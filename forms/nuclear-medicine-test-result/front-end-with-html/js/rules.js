@@ -45,7 +45,14 @@ function hasAnyAbnormalFinding(r) {
     r.abnormalUptake ||
     r.metastaticPattern ||
     r.perfusionDefect ||
-    r.photopenicArea
+    r.photopenicArea ||
+    // A markedly reduced ejection fraction (< 40 %) is itself an abnormal
+    // structured finding — Axis B (`gradeSeverity`) already grades it
+    // `major` via R-SEV-MAJOR-02; Axis A must agree, or a gated study with
+    // reduced EF and no other structured finding classifies `normal` with
+    // severity `major` and follow-up `urgent`, an axis-A/axis-B
+    // contradiction.
+    (r.ejectionFractionPercent !== null && r.ejectionFractionPercent < 40)
   );
 }
 

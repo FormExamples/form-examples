@@ -127,6 +127,10 @@ describe('Nuclear medicine four-axis grading engine', () => {
 		expect(g.followUpUrgency).toBe('urgent');
 		expect(g.recommendation).toBe('specialist-referral');
 		expect(g.firedRules.some((rule) => rule.ruleId === 'R-SEV-MAJOR-02')).toBe(true);
+		// Axis A must agree with Axis B: a reduced EF alone, with no other
+		// structured finding, is itself an abnormal finding, not `normal`.
+		expect(g.resultClassification).toBe('abnormal');
+		expect(g.firedRules.some((rule) => rule.ruleId === 'R-CLASS-ABNORMAL-01')).toBe(true);
 	});
 
 	it('classifies a non-diagnostic study as inconclusive', () => {

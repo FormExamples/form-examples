@@ -1,7 +1,7 @@
 {
   "engine": "front-end-with-html",
   "graderHint": "calculateGrade",
-  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `hasCriticalFinding` covers only a high-probability PE specifically on a `vq-lung-scan` (a perfusion defect on any other scan type never counts) and a widespread metastatic pattern — a reduced ejection fraction (< 40%) is its own dedicated major-severity trigger (R-SEV-MAJOR-02), checked before the perfusion-defect actionable-finding rule and entirely independent of `hasCriticalFinding`, so it never escalates past 'urgent' follow-up.",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. `hasCriticalFinding` covers only a high-probability PE specifically on a `vq-lung-scan` (a perfusion defect on any other scan type never counts) and a widespread metastatic pattern — a reduced ejection fraction (< 40%) is its own dedicated major-severity trigger (R-SEV-MAJOR-02), checked before the perfusion-defect actionable-finding rule and entirely independent of `hasCriticalFinding`, so it never escalates past 'urgent' follow-up. FIXED 2026-09-06: `hasAnyAbnormalFinding` (Axis A's classification predicate, shared with `hasOnlyIncidentalFinding`) never looked at `ejectionFractionPercent`, so a gated study with reduced EF and no other structured finding classified `normal` on Axis A while Axis B independently graded severity `major` and follow-up `urgent` — an axis-A/axis-B contradiction. The `abnormal-reduced-ejection-fraction-major-not-critical-complete` persona above always paired reduced EF with a perfusion defect specifically to avoid tripping this gap. Fixed by adding the same `ejectionFractionPercent < 40` condition to `hasAnyAbnormalFinding` in both `js/rules.js` and `src/lib/engine/utils.ts`; the new `abnormal-reduced-ejection-fraction-alone-no-other-finding` persona below isolates reduced EF with every other structured-finding field `false`/`null` and pins the corrected `abnormal` classification.",
   "personas": [
     {
       "name": "normal-bone-scan-complete",
@@ -251,6 +251,71 @@
             "suggestedAction": "Link the report to the originating request to support discrepancy review."
           }
         ]
+      }
+    },
+    {
+      "name": "abnormal-reduced-ejection-fraction-alone-no-other-finding",
+      "description": "A rest-only gated myocardial perfusion SPECT for known ischaemic cardiomyopathy shows no regional perfusion defect, photopenic area, or abnormal uptake, but gated analysis shows a markedly reduced ejection fraction of 28%: pins the 2026-09-06 fix where a reduced EF alone (no other structured finding) now correctly classifies abnormal on Axis A, matching Axis B's independent major-severity grade — before the fix, `hasAnyAbnormalFinding` ignored `ejectionFractionPercent`, so this exact combination classified 'normal' with severity 'major' and follow-up 'urgent', an axis-A/axis-B contradiction. Report complete — expect abnormal classification + major severity (reportingCategory reduced-ejection-fraction) + 100% completeness + urgent follow-up + specialist-referral, and no flags (the urgent-referral flag needs a perfusion defect or photopenic area specifically, which is a separate, not-yet-covered gap).",
+      "state": {
+        "reportingClinician": "Dr Femi Okafor (Nuclear Medicine Physician)",
+        "originatingRequestReference": "REQ-2026-0826-NM",
+        "reportStatus": "final",
+        "performedDate": "2026-08-26",
+        "reportedDate": "2026-08-26",
+        "scanType": "myocardial-perfusion",
+        "radiopharmaceutical": "Tc-99m tetrofosmin, rest gated SPECT only, 350 MBq.",
+        "injectedActivityMbq": 350,
+        "examinationAdequacy": "adequate",
+        "clinicalHistory": "Known ischaemic cardiomyopathy; gated rest SPECT to reassess left-ventricular function, no stress component performed given recent decompensation.",
+        "comparisonWithPrevious": "Prior scan 12 months ago showed EF 45%.",
+        "findingsNarrative": "No regional perfusion defect, photopenic area, or abnormal uptake on rest imaging. Gated analysis shows globally reduced left-ventricular systolic function.",
+        "abnormalUptake": false,
+        "metastaticPattern": false,
+        "perfusionDefect": false,
+        "photopenicArea": false,
+        "noSignificantAbnormality": false,
+        "incidentalFinding": false,
+        "ejectionFractionPercent": 28,
+        "splitFunctionLeftPercent": null,
+        "splitFunctionRightPercent": null,
+        "impression": "No regional perfusion defect. Reduced left-ventricular ejection fraction (28%), consistent with worsening cardiomyopathy.",
+        "reportingCategory": "",
+        "recommendedFollowUp": "Refer to cardiology heart-failure service for reassessment of ejection fraction and management optimisation.",
+        "criticalResultCommunicated": false,
+        "reportedTo": "",
+        "clinicianNotes": "",
+        "signed": true
+      },
+      "expected": {
+        "resultClassification": "abnormal",
+        "abnormalitySeverity": "major",
+        "reportingCategory": "reduced-ejection-fraction",
+        "reportCompletenessPercent": 100,
+        "followUpUrgency": "urgent",
+        "targetTimeframe": "within 24 hours",
+        "recommendedAction": "Arrange urgent clinical review and expedite onward referral.",
+        "recommendation": "specialist-referral",
+        "firedRules": [
+          {
+            "ruleId": "R-CLASS-ABNORMAL-01",
+            "axis": "classification",
+            "category": "abnormal-finding",
+            "description": "One or more abnormal structured findings are present; classified as abnormal."
+          },
+          {
+            "ruleId": "R-SEV-MAJOR-02",
+            "axis": "severity",
+            "category": "reduced-ejection-fraction",
+            "description": "Left-ventricular ejection fraction is markedly reduced (< 40 %); abnormality severity graded major."
+          },
+          {
+            "ruleId": "R-FU-URGENT-01",
+            "axis": "follow-up",
+            "category": "major-abnormality",
+            "description": "Major abnormality present; follow-up urgency graded urgent."
+          }
+        ],
+        "flags": []
       }
     }
   ]

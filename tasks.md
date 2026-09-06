@@ -1463,15 +1463,34 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       description and the file's top-level `note`. `bin/test-e2e --html
       hernia-diagnostic-evaluation` 2/2 passed. Fleet: `bin/test-personas`
       forms 352/352 PASS, personas 1173/1173 PASS, 0 FAIL.
-- [ ] **nuclear-medicine-test-result: Axis A ignores the ejection fraction.**
-      `gradeSeverity` grades EF < 40 % as `major` (R-SEV-MAJOR-02) but
-      `classifyResult` / `hasAnyAbnormalFinding` never look at
-      `ejectionFractionPercent`, so a gated study with reduced EF and no
-      other structured finding classifies **normal** with severity
+- [x] **nuclear-medicine-test-result: Axis A ignores the ejection fraction.**
+      FIXED 2026-09-06. `gradeSeverity` grades EF < 40 % as `major`
+      (R-SEV-MAJOR-02) but `classifyResult` / `hasAnyAbnormalFinding` never
+      looked at `ejectionFractionPercent`, so a gated study with reduced EF
+      and no other structured finding classified **normal** with severity
       **major** and follow-up **urgent** — an axis-A/axis-B contradiction
-      (the persona batch avoided it by pairing EF with a perfusion defect).
-      Add reduced EF to `hasAnyAbnormalFinding`, or make classification
-      consult severity; add a persona pinning the fixed behaviour.
+      (the existing `abnormal-reduced-ejection-fraction-major-not-critical-
+      complete` persona always paired EF with a perfusion defect
+      specifically to avoid tripping this gap). Fixed by adding the same
+      `ejectionFractionPercent < 40` condition to `hasAnyAbnormalFinding` —
+      the single shared predicate `classifyResult` and
+      `hasOnlyIncidentalFinding` both already call — in both HTML
+      `js/rules.js` and the SvelteKit `src/lib/engine/utils.ts`; confirmed
+      no Loco-side scoring logic and no static `grade_rule` seed rows exist
+      for this form, so no third stack needed changing. `gradeFollowUp`
+      needed no change: it already derives urgency from severity, which
+      was already correct. Extended the existing (previously
+      classification-blind) `grader.test.ts` boundary test with
+      `resultClassification`/`R-CLASS-ABNORMAL-01` assertions (14/14
+      passed — that test already existed but had never checked Axis A, so
+      it could not have caught this) and added a new persona
+      (`abnormal-reduced-ejection-fraction-alone-no-other-finding`) that
+      isolates reduced EF with every other structured-finding field false/
+      null, pinning the corrected `abnormal` classification.
+      `bin/test-personas --update nuclear-medicine-test-result` 4/4 PASS;
+      `bin/test-e2e --html nuclear-medicine-test-result` 2/2 passed.
+      Fleet: `bin/test-personas` forms 352/352 PASS, personas 1174/1174
+      PASS, 0 FAIL.
 - [ ] **holter-monitor-test-result: `F-UNEXPECTED-FINDING-001` predicate
       narrower than `hasCriticalFinding`.** The unexpected-finding flag
       checks only AF / VT / high-grade AV block, so a critical >3 s pause
