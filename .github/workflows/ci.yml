@@ -32,7 +32,7 @@ jobs:
   # Decide how much of the fleet the heavy Rust/Svelte matrices must cover.
   # A push or PR that touches only forms/<slug>/… paths tests just those
   # forms; anything cross-cutting (bin/, AGENTS/, e2e/, workflows, root
-  # files) — or the nightly schedule — tests all 355. The full fleet always
+  # files) — or the nightly schedule — tests all 356. The full fleet always
   # runs nightly, so per-push filtering can narrow coverage by at most one
   # day.
   changes:

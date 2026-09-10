@@ -21,7 +21,7 @@ Enable GitHub Dependabot .github/dependabot.yml for scheduled update PRs.
   concept and are out of scope.
 - **[`.github/dependabot.yml`](../../.github/dependabot.yml)**: already
   present (GitHub Actions, and the two npm projects — the documentation
-  site and the E2E harness — weekly). The 355-crate/front-end fleet is
+  site and the E2E harness — weekly). The 356-crate/front-end fleet is
   deliberately excluded, with the reasoning recorded in the file itself:
   Dependabot cannot reason about a fleet that must move in lockstep, so
   those are updated by deliberate fleet-wide sweeps instead, per

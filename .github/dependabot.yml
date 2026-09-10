@@ -1,7 +1,7 @@
 # Dependabot: currency for the dependency sets a human rarely looks at.
 #
-# Deliberately NOT here: the 355 per-form Loco crates and Svelte front-ends.
-# Dependabot cannot reason about a fleet that must move in lockstep — 355
+# Deliberately NOT here: the 356 per-form Loco crates and Svelte front-ends.
+# Dependabot cannot reason about a fleet that must move in lockstep — 356
 # separate bump PRs would be noise, and a partial merge would break the
 # uniformity the repo exists to demonstrate. Those are updated by deliberate
 # fleet-wide sweeps (see AGENTS.md), verified by the sharded CI matrices, and
