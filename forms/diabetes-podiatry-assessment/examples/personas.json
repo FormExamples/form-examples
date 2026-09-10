@@ -1,0 +1,448 @@
+{
+  "engine": "front-end-with-html",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state",
+    "result"
+  ],
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. Flags: this is a split engine, so the detector is pinned as expected.flaggedIssues via flagsHint \"detectFlaggedIssues\" with flagsArgs [\"state\", \"result\"], mirroring form-app.js's call detectFlaggedIssues(state, grade).",
+  "personas": [
+    {
+      "name": "low-risk-annual-review",
+      "description": "Routine annual diabetes review: type 2 diabetes 5 years, both feet sensate with normal pulses, no deformity, callus, or ulceration history — no risk factors on either foot.",
+      "state": {
+        "context": {
+          "assessedAt": "2026-09-01",
+          "assessmentSetting": "annual-review"
+        },
+        "riskFactors": {
+          "diabetesType": "type-2",
+          "yearsSinceDiagnosis": 5,
+          "onRenalReplacementTherapy": "no",
+          "visualAcuityImpairment": "no",
+          "selfCareAbility": "independent",
+          "footwearAppropriate": "yes"
+        },
+        "rightFoot": {
+          "neuropathyStatus": "sensate",
+          "pulsesStatus": "normal",
+          "deformity": "no",
+          "callus": "no",
+          "skinBreakdown": "no",
+          "activeUlcer": "no",
+          "ulcerSeverity": "",
+          "previousUlcer": "no",
+          "previousAmputation": "none",
+          "suspectedCharcot": "no"
+        },
+        "leftFoot": {
+          "neuropathyStatus": "sensate",
+          "pulsesStatus": "normal",
+          "deformity": "no",
+          "callus": "no",
+          "skinBreakdown": "no",
+          "activeUlcer": "no",
+          "ulcerSeverity": "",
+          "previousUlcer": "no",
+          "previousAmputation": "none",
+          "suspectedCharcot": "no"
+        },
+        "note": {
+          "clinicalContext": "No concerns raised at review; patient self-inspects feet weekly."
+        }
+      },
+      "expected": {
+        "rightFootRisk": "low",
+        "leftFootRisk": "low",
+        "overallRisk": "low",
+        "reviewPathway": "annual-review",
+        "reviewIntervalMonths": 12,
+        "referral": "none",
+        "status": "complete",
+        "firedRules": [
+          {
+            "id": "R-OVERALL-LOW-01",
+            "stage": "review",
+            "category": "low-risk",
+            "description": "Low risk (no risk factors on either foot) — annual review."
+          }
+        ],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "moderate-risk-single-factor",
+      "description": "Foot protection clinic follow-up: type 1 diabetes 22 years, right foot has isolated insensate neuropathy (10g monofilament), otherwise clean on both feet — a single risk factor routes to 6-monthly review.",
+      "state": {
+        "context": {
+          "assessedAt": "2026-09-01",
+          "assessmentSetting": "foot-protection-clinic"
+        },
+        "riskFactors": {
+          "diabetesType": "type-1",
+          "yearsSinceDiagnosis": 22,
+          "onRenalReplacementTherapy": "no",
+          "visualAcuityImpairment": "no",
+          "selfCareAbility": "independent",
+          "footwearAppropriate": "yes"
+        },
+        "rightFoot": {
+          "neuropathyStatus": "insensate",
+          "pulsesStatus": "normal",
+          "deformity": "no",
+          "callus": "no",
+          "skinBreakdown": "no",
+          "activeUlcer": "no",
+          "ulcerSeverity": "",
+          "previousUlcer": "no",
+          "previousAmputation": "none",
+          "suspectedCharcot": "no"
+        },
+        "leftFoot": {
+          "neuropathyStatus": "sensate",
+          "pulsesStatus": "normal",
+          "deformity": "no",
+          "callus": "no",
+          "skinBreakdown": "no",
+          "activeUlcer": "no",
+          "ulcerSeverity": "",
+          "previousUlcer": "no",
+          "previousAmputation": "none",
+          "suspectedCharcot": "no"
+        },
+        "note": {
+          "clinicalContext": "Reduced sensation confirmed on right foot only; annual review upgraded to 6-monthly."
+        }
+      },
+      "expected": {
+        "rightFootRisk": "moderate",
+        "leftFootRisk": "low",
+        "overallRisk": "moderate",
+        "reviewPathway": "moderate-risk-review",
+        "reviewIntervalMonths": 6,
+        "referral": "foot-protection-service",
+        "status": "complete",
+        "firedRules": [
+          {
+            "id": "R-OVERALL-MODERATE-01",
+            "stage": "review",
+            "category": "moderate-risk",
+            "description": "Moderate risk (one risk factor on the worse foot) — 6-monthly review by the foot protection service."
+          }
+        ],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "high-risk-combined-factors",
+      "description": "Type 2 diabetes 15 years, left foot has both insensate neuropathy and diminished pulses plus callus — two combined risk factors with no ulcer/amputation history routes to high risk on the looser 3-monthly interval.",
+      "state": {
+        "context": {
+          "assessedAt": "2026-09-01",
+          "assessmentSetting": "foot-protection-clinic"
+        },
+        "riskFactors": {
+          "diabetesType": "type-2",
+          "yearsSinceDiagnosis": 15,
+          "onRenalReplacementTherapy": "no",
+          "visualAcuityImpairment": "no",
+          "selfCareAbility": "independent",
+          "footwearAppropriate": "no"
+        },
+        "rightFoot": {
+          "neuropathyStatus": "sensate",
+          "pulsesStatus": "normal",
+          "deformity": "no",
+          "callus": "no",
+          "skinBreakdown": "no",
+          "activeUlcer": "no",
+          "ulcerSeverity": "",
+          "previousUlcer": "no",
+          "previousAmputation": "none",
+          "suspectedCharcot": "no"
+        },
+        "leftFoot": {
+          "neuropathyStatus": "insensate",
+          "pulsesStatus": "diminished",
+          "deformity": "no",
+          "callus": "yes",
+          "skinBreakdown": "no",
+          "activeUlcer": "no",
+          "ulcerSeverity": "",
+          "previousUlcer": "no",
+          "previousAmputation": "none",
+          "suspectedCharcot": "no"
+        },
+        "note": {
+          "clinicalContext": "Referred to orthotics for footwear assessment; left foot needs closer monitoring."
+        }
+      },
+      "expected": {
+        "rightFootRisk": "low",
+        "leftFootRisk": "high",
+        "overallRisk": "high",
+        "reviewPathway": "high-risk-review",
+        "reviewIntervalMonths": 3,
+        "referral": "multidisciplinary-foot-team",
+        "status": "complete",
+        "firedRules": [
+          {
+            "id": "R-OVERALL-HIGH-02",
+            "stage": "patient-wide",
+            "category": "high-risk",
+            "description": "High risk from combined risk factors or renal replacement therapy, without an ulcer/amputation history — 3-monthly review by the multidisciplinary foot team."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-COMBINED-RISK-FACTORS-001",
+            "category": "combined-risk-factors",
+            "priority": "medium",
+            "description": "Two or more risk factors combined on at least one foot (e.g. neuropathy and peripheral arterial disease, or either combined with callus/deformity).",
+            "suggestedAction": "Review referral timing to the multidisciplinary foot team."
+          },
+          {
+            "id": "F-FOOTWEAR-001",
+            "category": "footwear",
+            "priority": "medium",
+            "description": "Current footwear is not appropriate for the patient’s risk level.",
+            "suggestedAction": "Refer to orthotics / footwear assessment."
+          }
+        ]
+      }
+    },
+    {
+      "name": "high-risk-previous-ulcer-history",
+      "description": "Type 2 diabetes 18 years, right foot currently clean on examination but has a documented previous ulcer — history alone forces high risk on the tighter 1-monthly interval regardless of today's findings.",
+      "state": {
+        "context": {
+          "assessedAt": "2026-09-01",
+          "assessmentSetting": "hospital-admission"
+        },
+        "riskFactors": {
+          "diabetesType": "type-2",
+          "yearsSinceDiagnosis": 18,
+          "onRenalReplacementTherapy": "no",
+          "visualAcuityImpairment": "no",
+          "selfCareAbility": "partial",
+          "footwearAppropriate": "yes"
+        },
+        "rightFoot": {
+          "neuropathyStatus": "sensate",
+          "pulsesStatus": "normal",
+          "deformity": "no",
+          "callus": "no",
+          "skinBreakdown": "no",
+          "activeUlcer": "no",
+          "ulcerSeverity": "",
+          "previousUlcer": "yes",
+          "previousAmputation": "none",
+          "suspectedCharcot": "no"
+        },
+        "leftFoot": {
+          "neuropathyStatus": "sensate",
+          "pulsesStatus": "normal",
+          "deformity": "no",
+          "callus": "no",
+          "skinBreakdown": "no",
+          "activeUlcer": "no",
+          "ulcerSeverity": "",
+          "previousUlcer": "no",
+          "previousAmputation": "none",
+          "suspectedCharcot": "no"
+        },
+        "note": {
+          "clinicalContext": "Right foot ulcer healed 8 months ago; admission foot check as part of routine inpatient protocol. Carer assists with foot inspection."
+        }
+      },
+      "expected": {
+        "rightFootRisk": "high",
+        "leftFootRisk": "low",
+        "overallRisk": "high",
+        "reviewPathway": "high-risk-review",
+        "reviewIntervalMonths": 1,
+        "referral": "multidisciplinary-foot-team",
+        "status": "complete",
+        "firedRules": [
+          {
+            "id": "R-OVERALL-HIGH-01",
+            "stage": "patient-wide",
+            "category": "high-risk",
+            "description": "High risk from previous ulceration/amputation history — 1-monthly review by the multidisciplinary foot team."
+          }
+        ],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "active-urgent-infected-ulcer",
+      "description": "Type 1 diabetes 30 years, on renal replacement therapy, left foot has an active infected ulcer — forces active-urgent classification and an urgent multidisciplinary foot team referral regardless of the right foot's findings.",
+      "state": {
+        "context": {
+          "assessedAt": "2026-09-01",
+          "assessmentSetting": "hospital-admission"
+        },
+        "riskFactors": {
+          "diabetesType": "type-1",
+          "yearsSinceDiagnosis": 30,
+          "onRenalReplacementTherapy": "yes",
+          "visualAcuityImpairment": "yes",
+          "selfCareAbility": "unable",
+          "footwearAppropriate": "no"
+        },
+        "rightFoot": {
+          "neuropathyStatus": "sensate",
+          "pulsesStatus": "normal",
+          "deformity": "no",
+          "callus": "no",
+          "skinBreakdown": "no",
+          "activeUlcer": "no",
+          "ulcerSeverity": "",
+          "previousUlcer": "no",
+          "previousAmputation": "none",
+          "suspectedCharcot": "no"
+        },
+        "leftFoot": {
+          "neuropathyStatus": "insensate",
+          "pulsesStatus": "diminished",
+          "deformity": "yes",
+          "callus": "yes",
+          "skinBreakdown": "yes",
+          "activeUlcer": "yes",
+          "ulcerSeverity": "infected",
+          "previousUlcer": "yes",
+          "previousAmputation": "minor",
+          "suspectedCharcot": "no"
+        },
+        "note": {
+          "clinicalContext": "Left foot ulcer discharging and malodorous on admission; urgent multidisciplinary foot team referral made same day."
+        }
+      },
+      "expected": {
+        "rightFootRisk": "low",
+        "leftFootRisk": "active-urgent",
+        "overallRisk": "active-urgent",
+        "reviewPathway": "urgent-mdt-referral",
+        "reviewIntervalMonths": null,
+        "referral": "urgent-mdt",
+        "status": "complete",
+        "firedRules": [
+          {
+            "id": "R-OVERALL-ACTIVE-URGENT-01",
+            "stage": "urgent-override",
+            "category": "active-urgent",
+            "description": "An active ulcer or suspected Charcot foot on at least one foot — urgent referral to the multidisciplinary foot team (same or next working day)."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-ACTIVE-ULCER-001",
+            "category": "active-ulcer",
+            "priority": "high",
+            "description": "Active ulceration present on at least one foot.",
+            "suggestedAction": "Urgent referral to the multidisciplinary foot team (same or next working day)."
+          },
+          {
+            "id": "F-RENAL-REPLACEMENT-THERAPY-001",
+            "category": "renal-replacement-therapy",
+            "priority": "high",
+            "description": "Patient is on renal replacement therapy (dialysis) — an automatic high-risk factor per NICE NG19.",
+            "suggestedAction": "Manage as high risk regardless of current foot examination findings."
+          },
+          {
+            "id": "F-FOOTWEAR-001",
+            "category": "footwear",
+            "priority": "medium",
+            "description": "Current footwear is not appropriate for the patient’s risk level.",
+            "suggestedAction": "Refer to orthotics / footwear assessment."
+          },
+          {
+            "id": "F-SELF-CARE-001",
+            "category": "self-care",
+            "priority": "medium",
+            "description": "Patient’s ability to self-inspect and self-care for their feet is impaired, with no support recorded.",
+            "suggestedAction": "Arrange support (carer, family, or service) for regular foot self-inspection."
+          }
+        ]
+      }
+    },
+    {
+      "name": "active-urgent-suspected-charcot",
+      "description": "Type 2 diabetes 12 years, right foot unexplained hot, red, swollen with no clear precipitant — suspected acute Charcot foot forces the same active-urgent, urgent-referral pathway as an active ulcer, even with no ulceration present.",
+      "state": {
+        "context": {
+          "assessedAt": "2026-09-01",
+          "assessmentSetting": "foot-protection-clinic"
+        },
+        "riskFactors": {
+          "diabetesType": "type-2",
+          "yearsSinceDiagnosis": 12,
+          "onRenalReplacementTherapy": "no",
+          "visualAcuityImpairment": "no",
+          "selfCareAbility": "independent",
+          "footwearAppropriate": "yes"
+        },
+        "rightFoot": {
+          "neuropathyStatus": "insensate",
+          "pulsesStatus": "normal",
+          "deformity": "yes",
+          "callus": "no",
+          "skinBreakdown": "no",
+          "activeUlcer": "no",
+          "ulcerSeverity": "",
+          "previousUlcer": "no",
+          "previousAmputation": "none",
+          "suspectedCharcot": "yes"
+        },
+        "leftFoot": {
+          "neuropathyStatus": "sensate",
+          "pulsesStatus": "normal",
+          "deformity": "no",
+          "callus": "no",
+          "skinBreakdown": "no",
+          "activeUlcer": "no",
+          "ulcerSeverity": "",
+          "previousUlcer": "no",
+          "previousAmputation": "none",
+          "suspectedCharcot": "no"
+        },
+        "note": {
+          "clinicalContext": "Right foot noted hot and swollen on inspection; same-day referral for suspected Charcot foot, pending imaging."
+        }
+      },
+      "expected": {
+        "rightFootRisk": "active-urgent",
+        "leftFootRisk": "low",
+        "overallRisk": "active-urgent",
+        "reviewPathway": "urgent-mdt-referral",
+        "reviewIntervalMonths": null,
+        "referral": "urgent-mdt",
+        "status": "complete",
+        "firedRules": [
+          {
+            "id": "R-OVERALL-ACTIVE-URGENT-01",
+            "stage": "urgent-override",
+            "category": "active-urgent",
+            "description": "An active ulcer or suspected Charcot foot on at least one foot — urgent referral to the multidisciplinary foot team (same or next working day)."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-SUSPECTED-CHARCOT-001",
+            "category": "suspected-charcot",
+            "priority": "high",
+            "description": "Suspected acute Charcot foot (unexplained hot, red, swollen foot) on at least one foot — a limb-threatening emergency.",
+            "suggestedAction": "Urgent same/next-working-day referral to the multidisciplinary foot team; do not wait for imaging."
+          },
+          {
+            "id": "F-COMBINED-RISK-FACTORS-001",
+            "category": "combined-risk-factors",
+            "priority": "medium",
+            "description": "Two or more risk factors combined on at least one foot (e.g. neuropathy and peripheral arterial disease, or either combined with callus/deformity).",
+            "suggestedAction": "Review referral timing to the multidisciplinary foot team."
+          }
+        ]
+      }
+    }
+  ]
+}

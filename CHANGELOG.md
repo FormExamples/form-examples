@@ -374,6 +374,22 @@ for them.
   the intended 3-month one) — fixed in both engines and re-verified.
   `bin/test-form diabetes-podiatry-assessment` now passes; fleet-wide
   `bin/test` is 356/356 PASS, 0 FAIL.
+
+- **Persona backlog closed for every scorable form.** Authored 6
+  hand-curated `examples/personas.json` scenarios for
+  `diabetes-podiatry-assessment` (low / moderate / high-combined-factors /
+  high-with-ulcer-history / active-urgent-ulcer /
+  active-urgent-suspected-Charcot), the fleet's last form with a real
+  engine but no personas. `bin/test-personas` fleet-wide: forms 353/353
+  PASS (0 FAIL), personas 1183/1183 PASS (0 FAIL); the 3 remaining
+  personas-less forms (`architecture-decision-record`,
+  `legal-requirements-privacy-notice`, `screening-program-privacy-notice`)
+  are confirmed genuinely engine-less documentation/notice forms by design
+  (`bin/test-engines`'s own NONE classification), not a gap.
+  `bin/test-engines` also re-verified clean: PASS 353 / SKIP 0 / FAIL 0 /
+  NONE 3 — the "63 SKIP" figure recorded against this item earlier in this
+  file was stale.
+
 - Trusted Publishing recorded as general supply-chain policy in
   `SECURITY.md`, per `spec/trusted-publishing/`: if this or any future
   project of this maintainer's publishes a package from CI, OIDC-based

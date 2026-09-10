@@ -640,10 +640,20 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       bhutani-bilirubin, birth-control, mental-state-examination,
       newborn-blood-spot, plastic-surgery, return-to-work). This obviated the
       earlier "refactor the graders to an injected clock" follow-up.
-- [ ] Continue persona batches for the remaining scorable forms
-      (subagents on the proven rail; `spec/index.md` defines the bands).
-      63 forms are `test-engines` SKIPs (ESM/inline/nonstandard) — those need
-      a bespoke driver first.
+- [x] **Persona backlog CLOSED for every scorable form, 2026-09-10.**
+      Re-checked live: `bin/test-engines` is now PASS 353 / SKIP 0 / FAIL 0 /
+      NONE 3 (/ 356) — the earlier "63 SKIP" note above is stale; those were
+      resolved in the interim. `bin/test-personas` fleet-wide: forms 353/353
+      PASS (0 FAIL), personas 1183/1183 PASS (0 FAIL), forms without
+      personas: 3 — and those 3 (`architecture-decision-record`,
+      `legal-requirements-privacy-notice`, `screening-program-privacy-notice`)
+      are confirmed genuinely engine-less documentation/notice forms by
+      design (`bin/test-engines`'s own NONE classification, not a gap).
+      Closed the fleet's last actual gap by authoring 6 hand-curated
+      personas for `diabetes-podiatry-assessment` (built earlier this
+      session) spanning low / moderate / high-combined-factors /
+      high-with-history / active-urgent-ulcer /
+      active-urgent-suspected-Charcot.
 - [!] **Parallel-subagent hazard (lesson):** a leftover bulk-generator script
       in the shared scratchpad was found + run by two concurrent persona
       subagents; each script's "clean up my strays" `rm` deleted the OTHER

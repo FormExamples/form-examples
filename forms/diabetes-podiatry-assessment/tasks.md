@@ -82,9 +82,17 @@ Task tracking. See [`plan.md`](./plan.md) for the roadmap.
       running locally at that moment — independently verified separately
       against a scratch Postgres, 35/35).
 
+- [x] Author `examples/personas.json` (6 hand-curated, clinically realistic
+      scenarios spanning low / moderate / high-combined-factors /
+      high-with-ulcer-history / active-urgent-ulcer /
+      active-urgent-suspected-Charcot, with `expected` verified against the
+      real engine via `bin/test-personas`). Closes this form's gap in the
+      fleet's persona backlog — verified fleet-wide: 353/353 forms with an
+      engine now PASS, the only 3 forms without personas are genuinely
+      engine-less documentation/notice forms by design (not a gap).
+
 ## To do
 
 - [ ] Nothing outstanding for this form's foundation + full-stack build.
-      Future work (personas.json, CSV/TSV export samples, API transcripts)
-      is the same fleet-wide backlog every form shares — see the repo root
-      `tasks.md`.
+      Future work (CSV/TSV export samples, API transcripts) is the same
+      fleet-wide backlog every form shares — see the repo root `tasks.md`.

@@ -34,6 +34,7 @@ Not yet documented in this form's own `AGENTS.md`. See [`../../spec/index.md`](.
 ```sh
 bin/test-form diabetes-podiatry-assessment
 bin/test-sql-apply diabetes-podiatry-assessment
+bin/test-personas diabetes-podiatry-assessment
 bin/test-e2e --html diabetes-podiatry-assessment
 ```
 
