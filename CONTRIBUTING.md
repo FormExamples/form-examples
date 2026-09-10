@@ -1,6 +1,6 @@
 # Contributing
 
-This is a spec-driven monorepo of 355 medical / administrative forms. Each form
+This is a spec-driven monorepo of 356 medical / administrative forms. Each form
 carries a full stack — SQL schema, generated representations (XML, FHIR R5,
 Protocol Buffers, OpenAPI), two front-ends (HTML and SvelteKit), and a Rust
 back-end (axum + Loco). The uniformity is the point: one shared design proven
@@ -61,13 +61,13 @@ doc under [`AGENTS/`](AGENTS) and [`forms/`](forms) before changing code.
 - **xmllint** (`libxml2-utils`) — XML/DTD validation.
 - **Java 21** — the HL7 FHIR validator (CI only).
 
-### Rust build performance (355 crates)
+### Rust build performance (356 crates)
 
 Each `forms/<slug>/back-end-with-loco/` is its own self-contained workspace
 (there is no repo-root `Cargo.toml` uniting them), so a plain `cargo build`
-gives every one of the 355 crates its own `target/` directory — tens of GB
+gives every one of the 356 crates its own `target/` directory — tens of GB
 in aggregate, with the same dependency versions (loco-rs, sea-orm, tokio, …)
-compiled from scratch 355 times over. Two independent fixes, both safe to
+compiled from scratch 356 times over. Two independent fixes, both safe to
 set globally in `~/.cargo/config.toml`:
 
 - **A shared `CARGO_TARGET_DIR`** — point every crate's build output at one

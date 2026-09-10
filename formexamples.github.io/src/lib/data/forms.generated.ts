@@ -372,8 +372,12 @@ export const forms: Form[] = [
     "title": "Diabetes Assessment"
   },
   {
-    "slug": "diabetic-eye-screening",
-    "title": "Diabetic Eye Screening record"
+    "slug": "diabetes-eye-screening",
+    "title": "Diabetes Eye Screening record"
+  },
+  {
+    "slug": "diabetes-podiatry-assessment",
+    "title": "Diabetes Podiatry Assessment"
   },
   {
     "slug": "dietic-assessment",
