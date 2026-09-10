@@ -815,7 +815,7 @@ components:
       - category
       - description
       - concern_level
-      description: Reference catalogue of all 20 diabetes assessment rules (DM-001 to DM-020). Seeded
+      description: Reference catalogue of all 22 diabetes assessment rules (DM-001 to DM-022). Seeded
         at deployment.
     Grade:
       type: object
