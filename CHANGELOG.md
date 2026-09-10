@@ -286,6 +286,41 @@ for them.
   carry theirs — no `package.json` or `pnpm-workspace.yaml` next to it, so
   its `engine-strict=true` had never constrained anything. Moved to the
   correct location.
+- **Loco JSON API served/accepted snake_case, not camelCase (fleet-wide,
+  346/355 crates).** The `cargo loco generate scaffold` output never adds
+  `#[serde(rename_all = "camelCase")]`, so the on-the-wire keys were
+  snake_case — contradicting the repo's own convention and every
+  front-end's already-camelCase requests (a latent contract mismatch;
+  nothing was live-wired to break). New `bin/loco-camel-case-json-refactor`
+  adds it to every domain controller `Params` struct and domain entity
+  `Model` struct (never `auth.rs`/`users.rs`). Original scope estimate
+  assumed a ~1400-file insta-snapshot regen; a direct fleet check found
+  every crate's only real snapshot tests live in the Loco-scaffolded
+  auth/users tests, and every domain `tests/models/<table>.rs` is an
+  unfilled 31-line stub fleet-wide — so none was needed. It did surface
+  the fleet's only 2 hand-written, non-stub `tests/requests/*.rs` files
+  (found by scanning for size outliers against the 24-line scaffold-stub
+  size) whose assertions were hardcoded to the old snake_case format
+  (`apgar-score`, `architecture-decision-record`), fixed by hand alongside
+  the tool. First fleet-wide apply attempt double-inserted the attribute
+  on 15 crates with pre-existing partial coverage in the opposite
+  attribute order — caught by a post-apply `cargo check` sample, fixed by
+  scanning the whole attribute block rather than just the adjacent line,
+  reverted, and re-applied clean. `--check` is the CI drift detector.
+- `bin/generate-llms-txt.py --check` and `bin/generate-form-skills.py
+  --check` were both red on a pristine tree: `diabetes-eye-screening`'s
+  `llms.txt` had fallen behind `index.md`'s wording after a rename commit;
+  14 forms had gained `examples/personas.json` since their `skills/` docs
+  were last generated, so both `SKILL.md` files still said "no personas
+  yet" and omitted the `bin/test-personas` gate. Regenerated both; `--check`
+  now reports 0 drift fleet-wide.
+- `bin/openapi/generate-openapi-combined.py --check` flagged
+  `diabetes-assessment` and `neurodiversity-adjustment-response` as stale
+  — their per-entity `openapi/*.yaml`/`protobuf/*.proto` had been resynced
+  to `sql/` (a real, pre-existing drift: a rule-count comment and a
+  missing enum value) as a side effect of an unrelated fleet-wide
+  generator run, but the separate combined-spec generator hadn't been
+  re-run for them. Regenerated; `--check` now reports 0 stale.
 
 ### Added
 
@@ -317,6 +352,28 @@ for them.
   change that. Open Collective, the spec's other half, is explicitly
   deferred: it needs a fiscal host or a legal entity this project
   deliberately doesn't have.
+
+- **`forms/diabetes-podiatry-assessment` built to full four-layer depth** —
+  the fleet's one remaining `bin/create-form` scaffold that had never been
+  filled in (0-byte `index.md`/`AGENTS.md`, `bin/test-form` failing with 33
+  errors). A diabetic foot risk-screening record aligned with NICE NG19
+  (*Diabetic foot problems: prevention and management*): per-foot sensory
+  neuropathy, pedal pulses, deformity, callus, skin breakdown, active
+  ulceration + severity, ulceration/amputation history, and a
+  suspected-Charcot-foot marker, plus patient-wide risk factors (renal
+  replacement therapy, visual acuity, self-care, footwear); the engine
+  classifies each foot's risk, takes the worse foot (raised by patient-wide
+  overrides), and routes to a review pathway with a flagged-issues list.
+  SQL, spec, docs, and the Loco back-end (relational, every fleet
+  convention tool applied and `--check`-clean) built directly; both
+  front-ends (HTML + Svelte, 114 Svelte files) built by parallel background
+  agents against the finished SQL/spec ground truth. A real bug was caught
+  during the Svelte port — `hasHistory(foot)` checked `previousAmputation
+  !== 'none'`, but the unanswered default is `''` not `'none'`, so a blank
+  foot incorrectly counted as having history (1-month interval instead of
+  the intended 3-month one) — fixed in both engines and re-verified.
+  `bin/test-form diabetes-podiatry-assessment` now passes; fleet-wide
+  `bin/test` is 356/356 PASS, 0 FAIL.
 - Trusted Publishing recorded as general supply-chain policy in
   `SECURITY.md`, per `spec/trusted-publishing/`: if this or any future
   project of this maintainer's publishes a package from CI, OIDC-based
