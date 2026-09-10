@@ -1,0 +1,198 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: diabetes_podiatry_assessment_grade
+openapi: 3.1.0
+info:
+  title: Diabetes Podiatry Assessment — DiabetesPodiatryAssessmentGrade
+  version: 1.0.0
+  description: "Computed per-foot and overall diabetic foot risk classification for a diabetes-podiatry-assessment record: per-foot risk, overall risk, review pathway, referral, review interval, and completeness status."
+paths:
+  /diabetes-podiatry-assessment-grades:
+    get:
+      summary: List DiabetesPodiatryAssessmentGrade records
+      operationId: listDiabetesPodiatryAssessmentGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of DiabetesPodiatryAssessmentGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DiabetesPodiatryAssessmentGrade"
+    post:
+      summary: Create a new DiabetesPodiatryAssessmentGrade
+      operationId: createDiabetesPodiatryAssessmentGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiabetesPodiatryAssessmentGrade"
+      responses:
+        "201":
+          description: The newly created DiabetesPodiatryAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiabetesPodiatryAssessmentGrade"
+        "400":
+          description: Validation error
+  /diabetes-podiatry-assessment-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one DiabetesPodiatryAssessmentGrade by id
+      operationId: getDiabetesPodiatryAssessmentGrade
+      responses:
+        "200":
+          description: The requested DiabetesPodiatryAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiabetesPodiatryAssessmentGrade"
+        "404":
+          description: DiabetesPodiatryAssessmentGrade not found
+    patch:
+      summary: Update an existing DiabetesPodiatryAssessmentGrade
+      operationId: updateDiabetesPodiatryAssessmentGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiabetesPodiatryAssessmentGrade"
+      responses:
+        "200":
+          description: The updated DiabetesPodiatryAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiabetesPodiatryAssessmentGrade"
+        "404":
+          description: DiabetesPodiatryAssessmentGrade not found
+    delete:
+      summary: Soft-delete a DiabetesPodiatryAssessmentGrade
+      operationId: deleteDiabetesPodiatryAssessmentGrade
+      responses:
+        "204":
+          description: DiabetesPodiatryAssessmentGrade deleted
+        "404":
+          description: DiabetesPodiatryAssessmentGrade not found
+components:
+  schemas:
+    DiabetesPodiatryAssessmentGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        diabetes_podiatry_assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent diabetes-podiatry-assessment record (unique, 1:1).
+        right_foot_risk:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - active-urgent
+            - ""
+          description: "Right-foot risk category from its own examination findings: low, moderate, high, or active-urgent."
+        left_foot_risk:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - active-urgent
+            - ""
+          description: "Left-foot risk category from its own examination findings: low, moderate, high, or active-urgent."
+        overall_risk:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - active-urgent
+            - ""
+          description: "Overall risk category: the worse of the two feet, raised to high by patient-wide factors (previous ulcer/amputation, dialysis) or to active-urgent by an active ulcer or suspected Charcot foot on either foot."
+        review_pathway:
+          type: string
+          enum:
+            - urgent-mdt-referral
+            - high-risk-review
+            - moderate-risk-review
+            - annual-review
+            - ""
+          description: "Review / referral pathway (most urgent wins): urgent-mdt-referral, high-risk-review, moderate-risk-review, or annual-review."
+        referral:
+          type: string
+          enum:
+            - none
+            - foot-protection-service
+            - multidisciplinary-foot-team
+            - urgent-mdt
+            - ""
+          description: "Referral destination derived from the pathway: none, foot-protection-service, multidisciplinary-foot-team, or urgent-mdt."
+        review_interval_months:
+          type: integer
+          format: int32
+          description: Recommended review interval in months (1, 3, 6, or 12); null for the urgent-mdt-referral pathway, which has no routine interval.
+        status:
+          type: string
+          enum:
+            - complete
+            - incomplete
+            - ""
+          description: "Completeness status: complete when both feet have a neuropathy and pulses status recorded; otherwise incomplete."
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the classification.
+      required:
+        - created_at
+        - updated_at
+        - diabetes_podiatry_assessment_id
+        - right_foot_risk
+        - left_foot_risk
+        - overall_risk
+        - review_pathway
+        - referral
+        - status
+        - graded_at
+      description: "Computed per-foot and overall diabetic foot risk classification for a diabetes-podiatry-assessment record: per-foot risk, overall risk, review pathway, referral, review interval, and completeness status."

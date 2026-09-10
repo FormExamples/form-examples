@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE diabetes_podiatry_assessment_grade SYSTEM "diabetes_podiatry_assessment_grade.dtd">
+<diabetes_podiatry_assessment_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<diabetes_podiatry_assessment_id>770e8400-e29b-41d4-a716-446655440002</diabetes_podiatry_assessment_id>
+<right_foot_risk>low</right_foot_risk>
+<left_foot_risk>low</left_foot_risk>
+<overall_risk>low</overall_risk>
+<review_pathway>urgent-mdt-referral</review_pathway>
+<referral>none</referral>
+<review_interval_months>1</review_interval_months>
+<status>complete</status>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</diabetes_podiatry_assessment_grade>

@@ -167,8 +167,9 @@ components:
             - seek-occupational-health
             - reconsider-decision
             - escalate-to-hr
+            - record-decline
             - ""
-          description: "Overall recommendation: implement, schedule-review, seek-occupational-health, reconsider-decision, escalate-to-hr."
+          description: "Overall recommendation: implement, schedule-review, seek-occupational-health, reconsider-decision, escalate-to-hr, record-decline."
         manager_notes:
           type: string
           description: Free-text sign-off notes from the manager or HR contact.

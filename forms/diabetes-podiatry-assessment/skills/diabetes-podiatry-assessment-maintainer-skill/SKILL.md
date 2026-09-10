@@ -17,6 +17,7 @@ Implementation-facing companion to `diabetes-podiatry-assessment-skill` (this fo
 | `xml` | generated |
 | `fhir` | generated |
 | `protobuf` | generated |
+| `openapi` | generated |
 | `front-end-with-html` | HTML + Lily (wizard + dashboard) |
 | `front-end-with-svelte` | SvelteKit (wizard + dashboard) |
 | `back-end-with-loco` | Rust + Loco JSON API |
@@ -40,4 +41,5 @@ bin/test-e2e --html diabetes-podiatry-assessment
 
 - [`../../AGENTS.md`](../../AGENTS.md) — this form's agent instructions.
 - [`../../spec/index.md`](../../spec/index.md) — living domain spec.
+- [`../../tasks.md`](../../tasks.md) — task tracking.
 - [`../../../../AGENTS.md`](../../../../AGENTS.md) — repo-wide tool catalogue and verify gates.

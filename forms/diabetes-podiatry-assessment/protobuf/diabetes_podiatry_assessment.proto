@@ -1,0 +1,218 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: diabetes_podiatry_assessment
+
+syntax = "proto3";
+
+package form_examples.diabetes_podiatry_assessment;
+
+enum DiabetesPodiatryAssessmentAssessmentSettingEnum {
+  ASSESSMENTSETTING_UNSPECIFIED = 0;
+  ASSESSMENTSETTING_ANNUAL_REVIEW = 1;  // annual-review
+  ASSESSMENTSETTING_FOOT_PROTECTION_CLINIC = 2;  // foot-protection-clinic
+  ASSESSMENTSETTING_HOSPITAL_ADMISSION = 3;  // hospital-admission
+  ASSESSMENTSETTING_PRE_DISCHARGE = 4;  // pre-discharge
+  ASSESSMENTSETTING_OTHER = 5;  // other
+}
+
+enum DiabetesPodiatryAssessmentDiabetesTypeEnum {
+  DIABETESTYPE_UNSPECIFIED = 0;
+  DIABETESTYPE_TYPE_1 = 1;  // type-1
+  DIABETESTYPE_TYPE_2 = 2;  // type-2
+  DIABETESTYPE_OTHER = 3;  // other
+  DIABETESTYPE_UNKNOWN = 4;  // unknown
+}
+
+enum DiabetesPodiatryAssessmentOnRenalReplacementTherapyEnum {
+  ONRENALREPLACEMENTTHERAPY_UNSPECIFIED = 0;
+  ONRENALREPLACEMENTTHERAPY_YES = 1;  // yes
+  ONRENALREPLACEMENTTHERAPY_NO = 2;  // no
+}
+
+enum DiabetesPodiatryAssessmentVisualAcuityImpairmentEnum {
+  VISUALACUITYIMPAIRMENT_UNSPECIFIED = 0;
+  VISUALACUITYIMPAIRMENT_YES = 1;  // yes
+  VISUALACUITYIMPAIRMENT_NO = 2;  // no
+}
+
+enum DiabetesPodiatryAssessmentSelfCareAbilityEnum {
+  SELFCAREABILITY_UNSPECIFIED = 0;
+  SELFCAREABILITY_INDEPENDENT = 1;  // independent
+  SELFCAREABILITY_PARTIAL = 2;  // partial
+  SELFCAREABILITY_UNABLE = 3;  // unable
+}
+
+enum DiabetesPodiatryAssessmentFootwearAppropriateEnum {
+  FOOTWEARAPPROPRIATE_UNSPECIFIED = 0;
+  FOOTWEARAPPROPRIATE_YES = 1;  // yes
+  FOOTWEARAPPROPRIATE_NO = 2;  // no
+}
+
+enum DiabetesPodiatryAssessmentRightNeuropathyStatusEnum {
+  RIGHTNEUROPATHYSTATUS_UNSPECIFIED = 0;
+  RIGHTNEUROPATHYSTATUS_SENSATE = 1;  // sensate
+  RIGHTNEUROPATHYSTATUS_INSENSATE = 2;  // insensate
+  RIGHTNEUROPATHYSTATUS_NOT_TESTED = 3;  // not-tested
+}
+
+enum DiabetesPodiatryAssessmentRightPulsesStatusEnum {
+  RIGHTPULSESSTATUS_UNSPECIFIED = 0;
+  RIGHTPULSESSTATUS_NORMAL = 1;  // normal
+  RIGHTPULSESSTATUS_DIMINISHED = 2;  // diminished
+  RIGHTPULSESSTATUS_ABSENT = 3;  // absent
+  RIGHTPULSESSTATUS_NOT_TESTED = 4;  // not-tested
+}
+
+enum DiabetesPodiatryAssessmentRightDeformityEnum {
+  RIGHTDEFORMITY_UNSPECIFIED = 0;
+  RIGHTDEFORMITY_YES = 1;  // yes
+  RIGHTDEFORMITY_NO = 2;  // no
+}
+
+enum DiabetesPodiatryAssessmentRightCallusEnum {
+  RIGHTCALLUS_UNSPECIFIED = 0;
+  RIGHTCALLUS_YES = 1;  // yes
+  RIGHTCALLUS_NO = 2;  // no
+}
+
+enum DiabetesPodiatryAssessmentRightSkinBreakdownEnum {
+  RIGHTSKINBREAKDOWN_UNSPECIFIED = 0;
+  RIGHTSKINBREAKDOWN_YES = 1;  // yes
+  RIGHTSKINBREAKDOWN_NO = 2;  // no
+}
+
+enum DiabetesPodiatryAssessmentRightActiveUlcerEnum {
+  RIGHTACTIVEULCER_UNSPECIFIED = 0;
+  RIGHTACTIVEULCER_YES = 1;  // yes
+  RIGHTACTIVEULCER_NO = 2;  // no
+}
+
+enum DiabetesPodiatryAssessmentRightUlcerSeverityEnum {
+  RIGHTULCERSEVERITY_UNSPECIFIED = 0;
+  RIGHTULCERSEVERITY_SUPERFICIAL = 1;  // superficial
+  RIGHTULCERSEVERITY_DEEP = 2;  // deep
+  RIGHTULCERSEVERITY_INFECTED = 3;  // infected
+  RIGHTULCERSEVERITY_CRITICAL_ISCHAEMIA = 4;  // critical-ischaemia
+}
+
+enum DiabetesPodiatryAssessmentRightPreviousUlcerEnum {
+  RIGHTPREVIOUSULCER_UNSPECIFIED = 0;
+  RIGHTPREVIOUSULCER_YES = 1;  // yes
+  RIGHTPREVIOUSULCER_NO = 2;  // no
+}
+
+enum DiabetesPodiatryAssessmentRightPreviousAmputationEnum {
+  RIGHTPREVIOUSAMPUTATION_UNSPECIFIED = 0;
+  RIGHTPREVIOUSAMPUTATION_NONE = 1;  // none
+  RIGHTPREVIOUSAMPUTATION_MINOR = 2;  // minor
+  RIGHTPREVIOUSAMPUTATION_MAJOR = 3;  // major
+}
+
+enum DiabetesPodiatryAssessmentRightSuspectedCharcotEnum {
+  RIGHTSUSPECTEDCHARCOT_UNSPECIFIED = 0;
+  RIGHTSUSPECTEDCHARCOT_YES = 1;  // yes
+  RIGHTSUSPECTEDCHARCOT_NO = 2;  // no
+}
+
+enum DiabetesPodiatryAssessmentLeftNeuropathyStatusEnum {
+  LEFTNEUROPATHYSTATUS_UNSPECIFIED = 0;
+  LEFTNEUROPATHYSTATUS_SENSATE = 1;  // sensate
+  LEFTNEUROPATHYSTATUS_INSENSATE = 2;  // insensate
+  LEFTNEUROPATHYSTATUS_NOT_TESTED = 3;  // not-tested
+}
+
+enum DiabetesPodiatryAssessmentLeftPulsesStatusEnum {
+  LEFTPULSESSTATUS_UNSPECIFIED = 0;
+  LEFTPULSESSTATUS_NORMAL = 1;  // normal
+  LEFTPULSESSTATUS_DIMINISHED = 2;  // diminished
+  LEFTPULSESSTATUS_ABSENT = 3;  // absent
+  LEFTPULSESSTATUS_NOT_TESTED = 4;  // not-tested
+}
+
+enum DiabetesPodiatryAssessmentLeftDeformityEnum {
+  LEFTDEFORMITY_UNSPECIFIED = 0;
+  LEFTDEFORMITY_YES = 1;  // yes
+  LEFTDEFORMITY_NO = 2;  // no
+}
+
+enum DiabetesPodiatryAssessmentLeftCallusEnum {
+  LEFTCALLUS_UNSPECIFIED = 0;
+  LEFTCALLUS_YES = 1;  // yes
+  LEFTCALLUS_NO = 2;  // no
+}
+
+enum DiabetesPodiatryAssessmentLeftSkinBreakdownEnum {
+  LEFTSKINBREAKDOWN_UNSPECIFIED = 0;
+  LEFTSKINBREAKDOWN_YES = 1;  // yes
+  LEFTSKINBREAKDOWN_NO = 2;  // no
+}
+
+enum DiabetesPodiatryAssessmentLeftActiveUlcerEnum {
+  LEFTACTIVEULCER_UNSPECIFIED = 0;
+  LEFTACTIVEULCER_YES = 1;  // yes
+  LEFTACTIVEULCER_NO = 2;  // no
+}
+
+enum DiabetesPodiatryAssessmentLeftUlcerSeverityEnum {
+  LEFTULCERSEVERITY_UNSPECIFIED = 0;
+  LEFTULCERSEVERITY_SUPERFICIAL = 1;  // superficial
+  LEFTULCERSEVERITY_DEEP = 2;  // deep
+  LEFTULCERSEVERITY_INFECTED = 3;  // infected
+  LEFTULCERSEVERITY_CRITICAL_ISCHAEMIA = 4;  // critical-ischaemia
+}
+
+enum DiabetesPodiatryAssessmentLeftPreviousUlcerEnum {
+  LEFTPREVIOUSULCER_UNSPECIFIED = 0;
+  LEFTPREVIOUSULCER_YES = 1;  // yes
+  LEFTPREVIOUSULCER_NO = 2;  // no
+}
+
+enum DiabetesPodiatryAssessmentLeftPreviousAmputationEnum {
+  LEFTPREVIOUSAMPUTATION_UNSPECIFIED = 0;
+  LEFTPREVIOUSAMPUTATION_NONE = 1;  // none
+  LEFTPREVIOUSAMPUTATION_MINOR = 2;  // minor
+  LEFTPREVIOUSAMPUTATION_MAJOR = 3;  // major
+}
+
+enum DiabetesPodiatryAssessmentLeftSuspectedCharcotEnum {
+  LEFTSUSPECTEDCHARCOT_UNSPECIFIED = 0;
+  LEFTSUSPECTEDCHARCOT_YES = 1;  // yes
+  LEFTSUSPECTEDCHARCOT_NO = 2;  // no
+}
+
+message DiabetesPodiatryAssessment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string assessed_at = 7;  // DATE — iso 8601 date
+  DiabetesPodiatryAssessmentAssessmentSettingEnum assessment_setting = 8;  // VARCHAR(25)
+  DiabetesPodiatryAssessmentDiabetesTypeEnum diabetes_type = 9;  // VARCHAR(10)
+  double years_since_diagnosis = 10;  // NUMERIC(4,1) — numeric(4,1)
+  DiabetesPodiatryAssessmentOnRenalReplacementTherapyEnum on_renal_replacement_therapy = 11;  // VARCHAR(5)
+  DiabetesPodiatryAssessmentVisualAcuityImpairmentEnum visual_acuity_impairment = 12;  // VARCHAR(5)
+  DiabetesPodiatryAssessmentSelfCareAbilityEnum self_care_ability = 13;  // VARCHAR(15)
+  DiabetesPodiatryAssessmentFootwearAppropriateEnum footwear_appropriate = 14;  // VARCHAR(5)
+  DiabetesPodiatryAssessmentRightNeuropathyStatusEnum right_neuropathy_status = 15;  // VARCHAR(15)
+  DiabetesPodiatryAssessmentRightPulsesStatusEnum right_pulses_status = 16;  // VARCHAR(15)
+  DiabetesPodiatryAssessmentRightDeformityEnum right_deformity = 17;  // VARCHAR(5)
+  DiabetesPodiatryAssessmentRightCallusEnum right_callus = 18;  // VARCHAR(5)
+  DiabetesPodiatryAssessmentRightSkinBreakdownEnum right_skin_breakdown = 19;  // VARCHAR(5)
+  DiabetesPodiatryAssessmentRightActiveUlcerEnum right_active_ulcer = 20;  // VARCHAR(5)
+  DiabetesPodiatryAssessmentRightUlcerSeverityEnum right_ulcer_severity = 21;  // VARCHAR(20)
+  DiabetesPodiatryAssessmentRightPreviousUlcerEnum right_previous_ulcer = 22;  // VARCHAR(5)
+  DiabetesPodiatryAssessmentRightPreviousAmputationEnum right_previous_amputation = 23;  // VARCHAR(10)
+  DiabetesPodiatryAssessmentRightSuspectedCharcotEnum right_suspected_charcot = 24;  // VARCHAR(5)
+  DiabetesPodiatryAssessmentLeftNeuropathyStatusEnum left_neuropathy_status = 25;  // VARCHAR(15)
+  DiabetesPodiatryAssessmentLeftPulsesStatusEnum left_pulses_status = 26;  // VARCHAR(15)
+  DiabetesPodiatryAssessmentLeftDeformityEnum left_deformity = 27;  // VARCHAR(5)
+  DiabetesPodiatryAssessmentLeftCallusEnum left_callus = 28;  // VARCHAR(5)
+  DiabetesPodiatryAssessmentLeftSkinBreakdownEnum left_skin_breakdown = 29;  // VARCHAR(5)
+  DiabetesPodiatryAssessmentLeftActiveUlcerEnum left_active_ulcer = 30;  // VARCHAR(5)
+  DiabetesPodiatryAssessmentLeftUlcerSeverityEnum left_ulcer_severity = 31;  // VARCHAR(20)
+  DiabetesPodiatryAssessmentLeftPreviousUlcerEnum left_previous_ulcer = 32;  // VARCHAR(5)
+  DiabetesPodiatryAssessmentLeftPreviousAmputationEnum left_previous_amputation = 33;  // VARCHAR(10)
+  DiabetesPodiatryAssessmentLeftSuspectedCharcotEnum left_suspected_charcot = 34;  // VARCHAR(5)
+  string clinical_context = 35;  // TEXT
+}

@@ -108,6 +108,7 @@ Subprojects:
 - [DEXA Bone Density Test Result](dexa-bone-density-test-result)
 - [diabetes assessment](diabetes-assessment)
 - [Diabetes Eye Screening record](diabetes-eye-screening)
+- [Diabetes Podiatry Assessment](diabetes-podiatry-assessment)
 - [dyslexia assessment](dyslexia-assessment)
 - [echocardiogram test request](echocardiogram-test-request)
 - [Echocardiogram Test Result](echocardiogram-test-result)

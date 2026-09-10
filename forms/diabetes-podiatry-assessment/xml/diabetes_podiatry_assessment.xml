@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE diabetes_podiatry_assessment SYSTEM "diabetes_podiatry_assessment.dtd">
+<diabetes_podiatry_assessment>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<patient_id>550e8400-e29b-41d4-a716-446655440000</patient_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<assessed_at>2026-01-15</assessed_at>
+<assessment_setting>annual-review</assessment_setting>
+<diabetes_type>type-1</diabetes_type>
+<years_since_diagnosis>0.0</years_since_diagnosis>
+<on_renal_replacement_therapy>yes</on_renal_replacement_therapy>
+<visual_acuity_impairment>yes</visual_acuity_impairment>
+<self_care_ability>independent</self_care_ability>
+<footwear_appropriate>yes</footwear_appropriate>
+<right_neuropathy_status>sensate</right_neuropathy_status>
+<right_pulses_status>normal</right_pulses_status>
+<right_deformity>yes</right_deformity>
+<right_callus>yes</right_callus>
+<right_skin_breakdown>yes</right_skin_breakdown>
+<right_active_ulcer>yes</right_active_ulcer>
+<right_ulcer_severity>superficial</right_ulcer_severity>
+<right_previous_ulcer>yes</right_previous_ulcer>
+<right_previous_amputation>none</right_previous_amputation>
+<right_suspected_charcot>yes</right_suspected_charcot>
+<left_neuropathy_status>sensate</left_neuropathy_status>
+<left_pulses_status>normal</left_pulses_status>
+<left_deformity>yes</left_deformity>
+<left_callus>yes</left_callus>
+<left_skin_breakdown>yes</left_skin_breakdown>
+<left_active_ulcer>yes</left_active_ulcer>
+<left_ulcer_severity>superficial</left_ulcer_severity>
+<left_previous_ulcer>yes</left_previous_ulcer>
+<left_previous_amputation>none</left_previous_amputation>
+<left_suspected_charcot>yes</left_suspected_charcot>
+<clinical_context>Example text.</clinical_context>
+</diabetes_podiatry_assessment>

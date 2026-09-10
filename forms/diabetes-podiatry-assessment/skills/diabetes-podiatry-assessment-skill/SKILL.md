@@ -5,7 +5,7 @@ description: "Explains what the Diabetes Podiatry Assessment form measures, its 
 
 # Diabetes Podiatry Assessment
 
-The Diabetes Podiatry Assessment form.
+A structured diabetic foot risk-screening record aligned with **NICE NG19** (*Diabetic foot problems: prevention and management*). For each foot it captures sensory neuropathy status, pedal pulses, structural deformity, callus, skin breakdown, active ulceration (and its severity), ulceration and amputation history, and a suspected-Charcot-foot marker, together with patient-wide risk factors (renal replacement therapy, visual acuity impairment, self-care ability, footwear). From the two examined feet it classifies each foot's risk, applies the patient-wide high-risk overrides, derives an overall risk category, review pathway, and review interval, and raises flagged issues.
 
 This skill is the end-user-facing guide to this specific form; for cross-form concepts and terminology shared across the monorepo, use `form-examples-skill`. For implementation work on this form's code, use `diabetes-podiatry-assessment-maintainer-skill` instead.
 

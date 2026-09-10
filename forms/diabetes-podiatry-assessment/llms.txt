@@ -1,0 +1,27 @@
+# Diabetes Podiatry Assessment
+
+> A structured diabetic foot risk-screening record aligned with **NICE NG19** (*Diabetic foot problems: prevention and management*). For each foot it captures sensory neuropathy status, pedal pulses, structural deformity, callus, skin breakdown, active ulceration (and its severity), ulceration and amputation history, and a suspected-Charcot-foot marker, together with patient-wide risk factors (renal replacement therapy, visual acuity impairment, self-care ability, footwear). From the two examined feet it classifies each foot's risk, applies the patient-wide high-risk overrides, derives an overall risk category, review pathway, and review interval, and raises flagged issues.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

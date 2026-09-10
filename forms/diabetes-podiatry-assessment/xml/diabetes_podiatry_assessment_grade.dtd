@@ -1,0 +1,14 @@
+<!ELEMENT diabetes_podiatry_assessment_grade (id,created_at,updated_at,deleted_at,diabetes_podiatry_assessment_id,right_foot_risk,left_foot_risk,overall_risk,review_pathway,referral,review_interval_months,status,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT diabetes_podiatry_assessment_id (#PCDATA)>
+<!ELEMENT right_foot_risk (#PCDATA)>
+<!ELEMENT left_foot_risk (#PCDATA)>
+<!ELEMENT overall_risk (#PCDATA)>
+<!ELEMENT review_pathway (#PCDATA)>
+<!ELEMENT referral (#PCDATA)>
+<!ELEMENT review_interval_months (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

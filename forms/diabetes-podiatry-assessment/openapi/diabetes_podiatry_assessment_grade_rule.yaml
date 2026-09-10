@@ -1,0 +1,157 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: diabetes_podiatry_assessment_grade_rule
+openapi: 3.1.0
+info:
+  title: Diabetes Podiatry Assessment — DiabetesPodiatryAssessmentGradeRule
+  version: 1.0.0
+  description: "Audit trail of every classification rule that fired during grading: pathway stage, category, and description."
+paths:
+  /diabetes-podiatry-assessment-grade-rules:
+    get:
+      summary: List DiabetesPodiatryAssessmentGradeRule records
+      operationId: listDiabetesPodiatryAssessmentGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of DiabetesPodiatryAssessmentGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DiabetesPodiatryAssessmentGradeRule"
+    post:
+      summary: Create a new DiabetesPodiatryAssessmentGradeRule
+      operationId: createDiabetesPodiatryAssessmentGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiabetesPodiatryAssessmentGradeRule"
+      responses:
+        "201":
+          description: The newly created DiabetesPodiatryAssessmentGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiabetesPodiatryAssessmentGradeRule"
+        "400":
+          description: Validation error
+  /diabetes-podiatry-assessment-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one DiabetesPodiatryAssessmentGradeRule by id
+      operationId: getDiabetesPodiatryAssessmentGradeRule
+      responses:
+        "200":
+          description: The requested DiabetesPodiatryAssessmentGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiabetesPodiatryAssessmentGradeRule"
+        "404":
+          description: DiabetesPodiatryAssessmentGradeRule not found
+    patch:
+      summary: Update an existing DiabetesPodiatryAssessmentGradeRule
+      operationId: updateDiabetesPodiatryAssessmentGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiabetesPodiatryAssessmentGradeRule"
+      responses:
+        "200":
+          description: The updated DiabetesPodiatryAssessmentGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiabetesPodiatryAssessmentGradeRule"
+        "404":
+          description: DiabetesPodiatryAssessmentGradeRule not found
+    delete:
+      summary: Soft-delete a DiabetesPodiatryAssessmentGradeRule
+      operationId: deleteDiabetesPodiatryAssessmentGradeRule
+      responses:
+        "204":
+          description: DiabetesPodiatryAssessmentGradeRule deleted
+        "404":
+          description: DiabetesPodiatryAssessmentGradeRule not found
+components:
+  schemas:
+    DiabetesPodiatryAssessmentGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was soft-deleted.
+        diabetes_podiatry_assessment_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 40
+          description: Stable rule identifier (e.g. R-OVERALL-ACTIVE-ULCER-01).
+        stage:
+          type: string
+          enum:
+            - per-foot
+            - patient-wide
+            - urgent-override
+            - review
+            - completeness
+            - ""
+          description: "Pathway stage the rule concerns: per-foot, patient-wide, urgent-override, review, or completeness."
+        category:
+          type: string
+          maxLength: 50
+          description: Subject category (e.g. gate, classification, conditional-requirement).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+        - created_at
+        - updated_at
+        - diabetes_podiatry_assessment_grade_id
+        - rule_id
+        - stage
+        - category
+        - description
+      description: "Audit trail of every classification rule that fired during grading: pathway stage, category, and description."

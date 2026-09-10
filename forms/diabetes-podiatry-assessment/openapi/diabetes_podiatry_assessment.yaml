@@ -1,0 +1,373 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: diabetes_podiatry_assessment
+openapi: 3.1.0
+info:
+  title: Diabetes Podiatry Assessment — DiabetesPodiatryAssessment
+  version: 1.0.0
+  description: "Main diabetes-podiatry-assessment record for one diabetic foot risk-screening episode: assessment context, patient-wide risk factors, and the right-foot and left-foot examination blocks. The per-foot and overall risk classification, fired rules, and flags live in child tables."
+paths:
+  /diabetes-podiatry-assessments:
+    get:
+      summary: List DiabetesPodiatryAssessment records
+      operationId: listDiabetesPodiatryAssessment
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of DiabetesPodiatryAssessment records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DiabetesPodiatryAssessment"
+    post:
+      summary: Create a new DiabetesPodiatryAssessment
+      operationId: createDiabetesPodiatryAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiabetesPodiatryAssessment"
+      responses:
+        "201":
+          description: The newly created DiabetesPodiatryAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiabetesPodiatryAssessment"
+        "400":
+          description: Validation error
+  /diabetes-podiatry-assessments/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one DiabetesPodiatryAssessment by id
+      operationId: getDiabetesPodiatryAssessment
+      responses:
+        "200":
+          description: The requested DiabetesPodiatryAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiabetesPodiatryAssessment"
+        "404":
+          description: DiabetesPodiatryAssessment not found
+    patch:
+      summary: Update an existing DiabetesPodiatryAssessment
+      operationId: updateDiabetesPodiatryAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiabetesPodiatryAssessment"
+      responses:
+        "200":
+          description: The updated DiabetesPodiatryAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiabetesPodiatryAssessment"
+        "404":
+          description: DiabetesPodiatryAssessment not found
+    delete:
+      summary: Soft-delete a DiabetesPodiatryAssessment
+      operationId: deleteDiabetesPodiatryAssessment
+      responses:
+        "204":
+          description: DiabetesPodiatryAssessment deleted
+        "404":
+          description: DiabetesPodiatryAssessment not found
+components:
+  schemas:
+    DiabetesPodiatryAssessment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the patient this assessment documents (restrict delete).
+        clinician_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessing clinician (restrict delete); optional.
+        assessed_at:
+          type: string
+          format: date
+          description: Date the assessment was performed; drives the review-overdue comparison.
+        assessment_setting:
+          type: string
+          enum:
+            - annual-review
+            - foot-protection-clinic
+            - hospital-admission
+            - pre-discharge
+            - other
+            - ""
+          description: "Setting: annual-review, foot-protection-clinic, hospital-admission, pre-discharge, or other."
+        diabetes_type:
+          type: string
+          enum:
+            - type-1
+            - type-2
+            - other
+            - unknown
+            - ""
+          description: "Diabetes type: type-1, type-2, other, or unknown."
+        years_since_diagnosis:
+          type: number
+          format: double
+          description: Years since diabetes diagnosis.
+        on_renal_replacement_therapy:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the patient is on renal replacement therapy (dialysis): yes or no; yes is an automatic high-risk factor per NICE NG19."
+        visual_acuity_impairment:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the patient has a visual acuity impairment that limits foot self-inspection: yes or no."
+        self_care_ability:
+          type: string
+          enum:
+            - independent
+            - partial
+            - unable
+            - ""
+          description: "Patient's ability to self-inspect and self-care for their feet: independent, partial, or unable."
+        footwear_appropriate:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether current footwear is appropriate for the patient's risk level: yes or no."
+        right_neuropathy_status:
+          type: string
+          enum:
+            - sensate
+            - insensate
+            - not-tested
+            - ""
+          description: "Right-foot sensory neuropathy test result (e.g. 10g monofilament): sensate, insensate, or not-tested."
+        right_pulses_status:
+          type: string
+          enum:
+            - normal
+            - diminished
+            - absent
+            - not-tested
+            - ""
+          description: "Right-foot pedal pulses (dorsalis pedis / posterior tibial): normal, diminished, absent, or not-tested."
+        right_deformity:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Right-foot structural deformity present (e.g. claw toes, bunion, prominent metatarsal heads): yes or no."
+        right_callus:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Right-foot callus present: yes or no."
+        right_skin_breakdown:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Right-foot skin breakdown / fissure present (short of an active ulcer): yes or no."
+        right_active_ulcer:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Right-foot active ulceration present: yes or no."
+        right_ulcer_severity:
+          type: string
+          enum:
+            - superficial
+            - deep
+            - infected
+            - critical-ischaemia
+            - ""
+          description: "Right-foot active ulcer severity when present: superficial, deep, infected, or critical-ischaemia."
+        right_previous_ulcer:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "History of previous right-foot ulceration: yes or no; yes is an automatic high-risk factor."
+        right_previous_amputation:
+          type: string
+          enum:
+            - none
+            - minor
+            - major
+            - ""
+          description: "History of previous right-foot amputation: none, minor (toe / partial foot), or major (below / above knee)."
+        right_suspected_charcot:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Suspected acute Charcot foot on the right (unexplained hot, red, swollen foot, with or without deformity or pain): yes or no; yes requires urgent same-day / next-working-day referral."
+        left_neuropathy_status:
+          type: string
+          enum:
+            - sensate
+            - insensate
+            - not-tested
+            - ""
+          description: "Left-foot sensory neuropathy test result (e.g. 10g monofilament): sensate, insensate, or not-tested."
+        left_pulses_status:
+          type: string
+          enum:
+            - normal
+            - diminished
+            - absent
+            - not-tested
+            - ""
+          description: "Left-foot pedal pulses (dorsalis pedis / posterior tibial): normal, diminished, absent, or not-tested."
+        left_deformity:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Left-foot structural deformity present (e.g. claw toes, bunion, prominent metatarsal heads): yes or no."
+        left_callus:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Left-foot callus present: yes or no."
+        left_skin_breakdown:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Left-foot skin breakdown / fissure present (short of an active ulcer): yes or no."
+        left_active_ulcer:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Left-foot active ulceration present: yes or no."
+        left_ulcer_severity:
+          type: string
+          enum:
+            - superficial
+            - deep
+            - infected
+            - critical-ischaemia
+            - ""
+          description: "Left-foot active ulcer severity when present: superficial, deep, infected, or critical-ischaemia."
+        left_previous_ulcer:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "History of previous left-foot ulceration: yes or no; yes is an automatic high-risk factor."
+        left_previous_amputation:
+          type: string
+          enum:
+            - none
+            - minor
+            - major
+            - ""
+          description: "History of previous left-foot amputation: none, minor (toe / partial foot), or major (below / above knee)."
+        left_suspected_charcot:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Suspected acute Charcot foot on the left (unexplained hot, red, swollen foot, with or without deformity or pain): yes or no; yes requires urgent same-day / next-working-day referral."
+        clinical_context:
+          type: string
+          description: Optional free-text clinical context shown in the summary.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - assessment_setting
+        - diabetes_type
+        - on_renal_replacement_therapy
+        - visual_acuity_impairment
+        - self_care_ability
+        - footwear_appropriate
+        - right_neuropathy_status
+        - right_pulses_status
+        - right_deformity
+        - right_callus
+        - right_skin_breakdown
+        - right_active_ulcer
+        - right_ulcer_severity
+        - right_previous_ulcer
+        - right_previous_amputation
+        - right_suspected_charcot
+        - left_neuropathy_status
+        - left_pulses_status
+        - left_deformity
+        - left_callus
+        - left_skin_breakdown
+        - left_active_ulcer
+        - left_ulcer_severity
+        - left_previous_ulcer
+        - left_previous_amputation
+        - left_suspected_charcot
+        - clinical_context
+      description: "Main diabetes-podiatry-assessment record for one diabetic foot risk-screening episode: assessment context, patient-wide risk factors, and the right-foot and left-foot examination blocks. The per-foot and overall risk classification, fired rules, and flags live in child tables."

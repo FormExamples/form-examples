@@ -36,6 +36,7 @@ enum NeurodiversityAdjustmentResponseGradeRecommendationEnum {
   RECOMMENDATION_SEEK_OCCUPATIONAL_HEALTH = 3;  // seek-occupational-health
   RECOMMENDATION_RECONSIDER_DECISION = 4;  // reconsider-decision
   RECOMMENDATION_ESCALATE_TO_HR = 5;  // escalate-to-hr
+  RECOMMENDATION_RECORD_DECLINE = 6;  // record-decline
 }
 
 message NeurodiversityAdjustmentResponseGrade {
