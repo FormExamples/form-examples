@@ -164,10 +164,17 @@ the remaining scorable forms.
       in the UK LPA form). **Full sweep: 286/286 HTML front-ends pass** smoke
       + a11y (from ~2/286 at the start). Harness retries once to absorb
       parallel-load flakes.
-- [ ] Extend `examples/` fixtures with an `expected` block (score/grade/flags)
-      as the E2E oracle — REQUIRES running each form's JS engine over the
-      fixture (Python generator cannot; needs a Node oracle harness). Pending.
-- [ ] Fill `expected` for all 286 typical fixtures (mechanical; needs oracle).
+- [x] **SUPERSEDED** by the later `examples/personas.json` + `bin/test-personas`
+      system (see Phase 3, below): rather than adding an `expected` block to
+      the type-defaulted `examples/assessment.json` fixture, personas are
+      realistic, hand-curated, engine-verified scenarios in their own file,
+      computed by the exact Node oracle harness this item called for
+      (`bin/lib/engine-loader.js`). Fleet-wide as of 2026-09-10: 353/353
+      forms with an engine PASS (0 FAIL); the 3 without personas are
+      genuinely engine-less by design.
+- [x] **SUPERSEDED**, same reason as above — "all 286 typical fixtures" is
+      also a stale count (356 forms now); the live, correct figure is the
+      `bin/test-personas` fleet-wide result just above.
 - [ ] Wire changed-forms E2E subset into PR CI (nightly full sweep done).
 
 ## Phase 3 — Functionality rollout (WS3) — ASSESSED; remaining as batch rollout
@@ -603,10 +610,11 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       reusable engine-execution half of the oracle; the remaining work is the
       per-form fixture→engine-state adapter that yields the actual `expected`
       score/grade/flags.
-- [ ] Extend the fixture convention to three personas per form:
-      `example-minimal.json`, `example-typical.json` (rename of current),
-      `example-flagged.json` — each with `expected` scores/flags. Update
-      `bin/generate-changelog-and-examples.py` scaffold + `--check`.
+- [x] **SUPERSEDED** by the `personas.json` design below (a single file
+      holding a variable number of hand-curated personas per form, rather
+      than a fixed three-file `example-minimal`/`-typical`/`-flagged`
+      convention) — the design that actually shipped and reached fleet-wide
+      coverage.
 - [x] **Persona format + verifier built:** `bin/test-personas` — authors write
       realistic filled states in the engine's shape under
       `forms/<slug>/examples/personas.json`; `--update` computes `expected` by
@@ -623,13 +631,14 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       derm, diabetic-eye, EPDS, EMT, endocrine, epilepsy, ergonomic (REBA),
       fall-risk (Morse), fertility, Framingham, gastro, Glasgow-Blatchford,
       GRACE, HAS-BLED — plus the reference 9.
-- [ ] **Finding:** ~6 forms were skipped because their only whole-state
-      grader stamps a live `new Date()` timestamp (dyslexia-, endometriosis-,
+- [x] **Finding, RESOLVED** (see "Timestamp-skip category CLOSED" below):
+      ~6 forms were skipped because their only whole-state grader stamps a
+      live `new Date()` timestamp (dyslexia-, endometriosis-,
       first-responder-assessment; bhutani-bilirubin-nomogram;
-      birth-control-assessment) with no deterministic band-producing entry to
-      pin. Their `expected` cannot be reproduced. Worth a follow-up: refactor
-      those graders to take an injected clock / split the timestamp out, so
-      they become testable.
+      birth-control-assessment) with no deterministic band-producing entry
+      to pin. Their `expected` cannot be reproduced. Worth a follow-up:
+      refactor those graders to take an injected clock / split the
+      timestamp out, so they become testable.
 - [x] **108 forms** now have verified personas (`bin/test-personas` PASS 108 /
       FAIL 0, deterministic across the full corpus). Rounds: 9 reference + 35
       + 18 (F,H) + 18 (E,G re-authored) + 19 (I,J) + 9 (timestamp-unlocked).
@@ -939,11 +948,14 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
 
 ## Phase 11 — R3 functionality carry-overs (from Phases 3/6)
 
-- [ ] **Form export/import (JSON/XML/CSV/TSV) — design on the reference
+- [x] **Form export/import (JSON/XML/CSV/TSV) — design on the reference
       forms, roll out mechanically with a `--check` tool (Conventions
       promise).** Reference-form design DONE 2026-09-08 on both stacks;
-      fleet rollout across the other ~350 forms NOT started (that's the
-      "roll out mechanically" half of this item, still open).
+      the HTML fleet rollout (see below, "Fleet-wide HTML rollout: DONE
+      2026-09-08") is complete and `--check`-clean fleet-wide (`0 form(s)
+      pending, 87 SKIP` — re-verified 2026-09-11; the 87 SKIP are
+      documented non-wizard forms, not a gap). Svelte's fleet rollout is a
+      separate, still-open follow-on (see the Autosave item above).
 
       **HTML** (`pre-operative-assessment-by-clinician`): two new
       standalone, self-injecting ES modules, `js/form-export.js` and
