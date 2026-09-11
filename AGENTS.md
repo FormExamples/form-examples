@@ -260,6 +260,7 @@ bin/loco-migration-nullability --check --all # Loco migration/entity/controller 
 bin/loco-test-max-connections-fix --check --all # Loco config/test.yaml max_connections=1 pool-race drift detector
 bin/loco-serve-openapi-refactor --check --all # Loco GET /api/openapi.yaml route rollout drift detector
 bin/loco-camel-case-json-refactor --check --all # Loco domain-struct rename_all=camelCase drift detector
+bin/loco-integration-test-rollout --check --all # Loco patient-table POST/GET round-trip test rollout drift detector
 bin/loco-rs-1-migration --check --all # Loco 0.16 -> 1.0.1 migration completeness check (one-shot)
 bin/loco-msrv-set --msrv 1.96 --check --all # Rust MSRV (rust-version) drift detector, per spec/rust-msrv-n-minus-2/
 bin/generate-forms-tsv.py --check     # forms.tsv drift detector

@@ -517,8 +517,37 @@ Design each feature on the reference forms
       unblocks the CI rust job's `cargo test`. Added a `bin/test-loco-routes`
       gate rejecting the broken `base.join("users.yaml")` pattern. (The 6
       crates without a users.yaml never call seed — genuinely fine.)
-- [ ] **Loco API integration test rollout** (per crate) once the two findings
-      above are resolved — the apgar template is the pattern.
+- [x] **Loco API integration test rollout, Phase 1: DONE 2026-09-11.** New
+      `bin/loco-integration-test-rollout` upgrades every crate's scaffold-stub
+      `tests/requests/patient.rs` into a real POST-then-GET-then-list
+      round-trip test, mirroring the apgar-score reference (per-crate
+      generator, not a copy-vendor: the `patient` `Params` struct has 8+
+      distinct shapes fleet-wide, found by direct check, so each crate's own
+      field list is parsed from Rust source and cross-referenced against its
+      own `sql/*create_table_patient.sql` CHECK constraints for realistic
+      enum values). 323/356 crates changed (20 have no `patient` table; 9
+      have no domain request test stubs at all — a separate pre-existing
+      gap, flagged below, not fixed by this tool). Verified: `cargo
+      check`/`clippy -D warnings` clean on 8 diverse crates spanning the
+      `Params`-variant spread, `cargo test` green with a live scratch
+      Postgres on 4 (all running the new test). See
+      `AGENTS/back-end-with-loco.md` §Fleet-wide maintenance tools for the
+      full writeup; `--check` is the CI drift detector.
+
+      **Follow-on scope, not yet started:** (1) the same test pattern for
+      other domain tables (the form's own main table, clinician, grade
+      trio) — deferred because those have far more per-form-specific shapes
+      (FK chains needing seeded parent rows, bespoke enum vocabularies) than
+      a generic value-picker can safely guess; (2) the 9 crates found with
+      no domain request test stubs whatsoever (only `auth.rs`/
+      `prepare_data.rs` wired in `tests/requests/mod.rs`) — a real,
+      pre-existing gap this phase surfaced but didn't fix, since it needs
+      scaffolding new test files + `mod.rs` wiring, not upgrading an
+      existing stub: `cataract-diagnostic-evaluation`, `dietic-assessment`,
+      `health-screening-questionnaire`, `hernia-diagnostic-evaluation`,
+      `hip-replacement-surgery-evaluation`, `inpatient-clinical-note`,
+      `knee-replacement-surgery-evaluation`, `medical-operation-note`,
+      `perioperative-optimization`.
 - [x] **Combined OpenAPI spec per form** (the first half of "serve OpenAPI"):
       `bin/openapi/generate-openapi-combined.py [--check]` merges each form's
       per-entity `openapi/*.yaml` into one `openapi/combined/openapi.yaml`

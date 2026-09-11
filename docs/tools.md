@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-88 tools.
+89 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -42,6 +42,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/loco-camel-case-json-refactor`](#loco-camel-case-json-refactor)
 - [`bin/loco-config-refactor`](#loco-config-refactor)
 - [`bin/loco-forbid-unsafe`](#loco-forbid-unsafe)
+- [`bin/loco-integration-test-rollout`](#loco-integration-test-rollout)
 - [`bin/loco-migration-defaults`](#loco-migration-defaults)
 - [`bin/loco-migration-nullability`](#loco-migration-nullability)
 - [`bin/loco-msrv-set`](#loco-msrv-set)
@@ -1174,6 +1175,51 @@ Usage:
   bin/loco-forbid-unsafe --dry-run --all  # show what would change
   bin/loco-forbid-unsafe --check --all    # CI drift check (non-zero on drift)
   bin/loco-forbid-unsafe --verbose --all  # list every file touched
+```
+
+<h2 id="loco-integration-test-rollout"><code>bin/loco-integration-test-rollout</code></h2>
+
+```text
+bin/loco-integration-test-rollout — Phase 1 of tasks.md's "Loco API
+integration test rollout (per crate)": upgrades every crate's scaffold-stub
+`tests/requests/patient.rs` (a bare "GET list returns 200 JSON" check) into a
+real POST-then-GET-then-list round-trip integration test, mirroring the
+hand-written `apgar-score` reference (`tests/requests/patients.rs`, itself
+fixed for camelCase by `bin/loco-camel-case-json-refactor`).
+
+Scoped to the `patient` table specifically (present in 336/356 crates) —
+not literally "every table in every crate" — because it is the one table
+every clinical form shares conceptually, and because its `Params` struct
+shape is NOT byte-identical fleet-wide (a direct fleet check found 8+
+distinct variants: some carry a `sex` CHECK-enum column, some don't; some
+carry fitness/vitals fields like `waist_as_cm`/`vo2_max`; some carry
+`deleted_at` in `Params`, most don't) — so this is a genuine per-crate
+generator, not a copy-vendor tool. Extending to other domain tables (the
+form's own main table, clinician, grade/grade_rule/grade_flag) is future,
+separate scope — those have far more per-form-specific shapes (FK chains,
+enum vocabularies) that a generic value-picker can't safely guess.
+
+For each crate: parses `controllers/patient.rs`'s `struct Params { ... }`
+field list (name + Rust type), cross-references `sql/*create_table_patient.sql`
+for CHECK-constrained enum columns (picks the first non-empty allowed value,
+mirroring `examples/assessment.json`'s own generator convention), converts
+each field name to camelCase (serde's own `RenameRule::CamelCase` algorithm,
+reimplemented here — verified against real `serde` output elsewhere this
+session), and emits a JSON body via small field-name heuristics (email,
+phone, postcode, NHS number, MRN, height/weight/BMI, etc.) falling back to a
+generic placeholder per Rust type. `deleted_at` (`Option<DateTimeWithTimeZone>`)
+is always omitted from the body — serde's derive treats a missing `Option<T>`
+key as `None` without an explicit `#[serde(default)]`, and there's no
+sensible "create" value for a soft-delete timestamp anyway.
+
+Usage:
+    bin/loco-integration-test-rollout [--check] [--dry-run] [--all|<slug>...]
+
+--check reports which crates would change, and exits non-zero if any change
+is pending (CI drift detector). --dry-run shows per-crate status without
+writing. Default (no flags): apply. Idempotent: re-running after a full
+apply makes no further changes (the generated file's own marker comment is
+checked before regenerating).
 ```
 
 <h2 id="loco-migration-defaults"><code>bin/loco-migration-defaults</code></h2>

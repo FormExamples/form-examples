@@ -459,6 +459,30 @@ for them.
   (a `claude mcp add …` command for the `svelte` MCP server, not valid
   Make syntax) as a leading comment rather than discarding it.
 
+- **Loco API integration test rollout, Phase 1.** New
+  `bin/loco-integration-test-rollout` upgrades every crate's
+  scaffold-stub `tests/requests/patient.rs` (a bare "GET list returns
+  200" check) into a real POST-then-GET-then-list HTTP round-trip test,
+  mirroring the hand-written `apgar-score` reference. A genuine per-crate
+  generator rather than a copy-vendor tool: a direct fleet check found
+  the `patient` table's `Params` struct is not byte-identical fleet-wide
+  (8+ distinct variants — some carry a `sex` CHECK-enum, some carry
+  fitness/vitals fields like `waistAsCm`/`vo2Max`, some carry
+  `deleted_at` in `Params`), so each crate's own field list is parsed
+  from Rust source and cross-referenced against its own
+  `sql/*create_table_patient.sql` CHECK constraints for realistic enum
+  values, falling back to field-name heuristics or a per-Rust-type
+  placeholder. 323/356 crates changed; 20 have no `patient` table; 9
+  were found to have no domain request test stubs whatsoever (only
+  `auth.rs`/`prepare_data.rs` wired) — a separate, real, pre-existing gap
+  this surfaced but didn't fix, since it needs new test scaffolding +
+  `mod.rs` wiring rather than upgrading an existing stub. Verified:
+  `cargo check`/`clippy -D warnings` clean on 8 diverse crates spanning
+  the `Params`-variant spread, `cargo test` green with a live scratch
+  Postgres on 4. Extending the pattern to other domain tables (the
+  form's own main table, clinician, grade trio) is separate, future
+  scope. `--check` is the CI drift detector.
+
 ### Changed
 
 - **`formexamples.github.io` refactored onto the Lily Design System**,
