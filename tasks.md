@@ -534,20 +534,31 @@ Design each feature on the reference forms
       `AGENTS/back-end-with-loco.md` §Fleet-wide maintenance tools for the
       full writeup; `--check` is the CI drift detector.
 
-      **Follow-on scope, not yet started:** (1) the same test pattern for
-      other domain tables (the form's own main table, clinician, grade
-      trio) — deferred because those have far more per-form-specific shapes
-      (FK chains needing seeded parent rows, bespoke enum vocabularies) than
-      a generic value-picker can safely guess; (2) the 9 crates found with
-      no domain request test stubs whatsoever (only `auth.rs`/
-      `prepare_data.rs` wired in `tests/requests/mod.rs`) — a real,
-      pre-existing gap this phase surfaced but didn't fix, since it needs
-      scaffolding new test files + `mod.rs` wiring, not upgrading an
-      existing stub: `cataract-diagnostic-evaluation`, `dietic-assessment`,
+      **Follow-on (2), the 9-crate missing-stub gap: FIXED same day,
+      2026-09-11.** New `bin/loco-missing-request-test-stubs-fix` scaffolds
+      the missing domain `tests/requests/<table>.rs` stub for exactly those
+      9 crates (`cataract-diagnostic-evaluation`, `dietic-assessment`,
       `health-screening-questionnaire`, `hernia-diagnostic-evaluation`,
       `hip-replacement-surgery-evaluation`, `inpatient-clinical-note`,
       `knee-replacement-surgery-evaluation`, `medical-operation-note`,
-      `perioperative-optimization`.
+      `perioperative-optimization`) — 68 files across all of their domain
+      controllers, not just `patient`. Reads each controller's own
+      `routes()` function for its real mounted route prefix rather than
+      re-deriving English pluralization independently (Loco's inflector
+      already decided allergy → allergies once; re-parsing that source
+      beats reimplementing it). Then re-ran `bin/loco-integration-test-
+      rollout` fleet-wide, which picked up these 9 crates' newly-created
+      `patient.rs` stub and upgraded it too — `--check` now reports 0
+      pending across all 336/336 patient-bearing crates. Verified: `cargo
+      check`/`clippy -D warnings` clean on all 9, `cargo test` green with a
+      live scratch Postgres on 4 (54/43/43/33 tests, 0 failed, including
+      the upgraded `can_create_and_read_back_patient`).
+
+      **Follow-on (1), other domain tables: still not started** — the same
+      test pattern for the form's own main table, clinician, and the grade
+      trio, deferred because those have far more per-form-specific shapes
+      (FK chains needing seeded parent rows, bespoke enum vocabularies)
+      than a generic value-picker can safely guess.
 - [x] **Combined OpenAPI spec per form** (the first half of "serve OpenAPI"):
       `bin/openapi/generate-openapi-combined.py [--check]` merges each form's
       per-entity `openapi/*.yaml` into one `openapi/combined/openapi.yaml`

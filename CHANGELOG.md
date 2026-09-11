@@ -483,6 +483,19 @@ for them.
   form's own main table, clinician, grade trio) is separate, future
   scope. `--check` is the CI drift detector.
 
+  **Same-day follow-up:** the 9 crates with no domain request test
+  stubs at all were a real, separate gap, not a limitation of the
+  rollout tool. New `bin/loco-missing-request-test-stubs-fix` scaffolds
+  the missing stub for every domain controller in those 9 crates (68
+  files) by reading each controller's own `routes()` function for its
+  real route prefix, rather than re-deriving English pluralization
+  independently. Re-running `loco-integration-test-rollout` afterward
+  picked up their newly-created `patient.rs` and upgraded it too — all
+  336/336 patient-bearing crates are now covered, `--check` reports 0
+  pending. Verified: `cargo check`/`clippy -D warnings` clean on all 9,
+  `cargo test` green with a live scratch Postgres on 4
+  (54/43/43/33 tests, 0 failed).
+
 ### Changed
 
 - **`formexamples.github.io` refactored onto the Lily Design System**,

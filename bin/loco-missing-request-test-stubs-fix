@@ -1,0 +1,172 @@
+#!/usr/bin/env python3
+"""bin/loco-missing-request-test-stubs-fix — scaffolds the missing domain
+`tests/requests/<table>.rs` stub for every crate found (via a direct fleet
+check, 2026-09-11) to have NO domain request test stubs whatsoever: only
+`auth.rs`/`prepare_data.rs` are wired in `tests/requests/mod.rs`, even
+though every domain controller exists and is routed. `cargo loco generate
+scaffold` normally emits one such stub per table as a side effect; these
+9 crates never got it (built via an earlier/different process, before the
+convention was consistently applied) — a real, pre-existing gap flagged
+in tasks.md's "Loco API integration test rollout" write-up, not something
+that tool's own patient-table generator touches (it upgrades an existing
+stub; it doesn't create new ones).
+
+For each affected crate, for every domain controller (skipping `auth.rs`,
+`openapi.rs`, `mod.rs`): reads that controller's own `routes()` function
+to find its real mounted route prefix (`.prefix("api/<plural>/")`) rather
+than independently re-deriving English pluralization (allergy -> allergies,
+not allergys) — Loco's own inflector already decided this once; asking it
+again by parsing the same source is more reliable than reimplementing it.
+Writes the fleet's standard scaffold-stub test (a GET-list-returns-200-JSON
+check, already carrying the trailing-slash / content-type fix applied
+fleet-wide earlier) at `tests/requests/<table>.rs`, and adds `pub mod
+<table>;` to `tests/requests/mod.rs`.
+
+Deliberately stops at parity with every OTHER crate's own stub depth — it
+does not also apply `bin/loco-integration-test-rollout`'s richer
+patient-table round-trip test; run that tool afterward (it is naturally
+idempotent and will pick up these crates' newly-created `patient.rs` stub
+on its next fleet-wide run).
+
+Usage:
+    bin/loco-missing-request-test-stubs-fix [--check] [--dry-run] [--all|<slug>...]
+
+--check reports which crates would change, and exits non-zero if any
+change is pending (CI drift detector / completeness check — this is a
+one-shot fix for a specific found gap, not a routine scaffold-drift
+detector, since no generator produces this stub set automatically).
+--dry-run shows per-crate status without writing.
+"""
+
+import argparse
+import re
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS_DIR = REPO_ROOT / "forms"
+
+PREFIX_RE = re.compile(r'\.prefix\("api/([^"/]+)/?"\)')
+SKIP_CONTROLLER_NAMES = {"mod.rs", "auth.rs", "openapi.rs"}
+
+
+def stub_test_text(crate_snake: str, plural: str) -> str:
+    fn_name = f"can_get_{plural}"
+    return f'''use {crate_snake}::app::App;
+use loco_rs::testing::prelude::*;
+use serial_test::serial;
+
+#[tokio::test]
+#[serial]
+async fn {fn_name}() {{
+    request::<App, _, _>(|request, _ctx| async move {{
+        let res = request.get("/api/{plural}").await;
+        assert_eq!(res.status_code(), 200);
+        // Assert the JSON list handler answered — not Loco's HTML welcome page,
+        // which a trailing-slash URL falls through to (also returning 200).
+        let content_type = res
+            .headers()
+            .get("content-type")
+            .and_then(|v| v.to_str().ok())
+            .unwrap_or("");
+        assert!(
+            content_type.contains("json"),
+            "expected JSON from the list handler, got content-type {{content_type:?}}"
+        );
+    }})
+    .await;
+}}
+'''
+
+
+def find_crates():
+    for controllers_mod in sorted(FORMS_DIR.glob("*/back-end-with-loco/src/*/controllers/mod.rs")):
+        yield controllers_mod.parents[1]
+
+
+def has_no_domain_stubs(src_dir: Path) -> bool:
+    tests_mod = src_dir.parent.parent / "tests" / "requests" / "mod.rs"
+    if not tests_mod.is_file():
+        return False
+    text = tests_mod.read_text()
+    mod_names = set(re.findall(r"^\s*(?:pub\s+)?mod\s+(\w+);", text, re.MULTILINE))
+    return mod_names <= {"auth", "prepare_data"} and "auth" in mod_names
+
+
+def process_crate(src_dir: Path, apply: bool) -> tuple[int, list[str]]:
+    controllers_dir = src_dir / "controllers"
+    tests_dir = src_dir.parent.parent / "tests" / "requests"
+    added = []
+
+    for controller_file in sorted(controllers_dir.glob("*.rs")):
+        if controller_file.name in SKIP_CONTROLLER_NAMES:
+            continue
+        table = controller_file.stem
+        text = controller_file.read_text()
+        m = PREFIX_RE.search(text)
+        if not m:
+            continue
+        plural = m.group(1)
+        stub_path = tests_dir / f"{table}.rs"
+        if stub_path.exists():
+            continue
+        added.append(table)
+        if apply:
+            stub_path.write_text(stub_test_text(src_dir.name, plural))
+
+    if added and apply:
+        mod_file = tests_dir / "mod.rs"
+        text = mod_file.read_text()
+        new_lines = "\n".join(f"pub mod {t};" for t in added)
+        if not text.endswith("\n"):
+            text += "\n"
+        text = text.rstrip("\n") + "\n\n" + new_lines + "\n"
+        mod_file.write_text(text)
+
+    return len(added), added
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("slugs", nargs="*", help="form slugs (default: every form)")
+    parser.add_argument("--all", action="store_true", help="same as no slugs: every form")
+    parser.add_argument("--check", action="store_true", help="report drift; exit 1 if any pending; don't write")
+    parser.add_argument("--dry-run", action="store_true", help="show status per crate; don't write")
+    args = parser.parse_args()
+
+    if args.slugs:
+        src_dirs = []
+        for slug in args.slugs:
+            matches = sorted((FORMS_DIR / slug / "back-end-with-loco" / "src").glob("*/"))
+            src_dirs.extend(d for d in matches if (d / "controllers" / "mod.rs").is_file())
+    else:
+        src_dirs = list(find_crates())
+
+    dry = args.check or args.dry_run
+    affected = [d for d in src_dirs if has_no_domain_stubs(d)]
+
+    changed_crates = []
+    total_files = 0
+    for src_dir in affected:
+        slug = src_dir.parents[2].name
+        n, added = process_crate(src_dir, apply=not dry)
+        if n > 0:
+            changed_crates.append((slug, n, added))
+            total_files += n
+
+    if args.check:
+        print(f"loco-missing-request-test-stubs-fix [CHECK]: {len(changed_crates)} crate(s) pending "
+              f"({total_files} file(s))")
+        for slug, n, added in changed_crates:
+            print(f"  would add: {slug} ({n} file(s): {', '.join(added)})")
+        return 1 if changed_crates else 0
+
+    verb = "would add" if dry else "added"
+    print(f"loco-missing-request-test-stubs-fix: {len(changed_crates)} crate(s), {total_files} file(s) {verb}")
+    for slug, n, added in changed_crates:
+        print(f"  {slug}: {n} file(s) ({', '.join(added)})")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

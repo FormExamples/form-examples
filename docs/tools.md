@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-89 tools.
+90 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -45,6 +45,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/loco-integration-test-rollout`](#loco-integration-test-rollout)
 - [`bin/loco-migration-defaults`](#loco-migration-defaults)
 - [`bin/loco-migration-nullability`](#loco-migration-nullability)
+- [`bin/loco-missing-request-test-stubs-fix`](#loco-missing-request-test-stubs-fix)
 - [`bin/loco-msrv-set`](#loco-msrv-set)
 - [`bin/loco-rs-1-migration`](#loco-rs-1-migration)
 - [`bin/loco-seed-base-rename`](#loco-seed-base-rename)
@@ -1342,6 +1343,48 @@ Usage:
   bin/loco-migration-nullability --all              # every form's Loco crate
   bin/loco-migration-nullability --dry-run --all    # show what would change
   bin/loco-migration-nullability --check --all      # CI drift check (non-zero on drift)
+```
+
+<h2 id="loco-missing-request-test-stubs-fix"><code>bin/loco-missing-request-test-stubs-fix</code></h2>
+
+```text
+bin/loco-missing-request-test-stubs-fix — scaffolds the missing domain
+`tests/requests/<table>.rs` stub for every crate found (via a direct fleet
+check, 2026-09-11) to have NO domain request test stubs whatsoever: only
+`auth.rs`/`prepare_data.rs` are wired in `tests/requests/mod.rs`, even
+though every domain controller exists and is routed. `cargo loco generate
+scaffold` normally emits one such stub per table as a side effect; these
+9 crates never got it (built via an earlier/different process, before the
+convention was consistently applied) — a real, pre-existing gap flagged
+in tasks.md's "Loco API integration test rollout" write-up, not something
+that tool's own patient-table generator touches (it upgrades an existing
+stub; it doesn't create new ones).
+
+For each affected crate, for every domain controller (skipping `auth.rs`,
+`openapi.rs`, `mod.rs`): reads that controller's own `routes()` function
+to find its real mounted route prefix (`.prefix("api/<plural>/")`) rather
+than independently re-deriving English pluralization (allergy -> allergies,
+not allergys) — Loco's own inflector already decided this once; asking it
+again by parsing the same source is more reliable than reimplementing it.
+Writes the fleet's standard scaffold-stub test (a GET-list-returns-200-JSON
+check, already carrying the trailing-slash / content-type fix applied
+fleet-wide earlier) at `tests/requests/<table>.rs`, and adds `pub mod
+<table>;` to `tests/requests/mod.rs`.
+
+Deliberately stops at parity with every OTHER crate's own stub depth — it
+does not also apply `bin/loco-integration-test-rollout`'s richer
+patient-table round-trip test; run that tool afterward (it is naturally
+idempotent and will pick up these crates' newly-created `patient.rs` stub
+on its next fleet-wide run).
+
+Usage:
+    bin/loco-missing-request-test-stubs-fix [--check] [--dry-run] [--all|<slug>...]
+
+--check reports which crates would change, and exits non-zero if any
+change is pending (CI drift detector / completeness check — this is a
+one-shot fix for a specific found gap, not a routine scaffold-drift
+detector, since no generator produces this stub set automatically).
+--dry-run shows per-crate status without writing.
 ```
 
 <h2 id="loco-msrv-set"><code>bin/loco-msrv-set</code></h2>
