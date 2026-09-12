@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-91 tools.
+92 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -87,6 +87,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/test-vendored-uniformity`](#test-vendored-uniformity)
 - [`bin/update`](#update)
 - [`bin/update-group-b-plans.py`](#update-group-b-planspy)
+- [`bin/verify-personas`](#verify-personas)
 - [`bin/protobuf/generate-protobuf-representations.py`](#protobufgenerate-protobuf-representationspy)
 - [`bin/openapi/generate-openapi-combined.py`](#openapigenerate-openapi-combinedpy)
 - [`bin/openapi/generate-openapi-representations.py`](#openapigenerate-openapi-representationspy)
@@ -2493,6 +2494,31 @@ Update plan.md for the 11 Group B forms whose front-end-form-with-svelte
 was just implemented. Replace stub status with accurate "implemented"
 status for the SvelteKit patient form, and note the dashboard + Rust
 backend remaining.
+```
+
+<h2 id="verify-personas"><code>bin/verify-personas</code></h2>
+
+```text
+bin/verify-personas — for every eligible form, drive the real wizard
+ through a headless browser for EVERY entry in examples/personas.json:
+ inject that persona's state via window.__FORM_STATE__.setState(), click
+ the real #submit-btn, and assert the wizard actually completed (no page
+ error, no unexpected validation errors, #report left its empty-state
+ placeholder). A UI-level complement to bin/test-personas, which verifies
+ the same personas' expected grades at the pure-engine level but never
+ drives the wizard's own submit/render code path.
+
+ Scoped to forms with a #submit-btn + window.__FORM_STATE__ wizard shape
+ and a real examples/personas.json. Forms missing either are reported as
+ SKIP, not silently omitted.
+
+ Usage:
+   bin/verify-personas [<slug> ...]
+
+   <slug> ...  restrict to the named forms (default: every eligible form)
+
+ Requires e2e/ deps installed (cd e2e && npm ci) and browsers
+ (cd e2e && npx playwright install chromium).
 ```
 
 <h2 id="protobufgenerate-protobuf-representationspy"><code>bin/protobuf/generate-protobuf-representations.py</code></h2>

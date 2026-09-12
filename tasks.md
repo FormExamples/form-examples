@@ -802,7 +802,55 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       `pnpm check` (0 errors/0 warnings, 336 files), `pnpm build`
       succeeds (prerendered page ~1MB, consistent with `/forms` already
       rendering all 356 forms on one page with no pagination).
-- [ ] Run E2E sweep against all three personas per form.
+- [x] **Run E2E sweep against all three personas per form: DONE
+      2026-09-12.** New `e2e/verify-personas.mjs` + `bin/verify-personas`:
+      for every eligible form, drives the real wizard through a fresh
+      headless-browser page per `personas.json` entry — inject `state` via
+      `window.__FORM_STATE__.setState()`, autofill any still-empty required
+      field (the same generic-fill trick `bin/generate-export-samples`
+      pioneered, extended to `number`/`time` input types and the fleet's
+      two rarer required-radio-group conventions,
+      `data-required-group`/`data-required-radio`), click `#submit-btn`,
+      and assert no page error plus a real rendered report. This is the UI
+      submit/render code path `bin/test-personas` never exercises (it only
+      calls the engine module directly) — exactly the class of bug that
+      broke `advance-statement-about-care` (found via the sibling
+      `generate-export-samples.mjs`, Phase 6 above).
+
+      A validation block after autofill is logged as an informational note,
+      not a failure: several personas are deliberately incomplete by
+      design (`missing-*`, `incomplete-*`, "Blank notice...", "...dies with
+      an almost blank record") to exercise the ENGINE's own incompleteness
+      handling, and the wizard correctly refusing to submit incomplete
+      data is the wizard working as intended, not a bug. Only two things
+      count as a hard failure: a page error, and a report that never
+      rendered despite validation reporting zero errors.
+
+      **Two real bugs found and fixed in the tool itself before the fleet
+      run could be trusted:**
+      1. Reusing one page across a form's several personas hid a race — a
+         stale async effect from a previous persona could overwrite
+         `#report` right after the current persona's submit had rendered
+         it, so a persona only failed when checked after another one on
+         the same page, never in isolation (`blood-test-result`'s
+         `normal-annual-health-check-complete` was the reproducer). Fixed
+         by giving every persona its own fresh page.
+      2. The empty-state check searched for the substring `empty-message`
+         anywhere in the rendered report, which false-positives on any
+         form that legitimately reuses that CSS class for an inner
+         "no items in this sub-section" line (e.g. "No safety flags
+         raised."). Fixed to check that the placeholder is the report's
+         *entire* content, not a substring search.
+
+      Final result: **265/265 forms clean, 913/913 personas checked, 0
+      hard failures** (91 SKIP — no `#submit-btn` or no
+      `window.__FORM_STATE__` contract, matching the non-wizard/
+      not-yet-migrated set already known from
+      `bin/form-export-import-refactor`), 19 informational
+      validation-blocked notes (all traced to persona names/designs that
+      are deliberately incomplete). Not wired into routine CI — a fresh
+      page per persona across 913 personas is slow, same rationale as
+      `bin/generate-export-samples`; an occasional maintainer-run gate.
 
 ## Phase 7 — Special files + unsafe-forbid ✅ COMPLETE (2026-08-26)
 

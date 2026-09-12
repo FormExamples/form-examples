@@ -16,6 +16,23 @@ for them.
 
 ## [Unreleased]
 
+### Added
+
+- **New `bin/verify-personas` (+ `e2e/verify-personas.mjs`): a UI-level
+  complement to `bin/test-personas`.** For every eligible form, drives the
+  real wizard through a fresh headless-browser page per `personas.json`
+  entry — inject `state` via `window.__FORM_STATE__.setState()`, autofill
+  any still-empty required field, click `#submit-btn` — and asserts no
+  page error and a real rendered report. This exercises the wizard's own
+  submit/render code path, which `bin/test-personas` never touches (it
+  calls the scoring engine module directly). A validation block after
+  autofill is logged as informational, not a failure, since several
+  personas are deliberately incomplete by design to exercise the engine's
+  own incompleteness handling. Result: 265/265 forms clean, 913/913
+  personas checked, 0 hard failures. Found and fixed two real bugs in the
+  tool itself first (a page-reuse state race between personas, and a
+  false-positive empty-state substring check) — see `tasks.md` for detail.
+
 ### Fixed
 
 - **Fixed a real, fleet-wide invalid FHIR R5 property in generated persona

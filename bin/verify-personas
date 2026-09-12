@@ -1,0 +1,26 @@
+#!/bin/sh
+set -eu
+# bin/verify-personas — for every eligible form, drive the real wizard
+# through a headless browser for EVERY entry in examples/personas.json:
+# inject that persona's state via window.__FORM_STATE__.setState(), click
+# the real #submit-btn, and assert the wizard actually completed (no page
+# error, no unexpected validation errors, #report left its empty-state
+# placeholder). A UI-level complement to bin/test-personas, which verifies
+# the same personas' expected grades at the pure-engine level but never
+# drives the wizard's own submit/render code path.
+#
+# Scoped to forms with a #submit-btn + window.__FORM_STATE__ wizard shape
+# and a real examples/personas.json. Forms missing either are reported as
+# SKIP, not silently omitted.
+#
+# Usage:
+#   bin/verify-personas [<slug> ...]
+#
+#   <slug> ...  restrict to the named forms (default: every eligible form)
+#
+# Requires e2e/ deps installed (cd e2e && npm ci) and browsers
+# (cd e2e && npx playwright install chromium).
+
+top="$(git rev-parse --show-toplevel)"
+cd "$top"
+node e2e/verify-personas.mjs "$@"
