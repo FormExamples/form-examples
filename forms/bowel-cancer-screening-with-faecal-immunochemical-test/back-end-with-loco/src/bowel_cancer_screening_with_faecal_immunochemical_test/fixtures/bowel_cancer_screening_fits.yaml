@@ -1,0 +1,25 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 865896
+  deletedAt: null
+  reviewedAt: "2026-01-01T00:00:00Z"
+  screeningHub: "Test screeningHub"
+  participantIdentifier: "Test participantIdentifier"
+  age: 1
+  withinAgeRange: "eligible"
+  recallInterval: "two-yearly"
+  invitationDate: "1990-01-01"
+  previousOutcome: "first-invitation"
+  lastScreenDate: "1990-01-01"
+  kitReturned: "yes"
+  returnDate: "1990-01-01"
+  sampleAdequacy: "adequate"
+  spoiltReason: "leaked"
+  faecalHaemoglobinUgG: 1.0
+  assay: "Test assay"
+  thresholdApplied: 1.0
+  redFlagSymptoms: "yes"
+  clinicalNote: "Test clinicalNote"
+  context: "Test context"
+  patientId: 276312
+  clinicianId: null

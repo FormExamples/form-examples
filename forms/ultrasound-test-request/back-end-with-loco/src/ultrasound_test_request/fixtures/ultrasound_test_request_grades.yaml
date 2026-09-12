@@ -1,0 +1,16 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 918861
+  deletedAt: null
+  appropriatenessScore: 1
+  appropriatenessBand: "usually-appropriate"
+  suitabilityBand: "ok"
+  prepRequirements: "Test prepRequirements"
+  completenessPercent: 1
+  triageTier: "routine"
+  targetTimeframe: "Test targetTimeframe"
+  recommendation: "accept"
+  clinicianNotes: "Test clinicianNotes"
+  signedAt: "2026-01-01T00:00:00Z"
+  gradedAt: "2026-01-01T00:00:00Z"
+  ultrasoundTestRequestId: 853277

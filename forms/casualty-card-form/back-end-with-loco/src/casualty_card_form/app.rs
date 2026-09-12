@@ -91,6 +91,118 @@ impl Hooks for App {
             &format!("{}/src/casualty_card_form/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/casualty_card_form/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/casualty_card_form/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::casualty_cards::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/casualty_card_form/fixtures/casualty_cards.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::casualty_card_allergies::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/casualty_card_form/fixtures/casualty_card_allergies.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::casualty_card_arrival_triages::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/casualty_card_form/fixtures/casualty_card_arrival_triages.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::casualty_card_assessment_plans::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/casualty_card_form/fixtures/casualty_card_assessment_plans.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::casualty_card_clinical_examinations::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/casualty_card_form/fixtures/casualty_card_clinical_examinations.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::casualty_card_demographics::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/casualty_card_form/fixtures/casualty_card_demographics.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::casualty_card_dispositions::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/casualty_card_form/fixtures/casualty_card_dispositions.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::casualty_card_gps::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/casualty_card_form/fixtures/casualty_card_gps.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::casualty_card_investigations::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/casualty_card_form/fixtures/casualty_card_investigations.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::casualty_card_medical_histories::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/casualty_card_form/fixtures/casualty_card_medical_histories.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::casualty_card_medications::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/casualty_card_form/fixtures/casualty_card_medications.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::casualty_card_next_of_kins::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/casualty_card_form/fixtures/casualty_card_next_of_kins.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::casualty_card_pain_assessments::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/casualty_card_form/fixtures/casualty_card_pain_assessments.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::casualty_card_presenting_complaints::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/casualty_card_form/fixtures/casualty_card_presenting_complaints.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::casualty_card_primary_surveys::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/casualty_card_form/fixtures/casualty_card_primary_surveys.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::casualty_card_safeguarding_consents::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/casualty_card_form/fixtures/casualty_card_safeguarding_consents.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::casualty_card_treatments::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/casualty_card_form/fixtures/casualty_card_treatments.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::casualty_card_vital_signs::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/casualty_card_form/fixtures/casualty_card_vital_signs.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::news2_results::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/casualty_card_form/fixtures/news2_results.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::flagged_issues::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/casualty_card_form/fixtures/flagged_issues.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

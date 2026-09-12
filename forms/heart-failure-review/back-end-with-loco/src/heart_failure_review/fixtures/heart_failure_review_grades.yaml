@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 309836
+  deletedAt: null
+  nyhaStatus: "stable"
+  medicationOptimisationStatus: "optimised"
+  reviewStatus: "complete"
+  indicatedPillars: 1
+  prescribedPillars: 1
+  missingPillars: "Test missingPillars"
+  completenessScore: 1
+  gradedAt: "2026-01-01T00:00:00Z"
+  heartFailureReviewId: 623820

@@ -1,0 +1,23 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 516472
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "doctor"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "emergency-department"
+  presentingComplaint: "haematemesis"
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "16-39"
+  sex: "female"
+  bloodUreaMmolL: 1.0
+  haemoglobinGL: 1.0
+  systolicBloodPressureMmhg: 1
+  pulseBeatsPerMin: 1
+  melaenaPresent: "yes"
+  syncope: "yes"
+  hepaticDisease: "yes"
+  cardiacFailure: "yes"
+  clinicalNote: "Test clinicalNote"
+  patientId: 211713
+  clinicianId: 883015

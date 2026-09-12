@@ -1,0 +1,35 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 383946
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  requestedByDate: "1990-01-01"
+  bodyRegion: "brain"
+  primaryIndication: "suspected-malignancy"
+  clinicalQuestion: "Test clinicalQuestion"
+  relevantHistory: "Test relevantHistory"
+  contrastRequired: "none"
+  egfr: 1.0
+  previousGadoliniumReaction: "none"
+  pregnancyStatus: "not-pregnant"
+  pacemakerOrIcd: true
+  cochlearImplant: true
+  aneurysmClip: true
+  metallicForeignBodyEye: true
+  shrapnelOrMetalFragments: true
+  programmableShunt: true
+  neurostimulator: true
+  metalImplantOrProsthesis: true
+  insulinPump: true
+  claustrophobia: true
+  mriSafetyStatus: "cleared"
+  weightKg: 1.0
+  relevantPreviousImaging: "Test relevantPreviousImaging"
+  urgency: "routine"
+  supervisingConsultant: "Test supervisingConsultant"
+  notes: "Test notes"
+  patientId: 446422
+  clinicianId: 261681

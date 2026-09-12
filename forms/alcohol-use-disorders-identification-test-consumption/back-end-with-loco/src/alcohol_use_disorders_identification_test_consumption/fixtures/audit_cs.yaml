@@ -1,0 +1,18 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 928909
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "gp"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "primary-care"
+  administrationMode: "self-completed"
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "16-24"
+  sex: "female"
+  item1Frequency: 1
+  item2Quantity: 1
+  item3BingeFrequency: 1
+  context: "Test context"
+  patientId: 313520
+  clinicianId: null

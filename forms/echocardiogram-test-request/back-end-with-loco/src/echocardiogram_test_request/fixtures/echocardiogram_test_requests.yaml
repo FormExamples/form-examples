@@ -1,0 +1,33 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 817015
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  requestedByDate: "1990-01-01"
+  echoType: "transthoracic-tte"
+  primaryIndication: "heart-failure"
+  clinicalQuestion: "Test clinicalQuestion"
+  relevantHistory: "Test relevantHistory"
+  breathlessness: true
+  chestPain: true
+  palpitations: true
+  syncope: true
+  oedema: true
+  nyhaClass: "i"
+  ecgFindings: "Test ecgFindings"
+  bnpOrNtProbnp: 1.0
+  knownMurmur: true
+  previousEcho: "none"
+  previousEchoDate: "1990-01-01"
+  ejectionFractionKnown: 1.0
+  onCardiotoxicChemotherapy: true
+  relevantMedications: "Test relevantMedications"
+  urgency: "routine"
+  supervisingConsultant: "Test supervisingConsultant"
+  requesterContact: "Test requesterContact"
+  notes: "Test notes"
+  patientId: 356527
+  clinicianId: 896773

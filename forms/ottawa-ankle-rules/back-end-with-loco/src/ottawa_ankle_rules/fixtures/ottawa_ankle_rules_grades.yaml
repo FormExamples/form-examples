@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 666894
+  deletedAt: null
+  unableToBearWeight: "yes"
+  ankleXrayIndicated: "yes"
+  footXrayIndicated: "yes"
+  recommendedAction: "Test recommendedAction"
+  gradedAt: "2026-01-01T00:00:00Z"
+  ottawaAnkleRulesId: 1

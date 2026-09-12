@@ -1,0 +1,39 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 571203
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "clinician"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "mental-health"
+  scaleVersion: "screener"
+  reasonForAssessment: "Test reasonForAssessment"
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "adolescent"
+  sex: "female"
+  wishToBeDead: "yes"
+  nonSpecificActiveThoughts: "yes"
+  activeIdeationMethods: "yes"
+  activeIdeationIntent: "yes"
+  activeIdeationPlan: "yes"
+  ideationTimeframe: "past-month"
+  ideationFrequency: 1
+  ideationDuration: 1
+  ideationControllability: 1
+  ideationDeterrents: 1
+  ideationReasons: 1
+  actualAttempt: "yes"
+  interruptedAttempt: "yes"
+  abortedAttempt: "yes"
+  preparatoryActs: "yes"
+  nonSuicidalSelfInjury: "yes"
+  behaviourRecency: "within-3-months"
+  lifetimeAttemptCount: 1
+  mostRecentAttemptDate: "1990-01-01"
+  actualLethality: 1
+  potentialLethality: 1
+  accessToLethalMeans: "yes"
+  protectiveFactors: "Test protectiveFactors"
+  clinicalNote: "Test clinicalNote"
+  patientId: 781035
+  clinicianId: null

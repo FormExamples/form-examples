@@ -1,0 +1,15 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 917178
+  deletedAt: null
+  totalSymptomScore: 1
+  dermatologicalScore: 1
+  gastrointestinalScore: 1
+  cardiovascularScore: 1
+  respiratoryScore: 1
+  neurologicalScore: 1
+  organSystemCount: 1
+  severityLevel: "Test severityLevel"
+  triggerCount: 1
+  gradedAt: "2026-01-01T00:00:00Z"
+  assessmentId: 649816

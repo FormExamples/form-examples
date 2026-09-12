@@ -1,0 +1,29 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 539756
+  deletedAt: null
+  mustBmiScore: 1
+  mustWeightLossScore: 1
+  mustAcuteDiseaseScore: 1
+  mustScore: 1
+  computedMustRisk: "low"
+  finalMustRisk: "low"
+  mustIsEstimated: true
+  glimPhenotypicCriteria: "Test glimPhenotypicCriteria"
+  glimEtiologicCriteria: "Test glimEtiologicCriteria"
+  glimDiagnosis: "none"
+  nrs2002Score: 1
+  sarcfScore: 1
+  scoffScore: 1
+  refeedingRisk: "none"
+  energyRequirementKcal: 1
+  proteinRequirementG: 1
+  computedCompositeRisk: "low"
+  finalCompositeRisk: "low"
+  overrideReason: "Test overrideReason"
+  recommendation: "routine-care"
+  dietitianNotes: "Test dietitianNotes"
+  signedByName: "Test signedByName"
+  signedAt: "2026-01-01T00:00:00Z"
+  gradedAt: "2026-01-01T00:00:00Z"
+  dieticAssessmentId: 243580

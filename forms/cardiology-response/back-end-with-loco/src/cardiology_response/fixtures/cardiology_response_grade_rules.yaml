@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "3d80646e-11a9-54fc-af7b-53cb6185f517"
+  deletedAt: null
+  ruleId: "Test ruleId"
+  axis: "classification"
+  category: "Test category"
+  description: "Test description"
+  cardiologyResponseGradeId: "6c81a9f9-f78a-5d8a-80d7-843bc98457ca"

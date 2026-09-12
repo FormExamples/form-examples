@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 949285
+  deletedAt: null
+  addressLine1: "Test addressLine1"
+  addressLine2: "Test addressLine2"
+  addressLine3: "Test addressLine3"
+  postcode: "SW1A 2AA"
+  countryAsIso31661Alpha2: "GB"

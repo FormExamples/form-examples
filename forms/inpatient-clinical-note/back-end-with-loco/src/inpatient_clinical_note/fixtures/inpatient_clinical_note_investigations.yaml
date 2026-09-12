@@ -1,0 +1,14 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 938099
+  deletedAt: null
+  sortOrder: 1
+  testName: "Test testName"
+  category: "haematology"
+  requestedDate: "1990-01-01"
+  resultDate: "1990-01-01"
+  resultSummary: "Test resultSummary"
+  abnormal: "yes"
+  actioned: "yes"
+  actionTaken: "Test actionTaken"
+  inpatientClinicalNoteId: 728045

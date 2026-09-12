@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 845742
+  deletedAt: null
+  completenessLevel: "Test completenessLevel"
+  sectionsCompleted: 1
+  totalSections: 1
+  gradedAt: "2026-01-01T00:00:00Z"
+  assessmentId: 492906

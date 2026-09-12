@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "3a5c67ee-baf3-5e96-ae2c-bc3a66aa0982"
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "disability-duty-engaged"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  neurodiversityAdjustmentRequestGradeId: "39a69be0-0fb3-59c1-becb-80a91fd2a5f4"

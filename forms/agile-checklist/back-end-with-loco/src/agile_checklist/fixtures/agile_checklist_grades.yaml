@@ -1,0 +1,26 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 765544
+  deletedAt: null
+  answeredCount: 1
+  teamsYesCount: 1
+  teamsApplicableCount: 1
+  teamsPercent: 1.0
+  stakeholdersYesCount: 1
+  stakeholdersApplicableCount: 1
+  stakeholdersPercent: 1.0
+  practicesYesCount: 1
+  practicesApplicableCount: 1
+  practicesPercent: 1.0
+  overallPercent: 1.0
+  teamsBand: "high"
+  stakeholdersBand: "high"
+  practicesBand: "high"
+  maturity: "optimising"
+  topAction1: "Test topAction1"
+  topAction2: "Test topAction2"
+  topAction3: "Test topAction3"
+  coachNotes: "Test coachNotes"
+  signedAt: "2026-01-01T00:00:00Z"
+  gradedAt: "2026-01-01T00:00:00Z"
+  agileChecklistId: 935763

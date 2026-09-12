@@ -1,0 +1,32 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 407121
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  requestedByDate: "1990-01-01"
+  procedure: "flexible-bronchoscopy"
+  primaryIndication: "suspected-lung-cancer"
+  clinicalQuestion: "Test clinicalQuestion"
+  relevantHistory: "Test relevantHistory"
+  symptomHaemoptysis: true
+  symptomCough: true
+  symptomBreathlessness: true
+  symptomWeightLoss: true
+  imagingFindings: "Test imagingFindings"
+  takingAnticoagulant: true
+  anticoagulantAgent: "Test anticoagulantAgent"
+  takingAntiplatelet: true
+  antiplateletAgent: "Test antiplateletAgent"
+  plateletCount: 1.0
+  oxygenDependent: true
+  asaGrade: "I"
+  sedation: "conscious"
+  urgency: "routine"
+  supervisingConsultant: "Test supervisingConsultant"
+  requesterContact: "Test requesterContact"
+  notes: "Test notes"
+  patientId: 976540
+  clinicianId: 629121

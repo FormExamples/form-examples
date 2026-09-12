@@ -72,6 +72,23 @@ impl Hooks for App {
             &format!("{}/src/bone_marrow_donation_assessment/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/bone_marrow_donation_assessment/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/bone_marrow_donation_assessment/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::bone_marrow_donation_assessments::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/bone_marrow_donation_assessment/fixtures/bone_marrow_donation_assessments.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

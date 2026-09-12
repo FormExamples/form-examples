@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 760021
+  deletedAt: null
+  ruleId: "Test ruleId"
+  dimension: "part-i"
+  category: "Test category"
+  description: "Test description"
+  medicalCertificateOfCauseOfDeathGradeId: 102470

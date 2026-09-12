@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 680693
+  deletedAt: null
+  riskZone: "low"
+  percentileBand: "<40"
+  phototherapyThresholdUmolL: 1.0
+  exchangeThresholdUmolL: 1.0
+  abovePhototherapyThreshold: "yes"
+  aboveExchangeThreshold: "yes"
+  gradedAt: "2026-01-01T00:00:00Z"
+  bhutaniBilirubinNomogramId: 387821

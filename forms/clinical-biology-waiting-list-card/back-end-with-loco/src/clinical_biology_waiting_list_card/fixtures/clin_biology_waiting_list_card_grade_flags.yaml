@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 261017
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "breach-risk"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  clinBiologyWaitingListCardGradeId: 940401

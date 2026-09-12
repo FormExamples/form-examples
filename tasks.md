@@ -337,8 +337,45 @@ Design each feature on the reference forms
       (audited: 0 stubs remain). Implemented it (12 Tinetti sample rows, 6
       columns, filters, sort) + its scaffold CSS; html-smoke + dashboard-export
       + a11y all pass.
-- [ ] **Loco seed data**: per-crate seeder loading `examples/` typical
-      fixture; document `cargo loco db seed` (or task equivalent).
+- [x] **Loco seed data: DONE 2026-09-12.** New `bin/loco-seed-data-rollout`
+      implements every crate's empty `App::seed()` hook. `cargo <bin> db
+      seed --from src/fixtures` (`--from`'s own default) calls `seed(ctx,
+      base)`, which every scaffolded crate leaves as a no-op (or, in the
+      dominant case, seeding only the Loco-scaffolded `users` auth
+      table); this tool discovers each crate's domain tables from
+      `models/_entities/*.rs`, parses each `Model`'s fields, detects
+      foreign keys, topologically sorts, and inserts a
+      `loco_rs::db::seed::<T>()` call sequence into the *existing*
+      `seed()` body (never replacing whatever it already does) plus one
+      generated YAML fixture per table.
+
+      **Real finding that overturned this session's own earlier
+      assumption:** a fleet survey before generalising found only 2/338
+      crates (`cardiology-request`, `cardiology-response`) use a `Uuid`
+      primary key — the other 336 use the Loco scaffold's `i64`
+      auto-increment default, which `sql/` (the source of truth) never
+      specifies (always `UUID`). This is the exact "UUID vs i64
+      mismatch" this backlog item was originally blocked on; an earlier
+      note in this session had assumed it was resolved fleet-wide by the
+      relational-schema convention, conflating table *structure*
+      (one entity per table — genuinely fleet-wide now) with primary-key
+      *type* (still split). The tool generates the right kind of id
+      (`det_uuid()` or `det_int_id()`) per table based on its actual PK
+      type, confirmed via `loco_rs::db::seed`'s own behaviour: it
+      deserializes a fixture row straight into the entity `Model` and
+      inserts explicit id values into a `SERIAL` column just fine, then
+      resets the sequence to `MAX(id)+1` afterward — verified live, not
+      assumed, by inserting a real row post-seed and confirming its id
+      continued correctly.
+
+      Result: 352/356 crates changed (3 already migrated during
+      development, 1 SKIP — see the CHANGELOG entry for the genuine,
+      separate, pre-existing bug it surfaced). Verified: live
+      `cargo loco db migrate` + `db seed --from src/fixtures` +
+      row/FK-linkage queries against a real scratch Postgres on 6
+      structurally diverse crates (both PK-type paths, the
+      `users`-preserving insertion, the sequence-reset behaviour), and
+      `cargo check` clean fleet-wide.
 - [x] **Fixed a real back-end bug found by audit:** `medical-operation-note`
       — the crate the notes call the "gold reference" — was the ONLY crate of
       286 missing its domain HTTP controllers (its `controllers/` had just
@@ -1431,7 +1468,9 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       `forms/AGENTS-front-end-html.md` and `AGENTS.md`'s Generators
       catalogue + Verify section; `docs/tools.md` regenerated.
 
-- [ ] Loco: per-crate seeder from `examples/`.
+- [x] Loco: per-crate seeder from `examples/`. **DONE 2026-09-12** — see
+      the "Loco seed data" entry above for the full write-up
+      (`bin/loco-seed-data-rollout`).
       **Serve `combined/openapi.yaml` at `/api/openapi.yaml`: DONE
       2026-09-09.** New `bin/loco-serve-openapi-refactor`, targeting every
       Loco crate (355 found via `back-end-with-loco/src/*/controllers/

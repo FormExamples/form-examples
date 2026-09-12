@@ -1,0 +1,47 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 773458
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "gp"
+  reviewedAt: "1990-01-01"
+  reviewType: "routine-annual"
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "18-39"
+  sex: "female"
+  diagnosisYear: 1
+  spirometryConfirmed: "yes"
+  exposureNotes: "Test exposureNotes"
+  fev1Litres: 1.0
+  fev1PercentPredicted: 1.0
+  fvcLitres: 1.0
+  fev1FvcRatio: 1.0
+  spirometryDate: "1990-01-01"
+  mrcGrade: 1
+  mmrcGrade: 1
+  catScore: 1
+  exacerbationsLast12m: 1
+  hospitalisationsLast12m: 1
+  lastExacerbationDate: "1990-01-01"
+  rescuePackCourses: 1
+  smokingStatus: "current"
+  packYears: 1.0
+  cessationSupportOffered: "yes"
+  inhaledTherapy: "Test inhaledTherapy"
+  deviceType: "Test deviceType"
+  inhalerTechniqueChecked: "yes"
+  inhalerTechniqueAdequate: "yes"
+  adherence: "good"
+  influenzaVaccine: "up-to-date"
+  pneumococcalVaccine: "up-to-date"
+  covidVaccine: "up-to-date"
+  pulmonaryRehabStatus: "completed"
+  oxygenUse: "none"
+  restingSpo2: 1
+  comorbidities: "Test comorbidities"
+  selfManagementPlan: "yes"
+  rescuePackSupplied: "yes"
+  nextReviewInterval: "Test nextReviewInterval"
+  clinicianNote: "Test clinicianNote"
+  patientId: 276043
+  clinicianId: null

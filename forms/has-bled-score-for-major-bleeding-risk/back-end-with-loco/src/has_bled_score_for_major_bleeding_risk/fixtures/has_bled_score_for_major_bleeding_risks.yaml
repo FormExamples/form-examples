@@ -1,0 +1,24 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 141858
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "doctor"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "cardiology"
+  anticoagulationStatus: "on"
+  chaDsVascScore: 1
+  patientIdentifier: "Test patientIdentifier"
+  ageYears: 1
+  sex: "female"
+  hypertensionUncontrolled: "yes"
+  abnormalRenalFunction: "yes"
+  abnormalLiverFunction: "yes"
+  strokeHistory: "yes"
+  bleedingHistory: "yes"
+  labileInr: "yes"
+  antiplateletOrNsaid: "yes"
+  alcoholUnitsPerWeek: 1.0
+  clinicalNote: "Test clinicalNote"
+  patientId: 946299
+  clinicianId: null

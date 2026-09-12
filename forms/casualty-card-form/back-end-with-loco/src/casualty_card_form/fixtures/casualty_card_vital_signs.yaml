@@ -1,0 +1,21 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 301722
+  deletedAt: null
+  heartRate: 1
+  systolicBp: 1
+  diastolicBp: 1
+  respiratoryRate: 1
+  oxygenSaturation: 1
+  supplementalOxygen: "yes"
+  oxygenFlowRate: "Test oxygenFlowRate"
+  temperature: 1.0
+  bloodGlucose: 1.0
+  consciousnessLevel: "alert"
+  pupilLeftSize: 1
+  pupilLeftReactive: "yes"
+  pupilRightSize: 1
+  pupilRightReactive: "yes"
+  capillaryRefillTime: "Test capillaryRefillTime"
+  weight: 1.0
+  casualtyCardId: 233761

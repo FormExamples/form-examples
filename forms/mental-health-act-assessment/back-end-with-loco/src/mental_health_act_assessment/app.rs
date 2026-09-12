@@ -75,6 +75,38 @@ impl Hooks for App {
             &format!("{}/src/mental_health_act_assessment/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/mental_health_act_assessment/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/mental_health_act_assessment/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::mental_health_act_assessments::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/mental_health_act_assessment/fixtures/mental_health_act_assessments.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::mental_health_act_assessment_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/mental_health_act_assessment/fixtures/mental_health_act_assessment_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::mental_health_act_assessment_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/mental_health_act_assessment/fixtures/mental_health_act_assessment_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::mental_health_act_assessment_grade_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/mental_health_act_assessment/fixtures/mental_health_act_assessment_grade_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

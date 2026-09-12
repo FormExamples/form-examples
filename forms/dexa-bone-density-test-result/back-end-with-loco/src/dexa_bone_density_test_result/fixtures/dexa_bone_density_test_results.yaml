@@ -1,0 +1,30 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 862914
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  scanRegion: "hip"
+  examinationAdequacy: "adequate"
+  clinicalHistory: "Test clinicalHistory"
+  lumbarSpineTScore: 1.0
+  lumbarSpineZScore: 1.0
+  femoralNeckTScore: 1.0
+  femoralNeckZScore: 1.0
+  totalHipTScore: 1.0
+  lowestTScore: 1.0
+  boneMineralDensityGCm2: 1.0
+  whoClassification: "normal"
+  fraxMajorFracturePercent: 1.0
+  fraxHipFracturePercent: 1.0
+  vertebralFractureIdentified: true
+  comparisonWithPrevious: "Test comparisonWithPrevious"
+  percentChangeSincePrevious: 1.0
+  impression: "Test impression"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 798409
+  clinicianId: 218126

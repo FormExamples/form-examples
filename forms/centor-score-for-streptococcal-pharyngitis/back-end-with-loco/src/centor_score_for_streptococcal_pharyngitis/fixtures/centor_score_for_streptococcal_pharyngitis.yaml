@@ -1,0 +1,24 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 102779
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "gp"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "general-practice"
+  patientIdentifier: "Test patientIdentifier"
+  ageYears: 1
+  sex: "female"
+  tonsillarExudate: "yes"
+  tenderAnteriorCervicalNodes: "yes"
+  feverOver38: "yes"
+  measuredTemperatureCelsius: 1.0
+  absenceOfCough: "yes"
+  stridorOrBreathingDifficulty: "yes"
+  droolingOrCannotSwallow: "yes"
+  trismus: "yes"
+  muffledVoice: "yes"
+  unilateralNeckSwelling: "yes"
+  clinicalNote: "Test clinicalNote"
+  patientId: 627845
+  clinicianId: null

@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 207195
+  deletedAt: null
+  ruleId: "Test ruleId"
+  factor: "Test factor"
+  weightGroup: "age"
+  points: 1
+  category: "Test category"
+  description: "Test description"
+  capriniVenousThromboembolismRiskAssessmentGradeId: 975358

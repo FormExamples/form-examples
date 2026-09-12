@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "70e58114-e622-55f2-a482-c54be6bccda2"
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "discrimination-risk"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  neurodiversityAdjustmentResponseGradeId: "b760eeea-386a-56d5-b978-760fb38f3088"

@@ -1,0 +1,20 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 157305
+  deletedAt: null
+  dose: "Test dose"
+  frequency: "Test frequency"
+  route: "oral"
+  indication: "Test indication"
+  startedOn: "1990-01-01"
+  prescribedBy: "Test prescribedBy"
+  adherence: "full"
+  holdRequired: true
+  holdStartBeforeDays: 1
+  restartAfterDays: 1
+  holdPlanAgreed: true
+  holdPlanAgreedBy: "Test holdPlanAgreedBy"
+  holdPlanAgreedOn: "1990-01-01"
+  notes: "Test notes"
+  patientId: 262369
+  medicationId: 567599

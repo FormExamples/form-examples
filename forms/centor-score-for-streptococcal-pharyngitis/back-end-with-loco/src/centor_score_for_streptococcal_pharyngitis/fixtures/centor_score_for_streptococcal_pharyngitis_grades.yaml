@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 929121
+  deletedAt: null
+  centorScore: 1
+  ageModifier: 1
+  mcisaacScore: 1
+  riskBand: "low"
+  management: "Test management"
+  gradedAt: "2026-01-01T00:00:00Z"
+  centorScoreForStreptococcalPharyngitisId: 1

@@ -1,0 +1,32 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 971791
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  testType: "pure-tone-audiometry"
+  testReliability: "good"
+  clinicalHistory: "Test clinicalHistory"
+  pureToneAverageRightDb: 1.0
+  pureToneAverageLeftDb: 1.0
+  hearingLossTypeRight: "none"
+  hearingLossTypeLeft: "none"
+  hearingLossSeverityRight: "normal"
+  hearingLossSeverityLeft: "normal"
+  tympanometryTypeRight: "A"
+  tympanometryTypeLeft: "A"
+  hearingLossPresent: true
+  asymmetricLoss: true
+  suddenSensorineuralLoss: true
+  conductiveComponent: true
+  normalHearing: true
+  findingsNarrative: "Test findingsNarrative"
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 320685
+  clinicianId: 505246

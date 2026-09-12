@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 841125
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "sepsis-escalation"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  quickSequentialOrganFailureAssessmentGradeId: 585105

@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 694468
+  deletedAt: null
+  cmaiScore: 1
+  npiTotalScore: 1
+  overallSeverity: "Test overallSeverity"
+  gradedAt: "2026-01-01T00:00:00Z"
+  assessmentId: 591090

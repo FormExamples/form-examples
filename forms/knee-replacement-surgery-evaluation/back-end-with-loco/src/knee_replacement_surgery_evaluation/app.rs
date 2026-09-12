@@ -80,6 +80,33 @@ impl Hooks for App {
             ),
         )
         .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/knee_replacement_surgery_evaluation/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/knee_replacement_surgery_evaluation/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::knee_replacement_surgery_evaluations::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/knee_replacement_surgery_evaluation/fixtures/knee_replacement_surgery_evaluations.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::knee_replacement_surgery_evaluation_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/knee_replacement_surgery_evaluation/fixtures/knee_replacement_surgery_evaluation_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::knee_replacement_surgery_evaluation_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/knee_replacement_surgery_evaluation/fixtures/knee_replacement_surgery_evaluation_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

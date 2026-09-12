@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 509133
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "sudden-visual-loss-emergency"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  eyeVisionTestRequestGradeId: 938423

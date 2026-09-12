@@ -1,0 +1,34 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 322309
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  echoType: "transthoracic-tte"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  reportStatus: "preliminary"
+  studyQuality: "good"
+  clinicalHistory: "Test clinicalHistory"
+  lvEjectionFractionPercent: 1.0
+  lvFunction: "normal"
+  lvInternalDiameterDiastoleMm: 1.0
+  aorticStenosis: "none"
+  aorticRegurgitation: "none"
+  mitralStenosis: "none"
+  mitralRegurgitation: "none"
+  pulmonaryArterySystolicPressureMmhg: 1.0
+  lvHypertrophy: true
+  regionalWallMotionAbnormality: true
+  pericardialEffusion: true
+  vegetation: true
+  intracardiacThrombus: true
+  normalStudy: true
+  findingsNarrative: "Test findingsNarrative"
+  comparisonWithPrevious: "Test comparisonWithPrevious"
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 152397
+  clinicianId: 558135

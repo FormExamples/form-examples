@@ -1,0 +1,30 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "dacac3aa-0b3f-5a20-9350-ec6b8e6e0967"
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  responseStatus: "preliminary"
+  consultationType: "clinic-review"
+  assessedDate: "1990-01-01"
+  respondedDate: "1990-01-01"
+  clinicalSummary: "Test clinicalSummary"
+  examinationFindings: "Test examinationFindings"
+  investigationsPerformed: "Test investigationsPerformed"
+  ischaemiaOrCad: true
+  significantArrhythmia: true
+  reducedEjectionFraction: true
+  significantValveDisease: true
+  structuralAbnormality: true
+  uncontrolledHypertension: true
+  nonCardiacCause: true
+  primaryDiagnosisCategory: "coronary-artery-disease"
+  diagnosisNarrative: "Test diagnosisNarrative"
+  lvEjectionFractionPercent: 1.0
+  managementPlan: "Test managementPlan"
+  medicationChanges: "Test medicationChanges"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResult: true
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: "0490d2a8-e636-593e-9816-2247b06c0348"
+  clinicianId: "7a603d63-f4e7-53d4-ad26-9df352af2dd8"

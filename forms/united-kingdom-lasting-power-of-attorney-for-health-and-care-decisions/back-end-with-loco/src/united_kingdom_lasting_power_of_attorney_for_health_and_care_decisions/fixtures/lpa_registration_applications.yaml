@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 834084
+  deletedAt: null
+  applicantRole: "donor"
+  applicantSignedAt: "2026-01-01T00:00:00Z"
+  feeAmountPounds: 1.0
+  feeRemission: "none"
+  feeRemissionReason: "low-income"
+  submittedAt: "2026-01-01T00:00:00Z"
+  submissionChannel: "post"
+  lpaId: 652235

@@ -1,0 +1,14 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 134004
+  deletedAt: null
+  name: "Test Patient"
+  email: "test.patient@example.com"
+  phone: "+441234567890"
+  postalAddressAsFullText: "10 Downing Street, London"
+  countryAsIso31661Alpha2: "GB"
+  postcode: "SW1A 2AA"
+  role: "cardiologist"
+  registrationBody: "GMC"
+  registrationNumber: "Test registrationNumber"
+  unitedKingdomNhsNumber: "9434765919"

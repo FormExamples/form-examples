@@ -1,0 +1,14 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 818668
+  deletedAt: null
+  name: "Test Patient"
+  birthDate: "1990-01-01"
+  sex: "female"
+  identifierType: "nhs-number"
+  identifierValue: "Test identifierValue"
+  email: "test.patient@example.com"
+  phone: "+441234567890"
+  emergencyContactName: "Test emergencyContactName"
+  emergencyContactRelationship: "Test emergencyContactRelationship"
+  emergencyContactPhone: "+441234567890"

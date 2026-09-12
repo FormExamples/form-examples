@@ -1,0 +1,410 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 425475
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  assessmentDate: "1990-01-01"
+  assessmentTime: "Test assessmentTime"
+  plannedProcedure: "Test plannedProcedure"
+  surgicalSpecialty: "Test surgicalSpecialty"
+  urgency: "elective"
+  laterality: "left"
+  surgicalSeverity: "minor"
+  anticipatedBloodLossMl: 1
+  anticipatedDurationMinutes: 1
+  consultantSurgeon: "Test consultantSurgeon"
+  plannedDate: "1990-01-01"
+  systolicBp: 1
+  diastolicBp: 1
+  heartRate: 1
+  respiratoryRate: 1
+  spo2Percent: 1.0
+  temperatureCelsius: 1.0
+  capillaryRefillSeconds: 1.0
+  painScore010: 1
+  onRoomAir: "yes"
+  supplementalOxygenLitres: 1.0
+  mallampatiClass: "I"
+  thyromentalDistanceCm: 1.0
+  mouthOpeningCm: 1.0
+  interIncisorGapCm: 1.0
+  neckRom: "full"
+  cervicalSpineStability: "stable"
+  dentition: "good"
+  beard: "yes"
+  upperLipBiteTest: "I"
+  priorDifficultIntubation: "yes"
+  stopbangSnoring: "yes"
+  stopbangTired: "yes"
+  stopbangObservedApnoea: "yes"
+  stopbangPressure: "yes"
+  stopbangBmiGt35: "yes"
+  stopbangAgeGt50: "yes"
+  stopbangNeckGt40: "yes"
+  stopbangMale: "yes"
+  airwayNotes: "Test airwayNotes"
+  heartRhythm: "sinus"
+  murmurPresent: "yes"
+  murmurDescription: "Test murmurDescription"
+  peripheralPulses: "normal"
+  jvpRaised: "yes"
+  peripheralOedema: "none"
+  ecgPerformed: "yes"
+  ecgRhythm: "Test ecgRhythm"
+  ecgRateBpm: 1
+  ecgAxis: "normal"
+  ecgIschaemicChanges: "yes"
+  ecgNotes: "Test ecgNotes"
+  echoPerformed: "yes"
+  echoEfPercent: 1
+  echoNotes: "Test echoNotes"
+  historyIhd: "yes"
+  historyChf: "yes"
+  historyStrokeTia: "yes"
+  recentMiWithin3Months: "yes"
+  pacemakerOrIcd: "yes"
+  severeValveDysfunction: "yes"
+  activeAngina: "yes"
+  breathSounds: "normal"
+  wheeze: "yes"
+  crackles: "yes"
+  crepitations: "yes"
+  chestWallDeformity: "yes"
+  asthma: "none"
+  copd: "none"
+  cxrPerformed: "yes"
+  cxrFindings: "Test cxrFindings"
+  pftPerformed: "yes"
+  pftFev1PercentPredicted: 1.0
+  pftFev1FvcRatio: 1.0
+  smokingStatus: "never"
+  packYears: 1.0
+  covidHistory: "never"
+  daysSinceCovid: 1
+  covidUnresolvedSymptoms: "yes"
+  gcsTotal: 1
+  gcsEye: 1
+  gcsVerbal: 1
+  gcsMotor: 1
+  cognitionTool: "AMT-4"
+  cognitionScore: 1
+  cognitiveImpairment: "none"
+  capacityConcern: "yes"
+  cranialNervesNotes: "Test cranialNervesNotes"
+  motorPower: "normal"
+  sensoryNotes: "Test sensoryNotes"
+  reflexes: "normal"
+  recentStrokeTia: "yes"
+  daysSinceStrokeTia: 1
+  seizureDisorder: "yes"
+  creatinineUmolL: 1
+  egfrMlMin173m2: 1
+  ureaMmolL: 1.0
+  potassiumMmolL: 1.0
+  sodiumMmolL: 1.0
+  dialysisStatus: "none"
+  ckdStage: "1"
+  bilirubinUmolL: 1
+  altUL: 1
+  astUL: 1
+  alpUL: 1
+  albuminGL: 1.0
+  chronicLiverDisease: "none"
+  childPughClass: "A"
+  hbGL: 1
+  wcc109L: 1.0
+  platelets109L: 1
+  mcvFl: 1.0
+  ferritinUgL: 1
+  transferrinSaturationPercent: 1.0
+  inr: 1.0
+  apttSeconds: 1.0
+  fibrinogenGL: 1.0
+  onAnticoagulant: "yes"
+  anticoagulantType: "warfarin"
+  anticoagulantHoldPlan: "Test anticoagulantHoldPlan"
+  groupAndSave: "not-required"
+  crossmatchUnits: 1
+  lastTransfusionDate: "1990-01-01"
+  anaemiaSeverity: "none"
+  diabetesType: "none"
+  diabetesOnInsulin: "yes"
+  hba1cMmolMol: 1
+  fastingGlucoseMmolL: 1.0
+  randomGlucoseMmolL: 1.0
+  diabetesControl: "well-controlled"
+  diabetesComplications: "Test diabetesComplications"
+  thyroidStatus: "euthyroid"
+  tshMuL: 1.0
+  adrenalStatus: "normal"
+  onLongTermSteroids: "yes"
+  steroidDoseMg: 1.0
+  steroidCoverPlan: "Test steroidCoverPlan"
+  abdominalExam: "normal"
+  abdominalNotes: "Test abdominalNotes"
+  refluxSymptoms: "none"
+  hiatusHernia: "yes"
+  previousGastricSurgery: "yes"
+  ngTube: "yes"
+  stoma: "none"
+  fastingConfirmed: "yes"
+  lastSolidFoodAt: "2026-01-01T00:00:00Z"
+  lastClearFluidAt: "2026-01-01T00:00:00Z"
+  rapidSequenceInductionNeeded: "yes"
+  spineExam: "normal"
+  spineNotes: "Test spineNotes"
+  neuraxialSuitable: "yes"
+  jointRomHip: "full"
+  jointRomShoulder: "full"
+  jointRomNeck: "full"
+  skinIvAccess: "good"
+  skinBlockSite: "intact"
+  pressureUlcerRisk: "low"
+  name: "Test Patient"
+  dose: "Test dose"
+  route: "oral"
+  frequency: "Test frequency"
+  indication: "Test indication"
+  class: "anticoagulant"
+  perioperativeAction: "continue"
+  perioperativeNotes: "Test perioperativeNotes"
+  lastDoseAt: "2026-01-01T00:00:00Z"
+  allergen: "Test allergen"
+  category: "drug"
+  reactionType: "anaphylaxis"
+  reactionSeverity: "mild"
+  reactionNotes: "Test reactionNotes"
+  verified: "yes"
+  metsEstimate: 1.0
+  dasiScore: 1.0
+  ecogPerformanceStatus: 1
+  clinicalFrailtyScale: 1
+  sixMinuteWalkMetres: 1
+  stsOneMinuteReps: 1
+  tugSeconds: 1.0
+  cpetPerformed: "yes"
+  cpetVo2PeakMlKgMin: 1.0
+  cpetAnaerobicThresholdMlKgMin: 1.0
+  cpetNotes: "Test cpetNotes"
+  malnutritionRisk: "none"
+  unintentionalWeightLossKg: 1.0
+  technique: "ga"
+  airwayPlan: "face-mask"
+  rsiPlanned: "yes"
+  monitoringLevel: "standard"
+  analgesiaPlan: "Test analgesiaPlan"
+  regionalBlockPlanned: "Test regionalBlockPlanned"
+  dvtProphylaxis: "Test dvtProphylaxis"
+  antibioticProphylaxis: "Test antibioticProphylaxis"
+  postOpDisposition: "day-case"
+  anticipatedLengthOfStayDays: 1
+  specialEquipment: "Test specialEquipment"
+  bloodProductsRequired: "Test bloodProductsRequired"
+  proformaHeaderDepartment: "Test proformaHeaderDepartment"
+  proformaHeaderRegistrationDate: "Test proformaHeaderRegistrationDate"
+  proformaHeaderPreOpDiagnosis: "Test proformaHeaderPreOpDiagnosis"
+  prevAnaesAnaestheticDifficulty: true
+  prevAnaesAbnormalReaction: true
+  prevAnaesPonv: true
+  prevAnaesMalignantHyperpyrexia: true
+  prevAnaesDifficultIntubation: true
+  prevAnaesDifficultSpinalOrEpidural: true
+  addictionAlcohol: true
+  addictionSmoking: true
+  addictionFastScore3OrMore: true
+  addictionBetel: true
+  addictionDrugs: true
+  addictionOther: true
+  addictionOtherDetails: "Test addictionOtherDetails"
+  pmhProformaHypertension: true
+  pmhProformaMi: true
+  pmhProformaMiWithinPast6Months: true
+  pmhProformaAnginaOrChestPain: true
+  pmhProformaAnginaTriggers: "Test pmhProformaAnginaTriggers"
+  pmhProformaHeartFailure: true
+  pmhProformaDyspnoea: true
+  pmhProformaDyspnoeaSubtypes: "Test pmhProformaDyspnoeaSubtypes"
+  pmhProformaPalpitation: true
+  pmhProformaArrhythmia: true
+  pmhProformaSyncopeOrFainting: true
+  pmhProformaHeartMurmur: true
+  pmhProformaRheumaticFever: true
+  pmhProformaPacemaker: true
+  pmhProformaPacemakerLastCheckWithin6Months: true
+  pmhProformaImplantedIcdCrtd: true
+  pmhProformaAngioplasty: true
+  pmhProformaStenting: true
+  pmhProformaStentingWithinPast6Months: true
+  pmhProformaStentType: "drug-eluting"
+  pmhProformaValveDisease: true
+  pmhProformaCardiacSurgery: true
+  pmhProformaCardiacSurgeryWithinPastYear: true
+  pmhProformaPeripheralVascularDisease: true
+  pmhProformaIschemicHeartDisease: true
+  pmhProformaAsthma: true
+  pmhProformaCopd: true
+  pmhProformaTb: true
+  pmhProformaBronchiectasis: true
+  pmhProformaPreviousHospitalAdmission: true
+  pmhProformaIcuAdmission: true
+  pmhProformaOnHomeOxygenOrNebulizers: true
+  pmhProformaUsesInhalerDailyOrMore: true
+  pmhProformaFluCoughSputum: true
+  pmhProformaHaemoptysis: true
+  pmhProformaSleepApnoea: true
+  pmhProformaSleepApnoeaUsingCpap: true
+  pmhProformaStopBangRisk: "high"
+  pmhProformaOtherRespiratoryDisease: true
+  pmhProformaDiabetesMellitus: true
+  pmhProformaDiabetesDietControlled: true
+  pmhProformaDiabetesDrugControlled: true
+  pmhProformaDiabetesInsulinControlled: true
+  pmhProformaDiabetesHba1cOver69: true
+  pmhProformaHypothyroid: true
+  pmhProformaHyperthyroid: true
+  pmhProformaStrokeOrTia: true
+  pmhProformaStrokeWithin3Months: true
+  pmhProformaStrokeResidualDisability: "Test pmhProformaStrokeResidualDisability"
+  pmhProformaEpilepsyOrSeizures: true
+  pmhProformaEpilepsyControl: "well-controlled"
+  pmhProformaMs: true
+  pmhProformaMuscularDystrophy: true
+  pmhProformaOtherNeurologicalDisease: true
+  pmhProformaOtherNeurologicalDiseaseDetails: "Test pmhProformaOtherNeurologicalDiseaseDetails"
+  pmhProformaDementia: true
+  pmhProformaCreutzfeldtJakobDisease: true
+  pmhProformaGrowthHormoneOrGonadotrophin: true
+  pmhProformaBrainOrSpinalCordSurgery: true
+  pmhProformaFourAtScore: 1
+  pmhProformaComplexNeeds: true
+  pmhProformaRenalImpairment: true
+  pmhProformaCkdStage3: true
+  pmhProformaCkdStage4OrHemodialysis: true
+  pmhProformaLiverDisease: true
+  pmhProformaClottingDisordersHaemophilia: true
+  pmhProformaEasyBruisingProlongedBleeding: true
+  pmhProformaDvtOrPe: true
+  pmhProformaDvtOrPeWithinPast3Months: true
+  pmhProformaGord: true
+  pmhProformaAnyOtherDisease: true
+  pmhProformaChronicPain: true
+  pmhProformaDukeActivityStatusIndex: 1
+  pmhProformaMetsScore: 1.0
+  pmhProformaOngoingMedications: "Test pmhProformaOngoingMedications"
+  pmhProformaCortisonePrednisoneSteroid: true
+  pmhProformaBloodTransfusionHistory: true
+  pmhProformaChemotherapyDrugs: true
+  pmhProformaRadiotherapy: true
+  airwayExamProformaMouthOpening: true
+  airwayExamProformaLooseTeeth: true
+  airwayExamProformaDentureMissing: true
+  airwayExamProformaMpGrade: "1"
+  airwayExamProformaMicrognathia: true
+  airwayExamProformaTmDistanceOver65: true
+  airwayExamProformaMoDistance: true
+  airwayExamProformaTmJoint: true
+  airwayExamProformaShortNeckRom: true
+  airwayExamProformaDifficultAirway: true
+  airwayExamProformaObesityScoring: true
+  airwayExamProformaSpineBack: true
+  airwayExamProformaScoliosis: true
+  airwayExamProformaVitalsExamination: true
+  vitalsProformaHeightCm: 1.0
+  vitalsProformaWeightKg: 1.0
+  vitalsProformaHr: 1
+  vitalsProformaBp: "Test vitalsProformaBp"
+  vitalsProformaRespRate: 1
+  vitalsProformaSpo2: 1.0
+  vitalsProformaTemp: 1.0
+  vitalsProformaBmi: 1.0
+  genExamProformaPallor: true
+  genExamProformaIcterus: true
+  genExamProformaCyanosis: true
+  genExamProformaClubbing: true
+  genExamProformaKoilonychia: true
+  genExamProformaLymphadenopathy: true
+  genExamProformaEdema: true
+  genExamProformaJvp: true
+  investProformaBloodGroupHaemoglobin: "Test investProformaBloodGroupHaemoglobin"
+  investProformaDifferentialN: "Test investProformaDifferentialN"
+  investProformaDifferentialL: "Test investProformaDifferentialL"
+  investProformaDifferentialE: "Test investProformaDifferentialE"
+  investProformaDifferentialM: "Test investProformaDifferentialM"
+  investProformaDifferentialB: "Test investProformaDifferentialB"
+  investProformaAbsolute: "Test investProformaAbsolute"
+  investProformaNc: "Test investProformaNc"
+  investProformaTlc: "Test investProformaTlc"
+  investProformaTpc: "Test investProformaTpc"
+  investProformaEsr: "Test investProformaEsr"
+  investProformaCrp: "Test investProformaCrp"
+  investProformaPcv: "Test investProformaPcv"
+  investProformaLatexRast: "Test investProformaLatexRast"
+  investProformaFbs: "Test investProformaFbs"
+  investProformaPpbs: "Test investProformaPpbs"
+  investProformaHba1c: "Test investProformaHba1c"
+  investProformaNa: "Test investProformaNa"
+  investProformaK: "Test investProformaK"
+  investProformaUrea: "Test investProformaUrea"
+  investProformaCreatinine: "Test investProformaCreatinine"
+  investProformaBilirubinTotal: "Test investProformaBilirubinTotal"
+  investProformaBilirubinDirect: "Test investProformaBilirubinDirect"
+  investProformaAlkPhosphatase: "Test investProformaAlkPhosphatase"
+  investProformaSgptAlt: "Test investProformaSgptAlt"
+  investProformaSgotAst: "Test investProformaSgotAst"
+  investProformaBt: "Test investProformaBt"
+  investProformaCt: "Test investProformaCt"
+  investProformaPt: "Test investProformaPt"
+  investProformaAptt: "Test investProformaAptt"
+  investProformaInr: "Test investProformaInr"
+  investProformaFt3: "Test investProformaFt3"
+  investProformaFt4: "Test investProformaFt4"
+  investProformaTsh: "Test investProformaTsh"
+  investProformaEcg: "Test investProformaEcg"
+  investProformaChestXray: "Test investProformaChestXray"
+  investProformaPft: "Test investProformaPft"
+  investProformaAbg: "Test investProformaAbg"
+  investProformaTwoDEcho: "Test investProformaTwoDEcho"
+  investProformaLvefPercent: 1.0
+  investProformaTmt: "Test investProformaTmt"
+  investProformaCtScan: "Test investProformaCtScan"
+  investProformaMri: "Test investProformaMri"
+  riskFactorsCardiac: true
+  riskFactorsRespiratory: true
+  riskFactorsDiabetes: true
+  riskFactorsInsulin: true
+  riskFactorsBmiOver40: true
+  riskFactorsAnticoagulants: true
+  riskFactorsAllergies: "No known allergies"
+  riskFactorsAntiplatelets: true
+  riskFactorsEgfrUnder30: true
+  riskFactorsEgfr30To60: true
+  riskFactorsAgeOver70: true
+  riskFactorsPvd: true
+  riskFactorsLiverDisease: true
+  riskFactorsVteRisk: true
+  riskFactorsComplexNeeds: true
+  riskFactorsAnaemia: true
+  riskFactorsNeuromuscularDisorders: true
+  riskFactorsOthers: true
+  riskFactorsOthersDetails: "Test riskFactorsOthersDetails"
+  anaesPlanProformaAnaestheticConcerns: "Test anaesPlanProformaAnaestheticConcerns"
+  anaesPlanProformaPlanTiva: true
+  anaesPlanProformaPlanRa: true
+  anaesPlanProformaPlanOther: true
+  anaesPlanProformaPlanOtherDetails: "Test anaesPlanProformaPlanOtherDetails"
+  anaesPlanProformaListForOtDeferNotFit: "list-for-ot"
+  anaesPlanProformaNilOrallyAfter: "Test anaesPlanProformaNilOrallyAfter"
+  anaesPlanProformaInformedWrittenConsent: true
+  anaesPlanProformaRisksBenefitsAlternativesDiscussed: true
+  anaesPlanProformaArrangeUnitsOfBlood: "Test anaesPlanProformaArrangeUnitsOfBlood"
+  anaesPlanProformaArrangePostOpIcu: true
+  anaesPlanProformaBackup: true
+  anaesPlanProformaDoInvestigations: "Test anaesPlanProformaDoInvestigations"
+  anaesPlanProformaDoSpecialOrders: "Test anaesPlanProformaDoSpecialOrders"
+  anaesPlanProformaReviewedHighRiskAnaesthesia: true
+  anaesPlanProformaReviewedConsent: true
+  anaesPlanProformaConsultantAnaesthesiologistName: "Test anaesPlanProformaConsultantAnaesthesiologistName"
+  anaesPlanProformaConsultantAnaesthesiologistSignature: "Test anaesPlanProformaConsultantAnaesthesiologistSignature"
+  patientId: 353333
+  clinicianId: 860172

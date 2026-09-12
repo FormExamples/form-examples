@@ -1,0 +1,29 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 693794
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  requestedByDate: "1990-01-01"
+  scanType: "fdg-pet-ct"
+  primaryIndication: "cancer-staging"
+  clinicalQuestion: "Test clinicalQuestion"
+  relevantHistory: "Test relevantHistory"
+  primaryTumourSite: "Test primaryTumourSite"
+  diabetes: true
+  bloodGlucoseMmolL: 1.0
+  pregnancyStatus: "not-pregnant"
+  breastfeeding: true
+  egfr: 1.0
+  recentChemoRadiotherapy: "Test recentChemoRadiotherapy"
+  claustrophobia: true
+  weightKg: 1.0
+  urgency: "routine"
+  irMeRJustification: "Test irMeRJustification"
+  supervisingConsultant: "Test supervisingConsultant"
+  requesterContact: "Test requesterContact"
+  notes: "Test notes"
+  patientId: 441656
+  clinicianId: 156466

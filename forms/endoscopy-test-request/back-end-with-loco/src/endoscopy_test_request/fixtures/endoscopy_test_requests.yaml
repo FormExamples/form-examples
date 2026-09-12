@@ -1,0 +1,51 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 111596
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  requestedByDate: "1990-01-01"
+  requestedProcedure: "ogd"
+  primaryIndication: "dyspepsia"
+  clinicalQuestion: "Test clinicalQuestion"
+  relevantHistory: "Test relevantHistory"
+  redFlagDysphagia: true
+  redFlagWeightLoss: true
+  redFlagAnaemia: true
+  redFlagGiBleeding: true
+  redFlagAbdominalMass: true
+  redFlagAgeOver55: true
+  fitResultUgG: 1.0
+  haemoglobinGL: 1.0
+  ferritinUgL: 1.0
+  takingAnticoagulant: true
+  anticoagulantAgent: "none"
+  takingAntiplatelet: true
+  antiplateletAgent: "none"
+  diabetesMedication: "none"
+  allergies: "No known allergies"
+  latexAllergy: true
+  cardiacNyhaClass: "I"
+  pacemakerIcd: true
+  chronicKidneyDisease: true
+  egfrMlMin: 1.0
+  sleepApnoea: true
+  neutropenia: true
+  asaGrade: "I"
+  vcjdRisk: true
+  cpeCarriage: true
+  mrsa: true
+  bloodBorneVirus: true
+  fitForBowelPrep: true
+  bowelPrepAgent: "none"
+  sedation: "none"
+  escortAvailable: true
+  urgency: "routine"
+  supervisingConsultant: "Test supervisingConsultant"
+  requesterContact: "Test requesterContact"
+  interpreterRequired: true
+  notes: "Test notes"
+  patientId: 886746
+  clinicianId: 846922

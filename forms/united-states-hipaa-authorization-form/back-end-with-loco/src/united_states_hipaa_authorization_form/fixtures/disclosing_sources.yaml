@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 778004
+  deletedAt: null
+  identificationMode: "specific"
+  specificPersonsOrOrganizations: "Test specificPersonsOrOrganizations"
+  classDescription: "Test classDescription"
+  isVaFacility: "yes"
+  isPart2Program: "yes"
+  hipaaAuthorizationId: 962728

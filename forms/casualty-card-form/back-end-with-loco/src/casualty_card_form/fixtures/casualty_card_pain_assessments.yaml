@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 213964
+  deletedAt: null
+  painPresent: "yes"
+  painScore: 1
+  painLocation: "Test painLocation"
+  painCharacter: "Test painCharacter"
+  painOnset: "Test painOnset"
+  painSeverityCategory: "mild"
+  casualtyCardId: 233761

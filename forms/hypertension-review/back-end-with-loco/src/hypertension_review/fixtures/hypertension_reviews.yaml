@@ -1,0 +1,41 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 860266
+  deletedAt: null
+  clinicianRole: "gp"
+  reviewedAt: "1990-01-01"
+  practiceSite: "Test practiceSite"
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "18-39"
+  sex: "female"
+  ethnicity: "white"
+  diagnosisDate: "1990-01-01"
+  type2Diabetes: "yes"
+  chronicKidneyDisease: "yes"
+  establishedCvd: "yes"
+  atrialFibrillation: "yes"
+  clinicSystolic: 1
+  clinicDiastolic: 1
+  homeSystolic: 1
+  homeDiastolic: 1
+  monitoringMethod: "clinic-only"
+  posturalDrop: "yes"
+  antihypertensiveAgents: 1
+  adherence: "good"
+  sideEffects: "yes"
+  qriskPercent: 1.0
+  smokingStatus: "never"
+  statinTherapy: "yes"
+  bmi: 1.0
+  lifestyleAdvice: "Test lifestyleAdvice"
+  serumCreatinine: 1.0
+  egfr: 1.0
+  serumPotassium: 1.0
+  hba1c: 1.0
+  totalCholesterol: 1.0
+  hdlCholesterol: 1.0
+  urineAcr: 1.0
+  complications: "Test complications"
+  reviewContext: "Test reviewContext"
+  patientId: 264702
+  clinicianId: null

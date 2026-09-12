@@ -1,0 +1,33 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 269601
+  deletedAt: null
+  assessorName: "Test assessorName"
+  assessorRole: "nurse"
+  assessedAt: "2026-01-01T00:00:00Z"
+  wardUnit: "Test wardUnit"
+  camVariant: "cam"
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "16-39"
+  sex: "female"
+  cognitiveBaseline: "independent"
+  collateralSource: "family"
+  featureAcuteOnsetFluctuating: "present"
+  onsetTiming: "hours"
+  featureInattention: "present"
+  attentionTest: "digit-span"
+  featureDisorganisedThinking: "present"
+  featureAlteredConsciousness: "present"
+  consciousnessLevel: "alert"
+  rassScore: 1
+  motoricSubtype: "hypoactive"
+  hallucinations: true
+  delusions: true
+  sleepWakeDisturbance: true
+  deliriogenicMedication: true
+  deliriogenicMedicationDetail: "Test deliriogenicMedicationDetail"
+  suspectedPrecipitants: "Test suspectedPrecipitants"
+  recommendedActions: "Test recommendedActions"
+  clinicalNote: "Test clinicalNote"
+  patientId: 691827
+  clinicianId: null

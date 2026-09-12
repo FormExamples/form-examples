@@ -1,0 +1,31 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 419839
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  requestedByDate: "1990-01-01"
+  angiographyType: "ct-angiography"
+  bodyRegion: "coronary"
+  primaryIndication: "suspected-coronary-disease"
+  clinicalQuestion: "Test clinicalQuestion"
+  relevantHistory: "Test relevantHistory"
+  contrastRequired: "iodinated"
+  egfr: 1.0
+  contrastAllergy: true
+  diabetes: true
+  metformin: true
+  takingAnticoagulant: true
+  anticoagulantAgent: "Test anticoagulantAgent"
+  takingAntiplatelet: true
+  bleedingDisorder: true
+  pregnancyStatus: "not-pregnant"
+  urgency: "routine"
+  irMeRJustification: "Test irMeRJustification"
+  supervisingConsultant: "Test supervisingConsultant"
+  requesterContact: "Test requesterContact"
+  notes: "Test notes"
+  patientId: 435157
+  clinicianId: 212376

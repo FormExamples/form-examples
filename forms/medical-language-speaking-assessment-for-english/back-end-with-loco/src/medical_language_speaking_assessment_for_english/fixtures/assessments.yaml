@@ -1,0 +1,6 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 725519
+  deletedAt: null
+  status: "Test status"
+  patientId: 693872

@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 761002
+  deletedAt: null
+  ordinal: 1
+  category: "Test category"
+  choice: "Test choice"
+  rationale: "Test rationale"
+  arc42DocumentationId: 202624

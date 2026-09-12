@@ -1,0 +1,15 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 760141
+  deletedAt: null
+  confusionScore: 1
+  ureaScore: 1
+  respiratoryRateScore: 1
+  bloodPressureScore: 1
+  ageScore: 1
+  totalScore: 1
+  scoreVariant: "curb-65"
+  riskBand: "low"
+  recommendedSetting: "Test recommendedSetting"
+  gradedAt: "2026-01-01T00:00:00Z"
+  curb65PneumoniaSeverityScoreId: 991585

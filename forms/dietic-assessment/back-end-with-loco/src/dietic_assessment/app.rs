@@ -85,6 +85,58 @@ impl Hooks for App {
             ),
         )
         .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::allergies::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/dietic_assessment/fixtures/allergies.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::dietitians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/dietic_assessment/fixtures/dietitians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medications::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/dietic_assessment/fixtures/medications.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/dietic_assessment/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::dietic_assessments::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/dietic_assessment/fixtures/dietic_assessments.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patient_allergies::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/dietic_assessment/fixtures/patient_allergies.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patient_medications::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/dietic_assessment/fixtures/patient_medications.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::dietic_assessment_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/dietic_assessment/fixtures/dietic_assessment_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::dietic_assessment_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/dietic_assessment/fixtures/dietic_assessment_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::dietic_assessment_grade_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/dietic_assessment/fixtures/dietic_assessment_grade_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

@@ -1,0 +1,24 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 454997
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  requestedByDate: "1990-01-01"
+  studyType: "barium-swallow"
+  primaryIndication: "dysphagia"
+  clinicalQuestion: "Test clinicalQuestion"
+  relevantHistory: "Test relevantHistory"
+  pregnancyStatus: "not-pregnant"
+  contrastAllergy: true
+  aspirationRisk: true
+  diabetes: true
+  urgency: "routine"
+  irMeRJustification: "Test irMeRJustification"
+  supervisingConsultant: "Test supervisingConsultant"
+  requesterContact: "Test requesterContact"
+  notes: "Test notes"
+  patientId: 381780
+  clinicianId: 667318

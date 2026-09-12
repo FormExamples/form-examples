@@ -1,0 +1,18 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 919640
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "doctor"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "primary-care"
+  purpose: "screening"
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "18-39"
+  sex: "female"
+  ancestry: "asian"
+  heightCm: 1.0
+  weightKg: 1.0
+  bsaFormula: "mosteller"
+  patientId: 607871
+  clinicianId: 833323

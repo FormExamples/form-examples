@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 437122
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "competing-pathology-suspected"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  cataractDiagnosticEvaluationGradeId: 189391

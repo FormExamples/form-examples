@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 825655
+  deletedAt: null
+  totalFmsScore: 1
+  riskCategory: "Test riskCategory"
+  asymmetryCount: 1
+  painCount: 1
+  gradedAt: "2026-01-01T00:00:00Z"
+  assessmentId: 867450

@@ -1,0 +1,31 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 336158
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  scanType: "bone-scan"
+  radiopharmaceutical: "Test radiopharmaceutical"
+  injectedActivityMbq: 1.0
+  examinationAdequacy: "adequate"
+  clinicalHistory: "Test clinicalHistory"
+  comparisonWithPrevious: "Test comparisonWithPrevious"
+  findingsNarrative: "Test findingsNarrative"
+  abnormalUptake: true
+  metastaticPattern: true
+  perfusionDefect: true
+  photopenicArea: true
+  noSignificantAbnormality: true
+  incidentalFinding: true
+  ejectionFractionPercent: 1.0
+  splitFunctionLeftPercent: 1.0
+  splitFunctionRightPercent: 1.0
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 468284
+  clinicianId: 973400

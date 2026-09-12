@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 372771
+  deletedAt: null
+  rightPtaDb: 1.0
+  leftPtaDb: 1.0
+  betterEarPtaDb: 1.0
+  rightHearingGrade: "Test rightHearingGrade"
+  leftHearingGrade: "Test leftHearingGrade"
+  overallHearingGrade: "Test overallHearingGrade"
+  gradedAt: "2026-01-01T00:00:00Z"
+  assessmentId: 588196

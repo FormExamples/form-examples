@@ -1,0 +1,39 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 138215
+  deletedAt: null
+  clerkedAt: "2026-01-01T00:00:00Z"
+  clinicianRole: "doctor"
+  registrationNumber: "Test registrationNumber"
+  careSetting: "emergency-department"
+  admissionSource: "self"
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "18-39"
+  sex: "female"
+  presentingComplaint: "Test presentingComplaint"
+  historyOfPresentingComplaint: "Test historyOfPresentingComplaint"
+  pastMedicalSurgicalHistory: "Test pastMedicalSurgicalHistory"
+  drugHistory: "Test drugHistory"
+  allergyStatus: "none-known"
+  allergyDetail: "Test allergyDetail"
+  familyHistory: "Test familyHistory"
+  socialHistory: "Test socialHistory"
+  systemsReview: "Test systemsReview"
+  temperature: 1.0
+  heartRate: 1
+  respiratoryRate: 1
+  systolicBloodPressure: 1
+  oxygenSaturation: 1
+  consciousnessLevel: "alert"
+  examCardiovascular: "Test examCardiovascular"
+  examRespiratory: "Test examRespiratory"
+  examAbdominal: "Test examAbdominal"
+  examNeurological: "Test examNeurological"
+  examOther: "Test examOther"
+  investigations: "Test investigations"
+  impression: "Test impression"
+  redFlagFindings: "Test redFlagFindings"
+  managementPlan: "Test managementPlan"
+  clinicalNote: "Test clinicalNote"
+  patientId: 378635
+  clinicianId: null

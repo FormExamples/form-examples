@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 305300
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "escalate-therapy"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  chronicObstructivePulmonaryDiseaseReviewGradeId: 229591

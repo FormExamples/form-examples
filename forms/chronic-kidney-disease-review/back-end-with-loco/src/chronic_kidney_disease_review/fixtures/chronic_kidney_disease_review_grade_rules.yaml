@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 377373
+  deletedAt: null
+  ruleId: "Test ruleId"
+  section: "gfr-stage"
+  category: "Test category"
+  description: "Test description"
+  chronicKidneyDiseaseReviewGradeId: 298547

@@ -1,0 +1,19 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 813416
+  deletedAt: null
+  totalRegularMedications: 1
+  totalPrnMedications: 1
+  polypharmacyFlag: "Test polypharmacyFlag"
+  medicationReviewDate: "1990-01-01"
+  fallsRiskMedications: "Test fallsRiskMedications"
+  fallsRiskMedicationDetails: "Test fallsRiskMedicationDetails"
+  anticholinergicBurden: "Test anticholinergicBurden"
+  drugInteractionsIdentified: "Test drugInteractionsIdentified"
+  drugInteractionDetails: "Test drugInteractionDetails"
+  adherenceConcerns: "Test adherenceConcerns"
+  adherenceDetails: "Test adherenceDetails"
+  stoppStartReviewDone: "Test stoppStartReviewDone"
+  deprescribingOpportunities: "Test deprescribingOpportunities"
+  polypharmacyNotes: "Test polypharmacyNotes"
+  assessmentId: 504684

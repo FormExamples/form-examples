@@ -1,0 +1,15 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 715728
+  deletedAt: null
+  controlStatus: "controlled"
+  hypertensionStage: "none"
+  reviewStatus: "complete"
+  primarySource: "home"
+  targetGroup: "Test targetGroup"
+  clinicTargetSystolic: 1
+  clinicTargetDiastolic: 1
+  homeTargetSystolic: 1
+  homeTargetDiastolic: 1
+  gradedAt: "2026-01-01T00:00:00Z"
+  hypertensionReviewId: 860266

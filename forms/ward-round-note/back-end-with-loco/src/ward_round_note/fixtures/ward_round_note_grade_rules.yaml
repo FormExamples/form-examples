@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 189765
+  deletedAt: null
+  ruleId: "Test ruleId"
+  component: "header"
+  category: "Test category"
+  description: "Test description"
+  wardRoundNoteGradeId: 213854

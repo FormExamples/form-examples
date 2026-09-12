@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 182689
+  deletedAt: null
+  status: "complete"
+  sourceCount: 1
+  unintentionalCount: 1
+  highRiskUnintentionalCount: 1
+  gradedAt: "2026-01-01T00:00:00Z"
+  medicationReconciliationId: 376586

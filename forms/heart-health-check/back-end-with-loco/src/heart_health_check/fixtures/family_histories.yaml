@@ -1,0 +1,8 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 957911
+  deletedAt: null
+  familyCvdUnder60: "Test familyCvdUnder60"
+  familyCvdRelationship: "Test familyCvdRelationship"
+  familyDiabetesHistory: "Test familyDiabetesHistory"
+  assessmentId: 172043

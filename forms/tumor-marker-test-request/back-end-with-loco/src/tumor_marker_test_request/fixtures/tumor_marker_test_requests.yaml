@@ -1,0 +1,31 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 448835
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  requestedByDate: "1990-01-01"
+  psa: true
+  ca125: true
+  ca199: true
+  carcinoembryonicAntigenCea: true
+  alphaFetoproteinAfp: true
+  betaHcg: true
+  ca153: true
+  lactateDehydrogenaseLdh: true
+  calcitonin: true
+  chromograninA: true
+  primaryIndication: "suspected-malignancy"
+  clinicalDetails: "Test clinicalDetails"
+  knownCancerSite: "Test knownCancerSite"
+  onTreatment: true
+  previousMarkerValue: 1.0
+  previousMarkerDate: "1990-01-01"
+  urgency: "routine"
+  supervisingConsultant: "Test supervisingConsultant"
+  requesterContact: "Test requesterContact"
+  notes: "Test notes"
+  patientId: 226202
+  clinicianId: 157028

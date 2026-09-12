@@ -1,0 +1,34 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 895809
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  testType: "exercise-treadmill-ecg"
+  protocol: "Test protocol"
+  clinicalHistory: "Test clinicalHistory"
+  comparisonWithPrevious: "Test comparisonWithPrevious"
+  maximumHeartRateBpm: 1
+  percentPredictedHeartRate: 1.0
+  exerciseDurationMinutes: 1.0
+  metsAchieved: 1.0
+  peakBloodPressure: "Test peakBloodPressure"
+  bloodPressureResponse: "normal"
+  ischaemicStChanges: true
+  chestPainInduced: true
+  arrhythmiaInduced: true
+  terminatedEarly: true
+  testPositive: true
+  testNegative: true
+  testInconclusive: true
+  reasonForTermination: "Test reasonForTermination"
+  dukeTreadmillScore: 1.0
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 268407
+  clinicianId: 980062

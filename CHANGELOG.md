@@ -33,6 +33,47 @@ for them.
   tool itself first (a page-reuse state race between personas, and a
   false-positive empty-state substring check) — see `tasks.md` for detail.
 
+- **New `bin/loco-seed-data-rollout`: implements every Loco crate's empty
+  `App::seed()` hook, and overturns this session's own earlier
+  assumption about the fleet's primary-key convention along the way.**
+  `cargo <bin> db seed --from src/fixtures` calls `seed(ctx, base)`,
+  which every scaffolded crate leaves a no-op (or, in the dominant case,
+  seeding only the Loco-scaffolded `users` auth table). The tool
+  discovers each crate's domain tables from `models/_entities/*.rs`,
+  parses each `Model`'s fields, detects foreign keys, topologically
+  sorts the tables, and inserts a `loco_rs::db::seed::<T>()` call
+  sequence into the *existing* `seed()` body — never replacing whatever
+  it already seeds — plus one generated YAML fixture per table.
+
+  A fleet survey done before generalising (piloting on
+  `cardiology-request` first, then re-checking against a second,
+  differently-shaped crate before trusting the pattern) found only 2/338
+  crates use a `Uuid` primary key — the other 336 use the Loco scaffold's
+  `i64` auto-increment default, which `sql/` (the source of truth) never
+  specifies (always `UUID`). This is exactly the "UUID vs i64 mismatch"
+  this backlog item was originally blocked on; an earlier note this
+  session had assumed it was resolved fleet-wide by the relational
+  per-table-entity convention, conflating table *structure* (genuinely
+  fleet-wide now) with primary-key *type* (still split). Confirmed live
+  that `loco_rs::db::seed` handles both correctly: it deserializes a
+  fixture row straight into the entity `Model`, inserts an explicit id
+  into a `SERIAL` column without complaint, and resets the sequence to
+  `MAX(id)+1` afterward — verified by inserting a real row post-seed and
+  checking its id continued correctly, not assumed from the source.
+
+  Result: 352/356 crates changed. 1 SKIP found a real, separate,
+  pre-existing bug: `united-kingdom-statement-of-fitness-for-work`'s
+  main-table entity carries a `united_kingdom_statement_of_fitness_for_work_id`
+  column that self-references its own table — `sql/` has no such column
+  (it has `is_duplicate_of`, which the entity is missing entirely),
+  so this looks like a scaffold-generation mistake predating this
+  session. Flagged, not fixed here, to keep this change's own scope to
+  seed data. Verified: live `cargo loco db migrate` + `db seed --from
+  src/fixtures` + row/FK-linkage queries against a real scratch Postgres
+  on 6 structurally diverse crates (both PK-type paths, the
+  `users`-preserving insertion, the sequence-reset behaviour), and
+  `cargo check` clean fleet-wide.
+
 - **New `bin/verify-blank-submit` (+ `e2e/verify-blank-submit.mjs`): a
   cheap, fleet-safe partial answer to "wizard blocks invalid
   submission."** Loads every wizard's own blank/default state (no

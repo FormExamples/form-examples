@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 579584
+  deletedAt: null
+  reviewStatus: "complete"
+  anticholinergicBurdenScore: 1
+  anticholinergicBand: "low"
+  polypharmacyBand: "none"
+  burdenBand: "low"
+  medicineCount: 1
+  regularMedicineCount: 1
+  gradedAt: "2026-01-01T00:00:00Z"
+  structuredMedicationReviewId: 127781

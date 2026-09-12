@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 432554
+  deletedAt: null
+  pastMedicalHistory: "Test pastMedicalHistory"
+  pastSurgicalHistory: "Test pastSurgicalHistory"
+  tetanusStatus: "Test tetanusStatus"
+  smokingStatus: "Test smokingStatus"
+  alcoholConsumption: "Test alcoholConsumption"
+  recreationalDrugUse: "Test recreationalDrugUse"
+  lastOralIntake: "Test lastOralIntake"
+  casualtyCardId: 233761

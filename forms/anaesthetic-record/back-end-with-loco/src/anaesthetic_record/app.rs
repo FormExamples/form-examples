@@ -78,6 +78,53 @@ impl Hooks for App {
             &format!("{}/src/anaesthetic_record/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/anaesthetic_record/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/anaesthetic_record/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::anaesthetic_records::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/anaesthetic_record/fixtures/anaesthetic_records.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::anaesthetic_record_drug_administrations::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/anaesthetic_record/fixtures/anaesthetic_record_drug_administrations.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::anaesthetic_record_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/anaesthetic_record/fixtures/anaesthetic_record_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::anaesthetic_record_intra_operative_events::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/anaesthetic_record/fixtures/anaesthetic_record_intra_operative_events.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::anaesthetic_record_timed_observations::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/anaesthetic_record/fixtures/anaesthetic_record_timed_observations.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::anaesthetic_record_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/anaesthetic_record/fixtures/anaesthetic_record_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::anaesthetic_record_grade_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/anaesthetic_record/fixtures/anaesthetic_record_grade_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

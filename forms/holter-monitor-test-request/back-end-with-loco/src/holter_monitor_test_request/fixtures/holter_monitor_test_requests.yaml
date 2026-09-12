@@ -1,0 +1,27 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 460578
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  requestedByDate: "1990-01-01"
+  monitorType: "24-hour"
+  primaryIndication: "palpitations"
+  clinicalQuestion: "Test clinicalQuestion"
+  relevantHistory: "Test relevantHistory"
+  symptomPalpitations: true
+  symptomSyncope: true
+  symptomPresyncope: true
+  symptomBreathlessness: true
+  symptomFrequency: "daily"
+  knownArrhythmia: "none"
+  recentStrokeTia: true
+  relevantMedications: "Test relevantMedications"
+  urgency: "routine"
+  supervisingConsultant: "Test supervisingConsultant"
+  requesterContact: "Test requesterContact"
+  notes: "Test notes"
+  patientId: 487596
+  clinicianId: 134004

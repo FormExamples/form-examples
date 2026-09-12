@@ -1,0 +1,15 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 287940
+  deletedAt: null
+  aggregateScore: 1
+  systolicBloodPressureScore: 1
+  heartRateScore: 1
+  respiratoryRateScore: 1
+  temperatureScore: 1
+  avpuScore: 1
+  singleParameterTrigger: "yes"
+  riskBand: "low"
+  monitoringFrequency: "Test monitoringFrequency"
+  gradedAt: "2026-01-01T00:00:00Z"
+  modifiedEarlyWarningScoreId: 245584

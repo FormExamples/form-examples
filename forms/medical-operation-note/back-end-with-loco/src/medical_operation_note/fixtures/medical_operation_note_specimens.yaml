@@ -1,0 +1,15 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 858814
+  deletedAt: null
+  label: "Test label"
+  specimenType: "tissue"
+  anatomicalSite: "Test anatomicalSite"
+  container: "histology-pot"
+  fixative: "formalin"
+  destination: "histopathology"
+  urgency: "routine"
+  labelVerified: "yes"
+  chainOfCustodyDocumented: "yes"
+  notes: "Test notes"
+  medicalOperationNoteId: 506012

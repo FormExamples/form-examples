@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 514938
+  deletedAt: null
+  systolicBp: 1
+  systolicBpSd: 1.0
+  diastolicBp: 1
+  onBpTreatment: "yes"
+  numberOfBpMedications: 1
+  assessmentId: 172043

@@ -81,6 +81,68 @@ impl Hooks for App {
             &format!("{}/src/encounter_satisfaction/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/encounter_satisfaction/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/encounter_satisfaction/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::encounter_satisfactions::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/encounter_satisfaction/fixtures/encounter_satisfactions.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::access_schedulings::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/encounter_satisfaction/fixtures/access_schedulings.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::care_qualities::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/encounter_satisfaction/fixtures/care_qualities.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::communications::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/encounter_satisfaction/fixtures/communications.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::environments::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/encounter_satisfaction/fixtures/environments.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::overall_satisfactions::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/encounter_satisfaction/fixtures/overall_satisfactions.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::satisfaction_results::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/encounter_satisfaction/fixtures/satisfaction_results.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::staff_professionalisms::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/encounter_satisfaction/fixtures/staff_professionalisms.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::visit_informations::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/encounter_satisfaction/fixtures/visit_informations.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::flagged_issues::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/encounter_satisfaction/fixtures/flagged_issues.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

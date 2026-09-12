@@ -1,0 +1,17 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 762792
+  deletedAt: null
+  computedCompositeRisk: "routine"
+  finalCompositeRisk: "routine"
+  overrideReason: "Test overrideReason"
+  worstClavienDindoGrade: "0"
+  asaPhysicalStatus: "I"
+  bloodLossBand: "minimal"
+  countsAgreed: "yes"
+  neverEventSuspected: "yes"
+  recommendation: "routine-recovery"
+  surgeonNotes: "Test surgeonNotes"
+  signedAt: "2026-01-01T00:00:00Z"
+  gradedAt: "2026-01-01T00:00:00Z"
+  medicalOperationNoteId: 506012

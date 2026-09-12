@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 693347
+  deletedAt: null
+  recordTypes: "Test recordTypes"
+  specificDateRange: "yes"
+  dateFrom: "1990-01-01"
+  dateTo: "1990-01-01"
+  specificRecordDetails: "Test specificRecordDetails"
+  releaseFormId: 708142

@@ -1,0 +1,17 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 921292
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "midwife"
+  careSetting: "labour-ward"
+  activePhaseStartAt: "2026-01-01T00:00:00Z"
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "under-18"
+  parity: "nulliparous"
+  gestationWeeks: 1.0
+  membranesOnAdmission: "intact"
+  riskFactors: "Test riskFactors"
+  plannedCare: "Test plannedCare"
+  patientId: 732023
+  clinicianId: null

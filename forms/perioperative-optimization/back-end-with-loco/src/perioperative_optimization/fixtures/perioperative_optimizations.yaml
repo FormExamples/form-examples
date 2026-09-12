@@ -1,0 +1,221 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 165652
+  deletedAt: null
+  status: "draft"
+  assessmentDate: "1990-01-01"
+  assessmentTime: "Test assessmentTime"
+  siteName: "Test siteName"
+  serviceName: "Test serviceName"
+  pathwayStage: "referral"
+  assessmentMode: "clinic"
+  referralSource: "surgical-team"
+  plannedProcedure: "Test plannedProcedure"
+  surgicalSpecialty: "Test surgicalSpecialty"
+  consultantSurgeon: "Test consultantSurgeon"
+  plannedSurgeryDate: "1990-01-01"
+  urgency: "elective"
+  surgicalSeverity: "minor"
+  laterality: "left"
+  anticipatedBloodLossMl: 1
+  anticipatedLengthOfStayDays: 1
+  interpreterRequired: "yes"
+  interpreterLanguage: "Test interpreterLanguage"
+  conditionCardiac: "yes"
+  conditionRespiratory: "yes"
+  conditionRenal: "yes"
+  conditionHepatic: "yes"
+  conditionStroke: "yes"
+  conditionCancer: "yes"
+  conditionRheumatological: "yes"
+  conditionThyroid: "yes"
+  conditionOther: "Test conditionOther"
+  previousSurgery: "yes"
+  previousSurgeryDetail: "Test previousSurgeryDetail"
+  previousAnaestheticComplication: "yes"
+  previousAnaestheticComplicationDetail: "Test previousAnaestheticComplicationDetail"
+  postoperativeNauseaHistory: "yes"
+  difficultAirwayHistory: "yes"
+  malignantHyperthermiaHistory: "yes"
+  venousThromboembolismHistory: "yes"
+  familyHistory: "Test familyHistory"
+  pregnancyStatus: "not-applicable"
+  takesPrescriptionMedicines: "yes"
+  takesOverTheCounterMedicines: "yes"
+  takesHerbalProducts: "yes"
+  takesAnticoagulant: "yes"
+  takesAntiplatelet: "yes"
+  takesAceInhibitorOrArb: "yes"
+  takesSglt2Inhibitor: "yes"
+  takesGlp1Agonist: "yes"
+  glp1Formulation: "daily"
+  glp1HeldPerGuideline: "yes"
+  glp1ExtendedClearFluidsConfirmed: "yes"
+  glp1GiSymptoms: "yes"
+  glp1GiSymptomsDetails: "Test glp1GiSymptomsDetails"
+  glp1GastricUltrasoundPerformed: "yes"
+  glp1GastricUltrasoundFindings: "empty"
+  takesCorticosteroid: "yes"
+  takesImmunosuppressant: "yes"
+  takesHormoneTherapy: "yes"
+  medicationHoldPlanAgreed: "yes"
+  medicationHoldPlanAgreedBy: "Test medicationHoldPlanAgreedBy"
+  medicationAdherence: "full"
+  medicationNotes: "Test medicationNotes"
+  hasDrugAllergy: "yes"
+  drugAllergyDetail: "Test drugAllergyDetail"
+  hasFoodAllergy: "yes"
+  foodAllergyDetail: "Test foodAllergyDetail"
+  hasLatexAllergy: "yes"
+  hasAdhesiveAllergy: "yes"
+  hasContrastAllergy: "yes"
+  allergySeverity: "mild"
+  adrenalineAutoInjector: "yes"
+  allergyNotes: "Test allergyNotes"
+  bloodsSampleDate: "1990-01-01"
+  haemoglobinGPerL: 1.0
+  meanCellVolumeFl: 1.0
+  ferritinUgPerL: 1.0
+  transferrinSaturationPercent: 1.0
+  vitaminB12NgPerL: 1.0
+  folateUgPerL: 1.0
+  cReactiveProteinMgPerL: 1.0
+  creatinineUmolPerL: 1.0
+  egfrMlPerMin: 1.0
+  anaemiaKnownCause: "Test anaemiaKnownCause"
+  anaemiaTreatmentStarted: "yes"
+  anaemiaTreatmentRoute: "oral"
+  anaemiaTreatmentStartDate: "1990-01-01"
+  previousTransfusion: "yes"
+  groupAndSaveDone: "yes"
+  anaemiaNotes: "Test anaemiaNotes"
+  diabetesType: "none"
+  diabetesDurationYears: 1.0
+  hba1cMmolPerMol: 1.0
+  hba1cSampleDate: "1990-01-01"
+  capillaryGlucoseMmolPerL: 1.0
+  diabetesTreatment: "diet-only"
+  insulinRegimen: "Test insulinRegimen"
+  hypoglycaemiaAwareness: "normal"
+  diabetesTeamReview: "yes"
+  diabetesTeamReviewDate: "1990-01-01"
+  footCheckDone: "yes"
+  glycaemicNotes: "Test glycaemicNotes"
+  smokingStatus: "never"
+  cigarettesPerDay: 1
+  packYears: 1.0
+  quitDate: "1990-01-01"
+  smokingCessationOffered: "yes"
+  smokingCessationAccepted: "yes"
+  nicotineReplacement: "yes"
+  vaping: "yes"
+  smokingNotes: "Test smokingNotes"
+  alcoholUnitsPerWeek: 1.0
+  auditCFrequency: 1
+  auditCTypicalQuantity: 1
+  auditCBingeFrequency: 1
+  alcoholDependenceFeatures: "yes"
+  alcoholReductionPlanAgreed: "yes"
+  alcoholServicesReferral: "yes"
+  recreationalDrugUse: "yes"
+  recreationalDrugDetail: "Test recreationalDrugDetail"
+  alcoholNotes: "Test alcoholNotes"
+  heightAsCm: 170.2
+  weightAsKg: 70.4
+  bodyMassIndex: 24.2
+  usualWeightAsKg: 70.4
+  weightLossPercent: 1.0
+  weightLossIsIntentional: "yes"
+  acutelyIll: "yes"
+  noNutritionalIntakeOver5Days: "yes"
+  appetite: "good"
+  oralNutritionalSupplements: "yes"
+  immunonutrition: "yes"
+  dietitianReferral: "yes"
+  nutritionNotes: "Test nutritionNotes"
+  usualActivityLevel: "sedentary"
+  climbsFlightOfStairs: "yes-easily"
+  metabolicEquivalents: 1.0
+  dukeActivityStatusIndex: 1.0
+  sixMinuteWalkMetres: 1
+  cpetAnaerobicThreshold: 1.0
+  cpetPeakVo2: 1.0
+  gripStrengthKg: 1.0
+  prehabilitationOffered: "yes"
+  prehabilitationEnrolled: "yes"
+  prehabilitationSessionsPerWeek: 1
+  prehabilitationStartDate: "1990-01-01"
+  proteinSupplementationRecommended: "yes"
+  fitnessNotes: "Test fitnessNotes"
+  clinicalFrailtyScale: 1
+  friedWeakness: "yes"
+  friedSlowness: "yes"
+  friedLowPhysicalActivity: "yes"
+  friedExhaustion: "yes"
+  friedUnintentionalWeightLoss: "yes"
+  riskAnalysisIndexScore: 1
+  miniCogPerformed: "yes"
+  miniCogScore: 1
+  cognitiveScreenTool: "4at"
+  cognitiveScreenScore: 1.0
+  cognitiveImpairment: "none"
+  capacityConcern: "yes"
+  fallsInLast12Months: 1
+  mobilityAid: "none"
+  livingSituation: "alone"
+  carePackage: "none"
+  frailtyNotes: "Test frailtyNotes"
+  systolicBp: 1
+  diastolicBp: 1
+  heartRate: 1
+  heartRhythm: "sinus"
+  murmurPresent: "yes"
+  exerciseTolerance: "good"
+  ejectionFractionPercent: 1
+  echoDate: "1990-01-01"
+  asthmaControl: "none"
+  copdControl: "none"
+  inhalerTechniqueChecked: "yes"
+  rescueSteroids: "yes"
+  spirometryFev1Percent: 1.0
+  stopBangScore: 1
+  sleepApnoeaDiagnosis: "yes"
+  cpapUse: "yes"
+  oxygenSaturationPercent: 1.0
+  cardiorespiratoryNotes: "Test cardiorespiratoryNotes"
+  anxietyLevel: "none"
+  depressionScreen: "negative"
+  understandsProcedure: "yes"
+  expectationsRealistic: "yes"
+  sharedDecisionMakingDiscussed: "yes"
+  hasCarer: "yes"
+  transportHomeArranged: "yes"
+  supportAfterDischarge: "good"
+  healthLiteracy: "high"
+  psychologicalSupportOffered: "yes"
+  socialNotes: "Test socialNotes"
+  planAnaemia: "Test planAnaemia"
+  referralAnaemia: "yes"
+  planGlycaemicControl: "Test planGlycaemicControl"
+  referralGlycaemicControl: "yes"
+  planSmoking: "Test planSmoking"
+  referralSmoking: "yes"
+  planAlcohol: "Test planAlcohol"
+  referralAlcohol: "yes"
+  planNutrition: "Test planNutrition"
+  referralNutrition: "yes"
+  planPhysicalFitness: "Test planPhysicalFitness"
+  referralPhysicalFitness: "yes"
+  planMedication: "Test planMedication"
+  referralMedication: "yes"
+  planCardiorespiratory: "Test planCardiorespiratory"
+  referralCardiorespiratory: "yes"
+  responsibleClinician: "Test responsibleClinician"
+  planAgreedWithPatient: "yes"
+  planSharedWithPatient: "yes"
+  nextReviewDate: "1990-01-01"
+  planNotes: "Test planNotes"
+  gateDecision: "proceed"
+  additionalNotes: "Test additionalNotes"
+  patientId: 262369
+  clinicianId: 785304

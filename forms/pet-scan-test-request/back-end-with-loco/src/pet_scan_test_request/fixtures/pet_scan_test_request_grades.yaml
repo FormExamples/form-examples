@@ -1,0 +1,16 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 561850
+  deletedAt: null
+  appropriatenessScore: 1
+  appropriatenessBand: "usually-appropriate"
+  prepSafetyBand: "ok"
+  radiationDoseBand: "low"
+  completenessPercent: 1
+  triageTier: "routine"
+  targetTimeframe: "Test targetTimeframe"
+  recommendation: "accept"
+  clinicianNotes: "Test clinicianNotes"
+  signedAt: "2026-01-01T00:00:00Z"
+  gradedAt: "2026-01-01T00:00:00Z"
+  petScanTestRequestId: 693794

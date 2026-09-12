@@ -1,0 +1,20 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 607056
+  deletedAt: null
+  patientIdentifier: "Test patientIdentifier"
+  patientName: "Test patientName"
+  dateOfBirth: "1990-01-01"
+  assessmentDate: "1990-01-01"
+  assessmentTime: null
+  setting: "acute"
+  assessorName: "Test assessorName"
+  assessorRole: "Test assessorRole"
+  alertness: "normal"
+  amt4: "noMistakes"
+  attentionMonths: "sevenOrMore"
+  acuteChange: "no"
+  acuteChangeSource: "patient"
+  clinicalNotes: "Test clinicalNotes"
+  patientId: 383560
+  clinicianId: null

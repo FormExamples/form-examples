@@ -1,0 +1,45 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 128236
+  deletedAt: null
+  reviewerName: "Test reviewerName"
+  reviewerRole: "gp"
+  reviewedAt: "1990-01-01"
+  careSetting: "general-practice"
+  reviewType: "annual"
+  monthsSinceLastReview: 1.0
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "18-39"
+  sex: "female"
+  epilepsyType: "focal"
+  ageAtOnset: 1.0
+  yearsSinceDiagnosis: 1.0
+  learningDisability: "yes"
+  seizureTypes: "Test seizureTypes"
+  seizureFrequency: "none"
+  lastSeizureDate: "1990-01-01"
+  seizureFreeMonths: 1.0
+  seizureTrend: "seizure-free"
+  currentAsms: "Test currentAsms"
+  asmAdherence: "good"
+  asmSideEffects: "none"
+  drugLevel: 1.0
+  triggers: "Test triggers"
+  sudepDiscussed: "yes"
+  statusEpilepticus: "yes"
+  seizureInjury: "yes"
+  dvlaEligible: "eligible"
+  currentlyDriving: "yes"
+  bathingAdviceGiven: "yes"
+  womanOfChildbearingPotential: "yes"
+  onValproate: "yes"
+  pregnancyPreventionProgramme: "in-place"
+  folicAcid: "yes"
+  contraceptionInteractionReviewed: "yes"
+  mentalHealthConcern: "none"
+  specialistReviewNeeded: "yes"
+  nextReviewDue: "1990-01-01"
+  carePlan: "Test carePlan"
+  reviewContext: "Test reviewContext"
+  patientId: 623579
+  clinicianId: null

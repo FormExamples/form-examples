@@ -1,0 +1,7 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 678968
+  deletedAt: null
+  hasDrugAllergies: "No known allergies"
+  crossReactivityConcerns: "Test crossReactivityConcerns"
+  assessmentId: 969864

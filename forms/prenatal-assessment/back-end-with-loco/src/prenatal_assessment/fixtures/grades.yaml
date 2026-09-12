@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 428447
+  deletedAt: null
+  riskLevel: "Test riskLevel"
+  riskScore: 1
+  obstetricRisk: "Test obstetricRisk"
+  medicalRisk: "Test medicalRisk"
+  mentalHealthRisk: "Test mentalHealthRisk"
+  gradedAt: "2026-01-01T00:00:00Z"
+  assessmentId: 318503

@@ -1,0 +1,30 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 329536
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  requestType: "group-and-save"
+  clinicalHistory: "Test clinicalHistory"
+  aboGroup: "a"
+  rhdGroup: "positive"
+  antibodyScreenResult: "negative"
+  antibodiesIdentified: "Test antibodiesIdentified"
+  crossmatchResult: "compatible"
+  component: "red-cells"
+  unitsCrossmatched: 1
+  unitsAvailable: 1
+  twoSampleRuleMet: true
+  specialRequirements: "Test specialRequirements"
+  historicalGroupConcordant: true
+  overallResultStatus: "normal"
+  findingsNarrative: "Test findingsNarrative"
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 901096
+  clinicianId: 940112

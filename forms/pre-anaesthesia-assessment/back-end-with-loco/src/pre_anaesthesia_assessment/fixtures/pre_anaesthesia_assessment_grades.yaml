@@ -1,0 +1,18 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 190592
+  deletedAt: null
+  computedAsaGrade: "I"
+  finalAsaGrade: "I"
+  asaEmergencySuffix: "E"
+  overrideReason: "Test overrideReason"
+  mallampatiClass: "I"
+  rcriScore: 1
+  stopbangScore: 1
+  frailtyScale: 1
+  compositeRisk: "low"
+  recommendation: "proceed"
+  clinicianNotes: "Test clinicianNotes"
+  signedAt: "2026-01-01T00:00:00Z"
+  gradedAt: "2026-01-01T00:00:00Z"
+  preAnaesthesiaAssessmentId: 425475

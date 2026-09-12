@@ -1,0 +1,20 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 821120
+  deletedAt: null
+  title: "Test title"
+  givenNames: "Test givenNames"
+  familyName: "Test familyName"
+  email: "test.patient@example.com"
+  phone: "+441234567890"
+  postalAddressAsFullText: "10 Downing Street, London"
+  countryAsIso31661Alpha2: "GB"
+  postcode: "SW1A 2AA"
+  route: "skill-based"
+  profession: "solicitor"
+  professionRegistrationNumber: "Test professionRegistrationNumber"
+  yearsKnownDonor: 1.0
+  relationshipToDonor: "professional"
+  declaredNotFamily: "yes"
+  declaredNotEmployee: "yes"
+  declaredNotAttorney: "yes"

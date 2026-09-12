@@ -1,0 +1,16 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 138621
+  deletedAt: null
+  status: "complete"
+  riskLevel: "none"
+  completenessPercent: 1
+  appearanceBehaviourDocumented: "yes"
+  speechDocumented: "yes"
+  emotionDocumented: "yes"
+  perceptionDocumented: "yes"
+  thoughtDocumented: "yes"
+  insightDocumented: "yes"
+  cognitionDocumented: "yes"
+  gradedAt: "2026-01-01T00:00:00Z"
+  mentalStateExaminationId: 918278

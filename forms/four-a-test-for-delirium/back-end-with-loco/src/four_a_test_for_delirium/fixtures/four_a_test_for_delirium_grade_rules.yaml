@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 142484
+  deletedAt: null
+  ruleId: "Test ruleId"
+  item: "alertness"
+  points: 1
+  category: "Test category"
+  description: "Test description"
+  fourATestForDeliriumGradeId: 994181

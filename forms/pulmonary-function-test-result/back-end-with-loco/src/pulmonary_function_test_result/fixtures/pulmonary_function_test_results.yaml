@@ -1,0 +1,35 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 599986
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  testType: "spirometry"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  reportStatus: "preliminary"
+  testQuality: "acceptable"
+  clinicalHistory: "Test clinicalHistory"
+  fev1Litres: 1.0
+  fev1PercentPredicted: 1.0
+  fvcLitres: 1.0
+  fvcPercentPredicted: 1.0
+  fev1FvcRatio: 1.0
+  peakExpiratoryFlow: 1.0
+  dlcoPercentPredicted: 1.0
+  ventilatoryPattern: "normal"
+  severity: "none"
+  bronchodilatorReversibility: "positive"
+  airflowObstruction: true
+  restriction: true
+  reducedGasTransfer: true
+  significantReversibility: true
+  normalSpirometry: true
+  findingsNarrative: "Test findingsNarrative"
+  comparisonWithPrevious: "Test comparisonWithPrevious"
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 495150
+  clinicianId: 704388

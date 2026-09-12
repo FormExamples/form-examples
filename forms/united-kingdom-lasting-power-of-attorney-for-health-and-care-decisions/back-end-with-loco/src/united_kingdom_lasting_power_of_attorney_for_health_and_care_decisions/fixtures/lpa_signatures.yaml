@@ -1,0 +1,14 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 624814
+  deletedAt: null
+  signerRole: "donor"
+  signerId: "781d312d-05b3-5a9a-b7b4-afa8aa180e7a"
+  signedAt: "2026-01-01T00:00:00Z"
+  signatureMethod: "wet-ink"
+  signatureData: null
+  witnessName: "Test witnessName"
+  witnessAddress: "Test witnessAddress"
+  witnessSignedAt: "2026-01-01T00:00:00Z"
+  witnessIsAttorney: "yes"
+  lpaId: 652235

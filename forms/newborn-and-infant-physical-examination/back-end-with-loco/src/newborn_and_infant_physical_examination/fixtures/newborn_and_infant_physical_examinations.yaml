@@ -1,0 +1,54 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 129803
+  deletedAt: null
+  practitionerName: "Test practitionerName"
+  practitionerRole: "midwife"
+  examinedAt: "2026-01-01T00:00:00Z"
+  examinationContext: "newborn-72h"
+  careSetting: "maternity-ward"
+  babyIdentifier: "Test babyIdentifier"
+  babyName: "Test babyName"
+  dateOfBirth: "1990-01-01"
+  sex: "male"
+  gestationalAgeWeeks: 1.0
+  birthWeightGrams: 1.0
+  breechPresentation: "yes"
+  familyHistoryHipProblems: "yes"
+  antenatalConcerns: "Test antenatalConcerns"
+  eyesRedReflexRight: "present"
+  eyesRedReflexLeft: "present"
+  eyesAppearance: "normal"
+  heartMurmur: "none"
+  femoralPulsesRight: "present"
+  femoralPulsesLeft: "present"
+  centralCyanosis: "absent"
+  oxygenSaturationPreductal: 1.0
+  oxygenSaturationPostductal: 1.0
+  barlowTest: "negative"
+  ortolaniTest: "negative"
+  hipAbduction: "normal"
+  testisRight: "descended"
+  testisLeft: "descended"
+  generalAppearance: "normal"
+  skin: "normal"
+  headAndFontanelles: "normal"
+  faceAndPalate: "normal"
+  neckAndClavicles: "normal"
+  chestAndLungs: "normal"
+  abdomen: "normal"
+  genitalia: "normal"
+  anusAndSpine: "normal"
+  limbsAndDigits: "normal"
+  feet: "normal"
+  toneAndMovement: "normal"
+  weightGrams: 1.0
+  headCircumferenceCm: 1.0
+  lengthCm: 1.0
+  eyesResultRecorded: "satisfactory"
+  heartResultRecorded: "satisfactory"
+  hipsResultRecorded: "satisfactory"
+  testesResultRecorded: "satisfactory"
+  clinicalNote: "Test clinicalNote"
+  patientId: 286573
+  clinicianId: null

@@ -1,0 +1,30 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 241257
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  requestedByDate: "1990-01-01"
+  requestType: "group-and-save"
+  component: "red-cells"
+  unitsRequired: 1
+  primaryIndication: "surgery"
+  clinicalDetails: "Test clinicalDetails"
+  patientBloodGroup: "a-pos"
+  knownAntibodies: true
+  antibodyDetail: "Test antibodyDetail"
+  previousTransfusion: true
+  previousTransfusionReaction: true
+  pregnant: true
+  sampleCollected: "yes"
+  collectionDatetime: "2026-01-01T00:00:00Z"
+  twoSampleRuleMet: true
+  requiredByDatetime: "2026-01-01T00:00:00Z"
+  urgency: "routine"
+  supervisingConsultant: "Test supervisingConsultant"
+  requesterContact: "Test requesterContact"
+  notes: "Test notes"
+  patientId: 399566
+  clinicianId: 623392

@@ -1,0 +1,19 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 681194
+  deletedAt: null
+  aggregateScore: 1
+  maxParameterScore: 1
+  respiratoryRateScore: 1
+  respiratoryEffortScore: 1
+  oxygenSaturationScore: 1
+  supplementalOxygenScore: 1
+  heartRateScore: 1
+  capillaryRefillScore: 1
+  consciousnessScore: 1
+  riskBand: "routine"
+  singleParameterTrigger: "yes"
+  concernTrigger: "yes"
+  monitoringFrequency: "Test monitoringFrequency"
+  gradedAt: "2026-01-01T00:00:00Z"
+  paediatricEarlyWarningScoreId: 408442

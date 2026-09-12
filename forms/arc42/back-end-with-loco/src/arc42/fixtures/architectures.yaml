@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 122140
+  deletedAt: null
+  name: "Test Patient"
+  version: "Test version"
+  owner: "Test owner"
+  status: "draft"
+  description: "Test description"

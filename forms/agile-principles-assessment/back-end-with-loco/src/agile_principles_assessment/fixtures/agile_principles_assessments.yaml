@@ -1,0 +1,46 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 321632
+  deletedAt: null
+  status: "draft"
+  isAnonymous: true
+  assessmentDate: "1990-01-01"
+  assessmentPeriod: "sprint"
+  p01CustomerSatisfaction: 1
+  p01Comment: "Test p01Comment"
+  p01Weight: 1.0
+  p02WelcomeChange: 1
+  p02Comment: "Test p02Comment"
+  p02Weight: 1.0
+  p03DeliverFrequently: 1
+  p03Comment: "Test p03Comment"
+  p03Weight: 1.0
+  p04Collaboration: 1
+  p04Comment: "Test p04Comment"
+  p04Weight: 1.0
+  p05MotivatedIndividuals: 1
+  p05Comment: "Test p05Comment"
+  p05Weight: 1.0
+  p06FaceToFace: 1
+  p06Comment: "Test p06Comment"
+  p06Weight: 1.0
+  p07WorkingSoftware: 1
+  p07Comment: "Test p07Comment"
+  p07Weight: 1.0
+  p08SustainableDevelopment: 1
+  p08Comment: "Test p08Comment"
+  p08Weight: 1.0
+  p09TechnicalExcellence: 1
+  p09Comment: "Test p09Comment"
+  p09Weight: 1.0
+  p10Simplicity: 1
+  p10Comment: "Test p10Comment"
+  p10Weight: 1.0
+  p11SelfOrganisingTeams: 1
+  p11Comment: "Test p11Comment"
+  p11Weight: 1.0
+  p12RegularReflection: 1
+  p12Comment: "Test p12Comment"
+  p12Weight: 1.0
+  overallNotes: "Test overallNotes"
+  respondentId: 321246

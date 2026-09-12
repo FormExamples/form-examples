@@ -1,0 +1,15 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 137465
+  deletedAt: null
+  safeguardingConcern: "yes"
+  safeguardingType: "Test safeguardingType"
+  referralMade: "yes"
+  mentalCapacityAssessment: "Test mentalCapacityAssessment"
+  mentalHealthActStatus: "Test mentalHealthActStatus"
+  consentForTreatment: "verbal"
+  completedByName: "Test completedByName"
+  completedByRole: "Test completedByRole"
+  completedByGmcNumber: "Test completedByGmcNumber"
+  seniorReviewingClinician: "Test seniorReviewingClinician"
+  casualtyCardId: 233761

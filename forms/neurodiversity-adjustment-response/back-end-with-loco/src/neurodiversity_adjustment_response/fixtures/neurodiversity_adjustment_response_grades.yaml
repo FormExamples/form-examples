@@ -1,0 +1,14 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "b760eeea-386a-56d5-b978-760fb38f3088"
+  deletedAt: null
+  outcomeClassification: "fully-agreed"
+  legalRiskBand: "ok"
+  completenessPercent: 1
+  followUpUrgency: "none"
+  targetTimeframe: "Test targetTimeframe"
+  recommendation: "implement"
+  managerNotes: "Test managerNotes"
+  signedAt: "2026-01-01T00:00:00Z"
+  gradedAt: "2026-01-01T00:00:00Z"
+  neurodiversityAdjustmentResponseId: "8a28a02d-1a8f-5b89-bda9-20d655d4cd75"

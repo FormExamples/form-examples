@@ -1,0 +1,83 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 623820
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "gp"
+  reviewDate: "1990-01-01"
+  careSetting: "general-practice"
+  reviewType: "routine-annual"
+  lastReviewDate: "1990-01-01"
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "18-39"
+  sex: "female"
+  yearOfDiagnosis: 1
+  heartFailureType: "reduced"
+  latestLvef: 1.0
+  lastEchoDate: "1990-01-01"
+  aetiology: "ischaemic"
+  nyhaClass: 1
+  breathlessness: "none"
+  orthopnoea: "yes"
+  paroxysmalNocturnalDyspnoea: "yes"
+  fatigue: "none"
+  changeSinceLastReview: "improved"
+  decompensation: "yes"
+  weightKg: 1.0
+  weightChangeKg: 1.0
+  peripheralOedema: "none"
+  raisedJvp: "yes"
+  lungCrackles: "yes"
+  systolicBloodPressure: 1
+  diastolicBloodPressure: 1
+  heartRate: 1
+  heartRhythm: "sinus"
+  ntProBnp: 1.0
+  sodium: 1.0
+  potassium: 1.0
+  urea: 1.0
+  creatinine: 1.0
+  egfr: 1.0
+  haemoglobin: 1.0
+  ferritin: 1.0
+  transferrinSaturation: 1.0
+  hba1c: 1.0
+  bloodsDate: "1990-01-01"
+  raasInhibitorStatus: "prescribed"
+  raasInhibitorAgent: "Test raasInhibitorAgent"
+  raasInhibitorDose: "Test raasInhibitorDose"
+  raasInhibitorAtTargetDose: "yes"
+  raasInhibitorAdherence: "good"
+  betaBlockerStatus: "prescribed"
+  betaBlockerAgent: "Test betaBlockerAgent"
+  betaBlockerDose: "Test betaBlockerDose"
+  betaBlockerAtTargetDose: "yes"
+  betaBlockerAdherence: "good"
+  mraStatus: "prescribed"
+  mraAgent: "Test mraAgent"
+  mraDose: "Test mraDose"
+  mraAtTargetDose: "yes"
+  mraAdherence: "good"
+  sglt2InhibitorStatus: "prescribed"
+  sglt2InhibitorAgent: "Test sglt2InhibitorAgent"
+  sglt2InhibitorDose: "Test sglt2InhibitorDose"
+  sglt2InhibitorAtTargetDose: "yes"
+  sglt2InhibitorAdherence: "good"
+  loopDiureticAgent: "Test loopDiureticAgent"
+  loopDiureticDose: "Test loopDiureticDose"
+  otherMedications: "Test otherMedications"
+  icd: "yes"
+  crt: "yes"
+  pacemaker: "yes"
+  deviceCheckStatus: "up-to-date"
+  influenzaVaccination: "yes"
+  pneumococcalVaccination: "yes"
+  covidVaccination: "yes"
+  smokingStatus: "never"
+  alcoholStatus: "none"
+  dailyWeights: "yes"
+  selfManagementPlan: "yes"
+  cardiacRehab: "yes"
+  reviewContext: "Test reviewContext"
+  patientId: 965991
+  clinicianId: null

@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 946274
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "ferromagnetic-implant"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  mriScanTestRequestGradeId: 194623

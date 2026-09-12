@@ -1,0 +1,69 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 550761
+  deletedAt: null
+  status: "draft"
+  screeningPurpose: "occupational-pre-placement"
+  siteName: "Test siteName"
+  assessmentDate: "1990-01-01"
+  assessmentMode: "in-person"
+  usualActivityLevel: "sedentary"
+  moderateExerciseDaysPerWeek: 1
+  fruitAndVegetablePortionsPerDay: 1
+  dietNotes: "Test dietNotes"
+  smokingStatus: "never"
+  cigarettesPerDay: 1
+  auditCFrequency: 1
+  auditCTypicalQuantity: 1
+  auditCBingeFrequency: 1
+  conditionDiabetes: "yes"
+  conditionHypertension: "yes"
+  conditionAsthma: "yes"
+  conditionCopd: "yes"
+  conditionHeartDisease: "yes"
+  conditionKidneyDisease: "yes"
+  conditionThyroid: "yes"
+  conditionOther: "Test conditionOther"
+  pastSurgeries: "Test pastSurgeries"
+  currentMedications: "Test currentMedications"
+  knownDrugAllergies: "No known allergies"
+  familyHistoryPrematureCardiacEvent: "yes"
+  familyHistoryOther: "Test familyHistoryOther"
+  symptomUnexplainedChestPain: "yes"
+  symptomDizzySpellsOrFainting: "yes"
+  symptomPersistentCoughOver3Weeks: "yes"
+  symptomUnexplainedWeightLoss: "yes"
+  symptomJointPainRestrictingMovement: "yes"
+  symptomShortnessOfBreathOnExertion: "yes"
+  symptomPalpitations: "yes"
+  parqDiagnosedHeartCondition: "yes"
+  parqChestPainAtRest: "yes"
+  parqChestPainDuringActivity: "yes"
+  parqDizzinessOrLossOfConsciousness: "yes"
+  parqOtherChronicMedicalCondition: "yes"
+  parqPrescribedMedicationForChronicCondition: "yes"
+  parqBoneOrJointProblem: "yes"
+  heightAsCm: 170.2
+  weightAsKg: 70.4
+  bodyMassIndex: 24.2
+  restingBloodPressureSystolic: 1
+  restingBloodPressureDiastolic: 1
+  restingHeartRate: 1
+  jobRole: "Test jobRole"
+  physicalDemandsOfRole: "sedentary"
+  exposureNoise: "yes"
+  exposureChemicals: "yes"
+  exposureManualHandling: "yes"
+  exposureOther: "yes"
+  exposureOtherDetail: "Test exposureOtherDetail"
+  stressLevel: 1
+  sleepQuality: 1
+  mentalHealthConcern: "yes"
+  mentalHealthConcernNote: "Test mentalHealthConcernNote"
+  vaccinationUpToDate: "yes"
+  vaccinationGapsNote: "Test vaccinationGapsNote"
+  consentToScreening: "yes"
+  informationAccurateConfirmed: "yes"
+  interpreterRequired: "yes"
+  patientId: 818668
+  assessorId: 602887

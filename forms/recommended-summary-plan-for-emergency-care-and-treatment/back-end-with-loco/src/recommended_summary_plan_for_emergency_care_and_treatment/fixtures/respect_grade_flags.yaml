@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 496031
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "cpr-not-documented"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  respectGradeId: 141167

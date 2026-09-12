@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 943747
+  deletedAt: null
+  ruleId: "Test ruleId"
+  instrument: "criterion"
+  points: 1
+  band: "likely"
+  category: "Test category"
+  description: "Test description"
+  wellsScoreForDeepVeinThrombosisGradeId: 290585

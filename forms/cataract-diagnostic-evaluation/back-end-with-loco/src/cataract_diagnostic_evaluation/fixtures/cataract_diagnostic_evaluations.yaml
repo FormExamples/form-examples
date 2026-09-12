@@ -1,0 +1,104 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 503803
+  deletedAt: null
+  status: "draft"
+  assessmentDate: "1990-01-01"
+  assessmentTime: "Test assessmentTime"
+  blurredVision: "yes"
+  glareOrHalos: "yes"
+  nightDrivingDifficulty: "yes"
+  fadedColourPerception: "yes"
+  frequentPrescriptionChanges: "yes"
+  symptomDurationMonths: 1.0
+  symptomLaterality: "right-eye"
+  presentingComplaintNotes: "Test presentingComplaintNotes"
+  historyDiabetes: "yes"
+  historyPriorEyeSurgery: "yes"
+  historyPriorEyeSurgeryDetail: "Test historyPriorEyeSurgeryDetail"
+  historyOcularTrauma: "yes"
+  historyUveitis: "yes"
+  historySteroidUse: "none"
+  historyFamilyCataract: "yes"
+  historySmokingStatus: "never"
+  historyHighUvExposure: "yes"
+  historyHighMyopia: "yes"
+  medicalHistoryNotes: "Test medicalHistoryNotes"
+  unaidedVaLogmarRight: 1.0
+  unaidedVaLogmarLeft: 1.0
+  unaidedVaSnellenRight: "Test unaidedVaSnellenRight"
+  unaidedVaSnellenLeft: "Test unaidedVaSnellenLeft"
+  bestCorrectedVaLogmarRight: 1.0
+  bestCorrectedVaLogmarLeft: 1.0
+  bestCorrectedVaSnellenRight: "Test bestCorrectedVaSnellenRight"
+  bestCorrectedVaSnellenLeft: "Test bestCorrectedVaSnellenLeft"
+  pinholeVaLogmarRight: 1.0
+  pinholeVaLogmarLeft: 1.0
+  pinholeVaSnellenRight: "Test pinholeVaSnellenRight"
+  pinholeVaSnellenLeft: "Test pinholeVaSnellenLeft"
+  refractionSphereRight: 1.0
+  refractionSphereLeft: 1.0
+  refractionCylinderRight: 1.0
+  refractionCylinderLeft: 1.0
+  refractionAxisRight: 1
+  refractionAxisLeft: 1
+  refractionStability: "stable"
+  locsIiiNoRight: 1.0
+  locsIiiNoLeft: 1.0
+  locsIiiNcRight: 1.0
+  locsIiiNcLeft: 1.0
+  locsIiiCRight: 1.0
+  locsIiiCLeft: 1.0
+  locsIiiPRight: 1.0
+  locsIiiPLeft: 1.0
+  cataractTypeRight: "nuclear"
+  cataractTypeLeft: "nuclear"
+  anteriorChamberDepthRight: "normal"
+  anteriorChamberDepthLeft: "normal"
+  cornealClarityRight: "clear"
+  cornealClarityLeft: "clear"
+  pupilReactionRight: "normal"
+  pupilReactionLeft: "normal"
+  glareAcuityResultRight: "Test glareAcuityResultRight"
+  glareAcuityResultLeft: "Test glareAcuityResultLeft"
+  glareFunctionalImpact: "none"
+  intraocularPressureRightMmhg: 1.0
+  intraocularPressureLeftMmhg: 1.0
+  tonometryMethod: "goldmann"
+  dilatedFundusExamPerformed: "yes"
+  opticDiscCupDiscRatioRight: 1.0
+  opticDiscCupDiscRatioLeft: 1.0
+  maculaFindingsRight: "normal"
+  maculaFindingsLeft: "normal"
+  retinalFindingsRight: "Test retinalFindingsRight"
+  retinalFindingsLeft: "Test retinalFindingsLeft"
+  viewObscuredByCataractRight: "yes"
+  viewObscuredByCataractLeft: "yes"
+  glaucomaSuspected: "yes"
+  glaucomaNotes: "Test glaucomaNotes"
+  amdSuspected: "yes"
+  amdNotes: "Test amdNotes"
+  diabeticRetinopathySuspected: "yes"
+  diabeticRetinopathyNotes: "Test diabeticRetinopathyNotes"
+  biometryPerformed: "yes"
+  axialLengthRightMm: 1.0
+  axialLengthLeftMm: 1.0
+  keratometryK1Right: 1.0
+  keratometryK1Left: 1.0
+  keratometryK2Right: 1.0
+  keratometryK2Left: 1.0
+  octPerformed: "yes"
+  octFindings: "Test octFindings"
+  calculatedIolPowerRight: 1.0
+  calculatedIolPowerLeft: 1.0
+  functionalDifficultyReading: 1
+  functionalDifficultyDriving: 1
+  functionalDifficultyDailyActivities: 1
+  functionalImpactNotes: "Test functionalImpactNotes"
+  managementRecommendation: "monitor"
+  eyeForSurgery: "right"
+  risksBenefitsCounselled: "yes"
+  consentDiscussed: "yes"
+  managementNotes: "Test managementNotes"
+  patientId: 424998
+  clinicianId: 728560

@@ -78,6 +78,53 @@ impl Hooks for App {
             &format!("{}/src/prescription_request/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/prescription_request/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/prescription_request/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::prescription_requests::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/prescription_request/fixtures/prescription_requests.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/prescription_request/fixtures/grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::prescription_details::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/prescription_request/fixtures/prescription_details.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::prescription_request_types::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/prescription_request/fixtures/prescription_request_types.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::prescription_substitution_options::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/prescription_request/fixtures/prescription_substitution_options.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::grading_additional_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/prescription_request/fixtures/grading_additional_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::grading_fired_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/prescription_request/fixtures/grading_fired_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 114777
+  deletedAt: null
+  resultCategory: "Test resultCategory"
+  resultScore: 1.0
+  resultNotes: "Test resultNotes"
+  gradedAt: "2026-01-01T00:00:00Z"
+  assessmentId: 510868

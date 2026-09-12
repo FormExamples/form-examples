@@ -1,0 +1,37 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "8a28a02d-1a8f-5b89-bda9-20d655d4cd75"
+  deletedAt: null
+  responseStatus: "draft"
+  requestReference: "Test requestReference"
+  handlingMethod: "meeting"
+  assessedDate: "1990-01-01"
+  respondedDate: "1990-01-01"
+  effectiveDate: "1990-01-01"
+  overallDecision: "agreed"
+  decisionRationale: "Test decisionRationale"
+  declineReasonCategory: "not-reasonable"
+  agreedWorkingEnvironment: true
+  agreedEquipmentTechnology: true
+  agreedWorkingArrangements: true
+  agreedCommunication: true
+  agreedSupportMentoring: true
+  agreedRecruitmentProcess: true
+  agreedPolicyDress: true
+  agreedOther: true
+  agreedAdjustmentsDetail: "Test agreedAdjustmentsDetail"
+  alternativeAdjustmentsDetail: "Test alternativeAdjustmentsDetail"
+  trialPeriod: true
+  trialPeriodWeeks: 1
+  reviewScheduled: true
+  reviewDate: "1990-01-01"
+  occupationalHealthReferred: true
+  accessToWorkReferred: true
+  supportResourcesDetail: "Test supportResourcesDetail"
+  responsibilitiesDetail: "Test responsibilitiesDetail"
+  pointOfContact: "Test pointOfContact"
+  escalated: true
+  escalationDetail: "Test escalationDetail"
+  notes: "Test notes"
+  workerId: "d086443f-6f7b-5985-a958-2669b26e026f"
+  managerId: "51e40742-77a2-595d-8d9d-0cf81267524d"

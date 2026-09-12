@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 177645
+  deletedAt: null
+  role: "planned-primary"
+  opcs4Code: "Test opcs4Code"
+  name: "Test Patient"
+  description: "Test description"
+  laterality: "left"
+  sequenceIndex: 1
+  medicalOperationNoteId: 506012

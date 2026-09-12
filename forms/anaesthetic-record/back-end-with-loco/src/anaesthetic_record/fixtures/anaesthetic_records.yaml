@@ -1,0 +1,60 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 935041
+  deletedAt: null
+  theatre: "Test theatre"
+  operationDate: "1990-01-01"
+  anaesthetistName: "Test anaesthetistName"
+  assistantName: "Test assistantName"
+  surgeonName: "Test surgeonName"
+  plannedProcedure: "Test plannedProcedure"
+  urgency: "elective"
+  machineChecked: "yes"
+  whoSignIn: "yes"
+  whoTimeOut: "yes"
+  consentConfirmed: "yes"
+  fastingConfirmed: "yes"
+  ivAccess: "Test ivAccess"
+  allergyBandChecked: "yes"
+  documentedAllergies: "No known allergies"
+  asaStatus: "I"
+  asaEmergencyModifier: "yes"
+  mallampatiClass: 1
+  mouthOpeningCm: 1.0
+  thyromentalDistanceCm: 1.0
+  dentition: "Test dentition"
+  anticipatedDifficultAirway: "yes"
+  priorDifficultIntubation: "yes"
+  airwayTechnique: "facemask"
+  deviceSize: "Test deviceSize"
+  tubeDepthCm: 1.0
+  cuffed: "yes"
+  cormackLehaneGrade: 1
+  intubationAttempts: 1
+  capnographyConfirmed: "yes"
+  monitoringModalities: "Test monitoringModalities"
+  anaestheticTechnique: "general"
+  crystalloidMl: 1.0
+  colloidMl: 1.0
+  bloodProductsMl: 1.0
+  estimatedBloodLossMl: 1.0
+  urineOutputMl: 1.0
+  cellSalvageMl: 1.0
+  regionalTechnique: "none"
+  regionalLevel: "Test regionalLevel"
+  regionalDrug: "Test regionalDrug"
+  regionalDoseMg: 1.0
+  blockHeight: "Test blockHeight"
+  regionalComplications: "Test regionalComplications"
+  recoveryDestination: "recovery"
+  handoverAirwayStatus: "Test handoverAirwayStatus"
+  analgesiaPlan: "Test analgesiaPlan"
+  antiemeticPlan: "Test antiemeticPlan"
+  oxygenPlan: "Test oxygenPlan"
+  outstandingTasks: "Test outstandingTasks"
+  handoverAt: "2026-01-01T00:00:00Z"
+  receivingPractitioner: "Test receivingPractitioner"
+  anaesthetistSignature: "Test anaesthetistSignature"
+  signedAt: "2026-01-01T00:00:00Z"
+  patientId: 813987
+  clinicianId: null

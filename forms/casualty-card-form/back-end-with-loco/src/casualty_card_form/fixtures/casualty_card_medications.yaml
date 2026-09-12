@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 519231
+  deletedAt: null
+  name: "Test Patient"
+  dose: "Test dose"
+  frequency: "Test frequency"
+  sortOrder: 1
+  casualtyCardId: 233761

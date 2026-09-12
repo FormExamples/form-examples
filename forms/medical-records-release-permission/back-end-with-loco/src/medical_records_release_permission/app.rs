@@ -82,6 +82,73 @@ impl Hooks for App {
             &format!("{}/src/medical_records_release_permission/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_records_release_permission/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_records_release_permission/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::release_forms::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_records_release_permission/fixtures/release_forms.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::authorization_periods::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_records_release_permission/fixtures/authorization_periods.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::authorized_recipients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_records_release_permission/fixtures/authorized_recipients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patient_rights::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_records_release_permission/fixtures/patient_rights.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::purpose_of_releases::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_records_release_permission/fixtures/purpose_of_releases.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::records_to_releases::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_records_release_permission/fixtures/records_to_releases.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::restrictions_limitations::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_records_release_permission/fixtures/restrictions_limitations.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::signature_consents::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_records_release_permission/fixtures/signature_consents.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::validation_results::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_records_release_permission/fixtures/validation_results.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::validation_additional_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_records_release_permission/fixtures/validation_additional_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::validation_fired_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_records_release_permission/fixtures/validation_fired_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

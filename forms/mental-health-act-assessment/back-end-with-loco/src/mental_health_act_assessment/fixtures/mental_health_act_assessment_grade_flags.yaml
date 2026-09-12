@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 568641
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "criteria-not-met"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  mentalHealthActAssessmentGradeId: 186565

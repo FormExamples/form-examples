@@ -77,6 +77,48 @@ impl Hooks for App {
             &format!("{}/src/meeting/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::organizers::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/meeting/fixtures/organizers.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::meetings::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/meeting/fixtures/meetings.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::action_items::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/meeting/fixtures/action_items.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::agenda_items::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/meeting/fixtures/agenda_items.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::meeting_outputs::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/meeting/fixtures/meeting_outputs.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::participants::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/meeting/fixtures/participants.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::recurring_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/meeting/fixtures/recurring_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::resources::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/meeting/fixtures/resources.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

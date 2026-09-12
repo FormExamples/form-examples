@@ -1,0 +1,15 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 233468
+  deletedAt: null
+  total24hVolumeMl: 1.0
+  first8hVolumeMl: 1.0
+  next16hVolumeMl: 1.0
+  hoursSinceInjury: 1.0
+  remainingFirst8hHours: 1.0
+  first8hRateMlH: 1.0
+  next16hRateMlH: 1.0
+  urineOutputTargetMinMlH: 1.0
+  urineOutputTargetMaxMlH: 1.0
+  gradedAt: "2026-01-01T00:00:00Z"
+  parklandFormulaForBurnsId: 1

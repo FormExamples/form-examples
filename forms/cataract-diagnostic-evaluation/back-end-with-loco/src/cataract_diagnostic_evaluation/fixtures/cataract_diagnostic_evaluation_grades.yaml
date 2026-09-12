@@ -1,0 +1,15 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 189391
+  deletedAt: null
+  computedLocsIiiSeverityRight: "mild"
+  computedLocsIiiSeverityLeft: "mild"
+  computedSurgicalCandidacy: "not-indicated"
+  finalSurgicalCandidacy: "not-indicated"
+  overrideReason: "Test overrideReason"
+  functionalImpactScore: 1
+  clinicianNotes: "Test clinicianNotes"
+  signedByName: "Test signedByName"
+  signedAt: "2026-01-01T00:00:00Z"
+  gradedAt: "2026-01-01T00:00:00Z"
+  cataractDiagnosticEvaluationId: 503803

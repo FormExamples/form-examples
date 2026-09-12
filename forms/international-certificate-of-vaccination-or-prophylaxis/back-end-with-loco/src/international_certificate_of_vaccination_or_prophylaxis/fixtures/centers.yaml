@@ -1,0 +1,17 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 798855
+  deletedAt: null
+  name: "Test Patient"
+  whoDesignationReference: "Test whoDesignationReference"
+  nationalAuthorityReference: "Test nationalAuthorityReference"
+  email: "test.patient@example.com"
+  phone: "+441234567890"
+  postalAddressAsFullText: "10 Downing Street, London"
+  countryAsIso31661Alpha2: "GB"
+  countryAsIso31661Alpha3: "GB"
+  postcode: "SW1A 2AA"
+  uniformStampImageDataUrl: "Test uniformStampImageDataUrl"
+  authorisedDiseases: "Test authorisedDiseases"
+  designationValidFrom: "1990-01-01"
+  designationValidUntil: "1990-01-01"

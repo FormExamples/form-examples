@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 567599
+  deletedAt: null
+  internationalNonproprietaryName: "Test internationalNonproprietaryName"
+  brandName: "Test brandName"
+  kind: "prescription"
+  holdClass: "anticoagulant"
+  holdRequired: true
+  defaultHoldStartBeforeDays: 1
+  defaultRestartAfterDays: 1
+  perioperativeHoldGuidance: "Test perioperativeHoldGuidance"
+  description: "Test description"

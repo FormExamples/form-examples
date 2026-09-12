@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 605558
+  deletedAt: null
+  problemStatement: "Test problemStatement"
+  adlCategory: "safe-environment"
+  actualOrPotential: "actual"
+  assessmentData: "Test assessmentData"
+  linkedRisk: "none"
+  evaluationNote: "Test evaluationNote"
+  goalMet: "met"
+  nextReviewDate: "1990-01-01"
+  nursingCarePlanId: 601093

@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 652235
+  deletedAt: null
+  formVersion: "Test formVersion"
+  jurisdiction: "england"
+  status: "draft"
+  opgReference: "Test opgReference"
+  registeredAt: "2026-01-01T00:00:00Z"
+  effectiveFrom: "2026-01-01T00:00:00Z"
+  notes: "Test notes"
+  donorId: 175779
+  certificateProviderId: 821120

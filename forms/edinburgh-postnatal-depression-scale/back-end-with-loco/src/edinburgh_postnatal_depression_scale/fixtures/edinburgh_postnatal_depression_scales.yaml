@@ -1,0 +1,27 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 709311
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "midwife"
+  careSetting: "maternity"
+  assessedAt: "2026-01-01T00:00:00Z"
+  perinatalStage: "antenatal"
+  perinatalWeek: 1.0
+  respondentIdentifier: "Test respondentIdentifier"
+  ageBand: "under-20"
+  preferredLanguage: "Test preferredLanguage"
+  assistanceNeeded: "none"
+  item1: 1
+  item2: 1
+  item3: 1
+  item4: 1
+  item5: 1
+  item6: 1
+  item7: 1
+  item8: 1
+  item9: 1
+  item10: 1
+  clinicalNote: "Test clinicalNote"
+  patientId: 595910
+  clinicianId: null

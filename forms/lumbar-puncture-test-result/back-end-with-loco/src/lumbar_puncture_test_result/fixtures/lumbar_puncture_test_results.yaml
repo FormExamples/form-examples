@@ -1,0 +1,37 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 383783
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  clinicalHistory: "Test clinicalHistory"
+  openingPressureCmh2o: 1.0
+  csfAppearance: "clear"
+  csfWhiteCellCount: 1.0
+  csfRedCellCount: 1.0
+  csfProteinGL: 1.0
+  csfGlucoseMmolL: 1.0
+  csfSerumGlucoseRatio: 1.0
+  csfLactateMmolL: 1.0
+  gramStainResult: "Test gramStainResult"
+  cultureResult: "Test cultureResult"
+  pcrResult: "Test pcrResult"
+  oligoclonalBands: "positive"
+  xanthochromia: "positive"
+  raisedProtein: true
+  pleocytosis: true
+  lowGlucose: true
+  bacterialMeningitisPattern: true
+  viralPattern: true
+  subarachnoidHaemorrhageSuggested: true
+  normalCsf: true
+  findingsNarrative: "Test findingsNarrative"
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 570603
+  clinicianId: 325246

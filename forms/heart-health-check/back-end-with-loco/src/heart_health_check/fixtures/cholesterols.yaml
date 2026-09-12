@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 802030
+  deletedAt: null
+  totalCholesterol: 1.0
+  hdlCholesterol: 1.0
+  totalHdlRatio: 1.0
+  onStatin: "yes"
+  assessmentId: 172043

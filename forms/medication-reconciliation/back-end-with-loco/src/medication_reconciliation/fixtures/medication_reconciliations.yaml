@@ -1,0 +1,16 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 376586
+  deletedAt: null
+  reconciliationType: "admission"
+  careSetting: "emergency-department"
+  reconciledAt: "2026-01-01T00:00:00Z"
+  clinicianName: "Test clinicianName"
+  clinicianRole: "pharmacist"
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "adult"
+  sex: "female"
+  weightKg: 1.0
+  allergyStatus: "documented"
+  patientId: 639916
+  clinicianId: null

@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 239031
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "suspected-dvt-urgent"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  ultrasoundTestRequestGradeId: 918861

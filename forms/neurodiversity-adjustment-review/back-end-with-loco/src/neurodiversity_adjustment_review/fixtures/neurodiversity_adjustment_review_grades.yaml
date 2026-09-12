@@ -1,0 +1,14 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "073feabe-f3f1-56cf-b062-50f55bc1359c"
+  deletedAt: null
+  effectivenessBand: "effective"
+  wellbeingRiskBand: "ok"
+  completenessPercent: 1
+  nextStepUrgency: "none"
+  targetTimeframe: "Test targetTimeframe"
+  recommendation: "maintain"
+  managerNotes: "Test managerNotes"
+  signedAt: "2026-01-01T00:00:00Z"
+  gradedAt: "2026-01-01T00:00:00Z"
+  neurodiversityAdjustmentReviewId: "b1361863-39ce-51cb-8c11-7fc8be596d35"

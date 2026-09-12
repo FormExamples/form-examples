@@ -1,0 +1,32 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 923435
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  specimenCondition: "satisfactory"
+  clinicalHistory: "Test clinicalHistory"
+  onAnticoagulant: true
+  anticoagulantAgent: "Test anticoagulantAgent"
+  prothrombinTimeSeconds: 1.0
+  inr: 1.0
+  activatedPartialThromboplastinTimeSeconds: 1.0
+  apttRatio: 1.0
+  fibrinogenGL: 1.0
+  dDimer: 1.0
+  thrombinTimeSeconds: 1.0
+  factorAssays: "Test factorAssays"
+  overallResultStatus: "normal"
+  criticalValuePresent: true
+  criticalValueDetail: "Test criticalValueDetail"
+  findingsNarrative: "Test findingsNarrative"
+  comparisonWithPrevious: "Test comparisonWithPrevious"
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 698644
+  clinicianId: 440007

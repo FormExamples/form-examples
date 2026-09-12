@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 718823
+  deletedAt: null
+  ruleId: "Test ruleId"
+  instrument: "precondition"
+  region: "ankle"
+  category: "Test category"
+  description: "Test description"
+  ottawaAnkleRulesGradeId: 666894

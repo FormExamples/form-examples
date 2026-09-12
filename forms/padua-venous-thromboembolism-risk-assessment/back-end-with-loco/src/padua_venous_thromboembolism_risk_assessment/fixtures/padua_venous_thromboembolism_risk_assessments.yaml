@@ -1,0 +1,27 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 753436
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "doctor"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "acute-medical"
+  admissionReason: "Test admissionReason"
+  patientIdentifier: "Test patientIdentifier"
+  ageYears: 1.0
+  sex: "female"
+  activeCancer: "yes"
+  previousVte: "yes"
+  reducedMobility: "yes"
+  knownThrombophilia: "yes"
+  recentTraumaOrSurgery: "yes"
+  heartOrRespiratoryFailure: "yes"
+  acuteMiOrIschaemicStroke: "yes"
+  acuteInfectionOrRheumatological: "yes"
+  bodyMassIndex: 24.2
+  ongoingHormonalTreatment: "yes"
+  activeBleeding: "yes"
+  highBleedingRisk: "yes"
+  clinicalNote: "Test clinicalNote"
+  patientId: 222016
+  clinicianId: null

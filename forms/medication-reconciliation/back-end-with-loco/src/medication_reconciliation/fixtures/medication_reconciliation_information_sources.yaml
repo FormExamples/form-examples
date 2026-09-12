@@ -1,0 +1,7 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 683965
+  deletedAt: null
+  sourceType: "patient-interview"
+  verified: true
+  medicationReconciliationId: 376586

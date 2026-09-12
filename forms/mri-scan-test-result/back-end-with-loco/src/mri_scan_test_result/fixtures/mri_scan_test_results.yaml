@@ -1,0 +1,31 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 739442
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  bodyRegion: "brain"
+  contrastUsed: "none"
+  sequencesPerformed: "Test sequencesPerformed"
+  examinationAdequacy: "adequate"
+  clinicalHistory: "Test clinicalHistory"
+  comparisonWithPrevious: "Test comparisonWithPrevious"
+  findingsNarrative: "Test findingsNarrative"
+  massOrLesion: true
+  haemorrhage: true
+  infarct: true
+  demyelination: true
+  discHerniation: true
+  cordCompression: true
+  infectionInflammation: true
+  incidentalFinding: true
+  largestLesionSizeMm: 1.0
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 259101
+  clinicianId: 252593

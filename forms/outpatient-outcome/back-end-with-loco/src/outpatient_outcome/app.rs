@@ -80,6 +80,63 @@ impl Hooks for App {
             &format!("{}/src/outpatient_outcome/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/outpatient_outcome/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/outpatient_outcome/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::outpatient_outcomes::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/outpatient_outcome/fixtures/outpatient_outcomes.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::outpatient_outcome_clinicals::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/outpatient_outcome/fixtures/outpatient_outcome_clinicals.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::outpatient_outcome_encounters::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/outpatient_outcome/fixtures/outpatient_outcome_encounters.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::outpatient_outcome_followups::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/outpatient_outcome/fixtures/outpatient_outcome_followups.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::outpatient_outcome_operationals::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/outpatient_outcome/fixtures/outpatient_outcome_operationals.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::outpatient_outcome_prem_ffts::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/outpatient_outcome/fixtures/outpatient_outcome_prem_ffts.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::outpatient_outcome_prom_eq5d5ls::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/outpatient_outcome/fixtures/outpatient_outcome_prom_eq5d5ls.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::outpatient_outcome_prom_grcs::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/outpatient_outcome/fixtures/outpatient_outcome_prom_grcs.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::outpatient_outcome_prom_promis::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/outpatient_outcome/fixtures/outpatient_outcome_prom_promis.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

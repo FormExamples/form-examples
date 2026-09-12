@@ -1,0 +1,23 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 618030
+  deletedAt: null
+  status: "Test status"
+  patientIdentifier: "Test patientIdentifier"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "Test careSetting"
+  ageBand: "Test ageBand"
+  symptomaticLeg: "Test symptomaticLeg"
+  activeCancer: "Test activeCancer"
+  paralysisOrImmobilisation: "Test paralysisOrImmobilisation"
+  recentlyBedriddenOrSurgery: "Test recentlyBedriddenOrSurgery"
+  localisedTenderness: "Test localisedTenderness"
+  entireLegSwollen: "Test entireLegSwollen"
+  calfSwellingOver3cm: "Test calfSwellingOver3cm"
+  pittingOedema: "Test pittingOedema"
+  collateralSuperficialVeins: "Test collateralSuperficialVeins"
+  previouslyDocumentedDvt: "Test previouslyDocumentedDvt"
+  alternativeDiagnosisAsLikely: "Test alternativeDiagnosisAsLikely"
+  clinicalNotes: "Test clinicalNotes"
+  patientId: 645860
+  clinicianId: null

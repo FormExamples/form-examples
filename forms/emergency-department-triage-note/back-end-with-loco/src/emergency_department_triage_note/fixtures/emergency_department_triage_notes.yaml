@@ -1,0 +1,39 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 157067
+  deletedAt: null
+  status: "draft"
+  nurseName: "Test nurseName"
+  triagedAt: "2026-01-01T00:00:00Z"
+  careSetting: "emergency-department"
+  arrivalMode: "walk-in"
+  arrivedAt: "2026-01-01T00:00:00Z"
+  referralSource: "Test referralSource"
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "paediatric"
+  presentingComplaint: "Test presentingComplaint"
+  briefHistory: "Test briefHistory"
+  symptomOnset: "Test symptomOnset"
+  respiratoryRate: 1
+  spo2: 1
+  onOxygen: "air"
+  systolicBp: 1
+  pulse: 1
+  consciousnessAcvpu: "A"
+  temperature: 1.0
+  glasgowComaScale: 1
+  painScore: 1
+  airwayThreat: "yes"
+  breathingInadequate: "yes"
+  circulationShock: "yes"
+  haemorrhageMajor: "yes"
+  consciousnessReduced: "yes"
+  seizureActive: "yes"
+  focalNeurology: "yes"
+  sepsisFeatures: "yes"
+  chestPainCardiac: "yes"
+  strokeFeatures: "yes"
+  paediatricRedFlag: "yes"
+  clinicalNotes: "Test clinicalNotes"
+  patientId: 522508
+  clinicianId: null

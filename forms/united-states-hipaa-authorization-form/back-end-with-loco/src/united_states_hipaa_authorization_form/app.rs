@@ -82,6 +82,73 @@ impl Hooks for App {
             &format!("{}/src/united_states_hipaa_authorization_form/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_states_hipaa_authorization_form/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::hipaa_authorizations::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_states_hipaa_authorization_form/fixtures/hipaa_authorizations.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::authorized_recipients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_states_hipaa_authorization_form/fixtures/authorized_recipients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::disclosing_sources::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_states_hipaa_authorization_form/fixtures/disclosing_sources.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::expirations::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_states_hipaa_authorization_form/fixtures/expirations.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patient_rights_acknowledgements::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_states_hipaa_authorization_form/fixtures/patient_rights_acknowledgements.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::purpose_of_disclosures::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_states_hipaa_authorization_form/fixtures/purpose_of_disclosures.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::records_to_discloses::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_states_hipaa_authorization_form/fixtures/records_to_discloses.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::signature_witnesses::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_states_hipaa_authorization_form/fixtures/signature_witnesses.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::signers::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_states_hipaa_authorization_form/fixtures/signers.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::validation_results::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_states_hipaa_authorization_form/fixtures/validation_results.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::validation_additional_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_states_hipaa_authorization_form/fixtures/validation_additional_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::validation_fired_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_states_hipaa_authorization_form/fixtures/validation_fired_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

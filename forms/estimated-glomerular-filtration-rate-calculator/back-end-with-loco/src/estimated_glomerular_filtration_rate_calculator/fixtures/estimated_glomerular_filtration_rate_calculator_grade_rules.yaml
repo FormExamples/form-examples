@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 787117
+  deletedAt: null
+  ruleId: "Test ruleId"
+  instrument: "conversion"
+  band: "G1"
+  category: "Test category"
+  description: "Test description"
+  estimatedGlomerularFiltrationRateCalculatorGradeId: 173179

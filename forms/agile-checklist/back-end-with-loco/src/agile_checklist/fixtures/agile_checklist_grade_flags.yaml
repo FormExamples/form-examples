@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 330189
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "teams-autonomy-risk"
+  priority: "low"
+  section: "teams"
+  triggeringItems: "Test triggeringItems"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  agileChecklistGradeId: 765544

@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 571751
+  deletedAt: null
+  ruleId: "Test ruleId"
+  criterion: "hypertension"
+  points: 1
+  category: "Test category"
+  description: "Test description"
+  hasBledScoreForMajorBleedingRiskGradeId: 181463

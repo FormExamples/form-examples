@@ -1,0 +1,23 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 154184
+  deletedAt: null
+  includeMedicalHealth: "yes"
+  medicalHealthInitials: "Test medicalHealthInitials"
+  includeMentalHealth: "yes"
+  mentalHealthInitials: "Test mentalHealthInitials"
+  includeSubstanceUse: "yes"
+  substanceUseInitials: "Test substanceUseInitials"
+  part2RedisclosureNoticeIncluded: "yes"
+  includeHivAids: "yes"
+  hivAidsInitials: "Test hivAidsInitials"
+  hivAidsStateConsentIncluded: "yes"
+  includePsychotherapyNotes: "yes"
+  includeGeneticInformation: "yes"
+  includeReproductiveHealth: "yes"
+  section7332NoticeIncluded: "yes"
+  dateRangeSpecified: "yes"
+  dateFrom: "1990-01-01"
+  dateTo: "1990-01-01"
+  otherDescription: "Test otherDescription"
+  hipaaAuthorizationId: 962728

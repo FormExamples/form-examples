@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 630325
+  deletedAt: null
+  ruleId: "Test ruleId"
+  category: "Test category"
+  criticality: "critical"
+  satisfied: true
+  description: "Test description"
+  anaestheticRecordGradeId: 148820

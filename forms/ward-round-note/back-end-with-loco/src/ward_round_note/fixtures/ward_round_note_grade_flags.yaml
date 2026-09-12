@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 538100
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "deteriorating-news2-escalation"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  wardRoundNoteGradeId: 213854

@@ -1,0 +1,23 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 592010
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "emergency-physician"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "emergency-department"
+  presentationType: "nstemi"
+  patientIdentifier: "Test patientIdentifier"
+  ageYears: 1
+  sex: "female"
+  heartRate: 1
+  systolicBloodPressure: 1
+  serumCreatinine: 1.0
+  serumCreatinineUnit: "mg/dL"
+  killipClass: "I"
+  cardiacArrestAtAdmission: "yes"
+  stSegmentDeviation: "yes"
+  elevatedCardiacEnzymes: "yes"
+  clinicalNote: "Test clinicalNote"
+  patientId: 227911
+  clinicianId: null

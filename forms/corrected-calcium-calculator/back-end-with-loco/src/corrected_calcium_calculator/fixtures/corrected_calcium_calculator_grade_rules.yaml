@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 625904
+  deletedAt: null
+  ruleId: "Test ruleId"
+  instrument: "correction"
+  band: "hypocalcaemia"
+  category: "Test category"
+  description: "Test description"
+  correctedCalciumCalculatorGradeId: 370149

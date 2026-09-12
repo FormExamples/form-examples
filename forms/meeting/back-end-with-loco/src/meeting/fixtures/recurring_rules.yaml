@@ -1,0 +1,15 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 515159
+  deletedAt: null
+  frequency: "none"
+  intervalCount: 1
+  byDayOfWeek: "Test byDayOfWeek"
+  byDayOfMonth: 1
+  bySetPosition: 1
+  byMonthOfYear: 1
+  seriesCount: 1
+  seriesUntil: "2026-01-01T00:00:00Z"
+  timezone: "Test timezone"
+  rruleText: "Test rruleText"
+  meetingId: 247312

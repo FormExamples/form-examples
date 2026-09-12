@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 914407
+  deletedAt: null
+  acknowledgedRightToRevoke: "yes"
+  acknowledgedRevocationProcedure: "yes"
+  acknowledgedNoConditioning: "yes"
+  acknowledgedRedisclosureWarning: "yes"
+  acknowledgedRightToCopy: "yes"
+  acknowledgedRightToInspectDisclosed: "yes"
+  hipaaAuthorizationId: 962728

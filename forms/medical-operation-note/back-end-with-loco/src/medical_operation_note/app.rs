@@ -86,6 +86,73 @@ impl Hooks for App {
             &format!("{}/src/medical_operation_note/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_operation_note/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_operation_note/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medical_operation_notes::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_operation_note/fixtures/medical_operation_notes.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medical_operation_note_complications::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_operation_note/fixtures/medical_operation_note_complications.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medical_operation_note_drains::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_operation_note/fixtures/medical_operation_note_drains.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medical_operation_note_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_operation_note/fixtures/medical_operation_note_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medical_operation_note_implants::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_operation_note/fixtures/medical_operation_note_implants.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medical_operation_note_procedures::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_operation_note/fixtures/medical_operation_note_procedures.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medical_operation_note_specimens::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_operation_note/fixtures/medical_operation_note_specimens.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medical_operation_note_steps::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_operation_note/fixtures/medical_operation_note_steps.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medical_operation_note_team_members::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_operation_note/fixtures/medical_operation_note_team_members.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medical_operation_note_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_operation_note/fixtures/medical_operation_note_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medical_operation_note_grade_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_operation_note/fixtures/medical_operation_note_grade_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

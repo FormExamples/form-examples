@@ -1,0 +1,24 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 825024
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "hepatologist"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "hepatology-clinic"
+  meldVariant: "meld"
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "16-39"
+  sex: "female"
+  bilirubin: 1.0
+  bilirubinUnit: "mg/dL"
+  inr: 1.0
+  creatinine: 1.0
+  creatinineUnit: "mg/dL"
+  dialysisSessionsPastWeek: 1
+  cvvhd24h: "yes"
+  sodium: 1.0
+  albumin: 1.0
+  clinicalNote: "Test clinicalNote"
+  patientId: 847604
+  clinicianId: 875428

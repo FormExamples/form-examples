@@ -75,6 +75,38 @@ impl Hooks for App {
             &format!("{}/src/issue_tracker/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::participants::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/issue_tracker/fixtures/participants.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::reporters::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/issue_tracker/fixtures/reporters.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::issue_trackers::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/issue_tracker/fixtures/issue_trackers.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::issue_tracker_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/issue_tracker/fixtures/issue_tracker_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::issue_tracker_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/issue_tracker/fixtures/issue_tracker_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::issue_tracker_grade_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/issue_tracker/fixtures/issue_tracker_grade_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

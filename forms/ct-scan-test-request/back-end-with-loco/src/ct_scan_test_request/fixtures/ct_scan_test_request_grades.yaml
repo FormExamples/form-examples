@@ -1,0 +1,17 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 606223
+  deletedAt: null
+  appropriatenessScore: 1
+  appropriatenessBand: "usually-appropriate"
+  contrastSafetyBand: "safe"
+  estimatedDoseBand: "low"
+  renalRisk: true
+  completenessPercent: 1
+  triageTier: "routine"
+  targetTimeframe: "Test targetTimeframe"
+  recommendation: "accept"
+  clinicianNotes: "Test clinicianNotes"
+  signedAt: "2026-01-01T00:00:00Z"
+  gradedAt: "2026-01-01T00:00:00Z"
+  ctScanTestRequestId: 261821

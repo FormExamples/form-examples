@@ -1,0 +1,24 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 588206
+  deletedAt: null
+  status: "draft"
+  patientIdentifier: "Test patientIdentifier"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "emergency-department"
+  presentingComplaint: "Test presentingComplaint"
+  age: 1.0
+  heartRate: 1.0
+  oxygenSaturation: 1.0
+  pretestProbability: "low"
+  ageUnder50: "yes"
+  heartRateUnder100: "yes"
+  spo2AtLeast95: "yes"
+  noUnilateralLegSwelling: "yes"
+  noHaemoptysis: "yes"
+  noRecentSurgeryTrauma: "yes"
+  noPriorDvtPe: "yes"
+  noOestrogenUse: "yes"
+  clinicalNotes: "Test clinicalNotes"
+  patientId: 845659
+  clinicianId: null

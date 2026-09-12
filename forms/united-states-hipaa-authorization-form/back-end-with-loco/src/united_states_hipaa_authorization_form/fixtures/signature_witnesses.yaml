@@ -1,0 +1,17 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 138437
+  deletedAt: null
+  individualSignatureConfirmed: "Test individualSignatureConfirmed"
+  individualSignatureImageUri: "Test individualSignatureImageUri"
+  signatureDate: "1990-01-01"
+  signedAtLocation: "Test signedAtLocation"
+  parentGuardianCoSignatureRequired: "Test parentGuardianCoSignatureRequired"
+  parentGuardianName: "Test parentGuardianName"
+  parentGuardianSignatureConfirmed: "Test parentGuardianSignatureConfirmed"
+  parentGuardianSignatureDate: "1990-01-01"
+  witnessName: "Test witnessName"
+  witnessSignatureConfirmed: "Test witnessSignatureConfirmed"
+  witnessDate: "1990-01-01"
+  witnessRole: "Test witnessRole"
+  hipaaAuthorizationId: 962728

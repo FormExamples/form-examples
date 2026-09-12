@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 473998
+  deletedAt: null
+  validityStatus: "Test validityStatus"
+  completenessScore: 1
+  effectiveDate: "1990-01-01"
+  computedAt: "2026-01-01T00:00:00Z"
+  engineVersion: "Test engineVersion"
+  notes: "Test notes"
+  lpaId: 652235

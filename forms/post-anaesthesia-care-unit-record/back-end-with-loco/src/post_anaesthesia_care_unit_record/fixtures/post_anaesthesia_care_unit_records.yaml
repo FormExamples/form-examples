@@ -1,0 +1,34 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 830498
+  deletedAt: null
+  nurseName: "Test nurseName"
+  nurseRole: "recovery-nurse"
+  anaesthetistName: "Test anaesthetistName"
+  admittedAt: "2026-01-01T00:00:00Z"
+  anaestheticTechnique: "general"
+  procedure: "Test procedure"
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "16-39"
+  sex: "female"
+  asaStatus: "I"
+  baselineSystolicBp: 1.0
+  ambulatoryCase: "yes"
+  activity: "all-four"
+  respiration: "deep-cough"
+  circulation: "within-20"
+  consciousness: "awake"
+  oxygenSaturation: "room-air"
+  airwayStatus: "patent"
+  painScore: 1.0
+  ponvSeverity: "none"
+  analgesiaGiven: "Test analgesiaGiven"
+  antiemeticsGiven: "Test antiemeticsGiven"
+  padssVitalSigns: "within-20"
+  padssAmbulation: "steady"
+  padssNauseaVomiting: "minimal"
+  padssPain: "minimal"
+  padssSurgicalBleeding: "minimal"
+  recoveryNote: "Test recoveryNote"
+  patientId: 744086
+  clinicianId: null

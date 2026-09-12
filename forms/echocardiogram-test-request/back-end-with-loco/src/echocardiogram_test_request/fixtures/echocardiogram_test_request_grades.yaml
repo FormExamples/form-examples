@@ -1,0 +1,15 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 280298
+  deletedAt: null
+  appropriatenessScore: 1
+  appropriatenessBand: "appropriate"
+  triageTier: "routine"
+  targetTimeframe: "Test targetTimeframe"
+  completenessPercent: 1
+  priorityBand: "low"
+  recommendation: "accept"
+  clinicianNotes: "Test clinicianNotes"
+  signedAt: "2026-01-01T00:00:00Z"
+  gradedAt: "2026-01-01T00:00:00Z"
+  echocardiogramTestRequestId: 817015

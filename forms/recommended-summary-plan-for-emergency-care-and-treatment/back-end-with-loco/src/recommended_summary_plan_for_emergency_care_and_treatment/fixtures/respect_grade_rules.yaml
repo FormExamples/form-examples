@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 687102
+  deletedAt: null
+  ruleId: "Test ruleId"
+  section: "identity"
+  satisfied: "yes"
+  category: "Test category"
+  description: "Test description"
+  respectGradeId: 141167

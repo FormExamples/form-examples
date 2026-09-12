@@ -1,0 +1,33 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 705079
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  procedure: "colonoscopy"
+  extentReached: "caecum"
+  bowelPreparationQuality: "excellent"
+  sedationUsed: true
+  clinicalHistory: "Test clinicalHistory"
+  polypsFound: true
+  massLesion: true
+  diverticulosis: true
+  inflammationIbd: true
+  angiodysplasia: true
+  bleedingSourceIdentified: true
+  normalExamination: true
+  polypCount: 1
+  largestPolypMm: 1.0
+  biopsyTaken: true
+  polypectomyPerformed: true
+  complication: "none"
+  findingsNarrative: "Test findingsNarrative"
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 800965
+  clinicianId: 497088

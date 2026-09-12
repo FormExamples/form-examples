@@ -81,6 +81,68 @@ impl Hooks for App {
             &format!("{}/src/vaccinations_assessment/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/vaccinations_assessment/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/vaccinations_assessment/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::assessments::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/vaccinations_assessment/fixtures/assessments.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::administration_records::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/vaccinations_assessment/fixtures/administration_records.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::adult_vaccinations::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/vaccinations_assessment/fixtures/adult_vaccinations.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::childhood_vaccinations::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/vaccinations_assessment/fixtures/childhood_vaccinations.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::clinical_reviews::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/vaccinations_assessment/fixtures/clinical_reviews.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::consent_informations::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/vaccinations_assessment/fixtures/consent_informations.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::contraindications_allergies::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/vaccinations_assessment/fixtures/contraindications_allergies.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::immunization_histories::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/vaccinations_assessment/fixtures/immunization_histories.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::occupational_vaccinations::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/vaccinations_assessment/fixtures/occupational_vaccinations.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::travel_vaccinations::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/vaccinations_assessment/fixtures/travel_vaccinations.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

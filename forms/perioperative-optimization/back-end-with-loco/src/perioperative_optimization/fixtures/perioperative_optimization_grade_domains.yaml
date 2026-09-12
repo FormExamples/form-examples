@@ -1,0 +1,17 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 568013
+  deletedAt: null
+  domain: "anaemia"
+  status: "optimized"
+  triggered: true
+  leadTimeWeeks: 1
+  weeksShortfall: 1
+  ruleId: "Test ruleId"
+  finding: "Test finding"
+  intervention: "Test intervention"
+  interventionStarted: true
+  referralMade: true
+  targetValue: "Test targetValue"
+  startDate: "1990-01-01"
+  perioperativeOptimizationGradeId: 272849

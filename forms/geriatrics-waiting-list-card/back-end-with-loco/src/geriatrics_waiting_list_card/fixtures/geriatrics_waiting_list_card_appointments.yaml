@@ -1,0 +1,18 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 537371
+  deletedAt: null
+  appointmentDate: "1990-01-01"
+  appointmentTime: "Test appointmentTime"
+  durationMinutes: 1
+  appointmentType: "first-outpatient"
+  siteName: "Test siteName"
+  siteAddress: "Test siteAddress"
+  clinicName: "Test clinicName"
+  room: "Test room"
+  clinicianName: "Test clinicianName"
+  clinicianTeam: "Test clinicianTeam"
+  status: "scheduled"
+  travelNotes: "Test travelNotes"
+  accessNotes: "Test accessNotes"
+  geriatricsWaitingListCardId: 658438

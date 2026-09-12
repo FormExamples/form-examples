@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 878229
+  deletedAt: null
+  ruleId: "Test ruleId"
+  parameter: "bilirubin"
+  points: 1
+  category: "Test category"
+  description: "Test description"
+  childPughScoreGradeId: 638214

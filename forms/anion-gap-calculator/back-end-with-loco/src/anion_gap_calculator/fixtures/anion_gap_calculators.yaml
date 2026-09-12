@@ -1,0 +1,20 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 387343
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "doctor"
+  calculatedAt: "2026-01-01T00:00:00Z"
+  careSetting: "emergency-department"
+  clinicalContext: "Test clinicalContext"
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "18-39"
+  sex: "female"
+  sodiumMmolL: 1.0
+  potassiumMmolL: 1.0
+  chlorideMmolL: 1.0
+  bicarbonateMmolL: 1.0
+  albuminGL: 1.0
+  includePotassium: "yes"
+  patientId: 633964
+  clinicianId: 257612

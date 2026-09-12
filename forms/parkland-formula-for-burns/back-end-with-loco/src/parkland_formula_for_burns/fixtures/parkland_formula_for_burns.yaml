@@ -1,0 +1,21 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 655168
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "doctor"
+  careSetting: "emergency-department"
+  assessedAt: "2026-01-01T00:00:00Z"
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "adult"
+  sex: "female"
+  weightKg: 1.0
+  tbsaPercent: 1.0
+  tbsaMethod: "rule-of-nines"
+  injuryAt: "2026-01-01T00:00:00Z"
+  injuryTimeKnown: "known"
+  inhalationSuspected: "yes"
+  circumferentialOrDeep: "yes"
+  mechanism: "thermal"
+  patientId: 897537
+  clinicianId: 493867

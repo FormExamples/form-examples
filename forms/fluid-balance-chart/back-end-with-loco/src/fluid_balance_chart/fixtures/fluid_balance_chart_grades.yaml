@@ -1,0 +1,14 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 392728
+  deletedAt: null
+  totalIntakeMl: 1.0
+  totalOutputMl: 1.0
+  netBalanceMl: 1.0
+  urineOutputMl: 1.0
+  hoursObserved: 1.0
+  weightKg: 1.0
+  urineOutputMlKgH: 1.0
+  fluidStatus: "balanced"
+  gradedAt: "2026-01-01T00:00:00Z"
+  fluidBalanceChartId: 438032

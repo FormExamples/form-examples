@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 534426
+  deletedAt: null
+  okrObjectiveId: "49c2376d-bc92-5f37-8147-e44be8f7f14a"
+  role: "dri"
+  name: "Test Patient"
+  email: "test.patient@example.com"
+  notes: "Test notes"

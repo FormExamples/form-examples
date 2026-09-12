@@ -1,0 +1,8 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 745706
+  deletedAt: null
+  orderPosition: 1
+  replacementTrigger: "Test replacementTrigger"
+  lpaId: 652235
+  replacementAttorneyId: 186809

@@ -1,0 +1,21 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 114739
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "hepatologist"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "hepatology-clinic"
+  aetiology: "alcohol"
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "16-39"
+  sex: "female"
+  totalBilirubinUmolL: 1.0
+  serumAlbuminGL: 1.0
+  inr: 1.0
+  prothrombinTimeSeconds: 1.0
+  ascites: "none"
+  hepaticEncephalopathy: "none"
+  clinicalNote: "Test clinicalNote"
+  patientId: 918261
+  clinicianId: 272680

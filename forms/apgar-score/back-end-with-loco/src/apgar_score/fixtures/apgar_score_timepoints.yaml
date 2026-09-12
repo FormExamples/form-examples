@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 294002
+  deletedAt: null
+  timepointMinutes: 1
+  appearance: "0"
+  pulse: "0"
+  grimace: "0"
+  activity: "0"
+  respiration: "0"
+  total: 1
+  band: "reassuring"
+  apgarScoreId: 808144

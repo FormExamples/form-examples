@@ -1,0 +1,43 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 923048
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  specimenType: "serum"
+  specimenCondition: "satisfactory"
+  clinicalHistory: "Test clinicalHistory"
+  haemoglobinGL: 1.0
+  whiteCellCount: 1.0
+  platelets: 1.0
+  neutrophils: 1.0
+  sodiumMmolL: 1.0
+  potassiumMmolL: 1.0
+  ureaMmolL: 1.0
+  creatinineUmolL: 1.0
+  egfr: 1.0
+  altUL: 1.0
+  alkalinePhosphatase: 1.0
+  bilirubinUmolL: 1.0
+  albuminGL: 1.0
+  cReactiveProtein: 1.0
+  hba1cMmolMol: 1.0
+  glucoseMmolL: 1.0
+  tsh: 1.0
+  ferritin: 1.0
+  inr: 1.0
+  overallResultStatus: "normal"
+  abnormalResultsPresent: true
+  criticalValuePresent: true
+  criticalValueDetail: "Test criticalValueDetail"
+  findingsNarrative: "Test findingsNarrative"
+  comparisonWithPrevious: "Test comparisonWithPrevious"
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 852345
+  clinicianId: 247556

@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 278535
+  deletedAt: null
+  asrmStage: "Test asrmStage"
+  asrmPoints: 1
+  ehp30TotalScore: 1
+  overallSeverity: "Test overallSeverity"
+  gradedAt: "2026-01-01T00:00:00Z"
+  assessmentId: 721973

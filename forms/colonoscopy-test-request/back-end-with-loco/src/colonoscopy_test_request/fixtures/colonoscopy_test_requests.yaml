@@ -1,0 +1,35 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 468648
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  requestedByDate: "1990-01-01"
+  procedure: "colonoscopy"
+  primaryIndication: "rectal-bleeding"
+  clinicalQuestion: "Test clinicalQuestion"
+  relevantHistory: "Test relevantHistory"
+  redFlagWeightLoss: true
+  redFlagAnaemia: true
+  redFlagAbdominalMass: true
+  redFlagRectalBleeding: true
+  fitResultUgG: 1.0
+  haemoglobinGL: 1.0
+  takingAnticoagulant: true
+  anticoagulantAgent: "Test anticoagulantAgent"
+  takingAntiplatelet: true
+  antiplateletAgent: "Test antiplateletAgent"
+  diabetesMedication: "none"
+  fitForBowelPrep: true
+  bowelPrepAgent: "Test bowelPrepAgent"
+  chronicKidneyDisease: true
+  egfrMlMin: 1.0
+  asaGrade: "I"
+  urgency: "routine"
+  supervisingConsultant: "Test supervisingConsultant"
+  requesterContact: "Test requesterContact"
+  notes: "Test notes"
+  patientId: 340474
+  clinicianId: 390316

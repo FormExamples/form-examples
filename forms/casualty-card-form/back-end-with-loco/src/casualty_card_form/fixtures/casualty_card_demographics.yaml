@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 223610
+  deletedAt: null
+  address: "Test address"
+  postcode: "SW1A 2AA"
+  phone: "+441234567890"
+  email: "test.patient@example.com"
+  ethnicity: "Test ethnicity"
+  preferredLanguage: "Test preferredLanguage"
+  interpreterRequired: "yes"
+  casualtyCardId: 233761

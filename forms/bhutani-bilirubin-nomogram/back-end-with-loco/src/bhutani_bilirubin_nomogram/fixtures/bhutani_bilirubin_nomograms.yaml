@@ -1,0 +1,24 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 387821
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "midwife"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "postnatal-ward"
+  infantIdentifier: "Test infantIdentifier"
+  sex: "female"
+  bornAt: "2026-01-01T00:00:00Z"
+  gestationalAgeWeeks: 1.0
+  ageHours: 1.0
+  totalSerumBilirubinUmolL: 1.0
+  measurementMethod: "serum"
+  pretermUnder38: "yes"
+  previousSiblingJaundice: "yes"
+  exclusiveBreastfeeding: "yes"
+  bruising: "yes"
+  bloodGroupIncompatibility: "yes"
+  earlyOnsetUnder24h: "yes"
+  clinicalNote: "Test clinicalNote"
+  patientId: 116634
+  clinicianId: null

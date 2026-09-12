@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 527317
+  deletedAt: null
+  classification: "perc-negative"
+  allCriteriaSatisfied: "yes"
+  applicable: "yes"
+  recommendedPathway: "Test recommendedPathway"
+  gradedAt: "2026-01-01T00:00:00Z"
+  pulmonaryEmbolismRuleOutCriteriaId: 1

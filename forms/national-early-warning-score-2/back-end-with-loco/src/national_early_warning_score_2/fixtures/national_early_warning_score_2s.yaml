@@ -1,0 +1,25 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 613442
+  deletedAt: null
+  status: "draft"
+  observationAt: "2026-01-01T00:00:00Z"
+  wardOrLocation: "Test wardOrLocation"
+  spo2Scale: "scale-1"
+  spo2Scale2Endorsed: "yes"
+  respiratoryRate: 1
+  spo2: 1
+  onOxygen: "air"
+  oxygenDevice: "nasal-cannula"
+  oxygenFlowRateLMin: 1.0
+  inspiredOxygenFractionPercent: 1
+  systolicBloodPressure: 1
+  pulse: 1
+  consciousnessAcvpu: "A"
+  temperature: 1.0
+  isUnder16: "yes"
+  isPregnant: "yes"
+  hasSpinalCordInjury: "yes"
+  clinicalNotes: "Test clinicalNotes"
+  patientId: 565397
+  clinicianId: null

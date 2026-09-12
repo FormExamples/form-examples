@@ -1,0 +1,30 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 240859
+  deletedAt: null
+  status: "draft"
+  entryDate: "1990-01-01"
+  entryTime: "Test entryTime"
+  referralSource: "gp"
+  referralDate: "1990-01-01"
+  referralLetterReference: "Test referralLetterReference"
+  reasonForReferral: "Test reasonForReferral"
+  presentingCondition: "Test presentingCondition"
+  icd10Code: "Test icd10Code"
+  snomedCtCode: "Test snomedCtCode"
+  suspectedCancer: "yes"
+  listName: "Test listName"
+  specialty: "Test specialty"
+  subSpecialty: "Test subSpecialty"
+  procedureDescription: "Test procedureDescription"
+  opcs4Code: "Test opcs4Code"
+  clinicalPriority: "P1a"
+  rttClockStartDate: "1990-01-01"
+  expectedProcedureType: "first-outpatient-appointment"
+  expectedWaitWeeks: 1
+  consentToReminders: "yes"
+  communicationNotes: "Test communicationNotes"
+  additionalNotes: "Test additionalNotes"
+  signedAt: "2026-01-01T00:00:00Z"
+  patientId: 201044
+  practitionerId: 296600

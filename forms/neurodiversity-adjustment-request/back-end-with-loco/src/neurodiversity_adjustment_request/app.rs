@@ -65,7 +65,39 @@ impl Hooks for App {
         Ok(())
     }
 
-    async fn seed(_ctx: &AppContext, _base: &Path) -> Result<()> {
+    async fn seed(ctx: &AppContext, _base: &Path) -> Result<()> {
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::managers::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/neurodiversity_adjustment_request/fixtures/managers.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::workers::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/neurodiversity_adjustment_request/fixtures/workers.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::neurodiversity_adjustment_requests::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/neurodiversity_adjustment_request/fixtures/neurodiversity_adjustment_requests.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::neurodiversity_adjustment_request_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/neurodiversity_adjustment_request/fixtures/neurodiversity_adjustment_request_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::neurodiversity_adjustment_request_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/neurodiversity_adjustment_request/fixtures/neurodiversity_adjustment_request_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::neurodiversity_adjustment_request_grade_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/neurodiversity_adjustment_request/fixtures/neurodiversity_adjustment_request_grade_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

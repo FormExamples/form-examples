@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 374061
+  deletedAt: null
+  overallPerformanceScore: 1.0
+  selfCarePerformanceScore: 1.0
+  productivityPerformanceScore: 1.0
+  leisurePerformanceScore: 1.0
+  performanceNotes: "Test performanceNotes"
+  assessmentId: 472853

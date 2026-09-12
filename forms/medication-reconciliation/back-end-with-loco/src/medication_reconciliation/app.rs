@@ -79,6 +79,58 @@ impl Hooks for App {
             &format!("{}/src/medication_reconciliation/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medication_reconciliation/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medication_reconciliation/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medication_reconciliations::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medication_reconciliation/fixtures/medication_reconciliations.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medication_reconciliation_allergies::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medication_reconciliation/fixtures/medication_reconciliation_allergies.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medication_reconciliation_discrepancies::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medication_reconciliation/fixtures/medication_reconciliation_discrepancies.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medication_reconciliation_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medication_reconciliation/fixtures/medication_reconciliation_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medication_reconciliation_information_sources::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medication_reconciliation/fixtures/medication_reconciliation_information_sources.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medication_reconciliation_line_items::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medication_reconciliation/fixtures/medication_reconciliation_line_items.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medication_reconciliation_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medication_reconciliation/fixtures/medication_reconciliation_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medication_reconciliation_grade_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medication_reconciliation/fixtures/medication_reconciliation_grade_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

@@ -1,0 +1,18 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 595445
+  deletedAt: null
+  herniaType: "inguinal"
+  herniaSubtype: "direct"
+  ehsClassification: "Test ehsClassification"
+  ehsSizeGrade: "1"
+  reducibilityStatus: "reducible"
+  computedUrgency: "routine"
+  finalUrgency: "routine"
+  overrideReason: "Test overrideReason"
+  recommendation: "watchful-waiting"
+  clinicianNotes: "Test clinicianNotes"
+  signedByName: "Test signedByName"
+  signedAt: "2026-01-01T00:00:00Z"
+  gradedAt: "2026-01-01T00:00:00Z"
+  herniaDiagnosticEvaluationId: 157798

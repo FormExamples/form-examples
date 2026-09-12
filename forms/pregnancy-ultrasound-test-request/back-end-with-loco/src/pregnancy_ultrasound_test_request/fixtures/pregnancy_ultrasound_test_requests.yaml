@@ -1,0 +1,46 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 915455
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  requestedByDate: "1990-01-01"
+  lastMenstrualPeriodDate: "1990-01-01"
+  lastMenstrualPeriodReliability: "reliable"
+  estimatedDueDate: "1990-01-01"
+  estimatedDueDateMethod: "lmp"
+  gestationalAgeWeeks: 1
+  gestationalAgeDays: 1
+  gravida: 1
+  para: 1
+  plurality: "singleton"
+  chorionicity: "dichorionic-diamniotic"
+  conceptionMethod: "spontaneous"
+  rhesusStatus: "positive"
+  bodyMassIndex: 24.2
+  requestedScanType: "viability"
+  primaryIndication: "dating"
+  clinicalQuestion: "Test clinicalQuestion"
+  relevantHistory: "Test relevantHistory"
+  previousScanFinding: "Test previousScanFinding"
+  previousScanDate: "1990-01-01"
+  vaginalBleeding: "none"
+  abdominalPain: "none"
+  reducedFetalMovements: true
+  suspectedEctopic: true
+  haemodynamicallyUnstable: true
+  hypertension: true
+  diabetes: true
+  previousGrowthRestriction: true
+  previousPretermBirth: true
+  previousCaesarean: true
+  smoker: true
+  urgency: "routine"
+  supervisingConsultant: "Test supervisingConsultant"
+  requesterContact: "Test requesterContact"
+  interpreterRequired: true
+  notes: "Test notes"
+  patientId: 539987
+  clinicianId: 743287

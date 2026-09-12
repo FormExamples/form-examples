@@ -1,0 +1,14 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "e0f872bd-7832-5b9b-b4d2-2a62031d0ee6"
+  deletedAt: null
+  appropriatenessBand: "usually-appropriate"
+  safetyBand: "ok"
+  completenessPercent: 1
+  triageTier: "routine"
+  targetTimeframe: "Test targetTimeframe"
+  recommendation: "accept"
+  clinicianNotes: "Test clinicianNotes"
+  signedAt: "2026-01-01T00:00:00Z"
+  gradedAt: "2026-01-01T00:00:00Z"
+  cardiologyRequestId: "5106c30e-7d71-57b3-9695-4622bc070781"

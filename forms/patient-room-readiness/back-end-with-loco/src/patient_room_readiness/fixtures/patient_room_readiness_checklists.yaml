@@ -1,0 +1,35 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 421094
+  deletedAt: null
+  buildingNameOrNumber: "Test buildingNameOrNumber"
+  roomNameOrNumber: "Test roomNameOrNumber"
+  patientCotMattressSideRailings: true
+  attendantCotMattress: true
+  callBell: true
+  cardiacTableIvStand: true
+  hotKettleGlasses: true
+  linenPatientDress: true
+  landlineNumbers: true
+  refrigeratorFan: true
+  televisionRemote: true
+  dustbin: true
+  bathTowelHandtowels: true
+  wcDustbins: true
+  washbasinAndFittings: true
+  bucketAndMug: true
+  geyser: true
+  soapDispenser: true
+  toiletKit: true
+  windowGlassGrooves: true
+  sidewalls: true
+  curtainBlind: true
+  chairSofa: true
+  wallSeepageWaterLeakage: true
+  electricityPointsLights: true
+  ceilingTiles: true
+  doorKnobsStopper: true
+  inspectorName: "Test inspectorName"
+  inspectorEmail: "test.patient@example.com"
+  inspectionDate: "1990-01-01"
+  inspectionTime: "Test inspectionTime"

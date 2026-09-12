@@ -1,0 +1,20 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 627263
+  deletedAt: null
+  inhalerUse: "Test inhalerUse"
+  inhalerTechniqueAssessed: "Test inhalerTechniqueAssessed"
+  inhalerTechniqueAdequate: "Test inhalerTechniqueAdequate"
+  shortActingBronchodilator: "Test shortActingBronchodilator"
+  sabaFrequency: "Test sabaFrequency"
+  longActingBronchodilator: "Test longActingBronchodilator"
+  inhaledCorticosteroid: "Test inhaledCorticosteroid"
+  combinationInhaler: "Test combinationInhaler"
+  longTermOxygenTherapy: "Test longTermOxygenTherapy"
+  oxygenFlowRateLmin: 1.0
+  oxygenHoursPerDay: 1
+  nebuliserUse: "Test nebuliserUse"
+  oralMedications: "Test oralMedications"
+  medicationAdherence: "Test medicationAdherence"
+  additionalNotes: "Test additionalNotes"
+  assessmentId: 455661

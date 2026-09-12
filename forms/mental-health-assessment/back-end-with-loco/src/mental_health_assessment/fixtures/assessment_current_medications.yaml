@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 568860
+  deletedAt: null
+  takingPsychotropicMedication: "Test takingPsychotropicMedication"
+  medicationAdherence: "Test medicationAdherence"
+  sideEffects: "Test sideEffects"
+  sideEffectsDetails: "Test sideEffectsDetails"
+  overTheCounterMedications: "Test overTheCounterMedications"
+  supplements: "Test supplements"
+  medicationNotes: "Test medicationNotes"
+  assessmentId: 661580

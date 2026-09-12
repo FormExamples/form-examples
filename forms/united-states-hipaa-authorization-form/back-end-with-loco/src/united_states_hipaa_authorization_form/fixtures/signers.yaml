@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 270213
+  deletedAt: null
+  relationship: "self"
+  representativeName: "Test representativeName"
+  representativeAuthorityDescription: "Test representativeAuthorityDescription"
+  representativeAuthorityProofAttached: "yes"
+  hipaaAuthorizationId: 962728

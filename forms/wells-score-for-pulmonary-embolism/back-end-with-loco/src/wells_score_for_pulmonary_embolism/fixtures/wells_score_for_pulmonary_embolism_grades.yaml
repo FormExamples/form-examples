@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 804055
+  deletedAt: null
+  wellsScore: 1.0
+  twoLevelBand: "likely"
+  threeLevelBand: "low"
+  recommendedPathway: "Test recommendedPathway"
+  gradedAt: "2026-01-01T00:00:00Z"
+  wellsScoreForPulmonaryEmbolismId: 900011

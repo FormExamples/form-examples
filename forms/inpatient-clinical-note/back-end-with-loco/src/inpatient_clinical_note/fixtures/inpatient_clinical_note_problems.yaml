@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 111211
+  deletedAt: null
+  sortOrder: 1
+  problem: "Test problem"
+  category: "presenting"
+  status: "active"
+  priority: "low"
+  onsetDate: "1990-01-01"
+  snomedCode: "Test snomedCode"
+  progressCommentary: "Test progressCommentary"
+  inpatientClinicalNoteId: 728045

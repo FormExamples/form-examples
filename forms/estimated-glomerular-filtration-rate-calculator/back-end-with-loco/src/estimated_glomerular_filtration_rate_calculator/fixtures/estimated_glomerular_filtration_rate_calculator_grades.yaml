@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 173179
+  deletedAt: null
+  serumCreatinineMgDl: 1.0
+  egfrMlMin173m2: 1.0
+  gStage: "G1"
+  gStageLabel: "Test gStageLabel"
+  gradedAt: "2026-01-01T00:00:00Z"
+  estimatedGlomerularFiltrationRateCalculatorId: 702502

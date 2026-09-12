@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 530044
+  deletedAt: null
+  postVaccinationObservation: 1
+  immediateReaction: "yes"
+  reactionDetails: "Test reactionDetails"
+  nextDoseDue: "1990-01-01"
+  catchUpScheduleNeeded: "yes"
+  referralNeeded: "yes"
+  clinicianNotes: "Test clinicianNotes"
+  reviewingClinician: "Test reviewingClinician"
+  assessmentId: 174864

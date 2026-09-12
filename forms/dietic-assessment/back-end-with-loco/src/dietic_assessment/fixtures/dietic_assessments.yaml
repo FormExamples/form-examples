@@ -1,0 +1,250 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 243580
+  deletedAt: null
+  status: "draft"
+  assessmentDate: "1990-01-01"
+  assessmentTime: "Test assessmentTime"
+  siteName: "Test siteName"
+  serviceName: "Test serviceName"
+  setting: "outpatient-clinic"
+  appointmentType: "initial"
+  plannedDurationMinutes: 1
+  interpreterRequired: "yes"
+  interpreterLanguage: "Test interpreterLanguage"
+  referralSource: "general-practitioner"
+  referralDate: "1990-01-01"
+  referralReason: "Test referralReason"
+  primaryCondition: "Test primaryCondition"
+  consentToRecord: "yes"
+  accompaniedBy: "Test accompaniedBy"
+  conditionDiabetes: "none"
+  conditionCoeliac: "yes"
+  conditionInflammatoryBowelDisease: "yes"
+  conditionChronicKidneyDisease: "yes"
+  conditionLiverDisease: "yes"
+  conditionCancer: "yes"
+  conditionCardiovascularDisease: "yes"
+  conditionRespiratoryDisease: "yes"
+  conditionStroke: "yes"
+  conditionDementia: "yes"
+  conditionEatingDisorder: "yes"
+  conditionOther: "Test conditionOther"
+  recentSurgery: "yes"
+  recentSurgeryType: "Test recentSurgeryType"
+  recentSurgeryDate: "1990-01-01"
+  gastrointestinalSurgery: "none"
+  currentSymptoms: "Test currentSymptoms"
+  familyHistory: "Test familyHistory"
+  pregnancyStatus: "not-applicable"
+  takesPrescriptionMedicines: "yes"
+  takesOverTheCounterMedicines: "yes"
+  takesVitaminSupplements: "yes"
+  takesMineralSupplements: "yes"
+  takesHerbalProducts: "yes"
+  takesOralNutritionalSupplements: "yes"
+  oralNutritionalSupplementDetail: "Test oralNutritionalSupplementDetail"
+  enteralNutrition: "yes"
+  enteralRoute: "nasogastric"
+  enteralTubeProblem: "yes"
+  parenteralNutrition: "yes"
+  drugNutrientInteraction: "yes"
+  drugNutrientInteractionDetail: "Test drugNutrientInteractionDetail"
+  medicationAdherence: "full"
+  medicationNotes: "Test medicationNotes"
+  measurementMethod: "measured"
+  heightAsCm: 170.2
+  weightAsKg: 70.4
+  bodyMassIndex: 24.2
+  midUpperArmCircumferenceAsCm: 1.0
+  calfCircumferenceAsCm: 1.0
+  waistAsCm: 85.0
+  usualWeightAsKg: 70.4
+  weight3MonthsAgoAsKg: 1.0
+  weight6MonthsAgoAsKg: 1.0
+  weightLossPercent: 1.0
+  weightLossIsIntentional: "yes"
+  weightTrend: "losing"
+  clothesOrJewelleryLooser: "yes"
+  oedemaPresent: "yes"
+  oedemaAdjustmentKg: 1.0
+  ascitesPresent: "yes"
+  amputationPresent: "yes"
+  amputationAdjustmentPercent: 1.0
+  anthropometryNotes: "Test anthropometryNotes"
+  bloodsSampleDate: "1990-01-01"
+  albuminGPerL: 1.0
+  cReactiveProteinMgPerL: 1.0
+  haemoglobinGPerL: 1.0
+  ferritinUgPerL: 1.0
+  vitaminB12NgPerL: 1.0
+  folateUgPerL: 1.0
+  vitaminDNmolPerL: 1.0
+  hba1cMmolPerMol: 1.0
+  sodiumMmolPerL: 1.0
+  potassiumMmolPerL: 1.0
+  magnesiumMmolPerL: 1.0
+  phosphateMmolPerL: 1.0
+  correctedCalciumMmolPerL: 1.0
+  ureaMmolPerL: 1.0
+  creatinineUmolPerL: 1.0
+  egfrMlPerMin: 1.0
+  alanineAminotransferaseUPerL: 1.0
+  bilirubinUmolPerL: 1.0
+  totalCholesterolMmolPerL: 1.0
+  triglyceridesMmolPerL: 1.0
+  biochemistryNotes: "Test biochemistryNotes"
+  subcutaneousFatLoss: "none"
+  muscleWastingTemples: "yes"
+  muscleWastingClavicles: "yes"
+  muscleWastingQuadriceps: "yes"
+  muscleWastingSeverity: "none"
+  peripheralOedemaSeverity: "none"
+  oralHealth: "good"
+  dentition: "good"
+  chewingAbility: "normal"
+  tongueAndMucosa: "normal"
+  skinCondition: "normal"
+  hairCondition: "normal"
+  nailCondition: "normal"
+  pressureUlcerPresent: "yes"
+  pressureUlcerCategory: "1"
+  handGripStrengthKg: 1.0
+  physicalExamNotes: "Test physicalExamNotes"
+  mealsPerDay: 1
+  snacksPerDay: 1
+  recallBreakfast: "Test recallBreakfast"
+  recallMidMorning: "Test recallMidMorning"
+  recallLunch: "Test recallLunch"
+  recallAfternoon: "Test recallAfternoon"
+  recallDinner: "Test recallDinner"
+  recallEvening: "Test recallEvening"
+  portionSize: "small"
+  appetite: "good"
+  appetiteScore010: 1
+  proportionOfUsualIntakePercent: 1
+  mealsOutPerWeek: 1
+  takeawaysPerWeek: 1
+  foodDiaryCompleted: "yes"
+  estimatedEnergyIntakeKcal: 1
+  estimatedProteinIntakeG: 1
+  eatsAlone: "yes"
+  dietaryRecallNotes: "Test dietaryRecallNotes"
+  fluidIntakeMlPerDay: 1
+  fluidTypes: "Test fluidTypes"
+  caffeinatedDrinksPerDay: 1
+  alcoholUnitsPerWeek: 1.0
+  thickenedFluids: "yes"
+  thickenedFluidsIddsiLevel: "0"
+  hydrationSigns: "well-hydrated"
+  fluidRestriction: "yes"
+  fluidRestrictionMlPerDay: 1
+  hydrationNotes: "Test hydrationNotes"
+  hasFoodAllergy: "yes"
+  hasFoodIntolerance: "yes"
+  foodsAvoided: "Test foodsAvoided"
+  avoidanceReason: "allergy"
+  dislikes: "Test dislikes"
+  therapeuticDiet: "none"
+  dietaryPattern: "omnivore"
+  religiousOrCulturalRequirement: "Test religiousOrCulturalRequirement"
+  fastingPractice: "Test fastingPractice"
+  textureModifiedDiet: "yes"
+  textureModifiedIddsiLevel: "3"
+  preferencesNotes: "Test preferencesNotes"
+  appetiteChange: "none"
+  earlySatiety: "yes"
+  nausea: "yes"
+  vomiting: "yes"
+  dysphagia: "yes"
+  dysphagiaScreenOutcome: "pass"
+  speechAndLanguageTherapy: "yes"
+  reflux: "yes"
+  abdominalPain: "yes"
+  bloating: "yes"
+  bowelFrequencyPerWeek: 1
+  bristolStoolType: "1"
+  constipation: "yes"
+  diarrhoea: "yes"
+  stomaPresent: "yes"
+  stomaOutputMlPerDay: 1
+  malabsorptionSigns: "yes"
+  gastrointestinalNotes: "Test gastrointestinalNotes"
+  livingSituation: "alone"
+  whoShops: "patient"
+  whoCooks: "patient"
+  cookingSkills: "confident"
+  cookingConfidence010: 1
+  hasCooker: "yes"
+  hasFridge: "yes"
+  hasFreezer: "yes"
+  hasMicrowave: "yes"
+  foodBudgetPerWeek: 1.0
+  worriedFoodWouldRunOut: "yes"
+  skippedMealsForMoney: "yes"
+  usesFoodBank: "yes"
+  accessToShops: "easy"
+  hasTransport: "yes"
+  workPattern: "full-time"
+  mealSupport: "none"
+  socialSupport: "good"
+  environmentNotes: "Test environmentNotes"
+  activityLevel: "sedentary"
+  exerciseType: "Test exerciseType"
+  exerciseMinutesPerWeek: 1
+  sedentaryHoursPerDay: 1.0
+  mobility: "independent"
+  fallsInLast12Months: 1
+  sarcfStrength: 1
+  sarcfWalking: 1
+  sarcfRisingFromChair: 1
+  sarcfClimbingStairs: 1
+  sarcfFalls: 1
+  eatsIndependently: "yes"
+  feedingAssistanceRequired: "none"
+  functionNotes: "Test functionNotes"
+  motivation010: 1
+  stageOfChange: "precontemplation"
+  selfEfficacy010: 1
+  previousAttempts: "Test previousAttempts"
+  barriers: "Test barriers"
+  scoffMakeYourselfSick: "yes"
+  scoffLostControl: "yes"
+  scoffLostOneStone: "yes"
+  scoffBelieveYourselfFat: "yes"
+  scoffFoodDominates: "yes"
+  mood: "good"
+  anxiety: "none"
+  cognitiveImpairment: "none"
+  capacityConcern: "yes"
+  safeguardingConcern: "yes"
+  healthLiteracy: "high"
+  preferredLearningStyle: "verbal"
+  patientGoalInOwnWords: "Test patientGoalInOwnWords"
+  acutelyIll: "yes"
+  noNutritionalIntakeOver5Days: "yes"
+  daysOfNegligibleIntake: 1
+  nrs2002Score: 1
+  energyRequirementKcal: 1
+  proteinRequirementG: 1
+  fluidRequirementMl: 1
+  requirementEquation: "henry"
+  pesProblem: "Test pesProblem"
+  pesEtiology: "Test pesEtiology"
+  pesSignsSymptoms: "Test pesSignsSymptoms"
+  interventionType: "dietary-counselling"
+  prescribedSupplement: "Test prescribedSupplement"
+  prescribedSupplementDose: "Test prescribedSupplementDose"
+  textureModificationPlan: "Test textureModificationPlan"
+  goal1: "Test goal1"
+  goal2: "Test goal2"
+  goal3: "Test goal3"
+  educationProvided: "Test educationProvided"
+  resourcesGiven: "Test resourcesGiven"
+  monitoringIndicators: "Test monitoringIndicators"
+  reviewIntervalWeeks: 1
+  reviewDate: "1990-01-01"
+  onwardReferral: "Test onwardReferral"
+  additionalNotes: "Test additionalNotes"
+  patientId: 551175
+  dietitianId: 220178

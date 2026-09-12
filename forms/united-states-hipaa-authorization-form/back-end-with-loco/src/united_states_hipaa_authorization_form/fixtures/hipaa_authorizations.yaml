@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 962728
+  deletedAt: null
+  status: "draft"
+  stateTemplate: "tn-hs-2557"
+  revokedAt: "2026-01-01T00:00:00Z"
+  revocationMethod: "written"
+  patientId: 912096

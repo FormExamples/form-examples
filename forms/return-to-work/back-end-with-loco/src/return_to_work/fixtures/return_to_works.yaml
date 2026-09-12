@@ -1,0 +1,64 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 583038
+  deletedAt: null
+  status: "draft"
+  statementKind: "fit-note"
+  assessmentDate: "1990-01-01"
+  assessmentTime: "Test assessmentTime"
+  absenceFirstDay: "1990-01-01"
+  absenceTotalCalendarDays: 1
+  priorMed3Reference: "Test priorMed3Reference"
+  priorSelfCertificationReference: "Test priorSelfCertificationReference"
+  primaryDiagnosisText: "Test primaryDiagnosisText"
+  primaryDiagnosisSnomed: "Test primaryDiagnosisSnomed"
+  primaryDiagnosisIcd10: "Test primaryDiagnosisIcd10"
+  comorbidConditions: "Test comorbidConditions"
+  mechanism: "illness"
+  workplaceCause: "yes"
+  riddorReference: "Test riddorReference"
+  currentMedications: "Test currentMedications"
+  ongoingTherapy: "Test ongoingTherapy"
+  lastConsultationDate: "1990-01-01"
+  anticipatedRecoveryTrajectory: "full-recovery-imminent"
+  specialistFollowupRequired: "yes"
+  mobility: "normal"
+  manualHandlingCapacityKg: 1.0
+  cognition: "normal"
+  mood: "stable"
+  sleep: "normal"
+  painScore010: 1
+  drivingCapacity: "fit-to-drive"
+  standingToleranceMinutes: 1
+  sittingToleranceMinutes: 1
+  screenToleranceMinutes: 1
+  adlIndependence: "independent"
+  fitnessStatementComputed: "fit"
+  fitnessStatementFinal: "fit"
+  clinicianOverride: "yes"
+  clinicianOverrideReason: "Test clinicianOverrideReason"
+  clinicianConfidence: "high"
+  validFrom: "1990-01-01"
+  validUntil: "1990-01-01"
+  validityWeeks: 1
+  reassessmentRequired: "yes"
+  phasedReturnApplicable: "yes"
+  phasedReturnTemplate: "2-week"
+  phasedReturnTargetDate: "1990-01-01"
+  phasedReturnScheduleJson: {}
+  phasedReturnSupportContact: "Test phasedReturnSupportContact"
+  workstationReviewRequired: "yes"
+  additionalAdjustmentsText: "Test additionalAdjustmentsText"
+  reviewLocation: "gp"
+  reviewDate: "1990-01-01"
+  occupationalHealthReferralMade: "yes"
+  dvlaNotificationRequired: "yes"
+  employerOhNotified: "yes"
+  returnToWorkMeetingScheduled: "yes"
+  maternityCertificateReference: "Test maternityCertificateReference"
+  finalNotes: "Test finalNotes"
+  signatureSvg: "Test signatureSvg"
+  signedAt: "2026-01-01T00:00:00Z"
+  patientId: 158185
+  clinicianId: 532551
+  employerId: 438980

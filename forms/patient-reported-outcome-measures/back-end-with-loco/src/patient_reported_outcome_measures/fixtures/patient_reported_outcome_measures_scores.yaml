@@ -1,0 +1,24 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 694432
+  deletedAt: null
+  sf36Pf: 1.0
+  sf36Rp: 1.0
+  sf36Bp: 1.0
+  sf36Gh: 1.0
+  sf36Vt: 1.0
+  sf36Sf: 1.0
+  sf36Re: 1.0
+  sf36Mh: 1.0
+  sf36PcsApprox: 1.0
+  sf36McsApprox: 1.0
+  ndiRawScore: 1
+  ndiAnsweredSections: 1
+  ndiPercentageScore: 1.0
+  ndiBand: "no-disability"
+  mjoaTotalScore: 1
+  mjoaBand: "mild"
+  eq5dHealthStateDescriptor: "Test eq5dHealthStateDescriptor"
+  eq5dUkIndexValue: 1.0
+  eq5dVasScore: 1.0
+  patientReportedOutcomeMeasuresId: 1

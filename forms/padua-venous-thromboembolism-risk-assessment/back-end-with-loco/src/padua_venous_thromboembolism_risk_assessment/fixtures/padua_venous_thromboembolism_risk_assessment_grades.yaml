@@ -1,0 +1,20 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 438380
+  deletedAt: null
+  activeCancerPoints: 1
+  previousVtePoints: 1
+  reducedMobilityPoints: 1
+  knownThrombophiliaPoints: 1
+  recentTraumaOrSurgeryPoints: 1
+  elderlyAgePoints: 1
+  heartOrRespiratoryFailurePoints: 1
+  acuteMiOrIschaemicStrokePoints: 1
+  acuteInfectionOrRheumatologicalPoints: 1
+  obesityPoints: 1
+  ongoingHormonalTreatmentPoints: 1
+  totalScore: 1
+  riskBand: "low"
+  prophylaxisRecommendation: "Test prophylaxisRecommendation"
+  gradedAt: "2026-01-01T00:00:00Z"
+  paduaVenousThromboembolismRiskAssessmentId: 753436

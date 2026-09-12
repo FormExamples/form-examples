@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 379735
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "recent-mi-contraindication"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  pulmonaryFunctionTestRequestGradeId: 777620

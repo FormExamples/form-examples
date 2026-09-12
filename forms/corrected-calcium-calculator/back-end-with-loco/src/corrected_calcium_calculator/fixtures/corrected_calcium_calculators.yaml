@@ -1,0 +1,17 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 133194
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "doctor"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "general-practice"
+  sampleReference: "Test sampleReference"
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "18-39"
+  sex: "female"
+  totalCalciumMmolL: 1.0
+  albuminGL: 1.0
+  symptomatic: "yes"
+  patientId: 251982
+  clinicianId: 888296

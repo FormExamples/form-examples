@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 275417
+  deletedAt: null
+  ordinal: 1
+  name: "Test Patient"
+  priority: "high"
+  scenario: "Test scenario"
+  arc42DocumentationId: 202624

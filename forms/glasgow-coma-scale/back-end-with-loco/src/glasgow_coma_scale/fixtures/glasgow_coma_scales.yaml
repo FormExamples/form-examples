@@ -1,0 +1,28 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 608371
+  deletedAt: null
+  assessorName: "Test assessorName"
+  assessorRole: "doctor"
+  assessedAt: "2026-01-01T00:00:00Z"
+  setting: "ed"
+  reason: "Test reason"
+  intubated: "yes"
+  sedated: "yes"
+  paralysed: "yes"
+  eyeResponse: "spontaneous"
+  eyeNotTestableReason: "Test eyeNotTestableReason"
+  verbalResponse: "orientated"
+  verbalNotTestableReason: "Test verbalNotTestableReason"
+  motorResponse: "obeys-commands"
+  motorNotTestableReason: "Test motorNotTestableReason"
+  leftPupilReactivity: "reactive"
+  rightPupilReactivity: "reactive"
+  leftPupilSizeMm: 1.0
+  rightPupilSizeMm: 1.0
+  previousTotal: 1
+  previousMotorScore: 1
+  previousAssessedAt: "2026-01-01T00:00:00Z"
+  clinicalNote: "Test clinicalNote"
+  patientId: 732743
+  clinicianId: null

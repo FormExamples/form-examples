@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 905355
+  deletedAt: null
+  recipientName: "Test recipientName"
+  recipientOrganization: "Test recipientOrganization"
+  recipientRole: "Test recipientRole"
+  recipientAddress: "Test recipientAddress"
+  recipientPhone: "+441234567890"
+  recipientEmail: "test.patient@example.com"
+  recipientRelationshipToPatient: "health-plan"
+  hipaaAuthorizationId: 962728

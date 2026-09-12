@@ -1,0 +1,24 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 818141
+  deletedAt: null
+  nurseName: "Test nurseName"
+  nurseRole: "registered-nurse"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "acute-ward"
+  assessmentReason: "admission"
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "14-49"
+  sex: "female"
+  buildWeightForHeight: "average"
+  skinType: "healthy"
+  continence: "complete-catheterised"
+  mobility: "fully-mobile"
+  tissueMalnutrition: "none"
+  neurologicalDeficit: "none"
+  majorSurgeryTrauma: "none"
+  medication: "none"
+  existingPressureDamage: "no"
+  clinicalNote: "Test clinicalNote"
+  patientId: 607170
+  clinicianId: 175105

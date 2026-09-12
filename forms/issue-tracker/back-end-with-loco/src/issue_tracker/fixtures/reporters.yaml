@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 535615
+  deletedAt: null
+  name: "Test Patient"
+  email: "test.patient@example.com"
+  phone: "+441234567890"
+  role: "engineer"
+  organisation: "Test organisation"
+  team: "Test team"
+  location: "Test location"
+  timezone: "Test timezone"
+  preferredContact: "email"

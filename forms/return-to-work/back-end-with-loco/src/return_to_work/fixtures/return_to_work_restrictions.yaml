@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 155099
+  deletedAt: null
+  kind: "altered-hours"
+  severity: "low"
+  quantitativeLimit: "Test quantitativeLimit"
+  notes: "Test notes"
+  startDate: "1990-01-01"
+  endDate: "1990-01-01"
+  priorityRank: 1
+  returnToWorkId: 583038

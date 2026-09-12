@@ -1,0 +1,35 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 858637
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  ecgType: "resting-12-lead"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  recordingQuality: "good"
+  clinicalHistory: "Test clinicalHistory"
+  ventricularRateBpm: 1
+  rhythm: "sinus"
+  prIntervalMs: 1
+  qrsDurationMs: 1
+  qtIntervalMs: 1
+  qtcMs: 1
+  cardiacAxis: "normal"
+  stElevation: true
+  stDepression: true
+  tWaveInversion: true
+  pathologicalQWaves: true
+  leftVentricularHypertrophy: true
+  bundleBranchBlock: true
+  ischaemia: true
+  normalEcg: true
+  interpretation: "Test interpretation"
+  comparisonWithPrevious: "Test comparisonWithPrevious"
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 937188
+  clinicianId: 442602

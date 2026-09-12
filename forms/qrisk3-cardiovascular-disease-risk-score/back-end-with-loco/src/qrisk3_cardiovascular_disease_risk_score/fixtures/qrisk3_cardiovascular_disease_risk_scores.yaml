@@ -1,0 +1,36 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 274844
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "gp"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "general-practice"
+  patientIdentifier: "Test patientIdentifier"
+  age: 1.0
+  sex: "female"
+  ethnicity: "white-or-not-stated"
+  townsendScore: 1.0
+  postcode: "SW1A 2AA"
+  smokingStatus: "non"
+  bodyMassIndex: 24.2
+  diabetesStatus: "none"
+  cholesterolHdlRatio: 1.0
+  systolicBloodPressure: 1.0
+  systolicBloodPressureSd: 1.0
+  onBloodPressureTreatment: "yes"
+  familyHistoryChd: "yes"
+  atrialFibrillation: "yes"
+  chronicKidneyDiseaseStage: "none"
+  migraine: "yes"
+  rheumatoidArthritis: "yes"
+  systemicLupusErythematosus: "yes"
+  severeMentalIllness: "yes"
+  erectileDysfunction: "yes"
+  onAtypicalAntipsychotics: "yes"
+  onCorticosteroids: "yes"
+  hasEstablishedCvd: "yes"
+  hasFamilialHypercholesterolaemia: "yes"
+  clinicalNote: "Test clinicalNote"
+  patientId: 602162
+  clinicianId: null

@@ -1,0 +1,39 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 561442
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  specimenType: "midstream"
+  specimenCondition: "satisfactory"
+  clinicalHistory: "Test clinicalHistory"
+  leucocytes: "negative"
+  nitrites: "negative"
+  protein: "negative"
+  blood: "negative"
+  glucose: "negative"
+  ketones: "negative"
+  bilirubin: "negative"
+  ph: 1.0
+  specificGravity: 1.0
+  redCellCount: "Test redCellCount"
+  whiteCellCount: "Test whiteCellCount"
+  epithelialCells: "Test epithelialCells"
+  casts: "Test casts"
+  organismsSeen: true
+  crystals: "Test crystals"
+  cultureResult: "no-growth"
+  organismIsolated: "Test organismIsolated"
+  colonyCountCfuMl: "Test colonyCountCfuMl"
+  antibioticSensitivities: "Test antibioticSensitivities"
+  overallResultStatus: "normal"
+  findingsNarrative: "Test findingsNarrative"
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 299231
+  clinicianId: 836300

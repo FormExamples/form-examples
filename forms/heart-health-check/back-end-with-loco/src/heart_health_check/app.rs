@@ -78,6 +78,53 @@ impl Hooks for App {
             &format!("{}/src/heart_health_check/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/heart_health_check/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/heart_health_check/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::assessments::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/heart_health_check/fixtures/assessments.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::blood_pressures::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/heart_health_check/fixtures/blood_pressures.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::cholesterols::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/heart_health_check/fixtures/cholesterols.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::demographics_ethnicities::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/heart_health_check/fixtures/demographics_ethnicities.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::family_histories::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/heart_health_check/fixtures/family_histories.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medical_conditions::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/heart_health_check/fixtures/medical_conditions.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::smoking_alcohols::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/heart_health_check/fixtures/smoking_alcohols.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

@@ -1,0 +1,35 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 711858
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  dipstick: true
+  microscopyCultureSensitivity: true
+  albuminCreatinineRatio: true
+  proteinCreatinineRatio: true
+  pregnancyTest: true
+  drugScreen: true
+  cytology: true
+  twentyFourHourCollection: true
+  primaryIndication: "suspected-uti"
+  clinicalDetails: "Test clinicalDetails"
+  symptomDysuria: true
+  symptomFrequency: true
+  symptomVisibleHaematuria: true
+  symptomLoinPain: true
+  symptomFever: true
+  specimenType: "midstream"
+  specimenCollected: "yes"
+  collectionDatetime: "2026-01-01T00:00:00Z"
+  pregnant: true
+  catheterised: true
+  currentAntibiotics: true
+  urgency: "routine"
+  supervisingConsultant: "Test supervisingConsultant"
+  requesterContact: "Test requesterContact"
+  notes: "Test notes"
+  patientId: 858487
+  clinicianId: 503627

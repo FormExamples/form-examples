@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 241518
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "sudden-sensorineural-hearing-loss-urgent"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  hearingTestRequestGradeId: 451922

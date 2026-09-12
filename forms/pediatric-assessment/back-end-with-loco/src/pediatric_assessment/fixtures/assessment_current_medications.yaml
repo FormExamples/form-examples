@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 920686
+  deletedAt: null
+  takesRegularMedications: "Test takesRegularMedications"
+  takesOverTheCounter: "Test takesOverTheCounter"
+  overTheCounterDetails: "Test overTheCounterDetails"
+  takesSupplements: "Test takesSupplements"
+  supplementDetails: "Test supplementDetails"
+  medicationAdherence: "Test medicationAdherence"
+  adverseDrugReactions: "Test adverseDrugReactions"
+  additionalNotes: "Test additionalNotes"
+  assessmentId: 794405

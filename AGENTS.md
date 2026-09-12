@@ -269,6 +269,7 @@ bin/loco-test-max-connections-fix --check --all # Loco config/test.yaml max_conn
 bin/loco-serve-openapi-refactor --check --all # Loco GET /api/openapi.yaml route rollout drift detector
 bin/loco-camel-case-json-refactor --check --all # Loco domain-struct rename_all=camelCase drift detector
 bin/loco-integration-test-rollout --check --all # Loco patient-table POST/GET round-trip test rollout drift detector
+bin/loco-seed-data-rollout --check --all # Loco App::seed() domain-table fixture rollout drift detector
 bin/loco-missing-request-test-stubs-fix --check --all # Loco missing-domain-test-stub completeness check (one-shot)
 bin/loco-rs-1-migration --check --all # Loco 0.16 -> 1.0.1 migration completeness check (one-shot)
 bin/loco-msrv-set --msrv 1.96 --check --all # Rust MSRV (rust-version) drift detector, per spec/rust-msrv-n-minus-2/

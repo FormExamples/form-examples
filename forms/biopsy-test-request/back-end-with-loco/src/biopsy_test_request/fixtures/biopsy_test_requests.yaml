@@ -1,0 +1,31 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 875917
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  requestedByDate: "1990-01-01"
+  biopsySite: "skin"
+  biopsyMethod: "punch"
+  laterality: "left"
+  primaryIndication: "suspected-malignancy"
+  clinicalQuestion: "Test clinicalQuestion"
+  relevantHistory: "Test relevantHistory"
+  lesionDescription: "Test lesionDescription"
+  imagingGuidanceRequired: true
+  takingAnticoagulant: true
+  anticoagulantAgent: "Test anticoagulantAgent"
+  takingAntiplatelet: true
+  antiplateletAgent: "Test antiplateletAgent"
+  inr: 1.0
+  plateletCount: 1.0
+  bleedingDisorder: true
+  immunosuppressed: true
+  urgency: "routine"
+  supervisingConsultant: "Test supervisingConsultant"
+  requesterContact: "Test requesterContact"
+  notes: "Test notes"
+  patientId: 588998
+  clinicianId: 146600

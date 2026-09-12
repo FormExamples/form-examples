@@ -75,6 +75,38 @@ impl Hooks for App {
             &format!("{}/src/alcohol_use_disorders_identification_test_consumption/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/alcohol_use_disorders_identification_test_consumption/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/alcohol_use_disorders_identification_test_consumption/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::audit_cs::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/alcohol_use_disorders_identification_test_consumption/fixtures/audit_cs.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::audit_c_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/alcohol_use_disorders_identification_test_consumption/fixtures/audit_c_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::audit_c_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/alcohol_use_disorders_identification_test_consumption/fixtures/audit_c_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::audit_c_grade_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/alcohol_use_disorders_identification_test_consumption/fixtures/audit_c_grade_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

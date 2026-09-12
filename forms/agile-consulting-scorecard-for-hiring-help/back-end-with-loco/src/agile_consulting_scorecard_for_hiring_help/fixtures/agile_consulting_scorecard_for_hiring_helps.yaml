@@ -1,0 +1,42 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 497660
+  deletedAt: null
+  status: "draft"
+  assessmentDate: "1990-01-01"
+  submittedAt: "2026-01-01T00:00:00Z"
+  finalizedAt: "2026-01-01T00:00:00Z"
+  m1Done: true
+  m1Evidence: "Test m1Evidence"
+  m2Done: true
+  m2Evidence: "Test m2Evidence"
+  m3Done: true
+  m3Evidence: "Test m3Evidence"
+  m4Done: true
+  m4Evidence: "Test m4Evidence"
+  p1Done: true
+  p1Evidence: "Test p1Evidence"
+  p2Done: true
+  p2Evidence: "Test p2Evidence"
+  p3Done: true
+  p3Evidence: "Test p3Evidence"
+  p4Done: true
+  p4Evidence: "Test p4Evidence"
+  p5Done: true
+  p5Evidence: "Test p5Evidence"
+  p6Done: true
+  p6Evidence: "Test p6Evidence"
+  p7Done: true
+  p7Evidence: "Test p7Evidence"
+  p8Done: true
+  p8Evidence: "Test p8Evidence"
+  p9Done: true
+  p9Evidence: "Test p9Evidence"
+  p10Done: true
+  p10Evidence: "Test p10Evidence"
+  p11Done: true
+  p11Evidence: "Test p11Evidence"
+  p12Done: true
+  p12Evidence: "Test p12Evidence"
+  organizationId: 210143
+  respondentId: 926559

@@ -1,0 +1,8 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 435904
+  deletedAt: null
+  easeOfScheduling: 1
+  waitForAppointment: 1
+  waitInWaitingRoom: 1
+  encounterSatisfactionId: 670200

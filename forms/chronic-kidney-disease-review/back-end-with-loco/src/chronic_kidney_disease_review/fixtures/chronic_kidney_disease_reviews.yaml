@@ -1,0 +1,41 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 334035
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "gp"
+  reviewedAt: "1990-01-01"
+  careSetting: "general-practice"
+  reviewType: "annual"
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "18-39"
+  sex: "female"
+  diabetesStatus: "none"
+  primaryCause: "diabetic"
+  monthsSinceDiagnosis: 1
+  egfr: 1.0
+  egfrSampleDate: "1990-01-01"
+  previousEgfr: 1.0
+  previousEgfrDate: "1990-01-01"
+  acr: 1.0
+  acrSampleDate: "1990-01-01"
+  acrMeasured: "yes"
+  systolicBloodPressure: 1
+  diastolicBloodPressure: 1
+  aceiOrArbPrescribed: "yes"
+  sglt2iPrescribed: "yes"
+  statinPrescribed: "yes"
+  nephrotoxicDrugPresent: "yes"
+  nephrotoxicDoseAdjusted: "yes"
+  medicationReviewCompleted: "yes"
+  hba1c: 1.0
+  potassium: 1.0
+  bicarbonate: 1.0
+  calcium: 1.0
+  phosphate: 1.0
+  pth: 1.0
+  haemoglobin: 1.0
+  referralDecision: "none"
+  clinicalNote: "Test clinicalNote"
+  patientId: 843772
+  clinicianId: null

@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 822416
+  deletedAt: null
+  category: "normal"
+  surveillanceBand: "discharge"
+  recommendedAction: "Test recommendedAction"
+  growthCm: 1.0
+  gradedAt: "2026-01-01T00:00:00Z"
+  abdominalAorticAneurysmScreeningId: 709289

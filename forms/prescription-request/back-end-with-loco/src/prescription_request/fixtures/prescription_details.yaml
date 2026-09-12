@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 919768
+  deletedAt: null
+  requestDate: "1990-01-01"
+  medicationName: "Test medicationName"
+  dosage: "Test dosage"
+  frequency: "Test frequency"
+  routeOfAdministration: "oral"
+  treatmentInstructions: "Test treatmentInstructions"
+  prescriptionRequestId: 505640

@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 548079
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "high-bleeding-risk"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  hasBledScoreForMajorBleedingRiskGradeId: 181463

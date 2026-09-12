@@ -1,0 +1,34 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 472453
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  studyType: "home-sleep-apnoea-test"
+  studyAdequacy: "adequate"
+  clinicalHistory: "Test clinicalHistory"
+  comparisonWithPrevious: "Test comparisonWithPrevious"
+  totalRecordingTimeHours: 1.0
+  totalSleepTimeHours: 1.0
+  apnoeaHypopnoeaIndex: 1.0
+  oxygenDesaturationIndex: 1.0
+  minimumSpo2Percent: 1.0
+  timeBelow90PercentSpo2: 1.0
+  meanHeartRateBpm: 1
+  osaSeverity: "none"
+  obstructiveSleepApnoea: true
+  centralSleepApnoea: true
+  periodicLimbMovements: true
+  nocturnalHypoventilation: true
+  significantDesaturation: true
+  normalStudy: true
+  findingsNarrative: "Test findingsNarrative"
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 746149
+  clinicianId: 247465

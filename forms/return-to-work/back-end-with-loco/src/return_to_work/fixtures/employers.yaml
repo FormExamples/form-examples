@@ -1,0 +1,14 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 438980
+  deletedAt: null
+  name: "Test Patient"
+  industrySector: "agriculture"
+  postalAddressAsFullText: "10 Downing Street, London"
+  countryAsIso31661Alpha2: "GB"
+  postcode: "SW1A 2AA"
+  occupationalHealthContactName: "Test occupationalHealthContactName"
+  occupationalHealthContactEmail: "test.patient@example.com"
+  occupationalHealthContactPhone: "+441234567890"
+  hrContactName: "Test hrContactName"
+  hrContactEmail: "test.patient@example.com"

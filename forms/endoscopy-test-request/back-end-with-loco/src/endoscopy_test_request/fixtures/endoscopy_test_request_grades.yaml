@@ -1,0 +1,20 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 828235
+  deletedAt: null
+  appropriatenessScore: 1
+  appropriatenessBand: "usually-appropriate"
+  triageTier: "routine"
+  targetTimeframe: "Test targetTimeframe"
+  twoWeekWaitEligible: true
+  twoWeekWaitRationale: "Test twoWeekWaitRationale"
+  completenessPercent: 1
+  glasgowBlatchfordScore: 1
+  rockallScore: 1
+  riskBand: "low"
+  anticoagulantAction: "Test anticoagulantAction"
+  recommendation: "accept"
+  clinicianNotes: "Test clinicianNotes"
+  signedAt: "2026-01-01T00:00:00Z"
+  gradedAt: "2026-01-01T00:00:00Z"
+  endoscopyTestRequestId: 111596

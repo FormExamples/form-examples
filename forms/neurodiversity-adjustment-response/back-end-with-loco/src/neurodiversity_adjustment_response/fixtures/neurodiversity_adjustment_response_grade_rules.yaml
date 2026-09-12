@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "06288451-84fb-5dd5-af69-c2f9cb1e532c"
+  deletedAt: null
+  ruleId: "Test ruleId"
+  axis: "outcome"
+  category: "Test category"
+  description: "Test description"
+  neurodiversityAdjustmentResponseGradeId: "b760eeea-386a-56d5-b978-760fb38f3088"

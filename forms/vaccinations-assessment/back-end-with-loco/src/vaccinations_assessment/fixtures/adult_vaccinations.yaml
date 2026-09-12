@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 460593
+  deletedAt: null
+  tdIpvBooster: 1
+  hpv: 1
+  meningitisAcwy: 1
+  influenzaAnnual: 1
+  covid19: 1
+  shingles: 1
+  pneumococcalPpv: 1
+  assessmentId: 174864

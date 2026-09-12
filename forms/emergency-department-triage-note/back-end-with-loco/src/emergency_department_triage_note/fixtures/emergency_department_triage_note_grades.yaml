@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 503615
+  deletedAt: null
+  news2Total: 1
+  news2AnyParameterThree: "yes"
+  priorityLevel: 1
+  priorityColour: "red"
+  priorityName: "Immediate"
+  targetMinutes: 1
+  gradedAt: "2026-01-01T00:00:00Z"
+  emergencyDepartmentTriageNoteId: 157067

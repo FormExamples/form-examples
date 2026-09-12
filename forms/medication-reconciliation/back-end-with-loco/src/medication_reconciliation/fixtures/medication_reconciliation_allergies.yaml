@@ -1,0 +1,8 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 224873
+  deletedAt: null
+  substance: "Test substance"
+  reactionType: "Test reactionType"
+  severity: "Test severity"
+  medicationReconciliationId: 376586

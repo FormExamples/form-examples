@@ -1,0 +1,29 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 592363
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  requestedByDate: "1990-01-01"
+  studyType: "nerve-conduction"
+  region: "upper-limb"
+  laterality: "left"
+  primaryIndication: "carpal-tunnel"
+  clinicalQuestion: "Test clinicalQuestion"
+  relevantHistory: "Test relevantHistory"
+  symptomNumbness: true
+  symptomWeakness: true
+  symptomPain: true
+  symptomTingling: true
+  symptomDuration: "less-than-6-weeks"
+  diabetes: true
+  takingAnticoagulant: true
+  pacemakerOrIcd: true
+  urgency: "routine"
+  supervisingConsultant: "Test supervisingConsultant"
+  requesterContact: "Test requesterContact"
+  notes: "Test notes"
+  patientId: 249774
+  clinicianId: 352894

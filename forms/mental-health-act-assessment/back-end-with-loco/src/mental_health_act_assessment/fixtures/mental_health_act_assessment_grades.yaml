@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 186565
+  deletedAt: null
+  completenessStatus: "valid"
+  recommendedSectionClass: "section-2"
+  urgency: "routine"
+  gradedAt: "2026-01-01T00:00:00Z"
+  mentalHealthActAssessmentId: 487060

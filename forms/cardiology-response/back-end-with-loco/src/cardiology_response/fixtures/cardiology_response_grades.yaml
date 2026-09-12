@@ -1,0 +1,16 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "6c81a9f9-f78a-5d8a-80d7-843bc98457ca"
+  deletedAt: null
+  responseClassification: "no-abnormality"
+  severity: "none"
+  severityCategory: "Test severityCategory"
+  completenessPercent: 1
+  followUpUrgency: "routine"
+  targetTimeframe: "Test targetTimeframe"
+  recommendedAction: "Test recommendedAction"
+  recommendation: "no-action"
+  clinicianNotes: "Test clinicianNotes"
+  signedAt: "2026-01-01T00:00:00Z"
+  gradedAt: "2026-01-01T00:00:00Z"
+  cardiologyResponseId: "dacac3aa-0b3f-5a20-9350-ec6b8e6e0967"

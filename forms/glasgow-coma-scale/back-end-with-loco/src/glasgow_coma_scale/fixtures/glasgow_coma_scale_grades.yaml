@@ -1,0 +1,15 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 137950
+  deletedAt: null
+  eyeScore: 1
+  verbalScore: 1
+  motorScore: 1
+  totalScore: 1
+  breakdown: "Test breakdown"
+  totalDisplay: "Test totalDisplay"
+  severityBand: "mild"
+  pupilReactivityScore: 1
+  gcsP: 1
+  gradedAt: "2026-01-01T00:00:00Z"
+  glasgowComaScaleId: 608371

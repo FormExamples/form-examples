@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 527443
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "requires-workup"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  pulmonaryEmbolismRuleOutCriteriaGradeId: 527317

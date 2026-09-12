@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 999015
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "massive-haemorrhage-stat"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  bloodCrossMatchTestRequestGradeId: 394965

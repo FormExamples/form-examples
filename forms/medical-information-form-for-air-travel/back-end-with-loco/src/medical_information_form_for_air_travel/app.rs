@@ -75,6 +75,38 @@ impl Hooks for App {
             &format!("{}/src/medical_information_form_for_air_travel/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_information_form_for_air_travel/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_information_form_for_air_travel/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medical_information_form_for_air_travels::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_information_form_for_air_travel/fixtures/medical_information_form_for_air_travels.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medical_information_form_for_air_travel_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_information_form_for_air_travel/fixtures/medical_information_form_for_air_travel_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medical_information_form_for_air_travel_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_information_form_for_air_travel/fixtures/medical_information_form_for_air_travel_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medical_information_form_for_air_travel_grade_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_information_form_for_air_travel/fixtures/medical_information_form_for_air_travel_grade_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

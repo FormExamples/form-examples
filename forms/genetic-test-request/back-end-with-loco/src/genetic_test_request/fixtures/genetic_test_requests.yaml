@@ -1,0 +1,25 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 260588
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  requestedByDate: "1990-01-01"
+  testType: "diagnostic-single-gene"
+  primaryIndication: "suspected-genetic-disorder"
+  clinicalQuestion: "Test clinicalQuestion"
+  clinicalDetails: "Test clinicalDetails"
+  familyHistory: "Test familyHistory"
+  suspectedCondition: "Test suspectedCondition"
+  consentObtained: true
+  geneticCounsellingOffered: true
+  affectedRelativeTested: true
+  specimenType: "blood"
+  urgency: "routine"
+  supervisingConsultant: "Test supervisingConsultant"
+  requesterContact: "Test requesterContact"
+  notes: "Test notes"
+  patientId: 658910
+  clinicianId: 911472

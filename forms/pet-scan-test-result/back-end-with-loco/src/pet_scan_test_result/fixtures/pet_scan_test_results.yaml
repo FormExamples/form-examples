@@ -1,0 +1,31 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 778027
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  scanType: "fdg-pet-ct"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  clinicalHistory: "Test clinicalHistory"
+  bloodGlucoseMmolL: 1.0
+  injectedActivityMbq: 1.0
+  examinationAdequacy: "adequate"
+  findingsNarrative: "Test findingsNarrative"
+  hypermetabolicLesion: true
+  nodalUptake: true
+  distantMetastasis: true
+  noAbnormalUptake: true
+  physiologicalUptakeOnly: true
+  incidentalFinding: true
+  suvMax: 1.0
+  largestLesionSizeMm: 1.0
+  comparisonWithPrevious: "Test comparisonWithPrevious"
+  treatmentResponse: "complete"
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 981813
+  clinicianId: 350310

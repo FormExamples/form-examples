@@ -1,0 +1,18 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 288567
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "doctor"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "primary-care"
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "16-39"
+  sex: "female"
+  cutDown: "yes"
+  annoyed: "yes"
+  guilty: "yes"
+  eyeOpener: "yes"
+  clinicalNote: "Test clinicalNote"
+  patientId: 241592
+  clinicianId: null

@@ -1,0 +1,17 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 192880
+  deletedAt: null
+  sortOrder: 1
+  drugName: "Test drugName"
+  action: "started"
+  dose: "Test dose"
+  route: "oral"
+  frequency: "Test frequency"
+  indication: "Test indication"
+  isAntimicrobial: "yes"
+  reviewDate: "1990-01-01"
+  stopDate: "1990-01-01"
+  dmdCode: "Test dmdCode"
+  notes: "Test notes"
+  inpatientClinicalNoteId: 728045

@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 413290
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "deteriorating-news2-no-escalation"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  inpatientClinicalNoteGradeId: 994703

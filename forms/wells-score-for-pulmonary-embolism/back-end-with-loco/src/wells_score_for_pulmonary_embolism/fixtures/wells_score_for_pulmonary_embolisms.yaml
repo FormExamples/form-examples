@@ -1,0 +1,20 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 900011
+  deletedAt: null
+  status: "draft"
+  patientIdentifier: "Test patientIdentifier"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "emergency-department"
+  ageBand: "18-39"
+  haemodynamicStatus: "stable"
+  clinicalSignsOfDvt: "yes"
+  peMostLikely: "yes"
+  heartRateOver100: "yes"
+  immobilisationOrSurgery: "yes"
+  previousDvtPe: "yes"
+  haemoptysis: "yes"
+  malignancy: "yes"
+  clinicalNotes: "Test clinicalNotes"
+  patientId: 474394
+  clinicianId: null

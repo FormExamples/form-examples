@@ -1,0 +1,16 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 900509
+  deletedAt: null
+  appropriatenessScore: 1
+  appropriatenessBand: "usually-appropriate"
+  radiationSafetyBand: "safe"
+  radiationDoseBand: "low"
+  completenessPercent: 1
+  triageTier: "routine"
+  targetTimeframe: "Test targetTimeframe"
+  recommendation: "accept"
+  clinicianNotes: "Test clinicianNotes"
+  signedAt: "2026-01-01T00:00:00Z"
+  gradedAt: "2026-01-01T00:00:00Z"
+  xRayTestRequestId: 749168

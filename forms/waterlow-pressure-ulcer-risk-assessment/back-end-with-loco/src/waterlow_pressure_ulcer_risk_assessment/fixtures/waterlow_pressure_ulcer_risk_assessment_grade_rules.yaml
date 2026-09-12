@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 630312
+  deletedAt: null
+  ruleId: "Test ruleId"
+  category: "build"
+  points: 1
+  label: "Test label"
+  description: "Test description"
+  waterlowPressureUlcerRiskAssessmentGradeId: 846229

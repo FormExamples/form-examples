@@ -1,0 +1,26 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 308245
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  requestedByDate: "1990-01-01"
+  studyType: "home-sleep-apnoea-test"
+  primaryIndication: "suspected-osa"
+  clinicalQuestion: "Test clinicalQuestion"
+  relevantHistory: "Test relevantHistory"
+  epworthScore: 1
+  stopBangScore: 1
+  bodyMassIndex: 24.2
+  neckCircumferenceCm: 1.0
+  witnessedApnoeas: true
+  occupationalDriver: true
+  cardiovascularDisease: true
+  urgency: "routine"
+  supervisingConsultant: "Test supervisingConsultant"
+  requesterContact: "Test requesterContact"
+  notes: "Test notes"
+  patientId: 493110
+  clinicianId: 528812

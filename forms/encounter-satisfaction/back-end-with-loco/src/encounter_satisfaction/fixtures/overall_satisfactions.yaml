@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 319582
+  deletedAt: null
+  overallRating: 1
+  likelyToRecommend: 1
+  likelyToReturn: 1
+  comments: "Test comments"
+  encounterSatisfactionId: 670200

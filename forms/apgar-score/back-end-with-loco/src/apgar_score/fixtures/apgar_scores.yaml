@@ -1,0 +1,17 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 808144
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "midwife"
+  bornAt: "2026-01-01T00:00:00Z"
+  careSetting: "delivery-room"
+  gestationalAgeWeeks: 1.0
+  modeOfDelivery: "vaginal"
+  newbornIdentifier: "Test newbornIdentifier"
+  sex: "female"
+  birthOrder: 1
+  resuscitationMeasures: "Test resuscitationMeasures"
+  clinicianNote: "Test clinicianNote"
+  patientId: 800531
+  clinicianId: null

@@ -1,0 +1,27 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 395612
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  requestedByDate: "1990-01-01"
+  testType: "pure-tone-audiometry"
+  laterality: "left"
+  primaryIndication: "hearing-loss"
+  clinicalQuestion: "Test clinicalQuestion"
+  relevantHistory: "Test relevantHistory"
+  symptomHearingLoss: true
+  symptomTinnitus: true
+  symptomVertigo: true
+  symptomOtalgia: true
+  suddenOnset: true
+  earDischarge: true
+  ototoxicMedication: true
+  urgency: "routine"
+  supervisingConsultant: "Test supervisingConsultant"
+  requesterContact: "Test requesterContact"
+  notes: "Test notes"
+  patientId: 418255
+  clinicianId: 623341

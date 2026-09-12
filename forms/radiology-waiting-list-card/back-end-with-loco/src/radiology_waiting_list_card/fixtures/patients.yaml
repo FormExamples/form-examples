@@ -1,0 +1,17 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 384826
+  deletedAt: null
+  name: "Test Patient"
+  birthDate: "1990-01-01"
+  sex: "female"
+  email: "test.patient@example.com"
+  phone: "+441234567890"
+  postalAddressAsFullText: "10 Downing Street, London"
+  countryAsIso31661Alpha2: "GB"
+  postcode: "SW1A 2AA"
+  unitedKingdomNhsNumber: "9434765919"
+  preferredLanguageAsIso6391: "Test preferredLanguageAsIso6391"
+  interpreterRequired: "yes"
+  accessibilityNeeds: "Test accessibilityNeeds"
+  preferredContactChannel: "sms"

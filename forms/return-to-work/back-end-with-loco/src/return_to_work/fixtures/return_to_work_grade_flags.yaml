@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 484192
+  deletedAt: null
+  flagCode: "Test flagCode"
+  flagTitle: "Test flagTitle"
+  flagCategory: "safety-critical-role"
+  flagPriority: "low"
+  flagEvidence: "Test flagEvidence"
+  flagRecommendation: "Test flagRecommendation"
+  returnToWorkGradeId: 530704

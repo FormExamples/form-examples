@@ -1,0 +1,35 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 215213
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  monitorType: "24-hour"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  recordingDurationHours: 1.0
+  analysedPercent: 1.0
+  clinicalHistory: "Test clinicalHistory"
+  predominantRhythm: "sinus"
+  meanHeartRateBpm: 1
+  minimumHeartRateBpm: 1
+  maximumHeartRateBpm: 1
+  longestPauseSeconds: 1.0
+  ventricularEctopicPercent: 1.0
+  supraventricularEctopicPercent: 1.0
+  atrialFibrillationDetected: true
+  significantPauses: true
+  ventricularTachycardia: true
+  supraventricularTachycardia: true
+  highGradeAvBlock: true
+  symptomRhythmCorrelation: true
+  normalStudy: true
+  findingsNarrative: "Test findingsNarrative"
+  comparisonWithPrevious: "Test comparisonWithPrevious"
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 225273
+  clinicianId: 593205

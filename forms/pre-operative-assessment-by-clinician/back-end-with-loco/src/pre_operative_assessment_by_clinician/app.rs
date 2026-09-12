@@ -77,6 +77,48 @@ impl Hooks for App {
             &format!("{}/src/pre_operative_assessment_by_clinician/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::allergies::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/pre_operative_assessment_by_clinician/fixtures/allergies.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/pre_operative_assessment_by_clinician/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medications::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/pre_operative_assessment_by_clinician/fixtures/medications.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/pre_operative_assessment_by_clinician/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patient_allergies::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/pre_operative_assessment_by_clinician/fixtures/patient_allergies.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patient_medications::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/pre_operative_assessment_by_clinician/fixtures/patient_medications.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::pre_operative_assessment_by_clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/pre_operative_assessment_by_clinician/fixtures/pre_operative_assessment_by_clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::pre_operative_assessment_by_clinician_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/pre_operative_assessment_by_clinician/fixtures/pre_operative_assessment_by_clinician_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

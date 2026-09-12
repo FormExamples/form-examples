@@ -1,0 +1,14 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "39a69be0-0fb3-59c1-becb-80a91fd2a5f4"
+  deletedAt: null
+  eligibilityBand: "likely-covered"
+  impactBand: "ok"
+  completenessPercent: 1
+  priorityTier: "routine"
+  targetTimeframe: "Test targetTimeframe"
+  recommendation: "progress-to-meeting"
+  managerNotes: "Test managerNotes"
+  signedAt: "2026-01-01T00:00:00Z"
+  gradedAt: "2026-01-01T00:00:00Z"
+  neurodiversityAdjustmentRequestId: "9b4286e8-8786-50bb-8fd7-ca57d01b0a70"

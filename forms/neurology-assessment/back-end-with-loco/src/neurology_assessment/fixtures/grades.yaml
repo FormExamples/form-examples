@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 720237
+  deletedAt: null
+  nihssTotalScore: 1
+  nihssSeverity: "Test nihssSeverity"
+  modifiedRankinScore: 1
+  barthelIndex: 1
+  gradedAt: "2026-01-01T00:00:00Z"
+  assessmentId: 567656

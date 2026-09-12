@@ -1,0 +1,30 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 179854
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  procedure: "flexible-bronchoscopy"
+  sedationUsed: "none"
+  extentExamined: "Test extentExamined"
+  clinicalHistory: "Test clinicalHistory"
+  endobronchialLesion: true
+  mucosalAbnormality: true
+  extrinsicCompression: true
+  bleeding: true
+  foreignBody: true
+  secretionsPurulent: true
+  normalExamination: true
+  lesionLocation: "Test lesionLocation"
+  samplesTaken: "Test samplesTaken"
+  complication: "none"
+  findingsNarrative: "Test findingsNarrative"
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 681892
+  clinicianId: 168413

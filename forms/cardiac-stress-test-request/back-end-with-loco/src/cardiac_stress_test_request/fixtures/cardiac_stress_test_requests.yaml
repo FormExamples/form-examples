@@ -1,0 +1,29 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 390574
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  requestedByDate: "1990-01-01"
+  testType: "exercise-treadmill-ecg"
+  primaryIndication: "suspected-angina"
+  clinicalQuestion: "Test clinicalQuestion"
+  relevantHistory: "Test relevantHistory"
+  symptomChestPain: true
+  symptomBreathlessness: true
+  symptomPalpitations: true
+  ableToExercise: true
+  restingEcgFindings: "Test restingEcgFindings"
+  knownCoronaryArteryDisease: true
+  recentAcuteCoronarySyndrome: true
+  aorticStenosis: "none"
+  uncontrolledHypertension: true
+  betaBlocker: true
+  urgency: "routine"
+  supervisingConsultant: "Test supervisingConsultant"
+  requesterContact: "Test requesterContact"
+  notes: "Test notes"
+  patientId: 953867
+  clinicianId: 917577

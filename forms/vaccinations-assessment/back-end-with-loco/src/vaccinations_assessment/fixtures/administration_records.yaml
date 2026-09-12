@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 320323
+  deletedAt: null
+  vaccineName: "Test vaccineName"
+  batchNumber: "Test batchNumber"
+  expiryDate: "1990-01-01"
+  administrationSite: "leftDeltoid"
+  administrationRoute: "intramuscular"
+  doseNumber: "1"
+  administeredBy: "Test administeredBy"
+  administrationDate: "1990-01-01"
+  assessmentId: 174864

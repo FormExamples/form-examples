@@ -1,0 +1,27 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 430486
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  requestedByDate: "1990-01-01"
+  scanRegion: "hip"
+  primaryIndication: "osteoporosis-screening"
+  clinicalQuestion: "Test clinicalQuestion"
+  relevantHistory: "Test relevantHistory"
+  fraxMajorFracturePercent: 1.0
+  previousFragilityFracture: true
+  longTermSteroids: true
+  menopauseStatus: "pre"
+  parentalHipFracture: true
+  weightKg: 1.0
+  previousDexa: "none"
+  previousDexaDate: "1990-01-01"
+  urgency: "routine"
+  supervisingConsultant: "Test supervisingConsultant"
+  requesterContact: "Test requesterContact"
+  notes: "Test notes"
+  patientId: 611202
+  clinicianId: 995863

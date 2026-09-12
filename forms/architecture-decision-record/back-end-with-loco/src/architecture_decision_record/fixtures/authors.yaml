@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 936864
+  name: "Test Patient"
+  email: "test.patient@example.com"
+  phone: "+441234567890"
+  role: "architect"
+  organizationName: "Test organizationName"
+  teamName: "Test teamName"

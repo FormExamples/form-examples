@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 356933
+  deletedAt: null
+  completenessScore: 1
+  completenessStatus: "Test completenessStatus"
+  validationStatus: "Test validationStatus"
+  validatedAt: "2026-01-01T00:00:00Z"
+  releaseFormId: 708142

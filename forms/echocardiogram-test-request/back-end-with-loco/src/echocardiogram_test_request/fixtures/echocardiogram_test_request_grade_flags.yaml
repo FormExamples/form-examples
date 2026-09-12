@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 570391
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "suspected-endocarditis"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  echocardiogramTestRequestGradeId: 280298

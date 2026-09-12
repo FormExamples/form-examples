@@ -1,0 +1,8 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 946025
+  deletedAt: null
+  scientificName: "Test scientificName"
+  europeanUnionName: "Test europeanUnionName"
+  unitedStatesName: "Test unitedStatesName"
+  cosmeticName: "Test cosmeticName"

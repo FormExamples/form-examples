@@ -1,0 +1,33 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 248237
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  specimenType: "blood-culture"
+  specimenSiteDetail: "Test specimenSiteDetail"
+  specimenCondition: "satisfactory"
+  clinicalHistory: "Test clinicalHistory"
+  gramStainResult: "Test gramStainResult"
+  cultureResult: "no-growth"
+  organismIsolated: "Test organismIsolated"
+  secondOrganismIsolated: "Test secondOrganismIsolated"
+  colonyCount: "Test colonyCount"
+  antibioticSensitivities: "Test antibioticSensitivities"
+  resistanceMrsa: true
+  resistanceEsbl: true
+  resistanceCpe: true
+  cDifficileToxin: "positive"
+  acidFastBacilli: "positive"
+  pcrResult: "Test pcrResult"
+  criticalOrganism: true
+  findingsNarrative: "Test findingsNarrative"
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 466254
+  clinicianId: 666662

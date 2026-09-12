@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 463803
+  deletedAt: null
+  depressionScore: 1
+  depressionSeverity: "Test depressionSeverity"
+  anxietyScore: 1
+  anxietySeverity: "Test anxietySeverity"
+  stressScore: 1
+  stressSeverity: "Test stressSeverity"
+  gradedAt: "2026-01-01T00:00:00Z"
+  assessmentId: 105494

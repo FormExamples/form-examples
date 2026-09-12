@@ -1,0 +1,32 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 600180
+  deletedAt: null
+  assessorName: "Test assessorName"
+  assessorRole: "intensivist"
+  assessorRegistrationNumber: "Test assessorRegistrationNumber"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careLocation: "icu"
+  hoursSinceAdmission: 1
+  patientIdentifier: "Test patientIdentifier"
+  ageYears: 1
+  sex: "female"
+  admissionDiagnosis: "Test admissionDiagnosis"
+  suspectedInfection: "yes"
+  baselineSofaTotal: 1
+  pao2: 1.0
+  fio2: 1.0
+  pao2Fio2Ratio: 1.0
+  respiratorySupport: "ventilated"
+  platelets: 1.0
+  bilirubin: 1.0
+  map: 1.0
+  vasopressor: "none"
+  vasopressorDose: 1.0
+  glasgowComaScale: 1
+  sedated: true
+  creatinine: 1.0
+  urineOutput: 1
+  clinicalNote: "Test clinicalNote"
+  patientId: 435213
+  clinicianId: null

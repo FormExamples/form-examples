@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 169028
+  deletedAt: null
+  ruleId: "Test ruleId"
+  engine: "completeness"
+  component: "header"
+  band: "stable"
+  category: "Test category"
+  description: "Test description"
+  inpatientClinicalNoteGradeId: 994703

@@ -1,0 +1,85 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 840449
+  deletedAt: null
+  status: "draft"
+  assessmentDate: "1990-01-01"
+  assessmentTime: "Test assessmentTime"
+  siteName: "Test siteName"
+  affectedSide: "left"
+  symptomDurationMonths: 1
+  painAtRest010: 1
+  painOnActivity010: 1
+  nightPain: "yes"
+  priorHipSurgery: "yes"
+  priorHipSurgeryDetail: "Test priorHipSurgeryDetail"
+  priorInjuryOrDysplasiaHistory: "yes"
+  priorInjuryOrDysplasiaDetail: "Test priorInjuryOrDysplasiaDetail"
+  ohsPainSeverity: 1
+  ohsWashingAndDrying: 1
+  ohsTransport: 1
+  ohsDressingSocks: 1
+  ohsShopping: 1
+  ohsWalkingPain: 1
+  ohsLimping: 1
+  ohsKneeling: 1
+  ohsNightPain: 1
+  ohsWorkInterference: 1
+  ohsGivingWay: 1
+  ohsStairs: 1
+  walkingDistanceBeforePain: "unlimited"
+  shoesAndSocksDifficulty: "none"
+  walkingAidUse: "none"
+  limpPresent: "yes"
+  antalgicGait: "yes"
+  trendelenburgSign: "yes"
+  legLengthDiscrepancyAsCm: 1.0
+  flexionDegrees: 1
+  internalRotationDegrees: 1
+  externalRotationDegrees: 1
+  abductionDegrees: 1
+  adductionDegrees: 1
+  fixedFlexionDeformityPresent: "yes"
+  hipAbductorStrengthMrc: 1
+  jointStability: "stable"
+  tendernessSite: "none"
+  weightBearingXrayPerformed: "yes"
+  kellgrenLawrenceGrade: 1
+  jointSpaceNarrowing: "none"
+  subchondralSclerosisOrCystsPresent: "yes"
+  mriPerformed: "yes"
+  mriFindings: "Test mriFindings"
+  ctPerformed: "yes"
+  ctIndication: "none"
+  physiotherapyTried: "yes"
+  physiotherapyDurationWeeks: 1
+  weightManagementAdviceGiven: "yes"
+  steroidInjectionGiven: "yes"
+  steroidInjectionCount: 1
+  steroidInjectionResponse: "no-relief"
+  analgesicTrialGiven: "yes"
+  analgesicTrialResponse: "no-relief"
+  walkingAidTrial: "yes"
+  conservativeMeasuresExhausted: "yes"
+  diabetesControlled: "not-diabetic"
+  cardiacDiseasePresent: "yes"
+  bleedingDisorderOrAnticoagulantUse: "yes"
+  smokingStatus: "never"
+  generalFitnessNote: "Test generalFitnessNote"
+  fullBloodCountDone: "yes"
+  renalFunctionDone: "yes"
+  clottingOrInrDone: "yes"
+  ecgDone: "yes"
+  mrsaScreenDone: "yes"
+  urinalysisDone: "yes"
+  risksAndBenefitsDiscussed: "yes"
+  realisticExpectationsDiscussed: "yes"
+  patientDecisionAidGiven: "yes"
+  interpreterRequired: "yes"
+  interpreterLanguage: "Test interpreterLanguage"
+  recommendation: "total-hip-replacement"
+  targetListDate: "1990-01-01"
+  responsibleSurgeon: "Test responsibleSurgeon"
+  additionalNotes: "Test additionalNotes"
+  patientId: 706993
+  clinicianId: 942399

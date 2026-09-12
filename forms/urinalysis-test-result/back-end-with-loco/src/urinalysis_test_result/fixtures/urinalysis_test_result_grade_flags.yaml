@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 522659
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "critical-result-alert"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  urinalysisTestResultGradeId: 108215

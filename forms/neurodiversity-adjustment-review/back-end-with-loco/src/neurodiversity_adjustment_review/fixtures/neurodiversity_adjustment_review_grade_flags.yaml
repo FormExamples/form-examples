@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "57f79ab7-a800-5142-8580-25f2867cf230"
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "adjustments-not-working"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  neurodiversityAdjustmentReviewGradeId: "073feabe-f3f1-56cf-b062-50f55bc1359c"

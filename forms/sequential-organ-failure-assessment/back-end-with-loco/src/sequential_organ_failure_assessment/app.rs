@@ -75,6 +75,38 @@ impl Hooks for App {
             &format!("{}/src/sequential_organ_failure_assessment/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/sequential_organ_failure_assessment/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/sequential_organ_failure_assessment/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::sequential_organ_failure_assessments::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/sequential_organ_failure_assessment/fixtures/sequential_organ_failure_assessments.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::sequential_organ_failure_assessment_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/sequential_organ_failure_assessment/fixtures/sequential_organ_failure_assessment_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::sequential_organ_failure_assessment_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/sequential_organ_failure_assessment/fixtures/sequential_organ_failure_assessment_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::sequential_organ_failure_assessment_grade_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/sequential_organ_failure_assessment/fixtures/sequential_organ_failure_assessment_grade_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

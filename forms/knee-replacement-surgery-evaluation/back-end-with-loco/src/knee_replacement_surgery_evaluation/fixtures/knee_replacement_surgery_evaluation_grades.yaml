@@ -1,0 +1,16 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 600055
+  deletedAt: null
+  oksTotal: 1
+  computedOksCategory: "severe"
+  finalOksCategory: "severe"
+  maxKellgrenLawrenceGrade: 1
+  computedCandidacy: "strong-candidate"
+  finalCandidacy: "strong-candidate"
+  overrideReason: "Test overrideReason"
+  clinicianNotes: "Test clinicianNotes"
+  signedByName: "Test signedByName"
+  signedAt: "2026-01-01T00:00:00Z"
+  gradedAt: "2026-01-01T00:00:00Z"
+  kneeReplacementSurgeryEvaluationId: 705876

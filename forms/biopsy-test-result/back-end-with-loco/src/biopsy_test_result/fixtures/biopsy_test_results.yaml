@@ -1,0 +1,31 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 619339
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  biopsySite: "skin"
+  biopsyMethod: "punch"
+  specimenAdequacy: "adequate"
+  clinicalHistory: "Test clinicalHistory"
+  comparisonWithPrevious: "Test comparisonWithPrevious"
+  macroscopicDescription: "Test macroscopicDescription"
+  microscopicDescription: "Test microscopicDescription"
+  diagnosis: "Test diagnosis"
+  malignancyPresent: true
+  tumourType: "Test tumourType"
+  histologicalGrade: "well-differentiated"
+  resectionMargins: "clear"
+  lymphovascularInvasion: true
+  immunohistochemistry: "Test immunohistochemistry"
+  molecularResults: "Test molecularResults"
+  snomedCode: "Test snomedCode"
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 960453
+  clinicianId: 274856

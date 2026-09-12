@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 657305
+  deletedAt: null
+  ruleId: "Test ruleId"
+  category: "Test category"
+  description: "Test description"
+  hearingGrade: "Test hearingGrade"
+  gradeId: 372771

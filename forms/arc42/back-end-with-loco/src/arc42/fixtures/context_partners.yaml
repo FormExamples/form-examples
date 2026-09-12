@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 493582
+  deletedAt: null
+  ordinal: 1
+  kind: "business"
+  name: "Test Patient"
+  interfaceDescription: "Test interfaceDescription"
+  protocol: "Test protocol"
+  direction: "inbound"
+  arc42DocumentationId: 202624

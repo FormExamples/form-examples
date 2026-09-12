@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 684766
+  deletedAt: null
+  overallOutcome: "referral-required"
+  referralStatus: "routine"
+  sampleAdequate: true
+  withinWindow: true
+  avoidableRepeat: true
+  gradedAt: "2026-01-01T00:00:00Z"
+  newbornBloodSpotScreeningId: 201820

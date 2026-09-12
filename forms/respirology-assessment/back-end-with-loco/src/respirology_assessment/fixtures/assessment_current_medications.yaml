@@ -1,0 +1,15 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 849253
+  deletedAt: null
+  takesRespiratoryMedications: "Test takesRespiratoryMedications"
+  inhalerUse: "Test inhalerUse"
+  inhalerTechniqueAssessed: "Test inhalerTechniqueAssessed"
+  inhalerTechniqueAdequate: "Test inhalerTechniqueAdequate"
+  longTermOxygenTherapy: "Test longTermOxygenTherapy"
+  nebuliserUse: "Test nebuliserUse"
+  takesOtherMedications: "Test takesOtherMedications"
+  medicationAdherence: "Test medicationAdherence"
+  adverseDrugReactions: "Test adverseDrugReactions"
+  additionalNotes: "Test additionalNotes"
+  assessmentId: 294585

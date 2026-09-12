@@ -75,6 +75,38 @@ impl Hooks for App {
             &format!("{}/src/ottawa_knee_rule/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/ottawa_knee_rule/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/ottawa_knee_rule/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::ottawa_knee_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/ottawa_knee_rule/fixtures/ottawa_knee_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::ottawa_knee_rule_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/ottawa_knee_rule/fixtures/ottawa_knee_rule_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::ottawa_knee_rule_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/ottawa_knee_rule/fixtures/ottawa_knee_rule_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::ottawa_knee_rule_grade_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/ottawa_knee_rule/fixtures/ottawa_knee_rule_grade_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 980840
+  deletedAt: null
+  eligibilityStatus: "eligible"
+  resultClass: "routine"
+  managementAction: "routine-recall"
+  status: "complete"
+  gradedAt: "2026-01-01T00:00:00Z"
+  breastScreeningId: 199908

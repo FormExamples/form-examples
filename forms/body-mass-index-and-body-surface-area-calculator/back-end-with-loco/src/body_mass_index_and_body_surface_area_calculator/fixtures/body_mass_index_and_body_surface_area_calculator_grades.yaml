@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 839589
+  deletedAt: null
+  bmi: 1.0
+  bmiCategory: "underweight"
+  bsaMosteller: 1.0
+  bsaDuBois: 1.0
+  gradedAt: "2026-01-01T00:00:00Z"
+  bodyMassIndexAndBodySurfaceAreaCalculatorId: 919640

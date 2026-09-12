@@ -1,0 +1,14 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 719016
+  deletedAt: null
+  totalOneMinute: 1
+  totalFiveMinute: 1
+  totalTenMinute: 1
+  bandOneMinute: "reassuring"
+  bandFiveMinute: "reassuring"
+  bandTenMinute: "reassuring"
+  summaryBand: "reassuring"
+  trend: "improving"
+  gradedAt: "2026-01-01T00:00:00Z"
+  apgarScoreId: 808144

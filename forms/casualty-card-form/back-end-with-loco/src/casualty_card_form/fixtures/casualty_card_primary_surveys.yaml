@@ -1,0 +1,28 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 122478
+  deletedAt: null
+  airwayStatus: "patent"
+  airwayAdjuncts: "Test airwayAdjuncts"
+  cSpineImmobilised: "yes"
+  breathingEffort: "normal"
+  chestMovement: "Test chestMovement"
+  breathSounds: "Test breathSounds"
+  tracheaPosition: "Test tracheaPosition"
+  pulseCharacter: "Test pulseCharacter"
+  skinColour: "Test skinColour"
+  skinTemperature: "Test skinTemperature"
+  capillaryRefill: "Test capillaryRefill"
+  haemorrhage: "Test haemorrhage"
+  ivAccess: "Test ivAccess"
+  gcsEye: 1
+  gcsVerbal: 1
+  gcsMotor: 1
+  gcsTotal: 1
+  pupils: "Test pupils"
+  bloodGlucoseDisability: "Test bloodGlucoseDisability"
+  limbMovements: "Test limbMovements"
+  skinExamination: "Test skinExamination"
+  injuriesIdentified: "Test injuriesIdentified"
+  logRollFindings: "Test logRollFindings"
+  casualtyCardId: 233761

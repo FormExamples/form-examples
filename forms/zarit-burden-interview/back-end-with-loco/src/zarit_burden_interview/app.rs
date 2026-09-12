@@ -75,6 +75,38 @@ impl Hooks for App {
             &format!("{}/src/zarit_burden_interview/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/zarit_burden_interview/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/zarit_burden_interview/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::zarit_burden_interviews::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/zarit_burden_interview/fixtures/zarit_burden_interviews.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::zarit_burden_interview_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/zarit_burden_interview/fixtures/zarit_burden_interview_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::zarit_burden_interview_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/zarit_burden_interview/fixtures/zarit_burden_interview_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::zarit_burden_interview_grade_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/zarit_burden_interview/fixtures/zarit_burden_interview_grade_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

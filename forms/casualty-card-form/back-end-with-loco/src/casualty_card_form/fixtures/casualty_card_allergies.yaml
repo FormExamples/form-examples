@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 604730
+  deletedAt: null
+  allergen: "Test allergen"
+  reaction: "Test reaction"
+  severity: "Test severity"
+  sortOrder: 1
+  casualtyCardId: 233761

@@ -85,6 +85,58 @@ impl Hooks for App {
             ),
         )
         .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::allergies::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/perioperative_optimization/fixtures/allergies.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/perioperative_optimization/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medications::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/perioperative_optimization/fixtures/medications.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/perioperative_optimization/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patient_allergies::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/perioperative_optimization/fixtures/patient_allergies.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patient_medications::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/perioperative_optimization/fixtures/patient_medications.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::perioperative_optimizations::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/perioperative_optimization/fixtures/perioperative_optimizations.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::perioperative_optimization_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/perioperative_optimization/fixtures/perioperative_optimization_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::perioperative_optimization_grade_domains::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/perioperative_optimization/fixtures/perioperative_optimization_grade_domains.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::perioperative_optimization_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/perioperative_optimization/fixtures/perioperative_optimization_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

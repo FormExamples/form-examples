@@ -1,0 +1,17 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 590261
+  deletedAt: null
+  generalAppearance: "Test generalAppearance"
+  headAndFace: "Test headAndFace"
+  neck: "Test neck"
+  chestCardiovascular: "Test chestCardiovascular"
+  chestRespiratory: "Test chestRespiratory"
+  abdomen: "Test abdomen"
+  pelvis: "Test pelvis"
+  musculoskeletalLimbs: "Test musculoskeletalLimbs"
+  neurological: "Test neurological"
+  skin: "Test skin"
+  mentalState: "Test mentalState"
+  bodyDiagramNotes: "Test bodyDiagramNotes"
+  casualtyCardId: 233761

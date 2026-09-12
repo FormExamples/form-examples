@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 304348
+  deletedAt: null
+  ruleId: "Test ruleId"
+  severity: "fatal"
+  ruleFamily: "donor"
+  sourceCitation: "Test sourceCitation"
+  description: "Test description"
+  suggestedCorrection: "Test suggestedCorrection"
+  lpaValidityId: 1

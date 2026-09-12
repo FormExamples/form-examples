@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 227747
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "Test category"
+  message: "Test message"
+  priority: "Test priority"
+  gradeId: 981292

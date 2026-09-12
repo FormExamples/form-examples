@@ -1,0 +1,41 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "5106c30e-7d71-57b3-9695-4622bc070781"
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  requestedByDate: "1990-01-01"
+  requestedService: "general-cardiology"
+  referralReason: "chest-pain"
+  clinicalQuestion: "Test clinicalQuestion"
+  relevantHistory: "Test relevantHistory"
+  symptomChestPain: true
+  chestPainCharacter: "typical-angina"
+  symptomBreathlessness: true
+  nyhaClass: "i"
+  symptomPalpitations: true
+  symptomSyncope: true
+  symptomOedema: true
+  suspectedAcs: true
+  exertionalSyncope: true
+  newOnsetHeartFailure: true
+  ecgDone: true
+  ecgFindings: "Test ecgFindings"
+  troponinStatus: "elevated"
+  bnpStatus: "elevated"
+  knownCoronaryArteryDisease: true
+  previousMi: true
+  heartFailure: true
+  valveDisease: true
+  arrhythmia: true
+  hypertension: true
+  diabetes: true
+  currentMedications: "Test currentMedications"
+  urgency: "routine"
+  supervisingConsultant: "Test supervisingConsultant"
+  requesterContact: "Test requesterContact"
+  notes: "Test notes"
+  patientId: "f7cc84c4-62e2-5dfa-8eb8-e59266ac0729"
+  clinicianId: "3935f103-eaa4-5948-bc80-df31299af73f"

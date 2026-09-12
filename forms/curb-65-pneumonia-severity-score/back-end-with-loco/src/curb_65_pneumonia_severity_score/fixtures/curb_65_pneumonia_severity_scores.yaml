@@ -1,0 +1,27 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 991585
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "physician"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "primary-care"
+  patientIdentifier: "Test patientIdentifier"
+  sex: "female"
+  ageYears: 1
+  confusionPresent: "yes"
+  amtScore: 1
+  ureaMeasured: "yes"
+  ureaMmolL: 1.0
+  respiratoryRate: 1
+  systolicBp: 1
+  diastolicBp: 1
+  oxygenSaturation: 1
+  temperatureC: 1.0
+  significantComorbidity: "yes"
+  multilobarChanges: "yes"
+  clinicianOverrideBand: "low"
+  overrideReason: "Test overrideReason"
+  clinicalNote: "Test clinicalNote"
+  patientId: 244246
+  clinicianId: null

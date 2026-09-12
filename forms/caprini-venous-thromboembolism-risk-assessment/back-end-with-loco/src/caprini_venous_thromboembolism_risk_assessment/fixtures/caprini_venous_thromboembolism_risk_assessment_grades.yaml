@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 975358
+  deletedAt: null
+  totalScore: 1
+  riskBand: "very-low"
+  prophylaxisRecommendation: "Test prophylaxisRecommendation"
+  gradedAt: "2026-01-01T00:00:00Z"
+  capriniVenousThromboembolismRiskAssessmentId: 331633

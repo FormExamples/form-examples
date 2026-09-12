@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 816659
+  deletedAt: null
+  tenYearRiskPercent: 1.0
+  riskBand: "low"
+  heartAge: 1.0
+  linearPredictor: 1.0
+  gradedAt: "2026-01-01T00:00:00Z"
+  qrisk3CardiovascularDiseaseRiskScoreId: 274844

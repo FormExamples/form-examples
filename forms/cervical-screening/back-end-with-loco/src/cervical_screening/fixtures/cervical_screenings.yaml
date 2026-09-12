@@ -1,0 +1,24 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 256757
+  deletedAt: null
+  careSetting: "general-practice"
+  sampleTakerRole: "practice-nurse"
+  sampleTakenAt: "2026-01-01T00:00:00Z"
+  patientIdentifier: "Test patientIdentifier"
+  age: 1
+  recallInterval: "three-yearly"
+  screenDueDate: "1990-01-01"
+  lastScreenDate: "1990-01-01"
+  overdue: "yes"
+  previouslyCeased: "yes"
+  consentGiven: "yes"
+  symptomatic: "yes"
+  symptomDetail: "Test symptomDetail"
+  sampleAdequacy: "adequate"
+  inadequateReason: "insufficient-cells"
+  hpvResult: "negative"
+  cytologyGrade: "negative"
+  clinicalContext: "Test clinicalContext"
+  patientId: 844424
+  clinicianId: null

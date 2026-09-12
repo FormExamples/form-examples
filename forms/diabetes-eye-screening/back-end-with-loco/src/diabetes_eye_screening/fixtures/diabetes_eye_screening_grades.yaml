@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 698452
+  deletedAt: null
+  worstRetinopathy: "R0"
+  worstMaculopathy: "M0"
+  anyUngradable: "yes"
+  outcome: "refer-hes-urgent"
+  referral: "none"
+  recallIntervalMonths: 1
+  status: "complete"
+  gradedAt: "2026-01-01T00:00:00Z"
+  diabetesEyeScreeningId: 246993

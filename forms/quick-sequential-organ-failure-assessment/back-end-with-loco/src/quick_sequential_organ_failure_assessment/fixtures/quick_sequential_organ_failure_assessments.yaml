@@ -1,0 +1,19 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 511185
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "doctor"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "emergency-department"
+  suspectedSource: "Test suspectedSource"
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "16-39"
+  sex: "female"
+  respiratoryRate: 1.0
+  glasgowComaScale: 1
+  mentationAltered: "yes"
+  systolicBloodPressure: 1.0
+  clinicalNote: "Test clinicalNote"
+  patientId: 472909
+  clinicianId: null

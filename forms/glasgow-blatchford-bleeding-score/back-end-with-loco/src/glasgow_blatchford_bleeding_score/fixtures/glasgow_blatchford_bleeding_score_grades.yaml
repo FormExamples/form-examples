@@ -1,0 +1,17 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 764395
+  deletedAt: null
+  bloodUreaPoints: 1
+  haemoglobinPoints: 1
+  systolicBloodPressurePoints: 1
+  pulsePoint: 1
+  melaenaPoint: 1
+  syncopePoint: 1
+  hepaticDiseasePoint: 1
+  cardiacFailurePoint: 1
+  totalScore: 1
+  riskBand: "very-low"
+  recommendedManagement: "Test recommendedManagement"
+  gradedAt: "2026-01-01T00:00:00Z"
+  glasgowBlatchfordBleedingScoreId: 516472

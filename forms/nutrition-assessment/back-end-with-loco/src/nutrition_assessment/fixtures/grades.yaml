@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 916643
+  deletedAt: null
+  mustTotalScore: 1
+  mustRiskCategory: "Test mustRiskCategory"
+  overallRiskLevel: "Test overallRiskLevel"
+  gradedAt: "2026-01-01T00:00:00Z"
+  assessmentId: 690035

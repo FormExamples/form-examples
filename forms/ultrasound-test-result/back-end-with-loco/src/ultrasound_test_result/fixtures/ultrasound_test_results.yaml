@@ -1,0 +1,31 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 677354
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  bodyRegion: "abdomen"
+  laterality: "left"
+  examinationAdequacy: "adequate"
+  clinicalHistory: "Test clinicalHistory"
+  comparisonWithPrevious: "Test comparisonWithPrevious"
+  findingsNarrative: "Test findingsNarrative"
+  massOrLesion: true
+  cyst: true
+  gallstones: true
+  hydronephrosis: true
+  freeFluid: true
+  dvtPresent: true
+  aneurysm: true
+  organEnlargement: true
+  incidentalFinding: true
+  largestLesionSizeMm: 1.0
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 610135
+  clinicianId: 499392

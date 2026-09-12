@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 326087
+  deletedAt: null
+  excludeHiv: "yes"
+  excludeSubstanceAbuse: "yes"
+  excludeMentalHealth: "yes"
+  excludeGeneticInfo: "yes"
+  excludeSti: "yes"
+  additionalRestrictions: "Test additionalRestrictions"
+  releaseFormId: 708142

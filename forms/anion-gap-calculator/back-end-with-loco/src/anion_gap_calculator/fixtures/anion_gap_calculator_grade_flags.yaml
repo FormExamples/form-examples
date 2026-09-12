@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 547041
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "very-high"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  anionGapCalculatorGradeId: 414411

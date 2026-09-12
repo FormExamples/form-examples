@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 799938
+  deletedAt: null
+  eyesResult: "satisfactory"
+  heartResult: "satisfactory"
+  hipsResult: "satisfactory"
+  testesResult: "satisfactory"
+  overallOutcome: "satisfactory"
+  completeness: "complete"
+  completenessPercent: 1
+  gradedAt: "2026-01-01T00:00:00Z"
+  newbornAndInfantPhysicalExaminationId: 129803

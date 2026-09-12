@@ -1,0 +1,22 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 202624
+  deletedAt: null
+  authorName: "Test authorName"
+  authorRole: "Test authorRole"
+  documentDate: "1990-01-01"
+  introduction: "Test introduction"
+  businessContextDescription: "Test businessContextDescription"
+  technicalContextDescription: "Test technicalContextDescription"
+  solutionStrategySummary: "Test solutionStrategySummary"
+  topLevelDecompositionSummary: "Test topLevelDecompositionSummary"
+  buildingBlockOverview: "Test buildingBlockOverview"
+  runtimeOverview: "Test runtimeOverview"
+  deploymentOverview: "Test deploymentOverview"
+  crosscuttingOverview: "Test crosscuttingOverview"
+  qualityTreeSummary: "Test qualityTreeSummary"
+  recommendation: "proceed"
+  additionalNotes: "Test additionalNotes"
+  signedBy: "Test signedBy"
+  signedAt: "2026-01-01T00:00:00Z"
+  architectureId: 122140

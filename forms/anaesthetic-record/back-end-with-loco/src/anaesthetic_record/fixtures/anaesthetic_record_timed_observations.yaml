@@ -1,0 +1,14 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 920389
+  deletedAt: null
+  observedAt: "2026-01-01T00:00:00Z"
+  systolicBloodPressure: 1.0
+  diastolicBloodPressure: 1.0
+  heartRate: 1.0
+  spo2: 1.0
+  endTidalCo2: 1.0
+  temperature: 1.0
+  agentPercent: 1.0
+  freshGasFlowL: 1.0
+  anaestheticRecordId: 935041

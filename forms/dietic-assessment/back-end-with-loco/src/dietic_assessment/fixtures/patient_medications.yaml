@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 250692
+  deletedAt: null
+  dose: "Test dose"
+  frequency: "Test frequency"
+  route: "oral"
+  startedOn: "1990-01-01"
+  prescribedBy: "Test prescribedBy"
+  adherence: "full"
+  notes: "Test notes"
+  patientId: 551175
+  medicationId: 462480

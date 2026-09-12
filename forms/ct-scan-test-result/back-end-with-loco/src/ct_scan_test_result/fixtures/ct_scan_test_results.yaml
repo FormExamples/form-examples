@@ -1,0 +1,31 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 583041
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  bodyRegion: "head"
+  contrastUsed: "none"
+  technique: "Test technique"
+  examinationAdequacy: "adequate"
+  clinicalHistory: "Test clinicalHistory"
+  comparisonWithPrevious: "Test comparisonWithPrevious"
+  findingsNarrative: "Test findingsNarrative"
+  acuteFinding: true
+  massOrLesion: true
+  haemorrhage: true
+  infarct: true
+  fracture: true
+  infectionInflammation: true
+  obstruction: true
+  incidentalFinding: true
+  largestLesionSizeMm: 1.0
+  radiationDoseDlp: 1.0
+  impression: "Test impression"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 862497
+  clinicianId: 950438

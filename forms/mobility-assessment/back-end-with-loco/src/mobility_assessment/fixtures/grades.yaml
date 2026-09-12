@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 266877
+  deletedAt: null
+  balanceScore: 1
+  gaitScore: 1
+  totalTinettiScore: 1
+  fallRiskCategory: "Test fallRiskCategory"
+  tugTimeSeconds: 1.0
+  tugRiskCategory: "Test tugRiskCategory"
+  gradedAt: "2026-01-01T00:00:00Z"
+  assessmentId: 424621

@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 383467
+  deletedAt: null
+  takesMedications: "Test takesMedications"
+  takesOverTheCounter: "Test takesOverTheCounter"
+  takesSupplements: "Test takesSupplements"
+  supplementDetails: "Test supplementDetails"
+  medicationAdherence: "Test medicationAdherence"
+  pharmacyName: "Test pharmacyName"
+  pharmacyPhone: "+441234567890"
+  medicationsNotes: "Test medicationsNotes"
+  assessmentId: 721063

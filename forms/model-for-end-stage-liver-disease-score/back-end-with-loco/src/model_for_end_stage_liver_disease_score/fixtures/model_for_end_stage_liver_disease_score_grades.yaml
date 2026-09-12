@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 491696
+  deletedAt: null
+  bilirubinMgDl: 1.0
+  creatinineMgDl: 1.0
+  creatinineAdjusted: 1.0
+  dialysisRuleApplied: true
+  meldScore: 1
+  mortalityBand: "low"
+  estimatedMortalityPercent: 1.0
+  gradedAt: "2026-01-01T00:00:00Z"
+  modelForEndStageLiverDiseaseScoreId: 825024

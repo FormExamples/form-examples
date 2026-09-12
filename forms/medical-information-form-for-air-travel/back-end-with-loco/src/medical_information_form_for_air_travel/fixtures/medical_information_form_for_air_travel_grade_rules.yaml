@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 254807
+  deletedAt: null
+  ruleId: "Test ruleId"
+  instrument: "cardiovascular"
+  fitnessBand: "fit"
+  category: "Test category"
+  description: "Test description"
+  medicalInformationFormForAirTravelGradeId: 716939

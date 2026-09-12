@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 388837
+  deletedAt: null
+  name: "Test Patient"
+  birthDate: "1990-01-01"
+  sex: "female"
+  unitedKingdomNhsNumber: "9434765919"
+  medicalRecordNumber: "Test medicalRecordNumber"
+  weightAsKg: 70.4

@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 626980
+  deletedAt: null
+  visitDate: "1990-01-01"
+  department: "Test department"
+  providerName: "Test providerName"
+  visitType: "routine-checkup"
+  reasonForVisit: "Test reasonForVisit"
+  firstVisit: "yes"
+  encounterSatisfactionId: 670200

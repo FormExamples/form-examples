@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "51e40742-77a2-595d-8d9d-0cf81267524d"
+  deletedAt: null
+  name: "Test Patient"
+  email: "test.patient@example.com"
+  phone: "+441234567890"
+  postalAddressAsFullText: "10 Downing Street, London"
+  countryAsIso31661Alpha2: "GB"
+  postcode: "SW1A 2AA"
+  role: "line-manager"
+  jobTitle: "Test jobTitle"
+  department: "Test department"

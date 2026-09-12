@@ -1,0 +1,8 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 629753
+  deletedAt: null
+  tenYearRiskPercent: 1.0
+  riskCategory: "Test riskCategory"
+  gradedAt: "2026-01-01T00:00:00Z"
+  assessmentId: 980919

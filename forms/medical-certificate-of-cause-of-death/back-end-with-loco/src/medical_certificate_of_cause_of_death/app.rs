@@ -75,6 +75,38 @@ impl Hooks for App {
             &format!("{}/src/medical_certificate_of_cause_of_death/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_certificate_of_cause_of_death/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_certificate_of_cause_of_death/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medical_certificate_of_cause_of_deaths::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_certificate_of_cause_of_death/fixtures/medical_certificate_of_cause_of_deaths.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medical_certificate_of_cause_of_death_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_certificate_of_cause_of_death/fixtures/medical_certificate_of_cause_of_death_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medical_certificate_of_cause_of_death_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_certificate_of_cause_of_death/fixtures/medical_certificate_of_cause_of_death_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::medical_certificate_of_cause_of_death_grade_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/medical_certificate_of_cause_of_death/fixtures/medical_certificate_of_cause_of_death_grade_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

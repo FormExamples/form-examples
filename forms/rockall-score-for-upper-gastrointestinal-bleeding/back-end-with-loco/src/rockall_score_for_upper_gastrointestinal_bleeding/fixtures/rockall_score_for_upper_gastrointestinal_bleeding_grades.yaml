@@ -1,0 +1,14 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 394730
+  deletedAt: null
+  agePoints: 1
+  shockPoints: 1
+  comorbidityPoints: 1
+  clinicalScore: 1
+  diagnosisPoints: 1
+  stigmataPoints: 1
+  fullScore: 1
+  riskBand: "low"
+  gradedAt: "2026-01-01T00:00:00Z"
+  rockallScoreForUpperGastrointestinalBleedingId: 914447

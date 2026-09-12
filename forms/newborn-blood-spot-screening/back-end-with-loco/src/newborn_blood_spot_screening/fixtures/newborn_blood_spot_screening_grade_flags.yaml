@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 477719
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "urgent-referral"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  newbornBloodSpotScreeningGradeId: 684766

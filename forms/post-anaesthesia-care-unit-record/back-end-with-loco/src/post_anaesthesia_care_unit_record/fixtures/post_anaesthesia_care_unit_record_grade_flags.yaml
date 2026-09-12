@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 176883
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "not-ready-for-discharge"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  postAnaesthesiaCareUnitRecordGradeId: 993958

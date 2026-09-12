@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 735833
+  deletedAt: null
+  graceScore: 1
+  inHospitalRiskBand: "low"
+  sixMonthRiskBand: "low"
+  overallBand: "low"
+  invasiveStrategy: "Test invasiveStrategy"
+  gradedAt: "2026-01-01T00:00:00Z"
+  graceScoreForAcuteCoronarySyndromeId: 592010

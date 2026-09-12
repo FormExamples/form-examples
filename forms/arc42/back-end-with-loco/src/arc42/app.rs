@@ -77,6 +77,48 @@ impl Hooks for App {
             &format!("{}/src/arc42/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::architectures::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/arc42/fixtures/architectures.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::arc42_documentations::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/arc42/fixtures/arc42_documentations.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::business_goals::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/arc42/fixtures/business_goals.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::constraint_items::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/arc42/fixtures/constraint_items.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::context_partners::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/arc42/fixtures/context_partners.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::quality_goals::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/arc42/fixtures/quality_goals.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::stakeholders::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/arc42/fixtures/stakeholders.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::technology_decisions::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/arc42/fixtures/technology_decisions.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

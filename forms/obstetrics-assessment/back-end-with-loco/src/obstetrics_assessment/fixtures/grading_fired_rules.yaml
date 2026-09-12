@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 205524
+  deletedAt: null
+  ruleId: "Test ruleId"
+  category: "Test category"
+  description: "Test description"
+  severityLevel: "Test severityLevel"
+  gradeId: 390973

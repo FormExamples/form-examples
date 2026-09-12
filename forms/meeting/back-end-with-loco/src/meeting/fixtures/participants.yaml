@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 895913
+  deletedAt: null
+  position: 1
+  name: "Test Patient"
+  email: "test.patient@example.com"
+  organisation: "Test organisation"
+  role: "organizer"
+  responseStatus: "no-response"
+  attendanceStatus: "present"
+  notes: "Test notes"
+  meetingId: 247312

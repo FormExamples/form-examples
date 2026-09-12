@@ -1,0 +1,462 @@
+#!/usr/bin/env python3
+"""bin/loco-seed-data-rollout — implement each Loco crate's empty `seed()`
+hook (tasks.md's "Loco seed data: per-crate seeder loading examples/
+typical fixture; document `cargo loco db seed`"), proven against a live
+scratch Postgres on `cardiology-request` before generalising.
+
+Every scaffolded crate ships `async fn seed(_ctx, _base) -> Result<()> {
+Ok(()) }` — a no-op. `cargo <bin> db seed --from src/fixtures` (the Loco
+CLI's own convention; `src/fixtures` is its default `--from`) calls this
+hook with `base` pointing at a fixtures directory; `loco_rs::db::seed::<A>`
+deserializes a YAML file straight into the entity's `Model` and batch-
+inserts it. This tool:
+
+  - Discovers each crate's domain tables from `models/_entities/*.rs`
+    (excluding `mod.rs`/`prelude.rs`/the Loco-scaffolded `users.rs` auth
+    table).
+  - Parses each table's `Model` struct fields (name, Rust type) the same
+    way `bin/loco-integration-test-rollout` parses a controller's
+    `Params` struct, and reuses its exact value-synthesis
+    (`pick_value`/`NAME_HEURISTICS`/CHECK-constraint cross-reference
+    against `sql/*.sql`) — copied in, not imported, matching this repo's
+    self-contained-tool convention.
+  - Detects each table's foreign keys (a `Uuid`-typed column literally
+    named `<other_table>_id` where `<other_table>` + `s` matches another
+    discovered table) and topologically sorts tables so a referenced row
+    is always seeded before the row that references it.
+  - Emits one deterministic UUID per table (stable across re-runs, so
+    `--check` is meaningful) via `uuid5` keyed on `<crate>:<table>`, one
+    YAML fixture per table under `src/fixtures/`, and a `seed()` body
+    that calls `db::seed::<T>()` in that same dependency order.
+
+**Every field's serialised key is converted to camelCase** to match
+`#[serde(rename_all = "camelCase")]` on every entity `Model` fleet-wide —
+missing this silently fails deserialization with a "missing field"
+error, since `loco_rs::db::seed` deserializes straight into `Model`
+(verified live on the cardiology-request pilot before writing this
+generic version).
+
+A crate is SKIPped, not guessed at, when: a field's Rust type isn't one
+`pick_value` already models, a `Uuid` FK column can't be resolved to a
+discovered table, or the dependency graph isn't a clean DAG (a cycle).
+
+Usage:
+    bin/loco-seed-data-rollout [--check] [--dry-run] [--all|<slug>...]
+
+--check reports which crates would change, and exits non-zero if any
+change is pending (CI drift detector). --dry-run shows per-crate status
+without writing. Default (no flags): apply. Idempotent: a crate whose
+`seed()` already calls `db::seed` for every table it would generate is
+left alone.
+"""
+
+import argparse
+import hashlib
+import re
+import sys
+import uuid
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS_DIR = REPO_ROOT / "forms"
+
+MARKER_BEGIN = "// BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change."
+MARKER_END = "// END bin/loco-seed-data-rollout"
+
+# Matches the whole seed() function body (both shapes actually found
+# fleet-wide: 350/356 crates already seed `users` via the Loco scaffold's
+# own default and end with a bare `Ok(())`; 5/356 never got that far and
+# are just `Ok(())`). Either way, this tool's own generated block is
+# inserted right before that trailing `Ok(())` -- never touching whatever
+# (if anything) came before it.
+SEED_FN_RE = re.compile(
+    r"async fn seed\((_?ctx): &AppContext,\s*[\w_]+: &Path\)\s*->\s*Result<\(\)>\s*\{\n"
+    r"(.*?)"
+    r"([ \t]*)Ok\(\(\)\)(\s*\n[ \t]*\})",
+    re.DOTALL,
+)
+MODEL_STRUCT_RE = re.compile(r"pub struct Model\s*\{(.*?)\n\}", re.DOTALL)
+FIELD_RE = re.compile(r"pub\s+(\w+)\s*:\s*([^,\n]+?)\s*,?\s*$", re.MULTILINE)
+CHECK_ENUM_RE = re.compile(r"CHECK\s*\(\s*(\w+)\s+IN\s*\(([^)]+)\)\s*\)", re.IGNORECASE)
+
+
+def to_camel_case(name: str) -> str:
+    words = name.split("_")
+    out = words[0]
+    for w in words[1:]:
+        if w:
+            out += w[0].upper() + w[1:]
+    return out
+
+
+def parse_model_fields(entity_text: str) -> list[tuple[str, str]]:
+    m = MODEL_STRUCT_RE.search(entity_text)
+    if not m:
+        return []
+    return [(fm.group(1), fm.group(2).strip()) for fm in FIELD_RE.finditer(m.group(1))]
+
+
+def parse_check_enums(sql_text: str) -> dict[str, list[str]]:
+    enums = {}
+    for m in CHECK_ENUM_RE.finditer(sql_text):
+        values = re.findall(r"'([^']*)'", m.group(2))
+        if values:
+            enums[m.group(1)] = values
+    return enums
+
+
+def first_non_empty(values: list[str]) -> str:
+    for v in values:
+        if v != "":
+            return v
+    return values[0] if values else ""
+
+
+NAME_HEURISTICS: list[tuple[re.Pattern, object]] = [
+    (re.compile(r"^name$"), "Test Patient"),
+    (re.compile(r"email"), "test.patient@example.com"),
+    (re.compile(r"phone"), "+441234567890"),
+    (re.compile(r"postal_address"), "10 Downing Street, London"),
+    (re.compile(r"^postcode$"), "SW1A 2AA"),
+    (re.compile(r"country_as_iso"), "GB"),
+    (re.compile(r"nhs_number"), "9434765919"),
+    (re.compile(r"hospital_mrn|^mrn$"), "MRN-000123"),
+    (re.compile(r"allergies"), "No known allergies"),
+    (re.compile(r"height_as_cm"), 170.2),
+    (re.compile(r"weight_as_kg"), 70.4),
+    (re.compile(r"body_mass_index"), 24.2),
+    (re.compile(r"waist_as_cm"), 85.0),
+    (re.compile(r"waist_height_ratio"), 0.5),
+    (re.compile(r"vo2_max"), 35.0),
+    (re.compile(r"birth_date"), "1990-01-01"),
+]
+
+
+def pick_value(field_name: str, rust_type: str, enums: dict[str, list[str]]):
+    inner_type = rust_type[len("Option<"):-1] if rust_type.startswith("Option<") else rust_type
+    value = _pick_raw_value(field_name, inner_type, enums)
+    if value == "__UNKNOWN__":
+        return value
+    # rust_decimal::Decimal always (de)serializes as a JSON/YAML STRING, not
+    # a bare number (verified live this session, see
+    # bin/loco-integration-test-rollout) -- seed fixtures must match.
+    if inner_type == "Decimal" and isinstance(value, float):
+        value = str(value)
+    return value
+
+
+def _pick_raw_value(field_name: str, inner_type: str, enums: dict[str, list[str]]):
+    if field_name in enums:
+        return first_non_empty(enums[field_name])
+    for pattern, heuristic_value in NAME_HEURISTICS:
+        if pattern.search(field_name):
+            return heuristic_value
+    if inner_type == "String":
+        return f"Test {to_camel_case(field_name)}"
+    if inner_type == "Date":
+        return "1990-01-01"
+    if inner_type == "DateTimeWithTimeZone":
+        return "2026-01-01T00:00:00Z"
+    if inner_type in ("f64", "f32"):
+        return 1.0
+    if inner_type == "Decimal":
+        return "1.0"
+    if inner_type in ("i64", "i32"):
+        return 1
+    if inner_type == "bool":
+        return True
+    if inner_type == "Uuid":
+        # A Uuid-typed field that isn't a foreign key to a discovered
+        # table (build_crate() already tried that first) -- a business
+        # identifier of some kind. A stable placeholder is as good as any.
+        return det_uuid(f"stray-uuid-field:{field_name}")
+    if inner_type == "Json":
+        return "__JSON_EMPTY_OBJECT__"
+    return "__UNKNOWN__"
+
+
+def yaml_scalar(value) -> str:
+    if value is None:
+        return "null"
+    if value == "__JSON_EMPTY_OBJECT__":
+        return "{}"
+    if isinstance(value, bool):
+        return "true" if value else "false"
+    if isinstance(value, (int, float)):
+        return repr(value)
+    escaped = str(value).replace("\\", "\\\\").replace('"', '\\"')
+    return f'"{escaped}"'
+
+
+def det_uuid(seed_text: str) -> str:
+    return str(uuid.uuid5(uuid.NAMESPACE_URL, seed_text))
+
+
+def det_int_id(seed_text: str) -> int:
+    """A stable, distinct, small-ish positive integer id -- for the
+    dominant i64-auto-increment-PK crates (336/338 surveyed; only 2 use a
+    Uuid PK). loco_rs::db::seed inserts the fixture's explicit id as-is
+    (Postgres allows an explicit value into a SERIAL column) and then
+    resets the sequence to MAX(id)+1, so any distinct positive value
+    works regardless of what the real app would have auto-assigned."""
+    return int(hashlib.sha256(seed_text.encode()).hexdigest(), 16) % 900_000 + 100_000
+
+
+def gen_id(pk_type: str, seed_text: str):
+    return det_uuid(seed_text) if pk_type == "Uuid" else det_int_id(seed_text)
+
+
+def discover_tables(entities_dir: Path) -> list[str]:
+    return sorted(
+        f.stem
+        for f in entities_dir.glob("*.rs")
+        if f.stem not in ("mod", "prelude", "users")
+    )
+
+
+def find_sql_file(sql_dir: Path, table: str) -> Path | None:
+    candidates = list(sql_dir.glob(f"*create_table_{table}.sql"))
+    if not candidates and table.endswith("s"):
+        candidates = list(sql_dir.glob(f"*create_table_{table[:-1]}.sql"))
+    return candidates[0] if candidates else None
+
+
+class CrateAnalysis:
+    def __init__(self, order: list[str], fixtures: dict[str, str]):
+        self.order = order
+        self.fixtures = fixtures
+
+
+def build_crate(src_dir: Path, form_dir: Path) -> tuple[CrateAnalysis | None, str]:
+    """Returns (analysis, detail). analysis is None on SKIP, with detail
+    the reason; otherwise analysis carries the table insertion order and
+    each table's rendered YAML fixture content."""
+    entities_dir = src_dir / "models" / "_entities"
+    if not entities_dir.is_dir():
+        return None, "no models/_entities"
+    tables = discover_tables(entities_dir)
+    if not tables:
+        return None, "no domain tables (only users)"
+
+    sql_dir = form_dir / "sql"
+    table_fields: dict[str, list[tuple[str, str]]] = {}
+    pk_type: dict[str, str] = {}  # table -> "Uuid" or "i64"
+    for table in tables:
+        entity_text = (entities_dir / f"{table}.rs").read_text()
+        fields = parse_model_fields(entity_text)
+        if not fields:
+            return None, f"could not parse Model fields for {table}"
+        table_fields[table] = fields
+        id_types = {rt for n, rt in fields if n == "id"}
+        if id_types != {"Uuid"} and id_types != {"i64"}:
+            return None, f"{table}.id is {id_types or 'missing'} -- only Uuid and i64 PKs are handled"
+        pk_type[table] = next(iter(id_types))
+
+    # A field merely NAMED "..._id" (e.g. `flag_id: String`, a business
+    # identifier, not a foreign key) is not an FK -- only one typed to
+    # match another discovered table's own PK type is. A nullable FK
+    # (`Option<Uuid>`/`Option<i64>`) is left null in the fixture: that's
+    # exactly what an optional relationship with no heuristic-guessable
+    # target should be, not a value to guess at.
+    table_fks: dict[str, dict[str, str]] = {}
+    table_nullable_fks: dict[str, set[str]] = {}
+    for table in tables:
+        fks: dict[str, str] = {}
+        nullable_fks: set[str] = set()
+        for name, rust_type in table_fields[table]:
+            if name == "id" or not name.endswith("_id"):
+                continue
+            if rust_type not in ("Uuid", "i64", "Option<Uuid>", "Option<i64>"):
+                continue
+            target = f"{name[:-3]}s"
+            if target not in tables:
+                continue  # not an FK column after all -- e.g. an unrelated "..._id" name
+            if rust_type.startswith("Option<"):
+                nullable_fks.add(name)
+                continue
+            if rust_type != pk_type[target]:
+                return None, (
+                    f"{table}.{name} is {rust_type} but target table {target}'s PK is "
+                    f"{pk_type[target]} -- mismatched FK type"
+                )
+            fks[name] = target
+        table_fks[table] = fks
+        table_nullable_fks[table] = nullable_fks
+
+    # Topological sort (Kahn's algorithm): tables with no unresolved
+    # dependency first.
+    remaining = set(tables)
+    order: list[str] = []
+    while remaining:
+        ready = [t for t in remaining if all(dep in order for dep in table_fks[t].values())]
+        if not ready:
+            return None, "dependency graph is not a clean DAG (cycle?)"
+        ready.sort()
+        order.extend(ready)
+        remaining -= set(ready)
+
+    table_ids = {t: gen_id(pk_type[t], f"{src_dir.name}:{t}") for t in tables}
+    fixtures: dict[str, str] = {}
+    for table in order:
+        enums = {}
+        sql_file = find_sql_file(sql_dir, table)
+        if sql_file:
+            enums = parse_check_enums(sql_file.read_text())
+        rows_lines = []
+        for name, rust_type in table_fields[table]:
+            if name == "id":
+                value = table_ids[table]
+            elif name in ("created_at", "updated_at"):
+                value = "2026-01-01T00:00:00Z"
+            elif name == "deleted_at":
+                value = None
+            elif name in table_fks[table]:
+                value = table_ids[table_fks[table][name]]
+            elif name in table_nullable_fks[table]:
+                value = None
+            else:
+                value = pick_value(name, rust_type, enums)
+                if value == "__UNKNOWN__":
+                    # An unhandled type is only fatal for a REQUIRED
+                    # column -- an optional one this generator doesn't
+                    # know how to fill safely just stays unset, which
+                    # is exactly what an optional field with no
+                    # heuristic match should be anyway.
+                    if rust_type.startswith("Option<"):
+                        value = None
+                    else:
+                        return None, f"{table}.{name}: {rust_type} unhandled by pick_value"
+                if isinstance(value, str) and value.startswith("__DATE__"):
+                    value = value[len("__DATE__"):]
+            rows_lines.append(f"{to_camel_case(name)}: {yaml_scalar(value)}")
+        fixtures[table] = "- " + "\n  ".join(rows_lines) + "\n"
+
+    return CrateAnalysis(order, fixtures), "ok"
+
+
+def render_seed_block(crate_snake: str, order: list[str], indent: str) -> str:
+    """The block this tool inserts right before seed()'s trailing
+    `Ok(())` -- never the whole function, so whatever the crate's own
+    scaffold already seeds there (fleet-wide: a `users` auth-table seed,
+    350/356 crates; nothing at all, the other 6) is left untouched.
+
+    Every path is fully qualified (`loco_rs::db::seed`,
+    `crate::models::_entities::<table>::ActiveModel`) rather than relying
+    on a `use` statement this tool would otherwise have to locate and
+    edit -- the one part of app.rs's existing shape that genuinely varies
+    (a combined `use crate::{...}` list, a bare `db::truncate_table`
+    import, or nothing at all) is import style, which fully-qualifying
+    sidesteps entirely.
+    """
+    lines = [MARKER_BEGIN]
+    for table in order:
+        path_expr = (
+            f'&format!("{{}}/src/{crate_snake}/fixtures/{table}.yaml", '
+            f'env!("CARGO_MANIFEST_DIR"))'
+        )
+        lines.append(
+            f"loco_rs::db::seed::<crate::models::_entities::{table}::ActiveModel>(\n"
+            f"{indent}    &ctx.db,\n"
+            f"{indent}    {path_expr},\n"
+            f"{indent})\n"
+            f"{indent}.await?;"
+        )
+    lines.append(MARKER_END)
+    return f"{indent}" + f"\n{indent}".join(lines) + "\n"
+
+
+def process_crate(src_dir: Path, form_dir: Path, write: bool) -> tuple[str, str]:
+    app_rs = src_dir / "app.rs"
+    if not app_rs.is_file():
+        return "SKIP", "no app.rs"
+    app_text = app_rs.read_text()
+    if MARKER_BEGIN in app_text:
+        return "unchanged", "already migrated"
+
+    m_seed = SEED_FN_RE.search(app_text)
+    if not m_seed:
+        return "SKIP", "seed() not in a shape this tool recognises"
+
+    analysis, detail = build_crate(src_dir, form_dir)
+    if analysis is None:
+        return "SKIP", detail
+    order, fixtures = analysis.order, analysis.fixtures
+
+    if write:
+        fixtures_dir = src_dir / "fixtures"
+        fixtures_dir.mkdir(parents=True, exist_ok=True)
+        for table, content in fixtures.items():
+            (fixtures_dir / f"{table}.yaml").write_text(content)
+
+        indent = m_seed.group(3)
+        block = render_seed_block(src_dir.name, order, indent)
+        # Insert right after whatever (if anything) the crate's own
+        # scaffold already seeds (end of group 2) and before the
+        # indentation + `Ok(())` (group 3 on), so the existing trailing
+        # `Ok(())` -- and its own indentation -- is left untouched.
+        insert_at = m_seed.end(2)
+        new_app_text = app_text[:insert_at] + block + app_text[insert_at:]
+        if m_seed.group(1) == "_ctx":
+            # The parameter was unused (an empty `Ok(())` stub never
+            # touched it) -- our own inserted calls now use `ctx.db`, so
+            # the leading underscore needs to go, fleet-wide-uniquely at
+            # this exact call site (`fn seed(_ctx: &AppContext,`).
+            new_app_text = new_app_text.replace(
+                "fn seed(_ctx: &AppContext,", "fn seed(ctx: &AppContext,", 1
+            )
+        app_rs.write_text(new_app_text)
+
+    return "changed", f"{len(order)} table(s): {', '.join(order)}"
+
+
+def find_crates():
+    for controllers_mod in sorted(FORMS_DIR.glob("*/back-end-with-loco/src/*/controllers/mod.rs")):
+        yield controllers_mod.parents[1]
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("slugs", nargs="*", help="form slugs (default: every form)")
+    parser.add_argument("--all", action="store_true", help="same as no slugs: every form")
+    parser.add_argument("--check", action="store_true", help="report drift; exit 1 if any pending; don't write")
+    parser.add_argument("--dry-run", action="store_true", help="show status per crate; don't write")
+    args = parser.parse_args()
+
+    if args.slugs:
+        src_dirs = []
+        for slug in args.slugs:
+            matches = sorted((FORMS_DIR / slug / "back-end-with-loco" / "src").glob("*/"))
+            src_dirs.extend(d for d in matches if (d / "controllers" / "mod.rs").is_file())
+    else:
+        src_dirs = list(find_crates())
+
+    write = not (args.check or args.dry_run)
+    changed, unchanged, skipped = [], 0, {}
+    for src_dir in src_dirs:
+        slug = src_dir.parents[2].name
+        form_dir = src_dir.parents[2]
+        status, detail = process_crate(src_dir, form_dir, write)
+        if status == "changed":
+            changed.append((slug, detail))
+        elif status == "unchanged":
+            unchanged += 1
+        else:
+            skipped.setdefault(detail, []).append(slug)
+
+    total_skip = sum(len(v) for v in skipped.values())
+    if args.check:
+        print(f"loco-seed-data-rollout [CHECK]: {len(changed)} crate(s) pending, "
+              f"{unchanged} up to date, {total_skip} SKIP")
+        for slug, _ in changed:
+            print(f"  would change: {slug}")
+        return 1 if changed else 0
+
+    verb = "would change" if not write else "changed"
+    print(f"loco-seed-data-rollout: {len(changed)} crate(s) {verb}, {unchanged} up to date, {total_skip} SKIP")
+    for reason, slugs in sorted(skipped.items(), key=lambda kv: -len(kv[1])):
+        print(f"  SKIP ({len(slugs)}): {reason}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

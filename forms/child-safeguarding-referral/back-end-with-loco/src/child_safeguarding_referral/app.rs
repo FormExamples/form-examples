@@ -75,6 +75,38 @@ impl Hooks for App {
             &format!("{}/src/child_safeguarding_referral/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/child_safeguarding_referral/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/child_safeguarding_referral/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::child_safeguarding_referrals::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/child_safeguarding_referral/fixtures/child_safeguarding_referrals.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::child_safeguarding_referral_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/child_safeguarding_referral/fixtures/child_safeguarding_referral_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::child_safeguarding_referral_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/child_safeguarding_referral/fixtures/child_safeguarding_referral_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::child_safeguarding_referral_grade_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/child_safeguarding_referral/fixtures/child_safeguarding_referral_grade_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

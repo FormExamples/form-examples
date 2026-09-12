@@ -1,0 +1,17 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 702502
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "doctor"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "primary-care"
+  equation: "ckd-epi-2021-creatinine"
+  patientIdentifier: "Test patientIdentifier"
+  serumCreatinineUmolL: 1.0
+  ageYears: 1
+  sex: "female"
+  specimenDate: "1990-01-01"
+  steadyState: "yes"
+  patientId: 238309
+  clinicianId: 994414

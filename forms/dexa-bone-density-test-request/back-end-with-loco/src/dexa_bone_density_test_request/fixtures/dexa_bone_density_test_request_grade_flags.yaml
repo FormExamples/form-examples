@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 591537
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "recent-fragility-fracture"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  dexaBoneDensityTestRequestGradeId: 152194

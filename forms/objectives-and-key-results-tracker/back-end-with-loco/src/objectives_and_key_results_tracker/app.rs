@@ -71,6 +71,18 @@ impl Hooks for App {
             &format!("{}/src/objectives_and_key_results_tracker/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::participants::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/objectives_and_key_results_tracker/fixtures/participants.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::reporters::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/objectives_and_key_results_tracker/fixtures/reporters.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

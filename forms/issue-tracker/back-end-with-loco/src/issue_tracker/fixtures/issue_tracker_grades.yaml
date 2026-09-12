@@ -1,0 +1,20 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 589275
+  deletedAt: null
+  scoreByPriorityRank: 1
+  scoreBySeverityOfImpact: 1
+  scoreByMagnitudeOfDamage: 1
+  scoreByHarmGrade: 1
+  scoreByFailureCondition: "A"
+  scoreByMoscowRequirement: 1
+  scoreByFrequencyPercent: 1.0
+  computedCompositePriority: "low"
+  finalCompositePriority: "low"
+  overrideReason: "Test overrideReason"
+  recommendation: "proceed"
+  triageNotes: "Test triageNotes"
+  signedBy: "Test signedBy"
+  signedAt: "2026-01-01T00:00:00Z"
+  gradedAt: "2026-01-01T00:00:00Z"
+  issueTrackerId: 435746

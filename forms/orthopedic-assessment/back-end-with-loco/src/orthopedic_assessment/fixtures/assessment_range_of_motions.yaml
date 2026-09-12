@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 786999
+  deletedAt: null
+  jointAssessed: "Test jointAssessed"
+  sideAssessed: "Test sideAssessed"
+  overallRomStatus: "Test overallRomStatus"
+  rangeOfMotionNotes: "Test rangeOfMotionNotes"
+  assessmentId: 771465

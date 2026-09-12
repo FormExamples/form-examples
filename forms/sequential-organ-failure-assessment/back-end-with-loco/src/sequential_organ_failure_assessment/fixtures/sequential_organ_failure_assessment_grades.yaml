@@ -1,0 +1,16 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 986710
+  deletedAt: null
+  respirationScore: 1
+  coagulationScore: 1
+  liverScore: 1
+  cardiovascularScore: 1
+  cnsScore: 1
+  renalScore: 1
+  totalScore: 1
+  deltaSofa: 1
+  mortalityBand: "low"
+  sepsis3: true
+  gradedAt: "2026-01-01T00:00:00Z"
+  sequentialOrganFailureAssessmentId: 600180

@@ -1,0 +1,24 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 226833
+  deletedAt: null
+  status: "draft"
+  patientIdentifier: "Test patientIdentifier"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "emergency-department"
+  injuredSide: "left"
+  hoursSinceInjury: 1.0
+  ageYears: 1
+  sex: "female"
+  assessmentReliable: "yes"
+  malleolarZonePain: "yes"
+  lateralMalleolusTenderness: "yes"
+  medialMalleolusTenderness: "yes"
+  midfootZonePain: "yes"
+  fifthMetatarsalBaseTenderness: "yes"
+  navicularTenderness: "yes"
+  ableToBearWeightImmediately: "yes"
+  ableToBearWeightNow: "yes"
+  clinicalNotes: "Test clinicalNotes"
+  patientId: 677255
+  clinicianId: null

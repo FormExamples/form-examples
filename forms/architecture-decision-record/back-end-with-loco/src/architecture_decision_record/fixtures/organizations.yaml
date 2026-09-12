@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 220741
+  name: "Test Patient"
+  legalName: "Test legalName"
+  industry: "Test industry"
+  domain: "Test domain"
+  countryAsIso31661Alpha2: "GB"
+  description: "Test description"

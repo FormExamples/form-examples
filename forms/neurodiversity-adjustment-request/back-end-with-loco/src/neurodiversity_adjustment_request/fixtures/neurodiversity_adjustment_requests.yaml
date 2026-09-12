@@ -1,0 +1,48 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "9b4286e8-8786-50bb-8fd7-ca57d01b0a70"
+  deletedAt: null
+  status: "draft"
+  requestedBy: "worker"
+  requestDate: "1990-01-01"
+  requestedStartDate: "1990-01-01"
+  conditionAdhd: true
+  conditionAutism: true
+  conditionDyslexia: true
+  conditionDyspraxia: true
+  conditionDyscalculia: true
+  conditionTourettes: true
+  conditionOther: true
+  conditionOtherDetail: "Test conditionOtherDetail"
+  diagnosisStatus: "diagnosed"
+  considersDisability: "yes"
+  substantialLongTermImpact: true
+  disclosureConsent: true
+  difficultyConcentration: true
+  difficultyWrittenCommunication: true
+  difficultyOrganisationTime: true
+  difficultySensoryOverload: true
+  difficultyBalanceCoordination: true
+  difficultySocialCommunication: true
+  difficultyMemory: true
+  difficultyBurnoutWellbeing: true
+  tasksSituationsAffected: "Test tasksSituationsAffected"
+  workerStrengths: "Test workerStrengths"
+  adjustmentWorkingEnvironment: true
+  adjustmentEquipmentTechnology: true
+  adjustmentWorkingArrangements: true
+  adjustmentCommunication: true
+  adjustmentSupportMentoring: true
+  adjustmentRecruitmentProcess: true
+  adjustmentPolicyDress: true
+  adjustmentOther: true
+  adjustmentsRequestedDetail: "Test adjustmentsRequestedDetail"
+  supportingEvidenceType: "occupational-health"
+  occupationalHealthInvolved: true
+  accessToWorkInvolved: true
+  currentImpact: "low"
+  atRiskOfAbsence: true
+  urgency: "routine"
+  notes: "Test notes"
+  workerId: "18dabf4f-2605-5c65-a6c4-c231298c343a"
+  managerId: "fc3a9bd7-6854-566c-a9b8-0c39660ed786"

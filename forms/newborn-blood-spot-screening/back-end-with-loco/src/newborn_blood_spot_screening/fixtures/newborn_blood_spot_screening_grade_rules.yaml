@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 986724
+  deletedAt: null
+  ruleId: "Test ruleId"
+  stage: "condition"
+  category: "Test category"
+  description: "Test description"
+  newbornBloodSpotScreeningGradeId: 684766

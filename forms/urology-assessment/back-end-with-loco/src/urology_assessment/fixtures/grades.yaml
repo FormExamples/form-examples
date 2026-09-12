@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 471784
+  deletedAt: null
+  ipssTotalScore: 1
+  ipssQolScore: 1
+  symptomSeverity: "Test symptomSeverity"
+  gradedAt: "2026-01-01T00:00:00Z"
+  assessmentId: 955522

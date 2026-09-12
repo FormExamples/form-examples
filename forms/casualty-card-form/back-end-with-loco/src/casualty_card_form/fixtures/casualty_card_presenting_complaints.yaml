@@ -1,0 +1,18 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 831742
+  deletedAt: null
+  chiefComplaint: "Test chiefComplaint"
+  historyOfPresentingComplaint: "Test historyOfPresentingComplaint"
+  onset: "Test onset"
+  duration: "Test duration"
+  character: "Test character"
+  severity: "Test severity"
+  location: "Test location"
+  radiation: "Test radiation"
+  aggravatingFactors: "Test aggravatingFactors"
+  relievingFactors: "Test relievingFactors"
+  associatedSymptoms: "Test associatedSymptoms"
+  previousEpisodes: "Test previousEpisodes"
+  treatmentPriorToArrival: "Test treatmentPriorToArrival"
+  casualtyCardId: 233761

@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 515341
+  deletedAt: null
+  ruleCode: "Test ruleCode"
+  ruleTitle: "Test ruleTitle"
+  ruleBand: "routine"
+  rulePriority: "low"
+  ruleKind: "fitness"
+  ruleEvidence: "Test ruleEvidence"
+  ruleNotes: "Test ruleNotes"
+  returnToWorkGradeId: 530704

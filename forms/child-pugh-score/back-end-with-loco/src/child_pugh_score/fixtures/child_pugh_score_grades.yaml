@@ -1,0 +1,16 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 638214
+  deletedAt: null
+  bilirubinPoints: 1
+  albuminPoints: 1
+  coagulationPoints: 1
+  ascitesPoints: 1
+  encephalopathyPoints: 1
+  totalScore: 1
+  childPughClass: "A"
+  oneYearSurvival: "Test oneYearSurvival"
+  twoYearSurvival: "Test twoYearSurvival"
+  surgicalRisk: "low"
+  gradedAt: "2026-01-01T00:00:00Z"
+  childPughScoreId: 114739

@@ -1,0 +1,32 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 343480
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  studyType: "nerve-conduction"
+  region: "upper-limb"
+  laterality: "left"
+  studyAdequacy: "adequate"
+  clinicalHistory: "Test clinicalHistory"
+  comparisonWithPrevious: "Test comparisonWithPrevious"
+  nerveConductionFindings: "Test nerveConductionFindings"
+  emgFindings: "Test emgFindings"
+  carpalTunnelSyndrome: true
+  peripheralNeuropathy: true
+  radiculopathy: true
+  motorNeuroneDiseaseFeatures: true
+  myopathy: true
+  neuromuscularJunctionDisorder: true
+  normalStudy: true
+  severity: "mild"
+  pattern: "demyelinating"
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 957419
+  clinicianId: 746412

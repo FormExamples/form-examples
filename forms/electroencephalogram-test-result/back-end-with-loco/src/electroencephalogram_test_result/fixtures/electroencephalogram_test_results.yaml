@@ -1,0 +1,30 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 386430
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  eegType: "routine-awake"
+  recordingDurationMinutes: 1.0
+  recordingQuality: "good"
+  clinicalHistory: "Test clinicalHistory"
+  comparisonWithPrevious: "Test comparisonWithPrevious"
+  backgroundRhythm: "normal"
+  epileptiformDischarges: true
+  focalSlowing: true
+  generalisedSlowing: true
+  seizureRecorded: true
+  statusEpilepticus: true
+  photoparoxysmalResponse: true
+  normalEeg: true
+  findingsNarrative: "Test findingsNarrative"
+  clinicalCorrelation: "Test clinicalCorrelation"
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 722798
+  clinicianId: 383031

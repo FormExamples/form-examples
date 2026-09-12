@@ -1,0 +1,8 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 310831
+  deletedAt: null
+  purposes: "Test purposes"
+  primaryPurpose: "eligibility-determination"
+  otherDetails: "Test otherDetails"
+  hipaaAuthorizationId: 962728

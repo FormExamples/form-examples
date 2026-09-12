@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 391101
+  deletedAt: null
+  ruleId: "Test ruleId"
+  instrument: "must"
+  component: "Test component"
+  score: 1
+  band: "Test band"
+  category: "Test category"
+  description: "Test description"
+  dieticAssessmentGradeId: 539756

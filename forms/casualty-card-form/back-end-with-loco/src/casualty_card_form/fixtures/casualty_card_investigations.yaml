@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 551878
+  deletedAt: null
+  bloodTests: "Test bloodTests"
+  urinalysis: "Test urinalysis"
+  pregnancyTest: "Test pregnancyTest"
+  ecgPerformed: "yes"
+  ecgFindings: "Test ecgFindings"
+  otherInvestigations: "Test otherInvestigations"
+  casualtyCardId: 233761

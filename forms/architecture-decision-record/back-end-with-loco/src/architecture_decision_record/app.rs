@@ -75,7 +75,34 @@ impl Hooks for App {
         Ok(())
     }
 
-    async fn seed(_ctx: &AppContext, _base: &Path) -> Result<()> {
+    async fn seed(ctx: &AppContext, _base: &Path) -> Result<()> {
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::authors::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/architecture_decision_record/fixtures/authors.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::organizations::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/architecture_decision_record/fixtures/organizations.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::architecture_decision_records::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/architecture_decision_record/fixtures/architecture_decision_records.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::architecture_decision_record_notes::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/architecture_decision_record/fixtures/architecture_decision_record_notes.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::architecture_decision_record_positions::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/architecture_decision_record/fixtures/architecture_decision_record_positions.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

@@ -1,0 +1,15 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 350657
+  deletedAt: null
+  waitingTimeStatus: "within-target"
+  clinicalPriority: "P1a"
+  targetWaitWeeks: 1.0
+  daysWaited: 1
+  weeksWaited: 1.0
+  daysToTarget: 1
+  daysToBreach: 1
+  daysToAppointment: 1
+  graderNotes: "Test graderNotes"
+  gradedAt: "2026-01-01T00:00:00Z"
+  prevMedWaitingListCardId: 655005

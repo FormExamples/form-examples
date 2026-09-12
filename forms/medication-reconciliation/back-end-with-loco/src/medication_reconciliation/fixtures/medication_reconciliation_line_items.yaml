@@ -1,0 +1,16 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 181423
+  deletedAt: null
+  listSource: "bpmh"
+  drugName: "Test drugName"
+  form: "Test form"
+  dose: "Test dose"
+  route: "oral"
+  frequency: "Test frequency"
+  indication: "Test indication"
+  highRiskClass: "none"
+  adherence: "taking"
+  sourceType: "patient-interview"
+  status: "active"
+  medicationReconciliationId: 376586

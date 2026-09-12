@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 788601
+  deletedAt: null
+  polypharmacyConcern: "Test polypharmacyConcern"
+  drugInteractionsIdentified: "Test drugInteractionsIdentified"
+  drugInteractionDetails: "Test drugInteractionDetails"
+  complementaryMedicines: "Test complementaryMedicines"
+  complementaryMedicineDetails: "Test complementaryMedicineDetails"
+  medicationAdherence: "Test medicationAdherence"
+  medicationsNotes: "Test medicationsNotes"
+  assessmentId: 203823

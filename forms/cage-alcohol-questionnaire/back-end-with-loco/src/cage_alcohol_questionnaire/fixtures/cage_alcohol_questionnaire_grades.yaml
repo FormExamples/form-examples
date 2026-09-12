@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 413255
+  deletedAt: null
+  cutDownPoint: 1
+  annoyedPoint: 1
+  guiltyPoint: 1
+  eyeOpenerPoint: 1
+  totalScore: 1
+  interpretation: "negative"
+  gradedAt: "2026-01-01T00:00:00Z"
+  cageAlcoholQuestionnaireId: 288567

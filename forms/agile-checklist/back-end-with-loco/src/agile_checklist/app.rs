@@ -74,6 +74,33 @@ impl Hooks for App {
             &format!("{}/src/agile_checklist/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::respondents::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/agile_checklist/fixtures/respondents.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::agile_checklists::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/agile_checklist/fixtures/agile_checklists.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::agile_checklist_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/agile_checklist/fixtures/agile_checklist_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::agile_checklist_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/agile_checklist/fixtures/agile_checklist_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::agile_checklist_grade_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/agile_checklist/fixtures/agile_checklist_grade_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

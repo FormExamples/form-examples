@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 268353
+  deletedAt: null
+  teamRole: "lead-surgeon"
+  arrivedAt: "2026-01-01T00:00:00Z"
+  leftAt: "2026-01-01T00:00:00Z"
+  notes: "Test notes"
+  medicalOperationNoteId: 506012
+  clinicianId: 452324

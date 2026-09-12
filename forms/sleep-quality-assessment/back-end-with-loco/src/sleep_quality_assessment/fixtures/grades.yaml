@@ -1,0 +1,15 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 222490
+  deletedAt: null
+  psqiGlobalScore: 1
+  psqiComponent1SubjectiveQuality: 1
+  psqiComponent2SleepLatency: 1
+  psqiComponent3SleepDuration: 1
+  psqiComponent4SleepEfficiency: 1
+  psqiComponent5SleepDisturbances: 1
+  psqiComponent6SleepMedication: 1
+  psqiComponent7DaytimeDysfunction: 1
+  sleepQualityCategory: "Test sleepQualityCategory"
+  gradedAt: "2026-01-01T00:00:00Z"
+  assessmentId: 103634

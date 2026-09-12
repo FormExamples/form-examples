@@ -75,6 +75,38 @@ impl Hooks for App {
             &format!("{}/src/confusion_assessment_method/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/confusion_assessment_method/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/confusion_assessment_method/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::confusion_assessment_methods::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/confusion_assessment_method/fixtures/confusion_assessment_methods.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::confusion_assessment_method_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/confusion_assessment_method/fixtures/confusion_assessment_method_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::confusion_assessment_method_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/confusion_assessment_method/fixtures/confusion_assessment_method_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::confusion_assessment_method_grade_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/confusion_assessment_method/fixtures/confusion_assessment_method_grade_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

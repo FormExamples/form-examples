@@ -1,0 +1,24 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 341208
+  deletedAt: null
+  observedAt: "2026-01-01T00:00:00Z"
+  cervicalDilatationCm: 1.0
+  descentFifths: 1.0
+  contractionsPer10Min: 1.0
+  contractionDurationBand: "<20s"
+  contractionStrength: "mild"
+  fetalHeartRate: 1
+  liquorState: "intact"
+  moulding: "0"
+  systolicBloodPressure: 1
+  diastolicBloodPressure: 1
+  pulse: 1
+  temperature: 1.0
+  urineVolumeMl: 1.0
+  urineProtein: "negative"
+  urineKetones: "negative"
+  urineGlucose: "negative"
+  oxytocinRate: 1.0
+  drugsAndFluids: "Test drugsAndFluids"
+  partogramId: 921292

@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 508440
+  deletedAt: null
+  ruleId: "Test ruleId"
+  instrument: "waiting-time-status"
+  band: "within-target"
+  category: "Test category"
+  description: "Test description"
+  hematologyWaitingListCardGradeId: 727449

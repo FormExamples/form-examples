@@ -1,0 +1,20 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 920760
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "doctor"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "primary-care"
+  atrialFibrillationType: "paroxysmal"
+  patientIdentifier: "Test patientIdentifier"
+  ageYears: 1
+  sex: "female"
+  congestiveHeartFailure: "yes"
+  hypertension: "yes"
+  diabetes: "yes"
+  strokeTiaThromboembolism: "yes"
+  vascularDisease: "yes"
+  clinicalNote: "Test clinicalNote"
+  patientId: 329085
+  clinicianId: null

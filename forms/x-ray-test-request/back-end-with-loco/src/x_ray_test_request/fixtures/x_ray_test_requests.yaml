@@ -1,0 +1,24 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 749168
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  requestedByDate: "1990-01-01"
+  bodyRegion: "chest"
+  laterality: "left"
+  primaryIndication: "trauma-fracture"
+  clinicalQuestion: "Test clinicalQuestion"
+  relevantHistory: "Test relevantHistory"
+  pregnancyStatus: "not-pregnant"
+  recentSimilarXray: true
+  mobility: "ambulant"
+  urgency: "routine"
+  irMeRJustification: "Test irMeRJustification"
+  supervisingConsultant: "Test supervisingConsultant"
+  requesterContact: "Test requesterContact"
+  notes: "Test notes"
+  patientId: 663642
+  clinicianId: 132841

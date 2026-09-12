@@ -77,6 +77,18 @@ impl Hooks for App {
             ),
         )
         .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::hospital_performance_indicator_values::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/hospital_performance_indicators/fixtures/hospital_performance_indicator_values.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::hospital_performance_indicators::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/hospital_performance_indicators/fixtures/hospital_performance_indicators.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

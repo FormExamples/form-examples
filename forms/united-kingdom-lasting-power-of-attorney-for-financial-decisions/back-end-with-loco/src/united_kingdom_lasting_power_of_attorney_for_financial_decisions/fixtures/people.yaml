@@ -1,0 +1,16 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 608765
+  deletedAt: null
+  title: "Test title"
+  firstNames: "Test firstNames"
+  lastName: "Test lastName"
+  otherNames: "Test otherNames"
+  dateOfBirth: "1990-01-01"
+  email: "test.patient@example.com"
+  phone: "+441234567890"
+  addressId: "567f49f3-3dd2-5267-87f2-c27ebee0c049"
+  isTrustCorporation: true
+  trustCorporationNumber: "Test trustCorporationNumber"
+  isBankrupt: true
+  hasDebtReliefOrder: true

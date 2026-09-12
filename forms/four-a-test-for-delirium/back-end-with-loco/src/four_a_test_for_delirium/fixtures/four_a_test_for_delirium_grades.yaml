@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 994181
+  deletedAt: null
+  item1Score: 1
+  item2Score: 1
+  item3Score: 1
+  item4Score: 1
+  totalScore: 1
+  interpretation: "delirium-unlikely"
+  gradedAt: "2026-01-01T00:00:00Z"
+  fourATestForDeliriumId: 607056

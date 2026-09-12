@@ -75,6 +75,38 @@ impl Hooks for App {
             &format!("{}/src/body_mass_index_and_body_surface_area_calculator/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/body_mass_index_and_body_surface_area_calculator/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/body_mass_index_and_body_surface_area_calculator/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::body_mass_index_and_body_surface_area_calculators::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/body_mass_index_and_body_surface_area_calculator/fixtures/body_mass_index_and_body_surface_area_calculators.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::body_mass_index_and_body_surface_area_calculator_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/body_mass_index_and_body_surface_area_calculator/fixtures/body_mass_index_and_body_surface_area_calculator_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::body_mass_index_and_body_surface_area_calculator_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/body_mass_index_and_body_surface_area_calculator/fixtures/body_mass_index_and_body_surface_area_calculator_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::body_mass_index_and_body_surface_area_calculator_grade_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/body_mass_index_and_body_surface_area_calculator/fixtures/body_mass_index_and_body_surface_area_calculator_grade_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

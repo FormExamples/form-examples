@@ -1,0 +1,20 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 158185
+  deletedAt: null
+  name: "Test Patient"
+  birthDate: "1990-01-01"
+  sex: "female"
+  email: "test.patient@example.com"
+  phone: "+441234567890"
+  postalAddressAsFullText: "10 Downing Street, London"
+  countryAsIso31661Alpha2: "GB"
+  postcode: "SW1A 2AA"
+  unitedKingdomNhsNumber: "9434765919"
+  jobTitle: "Test jobTitle"
+  roleDescription: "Test roleDescription"
+  contractedHoursPerWeek: 1.0
+  shiftPattern: "day"
+  safetyCriticalRole: "yes"
+  dvlaGroup1LicenceHeld: "yes"
+  dvlaGroup2LicenceHeld: "yes"

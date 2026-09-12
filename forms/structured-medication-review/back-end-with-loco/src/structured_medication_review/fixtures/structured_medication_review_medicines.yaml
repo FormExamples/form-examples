@@ -1,0 +1,20 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 947909
+  deletedAt: null
+  drugName: "Test drugName"
+  formStrength: "Test formStrength"
+  doseRegimen: "Test doseRegimen"
+  indication: "Test indication"
+  indicationRecorded: "yes"
+  isRegular: "yes"
+  isHighRisk: "yes"
+  highRiskClass: "anticoagulant"
+  adherence: "good"
+  anticholinergicBurdenPoints: 1
+  monitoringRequired: "yes"
+  monitoringUpToDate: "yes"
+  deprescribingCandidate: "yes"
+  stoppCriterion: "Test stoppCriterion"
+  startCriterion: "Test startCriterion"
+  structuredMedicationReviewId: 127781

@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 763662
+  deletedAt: null
+  ruleId: "Test ruleId"
+  axis: "classification"
+  category: "Test category"
+  description: "Test description"
+  echocardiogramTestResultGradeId: 713444

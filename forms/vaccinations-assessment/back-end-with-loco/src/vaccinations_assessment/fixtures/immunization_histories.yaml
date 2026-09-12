@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 429645
+  deletedAt: null
+  hasVaccinationRecord: "Test hasVaccinationRecord"
+  recordSource: "Test recordSource"
+  lastReviewDate: "1990-01-01"
+  previousAdverseReactions: "Test previousAdverseReactions"
+  adverseReactionDetails: "Test adverseReactionDetails"
+  immunocompromised: "Test immunocompromised"
+  immunocompromisedDetails: "Test immunocompromisedDetails"
+  assessmentId: 174864

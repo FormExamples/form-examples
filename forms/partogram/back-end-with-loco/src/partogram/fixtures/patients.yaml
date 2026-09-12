@@ -1,0 +1,18 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 732023
+  deletedAt: null
+  name: "Test Patient"
+  birthDate: "1990-01-01"
+  sex: "female"
+  email: "test.patient@example.com"
+  phone: "+441234567890"
+  postalAddressAsFullText: "10 Downing Street, London"
+  countryAsIso31661Alpha2: "GB"
+  postcode: "SW1A 2AA"
+  unitedKingdomNhsNumber: "9434765919"
+  hospitalMrn: "MRN-000123"
+  heightAsCm: 170.2
+  weightAsKg: 70.4
+  bodyMassIndex: 24.2
+  allergiesSummary: "No known allergies"

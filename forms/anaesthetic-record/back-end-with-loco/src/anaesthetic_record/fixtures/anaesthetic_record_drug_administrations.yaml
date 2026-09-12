@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 601328
+  deletedAt: null
+  drugName: "Test drugName"
+  dose: 1.0
+  doseUnit: "mg"
+  route: "iv"
+  category: "induction"
+  administeredAt: "2026-01-01T00:00:00Z"
+  anaestheticRecordId: 935041

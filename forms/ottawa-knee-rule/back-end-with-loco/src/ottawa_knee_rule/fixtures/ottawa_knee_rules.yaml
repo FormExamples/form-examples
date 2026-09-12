@@ -1,0 +1,21 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 656133
+  deletedAt: null
+  status: "draft"
+  patientIdentifier: "Test patientIdentifier"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "emergency-department"
+  injuryMechanism: "blunt-trauma"
+  hoursSinceInjury: 1.0
+  sex: "female"
+  injuredSide: "left"
+  ageYears: 1
+  patellarTenderness: "yes"
+  otherBonyTenderness: "yes"
+  fibularHeadTenderness: "yes"
+  unableToFlex90: "yes"
+  unableToBearWeight: "yes"
+  clinicalNotes: "Test clinicalNotes"
+  patientId: 677175
+  clinicianId: null

@@ -1,0 +1,26 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 127781
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "clinical-pharmacist"
+  reviewedAt: "2026-01-01T00:00:00Z"
+  careSetting: "gp-practice"
+  consultationMode: "face-to-face"
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "18-39"
+  sex: "female"
+  frailtyStatus: "fit"
+  livesInCareHome: "yes"
+  longTermConditions: "Test longTermConditions"
+  presentingProblems: "Test presentingProblems"
+  patientReportedIssues: "Test patientReportedIssues"
+  whatMattersToPatient: "Test whatMattersToPatient"
+  sharedDecisions: "Test sharedDecisions"
+  monitoringDue: "Test monitoringDue"
+  overdueMonitoringCount: 1
+  followUpPlan: "Test followUpPlan"
+  followUpDate: "1990-01-01"
+  reviewCompleted: "yes"
+  patientId: 568514
+  clinicianId: null

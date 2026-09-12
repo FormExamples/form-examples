@@ -1,0 +1,15 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 883701
+  deletedAt: null
+  normalizedScore: 1.0
+  satisfactionCategory: "Test satisfactionCategory"
+  domainAccessScore: 1.0
+  domainCommunicationScore: 1.0
+  domainClinicalCareScore: 1.0
+  domainStaffScore: 1.0
+  domainEnvironmentScore: 1.0
+  domainDischargeScore: 1.0
+  domainOverallScore: 1.0
+  gradedAt: "2026-01-01T00:00:00Z"
+  assessmentId: 156353

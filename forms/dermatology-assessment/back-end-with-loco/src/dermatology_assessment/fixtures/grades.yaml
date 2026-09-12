@@ -1,0 +1,8 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 709992
+  deletedAt: null
+  dlqiScore: 1
+  impactLevel: "Test impactLevel"
+  gradedAt: "2026-01-01T00:00:00Z"
+  assessmentId: 605552

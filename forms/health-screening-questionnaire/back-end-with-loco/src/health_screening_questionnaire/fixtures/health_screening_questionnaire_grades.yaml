@@ -1,0 +1,17 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 583623
+  deletedAt: null
+  parqPlusClearance: "cleared"
+  auditCScore: 1
+  auditCBand: "low"
+  computedRiskBand: "low"
+  finalRiskBand: "low"
+  computedRecommendation: "clear-to-proceed"
+  finalRecommendation: "clear-to-proceed"
+  overrideReason: "Test overrideReason"
+  notes: "Test notes"
+  signedByName: "Test signedByName"
+  signedAt: "2026-01-01T00:00:00Z"
+  gradedAt: "2026-01-01T00:00:00Z"
+  healthScreeningQuestionnaireId: 550761

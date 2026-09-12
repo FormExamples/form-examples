@@ -81,6 +81,33 @@ impl Hooks for App {
             ),
         )
         .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::assessors::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/health_screening_questionnaire/fixtures/assessors.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/health_screening_questionnaire/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::health_screening_questionnaires::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/health_screening_questionnaire/fixtures/health_screening_questionnaires.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::health_screening_questionnaire_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/health_screening_questionnaire/fixtures/health_screening_questionnaire_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::health_screening_questionnaire_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/health_screening_questionnaire/fixtures/health_screening_questionnaire_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

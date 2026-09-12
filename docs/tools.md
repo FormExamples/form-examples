@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-94 tools.
+95 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -51,6 +51,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/loco-rs-1-migration`](#loco-rs-1-migration)
 - [`bin/loco-seed-base-rename`](#loco-seed-base-rename)
 - [`bin/loco-seed-base-stray-usage-fix`](#loco-seed-base-stray-usage-fix)
+- [`bin/loco-seed-data-rollout`](#loco-seed-data-rollout)
 - [`bin/loco-serve-openapi-refactor`](#loco-serve-openapi-refactor)
 - [`bin/loco-test-auth-header-fix`](#loco-test-auth-header-fix)
 - [`bin/loco-test-max-connections-fix`](#loco-test-max-connections-fix)
@@ -1585,6 +1586,60 @@ Usage:
   bin/loco-seed-base-stray-usage-fix --all             # every form's Loco crate
   bin/loco-seed-base-stray-usage-fix --dry-run --all   # show what would change
   bin/loco-seed-base-stray-usage-fix --check --all     # drift check (non-zero on drift)
+```
+
+<h2 id="loco-seed-data-rollout"><code>bin/loco-seed-data-rollout</code></h2>
+
+```text
+bin/loco-seed-data-rollout — implement each Loco crate's empty `seed()`
+hook (tasks.md's "Loco seed data: per-crate seeder loading examples/
+typical fixture; document `cargo loco db seed`"), proven against a live
+scratch Postgres on `cardiology-request` before generalising.
+
+Every scaffolded crate ships `async fn seed(_ctx, _base) -> Result<()> {
+Ok(()) }` — a no-op. `cargo <bin> db seed --from src/fixtures` (the Loco
+CLI's own convention; `src/fixtures` is its default `--from`) calls this
+hook with `base` pointing at a fixtures directory; `loco_rs::db::seed::<A>`
+deserializes a YAML file straight into the entity's `Model` and batch-
+inserts it. This tool:
+
+  - Discovers each crate's domain tables from `models/_entities/*.rs`
+    (excluding `mod.rs`/`prelude.rs`/the Loco-scaffolded `users.rs` auth
+    table).
+  - Parses each table's `Model` struct fields (name, Rust type) the same
+    way `bin/loco-integration-test-rollout` parses a controller's
+    `Params` struct, and reuses its exact value-synthesis
+    (`pick_value`/`NAME_HEURISTICS`/CHECK-constraint cross-reference
+    against `sql/*.sql`) — copied in, not imported, matching this repo's
+    self-contained-tool convention.
+  - Detects each table's foreign keys (a `Uuid`-typed column literally
+    named `<other_table>_id` where `<other_table>` + `s` matches another
+    discovered table) and topologically sorts tables so a referenced row
+    is always seeded before the row that references it.
+  - Emits one deterministic UUID per table (stable across re-runs, so
+    `--check` is meaningful) via `uuid5` keyed on `<crate>:<table>`, one
+    YAML fixture per table under `src/fixtures/`, and a `seed()` body
+    that calls `db::seed::<T>()` in that same dependency order.
+
+**Every field's serialised key is converted to camelCase** to match
+`#[serde(rename_all = "camelCase")]` on every entity `Model` fleet-wide —
+missing this silently fails deserialization with a "missing field"
+error, since `loco_rs::db::seed` deserializes straight into `Model`
+(verified live on the cardiology-request pilot before writing this
+generic version).
+
+A crate is SKIPped, not guessed at, when: a field's Rust type isn't one
+`pick_value` already models, a `Uuid` FK column can't be resolved to a
+discovered table, or the dependency graph isn't a clean DAG (a cycle).
+
+Usage:
+    bin/loco-seed-data-rollout [--check] [--dry-run] [--all|<slug>...]
+
+--check reports which crates would change, and exits non-zero if any
+change is pending (CI drift detector). --dry-run shows per-crate status
+without writing. Default (no flags): apply. Idempotent: a crate whose
+`seed()` already calls `db::seed` for every table it would generate is
+left alone.
 ```
 
 <h2 id="loco-serve-openapi-refactor"><code>bin/loco-serve-openapi-refactor</code></h2>

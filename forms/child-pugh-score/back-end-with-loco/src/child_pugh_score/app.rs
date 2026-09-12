@@ -75,6 +75,38 @@ impl Hooks for App {
             &format!("{}/src/child_pugh_score/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/child_pugh_score/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/child_pugh_score/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::child_pugh_scores::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/child_pugh_score/fixtures/child_pugh_scores.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::child_pugh_score_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/child_pugh_score/fixtures/child_pugh_score_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::child_pugh_score_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/child_pugh_score/fixtures/child_pugh_score_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::child_pugh_score_grade_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/child_pugh_score/fixtures/child_pugh_score_grade_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

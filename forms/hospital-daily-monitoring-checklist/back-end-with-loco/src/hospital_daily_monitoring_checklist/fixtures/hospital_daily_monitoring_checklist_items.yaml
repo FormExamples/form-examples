@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 496701
+  deletedAt: null
+  itemCode: "Test itemCode"
+  sectionNumber: 1
+  sectionTitle: "Test sectionTitle"
+  itemText: "Test itemText"
+  status: "satisfactory"
+  remarks: "Test remarks"
+  hospitalDailyMonitoringChecklistId: 854161

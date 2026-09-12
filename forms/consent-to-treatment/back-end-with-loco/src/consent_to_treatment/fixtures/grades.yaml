@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 886185
+  deletedAt: null
+  completenessStatus: "Test completenessStatus"
+  sectionsComplete: 1
+  sectionsTotal: 1
+  gradedAt: "2026-01-01T00:00:00Z"
+  assessmentId: 171832

@@ -1,0 +1,14 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 417605
+  deletedAt: null
+  deviceType: "closed-suction"
+  name: "Test Patient"
+  site: "Test site"
+  sizeOrGauge: "Test sizeOrGauge"
+  outputTarget: "Test outputTarget"
+  removalPlan: "Test removalPlan"
+  removalByDate: "1990-01-01"
+  quantity: 1
+  notes: "Test notes"
+  medicalOperationNoteId: 506012

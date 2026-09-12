@@ -1,0 +1,19 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 846229
+  deletedAt: null
+  buildPoints: 1
+  skinPoints: 1
+  sexPoints: 1
+  agePoints: 1
+  continencePoints: 1
+  mobilityPoints: 1
+  tissueMalnutritionPoints: 1
+  neurologicalDeficitPoints: 1
+  majorSurgeryTraumaPoints: 1
+  medicationPoints: 1
+  totalScore: 1
+  riskBand: "low"
+  preventionActions: "Test preventionActions"
+  gradedAt: "2026-01-01T00:00:00Z"
+  waterlowPressureUlcerRiskAssessmentId: 818141

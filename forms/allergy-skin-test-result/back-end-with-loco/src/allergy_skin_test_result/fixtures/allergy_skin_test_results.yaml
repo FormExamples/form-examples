@@ -1,0 +1,29 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 923651
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  testType: "skin-prick-test"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  clinicalHistory: "Test clinicalHistory"
+  antihistaminesWithheld: true
+  positiveControlValid: true
+  allergensTested: "Test allergensTested"
+  whealSizes: "Test whealSizes"
+  specificIgeResults: "Test specificIgeResults"
+  sensitisedAllergens: "Test sensitisedAllergens"
+  positiveReactions: true
+  sensitisationConfirmed: true
+  anaphylaxisDuringTest: true
+  allNegative: true
+  testInvalid: true
+  interpretation: "Test interpretation"
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 982928
+  clinicianId: 111487

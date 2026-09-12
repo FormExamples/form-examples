@@ -1,0 +1,14 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 376674
+  deletedAt: null
+  hasDiabetes: "no"
+  hasAtrialFibrillation: "yes"
+  hasRheumatoidArthritis: "yes"
+  hasChronicKidneyDisease: "yes"
+  hasMigraine: "yes"
+  hasSevereMentalIllness: "yes"
+  hasErectileDysfunction: "yes"
+  onAtypicalAntipsychotic: "yes"
+  onCorticosteroids: "yes"
+  assessmentId: 172043

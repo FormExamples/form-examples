@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 504972
+  deletedAt: null
+  clinicDate: "1990-01-01"
+  specialty: "Test specialty"
+  modality: "in_person"
+  appointmentType: "new"
+  outpatientOutcomeId: 379759
+  clinicianId: 459572

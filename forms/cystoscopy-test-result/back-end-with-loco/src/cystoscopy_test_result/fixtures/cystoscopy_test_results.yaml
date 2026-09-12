@@ -1,0 +1,30 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 677888
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  procedure: "flexible-cystoscopy"
+  anaesthesia: "local"
+  clinicalHistory: "Test clinicalHistory"
+  bladderTumour: true
+  inflammationCystitis: true
+  bladderStones: true
+  urethralStricture: true
+  trabeculation: true
+  prostaticEnlargement: true
+  normalExamination: true
+  tumourSizeMm: 1.0
+  tumourAppearance: "papillary"
+  biopsyTaken: true
+  complication: "none"
+  findingsNarrative: "Test findingsNarrative"
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 710834
+  clinicianId: 906687

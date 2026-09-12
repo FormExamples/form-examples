@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 925095
+  deletedAt: null
+  occupation: "Test occupation"
+  healthcareWorker: "yes"
+  hepatitisBOccupational: 1
+  influenzaOccupational: 1
+  varicella: 1
+  bcgTuberculosis: 1
+  assessmentId: 174864

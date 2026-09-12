@@ -71,6 +71,18 @@ impl Hooks for App {
             &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_financial_decisions/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::addresses::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_financial_decisions/fixtures/addresses.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::people::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_financial_decisions/fixtures/people.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

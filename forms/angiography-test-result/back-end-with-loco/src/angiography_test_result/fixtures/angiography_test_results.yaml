@@ -1,0 +1,32 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 771488
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  angiographyType: "ct-angiography"
+  bodyRegion: "coronary"
+  contrastUsed: "iodinated"
+  examinationAdequacy: "adequate"
+  clinicalHistory: "Test clinicalHistory"
+  comparisonWithPrevious: "Test comparisonWithPrevious"
+  findingsNarrative: "Test findingsNarrative"
+  significantStenosis: true
+  occlusion: true
+  aneurysm: true
+  dissection: true
+  activeExtravasation: true
+  thrombus: true
+  normalVessels: true
+  incidentalFinding: true
+  maxStenosisPercent: 1.0
+  interventionPerformed: true
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 443872
+  clinicianId: 568811

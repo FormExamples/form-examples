@@ -74,6 +74,18 @@ impl Hooks for App {
             &format!("{}/src/hospital_daily_monitoring_checklist/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::hospital_daily_monitoring_checklists::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/hospital_daily_monitoring_checklist/fixtures/hospital_daily_monitoring_checklists.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::hospital_daily_monitoring_checklist_items::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/hospital_daily_monitoring_checklist/fixtures/hospital_daily_monitoring_checklist_items.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

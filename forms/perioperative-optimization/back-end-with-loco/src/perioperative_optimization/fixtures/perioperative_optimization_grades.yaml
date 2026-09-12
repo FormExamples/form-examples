@@ -1,0 +1,28 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 272849
+  deletedAt: null
+  weeksToSurgery: 1
+  gatingApplied: true
+  mustScore: 1
+  mustRisk: "low"
+  auditCScore: 1
+  stopBangScore: 1
+  dukeActivityStatusIndex: 1.0
+  clinicalFrailtyScale: 1
+  friedPhenotypeScore: 1
+  friedFrailtyCategory: "robust"
+  domainsOptimized: 1
+  domainsInProgress: 1
+  domainsActionRequired: 1
+  domainsInsufficientTime: 1
+  computedReadiness: "ready"
+  finalReadiness: "ready"
+  overrideReason: "Test overrideReason"
+  gateDecision: "proceed"
+  recommendedEarliestSurgeryDate: "1990-01-01"
+  clinicianNotes: "Test clinicianNotes"
+  signedByName: "Test signedByName"
+  signedAt: "2026-01-01T00:00:00Z"
+  gradedAt: "2026-01-01T00:00:00Z"
+  perioperativeOptimizationId: 165652

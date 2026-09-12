@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 866627
+  deletedAt: null
+  gssTotal: 1
+  gssCategory: "Test gssCategory"
+  phq9Total: 1
+  phq9Severity: "Test phq9Severity"
+  combinedSeverity: "Test combinedSeverity"
+  gradedAt: "2026-01-01T00:00:00Z"
+  assessmentId: 218543

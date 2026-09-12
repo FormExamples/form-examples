@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 997704
+  deletedAt: null
+  indicatorCode: "Test indicatorCode"
+  categoryNumber: 1
+  categoryTitle: "Test categoryTitle"
+  indicatorText: "Test indicatorText"
+  indicatorValue: 1.0
+  notes: "Test notes"
+  hospitalPerformanceIndicatorsId: 1

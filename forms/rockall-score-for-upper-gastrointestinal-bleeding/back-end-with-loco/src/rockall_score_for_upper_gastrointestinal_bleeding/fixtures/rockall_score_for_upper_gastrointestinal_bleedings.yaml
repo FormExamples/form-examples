@@ -1,0 +1,21 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 914447
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "doctor"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "emergency-department"
+  presentingComplaint: "Test presentingComplaint"
+  patientIdentifier: "Test patientIdentifier"
+  ageYears: 1
+  sex: "female"
+  systolicBloodPressureMmhg: 1
+  heartRateBpm: 1
+  comorbidity: "none"
+  endoscopyPerformed: "yes"
+  diagnosis: "mallory-weiss-or-none"
+  stigmataRecentHaemorrhage: "none-or-dark-spot"
+  clinicalNote: "Test clinicalNote"
+  patientId: 123433
+  clinicianId: 631349

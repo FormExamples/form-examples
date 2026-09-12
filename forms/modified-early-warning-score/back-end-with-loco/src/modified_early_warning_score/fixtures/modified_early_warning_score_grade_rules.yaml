@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 142117
+  deletedAt: null
+  ruleId: "Test ruleId"
+  instrument: "systolic-blood-pressure"
+  band: "low"
+  points: 1
+  category: "Test category"
+  description: "Test description"
+  modifiedEarlyWarningScoreGradeId: 287940

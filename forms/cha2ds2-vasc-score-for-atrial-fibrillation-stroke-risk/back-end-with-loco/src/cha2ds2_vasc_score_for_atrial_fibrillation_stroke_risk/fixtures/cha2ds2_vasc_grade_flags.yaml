@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 597638
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "anticoagulation-recommended"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  cha2ds2VascGradeId: 300627

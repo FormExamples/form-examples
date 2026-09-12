@@ -1,0 +1,14 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 844910
+  deletedAt: null
+  familyCancerHistory: "Test familyCancerHistory"
+  multipleFamilyCancers: "Test multipleFamilyCancers"
+  earlyOnsetCancer: "Test earlyOnsetCancer"
+  bilateralCancer: "Test bilateralCancer"
+  rareTumourTypes: "Test rareTumourTypes"
+  rareTumourDetails: "Test rareTumourDetails"
+  knownCancerSyndrome: "Test knownCancerSyndrome"
+  cancerSyndromeDetails: "Test cancerSyndromeDetails"
+  cancerRiskScore: 1
+  assessmentId: 542148

@@ -1,0 +1,28 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 246993
+  deletedAt: null
+  graderName: "Test graderName"
+  graderRole: "screener"
+  gradedAt: "1990-01-01"
+  imageCapturedAt: "1990-01-01"
+  imagingMedia: "digital-fundus"
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "under-12"
+  diabetesType: "type-1"
+  yearsSinceDiagnosis: 1.0
+  previousScreenDate: "1990-01-01"
+  previousScreenResult: "r0m0"
+  rightRetinopathyGrade: "R0"
+  rightMaculopathyGrade: "M0"
+  rightPhotocoagulation: "yes"
+  rightUngradable: "yes"
+  rightVisualAcuity: "Test rightVisualAcuity"
+  leftRetinopathyGrade: "R0"
+  leftMaculopathyGrade: "M0"
+  leftPhotocoagulation: "yes"
+  leftUngradable: "yes"
+  leftVisualAcuity: "Test leftVisualAcuity"
+  clinicalContext: "Test clinicalContext"
+  patientId: 815576
+  clinicianId: null

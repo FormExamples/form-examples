@@ -1,0 +1,33 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 201820
+  deletedAt: null
+  sampleTakerRole: "midwife"
+  careSetting: "community"
+  recordDate: "1990-01-01"
+  timeOfBirth: "Test timeOfBirth"
+  gestationWeeks: 1.0
+  previouslyScreened: "yes"
+  consentGiven: "yes"
+  declineReason: "Test declineReason"
+  sampleDate: "1990-01-01"
+  sampleTime: "Test sampleTime"
+  ageAtSampleDays: 1
+  samplingSite: "heel"
+  sampleNotes: "Test sampleNotes"
+  sampleAdequacy: "adequate"
+  spotQualityIssue: "none"
+  isRepeat: "yes"
+  repeatReason: "not-applicable"
+  scdResult: "not-suspected"
+  cfResult: "not-suspected"
+  chtResult: "not-suspected"
+  pkuResult: "not-suspected"
+  mcaddResult: "not-suspected"
+  msudResult: "not-suspected"
+  ivaResult: "not-suspected"
+  ga1Result: "not-suspected"
+  hcuResult: "not-suspected"
+  clinicalContext: "Test clinicalContext"
+  patientId: 986050
+  clinicianId: null

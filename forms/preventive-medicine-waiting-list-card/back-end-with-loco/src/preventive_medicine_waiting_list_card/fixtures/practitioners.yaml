@@ -1,0 +1,14 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 903985
+  deletedAt: null
+  name: "Test Patient"
+  email: "test.patient@example.com"
+  phone: "+441234567890"
+  role: "gp"
+  registrationBody: "GMC"
+  registrationNumber: "Test registrationNumber"
+  organisationName: "Test organisationName"
+  organisationOdsCode: "Test organisationOdsCode"
+  siteName: "Test siteName"
+  countryAsIso31661Alpha2: "GB"

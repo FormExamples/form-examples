@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 518463
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "severe-anaemia"
+  priority: "low"
+  domain: "Test domain"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  perioperativeOptimizationGradeId: 272849

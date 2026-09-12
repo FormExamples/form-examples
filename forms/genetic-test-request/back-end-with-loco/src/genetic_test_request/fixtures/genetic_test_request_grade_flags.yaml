@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 581398
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "predictive-test-counselling-required"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  geneticTestRequestGradeId: 785591

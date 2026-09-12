@@ -1,0 +1,16 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 213854
+  deletedAt: null
+  status: "complete"
+  completenessPercent: 1
+  headerDocumented: "yes"
+  problemsDocumented: "yes"
+  examinationDocumented: "yes"
+  investigationsDocumented: "yes"
+  vteDocumented: "yes"
+  medicationDocumented: "yes"
+  planDocumented: "yes"
+  escalationDocumented: "yes"
+  gradedAt: "2026-01-01T00:00:00Z"
+  wardRoundNoteId: 573601

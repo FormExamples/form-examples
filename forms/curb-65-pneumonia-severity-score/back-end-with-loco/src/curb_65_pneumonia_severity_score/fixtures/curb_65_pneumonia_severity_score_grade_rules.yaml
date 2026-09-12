@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 717301
+  deletedAt: null
+  ruleId: "Test ruleId"
+  criterion: "confusion"
+  points: 1
+  category: "Test category"
+  description: "Test description"
+  curb65PneumoniaSeverityScoreGradeId: 760141

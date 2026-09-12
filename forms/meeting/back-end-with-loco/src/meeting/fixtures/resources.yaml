@@ -1,0 +1,15 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 584496
+  deletedAt: null
+  position: 1
+  resourceType: "room"
+  name: "Test Patient"
+  quantity: 1
+  unit: "Test unit"
+  url: "Test url"
+  costAmount: 1.0
+  costCurrency: "Test costCurrency"
+  status: "requested"
+  notes: "Test notes"
+  meetingId: 247312

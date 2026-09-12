@@ -1,0 +1,23 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 594366
+  slug: "Test slug"
+  number: 1
+  title: "Test title"
+  decisionDate: "1990-01-01"
+  status: "pending"
+  decisionGroup: "business"
+  issue: "Test issue"
+  decision: "Test decision"
+  assumptions: "Test assumptions"
+  constraints: "Test constraints"
+  argument: "Test argument"
+  implications: "Test implications"
+  relatedDecisions: "Test relatedDecisions"
+  relatedRequirements: "Test relatedRequirements"
+  relatedArtifacts: "Test relatedArtifacts"
+  relatedPrinciples: "Test relatedPrinciples"
+  signedOffBy: "Test signedOffBy"
+  signedOffAt: "2026-01-01T00:00:00Z"
+  authorId: 936864
+  organizationId: 220741

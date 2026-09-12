@@ -1,0 +1,16 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 805497
+  deletedAt: null
+  resultClassification: "normal"
+  abnormalitySeverity: "none"
+  reportingCategory: "Test reportingCategory"
+  reportCompletenessPercent: 1
+  followUpUrgency: "routine"
+  targetTimeframe: "Test targetTimeframe"
+  recommendedAction: "Test recommendedAction"
+  recommendation: "no-action"
+  clinicianNotes: "Test clinicianNotes"
+  signedAt: "2026-01-01T00:00:00Z"
+  gradedAt: "2026-01-01T00:00:00Z"
+  geneticTestResultId: 669140

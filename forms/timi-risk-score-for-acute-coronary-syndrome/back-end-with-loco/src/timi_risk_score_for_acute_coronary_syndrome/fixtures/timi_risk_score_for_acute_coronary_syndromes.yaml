@@ -1,0 +1,21 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 438253
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "physician"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "emergency-department"
+  workingDiagnosis: "unstable-angina"
+  patientIdentifier: "Test patientIdentifier"
+  sex: "female"
+  ageOver65: "yes"
+  threeOrMoreCadRiskFactors: "yes"
+  knownCadStenosis: "yes"
+  aspirinUsePrior7Days: "yes"
+  twoOrMoreAnginaEpisodes24h: "yes"
+  stDeviation: "yes"
+  positiveCardiacMarker: "yes"
+  clinicalNote: "Test clinicalNote"
+  patientId: 932867
+  clinicianId: null

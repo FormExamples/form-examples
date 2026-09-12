@@ -1,0 +1,14 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 505898
+  deletedAt: null
+  sortOrder: 1
+  job: "Test job"
+  category: "investigation"
+  owner: "Test owner"
+  priority: "low"
+  dueAt: "2026-01-01T00:00:00Z"
+  status: "outstanding"
+  completedAt: "2026-01-01T00:00:00Z"
+  notes: "Test notes"
+  inpatientClinicalNoteId: 728045

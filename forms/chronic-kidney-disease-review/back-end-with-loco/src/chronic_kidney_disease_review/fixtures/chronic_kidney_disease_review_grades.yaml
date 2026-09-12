@@ -1,0 +1,14 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 298547
+  deletedAt: null
+  gfrCategory: "G1"
+  albuminuriaCategory: "A1"
+  kdigoRiskZone: "low"
+  reviewStatus: "complete"
+  bloodPressureTargetSystolic: 1
+  bloodPressureTargetDiastolic: 1
+  bloodPressureAtTarget: true
+  completenessScore: 1
+  gradedAt: "2026-01-01T00:00:00Z"
+  chronicKidneyDiseaseReviewId: 334035

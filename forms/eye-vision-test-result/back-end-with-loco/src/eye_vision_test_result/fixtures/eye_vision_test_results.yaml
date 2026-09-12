@@ -1,0 +1,31 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 977945
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  testType: "visual-acuity"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  clinicalHistory: "Test clinicalHistory"
+  visualAcuityRight: "Test visualAcuityRight"
+  visualAcuityLeft: "Test visualAcuityLeft"
+  intraocularPressureRightMmhg: 1.0
+  intraocularPressureLeftMmhg: 1.0
+  visualFieldResult: "full"
+  reducedVisualAcuity: true
+  visualFieldDefect: true
+  raisedIntraocularPressure: true
+  diabeticRetinopathy: true
+  opticDiscAbnormality: true
+  macularAbnormality: true
+  normalExamination: true
+  retinopathyGrade: "none"
+  findingsNarrative: "Test findingsNarrative"
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 641754
+  clinicianId: 117249

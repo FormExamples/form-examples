@@ -1,0 +1,20 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 408442
+  deletedAt: null
+  status: "draft"
+  observationAt: "2026-01-01T00:00:00Z"
+  careSetting: "ward"
+  ageBand: "neonate"
+  respiratoryRate: 1
+  respiratoryEffort: "none"
+  oxygenSaturation: 1
+  supplementalOxygen: "room-air"
+  heartRate: 1
+  capillaryRefill: "under-2s"
+  consciousnessAcvpu: "alert"
+  nurseConcern: "yes"
+  parentConcern: "yes"
+  clinicalNotes: "Test clinicalNotes"
+  patientId: 283843
+  clinicianId: null

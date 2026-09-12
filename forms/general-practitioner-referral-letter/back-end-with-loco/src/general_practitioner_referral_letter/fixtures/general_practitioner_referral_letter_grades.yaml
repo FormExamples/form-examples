@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 614061
+  deletedAt: null
+  status: "Complete"
+  urgency: "routine"
+  completenessPercent: 1
+  gradedAt: "2026-01-01T00:00:00Z"
+  generalPractitionerReferralLetterId: 485706

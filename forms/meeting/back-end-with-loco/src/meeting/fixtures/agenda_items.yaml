@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 740545
+  deletedAt: null
+  position: 1
+  title: "Test title"
+  durationMinutes: 1
+  presenter: "Test presenter"
+  notes: "Test notes"
+  status: "planned"
+  meetingId: 247312

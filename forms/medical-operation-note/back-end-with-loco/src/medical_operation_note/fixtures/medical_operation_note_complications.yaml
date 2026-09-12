@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 949571
+  deletedAt: null
+  category: "haemorrhage"
+  description: "Test description"
+  clavienDindoGrade: "0"
+  onsetAt: "2026-01-01T00:00:00Z"
+  actionTaken: "Test actionTaken"
+  resolvedInTheatre: "yes"
+  reportedToGovernance: "yes"
+  medicalOperationNoteId: 506012

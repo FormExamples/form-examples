@@ -1,0 +1,33 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 566900
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  requestedByDate: "1990-01-01"
+  paracetamolLevel: true
+  salicylateLevel: true
+  alcoholLevel: true
+  drugsOfAbuseScreen: true
+  lithiumLevel: true
+  digoxinLevel: true
+  antiepilepticDrugLevel: true
+  carboxyhaemoglobin: true
+  heavyMetals: true
+  specificDrugLevel: true
+  primaryIndication: "suspected-overdose"
+  clinicalDetails: "Test clinicalDetails"
+  suspectedAgent: "Test suspectedAgent"
+  timeSinceIngestionHours: 1.0
+  deliberateOverdose: true
+  symptomatic: true
+  specimenCollected: "yes"
+  collectionDatetime: "2026-01-01T00:00:00Z"
+  urgency: "routine"
+  supervisingConsultant: "Test supervisingConsultant"
+  requesterContact: "Test requesterContact"
+  notes: "Test notes"
+  patientId: 397066
+  clinicianId: 754954

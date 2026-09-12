@@ -1,0 +1,44 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 978177
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  fullBloodCount: true
+  ureaElectrolytes: true
+  liverFunction: true
+  thyroidFunction: true
+  hba1c: true
+  lipidProfile: true
+  cReactiveProtein: true
+  coagulationScreen: true
+  boneProfile: true
+  ferritinIron: true
+  vitaminB12Folate: true
+  vitaminD: true
+  hba1cMonitoring: true
+  glucose: true
+  inr: true
+  bloodCulture: true
+  groupAndSave: true
+  crossmatch: true
+  troponin: true
+  dDimer: true
+  amylaseLipase: true
+  primaryIndication: "routine-monitoring"
+  clinicalDetails: "Test clinicalDetails"
+  relevantMedications: "Test relevantMedications"
+  fastingRequired: true
+  fastingStatus: "fasting"
+  specimenCollected: "yes"
+  collectionDatetime: "2026-01-01T00:00:00Z"
+  knownBloodBorneVirus: true
+  difficultVenousAccess: true
+  urgency: "routine"
+  supervisingConsultant: "Test supervisingConsultant"
+  requesterContact: "Test requesterContact"
+  notes: "Test notes"
+  patientId: 595571
+  clinicianId: 395175

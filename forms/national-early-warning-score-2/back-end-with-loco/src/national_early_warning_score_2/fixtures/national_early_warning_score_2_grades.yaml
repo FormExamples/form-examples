@@ -1,0 +1,18 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 665517
+  deletedAt: null
+  aggregateScore: 1
+  respiratoryRateScore: 1
+  spo2Score: 1
+  oxygenScore: 1
+  bloodPressureScore: 1
+  pulseScore: 1
+  consciousnessScore: 1
+  temperatureScore: 1
+  anySingleParameterThree: "yes"
+  riskBand: "low"
+  monitoringFrequency: "Test monitoringFrequency"
+  recommendation: "Test recommendation"
+  gradedAt: "2026-01-01T00:00:00Z"
+  nationalEarlyWarningScore2Id: 613442

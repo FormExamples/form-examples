@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "56d0449b-47ec-5758-b510-8981f2e86b3c"
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "critical-finding"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  cardiologyResponseGradeId: "6c81a9f9-f78a-5d8a-80d7-843bc98457ca"

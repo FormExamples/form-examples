@@ -1,0 +1,30 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 214326
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  examType: "screening"
+  laterality: "left"
+  examinationAdequacy: "adequate"
+  breastDensity: "a"
+  clinicalHistory: "Test clinicalHistory"
+  comparisonWithPrevious: "Test comparisonWithPrevious"
+  findingsNarrative: "Test findingsNarrative"
+  mass: true
+  calcifications: true
+  architecturalDistortion: true
+  asymmetry: true
+  skinOrNippleChange: true
+  lymphadenopathy: true
+  incidentalFinding: true
+  largestLesionSizeMm: 1.0
+  impression: "Test impression"
+  biRadsCategory: "0"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 652782
+  clinicianId: 416807

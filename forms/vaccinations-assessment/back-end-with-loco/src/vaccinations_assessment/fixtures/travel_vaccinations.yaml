@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 781425
+  deletedAt: null
+  travelPlanned: "yes"
+  travelDestination: "Test travelDestination"
+  hepatitisA: 1
+  hepatitisB: 1
+  typhoid: 1
+  yellowFever: 1
+  rabies: 1
+  japaneseEncephalitis: 1
+  assessmentId: 174864

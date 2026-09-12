@@ -1,0 +1,26 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 709289
+  deletedAt: null
+  technicianName: "Test technicianName"
+  technicianRole: "screening-technician"
+  clinicSite: "Test clinicSite"
+  scannedAt: "2026-01-01T00:00:00Z"
+  deviceIdentifier: "Test deviceIdentifier"
+  patientIdentifier: "Test patientIdentifier"
+  age: 1
+  sex: "female"
+  eligibilityRoute: "routine-year-of-65"
+  scanType: "first-scan"
+  consentGiven: "yes"
+  leafletProvided: "yes"
+  consentNote: "Test consentNote"
+  aortaVisualised: "yes"
+  maxAorticDiameterCm: 1.0
+  priorMaxDiameterCm: 1.0
+  priorScanDate: "1990-01-01"
+  symptomatic: "yes"
+  incidentalFindings: "Test incidentalFindings"
+  resultNote: "Test resultNote"
+  patientId: 334041
+  clinicianId: null

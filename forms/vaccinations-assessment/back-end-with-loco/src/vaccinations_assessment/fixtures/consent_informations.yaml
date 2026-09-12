@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 265497
+  deletedAt: null
+  informationProvided: 1
+  risksExplained: 1
+  benefitsExplained: 1
+  questionsAnswered: 1
+  consentGiven: "yes"
+  consentDate: "1990-01-01"
+  guardianConsent: "yes"
+  assessmentId: 174864

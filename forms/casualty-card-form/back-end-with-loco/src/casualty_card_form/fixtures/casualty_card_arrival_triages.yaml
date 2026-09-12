@@ -1,0 +1,14 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 751470
+  deletedAt: null
+  attendanceCategory: "first"
+  arrivalMode: "ambulance"
+  referralSource: "self"
+  ambulanceIncidentNumber: "Test ambulanceIncidentNumber"
+  triageTime: "2026-01-01T00:00:00Z"
+  triageNurse: "Test triageNurse"
+  mtsFlowchart: "Test mtsFlowchart"
+  mtsCategory: "1-immediate"
+  mtsDiscriminator: "Test mtsDiscriminator"
+  casualtyCardId: 233761

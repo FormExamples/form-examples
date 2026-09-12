@@ -1,0 +1,33 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 321998
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  specimenType: "Test specimenType"
+  specimenSite: "Test specimenSite"
+  specimenAdequacy: "adequate"
+  clinicalHistory: "Test clinicalHistory"
+  macroscopicDescription: "Test macroscopicDescription"
+  microscopicDescription: "Test microscopicDescription"
+  diagnosis: "Test diagnosis"
+  malignancyPresent: true
+  tumourType: "Test tumourType"
+  histologicalGrade: "well-differentiated"
+  tnmPt: "Test tnmPt"
+  tnmPn: "Test tnmPn"
+  tnmPm: "Test tnmPm"
+  resectionMargins: "clear"
+  lymphovascularInvasion: true
+  immunohistochemistry: "Test immunohistochemistry"
+  snomedCode: "Test snomedCode"
+  comparisonWithPrevious: "Test comparisonWithPrevious"
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 257122
+  clinicianId: 379608

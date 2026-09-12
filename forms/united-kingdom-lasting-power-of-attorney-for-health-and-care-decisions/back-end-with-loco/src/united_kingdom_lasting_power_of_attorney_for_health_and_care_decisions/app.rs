@@ -87,6 +87,98 @@ impl Hooks for App {
             &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::attorneys::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/attorneys.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::certificate_providers::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/certificate_providers.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::donors::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/donors.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::lpa_validity_additional_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/lpa_validity_additional_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::lpa_validity_fired_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/lpa_validity_fired_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::person_to_notifies::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/person_to_notifies.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::replacement_attorneys::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/replacement_attorneys.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::lpas::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/lpas.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::lpa_attorneys::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/lpa_attorneys.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::lpa_decision_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/lpa_decision_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::lpa_instructions::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/lpa_instructions.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::lpa_lst_choices::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/lpa_lst_choices.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::lpa_person_to_notifies::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/lpa_person_to_notifies.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::lpa_preferences::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/lpa_preferences.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::lpa_registration_applications::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/lpa_registration_applications.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::lpa_replacement_attorneys::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/lpa_replacement_attorneys.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::lpa_signatures::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/lpa_signatures.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::lpa_validities::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/lpa_validities.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

@@ -1,0 +1,24 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 385922
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "doctor"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "emergency-department"
+  symptomOnsetAt: "2026-01-01T00:00:00Z"
+  patientIdentifier: "Test patientIdentifier"
+  ageBand: "16-39"
+  sex: "female"
+  bloodGlucose: 1.0
+  hypoglycaemiaCorrected: "yes"
+  lossOfConsciousness: "yes"
+  seizureActivity: "yes"
+  facialWeakness: "yes"
+  armWeakness: "yes"
+  legWeakness: "yes"
+  speechDisturbance: "yes"
+  visualFieldDefect: "yes"
+  clinicalNote: "Test clinicalNote"
+  patientId: 798925
+  clinicianId: null

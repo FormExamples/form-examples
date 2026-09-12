@@ -1,0 +1,27 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 503110
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  requestedByDate: "1990-01-01"
+  testType: "24-hour-abpm"
+  primaryIndication: "diagnose-hypertension"
+  clinicalQuestion: "Test clinicalQuestion"
+  relevantHistory: "Test relevantHistory"
+  clinicBpSystolic: 1
+  clinicBpDiastolic: 1
+  onAntihypertensives: true
+  currentMedications: "Test currentMedications"
+  symptomDizziness: true
+  symptomHeadache: true
+  atrialFibrillation: true
+  pregnant: true
+  urgency: "routine"
+  supervisingConsultant: "Test supervisingConsultant"
+  requesterContact: "Test requesterContact"
+  notes: "Test notes"
+  patientId: 588692
+  clinicianId: 965124

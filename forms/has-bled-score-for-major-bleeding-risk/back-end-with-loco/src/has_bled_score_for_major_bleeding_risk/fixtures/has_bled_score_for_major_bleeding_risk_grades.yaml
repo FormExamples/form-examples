@@ -1,0 +1,18 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 181463
+  deletedAt: null
+  hypertensionPoints: 1
+  renalPoints: 1
+  liverPoints: 1
+  strokePoints: 1
+  bleedingPoints: 1
+  labileInrPoints: 1
+  elderlyPoints: 1
+  drugsPoints: 1
+  alcoholPoints: 1
+  totalScore: 1
+  riskBand: "low"
+  modifiableFactors: "Test modifiableFactors"
+  gradedAt: "2026-01-01T00:00:00Z"
+  hasBledScoreForMajorBleedingRiskId: 141858

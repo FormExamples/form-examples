@@ -1,0 +1,21 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 398718
+  deletedAt: null
+  name: "Test Patient"
+  birthDate: "1990-01-01"
+  sexAtBirth: "female"
+  nationalityAsIso31661Alpha2: "Test nationalityAsIso31661Alpha2"
+  passportNumber: "Test passportNumber"
+  unitedKingdomNhsNumber: "9434765919"
+  nationalHealthId: "Test nationalHealthId"
+  email: "test.patient@example.com"
+  phone: "+441234567890"
+  postalAddressAsFullText: "10 Downing Street, London"
+  countryAsIso31661Alpha2: "GB"
+  postcode: "SW1A 2AA"
+  emergencyContactName: "Test emergencyContactName"
+  emergencyContactRelationship: "Test emergencyContactRelationship"
+  emergencyContactPhone: "+441234567890"
+  weightAsKg: 70.4
+  heightAsCm: 170.2

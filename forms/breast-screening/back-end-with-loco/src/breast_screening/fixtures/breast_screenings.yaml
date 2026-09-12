@@ -1,0 +1,26 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 199908
+  deletedAt: null
+  reportingClinicianRole: "mammographer"
+  reportedAt: "2026-01-01T00:00:00Z"
+  screeningUnit: "Test screeningUnit"
+  episodeType: "routine-recall"
+  patientIdentifier: "Test patientIdentifier"
+  ageYears: 1
+  lastScreenedDate: "1990-01-01"
+  higherRiskSurveillance: "yes"
+  symptomatic: "yes"
+  consentGiven: "yes"
+  viewsTaken: "standard-four-view"
+  imageAdequacy: "adequate"
+  firstReadOpinion: "normal"
+  secondReadOpinion: "normal"
+  arbitrationOutcome: "normal"
+  readingOutcome: "normal-routine-recall"
+  assessmentPerformed: "yes"
+  assessmentModalities: "Test assessmentModalities"
+  imagingClassification: 1
+  clinicalContext: "Test clinicalContext"
+  patientId: 338021
+  clinicianId: null

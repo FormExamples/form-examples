@@ -1,0 +1,8 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 863287
+  deletedAt: null
+  aq10Score: 1
+  thresholdCategory: "Test thresholdCategory"
+  gradedAt: "2026-01-01T00:00:00Z"
+  assessmentId: 615699

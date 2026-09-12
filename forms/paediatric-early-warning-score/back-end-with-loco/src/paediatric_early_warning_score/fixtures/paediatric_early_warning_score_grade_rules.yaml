@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 951356
+  deletedAt: null
+  ruleId: "Test ruleId"
+  instrument: "respiratory-rate"
+  band: "routine"
+  points: 1
+  category: "Test category"
+  description: "Test description"
+  paediatricEarlyWarningScoreGradeId: 681194

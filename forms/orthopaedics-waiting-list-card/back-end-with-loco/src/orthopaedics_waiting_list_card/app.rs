@@ -76,6 +76,43 @@ impl Hooks for App {
             &format!("{}/src/orthopaedics_waiting_list_card/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/orthopaedics_waiting_list_card/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::practitioners::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/orthopaedics_waiting_list_card/fixtures/practitioners.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::orthopaedics_waiting_list_cards::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/orthopaedics_waiting_list_card/fixtures/orthopaedics_waiting_list_cards.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::orthopaedics_waiting_list_card_appointments::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/orthopaedics_waiting_list_card/fixtures/orthopaedics_waiting_list_card_appointments.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::orthopaedics_waiting_list_card_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/orthopaedics_waiting_list_card/fixtures/orthopaedics_waiting_list_card_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::orthopaedics_waiting_list_card_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/orthopaedics_waiting_list_card/fixtures/orthopaedics_waiting_list_card_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::orthopaedics_waiting_list_card_grade_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/orthopaedics_waiting_list_card/fixtures/orthopaedics_waiting_list_card_grade_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

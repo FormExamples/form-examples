@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 579291
+  deletedAt: null
+  reaction: "Test reaction"
+  severity: "Test severity"
+  kind: "Test kind"
+  diagnosisMethod: "Test diagnosisMethod"
+  onsetOn: "1990-01-01"
+  adrenalineAutoInjector: true
+  notes: "Test notes"
+  patientId: 262369
+  allergyId: 1

@@ -1,0 +1,15 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 431759
+  deletedAt: null
+  name: "Test Patient"
+  specialty: "Test specialty"
+  role: "general-practitioner"
+  registrationBody: "GMC"
+  registrationNumber: "Test registrationNumber"
+  clinicName: "Test clinicName"
+  email: "test.patient@example.com"
+  phone: "+441234567890"
+  postalAddressAsFullText: "10 Downing Street, London"
+  countryAsIso31661Alpha2: "GB"
+  postcode: "SW1A 2AA"

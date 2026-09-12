@@ -1,0 +1,34 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 968845
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  specimenCondition: "satisfactory"
+  clinicalHistory: "Test clinicalHistory"
+  knownCancerSite: "Test knownCancerSite"
+  psa: 1.0
+  ca125: 1.0
+  ca199: 1.0
+  carcinoembryonicAntigenCea: 1.0
+  alphaFetoproteinAfp: 1.0
+  betaHcg: 1.0
+  ca153: 1.0
+  lactateDehydrogenaseLdh: 1.0
+  calcitonin: 1.0
+  chromograninA: 1.0
+  previousValue: 1.0
+  trend: "rising"
+  comparisonWithPrevious: "Test comparisonWithPrevious"
+  overallResultStatus: "normal"
+  markedlyElevated: true
+  findingsNarrative: "Test findingsNarrative"
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 181064
+  clinicianId: 999716

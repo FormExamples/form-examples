@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 994689
+  deletedAt: null
+  dmftScore: 1
+  decayedCount: 1
+  missingCount: 1
+  filledCount: 1
+  severityLevel: "Test severityLevel"
+  periodontalRisk: "Test periodontalRisk"
+  gradedAt: "2026-01-01T00:00:00Z"
+  assessmentId: 626268

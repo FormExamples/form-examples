@@ -1,0 +1,25 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 997817
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  specimenType: "cervical-smear"
+  specimenAdequacy: "satisfactory"
+  clinicalHistory: "Test clinicalHistory"
+  comparisonWithPrevious: "Test comparisonWithPrevious"
+  cytologyResultCategory: "Test cytologyResultCategory"
+  hpvResult: "positive"
+  malignancyPresent: true
+  dysplasiaPresent: true
+  microscopicDescription: "Test microscopicDescription"
+  diagnosis: "Test diagnosis"
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 861333
+  clinicianId: 713490

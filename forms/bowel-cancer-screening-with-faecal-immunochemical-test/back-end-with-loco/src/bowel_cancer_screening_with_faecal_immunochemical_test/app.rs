@@ -75,6 +75,38 @@ impl Hooks for App {
             &format!("{}/src/bowel_cancer_screening_with_faecal_immunochemical_test/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/bowel_cancer_screening_with_faecal_immunochemical_test/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/bowel_cancer_screening_with_faecal_immunochemical_test/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::bowel_cancer_screening_fits::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/bowel_cancer_screening_with_faecal_immunochemical_test/fixtures/bowel_cancer_screening_fits.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::bowel_cancer_screening_fit_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/bowel_cancer_screening_with_faecal_immunochemical_test/fixtures/bowel_cancer_screening_fit_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::bowel_cancer_screening_fit_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/bowel_cancer_screening_with_faecal_immunochemical_test/fixtures/bowel_cancer_screening_fit_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::bowel_cancer_screening_fit_grade_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/bowel_cancer_screening_with_faecal_immunochemical_test/fixtures/bowel_cancer_screening_fit_grade_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

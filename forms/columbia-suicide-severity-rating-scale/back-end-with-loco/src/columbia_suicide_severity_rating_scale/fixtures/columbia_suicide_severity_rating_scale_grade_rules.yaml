@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 810523
+  deletedAt: null
+  ruleId: "Test ruleId"
+  dimension: "ideation"
+  tier: "low"
+  category: "Test category"
+  description: "Test description"
+  columbiaSuicideSeverityRatingScaleGradeId: 219270

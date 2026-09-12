@@ -78,6 +78,53 @@ impl Hooks for App {
             &format!("{}/src/nursing_care_plan/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/nursing_care_plan/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/nursing_care_plan/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::nursing_care_plans::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/nursing_care_plan/fixtures/nursing_care_plans.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::nursing_care_plan_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/nursing_care_plan/fixtures/nursing_care_plan_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::nursing_care_plan_problems::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/nursing_care_plan/fixtures/nursing_care_plan_problems.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::nursing_care_plan_goals::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/nursing_care_plan/fixtures/nursing_care_plan_goals.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::nursing_care_plan_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/nursing_care_plan/fixtures/nursing_care_plan_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::nursing_care_plan_grade_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/nursing_care_plan/fixtures/nursing_care_plan_grade_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::nursing_care_plan_interventions::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/nursing_care_plan/fixtures/nursing_care_plan_interventions.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

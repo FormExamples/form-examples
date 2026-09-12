@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 827832
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "suspected-cancer-2ww"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  histopathologyTestRequestGradeId: 130704

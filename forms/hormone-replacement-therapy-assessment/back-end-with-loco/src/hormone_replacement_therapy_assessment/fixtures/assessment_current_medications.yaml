@@ -1,0 +1,18 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 571058
+  deletedAt: null
+  takesRegularMedications: "Test takesRegularMedications"
+  currentHrt: "Test currentHrt"
+  currentHrtType: "Test currentHrtType"
+  currentHrtRoute: "Test currentHrtRoute"
+  currentHrtDuration: "Test currentHrtDuration"
+  previousHrt: "Test previousHrt"
+  previousHrtDetails: "Test previousHrtDetails"
+  reasonForStoppingHrt: "Test reasonForStoppingHrt"
+  takesHerbalSupplements: "Test takesHerbalSupplements"
+  herbalSupplementDetails: "Test herbalSupplementDetails"
+  takesAnticoagulants: "Test takesAnticoagulants"
+  anticoagulantDetails: "Test anticoagulantDetails"
+  medicationNotes: "Test medicationNotes"
+  assessmentId: 857994

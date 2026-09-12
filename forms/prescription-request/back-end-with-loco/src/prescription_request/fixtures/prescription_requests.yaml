@@ -1,0 +1,7 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 505640
+  deletedAt: null
+  status: "draft"
+  patientId: 662727
+  clinicianId: 686575

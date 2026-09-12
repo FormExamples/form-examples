@@ -75,6 +75,38 @@ impl Hooks for App {
             &format!("{}/src/recommended_summary_plan_for_emergency_care_and_treatment/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/recommended_summary_plan_for_emergency_care_and_treatment/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/recommended_summary_plan_for_emergency_care_and_treatment/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::respect_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/recommended_summary_plan_for_emergency_care_and_treatment/fixtures/respect_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::respect::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/recommended_summary_plan_for_emergency_care_and_treatment/fixtures/respect.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::respect_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/recommended_summary_plan_for_emergency_care_and_treatment/fixtures/respect_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::respect_grade_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/recommended_summary_plan_for_emergency_care_and_treatment/fixtures/respect_grade_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

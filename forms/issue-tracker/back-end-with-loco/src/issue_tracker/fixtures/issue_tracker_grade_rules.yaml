@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 695429
+  deletedAt: null
+  ruleId: "Test ruleId"
+  instrument: "priority"
+  grade: "Test grade"
+  category: "Test category"
+  description: "Test description"
+  issueTrackerGradeId: 589275

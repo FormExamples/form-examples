@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "194ad32d-b210-5075-8dea-ccf212a6d65a"
+  deletedAt: null
+  ruleId: "Test ruleId"
+  axis: "effectiveness"
+  category: "Test category"
+  description: "Test description"
+  neurodiversityAdjustmentReviewGradeId: "073feabe-f3f1-56cf-b062-50f55bc1359c"

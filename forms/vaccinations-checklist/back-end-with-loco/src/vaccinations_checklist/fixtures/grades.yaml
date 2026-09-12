@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 633582
+  deletedAt: null
+  complianceStatus: "Test complianceStatus"
+  overallRiskLevel: "Test overallRiskLevel"
+  childhoodComplete: "Test childhoodComplete"
+  occupationalComplete: "Test occupationalComplete"
+  covidComplete: "Test covidComplete"
+  fluCurrent: "Test fluCurrent"
+  gradedAt: "2026-01-01T00:00:00Z"
+  assessmentId: 250742

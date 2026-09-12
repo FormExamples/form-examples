@@ -1,0 +1,20 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 323132
+  deletedAt: null
+  disposition: "admitted"
+  admittingSpecialty: "Test admittingSpecialty"
+  admittingConsultant: "Test admittingConsultant"
+  ward: "Test ward"
+  levelOfCare: "Test levelOfCare"
+  dischargeDiagnosis: "Test dischargeDiagnosis"
+  dischargeMedications: "Test dischargeMedications"
+  dischargeInstructions: "Test dischargeInstructions"
+  followUp: "Test followUp"
+  returnPrecautions: "Test returnPrecautions"
+  receivingHospital: "Test receivingHospital"
+  reasonForTransfer: "Test reasonForTransfer"
+  modeOfTransfer: "Test modeOfTransfer"
+  dischargeTime: "2026-01-01T00:00:00Z"
+  totalTimeInDepartment: "Test totalTimeInDepartment"
+  casualtyCardId: 233761

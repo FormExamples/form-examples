@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 168878
+  deletedAt: null
+  ruleId: "Test ruleId"
+  feature: "acute-onset-fluctuating"
+  positive: true
+  category: "Test category"
+  description: "Test description"
+  confusionAssessmentMethodGradeId: 521328

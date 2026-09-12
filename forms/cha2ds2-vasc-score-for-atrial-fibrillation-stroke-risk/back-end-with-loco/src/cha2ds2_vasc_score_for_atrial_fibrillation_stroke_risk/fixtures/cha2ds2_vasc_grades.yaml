@@ -1,0 +1,17 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 300627
+  deletedAt: null
+  congestiveHeartFailurePoints: 1
+  hypertensionPoints: 1
+  agePoints: 1
+  diabetesPoints: 1
+  strokePoints: 1
+  vascularDiseasePoints: 1
+  sexPoints: 1
+  totalScore: 1
+  riskBand: "low"
+  annualStrokeRiskPercent: 1.0
+  anticoagulationRecommendation: "Test anticoagulationRecommendation"
+  gradedAt: "2026-01-01T00:00:00Z"
+  cha2ds2VascId: 920760

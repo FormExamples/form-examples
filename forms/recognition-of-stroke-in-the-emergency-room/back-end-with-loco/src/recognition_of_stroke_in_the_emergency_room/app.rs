@@ -75,6 +75,38 @@ impl Hooks for App {
             &format!("{}/src/recognition_of_stroke_in_the_emergency_room/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/recognition_of_stroke_in_the_emergency_room/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/recognition_of_stroke_in_the_emergency_room/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::recognition_of_stroke_in_the_emergency_rooms::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/recognition_of_stroke_in_the_emergency_room/fixtures/recognition_of_stroke_in_the_emergency_rooms.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::recognition_of_stroke_in_the_emergency_room_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/recognition_of_stroke_in_the_emergency_room/fixtures/recognition_of_stroke_in_the_emergency_room_grades.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::recognition_of_stroke_in_the_emergency_room_grade_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/recognition_of_stroke_in_the_emergency_room/fixtures/recognition_of_stroke_in_the_emergency_room_grade_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::recognition_of_stroke_in_the_emergency_room_grade_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/recognition_of_stroke_in_the_emergency_room/fixtures/recognition_of_stroke_in_the_emergency_room_grade_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

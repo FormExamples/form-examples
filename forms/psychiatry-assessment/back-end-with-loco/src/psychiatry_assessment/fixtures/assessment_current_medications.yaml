@@ -1,0 +1,15 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 252083
+  deletedAt: null
+  takesPsychiatricMedications: "Test takesPsychiatricMedications"
+  takesOtherMedications: "Test takesOtherMedications"
+  medicationAdherence: "Test medicationAdherence"
+  adherenceBarriers: "Test adherenceBarriers"
+  sideEffects: "Test sideEffects"
+  clozapineRegistered: "Test clozapineRegistered"
+  depotInjection: "Test depotInjection"
+  depotDetails: "Test depotDetails"
+  adverseDrugReactions: "Test adverseDrugReactions"
+  additionalNotes: "Test additionalNotes"
+  assessmentId: 382547

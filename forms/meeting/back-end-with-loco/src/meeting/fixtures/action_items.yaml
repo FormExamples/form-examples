@@ -1,0 +1,15 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 499209
+  deletedAt: null
+  position: 1
+  title: "Test title"
+  description: "Test description"
+  ownerName: "Test ownerName"
+  ownerEmail: "test.patient@example.com"
+  dueDate: "1990-01-01"
+  priority: "low"
+  status: "open"
+  completedAt: "2026-01-01T00:00:00Z"
+  externalReference: "Test externalReference"
+  meetingId: 247312

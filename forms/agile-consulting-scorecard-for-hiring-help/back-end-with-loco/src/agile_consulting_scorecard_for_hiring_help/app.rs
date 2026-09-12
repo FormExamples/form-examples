@@ -72,6 +72,23 @@ impl Hooks for App {
             &format!("{}/src/agile_consulting_scorecard_for_hiring_help/fixtures/users.yaml", env!("CARGO_MANIFEST_DIR")),
         )
             .await?;
+        // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
+        loco_rs::db::seed::<crate::models::_entities::organizations::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/agile_consulting_scorecard_for_hiring_help/fixtures/organizations.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::respondents::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/agile_consulting_scorecard_for_hiring_help/fixtures/respondents.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::agile_consulting_scorecard_for_hiring_helps::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/agile_consulting_scorecard_for_hiring_help/fixtures/agile_consulting_scorecard_for_hiring_helps.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        // END bin/loco-seed-data-rollout
         Ok(())
     }
 }

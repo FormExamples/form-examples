@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 372293
+  deletedAt: null
+  seizureControl: "seizure-free"
+  reviewStatus: "complete"
+  completenessScore: 1
+  gradedAt: "2026-01-01T00:00:00Z"
+  epilepsyReviewId: 128236

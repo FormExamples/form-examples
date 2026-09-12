@@ -1,0 +1,8 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 882170
+  deletedAt: null
+  orderPosition: 1
+  category: "residence"
+  statement: "Test statement"
+  lpaId: 652235

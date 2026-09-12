@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 487831
+  deletedAt: null
+  ruleId: "Test ruleId"
+  criterion: "congestive-heart-failure"
+  points: 1
+  category: "Test category"
+  description: "Test description"
+  cha2ds2VascGradeId: 300627

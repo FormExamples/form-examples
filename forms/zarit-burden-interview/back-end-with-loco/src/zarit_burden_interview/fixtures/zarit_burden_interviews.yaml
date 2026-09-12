@@ -1,0 +1,40 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 558827
+  deletedAt: null
+  practitionerName: "Test practitionerName"
+  practitionerRole: "clinician"
+  assessedAt: "2026-01-01T00:00:00Z"
+  careSetting: "memory-service"
+  instrumentForm: "zbi22"
+  carerIdentifier: "Test carerIdentifier"
+  carerRelationship: "spouse-partner"
+  carerCoResident: "yes"
+  careHoursPerWeek: 1.0
+  recipientIdentifier: "Test recipientIdentifier"
+  recipientCondition: "dementia"
+  item1: 1
+  item2: 1
+  item3: 1
+  item4: 1
+  item5: 1
+  item6: 1
+  item7: 1
+  item8: 1
+  item9: 1
+  item10: 1
+  item11: 1
+  item12: 1
+  item13: 1
+  item14: 1
+  item15: 1
+  item16: 1
+  item17: 1
+  item18: 1
+  item19: 1
+  item20: 1
+  item21: 1
+  item22: 1
+  clinicalNote: "Test clinicalNote"
+  patientId: 551328
+  clinicianId: null

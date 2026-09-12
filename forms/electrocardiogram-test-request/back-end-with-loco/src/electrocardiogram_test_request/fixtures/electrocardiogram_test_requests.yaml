@@ -1,0 +1,28 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 150310
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  requestedByDate: "1990-01-01"
+  ecgType: "resting-12-lead"
+  primaryIndication: "chest-pain"
+  clinicalQuestion: "Test clinicalQuestion"
+  relevantHistory: "Test relevantHistory"
+  symptomChestPain: true
+  symptomPalpitations: true
+  symptomSyncope: true
+  symptomBreathlessness: true
+  symptomDizziness: true
+  currentlySymptomatic: true
+  suspectedAcs: true
+  knownArrhythmia: "none"
+  relevantMedications: "Test relevantMedications"
+  urgency: "routine"
+  supervisingConsultant: "Test supervisingConsultant"
+  requesterContact: "Test requesterContact"
+  notes: "Test notes"
+  patientId: 542872
+  clinicianId: 100767

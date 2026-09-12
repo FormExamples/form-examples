@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 242445
+  deletedAt: null
+  ruleId: "Test ruleId"
+  principleNumber: 1
+  band: "high"
+  principleSlug: "Test principleSlug"
+  description: "Test description"
+  agilePrinciplesAssessmentGradeId: 512485

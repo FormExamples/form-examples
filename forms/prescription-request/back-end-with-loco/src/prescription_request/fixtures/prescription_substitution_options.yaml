@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 899214
+  deletedAt: null
+  allowBrandSubstitution: "yes"
+  allowGenericSubstitution: "yes"
+  allowDosageAdjustment: "yes"
+  substitutionNotes: "Test substitutionNotes"
+  prescriptionRequestId: 505640

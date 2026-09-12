@@ -1,0 +1,14 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 438032
+  deletedAt: null
+  clinicianName: "Test clinicianName"
+  clinicianRole: "nurse"
+  patientIdentifier: "Test patientIdentifier"
+  wardOrUnit: "Test wardOrUnit"
+  chartStartAt: "2026-01-01T00:00:00Z"
+  chartPeriodHours: 1.0
+  weightKg: 1.0
+  clinicalNote: "Test clinicalNote"
+  patientId: 612326
+  clinicianId: null

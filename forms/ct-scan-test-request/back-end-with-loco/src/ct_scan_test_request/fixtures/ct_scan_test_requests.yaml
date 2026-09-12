@@ -1,0 +1,29 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 261821
+  deletedAt: null
+  status: "draft"
+  siteName: "Test siteName"
+  setting: "outpatient"
+  referralDate: "1990-01-01"
+  requestedByDate: "1990-01-01"
+  bodyRegion: "head"
+  primaryIndication: "trauma"
+  clinicalQuestion: "Test clinicalQuestion"
+  relevantHistory: "Test relevantHistory"
+  contrastRequired: "none"
+  pregnancyStatus: "not-pregnant"
+  egfr: 1.0
+  previousContrastReaction: "none"
+  iodineContrastAllergy: true
+  metformin: true
+  diabetes: true
+  renalImpairment: true
+  weightKg: 1.0
+  relevantPreviousImaging: "Test relevantPreviousImaging"
+  urgency: "routine"
+  supervisingConsultant: "Test supervisingConsultant"
+  irMeRJustification: "Test irMeRJustification"
+  notes: "Test notes"
+  patientId: 198449
+  clinicianId: 809390

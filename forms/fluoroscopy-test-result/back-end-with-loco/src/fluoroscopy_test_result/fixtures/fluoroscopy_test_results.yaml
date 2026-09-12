@@ -1,0 +1,31 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: 152046
+  deletedAt: null
+  originatingRequestReference: "Test originatingRequestReference"
+  reportStatus: "preliminary"
+  performedDate: "1990-01-01"
+  reportedDate: "1990-01-01"
+  studyType: "barium-swallow"
+  contrastUsed: "barium"
+  examinationAdequacy: "adequate"
+  screeningTimeMinutes: 1.0
+  clinicalHistory: "Test clinicalHistory"
+  comparisonWithPrevious: "Test comparisonWithPrevious"
+  findingsNarrative: "Test findingsNarrative"
+  stricture: true
+  reflux: true
+  obstruction: true
+  perforationOrLeak: true
+  fistula: true
+  fillingDefect: true
+  dysmotility: true
+  normalStudy: true
+  incidentalFinding: true
+  impression: "Test impression"
+  reportingCategory: "Test reportingCategory"
+  recommendedFollowUp: "Test recommendedFollowUp"
+  criticalResultCommunicated: true
+  reportedTo: "Test reportedTo"
+  patientId: 695991
+  clinicianId: 382441
