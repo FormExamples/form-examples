@@ -175,7 +175,25 @@ the remaining scorable forms.
 - [x] **SUPERSEDED**, same reason as above — "all 286 typical fixtures" is
       also a stale count (356 forms now); the live, correct figure is the
       `bin/test-personas` fleet-wide result just above.
-- [ ] Wire changed-forms E2E subset into PR CI (nightly full sweep done).
+- [x] **Wire changed-forms E2E subset into PR CI: DONE 2026-09-12.** The
+      `e2e` job in `.github/workflows/ci.yml` ran only on the nightly
+      schedule (`if: github.event_name == 'schedule' && ...`); widened its
+      gate to match `changes`/`structure` (every push/PR/workflow_dispatch,
+      plus the nightly full sweep — excludes only the weekly
+      advisories-only cron), added `needs: changes`, and scoped both
+      `bin/test-e2e --html`/`--svelte` invocations to
+      `needs.changes.outputs.forms` on a push/PR touching only
+      `forms/<slug>/…` paths (full `--all` sweep otherwise — nightly,
+      workflow_dispatch, or any cross-cutting change). Mirrors the exact
+      `ALL`/`CHANGED` shell pattern the Rust and Svelte matrix jobs already
+      use. `docs/verification.md` already documented this as the intended
+      design ("E2E + a11y | bin/test-e2e --html (nightly + changed-forms)")
+      — the CI implementation had not caught up until now; no doc changes
+      needed. Verified via careful reading against the proven sibling
+      pattern (YAML re-parsed to confirm structure; `bin/test-e2e`'s own
+      arg parser re-checked to confirm `--html $CHANGED` with an unquoted,
+      space-separated slug list behaves as intended) rather than a live
+      GitHub Actions dispatch, which isn't practical to run locally.
 
 ## Phase 3 — Functionality rollout (WS3) — ASSESSED; remaining as batch rollout
 

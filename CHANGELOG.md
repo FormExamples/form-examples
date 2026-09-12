@@ -321,6 +321,16 @@ for them.
   missing enum value) as a side effect of an unrelated fleet-wide
   generator run, but the separate combined-spec generator hadn't been
   re-run for them. Regenerated; `--check` now reports 0 stale.
+- **CI's `e2e` job ran only on the nightly schedule**, contradicting
+  `docs/verification.md`'s own description of the intended design
+  ("nightly + changed-forms"). Widened its `if:` gate to match
+  `changes`/`structure` (every push/PR/workflow_dispatch, plus the
+  nightly full sweep), added `needs: changes`, and scoped both
+  `bin/test-e2e --html`/`--svelte` invocations to the changed-forms list
+  on a push/PR touching only `forms/<slug>/…` paths — mirroring the
+  `ALL`/`CHANGED` shell pattern the Rust and Svelte matrix jobs already
+  use. A PR touching one form now gets E2E feedback without waiting for
+  the next nightly run.
 
 ### Added
 
