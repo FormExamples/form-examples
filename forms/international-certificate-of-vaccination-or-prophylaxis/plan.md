@@ -27,17 +27,17 @@
 
 ## Phase 4 — Front-ends
 
-- [ ] `front-end-with-html/` — static 8-step wizard
-- [ ] `front-end-with-svelte/` — SvelteKit 5 + Tailwind 4 wizard
-- [ ] `front-end-with-html/` — static review table
-- [ ] `front-end-with-svelte/` — SVAR DataGrid review dashboard
+- [x] `front-end-with-html/` — static 8-step wizard
+- [x] `front-end-with-svelte/` — SvelteKit 5 + Tailwind 4 wizard
+- [x] `front-end-with-html/` — static review table
+- [x] `front-end-with-svelte/` — SVAR DataGrid review dashboard
 
 ## Phase 5 — Full-stack backend
 
-- [ ] `back-end-with-loco-setup` — scaffold generator script
-- [ ] `back-end-with-loco/` — Rust Loco crate
+- [x] `back-end-with-loco-setup` — scaffold generator script
+- [x] `back-end-with-loco/` — Rust Loco crate
 - [ ] HTMX + Alpine.js base layout (`templates/base.html.tera`)
-- [ ] SeaORM migrations mirroring `sql/`
+- [x] SeaORM migrations mirroring `sql/`
 - [ ] Validation engine port to Rust
 - [ ] Controller routes: GET show, POST submit, GET report
 

@@ -19,29 +19,31 @@ for them.
 ### Added
 
 - **New `bin/sync-form-tasks-checkboxes`: check off stale per-form
-  `tasks.md` items whose named artefact already exists on disk.** Every
-  form's checklist began life as `bin/create-form`'s scaffold template;
-  fleet-wide tooling since has built almost all of that work directly
-  (SQL migrations, generated XML/FHIR/protobuf/OpenAPI,
+  `tasks.md`/`plan.md` items whose named artefact already exists on
+  disk.** Every form's checklist began life as `bin/create-form`'s
+  scaffold template; fleet-wide tooling since has built almost all of
+  that work directly (SQL migrations, generated XML/FHIR/protobuf/OpenAPI,
   `front-end-with-html/`, `front-end-with-svelte/`, `back-end-with-loco/`,
   `doc/` pages, ...) without ever going back to tick the original
-  per-form list — 1856 stale `- [ ]` lines found fleet-wide. Deliberately
-  conservative: a line only flips to `[x]` when *every* backtick-quoted
-  token on it resolves to a real, non-empty file or directory relative to
-  that form's own directory; a line with no backtick-quoted path, or any
-  backtick span that's a command invocation rather than a path
-  (`bin/test-form <slug>`, `cargo test`) is left untouched rather than
-  guessed at — verifying those would need a live Postgres per crate
-  (~45s/crate observed), far too slow to run fleet-wide as a documentation
-  sync. 450/1856 eligible and closed under this rule; the remaining 1406
-  are prose-only scaffold items with no path claim to mechanically verify,
-  correctly left open. The root `tasks.md` remains the actually-maintained
-  fleet backlog — this only keeps the per-form snapshots from misleading a
-  reader into thinking finished work is outstanding. Not wired into the CI
-  Verify block: unlike a generated-artefact drift detector, a form with
-  genuinely unfinished work will always show legitimate pending items, so
-  "pending > 0" isn't drift to fail a build on — it's a maintenance
-  utility, run occasionally like `bin/update`.
+  per-form list — 1856 stale `- [ ]` lines found in `tasks.md` fleet-wide,
+  plus another 69 in `plan.md` once the sweep was extended there too.
+  Deliberately conservative: a line only flips to `[x]` when *every*
+  backtick-quoted token on it resolves to a real, non-empty file or
+  directory relative to that form's own directory; a line with no
+  backtick-quoted path, or any backtick span that's a command invocation
+  rather than a path (`bin/test-form <slug>`, `cargo test`) is left
+  untouched rather than guessed at — verifying those would need a live
+  Postgres per crate (~45s/crate observed), far too slow to run fleet-wide
+  as a documentation sync. 450/1856 `tasks.md` + 36/69 `plan.md` eligible
+  and closed under this rule; the rest are prose-only scaffold items with
+  no path claim to mechanically verify, correctly left open. The root
+  `tasks.md` remains the actually-maintained fleet backlog — this only
+  keeps the per-form snapshots from misleading a reader into thinking
+  finished work is outstanding. Not wired into the CI Verify block: unlike
+  a generated-artefact drift detector, a form with genuinely unfinished
+  work will always show legitimate pending items, so "pending > 0" isn't
+  drift to fail a build on — it's a maintenance utility, run occasionally
+  like `bin/update`.
 
 - **New `bin/generate-api-transcripts`: a real, live-server POST-then-GET
   transcript per crate (`examples/api-create.http`), 336/336 eligible

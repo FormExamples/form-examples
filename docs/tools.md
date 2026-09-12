@@ -2445,18 +2445,18 @@ Usage:
 <h2 id="sync-form-tasks-checkboxes"><code>bin/sync-form-tasks-checkboxes</code></h2>
 
 ```text
-Check off stale per-form tasks.md items whose named artefact already exists.
+Check off stale per-form tasks.md/plan.md items whose artefact exists.
 
-Every form's `forms/<slug>/tasks.md` began life as `bin/create-form`'s
-scaffold checklist. Fleet-wide tooling since then has built almost all of
-that work directly (SQL migrations, generated XML/FHIR/protobuf/OpenAPI,
-front-end-with-html/, front-end-with-svelte/, back-end-with-loco/, doc/
-pages, ...) without ever going back to tick the original per-form
-checklist -- so ~1856 `- [ ]` lines across the fleet describe work that is
-now actually done. The living, actually-maintained backlog is the root
-`tasks.md`; this tool only closes the loop on these stale per-form
-snapshots so they stop misleading a reader into thinking the work is
-outstanding.
+Every form's `forms/<slug>/tasks.md` (and `plan.md`) began life as
+`bin/create-form`'s scaffold checklist. Fleet-wide tooling since then has
+built almost all of that work directly (SQL migrations, generated
+XML/FHIR/protobuf/OpenAPI, front-end-with-html/, front-end-with-svelte/,
+back-end-with-loco/, doc/ pages, ...) without ever going back to tick the
+original per-form checklist -- so ~1900 `- [ ]` lines across the fleet
+describe work that is now actually done. The living, actually-maintained
+backlog is the root `tasks.md`; this tool only closes the loop on these
+stale per-form snapshots so they stop misleading a reader into thinking
+the work is outstanding.
 
 Deliberately conservative: a line is only ever flipped to `- [x]` when
 *every* backtick-quoted token on it is a real, existing, non-empty file or
@@ -2474,7 +2474,8 @@ Usage:
 
 --check reports the pending count per form (and exits 1 if any are
 pending) without writing. Default applies the fix. With no slug and no
---all, defaults to every form (via bin/forms-as-kebab-case).
+--all, defaults to every form (via bin/forms-as-kebab-case). Sweeps both
+`tasks.md` and `plan.md` in each form directory.
 ```
 
 <h2 id="sync-from-skel-to-forms"><code>bin/sync-from-skel-to-forms</code></h2>

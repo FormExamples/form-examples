@@ -13,10 +13,10 @@ Implementation roadmap for the WHO Surgical Safety Checklist form.
 
 - [x] `sql/00_create_extensions.sql` (pgcrypto).
 - [x] `sql/01_create_function_set_updated_at.sql`.
-- [ ] `sql/02_create_table_patient.sql`.
-- [ ] `sql/03_create_table_clinician.sql`.
-- [ ] `sql/04_create_table_who_surgical_safety_checklist.sql`.
-- [ ] `sql/05_create_table_team_member.sql`.
+- [x] `sql/02_create_table_patient.sql`.
+- [x] `sql/03_create_table_clinician.sql`.
+- [x] `sql/04_create_table_who_surgical_safety_checklist.sql`.
+- [x] `sql/05_create_table_team_member.sql`.
 
 ## Phase 3 — Generated representations
 
@@ -25,7 +25,7 @@ Implementation roadmap for the WHO Surgical Safety Checklist form.
 - [ ] Run `bin/fhir-r5/generate-fhir-r5-representations.py` → JSON per table.
 - [ ] Run `bin/protobuf/generate-protobuf-representations.py` → `.proto` per
       table.
-- [ ] Author TypeSpec definitions per table under `typespec/`.
+- [x] Author TypeSpec definitions per table under `typespec/`.
 
 ## Phase 4 — Static HTML wizard (`front-end-with-html`)
 
@@ -54,7 +54,7 @@ Implementation roadmap for the WHO Surgical Safety Checklist form.
 
 ## Phase 8 — Full-stack Rust (`back-end-with-loco`)
 
-- [ ] Author `back-end-with-loco-setup` script with the
+- [x] Author `back-end-with-loco-setup` script with the
       `cargo loco generate scaffold` invocations for each table.
 - [ ] Run the setup script to generate the application.
 - [ ] Customize templates with HTMX + Alpine.js for the three-phase wizard.

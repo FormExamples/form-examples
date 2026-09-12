@@ -950,7 +950,7 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       attorney-for-health-and-care-decisions`'s irregular
       `person_to_notifies` plural); every one of the 336 captured
       transcripts is a real, live HTTP exchange, not synthesized.
-- [x] **Per-form `tasks.md` checkbox drift: DONE 2026-09-12.** Root-level
+- [x] **Per-form `tasks.md`/`plan.md` checkbox drift: DONE 2026-09-12.** Root-level
       backlog review found no remaining autonomously-actionable item, but
       auditing every `forms/<slug>/tasks.md` (not just the root file)
       turned up 1856 stale `- [ ]` lines fleet-wide — each form's
@@ -970,12 +970,20 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       `` `cargo test` ``), is left untouched — verifying those needs a
       live Postgres per crate (~45s/crate observed via a direct trial),
       far too slow to run fleet-wide for a documentation sync, so no
-      guessing. 450/1856 eligible and closed under this rule across 50
-      forms; the remaining 1406 are prose-only scaffold items with no
-      path claim to mechanically verify (e.g. "User acceptance testing
-      with a real GP / OH practice", "Clinical safety case documentation")
-      and correctly left open — some genuinely still open, some just
-      worded in a way this tool can't verify without guessing.
+      guessing. 450/1856 `tasks.md` items eligible and closed under this
+      rule across 50 forms; the remaining 1406 are prose-only scaffold
+      items with no path claim to mechanically verify (e.g. "User
+      acceptance testing with a real GP / OH practice", "Clinical safety
+      case documentation") and correctly left open — some genuinely still
+      open, some just worded in a way this tool can't verify without
+      guessing.
+
+      A follow-up sweep found the identical pattern in `plan.md` (69
+      stale `- [ ]` lines across the fleet, once checked); extended the
+      same tool to cover both files. 36/69 `plan.md` items eligible and
+      closed across 3 forms
+      (`international-certificate-of-vaccination-or-prophylaxis`,
+      `medical-operation-note`, `who-surgical-safety-checklist`).
 
       Deliberately not wired into the CI Verify block: unlike a
       generated-artefact drift detector, a form with real unfinished work

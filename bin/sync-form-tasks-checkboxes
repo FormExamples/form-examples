@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
-"""Check off stale per-form tasks.md items whose named artefact already exists.
+"""Check off stale per-form tasks.md/plan.md items whose artefact exists.
 
-Every form's `forms/<slug>/tasks.md` began life as `bin/create-form`'s
-scaffold checklist. Fleet-wide tooling since then has built almost all of
-that work directly (SQL migrations, generated XML/FHIR/protobuf/OpenAPI,
-front-end-with-html/, front-end-with-svelte/, back-end-with-loco/, doc/
-pages, ...) without ever going back to tick the original per-form
-checklist -- so ~1856 `- [ ]` lines across the fleet describe work that is
-now actually done. The living, actually-maintained backlog is the root
-`tasks.md`; this tool only closes the loop on these stale per-form
-snapshots so they stop misleading a reader into thinking the work is
-outstanding.
+Every form's `forms/<slug>/tasks.md` (and `plan.md`) began life as
+`bin/create-form`'s scaffold checklist. Fleet-wide tooling since then has
+built almost all of that work directly (SQL migrations, generated
+XML/FHIR/protobuf/OpenAPI, front-end-with-html/, front-end-with-svelte/,
+back-end-with-loco/, doc/ pages, ...) without ever going back to tick the
+original per-form checklist -- so ~1900 `- [ ]` lines across the fleet
+describe work that is now actually done. The living, actually-maintained
+backlog is the root `tasks.md`; this tool only closes the loop on these
+stale per-form snapshots so they stop misleading a reader into thinking
+the work is outstanding.
 
 Deliberately conservative: a line is only ever flipped to `- [x]` when
 *every* backtick-quoted token on it is a real, existing, non-empty file or
@@ -28,7 +28,8 @@ Usage:
 
 --check reports the pending count per form (and exits 1 if any are
 pending) without writing. Default applies the fix. With no slug and no
---all, defaults to every form (via bin/forms-as-kebab-case).
+--all, defaults to every form (via bin/forms-as-kebab-case). Sweeps both
+`tasks.md` and `plan.md` in each form directory.
 """
 import os
 import re
@@ -86,11 +87,9 @@ def classify_line(text: str):
     return "paths", tokens
 
 
-def process_form(slug: str, apply: bool):
-    path = os.path.join(ROOT, "forms", slug, "tasks.md")
+def process_file(form_dir: str, path: str, apply: bool):
     if not os.path.isfile(path):
         return 0, 0
-    form_dir = os.path.join(ROOT, "forms", slug)
     with open(path, encoding="utf-8") as f:
         lines = f.readlines()
 
@@ -134,12 +133,18 @@ def main():
     total_pending = 0
     touched_forms = 0
     for slug in slugs:
-        pending, changed = process_form(slug, apply=not check)
-        if pending:
-            total_pending += pending
+        form_dir = os.path.join(ROOT, "forms", slug)
+        form_pending = 0
+        for filename in ("tasks.md", "plan.md"):
+            pending, changed = process_file(
+                form_dir, os.path.join(form_dir, filename), apply=not check
+            )
+            form_pending += pending
+        if form_pending:
+            total_pending += form_pending
             touched_forms += 1
             verb = "pending" if check else "checked off"
-            print(f"{slug}: {pending} item(s) {verb}")
+            print(f"{slug}: {form_pending} item(s) {verb}")
 
     label = "CHECK" if check else "APPLY"
     print(

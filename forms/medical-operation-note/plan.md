@@ -13,40 +13,40 @@
 
 - [x] `sql/00_create_extensions.sql` (pre-scaffolded).
 - [x] `sql/01_create_function_set_updated_at.sql` (pre-scaffolded).
-- [ ] `sql/02_create_table_patient.sql`
-- [ ] `sql/03_create_table_clinician.sql`
-- [ ] `sql/04_create_table_medical_operation_note.sql`
-- [ ] `sql/05_create_table_medical_operation_note_team_member.sql`
-- [ ] `sql/06_create_table_medical_operation_note_procedure.sql`
-- [ ] `sql/07_create_table_medical_operation_note_step.sql`
-- [ ] `sql/08_create_table_medical_operation_note_implant.sql`
-- [ ] `sql/09_create_table_medical_operation_note_drain.sql`
-- [ ] `sql/10_create_table_medical_operation_note_specimen.sql`
-- [ ] `sql/11_create_table_medical_operation_note_complication.sql`
-- [ ] `sql/12_create_table_medical_operation_note_grade.sql`
-- [ ] `sql/13_create_table_medical_operation_note_grade_rule.sql`
-- [ ] `sql/14_create_table_medical_operation_note_grade_flag.sql`
+- [x] `sql/02_create_table_patient.sql`
+- [x] `sql/03_create_table_clinician.sql`
+- [x] `sql/04_create_table_medical_operation_note.sql`
+- [x] `sql/05_create_table_medical_operation_note_team_member.sql`
+- [x] `sql/06_create_table_medical_operation_note_procedure.sql`
+- [x] `sql/07_create_table_medical_operation_note_step.sql`
+- [x] `sql/08_create_table_medical_operation_note_implant.sql`
+- [x] `sql/09_create_table_medical_operation_note_drain.sql`
+- [x] `sql/10_create_table_medical_operation_note_specimen.sql`
+- [x] `sql/11_create_table_medical_operation_note_complication.sql`
+- [x] `sql/12_create_table_medical_operation_note_grade.sql`
+- [x] `sql/13_create_table_medical_operation_note_grade_rule.sql`
+- [x] `sql/14_create_table_medical_operation_note_grade_flag.sql`
 
 ## Phase 3 — Generated artefacts (this commit)
 
-- [ ] `xml/` — XML + DTD per SQL table.
-- [ ] `fhir/r5/` — FHIR R5 JSON per SQL entity.
-- [ ] `protobuf/` — `.proto` per SQL entity.
-- [ ] `openapi/` — OpenAPI 3.1 `.yaml` per SQL entity.
-- [ ] `back-end-with-loco-setup` — Loco scaffold script.
+- [x] `xml/` — XML + DTD per SQL table.
+- [x] `fhir/r5/` — FHIR R5 JSON per SQL entity.
+- [x] `protobuf/` — `.proto` per SQL entity.
+- [x] `openapi/` — OpenAPI 3.1 `.yaml` per SQL entity.
+- [x] `back-end-with-loco-setup` — Loco scaffold script.
 
 ## Phase 4 — Front-ends (deferred, parallel subagents)
 
-- [ ] `front-end-with-html/` — static single-page wizard, Lily
+- [x] `front-end-with-html/` — static single-page wizard, Lily
       Design System headless.
-- [ ] `front-end-with-svelte/` — SvelteKit single-page wizard,
+- [x] `front-end-with-svelte/` — SvelteKit single-page wizard,
       Lily Svelte headless.
-- [ ] `front-end-with-html/` — HTML review table.
-- [ ] `front-end-with-svelte/` — SvelteKit SVAR DataGrid.
+- [x] `front-end-with-html/` — HTML review table.
+- [x] `front-end-with-svelte/` — SvelteKit SVAR DataGrid.
 
 ## Phase 5 — Backend (deferred)
 
-- [ ] `back-end-with-loco/` — Rust Loco backend with
+- [x] `back-end-with-loco/` — Rust Loco backend with
       Loco JSON API.
 
 ## Phase 6 — Verification
