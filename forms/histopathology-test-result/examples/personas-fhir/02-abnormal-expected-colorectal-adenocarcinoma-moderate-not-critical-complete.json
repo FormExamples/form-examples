@@ -790,9 +790,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Confirmed malignancy requiring timely action is present.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Ensure the requester is alerted and a clear MDT action plan is documented."
             }
           }
@@ -837,9 +837,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Malignancy present; urgent cancer MDT referral is warranted.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Refer to the cancer MDT and manage per the 2-week-wait suspected-cancer pathway."
             }
           }

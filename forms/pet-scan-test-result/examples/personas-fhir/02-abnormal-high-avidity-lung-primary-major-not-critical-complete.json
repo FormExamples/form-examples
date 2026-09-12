@@ -774,9 +774,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Abnormal tracer uptake (hypermetabolic lesion or nodal uptake) is present and may warrant urgent referral.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Consider urgent referral to the appropriate oncology / specialist team."
             }
           }

@@ -814,9 +814,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical finding (haemorrhage or infarct) is present.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Communicate the critical result to the referrer immediately and document the communication."
             }
           }
@@ -861,9 +861,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding present but the result has not been recorded as communicated.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Contact the referrer now and record who was informed, with date and time."
             }
           }
@@ -908,9 +908,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "No impression / conclusion has been recorded.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Add an impression that answers the clinical question."
             }
           }

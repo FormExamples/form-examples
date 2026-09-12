@@ -676,9 +676,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "No assay result value has been recorded.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Record at least one assay level or screen result for the report."
             }
           }

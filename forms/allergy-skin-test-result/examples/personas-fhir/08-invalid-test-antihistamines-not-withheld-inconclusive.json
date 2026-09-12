@@ -756,9 +756,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Test is invalid / non-interpretable (antihistamines not withheld, absent positive control, or dermographism).",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Repeat testing after an adequate washout, or arrange specific-IgE blood testing."
             }
           }

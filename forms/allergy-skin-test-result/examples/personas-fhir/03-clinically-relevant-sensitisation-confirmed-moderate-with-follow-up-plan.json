@@ -728,9 +728,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Clinically relevant sensitisation was confirmed.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Provide allergen avoidance advice and consider immunotherapy referral or an oral challenge."
             }
           }

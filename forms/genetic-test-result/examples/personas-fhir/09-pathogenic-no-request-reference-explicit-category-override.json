@@ -761,9 +761,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A pathogenic or likely-pathogenic actionable variant is present.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Communicate the actionable result to the referrer, arrange urgent genetics MDT / counselling, and document the communication."
             }
           }
@@ -808,9 +808,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Actionable genomic result requiring direct communication to the referrer.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Communicate the critical result to the referrer immediately and record who was informed, with date and time."
             }
           }
@@ -855,9 +855,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Actionable variant present but the result has not been recorded as communicated.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Contact the referrer now and record who was informed, with date and time."
             }
           }
@@ -902,9 +902,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Cascade (predictive) testing of at-risk relatives is recommended.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Offer cascade testing and genetic counselling to at-risk relatives."
             }
           }
@@ -949,9 +949,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "An actionable variant is present but no originating request reference is recorded.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Link the report to the originating request to support discrepancy review."
             }
           }

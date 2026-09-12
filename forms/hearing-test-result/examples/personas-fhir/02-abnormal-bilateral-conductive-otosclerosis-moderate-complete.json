@@ -817,9 +817,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Hearing loss is present and may require timely management.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Ensure the referrer is alerted and a clear management plan is documented."
             }
           }
@@ -864,9 +864,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A conductive component is present and may warrant ENT referral.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Consider referral to ENT for assessment of the conductive component."
             }
           }

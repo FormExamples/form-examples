@@ -814,9 +814,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Recording adequacy is below the 70% valid-readings threshold; diagnostic confidence may be reduced.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Consider repeating the monitoring period to obtain an adequate study."
             }
           }
@@ -861,9 +861,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "No impression / conclusion has been recorded.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Add an impression that answers the clinical question."
             }
           }
@@ -908,9 +908,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "No daytime or 24-hour average blood pressure was recorded.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Record the averaged blood-pressure measurements for interpretation."
             }
           }

@@ -819,9 +819,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Study quality is poor; diagnostic confidence may be reduced.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Consider a contrast study or transoesophageal echo to reach diagnostic quality."
             }
           }

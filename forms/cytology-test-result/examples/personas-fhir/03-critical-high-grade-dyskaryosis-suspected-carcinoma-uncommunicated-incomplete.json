@@ -742,9 +742,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical finding (malignant cells, high-grade dyskaryosis, Thy5, or breast C5) is present.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Communicate the critical result to the referrer immediately, document the communication, and refer for urgent colposcopy / MDT review."
             }
           }
@@ -789,9 +789,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical finding present but the result has not been recorded as communicated.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Contact the referrer now and record who was informed, with date and time."
             }
           }
@@ -836,9 +836,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Malignant cells reported; this is a suspected-cancer (2-week-wait) result.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Refer urgently on a suspected-cancer (2-week-wait) pathway."
             }
           }
@@ -883,9 +883,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "No impression / conclusion has been recorded.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Add an impression that answers the clinical question."
             }
           }
@@ -930,9 +930,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "An abnormal finding is reported but no structured reporting category was recorded.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Record the structured reporting category (e.g. dyskaryosis grade, Thy or C category)."
             }
           }
@@ -977,9 +977,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A significant finding is present but no originating request reference is recorded.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Link the report to the originating request to support discrepancy review."
             }
           }

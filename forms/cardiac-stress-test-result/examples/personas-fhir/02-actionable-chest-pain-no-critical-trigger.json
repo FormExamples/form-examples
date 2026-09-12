@@ -831,9 +831,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Induced ischaemia or chest pain requiring timely action is present.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Ensure the referrer is alerted and a clear action plan is documented."
             }
           }
@@ -878,9 +878,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Test was terminated early or submaximal (target heart rate not reached); diagnostic confidence may be reduced.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Consider repeating the test to a maximal endpoint or supplementing with imaging."
             }
           }

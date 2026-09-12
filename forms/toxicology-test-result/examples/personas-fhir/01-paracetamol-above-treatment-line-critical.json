@@ -686,9 +686,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Paracetamol level is above the treatment line.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Communicate the critical result to the requester immediately and start N-acetylcysteine (NAC)."
             }
           }
@@ -733,9 +733,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Toxic result present but the result has not been recorded as communicated.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Contact the requester now and record who was informed, with date and time."
             }
           }

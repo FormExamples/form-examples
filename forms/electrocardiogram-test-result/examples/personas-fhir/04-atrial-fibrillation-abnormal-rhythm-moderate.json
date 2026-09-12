@@ -849,9 +849,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "An abnormal rhythm is present and may warrant urgent cardiology referral.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Consider urgent referral to the cardiology team."
             }
           }
@@ -896,9 +896,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "One or more key measurements (rate, PR, QRS, QT, or QTc) were not recorded.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Record the ventricular rate and the PR / QRS / QT / QTc intervals for completeness."
             }
           }

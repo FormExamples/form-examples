@@ -732,9 +732,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Malignancy with lymphovascular invasion is present and may warrant urgent referral.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Consider urgent referral to the appropriate cancer specialist team."
             }
           }

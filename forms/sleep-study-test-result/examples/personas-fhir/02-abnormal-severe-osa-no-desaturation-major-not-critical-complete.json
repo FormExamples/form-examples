@@ -814,9 +814,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Severe OSA (AHI >= 30) is present and requires timely action.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Ensure the referrer is alerted and arrange a sleep-clinic review for CPAP titration."
             }
           }

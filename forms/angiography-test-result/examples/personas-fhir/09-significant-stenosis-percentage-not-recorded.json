@@ -773,9 +773,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "An abnormal vascular finding requiring timely action is present.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Ensure the referrer is alerted and a clear action plan is documented."
             }
           }
@@ -820,9 +820,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A significant stenosis is reported but no maximum stenosis percentage was recorded.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Record the maximum stenosis percentage (e.g. NASCET-style) for grading."
             }
           }

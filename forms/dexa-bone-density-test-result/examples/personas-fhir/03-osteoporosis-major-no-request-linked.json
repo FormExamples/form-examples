@@ -769,9 +769,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Osteoporosis (T \u2264 \u22122.5) requiring fracture-risk treatment review.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Refer for specialist treatment review and consider pharmacological therapy."
             }
           }
@@ -816,9 +816,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Osteoporosis warrants onward referral for treatment review.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Consider urgent referral to the metabolic-bone / fracture-liaison service."
             }
           }
@@ -863,9 +863,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A significant densitometric finding is present but no originating request reference is recorded.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Link the report to the originating request to support discrepancy review."
             }
           }

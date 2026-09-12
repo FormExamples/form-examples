@@ -872,9 +872,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical CSF result (bacterial meningitis pattern, suggested subarachnoid haemorrhage, or positive culture) is present.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Communicate the critical result to the requesting clinician immediately and document the communication."
             }
           }
@@ -919,9 +919,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical CSF result present but the result has not been recorded as communicated.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Contact the requesting clinician now and record who was informed, with date and time."
             }
           }
@@ -966,9 +966,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A bacterial meningitis CSF pattern is present and requires immediate action.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Ensure empirical antibiotics are given without delay per NICE NG240 and the responsible team is alerted."
             }
           }
@@ -1013,9 +1013,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "No impression / conclusion has been recorded.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Add an impression that answers the clinical question."
             }
           }
@@ -1060,9 +1060,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A positive culture is present but no originating request reference is recorded.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Link the report to the originating request to support discrepancy review."
             }
           }

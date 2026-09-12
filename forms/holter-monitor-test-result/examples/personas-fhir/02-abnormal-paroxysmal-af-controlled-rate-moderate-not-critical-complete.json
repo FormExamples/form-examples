@@ -817,9 +817,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Atrial fibrillation or a significant pause is present and may warrant urgent referral.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Consider urgent referral to the appropriate cardiology team."
             }
           }
@@ -864,9 +864,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A symptom-rhythm correlation is documented.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Manage the correlated rhythm per the relevant ambulatory ECG pathway."
             }
           }

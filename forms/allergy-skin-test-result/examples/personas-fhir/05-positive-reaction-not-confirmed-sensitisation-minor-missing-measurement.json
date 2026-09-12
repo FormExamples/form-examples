@@ -720,9 +720,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Positive reaction(s) present; sensitisation versus clinical allergy needs review.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Correlate the positive result with the clinical history before advising the patient."
             }
           }
@@ -767,9 +767,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "No impression / conclusion has been recorded.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Add an impression that answers the clinical question."
             }
           }
@@ -814,9 +814,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A positive reaction is reported but no weal sizes or specific-IgE results were recorded.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Record the measured weal sizes (mm) or specific-IgE results (kUA/L) per allergen."
             }
           }

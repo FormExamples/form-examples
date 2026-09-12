@@ -711,9 +711,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A secondary / incidental actionable finding was identified.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Review the secondary finding per the relevant secondary-findings policy and arrange genetics review."
             }
           }
@@ -758,9 +758,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Cascade (predictive) testing of at-risk relatives is recommended.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Offer cascade testing and genetic counselling to at-risk relatives."
             }
           }
@@ -805,9 +805,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Variants are described but no ACMG/AMP classification has been recorded.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Record the overall ACMG/AMP (ACGS) five-tier variant classification."
             }
           }

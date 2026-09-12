@@ -799,9 +799,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A severe electrodiagnostic abnormality may warrant expedited specialist review.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Consider urgent referral to the appropriate specialist team."
             }
           }

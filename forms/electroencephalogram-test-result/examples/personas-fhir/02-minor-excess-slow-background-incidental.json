@@ -784,9 +784,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A minor background abnormality is documented as an incidental finding.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Correlate the minor background abnormality with the clinical context."
             }
           }

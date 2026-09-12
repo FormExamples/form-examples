@@ -749,9 +749,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "An isolated APTT prolongation is present and may warrant haematology referral for inhibitor / factor work-up.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Consider referral to haematology for mixing studies and factor assays."
             }
           }

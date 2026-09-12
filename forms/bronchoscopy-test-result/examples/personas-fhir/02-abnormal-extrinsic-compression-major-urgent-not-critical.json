@@ -742,9 +742,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Extrinsic central-airway compression requiring timely action is present.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Ensure the referrer is alerted and a clear airway-management plan is documented."
             }
           }

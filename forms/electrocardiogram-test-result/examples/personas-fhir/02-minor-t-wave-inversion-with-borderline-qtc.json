@@ -809,9 +809,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "QTc is borderline prolonged (485 ms) but below the critical threshold.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Review medications and electrolytes; consider repeat ECG for QTc surveillance."
             }
           }

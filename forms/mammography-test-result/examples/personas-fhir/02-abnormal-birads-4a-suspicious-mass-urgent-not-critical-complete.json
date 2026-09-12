@@ -782,9 +782,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "BI-RADS 4a final assessment requires tissue diagnosis / action.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Ensure the referrer is alerted and an image-guided biopsy is arranged."
             }
           }
@@ -829,9 +829,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Suspected cancer \u2014 refer on a two-week-wait (2WW) breast pathway.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Refer for image-guided biopsy and communicate to the breast MDT."
             }
           }
@@ -876,9 +876,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A mass is reported on a symptomatic / diagnostic study (palpable breast lump).",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Correlate clinically and ensure triple assessment is completed."
             }
           }

@@ -18,6 +18,25 @@ for them.
 
 ### Fixed
 
+- **Fixed a real, fleet-wide invalid FHIR R5 property in generated persona
+  Bundles (135 files across 37 `*-test-result` forms), found by CI's own
+  "FHIR R5 validation" job the first time it ever got a chance to actually
+  complete instead of hanging on the terminology server.**
+  `bin/generate-persona-fhir-bundles.py`'s `build_persona_flag()` emitted
+  a `DetectedIssue.detectedIssueManagement` element with a `concept` child
+  — neither name exists in FHIR R5 (`DetectedIssue.mitigation`, 0..\*, is
+  the real element; its one required child is `action`, not `concept`).
+  Fixed the generator and regenerated: 189 persona bundles across 37 forms
+  (135 files changed). Verified against the real HL7 FHIR R5 validator
+  (`validator_cli.jar`, `-tx n/a`) on the previously-failing file plus a
+  cross-form sample: `Success: 0 errors` on every one.
+- **Fixed double-mojibake corruption in two forms' `CHANGELOG.md`**
+  (`pre-operative-assessment-by-clinician`, `pre-anaesthesia-assessment`):
+  em-dashes and one right-arrow had been round-tripped through the wrong
+  encoding twice (UTF-8 decoded as Latin-1, re-saved as UTF-8, twice
+  over), rendering as `Ã¢ÂÂ`/`â` on GitHub. Isolated to these two files —
+  0/356 elsewhere — so this was a historical hand-edit, not a generator
+  bug; `bin/generate-changelog-and-examples.py --check` stays clean.
 - **Fleet-wide WCAG AA colour-contrast sweep: `bin/test-e2e --html --all`
   run in full for the first time this session (355 forms), found 18
   failures, fixed via a new `bin/html-error-message-contrast-fix`,

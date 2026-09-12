@@ -310,7 +310,14 @@ def build_persona_flag(form_slug, flag: dict, res_id):
         "subject": {"reference": "Patient/PLACEHOLDER"},
         "identifiedDateTime": TIMESTAMP,
         "detail": flag.get("description", ""),
-        "detectedIssueManagement": [{"concept": {"text": flag.get("suggestedAction", "")}}]
+        # FHIR R5 DetectedIssue has no "detectedIssueManagement" element (an
+        # earlier version of this generator invented one, which the FHIR R5
+        # validator rejects as an unrecognized property once CI's own
+        # "FHIR R5 validation" job actually gets to run instead of hanging
+        # on the terminology server). The real element is "mitigation"
+        # (0..*), whose one required sub-element is "action"
+        # (CodeableConcept), not "concept".
+        "mitigation": [{"action": {"text": flag.get("suggestedAction", "")}}]
         if flag.get("suggestedAction")
         else None,
     }
@@ -395,8 +402,8 @@ def build_persona_bundle(form_dir: Path, form_slug: str, title: str, roles: dict
 
     for i, flag in enumerate(expected.get("flags", []) or []):
         issue = build_persona_flag(form_slug, flag, "PLACEHOLDER")
-        if issue.get("detectedIssueManagement") is None:
-            issue.pop("detectedIssueManagement", None)
+        if issue.get("mitigation") is None:
+            issue.pop("mitigation", None)
         if patient_url:
             issue["subject"] = {"reference": patient_url}
         else:

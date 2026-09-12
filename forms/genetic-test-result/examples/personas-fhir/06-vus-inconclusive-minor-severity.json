@@ -749,9 +749,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A variant of uncertain significance (VUS) is reported.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Do not act clinically on the VUS alone; recommend periodic reclassification review and re-contact."
             }
           }

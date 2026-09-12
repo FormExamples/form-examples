@@ -836,9 +836,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A regional wall-motion abnormality is present, suggesting ischaemic disease.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Ensure the referrer is alerted and an ischaemia work-up is considered."
             }
           }

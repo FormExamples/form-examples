@@ -874,9 +874,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Glucosuria detected on dipstick (incidental finding).",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Consider screening for diabetes per the relevant pathway."
             }
           }

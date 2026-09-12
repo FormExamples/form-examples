@@ -784,9 +784,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A recorded seizure or photoparoxysmal response is present and may warrant urgent neurology referral.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Consider urgent referral to the neurology / epilepsy team."
             }
           }

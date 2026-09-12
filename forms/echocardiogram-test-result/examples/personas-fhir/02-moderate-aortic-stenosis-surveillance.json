@@ -836,9 +836,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Moderate valve disease is present and may warrant cardiology referral.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Consider referral to cardiology for surveillance and management."
             }
           }

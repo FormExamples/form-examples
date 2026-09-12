@@ -811,9 +811,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Reduced gas transfer (low DLCO) is present and may warrant respiratory referral.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Consider referral to the respiratory team for further characterisation."
             }
           }

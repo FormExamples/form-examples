@@ -823,9 +823,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A critical result (incompatible crossmatch, clinically-significant antibodies, ABO discrepancy, or unmet two-sample rule) is present.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Communicate the critical result to the requester immediately, withhold issue until resolved, and document the communication."
             }
           }
@@ -870,9 +870,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical result present but it has not been recorded as communicated.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Contact the requester now and record who was informed, with date and time."
             }
           }
@@ -917,9 +917,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "An ABO discrepancy (historical-group non-concordance) or an unmet two-sample group-check rule indicates a possible Wrong-Blood-in-Tube / identity event.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Do not issue. Investigate the discrepancy, request a fresh group-check sample, and escalate to the consultant haematologist."
             }
           }
@@ -964,9 +964,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A crossmatch / compatibility test was not performed for a crossmatch or emergency-issue request.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Complete the appropriate compatibility testing or document the emergency-issue justification."
             }
           }
@@ -1011,9 +1011,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "No impression / conclusion has been recorded.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Add an impression that answers the compatibility question."
             }
           }

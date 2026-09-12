@@ -781,9 +781,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A vertebral fracture was identified without a T-score in the osteoporotic range.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Review fracture risk; a fragility fracture may itself indicate treatment irrespective of BMD."
             }
           }

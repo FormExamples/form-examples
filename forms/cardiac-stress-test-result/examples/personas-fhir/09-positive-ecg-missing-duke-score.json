@@ -777,9 +777,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "An exercise treadmill ECG with an abnormal finding has no Duke treadmill score recorded.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Record the Duke treadmill score for prognostic risk stratification."
             }
           }

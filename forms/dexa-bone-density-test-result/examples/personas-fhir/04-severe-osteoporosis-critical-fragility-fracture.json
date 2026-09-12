@@ -765,9 +765,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Severe (established) osteoporosis \u2014 T \u2264 \u22122.5 with an identified fragility / vertebral fracture.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Communicate the result to the referrer and refer urgently for a fracture-risk treatment review."
             }
           }

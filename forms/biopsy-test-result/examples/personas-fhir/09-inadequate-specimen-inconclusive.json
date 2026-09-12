@@ -710,9 +710,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Specimen adequacy is inadequate; diagnostic confidence may be reduced.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Consider repeat sampling or ancillary testing to reach a diagnostic standard."
             }
           }

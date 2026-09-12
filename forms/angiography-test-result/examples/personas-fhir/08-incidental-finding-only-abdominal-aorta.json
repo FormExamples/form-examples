@@ -785,9 +785,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "One or more incidental findings are documented.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Manage the incidental finding per the relevant structured pathway."
             }
           }

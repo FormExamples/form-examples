@@ -726,9 +726,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A markedly elevated value or a rising trend on treatment requires timely action.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Ensure the requester is alerted and a clear action plan is documented."
             }
           }

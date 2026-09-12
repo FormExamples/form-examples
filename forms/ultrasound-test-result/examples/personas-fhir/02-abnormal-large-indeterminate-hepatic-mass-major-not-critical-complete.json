@@ -768,9 +768,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A mass / lesion or gallstones are present and may warrant onward referral.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Consider referral to the appropriate specialist team as clinically indicated."
             }
           }

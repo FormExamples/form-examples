@@ -774,9 +774,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Test quality is unacceptable; diagnostic confidence may be reduced.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Consider repeating the test to ATS/ERS acceptability and repeatability standards."
             }
           }

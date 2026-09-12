@@ -823,9 +823,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A white-coat effect is documented (raised clinic BP but normal ambulatory averages).",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Manage per the relevant white-coat-hypertension pathway and document."
             }
           }

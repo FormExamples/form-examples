@@ -756,9 +756,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "A systemic / anaphylactic reaction occurred during the test.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Communicate the critical result to the referrer immediately and document the reaction, treatment, and observation."
             }
           }
@@ -803,9 +803,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Anaphylaxis during testing is a critical safety event.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Ensure resuscitation was provided, prescribe / review an adrenaline auto-injector, and refer to allergy / immunology."
             }
           }
@@ -850,9 +850,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Critical event present but the result has not been recorded as communicated.",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Contact the referrer now and record who was informed, with date and time."
             }
           }
@@ -897,9 +897,9 @@
         },
         "identifiedDateTime": "2026-04-09T10:00:00+00:00",
         "detail": "Test is invalid / non-interpretable (antihistamines not withheld, absent positive control, or dermographism).",
-        "detectedIssueManagement": [
+        "mitigation": [
           {
-            "concept": {
+            "action": {
               "text": "Repeat testing after an adequate washout, or arrange specific-IgE blood testing."
             }
           }
