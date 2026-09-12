@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-95 tools.
+96 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -17,6 +17,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/forms-as-snake-case`](#forms-as-snake-case)
 - [`bin/forms-as-tsv`](#forms-as-tsv)
 - [`bin/forms-shard`](#forms-shard)
+- [`bin/generate-api-transcripts`](#generate-api-transcripts)
 - [`bin/generate-changelog-and-examples.py`](#generate-changelog-and-examplespy)
 - [`bin/generate-export-samples`](#generate-export-samples)
 - [`bin/generate-form-skills.py`](#generate-form-skillspy)
@@ -305,6 +306,53 @@ bin/forms-shard <index> <total> — print the form slugs assigned to one
    bin/forms-shard 0 8      # first of eight shards
 
  <index> is 0-based and must satisfy 0 <= index < total.
+```
+
+<h2 id="generate-api-transcripts"><code>bin/generate-api-transcripts</code></h2>
+
+```text
+bin/generate-api-transcripts — record a real `examples/api-create.http`
+transcript (POST-then-GET against the live `patient` endpoint) for every
+Loco crate with the fleet's uniform `controllers/patient.rs` shape.
+
+tasks.md's "API transcripts per form" item asks for a *recorded*
+request/response against the seeded crate, not a reimplemented/faked
+one — same fidelity rule this repo already applies to CSV/TSV export
+samples (bin/generate-export-samples drives the real wizard rather than
+reimplementing its serialiser). So this tool actually runs each crate:
+create/reset its dev database, migrate, seed
+(bin/loco-seed-data-rollout's fixtures), start the real server, POST a
+real request, GET it back, capture both real HTTP transcripts, stop the
+server.
+
+Reuses bin/loco-integration-test-rollout's own field-parsing and
+value-synthesis (copied in, not imported, matching this repo's
+self-contained-tool convention) so the POSTed body matches exactly what
+that tool's own integration test already sends and asserts — this
+script does not re-decide what a realistic patient record looks like.
+
+Scoped to crates with `controllers/patient.rs` (336/356 fleet-wide,
+per bin/loco-integration-test-rollout's own survey) -- the same
+controller/`Params` shape that tool already handles. A crate with a
+differently-shaped or absent patient controller (e.g. this repo's own
+"gold reference", `cardiology-request`, whose only controller is a
+hand-named `RequestParams` on its main table) is SKIPped, not guessed
+at -- recording a meaningful transcript for those needs its own,
+per-crate scoping pass, not a generic patient-table body.
+
+This is SLOW: each crate needs its own migrate + seed + a real `cargo
+run ... start` (a fresh compile if not already built) + curl + shutdown
+-- expect tens of seconds per crate even warm, not milliseconds. Not a
+CI gate; a manual, occasional generator.
+
+Usage:
+    bin/generate-api-transcripts [--check] [<slug> ...]
+
+--check reports which forms would change (by re-running the capture and
+diffing), exits non-zero if any are pending. Default: capture and
+write. Requires a Postgres reachable at the crate's own configured
+`database.uri` (see CONTRIBUTING.md's scratch-Postgres recipe) with a
+role/database it can create.
 ```
 
 <h2 id="generate-changelog-and-examplespy"><code>bin/generate-changelog-and-examples.py</code></h2>

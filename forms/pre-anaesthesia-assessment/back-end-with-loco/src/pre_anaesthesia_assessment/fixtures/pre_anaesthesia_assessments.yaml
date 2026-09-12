@@ -375,7 +375,7 @@
   riskFactorsInsulin: true
   riskFactorsBmiOver40: true
   riskFactorsAnticoagulants: true
-  riskFactorsAllergies: "No known allergies"
+  riskFactorsAllergies: true
   riskFactorsAntiplatelets: true
   riskFactorsEgfrUnder30: true
   riskFactorsEgfr30To60: true

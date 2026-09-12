@@ -898,27 +898,58 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       re-run clean afterward (0 errors across all 356 forms);
       `bin/test-e2e --html advance-statement-about-care` 2/2;
       `bin/lily-html-refactor --check` clean for it.
-- [ ] API transcripts per form: `examples/api-create.http` (or .md) with
-      recorded request/response against the seeded crate.
-      **Investigated 2026-09-12, not attempted fleet-wide: same
-      heterogeneity wall `bin/loco-integration-test-rollout` already had
-      to scope narrowly around.** With the new seed data + a live
-      scratch Postgres in hand, tried the obvious next step directly:
-      started `cardiology-request`'s real server (`cargo run ... --
-      start`) and curled its API. `POST /api/patients` 404'd —
-      `cardiology-request` (this repo's own "gold reference" crate) has
-      **no dedicated `patient`/`clinician` controller at all**; only its
-      main `cardiology_requests` table is routed, and that controller's
-      request struct is named `RequestParams`, not the fleet's usual
-      `Params` (a hand-crafted crate, not a raw scaffold, unlike the
-      336/356 `loco-integration-test-rollout` already handles). Recording
-      a real transcript per crate needs, per crate: knowing *which*
-      controller(s) actually exist and are worth demonstrating, their
-      real param shape, and orchestrating a live server per crate
-      (start, wait for readiness, request, shut down cleanly) at fleet
-      scale — a distinct, larger engineering effort than reusing the
-      existing seed/integration-test machinery, not a quick follow-on.
-      Flagged rather than rushed or faked with a placeholder transcript.
+- [x] **API transcripts per form: DONE 2026-09-12.** First investigation
+      (same day) found a real wall: `cardiology-request` (this repo's own
+      "gold reference" crate) has no dedicated `patient`/`clinician`
+      controller at all, and its main controller's request struct is
+      `RequestParams`, not the fleet's usual `Params` — a hand-crafted
+      crate, not a raw scaffold. Recording a transcript needs knowing
+      *which* controller to demonstrate and its real shape per crate.
+
+      Rather than force a fleet-wide tool through that heterogeneity,
+      scoped to exactly the shape `bin/loco-integration-test-rollout`
+      already solved: new `bin/generate-api-transcripts` reuses that
+      tool's own field-parsing/value-synthesis, drives each crate's real
+      seeded server (not a reimplementation — same fidelity rule as
+      `bin/generate-export-samples`), and records a real POST-then-GET
+      transcript to `examples/api-create.http`. 336/336 eligible crates
+      captured (20 SKIP: the same non-uniform-controller set that tool's
+      own docstring already names, `cardiology-request` among them).
+
+      **Found and fixed 3 more real bugs in `bin/loco-seed-data-rollout`
+      along the way** (compile-time `cargo check` can't see a runtime FK
+      violation or a bad heuristic value):
+      1. FK target resolution by column-name guessing broke on irregular
+         plurals (`thrombosis` -> `thromboses`), already-plural/
+         unpluralized table names (`respect`, `ottawa_ankle_rules`), and
+         semantically-named columns sharing no substring with their
+         target (`author_id` -> `clinicians`). Fixed to parse each
+         entity's own authoritative `belongs_to` relation first.
+      2. A hardcoded "`deleted_at` is always nullable" assumption broke
+         on the one crate (`advance-statement-about-care`) where it
+         isn't — a separate, pre-existing entity bug, flagged not fixed.
+      3. A name-based heuristic ("allergies" -> a free-text string)
+         matched `risk_factors_allergies: bool` by substring and handed
+         it a string. Fixed (in this tool, `generate-api-transcripts`,
+         and `loco-integration-test-rollout` for consistency) to check
+         the heuristic's value type is actually compatible with the
+         column's real type before using it.
+
+      Also found 2 environment-specific quirks, not repo bugs: macOS
+      resolves a bare `localhost` bind to IPv6-only, so probing
+      `127.0.0.1` gets refused even though the server is listening; and
+      the same 9 crates `bin/loco-missing-request-test-stubs-fix`
+      already flagged as "built via an earlier/different process"
+      default to Postgres port `5433`, not the fleet's usual `5432`.
+
+      Verified throughout: `cargo check` clean on every crate this
+      touched; live `migrate` + `seed` + row/FK-linkage queries against
+      a real scratch Postgres confirming the fixes (e.g.
+      `recommended-summary-plan-for-emergency-care-and-treatment`'s
+      `respect`/`respect_grades` FK, `united-kingdom-lasting-power-of-
+      attorney-for-health-and-care-decisions`'s irregular
+      `person_to_notifies` plural); every one of the 336 captured
+      transcripts is a real, live HTTP exchange, not synthesized.
 - [x] **FHIR Bundles for the new personas: already current, re-verified
       2026-09-12.** `bin/generate-persona-fhir-bundles.py --check --all`
       reports 0 drift (189 bundles, 37 `*-test-result` forms — its

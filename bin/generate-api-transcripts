@@ -1,0 +1,367 @@
+#!/usr/bin/env python3
+"""bin/generate-api-transcripts — record a real `examples/api-create.http`
+transcript (POST-then-GET against the live `patient` endpoint) for every
+Loco crate with the fleet's uniform `controllers/patient.rs` shape.
+
+tasks.md's "API transcripts per form" item asks for a *recorded*
+request/response against the seeded crate, not a reimplemented/faked
+one — same fidelity rule this repo already applies to CSV/TSV export
+samples (bin/generate-export-samples drives the real wizard rather than
+reimplementing its serialiser). So this tool actually runs each crate:
+create/reset its dev database, migrate, seed
+(bin/loco-seed-data-rollout's fixtures), start the real server, POST a
+real request, GET it back, capture both real HTTP transcripts, stop the
+server.
+
+Reuses bin/loco-integration-test-rollout's own field-parsing and
+value-synthesis (copied in, not imported, matching this repo's
+self-contained-tool convention) so the POSTed body matches exactly what
+that tool's own integration test already sends and asserts — this
+script does not re-decide what a realistic patient record looks like.
+
+Scoped to crates with `controllers/patient.rs` (336/356 fleet-wide,
+per bin/loco-integration-test-rollout's own survey) -- the same
+controller/`Params` shape that tool already handles. A crate with a
+differently-shaped or absent patient controller (e.g. this repo's own
+"gold reference", `cardiology-request`, whose only controller is a
+hand-named `RequestParams` on its main table) is SKIPped, not guessed
+at -- recording a meaningful transcript for those needs its own,
+per-crate scoping pass, not a generic patient-table body.
+
+This is SLOW: each crate needs its own migrate + seed + a real `cargo
+run ... start` (a fresh compile if not already built) + curl + shutdown
+-- expect tens of seconds per crate even warm, not milliseconds. Not a
+CI gate; a manual, occasional generator.
+
+Usage:
+    bin/generate-api-transcripts [--check] [<slug> ...]
+
+--check reports which forms would change (by re-running the capture and
+diffing), exits non-zero if any are pending. Default: capture and
+write. Requires a Postgres reachable at the crate's own configured
+`database.uri` (see CONTRIBUTING.md's scratch-Postgres recipe) with a
+role/database it can create.
+"""
+
+import argparse
+import json
+import os
+import re
+import subprocess
+import sys
+import time
+import urllib.request
+import urllib.error
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS_DIR = REPO_ROOT / "forms"
+
+PARAMS_BLOCK_RE = re.compile(r"pub struct Params\s*\{(.*?)\n\s*\}", re.DOTALL)
+FIELD_RE = re.compile(r"pub\s+(\w+)\s*:\s*([^,\n]+?)\s*,?\s*$", re.MULTILINE)
+CHECK_ENUM_RE = re.compile(r"CHECK\s*\(\s*(\w+)\s+IN\s*\(([^)]+)\)\s*\)", re.IGNORECASE)
+PREFIX_RE = re.compile(r'\.prefix\("api/([^"/]+)/?"\)')
+PORT_RE = re.compile(r"^\s*port:\s*(\d+)", re.MULTILINE)
+BIN_NAME_RE = re.compile(r'name\s*=\s*"([\w-]+)"')
+
+
+def to_camel_case(name: str) -> str:
+    words = name.split("_")
+    out = words[0]
+    for w in words[1:]:
+        if w:
+            out += w[0].upper() + w[1:]
+    return out
+
+
+def parse_check_enums(sql_text: str) -> dict[str, list[str]]:
+    enums = {}
+    for m in CHECK_ENUM_RE.finditer(sql_text):
+        values = re.findall(r"'([^']*)'", m.group(2))
+        if values:
+            enums[m.group(1)] = values
+    return enums
+
+
+def first_non_empty(values: list[str]) -> str:
+    for v in values:
+        if v != "":
+            return v
+    return values[0] if values else ""
+
+
+NAME_HEURISTICS: list[tuple[re.Pattern, object]] = [
+    (re.compile(r"^name$"), "Test Patient"),
+    (re.compile(r"email"), "test.patient@example.com"),
+    (re.compile(r"phone"), "+441234567890"),
+    (re.compile(r"postal_address"), "10 Downing Street, London"),
+    (re.compile(r"^postcode$"), "SW1A 2AA"),
+    (re.compile(r"country_as_iso"), "GB"),
+    # Distinct from bin/loco-seed-data-rollout's own "9434765919": the
+    # seed fixture already inserted a patient row with that NHS number,
+    # and this generator's own POST must not collide with it under the
+    # column's unique constraint.
+    (re.compile(r"nhs_number"), "9434765928"),
+    (re.compile(r"hospital_mrn|^mrn$"), "MRN-000123"),
+    (re.compile(r"allergies"), "No known allergies"),
+    (re.compile(r"height_as_cm"), 170.2),
+    (re.compile(r"weight_as_kg"), 70.4),
+    (re.compile(r"body_mass_index"), 24.2),
+    (re.compile(r"waist_as_cm"), 85.0),
+    (re.compile(r"waist_height_ratio"), 0.5),
+    (re.compile(r"vo2_max"), 35.0),
+    (re.compile(r"birth_date"), "1990-01-01"),
+]
+
+
+def _heuristic_type_compatible(heuristic_value, inner_type: str) -> bool:
+    """A name-based heuristic match is only safe to use if its value type
+    fits the column's actual type -- e.g. `risk_factors_allergies: bool`
+    matches the "allergies" heuristic by substring, but that heuristic's
+    string value ("No known allergies") can't deserialize into a bool."""
+    if isinstance(heuristic_value, bool):
+        return inner_type == "bool"
+    if isinstance(heuristic_value, float):
+        return inner_type in ("f64", "f32", "Decimal")
+    if isinstance(heuristic_value, str):
+        return inner_type not in ("bool", "i64", "i32", "f64", "f32", "Decimal")
+    return True
+
+
+def pick_value(field_name: str, rust_type: str, enums: dict[str, list[str]]):
+    inner_type = rust_type[len("Option<"):-1] if rust_type.startswith("Option<") else rust_type
+    if inner_type == "DateTimeWithTimeZone" and field_name == "deleted_at":
+        return None
+    if field_name in enums:
+        return first_non_empty(enums[field_name])
+    for pattern, heuristic_value in NAME_HEURISTICS:
+        if pattern.search(field_name) and _heuristic_type_compatible(heuristic_value, inner_type):
+            return heuristic_value
+    if inner_type == "String":
+        return f"Test {to_camel_case(field_name)}"
+    if inner_type == "Date":
+        return "1990-01-01"
+    if inner_type == "DateTimeWithTimeZone":
+        return "2026-01-01T00:00:00Z"
+    if inner_type in ("f64", "f32"):
+        return 1.0
+    if inner_type == "Decimal":
+        return "1.0"
+    if inner_type in ("i64", "i32"):
+        return 1
+    if inner_type == "bool":
+        return True
+    return None  # unhandled -- caller SKIPs the whole crate
+
+
+def build_patient_body(controller_text: str, sql_text: str) -> dict | None:
+    m = PARAMS_BLOCK_RE.search(controller_text)
+    if not m:
+        return None
+    enums = parse_check_enums(sql_text) if sql_text else {}
+    body = {}
+    for fm in FIELD_RE.finditer(m.group(1)):
+        name, rust_type = fm.group(1), fm.group(2).strip()
+        if name == "deleted_at":
+            continue
+        value = pick_value(name, rust_type, enums)
+        if value is None and not rust_type.startswith("Option<"):
+            return None
+        if value is not None:
+            body[to_camel_case(name)] = value
+    return body if body else None
+
+
+def run(cmd: list[str], cwd: Path, timeout: int = 120) -> subprocess.CompletedProcess:
+    return subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, timeout=timeout)
+
+
+def find_bin_name(cargo_toml: str) -> str | None:
+    m = re.search(r"\[\[bin\]\]\s*\nname\s*=\s*\"([\w-]+)\"", cargo_toml)
+    return m.group(1) if m else None
+
+
+DB_URI_RE = re.compile(r"postgres://([\w-]+):([\w-]+)@([\w.]+):(\d+)/([\w-]+)")
+
+
+def ensure_database(config_text: str) -> str | None:
+    """Parses the plain (non-templated) postgres://user:pass@host:port/db
+    URI out of development.yaml and creates the role/database if they
+    don't exist yet. Returns an error string, or None on success."""
+    m = DB_URI_RE.search(config_text)
+    if not m:
+        return "no plain postgres:// URI found in development.yaml (templated config?)"
+    user, password, host, port, dbname = m.groups()
+    psql = ["psql", "-h", host, "-p", port, "-U", "postgres", "-d", "postgres", "-v", "ON_ERROR_STOP=0", "-c"]
+    env = {**os.environ, "PGPASSWORD": "postgres"}
+    subprocess.run(psql + [f"CREATE ROLE {user} WITH LOGIN SUPERUSER PASSWORD '{password}';"],
+                    capture_output=True, text=True, env=env)
+    subprocess.run(psql + [f"CREATE DATABASE {dbname};"],
+                    capture_output=True, text=True, env=env)
+    return None
+
+
+def wait_for_port(port: int, timeout: float = 20.0) -> bool:
+    import socket
+
+    deadline = time.time() + timeout
+    while time.time() < deadline:
+        try:
+            with socket.create_connection(("localhost", port), timeout=1):
+                return True
+        except OSError:
+            time.sleep(0.5)
+    return False
+
+
+def http_json(method: str, url: str, body: dict | None = None) -> tuple[int, dict | str]:
+    data = json.dumps(body).encode() if body is not None else None
+    req = urllib.request.Request(url, data=data, method=method, headers={"Content-Type": "application/json"})
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            raw = resp.read().decode()
+            try:
+                return resp.status, json.loads(raw)
+            except json.JSONDecodeError:
+                return resp.status, raw
+    except urllib.error.HTTPError as e:
+        raw = e.read().decode()
+        try:
+            return e.code, json.loads(raw)
+        except json.JSONDecodeError:
+            return e.code, raw
+
+
+def render_transcript(slug: str, base_url: str, path: str, req_body: dict, post_status: int, post_resp, get_status: int, get_resp) -> str:
+    def fmt(status, resp):
+        body = json.dumps(resp, indent=2) if isinstance(resp, (dict, list)) else str(resp)
+        return f"HTTP {status}\nContent-Type: application/json\n\n{body}\n"
+
+    rid = post_resp.get("id") if isinstance(post_resp, dict) else None
+    return (
+        f"### Real transcript recorded against a live seeded instance of the\n"
+        f"### {slug} Loco crate. Generated by bin/generate-api-transcripts --\n"
+        f"### re-run it after a schema change rather than hand-editing.\n\n"
+        f"POST {base_url}{path.rstrip('/')}\n"
+        f"Content-Type: application/json\n\n"
+        f"{json.dumps(req_body, indent=2)}\n\n"
+        f"{fmt(post_status, post_resp)}\n"
+        f"###\n\n"
+        f"GET {base_url}{path}{rid}\n\n"
+        f"{fmt(get_status, get_resp)}"
+    )
+
+
+def capture_crate(slug: str, write: bool) -> tuple[str, str]:
+    loco_dir = FORMS_DIR / slug / "back-end-with-loco"
+    src_dirs = [d for d in loco_dir.glob("src/*/") if (d / "controllers" / "mod.rs").is_file()]
+    if not src_dirs:
+        return "SKIP", "no crate src dir found"
+    src_dir = src_dirs[0]
+    controller = src_dir / "controllers" / "patient.rs"
+    if not controller.is_file():
+        return "SKIP", "no controllers/patient.rs (non-uniform crate)"
+
+    sql_dir = FORMS_DIR / slug / "sql"
+    sql_candidates = list(sql_dir.glob("*create_table_patient.sql"))
+    sql_text = sql_candidates[0].read_text() if sql_candidates else ""
+
+    controller_text = controller.read_text()
+    body = build_patient_body(controller_text, sql_text)
+    if body is None:
+        return "SKIP", "unhandled Params field type or shape"
+
+    m_prefix = PREFIX_RE.search(controller_text)
+    if not m_prefix:
+        return "SKIP", "no .prefix(\"api/...\") found in controllers/patient.rs"
+    path = f"/api/{m_prefix.group(1)}/"
+
+    config = (loco_dir / "config" / "development.yaml").read_text()
+    m_port = PORT_RE.search(config)
+    port = int(m_port.group(1)) if m_port else 5150
+
+    cargo_toml = (loco_dir / "Cargo.toml").read_text()
+    bin_name = find_bin_name(cargo_toml)
+    if not bin_name:
+        return "SKIP", "no [[bin]] in Cargo.toml"
+
+    db_err = ensure_database(config)
+    if db_err:
+        return "SKIP", db_err
+
+    # migrate + seed (idempotent: automigrate mode + a fresh scratch DB).
+    migrate = run(["cargo", "run", "--bin", bin_name, "--", "db", "migrate"], loco_dir, timeout=180)
+    if migrate.returncode != 0:
+        return "SKIP", f"db migrate failed: {migrate.stderr.strip().splitlines()[-1] if migrate.stderr else 'unknown'}"
+    seed = run(["cargo", "run", "--bin", bin_name, "--", "db", "seed", "--from", "src/fixtures"], loco_dir, timeout=180)
+    if seed.returncode != 0:
+        return "SKIP", f"db seed failed: {seed.stderr.strip().splitlines()[-1] if seed.stderr else 'unknown'}"
+
+    proc = subprocess.Popen(
+        ["cargo", "run", "--bin", bin_name, "--", "start"],
+        cwd=loco_dir, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+    )
+    try:
+        if not wait_for_port(port, timeout=60):
+            return "SKIP", f"server never listened on port {port}"
+        base_url = f"http://localhost:{port}"
+        # POST mounts at the bare prefix (no trailing slash: `.add("/",
+        # post(add))` under a prefix that already ends in "/" would
+        # double up); GET-by-id keeps the prefix's own trailing slash
+        # before the id. Verified live, not assumed from the route
+        # source alone -- a trailing-slash POST 404s on this fleet.
+        post_status, post_resp = http_json("POST", f"{base_url}{path.rstrip('/')}", body)
+        if post_status != 200 or not isinstance(post_resp, dict) or "id" not in post_resp:
+            return "SKIP", f"POST {path.rstrip('/')} did not return a created record (status {post_status})"
+        rid = post_resp["id"]
+        get_status, get_resp = http_json("GET", f"{base_url}{path}{rid}")
+    finally:
+        proc.terminate()
+        try:
+            proc.wait(timeout=10)
+        except subprocess.TimeoutExpired:
+            proc.kill()
+
+    transcript = render_transcript(slug, base_url, path, body, post_status, post_resp, get_status, get_resp)
+    out_path = FORMS_DIR / slug / "examples" / "api-create.http"
+    current = out_path.read_text() if out_path.is_file() else None
+    if current == transcript:
+        return "unchanged", "already up to date"
+    if write:
+        out_path.write_text(transcript)
+    return "changed", f"POST {path} -> {post_status}, GET -> {get_status}"
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("slugs", nargs="*", help="form slugs (default: every eligible form)")
+    parser.add_argument("--check", action="store_true", help="report drift; exit 1 if any pending; don't write")
+    args = parser.parse_args()
+
+    if args.slugs:
+        slugs = args.slugs
+    else:
+        out = subprocess.run(["bin/forms-as-kebab-case"], cwd=REPO_ROOT, capture_output=True, text=True)
+        slugs = [s.strip() for s in out.stdout.splitlines() if s.strip()]
+
+    changed, unchanged, skipped = [], 0, {}
+    for slug in slugs:
+        status, detail = capture_crate(slug, write=not args.check)
+        if status == "changed":
+            changed.append(slug)
+            print(f"  {slug}: {detail}")
+        elif status == "unchanged":
+            unchanged += 1
+        else:
+            skipped.setdefault(detail, []).append(slug)
+
+    total_skip = sum(len(v) for v in skipped.values())
+    verb = "would change" if args.check else "changed"
+    print(f"generate-api-transcripts: {len(changed)} form(s) {verb}, {unchanged} up to date, {total_skip} SKIP")
+    for reason, sl in sorted(skipped.items(), key=lambda kv: -len(kv[1])):
+        print(f"  SKIP ({len(sl)}): {reason}")
+    return 1 if (args.check and changed) else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

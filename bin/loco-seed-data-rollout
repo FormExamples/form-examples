@@ -172,11 +172,26 @@ def pick_value(field_name: str, rust_type: str, enums: dict[str, list[str]]):
     return value
 
 
+def _heuristic_type_compatible(heuristic_value, inner_type: str) -> bool:
+    """A name-based heuristic match is only safe to use if its value type
+    fits the column's actual type -- e.g. `risk_factors_allergies: bool`
+    matches the "allergies" heuristic by substring, but that heuristic's
+    string value ("No known allergies") can't deserialize into a bool.
+    Found live via bin/generate-api-transcripts's fleet run."""
+    if isinstance(heuristic_value, bool):
+        return inner_type == "bool"
+    if isinstance(heuristic_value, float):
+        return inner_type in ("f64", "f32", "Decimal")
+    if isinstance(heuristic_value, str):
+        return inner_type not in ("bool", "i64", "i32", "f64", "f32", "Decimal")
+    return True
+
+
 def _pick_raw_value(field_name: str, inner_type: str, enums: dict[str, list[str]]):
     if field_name in enums:
         return first_non_empty(enums[field_name])
     for pattern, heuristic_value in NAME_HEURISTICS:
-        if pattern.search(field_name):
+        if pattern.search(field_name) and _heuristic_type_compatible(heuristic_value, inner_type):
             return heuristic_value
     if inner_type == "String":
         return f"Test {to_camel_case(field_name)}"

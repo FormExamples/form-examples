@@ -75,14 +75,14 @@ impl Hooks for App {
         )
             .await?;
         // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
-        loco_rs::db::seed::<crate::models::_entities::hospital_dashboard_metric_values::ActiveModel>(
-            &ctx.db,
-            &format!("{}/src/hospital_dashboard_metrics/fixtures/hospital_dashboard_metric_values.yaml", env!("CARGO_MANIFEST_DIR")),
-        )
-        .await?;
         loco_rs::db::seed::<crate::models::_entities::hospital_dashboard_metrics::ActiveModel>(
             &ctx.db,
             &format!("{}/src/hospital_dashboard_metrics/fixtures/hospital_dashboard_metrics.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::hospital_dashboard_metric_values::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/hospital_dashboard_metrics/fixtures/hospital_dashboard_metric_values.yaml", env!("CARGO_MANIFEST_DIR")),
         )
         .await?;
         // END bin/loco-seed-data-rollout

@@ -103,16 +103,6 @@ impl Hooks for App {
             &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/donors.yaml", env!("CARGO_MANIFEST_DIR")),
         )
         .await?;
-        loco_rs::db::seed::<crate::models::_entities::lpa_validity_additional_flags::ActiveModel>(
-            &ctx.db,
-            &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/lpa_validity_additional_flags.yaml", env!("CARGO_MANIFEST_DIR")),
-        )
-        .await?;
-        loco_rs::db::seed::<crate::models::_entities::lpa_validity_fired_rules::ActiveModel>(
-            &ctx.db,
-            &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/lpa_validity_fired_rules.yaml", env!("CARGO_MANIFEST_DIR")),
-        )
-        .await?;
         loco_rs::db::seed::<crate::models::_entities::person_to_notifies::ActiveModel>(
             &ctx.db,
             &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/person_to_notifies.yaml", env!("CARGO_MANIFEST_DIR")),
@@ -176,6 +166,16 @@ impl Hooks for App {
         loco_rs::db::seed::<crate::models::_entities::lpa_validities::ActiveModel>(
             &ctx.db,
             &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/lpa_validities.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::lpa_validity_additional_flags::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/lpa_validity_additional_flags.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::lpa_validity_fired_rules::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions/fixtures/lpa_validity_fired_rules.yaml", env!("CARGO_MANIFEST_DIR")),
         )
         .await?;
         // END bin/loco-seed-data-rollout

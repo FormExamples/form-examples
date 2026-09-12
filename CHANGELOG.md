@@ -18,6 +18,50 @@ for them.
 
 ### Added
 
+- **New `bin/generate-api-transcripts`: a real, live-server POST-then-GET
+  transcript per crate (`examples/api-create.http`), 336/336 eligible
+  crates — and it found 3 more real bugs in `bin/loco-seed-data-rollout`
+  that `cargo check` structurally cannot see.** Reuses
+  `bin/loco-integration-test-rollout`'s field-parsing/value-synthesis so
+  the POSTed body matches that tool's own generated test; scoped to the
+  same uniform `controllers/patient.rs` shape (336/356), since the
+  obvious first target — `cardiology-request`, this repo's own "gold
+  reference" — turned out to have no dedicated patient controller at
+  all, confirming a fleet-wide generic tool needs that same scoping.
+
+  Bugs found and fixed in `bin/loco-seed-data-rollout` by actually
+  running the seeded server rather than just compiling against it:
+  1. Foreign-key target resolution by column-name guessing broke on
+     irregular plurals (`thrombosis` -> `thromboses`), already-plural
+     or unpluralized table names (`respect`, `ottawa_ankle_rules`), and
+     semantically-named columns sharing no substring with their target
+     (`author_id` -> `clinicians`) — all found via a real FK-violation
+     error at insert time, not a guess. Fixed to parse each entity's own
+     authoritative `#[sea_orm(belongs_to = ...)]` relation first,
+     falling back to the name guess only when no relation is declared.
+  2. A hardcoded "`deleted_at` is always nullable" assumption broke on
+     the one crate (`advance-statement-about-care`) where it isn't — a
+     separate, pre-existing entity bug, flagged not fixed here.
+  3. A name-based heuristic ("allergies" -> a free-text string) matched
+     `risk_factors_allergies: bool` by substring and handed it a string
+     the column couldn't deserialize. Fixed (in this tool and its two
+     siblings, `generate-api-transcripts` and
+     `loco-integration-test-rollout`, for consistency) to check a
+     heuristic's value type is actually compatible with the column's
+     real type before using it.
+
+  Also found two environment-specific quirks, not repo bugs: macOS
+  resolves a bare `localhost` server bind to IPv6-only, so probing
+  `127.0.0.1` gets refused even though the server is listening; and the
+  same 9 crates `bin/loco-missing-request-test-stubs-fix` already
+  flagged as "built via an earlier/different process" default to
+  Postgres port `5433`, not the fleet's usual `5432`.
+
+  Verified throughout: `cargo check` clean on every crate touched; live
+  `migrate` + `seed` + row/FK-linkage queries against a real scratch
+  Postgres confirming each fix; every one of the 336 transcripts is a
+  real HTTP exchange against a real running server, not synthesized.
+
 - **New `bin/verify-personas` (+ `e2e/verify-personas.mjs`): a UI-level
   complement to `bin/test-personas`.** For every eligible form, drives the
   real wizard through a fresh headless-browser page per `personas.json`
