@@ -244,7 +244,7 @@ Design each feature on the reference forms
       state architecture and reactivity pitfall make this a harder
       mechanical target than HTML's regex-extractable `loadState`/
       `startOver` shape).
-- [ ] **Autosave**: localStorage persistence keyed by slug, restore banner
+- [x] **Autosave**: localStorage persistence keyed by slug, restore banner
       on load, clear-on-submit + explicit clear control; both front-ends.
       E2E test: fill half, reload, assert restored. HTML reference form
       already had working autosave/restore (verified, unaffected by the
