@@ -5,6 +5,7 @@
     { "title": "Home", "url": "https://formexamples.com/", "description": "Project overview and highlights" },
     { "title": "Get started", "url": "https://formexamples.com/get-started", "description": "Run a form locally" },
     { "title": "Forms", "url": "https://formexamples.com/forms", "description": "Browse the form catalogue" },
+    { "title": "Examples", "url": "https://formexamples.com/examples", "description": "Worked examples — hand-curated, engine-verified personas per form" },
     { "title": "Architecture", "url": "https://formexamples.com/architecture", "description": "The big-picture design" },
     { "title": "Tech stacks", "url": "https://formexamples.com/tech-stacks", "description": "The front-end/back-end stacks per form" },
     { "title": "Compliance", "url": "https://formexamples.com/compliance", "description": "The regulatory standards this project tracks" }

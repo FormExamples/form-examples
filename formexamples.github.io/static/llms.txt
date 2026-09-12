@@ -15,6 +15,7 @@
 - [Home](https://formexamples.com/): project overview and highlights
 - [Get started](https://formexamples.com/get-started): run a form locally
 - [Forms](https://formexamples.com/forms): browse the form catalogue
+- [Examples](https://formexamples.com/examples): worked examples — hand-curated, engine-verified personas per form
 - [Architecture](https://formexamples.com/architecture): the big-picture design
 - [Tech stacks](https://formexamples.com/tech-stacks): the front-end/back-end stacks per form
 - [Compliance](https://formexamples.com/compliance): the regulatory standards this project tracks

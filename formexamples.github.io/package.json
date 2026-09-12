@@ -5,12 +5,12 @@
   "engines": { "node": "=26" },
   "type": "module",
   "scripts": {
-    "prebuild": "tsx scripts/generate-forms-data.ts",
+    "prebuild": "tsx scripts/generate-forms-data.ts && tsx scripts/generate-examples-data.ts",
     "build": "vite build",
-    "predev": "tsx scripts/generate-forms-data.ts",
+    "predev": "tsx scripts/generate-forms-data.ts && tsx scripts/generate-examples-data.ts",
     "dev": "vite dev",
     "preview": "vite preview",
-    "precheck": "tsx scripts/generate-forms-data.ts",
+    "precheck": "tsx scripts/generate-forms-data.ts && tsx scripts/generate-examples-data.ts",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {

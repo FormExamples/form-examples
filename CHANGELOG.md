@@ -506,6 +506,17 @@ for them.
   `cargo test` green with a live scratch Postgres on 4
   (54/43/43/33 tests, 0 failed).
 
+- **Examples gallery page** on `formexamples.github.io`: a new `/examples`
+  route, one card per form with `examples/personas.json` (353/356 — the 3
+  without are confirmed genuinely engine-less by design), showing the
+  form's title, `index.md` lead paragraph, and every persona's
+  name/description (1183 total), each linking out to that form's
+  `personas.json` and directory on GitHub. A client-side text filter
+  narrows the list. New `scripts/generate-examples-data.ts`, wired into
+  the same prebuild/predev/precheck hooks as the existing forms-data
+  generator — no per-form hand-authoring needed. Verified: `pnpm check`
+  (0/0), `pnpm build` succeeds.
+
 ### Changed
 
 - **`formexamples.github.io` refactored onto the Lily Design System**,

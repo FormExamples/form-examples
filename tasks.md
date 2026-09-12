@@ -735,9 +735,40 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       (generate via the Phase 3 export feature to guarantee fidelity).
 - [ ] API transcripts per form: `examples/api-create.http` (or .md) with
       recorded request/response against the seeded crate.
-- [ ] FHIR Bundles for the new personas; validate in the `fhir` CI job.
-- [ ] Examples gallery page on `formexamples.github.io` (per-form card:
-      description, personas, score ranges, links).
+- [x] **FHIR Bundles for the new personas: already current, re-verified
+      2026-09-12.** `bin/generate-persona-fhir-bundles.py --check --all`
+      reports 0 drift (189 bundles, 37 `*-test-result` forms — its
+      documented scope). The `FHIR R5 validation` CI job already globs
+      `forms/*/examples/*bundle*.json` alongside `forms/*/fhir/r5/*.json`,
+      so these are validated. That job's own execution is separately
+      fragile (its comment documents it once sat "in progress" for 4+
+      hours before the `-tx n/a` fix; a 2026-09-11 full-fleet run still
+      failed it, apparently on a slow/hanging step unrelated to any
+      content this session touched) — a real, pre-existing CI-health issue
+      distinct from bundle correctness, out of this item's scope.
+- [x] **Examples gallery page on `formexamples.github.io`: DONE 2026-09-12.**
+      New `/examples` route: one card per form with `examples/personas.json`
+      (353/356 — the 3 without are confirmed genuinely engine-less by
+      design, correctly excluded rather than shown empty), each showing the
+      form's title, `index.md` lead paragraph, and every persona's
+      name/description (1183 total), with a link out to that form's
+      `personas.json` and its directory on GitHub. A client-side text
+      filter (form/slug/scenario) narrows the 353-card list, since the
+      page renders everything at once, matching the existing `/forms`
+      page's "no pagination" convention. New `scripts/generate-examples-
+      data.ts` (wired into the same prebuild/predev/precheck hooks as
+      `generate-forms-data.ts`) reads each form's `index.md` and
+      `personas.json` at build time — no per-form hand-authoring needed.
+      Added to the nav and to the site's own `llms.txt`/`llms.json`.
+      "Score ranges" (the task's own original wording) is covered by each
+      persona's own description prose (e.g. "Aorta 6.2 cm — at or above
+      5.5 cm, large category") rather than a separately-extracted numeric
+      field — the 353 forms' engines are too heterogeneous (Complete/
+      Partial/Incomplete, numeric bands, risk categories, …) for a single
+      generic "range" extraction to mean the same thing twice. Verified:
+      `pnpm check` (0 errors/0 warnings, 336 files), `pnpm build`
+      succeeds (prerendered page ~1MB, consistent with `/forms` already
+      rendering all 356 forms on one page with no pagination).
 - [ ] Run E2E sweep against all three personas per form.
 
 ## Phase 7 — Special files + unsafe-forbid ✅ COMPLETE (2026-08-26)

@@ -7,6 +7,7 @@ export const REPO_URL = 'https://github.com/formexamples/form-examples';
 export const navLinks: NavLink[] = [
   { href: '/', label: 'Home' },
   { href: '/forms/', label: 'Forms' },
+  { href: '/examples/', label: 'Examples' },
   { href: '/architecture/', label: 'Architecture' },
   { href: '/tech-stacks/', label: 'Tech stacks' },
   { href: '/compliance/', label: 'Compliance' },
