@@ -81,11 +81,6 @@ impl Hooks for App {
             &format!("{}/src/ottawa_ankle_rules/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
         )
         .await?;
-        loco_rs::db::seed::<crate::models::_entities::ottawa_ankle_rules_grades::ActiveModel>(
-            &ctx.db,
-            &format!("{}/src/ottawa_ankle_rules/fixtures/ottawa_ankle_rules_grades.yaml", env!("CARGO_MANIFEST_DIR")),
-        )
-        .await?;
         loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
             &ctx.db,
             &format!("{}/src/ottawa_ankle_rules/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
@@ -94,6 +89,11 @@ impl Hooks for App {
         loco_rs::db::seed::<crate::models::_entities::ottawa_ankle_rules::ActiveModel>(
             &ctx.db,
             &format!("{}/src/ottawa_ankle_rules/fixtures/ottawa_ankle_rules.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::ottawa_ankle_rules_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/ottawa_ankle_rules/fixtures/ottawa_ankle_rules_grades.yaml", env!("CARGO_MANIFEST_DIR")),
         )
         .await?;
         loco_rs::db::seed::<crate::models::_entities::ottawa_ankle_rules_grade_flags::ActiveModel>(

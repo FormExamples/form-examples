@@ -81,11 +81,6 @@ impl Hooks for App {
             &format!("{}/src/parkland_formula_for_burns/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
         )
         .await?;
-        loco_rs::db::seed::<crate::models::_entities::parkland_formula_for_burns_grades::ActiveModel>(
-            &ctx.db,
-            &format!("{}/src/parkland_formula_for_burns/fixtures/parkland_formula_for_burns_grades.yaml", env!("CARGO_MANIFEST_DIR")),
-        )
-        .await?;
         loco_rs::db::seed::<crate::models::_entities::patients::ActiveModel>(
             &ctx.db,
             &format!("{}/src/parkland_formula_for_burns/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
@@ -94,6 +89,11 @@ impl Hooks for App {
         loco_rs::db::seed::<crate::models::_entities::parkland_formula_for_burns::ActiveModel>(
             &ctx.db,
             &format!("{}/src/parkland_formula_for_burns/fixtures/parkland_formula_for_burns.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::parkland_formula_for_burns_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/parkland_formula_for_burns/fixtures/parkland_formula_for_burns_grades.yaml", env!("CARGO_MANIFEST_DIR")),
         )
         .await?;
         loco_rs::db::seed::<crate::models::_entities::parkland_formula_for_burns_grade_flags::ActiveModel>(

@@ -78,6 +78,9 @@ SEED_FN_RE = re.compile(
 MODEL_STRUCT_RE = re.compile(r"pub struct Model\s*\{(.*?)\n\}", re.DOTALL)
 FIELD_RE = re.compile(r"pub\s+(\w+)\s*:\s*([^,\n]+?)\s*,?\s*$", re.MULTILINE)
 CHECK_ENUM_RE = re.compile(r"CHECK\s*\(\s*(\w+)\s+IN\s*\(([^)]+)\)\s*\)", re.IGNORECASE)
+BELONGS_TO_RE = re.compile(
+    r'belongs_to\s*=\s*"super::(\w+)::Entity",\s*\n\s*from\s*=\s*"Column::(\w+)"'
+)
 
 
 def to_camel_case(name: str) -> str:
@@ -87,6 +90,30 @@ def to_camel_case(name: str) -> str:
         if w:
             out += w[0].upper() + w[1:]
     return out
+
+
+def to_pascal_case(name: str) -> str:
+    return "".join(w[0].upper() + w[1:] for w in name.split("_") if w)
+
+
+def parse_belongs_to(entity_text: str) -> dict[str, str]:
+    """Returns {snake_case_fk_column: target_table}, read from each
+    entity's own `#[sea_orm(belongs_to = "super::<table>::Entity", from =
+    "Column::<Col>")]` relation -- the authoritative source for what a
+    foreign-key column actually points at. A name-based guess (does
+    `foo_id` mean table `foos`?) breaks on irregular plurals
+    (`thrombosis` -> `thromboses`), already-plural or never-pluralized
+    table names (`respect`, `ottawa_ankle_rules`), and semantically-named
+    columns that don't share the target's name at all (`author_id` ->
+    `clinicians`) -- all confirmed live via a real FK-violation error
+    from bin/generate-api-transcripts's fleet run before this existed."""
+    by_pascal = {m.group(2): m.group(1) for m in BELONGS_TO_RE.finditer(entity_text)}
+    result = {}
+    for field_name, _ in parse_model_fields(entity_text):
+        pascal = to_pascal_case(field_name)
+        if pascal in by_pascal:
+            result[field_name] = by_pascal[pascal]
+    return result
 
 
 def parse_model_fields(entity_text: str) -> list[tuple[str, str]]:
@@ -261,6 +288,8 @@ def build_crate(src_dir: Path, form_dir: Path) -> tuple[CrateAnalysis | None, st
     table_fks: dict[str, dict[str, str]] = {}
     table_nullable_fks: dict[str, set[str]] = {}
     for table in tables:
+        entity_text = (entities_dir / f"{table}.rs").read_text()
+        belongs_to = parse_belongs_to(entity_text)
         fks: dict[str, str] = {}
         nullable_fks: set[str] = set()
         for name, rust_type in table_fields[table]:
@@ -268,9 +297,20 @@ def build_crate(src_dir: Path, form_dir: Path) -> tuple[CrateAnalysis | None, st
                 continue
             if rust_type not in ("Uuid", "i64", "Option<Uuid>", "Option<i64>"):
                 continue
-            target = f"{name[:-3]}s"
-            if target not in tables:
-                continue  # not an FK column after all -- e.g. an unrelated "..._id" name
+            # The entity's own `belongs_to` relation is authoritative;
+            # only fall back to the "does <col> minus _id, plus s, name a
+            # real table" guess when a column has no declared relation
+            # (rare fleet-wide, but not zero) -- a name-based guess alone
+            # breaks on irregular plurals, already-plural/unpluralized
+            # table names, and semantically-named FK columns that share
+            # no substring with their target's name at all.
+            target = belongs_to.get(name)
+            if target is None:
+                target = f"{name[:-3]}s"
+                if target not in tables:
+                    continue  # not an FK column after all
+            elif target not in tables:
+                return None, f"{table}.{name}'s belongs_to target {target} isn't a discovered table"
             if rust_type.startswith("Option<"):
                 nullable_fks.add(name)
                 continue
@@ -308,8 +348,16 @@ def build_crate(src_dir: Path, form_dir: Path) -> tuple[CrateAnalysis | None, st
                 value = table_ids[table]
             elif name in ("created_at", "updated_at"):
                 value = "2026-01-01T00:00:00Z"
-            elif name == "deleted_at":
+            elif name == "deleted_at" and rust_type.startswith("Option<"):
                 value = None
+            elif name == "deleted_at":
+                # Fleet-wide, `deleted_at` is always Option<...> -- a
+                # required one is a separate, pre-existing entity bug
+                # (found live: advance-statement-about-care's `grades`
+                # table), not something to paper over with a null that
+                # would violate its NOT NULL constraint. Fall through to
+                # a real value via pick_value() below.
+                value = pick_value(name, rust_type, enums)
             elif name in table_fks[table]:
                 value = table_ids[table_fks[table][name]]
             elif name in table_nullable_fks[table]:

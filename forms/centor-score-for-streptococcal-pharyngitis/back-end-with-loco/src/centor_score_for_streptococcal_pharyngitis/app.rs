@@ -76,11 +76,6 @@ impl Hooks for App {
         )
             .await?;
         // BEGIN bin/loco-seed-data-rollout -- do not hand-edit this block; re-run the tool after a schema change.
-        loco_rs::db::seed::<crate::models::_entities::centor_score_for_streptococcal_pharyngitis_grades::ActiveModel>(
-            &ctx.db,
-            &format!("{}/src/centor_score_for_streptococcal_pharyngitis/fixtures/centor_score_for_streptococcal_pharyngitis_grades.yaml", env!("CARGO_MANIFEST_DIR")),
-        )
-        .await?;
         loco_rs::db::seed::<crate::models::_entities::clinicians::ActiveModel>(
             &ctx.db,
             &format!("{}/src/centor_score_for_streptococcal_pharyngitis/fixtures/clinicians.yaml", env!("CARGO_MANIFEST_DIR")),
@@ -94,6 +89,11 @@ impl Hooks for App {
         loco_rs::db::seed::<crate::models::_entities::centor_score_for_streptococcal_pharyngitis::ActiveModel>(
             &ctx.db,
             &format!("{}/src/centor_score_for_streptococcal_pharyngitis/fixtures/centor_score_for_streptococcal_pharyngitis.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::centor_score_for_streptococcal_pharyngitis_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/centor_score_for_streptococcal_pharyngitis/fixtures/centor_score_for_streptococcal_pharyngitis_grades.yaml", env!("CARGO_MANIFEST_DIR")),
         )
         .await?;
         loco_rs::db::seed::<crate::models::_entities::centor_score_for_streptococcal_pharyngitis_grade_flags::ActiveModel>(

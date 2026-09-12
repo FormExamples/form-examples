@@ -86,14 +86,14 @@ impl Hooks for App {
             &format!("{}/src/pulmonary_embolism_rule_out_criteria/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
         )
         .await?;
-        loco_rs::db::seed::<crate::models::_entities::pulmonary_embolism_rule_out_criteria_grades::ActiveModel>(
-            &ctx.db,
-            &format!("{}/src/pulmonary_embolism_rule_out_criteria/fixtures/pulmonary_embolism_rule_out_criteria_grades.yaml", env!("CARGO_MANIFEST_DIR")),
-        )
-        .await?;
         loco_rs::db::seed::<crate::models::_entities::pulmonary_embolism_rule_out_criteria::ActiveModel>(
             &ctx.db,
             &format!("{}/src/pulmonary_embolism_rule_out_criteria/fixtures/pulmonary_embolism_rule_out_criteria.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::pulmonary_embolism_rule_out_criteria_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/pulmonary_embolism_rule_out_criteria/fixtures/pulmonary_embolism_rule_out_criteria_grades.yaml", env!("CARGO_MANIFEST_DIR")),
         )
         .await?;
         loco_rs::db::seed::<crate::models::_entities::pulmonary_embolism_rule_out_criteria_grade_flags::ActiveModel>(

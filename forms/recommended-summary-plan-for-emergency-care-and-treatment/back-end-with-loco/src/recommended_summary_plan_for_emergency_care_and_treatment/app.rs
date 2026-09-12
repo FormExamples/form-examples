@@ -86,14 +86,14 @@ impl Hooks for App {
             &format!("{}/src/recommended_summary_plan_for_emergency_care_and_treatment/fixtures/patients.yaml", env!("CARGO_MANIFEST_DIR")),
         )
         .await?;
-        loco_rs::db::seed::<crate::models::_entities::respect_grades::ActiveModel>(
-            &ctx.db,
-            &format!("{}/src/recommended_summary_plan_for_emergency_care_and_treatment/fixtures/respect_grades.yaml", env!("CARGO_MANIFEST_DIR")),
-        )
-        .await?;
         loco_rs::db::seed::<crate::models::_entities::respect::ActiveModel>(
             &ctx.db,
             &format!("{}/src/recommended_summary_plan_for_emergency_care_and_treatment/fixtures/respect.yaml", env!("CARGO_MANIFEST_DIR")),
+        )
+        .await?;
+        loco_rs::db::seed::<crate::models::_entities::respect_grades::ActiveModel>(
+            &ctx.db,
+            &format!("{}/src/recommended_summary_plan_for_emergency_care_and_treatment/fixtures/respect_grades.yaml", env!("CARGO_MANIFEST_DIR")),
         )
         .await?;
         loco_rs::db::seed::<crate::models::_entities::respect_grade_flags::ActiveModel>(
