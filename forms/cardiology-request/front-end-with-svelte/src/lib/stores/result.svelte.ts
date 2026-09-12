@@ -80,6 +80,14 @@ class RequestStore {
 	result = $state<GradingResult | null>(null);
 	currentStep = $state(1);
 	/**
+	 * True once loadForId() has found and restored a saved draft for the
+	 * current id -- read by RestoreBanner.svelte to tell the user their
+	 * progress was restored rather than silently repopulating fields with
+	 * no explanation. Mirrors the HTML front-end's
+	 * window.__FORM_STATE__.hadDraftAtLoad.
+	 */
+	hadDraftAtLoad = $state(false);
+	/**
 	 * The id of the referral currently loaded into the store (`new` for a
 	 * fresh draft). Starts as `''`, not `'new'`: the wizard page only calls
 	 * loadForId() when `requestStore.id !== id`, so if this defaulted to the
@@ -142,6 +150,7 @@ class RequestStore {
 
 		const base = seed ?? createDefaultRequest();
 		this.data = draft ? { ...base, ...draft } : { ...base };
+		this.hadDraftAtLoad = draft !== null;
 		this.#loaded = true;
 	}
 
@@ -149,6 +158,7 @@ class RequestStore {
 		this.data = createDefaultRequest();
 		this.result = null;
 		this.currentStep = 1;
+		this.hadDraftAtLoad = false;
 		if (browser) {
 			localStorage.removeItem(storageKey(this.id));
 		}

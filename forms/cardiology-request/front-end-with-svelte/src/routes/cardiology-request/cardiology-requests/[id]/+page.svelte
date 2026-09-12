@@ -13,6 +13,7 @@
 	import StepListItem from '#lib/components/ui/StepListItem.svelte';
 	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 	import FormDataTransfer from '#lib/components/ui/FormDataTransfer.svelte';
+	import RestoreBanner from '#lib/components/ui/RestoreBanner.svelte';
 
 	import Step1ReferringClinician from '#lib/components/steps/Step1ReferringClinician.svelte';
 	import Step2PatientIdentification from '#lib/components/steps/Step2PatientIdentification.svelte';
@@ -90,6 +91,7 @@
 		getState={() => requestStore.data}
 		setState={(parsed) => requestStore.importData(parsed)}
 	/>
+	<RestoreBanner show={requestStore.hadDraftAtLoad} onDiscard={startOver} />
 
 	<Progress label="Referral sections" value={TOTAL_STEPS} max={TOTAL_STEPS} />
 	<StepList label="Referral sections" current={TOTAL_STEPS}>

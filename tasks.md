@@ -263,9 +263,32 @@ Design each feature on the reference forms
       that now is a real, ambiguous product-behaviour question (does
       reloading after submit lose the just-computed report, which
       `lastResult` was never persisted for either way?) rather than a
-      mechanical gap — flagged, not guessed at. Still not done: the
-      Svelte side's restore banner (no reference implementation yet),
-      and the Svelte fleet rollout in general.
+      mechanical gap — flagged, not guessed at.
+
+      **Svelte reference implementation: DONE 2026-09-12** on
+      `cardiology-request`. Added `hadDraftAtLoad` to `RequestStore` (set
+      in `loadForId()`, mirroring the HTML
+      `window.__FORM_STATE__.hadDraftAtLoad` contract) and a new, generic
+      `RestoreBanner.svelte` (built on the existing `Alert.svelte`
+      headless component, taking `show`/`onDiscard` props so the same
+      file can be byte-identical across forms regardless of what each
+      form calls its store) wired into the wizard page. Verified live
+      end-to-end via a real preview build + Playwright: fill a field →
+      reload → banner shown + field restored; "Discard and start over"
+      clears both; "Dismiss" hides the banner but keeps the draft. `pnpm
+      check` 0/0, `pnpm build` succeeds, `vitest run` 12/12.
+
+      **Still not done, and NOT attempted here: the Svelte fleet
+      rollout.** Unlike the HTML fleet (which had one dominant,
+      mechanically-detectable `form-app.js` shape after months of
+      consolidation), each Svelte form's state store, wizard-page
+      structure, and reset-handler naming are genuinely bespoke per form
+      — this repo's own prior Svelte rollouts (theming, LocalePicker,
+      etc.) were done via batches of foreground subagents with spot-
+      checks, not a single mechanical regex tool, precisely because of
+      that heterogeneity. A ~280-form Svelte rollout is a substantial,
+      separate undertaking on that scale and deserves an explicit
+      go-ahead rather than being started unilaterally here.
 - [x] **Print CSS (HTML)**: added a shared, idempotent `@media print` block
       (`print-report-styles v1`) to every HTML front-end — hides wizard chrome
       (buttons, progress, step-list, theme switcher), flattens colours/shadows

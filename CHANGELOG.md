@@ -50,6 +50,24 @@ for them.
   fields should become mandatory is a per-form judgment call left for a
   follow-up pass (see `tasks.md`).
 
+- **Svelte Autosave restore banner: reference implementation on
+  `cardiology-request`** (fleet rollout still pending — see `tasks.md`).
+  Autosave itself already existed in the Svelte reference form
+  (`RequestStore`'s localStorage persistence, `data.` requests survive a
+  reload) but nothing told the user a draft had been restored, unlike the
+  HTML side's `js/restore-banner.js`. Added `hadDraftAtLoad` to
+  `RequestStore` (set in `loadForId()`, mirroring the HTML
+  `window.__FORM_STATE__.hadDraftAtLoad` contract) and a new, generic
+  `RestoreBanner.svelte` (built on the existing `Alert.svelte` headless
+  component) wired into the wizard page: "Discard and start over"
+  delegates to the page's own existing reset handler rather than
+  reimplementing it; "Dismiss" just hides the banner, keeping the draft.
+  Verified live end-to-end against a real preview build (Playwright): a
+  filled field survives reload with the banner shown and the field
+  restored; "Discard and start over" clears both the banner and the
+  field; "Dismiss" hides the banner while keeping the draft. `pnpm
+  check` 0/0, `pnpm build` succeeds, `vitest run` 12/12.
+
 ### Fixed
 
 - **Fixed a real, fleet-wide invalid FHIR R5 property in generated persona
