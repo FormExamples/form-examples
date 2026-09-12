@@ -194,6 +194,15 @@ the remaining scorable forms.
       arg parser re-checked to confirm `--html $CHANGED` with an unquoted,
       space-separated slug list behaves as intended) rather than a live
       GitHub Actions dispatch, which isn't practical to run locally.
+      **Live-verified 2026-09-12:** a later push's CI run (34687636485)
+      finally got a chance to run to completion instead of being
+      cancelled by the next push, and its unrelated "FHIR R5 validation"
+      job — able to complete for the first time now that `-tx n/a` stops
+      it hanging on the terminology server — failed for real, surfacing a
+      genuine fleet-wide bug: 135 generated persona FHIR bundles across 37
+      forms carried an invalid `DetectedIssue` property. See the CHANGELOG
+      entry "Fixed a real, fleet-wide invalid FHIR R5 property...". Fixed
+      and re-verified against the real validator.
 
 ## Phase 3 — Functionality rollout (WS3) — ASSESSED; remaining as batch rollout
 
