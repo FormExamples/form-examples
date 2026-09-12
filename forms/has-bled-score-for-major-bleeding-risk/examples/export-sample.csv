@@ -1,0 +1,2 @@
+context.clinicianName,context.clinicianRole,context.assessedAt,context.careSetting,context.anticoagulationStatus,context.chaDsVascScore,identification.patientIdentifier,identification.ageYears,identification.sex,hypertension.hypertensionUncontrolled,organFunction.abnormalRenalFunction,organFunction.abnormalLiverFunction,stroke.strokeHistory,bleeding.bleedingHistory,labileInr.labileInr,drugsAlcohol.antiplateletOrNsaid,drugsAlcohol.alcoholUnitsPerWeek,note.clinicalNote
+,,,,,,,60,male,no,no,no,no,no,no,no,2,

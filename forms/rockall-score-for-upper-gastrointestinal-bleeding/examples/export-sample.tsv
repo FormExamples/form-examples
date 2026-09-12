@@ -1,0 +1,2 @@
+context.clinicianName	context.clinicianRole	context.assessedAt	context.careSetting	context.presentingComplaint	identification.patientIdentifier	identification.ageYears	identification.sex	shock.systolicBloodPressure	shock.heartRate	comorbidityStep.comorbidity	endoscopy.endoscopyPerformed	endoscopy.diagnosis	endoscopy.stigmata	note.clinicalNote
+	gastroenterologist		ward			45	female	124	80	none	yes	mallory-weiss-or-none	none-or-dark-spot	

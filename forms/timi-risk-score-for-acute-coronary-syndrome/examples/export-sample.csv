@@ -1,0 +1,2 @@
+context.clinicianName,context.clinicianRole,context.assessedAt,context.careSetting,context.workingDiagnosis,identification.patientIdentifier,identification.sex,riskProfile.ageOver65,riskProfile.threeOrMoreCadRiskFactors,cardiacHistory.knownCadStenosis,cardiacHistory.aspirinUsePrior7Days,presentation.twoOrMoreAnginaEpisodes24h,investigations.stDeviation,investigations.positiveCardiacMarker,note.clinicalNote
+,physician,,emergency-department,unstable-angina,,female,yes,no,no,no,no,no,no,

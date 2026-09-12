@@ -1,0 +1,2 @@
+context.clinicianName,context.clinicianRole,context.assessedAt,context.careSetting,context.atrialFibrillationType,identification.patientIdentifier,identification.ageYears,identification.sex,cardiac.congestiveHeartFailure,cardiac.hypertension,cardiac.vascularDisease,metabolic.diabetes,metabolic.priorStrokeTiaThromboembolism,note.clinicalNote
+,,,,,,55,male,no,no,no,no,no,

@@ -341,7 +341,7 @@ function peopleEditor() {
       r.innerHTML = `
         <div class="person-row-header">
           <span>Person ${idx + 1}</span>
-          <button type="button" class="button" data-variant="remove" aria-label="Remove person">Remove</button>
+          <button type="button" class="button btn-remove" data-variant="remove" aria-label="Remove person">Remove</button>
         </div>
         <div class="two-col">
           <div class="field">

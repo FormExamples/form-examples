@@ -1,0 +1,2 @@
+context.clinicianName	context.clinicianRole	context.calculatedAt	context.careSetting	context.clinicalContext	identification.patientIdentifier	identification.ageBand	identification.sex	electrolytes.sodium	electrolytes.potassium	electrolytes.chloride	electrolytes.bicarbonate	albumin.albumin	note.clinicalNote
+Dr Aisha Rahman	doctor	2026-06-24T09:15	ward	Routine electrolyte panel, post-operative day 1	WD-573110	40-64	female	140		105	25		

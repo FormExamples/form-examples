@@ -21,14 +21,22 @@ bin/generate-changelog-and-examples.py contraception-assessment
 
 Run with `--check` in CI to detect drift between the schema and the examples.
 
-## When to enrich by hand
-
-These mechanically-generated fixtures are correct-by-construction but
-clinically thin. Hand-curated **low-risk** / **high-risk** / **edge-case**
-fixtures that exercise the scoring engine across realistic scenarios live
-alongside these and override them where present (`low-risk.json`,
-`high-risk.json`, `edge-case-*.json`). Hand-curated fixtures are not touched
-by the generator.
+- `personas.json` — hand-curated, engine-verified realistic scenarios (where
+  this form has a scoring/grading engine — see `bin/test-personas`). Each
+  persona's `state` is a filled record in the engine's own shape; `expected`
+  is computed by the engine itself (`bin/test-personas --update`) and
+  verified as a regression oracle by default. This is the current, living
+  hand-curation convention — it supersedes an earlier, one-off
+  `low-risk.json`/`high-risk.json`/`edge-case-*.json` file-per-scenario
+  design that never shipped fleet-wide.
+- `export-sample.csv` / `export-sample.tsv` — the real CSV/TSV output of
+  `js/form-export.js`'s "Download CSV"/"Download TSV" buttons for this
+  form's typical persona (`personas.json`'s first entry), captured by
+  actually driving the wizard through a headless browser
+  (`e2e/generate-export-samples.mjs --check`) rather than reimplementing the
+  export serialisation — guarantees fidelity to the real feature. Present
+  only for forms with `js/form-export.js` wired
+  (`bin/form-export-import-refactor`) and a `personas.json`.
 
 ## See also
 

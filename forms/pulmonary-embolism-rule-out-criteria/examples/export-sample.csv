@@ -1,0 +1,2 @@
+context.clinicianName,context.clinicianRole,context.assessedAt,context.careSetting,context.presentingComplaint,identification.patientIdentifier,identification.age,identification.sex,pretest.pretestProbability,vitals.heartRate,vitals.oxygenSaturation,criteria.unilateralLegSwelling,criteria.haemoptysis,criteria.recentSurgeryOrTrauma,criteria.priorVenousThromboembolism,criteria.oestrogenUse,result.clinicalNote
+,emergency-physician,,emergency-department,,,34,female,low,78,98,no,no,no,no,no,

@@ -1,0 +1,2 @@
+context.clinicianName,context.clinicianRole,context.assessedAt,context.careSetting,context.purpose,identification.patientIdentifier,identification.ageBand,identification.sex,identification.ancestry,height.heightCm,weight.weightKg,results.bsaFormula,results.clinicalNote
+Dr Elena Vasquez,nurse,2026-06-24T09:00,primary-care,screening,GP-100221,40-64,female,other,170,65,mosteller,

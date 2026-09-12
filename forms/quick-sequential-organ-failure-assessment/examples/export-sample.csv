@@ -1,0 +1,2 @@
+context.clinicianName,context.clinicianRole,context.assessedAt,context.careSetting,context.suspectedSource,identification.patientIdentifier,identification.ageBand,identification.sex,respiratory.respiratoryRate,mentation.glasgowComaScale,mentation.mentationAltered,circulation.systolicBloodPressure,note.clinicalNote
+,nurse,,ward,,,45-64,female,16,15,no,130,

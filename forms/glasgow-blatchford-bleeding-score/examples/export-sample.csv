@@ -1,0 +1,2 @@
+context.clinicianName,context.clinicianRole,context.assessedAt,context.careSetting,context.presentingComplaint,identification.patientIdentifier,identification.ageBand,identification.sex,labs.bloodUrea,labs.haemoglobin,haemodynamics.systolicBloodPressure,haemodynamics.pulse,clinicalMarkers.melaenaPresent,clinicalMarkers.syncope,clinicalMarkers.hepaticDisease,clinicalMarkers.cardiacFailure,note.clinicalNote
+,,,,,,,male,5,150,120,80,no,no,no,no,

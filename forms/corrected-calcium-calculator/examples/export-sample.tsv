@@ -1,0 +1,2 @@
+context.clinicianName	context.clinicianRole	context.assessedAt	context.careSetting	context.sampleReference	identification.patientIdentifier	identification.ageBand	identification.sex	calcium.totalCalcium	albumin.albumin	symptoms.symptomatic	note.clinicalNote
+Dr Elena Vasquez	doctor	2026-06-24T09:00	general-practice	GP-44201	GP-100221	40-64	female	2.3	40	no	

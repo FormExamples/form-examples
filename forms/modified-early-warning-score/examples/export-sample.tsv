@@ -1,0 +1,2 @@
+context.clinicianName	context.clinicianRole	context.observedAt	context.careSetting	context.wardLocation	identification.patientIdentifier	identification.ageBand	identification.sex	bloodPressure.systolicBloodPressure	heartRate.heartRate	respiratory.respiratoryRate	temperature.temperature	consciousness.avpu	summary.previousMewsScore	summary.clinicalNotes
+	nurse		acute-ward			40-59	female	122	72	14	36.8	alert		

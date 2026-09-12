@@ -1,0 +1,2 @@
+identification.patientIdentifier,identification.patientName,identification.dateOfBirth,identification.assessmentDate,identification.assessmentTime,identification.setting,identification.assessorName,identification.assessorRole,item1.alertness,item2.amt4,item3.attentionMonths,item4.acuteChange,item4.acuteChangeSource,note.clinicalNotes
+,,,,,acute,,,normal,noMistakes,sevenOrMore,no,collateral,

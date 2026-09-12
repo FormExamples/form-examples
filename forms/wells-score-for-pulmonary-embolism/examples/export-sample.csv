@@ -1,0 +1,2 @@
+context.clinicianName,context.clinicianRole,context.assessedAt,context.careSetting,identification.patientIdentifier,identification.ageBand,identification.sex,haemodynamic.haemodynamicStatus,criteria.dvtSigns,criteria.peMostLikely,criteria.immobilisationSurgery,criteria.previousDvtPe,criteria.haemoptysis,criteria.malignancy,observations.heartRate,note.clinicalNotes
+,doctor,,emergency-department,,40-64,female,stable,no,no,no,no,no,no,78,

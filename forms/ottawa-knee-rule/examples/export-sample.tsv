@@ -1,0 +1,2 @@
+context.clinicianName	context.clinicianRole	context.assessedAt	context.careSetting	context.injuryMechanism	context.hoursSinceInjury	identification.patientIdentifier	identification.sex	identification.injuredSide	age.ageYears	tenderness.patellarTenderness	tenderness.otherBonyTenderness	tenderness.fibularHeadTenderness	flexion.unableToFlex90	weightBearing.unableToBearWeight	note.clinicalNotes
+	nurse-practitioner		minor-injuries-unit	twisting	4		female	left	30	no	no	no	no	no	

@@ -1,0 +1,2 @@
+context.clinicianName,context.clinicianRole,context.assessedAt,context.careSetting,context.meldVariant,identification.patientIdentifier,identification.ageBand,identification.sex,bilirubin.bilirubin,bilirubin.bilirubinUnit,inr.inr,renal.creatinine,renal.creatinineUnit,renal.dialysisSessionsPastWeek,renal.cvvhd24h,sodium.sodium,albumin.albumin,note.clinicalNote
+Dr Femi Adeyemi,hepatologist,2026-06-24T09:00,hepatology-clinic,meld,HC-100221,40-64,male,2,mg/dL,1.5,1.2,mg/dL,0,no,,,

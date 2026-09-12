@@ -731,8 +731,32 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       before committing.
 - [ ] `example-invalid.json` per form + expected validation errors list;
       assert in the E2E harness (wizard blocks submission).
-- [ ] CSV and TSV export samples per form matching the typical persona
-      (generate via the Phase 3 export feature to guarantee fidelity).
+- [x] **CSV and TSV export samples per form: DONE 2026-09-12.** New
+      `bin/generate-export-samples` (thin wrapper around
+      `e2e/generate-export-samples.mjs`) drives the real wizard through a
+      headless browser per form — inject the typical persona via
+      `window.__FORM_STATE__.setState()`, click the real "Download
+      CSV"/"Download TSV" buttons, save the real download — guaranteeing
+      fidelity to the actual export feature rather than reimplementing its
+      serialisation, per this item's own wording. 265/356 forms generated
+      (91 SKIP — no `js/form-export.js` wired, matching
+      `bin/form-export-import-refactor`'s own unmigrated set exactly).
+      **Real bug found + fixed along the way:** the first fleet-wide
+      `--check` run crashed outright (an uncaught exception took down the
+      whole batch) on `advance-statement-about-care` — its "Remove
+      person" button's template used `data-variant="remove"` but the
+      handler queried `.btn-remove` (the fleet's actual convention, seen
+      working in `genetics-assessment` and the UK LPA forms), so
+      `querySelector('.btn-remove')` returned `null` and
+      `.addEventListener` on it threw — crashing the wizard's re-render
+      the moment that repeatable section had any row (adding a person,
+      importing a draft with people, or this generator's own persona
+      injection). Made the generator itself robust to a single form's
+      failure first (so one bug can't hide the rest of the fleet's
+      result), then fixed the actual template bug. Verified: `--check`
+      re-run clean afterward (0 errors across all 356 forms);
+      `bin/test-e2e --html advance-statement-about-care` 2/2;
+      `bin/lily-html-refactor --check` clean for it.
 - [ ] API transcripts per form: `examples/api-create.http` (or .md) with
       recorded request/response against the seeded crate.
 - [x] **FHIR Bundles for the new personas: already current, re-verified

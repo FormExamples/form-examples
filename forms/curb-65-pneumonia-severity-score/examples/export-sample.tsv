@@ -1,0 +1,2 @@
+context.clinicianName	context.clinicianRole	context.assessedAt	context.careSetting	identification.patientIdentifier	identification.sex	confusion.confusionPresent	confusion.amtScore	urea.ureaMeasured	urea.ureaMmolL	respiratory.respiratoryRate	bloodPressure.systolicBp	bloodPressure.diastolicBp	age.ageYears	adjuncts.oxygenSaturation	adjuncts.temperatureC	adjuncts.significantComorbidity	adjuncts.multilobarChanges	disposition.clinicianOverrideBand	disposition.overrideReason	disposition.clinicalNote
+					female	no	10	yes	5.4	18	124	78	40	97	37.8	no	no			

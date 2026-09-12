@@ -1,0 +1,2 @@
+context.clinicianName,context.clinicianRole,context.assessedAt,context.careSetting,context.aetiology,identification.patientIdentifier,identification.ageBand,identification.sex,bilirubin.totalBilirubin,albumin.serumAlbumin,coagulation.inr,coagulation.prothrombinTimeProlongation,ascitesStep.ascites,encephalopathyStep.encephalopathy,note.clinicalNote
+,hepatologist,,hepatology-clinic,viral-hepatitis,,40-59,female,18,42,1.2,,none,none,

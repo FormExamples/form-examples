@@ -1,0 +1,2 @@
+context.nurseName,context.nurseRole,context.assessedAt,context.careSetting,context.assessmentReason,identification.patientIdentifier,identification.ageBand,identification.sex,core.buildWeightForHeight,core.skinType,core.continence,core.mobility,special.tissueMalnutrition,special.neurologicalDeficit,special.majorSurgeryTrauma,special.medication,special.existingPressureDamage,note.clinicalNote
+,registered-nurse,,acute-ward,admission,,75-80,female,average,dry,incontinent-urine,restricted,none,none,none,none,no,

@@ -1,0 +1,2 @@
+context.technicianName,context.technicianRole,context.clinicSite,context.scannedAt,context.deviceIdentifier,identification.patientIdentifier,identification.age,identification.sex,identification.eligibilityRoute,identification.scanType,consent.consentGiven,consent.leafletProvided,consent.consentNote,measurement.aortaVisualised,measurement.maxAorticDiameterCm,measurement.priorMaxDiameterCm,measurement.priorScanDate,observations.symptomatic,observations.incidentalFindings,result.resultNote
+,screening-technician,,,,,66,male,,first-scan,yes,yes,,yes,2.4,,,no,,

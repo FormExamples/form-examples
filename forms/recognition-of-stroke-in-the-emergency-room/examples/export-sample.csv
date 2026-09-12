@@ -1,0 +1,2 @@
+context.clinicianName,context.clinicianRole,context.assessedAt,context.careSetting,context.symptomOnsetAt,identification.patientIdentifier,identification.ageBand,identification.sex,precondition.bloodGlucose,precondition.hypoglycaemiaCorrected,mimics.lossOfConsciousness,mimics.seizureActivity,signs.facialWeakness,signs.armWeakness,signs.legWeakness,signs.speechDisturbance,signs.visualFieldDefect,note.clinicalNote
+,doctor,,emergency-department,,,40-59,female,5.4,na,yes,no,no,no,no,no,no,

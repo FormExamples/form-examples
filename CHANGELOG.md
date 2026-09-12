@@ -517,6 +517,21 @@ for them.
   generator — no per-form hand-authoring needed. Verified: `pnpm check`
   (0/0), `pnpm build` succeeds.
 
+- **CSV and TSV export samples per form.** New `bin/generate-export-samples`
+  (wrapping `e2e/generate-export-samples.mjs`) generates
+  `examples/export-sample.csv`/`.tsv` by driving the real wizard through a
+  headless browser per form: inject the typical persona
+  (`personas.json`'s first entry) via `window.__FORM_STATE__.setState()`,
+  click the real "Download CSV"/"Download TSV" buttons, save the real
+  download — guaranteeing fidelity to the actual export feature rather
+  than reimplementing its serialisation. 265/356 forms generated (91
+  SKIP — no `js/form-export.js` wired). Found and fixed a real bug this
+  surfaced: `advance-statement-about-care`'s "Remove person" button
+  queried a `.btn-remove` class its template never set (it had
+  `data-variant="remove"` instead, matching no fleet convention), so the
+  query returned `null` and calling `.addEventListener` on it crashed the
+  wizard's re-render the moment that section had any row.
+
 ### Changed
 
 - **`formexamples.github.io` refactored onto the Lily Design System**,

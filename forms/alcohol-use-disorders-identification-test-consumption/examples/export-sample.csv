@@ -1,0 +1,2 @@
+context.clinicianName,context.clinicianRole,context.assessedAt,context.careSetting,context.administrationMode,identification.patientIdentifier,identification.ageBand,identification.sex,items.frequencyOfDrinking,items.typicalQuantity,items.heavyEpisodeFrequency,note.clinicalNote
+,gp,,primary-care,self-completed,,40-59,female,1,0,0,

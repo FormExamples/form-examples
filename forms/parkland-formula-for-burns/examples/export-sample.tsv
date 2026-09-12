@@ -1,0 +1,2 @@
+context.clinicianName	context.clinicianRole	context.assessedAt	context.careSetting	identification.patientIdentifier	identification.ageBand	identification.sex	weight.weightKg	burn.tbsaPercent	burn.tbsaMethod	injury.injuryAt	injury.injuryTimeKnown	features.inhalationSuspected	features.circumferentialOrDeep	features.mechanism	note.clinicalNote
+Dr Elena Vasquez	doctor	2026-06-24T08:00	emergency-department	ED-100221	adult	female	80	20		2026-06-24T08:00	known	no	no	thermal	House fire; brought in by ambulance directly from the scene

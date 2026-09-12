@@ -1,0 +1,2 @@
+context.clinicianName	context.clinicianRole	context.assessedAt	context.careSetting	identification.patientIdentifier	identification.ageBand	identification.sex	criteria.cutDown	criteria.annoyed	criteria.guilty	criteria.eyeOpener	note.clinicalNote
+	nurse		primary-care		40-59	female	no	no	no	no	

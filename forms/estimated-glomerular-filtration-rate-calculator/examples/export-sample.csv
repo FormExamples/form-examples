@@ -1,0 +1,2 @@
+context.clinicianName,context.clinicianRole,context.assessedAt,context.careSetting,context.equation,identification.patientIdentifier,identification.ageYears,identification.sex,creatinine.serumCreatinine,creatinine.specimenDate,creatinine.steadyState,note.clinicalNote
+Dr Priya Nair,doctor,2026-06-24T09:00,primary-care,ckd-epi-2021-creatinine,GP-100221,28,female,62,2026-06-24,yes,

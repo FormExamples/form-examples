@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-90 tools.
+91 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -18,6 +18,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/forms-as-tsv`](#forms-as-tsv)
 - [`bin/forms-shard`](#forms-shard)
 - [`bin/generate-changelog-and-examples.py`](#generate-changelog-and-examplespy)
+- [`bin/generate-export-samples`](#generate-export-samples)
 - [`bin/generate-form-skills.py`](#generate-form-skillspy)
 - [`bin/generate-forms-tsv.py`](#generate-forms-tsvpy)
 - [`bin/generate-llms-txt.py`](#generate-llms-txtpy)
@@ -324,6 +325,32 @@ Usage:
   bin/generate-changelog-and-examples.py                 # all forms
   bin/generate-changelog-and-examples.py <slug> [...]    # only named forms
   bin/generate-changelog-and-examples.py --check         # exit nonzero on drift
+```
+
+<h2 id="generate-export-samples"><code>bin/generate-export-samples</code></h2>
+
+```text
+bin/generate-export-samples — generate examples/export-sample.csv and
+ examples/export-sample.tsv per form, matching that form's typical persona
+ (examples/personas.json's first entry), by actually driving the real
+ wizard through a headless browser: load index.html, inject the persona's
+ state via window.__FORM_STATE__.setState(), click the real "Download
+ CSV"/"Download TSV" buttons js/form-export.js injects, and save the real
+ downloaded content. Guarantees fidelity to the actual export feature
+ rather than reimplementing its CSV/TSV serialisation a second time.
+
+ Scoped to forms with both js/form-export.js wired
+ (bin/form-export-import-refactor) and a real examples/personas.json.
+ Forms missing either are reported as SKIP, not silently omitted.
+
+ Usage:
+   bin/generate-export-samples [--check] [<slug> ...]
+
+   --check     report which forms would change; exit 1 if any pending
+   <slug> ...  restrict to the named forms (default: every eligible form)
+
+ Requires e2e/ deps installed (cd e2e && npm ci) and browsers
+ (cd e2e && npx playwright install chromium).
 ```
 
 <h2 id="generate-form-skillspy"><code>bin/generate-form-skills.py</code></h2>

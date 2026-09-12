@@ -1,0 +1,2 @@
+context.assessorName,context.assessorRole,context.assessedAt,context.setting,context.reason,confounders.intubated,confounders.sedated,confounders.paralysed,eye.eyeResponse,eye.eyeNotTestableReason,verbal.verbalResponse,verbal.verbalNotTestableReason,motor.motorResponse,motor.motorNotTestableReason,pupils.leftPupilReactivity,pupils.rightPupilReactivity,pupils.leftPupilSizeMm,pupils.rightPupilSizeMm,trend.previousTotal,trend.previousMotorScore,trend.previousAssessedAt,note.clinicalNote
+,,,,,no,no,no,spontaneous,,orientated,,obeys-commands,,reactive,reactive,3,3,,,,

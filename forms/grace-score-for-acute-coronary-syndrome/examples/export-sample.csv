@@ -1,0 +1,2 @@
+context.clinicianName,context.clinicianRole,context.assessedAt,context.careSetting,context.presentationType,identification.patientIdentifier,identification.ageYears,identification.sex,haemodynamics.heartRate,haemodynamics.systolicBloodPressure,renal.serumCreatinine,renal.serumCreatinineUnit,heartFailure.killipClass,highRiskFeatures.cardiacArrestAtAdmission,highRiskFeatures.stSegmentDeviation,highRiskFeatures.elevatedCardiacEnzymes,note.clinicalNote
+,,,,,,45,male,70,130,1,mg/dL,I,no,no,no,
