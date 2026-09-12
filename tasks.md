@@ -612,8 +612,22 @@ Design each feature on the reference forms
       (incl. NHS Wales "Mwy na Geiriau"). `npm run check` 0/0, build ok, Lily
       no drift. Step/clinical content + other locales deferred; `docs/i18n.md`
       updated to the shipped-pilot pattern.
-- [ ] Update every touched form's `CHANGELOG.md` (batchable; group features
-      per release entry).
+- [x] **SUPERSEDED by the two-scope `CHANGELOG.md` design itself.** This
+      item predates (2026-07-ish) the now-settled convention, stated in
+      root `CHANGELOG.md`'s own preamble and echoed in every per-form
+      `CHANGELOG.md`: fleet-wide rollouts (export/import, restore banner,
+      theme/locale pickers, and every other batch tool in this file) are
+      recorded in the *root* `CHANGELOG.md` — not per-form — while each
+      `forms/<slug>/CHANGELOG.md` is reserved for changes scoped to that
+      one form's own schema/engine/front-end. Since nearly everything this
+      backlog has shipped since Phase 3 is fleet-wide, there is no
+      well-defined "batch update every touched form's CHANGELOG" action
+      left to do: the root file already carries those entries (see every
+      `### Fixed`/`### Added` entry added this session), and a form's own
+      `CHANGELOG.md` gets a new entry exactly when that specific form's
+      contract changes, at the time it changes — which is how this session
+      has actually been operating throughout (e.g. the mojibake-encoding
+      fix above touched two forms' own `CHANGELOG.md` directly).
 
 ## Phase 4 — Documentation (WS4) ✅ COMPLETE (2026-07-12)
 
