@@ -900,6 +900,25 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       `bin/lily-html-refactor --check` clean for it.
 - [ ] API transcripts per form: `examples/api-create.http` (or .md) with
       recorded request/response against the seeded crate.
+      **Investigated 2026-09-12, not attempted fleet-wide: same
+      heterogeneity wall `bin/loco-integration-test-rollout` already had
+      to scope narrowly around.** With the new seed data + a live
+      scratch Postgres in hand, tried the obvious next step directly:
+      started `cardiology-request`'s real server (`cargo run ... --
+      start`) and curled its API. `POST /api/patients` 404'd —
+      `cardiology-request` (this repo's own "gold reference" crate) has
+      **no dedicated `patient`/`clinician` controller at all**; only its
+      main `cardiology_requests` table is routed, and that controller's
+      request struct is named `RequestParams`, not the fleet's usual
+      `Params` (a hand-crafted crate, not a raw scaffold, unlike the
+      336/356 `loco-integration-test-rollout` already handles). Recording
+      a real transcript per crate needs, per crate: knowing *which*
+      controller(s) actually exist and are worth demonstrating, their
+      real param shape, and orchestrating a live server per crate
+      (start, wait for readiness, request, shut down cleanly) at fleet
+      scale — a distinct, larger engineering effort than reusing the
+      existing seed/integration-test machinery, not a quick follow-on.
+      Flagged rather than rushed or faked with a placeholder transcript.
 - [x] **FHIR Bundles for the new personas: already current, re-verified
       2026-09-12.** `bin/generate-persona-fhir-bundles.py --check --all`
       reports 0 drift (189 bundles, 37 `*-test-result` forms — its
