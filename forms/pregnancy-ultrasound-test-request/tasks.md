@@ -24,12 +24,12 @@
 
 ## Front-ends
 
-- [ ] `front-end-with-html`
-- [ ] `front-end-with-svelte`
-- [ ] `front-end-with-html`
-- [ ] `front-end-with-svelte`
+- [x] `front-end-with-html`
+- [x] `front-end-with-svelte`
+- [x] `front-end-with-html`
+- [x] `front-end-with-svelte`
 
 ## Back-end
 
-- [ ] `back-end-with-loco` Rust JSON API crate
+- [x] `back-end-with-loco` Rust JSON API crate
 - [ ] `cargo test` green (requires local Postgres)

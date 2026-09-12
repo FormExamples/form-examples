@@ -49,12 +49,12 @@
       11-step wizard, typed engine, browser + Vitest tests passing.
 - [x] `front-end-with-html/` — single-page 11-step wizard, vanilla JS
       with browser smoke test passing (all flags + complexity verified).
-- [ ] `front-end-with-svelte/` — SVAR DataGrid review.
+- [x] `front-end-with-svelte/` — SVAR DataGrid review.
 - [x] `front-end-with-html/` — sortable / filterable review
       table with sample data, browser smoke test passing.
 
 ## Full-stack backend
-- [ ] `back-end-with-loco/` — Loco 0.16 + axum 0.8 +
+- [x] `back-end-with-loco/` — Loco 0.16 + axum 0.8 +
       SeaORM + Loco JSON API.
 
 ## Tests

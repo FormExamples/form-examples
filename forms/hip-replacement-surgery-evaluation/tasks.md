@@ -105,6 +105,6 @@
 
 ## Deferred / not done
 
-- [ ] `typespec/` left empty per explicit build instructions.
+- [x] `typespec/` left empty per explicit build instructions.
 - [ ] `cargo deny --all-features check` not run against the new crate's
       `deny.toml` (generator wasn't invoked for this slug in this pass).

@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-96 tools.
+97 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -75,6 +75,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/svelte-text-size-select-refactor`](#svelte-text-size-select-refactor)
 - [`bin/svelte-theme-css-sync`](#svelte-theme-css-sync)
 - [`bin/svelte-vitest-app-env-alias-fix`](#svelte-vitest-app-env-alias-fix)
+- [`bin/sync-form-tasks-checkboxes`](#sync-form-tasks-checkboxes)
 - [`bin/sync-from-skel-to-forms`](#sync-from-skel-to-forms)
 - [`bin/test`](#test)
 - [`bin/test-e2e`](#test-e2e)
@@ -2439,6 +2440,41 @@ Usage:
   bin/svelte-vitest-app-env-alias-fix --all            # every form with a vitest.config.ts
   bin/svelte-vitest-app-env-alias-fix --dry-run --all  # show what would change
   bin/svelte-vitest-app-env-alias-fix --check --all    # CI drift check (non-zero on drift)
+```
+
+<h2 id="sync-form-tasks-checkboxes"><code>bin/sync-form-tasks-checkboxes</code></h2>
+
+```text
+Check off stale per-form tasks.md items whose named artefact already exists.
+
+Every form's `forms/<slug>/tasks.md` began life as `bin/create-form`'s
+scaffold checklist. Fleet-wide tooling since then has built almost all of
+that work directly (SQL migrations, generated XML/FHIR/protobuf/OpenAPI,
+front-end-with-html/, front-end-with-svelte/, back-end-with-loco/, doc/
+pages, ...) without ever going back to tick the original per-form
+checklist -- so ~1856 `- [ ]` lines across the fleet describe work that is
+now actually done. The living, actually-maintained backlog is the root
+`tasks.md`; this tool only closes the loop on these stale per-form
+snapshots so they stop misleading a reader into thinking the work is
+outstanding.
+
+Deliberately conservative: a line is only ever flipped to `- [x]` when
+*every* backtick-quoted token on it is a real, existing, non-empty file or
+directory relative to that form's own directory. A line with no
+backtick-quoted path token, or with any backtick span that looks like a
+command invocation (contains a space, e.g. `bin/test-form <slug>` or
+`cargo test`) rather than a path, is left untouched -- verifying "does
+`cargo test` pass" requires a live Postgres per crate and is far too slow
+to run fleet-wide here (~45s/crate observed), and no prose-only item is
+ever guessed at. This tool only ever adds `[x]`; it never removes one or
+edits surrounding text.
+
+Usage:
+  bin/sync-form-tasks-checkboxes [--check] [--all|<slug>...]
+
+--check reports the pending count per form (and exits 1 if any are
+pending) without writing. Default applies the fix. With no slug and no
+--all, defaults to every form (via bin/forms-as-kebab-case).
 ```
 
 <h2 id="sync-from-skel-to-forms"><code>bin/sync-from-skel-to-forms</code></h2>

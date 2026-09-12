@@ -45,14 +45,14 @@
 - [ ] TypeSpec API definitions hand-authored to match the FHIR Bundle.
 
 ## Front-ends
-- [ ] `front-end-with-svelte/` — SvelteKit 2 + Svelte 5 + Tailwind 4.
-- [ ] `front-end-with-html/` — single-page static HTML + Alpine.js.
-- [ ] `front-end-with-svelte/` — SVAR DataGrid review.
-- [ ] `front-end-with-html/` — HTML review table.
+- [x] `front-end-with-svelte/` — SvelteKit 2 + Svelte 5 + Tailwind 4.
+- [x] `front-end-with-html/` — single-page static HTML + Alpine.js.
+- [x] `front-end-with-svelte/` — SVAR DataGrid review.
+- [x] `front-end-with-html/` — HTML review table.
 
 ## Full-stack backend
 - [ ] `back-end-with-loco-new/00-new.sh` — Loco scaffold.
-- [ ] `back-end-with-loco/` — Loco 0.16 + axum 0.8 + SeaORM + Loco JSON API.
+- [x] `back-end-with-loco/` — Loco 0.16 + axum 0.8 + SeaORM + Loco JSON API.
 
 ## Tests
 - [ ] Vitest unit tests for `composite-validator.ts` (all rule families).

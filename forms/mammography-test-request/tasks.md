@@ -9,11 +9,11 @@
 
 ## Generated representations
 
-- [ ] XML + DTD (`xml/`)
-- [ ] FHIR R5 JSON (`fhir/r5/`)
-- [ ] Protocol Buffers (`protobuf/`)
-- [ ] OpenAPI 3.1 (`openapi/`)
-- [ ] Loco setup script (`back-end-with-loco-setup`)
+- [x] XML + DTD (`xml/`)
+- [x] FHIR R5 JSON (`fhir/r5/`)
+- [x] Protocol Buffers (`protobuf/`)
+- [x] OpenAPI 3.1 (`openapi/`)
+- [x] Loco setup script (`back-end-with-loco-setup`)
 - [ ] `schema.sql`, `examples/`, `spec.md`, `CHANGELOG.md`
 
 ## Documentation
@@ -24,12 +24,12 @@
 
 ## Front-ends
 
-- [ ] `front-end-with-html`
-- [ ] `front-end-with-svelte`
-- [ ] `front-end-with-html`
-- [ ] `front-end-with-svelte`
+- [x] `front-end-with-html`
+- [x] `front-end-with-svelte`
+- [x] `front-end-with-html`
+- [x] `front-end-with-svelte`
 
 ## Back-end
 
-- [ ] `back-end-with-loco` Rust JSON API crate
+- [x] `back-end-with-loco` Rust JSON API crate
 - [ ] `cargo test` green (requires local Postgres)

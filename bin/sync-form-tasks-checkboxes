@@ -1,0 +1,154 @@
+#!/usr/bin/env python3
+"""Check off stale per-form tasks.md items whose named artefact already exists.
+
+Every form's `forms/<slug>/tasks.md` began life as `bin/create-form`'s
+scaffold checklist. Fleet-wide tooling since then has built almost all of
+that work directly (SQL migrations, generated XML/FHIR/protobuf/OpenAPI,
+front-end-with-html/, front-end-with-svelte/, back-end-with-loco/, doc/
+pages, ...) without ever going back to tick the original per-form
+checklist -- so ~1856 `- [ ]` lines across the fleet describe work that is
+now actually done. The living, actually-maintained backlog is the root
+`tasks.md`; this tool only closes the loop on these stale per-form
+snapshots so they stop misleading a reader into thinking the work is
+outstanding.
+
+Deliberately conservative: a line is only ever flipped to `- [x]` when
+*every* backtick-quoted token on it is a real, existing, non-empty file or
+directory relative to that form's own directory. A line with no
+backtick-quoted path token, or with any backtick span that looks like a
+command invocation (contains a space, e.g. `bin/test-form <slug>` or
+`cargo test`) rather than a path, is left untouched -- verifying "does
+`cargo test` pass" requires a live Postgres per crate and is far too slow
+to run fleet-wide here (~45s/crate observed), and no prose-only item is
+ever guessed at. This tool only ever adds `[x]`; it never removes one or
+edits surrounding text.
+
+Usage:
+  bin/sync-form-tasks-checkboxes [--check] [--all|<slug>...]
+
+--check reports the pending count per form (and exits 1 if any are
+pending) without writing. Default applies the fix. With no slug and no
+--all, defaults to every form (via bin/forms-as-kebab-case).
+"""
+import os
+import re
+import subprocess
+import sys
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+ITEM_RE = re.compile(r"^(\s*)- \[ \] (.*)$")
+BACKTICK_RE = re.compile(r"`([^`]+)`")
+# A bare relative path: word chars, dots, slashes, hyphens/underscores only.
+PATH_LIKE_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._/-]*$")
+
+
+def all_slugs():
+    out = subprocess.run(
+        [os.path.join(ROOT, "bin", "forms-as-kebab-case")],
+        cwd=ROOT, capture_output=True, text=True, check=True,
+    )
+    return [l.strip() for l in out.stdout.splitlines() if l.strip()]
+
+
+def artefact_exists(form_dir: str, token: str) -> bool:
+    rel = token.rstrip("/")
+    if not rel:
+        return False
+    path = os.path.join(form_dir, rel)
+    if os.path.isfile(path):
+        return os.path.getsize(path) > 0
+    if os.path.isdir(path):
+        try:
+            return any(os.scandir(path))
+        except OSError:
+            return False
+    return False
+
+
+def classify_line(text: str):
+    """Return ('paths', [tokens]) or ('command', None) or ('prose', None)."""
+    spans = BACKTICK_RE.findall(text)
+    if not spans:
+        return "prose", None
+    tokens = []
+    for span in spans:
+        if " " in span:
+            # A command invocation (e.g. `bin/test-form foo`, `cargo test`),
+            # not a path claim -- never mechanically verifiable here.
+            return "command", None
+        if PATH_LIKE_RE.match(span):
+            tokens.append(span)
+        # Non-path-shaped backtick spans (e.g. a bare identifier with no
+        # slash/extension) are ignored rather than treated as a path claim.
+    if not tokens:
+        return "prose", None
+    return "paths", tokens
+
+
+def process_form(slug: str, apply: bool):
+    path = os.path.join(ROOT, "forms", slug, "tasks.md")
+    if not os.path.isfile(path):
+        return 0, 0
+    form_dir = os.path.join(ROOT, "forms", slug)
+    with open(path, encoding="utf-8") as f:
+        lines = f.readlines()
+
+    pending = 0
+    changed = 0
+    out = []
+    for line in lines:
+        m = ITEM_RE.match(line.rstrip("\n"))
+        if not m:
+            out.append(line)
+            continue
+        indent, rest = m.groups()
+        kind, tokens = classify_line(rest)
+        if kind != "paths":
+            out.append(line)
+            continue
+        if all(artefact_exists(form_dir, t) for t in tokens):
+            pending += 1
+            if apply:
+                out.append(f"{indent}- [x] {rest}\n")
+                changed += 1
+            else:
+                out.append(line)
+        else:
+            out.append(line)
+
+    if apply and changed:
+        with open(path, "w", encoding="utf-8") as f:
+            f.writelines(out)
+    return pending, changed
+
+
+def main():
+    args = sys.argv[1:]
+    check = "--check" in args
+    args = [a for a in args if a != "--check"]
+    if "--all" in args:
+        args = [a for a in args if a != "--all"]
+    slugs = args if args else all_slugs()
+
+    total_pending = 0
+    touched_forms = 0
+    for slug in slugs:
+        pending, changed = process_form(slug, apply=not check)
+        if pending:
+            total_pending += pending
+            touched_forms += 1
+            verb = "pending" if check else "checked off"
+            print(f"{slug}: {pending} item(s) {verb}")
+
+    label = "CHECK" if check else "APPLY"
+    print(
+        f"sync-form-tasks-checkboxes [{label}]: {total_pending} item(s) "
+        f"across {touched_forms} form(s)"
+    )
+    if check and total_pending:
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

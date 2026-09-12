@@ -950,6 +950,40 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       attorney-for-health-and-care-decisions`'s irregular
       `person_to_notifies` plural); every one of the 336 captured
       transcripts is a real, live HTTP exchange, not synthesized.
+- [x] **Per-form `tasks.md` checkbox drift: DONE 2026-09-12.** Root-level
+      backlog review found no remaining autonomously-actionable item, but
+      auditing every `forms/<slug>/tasks.md` (not just the root file)
+      turned up 1856 stale `- [ ]` lines fleet-wide — each form's
+      checklist began as `bin/create-form`'s scaffold template, and
+      fleet-wide tooling since has built almost all of that work directly
+      (SQL migrations, generated XML/FHIR/protobuf/OpenAPI,
+      `front-end-with-html/`, `front-end-with-svelte/`,
+      `back-end-with-loco/`, `doc/` pages, ...) without ever going back to
+      tick the original per-form list.
+
+      New `bin/sync-form-tasks-checkboxes` closes the loop mechanically
+      and conservatively: a line only flips to `[x]` when *every*
+      backtick-quoted token on it resolves to a real, non-empty file or
+      directory relative to that form's own directory. A line with no
+      backtick-quoted path, or any backtick span that's a command
+      invocation rather than a path (`` `bin/test-form <slug>` ``,
+      `` `cargo test` ``), is left untouched — verifying those needs a
+      live Postgres per crate (~45s/crate observed via a direct trial),
+      far too slow to run fleet-wide for a documentation sync, so no
+      guessing. 450/1856 eligible and closed under this rule across 50
+      forms; the remaining 1406 are prose-only scaffold items with no
+      path claim to mechanically verify (e.g. "User acceptance testing
+      with a real GP / OH practice", "Clinical safety case documentation")
+      and correctly left open — some genuinely still open, some just
+      worded in a way this tool can't verify without guessing.
+
+      Deliberately not wired into the CI Verify block: unlike a
+      generated-artefact drift detector, a form with real unfinished work
+      will always show legitimate pending items, so "pending > 0" isn't
+      drift to fail a build on. It's a maintenance utility, run
+      occasionally like `bin/update` — not a routine gate. The root
+      `tasks.md` (this file) remains the actually-maintained fleet
+      backlog; this only keeps the per-form snapshots honest.
 - [x] **FHIR Bundles for the new personas: already current, re-verified
       2026-09-12.** `bin/generate-persona-fhir-bundles.py --check --all`
       reports 0 drift (189 bundles, 37 `*-test-result` forms — its

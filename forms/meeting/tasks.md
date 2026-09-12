@@ -25,10 +25,10 @@
       `index.md`, `plan.md`, `tasks.md`).
 - [x] Build `front-end-with-html/` static single-page wizard.
 - [x] Build `front-end-with-html/` static review table.
-- [ ] Build `front-end-with-svelte/` SvelteKit single-page wizard.
-- [ ] Build `front-end-with-svelte/` SVAR DataGrid dashboard.
-- [ ] Build `back-end-with-loco-setup` scaffold script.
-- [ ] Build `back-end-with-loco/` Rust crate.
-- [ ] Author `typespec/` TypeSpec API definitions.
+- [x] Build `front-end-with-svelte/` SvelteKit single-page wizard.
+- [x] Build `front-end-with-svelte/` SVAR DataGrid dashboard.
+- [x] Build `back-end-with-loco-setup` scaffold script.
+- [x] Build `back-end-with-loco/` Rust crate.
+- [x] Author `typespec/` TypeSpec API definitions.
 - [ ] Unit-test `validateMeeting()` with Vitest.
 - [ ] Run `bin/test-form meeting` and resolve remaining failures.

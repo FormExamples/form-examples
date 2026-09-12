@@ -13,7 +13,7 @@
       I/O shapes).
 - [x] `plan.md` with design principles and build order.
 - [x] `tasks.md` (this file).
-- [ ] `doc/` — GCS structured approach, GCS-P derivation, head-injury escalation.
+- [x] `doc/` — GCS structured approach, GCS-P derivation, head-injury escalation.
 
 ## Schema
 - [x] `sql/` migrations authored: assessment, grading result, fired rule, flag.

@@ -25,7 +25,7 @@
 
 ## Front-end form
 
-- [ ] HTML static 8-step wizard (`front-end-with-html/`)
+- [x] HTML static 8-step wizard (`front-end-with-html/`)
 - [ ] SvelteKit 8-step wizard with Svelte 5 runes and Tailwind 4
 
 ## Front-end dashboard
@@ -35,7 +35,7 @@
 
 ## Full-stack backend
 
-- [ ] `back-end-with-loco-setup` shell script
+- [x] `back-end-with-loco-setup` shell script
 - [ ] Loco app scaffold
 - [ ] Cargo workspace + migration sub-crate
 - [ ] Tera base template with HTMX + Alpine CDN scripts
