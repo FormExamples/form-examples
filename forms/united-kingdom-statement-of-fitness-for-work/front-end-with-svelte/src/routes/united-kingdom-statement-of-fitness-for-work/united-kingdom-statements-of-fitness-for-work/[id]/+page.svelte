@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { store } from '#lib/stores/fitnote.svelte.js';
+	import RestoreBanner from '#lib/components/ui/RestoreBanner.svelte';
 	import { gradeFitNote } from '#lib/engine/grader.js';
 	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
 	import { sampleFitNotes } from '#lib/data/sample-reports.js';
@@ -109,6 +110,8 @@
 			</ul>
 		</ErrorSummary>
 	{/if}
+
+	<RestoreBanner show={store.hadDraftAtLoad} onDiscard={startOver} />
 
 	<Form label="UK Statement of Fitness for Work" onsubmit={submit}>
 		<Step1Issuer />

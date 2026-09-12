@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import RestoreBanner from '#lib/components/ui/RestoreBanner.svelte';
 	import { gradeReconciliation } from '#lib/engine/medication-reconciliation-grader.js';
 	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
 	import { sampleReconciliations } from '#lib/data/sample-reports.js';
@@ -109,6 +110,8 @@
 			</ul>
 		</ErrorSummary>
 	{/if}
+
+	<RestoreBanner show={assessment.hadDraftAtLoad} onDiscard={startOver} />
 
 	<Form label="Medication reconciliation" onsubmit={submit}>
 		<Step1Encounter />

@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { store } from '#lib/stores/indicators.svelte.js';
+	import RestoreBanner from '#lib/components/ui/RestoreBanner.svelte';
 	import { STEPS } from '#lib/config/steps.js';
 	import { TOTAL_INDICATORS } from '#lib/config/indicators.js';
 	import { sampleReports } from '#lib/data/sample-reports.js';
@@ -120,6 +121,8 @@
 			</ul>
 		</ErrorSummary>
 	{/if}
+
+	<RestoreBanner show={store.hadDraftAtLoad} onDiscard={startOver} />
 
 	<Form label="Hospital performance indicators" onsubmit={submit}>
 		<div id="form-sections">

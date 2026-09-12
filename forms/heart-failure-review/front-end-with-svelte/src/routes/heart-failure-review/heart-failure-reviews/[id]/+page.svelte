@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import RestoreBanner from '#lib/components/ui/RestoreBanner.svelte';
 	import { gradeReview } from '#lib/engine/heart-failure-review-grader.js';
 	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
 	import { sampleAssessments } from '#lib/data/sample-reports.js';
@@ -112,6 +113,8 @@
 			</ul>
 		</ErrorSummary>
 	{/if}
+
+	<RestoreBanner show={assessment.hadDraftAtLoad} onDiscard={startOver} />
 
 	<Form label="Heart-failure annual review" onsubmit={submit}>
 		<Step1Context />

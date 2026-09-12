@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import RestoreBanner from '#lib/components/ui/RestoreBanner.svelte';
 	import { calculateASA } from '#lib/engine/asa-grader.js';
 	import { detectAdditionalFlags } from '#lib/engine/flagged-issues.js';
 	import { steps, getVisibleSteps } from '#lib/config/steps.js';
@@ -118,6 +119,8 @@
 			</ul>
 		</ErrorSummary>
 	{/if}
+
+	<RestoreBanner show={assessment.hadDraftAtLoad} onDiscard={startOver} />
 
 	<Form label="Pre-operative assessment" onsubmit={submit}>
 		<Step1Demographics />

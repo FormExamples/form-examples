@@ -3,6 +3,7 @@
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import RestoreBanner from '#lib/components/ui/RestoreBanner.svelte';
 	import { assess } from '#lib/engine/note-grader.js';
 	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
 	import { sampleAssessments } from '#lib/data/sample-reports.js';
@@ -154,6 +155,8 @@
 			</ul>
 		</ErrorSummary>
 	{/if}
+
+	<RestoreBanner show={assessment.hadDraftAtLoad} onDiscard={startOver} />
 
 	<Form label="Inpatient clinical note" onsubmit={submit}>
 		<Step1NoteIdentification />

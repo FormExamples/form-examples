@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { store } from '#lib/stores/assessment.svelte.js';
+	import RestoreBanner from '#lib/components/ui/RestoreBanner.svelte';
 	import { evaluateFitnessToFly } from '#lib/engine/composite-grader.js';
 	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
 	import { sampleAssessments } from '#lib/data/sample-reports.js';
@@ -118,6 +119,8 @@
 			</ul>
 		</ErrorSummary>
 	{/if}
+
+	<RestoreBanner show={store.hadDraftAtLoad} onDiscard={startOver} />
 
 	<Form label="Medical Information Form for Air Travel" onsubmit={submit}>
 		<div class="space-y-8">

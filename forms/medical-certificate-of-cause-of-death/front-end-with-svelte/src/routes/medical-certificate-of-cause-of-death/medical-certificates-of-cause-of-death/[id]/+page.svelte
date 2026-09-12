@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import RestoreBanner from '#lib/components/ui/RestoreBanner.svelte';
 	import { validateCertificate } from '#lib/engine/mccd-grader.js';
 	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
 	import { sampleCertificates } from '#lib/data/sample-reports.js';
@@ -97,6 +98,8 @@
 			</ul>
 		</ErrorSummary>
 	{/if}
+
+	<RestoreBanner show={assessment.hadDraftAtLoad} onDiscard={startOver} />
 
 	<Form label="Medical Certificate of Cause of Death" onsubmit={submit}>
 		<Step1Certification />

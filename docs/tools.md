@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-93 tools.
+94 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -61,6 +61,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/page-header-layout-refactor`](#page-header-layout-refactor)
 - [`bin/route-loco-layout`](#route-loco-layout)
 - [`bin/route-svelte-layout`](#route-svelte-layout)
+- [`bin/svelte-autosave-restore-fix`](#svelte-autosave-restore-fix)
 - [`bin/svelte-date-time-picker-vendor`](#svelte-date-time-picker-vendor)
 - [`bin/svelte-helpers-chooser-rename`](#svelte-helpers-chooser-rename)
 - [`bin/svelte-helpers-picker-rename`](#svelte-helpers-picker-rename)
@@ -1871,6 +1872,72 @@ route-svelte-layout <slug> : nest a form's SvelteKit routes under
  front-end-with-svelte/src/routes/<form-kebab-case>/  and prefix internal
  absolute route links (href / goto / redirect, plus the "/" home link) with
  /<slug>. /api/ fetch paths are left untouched. Idempotent (skips if routed).
+```
+
+<h2 id="svelte-autosave-restore-fix"><code>bin/svelte-autosave-restore-fix</code></h2>
+
+```text
+bin/svelte-autosave-restore-fix — fix a real, fleet-wide bug in the
+Svelte Autosave restore mechanism, and roll out the restore banner that
+tells the user it worked.
+
+**The bug** (found live, not assumed, while building the restore banner
+on forms/glasgow-coma-scale as a second reference form after
+forms/cardiology-request): every id-keyed store
+(`loadForId(id, seed)` shape) has two independent defects that together
+make "reload the page, get your draft back" silently fail on the (by far
+most common) `/new` route:
+
+  1. `id = $state('new');` -- the wizard page only calls `loadForId(id,
+     seed)` when `store.id !== id`. Since a fresh `/new` visit's route id
+     is the literal string `'new'`, this guard is false from the very
+     first render, so `loadForId()` -- the ONLY place that reads a saved
+     draft back out of localStorage -- never runs at all. A draft for
+     `new` sits in localStorage untouched and is never restored.
+  2. Even once (1) is fixed, the constructor's persistence `$effect`
+     fires immediately on store construction (module import time) with
+     the blank initial `data`, before the page's own effect gets a
+     chance to call `loadForId()` -- clobbering a good draft with blank
+     defaults moments before it would have been read back.
+
+`forms/cardiology-request` already carries the correct pattern for both
+(its own commit history documents finding and fixing this on itself in
+2026-09-08); `forms/glasgow-coma-scale` did not, and neither does 306 of
+the other 308 forms sharing the same loadForId(id, seed) store shape --
+confirmed live: a filled field, reloaded, came back empty, with
+localStorage itself already overwritten, before the fix; restored
+correctly, with the new restore banner shown, after it.
+
+For each matched form, this tool:
+  - Store file: changes `id = $state('new')` to `id = $state('')` (with
+    an explanatory comment); adds `#loaded`/`hadDraftAtLoad` fields;
+    guards the persistence effect on `#loaded`; sets `#loaded = true` and
+    `hadDraftAtLoad = raw !== null` inside `loadForId()`; resets
+    `hadDraftAtLoad` in `reset()`.
+  - Vendors RestoreBanner.svelte (byte-identical, built on the existing
+    Alert.svelte headless component) into the form's
+    src/lib/components/ui/, if not already present.
+  - Wizard page (routes/**/[id]/+page.svelte): adds the RestoreBanner
+    import right after the store's own import line, and
+    `<RestoreBanner show={<store>.hadDraftAtLoad} onDiscard={startOver} />`
+    right before the page's `<Form ...>` tag.
+
+Scoped to the loadForId(id, seed) shape only (308 of 355 Svelte stores):
+the single-instance constructor-only shape (37 forms, e.g.
+genetic-test-result) reads and restores localStorage synchronously
+inside its own constructor, before its persistence effect is even
+created, so it never had bug (2) -- and has no `id`/routing concept at
+all, so bug (1) doesn't apply either. Left untouched (not SKIP-reported
+as a defect; there is nothing to fix there). Forms whose store/page
+don't match every anchor this tool depends on are reported as SKIP
+(needs manual handling).
+
+Usage:
+    bin/svelte-autosave-restore-fix [--check] [--dry-run] [--all|<slug>...]
+
+--check reports which forms would change, and exits non-zero if any
+change is pending (CI drift detector). --dry-run shows per-form status
+without writing. Default (no flags): apply. Idempotent.
 ```
 
 <h2 id="svelte-date-time-picker-vendor"><code>bin/svelte-date-time-picker-vendor</code></h2>

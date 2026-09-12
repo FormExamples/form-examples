@@ -1,0 +1,329 @@
+#!/usr/bin/env python3
+"""bin/svelte-autosave-restore-fix — fix a real, fleet-wide bug in the
+Svelte Autosave restore mechanism, and roll out the restore banner that
+tells the user it worked.
+
+**The bug** (found live, not assumed, while building the restore banner
+on forms/glasgow-coma-scale as a second reference form after
+forms/cardiology-request): every id-keyed store
+(`loadForId(id, seed)` shape) has two independent defects that together
+make "reload the page, get your draft back" silently fail on the (by far
+most common) `/new` route:
+
+  1. `id = $state('new');` -- the wizard page only calls `loadForId(id,
+     seed)` when `store.id !== id`. Since a fresh `/new` visit's route id
+     is the literal string `'new'`, this guard is false from the very
+     first render, so `loadForId()` -- the ONLY place that reads a saved
+     draft back out of localStorage -- never runs at all. A draft for
+     `new` sits in localStorage untouched and is never restored.
+  2. Even once (1) is fixed, the constructor's persistence `$effect`
+     fires immediately on store construction (module import time) with
+     the blank initial `data`, before the page's own effect gets a
+     chance to call `loadForId()` -- clobbering a good draft with blank
+     defaults moments before it would have been read back.
+
+`forms/cardiology-request` already carries the correct pattern for both
+(its own commit history documents finding and fixing this on itself in
+2026-09-08); `forms/glasgow-coma-scale` did not, and neither does 306 of
+the other 308 forms sharing the same loadForId(id, seed) store shape --
+confirmed live: a filled field, reloaded, came back empty, with
+localStorage itself already overwritten, before the fix; restored
+correctly, with the new restore banner shown, after it.
+
+For each matched form, this tool:
+  - Store file: changes `id = $state('new')` to `id = $state('')` (with
+    an explanatory comment); adds `#loaded`/`hadDraftAtLoad` fields;
+    guards the persistence effect on `#loaded`; sets `#loaded = true` and
+    `hadDraftAtLoad = raw !== null` inside `loadForId()`; resets
+    `hadDraftAtLoad` in `reset()`.
+  - Vendors RestoreBanner.svelte (byte-identical, built on the existing
+    Alert.svelte headless component) into the form's
+    src/lib/components/ui/, if not already present.
+  - Wizard page (routes/**/[id]/+page.svelte): adds the RestoreBanner
+    import right after the store's own import line, and
+    `<RestoreBanner show={<store>.hadDraftAtLoad} onDiscard={startOver} />`
+    right before the page's `<Form ...>` tag.
+
+Scoped to the loadForId(id, seed) shape only (308 of 355 Svelte stores):
+the single-instance constructor-only shape (37 forms, e.g.
+genetic-test-result) reads and restores localStorage synchronously
+inside its own constructor, before its persistence effect is even
+created, so it never had bug (2) -- and has no `id`/routing concept at
+all, so bug (1) doesn't apply either. Left untouched (not SKIP-reported
+as a defect; there is nothing to fix there). Forms whose store/page
+don't match every anchor this tool depends on are reported as SKIP
+(needs manual handling).
+
+Usage:
+    bin/svelte-autosave-restore-fix [--check] [--dry-run] [--all|<slug>...]
+
+--check reports which forms would change, and exits non-zero if any
+change is pending (CI drift detector). --dry-run shows per-form status
+without writing. Default (no flags): apply. Idempotent.
+"""
+
+import argparse
+import re
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS_DIR = REPO_ROOT / "forms"
+REFERENCE_FORM = "cardiology-request"
+
+STORE_IMPORT_RE = re.compile(
+    r"^([ \t]*)import \{ (\w+) \} from '#lib/(stores/[\w./-]+)\.svelte\.js';[ \t]*$", re.MULTILINE
+)
+GET_ITEM_RE = re.compile(r"^([ \t]*)const raw = localStorage\.getItem\([^;]*\);[ \t]*$", re.MULTILINE)
+CONSTRUCTOR_RE = re.compile(r"^([ \t]*)constructor\(\)", re.MULTILINE)
+RESET_RE = re.compile(r"^([ \t]*)reset\(\)[ \t]*\{[ \t]*$", re.MULTILINE)
+ID_NEW_RE = re.compile(
+    r"(?:^[ \t]*/\*\*.*\*/[ \t]*\n)?^([ \t]*)id = \$state\('new'\);[ \t]*$", re.MULTILINE
+)
+PERSIST_EFFECT_RE = re.compile(
+    r"^([ \t]*)localStorage\.setItem\(storageKey\(this\.id\), JSON\.stringify\(this\.data\)\);[ \t]*$",
+    re.MULTILINE,
+)
+FORM_TAG_RE = re.compile(r"^([ \t]*)<Form ", re.MULTILINE)
+STARTOVER_RE = re.compile(r"function startOver\(\)")
+ALREADY_RE = re.compile(r"hadDraftAtLoad")
+
+RESTORE_BANNER_SRC = (
+    REPO_ROOT
+    / "forms"
+    / REFERENCE_FORM
+    / "front-end-with-svelte"
+    / "src"
+    / "lib"
+    / "components"
+    / "ui"
+    / "RestoreBanner.svelte"
+)
+
+
+def find_wizard_page(svelte_dir: Path) -> Path | None:
+    candidates = sorted(svelte_dir.glob("src/routes/*/*/[[]id[]]/+page.svelte"))
+    return candidates[0] if candidates else None
+
+
+def transform_store(text: str) -> str | None:
+    """Returns the transformed text, or None if the store doesn't match
+    the loadForId(id, seed) shape this tool knows how to patch."""
+    if ALREADY_RE.search(text):
+        return text  # already migrated; caller treats as unchanged
+
+    m_get = GET_ITEM_RE.search(text)
+    m_ctor = CONSTRUCTOR_RE.search(text)
+    m_reset = RESET_RE.search(text)
+    m_id = ID_NEW_RE.search(text)
+    m_effect = PERSIST_EFFECT_RE.search(text)
+    if not (m_get and m_ctor and m_reset and m_id and m_effect):
+        return None
+
+    # Apply in reverse source order so earlier edits don't shift the
+    # offsets of matches found before them.
+
+    # 5. reset(): clear hadDraftAtLoad.
+    reset_indent = m_reset.group(1)
+    text = text[: m_reset.end()] + f"\n{reset_indent}\tthis.hadDraftAtLoad = false;" + text[m_reset.end() :]
+
+    # 4. loadForId(): set hadDraftAtLoad + #loaded right after the
+    # existing `const raw = ...` line, present in every variant surveyed.
+    m_get = GET_ITEM_RE.search(text)
+    get_indent = m_get.group(1)
+    text = (
+        text[: m_get.end()]
+        + f"\n{get_indent}this.hadDraftAtLoad = raw !== null;"
+        + f"\n{get_indent}this.#loaded = true;"
+        + text[m_get.end() :]
+    )
+
+    # 3. Persistence effect: guard on #loaded so its first (immediate)
+    # run doesn't clobber a not-yet-restored draft with blank defaults.
+    m_effect = PERSIST_EFFECT_RE.search(text)
+    effect_indent = m_effect.group(1)
+    guarded = (
+        f"{effect_indent}const key = storageKey(this.id);\n"
+        f"{effect_indent}const snapshot = JSON.stringify(this.data);\n"
+        f"{effect_indent}if (!this.#loaded) return;\n"
+        f"{effect_indent}localStorage.setItem(key, snapshot);"
+    )
+    text = text[: m_effect.start()] + guarded + text[m_effect.end() :]
+
+    # 2. id default: 'new' -> '' (see module docstring for why).
+    m_id = ID_NEW_RE.search(text)
+    id_indent = m_id.group(1)
+    id_decl = (
+        f"{id_indent}/**\n"
+        f"{id_indent} * The id of the record currently loaded into the store (`new`\n"
+        f"{id_indent} * for a fresh draft). Starts as `''`, not `'new'`: the wizard\n"
+        f"{id_indent} * page only calls loadForId() when `store.id !== id`, so if this\n"
+        f"{id_indent} * defaulted to the literal string `'new'` the very first visit\n"
+        f"{id_indent} * to the (very common) `/new` route would never call\n"
+        f"{id_indent} * loadForId() at all -- any saved draft for `new` would be\n"
+        f"{id_indent} * silently ignored on every fresh page load. `''` never\n"
+        f"{id_indent} * collides with a real route id.\n"
+        f"{id_indent} */\n"
+        f"{id_indent}id = $state('');"
+    )
+    text = text[: m_id.start()] + id_decl + text[m_id.end() :]
+
+    # 1. New fields: hadDraftAtLoad + #loaded, right before constructor().
+    m_ctor = CONSTRUCTOR_RE.search(text)
+    ctor_indent = m_ctor.group(1)
+    field_decl = (
+        f"{ctor_indent}/**\n"
+        f"{ctor_indent} * True once a saved draft was found for the current id/store on\n"
+        f"{ctor_indent} * load -- read by RestoreBanner.svelte to tell the user their\n"
+        f"{ctor_indent} * progress was restored rather than silently repopulating fields\n"
+        f"{ctor_indent} * with no explanation. Mirrors the HTML front-end's\n"
+        f"{ctor_indent} * window.__FORM_STATE__.hadDraftAtLoad.\n"
+        f"{ctor_indent} */\n"
+        f"{ctor_indent}hadDraftAtLoad = $state(false);\n"
+        f"{ctor_indent}// True once loadForId() has run for the first time. Guards the\n"
+        f"{ctor_indent}// persistence effect below: without it, the effect's very first\n"
+        f"{ctor_indent}// (immediate) run persists the *blank* initial data before\n"
+        f"{ctor_indent}// loadForId() ever gets a chance to read a previously-saved draft\n"
+        f"{ctor_indent}// from localStorage -- silently clobbering it with blank data on\n"
+        f"{ctor_indent}// every fresh page load.\n"
+        f"{ctor_indent}#loaded = false;\n\n"
+    )
+    text = text[: m_ctor.start()] + field_decl + text[m_ctor.start() :]
+    return text
+
+
+def transform_page(text: str, store_var: str) -> str | None:
+    if "RestoreBanner" in text:
+        return text  # already migrated
+
+    m_import = STORE_IMPORT_RE.search(text)
+    m_form = FORM_TAG_RE.search(text)
+    if not (m_import and m_form and STARTOVER_RE.search(text)):
+        return None
+
+    form_indent = m_form.group(1)
+    text = (
+        text[: m_form.start()]
+        + f"{form_indent}<RestoreBanner show={{{store_var}.hadDraftAtLoad}} onDiscard={{startOver}} />\n\n"
+        + text[m_form.start() :]
+    )
+
+    m_import = STORE_IMPORT_RE.search(text)  # re-find: earlier edit was after this point
+    import_indent = m_import.group(1)
+    text = (
+        text[: m_import.end()]
+        + f"\n{import_indent}import RestoreBanner from '#lib/components/ui/RestoreBanner.svelte';"
+        + text[m_import.end() :]
+    )
+    return text
+
+
+def process_form(slug: str, write: bool) -> tuple[str, str]:
+    """Returns (status, detail). status is 'changed', 'unchanged', or
+    'SKIP'."""
+    svelte_dir = FORMS_DIR / slug / "front-end-with-svelte"
+    if not svelte_dir.is_dir():
+        return "SKIP", "no front-end-with-svelte"
+
+    page_path = find_wizard_page(svelte_dir)
+    if page_path is None:
+        return "SKIP", "no routes/**/[id]/+page.svelte"
+
+    page_text = page_path.read_text()
+    m_import = STORE_IMPORT_RE.search(page_text)
+    if not m_import:
+        return "SKIP", "no single-named store import in page"
+
+    store_var = m_import.group(2)
+    store_rel = m_import.group(3)  # e.g. 'stores/assessment'
+    store_path = svelte_dir / "src" / "lib" / f"{store_rel}.svelte.ts"
+    if not store_path.is_file():
+        return "SKIP", f"store file not found: {store_path.relative_to(REPO_ROOT)}"
+
+    store_text = store_path.read_text()
+    new_store_text = transform_store(store_text)
+    if new_store_text is None:
+        return "SKIP", "store shape not recognised (needs the loadForId(id, seed) shape with 'new' id default)"
+    store_changed = new_store_text != store_text
+
+    # The restore-bug fix above needs nothing but the store; the banner
+    # additionally needs Alert.svelte/Button.svelte to build on. A form
+    # missing those still gets the bug fix -- it just doesn't get a
+    # visible banner (SKIP-reported as 'no banner' via the detail, not
+    # left out of `changed` entirely).
+    ui_dir = svelte_dir / "src" / "lib" / "components" / "ui"
+    has_ui_deps = (ui_dir / "Alert.svelte").is_file() and (ui_dir / "Button.svelte").is_file()
+
+    new_page_text = None
+    banner_missing = False
+    if has_ui_deps:
+        new_page_text = transform_page(page_text, store_var)
+        banner_missing = not (ui_dir / "RestoreBanner.svelte").is_file()
+
+    page_changed = new_page_text is not None and new_page_text != page_text
+
+    if not (store_changed or page_changed or (banner_missing and new_page_text is not None)):
+        return "unchanged", "already migrated"
+
+    if write:
+        if store_changed:
+            store_path.write_text(new_store_text)
+        if page_changed:
+            page_path.write_text(new_page_text)
+        if banner_missing and new_page_text is not None:
+            ui_dir.mkdir(parents=True, exist_ok=True)
+            (ui_dir / "RestoreBanner.svelte").write_text(RESTORE_BANNER_SRC.read_text())
+
+    if store_changed and page_changed:
+        return "changed", "store+page+component"
+    if store_changed and not has_ui_deps:
+        return "changed", "store fix only (no Alert.svelte/Button.svelte -- no banner)"
+    if store_changed and new_page_text is None:
+        return "changed", "store fix only (page shape not recognised for banner -- no '<Form '/'startOver()')"
+    return "changed", "component only"
+
+
+def iter_candidate_slugs():
+    for d in sorted(FORMS_DIR.glob("*/front-end-with-svelte")):
+        yield d.parts[-2]
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("slugs", nargs="*", help="form slugs (default: every form)")
+    parser.add_argument("--all", action="store_true", help="same as no slugs: every form")
+    parser.add_argument("--check", action="store_true", help="report drift; exit 1 if any pending; don't write")
+    parser.add_argument("--dry-run", action="store_true", help="show status per form; don't write")
+    args = parser.parse_args()
+
+    slugs = args.slugs if args.slugs else list(iter_candidate_slugs())
+    write = not (args.check or args.dry_run)
+
+    changed = []
+    skipped = []
+    for slug in slugs:
+        if slug == REFERENCE_FORM:
+            continue
+        status, detail = process_form(slug, write)
+        if status == "changed":
+            changed.append(slug)
+        elif status == "SKIP":
+            skipped.append((slug, detail))
+
+    if args.check:
+        print(f"svelte-autosave-restore-fix [CHECK]: {len(changed)} form(s) pending, "
+              f"{len(skipped)} SKIP (needs manual handling)")
+        for slug in changed:
+            print(f"  would change: {slug}")
+        return 1 if changed else 0
+
+    verb = "would change" if not write else "changed"
+    print(f"svelte-autosave-restore-fix: {len(changed)} form(s) {verb}, "
+          f"{len(skipped)} SKIP (needs manual handling)")
+    for slug, reason in skipped:
+        print(f"  {slug}: {reason}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

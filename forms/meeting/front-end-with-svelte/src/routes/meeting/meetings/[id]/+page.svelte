@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { meeting } from '#lib/stores/meeting.svelte.js';
+	import RestoreBanner from '#lib/components/ui/RestoreBanner.svelte';
 	import { validateMeeting } from '#lib/engine/meeting-validator.js';
 	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
 	import { sampleMeetings } from '#lib/data/sample-reports.js';
@@ -93,6 +94,8 @@
 			</ul>
 		</ErrorSummary>
 	{/if}
+
+	<RestoreBanner show={meeting.hadDraftAtLoad} onDiscard={startOver} />
 
 	<Form label="Meeting record" onsubmit={submit}>
 		<Step1Organizer />

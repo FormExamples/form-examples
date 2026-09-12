@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import RestoreBanner from '#lib/components/ui/RestoreBanner.svelte';
 	import { STEPS } from '#lib/config/steps.js';
 	import { TOTAL_ITEMS } from '#lib/config/items.js';
 	import { sampleAssessments } from '#lib/data/sample-reports.js';
@@ -142,6 +143,8 @@
 			</ul>
 		</ErrorSummary>
 	{/if}
+
+	<RestoreBanner show={assessment.hadDraftAtLoad} onDiscard={startOver} />
 
 	<Form label="Hospital daily monitoring checklist" onsubmit={submit}>
 		<div id="form-sections">

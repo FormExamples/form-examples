@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import RestoreBanner from '#lib/components/ui/RestoreBanner.svelte';
 	import { gradeAssessment } from '#lib/engine/reba-grader.js';
 	import { steps } from '#lib/config/steps.js';
 	import { sampleAssessments } from '#lib/data/sample-reports.js';
@@ -96,6 +97,8 @@
 			</ul>
 		</ErrorSummary>
 	{/if}
+
+	<RestoreBanner show={assessment.hadDraftAtLoad} onDiscard={startOver} />
 
 	<Form label="Ergonomic assessment" onsubmit={submit}>
 		<Step1Demographics />

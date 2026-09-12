@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { store } from '#lib/stores/checklist.svelte.js';
+	import RestoreBanner from '#lib/components/ui/RestoreBanner.svelte';
 	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
 	import { sampleChecklists } from '#lib/data/sample-reports.js';
 
@@ -91,6 +92,8 @@
 			</ul>
 		</ErrorSummary>
 	{/if}
+
+	<RestoreBanner show={store.hadDraftAtLoad} onDiscard={startOver} />
 
 	<Form label="WHO Surgical Safety Checklist" onsubmit={submit}>
 		<Step1CaseDetails />

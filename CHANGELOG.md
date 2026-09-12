@@ -50,23 +50,72 @@ for them.
   fields should become mandatory is a per-form judgment call left for a
   follow-up pass (see `tasks.md`).
 
-- **Svelte Autosave restore banner: reference implementation on
-  `cardiology-request`** (fleet rollout still pending — see `tasks.md`).
-  Autosave itself already existed in the Svelte reference form
-  (`RequestStore`'s localStorage persistence, `data.` requests survive a
-  reload) but nothing told the user a draft had been restored, unlike the
-  HTML side's `js/restore-banner.js`. Added `hadDraftAtLoad` to
-  `RequestStore` (set in `loadForId()`, mirroring the HTML
-  `window.__FORM_STATE__.hadDraftAtLoad` contract) and a new, generic
-  `RestoreBanner.svelte` (built on the existing `Alert.svelte` headless
-  component) wired into the wizard page: "Discard and start over"
-  delegates to the page's own existing reset handler rather than
-  reimplementing it; "Dismiss" just hides the banner, keeping the draft.
-  Verified live end-to-end against a real preview build (Playwright): a
-  filled field survives reload with the banner shown and the field
-  restored; "Discard and start over" clears both the banner and the
-  field; "Dismiss" hides the banner while keeping the draft. `pnpm
-  check` 0/0, `pnpm build` succeeds, `vitest run` 12/12.
+- **Svelte Autosave restore banner, fleet-wide (305/355 forms) — and a
+  real, severe, previously-undiscovered bug found and fixed along the
+  way: Svelte Autosave silently failed to restore a draft on the `/new`
+  route for ~308 forms.** Started as a reference-implementation-only
+  change on `cardiology-request` (add `hadDraftAtLoad` +
+  `RestoreBanner.svelte`, mirroring the HTML side's
+  `js/restore-banner.js`); building a *second* reference form
+  (`glasgow-coma-scale`) to prove the pattern generalised exposed the
+  real bug live, not by inspection: fill a field, reload, and the field
+  came back empty — with localStorage itself already overwritten with
+  blank data by the time of the check.
+
+  Root cause, two compounding defects in the dominant `loadForId(id,
+  seed)` store shape:
+  1. `id = $state('new')`. The wizard page only calls `loadForId(id,
+     seed)` — the only place that reads a saved draft back out of
+     localStorage — when `store.id !== id`. Since a fresh `/new` visit's
+     route id is the literal string `'new'`, this guard is false from
+     the very first render, so `loadForId()` never runs at all on the
+     single most common route in the fleet.
+  2. Even with (1) fixed, the constructor's persistence `$effect` fires
+     immediately at store construction (module import time) with the
+     blank initial `data`, before the page's own effect gets a chance to
+     call `loadForId()` — clobbering a good draft with blanks moments
+     before it would have been read back.
+
+  `cardiology-request` alone already carried the correct pattern for
+  both (fixed on itself back on 2026-09-08 while building Export/Import,
+  per its own commit history) — but that fix was never generalised
+  beyond the one reference form, so it silently never protected the
+  other ~308 Svelte forms sharing the same store shape.
+
+  Surveyed the fleet before generalising (not assumed): 308/311
+  `loadForId`-shape stores had defect (1), of which 345 (308 + the 37
+  single-instance stores, unaffected — see below) matched an *exact*
+  persist-effect anchor a mechanical fix could target safely. New
+  `bin/svelte-autosave-restore-fix` applies both fixes plus the
+  `hadDraftAtLoad` field and wires `RestoreBanner.svelte` (built on the
+  existing `Alert.svelte` headless component) wherever its dependencies
+  exist; where they don't (15 forms), it still applies the bug fix alone
+  (a working, silent restore beats a broken one, banner or not).
+  Deliberately does **not** touch the single-instance, constructor-only
+  store shape (37 forms, e.g. `genetic-test-result`): that shape reads
+  and restores localStorage synchronously inside its own constructor,
+  before its persistence effect is even created, so it never had either
+  defect.
+
+  Result: **305/355 forms fixed**, 50 SKIP (mostly single-instance
+  stores with nothing to fix, or a handful of outlier store/page
+  shapes). Verified: `pnpm check` 0 errors/0 warnings on all 305 changed
+  forms; a 25-form random `vitest run` sample, all passing; live
+  Playwright round-trips (fill → reload → draft + banner restored →
+  discard clears both) on 4 structurally distinct forms
+  (`cardiology-request`, `glasgow-coma-scale`, `dental-assessment`,
+  `x-ray-test-request`) plus a banner-less store-only fix
+  (`stroke-assessment`). Found and fixed one more real, unrelated
+  pre-existing bug along the way while running `pnpm check` fleet-wide:
+  `diabetes-eye-screening`'s Svelte engine imported `./diabetes-eye-rules`
+  / `#lib/engine/diabetes-eye-grader.js` (matching its own tests, docs,
+  and every call site) but the files on disk were misnamed
+  `diabetic-eye-*` — renamed the files to match every reference rather
+  than the reverse, which would have needed 5+ edits instead of 2.
+
+  Not attempted: the 50 SKIP forms' individual outlier shapes, and the
+  Svelte restore banner for the `*-test-result` family and other forms
+  outside this tool's detected shapes — left for a follow-up pass.
 
 ### Fixed
 

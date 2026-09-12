@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import RestoreBanner from '#lib/components/ui/RestoreBanner.svelte';
 	import { validateV1 } from '#lib/engine/v1-validator.js';
 	import { detectFlaggedIssues } from '#lib/engine/flagged-issues.js';
 	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
@@ -109,6 +110,8 @@
 			of flagged issues.
 		</p>
 	</Alert>
+
+	<RestoreBanner show={assessment.hadDraftAtLoad} onDiscard={startOver} />
 
 	<Form label="DVLA V1 form" onsubmit={submit}>
 		<Step1PersonalDetails />

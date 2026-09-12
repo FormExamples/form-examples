@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { requestStore } from '#lib/stores/request.svelte.js';
+	import RestoreBanner from '#lib/components/ui/RestoreBanner.svelte';
 	import { calculateGrade } from '#lib/engine/grader.js';
 	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
 	import { sampleRequests } from '#lib/data/sample-reports.js';
@@ -108,6 +109,8 @@
 			</ul>
 		</ErrorSummary>
 	{/if}
+
+	<RestoreBanner show={requestStore.hadDraftAtLoad} onDiscard={startOver} />
 
 	<Form label="X-ray request" onsubmit={submit}>
 		<Step1RequestingClinician />

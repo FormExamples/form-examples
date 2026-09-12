@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import RestoreBanner from '#lib/components/ui/RestoreBanner.svelte';
 	import { calculateZaritGrade } from '#lib/engine/zarit-grader.js';
 	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
 	import { activeItemNumbers, normalizeInstrumentForm, ratingValue } from '#lib/engine/zarit-rules.js';
@@ -108,6 +109,8 @@
 			</ul>
 		</ErrorSummary>
 	{/if}
+
+	<RestoreBanner show={assessment.hadDraftAtLoad} onDiscard={startOver} />
 
 	<Form label="ZBI assessment" onsubmit={submit}>
 		<Step1Context />

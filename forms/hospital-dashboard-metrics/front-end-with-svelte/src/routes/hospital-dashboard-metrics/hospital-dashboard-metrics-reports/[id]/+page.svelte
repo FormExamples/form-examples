@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { store } from '#lib/stores/metrics.svelte.js';
+	import RestoreBanner from '#lib/components/ui/RestoreBanner.svelte';
 	import { STEPS } from '#lib/config/steps.js';
 	import { TOTAL_METRICS } from '#lib/config/metrics.js';
 	import { sampleReports } from '#lib/data/sample-reports.js';
@@ -133,6 +134,8 @@
 			</ul>
 		</ErrorSummary>
 	{/if}
+
+	<RestoreBanner show={store.hadDraftAtLoad} onDiscard={startOver} />
 
 	<Form label="Hospital dashboard metrics" onsubmit={submit}>
 		<div id="form-sections">

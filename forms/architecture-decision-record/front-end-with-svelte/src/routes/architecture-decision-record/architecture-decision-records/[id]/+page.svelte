@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { store } from '#lib/stores/adr.svelte.js';
+	import RestoreBanner from '#lib/components/ui/RestoreBanner.svelte';
 	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
 	import { sampleAdrs } from '#lib/data/sample-reports.js';
 	import { parseMarkdown } from '#lib/report/parse-markdown.js';
@@ -121,6 +122,8 @@
 			</ul>
 		</ErrorSummary>
 	{/if}
+
+	<RestoreBanner show={store.hadDraftAtLoad} onDiscard={startOver} />
 
 	<Form label="Architecture decision record" onsubmit={submit}>
 		<Step01 />

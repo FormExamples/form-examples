@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { assessment } from '#lib/stores/assessment.svelte.js';
+	import RestoreBanner from '#lib/components/ui/RestoreBanner.svelte';
 	import { STEPS, TOTAL_STEPS } from '#lib/config/steps.js';
 	import { sampleVisits } from '#lib/data/sample-reports.js';
 
@@ -117,6 +118,8 @@
 			</ul>
 		</ErrorSummary>
 	{/if}
+
+	<RestoreBanner show={assessment.hadDraftAtLoad} onDiscard={startOver} />
 
 	<Form label="Patient-reported outcome measures" onsubmit={submit}>
 		<div id="form-sections">

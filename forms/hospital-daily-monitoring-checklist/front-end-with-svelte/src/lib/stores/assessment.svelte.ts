@@ -24,8 +24,17 @@ class AssessmentStore {
   data = $state<HospitalDailyMonitoringChecklist>(createDefaultAssessment());
   currentStep = $state(1);
 
-  /** The id of the checklist currently loaded into the store (`new` for a fresh draft). */
-  id = $state('new');
+  /**
+   * The id of the record currently loaded into the store (`new`
+   * for a fresh draft). Starts as `''`, not `'new'`: the wizard
+   * page only calls loadForId() when `store.id !== id`, so if this
+   * defaulted to the literal string `'new'` the very first visit
+   * to the (very common) `/new` route would never call
+   * loadForId() at all -- any saved draft for `new` would be
+   * silently ignored on every fresh page load. `''` never
+   * collides with a real route id.
+   */
+  id = $state('');
 
   /** The live tally, recomputed from `data` on every change. Pure — no grading engine. */
   result = $derived<ChecklistSummaryResult>(summariseChecklist(this.data));
@@ -35,11 +44,30 @@ class AssessmentStore {
     ? 0
     : Math.round(this.result.answeredCount / TOTAL_ITEMS * 100));
 
+  /**
+   * True once a saved draft was found for the current id/store on
+   * load -- read by RestoreBanner.svelte to tell the user their
+   * progress was restored rather than silently repopulating fields
+   * with no explanation. Mirrors the HTML front-end's
+   * window.__FORM_STATE__.hadDraftAtLoad.
+   */
+  hadDraftAtLoad = $state(false);
+  // True once loadForId() has run for the first time. Guards the
+  // persistence effect below: without it, the effect's very first
+  // (immediate) run persists the *blank* initial data before
+  // loadForId() ever gets a chance to read a previously-saved draft
+  // from localStorage -- silently clobbering it with blank data on
+  // every fresh page load.
+  #loaded = false;
+
   constructor() {
     if (browser) {
       $effect.root(() => {
         $effect(() => {
-          localStorage.setItem(storageKey(this.id), JSON.stringify(this.data));
+          const key = storageKey(this.id);
+          const snapshot = JSON.stringify(this.data);
+          if (!this.#loaded) return;
+          localStorage.setItem(key, snapshot);
         });
       });
     }
@@ -62,6 +90,8 @@ class AssessmentStore {
     let draft: HospitalDailyMonitoringChecklist | null = null;
     if (browser) {
       const raw = localStorage.getItem(storageKey(key));
+      this.hadDraftAtLoad = raw !== null;
+      this.#loaded = true;
       if (raw) {
         try {
           draft = JSON.parse(raw) as HospitalDailyMonitoringChecklist;
@@ -77,6 +107,7 @@ class AssessmentStore {
   }
 
   reset() {
+  	this.hadDraftAtLoad = false;
     deepAssign(
       this.data as unknown as Record<string, unknown>,
       createDefaultAssessment() as unknown as Record<string, unknown>,
