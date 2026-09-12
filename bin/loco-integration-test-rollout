@@ -131,12 +131,30 @@ def pick_value(field_name: str, rust_type: str, enums: dict[str, list[str]]):
     if inner_type in ("DateTimeWithTimeZone",) and field_name == "deleted_at":
         return None
 
+    value = _pick_raw_value(field_name, inner_type, enums)
+    if value == "__UNKNOWN__":
+        return value
+
+    # rust_decimal::Decimal (sea-orm's mapping for SQL NUMERIC columns, seen
+    # in inpatient-clinical-note's patient table) round-trips a JSON NUMBER
+    # fine on the way IN (its Deserialize impl accepts both), but its
+    # Serialize impl always emits a JSON STRING on the way OUT (verified
+    # live: `"heightAsCm":"170.2"`, not a bare 170.2) — so both the request
+    # body and the response assertion must treat it as a string, never
+    # `.as_f64()`, or the assertion fails even though the value round-tripped
+    # correctly.
+    if inner_type == "Decimal" and isinstance(value, float):
+        value = str(value)
+    return value
+
+
+def _pick_raw_value(field_name: str, inner_type: str, enums: dict[str, list[str]]):
     if field_name in enums:
         return first_non_empty(enums[field_name])
 
-    for pattern, value in NAME_HEURISTICS:
+    for pattern, heuristic_value in NAME_HEURISTICS:
         if pattern.search(field_name):
-            return value
+            return heuristic_value
 
     if inner_type == "String":
         return f"Test {to_camel_case(field_name)}"
@@ -146,6 +164,8 @@ def pick_value(field_name: str, rust_type: str, enums: dict[str, list[str]]):
         return "2026-01-01T00:00:00Z"
     if inner_type in ("f64", "f32"):
         return 1.0
+    if inner_type == "Decimal":
+        return "1.0"
     if inner_type in ("i64", "i32"):
         return 1
     if inner_type == "bool":

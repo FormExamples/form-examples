@@ -336,8 +336,8 @@
             "valueCodeableConcept": {
               "coding": [
                 {
-                  "code": "lumbar-spine-and-hip",
-                  "display": "Lumbar-Spine-And-Hip"
+                  "code": "hip-and-spine",
+                  "display": "Hip-And-Spine"
                 }
               ]
             }

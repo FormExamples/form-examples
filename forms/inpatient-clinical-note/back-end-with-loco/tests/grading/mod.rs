@@ -305,11 +305,12 @@ async fn the_grade_endpoints_round_trip_over_http() {
             .await;
         assert_eq!(posted.status_code(), 200);
         let body: serde_json::Value = posted.json();
-        // The grade row is a SeaORM entity, so its keys are snake_case, as with
-        // every other entity controller in this crate. The engine result
-        // carries `rename_all = "camelCase"`, matching the front-end engines.
+        // The grade row is a SeaORM entity; like every entity controller in
+        // this crate (and fleet-wide, per bin/loco-camel-case-json-refactor),
+        // its keys are camelCase. The engine result nested beside it was
+        // already hand-written as camelCase.
         assert_eq!(body["grade"]["status"], "complete");
-        assert_eq!(body["grade"]["acuity_band"], "stable");
+        assert_eq!(body["grade"]["acuityBand"], "stable");
         assert_eq!(body["result"]["status"], "complete");
         assert_eq!(body["result"]["computedAcuityBand"], "stable");
         assert!(

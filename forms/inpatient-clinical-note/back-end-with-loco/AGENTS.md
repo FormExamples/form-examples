@@ -47,9 +47,11 @@ Grading is **append-only**: each `POST` inserts a new grade row rather than
 updating the last, so a note's grading history stays auditable. The grade row
 and its rule and flag children are written in one transaction.
 
-Note that the grade row is a SeaORM entity and therefore serializes
-**snake_case**, as every entity controller in this crate does; the engine
-result nested beside it is camelCase.
+The grade row is a SeaORM entity; like every entity controller in this
+crate (and fleet-wide, per `bin/loco-camel-case-json-refactor`), it
+serializes **camelCase**. The engine result nested beside it was already
+hand-written as camelCase, so both halves of the response use the same
+casing.
 
 ## Engine
 

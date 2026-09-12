@@ -12,7 +12,7 @@ const sampleReports = [
   {
     id: 'DXA-2026-0001',
     patientName: 'Aisha Khan',
-    scanRegion: 'lumbar-spine-and-hip',
+    scanRegion: 'hip-and-spine',
     reportStatus: 'final',
     reportedDate: '2026-06-25',
     lowestTScore: -0.5,
@@ -26,7 +26,7 @@ const sampleReports = [
   {
     id: 'DXA-2026-0002',
     patientName: 'Brian O’Connor',
-    scanRegion: 'lumbar-spine-and-hip',
+    scanRegion: 'hip-and-spine',
     reportStatus: 'final',
     reportedDate: '2026-06-26',
     lowestTScore: -1.8,
@@ -40,7 +40,7 @@ const sampleReports = [
   {
     id: 'DXA-2026-0003',
     patientName: 'Carmen Diaz',
-    scanRegion: 'lumbar-spine-and-hip',
+    scanRegion: 'hip-and-spine',
     reportStatus: 'final',
     reportedDate: '2026-06-27',
     lowestTScore: -2.8,
@@ -54,7 +54,7 @@ const sampleReports = [
   {
     id: 'DXA-2026-0004',
     patientName: 'David Müller',
-    scanRegion: 'lumbar-spine-and-hip',
+    scanRegion: 'hip-and-spine',
     reportStatus: 'final',
     reportedDate: '2026-06-27',
     lowestTScore: -3.2,
@@ -68,7 +68,7 @@ const sampleReports = [
   {
     id: 'DXA-2026-0005',
     patientName: 'Evelyn Wright',
-    scanRegion: 'lumbar-spine-and-hip',
+    scanRegion: 'hip-and-spine',
     reportStatus: 'final',
     reportedDate: '2026-06-29',
     lowestTScore: -1.6,
@@ -82,7 +82,7 @@ const sampleReports = [
   {
     id: 'DXA-2026-0006',
     patientName: 'Farid Hassan',
-    scanRegion: 'lumbar-spine-and-hip',
+    scanRegion: 'hip-and-spine',
     reportStatus: 'preliminary',
     reportedDate: '2026-06-30',
     lowestTScore: null,
@@ -96,7 +96,7 @@ const sampleReports = [
   {
     id: 'DXA-2026-0007',
     patientName: 'Grace Thompson',
-    scanRegion: 'lumbar-spine-and-hip',
+    scanRegion: 'hip-and-spine',
     reportStatus: 'preliminary',
     reportedDate: '',
     lowestTScore: null,
