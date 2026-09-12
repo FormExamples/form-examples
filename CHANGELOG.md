@@ -33,6 +33,23 @@ for them.
   tool itself first (a page-reuse state race between personas, and a
   false-positive empty-state substring check) — see `tasks.md` for detail.
 
+- **New `bin/verify-blank-submit` (+ `e2e/verify-blank-submit.mjs`): a
+  cheap, fleet-safe partial answer to "wizard blocks invalid
+  submission."** Loads every wizard's own blank/default state (no
+  persona needed) and clicks `#submit-btn`, asserting the wizard never
+  crashes regardless of its own validation rules. The literal backlog
+  ask — hand-curating an `example-invalid.json` fixture plus its exact
+  expected error-message list for 350+ forms — is genuine per-form
+  content authorship, not a mechanical sweep, so it remains undone; this
+  is the mechanical subset of that ask. Result: 348/348 forms clean, 0
+  crashes. Flagged (not fixed) 28 forms that render a full report on an
+  entirely blank submit — several look like a genuine gap in
+  clinically/legally significant documents (`consent-to-treatment`,
+  `who-acute-referral-form`, the UK DVLA/MAT B1/fit-note forms among
+  them) rather than an intentional all-optional design; deciding which
+  fields should become mandatory is a per-form judgment call left for a
+  follow-up pass (see `tasks.md`).
+
 ### Fixed
 
 - **Fixed a real, fleet-wide invalid FHIR R5 property in generated persona

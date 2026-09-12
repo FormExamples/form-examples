@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-92 tools.
+93 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -87,6 +87,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/test-vendored-uniformity`](#test-vendored-uniformity)
 - [`bin/update`](#update)
 - [`bin/update-group-b-plans.py`](#update-group-b-planspy)
+- [`bin/verify-blank-submit`](#verify-blank-submit)
 - [`bin/verify-personas`](#verify-personas)
 - [`bin/protobuf/generate-protobuf-representations.py`](#protobufgenerate-protobuf-representationspy)
 - [`bin/openapi/generate-openapi-combined.py`](#openapigenerate-openapi-combinedpy)
@@ -2494,6 +2495,27 @@ Update plan.md for the 11 Group B forms whose front-end-form-with-svelte
 was just implemented. Replace stub status with accurate "implemented"
 status for the SvelteKit patient form, and note the dashboard + Rust
 backend remaining.
+```
+
+<h2 id="verify-blank-submit"><code>bin/verify-blank-submit</code></h2>
+
+```text
+bin/verify-blank-submit — for every HTML wizard, load the page fresh
+ (its own default/blank state) and click #submit-btn immediately,
+ asserting the wizard never crashes on a blank submission attempt.
+ The cheapest, fleet-safe answer to "the wizard must block invalid
+ submissions without crashing" — see e2e/verify-blank-submit.mjs's own
+ header for why the literal per-form example-invalid.json + expected-
+ errors-list ask is out of mechanical scope.
+
+ Usage:
+   bin/verify-blank-submit [<slug> ...]
+
+   <slug> ...  restrict to the named forms (default: every form with a
+               #submit-btn)
+
+ Requires e2e/ deps installed (cd e2e && npm ci) and browsers
+ (cd e2e && npx playwright install chromium).
 ```
 
 <h2 id="verify-personas"><code>bin/verify-personas</code></h2>

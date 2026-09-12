@@ -753,7 +753,37 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       scratchpad script. Audit new-file counts against the dispatched set
       before committing.
 - [ ] `example-invalid.json` per form + expected validation errors list;
-      assert in the E2E harness (wizard blocks submission).
+      assert in the E2E harness (wizard blocks submission). **Partial,
+      honestly-scoped answer shipped 2026-09-12** (the literal ask —
+      hand-curating a meaningfully-invalid fixture *and* its exact
+      expected error-message list for 350+ forms — is genuine per-form
+      content authorship, not a mechanical sweep, so it's still not
+      attempted): new `bin/verify-blank-submit` +
+      `e2e/verify-blank-submit.mjs` load every wizard's own blank/default
+      state (no persona injection needed) and click `#submit-btn`,
+      asserting the wizard never crashes regardless of its own validation
+      rules — the one thing every wizard must get right unconditionally.
+      **348/348 forms clean, 0 crashes** (8 SKIP — no `#submit-btn`,
+      matching the non-wizard set). Reuses the page-error-detection
+      pattern from `bin/verify-personas`/`bin/generate-export-samples`.
+
+      **Real finding, needs a follow-up product-judgment pass, not a
+      mechanical fix:** 28 forms render a full report on an entirely
+      blank submit (zero required fields), including several
+      clinically/legally significant documents where that looks like a
+      genuine gap rather than an intentional all-optional design:
+      `consent-to-treatment`, `provider-transfer-request`,
+      `who-acute-referral-form`, `who-counter-referral-form`,
+      `eye-prescription`, `medical-information-form-for-air-travel`,
+      `united-kingdom-driver-and-vehicle-licensing-agency-{b1,m1,v1}-form`,
+      `united-kingdom-maternity-certificate-mat-b1`,
+      `united-kingdom-statement-of-fitness-for-work`. Deciding which
+      fields should become mandatory on each of these (patient identity?
+      signature? date? diagnosis?) is a per-form clinical/legal judgment
+      call, not something to decide unilaterally here. The rest of the 28
+      are checklists/surveys/trackers (`agile-checklist`,
+      `employee-satisfaction-survey`, `workplace-climate-assessment`,
+      etc.) where all-optional fields are plausibly intentional.
 - [x] **CSV and TSV export samples per form: DONE 2026-09-12.** New
       `bin/generate-export-samples` (thin wrapper around
       `e2e/generate-export-samples.mjs`) drives the real wizard through a

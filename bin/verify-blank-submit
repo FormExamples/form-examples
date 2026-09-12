@@ -1,0 +1,22 @@
+#!/bin/sh
+set -eu
+# bin/verify-blank-submit — for every HTML wizard, load the page fresh
+# (its own default/blank state) and click #submit-btn immediately,
+# asserting the wizard never crashes on a blank submission attempt.
+# The cheapest, fleet-safe answer to "the wizard must block invalid
+# submissions without crashing" — see e2e/verify-blank-submit.mjs's own
+# header for why the literal per-form example-invalid.json + expected-
+# errors-list ask is out of mechanical scope.
+#
+# Usage:
+#   bin/verify-blank-submit [<slug> ...]
+#
+#   <slug> ...  restrict to the named forms (default: every form with a
+#               #submit-btn)
+#
+# Requires e2e/ deps installed (cd e2e && npm ci) and browsers
+# (cd e2e && npx playwright install chromium).
+
+top="$(git rev-parse --show-toplevel)"
+cd "$top"
+node e2e/verify-blank-submit.mjs "$@"
