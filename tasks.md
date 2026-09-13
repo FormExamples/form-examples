@@ -992,6 +992,57 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       occasionally like `bin/update` — not a routine gate. The root
       `tasks.md` (this file) remains the actually-maintained fleet
       backlog; this only keeps the per-form snapshots honest.
+- [x] **Dependabot: all 713 open alerts cleared, DONE 2026-09-13.** Every
+      `git push` this session had been printing "GitHub found 713
+      vulnerabilities" without it ever being checked directly; the
+      backlog review widened to actually look. `gh api
+      repos/.../dependabot/alerts` showed all 713 were npm-ecosystem,
+      scoped to `front-end-with-svelte/pnpm-lock.yaml`: 711 medium
+      (`vitest` + `@vitest/mocker`) and 2 high (`js-yaml`).
+
+      **711 medium (GHSA-82fw-gwwq-j7x9 / CVE-2026-84373** — a
+      path-traversal file read via a redirect mock, reachable only
+      through the Vite dev server's unauthenticated HMR socket, not
+      Vitest's own token-authenticated browser-mode RPC): fixed 355/356
+      forms with a narrow, lockfile-only `pnpm update vitest
+      @vitest/mocker` (patched at `4.1.11`) — leaves every other pinned
+      dependency untouched, a 92-line diff per form, and
+      `package.json`'s existing `^4.1.10` specifier already covers the
+      patch so it only bumps to `^4.1.11`. The 1 remaining form
+      (`agile-consulting-scorecard-for-hiring-help`) was pinned to the
+      older `vitest@^3.2.7` line, for which no patched release exists
+      (the vulnerable range is `>= 2.1.0, < 4.1.11` — 3.2.7 is inside
+      it), so it needed a real major-version bump to `^4.1.11` instead;
+      verified safe by actually running its test suite (64/64 passing)
+      and `svelte-check` (0 errors) afterward, not just trusting the
+      semver bump.
+
+      **2 high (GHSA-2883-xcg3-v3hh / CVE-2026-84375** — a
+      `maxTotalMergeKeys` CPU-exhaustion DoS in `js-yaml`), affecting
+      only `pre-anaesthesia-assessment` and
+      `pre-operative-assessment-by-clinician`: `js-yaml` is
+      transitive-only (pulled in by `@eslint/eslintrc`'s own manifest,
+      not a direct dependency), so no `package.json` specifier could
+      pin it directly — needed a `pnpm.overrides` entry plus a full
+      `pnpm update --lockfile-only` (patched at `4.3.2`) for just these
+      2 forms. This is a broader, within-existing-semver-range diff than
+      the narrow fix above (it also picked up already-permitted patch
+      bumps to `svelte`, `vite`, `typescript`, etc.), but bounded to 2
+      forms and verified the same way — both test suites green,
+      `svelte-check` clean — before accepting it.
+
+      A real, mildly annoying side effect discovered along the way:
+      pnpm's own writer always reformats `package.json`'s "engines"
+      field (and, occasionally, the whole file's indentation) whenever
+      it rewrites anything, even when the field's own value doesn't
+      change — restored the fleet's single-line `"engines": { "node":
+      "=26" }` convention after every run rather than let 355 forms pick
+      up unrelated cosmetic diffs.
+
+      Verified fleet-wide afterward: no `pnpm-lock.yaml` still resolves
+      a vulnerable `vitest`/`@vitest/mocker`/`js-yaml` version;
+      `bin/svelte-pnpm-workspace-fix --check --all` and
+      `bin/lily-svelte-refactor --check --all` both stayed clean.
 - [x] **FHIR Bundles for the new personas: already current, re-verified
       2026-09-12.** `bin/generate-persona-fhir-bundles.py --check --all`
       reports 0 drift (189 bundles, 37 `*-test-result` forms — its

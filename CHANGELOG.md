@@ -16,6 +16,42 @@ for them.
 
 ## [Unreleased]
 
+### Security
+
+- **Cleared all 713 open Dependabot alerts fleet-wide (2 high, 711
+  medium) across every `front-end-with-svelte/pnpm-lock.yaml`.** GitHub
+  had been reporting these on every push; the backlog review widened to
+  check it directly rather than keep ignoring the warning.
+  - **711 medium (`vitest` + `@vitest/mocker`, GHSA-82fw-gwwq-j7x9 /
+    CVE-2026-84373 — a path-traversal file read via a redirect mock,
+    reachable only through the Vite dev server's unauthenticated HMR
+    socket, not Vitest's own token-authenticated browser-mode RPC):
+    355/356 forms fixed with a narrow, lockfile-only
+    `pnpm update vitest @vitest/mocker` (patched at `4.1.11`) that leaves
+    every other pinned dependency untouched (92-line diff per form,
+    `package.json`'s existing `^4.1.10` specifier already covers the
+    patch and only bumps to `^4.1.11`); the 1 remaining form
+    (`agile-consulting-scorecard-for-hiring-help`) was pinned to the
+    older `vitest@^3.2.7` line, for which no patched release exists (the
+    vulnerable range is `>= 2.1.0, < 4.1.11`), so it needed a real major
+    bump to `^4.1.11` instead — verified safe by actually running its
+    test suite (64/64 passing) and `svelte-check` (0 errors) after.
+  - **2 high (`js-yaml`, GHSA-2883-xcg3-v3hh / CVE-2026-84375 — a
+    `maxTotalMergeKeys` CPU-exhaustion DoS), affecting
+    `pre-anaesthesia-assessment` and
+    `pre-operative-assessment-by-clinician` only:** transitive-only
+    (pulled in by `@eslint/eslintrc`, not a direct dependency), so no
+    package.json specifier could pin it directly. Added a
+    `pnpm.overrides` entry and ran a full `pnpm update --lockfile-only`
+    for just these 2 forms (patched at `4.3.2`) — a broader,
+    within-existing-semver-range diff than the narrow fix above, but
+    bounded to 2 forms and verified safe the same way (test suites green,
+    `svelte-check` clean) before accepting it.
+  - Verified fleet-wide afterward: no `pnpm-lock.yaml` still resolves a
+    vulnerable `vitest`/`@vitest/mocker`/`js-yaml` version;
+    `bin/svelte-pnpm-workspace-fix --check --all` and
+    `bin/lily-svelte-refactor --check --all` both stayed clean.
+
 ### Added
 
 - **New `bin/sync-form-tasks-checkboxes`: check off stale per-form
