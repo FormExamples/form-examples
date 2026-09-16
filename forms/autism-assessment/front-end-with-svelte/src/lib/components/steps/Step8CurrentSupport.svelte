@@ -2,7 +2,7 @@
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import { CheckboxGroup, TextAreaInput } from "lily-design-system-svelte-headless";
+	import { CheckboxGroup, TextAreaInput } from "@lilydesignsystem/svelte-headless";
 	import MedicationEntry from '#lib/components/ui/MedicationEntry.svelte';
 
 	const cs = assessment.data.currentSupport;

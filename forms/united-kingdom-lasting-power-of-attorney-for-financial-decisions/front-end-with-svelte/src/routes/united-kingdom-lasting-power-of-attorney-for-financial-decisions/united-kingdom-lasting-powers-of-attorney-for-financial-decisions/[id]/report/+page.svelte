@@ -10,7 +10,7 @@
 		compositeRiskColor,
 		priorityColor
 	} from '#lib/validator/labels.js';
-	import { Button } from "lily-design-system-svelte-headless";
+	import { Button } from "@lilydesignsystem/svelte-headless";
 
 	const plural = 'united-kingdom-lasting-powers-of-attorney-for-financial-decisions';
 

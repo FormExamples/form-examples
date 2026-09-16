@@ -2,7 +2,7 @@
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import { RadioGroup, TextAreaInput } from "lily-design-system-svelte-headless";
+	import { RadioGroup, TextAreaInput } from "@lilydesignsystem/svelte-headless";
 	import SpecimenEntry from '#lib/components/ui/SpecimenEntry.svelte';
 	import ImplantEntry from '#lib/components/ui/ImplantEntry.svelte';
 

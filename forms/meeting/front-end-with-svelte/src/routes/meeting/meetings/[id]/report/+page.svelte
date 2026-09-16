@@ -13,7 +13,7 @@
 		overallResultLabel,
 		formatDateTime
 	} from '#lib/engine/utils.js';
-	import { Button } from "lily-design-system-svelte-headless";
+	import { Button } from "@lilydesignsystem/svelte-headless";
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(meeting.data);

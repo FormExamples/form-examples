@@ -8,7 +8,7 @@
 	import Field from '#lib/components/ui/Field.svelte';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
-	import { TextAreaInput, TextInput } from "lily-design-system-svelte-headless";
+	import { TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
 	import { OPTIONS } from '#lib/config/options.js';
 	import { CANDIDACY_LABELS, OHS_CATEGORY_LABELS } from '#lib/engine/grader.js';
 	import { titleCase } from '#lib/engine/utils.js';

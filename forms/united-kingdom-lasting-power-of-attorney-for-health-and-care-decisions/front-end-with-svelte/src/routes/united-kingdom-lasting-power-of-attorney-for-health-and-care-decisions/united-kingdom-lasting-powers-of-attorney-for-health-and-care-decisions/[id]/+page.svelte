@@ -6,7 +6,7 @@
 	import { sampleLpas } from '#lib/data/sample-reports.js';
 
 	import Form from '#lib/components/ui/Form.svelte';
-	import { Button, ErrorSummary, Panel } from "lily-design-system-svelte-headless";
+	import { Button, ErrorSummary, Panel } from "@lilydesignsystem/svelte-headless";
 	import Progress from '#lib/components/ui/Progress.svelte';
 
 	import Step01Donor from '#lib/components/steps/Step01Donor.svelte';

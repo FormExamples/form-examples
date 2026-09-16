@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Field from '#lib/components/ui/Field.svelte';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import { DateInput, TextAreaInput } from "lily-design-system-svelte-headless";
+	import { DateInput, TextAreaInput } from "@lilydesignsystem/svelte-headless";
 	import NumberInput from '#lib/components/ui/NumberInput.svelte';
 	import { assessmentStore } from '#lib/stores/assessment.svelte.js';
 

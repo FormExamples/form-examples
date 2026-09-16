@@ -2,7 +2,7 @@
 	import Field from '#lib/components/ui/Field.svelte';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import NumberInput from '#lib/components/ui/NumberInput.svelte';
-	import { CheckboxGroup, CheckboxInput } from "lily-design-system-svelte-headless";
+	import { CheckboxGroup, CheckboxInput } from "@lilydesignsystem/svelte-headless";
 	import { request } from '#lib/stores/request.svelte.js';
 
 	const d = request.data.redFlags;

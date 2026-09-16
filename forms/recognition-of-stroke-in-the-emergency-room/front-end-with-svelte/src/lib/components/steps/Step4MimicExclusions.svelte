@@ -4,7 +4,7 @@
 	import { pointColor, signed } from '#lib/engine/utils.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import { RadioGroup } from "lily-design-system-svelte-headless";
+	import { RadioGroup } from "@lilydesignsystem/svelte-headless";
 
 	const m = assessment.data.mimics;
 	const grade = $derived(calculateRosierGrade(assessment.data));

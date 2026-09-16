@@ -3,7 +3,7 @@
 	import { calculateAge } from '#lib/engine/utils.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import { DateInput, RadioGroup, TextInput } from "lily-design-system-svelte-headless";
+	import { DateInput, RadioGroup, TextInput } from "@lilydesignsystem/svelte-headless";
 	import NumberInput from '#lib/components/ui/NumberInput.svelte';
 
 	const d = assessment.data.demographics;

@@ -14,7 +14,7 @@
 		sexLabel,
 		avpuLabel
 	} from '#lib/engine/utils.js';
-	import { Button } from "lily-design-system-svelte-headless";
+	import { Button } from "@lilydesignsystem/svelte-headless";
 
 	const plural = 'modified-early-warning-scores';
 

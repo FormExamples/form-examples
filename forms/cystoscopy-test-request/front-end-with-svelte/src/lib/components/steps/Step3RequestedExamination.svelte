@@ -2,7 +2,7 @@
 	import Field from '#lib/components/ui/Field.svelte';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
-	import { TextAreaInput } from "lily-design-system-svelte-headless";
+	import { TextAreaInput } from "@lilydesignsystem/svelte-headless";
 	import { requestStore } from '#lib/stores/result.svelte.js';
 
 	const r = requestStore.data.request;

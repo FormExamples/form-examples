@@ -3,7 +3,7 @@
 	import { calculateLengthOfStay } from '#lib/engine/utils.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import { DateInput, TextAreaInput, TextInput } from "lily-design-system-svelte-headless";
+	import { DateInput, TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
 
 	const d = assessment.data.admissionSummary;
 

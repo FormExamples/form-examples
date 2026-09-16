@@ -3,7 +3,7 @@
 	import type { ImagingClassification } from '#lib/engine/types.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import { CheckboxGroup, RadioGroup } from "lily-design-system-svelte-headless";
+	import { CheckboxGroup, RadioGroup } from "@lilydesignsystem/svelte-headless";
 
 	const a = assessment.data.assessment;
 	const yesNo = [

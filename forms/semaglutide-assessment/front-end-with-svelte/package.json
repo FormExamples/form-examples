@@ -28,19 +28,19 @@
     "vitest": "^4.1.11"
   },
   "dependencies": {
+    "@lilydesignsystem/svelte-headless": "^0.1.0",
+    "@lilydesignsystem/svelte-locale-picker": "^0.1.0",
+    "@lilydesignsystem/svelte-picker-bar": "^0.1.0",
+    "@lilydesignsystem/svelte-share-picker": "^0.1.0",
+    "@lilydesignsystem/svelte-text-size-picker": "^0.1.0",
+    "@lilydesignsystem/svelte-theme-picker": "^0.1.0",
     "@svar-ui/svelte-grid": "^2.7.2",
     "migrate": "^2.1.0",
     "npx": "^10.2.2",
     "package": "^1.0.1",
     "pdfmake": "^0.3.11",
     "sv": "^0.17.0",
-    "zod": "^4.4.3",
-    "lily-design-system-svelte-headless": "^0.3.1",
-    "lily-design-system-svelte-theme-picker": "^0.1.1",
-    "lily-design-system-svelte-locale-picker": "^0.1.1",
-    "lily-design-system-svelte-text-size-picker": "^0.1.1",
-    "lily-design-system-svelte-share-picker": "^0.1.1",
-    "lily-design-system-svelte-picker-bar": "^0.1.0"
+    "zod": "^4.4.3"
   },
   "exports": {
     "./package.json": "./package.json",
@@ -458,5 +458,10 @@
   "imports": {
     "#lib": "./src/lib/index.js",
     "#lib/*": "./src/lib/*"
+  },
+  "pnpm": {
+    "overrides": {
+      "@svar-ui/svelte-core": "^2.6.1"
+    }
   }
 }

@@ -2,7 +2,7 @@
 	// Repeating-list editor for the Health Action Plan: each row captures an
 	// action, its owner, and a due date.
 	import type { HealthActionItem } from '#lib/engine/types.js';
-	import { Button, DateInput, TextInput } from "lily-design-system-svelte-headless";
+	import { Button, DateInput, TextInput } from "@lilydesignsystem/svelte-headless";
 
 	let { actions = $bindable<HealthActionItem[]>([]) }: { actions?: HealthActionItem[] } = $props();
 

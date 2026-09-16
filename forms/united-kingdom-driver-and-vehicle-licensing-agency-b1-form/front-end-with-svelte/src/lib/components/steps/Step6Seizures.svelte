@@ -2,7 +2,7 @@
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import { DateInput, RadioGroup, TextAreaInput, TextInput } from "lily-design-system-svelte-headless";
+	import { DateInput, RadioGroup, TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
 	import Alert from '#lib/components/ui/Alert.svelte';
 	import { epilepsyDeclarationRequired } from '#lib/engine/utils.js';
 

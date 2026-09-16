@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Field from '#lib/components/ui/Field.svelte';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import { DateInput, TextAreaInput } from "lily-design-system-svelte-headless";
+	import { DateInput, TextAreaInput } from "@lilydesignsystem/svelte-headless";
 	import { request } from '#lib/stores/request.svelte.js';
 
 	const d = request.data.triage;

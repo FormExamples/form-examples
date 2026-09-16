@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import { CheckboxInput } from "lily-design-system-svelte-headless";
+	import { CheckboxInput } from "@lilydesignsystem/svelte-headless";
 	import { request } from '#lib/stores/request.svelte.js';
 	import { MARKERS, countSelectedMarkers } from '#lib/engine/markers.js';
 

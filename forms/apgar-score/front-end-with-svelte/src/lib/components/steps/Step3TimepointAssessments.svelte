@@ -7,7 +7,7 @@
 	import Field from '#lib/components/ui/Field.svelte';
 	import NumberInput from '#lib/components/ui/NumberInput.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
-	import { Button } from "lily-design-system-svelte-headless";
+	import { Button } from "@lilydesignsystem/svelte-headless";
 
 	// Grade the whole assessment reactively so each timepoint shows a live total.
 	const graded = $derived(calculateApgarGrade(assessment.data).timepoints);

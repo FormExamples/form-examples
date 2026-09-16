@@ -2,7 +2,7 @@
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import { TextInput } from "lily-design-system-svelte-headless";
+	import { TextInput } from "@lilydesignsystem/svelte-headless";
 	import TeamMemberEntry from '#lib/components/ui/TeamMemberEntry.svelte';
 
 	const d = assessment.data.surgicalTeam;

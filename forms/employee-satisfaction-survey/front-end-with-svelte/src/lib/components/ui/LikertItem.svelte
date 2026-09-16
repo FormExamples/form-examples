@@ -2,7 +2,7 @@
 	// A single 1-5 Likert agreement item rendered as a Field + RadioGroup.
 	// Positively worded: 1 = Strongly disagree, 5 = Strongly agree.
 	import Field from '#lib/components/ui/Field.svelte';
-	import { RadioGroup } from "lily-design-system-svelte-headless";
+	import { RadioGroup } from "@lilydesignsystem/svelte-headless";
 	import { LIKERT_AGREEMENT } from '#lib/engine/rules.js';
 	import type { LikertValue } from '#lib/engine/types.js';
 

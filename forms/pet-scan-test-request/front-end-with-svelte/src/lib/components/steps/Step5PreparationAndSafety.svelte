@@ -3,7 +3,7 @@
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import NumberInput from '#lib/components/ui/NumberInput.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
-	import { CheckboxGroup, CheckboxInput } from "lily-design-system-svelte-headless";
+	import { CheckboxGroup, CheckboxInput } from "@lilydesignsystem/svelte-headless";
 	import Alert from '#lib/components/ui/Alert.svelte';
 	import { request } from '#lib/stores/request.svelte.js';
 	import { isFdgStudy } from '#lib/engine/utils.js';

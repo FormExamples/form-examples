@@ -2,7 +2,7 @@
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import { CheckboxGroup, RadioGroup, TextAreaInput } from "lily-design-system-svelte-headless";
+	import { CheckboxGroup, RadioGroup, TextAreaInput } from "@lilydesignsystem/svelte-headless";
 
 	const ad = assessment.data.assistiveDevices;
 	const yesNo = [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }];

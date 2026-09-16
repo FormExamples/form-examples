@@ -89,12 +89,12 @@ system** — do not hand-roll theme CSS.
   option (it would 404 on a missing stylesheet).
 - **Prebuilt control, consolidated behind `PickerBar`.** As of 2026-09-16
   the header renders a single `<PickerBar>` (from the real pnpm dependency
-  `lily-design-system-svelte-picker-bar`, imported in `+layout.svelte`)
+  `@lilydesignsystem/svelte-picker-bar`, imported in `+layout.svelte`)
   instead of four separately-wired components, in every form whose header
   matched the fleet's standard block (355/356 — see below for the one
   exception). `PickerBar` composes `ThemePicker`/`LocalePicker`/
   `TextSizePicker`/`SharePicker` internally, each a real pnpm dependency
-  in its own right (`lily-design-system-svelte-{theme,locale,text-size,
+  in its own right (`@lilydesignsystem/svelte-{theme,locale,text-size,
   share}-picker`), and takes `labels` (accessible names for all four),
   `themesUrl`/`themes`/`themeProps`, `locales`/`localeProps`,
   `sizes`/`textSizeProps`, and `shareTargets`/`shareProps` — each
@@ -164,8 +164,11 @@ Companion docs: [`AGENTS-front-end-html.md`](AGENTS-front-end-html.md),
 
 ## 1. What Lily Svelte headless is, for our purposes
 
-`lily-design-system-svelte-headless` is a **library of Svelte 5 components**
-that ship structural markup + ARIA + keyboard behaviour, with **no styling**.
+`@lilydesignsystem/svelte-headless` (published unscoped as
+`lily-design-system-svelte-headless` until 2026-09-17 — see
+[`lily-svelte-helpers-version.md`](lily-svelte-helpers-version.md) §History)
+is a **library of Svelte 5 components** that ship structural markup + ARIA +
+keyboard behaviour, with **no styling**.
 Each component under
 `~/git/lilydesignsystem/lily-design-system/lily-design-system-svelte-headless/components/`
 is a folder containing:
@@ -185,7 +188,7 @@ stylesheet works for both.
 ## 2. Consumption model (decision)
 
 **As of 2026-09-16, Lily Svelte is a real pnpm dependency, not just a
-contract.** `lily-design-system-svelte-headless` is in every form's
+contract.** `@lilydesignsystem/svelte-headless` is in every form's
 `package.json` `dependencies`, and most of the catalogue components a form
 uses are imported directly from it:
 
@@ -196,7 +199,7 @@ uses are imported directly from it:
   extra class hooks — see [`lily-svelte-version.md`](lily-svelte-version.md)
   for the full list and why). Everywhere else, code imports the component
   by name: `import { Button, TextInput } from
-  "lily-design-system-svelte-headless";` — no local file, no per-form copy.
+  "@lilydesignsystem/svelte-headless";` — no local file, no per-form copy.
 - **The four picker helpers and `PickerBar` are pnpm dependencies too.**
   See the Theming section below and
   [`lily-svelte-helpers-version.md`](lily-svelte-helpers-version.md).

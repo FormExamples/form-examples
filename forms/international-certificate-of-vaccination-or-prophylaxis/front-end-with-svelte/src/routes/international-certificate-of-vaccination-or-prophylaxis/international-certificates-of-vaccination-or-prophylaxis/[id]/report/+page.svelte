@@ -10,7 +10,7 @@
 		overallValidityStatus,
 		calculateAge
 	} from '#lib/engine/utils.js';
-	import { Button } from "lily-design-system-svelte-headless";
+	import { Button } from "@lilydesignsystem/svelte-headless";
 
 	const plural = 'international-certificates-of-vaccination-or-prophylaxis';
 

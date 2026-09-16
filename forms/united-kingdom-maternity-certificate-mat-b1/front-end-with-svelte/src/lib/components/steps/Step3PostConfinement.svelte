@@ -2,7 +2,7 @@
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import { DateInput } from "lily-design-system-svelte-headless";
+	import { DateInput } from "@lilydesignsystem/svelte-headless";
 
 	const data = assessment.data;
 	const post = data.postConfinement;

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import { Panel, TextInput } from "lily-design-system-svelte-headless";
+	import { Panel, TextInput } from "@lilydesignsystem/svelte-headless";
 	import Badge from '#lib/components/ui/Badge.svelte';
 	import Alert from '#lib/components/ui/Alert.svelte';
 	import { assessment } from '#lib/stores/assessment.svelte.js';

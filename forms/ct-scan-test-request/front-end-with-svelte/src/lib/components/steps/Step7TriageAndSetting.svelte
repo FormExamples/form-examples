@@ -2,7 +2,7 @@
 	import Field from '#lib/components/ui/Field.svelte';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
-	import { DateInput } from "lily-design-system-svelte-headless";
+	import { DateInput } from "@lilydesignsystem/svelte-headless";
 	import { request } from '#lib/stores/request.svelte.js';
 
 	const d = request.data.triage;

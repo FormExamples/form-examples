@@ -4,7 +4,7 @@
 	import { calculateGrade } from '#lib/engine/grader.js';
 	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
 
-	import { Button, ErrorSummary, Form, Progress } from "lily-design-system-svelte-headless";
+	import { Button, ErrorSummary, Form, Progress } from "@lilydesignsystem/svelte-headless";
 	import StepList from '#lib/components/ui/StepList.svelte';
 	import StepListItem from '#lib/components/ui/StepListItem.svelte';
 

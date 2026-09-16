@@ -3,7 +3,7 @@
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
-	import { DateInput, RadioGroup, TextInput } from "lily-design-system-svelte-headless";
+	import { DateInput, RadioGroup, TextInput } from "@lilydesignsystem/svelte-headless";
 	import NumberInput from '#lib/components/ui/NumberInput.svelte';
 
 	const p = assessment.data.physicalHealthImpact;

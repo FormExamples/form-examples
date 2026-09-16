@@ -4,7 +4,7 @@
 	// safety flags. Filterable on each of those, and sortable by clinical
 	// severity rather than alphabetically.
 	import Alert from '#lib/components/ui/Alert.svelte';
-	import { Button, TextInput } from "lily-design-system-svelte-headless";
+	import { Button, TextInput } from "@lilydesignsystem/svelte-headless";
 	import Field from '#lib/components/ui/Field.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
 	import { sampleEvaluations } from '#lib/data/sample-reports.js';

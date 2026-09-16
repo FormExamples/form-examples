@@ -2,7 +2,7 @@
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import { RadioGroup, TextAreaInput } from "lily-design-system-svelte-headless";
+	import { RadioGroup, TextAreaInput } from "@lilydesignsystem/svelte-headless";
 	import PriorTestList from '#lib/components/ui/PriorTestList.svelte';
 
 	const d = assessment.data.priorGeneticTesting;

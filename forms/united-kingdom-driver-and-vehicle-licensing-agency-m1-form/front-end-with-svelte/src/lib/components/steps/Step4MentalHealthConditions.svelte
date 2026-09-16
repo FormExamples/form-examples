@@ -3,7 +3,7 @@
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
 	import YesNoQuestion from '#lib/components/ui/YesNoQuestion.svelte';
-	import { TextAreaInput } from "lily-design-system-svelte-headless";
+	import { TextAreaInput } from "@lilydesignsystem/svelte-headless";
 	import Alert from '#lib/components/ui/Alert.svelte';
 
 	const c = assessment.data.mentalHealthConditions;

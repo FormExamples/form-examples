@@ -20,7 +20,7 @@
 		todayIso,
 		parseImportedJson
 	} from '#lib/utils/form-data-transfer.js';
-	import { Button } from "lily-design-system-svelte-headless";
+	import { Button } from "@lilydesignsystem/svelte-headless";
 
 	let {
 		slug,

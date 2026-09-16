@@ -3,7 +3,7 @@
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
 	import MedicationEntry from '#lib/components/ui/MedicationEntry.svelte';
-	import { CheckboxGroup, TextAreaInput } from "lily-design-system-svelte-headless";
+	import { CheckboxGroup, TextAreaInput } from "@lilydesignsystem/svelte-headless";
 
 	const med = assessment.data.currentMedications;
 	const fallRisk = [

@@ -4,7 +4,7 @@
   import Field from '#lib/components/ui/Field.svelte';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
   import Select from '#lib/components/ui/Select.svelte';
-  import { RadioGroup } from "lily-design-system-svelte-headless";
+  import { RadioGroup } from "@lilydesignsystem/svelte-headless";
 
   const mh = assessment.data.metabolicHealth;
 </script>

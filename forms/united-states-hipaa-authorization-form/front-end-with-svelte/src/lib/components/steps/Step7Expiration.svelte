@@ -2,7 +2,7 @@
 	import { authorization } from '#lib/stores/authorization.svelte.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import { RadioGroup, TextInput } from "lily-design-system-svelte-headless";
+	import { RadioGroup, TextInput } from "@lilydesignsystem/svelte-headless";
 	import DateInput from '#lib/components/ui/DateInput.svelte';
 	import NumberInput from '#lib/components/ui/NumberInput.svelte';
 

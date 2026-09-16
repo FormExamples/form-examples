@@ -3,7 +3,7 @@
 	import { page } from '$app/state';
 	import { store } from '#lib/stores/checklist.svelte.js';
 	import { statusLabel, statusColor, urgencyLabel, priorityColor } from '#lib/checklist/labels.js';
-	import { Button } from "lily-design-system-svelte-headless";
+	import { Button } from "@lilydesignsystem/svelte-headless";
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(store.data);

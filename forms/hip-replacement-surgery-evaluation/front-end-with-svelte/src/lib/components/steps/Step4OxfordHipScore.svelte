@@ -4,7 +4,7 @@
 	// item concepts and the licensing note on the instrument's wording.
 	import Field from '#lib/components/ui/Field.svelte';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import { RadioGroup } from "lily-design-system-svelte-headless";
+	import { RadioGroup } from "@lilydesignsystem/svelte-headless";
 	import { OHS_ITEMS } from '#lib/config/ohs-items.js';
 	import { evaluationStore } from '#lib/stores/evaluation.svelte.js';
 

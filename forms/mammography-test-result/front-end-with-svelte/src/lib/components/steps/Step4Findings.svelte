@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Field from '#lib/components/ui/Field.svelte';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import { CheckboxGroup, CheckboxInput, TextAreaInput } from "lily-design-system-svelte-headless";
+	import { CheckboxGroup, CheckboxInput, TextAreaInput } from "@lilydesignsystem/svelte-headless";
 	import { resultStore } from '#lib/stores/result.svelte.js';
 
 	const d = resultStore.data;

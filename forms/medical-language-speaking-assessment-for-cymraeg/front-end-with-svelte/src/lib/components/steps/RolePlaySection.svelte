@@ -2,7 +2,7 @@
 	import type { RolePlayContext } from '#lib/engine/types.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import { TextAreaInput, TextInput } from "lily-design-system-svelte-headless";
+	import { TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
 
 	let {
 		section,

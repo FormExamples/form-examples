@@ -3,7 +3,7 @@
 	// emitting Lily class names (radio-group, radio-input).
 	import type { YesNo } from '#lib/engine/types.js';
 	import Field from './Field.svelte';
-	import { RadioGroup } from "lily-design-system-svelte-headless";
+	import { RadioGroup } from "@lilydesignsystem/svelte-headless";
 
 	let {
 		label,

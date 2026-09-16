@@ -3,7 +3,7 @@
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
-	import { RadioGroup, TextAreaInput } from "lily-design-system-svelte-headless";
+	import { RadioGroup, TextAreaInput } from "@lilydesignsystem/svelte-headless";
 	import AllergyEntry from '#lib/components/ui/AllergyEntry.svelte';
 
 	const f = $state(assessment.data.foodAllergies);

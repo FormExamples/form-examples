@@ -3,7 +3,7 @@
 	import { SPAQ_OPTIONS } from '#lib/engine/sad-rules.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import { RadioGroup, TextAreaInput } from "lily-design-system-svelte-headless";
+	import { RadioGroup, TextAreaInput } from "@lilydesignsystem/svelte-headless";
 
 	const s = assessment.data.socialOccupational;
 	const yesNo = [

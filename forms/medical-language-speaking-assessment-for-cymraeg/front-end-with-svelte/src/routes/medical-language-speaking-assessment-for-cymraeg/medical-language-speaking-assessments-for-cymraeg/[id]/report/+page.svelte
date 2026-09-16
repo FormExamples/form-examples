@@ -4,7 +4,7 @@
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import { gradeLabel, gradeColor, isAtOrAboveClinicalThreshold } from '#lib/engine/utils.js';
 	import Badge from '#lib/components/ui/Badge.svelte';
-	import { Button } from "lily-design-system-svelte-headless";
+	import { Button } from "@lilydesignsystem/svelte-headless";
 
 	const plural = 'medical-language-speaking-assessments-for-cymraeg';
 

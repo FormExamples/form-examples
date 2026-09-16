@@ -3,7 +3,7 @@
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
-	import { RadioGroup } from "lily-design-system-svelte-headless";
+	import { RadioGroup } from "@lilydesignsystem/svelte-headless";
 
 	const f = assessment.data.familyPlanningGoals;
 

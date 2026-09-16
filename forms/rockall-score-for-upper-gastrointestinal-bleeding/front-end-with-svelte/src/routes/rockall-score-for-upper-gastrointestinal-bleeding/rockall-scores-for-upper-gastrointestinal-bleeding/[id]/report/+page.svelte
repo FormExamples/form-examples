@@ -17,7 +17,7 @@
 		stigmataLabel,
 		formatScore
 	} from '#lib/engine/utils.js';
-	import { Button } from "lily-design-system-svelte-headless";
+	import { Button } from "@lilydesignsystem/svelte-headless";
 
 	const plural = 'rockall-scores-for-upper-gastrointestinal-bleeding';
 

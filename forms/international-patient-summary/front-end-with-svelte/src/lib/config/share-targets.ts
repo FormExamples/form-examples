@@ -1,4 +1,4 @@
-import type { ShareTarget } from "lily-design-system-svelte-share-picker";
+import type { ShareTarget } from "@lilydesignsystem/svelte-share-picker";
 
 /**
  * The fleet's standard share destinations. Copy-to-clipboard is handled by

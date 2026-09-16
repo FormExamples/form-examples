@@ -4,7 +4,7 @@
 	// actually has — which of next month's lists are about to go ahead without
 	// the optimization they were promised?
 	import Alert from '#lib/components/ui/Alert.svelte';
-	import { Button, TextInput } from "lily-design-system-svelte-headless";
+	import { Button, TextInput } from "@lilydesignsystem/svelte-headless";
 	import Field from '#lib/components/ui/Field.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
 	import { sampleAssessments } from '#lib/data/sample-reports.js';

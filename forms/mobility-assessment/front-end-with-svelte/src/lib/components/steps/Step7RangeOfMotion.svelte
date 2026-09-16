@@ -3,7 +3,7 @@
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
-	import { TextAreaInput } from "lily-design-system-svelte-headless";
+	import { TextAreaInput } from "@lilydesignsystem/svelte-headless";
 
 	const rom = assessment.data.rangeOfMotion;
 

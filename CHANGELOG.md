@@ -16,6 +16,59 @@ for them.
 
 ## [Unreleased]
 
+### Changed
+
+- **Every `front-end-with-svelte/` moved off vendored Lily Svelte
+  components onto the real, published `@lilydesignsystem/svelte-*` pnpm
+  packages, fleet-wide (356/356 forms).** Reverses the "consumed as a
+  specification, no runtime dependency" model this repo had followed
+  since the Svelte stack was introduced: `@lilydesignsystem/svelte-headless`
+  is now a real `package.json` dependency, and every local
+  `src/lib/components/ui/<Name>.svelte` that faithfully mirrored a
+  headless-catalogue component (verified against the actual published
+  package, not just by name) was deleted in favour of
+  `import { Name } from "@lilydesignsystem/svelte-headless"` — typically
+  15-21 of the ~26 candidate components per form; the rest stay vendored
+  for real, documented reasons (`Form.svelte`'s `novalidate`,
+  `NumberInput.svelte`'s `null`-not-`undefined` default,
+  `Field.svelte`/`Fieldset.svelte`'s extra CSS class hooks). The four
+  header pickers (`ThemePicker`/`LocalePicker`/`TextSizePicker`/
+  `SharePicker`) are pnpm dependencies too, and are consolidated behind a
+  single new `<PickerBar>` component in 355/356 forms — the one
+  exception, `medical-language-speaking-assessment-for-cymraeg`, drives
+  the pickers through its own i18n store and keeps four separate tags
+  (now importing from the real packages rather than a vendored copy).
+  `SharePicker` gained six destinations via a new vendored
+  `share-targets.ts` per form — copy link, email, LinkedIn, Reddit,
+  Bluesky, Mastodon (mastodonshare.com) — replacing the previous
+  copy-link-only policy. New tool: `bin/svelte-lily-pnpm-migrate
+  --check|--apply`. Verified with a full `pnpm install` + `svelte-check`
+  + `vite build` sweep across all 356 forms (8-way parallel), not just a
+  sample. Retires `bin/svelte-helpers-picker-rename` (superseded, now a
+  no-op) and trims `bin/test-vendored-uniformity`'s byte-identity check
+  to just the still-vendored `DateTimePicker.svelte`.
+- **The six packages above moved to the `@lilydesignsystem` npm scope**
+  the day after landing (`lily-design-system-svelte-*` → `@lilydesignsystem/
+  svelte-*`), matching upstream's own package move; confirmed
+  content-identical before renaming — a pure package-name change, not a
+  behavioural one. New tool: `bin/svelte-lily-scope-rename
+  --check|--apply`. Also applied to `formexamples.github.io/`'s own,
+  separate npm dependency on three of the six packages (its Lily theming
+  refactor, recorded further down this file).
+  - Found and fixed a real, latent bug this rename exposed: `@svar-ui/
+    svelte-core@2.6.0` (pulled in transitively by `@svar-ui/svelte-grid`,
+    used for every SVAR dashboard) ships a `ColorBoard.svelte` with a
+    stray `import { Button } from "lily-design-system-svelte-headless"`
+    — upstream's own mistake, fixed in `2.6.1`. It only ever resolved
+    because our own unrelated dependency on that exact package name
+    happened to satisfy it; removing that dependency during the scope
+    rename exposed the break for the 2/319 SVAR-dashboard forms whose
+    bundle actually reaches `ColorBoard.svelte`. Fixed fleet-wide with a
+    `pnpm.overrides` pin to `@svar-ui/svelte-core@^2.6.1` in all 319
+    forms using `@svar-ui/svelte-grid`, not just the 2 currently
+    affected — any other form could hit the same landmine the day its
+    dashboard starts using whatever SVAR feature pulls in `ColorBoard`.
+
 ### Security
 
 - **Cleared all 713 open Dependabot alerts fleet-wide (2 high, 711

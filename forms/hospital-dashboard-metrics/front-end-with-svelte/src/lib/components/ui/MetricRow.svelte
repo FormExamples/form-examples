@@ -6,7 +6,7 @@
   import { store } from '#lib/stores/metrics.svelte.js';
   import type { MetricDef } from '#lib/config/metrics.js';
   import NumberInput from './NumberInput.svelte';
-  import { TextInput } from "lily-design-system-svelte-headless";
+  import { TextInput } from "@lilydesignsystem/svelte-headless";
 
   let { metric }: { metric: MetricDef } = $props();
 

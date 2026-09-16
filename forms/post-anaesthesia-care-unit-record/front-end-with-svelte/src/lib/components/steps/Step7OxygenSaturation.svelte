@@ -4,7 +4,7 @@
 	import { scoreColor } from '#lib/engine/utils.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import { RadioGroup } from "lily-design-system-svelte-headless";
+	import { RadioGroup } from "@lilydesignsystem/svelte-headless";
 
 	const s = assessment.data.oxygenSaturation;
 	const options = ALDRETE_OPTIONS.oxygenSaturation;

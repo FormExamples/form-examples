@@ -5,7 +5,7 @@
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
-	import { CheckboxInput, TextAreaInput } from "lily-design-system-svelte-headless";
+	import { CheckboxInput, TextAreaInput } from "@lilydesignsystem/svelte-headless";
 
 	const o = assessment.data.observations;
 	const grade = $derived(calculateCamGrade(assessment.data));

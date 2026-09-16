@@ -3,7 +3,7 @@
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
 	import NumberInput from '#lib/components/ui/NumberInput.svelte';
-	import { TextAreaInput, TextInput } from "lily-design-system-svelte-headless";
+	import { TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
 	import { ESAS_ITEMS, classifyESASTotal, severityBandLabel } from '#lib/engine/utils.js';
 	import type { ESASSymptomKey } from '#lib/engine/types.js';
 

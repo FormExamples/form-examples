@@ -5,7 +5,7 @@
 	//   'yes' Demonstrated · 'no' Not yet · 'na' Not assessed.
 	// Built from the Lily Svelte headless Field and RadioGroup contracts.
 	import Field from '#lib/components/ui/Field.svelte';
-	import { RadioGroup } from "lily-design-system-svelte-headless";
+	import { RadioGroup } from "@lilydesignsystem/svelte-headless";
 	import type { TriState } from '#lib/engine/types.js';
 
 	let {

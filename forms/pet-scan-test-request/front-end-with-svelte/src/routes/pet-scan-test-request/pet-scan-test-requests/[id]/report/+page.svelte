@@ -3,7 +3,7 @@
 	import { page } from '$app/state';
 	import { request } from '#lib/stores/request.svelte.js';
 	import Badge from '#lib/components/ui/Badge.svelte';
-	import { Button } from "lily-design-system-svelte-headless";
+	import { Button } from "@lilydesignsystem/svelte-headless";
 	import Alert from '#lib/components/ui/Alert.svelte';
 	import {
 		scanTypeLabel,

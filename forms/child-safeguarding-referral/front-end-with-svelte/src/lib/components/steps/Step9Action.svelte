@@ -5,7 +5,7 @@
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
 	import Badge from '#lib/components/ui/Badge.svelte';
-	import { RadioGroup, TextAreaInput } from "lily-design-system-svelte-headless";
+	import { RadioGroup, TextAreaInput } from "@lilydesignsystem/svelte-headless";
 
 	const a = assessment.data.action;
 	const grade = $derived(calculateSafeguardingGrade(assessment.data));

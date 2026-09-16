@@ -15,7 +15,7 @@
 		sexLabel,
 		ageBandLabel
 	} from '#lib/engine/utils.js';
-	import { Button } from "lily-design-system-svelte-headless";
+	import { Button } from "@lilydesignsystem/svelte-headless";
 
 	const plural = 'waterlow-pressure-ulcer-risk-assessments';
 

@@ -9,12 +9,13 @@ plus a fifth, `DateTimePicker`.
 are real pnpm dependencies, not vendored copies.** `bin/svelte-lily-pnpm-migrate`
 replaced every form's `src/lib/components/ui/{Name}Picker.svelte` (and the
 companion `locales.ts` data file) with a `package.json` dependency on the
-published `lily-design-system-svelte-theme-picker` / `-locale-picker` /
-`-text-size-picker` / `-share-picker` packages, and — in every form whose
-header wiring matched the fleet's standard four-picker block (355/356) —
-consolidated the four separate components behind a fifth package,
-`lily-design-system-svelte-picker-bar`, imported as `PickerBar` in each
-form's root `+layout.svelte`. The one exception,
+published `@lilydesignsystem/svelte-theme-picker` / `-locale-picker` /
+`-text-size-picker` / `-share-picker` packages (published unscoped for one
+day, then moved to the `@lilydesignsystem` npm scope the same day — see
+History), and — in every form whose header wiring matched the fleet's
+standard four-picker block (355/356) — consolidated the four separate
+components behind a fifth package, `@lilydesignsystem/svelte-picker-bar`,
+imported as `PickerBar` in each form's root `+layout.svelte`. The one exception,
 `medical-language-speaking-assessment-for-cymraeg`, drives the pickers
 through its own i18n store and keeps four separate `<ThemePicker>`/etc.
 tags — now importing from the real packages, just not consolidated.
@@ -31,7 +32,7 @@ pinned checkout at apply time. See
 the consumption model.
 
 This is a separate contract from [`lily-svelte-version.md`](lily-svelte-version.md)
-(the generic `lily-design-system-svelte-headless` component family, snapshotted
+(the generic `@lilydesignsystem/svelte-headless` component family, snapshotted
 into [`lily-svelte-spec/`](lily-svelte-spec/), including its own unrelated
 `theme-select`/`theme-select-option` catalog components — those were NOT
 renamed by the helpers' renames below, and never shared more than a
@@ -44,14 +45,15 @@ now pinned by `package.json` semver range, like any other npm dependency —
 there is no checkout commit to record for them any more. `DateTimePicker`
 stays vendor-only and is still pinned by upstream commit.
 
-| Field                                        | Value    |
-| --------------------------------------------- | -------- |
-| `lily-design-system-svelte-theme-picker`      | `^0.1.1` |
-| `lily-design-system-svelte-locale-picker`     | `^0.1.1` |
-| `lily-design-system-svelte-text-size-picker`  | `^0.1.1` |
-| `lily-design-system-svelte-share-picker`      | `^0.1.1` |
-| `lily-design-system-svelte-picker-bar`        | `^0.1.0` |
-| Date migrated to pnpm dependencies            | 2026-09-16 |
+| Field                                              | Value    |
+| --------------------------------------------------- | -------- |
+| `@lilydesignsystem/svelte-theme-picker`             | `^0.1.0` |
+| `@lilydesignsystem/svelte-locale-picker`            | `^0.1.0` |
+| `@lilydesignsystem/svelte-text-size-picker`         | `^0.1.0` |
+| `@lilydesignsystem/svelte-share-picker`             | `^0.1.0` |
+| `@lilydesignsystem/svelte-picker-bar`               | `^0.1.0` |
+| Date migrated to pnpm dependencies                  | 2026-09-16 |
+| Date moved to the `@lilydesignsystem` npm scope     | 2026-09-17 |
 
 | Field         | Value                                                                                                                     |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------- |
@@ -79,11 +81,28 @@ that never existed under the new names.
 
 ## History
 
+- **2026-09-17 — moved to the `@lilydesignsystem` npm scope.** Upstream
+  republished all six packages under `@lilydesignsystem/svelte-{headless,
+  theme-picker,locale-picker,text-size-picker,share-picker,picker-bar}`,
+  resetting every version to `0.1.0` (the unscoped names had no history to
+  imply carrying forward, same rationale as the earlier `*-chooser` →
+  `*-picker` rename). Confirmed content-identical before renaming (e.g.
+  `svelte-headless`'s `Button.svelte` diffs empty; `PickerBar.svelte`'s
+  only change is its own internal imports of the four picker packages,
+  now scoped) — a pure package-name rename, not a behavioural change.
+  Every form's `package.json` dependency keys and every import statement
+  (including `medical-language-speaking-assessment-for-cymraeg`'s four
+  separate picker tags and every form's `share-targets.ts`) updated;
+  `formexamples.github.io/` (its own separate, npm-based dependency on
+  `theme-picker`/`text-size-picker`/`share-picker`, unrelated to the
+  `forms/` fleet) updated too. Tool: `bin/svelte-lily-scope-rename
+  --check|--apply`.
 - **2026-09-16 — moved off vendoring onto real pnpm dependencies, and
   consolidated the four pickers behind `PickerBar`.** Every form's
   `src/lib/components/ui/{Theme,Locale,TextSize,Share}Picker.svelte` (and
   `locales.ts`) deleted; `package.json` gets the four picker packages plus
-  `lily-design-system-svelte-picker-bar` as real dependencies. In every
+  `lily-design-system-svelte-picker-bar` (renamed the next day, above) as
+  real dependencies. In every
   form whose root `+layout.svelte` matched the fleet's standard
   four-picker header block (355/356), that block became a single
   `<PickerBar>`, fed a new `SHARE_TARGETS` array from a vendored

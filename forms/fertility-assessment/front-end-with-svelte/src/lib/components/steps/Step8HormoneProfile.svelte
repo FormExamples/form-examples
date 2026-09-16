@@ -3,7 +3,7 @@
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
 	import NumberInput from '#lib/components/ui/NumberInput.svelte';
-	import { DateInput, TextAreaInput } from "lily-design-system-svelte-headless";
+	import { DateInput, TextAreaInput } from "@lilydesignsystem/svelte-headless";
 
 	const hp = assessment.data.hormoneProfile;
 </script>

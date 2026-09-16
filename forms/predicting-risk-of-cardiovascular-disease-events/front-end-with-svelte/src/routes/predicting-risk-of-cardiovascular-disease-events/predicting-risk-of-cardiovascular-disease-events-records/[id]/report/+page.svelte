@@ -3,7 +3,7 @@
 	import { page } from '$app/state';
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import { riskCategoryLabel, riskCategoryColor } from '#lib/engine/utils.js';
-	import { Button } from "lily-design-system-svelte-headless";
+	import { Button } from "@lilydesignsystem/svelte-headless";
 
 	const plural = 'predicting-risk-of-cardiovascular-disease-events-records';
 

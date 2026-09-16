@@ -3,13 +3,16 @@
 This monorepo's `front-end-*-with-svelte/` subprojects conform to the
 **Lily Design System Svelte headless** component contract.
 
-**As of 2026-09-16, `lily-design-system-svelte-headless` is a real pnpm
+**As of 2026-09-16, `@lilydesignsystem/svelte-headless` is a real pnpm
 dependency in every form**, not a specification consumed only at authoring
-time. `bin/svelte-lily-pnpm-migrate` compared each form's hand-authored
-`src/lib/components/ui/<Name>.svelte` against the published package
-(comment/quote-style-insensitive) and, for every one that was a faithful
-mirror, deleted the local file and rewrote its importers to
-`import { Name } from "lily-design-system-svelte-headless"`. A component
+time. (Published under the unscoped name `lily-design-system-svelte-headless`
+for one day, then moved to the `@lilydesignsystem` npm scope the same day —
+see the History note below; `bin/svelte-lily-scope-rename` did the rename
+fleet-wide.) `bin/svelte-lily-pnpm-migrate` compared each form's
+hand-authored `src/lib/components/ui/<Name>.svelte` against the published
+package (comment/quote-style-insensitive) and, for every one that was a
+faithful mirror, deleted the local file and rewrote its importers to
+`import { Name } from "@lilydesignsystem/svelte-headless"`. A component
 whose local copy had genuinely diverged — for a real reason, not just
 formatting — is left vendored and untouched:
 
@@ -41,9 +44,9 @@ picker family's own (larger) pnpm migration.
 
 | Field            | Value                                                                  |
 |------------------|------------------------------------------------------------------------|
-| Repository       | `lilydesignsystem/lily-design-system` (subdir `lily-design-system-svelte-headless`) |
+| Repository       | `lilydesignsystem/lily-design-system` (subdir `lily-design-system-svelte-headless` — the git subdirectory name is unchanged by the npm scope move) |
 | Pinned commit    | `a89961e8f`                                                             |
-| npm version depended on | `^0.3.1` |
+| npm package depended on | `@lilydesignsystem/svelte-headless` `^0.1.0` |
 | Date pinned      | 2026-08-31                                                              |
 | Snapshot         | [`lily-svelte-spec/`](lily-svelte-spec/) — one subdirectory per component |
 

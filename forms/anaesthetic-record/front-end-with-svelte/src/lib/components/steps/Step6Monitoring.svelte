@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import { CheckboxGroup } from "lily-design-system-svelte-headless";
+	import { CheckboxGroup } from "@lilydesignsystem/svelte-headless";
 
 	const m = $state(assessment.data.monitoring);
 

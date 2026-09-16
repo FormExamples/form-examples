@@ -4,7 +4,7 @@
 	// the dietitian overrode the composite risk category.
 	import { page } from '$app/state';
 	import Alert from '#lib/components/ui/Alert.svelte';
-	import { Button, Panel } from "lily-design-system-svelte-headless";
+	import { Button, Panel } from "@lilydesignsystem/svelte-headless";
 	import {
 		COMPOSITE_RISK_LABELS,
 		GLIM_DIAGNOSIS_LABELS,

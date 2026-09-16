@@ -4,7 +4,7 @@
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import { calculateAge, combinedSeverityColor, spaqBandColor, phq9BandColor } from '#lib/engine/utils.js';
 	import { combinedSeverityLabel, spaqBandLabel, phq9BandLabel } from '#lib/engine/sad-rules.js';
-	import { Button } from "lily-design-system-svelte-headless";
+	import { Button } from "@lilydesignsystem/svelte-headless";
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(assessment.data);

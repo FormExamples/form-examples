@@ -1,7 +1,7 @@
 <script lang="ts">
 	// A single Braden Scale subscale rendered as a stacked radio group. Each
 	// option carries a numeric value plus a short title and a full description.
-	import { RadioGroup } from "lily-design-system-svelte-headless";
+	import { RadioGroup } from "@lilydesignsystem/svelte-headless";
 
 	let {
 		name,

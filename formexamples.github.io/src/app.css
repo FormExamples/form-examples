@@ -46,7 +46,7 @@ a:hover {
 	opacity: 0.85;
 }
 
-/* lily-design-system-svelte-theme-picker / text-size-picker / share-picker
+/* @lilydesignsystem/svelte-theme-picker / text-size-picker / share-picker
  * ship no CSS by design — the host owns the visual style. This is a compact,
  * hand-authored style for the three header controls, shared across all three
  * (identical shape: icon button + APG listbox), matching the class hooks

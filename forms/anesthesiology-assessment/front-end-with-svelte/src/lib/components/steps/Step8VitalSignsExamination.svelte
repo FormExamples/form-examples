@@ -5,7 +5,7 @@
 	import Field from '#lib/components/ui/Field.svelte';
 	import NumberInput from '#lib/components/ui/NumberInput.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
-	import { CheckboxInput } from "lily-design-system-svelte-headless";
+	import { CheckboxInput } from "@lilydesignsystem/svelte-headless";
 	import YesNoField from '#lib/components/ui/YesNoField.svelte';
 
 	const v = assessment.data.vitalSigns;

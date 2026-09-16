@@ -9,7 +9,7 @@
 	import { countSelectedMarkers } from '#lib/engine/markers.js';
 
 	import Form from '#lib/components/ui/Form.svelte';
-	import { Button, ErrorSummary, Progress } from "lily-design-system-svelte-headless";
+	import { Button, ErrorSummary, Progress } from "@lilydesignsystem/svelte-headless";
 	import StepList from '#lib/components/ui/StepList.svelte';
 	import StepListItem from '#lib/components/ui/StepListItem.svelte';
 

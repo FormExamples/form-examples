@@ -8,7 +8,7 @@
 	import { parseMarkdown } from '#lib/report/parse-markdown.js';
 
 	import Form from '#lib/components/ui/Form.svelte';
-	import { Button } from "lily-design-system-svelte-headless";
+	import { Button } from "@lilydesignsystem/svelte-headless";
 	import Progress from '#lib/components/ui/Progress.svelte';
 	import StepList from '#lib/components/ui/StepList.svelte';
 	import StepListItem from '#lib/components/ui/StepListItem.svelte';

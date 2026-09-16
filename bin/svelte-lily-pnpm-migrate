@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 """bin/svelte-lily-pnpm-migrate -- migrate every form's `front-end-with-svelte/`
 off the vendored Lily Svelte component copies and onto the real, published
-pnpm packages:
+pnpm packages, under the `@lilydesignsystem` npm scope (renamed there
+2026-09; see bin/svelte-lily-scope-rename for the from-unscoped rename this
+tool's own constants already assume for a fresh migration):
 
-  lily-design-system-svelte-headless      (the full headless catalogue)
-  lily-design-system-svelte-theme-picker
-  lily-design-system-svelte-locale-picker
-  lily-design-system-svelte-text-size-picker
-  lily-design-system-svelte-share-picker
-  lily-design-system-svelte-picker-bar    (bundles the four pickers above)
+  @lilydesignsystem/svelte-headless      (the full headless catalogue)
+  @lilydesignsystem/svelte-theme-picker
+  @lilydesignsystem/svelte-locale-picker
+  @lilydesignsystem/svelte-text-size-picker
+  @lilydesignsystem/svelte-share-picker
+  @lilydesignsystem/svelte-picker-bar    (bundles the four pickers above)
 
 This reverses the "consumed as a specification, no runtime dependency"
 model recorded in `forms/lily-svelte-version.md` /
@@ -23,7 +25,7 @@ What changes per form (front-end-with-svelte/):
      headless-catalogue component 1:1 (verified by a comment/whitespace-
      insensitive diff against the real published package, not just a name
      match) is deleted; every file that imported it is rewritten to import
-     the named export from `lily-design-system-svelte-headless` instead
+     the named export from `@lilydesignsystem/svelte-headless` instead
      (multiple such imports in one file are consolidated into a single
      import statement).
   3. The four picker components (`ThemePicker`/`LocalePicker`/
@@ -33,7 +35,7 @@ What changes per form (front-end-with-svelte/):
      them from their own packages. Where the wiring exactly matches the
      fleet's standard four-picker header block, that block is further
      consolidated into a single `<PickerBar>` from
-     `lily-design-system-svelte-picker-bar`, and a new
+     `@lilydesignsystem/svelte-picker-bar`, and a new
      `src/lib/config/share-targets.ts` is vendored with six destinations:
      copy link, email, LinkedIn, Reddit, Bluesky, Mastodon (mastodonshare.com).
      A form whose header wiring doesn't match the standard block (i.e. it
@@ -80,26 +82,27 @@ DEFAULT_REF_DIR = Path(
 )
 
 DEPENDENCIES = {
-    "lily-design-system-svelte-headless": "^0.3.1",
-    "lily-design-system-svelte-theme-picker": "^0.1.1",
-    "lily-design-system-svelte-locale-picker": "^0.1.1",
-    "lily-design-system-svelte-text-size-picker": "^0.1.1",
-    "lily-design-system-svelte-share-picker": "^0.1.1",
-    "lily-design-system-svelte-picker-bar": "^0.1.0",
+    "@lilydesignsystem/svelte-headless": "^0.1.0",
+    "@lilydesignsystem/svelte-theme-picker": "^0.1.0",
+    "@lilydesignsystem/svelte-locale-picker": "^0.1.0",
+    "@lilydesignsystem/svelte-text-size-picker": "^0.1.0",
+    "@lilydesignsystem/svelte-share-picker": "^0.1.0",
+    "@lilydesignsystem/svelte-picker-bar": "^0.1.0",
 }
 
-# name -> reference-package directory prefix (matched by glob "<prefix>-*")
-HEADLESS_REF_PKG = "lily-design-system-svelte-headless"
+# name -> reference-package name (its extracted `npm pack` dir is found via
+# npm_pack_dir_prefix() below)
+HEADLESS_REF_PKG = "@lilydesignsystem/svelte-headless"
 PICKERS = {
-    "ThemePicker": "lily-design-system-svelte-theme-picker",
-    "LocalePicker": "lily-design-system-svelte-locale-picker",
-    "TextSizePicker": "lily-design-system-svelte-text-size-picker",
-    "SharePicker": "lily-design-system-svelte-share-picker",
+    "ThemePicker": "@lilydesignsystem/svelte-theme-picker",
+    "LocalePicker": "@lilydesignsystem/svelte-locale-picker",
+    "TextSizePicker": "@lilydesignsystem/svelte-text-size-picker",
+    "SharePicker": "@lilydesignsystem/svelte-share-picker",
 }
 
 CYMRAEG_SLUG = "medical-language-speaking-assessment-for-cymraeg"
 
-SHARE_TARGETS_TS = '''import type { ShareTarget } from "lily-design-system-svelte-share-picker";
+SHARE_TARGETS_TS = '''import type { ShareTarget } from "@lilydesignsystem/svelte-share-picker";
 
 /**
  * The fleet's standard share destinations. Copy-to-clipboard is handled by
@@ -160,8 +163,33 @@ def normalize(src: str) -> str:
     return re.sub(r" (/?>)", r"\1", src)
 
 
-def ref_component_path(ref_dir: Path, pkg_prefix: str, *parts: str) -> Path | None:
-    candidates = sorted(ref_dir.glob(f"{pkg_prefix}-*/package"))
+SKIP_DIR_NAMES = {"node_modules", ".svelte-kit", ".git", "build", "dist"}
+
+
+def source_files(front_end: Path, suffixes: tuple[str, ...] = (".svelte", ".ts")) -> list[Path]:
+    """Every .svelte/.ts file under front_end, without descending into
+    node_modules/.svelte-kit/etc -- rglob("*") would otherwise walk a
+    fully-installed form's entire dependency tree."""
+    import os
+
+    found = []
+    for dirpath, dirnames, filenames in os.walk(front_end):
+        dirnames[:] = [d for d in dirnames if d not in SKIP_DIR_NAMES]
+        for name in filenames:
+            if name.endswith(suffixes):
+                found.append(Path(dirpath) / name)
+    return sorted(found)
+
+
+def npm_pack_dir_prefix(pkg: str) -> str:
+    """The directory-name prefix `npm pack` gives an extracted tarball,
+    e.g. "@lilydesignsystem/svelte-headless" -> "lilydesignsystem-svelte-headless"
+    (leading "@" stripped, "/" replaced with "-")."""
+    return pkg.lstrip("@").replace("/", "-")
+
+
+def ref_component_path(ref_dir: Path, pkg_name: str, *parts: str) -> Path | None:
+    candidates = sorted(ref_dir.glob(f"{npm_pack_dir_prefix(pkg_name)}-*/package"))
     if not candidates:
         return None
     return candidates[-1].joinpath(*parts)
@@ -228,9 +256,7 @@ def rewrite_primitive_imports(
         r'''['"](?:[./#$][^'"]*/)?(?P=name)\.svelte['"];?[ \t]*\n''',
         re.MULTILINE,
     )
-    for path in sorted(front_end.rglob("*")):
-        if path.suffix not in (".svelte", ".ts") or not path.is_file():
-            continue
+    for path in source_files(front_end):
         if path.parent.name == "ui" and path.stem in migratable:
             continue  # the vendored file itself, about to be deleted
         text = path.read_text(encoding="utf-8")
@@ -250,7 +276,7 @@ def rewrite_primitive_imports(
         if not removed:
             continue
         names = ", ".join(sorted(set(removed)))
-        combined = f'{first_indent}import {{ {names} }} from "lily-design-system-svelte-headless";\n'
+        combined = f'{first_indent}import {{ {names} }} from "@lilydesignsystem/svelte-headless";\n'
         new_text = new_text[:first_pos] + combined + new_text[first_pos:]
         if apply:
             path.write_text(new_text, encoding="utf-8")
@@ -359,7 +385,9 @@ def detect_lib_import_style(text: str) -> str:
 
 
 def find_layout(front_end: Path) -> Path | None:
-    for p in front_end.rglob("+layout.svelte"):
+    for p in source_files(front_end, suffixes=(".svelte",)):
+        if p.name != "+layout.svelte":
+            continue
         if "ThemePicker" in p.read_text(encoding="utf-8"):
             return p
     return None
@@ -389,7 +417,7 @@ def rewrite_layout(front_end: Path, apply: bool, result: FormResult) -> None:
         new_text = COMBINED_PICKER_IMPORT_RE.sub(_collect_picker_import, new_text)
         if first_pos is not None:
             insertion = (
-                f'{first_indent}import PickerBar from "lily-design-system-svelte-picker-bar";\n'
+                f'{first_indent}import PickerBar from "@lilydesignsystem/svelte-picker-bar";\n'
                 f'{first_indent}import {{ SHARE_TARGETS }} from "{share_targets_import_path}";\n'
             )
             new_text = new_text[:first_pos] + insertion + new_text[first_pos:]

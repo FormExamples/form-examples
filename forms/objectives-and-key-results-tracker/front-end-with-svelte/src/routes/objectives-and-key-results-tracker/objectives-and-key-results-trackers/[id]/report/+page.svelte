@@ -3,7 +3,7 @@
 	import { page } from '$app/state';
 	import { formState } from '$stores/formState.svelte';
 	import { ragLabel, ragColor, flagPriorityColor } from '$engine/utils';
-	import { Button } from "lily-design-system-svelte-headless";
+	import { Button } from "@lilydesignsystem/svelte-headless";
 	import RagBadge from '#lib/components/ui/RagBadge.svelte';
 
 	const id = $derived(page.params.id ?? 'new');

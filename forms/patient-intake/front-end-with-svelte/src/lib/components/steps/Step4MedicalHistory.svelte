@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { CheckboxGroup, TextAreaInput } from "lily-design-system-svelte-headless";
+	import { CheckboxGroup, TextAreaInput } from "@lilydesignsystem/svelte-headless";
 	import Field from '#lib/components/ui/Field.svelte';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 

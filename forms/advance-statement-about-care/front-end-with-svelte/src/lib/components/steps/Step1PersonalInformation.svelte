@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { DateInput, EmailInput, TextInput } from "lily-design-system-svelte-headless";
+	import { DateInput, EmailInput, TextInput } from "@lilydesignsystem/svelte-headless";
 	import Field from '#lib/components/ui/Field.svelte';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 

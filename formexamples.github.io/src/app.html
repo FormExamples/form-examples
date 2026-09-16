@@ -7,13 +7,13 @@
     <meta name="description" content="356 medical-form reference implementations: clinical assessments, scoring engines, SQL, FHIR R5, SvelteKit and Rust." />
     <!-- Every theme's stylesheet is preloaded (one <link> per $lib/config/themes.ts
          entry, emitted from the root +layout.svelte's <svelte:head>) so
-         lily-design-system-svelte-theme-picker's runtime data-theme switch is
+         @lilydesignsystem/svelte-theme-picker's runtime data-theme switch is
          pure attribute mutation — no stylesheet fetch, ever, on toggle. -->
     <script>
       // Apply theme synchronously to prevent flash of wrong theme. This is
       // adapter-static (no server to read a cookie from), so the stored
       // preference (or prefers-color-scheme) is resolved client-side before
-      // first paint. lily-design-system-svelte-theme-picker re-derives and
+      // first paint. @lilydesignsystem/svelte-theme-picker re-derives and
       // owns this same value on mount (see Header.svelte).
       (function () {
         try {

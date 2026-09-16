@@ -2,7 +2,7 @@
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import { mfsItems } from '#lib/engine/mfs-rules.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import { RadioGroup } from "lily-design-system-svelte-headless";
+	import { RadioGroup } from "@lilydesignsystem/svelte-headless";
 
 	const m = assessment.data.mfs;
 </script>

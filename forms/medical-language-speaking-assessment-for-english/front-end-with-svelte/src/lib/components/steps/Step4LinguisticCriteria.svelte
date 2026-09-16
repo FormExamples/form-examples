@@ -3,7 +3,7 @@
 	import { linguisticTotal, LINGUISTIC_MAX } from '#lib/engine/utils.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import { RadioGroup } from "lily-design-system-svelte-headless";
+	import { RadioGroup } from "@lilydesignsystem/svelte-headless";
 
 	const d = assessment.data.linguisticCriteria;
 	const bands = [0, 1, 2, 3, 4, 5, 6];

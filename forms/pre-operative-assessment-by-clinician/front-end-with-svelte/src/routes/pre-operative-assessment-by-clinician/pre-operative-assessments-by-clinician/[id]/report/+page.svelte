@@ -3,7 +3,7 @@
   import { page } from '$app/state';
   import { store } from '#lib/stores/assessment.svelte.js';
   import FlagBanner from '#lib/components/ui/FlagBanner.svelte';
-  import { Button, Panel } from "lily-design-system-svelte-headless";
+  import { Button, Panel } from "@lilydesignsystem/svelte-headless";
   import Alert from '#lib/components/ui/Alert.svelte';
 
   const id = $derived(page.params.id ?? 'new');

@@ -3,7 +3,7 @@
 	import { criterionStatusColor, criterionStatusLabel } from '#lib/engine/utils.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import { RadioGroup } from "lily-design-system-svelte-headless";
+	import { RadioGroup } from "@lilydesignsystem/svelte-headless";
 
 	const c = assessment.data.criteria;
 	const yesNo = [

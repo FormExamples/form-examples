@@ -9,7 +9,7 @@
  * the same `--color-base-*` / `--color-primary*` naming and the same
  * `:root[data-theme="…"]` selector convention as every form's theme
  * catalogue, and is swapped at runtime by the published
- * lily-design-system-svelte-theme-picker npm package (not a local copy).
+ * @lilydesignsystem/svelte-theme-picker npm package (not a local copy).
  *
  * This *is* the default theme: it applies both on bare `:root` (so a page
  * with no `data-theme` set yet still renders correctly) and on

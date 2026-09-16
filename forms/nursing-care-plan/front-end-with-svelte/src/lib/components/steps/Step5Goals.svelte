@@ -4,7 +4,7 @@
 	import type { Goal } from '#lib/engine/types.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
-	import { TextAreaInput, TextInput } from "lily-design-system-svelte-headless";
+	import { TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
 	import ListEditor from '#lib/components/ui/ListEditor.svelte';
 
 	const data = assessment.data;

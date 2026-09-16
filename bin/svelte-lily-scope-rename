@@ -1,0 +1,177 @@
+#!/usr/bin/env python3
+"""bin/svelte-lily-scope-rename -- one-shot: rename the six Lily Svelte
+pnpm dependencies from their original unscoped npm names to their new
+`@lilydesignsystem` scoped names, matching upstream's package move.
+
+  lily-design-system-svelte-headless          -> @lilydesignsystem/svelte-headless
+  lily-design-system-svelte-theme-picker      -> @lilydesignsystem/svelte-theme-picker
+  lily-design-system-svelte-locale-picker     -> @lilydesignsystem/svelte-locale-picker
+  lily-design-system-svelte-text-size-picker  -> @lilydesignsystem/svelte-text-size-picker
+  lily-design-system-svelte-share-picker      -> @lilydesignsystem/svelte-share-picker
+  lily-design-system-svelte-picker-bar        -> @lilydesignsystem/svelte-picker-bar
+
+Verified against the published packages before writing this tool: the
+scoped 0.1.0 releases are byte-identical to the unscoped versions
+bin/svelte-lily-pnpm-migrate depended on (headless's Button.svelte, e.g.,
+diffs empty; PickerBar.svelte's only change is its own internal imports
+of the four picker packages, now scoped) -- a pure package-name rename,
+not a behavioural change. All six reset to 0.1.0 under the new scope, so
+every form's `package.json` also gets the version range bumped to
+`^0.1.0` (down from headless's prior `^0.3.1` and the pickers' `^0.1.1`).
+
+This is a plain string substitution -- unlike bin/svelte-lily-pnpm-migrate,
+there is no component-content diffing to do here, because the rename
+touches only the module-specifier string in `package.json` and import
+statements, never component source. Runs across every place that string
+can appear:
+  - package.json `dependencies` keys
+  - `import ... from "<old-name>"` / `from '<old-name>'` in any .svelte/.ts
+    file (named or default import, single or double quotes) -- covers the
+    consolidated `<PickerBar>` forms, the one form that kept four separate
+    pickers (medical-language-speaking-assessment-for-cymraeg), and every
+    step file with a headless named import
+  - the vendored `src/lib/config/share-targets.ts`'s `ShareTarget` type import
+
+Usage:
+  bin/svelte-lily-scope-rename --check   # CI drift check (no writes)
+  bin/svelte-lily-scope-rename --apply   # write changes
+  bin/svelte-lily-scope-rename --apply --all
+  bin/svelte-lily-scope-rename --apply <slug>...
+
+Idempotent: re-running after a full --apply makes no further changes.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS_DIR = REPO_ROOT / "forms"
+
+RENAMES = {
+    "lily-design-system-svelte-headless": "@lilydesignsystem/svelte-headless",
+    "lily-design-system-svelte-theme-picker": "@lilydesignsystem/svelte-theme-picker",
+    "lily-design-system-svelte-locale-picker": "@lilydesignsystem/svelte-locale-picker",
+    "lily-design-system-svelte-text-size-picker": "@lilydesignsystem/svelte-text-size-picker",
+    "lily-design-system-svelte-share-picker": "@lilydesignsystem/svelte-share-picker",
+    "lily-design-system-svelte-picker-bar": "@lilydesignsystem/svelte-picker-bar",
+}
+NEW_VERSION = "^0.1.0"
+
+_OLD_NAME_PATTERN = "|".join(re.escape(n) for n in RENAMES)
+IMPORT_STRING_RE = re.compile(r"""(['"])(""" + _OLD_NAME_PATTERN + r""")(['"])""")
+
+
+def rewrite_source_text(text: str) -> str:
+    def _sub(m: re.Match) -> str:
+        return f"{m.group(1)}{RENAMES[m.group(2)]}{m.group(3)}"
+
+    return IMPORT_STRING_RE.sub(_sub, text)
+
+
+def process_package_json(front_end: Path, apply: bool) -> bool:
+    path = front_end / "package.json"
+    if not path.is_file():
+        return False
+    data = json.loads(path.read_text(encoding="utf-8"))
+    deps = data.get("dependencies")
+    if not deps:
+        return False
+    changed = False
+    for old_name, new_name in RENAMES.items():
+        if old_name in deps:
+            del deps[old_name]
+            deps[new_name] = NEW_VERSION
+            changed = True
+        elif new_name in deps and deps[new_name] != NEW_VERSION:
+            deps[new_name] = NEW_VERSION
+            changed = True
+    if changed and apply:
+        path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+    return changed
+
+
+SKIP_DIR_NAMES = {"node_modules", ".svelte-kit", ".git", "build", "dist"}
+
+
+def _source_files(front_end: Path):
+    import os
+
+    for dirpath, dirnames, filenames in os.walk(front_end):
+        dirnames[:] = [d for d in dirnames if d not in SKIP_DIR_NAMES]
+        for name in filenames:
+            if name.endswith((".svelte", ".ts")):
+                yield Path(dirpath) / name
+
+
+def process_source_files(front_end: Path, apply: bool) -> list[Path]:
+    changed_files = []
+    for path in sorted(_source_files(front_end)):
+        text = path.read_text(encoding="utf-8")
+        new_text = rewrite_source_text(text)
+        if new_text != text:
+            changed_files.append(path)
+            if apply:
+                path.write_text(new_text, encoding="utf-8")
+    return changed_files
+
+
+def process_form(slug: str, apply: bool) -> tuple[bool, list[Path]]:
+    front_end = FORMS_DIR / slug / "front-end-with-svelte"
+    if not front_end.is_dir():
+        return False, []
+    pkg_changed = process_package_json(front_end, apply)
+    changed_files = process_source_files(front_end, apply)
+    return pkg_changed or bool(changed_files), changed_files
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Rename the six Lily Svelte pnpm dependencies to their "
+        "@lilydesignsystem-scoped npm names."
+    )
+    parser.add_argument("slugs", nargs="*", help="form slugs to process")
+    parser.add_argument("--all", action="store_true", help="process every form")
+    parser.add_argument("--check", action="store_true", help="report drift; exit non-zero if any")
+    parser.add_argument("--dry-run", action="store_true", help="report what would change")
+    args = parser.parse_args()
+
+    if args.all:
+        slugs = sorted(
+            p.name for p in FORMS_DIR.iterdir() if (p / "front-end-with-svelte").is_dir()
+        )
+    elif args.slugs:
+        slugs = args.slugs
+    else:
+        parser.error("give one or more slugs, or --all")
+
+    apply = not (args.check or args.dry_run)
+    changed_slugs: list[str] = []
+
+    for slug in slugs:
+        changed, _files = process_form(slug, apply)
+        if changed:
+            changed_slugs.append(slug)
+
+    if args.check:
+        if changed_slugs:
+            print(f"Lily scope-rename drift in {len(changed_slugs)}/{len(slugs)} form(s)")
+            for name in changed_slugs[:10]:
+                print(f"  {name}")
+            if len(changed_slugs) > 10:
+                print(f"  … and {len(changed_slugs) - 10} more")
+            return 1
+        print(f"Lily scope-rename complete in every form ({len(slugs)} forms)")
+        return 0
+
+    verb = "would rename" if args.dry_run else "renamed"
+    print(f"{len(changed_slugs)}/{len(slugs)} form(s) {verb}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -3,7 +3,7 @@
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
 	import YesNoQuestion from '#lib/components/ui/YesNoQuestion.svelte';
-	import { DateInput } from "lily-design-system-svelte-headless";
+	import { DateInput } from "@lilydesignsystem/svelte-headless";
 	import Alert from '#lib/components/ui/Alert.svelte';
 
 	const r = assessment.data.recentContact;

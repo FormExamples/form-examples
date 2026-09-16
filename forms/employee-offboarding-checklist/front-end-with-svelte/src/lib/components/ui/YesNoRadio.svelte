@@ -1,7 +1,7 @@
 <script lang="ts">
 	// YesNoRadio — a thin composition over the Lily RadioGroup contract for the
 	// Yes / No (/ N/A) confirmation fields that make up the offboarding checklist.
-	import { RadioGroup } from "lily-design-system-svelte-headless";
+	import { RadioGroup } from "@lilydesignsystem/svelte-headless";
 
 	let {
 		label,

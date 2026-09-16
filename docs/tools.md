@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-97 tools.
+99 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -68,6 +68,8 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/svelte-helpers-chooser-rename`](#svelte-helpers-chooser-rename)
 - [`bin/svelte-helpers-picker-rename`](#svelte-helpers-picker-rename)
 - [`bin/svelte-kit-3-theme-url-fix.py`](#svelte-kit-3-theme-url-fixpy)
+- [`bin/svelte-lily-pnpm-migrate`](#svelte-lily-pnpm-migrate)
+- [`bin/svelte-lily-scope-rename`](#svelte-lily-scope-rename)
 - [`bin/svelte-locale-select-refactor`](#svelte-locale-select-refactor)
 - [`bin/svelte-pnpm-workspace-fix`](#svelte-pnpm-workspace-fix)
 - [`bin/svelte-share-button-refactor`](#svelte-share-button-refactor)
@@ -2112,10 +2114,20 @@ Idempotent: re-running after a full --apply makes no further changes.
 <h2 id="svelte-helpers-picker-rename"><code>bin/svelte-helpers-picker-rename</code></h2>
 
 ```text
-bin/svelte-helpers-picker-rename -- rename the four Lily Svelte helper
-controls from their current *-chooser names to their new *-picker names,
-matching the upstream rename (lily-design-system-svelte-helpers commit
-"Rename *-chooser to *-picker to harmonize with Adobe").
+bin/svelte-helpers-picker-rename -- one-shot (superseded): rename the four
+Lily Svelte helper controls from their current *-chooser names to their new
+*-picker names, matching the upstream rename (lily-design-system-svelte-helpers
+commit "Rename *-chooser to *-picker to harmonize with Adobe").
+
+Superseded by bin/svelte-lily-pnpm-migrate (2026-09), which replaced every
+form's vendored copy of these four components with a real pnpm dependency
+on the published lily-design-system-svelte-{theme,locale,text-size,share}-picker
+packages (usually consolidated behind lily-design-system-svelte-picker-bar);
+see forms/lily-svelte-helpers-version.md. There is no vendored
+src/lib/components/ui/{Theme,Locale,TextSize,Share}Picker.svelte left to
+rename in almost any form, so this tool's --check now finds nothing to do
+fleet-wide (harmless) -- do not use it as a drift detector going forward,
+and do not resurrect the vendoring pattern it was written for.
 
   ThemeChooser.svelte    -> ThemePicker.svelte    (.theme-chooser*    -> .theme-picker*)
   LocaleChooser.svelte   -> LocalePicker.svelte   (.locale-chooser*   -> .locale-picker*)
@@ -2192,6 +2204,120 @@ the `sv migrate` codemod's own per-form task list — once confirmed resolved
 Usage:
   bin/svelte-kit-3-theme-url-fix.py --check          # CI drift detector
   bin/svelte-kit-3-theme-url-fix.py --apply          # rewrite in place
+```
+
+<h2 id="svelte-lily-pnpm-migrate"><code>bin/svelte-lily-pnpm-migrate</code></h2>
+
+```text
+bin/svelte-lily-pnpm-migrate -- migrate every form's `front-end-with-svelte/`
+off the vendored Lily Svelte component copies and onto the real, published
+pnpm packages, under the `@lilydesignsystem` npm scope (renamed there
+2026-09; see bin/svelte-lily-scope-rename for the from-unscoped rename this
+tool's own constants already assume for a fresh migration):
+
+  @lilydesignsystem/svelte-headless      (the full headless catalogue)
+  @lilydesignsystem/svelte-theme-picker
+  @lilydesignsystem/svelte-locale-picker
+  @lilydesignsystem/svelte-text-size-picker
+  @lilydesignsystem/svelte-share-picker
+  @lilydesignsystem/svelte-picker-bar    (bundles the four pickers above)
+
+This reverses the "consumed as a specification, no runtime dependency"
+model recorded in `forms/lily-svelte-version.md` /
+`forms/lily-svelte-helpers-version.md`: those packages are now real npm
+dependencies, and the local `src/lib/components/ui/` mirrors of components
+they cover are deleted rather than hand-maintained.
+
+What changes per form (front-end-with-svelte/):
+
+  1. `package.json` gets the six packages added to `dependencies`.
+  2. Every local `src/lib/components/ui/<Name>.svelte` that mirrors a
+     headless-catalogue component 1:1 (verified by a comment/whitespace-
+     insensitive diff against the real published package, not just a name
+     match) is deleted; every file that imported it is rewritten to import
+     the named export from `@lilydesignsystem/svelte-headless` instead
+     (multiple such imports in one file are consolidated into a single
+     import statement).
+  3. The four picker components (`ThemePicker`/`LocalePicker`/
+     `TextSizePicker`/`SharePicker`) are deleted from `components/ui/`
+     (along with the vendored `locales.ts` data file); every root
+     `+layout.svelte` that wires them individually is rewritten to import
+     them from their own packages. Where the wiring exactly matches the
+     fleet's standard four-picker header block, that block is further
+     consolidated into a single `<PickerBar>` from
+     `@lilydesignsystem/svelte-picker-bar`, and a new
+     `src/lib/config/share-targets.ts` is vendored with six destinations:
+     copy link, email, LinkedIn, Reddit, Bluesky, Mastodon (mastodonshare.com).
+     A form whose header wiring doesn't match the standard block (i.e. it
+     drives the pickers through custom logic, e.g.
+     medical-language-speaking-assessment-for-cymraeg's own i18n store)
+     keeps its four separate `<ThemePicker>`/etc. tags — now importing from
+     the real packages — and is reported as a manual-follow-up SKIP for the
+     PickerBar consolidation step only.
+
+`DateTimePicker.svelte` (vendored, unwired, a deliberate accessibility
+decision -- see lily-svelte-helpers-version.md) and every non-catalogue
+local component (StepNName.svelte, FormField.svelte, domain entities like
+MedicationEntry.svelte, etc.) are untouched.
+
+Diff-check reference: the real published packages, downloaded once via
+`npm pack` and cached under `<scratchpad>/lily-npm-ref/`. Pass
+--ref-dir to point at a different extraction (each package under
+`<name>-<version>/package/`).
+
+Usage:
+  bin/svelte-lily-pnpm-migrate <slug>...        # named forms
+  bin/svelte-lily-pnpm-migrate --all            # every form's Svelte front-end
+  bin/svelte-lily-pnpm-migrate --dry-run --all  # show what would change
+  bin/svelte-lily-pnpm-migrate --check --all    # CI drift check (non-zero on drift)
+
+Idempotent: once a form is migrated, the local ui/ files it deleted no
+longer exist, so re-running finds nothing left to migrate for it.
+```
+
+<h2 id="svelte-lily-scope-rename"><code>bin/svelte-lily-scope-rename</code></h2>
+
+```text
+bin/svelte-lily-scope-rename -- one-shot: rename the six Lily Svelte
+pnpm dependencies from their original unscoped npm names to their new
+`@lilydesignsystem` scoped names, matching upstream's package move.
+
+  lily-design-system-svelte-headless          -> @lilydesignsystem/svelte-headless
+  lily-design-system-svelte-theme-picker      -> @lilydesignsystem/svelte-theme-picker
+  lily-design-system-svelte-locale-picker     -> @lilydesignsystem/svelte-locale-picker
+  lily-design-system-svelte-text-size-picker  -> @lilydesignsystem/svelte-text-size-picker
+  lily-design-system-svelte-share-picker      -> @lilydesignsystem/svelte-share-picker
+  lily-design-system-svelte-picker-bar        -> @lilydesignsystem/svelte-picker-bar
+
+Verified against the published packages before writing this tool: the
+scoped 0.1.0 releases are byte-identical to the unscoped versions
+bin/svelte-lily-pnpm-migrate depended on (headless's Button.svelte, e.g.,
+diffs empty; PickerBar.svelte's only change is its own internal imports
+of the four picker packages, now scoped) -- a pure package-name rename,
+not a behavioural change. All six reset to 0.1.0 under the new scope, so
+every form's `package.json` also gets the version range bumped to
+`^0.1.0` (down from headless's prior `^0.3.1` and the pickers' `^0.1.1`).
+
+This is a plain string substitution -- unlike bin/svelte-lily-pnpm-migrate,
+there is no component-content diffing to do here, because the rename
+touches only the module-specifier string in `package.json` and import
+statements, never component source. Runs across every place that string
+can appear:
+  - package.json `dependencies` keys
+  - `import ... from "<old-name>"` / `from '<old-name>'` in any .svelte/.ts
+    file (named or default import, single or double quotes) -- covers the
+    consolidated `<PickerBar>` forms, the one form that kept four separate
+    pickers (medical-language-speaking-assessment-for-cymraeg), and every
+    step file with a headless named import
+  - the vendored `src/lib/config/share-targets.ts`'s `ShareTarget` type import
+
+Usage:
+  bin/svelte-lily-scope-rename --check   # CI drift check (no writes)
+  bin/svelte-lily-scope-rename --apply   # write changes
+  bin/svelte-lily-scope-rename --apply --all
+  bin/svelte-lily-scope-rename --apply <slug>...
+
+Idempotent: re-running after a full --apply makes no further changes.
 ```
 
 <h2 id="svelte-locale-select-refactor"><code>bin/svelte-locale-select-refactor</code></h2>
@@ -2664,15 +2790,24 @@ bin/test-vendored-uniformity — verify vendored assets are byte-identical
 across every form.
 
 The fleet vendors several asset sets per form that must be identical
-everywhere: the 45-stylesheet Lily theme catalogue in each front-end, and the
-five Lily Svelte helper components plus their locales companion. The tools
-that re-sync them (bin/svelte-theme-css-sync, bin/html-theme-locale-select-
-refactor, bin/svelte-helpers-picker-rename) compare against the local Lily
-checkout, which CI does not have — so this gate proves the CI-checkable half
-of the same invariant: every form carries the SAME bytes as the rest of the
-fleet. Upstream currency (fleet vs the pinned checkout) remains the
-maintainer-run half, guarded locally by those tools' --check modes and
-bin/lib/lily_pin.py.
+everywhere: the 45-stylesheet Lily theme catalogue in each front-end, and
+(Svelte side) the one still-vendored Lily Svelte helper component,
+DateTimePicker.svelte. The tools that re-sync them (bin/svelte-theme-css-sync,
+bin/html-theme-locale-select-refactor, bin/svelte-date-time-picker-vendor)
+compare against the local Lily checkout, which CI does not have — so this
+gate proves the CI-checkable half of the same invariant: every form carries
+the SAME bytes as the rest of the fleet. Upstream currency (fleet vs the
+pinned checkout) remains the maintainer-run half, guarded locally by those
+tools' --check modes and bin/lib/lily_pin.py.
+
+ThemePicker/LocalePicker/TextSizePicker/SharePicker (and their locales.ts
+data companion) were vendored copies until bin/svelte-lily-pnpm-migrate
+(2026-09) replaced them fleet-wide with real pnpm dependencies on
+lily-design-system-svelte-{theme,locale,text-size,share}-picker (usually
+consolidated behind lily-design-system-svelte-picker-bar) — see
+forms/lily-svelte-helpers-version.md. There is nothing left to hash for
+them: every form now imports the same published package, which is a
+stronger uniformity guarantee than a byte-compare ever was.
 
 Checked per form:
   front-end-with-svelte/static/themes/*.css           (all 355 identical)
@@ -2680,8 +2815,7 @@ Checked per form:
       four THEME_COLLISION_SLUGS forms, whose page content collides with
       theme selectors and which bin/html-theme-locale-select-refactor
       deliberately skips — they are exempted here for the same reason)
-  front-end-with-svelte/src/lib/components/ui/{ThemePicker,LocalePicker,
-      TextSizePicker,SharePicker,DateTimePicker}.svelte and locales.ts
+  front-end-with-svelte/src/lib/components/ui/DateTimePicker.svelte
 
 The majority hash is the reference: any form whose copy differs from the
 fleet majority is reported. Exit is non-zero on any outlier.

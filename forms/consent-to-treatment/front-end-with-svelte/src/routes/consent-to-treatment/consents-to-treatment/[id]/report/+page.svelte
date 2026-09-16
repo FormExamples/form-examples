@@ -3,7 +3,7 @@
 	import { page } from '$app/state';
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import { completenessColor, calculateAge } from '#lib/engine/utils.js';
-	import { Button, Panel } from "lily-design-system-svelte-headless";
+	import { Button, Panel } from "@lilydesignsystem/svelte-headless";
 	import Alert from '#lib/components/ui/Alert.svelte';
 
 	const id = $derived(page.params.id ?? 'new');

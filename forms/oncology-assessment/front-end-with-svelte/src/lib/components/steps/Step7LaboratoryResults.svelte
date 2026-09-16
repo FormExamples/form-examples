@@ -3,7 +3,7 @@
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
 	import NumberInput from '#lib/components/ui/NumberInput.svelte';
-	import { TextInput } from "lily-design-system-svelte-headless";
+	import { TextInput } from "@lilydesignsystem/svelte-headless";
 
 	const lab = assessment.data.laboratoryResults;
 </script>

@@ -2,7 +2,7 @@
 	// A single yes/no/unanswered checklist item built from Lily primitives:
 	// Field wraps a RadioGroup of RadioInputs plus an evidence TextAreaInput.
 	import Field from '#lib/components/ui/Field.svelte';
-	import { RadioGroup, RadioInput, TextAreaInput } from "lily-design-system-svelte-headless";
+	import { RadioGroup, RadioInput, TextAreaInput } from "@lilydesignsystem/svelte-headless";
 	import type { ChecklistItem as ChecklistItemType } from '#lib/engine/types.js';
 
 	let {

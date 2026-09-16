@@ -1,7 +1,7 @@
 <script lang="ts">
   import "../../app.css";
   import { page } from "$app/state";
-  import PickerBar from "lily-design-system-svelte-picker-bar";
+  import PickerBar from "@lilydesignsystem/svelte-picker-bar";
   import { SHARE_TARGETS } from "#lib/config/share-targets.js";
   import {
     THEME_OPTIONS,

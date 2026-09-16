@@ -3,7 +3,7 @@
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
 	import NumberInput from '#lib/components/ui/NumberInput.svelte';
-	import { TextAreaInput } from "lily-design-system-svelte-headless";
+	import { TextAreaInput } from "@lilydesignsystem/svelte-headless";
 	import { OPTIONS, YES_NO } from '#lib/config/options.js';
 	import { evaluationStore } from '#lib/stores/evaluation.svelte.js';
 

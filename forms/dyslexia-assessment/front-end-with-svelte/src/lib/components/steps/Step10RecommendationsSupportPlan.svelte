@@ -2,7 +2,7 @@
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import { CheckboxGroup, TextAreaInput, TextInput } from "lily-design-system-svelte-headless";
+	import { CheckboxGroup, TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
 	import RadioField from './RadioField.svelte';
 
 	const d = assessment.data.recommendationsSupportPlan;

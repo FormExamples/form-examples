@@ -2,7 +2,7 @@
 	// TriStateField — a labelled yes / no / N-A checklist item for the
 	// psychomotor examination, built from the Lily Field + RadioGroup contract.
 	import Field from '#lib/components/ui/Field.svelte';
-	import { RadioGroup } from "lily-design-system-svelte-headless";
+	import { RadioGroup } from "@lilydesignsystem/svelte-headless";
 	import type { TriState } from '#lib/engine/types.js';
 
 	let {

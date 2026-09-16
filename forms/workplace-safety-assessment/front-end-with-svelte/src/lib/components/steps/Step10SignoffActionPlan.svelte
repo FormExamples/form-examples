@@ -2,7 +2,7 @@
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import { Button, DateInput, TextAreaInput, TextInput } from "lily-design-system-svelte-headless";
+	import { Button, DateInput, TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
 	import Select from '#lib/components/ui/Select.svelte';
 	import YesNoNA from '#lib/components/ui/YesNoNA.svelte';
 	import type { ActionPlanItem } from '#lib/engine/types.js';

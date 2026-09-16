@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Field from '#lib/components/ui/Field.svelte';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import { DateInput, TextInput } from "lily-design-system-svelte-headless";
+	import { DateInput, TextInput } from "@lilydesignsystem/svelte-headless";
 	import { requestStore } from '#lib/stores/request.svelte.js';
 
 	const d = requestStore.data.clinician;

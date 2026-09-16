@@ -4,7 +4,7 @@
 	// flags are printed whether or not the clinician overrode the candidacy.
 	import { page } from '$app/state';
 	import Alert from '#lib/components/ui/Alert.svelte';
-	import { Button, Panel } from "lily-design-system-svelte-headless";
+	import { Button, Panel } from "@lilydesignsystem/svelte-headless";
 	import { OHS_ITEMS } from '#lib/config/ohs-items.js';
 	import { CANDIDACY_LABELS, OHS_CATEGORY_LABELS } from '#lib/engine/grader.js';
 	import { titleCase } from '#lib/engine/utils.js';

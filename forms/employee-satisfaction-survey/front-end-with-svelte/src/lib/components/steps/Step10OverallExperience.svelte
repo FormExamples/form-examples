@@ -3,7 +3,7 @@
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
-	import { RadioGroup, TextAreaInput } from "lily-design-system-svelte-headless";
+	import { RadioGroup, TextAreaInput } from "@lilydesignsystem/svelte-headless";
 	import LikertItem from '#lib/components/ui/LikertItem.svelte';
 	import { surveyItems, RETENTION_INTENT_OPTIONS } from '#lib/engine/rules.js';
 	import type { LikertValue } from '#lib/engine/types.js';

@@ -3,7 +3,7 @@
 	import { purposeOptions } from '#lib/engine/validation-rules.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import { RadioGroup, TextAreaInput } from "lily-design-system-svelte-headless";
+	import { RadioGroup, TextAreaInput } from "@lilydesignsystem/svelte-headless";
 
 	const p = assessment.data.purposeOfRelease;
 </script>

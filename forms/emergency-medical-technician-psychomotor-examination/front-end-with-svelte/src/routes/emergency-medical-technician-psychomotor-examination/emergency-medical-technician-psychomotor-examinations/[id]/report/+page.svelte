@@ -11,7 +11,7 @@
 		formatPercent,
 		candidateName
 	} from '#lib/engine/utils.js';
-	import { Button } from "lily-design-system-svelte-headless";
+	import { Button } from "@lilydesignsystem/svelte-headless";
 
 	const plural = 'emergency-medical-technician-psychomotor-examinations';
 

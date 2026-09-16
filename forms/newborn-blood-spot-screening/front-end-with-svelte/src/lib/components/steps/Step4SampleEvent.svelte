@@ -3,7 +3,7 @@
 	import { computeAgeAtSampleDays } from '#lib/engine/bloodspot-rules.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import { DateInput, TextAreaInput, TextInput } from "lily-design-system-svelte-headless";
+	import { DateInput, TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
 	import Select from '#lib/components/ui/Select.svelte';
 
 	const s = assessment.data.sampleEvent;

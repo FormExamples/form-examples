@@ -4,7 +4,7 @@
   import Field from '#lib/components/ui/Field.svelte';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
   import Select from '#lib/components/ui/Select.svelte';
-  import { TextInput } from "lily-design-system-svelte-headless";
+  import { TextInput } from "@lilydesignsystem/svelte-headless";
 </script>
 
 <Fieldset legend="Step 14 — Functional capacity and frailty">

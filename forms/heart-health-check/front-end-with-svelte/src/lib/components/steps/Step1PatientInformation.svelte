@@ -2,7 +2,7 @@
   import { assessment } from '#lib/stores/assessment.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { DateInput, EmailInput, TelInput, TextInput } from "lily-design-system-svelte-headless";
+  import { DateInput, EmailInput, TelInput, TextInput } from "@lilydesignsystem/svelte-headless";
 
   const d = assessment.data.patientInformation;
 </script>

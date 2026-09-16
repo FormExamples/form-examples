@@ -3,7 +3,7 @@
 	import { ISSUED_VIA_OPTIONS, PRACTICE_SETTINGS } from '#lib/engine/types.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import { DateInput, TextAreaInput } from "lily-design-system-svelte-headless";
+	import { DateInput, TextAreaInput } from "@lilydesignsystem/svelte-headless";
 	import Select from '#lib/components/ui/Select.svelte';
 	import YesNo from '#lib/components/ui/YesNo.svelte';
 
