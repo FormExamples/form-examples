@@ -8,7 +8,7 @@
 	// array from the store, so push/splice mutate reactive state in place and
 	// seeded rows reach the editor.
 	import type { Snippet } from 'svelte';
-	import Button from './Button.svelte';
+	import { Button } from "lily-design-system-svelte-headless";
 
 	let {
 		items = $bindable<T[]>([]),

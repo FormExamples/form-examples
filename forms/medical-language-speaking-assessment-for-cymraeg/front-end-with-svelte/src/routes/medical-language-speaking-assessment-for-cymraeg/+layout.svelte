@@ -1,10 +1,10 @@
 <script lang="ts">
     import "../../app.css";
     import { page } from "$app/state";
-    import ThemePicker from "#lib/components/ui/ThemePicker.svelte";
-    import LocalePicker from "#lib/components/ui/LocalePicker.svelte";
-    import TextSizePicker from "#lib/components/ui/TextSizePicker.svelte";
-    import SharePicker from "#lib/components/ui/SharePicker.svelte";
+    import ThemePicker from "lily-design-system-svelte-theme-picker";
+    import LocalePicker from "lily-design-system-svelte-locale-picker";
+    import TextSizePicker from "lily-design-system-svelte-text-size-picker";
+    import SharePicker from "lily-design-system-svelte-share-picker";
     import {
         THEME_OPTIONS,
         THEME_STORAGE_KEY,

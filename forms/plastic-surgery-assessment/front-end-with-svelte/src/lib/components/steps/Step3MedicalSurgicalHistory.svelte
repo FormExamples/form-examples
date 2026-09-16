@@ -3,8 +3,7 @@
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
-	import TextInput from '#lib/components/ui/TextInput.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import { RadioGroup, TextInput } from "lily-design-system-svelte-headless";
 
 	const d = assessment.data.medicalSurgicalHistory;
 	const yesNo = [

@@ -4,8 +4,7 @@
 	// whether or not the clinician overrode the readiness band.
 	import { page } from '$app/state';
 	import Alert from '#lib/components/ui/Alert.svelte';
-	import Button from '#lib/components/ui/Button.svelte';
-	import Panel from '#lib/components/ui/Panel.svelte';
+	import { Button, Panel } from "lily-design-system-svelte-headless";
 	import { DOMAIN_LABELS } from '#lib/engine/domain-rules.js';
 	import { GATE_DECISION_LABELS, READINESS_LABELS, STATUS_LABELS } from '#lib/engine/labels.js';
 	import { titleCase } from '#lib/engine/utils.js';

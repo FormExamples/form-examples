@@ -12,7 +12,7 @@
 	// banner (the draft stays); "Discard and start over" calls the caller's
 	// own reset handler rather than reimplementing clearing logic here.
 	import Alert from './Alert.svelte';
-	import Button from './Button.svelte';
+	import { Button } from "lily-design-system-svelte-headless";
 
 	let {
 		show = false,

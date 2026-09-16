@@ -11,8 +11,7 @@
 	} from '#lib/engine/utils.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import { RadioGroup, TextAreaInput } from "lily-design-system-svelte-headless";
 
 	const d = assessment.data.clinicalCommunication;
 	const bands = [0, 1, 2, 3];

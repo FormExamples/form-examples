@@ -1,20 +1,18 @@
 <script lang="ts">
     import "../../app.css";
     import { page } from "$app/state";
-    import ThemePicker from "#lib/components/ui/ThemePicker.svelte";
+    import PickerBar from "lily-design-system-svelte-picker-bar";
+    import { SHARE_TARGETS } from "#lib/config/share-targets.js";
     import {
         THEME_OPTIONS,
         THEME_STORAGE_KEY,
         DEFAULT_THEME,
     } from "#lib/config/themes.js";
-    import LocalePicker from "#lib/components/ui/LocalePicker.svelte";
     import {
         LOCALE_OPTIONS,
         LOCALE_STORAGE_KEY,
         DEFAULT_LOCALE,
     } from "#lib/config/locales.js";
-    import TextSizePicker from "#lib/components/ui/TextSizePicker.svelte";
-    import SharePicker from "#lib/components/ui/SharePicker.svelte";
     import {
         TEXT_SIZE_OPTIONS,
         TEXT_SIZE_STORAGE_KEY,
@@ -71,37 +69,23 @@
                     class={navClass("/general-surgery-waiting-list-cards")}
                     >Dashboard</a
                 >
-                <LocalePicker
-                    label="Language"
-                    class="ml-2"
-                    locales={localeValues}
-                    localeLabels={localeLabels}
-                    defaultValue={DEFAULT_LOCALE}
-                    storageKey={LOCALE_STORAGE_KEY}
-                />
-                <ThemePicker
-                    label="Theme"
-                    class="ml-2"
-                    themesUrl="/themes/"
-                    themes={themeValues}
-                    themeLabels={themeLabels}
-                    defaultValue={DEFAULT_THEME}
-                    storageKey={THEME_STORAGE_KEY}
-                />
-                <TextSizePicker
-                    label="Text size"
-                    class="ml-2"
-                    sizes={textSizeValues}
-                    sizeLabels={textSizeLabels}
-                    defaultValue={DEFAULT_TEXT_SIZE}
-                    storageKey={TEXT_SIZE_STORAGE_KEY}
-                />
-                <SharePicker
-                    label="Share this page"
-                    class="ml-2"
-                    copyLabel="Copy link"
-                    copiedLabel="Link copied"
-                    copyFailedLabel="Could not copy — copy it from the address bar"
+                <PickerBar
+                  class="ml-2"
+                  labels={{
+                    theme: "Theme",
+                    locale: "Language",
+                    textSize: "Text size",
+                    share: "Share this page",
+                  }}
+                  themesUrl="/themes/"
+                  themes={themeValues}
+                  themeProps={{ themeLabels, defaultValue: DEFAULT_THEME, storageKey: THEME_STORAGE_KEY }}
+                  locales={localeValues}
+                  localeProps={{ localeLabels, defaultValue: DEFAULT_LOCALE, storageKey: LOCALE_STORAGE_KEY }}
+                  sizes={textSizeValues}
+                  textSizeProps={{ sizeLabels: textSizeLabels, defaultValue: DEFAULT_TEXT_SIZE, storageKey: TEXT_SIZE_STORAGE_KEY }}
+                  shareTargets={SHARE_TARGETS}
+                  shareProps={{ copyLabel: "Copy Link", copiedLabel: "Link copied", copyFailedLabel: "Could not copy — copy it from the address bar" }}
                 />
             </div>
         </div>

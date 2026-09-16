@@ -3,7 +3,7 @@
 	import { aq10Questions, aq10ResponseOptions, aq10ScoringDirections } from '#lib/engine/aq10-rules.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import { RadioGroup } from "lily-design-system-svelte-headless";
 	import type { AQ10Score } from '#lib/engine/types.js';
 
 	const questionKeys = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10'] as const;

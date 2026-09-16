@@ -2,8 +2,7 @@
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
-	import DateInput from '#lib/components/ui/DateInput.svelte';
+	import { DateInput, RadioGroup } from "lily-design-system-svelte-headless";
 
 	const p = assessment.data.pregnancyTransfusion;
 	const yesNo = [

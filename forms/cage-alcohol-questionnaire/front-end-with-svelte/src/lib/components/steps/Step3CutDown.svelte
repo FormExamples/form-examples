@@ -4,7 +4,7 @@
 	import { pointColor } from '#lib/engine/utils.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import { RadioGroup } from "lily-design-system-svelte-headless";
 
 	const c = assessment.data.criteria;
 	const point = $derived(calculateCageGrade(assessment.data).cutDownPoint);

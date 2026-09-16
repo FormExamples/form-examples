@@ -5,7 +5,7 @@
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
 	import Badge from '#lib/components/ui/Badge.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import { TextAreaInput } from "lily-design-system-svelte-headless";
 
 	const n = assessment.data.note;
 	const grade = $derived(calculateQrisk3Grade(assessment.data));

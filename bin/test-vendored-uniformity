@@ -3,15 +3,24 @@
 across every form.
 
 The fleet vendors several asset sets per form that must be identical
-everywhere: the 45-stylesheet Lily theme catalogue in each front-end, and the
-five Lily Svelte helper components plus their locales companion. The tools
-that re-sync them (bin/svelte-theme-css-sync, bin/html-theme-locale-select-
-refactor, bin/svelte-helpers-picker-rename) compare against the local Lily
-checkout, which CI does not have — so this gate proves the CI-checkable half
-of the same invariant: every form carries the SAME bytes as the rest of the
-fleet. Upstream currency (fleet vs the pinned checkout) remains the
-maintainer-run half, guarded locally by those tools' --check modes and
-bin/lib/lily_pin.py.
+everywhere: the 45-stylesheet Lily theme catalogue in each front-end, and
+(Svelte side) the one still-vendored Lily Svelte helper component,
+DateTimePicker.svelte. The tools that re-sync them (bin/svelte-theme-css-sync,
+bin/html-theme-locale-select-refactor, bin/svelte-date-time-picker-vendor)
+compare against the local Lily checkout, which CI does not have — so this
+gate proves the CI-checkable half of the same invariant: every form carries
+the SAME bytes as the rest of the fleet. Upstream currency (fleet vs the
+pinned checkout) remains the maintainer-run half, guarded locally by those
+tools' --check modes and bin/lib/lily_pin.py.
+
+ThemePicker/LocalePicker/TextSizePicker/SharePicker (and their locales.ts
+data companion) were vendored copies until bin/svelte-lily-pnpm-migrate
+(2026-09) replaced them fleet-wide with real pnpm dependencies on
+lily-design-system-svelte-{theme,locale,text-size,share}-picker (usually
+consolidated behind lily-design-system-svelte-picker-bar) — see
+forms/lily-svelte-helpers-version.md. There is nothing left to hash for
+them: every form now imports the same published package, which is a
+stronger uniformity guarantee than a byte-compare ever was.
 
 Checked per form:
   front-end-with-svelte/static/themes/*.css           (all 355 identical)
@@ -19,8 +28,7 @@ Checked per form:
       four THEME_COLLISION_SLUGS forms, whose page content collides with
       theme selectors and which bin/html-theme-locale-select-refactor
       deliberately skips — they are exempted here for the same reason)
-  front-end-with-svelte/src/lib/components/ui/{ThemePicker,LocalePicker,
-      TextSizePicker,SharePicker,DateTimePicker}.svelte and locales.ts
+  front-end-with-svelte/src/lib/components/ui/DateTimePicker.svelte
 
 The majority hash is the reference: any form whose copy differs from the
 fleet majority is reported. Exit is non-zero on any outlier.
@@ -51,12 +59,7 @@ THEME_COLLISION_SLUGS = {
 
 UI = "front-end-with-svelte/src/lib/components/ui"
 FILE_SETS = [
-    (f"{UI}/ThemePicker.svelte", set()),
-    (f"{UI}/LocalePicker.svelte", set()),
-    (f"{UI}/TextSizePicker.svelte", set()),
-    (f"{UI}/SharePicker.svelte", set()),
     (f"{UI}/DateTimePicker.svelte", set()),
-    (f"{UI}/locales.ts", set()),
 ]
 DIR_SETS = [
     ("front-end-with-svelte/static/themes", set()),

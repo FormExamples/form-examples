@@ -3,7 +3,7 @@
 	// Field + RadioGroup contract. The bound value uses '' for unanswered,
 	// 'yes' | 'no' | 'na' otherwise. `id` is the stable input name/anchor id.
 	import Field from './Field.svelte';
-	import RadioGroup from './RadioGroup.svelte';
+	import { RadioGroup } from "lily-design-system-svelte-headless";
 	import type { YesNoNA } from '#lib/engine/types.js';
 
 	let {

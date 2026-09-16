@@ -1,8 +1,7 @@
 <script lang="ts">
 	import Field from '#lib/components/ui/Field.svelte';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import DateInput from '#lib/components/ui/DateInput.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import { DateInput, TextAreaInput } from "lily-design-system-svelte-headless";
 	import Select from '#lib/components/ui/Select.svelte';
 	import { request } from '#lib/stores/request.svelte.js';
 

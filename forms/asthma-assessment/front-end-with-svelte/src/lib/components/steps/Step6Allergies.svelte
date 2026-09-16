@@ -2,8 +2,7 @@
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import { RadioGroup, TextAreaInput } from "lily-design-system-svelte-headless";
 	import AllergyEntry from '#lib/components/ui/AllergyEntry.svelte';
 
 	const a = assessment.data.allergies;

@@ -4,8 +4,7 @@
 	// whether or not the assessor overrode the risk band.
 	import { page } from '$app/state';
 	import Alert from '#lib/components/ui/Alert.svelte';
-	import Button from '#lib/components/ui/Button.svelte';
-	import Panel from '#lib/components/ui/Panel.svelte';
+	import { Button, Panel } from "lily-design-system-svelte-headless";
 	import {
 		AUDIT_C_BAND_LABELS,
 		PARQ_CLEARANCE_LABELS,

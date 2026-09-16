@@ -5,7 +5,7 @@
 	import Field from '#lib/components/ui/Field.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
 	import NumberInput from '#lib/components/ui/NumberInput.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import { RadioGroup } from "lily-design-system-svelte-headless";
 
 	const f = assessment.data.feature4;
 	const ctx = assessment.data.context;

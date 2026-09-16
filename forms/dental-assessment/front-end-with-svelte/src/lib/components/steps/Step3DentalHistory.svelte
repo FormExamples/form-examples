@@ -2,9 +2,8 @@
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import DateInput from '#lib/components/ui/DateInput.svelte';
+	import { DateInput, RadioGroup } from "lily-design-system-svelte-headless";
 	import Select from '#lib/components/ui/Select.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
 
 	const d = assessment.data.dentalHistory;
 	const anxietyOptions = [

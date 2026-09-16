@@ -6,11 +6,9 @@
 	import { findSampleLpa } from '#lib/data/sample-reports.js';
 
 	import Form from '#lib/components/ui/Form.svelte';
-	import Button from '#lib/components/ui/Button.svelte';
-	import Progress from '#lib/components/ui/Progress.svelte';
+	import { Button, ErrorSummary, Progress } from "lily-design-system-svelte-headless";
 	import StepList from '#lib/components/ui/StepList.svelte';
 	import StepListItem from '#lib/components/ui/StepListItem.svelte';
-	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
 	import Step1Donor from '#lib/components/steps/Step1Donor.svelte';
 	import Step2Attorneys from '#lib/components/steps/Step2Attorneys.svelte';

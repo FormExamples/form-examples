@@ -2,10 +2,7 @@
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import TextInput from '#lib/components/ui/TextInput.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
-	import DateInput from '#lib/components/ui/DateInput.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import { DateInput, RadioGroup, TextAreaInput, TextInput } from "lily-design-system-svelte-headless";
 
 	const c = assessment.data.chiefComplaint;
 	const onsetOptions = [{ value: 'sudden', label: 'Sudden' }, { value: 'gradual', label: 'Gradual' }];

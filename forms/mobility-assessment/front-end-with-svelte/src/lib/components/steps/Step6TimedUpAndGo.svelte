@@ -3,8 +3,7 @@
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
 	import NumberInput from '#lib/components/ui/NumberInput.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
-	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import { RadioGroup, TextInput } from "lily-design-system-svelte-headless";
 	import Alert from '#lib/components/ui/Alert.svelte';
 
 	const t = assessment.data.timedUpAndGo;

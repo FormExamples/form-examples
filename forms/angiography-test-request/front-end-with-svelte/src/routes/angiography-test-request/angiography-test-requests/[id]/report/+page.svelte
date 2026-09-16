@@ -17,7 +17,7 @@
 		calculateAge
 	} from '$lib/engine/utils';
 	import Badge from '$lib/components/ui/Badge.svelte';
-	import Button from '$lib/components/ui/Button.svelte';
+	import { Button } from "lily-design-system-svelte-headless";
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(request.data);

@@ -3,9 +3,7 @@
   import type { Medication, Allergy } from "#lib/engine/types.js";
   import Fieldset from "#lib/components/ui/Fieldset.svelte";
   import Field from "#lib/components/ui/Field.svelte";
-  import Button from "#lib/components/ui/Button.svelte";
-  import TextInput from "#lib/components/ui/TextInput.svelte";
-  import TextAreaInput from "#lib/components/ui/TextAreaInput.svelte";
+  import { Button, TextAreaInput, TextInput } from "lily-design-system-svelte-headless";
   import Select from "#lib/components/ui/Select.svelte";
 
   function newMed(): Medication {

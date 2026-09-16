@@ -8,8 +8,7 @@
 	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
 	import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '#lib/components/ui/Form.svelte';
-	import Button from '#lib/components/ui/Button.svelte';
+	import { Button, Form } from "lily-design-system-svelte-headless";
 	import Progress from '#lib/components/ui/Progress.svelte';
 	import StepList from '#lib/components/ui/StepList.svelte';
 	import StepListItem from '#lib/components/ui/StepListItem.svelte';

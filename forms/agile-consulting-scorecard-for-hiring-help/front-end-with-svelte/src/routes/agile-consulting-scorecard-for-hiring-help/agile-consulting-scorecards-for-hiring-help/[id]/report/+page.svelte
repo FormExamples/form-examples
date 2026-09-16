@@ -5,7 +5,7 @@
 	import { sampleAssessments } from '#lib/data/sample-reports.js';
 	import { getRecommendedActions } from '#lib/engine/recommendations.js';
 	import { bandColor, bandLabel, recommendationCopy } from '#lib/engine/utils.js';
-	import Button from '#lib/components/ui/Button.svelte';
+	import { Button } from "lily-design-system-svelte-headless";
 
 	const plural = 'agile-consulting-scorecards-for-hiring-help';
 

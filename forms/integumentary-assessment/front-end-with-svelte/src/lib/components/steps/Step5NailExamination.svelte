@@ -3,8 +3,7 @@
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
-	import CheckboxGroup from '#lib/components/ui/CheckboxGroup.svelte';
+	import { CheckboxGroup, TextAreaInput } from "lily-design-system-svelte-headless";
 
 	const d = assessment.data.nailExamination;
 

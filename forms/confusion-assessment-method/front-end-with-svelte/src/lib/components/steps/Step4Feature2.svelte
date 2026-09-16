@@ -4,7 +4,7 @@
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import { RadioGroup } from "lily-design-system-svelte-headless";
 
 	const f = assessment.data.feature2;
 	const presentAbsent = [

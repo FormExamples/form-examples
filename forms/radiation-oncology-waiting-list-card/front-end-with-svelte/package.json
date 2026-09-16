@@ -1,7 +1,9 @@
 {
   "name": "radiation-oncology-waiting-list-card-front-end",
   "private": true,
-  "engines": { "node": "=26" },
+  "engines": {
+    "node": "=26"
+  },
   "version": "0.0.1",
   "type": "module",
   "scripts": {
@@ -32,7 +34,13 @@
     "npx": "^10.2.2",
     "package": "^1.0.1",
     "pdfmake": "^0.3.11",
-    "sv": "^0.17.0"
+    "sv": "^0.17.0",
+    "lily-design-system-svelte-headless": "^0.3.1",
+    "lily-design-system-svelte-theme-picker": "^0.1.1",
+    "lily-design-system-svelte-locale-picker": "^0.1.1",
+    "lily-design-system-svelte-text-size-picker": "^0.1.1",
+    "lily-design-system-svelte-share-picker": "^0.1.1",
+    "lily-design-system-svelte-picker-bar": "^0.1.0"
   },
   "exports": {
     "./package.json": "./package.json",

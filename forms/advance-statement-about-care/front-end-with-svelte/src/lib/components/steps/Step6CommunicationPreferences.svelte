@@ -1,9 +1,7 @@
 <script lang="ts">
 	import Field from '#lib/components/ui/Field.svelte';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
-	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import { RadioGroup, TextAreaInput, TextInput } from "lily-design-system-svelte-headless";
 
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 

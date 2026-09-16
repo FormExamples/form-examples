@@ -2,7 +2,7 @@
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import { RadioGroup } from "lily-design-system-svelte-headless";
 	import Alert from '#lib/components/ui/Alert.svelte';
 
 	const v = assessment.data.vehicleAdaptations;

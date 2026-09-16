@@ -4,7 +4,7 @@
 	// questionnaire's many yes/no/unsure questions concise while still emitting
 	// the canonical Lily class contract (`field`, `radio-group`, `radio-input`).
 	import Field from '#lib/components/ui/Field.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import { RadioGroup } from "lily-design-system-svelte-headless";
 
 	let {
 		label,

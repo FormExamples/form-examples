@@ -4,8 +4,7 @@
 	import Field from '#lib/components/ui/Field.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
 	import NumberInput from '#lib/components/ui/NumberInput.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
-	import CheckboxInput from '#lib/components/ui/CheckboxInput.svelte';
+	import { CheckboxInput, TextAreaInput } from "lily-design-system-svelte-headless";
 
 	const d = assessment.data.indication;
 

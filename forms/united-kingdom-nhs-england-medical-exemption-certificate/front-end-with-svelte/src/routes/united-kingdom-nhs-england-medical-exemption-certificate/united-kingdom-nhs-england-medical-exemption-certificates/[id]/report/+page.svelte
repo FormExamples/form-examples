@@ -4,7 +4,7 @@
 	import { application } from '#lib/stores/application.svelte.js';
 	import { conditionLabel } from '#lib/engine/utils.js';
 	import Badge from '#lib/components/ui/Badge.svelte';
-	import Button from '#lib/components/ui/Button.svelte';
+	import { Button } from "lily-design-system-svelte-headless";
 
 	const plural = 'united-kingdom-nhs-england-medical-exemption-certificates';
 

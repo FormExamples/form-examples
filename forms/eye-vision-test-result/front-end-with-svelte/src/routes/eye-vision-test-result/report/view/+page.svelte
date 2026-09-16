@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { resultStore } from '#lib/stores/result.svelte.js';
 	import Badge from '#lib/components/ui/Badge.svelte';
-	import Button from '#lib/components/ui/Button.svelte';
+	import { Button } from "lily-design-system-svelte-headless";
 	import Alert from '#lib/components/ui/Alert.svelte';
 	import {
 		resultClassificationLabel,

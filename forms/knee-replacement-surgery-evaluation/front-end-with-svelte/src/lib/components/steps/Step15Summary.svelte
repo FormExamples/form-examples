@@ -1,10 +1,8 @@
 <script lang="ts">
 	import Field from '#lib/components/ui/Field.svelte';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import TextInput from '#lib/components/ui/TextInput.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import { Panel, TextAreaInput, TextInput } from "lily-design-system-svelte-headless";
 	import Select from '#lib/components/ui/Select.svelte';
-	import Panel from '#lib/components/ui/Panel.svelte';
 	import { OPTIONS } from '#lib/config/options.js';
 	import { CANDIDACY_LABELS, OKS_CATEGORY_LABELS } from '#lib/engine/grader.js';
 	import { evaluationStore } from '#lib/stores/evaluation.svelte.js';

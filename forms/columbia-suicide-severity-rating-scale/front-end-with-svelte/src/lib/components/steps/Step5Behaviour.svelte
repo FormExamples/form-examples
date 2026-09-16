@@ -4,8 +4,7 @@
 	import Field from '#lib/components/ui/Field.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
 	import NumberInput from '#lib/components/ui/NumberInput.svelte';
-	import DateInput from '#lib/components/ui/DateInput.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import { DateInput, RadioGroup } from "lily-design-system-svelte-headless";
 
 	const b = assessment.data.behaviour;
 	const yesNo = [

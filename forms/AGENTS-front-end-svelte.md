@@ -87,56 +87,50 @@ system** — do not hand-roll theme CSS.
   Lily light before any stylesheet loads; the persisted default selection is
   `light` (`src/lib/config/themes.ts` `DEFAULT_THEME`). There is no "system"
   option (it would 404 on a missing stylesheet).
-- **Prebuilt control.** Switch themes with the Lily `ThemePicker` component
-  (`src/lib/components/ui/`), mirroring
-  `lily-design-system-svelte-helpers/lily-design-system-svelte-theme-picker`:
-  a single-glyph icon button (◑) that opens a headless listbox. Called with
-  `themesUrl`/`themes`/`themeLabels`/`defaultValue`/`storageKey` props and
-  manages its own `<link>` swap, `data-theme` attribute, and localStorage
-  persistence internally.
-- **LocalePicker sits before ThemePicker** in the header nav, the headless
-  sibling of `ThemePicker` (single-glyph 🌐 icon button + listbox, `locales`/
-  `localeLabels`/`defaultValue`/`storageKey` props), reflected onto
-  `<html lang>`/`<html dir>` and persisted to `src/lib/config/locales.ts`'s
-  `LOCALE_STORAGE_KEY`. Fixed four-locale catalogue (`en-GB`, `en-US`,
-  `cy-GB`, `de-DE`); presentation only — no message catalogue is wired up,
-  see [`../docs/i18n.md`](../docs/i18n.md). Vendors a companion
-  `src/lib/components/ui/locales.ts` (upstream's `defaultLocaleLabels`/RTL
-  data) alongside `LocalePicker.svelte`. Both controls share
-  `.theme-picker`/`.locale-picker` baseline CSS appended once to `app.css`
-  (headless: no default styling otherwise; no `lily-` prefix needed — the
-  picker rename dissolved the class-name collision with the unrelated
-  `lily-design-system-svelte-headless` catalog components that made the
-  prefix necessary in the first place). Tools:
-  `bin/svelte-locale-select-refactor --check` (a locale control present in
-  every layout) and `bin/svelte-helpers-picker-rename --check|--apply`
-  (button+listbox contract + naming drift against
-  `lily-design-system-svelte-helpers`; pin recorded in
-  [`lily-svelte-helpers-version.md`](lily-svelte-helpers-version.md)).
-- **`TextSizePicker` sits after `ThemePicker`** in the header nav: the same
-  headless button+listbox shape (single-glyph "A" icon, `sizes`/`sizeLabels`/
-  `defaultValue`/`storageKey` props), mirroring
-  `lily-design-system-svelte-helpers/lily-design-system-svelte-text-size-picker`.
-  Sets `data-text-size` on `<html>` (mapped to `font-size` via
-  `:root[data-text-size="…"]` rules in `app.css`; WCAG 2.2 1.4.4/1.4.12), and
-  persists to `src/lib/config/text-sizes.ts`'s `TEXT_SIZE_STORAGE_KEY`. Fixed
-  four-size catalogue (`small`/`medium`/`large`/`x-large`).
-- **`SharePicker` sits after `TextSizePicker`** in the header nav: the same
-  headless button shape (single-glyph "↪" icon), mirroring
-  `lily-design-system-svelte-helpers/lily-design-system-svelte-share-picker`.
+- **Prebuilt control, consolidated behind `PickerBar`.** As of 2026-09-16
+  the header renders a single `<PickerBar>` (from the real pnpm dependency
+  `lily-design-system-svelte-picker-bar`, imported in `+layout.svelte`)
+  instead of four separately-wired components, in every form whose header
+  matched the fleet's standard block (355/356 — see below for the one
+  exception). `PickerBar` composes `ThemePicker`/`LocalePicker`/
+  `TextSizePicker`/`SharePicker` internally, each a real pnpm dependency
+  in its own right (`lily-design-system-svelte-{theme,locale,text-size,
+  share}-picker`), and takes `labels` (accessible names for all four),
+  `themesUrl`/`themes`/`themeProps`, `locales`/`localeProps`,
+  `sizes`/`textSizeProps`, and `shareTargets`/`shareProps` — each
+  `*Props` bag spreads that picker's other props (`themeLabels`,
+  `defaultValue`, `storageKey`, etc.) through unchanged. `ThemePicker`
+  manages its own `<link>` swap + `data-theme` attribute + localStorage;
+  `LocalePicker` manages `<html lang>`/`<html dir>` + localStorage;
+  `TextSizePicker` manages `data-text-size` + localStorage — all
+  internally, as before.
+- **`medical-language-speaking-assessment-for-cymraeg` is the one
+  exception**, kept as four separate `<ThemePicker>`/`<LocalePicker>`/
+  `<TextSizePicker>`/`<SharePicker>` tags (now importing from the real
+  packages, not a vendored copy) because it drives `LocalePicker` through
+  its own i18n store via a detached decoy `target` element rather than
+  `PickerBar`'s bundled wiring.
+- **`SharePicker` offers six destinations via `shareTargets`**, sourced
+  from a small vendored `src/lib/config/share-targets.ts` per form (not a
+  Lily package artefact — this repo's own choice of destinations, so it
+  isn't a pnpm dependency): copy link (via `SharePicker`'s built-in
+  `copyLabel`, not a target), Email Link, Share on LinkedIn, Share on
+  Reddit, Share on Bluesky, and Share on Mastodon (via mastodonshare.com).
   Opens the native OS share sheet where available
-  (`navigator.share`/`strategy="auto"`), otherwise a small list — here, just
-  a "Copy link" item, since this package ships no social-network URLs by
-  design and a 341-form medical/clinical monorepo has no single defensible
-  answer for which networks belong. `targets` stays `[]` everywhere. Tool
-  for both of the above (naming rollout + rename):
-  `bin/svelte-helpers-picker-rename --check|--apply`.
+  (`navigator.share`/`strategy="auto"`), otherwise a list of these six.
+  Supersedes the earlier copy-link-only, `targets: []` policy.
+- **LocalePicker fixed four-locale catalogue** (`en-GB`, `en-US`, `cy-GB`,
+  `de-DE`); presentation only — no message catalogue is wired up, see
+  [`../docs/i18n.md`](../docs/i18n.md).
+- **Tool:** `bin/svelte-lily-pnpm-migrate --check|--apply` (vendoring →
+  pnpm dependency + `PickerBar` consolidation; supersedes
+  `bin/svelte-helpers-picker-rename`, now a no-op one-shot — see
+  [`lily-svelte-helpers-version.md`](lily-svelte-helpers-version.md)).
 - **Header layout: title left, nav + controls right.** The header `<nav>`'s
   inner row is `flex items-center justify-between`: the brand/title `<a>` is
   the first child, and a second `flex items-center gap-1` wrapper holding the
-  nav links, `LocalePicker`, `ThemePicker`, `TextSizePicker`, then
-  `SharePicker` is the second child — so the row splits into a left title
-  and a right-aligned link/control cluster.
+  nav links then `PickerBar` is the second child — so the row splits into a
+  left title and a right-aligned link/control cluster.
 - **Page-width model: `body` is edge-to-edge; `<main>` carries the gutter.**
   `body { margin: 0; }` (an unlayered rule in `app.css` so it outranks
   Tailwind's `@layer base` preflight reset). The `+layout.svelte` `<nav>`
@@ -190,22 +184,37 @@ stylesheet works for both.
 
 ## 2. Consumption model (decision)
 
-Lily Svelte is consumed as a **contract**, not as a runtime npm package:
+**As of 2026-09-16, Lily Svelte is a real pnpm dependency, not just a
+contract.** `lily-design-system-svelte-headless` is in every form's
+`package.json` `dependencies`, and most of the catalogue components a form
+uses are imported directly from it:
 
-- **Each form's local `src/lib/components/ui/` mirrors the Lily Svelte API.**
-  Every local component has the same prop signature, the same `bind:value`
-  shape, and emits the same Lily class names as the upstream Lily Svelte
-  component of the same name.
-- **No runtime dependency on Lily.** The form's `package.json` does not
-  depend on `lily-design-system-svelte-headless` (it is not published to
-  npm). Each form remains a self-contained pnpm/SvelteKit project.
-- **Pinned upstream commit recorded in [`lily-svelte-version.md`](lily-svelte-version.md).**
-  Component source snapshots live in [`lily-svelte-spec/`](lily-svelte-spec/),
-  refreshed by `bin/lily-svelte-sync`.
+- **`src/lib/components/ui/<Name>.svelte` only still exists locally when it
+  genuinely diverges from the published package** — a deliberate behavioural
+  or styling difference this repo needs (`Form.svelte`'s `novalidate`,
+  `NumberInput.svelte`'s `null` default, `Field.svelte`/`Fieldset.svelte`'s
+  extra class hooks — see [`lily-svelte-version.md`](lily-svelte-version.md)
+  for the full list and why). Everywhere else, code imports the component
+  by name: `import { Button, TextInput } from
+  "lily-design-system-svelte-headless";` — no local file, no per-form copy.
+- **The four picker helpers and `PickerBar` are pnpm dependencies too.**
+  See the Theming section below and
+  [`lily-svelte-helpers-version.md`](lily-svelte-helpers-version.md).
+- **`bin/svelte-lily-pnpm-migrate --check --all`** is the CI drift detector:
+  it diffs each form's remaining local `ui/` files against the published
+  package and fails if one has silently gone stale (rather than
+  deliberately diverged for a documented reason).
+- **Pinned upstream commit still recorded in
+  [`lily-svelte-version.md`](lily-svelte-version.md)** for the sync/rename
+  tools that read fresh component source at apply time; the npm dependency
+  version each form actually runs is pinned separately, by ordinary semver
+  range in `package.json`. Component source snapshots live in
+  [`lily-svelte-spec/`](lily-svelte-spec/), refreshed by `bin/lily-svelte-sync`.
 
-This mirrors the Lily HTML consumption model (see
-[`AGENTS-front-end-html.md`](AGENTS-front-end-html.md) §2). The libraries
-are paired specs; the forms are paired conformant implementations.
+The Lily HTML side (see [`AGENTS-front-end-html.md`](AGENTS-front-end-html.md)
+§2) is unaffected — HTML front-ends have no build step and no package
+manager, so they still vendor by design. Only the Svelte side moved to a
+real dependency.
 
 ## 3. Component vocabulary (Lily contract)
 

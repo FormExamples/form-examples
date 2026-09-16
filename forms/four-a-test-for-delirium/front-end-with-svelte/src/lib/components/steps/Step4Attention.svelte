@@ -4,7 +4,7 @@
 	import { pointColor } from '#lib/engine/utils.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import { RadioGroup } from "lily-design-system-svelte-headless";
 
 	const i = assessment.data.item3;
 	const point = $derived(calculateFourATGrade(assessment.data).item3Score);

@@ -3,9 +3,7 @@
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
-	import TextInput from '#lib/components/ui/TextInput.svelte';
-	import DateInput from '#lib/components/ui/DateInput.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import { DateInput, TextAreaInput, TextInput } from "lily-design-system-svelte-headless";
 
 	const d = assessment.data.eligibilityAllocation;
 </script>

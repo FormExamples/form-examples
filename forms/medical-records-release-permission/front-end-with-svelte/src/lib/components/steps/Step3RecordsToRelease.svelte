@@ -3,10 +3,7 @@
 	import { recordTypeOptions } from '#lib/engine/validation-rules.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import CheckboxGroup from '#lib/components/ui/CheckboxGroup.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
-	import DateInput from '#lib/components/ui/DateInput.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import { CheckboxGroup, DateInput, RadioGroup, TextAreaInput } from "lily-design-system-svelte-headless";
 
 	const r = assessment.data.recordsToRelease;
 

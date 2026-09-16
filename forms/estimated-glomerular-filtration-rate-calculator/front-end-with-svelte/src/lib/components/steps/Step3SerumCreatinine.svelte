@@ -5,8 +5,7 @@
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
 	import NumberInput from '#lib/components/ui/NumberInput.svelte';
-	import TextInput from '#lib/components/ui/TextInput.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import { RadioGroup, TextInput } from "lily-design-system-svelte-headless";
 
 	const cr = assessment.data.creatinine;
 	const grade = $derived(calculateEgfr(assessment.data));

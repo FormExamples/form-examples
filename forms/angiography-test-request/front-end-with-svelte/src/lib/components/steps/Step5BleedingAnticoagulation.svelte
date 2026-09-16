@@ -2,8 +2,7 @@
 	import { request } from '$lib/stores/request.svelte';
 	import Fieldset from '$lib/components/ui/Fieldset.svelte';
 	import Field from '$lib/components/ui/Field.svelte';
-	import TextInput from '$lib/components/ui/TextInput.svelte';
-	import CheckboxInput from '$lib/components/ui/CheckboxInput.svelte';
+	import { CheckboxInput, TextInput } from "lily-design-system-svelte-headless";
 
 	const b = request.data.bleeding;
 </script>

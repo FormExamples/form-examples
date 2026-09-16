@@ -3,7 +3,7 @@
 	import { ageBandLabel } from '#lib/engine/utils.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import { TextInput } from "lily-design-system-svelte-headless";
 	import Select from '#lib/components/ui/Select.svelte';
 
 	const d = assessment.data.identification;

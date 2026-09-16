@@ -1,8 +1,18 @@
 #!/usr/bin/env python3
-"""bin/svelte-helpers-picker-rename -- rename the four Lily Svelte helper
-controls from their current *-chooser names to their new *-picker names,
-matching the upstream rename (lily-design-system-svelte-helpers commit
-"Rename *-chooser to *-picker to harmonize with Adobe").
+"""bin/svelte-helpers-picker-rename -- one-shot (superseded): rename the four
+Lily Svelte helper controls from their current *-chooser names to their new
+*-picker names, matching the upstream rename (lily-design-system-svelte-helpers
+commit "Rename *-chooser to *-picker to harmonize with Adobe").
+
+Superseded by bin/svelte-lily-pnpm-migrate (2026-09), which replaced every
+form's vendored copy of these four components with a real pnpm dependency
+on the published lily-design-system-svelte-{theme,locale,text-size,share}-picker
+packages (usually consolidated behind lily-design-system-svelte-picker-bar);
+see forms/lily-svelte-helpers-version.md. There is no vendored
+src/lib/components/ui/{Theme,Locale,TextSize,Share}Picker.svelte left to
+rename in almost any form, so this tool's --check now finds nothing to do
+fleet-wide (harmless) -- do not use it as a drift detector going forward,
+and do not resurrect the vendoring pattern it was written for.
 
   ThemeChooser.svelte    -> ThemePicker.svelte    (.theme-chooser*    -> .theme-picker*)
   LocaleChooser.svelte   -> LocalePicker.svelte   (.locale-chooser*   -> .locale-picker*)

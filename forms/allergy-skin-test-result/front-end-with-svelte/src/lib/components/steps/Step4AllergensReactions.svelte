@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Field from '#lib/components/ui/Field.svelte';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import { TextAreaInput } from "lily-design-system-svelte-headless";
 	import { resultStore } from '#lib/stores/result.svelte.js';
 
 	const d = $state(resultStore.data);

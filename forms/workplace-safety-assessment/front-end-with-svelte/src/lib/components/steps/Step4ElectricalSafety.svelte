@@ -2,7 +2,7 @@
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import { TextAreaInput } from "lily-design-system-svelte-headless";
 	import YesNoNA from '#lib/components/ui/YesNoNA.svelte';
 
 	const d = assessment.data.electricalSafety;

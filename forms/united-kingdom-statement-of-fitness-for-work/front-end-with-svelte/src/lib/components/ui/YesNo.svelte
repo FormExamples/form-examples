@@ -1,6 +1,6 @@
 <script lang="ts">
 	// YesNo — a yes/no radio pair built on the Lily radio-group contract.
-	import RadioGroup from './RadioGroup.svelte';
+	import { RadioGroup } from "lily-design-system-svelte-headless";
 
 	let {
 		label,

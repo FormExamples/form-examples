@@ -4,7 +4,7 @@
   import Field from '#lib/components/ui/Field.svelte';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
   import Select from '#lib/components/ui/Select.svelte';
-  import TextInput from '#lib/components/ui/TextInput.svelte';
+  import { TextInput } from "lily-design-system-svelte-headless";
 </script>
 
 <Fieldset legend="Step 8 — Renal and hepatic">

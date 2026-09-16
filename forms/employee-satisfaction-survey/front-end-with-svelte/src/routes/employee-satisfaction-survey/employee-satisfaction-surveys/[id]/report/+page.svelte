@@ -12,7 +12,7 @@
 	} from '#lib/engine/utils.js';
 	import { GRADED_DOMAIN_KEYS } from '#lib/engine/rules.js';
 	import { DEPARTMENT_OPTIONS, TENURE_OPTIONS, HOURS_OPTIONS } from '#lib/engine/rules.js';
-	import Button from '#lib/components/ui/Button.svelte';
+	import { Button } from "lily-design-system-svelte-headless";
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(assessment.data);

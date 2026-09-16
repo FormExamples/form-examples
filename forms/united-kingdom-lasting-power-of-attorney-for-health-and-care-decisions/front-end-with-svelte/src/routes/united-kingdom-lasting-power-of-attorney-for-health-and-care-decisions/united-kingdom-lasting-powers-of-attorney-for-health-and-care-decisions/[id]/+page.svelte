@@ -6,10 +6,8 @@
 	import { sampleLpas } from '#lib/data/sample-reports.js';
 
 	import Form from '#lib/components/ui/Form.svelte';
-	import Button from '#lib/components/ui/Button.svelte';
+	import { Button, ErrorSummary, Panel } from "lily-design-system-svelte-headless";
 	import Progress from '#lib/components/ui/Progress.svelte';
-	import Panel from '#lib/components/ui/Panel.svelte';
-	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
 
 	import Step01Donor from '#lib/components/steps/Step01Donor.svelte';
 	import Step02Scope from '#lib/components/steps/Step02Scope.svelte';

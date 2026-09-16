@@ -4,7 +4,7 @@
 	import { decisionLabel, decisionColor } from '#lib/engine/utils.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import { RadioGroup } from "lily-design-system-svelte-headless";
 	import Badge from '#lib/components/ui/Badge.svelte';
 
 	const t = assessment.data.ankleTenderness;

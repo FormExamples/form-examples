@@ -3,7 +3,7 @@
 	import { page } from '$app/state';
 	import { store } from '#lib/stores/indicators.svelte.js';
 	import { CATEGORIES, PERFORMANCE_INDICATORS, TOTAL_INDICATORS } from '#lib/config/indicators.js';
-	import Button from '#lib/components/ui/Button.svelte';
+	import { Button } from "lily-design-system-svelte-headless";
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(store.data);

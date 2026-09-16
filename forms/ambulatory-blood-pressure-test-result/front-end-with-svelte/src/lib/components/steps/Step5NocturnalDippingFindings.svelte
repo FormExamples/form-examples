@@ -3,9 +3,7 @@
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import NumberInput from '#lib/components/ui/NumberInput.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
-	import CheckboxGroup from '#lib/components/ui/CheckboxGroup.svelte';
-	import CheckboxInput from '#lib/components/ui/CheckboxInput.svelte';
+	import { CheckboxGroup, CheckboxInput, TextAreaInput } from "lily-design-system-svelte-headless";
 	import Alert from '#lib/components/ui/Alert.svelte';
 	import { resultStore } from '#lib/stores/result.svelte.js';
 

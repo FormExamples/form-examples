@@ -1,8 +1,7 @@
 <script lang="ts">
 	import Field from '#lib/components/ui/Field.svelte';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import TextInput from '#lib/components/ui/TextInput.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import { TextAreaInput, TextInput } from "lily-design-system-svelte-headless";
 	import Select from '#lib/components/ui/Select.svelte';
 	import { OPTIONS, YES_NO_OPTS } from '#lib/config/options.js';
 	import { assessmentStore } from '#lib/stores/assessment.svelte.js';

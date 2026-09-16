@@ -2,9 +2,8 @@
   import { store } from '#lib/stores/assessment.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import TextInput from '#lib/components/ui/TextInput.svelte';
+  import { DateInput, TextInput } from "lily-design-system-svelte-headless";
   import Select from '#lib/components/ui/Select.svelte';
-  import DateInput from '#lib/components/ui/DateInput.svelte';
 </script>
 
 <Fieldset legend="Step 1 — Clinician identification">

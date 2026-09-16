@@ -2,9 +2,8 @@
 	import { assessment, createDefaultEvent } from '#lib/stores/assessment.svelte.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import { Button, TextInput } from "lily-design-system-svelte-headless";
 	import Select from '#lib/components/ui/Select.svelte';
-	import Button from '#lib/components/ui/Button.svelte';
 
 	const d = $state(assessment.data);
 

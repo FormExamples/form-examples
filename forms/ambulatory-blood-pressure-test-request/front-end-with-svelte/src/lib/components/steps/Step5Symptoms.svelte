@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { request } from '#lib/stores/request.svelte.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import CheckboxInput from '#lib/components/ui/CheckboxInput.svelte';
+	import { CheckboxInput } from "lily-design-system-svelte-headless";
 
 	const d = $state(request.data.symptoms);
 </script>

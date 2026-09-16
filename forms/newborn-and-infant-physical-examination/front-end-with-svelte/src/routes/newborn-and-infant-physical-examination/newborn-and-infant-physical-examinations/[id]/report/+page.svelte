@@ -17,7 +17,7 @@
 		examinationContextLabel,
 		sexLabel
 	} from '#lib/engine/utils.js';
-	import Button from '#lib/components/ui/Button.svelte';
+	import { Button } from "lily-design-system-svelte-headless";
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(assessment.data);

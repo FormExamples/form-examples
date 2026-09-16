@@ -2,9 +2,8 @@
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import TextInput from '#lib/components/ui/TextInput.svelte';
-	import EmailInput from '#lib/components/ui/EmailInput.svelte';
+	import { DateInput, EmailInput } from "lily-design-system-svelte-headless";
 	import NumberInput from '#lib/components/ui/NumberInput.svelte';
-	import DateInput from '#lib/components/ui/DateInput.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
 	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
 	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';

@@ -6,11 +6,9 @@
 
   // Lily Svelte headless contract — local shape-equivalent components.
   import Form from '#lib/components/ui/Form.svelte';
-  import Progress from '#lib/components/ui/Progress.svelte';
+  import { Button, ErrorSummary, Progress } from "lily-design-system-svelte-headless";
   import StepList from '#lib/components/ui/StepList.svelte';
   import StepListItem from '#lib/components/ui/StepListItem.svelte';
-  import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
-  import Button from '#lib/components/ui/Button.svelte';
 
   // 16 step components.
   import Step01 from '#lib/components/steps/Step01Clinician.svelte';

@@ -2,8 +2,7 @@
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import CheckboxGroup from '#lib/components/ui/CheckboxGroup.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import { CheckboxGroup, TextAreaInput } from "lily-design-system-svelte-headless";
 
 	const fl = assessment.data.functionalLimitations;
 

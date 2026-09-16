@@ -7,11 +7,8 @@
 	// screeningPurpose is occupational-pre-placement.
 	import { page } from '$app/state';
 	import Alert from '#lib/components/ui/Alert.svelte';
-	import Button from '#lib/components/ui/Button.svelte';
-	import ErrorSummary from '#lib/components/ui/ErrorSummary.svelte';
+	import { Button, ErrorSummary, Panel, Progress } from "lily-design-system-svelte-headless";
 	import Form from '#lib/components/ui/Form.svelte';
-	import Panel from '#lib/components/ui/Panel.svelte';
-	import Progress from '#lib/components/ui/Progress.svelte';
 	import StepList from '#lib/components/ui/StepList.svelte';
 	import StepListItem from '#lib/components/ui/StepListItem.svelte';
 

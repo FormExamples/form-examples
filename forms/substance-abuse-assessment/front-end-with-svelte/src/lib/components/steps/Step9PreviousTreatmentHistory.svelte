@@ -4,8 +4,7 @@
 	import Field from '#lib/components/ui/Field.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
 	import NumberInput from '#lib/components/ui/NumberInput.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import { RadioGroup, TextAreaInput } from "lily-design-system-svelte-headless";
 
 	const t = assessment.data.previousTreatmentHistory;
 	const yesNo = [

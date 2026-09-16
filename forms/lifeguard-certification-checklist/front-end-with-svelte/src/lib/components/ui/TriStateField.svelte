@@ -3,7 +3,7 @@
 	// Not assessed. Wraps the Lily Field + RadioGroup contract so each lifeguard
 	// rule maps to a single, accessible tri-state control.
 	import Field from './Field.svelte';
-	import RadioGroup from './RadioGroup.svelte';
+	import { RadioGroup } from "lily-design-system-svelte-headless";
 	import type { TriState } from '#lib/engine/types.js';
 
 	let {

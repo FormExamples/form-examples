@@ -15,7 +15,7 @@
 		asaStatusLabel
 	} from '#lib/engine/utils.js';
 	import { aldreteValueLabel } from '#lib/engine/pacu-rules.js';
-	import Button from '#lib/components/ui/Button.svelte';
+	import { Button } from "lily-design-system-svelte-headless";
 
 	const plural = 'post-anaesthesia-care-unit-records';
 

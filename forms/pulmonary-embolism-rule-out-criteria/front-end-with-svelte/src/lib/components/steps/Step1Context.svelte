@@ -2,9 +2,8 @@
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import { TextAreaInput, TextInput } from "lily-design-system-svelte-headless";
 	import Select from '#lib/components/ui/Select.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
 
 	const c = assessment.data.context;
 </script>

@@ -2,7 +2,7 @@
 	import { authorization } from '#lib/stores/authorization.svelte.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import { TextInput } from "lily-design-system-svelte-headless";
 	import DateInput from '#lib/components/ui/DateInput.svelte';
 
 	const d = authorization.data.patient;

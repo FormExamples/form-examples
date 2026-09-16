@@ -2,7 +2,7 @@
 	import Field from '#lib/components/ui/Field.svelte';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import { TextAreaInput } from "lily-design-system-svelte-headless";
 	import NumberInput from '#lib/components/ui/NumberInput.svelte';
 	import { resultStore } from '#lib/stores/result.svelte.js';
 

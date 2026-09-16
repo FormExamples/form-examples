@@ -9,9 +9,8 @@
 		formatNhsNumber
 	} from '#lib/engine/utils.js';
 	import { recordTypeOptions, purposeOptions } from '#lib/engine/validation-rules.js';
-	import Panel from '#lib/components/ui/Panel.svelte';
+	import { Button, Panel } from "lily-design-system-svelte-headless";
 	import Alert from '#lib/components/ui/Alert.svelte';
-	import Button from '#lib/components/ui/Button.svelte';
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(assessment.data);

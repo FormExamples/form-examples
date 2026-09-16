@@ -6,8 +6,7 @@
   // pattern this mirrors.
   import { store } from '#lib/stores/assessment.svelte.js';
   import type { ChecklistItemDef } from '#lib/config/items.js';
-  import RadioGroup from './RadioGroup.svelte';
-  import TextInput from './TextInput.svelte';
+  import { RadioGroup, TextInput } from "lily-design-system-svelte-headless";
 
   let { item }: { item: ChecklistItemDef } = $props();
 

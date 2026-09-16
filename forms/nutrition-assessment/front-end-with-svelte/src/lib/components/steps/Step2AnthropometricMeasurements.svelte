@@ -10,7 +10,7 @@
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
 	import NumberInput from '#lib/components/ui/NumberInput.svelte';
-	import DateInput from '#lib/components/ui/DateInput.svelte';
+	import { DateInput } from "lily-design-system-svelte-headless";
 
 	const a = assessment.data.anthropometricMeasurements;
 	const screen = assessment.data.nutritionalScreening;

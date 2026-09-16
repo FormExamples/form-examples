@@ -14,7 +14,7 @@
 		airOrOxygenLabel,
 		oxygenDeviceLabel
 	} from '#lib/engine/utils.js';
-	import Button from '#lib/components/ui/Button.svelte';
+	import { Button } from "lily-design-system-svelte-headless";
 
 	const plural = 'national-early-warning-score-2s';
 

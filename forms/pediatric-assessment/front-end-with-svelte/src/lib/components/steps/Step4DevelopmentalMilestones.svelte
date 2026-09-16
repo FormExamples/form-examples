@@ -3,8 +3,7 @@
 	import { formatAge } from '#lib/engine/utils.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import { RadioGroup, TextAreaInput } from "lily-design-system-svelte-headless";
 	import Alert from '#lib/components/ui/Alert.svelte';
 
 	const m = assessment.data.developmentalMilestones;

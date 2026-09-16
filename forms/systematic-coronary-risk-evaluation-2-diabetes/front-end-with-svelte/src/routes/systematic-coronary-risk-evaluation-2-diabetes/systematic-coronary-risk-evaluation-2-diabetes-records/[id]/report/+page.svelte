@@ -8,7 +8,7 @@
 		calculateAge,
 		hba1cMmolMol
 	} from '#lib/engine/utils.js';
-	import Button from '#lib/components/ui/Button.svelte';
+	import { Button } from "lily-design-system-svelte-headless";
 
 	const plural = 'systematic-coronary-risk-evaluation-2-diabetes-records';
 

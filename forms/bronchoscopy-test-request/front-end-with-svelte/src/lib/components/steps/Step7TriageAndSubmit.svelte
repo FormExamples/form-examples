@@ -2,8 +2,7 @@
 	import Field from '#lib/components/ui/Field.svelte';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
-	import DateInput from '#lib/components/ui/DateInput.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import { DateInput, TextAreaInput } from "lily-design-system-svelte-headless";
 	import Badge from '#lib/components/ui/Badge.svelte';
 	import Alert from '#lib/components/ui/Alert.svelte';
 	import { requestStore } from '#lib/stores/result.svelte.js';

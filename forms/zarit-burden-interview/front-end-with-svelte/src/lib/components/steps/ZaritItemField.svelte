@@ -8,7 +8,7 @@
 	import { RESPONSE_SCALE, ratingValue, normalizeInstrumentForm } from '#lib/engine/zarit-rules.js';
 	import { itemRatingColor } from '#lib/engine/utils.js';
 	import type { ZaritItem } from '#lib/engine/types.js';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import { RadioGroup } from "lily-design-system-svelte-headless";
 
 	let { item }: { item: ZaritItem } = $props();
 

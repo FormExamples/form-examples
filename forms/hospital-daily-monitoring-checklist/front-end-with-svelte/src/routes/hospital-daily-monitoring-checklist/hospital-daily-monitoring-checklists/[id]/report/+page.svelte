@@ -4,7 +4,7 @@
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import { CHECKLIST_ITEMS, SECTIONS } from '#lib/config/items.js';
 	import { statusLabel, statusColor } from '#lib/engine/utils.js';
-	import Button from '#lib/components/ui/Button.svelte';
+	import { Button } from "lily-design-system-svelte-headless";
 
 	const id = $derived(page.params.id ?? 'new');
 	const data = $derived(assessment.data);

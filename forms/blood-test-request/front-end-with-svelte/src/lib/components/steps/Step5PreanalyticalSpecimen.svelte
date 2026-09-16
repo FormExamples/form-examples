@@ -2,9 +2,7 @@
 	import Field from '#lib/components/ui/Field.svelte';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
-	import DateInput from '#lib/components/ui/DateInput.svelte';
-	import CheckboxGroup from '#lib/components/ui/CheckboxGroup.svelte';
-	import CheckboxInput from '#lib/components/ui/CheckboxInput.svelte';
+	import { CheckboxGroup, CheckboxInput, DateInput } from "lily-design-system-svelte-headless";
 	import { requestStore } from '#lib/stores/request.svelte.js';
 
 	const d = requestStore.data.preanalytical;

@@ -2,11 +2,8 @@
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import { CheckboxGroup, CheckboxInput, RadioGroup, TextAreaInput } from "lily-design-system-svelte-headless";
 	import DateTimeInput from '#lib/components/ui/DateTimeInput.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
-	import CheckboxGroup from '#lib/components/ui/CheckboxGroup.svelte';
-	import CheckboxInput from '#lib/components/ui/CheckboxInput.svelte';
 
 	const d = assessment.data.transferLogistics;
 

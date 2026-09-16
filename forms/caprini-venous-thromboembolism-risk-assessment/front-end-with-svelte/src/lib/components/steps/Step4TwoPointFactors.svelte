@@ -5,7 +5,7 @@
 	import type { YesNo } from '#lib/engine/types.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import { RadioGroup } from "lily-design-system-svelte-headless";
 
 	const s = assessment.data.twoPoint as unknown as Record<string, YesNo>;
 	const subtotal = $derived(calculateCapriniGrade(assessment.data).groupSubtotals['2-point']);

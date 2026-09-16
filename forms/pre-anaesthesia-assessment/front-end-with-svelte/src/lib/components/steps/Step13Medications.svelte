@@ -2,8 +2,7 @@
   import { store } from '#lib/stores/assessment.svelte.js';
   import type { Medication, Allergy } from '#lib/engine/types.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
-  import Button from '#lib/components/ui/Button.svelte';
-  import TextInput from '#lib/components/ui/TextInput.svelte';
+  import { Button, TextInput } from "lily-design-system-svelte-headless";
   import Select from '#lib/components/ui/Select.svelte';
 
   function newMed(): Medication {

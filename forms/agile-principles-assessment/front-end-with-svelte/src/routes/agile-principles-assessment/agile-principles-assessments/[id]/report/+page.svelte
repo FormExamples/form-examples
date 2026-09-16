@@ -4,7 +4,7 @@
 	import { store } from '#lib/stores/assessment.svelte.js';
 	import { PRINCIPLES } from '#lib/config/principles.js';
 	import { sampleAssessments } from '#lib/data/sample-reports.js';
-	import Button from '#lib/components/ui/Button.svelte';
+	import { Button } from "lily-design-system-svelte-headless";
 
 	const id = $derived(page.params.id ?? 'new');
 	const d = $derived(store.data);

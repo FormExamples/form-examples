@@ -1,0 +1,551 @@
+#!/usr/bin/env python3
+"""bin/svelte-lily-pnpm-migrate -- migrate every form's `front-end-with-svelte/`
+off the vendored Lily Svelte component copies and onto the real, published
+pnpm packages:
+
+  lily-design-system-svelte-headless      (the full headless catalogue)
+  lily-design-system-svelte-theme-picker
+  lily-design-system-svelte-locale-picker
+  lily-design-system-svelte-text-size-picker
+  lily-design-system-svelte-share-picker
+  lily-design-system-svelte-picker-bar    (bundles the four pickers above)
+
+This reverses the "consumed as a specification, no runtime dependency"
+model recorded in `forms/lily-svelte-version.md` /
+`forms/lily-svelte-helpers-version.md`: those packages are now real npm
+dependencies, and the local `src/lib/components/ui/` mirrors of components
+they cover are deleted rather than hand-maintained.
+
+What changes per form (front-end-with-svelte/):
+
+  1. `package.json` gets the six packages added to `dependencies`.
+  2. Every local `src/lib/components/ui/<Name>.svelte` that mirrors a
+     headless-catalogue component 1:1 (verified by a comment/whitespace-
+     insensitive diff against the real published package, not just a name
+     match) is deleted; every file that imported it is rewritten to import
+     the named export from `lily-design-system-svelte-headless` instead
+     (multiple such imports in one file are consolidated into a single
+     import statement).
+  3. The four picker components (`ThemePicker`/`LocalePicker`/
+     `TextSizePicker`/`SharePicker`) are deleted from `components/ui/`
+     (along with the vendored `locales.ts` data file); every root
+     `+layout.svelte` that wires them individually is rewritten to import
+     them from their own packages. Where the wiring exactly matches the
+     fleet's standard four-picker header block, that block is further
+     consolidated into a single `<PickerBar>` from
+     `lily-design-system-svelte-picker-bar`, and a new
+     `src/lib/config/share-targets.ts` is vendored with six destinations:
+     copy link, email, LinkedIn, Reddit, Bluesky, Mastodon (mastodonshare.com).
+     A form whose header wiring doesn't match the standard block (i.e. it
+     drives the pickers through custom logic, e.g.
+     medical-language-speaking-assessment-for-cymraeg's own i18n store)
+     keeps its four separate `<ThemePicker>`/etc. tags — now importing from
+     the real packages — and is reported as a manual-follow-up SKIP for the
+     PickerBar consolidation step only.
+
+`DateTimePicker.svelte` (vendored, unwired, a deliberate accessibility
+decision -- see lily-svelte-helpers-version.md) and every non-catalogue
+local component (StepNName.svelte, FormField.svelte, domain entities like
+MedicationEntry.svelte, etc.) are untouched.
+
+Diff-check reference: the real published packages, downloaded once via
+`npm pack` and cached under `<scratchpad>/lily-npm-ref/`. Pass
+--ref-dir to point at a different extraction (each package under
+`<name>-<version>/package/`).
+
+Usage:
+  bin/svelte-lily-pnpm-migrate <slug>...        # named forms
+  bin/svelte-lily-pnpm-migrate --all            # every form's Svelte front-end
+  bin/svelte-lily-pnpm-migrate --dry-run --all  # show what would change
+  bin/svelte-lily-pnpm-migrate --check --all    # CI drift check (non-zero on drift)
+
+Idempotent: once a form is migrated, the local ui/ files it deleted no
+longer exist, so re-running finds nothing left to migrate for it.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS_DIR = REPO_ROOT / "forms"
+
+DEFAULT_REF_DIR = Path(
+    "/private/tmp/claude-501/-Users-jph-git-formexamples-form-examples/"
+    "1fa8646b-71da-4610-83ef-15e530ff0924/scratchpad/lily-npm-ref"
+)
+
+DEPENDENCIES = {
+    "lily-design-system-svelte-headless": "^0.3.1",
+    "lily-design-system-svelte-theme-picker": "^0.1.1",
+    "lily-design-system-svelte-locale-picker": "^0.1.1",
+    "lily-design-system-svelte-text-size-picker": "^0.1.1",
+    "lily-design-system-svelte-share-picker": "^0.1.1",
+    "lily-design-system-svelte-picker-bar": "^0.1.0",
+}
+
+# name -> reference-package directory prefix (matched by glob "<prefix>-*")
+HEADLESS_REF_PKG = "lily-design-system-svelte-headless"
+PICKERS = {
+    "ThemePicker": "lily-design-system-svelte-theme-picker",
+    "LocalePicker": "lily-design-system-svelte-locale-picker",
+    "TextSizePicker": "lily-design-system-svelte-text-size-picker",
+    "SharePicker": "lily-design-system-svelte-share-picker",
+}
+
+CYMRAEG_SLUG = "medical-language-speaking-assessment-for-cymraeg"
+
+SHARE_TARGETS_TS = '''import type { ShareTarget } from "lily-design-system-svelte-share-picker";
+
+/**
+ * The fleet's standard share destinations. Copy-to-clipboard is handled by
+ * SharePicker's own built-in `copyLabel` item, not listed here.
+ */
+export const SHARE_TARGETS: ShareTarget[] = [
+  {
+    id: "email",
+    label: "Email Link",
+    href: (url, title, text) =>
+      `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(
+        text ? `${text}\\n\\n${url}` : url,
+      )}`,
+  },
+  {
+    id: "linkedin",
+    label: "Share on LinkedIn",
+    href: (url) =>
+      `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
+    newTab: true,
+  },
+  {
+    id: "reddit",
+    label: "Share on Reddit",
+    href: (url, title) =>
+      `https://www.reddit.com/submit?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`,
+    newTab: true,
+  },
+  {
+    id: "bluesky",
+    label: "Share on Bluesky",
+    href: (url, title, text) =>
+      `https://bsky.app/intent/compose?text=${encodeURIComponent(`${text || title} ${url}`)}`,
+    newTab: true,
+  },
+  {
+    id: "mastodon",
+    label: "Share on Mastodon",
+    href: (url, title, text) =>
+      `https://mastodonshare.com/?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text || title)}`,
+    newTab: true,
+  },
+];
+'''
+
+LINE_COMMENT_RE = re.compile(r"^\s*//.*$", re.MULTILINE)
+BLOCK_COMMENT_RE = re.compile(r"/\*.*?\*/", re.DOTALL)
+HTML_COMMENT_RE = re.compile(r"<!--.*?-->", re.DOTALL)
+WS_RE = re.compile(r"\s+")
+
+
+def normalize(src: str) -> str:
+    src = HTML_COMMENT_RE.sub("", src)
+    src = BLOCK_COMMENT_RE.sub("", src)
+    src = LINE_COMMENT_RE.sub("", src)
+    src = src.replace("'", '"')
+    src = WS_RE.sub(" ", src).strip()
+    return re.sub(r" (/?>)", r"\1", src)
+
+
+def ref_component_path(ref_dir: Path, pkg_prefix: str, *parts: str) -> Path | None:
+    candidates = sorted(ref_dir.glob(f"{pkg_prefix}-*/package"))
+    if not candidates:
+        return None
+    return candidates[-1].joinpath(*parts)
+
+
+def matches_reference(local_text: str, ref_path: Path | None) -> bool:
+    if ref_path is None or not ref_path.is_file():
+        return False
+    try:
+        ref_text = ref_path.read_text(encoding="utf-8")
+    except OSError:
+        return False
+    return normalize(local_text) == normalize(ref_text)
+
+
+def headless_matched_names(ref_dir: Path) -> list[str]:
+    """Every headless component name this repo's spec snapshot + reference
+    package agree exist, used to build the candidate list once."""
+    dist = ref_component_path(ref_dir, HEADLESS_REF_PKG, "dist", "components")
+    if dist is None or not dist.is_dir():
+        return []
+    return sorted(p.name for p in dist.iterdir() if p.is_dir())
+
+
+class FormResult:
+    def __init__(self, slug: str):
+        self.slug = slug
+        self.changed = False
+        self.deps_added: list[str] = []
+        self.primitives_migrated: list[str] = []
+        self.primitives_skipped_diverged: list[str] = []
+        self.pickers_migrated: list[str] = []
+        self.picker_bar_wired = False
+        self.picker_bar_skipped_reason: str | None = None
+        self.notes: list[str] = []
+
+
+def process_package_json(front_end: Path, apply: bool, result: FormResult) -> None:
+    path = front_end / "package.json"
+    if not path.is_file():
+        return
+    data = json.loads(path.read_text(encoding="utf-8"))
+    deps = data.setdefault("dependencies", {})
+    added = False
+    for name, version in DEPENDENCIES.items():
+        if name not in deps:
+            deps[name] = version
+            result.deps_added.append(name)
+            added = True
+    if added:
+        result.changed = True
+        if apply:
+            path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+
+
+def rewrite_primitive_imports(
+    front_end: Path, migratable: list[str], apply: bool, result: FormResult
+) -> None:
+    if not migratable:
+        return
+    name_pattern = "|".join(re.escape(n) for n in migratable)
+    import_re = re.compile(
+        r'^(?P<indent>[ \t]*)import[ \t]+(?P<name>' + name_pattern + r')[ \t]+from[ \t]+'
+        r'''['"](?:[./#$][^'"]*/)?(?P=name)\.svelte['"];?[ \t]*\n''',
+        re.MULTILINE,
+    )
+    for path in sorted(front_end.rglob("*")):
+        if path.suffix not in (".svelte", ".ts") or not path.is_file():
+            continue
+        if path.parent.name == "ui" and path.stem in migratable:
+            continue  # the vendored file itself, about to be deleted
+        text = path.read_text(encoding="utf-8")
+        removed: list[str] = []
+        first_pos: int | None = None
+        first_indent = ""
+
+        def _collect(m: re.Match) -> str:
+            nonlocal first_pos, first_indent
+            removed.append(m.group("name"))
+            if first_pos is None:
+                first_pos = m.start()
+                first_indent = m.group("indent")
+            return ""
+
+        new_text = import_re.sub(_collect, text)
+        if not removed:
+            continue
+        names = ", ".join(sorted(set(removed)))
+        combined = f'{first_indent}import {{ {names} }} from "lily-design-system-svelte-headless";\n'
+        new_text = new_text[:first_pos] + combined + new_text[first_pos:]
+        if apply:
+            path.write_text(new_text, encoding="utf-8")
+        result.changed = True
+
+
+def delete_migrated_primitives(
+    ui_dir: Path, migratable: list[str], apply: bool, result: FormResult
+) -> None:
+    for name in migratable:
+        f = ui_dir / f"{name}.svelte"
+        if f.is_file():
+            result.primitives_migrated.append(name)
+            result.changed = True
+            if apply:
+                f.unlink()
+
+
+_PICKER_NAME_PATTERN = "|".join(re.escape(n) for n in PICKERS)
+COMBINED_PICKER_IMPORT_RE = re.compile(
+    r'^(?P<indent>[ \t]*)import[ \t]+(?P<name>' + _PICKER_NAME_PATTERN + r')[ \t]+from[ \t]+'
+    r'''['"][^'"]*(?P=name)\.svelte['"];?[ \t]*\n''',
+    re.MULTILINE,
+)
+
+STANDARD_BLOCK_RE = re.compile(
+    r'(?P<indent>[ \t]*)<LocalePicker\s+'
+    r'label="(?P<localeLabel>[^"]*)"\s+'
+    r'class="(?P<localeClass>[^"]*)"\s+'
+    r'locales=\{localeValues\}\s+'
+    r'localeLabels=\{localeLabels\}\s+'
+    r'defaultValue=\{DEFAULT_LOCALE\}\s+'
+    r'storageKey=\{LOCALE_STORAGE_KEY\}\s*'
+    r'/>\s*'
+    r'<ThemePicker\s+'
+    r'label="(?P<themeLabel>[^"]*)"\s+'
+    r'class="[^"]*"\s+'
+    r'themesUrl="(?P<themesUrl>[^"]*)"\s+'
+    r'themes=\{themeValues\}\s+'
+    r'themeLabels=\{themeLabels\}\s+'
+    r'defaultValue=\{DEFAULT_THEME\}\s+'
+    r'storageKey=\{THEME_STORAGE_KEY\}\s*'
+    r'/>\s*'
+    r'<TextSizePicker\s+'
+    r'label="(?P<textSizeLabel>[^"]*)"\s+'
+    r'class="[^"]*"\s+'
+    r'sizes=\{textSizeValues\}\s+'
+    r'sizeLabels=\{textSizeLabels\}\s+'
+    r'defaultValue=\{DEFAULT_TEXT_SIZE\}\s+'
+    r'storageKey=\{TEXT_SIZE_STORAGE_KEY\}\s*'
+    r'/>\s*'
+    r'<SharePicker\s+'
+    r'label="(?P<shareLabel>[^"]*)"\s+'
+    r'class="[^"]*"\s+'
+    r'copyLabel="(?P<copyLabel>[^"]*)"\s+'
+    r'copiedLabel="(?P<copiedLabel>[^"]*)"\s+'
+    r'copyFailedLabel="(?P<copyFailedLabel>[^"]*)"\s*'
+    r'/>'
+)
+
+
+def picker_bar_replacement(m: re.Match) -> str:
+    ind = m.group("indent")
+    unit = "\t" if "\t" in ind else "  "
+    ind2 = ind + unit
+    ind3 = ind2 + unit
+    g = m.groupdict()
+    return (
+        f'{ind}<PickerBar\n'
+        f'{ind2}class="{g["localeClass"]}"\n'
+        f'{ind2}labels={{{{\n'
+        f'{ind3}theme: "{g["themeLabel"]}",\n'
+        f'{ind3}locale: "{g["localeLabel"]}",\n'
+        f'{ind3}textSize: "{g["textSizeLabel"]}",\n'
+        f'{ind3}share: "{g["shareLabel"]}",\n'
+        f'{ind2}}}}}\n'
+        f'{ind2}themesUrl="{g["themesUrl"]}"\n'
+        f'{ind2}themes={{themeValues}}\n'
+        f'{ind2}themeProps={{{{ themeLabels, defaultValue: DEFAULT_THEME, storageKey: THEME_STORAGE_KEY }}}}\n'
+        f'{ind2}locales={{localeValues}}\n'
+        f'{ind2}localeProps={{{{ localeLabels, defaultValue: DEFAULT_LOCALE, storageKey: LOCALE_STORAGE_KEY }}}}\n'
+        f'{ind2}sizes={{textSizeValues}}\n'
+        f'{ind2}textSizeProps={{{{ sizeLabels: textSizeLabels, defaultValue: DEFAULT_TEXT_SIZE, storageKey: TEXT_SIZE_STORAGE_KEY }}}}\n'
+        f'{ind2}shareTargets={{SHARE_TARGETS}}\n'
+        f'{ind2}shareProps={{{{ copyLabel: "Copy Link", copiedLabel: "{g["copiedLabel"]}", copyFailedLabel: "{g["copyFailedLabel"]}" }}}}\n'
+        f'{ind}/>'
+    )
+
+
+LIB_IMPORT_STYLE_RE = re.compile(
+    r'''from[ \t]+['"](#lib|\$lib)/config/\w+(\.js)?['"]'''
+)
+
+
+def detect_lib_import_style(text: str) -> str:
+    """Mirror this file's own alias ('#lib' vs the SvelteKit-default '$lib')
+    and extension convention for the new share-targets.js import, instead
+    of assuming the fleet's dominant '#lib/config/....js' style -- one form
+    (angiography-test-request) uses bare '$lib' with no subpath-imports map
+    in its package.json at all, so '#lib/...' would 404 there."""
+    m = LIB_IMPORT_STYLE_RE.search(text)
+    if m is None:
+        return "#lib/config/share-targets.js"
+    alias, ext = m.group(1), m.group(2) or ""
+    return f"{alias}/config/share-targets{ext}"
+
+
+def find_layout(front_end: Path) -> Path | None:
+    for p in front_end.rglob("+layout.svelte"):
+        if "ThemePicker" in p.read_text(encoding="utf-8"):
+            return p
+    return None
+
+
+def rewrite_layout(front_end: Path, apply: bool, result: FormResult) -> None:
+    layout = find_layout(front_end)
+    if layout is None:
+        return
+    text = layout.read_text(encoding="utf-8")
+    share_targets_import_path = detect_lib_import_style(text)
+
+    block_match = STANDARD_BLOCK_RE.search(text)
+    if block_match is not None:
+        new_text = STANDARD_BLOCK_RE.sub(picker_bar_replacement, text, count=1)
+
+        first_pos: int | None = None
+        first_indent = ""
+
+        def _collect_picker_import(m: re.Match) -> str:
+            nonlocal first_pos, first_indent
+            if first_pos is None:
+                first_pos = m.start()
+                first_indent = m.group("indent")
+            return ""
+
+        new_text = COMBINED_PICKER_IMPORT_RE.sub(_collect_picker_import, new_text)
+        if first_pos is not None:
+            insertion = (
+                f'{first_indent}import PickerBar from "lily-design-system-svelte-picker-bar";\n'
+                f'{first_indent}import {{ SHARE_TARGETS }} from "{share_targets_import_path}";\n'
+            )
+            new_text = new_text[:first_pos] + insertion + new_text[first_pos:]
+        if new_text != text:
+            result.picker_bar_wired = True
+            result.changed = True
+            if apply:
+                layout.write_text(new_text, encoding="utf-8")
+                config_dir = front_end / "src/lib/config"
+                config_dir.mkdir(parents=True, exist_ok=True)
+                (config_dir / "share-targets.ts").write_text(
+                    SHARE_TARGETS_TS, encoding="utf-8"
+                )
+            return
+        result.picker_bar_skipped_reason = "block matched but rewrite no-op"
+
+    # Fall back: point each picker's own import at its real package,
+    # leave the JSX (and any bespoke props) untouched. Only worth
+    # reporting as a skip if the layout still has individual picker
+    # tags at all -- a form already fully consolidated to <PickerBar>
+    # in an earlier run has none, and re-running should say nothing.
+    if re.search(r"<ThemePicker\b", text):
+        result.picker_bar_skipped_reason = (
+            result.picker_bar_skipped_reason
+            or "non-standard header wiring (custom props/logic)"
+        )
+    new_text = text
+    for name, pkg in PICKERS.items():
+        pattern = re.compile(
+            r'(import[ \t]+' + name + r'[ \t]+from[ \t]+)[\'"][^\'"]*' + name + r'\.svelte[\'"]'
+        )
+        new_text, n = pattern.subn(rf'\1"{pkg}"', new_text)
+        if n:
+            result.pickers_migrated.append(name)
+    if new_text != text:
+        result.changed = True
+        if apply:
+            layout.write_text(new_text, encoding="utf-8")
+
+
+def delete_pickers(ui_dir: Path, apply: bool, result: FormResult) -> None:
+    for name in PICKERS:
+        f = ui_dir / f"{name}.svelte"
+        if f.is_file():
+            if name not in result.pickers_migrated:
+                result.pickers_migrated.append(name)
+            result.changed = True
+            if apply:
+                f.unlink()
+    locales_ts = ui_dir / "locales.ts"
+    if locales_ts.is_file():
+        result.changed = True
+        if apply:
+            locales_ts.unlink()
+
+
+def process_form(slug: str, ref_dir: Path, candidates: list[str], apply: bool) -> FormResult:
+    result = FormResult(slug)
+    front_end = FORMS_DIR / slug / "front-end-with-svelte"
+    if not front_end.is_dir():
+        return result
+
+    process_package_json(front_end, apply, result)
+
+    ui_dir = front_end / "src/lib/components/ui"
+    migratable: list[str] = []
+    if ui_dir.is_dir():
+        for name in candidates:
+            f = ui_dir / f"{name}.svelte"
+            if not f.is_file():
+                continue
+            ref_path = ref_component_path(
+                ref_dir, HEADLESS_REF_PKG, "dist", "components", name, f"{name}.svelte"
+            )
+            if matches_reference(f.read_text(encoding="utf-8"), ref_path):
+                migratable.append(name)
+            else:
+                result.primitives_skipped_diverged.append(name)
+
+    rewrite_primitive_imports(front_end, migratable, apply, result)
+    delete_migrated_primitives(ui_dir, migratable, apply, result)
+
+    rewrite_layout(front_end, apply, result)
+    if ui_dir.is_dir():
+        delete_pickers(ui_dir, apply, result)
+
+    return result
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Migrate front-end-with-svelte/ from vendored Lily "
+        "Svelte components to the real pnpm packages."
+    )
+    parser.add_argument("slugs", nargs="*", help="form slugs to process")
+    parser.add_argument("--all", action="store_true", help="process every form")
+    parser.add_argument("--check", action="store_true", help="report drift; exit non-zero if any")
+    parser.add_argument("--dry-run", action="store_true", help="report what would change")
+    parser.add_argument(
+        "--ref-dir", type=Path, default=DEFAULT_REF_DIR,
+        help="directory of extracted `npm pack` reference packages",
+    )
+    args = parser.parse_args()
+
+    if args.all:
+        slugs = sorted(
+            p.name for p in FORMS_DIR.iterdir() if (p / "front-end-with-svelte").is_dir()
+        )
+    elif args.slugs:
+        slugs = args.slugs
+    else:
+        parser.error("give one or more slugs, or --all")
+
+    ref_dir = args.ref_dir
+    candidates = headless_matched_names(ref_dir)
+    if not candidates:
+        print(f"error: no reference packages found under {ref_dir}", file=sys.stderr)
+        return 2
+
+    apply = not (args.check or args.dry_run)
+    changed_slugs: list[str] = []
+    picker_bar_skips: list[tuple[str, str]] = []
+    diverged: list[tuple[str, list[str]]] = []
+
+    for slug in slugs:
+        result = process_form(slug, ref_dir, candidates, apply)
+        if result.changed:
+            changed_slugs.append(slug)
+        if result.picker_bar_skipped_reason:
+            picker_bar_skips.append((slug, result.picker_bar_skipped_reason))
+        if result.primitives_skipped_diverged:
+            diverged.append((slug, result.primitives_skipped_diverged))
+
+    if args.check:
+        if changed_slugs:
+            print(f"Lily pnpm-migration drift in {len(changed_slugs)}/{len(slugs)} form(s)")
+            for name in changed_slugs[:10]:
+                print(f"  {name}")
+            if len(changed_slugs) > 10:
+                print(f"  … and {len(changed_slugs) - 10} more")
+            return 1
+        print(f"Lily pnpm-migration complete in every form ({len(slugs)} forms)")
+        return 0
+
+    verb = "would migrate" if args.dry_run else "migrated"
+    print(f"{len(changed_slugs)}/{len(slugs)} form(s) {verb}")
+    if picker_bar_skips:
+        print(f"\n{len(picker_bar_skips)} form(s) kept individual pickers (non-standard header):")
+        for name, reason in picker_bar_skips:
+            print(f"  {name}: {reason}")
+    if diverged:
+        print(f"\n{len(diverged)} form(s) have local ui/ components that diverge from upstream (left vendored):")
+        for name, names in diverged:
+            print(f"  {name}: {', '.join(names)}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

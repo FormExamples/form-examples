@@ -3,7 +3,7 @@
 	import type { RiskGroup } from '#lib/engine/types.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
-	import TextInput from '#lib/components/ui/TextInput.svelte';
+	import { TextInput } from "lily-design-system-svelte-headless";
 
 	const d = assessment.data;
 </script>

@@ -9,7 +9,7 @@
 	} from '#lib/engine/cmai-rules.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import { TextAreaInput } from "lily-design-system-svelte-headless";
 
 	const b = assessment.data.behaviouralSymptoms;
 </script>

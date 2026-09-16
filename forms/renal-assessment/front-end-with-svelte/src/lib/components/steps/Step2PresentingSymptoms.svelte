@@ -2,9 +2,8 @@
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
 	import Field from '#lib/components/ui/Field.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import { RadioGroup, TextAreaInput } from "lily-design-system-svelte-headless";
 	import Select from '#lib/components/ui/Select.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
 	import type { YesNo, PresentingSymptoms } from '#lib/engine/types.js';
 
 	const s = assessment.data.presentingSymptoms;

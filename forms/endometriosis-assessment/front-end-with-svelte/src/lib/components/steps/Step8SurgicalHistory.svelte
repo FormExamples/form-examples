@@ -4,10 +4,7 @@
 	import Field from '#lib/components/ui/Field.svelte';
 	import NumberInput from '#lib/components/ui/NumberInput.svelte';
 	import Select from '#lib/components/ui/Select.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
-	import DateInput from '#lib/components/ui/DateInput.svelte';
-	import TextInput from '#lib/components/ui/TextInput.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+	import { DateInput, RadioGroup, TextAreaInput, TextInput } from "lily-design-system-svelte-headless";
 
 	const s = assessment.data.surgicalHistory;
 	const yesNo = [

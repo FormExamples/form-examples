@@ -5,8 +5,7 @@
 	// candidacy recommendation.
 	import { page } from '$app/state';
 	import Alert from '#lib/components/ui/Alert.svelte';
-	import Button from '#lib/components/ui/Button.svelte';
-	import Panel from '#lib/components/ui/Panel.svelte';
+	import { Button, Panel } from "lily-design-system-svelte-headless";
 	import { CANDIDACY_LABELS, OKS_CATEGORY_LABELS } from '#lib/engine/grader.js';
 	import { titleCase } from '#lib/engine/utils.js';
 	import { evaluationStore } from '#lib/stores/evaluation.svelte.js';

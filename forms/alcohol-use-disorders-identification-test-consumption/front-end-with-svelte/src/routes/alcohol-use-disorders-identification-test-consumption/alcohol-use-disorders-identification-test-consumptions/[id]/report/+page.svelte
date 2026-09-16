@@ -18,7 +18,7 @@
 		QUANTITY_OPTIONS,
 		HEAVY_EPISODE_OPTIONS
 	} from '#lib/engine/utils.js';
-	import Button from '#lib/components/ui/Button.svelte';
+	import { Button } from "lily-design-system-svelte-headless";
 
 	const plural = 'alcohol-use-disorders-identification-test-consumptions';
 

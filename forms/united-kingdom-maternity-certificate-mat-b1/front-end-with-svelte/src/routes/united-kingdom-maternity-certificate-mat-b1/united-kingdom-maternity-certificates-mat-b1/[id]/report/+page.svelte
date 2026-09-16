@@ -3,7 +3,7 @@
 	import { page } from '$app/state';
 	import { assessment } from '#lib/stores/assessment.svelte.js';
 	import { priorityLabel } from '#lib/engine/utils.js';
-	import Button from '#lib/components/ui/Button.svelte';
+	import { Button } from "lily-design-system-svelte-headless";
 
 	const plural = 'united-kingdom-maternity-certificates-mat-b1';
 

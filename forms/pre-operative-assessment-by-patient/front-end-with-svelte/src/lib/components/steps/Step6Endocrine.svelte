@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Field from '#lib/components/ui/Field.svelte';
 	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+	import { RadioGroup } from "lily-design-system-svelte-headless";
 	import Select from '#lib/components/ui/Select.svelte';
 
 	import { assessment } from '#lib/stores/assessment.svelte.js';
