@@ -149,7 +149,7 @@ bloodPressureAtTarget = systolicBloodPressure != null && diastolicBloodPressure 
 
 **Rapid decline** — true when current and previous eGFR are both present and:
 a fall of `≥ 25 %` from previous **and** a change in G-stage, **or** an
-annualised fall of `≥ 15 mL/min/1.73 m²` between the two sample dates.
+annualized fall of `≥ 15 mL/min/1.73 m²` between the two sample dates.
 
 **Review completeness** — count the recorded bundle items (eGFR, ACR, BP,
 `medicationReviewCompleted == 'yes'`, and the core bloods potassium and

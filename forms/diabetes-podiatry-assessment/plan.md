@@ -54,5 +54,5 @@ JSON-API crate. `CHANGELOG.md` and `examples/` are in place.
   it — critical-ischaemia additionally raises the dedicated
   critical-limb-ischaemia flag.
 - Suspected Charcot foot is captured as a direct assessor judgement (not
-  derived), matching NICE NG19's emphasis on recognising it clinically and
+  derived), matching NICE NG19's emphasis on recognizing it clinically and
   referring urgently without waiting for imaging confirmation.

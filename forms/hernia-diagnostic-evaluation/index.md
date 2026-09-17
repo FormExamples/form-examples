@@ -21,7 +21,7 @@ to operate has already been made. This form is upstream of that decision:
 | | `hernia-diagnostic-evaluation` | `pre-operative-assessment-by-clinician` |
 | --- | --- | --- |
 | Purpose | detect, classify, and grade urgency | assess fitness for a planned operation |
-| Question answered | what type of hernia is this, and does it need referral today? | is this patient safe to anaesthetise and operate on? |
+| Question answered | what type of hernia is this, and does it need referral today? | is this patient safe to anaesthetize and operate on? |
 | Instrument | EHS classification + red-flag urgency screen | American Society of Anesthesiologists (ASA) grade and organ-system review |
 | Output | classification + urgency band | fitness-for-surgery grade |
 | Typical next step | referral to a surgical service, at the urgency indicated | theatre listing |

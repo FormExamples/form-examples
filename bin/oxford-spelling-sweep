@@ -1,0 +1,371 @@
+#!/usr/bin/env python3
+"""bin/oxford-spelling-sweep -- sweep hand-authored Markdown prose from
+British -ise/-isation spelling to Oxford -ize/-ization spelling, per
+spec/oxford-spelling/oxford-spelling.md.
+
+Converts only Greek -izo-derived verbs (organise -> organize, standardise
+-> standardize, ...); leaves English/French -ise roots alone (exercise,
+promise, surprise, advise, comprise, otherwise, practise, precise,
+concise, noise, disable, ...) per the spec's own exception list. The
+convert list below was built by grepping every -is(e|ed|es|ing|ation|...)
+word actually present in this repo's prose and classifying each one by
+hand against the spec -- not a blind suffix regex, which would also catch
+"disable", "precise", "raise", "supervisor", "pharyngitis", and code
+identifiers like "resolvePromise" or "screeningImmunisations" (a JSON
+field name, never prose).
+
+Protects, per the spec's own sweep rules:
+  - Fenced code blocks and inline code spans (their content is never touched).
+  - Markdown link targets, i.e. the `(url)` part of `[text](url)`.
+  - *Italic*/_italic_ spans, since this repo's citation-title convention
+    cites publications in their own published spelling inside emphasis
+    (e.g. CPOC's *Preoperative Assessment and Optimisation for Adult
+    Surgery*) -- protecting all italics is safer than trying to detect
+    "is this specifically a citation".
+
+Scope: every form's index.md, AGENTS.md, CHANGELOG.md, plan.md, tasks.md,
+doc/**/*.md, spec/**/*.md, and the same set of root-level docs (AGENTS.md,
+CHANGELOG.md, index.md, plan.md, tasks.md, docs/**/*.md, arc42/**/*.md,
+spec/**/*.md, AGENTS/**/*.md). Excludes generated/vendored snapshot
+directories (forms/lily-spec/, forms/lily-svelte-spec/, llms.txt --
+regenerate llms.txt separately via bin/generate-llms-txt.py after this).
+
+Usage:
+  bin/oxford-spelling-sweep --check   # CI drift check (no writes)
+  bin/oxford-spelling-sweep --apply   # write changes
+  bin/oxford-spelling-sweep --dry-run # show what would change
+
+Idempotent: a converted file has nothing left to convert.
+"""
+
+from __future__ import annotations
+
+import argparse
+import re
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+
+# lowercase -ise/-isation surface form -> lowercase -ize/-ization form.
+# Every pair differs by exactly one character (an "s" that becomes "z"),
+# so case is preserved by flipping that single character in the matched
+# text, never by reconstructing the whole word.
+CONVERT: dict[str, str] = {
+    "vocalisation": "vocalization",
+    "visualise": "visualize",
+    "visualised": "visualized",
+    "visualises": "visualizes",
+    "visualising": "visualizing",
+    "visualisation": "visualization",
+    "visualisations": "visualizations",
+    "utilise": "utilize",
+    "utilised": "utilized",
+    "utilises": "utilizes",
+    "utilising": "utilizing",
+    "utilisation": "utilization",
+    "standardise": "standardize",
+    "standardised": "standardized",
+    "standardises": "standardizes",
+    "standardising": "standardizing",
+    "standardisation": "standardization",
+    "stabilisation": "stabilization",
+    "specialise": "specialize",
+    "specialised": "specialized",
+    "specialises": "specializes",
+    "specialising": "specializing",
+    "socialised": "socialized",
+    "serialise": "serialize",
+    "serialised": "serialized",
+    "serialises": "serializes",
+    "serialising": "serializing",
+    "serialiser": "serializer",
+    "serialisers": "serializers",
+    "serialisation": "serialization",
+    "sensitisation": "sensitization",
+    "scrutinised": "scrutinized",
+    "sanitise": "sanitize",
+    "sanitised": "sanitized",
+    "sanitises": "sanitizes",
+    "sanitising": "sanitizing",
+    "reorganisation": "reorganization",
+    "reorganisations": "reorganizations",
+    "recognise": "recognize",
+    "recognised": "recognized",
+    "recognises": "recognizes",
+    "recognising": "recognizing",
+    "recognisable": "recognizable",
+    "realise": "realize",
+    "realised": "realized",
+    "realises": "realizes",
+    "realising": "realizing",
+    "realisation": "realization",
+    "quantise": "quantize",
+    "quantised": "quantized",
+    "unquantised": "unquantized",
+    "prioritise": "prioritize",
+    "prioritised": "prioritized",
+    "prioritises": "prioritizes",
+    "prioritising": "prioritizing",
+    "prioritisation": "prioritization",
+    "organiser": "organizer",
+    "organisers": "organizers",
+    "organise": "organize",
+    "organised": "organized",
+    "organises": "organizes",
+    "organising": "organizing",
+    "organisation": "organization",
+    "organisations": "organizations",
+    "optimise": "optimize",
+    "optimised": "optimized",
+    "optimises": "optimizes",
+    "optimising": "optimizing",
+    "optimisation": "optimization",
+    "optimisations": "optimizations",
+    "normalise": "normalize",
+    "normalised": "normalized",
+    "normalises": "normalizes",
+    "normalising": "normalizing",
+    "normalisation": "normalization",
+    "minimise": "minimize",
+    "minimised": "minimized",
+    "minimises": "minimizes",
+    "minimising": "minimizing",
+    "maximise": "maximize",
+    "maximised": "maximized",
+    "maximises": "maximizes",
+    "maximising": "maximizing",
+    "mechanise": "mechanize",
+    "localise": "localize",
+    "localised": "localized",
+    "localises": "localizes",
+    "localising": "localizing",
+    "localisation": "localization",
+    "liquidised": "liquidized",
+    "internationalised": "internationalized",
+    "initialise": "initialize",
+    "initialised": "initialized",
+    "initialises": "initializes",
+    "initialising": "initializing",
+    "hospitalised": "hospitalized",
+    "generalise": "generalize",
+    "generalised": "generalized",
+    "generalises": "generalizes",
+    "generalising": "generalizing",
+    "formalised": "formalized",
+    "fertilisation": "fertilization",
+    "emphasise": "emphasize",
+    "emphasised": "emphasized",
+    "emphasises": "emphasizes",
+    "emphasising": "emphasizing",
+    "deserialise": "deserialize",
+    "deserialised": "deserialized",
+    "deserialises": "deserializes",
+    "deserialising": "deserializing",
+    "derealisation": "derealization",
+    "depersonalisation": "depersonalization",
+    "dematerialised": "dematerialized",
+    "decentralise": "decentralize",
+    "decentralised": "decentralized",
+    "customise": "customize",
+    "customised": "customized",
+    "customising": "customizing",
+    "customisable": "customizable",
+    "criticise": "criticize",
+    "criticised": "criticized",
+    "criticises": "criticizes",
+    "criticising": "criticizing",
+    "characterise": "characterize",
+    "characterised": "characterized",
+    "characterises": "characterizes",
+    "characterising": "characterizing",
+    "centralise": "centralize",
+    "centralised": "centralized",
+    "catheterised": "catheterized",
+    "categorise": "categorize",
+    "categorised": "categorized",
+    "categorises": "categorizes",
+    "categorising": "categorizing",
+    "categorisation": "categorization",
+    "capitalise": "capitalize",
+    "capitalised": "capitalized",
+    "capitalises": "capitalizes",
+    "authorisation": "authorization",
+    "apologise": "apologize",
+    "apologised": "apologized",
+    "apologises": "apologizes",
+    "alloimmunisation": "alloimmunization",
+    "anaesthetise": "anaesthetize",
+    "anaesthetised": "anaesthetized",
+    "annualised": "annualized",
+    "memorisable": "memorizable",
+    "parenthesised": "parenthesized",
+    "penalise": "penalize",
+    "penalised": "penalized",
+    "penalises": "penalizes",
+    "pluralised": "pluralized",
+    "itemised": "itemized",
+}
+
+# Exact proper-noun phrases to never touch, regardless of markdown context --
+# unlike a citation title or a standards body's name (both wrapped in
+# *italics* in this repo's prose, and so already protected by ITALIC_RE),
+# a statute's official short title is cited as plain, unmarked text. UK Acts
+# of Parliament are enacted in British spelling, never Oxford spelling,
+# independent of what the general word would otherwise become.
+PROTECTED_PHRASES = [
+    "Human Fertilisation and Embryology Act 1990",
+    "Human Fertilisation and Embryology Authority",
+]
+
+# Sanity check: every pair must differ by exactly one character.
+for _from, _to in CONVERT.items():
+    diffs = [i for i, (a, b) in enumerate(zip(_from, _to)) if a != b]
+    assert len(_from) == len(_to) and len(diffs) == 1 and _from[diffs[0]] == "s" and _to[diffs[0]] == "z", (
+        f"{_from!r} -> {_to!r} is not a single s->z swap"
+    )
+
+_WORDS = sorted(CONVERT, key=len, reverse=True)
+WORD_RE = re.compile(r"\b(" + "|".join(re.escape(w) for w in _WORDS) + r")\b", re.IGNORECASE)
+
+FENCE_RE = re.compile(r"```.*?```", re.DOTALL)
+INLINE_CODE_RE = re.compile(r"`[^`\n]+`")
+LINK_URL_RE = re.compile(r"(?<=\]\()[^)]*(?=\))")
+# Prose in this repo hard-wraps at ~80 columns, so an italic span commonly
+# continues onto the next line -- allow a single soft line-break (but not
+# a blank-line paragraph break) inside the span, or protection silently
+# misses the wrapped half and only "fixes" it.
+_ITALIC_BODY = r"(?:[^*\n]|\n(?!\n))+"
+_ITALIC_BODY_U = r"(?:[^_\n]|\n(?!\n))+"
+ITALIC_RE = re.compile(
+    r"(?<!\*)\*" + _ITALIC_BODY + r"\*(?!\*)|(?<!_)_" + _ITALIC_BODY_U + r"_(?!_)"
+)
+
+# Allow the same hard-wrap tolerance as ITALIC_RE: a protected phrase's
+# spaces may be a line-wrap in the source, not just a literal " ".
+PHRASE_RE = re.compile(
+    "|".join(re.escape(p).replace(r"\ ", r"\s+") for p in PROTECTED_PHRASES)
+)
+
+PROTECT_RES = [FENCE_RE, INLINE_CODE_RE, LINK_URL_RE, ITALIC_RE, PHRASE_RE]
+
+
+def _word_replacer(m: re.Match) -> str:
+    matched = m.group(0)
+    to = CONVERT[matched.lower()]
+    idx = next(i for i, (a, b) in enumerate(zip(matched.lower(), to)) if a != b)
+    out = list(matched)
+    out[idx] = "Z" if matched[idx].isupper() else "z"
+    return "".join(out)
+
+
+def convert_text(text: str) -> str:
+    """Apply CONVERT to `text`, skipping protected spans (code, links,
+    italics) by masking them with placeholders during the substitution
+    and restoring the original bytes afterward -- so protected content
+    is never even examined, let alone changed."""
+    placeholders: list[str] = []
+
+    def _mask(pattern: re.Pattern) -> None:
+        nonlocal text
+
+        def _sub(m: re.Match) -> str:
+            placeholders.append(m.group(0))
+            return f"\x00{len(placeholders) - 1}\x00"
+
+        text = pattern.sub(_sub, text)
+
+    for pattern in PROTECT_RES:
+        _mask(pattern)
+
+    text = WORD_RE.sub(_word_replacer, text)
+
+    def _restore(m: re.Match) -> str:
+        return placeholders[int(m.group(1))]
+
+    # A protected span can nest inside another (e.g. `` `code` `` inside
+    # *italics*): the outer mask's placeholder swallows the inner one, so
+    # restoring must repeat until no placeholder remains, not run once.
+    placeholder_re = re.compile(r"\x00(\d+)\x00")
+    while placeholder_re.search(text):
+        text = placeholder_re.sub(_restore, text)
+    return text
+
+
+SCOPE_NAMES = ("index.md", "AGENTS.md", "CHANGELOG.md", "plan.md", "tasks.md")
+SCOPE_GLOB_DIRS = ("doc", "spec")
+
+# Files that are *about* spelling itself, not ordinary hand-authored prose:
+# spec/oxford-spelling/oxford-spelling.md's own "Use (Oxford) | Not" table
+# deliberately puts the wrong -ise spelling in its right-hand column as a
+# worked example -- sweeping it "fixes" the example into two identical
+# columns and destroys the table. Maintained by hand, never swept.
+EXCLUDE_FILES = {
+    REPO_ROOT / "spec/oxford-spelling/oxford-spelling.md",
+}
+
+
+def scope_files() -> list[Path]:
+    files: set[Path] = set()
+    for form_dir in sorted((REPO_ROOT / "forms").iterdir()):
+        if not form_dir.is_dir():
+            continue
+        for name in SCOPE_NAMES:
+            p = form_dir / name
+            if p.is_file() and not p.is_symlink():
+                files.add(p)
+        for sub in SCOPE_GLOB_DIRS:
+            d = form_dir / sub
+            if d.is_dir():
+                files.update(p for p in d.rglob("*.md") if p.is_file())
+    for name in SCOPE_NAMES:
+        p = REPO_ROOT / name
+        if p.is_file() and not p.is_symlink():
+            files.add(p)
+    for sub in ("docs", "arc42", "spec", "AGENTS"):
+        d = REPO_ROOT / sub
+        if d.is_dir():
+            files.update(p for p in d.rglob("*.md") if p.is_file())
+    return sorted(files - EXCLUDE_FILES)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Sweep hand-authored Markdown prose to Oxford spelling."
+    )
+    parser.add_argument("--check", action="store_true", help="report drift; exit non-zero if any")
+    parser.add_argument("--dry-run", action="store_true", help="report what would change")
+    args = parser.parse_args()
+
+    apply = not (args.check or args.dry_run)
+    changed: list[Path] = []
+
+    for path in scope_files():
+        try:
+            text = path.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError):
+            continue
+        new_text = convert_text(text)
+        if new_text != text:
+            changed.append(path)
+            if apply:
+                path.write_text(new_text, encoding="utf-8")
+
+    if args.check:
+        if changed:
+            print(f"Oxford-spelling drift in {len(changed)} file(s)")
+            for p in changed[:10]:
+                print(f"  {p.relative_to(REPO_ROOT)}")
+            if len(changed) > 10:
+                print(f"  … and {len(changed) - 10} more")
+            return 1
+        print("Oxford spelling complete across every scoped file")
+        return 0
+
+    verb = "would update" if args.dry_run else "updated"
+    print(f"{len(changed)} file(s) {verb}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

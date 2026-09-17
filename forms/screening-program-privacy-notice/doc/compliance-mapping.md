@@ -8,7 +8,7 @@ authorizes the processing.
 
 | Art. 13 item | Where satisfied in the notice |
 | --- | --- |
-| 13(1)(a) controller identity & contact | "Practice contact" block (practice-customisable) |
+| 13(1)(a) controller identity & contact | "Practice contact" block (practice-customizable) |
 | 13(1)(a) DPO contact | "Data Protection Officer" block |
 | 13(1)(c) purposes and legal basis | "How we use your information" lists screening recipients with Art. 6(1)(e), Art. 9(2)(h), and Art. 9(2)(i) bases |
 | 13(1)(e) recipients | NHS England, UKHSA, named research bodies |
@@ -29,7 +29,7 @@ authorizes the processing.
 | Approved screening research | 6(1)(e) | 9(2)(j) | s.251 CAG approval + HRA approval | Yes |
 | Anonymized statistics | outside UK GDPR | n/a | Anonymization Code | No (not personal data) |
 
-## Practice-customisable block
+## Practice-customizable block
 
 The form includes a `practice_config` block so each practice fills in:
 

@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-100 tools.
+101 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -60,6 +60,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/migrate-sql-filenames.py`](#migrate-sql-filenamespy)
 - [`bin/node-current-version-set`](#node-current-version-set)
 - [`bin/normalize`](#normalize)
+- [`bin/oxford-spelling-sweep`](#oxford-spelling-sweep)
 - [`bin/page-header-layout-refactor`](#page-header-layout-refactor)
 - [`bin/route-loco-layout`](#route-loco-layout)
 - [`bin/route-svelte-layout`](#route-svelte-layout)
@@ -1908,6 +1909,48 @@ Usage:
 <h2 id="normalize"><code>bin/normalize</code></h2>
 
 _No header documentation._
+
+<h2 id="oxford-spelling-sweep"><code>bin/oxford-spelling-sweep</code></h2>
+
+```text
+bin/oxford-spelling-sweep -- sweep hand-authored Markdown prose from
+British -ise/-isation spelling to Oxford -ize/-ization spelling, per
+spec/oxford-spelling/oxford-spelling.md.
+
+Converts only Greek -izo-derived verbs (organise -> organize, standardise
+-> standardize, ...); leaves English/French -ise roots alone (exercise,
+promise, surprise, advise, comprise, otherwise, practise, precise,
+concise, noise, disable, ...) per the spec's own exception list. The
+convert list below was built by grepping every -is(e|ed|es|ing|ation|...)
+word actually present in this repo's prose and classifying each one by
+hand against the spec -- not a blind suffix regex, which would also catch
+"disable", "precise", "raise", "supervisor", "pharyngitis", and code
+identifiers like "resolvePromise" or "screeningImmunisations" (a JSON
+field name, never prose).
+
+Protects, per the spec's own sweep rules:
+  - Fenced code blocks and inline code spans (their content is never touched).
+  - Markdown link targets, i.e. the `(url)` part of `[text](url)`.
+  - *Italic*/_italic_ spans, since this repo's citation-title convention
+    cites publications in their own published spelling inside emphasis
+    (e.g. CPOC's *Preoperative Assessment and Optimisation for Adult
+    Surgery*) -- protecting all italics is safer than trying to detect
+    "is this specifically a citation".
+
+Scope: every form's index.md, AGENTS.md, CHANGELOG.md, plan.md, tasks.md,
+doc/**/*.md, spec/**/*.md, and the same set of root-level docs (AGENTS.md,
+CHANGELOG.md, index.md, plan.md, tasks.md, docs/**/*.md, arc42/**/*.md,
+spec/**/*.md, AGENTS/**/*.md). Excludes generated/vendored snapshot
+directories (forms/lily-spec/, forms/lily-svelte-spec/, llms.txt --
+regenerate llms.txt separately via bin/generate-llms-txt.py after this).
+
+Usage:
+  bin/oxford-spelling-sweep --check   # CI drift check (no writes)
+  bin/oxford-spelling-sweep --apply   # write changes
+  bin/oxford-spelling-sweep --dry-run # show what would change
+
+Idempotent: a converted file has nothing left to convert.
+```
 
 <h2 id="page-header-layout-refactor"><code>bin/page-header-layout-refactor</code></h2>
 

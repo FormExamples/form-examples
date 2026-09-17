@@ -8,7 +8,7 @@ result when the score is **≥ 2**. A positive screen is a prompt for further
 assessment of drinking, not a diagnosis of an alcohol-use disorder.
 
 CAGE was described by Ewing (*JAMA* 1984) and derived from earlier work by Mayfield
-*et al.* It is short, memorisable, and requires no equipment, which makes it well
+*et al.* It is short, memorizable, and requires no equipment, which makes it well
 suited to opportunistic screening in primary and general clinical care. Because
 its questions concern lifetime experience and the consequences of drinking, CAGE
 is more sensitive to established problem drinking and dependence than to earlier

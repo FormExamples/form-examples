@@ -43,7 +43,7 @@ Request/response structs that cross the wire to the front-end carry
 internals stay snake_case — the same boundary described in
 [Data model](data-model.md).
 
-The scoring `engine/` module is plain, DB-free Rust: controllers deserialise a
+The scoring `engine/` module is plain, DB-free Rust: controllers deserialize a
 request, call the engine, and persist the grade + rules + flags. It shares rule
 and flag IDs with the JS and TypeScript engines — see
 [Scoring engines](scoring-engines.md).

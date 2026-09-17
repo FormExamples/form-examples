@@ -16,7 +16,7 @@ Slug: protobuf
 ## What is Protocol Buffers?
 
 Protocol Buffers (protobuf) is Google's language-neutral, platform-neutral,
-extensible mechanism for serialising structured data — smaller, faster, and
+extensible mechanism for serializing structured data — smaller, faster, and
 simpler than XML. You define how you want your data to be structured once,
 in a `.proto` file, then compile with the protocol buffer compiler
 (`protoc`) to generate native code in C++, C#, Dart, Go, Java, Kotlin,

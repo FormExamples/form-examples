@@ -281,7 +281,7 @@ Design each feature on the reference forms
       **Svelte fleet rollout: DONE 2026-09-12 — AND a real, severe,
       previously-undiscovered bug found and fixed along the way.**
       Building a *second* reference form (`glasgow-coma-scale`) to
-      check the pattern actually generalised (rather than assuming a
+      check the pattern actually generalized (rather than assuming a
       one-form pilot proved the fleet's shape was uniform) exposed a
       live failure: fill a field, reload, field comes back empty —
       localStorage itself already overwritten with blanks by the time
@@ -296,9 +296,9 @@ Design each feature on the reference forms
          clobbers a good draft with blank defaults regardless.
 
       `cardiology-request` alone already had the fix for both (from
-      2026-09-08, building Export/Import) — never generalised, so it
+      2026-09-08, building Export/Import) — never generalized, so it
       silently never protected the other ~308 forms sharing that shape.
-      Surveyed before generalising: 308/311 `loadForId`-shape stores had
+      Surveyed before generalizing: 308/311 `loadForId`-shape stores had
       defect (1); new `bin/svelte-autosave-restore-fix` fixes both
       defects plus adds/wires the restore banner where its dependencies
       exist (or the bug fix alone where they don't), and deliberately
@@ -350,7 +350,7 @@ Design each feature on the reference forms
       generated YAML fixture per table.
 
       **Real finding that overturned this session's own earlier
-      assumption:** a fleet survey before generalising found only 2/338
+      assumption:** a fleet survey before generalizing found only 2/338
       crates (`cardiology-request`, `cardiology-response`) use a `Uuid`
       primary key — the other 336 use the Loco scaffold's `i64`
       auto-increment default, which `sql/` (the source of truth) never
@@ -500,7 +500,7 @@ Design each feature on the reference forms
       map, emits import/export, re-declares non-namespace IIFE params, rewrites
       HTML to a single module entry; idempotent; `--check` CI drift detector,
       wired into AGENTS.md Verify). It handles the many real idioms found in the
-      corpus (per-symbol + `Object.assign` publishes, two-line & parenthesised &
+      corpus (per-symbol + `Object.assign` publishes, two-line & parenthesized &
       reverse `|| {}` inits, `const NS = window.X` aliases, global-param IIFEs
       incl. multi-param `(root, doc)`, inline member-access consumes, same-name
       shadows via `as`-aliased imports, function-RHS publishes with inner refs).
@@ -879,7 +879,7 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       `window.__FORM_STATE__.setState()`, click the real "Download
       CSV"/"Download TSV" buttons, save the real download — guaranteeing
       fidelity to the actual export feature rather than reimplementing its
-      serialisation, per this item's own wording. 265/356 forms generated
+      serialization, per this item's own wording. 265/356 forms generated
       (91 SKIP — no `js/form-export.js` wired, matching
       `bin/form-export-import-refactor`'s own unmigrated set exactly).
       **Real bug found + fixed along the way:** the first fleet-wide
@@ -1410,7 +1410,7 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       `window.__FORM_STATE__ = { slug, getState, setState }` — mirroring
       the pre-existing `window.__A11Y_DRAFT_KEY__` pattern, rather than
       the shared modules reaching into a wizard's private state directly.
-      Export serialises the current (possibly in-progress) state to
+      Export serializes the current (possibly in-progress) state to
       `<slug>-<date>.<ext>`: JSON, a generic recursive object->XML walk
       (field names are already valid XML element names, being camelCase
       identifiers), and CSV/TSV flattened to one header row of
@@ -1440,7 +1440,7 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       **Svelte** (`cardiology-request`): a shared, form-agnostic
       `src/lib/components/ui/FormDataTransfer.svelte` component (props:
       `slug`, `getState: () => unknown`, `setState`) wired into the
-      wizard route, backed by pure serialisation functions in
+      wizard route, backed by pure serialization functions in
       `src/lib/utils/form-data-transfer.ts` ported verbatim from the
       HTML implementation (same output shapes, same filenames, so the
       two stacks' exports are interchangeable). `RequestStore` gained an
@@ -1547,7 +1547,7 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       hand-picked diverse batch of 4 forms (a `*-test-result`, a
       `*-test-request`, a WHO trauma form, and a calculator with a
       nested-array merge case) plus `html-smoke` + `dashboard-export` +
-      a newly-generalised `form-export-import` E2E round-trip (the
+      a newly-generalized `form-export-import` E2E round-trip (the
       reference-form version only worked for its own field ids; rewrote
       it to fill the first visible free-text input with a marker and
       assert the marker survives export → reset → import, working for
@@ -2256,7 +2256,7 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
 - [x] **diabetes-assessment: pre-proliferative retinopathy and maculopathy
       raise no eye rule or flag.** FIXED 2026-09-06. `retinopathyStatus`
       has five options (none, background, preProliferative, proliferative,
-      maculopathy) but DM-004/DM-008 and FLAG-EYE-001 only recognised
+      maculopathy) but DM-004/DM-008 and FLAG-EYE-001 only recognized
       `'proliferative'` and `'background'` by exact string match (FLAG-
       EYE-002 was never about retinopathy status at all — a slip in this
       item's own earlier text, it checks a missing screening date).
@@ -2539,7 +2539,7 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       `bin/test-form` shows only the one pre-existing, unrelated failure
       (`diabetes-podiatry-assessment`, a foundation-depth-only form never
       in scope for any front-end gate).
-- [x] **microbiology-culture-test-result: completeness penalises a
+- [x] **microbiology-culture-test-result: completeness penalizes a
       no-growth culture.** FIXED 2026-09-06. `R-COMP-SENSITIVITIES-01`
       required `antibioticSensitivities` text even when `cultureResult` was
       `no-growth` (nothing to be sensitive to), silently capping an
@@ -2716,7 +2716,7 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       exercised by an existing persona (several — the three
       `*-now-correctly-critical` toxicology personas especially — had
       already documented the exact gap by name during the original
-      persona-authoring pass, before this sweep formalised the fix).
+      persona-authoring pass, before this sweep formalized the fix).
       Ran `npx vitest run` and `npx svelte-check` across all 16 Svelte
       engines: all green after fixing the two real regressions the first
       Vitest pass caught (blood-test-result, toxicology-test-result) —
@@ -2769,7 +2769,7 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       sub-result objects, key count; bare arrays/strings/booleans rank far
       below any object; names only break ties, with factory names,
       `*Label`/`*Class` helpers and per-item sub-scorers excluded or
-      penalised). Result: **PASS 279 → 340, SKIP 76 → 15**, FAIL 0, and
+      penalized). Result: **PASS 279 → 340, SKIP 76 → 15**, FAIL 0, and
       every one of the six known mis-picks now resolves to the composite.
       `--probe <slug>` prints each candidate's score. **Audit of the PASS
       forms' persona `graderHint`s** (script comparing each hint with the
@@ -2848,7 +2848,7 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       `united-states-hipaa-authorization-form`, `prescription-request`,
       `provider-transfer-request`, `patient-room-readiness`,
       `parkland-formula-for-burns`, `pre-operative-assessment-by-patient`:
-      the module exports helpers but no recognisable entry point. Add a
+      the module exports helpers but no recognizable entry point. Add a
       single composed `calculateGrade(data)` (or a `graderHint`) so
       discovery works; keep the existing per-axis functions.
 - [x] **"needs a fuller input" — 10 forms** — RESOLVED 2026-09-03 by
@@ -3032,7 +3032,7 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       `gerontology-assessment`\'s `calculateAge()` right above it), and
       `hematology-assessment` (`calculateAbnormality` + split
       `detectAdditionalFlags`; the composite abnormality score is the
-      mean of each answered lab value\'s normalised deviation from its
+      mean of each answered lab value\'s normalized deviation from its
       reference range, and returns \'draft\' with an empty firedRules
       array below 3 answered values — not reached by any of the
       three personas here, all of which answer 18/18). All nine matched
@@ -3182,7 +3182,7 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       general-form` and `who-emergency-unit-trauma-form`
       (`validateEuGeneral`/`validateEuTrauma` + split
       `detectFlaggedIssues`; the Trauma sibling ratchets several rules
-      — spine stabilisation and GCS — to RED-triage-only via
+      — spine stabilization and GCS — to RED-triage-only via
       `applies()`, and its pregnancy flag is `high` priority where the
       General form\'s equivalent is only `medium`; several vital-sign
       and SpO2 conditions fire independently rather than as mutually

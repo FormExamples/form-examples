@@ -86,5 +86,5 @@ axis to `null` when cylinder is zero, and rejects axis 0.
 
 All refractive numbers are quantized to **0.25 D** steps. The SQL columns
 are `NUMERIC(5,2)` so the step is preserved exactly without floating-
-point drift. The classification engine accepts unquantised input but the
+point drift. The classification engine accepts unquantized input but the
 front-end snaps to 0.25 D before submission.

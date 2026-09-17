@@ -10,7 +10,7 @@ baseline.
 ## Principle ↔ source mapping
 
 The actual twelve principles are defined per provider in the
-practice-customisable notice block; the canonical mappings below cover the
+practice-customizable notice block; the canonical mappings below cover the
 twelve-principle structure used in the monorepo's reference notice.
 
 | # | Principle | GMC *Good Medical Practice* (2024) | NHS Constitution | Statutory hook |

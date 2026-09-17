@@ -29,7 +29,7 @@ A team adopting this form is willing to write down assumptions,
 constraints, alternatives, and implications — not just a one-line
 decision.
 The form is a *documentation aid*, not a workflow tool: no notifications,
-no approval routing, no centralised search.
+no approval routing, no centralized search.
 Markdown is the canonical artefact: ADRs end up committed to a repo at
 `docs/adr/NNNN-slug.md`, not stored only in this form's database.
 

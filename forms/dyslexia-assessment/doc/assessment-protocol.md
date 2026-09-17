@@ -63,7 +63,7 @@ The clinician should record:
 - **Engagement and effort** — sustained attention, persistence on
   difficult items.
 - **Anxiety signs** — fidgeting, avoidance, verbal reports of stress.
-- **Strategies used** — finger-tracking, sub-vocalisation,
+- **Strategies used** — finger-tracking, sub-vocalization,
   self-correction, guessing.
 - **Reading behaviour** — left-right tracking errors, word
   substitutions, hesitations, regressions, omissions.

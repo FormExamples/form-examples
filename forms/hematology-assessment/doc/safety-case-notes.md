@@ -27,7 +27,7 @@ recommends urgent referral is **Class IIa**.
 | Iron-deficiency anaemia without underlying-cause investigation | Step 5 flags need for NG12 endoscopy referral in adults ≥ 60 y, men ≥ 50 y, or post-menopausal women |
 | Neutropenic sepsis missed | Step 2 neutrophil count linked to fever capture; high-priority sepsis flag |
 | Anticoagulant errors (wrong DOAC dose for renal function / weight) | Step 9 records eGFR and weight; not a prescribing tool but flags review |
-| Transfusion alloimmunisation history not transmitted to laboratory | Step 8 specifies alloantibodies; output to FHIR includes Specimen and Observation |
+| Transfusion alloimmunization history not transmitted to laboratory | Step 8 specifies alloantibodies; output to FHIR includes Specimen and Observation |
 | Jehovah's Witness or other patient preference for no blood products | Step 8 dedicated field; result page surfaces alternative-management pathways |
 | Suspected acute leukaemia (blasts + pancytopenia) not flagged urgently | Composite severity engine flags **Severe** with same-day haematology referral text |
 

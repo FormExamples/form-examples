@@ -4,7 +4,7 @@
 | ---- | ---------- |
 | **Form (project)** | One self-contained, full-stack implementation of a single clinical or administrative form, living under `forms/<slug>/`. The unit of composition in the monorepo. |
 | **Form slug** | The kebab-case directory name of a form (e.g. `cardiology-request`). Also the base for the Svelte route prefix `/<slug>/`, the snake-case back-end source dir `src/<form_snake_case>/`, and the per-form database names. |
-| **Pluralised slug** | The RESTful collection name for a form's resource (e.g. `cardiology-requests`), used in Svelte routes `/<slug>/<plural>/`. |
+| **Pluralized slug** | The RESTful collection name for a form's resource (e.g. `cardiology-requests`), used in Svelte routes `/<slug>/<plural>/`. |
 | **Wizard** | The single-page, step-by-step questionnaire — the whole form on one URL, navigated in-page. Never a multi-page form. |
 | **Dashboard** | The vetting/listing view of a form's collection: a data table of submitted records with computed scores, severities, and flags. |
 | **Grading engine (scoring engine)** | The pure logic that turns a submitted record into a grade. Decomposed into `types → rules → grader → flagged-issues` and mirrored in HTML JS, Svelte TS, and Rust. |

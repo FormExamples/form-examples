@@ -108,7 +108,7 @@ research consolidated in HSG179 and ILSF position statements.
 
 ## Drowning sequence (recognition)
 
-Drowning casualties follow a recognisable behaviour pattern documented by
+Drowning casualties follow a recognizable behaviour pattern documented by
 Pia in 1971 and now standardized by ILSF:
 
 1. Surprise — splashing or thrashing.

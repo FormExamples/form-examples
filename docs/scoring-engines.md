@@ -64,7 +64,7 @@ The HTML front-end's `js/` also holds the non-engine glue (`form-app.js`,
 `dashboard-app.js`, `data.js`, `api.js`) — the engine files are the ones that
 must match the other stacks. The Rust engine is a plain module under the crate's
 `src/<form_snake_case>/engine/` (see [Back end](back-end.md)); it is pure Rust
-with no database access, called by the controllers after deserialising a request.
+with no database access, called by the controllers after deserializing a request.
 
 ## Keeping them in agreement: golden vectors
 

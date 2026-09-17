@@ -230,7 +230,7 @@ for them.
   sequence into the *existing* `seed()` body — never replacing whatever
   it already seeds — plus one generated YAML fixture per table.
 
-  A fleet survey done before generalising (piloting on
+  A fleet survey done before generalizing (piloting on
   `cardiology-request` first, then re-checking against a second,
   differently-shaped crate before trusting the pattern) found only 2/338
   crates use a `Uuid` primary key — the other 336 use the Loco scaffold's
@@ -283,7 +283,7 @@ for them.
   change on `cardiology-request` (add `hadDraftAtLoad` +
   `RestoreBanner.svelte`, mirroring the HTML side's
   `js/restore-banner.js`); building a *second* reference form
-  (`glasgow-coma-scale`) to prove the pattern generalised exposed the
+  (`glasgow-coma-scale`) to prove the pattern generalized exposed the
   real bug live, not by inspection: fill a field, reload, and the field
   came back empty — with localStorage itself already overwritten with
   blank data by the time of the check.
@@ -304,11 +304,11 @@ for them.
 
   `cardiology-request` alone already carried the correct pattern for
   both (fixed on itself back on 2026-09-08 while building Export/Import,
-  per its own commit history) — but that fix was never generalised
+  per its own commit history) — but that fix was never generalized
   beyond the one reference form, so it silently never protected the
   other ~308 Svelte forms sharing the same store shape.
 
-  Surveyed the fleet before generalising (not assumed): 308/311
+  Surveyed the fleet before generalizing (not assumed): 308/311
   `loadForId`-shape stores had defect (1), of which 345 (308 + the 37
   single-instance stores, unaffected — see below) matched an *exact*
   persist-effect anchor a mechanical fix could target safely. New
@@ -394,7 +394,7 @@ for them.
     assumed): `--color-danger` didn't have this problem
     (`--color-danger-bg` derives from the untouched `--color-error`),
     but re-running the full sweep after the success/warning/info change
-    showed `meeting`'s "Organiser" badge only 3.97:1 (needs 4.5:1) — the
+    showed `meeting`'s "Organizer" badge only 3.97:1 (needs 4.5:1) — the
     darkened text on its now-also-darkened background. Fixed by also
     freezing `--color-success-bg`/`--color-warning-bg` to the *original*
     raw hex (not the token, which now points at the darkened value),
@@ -870,7 +870,7 @@ for them.
   (`personas.json`'s first entry) via `window.__FORM_STATE__.setState()`,
   click the real "Download CSV"/"Download TSV" buttons, save the real
   download — guaranteeing fidelity to the actual export feature rather
-  than reimplementing its serialisation. 265/356 forms generated (91
+  than reimplementing its serialization. 265/356 forms generated (91
   SKIP — no `js/form-export.js` wired). Found and fixed a real bug this
   surfaced: `advance-statement-about-care`'s "Remove person" button
   queried a `.btn-remove` class its template never set (it had
@@ -985,7 +985,7 @@ this section gathers the `[Unreleased]` history that shipped as v1.0.0.
   completeness and validation labels are not fully independent axes,
   since missing required fields populate the same firedRules list format
   errors do; complete-but-minor-issues on malformed emails and an
-  end-before-start authorisation period). This is the second of the 4
+  end-before-start authorization period). This is the second of the 4
   forms unblocked by the form-validator.js loader fix above.
 - Personas for `employee-onboarding-checklist` (complete, low risk; a
   critical DBS-not-started case regardless of otherwise-high completion; a

@@ -42,6 +42,6 @@ JSON-API crate. `CHANGELOG.md` and `examples/` are in place.
 - Safety-netting and follow-up are **conditionally required** — they only count
   toward the completeness tally when the encounter triggers them (red-flag
   symptoms present / a plan is recorded), so short well-documented notes are not
-  penalised for components that do not apply.
+  penalized for components that do not apply.
 - Keep the wizard one continuous single-page wizard (7 steps); the four SOAP
   sections map to steps 3–6 with context and summary either side.

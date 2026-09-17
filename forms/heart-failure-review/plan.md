@@ -40,7 +40,7 @@ JSON-API crate. `CHANGELOG.md` and `examples/` are in place.
 - The medication-optimization model is driven by `heartFailureType`: the four
   pillars are indicated for HFrEF; the SGLT2 inhibitor is the principal pillar
   for HFmrEF/HFpEF. A pillar marked `contraindicated` / `not-tolerated` counts
-  as addressed so the optimization grade is not penalised for documented reasons.
+  as addressed so the optimization grade is not penalized for documented reasons.
 - Monitoring bloods (U&E, eGFR, potassium) gate both the safety flags and the
   completeness grade because they underpin safe RAAS-inhibitor and MRA use.
 - Missing numeric inputs never fabricate a positive finding; they raise
