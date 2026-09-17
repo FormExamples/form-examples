@@ -2,11 +2,9 @@
 """bin/test-vendored-uniformity — verify vendored assets are byte-identical
 across every form.
 
-The fleet vendors several asset sets per form that must be identical
-everywhere: the 45-stylesheet Lily theme catalogue in each front-end, and
-(Svelte side) the one still-vendored Lily Svelte helper component,
-DateTimePicker.svelte. The tools that re-sync them (bin/svelte-theme-css-sync,
-bin/html-theme-locale-select-refactor, bin/svelte-date-time-picker-vendor)
+The fleet vendors one asset set per form that must be identical everywhere:
+the 45-stylesheet Lily theme catalogue in each front-end. The tools that
+re-sync it (bin/svelte-theme-css-sync, bin/html-theme-locale-select-refactor)
 compare against the local Lily checkout, which CI does not have — so this
 gate proves the CI-checkable half of the same invariant: every form carries
 the SAME bytes as the rest of the fleet. Upstream currency (fleet vs the
@@ -16,19 +14,24 @@ tools' --check modes and bin/lib/lily_pin.py.
 ThemePicker/LocalePicker/TextSizePicker/SharePicker (and their locales.ts
 data companion) were vendored copies until bin/svelte-lily-pnpm-migrate
 (2026-09) replaced them fleet-wide with real pnpm dependencies on
-lily-design-system-svelte-{theme,locale,text-size,share}-picker (usually
-consolidated behind lily-design-system-svelte-picker-bar) — see
-forms/lily-svelte-helpers-version.md. There is nothing left to hash for
-them: every form now imports the same published package, which is a
-stronger uniformity guarantee than a byte-compare ever was.
+@lilydesignsystem/svelte-{theme,locale,text-size,share}-picker (usually
+consolidated behind @lilydesignsystem/svelte-picker-bar) — see
+forms/lily-svelte-helpers-version.md. `DateTimePicker.svelte`, the one
+remaining vendored Svelte helper, was deleted fleet-wide by
+bin/svelte-lily-picker-defaults (per spec/lily-design-system-svelte-with-
+picker-bar/): it was vendored but never wired into any route/layout/step in
+any of the 356 forms, an unneeded vendored component per that spec's own
+"retire" directive. There is nothing left to hash for any of the five
+helpers: every form now either imports the same published package or has
+deleted the file outright, both stronger uniformity guarantees than a
+byte-compare ever was.
 
 Checked per form:
-  front-end-with-svelte/static/themes/*.css           (all 355 identical)
+  front-end-with-svelte/static/themes/*.css           (all 356 identical)
   front-end-with-html/css/themes/*.css                (identical, except the
       four THEME_COLLISION_SLUGS forms, whose page content collides with
       theme selectors and which bin/html-theme-locale-select-refactor
       deliberately skips — they are exempted here for the same reason)
-  front-end-with-svelte/src/lib/components/ui/DateTimePicker.svelte
 
 The majority hash is the reference: any form whose copy differs from the
 fleet majority is reported. Exit is non-zero on any outlier.
@@ -57,10 +60,7 @@ THEME_COLLISION_SLUGS = {
     "international-certificate-of-vaccination-or-prophylaxis",
 }
 
-UI = "front-end-with-svelte/src/lib/components/ui"
-FILE_SETS = [
-    (f"{UI}/DateTimePicker.svelte", set()),
-]
+FILE_SETS: list[tuple[str, set[str]]] = []
 DIR_SETS = [
     ("front-end-with-svelte/static/themes", set()),
     ("front-end-with-html/css/themes", THEME_COLLISION_SLUGS),

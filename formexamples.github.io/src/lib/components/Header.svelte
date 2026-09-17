@@ -2,48 +2,20 @@
   import { page } from '$app/state';
   import { SITE_NAME, REPO_URL, pageTitle } from '$lib/site';
   import { THEME_OPTIONS, DEFAULT_THEME, THEME_STORAGE_KEY } from '$lib/config/themes';
-  import { ThemePicker } from '@lilydesignsystem/svelte-theme-picker';
-  import { TextSizePicker } from '@lilydesignsystem/svelte-text-size-picker';
-  import { SharePicker, type ShareTarget } from '@lilydesignsystem/svelte-share-picker';
+  import { TEXT_SIZE_OPTIONS, DEFAULT_TEXT_SIZE, TEXT_SIZE_STORAGE_KEY } from '$lib/config/text-sizes';
+  import { LOCALE_OPTIONS, DEFAULT_LOCALE, LOCALE_STORAGE_KEY } from '$lib/config/locales';
+  import { SHARE_TARGETS } from '$lib/config/share-targets';
+  import PickerBar from '@lilydesignsystem/svelte-picker-bar';
 
   type Props = { onMenuToggle?: () => void };
   let { onMenuToggle }: Props = $props();
 
-  // This site has no i18n content, so there is no LocalePicker (setting
-  // lang/dir with nothing translated behind it would be misleading) — see
-  // every other header control this site does carry: Theme, Text size, Share.
-
   const themeValues = THEME_OPTIONS.map((t) => t.value);
   const themeLabels = Object.fromEntries(THEME_OPTIONS.map((t) => [t.value, t.label]));
-
-  // Standard share-intent URLs. Each network gets the current page's title
-  // (page.data.title, via pageTitle() — see src/app.d.ts / $lib/site.ts) so
-  // the shared text always matches what's in the browser tab.
-  const shareTargets: ShareTarget[] = [
-    {
-      id: 'linkedin',
-      label: 'LinkedIn',
-      href: (url) => `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`
-    },
-    {
-      id: 'mastodon',
-      label: 'Mastodon',
-      href: (url, title) =>
-        `https://mastodon.social/share?text=${encodeURIComponent(`${title} ${url}`)}`
-    },
-    {
-      id: 'bluesky',
-      label: 'Bluesky',
-      href: (url, title) =>
-        `https://bsky.app/intent/compose?text=${encodeURIComponent(`${title} ${url}`)}`
-    },
-    {
-      id: 'reddit',
-      label: 'Reddit',
-      href: (url, title) =>
-        `https://www.reddit.com/submit?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`
-    }
-  ];
+  const textSizeValues = TEXT_SIZE_OPTIONS.map((t) => t.value);
+  const textSizeLabels = Object.fromEntries(TEXT_SIZE_OPTIONS.map((t) => [t.value, t.label]));
+  const localeValues = LOCALE_OPTIONS.map((l) => l.value);
+  const localeLabels = Object.fromEntries(LOCALE_OPTIONS.map((l) => [l.value, l.label]));
 </script>
 
 <header class="sticky top-0 z-30 h-14 border-b border-base-300 bg-base-100/90 backdrop-blur">
@@ -70,28 +42,27 @@
       >
         GitHub
       </a>
-      <ThemePicker
-        label="Theme"
+      <PickerBar
+        labels={{
+          theme: 'Theme',
+          locale: 'Language',
+          textSize: 'Text size',
+          share: 'Share this page'
+        }}
         themesUrl="/themes/"
         themes={themeValues}
-        themeLabels={themeLabels}
-        defaultValue={DEFAULT_THEME}
-        detectFromSystem
-        storageKey={THEME_STORAGE_KEY}
-      />
-      <TextSizePicker
-        label="Text size"
-        sizes={['small', 'medium', 'large', 'x-large']}
-        defaultValue="medium"
-        storageKey="form-examples.text-size.v1"
-      />
-      <SharePicker
-        label="Share this page"
-        title={pageTitle(page.data.title)}
-        targets={shareTargets}
-        copyLabel="Copy link"
-        copiedLabel="Link copied"
-        copyFailedLabel="Could not copy — copy it from the address bar"
+        themeProps={{ themeLabels, defaultValue: DEFAULT_THEME, detectFromSystem: true, storageKey: THEME_STORAGE_KEY }}
+        locales={localeValues}
+        localeProps={{ localeLabels, defaultValue: DEFAULT_LOCALE, storageKey: LOCALE_STORAGE_KEY }}
+        sizes={textSizeValues}
+        textSizeProps={{ sizeLabels: textSizeLabels, defaultValue: DEFAULT_TEXT_SIZE, storageKey: TEXT_SIZE_STORAGE_KEY }}
+        shareTargets={SHARE_TARGETS}
+        shareProps={{
+          title: pageTitle(page.data.title),
+          copyLabel: 'Copy Link',
+          copiedLabel: 'Link copied',
+          copyFailedLabel: 'Could not copy — copy it from the address bar'
+        }}
       />
     </div>
   </div>

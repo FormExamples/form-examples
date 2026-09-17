@@ -81,6 +81,36 @@ that never existed under the new names.
 
 ## History
 
+- **2026-09-17 — applied `spec/lily-design-system-svelte-with-picker-bar/`:
+  Lily default theme order, Lily default text-size scale, and retired
+  `DateTimePicker`.** Three fleet-wide fixes, tool
+  `bin/svelte-lily-picker-defaults --check|--apply`:
+  1. `ThemePicker`'s theme set is now sourced from `PickerBar`'s own
+     `DEFAULT_THEMES` export instead of a hand-maintained local list — a
+     real fix, not just a refactor: every form's list sorted the UK/US
+     public-sector themes alphabetically among the rest (after
+     "synthwave", before "valentine"); the spec requires them at the very
+     end, after every non-national theme, matching `DEFAULT_THEMES`'s own
+     canonical order.
+  2. `TextSizePicker`'s size set is now sourced from `PickerBar`'s
+     `DEFAULT_SIZES` export instead of a hand-maintained, non-default
+     four-value catalogue (`small`/`medium`/`large`/`x-large`). The real
+     Lily default is seven steps: `largest`/`larger`/`large`/`normal`/
+     `small`/`smaller`/`smallest`. `DEFAULT_TEXT_SIZE` moved from
+     `"medium"` (no longer a valid value) to `"normal"`.
+  3. `DateTimePicker.svelte` deleted fleet-wide (356/356 forms) — vendored
+     but never wired into any route/layout/step in any form, an unneeded
+     vendored component per the spec's own "retire" directive.
+     `bin/svelte-date-time-picker-vendor` (which used to vendor it) is
+     now a superseded one-shot; do not re-run it to re-vendor.
+  Also applied to `formexamples.github.io/`, which additionally moved off
+  its own two application-specific custom themes (`light`/`dark`, a
+  hand-authored token pair, not Lily defaults) onto the full 45-theme
+  Lily catalogue, and onto `PickerBar` itself (previously three separate
+  `ThemePicker`/`TextSizePicker`/`SharePicker` controls with no
+  `LocalePicker`, since the site has no translated content — `PickerBar`
+  requires a non-empty `locales` list, so it now carries a genuine,
+  single-entry `en` catalogue rather than omitting the control).
 - **2026-09-17 — moved to the `@lilydesignsystem` npm scope.** Upstream
   republished all six packages under `@lilydesignsystem/svelte-{headless,
   theme-picker,locale-picker,text-size-picker,share-picker,picker-bar}`,

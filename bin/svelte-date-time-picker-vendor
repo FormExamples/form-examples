@@ -1,9 +1,19 @@
 #!/usr/bin/env python3
-"""bin/svelte-date-time-picker-vendor -- vendor DateTimePicker.svelte, the
-fifth Lily Svelte helper, into every form's
+"""bin/svelte-date-time-picker-vendor -- one-shot (superseded): vendor
+DateTimePicker.svelte, the fifth Lily Svelte helper, into every form's
 front-end-with-svelte/src/lib/components/ui/, matching how the other four
-helpers (ThemePicker, LocalePicker, TextSizePicker, SharePicker) are already
+helpers (ThemePicker, LocalePicker, TextSizePicker, SharePicker) used to be
 vendored there.
+
+Superseded 2026-09 by bin/svelte-lily-picker-defaults (per spec/
+lily-design-system-svelte-with-picker-bar/), which deleted the vendored
+copy fleet-wide: it was unused by every one of the 356 forms (vendored but
+never wired into any route/layout/step), an unneeded vendored component
+per that spec's own "retire" directive. Do not re-run this tool to
+re-vendor it -- if a form later wants DateTimePicker, add
+`@lilydesignsystem/svelte-date-time-picker` as a real pnpm dependency
+instead, matching every other Lily Svelte helper's current consumption
+model (forms/lily-svelte-helpers-version.md).
 
 Deliberately vendor-only: this does NOT wire DateTimePicker into any
 +layout.svelte, route, or step component, and does NOT touch any existing

@@ -1,13 +1,15 @@
-// The theme catalogue, vendored as standalone stylesheets under
-// static/themes/<value>.css (see static/themes/light.css for the rationale:
-// a hand-authored token file, not a copy of Lily's full component CSS).
+// The full Lily Design System theme catalogue, vendored as standalone
+// stylesheets under `static/themes/<value>.css`. Each file is loaded one at a
+// time via a swappable <link> in the root layout (standalone Lily theme files
+// are designed to be the sole theme stylesheet, so they cannot be combined).
 //
-// This is the single source for the site's multi-stylesheet setup: every
-// entry here gets an always-loaded <link rel="stylesheet"> (see the
-// {#each} in the root +layout.svelte's <svelte:head>), so ThemePicker's
-// runtime switch is pure attribute mutation (`data-theme` on <html>) —
-// no stylesheet fetch, ever, on toggle. Adding a theme is one entry here
-// plus one CSS file; nothing else needs to change.
+// The theme set itself comes from `@lilydesignsystem/svelte-picker-bar`'s own
+// `DEFAULT_THEMES` -- all Lily default themes, alphabetical except the UK and
+// US public-sector themes, which sort last as one group -- rather than a
+// hand-maintained local list, so it can never drift from upstream's own
+// canonical order.
+
+import { DEFAULT_THEMES } from '@lilydesignsystem/svelte-picker-bar';
 
 /** A selectable theme: the stylesheet basename and a human-readable label. */
 export interface ThemeOption {
@@ -15,13 +17,39 @@ export interface ThemeOption {
 	label: string;
 }
 
-/** Every vendored theme, in catalogue order. */
-export const THEME_OPTIONS: ThemeOption[] = [
-	{ value: 'light', label: 'Light' },
-	{ value: 'dark', label: 'Dark' }
-];
+/** Friendly labels for the long, fully-qualified design-system theme names. */
+const LABEL_OVERRIDES: Record<string, string> = {
+	'adobe-spectrum': 'Adobe Spectrum',
+	'mozilla-protocol': 'Mozilla Protocol',
+	'united-kingdom-government-digital-service': 'UK · Government Digital Service',
+	'united-kingdom-national-health-service-england-for-patients': 'UK · NHS England — Patients',
+	'united-kingdom-national-health-service-england-for-practitioners':
+		'UK · NHS England — Practitioners',
+	'united-kingdom-national-health-service-scotland-for-patients':
+		'UK · NHS Scotland — Patients',
+	'united-kingdom-national-health-service-scotland-for-practitioners':
+		'UK · NHS Scotland — Practitioners',
+	'united-kingdom-national-health-service-wales-for-patients': 'UK · NHS Wales — Patients',
+	'united-kingdom-national-health-service-wales-for-practitioners':
+		'UK · NHS Wales — Practitioners',
+	'united-states-web-design-system': 'US · Web Design System'
+};
 
-/** The default theme. */
+/** Title-case a hyphenated single-word theme name (e.g. `cyberpunk` → `Cyberpunk`). */
+function titleCase(value: string): string {
+	return value
+		.split('-')
+		.map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+		.join(' ');
+}
+
+/** Every Lily default theme, in catalogue order. */
+export const THEME_OPTIONS: ThemeOption[] = DEFAULT_THEMES.map((value) => ({
+	value,
+	label: LABEL_OVERRIDES[value] ?? titleCase(value)
+}));
+
+/** The gold-standard default theme: the Lily Design System light theme. */
 export const DEFAULT_THEME = 'light';
 
 /** localStorage key for the persisted theme selection. */

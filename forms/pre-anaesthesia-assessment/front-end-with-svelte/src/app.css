@@ -731,20 +731,28 @@ input[type="radio"].radio-input {
   font-weight: 600;
 }
 
-/* Lily: text-size-picker -- WCAG 2.2 1.4.4 (Resize Text) / 1.4.12 (Text Spacing). */
-:root[data-text-size="small"] {
+/* Lily text-size-picker -- WCAG 2.2 1.4.4 (Resize Text) / 1.4.12 (Text Spacing). */
+:root[data-text-size="smallest"] {
+  font-size: 75%;
+}
+:root[data-text-size="smaller"] {
   font-size: 87.5%;
 }
-:root[data-text-size="medium"] {
+:root[data-text-size="small"] {
+  font-size: 93.75%;
+}
+:root[data-text-size="normal"] {
   font-size: 100%;
 }
 :root[data-text-size="large"] {
   font-size: 112.5%;
 }
-:root[data-text-size="x-large"] {
+:root[data-text-size="larger"] {
   font-size: 125%;
 }
-
+:root[data-text-size="largest"] {
+  font-size: 150%;
+}
 /* Lily: .text-size-picker (headless button + listbox). No upstream theme
    catalogue collision (unlike theme-select/locale-select), so no `lily-`
    prefix is needed here. */

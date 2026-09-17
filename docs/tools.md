@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-99 tools.
+100 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -68,6 +68,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/svelte-helpers-chooser-rename`](#svelte-helpers-chooser-rename)
 - [`bin/svelte-helpers-picker-rename`](#svelte-helpers-picker-rename)
 - [`bin/svelte-kit-3-theme-url-fix.py`](#svelte-kit-3-theme-url-fixpy)
+- [`bin/svelte-lily-picker-defaults`](#svelte-lily-picker-defaults)
 - [`bin/svelte-lily-pnpm-migrate`](#svelte-lily-pnpm-migrate)
 - [`bin/svelte-lily-scope-rename`](#svelte-lily-scope-rename)
 - [`bin/svelte-locale-select-refactor`](#svelte-locale-select-refactor)
@@ -2049,11 +2050,21 @@ without writing. Default (no flags): apply. Idempotent.
 <h2 id="svelte-date-time-picker-vendor"><code>bin/svelte-date-time-picker-vendor</code></h2>
 
 ```text
-bin/svelte-date-time-picker-vendor -- vendor DateTimePicker.svelte, the
-fifth Lily Svelte helper, into every form's
+bin/svelte-date-time-picker-vendor -- one-shot (superseded): vendor
+DateTimePicker.svelte, the fifth Lily Svelte helper, into every form's
 front-end-with-svelte/src/lib/components/ui/, matching how the other four
-helpers (ThemePicker, LocalePicker, TextSizePicker, SharePicker) are already
+helpers (ThemePicker, LocalePicker, TextSizePicker, SharePicker) used to be
 vendored there.
+
+Superseded 2026-09 by bin/svelte-lily-picker-defaults (per spec/
+lily-design-system-svelte-with-picker-bar/), which deleted the vendored
+copy fleet-wide: it was unused by every one of the 356 forms (vendored but
+never wired into any route/layout/step), an unneeded vendored component
+per that spec's own "retire" directive. Do not re-run this tool to
+re-vendor it -- if a form later wants DateTimePicker, add
+`@lilydesignsystem/svelte-date-time-picker` as a real pnpm dependency
+instead, matching every other Lily Svelte helper's current consumption
+model (forms/lily-svelte-helpers-version.md).
 
 Deliberately vendor-only: this does NOT wire DateTimePicker into any
 +layout.svelte, route, or step component, and does NOT touch any existing
@@ -2204,6 +2215,54 @@ the `sv migrate` codemod's own per-form task list — once confirmed resolved
 Usage:
   bin/svelte-kit-3-theme-url-fix.py --check          # CI drift detector
   bin/svelte-kit-3-theme-url-fix.py --apply          # rewrite in place
+```
+
+<h2 id="svelte-lily-picker-defaults"><code>bin/svelte-lily-picker-defaults</code></h2>
+
+```text
+bin/svelte-lily-picker-defaults -- apply spec/lily-design-system-svelte-with-picker-bar/
+fleet-wide: every form's theme and text-size catalogues become the real
+Lily defaults, sourced from the actual npm packages instead of a
+hand-maintained local list, and the one universally-unused vendored Lily
+Svelte component is retired.
+
+Three changes per form (front-end-with-svelte/):
+
+  1. `src/lib/config/themes.ts` — `THEME_OPTIONS` is now derived from
+     `DEFAULT_THEMES` (imported from `@lilydesignsystem/svelte-picker-bar`)
+     instead of a hand-maintained `THEME_VALUES` array. This is a real
+     fix, not just a refactor: every form's list had the UK/US themes
+     sorted alphabetically among the rest (after "synthwave", before
+     "valentine"); the spec wants them moved to the very end, after every
+     non-national theme -- which is exactly `DEFAULT_THEMES`'s own order.
+     `LABEL_OVERRIDES`/`titleCase`/`DEFAULT_THEME`/`THEME_STORAGE_KEY` are
+     unchanged.
+  2. `src/lib/config/text-sizes.ts` — `TEXT_SIZE_OPTIONS` is now derived
+     from `DEFAULT_SIZES` (imported from
+     `@lilydesignsystem/svelte-text-size-picker`, labelled via that
+     package's own `sizeName()`) instead of a hand-maintained, non-default
+     four-value catalogue (`small`/`medium`/`large`/`x-large`). The real
+     Lily default is seven steps: `largest`/`larger`/`large`/`normal`/
+     `small`/`smaller`/`smallest`. `DEFAULT_TEXT_SIZE` becomes `"normal"`
+     (was `"medium"`, which doesn't exist in the new scale) and
+     `TEXT_SIZE_STORAGE_KEY` is unchanged. `src/app.css`'s
+     `:root[data-text-size="…"]` block is rewritten for the new seven
+     values (verified byte-for-byte content-uniform fleet-wide before
+     writing this tool, so the whole file can be regenerated per form
+     rather than patched around varying formatting).
+  3. `src/lib/components/ui/DateTimePicker.svelte` is deleted -- verified
+     unused by every one of the 356 forms (vendored but never wired into
+     any route/layout/step, a deliberate accessibility decision recorded
+     in forms/lily-svelte-helpers-version.md, not a mistake -- but still
+     an unneeded vendored component per the spec's own "retire" directive).
+
+Usage:
+  bin/svelte-lily-picker-defaults --check   # CI drift check (no writes)
+  bin/svelte-lily-picker-defaults --apply   # write changes
+  bin/svelte-lily-picker-defaults --apply --all
+  bin/svelte-lily-picker-defaults --apply <slug>...
+
+Idempotent: re-running after a full --apply makes no further changes.
 ```
 
 <h2 id="svelte-lily-pnpm-migrate"><code>bin/svelte-lily-pnpm-migrate</code></h2>
@@ -2789,11 +2848,9 @@ bin/test-tutorials — honest, fast doc-rot check for docs/tutorials/.
 bin/test-vendored-uniformity — verify vendored assets are byte-identical
 across every form.
 
-The fleet vendors several asset sets per form that must be identical
-everywhere: the 45-stylesheet Lily theme catalogue in each front-end, and
-(Svelte side) the one still-vendored Lily Svelte helper component,
-DateTimePicker.svelte. The tools that re-sync them (bin/svelte-theme-css-sync,
-bin/html-theme-locale-select-refactor, bin/svelte-date-time-picker-vendor)
+The fleet vendors one asset set per form that must be identical everywhere:
+the 45-stylesheet Lily theme catalogue in each front-end. The tools that
+re-sync it (bin/svelte-theme-css-sync, bin/html-theme-locale-select-refactor)
 compare against the local Lily checkout, which CI does not have — so this
 gate proves the CI-checkable half of the same invariant: every form carries
 the SAME bytes as the rest of the fleet. Upstream currency (fleet vs the
@@ -2803,19 +2860,24 @@ tools' --check modes and bin/lib/lily_pin.py.
 ThemePicker/LocalePicker/TextSizePicker/SharePicker (and their locales.ts
 data companion) were vendored copies until bin/svelte-lily-pnpm-migrate
 (2026-09) replaced them fleet-wide with real pnpm dependencies on
-lily-design-system-svelte-{theme,locale,text-size,share}-picker (usually
-consolidated behind lily-design-system-svelte-picker-bar) — see
-forms/lily-svelte-helpers-version.md. There is nothing left to hash for
-them: every form now imports the same published package, which is a
-stronger uniformity guarantee than a byte-compare ever was.
+@lilydesignsystem/svelte-{theme,locale,text-size,share}-picker (usually
+consolidated behind @lilydesignsystem/svelte-picker-bar) — see
+forms/lily-svelte-helpers-version.md. `DateTimePicker.svelte`, the one
+remaining vendored Svelte helper, was deleted fleet-wide by
+bin/svelte-lily-picker-defaults (per spec/lily-design-system-svelte-with-
+picker-bar/): it was vendored but never wired into any route/layout/step in
+any of the 356 forms, an unneeded vendored component per that spec's own
+"retire" directive. There is nothing left to hash for any of the five
+helpers: every form now either imports the same published package or has
+deleted the file outright, both stronger uniformity guarantees than a
+byte-compare ever was.
 
 Checked per form:
-  front-end-with-svelte/static/themes/*.css           (all 355 identical)
+  front-end-with-svelte/static/themes/*.css           (all 356 identical)
   front-end-with-html/css/themes/*.css                (identical, except the
       four THEME_COLLISION_SLUGS forms, whose page content collides with
       theme selectors and which bin/html-theme-locale-select-refactor
       deliberately skips — they are exempted here for the same reason)
-  front-end-with-svelte/src/lib/components/ui/DateTimePicker.svelte
 
 The majority hash is the reference: any form whose copy differs from the
 fleet majority is reported. Exit is non-zero on any outlier.

@@ -2,7 +2,14 @@
 // stylesheets under `static/themes/<value>.css`. Each file is loaded one at a
 // time via a swappable <link> in the root layout (standalone Lily theme files
 // are designed to be the sole theme stylesheet, so they cannot be combined).
-// `system` loads no theme file and falls back to the app's default tokens.
+//
+// The theme set itself comes from `@lilydesignsystem/svelte-picker-bar`'s own
+// `DEFAULT_THEMES` -- all Lily default themes, alphabetical except the UK and
+// US public-sector themes, which sort last as one group -- rather than a
+// hand-maintained local list, so it can never drift from upstream's own
+// canonical order.
+
+import { DEFAULT_THEMES } from "@lilydesignsystem/svelte-picker-bar";
 
 /** A selectable theme: the stylesheet basename and a human-readable label. */
 export interface ThemeOption {
@@ -39,56 +46,8 @@ function titleCase(value: string): string {
     .join(" ");
 }
 
-const THEME_VALUES = [
-  "abyss",
-  "acid",
-  "adobe-spectrum",
-  "aqua",
-  "autumn",
-  "black",
-  "bumblebee",
-  "business",
-  "caramellatte",
-  "cmyk",
-  "coffee",
-  "corporate",
-  "cupcake",
-  "cyberpunk",
-  "dark",
-  "dim",
-  "dracula",
-  "emerald",
-  "fantasy",
-  "forest",
-  "garden",
-  "halloween",
-  "lemonade",
-  "light",
-  "lofi",
-  "luxury",
-  "mozilla-protocol",
-  "night",
-  "nord",
-  "pastel",
-  "retro",
-  "silk",
-  "sunset",
-  "synthwave",
-  "united-kingdom-government-digital-service",
-  "united-kingdom-national-health-service-england-for-patients",
-  "united-kingdom-national-health-service-england-for-practitioners",
-  "united-kingdom-national-health-service-scotland-for-patients",
-  "united-kingdom-national-health-service-scotland-for-practitioners",
-  "united-kingdom-national-health-service-wales-for-patients",
-  "united-kingdom-national-health-service-wales-for-practitioners",
-  "united-states-web-design-system",
-  "valentine",
-  "winter",
-  "wireframe",
-];
-
-/** Every vendored Lily theme, in catalogue order. */
-export const THEME_OPTIONS: ThemeOption[] = THEME_VALUES.map((value) => ({
+/** Every Lily default theme, in catalogue order. */
+export const THEME_OPTIONS: ThemeOption[] = DEFAULT_THEMES.map((value) => ({
   value,
   label: LABEL_OVERRIDES[value] ?? titleCase(value),
 }));
@@ -97,5 +56,4 @@ export const THEME_OPTIONS: ThemeOption[] = THEME_VALUES.map((value) => ({
 export const DEFAULT_THEME = "light";
 
 /** localStorage key for the persisted theme selection. */
-export const THEME_STORAGE_KEY =
-  "pre-operative-assessment-by-clinician.theme.v1";
+export const THEME_STORAGE_KEY = "pre-operative-assessment-by-clinician.theme.v1";

@@ -18,6 +18,31 @@ for them.
 
 ### Changed
 
+- **Applied `spec/lily-design-system-svelte-with-picker-bar/` fleet-wide:
+  Lily default theme order, Lily default text-size scale, retired
+  `DateTimePicker`.** New tool `bin/svelte-lily-picker-defaults
+  --check|--apply`. `ThemePicker`'s theme catalogue is now sourced from
+  `@lilydesignsystem/svelte-picker-bar`'s own `DEFAULT_THEMES` instead of
+  a hand-maintained local list — a real fix: every form's list sorted the
+  UK/US public-sector themes alphabetically among the rest rather than at
+  the very end, as the spec (and `DEFAULT_THEMES` itself) requires.
+  `TextSizePicker`'s size catalogue is now the real Lily default
+  seven-step scale (`largest`/`larger`/`large`/`normal`/`small`/`smaller`/
+  `smallest`, `DEFAULT_TEXT_SIZE = "normal"`), replacing every form's
+  hand-maintained, non-default four-value list (`small`/`medium`/`large`/
+  `x-large`). `DateTimePicker.svelte` deleted fleet-wide (356/356 forms
+  had it vendored, 0/356 ever wired it into a route/layout/step) —
+  retires `bin/svelte-date-time-picker-vendor`. Also applied to
+  `formexamples.github.io/`, which additionally moved off its own two
+  application-specific custom themes (`light`/`dark`) onto the full
+  45-theme Lily catalogue, and onto `PickerBar` itself (previously three
+  separate controls with no `LocalePicker`; now carries a genuine,
+  single-entry `en` locale catalogue rather than omitting the control,
+  since `PickerBar` requires a non-empty `locales` list). Verified with
+  the same full `pnpm install`/`svelte-check`/`vite build` fleet sweep as
+  the earlier migrations, plus live Playwright checks of theme order,
+  text-size options, and the docs site's header.
+
 - **Every `front-end-with-svelte/` moved off vendored Lily Svelte
   components onto the real, published `@lilydesignsystem/svelte-*` pnpm
   packages, fleet-wide (356/356 forms).** Reverses the "consumed as a

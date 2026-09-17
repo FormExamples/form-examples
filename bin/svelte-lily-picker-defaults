@@ -1,0 +1,317 @@
+#!/usr/bin/env python3
+"""bin/svelte-lily-picker-defaults -- apply spec/lily-design-system-svelte-with-picker-bar/
+fleet-wide: every form's theme and text-size catalogues become the real
+Lily defaults, sourced from the actual npm packages instead of a
+hand-maintained local list, and the one universally-unused vendored Lily
+Svelte component is retired.
+
+Three changes per form (front-end-with-svelte/):
+
+  1. `src/lib/config/themes.ts` — `THEME_OPTIONS` is now derived from
+     `DEFAULT_THEMES` (imported from `@lilydesignsystem/svelte-picker-bar`)
+     instead of a hand-maintained `THEME_VALUES` array. This is a real
+     fix, not just a refactor: every form's list had the UK/US themes
+     sorted alphabetically among the rest (after "synthwave", before
+     "valentine"); the spec wants them moved to the very end, after every
+     non-national theme -- which is exactly `DEFAULT_THEMES`'s own order.
+     `LABEL_OVERRIDES`/`titleCase`/`DEFAULT_THEME`/`THEME_STORAGE_KEY` are
+     unchanged.
+  2. `src/lib/config/text-sizes.ts` — `TEXT_SIZE_OPTIONS` is now derived
+     from `DEFAULT_SIZES` (imported from
+     `@lilydesignsystem/svelte-text-size-picker`, labelled via that
+     package's own `sizeName()`) instead of a hand-maintained, non-default
+     four-value catalogue (`small`/`medium`/`large`/`x-large`). The real
+     Lily default is seven steps: `largest`/`larger`/`large`/`normal`/
+     `small`/`smaller`/`smallest`. `DEFAULT_TEXT_SIZE` becomes `"normal"`
+     (was `"medium"`, which doesn't exist in the new scale) and
+     `TEXT_SIZE_STORAGE_KEY` is unchanged. `src/app.css`'s
+     `:root[data-text-size="…"]` block is rewritten for the new seven
+     values (verified byte-for-byte content-uniform fleet-wide before
+     writing this tool, so the whole file can be regenerated per form
+     rather than patched around varying formatting).
+  3. `src/lib/components/ui/DateTimePicker.svelte` is deleted -- verified
+     unused by every one of the 356 forms (vendored but never wired into
+     any route/layout/step, a deliberate accessibility decision recorded
+     in forms/lily-svelte-helpers-version.md, not a mistake -- but still
+     an unneeded vendored component per the spec's own "retire" directive).
+
+Usage:
+  bin/svelte-lily-picker-defaults --check   # CI drift check (no writes)
+  bin/svelte-lily-picker-defaults --apply   # write changes
+  bin/svelte-lily-picker-defaults --apply --all
+  bin/svelte-lily-picker-defaults --apply <slug>...
+
+Idempotent: re-running after a full --apply makes no further changes.
+"""
+
+from __future__ import annotations
+
+import argparse
+import re
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FORMS_DIR = REPO_ROOT / "forms"
+
+STORAGE_KEY_RE = re.compile(
+    r"export const THEME_STORAGE_KEY\s*=\s*['\"]([^'\"]+)['\"];?", re.DOTALL
+)
+TEXT_STORAGE_KEY_RE = re.compile(
+    r"export const TEXT_SIZE_STORAGE_KEY\s*=\s*['\"]([^'\"]+)['\"];?", re.DOTALL
+)
+
+THEMES_TS_TEMPLATE = '''// The full Lily Design System theme catalogue, vendored as standalone
+// stylesheets under `static/themes/<value>.css`. Each file is loaded one at a
+// time via a swappable <link> in the root layout (standalone Lily theme files
+// are designed to be the sole theme stylesheet, so they cannot be combined).
+//
+// The theme set itself comes from `@lilydesignsystem/svelte-picker-bar`'s own
+// `DEFAULT_THEMES` -- all Lily default themes, alphabetical except the UK and
+// US public-sector themes, which sort last as one group -- rather than a
+// hand-maintained local list, so it can never drift from upstream's own
+// canonical order.
+
+import { DEFAULT_THEMES } from "@lilydesignsystem/svelte-picker-bar";
+
+/** A selectable theme: the stylesheet basename and a human-readable label. */
+export interface ThemeOption {
+  value: string;
+  label: string;
+}
+
+/** Friendly labels for the long, fully-qualified design-system theme names. */
+const LABEL_OVERRIDES: Record<string, string> = {
+  "adobe-spectrum": "Adobe Spectrum",
+  "mozilla-protocol": "Mozilla Protocol",
+  "united-kingdom-government-digital-service":
+    "UK · Government Digital Service",
+  "united-kingdom-national-health-service-england-for-patients":
+    "UK · NHS England — Patients",
+  "united-kingdom-national-health-service-england-for-practitioners":
+    "UK · NHS England — Practitioners",
+  "united-kingdom-national-health-service-scotland-for-patients":
+    "UK · NHS Scotland — Patients",
+  "united-kingdom-national-health-service-scotland-for-practitioners":
+    "UK · NHS Scotland — Practitioners",
+  "united-kingdom-national-health-service-wales-for-patients":
+    "UK · NHS Wales — Patients",
+  "united-kingdom-national-health-service-wales-for-practitioners":
+    "UK · NHS Wales — Practitioners",
+  "united-states-web-design-system": "US · Web Design System",
+};
+
+/** Title-case a hyphenated single-word theme name (e.g. `cyberpunk` → `Cyberpunk`). */
+function titleCase(value: string): string {
+  return value
+    .split("-")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
+
+/** Every Lily default theme, in catalogue order. */
+export const THEME_OPTIONS: ThemeOption[] = DEFAULT_THEMES.map((value) => ({
+  value,
+  label: LABEL_OVERRIDES[value] ?? titleCase(value),
+}));
+
+/** The gold-standard default theme: the Lily Design System light theme. */
+export const DEFAULT_THEME = "light";
+
+/** localStorage key for the persisted theme selection. */
+export const THEME_STORAGE_KEY = "{storage_key}";
+'''
+
+TEXT_SIZES_TS_TEMPLATE = '''// The Lily text-size catalogue: WCAG 2.2 1.4.4 (Resize Text) support.
+// Mapped to real typography via `:root[data-text-size]` rules in app.css.
+//
+// The size set itself comes from `@lilydesignsystem/svelte-text-size-picker`'s
+// own `DEFAULT_SIZES` -- the real Lily default seven-step scale -- rather
+// than a hand-maintained four-value list, so it can never drift from
+// upstream's own catalogue.
+
+import { DEFAULT_SIZES } from "@lilydesignsystem/svelte-picker-bar";
+import { sizeName } from "@lilydesignsystem/svelte-text-size-picker";
+
+/** A selectable reading text size: the slug and a human-readable label. */
+export interface TextSizeOption {
+  value: string;
+  label: string;
+}
+
+/** The text sizes offered by the switcher: every Lily default size. */
+export const TEXT_SIZE_OPTIONS: TextSizeOption[] = DEFAULT_SIZES.map(
+  (value) => ({ value, label: sizeName(value) }),
+);
+
+/** The gold-standard default text size. */
+export const DEFAULT_TEXT_SIZE = "normal";
+
+/** localStorage key for the persisted text-size selection. */
+export const TEXT_SIZE_STORAGE_KEY = "{storage_key}";
+'''
+
+# WCAG 2.2 1.4.4 (Resize Text) -- a symmetric-ish scale around "normal" (100%).
+TEXT_SIZE_FONT_SCALE = {
+    "smallest": "75%",
+    "smaller": "87.5%",
+    "small": "93.75%",
+    "normal": "100%",
+    "large": "112.5%",
+    "larger": "125%",
+    "largest": "150%",
+}
+
+OLD_TEXT_SIZE_BLOCK_RE = re.compile(
+    r'(?:/\*[^*]*\*/\s*)?'
+    r'(?::root\[data-text-size=[\'"][\w-]+[\'"]\]\s*\{\s*font-size:\s*[0-9.]+%;\s*\}\s*)+',
+)
+
+
+def new_text_size_css_block(indent_unit: str) -> str:
+    lines = ["/* Lily text-size-picker -- WCAG 2.2 1.4.4 (Resize Text) / 1.4.12 (Text Spacing). */"]
+    for value, pct in TEXT_SIZE_FONT_SCALE.items():
+        lines.append(f':root[data-text-size="{value}"] {{')
+        lines.append(f"{indent_unit}font-size: {pct};")
+        lines.append("}")
+    return "\n".join(lines) + "\n"
+
+
+def detect_indent_unit(css_text: str) -> str:
+    m = re.search(r"\n([ \t]+)font-size:", css_text)
+    return m.group(1) if m else "  "
+
+
+class FormResult:
+    def __init__(self, slug: str):
+        self.slug = slug
+        self.changed = False
+        self.notes: list[str] = []
+
+
+def process_themes_ts(front_end: Path, apply: bool, result: FormResult) -> None:
+    path = front_end / "src/lib/config/themes.ts"
+    if not path.is_file():
+        return
+    text = path.read_text(encoding="utf-8")
+    if "DEFAULT_THEMES" in text and "@lilydesignsystem/svelte-picker-bar" in text:
+        return  # already migrated
+    m = STORAGE_KEY_RE.search(text)
+    if not m:
+        result.notes.append("themes.ts: could not find THEME_STORAGE_KEY, skipped")
+        return
+    new_text = THEMES_TS_TEMPLATE.replace("{storage_key}", m.group(1))
+    result.changed = True
+    if apply:
+        path.write_text(new_text, encoding="utf-8")
+
+
+def process_text_sizes_ts(front_end: Path, apply: bool, result: FormResult) -> None:
+    path = front_end / "src/lib/config/text-sizes.ts"
+    if not path.is_file():
+        return
+    text = path.read_text(encoding="utf-8")
+    if "DEFAULT_SIZES" in text and "@lilydesignsystem/svelte-text-size-picker" in text:
+        return  # already migrated
+    m = TEXT_STORAGE_KEY_RE.search(text)
+    if not m:
+        result.notes.append("text-sizes.ts: could not find TEXT_SIZE_STORAGE_KEY, skipped")
+        return
+    new_text = TEXT_SIZES_TS_TEMPLATE.replace("{storage_key}", m.group(1))
+    result.changed = True
+    if apply:
+        path.write_text(new_text, encoding="utf-8")
+
+
+def process_app_css(front_end: Path, apply: bool, result: FormResult) -> None:
+    path = front_end / "src/app.css"
+    if not path.is_file():
+        return
+    text = path.read_text(encoding="utf-8")
+    if '"largest"' in text or "'largest'" in text:
+        return  # already migrated
+    m = OLD_TEXT_SIZE_BLOCK_RE.search(text)
+    if not m:
+        result.notes.append("app.css: could not find data-text-size block, skipped")
+        return
+    indent_unit = detect_indent_unit(text)
+    new_text = text[: m.start()] + new_text_size_css_block(indent_unit) + text[m.end() :]
+    result.changed = True
+    if apply:
+        path.write_text(new_text, encoding="utf-8")
+
+
+def process_datetimepicker(front_end: Path, apply: bool, result: FormResult) -> None:
+    path = front_end / "src/lib/components/ui/DateTimePicker.svelte"
+    if not path.is_file():
+        return
+    result.changed = True
+    if apply:
+        path.unlink()
+
+
+def process_form(slug: str, apply: bool) -> FormResult:
+    result = FormResult(slug)
+    front_end = FORMS_DIR / slug / "front-end-with-svelte"
+    if not front_end.is_dir():
+        return result
+    process_themes_ts(front_end, apply, result)
+    process_text_sizes_ts(front_end, apply, result)
+    process_app_css(front_end, apply, result)
+    process_datetimepicker(front_end, apply, result)
+    return result
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Apply Lily default theme/text-size catalogues and "
+        "retire the unused vendored DateTimePicker, fleet-wide."
+    )
+    parser.add_argument("slugs", nargs="*", help="form slugs to process")
+    parser.add_argument("--all", action="store_true", help="process every form")
+    parser.add_argument("--check", action="store_true", help="report drift; exit non-zero if any")
+    parser.add_argument("--dry-run", action="store_true", help="report what would change")
+    args = parser.parse_args()
+
+    if args.all:
+        slugs = sorted(
+            p.name for p in FORMS_DIR.iterdir() if (p / "front-end-with-svelte").is_dir()
+        )
+    elif args.slugs:
+        slugs = args.slugs
+    else:
+        parser.error("give one or more slugs, or --all")
+
+    apply = not (args.check or args.dry_run)
+    changed_slugs: list[str] = []
+    all_notes: list[tuple[str, str]] = []
+
+    for slug in slugs:
+        result = process_form(slug, apply)
+        if result.changed:
+            changed_slugs.append(slug)
+        for note in result.notes:
+            all_notes.append((slug, note))
+
+    if args.check:
+        if changed_slugs:
+            print(f"Lily picker-defaults drift in {len(changed_slugs)}/{len(slugs)} form(s)")
+            for name in changed_slugs[:10]:
+                print(f"  {name}")
+            if len(changed_slugs) > 10:
+                print(f"  … and {len(changed_slugs) - 10} more")
+            return 1
+        print(f"Lily picker-defaults complete in every form ({len(slugs)} forms)")
+        return 0
+
+    verb = "would update" if args.dry_run else "updated"
+    print(f"{len(changed_slugs)}/{len(slugs)} form(s) {verb}")
+    if all_notes:
+        print(f"\n{len(all_notes)} note(s):")
+        for slug, note in all_notes:
+            print(f"  {slug}: {note}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
