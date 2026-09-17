@@ -60,11 +60,14 @@ cat forms/lily-svelte-version.md
 
 Lily is headless, so a theme is just the set of design tokens the app resolves
 the Lily classes to. In the Svelte apps the theme lives with the component set
-and the `ThemePicker` control:
+and the header's `ThemePicker` control — a real pnpm dependency
+(`@lilydesignsystem/svelte-theme-picker`), consolidated behind `PickerBar`
+(`@lilydesignsystem/svelte-picker-bar`) in every form except one bespoke i18n
+exception; there is no vendored `ThemePicker.svelte` to inspect any more:
 
 ```sh
 ls forms/cardiology-request/front-end-with-svelte/src/lib/config/themes.ts
-ls forms/cardiology-request/front-end-with-svelte/src/lib/components/ui/ThemePicker.svelte
+grep PickerBar forms/cardiology-request/front-end-with-svelte/src/routes/cardiology-request/+layout.svelte
 ```
 
 To re-theme, you change the token values — never the Lily class names, because
