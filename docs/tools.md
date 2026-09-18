@@ -2688,14 +2688,28 @@ the work is outstanding.
 
 Deliberately conservative: a line is only ever flipped to `- [x]` when
 *every* backtick-quoted token on it is a real, existing, non-empty file or
-directory relative to that form's own directory. A line with no
+directory relative to that form's own directory (a small PATH_ALIASES map
+covers two known post-scaffold reorgs -- `spec.md` -> `spec/index.md`,
+`schema.sql` -> `sql/schema.sql` -- so lines written before those moves
+aren't blocked by a rename that isn't a missing artefact). A line with no
 backtick-quoted path token, or with any backtick span that looks like a
 command invocation (contains a space, e.g. `bin/test-form <slug>` or
 `cargo test`) rather than a path, is left untouched -- verifying "does
 `cargo test` pass" requires a live Postgres per crate and is far too slow
-to run fleet-wide here (~45s/crate observed), and no prose-only item is
-ever guessed at. This tool only ever adds `[x]`; it never removes one or
-edits surrounding text.
+to run fleet-wide here (~45s/crate observed).
+
+A second, narrower whitelist (`PROSE_PREDICATES`) handles the highest-
+frequency backtick-free scaffold phrasings (e.g. "Add Playwright
+end-to-end tests", "Create SQL migration files") whose completion is
+independently, mechanically verifiable against on-disk structure or
+fleet-wide gates already documented in `AGENTS.md` (a form's `sql/`
+directory being non-empty, a `*.test.ts` file existing in its engine
+directory, `localStorage` actually appearing in its front-end source, ...).
+Every other prose-only item -- anything not an exact match in that
+whitelist, including real, still-outstanding work like clinical safety
+case documentation, a GDPR DPIA, Zod schemas, or NHS PDS integration --
+is left untouched rather than guessed at. This tool only ever adds `[x]`;
+it never removes one or edits surrounding text.
 
 Usage:
   bin/sync-form-tasks-checkboxes [--check] [--all|<slug>...]
