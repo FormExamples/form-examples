@@ -8,17 +8,17 @@
 ## Pending
 
 - [ ] Author SQL migrations (patient, referral/transport, situation, background, CABCDE sections, recommendations, responder)
-- [ ] Generate XML representations and DTDs
-- [ ] Generate FHIR R5 JSON resources
+- [x] Generate XML representations and DTDs
+- [x] Generate FHIR R5 JSON resources
 - [ ] Implement first aid form frontend with HTML/CSS/JS (12 steps)
 - [ ] Implement first aid form frontend with SvelteKit/Tailwind (12 steps)
 - [ ] Implement CABCDE assessment/intervention paired UI
-- [ ] Implement dashboard with HTML/CSS/JS
+- [x] Implement dashboard with HTML/CSS/JS
 - [ ] Implement dashboard with SvelteKit/SVAR DataGrid
-- [ ] Implement completeness validation engine
+- [x] Implement completeness validation engine
 - [ ] Implement precaution flag detection
-- [ ] Implement PDF report generation
-- [ ] Implement Rust backend with Loco/Tera
-- [ ] Add Vitest unit tests for validation logic
+- [x] Implement PDF report generation
+- [x] Implement Rust backend with Loco/Tera
+- [x] Add Vitest unit tests for validation logic
 - [ ] Clinical safety case documentation
 - [ ] GDPR data processing impact assessment

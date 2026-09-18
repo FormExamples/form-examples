@@ -11,7 +11,7 @@
 
 ## Next
 
-- [ ] Regenerate derived artefacts (XML, FHIR R5, protobuf, OpenAPI, Loco setup).
+- [x] Regenerate derived artefacts (XML, FHIR R5, protobuf, OpenAPI, Loco setup).
 - [x] Generate `spec/index.md`, `CHANGELOG.md`, `examples/`, `llms.txt`.
 - [x] Build `front-end-with-html` (single-page wizard + dashboard + JS engine).
 - [x] Build `front-end-with-svelte` (RESTful list + form routes + TS engine).

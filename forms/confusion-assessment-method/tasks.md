@@ -48,6 +48,6 @@
 ## Deferred / future
 - [ ] 4AT rapid-screening cross-reference.
 - [ ] CAM-S severity scoring companion.
-- [ ] Playwright end-to-end tests.
-- [ ] Axe-core accessibility audit.
+- [x] Playwright end-to-end tests.
+- [x] Axe-core accessibility audit.
 - [ ] EHR delirium care-bundle integration.

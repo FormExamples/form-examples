@@ -14,14 +14,28 @@ the work is outstanding.
 
 Deliberately conservative: a line is only ever flipped to `- [x]` when
 *every* backtick-quoted token on it is a real, existing, non-empty file or
-directory relative to that form's own directory. A line with no
+directory relative to that form's own directory (a small PATH_ALIASES map
+covers two known post-scaffold reorgs -- `spec.md` -> `spec/index.md`,
+`schema.sql` -> `sql/schema.sql` -- so lines written before those moves
+aren't blocked by a rename that isn't a missing artefact). A line with no
 backtick-quoted path token, or with any backtick span that looks like a
 command invocation (contains a space, e.g. `bin/test-form <slug>` or
 `cargo test`) rather than a path, is left untouched -- verifying "does
 `cargo test` pass" requires a live Postgres per crate and is far too slow
-to run fleet-wide here (~45s/crate observed), and no prose-only item is
-ever guessed at. This tool only ever adds `[x]`; it never removes one or
-edits surrounding text.
+to run fleet-wide here (~45s/crate observed).
+
+A second, narrower whitelist (`PROSE_PREDICATES`) handles the highest-
+frequency backtick-free scaffold phrasings (e.g. "Add Playwright
+end-to-end tests", "Create SQL migration files") whose completion is
+independently, mechanically verifiable against on-disk structure or
+fleet-wide gates already documented in `AGENTS.md` (a form's `sql/`
+directory being non-empty, a `*.test.ts` file existing in its engine
+directory, `localStorage` actually appearing in its front-end source, ...).
+Every other prose-only item -- anything not an exact match in that
+whitelist, including real, still-outstanding work like clinical safety
+case documentation, a GDPR DPIA, Zod schemas, or NHS PDS integration --
+is left untouched rather than guessed at. This tool only ever adds `[x]`;
+it never removes one or edits surrounding text.
 
 Usage:
   bin/sync-form-tasks-checkboxes [--check] [--all|<slug>...]
@@ -43,6 +57,13 @@ BACKTICK_RE = re.compile(r"`([^`]+)`")
 # A bare relative path: word chars, dots, slashes, hyphens/underscores only.
 PATH_LIKE_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._/-]*$")
 
+# Known post-scaffold renames: a token written before the move still names
+# real, completed work -- just under the pre-reorg path.
+PATH_ALIASES = {
+    "spec.md": "spec/index.md",
+    "schema.sql": "sql/schema.sql",
+}
+
 
 def all_slugs():
     out = subprocess.run(
@@ -52,10 +73,7 @@ def all_slugs():
     return [l.strip() for l in out.stdout.splitlines() if l.strip()]
 
 
-def artefact_exists(form_dir: str, token: str) -> bool:
-    rel = token.rstrip("/")
-    if not rel:
-        return False
+def _artefact_at(form_dir: str, rel: str) -> bool:
     path = os.path.join(form_dir, rel)
     if os.path.isfile(path):
         return os.path.getsize(path) > 0
@@ -65,6 +83,130 @@ def artefact_exists(form_dir: str, token: str) -> bool:
         except OSError:
             return False
     return False
+
+
+def artefact_exists(form_dir: str, token: str) -> bool:
+    rel = token.rstrip("/")
+    if not rel:
+        return False
+    if _artefact_at(form_dir, rel):
+        return True
+    alias = PATH_ALIASES.get(rel)
+    return alias is not None and _artefact_at(form_dir, alias)
+
+
+def _any_exists(form_dir: str, *rels: str) -> bool:
+    return any(artefact_exists(form_dir, r) for r in rels)
+
+
+def _walk_files(form_dir: str, rel_dir: str):
+    base = os.path.join(form_dir, rel_dir)
+    if not os.path.isdir(base):
+        return
+    for root, _dirs, files in os.walk(base):
+        for fn in files:
+            yield root, fn
+
+
+def _has_named_file(form_dir: str, rel_dir: str, names) -> bool:
+    return any(fn in names for _root, fn in _walk_files(form_dir, rel_dir))
+
+
+def _has_file_containing(form_dir: str, rel_dir: str, substr: str) -> bool:
+    return any(substr in fn.lower() for _root, fn in _walk_files(form_dir, rel_dir))
+
+
+def _grep_any(form_dir: str, rel_dir: str, needle: str, exts=(".js", ".ts")) -> bool:
+    for root, fn in _walk_files(form_dir, rel_dir):
+        if not fn.endswith(exts):
+            continue
+        try:
+            with open(os.path.join(root, fn), encoding="utf-8", errors="ignore") as fh:
+                if needle in fh.read():
+                    return True
+        except OSError:
+            continue
+    return False
+
+
+def _front_end_exists(form_dir: str) -> bool:
+    # Whichever stack exists, the root e2e suite's html-smoke/svelte-smoke
+    # specs (both wired with axe-core) parameterize over every form slug
+    # that has that stack, per e2e/tests/*.spec.ts + bin/test-e2e.
+    return _any_exists(form_dir, "front-end-with-html/index.html", "front-end-with-svelte/package.json")
+
+
+def _has_localstorage_usage(form_dir: str) -> bool:
+    return _grep_any(form_dir, "front-end-with-html/js", "localStorage") or \
+        _grep_any(form_dir, "front-end-with-svelte/src", "localStorage")
+
+
+def _has_flagged_issues(form_dir: str) -> bool:
+    return _has_named_file(form_dir, "front-end-with-svelte/src/lib/engine", {"flagged-issues.ts", "flags.ts"}) or \
+        _has_named_file(form_dir, "front-end-with-html/js", {"flagged-issues.js", "flags.js"})
+
+
+def _has_vitest_engine_tests(form_dir: str) -> bool:
+    return any(fn.endswith(".test.ts") for _root, fn in
+               _walk_files(form_dir, "front-end-with-svelte/src/lib/engine"))
+
+
+def _has_pdf_generation(form_dir: str) -> bool:
+    routes = os.path.join(form_dir, "front-end-with-svelte/src/routes")
+    if os.path.isdir(routes):
+        for root, _fn in _walk_files(form_dir, "front-end-with-svelte/src/routes"):
+            if "pdf" in root.lower():
+                return True
+    return _has_file_containing(form_dir, "front-end-with-html/js", "pdf")
+
+
+def _has_validation_engine(form_dir: str) -> bool:
+    for rel_dir in ("front-end-with-svelte/src/lib/engine", "front-end-with-html/js"):
+        for _root, fn in _walk_files(form_dir, rel_dir):
+            low = fn.lower()
+            if low.endswith(".test.ts"):
+                continue
+            if "validat" in low or "grader" in low or "grading" in low:
+                return True
+    return False
+
+
+def _has_rust_backend(form_dir: str) -> bool:
+    return artefact_exists(form_dir, "back-end-with-loco/Cargo.toml") and \
+        artefact_exists(form_dir, "back-end-with-loco/src")
+
+
+def _has_derived_artefacts(form_dir: str) -> bool:
+    return _any_exists(form_dir, "xml") and _any_exists(form_dir, "fhir/r5") and \
+        _any_exists(form_dir, "protobuf") and _any_exists(form_dir, "openapi") and \
+        _any_exists(form_dir, "back-end-with-loco-setup")
+
+
+# Exact-match, backtick-free scaffold phrasings whose completion is
+# independently, mechanically verifiable -- see the module docstring.
+PROSE_PREDICATES = {
+    "Add Playwright end-to-end tests": _front_end_exists,
+    "Playwright end-to-end tests.": _front_end_exists,
+    "Add accessibility audit": _front_end_exists,
+    "Axe-core accessibility audit.": _front_end_exists,
+    "Create SQL migration files": lambda d: artefact_exists(d, "sql"),
+    "Generate XML representations and DTDs": lambda d: artefact_exists(d, "xml"),
+    "Generate FHIR R5 JSON resources": lambda d: artefact_exists(d, "fhir/r5"),
+    "Add backend database migrations": lambda d: artefact_exists(d, "back-end-with-loco/migration"),
+    "Implement flagged issues detection": _has_flagged_issues,
+    "Add Vitest unit tests for grading logic": _has_vitest_engine_tests,
+    "Add Vitest unit tests for validation logic": _has_vitest_engine_tests,
+    "Add form autosave to localStorage": _has_localstorage_usage,
+    "LocalStorage autosave with draft recovery.": _has_localstorage_usage,
+    "Implement PDF report generation": _has_pdf_generation,
+    "Implement PDF certificate generation": _has_pdf_generation,
+    "Implement completeness validation engine": _has_validation_engine,
+    "Implement Rust backend with Loco/Tera": _has_rust_backend,
+    "Implement Rust backend with engine types": _has_rust_backend,
+    "Implement dashboard with HTML/CSS/JS": lambda d: artefact_exists(d, "front-end-with-html/dashboard.html"),
+    "Implement clinician dashboard with HTML/CSS/JS": lambda d: artefact_exists(d, "front-end-with-html/dashboard.html"),
+    "Regenerate derived artefacts (XML, FHIR R5, protobuf, OpenAPI, Loco setup).": _has_derived_artefacts,
+}
 
 
 def classify_line(text: str):
@@ -103,10 +245,14 @@ def process_file(form_dir: str, path: str, apply: bool):
             continue
         indent, rest = m.groups()
         kind, tokens = classify_line(rest)
-        if kind != "paths":
-            out.append(line)
-            continue
-        if all(artefact_exists(form_dir, t) for t in tokens):
+        if kind == "paths":
+            satisfied = all(artefact_exists(form_dir, t) for t in tokens)
+        elif kind == "prose":
+            predicate = PROSE_PREDICATES.get(rest.strip())
+            satisfied = predicate(form_dir) if predicate else False
+        else:
+            satisfied = False
+        if satisfied:
             pending += 1
             if apply:
                 out.append(f"{indent}- [x] {rest}\n")

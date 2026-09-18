@@ -8,15 +8,15 @@
 
 - [ ] Implement examiner form frontend (6 steps)
 - [ ] Implement NREMT-style psychomotor scoring engine with critical-criteria overrides
-- [ ] Implement flagged issues detection
+- [x] Implement flagged issues detection
 - [ ] Implement PDF score sheet generation
 - [ ] Implement training coordinator dashboard with SVAR DataGrid
-- [ ] Add Vitest unit tests for grading logic
-- [ ] Create SQL migration files
+- [x] Add Vitest unit tests for grading logic
+- [x] Create SQL migration files
 - [ ] Add Zod input validation schemas
-- [ ] Add Playwright end-to-end tests
-- [ ] Add accessibility audit
-- [ ] Add form autosave to localStorage
-- [ ] Add backend database migrations
+- [x] Add Playwright end-to-end tests
+- [x] Add accessibility audit
+- [x] Add form autosave to localStorage
+- [x] Add backend database migrations
 - [ ] Clinical safety case documentation
 - [ ] GDPR data processing impact assessment

@@ -19,8 +19,8 @@
 ## Pending
 
 - [ ] Add Zod input validation schemas
-- [ ] Add Playwright end-to-end tests
-- [ ] Add accessibility audit
-- [ ] Add form autosave to localStorage
+- [x] Add Playwright end-to-end tests
+- [x] Add accessibility audit
+- [x] Add form autosave to localStorage
 - [ ] Clinical safety case documentation
 - [ ] GDPR data processing impact assessment

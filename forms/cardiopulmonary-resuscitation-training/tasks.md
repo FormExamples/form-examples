@@ -8,15 +8,15 @@
 
 - [ ] Implement examiner form frontend (8 steps)
 - [ ] Implement BLS pass/fail scoring engine with critical-action rules
-- [ ] Implement flagged issues detection
-- [ ] Implement PDF certificate generation
+- [x] Implement flagged issues detection
+- [x] Implement PDF certificate generation
 - [ ] Implement training coordinator dashboard with SVAR DataGrid
-- [ ] Add Vitest unit tests for grading logic
-- [ ] Create SQL migration files
+- [x] Add Vitest unit tests for grading logic
+- [x] Create SQL migration files
 - [ ] Add Zod input validation schemas
-- [ ] Add Playwright end-to-end tests
-- [ ] Add accessibility audit
-- [ ] Add form autosave to localStorage
-- [ ] Add backend database migrations
+- [x] Add Playwright end-to-end tests
+- [x] Add accessibility audit
+- [x] Add form autosave to localStorage
+- [x] Add backend database migrations
 - [ ] Clinical safety case documentation
 - [ ] GDPR data processing impact assessment

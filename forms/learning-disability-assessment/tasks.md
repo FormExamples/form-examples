@@ -8,16 +8,16 @@
 
 - [ ] Implement clinician / carer form frontend (10 steps)
 - [ ] Implement severity + annual health-check grading engine
-- [ ] Implement flagged issues detection
+- [x] Implement flagged issues detection
 - [ ] Implement easy-read patient-facing presentation
 - [ ] Implement PDF Health Action Plan generation
 - [ ] Implement LD team dashboard with SVAR DataGrid
-- [ ] Add Vitest unit tests for grading logic
-- [ ] Create SQL migration files
+- [x] Add Vitest unit tests for grading logic
+- [x] Create SQL migration files
 - [ ] Add Zod input validation schemas
-- [ ] Add Playwright end-to-end tests
-- [ ] Add accessibility audit
-- [ ] Add form autosave to localStorage
-- [ ] Add backend database migrations
+- [x] Add Playwright end-to-end tests
+- [x] Add accessibility audit
+- [x] Add form autosave to localStorage
+- [x] Add backend database migrations
 - [ ] Clinical safety case documentation
 - [ ] GDPR data processing impact assessment

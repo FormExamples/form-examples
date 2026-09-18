@@ -48,6 +48,6 @@
 - [ ] Airline-specific submission profiles (Emirates, BA, LOT, KLM, QR).
 - [ ] IATA SSR code generator from requested accommodations.
 - [ ] Zod schemas for client-side validation.
-- [ ] LocalStorage autosave with draft recovery.
+- [x] LocalStorage autosave with draft recovery.
 - [ ] Bilingual UI (English / Cymraeg, English / Arabic).
 - [ ] Airline electronic submission API (where supported).

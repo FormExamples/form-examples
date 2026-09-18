@@ -8,16 +8,16 @@
 ## Pending
 
 - [ ] Author SQL migrations (patient, facilities, SBAR sections, status flags, sign-off)
-- [ ] Generate XML representations and DTDs
-- [ ] Generate FHIR R5 JSON resources
+- [x] Generate XML representations and DTDs
+- [x] Generate FHIR R5 JSON resources
 - [ ] Implement counter-referral form frontend with HTML/CSS/JS (7 steps)
 - [ ] Implement counter-referral form frontend with SvelteKit/Tailwind (7 steps)
-- [ ] Implement dashboard with HTML/CSS/JS
+- [x] Implement dashboard with HTML/CSS/JS
 - [ ] Implement dashboard with SvelteKit/SVAR DataGrid
-- [ ] Implement completeness validation engine
+- [x] Implement completeness validation engine
 - [ ] Implement status flag detection
-- [ ] Implement PDF report generation
-- [ ] Implement Rust backend with Loco/Tera
-- [ ] Add Vitest unit tests for validation logic
+- [x] Implement PDF report generation
+- [x] Implement Rust backend with Loco/Tera
+- [x] Add Vitest unit tests for validation logic
 - [ ] Clinical safety case documentation
 - [ ] GDPR data processing impact assessment

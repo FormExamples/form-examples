@@ -40,4 +40,4 @@
 - [ ] Collateral-history capture for item 4.
 - [ ] Serial-score trend view.
 - [ ] Delirium care-bundle linkage on positive screen.
-- [ ] LocalStorage autosave with draft recovery.
+- [x] LocalStorage autosave with draft recovery.

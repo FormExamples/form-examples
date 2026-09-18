@@ -62,7 +62,7 @@
 - [ ] Zod schemas for client-side validation.
 - [ ] Axe-core accessibility audit (WCAG 2.2 AA).
 - [ ] Playwright end-to-end tests covering the donor / attorney happy paths.
-- [ ] LocalStorage autosave with draft recovery.
+- [x] LocalStorage autosave with draft recovery.
 - [ ] Welsh-language (Cymraeg) UI.
 - [ ] OPG digital-LPA API submission (pending Powers of Attorney Act 2023 commencement).
 - [ ] Cross-form ADRT consistency check.

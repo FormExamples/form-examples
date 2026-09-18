@@ -14,7 +14,7 @@
 - [x] Protocol Buffers (`protobuf/`)
 - [x] OpenAPI 3.1 (`openapi/`)
 - [x] Loco setup script (`back-end-with-loco-setup`)
-- [ ] `schema.sql`, `examples/`, `spec.md`, `CHANGELOG.md`
+- [x] `schema.sql`, `examples/`, `spec.md`, `CHANGELOG.md`
 
 ## Documentation
 

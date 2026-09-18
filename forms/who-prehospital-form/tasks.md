@@ -8,18 +8,18 @@
 ## Pending
 
 - [ ] Author SQL migrations (caller/scene, vitals, high risk signs, triage, ABCDE, SAMPLE history, injury details, physical exam, interventions, assessment, reassessments, disposition)
-- [ ] Generate XML representations and DTDs
-- [ ] Generate FHIR R5 JSON resources
+- [x] Generate XML representations and DTDs
+- [x] Generate FHIR R5 JSON resources
 - [ ] Implement prehospital form frontend with HTML/CSS/JS (16 steps)
 - [ ] Implement prehospital form frontend with SvelteKit/Tailwind (16 steps)
 - [ ] Implement multiple reassessment vital signs UI
 - [ ] Implement triage category selection (RED/YELLOW/GREEN)
-- [ ] Implement dashboard with HTML/CSS/JS
+- [x] Implement dashboard with HTML/CSS/JS
 - [ ] Implement dashboard with SvelteKit/SVAR DataGrid
-- [ ] Implement completeness validation engine
+- [x] Implement completeness validation engine
 - [ ] Implement high risk sign detection
-- [ ] Implement PDF report generation
-- [ ] Implement Rust backend with Loco/Tera
-- [ ] Add Vitest unit tests for validation logic
+- [x] Implement PDF report generation
+- [x] Implement Rust backend with Loco/Tera
+- [x] Add Vitest unit tests for validation logic
 - [ ] Clinical safety case documentation
 - [ ] GDPR data processing impact assessment

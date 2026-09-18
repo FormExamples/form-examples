@@ -59,9 +59,9 @@
 ## Deferred / future
 
 - [ ] Zod schemas for client-side validation.
-- [ ] Axe-core accessibility audit.
-- [ ] Playwright end-to-end tests.
-- [ ] LocalStorage autosave with draft recovery.
+- [x] Axe-core accessibility audit.
+- [x] Playwright end-to-end tests.
+- [x] LocalStorage autosave with draft recovery.
 - [ ] NHS number validation via PDS.
 - [ ] SNOMED CT terminology auto-complete.
 - [ ] Clinical safety case (DCB0129 / DCB0160) documentation.

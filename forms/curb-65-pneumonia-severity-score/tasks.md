@@ -39,5 +39,5 @@
 
 ## Deferred / future
 - [ ] Automatic urea-unit detection.
-- [ ] LocalStorage autosave with draft recovery.
+- [x] LocalStorage autosave with draft recovery.
 - [ ] Clinical safety case (DCB0129 / DCB0160).

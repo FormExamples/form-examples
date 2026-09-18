@@ -14,5 +14,5 @@
 ## Pending
 
 - [ ] Implement clinician dashboard with SVAR DataGrid
-- [ ] Implement Rust backend with engine types
+- [x] Implement Rust backend with engine types
 - [ ] Clinical safety case documentation
