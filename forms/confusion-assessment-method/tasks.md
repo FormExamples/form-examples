@@ -2,7 +2,7 @@
 
 ## Scaffolding
 - [x] Directory scaffolded.
-- [ ] Verify structure matches `bin/test-form` expectations.
+- [x] Verify structure matches `bin/test-form` expectations.
 
 ## Documentation
 - [x] `index.md` — description, scope, scoring system (four features + the
