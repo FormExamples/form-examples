@@ -3,7 +3,17 @@ import { validateForm } from './form-validator';
 import { detectAdditionalFlags } from './flagged-issues';
 import type { AssessmentData } from './types';
 
+/** Formats a date offset from today as YYYY-MM-DD, so fixtures never drift into the past. */
+function isoDateMonthsFromNow(months: number): string {
+	const d = new Date();
+	d.setHours(0, 0, 0, 0);
+	d.setMonth(d.getMonth() + months);
+	return d.toISOString().slice(0, 10);
+}
+
 function createCompleteForm(): AssessmentData {
+	const startDate = isoDateMonthsFromNow(-6);
+	const endDate = isoDateMonthsFromNow(6);
 	return {
 		patientInformation: {
 			firstName: 'Jane',
@@ -37,8 +47,8 @@ function createCompleteForm(): AssessmentData {
 			otherDetails: ''
 		},
 		authorizationPeriod: {
-			startDate: '2026-03-08',
-			endDate: '2026-09-08',
+			startDate,
+			endDate,
 			singleUse: 'no'
 		},
 		restrictionsLimitations: {
@@ -56,10 +66,10 @@ function createCompleteForm(): AssessmentData {
 		},
 		signatureConsent: {
 			patientSignatureConfirmed: 'yes',
-			signatureDate: '2026-03-08',
+			signatureDate: startDate,
 			witnessName: 'Robert Jones',
 			witnessSignatureConfirmed: 'yes',
-			witnessDate: '2026-03-08',
+			witnessDate: startDate,
 			parentGuardianName: ''
 		}
 	};
