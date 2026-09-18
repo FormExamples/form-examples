@@ -408,10 +408,5 @@
   "imports": {
     "#lib": "./src/lib/index.js",
     "#lib/*": "./src/lib/*"
-  },
-  "pnpm": {
-    "overrides": {
-      "@svar-ui/svelte-core": "^2.6.1"
-    }
   }
 }

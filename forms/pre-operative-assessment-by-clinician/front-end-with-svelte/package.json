@@ -555,11 +555,5 @@
   "imports": {
     "#lib": "./src/lib/index.js",
     "#lib/*": "./src/lib/*"
-  },
-  "pnpm": {
-    "overrides": {
-      "js-yaml": "^4.3.2",
-      "@svar-ui/svelte-core": "^2.6.1"
-    }
   }
 }

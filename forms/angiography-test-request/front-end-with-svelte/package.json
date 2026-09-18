@@ -432,10 +432,5 @@
         "./package/stores/request.svelte.d.ts"
       ]
     }
-  },
-  "pnpm": {
-    "overrides": {
-      "@svar-ui/svelte-core": "^2.6.1"
-    }
   }
 }

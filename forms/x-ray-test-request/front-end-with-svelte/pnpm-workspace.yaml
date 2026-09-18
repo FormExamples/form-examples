@@ -4,3 +4,6 @@ packages:
 allowBuilds:
   esbuild: true
 engineStrict: true
+
+overrides:
+  '@svar-ui/svelte-core': ^2.6.1

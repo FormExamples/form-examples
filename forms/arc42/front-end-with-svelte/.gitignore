@@ -6,4 +6,3 @@ build
 !.env.example
 .DS_Store
 vite.config.ts.timestamp-*
-pnpm-workspace.yaml
