@@ -4,7 +4,7 @@
 For every form under forms/ this script ensures:
 
 - forms/<slug>/CHANGELOG.md (Keep-a-Changelog 1.1.0 stub, semver policy)
-- forms/<slug>/examples/AGENTS.md, CLAUDE.md, index.md, README.md (skeleton)
+- forms/<slug>/examples/AGENTS.md, index.md, README.md (skeleton)
 - forms/<slug>/examples/assessment.json (a filled-form JSON fixture derived from
   sql/ — type-defaulted, CHECK-constraint aware)
 - forms/<slug>/examples/fhir-bundle.json (a FHIR R5 Bundle of type=collection
@@ -171,9 +171,6 @@ EXAMPLES_INDEX_TEMPLATE = """# Examples
 Worked examples for the **{title}** form. See [`AGENTS.md`](AGENTS.md) for the
 file list, generator command, and curation policy.
 """
-
-
-CLAUDE_AT_AGENTS = "@AGENTS.md\n"
 
 
 # ---------- SQL parsing ----------------------------------------------------
@@ -515,8 +512,6 @@ def write_examples(form_dir: Path, slug: str, title: str, check: bool, drifted: 
         check,
         drifted,
     )
-    # CLAUDE.md
-    write_if_changed(examples / "CLAUDE.md", CLAUDE_AT_AGENTS, check, drifted)
     # index.md
     write_if_changed(
         examples / "index.md", EXAMPLES_INDEX_TEMPLATE.format(title=title), check, drifted

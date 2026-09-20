@@ -33,8 +33,8 @@ different, persona-driven artefact, not a schema-level template):
   <table>_grade_flag    -> one DetectedIssue per persona.expected.flags
 
 Output: examples/personas-fhir/<NN>-<slugified-persona-name>.json, one file
-per persona, plus the standard AGENTS.md/CLAUDE.md/index.md/README.md doc
-quartet for the new directory.
+per persona, plus the standard AGENTS.md/index.md/README.md doc trio for
+the new directory.
 
 Usage:
     bin/generate-persona-fhir-bundles.py [--check] [--all|<slug>...]
@@ -463,7 +463,6 @@ def write_if_changed(path: Path, content: str, check: bool, drifted: list) -> No
 def write_docs(out_dir: Path, title: str, check: bool, drifted: list) -> None:
     write_if_changed(out_dir / "index.md", DOC_INDEX_MD.format(title=title), check, drifted)
     write_if_changed(out_dir / "AGENTS.md", DOC_AGENTS_MD.format(title=title), check, drifted)
-    write_if_changed(out_dir / "CLAUDE.md", "@AGENTS.md\n", check, drifted)
     readme = out_dir / "README.md"
     if check:
         if not readme.is_symlink() or not readme.is_file():

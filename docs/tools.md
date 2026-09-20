@@ -368,7 +368,7 @@ bin/generate-changelog-and-examples.py — Scaffold CHANGELOG.md and examples/.
 For every form under forms/ this script ensures:
 
 - forms/<slug>/CHANGELOG.md (Keep-a-Changelog 1.1.0 stub, semver policy)
-- forms/<slug>/examples/AGENTS.md, CLAUDE.md, index.md, README.md (skeleton)
+- forms/<slug>/examples/AGENTS.md, index.md, README.md (skeleton)
 - forms/<slug>/examples/assessment.json (a filled-form JSON fixture derived from
   sql/ — type-defaulted, CHECK-constraint aware)
 - forms/<slug>/examples/fhir-bundle.json (a FHIR R5 Bundle of type=collection
@@ -586,8 +586,8 @@ different, persona-driven artefact, not a schema-level template):
   <table>_grade_flag    -> one DetectedIssue per persona.expected.flags
 
 Output: examples/personas-fhir/<NN>-<slugified-persona-name>.json, one file
-per persona, plus the standard AGENTS.md/CLAUDE.md/index.md/README.md doc
-quartet for the new directory.
+per persona, plus the standard AGENTS.md/index.md/README.md doc trio for
+the new directory.
 
 Usage:
     bin/generate-persona-fhir-bundles.py [--check] [--all|<slug>...]

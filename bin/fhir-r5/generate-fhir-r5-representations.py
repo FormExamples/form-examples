@@ -978,8 +978,8 @@ def process_form(form_dir):
     # children, or dropped tables. Every *.json here is table-derived, so any
     # file outside expected_files is an orphan; leaving it behind duplicates a
     # resource and carries stale cross-references that dangle in the bundle.
-    # The per-form docs (AGENTS.md, README.md, index.md, CLAUDE.md) are *.md
-    # and untouched by the *.json glob.
+    # The per-form docs (AGENTS.md, README.md, index.md) are *.md and
+    # untouched by the *.json glob.
     for f in fhir_dir.glob("*.json"):
         if f.name not in expected_files:
             f.unlink()

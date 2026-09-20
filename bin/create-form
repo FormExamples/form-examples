@@ -15,7 +15,6 @@ mkdir_with_ai_idempotent() (
   touch index.md
   ln -sfn index.md README.md
   touch AGENTS.md
-  test -f CLAUDE.md || echo "@AGENTS.md" > CLAUDE.md
   touch plan.md
   touch tasks.md
 )
