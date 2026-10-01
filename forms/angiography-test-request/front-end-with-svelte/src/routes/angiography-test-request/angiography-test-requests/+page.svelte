@@ -2,14 +2,14 @@
 	import { goto } from '$app/navigation';
 	import { browser } from '$app/env';
 	import { Grid, Willow, WillowDark } from '@svar-ui/svelte-grid';
-	import { sampleRequestRows } from '$lib/data/sample-reports';
+	import { sampleRequestRows } from '#lib/data/sample-reports.js';
 	import {
 		angiographyTypeLabel,
 		indicationLabel,
 		appropriatenessBandLabel,
 		safetyBandLabel,
 		triageTierLabel
-	} from '$lib/engine/utils';
+	} from '#lib/engine/utils.js';
 
 	let triageFilter = $state('');
 	let safetyFilter = $state('');

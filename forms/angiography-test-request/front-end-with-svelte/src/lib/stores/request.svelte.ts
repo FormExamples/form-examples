@@ -1,11 +1,11 @@
 import { browser } from '$app/env';
-import type { RequestData, GradingResult } from '$lib/engine/types';
-import { createDefaultRequest } from '$lib/engine/defaults';
+import type { RequestData, GradingResult } from '#lib/engine/types.js';
+import { createDefaultRequest } from '#lib/engine/defaults.js';
 
 // Re-export the default factory so callers can `import { createDefaultRequest }`
 // from the store (the gold convention) while the pure factory lives in the
 // engine and stays free of Svelte runtime imports.
-export { createDefaultRequest } from '$lib/engine/defaults';
+export { createDefaultRequest } from '#lib/engine/defaults.js';
 
 /** localStorage draft key for a given request id (defaults to `new`). */
 function storageKey(id: string): string {

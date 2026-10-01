@@ -1,5 +1,5 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
-import type { RequestData, GradingResult } from '$lib/engine/types';
+import type { RequestData, GradingResult } from '#lib/engine/types.js';
 import {
 	angiographyTypeLabel,
 	bodyRegionLabel,
@@ -8,7 +8,7 @@ import {
 	safetyBandLabel,
 	triageTierLabel,
 	calculateAge
-} from '$lib/engine/utils';
+} from '#lib/engine/utils.js';
 
 export function buildPdfDocument(
 	data: RequestData,

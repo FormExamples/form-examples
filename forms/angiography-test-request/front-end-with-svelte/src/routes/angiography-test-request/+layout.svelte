@@ -2,10 +2,10 @@
 	import '../../app.css';
 	import { page } from '$app/state';
 	import PickerBar from "@lilydesignsystem/svelte-picker-bar";
-	import { SHARE_TARGETS } from "$lib/config/share-targets";
-	import { THEME_OPTIONS, THEME_STORAGE_KEY, DEFAULT_THEME } from '$lib/config/themes';
-	import { LOCALE_OPTIONS, LOCALE_STORAGE_KEY, DEFAULT_LOCALE } from '$lib/config/locales';
-	import { TEXT_SIZE_OPTIONS, TEXT_SIZE_STORAGE_KEY, DEFAULT_TEXT_SIZE } from '$lib/config/text-sizes';
+	import { SHARE_TARGETS } from "#lib/config/share-targets.js";
+	import { THEME_OPTIONS, THEME_STORAGE_KEY, DEFAULT_THEME } from '#lib/config/themes.js';
+	import { LOCALE_OPTIONS, LOCALE_STORAGE_KEY, DEFAULT_LOCALE } from '#lib/config/locales.js';
+	import { TEXT_SIZE_OPTIONS, TEXT_SIZE_STORAGE_KEY, DEFAULT_TEXT_SIZE } from '#lib/config/text-sizes.js';
 	let { children } = $props();
 
 	const navClass = (href: string) =>

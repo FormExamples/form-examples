@@ -15,22 +15,22 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0(svelte@5.57.1)
       '@lilydesignsystem/svelte-locale-picker':
-        specifier: ^0.1.2
+        specifier: ^0.1.0
         version: 0.1.2(svelte@5.57.1)
       '@lilydesignsystem/svelte-picker-bar':
         specifier: ^0.1.0
         version: 0.1.0(svelte@5.57.1)
       '@lilydesignsystem/svelte-share-picker':
-        specifier: ^0.1.2
+        specifier: ^0.1.0
         version: 0.1.2(svelte@5.57.1)
       '@lilydesignsystem/svelte-text-size-picker':
-        specifier: ^0.1.2
+        specifier: ^0.1.0
         version: 0.1.2(svelte@5.57.1)
       '@lilydesignsystem/svelte-theme-picker':
-        specifier: ^0.1.2
+        specifier: ^0.1.0
         version: 0.1.2(svelte@5.57.1)
       '@svar-ui/svelte-grid':
-        specifier: ^2.7.3
+        specifier: ^2.7.2
         version: 2.7.3
       migrate:
         specifier: ^2.1.0
@@ -45,17 +45,17 @@ importers:
         specifier: ^0.3.11
         version: 0.3.11
       sv:
-        specifier: ^0.17.1
+        specifier: ^0.17.0
         version: 0.17.1
     devDependencies:
       '@sveltejs/adapter-auto':
-        specifier: next
+        specifier: ^8.0.0-next.0
         version: 8.0.0-next.4(@sveltejs/kit@3.0.0-next.31(@sveltejs/vite-plugin-svelte@7.3.1(svelte@5.57.1)(vite@8.3.1(@types/node@26.6.3)(jiti@2.7.0)))(svelte@5.57.1)(typescript@6.0.3)(vite@8.3.1(@types/node@26.6.3)(jiti@2.7.0)))
       '@sveltejs/kit':
-        specifier: next
+        specifier: ^3.0.0-next.0
         version: 3.0.0-next.31(@sveltejs/vite-plugin-svelte@7.3.1(svelte@5.57.1)(vite@8.3.1(@types/node@26.6.3)(jiti@2.7.0)))(svelte@5.57.1)(typescript@6.0.3)(vite@8.3.1(@types/node@26.6.3)(jiti@2.7.0))
       '@sveltejs/vite-plugin-svelte':
-        specifier: ^7.3.1
+        specifier: ^7.0.0
         version: 7.3.1(svelte@5.57.1)(vite@8.3.1(@types/node@26.6.3)(jiti@2.7.0))
       '@tailwindcss/vite':
         specifier: ^4.3.3
@@ -64,7 +64,7 @@ importers:
         specifier: ^0.3.3
         version: 0.3.3
       svelte:
-        specifier: ^5.57.1
+        specifier: ^5.56.9
         version: 5.57.1
       svelte-check:
         specifier: ^4.7.6
@@ -73,10 +73,10 @@ importers:
         specifier: ^4.3.3
         version: 4.3.3
       typescript:
-        specifier: ^6.0.3
+        specifier: ^6.0.0
         version: 6.0.3
       vite:
-        specifier: ^8.3.1
+        specifier: ^8.0.12
         version: 8.3.1(@types/node@26.6.3)(jiti@2.7.0)
       vitest:
         specifier: ^4.1.11

@@ -56,4 +56,5 @@ export const THEME_OPTIONS: ThemeOption[] = DEFAULT_THEMES.map((value) => ({
 export const DEFAULT_THEME = "light";
 
 /** localStorage key for the persisted theme selection. */
-export const THEME_STORAGE_KEY = "pre-operative-assessment-by-clinician.theme.v1";
+export const THEME_STORAGE_KEY =
+  "pre-operative-assessment-by-clinician.theme.v1";

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { request } from '$lib/stores/request.svelte';
-	import Fieldset from '$lib/components/ui/Fieldset.svelte';
-	import Field from '$lib/components/ui/Field.svelte';
+	import { request } from '#lib/stores/request.svelte.js';
+	import Fieldset from '#lib/components/ui/Fieldset.svelte';
+	import Field from '#lib/components/ui/Field.svelte';
 	import { CheckboxInput, DateInput, TextInput } from "@lilydesignsystem/svelte-headless";
-	import NumberInput from '$lib/components/ui/NumberInput.svelte';
+	import NumberInput from '#lib/components/ui/NumberInput.svelte';
 
 	const p = request.data.patient;
 </script>

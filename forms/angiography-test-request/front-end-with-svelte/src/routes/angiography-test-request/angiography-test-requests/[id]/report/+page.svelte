@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { request } from '$lib/stores/request.svelte';
+	import { request } from '#lib/stores/request.svelte.js';
 	import {
 		angiographyTypeLabel,
 		bodyRegionLabel,
@@ -15,8 +15,8 @@
 		recommendationColor,
 		priorityColor,
 		calculateAge
-	} from '$lib/engine/utils';
-	import Badge from '$lib/components/ui/Badge.svelte';
+	} from '#lib/engine/utils.js';
+	import Badge from '#lib/components/ui/Badge.svelte';
 	import { Button } from "@lilydesignsystem/svelte-headless";
 
 	const id = $derived(page.params.id ?? 'new');
