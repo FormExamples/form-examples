@@ -87,9 +87,6 @@ def process_package_json(front_end: Path, apply: bool) -> bool:
             del deps[old_name]
             deps[new_name] = NEW_VERSION
             changed = True
-        elif new_name in deps and deps[new_name] != NEW_VERSION:
-            deps[new_name] = NEW_VERSION
-            changed = True
     if changed and apply:
         path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
     return changed
