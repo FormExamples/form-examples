@@ -1,10 +1,10 @@
 <script lang="ts">
   import '../app.css';
   import { page } from '$app/state';
-  import Header from '$lib/components/Header.svelte';
-  import Sidebar from '$lib/components/Sidebar.svelte';
-  import Footer from '$lib/components/Footer.svelte';
-  import { pageTitle } from '$lib/site';
+  import Header from '#lib/components/Header.svelte';
+  import Sidebar from '#lib/components/Sidebar.svelte';
+  import Footer from '#lib/components/Footer.svelte';
+  import { pageTitle } from '#lib/site.js';
   import type { Snippet } from 'svelte';
 
   type Props = { children: Snippet };

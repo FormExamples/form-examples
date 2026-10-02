@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { REPO_URL } from '$lib/site';
-  import type { ExampleEntry } from '$lib/data/examples.generated';
+  import { REPO_URL } from '#lib/site.js';
+  import type { ExampleEntry } from '#lib/data/examples.generated.js';
 
   type Props = { example: ExampleEntry };
   let { example }: Props = $props();

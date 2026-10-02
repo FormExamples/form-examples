@@ -1,10 +1,10 @@
 <script lang="ts">
   import { page } from '$app/state';
-  import { SITE_NAME, REPO_URL, pageTitle } from '$lib/site';
-  import { THEME_OPTIONS, DEFAULT_THEME, THEME_STORAGE_KEY } from '$lib/config/themes';
-  import { TEXT_SIZE_OPTIONS, DEFAULT_TEXT_SIZE, TEXT_SIZE_STORAGE_KEY } from '$lib/config/text-sizes';
-  import { LOCALE_OPTIONS, DEFAULT_LOCALE, LOCALE_STORAGE_KEY } from '$lib/config/locales';
-  import { SHARE_TARGETS } from '$lib/config/share-targets';
+  import { SITE_NAME, REPO_URL, pageTitle } from '#lib/site.js';
+  import { THEME_OPTIONS, DEFAULT_THEME, THEME_STORAGE_KEY } from '#lib/config/themes.js';
+  import { TEXT_SIZE_OPTIONS, DEFAULT_TEXT_SIZE, TEXT_SIZE_STORAGE_KEY } from '#lib/config/text-sizes.js';
+  import { LOCALE_OPTIONS, DEFAULT_LOCALE, LOCALE_STORAGE_KEY } from '#lib/config/locales.js';
+  import { SHARE_TARGETS } from '#lib/config/share-targets.js';
   import PickerBar from '@lilydesignsystem/svelte-picker-bar';
 
   type Props = { onMenuToggle?: () => void };

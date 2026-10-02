@@ -1,6 +1,6 @@
 <script lang="ts">
-  import ExampleCard from '$lib/components/ExampleCard.svelte';
-  import { examples } from '$lib/data/examples.generated';
+  import ExampleCard from '#lib/components/ExampleCard.svelte';
+  import { examples } from '#lib/data/examples.generated.js';
 
   let query = $state('');
 

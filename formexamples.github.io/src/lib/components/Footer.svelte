@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { REPO_URL } from '$lib/site';
+  import { REPO_URL } from '#lib/site.js';
   const year = new Date().getFullYear();
 </script>
 

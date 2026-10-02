@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { categories } from '$lib/data/categories';
+  import { categories } from '#lib/data/categories.js';
 </script>
 
 <div class="my-6 overflow-x-auto">

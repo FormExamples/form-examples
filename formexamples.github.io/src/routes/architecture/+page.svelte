@@ -1,6 +1,6 @@
 <script lang="ts">
-  import CodeBlock from '$lib/components/CodeBlock.svelte';
-  import OnThisPage from '$lib/components/OnThisPage.svelte';
+  import CodeBlock from '#lib/components/CodeBlock.svelte';
+  import OnThisPage from '#lib/components/OnThisPage.svelte';
 
   const sections = [
     { id: 'directory-layout', label: 'Directory layout' },

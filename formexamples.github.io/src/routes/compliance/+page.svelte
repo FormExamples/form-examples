@@ -1,5 +1,5 @@
 <script lang="ts">
-  import ReferenceCard from '$lib/components/ReferenceCard.svelte';
+  import ReferenceCard from '#lib/components/ReferenceCard.svelte';
 
   const refs = [
     {

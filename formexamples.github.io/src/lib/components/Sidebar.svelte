@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/state';
-  import { navLinks } from '$lib/site';
+  import { navLinks } from '#lib/site.js';
 
   type Props = { open?: boolean; onClose?: () => void };
   let { open = false, onClose }: Props = $props();

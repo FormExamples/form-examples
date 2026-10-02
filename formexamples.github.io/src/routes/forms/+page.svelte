@@ -1,7 +1,7 @@
 <script lang="ts">
-  import CategoryTable from '$lib/components/CategoryTable.svelte';
-  import { forms } from '$lib/data/forms.generated';
-  import { REPO_URL } from '$lib/site';
+  import CategoryTable from '#lib/components/CategoryTable.svelte';
+  import { forms } from '#lib/data/forms.generated.js';
+  import { REPO_URL } from '#lib/site.js';
 
   function formUrl(slug: string): string {
     return `${REPO_URL}/tree/main/forms/${slug}`;

@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { SITE_NAME, SITE_TAGLINE, REPO_URL } from '$lib/site';
-  import CategoryTable from '$lib/components/CategoryTable.svelte';
-  import CodeBlock from '$lib/components/CodeBlock.svelte';
+  import { SITE_NAME, SITE_TAGLINE, REPO_URL } from '#lib/site.js';
+  import CategoryTable from '#lib/components/CategoryTable.svelte';
+  import CodeBlock from '#lib/components/CodeBlock.svelte';
 </script>
 
 <h1 class="text-3xl font-semibold tracking-tight">{SITE_NAME}</h1>

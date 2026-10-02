@@ -1,6 +1,6 @@
 <script lang="ts">
-  import OnThisPage from '$lib/components/OnThisPage.svelte';
-  import { REPO_URL } from '$lib/site';
+  import OnThisPage from '#lib/components/OnThisPage.svelte';
+  import { REPO_URL } from '#lib/site.js';
 
   const sections = [
     { id: 'html', label: 'Front-end: HTML / Lily headless' },

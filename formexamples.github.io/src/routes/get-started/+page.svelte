@@ -1,6 +1,6 @@
 <script lang="ts">
-  import CodeBlock from '$lib/components/CodeBlock.svelte';
-  import { REPO_URL } from '$lib/site';
+  import CodeBlock from '#lib/components/CodeBlock.svelte';
+  import { REPO_URL } from '#lib/site.js';
 </script>
 
 <h1 class="text-3xl font-semibold tracking-tight">Get started</h1>
