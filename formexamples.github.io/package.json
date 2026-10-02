@@ -22,7 +22,7 @@
     "@lilydesignsystem/svelte-picker-bar": "^0.1.0",
     "@lilydesignsystem/svelte-share-picker": "^0.1.0",
     "@lilydesignsystem/svelte-text-size-picker": "^0.1.0",
-    "@lilydesignsystem/svelte-theme-picker": "^0.1.0",
+    "@lilydesignsystem/svelte-theme-picker": "^0.1.2",
     "@sveltejs/adapter-static": "^4.0.0-next.0",
     "@sveltejs/kit": "^3.0.0-next.0",
     "@sveltejs/vite-plugin-svelte": "^7.3.0",
