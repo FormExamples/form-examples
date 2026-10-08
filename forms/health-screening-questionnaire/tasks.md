@@ -49,7 +49,7 @@
 - [x] `front-end-with-svelte/src/lib/engine/flagged-issues.ts`
 - [x] `front-end-with-svelte/src/lib/engine/grader.ts` — `calculateHealthScreening()`
 - [x] `front-end-with-svelte/src/lib/engine/grader.test.ts` — 39 cases, every PAR-Q+ item and both AUDIT-C thresholds on both sides
-- [x] `npx vitest run` green.
+- [x] `pnpm exec vitest run` green.
 
 ## Front end — SvelteKit
 

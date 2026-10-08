@@ -19,8 +19,8 @@ set -eu
 #   --check     report which forms would change; exit 1 if any pending
 #   <slug> ...  restrict to the named forms (default: every eligible form)
 #
-# Requires e2e/ deps installed (cd e2e && npm ci) and browsers
-# (cd e2e && npx playwright install chromium).
+# Requires e2e/ deps installed (cd e2e && pnpm install --frozen-lockfile) and browsers
+# (cd e2e && pnpm exec playwright install chromium).
 
 top="$(git rev-parse --show-toplevel)"
 cd "$top"

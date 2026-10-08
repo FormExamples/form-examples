@@ -35,11 +35,11 @@
 - [x] `report/pdf/+server.ts` + `pdf-builder.ts` — `pdfmake` PDF export
 - [x] Welcome page (`/hospital-daily-monitoring-checklist/`) with links to
       the wizard and dashboard, and a detailed explanation
-- [x] `npx svelte-kit sync && npx svelte-check` — 0 errors, 4 pre-existing
+- [x] `pnpm exec svelte-kit sync && pnpm exec svelte-check` — 0 errors, 4 pre-existing
       a11y warnings in the vendored Lily picker components (LocalePicker,
       SharePicker, TextSizePicker, ThemePicker), identical to every other
       form in the monorepo
-- [x] `npx vitest run` — 4/4 tests passing
+- [x] `pnpm exec vitest run` — 4/4 tests passing
 - [x] Playwright smoke test of `/hospital-daily-monitoring-checklist/hospital-daily-monitoring-checklists/new`:
       24 fieldset legends, 24 step-list items, 97 item rows, 97 radio
       groups, zero console errors; interactive check that marking a

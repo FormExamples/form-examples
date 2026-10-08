@@ -30,7 +30,7 @@ The application is built with:
 
 ```bash
 # Build the production application
-npm run build
+pnpm run build
 
 # Start the production server
 node build/index.js
@@ -50,9 +50,9 @@ Create a `Dockerfile`:
 FROM node:20-slim AS builder
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci
+RUN pnpm install --frozen-lockfile
 COPY . .
-RUN npm run build
+RUN pnpm run build
 
 FROM node:20-slim
 WORKDIR /app
@@ -109,7 +109,7 @@ The default build uses `@sveltejs/adapter-auto`, which detects the deployment pl
 ### Node.js Server (Recommended)
 
 ```bash
-npm install -D @sveltejs/adapter-node
+pnpm install -D @sveltejs/adapter-node
 ```
 
 Update `svelte.config.js`:
@@ -219,7 +219,7 @@ Use a process manager for automatic restart:
 
 ```bash
 # Using PM2
-npm install -g pm2
+pnpm install -g pm2
 pm2 start build/index.js --name preop-assessment
 pm2 save
 pm2 startup  # Configure auto-start on boot
@@ -255,7 +255,7 @@ The system has **no persistent data store**. The only items to back up are:
 
 1. Provision a new server (or container).
 2. Clone the application repository.
-3. Run `npm ci && npm run build`.
+3. Run `pnpm install --frozen-lockfile && pnpm run build`.
 4. Configure the reverse proxy and TLS.
 5. Start the application.
 6. Verify health check passes.
@@ -290,9 +290,9 @@ The system supports:
 
 1. **Announce maintenance window** (system has no persistent state, so brief downtime is low-impact).
 2. Pull latest code from repository.
-3. Run `npm ci` to update dependencies.
-4. Run `npm run build` to rebuild the application.
-5. Run `npx vitest run` to verify tests pass.
+3. Run `pnpm install --frozen-lockfile` to update dependencies.
+4. Run `pnpm run build` to rebuild the application.
+5. Run `pnpm exec vitest run` to verify tests pass.
 6. Restart the application process.
 7. Verify health check.
 8. Test a sample assessment end-to-end.
@@ -305,7 +305,7 @@ Zero-downtime upgrades are possible with blue-green deployment or container orch
 
 | Symptom | Likely Cause | Resolution |
 |---------|-------------|------------|
-| Page loads but no styles | Tailwind CSS not built | Rebuild with `npm run build` |
+| Page loads but no styles | Tailwind CSS not built | Rebuild with `pnpm run build` |
 | PDF download fails | Server-side pdfmake error | Check server logs for errors; verify Node.js version |
 | "Cannot connect" on tablet | Network/firewall issue | Verify tablet can reach server; check firewall rules |
 | Assessment data lost on page refresh | Expected behaviour | Data lives in browser memory only; this is by design |

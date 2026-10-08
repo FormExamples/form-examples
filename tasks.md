@@ -39,7 +39,7 @@ cancelled, Rust and Svelte matrices had never once gone green. What
 followed was a real-CI-run-at-a-time loop, not a single fix: each push's
 own run was watched through to its actual result rather than assumed,
 and nine more times it surfaced a bug the previous fix hadn't touched —
-a scaffold clippy default, `npm ci` against pnpm-only front-ends, a
+a scaffold clippy default, `pnpm install --frozen-lockfile` against pnpm-only front-ends, a
 missing PyYAML install, a missing `pnpm-workspace.yaml` key, a merge-
 regressed `locales.ts`, an XML-escaping/orphan-file generator bug, a
 SvelteKit 3.0-next rename (after one wrong diagnosis was caught and
@@ -131,7 +131,7 @@ the remaining scorable forms.
   - [x] `rust` — 8-way sharded (`bin/forms-shard`) `cargo check` +
         `clippy -D warnings` + `cargo test`, each shard with a Postgres
         service and per-crate DB creation; `Swatinem/rust-cache`.
-  - [x] `svelte` — 8-way sharded `npm ci && check && build && vitest run`.
+  - [x] `svelte` — 8-way sharded `pnpm install --frozen-lockfile && check && build && vitest run`.
   - [x] `fhir` — official HL7 `validator_cli.jar` (pinned 6.3.11, cached)
         over generated `fhir/r5/*.json` + example Bundles.
 - [x] Wrote `bin/test-examples-conformance` (entity/property vs SQL schema,
@@ -688,16 +688,16 @@ Design each feature on the reference forms
       above rather than the raw per-entity `openapi/*.yaml` files (one
       complete document per form, matching "useful directly for Swagger UI
       / client codegen" above).
-- [i] **Svelte build audit (2026-07-13): CLEAN.** Sampled `npm run build`
+- [i] **Svelte build audit (2026-07-13): CLEAN.** Sampled `pnpm run build`
       across diverse forms (incl. the re-ported Lily forms + a test-request
-      form) → all build; `npm run check` + `vitest` also green on the sample.
+      form) → all build; `pnpm run check` + `vitest` also green on the sample.
       Unlike the Rust suite, the Svelte CI job is genuinely sound.
 - [x] **i18n pilot DONE** on `medical-language-speaking-assessment-for-cymraeg`:
       message layer (`src/lib/i18n/messages.ts` typed `{en,cy}` catalogue +
       `locale.svelte.ts` runes store, localStorage-persisted, `t()` with en
       fallback, mirrors `<html lang>` en-GB/cy) + `LocaleSelect` switcher
       mirroring ThemeSelect. Welcome + layout chrome in en-GB + Cymraeg
-      (incl. NHS Wales "Mwy na Geiriau"). `npm run check` 0/0, build ok, Lily
+      (incl. NHS Wales "Mwy na Geiriau"). `pnpm run check` 0/0, build ok, Lily
       no drift. Step/clinical content + other locales deferred; `docs/i18n.md`
       updated to the shipped-pilot pattern.
 - [x] **SUPERSEDED by the two-scope `CHANGELOG.md` design itself.** This
@@ -1266,9 +1266,9 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
         (single-occurrence-per-file confirmed before writing, `--check`
         gated, wired into the setup script alongside `loco-forbid-unsafe`).
         24-crate sample across all 8 shards verified clippy-clean.
-      - **Svelte, all 8 shards:** the job ran `npm ci`, but every
+      - **Svelte, all 8 shards:** the job ran `pnpm install --frozen-lockfile`, but every
         `front-end-with-svelte` is its own pnpm project with no
-        `package-lock.json` — `npm ci` has required one since npm 5 and
+        `pnpm-lock.yaml` — `pnpm install --frozen-lockfile` has required one since npm 5 and
         failed immediately, every time. This predates the session; this
         round's own npm-caching addition pointed at the same nonexistent
         lockfile without catching the underlying bug. Switched to
@@ -1354,7 +1354,7 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
         with an intermittent outcome, not unexplained flakiness. Raised
         to 10, fleet-wide.
       - The nightly E2E job's `e2e/.gitignore` excluded
-        `package-lock.json` — `npm ci` had never had a lockfile to
+        `pnpm-lock.yaml` — `pnpm install --frozen-lockfile` had never had a lockfile to
         install from. Committed.
       **Confirmed, not assumed:** run
       [33213955606](https://github.com/FormExamples/form-examples/actions/runs/33213955606)
@@ -2210,7 +2210,7 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       behaviour (now grades ASA IV, `compositeRisk: 'high'`), and updated
       the personas file's top-level `note`. Verified: the existing 3
       personas for this form were unaffected (none exercised this exact
-      combination); `npx vitest run` on this form's
+      combination); `pnpm exec vitest run` on this form's
       `composite-grader.test.ts` still 29/29 passed (no prior test
       asserted the old, buggy behaviour); `bin/test-personas
       pre-operative-assessment-by-clinician` 4/4 PASS; `bin/test-e2e --html
@@ -2717,7 +2717,7 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       `*-now-correctly-critical` toxicology personas especially — had
       already documented the exact gap by name during the original
       persona-authoring pass, before this sweep formalized the fix).
-      Ran `npx vitest run` and `npx svelte-check` across all 16 Svelte
+      Ran `pnpm exec vitest run` and `pnpm exec svelte-check` across all 16 Svelte
       engines: all green after fixing the two real regressions the first
       Vitest pass caught (blood-test-result, toxicology-test-result) —
       both were exactly the "widening a predicate `gradeSeverity` itself

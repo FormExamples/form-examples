@@ -65,7 +65,7 @@
 - [x] Root welcome page.
 - [x] Vendored `src/lib/components/ui/` and `static/themes/`.
 - [x] `pdfmake` PDF report.
-- [x] `pnpm install && npx vitest run` green (40/40); `npm run check` clean
+- [x] `pnpm install && pnpm exec vitest run` green (40/40); `pnpm run check` clean
       (0 errors, 0 warnings).
 - [x] `bin/lily-svelte-refactor --check knee-replacement-surgery-evaluation`
       passes.

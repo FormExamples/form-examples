@@ -106,7 +106,7 @@ differed.
 | `bin/test` | needs a reachable PostgreSQL for the per-crate `cargo test`; without one it fails on the first crate at ~24 s |
 | `bin/test-sql-apply` | needs a scratch PostgreSQL |
 | `cargo check` / `clippy` / `cargo deny`, per crate | dominated by the Rust toolchain and the crate cache, not by this repository; CI shards them 8 ways for this reason |
-| `pnpm run check` / `build`, per front-end | dominated by npm install and Vite; CI shards them 8 ways |
+| `pnpm run check` / `build`, per front-end | dominated by pnpm install and Vite; CI shards them 8 ways |
 | The HL7 FHIR validator | a Java process with a multi-hundred-megabyte package cache; CI caches it |
 | `bin/test-e2e` | Playwright plus axe-core over real browsers; runs nightly, not per push |
 

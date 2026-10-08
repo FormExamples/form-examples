@@ -11,7 +11,7 @@ OpenAPI 3 specifications, JSON Schema, and client SDKs via the
 ## Compile
 
 ```sh
-npx tsp compile main.tsp --emit @typespec/openapi3
+pnpm exec tsp compile main.tsp --emit @typespec/openapi3
 ```
 
 ## Maintenance

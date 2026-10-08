@@ -13,8 +13,8 @@ set -eu
 #   --all       every form (default when no slugs are listed)
 #   <slug> ...  restrict to the named forms
 #
-# Requires e2e/ deps installed (cd e2e && npm ci) and browsers
-# (cd e2e && npx playwright install chromium).
+# Requires e2e/ deps installed (cd e2e && pnpm install --frozen-lockfile) and browsers
+# (cd e2e && pnpm exec playwright install chromium).
 
 top="$(git rev-parse --show-toplevel)"
 cd "$top"
@@ -46,7 +46,7 @@ export FORMS
 
 if [ "$do_html" -eq 1 ]; then
     echo "== HTML front-end E2E sweep (wizard a11y + dashboard export) =="
-    ( cd e2e && npx playwright test html-smoke dashboard-export )
+    ( cd e2e && pnpm exec playwright test html-smoke dashboard-export )
 fi
 
 if [ "$do_svelte" -eq 1 ]; then
@@ -88,7 +88,7 @@ if [ "$do_svelte" -eq 1 ]; then
             i=$((i + 1)); sleep 1
         done
         if ! BASE_URL="http://127.0.0.1:4173" SLUG="$slug" \
-            sh -c 'cd e2e && npx playwright test svelte-smoke'; then
+            sh -c 'cd e2e && pnpm exec playwright test svelte-smoke'; then
             echo "::error::$slug: svelte-smoke test failed" >&2
             svelte_fail=1
             svelte_failed_forms="$svelte_failed_forms $slug"

@@ -6,6 +6,6 @@ psychology assessment. Pure scoring engine, Vitest tests, server-side PDF.
 ## Running
 
 ```sh
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```

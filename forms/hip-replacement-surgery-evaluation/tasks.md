@@ -62,7 +62,7 @@
 - [x] PDF report endpoint via `pdfmake` (`src/lib/report/pdf-builder.ts`).
 - [x] Vendored `src/lib/components/ui/` and `static/themes/` from
       `dietic-assessment`.
-- [x] `npx vitest run` (25/25), `svelte-check` (0 errors/0 warnings), `vite
+- [x] `pnpm exec vitest run` (25/25), `svelte-check` (0 errors/0 warnings), `vite
       build` all pass in the main checkout.
 
 ## Front-end with HTML

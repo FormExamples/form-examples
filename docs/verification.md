@@ -29,7 +29,7 @@ page lists each gate, what it proves, and how it runs in CI
 | XML validity | `xmllint --valid` (CI) | Generated `xml/*.xml` validate against their DTDs. |
 | Rust | `cargo check` + `cargo clippy -D warnings` + `cargo deny --all-features check` + `cargo test` (CI, 8 shards) | Every Loco crate compiles, is lint-clean, clears the supply-chain policy, and its model/request tests pass against Postgres. |
 | Rust MSRV | `cargo +1.96 check --all-targets --workspace` (CI, 8 shards) | Every crate compiles on the pinned MSRV (current stable minus two minor versions), not just on the toolchain default. |
-| Svelte | `pnpm run check` + `pnpm run build` + `vitest run` (CI, 8 shards) | Every SvelteKit front-end type-checks, builds (catches the SVAR/SSR trap), and its engine tests pass. Each front-end is its own pnpm project (`pnpm-lock.yaml`); `npm ci` has no lockfile to install from and fails immediately. |
+| Svelte | `pnpm run check` + `pnpm run build` + `vitest run` (CI, 8 shards) | Every SvelteKit front-end type-checks, builds (catches the SVAR/SSR trap), and its engine tests pass. Each front-end is its own pnpm project (`pnpm-lock.yaml`); `pnpm install --frozen-lockfile` has no lockfile to install from and fails immediately. |
 | E2E + a11y | `bin/test-e2e --html` (nightly + changed-forms) | Every HTML front-end loads with no uncaught JS error and no serious/critical axe-core accessibility violation. |
 | Supply-chain advisories | `cargo deny advisories` (weekly, CI) | Every crate's lockfile is re-checked against newly published security advisories between pushes. |
 

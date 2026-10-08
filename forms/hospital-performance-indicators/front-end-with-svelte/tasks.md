@@ -40,11 +40,11 @@
       content (24-step checklist steps, `items.ts`, `ItemRow.svelte`,
       wrong routes, wrong `package.json` name, wrong root redirect) —
       removed and rebuilt from scratch against this form's own spec/SQL
-- [x] `npx svelte-kit sync && npx svelte-check` — 0 errors, 4 pre-existing
+- [x] `pnpm exec svelte-kit sync && pnpm exec svelte-check` — 0 errors, 4 pre-existing
       a11y warnings in the vendored Lily picker components (LocalePicker,
       SharePicker, TextSizePicker, ThemePicker), identical to every other
       form in the monorepo
-- [x] `npx vitest run` — 3/3 tests passing
+- [x] `pnpm exec vitest run` — 3/3 tests passing
 - [x] Playwright smoke test of `/hospital-performance-indicators/hospital-performance-indicator-reports/new`:
       6 fieldset legends, 50 indicator rows (9 + 28 + 8 + 5), zero console
       errors on welcome/dashboard/wizard/report pages; filled reporting

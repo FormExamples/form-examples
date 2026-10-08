@@ -1,11 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(cd /Users/jph/git/formexamples/form-examples/forms/cognitive-assessment/front-end-patient-form-with-svelte && npm install 2>&1)",
-      "Bash(cd /Users/jph/git/formexamples/form-examples/forms/cognitive-assessment/front-end-clinician-dashboard-with-svelte && npm install 2>&1)",
-      "Bash(npm run build 2>&1)",
-      "Bash(npx vitest run 2>&1)",
-      "Bash(cd /Users/jph/git/formexamples/form-examples/forms/cognitive-assessment/front-end-clinician-dashboard-with-svelte && npm run build 2>&1)",
+      "Bash(cd /Users/jph/git/formexamples/form-examples/forms/cognitive-assessment/front-end-patient-form-with-svelte && pnpm install 2>&1)",
+      "Bash(cd /Users/jph/git/formexamples/form-examples/forms/cognitive-assessment/front-end-clinician-dashboard-with-svelte && pnpm install 2>&1)",
+      "Bash(pnpm run build 2>&1)",
+      "Bash(pnpm exec vitest run 2>&1)",
+      "Bash(cd /Users/jph/git/formexamples/form-examples/forms/cognitive-assessment/front-end-clinician-dashboard-with-svelte && pnpm run build 2>&1)",
       "Bash(cd /Users/jph/git/formexamples/form-examples/forms/cognitive-assessment/full-stack-with-loco-tera-htmx-alpine && cargo build 2>&1)",
       "Bash(cd /Users/jph/git/formexamples/form-examples/forms/cognitive-assessment/full-stack-with-loco-tera-htmx-alpine && cargo test 2>&1)",
       "Bash(cd /Users/jph/git/formexamples/form-examples && bash bin/test-forms 2>&1 | grep \"cognitive-assessment\" | head -40)",

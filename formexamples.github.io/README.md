@@ -5,15 +5,15 @@ Static documentation site for the [form-examples](https://github.com/formexample
 ## Develop
 
 ```sh
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 ## Build
 
 ```sh
-npm run build
-npm run preview
+pnpm run build
+pnpm run preview
 ```
 
 ## Deploy

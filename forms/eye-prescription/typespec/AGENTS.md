@@ -12,8 +12,8 @@ client SDKs in multiple languages.
 ## Build
 
 ```sh
-npm install --save-dev @typespec/compiler @typespec/openapi3
-npx tsp compile main.tsp --emit @typespec/openapi3
+pnpm install --save-dev @typespec/compiler @typespec/openapi3
+pnpm exec tsp compile main.tsp --emit @typespec/openapi3
 ```
 
 This emits an `tsp-output/@typespec/openapi3/openapi.yaml` file that can

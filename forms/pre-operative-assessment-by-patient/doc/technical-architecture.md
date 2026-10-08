@@ -346,11 +346,11 @@ Located in `src/lib/engine/asa-grader.test.ts`:
 - Test flag generation and priority sorting
 - Verify rule uniqueness
 
-Run with: `npx vitest run`
+Run with: `pnpm exec vitest run`
 
 ### Type Checking
 
-`npx svelte-check` verifies TypeScript types across all `.svelte` and `.ts` files.
+`pnpm exec svelte-check` verifies TypeScript types across all `.svelte` and `.ts` files.
 
 ### Integration Testing
 
@@ -384,4 +384,4 @@ Manual testing through the browser:
 | Data in transit | HTTPS required for production |
 | Data at rest | Backend uses PostgreSQL with parameterized queries; no raw SQL |
 | Injection | SeaORM parameterized queries prevent SQL injection; no shell execution |
-| Dependency vulnerabilities | Regular `npm audit`; minimal dependency tree |
+| Dependency vulnerabilities | Regular `pnpm audit`; minimal dependency tree |

@@ -57,8 +57,8 @@ src/
 ## Running
 
 ```sh
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 Open `http://localhost:5173` and step through the wizard.
@@ -66,5 +66,5 @@ Open `http://localhost:5173` and step through the wizard.
 ## Testing
 
 ```sh
-npx vitest run
+pnpm exec vitest run
 ```

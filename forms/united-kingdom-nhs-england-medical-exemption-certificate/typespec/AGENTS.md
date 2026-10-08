@@ -25,5 +25,5 @@ TypeSpec models for the FP92A data model. The canonical source of truth is
 ## Compile
 
 ```sh
-npx tsp compile main.tsp --emit @typespec/openapi3
+pnpm exec tsp compile main.tsp --emit @typespec/openapi3
 ```

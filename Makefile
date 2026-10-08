@@ -1,4 +1,4 @@
-# claude mcp add -t stdio -s project svelte -- npx -y @sveltejs/mcp
+# claude mcp add -t stdio -s project svelte -- pnpm dlx @sveltejs/mcp
 
 .PHONY: github-pages
 

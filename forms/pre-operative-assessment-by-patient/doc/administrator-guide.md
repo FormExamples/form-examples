@@ -194,7 +194,7 @@ Since the system has no persistent storage, audit data must be captured external
 | Task | Frequency | Procedure |
 |------|-----------|-----------|
 | Node.js security updates | Monthly | Update Node.js to latest patch version |
-| npm dependency audit | Monthly | Run `npm audit` and update packages |
+| npm dependency audit | Monthly | Run `pnpm audit` and update packages |
 | Clinical rule review | Annually | CSO reviews rules against current guidelines |
 | TLS certificate renewal | Per certificate expiry | Renew and deploy new certificates |
 | Tablet device maintenance | Quarterly | Check device health, update OS, clean screens |
@@ -204,18 +204,18 @@ Since the system has no persistent storage, audit data must be captured external
 
 ```bash
 # Check for vulnerabilities
-npm audit
+pnpm audit
 
 # Update non-breaking changes
 npm update
 
 # Check for major version updates
-npx npm-check-updates
+pnpm dlx npm-check-updates
 
 # After updates, always run tests
-npx vitest run
-npx svelte-check
-npm run build
+pnpm exec vitest run
+pnpm exec svelte-check
+pnpm run build
 ```
 
 ### Version Management
@@ -236,7 +236,7 @@ The system version is tracked in `package.json`. Use semantic versioning:
 |-------|-----------|------------|
 | Blank page on load | JavaScript error | Check browser console (F12); rebuild application |
 | PDF generation fails | Server-side error | Check server logs; verify pdfmake installed |
-| Styles missing | CSS build issue | Run `npm run build` and redeploy |
+| Styles missing | CSS build issue | Run `pnpm run build` and redeploy |
 | Assessment data disappears | Page refresh | Expected behaviour; data is session-only |
 | Tablet can't access system | Network issue | Verify tablet is on correct network; check firewall |
 | Step 16 not showing | Conditional logic | Only shows for female patients age 12-55 |
@@ -252,16 +252,16 @@ curl -I http://localhost:3000
 node --version
 
 # Run test suite
-npx vitest run
+pnpm exec vitest run
 
 # Type-check all code
-npx svelte-check
+pnpm exec svelte-check
 
 # Build and check for errors
-npm run build
+pnpm run build
 
 # Check npm dependencies for vulnerabilities
-npm audit
+pnpm audit
 ```
 
 ### Log Analysis

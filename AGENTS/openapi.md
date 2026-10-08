@@ -146,7 +146,7 @@ sys.exit(1 if fails else 0)
 For full schema validation, run an OpenAPI linter such as Spectral:
 
 ```sh
-npx --yes @stoplight/spectral-cli lint 'forms/*/openapi/*.yaml'
+pnpm dlx @stoplight/spectral-cli lint 'forms/*/openapi/*.yaml'
 ```
 
 ## Generate language bindings
@@ -156,7 +156,7 @@ the openapi-generator or oapi-codegen toolchains:
 
 ```sh
 # Typed TypeScript client
-npx --yes @openapitools/openapi-generator-cli generate \
+pnpm dlx @openapitools/openapi-generator-cli generate \
   -i forms/<slug>/openapi/patient.yaml \
   -g typescript-axios \
   -o gen/<slug>/patient-ts
@@ -168,5 +168,5 @@ openapi-generator generate \
   -o gen/<slug>/patient-rs
 
 # Mock server with Prism
-npx --yes @stoplight/prism-cli mock forms/<slug>/openapi/patient.yaml
+pnpm dlx @stoplight/prism-cli mock forms/<slug>/openapi/patient.yaml
 ```

@@ -519,9 +519,8 @@ jobs:
       - name: check / build / vitest each front-end in this shard
         run: |
           # Each front-end-with-svelte is its own pnpm project (own
-          # pnpm-lock.yaml + pnpm-workspace.yaml) — npm ci has no lockfile
-          # here and always fails; pnpm install --frozen-lockfile is the
-          # equivalent gate against pnpm-lock.yaml.
+          # pnpm-lock.yaml + pnpm-workspace.yaml), so `pnpm install
+          # --frozen-lockfile` is the gate against pnpm-lock.yaml.
           fail=0
           CHANGED="${{ needs.changes.outputs.forms }}"
           ALL="${{ needs.changes.outputs.all }}"
@@ -585,10 +584,10 @@ jobs:
           node-version: '26'
       - name: Install E2E harness deps
         working-directory: e2e
-        run: npm ci --no-audit --no-fund
+        run: pnpm install --frozen-lockfile
       - name: Install Playwright browsers
         working-directory: e2e
-        run: npx playwright install --with-deps chromium
+        run: pnpm exec playwright install --with-deps chromium
       - name: Run the HTML front-end E2E + accessibility sweep
         run: |
           ALL="${{ needs.changes.outputs.all }}"

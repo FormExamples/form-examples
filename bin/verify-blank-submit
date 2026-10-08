@@ -14,8 +14,8 @@ set -eu
 #   <slug> ...  restrict to the named forms (default: every form with a
 #               #submit-btn)
 #
-# Requires e2e/ deps installed (cd e2e && npm ci) and browsers
-# (cd e2e && npx playwright install chromium).
+# Requires e2e/ deps installed (cd e2e && pnpm install --frozen-lockfile) and browsers
+# (cd e2e && pnpm exec playwright install chromium).
 
 top="$(git rev-parse --show-toplevel)"
 cd "$top"

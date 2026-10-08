@@ -46,6 +46,9 @@
 				<PickerBar
 					class="ml-2"
 					labels={{
+						search: "Search",
+						searchInput: "Search terms",
+						searchSubmit: "Search",
 						theme: "Theme",
 						locale: "Language",
 						textSize: "Text size",

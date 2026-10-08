@@ -224,7 +224,7 @@ See [`AGENTS.md`](AGENTS.md) `## Tools` and [`docs/tools.md`](docs/tools.md) for
 ### Claude terminal (optional)
 
 ```sh
-claude mcp add -t stdio -s project svelte -- npx -y @sveltejs/mcp
+claude mcp add -t stdio -s project svelte -- pnpm dlx @sveltejs/mcp
 ```
 
 ### Rust back-end

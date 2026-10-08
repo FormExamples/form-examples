@@ -4,5 +4,8 @@ packages:
 allowBuilds:
   esbuild: true
 
+minimumReleaseAgeExclude:
+  - vite@8.3.4
+
 overrides:
   '@svar-ui/svelte-core': ^2.6.1

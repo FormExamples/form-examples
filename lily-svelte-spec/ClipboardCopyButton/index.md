@@ -54,7 +54,7 @@ Provide `text` (what to copy) and `label` (the accessible name of the button). U
 <script lang="ts">
     import ClipboardCopyButton from "./ClipboardCopyButton.svelte";
 
-    const code = "npm install lily-design-system-svelte-headless";
+    const code = "pnpm install lily-design-system-svelte-headless";
 </script>
 
 <ClipboardCopyButton text={code} label="Copy install command">

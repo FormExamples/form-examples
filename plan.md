@@ -243,8 +243,8 @@ proves every claim the repo makes about itself.
   container — this is the executable source-of-truth check.
 - Add a sharded Rust job: `cargo check` + `cargo clippy -- -D warnings` +
   `cargo test` across the 286 crates (matrix-sharded; cached).
-- Add a sharded Svelte job: `npm ci && npm run check && npm run build &&
-  npx vitest run` per form (matrix-sharded; cached).
+- Add a sharded Svelte job: `pnpm install --frozen-lockfile && pnpm run check && pnpm run build &&
+  pnpm exec vitest run` per form (matrix-sharded; cached).
 - Add real FHIR validation: run generated `fhir/r5/*.json` and the
   `examples/` Bundles through the official HL7 FHIR validator (or a pinned
   `fhir-validator` container) instead of the current "has resourceType"

@@ -7,12 +7,12 @@ SvelteKit TypeScript application for patient pre-operative assessment intake que
 ## Commands
 
 ```bash
-npm install          # Install dependencies
-npm run dev          # Start dev server (port 5173)
-npm run build        # Production build
-npm run preview      # Preview production build
-npm run check        # TypeScript type checking
-npx vitest run       # Run unit tests
+pnpm install          # Install dependencies
+pnpm run dev          # Start dev server (port 5173)
+pnpm run build        # Production build
+pnpm run preview      # Preview production build
+pnpm run check        # TypeScript type checking
+pnpm exec vitest run       # Run unit tests
 ```
 
 ## Architecture
@@ -78,7 +78,7 @@ src/
 ### Testing
 
 - Unit tests in `src/lib/engine/asa-grader.test.ts`
-- Run with `npx vitest run`
+- Run with `pnpm exec vitest run`
 - Tests cover: ASA I-IV grading, rule uniqueness, flag detection
 - Vitest config uses `$lib` path alias
 

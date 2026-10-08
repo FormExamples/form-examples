@@ -7,11 +7,11 @@ SvelteKit TypeScript application for Emergency Department casualty card document
 ## Commands
 
 ```bash
-npm install          # Install dependencies
-npm run dev          # Start dev server (port 5173)
-npm run build        # Production build
-npm run preview      # Preview production build
-npm run check        # TypeScript type checking
+pnpm install          # Install dependencies
+pnpm run dev          # Start dev server (port 5173)
+pnpm run build        # Production build
+pnpm run preview      # Preview production build
+pnpm run check        # TypeScript type checking
 ```
 
 ## Architecture

@@ -406,8 +406,8 @@ bin/generate-export-samples — generate examples/export-sample.csv and
    --check     report which forms would change; exit 1 if any pending
    <slug> ...  restrict to the named forms (default: every eligible form)
 
- Requires e2e/ deps installed (cd e2e && npm ci) and browsers
- (cd e2e && npx playwright install chromium).
+ Requires e2e/ deps installed (cd e2e && pnpm install --frozen-lockfile) and browsers
+ (cd e2e && pnpm exec playwright install chromium).
 ```
 
 <h2 id="generate-form-skillspy"><code>bin/generate-form-skills.py</code></h2>
@@ -2746,8 +2746,8 @@ bin/test-e2e — run the Playwright smoke + accessibility sweep over form
    --all       every form (default when no slugs are listed)
    <slug> ...  restrict to the named forms
 
- Requires e2e/ deps installed (cd e2e && npm ci) and browsers
- (cd e2e && npx playwright install chromium).
+ Requires e2e/ deps installed (cd e2e && pnpm install --frozen-lockfile) and browsers
+ (cd e2e && pnpm exec playwright install chromium).
 ```
 
 <h2 id="test-engines"><code>bin/test-engines</code></h2>
@@ -2974,8 +2974,8 @@ bin/verify-blank-submit — for every HTML wizard, load the page fresh
    <slug> ...  restrict to the named forms (default: every form with a
                #submit-btn)
 
- Requires e2e/ deps installed (cd e2e && npm ci) and browsers
- (cd e2e && npx playwright install chromium).
+ Requires e2e/ deps installed (cd e2e && pnpm install --frozen-lockfile) and browsers
+ (cd e2e && pnpm exec playwright install chromium).
 ```
 
 <h2 id="verify-personas"><code>bin/verify-personas</code></h2>
@@ -2999,8 +2999,8 @@ bin/verify-personas — for every eligible form, drive the real wizard
 
    <slug> ...  restrict to the named forms (default: every eligible form)
 
- Requires e2e/ deps installed (cd e2e && npm ci) and browsers
- (cd e2e && npx playwright install chromium).
+ Requires e2e/ deps installed (cd e2e && pnpm install --frozen-lockfile) and browsers
+ (cd e2e && pnpm exec playwright install chromium).
 ```
 
 <h2 id="protobufgenerate-protobuf-representationspy"><code>bin/protobuf/generate-protobuf-representations.py</code></h2>

@@ -16,7 +16,7 @@ This document provides test scenarios, expected outcomes, and procedures for val
 The system includes 12 automated unit tests in `src/lib/engine/asa-grader.test.ts`. These can be run with:
 
 ```bash
-npx vitest run
+pnpm exec vitest run
 ```
 
 ### Existing Automated Tests
@@ -277,14 +277,14 @@ npx vitest run
 
 When modifying any ASA rule or flag logic, re-run the following:
 
-- [ ] `npx vitest run` - all 12 automated tests pass
+- [ ] `pnpm exec vitest run` - all 12 automated tests pass
 - [ ] Scenario 1 - healthy patient returns ASA I
 - [ ] Scenario 2 - ASA II multi-condition
 - [ ] Scenario 3 - ASA III multi-system
 - [ ] Scenario 4 - ASA IV cardiac
 - [ ] Scenario 7 - MH flag without grade change
 - [ ] Boundary condition for the modified rule
-- [ ] No new TypeScript errors (`npx svelte-check`)
+- [ ] No new TypeScript errors (`pnpm exec svelte-check`)
 
 ---
 

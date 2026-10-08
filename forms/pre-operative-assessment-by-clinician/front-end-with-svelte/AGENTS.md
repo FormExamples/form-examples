@@ -57,7 +57,7 @@ Vitest in `src/lib/engine/composite-grader.test.ts`. Coverage of:
 - Recent COVID-19 < 7 weeks fires recent-covid-19 flag.
 - Rule-ID uniqueness across catalogues.
 
-Run with `npx vitest run`.
+Run with `pnpm exec vitest run`.
 
 ## Accessibility
 
