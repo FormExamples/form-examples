@@ -1,8 +1,8 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 233761
+  id: "00000000-0000-4000-8000-000000039121"
   deletedAt: null
   status: "in_progress"
   attendanceDate: "1990-01-01"
   arrivalTime: "2026-01-01T00:00:00Z"
-  patientId: 439430
+  patientId: "00000000-0000-4000-8000-00000006b486"

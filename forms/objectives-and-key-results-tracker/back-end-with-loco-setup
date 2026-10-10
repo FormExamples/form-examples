@@ -33,8 +33,8 @@ cargo loco generate scaffold participant \
 
 cargo loco generate scaffold okr_objective \
     deleted_at:tstz \
-    reporter:references \
-    parent_objective:references \
+    reporter:references:reporter_id \
+    okr_objective:references:parent_objective_id \
     status:text! \
     level:text! \
     cycle:text! \
@@ -66,7 +66,7 @@ cargo loco generate scaffold okr_objective \
 
 cargo loco generate scaffold okr_key_result \
     deleted_at:tstz \
-    okr_objective:references \
+    okr_objective:references:okr_objective_id \
     position:int! \
     title:text! \
     kr_type:text! \
@@ -83,7 +83,7 @@ cargo loco generate scaffold okr_key_result \
 
 cargo loco generate scaffold okr_check_in \
     deleted_at:tstz \
-    okr_objective:references \
+    okr_objective:references:okr_objective_id \
     checked_in_at:tstz! \
     narrative:text! \
     since_last_changes:text! \
@@ -94,7 +94,7 @@ cargo loco generate scaffold okr_check_in \
 
 cargo loco generate scaffold okr_grade \
     deleted_at:tstz \
-    okr_objective:references \
+    okr_objective:references:okr_objective_id \
     score_by_progress_percent:double \
     score_by_confidence_decile:int \
     score_by_stretch_tier:int \
@@ -114,7 +114,7 @@ cargo loco generate scaffold okr_grade \
 
 cargo loco generate scaffold okr_grade_rule \
     deleted_at:tstz \
-    okr_grade:references \
+    okr_grade:references:okr_grade_id \
     rule_id:text! \
     instrument:text! \
     grade:text! \
@@ -124,7 +124,7 @@ cargo loco generate scaffold okr_grade_rule \
 
 cargo loco generate scaffold okr_grade_flag \
     deleted_at:tstz \
-    okr_grade:references \
+    okr_grade:references:okr_grade_id \
     flag_code:text! \
     priority:text! \
     description:text! \
@@ -134,6 +134,10 @@ cargo loco generate scaffold okr_grade_flag \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

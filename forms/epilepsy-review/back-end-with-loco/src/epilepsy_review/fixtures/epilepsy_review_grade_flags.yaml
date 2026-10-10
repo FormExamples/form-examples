@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 265110
+  id: "00000000-0000-4000-8000-000000040b96"
   deletedAt: null
   flagId: "Test flagId"
   category: "specialist-review"
   priority: "low"
   description: "Test description"
   suggestedAction: "Test suggestedAction"
-  epilepsyReviewGradeId: 372293
+  epilepsyReviewGradeId: "00000000-0000-4000-8000-00000005ae45"

@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 709311
+  id: "00000000-0000-4000-8000-0000000ad2bf"
   deletedAt: null
   clinicianName: "Test clinicianName"
   clinicianRole: "midwife"
@@ -23,5 +23,5 @@
   item9: 1
   item10: 1
   clinicalNote: "Test clinicalNote"
-  patientId: 595910
+  patientId: "00000000-0000-4000-8000-0000000917c6"
   clinicianId: null

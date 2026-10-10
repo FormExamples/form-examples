@@ -13,8 +13,8 @@ pub struct Model {
     /// Updated at.
     pub updated_at: DateTimeWithTimeZone,
     /// ID.
-    #[sea_orm(primary_key)]
-    pub id: i64,
+    #[sea_orm(primary_key, auto_increment = false)]
+    pub id: Uuid,
     /// Deleted at.
     pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Item code.
@@ -32,7 +32,7 @@ pub struct Model {
     #[sea_orm(column_type = "Text")]
     pub remarks: String,
     /// Hospital daily monitoring checklist ID.
-    pub hospital_daily_monitoring_checklist_id: i64,
+    pub hospital_daily_monitoring_checklist_id: Uuid,
 }
 
 /// Relation.

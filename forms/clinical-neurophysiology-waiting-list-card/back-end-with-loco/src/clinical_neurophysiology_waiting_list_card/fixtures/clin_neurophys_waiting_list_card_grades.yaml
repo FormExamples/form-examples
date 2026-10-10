@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 994490
+  id: "00000000-0000-4000-8000-0000000f2cba"
   deletedAt: null
   waitingTimeStatus: "within-target"
   clinicalPriority: "P1a"
@@ -12,4 +12,4 @@
   daysToAppointment: 1
   graderNotes: "Test graderNotes"
   gradedAt: "2026-01-01T00:00:00Z"
-  clinNeurophysWaitingListCardId: 704597
+  clinNeurophysWaitingListCardId: "00000000-0000-4000-8000-0000000ac055"

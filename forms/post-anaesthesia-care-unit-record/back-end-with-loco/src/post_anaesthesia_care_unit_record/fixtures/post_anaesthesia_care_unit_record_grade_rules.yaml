@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 608883
+  id: "00000000-0000-4000-8000-000000094a73"
   deletedAt: null
   ruleId: "Test ruleId"
   parameter: "activity"
   points: 1
   category: "Test category"
   description: "Test description"
-  postAnaesthesiaCareUnitRecordGradeId: 993958
+  postAnaesthesiaCareUnitRecordGradeId: "00000000-0000-4000-8000-0000000f2aa6"

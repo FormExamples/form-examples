@@ -9,8 +9,8 @@ use serde::{Deserialize, Serialize};
 pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
-    #[sea_orm(primary_key)]
-    pub id: i64,
+    #[sea_orm(primary_key, auto_increment = false)]
+    pub id: Uuid,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub ideation_level: Option<i32>,
     pub any_behaviour: String,
@@ -21,7 +21,7 @@ pub struct Model {
     #[sea_orm(column_type = "Text")]
     pub management_recommendation: String,
     pub graded_at: DateTimeWithTimeZone,
-    pub columbia_suicide_severity_rating_scale_id: i64,
+    pub columbia_suicide_severity_rating_scale_id: Uuid,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

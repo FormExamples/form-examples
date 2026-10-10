@@ -7,32 +7,41 @@ pub struct Migration;
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, m: &SchemaManager) -> Result<(), DbErr> {
-        create_table(m, "patient_medications",
+        create_table(
+            m,
+            "patient_medications",
             &[
-            
-            ("id", ColType::PkAuto),
-            
-            ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("dose", ColType::TextWithDefault(String::new())),
-            ("frequency", ColType::TextWithDefault(String::new())),
-            ("route", ColType::TextWithDefault(String::new())),
-            ("indication", ColType::TextWithDefault(String::new())),
-            ("started_on", ColType::DateNull),
-            ("prescribed_by", ColType::TextWithDefault(String::new())),
-            ("adherence", ColType::TextWithDefault(String::new())),
-            ("hold_required", ColType::BooleanWithDefault(false)),
-            ("hold_start_before_days", ColType::IntegerNull),
-            ("restart_after_days", ColType::IntegerNull),
-            ("hold_plan_agreed", ColType::BooleanWithDefault(false)),
-            ("hold_plan_agreed_by", ColType::TextWithDefault(String::new())),
-            ("hold_plan_agreed_on", ColType::DateNull),
-            ("notes", ColType::TextWithDefault(String::new())),
+                ("id", ColType::PkUuid),
+                ("deleted_at", ColType::TimestampWithTimeZoneNull),
+                ("dose", ColType::TextWithDefault(String::new())),
+                ("frequency", ColType::TextWithDefault(String::new())),
+                ("route", ColType::TextWithDefault(String::new())),
+                ("indication", ColType::TextWithDefault(String::new())),
+                ("started_on", ColType::DateNull),
+                ("prescribed_by", ColType::TextWithDefault(String::new())),
+                ("adherence", ColType::TextWithDefault(String::new())),
+                ("hold_required", ColType::BooleanWithDefault(false)),
+                ("hold_start_before_days", ColType::IntegerNull),
+                ("restart_after_days", ColType::IntegerNull),
+                ("hold_plan_agreed", ColType::BooleanWithDefault(false)),
+                (
+                    "hold_plan_agreed_by",
+                    ColType::TextWithDefault(String::new()),
+                ),
+                ("hold_plan_agreed_on", ColType::DateNull),
+                ("notes", ColType::TextWithDefault(String::new())),
+                ("patient_id", ColType::Uuid),
+                ("medication_id", ColType::Uuid),
             ],
-            &[
-            ("patient", ""),
-            ("medication", ""),
-            ]
-        ).await
+            &[("patient", "patient_id"), ("medication", "medication_id")],
+        )
+        .await?;
+        m.get_connection()
+            .execute_unprepared(
+                "ALTER TABLE patient_medications ALTER COLUMN id SET DEFAULT gen_random_uuid()",
+            )
+            .await?;
+        Ok(())
     }
 
     async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {

@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 515159
+  id: "00000000-0000-4000-8000-00000007dc57"
   deletedAt: null
   frequency: "none"
   intervalCount: 1
@@ -12,4 +12,4 @@
   seriesUntil: "2026-01-01T00:00:00Z"
   timezone: "Test timezone"
   rruleText: "Test rruleText"
-  meetingId: 247312
+  meetingId: "00000000-0000-4000-8000-00000003c610"

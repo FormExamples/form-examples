@@ -1,8 +1,8 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 568105
+  id: "00000000-0000-4000-8000-00000008ab29"
   deletedAt: null
   ruleId: "Test ruleId"
   category: "Test category"
   description: "Test description"
-  medicationReconciliationGradeId: 182689
+  medicationReconciliationGradeId: "00000000-0000-4000-8000-00000002c9a1"

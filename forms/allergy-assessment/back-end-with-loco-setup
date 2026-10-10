@@ -49,7 +49,7 @@ cargo loco generate scaffold clinician \
 
 cargo loco generate scaffold assessment \
     deleted_at:tstz \
-    patient:references \
+    patient:references:patient_id \
     status:string! \
     age_of_onset:int \
     known_allergens:text! \
@@ -88,14 +88,14 @@ cargo loco generate scaffold assessment \
 
 cargo loco generate scaffold assessment_drug_allergies \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     has_drug_allergies:string! \
     cross_reactivity_concerns:text! \
     --api
 
 cargo loco generate scaffold assessment_drug_allergy_item \
     deleted_at:tstz \
-    drug_allergies:references \
+    assessment_drug_allergies:references:drug_allergies_id \
     allergen:string! \
     reaction_type:string! \
     severity:string! \
@@ -106,7 +106,7 @@ cargo loco generate scaffold assessment_drug_allergy_item \
 
 cargo loco generate scaffold assessment_food_allergies \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     has_food_allergies:string! \
     ige_type:string! \
     oral_allergy_syndrome:string! \
@@ -115,7 +115,7 @@ cargo loco generate scaffold assessment_food_allergies \
 
 cargo loco generate scaffold assessment_food_allergy_item \
     deleted_at:tstz \
-    food_allergies:references \
+    assessment_food_allergies:references:food_allergies_id \
     allergen:string! \
     reaction_type:string! \
     severity:string! \
@@ -126,7 +126,7 @@ cargo loco generate scaffold assessment_food_allergy_item \
 
 cargo loco generate scaffold assessment_anaphylaxis_history \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     has_anaphylaxis_history:string! \
     number_of_episodes:int \
     adrenaline_auto_injector_prescribed:string! \
@@ -135,7 +135,7 @@ cargo loco generate scaffold assessment_anaphylaxis_history \
 
 cargo loco generate scaffold assessment_anaphylaxis_episode \
     deleted_at:tstz \
-    anaphylaxis_history:references \
+    assessment_anaphylaxis_history:references:anaphylaxis_history_id \
     trigger_description:text! \
     symptoms:text! \
     treatment_required:text! \
@@ -144,7 +144,7 @@ cargo loco generate scaffold assessment_anaphylaxis_episode \
 
 cargo loco generate scaffold assessment_testing_results \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     skin_prick_tests_done:string! \
     specific_ige_done:string! \
     component_resolved_diagnostics_done:string! \
@@ -154,7 +154,7 @@ cargo loco generate scaffold assessment_testing_results \
 
 cargo loco generate scaffold assessment_test_result_item \
     deleted_at:tstz \
-    testing_results:references \
+    assessment_testing_results:references:testing_results_id \
     test_type:string! \
     allergen:string! \
     result:string! \
@@ -163,7 +163,7 @@ cargo loco generate scaffold assessment_test_result_item \
 
 cargo loco generate scaffold assessment_current_management \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     antihistamines:string! \
     antihistamine_details:text! \
     nasal_steroids:string! \
@@ -177,7 +177,7 @@ cargo loco generate scaffold assessment_current_management \
 
 cargo loco generate scaffold assessment_other_medication \
     deleted_at:tstz \
-    current_management:references \
+    assessment_current_management:references:current_management_id \
     medication_name:string! \
     dose:string! \
     frequency:string! \
@@ -186,7 +186,7 @@ cargo loco generate scaffold assessment_other_medication \
 
 cargo loco generate scaffold grade \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     severity_level:string! \
     allergy_burden_score:int! \
     graded_at:tstz! \
@@ -194,7 +194,7 @@ cargo loco generate scaffold grade \
 
 cargo loco generate scaffold grading_fired_rule \
     deleted_at:tstz \
-    grade:references \
+    grade:references:grade_id \
     rule_id:string! \
     category:string! \
     description:text! \
@@ -203,7 +203,7 @@ cargo loco generate scaffold grading_fired_rule \
 
 cargo loco generate scaffold grading_additional_flag \
     deleted_at:tstz \
-    grade:references \
+    grade:references:grade_id \
     flag_id:string! \
     category:string! \
     message:text! \
@@ -214,6 +214,10 @@ cargo loco generate scaffold grading_additional_flag \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

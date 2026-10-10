@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 949571
+  id: "00000000-0000-4000-8000-0000000e7d43"
   deletedAt: null
   category: "haemorrhage"
   description: "Test description"
@@ -9,4 +9,4 @@
   actionTaken: "Test actionTaken"
   resolvedInTheatre: "yes"
   reportedToGovernance: "yes"
-  medicalOperationNoteId: 506012
+  medicalOperationNoteId: "00000000-0000-4000-8000-00000007b89c"

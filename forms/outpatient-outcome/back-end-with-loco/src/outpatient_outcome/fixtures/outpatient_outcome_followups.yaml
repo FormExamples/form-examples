@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 828973
+  id: "00000000-0000-4000-8000-0000000ca62d"
   deletedAt: null
   disposition: "discharge"
   nextAppointmentDate: "1990-01-01"
   onwardReferralSpecialty: "Test onwardReferralSpecialty"
   followupNotes: "Test followupNotes"
-  outpatientOutcomeId: 379759
+  outpatientOutcomeId: "00000000-0000-4000-8000-00000005cb6f"

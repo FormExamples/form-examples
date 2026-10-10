@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 715728
+  id: "00000000-0000-4000-8000-0000000aebd0"
   deletedAt: null
   controlStatus: "controlled"
   hypertensionStage: "none"
@@ -12,4 +12,4 @@
   homeTargetSystolic: 1
   homeTargetDiastolic: 1
   gradedAt: "2026-01-01T00:00:00Z"
-  hypertensionReviewId: 860266
+  hypertensionReviewId: "00000000-0000-4000-8000-0000000d206a"

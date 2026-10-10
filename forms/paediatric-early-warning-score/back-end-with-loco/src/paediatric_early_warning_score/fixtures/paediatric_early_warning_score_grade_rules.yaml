@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 951356
+  id: "00000000-0000-4000-8000-0000000e843c"
   deletedAt: null
   ruleId: "Test ruleId"
   instrument: "respiratory-rate"
@@ -8,4 +8,4 @@
   points: 1
   category: "Test category"
   description: "Test description"
-  paediatricEarlyWarningScoreGradeId: 681194
+  paediatricEarlyWarningScoreGradeId: "00000000-0000-4000-8000-0000000a64ea"

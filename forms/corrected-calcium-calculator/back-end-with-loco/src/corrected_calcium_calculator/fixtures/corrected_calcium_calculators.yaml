@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 133194
+  id: "00000000-0000-4000-8000-00000002084a"
   deletedAt: null
   clinicianName: "Test clinicianName"
   clinicianRole: "doctor"
@@ -13,5 +13,5 @@
   totalCalciumMmolL: 1.0
   albuminGL: 1.0
   symptomatic: "yes"
-  patientId: 251982
-  clinicianId: 888296
+  patientId: "00000000-0000-4000-8000-00000003d84e"
+  clinicianId: "00000000-0000-4000-8000-0000000d8de8"

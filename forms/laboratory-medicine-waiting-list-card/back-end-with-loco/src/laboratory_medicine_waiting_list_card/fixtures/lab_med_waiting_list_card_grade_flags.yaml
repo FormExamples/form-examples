@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 938397
+  id: "00000000-0000-4000-8000-0000000e519d"
   deletedAt: null
   flagId: "Test flagId"
   category: "breach-risk"
   priority: "low"
   description: "Test description"
   suggestedAction: "Test suggestedAction"
-  labMedWaitingListCardGradeId: 573345
+  labMedWaitingListCardGradeId: "00000000-0000-4000-8000-00000008bfa1"

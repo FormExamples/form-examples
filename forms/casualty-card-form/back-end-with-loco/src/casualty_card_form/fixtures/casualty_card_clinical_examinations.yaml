@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 590261
+  id: "00000000-0000-4000-8000-0000000901b5"
   deletedAt: null
   generalAppearance: "Test generalAppearance"
   headAndFace: "Test headAndFace"
@@ -14,4 +14,4 @@
   skin: "Test skin"
   mentalState: "Test mentalState"
   bodyDiagramNotes: "Test bodyDiagramNotes"
-  casualtyCardId: 233761
+  casualtyCardId: "00000000-0000-4000-8000-000000039121"

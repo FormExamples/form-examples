@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 512619
+  id: "00000000-0000-4000-8000-00000007d26b"
   deletedAt: null
   ruleId: "Test ruleId"
   instrument: "bmi"
   band: "underweight"
   category: "Test category"
   description: "Test description"
-  bodyMassIndexAndBodySurfaceAreaCalculatorGradeId: 839589
+  bodyMassIndexAndBodySurfaceAreaCalculatorGradeId: "00000000-0000-4000-8000-0000000ccfa5"

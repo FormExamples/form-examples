@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 763662
+  id: "00000000-0000-4000-8000-0000000ba70e"
   deletedAt: null
   ruleId: "Test ruleId"
   axis: "classification"
   category: "Test category"
   description: "Test description"
-  echocardiogramTestResultGradeId: 713444
+  echocardiogramTestResultGradeId: "00000000-0000-4000-8000-0000000ae2e4"

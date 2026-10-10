@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 226148
+  id: "00000000-0000-4000-8000-000000037364"
   deletedAt: null
   flagId: "Test flagId"
   category: "harm-fatal"
   priority: "low"
   description: "Test description"
   suggestedAction: "Test suggestedAction"
-  issueTrackerGradeId: 589275
+  issueTrackerGradeId: "00000000-0000-4000-8000-00000008fddb"

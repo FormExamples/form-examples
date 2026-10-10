@@ -68,9 +68,9 @@ cargo loco generate scaffold center \
 
 cargo loco generate scaffold international_certificate_of_vaccination_or_prophylaxis \
     deleted_at:tstz \
-    patient:references \
-    clinician:references \
-    center:references \
+    patient:references:patient_id \
+    clinician:references:clinician_id \
+    center:references:center_id \
     status:string! \
     issued_at:tstz \
     revoked_at:tstz \
@@ -85,7 +85,7 @@ cargo loco generate scaffold international_certificate_of_vaccination_or_prophyl
     purpose_of_travel:string! \
     medical_waiver:string! \
     medical_waiver_reason:text! \
-    medical_waiver_signed_by_clinician:references \
+    clinician:references:medical_waiver_signed_by_clinician_id \
     medical_waiver_signed_at:tstz \
     declared_pregnancy:string! \
     declared_breastfeeding:string! \
@@ -99,7 +99,7 @@ cargo loco generate scaffold international_certificate_of_vaccination_or_prophyl
 
 cargo loco generate scaffold international_certificate_of_vaccination_or_prophylaxis_entry \
     deleted_at:tstz \
-    international_certificate_of_vaccination_or_prophylaxis:references \
+    international_certificate_of_vaccination_or_prophylaxis:references:international_certificate_of_vaccination_or_prophylaxis_id \
     entry_index:int! \
     disease:string! \
     disease_other_label:string! \
@@ -120,13 +120,13 @@ cargo loco generate scaffold international_certificate_of_vaccination_or_prophyl
     dose_sequence_total:int \
     vaccination_date:date \
     vaccination_time:string \
-    administered_by_clinician:references \
+    clinician:references:administered_by_clinician_id \
     administering_clinician_signature_data_url:text! \
     administering_clinician_professional_status:string! \
     validity_starts_on:date \
     validity_ends_on:date \
     validity_is_lifetime:string! \
-    centre:references \
+    center:references:centre_id \
     centre_stamp_image_data_url:text! \
     centre_stamp_applied:string! \
     adverse_event:string! \
@@ -139,6 +139,10 @@ cargo loco generate scaffold international_certificate_of_vaccination_or_prophyl
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

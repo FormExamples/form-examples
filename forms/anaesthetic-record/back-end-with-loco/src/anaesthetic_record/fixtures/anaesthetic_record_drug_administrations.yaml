@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 601328
+  id: "00000000-0000-4000-8000-000000092cf0"
   deletedAt: null
   drugName: "Test drugName"
   dose: 1.0
@@ -8,4 +8,4 @@
   route: "iv"
   category: "induction"
   administeredAt: "2026-01-01T00:00:00Z"
-  anaestheticRecordId: 935041
+  anaestheticRecordId: "00000000-0000-4000-8000-0000000e4481"

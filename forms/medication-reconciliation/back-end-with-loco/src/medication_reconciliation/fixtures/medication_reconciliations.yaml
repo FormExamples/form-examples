@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 376586
+  id: "00000000-0000-4000-8000-00000005bf0a"
   deletedAt: null
   reconciliationType: "admission"
   careSetting: "emergency-department"
@@ -12,5 +12,5 @@
   sex: "female"
   weightKg: 1.0
   allergyStatus: "documented"
-  patientId: 639916
+  patientId: "00000000-0000-4000-8000-00000009c3ac"
   clinicianId: null

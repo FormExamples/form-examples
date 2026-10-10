@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 751470
+  id: "00000000-0000-4000-8000-0000000b776e"
   deletedAt: null
   attendanceCategory: "first"
   arrivalMode: "ambulance"
@@ -11,4 +11,4 @@
   mtsFlowchart: "Test mtsFlowchart"
   mtsCategory: "1-immediate"
   mtsDiscriminator: "Test mtsDiscriminator"
-  casualtyCardId: 233761
+  casualtyCardId: "00000000-0000-4000-8000-000000039121"

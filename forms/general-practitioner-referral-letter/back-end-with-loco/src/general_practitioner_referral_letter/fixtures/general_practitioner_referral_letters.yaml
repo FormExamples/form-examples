@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 485706
+  id: "00000000-0000-4000-8000-00000007694a"
   deletedAt: null
   patientIdentifier: "Test patientIdentifier"
   referrerRole: "gp"
@@ -27,5 +27,5 @@
   consentToShare: "yes"
   safetyNetting: "Test safetyNetting"
   clinicalNote: "Test clinicalNote"
-  patientId: 426908
+  patientId: "00000000-0000-4000-8000-00000006839c"
   clinicianId: null

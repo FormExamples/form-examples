@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 626980
+  id: "00000000-0000-4000-8000-000000099124"
   deletedAt: null
   visitDate: "1990-01-01"
   department: "Test department"
@@ -8,4 +8,4 @@
   visitType: "routine-checkup"
   reasonForVisit: "Test reasonForVisit"
   firstVisit: "yes"
-  encounterSatisfactionId: 670200
+  encounterSatisfactionId: "00000000-0000-4000-8000-0000000a39f8"

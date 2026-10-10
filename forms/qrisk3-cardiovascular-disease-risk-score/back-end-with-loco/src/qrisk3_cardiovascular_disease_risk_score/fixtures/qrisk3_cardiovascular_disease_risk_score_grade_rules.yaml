@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 676489
+  id: "00000000-0000-4000-8000-0000000a5289"
   deletedAt: null
   ruleId: "Test ruleId"
   component: "age"
   contribution: 1.0
   category: "Test category"
   description: "Test description"
-  qrisk3CardiovascularDiseaseRiskScoreGradeId: 816659
+  qrisk3CardiovascularDiseaseRiskScoreGradeId: "00000000-0000-4000-8000-0000000c7613"

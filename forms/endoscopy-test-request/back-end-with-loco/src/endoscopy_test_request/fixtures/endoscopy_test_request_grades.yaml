@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 828235
+  id: "00000000-0000-4000-8000-0000000ca34b"
   deletedAt: null
   appropriatenessScore: 1
   appropriatenessBand: "usually-appropriate"
@@ -17,4 +17,4 @@
   clinicianNotes: "Test clinicianNotes"
   signedAt: "2026-01-01T00:00:00Z"
   gradedAt: "2026-01-01T00:00:00Z"
-  endoscopyTestRequestId: 111596
+  endoscopyTestRequestId: "00000000-0000-4000-8000-00000001b3ec"

@@ -48,8 +48,8 @@ cargo loco generate scaffold clinician \
 
 cargo loco generate scaffold estimated_glomerular_filtration_rate_calculator \
     deleted_at:tstz \
-    patient:references \
-    clinician:references \
+    patient:references:patient_id \
+    clinician:references:clinician_id \
     clinician_name:string! \
     clinician_role:string! \
     assessed_at:tstz \
@@ -65,7 +65,7 @@ cargo loco generate scaffold estimated_glomerular_filtration_rate_calculator \
 
 cargo loco generate scaffold estimated_glomerular_filtration_rate_calculator_grade \
     deleted_at:tstz \
-    estimated_glomerular_filtration_rate_calculator:references \
+    estimated_glomerular_filtration_rate_calculator:references:estimated_glomerular_filtration_rate_calculator_id \
     serum_creatinine_mg_dl:double \
     egfr_ml_min_1_73m2:double \
     g_stage:string! \
@@ -75,7 +75,7 @@ cargo loco generate scaffold estimated_glomerular_filtration_rate_calculator_gra
 
 cargo loco generate scaffold estimated_glomerular_filtration_rate_calculator_grade_rule \
     deleted_at:tstz \
-    estimated_glomerular_filtration_rate_calculator_grade:references \
+    estimated_glomerular_filtration_rate_calculator_grade:references:estimated_glomerular_filtration_rate_calculator_grade_id \
     rule_id:string! \
     instrument:string! \
     band:string! \
@@ -85,7 +85,7 @@ cargo loco generate scaffold estimated_glomerular_filtration_rate_calculator_gra
 
 cargo loco generate scaffold estimated_glomerular_filtration_rate_calculator_grade_flag \
     deleted_at:tstz \
-    estimated_glomerular_filtration_rate_calculator_grade:references \
+    estimated_glomerular_filtration_rate_calculator_grade:references:estimated_glomerular_filtration_rate_calculator_grade_id \
     flag_id:string! \
     category:string! \
     priority:string! \
@@ -97,6 +97,10 @@ cargo loco generate scaffold estimated_glomerular_filtration_rate_calculator_gra
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

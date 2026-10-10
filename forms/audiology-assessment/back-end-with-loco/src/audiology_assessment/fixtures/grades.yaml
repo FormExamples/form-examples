@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 372771
+  id: "00000000-0000-4000-8000-00000005b023"
   deletedAt: null
   rightPtaDb: 1.0
   leftPtaDb: 1.0
@@ -9,4 +9,4 @@
   leftHearingGrade: "Test leftHearingGrade"
   overallHearingGrade: "Test overallHearingGrade"
   gradedAt: "2026-01-01T00:00:00Z"
-  assessmentId: 588196
+  assessmentId: "00000000-0000-4000-8000-00000008f9a4"

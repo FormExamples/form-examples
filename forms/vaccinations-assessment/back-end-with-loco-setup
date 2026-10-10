@@ -49,13 +49,13 @@ cargo loco generate scaffold clinician \
 
 cargo loco generate scaffold assessment \
     deleted_at:tstz \
-    patient:references \
+    patient:references:patient_id \
     status:string! \
     --api
 
 cargo loco generate scaffold immunization_history \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     has_vaccination_record:string! \
     record_source:string! \
     last_review_date:date \
@@ -67,7 +67,7 @@ cargo loco generate scaffold immunization_history \
 
 cargo loco generate scaffold childhood_vaccinations \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     dtap_ipv_hib_hepb:int \
     pneumococcal:int \
     rotavirus:int \
@@ -79,7 +79,7 @@ cargo loco generate scaffold childhood_vaccinations \
 
 cargo loco generate scaffold adult_vaccinations \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     td_ipv_booster:int \
     hpv:int \
     meningitis_acwy:int \
@@ -91,7 +91,7 @@ cargo loco generate scaffold adult_vaccinations \
 
 cargo loco generate scaffold travel_vaccinations \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     travel_planned:string! \
     travel_destination:string! \
     hepatitis_a:int \
@@ -104,7 +104,7 @@ cargo loco generate scaffold travel_vaccinations \
 
 cargo loco generate scaffold occupational_vaccinations \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     occupation:string! \
     healthcare_worker:string! \
     hepatitis_b_occupational:int \
@@ -115,7 +115,7 @@ cargo loco generate scaffold occupational_vaccinations \
 
 cargo loco generate scaffold contraindications_allergies \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     egg_allergy:string! \
     gelatin_allergy:string! \
     latex_allergy:string! \
@@ -129,7 +129,7 @@ cargo loco generate scaffold contraindications_allergies \
 
 cargo loco generate scaffold consent_information \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     information_provided:int \
     risks_explained:int \
     benefits_explained:int \
@@ -141,7 +141,7 @@ cargo loco generate scaffold consent_information \
 
 cargo loco generate scaffold administration_record \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     vaccine_name:string! \
     batch_number:string! \
     expiry_date:date \
@@ -154,7 +154,7 @@ cargo loco generate scaffold administration_record \
 
 cargo loco generate scaffold clinical_review \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     post_vaccination_observation:int \
     immediate_reaction:string! \
     reaction_details:text! \
@@ -167,7 +167,7 @@ cargo loco generate scaffold clinical_review \
 
 cargo loco generate scaffold grade \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     vaccination_level:string! \
     vaccination_score:int! \
     graded_at:tstz \
@@ -175,7 +175,7 @@ cargo loco generate scaffold grade \
 
 cargo loco generate scaffold fired_rule \
     deleted_at:tstz \
-    grade:references \
+    grade:references:grade_id \
     rule_id:string! \
     category:string! \
     description:text! \
@@ -184,7 +184,7 @@ cargo loco generate scaffold fired_rule \
 
 cargo loco generate scaffold additional_flag \
     deleted_at:tstz \
-    grade:references \
+    grade:references:grade_id \
     flag_id:string! \
     category:string! \
     message:text! \
@@ -195,6 +195,10 @@ cargo loco generate scaffold additional_flag \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

@@ -7,43 +7,43 @@ pub struct Migration;
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, m: &SchemaManager) -> Result<(), DbErr> {
-        create_table(m, "patient_reported_outcome_measures_scores",
+        create_table(
+            m,
+            "patient_reported_outcome_measures_scores",
             &[
-
-            ("id", ColType::PkAuto),
-
-            ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("sf36_pf", ColType::DoubleNull),
-            ("sf36_rp", ColType::DoubleNull),
-            ("sf36_bp", ColType::DoubleNull),
-            ("sf36_gh", ColType::DoubleNull),
-            ("sf36_vt", ColType::DoubleNull),
-            ("sf36_sf", ColType::DoubleNull),
-            ("sf36_re", ColType::DoubleNull),
-            ("sf36_mh", ColType::DoubleNull),
-            ("sf36_pcs_approx", ColType::DoubleNull),
-            ("sf36_mcs_approx", ColType::DoubleNull),
-            ("ndi_raw_score", ColType::IntegerNull),
-            ("ndi_answered_sections", ColType::IntegerNull),
-            ("ndi_percentage_score", ColType::DoubleNull),
-            ("ndi_band", ColType::StringWithDefault(String::new())),
-            ("mjoa_total_score", ColType::IntegerNull),
-            ("mjoa_band", ColType::StringWithDefault(String::new())),
-            ("eq5d_health_state_descriptor", ColType::StringWithDefault(String::new())),
-            ("eq5d_uk_index_value", ColType::DoubleNull),
-            ("eq5d_vas_score", ColType::DoubleNull),
+                ("id", ColType::PkUuid),
+                ("deleted_at", ColType::TimestampWithTimeZoneNull),
+                ("sf36_pf", ColType::DoubleNull),
+                ("sf36_rp", ColType::DoubleNull),
+                ("sf36_bp", ColType::DoubleNull),
+                ("sf36_gh", ColType::DoubleNull),
+                ("sf36_vt", ColType::DoubleNull),
+                ("sf36_sf", ColType::DoubleNull),
+                ("sf36_re", ColType::DoubleNull),
+                ("sf36_mh", ColType::DoubleNull),
+                ("sf36_pcs_approx", ColType::DoubleNull),
+                ("sf36_mcs_approx", ColType::DoubleNull),
+                ("ndi_raw_score", ColType::IntegerNull),
+                ("ndi_answered_sections", ColType::IntegerNull),
+                ("ndi_percentage_score", ColType::DoubleNull),
+                ("ndi_band", ColType::StringWithDefault(String::new())),
+                ("mjoa_total_score", ColType::IntegerNull),
+                ("mjoa_band", ColType::StringWithDefault(String::new())),
+                (
+                    "eq5d_health_state_descriptor",
+                    ColType::StringWithDefault(String::new()),
+                ),
+                ("eq5d_uk_index_value", ColType::DoubleNull),
+                ("eq5d_vas_score", ColType::DoubleNull),
+                ("patient_reported_outcome_measures_id", ColType::Uuid),
             ],
-            &[
-            // Explicit column name override: the default `references()`
-            // helper singularizes the from-table name (dropping the
-            // trailing "s" of "measures"), which would produce
-            // `patient_reported_outcome_measure_id` and no longer match
-            // the hand-written SQL schema's
-            // `patient_reported_outcome_measures_id` column. Pin the
-            // exact name here instead.
-            ("patient_reported_outcome_measures", "patient_reported_outcome_measures_id"),
-            ]
-        ).await?;
+            &[(
+                "patient_reported_outcome_measures",
+                "patient_reported_outcome_measures_id",
+            )],
+        )
+        .await?;
+        m.get_connection().execute_unprepared("ALTER TABLE patient_reported_outcome_measures_scores ALTER COLUMN id SET DEFAULT gen_random_uuid()").await?;
 
         // The parent/child relationship is 1:1 (enforced in the
         // hand-written SQL via `UNIQUE REFERENCES`), not 1:many, so add a

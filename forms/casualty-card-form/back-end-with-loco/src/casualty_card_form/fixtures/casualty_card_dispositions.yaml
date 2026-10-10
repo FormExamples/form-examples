@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 323132
+  id: "00000000-0000-4000-8000-00000004ee3c"
   deletedAt: null
   disposition: "admitted"
   admittingSpecialty: "Test admittingSpecialty"
@@ -17,4 +17,4 @@
   modeOfTransfer: "Test modeOfTransfer"
   dischargeTime: "2026-01-01T00:00:00Z"
   totalTimeInDepartment: "Test totalTimeInDepartment"
-  casualtyCardId: 233761
+  casualtyCardId: "00000000-0000-4000-8000-000000039121"

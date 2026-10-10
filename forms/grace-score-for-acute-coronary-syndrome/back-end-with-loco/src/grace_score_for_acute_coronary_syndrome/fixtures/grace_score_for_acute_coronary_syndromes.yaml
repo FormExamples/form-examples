@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 592010
+  id: "00000000-0000-4000-8000-00000009088a"
   deletedAt: null
   clinicianName: "Test clinicianName"
   clinicianRole: "emergency-physician"
@@ -19,5 +19,5 @@
   stSegmentDeviation: "yes"
   elevatedCardiacEnzymes: "yes"
   clinicalNote: "Test clinicalNote"
-  patientId: 227911
+  patientId: "00000000-0000-4000-8000-000000037a47"
   clinicianId: null

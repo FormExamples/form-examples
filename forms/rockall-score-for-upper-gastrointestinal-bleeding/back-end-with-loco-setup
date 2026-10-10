@@ -48,8 +48,8 @@ cargo loco generate scaffold clinician \
 
 cargo loco generate scaffold rockall_score_for_upper_gastrointestinal_bleeding \
     deleted_at:tstz \
-    patient:references \
-    clinician:references \
+    patient:references:patient_id \
+    clinician:references:clinician_id \
     clinician_name:string! \
     clinician_role:string! \
     assessed_at:tstz \
@@ -69,7 +69,7 @@ cargo loco generate scaffold rockall_score_for_upper_gastrointestinal_bleeding \
 
 cargo loco generate scaffold rockall_score_for_upper_gastrointestinal_bleeding_grade \
     deleted_at:tstz \
-    rockall_score_for_upper_gastrointestinal_bleeding:references \
+    rockall_score_for_upper_gastrointestinal_bleeding:references:rockall_score_for_upper_gastrointestinal_bleeding_id \
     age_points:int \
     shock_points:int \
     comorbidity_points:int \
@@ -83,7 +83,7 @@ cargo loco generate scaffold rockall_score_for_upper_gastrointestinal_bleeding_g
 
 cargo loco generate scaffold rockall_score_for_upper_gastrointestinal_bleeding_grade_rule \
     deleted_at:tstz \
-    rockall_score_for_upper_gastrointestinal_bleeding_grade:references \
+    rockall_score_for_upper_gastrointestinal_bleeding_grade:references:rockall_score_for_upper_gastrointestinal_bleeding_grade_id \
     rule_id:string! \
     parameter:string! \
     points:int \
@@ -93,7 +93,7 @@ cargo loco generate scaffold rockall_score_for_upper_gastrointestinal_bleeding_g
 
 cargo loco generate scaffold rockall_score_for_upper_gastrointestinal_bleeding_grade_flag \
     deleted_at:tstz \
-    rockall_score_for_upper_gastrointestinal_bleeding_grade:references \
+    rockall_score_for_upper_gastrointestinal_bleeding_grade:references:rockall_score_for_upper_gastrointestinal_bleeding_grade_id \
     flag_id:string! \
     category:string! \
     priority:string! \
@@ -105,6 +105,10 @@ cargo loco generate scaffold rockall_score_for_upper_gastrointestinal_bleeding_g
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

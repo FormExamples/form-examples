@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 735833
+  id: "00000000-0000-4000-8000-0000000b3a59"
   deletedAt: null
   graceScore: 1
   inHospitalRiskBand: "low"
@@ -8,4 +8,4 @@
   overallBand: "low"
   invasiveStrategy: "Test invasiveStrategy"
   gradedAt: "2026-01-01T00:00:00Z"
-  graceScoreForAcuteCoronarySyndromeId: 592010
+  graceScoreForAcuteCoronarySyndromeId: "00000000-0000-4000-8000-00000009088a"

@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 825024
+  id: "00000000-0000-4000-8000-0000000c96c0"
   deletedAt: null
   clinicianName: "Test clinicianName"
   clinicianRole: "hepatologist"
@@ -20,5 +20,5 @@
   sodium: 1.0
   albumin: 1.0
   clinicalNote: "Test clinicalNote"
-  patientId: 847604
-  clinicianId: 875428
+  patientId: "00000000-0000-4000-8000-0000000ceef4"
+  clinicianId: "00000000-0000-4000-8000-0000000d5ba4"

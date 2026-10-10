@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 869151
+  id: "00000000-0000-4000-8000-0000000d431f"
   deletedAt: null
   referrerOrganisation: "Test referrerOrganisation"
   referredAt: "2026-01-01T00:00:00Z"
@@ -38,5 +38,5 @@
   requestedAction: "Test requestedAction"
   referrerDeclaration: "yes"
   notes: "Test notes"
-  patientId: 885822
+  patientId: "00000000-0000-4000-8000-0000000d843e"
   clinicianId: null

@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 778027
+  id: "00000000-0000-4000-8000-0000000bdf2b"
   deletedAt: null
   originatingRequestReference: "Test originatingRequestReference"
   scanType: "fdg-pet-ct"
@@ -27,5 +27,5 @@
   recommendedFollowUp: "Test recommendedFollowUp"
   criticalResultCommunicated: true
   reportedTo: "Test reportedTo"
-  patientId: 981813
-  clinicianId: 350310
+  patientId: "00000000-0000-4000-8000-0000000efb35"
+  clinicianId: "00000000-0000-4000-8000-000000055866"

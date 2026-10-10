@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 122478
+  id: "00000000-0000-4000-8000-00000001de6e"
   deletedAt: null
   airwayStatus: "patent"
   airwayAdjuncts: "Test airwayAdjuncts"
@@ -25,4 +25,4 @@
   skinExamination: "Test skinExamination"
   injuriesIdentified: "Test injuriesIdentified"
   logRollFindings: "Test logRollFindings"
-  casualtyCardId: 233761
+  casualtyCardId: "00000000-0000-4000-8000-000000039121"

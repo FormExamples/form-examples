@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 918278
+  id: "00000000-0000-4000-8000-0000000e0306"
   deletedAt: null
   clinicianName: "Test clinicianName"
   clinicianRole: "psychiatrist"
@@ -50,5 +50,5 @@
   cognitiveImpression: "no-concern"
   cognitionNotes: "Test cognitionNotes"
   clinicalFormulation: "Test clinicalFormulation"
-  patientId: 346402
+  patientId: "00000000-0000-4000-8000-000000054922"
   clinicianId: null

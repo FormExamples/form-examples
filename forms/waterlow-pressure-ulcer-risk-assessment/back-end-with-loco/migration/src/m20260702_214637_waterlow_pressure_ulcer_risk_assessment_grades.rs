@@ -7,31 +7,39 @@ pub struct Migration;
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, m: &SchemaManager) -> Result<(), DbErr> {
-        create_table(m, "waterlow_pressure_ulcer_risk_assessment_grades",
+        create_table(
+            m,
+            "waterlow_pressure_ulcer_risk_assessment_grades",
             &[
-            
-            ("id", ColType::PkAuto),
-            
-            ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("build_points", ColType::IntegerNull),
-            ("skin_points", ColType::IntegerNull),
-            ("sex_points", ColType::IntegerNull),
-            ("age_points", ColType::IntegerNull),
-            ("continence_points", ColType::IntegerNull),
-            ("mobility_points", ColType::IntegerNull),
-            ("tissue_malnutrition_points", ColType::IntegerNull),
-            ("neurological_deficit_points", ColType::IntegerNull),
-            ("major_surgery_trauma_points", ColType::IntegerNull),
-            ("medication_points", ColType::IntegerNull),
-            ("total_score", ColType::IntegerNull),
-            ("risk_band", ColType::StringWithDefault(String::new())),
-            ("prevention_actions", ColType::TextWithDefault(String::new())),
-            ("graded_at", ColType::TimestampWithTimeZone),
+                ("id", ColType::PkUuid),
+                ("deleted_at", ColType::TimestampWithTimeZoneNull),
+                ("build_points", ColType::IntegerNull),
+                ("skin_points", ColType::IntegerNull),
+                ("sex_points", ColType::IntegerNull),
+                ("age_points", ColType::IntegerNull),
+                ("continence_points", ColType::IntegerNull),
+                ("mobility_points", ColType::IntegerNull),
+                ("tissue_malnutrition_points", ColType::IntegerNull),
+                ("neurological_deficit_points", ColType::IntegerNull),
+                ("major_surgery_trauma_points", ColType::IntegerNull),
+                ("medication_points", ColType::IntegerNull),
+                ("total_score", ColType::IntegerNull),
+                ("risk_band", ColType::StringWithDefault(String::new())),
+                (
+                    "prevention_actions",
+                    ColType::TextWithDefault(String::new()),
+                ),
+                ("graded_at", ColType::TimestampWithTimeZone),
+                ("waterlow_pressure_ulcer_risk_assessment_id", ColType::Uuid),
             ],
-            &[
-            ("waterlow_pressure_ulcer_risk_assessment", ""),
-            ]
-        ).await
+            &[(
+                "waterlow_pressure_ulcer_risk_assessment",
+                "waterlow_pressure_ulcer_risk_assessment_id",
+            )],
+        )
+        .await?;
+        m.get_connection().execute_unprepared("ALTER TABLE waterlow_pressure_ulcer_risk_assessment_grades ALTER COLUMN id SET DEFAULT gen_random_uuid()").await?;
+        Ok(())
     }
 
     async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {

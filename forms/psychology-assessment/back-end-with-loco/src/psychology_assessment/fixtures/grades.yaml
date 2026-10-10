@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 463803
+  id: "00000000-0000-4000-8000-0000000713bb"
   deletedAt: null
   depressionScore: 1
   depressionSeverity: "Test depressionSeverity"
@@ -9,4 +9,4 @@
   stressScore: 1
   stressSeverity: "Test stressSeverity"
   gradedAt: "2026-01-01T00:00:00Z"
-  assessmentId: 105494
+  assessmentId: "00000000-0000-4000-8000-000000019c16"

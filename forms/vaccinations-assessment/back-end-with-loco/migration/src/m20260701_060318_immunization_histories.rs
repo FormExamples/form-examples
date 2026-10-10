@@ -7,24 +7,45 @@ pub struct Migration;
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, m: &SchemaManager) -> Result<(), DbErr> {
-        create_table(m, "immunization_histories",
+        create_table(
+            m,
+            "immunization_histories",
             &[
-            
-            ("id", ColType::PkAuto),
-            
-            ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("has_vaccination_record", ColType::StringWithDefault(String::new())),
-            ("record_source", ColType::StringWithDefault(String::new())),
-            ("last_review_date", ColType::DateNull),
-            ("previous_adverse_reactions", ColType::StringWithDefault(String::new())),
-            ("adverse_reaction_details", ColType::TextWithDefault(String::new())),
-            ("immunocompromised", ColType::StringWithDefault(String::new())),
-            ("immunocompromised_details", ColType::TextWithDefault(String::new())),
+                ("id", ColType::PkUuid),
+                ("deleted_at", ColType::TimestampWithTimeZoneNull),
+                (
+                    "has_vaccination_record",
+                    ColType::StringWithDefault(String::new()),
+                ),
+                ("record_source", ColType::StringWithDefault(String::new())),
+                ("last_review_date", ColType::DateNull),
+                (
+                    "previous_adverse_reactions",
+                    ColType::StringWithDefault(String::new()),
+                ),
+                (
+                    "adverse_reaction_details",
+                    ColType::TextWithDefault(String::new()),
+                ),
+                (
+                    "immunocompromised",
+                    ColType::StringWithDefault(String::new()),
+                ),
+                (
+                    "immunocompromised_details",
+                    ColType::TextWithDefault(String::new()),
+                ),
+                ("assessment_id", ColType::Uuid),
             ],
-            &[
-            ("assessment", ""),
-            ]
-        ).await
+            &[("assessment", "assessment_id")],
+        )
+        .await?;
+        m.get_connection()
+            .execute_unprepared(
+                "ALTER TABLE immunization_histories ALTER COLUMN id SET DEFAULT gen_random_uuid()",
+            )
+            .await?;
+        Ok(())
     }
 
     async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {

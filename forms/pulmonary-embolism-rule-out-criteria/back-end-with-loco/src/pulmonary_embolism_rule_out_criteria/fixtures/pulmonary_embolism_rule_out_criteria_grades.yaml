@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 527317
+  id: "00000000-0000-4000-8000-000000080bd5"
   deletedAt: null
   classification: "perc-negative"
   allCriteriaSatisfied: "yes"
   applicable: "yes"
   recommendedPathway: "Test recommendedPathway"
   gradedAt: "2026-01-01T00:00:00Z"
-  pulmonaryEmbolismRuleOutCriteriaId: 588206
+  pulmonaryEmbolismRuleOutCriteriaId: "00000000-0000-4000-8000-00000008f9ae"

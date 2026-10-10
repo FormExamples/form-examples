@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 222155
+  id: "00000000-0000-4000-8000-0000000363cb"
   deletedAt: null
   flagId: "Test flagId"
   category: "ankle-xray-indicated"
   priority: "low"
   description: "Test description"
   suggestedAction: "Test suggestedAction"
-  ottawaAnkleRulesGradeId: 666894
+  ottawaAnkleRulesGradeId: "00000000-0000-4000-8000-0000000a2d0e"

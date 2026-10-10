@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 487094
+  id: "00000000-0000-4000-8000-000000076eb6"
   deletedAt: null
   ruleId: "Test ruleId"
   axis: "appropriateness"
   category: "Test category"
   description: "Test description"
-  angiographyTestRequestGradeId: 398667
+  angiographyTestRequestGradeId: "00000000-0000-4000-8000-00000006154b"

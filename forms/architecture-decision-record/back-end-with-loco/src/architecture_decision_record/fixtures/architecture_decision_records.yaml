@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 594366
+  id: "00000000-0000-4000-8000-0000000911be"
   slug: "Test slug"
   number: 1
   title: "Test title"
@@ -19,5 +19,5 @@
   relatedPrinciples: "Test relatedPrinciples"
   signedOffBy: "Test signedOffBy"
   signedOffAt: "2026-01-01T00:00:00Z"
-  authorId: 936864
-  organizationId: 220741
+  authorId: "00000000-0000-4000-8000-0000000e4ba0"
+  organizationId: "00000000-0000-4000-8000-000000035e45"

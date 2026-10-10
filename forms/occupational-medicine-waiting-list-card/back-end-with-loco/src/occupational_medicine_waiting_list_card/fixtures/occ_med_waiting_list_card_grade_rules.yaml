@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 741674
+  id: "00000000-0000-4000-8000-0000000b512a"
   deletedAt: null
   ruleId: "Test ruleId"
   instrument: "waiting-time-status"
   band: "within-target"
   category: "Test category"
   description: "Test description"
-  occMedWaitingListCardGradeId: 760320
+  occMedWaitingListCardGradeId: "00000000-0000-4000-8000-0000000b9a00"

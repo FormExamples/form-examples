@@ -7,27 +7,38 @@ pub struct Migration;
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, m: &SchemaManager) -> Result<(), DbErr> {
-        create_table(m, "child_psych_waiting_list_card_grades",
+        create_table(
+            m,
+            "child_psych_waiting_list_card_grades",
             &[
-            
-            ("id", ColType::PkAuto),
-            
-            ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("waiting_time_status", ColType::StringWithDefault(String::new())),
-            ("clinical_priority", ColType::StringWithDefault(String::new())),
-            ("target_wait_weeks", ColType::DoubleNull),
-            ("days_waited", ColType::IntegerNull),
-            ("weeks_waited", ColType::DoubleNull),
-            ("days_to_target", ColType::IntegerNull),
-            ("days_to_breach", ColType::IntegerNull),
-            ("days_to_appointment", ColType::IntegerNull),
-            ("grader_notes", ColType::TextWithDefault(String::new())),
-            ("graded_at", ColType::TimestampWithTimeZone),
+                ("id", ColType::PkUuid),
+                ("deleted_at", ColType::TimestampWithTimeZoneNull),
+                (
+                    "waiting_time_status",
+                    ColType::StringWithDefault(String::new()),
+                ),
+                (
+                    "clinical_priority",
+                    ColType::StringWithDefault(String::new()),
+                ),
+                ("target_wait_weeks", ColType::DoubleNull),
+                ("days_waited", ColType::IntegerNull),
+                ("weeks_waited", ColType::DoubleNull),
+                ("days_to_target", ColType::IntegerNull),
+                ("days_to_breach", ColType::IntegerNull),
+                ("days_to_appointment", ColType::IntegerNull),
+                ("grader_notes", ColType::TextWithDefault(String::new())),
+                ("graded_at", ColType::TimestampWithTimeZone),
+                ("child_psych_waiting_list_card_id", ColType::Uuid),
             ],
-            &[
-            ("child_psych_waiting_list_card", ""),
-            ]
-        ).await
+            &[(
+                "child_psych_waiting_list_card",
+                "child_psych_waiting_list_card_id",
+            )],
+        )
+        .await?;
+        m.get_connection().execute_unprepared("ALTER TABLE child_psych_waiting_list_card_grades ALTER COLUMN id SET DEFAULT gen_random_uuid()").await?;
+        Ok(())
     }
 
     async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {

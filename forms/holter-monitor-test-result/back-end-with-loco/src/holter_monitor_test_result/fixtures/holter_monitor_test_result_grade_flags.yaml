@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 617029
+  id: "00000000-0000-4000-8000-000000096a45"
   deletedAt: null
   flagId: "Test flagId"
   category: "critical-result-alert"
   priority: "low"
   description: "Test description"
   suggestedAction: "Test suggestedAction"
-  holterMonitorTestResultGradeId: 200634
+  holterMonitorTestResultGradeId: "00000000-0000-4000-8000-000000030fba"

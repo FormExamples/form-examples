@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 623820
+  id: "00000000-0000-4000-8000-0000000984cc"
   deletedAt: null
   clinicianName: "Test clinicianName"
   clinicianRole: "gp"
@@ -79,5 +79,5 @@
   selfManagementPlan: "yes"
   cardiacRehab: "yes"
   reviewContext: "Test reviewContext"
-  patientId: 965991
+  patientId: "00000000-0000-4000-8000-0000000ebd67"
   clinicianId: null

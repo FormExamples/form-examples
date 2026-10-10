@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 199908
+  id: "00000000-0000-4000-8000-000000030ce4"
   deletedAt: null
   reportingClinicianRole: "mammographer"
   reportedAt: "2026-01-01T00:00:00Z"
@@ -22,5 +22,5 @@
   assessmentModalities: "Test assessmentModalities"
   imagingClassification: 1
   clinicalContext: "Test clinicalContext"
-  patientId: 338021
+  patientId: "00000000-0000-4000-8000-000000052865"
   clinicianId: null

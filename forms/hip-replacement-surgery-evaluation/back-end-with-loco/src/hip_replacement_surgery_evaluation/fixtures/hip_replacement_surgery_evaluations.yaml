@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 840449
+  id: "00000000-0000-4000-8000-0000000cd301"
   deletedAt: null
   status: "draft"
   assessmentDate: "1990-01-01"
@@ -81,5 +81,5 @@
   targetListDate: "1990-01-01"
   responsibleSurgeon: "Test responsibleSurgeon"
   additionalNotes: "Test additionalNotes"
-  patientId: 706993
-  clinicianId: 942399
+  patientId: "00000000-0000-4000-8000-0000000ac9b1"
+  clinicianId: "00000000-0000-4000-8000-0000000e613f"

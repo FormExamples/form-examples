@@ -49,7 +49,7 @@ cargo loco generate scaffold clinician \
 
 cargo loco generate scaffold assessment \
     deleted_at:tstz \
-    patient:references \
+    patient:references:patient_id \
     status:text! \
     --api
 
@@ -63,7 +63,7 @@ cargo loco generate scaffold pvt_rule \
 
 cargo loco generate scaffold grade \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     risk_category:text! \
     ten_year_risk_percent:double! \
     thirty_year_risk_percent:double! \
@@ -74,8 +74,8 @@ cargo loco generate scaffold grade \
 
 cargo loco generate scaffold grading_fired_rule \
     deleted_at:tstz \
-    grade:references \
-    pvt_rule:references \
+    grade:references:grade_id \
+    pvt_rule:references:rule_code \
     rule_category:text! \
     rule_description:text! \
     rule_risk_level:text! \
@@ -83,7 +83,7 @@ cargo loco generate scaffold grading_fired_rule \
 
 cargo loco generate scaffold grading_additional_flag \
     deleted_at:tstz \
-    grade:references \
+    grade:references:grade_id \
     flag_id:text! \
     category:text! \
     message:text! \
@@ -94,6 +94,10 @@ cargo loco generate scaffold grading_additional_flag \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

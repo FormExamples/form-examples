@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 994181
+  id: "00000000-0000-4000-8000-0000000f2b85"
   deletedAt: null
   item1Score: 1
   item2Score: 1
@@ -9,4 +9,4 @@
   totalScore: 1
   interpretation: "delirium-unlikely"
   gradedAt: "2026-01-01T00:00:00Z"
-  fourATestForDeliriumId: 607056
+  fourATestForDeliriumId: "00000000-0000-4000-8000-000000094350"

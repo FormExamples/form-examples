@@ -7,30 +7,41 @@ pub struct Migration;
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, m: &SchemaManager) -> Result<(), DbErr> {
-        create_table(m, "public_health_waiting_list_card_appointments",
+        create_table(
+            m,
+            "public_health_waiting_list_card_appointments",
             &[
-            
-            ("id", ColType::PkAuto),
-            
-            ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("appointment_date", ColType::DateNull),
-            ("appointment_time", ColType::StringNull),
-            ("duration_minutes", ColType::IntegerNull),
-            ("appointment_type", ColType::StringWithDefault(String::new())),
-            ("site_name", ColType::StringWithDefault(String::new())),
-            ("site_address", ColType::TextWithDefault(String::new())),
-            ("clinic_name", ColType::StringWithDefault(String::new())),
-            ("room", ColType::StringWithDefault(String::new())),
-            ("clinician_name", ColType::StringWithDefault(String::new())),
-            ("clinician_team", ColType::StringWithDefault(String::new())),
-            ("status", ColType::StringWithDefault("scheduled".to_string())),
-            ("travel_notes", ColType::TextWithDefault(String::new())),
-            ("access_notes", ColType::TextWithDefault(String::new())),
+                ("id", ColType::PkUuid),
+                ("deleted_at", ColType::TimestampWithTimeZoneNull),
+                ("appointment_date", ColType::DateNull),
+                ("appointment_time", ColType::StringNull),
+                ("duration_minutes", ColType::IntegerNull),
+                (
+                    "appointment_type",
+                    ColType::StringWithDefault(String::new()),
+                ),
+                ("site_name", ColType::StringWithDefault(String::new())),
+                ("site_address", ColType::TextWithDefault(String::new())),
+                ("clinic_name", ColType::StringWithDefault(String::new())),
+                ("room", ColType::StringWithDefault(String::new())),
+                ("clinician_name", ColType::StringWithDefault(String::new())),
+                ("clinician_team", ColType::StringWithDefault(String::new())),
+                (
+                    "status",
+                    ColType::StringWithDefault("scheduled".to_string()),
+                ),
+                ("travel_notes", ColType::TextWithDefault(String::new())),
+                ("access_notes", ColType::TextWithDefault(String::new())),
+                ("public_health_waiting_list_card_id", ColType::Uuid),
             ],
-            &[
-            ("public_health_waiting_list_card", ""),
-            ]
-        ).await
+            &[(
+                "public_health_waiting_list_card",
+                "public_health_waiting_list_card_id",
+            )],
+        )
+        .await?;
+        m.get_connection().execute_unprepared("ALTER TABLE public_health_waiting_list_card_appointments ALTER COLUMN id SET DEFAULT gen_random_uuid()").await?;
+        Ok(())
     }
 
     async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {

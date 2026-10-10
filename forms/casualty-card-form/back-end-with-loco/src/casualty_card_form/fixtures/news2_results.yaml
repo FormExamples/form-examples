@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 887758
+  id: "00000000-0000-4000-8000-0000000d8bce"
   deletedAt: null
   totalScore: 1
   clinicalResponse: "low"
   hasAnySingleScore3: true
   supplementalOxygen: "Test supplementalOxygen"
   scoredAt: "2026-01-01T00:00:00Z"
-  casualtyCardId: 233761
+  casualtyCardId: "00000000-0000-4000-8000-000000039121"

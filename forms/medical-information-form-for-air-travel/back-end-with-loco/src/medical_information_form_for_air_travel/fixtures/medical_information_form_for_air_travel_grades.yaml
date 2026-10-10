@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 716939
+  id: "00000000-0000-4000-8000-0000000af08b"
   deletedAt: null
   computedFitnessBand: "fit"
   finalFitnessBand: "fit"
@@ -10,4 +10,4 @@
   validUntil: "1990-01-01"
   signedAt: "2026-01-01T00:00:00Z"
   gradedAt: "2026-01-01T00:00:00Z"
-  medicalInformationFormForAirTravelId: 399933
+  medicalInformationFormForAirTravelId: "00000000-0000-4000-8000-000000061a3d"

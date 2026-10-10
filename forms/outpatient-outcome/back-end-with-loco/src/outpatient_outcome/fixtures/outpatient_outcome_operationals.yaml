@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 432375
+  id: "00000000-0000-4000-8000-0000000698f7"
   deletedAt: null
   referralDate: "1990-01-01"
   appointmentDate: "1990-01-01"
   waitTimeDays: 1
   serviceTargetDays: 1
   nhsAttendanceOutcome: "attended"
-  outpatientOutcomeId: 379759
+  outpatientOutcomeId: "00000000-0000-4000-8000-00000005cb6f"

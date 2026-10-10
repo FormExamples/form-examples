@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 306234
+  id: "00000000-0000-4000-8000-00000004ac3a"
   deletedAt: null
   ruleId: "Test ruleId"
   stage: "per-foot"
   category: "Test category"
   description: "Test description"
-  diabetesPodiatryAssessmentGradeId: 484605
+  diabetesPodiatryAssessmentGradeId: "00000000-0000-4000-8000-0000000764fd"

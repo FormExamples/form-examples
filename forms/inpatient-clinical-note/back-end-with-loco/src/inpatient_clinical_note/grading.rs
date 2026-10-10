@@ -158,7 +158,7 @@ pub fn to_engine_note(
 /// Returns [`Error::NotFound`] if no such note exists, or a database error.
 pub async fn grade_note(
     db: &DatabaseConnection,
-    id: i64,
+    id: Uuid,
 ) -> Result<(inpatient_clinical_notes::Model, NoteGrade)> {
     let note = inpatient_clinical_notes::Entity::find_by_id(id)
         .one(db)
@@ -230,7 +230,7 @@ fn documented(result: &NoteGrade, component: ComponentKey) -> String {
 /// Returns [`Error::NotFound`] if no such note exists, or a database error.
 pub async fn grade_and_persist(
     db: &DatabaseConnection,
-    id: i64,
+    id: Uuid,
 ) -> Result<(inpatient_clinical_note_grades::Model, NoteGrade)> {
     let (_note, result) = grade_note(db, id).await?;
 
@@ -307,7 +307,7 @@ pub async fn grade_and_persist(
 /// database error.
 pub async fn latest_grade(
     db: &DatabaseConnection,
-    id: i64,
+    id: Uuid,
 ) -> Result<inpatient_clinical_note_grades::Model> {
     inpatient_clinical_note_grades::Entity::find()
         .filter(inpatient_clinical_note_grades::Column::InpatientClinicalNoteId.eq(id))

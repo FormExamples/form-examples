@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 587001
+  id: "00000000-0000-4000-8000-00000008f4f9"
   deletedAt: null
   status: "draft"
   entryDate: "1990-01-01"
@@ -26,5 +26,5 @@
   communicationNotes: "Test communicationNotes"
   additionalNotes: "Test additionalNotes"
   signedAt: "2026-01-01T00:00:00Z"
-  patientId: 976456
-  practitionerId: 806552
+  patientId: "00000000-0000-4000-8000-0000000ee648"
+  practitionerId: "00000000-0000-4000-8000-0000000c4e98"

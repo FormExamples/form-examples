@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 684766
+  id: "00000000-0000-4000-8000-0000000a72de"
   deletedAt: null
   overallOutcome: "referral-required"
   referralStatus: "routine"
@@ -8,4 +8,4 @@
   withinWindow: true
   avoidableRepeat: true
   gradedAt: "2026-01-01T00:00:00Z"
-  newbornBloodSpotScreeningId: 201820
+  newbornBloodSpotScreeningId: "00000000-0000-4000-8000-00000003145c"

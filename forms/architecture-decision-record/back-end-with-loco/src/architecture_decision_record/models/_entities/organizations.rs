@@ -13,8 +13,8 @@ pub struct Model {
     /// Updated at.
     pub updated_at: DateTimeWithTimeZone,
     /// ID.
-    #[sea_orm(primary_key)]
-    pub id: i64,
+    #[sea_orm(primary_key, auto_increment = false)]
+    pub id: Uuid,
     /// Name.
     pub name: String,
     /// Legal name.

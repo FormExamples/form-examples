@@ -10,8 +10,8 @@ use crate::models::_entities::dietic_assessments::{ActiveModel, Entity, Model};
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub deleted_at: Option<DateTimeWithTimeZone>,
-    pub patient_id: i64,
-    pub dietitian_id: i64,
+    pub patient_id: Uuid,
+    pub dietitian_id: Uuid,
     pub status: String,
     pub assessment_date: Option<Date>,
     pub assessment_time: Option<String>,
@@ -510,7 +510,7 @@ impl Params {
       }
 }
 
-async fn load_item(ctx: &AppContext, id: i64) -> Result<Model> {
+async fn load_item(ctx: &AppContext, id: Uuid) -> Result<Model> {
     let item = Entity::find_by_id(id).one(&ctx.db).await?;
     item.ok_or_else(|| Error::NotFound)
 }
@@ -532,7 +532,7 @@ pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> R
 
 #[debug_handler]
 pub async fn update(
-    Path(id): Path<i64>,
+    Path(id): Path<Uuid>,
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
@@ -544,13 +544,13 @@ pub async fn update(
 }
 
 #[debug_handler]
-pub async fn remove(Path(id): Path<i64>, State(ctx): State<AppContext>) -> Result<Response> {
+pub async fn remove(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
     load_item(&ctx, id).await?.delete(&ctx.db).await?;
     format::empty()
 }
 
 #[debug_handler]
-pub async fn get_one(Path(id): Path<i64>, State(ctx): State<AppContext>) -> Result<Response> {
+pub async fn get_one(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
     format::json(load_item(&ctx, id).await?)
 }
 

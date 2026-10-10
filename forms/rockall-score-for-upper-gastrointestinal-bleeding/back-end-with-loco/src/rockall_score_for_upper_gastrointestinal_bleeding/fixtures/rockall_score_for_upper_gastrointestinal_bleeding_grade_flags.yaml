@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 820792
+  id: "00000000-0000-4000-8000-0000000c8638"
   deletedAt: null
   flagId: "Test flagId"
   category: "high-mortality-risk"
   priority: "low"
   description: "Test description"
   suggestedAction: "Test suggestedAction"
-  rockallScoreForUpperGastrointestinalBleedingGradeId: 394730
+  rockallScoreForUpperGastrointestinalBleedingGradeId: "00000000-0000-4000-8000-0000000605ea"

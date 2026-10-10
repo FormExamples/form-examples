@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 600055
+  id: "00000000-0000-4000-8000-0000000927f7"
   deletedAt: null
   oksTotal: 1
   computedOksCategory: "severe"
@@ -13,4 +13,4 @@
   signedByName: "Test signedByName"
   signedAt: "2026-01-01T00:00:00Z"
   gradedAt: "2026-01-01T00:00:00Z"
-  kneeReplacementSurgeryEvaluationId: 705876
+  kneeReplacementSurgeryEvaluationId: "00000000-0000-4000-8000-0000000ac554"

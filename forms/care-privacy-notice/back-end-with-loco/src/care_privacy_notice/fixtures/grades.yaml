@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 650776
+  id: "00000000-0000-4000-8000-00000009ee18"
   deletedAt: null
   completenessStatus: "Test completenessStatus"
   sectionsComplete: 1
   sectionsTotal: 1
   gradedAt: "2026-01-01T00:00:00Z"
-  assessmentId: 602224
+  assessmentId: "00000000-0000-4000-8000-000000093070"

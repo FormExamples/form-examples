@@ -7,23 +7,28 @@ pub struct Migration;
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, m: &SchemaManager) -> Result<(), DbErr> {
-        create_table(m, "hospital_dashboard_metrics",
+        create_table(
+            m,
+            "hospital_dashboard_metrics",
             &[
-            
-            ("id", ColType::PkAuto),
-            
-            ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("hospital_name", ColType::StringWithDefault(String::new())),
-            ("period_month", ColType::IntegerNull),
-            ("period_year", ColType::IntegerNull),
-            ("prepared_by_name", ColType::StringWithDefault(String::new())),
-            ("overall_notes", ColType::TextWithDefault(String::new())),
-            ("status", ColType::StringWithDefault("draft".to_string())),
-            ("signed_at", ColType::TimestampWithTimeZoneNull),
+                ("id", ColType::PkUuid),
+                ("deleted_at", ColType::TimestampWithTimeZoneNull),
+                ("hospital_name", ColType::StringWithDefault(String::new())),
+                ("period_month", ColType::IntegerNull),
+                ("period_year", ColType::IntegerNull),
+                (
+                    "prepared_by_name",
+                    ColType::StringWithDefault(String::new()),
+                ),
+                ("overall_notes", ColType::TextWithDefault(String::new())),
+                ("status", ColType::StringWithDefault("draft".to_string())),
+                ("signed_at", ColType::TimestampWithTimeZoneNull),
             ],
-            &[
-            ]
-        ).await
+            &[],
+        )
+        .await?;
+        m.get_connection().execute_unprepared("ALTER TABLE hospital_dashboard_metrics ALTER COLUMN id SET DEFAULT gen_random_uuid()").await?;
+        Ok(())
     }
 
     async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {

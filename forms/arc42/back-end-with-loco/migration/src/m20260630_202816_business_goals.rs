@@ -7,20 +7,26 @@ pub struct Migration;
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, m: &SchemaManager) -> Result<(), DbErr> {
-        create_table(m, "business_goals",
+        create_table(
+            m,
+            "business_goals",
             &[
-            
-            ("id", ColType::PkAuto),
-            
-            ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("ordinal", ColType::IntegerWithDefault(0)),
-            ("name", ColType::TextWithDefault(String::new())),
-            ("description", ColType::TextWithDefault(String::new())),
+                ("id", ColType::PkUuid),
+                ("deleted_at", ColType::TimestampWithTimeZoneNull),
+                ("ordinal", ColType::IntegerWithDefault(0)),
+                ("name", ColType::TextWithDefault(String::new())),
+                ("description", ColType::TextWithDefault(String::new())),
+                ("arc42_documentation_id", ColType::Uuid),
             ],
-            &[
-            ("arc42_documentation", ""),
-            ]
-        ).await
+            &[("arc42_documentation", "arc42_documentation_id")],
+        )
+        .await?;
+        m.get_connection()
+            .execute_unprepared(
+                "ALTER TABLE business_goals ALTER COLUMN id SET DEFAULT gen_random_uuid()",
+            )
+            .await?;
+        Ok(())
     }
 
     async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {

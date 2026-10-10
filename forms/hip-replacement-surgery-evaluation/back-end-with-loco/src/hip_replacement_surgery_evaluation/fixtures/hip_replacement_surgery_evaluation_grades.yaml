@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 897338
+  id: "00000000-0000-4000-8000-0000000db13a"
   deletedAt: null
   ohsTotal: 1
   ohsCategory: "severe"
@@ -11,4 +11,4 @@
   signedByName: "Test signedByName"
   signedAt: "2026-01-01T00:00:00Z"
   gradedAt: "2026-01-01T00:00:00Z"
-  hipReplacementSurgeryEvaluationId: 840449
+  hipReplacementSurgeryEvaluationId: "00000000-0000-4000-8000-0000000cd301"

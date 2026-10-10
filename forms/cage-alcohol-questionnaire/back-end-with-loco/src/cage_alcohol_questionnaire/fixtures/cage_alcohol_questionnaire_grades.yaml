@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 413255
+  id: "00000000-0000-4000-8000-000000064e47"
   deletedAt: null
   cutDownPoint: 1
   annoyedPoint: 1
@@ -9,4 +9,4 @@
   totalScore: 1
   interpretation: "negative"
   gradedAt: "2026-01-01T00:00:00Z"
-  cageAlcoholQuestionnaireId: 288567
+  cageAlcoholQuestionnaireId: "00000000-0000-4000-8000-000000046737"

@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 709289
+  id: "00000000-0000-4000-8000-0000000ad2a9"
   deletedAt: null
   technicianName: "Test technicianName"
   technicianRole: "screening-technician"
@@ -22,5 +22,5 @@
   symptomatic: "yes"
   incidentalFindings: "Test incidentalFindings"
   resultNote: "Test resultNote"
-  patientId: 334041
+  patientId: "00000000-0000-4000-8000-0000000518d9"
   clinicianId: null

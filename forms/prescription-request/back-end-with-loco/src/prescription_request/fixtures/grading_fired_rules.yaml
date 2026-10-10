@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 454865
+  id: "00000000-0000-4000-8000-00000006f0d1"
   deletedAt: null
   ruleId: "Test ruleId"
   category: "Test category"
   description: "Test description"
   severityLevel: "Test severityLevel"
-  gradeId: 927916
+  gradeId: "00000000-0000-4000-8000-0000000e28ac"

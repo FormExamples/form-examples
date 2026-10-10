@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 107589
+  id: "00000000-0000-4000-8000-00000001a445"
   deletedAt: null
   hasOcularMedications: "Test hasOcularMedications"
   hasSystemicMedications: "Test hasSystemicMedications"
   medicationAllergies: "No known allergies"
   medicationsNotes: "Test medicationsNotes"
-  assessmentId: 128354
+  assessmentId: "00000000-0000-4000-8000-00000001f562"

@@ -53,7 +53,7 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 ### Loco back-end refactor
 
 Mechanical fleet-wide maintenance tools for `back-end-with-loco/` crates
-(background-queue/observability config, migration defaults/nullability,
+(background-queue/observability config, migration defaults/nullability, UUID primary keys,
 `deny.toml`, `#![forbid(unsafe_code)]`, scaffold-bug fixups, the loco-rs
 1.0.1 migration, MSRV, connection-pool sizing, `GET /api/openapi.yaml`,
 camelCase JSON) are catalogued in
@@ -281,6 +281,7 @@ bin/loco-integration-test-rollout --check --all # Loco patient-table POST/GET ro
 bin/loco-seed-data-rollout --check --all # Loco App::seed() domain-table fixture rollout drift detector
 bin/generate-api-transcripts --check   # per-form api-create.http drift detector (336/356; slow, real server)
 bin/loco-missing-request-test-stubs-fix --check --all # Loco missing-domain-test-stub completeness check (one-shot)
+bin/loco-uuid-pk-refactor --check --all # Loco integer-id -> UUID primary-key drift detector
 bin/loco-rs-1-migration --check --all # Loco 0.16 -> 1.0.1 migration completeness check (one-shot)
 bin/loco-msrv-set --msrv 1.96 --check --all # Rust MSRV (rust-version) drift detector, per spec/rust-msrv-n-minus-2/
 bin/generate-forms-tsv.py --check     # forms.tsv drift detector

@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 331633
+  id: "00000000-0000-4000-8000-000000050f71"
   deletedAt: null
   clinicianName: "Test clinicianName"
   clinicianRole: "doctor"
@@ -48,5 +48,5 @@
   multipleTrauma: "yes"
   highBleedingRisk: "yes"
   clinicalNote: "Test clinicalNote"
-  patientId: 931614
+  patientId: "00000000-0000-4000-8000-0000000e371e"
   clinicianId: null

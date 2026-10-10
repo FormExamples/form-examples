@@ -7,26 +7,35 @@ pub struct Migration;
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, m: &SchemaManager) -> Result<(), DbErr> {
-        create_table(m, "apgar_score_grades",
+        create_table(
+            m,
+            "apgar_score_grades",
             &[
-            
-            ("id", ColType::PkAuto),
-            ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            
-            ("total_one_minute", ColType::IntegerNull),
-            ("total_five_minute", ColType::IntegerNull),
-            ("total_ten_minute", ColType::IntegerNull),
-            ("band_one_minute", ColType::StringWithDefault(String::new())),
-            ("band_five_minute", ColType::StringWithDefault(String::new())),
-            ("band_ten_minute", ColType::StringWithDefault(String::new())),
-            ("summary_band", ColType::StringWithDefault(String::new())),
-            ("trend", ColType::StringWithDefault(String::new())),
-            ("graded_at", ColType::TimestampWithTimeZone),
+                ("id", ColType::PkUuid),
+                ("deleted_at", ColType::TimestampWithTimeZoneNull),
+                ("total_one_minute", ColType::IntegerNull),
+                ("total_five_minute", ColType::IntegerNull),
+                ("total_ten_minute", ColType::IntegerNull),
+                ("band_one_minute", ColType::StringWithDefault(String::new())),
+                (
+                    "band_five_minute",
+                    ColType::StringWithDefault(String::new()),
+                ),
+                ("band_ten_minute", ColType::StringWithDefault(String::new())),
+                ("summary_band", ColType::StringWithDefault(String::new())),
+                ("trend", ColType::StringWithDefault(String::new())),
+                ("graded_at", ColType::TimestampWithTimeZone),
+                ("apgar_score_id", ColType::Uuid),
             ],
-            &[
-            ("apgar_score", ""),
-            ]
-        ).await
+            &[("apgar_score", "apgar_score_id")],
+        )
+        .await?;
+        m.get_connection()
+            .execute_unprepared(
+                "ALTER TABLE apgar_score_grades ALTER COLUMN id SET DEFAULT gen_random_uuid()",
+            )
+            .await?;
+        Ok(())
     }
 
     async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {

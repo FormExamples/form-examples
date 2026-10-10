@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 376100
+  id: "00000000-0000-4000-8000-00000005bd24"
   deletedAt: null
   ruleId: "Test ruleId"
   stage: "visualisation"
   category: "Test category"
   description: "Test description"
-  abdominalAorticAneurysmScreeningGradeId: 822416
+  abdominalAorticAneurysmScreeningGradeId: "00000000-0000-4000-8000-0000000c8c90"

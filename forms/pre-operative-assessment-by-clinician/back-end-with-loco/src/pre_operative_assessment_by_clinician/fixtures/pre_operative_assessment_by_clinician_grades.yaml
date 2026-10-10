@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 222551
+  id: "00000000-0000-4000-8000-000000036557"
   deletedAt: null
   computedAsaGrade: "I"
   finalAsaGrade: "I"
@@ -17,4 +17,4 @@
   clinicianNotes: "Test clinicianNotes"
   signedAt: "2026-01-01T00:00:00Z"
   gradedAt: "2026-01-01T00:00:00Z"
-  preOperativeAssessmentByClinicianId: 638962
+  preOperativeAssessmentByClinicianId: "00000000-0000-4000-8000-00000009bff2"

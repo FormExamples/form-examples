@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 941110
+  id: "00000000-0000-4000-8000-0000000e5c36"
   deletedAt: null
   patientSignatureConfirmed: "yes"
   signatureDate: "1990-01-01"
@@ -8,4 +8,4 @@
   witnessSignatureConfirmed: "yes"
   witnessDate: "1990-01-01"
   parentGuardianName: "Test parentGuardianName"
-  releaseFormId: 708142
+  releaseFormId: "00000000-0000-4000-8000-0000000ace2e"

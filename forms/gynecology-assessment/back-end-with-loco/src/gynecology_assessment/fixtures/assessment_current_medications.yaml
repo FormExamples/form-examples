@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 536398
+  id: "00000000-0000-4000-8000-000000082f4e"
   deletedAt: null
   takesRegularMedications: "Test takesRegularMedications"
   takesOverTheCounter: "Test takesOverTheCounter"
@@ -9,4 +9,4 @@
   hormoneTherapy: "Test hormoneTherapy"
   hormoneTherapyDetails: "Test hormoneTherapyDetails"
   medicationNotes: "Test medicationNotes"
-  assessmentId: 492816
+  assessmentId: "00000000-0000-4000-8000-000000078510"

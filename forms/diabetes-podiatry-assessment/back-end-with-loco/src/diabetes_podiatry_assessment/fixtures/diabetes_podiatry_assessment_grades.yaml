@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 484605
+  id: "00000000-0000-4000-8000-0000000764fd"
   deletedAt: null
   rightFootRisk: "low"
   leftFootRisk: "low"
@@ -10,4 +10,4 @@
   reviewIntervalMonths: 1
   status: "complete"
   gradedAt: "2026-01-01T00:00:00Z"
-  diabetesPodiatryAssessmentId: 243609
+  diabetesPodiatryAssessmentId: "00000000-0000-4000-8000-00000003b799"

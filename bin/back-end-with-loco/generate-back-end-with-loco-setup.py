@@ -205,12 +205,11 @@ def loco_field_for(col: dict) -> str | None:
         return None
 
     if col["fk_target"]:
-        # FK column. Loco's convention: `<refname>:references` creates a
-        # <refname>_id column. Derive <refname> from the SQL column name by
-        # stripping the trailing `_id`, so the scaffold produces the same
-        # column name.
-        ref = name[:-3] if name.endswith("_id") else col["fk_target"]
-        return f"{ref}:references"
+        # FK column. Always name the column explicitly (`<table>:references:<col>`):
+        # Loco otherwise derives it as `<singular(table)>_id`, which is wrong for
+        # irregular plurals ("criteria" -> "criterium") and for FK columns whose
+        # name isn't the target table's (`grade_id` -> a `<form>_grade` table).
+        return f"{col['fk_target']}:references:{name}"
 
     base = loco_type_for(col["type"])
     suffix = ""
@@ -279,6 +278,10 @@ def render_generate_sh(form_slug: str, tables: list) -> str:
         "# layout: back-end-with-loco/src/${form_snake_case}/*.rs",
         'cd ..',
         '"$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"',
+        "",
+        "# Move every domain table's primary key (and foreign keys) from Loco's",
+        "# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.",
+        '"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"',
         "",
         "# Add #![forbid(unsafe_code)] to each crate root the scaffold created:",
         "# the library, the -cli binary, the migration library, and the tests.",

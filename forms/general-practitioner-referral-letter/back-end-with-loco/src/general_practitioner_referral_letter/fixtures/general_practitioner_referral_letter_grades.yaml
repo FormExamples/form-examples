@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 614061
+  id: "00000000-0000-4000-8000-000000095ead"
   deletedAt: null
   status: "Complete"
   urgency: "routine"
   completenessPercent: 1
   gradedAt: "2026-01-01T00:00:00Z"
-  generalPractitionerReferralLetterId: 485706
+  generalPractitionerReferralLetterId: "00000000-0000-4000-8000-00000007694a"

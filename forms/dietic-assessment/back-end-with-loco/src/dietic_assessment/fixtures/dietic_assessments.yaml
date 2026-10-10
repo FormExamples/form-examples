@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 243580
+  id: "00000000-0000-4000-8000-00000003b77c"
   deletedAt: null
   status: "draft"
   assessmentDate: "1990-01-01"
@@ -246,5 +246,5 @@
   reviewDate: "1990-01-01"
   onwardReferral: "Test onwardReferral"
   additionalNotes: "Test additionalNotes"
-  patientId: 551175
-  dietitianId: 220178
+  patientId: "00000000-0000-4000-8000-000000086907"
+  dietitianId: "00000000-0000-4000-8000-000000035c12"

@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 633582
+  id: "00000000-0000-4000-8000-00000009aaee"
   deletedAt: null
   complianceStatus: "Test complianceStatus"
   overallRiskLevel: "Test overallRiskLevel"
@@ -9,4 +9,4 @@
   covidComplete: "Test covidComplete"
   fluCurrent: "Test fluCurrent"
   gradedAt: "2026-01-01T00:00:00Z"
-  assessmentId: 250742
+  assessmentId: "00000000-0000-4000-8000-00000003d376"

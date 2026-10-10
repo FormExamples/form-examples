@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 733464
+  id: "00000000-0000-4000-8000-0000000b3118"
   deletedAt: null
   ruleId: "Test ruleId"
   criterion: "tonsillar-exudate"
   points: 1
   category: "Test category"
   description: "Test description"
-  centorScoreForStreptococcalPharyngitisGradeId: 929121
+  centorScoreForStreptococcalPharyngitisGradeId: "00000000-0000-4000-8000-0000000e2d61"

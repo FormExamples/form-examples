@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 514938
+  id: "00000000-0000-4000-8000-00000007db7a"
   deletedAt: null
   systolicBp: 1
   systolicBpSd: 1.0
   diastolicBp: 1
   onBpTreatment: "yes"
   numberOfBpMedications: 1
-  assessmentId: 172043
+  assessmentId: "00000000-0000-4000-8000-00000002a00b"

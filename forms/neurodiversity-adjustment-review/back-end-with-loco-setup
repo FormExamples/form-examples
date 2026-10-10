@@ -47,8 +47,8 @@ cargo loco generate scaffold manager \
 
 cargo loco generate scaffold neurodiversity_adjustment_review \
     deleted_at:tstz \
-    worker:references \
-    manager:references \
+    worker:references:worker_id \
+    manager:references:manager_id \
     review_status:string! \
     response_reference:string! \
     review_method:string! \
@@ -77,7 +77,7 @@ cargo loco generate scaffold neurodiversity_adjustment_review \
 
 cargo loco generate scaffold neurodiversity_adjustment_review_grade \
     deleted_at:tstz \
-    neurodiversity_adjustment_review:references \
+    neurodiversity_adjustment_review:references:neurodiversity_adjustment_review_id \
     effectiveness_band:string! \
     wellbeing_risk_band:string! \
     completeness_percent:int \
@@ -91,7 +91,7 @@ cargo loco generate scaffold neurodiversity_adjustment_review_grade \
 
 cargo loco generate scaffold neurodiversity_adjustment_review_grade_rule \
     deleted_at:tstz \
-    neurodiversity_adjustment_review_grade:references \
+    neurodiversity_adjustment_review_grade:references:neurodiversity_adjustment_review_grade_id \
     rule_id:string! \
     axis:string! \
     category:string! \
@@ -100,7 +100,7 @@ cargo loco generate scaffold neurodiversity_adjustment_review_grade_rule \
 
 cargo loco generate scaffold neurodiversity_adjustment_review_grade_flag \
     deleted_at:tstz \
-    neurodiversity_adjustment_review_grade:references \
+    neurodiversity_adjustment_review_grade:references:neurodiversity_adjustment_review_grade_id \
     flag_id:string! \
     category:string! \
     priority:string! \
@@ -112,6 +112,10 @@ cargo loco generate scaffold neurodiversity_adjustment_review_grade_flag \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

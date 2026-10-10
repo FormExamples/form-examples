@@ -7,26 +7,31 @@ pub struct Migration;
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, m: &SchemaManager) -> Result<(), DbErr> {
-        create_table(m, "patients",
+        create_table(
+            m,
+            "patients",
             &[
-            
-            ("id", ColType::PkAuto),
-            
-            ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("name", ColType::String),
-            ("birth_date", ColType::DateNull),
-            ("email", ColType::TextNull),
-            ("phone", ColType::TextNull),
-            ("postal_address_as_full_text", ColType::TextNull),
-            ("country_as_iso_3166_1_alpha_2", ColType::StringNull),
-            ("postcode", ColType::TextNull),
-            ("united_kingdom_nhs_number", ColType::StringNull),
-            ("employer_name", ColType::TextNull),
-            ("occupation", ColType::TextNull),
+                ("id", ColType::PkUuid),
+                ("deleted_at", ColType::TimestampWithTimeZoneNull),
+                ("name", ColType::String),
+                ("birth_date", ColType::DateNull),
+                ("email", ColType::TextNull),
+                ("phone", ColType::TextNull),
+                ("postal_address_as_full_text", ColType::TextNull),
+                ("country_as_iso_3166_1_alpha_2", ColType::StringNull),
+                ("postcode", ColType::TextNull),
+                ("united_kingdom_nhs_number", ColType::StringNull),
+                ("employer_name", ColType::TextNull),
+                ("occupation", ColType::TextNull),
             ],
-            &[
-            ]
-        ).await?;
+            &[],
+        )
+        .await?;
+        m.get_connection()
+            .execute_unprepared(
+                "ALTER TABLE patients ALTER COLUMN id SET DEFAULT gen_random_uuid()",
+            )
+            .await?;
 
         m.create_index(
             Index::create()

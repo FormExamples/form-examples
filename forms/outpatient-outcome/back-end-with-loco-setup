@@ -49,23 +49,23 @@ cargo loco generate scaffold clinician \
 
 cargo loco generate scaffold outpatient_outcome \
     deleted_at:tstz \
-    patient:references \
+    patient:references:patient_id \
     status:string! \
     --api
 
 cargo loco generate scaffold outpatient_outcome_encounter \
     deleted_at:tstz \
-    outpatient_outcome:references \
+    outpatient_outcome:references:outpatient_outcome_id \
     clinic_date:date \
     specialty:string! \
-    clinician:references \
+    clinician:references:clinician_id \
     modality:string! \
     appointment_type:string! \
     --api
 
 cargo loco generate scaffold outpatient_outcome_operational \
     deleted_at:tstz \
-    outpatient_outcome:references \
+    outpatient_outcome:references:outpatient_outcome_id \
     referral_date:date \
     appointment_date:date \
     wait_time_days:int \
@@ -75,7 +75,7 @@ cargo loco generate scaffold outpatient_outcome_operational \
 
 cargo loco generate scaffold outpatient_outcome_clinical \
     deleted_at:tstz \
-    outpatient_outcome:references \
+    outpatient_outcome:references:outpatient_outcome_id \
     presenting_complaint:text! \
     diagnosis:text! \
     treatment_delivered:text! \
@@ -84,31 +84,31 @@ cargo loco generate scaffold outpatient_outcome_clinical \
 
 cargo loco generate scaffold outpatient_outcome_prom_eq5d5l \
     deleted_at:tstz \
-    outpatient_outcome:references \
+    outpatient_outcome:references:outpatient_outcome_id \
     --api
 
 cargo loco generate scaffold outpatient_outcome_prom_grc \
     deleted_at:tstz \
-    outpatient_outcome:references \
+    outpatient_outcome:references:outpatient_outcome_id \
     global_rating_of_change:int \
     self_rated_health:string! \
     --api
 
 cargo loco generate scaffold outpatient_outcome_prom_promis \
     deleted_at:tstz \
-    outpatient_outcome:references \
+    outpatient_outcome:references:outpatient_outcome_id \
     --api
 
 cargo loco generate scaffold outpatient_outcome_prem_fft \
     deleted_at:tstz \
-    outpatient_outcome:references \
+    outpatient_outcome:references:outpatient_outcome_id \
     fft_response:string! \
     fft_comment:text! \
     --api
 
 cargo loco generate scaffold outpatient_outcome_followup \
     deleted_at:tstz \
-    outpatient_outcome:references \
+    outpatient_outcome:references:outpatient_outcome_id \
     disposition:string! \
     next_appointment_date:date \
     onward_referral_specialty:string! \
@@ -117,8 +117,8 @@ cargo loco generate scaffold outpatient_outcome_followup \
 
 cargo loco generate scaffold outpatient_outcome_signoff \
     deleted_at:tstz \
-    outpatient_outcome:references \
-    reporting_clinician:references \
+    outpatient_outcome:references:outpatient_outcome_id \
+    clinician:references:reporting_clinician_id \
     reporting_clinician_name:string! \
     reporting_clinician_role:string! \
     signed_off_at:tstz \
@@ -126,7 +126,7 @@ cargo loco generate scaffold outpatient_outcome_signoff \
 
 cargo loco generate scaffold outpatient_outcome_grade \
     deleted_at:tstz \
-    outpatient_outcome:references \
+    outpatient_outcome:references:outpatient_outcome_id \
     overall_grade:string! \
     clinical_grade:string! \
     prom_grade:string! \
@@ -138,7 +138,7 @@ cargo loco generate scaffold outpatient_outcome_grade \
 
 cargo loco generate scaffold outpatient_outcome_grade_rule \
     deleted_at:tstz \
-    grade:references \
+    outpatient_outcome_grade:references:grade_id \
     rule_id:string! \
     category:string! \
     description:text! \
@@ -147,7 +147,7 @@ cargo loco generate scaffold outpatient_outcome_grade_rule \
 
 cargo loco generate scaffold outpatient_outcome_grade_flag \
     deleted_at:tstz \
-    grade:references \
+    outpatient_outcome_grade:references:grade_id \
     flag_id:string! \
     category:string! \
     description:text! \
@@ -158,6 +158,10 @@ cargo loco generate scaffold outpatient_outcome_grade_flag \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

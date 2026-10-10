@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 144948
+  id: "00000000-0000-4000-8000-000000023634"
   deletedAt: null
   discrepancyType: "Test discrepancyType"
   bpmhItemRef: "Test bpmhItemRef"
@@ -8,4 +8,4 @@
   intendedAction: "Test intendedAction"
   rationale: "Test rationale"
   intentional: true
-  medicationReconciliationId: 376586
+  medicationReconciliationId: "00000000-0000-4000-8000-00000005bf0a"

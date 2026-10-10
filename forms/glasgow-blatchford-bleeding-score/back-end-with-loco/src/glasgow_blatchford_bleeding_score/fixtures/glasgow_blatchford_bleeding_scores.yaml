@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 516472
+  id: "00000000-0000-4000-8000-00000007e178"
   deletedAt: null
   clinicianName: "Test clinicianName"
   clinicianRole: "doctor"
@@ -19,5 +19,5 @@
   hepaticDisease: "yes"
   cardiacFailure: "yes"
   clinicalNote: "Test clinicalNote"
-  patientId: 211713
-  clinicianId: 883015
+  patientId: "00000000-0000-4000-8000-000000033b01"
+  clinicianId: "00000000-0000-4000-8000-0000000d7947"

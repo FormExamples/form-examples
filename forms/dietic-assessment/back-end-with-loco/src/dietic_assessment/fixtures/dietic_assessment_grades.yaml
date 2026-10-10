@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 539756
+  id: "00000000-0000-4000-8000-000000083c6c"
   deletedAt: null
   mustBmiScore: 1
   mustWeightLossScore: 1
@@ -26,4 +26,4 @@
   signedByName: "Test signedByName"
   signedAt: "2026-01-01T00:00:00Z"
   gradedAt: "2026-01-01T00:00:00Z"
-  dieticAssessmentId: 243580
+  dieticAssessmentId: "00000000-0000-4000-8000-00000003b77c"

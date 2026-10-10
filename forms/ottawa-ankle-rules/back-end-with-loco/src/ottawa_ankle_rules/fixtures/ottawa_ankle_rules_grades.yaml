@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 666894
+  id: "00000000-0000-4000-8000-0000000a2d0e"
   deletedAt: null
   unableToBearWeight: "yes"
   ankleXrayIndicated: "yes"
   footXrayIndicated: "yes"
   recommendedAction: "Test recommendedAction"
   gradedAt: "2026-01-01T00:00:00Z"
-  ottawaAnkleRulesId: 226833
+  ottawaAnkleRulesId: "00000000-0000-4000-8000-000000037611"

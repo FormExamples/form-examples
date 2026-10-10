@@ -7,35 +7,43 @@ pub struct Migration;
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, m: &SchemaManager) -> Result<(), DbErr> {
-        create_table(m, "architecture_decision_records",
+        create_table(
+            m,
+            "architecture_decision_records",
             &[
-            
-            ("id", ColType::PkAuto),
-            
-            ("slug", ColType::StringWithDefault(String::new())),
-            ("number", ColType::IntegerNull),
-            ("title", ColType::String),
-            ("decision_date", ColType::DateNull),
-            ("status", ColType::StringWithDefault("pending".to_string())),
-            ("decision_group", ColType::StringWithDefault(String::new())),
-            ("issue", ColType::TextWithDefault(String::new())),
-            ("decision", ColType::TextWithDefault(String::new())),
-            ("assumptions", ColType::TextWithDefault(String::new())),
-            ("constraints", ColType::TextWithDefault(String::new())),
-            ("argument", ColType::TextWithDefault(String::new())),
-            ("implications", ColType::TextWithDefault(String::new())),
-            ("related_decisions", ColType::TextWithDefault(String::new())),
-            ("related_requirements", ColType::TextWithDefault(String::new())),
-            ("related_artifacts", ColType::TextWithDefault(String::new())),
-            ("related_principles", ColType::TextWithDefault(String::new())),
-            ("signed_off_by", ColType::StringWithDefault(String::new())),
-            ("signed_off_at", ColType::TimestampWithTimeZoneNull),
+                ("id", ColType::PkUuid),
+                ("slug", ColType::StringWithDefault(String::new())),
+                ("number", ColType::IntegerNull),
+                ("title", ColType::String),
+                ("decision_date", ColType::DateNull),
+                ("status", ColType::StringWithDefault("pending".to_string())),
+                ("decision_group", ColType::StringWithDefault(String::new())),
+                ("issue", ColType::TextWithDefault(String::new())),
+                ("decision", ColType::TextWithDefault(String::new())),
+                ("assumptions", ColType::TextWithDefault(String::new())),
+                ("constraints", ColType::TextWithDefault(String::new())),
+                ("argument", ColType::TextWithDefault(String::new())),
+                ("implications", ColType::TextWithDefault(String::new())),
+                ("related_decisions", ColType::TextWithDefault(String::new())),
+                (
+                    "related_requirements",
+                    ColType::TextWithDefault(String::new()),
+                ),
+                ("related_artifacts", ColType::TextWithDefault(String::new())),
+                (
+                    "related_principles",
+                    ColType::TextWithDefault(String::new()),
+                ),
+                ("signed_off_by", ColType::StringWithDefault(String::new())),
+                ("signed_off_at", ColType::TimestampWithTimeZoneNull),
+                ("author_id", ColType::UuidNull),
+                ("organization_id", ColType::UuidNull),
             ],
-            &[
-            ("author", ""),
-            ("organization", ""),
-            ]
-        ).await
+            &[("author", "author_id"), ("organization", "organization_id")],
+        )
+        .await?;
+        m.get_connection().execute_unprepared("ALTER TABLE architecture_decision_records ALTER COLUMN id SET DEFAULT gen_random_uuid()").await?;
+        Ok(())
     }
 
     async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {

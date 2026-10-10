@@ -7,25 +7,40 @@ pub struct Migration;
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, m: &SchemaManager) -> Result<(), DbErr> {
-        create_table(m, "body_mass_index_and_body_surface_area_calculator_grade_flags",
+        create_table(
+            m,
+            "body_mass_index_and_body_surface_area_calculator_grade_flags",
             &[
-            
-            ("id", ColType::PkAuto),
-            
-            ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("flag_id", ColType::String),
-            ("category", ColType::StringWithDefault(String::new())),
-            ("priority", ColType::StringWithDefault(String::new())),
-            ("description", ColType::StringWithDefault(String::new())),
-            ("suggested_action", ColType::StringWithDefault(String::new())),
+                ("id", ColType::PkUuid),
+                ("deleted_at", ColType::TimestampWithTimeZoneNull),
+                ("flag_id", ColType::String),
+                ("category", ColType::StringWithDefault(String::new())),
+                ("priority", ColType::StringWithDefault(String::new())),
+                ("description", ColType::StringWithDefault(String::new())),
+                (
+                    "suggested_action",
+                    ColType::StringWithDefault(String::new()),
+                ),
+                (
+                    "body_mass_index_and_body_surface_area_calculator_grade_id",
+                    ColType::Uuid,
+                ),
             ],
-            &[
-            ("body_mass_index_and_body_surface_area_calculator_grade", ""),
-            ]
-        ).await
+            &[(
+                "body_mass_index_and_body_surface_area_calculator_grade",
+                "body_mass_index_and_body_surface_area_calculator_grade_id",
+            )],
+        )
+        .await?;
+        m.get_connection().execute_unprepared("ALTER TABLE body_mass_index_and_body_surface_area_calculator_grade_flags ALTER COLUMN id SET DEFAULT gen_random_uuid()").await?;
+        Ok(())
     }
 
     async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {
-        drop_table(m, "body_mass_index_and_body_surface_area_calculator_grade_flags").await
+        drop_table(
+            m,
+            "body_mass_index_and_body_surface_area_calculator_grade_flags",
+        )
+        .await
     }
 }

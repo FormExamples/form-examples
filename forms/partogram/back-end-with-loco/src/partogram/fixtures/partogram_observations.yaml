@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 341208
+  id: "00000000-0000-4000-8000-0000000534d8"
   deletedAt: null
   observedAt: "2026-01-01T00:00:00Z"
   cervicalDilatationCm: 1.0
@@ -21,4 +21,4 @@
   urineGlucose: "negative"
   oxytocinRate: 1.0
   drugsAndFluids: "Test drugsAndFluids"
-  partogramId: 921292
+  partogramId: "00000000-0000-4000-8000-0000000e0ecc"

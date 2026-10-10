@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 496701
+  id: "00000000-0000-4000-8000-00000007943d"
   deletedAt: null
   itemCode: "Test itemCode"
   sectionNumber: 1
@@ -8,4 +8,4 @@
   itemText: "Test itemText"
   status: "satisfactory"
   remarks: "Test remarks"
-  hospitalDailyMonitoringChecklistId: 854161
+  hospitalDailyMonitoringChecklistId: "00000000-0000-4000-8000-0000000d0891"

@@ -49,13 +49,13 @@ cargo loco generate scaffold clinician \
 
 cargo loco generate scaffold assessment \
     deleted_at:tstz \
-    patient:references \
+    patient:references:patient_id \
     status:string! \
     --api
 
 cargo loco generate scaffold assessment_performance_ratings \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     overall_performance_score:double \
     self_care_performance_score:double \
     productivity_performance_score:double \
@@ -65,7 +65,7 @@ cargo loco generate scaffold assessment_performance_ratings \
 
 cargo loco generate scaffold assessment_performance_rating_item \
     deleted_at:tstz \
-    performance_ratings:references \
+    assessment_performance_ratings:references:performance_ratings_id \
     occupational_issue:string! \
     domain:string! \
     importance_score:int \
@@ -75,7 +75,7 @@ cargo loco generate scaffold assessment_performance_rating_item \
 
 cargo loco generate scaffold assessment_satisfaction_ratings \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     overall_satisfaction_score:double \
     self_care_satisfaction_score:double \
     productivity_satisfaction_score:double \
@@ -85,7 +85,7 @@ cargo loco generate scaffold assessment_satisfaction_ratings \
 
 cargo loco generate scaffold assessment_satisfaction_rating_item \
     deleted_at:tstz \
-    satisfaction_ratings:references \
+    assessment_satisfaction_ratings:references:satisfaction_ratings_id \
     occupational_issue:string! \
     domain:string! \
     satisfaction_score:int \
@@ -94,7 +94,7 @@ cargo loco generate scaffold assessment_satisfaction_rating_item \
 
 cargo loco generate scaffold grade \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     performance_mean_score:double \
     satisfaction_mean_score:double \
     performance_category:string! \
@@ -104,7 +104,7 @@ cargo loco generate scaffold grade \
 
 cargo loco generate scaffold grading_fired_rule \
     deleted_at:tstz \
-    grade:references \
+    grade:references:grade_id \
     rule_id:string! \
     category:string! \
     description:text! \
@@ -113,7 +113,7 @@ cargo loco generate scaffold grading_fired_rule \
 
 cargo loco generate scaffold grading_additional_flag \
     deleted_at:tstz \
-    grade:references \
+    grade:references:grade_id \
     flag_id:string! \
     category:string! \
     message:text! \
@@ -124,6 +124,10 @@ cargo loco generate scaffold grading_additional_flag \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

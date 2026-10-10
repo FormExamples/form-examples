@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 591537
+  id: "00000000-0000-4000-8000-0000000906b1"
   deletedAt: null
   flagId: "Test flagId"
   category: "recent-fragility-fracture"
   priority: "low"
   description: "Test description"
   suggestedAction: "Test suggestedAction"
-  dexaBoneDensityTestRequestGradeId: 152194
+  dexaBoneDensityTestRequestGradeId: "00000000-0000-4000-8000-000000025282"

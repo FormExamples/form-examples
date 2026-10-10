@@ -9,8 +9,8 @@ use serde::{Deserialize, Serialize};
 pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
-    #[sea_orm(primary_key)]
-    pub id: i64,
+    #[sea_orm(primary_key, auto_increment = false)]
+    pub id: Uuid,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     #[sea_orm(column_type = "Double", nullable)]
     pub serum_creatinine_mg_dl: Option<f64>,
@@ -19,7 +19,7 @@ pub struct Model {
     pub g_stage: String,
     pub g_stage_label: String,
     pub graded_at: DateTimeWithTimeZone,
-    pub estimated_glomerular_filtration_rate_calculator_id: i64,
+    pub estimated_glomerular_filtration_rate_calculator_id: Uuid,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

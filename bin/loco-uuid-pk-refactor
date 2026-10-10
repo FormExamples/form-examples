@@ -1,0 +1,368 @@
+#!/usr/bin/env python3
+"""loco-uuid-pk-refactor — move every Loco crate's domain tables from Loco's
+auto-increment integer `id` to a UUIDv4 primary key (`gen_random_uuid()`),
+matching the `sql/` source of truth.
+
+Usage:
+    bin/loco-uuid-pk-refactor [--check] [--dry-run] [--all | <slug>...]
+
+What it rewrites, per `forms/<slug>/back-end-with-loco/` (the `users` table
+and the auth controller are Loco framework code and are left on integer ids):
+
+- migration/src/m*.rs (domain tables): `("id", ColType::PkAuto)` becomes
+  `ColType::PkUuid` plus an `ALTER TABLE ... SET DEFAULT gen_random_uuid()`;
+  every reference in the `refs` slice gets an explicit `ColType::Uuid` /
+  `UuidNull` column (Loco's `create_table` hard-codes integer FK columns) and
+  a named reference so the column name is pinned.
+- src/<snake>/models/_entities/*.rs: `id: i64` -> `Uuid`
+  (`auto_increment = false`); foreign-key fields -> `Uuid` / `Option<Uuid>`.
+- src/<snake>/controllers/*.rs: `Path<i64>` / `id: i64` / FK params -> `Uuid`.
+- src/<snake>/fixtures/*.yaml: integer ids and FK ids -> deterministic UUIDs
+  (`00000000-0000-4000-8000-<12 hex digits of the integer>`), preserving
+  parent/child consistency.
+- tests/requests/*.rs: the scaffold round-trip assertions read the id as a
+  UUID string instead of `as_i64`.
+
+Idempotent. `--check` exits 1 if any crate would change (CI drift detector).
+"""
+
+import argparse
+import re
+import sys
+from pathlib import Path
+
+TOP = Path(__file__).resolve().parent.parent
+FORMS = TOP / "forms"
+
+
+def snake(slug):
+    return slug.replace("-", "_")
+
+
+def pascal_to_snake(s):
+    return re.sub(r"(?<!^)(?=[A-Z])", "_", s).lower()
+
+
+def camel(s):
+    parts = s.split("_")
+    return parts[0] + "".join(p.title() for p in parts[1:])
+
+
+def int_to_uuid(n):
+    return "00000000-0000-4000-8000-%012x" % int(n)
+
+
+# --- entities -----------------------------------------------------------
+
+def entity_fk_info(text):
+    """Return [(target_module, fk_field_snake)] for each belongs_to relation.
+
+    The snake_case field name is recovered from the struct itself (matching on
+    the underscore-stripped name), because Pascal->snake loses digit
+    boundaries (`Curb65X` vs the real field `curb_65_x`)."""
+    fields = re.findall(r"pub (\w+): (?:Option<)?(?:i32|i64|Uuid)>?,", text)
+    out = []
+    for m in re.finditer(
+        r'belongs_to\s*=\s*"super::(\w+)::Entity",\s*from\s*=\s*"Column::(\w+)"', text
+    ):
+        flat = m.group(2).lower()
+        field = next((f for f in fields if f.replace("_", "") == flat), pascal_to_snake(m.group(2)))
+        out.append((m.group(1), field))
+    return out
+
+
+def rewrite_entity(text, extra=()):
+    fks = {f for _, f in entity_fk_info(text)} | set(extra)
+    new = text
+    new = re.sub(
+        r"#\[sea_orm\(primary_key\)\]\n(\s*)pub id: i(?:32|64),",
+        r"#[sea_orm(primary_key, auto_increment = false)]\n\1pub id: Uuid,",
+        new,
+    )
+    for f in fks:
+        new = re.sub(rf"pub {f}: i(?:32|64),", f"pub {f}: Uuid,", new)
+        new = re.sub(rf"pub {f}: Option<i(?:32|64)>,", f"pub {f}: Option<Uuid>,", new)
+    return new, fks
+
+
+# --- migrations ---------------------------------------------------------
+
+def target_matches(ref, module):
+    ref = ref.rstrip("?")
+    return module == ref or (module.startswith(ref) and len(module) - len(ref) <= 3)
+
+
+def singular(name):
+    if name.endswith("ies"):
+        return name[:-3] + "y"
+    if re.search(r"(ss|x|ch|sh)es$", name):
+        return name[:-2]
+    if name.endswith("s") and not name.endswith("ss"):
+        return name[:-1]
+    return name
+
+
+def match_paren(text, open_idx):
+    """Index of the ')' matching the '(' at open_idx, skipping string literals."""
+    depth, i, n = 0, open_idx, len(text)
+    while i < n:
+        c = text[i]
+        if c == '"':
+            i += 1
+            while text[i] != '"':
+                i += 2 if text[i] == "\\" else 1
+        elif c in "([":
+            depth += 1
+        elif c in ")]":
+            depth -= 1
+            if depth == 0:
+                return i
+        i += 1
+    return -1
+
+
+def split_args(body):
+    args, depth, cur, i = [], 0, "", 0
+    while i < len(body):
+        c = body[i]
+        if c == '"':
+            j = i + 1
+            while body[j] != '"':
+                j += 2 if body[j] == "\\" else 1
+            cur += body[i:j + 1]
+            i = j + 1
+            continue
+        if c in "([":
+            depth += 1
+        elif c in ")]":
+            depth -= 1
+        if c == "," and depth == 0:
+            args.append(cur)
+            cur = ""
+        else:
+            cur += c
+        i += 1
+    if cur.strip():
+        args.append(cur)
+    return args
+
+
+def rewrite_migration(text, fk_info, errors, name):
+    if "ColType::PkUuid" in text:
+        return text
+    m = re.search(r"\bcreate_table\(", text)
+    if not m or "ColType::PkAuto" not in text:
+        errors.append(f"{name}: no create_table with PkAuto")
+        return text
+    open_idx = m.end() - 1
+    close_idx = match_paren(text, open_idx)
+    args = split_args(text[open_idx + 1:close_idx])
+    if len(args) < 4:
+        errors.append(f"{name}: create_table has {len(args)} args")
+        return text
+    table = re.search(r'"([^"]+)"', args[1]).group(1)
+    cols = args[2]
+    refs = re.findall(r'\(\s*"([^"]*)",\s*"([^"]*)",?\s*\)', args[3])
+    used = set()
+    new_refs, new_cols = [], []
+    for frm, nm in refs:
+        col = nm
+        if not col:
+            for i, (tmod, f) in enumerate(fk_info):
+                if i not in used and target_matches(frm, tmod):
+                    used.add(i)
+                    col = f
+                    break
+        if not col:
+            col = singular(frm.rstrip("?")) + "_id"
+        new_refs.append((frm, col))
+        new_cols.append((col, "UuidNull" if frm.endswith("?") else "Uuid"))
+    cols = cols.replace("ColType::PkAuto", "ColType::PkUuid", 1)
+    end = cols.rindex("]")
+    head = cols[:end].rstrip()
+    if not head.endswith(","):
+        head += ","
+    add = "".join(f'\n("{c}", ColType::{t}),' for c, t in new_cols)
+    cols = head + add + "\n]"
+    refs_txt = "&[" + ", ".join(f'("{a}", "{b}")' for a, b in new_refs) + "]"
+    new_call = f"create_table(m, {args[1].strip()}, {cols.strip()}, {refs_txt})"
+    stmt = (
+        f'm.get_connection().execute_unprepared("ALTER TABLE {table} ALTER COLUMN id '
+        f'SET DEFAULT gen_random_uuid()").await?;'
+    )
+    rest = text[close_idx + 1:]
+    mm = re.match(r"\s*\.await(\?;|)", rest)
+    if not mm:
+        errors.append(f"{name}: unrecognised create_table tail")
+        return text
+    if mm.group(1):  # `.await?;` — more statements follow
+        tail = f".await?;\n{stmt}" + rest[mm.end():]
+    else:  # `.await` is the tail expression of up()
+        tail = f".await?;\n{stmt}\nOk(())" + rest[mm.end():]
+    return text[:m.start()] + new_call + tail
+
+
+# --- controllers --------------------------------------------------------
+
+def rewrite_controller(text, fks):
+    new = text.replace("Path<i64>", "Path<Uuid>").replace("Path<i32>", "Path<Uuid>")
+    new = re.sub(r"(async fn load_item\([^)]*?\bid): i(?:32|64)", r"\1: Uuid", new)
+    for f in fks:
+        new = re.sub(rf"^(\s*(?:pub )?{f}): i(?:32|64),", r"\1: Uuid,", new, flags=re.M)
+        new = re.sub(rf"^(\s*(?:pub )?{f}): Option<i(?:32|64)>,", r"\1: Option<Uuid>,", new, flags=re.M)
+    return new
+
+
+# --- fixtures -----------------------------------------------------------
+
+def rewrite_fixture(text, fks):
+    keys = ["id"] + [camel(f) for f in fks]
+    for k in keys:
+        text = re.sub(
+            rf"^(\s*(?:- )?{k}: )(\d+)\s*$",
+            lambda m: m.group(1) + '"' + int_to_uuid(m.group(2)) + '"',
+            text,
+            flags=re.M,
+        )
+    return text
+
+
+# --- tests --------------------------------------------------------------
+
+TEST_SUBS = [
+    (
+        '''        let id = created
+            .get("id")
+            .and_then(Value::as_i64)
+            .expect("create response should carry a numeric id");
+        assert!(id > 0, "id should be a positive integer, got {id}");''',
+        '''        let id = created
+            .get("id")
+            .and_then(Value::as_str)
+            .expect("create response should carry a UUID id")
+            .to_owned();
+        assert!(
+            uuid::Uuid::parse_str(&id).is_ok(),
+            "id should be a UUID, got {id}"
+        );''',
+    ),
+    ('assert_eq!(fetched["id"].as_i64(), Some(id));', 'assert_eq!(fetched["id"].as_str(), Some(id.as_str()));'),
+    (
+        '.any(|row| row.get("id").and_then(Value::as_i64) == Some(id)),',
+        '.any(|row| row.get("id").and_then(Value::as_str) == Some(id.as_str())),',
+    ),
+]
+
+
+def rewrite_test(text):
+    for a, b in TEST_SUBS:
+        text = text.replace(a, b)
+    return text
+
+
+# --- driver -------------------------------------------------------------
+
+def process(slug, dry):
+    crate = FORMS / slug / "back-end-with-loco"
+    if not (crate / "Cargo.toml").exists():
+        return None
+    sn = snake(slug)
+    src = crate / "src" / sn
+    changes, errors = {}, []
+    if not src.is_dir():
+        return [], [f"{slug}: no src/{sn}"]
+
+    # pass 1: entity relation info (read-only)
+    ents = {}
+    for p in sorted((src / "models" / "_entities").glob("*.rs")):
+        if p.stem in ("users", "mod", "prelude"):
+            continue
+        t = p.read_text()
+        ents[p.stem] = (p, t, entity_fk_info(t))
+
+    # pass 2: migrations; also learn each table's FK columns from the result
+    mig_fks = {}
+    for p in sorted((crate / "migration" / "src").glob("m*.rs")):
+        if p.name.endswith("_users.rs"):
+            continue
+        t = p.read_text()
+        mt = re.search(r'create_table\(\s*m,\s*"([^"]+)"', t)
+        if not mt:
+            continue
+        info = ents.get(mt.group(1), (None, "", []))[2]
+        new = rewrite_migration(t, info, errors, f"{slug}/{p.name}")
+        if new != t:
+            changes[p] = new
+        mig_fks[mt.group(1)] = set(re.findall(r'"(\w+)",\s*ColType::Uuid(?:Null)?', new)) - {"id"}
+
+    fk_by_module = {}
+    for mod, (p, t, info) in ents.items():
+        fks = {f for _, f in info} | mig_fks.get(mod, set())
+        fk_by_module[mod] = (info, fks)
+        new, _ = rewrite_entity(t, fks)
+        if new != t:
+            changes[p] = new
+
+    for p in sorted((src / "controllers").glob("*.rs")):
+        if p.stem in ("auth", "mod", "openapi"):
+            continue
+        t = p.read_text()
+        fks = set().union(*(v[1] for v in fk_by_module.values())) if fk_by_module else set()
+        new = rewrite_controller(t, fks)
+        if new != t:
+            changes[p] = new
+
+    for p in sorted((src / "fixtures").glob("*.yaml")):
+        if p.stem == "users":
+            continue
+        fks = fk_by_module.get(p.stem, ([], set()))[1]
+        t = p.read_text()
+        new = rewrite_fixture(t, fks)
+        if new != t:
+            changes[p] = new
+
+    tdir = crate / "tests" / "requests"
+    if tdir.is_dir():
+        for p in sorted(tdir.glob("*.rs")):
+            t = p.read_text()
+            new = rewrite_test(t)
+            if new != t:
+                changes[p] = new
+
+    if not dry:
+        for p, new in changes.items():
+            p.write_text(new)
+    return list(changes), errors
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("slugs", nargs="*")
+    ap.add_argument("--all", action="store_true")
+    ap.add_argument("--check", action="store_true")
+    ap.add_argument("--dry-run", action="store_true")
+    a = ap.parse_args()
+    slugs = a.slugs or sorted(d.name for d in FORMS.iterdir() if (d / "back-end-with-loco" / "Cargo.toml").exists())
+    if not slugs:
+        ap.error("no slugs")
+    drift, errs, files = [], [], 0
+    for s in slugs:
+        r = process(s, a.check or a.dry_run)
+        if r is None:
+            continue
+        ch, er = r
+        errs += er
+        if ch:
+            drift.append(s)
+            files += len(ch)
+    verb = "would change" if (a.check or a.dry_run) else "changed"
+    print(f"loco-uuid-pk-refactor: {verb} {files} file(s) in {len(drift)} crate(s); {len(errs)} problem(s)")
+    for e in errs[:40]:
+        print("  PROBLEM", e, file=sys.stderr)
+    if a.check and (drift or errs):
+        return 1
+    return 1 if errs else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

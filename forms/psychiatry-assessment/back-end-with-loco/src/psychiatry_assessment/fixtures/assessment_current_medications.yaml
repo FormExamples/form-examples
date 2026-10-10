@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 252083
+  id: "00000000-0000-4000-8000-00000003d8b3"
   deletedAt: null
   takesPsychiatricMedications: "Test takesPsychiatricMedications"
   takesOtherMedications: "Test takesOtherMedications"
@@ -12,4 +12,4 @@
   depotDetails: "Test depotDetails"
   adverseDrugReactions: "Test adverseDrugReactions"
   additionalNotes: "Test additionalNotes"
-  assessmentId: 382547
+  assessmentId: "00000000-0000-4000-8000-00000005d653"

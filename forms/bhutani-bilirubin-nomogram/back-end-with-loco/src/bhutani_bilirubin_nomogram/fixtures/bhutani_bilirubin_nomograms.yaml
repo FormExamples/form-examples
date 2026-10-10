@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 387821
+  id: "00000000-0000-4000-8000-00000005eaed"
   deletedAt: null
   clinicianName: "Test clinicianName"
   clinicianRole: "midwife"
@@ -20,5 +20,5 @@
   bloodGroupIncompatibility: "yes"
   earlyOnsetUnder24h: "yes"
   clinicalNote: "Test clinicalNote"
-  patientId: 116634
+  patientId: "00000000-0000-4000-8000-00000001c79a"
   clinicianId: null

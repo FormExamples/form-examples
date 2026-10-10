@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 420506
+  id: "00000000-0000-4000-8000-000000066a9a"
   deletedAt: null
   resultClassification: "normal"
   abnormalitySeverity: "none"
@@ -13,4 +13,4 @@
   clinicianNotes: "Test clinicianNotes"
   signedAt: "2026-01-01T00:00:00Z"
   gradedAt: "2026-01-01T00:00:00Z"
-  ambulatoryBloodPressureTestResultId: 289764
+  ambulatoryBloodPressureTestResultId: "00000000-0000-4000-8000-000000046be4"

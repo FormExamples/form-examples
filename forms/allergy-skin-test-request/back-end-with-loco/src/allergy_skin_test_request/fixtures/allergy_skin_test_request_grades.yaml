@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 420944
+  id: "00000000-0000-4000-8000-000000066c50"
   deletedAt: null
   appropriatenessScore: 1
   appropriatenessBand: "usually-appropriate"
@@ -12,4 +12,4 @@
   clinicianNotes: "Test clinicianNotes"
   signedAt: "2026-01-01T00:00:00Z"
   gradedAt: "2026-01-01T00:00:00Z"
-  allergySkinTestRequestId: 506122
+  allergySkinTestRequestId: "00000000-0000-4000-8000-00000007b90a"

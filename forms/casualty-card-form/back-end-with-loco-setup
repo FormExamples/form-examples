@@ -49,7 +49,7 @@ cargo loco generate scaffold clinician \
 
 cargo loco generate scaffold casualty_card \
     deleted_at:tstz \
-    patient:references \
+    patient:references:patient_id \
     status:text! \
     attendance_date:date \
     arrival_time:tstz \
@@ -57,7 +57,7 @@ cargo loco generate scaffold casualty_card \
 
 cargo loco generate scaffold casualty_card_demographics \
     deleted_at:tstz \
-    casualty_card:references \
+    casualty_card:references:casualty_card_id \
     address:text! \
     postcode:text! \
     phone:text! \
@@ -69,7 +69,7 @@ cargo loco generate scaffold casualty_card_demographics \
 
 cargo loco generate scaffold casualty_card_next_of_kin \
     deleted_at:tstz \
-    casualty_card:references \
+    casualty_card:references:casualty_card_id \
     name:text! \
     relationship:text! \
     phone:text! \
@@ -78,7 +78,7 @@ cargo loco generate scaffold casualty_card_next_of_kin \
 
 cargo loco generate scaffold casualty_card_gp \
     deleted_at:tstz \
-    casualty_card:references \
+    casualty_card:references:casualty_card_id \
     name:text! \
     practice_name:text! \
     practice_address:text! \
@@ -87,7 +87,7 @@ cargo loco generate scaffold casualty_card_gp \
 
 cargo loco generate scaffold casualty_card_arrival_triage \
     deleted_at:tstz \
-    casualty_card:references \
+    casualty_card:references:casualty_card_id \
     attendance_category:text! \
     arrival_mode:text! \
     referral_source:text! \
@@ -101,7 +101,7 @@ cargo loco generate scaffold casualty_card_arrival_triage \
 
 cargo loco generate scaffold casualty_card_presenting_complaint \
     deleted_at:tstz \
-    casualty_card:references \
+    casualty_card:references:casualty_card_id \
     chief_complaint:text! \
     history_of_presenting_complaint:text! \
     onset:text! \
@@ -119,7 +119,7 @@ cargo loco generate scaffold casualty_card_presenting_complaint \
 
 cargo loco generate scaffold casualty_card_pain_assessment \
     deleted_at:tstz \
-    casualty_card:references \
+    casualty_card:references:casualty_card_id \
     pain_present:text! \
     pain_score:int \
     pain_location:text! \
@@ -130,7 +130,7 @@ cargo loco generate scaffold casualty_card_pain_assessment \
 
 cargo loco generate scaffold casualty_card_medical_history \
     deleted_at:tstz \
-    casualty_card:references \
+    casualty_card:references:casualty_card_id \
     past_medical_history:text! \
     past_surgical_history:text! \
     tetanus_status:text! \
@@ -142,7 +142,7 @@ cargo loco generate scaffold casualty_card_medical_history \
 
 cargo loco generate scaffold casualty_card_medication \
     deleted_at:tstz \
-    casualty_card:references \
+    casualty_card:references:casualty_card_id \
     name:text! \
     dose:text! \
     frequency:text! \
@@ -151,7 +151,7 @@ cargo loco generate scaffold casualty_card_medication \
 
 cargo loco generate scaffold casualty_card_allergy \
     deleted_at:tstz \
-    casualty_card:references \
+    casualty_card:references:casualty_card_id \
     allergen:text! \
     reaction:text! \
     severity:text! \
@@ -160,7 +160,7 @@ cargo loco generate scaffold casualty_card_allergy \
 
 cargo loco generate scaffold casualty_card_vital_signs \
     deleted_at:tstz \
-    casualty_card:references \
+    casualty_card:references:casualty_card_id \
     heart_rate:int \
     systolic_bp:int \
     diastolic_bp:int \
@@ -181,7 +181,7 @@ cargo loco generate scaffold casualty_card_vital_signs \
 
 cargo loco generate scaffold casualty_card_primary_survey \
     deleted_at:tstz \
-    casualty_card:references \
+    casualty_card:references:casualty_card_id \
     airway_status:text! \
     airway_adjuncts:text! \
     c_spine_immobilised:text! \
@@ -209,7 +209,7 @@ cargo loco generate scaffold casualty_card_primary_survey \
 
 cargo loco generate scaffold casualty_card_clinical_examination \
     deleted_at:tstz \
-    casualty_card:references \
+    casualty_card:references:casualty_card_id \
     general_appearance:text! \
     head_and_face:text! \
     neck:text! \
@@ -226,7 +226,7 @@ cargo loco generate scaffold casualty_card_clinical_examination \
 
 cargo loco generate scaffold casualty_card_investigations \
     deleted_at:tstz \
-    casualty_card:references \
+    casualty_card:references:casualty_card_id \
     blood_tests:text! \
     urinalysis:text! \
     pregnancy_test:text! \
@@ -237,7 +237,7 @@ cargo loco generate scaffold casualty_card_investigations \
 
 cargo loco generate scaffold casualty_card_treatment \
     deleted_at:tstz \
-    casualty_card:references \
+    casualty_card:references:casualty_card_id \
     oxygen_therapy_device:text! \
     oxygen_therapy_flow_rate:text! \
     tetanus_prophylaxis:text! \
@@ -245,7 +245,7 @@ cargo loco generate scaffold casualty_card_treatment \
 
 cargo loco generate scaffold casualty_card_assessment_plan \
     deleted_at:tstz \
-    casualty_card:references \
+    casualty_card:references:casualty_card_id \
     working_diagnosis:text! \
     differential_diagnoses:text! \
     clinical_impression:text! \
@@ -254,7 +254,7 @@ cargo loco generate scaffold casualty_card_assessment_plan \
 
 cargo loco generate scaffold casualty_card_disposition \
     deleted_at:tstz \
-    casualty_card:references \
+    casualty_card:references:casualty_card_id \
     disposition:text! \
     admitting_specialty:text! \
     admitting_consultant:text! \
@@ -274,7 +274,7 @@ cargo loco generate scaffold casualty_card_disposition \
 
 cargo loco generate scaffold casualty_card_safeguarding_consent \
     deleted_at:tstz \
-    casualty_card:references \
+    casualty_card:references:casualty_card_id \
     safeguarding_concern:text! \
     safeguarding_type:text! \
     referral_made:text! \
@@ -289,7 +289,7 @@ cargo loco generate scaffold casualty_card_safeguarding_consent \
 
 cargo loco generate scaffold news2_result \
     deleted_at:tstz \
-    casualty_card:references \
+    casualty_card:references:casualty_card_id \
     total_score:int! \
     clinical_response:text! \
     has_any_single_score_3:bool! \
@@ -299,7 +299,7 @@ cargo loco generate scaffold news2_result \
 
 cargo loco generate scaffold flagged_issue \
     deleted_at:tstz \
-    news2_result:references \
+    news2_result:references:news2_result_id \
     flag_id:text! \
     category:text! \
     message:text! \
@@ -310,6 +310,10 @@ cargo loco generate scaffold flagged_issue \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

@@ -13,8 +13,8 @@ pub struct Model {
     /// Updated at.
     pub updated_at: DateTimeWithTimeZone,
     /// ID.
-    #[sea_orm(primary_key)]
-    pub id: i64,
+    #[sea_orm(primary_key, auto_increment = false)]
+    pub id: Uuid,
     /// Noted at.
     pub noted_at: DateTimeWithTimeZone,
     /// Noted by.
@@ -23,7 +23,7 @@ pub struct Model {
     #[sea_orm(column_type = "Text")]
     pub body: String,
     /// Architecture decision record ID.
-    pub architecture_decision_record_id: i64,
+    pub architecture_decision_record_id: Uuid,
 }
 
 /// Relation.

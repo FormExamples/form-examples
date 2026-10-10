@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 233468
+  id: "00000000-0000-4000-8000-000000038ffc"
   deletedAt: null
   total24hVolumeMl: 1.0
   first8hVolumeMl: 1.0
@@ -12,4 +12,4 @@
   urineOutputTargetMinMlH: 1.0
   urineOutputTargetMaxMlH: 1.0
   gradedAt: "2026-01-01T00:00:00Z"
-  parklandFormulaForBurnsId: 655168
+  parklandFormulaForBurnsId: "00000000-0000-4000-8000-00000009ff40"

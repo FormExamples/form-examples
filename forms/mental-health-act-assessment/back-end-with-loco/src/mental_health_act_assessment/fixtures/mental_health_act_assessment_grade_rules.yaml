@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 342964
+  id: "00000000-0000-4000-8000-000000053bb4"
   deletedAt: null
   ruleId: "Test ruleId"
   section: "signatories"
   category: "Test category"
   description: "Test description"
-  mentalHealthActAssessmentGradeId: 186565
+  mentalHealthActAssessmentGradeId: "00000000-0000-4000-8000-00000002d8c5"

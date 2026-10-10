@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 301722
+  id: "00000000-0000-4000-8000-000000049a9a"
   deletedAt: null
   heartRate: 1
   systolicBp: 1
@@ -18,4 +18,4 @@
   pupilRightReactive: "yes"
   capillaryRefillTime: "Test capillaryRefillTime"
   weight: 1.0
-  casualtyCardId: 233761
+  casualtyCardId: "00000000-0000-4000-8000-000000039121"

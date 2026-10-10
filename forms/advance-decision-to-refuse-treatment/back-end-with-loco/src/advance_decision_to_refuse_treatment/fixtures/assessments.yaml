@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 426756
+  id: "00000000-0000-4000-8000-000000068304"
   deletedAt: null
   status: "Test status"
   fullName: "Test fullName"
@@ -84,4 +84,4 @@
   secondWitnessSignatureObtained: "Test secondWitnessSignatureObtained"
   declarationStatementAgreed: "Test declarationStatementAgreed"
   legalNotes: "Test legalNotes"
-  patientId: 404886
+  patientId: "00000000-0000-4000-8000-000000062d96"

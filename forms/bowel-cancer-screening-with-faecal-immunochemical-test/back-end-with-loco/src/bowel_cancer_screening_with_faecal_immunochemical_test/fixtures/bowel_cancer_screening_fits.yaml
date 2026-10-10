@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 865896
+  id: "00000000-0000-4000-8000-0000000d3668"
   deletedAt: null
   reviewedAt: "2026-01-01T00:00:00Z"
   screeningHub: "Test screeningHub"
@@ -21,5 +21,5 @@
   redFlagSymptoms: "yes"
   clinicalNote: "Test clinicalNote"
   context: "Test context"
-  patientId: 276312
+  patientId: "00000000-0000-4000-8000-000000043758"
   clinicianId: null

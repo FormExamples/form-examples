@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 518463
+  id: "00000000-0000-4000-8000-00000007e93f"
   deletedAt: null
   flagId: "Test flagId"
   category: "severe-anaemia"
@@ -8,4 +8,4 @@
   domain: "Test domain"
   description: "Test description"
   suggestedAction: "Test suggestedAction"
-  perioperativeOptimizationGradeId: 272849
+  perioperativeOptimizationGradeId: "00000000-0000-4000-8000-0000000429d1"

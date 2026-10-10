@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 237728
+  id: "00000000-0000-4000-8000-00000003a0a0"
   deletedAt: null
   ruleId: "Test ruleId"
   axis: "appropriateness"
   category: "Test category"
   description: "Test description"
-  sleepStudyTestRequestGradeId: 282884
+  sleepStudyTestRequestGradeId: "00000000-0000-4000-8000-000000045104"

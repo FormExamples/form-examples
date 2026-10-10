@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 986710
+  id: "00000000-0000-4000-8000-0000000f0e56"
   deletedAt: null
   respirationScore: 1
   coagulationScore: 1
@@ -13,4 +13,4 @@
   mortalityBand: "low"
   sepsis3: true
   gradedAt: "2026-01-01T00:00:00Z"
-  sequentialOrganFailureAssessmentId: 600180
+  sequentialOrganFailureAssessmentId: "00000000-0000-4000-8000-000000092874"

@@ -48,8 +48,8 @@ cargo loco generate scaffold clinician \
 
 cargo loco generate scaffold recognition_of_stroke_in_the_emergency_room \
     deleted_at:tstz \
-    patient:references \
-    clinician:references \
+    patient:references:patient_id \
+    clinician:references:clinician_id \
     clinician_name:string! \
     clinician_role:string! \
     assessed_at:tstz \
@@ -72,7 +72,7 @@ cargo loco generate scaffold recognition_of_stroke_in_the_emergency_room \
 
 cargo loco generate scaffold recognition_of_stroke_in_the_emergency_room_grade \
     deleted_at:tstz \
-    recognition_of_stroke_in_the_emergency_room:references \
+    recognition_of_stroke_in_the_emergency_room:references:recognition_of_stroke_in_the_emergency_room_id \
     rosier_score:int \
     stroke_likely:string! \
     glucose_excluded:string! \
@@ -81,7 +81,7 @@ cargo loco generate scaffold recognition_of_stroke_in_the_emergency_room_grade \
 
 cargo loco generate scaffold recognition_of_stroke_in_the_emergency_room_grade_rule \
     deleted_at:tstz \
-    recognition_of_stroke_in_the_emergency_room_grade:references \
+    recognition_of_stroke_in_the_emergency_room_grade:references:recognition_of_stroke_in_the_emergency_room_grade_id \
     rule_id:string! \
     criterion:string! \
     points:int \
@@ -91,7 +91,7 @@ cargo loco generate scaffold recognition_of_stroke_in_the_emergency_room_grade_r
 
 cargo loco generate scaffold recognition_of_stroke_in_the_emergency_room_grade_flag \
     deleted_at:tstz \
-    recognition_of_stroke_in_the_emergency_room_grade:references \
+    recognition_of_stroke_in_the_emergency_room_grade:references:recognition_of_stroke_in_the_emergency_room_grade_id \
     flag_id:string! \
     category:string! \
     priority:string! \
@@ -103,6 +103,10 @@ cargo loco generate scaffold recognition_of_stroke_in_the_emergency_room_grade_f
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

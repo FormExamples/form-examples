@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 673855
+  id: "00000000-0000-4000-8000-0000000a483f"
   deletedAt: null
   appointmentDate: "1990-01-01"
   appointmentTime: "Test appointmentTime"
@@ -15,4 +15,4 @@
   status: "scheduled"
   travelNotes: "Test travelNotes"
   accessNotes: "Test accessNotes"
-  omfsWaitingListCardId: 801723
+  omfsWaitingListCardId: "00000000-0000-4000-8000-0000000c3bbb"

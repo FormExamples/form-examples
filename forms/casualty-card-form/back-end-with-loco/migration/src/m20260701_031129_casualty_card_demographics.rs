@@ -7,24 +7,32 @@ pub struct Migration;
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, m: &SchemaManager) -> Result<(), DbErr> {
-        create_table(m, "casualty_card_demographics",
+        create_table(
+            m,
+            "casualty_card_demographics",
             &[
-            
-            ("id", ColType::PkAuto),
-            
-            ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("address", ColType::TextWithDefault(String::new())),
-            ("postcode", ColType::TextWithDefault(String::new())),
-            ("phone", ColType::TextWithDefault(String::new())),
-            ("email", ColType::TextWithDefault(String::new())),
-            ("ethnicity", ColType::TextWithDefault(String::new())),
-            ("preferred_language", ColType::TextWithDefault(String::new())),
-            ("interpreter_required", ColType::TextWithDefault(String::new())),
+                ("id", ColType::PkUuid),
+                ("deleted_at", ColType::TimestampWithTimeZoneNull),
+                ("address", ColType::TextWithDefault(String::new())),
+                ("postcode", ColType::TextWithDefault(String::new())),
+                ("phone", ColType::TextWithDefault(String::new())),
+                ("email", ColType::TextWithDefault(String::new())),
+                ("ethnicity", ColType::TextWithDefault(String::new())),
+                (
+                    "preferred_language",
+                    ColType::TextWithDefault(String::new()),
+                ),
+                (
+                    "interpreter_required",
+                    ColType::TextWithDefault(String::new()),
+                ),
+                ("casualty_card_id", ColType::Uuid),
             ],
-            &[
-            ("casualty_card", ""),
-            ]
-        ).await
+            &[("casualty_card", "casualty_card_id")],
+        )
+        .await?;
+        m.get_connection().execute_unprepared("ALTER TABLE casualty_card_demographics ALTER COLUMN id SET DEFAULT gen_random_uuid()").await?;
+        Ok(())
     }
 
     async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {

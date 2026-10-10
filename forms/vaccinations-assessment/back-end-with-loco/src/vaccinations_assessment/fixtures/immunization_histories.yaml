@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 429645
+  id: "00000000-0000-4000-8000-000000068e4d"
   deletedAt: null
   hasVaccinationRecord: "Test hasVaccinationRecord"
   recordSource: "Test recordSource"
@@ -9,4 +9,4 @@
   adverseReactionDetails: "Test adverseReactionDetails"
   immunocompromised: "Test immunocompromised"
   immunocompromisedDetails: "Test immunocompromisedDetails"
-  assessmentId: 174864
+  assessmentId: "00000000-0000-4000-8000-00000002ab10"

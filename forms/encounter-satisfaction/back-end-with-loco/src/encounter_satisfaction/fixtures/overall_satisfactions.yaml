@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 319582
+  id: "00000000-0000-4000-8000-00000004e05e"
   deletedAt: null
   overallRating: 1
   likelyToRecommend: 1
   likelyToReturn: 1
   comments: "Test comments"
-  encounterSatisfactionId: 670200
+  encounterSatisfactionId: "00000000-0000-4000-8000-0000000a39f8"

@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 221163
+  id: "00000000-0000-4000-8000-000000035feb"
   deletedAt: null
   ruleId: "Test ruleId"
   stage: "eligibility"
   category: "Test category"
   description: "Test description"
-  cervicalScreeningGradeId: 527686
+  cervicalScreeningGradeId: "00000000-0000-4000-8000-000000080d46"

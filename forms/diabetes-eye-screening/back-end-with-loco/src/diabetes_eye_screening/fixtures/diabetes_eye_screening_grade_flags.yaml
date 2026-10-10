@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 654186
+  id: "00000000-0000-4000-8000-00000009fb6a"
   deletedAt: null
   flagId: "Test flagId"
   category: "active-proliferative"
   priority: "low"
   description: "Test description"
   suggestedAction: "Test suggestedAction"
-  diabetesEyeScreeningGradeId: 698452
+  diabetesEyeScreeningGradeId: "00000000-0000-4000-8000-0000000aa854"

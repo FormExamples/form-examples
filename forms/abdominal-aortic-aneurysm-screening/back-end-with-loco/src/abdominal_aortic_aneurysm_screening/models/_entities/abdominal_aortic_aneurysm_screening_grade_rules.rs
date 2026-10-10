@@ -9,14 +9,14 @@ use serde::{Deserialize, Serialize};
 pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
-    #[sea_orm(primary_key)]
-    pub id: i64,
+    #[sea_orm(primary_key, auto_increment = false)]
+    pub id: Uuid,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub rule_id: String,
     pub stage: String,
     pub category: String,
     pub description: String,
-    pub abdominal_aortic_aneurysm_screening_grade_id: i64,
+    pub abdominal_aortic_aneurysm_screening_grade_id: Uuid,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

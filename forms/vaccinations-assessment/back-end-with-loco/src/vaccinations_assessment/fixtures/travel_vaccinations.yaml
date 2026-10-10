@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 781425
+  id: "00000000-0000-4000-8000-0000000bec71"
   deletedAt: null
   travelPlanned: "yes"
   travelDestination: "Test travelDestination"
@@ -10,4 +10,4 @@
   yellowFever: 1
   rabies: 1
   japaneseEncephalitis: 1
-  assessmentId: 174864
+  assessmentId: "00000000-0000-4000-8000-00000002ab10"

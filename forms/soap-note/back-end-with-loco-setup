@@ -48,8 +48,8 @@ cargo loco generate scaffold clinician \
 
 cargo loco generate scaffold soap_note \
     deleted_at:tstz \
-    patient:references \
-    clinician:references \
+    patient:references:patient_id \
+    clinician:references:clinician_id \
     encountered_at:tstz \
     care_setting:string! \
     encounter_type:string! \
@@ -79,7 +79,7 @@ cargo loco generate scaffold soap_note \
 
 cargo loco generate scaffold soap_note_grade \
     deleted_at:tstz \
-    soap_note:references \
+    soap_note:references:soap_note_id \
     status:string! \
     completeness_percent:int \
     subjective_present:string! \
@@ -91,7 +91,7 @@ cargo loco generate scaffold soap_note_grade \
 
 cargo loco generate scaffold soap_note_grade_rule \
     deleted_at:tstz \
-    soap_note_grade:references \
+    soap_note_grade:references:soap_note_grade_id \
     rule_id:string! \
     section:string! \
     category:string! \
@@ -100,7 +100,7 @@ cargo loco generate scaffold soap_note_grade_rule \
 
 cargo loco generate scaffold soap_note_grade_flag \
     deleted_at:tstz \
-    soap_note_grade:references \
+    soap_note_grade:references:soap_note_grade_id \
     flag_id:string! \
     category:string! \
     priority:string! \
@@ -112,6 +112,10 @@ cargo loco generate scaffold soap_note_grade_flag \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

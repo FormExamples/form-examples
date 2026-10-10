@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 226833
+  id: "00000000-0000-4000-8000-000000037611"
   deletedAt: null
   status: "draft"
   patientIdentifier: "Test patientIdentifier"
@@ -20,5 +20,5 @@
   ableToBearWeightImmediately: "yes"
   ableToBearWeightNow: "yes"
   clinicalNotes: "Test clinicalNotes"
-  patientId: 677255
+  patientId: "00000000-0000-4000-8000-0000000a5587"
   clinicianId: null

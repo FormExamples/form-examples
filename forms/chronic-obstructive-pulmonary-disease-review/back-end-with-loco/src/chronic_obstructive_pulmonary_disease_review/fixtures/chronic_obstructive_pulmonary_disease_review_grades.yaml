@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 229591
+  id: "00000000-0000-4000-8000-0000000380d7"
   deletedAt: null
   goldAirflowGrade: "1"
   symptomBurden: "low"
@@ -8,4 +8,4 @@
   abeGroup: "A"
   reviewStatus: "complete"
   gradedAt: "2026-01-01T00:00:00Z"
-  chronicObstructivePulmonaryDiseaseReviewId: 773458
+  chronicObstructivePulmonaryDiseaseReviewId: "00000000-0000-4000-8000-0000000bcd52"

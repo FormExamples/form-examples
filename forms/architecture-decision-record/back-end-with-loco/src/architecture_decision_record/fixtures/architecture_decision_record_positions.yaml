@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 506773
+  id: "00000000-0000-4000-8000-00000007bb95"
   ordinal: 1
   name: "Test Patient"
   description: "Test description"
@@ -8,4 +8,4 @@
   isChosen: true
   pros: "Test pros"
   cons: "Test cons"
-  architectureDecisionRecordId: 594366
+  architectureDecisionRecordId: "00000000-0000-4000-8000-0000000911be"

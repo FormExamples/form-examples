@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 392256
+  id: "00000000-0000-4000-8000-00000005fc40"
   deletedAt: null
   ruleId: "Test ruleId"
   axis: "classification"
   category: "Test category"
   description: "Test description"
-  microbiologyCultureTestResultGradeId: 398579
+  microbiologyCultureTestResultGradeId: "00000000-0000-4000-8000-0000000614f3"

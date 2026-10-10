@@ -49,13 +49,13 @@ cargo loco generate scaffold clinician \
 
 cargo loco generate scaffold assessment \
     deleted_at:tstz \
-    patient:references \
+    patient:references:patient_id \
     status:string! \
     --api
 
 cargo loco generate scaffold demographics_ethnicity \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     age:int \
     sex:string! \
     ethnicity:string! \
@@ -64,7 +64,7 @@ cargo loco generate scaffold demographics_ethnicity \
 
 cargo loco generate scaffold blood_pressure \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     systolic_bp:int \
     systolic_bp_sd:double \
     diastolic_bp:int \
@@ -74,7 +74,7 @@ cargo loco generate scaffold blood_pressure \
 
 cargo loco generate scaffold cholesterol \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     total_cholesterol:double \
     hdl_cholesterol:double \
     total_hdl_ratio:double \
@@ -83,7 +83,7 @@ cargo loco generate scaffold cholesterol \
 
 cargo loco generate scaffold medical_conditions \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     has_diabetes:string! \
     has_atrial_fibrillation:string! \
     has_rheumatoid_arthritis:string! \
@@ -97,7 +97,7 @@ cargo loco generate scaffold medical_conditions \
 
 cargo loco generate scaffold family_history \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     family_cvd_under_60:string! \
     family_cvd_relationship:string! \
     family_diabetes_history:string! \
@@ -105,7 +105,7 @@ cargo loco generate scaffold family_history \
 
 cargo loco generate scaffold smoking_alcohol \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     smoking_status:string! \
     cigarettes_per_day:int \
     years_since_quit:int \
@@ -115,7 +115,7 @@ cargo loco generate scaffold smoking_alcohol \
 
 cargo loco generate scaffold physical_activity_diet \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     physical_activity_minutes_per_week:int \
     activity_intensity:string! \
     fruit_veg_portions_per_day:int \
@@ -125,7 +125,7 @@ cargo loco generate scaffold physical_activity_diet \
 
 cargo loco generate scaffold body_measurements \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     height_cm:double \
     weight_kg:double \
     bmi:double \
@@ -134,7 +134,7 @@ cargo loco generate scaffold body_measurements \
 
 cargo loco generate scaffold review_calculate \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     clinician_name:string! \
     review_date:date \
     clinical_notes:text! \
@@ -143,7 +143,7 @@ cargo loco generate scaffold review_calculate \
 
 cargo loco generate scaffold grade \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     risk_category:string! \
     ten_year_risk_percent:double! \
     heart_age:int \
@@ -152,7 +152,7 @@ cargo loco generate scaffold grade \
 
 cargo loco generate scaffold grading_fired_rule \
     deleted_at:tstz \
-    grade:references \
+    grade:references:grade_id \
     rule_id:string! \
     category:string! \
     description:text! \
@@ -161,7 +161,7 @@ cargo loco generate scaffold grading_fired_rule \
 
 cargo loco generate scaffold grading_additional_flag \
     deleted_at:tstz \
-    grade:references \
+    grade:references:grade_id \
     flag_id:string! \
     category:string! \
     message:text! \
@@ -172,6 +172,10 @@ cargo loco generate scaffold grading_additional_flag \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

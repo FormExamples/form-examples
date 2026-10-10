@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 515341
+  id: "00000000-0000-4000-8000-00000007dd0d"
   deletedAt: null
   ruleCode: "Test ruleCode"
   ruleTitle: "Test ruleTitle"
@@ -9,4 +9,4 @@
   ruleKind: "fitness"
   ruleEvidence: "Test ruleEvidence"
   ruleNotes: "Test ruleNotes"
-  returnToWorkGradeId: 530704
+  returnToWorkGradeId: "00000000-0000-4000-8000-000000081910"

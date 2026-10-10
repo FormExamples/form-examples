@@ -1,7 +1,7 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 672214
+  id: "00000000-0000-4000-8000-0000000a41d6"
   deletedAt: null
   globalRatingOfChange: 1
   selfRatedHealth: "excellent"
-  outpatientOutcomeId: 379759
+  outpatientOutcomeId: "00000000-0000-4000-8000-00000005cb6f"

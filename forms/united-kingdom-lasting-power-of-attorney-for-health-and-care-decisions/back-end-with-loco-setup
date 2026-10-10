@@ -101,8 +101,8 @@ cargo loco generate scaffold person_to_notify \
 
 cargo loco generate scaffold lpa \
     deleted_at:tstz \
-    donor:references \
-    certificate_provider:references \
+    donor:references:donor_id \
+    certificate_provider:references:certificate_provider_id \
     form_version:string! \
     jurisdiction:string! \
     status:string! \
@@ -114,36 +114,36 @@ cargo loco generate scaffold lpa \
 
 cargo loco generate scaffold lpa_attorney \
     deleted_at:tstz \
-    lpa:references \
-    attorney:references \
+    lpa:references:lpa_id \
+    attorney:references:attorney_id \
     order_position:int! \
     --api
 
 cargo loco generate scaffold lpa_replacement_attorney \
     deleted_at:tstz \
-    lpa:references \
-    replacement_attorney:references \
+    lpa:references:lpa_id \
+    replacement_attorney:references:replacement_attorney_id \
     order_position:int! \
     replacement_trigger:text! \
     --api
 
 cargo loco generate scaffold lpa_person_to_notify \
     deleted_at:tstz \
-    lpa:references \
-    person_to_notify:references \
+    lpa:references:lpa_id \
+    person_to_notify:references:person_to_notify_id \
     order_position:int! \
     --api
 
 cargo loco generate scaffold lpa_decision_rule \
     deleted_at:tstz \
-    lpa:references \
+    lpa:references:lpa_id \
     decision_rule:string! \
     joint_decision_set:text! \
     --api
 
 cargo loco generate scaffold lpa_lst_choice \
     deleted_at:tstz \
-    lpa:references \
+    lpa:references:lpa_id \
     lst_choice:string! \
     donor_initialled:string! \
     initialled_at:tstz \
@@ -151,7 +151,7 @@ cargo loco generate scaffold lpa_lst_choice \
 
 cargo loco generate scaffold lpa_preference \
     deleted_at:tstz \
-    lpa:references \
+    lpa:references:lpa_id \
     order_position:int! \
     category:string! \
     statement:text! \
@@ -159,7 +159,7 @@ cargo loco generate scaffold lpa_preference \
 
 cargo loco generate scaffold lpa_instruction \
     deleted_at:tstz \
-    lpa:references \
+    lpa:references:lpa_id \
     order_position:int! \
     category:string! \
     statement:text! \
@@ -169,7 +169,7 @@ cargo loco generate scaffold lpa_instruction \
 
 cargo loco generate scaffold lpa_signature \
     deleted_at:tstz \
-    lpa:references \
+    lpa:references:lpa_id \
     signer_role:string! \
     signer_id:uuid \
     signed_at:tstz \
@@ -183,7 +183,7 @@ cargo loco generate scaffold lpa_signature \
 
 cargo loco generate scaffold lpa_registration_application \
     deleted_at:tstz \
-    lpa:references \
+    lpa:references:lpa_id \
     applicant_role:string! \
     applicant_signed_at:tstz \
     fee_amount_pounds:double! \
@@ -195,7 +195,7 @@ cargo loco generate scaffold lpa_registration_application \
 
 cargo loco generate scaffold lpa_validity \
     deleted_at:tstz \
-    lpa:references \
+    lpa:references:lpa_id \
     validity_status:string! \
     completeness_score:int! \
     effective_date:date \
@@ -206,7 +206,7 @@ cargo loco generate scaffold lpa_validity \
 
 cargo loco generate scaffold lpa_validity_fired_rule \
     deleted_at:tstz \
-    lpa_validity:references \
+    lpa_validity:references:lpa_validity_id \
     rule_id:string! \
     severity:string! \
     rule_family:string! \
@@ -217,7 +217,7 @@ cargo loco generate scaffold lpa_validity_fired_rule \
 
 cargo loco generate scaffold lpa_validity_additional_flag \
     deleted_at:tstz \
-    lpa_validity:references \
+    lpa_validity:references:lpa_validity_id \
     flag_id:string! \
     category:string! \
     priority:string! \
@@ -229,6 +229,10 @@ cargo loco generate scaffold lpa_validity_additional_flag \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

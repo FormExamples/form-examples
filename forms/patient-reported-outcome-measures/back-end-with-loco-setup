@@ -82,7 +82,7 @@ cargo loco generate scaffold patient_reported_outcome_measures \
 
 cargo loco generate scaffold patient_reported_outcome_measures_score \
     deleted_at:tstz \
-    patient_reported_outcome_measures:references \
+    patient_reported_outcome_measures:references:patient_reported_outcome_measures_id \
     sf36_pf:double \
     sf36_rp:double \
     sf36_bp:double \
@@ -108,6 +108,10 @@ cargo loco generate scaffold patient_reported_outcome_measures_score \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

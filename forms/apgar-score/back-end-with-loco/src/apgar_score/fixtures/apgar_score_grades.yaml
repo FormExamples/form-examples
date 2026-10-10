@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 719016
+  id: "00000000-0000-4000-8000-0000000af8a8"
   deletedAt: null
   totalOneMinute: 1
   totalFiveMinute: 1
@@ -11,4 +11,4 @@
   summaryBand: "reassuring"
   trend: "improving"
   gradedAt: "2026-01-01T00:00:00Z"
-  apgarScoreId: 808144
+  apgarScoreId: "00000000-0000-4000-8000-0000000c54d0"

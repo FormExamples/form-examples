@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 530044
+  id: "00000000-0000-4000-8000-00000008167c"
   deletedAt: null
   postVaccinationObservation: 1
   immediateReaction: "yes"
@@ -10,4 +10,4 @@
   referralNeeded: "yes"
   clinicianNotes: "Test clinicianNotes"
   reviewingClinician: "Test reviewingClinician"
-  assessmentId: 174864
+  assessmentId: "00000000-0000-4000-8000-00000002ab10"

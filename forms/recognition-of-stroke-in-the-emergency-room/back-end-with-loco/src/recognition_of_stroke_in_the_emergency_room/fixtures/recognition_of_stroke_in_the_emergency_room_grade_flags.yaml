@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 853525
+  id: "00000000-0000-4000-8000-0000000d0615"
   deletedAt: null
   flagId: "Test flagId"
   category: "activate-stroke-pathway"
   priority: "low"
   description: "Test description"
   suggestedAction: "Test suggestedAction"
-  recognitionOfStrokeInTheEmergencyRoomGradeId: 762069
+  recognitionOfStrokeInTheEmergencyRoomGradeId: "00000000-0000-4000-8000-0000000ba0d5"

@@ -48,8 +48,8 @@ cargo loco generate scaffold clinician \
 
 cargo loco generate scaffold medical_operation_note \
     deleted_at:tstz \
-    patient:references \
-    lead_surgeon:references \
+    patient:references:patient_id \
+    clinician:references:lead_surgeon_id \
     status:string! \
     hospital_name:string! \
     theatre_number:string! \
@@ -143,8 +143,8 @@ cargo loco generate scaffold medical_operation_note \
 
 cargo loco generate scaffold medical_operation_note_team_member \
     deleted_at:tstz \
-    medical_operation_note:references \
-    clinician:references \
+    medical_operation_note:references:medical_operation_note_id \
+    clinician:references:clinician_id \
     team_role:string! \
     arrived_at:tstz \
     left_at:tstz \
@@ -153,7 +153,7 @@ cargo loco generate scaffold medical_operation_note_team_member \
 
 cargo loco generate scaffold medical_operation_note_procedure \
     deleted_at:tstz \
-    medical_operation_note:references \
+    medical_operation_note:references:medical_operation_note_id \
     role:string! \
     opcs4_code:string! \
     name:string! \
@@ -164,7 +164,7 @@ cargo loco generate scaffold medical_operation_note_procedure \
 
 cargo loco generate scaffold medical_operation_note_step \
     deleted_at:tstz \
-    medical_operation_note:references \
+    medical_operation_note:references:medical_operation_note_id \
     step_number:int! \
     title:string! \
     description:text! \
@@ -172,7 +172,7 @@ cargo loco generate scaffold medical_operation_note_step \
 
 cargo loco generate scaffold medical_operation_note_implant \
     deleted_at:tstz \
-    medical_operation_note:references \
+    medical_operation_note:references:medical_operation_note_id \
     category:string! \
     name:string! \
     size_or_gauge:string! \
@@ -191,7 +191,7 @@ cargo loco generate scaffold medical_operation_note_implant \
 
 cargo loco generate scaffold medical_operation_note_drain \
     deleted_at:tstz \
-    medical_operation_note:references \
+    medical_operation_note:references:medical_operation_note_id \
     device_type:string! \
     name:string! \
     site:string! \
@@ -205,7 +205,7 @@ cargo loco generate scaffold medical_operation_note_drain \
 
 cargo loco generate scaffold medical_operation_note_specimen \
     deleted_at:tstz \
-    medical_operation_note:references \
+    medical_operation_note:references:medical_operation_note_id \
     label:string! \
     specimen_type:string! \
     anatomical_site:string! \
@@ -220,7 +220,7 @@ cargo loco generate scaffold medical_operation_note_specimen \
 
 cargo loco generate scaffold medical_operation_note_complication \
     deleted_at:tstz \
-    medical_operation_note:references \
+    medical_operation_note:references:medical_operation_note_id \
     category:string! \
     description:text! \
     clavien_dindo_grade:string! \
@@ -232,7 +232,7 @@ cargo loco generate scaffold medical_operation_note_complication \
 
 cargo loco generate scaffold medical_operation_note_grade \
     deleted_at:tstz \
-    medical_operation_note:references \
+    medical_operation_note:references:medical_operation_note_id \
     computed_composite_risk:string! \
     final_composite_risk:string! \
     override_reason:string! \
@@ -249,7 +249,7 @@ cargo loco generate scaffold medical_operation_note_grade \
 
 cargo loco generate scaffold medical_operation_note_grade_rule \
     deleted_at:tstz \
-    medical_operation_note_grade:references \
+    medical_operation_note_grade:references:medical_operation_note_grade_id \
     rule_id:string! \
     instrument:string! \
     band:string! \
@@ -259,7 +259,7 @@ cargo loco generate scaffold medical_operation_note_grade_rule \
 
 cargo loco generate scaffold medical_operation_note_grade_flag \
     deleted_at:tstz \
-    medical_operation_note_grade:references \
+    medical_operation_note_grade:references:medical_operation_note_grade_id \
     flag_id:string! \
     category:string! \
     priority:string! \
@@ -271,6 +271,10 @@ cargo loco generate scaffold medical_operation_note_grade_flag \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

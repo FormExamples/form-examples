@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 817015
+  id: "00000000-0000-4000-8000-0000000c7777"
   deletedAt: null
   status: "draft"
   siteName: "Test siteName"
@@ -29,5 +29,5 @@
   supervisingConsultant: "Test supervisingConsultant"
   requesterContact: "Test requesterContact"
   notes: "Test notes"
-  patientId: 356527
-  clinicianId: 896773
+  patientId: "00000000-0000-4000-8000-0000000570af"
+  clinicianId: "00000000-0000-4000-8000-0000000daf05"

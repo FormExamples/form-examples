@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 222490
+  id: "00000000-0000-4000-8000-00000003651a"
   deletedAt: null
   psqiGlobalScore: 1
   psqiComponent1SubjectiveQuality: 1
@@ -12,4 +12,4 @@
   psqiComponent7DaytimeDysfunction: 1
   sleepQualityCategory: "Test sleepQualityCategory"
   gradedAt: "2026-01-01T00:00:00Z"
-  assessmentId: 103634
+  assessmentId: "00000000-0000-4000-8000-0000000194d2"

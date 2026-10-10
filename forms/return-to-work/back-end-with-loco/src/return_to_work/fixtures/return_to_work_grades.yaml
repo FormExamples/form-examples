@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 530704
+  id: "00000000-0000-4000-8000-000000081910"
   deletedAt: null
   fitnessStatement: "fit"
   restrictionPriority: "routine"
   ruleCount: 1
   flagCount: 1
   gradedAt: "2026-01-01T00:00:00Z"
-  returnToWorkId: 583038
+  returnToWorkId: "00000000-0000-4000-8000-00000008e57e"

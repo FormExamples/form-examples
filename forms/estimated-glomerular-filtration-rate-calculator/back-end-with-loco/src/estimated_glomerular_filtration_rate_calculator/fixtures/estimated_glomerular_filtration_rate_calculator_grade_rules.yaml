@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 787117
+  id: "00000000-0000-4000-8000-0000000c02ad"
   deletedAt: null
   ruleId: "Test ruleId"
   instrument: "conversion"
   band: "G1"
   category: "Test category"
   description: "Test description"
-  estimatedGlomerularFiltrationRateCalculatorGradeId: 173179
+  estimatedGlomerularFiltrationRateCalculatorGradeId: "00000000-0000-4000-8000-00000002a47b"

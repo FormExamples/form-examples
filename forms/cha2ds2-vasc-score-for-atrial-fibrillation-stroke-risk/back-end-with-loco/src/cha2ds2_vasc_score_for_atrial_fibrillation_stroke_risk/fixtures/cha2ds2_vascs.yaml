@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 920760
+  id: "00000000-0000-4000-8000-0000000e0cb8"
   deletedAt: null
   clinicianName: "Test clinicianName"
   clinicianRole: "doctor"
@@ -16,5 +16,5 @@
   strokeTiaThromboembolism: "yes"
   vascularDisease: "yes"
   clinicalNote: "Test clinicalNote"
-  patientId: 329085
+  patientId: "00000000-0000-4000-8000-00000005057d"
   clinicianId: null

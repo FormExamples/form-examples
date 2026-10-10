@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 223610
+  id: "00000000-0000-4000-8000-00000003697a"
   deletedAt: null
   address: "Test address"
   postcode: "SW1A 2AA"
@@ -9,4 +9,4 @@
   ethnicity: "Test ethnicity"
   preferredLanguage: "Test preferredLanguage"
   interpreterRequired: "yes"
-  casualtyCardId: 233761
+  casualtyCardId: "00000000-0000-4000-8000-000000039121"

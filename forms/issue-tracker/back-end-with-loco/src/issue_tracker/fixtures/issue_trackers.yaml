@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 435746
+  id: "00000000-0000-4000-8000-00000006a622"
   deletedAt: null
   status: "draft"
   reportedAt: "2026-01-01T00:00:00Z"
@@ -65,4 +65,4 @@
   scoreByFailureCondition: "A"
   scoreByMoscowRequirement: 1
   scoreByFrequencyPercent: 1.0
-  reporterId: 535615
+  reporterId: "00000000-0000-4000-8000-000000082c3f"

@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 197133
+  id: "00000000-0000-4000-8000-00000003020d"
   deletedAt: null
   clinicianName: "Test clinicianName"
   clinicianRole: "gp"
@@ -50,5 +50,5 @@
   healthActionPlanShared: "yes"
   healthActionPlanActions: "Test healthActionPlanActions"
   clinicianNote: "Test clinicianNote"
-  patientId: 818864
+  patientId: "00000000-0000-4000-8000-0000000c7eb0"
   clinicianId: null

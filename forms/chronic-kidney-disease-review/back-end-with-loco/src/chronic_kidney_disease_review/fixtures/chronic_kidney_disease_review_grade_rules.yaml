@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 377373
+  id: "00000000-0000-4000-8000-00000005c21d"
   deletedAt: null
   ruleId: "Test ruleId"
   section: "gfr-stage"
   category: "Test category"
   description: "Test description"
-  chronicKidneyDiseaseReviewGradeId: 298547
+  chronicKidneyDiseaseReviewGradeId: "00000000-0000-4000-8000-000000048e33"

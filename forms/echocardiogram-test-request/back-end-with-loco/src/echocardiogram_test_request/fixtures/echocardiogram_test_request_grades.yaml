@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 280298
+  id: "00000000-0000-4000-8000-0000000446ea"
   deletedAt: null
   appropriatenessScore: 1
   appropriatenessBand: "appropriate"
@@ -12,4 +12,4 @@
   clinicianNotes: "Test clinicianNotes"
   signedAt: "2026-01-01T00:00:00Z"
   gradedAt: "2026-01-01T00:00:00Z"
-  echocardiogramTestRequestId: 817015
+  echocardiogramTestRequestId: "00000000-0000-4000-8000-0000000c7777"

@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 979230
+  id: "00000000-0000-4000-8000-0000000ef11e"
   deletedAt: null
   flagId: "Test flagId"
   category: "breach-risk"
   priority: "low"
   description: "Test description"
   suggestedAction: "Test suggestedAction"
-  neurosurgeryWaitingListCardGradeId: 539965
+  neurosurgeryWaitingListCardGradeId: "00000000-0000-4000-8000-000000083d3d"

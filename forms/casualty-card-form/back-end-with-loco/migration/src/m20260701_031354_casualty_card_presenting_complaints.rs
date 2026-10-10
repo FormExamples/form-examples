@@ -7,30 +7,44 @@ pub struct Migration;
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, m: &SchemaManager) -> Result<(), DbErr> {
-        create_table(m, "casualty_card_presenting_complaints",
+        create_table(
+            m,
+            "casualty_card_presenting_complaints",
             &[
-            
-            ("id", ColType::PkAuto),
-            
-            ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("chief_complaint", ColType::TextWithDefault(String::new())),
-            ("history_of_presenting_complaint", ColType::TextWithDefault(String::new())),
-            ("onset", ColType::TextWithDefault(String::new())),
-            ("duration", ColType::TextWithDefault(String::new())),
-            ("character", ColType::TextWithDefault(String::new())),
-            ("severity", ColType::TextWithDefault(String::new())),
-            ("location", ColType::TextWithDefault(String::new())),
-            ("radiation", ColType::TextWithDefault(String::new())),
-            ("aggravating_factors", ColType::TextWithDefault(String::new())),
-            ("relieving_factors", ColType::TextWithDefault(String::new())),
-            ("associated_symptoms", ColType::TextWithDefault(String::new())),
-            ("previous_episodes", ColType::TextWithDefault(String::new())),
-            ("treatment_prior_to_arrival", ColType::TextWithDefault(String::new())),
+                ("id", ColType::PkUuid),
+                ("deleted_at", ColType::TimestampWithTimeZoneNull),
+                ("chief_complaint", ColType::TextWithDefault(String::new())),
+                (
+                    "history_of_presenting_complaint",
+                    ColType::TextWithDefault(String::new()),
+                ),
+                ("onset", ColType::TextWithDefault(String::new())),
+                ("duration", ColType::TextWithDefault(String::new())),
+                ("character", ColType::TextWithDefault(String::new())),
+                ("severity", ColType::TextWithDefault(String::new())),
+                ("location", ColType::TextWithDefault(String::new())),
+                ("radiation", ColType::TextWithDefault(String::new())),
+                (
+                    "aggravating_factors",
+                    ColType::TextWithDefault(String::new()),
+                ),
+                ("relieving_factors", ColType::TextWithDefault(String::new())),
+                (
+                    "associated_symptoms",
+                    ColType::TextWithDefault(String::new()),
+                ),
+                ("previous_episodes", ColType::TextWithDefault(String::new())),
+                (
+                    "treatment_prior_to_arrival",
+                    ColType::TextWithDefault(String::new()),
+                ),
+                ("casualty_card_id", ColType::Uuid),
             ],
-            &[
-            ("casualty_card", ""),
-            ]
-        ).await
+            &[("casualty_card", "casualty_card_id")],
+        )
+        .await?;
+        m.get_connection().execute_unprepared("ALTER TABLE casualty_card_presenting_complaints ALTER COLUMN id SET DEFAULT gen_random_uuid()").await?;
+        Ok(())
     }
 
     async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {

@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 760141
+  id: "00000000-0000-4000-8000-0000000b994d"
   deletedAt: null
   confusionScore: 1
   ureaScore: 1
@@ -12,4 +12,4 @@
   riskBand: "low"
   recommendedSetting: "Test recommendedSetting"
   gradedAt: "2026-01-01T00:00:00Z"
-  curb65PneumoniaSeverityScoreId: 991585
+  curb65PneumoniaSeverityScoreId: "00000000-0000-4000-8000-0000000f2161"

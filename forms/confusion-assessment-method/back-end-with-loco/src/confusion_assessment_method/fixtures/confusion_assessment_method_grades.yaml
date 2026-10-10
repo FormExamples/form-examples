@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 521328
+  id: "00000000-0000-4000-8000-00000007f470"
   deletedAt: null
   classification: "present"
   deliriumPresent: true
@@ -11,4 +11,4 @@
   positiveFeatures: "Test positiveFeatures"
   motoricSubtype: "hypoactive"
   gradedAt: "2026-01-01T00:00:00Z"
-  confusionAssessmentMethodId: 269601
+  confusionAssessmentMethodId: "00000000-0000-4000-8000-000000041d21"

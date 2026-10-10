@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 827966
+  id: "00000000-0000-4000-8000-0000000ca23e"
   deletedAt: null
   appointmentDate: "1990-01-01"
   appointmentTime: "Test appointmentTime"
@@ -15,4 +15,4 @@
   status: "scheduled"
   travelNotes: "Test travelNotes"
   accessNotes: "Test accessNotes"
-  childPsychWaitingListCardId: 433164
+  childPsychWaitingListCardId: "00000000-0000-4000-8000-000000069c0c"

@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 491696
+  id: "00000000-0000-4000-8000-0000000780b0"
   deletedAt: null
   bilirubinMgDl: 1.0
   creatinineMgDl: 1.0
@@ -10,4 +10,4 @@
   mortalityBand: "low"
   estimatedMortalityPercent: 1.0
   gradedAt: "2026-01-01T00:00:00Z"
-  modelForEndStageLiverDiseaseScoreId: 825024
+  modelForEndStageLiverDiseaseScoreId: "00000000-0000-4000-8000-0000000c96c0"

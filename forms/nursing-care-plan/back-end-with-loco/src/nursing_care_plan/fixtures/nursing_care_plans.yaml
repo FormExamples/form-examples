@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 601093
+  id: "00000000-0000-4000-8000-000000092c05"
   deletedAt: null
   nurseName: "Test nurseName"
   nurseRole: "registered-nurse"
@@ -32,5 +32,5 @@
   nutritionRiskLevel: "low"
   nutritionRiskAssessedOn: "1990-01-01"
   nutritionRiskActioned: "yes"
-  patientId: 867721
-  clinicianId: 316515
+  patientId: "00000000-0000-4000-8000-0000000d3d89"
+  clinicianId: "00000000-0000-4000-8000-00000004d463"

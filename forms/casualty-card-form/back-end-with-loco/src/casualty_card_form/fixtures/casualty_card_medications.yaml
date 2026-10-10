@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 519231
+  id: "00000000-0000-4000-8000-00000007ec3f"
   deletedAt: null
   name: "Test Patient"
   dose: "Test dose"
   frequency: "Test frequency"
   sortOrder: 1
-  casualtyCardId: 233761
+  casualtyCardId: "00000000-0000-4000-8000-000000039121"

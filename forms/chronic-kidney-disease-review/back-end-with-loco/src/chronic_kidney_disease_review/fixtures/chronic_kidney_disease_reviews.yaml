@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 334035
+  id: "00000000-0000-4000-8000-0000000518d3"
   deletedAt: null
   clinicianName: "Test clinicianName"
   clinicianRole: "gp"
@@ -37,5 +37,5 @@
   haemoglobin: 1.0
   referralDecision: "none"
   clinicalNote: "Test clinicalNote"
-  patientId: 843772
+  patientId: "00000000-0000-4000-8000-0000000cdffc"
   clinicianId: null

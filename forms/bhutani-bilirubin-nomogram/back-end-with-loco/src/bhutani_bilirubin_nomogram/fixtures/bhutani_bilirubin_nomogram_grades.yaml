@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 680693
+  id: "00000000-0000-4000-8000-0000000a62f5"
   deletedAt: null
   riskZone: "low"
   percentileBand: "<40"
@@ -9,4 +9,4 @@
   abovePhototherapyThreshold: "yes"
   aboveExchangeThreshold: "yes"
   gradedAt: "2026-01-01T00:00:00Z"
-  bhutaniBilirubinNomogramId: 387821
+  bhutaniBilirubinNomogramId: "00000000-0000-4000-8000-00000005eaed"

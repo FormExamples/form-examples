@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 797009
+  id: "00000000-0000-4000-8000-0000000c2951"
   deletedAt: null
   appropriatenessScore: 1
   appropriatenessBand: "usually-appropriate"
@@ -14,4 +14,4 @@
   clinicianNotes: "Test clinicianNotes"
   signedAt: "2026-01-01T00:00:00Z"
   gradedAt: "2026-01-01T00:00:00Z"
-  biopsyTestRequestId: 875917
+  biopsyTestRequestId: "00000000-0000-4000-8000-0000000d5d8d"

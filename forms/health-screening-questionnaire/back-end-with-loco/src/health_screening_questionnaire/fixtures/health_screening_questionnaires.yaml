@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 550761
+  id: "00000000-0000-4000-8000-000000086769"
   deletedAt: null
   status: "draft"
   screeningPurpose: "occupational-pre-placement"
@@ -65,5 +65,5 @@
   consentToScreening: "yes"
   informationAccurateConfirmed: "yes"
   interpreterRequired: "yes"
-  patientId: 818668
-  assessorId: 602887
+  patientId: "00000000-0000-4000-8000-0000000c7dec"
+  assessorId: "00000000-0000-4000-8000-000000093307"

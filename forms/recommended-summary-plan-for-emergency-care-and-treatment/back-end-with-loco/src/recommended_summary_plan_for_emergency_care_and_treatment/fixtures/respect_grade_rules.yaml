@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 687102
+  id: "00000000-0000-4000-8000-0000000a7bfe"
   deletedAt: null
   ruleId: "Test ruleId"
   section: "identity"
   satisfied: "yes"
   category: "Test category"
   description: "Test description"
-  respectGradeId: 141167
+  respectGradeId: "00000000-0000-4000-8000-00000002276f"

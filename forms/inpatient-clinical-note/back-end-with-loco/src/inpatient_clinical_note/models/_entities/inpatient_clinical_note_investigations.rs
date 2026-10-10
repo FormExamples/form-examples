@@ -13,8 +13,8 @@ pub struct Model {
     /// Updated at.
     pub updated_at: DateTimeWithTimeZone,
     /// ID.
-    #[sea_orm(primary_key)]
-    pub id: i64,
+    #[sea_orm(primary_key, auto_increment = false)]
+    pub id: Uuid,
     /// Deleted at.
     pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Sort order.
@@ -38,7 +38,7 @@ pub struct Model {
     #[sea_orm(column_type = "Text")]
     pub action_taken: String,
     /// Inpatient clinical note ID.
-    pub inpatient_clinical_note_id: i64,
+    pub inpatient_clinical_note_id: Uuid,
 }
 
 /// Relation.

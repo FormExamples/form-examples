@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 129803
+  id: "00000000-0000-4000-8000-00000001fb0b"
   deletedAt: null
   practitionerName: "Test practitionerName"
   practitionerRole: "midwife"
@@ -50,5 +50,5 @@
   hipsResultRecorded: "satisfactory"
   testesResultRecorded: "satisfactory"
   clinicalNote: "Test clinicalNote"
-  patientId: 286573
+  patientId: "00000000-0000-4000-8000-000000045f6d"
   clinicianId: null

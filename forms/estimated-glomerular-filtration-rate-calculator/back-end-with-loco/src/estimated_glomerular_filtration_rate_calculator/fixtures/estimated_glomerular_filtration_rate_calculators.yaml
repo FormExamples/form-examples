@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 702502
+  id: "00000000-0000-4000-8000-0000000ab826"
   deletedAt: null
   clinicianName: "Test clinicianName"
   clinicianRole: "doctor"
@@ -13,5 +13,5 @@
   sex: "female"
   specimenDate: "1990-01-01"
   steadyState: "yes"
-  patientId: 238309
-  clinicianId: 994414
+  patientId: "00000000-0000-4000-8000-00000003a2e5"
+  clinicianId: "00000000-0000-4000-8000-0000000f2c6e"

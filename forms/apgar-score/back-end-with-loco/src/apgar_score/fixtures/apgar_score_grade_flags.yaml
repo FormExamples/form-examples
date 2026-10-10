@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 100797
+  id: "00000000-0000-4000-8000-0000000189bd"
   deletedAt: null
   flagId: "Test flagId"
   category: "resuscitation-needed"
   priority: "low"
   description: "Test description"
   suggestedAction: "Test suggestedAction"
-  apgarScoreGradeId: 719016
+  apgarScoreGradeId: "00000000-0000-4000-8000-0000000af8a8"

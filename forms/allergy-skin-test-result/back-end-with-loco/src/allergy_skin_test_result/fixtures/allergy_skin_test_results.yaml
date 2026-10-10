@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 923651
+  id: "00000000-0000-4000-8000-0000000e1803"
   deletedAt: null
   originatingRequestReference: "Test originatingRequestReference"
   testType: "skin-prick-test"
@@ -25,5 +25,5 @@
   recommendedFollowUp: "Test recommendedFollowUp"
   criticalResultCommunicated: true
   reportedTo: "Test reportedTo"
-  patientId: 982928
-  clinicianId: 111487
+  patientId: "00000000-0000-4000-8000-0000000eff90"
+  clinicianId: "00000000-0000-4000-8000-00000001b37f"

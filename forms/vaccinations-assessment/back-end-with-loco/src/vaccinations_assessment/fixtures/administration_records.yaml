@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 320323
+  id: "00000000-0000-4000-8000-00000004e343"
   deletedAt: null
   vaccineName: "Test vaccineName"
   batchNumber: "Test batchNumber"
@@ -10,4 +10,4 @@
   doseNumber: "1"
   administeredBy: "Test administeredBy"
   administrationDate: "1990-01-01"
-  assessmentId: 174864
+  assessmentId: "00000000-0000-4000-8000-00000002ab10"

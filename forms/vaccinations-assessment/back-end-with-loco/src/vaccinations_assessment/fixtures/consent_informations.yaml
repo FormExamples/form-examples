@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 265497
+  id: "00000000-0000-4000-8000-000000040d19"
   deletedAt: null
   informationProvided: 1
   risksExplained: 1
@@ -9,4 +9,4 @@
   consentGiven: "yes"
   consentDate: "1990-01-01"
   guardianConsent: "yes"
-  assessmentId: 174864
+  assessmentId: "00000000-0000-4000-8000-00000002ab10"

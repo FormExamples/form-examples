@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 900011
+  id: "00000000-0000-4000-8000-0000000dbbab"
   deletedAt: null
   status: "draft"
   patientIdentifier: "Test patientIdentifier"
@@ -16,5 +16,5 @@
   haemoptysis: "yes"
   malignancy: "yes"
   clinicalNotes: "Test clinicalNotes"
-  patientId: 474394
+  patientId: "00000000-0000-4000-8000-000000073d1a"
   clinicianId: null

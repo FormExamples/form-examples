@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 247312
+  id: "00000000-0000-4000-8000-00000003c610"
   deletedAt: null
   status: "draft"
   title: "Test title"
@@ -24,4 +24,4 @@
   additionalNotes: "Test additionalNotes"
   signedByName: "Test signedByName"
   signedAt: "2026-01-01T00:00:00Z"
-  organizerId: 557579
+  organizerId: "00000000-0000-4000-8000-00000008820b"

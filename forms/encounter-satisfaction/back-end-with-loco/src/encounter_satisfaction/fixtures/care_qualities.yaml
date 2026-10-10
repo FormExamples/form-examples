@@ -1,8 +1,8 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 745678
+  id: "00000000-0000-4000-8000-0000000b60ce"
   deletedAt: null
   involvementInDecisions: 1
   treatmentPlanExplanation: 1
   confidenceInCare: 1
-  encounterSatisfactionId: 670200
+  encounterSatisfactionId: "00000000-0000-4000-8000-0000000a39f8"

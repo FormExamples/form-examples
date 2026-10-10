@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 157067
+  id: "00000000-0000-4000-8000-00000002658b"
   deletedAt: null
   status: "draft"
   nurseName: "Test nurseName"
@@ -35,5 +35,5 @@
   strokeFeatures: "yes"
   paediatricRedFlag: "yes"
   clinicalNotes: "Test clinicalNotes"
-  patientId: 522508
+  patientId: "00000000-0000-4000-8000-00000007f90c"
   clinicianId: null

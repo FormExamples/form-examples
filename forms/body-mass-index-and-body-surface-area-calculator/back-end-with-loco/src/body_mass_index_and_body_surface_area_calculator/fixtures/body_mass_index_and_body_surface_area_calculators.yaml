@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 919640
+  id: "00000000-0000-4000-8000-0000000e0858"
   deletedAt: null
   clinicianName: "Test clinicianName"
   clinicianRole: "doctor"
@@ -14,5 +14,5 @@
   heightCm: 1.0
   weightKg: 1.0
   bsaFormula: "mosteller"
-  patientId: 607871
-  clinicianId: 833323
+  patientId: "00000000-0000-4000-8000-00000009467f"
+  clinicianId: "00000000-0000-4000-8000-0000000cb72b"

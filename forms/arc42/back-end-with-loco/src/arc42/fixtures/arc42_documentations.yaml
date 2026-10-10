@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 202624
+  id: "00000000-0000-4000-8000-000000031780"
   deletedAt: null
   authorName: "Test authorName"
   authorRole: "Test authorRole"
@@ -19,4 +19,4 @@
   additionalNotes: "Test additionalNotes"
   signedBy: "Test signedBy"
   signedAt: "2026-01-01T00:00:00Z"
-  architectureId: 122140
+  architectureId: "00000000-0000-4000-8000-00000001dd1c"

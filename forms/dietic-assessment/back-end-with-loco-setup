@@ -63,8 +63,8 @@ cargo loco generate scaffold medication \
 
 cargo loco generate scaffold patient_medication \
     deleted_at:tstz \
-    patient:references \
-    medication:references \
+    patient:references:patient_id \
+    medication:references:medication_id \
     dose:text! \
     frequency:text! \
     route:text! \
@@ -86,8 +86,8 @@ cargo loco generate scaffold allergy \
 
 cargo loco generate scaffold patient_allergy \
     deleted_at:tstz \
-    patient:references \
-    allergy:references \
+    patient:references:patient_id \
+    allergy:references:allergy_id \
     reaction:text! \
     severity:text! \
     kind:text! \
@@ -99,8 +99,8 @@ cargo loco generate scaffold patient_allergy \
 
 cargo loco generate scaffold dietic_assessment \
     deleted_at:tstz \
-    patient:references \
-    dietitian:references \
+    patient:references:patient_id \
+    dietitian:references:dietitian_id \
     status:string! \
     assessment_date:date \
     assessment_time:string \
@@ -349,7 +349,7 @@ cargo loco generate scaffold dietic_assessment \
 
 cargo loco generate scaffold dietic_assessment_grade \
     deleted_at:tstz \
-    dietic_assessment:references \
+    dietic_assessment:references:dietic_assessment_id \
     must_bmi_score:int \
     must_weight_loss_score:int \
     must_acute_disease_score:int \
@@ -378,7 +378,7 @@ cargo loco generate scaffold dietic_assessment_grade \
 
 cargo loco generate scaffold dietic_assessment_grade_rule \
     deleted_at:tstz \
-    dietic_assessment_grade:references \
+    dietic_assessment_grade:references:dietic_assessment_grade_id \
     rule_id:string! \
     instrument:string! \
     component:string! \
@@ -390,7 +390,7 @@ cargo loco generate scaffold dietic_assessment_grade_rule \
 
 cargo loco generate scaffold dietic_assessment_grade_flag \
     deleted_at:tstz \
-    dietic_assessment_grade:references \
+    dietic_assessment_grade:references:dietic_assessment_grade_id \
     flag_id:string! \
     category:string! \
     priority:string! \
@@ -402,6 +402,10 @@ cargo loco generate scaffold dietic_assessment_grade_flag \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

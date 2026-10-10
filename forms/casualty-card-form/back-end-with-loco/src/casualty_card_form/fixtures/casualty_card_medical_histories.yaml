@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 432554
+  id: "00000000-0000-4000-8000-0000000699aa"
   deletedAt: null
   pastMedicalHistory: "Test pastMedicalHistory"
   pastSurgicalHistory: "Test pastSurgicalHistory"
@@ -9,4 +9,4 @@
   alcoholConsumption: "Test alcoholConsumption"
   recreationalDrugUse: "Test recreationalDrugUse"
   lastOralIntake: "Test lastOralIntake"
-  casualtyCardId: 233761
+  casualtyCardId: "00000000-0000-4000-8000-000000039121"

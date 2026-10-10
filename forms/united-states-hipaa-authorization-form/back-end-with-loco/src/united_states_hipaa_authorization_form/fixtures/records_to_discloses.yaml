@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 154184
+  id: "00000000-0000-4000-8000-000000025a48"
   deletedAt: null
   includeMedicalHealth: "yes"
   medicalHealthInitials: "Test medicalHealthInitials"
@@ -20,4 +20,4 @@
   dateFrom: "1990-01-01"
   dateTo: "1990-01-01"
   otherDescription: "Test otherDescription"
-  hipaaAuthorizationId: 962728
+  hipaaAuthorizationId: "00000000-0000-4000-8000-0000000eb0a8"

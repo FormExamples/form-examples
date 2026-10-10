@@ -30,7 +30,7 @@ cargo loco generate scaffold organization \
 
 cargo loco generate scaffold respondent \
     deleted_at:tstz \
-    organization:references \
+    organization:references:organization_id \
     name:string! \
     email:text! \
     phone:text! \
@@ -43,8 +43,8 @@ cargo loco generate scaffold respondent \
 
 cargo loco generate scaffold agile_consulting_scorecard_for_hiring_help \
     deleted_at:tstz \
-    organization:references \
-    respondent:references \
+    organization:references:organization_id \
+    respondent:references:respondent_id \
     status:string! \
     assessment_date:date! \
     submitted_at:tstz \
@@ -85,7 +85,7 @@ cargo loco generate scaffold agile_consulting_scorecard_for_hiring_help \
 
 cargo loco generate scaffold agile_consulting_scorecard_for_hiring_help_grade \
     deleted_at:tstz \
-    agile_consulting_scorecard:references \
+    agile_consulting_scorecard_for_hiring_help:references:agile_consulting_scorecard_id \
     score_total:int \
     manifesto_subtotal:int \
     principles_subtotal:int \
@@ -102,7 +102,7 @@ cargo loco generate scaffold agile_consulting_scorecard_for_hiring_help_grade \
 
 cargo loco generate scaffold agile_consulting_scorecard_for_hiring_help_grade_rule \
     deleted_at:tstz \
-    agile_consulting_scorecard_grade:references \
+    agile_consulting_scorecard_for_hiring_help_grade:references:agile_consulting_scorecard_grade_id \
     rule_id:string! \
     instrument:string! \
     item_number:int \
@@ -114,7 +114,7 @@ cargo loco generate scaffold agile_consulting_scorecard_for_hiring_help_grade_ru
 
 cargo loco generate scaffold agile_consulting_scorecard_for_hiring_help_grade_flag \
     deleted_at:tstz \
-    agile_consulting_scorecard_grade:references \
+    agile_consulting_scorecard_for_hiring_help_grade:references:agile_consulting_scorecard_grade_id \
     flag_id:string! \
     category:string! \
     priority:string! \
@@ -126,6 +126,10 @@ cargo loco generate scaffold agile_consulting_scorecard_for_hiring_help_grade_fl
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

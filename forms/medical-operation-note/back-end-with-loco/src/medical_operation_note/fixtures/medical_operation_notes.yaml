@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 506012
+  id: "00000000-0000-4000-8000-00000007b89c"
   deletedAt: null
   status: "draft"
   hospitalName: "Test hospitalName"
@@ -91,5 +91,5 @@
   electronicSignature: "Test electronicSignature"
   dictatedAt: "2026-01-01T00:00:00Z"
   signedAt: "2026-01-01T00:00:00Z"
-  patientId: 988899
-  leadSurgeonId: 452324
+  patientId: "00000000-0000-4000-8000-0000000f16e3"
+  leadSurgeonId: "00000000-0000-4000-8000-00000006e6e4"

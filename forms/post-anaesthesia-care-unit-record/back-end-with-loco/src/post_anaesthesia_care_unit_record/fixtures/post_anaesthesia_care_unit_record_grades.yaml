@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 993958
+  id: "00000000-0000-4000-8000-0000000f2aa6"
   deletedAt: null
   activityScore: 1
   respirationScore: 1
@@ -12,4 +12,4 @@
   padssTotal: 1
   padssStreetFit: "yes"
   gradedAt: "2026-01-01T00:00:00Z"
-  postAnaesthesiaCareUnitRecordId: 830498
+  postAnaesthesiaCareUnitRecordId: "00000000-0000-4000-8000-0000000cac22"

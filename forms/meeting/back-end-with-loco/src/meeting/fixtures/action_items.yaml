@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 499209
+  id: "00000000-0000-4000-8000-000000079e09"
   deletedAt: null
   position: 1
   title: "Test title"
@@ -12,4 +12,4 @@
   status: "open"
   completedAt: "2026-01-01T00:00:00Z"
   externalReference: "Test externalReference"
-  meetingId: 247312
+  meetingId: "00000000-0000-4000-8000-00000003c610"

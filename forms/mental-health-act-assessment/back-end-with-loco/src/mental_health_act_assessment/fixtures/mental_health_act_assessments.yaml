@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 487060
+  id: "00000000-0000-4000-8000-000000076e94"
   deletedAt: null
   assessedAt: "2026-01-01T00:00:00Z"
   location: "hospital-ward"
@@ -41,5 +41,5 @@
   bedIdentified: "yes"
   conveyance: "ambulance"
   clinicalLegalNote: "Test clinicalLegalNote"
-  patientId: 841306
+  patientId: "00000000-0000-4000-8000-0000000cd65a"
   clinicianId: null

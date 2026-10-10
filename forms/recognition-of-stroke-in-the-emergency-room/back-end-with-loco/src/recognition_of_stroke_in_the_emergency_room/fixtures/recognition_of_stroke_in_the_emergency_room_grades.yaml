@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 762069
+  id: "00000000-0000-4000-8000-0000000ba0d5"
   deletedAt: null
   rosierScore: 1
   strokeLikely: "stroke-unlikely"
   glucoseExcluded: "yes"
   gradedAt: "2026-01-01T00:00:00Z"
-  recognitionOfStrokeInTheEmergencyRoomId: 385922
+  recognitionOfStrokeInTheEmergencyRoomId: "00000000-0000-4000-8000-00000005e382"

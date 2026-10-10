@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 808144
+  id: "00000000-0000-4000-8000-0000000c54d0"
   deletedAt: null
   clinicianName: "Test clinicianName"
   clinicianRole: "midwife"
@@ -13,5 +13,5 @@
   birthOrder: 1
   resuscitationMeasures: "Test resuscitationMeasures"
   clinicianNote: "Test clinicianNote"
-  patientId: 800531
+  patientId: "00000000-0000-4000-8000-0000000c3713"
   clinicianId: null

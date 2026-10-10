@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 243609
+  id: "00000000-0000-4000-8000-00000003b799"
   deletedAt: null
   assessedAt: "1990-01-01"
   assessmentSetting: "annual-review"
@@ -31,5 +31,5 @@
   leftPreviousAmputation: "none"
   leftSuspectedCharcot: "yes"
   clinicalContext: "Test clinicalContext"
-  patientId: 825104
-  clinicianId: 361740
+  patientId: "00000000-0000-4000-8000-0000000c9710"
+  clinicianId: "00000000-0000-4000-8000-00000005850c"

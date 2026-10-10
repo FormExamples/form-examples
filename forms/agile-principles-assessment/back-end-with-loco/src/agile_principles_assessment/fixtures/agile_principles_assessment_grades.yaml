@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 512485
+  id: "00000000-0000-4000-8000-00000007d1e5"
   deletedAt: null
   answeredCount: 1
   meanScore: 1.0
@@ -13,4 +13,4 @@
   coachNotes: "Test coachNotes"
   signedAt: "2026-01-01T00:00:00Z"
   gradedAt: "2026-01-01T00:00:00Z"
-  agilePrinciplesAssessmentId: 321632
+  agilePrinciplesAssessmentId: "00000000-0000-4000-8000-00000004e860"

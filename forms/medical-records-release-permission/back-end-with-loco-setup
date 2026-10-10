@@ -49,13 +49,13 @@ cargo loco generate scaffold clinician \
 
 cargo loco generate scaffold release_form \
     deleted_at:tstz \
-    patient:references \
+    patient:references:patient_id \
     status:string! \
     --api
 
 cargo loco generate scaffold authorized_recipient \
     deleted_at:tstz \
-    release_form:references \
+    release_form:references:release_form_id \
     recipient_name:string! \
     recipient_organization:string! \
     recipient_address:text! \
@@ -66,7 +66,7 @@ cargo loco generate scaffold authorized_recipient \
 
 cargo loco generate scaffold records_to_release \
     deleted_at:tstz \
-    release_form:references \
+    release_form:references:release_form_id \
     record_types:text! \
     specific_date_range:string! \
     date_from:date \
@@ -76,14 +76,14 @@ cargo loco generate scaffold records_to_release \
 
 cargo loco generate scaffold purpose_of_release \
     deleted_at:tstz \
-    release_form:references \
+    release_form:references:release_form_id \
     purpose:string! \
     other_details:text! \
     --api
 
 cargo loco generate scaffold authorization_period \
     deleted_at:tstz \
-    release_form:references \
+    release_form:references:release_form_id \
     start_date:date! \
     end_date:date! \
     single_use:string! \
@@ -91,7 +91,7 @@ cargo loco generate scaffold authorization_period \
 
 cargo loco generate scaffold restrictions_limitations \
     deleted_at:tstz \
-    release_form:references \
+    release_form:references:release_form_id \
     exclude_hiv:string! \
     exclude_substance_abuse:string! \
     exclude_mental_health:string! \
@@ -102,7 +102,7 @@ cargo loco generate scaffold restrictions_limitations \
 
 cargo loco generate scaffold patient_rights \
     deleted_at:tstz \
-    release_form:references \
+    release_form:references:release_form_id \
     acknowledged_right_to_revoke:string! \
     acknowledged_no_charge_for_access:string! \
     acknowledged_data_protection:string! \
@@ -110,7 +110,7 @@ cargo loco generate scaffold patient_rights \
 
 cargo loco generate scaffold signature_consent \
     deleted_at:tstz \
-    release_form:references \
+    release_form:references:release_form_id \
     patient_signature_confirmed:string! \
     signature_date:date \
     witness_name:string! \
@@ -121,7 +121,7 @@ cargo loco generate scaffold signature_consent \
 
 cargo loco generate scaffold validation_result \
     deleted_at:tstz \
-    release_form:references \
+    release_form:references:release_form_id \
     completeness_score:int! \
     completeness_status:string! \
     validation_status:string! \
@@ -130,7 +130,7 @@ cargo loco generate scaffold validation_result \
 
 cargo loco generate scaffold validation_fired_rule \
     deleted_at:tstz \
-    validation_result:references \
+    validation_result:references:validation_result_id \
     rule_id:string! \
     domain:string! \
     description:text! \
@@ -139,7 +139,7 @@ cargo loco generate scaffold validation_fired_rule \
 
 cargo loco generate scaffold validation_additional_flag \
     deleted_at:tstz \
-    validation_result:references \
+    validation_result:references:validation_result_id \
     flag_id:string! \
     category:string! \
     message:text! \
@@ -150,6 +150,10 @@ cargo loco generate scaffold validation_additional_flag \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

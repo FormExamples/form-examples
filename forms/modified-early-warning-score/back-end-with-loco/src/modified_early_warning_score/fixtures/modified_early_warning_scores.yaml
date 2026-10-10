@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 245584
+  id: "00000000-0000-4000-8000-00000003bf50"
   deletedAt: null
   status: "draft"
   observationAt: "2026-01-01T00:00:00Z"
@@ -13,5 +13,5 @@
   consciousnessAvpu: "A"
   previousMewsScore: 1
   clinicalNotes: "Test clinicalNotes"
-  patientId: 370915
+  patientId: "00000000-0000-4000-8000-00000005a8e3"
   clinicianId: null

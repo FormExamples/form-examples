@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 227467
+  id: "00000000-0000-4000-8000-00000003788b"
   deletedAt: null
   resultClassification: "normal"
   abnormalitySeverity: "none"
@@ -13,4 +13,4 @@
   clinicianNotes: "Test clinicianNotes"
   signedAt: "2026-01-01T00:00:00Z"
   gradedAt: "2026-01-01T00:00:00Z"
-  eyeVisionTestResultId: 977945
+  eyeVisionTestResultId: "00000000-0000-4000-8000-0000000eec19"

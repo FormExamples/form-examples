@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 485924
+  id: "00000000-0000-4000-8000-000000076a24"
   deletedAt: null
   ruleId: "Test ruleId"
   instrument: "volume"
   category: "Test category"
   description: "Test description"
-  parklandFormulaForBurnsGradeId: 233468
+  parklandFormulaForBurnsGradeId: "00000000-0000-4000-8000-000000038ffc"

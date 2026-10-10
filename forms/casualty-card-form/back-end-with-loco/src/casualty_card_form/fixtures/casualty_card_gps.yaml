@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 503077
+  id: "00000000-0000-4000-8000-00000007ad25"
   deletedAt: null
   name: "Test Patient"
   practiceName: "Test practiceName"
   practiceAddress: "Test practiceAddress"
   practicePhone: "+441234567890"
-  casualtyCardId: 233761
+  casualtyCardId: "00000000-0000-4000-8000-000000039121"

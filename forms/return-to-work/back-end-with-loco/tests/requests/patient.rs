@@ -50,9 +50,13 @@ async fn can_create_and_read_back_patient() {
         let created: Value = create_res.json();
         let id = created
             .get("id")
-            .and_then(Value::as_i64)
-            .expect("create response should carry a numeric id");
-        assert!(id > 0, "id should be a positive integer, got {id}");
+            .and_then(Value::as_str)
+            .expect("create response should carry a UUID id")
+            .to_owned();
+        assert!(
+            uuid::Uuid::parse_str(&id).is_ok(),
+            "id should be a UUID, got {id}"
+        );
 
         // 2. READ back by id over HTTP.
         let get_res = request.get(&format!("/api/patients/{id}")).await;
@@ -66,7 +70,7 @@ async fn can_create_and_read_back_patient() {
         let fetched: Value = get_res.json();
 
         // 3. Round-trip: the fetched record echoes exactly what we sent.
-        assert_eq!(fetched["id"].as_i64(), Some(id));
+        assert_eq!(fetched["id"].as_str(), Some(id.as_str()));
         assert_eq!(fetched["name"], "Test Patient");
         assert_eq!(fetched["birthDate"], "1990-01-01");
         assert_eq!(fetched["sex"], "female");
@@ -92,7 +96,7 @@ async fn can_create_and_read_back_patient() {
         assert!(
             items
                 .iter()
-                .any(|row| row.get("id").and_then(Value::as_i64) == Some(id)),
+                .any(|row| row.get("id").and_then(Value::as_str) == Some(id.as_str())),
             "the created patient (id {id}) should appear in the list"
         );
     })

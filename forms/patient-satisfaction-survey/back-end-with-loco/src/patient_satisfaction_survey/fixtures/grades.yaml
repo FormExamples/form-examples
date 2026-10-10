@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 883701
+  id: "00000000-0000-4000-8000-0000000d7bf5"
   deletedAt: null
   normalizedScore: 1.0
   satisfactionCategory: "Test satisfactionCategory"
@@ -12,4 +12,4 @@
   domainDischargeScore: 1.0
   domainOverallScore: 1.0
   gradedAt: "2026-01-01T00:00:00Z"
-  assessmentId: 156353
+  assessmentId: "00000000-0000-4000-8000-0000000262c1"

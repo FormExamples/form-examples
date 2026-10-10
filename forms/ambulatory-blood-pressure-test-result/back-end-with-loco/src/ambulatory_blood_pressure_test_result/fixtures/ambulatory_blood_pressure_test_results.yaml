@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 289764
+  id: "00000000-0000-4000-8000-000000046be4"
   deletedAt: null
   originatingRequestReference: "Test originatingRequestReference"
   monitoringType: "24-hour-abpm"
@@ -31,5 +31,5 @@
   recommendedFollowUp: "Test recommendedFollowUp"
   criticalResultCommunicated: true
   reportedTo: "Test reportedTo"
-  patientId: 489788
-  clinicianId: 803927
+  patientId: "00000000-0000-4000-8000-00000007793c"
+  clinicianId: "00000000-0000-4000-8000-0000000c4457"

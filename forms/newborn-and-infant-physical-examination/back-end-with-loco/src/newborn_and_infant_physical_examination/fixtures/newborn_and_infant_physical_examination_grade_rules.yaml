@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 517105
+  id: "00000000-0000-4000-8000-00000007e3f1"
   deletedAt: null
   ruleId: "Test ruleId"
   component: "eyes"
   category: "Test category"
   description: "Test description"
-  newbornAndInfantPhysicalExaminationGradeId: 799938
+  newbornAndInfantPhysicalExaminationGradeId: "00000000-0000-4000-8000-0000000c34c2"

@@ -1,8 +1,8 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 315796
+  id: "00000000-0000-4000-8000-00000004d194"
   deletedAt: null
   ruleId: "Test ruleId"
   category: "Test category"
   description: "Test description"
-  nursingCarePlanGradeId: 126245
+  nursingCarePlanGradeId: "00000000-0000-4000-8000-00000001ed25"

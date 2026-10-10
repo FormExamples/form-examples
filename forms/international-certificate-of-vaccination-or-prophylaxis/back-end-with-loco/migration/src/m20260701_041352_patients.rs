@@ -7,31 +7,55 @@ pub struct Migration;
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, m: &SchemaManager) -> Result<(), DbErr> {
-        create_table(m, "patients",
+        create_table(
+            m,
+            "patients",
             &[
-            
-            ("id", ColType::PkAuto),
-            
-            ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("surname", ColType::StringWithDefault(String::new())),
-            ("given_names", ColType::StringWithDefault(String::new())),
-            ("birth_date", ColType::DateNull),
-            ("sex", ColType::StringWithDefault(String::new())),
-            ("nationality_as_iso_3166_1_alpha_3", ColType::StringWithDefault(String::new())),
-            ("travel_document_kind", ColType::StringWithDefault(String::new())),
-            ("travel_document_number", ColType::StringWithDefault(String::new())),
-            ("travel_document_issuer_as_iso_3166_1_alpha_3", ColType::StringWithDefault(String::new())),
-            ("email", ColType::TextNull),
-            ("phone", ColType::TextNull),
-            ("postal_address_as_full_text", ColType::TextNull),
-            ("country_as_iso_3166_1_alpha_2", ColType::StringNull),
-            ("postcode", ColType::TextNull),
-            ("consented_to_data_sharing", ColType::StringWithDefault(String::new())),
-            ("signature_image_data_url", ColType::TextWithDefault(String::new())),
+                ("id", ColType::PkUuid),
+                ("deleted_at", ColType::TimestampWithTimeZoneNull),
+                ("surname", ColType::StringWithDefault(String::new())),
+                ("given_names", ColType::StringWithDefault(String::new())),
+                ("birth_date", ColType::DateNull),
+                ("sex", ColType::StringWithDefault(String::new())),
+                (
+                    "nationality_as_iso_3166_1_alpha_3",
+                    ColType::StringWithDefault(String::new()),
+                ),
+                (
+                    "travel_document_kind",
+                    ColType::StringWithDefault(String::new()),
+                ),
+                (
+                    "travel_document_number",
+                    ColType::StringWithDefault(String::new()),
+                ),
+                (
+                    "travel_document_issuer_as_iso_3166_1_alpha_3",
+                    ColType::StringWithDefault(String::new()),
+                ),
+                ("email", ColType::TextNull),
+                ("phone", ColType::TextNull),
+                ("postal_address_as_full_text", ColType::TextNull),
+                ("country_as_iso_3166_1_alpha_2", ColType::StringNull),
+                ("postcode", ColType::TextNull),
+                (
+                    "consented_to_data_sharing",
+                    ColType::StringWithDefault(String::new()),
+                ),
+                (
+                    "signature_image_data_url",
+                    ColType::TextWithDefault(String::new()),
+                ),
             ],
-            &[
-            ]
-        ).await
+            &[],
+        )
+        .await?;
+        m.get_connection()
+            .execute_unprepared(
+                "ALTER TABLE patients ALTER COLUMN id SET DEFAULT gen_random_uuid()",
+            )
+            .await?;
+        Ok(())
     }
 
     async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {

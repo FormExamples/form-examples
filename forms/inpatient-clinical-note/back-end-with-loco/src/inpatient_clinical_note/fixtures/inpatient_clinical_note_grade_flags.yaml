@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 413290
+  id: "00000000-0000-4000-8000-000000064e6a"
   deletedAt: null
   flagId: "Test flagId"
   category: "deteriorating-news2-no-escalation"
   priority: "low"
   description: "Test description"
   suggestedAction: "Test suggestedAction"
-  inpatientClinicalNoteGradeId: 994703
+  inpatientClinicalNoteGradeId: "00000000-0000-4000-8000-0000000f2d8f"

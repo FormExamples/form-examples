@@ -1,8 +1,8 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 529162
+  id: "00000000-0000-4000-8000-00000008130a"
   deletedAt: null
   confirmed: true
   fullName: "Test fullName"
   acknowledgedDate: "1990-01-01"
-  patientId: 808325
+  patientId: "00000000-0000-4000-8000-0000000c5585"

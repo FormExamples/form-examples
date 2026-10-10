@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 813416
+  id: "00000000-0000-4000-8000-0000000c6968"
   deletedAt: null
   totalRegularMedications: 1
   totalPrnMedications: 1
@@ -16,4 +16,4 @@
   stoppStartReviewDone: "Test stoppStartReviewDone"
   deprescribingOpportunities: "Test deprescribingOpportunities"
   polypharmacyNotes: "Test polypharmacyNotes"
-  assessmentId: 504684
+  assessmentId: "00000000-0000-4000-8000-00000007b36c"

@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 288567
+  id: "00000000-0000-4000-8000-000000046737"
   deletedAt: null
   clinicianName: "Test clinicianName"
   clinicianRole: "doctor"
@@ -14,5 +14,5 @@
   guilty: "yes"
   eyeOpener: "yes"
   clinicalNote: "Test clinicalNote"
-  patientId: 241592
+  patientId: "00000000-0000-4000-8000-00000003afb8"
   clinicianId: null

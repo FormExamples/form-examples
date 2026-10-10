@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 165652
+  id: "00000000-0000-4000-8000-000000028714"
   deletedAt: null
   status: "draft"
   assessmentDate: "1990-01-01"
@@ -217,5 +217,5 @@
   planNotes: "Test planNotes"
   gateDecision: "proceed"
   additionalNotes: "Test additionalNotes"
-  patientId: 262369
-  clinicianId: 785304
+  patientId: "00000000-0000-4000-8000-0000000400e1"
+  clinicianId: "00000000-0000-4000-8000-0000000bfb98"

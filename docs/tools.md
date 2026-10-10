@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-101 tools.
+102 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -56,6 +56,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/loco-serve-openapi-refactor`](#loco-serve-openapi-refactor)
 - [`bin/loco-test-auth-header-fix`](#loco-test-auth-header-fix)
 - [`bin/loco-test-max-connections-fix`](#loco-test-max-connections-fix)
+- [`bin/loco-uuid-pk-refactor`](#loco-uuid-pk-refactor)
 - [`bin/make-github-pages`](#make-github-pages)
 - [`bin/migrate-sql-filenames.py`](#migrate-sql-filenamespy)
 - [`bin/node-current-version-set`](#node-current-version-set)
@@ -1803,6 +1804,36 @@ Usage:
   bin/loco-test-max-connections-fix --all             # every form's Loco crate
   bin/loco-test-max-connections-fix --dry-run --all   # show what would change
   bin/loco-test-max-connections-fix --check --all     # CI drift check (non-zero on drift)
+```
+
+<h2 id="loco-uuid-pk-refactor"><code>bin/loco-uuid-pk-refactor</code></h2>
+
+```text
+loco-uuid-pk-refactor — move every Loco crate's domain tables from Loco's
+auto-increment integer `id` to a UUIDv4 primary key (`gen_random_uuid()`),
+matching the `sql/` source of truth.
+
+Usage:
+    bin/loco-uuid-pk-refactor [--check] [--dry-run] [--all | <slug>...]
+
+What it rewrites, per `forms/<slug>/back-end-with-loco/` (the `users` table
+and the auth controller are Loco framework code and are left on integer ids):
+
+- migration/src/m*.rs (domain tables): `("id", ColType::PkAuto)` becomes
+  `ColType::PkUuid` plus an `ALTER TABLE ... SET DEFAULT gen_random_uuid()`;
+  every reference in the `refs` slice gets an explicit `ColType::Uuid` /
+  `UuidNull` column (Loco's `create_table` hard-codes integer FK columns) and
+  a named reference so the column name is pinned.
+- src/<snake>/models/_entities/*.rs: `id: i64` -> `Uuid`
+  (`auto_increment = false`); foreign-key fields -> `Uuid` / `Option<Uuid>`.
+- src/<snake>/controllers/*.rs: `Path<i64>` / `id: i64` / FK params -> `Uuid`.
+- src/<snake>/fixtures/*.yaml: integer ids and FK ids -> deterministic UUIDs
+  (`00000000-0000-4000-8000-<12 hex digits of the integer>`), preserving
+  parent/child consistency.
+- tests/requests/*.rs: the scaffold round-trip assertions read the id as a
+  UUID string instead of `as_i64`.
+
+Idempotent. `--check` exits 1 if any crate would change (CI drift detector).
 ```
 
 <h2 id="make-github-pages"><code>bin/make-github-pages</code></h2>

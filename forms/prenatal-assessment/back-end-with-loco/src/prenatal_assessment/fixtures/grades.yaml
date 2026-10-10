@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 428447
+  id: "00000000-0000-4000-8000-00000006899f"
   deletedAt: null
   riskLevel: "Test riskLevel"
   riskScore: 1
@@ -8,4 +8,4 @@
   medicalRisk: "Test medicalRisk"
   mentalHealthRisk: "Test mentalHealthRisk"
   gradedAt: "2026-01-01T00:00:00Z"
-  assessmentId: 318503
+  assessmentId: "00000000-0000-4000-8000-00000004dc27"

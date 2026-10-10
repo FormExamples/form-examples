@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 571058
+  id: "00000000-0000-4000-8000-00000008b6b2"
   deletedAt: null
   takesRegularMedications: "Test takesRegularMedications"
   currentHrt: "Test currentHrt"
@@ -15,4 +15,4 @@
   takesAnticoagulants: "Test takesAnticoagulants"
   anticoagulantDetails: "Test anticoagulantDetails"
   medicationNotes: "Test medicationNotes"
-  assessmentId: 857994
+  assessmentId: "00000000-0000-4000-8000-0000000d178a"

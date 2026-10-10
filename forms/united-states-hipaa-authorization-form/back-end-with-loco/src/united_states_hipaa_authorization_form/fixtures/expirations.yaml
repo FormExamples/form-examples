@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 201110
+  id: "00000000-0000-4000-8000-000000031196"
   deletedAt: null
   kind: "date"
   expirationDate: "1990-01-01"
   expirationEvent: "Test expirationEvent"
   durationMonths: 1
   durationLabel: "Test durationLabel"
-  hipaaAuthorizationId: 962728
+  hipaaAuthorizationId: "00000000-0000-4000-8000-0000000eb0a8"

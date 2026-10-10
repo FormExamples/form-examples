@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 397076
+  id: "00000000-0000-4000-8000-000000060f14"
   deletedAt: null
   flagId: "Test flagId"
   category: "breach-risk"
   priority: "low"
   description: "Test description"
   suggestedAction: "Test suggestedAction"
-  allergistWaitingListCardGradeId: 135303
+  allergistWaitingListCardGradeId: "00000000-0000-4000-8000-000000021087"

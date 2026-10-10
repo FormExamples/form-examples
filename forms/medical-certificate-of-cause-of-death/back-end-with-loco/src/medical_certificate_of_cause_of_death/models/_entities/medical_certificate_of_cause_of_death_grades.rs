@@ -9,15 +9,15 @@ use serde::{Deserialize, Serialize};
 pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
-    #[sea_orm(primary_key)]
-    pub id: i64,
+    #[sea_orm(primary_key, auto_increment = false)]
+    pub id: Uuid,
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub validity_class: String,
     #[sea_orm(column_type = "Text")]
     pub underlying_cause: String,
     pub coroner_referral_indicated: String,
     pub graded_at: DateTimeWithTimeZone,
-    pub medical_certificate_of_cause_of_death_id: i64,
+    pub medical_certificate_of_cause_of_death_id: Uuid,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

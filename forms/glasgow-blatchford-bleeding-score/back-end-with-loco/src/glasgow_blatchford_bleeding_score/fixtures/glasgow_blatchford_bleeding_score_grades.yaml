@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 764395
+  id: "00000000-0000-4000-8000-0000000ba9eb"
   deletedAt: null
   bloodUreaPoints: 1
   haemoglobinPoints: 1
@@ -14,4 +14,4 @@
   riskBand: "very-low"
   recommendedManagement: "Test recommendedManagement"
   gradedAt: "2026-01-01T00:00:00Z"
-  glasgowBlatchfordBleedingScoreId: 516472
+  glasgowBlatchfordBleedingScoreId: "00000000-0000-4000-8000-00000007e178"

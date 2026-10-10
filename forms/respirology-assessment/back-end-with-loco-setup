@@ -49,13 +49,13 @@ cargo loco generate scaffold clinician \
 
 cargo loco generate scaffold assessment \
     deleted_at:tstz \
-    patient:references \
+    patient:references:patient_id \
     status:string! \
     --api
 
 cargo loco generate scaffold assessment_current_medications \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     takes_respiratory_medications:string! \
     inhaler_use:string! \
     inhaler_technique_assessed:string! \
@@ -70,7 +70,7 @@ cargo loco generate scaffold assessment_current_medications \
 
 cargo loco generate scaffold assessment_medication_item \
     deleted_at:tstz \
-    current_medications:references \
+    assessment_current_medications:references:current_medications_id \
     medication_name:string! \
     dose:string! \
     frequency:string! \
@@ -81,7 +81,7 @@ cargo loco generate scaffold assessment_medication_item \
 
 cargo loco generate scaffold grade \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     mrc_grade:int! \
     mrc_description:string! \
     overall_severity:string! \
@@ -92,7 +92,7 @@ cargo loco generate scaffold grade \
 
 cargo loco generate scaffold grading_fired_rule \
     deleted_at:tstz \
-    grade:references \
+    grade:references:grade_id \
     rule_id:string! \
     category:string! \
     description:text! \
@@ -101,7 +101,7 @@ cargo loco generate scaffold grading_fired_rule \
 
 cargo loco generate scaffold grading_additional_flag \
     deleted_at:tstz \
-    grade:references \
+    grade:references:grade_id \
     flag_id:string! \
     category:string! \
     message:text! \
@@ -112,6 +112,10 @@ cargo loco generate scaffold grading_additional_flag \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

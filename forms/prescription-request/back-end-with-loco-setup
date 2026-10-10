@@ -49,14 +49,14 @@ cargo loco generate scaffold clinician \
 
 cargo loco generate scaffold prescription_request \
     deleted_at:tstz \
-    patient:references \
-    clinician:references \
+    patient:references:patient_id \
+    clinician:references:clinician_id \
     status:string! \
     --api
 
 cargo loco generate scaffold prescription_details \
     deleted_at:tstz \
-    prescription_request:references \
+    prescription_request:references:prescription_request_id \
     request_date:date! \
     medication_name:string! \
     dosage:string! \
@@ -67,7 +67,7 @@ cargo loco generate scaffold prescription_details \
 
 cargo loco generate scaffold prescription_substitution_options \
     deleted_at:tstz \
-    prescription_request:references \
+    prescription_request:references:prescription_request_id \
     allow_brand_substitution:string! \
     allow_generic_substitution:string! \
     allow_dosage_adjustment:string! \
@@ -76,7 +76,7 @@ cargo loco generate scaffold prescription_substitution_options \
 
 cargo loco generate scaffold prescription_request_type \
     deleted_at:tstz \
-    prescription_request:references \
+    prescription_request:references:prescription_request_id \
     is_new_prescription:string! \
     is_emergency:string! \
     additional_notes:text! \
@@ -84,7 +84,7 @@ cargo loco generate scaffold prescription_request_type \
 
 cargo loco generate scaffold grade \
     deleted_at:tstz \
-    prescription_request:references \
+    prescription_request:references:prescription_request_id \
     priority_level:string! \
     rule_count:int! \
     graded_at:tstz! \
@@ -92,7 +92,7 @@ cargo loco generate scaffold grade \
 
 cargo loco generate scaffold grading_fired_rule \
     deleted_at:tstz \
-    grade:references \
+    grade:references:grade_id \
     rule_id:string! \
     category:string! \
     description:text! \
@@ -101,7 +101,7 @@ cargo loco generate scaffold grading_fired_rule \
 
 cargo loco generate scaffold grading_additional_flag \
     deleted_at:tstz \
-    grade:references \
+    grade:references:grade_id \
     flag_id:string! \
     category:string! \
     message:text! \
@@ -112,6 +112,10 @@ cargo loco generate scaffold grading_additional_flag \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

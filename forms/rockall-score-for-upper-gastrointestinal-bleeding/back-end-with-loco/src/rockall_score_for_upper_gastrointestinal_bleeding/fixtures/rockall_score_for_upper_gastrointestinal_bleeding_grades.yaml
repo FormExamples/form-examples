@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 394730
+  id: "00000000-0000-4000-8000-0000000605ea"
   deletedAt: null
   agePoints: 1
   shockPoints: 1
@@ -11,4 +11,4 @@
   fullScore: 1
   riskBand: "low"
   gradedAt: "2026-01-01T00:00:00Z"
-  rockallScoreForUpperGastrointestinalBleedingId: 914447
+  rockallScoreForUpperGastrointestinalBleedingId: "00000000-0000-4000-8000-0000000df40f"

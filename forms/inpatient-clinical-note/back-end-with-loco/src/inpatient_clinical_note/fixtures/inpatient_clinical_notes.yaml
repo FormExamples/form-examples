@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 728045
+  id: "00000000-0000-4000-8000-0000000b1bed"
   deletedAt: null
   status: "draft"
   noteType: "admission-clerking"
@@ -121,6 +121,6 @@
   attestationText: "Test attestationText"
   electronicSignature: "Test electronicSignature"
   signedAt: "2026-01-01T00:00:00Z"
-  patientId: 179277
-  authorId: 690969
-  responsibleConsultantId: 690969
+  patientId: "00000000-0000-4000-8000-00000002bc4d"
+  authorId: "00000000-0000-4000-8000-0000000a8b19"
+  responsibleConsultantId: "00000000-0000-4000-8000-0000000a8b19"

@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 294002
+  id: "00000000-0000-4000-8000-000000047c72"
   deletedAt: null
   timepointMinutes: 1
   appearance: "0"
@@ -10,4 +10,4 @@
   respiration: "0"
   total: 1
   band: "reassuring"
-  apgarScoreId: 808144
+  apgarScoreId: "00000000-0000-4000-8000-0000000c54d0"

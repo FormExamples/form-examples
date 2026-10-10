@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 595445
+  id: "00000000-0000-4000-8000-0000000915f5"
   deletedAt: null
   herniaType: "inguinal"
   herniaSubtype: "direct"
@@ -15,4 +15,4 @@
   signedByName: "Test signedByName"
   signedAt: "2026-01-01T00:00:00Z"
   gradedAt: "2026-01-01T00:00:00Z"
-  herniaDiagnosticEvaluationId: 157798
+  herniaDiagnosticEvaluationId: "00000000-0000-4000-8000-000000026866"

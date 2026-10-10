@@ -7,23 +7,28 @@ pub struct Migration;
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, m: &SchemaManager) -> Result<(), DbErr> {
-        create_table(m, "assessment_drug_allergy_items",
+        create_table(
+            m,
+            "assessment_drug_allergy_items",
             &[
-            
-            ("id", ColType::PkAuto),
-            
-            ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("allergen", ColType::StringWithDefault(String::new())),
-            ("reaction_type", ColType::StringWithDefault(String::new())),
-            ("severity", ColType::StringWithDefault(String::new())),
-            ("timing", ColType::StringWithDefault(String::new())),
-            ("alternatives_tolerated", ColType::TextWithDefault(String::new())),
-            ("sort_order", ColType::IntegerWithDefault(0)),
+                ("id", ColType::PkUuid),
+                ("deleted_at", ColType::TimestampWithTimeZoneNull),
+                ("allergen", ColType::StringWithDefault(String::new())),
+                ("reaction_type", ColType::StringWithDefault(String::new())),
+                ("severity", ColType::StringWithDefault(String::new())),
+                ("timing", ColType::StringWithDefault(String::new())),
+                (
+                    "alternatives_tolerated",
+                    ColType::TextWithDefault(String::new()),
+                ),
+                ("sort_order", ColType::IntegerWithDefault(0)),
+                ("assessment_drug_allergy_id", ColType::Uuid),
             ],
-            &[
-            ("assessment_drug_allergy", ""),
-            ]
-        ).await
+            &[("assessment_drug_allergy", "assessment_drug_allergy_id")],
+        )
+        .await?;
+        m.get_connection().execute_unprepared("ALTER TABLE assessment_drug_allergy_items ALTER COLUMN id SET DEFAULT gen_random_uuid()").await?;
+        Ok(())
     }
 
     async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {

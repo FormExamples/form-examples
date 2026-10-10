@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 503803
+  id: "00000000-0000-4000-8000-00000007affb"
   deletedAt: null
   status: "draft"
   assessmentDate: "1990-01-01"
@@ -100,5 +100,5 @@
   risksBenefitsCounselled: "yes"
   consentDiscussed: "yes"
   managementNotes: "Test managementNotes"
-  patientId: 424998
-  clinicianId: 728560
+  patientId: "00000000-0000-4000-8000-000000067c26"
+  clinicianId: "00000000-0000-4000-8000-0000000b1df0"

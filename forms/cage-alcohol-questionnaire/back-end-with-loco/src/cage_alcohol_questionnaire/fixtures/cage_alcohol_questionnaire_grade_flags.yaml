@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 634439
+  id: "00000000-0000-4000-8000-00000009ae47"
   deletedAt: null
   flagId: "Test flagId"
   category: "positive-screen"
   priority: "low"
   description: "Test description"
   suggestedAction: "Test suggestedAction"
-  cageAlcoholQuestionnaireGradeId: 413255
+  cageAlcoholQuestionnaireGradeId: "00000000-0000-4000-8000-000000064e47"

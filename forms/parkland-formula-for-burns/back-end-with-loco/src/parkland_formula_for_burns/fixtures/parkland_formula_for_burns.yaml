@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 655168
+  id: "00000000-0000-4000-8000-00000009ff40"
   deletedAt: null
   clinicianName: "Test clinicianName"
   clinicianRole: "doctor"
@@ -17,5 +17,5 @@
   inhalationSuspected: "yes"
   circumferentialOrDeep: "yes"
   mechanism: "thermal"
-  patientId: 897537
-  clinicianId: 493867
+  patientId: "00000000-0000-4000-8000-0000000db201"
+  clinicianId: "00000000-0000-4000-8000-00000007892b"

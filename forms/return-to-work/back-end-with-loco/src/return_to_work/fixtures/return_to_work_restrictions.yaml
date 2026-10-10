@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 155099
+  id: "00000000-0000-4000-8000-000000025ddb"
   deletedAt: null
   kind: "altered-hours"
   severity: "low"
@@ -9,4 +9,4 @@
   startDate: "1990-01-01"
   endDate: "1990-01-01"
   priorityRank: 1
-  returnToWorkId: 583038
+  returnToWorkId: "00000000-0000-4000-8000-00000008e57e"

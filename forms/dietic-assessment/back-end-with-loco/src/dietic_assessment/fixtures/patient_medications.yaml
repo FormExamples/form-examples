@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 250692
+  id: "00000000-0000-4000-8000-00000003d344"
   deletedAt: null
   dose: "Test dose"
   frequency: "Test frequency"
@@ -9,5 +9,5 @@
   prescribedBy: "Test prescribedBy"
   adherence: "full"
   notes: "Test notes"
-  patientId: 551175
-  medicationId: 462480
+  patientId: "00000000-0000-4000-8000-000000086907"
+  medicationId: "00000000-0000-4000-8000-000000070e90"

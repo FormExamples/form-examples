@@ -7,21 +7,32 @@ pub struct Migration;
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, m: &SchemaManager) -> Result<(), DbErr> {
-        create_table(m, "casualty_card_assessment_plans",
+        create_table(
+            m,
+            "casualty_card_assessment_plans",
             &[
-            
-            ("id", ColType::PkAuto),
-            
-            ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("working_diagnosis", ColType::TextWithDefault(String::new())),
-            ("differential_diagnoses", ColType::TextWithDefault(String::new())),
-            ("clinical_impression", ColType::TextWithDefault(String::new())),
-            ("risk_stratification", ColType::TextWithDefault(String::new())),
+                ("id", ColType::PkUuid),
+                ("deleted_at", ColType::TimestampWithTimeZoneNull),
+                ("working_diagnosis", ColType::TextWithDefault(String::new())),
+                (
+                    "differential_diagnoses",
+                    ColType::TextWithDefault(String::new()),
+                ),
+                (
+                    "clinical_impression",
+                    ColType::TextWithDefault(String::new()),
+                ),
+                (
+                    "risk_stratification",
+                    ColType::TextWithDefault(String::new()),
+                ),
+                ("casualty_card_id", ColType::Uuid),
             ],
-            &[
-            ("casualty_card", ""),
-            ]
-        ).await
+            &[("casualty_card", "casualty_card_id")],
+        )
+        .await?;
+        m.get_connection().execute_unprepared("ALTER TABLE casualty_card_assessment_plans ALTER COLUMN id SET DEFAULT gen_random_uuid()").await?;
+        Ok(())
     }
 
     async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {

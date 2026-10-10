@@ -49,8 +49,8 @@ cargo loco generate scaffold clinician \
 
 cargo loco generate scaffold nerve_conduction_study_test_request \
     deleted_at:tstz \
-    patient:references \
-    clinician:references \
+    patient:references:patient_id \
+    clinician:references:clinician_id \
     status:string! \
     site_name:string! \
     setting:string! \
@@ -78,7 +78,7 @@ cargo loco generate scaffold nerve_conduction_study_test_request \
 
 cargo loco generate scaffold nerve_conduction_study_test_request_grade \
     deleted_at:tstz \
-    nerve_conduction_study_test_request:references \
+    nerve_conduction_study_test_request:references:nerve_conduction_study_test_request_id \
     appropriateness_score:int \
     appropriateness_band:string! \
     procedural_risk_band:string! \
@@ -93,7 +93,7 @@ cargo loco generate scaffold nerve_conduction_study_test_request_grade \
 
 cargo loco generate scaffold nerve_conduction_study_test_request_grade_rule \
     deleted_at:tstz \
-    nerve_conduction_study_test_request_grade:references \
+    nerve_conduction_study_test_request_grade:references:nerve_conduction_study_test_request_grade_id \
     rule_id:string! \
     axis:string! \
     category:string! \
@@ -102,7 +102,7 @@ cargo loco generate scaffold nerve_conduction_study_test_request_grade_rule \
 
 cargo loco generate scaffold nerve_conduction_study_test_request_grade_flag \
     deleted_at:tstz \
-    nerve_conduction_study_test_request_grade:references \
+    nerve_conduction_study_test_request_grade:references:nerve_conduction_study_test_request_grade_id \
     flag_id:string! \
     category:string! \
     priority:string! \
@@ -114,6 +114,10 @@ cargo loco generate scaffold nerve_conduction_study_test_request_grade_flag \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 849253
+  id: "00000000-0000-4000-8000-0000000cf565"
   deletedAt: null
   takesRespiratoryMedications: "Test takesRespiratoryMedications"
   inhalerUse: "Test inhalerUse"
@@ -12,4 +12,4 @@
   medicationAdherence: "Test medicationAdherence"
   adverseDrugReactions: "Test adverseDrugReactions"
   additionalNotes: "Test additionalNotes"
-  assessmentId: 294585
+  assessmentId: "00000000-0000-4000-8000-000000047eb9"

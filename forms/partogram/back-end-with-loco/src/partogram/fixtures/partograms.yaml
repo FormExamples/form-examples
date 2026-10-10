@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 921292
+  id: "00000000-0000-4000-8000-0000000e0ecc"
   deletedAt: null
   clinicianName: "Test clinicianName"
   clinicianRole: "midwife"
@@ -13,5 +13,5 @@
   membranesOnAdmission: "intact"
   riskFactors: "Test riskFactors"
   plannedCare: "Test plannedCare"
-  patientId: 732023
+  patientId: "00000000-0000-4000-8000-0000000b2b77"
   clinicianId: null

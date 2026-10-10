@@ -7,26 +7,28 @@ pub struct Migration;
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, m: &SchemaManager) -> Result<(), DbErr> {
-        create_table(m, "medical_operation_note_drains",
+        create_table(
+            m,
+            "medical_operation_note_drains",
             &[
-            
-            ("id", ColType::PkAuto),
-            
-            ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("device_type", ColType::StringWithDefault(String::new())),
-            ("name", ColType::StringWithDefault(String::new())),
-            ("site", ColType::StringWithDefault(String::new())),
-            ("size_or_gauge", ColType::StringWithDefault(String::new())),
-            ("output_target", ColType::StringWithDefault(String::new())),
-            ("removal_plan", ColType::StringWithDefault(String::new())),
-            ("removal_by_date", ColType::DateNull),
-            ("quantity", ColType::IntegerWithDefault(1)),
-            ("notes", ColType::TextWithDefault(String::new())),
+                ("id", ColType::PkUuid),
+                ("deleted_at", ColType::TimestampWithTimeZoneNull),
+                ("device_type", ColType::StringWithDefault(String::new())),
+                ("name", ColType::StringWithDefault(String::new())),
+                ("site", ColType::StringWithDefault(String::new())),
+                ("size_or_gauge", ColType::StringWithDefault(String::new())),
+                ("output_target", ColType::StringWithDefault(String::new())),
+                ("removal_plan", ColType::StringWithDefault(String::new())),
+                ("removal_by_date", ColType::DateNull),
+                ("quantity", ColType::IntegerWithDefault(1)),
+                ("notes", ColType::TextWithDefault(String::new())),
+                ("medical_operation_note_id", ColType::Uuid),
             ],
-            &[
-            ("medical_operation_note", ""),
-            ]
-        ).await
+            &[("medical_operation_note", "medical_operation_note_id")],
+        )
+        .await?;
+        m.get_connection().execute_unprepared("ALTER TABLE medical_operation_note_drains ALTER COLUMN id SET DEFAULT gen_random_uuid()").await?;
+        Ok(())
     }
 
     async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {

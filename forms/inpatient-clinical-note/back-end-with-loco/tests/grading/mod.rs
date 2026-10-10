@@ -17,6 +17,7 @@ use inpatient_clinical_note::models::_entities::{
 use loco_rs::testing::prelude::*;
 use sea_orm::{ActiveModelTrait, ColumnTrait, EntityTrait, QueryFilter, Set};
 use serial_test::serial;
+use uuid::Uuid;
 
 /// The `component` values the `inpatient_clinical_note_grade_rule` CHECK
 /// constraint permits, copied from `sql/10_create_table_…_grade_rule.sql`.
@@ -53,7 +54,7 @@ fn clinician(name: &str, grade: &str) -> clinicians::ActiveModel {
 
 /// Insert a patient, an author, and a consultant, returning
 /// `(patient_id, author_id, consultant_id)`.
-async fn seed_people(db: &sea_orm::DatabaseConnection) -> (i64, i64, i64) {
+async fn seed_people(db: &sea_orm::DatabaseConnection) -> (Uuid, Uuid, Uuid) {
     let patient = inpatient_clinical_note::models::_entities::patients::ActiveModel {
         name: Set("Test Patient".to_owned()),
         birth_date: Set(chrono::NaiveDate::from_ymd_opt(1948, 3, 12).unwrap()),
@@ -79,7 +80,7 @@ async fn seed_people(db: &sea_orm::DatabaseConnection) -> (i64, i64, i64) {
 
 /// A progress note with every base component documented and normal
 /// observations, so it grades `complete` / `stable`.
-async fn seed_complete_note(db: &sea_orm::DatabaseConnection) -> i64 {
+async fn seed_complete_note(db: &sea_orm::DatabaseConnection) -> Uuid {
     let (patient_id, author_id, consultant_id) = seed_people(db).await;
 
     let note = inpatient_clinical_notes::ActiveModel {
@@ -116,7 +117,7 @@ async fn seed_complete_note(db: &sea_orm::DatabaseConnection) -> i64 {
         capacity_assessed: Set("yes".to_owned()),
         patient_id: Set(patient_id),
         author_id: Set(author_id),
-        responsible_consultant_id: Set(consultant_id),
+        responsible_consultant_id: Set(Some(consultant_id)),
         ..Default::default()
     }
     .insert(db)
@@ -283,7 +284,7 @@ async fn soft_deleted_children_are_excluded_from_grading() {
 #[serial]
 async fn grading_a_missing_note_is_not_found() {
     let boot = boot_test::<App>().await.unwrap();
-    let result = grade_and_persist(&boot.app_context.db, 987_654).await;
+    let result = grade_and_persist(&boot.app_context.db, Uuid::from_u128(987_654)).await;
     assert!(result.is_err(), "grading an absent note must not succeed");
 }
 
@@ -337,7 +338,7 @@ async fn the_grade_endpoints_round_trip_over_http() {
 async fn grading_an_absent_note_over_http_is_404() {
     request::<App, _, _>(|request, _ctx| async move {
         let response = request
-            .post("/api/inpatient_clinical_notes/987654/grade")
+            .post("/api/inpatient_clinical_notes/00000000-0000-0000-0000-0000000fa0c6/grade")
             .await;
         assert_eq!(response.status_code(), 404);
     })

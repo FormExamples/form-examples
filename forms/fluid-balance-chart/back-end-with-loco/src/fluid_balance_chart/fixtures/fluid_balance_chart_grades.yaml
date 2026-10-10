@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 392728
+  id: "00000000-0000-4000-8000-00000005fe18"
   deletedAt: null
   totalIntakeMl: 1.0
   totalOutputMl: 1.0
@@ -11,4 +11,4 @@
   urineOutputMlKgH: 1.0
   fluidStatus: "balanced"
   gradedAt: "2026-01-01T00:00:00Z"
-  fluidBalanceChartId: 438032
+  fluidBalanceChartId: "00000000-0000-4000-8000-00000006af10"

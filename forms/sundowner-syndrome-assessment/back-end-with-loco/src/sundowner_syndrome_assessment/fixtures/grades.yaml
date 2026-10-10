@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 694468
+  id: "00000000-0000-4000-8000-0000000a98c4"
   deletedAt: null
   cmaiScore: 1
   npiTotalScore: 1
   overallSeverity: "Test overallSeverity"
   gradedAt: "2026-01-01T00:00:00Z"
-  assessmentId: 591090
+  assessmentId: "00000000-0000-4000-8000-0000000904f2"

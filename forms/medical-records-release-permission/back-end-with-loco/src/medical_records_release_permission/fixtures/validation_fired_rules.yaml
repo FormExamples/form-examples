@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 473079
+  id: "00000000-0000-4000-8000-0000000737f7"
   deletedAt: null
   ruleId: "Test ruleId"
   domain: "Test domain"
   description: "Test description"
   score: 1
-  validationResultId: 356933
+  validationResultId: "00000000-0000-4000-8000-000000057245"

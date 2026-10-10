@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 795407
+  id: "00000000-0000-4000-8000-0000000c230f"
   deletedAt: null
   resultClassification: "normal"
   abnormalitySeverity: "none"
@@ -13,4 +13,4 @@
   clinicianNotes: "Test clinicianNotes"
   signedAt: "2026-01-01T00:00:00Z"
   gradedAt: "2026-01-01T00:00:00Z"
-  ultrasoundTestResultId: 677354
+  ultrasoundTestResultId: "00000000-0000-4000-8000-0000000a55ea"

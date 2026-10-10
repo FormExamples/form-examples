@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 905355
+  id: "00000000-0000-4000-8000-0000000dd08b"
   deletedAt: null
   recipientName: "Test recipientName"
   recipientOrganization: "Test recipientOrganization"
@@ -9,4 +9,4 @@
   recipientPhone: "+441234567890"
   recipientEmail: "test.patient@example.com"
   recipientRelationshipToPatient: "health-plan"
-  hipaaAuthorizationId: 962728
+  hipaaAuthorizationId: "00000000-0000-4000-8000-0000000eb0a8"

@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 111596
+  id: "00000000-0000-4000-8000-00000001b3ec"
   deletedAt: null
   status: "draft"
   siteName: "Test siteName"
@@ -47,5 +47,5 @@
   requesterContact: "Test requesterContact"
   interpreterRequired: true
   notes: "Test notes"
-  patientId: 886746
-  clinicianId: 846922
+  patientId: "00000000-0000-4000-8000-0000000d87da"
+  clinicianId: "00000000-0000-4000-8000-0000000cec4a"

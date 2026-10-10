@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 138215
+  id: "00000000-0000-4000-8000-000000021be7"
   deletedAt: null
   clerkedAt: "2026-01-01T00:00:00Z"
   clinicianRole: "doctor"
@@ -35,5 +35,5 @@
   redFlagFindings: "Test redFlagFindings"
   managementPlan: "Test managementPlan"
   clinicalNote: "Test clinicalNote"
-  patientId: 378635
+  patientId: "00000000-0000-4000-8000-00000005c70b"
   clinicianId: null

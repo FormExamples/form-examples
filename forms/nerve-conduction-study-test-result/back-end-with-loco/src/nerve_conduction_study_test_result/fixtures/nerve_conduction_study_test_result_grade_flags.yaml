@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 318975
+  id: "00000000-0000-4000-8000-00000004ddff"
   deletedAt: null
   flagId: "Test flagId"
   category: "critical-result-alert"
   priority: "low"
   description: "Test description"
   suggestedAction: "Test suggestedAction"
-  nerveConductionStudyTestResultGradeId: 623501
+  nerveConductionStudyTestResultGradeId: "00000000-0000-4000-8000-00000009838d"

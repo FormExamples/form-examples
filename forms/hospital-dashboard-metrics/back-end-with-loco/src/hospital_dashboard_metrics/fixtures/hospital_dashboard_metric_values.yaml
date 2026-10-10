@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 869225
+  id: "00000000-0000-4000-8000-0000000d4369"
   deletedAt: null
   metricCode: "Test metricCode"
   categoryNumber: 1
@@ -8,4 +8,4 @@
   metricText: "Test metricText"
   metricValue: 1.0
   notes: "Test notes"
-  hospitalDashboardMetricsId: 281764
+  hospitalDashboardMetricsId: "00000000-0000-4000-8000-000000044ca4"

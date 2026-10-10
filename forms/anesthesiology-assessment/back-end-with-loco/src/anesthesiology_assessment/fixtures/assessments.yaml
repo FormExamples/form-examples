@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 935647
+  id: "00000000-0000-4000-8000-0000000e46df"
   deletedAt: null
   status: "Test status"
-  patientId: 509481
+  patientId: "00000000-0000-4000-8000-00000007c629"

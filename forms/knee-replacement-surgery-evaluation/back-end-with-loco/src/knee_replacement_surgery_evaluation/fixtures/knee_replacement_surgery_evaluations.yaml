@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 705876
+  id: "00000000-0000-4000-8000-0000000ac554"
   deletedAt: null
   status: "draft"
   siteName: "Test siteName"
@@ -83,5 +83,5 @@
   planRecommendation: "total-knee-replacement"
   targetListDate: "1990-01-01"
   responsibleSurgeon: "Test responsibleSurgeon"
-  patientId: 259468
-  clinicianId: 444407
+  patientId: "00000000-0000-4000-8000-00000003f58c"
+  clinicianId: "00000000-0000-4000-8000-00000006c7f7"

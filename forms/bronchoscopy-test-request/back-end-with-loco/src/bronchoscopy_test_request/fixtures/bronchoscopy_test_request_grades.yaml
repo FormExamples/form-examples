@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 521603
+  id: "00000000-0000-4000-8000-00000007f583"
   deletedAt: null
   appropriatenessScore: 1
   appropriatenessBand: "usually-appropriate"
@@ -14,4 +14,4 @@
   clinicianNotes: "Test clinicianNotes"
   signedAt: "2026-01-01T00:00:00Z"
   gradedAt: "2026-01-01T00:00:00Z"
-  bronchoscopyTestRequestId: 407121
+  bronchoscopyTestRequestId: "00000000-0000-4000-8000-000000063651"

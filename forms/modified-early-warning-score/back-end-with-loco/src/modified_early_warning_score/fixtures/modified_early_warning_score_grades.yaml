@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 287940
+  id: "00000000-0000-4000-8000-0000000464c4"
   deletedAt: null
   aggregateScore: 1
   systolicBloodPressureScore: 1
@@ -12,4 +12,4 @@
   riskBand: "low"
   monitoringFrequency: "Test monitoringFrequency"
   gradedAt: "2026-01-01T00:00:00Z"
-  modifiedEarlyWarningScoreId: 245584
+  modifiedEarlyWarningScoreId: "00000000-0000-4000-8000-00000003bf50"

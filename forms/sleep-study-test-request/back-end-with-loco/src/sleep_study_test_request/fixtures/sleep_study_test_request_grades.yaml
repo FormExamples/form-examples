@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 282884
+  id: "00000000-0000-4000-8000-000000045104"
   deletedAt: null
   appropriatenessScore: 1
   appropriatenessBand: "usually-appropriate"
@@ -12,4 +12,4 @@
   clinicianNotes: "Test clinicianNotes"
   signedAt: "2026-01-01T00:00:00Z"
   gradedAt: "2026-01-01T00:00:00Z"
-  sleepStudyTestRequestId: 308245
+  sleepStudyTestRequestId: "00000000-0000-4000-8000-00000004b415"

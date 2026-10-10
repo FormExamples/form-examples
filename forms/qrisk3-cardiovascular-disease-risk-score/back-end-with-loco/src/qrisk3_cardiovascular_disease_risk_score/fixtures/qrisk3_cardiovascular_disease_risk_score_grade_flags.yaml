@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 325468
+  id: "00000000-0000-4000-8000-00000004f75c"
   deletedAt: null
   flagId: "Test flagId"
   category: "statin-recommended"
   priority: "low"
   description: "Test description"
   suggestedAction: "Test suggestedAction"
-  qrisk3CardiovascularDiseaseRiskScoreGradeId: 816659
+  qrisk3CardiovascularDiseaseRiskScoreGradeId: "00000000-0000-4000-8000-0000000c7613"

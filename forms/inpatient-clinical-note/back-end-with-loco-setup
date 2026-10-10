@@ -50,9 +50,9 @@ cargo loco generate scaffold clinician \
 
 cargo loco generate scaffold inpatient_clinical_note \
     deleted_at:tstz \
-    patient:references \
-    author:references \
-    responsible_consultant:references \
+    patient:references:patient_id \
+    clinician:references:author_id \
+    clinician:references:responsible_consultant_id \
     status:string! \
     note_type:string! \
     hospital_name:string! \
@@ -176,7 +176,7 @@ cargo loco generate scaffold inpatient_clinical_note \
 
 cargo loco generate scaffold inpatient_clinical_note_problem \
     deleted_at:tstz \
-    inpatient_clinical_note:references \
+    inpatient_clinical_note:references:inpatient_clinical_note_id \
     sort_order:int! \
     problem:string! \
     category:string! \
@@ -189,7 +189,7 @@ cargo loco generate scaffold inpatient_clinical_note_problem \
 
 cargo loco generate scaffold inpatient_clinical_note_medication_change \
     deleted_at:tstz \
-    inpatient_clinical_note:references \
+    inpatient_clinical_note:references:inpatient_clinical_note_id \
     sort_order:int! \
     drug_name:string! \
     action:string! \
@@ -206,7 +206,7 @@ cargo loco generate scaffold inpatient_clinical_note_medication_change \
 
 cargo loco generate scaffold inpatient_clinical_note_investigation \
     deleted_at:tstz \
-    inpatient_clinical_note:references \
+    inpatient_clinical_note:references:inpatient_clinical_note_id \
     sort_order:int! \
     test_name:string! \
     category:string! \
@@ -220,7 +220,7 @@ cargo loco generate scaffold inpatient_clinical_note_investigation \
 
 cargo loco generate scaffold inpatient_clinical_note_job \
     deleted_at:tstz \
-    inpatient_clinical_note:references \
+    inpatient_clinical_note:references:inpatient_clinical_note_id \
     sort_order:int! \
     job:string! \
     category:string! \
@@ -234,7 +234,7 @@ cargo loco generate scaffold inpatient_clinical_note_job \
 
 cargo loco generate scaffold inpatient_clinical_note_grade \
     deleted_at:tstz \
-    inpatient_clinical_note:references \
+    inpatient_clinical_note:references:inpatient_clinical_note_id \
     status:string! \
     completeness_percent:int \
     required_component_count:int \
@@ -259,7 +259,7 @@ cargo loco generate scaffold inpatient_clinical_note_grade \
 
 cargo loco generate scaffold inpatient_clinical_note_grade_rule \
     deleted_at:tstz \
-    inpatient_clinical_note_grade:references \
+    inpatient_clinical_note_grade:references:inpatient_clinical_note_grade_id \
     rule_id:string! \
     engine:string! \
     component:string! \
@@ -270,7 +270,7 @@ cargo loco generate scaffold inpatient_clinical_note_grade_rule \
 
 cargo loco generate scaffold inpatient_clinical_note_grade_flag \
     deleted_at:tstz \
-    inpatient_clinical_note_grade:references \
+    inpatient_clinical_note_grade:references:inpatient_clinical_note_grade_id \
     flag_id:string! \
     category:string! \
     priority:string! \
@@ -282,6 +282,10 @@ cargo loco generate scaffold inpatient_clinical_note_grade_flag \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

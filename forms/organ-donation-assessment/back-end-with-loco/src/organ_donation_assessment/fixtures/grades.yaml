@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 358580
+  id: "00000000-0000-4000-8000-0000000578b4"
   deletedAt: null
   eligibility: "Test eligibility"
   overallRiskLevel: "Test overallRiskLevel"
   donorRiskIndex: 1.0
   gradedAt: "2026-01-01T00:00:00Z"
-  assessmentId: 230705
+  assessmentId: "00000000-0000-4000-8000-000000038531"

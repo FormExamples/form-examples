@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 900124
+  id: "00000000-0000-4000-8000-0000000dbc1c"
   deletedAt: null
   ruleId: "Test ruleId"
   axis: "classification"
   category: "Test category"
   description: "Test description"
-  lumbarPunctureTestResultGradeId: 482105
+  lumbarPunctureTestResultGradeId: "00000000-0000-4000-8000-000000075b39"

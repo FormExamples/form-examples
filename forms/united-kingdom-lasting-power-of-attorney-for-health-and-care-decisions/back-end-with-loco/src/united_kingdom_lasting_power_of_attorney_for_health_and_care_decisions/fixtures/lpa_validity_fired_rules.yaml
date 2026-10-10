@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 304348
+  id: "00000000-0000-4000-8000-00000004a4dc"
   deletedAt: null
   ruleId: "Test ruleId"
   severity: "fatal"
@@ -8,4 +8,4 @@
   sourceCitation: "Test sourceCitation"
   description: "Test description"
   suggestedCorrection: "Test suggestedCorrection"
-  lpaValidityId: 473998
+  lpaValidityId: "00000000-0000-4000-8000-000000073b8e"

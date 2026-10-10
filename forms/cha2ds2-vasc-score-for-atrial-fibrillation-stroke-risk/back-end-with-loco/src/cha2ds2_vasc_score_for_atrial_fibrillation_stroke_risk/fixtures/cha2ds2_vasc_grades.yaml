@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 300627
+  id: "00000000-0000-4000-8000-000000049653"
   deletedAt: null
   congestiveHeartFailurePoints: 1
   hypertensionPoints: 1
@@ -14,4 +14,4 @@
   annualStrokeRiskPercent: 1.0
   anticoagulationRecommendation: "Test anticoagulationRecommendation"
   gradedAt: "2026-01-01T00:00:00Z"
-  cha2ds2VascId: 920760
+  cha2ds2VascId: "00000000-0000-4000-8000-0000000e0cb8"

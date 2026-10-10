@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 472646
+  id: "00000000-0000-4000-8000-000000073646"
   deletedAt: null
   waitingTimeStatus: "within-target"
   clinicalPriority: "P1a"
@@ -12,4 +12,4 @@
   daysToAppointment: 1
   graderNotes: "Test graderNotes"
   gradedAt: "2026-01-01T00:00:00Z"
-  giSurgeryWaitingListCardId: 934175
+  giSurgeryWaitingListCardId: "00000000-0000-4000-8000-0000000e411f"

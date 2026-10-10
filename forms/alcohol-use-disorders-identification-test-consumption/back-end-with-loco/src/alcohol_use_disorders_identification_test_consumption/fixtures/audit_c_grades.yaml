@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 466829
+  id: "00000000-0000-4000-8000-000000071f8d"
   deletedAt: null
   totalScore: 1
   riskBand: "lower"
   positiveScreen: "yes"
   gradedAt: "2026-01-01T00:00:00Z"
-  auditCId: 928909
+  auditCId: "00000000-0000-4000-8000-0000000e2c8d"

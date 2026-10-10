@@ -43,8 +43,8 @@ cargo loco generate scaffold prescriber \
 
 cargo loco generate scaffold eye_prescription \
     deleted_at:tstz \
-    patient:references \
-    prescriber:references \
+    patient:references:patient_id \
+    prescriber:references:prescriber_id \
     status:string! \
     examination_date:date! \
     examination_time:string \
@@ -58,7 +58,7 @@ cargo loco generate scaffold eye_prescription \
 
 cargo loco generate scaffold eye_prescription_eye \
     deleted_at:tstz \
-    eye_prescription:references \
+    eye_prescription:references:eye_prescription_id \
     eye:string! \
     sphere_diopters:double \
     cylinder_diopters:double \
@@ -73,7 +73,7 @@ cargo loco generate scaffold eye_prescription_eye \
 
 cargo loco generate scaffold eye_prescription_visual_acuity \
     deleted_at:tstz \
-    eye_prescription:references \
+    eye_prescription:references:eye_prescription_id \
     distance_right_unaided:string! \
     distance_left_unaided:string! \
     distance_binocular_unaided:string! \
@@ -93,7 +93,7 @@ cargo loco generate scaffold eye_prescription_visual_acuity \
 
 cargo loco generate scaffold eye_prescription_pupillary_distance \
     deleted_at:tstz \
-    eye_prescription:references \
+    eye_prescription:references:eye_prescription_id \
     distance_total_mm:double \
     distance_right_mm:double \
     distance_left_mm:double \
@@ -106,7 +106,7 @@ cargo loco generate scaffold eye_prescription_pupillary_distance \
 
 cargo loco generate scaffold eye_prescription_lens_recommendation \
     deleted_at:tstz \
-    eye_prescription:references \
+    eye_prescription:references:eye_prescription_id \
     lens_type:string! \
     material:string! \
     refractive_index:double \
@@ -125,7 +125,7 @@ cargo loco generate scaffold eye_prescription_lens_recommendation \
 
 cargo loco generate scaffold eye_prescription_ocular_health_finding \
     deleted_at:tstz \
-    eye_prescription:references \
+    eye_prescription:references:eye_prescription_id \
     slit_lamp_right:text! \
     slit_lamp_left:text! \
     fundus_right:text! \
@@ -145,7 +145,7 @@ cargo loco generate scaffold eye_prescription_ocular_health_finding \
 
 cargo loco generate scaffold eye_prescription_grade \
     deleted_at:tstz \
-    eye_prescription:references \
+    eye_prescription:references:eye_prescription_id \
     right_eye_sphere_class:string! \
     right_eye_cylinder_class:string! \
     left_eye_sphere_class:string! \
@@ -165,7 +165,7 @@ cargo loco generate scaffold eye_prescription_grade \
 
 cargo loco generate scaffold eye_prescription_grade_rule \
     deleted_at:tstz \
-    eye_prescription_grade:references \
+    eye_prescription_grade:references:eye_prescription_grade_id \
     rule_id:string! \
     instrument:string! \
     eye:string! \
@@ -176,7 +176,7 @@ cargo loco generate scaffold eye_prescription_grade_rule \
 
 cargo loco generate scaffold eye_prescription_grade_flag \
     deleted_at:tstz \
-    eye_prescription_grade:references \
+    eye_prescription_grade:references:eye_prescription_grade_id \
     flag_id:string! \
     category:string! \
     eye:string! \
@@ -189,6 +189,10 @@ cargo loco generate scaffold eye_prescription_grade_flag \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

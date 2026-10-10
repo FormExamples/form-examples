@@ -25,8 +25,8 @@ use crate::models::_entities::{
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 struct Params {
-    author_id: i64,
-    organization_id: i64,
+    author_id: Uuid,
+    organization_id: Uuid,
     slug: Option<String>,
     number: Option<i32>,
     title: String,
@@ -125,8 +125,8 @@ impl Params {
     }
 
     fn update(&self, item: &mut ActiveModel) {
-        item.author_id = Set(self.author_id);
-        item.organization_id = Set(self.organization_id);
+        item.author_id = Set(Some(self.author_id));
+        item.organization_id = Set(Some(self.organization_id));
         item.slug = Set(self.slug.clone().unwrap_or_default());
         item.number = Set(self.number);
         item.title = Set(self.title.clone());
@@ -210,10 +210,10 @@ fn pad4(n: Option<i32>) -> String {
 #[allow(clippy::too_many_lines)] // linear Markdown builder; splitting adds indirection, not clarity
 async fn render_markdown(ctx: &AppContext, item: &Model) -> Result<String> {
     let id = item.id;
-    let author = authors::Entity::find_by_id(item.author_id)
+    let author = authors::Entity::find_by_id(item.author_id.unwrap_or_default())
         .one(&ctx.db)
         .await?;
-    let org = organizations::Entity::find_by_id(item.organization_id)
+    let org = organizations::Entity::find_by_id(item.organization_id.unwrap_or_default())
         .one(&ctx.db)
         .await?;
     let positions = architecture_decision_record_positions::Entity::find()
@@ -373,7 +373,7 @@ async fn api_show_by_slug(
         .await?
         .ok_or_else(|| Error::NotFound)?;
     let id = item.id;
-    let author_name = authors::Entity::find_by_id(item.author_id)
+    let author_name = authors::Entity::find_by_id(item.author_id.unwrap_or_default())
         .one(&ctx.db)
         .await?
         .map(|a| a.name)
@@ -421,7 +421,7 @@ async fn api_index(State(ctx): State<AppContext>) -> Result<Response> {
 
     let mut out: Vec<AdrRowApi> = Vec::with_capacity(rows.len());
     for r in rows {
-        let author_name = authors::Entity::find_by_id(r.author_id)
+        let author_name = authors::Entity::find_by_id(r.author_id.unwrap_or_default())
             .one(&ctx.db)
             .await?
             .map(|a| a.name)
@@ -461,8 +461,8 @@ mod tests {
 
     fn base_params() -> Params {
         Params {
-            author_id: 1,
-            organization_id: 1,
+            author_id: Uuid::from_u128(1),
+            organization_id: Uuid::from_u128(1),
             slug: None,
             number: None,
             title: "Test".to_string(),

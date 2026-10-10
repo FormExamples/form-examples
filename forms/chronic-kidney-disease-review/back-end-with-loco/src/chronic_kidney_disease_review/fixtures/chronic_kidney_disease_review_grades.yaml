@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 298547
+  id: "00000000-0000-4000-8000-000000048e33"
   deletedAt: null
   gfrCategory: "G1"
   albuminuriaCategory: "A1"
@@ -11,4 +11,4 @@
   bloodPressureAtTarget: true
   completenessScore: 1
   gradedAt: "2026-01-01T00:00:00Z"
-  chronicKidneyDiseaseReviewId: 334035
+  chronicKidneyDiseaseReviewId: "00000000-0000-4000-8000-0000000518d3"

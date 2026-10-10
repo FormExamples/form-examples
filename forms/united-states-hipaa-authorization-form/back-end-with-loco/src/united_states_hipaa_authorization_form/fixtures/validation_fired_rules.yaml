@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 277243
+  id: "00000000-0000-4000-8000-000000043afb"
   deletedAt: null
   ruleId: "Test ruleId"
   citation: "Test citation"
   domain: "core-element"
   description: "Test description"
   priority: "high"
-  validationResultId: 855789
+  validationResultId: "00000000-0000-4000-8000-0000000d0eed"

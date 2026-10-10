@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 111211
+  id: "00000000-0000-4000-8000-00000001b26b"
   deletedAt: null
   sortOrder: 1
   problem: "Test problem"
@@ -10,4 +10,4 @@
   onsetDate: "1990-01-01"
   snomedCode: "Test snomedCode"
   progressCommentary: "Test progressCommentary"
-  inpatientClinicalNoteId: 728045
+  inpatientClinicalNoteId: "00000000-0000-4000-8000-0000000b1bed"

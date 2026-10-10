@@ -7,26 +7,28 @@ pub struct Migration;
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, m: &SchemaManager) -> Result<(), DbErr> {
-        create_table(m, "inpatient_clinical_note_jobs",
+        create_table(
+            m,
+            "inpatient_clinical_note_jobs",
             &[
-
-            ("id", ColType::PkAuto),
-
-            ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("sort_order", ColType::IntegerWithDefault(0)),
-            ("job", ColType::StringWithDefault(String::new())),
-            ("category", ColType::StringWithDefault(String::new())),
-            ("owner", ColType::StringWithDefault(String::new())),
-            ("priority", ColType::StringWithDefault(String::new())),
-            ("due_at", ColType::TimestampWithTimeZoneNull),
-            ("status", ColType::StringWithDefault(String::new())),
-            ("completed_at", ColType::TimestampWithTimeZoneNull),
-            ("notes", ColType::TextWithDefault(String::new())),
+                ("id", ColType::PkUuid),
+                ("deleted_at", ColType::TimestampWithTimeZoneNull),
+                ("sort_order", ColType::IntegerWithDefault(0)),
+                ("job", ColType::StringWithDefault(String::new())),
+                ("category", ColType::StringWithDefault(String::new())),
+                ("owner", ColType::StringWithDefault(String::new())),
+                ("priority", ColType::StringWithDefault(String::new())),
+                ("due_at", ColType::TimestampWithTimeZoneNull),
+                ("status", ColType::StringWithDefault(String::new())),
+                ("completed_at", ColType::TimestampWithTimeZoneNull),
+                ("notes", ColType::TextWithDefault(String::new())),
+                ("inpatient_clinical_note_id", ColType::Uuid),
             ],
-            &[
-            ("inpatient_clinical_note", "inpatient_clinical_note_id"),
-            ]
-        ).await
+            &[("inpatient_clinical_note", "inpatient_clinical_note_id")],
+        )
+        .await?;
+        m.get_connection().execute_unprepared("ALTER TABLE inpatient_clinical_note_jobs ALTER COLUMN id SET DEFAULT gen_random_uuid()").await?;
+        Ok(())
     }
 
     async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {

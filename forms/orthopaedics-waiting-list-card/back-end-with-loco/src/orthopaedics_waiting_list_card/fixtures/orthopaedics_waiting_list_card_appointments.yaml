@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 870355
+  id: "00000000-0000-4000-8000-0000000d47d3"
   deletedAt: null
   appointmentDate: "1990-01-01"
   appointmentTime: "Test appointmentTime"
@@ -15,4 +15,4 @@
   status: "scheduled"
   travelNotes: "Test travelNotes"
   accessNotes: "Test accessNotes"
-  orthopaedicsWaitingListCardId: 943433
+  orthopaedicsWaitingListCardId: "00000000-0000-4000-8000-0000000e6549"

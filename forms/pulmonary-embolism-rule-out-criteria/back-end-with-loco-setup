@@ -48,8 +48,8 @@ cargo loco generate scaffold clinician \
 
 cargo loco generate scaffold pulmonary_embolism_rule_out_criteria \
     deleted_at:tstz \
-    patient:references \
-    clinician:references \
+    patient:references:patient_id \
+    clinician:references:clinician_id \
     status:string! \
     patient_identifier:string! \
     assessed_at:tstz \
@@ -72,7 +72,7 @@ cargo loco generate scaffold pulmonary_embolism_rule_out_criteria \
 
 cargo loco generate scaffold pulmonary_embolism_rule_out_criteria_grade \
     deleted_at:tstz \
-    pulmonary_embolism_rule_out_criteria:references \
+    pulmonary_embolism_rule_out_criteria:references:pulmonary_embolism_rule_out_criteria_id \
     classification:string! \
     all_criteria_satisfied:string! \
     applicable:string! \
@@ -82,7 +82,7 @@ cargo loco generate scaffold pulmonary_embolism_rule_out_criteria_grade \
 
 cargo loco generate scaffold pulmonary_embolism_rule_out_criteria_grade_rule \
     deleted_at:tstz \
-    pulmonary_embolism_rule_out_criteria_grade:references \
+    pulmonary_embolism_rule_out_criteria_grade:references:pulmonary_embolism_rule_out_criteria_grade_id \
     rule_id:string! \
     instrument:string! \
     satisfied:string! \
@@ -93,7 +93,7 @@ cargo loco generate scaffold pulmonary_embolism_rule_out_criteria_grade_rule \
 
 cargo loco generate scaffold pulmonary_embolism_rule_out_criteria_grade_flag \
     deleted_at:tstz \
-    pulmonary_embolism_rule_out_criteria_grade:references \
+    pulmonary_embolism_rule_out_criteria_grade:references:pulmonary_embolism_rule_out_criteria_grade_id \
     flag_id:string! \
     category:string! \
     priority:string! \
@@ -105,6 +105,10 @@ cargo loco generate scaffold pulmonary_embolism_rule_out_criteria_grade_flag \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

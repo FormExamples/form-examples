@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 815894
+  id: "00000000-0000-4000-8000-0000000c7316"
   deletedAt: null
   ruleId: "Test ruleId"
   axis: "classification"
   category: "Test category"
   description: "Test description"
-  coagulationTestResultGradeId: 214263
+  coagulationTestResultGradeId: "00000000-0000-4000-8000-0000000344f7"

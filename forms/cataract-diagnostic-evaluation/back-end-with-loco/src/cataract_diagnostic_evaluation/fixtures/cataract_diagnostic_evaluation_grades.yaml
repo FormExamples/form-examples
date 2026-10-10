@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 189391
+  id: "00000000-0000-4000-8000-00000002e3cf"
   deletedAt: null
   computedLocsIiiSeverityRight: "mild"
   computedLocsIiiSeverityLeft: "mild"
@@ -12,4 +12,4 @@
   signedByName: "Test signedByName"
   signedAt: "2026-01-01T00:00:00Z"
   gradedAt: "2026-01-01T00:00:00Z"
-  cataractDiagnosticEvaluationId: 503803
+  cataractDiagnosticEvaluationId: "00000000-0000-4000-8000-00000007affb"

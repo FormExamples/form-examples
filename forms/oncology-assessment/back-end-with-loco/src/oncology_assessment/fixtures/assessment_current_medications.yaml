@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 788601
+  id: "00000000-0000-4000-8000-0000000c0879"
   deletedAt: null
   polypharmacyConcern: "Test polypharmacyConcern"
   drugInteractionsIdentified: "Test drugInteractionsIdentified"
@@ -9,4 +9,4 @@
   complementaryMedicineDetails: "Test complementaryMedicineDetails"
   medicationAdherence: "Test medicationAdherence"
   medicationsNotes: "Test medicationsNotes"
-  assessmentId: 203823
+  assessmentId: "00000000-0000-4000-8000-000000031c2f"

@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 718823
+  id: "00000000-0000-4000-8000-0000000af7e7"
   deletedAt: null
   ruleId: "Test ruleId"
   instrument: "precondition"
   region: "ankle"
   category: "Test category"
   description: "Test description"
-  ottawaAnkleRulesGradeId: 666894
+  ottawaAnkleRulesGradeId: "00000000-0000-4000-8000-0000000a2d0e"

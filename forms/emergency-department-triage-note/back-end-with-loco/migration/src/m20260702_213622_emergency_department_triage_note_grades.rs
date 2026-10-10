@@ -7,24 +7,32 @@ pub struct Migration;
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, m: &SchemaManager) -> Result<(), DbErr> {
-        create_table(m, "emergency_department_triage_note_grades",
+        create_table(
+            m,
+            "emergency_department_triage_note_grades",
             &[
-            
-            ("id", ColType::PkAuto),
-            ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            
-            ("news2_total", ColType::IntegerNull),
-            ("news2_any_parameter_three", ColType::StringWithDefault(String::new())),
-            ("priority_level", ColType::IntegerNull),
-            ("priority_colour", ColType::StringWithDefault(String::new())),
-            ("priority_name", ColType::StringWithDefault(String::new())),
-            ("target_minutes", ColType::IntegerNull),
-            ("graded_at", ColType::TimestampWithTimeZone),
+                ("id", ColType::PkUuid),
+                ("deleted_at", ColType::TimestampWithTimeZoneNull),
+                ("news2_total", ColType::IntegerNull),
+                (
+                    "news2_any_parameter_three",
+                    ColType::StringWithDefault(String::new()),
+                ),
+                ("priority_level", ColType::IntegerNull),
+                ("priority_colour", ColType::StringWithDefault(String::new())),
+                ("priority_name", ColType::StringWithDefault(String::new())),
+                ("target_minutes", ColType::IntegerNull),
+                ("graded_at", ColType::TimestampWithTimeZone),
+                ("emergency_department_triage_note_id", ColType::Uuid),
             ],
-            &[
-            ("emergency_department_triage_note", ""),
-            ]
-        ).await
+            &[(
+                "emergency_department_triage_note",
+                "emergency_department_triage_note_id",
+            )],
+        )
+        .await?;
+        m.get_connection().execute_unprepared("ALTER TABLE emergency_department_triage_note_grades ALTER COLUMN id SET DEFAULT gen_random_uuid()").await?;
+        Ok(())
     }
 
     async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {

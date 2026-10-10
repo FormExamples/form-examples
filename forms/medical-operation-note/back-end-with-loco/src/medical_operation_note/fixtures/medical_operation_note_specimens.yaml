@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 858814
+  id: "00000000-0000-4000-8000-0000000d1abe"
   deletedAt: null
   label: "Test label"
   specimenType: "tissue"
@@ -12,4 +12,4 @@
   labelVerified: "yes"
   chainOfCustodyDocumented: "yes"
   notes: "Test notes"
-  medicalOperationNoteId: 506012
+  medicalOperationNoteId: "00000000-0000-4000-8000-00000007b89c"

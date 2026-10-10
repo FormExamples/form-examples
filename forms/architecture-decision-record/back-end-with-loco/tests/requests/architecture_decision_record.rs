@@ -12,7 +12,7 @@ use architecture_decision_record::app::App;
 use loco_rs::testing::prelude::*;
 use serial_test::serial;
 
-async fn seed_author(ctx: &loco_rs::app::AppContext) -> i64 {
+async fn seed_author(ctx: &loco_rs::app::AppContext) -> loco_rs::prelude::Uuid {
     use architecture_decision_record::models::_entities::authors;
     use loco_rs::prelude::*;
     let a = authors::ActiveModel {
@@ -25,7 +25,7 @@ async fn seed_author(ctx: &loco_rs::app::AppContext) -> i64 {
     a.id
 }
 
-async fn seed_org(ctx: &loco_rs::app::AppContext) -> i64 {
+async fn seed_org(ctx: &loco_rs::app::AppContext) -> loco_rs::prelude::Uuid {
     use architecture_decision_record::models::_entities::organizations;
     use loco_rs::prelude::*;
     let o = organizations::ActiveModel {

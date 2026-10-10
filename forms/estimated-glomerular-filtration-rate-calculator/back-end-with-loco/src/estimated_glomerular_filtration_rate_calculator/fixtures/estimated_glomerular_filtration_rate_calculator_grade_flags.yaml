@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 697766
+  id: "00000000-0000-4000-8000-0000000aa5a6"
   deletedAt: null
   flagId: "Test flagId"
   category: "g5-nephrology-referral"
   priority: "low"
   description: "Test description"
   suggestedAction: "Test suggestedAction"
-  estimatedGlomerularFiltrationRateCalculatorGradeId: 173179
+  estimatedGlomerularFiltrationRateCalculatorGradeId: "00000000-0000-4000-8000-00000002a47b"

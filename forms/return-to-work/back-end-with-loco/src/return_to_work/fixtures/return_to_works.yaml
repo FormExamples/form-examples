@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 583038
+  id: "00000000-0000-4000-8000-00000008e57e"
   deletedAt: null
   status: "draft"
   statementKind: "fit-note"
@@ -59,6 +59,6 @@
   finalNotes: "Test finalNotes"
   signatureSvg: "Test signatureSvg"
   signedAt: "2026-01-01T00:00:00Z"
-  patientId: 158185
-  clinicianId: 532551
-  employerId: 438980
+  patientId: "00000000-0000-4000-8000-0000000269e9"
+  clinicianId: "00000000-0000-4000-8000-000000082047"
+  employerId: "00000000-0000-4000-8000-00000006b2c4"

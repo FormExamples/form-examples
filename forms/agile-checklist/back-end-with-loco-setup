@@ -27,7 +27,7 @@ cargo loco generate scaffold respondent \
 
 cargo loco generate scaffold agile_checklist \
     deleted_at:tstz \
-    respondent:references \
+    respondent:references:respondent_id \
     status:string! \
     assessment_date:date \
     assessment_period:string! \
@@ -93,7 +93,7 @@ cargo loco generate scaffold agile_checklist \
 
 cargo loco generate scaffold agile_checklist_grade \
     deleted_at:tstz \
-    agile_checklist:references \
+    agile_checklist:references:agile_checklist_id \
     answered_count:int! \
     teams_yes_count:int! \
     teams_applicable_count:int! \
@@ -119,7 +119,7 @@ cargo loco generate scaffold agile_checklist_grade \
 
 cargo loco generate scaffold agile_checklist_grade_rule \
     deleted_at:tstz \
-    agile_checklist_grade:references \
+    agile_checklist_grade:references:agile_checklist_grade_id \
     rule_id:string! \
     section:string! \
     band:string! \
@@ -128,7 +128,7 @@ cargo loco generate scaffold agile_checklist_grade_rule \
 
 cargo loco generate scaffold agile_checklist_grade_flag \
     deleted_at:tstz \
-    agile_checklist_grade:references \
+    agile_checklist_grade:references:agile_checklist_grade_id \
     flag_id:string! \
     category:string! \
     priority:string! \
@@ -142,6 +142,10 @@ cargo loco generate scaffold agile_checklist_grade_flag \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

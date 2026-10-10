@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 914447
+  id: "00000000-0000-4000-8000-0000000df40f"
   deletedAt: null
   clinicianName: "Test clinicianName"
   clinicianRole: "doctor"
@@ -17,5 +17,5 @@
   diagnosis: "mallory-weiss-or-none"
   stigmataRecentHaemorrhage: "none-or-dark-spot"
   clinicalNote: "Test clinicalNote"
-  patientId: 123433
-  clinicianId: 631349
+  patientId: "00000000-0000-4000-8000-00000001e229"
+  clinicianId: "00000000-0000-4000-8000-00000009a235"

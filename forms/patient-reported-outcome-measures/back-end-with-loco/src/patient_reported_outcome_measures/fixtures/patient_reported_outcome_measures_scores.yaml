@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 694432
+  id: "00000000-0000-4000-8000-0000000a98a0"
   deletedAt: null
   sf36Pf: 1.0
   sf36Rp: 1.0
@@ -21,4 +21,4 @@
   eq5dHealthStateDescriptor: "Test eq5dHealthStateDescriptor"
   eq5dUkIndexValue: 1.0
   eq5dVasScore: 1.0
-  patientReportedOutcomeMeasuresId: 579177
+  patientReportedOutcomeMeasuresId: "00000000-0000-4000-8000-00000008d669"

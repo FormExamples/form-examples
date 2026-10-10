@@ -49,13 +49,13 @@ cargo loco generate scaffold clinician \
 
 cargo loco generate scaffold assessment \
     deleted_at:tstz \
-    patient:references \
+    patient:references:patient_id \
     status:string! \
     --api
 
 cargo loco generate scaffold assessment_cancer_history \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     family_cancer_history:string! \
     multiple_family_cancers:string! \
     early_onset_cancer:string! \
@@ -69,7 +69,7 @@ cargo loco generate scaffold assessment_cancer_history \
 
 cargo loco generate scaffold assessment_cancer_history_item \
     deleted_at:tstz \
-    cancer_history:references \
+    assessment_cancer_history:references:cancer_history_id \
     relative_relationship:string! \
     cancer_type:string! \
     age_at_diagnosis:int \
@@ -79,7 +79,7 @@ cargo loco generate scaffold assessment_cancer_history_item \
 
 cargo loco generate scaffold assessment_family_pedigree \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     total_first_degree_relatives:int \
     total_second_degree_relatives:int \
     consanguinity_in_family:string! \
@@ -91,7 +91,7 @@ cargo loco generate scaffold assessment_family_pedigree \
 
 cargo loco generate scaffold assessment_family_pedigree_member \
     deleted_at:tstz \
-    family_pedigree:references \
+    assessment_family_pedigree:references:family_pedigree_id \
     relationship:string! \
     sex:string! \
     age:int \
@@ -104,7 +104,7 @@ cargo loco generate scaffold assessment_family_pedigree_member \
 
 cargo loco generate scaffold grade \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     risk_level:string! \
     total_risk_score:int! \
     cancer_genetics_score:int! \
@@ -116,7 +116,7 @@ cargo loco generate scaffold grade \
 
 cargo loco generate scaffold grading_fired_rule \
     deleted_at:tstz \
-    grade:references \
+    grade:references:grade_id \
     rule_id:string! \
     category:string! \
     description:text! \
@@ -125,7 +125,7 @@ cargo loco generate scaffold grading_fired_rule \
 
 cargo loco generate scaffold grading_additional_flag \
     deleted_at:tstz \
-    grade:references \
+    grade:references:grade_id \
     flag_id:string! \
     category:string! \
     message:text! \
@@ -136,6 +136,10 @@ cargo loco generate scaffold grading_additional_flag \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

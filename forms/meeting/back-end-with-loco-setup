@@ -30,7 +30,7 @@ cargo loco generate scaffold organizer \
 
 cargo loco generate scaffold meeting \
     deleted_at:tstz \
-    organizer:references \
+    organizer:references:organizer_id \
     status:string! \
     title:string! \
     purpose:string! \
@@ -57,7 +57,7 @@ cargo loco generate scaffold meeting \
 
 cargo loco generate scaffold agenda_item \
     deleted_at:tstz \
-    meeting:references \
+    meeting:references:meeting_id \
     position:int! \
     title:string! \
     duration_minutes:int \
@@ -68,7 +68,7 @@ cargo loco generate scaffold agenda_item \
 
 cargo loco generate scaffold participant \
     deleted_at:tstz \
-    meeting:references \
+    meeting:references:meeting_id \
     position:int! \
     name:string! \
     email:string! \
@@ -81,7 +81,7 @@ cargo loco generate scaffold participant \
 
 cargo loco generate scaffold resource \
     deleted_at:tstz \
-    meeting:references \
+    meeting:references:meeting_id \
     position:int! \
     resource_type:string! \
     name:string! \
@@ -96,7 +96,7 @@ cargo loco generate scaffold resource \
 
 cargo loco generate scaffold recurring_rule \
     deleted_at:tstz \
-    meeting:references \
+    meeting:references:meeting_id \
     frequency:string! \
     interval_count:int! \
     by_day_of_week:string! \
@@ -111,7 +111,7 @@ cargo loco generate scaffold recurring_rule \
 
 cargo loco generate scaffold action_item \
     deleted_at:tstz \
-    meeting:references \
+    meeting:references:meeting_id \
     position:int! \
     title:string! \
     description:text! \
@@ -126,7 +126,7 @@ cargo loco generate scaffold action_item \
 
 cargo loco generate scaffold meeting_output \
     deleted_at:tstz \
-    meeting:references \
+    meeting:references:meeting_id \
     position:int! \
     title:string! \
     kind:string! \
@@ -137,18 +137,18 @@ cargo loco generate scaffold meeting_output \
 
 cargo loco generate scaffold meeting_outcome \
     deleted_at:tstz \
-    meeting:references \
+    meeting:references:meeting_id \
     position:int! \
     title:string! \
     category:string! \
     description:text! \
     impact:string! \
-    related_action_item:references \
+    action_item:references:related_action_item_id \
     --api
 
 cargo loco generate scaffold meeting_grade \
     deleted_at:tstz \
-    meeting:references \
+    meeting:references:meeting_id \
     duration_minutes:int \
     agenda_item_count:int! \
     participant_count:int! \
@@ -169,7 +169,7 @@ cargo loco generate scaffold meeting_grade \
 
 cargo loco generate scaffold meeting_grade_rule \
     deleted_at:tstz \
-    meeting_grade:references \
+    meeting_grade:references:meeting_grade_id \
     rule_id:string! \
     instrument:string! \
     grade:string! \
@@ -179,7 +179,7 @@ cargo loco generate scaffold meeting_grade_rule \
 
 cargo loco generate scaffold meeting_grade_flag \
     deleted_at:tstz \
-    meeting_grade:references \
+    meeting_grade:references:meeting_grade_id \
     flag_id:string! \
     category:string! \
     priority:string! \
@@ -191,6 +191,10 @@ cargo loco generate scaffold meeting_grade_flag \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

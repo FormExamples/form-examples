@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 677354
+  id: "00000000-0000-4000-8000-0000000a55ea"
   deletedAt: null
   originatingRequestReference: "Test originatingRequestReference"
   reportStatus: "preliminary"
@@ -27,5 +27,5 @@
   recommendedFollowUp: "Test recommendedFollowUp"
   criticalResultCommunicated: true
   reportedTo: "Test reportedTo"
-  patientId: 610135
-  clinicianId: 499392
+  patientId: "00000000-0000-4000-8000-000000094f57"
+  clinicianId: "00000000-0000-4000-8000-000000079ec0"

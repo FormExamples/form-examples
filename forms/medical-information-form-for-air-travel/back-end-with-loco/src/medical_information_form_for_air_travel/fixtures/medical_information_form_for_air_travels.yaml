@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 399933
+  id: "00000000-0000-4000-8000-000000061a3d"
   deletedAt: null
   status: "draft"
   submitterName: "Test submitterName"
@@ -97,5 +97,5 @@
   physicianSignatureDate: "1990-01-01"
   validUntilDate: "1990-01-01"
   additionalNotes: "Test additionalNotes"
-  patientId: 398718
-  clinicianId: 431759
+  patientId: "00000000-0000-4000-8000-00000006157e"
+  clinicianId: "00000000-0000-4000-8000-00000006968f"

@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 269601
+  id: "00000000-0000-4000-8000-000000041d21"
   deletedAt: null
   assessorName: "Test assessorName"
   assessorRole: "nurse"
@@ -29,5 +29,5 @@
   suspectedPrecipitants: "Test suspectedPrecipitants"
   recommendedActions: "Test recommendedActions"
   clinicalNote: "Test clinicalNote"
-  patientId: 691827
+  patientId: "00000000-0000-4000-8000-0000000a8e73"
   clinicianId: null

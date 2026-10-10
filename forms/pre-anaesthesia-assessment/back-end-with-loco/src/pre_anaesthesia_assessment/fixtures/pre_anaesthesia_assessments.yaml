@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 425475
+  id: "00000000-0000-4000-8000-000000067e03"
   deletedAt: null
   status: "draft"
   siteName: "Test siteName"
@@ -406,5 +406,5 @@
   anaesPlanProformaReviewedConsent: true
   anaesPlanProformaConsultantAnaesthesiologistName: "Test anaesPlanProformaConsultantAnaesthesiologistName"
   anaesPlanProformaConsultantAnaesthesiologistSignature: "Test anaesPlanProformaConsultantAnaesthesiologistSignature"
-  patientId: 353333
-  clinicianId: 860172
+  patientId: "00000000-0000-4000-8000-000000056435"
+  clinicianId: "00000000-0000-4000-8000-0000000d200c"

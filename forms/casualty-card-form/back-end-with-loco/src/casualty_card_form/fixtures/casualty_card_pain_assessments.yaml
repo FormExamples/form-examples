@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 213964
+  id: "00000000-0000-4000-8000-0000000343cc"
   deletedAt: null
   painPresent: "yes"
   painScore: 1
@@ -8,4 +8,4 @@
   painCharacter: "Test painCharacter"
   painOnset: "Test painOnset"
   painSeverityCategory: "mild"
-  casualtyCardId: 233761
+  casualtyCardId: "00000000-0000-4000-8000-000000039121"

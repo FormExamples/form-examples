@@ -7,22 +7,34 @@ pub struct Migration;
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, m: &SchemaManager) -> Result<(), DbErr> {
-        create_table(m, "lpa_instructions",
+        create_table(
+            m,
+            "lpa_instructions",
             &[
-            
-            ("id", ColType::PkAuto),
-            
-            ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("order_position", ColType::IntegerWithDefault(1)),
-            ("category", ColType::StringWithDefault(String::new())),
-            ("statement", ColType::TextWithDefault(String::new())),
-            ("lawfulness_assessed", ColType::StringWithDefault(String::new())),
-            ("contradicts_adrt", ColType::StringWithDefault(String::new())),
+                ("id", ColType::PkUuid),
+                ("deleted_at", ColType::TimestampWithTimeZoneNull),
+                ("order_position", ColType::IntegerWithDefault(1)),
+                ("category", ColType::StringWithDefault(String::new())),
+                ("statement", ColType::TextWithDefault(String::new())),
+                (
+                    "lawfulness_assessed",
+                    ColType::StringWithDefault(String::new()),
+                ),
+                (
+                    "contradicts_adrt",
+                    ColType::StringWithDefault(String::new()),
+                ),
+                ("lpa_id", ColType::Uuid),
             ],
-            &[
-            ("lpa", ""),
-            ]
-        ).await
+            &[("lpa", "lpa_id")],
+        )
+        .await?;
+        m.get_connection()
+            .execute_unprepared(
+                "ALTER TABLE lpa_instructions ALTER COLUMN id SET DEFAULT gen_random_uuid()",
+            )
+            .await?;
+        Ok(())
     }
 
     async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {

@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 852429
+  id: "00000000-0000-4000-8000-0000000d01cd"
   deletedAt: null
   ccsAnginaClass: "Test ccsAnginaClass"
   nyhaClass: "Test nyhaClass"
   overallRiskLevel: "Test overallRiskLevel"
   gradedAt: "2026-01-01T00:00:00Z"
-  assessmentId: 311057
+  assessmentId: "00000000-0000-4000-8000-00000004bf11"

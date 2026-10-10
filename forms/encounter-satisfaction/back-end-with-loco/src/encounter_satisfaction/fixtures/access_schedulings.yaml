@@ -1,8 +1,8 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 435904
+  id: "00000000-0000-4000-8000-00000006a6c0"
   deletedAt: null
   easeOfScheduling: 1
   waitForAppointment: 1
   waitInWaitingRoom: 1
-  encounterSatisfactionId: 670200
+  encounterSatisfactionId: "00000000-0000-4000-8000-0000000a39f8"

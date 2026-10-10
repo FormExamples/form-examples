@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 235924
+  id: "00000000-0000-4000-8000-000000039994"
   deletedAt: null
   waitingTimeStatus: "within-target"
   clinicalPriority: "P1a"
@@ -12,4 +12,4 @@
   daysToAppointment: 1
   graderNotes: "Test graderNotes"
   gradedAt: "2026-01-01T00:00:00Z"
-  nuclearMedWaitingListCardId: 655233
+  nuclearMedWaitingListCardId: "00000000-0000-4000-8000-00000009ff81"

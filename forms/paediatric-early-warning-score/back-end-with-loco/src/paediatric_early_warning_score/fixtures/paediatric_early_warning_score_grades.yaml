@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 681194
+  id: "00000000-0000-4000-8000-0000000a64ea"
   deletedAt: null
   aggregateScore: 1
   maxParameterScore: 1
@@ -16,4 +16,4 @@
   concernTrigger: "yes"
   monitoringFrequency: "Test monitoringFrequency"
   gradedAt: "2026-01-01T00:00:00Z"
-  paediatricEarlyWarningScoreId: 408442
+  paediatricEarlyWarningScoreId: "00000000-0000-4000-8000-000000063b7a"

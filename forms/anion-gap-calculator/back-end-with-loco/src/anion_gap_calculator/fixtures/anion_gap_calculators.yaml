@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 387343
+  id: "00000000-0000-4000-8000-00000005e90f"
   deletedAt: null
   clinicianName: "Test clinicianName"
   clinicianRole: "doctor"
@@ -16,5 +16,5 @@
   bicarbonateMmolL: 1.0
   albuminGL: 1.0
   includePotassium: "yes"
-  patientId: 633964
-  clinicianId: 257612
+  patientId: "00000000-0000-4000-8000-00000009ac6c"
+  clinicianId: "00000000-0000-4000-8000-00000003ee4c"

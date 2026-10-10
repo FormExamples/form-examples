@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 138621
+  id: "00000000-0000-4000-8000-000000021d7d"
   deletedAt: null
   status: "complete"
   riskLevel: "none"
@@ -13,4 +13,4 @@
   insightDocumented: "yes"
   cognitionDocumented: "yes"
   gradedAt: "2026-01-01T00:00:00Z"
-  mentalStateExaminationId: 918278
+  mentalStateExaminationId: "00000000-0000-4000-8000-0000000e0306"

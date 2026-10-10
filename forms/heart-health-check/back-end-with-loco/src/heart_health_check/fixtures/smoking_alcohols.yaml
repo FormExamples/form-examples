@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 271004
+  id: "00000000-0000-4000-8000-00000004229c"
   deletedAt: null
   smokingStatus: "nonSmoker"
   cigarettesPerDay: 1
   yearsSinceQuit: 1
   alcoholUnitsPerWeek: 1.0
   alcoholFrequency: "never"
-  assessmentId: 172043
+  assessmentId: "00000000-0000-4000-8000-00000002a00b"

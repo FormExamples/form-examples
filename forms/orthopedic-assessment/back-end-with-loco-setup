@@ -49,13 +49,13 @@ cargo loco generate scaffold clinician \
 
 cargo loco generate scaffold assessment \
     deleted_at:tstz \
-    patient:references \
+    patient:references:patient_id \
     status:string! \
     --api
 
 cargo loco generate scaffold assessment_range_of_motion \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     joint_assessed:string! \
     side_assessed:string! \
     overall_rom_status:string! \
@@ -64,7 +64,7 @@ cargo loco generate scaffold assessment_range_of_motion \
 
 cargo loco generate scaffold assessment_rom_measurement \
     deleted_at:tstz \
-    range_of_motion:references \
+    assessment_range_of_motion:references:range_of_motion_id \
     movement:string! \
     active_degrees:int \
     passive_degrees:int \
@@ -76,7 +76,7 @@ cargo loco generate scaffold assessment_rom_measurement \
 
 cargo loco generate scaffold assessment_strength_testing \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     grip_strength_affected_kg:double \
     grip_strength_unaffected_kg:double \
     overall_strength_status:string! \
@@ -85,7 +85,7 @@ cargo loco generate scaffold assessment_strength_testing \
 
 cargo loco generate scaffold assessment_strength_test_item \
     deleted_at:tstz \
-    strength_testing:references \
+    assessment_strength_testing:references:strength_testing_id \
     muscle_group:string! \
     movement:string! \
     mrc_grade:int \
@@ -95,7 +95,7 @@ cargo loco generate scaffold assessment_strength_test_item \
 
 cargo loco generate scaffold assessment_imaging_history \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     has_previous_imaging:string! \
     imaging_requested:string! \
     imaging_requested_details:text! \
@@ -104,7 +104,7 @@ cargo loco generate scaffold assessment_imaging_history \
 
 cargo loco generate scaffold assessment_imaging_item \
     deleted_at:tstz \
-    imaging_history:references \
+    assessment_imaging_history:references:imaging_history_id \
     modality:string! \
     body_region:string! \
     date_performed:date \
@@ -114,7 +114,7 @@ cargo loco generate scaffold assessment_imaging_item \
 
 cargo loco generate scaffold assessment_surgical_history \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     has_previous_surgery:string! \
     surgery_considered:string! \
     surgery_considered_details:text! \
@@ -128,7 +128,7 @@ cargo loco generate scaffold assessment_surgical_history \
 
 cargo loco generate scaffold assessment_surgery_item \
     deleted_at:tstz \
-    surgical_history:references \
+    assessment_surgical_history:references:surgical_history_id \
     procedure_name:string! \
     date_performed:date \
     surgeon:string! \
@@ -140,7 +140,7 @@ cargo loco generate scaffold assessment_surgery_item \
 
 cargo loco generate scaffold grade \
     deleted_at:tstz \
-    assessment:references \
+    assessment:references:assessment_id \
     dash_score:double! \
     disability_category:string! \
     graded_at:tstz! \
@@ -148,7 +148,7 @@ cargo loco generate scaffold grade \
 
 cargo loco generate scaffold grading_fired_rule \
     deleted_at:tstz \
-    grade:references \
+    grade:references:grade_id \
     rule_id:string! \
     category:string! \
     description:text! \
@@ -157,7 +157,7 @@ cargo loco generate scaffold grading_fired_rule \
 
 cargo loco generate scaffold grading_additional_flag \
     deleted_at:tstz \
-    grade:references \
+    grade:references:grade_id \
     flag_id:string! \
     category:string! \
     message:text! \
@@ -168,6 +168,10 @@ cargo loco generate scaffold grading_additional_flag \
 # layout: back-end-with-loco/src/${form_snake_case}/*.rs
 cd ..
 "$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
 
 # Add #![forbid(unsafe_code)] to each crate root the scaffold created:
 # the library, the -cli binary, the migration library, and the tests.

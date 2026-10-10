@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 497660
+  id: "00000000-0000-4000-8000-0000000797fc"
   deletedAt: null
   status: "draft"
   assessmentDate: "1990-01-01"
@@ -38,5 +38,5 @@
   p11Evidence: "Test p11Evidence"
   p12Done: true
   p12Evidence: "Test p12Evidence"
-  organizationId: 210143
-  respondentId: 926559
+  organizationId: "00000000-0000-4000-8000-0000000334df"
+  respondentId: "00000000-0000-4000-8000-0000000e235f"

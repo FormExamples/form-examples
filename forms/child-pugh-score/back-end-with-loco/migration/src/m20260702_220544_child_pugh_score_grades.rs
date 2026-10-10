@@ -7,28 +7,43 @@ pub struct Migration;
 #[async_trait::async_trait]
 impl MigrationTrait for Migration {
     async fn up(&self, m: &SchemaManager) -> Result<(), DbErr> {
-        create_table(m, "child_pugh_score_grades",
+        create_table(
+            m,
+            "child_pugh_score_grades",
             &[
-            
-            ("id", ColType::PkAuto),
-            
-            ("deleted_at", ColType::TimestampWithTimeZoneNull),
-            ("bilirubin_points", ColType::IntegerNull),
-            ("albumin_points", ColType::IntegerNull),
-            ("coagulation_points", ColType::IntegerNull),
-            ("ascites_points", ColType::IntegerNull),
-            ("encephalopathy_points", ColType::IntegerNull),
-            ("total_score", ColType::IntegerNull),
-            ("child_pugh_class", ColType::StringWithDefault(String::new())),
-            ("one_year_survival", ColType::StringWithDefault(String::new())),
-            ("two_year_survival", ColType::StringWithDefault(String::new())),
-            ("surgical_risk", ColType::StringWithDefault(String::new())),
-            ("graded_at", ColType::TimestampWithTimeZone),
+                ("id", ColType::PkUuid),
+                ("deleted_at", ColType::TimestampWithTimeZoneNull),
+                ("bilirubin_points", ColType::IntegerNull),
+                ("albumin_points", ColType::IntegerNull),
+                ("coagulation_points", ColType::IntegerNull),
+                ("ascites_points", ColType::IntegerNull),
+                ("encephalopathy_points", ColType::IntegerNull),
+                ("total_score", ColType::IntegerNull),
+                (
+                    "child_pugh_class",
+                    ColType::StringWithDefault(String::new()),
+                ),
+                (
+                    "one_year_survival",
+                    ColType::StringWithDefault(String::new()),
+                ),
+                (
+                    "two_year_survival",
+                    ColType::StringWithDefault(String::new()),
+                ),
+                ("surgical_risk", ColType::StringWithDefault(String::new())),
+                ("graded_at", ColType::TimestampWithTimeZone),
+                ("child_pugh_score_id", ColType::Uuid),
             ],
-            &[
-            ("child_pugh_score", ""),
-            ]
-        ).await
+            &[("child_pugh_score", "child_pugh_score_id")],
+        )
+        .await?;
+        m.get_connection()
+            .execute_unprepared(
+                "ALTER TABLE child_pugh_score_grades ALTER COLUMN id SET DEFAULT gen_random_uuid()",
+            )
+            .await?;
+        Ok(())
     }
 
     async fn down(&self, m: &SchemaManager) -> Result<(), DbErr> {

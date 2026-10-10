@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 831742
+  id: "00000000-0000-4000-8000-0000000cb0fe"
   deletedAt: null
   chiefComplaint: "Test chiefComplaint"
   historyOfPresentingComplaint: "Test historyOfPresentingComplaint"
@@ -15,4 +15,4 @@
   associatedSymptoms: "Test associatedSymptoms"
   previousEpisodes: "Test previousEpisodes"
   treatmentPriorToArrival: "Test treatmentPriorToArrival"
-  casualtyCardId: 233761
+  casualtyCardId: "00000000-0000-4000-8000-000000039121"

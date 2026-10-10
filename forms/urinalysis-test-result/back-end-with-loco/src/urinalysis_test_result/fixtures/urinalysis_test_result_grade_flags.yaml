@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 522659
+  id: "00000000-0000-4000-8000-00000007f9a3"
   deletedAt: null
   flagId: "Test flagId"
   category: "critical-result-alert"
   priority: "low"
   description: "Test description"
   suggestedAction: "Test suggestedAction"
-  urinalysisTestResultGradeId: 108215
+  urinalysisTestResultGradeId: "00000000-0000-4000-8000-00000001a6b7"

@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 997704
+  id: "00000000-0000-4000-8000-0000000f3948"
   deletedAt: null
   indicatorCode: "Test indicatorCode"
   categoryNumber: 1
@@ -8,4 +8,4 @@
   indicatorText: "Test indicatorText"
   indicatorValue: 1.0
   notes: "Test notes"
-  hospitalPerformanceIndicatorsId: 986078
+  hospitalPerformanceIndicatorsId: "00000000-0000-4000-8000-0000000f0bde"

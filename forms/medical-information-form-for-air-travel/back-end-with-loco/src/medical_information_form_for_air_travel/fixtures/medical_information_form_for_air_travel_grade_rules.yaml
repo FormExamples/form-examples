@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 254807
+  id: "00000000-0000-4000-8000-00000003e357"
   deletedAt: null
   ruleId: "Test ruleId"
   instrument: "cardiovascular"
   fitnessBand: "fit"
   category: "Test category"
   description: "Test description"
-  medicalInformationFormForAirTravelGradeId: 716939
+  medicalInformationFormForAirTravelGradeId: "00000000-0000-4000-8000-0000000af08b"

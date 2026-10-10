@@ -1,9 +1,9 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 761212
+  id: "00000000-0000-4000-8000-0000000b9d7c"
   deletedAt: null
   ordinal: 1
   kind: "technical"
   name: "Test Patient"
   description: "Test description"
-  arc42DocumentationId: 202624
+  arc42DocumentationId: "00000000-0000-4000-8000-000000031780"

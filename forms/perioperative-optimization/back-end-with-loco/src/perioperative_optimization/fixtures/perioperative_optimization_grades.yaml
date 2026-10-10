@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 272849
+  id: "00000000-0000-4000-8000-0000000429d1"
   deletedAt: null
   weeksToSurgery: 1
   gatingApplied: true
@@ -25,4 +25,4 @@
   signedByName: "Test signedByName"
   signedAt: "2026-01-01T00:00:00Z"
   gradedAt: "2026-01-01T00:00:00Z"
-  perioperativeOptimizationId: 165652
+  perioperativeOptimizationId: "00000000-0000-4000-8000-000000028714"

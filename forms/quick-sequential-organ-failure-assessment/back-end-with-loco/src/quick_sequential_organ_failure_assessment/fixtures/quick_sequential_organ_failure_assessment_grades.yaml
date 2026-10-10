@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 585105
+  id: "00000000-0000-4000-8000-00000008ed91"
   deletedAt: null
   respiratoryRatePoint: 1
   mentationPoint: 1
@@ -9,4 +9,4 @@
   riskBand: "lower"
   thresholdMet: "yes"
   gradedAt: "2026-01-01T00:00:00Z"
-  quickSequentialOrganFailureAssessmentId: 511185
+  quickSequentialOrganFailureAssessmentId: "00000000-0000-4000-8000-00000007ccd1"

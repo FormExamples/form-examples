@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 177645
+  id: "00000000-0000-4000-8000-00000002b5ed"
   deletedAt: null
   role: "planned-primary"
   opcs4Code: "Test opcs4Code"
@@ -8,4 +8,4 @@
   description: "Test description"
   laterality: "left"
   sequenceIndex: 1
-  medicalOperationNoteId: 506012
+  medicalOperationNoteId: "00000000-0000-4000-8000-00000007b89c"

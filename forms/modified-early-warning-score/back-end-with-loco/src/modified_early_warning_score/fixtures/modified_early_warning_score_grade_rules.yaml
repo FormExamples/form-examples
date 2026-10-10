@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 142117
+  id: "00000000-0000-4000-8000-000000022b25"
   deletedAt: null
   ruleId: "Test ruleId"
   instrument: "systolic-blood-pressure"
@@ -8,4 +8,4 @@
   points: 1
   category: "Test category"
   description: "Test description"
-  modifiedEarlyWarningScoreGradeId: 287940
+  modifiedEarlyWarningScoreGradeId: "00000000-0000-4000-8000-0000000464c4"

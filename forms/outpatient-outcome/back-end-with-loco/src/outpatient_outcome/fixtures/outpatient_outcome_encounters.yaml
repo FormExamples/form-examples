@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 504972
+  id: "00000000-0000-4000-8000-00000007b48c"
   deletedAt: null
   clinicDate: "1990-01-01"
   specialty: "Test specialty"
   modality: "in_person"
   appointmentType: "new"
-  outpatientOutcomeId: 379759
-  clinicianId: 459572
+  outpatientOutcomeId: "00000000-0000-4000-8000-00000005cb6f"
+  clinicianId: "00000000-0000-4000-8000-000000070334"

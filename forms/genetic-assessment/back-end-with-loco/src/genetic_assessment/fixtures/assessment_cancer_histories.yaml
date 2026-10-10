@@ -1,6 +1,6 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 844910
+  id: "00000000-0000-4000-8000-0000000ce46e"
   deletedAt: null
   familyCancerHistory: "Test familyCancerHistory"
   multipleFamilyCancers: "Test multipleFamilyCancers"
@@ -11,4 +11,4 @@
   knownCancerSyndrome: "Test knownCancerSyndrome"
   cancerSyndromeDetails: "Test cancerSyndromeDetails"
   cancerRiskScore: 1
-  assessmentId: 542148
+  assessmentId: "00000000-0000-4000-8000-0000000845c4"

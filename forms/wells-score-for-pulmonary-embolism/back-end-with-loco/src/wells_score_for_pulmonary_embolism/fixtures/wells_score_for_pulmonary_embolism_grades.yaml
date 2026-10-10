@@ -1,10 +1,10 @@
 - createdAt: "2026-01-01T00:00:00Z"
   updatedAt: "2026-01-01T00:00:00Z"
-  id: 804055
+  id: "00000000-0000-4000-8000-0000000c44d7"
   deletedAt: null
   wellsScore: 1.0
   twoLevelBand: "likely"
   threeLevelBand: "low"
   recommendedPathway: "Test recommendedPathway"
   gradedAt: "2026-01-01T00:00:00Z"
-  wellsScoreForPulmonaryEmbolismId: 900011
+  wellsScoreForPulmonaryEmbolismId: "00000000-0000-4000-8000-0000000dbbab"

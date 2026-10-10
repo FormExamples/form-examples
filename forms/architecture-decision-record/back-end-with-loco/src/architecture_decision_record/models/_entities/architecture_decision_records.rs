@@ -13,8 +13,8 @@ pub struct Model {
     /// Updated at.
     pub updated_at: DateTimeWithTimeZone,
     /// ID.
-    #[sea_orm(primary_key)]
-    pub id: i64,
+    #[sea_orm(primary_key, auto_increment = false)]
+    pub id: Uuid,
     /// Slug.
     pub slug: String,
     /// Number.
@@ -62,9 +62,9 @@ pub struct Model {
     /// Signed off at.
     pub signed_off_at: Option<DateTimeWithTimeZone>,
     /// Author ID.
-    pub author_id: i64,
+    pub author_id: Option<Uuid>,
     /// Organization ID.
-    pub organization_id: i64,
+    pub organization_id: Option<Uuid>,
 }
 
 /// Relation.
