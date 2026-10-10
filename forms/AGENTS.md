@@ -338,6 +338,7 @@ Subprojects:
 - [UK Lasting Power of Attorney for Financial Decisions (LP1F)](united-kingdom-lasting-power-of-attorney-for-financial-decisions)
 - [UK Lasting Power of Attorney for Health and Care Decisions (LP1H)](united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions)
 - [UK maternity certificate MAT B1](united-kingdom-maternity-certificate-mat-b1)
+- [UK NHS Digital Technology Assessment Criteria (DTAC)](uk-nhs-digital-technology-assessment-criteria)
 - [UK NHS England medical exemption certificate (FP92A)](united-kingdom-nhs-england-medical-exemption-certificate)
 - [UK Statement of Fitness for Work (Med 3 / fit note)](united-kingdom-statement-of-fitness-for-work)
 - [ultrasound test request](ultrasound-test-request)

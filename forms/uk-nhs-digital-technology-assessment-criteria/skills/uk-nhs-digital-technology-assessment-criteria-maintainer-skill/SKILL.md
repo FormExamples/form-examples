@@ -35,6 +35,7 @@ Not yet documented in this form's own `AGENTS.md`. See [`../../spec/index.md`](.
 bin/test-form uk-nhs-digital-technology-assessment-criteria
 bin/test-sql-apply uk-nhs-digital-technology-assessment-criteria
 bin/test-examples-conformance uk-nhs-digital-technology-assessment-criteria
+bin/test-personas uk-nhs-digital-technology-assessment-criteria
 bin/test-e2e --html uk-nhs-digital-technology-assessment-criteria
 ```
 
