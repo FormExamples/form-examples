@@ -1,0 +1,188 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: product
+openapi: 3.1.0
+info:
+  title: Uk Nhs Digital Technology Assessment Criteria — Product
+  version: 1.0.0
+  description: Digital health technology product under assessment.
+paths:
+  /products:
+    get:
+      summary: List Product records
+      operationId: listProduct
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Product records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+    post:
+      summary: Create a new Product
+      operationId: createProduct
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        "201":
+          description: The newly created Product
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "400":
+          description: Validation error
+  /products/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Product by id
+      operationId: getProduct
+      responses:
+        "200":
+          description: The requested Product
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "404":
+          description: Product not found
+    patch:
+      summary: Update an existing Product
+      operationId: updateProduct
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        "200":
+          description: The updated Product
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "404":
+          description: Product not found
+    delete:
+      summary: Soft-delete a Product
+      operationId: deleteProduct
+      responses:
+        "204":
+          description: Product deleted
+        "404":
+          description: Product not found
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        supplier_id:
+          type: string
+          format: uuid
+          description: Foreign key to the supplier table.
+        name:
+          type: string
+          description: Product name.
+        version:
+          type: string
+          description: Product version or release assessed.
+        description:
+          type: string
+          description: Short description of the product.
+        intended_purpose:
+          type: string
+          description: Intended purpose as stated by the supplier.
+        product_type:
+          type: string
+          enum:
+            - app
+            - web-service
+            - software-as-a-service
+            - wearable-integrated
+            - clinical-decision-support
+            - remote-monitoring
+            - other
+            - ""
+          description: Kind of digital health technology.
+        medical_device_class:
+          type: string
+          enum:
+            - not-a-medical-device
+            - class-i
+            - class-iia
+            - class-iib
+            - class-iii
+            - unknown
+            - ""
+          description: UK MDR 2002 medical device classification.
+        handles_patient_data:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the product processes patient-identifiable data.
+        is_patient_facing:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether patients or the public use the product directly.
+      required:
+        - created_at
+        - updated_at
+        - supplier_id
+        - name
+        - version
+        - description
+        - intended_purpose
+        - product_type
+        - medical_device_class
+        - handles_patient_data
+        - is_patient_facing
+      description: Digital health technology product under assessment.

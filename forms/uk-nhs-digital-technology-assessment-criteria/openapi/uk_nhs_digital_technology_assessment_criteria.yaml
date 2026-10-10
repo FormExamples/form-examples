@@ -1,0 +1,671 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: uk_nhs_digital_technology_assessment_criteria
+openapi: 3.1.0
+info:
+  title: Uk Nhs Digital Technology Assessment Criteria — UkNhsDigitalTechnologyAssessmentCriteria
+  version: 1.0.0
+  description: A DTAC assessment of one digital health technology product by one assessor.
+paths:
+  /uk-nhs-digital-technology-assessment-criterias:
+    get:
+      summary: List UkNhsDigitalTechnologyAssessmentCriteria records
+      operationId: listUkNhsDigitalTechnologyAssessmentCriteria
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of UkNhsDigitalTechnologyAssessmentCriteria records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UkNhsDigitalTechnologyAssessmentCriteria"
+    post:
+      summary: Create a new UkNhsDigitalTechnologyAssessmentCriteria
+      operationId: createUkNhsDigitalTechnologyAssessmentCriteria
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UkNhsDigitalTechnologyAssessmentCriteria"
+      responses:
+        "201":
+          description: The newly created UkNhsDigitalTechnologyAssessmentCriteria
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UkNhsDigitalTechnologyAssessmentCriteria"
+        "400":
+          description: Validation error
+  /uk-nhs-digital-technology-assessment-criterias/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one UkNhsDigitalTechnologyAssessmentCriteria by id
+      operationId: getUkNhsDigitalTechnologyAssessmentCriteria
+      responses:
+        "200":
+          description: The requested UkNhsDigitalTechnologyAssessmentCriteria
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UkNhsDigitalTechnologyAssessmentCriteria"
+        "404":
+          description: UkNhsDigitalTechnologyAssessmentCriteria not found
+    patch:
+      summary: Update an existing UkNhsDigitalTechnologyAssessmentCriteria
+      operationId: updateUkNhsDigitalTechnologyAssessmentCriteria
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UkNhsDigitalTechnologyAssessmentCriteria"
+      responses:
+        "200":
+          description: The updated UkNhsDigitalTechnologyAssessmentCriteria
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UkNhsDigitalTechnologyAssessmentCriteria"
+        "404":
+          description: UkNhsDigitalTechnologyAssessmentCriteria not found
+    delete:
+      summary: Soft-delete a UkNhsDigitalTechnologyAssessmentCriteria
+      operationId: deleteUkNhsDigitalTechnologyAssessmentCriteria
+      responses:
+        "204":
+          description: UkNhsDigitalTechnologyAssessmentCriteria deleted
+        "404":
+          description: UkNhsDigitalTechnologyAssessmentCriteria not found
+components:
+  schemas:
+    UkNhsDigitalTechnologyAssessmentCriteria:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        supplier_id:
+          type: string
+          format: uuid
+          description: Foreign key to the supplier table.
+        product_id:
+          type: string
+          format: uuid
+          description: Foreign key to the product table.
+        assessor_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessor table.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - reviewed
+            - approved
+            - rejected
+          description: Workflow status of the assessment.
+        assessment_date:
+          type: string
+          format: date
+          description: Date the assessment was carried out.
+        review_due_date:
+          type: string
+          format: date
+          description: Date the assessment must next be reviewed.
+        dtac_version:
+          type: string
+          maxLength: 50
+          description: Version of the NHS England DTAC the assessment was made against.
+        commissioning_organisation:
+          type: string
+          maxLength: 255
+          description: Organisation commissioning or procuring the product.
+        a1_company_registered_in_uk:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion A1 (mandatory): The supplier is a registered company or legal entity with a verifiable registration number."
+        a2_ico_registration_current:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion A2 (mandatory): The supplier has a current ICO data protection fee registration (or a documented exemption)."
+        a3_senior_responsible_owner_named:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion A3 (mandatory): A named senior individual is accountable for the product's compliance."
+        a4_incident_contact_published:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion A4 (advisory): A contact point for incident and safety reports is published to commissioners and users."
+        section_a_notes:
+          type: string
+          description: Assessor notes and evidence references for section A (Company information).
+        b1_intended_use_and_users_defined:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion B1 (mandatory): The intended purpose, target users and care setting are clearly defined."
+        b2_evidence_of_benefit:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion B2 (mandatory): Evidence demonstrates the product's benefit to patients, staff or the system."
+        b3_outcome_measures_defined:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion B3 (advisory): Measurable outcomes and an evaluation plan are defined."
+        b4_cost_effectiveness_evidence:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion B4 (advisory): Evidence of cost-effectiveness or economic value is available."
+        section_b_notes:
+          type: string
+          description: Assessor notes and evidence references for section B (Value proposition).
+        c1_clinical_safety_officer_named:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion C1 (mandatory): A named Clinical Safety Officer (a registered clinician with clinical risk management training) is appointed."
+        c2_clinical_risk_management_plan:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion C2 (mandatory): A DCB0129 Clinical Risk Management Plan exists and is current."
+        c3_hazard_log_maintained:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion C3 (mandatory): A DCB0129 Hazard Log is maintained and hazards are mitigated to acceptable levels."
+        c4_clinical_safety_case_report:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion C4 (mandatory): A DCB0129 Clinical Safety Case Report is complete and signed off by the Clinical Safety Officer."
+        c5_clinical_safety_officer_registration_verified:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion C5 (mandatory): The Clinical Safety Officer's professional registration has been verified."
+        c6_medical_device_registration_if_applicable:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion C6 (mandatory): If the product is a medical device, it is correctly classified and has UKCA/CE marking and MHRA registration."
+        c7_post_market_surveillance:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion C7 (advisory): A process exists to monitor safety in live use and to report incidents."
+        section_c_notes:
+          type: string
+          description: Assessor notes and evidence references for section C (Clinical safety).
+        d1_data_protection_officer_or_lead:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion D1 (mandatory): A Data Protection Officer or named data protection lead is appointed."
+        d2_dpia_completed:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion D2 (mandatory): A Data Protection Impact Assessment has been completed and is kept under review."
+        d3_dspt_standards_met:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion D3 (mandatory): The Data Security and Protection Toolkit assessment meets or exceeds standards."
+        d4_lawful_basis_documented:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion D4 (mandatory): The lawful basis for each processing purpose (UK GDPR Art. 6 and Art. 9) is documented."
+        d5_controller_processor_roles_defined:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion D5 (mandatory): Controller, joint controller and processor roles are defined in contracts."
+        d6_data_location_and_transfers:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion D6 (mandatory): Data is processed in the UK, or international transfers have lawful safeguards."
+        d7_retention_and_deletion_policy:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion D7 (mandatory): A retention and secure-deletion policy aligned with NHS records guidance is in place."
+        d8_privacy_notice_published:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion D8 (mandatory): A clear, accessible privacy notice is published to users."
+        d9_data_subject_rights_supported:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion D9 (advisory): Processes support data subject rights (access, rectification, erasure, objection, portability)."
+        section_d_notes:
+          type: string
+          description: Assessor notes and evidence references for section D (Data protection).
+        e1_cyber_essentials_plus_or_iso27001:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion E1 (mandatory): The supplier holds Cyber Essentials Plus or ISO 27001 certification (or equivalent assured evidence)."
+        e2_penetration_test_within_12_months:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion E2 (mandatory): An independent penetration test was completed within the last 12 months and findings addressed."
+        e3_vulnerability_management:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion E3 (mandatory): A vulnerability management and patching process is operated with defined timescales."
+        e4_encryption_in_transit_and_at_rest:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion E4 (mandatory): Data is encrypted in transit and at rest using current standards."
+        e5_access_control_and_mfa:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion E5 (mandatory): Role-based access control with multi-factor authentication for privileged and remote access."
+        e6_audit_logging:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion E6 (mandatory): Security-relevant events and access to patient data are logged and monitored."
+        e7_business_continuity_and_backup:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion E7 (mandatory): Tested backup, disaster recovery and business continuity arrangements exist."
+        e8_secure_development_lifecycle:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion E8 (advisory): A secure software development lifecycle, including dependency and supply-chain controls, is followed."
+        e9_incident_response_and_breach_notification:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion E9 (mandatory): A security incident response plan with breach notification timescales exists."
+        section_e_notes:
+          type: string
+          description: Assessor notes and evidence references for section E (Technical security).
+        f1_open_standards_apis:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion F1 (mandatory): The product exposes documented APIs that use open standards."
+        f2_fhir_or_nhs_standard_apis:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion F2 (advisory): The product supports HL7 FHIR or other relevant NHS interoperability standards."
+        f3_nhs_number_supported:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion F3 (mandatory): The NHS Number is supported as the primary patient identifier where patient data is held."
+        f4_clinical_terminology_standards:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion F4 (advisory): SNOMED CT, dm+d or other mandated clinical terminologies are used where relevant."
+        f5_nhs_login_integration:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion F5 (advisory): NHS login is supported for patient-facing authentication where relevant."
+        f6_nhs_systems_integration_documented:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion F6 (advisory): Integration with NHS systems (for example NHS App, GP Connect, national services) is documented."
+        f7_data_portability_export:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion F7 (mandatory): Patient and organisational data can be exported in a structured, machine-readable format."
+        section_f_notes:
+          type: string
+          description: Assessor notes and evidence references for section F (Interoperability).
+        g1_user_research_with_target_users:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion G1 (mandatory): User research with the intended users has informed the design."
+        g2_wcag_aa_conformance:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion G2 (mandatory): The product conforms to the WCAG level AA version specified by DTAC."
+        g3_accessibility_statement_published:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion G3 (mandatory): An accessibility statement meeting UK public-sector requirements is published."
+        g4_nhs_service_manual_followed:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion G4 (advisory): The NHS digital service manual design guidance is followed."
+        g5_assistive_technology_tested:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion G5 (mandatory): The product has been tested with assistive technologies."
+        g6_digital_inclusion_considered:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion G6 (advisory): Digital inclusion and non-digital alternatives are considered."
+        g7_user_feedback_mechanism:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: "Criterion G7 (advisory): A mechanism exists for users to give feedback and report accessibility problems."
+        section_g_notes:
+          type: string
+          description: Assessor notes and evidence references for section G (Usability and accessibility).
+        assessor_notes:
+          type: string
+          description: Overall assessor notes.
+      required:
+        - created_at
+        - updated_at
+        - supplier_id
+        - product_id
+        - assessor_id
+        - status
+        - dtac_version
+        - commissioning_organisation
+        - a1_company_registered_in_uk
+        - a2_ico_registration_current
+        - a3_senior_responsible_owner_named
+        - a4_incident_contact_published
+        - section_a_notes
+        - b1_intended_use_and_users_defined
+        - b2_evidence_of_benefit
+        - b3_outcome_measures_defined
+        - b4_cost_effectiveness_evidence
+        - section_b_notes
+        - c1_clinical_safety_officer_named
+        - c2_clinical_risk_management_plan
+        - c3_hazard_log_maintained
+        - c4_clinical_safety_case_report
+        - c5_clinical_safety_officer_registration_verified
+        - c6_medical_device_registration_if_applicable
+        - c7_post_market_surveillance
+        - section_c_notes
+        - d1_data_protection_officer_or_lead
+        - d2_dpia_completed
+        - d3_dspt_standards_met
+        - d4_lawful_basis_documented
+        - d5_controller_processor_roles_defined
+        - d6_data_location_and_transfers
+        - d7_retention_and_deletion_policy
+        - d8_privacy_notice_published
+        - d9_data_subject_rights_supported
+        - section_d_notes
+        - e1_cyber_essentials_plus_or_iso27001
+        - e2_penetration_test_within_12_months
+        - e3_vulnerability_management
+        - e4_encryption_in_transit_and_at_rest
+        - e5_access_control_and_mfa
+        - e6_audit_logging
+        - e7_business_continuity_and_backup
+        - e8_secure_development_lifecycle
+        - e9_incident_response_and_breach_notification
+        - section_e_notes
+        - f1_open_standards_apis
+        - f2_fhir_or_nhs_standard_apis
+        - f3_nhs_number_supported
+        - f4_clinical_terminology_standards
+        - f5_nhs_login_integration
+        - f6_nhs_systems_integration_documented
+        - f7_data_portability_export
+        - section_f_notes
+        - g1_user_research_with_target_users
+        - g2_wcag_aa_conformance
+        - g3_accessibility_statement_published
+        - g4_nhs_service_manual_followed
+        - g5_assistive_technology_tested
+        - g6_digital_inclusion_considered
+        - g7_user_feedback_mechanism
+        - section_g_notes
+        - assessor_notes
+      description: A DTAC assessment of one digital health technology product by one assessor.

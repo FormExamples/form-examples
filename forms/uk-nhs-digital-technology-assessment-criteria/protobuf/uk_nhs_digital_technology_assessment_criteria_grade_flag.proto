@@ -1,0 +1,37 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: uk_nhs_digital_technology_assessment_criteria_grade_flag
+
+syntax = "proto3";
+
+package form_examples.uk_nhs_digital_technology_assessment_criteria;
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_COMPANY = 1;  // company
+  CATEGORY_VALUE_PROPOSITION = 2;  // value-proposition
+  CATEGORY_CLINICAL_SAFETY = 3;  // clinical-safety
+  CATEGORY_DATA_PROTECTION = 4;  // data-protection
+  CATEGORY_TECHNICAL_SECURITY = 5;  // technical-security
+  CATEGORY_INTEROPERABILITY = 6;  // interoperability
+  CATEGORY_ACCESSIBILITY = 7;  // accessibility
+  CATEGORY_COMPLETENESS = 8;  // completeness
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaGradeFlagSeverityEnum {
+  SEVERITY_UNSPECIFIED = 0;
+  SEVERITY_INFO = 1;  // info
+  SEVERITY_WARNING = 2;  // warning
+  SEVERITY_CRITICAL = 3;  // critical
+}
+
+message UkNhsDigitalTechnologyAssessmentCriteriaGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string uk_nhs_digital_technology_assessment_criteria_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  UkNhsDigitalTechnologyAssessmentCriteriaGradeFlagCategoryEnum category = 7;  // VARCHAR(30)
+  UkNhsDigitalTechnologyAssessmentCriteriaGradeFlagSeverityEnum severity = 8;  // VARCHAR(10)
+  string message_ = 9;  // VARCHAR(500) — max 500 chars
+}

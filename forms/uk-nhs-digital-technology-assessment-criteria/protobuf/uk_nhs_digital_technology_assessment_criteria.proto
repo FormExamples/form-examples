@@ -1,0 +1,461 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: uk_nhs_digital_technology_assessment_criteria
+
+syntax = "proto3";
+
+package form_examples.uk_nhs_digital_technology_assessment_criteria;
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_APPROVED = 4;  // approved
+  STATUS_REJECTED = 5;  // rejected
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaA1CompanyRegisteredInUkEnum {
+  A1COMPANYREGISTEREDINUK_UNSPECIFIED = 0;
+  A1COMPANYREGISTEREDINUK_MET = 1;  // met
+  A1COMPANYREGISTEREDINUK_PARTIALLY_MET = 2;  // partially-met
+  A1COMPANYREGISTEREDINUK_NOT_MET = 3;  // not-met
+  A1COMPANYREGISTEREDINUK_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaA2IcoRegistrationCurrentEnum {
+  A2ICOREGISTRATIONCURRENT_UNSPECIFIED = 0;
+  A2ICOREGISTRATIONCURRENT_MET = 1;  // met
+  A2ICOREGISTRATIONCURRENT_PARTIALLY_MET = 2;  // partially-met
+  A2ICOREGISTRATIONCURRENT_NOT_MET = 3;  // not-met
+  A2ICOREGISTRATIONCURRENT_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaA3SeniorResponsibleOwnerNamedEnum {
+  A3SENIORRESPONSIBLEOWNERNAMED_UNSPECIFIED = 0;
+  A3SENIORRESPONSIBLEOWNERNAMED_MET = 1;  // met
+  A3SENIORRESPONSIBLEOWNERNAMED_PARTIALLY_MET = 2;  // partially-met
+  A3SENIORRESPONSIBLEOWNERNAMED_NOT_MET = 3;  // not-met
+  A3SENIORRESPONSIBLEOWNERNAMED_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaA4IncidentContactPublishedEnum {
+  A4INCIDENTCONTACTPUBLISHED_UNSPECIFIED = 0;
+  A4INCIDENTCONTACTPUBLISHED_MET = 1;  // met
+  A4INCIDENTCONTACTPUBLISHED_PARTIALLY_MET = 2;  // partially-met
+  A4INCIDENTCONTACTPUBLISHED_NOT_MET = 3;  // not-met
+  A4INCIDENTCONTACTPUBLISHED_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaB1IntendedUseAndUsersDefinedEnum {
+  B1INTENDEDUSEANDUSERSDEFINED_UNSPECIFIED = 0;
+  B1INTENDEDUSEANDUSERSDEFINED_MET = 1;  // met
+  B1INTENDEDUSEANDUSERSDEFINED_PARTIALLY_MET = 2;  // partially-met
+  B1INTENDEDUSEANDUSERSDEFINED_NOT_MET = 3;  // not-met
+  B1INTENDEDUSEANDUSERSDEFINED_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaB2EvidenceOfBenefitEnum {
+  B2EVIDENCEOFBENEFIT_UNSPECIFIED = 0;
+  B2EVIDENCEOFBENEFIT_MET = 1;  // met
+  B2EVIDENCEOFBENEFIT_PARTIALLY_MET = 2;  // partially-met
+  B2EVIDENCEOFBENEFIT_NOT_MET = 3;  // not-met
+  B2EVIDENCEOFBENEFIT_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaB3OutcomeMeasuresDefinedEnum {
+  B3OUTCOMEMEASURESDEFINED_UNSPECIFIED = 0;
+  B3OUTCOMEMEASURESDEFINED_MET = 1;  // met
+  B3OUTCOMEMEASURESDEFINED_PARTIALLY_MET = 2;  // partially-met
+  B3OUTCOMEMEASURESDEFINED_NOT_MET = 3;  // not-met
+  B3OUTCOMEMEASURESDEFINED_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaB4CostEffectivenessEvidenceEnum {
+  B4COSTEFFECTIVENESSEVIDENCE_UNSPECIFIED = 0;
+  B4COSTEFFECTIVENESSEVIDENCE_MET = 1;  // met
+  B4COSTEFFECTIVENESSEVIDENCE_PARTIALLY_MET = 2;  // partially-met
+  B4COSTEFFECTIVENESSEVIDENCE_NOT_MET = 3;  // not-met
+  B4COSTEFFECTIVENESSEVIDENCE_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaC1ClinicalSafetyOfficerNamedEnum {
+  C1CLINICALSAFETYOFFICERNAMED_UNSPECIFIED = 0;
+  C1CLINICALSAFETYOFFICERNAMED_MET = 1;  // met
+  C1CLINICALSAFETYOFFICERNAMED_PARTIALLY_MET = 2;  // partially-met
+  C1CLINICALSAFETYOFFICERNAMED_NOT_MET = 3;  // not-met
+  C1CLINICALSAFETYOFFICERNAMED_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaC2ClinicalRiskManagementPlanEnum {
+  C2CLINICALRISKMANAGEMENTPLAN_UNSPECIFIED = 0;
+  C2CLINICALRISKMANAGEMENTPLAN_MET = 1;  // met
+  C2CLINICALRISKMANAGEMENTPLAN_PARTIALLY_MET = 2;  // partially-met
+  C2CLINICALRISKMANAGEMENTPLAN_NOT_MET = 3;  // not-met
+  C2CLINICALRISKMANAGEMENTPLAN_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaC3HazardLogMaintainedEnum {
+  C3HAZARDLOGMAINTAINED_UNSPECIFIED = 0;
+  C3HAZARDLOGMAINTAINED_MET = 1;  // met
+  C3HAZARDLOGMAINTAINED_PARTIALLY_MET = 2;  // partially-met
+  C3HAZARDLOGMAINTAINED_NOT_MET = 3;  // not-met
+  C3HAZARDLOGMAINTAINED_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaC4ClinicalSafetyCaseReportEnum {
+  C4CLINICALSAFETYCASEREPORT_UNSPECIFIED = 0;
+  C4CLINICALSAFETYCASEREPORT_MET = 1;  // met
+  C4CLINICALSAFETYCASEREPORT_PARTIALLY_MET = 2;  // partially-met
+  C4CLINICALSAFETYCASEREPORT_NOT_MET = 3;  // not-met
+  C4CLINICALSAFETYCASEREPORT_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaC5ClinicalSafetyOfficerRegistrationVerifiedEnum {
+  C5CLINICALSAFETYOFFICERREGISTRATIONVERIFIED_UNSPECIFIED = 0;
+  C5CLINICALSAFETYOFFICERREGISTRATIONVERIFIED_MET = 1;  // met
+  C5CLINICALSAFETYOFFICERREGISTRATIONVERIFIED_PARTIALLY_MET = 2;  // partially-met
+  C5CLINICALSAFETYOFFICERREGISTRATIONVERIFIED_NOT_MET = 3;  // not-met
+  C5CLINICALSAFETYOFFICERREGISTRATIONVERIFIED_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaC6MedicalDeviceRegistrationIfApplicableEnum {
+  C6MEDICALDEVICEREGISTRATIONIFAPPLICABLE_UNSPECIFIED = 0;
+  C6MEDICALDEVICEREGISTRATIONIFAPPLICABLE_MET = 1;  // met
+  C6MEDICALDEVICEREGISTRATIONIFAPPLICABLE_PARTIALLY_MET = 2;  // partially-met
+  C6MEDICALDEVICEREGISTRATIONIFAPPLICABLE_NOT_MET = 3;  // not-met
+  C6MEDICALDEVICEREGISTRATIONIFAPPLICABLE_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaC7PostMarketSurveillanceEnum {
+  C7POSTMARKETSURVEILLANCE_UNSPECIFIED = 0;
+  C7POSTMARKETSURVEILLANCE_MET = 1;  // met
+  C7POSTMARKETSURVEILLANCE_PARTIALLY_MET = 2;  // partially-met
+  C7POSTMARKETSURVEILLANCE_NOT_MET = 3;  // not-met
+  C7POSTMARKETSURVEILLANCE_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaD1DataProtectionOfficerOrLeadEnum {
+  D1DATAPROTECTIONOFFICERORLEAD_UNSPECIFIED = 0;
+  D1DATAPROTECTIONOFFICERORLEAD_MET = 1;  // met
+  D1DATAPROTECTIONOFFICERORLEAD_PARTIALLY_MET = 2;  // partially-met
+  D1DATAPROTECTIONOFFICERORLEAD_NOT_MET = 3;  // not-met
+  D1DATAPROTECTIONOFFICERORLEAD_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaD2DpiaCompletedEnum {
+  D2DPIACOMPLETED_UNSPECIFIED = 0;
+  D2DPIACOMPLETED_MET = 1;  // met
+  D2DPIACOMPLETED_PARTIALLY_MET = 2;  // partially-met
+  D2DPIACOMPLETED_NOT_MET = 3;  // not-met
+  D2DPIACOMPLETED_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaD3DsptStandardsMetEnum {
+  D3DSPTSTANDARDSMET_UNSPECIFIED = 0;
+  D3DSPTSTANDARDSMET_MET = 1;  // met
+  D3DSPTSTANDARDSMET_PARTIALLY_MET = 2;  // partially-met
+  D3DSPTSTANDARDSMET_NOT_MET = 3;  // not-met
+  D3DSPTSTANDARDSMET_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaD4LawfulBasisDocumentedEnum {
+  D4LAWFULBASISDOCUMENTED_UNSPECIFIED = 0;
+  D4LAWFULBASISDOCUMENTED_MET = 1;  // met
+  D4LAWFULBASISDOCUMENTED_PARTIALLY_MET = 2;  // partially-met
+  D4LAWFULBASISDOCUMENTED_NOT_MET = 3;  // not-met
+  D4LAWFULBASISDOCUMENTED_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaD5ControllerProcessorRolesDefinedEnum {
+  D5CONTROLLERPROCESSORROLESDEFINED_UNSPECIFIED = 0;
+  D5CONTROLLERPROCESSORROLESDEFINED_MET = 1;  // met
+  D5CONTROLLERPROCESSORROLESDEFINED_PARTIALLY_MET = 2;  // partially-met
+  D5CONTROLLERPROCESSORROLESDEFINED_NOT_MET = 3;  // not-met
+  D5CONTROLLERPROCESSORROLESDEFINED_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaD6DataLocationAndTransfersEnum {
+  D6DATALOCATIONANDTRANSFERS_UNSPECIFIED = 0;
+  D6DATALOCATIONANDTRANSFERS_MET = 1;  // met
+  D6DATALOCATIONANDTRANSFERS_PARTIALLY_MET = 2;  // partially-met
+  D6DATALOCATIONANDTRANSFERS_NOT_MET = 3;  // not-met
+  D6DATALOCATIONANDTRANSFERS_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaD7RetentionAndDeletionPolicyEnum {
+  D7RETENTIONANDDELETIONPOLICY_UNSPECIFIED = 0;
+  D7RETENTIONANDDELETIONPOLICY_MET = 1;  // met
+  D7RETENTIONANDDELETIONPOLICY_PARTIALLY_MET = 2;  // partially-met
+  D7RETENTIONANDDELETIONPOLICY_NOT_MET = 3;  // not-met
+  D7RETENTIONANDDELETIONPOLICY_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaD8PrivacyNoticePublishedEnum {
+  D8PRIVACYNOTICEPUBLISHED_UNSPECIFIED = 0;
+  D8PRIVACYNOTICEPUBLISHED_MET = 1;  // met
+  D8PRIVACYNOTICEPUBLISHED_PARTIALLY_MET = 2;  // partially-met
+  D8PRIVACYNOTICEPUBLISHED_NOT_MET = 3;  // not-met
+  D8PRIVACYNOTICEPUBLISHED_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaD9DataSubjectRightsSupportedEnum {
+  D9DATASUBJECTRIGHTSSUPPORTED_UNSPECIFIED = 0;
+  D9DATASUBJECTRIGHTSSUPPORTED_MET = 1;  // met
+  D9DATASUBJECTRIGHTSSUPPORTED_PARTIALLY_MET = 2;  // partially-met
+  D9DATASUBJECTRIGHTSSUPPORTED_NOT_MET = 3;  // not-met
+  D9DATASUBJECTRIGHTSSUPPORTED_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaE1CyberEssentialsPlusOrIso27001Enum {
+  E1CYBERESSENTIALSPLUSORISO27001_UNSPECIFIED = 0;
+  E1CYBERESSENTIALSPLUSORISO27001_MET = 1;  // met
+  E1CYBERESSENTIALSPLUSORISO27001_PARTIALLY_MET = 2;  // partially-met
+  E1CYBERESSENTIALSPLUSORISO27001_NOT_MET = 3;  // not-met
+  E1CYBERESSENTIALSPLUSORISO27001_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaE2PenetrationTestWithin12MonthsEnum {
+  E2PENETRATIONTESTWITHIN12MONTHS_UNSPECIFIED = 0;
+  E2PENETRATIONTESTWITHIN12MONTHS_MET = 1;  // met
+  E2PENETRATIONTESTWITHIN12MONTHS_PARTIALLY_MET = 2;  // partially-met
+  E2PENETRATIONTESTWITHIN12MONTHS_NOT_MET = 3;  // not-met
+  E2PENETRATIONTESTWITHIN12MONTHS_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaE3VulnerabilityManagementEnum {
+  E3VULNERABILITYMANAGEMENT_UNSPECIFIED = 0;
+  E3VULNERABILITYMANAGEMENT_MET = 1;  // met
+  E3VULNERABILITYMANAGEMENT_PARTIALLY_MET = 2;  // partially-met
+  E3VULNERABILITYMANAGEMENT_NOT_MET = 3;  // not-met
+  E3VULNERABILITYMANAGEMENT_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaE4EncryptionInTransitAndAtRestEnum {
+  E4ENCRYPTIONINTRANSITANDATREST_UNSPECIFIED = 0;
+  E4ENCRYPTIONINTRANSITANDATREST_MET = 1;  // met
+  E4ENCRYPTIONINTRANSITANDATREST_PARTIALLY_MET = 2;  // partially-met
+  E4ENCRYPTIONINTRANSITANDATREST_NOT_MET = 3;  // not-met
+  E4ENCRYPTIONINTRANSITANDATREST_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaE5AccessControlAndMfaEnum {
+  E5ACCESSCONTROLANDMFA_UNSPECIFIED = 0;
+  E5ACCESSCONTROLANDMFA_MET = 1;  // met
+  E5ACCESSCONTROLANDMFA_PARTIALLY_MET = 2;  // partially-met
+  E5ACCESSCONTROLANDMFA_NOT_MET = 3;  // not-met
+  E5ACCESSCONTROLANDMFA_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaE6AuditLoggingEnum {
+  E6AUDITLOGGING_UNSPECIFIED = 0;
+  E6AUDITLOGGING_MET = 1;  // met
+  E6AUDITLOGGING_PARTIALLY_MET = 2;  // partially-met
+  E6AUDITLOGGING_NOT_MET = 3;  // not-met
+  E6AUDITLOGGING_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaE7BusinessContinuityAndBackupEnum {
+  E7BUSINESSCONTINUITYANDBACKUP_UNSPECIFIED = 0;
+  E7BUSINESSCONTINUITYANDBACKUP_MET = 1;  // met
+  E7BUSINESSCONTINUITYANDBACKUP_PARTIALLY_MET = 2;  // partially-met
+  E7BUSINESSCONTINUITYANDBACKUP_NOT_MET = 3;  // not-met
+  E7BUSINESSCONTINUITYANDBACKUP_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaE8SecureDevelopmentLifecycleEnum {
+  E8SECUREDEVELOPMENTLIFECYCLE_UNSPECIFIED = 0;
+  E8SECUREDEVELOPMENTLIFECYCLE_MET = 1;  // met
+  E8SECUREDEVELOPMENTLIFECYCLE_PARTIALLY_MET = 2;  // partially-met
+  E8SECUREDEVELOPMENTLIFECYCLE_NOT_MET = 3;  // not-met
+  E8SECUREDEVELOPMENTLIFECYCLE_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaE9IncidentResponseAndBreachNotificationEnum {
+  E9INCIDENTRESPONSEANDBREACHNOTIFICATION_UNSPECIFIED = 0;
+  E9INCIDENTRESPONSEANDBREACHNOTIFICATION_MET = 1;  // met
+  E9INCIDENTRESPONSEANDBREACHNOTIFICATION_PARTIALLY_MET = 2;  // partially-met
+  E9INCIDENTRESPONSEANDBREACHNOTIFICATION_NOT_MET = 3;  // not-met
+  E9INCIDENTRESPONSEANDBREACHNOTIFICATION_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaF1OpenStandardsApisEnum {
+  F1OPENSTANDARDSAPIS_UNSPECIFIED = 0;
+  F1OPENSTANDARDSAPIS_MET = 1;  // met
+  F1OPENSTANDARDSAPIS_PARTIALLY_MET = 2;  // partially-met
+  F1OPENSTANDARDSAPIS_NOT_MET = 3;  // not-met
+  F1OPENSTANDARDSAPIS_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaF2FhirOrNhsStandardApisEnum {
+  F2FHIRORNHSSTANDARDAPIS_UNSPECIFIED = 0;
+  F2FHIRORNHSSTANDARDAPIS_MET = 1;  // met
+  F2FHIRORNHSSTANDARDAPIS_PARTIALLY_MET = 2;  // partially-met
+  F2FHIRORNHSSTANDARDAPIS_NOT_MET = 3;  // not-met
+  F2FHIRORNHSSTANDARDAPIS_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaF3NhsNumberSupportedEnum {
+  F3NHSNUMBERSUPPORTED_UNSPECIFIED = 0;
+  F3NHSNUMBERSUPPORTED_MET = 1;  // met
+  F3NHSNUMBERSUPPORTED_PARTIALLY_MET = 2;  // partially-met
+  F3NHSNUMBERSUPPORTED_NOT_MET = 3;  // not-met
+  F3NHSNUMBERSUPPORTED_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaF4ClinicalTerminologyStandardsEnum {
+  F4CLINICALTERMINOLOGYSTANDARDS_UNSPECIFIED = 0;
+  F4CLINICALTERMINOLOGYSTANDARDS_MET = 1;  // met
+  F4CLINICALTERMINOLOGYSTANDARDS_PARTIALLY_MET = 2;  // partially-met
+  F4CLINICALTERMINOLOGYSTANDARDS_NOT_MET = 3;  // not-met
+  F4CLINICALTERMINOLOGYSTANDARDS_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaF5NhsLoginIntegrationEnum {
+  F5NHSLOGININTEGRATION_UNSPECIFIED = 0;
+  F5NHSLOGININTEGRATION_MET = 1;  // met
+  F5NHSLOGININTEGRATION_PARTIALLY_MET = 2;  // partially-met
+  F5NHSLOGININTEGRATION_NOT_MET = 3;  // not-met
+  F5NHSLOGININTEGRATION_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaF6NhsSystemsIntegrationDocumentedEnum {
+  F6NHSSYSTEMSINTEGRATIONDOCUMENTED_UNSPECIFIED = 0;
+  F6NHSSYSTEMSINTEGRATIONDOCUMENTED_MET = 1;  // met
+  F6NHSSYSTEMSINTEGRATIONDOCUMENTED_PARTIALLY_MET = 2;  // partially-met
+  F6NHSSYSTEMSINTEGRATIONDOCUMENTED_NOT_MET = 3;  // not-met
+  F6NHSSYSTEMSINTEGRATIONDOCUMENTED_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaF7DataPortabilityExportEnum {
+  F7DATAPORTABILITYEXPORT_UNSPECIFIED = 0;
+  F7DATAPORTABILITYEXPORT_MET = 1;  // met
+  F7DATAPORTABILITYEXPORT_PARTIALLY_MET = 2;  // partially-met
+  F7DATAPORTABILITYEXPORT_NOT_MET = 3;  // not-met
+  F7DATAPORTABILITYEXPORT_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaG1UserResearchWithTargetUsersEnum {
+  G1USERRESEARCHWITHTARGETUSERS_UNSPECIFIED = 0;
+  G1USERRESEARCHWITHTARGETUSERS_MET = 1;  // met
+  G1USERRESEARCHWITHTARGETUSERS_PARTIALLY_MET = 2;  // partially-met
+  G1USERRESEARCHWITHTARGETUSERS_NOT_MET = 3;  // not-met
+  G1USERRESEARCHWITHTARGETUSERS_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaG2WcagAaConformanceEnum {
+  G2WCAGAACONFORMANCE_UNSPECIFIED = 0;
+  G2WCAGAACONFORMANCE_MET = 1;  // met
+  G2WCAGAACONFORMANCE_PARTIALLY_MET = 2;  // partially-met
+  G2WCAGAACONFORMANCE_NOT_MET = 3;  // not-met
+  G2WCAGAACONFORMANCE_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaG3AccessibilityStatementPublishedEnum {
+  G3ACCESSIBILITYSTATEMENTPUBLISHED_UNSPECIFIED = 0;
+  G3ACCESSIBILITYSTATEMENTPUBLISHED_MET = 1;  // met
+  G3ACCESSIBILITYSTATEMENTPUBLISHED_PARTIALLY_MET = 2;  // partially-met
+  G3ACCESSIBILITYSTATEMENTPUBLISHED_NOT_MET = 3;  // not-met
+  G3ACCESSIBILITYSTATEMENTPUBLISHED_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaG4NhsServiceManualFollowedEnum {
+  G4NHSSERVICEMANUALFOLLOWED_UNSPECIFIED = 0;
+  G4NHSSERVICEMANUALFOLLOWED_MET = 1;  // met
+  G4NHSSERVICEMANUALFOLLOWED_PARTIALLY_MET = 2;  // partially-met
+  G4NHSSERVICEMANUALFOLLOWED_NOT_MET = 3;  // not-met
+  G4NHSSERVICEMANUALFOLLOWED_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaG5AssistiveTechnologyTestedEnum {
+  G5ASSISTIVETECHNOLOGYTESTED_UNSPECIFIED = 0;
+  G5ASSISTIVETECHNOLOGYTESTED_MET = 1;  // met
+  G5ASSISTIVETECHNOLOGYTESTED_PARTIALLY_MET = 2;  // partially-met
+  G5ASSISTIVETECHNOLOGYTESTED_NOT_MET = 3;  // not-met
+  G5ASSISTIVETECHNOLOGYTESTED_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaG6DigitalInclusionConsideredEnum {
+  G6DIGITALINCLUSIONCONSIDERED_UNSPECIFIED = 0;
+  G6DIGITALINCLUSIONCONSIDERED_MET = 1;  // met
+  G6DIGITALINCLUSIONCONSIDERED_PARTIALLY_MET = 2;  // partially-met
+  G6DIGITALINCLUSIONCONSIDERED_NOT_MET = 3;  // not-met
+  G6DIGITALINCLUSIONCONSIDERED_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaG7UserFeedbackMechanismEnum {
+  G7USERFEEDBACKMECHANISM_UNSPECIFIED = 0;
+  G7USERFEEDBACKMECHANISM_MET = 1;  // met
+  G7USERFEEDBACKMECHANISM_PARTIALLY_MET = 2;  // partially-met
+  G7USERFEEDBACKMECHANISM_NOT_MET = 3;  // not-met
+  G7USERFEEDBACKMECHANISM_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+message UkNhsDigitalTechnologyAssessmentCriteria {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string supplier_id = 5;  // UUID — uuid
+  string product_id = 6;  // UUID — uuid
+  string assessor_id = 7;  // UUID — uuid
+  UkNhsDigitalTechnologyAssessmentCriteriaStatusEnum status = 8;  // VARCHAR(20)
+  string assessment_date = 9;  // DATE — iso 8601 date
+  string review_due_date = 10;  // DATE — iso 8601 date
+  string dtac_version = 11;  // VARCHAR(50) — max 50 chars
+  string commissioning_organisation = 12;  // VARCHAR(255) — max 255 chars
+  UkNhsDigitalTechnologyAssessmentCriteriaA1CompanyRegisteredInUkEnum a1_company_registered_in_uk = 13;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaA2IcoRegistrationCurrentEnum a2_ico_registration_current = 14;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaA3SeniorResponsibleOwnerNamedEnum a3_senior_responsible_owner_named = 15;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaA4IncidentContactPublishedEnum a4_incident_contact_published = 16;  // VARCHAR(15)
+  string section_a_notes = 17;  // TEXT
+  UkNhsDigitalTechnologyAssessmentCriteriaB1IntendedUseAndUsersDefinedEnum b1_intended_use_and_users_defined = 18;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaB2EvidenceOfBenefitEnum b2_evidence_of_benefit = 19;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaB3OutcomeMeasuresDefinedEnum b3_outcome_measures_defined = 20;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaB4CostEffectivenessEvidenceEnum b4_cost_effectiveness_evidence = 21;  // VARCHAR(15)
+  string section_b_notes = 22;  // TEXT
+  UkNhsDigitalTechnologyAssessmentCriteriaC1ClinicalSafetyOfficerNamedEnum c1_clinical_safety_officer_named = 23;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaC2ClinicalRiskManagementPlanEnum c2_clinical_risk_management_plan = 24;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaC3HazardLogMaintainedEnum c3_hazard_log_maintained = 25;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaC4ClinicalSafetyCaseReportEnum c4_clinical_safety_case_report = 26;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaC5ClinicalSafetyOfficerRegistrationVerifiedEnum c5_clinical_safety_officer_registration_verified = 27;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaC6MedicalDeviceRegistrationIfApplicableEnum c6_medical_device_registration_if_applicable = 28;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaC7PostMarketSurveillanceEnum c7_post_market_surveillance = 29;  // VARCHAR(15)
+  string section_c_notes = 30;  // TEXT
+  UkNhsDigitalTechnologyAssessmentCriteriaD1DataProtectionOfficerOrLeadEnum d1_data_protection_officer_or_lead = 31;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaD2DpiaCompletedEnum d2_dpia_completed = 32;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaD3DsptStandardsMetEnum d3_dspt_standards_met = 33;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaD4LawfulBasisDocumentedEnum d4_lawful_basis_documented = 34;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaD5ControllerProcessorRolesDefinedEnum d5_controller_processor_roles_defined = 35;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaD6DataLocationAndTransfersEnum d6_data_location_and_transfers = 36;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaD7RetentionAndDeletionPolicyEnum d7_retention_and_deletion_policy = 37;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaD8PrivacyNoticePublishedEnum d8_privacy_notice_published = 38;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaD9DataSubjectRightsSupportedEnum d9_data_subject_rights_supported = 39;  // VARCHAR(15)
+  string section_d_notes = 40;  // TEXT
+  UkNhsDigitalTechnologyAssessmentCriteriaE1CyberEssentialsPlusOrIso27001Enum e1_cyber_essentials_plus_or_iso27001 = 41;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaE2PenetrationTestWithin12MonthsEnum e2_penetration_test_within_12_months = 42;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaE3VulnerabilityManagementEnum e3_vulnerability_management = 43;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaE4EncryptionInTransitAndAtRestEnum e4_encryption_in_transit_and_at_rest = 44;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaE5AccessControlAndMfaEnum e5_access_control_and_mfa = 45;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaE6AuditLoggingEnum e6_audit_logging = 46;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaE7BusinessContinuityAndBackupEnum e7_business_continuity_and_backup = 47;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaE8SecureDevelopmentLifecycleEnum e8_secure_development_lifecycle = 48;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaE9IncidentResponseAndBreachNotificationEnum e9_incident_response_and_breach_notification = 49;  // VARCHAR(15)
+  string section_e_notes = 50;  // TEXT
+  UkNhsDigitalTechnologyAssessmentCriteriaF1OpenStandardsApisEnum f1_open_standards_apis = 51;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaF2FhirOrNhsStandardApisEnum f2_fhir_or_nhs_standard_apis = 52;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaF3NhsNumberSupportedEnum f3_nhs_number_supported = 53;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaF4ClinicalTerminologyStandardsEnum f4_clinical_terminology_standards = 54;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaF5NhsLoginIntegrationEnum f5_nhs_login_integration = 55;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaF6NhsSystemsIntegrationDocumentedEnum f6_nhs_systems_integration_documented = 56;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaF7DataPortabilityExportEnum f7_data_portability_export = 57;  // VARCHAR(15)
+  string section_f_notes = 58;  // TEXT
+  UkNhsDigitalTechnologyAssessmentCriteriaG1UserResearchWithTargetUsersEnum g1_user_research_with_target_users = 59;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaG2WcagAaConformanceEnum g2_wcag_aa_conformance = 60;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaG3AccessibilityStatementPublishedEnum g3_accessibility_statement_published = 61;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaG4NhsServiceManualFollowedEnum g4_nhs_service_manual_followed = 62;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaG5AssistiveTechnologyTestedEnum g5_assistive_technology_tested = 63;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaG6DigitalInclusionConsideredEnum g6_digital_inclusion_considered = 64;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaG7UserFeedbackMechanismEnum g7_user_feedback_mechanism = 65;  // VARCHAR(15)
+  string section_g_notes = 66;  // TEXT
+  string assessor_notes = 67;  // TEXT
+}

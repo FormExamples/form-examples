@@ -1,0 +1,164 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: uk_nhs_digital_technology_assessment_criteria_grade_flag
+openapi: 3.1.0
+info:
+  title: Uk Nhs Digital Technology Assessment Criteria — UkNhsDigitalTechnologyAssessmentCriteriaGradeFlag
+  version: 1.0.0
+  description: Flagged issues raised for this assessment.
+paths:
+  /uk-nhs-digital-technology-assessment-criteria-grade-flags:
+    get:
+      summary: List UkNhsDigitalTechnologyAssessmentCriteriaGradeFlag records
+      operationId: listUkNhsDigitalTechnologyAssessmentCriteriaGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of UkNhsDigitalTechnologyAssessmentCriteriaGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UkNhsDigitalTechnologyAssessmentCriteriaGradeFlag"
+    post:
+      summary: Create a new UkNhsDigitalTechnologyAssessmentCriteriaGradeFlag
+      operationId: createUkNhsDigitalTechnologyAssessmentCriteriaGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UkNhsDigitalTechnologyAssessmentCriteriaGradeFlag"
+      responses:
+        "201":
+          description: The newly created UkNhsDigitalTechnologyAssessmentCriteriaGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UkNhsDigitalTechnologyAssessmentCriteriaGradeFlag"
+        "400":
+          description: Validation error
+  /uk-nhs-digital-technology-assessment-criteria-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one UkNhsDigitalTechnologyAssessmentCriteriaGradeFlag by id
+      operationId: getUkNhsDigitalTechnologyAssessmentCriteriaGradeFlag
+      responses:
+        "200":
+          description: The requested UkNhsDigitalTechnologyAssessmentCriteriaGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UkNhsDigitalTechnologyAssessmentCriteriaGradeFlag"
+        "404":
+          description: UkNhsDigitalTechnologyAssessmentCriteriaGradeFlag not found
+    patch:
+      summary: Update an existing UkNhsDigitalTechnologyAssessmentCriteriaGradeFlag
+      operationId: updateUkNhsDigitalTechnologyAssessmentCriteriaGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UkNhsDigitalTechnologyAssessmentCriteriaGradeFlag"
+      responses:
+        "200":
+          description: The updated UkNhsDigitalTechnologyAssessmentCriteriaGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UkNhsDigitalTechnologyAssessmentCriteriaGradeFlag"
+        "404":
+          description: UkNhsDigitalTechnologyAssessmentCriteriaGradeFlag not found
+    delete:
+      summary: Soft-delete a UkNhsDigitalTechnologyAssessmentCriteriaGradeFlag
+      operationId: deleteUkNhsDigitalTechnologyAssessmentCriteriaGradeFlag
+      responses:
+        "204":
+          description: UkNhsDigitalTechnologyAssessmentCriteriaGradeFlag deleted
+        "404":
+          description: UkNhsDigitalTechnologyAssessmentCriteriaGradeFlag not found
+components:
+  schemas:
+    UkNhsDigitalTechnologyAssessmentCriteriaGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        uk_nhs_digital_technology_assessment_criteria_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the grade table.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Identifier of the flag.
+        category:
+          type: string
+          enum:
+            - company
+            - value-proposition
+            - clinical-safety
+            - data-protection
+            - technical-security
+            - interoperability
+            - accessibility
+            - completeness
+            - ""
+          description: Flag category.
+        severity:
+          type: string
+          enum:
+            - info
+            - warning
+            - critical
+            - ""
+          description: Flag severity.
+        message:
+          type: string
+          maxLength: 500
+          description: Human-readable flag message.
+      required:
+        - created_at
+        - updated_at
+        - uk_nhs_digital_technology_assessment_criteria_grade_id
+        - flag_id
+        - category
+        - severity
+        - message
+      description: Flagged issues raised for this assessment.

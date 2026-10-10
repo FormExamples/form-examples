@@ -1,0 +1,21 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000040b58"
+  deletedAt: null
+  outcome: "meets"
+  mandatoryTotal: 1
+  mandatoryMet: 1
+  advisoryTotal: 1
+  advisoryMet: 1
+  sectionAResult: "met"
+  sectionBResult: "met"
+  sectionCResult: "met"
+  sectionDResult: "met"
+  sectionEResult: "met"
+  sectionFResult: "met"
+  sectionGResult: "met"
+  assessorOverrideReason: "Test assessorOverrideReason"
+  finalOutcome: "meets"
+  signedAt: "2026-01-01T00:00:00Z"
+  gradedAt: "2026-01-01T00:00:00Z"
+  ukNhsDigitalTechnologyAssessmentCriteriaId: "00000000-0000-4000-8000-000000093dbd"

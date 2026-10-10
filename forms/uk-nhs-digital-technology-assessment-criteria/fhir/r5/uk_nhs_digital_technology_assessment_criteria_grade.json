@@ -1,0 +1,313 @@
+{
+  "resourceType": "Observation",
+  "id": "990e8400-e29b-41d4-a716-446655440004",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+        "code": "uk_nhs_digital_technology_assessment_criteria_grade",
+        "display": "Uk Nhs Digital Technology Criteria Grade"
+      }
+    ]
+  },
+  "encounter": {
+    "reference": "Encounter/880e8400-e29b-41d4-a716-446655440003"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "outcome",
+            "display": "Outcome"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria:outcome",
+            "code": "meets",
+            "display": "Meets"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "mandatory_total",
+            "display": "Mandatory Total"
+          }
+        ]
+      },
+      "valueInteger": 5
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "mandatory_met",
+            "display": "Mandatory Met"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "advisory_total",
+            "display": "Advisory Total"
+          }
+        ]
+      },
+      "valueInteger": 5
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "advisory_met",
+            "display": "Advisory Met"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "section_a_result",
+            "display": "Section A Result"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria:section_a_result",
+            "code": "met",
+            "display": "Met"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "section_b_result",
+            "display": "Section B Result"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria:section_b_result",
+            "code": "met",
+            "display": "Met"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "section_c_result",
+            "display": "Section C Result"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria:section_c_result",
+            "code": "met",
+            "display": "Met"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "section_d_result",
+            "display": "Section D Result"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria:section_d_result",
+            "code": "met",
+            "display": "Met"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "section_e_result",
+            "display": "Section E Result"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria:section_e_result",
+            "code": "met",
+            "display": "Met"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "section_f_result",
+            "display": "Section F Result"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria:section_f_result",
+            "code": "met",
+            "display": "Met"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "section_g_result",
+            "display": "Section G Result"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria:section_g_result",
+            "code": "met",
+            "display": "Met"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "assessor_override_reason",
+            "display": "Assessor Override Reason"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "final_outcome",
+            "display": "Final Outcome"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria:final_outcome",
+            "code": "meets",
+            "display": "Meets"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "signed_at",
+            "display": "Signed At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "graded_at",
+            "display": "Graded At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    }
+  ]
+}

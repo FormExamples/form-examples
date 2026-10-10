@@ -1,0 +1,16 @@
+<!ELEMENT supplier (id,created_at,updated_at,deleted_at,name,trading_name,company_registration_number,country_of_registration_as_iso_3166_1_alpha_2,ico_registration_number,website,postal_address_as_full_text,postcode,contact_name,contact_email,contact_phone)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT trading_name (#PCDATA)>
+<!ELEMENT company_registration_number (#PCDATA)>
+<!ELEMENT country_of_registration_as_iso_3166_1_alpha_2 (#PCDATA)>
+<!ELEMENT ico_registration_number (#PCDATA)>
+<!ELEMENT website (#PCDATA)>
+<!ELEMENT postal_address_as_full_text (#PCDATA)>
+<!ELEMENT postcode (#PCDATA)>
+<!ELEMENT contact_name (#PCDATA)>
+<!ELEMENT contact_email (#PCDATA)>
+<!ELEMENT contact_phone (#PCDATA)>

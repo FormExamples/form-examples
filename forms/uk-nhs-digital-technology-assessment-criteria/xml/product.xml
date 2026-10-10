@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE product SYSTEM "product.dtd">
+<product>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<supplier_id>550e8400-e29b-41d4-a716-446655440000</supplier_id>
+<name>Example</name>
+<version></version>
+<description>Example text.</description>
+<intended_purpose></intended_purpose>
+<product_type>app</product_type>
+<medical_device_class>not-a-medical-device</medical_device_class>
+<handles_patient_data>yes</handles_patient_data>
+<is_patient_facing>yes</is_patient_facing>
+</product>

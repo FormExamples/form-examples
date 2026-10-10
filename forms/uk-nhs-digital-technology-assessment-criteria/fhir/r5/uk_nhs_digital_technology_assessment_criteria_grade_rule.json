@@ -1,0 +1,34 @@
+{
+  "resourceType": "DetectedIssue",
+  "id": "aa0e8400-e29b-41d4-a716-446655440005",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+          "code": "grading-fired-rule",
+          "display": "Grading Fired Rule"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria:rules",
+        "code": "RULE-001",
+        "display": "Example grading rule"
+      }
+    ]
+  },
+  "severity": "moderate",
+  "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+  "detail": "Example text."
+}

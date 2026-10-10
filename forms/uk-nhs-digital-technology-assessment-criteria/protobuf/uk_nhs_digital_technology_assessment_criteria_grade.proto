@@ -1,0 +1,102 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: uk_nhs_digital_technology_assessment_criteria_grade
+
+syntax = "proto3";
+
+package form_examples.uk_nhs_digital_technology_assessment_criteria;
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaGradeOutcomeEnum {
+  OUTCOME_UNSPECIFIED = 0;
+  OUTCOME_MEETS = 1;  // meets
+  OUTCOME_CONDITIONAL = 2;  // conditional
+  OUTCOME_DOES_NOT_MEET = 3;  // does-not-meet
+  OUTCOME_INCOMPLETE = 4;  // incomplete
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaGradeSectionAResultEnum {
+  SECTIONARESULT_UNSPECIFIED = 0;
+  SECTIONARESULT_MET = 1;  // met
+  SECTIONARESULT_PARTIALLY_MET = 2;  // partially-met
+  SECTIONARESULT_NOT_MET = 3;  // not-met
+  SECTIONARESULT_INCOMPLETE = 4;  // incomplete
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaGradeSectionBResultEnum {
+  SECTIONBRESULT_UNSPECIFIED = 0;
+  SECTIONBRESULT_MET = 1;  // met
+  SECTIONBRESULT_PARTIALLY_MET = 2;  // partially-met
+  SECTIONBRESULT_NOT_MET = 3;  // not-met
+  SECTIONBRESULT_INCOMPLETE = 4;  // incomplete
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaGradeSectionCResultEnum {
+  SECTIONCRESULT_UNSPECIFIED = 0;
+  SECTIONCRESULT_MET = 1;  // met
+  SECTIONCRESULT_PARTIALLY_MET = 2;  // partially-met
+  SECTIONCRESULT_NOT_MET = 3;  // not-met
+  SECTIONCRESULT_INCOMPLETE = 4;  // incomplete
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaGradeSectionDResultEnum {
+  SECTIONDRESULT_UNSPECIFIED = 0;
+  SECTIONDRESULT_MET = 1;  // met
+  SECTIONDRESULT_PARTIALLY_MET = 2;  // partially-met
+  SECTIONDRESULT_NOT_MET = 3;  // not-met
+  SECTIONDRESULT_INCOMPLETE = 4;  // incomplete
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaGradeSectionEResultEnum {
+  SECTIONERESULT_UNSPECIFIED = 0;
+  SECTIONERESULT_MET = 1;  // met
+  SECTIONERESULT_PARTIALLY_MET = 2;  // partially-met
+  SECTIONERESULT_NOT_MET = 3;  // not-met
+  SECTIONERESULT_INCOMPLETE = 4;  // incomplete
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaGradeSectionFResultEnum {
+  SECTIONFRESULT_UNSPECIFIED = 0;
+  SECTIONFRESULT_MET = 1;  // met
+  SECTIONFRESULT_PARTIALLY_MET = 2;  // partially-met
+  SECTIONFRESULT_NOT_MET = 3;  // not-met
+  SECTIONFRESULT_INCOMPLETE = 4;  // incomplete
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaGradeSectionGResultEnum {
+  SECTIONGRESULT_UNSPECIFIED = 0;
+  SECTIONGRESULT_MET = 1;  // met
+  SECTIONGRESULT_PARTIALLY_MET = 2;  // partially-met
+  SECTIONGRESULT_NOT_MET = 3;  // not-met
+  SECTIONGRESULT_INCOMPLETE = 4;  // incomplete
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaGradeFinalOutcomeEnum {
+  FINALOUTCOME_UNSPECIFIED = 0;
+  FINALOUTCOME_MEETS = 1;  // meets
+  FINALOUTCOME_CONDITIONAL = 2;  // conditional
+  FINALOUTCOME_DOES_NOT_MEET = 3;  // does-not-meet
+  FINALOUTCOME_INCOMPLETE = 4;  // incomplete
+}
+
+message UkNhsDigitalTechnologyAssessmentCriteriaGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string uk_nhs_digital_technology_assessment_criteria_id = 5;  // UUID — uuid
+  UkNhsDigitalTechnologyAssessmentCriteriaGradeOutcomeEnum outcome = 6;  // VARCHAR(20)
+  int32 mandatory_total = 7;  // INTEGER
+  int32 mandatory_met = 8;  // INTEGER
+  int32 advisory_total = 9;  // INTEGER
+  int32 advisory_met = 10;  // INTEGER
+  UkNhsDigitalTechnologyAssessmentCriteriaGradeSectionAResultEnum section_a_result = 11;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaGradeSectionBResultEnum section_b_result = 12;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaGradeSectionCResultEnum section_c_result = 13;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaGradeSectionDResultEnum section_d_result = 14;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaGradeSectionEResultEnum section_e_result = 15;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaGradeSectionFResultEnum section_f_result = 16;  // VARCHAR(15)
+  UkNhsDigitalTechnologyAssessmentCriteriaGradeSectionGResultEnum section_g_result = 17;  // VARCHAR(15)
+  string assessor_override_reason = 18;  // VARCHAR(500) — max 500 chars
+  UkNhsDigitalTechnologyAssessmentCriteriaGradeFinalOutcomeEnum final_outcome = 19;  // VARCHAR(20)
+  string signed_at = 20;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 21;  // TIMESTAMPTZ — iso 8601
+}

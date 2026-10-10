@@ -1,0 +1,219 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: uk_nhs_digital_technology_assessment_criteria_grade_rule
+openapi: 3.1.0
+info:
+  title: Uk Nhs Digital Technology Assessment Criteria — UkNhsDigitalTechnologyAssessmentCriteriaGradeRule
+  version: 1.0.0
+  description: Audit trail of every criterion rule that fired for this assessment.
+paths:
+  /uk-nhs-digital-technology-assessment-criteria-grade-rules:
+    get:
+      summary: List UkNhsDigitalTechnologyAssessmentCriteriaGradeRule records
+      operationId: listUkNhsDigitalTechnologyAssessmentCriteriaGradeRule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of UkNhsDigitalTechnologyAssessmentCriteriaGradeRule records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UkNhsDigitalTechnologyAssessmentCriteriaGradeRule"
+    post:
+      summary: Create a new UkNhsDigitalTechnologyAssessmentCriteriaGradeRule
+      operationId: createUkNhsDigitalTechnologyAssessmentCriteriaGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UkNhsDigitalTechnologyAssessmentCriteriaGradeRule"
+      responses:
+        "201":
+          description: The newly created UkNhsDigitalTechnologyAssessmentCriteriaGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UkNhsDigitalTechnologyAssessmentCriteriaGradeRule"
+        "400":
+          description: Validation error
+  /uk-nhs-digital-technology-assessment-criteria-grade-rules/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one UkNhsDigitalTechnologyAssessmentCriteriaGradeRule by id
+      operationId: getUkNhsDigitalTechnologyAssessmentCriteriaGradeRule
+      responses:
+        "200":
+          description: The requested UkNhsDigitalTechnologyAssessmentCriteriaGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UkNhsDigitalTechnologyAssessmentCriteriaGradeRule"
+        "404":
+          description: UkNhsDigitalTechnologyAssessmentCriteriaGradeRule not found
+    patch:
+      summary: Update an existing UkNhsDigitalTechnologyAssessmentCriteriaGradeRule
+      operationId: updateUkNhsDigitalTechnologyAssessmentCriteriaGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UkNhsDigitalTechnologyAssessmentCriteriaGradeRule"
+      responses:
+        "200":
+          description: The updated UkNhsDigitalTechnologyAssessmentCriteriaGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UkNhsDigitalTechnologyAssessmentCriteriaGradeRule"
+        "404":
+          description: UkNhsDigitalTechnologyAssessmentCriteriaGradeRule not found
+    delete:
+      summary: Soft-delete a UkNhsDigitalTechnologyAssessmentCriteriaGradeRule
+      operationId: deleteUkNhsDigitalTechnologyAssessmentCriteriaGradeRule
+      responses:
+        "204":
+          description: UkNhsDigitalTechnologyAssessmentCriteriaGradeRule deleted
+        "404":
+          description: UkNhsDigitalTechnologyAssessmentCriteriaGradeRule not found
+components:
+  schemas:
+    UkNhsDigitalTechnologyAssessmentCriteriaGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the grade table.
+        rule_id:
+          type: string
+          maxLength: 30
+          description: Identifier of the rule that fired.
+        section:
+          type: string
+          enum:
+            - a
+            - b
+            - c
+            - d
+            - e
+            - f
+            - g
+          description: DTAC section letter.
+        criterion_id:
+          type: string
+          enum:
+            - a1
+            - a2
+            - a3
+            - a4
+            - b1
+            - b2
+            - b3
+            - b4
+            - c1
+            - c2
+            - c3
+            - c4
+            - c5
+            - c6
+            - c7
+            - d1
+            - d2
+            - d3
+            - d4
+            - d5
+            - d6
+            - d7
+            - d8
+            - d9
+            - e1
+            - e2
+            - e3
+            - e4
+            - e5
+            - e6
+            - e7
+            - e8
+            - e9
+            - f1
+            - f2
+            - f3
+            - f4
+            - f5
+            - f6
+            - f7
+            - g1
+            - g2
+            - g3
+            - g4
+            - g5
+            - g6
+            - g7
+          description: Criterion identifier, for example c2.
+        status:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - not-applicable
+            - ""
+          description: Status of the criterion when the rule fired.
+        mandatory:
+          type: boolean
+          description: Whether the criterion is mandatory.
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable rule description.
+      required:
+        - created_at
+        - updated_at
+        - grade_id
+        - rule_id
+        - section
+        - criterion_id
+        - status
+        - mandatory
+        - description
+      description: Audit trail of every criterion rule that fired for this assessment.

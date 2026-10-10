@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE supplier SYSTEM "supplier.dtd">
+<supplier>
+<id>550e8400-e29b-41d4-a716-446655440000</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<name>Example</name>
+<trading_name>Example</trading_name>
+<company_registration_number></company_registration_number>
+<country_of_registration_as_iso_3166_1_alpha_2></country_of_registration_as_iso_3166_1_alpha_2>
+<ico_registration_number></ico_registration_number>
+<website>Example location</website>
+<postal_address_as_full_text>Example text.</postal_address_as_full_text>
+<postcode>SW1A 1AA</postcode>
+<contact_name>Example</contact_name>
+<contact_email>07700900001</contact_email>
+<contact_phone>07700900001</contact_phone>
+</supplier>

@@ -1,0 +1,55 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: product
+
+syntax = "proto3";
+
+package form_examples.uk_nhs_digital_technology_assessment_criteria;
+
+enum ProductProductTypeEnum {
+  PRODUCTTYPE_UNSPECIFIED = 0;
+  PRODUCTTYPE_APP = 1;  // app
+  PRODUCTTYPE_WEB_SERVICE = 2;  // web-service
+  PRODUCTTYPE_SOFTWARE_AS_A_SERVICE = 3;  // software-as-a-service
+  PRODUCTTYPE_WEARABLE_INTEGRATED = 4;  // wearable-integrated
+  PRODUCTTYPE_CLINICAL_DECISION_SUPPORT = 5;  // clinical-decision-support
+  PRODUCTTYPE_REMOTE_MONITORING = 6;  // remote-monitoring
+  PRODUCTTYPE_OTHER = 7;  // other
+}
+
+enum ProductMedicalDeviceClassEnum {
+  MEDICALDEVICECLASS_UNSPECIFIED = 0;
+  MEDICALDEVICECLASS_NOT_A_MEDICAL_DEVICE = 1;  // not-a-medical-device
+  MEDICALDEVICECLASS_CLASS_I = 2;  // class-i
+  MEDICALDEVICECLASS_CLASS_IIA = 3;  // class-iia
+  MEDICALDEVICECLASS_CLASS_IIB = 4;  // class-iib
+  MEDICALDEVICECLASS_CLASS_III = 5;  // class-iii
+  MEDICALDEVICECLASS_UNKNOWN = 6;  // unknown
+}
+
+enum ProductHandlesPatientDataEnum {
+  HANDLESPATIENTDATA_UNSPECIFIED = 0;
+  HANDLESPATIENTDATA_YES = 1;  // yes
+  HANDLESPATIENTDATA_NO = 2;  // no
+}
+
+enum ProductIsPatientFacingEnum {
+  ISPATIENTFACING_UNSPECIFIED = 0;
+  ISPATIENTFACING_YES = 1;  // yes
+  ISPATIENTFACING_NO = 2;  // no
+}
+
+message Product {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string supplier_id = 5;  // UUID — uuid
+  string name = 6;  // TEXT
+  string version = 7;  // TEXT
+  string description = 8;  // TEXT
+  string intended_purpose = 9;  // TEXT
+  ProductProductTypeEnum product_type = 10;  // TEXT
+  ProductMedicalDeviceClassEnum medical_device_class = 11;  // TEXT
+  ProductHandlesPatientDataEnum handles_patient_data = 12;  // TEXT
+  ProductIsPatientFacingEnum is_patient_facing = 13;  // TEXT
+}

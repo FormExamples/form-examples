@@ -1,0 +1,27 @@
+# UK NHS Digital Technology Assessment Criteria (DTAC)
+
+> A UK NHS–aligned assessment of a digital health technology against the NHS England **Digital Technology Assessment Criteria (DTAC)**. A commissioner, procurement lead or assurance team records, for each of 47 criteria in seven sections (company information, value proposition, clinical safety, data protection, technical security, interoperability, usability and accessibility), whether the supplier's evidence shows the criterion is **met**, **partially met**, **not met** or **not applicable**. The engine computes a per-section result, an overall outcome (**meets**, **conditional**, **does-not-meet** or **incomplete**) and a list of flagged issues, and the wizard produces a signed assessment report.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Loco JSON-API back-end](back-end-with-loco/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

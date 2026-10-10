@@ -1,0 +1,255 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: uk_nhs_digital_technology_assessment_criteria_grade
+openapi: 3.1.0
+info:
+  title: Uk Nhs Digital Technology Assessment Criteria — UkNhsDigitalTechnologyAssessmentCriteriaGrade
+  version: 1.0.0
+  description: Computed and signed-off DTAC outcome for an assessment.
+paths:
+  /uk-nhs-digital-technology-assessment-criteria-grades:
+    get:
+      summary: List UkNhsDigitalTechnologyAssessmentCriteriaGrade records
+      operationId: listUkNhsDigitalTechnologyAssessmentCriteriaGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of UkNhsDigitalTechnologyAssessmentCriteriaGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UkNhsDigitalTechnologyAssessmentCriteriaGrade"
+    post:
+      summary: Create a new UkNhsDigitalTechnologyAssessmentCriteriaGrade
+      operationId: createUkNhsDigitalTechnologyAssessmentCriteriaGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UkNhsDigitalTechnologyAssessmentCriteriaGrade"
+      responses:
+        "201":
+          description: The newly created UkNhsDigitalTechnologyAssessmentCriteriaGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UkNhsDigitalTechnologyAssessmentCriteriaGrade"
+        "400":
+          description: Validation error
+  /uk-nhs-digital-technology-assessment-criteria-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one UkNhsDigitalTechnologyAssessmentCriteriaGrade by id
+      operationId: getUkNhsDigitalTechnologyAssessmentCriteriaGrade
+      responses:
+        "200":
+          description: The requested UkNhsDigitalTechnologyAssessmentCriteriaGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UkNhsDigitalTechnologyAssessmentCriteriaGrade"
+        "404":
+          description: UkNhsDigitalTechnologyAssessmentCriteriaGrade not found
+    patch:
+      summary: Update an existing UkNhsDigitalTechnologyAssessmentCriteriaGrade
+      operationId: updateUkNhsDigitalTechnologyAssessmentCriteriaGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UkNhsDigitalTechnologyAssessmentCriteriaGrade"
+      responses:
+        "200":
+          description: The updated UkNhsDigitalTechnologyAssessmentCriteriaGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UkNhsDigitalTechnologyAssessmentCriteriaGrade"
+        "404":
+          description: UkNhsDigitalTechnologyAssessmentCriteriaGrade not found
+    delete:
+      summary: Soft-delete a UkNhsDigitalTechnologyAssessmentCriteriaGrade
+      operationId: deleteUkNhsDigitalTechnologyAssessmentCriteriaGrade
+      responses:
+        "204":
+          description: UkNhsDigitalTechnologyAssessmentCriteriaGrade deleted
+        "404":
+          description: UkNhsDigitalTechnologyAssessmentCriteriaGrade not found
+components:
+  schemas:
+    UkNhsDigitalTechnologyAssessmentCriteriaGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        uk_nhs_digital_technology_assessment_criteria_id:
+          type: string
+          format: uuid
+          description: Foreign key to the uk_nhs_digital_technology_assessment_criteria table.
+        outcome:
+          type: string
+          enum:
+            - meets
+            - conditional
+            - does-not-meet
+            - incomplete
+            - ""
+          description: Overall DTAC outcome computed by the engine.
+        mandatory_total:
+          type: integer
+          format: int32
+          description: Number of mandatory criteria that apply (not-applicable excluded).
+        mandatory_met:
+          type: integer
+          format: int32
+          description: Number of applicable mandatory criteria rated met.
+        advisory_total:
+          type: integer
+          format: int32
+          description: Number of advisory criteria that apply.
+        advisory_met:
+          type: integer
+          format: int32
+          description: Number of applicable advisory criteria rated met.
+        section_a_result:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - incomplete
+            - ""
+          description: Section A (Company information) result.
+        section_b_result:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - incomplete
+            - ""
+          description: Section B (Value proposition) result.
+        section_c_result:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - incomplete
+            - ""
+          description: Section C (Clinical safety) result.
+        section_d_result:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - incomplete
+            - ""
+          description: Section D (Data protection) result.
+        section_e_result:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - incomplete
+            - ""
+          description: Section E (Technical security) result.
+        section_f_result:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - incomplete
+            - ""
+          description: Section F (Interoperability) result.
+        section_g_result:
+          type: string
+          enum:
+            - met
+            - partially-met
+            - not-met
+            - incomplete
+            - ""
+          description: Section G (Usability and accessibility) result.
+        assessor_override_reason:
+          type: string
+          maxLength: 500
+          description: Reason the assessor's final decision differs from the computed outcome.
+        final_outcome:
+          type: string
+          enum:
+            - meets
+            - conditional
+            - does-not-meet
+            - incomplete
+            - ""
+          description: Outcome signed off by the assessor.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp when the assessor signed off.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the outcome was computed.
+      required:
+        - created_at
+        - updated_at
+        - uk_nhs_digital_technology_assessment_criteria_id
+        - outcome
+        - mandatory_total
+        - mandatory_met
+        - advisory_total
+        - advisory_met
+        - section_a_result
+        - section_b_result
+        - section_c_result
+        - section_d_result
+        - section_e_result
+        - section_f_result
+        - section_g_result
+        - assessor_override_reason
+        - final_outcome
+        - graded_at
+      description: Computed and signed-off DTAC outcome for an assessment.

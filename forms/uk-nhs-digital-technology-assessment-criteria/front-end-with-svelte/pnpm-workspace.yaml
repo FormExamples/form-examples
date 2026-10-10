@@ -1,0 +1,12 @@
+packages:
+  - "."
+
+allowBuilds:
+  esbuild: true
+
+minimumReleaseAgeExclude:
+  - vite@8.3.4
+
+overrides:
+  js-yaml: ^4.3.2
+  "@svar-ui/svelte-core": ^2.6.1

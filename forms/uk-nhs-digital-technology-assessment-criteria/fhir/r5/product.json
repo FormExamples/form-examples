@@ -1,0 +1,177 @@
+{
+  "resourceType": "Observation",
+  "id": "770e8400-e29b-41d4-a716-446655440002",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+        "code": "product",
+        "display": "Product"
+      }
+    ]
+  },
+  "encounter": {
+    "reference": "Encounter/880e8400-e29b-41d4-a716-446655440003"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "name",
+            "display": "Name"
+          }
+        ]
+      },
+      "valueString": "Example"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "version",
+            "display": "Version"
+          }
+        ]
+      },
+      "valueString": "Example Version"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "description",
+            "display": "Description"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "intended_purpose",
+            "display": "Intended Purpose"
+          }
+        ]
+      },
+      "valueString": "Example Intended Purpose"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "product_type",
+            "display": "Product Type"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria:product_type",
+            "code": "app",
+            "display": "App"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "medical_device_class",
+            "display": "Medical Device Class"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria:medical_device_class",
+            "code": "not-a-medical-device",
+            "display": "Not-A-Medical-Device"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "handles_patient_data",
+            "display": "Handles Patient Data"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria:handles_patient_data",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria",
+            "code": "is_patient_facing",
+            "display": "Is Patient Facing"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:uk-nhs-digital-technology-assessment-criteria:is_patient_facing",
+            "code": "yes",
+            "display": "Yes"
+          }
+        ]
+      }
+    }
+  ]
+}

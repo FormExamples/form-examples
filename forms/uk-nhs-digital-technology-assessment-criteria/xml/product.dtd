@@ -1,0 +1,14 @@
+<!ELEMENT product (id,created_at,updated_at,deleted_at,supplier_id,name,version,description,intended_purpose,product_type,medical_device_class,handles_patient_data,is_patient_facing)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT supplier_id (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT version (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT intended_purpose (#PCDATA)>
+<!ELEMENT product_type (#PCDATA)>
+<!ELEMENT medical_device_class (#PCDATA)>
+<!ELEMENT handles_patient_data (#PCDATA)>
+<!ELEMENT is_patient_facing (#PCDATA)>

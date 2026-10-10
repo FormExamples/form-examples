@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-0000000ec50a"
+  deletedAt: null
+  ruleId: "Test ruleId"
+  section: "a"
+  criterionId: "a1"
+  status: "met"
+  mandatory: true
+  description: "Test description"
+  gradeId: "00000000-0000-4000-8000-000000040b58"

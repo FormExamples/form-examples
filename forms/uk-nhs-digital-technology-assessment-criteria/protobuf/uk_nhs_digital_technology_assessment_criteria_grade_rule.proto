@@ -1,0 +1,90 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: uk_nhs_digital_technology_assessment_criteria_grade_rule
+
+syntax = "proto3";
+
+package form_examples.uk_nhs_digital_technology_assessment_criteria;
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaGradeRuleSectionEnum {
+  SECTION_UNSPECIFIED = 0;
+  SECTION_A = 1;  // a
+  SECTION_B = 2;  // b
+  SECTION_C = 3;  // c
+  SECTION_D = 4;  // d
+  SECTION_E = 5;  // e
+  SECTION_F = 6;  // f
+  SECTION_G = 7;  // g
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaGradeRuleCriterionIdEnum {
+  CRITERIONID_UNSPECIFIED = 0;
+  CRITERIONID_A1 = 1;  // a1
+  CRITERIONID_A2 = 2;  // a2
+  CRITERIONID_A3 = 3;  // a3
+  CRITERIONID_A4 = 4;  // a4
+  CRITERIONID_B1 = 5;  // b1
+  CRITERIONID_B2 = 6;  // b2
+  CRITERIONID_B3 = 7;  // b3
+  CRITERIONID_B4 = 8;  // b4
+  CRITERIONID_C1 = 9;  // c1
+  CRITERIONID_C2 = 10;  // c2
+  CRITERIONID_C3 = 11;  // c3
+  CRITERIONID_C4 = 12;  // c4
+  CRITERIONID_C5 = 13;  // c5
+  CRITERIONID_C6 = 14;  // c6
+  CRITERIONID_C7 = 15;  // c7
+  CRITERIONID_D1 = 16;  // d1
+  CRITERIONID_D2 = 17;  // d2
+  CRITERIONID_D3 = 18;  // d3
+  CRITERIONID_D4 = 19;  // d4
+  CRITERIONID_D5 = 20;  // d5
+  CRITERIONID_D6 = 21;  // d6
+  CRITERIONID_D7 = 22;  // d7
+  CRITERIONID_D8 = 23;  // d8
+  CRITERIONID_D9 = 24;  // d9
+  CRITERIONID_E1 = 25;  // e1
+  CRITERIONID_E2 = 26;  // e2
+  CRITERIONID_E3 = 27;  // e3
+  CRITERIONID_E4 = 28;  // e4
+  CRITERIONID_E5 = 29;  // e5
+  CRITERIONID_E6 = 30;  // e6
+  CRITERIONID_E7 = 31;  // e7
+  CRITERIONID_E8 = 32;  // e8
+  CRITERIONID_E9 = 33;  // e9
+  CRITERIONID_F1 = 34;  // f1
+  CRITERIONID_F2 = 35;  // f2
+  CRITERIONID_F3 = 36;  // f3
+  CRITERIONID_F4 = 37;  // f4
+  CRITERIONID_F5 = 38;  // f5
+  CRITERIONID_F6 = 39;  // f6
+  CRITERIONID_F7 = 40;  // f7
+  CRITERIONID_G1 = 41;  // g1
+  CRITERIONID_G2 = 42;  // g2
+  CRITERIONID_G3 = 43;  // g3
+  CRITERIONID_G4 = 44;  // g4
+  CRITERIONID_G5 = 45;  // g5
+  CRITERIONID_G6 = 46;  // g6
+  CRITERIONID_G7 = 47;  // g7
+}
+
+enum UkNhsDigitalTechnologyAssessmentCriteriaGradeRuleStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_MET = 1;  // met
+  STATUS_PARTIALLY_MET = 2;  // partially-met
+  STATUS_NOT_MET = 3;  // not-met
+  STATUS_NOT_APPLICABLE = 4;  // not-applicable
+}
+
+message UkNhsDigitalTechnologyAssessmentCriteriaGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(30) — max 30 chars
+  UkNhsDigitalTechnologyAssessmentCriteriaGradeRuleSectionEnum section = 7;  // CHAR(1)
+  UkNhsDigitalTechnologyAssessmentCriteriaGradeRuleCriterionIdEnum criterion_id = 8;  // VARCHAR(5)
+  UkNhsDigitalTechnologyAssessmentCriteriaGradeRuleStatusEnum status = 9;  // VARCHAR(15)
+  bool mandatory = 10;  // BOOLEAN
+  string description = 11;  // VARCHAR(500) — max 500 chars
+}

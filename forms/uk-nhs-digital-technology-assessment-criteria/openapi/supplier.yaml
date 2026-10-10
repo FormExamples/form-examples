@@ -1,0 +1,166 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: supplier
+openapi: 3.1.0
+info:
+  title: Uk Nhs Digital Technology Assessment Criteria — Supplier
+  version: 1.0.0
+  description: Supplier of the digital health technology being assessed.
+paths:
+  /suppliers:
+    get:
+      summary: List Supplier records
+      operationId: listSupplier
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Supplier records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Supplier"
+    post:
+      summary: Create a new Supplier
+      operationId: createSupplier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Supplier"
+      responses:
+        "201":
+          description: The newly created Supplier
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Supplier"
+        "400":
+          description: Validation error
+  /suppliers/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Supplier by id
+      operationId: getSupplier
+      responses:
+        "200":
+          description: The requested Supplier
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Supplier"
+        "404":
+          description: Supplier not found
+    patch:
+      summary: Update an existing Supplier
+      operationId: updateSupplier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Supplier"
+      responses:
+        "200":
+          description: The updated Supplier
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Supplier"
+        "404":
+          description: Supplier not found
+    delete:
+      summary: Soft-delete a Supplier
+      operationId: deleteSupplier
+      responses:
+        "204":
+          description: Supplier deleted
+        "404":
+          description: Supplier not found
+components:
+  schemas:
+    Supplier:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          description: Registered name of the supplier company.
+        trading_name:
+          type: string
+          description: Trading name, if different from the registered name.
+        company_registration_number:
+          type: string
+          description: Companies House (or equivalent) registration number.
+        country_of_registration_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country of registration as an ISO 3166-1 alpha-2 code.
+        ico_registration_number:
+          type: string
+          description: Information Commissioner's Office data protection fee registration number.
+        website:
+          type: string
+          description: Supplier website URL.
+        postal_address_as_full_text:
+          type: string
+          description: Registered postal address as free text.
+        postcode:
+          type: string
+          description: Postcode of the registered address.
+        contact_name:
+          type: string
+          description: Named contact for the assessment.
+        contact_email:
+          type: string
+          description: Contact email address.
+        contact_phone:
+          type: string
+          description: Contact telephone number.
+      required:
+        - created_at
+        - updated_at
+        - name
+        - trading_name
+        - company_registration_number
+        - ico_registration_number
+        - website
+        - contact_name
+      description: Supplier of the digital health technology being assessed.

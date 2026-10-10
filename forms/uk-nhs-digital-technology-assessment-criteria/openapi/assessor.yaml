@@ -1,0 +1,153 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: assessor
+openapi: 3.1.0
+info:
+  title: Uk Nhs Digital Technology Assessment Criteria — Assessor
+  version: 1.0.0
+  description: Person carrying out the DTAC assessment on behalf of an NHS or care organisation.
+paths:
+  /assessors:
+    get:
+      summary: List Assessor records
+      operationId: listAssessor
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Assessor records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Assessor"
+    post:
+      summary: Create a new Assessor
+      operationId: createAssessor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Assessor"
+      responses:
+        "201":
+          description: The newly created Assessor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Assessor"
+        "400":
+          description: Validation error
+  /assessors/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Assessor by id
+      operationId: getAssessor
+      responses:
+        "200":
+          description: The requested Assessor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Assessor"
+        "404":
+          description: Assessor not found
+    patch:
+      summary: Update an existing Assessor
+      operationId: updateAssessor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Assessor"
+      responses:
+        "200":
+          description: The updated Assessor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Assessor"
+        "404":
+          description: Assessor not found
+    delete:
+      summary: Soft-delete a Assessor
+      operationId: deleteAssessor
+      responses:
+        "204":
+          description: Assessor deleted
+        "404":
+          description: Assessor not found
+components:
+  schemas:
+    Assessor:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was deleted a.k.a. soft-removed.
+        name:
+          type: string
+          description: Name of the assessor.
+        email:
+          type: string
+          description: Email address.
+        phone:
+          type: string
+          description: Telephone number.
+        organisation:
+          type: string
+          description: Commissioning or assuring organisation the assessor works for.
+        role:
+          type: string
+          enum:
+            - commissioner
+            - procurement-lead
+            - clinical-safety-officer
+            - information-governance-lead
+            - information-security-lead
+            - digital-lead
+            - other
+            - ""
+          description: Assessor role.
+      required:
+        - created_at
+        - updated_at
+        - name
+        - organisation
+        - role
+      description: Person carrying out the DTAC assessment on behalf of an NHS or care organisation.

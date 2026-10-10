@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-0000000d542f"
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "company"
+  severity: "info"
+  message: "Test message"
+  ukNhsDigitalTechnologyAssessmentCriteriaGradeId: "00000000-0000-4000-8000-000000040b58"

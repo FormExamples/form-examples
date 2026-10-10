@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE uk_nhs_digital_technology_assessment_criteria SYSTEM "uk_nhs_digital_technology_assessment_criteria.dtd">
+<uk_nhs_digital_technology_assessment_criteria>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<supplier_id>550e8400-e29b-41d4-a716-446655440000</supplier_id>
+<product_id>770e8400-e29b-41d4-a716-446655440002</product_id>
+<assessor_id>660e8400-e29b-41d4-a716-446655440001</assessor_id>
+<status>draft</status>
+<assessment_date>2026-01-15</assessment_date>
+<review_due_date>2026-01-15</review_due_date>
+<dtac_version></dtac_version>
+<commissioning_organisation></commissioning_organisation>
+<a1_company_registered_in_uk>met</a1_company_registered_in_uk>
+<a2_ico_registration_current>met</a2_ico_registration_current>
+<a3_senior_responsible_owner_named>met</a3_senior_responsible_owner_named>
+<a4_incident_contact_published>met</a4_incident_contact_published>
+<section_a_notes>Example text.</section_a_notes>
+<b1_intended_use_and_users_defined>met</b1_intended_use_and_users_defined>
+<b2_evidence_of_benefit>met</b2_evidence_of_benefit>
+<b3_outcome_measures_defined>met</b3_outcome_measures_defined>
+<b4_cost_effectiveness_evidence>met</b4_cost_effectiveness_evidence>
+<section_b_notes>Example text.</section_b_notes>
+<c1_clinical_safety_officer_named>met</c1_clinical_safety_officer_named>
+<c2_clinical_risk_management_plan>met</c2_clinical_risk_management_plan>
+<c3_hazard_log_maintained>met</c3_hazard_log_maintained>
+<c4_clinical_safety_case_report>met</c4_clinical_safety_case_report>
+<c5_clinical_safety_officer_registration_verified>met</c5_clinical_safety_officer_registration_verified>
+<c6_medical_device_registration_if_applicable>met</c6_medical_device_registration_if_applicable>
+<c7_post_market_surveillance>met</c7_post_market_surveillance>
+<section_c_notes>Example text.</section_c_notes>
+<d1_data_protection_officer_or_lead>met</d1_data_protection_officer_or_lead>
+<d2_dpia_completed>met</d2_dpia_completed>
+<d3_dspt_standards_met>met</d3_dspt_standards_met>
+<d4_lawful_basis_documented>met</d4_lawful_basis_documented>
+<d5_controller_processor_roles_defined>met</d5_controller_processor_roles_defined>
+<d6_data_location_and_transfers>met</d6_data_location_and_transfers>
+<d7_retention_and_deletion_policy>met</d7_retention_and_deletion_policy>
+<d8_privacy_notice_published>met</d8_privacy_notice_published>
+<d9_data_subject_rights_supported>met</d9_data_subject_rights_supported>
+<section_d_notes>Example text.</section_d_notes>
+<e1_cyber_essentials_plus_or_iso27001>met</e1_cyber_essentials_plus_or_iso27001>
+<e2_penetration_test_within_12_months>met</e2_penetration_test_within_12_months>
+<e3_vulnerability_management>met</e3_vulnerability_management>
+<e4_encryption_in_transit_and_at_rest>met</e4_encryption_in_transit_and_at_rest>
+<e5_access_control_and_mfa>met</e5_access_control_and_mfa>
+<e6_audit_logging>met</e6_audit_logging>
+<e7_business_continuity_and_backup>met</e7_business_continuity_and_backup>
+<e8_secure_development_lifecycle>met</e8_secure_development_lifecycle>
+<e9_incident_response_and_breach_notification>met</e9_incident_response_and_breach_notification>
+<section_e_notes>Example text.</section_e_notes>
+<f1_open_standards_apis>met</f1_open_standards_apis>
+<f2_fhir_or_nhs_standard_apis>met</f2_fhir_or_nhs_standard_apis>
+<f3_nhs_number_supported>met</f3_nhs_number_supported>
+<f4_clinical_terminology_standards>met</f4_clinical_terminology_standards>
+<f5_nhs_login_integration>met</f5_nhs_login_integration>
+<f6_nhs_systems_integration_documented>met</f6_nhs_systems_integration_documented>
+<f7_data_portability_export>met</f7_data_portability_export>
+<section_f_notes>Example text.</section_f_notes>
+<g1_user_research_with_target_users>met</g1_user_research_with_target_users>
+<g2_wcag_aa_conformance>met</g2_wcag_aa_conformance>
+<g3_accessibility_statement_published>met</g3_accessibility_statement_published>
+<g4_nhs_service_manual_followed>met</g4_nhs_service_manual_followed>
+<g5_assistive_technology_tested>met</g5_assistive_technology_tested>
+<g6_digital_inclusion_considered>met</g6_digital_inclusion_considered>
+<g7_user_feedback_mechanism>met</g7_user_feedback_mechanism>
+<section_g_notes>Example text.</section_g_notes>
+<assessor_notes>Example text.</assessor_notes>
+</uk_nhs_digital_technology_assessment_criteria>

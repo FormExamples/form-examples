@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-00000008407e"
+  deletedAt: null
+  name: "Test Patient"
+  version: "Test version"
+  description: "Test description"
+  intendedPurpose: "Test intendedPurpose"
+  productType: "app"
+  medicalDeviceClass: "not-a-medical-device"
+  handlesPatientData: "yes"
+  isPatientFacing: "yes"
+  supplierId: "00000000-0000-4000-8000-00000001db87"

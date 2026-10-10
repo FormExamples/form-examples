@@ -1,0 +1,180 @@
+#!/bin/sh
+set -euf
+
+form_kebab_case=uk-nhs-digital-technology-assessment-criteria
+form_snake_case=uk_nhs_digital_technology_assessment_criteria
+
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_development" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
+
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold supplier \
+    deleted_at:tstz \
+    name:text! \
+    trading_name:text! \
+    company_registration_number:text! \
+    country_of_registration_as_iso_3166_1_alpha_2:string \
+    ico_registration_number:text! \
+    website:text! \
+    postal_address_as_full_text:text \
+    postcode:text \
+    contact_name:text! \
+    contact_email:text \
+    contact_phone:text \
+    --api
+
+cargo loco generate scaffold assessor \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    organisation:text! \
+    role:text! \
+    --api
+
+cargo loco generate scaffold product \
+    deleted_at:tstz \
+    supplier:references:supplier_id \
+    name:text! \
+    version:text! \
+    description:text! \
+    intended_purpose:text! \
+    product_type:text! \
+    medical_device_class:text! \
+    handles_patient_data:text! \
+    is_patient_facing:text! \
+    --api
+
+cargo loco generate scaffold uk_nhs_digital_technology_assessment_criteria \
+    deleted_at:tstz \
+    supplier:references:supplier_id \
+    product:references:product_id \
+    assessor:references:assessor_id \
+    status:string! \
+    assessment_date:date \
+    review_due_date:date \
+    dtac_version:string! \
+    commissioning_organisation:string! \
+    a1_company_registered_in_uk:string! \
+    a2_ico_registration_current:string! \
+    a3_senior_responsible_owner_named:string! \
+    a4_incident_contact_published:string! \
+    section_a_notes:text! \
+    b1_intended_use_and_users_defined:string! \
+    b2_evidence_of_benefit:string! \
+    b3_outcome_measures_defined:string! \
+    b4_cost_effectiveness_evidence:string! \
+    section_b_notes:text! \
+    c1_clinical_safety_officer_named:string! \
+    c2_clinical_risk_management_plan:string! \
+    c3_hazard_log_maintained:string! \
+    c4_clinical_safety_case_report:string! \
+    c5_clinical_safety_officer_registration_verified:string! \
+    c6_medical_device_registration_if_applicable:string! \
+    c7_post_market_surveillance:string! \
+    section_c_notes:text! \
+    d1_data_protection_officer_or_lead:string! \
+    d2_dpia_completed:string! \
+    d3_dspt_standards_met:string! \
+    d4_lawful_basis_documented:string! \
+    d5_controller_processor_roles_defined:string! \
+    d6_data_location_and_transfers:string! \
+    d7_retention_and_deletion_policy:string! \
+    d8_privacy_notice_published:string! \
+    d9_data_subject_rights_supported:string! \
+    section_d_notes:text! \
+    e1_cyber_essentials_plus_or_iso27001:string! \
+    e2_penetration_test_within_12_months:string! \
+    e3_vulnerability_management:string! \
+    e4_encryption_in_transit_and_at_rest:string! \
+    e5_access_control_and_mfa:string! \
+    e6_audit_logging:string! \
+    e7_business_continuity_and_backup:string! \
+    e8_secure_development_lifecycle:string! \
+    e9_incident_response_and_breach_notification:string! \
+    section_e_notes:text! \
+    f1_open_standards_apis:string! \
+    f2_fhir_or_nhs_standard_apis:string! \
+    f3_nhs_number_supported:string! \
+    f4_clinical_terminology_standards:string! \
+    f5_nhs_login_integration:string! \
+    f6_nhs_systems_integration_documented:string! \
+    f7_data_portability_export:string! \
+    section_f_notes:text! \
+    g1_user_research_with_target_users:string! \
+    g2_wcag_aa_conformance:string! \
+    g3_accessibility_statement_published:string! \
+    g4_nhs_service_manual_followed:string! \
+    g5_assistive_technology_tested:string! \
+    g6_digital_inclusion_considered:string! \
+    g7_user_feedback_mechanism:string! \
+    section_g_notes:text! \
+    assessor_notes:text! \
+    --api
+
+cargo loco generate scaffold uk_nhs_digital_technology_assessment_criteria_grade \
+    deleted_at:tstz \
+    uk_nhs_digital_technology_assessment_criteria:references:uk_nhs_digital_technology_assessment_criteria_id \
+    outcome:string! \
+    mandatory_total:int! \
+    mandatory_met:int! \
+    advisory_total:int! \
+    advisory_met:int! \
+    section_a_result:string! \
+    section_b_result:string! \
+    section_c_result:string! \
+    section_d_result:string! \
+    section_e_result:string! \
+    section_f_result:string! \
+    section_g_result:string! \
+    assessor_override_reason:string! \
+    final_outcome:string! \
+    signed_at:tstz \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold uk_nhs_digital_technology_assessment_criteria_grade_rule \
+    deleted_at:tstz \
+    uk_nhs_digital_technology_assessment_criteria_grade:references:grade_id \
+    rule_id:string! \
+    section:string! \
+    criterion_id:string! \
+    status:string! \
+    mandatory:bool! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold uk_nhs_digital_technology_assessment_criteria_grade_flag \
+    deleted_at:tstz \
+    uk_nhs_digital_technology_assessment_criteria_grade:references:uk_nhs_digital_technology_assessment_criteria_grade_id \
+    flag_id:string! \
+    category:string! \
+    severity:string! \
+    message:string! \
+    --api
+
+# Convert the freshly-scaffolded nested crate into the canonical route
+# layout: back-end-with-loco/src/${form_snake_case}/*.rs
+cd ..
+"$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
+
+# Add #![forbid(unsafe_code)] to each crate root the scaffold created:
+# the library, the -cli binary, the migration library, and the tests.
+"$(git rev-parse --show-toplevel)/bin/loco-forbid-unsafe" "${form_kebab_case}"
+
+# Fix two loco-new scaffold defaults that fail clippy -D warnings:
+# App::seed()'s unused base param, and the test auth_header() helper's
+# redundant &token.
+"$(git rev-parse --show-toplevel)/bin/loco-seed-base-rename" "${form_kebab_case}"
+"$(git rev-parse --show-toplevel)/bin/loco-test-auth-header-fix" "${form_kebab_case}"
