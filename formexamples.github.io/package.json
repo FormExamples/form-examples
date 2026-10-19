@@ -29,7 +29,7 @@
     "@tailwindcss/vite": "^4.3.3",
     "@types/node": "^26.6.4",
     "svelte": "^5.57.2",
-    "svelte-check": "^4.7.6",
+    "svelte-check": "^4.7.7",
     "tailwindcss": "^4.3.3",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3",
