@@ -88,6 +88,21 @@
   </header>
 
   <main class="mx-16">
+    {#if assessment.saveStatus.kind !== 'idle'}
+      <div class="no-print" data-testid="save-status">
+        <Alert
+          type={assessment.saveStatus.kind === 'saved'
+            ? 'success'
+            : assessment.saveStatus.kind === 'error'
+              ? 'error'
+              : 'info'}
+          role="status"
+        >
+          {assessment.saveStatus.message}
+        </Alert>
+      </div>
+    {/if}
+
     <Panel label="Medical device assessment report" class="report-panel">
       <h2>Medical Device Assessment Report</h2>
       <p><strong>Device:</strong> {d.deviceName || 'Unnamed device'}</p>

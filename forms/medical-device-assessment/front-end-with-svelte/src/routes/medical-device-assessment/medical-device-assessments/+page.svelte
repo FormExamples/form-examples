@@ -3,6 +3,8 @@
   import { browser } from '$app/env';
   import { Grid, Willow, WillowDark, type IApi } from '@svar-ui/svelte-grid';
   import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
+  import { fetchDashboardRows } from '#lib/api/medical-device-assessments.js';
+  import Alert from '#lib/components/ui/Alert.svelte';
   import { readinessLabel, routeLabel, shortClass } from '#lib/engine/utils.js';
   import type { ConformityRoute, DashboardRow, DeviceClass, Readiness } from '#lib/engine/types.js';
 
@@ -11,8 +13,29 @@
   let routeFilter = $state('');
   let readinessFilter = $state('');
 
+  // Sample rows show immediately; they are replaced by the joined back-end
+  // rows when the API answers with at least one assessment, and kept (with a
+  // notice) when it is down or empty.
+  let allRows = $state<DashboardRow[]>(sampleAssessmentRows);
+  let notice = $state('');
+  $effect(() => {
+    if (!browser) return;
+    fetchDashboardRows()
+      .then((items) => {
+        if (items.length > 0) {
+          allRows = items;
+          notice = '';
+        } else {
+          notice = 'Showing sample data — backend returned no assessments.';
+        }
+      })
+      .catch((err: unknown) => {
+        notice = `Showing sample data — backend offline (${err instanceof Error ? err.message : 'fetch failed'}).`;
+      });
+  });
+
   const rows = $derived(
-    sampleAssessmentRows.filter((r) => {
+    allRows.filter((r) => {
       if (search) {
         const term = search.toLowerCase();
         const hit = [r.device, r.summary, r.determiningRule, r.deviceKind].some((v) =>
@@ -118,6 +141,12 @@
 </header>
 
 <main class="mx-16 px-4 py-6">
+  {#if notice}
+    <div data-testid="status-banner" class="mb-4">
+      <Alert type="warning" role="status">{notice}</Alert>
+    </div>
+  {/if}
+
   <div class="mb-6 flex justify-end">
     <a
       href="/medical-device-assessment/medical-device-assessments/new"

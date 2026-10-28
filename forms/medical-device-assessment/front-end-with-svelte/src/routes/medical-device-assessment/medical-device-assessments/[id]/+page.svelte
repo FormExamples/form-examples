@@ -59,6 +59,7 @@
     }
     assessment.errorSummaryHidden = true;
     assessment.submitted = true;
+    void assessment.save();
     goto(`/medical-device-assessment/medical-device-assessments/${id}/report`);
   }
 

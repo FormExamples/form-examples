@@ -4,6 +4,7 @@
   import { store } from '#lib/stores/assessment.svelte.js';
   import { adviceLabel, approvalBadgeClass, approvalLabel } from '#lib/engine/utils.js';
   import { Button, Panel } from '@lilydesignsystem/svelte-headless';
+  import Alert from '#lib/components/ui/Alert.svelte';
 
   const id = $derived(page.params.id ?? 'new');
   const r = $derived(store.result);
@@ -73,6 +74,18 @@
   </header>
 
   <main class="mx-16">
+    {#if store.saveState !== 'idle'}
+      <Alert
+        type={store.saveState === 'saved'
+          ? 'success'
+          : store.saveState === 'error'
+            ? 'error'
+            : 'info'}
+        role="status"
+        data-testid="save-status">{store.saveMessage}</Alert
+      >
+    {/if}
+
     <Panel label="Fit note report" class="report-panel">
       <h2>Fit Note Report</h2>
       <p class="subtle">Employee: {d.employeeName || '—'}</p>

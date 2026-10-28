@@ -6,6 +6,7 @@
 // pure engine (device-grader.js) and renders the report inline.
 
 import { gradeDevice } from './device-grader.js';
+import { submitAssessment } from './api.js';
 import { classLabel, emptyAssessment, READINESS_LABELS, ROUTE_LABELS } from './types.js';
 import { STEPS, YN } from './steps.js';
 
@@ -377,12 +378,52 @@ function renderReport(r) {
   document.getElementById('report').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-function submitForm() {
+// Shows the outcome of saving to the back end under the report. A failure
+// never hides the report or clears the localStorage draft.
+function renderSaveStatus(kind, message) {
+  let el = document.getElementById('save-status');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'save-status';
+    el.className = 'alert no-print';
+    el.setAttribute('role', 'status');
+    el.setAttribute('aria-live', 'polite');
+    const report = document.getElementById('report');
+    report.insertBefore(el, report.querySelector('.report-actions'));
+  }
+  el.dataset.type = kind;
+  el.textContent = message;
+}
+
+async function saveToBackend(result) {
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  renderSaveStatus('info', 'Saving to the server...');
+  try {
+    const saved = await submitAssessment(state, result);
+    renderSaveStatus(
+      'success',
+      saved.blocked
+        ? `Saved as a draft (assessment id ${saved.assessmentId}). No class could be determined, so no grade was stored.`
+        : `Saved assessment ${saved.assessmentId} with ${saved.rules} rule(s) and ${saved.flags} flag(s).`
+    );
+  } catch (err) {
+    renderSaveStatus(
+      'error',
+      `Could not save to the server (${err && err.message ? err.message : 'request failed'}). Your report is shown above and your draft is kept on this device; submit again when the server is back.`
+    );
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+async function submitForm() {
   const result = gradeDevice(state);
   const errors = validate(result);
   renderErrorSummary(errors);
   if (errors.length > 0) return;
   renderReport(result);
+  await saveToBackend(result);
 }
 
 function startOver() {

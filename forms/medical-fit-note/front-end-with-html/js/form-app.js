@@ -1,4 +1,5 @@
 import { gradeFitNote } from './fit-note-grader.js';
+import { saveFitNote } from './api.js';
 import {
   ADVICE_OPTIONS,
   METHOD_OPTIONS,
@@ -626,6 +627,8 @@ function renderReport() {
     <h2>Fit Note Report</h2>
     <p class="muted">Generated ${esc(new Date(timestamp).toLocaleString())} · Employee: ${esc(state.employeeName || '—')}</p>
 
+    <div id="save-status" class="alert" data-type="info" role="status" aria-live="polite" data-testid="save-status" hidden></div>
+
     <div class="status-summary">
       <span class="status-badge status-${esc(approvalStatus)}" data-testid="approval-status">${esc(approvalLabel(approvalStatus))}</span>
       <span class="muted">Advice: ${esc(adviceLabel(outcome) || 'not chosen')} ·
@@ -650,11 +653,41 @@ function renderReport() {
   document.getElementById('print-btn').addEventListener('click', () => window.print());
 }
 
+function showSaveStatus(type, message) {
+  const el = document.getElementById('save-status');
+  if (!el) return;
+  el.dataset.type = type;
+  el.textContent = message;
+  el.hidden = false;
+}
+
+// Save the graded note to the back-end. The report is already on screen and
+// the draft stays in localStorage, so a failure only adds an error notice.
+async function saveToBackend(result, snapshot) {
+  const btn = document.getElementById('submit-btn');
+  if (btn) btn.disabled = true;
+  showSaveStatus('info', 'Saving to the back-end…');
+  try {
+    const saved = await saveFitNote(snapshot, result);
+    showSaveStatus('success', `Saved fit note ${saved.noteId} (status: ${saved.status}).`);
+  } catch (err) {
+    showSaveStatus(
+      'error',
+      `Not saved to the back-end (the report above is computed locally and your draft is kept): ${
+        err && err.message ? err.message : 'request failed'
+      }`
+    );
+  } finally {
+    if (btn) btn.disabled = false;
+  }
+}
+
 function submitForm() {
   const errors = validateForm();
   if (errors.length > 0) return;
   lastResult = { ...gradeFitNote(state), timestamp: new Date().toISOString() };
   renderReport();
+  saveToBackend(lastResult, { ...state });
 }
 
 function resetView() {

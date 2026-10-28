@@ -24,10 +24,11 @@ const IDENTITIES: Array<[string, string, string]> = [
   ['Evans, Isla', 'Tech Works Ltd', 'Dr A Shah'],
   ['Murphy, Jack', 'Riverside Farm', 'Dr M Okafor'],
   ['Wilson, Kate', 'County Hospital', 'Dr A Shah'],
-  ['Taylor, Liam', 'Cityline Buses', 'Dr M Okafor']
+  ['Taylor, Liam', 'Cityline Buses', 'Dr M Okafor'],
+  ['Evans, Priya', 'Harbour Dental', 'Dr A Shah']
 ];
 
-/** Sample fit notes `FN001..FN012`, one per persona. */
+/** Sample fit notes `FN001..FN013`, one per persona. */
 export const sampleAssessments: SampleAssessment[] = personasFile.personas.map((p, i) => {
   const [employeeName, employerName, clinicianName] = IDENTITIES[i];
   return {

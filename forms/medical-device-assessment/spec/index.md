@@ -46,10 +46,34 @@ determiningRule, readiness, firedRules[], flags[] }` (migrations 05–07).
 | -------------------------- | -------------------------------------------- |
 | `sql`                      | source of truth                              |
 | `xml`, `fhir`, `protobuf`, `openapi` | generated                          |
-| `front-end-with-html`      | HTML + Lily — not implemented                |
-| `front-end-with-svelte`    | SvelteKit — not implemented                  |
-| `back-end-with-loco`       | Rust + Loco JSON API — not implemented       |
+| `front-end-with-html`      | HTML + Lily; wired to the Loco API (below)   |
+| `front-end-with-svelte`    | SvelteKit; wired to the Loco API (below)     |
+| `back-end-with-loco`       | Rust + Loco per-table JSON API; dev CORS on  |
 | `back-end-with-loco-setup` | generated scaffold script                    |
+
+### Front-end to back-end wiring
+
+Both front-ends use one client (`front-end-with-html/js/api.js`,
+`front-end-with-svelte/src/lib/api/medical-device-assessments.ts`) against the
+per-table REST API (`/api/manufacturers`, `/api/assessors`,
+`/api/medical_device_assessments`, `/api/medical_device_assessment_grades`,
+`/api/medical_device_assessment_grade_rules`,
+`/api/medical_device_assessment_grade_flags`; no bespoke submit endpoint).
+
+- API base: HTML `?api=` or `window.__API_BASE__`, Svelte `VITE_API_BASE`;
+  default `http://localhost:5150`.
+- Dashboard: list assessments, manufacturers, assessors, grades and flags and
+  join them client-side into the dashboard row. On failure or an empty list
+  the offline persona-derived samples are shown with a notice (must keep
+  working with the server down).
+- Submit: the local engine grades the wizard state; then GET+POST manufacturer
+  and assessor (find-or-create by name; no upsert exists), POST assessment,
+  POST grade, POST each fired rule, POST each flag. Wizard status `draft`
+  becomes `submitted`. A blocked result (IVD, or missing device kind or
+  intended purpose: empty computed class) saves the assessment as `draft` and
+  skips the grade, rule and flag POSTs. On failure the report and the local
+  draft are kept and an error is shown.
+- The engine runs only in the front-end; the back end stores its output.
 
 ## 6. Acceptance criteria
 

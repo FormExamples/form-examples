@@ -24,3 +24,4 @@
 - [x] SvelteKit front-end (wizard + dashboard)
 - [x] Loco back-end
 - [x] Personas
+- [x] Wire HTML and SvelteKit front-ends to the Loco API (dashboard join, submit sequence, sample fallback, dev CORS)

@@ -1,6 +1,6 @@
 # Medical Device Assessment — SvelteKit front-end
 
-Single-page, nine-step wizard and sample-data dashboard for the medical device
+Single-page, nine-step wizard and dashboard for the medical device
 risk-class assessment (EU MDR 2017/745 Annex VIII / UK MDR 2002), built with
 SvelteKit, the Lily Design System Svelte headless components and the SVAR
 DataGrid. It is a port of [`../front-end-with-html/`](../front-end-with-html/).
@@ -28,6 +28,11 @@ Served under `/medical-device-assessment/` (the root `/` redirects there):
   rendered through `StepSection.svelte` and `FieldRenderer.svelte`.
 - `src/lib/stores/assessment.svelte.ts` — id-keyed store with localStorage
   autosave (`medical-device-assessment.front-end-with-svelte.v1` for `new`).
+- `src/lib/api/medical-device-assessments.ts` — Loco API client: dashboard
+  join (assessments + grades + flags) and the submit sequence (manufacturer,
+  assessor, assessment, grade, rules, flags). Set `VITE_API_BASE` to point at
+  the back end (default `http://localhost:5150`); the offline samples remain
+  the fallback when it is down or empty.
 - `src/lib/data/sample-reports.ts` — one sample per persona and the dashboard
   rows derived by running the engine.
 

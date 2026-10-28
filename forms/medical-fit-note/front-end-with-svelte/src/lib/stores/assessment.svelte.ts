@@ -2,6 +2,7 @@ import { browser } from '$app/env';
 import type { FitNoteAssessment } from '#lib/engine/types.js';
 import { createDefaultAssessment } from '#lib/engine/defaults.js';
 import { gradeFitNote } from '#lib/engine/fit-note-grader.js';
+import { saveFitNote } from '#lib/api/index.js';
 import { STEPS, TOTAL_STEPS, type StepDef } from '#lib/config/steps.js';
 
 export interface ValidationErrors {
@@ -61,6 +62,31 @@ class AssessmentStore {
 
   result = $derived(gradeFitNote(this.data));
 
+  /** Back-end save state after a submit (the report is computed locally regardless). */
+  saveState: 'idle' | 'saving' | 'saved' | 'error' = $state('idle');
+  /** Human-readable outcome of the last save attempt. */
+  saveMessage = $state('');
+
+  /**
+   * Save the current fit note to the back-end API. Never throws: a failure is
+   * recorded in `saveState` / `saveMessage` and the local report and draft are
+   * kept as they are.
+   */
+  async save() {
+    this.saveState = 'saving';
+    this.saveMessage = 'Saving to the back-end…';
+    try {
+      const saved = await saveFitNote($state.snapshot(this.data), $state.snapshot(this.result));
+      this.saveState = 'saved';
+      this.saveMessage = `Saved fit note ${saved.noteId} (status: ${saved.status}).`;
+    } catch (err) {
+      this.saveState = 'error';
+      this.saveMessage = `Not saved to the back-end (the report is computed locally and your draft is kept): ${
+        err instanceof Error ? err.message : 'request failed'
+      }`;
+    }
+  }
+
   /** Answered / total tracked fields, as a percentage, for the Progress bar. */
   percentComplete = $derived.by(() => {
     let answered = 0;
@@ -116,6 +142,8 @@ class AssessmentStore {
     this.errors = {};
     this.errorSummaryHidden = true;
     this.submitted = false;
+    this.saveState = 'idle';
+    this.saveMessage = '';
 
     let draft: FitNoteAssessment | null = null;
     if (browser) {
@@ -154,6 +182,8 @@ class AssessmentStore {
     this.errors = {};
     this.errorSummaryHidden = true;
     this.submitted = false;
+    this.saveState = 'idle';
+    this.saveMessage = '';
     if (browser) {
       try {
         localStorage.removeItem(storageKey(this.id));

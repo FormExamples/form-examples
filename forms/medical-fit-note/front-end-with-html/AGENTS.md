@@ -31,6 +31,14 @@ System headless conventions: [`../../AGENTS-front-end-html.md`](../../AGENTS-fro
   `medical-fit-note.theme.v1`, `.locale.v1`, `.text-size.v1`.
 - `js/table-export.js` self-installs on the dashboard; add no CSV/TSV buttons.
 
+## Back-end wiring
+
+`js/api.js` is the only module that talks to the Loco API (base
+`http://localhost:5150`, override via `window.__API_BASE__` or `?api=`). The
+dashboard joins six GETs client-side; `form-app.js` calls `saveFitNote` after
+grading and shows the result in `#save-status`. Sample-data fallback must stay.
+Flow and request order: see `index.md` "Back-end wiring".
+
 ## Verify
 
 ```sh

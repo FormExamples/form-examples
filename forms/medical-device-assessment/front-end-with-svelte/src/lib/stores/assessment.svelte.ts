@@ -4,6 +4,7 @@ import { gradeDevice } from '#lib/engine/device-grader.js';
 import { fieldId, getPath, isAnswered } from '#lib/engine/paths.js';
 import type { AssessmentData, GradingResult } from '#lib/engine/types.js';
 import { STEPS, TOTAL_STEPS } from '#lib/config/steps.js';
+import { submitAssessment } from '#lib/api/medical-device-assessments.js';
 
 export { createDefaultAssessment };
 
@@ -50,6 +51,15 @@ class AssessmentStore {
 
   /** Whether the user has submitted at least once (drives the report). */
   submitted = $state(false);
+
+  /**
+   * Outcome of saving to the back end after submit. A failure never hides the
+   * report or clears the localStorage draft.
+   */
+  saveStatus: { kind: 'idle' | 'saving' | 'saved' | 'error'; message: string } = $state({
+    kind: 'idle',
+    message: ''
+  });
 
   /** The live engine result for the current answers. */
   result = $derived<GradingResult>(gradeDevice(this.data));
@@ -135,6 +145,7 @@ class AssessmentStore {
     this.errors = [];
     this.errorSummaryHidden = true;
     this.submitted = false;
+    this.saveStatus = { kind: 'idle', message: '' };
 
     let draft: AssessmentData | null = null;
     if (browser) {
@@ -155,7 +166,34 @@ class AssessmentStore {
     );
   }
 
+  /**
+   * POST the submitted assessment, its grade, fired rules and flags to the
+   * Loco API (see lib/api/medical-device-assessments.ts for the sequence).
+   */
+  async save() {
+    this.saveStatus = { kind: 'saving', message: 'Saving to the server...' };
+    try {
+      const saved = await submitAssessment(
+        $state.snapshot(this.data) as AssessmentData,
+        this.result
+      );
+      this.saveStatus = {
+        kind: 'saved',
+        message: saved.blocked
+          ? `Saved as a draft (assessment id ${saved.assessmentId}). No class could be determined, so no grade was stored.`
+          : `Saved assessment ${saved.assessmentId} with ${saved.rules} rule(s) and ${saved.flags} flag(s).`
+      };
+    } catch (err) {
+      const why = err instanceof Error ? err.message : 'request failed';
+      this.saveStatus = {
+        kind: 'error',
+        message: `Could not save to the server (${why}). Your report is shown below and your draft is kept on this device; submit again when the server is back.`
+      };
+    }
+  }
+
   reset() {
+    this.saveStatus = { kind: 'idle', message: '' };
     this.hadDraftAtLoad = false;
     deepAssign(
       this.data as unknown as Record<string, unknown>,

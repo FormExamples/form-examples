@@ -3,13 +3,44 @@
   import { browser } from '$app/env';
   import { Grid, Willow, WillowDark, type IApi } from '@svar-ui/svelte-grid';
   import { sampleAssessmentRows } from '#lib/data/sample-reports.js';
+  import { fetchDashboardRows } from '#lib/api/index.js';
+  import Alert from '#lib/components/ui/Alert.svelte';
+  import type { DashboardRow } from '#lib/engine/types.js';
   import { adviceLabel, approvalLabel } from '#lib/engine/utils.js';
 
   let approvalFilter = $state('');
   let adviceFilter = $state('');
 
+  // Start with the offline sample rows, then replace them with the joined
+  // back-end rows when the API answers with at least one graded fit note.
+  let allRows: DashboardRow[] = $state(sampleAssessmentRows);
+  let notice = $state('');
+  $effect(() => {
+    if (!browser) return;
+    let cancelled = false;
+    fetchDashboardRows()
+      .then((fetched) => {
+        if (cancelled) return;
+        if (fetched.length > 0) {
+          allRows = fetched;
+          notice = '';
+        } else {
+          notice = 'Showing sample data — backend returned no fit notes.';
+        }
+      })
+      .catch((err: unknown) => {
+        if (cancelled) return;
+        notice = `Showing sample data — backend offline (${
+          err instanceof Error ? err.message : 'fetch failed'
+        }).`;
+      });
+    return () => {
+      cancelled = true;
+    };
+  });
+
   const rows = $derived(
-    sampleAssessmentRows.filter(
+    allRows.filter(
       (r) =>
         (approvalFilter === '' || r.approval === approvalFilter) &&
         (adviceFilter === '' || r.advice === adviceFilter)
@@ -115,6 +146,10 @@
       </select>
     </label>
   </div>
+
+  {#if notice}
+    <Alert type="warning" role="status" class="mb-4" data-testid="status-banner">{notice}</Alert>
+  {/if}
 
   <div class="overflow-hidden rounded-xl border border-base-300" style="height: 600px;">
     <GridTheme><Grid data={rows} {columns} {init} /></GridTheme>

@@ -8,4 +8,5 @@ Follows [`forms/AGENTS-front-end-html.md`](../../AGENTS-front-end-html.md).
 - localStorage keys: `medical-device-assessment.front-end-with-html.v1` (draft), `.theme.v1`, `.locale.v1`, `.text-size.v1`.
 - `js/table-export.js` self-installs on the dashboard; add no CSV/TSV buttons of your own. `js/form-export.js`, `js/form-import.js` and `js/restore-banner.js` read `window.__FORM_STATE__` from `form-app.js`.
 - `js/data.js` sample rows are derived from `examples/personas.json`; regenerate them if personas change.
+- `js/api.js` is the only module that talks to the back end (base: `?api=` > `window.__API_BASE__` > `http://localhost:5150`). The sample fallback in `js/data.js` must keep working with the server down. Blocked results save the assessment as `draft` and skip the grade POSTs. Do not call `fetch` from `form-app.js` or `dashboard-app.js` directly.
 - Verify: `bin/test-form medical-device-assessment`, `bin/test-personas medical-device-assessment`, `bin/test-engines medical-device-assessment`, `bin/test-e2e --html medical-device-assessment`.

@@ -52,6 +52,7 @@
     }
     store.errorSummaryHidden = true;
     store.submitted = true;
+    void store.save();
     goto(`/medical-fit-note/medical-fit-notes/${id}/report`);
   }
 

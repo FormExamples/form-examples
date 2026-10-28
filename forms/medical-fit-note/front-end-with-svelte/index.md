@@ -33,10 +33,24 @@ the UI; every other gap is the engine's job to report as a fired rule
   `$app/env`, which Vitest cannot resolve), `types.ts`, `utils.ts` (options
   and labels), `fit-note-grader.test.ts`
 - `src/lib/data/personas.json` — copy of `../examples/personas.json`; the
-  Vitest suite asserts all 12 personas, and `sample-reports.ts` derives the
-  dashboard rows `FN001..FN012` from them
+  Vitest suite asserts all 13 personas, and `sample-reports.ts` derives the
+  dashboard rows `FN001..FN013` from them
 - `src/lib/stores/assessment.svelte.ts` — id-keyed store (`deepAssign` merge)
 - `src/lib/components/steps/Step1Employee.svelte` … `Step8Report.svelte`
+
+## Back-end wiring
+
+`src/lib/api/index.ts` is the API client; the base URL is
+`VITE_API_BASE` (default `http://localhost:5150`). The dashboard fetches and
+joins notes, employees, clinicians, grades and flags client-side, falling back
+to the sample rows (with a notice) on failure or an empty list. Submit runs the
+engine locally, opens the report, and `store.save()` posts, in order: employee
+(find or create), clinician (find or create), `medical_fit_notes` (`signed`
+only when approved and declared, else `draft`), `medical_fit_note_grades`, then
+each fired rule and flag (categories outside the SQL CHECK list are skipped).
+The report page shows the saved note id or an error; the report and draft are
+kept either way. Run against a dev server with
+`VITE_API_BASE=http://localhost:5151 pnpm dev`.
 
 ## Run and verify
 
