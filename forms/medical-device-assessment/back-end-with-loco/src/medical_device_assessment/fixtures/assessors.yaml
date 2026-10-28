@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "62d5cd64-7ead-5775-9d1b-5b76f8daf76e"
+  deletedAt: null
+  name: "Test Patient"
+  email: "test.patient@example.com"
+  phone: "+441234567890"
+  role: "regulatory-affairs"
+  organization: "Test organization"

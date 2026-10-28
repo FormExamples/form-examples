@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "ed677183-ffbb-52f2-b236-66864ed128ad"
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "missing-diagnosis"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  medicalFitNoteGradeId: "f813bae8-c9ee-5b9f-bd93-5105532c7bec"

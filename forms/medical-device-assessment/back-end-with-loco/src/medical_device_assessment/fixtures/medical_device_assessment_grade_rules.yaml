@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "8fba6c1a-8e68-579b-b797-300393e19c59"
+  deletedAt: null
+  ruleId: "Test ruleId"
+  annexViiiRule: 1
+  deviceClass: "I"
+  category: "Test category"
+  description: "Test description"
+  gradeId: "a19ea35b-8b95-50cc-95e0-0d16d99e1bdd"

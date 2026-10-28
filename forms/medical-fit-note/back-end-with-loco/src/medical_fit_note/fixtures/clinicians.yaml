@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "10322ec7-64e7-5d1a-aa75-f8dd8c7b7712"
+  deletedAt: null
+  name: "Test Patient"
+  email: "test.patient@example.com"
+  phone: "+441234567890"
+  role: "gp"
+  registrationBody: "GMC"
+  registrationNumber: "Test registrationNumber"
+  practiceName: "Test practiceName"

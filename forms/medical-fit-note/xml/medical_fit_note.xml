@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE medical_fit_note SYSTEM "medical_fit_note.dtd">
+<medical_fit_note>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<employee_id>550e8400-e29b-41d4-a716-446655440000</employee_id>
+<clinician_id>660e8400-e29b-41d4-a716-446655440001</clinician_id>
+<status>draft</status>
+<assessment_date>2026-01-15</assessment_date>
+<assessment_method>face-to-face</assessment_method>
+<diagnosis_primary>Under investigation</diagnosis_primary>
+<diagnosis_additional>Under investigation</diagnosis_additional>
+<fitness_advice>not-fit-for-work</fitness_advice>
+<period_from>2026-01-15</period_from>
+<period_to>2026-01-15</period_to>
+<period_duration_days>1</period_duration_days>
+<reassessment_required>yes</reassessment_required>
+<adjustment_phased_return>yes</adjustment_phased_return>
+<adjustment_altered_hours>yes</adjustment_altered_hours>
+<adjustment_amended_duties>yes</adjustment_amended_duties>
+<adjustment_workplace_adaptations>yes</adjustment_workplace_adaptations>
+<functional_effects></functional_effects>
+<comments>Example text.</comments>
+<employee_consent_to_share>yes</employee_consent_to_share>
+<clinician_declaration>yes</clinician_declaration>
+<signed_at>2026-04-09T10:00:00Z</signed_at>
+</medical_fit_note>

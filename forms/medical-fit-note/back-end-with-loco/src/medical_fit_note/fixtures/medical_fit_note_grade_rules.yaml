@@ -1,0 +1,8 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "8326370b-6c21-59e9-9519-3ed9afff9d07"
+  deletedAt: null
+  ruleId: "Test ruleId"
+  category: "Test category"
+  description: "Test description"
+  gradeId: "f813bae8-c9ee-5b9f-bd93-5105532c7bec"

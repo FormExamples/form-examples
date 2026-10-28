@@ -1,0 +1,45 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: medical_device_assessment_grade_flag
+
+syntax = "proto3";
+
+package form_examples.medical_device_assessment;
+
+enum MedicalDeviceAssessmentGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_MISSING_INTENDED_PURPOSE = 1;  // missing-intended-purpose
+  CATEGORY_CLINICAL_EVIDENCE_GAP = 2;  // clinical-evidence-gap
+  CATEGORY_RISK_MANAGEMENT_GAP = 3;  // risk-management-gap
+  CATEGORY_QUALITY_SYSTEM_GAP = 4;  // quality-system-gap
+  CATEGORY_CYBERSECURITY_GAP = 5;  // cybersecurity-gap
+  CATEGORY_POST_MARKET_SURVEILLANCE_GAP = 6;  // post-market-surveillance-gap
+  CATEGORY_UDI_GAP = 7;  // udi-gap
+  CATEGORY_NOTIFIED_BODY_REQUIRED = 8;  // notified-body-required
+  CATEGORY_SOFTWARE_AS_MEDICAL_DEVICE = 9;  // software-as-medical-device
+  CATEGORY_MEDICINAL_SUBSTANCE_COMBINATION = 10;  // medicinal-substance-combination
+  CATEGORY_TISSUE_ORIGIN = 11;  // tissue-origin
+  CATEGORY_NANOMATERIAL = 12;  // nanomaterial
+  CATEGORY_IN_VITRO_DIAGNOSTIC_OUT_OF_SCOPE = 13;  // in-vitro-diagnostic-out-of-scope
+  CATEGORY_CLASS_OVERRIDE = 14;  // class-override
+  CATEGORY_OTHER = 15;  // other
+}
+
+enum MedicalDeviceAssessmentGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message MedicalDeviceAssessmentGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string medical_device_assessment_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  MedicalDeviceAssessmentGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  MedicalDeviceAssessmentGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

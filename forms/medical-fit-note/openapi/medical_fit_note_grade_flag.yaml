@@ -1,0 +1,171 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: medical_fit_note_grade_flag
+openapi: 3.1.0
+info:
+  title: Medical Fit Note — MedicalFitNoteGradeFlag
+  version: 1.0.0
+  description: Medical fit note grade flag.
+paths:
+  /medical-fit-note-grade-flags:
+    get:
+      summary: List MedicalFitNoteGradeFlag records
+      operationId: listMedicalFitNoteGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicalFitNoteGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicalFitNoteGradeFlag"
+    post:
+      summary: Create a new MedicalFitNoteGradeFlag
+      operationId: createMedicalFitNoteGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalFitNoteGradeFlag"
+      responses:
+        "201":
+          description: The newly created MedicalFitNoteGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalFitNoteGradeFlag"
+        "400":
+          description: Validation error
+  /medical-fit-note-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicalFitNoteGradeFlag by id
+      operationId: getMedicalFitNoteGradeFlag
+      responses:
+        "200":
+          description: The requested MedicalFitNoteGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalFitNoteGradeFlag"
+        "404":
+          description: MedicalFitNoteGradeFlag not found
+    patch:
+      summary: Update an existing MedicalFitNoteGradeFlag
+      operationId: updateMedicalFitNoteGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalFitNoteGradeFlag"
+      responses:
+        "200":
+          description: The updated MedicalFitNoteGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalFitNoteGradeFlag"
+        "404":
+          description: MedicalFitNoteGradeFlag not found
+    delete:
+      summary: Soft-delete a MedicalFitNoteGradeFlag
+      operationId: deleteMedicalFitNoteGradeFlag
+      responses:
+        "204":
+          description: MedicalFitNoteGradeFlag deleted
+        "404":
+          description: MedicalFitNoteGradeFlag not found
+components:
+  schemas:
+    MedicalFitNoteGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Soft-delete timestamp; NULL when the row is live.
+        medical_fit_note_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the medical_fit_note_grade table.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Flag ID.
+        category:
+          type: string
+          enum:
+            - missing-diagnosis
+            - missing-assessment
+            - invalid-period
+            - long-period-without-review
+            - missing-adjustments
+            - missing-consent
+            - missing-declaration
+            - unregistered-clinician
+            - backdated
+            - other
+            - ""
+          description: "Category. One of: missing-diagnosis, missing-assessment, invalid-period, long-period-without-review, missing-adjustments, missing-consent, missing-declaration, unregistered-clinician, …."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority. One of: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Description.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: Suggested action.
+      required:
+        - created_at
+        - updated_at
+        - medical_fit_note_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Medical fit note grade flag.

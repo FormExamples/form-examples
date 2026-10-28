@@ -1,0 +1,563 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeDevice",
+  "note": "Annex VIII personas; expected computed by bin/test-personas --update and checked by hand against the rule table.",
+  "personas": [
+    {
+      "name": "bandage-class-i",
+      "description": "Adhesive bandage: Rule 1, Class I, self-declaration.",
+      "state": {
+        "intendedPurpose": "Adhesive bandage: Rule 1, Class I, self-declaration.",
+        "clinicalEvidenceStatus": "complete",
+        "riskManagementFileIso14971": "yes",
+        "qualityManagementSystemIso13485": "yes",
+        "cybersecurityAssessmentDone": "yes",
+        "postMarketSurveillancePlan": "yes",
+        "uniqueDeviceIdentifierAssigned": "yes",
+        "deviceName": "Bandage",
+        "deviceKind": "non-invasive",
+        "bodySite": "intact-skin"
+      },
+      "expected": {
+        "computedDeviceClass": "I",
+        "finalDeviceClass": "I",
+        "classSuffix": "",
+        "overrideReason": "",
+        "conformityRoute": "self-declaration",
+        "determiningRule": "R-MDR-1-I",
+        "regulatoryReadiness": "ready",
+        "firedRules": [
+          {
+            "ruleId": "R-MDR-1-I",
+            "annexViiiRule": 1,
+            "deviceClass": "I",
+            "category": "non-invasive",
+            "description": "Non-invasive device, no other rule applies"
+          }
+        ],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "sterile-dressing-is",
+      "description": "Sterile wound dressing: Class Is, partial notified-body route.",
+      "state": {
+        "intendedPurpose": "Sterile wound dressing: Class Is, partial notified-body route.",
+        "clinicalEvidenceStatus": "complete",
+        "riskManagementFileIso14971": "yes",
+        "qualityManagementSystemIso13485": "yes",
+        "cybersecurityAssessmentDone": "yes",
+        "postMarketSurveillancePlan": "yes",
+        "uniqueDeviceIdentifierAssigned": "yes",
+        "deviceKind": "non-invasive",
+        "suppliedSterile": "yes"
+      },
+      "expected": {
+        "computedDeviceClass": "I",
+        "finalDeviceClass": "I",
+        "classSuffix": "s",
+        "overrideReason": "",
+        "conformityRoute": "notified-body-partial",
+        "determiningRule": "R-MDR-1-I",
+        "regulatoryReadiness": "ready",
+        "firedRules": [
+          {
+            "ruleId": "R-MDR-1-I",
+            "annexViiiRule": 1,
+            "deviceClass": "I",
+            "category": "non-invasive",
+            "description": "Non-invasive device, no other rule applies"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-NB-001",
+            "category": "notified-body-required",
+            "priority": "medium",
+            "description": "Class Is requires notified-body involvement.",
+            "suggestedAction": "Select and engage a notified body early."
+          }
+        ]
+      }
+    },
+    {
+      "name": "reusable-scalpel-ir",
+      "description": "Reusable surgical scalpel: Class Ir.",
+      "state": {
+        "intendedPurpose": "Reusable surgical scalpel: Class Ir.",
+        "clinicalEvidenceStatus": "complete",
+        "riskManagementFileIso14971": "yes",
+        "qualityManagementSystemIso13485": "yes",
+        "cybersecurityAssessmentDone": "yes",
+        "postMarketSurveillancePlan": "yes",
+        "uniqueDeviceIdentifierAssigned": "yes",
+        "deviceKind": "surgically-invasive",
+        "contactDuration": "transient",
+        "reusableSurgicalInstrument": "yes"
+      },
+      "expected": {
+        "computedDeviceClass": "I",
+        "finalDeviceClass": "I",
+        "classSuffix": "r",
+        "overrideReason": "",
+        "conformityRoute": "notified-body-partial",
+        "determiningRule": "R-MDR-6-I",
+        "regulatoryReadiness": "ready",
+        "firedRules": [
+          {
+            "ruleId": "R-MDR-6-I",
+            "annexViiiRule": 6,
+            "deviceClass": "I",
+            "category": "invasive",
+            "description": "Surgically invasive, transient"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-NB-001",
+            "category": "notified-body-required",
+            "priority": "medium",
+            "description": "Class Ir requires notified-body involvement.",
+            "suggestedAction": "Select and engage a notified body early."
+          }
+        ]
+      }
+    },
+    {
+      "name": "urinary-catheter-iia",
+      "description": "Short-term urinary catheter: Rule 5, Class IIa.",
+      "state": {
+        "intendedPurpose": "Short-term urinary catheter: Rule 5, Class IIa.",
+        "clinicalEvidenceStatus": "complete",
+        "riskManagementFileIso14971": "yes",
+        "qualityManagementSystemIso13485": "yes",
+        "cybersecurityAssessmentDone": "yes",
+        "postMarketSurveillancePlan": "yes",
+        "uniqueDeviceIdentifierAssigned": "yes",
+        "deviceKind": "invasive-body-orifice",
+        "contactDuration": "short-term",
+        "bodySite": "other-orifice"
+      },
+      "expected": {
+        "computedDeviceClass": "IIa",
+        "finalDeviceClass": "IIa",
+        "classSuffix": "",
+        "overrideReason": "",
+        "conformityRoute": "notified-body-full",
+        "determiningRule": "R-MDR-5-IIa",
+        "regulatoryReadiness": "ready",
+        "firedRules": [
+          {
+            "ruleId": "R-MDR-5-IIa",
+            "annexViiiRule": 5,
+            "deviceClass": "IIa",
+            "category": "invasive",
+            "description": "Short-term use via body orifice"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-NB-001",
+            "category": "notified-body-required",
+            "priority": "medium",
+            "description": "Class IIa requires notified-body involvement.",
+            "suggestedAction": "Select and engage a notified body early."
+          }
+        ]
+      }
+    },
+    {
+      "name": "hip-implant-iib",
+      "description": "Hip joint implant: Rule 8, Class IIb.",
+      "state": {
+        "intendedPurpose": "Hip joint implant: Rule 8, Class IIb.",
+        "clinicalEvidenceStatus": "complete",
+        "riskManagementFileIso14971": "yes",
+        "qualityManagementSystemIso13485": "yes",
+        "cybersecurityAssessmentDone": "yes",
+        "postMarketSurveillancePlan": "yes",
+        "uniqueDeviceIdentifierAssigned": "yes",
+        "deviceKind": "implantable",
+        "bodySite": "tissue"
+      },
+      "expected": {
+        "computedDeviceClass": "IIb",
+        "finalDeviceClass": "IIb",
+        "classSuffix": "",
+        "overrideReason": "",
+        "conformityRoute": "notified-body-full",
+        "determiningRule": "R-MDR-8-IIb",
+        "regulatoryReadiness": "ready",
+        "firedRules": [
+          {
+            "ruleId": "R-MDR-8-IIb",
+            "annexViiiRule": 8,
+            "deviceClass": "IIb",
+            "category": "implantable",
+            "description": "Implantable, long-term"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-NB-001",
+            "category": "notified-body-required",
+            "priority": "medium",
+            "description": "Class IIb requires notified-body involvement.",
+            "suggestedAction": "Select and engage a notified body early."
+          }
+        ]
+      }
+    },
+    {
+      "name": "pacemaker-iii",
+      "description": "Cardiac pacemaker: implant in heart, Class III.",
+      "state": {
+        "intendedPurpose": "Cardiac pacemaker: implant in heart, Class III.",
+        "clinicalEvidenceStatus": "complete",
+        "riskManagementFileIso14971": "yes",
+        "qualityManagementSystemIso13485": "yes",
+        "cybersecurityAssessmentDone": "yes",
+        "postMarketSurveillancePlan": "yes",
+        "uniqueDeviceIdentifierAssigned": "yes",
+        "deviceKind": "implantable",
+        "bodySite": "heart",
+        "activeTherapeutic": "yes",
+        "administersOrExchangesEnergy": "yes"
+      },
+      "expected": {
+        "computedDeviceClass": "III",
+        "finalDeviceClass": "III",
+        "classSuffix": "",
+        "overrideReason": "",
+        "conformityRoute": "notified-body-full",
+        "determiningRule": "R-MDR-8-III",
+        "regulatoryReadiness": "ready",
+        "firedRules": [
+          {
+            "ruleId": "R-MDR-8-III",
+            "annexViiiRule": 8,
+            "deviceClass": "III",
+            "category": "implantable",
+            "description": "Implantable, long-term, in contact with heart, central circulatory system or CNS"
+          },
+          {
+            "ruleId": "R-MDR-9-IIa",
+            "annexViiiRule": 9,
+            "deviceClass": "IIa",
+            "category": "active",
+            "description": "Active therapeutic device administering or exchanging energy"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-NB-001",
+            "category": "notified-body-required",
+            "priority": "medium",
+            "description": "Class III requires notified-body involvement.",
+            "suggestedAction": "Select and engage a notified body early."
+          }
+        ]
+      }
+    },
+    {
+      "name": "diagnostic-app-iia",
+      "description": "Decision-support app, other harm: Rule 11, Class IIa.",
+      "state": {
+        "intendedPurpose": "Decision-support app, other harm: Rule 11, Class IIa.",
+        "clinicalEvidenceStatus": "complete",
+        "riskManagementFileIso14971": "yes",
+        "qualityManagementSystemIso13485": "yes",
+        "cybersecurityAssessmentDone": "yes",
+        "postMarketSurveillancePlan": "yes",
+        "uniqueDeviceIdentifierAssigned": "yes",
+        "deviceKind": "software",
+        "softwarePurpose": "provides-information-for-decisions",
+        "softwareWorstCaseHarm": "other"
+      },
+      "expected": {
+        "computedDeviceClass": "IIa",
+        "finalDeviceClass": "IIa",
+        "classSuffix": "",
+        "overrideReason": "",
+        "conformityRoute": "notified-body-full",
+        "determiningRule": "R-MDR-11-IIa",
+        "regulatoryReadiness": "ready",
+        "firedRules": [
+          {
+            "ruleId": "R-MDR-11-IIa",
+            "annexViiiRule": 11,
+            "deviceClass": "IIa",
+            "category": "software",
+            "description": "Software informing diagnostic or therapeutic decisions"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-SAMD-001",
+            "category": "software-as-medical-device",
+            "priority": "medium",
+            "description": "Device includes software; IEC 62304 lifecycle applies.",
+            "suggestedAction": "Confirm IEC 62304 software safety class and documentation."
+          },
+          {
+            "flagId": "F-NB-001",
+            "category": "notified-body-required",
+            "priority": "medium",
+            "description": "Class IIa requires notified-body involvement.",
+            "suggestedAction": "Select and engage a notified body early."
+          }
+        ]
+      }
+    },
+    {
+      "name": "insulin-loop-iii",
+      "description": "Closed-loop insulin pump: Rule 22, Class III.",
+      "state": {
+        "intendedPurpose": "Closed-loop insulin pump: Rule 22, Class III.",
+        "clinicalEvidenceStatus": "complete",
+        "riskManagementFileIso14971": "yes",
+        "qualityManagementSystemIso13485": "yes",
+        "cybersecurityAssessmentDone": "yes",
+        "postMarketSurveillancePlan": "yes",
+        "uniqueDeviceIdentifierAssigned": "yes",
+        "deviceKind": "active",
+        "activeTherapeutic": "yes",
+        "administersOrRemovesMedicinalSubstances": "yes",
+        "closedLoopTherapy": "yes"
+      },
+      "expected": {
+        "computedDeviceClass": "III",
+        "finalDeviceClass": "III",
+        "classSuffix": "",
+        "overrideReason": "",
+        "conformityRoute": "notified-body-full",
+        "determiningRule": "R-MDR-22-III",
+        "regulatoryReadiness": "ready",
+        "firedRules": [
+          {
+            "ruleId": "R-MDR-12-IIa",
+            "annexViiiRule": 12,
+            "deviceClass": "IIa",
+            "category": "active",
+            "description": "Active device administering or removing medicinal substances"
+          },
+          {
+            "ruleId": "R-MDR-22-III",
+            "annexViiiRule": 22,
+            "deviceClass": "III",
+            "category": "active",
+            "description": "Active therapeutic device with integrated or incorporated diagnostic closed-loop function"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-NB-001",
+            "category": "notified-body-required",
+            "priority": "medium",
+            "description": "Class III requires notified-body involvement.",
+            "suggestedAction": "Select and engage a notified body early."
+          }
+        ]
+      }
+    },
+    {
+      "name": "ivd-out-of-scope",
+      "description": "In vitro diagnostic: blocked, IVDR applies.",
+      "state": {
+        "intendedPurpose": "In vitro diagnostic: blocked, IVDR applies.",
+        "clinicalEvidenceStatus": "complete",
+        "riskManagementFileIso14971": "yes",
+        "qualityManagementSystemIso13485": "yes",
+        "cybersecurityAssessmentDone": "yes",
+        "postMarketSurveillancePlan": "yes",
+        "uniqueDeviceIdentifierAssigned": "yes",
+        "isInVitroDiagnostic": "yes",
+        "deviceKind": "non-invasive"
+      },
+      "expected": {
+        "computedDeviceClass": "",
+        "finalDeviceClass": "",
+        "classSuffix": "",
+        "overrideReason": "",
+        "conformityRoute": "",
+        "determiningRule": "",
+        "regulatoryReadiness": "blocked",
+        "firedRules": [],
+        "additionalFlags": [
+          {
+            "flagId": "F-IVD-001",
+            "category": "in-vitro-diagnostic-out-of-scope",
+            "priority": "high",
+            "description": "In vitro diagnostic devices are classified under IVDR 2017/746, not MDR Annex VIII.",
+            "suggestedAction": "Use the IVDR classification rules."
+          }
+        ]
+      }
+    },
+    {
+      "name": "gaps-class-iia",
+      "description": "Class IIa device with no risk file, no QMS: readiness gaps.",
+      "state": {
+        "intendedPurpose": "Class IIa device with no risk file, no QMS: readiness gaps.",
+        "clinicalEvidenceStatus": "complete",
+        "riskManagementFileIso14971": "no",
+        "qualityManagementSystemIso13485": "",
+        "cybersecurityAssessmentDone": "yes",
+        "postMarketSurveillancePlan": "yes",
+        "uniqueDeviceIdentifierAssigned": "yes",
+        "deviceKind": "invasive-body-orifice",
+        "contactDuration": "short-term",
+        "bodySite": "other-orifice"
+      },
+      "expected": {
+        "computedDeviceClass": "IIa",
+        "finalDeviceClass": "IIa",
+        "classSuffix": "",
+        "overrideReason": "",
+        "conformityRoute": "notified-body-full",
+        "determiningRule": "R-MDR-5-IIa",
+        "regulatoryReadiness": "gaps",
+        "firedRules": [
+          {
+            "ruleId": "R-MDR-5-IIa",
+            "annexViiiRule": 5,
+            "deviceClass": "IIa",
+            "category": "invasive",
+            "description": "Short-term use via body orifice"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-NB-001",
+            "category": "notified-body-required",
+            "priority": "medium",
+            "description": "Class IIa requires notified-body involvement.",
+            "suggestedAction": "Select and engage a notified body early."
+          },
+          {
+            "flagId": "F-RISK-001",
+            "category": "risk-management-gap",
+            "priority": "high",
+            "description": "No ISO 14971 risk management file.",
+            "suggestedAction": "Establish the risk management file."
+          },
+          {
+            "flagId": "F-QMS-001",
+            "category": "quality-system-gap",
+            "priority": "high",
+            "description": "No ISO 13485 quality management system.",
+            "suggestedAction": "Implement a QMS."
+          }
+        ]
+      }
+    },
+    {
+      "name": "override-down",
+      "description": "Assessor overrides computed IIb to IIa with reason: class-override flag.",
+      "state": {
+        "intendedPurpose": "Assessor overrides computed IIb to IIa with reason: class-override flag.",
+        "clinicalEvidenceStatus": "complete",
+        "riskManagementFileIso14971": "yes",
+        "qualityManagementSystemIso13485": "yes",
+        "cybersecurityAssessmentDone": "yes",
+        "postMarketSurveillancePlan": "yes",
+        "uniqueDeviceIdentifierAssigned": "yes",
+        "deviceKind": "implantable",
+        "bodySite": "tissue",
+        "finalDeviceClass": "IIa",
+        "overrideReason": "Per notified body opinion"
+      },
+      "expected": {
+        "computedDeviceClass": "IIb",
+        "finalDeviceClass": "IIa",
+        "classSuffix": "",
+        "overrideReason": "Per notified body opinion",
+        "conformityRoute": "notified-body-full",
+        "determiningRule": "R-MDR-8-IIb",
+        "regulatoryReadiness": "ready",
+        "firedRules": [
+          {
+            "ruleId": "R-MDR-8-IIb",
+            "annexViiiRule": 8,
+            "deviceClass": "IIb",
+            "category": "implantable",
+            "description": "Implantable, long-term"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-OVERRIDE-001",
+            "category": "class-override",
+            "priority": "high",
+            "description": "Assessor class IIa differs from computed IIb.",
+            "suggestedAction": "Retain the override rationale in the technical file."
+          },
+          {
+            "flagId": "F-NB-001",
+            "category": "notified-body-required",
+            "priority": "medium",
+            "description": "Class IIa requires notified-body involvement.",
+            "suggestedAction": "Select and engage a notified body early."
+          }
+        ]
+      }
+    },
+    {
+      "name": "software-purpose-blank-failsafe",
+      "description": "Software with no purpose recorded: fail-safe IIa.",
+      "state": {
+        "intendedPurpose": "Software with no purpose recorded: fail-safe IIa.",
+        "clinicalEvidenceStatus": "complete",
+        "riskManagementFileIso14971": "yes",
+        "qualityManagementSystemIso13485": "yes",
+        "cybersecurityAssessmentDone": "yes",
+        "postMarketSurveillancePlan": "yes",
+        "uniqueDeviceIdentifierAssigned": "yes",
+        "deviceName": "Bandage",
+        "deviceKind": "software",
+        "bodySite": ""
+      },
+      "expected": {
+        "computedDeviceClass": "IIa",
+        "finalDeviceClass": "IIa",
+        "classSuffix": "",
+        "overrideReason": "",
+        "conformityRoute": "notified-body-full",
+        "determiningRule": "R-MDR-11-IIa",
+        "regulatoryReadiness": "ready",
+        "firedRules": [
+          {
+            "ruleId": "R-MDR-11-IIa",
+            "annexViiiRule": 11,
+            "deviceClass": "IIa",
+            "category": "software",
+            "description": "Software device with no purpose recorded, assumed to inform decisions"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-SAMD-003",
+            "category": "software-as-medical-device",
+            "priority": "medium",
+            "description": "Software purpose not recorded; class assumed IIa.",
+            "suggestedAction": "Record the software purpose to confirm the class."
+          },
+          {
+            "flagId": "F-SAMD-001",
+            "category": "software-as-medical-device",
+            "priority": "medium",
+            "description": "Device includes software; IEC 62304 lifecycle applies.",
+            "suggestedAction": "Confirm IEC 62304 software safety class and documentation."
+          },
+          {
+            "flagId": "F-NB-001",
+            "category": "notified-body-required",
+            "priority": "medium",
+            "description": "Class IIa requires notified-body involvement.",
+            "suggestedAction": "Select and engage a notified body early."
+          }
+        ]
+      }
+    }
+  ]
+}

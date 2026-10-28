@@ -1,0 +1,280 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: medical_device_assessment
+
+syntax = "proto3";
+
+package form_examples.medical_device_assessment;
+
+enum MedicalDeviceAssessmentStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_REVIEWED = 3;  // reviewed
+  STATUS_URGENT = 4;  // urgent
+}
+
+enum MedicalDeviceAssessmentIntendedUserEnum {
+  INTENDEDUSER_UNSPECIFIED = 0;
+  INTENDEDUSER_PROFESSIONAL = 1;  // professional
+  INTENDEDUSER_LAY_PERSON = 2;  // lay-person
+  INTENDEDUSER_BOTH = 3;  // both
+}
+
+enum MedicalDeviceAssessmentTargetJurisdictionEnum {
+  TARGETJURISDICTION_UNSPECIFIED = 0;
+  TARGETJURISDICTION_EU_MDR = 1;  // eu-mdr
+  TARGETJURISDICTION_UK_MDR = 2;  // uk-mdr
+  TARGETJURISDICTION_BOTH = 3;  // both
+}
+
+enum MedicalDeviceAssessmentIsInVitroDiagnosticEnum {
+  ISINVITRODIAGNOSTIC_UNSPECIFIED = 0;
+  ISINVITRODIAGNOSTIC_YES = 1;  // yes
+  ISINVITRODIAGNOSTIC_NO = 2;  // no
+}
+
+enum MedicalDeviceAssessmentDeviceKindEnum {
+  DEVICEKIND_UNSPECIFIED = 0;
+  DEVICEKIND_NON_INVASIVE = 1;  // non-invasive
+  DEVICEKIND_INVASIVE_BODY_ORIFICE = 2;  // invasive-body-orifice
+  DEVICEKIND_SURGICALLY_INVASIVE = 3;  // surgically-invasive
+  DEVICEKIND_IMPLANTABLE = 4;  // implantable
+  DEVICEKIND_ACTIVE = 5;  // active
+  DEVICEKIND_SOFTWARE = 6;  // software
+  DEVICEKIND_OTHER = 7;  // other
+}
+
+enum MedicalDeviceAssessmentContactDurationEnum {
+  CONTACTDURATION_UNSPECIFIED = 0;
+  CONTACTDURATION_TRANSIENT = 1;  // transient
+  CONTACTDURATION_SHORT_TERM = 2;  // short-term
+  CONTACTDURATION_LONG_TERM = 3;  // long-term
+}
+
+enum MedicalDeviceAssessmentBodySiteEnum {
+  BODYSITE_UNSPECIFIED = 0;
+  BODYSITE_INTACT_SKIN = 1;  // intact-skin
+  BODYSITE_WOUNDED_SKIN = 2;  // wounded-skin
+  BODYSITE_ORAL_NASAL_EAR = 3;  // oral-nasal-ear
+  BODYSITE_OTHER_ORIFICE = 4;  // other-orifice
+  BODYSITE_TISSUE = 5;  // tissue
+  BODYSITE_CENTRAL_CIRCULATORY_SYSTEM = 6;  // central-circulatory-system
+  BODYSITE_CENTRAL_NERVOUS_SYSTEM = 7;  // central-nervous-system
+  BODYSITE_HEART = 8;  // heart
+  BODYSITE_OTHER = 9;  // other
+}
+
+enum MedicalDeviceAssessmentChannelsOrStoresBodySubstancesEnum {
+  CHANNELSORSTORESBODYSUBSTANCES_UNSPECIFIED = 0;
+  CHANNELSORSTORESBODYSUBSTANCES_YES = 1;  // yes
+  CHANNELSORSTORESBODYSUBSTANCES_NO = 2;  // no
+}
+
+enum MedicalDeviceAssessmentConnectedToActiveDeviceClassIiaOrHigherEnum {
+  CONNECTEDTOACTIVEDEVICECLASSIIAORHIGHER_UNSPECIFIED = 0;
+  CONNECTEDTOACTIVEDEVICECLASSIIAORHIGHER_YES = 1;  // yes
+  CONNECTEDTOACTIVEDEVICECLASSIIAORHIGHER_NO = 2;  // no
+}
+
+enum MedicalDeviceAssessmentReusableSurgicalInstrumentEnum {
+  REUSABLESURGICALINSTRUMENT_UNSPECIFIED = 0;
+  REUSABLESURGICALINSTRUMENT_YES = 1;  // yes
+  REUSABLESURGICALINSTRUMENT_NO = 2;  // no
+}
+
+enum MedicalDeviceAssessmentActiveTherapeuticEnum {
+  ACTIVETHERAPEUTIC_UNSPECIFIED = 0;
+  ACTIVETHERAPEUTIC_YES = 1;  // yes
+  ACTIVETHERAPEUTIC_NO = 2;  // no
+}
+
+enum MedicalDeviceAssessmentActiveDiagnosticEnum {
+  ACTIVEDIAGNOSTIC_UNSPECIFIED = 0;
+  ACTIVEDIAGNOSTIC_YES = 1;  // yes
+  ACTIVEDIAGNOSTIC_NO = 2;  // no
+}
+
+enum MedicalDeviceAssessmentAdministersOrExchangesEnergyEnum {
+  ADMINISTERSOREXCHANGESENERGY_UNSPECIFIED = 0;
+  ADMINISTERSOREXCHANGESENERGY_YES = 1;  // yes
+  ADMINISTERSOREXCHANGESENERGY_NO = 2;  // no
+}
+
+enum MedicalDeviceAssessmentEnergyPotentiallyHazardousEnum {
+  ENERGYPOTENTIALLYHAZARDOUS_UNSPECIFIED = 0;
+  ENERGYPOTENTIALLYHAZARDOUS_YES = 1;  // yes
+  ENERGYPOTENTIALLYHAZARDOUS_NO = 2;  // no
+}
+
+enum MedicalDeviceAssessmentAdministersOrRemovesMedicinalSubstancesEnum {
+  ADMINISTERSORREMOVESMEDICINALSUBSTANCES_UNSPECIFIED = 0;
+  ADMINISTERSORREMOVESMEDICINALSUBSTANCES_YES = 1;  // yes
+  ADMINISTERSORREMOVESMEDICINALSUBSTANCES_NO = 2;  // no
+}
+
+enum MedicalDeviceAssessmentAdministrationPotentiallyHazardousEnum {
+  ADMINISTRATIONPOTENTIALLYHAZARDOUS_UNSPECIFIED = 0;
+  ADMINISTRATIONPOTENTIALLYHAZARDOUS_YES = 1;  // yes
+  ADMINISTRATIONPOTENTIALLYHAZARDOUS_NO = 2;  // no
+}
+
+enum MedicalDeviceAssessmentMonitorsVitalPhysiologicalParametersEnum {
+  MONITORSVITALPHYSIOLOGICALPARAMETERS_UNSPECIFIED = 0;
+  MONITORSVITALPHYSIOLOGICALPARAMETERS_YES = 1;  // yes
+  MONITORSVITALPHYSIOLOGICALPARAMETERS_NO = 2;  // no
+}
+
+enum MedicalDeviceAssessmentClosedLoopTherapyEnum {
+  CLOSEDLOOPTHERAPY_UNSPECIFIED = 0;
+  CLOSEDLOOPTHERAPY_YES = 1;  // yes
+  CLOSEDLOOPTHERAPY_NO = 2;  // no
+}
+
+enum MedicalDeviceAssessmentSoftwarePurposeEnum {
+  SOFTWAREPURPOSE_UNSPECIFIED = 0;
+  SOFTWAREPURPOSE_NONE = 1;  // none
+  SOFTWAREPURPOSE_PROVIDES_INFORMATION_FOR_DECISIONS = 2;  // provides-information-for-decisions
+  SOFTWAREPURPOSE_MONITORS_PHYSIOLOGICAL_PROCESSES = 3;  // monitors-physiological-processes
+  SOFTWAREPURPOSE_OTHER = 4;  // other
+}
+
+enum MedicalDeviceAssessmentSoftwareWorstCaseHarmEnum {
+  SOFTWAREWORSTCASEHARM_UNSPECIFIED = 0;
+  SOFTWAREWORSTCASEHARM_DEATH_OR_IRREVERSIBLE_DETERIORATION = 1;  // death-or-irreversible-deterioration
+  SOFTWAREWORSTCASEHARM_SERIOUS_DETERIORATION_OR_SURGICAL_INTERVENTION = 2;  // serious-deterioration-or-surgical-intervention
+  SOFTWAREWORSTCASEHARM_OTHER = 3;  // other
+}
+
+enum MedicalDeviceAssessmentContainsMedicinalSubstanceEnum {
+  CONTAINSMEDICINALSUBSTANCE_UNSPECIFIED = 0;
+  CONTAINSMEDICINALSUBSTANCE_YES = 1;  // yes
+  CONTAINSMEDICINALSUBSTANCE_NO = 2;  // no
+}
+
+enum MedicalDeviceAssessmentContainsHumanOrAnimalTissueEnum {
+  CONTAINSHUMANORANIMALTISSUE_UNSPECIFIED = 0;
+  CONTAINSHUMANORANIMALTISSUE_YES = 1;  // yes
+  CONTAINSHUMANORANIMALTISSUE_NO = 2;  // no
+}
+
+enum MedicalDeviceAssessmentContainsNanomaterialWithHighExposurePotentialEnum {
+  CONTAINSNANOMATERIALWITHHIGHEXPOSUREPOTENTIAL_UNSPECIFIED = 0;
+  CONTAINSNANOMATERIALWITHHIGHEXPOSUREPOTENTIAL_YES = 1;  // yes
+  CONTAINSNANOMATERIALWITHHIGHEXPOSUREPOTENTIAL_NO = 2;  // no
+}
+
+enum MedicalDeviceAssessmentComposedOfAbsorbedSubstancesEnum {
+  COMPOSEDOFABSORBEDSUBSTANCES_UNSPECIFIED = 0;
+  COMPOSEDOFABSORBEDSUBSTANCES_YES = 1;  // yes
+  COMPOSEDOFABSORBEDSUBSTANCES_NO = 2;  // no
+}
+
+enum MedicalDeviceAssessmentContraceptionOrStiPreventionEnum {
+  CONTRACEPTIONORSTIPREVENTION_UNSPECIFIED = 0;
+  CONTRACEPTIONORSTIPREVENTION_YES = 1;  // yes
+  CONTRACEPTIONORSTIPREVENTION_NO = 2;  // no
+}
+
+enum MedicalDeviceAssessmentDisinfectsOrCleansDevicesEnum {
+  DISINFECTSORCLEANSDEVICES_UNSPECIFIED = 0;
+  DISINFECTSORCLEANSDEVICES_YES = 1;  // yes
+  DISINFECTSORCLEANSDEVICES_NO = 2;  // no
+}
+
+enum MedicalDeviceAssessmentSuppliedSterileEnum {
+  SUPPLIEDSTERILE_UNSPECIFIED = 0;
+  SUPPLIEDSTERILE_YES = 1;  // yes
+  SUPPLIEDSTERILE_NO = 2;  // no
+}
+
+enum MedicalDeviceAssessmentHasMeasuringFunctionEnum {
+  HASMEASURINGFUNCTION_UNSPECIFIED = 0;
+  HASMEASURINGFUNCTION_YES = 1;  // yes
+  HASMEASURINGFUNCTION_NO = 2;  // no
+}
+
+enum MedicalDeviceAssessmentClinicalEvidenceStatusEnum {
+  CLINICALEVIDENCESTATUS_UNSPECIFIED = 0;
+  CLINICALEVIDENCESTATUS_COMPLETE = 1;  // complete
+  CLINICALEVIDENCESTATUS_PARTIAL = 2;  // partial
+  CLINICALEVIDENCESTATUS_NONE = 3;  // none
+}
+
+enum MedicalDeviceAssessmentRiskManagementFileIso14971Enum {
+  RISKMANAGEMENTFILEISO14971_UNSPECIFIED = 0;
+  RISKMANAGEMENTFILEISO14971_YES = 1;  // yes
+  RISKMANAGEMENTFILEISO14971_NO = 2;  // no
+}
+
+enum MedicalDeviceAssessmentQualityManagementSystemIso13485Enum {
+  QUALITYMANAGEMENTSYSTEMISO13485_UNSPECIFIED = 0;
+  QUALITYMANAGEMENTSYSTEMISO13485_YES = 1;  // yes
+  QUALITYMANAGEMENTSYSTEMISO13485_NO = 2;  // no
+}
+
+enum MedicalDeviceAssessmentCybersecurityAssessmentDoneEnum {
+  CYBERSECURITYASSESSMENTDONE_UNSPECIFIED = 0;
+  CYBERSECURITYASSESSMENTDONE_YES = 1;  // yes
+  CYBERSECURITYASSESSMENTDONE_NO = 2;  // no
+}
+
+enum MedicalDeviceAssessmentPostMarketSurveillancePlanEnum {
+  POSTMARKETSURVEILLANCEPLAN_UNSPECIFIED = 0;
+  POSTMARKETSURVEILLANCEPLAN_YES = 1;  // yes
+  POSTMARKETSURVEILLANCEPLAN_NO = 2;  // no
+}
+
+enum MedicalDeviceAssessmentUniqueDeviceIdentifierAssignedEnum {
+  UNIQUEDEVICEIDENTIFIERASSIGNED_UNSPECIFIED = 0;
+  UNIQUEDEVICEIDENTIFIERASSIGNED_YES = 1;  // yes
+  UNIQUEDEVICEIDENTIFIERASSIGNED_NO = 2;  // no
+}
+
+message MedicalDeviceAssessment {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string manufacturer_id = 5;  // UUID — uuid
+  string assessor_id = 6;  // UUID — uuid
+  MedicalDeviceAssessmentStatusEnum status = 7;  // VARCHAR(20)
+  string assessment_date = 8;  // DATE — iso 8601 date
+  string device_name = 9;  // VARCHAR(255) — max 255 chars
+  string model_or_catalogue_number = 10;  // VARCHAR(100) — max 100 chars
+  string unique_device_identifier = 11;  // VARCHAR(255) — max 255 chars
+  string intended_purpose = 12;  // TEXT
+  MedicalDeviceAssessmentIntendedUserEnum intended_user = 13;  // VARCHAR(20)
+  MedicalDeviceAssessmentTargetJurisdictionEnum target_jurisdiction = 14;  // VARCHAR(10)
+  MedicalDeviceAssessmentIsInVitroDiagnosticEnum is_in_vitro_diagnostic = 15;  // VARCHAR(5)
+  MedicalDeviceAssessmentDeviceKindEnum device_kind = 16;  // VARCHAR(25)
+  MedicalDeviceAssessmentContactDurationEnum contact_duration = 17;  // VARCHAR(15)
+  MedicalDeviceAssessmentBodySiteEnum body_site = 18;  // VARCHAR(30)
+  MedicalDeviceAssessmentChannelsOrStoresBodySubstancesEnum channels_or_stores_body_substances = 19;  // VARCHAR(5)
+  MedicalDeviceAssessmentConnectedToActiveDeviceClassIiaOrHigherEnum connected_to_active_device_class_iia_or_higher = 20;  // VARCHAR(5)
+  MedicalDeviceAssessmentReusableSurgicalInstrumentEnum reusable_surgical_instrument = 21;  // VARCHAR(5)
+  MedicalDeviceAssessmentActiveTherapeuticEnum active_therapeutic = 22;  // VARCHAR(5)
+  MedicalDeviceAssessmentActiveDiagnosticEnum active_diagnostic = 23;  // VARCHAR(5)
+  MedicalDeviceAssessmentAdministersOrExchangesEnergyEnum administers_or_exchanges_energy = 24;  // VARCHAR(5)
+  MedicalDeviceAssessmentEnergyPotentiallyHazardousEnum energy_potentially_hazardous = 25;  // VARCHAR(5)
+  MedicalDeviceAssessmentAdministersOrRemovesMedicinalSubstancesEnum administers_or_removes_medicinal_substances = 26;  // VARCHAR(5)
+  MedicalDeviceAssessmentAdministrationPotentiallyHazardousEnum administration_potentially_hazardous = 27;  // VARCHAR(5)
+  MedicalDeviceAssessmentMonitorsVitalPhysiologicalParametersEnum monitors_vital_physiological_parameters = 28;  // VARCHAR(5)
+  MedicalDeviceAssessmentClosedLoopTherapyEnum closed_loop_therapy = 29;  // VARCHAR(5)
+  MedicalDeviceAssessmentSoftwarePurposeEnum software_purpose = 30;  // VARCHAR(40)
+  MedicalDeviceAssessmentSoftwareWorstCaseHarmEnum software_worst_case_harm = 31;  // VARCHAR(50)
+  MedicalDeviceAssessmentContainsMedicinalSubstanceEnum contains_medicinal_substance = 32;  // VARCHAR(5)
+  MedicalDeviceAssessmentContainsHumanOrAnimalTissueEnum contains_human_or_animal_tissue = 33;  // VARCHAR(5)
+  MedicalDeviceAssessmentContainsNanomaterialWithHighExposurePotentialEnum contains_nanomaterial_with_high_exposure_potential = 34;  // VARCHAR(5)
+  MedicalDeviceAssessmentComposedOfAbsorbedSubstancesEnum composed_of_absorbed_substances = 35;  // VARCHAR(5)
+  MedicalDeviceAssessmentContraceptionOrStiPreventionEnum contraception_or_sti_prevention = 36;  // VARCHAR(5)
+  MedicalDeviceAssessmentDisinfectsOrCleansDevicesEnum disinfects_or_cleans_devices = 37;  // VARCHAR(5)
+  MedicalDeviceAssessmentSuppliedSterileEnum supplied_sterile = 38;  // VARCHAR(5)
+  MedicalDeviceAssessmentHasMeasuringFunctionEnum has_measuring_function = 39;  // VARCHAR(5)
+  MedicalDeviceAssessmentClinicalEvidenceStatusEnum clinical_evidence_status = 40;  // VARCHAR(10)
+  MedicalDeviceAssessmentRiskManagementFileIso14971Enum risk_management_file_iso_14971 = 41;  // VARCHAR(5)
+  MedicalDeviceAssessmentQualityManagementSystemIso13485Enum quality_management_system_iso_13485 = 42;  // VARCHAR(5)
+  MedicalDeviceAssessmentCybersecurityAssessmentDoneEnum cybersecurity_assessment_done = 43;  // VARCHAR(5)
+  MedicalDeviceAssessmentPostMarketSurveillancePlanEnum post_market_surveillance_plan = 44;  // VARCHAR(5)
+  MedicalDeviceAssessmentUniqueDeviceIdentifierAssignedEnum unique_device_identifier_assigned = 45;  // VARCHAR(5)
+  string assessor_notes = 46;  // TEXT
+}

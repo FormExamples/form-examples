@@ -1,0 +1,176 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: medical_device_assessment_grade_flag
+openapi: 3.1.0
+info:
+  title: Medical Device Assessment — MedicalDeviceAssessmentGradeFlag
+  version: 1.0.0
+  description: Medical device assessment grade flag.
+paths:
+  /medical-device-assessment-grade-flags:
+    get:
+      summary: List MedicalDeviceAssessmentGradeFlag records
+      operationId: listMedicalDeviceAssessmentGradeFlag
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicalDeviceAssessmentGradeFlag records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicalDeviceAssessmentGradeFlag"
+    post:
+      summary: Create a new MedicalDeviceAssessmentGradeFlag
+      operationId: createMedicalDeviceAssessmentGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalDeviceAssessmentGradeFlag"
+      responses:
+        "201":
+          description: The newly created MedicalDeviceAssessmentGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalDeviceAssessmentGradeFlag"
+        "400":
+          description: Validation error
+  /medical-device-assessment-grade-flags/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicalDeviceAssessmentGradeFlag by id
+      operationId: getMedicalDeviceAssessmentGradeFlag
+      responses:
+        "200":
+          description: The requested MedicalDeviceAssessmentGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalDeviceAssessmentGradeFlag"
+        "404":
+          description: MedicalDeviceAssessmentGradeFlag not found
+    patch:
+      summary: Update an existing MedicalDeviceAssessmentGradeFlag
+      operationId: updateMedicalDeviceAssessmentGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalDeviceAssessmentGradeFlag"
+      responses:
+        "200":
+          description: The updated MedicalDeviceAssessmentGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalDeviceAssessmentGradeFlag"
+        "404":
+          description: MedicalDeviceAssessmentGradeFlag not found
+    delete:
+      summary: Soft-delete a MedicalDeviceAssessmentGradeFlag
+      operationId: deleteMedicalDeviceAssessmentGradeFlag
+      responses:
+        "204":
+          description: MedicalDeviceAssessmentGradeFlag deleted
+        "404":
+          description: MedicalDeviceAssessmentGradeFlag not found
+components:
+  schemas:
+    MedicalDeviceAssessmentGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Soft-delete timestamp; NULL when the row is live.
+        medical_device_assessment_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the medical_device_assessment_grade table.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Flag ID.
+        category:
+          type: string
+          enum:
+            - missing-intended-purpose
+            - clinical-evidence-gap
+            - risk-management-gap
+            - quality-system-gap
+            - cybersecurity-gap
+            - post-market-surveillance-gap
+            - udi-gap
+            - notified-body-required
+            - software-as-medical-device
+            - medicinal-substance-combination
+            - tissue-origin
+            - nanomaterial
+            - in-vitro-diagnostic-out-of-scope
+            - class-override
+            - other
+            - ""
+          description: "Category. One of: missing-intended-purpose, clinical-evidence-gap, risk-management-gap, quality-system-gap, cybersecurity-gap, post-market-surveillance-gap, udi-gap, notified-body-required, …."
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - ""
+          description: "Priority. One of: low, medium, high."
+        description:
+          type: string
+          maxLength: 500
+          description: Description.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: Suggested action.
+      required:
+        - created_at
+        - updated_at
+        - medical_device_assessment_grade_id
+        - flag_id
+        - category
+        - priority
+        - description
+        - suggested_action
+      description: Medical device assessment grade flag.

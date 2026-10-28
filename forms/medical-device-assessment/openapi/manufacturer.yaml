@@ -1,0 +1,158 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: manufacturer
+openapi: 3.1.0
+info:
+  title: Medical Device Assessment — Manufacturer
+  version: 1.0.0
+  description: Manufacturer.
+paths:
+  /manufacturers:
+    get:
+      summary: List Manufacturer records
+      operationId: listManufacturer
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Manufacturer records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Manufacturer"
+    post:
+      summary: Create a new Manufacturer
+      operationId: createManufacturer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Manufacturer"
+      responses:
+        "201":
+          description: The newly created Manufacturer
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Manufacturer"
+        "400":
+          description: Validation error
+  /manufacturers/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Manufacturer by id
+      operationId: getManufacturer
+      responses:
+        "200":
+          description: The requested Manufacturer
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Manufacturer"
+        "404":
+          description: Manufacturer not found
+    patch:
+      summary: Update an existing Manufacturer
+      operationId: updateManufacturer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Manufacturer"
+      responses:
+        "200":
+          description: The updated Manufacturer
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Manufacturer"
+        "404":
+          description: Manufacturer not found
+    delete:
+      summary: Soft-delete a Manufacturer
+      operationId: deleteManufacturer
+      responses:
+        "204":
+          description: Manufacturer deleted
+        "404":
+          description: Manufacturer not found
+components:
+  schemas:
+    Manufacturer:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Soft-delete timestamp; NULL when the row is live.
+        name:
+          type: string
+          description: Name.
+        email:
+          type: string
+          description: Email.
+        phone:
+          type: string
+          description: Phone.
+        postal_address_as_full_text:
+          type: string
+          description: Postal address as full text.
+        country_as_iso_3166_1_alpha_2:
+          type: string
+          maxLength: 2
+          description: Country as iso 3166 1 alpha 2.
+        postcode:
+          type: string
+          description: Postcode.
+        single_registration_number:
+          type: string
+          description: Single registration number.
+        authorized_representative_name:
+          type: string
+          description: Authorized representative name.
+        united_kingdom_responsible_person_name:
+          type: string
+          description: United kingdom responsible person name.
+      required:
+        - created_at
+        - updated_at
+        - name
+        - single_registration_number
+        - authorized_representative_name
+        - united_kingdom_responsible_person_name
+      description: Manufacturer.

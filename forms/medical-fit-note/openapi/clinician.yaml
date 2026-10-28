@@ -1,0 +1,168 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: clinician
+openapi: 3.1.0
+info:
+  title: Medical Fit Note — Clinician
+  version: 1.0.0
+  description: Clinician.
+paths:
+  /clinicians:
+    get:
+      summary: List Clinician records
+      operationId: listClinician
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of Clinician records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Clinician"
+    post:
+      summary: Create a new Clinician
+      operationId: createClinician
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Clinician"
+      responses:
+        "201":
+          description: The newly created Clinician
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Clinician"
+        "400":
+          description: Validation error
+  /clinicians/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Clinician by id
+      operationId: getClinician
+      responses:
+        "200":
+          description: The requested Clinician
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Clinician"
+        "404":
+          description: Clinician not found
+    patch:
+      summary: Update an existing Clinician
+      operationId: updateClinician
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Clinician"
+      responses:
+        "200":
+          description: The updated Clinician
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Clinician"
+        "404":
+          description: Clinician not found
+    delete:
+      summary: Soft-delete a Clinician
+      operationId: deleteClinician
+      responses:
+        "204":
+          description: Clinician deleted
+        "404":
+          description: Clinician not found
+components:
+  schemas:
+    Clinician:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Soft-delete timestamp; NULL when the row is live.
+        name:
+          type: string
+          description: Name.
+        email:
+          type: string
+          description: Email.
+        phone:
+          type: string
+          description: Phone.
+        role:
+          type: string
+          enum:
+            - gp
+            - hospital-doctor
+            - nurse
+            - occupational-therapist
+            - pharmacist
+            - physiotherapist
+            - other
+            - ""
+          description: "Role. One of: gp, hospital-doctor, nurse, occupational-therapist, pharmacist, physiotherapist, other."
+        registration_body:
+          type: string
+          enum:
+            - GMC
+            - NMC
+            - HCPC
+            - GPhC
+            - other
+            - ""
+          description: "Registration body. One of: GMC, NMC, HCPC, GPhC, other."
+        registration_number:
+          type: string
+          description: Registration number.
+        practice_name:
+          type: string
+          description: Practice name.
+      required:
+        - created_at
+        - updated_at
+        - name
+        - role
+        - registration_body
+        - registration_number
+        - practice_name
+      description: Clinician.

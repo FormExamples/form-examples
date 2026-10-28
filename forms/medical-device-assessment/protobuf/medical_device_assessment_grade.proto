@@ -1,0 +1,65 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: medical_device_assessment_grade
+
+syntax = "proto3";
+
+package form_examples.medical_device_assessment;
+
+enum MedicalDeviceAssessmentGradeComputedDeviceClassEnum {
+  COMPUTEDDEVICECLASS_UNSPECIFIED = 0;
+  COMPUTEDDEVICECLASS_I = 1;  // I
+  COMPUTEDDEVICECLASS_IIA = 2;  // IIa
+  COMPUTEDDEVICECLASS_IIB = 3;  // IIb
+  COMPUTEDDEVICECLASS_III = 4;  // III
+}
+
+enum MedicalDeviceAssessmentGradeFinalDeviceClassEnum {
+  FINALDEVICECLASS_UNSPECIFIED = 0;
+  FINALDEVICECLASS_I = 1;  // I
+  FINALDEVICECLASS_IIA = 2;  // IIa
+  FINALDEVICECLASS_IIB = 3;  // IIb
+  FINALDEVICECLASS_III = 4;  // III
+}
+
+enum MedicalDeviceAssessmentGradeClassSuffixEnum {
+  CLASSSUFFIX_UNSPECIFIED = 0;
+  CLASSSUFFIX_S = 1;  // s
+  CLASSSUFFIX_M = 2;  // m
+  CLASSSUFFIX_R = 3;  // r
+  CLASSSUFFIX_SM = 4;  // sm
+  CLASSSUFFIX_SR = 5;  // sr
+  CLASSSUFFIX_MR = 6;  // mr
+  CLASSSUFFIX_SMR = 7;  // smr
+}
+
+enum MedicalDeviceAssessmentGradeConformityRouteEnum {
+  CONFORMITYROUTE_UNSPECIFIED = 0;
+  CONFORMITYROUTE_SELF_DECLARATION = 1;  // self-declaration
+  CONFORMITYROUTE_NOTIFIED_BODY_PARTIAL = 2;  // notified-body-partial
+  CONFORMITYROUTE_NOTIFIED_BODY_FULL = 3;  // notified-body-full
+}
+
+enum MedicalDeviceAssessmentGradeRegulatoryReadinessEnum {
+  REGULATORYREADINESS_UNSPECIFIED = 0;
+  REGULATORYREADINESS_READY = 1;  // ready
+  REGULATORYREADINESS_GAPS = 2;  // gaps
+  REGULATORYREADINESS_BLOCKED = 3;  // blocked
+}
+
+message MedicalDeviceAssessmentGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string medical_device_assessment_id = 5;  // UUID — uuid
+  MedicalDeviceAssessmentGradeComputedDeviceClassEnum computed_device_class = 6;  // VARCHAR(5)
+  MedicalDeviceAssessmentGradeFinalDeviceClassEnum final_device_class = 7;  // VARCHAR(5)
+  MedicalDeviceAssessmentGradeClassSuffixEnum class_suffix = 8;  // VARCHAR(5)
+  string override_reason = 9;  // VARCHAR(500) — max 500 chars
+  MedicalDeviceAssessmentGradeConformityRouteEnum conformity_route = 10;  // VARCHAR(30)
+  string determining_rule = 11;  // VARCHAR(20) — max 20 chars
+  MedicalDeviceAssessmentGradeRegulatoryReadinessEnum regulatory_readiness = 12;  // VARCHAR(10)
+  string assessor_notes = 13;  // TEXT
+  string signed_at = 14;  // TIMESTAMPTZ — iso 8601
+  string graded_at = 15;  // TIMESTAMPTZ — iso 8601
+}

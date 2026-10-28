@@ -1,0 +1,98 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: medical_fit_note
+
+syntax = "proto3";
+
+package form_examples.medical_fit_note;
+
+enum MedicalFitNoteStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SIGNED = 2;  // signed
+  STATUS_ISSUED = 3;  // issued
+  STATUS_CANCELLED = 4;  // cancelled
+}
+
+enum MedicalFitNoteAssessmentMethodEnum {
+  ASSESSMENTMETHOD_UNSPECIFIED = 0;
+  ASSESSMENTMETHOD_FACE_TO_FACE = 1;  // face-to-face
+  ASSESSMENTMETHOD_VIDEO = 2;  // video
+  ASSESSMENTMETHOD_TELEPHONE = 3;  // telephone
+  ASSESSMENTMETHOD_RECORDS_REVIEW = 4;  // records-review
+}
+
+enum MedicalFitNoteFitnessAdviceEnum {
+  FITNESSADVICE_UNSPECIFIED = 0;
+  FITNESSADVICE_NOT_FIT_FOR_WORK = 1;  // not-fit-for-work
+  FITNESSADVICE_MAY_BE_FIT_FOR_WORK = 2;  // may-be-fit-for-work
+}
+
+enum MedicalFitNoteReassessmentRequiredEnum {
+  REASSESSMENTREQUIRED_UNSPECIFIED = 0;
+  REASSESSMENTREQUIRED_YES = 1;  // yes
+  REASSESSMENTREQUIRED_NO = 2;  // no
+}
+
+enum MedicalFitNoteAdjustmentPhasedReturnEnum {
+  ADJUSTMENTPHASEDRETURN_UNSPECIFIED = 0;
+  ADJUSTMENTPHASEDRETURN_YES = 1;  // yes
+  ADJUSTMENTPHASEDRETURN_NO = 2;  // no
+}
+
+enum MedicalFitNoteAdjustmentAlteredHoursEnum {
+  ADJUSTMENTALTEREDHOURS_UNSPECIFIED = 0;
+  ADJUSTMENTALTEREDHOURS_YES = 1;  // yes
+  ADJUSTMENTALTEREDHOURS_NO = 2;  // no
+}
+
+enum MedicalFitNoteAdjustmentAmendedDutiesEnum {
+  ADJUSTMENTAMENDEDDUTIES_UNSPECIFIED = 0;
+  ADJUSTMENTAMENDEDDUTIES_YES = 1;  // yes
+  ADJUSTMENTAMENDEDDUTIES_NO = 2;  // no
+}
+
+enum MedicalFitNoteAdjustmentWorkplaceAdaptationsEnum {
+  ADJUSTMENTWORKPLACEADAPTATIONS_UNSPECIFIED = 0;
+  ADJUSTMENTWORKPLACEADAPTATIONS_YES = 1;  // yes
+  ADJUSTMENTWORKPLACEADAPTATIONS_NO = 2;  // no
+}
+
+enum MedicalFitNoteEmployeeConsentToShareEnum {
+  EMPLOYEECONSENTTOSHARE_UNSPECIFIED = 0;
+  EMPLOYEECONSENTTOSHARE_YES = 1;  // yes
+  EMPLOYEECONSENTTOSHARE_NO = 2;  // no
+}
+
+enum MedicalFitNoteClinicianDeclarationEnum {
+  CLINICIANDECLARATION_UNSPECIFIED = 0;
+  CLINICIANDECLARATION_YES = 1;  // yes
+  CLINICIANDECLARATION_NO = 2;  // no
+}
+
+message MedicalFitNote {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string employee_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  MedicalFitNoteStatusEnum status = 7;  // VARCHAR(20)
+  string assessment_date = 8;  // DATE — iso 8601 date
+  MedicalFitNoteAssessmentMethodEnum assessment_method = 9;  // VARCHAR(20)
+  string diagnosis_primary = 10;  // VARCHAR(255) — max 255 chars
+  string diagnosis_additional = 11;  // VARCHAR(500) — max 500 chars
+  MedicalFitNoteFitnessAdviceEnum fitness_advice = 12;  // VARCHAR(30)
+  string period_from = 13;  // DATE — iso 8601 date
+  string period_to = 14;  // DATE — iso 8601 date
+  int32 period_duration_days = 15;  // INTEGER
+  MedicalFitNoteReassessmentRequiredEnum reassessment_required = 16;  // VARCHAR(5)
+  MedicalFitNoteAdjustmentPhasedReturnEnum adjustment_phased_return = 17;  // VARCHAR(5)
+  MedicalFitNoteAdjustmentAlteredHoursEnum adjustment_altered_hours = 18;  // VARCHAR(5)
+  MedicalFitNoteAdjustmentAmendedDutiesEnum adjustment_amended_duties = 19;  // VARCHAR(5)
+  MedicalFitNoteAdjustmentWorkplaceAdaptationsEnum adjustment_workplace_adaptations = 20;  // VARCHAR(5)
+  string functional_effects = 21;  // TEXT
+  string comments = 22;  // TEXT
+  MedicalFitNoteEmployeeConsentToShareEnum employee_consent_to_share = 23;  // VARCHAR(5)
+  MedicalFitNoteClinicianDeclarationEnum clinician_declaration = 24;  // VARCHAR(5)
+  string signed_at = 25;  // TIMESTAMPTZ — iso 8601
+}

@@ -1,0 +1,455 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: medical_device_assessment
+openapi: 3.1.0
+info:
+  title: Medical Device Assessment — MedicalDeviceAssessment
+  version: 1.0.0
+  description: Medical device assessment.
+paths:
+  /medical-device-assessments:
+    get:
+      summary: List MedicalDeviceAssessment records
+      operationId: listMedicalDeviceAssessment
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicalDeviceAssessment records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicalDeviceAssessment"
+    post:
+      summary: Create a new MedicalDeviceAssessment
+      operationId: createMedicalDeviceAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalDeviceAssessment"
+      responses:
+        "201":
+          description: The newly created MedicalDeviceAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalDeviceAssessment"
+        "400":
+          description: Validation error
+  /medical-device-assessments/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicalDeviceAssessment by id
+      operationId: getMedicalDeviceAssessment
+      responses:
+        "200":
+          description: The requested MedicalDeviceAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalDeviceAssessment"
+        "404":
+          description: MedicalDeviceAssessment not found
+    patch:
+      summary: Update an existing MedicalDeviceAssessment
+      operationId: updateMedicalDeviceAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalDeviceAssessment"
+      responses:
+        "200":
+          description: The updated MedicalDeviceAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalDeviceAssessment"
+        "404":
+          description: MedicalDeviceAssessment not found
+    delete:
+      summary: Soft-delete a MedicalDeviceAssessment
+      operationId: deleteMedicalDeviceAssessment
+      responses:
+        "204":
+          description: MedicalDeviceAssessment deleted
+        "404":
+          description: MedicalDeviceAssessment not found
+components:
+  schemas:
+    MedicalDeviceAssessment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Soft-delete timestamp; NULL when the row is live.
+        manufacturer_id:
+          type: string
+          format: uuid
+          description: Foreign key to the manufacturer table.
+        assessor_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessor table.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - reviewed
+            - urgent
+          description: Lifecycle status of this row.
+        assessment_date:
+          type: string
+          format: date
+          description: Assessment date.
+        device_name:
+          type: string
+          maxLength: 255
+          description: Device name.
+        model_or_catalogue_number:
+          type: string
+          maxLength: 100
+          description: Model or catalogue number.
+        unique_device_identifier:
+          type: string
+          maxLength: 255
+          description: Unique device identifier.
+        intended_purpose:
+          type: string
+          description: Intended purpose.
+        intended_user:
+          type: string
+          enum:
+            - professional
+            - lay-person
+            - both
+            - ""
+          description: "Intended user. One of: professional, lay-person, both."
+        target_jurisdiction:
+          type: string
+          enum:
+            - eu-mdr
+            - uk-mdr
+            - both
+            - ""
+          description: "Target jurisdiction. One of: eu-mdr, uk-mdr, both."
+        is_in_vitro_diagnostic:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Is in vitro diagnostic. One of: yes, no."
+        device_kind:
+          type: string
+          enum:
+            - non-invasive
+            - invasive-body-orifice
+            - surgically-invasive
+            - implantable
+            - active
+            - software
+            - other
+            - ""
+          description: "Device kind. One of: non-invasive, invasive-body-orifice, surgically-invasive, implantable, active, software, other."
+        contact_duration:
+          type: string
+          enum:
+            - transient
+            - short-term
+            - long-term
+            - ""
+          description: "Contact duration. One of: transient, short-term, long-term."
+        body_site:
+          type: string
+          enum:
+            - intact-skin
+            - wounded-skin
+            - oral-nasal-ear
+            - other-orifice
+            - tissue
+            - central-circulatory-system
+            - central-nervous-system
+            - heart
+            - other
+            - ""
+          description: "Body site. One of: intact-skin, wounded-skin, oral-nasal-ear, other-orifice, tissue, central-circulatory-system, central-nervous-system, heart, …."
+        channels_or_stores_body_substances:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Channels or stores body substances. One of: yes, no."
+        connected_to_active_device_class_iia_or_higher:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Connected to active device class iia or higher. One of: yes, no."
+        reusable_surgical_instrument:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Reusable surgical instrument. One of: yes, no."
+        active_therapeutic:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Active therapeutic. One of: yes, no."
+        active_diagnostic:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Active diagnostic. One of: yes, no."
+        administers_or_exchanges_energy:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Administers or exchanges energy. One of: yes, no."
+        energy_potentially_hazardous:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Energy potentially hazardous. One of: yes, no."
+        administers_or_removes_medicinal_substances:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Administers or removes medicinal substances. One of: yes, no."
+        administration_potentially_hazardous:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Administration potentially hazardous. One of: yes, no."
+        monitors_vital_physiological_parameters:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Monitors vital physiological parameters. One of: yes, no."
+        closed_loop_therapy:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Closed loop therapy. One of: yes, no."
+        software_purpose:
+          type: string
+          enum:
+            - none
+            - provides-information-for-decisions
+            - monitors-physiological-processes
+            - other
+            - ""
+          description: "Software purpose. One of: none, provides-information-for-decisions, monitors-physiological-processes, other."
+        software_worst_case_harm:
+          type: string
+          enum:
+            - death-or-irreversible-deterioration
+            - serious-deterioration-or-surgical-intervention
+            - other
+            - ""
+          description: "Software worst case harm. One of: death-or-irreversible-deterioration, serious-deterioration-or-surgical-intervention, other."
+        contains_medicinal_substance:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Contains medicinal substance. One of: yes, no."
+        contains_human_or_animal_tissue:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Contains human or animal tissue. One of: yes, no."
+        contains_nanomaterial_with_high_exposure_potential:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Contains nanomaterial with high exposure potential. One of: yes, no."
+        composed_of_absorbed_substances:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Composed of absorbed substances. One of: yes, no."
+        contraception_or_sti_prevention:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Contraception or sti prevention. One of: yes, no."
+        disinfects_or_cleans_devices:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Disinfects or cleans devices. One of: yes, no."
+        supplied_sterile:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Supplied sterile. One of: yes, no."
+        has_measuring_function:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Has measuring function. One of: yes, no."
+        clinical_evidence_status:
+          type: string
+          enum:
+            - complete
+            - partial
+            - none
+            - ""
+          description: "Clinical evidence status. One of: complete, partial, none."
+        risk_management_file_iso_14971:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Risk management file iso 14971. One of: yes, no."
+        quality_management_system_iso_13485:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Quality management system iso 13485. One of: yes, no."
+        cybersecurity_assessment_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Cybersecurity assessment done. One of: yes, no."
+        post_market_surveillance_plan:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Post market surveillance plan. One of: yes, no."
+        unique_device_identifier_assigned:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Unique device identifier assigned. One of: yes, no."
+        assessor_notes:
+          type: string
+          description: Assessor notes.
+      required:
+        - created_at
+        - updated_at
+        - manufacturer_id
+        - assessor_id
+        - status
+        - device_name
+        - model_or_catalogue_number
+        - unique_device_identifier
+        - intended_purpose
+        - intended_user
+        - target_jurisdiction
+        - is_in_vitro_diagnostic
+        - device_kind
+        - contact_duration
+        - body_site
+        - channels_or_stores_body_substances
+        - connected_to_active_device_class_iia_or_higher
+        - reusable_surgical_instrument
+        - active_therapeutic
+        - active_diagnostic
+        - administers_or_exchanges_energy
+        - energy_potentially_hazardous
+        - administers_or_removes_medicinal_substances
+        - administration_potentially_hazardous
+        - monitors_vital_physiological_parameters
+        - closed_loop_therapy
+        - software_purpose
+        - software_worst_case_harm
+        - contains_medicinal_substance
+        - contains_human_or_animal_tissue
+        - contains_nanomaterial_with_high_exposure_potential
+        - composed_of_absorbed_substances
+        - contraception_or_sti_prevention
+        - disinfects_or_cleans_devices
+        - supplied_sterile
+        - has_measuring_function
+        - clinical_evidence_status
+        - risk_management_file_iso_14971
+        - quality_management_system_iso_13485
+        - cybersecurity_assessment_done
+        - post_market_surveillance_plan
+        - unique_device_identifier_assigned
+        - assessor_notes
+      description: Medical device assessment.

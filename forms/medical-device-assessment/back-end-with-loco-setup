@@ -1,0 +1,138 @@
+#!/bin/sh
+set -euf
+
+form_kebab_case=medical-device-assessment
+form_snake_case=medical_device_assessment
+
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_development" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
+
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold manufacturer \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    single_registration_number:text! \
+    authorized_representative_name:text! \
+    united_kingdom_responsible_person_name:text! \
+    --api
+
+cargo loco generate scaffold assessor \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    role:text! \
+    organization:text! \
+    --api
+
+cargo loco generate scaffold medical_device_assessment \
+    deleted_at:tstz \
+    manufacturer:references:manufacturer_id \
+    assessor:references:assessor_id \
+    status:string! \
+    assessment_date:date \
+    device_name:string! \
+    model_or_catalogue_number:string! \
+    unique_device_identifier:string! \
+    intended_purpose:text! \
+    intended_user:string! \
+    target_jurisdiction:string! \
+    is_in_vitro_diagnostic:string! \
+    device_kind:string! \
+    contact_duration:string! \
+    body_site:string! \
+    channels_or_stores_body_substances:string! \
+    connected_to_active_device_class_iia_or_higher:string! \
+    reusable_surgical_instrument:string! \
+    active_therapeutic:string! \
+    active_diagnostic:string! \
+    administers_or_exchanges_energy:string! \
+    energy_potentially_hazardous:string! \
+    administers_or_removes_medicinal_substances:string! \
+    administration_potentially_hazardous:string! \
+    monitors_vital_physiological_parameters:string! \
+    closed_loop_therapy:string! \
+    software_purpose:string! \
+    software_worst_case_harm:string! \
+    contains_medicinal_substance:string! \
+    contains_human_or_animal_tissue:string! \
+    contains_nanomaterial_with_high_exposure_potential:string! \
+    composed_of_absorbed_substances:string! \
+    contraception_or_sti_prevention:string! \
+    disinfects_or_cleans_devices:string! \
+    supplied_sterile:string! \
+    has_measuring_function:string! \
+    clinical_evidence_status:string! \
+    risk_management_file_iso_14971:string! \
+    quality_management_system_iso_13485:string! \
+    cybersecurity_assessment_done:string! \
+    post_market_surveillance_plan:string! \
+    unique_device_identifier_assigned:string! \
+    assessor_notes:text! \
+    --api
+
+cargo loco generate scaffold medical_device_assessment_grade \
+    deleted_at:tstz \
+    medical_device_assessment:references:medical_device_assessment_id \
+    computed_device_class:string! \
+    final_device_class:string! \
+    class_suffix:string! \
+    override_reason:string! \
+    conformity_route:string! \
+    determining_rule:string! \
+    regulatory_readiness:string! \
+    assessor_notes:text! \
+    signed_at:tstz \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold medical_device_assessment_grade_rule \
+    deleted_at:tstz \
+    medical_device_assessment_grade:references:grade_id \
+    rule_id:string! \
+    annex_viii_rule:int! \
+    device_class:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold medical_device_assessment_grade_flag \
+    deleted_at:tstz \
+    medical_device_assessment_grade:references:medical_device_assessment_grade_id \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api
+
+# Convert the freshly-scaffolded nested crate into the canonical route
+# layout: back-end-with-loco/src/${form_snake_case}/*.rs
+cd ..
+"$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
+
+# Add #![forbid(unsafe_code)] to each crate root the scaffold created:
+# the library, the -cli binary, the migration library, and the tests.
+"$(git rev-parse --show-toplevel)/bin/loco-forbid-unsafe" "${form_kebab_case}"
+
+# Fix two loco-new scaffold defaults that fail clippy -D warnings:
+# App::seed()'s unused base param, and the test auth_header() helper's
+# redundant &token.
+"$(git rev-parse --show-toplevel)/bin/loco-seed-base-rename" "${form_kebab_case}"
+"$(git rev-parse --show-toplevel)/bin/loco-test-auth-header-fix" "${form_kebab_case}"

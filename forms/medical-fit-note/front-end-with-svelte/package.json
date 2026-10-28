@@ -1,0 +1,61 @@
+{
+  "name": "medical-fit-note-front-end",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": "=26"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "format": "prettier --write .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@sveltejs/adapter-auto": "^8.0.0",
+    "@sveltejs/kit": "^3.1.0",
+    "@sveltejs/vite-plugin-svelte": "^7.3.1",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^26.6.5",
+    "@types/pdfmake": "^0.3.3",
+    "eslint": "^10.13.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-svelte": "^3.23.1",
+    "globals": "^17.13.0",
+    "prettier": "^3.9.10",
+    "prettier-plugin-svelte": "^4.1.1",
+    "svelte": "^5.57.2",
+    "svelte-check": "^4.7.7",
+    "svelte-eslint-parser": "^1.10.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.72.1",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5"
+  },
+  "dependencies": {
+    "@lilydesignsystem/svelte-headless": "^0.4.0",
+    "@lilydesignsystem/svelte-locale-picker": "^0.2.0",
+    "@lilydesignsystem/svelte-picker-bar": "^0.3.0",
+    "@lilydesignsystem/svelte-share-picker": "^0.2.0",
+    "@lilydesignsystem/svelte-text-size-picker": "^0.2.0",
+    "@lilydesignsystem/svelte-theme-picker": "^0.2.0",
+    "@svar-ui/svelte-grid": "^2.7.5",
+    "migrate": "^2.1.0",
+    "package": "^1.0.1",
+    "pdfmake": "^0.3.13",
+    "sv": "^1.1.1"
+  },
+  "imports": {
+    "#lib": "./src/lib/index.js",
+    "#lib/*": "./src/lib/*"
+  }
+}

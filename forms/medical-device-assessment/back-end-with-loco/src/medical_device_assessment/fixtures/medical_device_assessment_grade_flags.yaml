@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "e60919b8-04f2-52e8-bf09-08cab18d673c"
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "missing-intended-purpose"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  medicalDeviceAssessmentGradeId: "a19ea35b-8b95-50cc-95e0-0d16d99e1bdd"

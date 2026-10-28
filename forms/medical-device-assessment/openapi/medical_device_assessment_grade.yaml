@@ -1,0 +1,205 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: medical_device_assessment_grade
+openapi: 3.1.0
+info:
+  title: Medical Device Assessment — MedicalDeviceAssessmentGrade
+  version: 1.0.0
+  description: Medical device assessment grade.
+paths:
+  /medical-device-assessment-grades:
+    get:
+      summary: List MedicalDeviceAssessmentGrade records
+      operationId: listMedicalDeviceAssessmentGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicalDeviceAssessmentGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicalDeviceAssessmentGrade"
+    post:
+      summary: Create a new MedicalDeviceAssessmentGrade
+      operationId: createMedicalDeviceAssessmentGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalDeviceAssessmentGrade"
+      responses:
+        "201":
+          description: The newly created MedicalDeviceAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalDeviceAssessmentGrade"
+        "400":
+          description: Validation error
+  /medical-device-assessment-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicalDeviceAssessmentGrade by id
+      operationId: getMedicalDeviceAssessmentGrade
+      responses:
+        "200":
+          description: The requested MedicalDeviceAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalDeviceAssessmentGrade"
+        "404":
+          description: MedicalDeviceAssessmentGrade not found
+    patch:
+      summary: Update an existing MedicalDeviceAssessmentGrade
+      operationId: updateMedicalDeviceAssessmentGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalDeviceAssessmentGrade"
+      responses:
+        "200":
+          description: The updated MedicalDeviceAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalDeviceAssessmentGrade"
+        "404":
+          description: MedicalDeviceAssessmentGrade not found
+    delete:
+      summary: Soft-delete a MedicalDeviceAssessmentGrade
+      operationId: deleteMedicalDeviceAssessmentGrade
+      responses:
+        "204":
+          description: MedicalDeviceAssessmentGrade deleted
+        "404":
+          description: MedicalDeviceAssessmentGrade not found
+components:
+  schemas:
+    MedicalDeviceAssessmentGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Soft-delete timestamp; NULL when the row is live.
+        medical_device_assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the medical_device_assessment table.
+        computed_device_class:
+          type: string
+          enum:
+            - I
+            - IIa
+            - IIb
+            - III
+            - ""
+          description: "Computed device class. One of: I, IIa, IIb, III."
+        final_device_class:
+          type: string
+          enum:
+            - I
+            - IIa
+            - IIb
+            - III
+            - ""
+          description: "Final device class. One of: I, IIa, IIb, III."
+        class_suffix:
+          type: string
+          enum:
+            - s
+            - m
+            - r
+            - sm
+            - sr
+            - mr
+            - smr
+            - ""
+          description: "Class suffix. One of: s, m, r, sm, sr, mr, smr."
+        override_reason:
+          type: string
+          maxLength: 500
+          description: Override reason.
+        conformity_route:
+          type: string
+          enum:
+            - self-declaration
+            - notified-body-partial
+            - notified-body-full
+            - ""
+          description: "Conformity route. One of: self-declaration, notified-body-partial, notified-body-full."
+        determining_rule:
+          type: string
+          maxLength: 20
+          description: Determining rule.
+        regulatory_readiness:
+          type: string
+          enum:
+            - ready
+            - gaps
+            - blocked
+            - ""
+          description: "Regulatory readiness. One of: ready, gaps, blocked."
+        assessor_notes:
+          type: string
+          description: Assessor notes.
+        signed_at:
+          type: string
+          format: date-time
+          description: Signed at.
+        graded_at:
+          type: string
+          format: date-time
+          description: Graded at.
+      required:
+        - created_at
+        - updated_at
+        - medical_device_assessment_id
+        - computed_device_class
+        - final_device_class
+        - class_suffix
+        - override_reason
+        - conformity_route
+        - determining_rule
+        - regulatory_readiness
+        - assessor_notes
+        - graded_at
+      description: Medical device assessment grade.

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE medical_device_assessment_grade SYSTEM "medical_device_assessment_grade.dtd">
+<medical_device_assessment_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<medical_device_assessment_id>770e8400-e29b-41d4-a716-446655440002</medical_device_assessment_id>
+<computed_device_class>I</computed_device_class>
+<final_device_class>I</final_device_class>
+<class_suffix>s</class_suffix>
+<override_reason>Example text.</override_reason>
+<conformity_route>self-declaration</conformity_route>
+<determining_rule></determining_rule>
+<regulatory_readiness>ready</regulatory_readiness>
+<assessor_notes>Example text.</assessor_notes>
+<signed_at>2026-04-09T10:00:00Z</signed_at>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</medical_device_assessment_grade>

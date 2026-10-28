@@ -1,0 +1,515 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeFitNote",
+  "note": "Boundary personas for R-01..R-09; expected computed by bin/test-personas --update.",
+  "personas": [
+    {
+      "name": "not-fit-two-weeks",
+      "description": "Complete not-fit note for 14 days: approved.",
+      "state": {
+        "assessmentDate": "2026-10-01",
+        "assessmentMethod": "face-to-face",
+        "diagnosisPrimary": "Lower back pain",
+        "fitnessAdvice": "not-fit-for-work",
+        "periodFrom": "2026-10-01",
+        "periodTo": "2026-10-14",
+        "reassessmentRequired": "no",
+        "employeeConsentToShare": "yes",
+        "clinicianDeclaration": "yes",
+        "clinicianRegistrationBody": "GMC",
+        "clinicianRegistrationNumber": "1234567"
+      },
+      "expected": {
+        "outcome": "not-fit-for-work",
+        "approvalStatus": "approved",
+        "durationDays": 14,
+        "adjustmentCount": 0,
+        "firedRules": [],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "may-be-fit-phased-return",
+      "description": "May be fit with phased return and altered hours: approved, 2 adjustments.",
+      "state": {
+        "assessmentDate": "2026-10-01",
+        "assessmentMethod": "video",
+        "diagnosisPrimary": "Post-viral fatigue",
+        "fitnessAdvice": "may-be-fit-for-work",
+        "periodFrom": "2026-10-01",
+        "periodTo": "2026-10-14",
+        "reassessmentRequired": "no",
+        "employeeConsentToShare": "yes",
+        "clinicianDeclaration": "yes",
+        "clinicianRegistrationBody": "GMC",
+        "clinicianRegistrationNumber": "1234567",
+        "adjustmentPhasedReturn": "yes",
+        "adjustmentAlteredHours": "yes"
+      },
+      "expected": {
+        "outcome": "may-be-fit-for-work",
+        "approvalStatus": "approved",
+        "durationDays": 14,
+        "adjustmentCount": 2,
+        "firedRules": [],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "may-be-fit-no-adjustment",
+      "description": "May be fit but no adjustment chosen (R-05): needs-completion.",
+      "state": {
+        "assessmentDate": "2026-10-01",
+        "assessmentMethod": "face-to-face",
+        "diagnosisPrimary": "Lower back pain",
+        "fitnessAdvice": "may-be-fit-for-work",
+        "periodFrom": "2026-10-01",
+        "periodTo": "2026-10-14",
+        "reassessmentRequired": "no",
+        "employeeConsentToShare": "yes",
+        "clinicianDeclaration": "yes",
+        "clinicianRegistrationBody": "GMC",
+        "clinicianRegistrationNumber": "1234567"
+      },
+      "expected": {
+        "outcome": "may-be-fit-for-work",
+        "approvalStatus": "needs-completion",
+        "durationDays": 14,
+        "adjustmentCount": 0,
+        "firedRules": [
+          {
+            "ruleId": "R-05",
+            "category": "adjustments",
+            "description": "May be fit for work but no adjustment selected"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-05",
+            "category": "missing-adjustments",
+            "priority": "medium",
+            "description": "May be fit for work but no adjustment selected",
+            "suggestedAction": "Select at least one adjustment."
+          }
+        ]
+      }
+    },
+    {
+      "name": "unsigned-blocked",
+      "description": "Declaration not ticked (R-06): blocked.",
+      "state": {
+        "assessmentDate": "2026-10-01",
+        "assessmentMethod": "face-to-face",
+        "diagnosisPrimary": "Lower back pain",
+        "fitnessAdvice": "not-fit-for-work",
+        "periodFrom": "2026-10-01",
+        "periodTo": "2026-10-14",
+        "reassessmentRequired": "no",
+        "employeeConsentToShare": "yes",
+        "clinicianDeclaration": "",
+        "clinicianRegistrationBody": "GMC",
+        "clinicianRegistrationNumber": "1234567"
+      },
+      "expected": {
+        "outcome": "not-fit-for-work",
+        "approvalStatus": "blocked",
+        "durationDays": 14,
+        "adjustmentCount": 0,
+        "firedRules": [
+          {
+            "ruleId": "R-06",
+            "category": "sign-off",
+            "description": "Clinician declaration not given"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-06",
+            "category": "missing-declaration",
+            "priority": "high",
+            "description": "Clinician declaration not given",
+            "suggestedAction": "Tick the declaration to sign."
+          }
+        ]
+      }
+    },
+    {
+      "name": "end-before-start",
+      "description": "Period ends before it starts (R-04): blocked.",
+      "state": {
+        "assessmentDate": "2026-10-01",
+        "assessmentMethod": "face-to-face",
+        "diagnosisPrimary": "Lower back pain",
+        "fitnessAdvice": "not-fit-for-work",
+        "periodFrom": "2026-10-01",
+        "periodTo": "2026-09-20",
+        "reassessmentRequired": "no",
+        "employeeConsentToShare": "yes",
+        "clinicianDeclaration": "yes",
+        "clinicianRegistrationBody": "GMC",
+        "clinicianRegistrationNumber": "1234567"
+      },
+      "expected": {
+        "outcome": "not-fit-for-work",
+        "approvalStatus": "blocked",
+        "durationDays": null,
+        "adjustmentCount": 0,
+        "firedRules": [
+          {
+            "ruleId": "R-04",
+            "category": "period",
+            "description": "Period is missing or ends before it starts"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-04",
+            "category": "invalid-period",
+            "priority": "high",
+            "description": "Period is missing or ends before it starts",
+            "suggestedAction": "Enter a start date and an end date or duration."
+          }
+        ]
+      }
+    },
+    {
+      "name": "long-period-no-review",
+      "description": "120-day period without reassessment (R-08): needs-completion.",
+      "state": {
+        "assessmentDate": "2026-10-01",
+        "assessmentMethod": "face-to-face",
+        "diagnosisPrimary": "Lower back pain",
+        "fitnessAdvice": "not-fit-for-work",
+        "periodFrom": "2026-10-01",
+        "periodTo": "2027-01-28",
+        "reassessmentRequired": "no",
+        "employeeConsentToShare": "yes",
+        "clinicianDeclaration": "yes",
+        "clinicianRegistrationBody": "GMC",
+        "clinicianRegistrationNumber": "1234567"
+      },
+      "expected": {
+        "outcome": "not-fit-for-work",
+        "approvalStatus": "needs-completion",
+        "durationDays": 120,
+        "adjustmentCount": 0,
+        "firedRules": [
+          {
+            "ruleId": "R-08",
+            "category": "period",
+            "description": "Period over 90 days with no reassessment"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-08",
+            "category": "long-period-without-review",
+            "priority": "medium",
+            "description": "Period over 90 days with no reassessment",
+            "suggestedAction": "Set a reassessment or shorten the period."
+          }
+        ]
+      }
+    },
+    {
+      "name": "long-period-with-review",
+      "description": "120-day period with reassessment: approved.",
+      "state": {
+        "assessmentDate": "2026-10-01",
+        "assessmentMethod": "face-to-face",
+        "diagnosisPrimary": "Lower back pain",
+        "fitnessAdvice": "not-fit-for-work",
+        "periodFrom": "2026-10-01",
+        "periodTo": "2027-01-28",
+        "reassessmentRequired": "yes",
+        "employeeConsentToShare": "yes",
+        "clinicianDeclaration": "yes",
+        "clinicianRegistrationBody": "GMC",
+        "clinicianRegistrationNumber": "1234567"
+      },
+      "expected": {
+        "outcome": "not-fit-for-work",
+        "approvalStatus": "approved",
+        "durationDays": 120,
+        "adjustmentCount": 0,
+        "firedRules": [],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "backdated-15-days",
+      "description": "Period starts 15 days before assessment (R-09): needs-completion.",
+      "state": {
+        "assessmentDate": "2026-10-01",
+        "assessmentMethod": "face-to-face",
+        "diagnosisPrimary": "Lower back pain",
+        "fitnessAdvice": "not-fit-for-work",
+        "periodFrom": "2026-09-16",
+        "periodTo": "2026-10-14",
+        "reassessmentRequired": "no",
+        "employeeConsentToShare": "yes",
+        "clinicianDeclaration": "yes",
+        "clinicianRegistrationBody": "GMC",
+        "clinicianRegistrationNumber": "1234567"
+      },
+      "expected": {
+        "outcome": "not-fit-for-work",
+        "approvalStatus": "needs-completion",
+        "durationDays": 29,
+        "adjustmentCount": 0,
+        "firedRules": [
+          {
+            "ruleId": "R-09",
+            "category": "period",
+            "description": "Period starts more than 14 days before the assessment"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-09",
+            "category": "backdated",
+            "priority": "medium",
+            "description": "Period starts more than 14 days before the assessment",
+            "suggestedAction": "Confirm the backdating or correct the start date."
+          }
+        ]
+      }
+    },
+    {
+      "name": "backdated-14-days-ok",
+      "description": "Period starts exactly 14 days before assessment: approved.",
+      "state": {
+        "assessmentDate": "2026-10-01",
+        "assessmentMethod": "face-to-face",
+        "diagnosisPrimary": "Lower back pain",
+        "fitnessAdvice": "not-fit-for-work",
+        "periodFrom": "2026-09-17",
+        "periodTo": "2026-10-14",
+        "reassessmentRequired": "no",
+        "employeeConsentToShare": "yes",
+        "clinicianDeclaration": "yes",
+        "clinicianRegistrationBody": "GMC",
+        "clinicianRegistrationNumber": "1234567"
+      },
+      "expected": {
+        "outcome": "not-fit-for-work",
+        "approvalStatus": "approved",
+        "durationDays": 28,
+        "adjustmentCount": 0,
+        "firedRules": [],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "unregistered-clinician",
+      "description": "No registration number (R-07): blocked.",
+      "state": {
+        "assessmentDate": "2026-10-01",
+        "assessmentMethod": "face-to-face",
+        "diagnosisPrimary": "Lower back pain",
+        "fitnessAdvice": "not-fit-for-work",
+        "periodFrom": "2026-10-01",
+        "periodTo": "2026-10-14",
+        "reassessmentRequired": "no",
+        "employeeConsentToShare": "yes",
+        "clinicianDeclaration": "yes",
+        "clinicianRegistrationBody": "GMC",
+        "clinicianRegistrationNumber": ""
+      },
+      "expected": {
+        "outcome": "not-fit-for-work",
+        "approvalStatus": "blocked",
+        "durationDays": 14,
+        "adjustmentCount": 0,
+        "firedRules": [
+          {
+            "ruleId": "R-07",
+            "category": "sign-off",
+            "description": "Clinician registration body or number is missing"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-07",
+            "category": "unregistered-clinician",
+            "priority": "high",
+            "description": "Clinician registration body or number is missing",
+            "suggestedAction": "Add the clinician registration details."
+          }
+        ]
+      }
+    },
+    {
+      "name": "duration-only",
+      "description": "Duration of 28 days instead of an end date: approved.",
+      "state": {
+        "assessmentDate": "2026-10-01",
+        "assessmentMethod": "face-to-face",
+        "diagnosisPrimary": "Lower back pain",
+        "fitnessAdvice": "not-fit-for-work",
+        "periodFrom": "2026-10-01",
+        "periodTo": null,
+        "reassessmentRequired": "no",
+        "employeeConsentToShare": "yes",
+        "clinicianDeclaration": "yes",
+        "clinicianRegistrationBody": "GMC",
+        "clinicianRegistrationNumber": "1234567",
+        "periodDurationDays": 28
+      },
+      "expected": {
+        "outcome": "not-fit-for-work",
+        "approvalStatus": "approved",
+        "durationDays": 28,
+        "adjustmentCount": 0,
+        "firedRules": [],
+        "additionalFlags": []
+      }
+    },
+    {
+      "name": "blank-state",
+      "description": "Nothing entered: blocked with every blocking rule.",
+      "state": {
+        "assessmentDate": null,
+        "assessmentMethod": "",
+        "diagnosisPrimary": "",
+        "fitnessAdvice": "",
+        "periodFrom": null,
+        "periodTo": null,
+        "reassessmentRequired": "",
+        "employeeConsentToShare": "",
+        "clinicianDeclaration": "",
+        "clinicianRegistrationBody": "",
+        "clinicianRegistrationNumber": ""
+      },
+      "expected": {
+        "outcome": "",
+        "approvalStatus": "blocked",
+        "durationDays": null,
+        "adjustmentCount": 0,
+        "firedRules": [
+          {
+            "ruleId": "R-01",
+            "category": "assessment",
+            "description": "Assessment date or method is missing"
+          },
+          {
+            "ruleId": "R-02",
+            "category": "condition",
+            "description": "No primary diagnosis recorded"
+          },
+          {
+            "ruleId": "R-03",
+            "category": "advice",
+            "description": "No fitness advice chosen"
+          },
+          {
+            "ruleId": "R-04",
+            "category": "period",
+            "description": "Period is missing or ends before it starts"
+          },
+          {
+            "ruleId": "R-06",
+            "category": "sign-off",
+            "description": "Clinician declaration not given"
+          },
+          {
+            "ruleId": "R-07",
+            "category": "sign-off",
+            "description": "Clinician registration body or number is missing"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-01",
+            "category": "missing-assessment",
+            "priority": "medium",
+            "description": "Assessment date or method is missing",
+            "suggestedAction": "Record when and how the employee was assessed."
+          },
+          {
+            "flagId": "F-02",
+            "category": "missing-diagnosis",
+            "priority": "medium",
+            "description": "No primary diagnosis recorded",
+            "suggestedAction": "Record the condition the advice is based on."
+          },
+          {
+            "flagId": "F-03",
+            "category": "other",
+            "priority": "high",
+            "description": "No fitness advice chosen",
+            "suggestedAction": "Choose not fit for work or may be fit for work."
+          },
+          {
+            "flagId": "F-04",
+            "category": "invalid-period",
+            "priority": "high",
+            "description": "Period is missing or ends before it starts",
+            "suggestedAction": "Enter a start date and an end date or duration."
+          },
+          {
+            "flagId": "F-06",
+            "category": "missing-declaration",
+            "priority": "high",
+            "description": "Clinician declaration not given",
+            "suggestedAction": "Tick the declaration to sign."
+          },
+          {
+            "flagId": "F-07",
+            "category": "unregistered-clinician",
+            "priority": "high",
+            "description": "Clinician registration body or number is missing",
+            "suggestedAction": "Add the clinician registration details."
+          },
+          {
+            "flagId": "F-CONSENT",
+            "category": "missing-consent",
+            "priority": "low",
+            "description": "Employee consent to share with the employer not recorded",
+            "suggestedAction": "Record consent before the note is issued."
+          }
+        ]
+      }
+    },
+    {
+      "name": "duration-zero-days",
+      "description": "Duration of 0 days is not a valid period end (R-04): blocked.",
+      "state": {
+        "assessmentDate": "2026-10-01",
+        "assessmentMethod": "face-to-face",
+        "diagnosisPrimary": "Lower back pain",
+        "fitnessAdvice": "not-fit-for-work",
+        "periodFrom": "2026-10-01",
+        "periodTo": null,
+        "reassessmentRequired": "no",
+        "employeeConsentToShare": "yes",
+        "clinicianDeclaration": "yes",
+        "clinicianRegistrationBody": "GMC",
+        "clinicianRegistrationNumber": "1234567",
+        "periodDurationDays": 0
+      },
+      "expected": {
+        "outcome": "not-fit-for-work",
+        "approvalStatus": "blocked",
+        "durationDays": 0,
+        "adjustmentCount": 0,
+        "firedRules": [
+          {
+            "ruleId": "R-04",
+            "category": "period",
+            "description": "Period is missing or ends before it starts"
+          }
+        ],
+        "additionalFlags": [
+          {
+            "flagId": "F-04",
+            "category": "invalid-period",
+            "priority": "high",
+            "description": "Period is missing or ends before it starts",
+            "suggestedAction": "Enter a start date and an end date or duration."
+          }
+        ]
+      }
+    }
+  ]
+}

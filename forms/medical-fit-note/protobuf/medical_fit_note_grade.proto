@@ -1,0 +1,32 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: medical_fit_note_grade
+
+syntax = "proto3";
+
+package form_examples.medical_fit_note;
+
+enum MedicalFitNoteGradeOutcomeEnum {
+  OUTCOME_UNSPECIFIED = 0;
+  OUTCOME_NOT_FIT_FOR_WORK = 1;  // not-fit-for-work
+  OUTCOME_MAY_BE_FIT_FOR_WORK = 2;  // may-be-fit-for-work
+}
+
+enum MedicalFitNoteGradeApprovalStatusEnum {
+  APPROVALSTATUS_UNSPECIFIED = 0;
+  APPROVALSTATUS_APPROVED = 1;  // approved
+  APPROVALSTATUS_NEEDS_COMPLETION = 2;  // needs-completion
+  APPROVALSTATUS_BLOCKED = 3;  // blocked
+}
+
+message MedicalFitNoteGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string medical_fit_note_id = 5;  // UUID — uuid
+  MedicalFitNoteGradeOutcomeEnum outcome = 6;  // VARCHAR(30)
+  MedicalFitNoteGradeApprovalStatusEnum approval_status = 7;  // VARCHAR(20)
+  int32 duration_days = 8;  // INTEGER
+  int32 adjustment_count = 9;  // INTEGER
+  string graded_at = 10;  // TIMESTAMPTZ — iso 8601
+}

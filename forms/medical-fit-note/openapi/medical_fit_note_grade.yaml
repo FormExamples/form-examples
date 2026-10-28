@@ -1,0 +1,161 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: medical_fit_note_grade
+openapi: 3.1.0
+info:
+  title: Medical Fit Note — MedicalFitNoteGrade
+  version: 1.0.0
+  description: Medical fit note grade.
+paths:
+  /medical-fit-note-grades:
+    get:
+      summary: List MedicalFitNoteGrade records
+      operationId: listMedicalFitNoteGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of MedicalFitNoteGrade records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MedicalFitNoteGrade"
+    post:
+      summary: Create a new MedicalFitNoteGrade
+      operationId: createMedicalFitNoteGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalFitNoteGrade"
+      responses:
+        "201":
+          description: The newly created MedicalFitNoteGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalFitNoteGrade"
+        "400":
+          description: Validation error
+  /medical-fit-note-grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one MedicalFitNoteGrade by id
+      operationId: getMedicalFitNoteGrade
+      responses:
+        "200":
+          description: The requested MedicalFitNoteGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalFitNoteGrade"
+        "404":
+          description: MedicalFitNoteGrade not found
+    patch:
+      summary: Update an existing MedicalFitNoteGrade
+      operationId: updateMedicalFitNoteGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalFitNoteGrade"
+      responses:
+        "200":
+          description: The updated MedicalFitNoteGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalFitNoteGrade"
+        "404":
+          description: MedicalFitNoteGrade not found
+    delete:
+      summary: Soft-delete a MedicalFitNoteGrade
+      operationId: deleteMedicalFitNoteGrade
+      responses:
+        "204":
+          description: MedicalFitNoteGrade deleted
+        "404":
+          description: MedicalFitNoteGrade not found
+components:
+  schemas:
+    MedicalFitNoteGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Soft-delete timestamp; NULL when the row is live.
+        medical_fit_note_id:
+          type: string
+          format: uuid
+          description: Foreign key to the medical_fit_note table.
+        outcome:
+          type: string
+          enum:
+            - not-fit-for-work
+            - may-be-fit-for-work
+            - ""
+          description: "Outcome. One of: not-fit-for-work, may-be-fit-for-work."
+        approval_status:
+          type: string
+          enum:
+            - approved
+            - needs-completion
+            - blocked
+            - ""
+          description: "Approval status. One of: approved, needs-completion, blocked."
+        duration_days:
+          type: integer
+          format: int32
+          description: Duration days.
+        adjustment_count:
+          type: integer
+          format: int32
+          description: Adjustment count.
+        graded_at:
+          type: string
+          format: date-time
+          description: Graded at.
+      required:
+        - created_at
+        - updated_at
+        - medical_fit_note_id
+        - outcome
+        - approval_status
+        - graded_at
+      description: Medical fit note grade.

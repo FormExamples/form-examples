@@ -1,0 +1,113 @@
+#!/bin/sh
+set -euf
+
+form_kebab_case=medical-fit-note
+form_snake_case=medical_fit_note
+
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_development" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_test" || :
+createdb --host=localhost --port=5432 --username=loco --owner=loco "${form_snake_case}_production" || :
+
+loco new --name "${form_snake_case}" --db postgres --bg async --assets none -a
+cd "${form_snake_case}"
+
+# Pin time to a version compatible with cookie 0.18.1 (a fresh loco
+# starter otherwise resolves time 0.3.52, which fails to compile).
+cargo update -p time --precise 0.3.47
+
+cargo loco generate scaffold employee \
+    deleted_at:tstz \
+    name:string! \
+    birth_date:date! \
+    email:text \
+    phone:text \
+    postal_address_as_full_text:text \
+    country_as_iso_3166_1_alpha_2:string \
+    postcode:text \
+    united_kingdom_nhs_number:string^ \
+    employer_name:text! \
+    job_title:text! \
+    --api
+
+cargo loco generate scaffold clinician \
+    deleted_at:tstz \
+    name:text! \
+    email:text \
+    phone:text \
+    role:text! \
+    registration_body:text! \
+    registration_number:text! \
+    practice_name:text! \
+    --api
+
+cargo loco generate scaffold medical_fit_note \
+    deleted_at:tstz \
+    employee:references:employee_id \
+    clinician:references:clinician_id \
+    status:string! \
+    assessment_date:date \
+    assessment_method:string! \
+    diagnosis_primary:string! \
+    diagnosis_additional:string! \
+    fitness_advice:string! \
+    period_from:date \
+    period_to:date \
+    period_duration_days:int \
+    reassessment_required:string! \
+    adjustment_phased_return:string! \
+    adjustment_altered_hours:string! \
+    adjustment_amended_duties:string! \
+    adjustment_workplace_adaptations:string! \
+    functional_effects:text! \
+    comments:text! \
+    employee_consent_to_share:string! \
+    clinician_declaration:string! \
+    signed_at:tstz \
+    --api
+
+cargo loco generate scaffold medical_fit_note_grade \
+    deleted_at:tstz \
+    medical_fit_note:references:medical_fit_note_id \
+    outcome:string! \
+    approval_status:string! \
+    duration_days:int \
+    adjustment_count:int \
+    graded_at:tstz! \
+    --api
+
+cargo loco generate scaffold medical_fit_note_grade_rule \
+    deleted_at:tstz \
+    medical_fit_note_grade:references:grade_id \
+    rule_id:string! \
+    category:string! \
+    description:string! \
+    --api
+
+cargo loco generate scaffold medical_fit_note_grade_flag \
+    deleted_at:tstz \
+    medical_fit_note_grade:references:medical_fit_note_grade_id \
+    flag_id:string! \
+    category:string! \
+    priority:string! \
+    description:string! \
+    suggested_action:string! \
+    --api
+
+# Convert the freshly-scaffolded nested crate into the canonical route
+# layout: back-end-with-loco/src/${form_snake_case}/*.rs
+cd ..
+"$(git rev-parse --show-toplevel)/bin/route-loco-layout" "${form_kebab_case}"
+
+# Move every domain table's primary key (and foreign keys) from Loco's
+# auto-increment integer to a UUIDv4 (gen_random_uuid()), matching sql/.
+"$(git rev-parse --show-toplevel)/bin/loco-uuid-pk-refactor" "${form_kebab_case}"
+
+# Add #![forbid(unsafe_code)] to each crate root the scaffold created:
+# the library, the -cli binary, the migration library, and the tests.
+"$(git rev-parse --show-toplevel)/bin/loco-forbid-unsafe" "${form_kebab_case}"
+
+# Fix two loco-new scaffold defaults that fail clippy -D warnings:
+# App::seed()'s unused base param, and the test auth_header() helper's
+# redundant &token.
+"$(git rev-parse --show-toplevel)/bin/loco-seed-base-rename" "${form_kebab_case}"
+"$(git rev-parse --show-toplevel)/bin/loco-test-auth-header-fix" "${form_kebab_case}"

@@ -1,0 +1,27 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: medical_device_assessment_grade_rule
+
+syntax = "proto3";
+
+package form_examples.medical_device_assessment;
+
+enum MedicalDeviceAssessmentGradeRuleDeviceClassEnum {
+  DEVICECLASS_UNSPECIFIED = 0;
+  DEVICECLASS_I = 1;  // I
+  DEVICECLASS_IIA = 2;  // IIa
+  DEVICECLASS_IIB = 3;  // IIb
+  DEVICECLASS_III = 4;  // III
+}
+
+message MedicalDeviceAssessmentGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(30) — max 30 chars
+  int32 annex_viii_rule = 7;  // INTEGER
+  MedicalDeviceAssessmentGradeRuleDeviceClassEnum device_class = 8;  // VARCHAR(5)
+  string category = 9;  // VARCHAR(50) — max 50 chars
+  string description = 10;  // VARCHAR(500) — max 500 chars
+}

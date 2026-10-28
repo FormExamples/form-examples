@@ -1,0 +1,125 @@
+{
+  "resourceType": "Observation",
+  "id": "880e8400-e29b-41d4-a716-446655440003",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:medical-fit-note",
+        "code": "medical_fit_note_grade",
+        "display": "Medical Fit Note Grade"
+      }
+    ]
+  },
+  "encounter": {
+    "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-fit-note",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-fit-note",
+            "code": "outcome",
+            "display": "Outcome"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-fit-note:outcome",
+            "code": "not-fit-for-work",
+            "display": "Not-Fit-For-Work"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-fit-note",
+            "code": "approval_status",
+            "display": "Approval Status"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-fit-note:approval_status",
+            "code": "approved",
+            "display": "Approved"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-fit-note",
+            "code": "duration_days",
+            "display": "Duration Days"
+          }
+        ]
+      },
+      "valueInteger": 1
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-fit-note",
+            "code": "adjustment_count",
+            "display": "Adjustment Count"
+          }
+        ]
+      },
+      "valueInteger": 2
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:medical-fit-note",
+            "code": "graded_at",
+            "display": "Graded At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "f813bae8-c9ee-5b9f-bd93-5105532c7bec"
+  deletedAt: null
+  outcome: "not-fit-for-work"
+  approvalStatus: "approved"
+  durationDays: 1
+  adjustmentCount: 1
+  gradedAt: "2026-01-01T00:00:00Z"
+  medicalFitNoteId: "7fc9346b-4d61-50df-ae8e-a27bb9807db5"
