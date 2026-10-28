@@ -2,7 +2,9 @@
   "name": "form-examples-e2e",
   "version": "1.0.0",
   "private": true,
-  "engines": { "node": "=26" },
+  "engines": {
+    "node": "=26"
+  },
   "type": "module",
   "description": "Shared Playwright end-to-end + accessibility harness for every form's front-end.",
   "scripts": {
@@ -12,7 +14,7 @@
     "report": "playwright show-report"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.13.0",
-    "@playwright/test": "^1.64.0"
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.64.1"
   }
 }

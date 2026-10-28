@@ -18,16 +18,16 @@
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^8.0.0",
-    "@sveltejs/kit": "^3.0.1",
+    "@sveltejs/kit": "^3.1.0",
     "@sveltejs/vite-plugin-svelte": "^7.3.1",
     "@tailwindcss/vite": "^4.3.3",
     "@types/pdfmake": "^0.3.3",
     "svelte": "^5.57.2",
-    "svelte-check": "^4.7.6",
+    "svelte-check": "^4.7.7",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3",
-    "vite": "^8.3.4",
-    "vitest": "^5.0.3"
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5"
   },
   "dependencies": {
     "@lilydesignsystem/svelte-headless": "^0.4.0",
@@ -36,12 +36,12 @@
     "@lilydesignsystem/svelte-share-picker": "^0.2.0",
     "@lilydesignsystem/svelte-text-size-picker": "^0.2.0",
     "@lilydesignsystem/svelte-theme-picker": "^0.2.0",
-    "@svar-ui/svelte-grid": "^2.7.4",
+    "@svar-ui/svelte-grid": "^2.7.5",
     "migrate": "^2.1.0",
     "package": "^1.0.1",
-    "pdfmake": "^0.3.11",
+    "pdfmake": "^0.3.13",
     "sv": "^1.1.1",
-    "zod": "^4.6.5"
+    "zod": "^4.6.7"
   },
   "exports": {
     "./package.json": "./package.json",
