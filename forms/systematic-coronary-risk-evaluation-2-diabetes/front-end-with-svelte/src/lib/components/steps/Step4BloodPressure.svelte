@@ -3,7 +3,7 @@
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
-  import { RadioGroup } from "@lilydesignsystem/svelte-headless";
+  import { RadioGroup } from '@lilydesignsystem/svelte-headless';
 
   const d = assessment.data.bloodPressure;
 </script>
@@ -11,20 +11,42 @@
 <Fieldset legend="Step 4 \u2014 Blood pressure">
   <div class="field-grid">
     <Field label="Systolic BP (mmHg)" inputId="step-4-systolicBp">
-      <NumberInput id="step-4-systolicBp" label="Systolic BP" min={60} max={300} bind:value={d.systolicBp} />
+      <NumberInput
+        id="step-4-systolicBp"
+        label="Systolic BP"
+        min={60}
+        max={300}
+        bind:value={d.systolicBp}
+      />
     </Field>
     <Field label="Diastolic BP (mmHg)" inputId="step-4-diastolicBp">
-      <NumberInput id="step-4-diastolicBp" label="Diastolic BP" min={30} max={200} bind:value={d.diastolicBp} />
+      <NumberInput
+        id="step-4-diastolicBp"
+        label="Diastolic BP"
+        min={30}
+        max={200}
+        bind:value={d.diastolicBp}
+      />
     </Field>
   </div>
 
   <Field label="On antihypertensive medication">
     <RadioGroup label="On antihypertensive medication">
       <label class="radio-input">
-        <input type="radio" name="onAntihypertensive" value="yes" bind:group={d.onAntihypertensive} /> Yes
+        <input
+          type="radio"
+          name="onAntihypertensive"
+          value="yes"
+          bind:group={d.onAntihypertensive}
+        /> Yes
       </label>
       <label class="radio-input">
-        <input type="radio" name="onAntihypertensive" value="no" bind:group={d.onAntihypertensive} /> No
+        <input
+          type="radio"
+          name="onAntihypertensive"
+          value="no"
+          bind:group={d.onAntihypertensive}
+        /> No
       </label>
     </RadioGroup>
   </Field>
@@ -41,7 +63,10 @@
     </Field>
   {/if}
 
-  <Field label="Blood pressure at target" description="Target: <130/80 mmHg for most diabetes patients (ESC 2023)">
+  <Field
+    label="Blood pressure at target"
+    description="Target: <130/80 mmHg for most diabetes patients (ESC 2023)"
+  >
     <RadioGroup label="Blood pressure at target">
       <label class="radio-input">
         <input type="radio" name="bpAtTarget" value="yes" bind:group={d.bpAtTarget} /> Yes

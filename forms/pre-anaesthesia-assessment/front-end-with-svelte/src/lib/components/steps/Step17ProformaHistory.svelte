@@ -1,7 +1,7 @@
 <script lang="ts">
   import Field from '#lib/components/ui/Field.svelte';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
-  import { DateInput, TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { DateInput, TextAreaInput, TextInput } from '@lilydesignsystem/svelte-headless';
 
   import { store } from '#lib/stores/assessment.svelte.js';
 
@@ -15,7 +15,7 @@
     ['ponv', 'PONV'],
     ['malignantHyperpyrexia', 'Malignant hyperpyrexia'],
     ['difficultIntubation', 'Difficult intubation'],
-    ['difficultSpinalOrEpidural', 'Difficult spinal or epidural'],
+    ['difficultSpinalOrEpidural', 'Difficult spinal or epidural']
   ] as const;
 
   const addictionItems = [
@@ -24,7 +24,7 @@
     ['fastScore3OrMore', 'FAST score 3 or more'],
     ['betel', 'Betel'],
     ['drugs', 'Drugs'],
-    ['other', 'Other'],
+    ['other', 'Other']
   ] as const;
 </script>
 
@@ -43,20 +43,28 @@
 
   <h3 class="step-subhead">Previous anaesthesia history</h3>
   <div class="field-grid field-grid-3">
-    {#each previousAnaesthesiaItems as [key, label]}
-      <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={pa[key]} /> {label}</label>
+    {#each previousAnaesthesiaItems as [key, label] (key)}
+      <label class="checkbox-label"
+        ><input type="checkbox" class="checkbox-input" bind:checked={pa[key]} /> {label}</label
+      >
     {/each}
   </div>
 
   <h3 class="step-subhead">Addiction / substance abuse</h3>
   <div class="field-grid field-grid-3">
-    {#each addictionItems as [key, label]}
-      <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={ad[key]} /> {label}</label>
+    {#each addictionItems as [key, label] (key)}
+      <label class="checkbox-label"
+        ><input type="checkbox" class="checkbox-input" bind:checked={ad[key]} /> {label}</label
+      >
     {/each}
   </div>
   {#if ad.other}
     <Field label="Please provide details" inputId="addictionOtherDetails">
-      <TextInput id="addictionOtherDetails" label="Please provide details" bind:value={ad.otherDetails} />
+      <TextInput
+        id="addictionOtherDetails"
+        label="Please provide details"
+        bind:value={ad.otherDetails}
+      />
     </Field>
   {/if}
 </Fieldset>

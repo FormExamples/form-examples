@@ -13,7 +13,7 @@
     label,
     id,
     hint = '',
-    children,
+    children
   }: {
     label: string;
     id: string;

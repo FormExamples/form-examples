@@ -18,7 +18,7 @@
     placeholder = '',
     hint = '',
     required = false,
-    onchange,
+    onchange
   }: Props = $props();
 
   const id = `f-${Math.random().toString(36).slice(2, 10)}`;
@@ -42,13 +42,6 @@
   <label for={id} class="label" data-required={required || undefined}>
     {label}
   </label>
-  <input
-    {id}
-    {type}
-    {placeholder}
-    bind:value
-    oninput={() => onchange?.()}
-    class={inputClass}
-  />
+  <input {id} {type} {placeholder} bind:value oninput={() => onchange?.()} class={inputClass} />
   {#if hint}<span class="hint">{hint}</span>{/if}
 </div>

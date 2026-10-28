@@ -6,8 +6,8 @@
 // than a hand-maintained four-value list, so it can never drift from
 // upstream's own catalogue.
 
-import { DEFAULT_SIZES } from "@lilydesignsystem/svelte-picker-bar";
-import { sizeName } from "@lilydesignsystem/svelte-text-size-picker";
+import { DEFAULT_SIZES } from '@lilydesignsystem/svelte-picker-bar';
+import { sizeName } from '@lilydesignsystem/svelte-text-size-picker';
 
 /** A selectable reading text size: the slug and a human-readable label. */
 export interface TextSizeOption {
@@ -16,12 +16,13 @@ export interface TextSizeOption {
 }
 
 /** The text sizes offered by the switcher: every Lily default size. */
-export const TEXT_SIZE_OPTIONS: TextSizeOption[] = DEFAULT_SIZES.map(
-  (value) => ({ value, label: sizeName(value) }),
-);
+export const TEXT_SIZE_OPTIONS: TextSizeOption[] = DEFAULT_SIZES.map((value) => ({
+  value,
+  label: sizeName(value)
+}));
 
 /** The gold-standard default text size. */
-export const DEFAULT_TEXT_SIZE = "normal";
+export const DEFAULT_TEXT_SIZE = 'normal';
 
 /** localStorage key for the persisted text-size selection. */
-export const TEXT_SIZE_STORAGE_KEY = "gastroenterologic-surgery-waiting-list-card.text-size.v1";
+export const TEXT_SIZE_STORAGE_KEY = 'gastroenterologic-surgery-waiting-list-card.text-size.v1';

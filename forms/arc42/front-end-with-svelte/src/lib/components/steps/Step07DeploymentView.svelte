@@ -8,14 +8,23 @@
 
   <label class="block mb-4">
     <span class="text-sm text-base-content/80">Deployment overview</span>
-    <textarea rows="4" class="w-full border rounded px-2 py-1" bind:value={store.data.deploymentOverview}></textarea>
+    <textarea
+      rows="4"
+      class="w-full border rounded px-2 py-1"
+      bind:value={store.data.deploymentOverview}></textarea>
   </label>
 
   <RepeatList
     bind:items={store.data.deploymentNodes}
     title="Deployment nodes (max 10)"
     max={10}
-    create={() => ({ ordinal: store.data.deploymentNodes.length + 1, environment: '', nodeName: '', responsibility: '' })}>
+    create={() => ({
+      ordinal: store.data.deploymentNodes.length + 1,
+      environment: '',
+      nodeName: '',
+      responsibility: ''
+    })}
+  >
     {#snippet children(n, _i)}
       <div class="grid grid-cols-2 gap-2 mb-1">
         <select class="border rounded px-2 py-1" bind:value={n.environment}>
@@ -26,9 +35,19 @@
           <option value="disaster-recovery">Disaster recovery</option>
           <option value="other">Other</option>
         </select>
-        <input type="text" placeholder="Node name" class="border rounded px-2 py-1" bind:value={n.nodeName} />
+        <input
+          type="text"
+          placeholder="Node name"
+          class="border rounded px-2 py-1"
+          bind:value={n.nodeName}
+        />
       </div>
-      <input type="text" placeholder="Responsibility" class="w-full border rounded px-2 py-1" bind:value={n.responsibility} />
+      <input
+        type="text"
+        placeholder="Responsibility"
+        class="w-full border rounded px-2 py-1"
+        bind:value={n.responsibility}
+      />
     {/snippet}
   </RepeatList>
 </section>

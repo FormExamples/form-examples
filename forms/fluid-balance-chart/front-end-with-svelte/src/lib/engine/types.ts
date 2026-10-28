@@ -31,45 +31,45 @@ export type Priority = 'high' | 'medium' | 'low';
  * `fluid_balance_chart_entry`. The direction is implied by which array holds it.
  */
 export interface Entry {
-	/** ISO-ish datetime-local string; '' when unset. */
-	entryAt: string;
-	category: Category;
-	/** Optional route / free-text description. */
-	description: string;
-	/** Recorded volume in millilitres; null when unset. */
-	volumeMl: number | null;
+  /** ISO-ish datetime-local string; '' when unset. */
+  entryAt: string;
+  category: Category;
+  /** Optional route / free-text description. */
+  description: string;
+  /** Recorded volume in millilitres; null when unset. */
+  volumeMl: number | null;
 }
 
 /** Step 1 — chart context (mirrors the chart-header context fields). */
 export interface Context {
-	clinicianName: string;
-	clinicianRole: ClinicianRole;
-	patientIdentifier: string;
-	wardOrUnit: string;
-	/** ISO-ish datetime-local string; '' when unset. */
-	chartStartAt: string;
-	/** Charting period in hours (default 24). */
-	chartPeriodHours: number | null;
+  clinicianName: string;
+  clinicianRole: ClinicianRole;
+  patientIdentifier: string;
+  wardOrUnit: string;
+  /** ISO-ish datetime-local string; '' when unset. */
+  chartStartAt: string;
+  /** Charting period in hours (default 24). */
+  chartPeriodHours: number | null;
 }
 
 /** Step 2 — patient weight. */
 export interface Patient {
-	/** Patient weight in kilograms; null when unset. */
-	weightKg: number | null;
+  /** Patient weight in kilograms; null when unset. */
+  weightKg: number | null;
 }
 
 /** Step 5 — clinician free-text note. */
 export interface Note {
-	clinicalNote: string;
+  clinicalNote: string;
 }
 
 /** The full fluid-balance chart data model (parent header + two child lists). */
 export interface ChartData {
-	context: Context;
-	patient: Patient;
-	intake: Entry[];
-	output: Entry[];
-	note: Note;
+  context: Context;
+  patient: Patient;
+  intake: Entry[];
+  output: Entry[];
+  note: Note;
 }
 
 // ──────────────────────────────────────────────
@@ -78,45 +78,45 @@ export interface ChartData {
 
 /** One point on the time-sorted cumulative-balance trace. */
 export interface RunningBalancePoint {
-	entryAt: string;
-	balanceMl: number;
+  entryAt: string;
+  balanceMl: number;
 }
 
 /** One reconciliation-rule firing in the audit trail (mirrors `..._grade_rule`). */
 export interface FiredRule {
-	id: string;
-	category: string;
-	description: string;
+  id: string;
+  category: string;
+  description: string;
 }
 
 /** A clinician-facing safety flag (mirrors the `..._grade_flag` SQL table). */
 export interface FlaggedIssue {
-	id: string;
-	category: string;
-	priority: Priority;
-	description: string;
-	suggestedAction: string;
+  id: string;
+  category: string;
+  priority: Priority;
+  description: string;
+  suggestedAction: string;
 }
 
 /** The full reconciliation + grading result for one chart. */
 export interface GradingResult {
-	totalIntakeMl: number;
-	totalOutputMl: number;
-	/** intake − output; positive = net gain. */
-	netBalanceMl: number;
-	intakeByCategory: Record<string, number>;
-	outputByCategory: Record<string, number>;
-	runningBalance: RunningBalancePoint[];
-	urineOutputMl: number;
-	hoursObserved: number;
-	weightKg: number | null;
-	urineOutputRateMlPerKgPerHour: number | null;
-	positiveThresholdMl: number;
-	negativeThresholdMl: number;
-	fluidStatus: FluidStatus;
-	firedRules: FiredRule[];
-	flaggedIssues: FlaggedIssue[];
-	timestamp: string;
+  totalIntakeMl: number;
+  totalOutputMl: number;
+  /** intake − output; positive = net gain. */
+  netBalanceMl: number;
+  intakeByCategory: Record<string, number>;
+  outputByCategory: Record<string, number>;
+  runningBalance: RunningBalancePoint[];
+  urineOutputMl: number;
+  hoursObserved: number;
+  weightKg: number | null;
+  urineOutputRateMlPerKgPerHour: number | null;
+  positiveThresholdMl: number;
+  negativeThresholdMl: number;
+  fluidStatus: FluidStatus;
+  firedRules: FiredRule[];
+  flaggedIssues: FlaggedIssue[];
+  timestamp: string;
 }
 
 // ──────────────────────────────────────────────
@@ -124,8 +124,8 @@ export interface GradingResult {
 // ──────────────────────────────────────────────
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
-	section: keyof ChartData;
+  number: number;
+  title: string;
+  shortTitle: string;
+  section: keyof ChartData;
 }

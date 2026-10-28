@@ -11,7 +11,7 @@ export function applyRegistrationRules(app: LpaApplication): FiredRule[] {
       ruleFamily: 'registration',
       sourceCitation: 'LPA Regs 2007',
       description: `Too many persons to notify: ${app.peopleToNotify.length}; maximum is 5.`,
-      suggestedCorrection: 'List no more than five persons to notify on LP1H s.6.',
+      suggestedCorrection: 'List no more than five persons to notify on LP1H s.6.'
     });
   }
 
@@ -22,7 +22,8 @@ export function applyRegistrationRules(app: LpaApplication): FiredRule[] {
       ruleFamily: 'registration',
       sourceCitation: 'LPA Regs 2007 reg.6',
       description: 'The applicant for registration has not been identified.',
-      suggestedCorrection: 'Select whether the donor, one attorney, or all attorneys jointly are applying to register.',
+      suggestedCorrection:
+        'Select whether the donor, one attorney, or all attorneys jointly are applying to register.'
     });
   }
 
@@ -33,7 +34,8 @@ export function applyRegistrationRules(app: LpaApplication): FiredRule[] {
       ruleFamily: 'registration',
       sourceCitation: 'LPA Regs 2007 reg.6',
       description: 'The applicant has not signed Part C of LP1H.',
-      suggestedCorrection: 'The applicant must sign and date Part C before the LPA is sent to the OPG.',
+      suggestedCorrection:
+        'The applicant must sign and date Part C before the LPA is sent to the OPG.'
     });
   }
 
@@ -45,7 +47,8 @@ export function applyRegistrationRules(app: LpaApplication): FiredRule[] {
       ruleFamily: 'registration',
       sourceCitation: 'LPA Regs 2007 reg.6',
       description: 'No registration fee recorded and no remission or exemption indicated.',
-      suggestedCorrection: 'Record the registration fee (currently £82) or indicate the basis for remission or exemption.',
+      suggestedCorrection:
+        'Record the registration fee (currently £82) or indicate the basis for remission or exemption.'
     });
   }
 
@@ -56,7 +59,7 @@ export function applyRegistrationRules(app: LpaApplication): FiredRule[] {
       ruleFamily: 'registration',
       sourceCitation: 'LPA Regs 2007 reg.6',
       description: 'Fee remission claimed without a stated reason.',
-      suggestedCorrection: 'Select the statutory basis for the remission or exemption claim.',
+      suggestedCorrection: 'Select the statutory basis for the remission or exemption claim.'
     });
   }
 

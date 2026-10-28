@@ -1,14 +1,10 @@
 import type {
-	BloodCrossMatchResult,
-	ResultClassification,
-	AbnormalitySeverity,
-	FiredRule
+  BloodCrossMatchResult,
+  ResultClassification,
+  AbnormalitySeverity,
+  FiredRule
 } from './types';
-import {
-	isAboDiscrepancy,
-	isTwoSampleRuleUnmet,
-	insufficientUnits
-} from './utils';
+import { isAboDiscrepancy, isTwoSampleRuleUnmet, insufficientUnits } from './utils';
 
 /**
  * Axis B — abnormality severity & structured-reporting category.
@@ -27,88 +23,88 @@ import {
  * compatibility-status / antibody-significance reporting workflows.
  */
 export function gradeSeverity(
-	r: BloodCrossMatchResult,
-	classification: ResultClassification
+  r: BloodCrossMatchResult,
+  classification: ResultClassification
 ): {
-	abnormalitySeverity: AbnormalitySeverity;
-	reportingCategory: string;
-	firedRules: FiredRule[];
+  abnormalitySeverity: AbnormalitySeverity;
+  reportingCategory: string;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	if (isAboDiscrepancy(r) || isTwoSampleRuleUnmet(r)) {
-		firedRules.push({
-			ruleId: 'R-SEV-MAJOR-01',
-			axis: 'severity',
-			category: 'identity-safety',
-			description:
-				'An ABO discrepancy or unmet two-sample rule is present; abnormality severity graded major.'
-		});
-		return { abnormalitySeverity: 'major', reportingCategory: 'identity-safety-event', firedRules };
-	}
+  if (isAboDiscrepancy(r) || isTwoSampleRuleUnmet(r)) {
+    firedRules.push({
+      ruleId: 'R-SEV-MAJOR-01',
+      axis: 'severity',
+      category: 'identity-safety',
+      description:
+        'An ABO discrepancy or unmet two-sample rule is present; abnormality severity graded major.'
+    });
+    return { abnormalitySeverity: 'major', reportingCategory: 'identity-safety-event', firedRules };
+  }
 
-	if (r.crossmatchResult === 'incompatible') {
-		firedRules.push({
-			ruleId: 'R-SEV-MAJOR-02',
-			axis: 'severity',
-			category: 'incompatible-crossmatch',
-			description: 'Crossmatch is incompatible; abnormality severity graded major.'
-		});
-		return { abnormalitySeverity: 'major', reportingCategory: 'incompatible', firedRules };
-	}
+  if (r.crossmatchResult === 'incompatible') {
+    firedRules.push({
+      ruleId: 'R-SEV-MAJOR-02',
+      axis: 'severity',
+      category: 'incompatible-crossmatch',
+      description: 'Crossmatch is incompatible; abnormality severity graded major.'
+    });
+    return { abnormalitySeverity: 'major', reportingCategory: 'incompatible', firedRules };
+  }
 
-	if (r.antibodyScreenResult === 'positive') {
-		firedRules.push({
-			ruleId: 'R-SEV-MODERATE-01',
-			axis: 'severity',
-			category: 'significant-antibodies',
-			description:
-				'Antibody screen positive (clinically-significant antibodies); antigen-negative selection required. Severity graded moderate.'
-		});
-		return {
-			abnormalitySeverity: 'moderate',
-			reportingCategory: 'clinically-significant-antibodies',
-			firedRules
-		};
-	}
+  if (r.antibodyScreenResult === 'positive') {
+    firedRules.push({
+      ruleId: 'R-SEV-MODERATE-01',
+      axis: 'severity',
+      category: 'significant-antibodies',
+      description:
+        'Antibody screen positive (clinically-significant antibodies); antigen-negative selection required. Severity graded moderate.'
+    });
+    return {
+      abnormalitySeverity: 'moderate',
+      reportingCategory: 'clinically-significant-antibodies',
+      firedRules
+    };
+  }
 
-	if (insufficientUnits(r)) {
-		firedRules.push({
-			ruleId: 'R-SEV-MODERATE-02',
-			axis: 'severity',
-			category: 'insufficient-units',
-			description:
-				'Fewer compatible units are available than were crossmatched; severity graded moderate.'
-		});
-		return { abnormalitySeverity: 'moderate', reportingCategory: 'insufficient-units', firedRules };
-	}
+  if (insufficientUnits(r)) {
+    firedRules.push({
+      ruleId: 'R-SEV-MODERATE-02',
+      axis: 'severity',
+      category: 'insufficient-units',
+      description:
+        'Fewer compatible units are available than were crossmatched; severity graded moderate.'
+    });
+    return { abnormalitySeverity: 'moderate', reportingCategory: 'insufficient-units', firedRules };
+  }
 
-	if (r.specialRequirements.trim() !== '' && r.crossmatchResult !== 'compatible') {
-		firedRules.push({
-			ruleId: 'R-SEV-MINOR-01',
-			axis: 'severity',
-			category: 'special-requirement',
-			description:
-				'A special component requirement is noted without a confirmed compatible crossmatch; severity graded minor.'
-		});
-		return { abnormalitySeverity: 'minor', reportingCategory: 'special-requirement', firedRules };
-	}
+  if (r.specialRequirements.trim() !== '' && r.crossmatchResult !== 'compatible') {
+    firedRules.push({
+      ruleId: 'R-SEV-MINOR-01',
+      axis: 'severity',
+      category: 'special-requirement',
+      description:
+        'A special component requirement is noted without a confirmed compatible crossmatch; severity graded minor.'
+    });
+    return { abnormalitySeverity: 'minor', reportingCategory: 'special-requirement', firedRules };
+  }
 
-	if (classification === 'inconclusive') {
-		firedRules.push({
-			ruleId: 'R-SEV-NONE-02',
-			axis: 'severity',
-			category: 'inconclusive',
-			description: 'Inconclusive work-up; abnormality severity not established.'
-		});
-		return { abnormalitySeverity: 'none', reportingCategory: 'indeterminate', firedRules };
-	}
+  if (classification === 'inconclusive') {
+    firedRules.push({
+      ruleId: 'R-SEV-NONE-02',
+      axis: 'severity',
+      category: 'inconclusive',
+      description: 'Inconclusive work-up; abnormality severity not established.'
+    });
+    return { abnormalitySeverity: 'none', reportingCategory: 'indeterminate', firedRules };
+  }
 
-	firedRules.push({
-		ruleId: 'R-SEV-NONE-01',
-		axis: 'severity',
-		category: 'compatible',
-		description: 'No abnormal finding; abnormality severity graded none.'
-	});
-	return { abnormalitySeverity: 'none', reportingCategory: 'compatible', firedRules };
+  firedRules.push({
+    ruleId: 'R-SEV-NONE-01',
+    axis: 'severity',
+    category: 'compatible',
+    description: 'No abnormal finding; abnormality severity graded none.'
+  });
+  return { abnormalitySeverity: 'none', reportingCategory: 'compatible', firedRules };
 }

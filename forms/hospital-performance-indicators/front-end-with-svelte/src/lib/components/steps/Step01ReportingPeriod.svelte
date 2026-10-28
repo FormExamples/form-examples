@@ -2,14 +2,14 @@
   import { store } from '#lib/stores/indicators.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { TextInput } from "@lilydesignsystem/svelte-headless";
+  import { TextInput } from '@lilydesignsystem/svelte-headless';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
 </script>
 
 <Fieldset legend="Step 1 — Reporting period">
   <p class="hint">
-    Record the hospital or site, the reporting period (month and year), and
-    the name of the person compiling this Balanced Scorecard.
+    Record the hospital or site, the reporting period (month and year), and the name of the person
+    compiling this Balanced Scorecard.
   </p>
 
   <div class="field-grid">
@@ -57,6 +57,8 @@
     gap: 1rem;
   }
   @media (max-width: 640px) {
-    .field-grid { grid-template-columns: 1fr; }
+    .field-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

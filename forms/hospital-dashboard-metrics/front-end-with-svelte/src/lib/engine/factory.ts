@@ -16,12 +16,12 @@ export function createEmptyMetrics(): HospitalDashboardMetrics {
       hospitalName: '',
       periodMonth: null,
       periodYear: null,
-      preparedByName: '',
+      preparedByName: ''
     },
     items: emptyItems(),
     summary: {
       overallNotes: '',
-      signedAt: '',
-    },
+      signedAt: ''
+    }
   };
 }

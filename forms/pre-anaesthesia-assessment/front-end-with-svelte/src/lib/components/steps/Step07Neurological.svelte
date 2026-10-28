@@ -9,7 +9,12 @@
 <Fieldset legend="Step 7 — Neurological and cognition">
   <div class="field-grid field-grid-3">
     <Field label="GCS total (3-15)">
-      <NumberInput label="GCS total (3-15)" min={3} max={15} bind:value={store.data.neurological.gcsTotal} />
+      <NumberInput
+        label="GCS total (3-15)"
+        min={3}
+        max={15}
+        bind:value={store.data.neurological.gcsTotal}
+      />
     </Field>
     <Field label="Cognitive tool">
       <Select label="Cognitive tool" bind:value={store.data.neurological.cognitionTool}>
@@ -47,7 +52,10 @@
       </Select>
     </Field>
     <Field label="Days since stroke/TIA">
-      <NumberInput label="Days since stroke/TIA" bind:value={store.data.neurological.daysSinceStrokeTia} />
+      <NumberInput
+        label="Days since stroke/TIA"
+        bind:value={store.data.neurological.daysSinceStrokeTia}
+      />
     </Field>
   </div>
 </Fieldset>

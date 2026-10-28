@@ -1,54 +1,47 @@
 <script lang="ts">
-  import { store } from "#lib/stores/assessment.svelte.js";
-  import type { Medication, Allergy } from "#lib/engine/types.js";
-  import Fieldset from "#lib/components/ui/Fieldset.svelte";
-  import Field from "#lib/components/ui/Field.svelte";
-  import { Button, TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
-  import Select from "#lib/components/ui/Select.svelte";
+  import { store } from '#lib/stores/assessment.svelte.js';
+  import type { Medication, Allergy } from '#lib/engine/types.js';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import Field from '#lib/components/ui/Field.svelte';
+  import { Button, TextAreaInput, TextInput } from '@lilydesignsystem/svelte-headless';
+  import Select from '#lib/components/ui/Select.svelte';
 
   function newMed(): Medication {
     return {
-      name: "",
-      dose: "",
-      route: "",
-      frequency: "",
-      indication: "",
-      class: "",
-      perioperativeAction: "",
-      perioperativeNotes: "",
-      lastDoseAt: "",
+      name: '',
+      dose: '',
+      route: '',
+      frequency: '',
+      indication: '',
+      class: '',
+      perioperativeAction: '',
+      perioperativeNotes: '',
+      lastDoseAt: ''
     };
   }
   function newAllergy(): Allergy {
     return {
-      allergen: "",
-      category: "",
-      reactionType: "",
-      reactionSeverity: "",
-      reactionNotes: "",
-      verified: "",
+      allergen: '',
+      category: '',
+      reactionType: '',
+      reactionSeverity: '',
+      reactionNotes: '',
+      verified: ''
     };
   }
 </script>
 
 <Fieldset legend="Step 13 — Medications and allergies">
   <h3 class="step-subhead">Medications (clinician-reconciled)</h3>
-  <Button
-    data-variant="secondary"
-    onclick={() => store.data.medications.push(newMed())}
-  >
+  <Button data-variant="secondary" onclick={() => store.data.medications.push(newMed())}>
     + Add medication
   </Button>
 
-  {#each store.data.medications as med, i}
+  {#each store.data.medications as med, i (i)}
     <div class="row-grid">
       <TextInput label="Name" placeholder="Name" bind:value={med.name} />
       <TextInput label="Dose" placeholder="Dose" bind:value={med.dose} />
-      <TextInput
-        label="Frequency"
-        placeholder="Frequency"
-        bind:value={med.frequency}
-      />
+      <TextInput label="Frequency" placeholder="Frequency" bind:value={med.frequency} />
       <Select label="Class" bind:value={med.class}>
         <option value="">Class</option>
         <option value="anticoagulant">Anticoagulant</option>
@@ -72,28 +65,20 @@
         placeholder="Notes"
         bind:value={med.perioperativeNotes}
       />
-      <Button
-        data-variant="danger"
-        onclick={() => store.data.medications.splice(i, 1)}>Remove</Button
+      <Button data-variant="danger" onclick={() => store.data.medications.splice(i, 1)}
+        >Remove</Button
       >
     </div>
   {/each}
 
   <h3 class="step-subhead">Allergies</h3>
-  <Button
-    data-variant="secondary"
-    onclick={() => store.data.allergies.push(newAllergy())}
-  >
+  <Button data-variant="secondary" onclick={() => store.data.allergies.push(newAllergy())}>
     + Add allergy
   </Button>
 
-  {#each store.data.allergies as a, i}
+  {#each store.data.allergies as a, i (i)}
     <div class="row-grid">
-      <TextInput
-        label="Allergen"
-        placeholder="Allergen"
-        bind:value={a.allergen}
-      />
+      <TextInput label="Allergen" placeholder="Allergen" bind:value={a.allergen} />
       <Select label="Category" bind:value={a.category}>
         <option value="">Category</option>
         <option value="drug">Drug</option>
@@ -115,9 +100,7 @@
         <option value="severe">Severe</option>
         <option value="life-threatening">Life-threatening</option>
       </Select>
-      <Button
-        data-variant="danger"
-        onclick={() => store.data.allergies.splice(i, 1)}>Remove</Button
+      <Button data-variant="danger" onclick={() => store.data.allergies.splice(i, 1)}>Remove</Button
       >
     </div>
   {/each}
@@ -135,10 +118,7 @@
       </Select>
     </Field>
     <Field label="Agonist">
-      <Select
-        label="Agonist"
-        bind:value={store.data.glp1Management.glp1AgonistName}
-      >
+      <Select label="Agonist" bind:value={store.data.glp1Management.glp1AgonistName}>
         <option value="">—</option>
         <option value="semaglutide">Semaglutide</option>
         <option value="tirzepatide">Tirzepatide</option>
@@ -149,10 +129,7 @@
       </Select>
     </Field>
     <Field label="Formulation">
-      <Select
-        label="Formulation"
-        bind:value={store.data.glp1Management.glp1Formulation}
-      >
+      <Select label="Formulation" bind:value={store.data.glp1Management.glp1Formulation}>
         <option value="">—</option>
         <option value="daily">Daily</option>
         <option value="weekly">Weekly</option>
@@ -179,10 +156,7 @@
       </Select>
     </Field>
     <Field label="Active GI symptoms">
-      <Select
-        label="Active GI symptoms"
-        bind:value={store.data.glp1Management.glp1GiSymptoms}
-      >
+      <Select label="Active GI symptoms" bind:value={store.data.glp1Management.glp1GiSymptoms}>
         <option value="">—</option>
         <option value="yes">Yes</option>
         <option value="no">No</option>

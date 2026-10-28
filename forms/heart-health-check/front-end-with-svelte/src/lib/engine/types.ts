@@ -3,15 +3,15 @@
 // ──────────────────────────────────────────────
 
 export interface PatientInformation {
-	fullName: string;
-	dateOfBirth: string;
-	nhsNumber: string;
-	address: string;
-	postcode: string;
-	telephone: string;
-	email: string;
-	gpName: string;
-	gpPractice: string;
+  fullName: string;
+  dateOfBirth: string;
+  nhsNumber: string;
+  address: string;
+  postcode: string;
+  telephone: string;
+  email: string;
+  gpName: string;
+  gpPractice: string;
 }
 
 // ──────────────────────────────────────────────
@@ -19,10 +19,10 @@ export interface PatientInformation {
 // ──────────────────────────────────────────────
 
 export interface DemographicsEthnicity {
-	age: number | null;
-	sex: string;
-	ethnicity: string;
-	townsendDeprivation: number | null;
+  age: number | null;
+  sex: string;
+  ethnicity: string;
+  townsendDeprivation: number | null;
 }
 
 // ──────────────────────────────────────────────
@@ -30,11 +30,11 @@ export interface DemographicsEthnicity {
 // ──────────────────────────────────────────────
 
 export interface BloodPressure {
-	systolicBP: number | null;
-	systolicBPSD: number | null;
-	diastolicBP: number | null;
-	onBPTreatment: string;
-	numberOfBPMedications: number | null;
+  systolicBP: number | null;
+  systolicBPSD: number | null;
+  diastolicBP: number | null;
+  onBPTreatment: string;
+  numberOfBPMedications: number | null;
 }
 
 // ──────────────────────────────────────────────
@@ -42,10 +42,10 @@ export interface BloodPressure {
 // ──────────────────────────────────────────────
 
 export interface Cholesterol {
-	totalCholesterol: number | null;
-	hdlCholesterol: number | null;
-	totalHDLRatio: number | null;
-	onStatin: string;
+  totalCholesterol: number | null;
+  hdlCholesterol: number | null;
+  totalHDLRatio: number | null;
+  onStatin: string;
 }
 
 // ──────────────────────────────────────────────
@@ -53,15 +53,15 @@ export interface Cholesterol {
 // ──────────────────────────────────────────────
 
 export interface MedicalConditions {
-	hasDiabetes: string;
-	hasAtrialFibrillation: string;
-	hasRheumatoidArthritis: string;
-	hasChronicKidneyDisease: string;
-	hasMigraine: string;
-	hasSevereMentalIllness: string;
-	hasErectileDysfunction: string;
-	onAtypicalAntipsychotic: string;
-	onCorticosteroids: string;
+  hasDiabetes: string;
+  hasAtrialFibrillation: string;
+  hasRheumatoidArthritis: string;
+  hasChronicKidneyDisease: string;
+  hasMigraine: string;
+  hasSevereMentalIllness: string;
+  hasErectileDysfunction: string;
+  onAtypicalAntipsychotic: string;
+  onCorticosteroids: string;
 }
 
 // ──────────────────────────────────────────────
@@ -69,9 +69,9 @@ export interface MedicalConditions {
 // ──────────────────────────────────────────────
 
 export interface FamilyHistory {
-	familyCVDUnder60: string;
-	familyCVDRelationship: string;
-	familyDiabetesHistory: string;
+  familyCVDUnder60: string;
+  familyCVDRelationship: string;
+  familyDiabetesHistory: string;
 }
 
 // ──────────────────────────────────────────────
@@ -79,11 +79,11 @@ export interface FamilyHistory {
 // ──────────────────────────────────────────────
 
 export interface SmokingAlcohol {
-	smokingStatus: string;
-	cigarettesPerDay: number | null;
-	yearsSinceQuit: number | null;
-	alcoholUnitsPerWeek: number | null;
-	alcoholFrequency: string;
+  smokingStatus: string;
+  cigarettesPerDay: number | null;
+  yearsSinceQuit: number | null;
+  alcoholUnitsPerWeek: number | null;
+  alcoholFrequency: string;
 }
 
 // ──────────────────────────────────────────────
@@ -91,11 +91,11 @@ export interface SmokingAlcohol {
 // ──────────────────────────────────────────────
 
 export interface PhysicalActivityDiet {
-	physicalActivityMinutesPerWeek: number | null;
-	activityIntensity: string;
-	fruitVegPortionsPerDay: number | null;
-	dietQuality: string;
-	saltIntake: string;
+  physicalActivityMinutesPerWeek: number | null;
+  activityIntensity: string;
+  fruitVegPortionsPerDay: number | null;
+  dietQuality: string;
+  saltIntake: string;
 }
 
 // ──────────────────────────────────────────────
@@ -103,10 +103,10 @@ export interface PhysicalActivityDiet {
 // ──────────────────────────────────────────────
 
 export interface BodyMeasurements {
-	heightCm: number | null;
-	weightKg: number | null;
-	bmi: number | null;
-	waistCircumferenceCm: number | null;
+  heightCm: number | null;
+  weightKg: number | null;
+  bmi: number | null;
+  waistCircumferenceCm: number | null;
 }
 
 // ──────────────────────────────────────────────
@@ -114,10 +114,10 @@ export interface BodyMeasurements {
 // ──────────────────────────────────────────────
 
 export interface ReviewCalculate {
-	clinicianName: string;
-	reviewDate: string;
-	clinicalNotes: string;
-	auditScore: number | null;
+  clinicianName: string;
+  reviewDate: string;
+  clinicalNotes: string;
+  auditScore: number | null;
 }
 
 // ──────────────────────────────────────────────
@@ -125,16 +125,16 @@ export interface ReviewCalculate {
 // ──────────────────────────────────────────────
 
 export interface AssessmentData {
-	patientInformation: PatientInformation;
-	demographicsEthnicity: DemographicsEthnicity;
-	bloodPressure: BloodPressure;
-	cholesterol: Cholesterol;
-	medicalConditions: MedicalConditions;
-	familyHistory: FamilyHistory;
-	smokingAlcohol: SmokingAlcohol;
-	physicalActivityDiet: PhysicalActivityDiet;
-	bodyMeasurements: BodyMeasurements;
-	reviewCalculate: ReviewCalculate;
+  patientInformation: PatientInformation;
+  demographicsEthnicity: DemographicsEthnicity;
+  bloodPressure: BloodPressure;
+  cholesterol: Cholesterol;
+  medicalConditions: MedicalConditions;
+  familyHistory: FamilyHistory;
+  smokingAlcohol: SmokingAlcohol;
+  physicalActivityDiet: PhysicalActivityDiet;
+  bodyMeasurements: BodyMeasurements;
+  reviewCalculate: ReviewCalculate;
 }
 
 // ──────────────────────────────────────────────
@@ -142,26 +142,26 @@ export interface AssessmentData {
 // ──────────────────────────────────────────────
 
 export interface FiredRule {
-	id: string;
-	category: string;
-	description: string;
-	riskLevel: string;
+  id: string;
+  category: string;
+  description: string;
+  riskLevel: string;
 }
 
 export interface AdditionalFlag {
-	id: string;
-	category: string;
-	message: string;
-	priority: 'high' | 'medium' | 'low';
+  id: string;
+  category: string;
+  message: string;
+  priority: 'high' | 'medium' | 'low';
 }
 
 export interface GradingResult {
-	riskCategory: string;
-	tenYearRiskPercent: number;
-	heartAge: number | null;
-	firedRules: FiredRule[];
-	additionalFlags: AdditionalFlag[];
-	timestamp: string;
+  riskCategory: string;
+  tenYearRiskPercent: number;
+  heartAge: number | null;
+  firedRules: FiredRule[];
+  additionalFlags: AdditionalFlag[];
+  timestamp: string;
 }
 
 // ──────────────────────────────────────────────
@@ -169,8 +169,8 @@ export interface GradingResult {
 // ──────────────────────────────────────────────
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
-	section: string;
+  number: number;
+  title: string;
+  shortTitle: string;
+  section: string;
 }

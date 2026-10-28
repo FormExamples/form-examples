@@ -49,7 +49,7 @@ describe('summariseMetrics', () => {
       category: 1,
       categoryTitle: 'Antibiotics, Narcotics & Culture Monitoring',
       reported: 1,
-      total: 3,
+      total: 3
     });
 
     const cat4 = result.categoryCounts.find((c) => c.category === 4);
@@ -57,7 +57,7 @@ describe('summariseMetrics', () => {
       category: 4,
       categoryTitle: 'Infection Control Metrics',
       reported: 2,
-      total: 5,
+      total: 5
     });
 
     const cat9 = result.categoryCounts.find((c) => c.category === 9);
@@ -65,7 +65,7 @@ describe('summariseMetrics', () => {
       category: 9,
       categoryTitle: 'Radiology Metrics',
       reported: 0,
-      total: 1,
+      total: 1
     });
   });
 });

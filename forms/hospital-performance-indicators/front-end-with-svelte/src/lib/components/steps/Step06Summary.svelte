@@ -2,7 +2,7 @@
   import { store } from '#lib/stores/indicators.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { DateInput, TextAreaInput } from "@lilydesignsystem/svelte-headless";
+  import { DateInput, TextAreaInput } from '@lilydesignsystem/svelte-headless';
   import { summariseIndicators } from '#lib/engine/summary.js';
   import { TOTAL_INDICATORS } from '#lib/config/indicators.js';
 
@@ -11,9 +11,8 @@
 
 <Fieldset legend="Step 6 — Summary &amp; sign-off">
   <p class="hint">
-    A tally of indicators recorded, grouped by Balanced Scorecard
-    perspective, followed by overall notes and sign-off. This is a
-    completeness tally, not a scored grading engine.
+    A tally of indicators recorded, grouped by Balanced Scorecard perspective, followed by overall
+    notes and sign-off. This is a completeness tally, not a scored grading engine.
   </p>
 
   <div class="summary-box">
@@ -54,7 +53,9 @@
     padding: 0.75rem 1rem;
     margin: 0 0 1rem;
   }
-  .summary-box p { margin: 0 0 0.25rem; }
+  .summary-box p {
+    margin: 0 0 0.25rem;
+  }
   .category-tally {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
@@ -82,8 +83,19 @@
     border-bottom: 1px dashed var(--color-border);
     padding-bottom: 0.25rem;
   }
-  .category-tally li:last-child { border-bottom: 0; }
-  .category-number { color: var(--color-muted); margin-right: 0.25rem; }
-  .category-title { flex: 1; }
-  .category-count { font-variant-numeric: tabular-nums; color: var(--color-text); font-weight: 600; }
+  .category-tally li:last-child {
+    border-bottom: 0;
+  }
+  .category-number {
+    color: var(--color-muted);
+    margin-right: 0.25rem;
+  }
+  .category-title {
+    flex: 1;
+  }
+  .category-count {
+    font-variant-numeric: tabular-nums;
+    color: var(--color-text);
+    font-weight: 600;
+  }
 </style>

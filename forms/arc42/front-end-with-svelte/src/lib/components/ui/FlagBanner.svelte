@@ -11,7 +11,7 @@
   }
 </script>
 
-{#each flags as flag}
+{#each flags as flag (`${flag.category}:${flag.description}`)}
   <div class="alert" data-type={alertType(flag.priority)} role="alert">
     <p>
       <strong>[{flag.priority.toUpperCase()}]</strong>

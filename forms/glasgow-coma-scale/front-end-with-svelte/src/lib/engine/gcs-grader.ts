@@ -1,11 +1,11 @@
 import type { AssessmentData, FiredRule, GradingResult, SeverityBand } from './types';
 import {
-	eyeOptions,
-	verbalOptions,
-	motorOptions,
-	descriptorLabel,
-	bandForTotal,
-	severityBands
+  eyeOptions,
+  verbalOptions,
+  motorOptions,
+  descriptorLabel,
+  bandForTotal,
+  severityBands
 } from './gcs-rules';
 import { detectFlaggedIssues } from './flagged-issues';
 
@@ -34,13 +34,13 @@ import { detectFlaggedIssues } from './flagged-issues';
 
 /** Uppercase a descriptor enum for a rule id, e.g. 'to-sound' -> 'TO-SOUND'. */
 function ruleToken(value: string): string {
-	return String(value).toUpperCase();
+  return String(value).toUpperCase();
 }
 
 interface ResolvedComponent {
-	score: number | null;
-	nt: boolean;
-	answered: boolean;
+  score: number | null;
+  nt: boolean;
+  answered: boolean;
 }
 
 /**
@@ -48,165 +48,165 @@ interface ResolvedComponent {
  * unanswered. `nt` is true only for an explicit NT selection.
  */
 export function resolveComponent(
-	options: { value: string; score: number | null }[],
-	response: string
+  options: { value: string; score: number | null }[],
+  response: string
 ): ResolvedComponent {
-	if (response === '' || response === null || response === undefined) {
-		return { score: null, nt: false, answered: false };
-	}
-	if (response === 'NT') {
-		return { score: null, nt: true, answered: true };
-	}
-	const opt = options.find((o) => o.value === response);
-	return { score: opt ? opt.score : null, nt: false, answered: true };
+  if (response === '' || response === null || response === undefined) {
+    return { score: null, nt: false, answered: false };
+  }
+  if (response === 'NT') {
+    return { score: null, nt: true, answered: true };
+  }
+  const opt = options.find((o) => o.value === response);
+  return { score: opt ? opt.score : null, nt: false, answered: true };
 }
 
 /** Build the E/V/M breakdown token for one component. */
 function breakdownToken(prefix: string, response: string, score: number | null): string {
-	if (response === '' || response === null || response === undefined) return '';
-	if (response === 'NT') return `${prefix}-NT`;
-	return `${prefix}${score}`;
+  if (response === '' || response === null || response === undefined) return '';
+  if (response === 'NT') return `${prefix}-NT`;
+  return `${prefix}${score}`;
 }
 
 /**
  * Compute the full GCS grade for the supplied assessment data.
  */
 export function calculateGcsGrade(data: AssessmentData): GradingResult {
-	const eye = resolveComponent(eyeOptions, data.eye.eyeResponse);
-	const verbal = resolveComponent(verbalOptions, data.verbal.verbalResponse);
-	const motor = resolveComponent(motorOptions, data.motor.motorResponse);
+  const eye = resolveComponent(eyeOptions, data.eye.eyeResponse);
+  const verbal = resolveComponent(verbalOptions, data.verbal.verbalResponse);
+  const motor = resolveComponent(motorOptions, data.motor.motorResponse);
 
-	const eyeScore = eye.score;
-	const verbalScore = verbal.score;
-	const motorScore = motor.score;
+  const eyeScore = eye.score;
+  const verbalScore = verbal.score;
+  const motorScore = motor.score;
 
-	// Total is defined ONLY when all three components resolve to a number.
-	const allNumeric = eyeScore !== null && verbalScore !== null && motorScore !== null;
-	const totalScore = allNumeric ? eyeScore + verbalScore + motorScore : null;
+  // Total is defined ONLY when all three components resolve to a number.
+  const allNumeric = eyeScore !== null && verbalScore !== null && motorScore !== null;
+  const totalScore = allNumeric ? eyeScore + verbalScore + motorScore : null;
 
-	const severityBand: SeverityBand = bandForTotal(totalScore);
+  const severityBand: SeverityBand = bandForTotal(totalScore);
 
-	// Breakdown string, e.g. "E3 V-NT M5".
-	const breakdown = [
-		breakdownToken('E', data.eye.eyeResponse, eyeScore),
-		breakdownToken('V', data.verbal.verbalResponse, verbalScore),
-		breakdownToken('M', data.motor.motorResponse, motorScore)
-	]
-		.filter(Boolean)
-		.join(' ');
+  // Breakdown string, e.g. "E3 V-NT M5".
+  const breakdown = [
+    breakdownToken('E', data.eye.eyeResponse, eyeScore),
+    breakdownToken('V', data.verbal.verbalResponse, verbalScore),
+    breakdownToken('M', data.motor.motorResponse, motorScore)
+  ]
+    .filter(Boolean)
+    .join(' ');
 
-	// Total display: numeric total, or the "T" convention for an intubated
-	// verbal-NT patient (eye + motor sum with a trailing T, e.g. "9T").
-	let totalDisplay = '';
-	if (totalScore !== null) {
-		totalDisplay = String(totalScore);
-	} else if (
-		data.verbal.verbalResponse === 'NT' &&
-		data.confounders.intubated === 'yes' &&
-		eyeScore !== null &&
-		motorScore !== null
-	) {
-		totalDisplay = `${eyeScore + motorScore}T`;
-	}
+  // Total display: numeric total, or the "T" convention for an intubated
+  // verbal-NT patient (eye + motor sum with a trailing T, e.g. "9T").
+  let totalDisplay = '';
+  if (totalScore !== null) {
+    totalDisplay = String(totalScore);
+  } else if (
+    data.verbal.verbalResponse === 'NT' &&
+    data.confounders.intubated === 'yes' &&
+    eyeScore !== null &&
+    motorScore !== null
+  ) {
+    totalDisplay = `${eyeScore + motorScore}T`;
+  }
 
-	// Pupil Reactivity Score: count of pupils unreactive to light, when both
-	// pupils were examined (reactivity recorded on each side).
-	const left = data.pupils.leftPupilReactivity;
-	const right = data.pupils.rightPupilReactivity;
-	let pupilReactivityScore: number | null = null;
-	if (left !== '' && right !== '') {
-		pupilReactivityScore = (left === 'unreactive' ? 1 : 0) + (right === 'unreactive' ? 1 : 0);
-	}
+  // Pupil Reactivity Score: count of pupils unreactive to light, when both
+  // pupils were examined (reactivity recorded on each side).
+  const left = data.pupils.leftPupilReactivity;
+  const right = data.pupils.rightPupilReactivity;
+  let pupilReactivityScore: number | null = null;
+  if (left !== '' && right !== '') {
+    pupilReactivityScore = (left === 'unreactive' ? 1 : 0) + (right === 'unreactive' ? 1 : 0);
+  }
 
-	// GCS-Pupils: total minus PRS, only when both are defined.
-	const gcsP =
-		totalScore !== null && pupilReactivityScore !== null ? totalScore - pupilReactivityScore : null;
+  // GCS-Pupils: total minus PRS, only when both are defined.
+  const gcsP =
+    totalScore !== null && pupilReactivityScore !== null ? totalScore - pupilReactivityScore : null;
 
-	// ─── Audit trail: fired rules ────────────────────────────────
-	const firedRules: FiredRule[] = [];
+  // ─── Audit trail: fired rules ────────────────────────────────
+  const firedRules: FiredRule[] = [];
 
-	const componentRule = (
-		component: string,
-		prefix: string,
-		options: { value: string; score: number | null; label: string }[],
-		response: string,
-		score: number | null
-	) => {
-		if (response === '' || response === null || response === undefined) return;
-		if (response === 'NT') {
-			firedRules.push({
-				id: `R-${prefix}-NOT-TESTABLE-01`,
-				component,
-				points: null,
-				category: 'component-not-testable',
-				description: `${component[0].toUpperCase()}${component.slice(1)} component not testable`
-			});
-			return;
-		}
-		firedRules.push({
-			id: `R-${prefix}-${ruleToken(response)}-01`,
-			component,
-			points: score,
-			category: 'component-score',
-			description: descriptorLabel(options, response)
-		});
-	};
+  const componentRule = (
+    component: string,
+    prefix: string,
+    options: { value: string; score: number | null; label: string }[],
+    response: string,
+    score: number | null
+  ) => {
+    if (response === '' || response === null || response === undefined) return;
+    if (response === 'NT') {
+      firedRules.push({
+        id: `R-${prefix}-NOT-TESTABLE-01`,
+        component,
+        points: null,
+        category: 'component-not-testable',
+        description: `${component[0].toUpperCase()}${component.slice(1)} component not testable`
+      });
+      return;
+    }
+    firedRules.push({
+      id: `R-${prefix}-${ruleToken(response)}-01`,
+      component,
+      points: score,
+      category: 'component-score',
+      description: descriptorLabel(options, response)
+    });
+  };
 
-	componentRule('eye', 'EYE', eyeOptions, data.eye.eyeResponse, eyeScore);
-	componentRule('verbal', 'VERBAL', verbalOptions, data.verbal.verbalResponse, verbalScore);
-	componentRule('motor', 'MOTOR', motorOptions, data.motor.motorResponse, motorScore);
+  componentRule('eye', 'EYE', eyeOptions, data.eye.eyeResponse, eyeScore);
+  componentRule('verbal', 'VERBAL', verbalOptions, data.verbal.verbalResponse, verbalScore);
+  componentRule('motor', 'MOTOR', motorOptions, data.motor.motorResponse, motorScore);
 
-	if (severityBand) {
-		const bandDef = severityBands.find((b) => b.band === severityBand);
-		firedRules.push({
-			id: `R-TOTAL-BAND-${ruleToken(severityBand)}-01`,
-			component: 'total',
-			points: totalScore,
-			category: 'severity-band',
-			description: `Total GCS ${totalScore} — ${bandDef ? bandDef.interpretation : severityBand}`
-		});
-	}
+  if (severityBand) {
+    const bandDef = severityBands.find((b) => b.band === severityBand);
+    firedRules.push({
+      id: `R-TOTAL-BAND-${ruleToken(severityBand)}-01`,
+      component: 'total',
+      points: totalScore,
+      category: 'severity-band',
+      description: `Total GCS ${totalScore} — ${bandDef ? bandDef.interpretation : severityBand}`
+    });
+  }
 
-	if (pupilReactivityScore !== null) {
-		firedRules.push({
-			id: 'R-PUPIL-REACTIVITY-01',
-			component: 'pupils',
-			points: pupilReactivityScore,
-			category: 'pupil-reactivity',
-			description: `Pupil Reactivity Score ${pupilReactivityScore} (pupils unreactive to light)`
-		});
-	}
+  if (pupilReactivityScore !== null) {
+    firedRules.push({
+      id: 'R-PUPIL-REACTIVITY-01',
+      component: 'pupils',
+      points: pupilReactivityScore,
+      category: 'pupil-reactivity',
+      description: `Pupil Reactivity Score ${pupilReactivityScore} (pupils unreactive to light)`
+    });
+  }
 
-	if (gcsP !== null) {
-		firedRules.push({
-			id: 'R-GCS-P-01',
-			component: 'gcs-p',
-			points: gcsP,
-			category: 'gcs-pupils',
-			description: `GCS-Pupils = total ${totalScore} − PRS ${pupilReactivityScore} = ${gcsP}`
-		});
-	}
+  if (gcsP !== null) {
+    firedRules.push({
+      id: 'R-GCS-P-01',
+      component: 'gcs-p',
+      points: gcsP,
+      category: 'gcs-pupils',
+      description: `GCS-Pupils = total ${totalScore} − PRS ${pupilReactivityScore} = ${gcsP}`
+    });
+  }
 
-	const flaggedIssues = detectFlaggedIssues(data, {
-		totalScore,
-		motorScore,
-		eyeScore,
-		verbalScore,
-		pupilReactivityScore
-	});
+  const flaggedIssues = detectFlaggedIssues(data, {
+    totalScore,
+    motorScore,
+    eyeScore,
+    verbalScore,
+    pupilReactivityScore
+  });
 
-	return {
-		eyeScore,
-		verbalScore,
-		motorScore,
-		totalScore,
-		breakdown,
-		totalDisplay,
-		severityBand,
-		pupilReactivityScore,
-		gcsP,
-		firedRules,
-		flaggedIssues,
-		timestamp: new Date().toISOString()
-	};
+  return {
+    eyeScore,
+    verbalScore,
+    motorScore,
+    totalScore,
+    breakdown,
+    totalDisplay,
+    severityBand,
+    pupilReactivityScore,
+    gcsP,
+    firedRules,
+    flaggedIssues,
+    timestamp: new Date().toISOString()
+  };
 }

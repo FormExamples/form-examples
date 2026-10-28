@@ -1,22 +1,22 @@
 <script lang="ts">
-	import Field from '#lib/components/ui/Field.svelte';
-	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import { TextAreaInput } from "@lilydesignsystem/svelte-headless";
-	import { resultStore } from '#lib/stores/result.svelte.js';
+  import Field from '#lib/components/ui/Field.svelte';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import { TextAreaInput } from '@lilydesignsystem/svelte-headless';
+  import { resultStore } from '#lib/stores/result.svelte.js';
 
-	const d = $state(resultStore.data);
+  const d = $state(resultStore.data);
 </script>
 
 <Fieldset legend="2. Clinical History">
-	<p class="hint">The clinical history and the question the test was performed to answer.</p>
+  <p class="hint">The clinical history and the question the test was performed to answer.</p>
 
-	<Field label="Clinical history" inputId="clinicalHistory">
-		<TextAreaInput
-			id="clinicalHistory"
-			label="Clinical history"
-			rows={4}
-			placeholder="Clinical history, suspected triggers, and the question the test was performed to answer…"
-			bind:value={d.clinicalHistory}
-		/>
-	</Field>
+  <Field label="Clinical history" inputId="clinicalHistory">
+    <TextAreaInput
+      id="clinicalHistory"
+      label="Clinical history"
+      rows={4}
+      placeholder="Clinical history, suspected triggers, and the question the test was performed to answer…"
+      bind:value={d.clinicalHistory}
+    />
+  </Field>
 </Fieldset>

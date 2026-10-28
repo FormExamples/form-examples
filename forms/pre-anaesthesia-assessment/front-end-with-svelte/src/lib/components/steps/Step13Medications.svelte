@@ -2,7 +2,7 @@
   import { store } from '#lib/stores/assessment.svelte.js';
   import type { Medication, Allergy } from '#lib/engine/types.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
-  import { Button, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { Button, TextInput } from '@lilydesignsystem/svelte-headless';
   import Select from '#lib/components/ui/Select.svelte';
 
   function newMed(): Medication {
@@ -15,7 +15,7 @@
       class: '',
       perioperativeAction: '',
       perioperativeNotes: '',
-      lastDoseAt: '',
+      lastDoseAt: ''
     };
   }
   function newAllergy(): Allergy {
@@ -25,7 +25,7 @@
       reactionType: '',
       reactionSeverity: '',
       reactionNotes: '',
-      verified: '',
+      verified: ''
     };
   }
 </script>
@@ -36,7 +36,7 @@
     + Add medication
   </Button>
 
-  {#each store.data.medications as med, i}
+  {#each store.data.medications as med, i (i)}
     <div class="row-grid">
       <TextInput label="Name" placeholder="Name" bind:value={med.name} />
       <TextInput label="Dose" placeholder="Dose" bind:value={med.dose} />
@@ -58,8 +58,15 @@
         <option value="stop">Stop</option>
         <option value="bridge">Bridge</option>
       </Select>
-      <TextInput label="Notes" class="row-span-2" placeholder="Notes" bind:value={med.perioperativeNotes} />
-      <Button data-variant="danger" onclick={() => store.data.medications.splice(i, 1)}>Remove</Button>
+      <TextInput
+        label="Notes"
+        class="row-span-2"
+        placeholder="Notes"
+        bind:value={med.perioperativeNotes}
+      />
+      <Button data-variant="danger" onclick={() => store.data.medications.splice(i, 1)}
+        >Remove</Button
+      >
     </div>
   {/each}
 
@@ -68,7 +75,7 @@
     + Add allergy
   </Button>
 
-  {#each store.data.allergies as a, i}
+  {#each store.data.allergies as a, i (i)}
     <div class="row-grid">
       <TextInput label="Allergen" placeholder="Allergen" bind:value={a.allergen} />
       <Select label="Category" bind:value={a.category}>
@@ -92,7 +99,8 @@
         <option value="severe">Severe</option>
         <option value="life-threatening">Life-threatening</option>
       </Select>
-      <Button data-variant="danger" onclick={() => store.data.allergies.splice(i, 1)}>Remove</Button>
+      <Button data-variant="danger" onclick={() => store.data.allergies.splice(i, 1)}>Remove</Button
+      >
     </div>
   {/each}
 </Fieldset>

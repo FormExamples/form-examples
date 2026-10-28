@@ -3,7 +3,7 @@
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
-  import { RadioGroup } from "@lilydesignsystem/svelte-headless";
+  import { RadioGroup } from '@lilydesignsystem/svelte-headless';
 
   const bp = assessment.data.bloodPressure;
 </script>
@@ -13,20 +13,42 @@
 
   <div class="field-grid">
     <Field label="Systolic BP (mmHg)" inputId="step-3-systolicBp" required>
-      <NumberInput id="step-3-systolicBp" label="Systolic BP" min={60} max={300} bind:value={bp.systolicBp} />
+      <NumberInput
+        id="step-3-systolicBp"
+        label="Systolic BP"
+        min={60}
+        max={300}
+        bind:value={bp.systolicBp}
+      />
     </Field>
     <Field label="Diastolic BP (mmHg)" inputId="step-3-diastolicBp" required>
-      <NumberInput id="step-3-diastolicBp" label="Diastolic BP" min={30} max={200} bind:value={bp.diastolicBp} />
+      <NumberInput
+        id="step-3-diastolicBp"
+        label="Diastolic BP"
+        min={30}
+        max={200}
+        bind:value={bp.diastolicBp}
+      />
     </Field>
   </div>
 
   <Field label="On antihypertensive medication?">
     <RadioGroup label="On antihypertensive medication?">
       <label class="radio-input">
-        <input type="radio" name="onAntihypertensive" value="yes" bind:group={bp.onAntihypertensive} /> Yes
+        <input
+          type="radio"
+          name="onAntihypertensive"
+          value="yes"
+          bind:group={bp.onAntihypertensive}
+        /> Yes
       </label>
       <label class="radio-input">
-        <input type="radio" name="onAntihypertensive" value="no" bind:group={bp.onAntihypertensive} /> No
+        <input
+          type="radio"
+          name="onAntihypertensive"
+          value="no"
+          bind:group={bp.onAntihypertensive}
+        /> No
       </label>
     </RadioGroup>
   </Field>

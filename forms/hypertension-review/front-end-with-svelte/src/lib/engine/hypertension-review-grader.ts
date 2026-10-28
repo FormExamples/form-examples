@@ -1,12 +1,17 @@
 import type {
-	AssessmentData,
-	ComponentStatus,
-	ControlStatus,
-	FiredRule,
-	GradingResult,
-	ReviewStatus
+  AssessmentData,
+  ComponentStatus,
+  ControlStatus,
+  FiredRule,
+  GradingResult,
+  ReviewStatus
 } from './types';
-import { COMPONENTS, classifyControl, computeStage, selectTarget } from './hypertension-review-rules';
+import {
+  COMPONENTS,
+  classifyControl,
+  computeStage,
+  selectTarget
+} from './hypertension-review-rules';
 import { detectFlaggedIssues } from './flagged-issues';
 import { controlStatusLabel, hypertensionStageLabel } from './utils';
 
@@ -22,11 +27,11 @@ import { controlStatusLabel, hypertensionStageLabel } from './utils';
 
 /** Evaluate each review component's documentation status. */
 export function computeComponentStatuses(data: AssessmentData): ComponentStatus[] {
-	return COMPONENTS.map((c) => ({
-		component: c.component,
-		label: c.label,
-		documented: c.satisfied(data) === true
-	}));
+  return COMPONENTS.map((c) => ({
+    component: c.component,
+    label: c.label,
+    documented: c.satisfied(data) === true
+  }));
 }
 
 /**
@@ -35,15 +40,15 @@ export function computeComponentStatuses(data: AssessmentData): ComponentStatus[
  * component is documented, else partial.
  */
 export function gradeReviewStatus(
-	_data: AssessmentData,
-	componentStatuses: ComponentStatus[]
+  _data: AssessmentData,
+  componentStatuses: ComponentStatus[]
 ): ReviewStatus {
-	const bp = componentStatuses.find((c) => c.component === 'blood-pressure');
-	const hasBp = !!(bp && bp.documented);
-	if (!hasBp) return 'incomplete';
-	const secondary = componentStatuses.filter((c) => c.component !== 'blood-pressure');
-	const coreComplete = secondary.every((c) => c.documented);
-	return coreComplete ? 'complete' : 'partial';
+  const bp = componentStatuses.find((c) => c.component === 'blood-pressure');
+  const hasBp = !!(bp && bp.documented);
+  if (!hasBp) return 'incomplete';
+  const secondary = componentStatuses.filter((c) => c.component !== 'blood-pressure');
+  const coreComplete = secondary.every((c) => c.documented);
+  return coreComplete ? 'complete' : 'partial';
 }
 
 /**
@@ -51,10 +56,10 @@ export function gradeReviewStatus(
  * source, and hypertension stage.
  */
 export function computeControlStatus(data: AssessmentData): ControlStatus {
-	const bpTarget = selectTarget(data);
-	const { controlClass, primarySource } = classifyControl(data, bpTarget);
-	const hypertensionStage = computeStage(data);
-	return { controlClass, bpTarget, primarySource, hypertensionStage };
+  const bpTarget = selectTarget(data);
+  const { controlClass, primarySource } = classifyControl(data, bpTarget);
+  const hypertensionStage = computeStage(data);
+  return { controlClass, bpTarget, primarySource, hypertensionStage };
 }
 
 /**
@@ -62,62 +67,62 @@ export function computeControlStatus(data: AssessmentData): ControlStatus {
  * canonical engine entry point (spec §6).
  */
 export function review(data: AssessmentData): GradingResult {
-	const componentStatuses = computeComponentStatuses(data);
-	const reviewStatus = gradeReviewStatus(data, componentStatuses);
-	const controlStatus = computeControlStatus(data);
+  const componentStatuses = computeComponentStatuses(data);
+  const reviewStatus = gradeReviewStatus(data, componentStatuses);
+  const controlStatus = computeControlStatus(data);
 
-	const flags = detectFlaggedIssues(data, {
-		controlClass: controlStatus.controlClass,
-		reviewStatus
-	});
+  const flags = detectFlaggedIssues(data, {
+    controlClass: controlStatus.controlClass,
+    reviewStatus
+  });
 
-	const documented = componentStatuses.filter((c) => c.documented).length;
-	const total = componentStatuses.length;
+  const documented = componentStatuses.filter((c) => c.documented).length;
+  const total = componentStatuses.length;
 
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	firedRules.push({
-		id: 'R-TARGET-01',
-		category: 'target',
-		description:
-			`Target group: ${controlStatus.bpTarget.group} — clinic ` +
-			`${controlStatus.bpTarget.clinic.systolic}/${controlStatus.bpTarget.clinic.diastolic}, ` +
-			`home ${controlStatus.bpTarget.home.systolic}/${controlStatus.bpTarget.home.diastolic} mmHg`
-	});
+  firedRules.push({
+    id: 'R-TARGET-01',
+    category: 'target',
+    description:
+      `Target group: ${controlStatus.bpTarget.group} — clinic ` +
+      `${controlStatus.bpTarget.clinic.systolic}/${controlStatus.bpTarget.clinic.diastolic}, ` +
+      `home ${controlStatus.bpTarget.home.systolic}/${controlStatus.bpTarget.home.diastolic} mmHg`
+  });
 
-	firedRules.push({
-		id: 'R-CONTROL-01',
-		category: 'control',
-		description:
-			controlStatus.primarySource === 'none'
-				? 'No blood pressure recorded — control not classified'
-				: `Control classified ${controlStatusLabel(controlStatus.controlClass)} ` +
-					`against the ${controlStatus.primarySource} reading`
-	});
+  firedRules.push({
+    id: 'R-CONTROL-01',
+    category: 'control',
+    description:
+      controlStatus.primarySource === 'none'
+        ? 'No blood pressure recorded — control not classified'
+        : `Control classified ${controlStatusLabel(controlStatus.controlClass)} ` +
+          `against the ${controlStatus.primarySource} reading`
+  });
 
-	firedRules.push({
-		id: 'R-STAGE-01',
-		category: 'stage',
-		description: `Hypertension stage: ${hypertensionStageLabel(controlStatus.hypertensionStage)}`
-	});
+  firedRules.push({
+    id: 'R-STAGE-01',
+    category: 'stage',
+    description: `Hypertension stage: ${hypertensionStageLabel(controlStatus.hypertensionStage)}`
+  });
 
-	firedRules.push({
-		id: 'R-COMPLETENESS-01',
-		category: 'completeness',
-		description:
-			reviewStatus === 'complete'
-				? `All ${total} review components documented — review complete`
-				: reviewStatus === 'incomplete'
-					? 'No blood-pressure reading recorded — review incomplete'
-					: `${documented} of ${total} review components documented — review partial`
-	});
+  firedRules.push({
+    id: 'R-COMPLETENESS-01',
+    category: 'completeness',
+    description:
+      reviewStatus === 'complete'
+        ? `All ${total} review components documented — review complete`
+        : reviewStatus === 'incomplete'
+          ? 'No blood-pressure reading recorded — review incomplete'
+          : `${documented} of ${total} review components documented — review partial`
+  });
 
-	return {
-		controlStatus,
-		reviewStatus,
-		componentStatuses,
-		firedRules,
-		flags,
-		timestamp: new Date().toISOString()
-	};
+  return {
+    controlStatus,
+    reviewStatus,
+    componentStatuses,
+    firedRules,
+    flags,
+    timestamp: new Date().toISOString()
+  };
 }

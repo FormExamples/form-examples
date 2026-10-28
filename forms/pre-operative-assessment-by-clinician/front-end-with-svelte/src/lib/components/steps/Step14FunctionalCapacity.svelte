@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { store } from "#lib/stores/assessment.svelte.js";
-  import Fieldset from "#lib/components/ui/Fieldset.svelte";
-  import Field from "#lib/components/ui/Field.svelte";
-  import NumberInput from "#lib/components/ui/NumberInput.svelte";
-  import Select from "#lib/components/ui/Select.svelte";
-  import { DateInput, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { store } from '#lib/stores/assessment.svelte.js';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import Field from '#lib/components/ui/Field.svelte';
+  import NumberInput from '#lib/components/ui/NumberInput.svelte';
+  import Select from '#lib/components/ui/Select.svelte';
+  import { DateInput, TextInput } from '@lilydesignsystem/svelte-headless';
 </script>
 
 <Fieldset legend="Step 14 — Functional capacity and frailty">
@@ -46,10 +46,7 @@
       />
     </Field>
     <Field label="CPET performed">
-      <Select
-        label="CPET performed"
-        bind:value={store.data.functionalCapacity.cpetPerformed}
-      >
+      <Select label="CPET performed" bind:value={store.data.functionalCapacity.cpetPerformed}>
         <option value="">—</option>
         <option value="yes">Yes</option>
         <option value="no">No</option>
@@ -70,10 +67,7 @@
       />
     </Field>
     <Field label="Malnutrition risk">
-      <Select
-        label="Malnutrition risk"
-        bind:value={store.data.functionalCapacity.malnutritionRisk}
-      >
+      <Select label="Malnutrition risk" bind:value={store.data.functionalCapacity.malnutritionRisk}>
         <option value="">—</option>
         <option value="none">None</option>
         <option value="low">Low</option>
@@ -86,10 +80,7 @@
   <h3 class="step-subhead">Social history</h3>
   <div class="field-grid field-grid-3">
     <Field label="Living situation">
-      <Select
-        label="Living situation"
-        bind:value={store.data.functionalCapacity.livingSituation}
-      >
+      <Select label="Living situation" bind:value={store.data.functionalCapacity.livingSituation}>
         <option value="">—</option>
         <option value="independent">Independent</option>
         <option value="lives-with-family">Lives with family</option>
@@ -99,10 +90,7 @@
       </Select>
     </Field>
     <Field label="Support at home">
-      <Select
-        label="Support at home"
-        bind:value={store.data.functionalCapacity.supportAtHome}
-      >
+      <Select label="Support at home" bind:value={store.data.functionalCapacity.supportAtHome}>
         <option value="">—</option>
         <option value="yes">Yes</option>
         <option value="no">No</option>
@@ -129,20 +117,14 @@
   <h3 class="step-subhead">Fried Frailty Phenotype</h3>
   <div class="field-grid field-grid-3">
     <Field label="Weakness">
-      <Select
-        label="Weakness"
-        bind:value={store.data.functionalCapacity.friedWeakness}
-      >
+      <Select label="Weakness" bind:value={store.data.functionalCapacity.friedWeakness}>
         <option value="">—</option>
         <option value="yes">Yes</option>
         <option value="no">No</option>
       </Select>
     </Field>
     <Field label="Slowness">
-      <Select
-        label="Slowness"
-        bind:value={store.data.functionalCapacity.friedSlowness}
-      >
+      <Select label="Slowness" bind:value={store.data.functionalCapacity.friedSlowness}>
         <option value="">—</option>
         <option value="yes">Yes</option>
         <option value="no">No</option>
@@ -159,10 +141,7 @@
       </Select>
     </Field>
     <Field label="Exhaustion">
-      <Select
-        label="Exhaustion"
-        bind:value={store.data.functionalCapacity.friedExhaustion}
-      >
+      <Select label="Exhaustion" bind:value={store.data.functionalCapacity.friedExhaustion}>
         <option value="">—</option>
         <option value="yes">Yes</option>
         <option value="no">No</option>
@@ -245,9 +224,7 @@
     <Field label="Protein supplementation recommended">
       <Select
         label="Protein supplementation recommended"
-        bind:value={
-          store.data.functionalCapacity.proteinSupplementationRecommended
-        }
+        bind:value={store.data.functionalCapacity.proteinSupplementationRecommended}
       >
         <option value="">—</option>
         <option value="yes">Yes</option>

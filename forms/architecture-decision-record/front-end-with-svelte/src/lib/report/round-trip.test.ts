@@ -11,7 +11,15 @@ import { parseMarkdown } from './parse-markdown.js';
 // should produce semantically identical output. We compare *parsed* states
 // rather than raw strings because the emitter normalises whitespace.
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const EXAMPLE_ADR_PATH = join(__dirname, '..', '..', '..', '..', 'doc', '0001-use-tyree-and-akerman-template.md');
+const EXAMPLE_ADR_PATH = join(
+  __dirname,
+  '..',
+  '..',
+  '..',
+  '..',
+  'doc',
+  '0001-use-tyree-and-akerman-template.md'
+);
 
 describe('round-trip of doc/0001-use-tyree-and-akerman-template.md', () => {
   it('parses the example ADR cleanly', () => {

@@ -3,7 +3,7 @@
 //
 // Pure: both dates come from the recorded data, never from the system clock.
 
-import type { DomainEvaluation, DomainResult, DomainStatus } from "./types";
+import type { DomainEvaluation, DomainResult, DomainStatus } from './types';
 
 export const MILLISECONDS_PER_WEEK = 7 * 24 * 60 * 60 * 1000;
 
@@ -19,10 +19,7 @@ export const MILLISECONDS_PER_WEEK = 7 * 24 * 60 * 60 * 1000;
  * @param {string} plannedSurgeryDate - ISO date "YYYY-MM-DD"
  * @returns {number|null}
  */
-export function weeksBetween(
-  assessmentDate: string,
-  plannedSurgeryDate: string,
-): number | null {
+export function weeksBetween(assessmentDate: string, plannedSurgeryDate: string): number | null {
   if (!assessmentDate || !plannedSurgeryDate) return null;
   const from = new Date(assessmentDate);
   const to = new Date(plannedSurgeryDate);
@@ -39,31 +36,31 @@ export function weeksBetween(
  */
 export function gateDomain(
   evaluation: DomainEvaluation,
-  weeksToSurgery: number | null,
+  weeksToSurgery: number | null
 ): { status: DomainStatus; weeksShortfall: number | null } {
   if (!evaluation.triggered) {
     return {
-      status: evaluation.applicable ? "optimized" : "not-applicable",
-      weeksShortfall: null,
+      status: evaluation.applicable ? 'optimized' : 'not-applicable',
+      weeksShortfall: null
     };
   }
 
   // Ungated: no surgery date, so report the least alarming actionable status
   // and let the report say that gating could not be applied.
   if (weeksToSurgery === null) {
-    return { status: "action-required", weeksShortfall: null };
+    return { status: 'action-required', weeksShortfall: null };
   }
 
   const shortfall = evaluation.leadTimeWeeks - weeksToSurgery;
 
   if (weeksToSurgery >= evaluation.leadTimeWeeks) {
     return {
-      status: evaluation.started ? "in-progress" : "action-required",
-      weeksShortfall: null,
+      status: evaluation.started ? 'in-progress' : 'action-required',
+      weeksShortfall: null
     };
   }
 
-  return { status: "insufficient-time", weeksShortfall: shortfall };
+  return { status: 'insufficient-time', weeksShortfall: shortfall };
 }
 
 /**
@@ -77,16 +74,16 @@ export function gateDomain(
  */
 export function recommendedEarliestSurgeryDate(
   domains: DomainResult[],
-  plannedSurgeryDate: string,
+  plannedSurgeryDate: string
 ): string {
-  if (!plannedSurgeryDate) return "";
+  if (!plannedSurgeryDate) return '';
   const shortfalls = domains
     .map((d) => d.weeksShortfall)
-    .filter((w): w is number => typeof w === "number" && w > 0);
-  if (shortfalls.length === 0) return "";
+    .filter((w): w is number => typeof w === 'number' && w > 0);
+  if (shortfalls.length === 0) return '';
   const worst = Math.max(...shortfalls);
   const planned = new Date(plannedSurgeryDate);
-  if (Number.isNaN(planned.getTime())) return "";
+  if (Number.isNaN(planned.getTime())) return '';
   const moved = new Date(planned.getTime() + worst * MILLISECONDS_PER_WEEK);
   return moved.toISOString().slice(0, 10);
 }

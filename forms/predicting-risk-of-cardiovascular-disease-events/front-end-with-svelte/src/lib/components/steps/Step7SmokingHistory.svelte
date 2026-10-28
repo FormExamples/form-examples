@@ -22,7 +22,13 @@
 
   {#if sh.smokingStatus === 'current' || sh.smokingStatus === 'former'}
     <Field label="Years smoked" inputId="step-7-yearsSmoked">
-      <NumberInput id="step-7-yearsSmoked" label="Years smoked" min={1} max={80} bind:value={sh.yearsSmoked} />
+      <NumberInput
+        id="step-7-yearsSmoked"
+        label="Years smoked"
+        min={1}
+        max={80}
+        bind:value={sh.yearsSmoked}
+      />
     </Field>
   {/if}
 

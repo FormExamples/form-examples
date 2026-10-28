@@ -17,9 +17,7 @@ export function applyCountRules(data: OperationNote): {
   const firedRules: FiredRule[] = [];
 
   const anyDisagreed =
-    s.swabCountAgreed === 'no' ||
-    s.needleCountAgreed === 'no' ||
-    s.instrumentCountAgreed === 'no';
+    s.swabCountAgreed === 'no' || s.needleCountAgreed === 'no' || s.instrumentCountAgreed === 'no';
 
   const allAgreed =
     s.swabCountAgreed === 'yes' &&
@@ -32,7 +30,7 @@ export function applyCountRules(data: OperationNote): {
       instrument: 'counts',
       grade: 'discrepancy',
       category: 'safety',
-      description: 'Swab / needle / instrument count discrepancy at sign-out',
+      description: 'Swab / needle / instrument count discrepancy at sign-out'
     });
     return { countsAgreed: false, discrepancyRisk: 'high-risk', firedRules };
   }
@@ -40,6 +38,6 @@ export function applyCountRules(data: OperationNote): {
   return {
     countsAgreed: allAgreed,
     discrepancyRisk: 'routine',
-    firedRules,
+    firedRules
   };
 }

@@ -41,7 +41,7 @@ describe('parseMarkdown', () => {
     ];
     original.notes = [
       { notedAt: '2026-05-08T10:00:00Z', notedBy: 'Lin Chen', body: 'Aligned with platform.' },
-      { notedAt: '2026-05-09T11:30:00Z', notedBy: '',         body: 'Security review pending.' }
+      { notedAt: '2026-05-09T11:30:00Z', notedBy: '', body: 'Security review pending.' }
     ];
     original.adr.signedOffBy = 'Lin Chen';
     original.adr.signedOffAt = '2026-05-15T09:00:00Z';

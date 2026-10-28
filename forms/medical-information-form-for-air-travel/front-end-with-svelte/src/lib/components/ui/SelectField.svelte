@@ -7,7 +7,7 @@
     value = $bindable(),
     options,
     hint = '',
-    required = false,
+    required = false
   }: {
     label: string;
     value: string;

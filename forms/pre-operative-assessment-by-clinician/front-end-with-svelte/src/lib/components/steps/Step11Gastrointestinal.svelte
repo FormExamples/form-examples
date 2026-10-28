@@ -57,7 +57,10 @@
       />
     </Field>
     <Field label="RSI needed?">
-      <Select label="RSI needed?" bind:value={store.data.gastrointestinal.rapidSequenceInductionNeeded}>
+      <Select
+        label="RSI needed?"
+        bind:value={store.data.gastrointestinal.rapidSequenceInductionNeeded}
+      >
         <option value="">—</option>
         <option value="yes">Yes</option>
         <option value="no">No</option>

@@ -4,7 +4,7 @@
     value = $bindable(''),
     placeholder = '',
     type = 'text',
-    id = undefined,
+    id = undefined
   }: {
     value: string;
     placeholder?: string;
@@ -24,10 +24,4 @@
   });
 </script>
 
-<input
-  {type}
-  {id}
-  {placeholder}
-  bind:value
-  class={inputClass}
-/>
+<input {type} {id} {placeholder} bind:value class={inputClass} />

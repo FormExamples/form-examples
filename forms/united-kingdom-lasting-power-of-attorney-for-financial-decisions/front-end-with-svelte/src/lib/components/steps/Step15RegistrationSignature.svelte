@@ -13,8 +13,8 @@
       return [
         {
           personId: store.data.donor.id,
-          label: `Donor — ${store.data.donor.firstNames} ${store.data.donor.lastName}`.trim(),
-        },
+          label: `Donor — ${store.data.donor.firstNames} ${store.data.donor.lastName}`.trim()
+        }
       ];
     }
     if (app.applicantKind === 'attorneys') {
@@ -22,13 +22,13 @@
       const ids = new Set(
         store.data.signatures
           .filter((s) => s.role === 'applicant' && s.lp1fSection === 15)
-          .map((s) => s.signatoryPersonId),
+          .map((s) => s.signatoryPersonId)
       );
       return store.data.attorneys
         .filter((a) => ids.has(a.person.id))
         .map((a) => ({
           personId: a.person.id,
-          label: `Attorney #${a.ordinal} — ${a.person.firstNames} ${a.person.lastName}`.trim(),
+          label: `Attorney #${a.ordinal} — ${a.person.firstNames} ${a.person.lastName}`.trim()
         }));
     }
     return [];
@@ -44,7 +44,7 @@
         (s) =>
           s.role === 'applicant' &&
           s.lp1fSection === 15 &&
-          s.signatoryPersonId === store.data.donor.id,
+          s.signatoryPersonId === store.data.donor.id
       );
       if (!exists) {
         store.data.signatures.push({
@@ -56,7 +56,7 @@
           signedOn: '',
           signedOnBehalfFullName: '',
           isWitnessed: false,
-          witness: null,
+          witness: null
         });
       }
     }
@@ -64,10 +64,7 @@
 
   function sigFor(personId: string) {
     return store.data.signatures.find(
-      (s) =>
-        s.role === 'applicant' &&
-        s.lp1fSection === 15 &&
-        s.signatoryPersonId === personId,
+      (s) => s.role === 'applicant' && s.lp1fSection === 15 && s.signatoryPersonId === personId
     );
   }
 
@@ -82,16 +79,16 @@
 </script>
 
 <section>
-  <h2 class="text-xl font-semibold mb-2">Step 15 &mdash; Registration signature (LP1F section 15)</h2>
+  <h2 class="text-xl font-semibold mb-2">
+    Step 15 &mdash; Registration signature (LP1F section 15)
+  </h2>
   <p class="text-sm text-base-content/70 mb-3">
-    Each applicant signs the registration request. If attorneys are appointed jointly, every
-    joint attorney must sign here.
+    Each applicant signs the registration request. If attorneys are appointed jointly, every joint
+    attorney must sign here.
   </p>
 
   {#if app.applicantKind === ''}
-    <p class="text-sm text-error">
-      Choose an applicant kind in step 12 first.
-    </p>
+    <p class="text-sm text-error">Choose an applicant kind in step 12 first.</p>
   {/if}
 
   <div class="space-y-4">
@@ -111,8 +108,8 @@
 
   {#if !allJointAttorneysSigned}
     <p class="mt-4 text-sm text-error">
-      Attorneys are appointed jointly. Every joint attorney must sign section 15 before
-      the OPG will accept the registration application.
+      Attorneys are appointed jointly. Every joint attorney must sign section 15 before the OPG will
+      accept the registration application.
     </p>
   {/if}
 </section>

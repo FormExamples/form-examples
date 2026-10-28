@@ -4,7 +4,7 @@
   import Field from '#lib/components/ui/Field.svelte';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
   import Select from '#lib/components/ui/Select.svelte';
-  import { RadioGroup } from "@lilydesignsystem/svelte-headless";
+  import { RadioGroup } from '@lilydesignsystem/svelte-headless';
 
   const d = assessment.data.lifestyleFactors;
 </script>
@@ -65,7 +65,11 @@
   </Field>
 
   <Field label="Physical activity level" inputId="step-7-physicalActivity">
-    <Select id="step-7-physicalActivity" label="Physical activity level" bind:value={d.physicalActivity}>
+    <Select
+      id="step-7-physicalActivity"
+      label="Physical activity level"
+      bind:value={d.physicalActivity}
+    >
       <option value="">\u2014 Select \u2014</option>
       <option value="sedentary">Sedentary (&lt; 30 min/week)</option>
       <option value="lightlyActive">Lightly active (30\u2013149 min/week)</option>

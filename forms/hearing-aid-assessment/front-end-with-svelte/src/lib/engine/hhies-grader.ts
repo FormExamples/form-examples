@@ -13,37 +13,34 @@ import { hhiesCategory } from './utils';
  *   24-40 = Significant handicap
  */
 export function calculateHHIES(data: AssessmentData): {
-	hhiesScore: number;
-	hhiesCategoryLabel: string;
-	firedRules: FiredRule[];
+  hhiesScore: number;
+  hhiesCategoryLabel: string;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
-	const q = data.hhiesQuestionnaire;
+  const firedRules: FiredRule[] = [];
+  const q = data.hhiesQuestionnaire;
 
-	const scores: (number | null)[] = [
-		q.q1, q.q2, q.q3, q.q4, q.q5,
-		q.q6, q.q7, q.q8, q.q9, q.q10
-	];
+  const scores: (number | null)[] = [q.q1, q.q2, q.q3, q.q4, q.q5, q.q6, q.q7, q.q8, q.q9, q.q10];
 
-	let hhiesScore = 0;
+  let hhiesScore = 0;
 
-	for (let i = 0; i < scores.length; i++) {
-		const score = scores[i];
-		if (score !== null && score > 0) {
-			const question = hhiesQuestions[i];
-			firedRules.push({
-				id: question.id,
-				domain: question.domain,
-				description: question.text,
-				score
-			});
-			hhiesScore += score;
-		} else if (score !== null) {
-			hhiesScore += score;
-		}
-	}
+  for (let i = 0; i < scores.length; i++) {
+    const score = scores[i];
+    if (score !== null && score > 0) {
+      const question = hhiesQuestions[i];
+      firedRules.push({
+        id: question.id,
+        domain: question.domain,
+        description: question.text,
+        score
+      });
+      hhiesScore += score;
+    } else if (score !== null) {
+      hhiesScore += score;
+    }
+  }
 
-	const hhiesCategoryLabel = hhiesCategory(hhiesScore);
+  const hhiesCategoryLabel = hhiesCategory(hhiesScore);
 
-	return { hhiesScore, hhiesCategoryLabel, firedRules };
+  return { hhiesScore, hhiesCategoryLabel, firedRules };
 }

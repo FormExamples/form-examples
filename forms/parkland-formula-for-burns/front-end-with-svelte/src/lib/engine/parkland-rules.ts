@@ -32,5 +32,5 @@ export const REFERRAL_TBSA_CHILD = 10;
  * Children have a lower threshold (10%); adults and unspecified default to 15%.
  */
 export function referralThreshold(ageBand: string): number {
-	return ageBand === 'child' ? REFERRAL_TBSA_CHILD : REFERRAL_TBSA_ADULT;
+  return ageBand === 'child' ? REFERRAL_TBSA_CHILD : REFERRAL_TBSA_ADULT;
 }

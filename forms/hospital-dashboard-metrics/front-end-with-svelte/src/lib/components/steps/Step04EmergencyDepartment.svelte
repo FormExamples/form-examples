@@ -7,7 +7,10 @@
 </script>
 
 <Fieldset legend="Step 4 — Category 3 — Emergency Department Metrics (8 metrics)">
-  <p class="hint">Daily case volume, ECG turnaround, 4-hour treatment rate, consultant arrival times, ER returns, CPR success rate, and essential-supply availability.</p>
+  <p class="hint">
+    Daily case volume, ECG turnaround, 4-hour treatment rate, consultant arrival times, ER returns,
+    CPR success rate, and essential-supply availability.
+  </p>
 
   {#each metrics as metric (metric.id)}
     <MetricRow {metric} />

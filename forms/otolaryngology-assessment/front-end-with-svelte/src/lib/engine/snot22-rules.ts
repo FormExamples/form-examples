@@ -8,15 +8,15 @@ import { SNOT22_ITEMS } from './types';
  * the SNOT-22 total (0-110).
  */
 export const snot22Rules: Snot22Rule[] = SNOT22_ITEMS.map((item, idx) => ({
-	id: `SNOT22-${String(idx + 1).padStart(3, '0')}`,
-	key: item.key,
-	category: 'SNOT-22',
-	description: item.label,
-	evaluate: (d) => {
-		const v = d.snot22[item.key];
-		if (v === null || v === undefined) {
-			return { score: 0, answered: false };
-		}
-		return { score: Number(v), answered: true };
-	}
+  id: `SNOT22-${String(idx + 1).padStart(3, '0')}`,
+  key: item.key,
+  category: 'SNOT-22',
+  description: item.label,
+  evaluate: (d) => {
+    const v = d.snot22[item.key];
+    if (v === null || v === undefined) {
+      return { score: 0, answered: false };
+    }
+    return { score: Number(v), answered: true };
+  }
 }));

@@ -19,21 +19,22 @@ const RULES: EquipmentRule[] = [
     fires: (d) =>
       d.inflightNeeds.requiresSupplementalOxygen === 'yes' &&
       (d.inflightNeeds.oxygenFlowRateLpm ?? 0) > 0 &&
-      (d.inflightNeeds.oxygenFlowRateLpm ?? 0) <= 4,
+      (d.inflightNeeds.oxygenFlowRateLpm ?? 0) <= 4
   },
   {
     id: 'R-EQ-02',
     band: 'requires-review',
-    description: 'Supplemental oxygen flow > 4 L/min sustained — dangerous-goods declaration required',
+    description:
+      'Supplemental oxygen flow > 4 L/min sustained — dangerous-goods declaration required',
     fires: (d) =>
       d.inflightNeeds.requiresSupplementalOxygen === 'yes' &&
-      (d.inflightNeeds.oxygenFlowRateLpm ?? 0) > 4,
+      (d.inflightNeeds.oxygenFlowRateLpm ?? 0) > 4
   },
   {
     id: 'R-EQ-03',
     band: 'fit-with-conditions',
     description: 'Portable oxygen concentrator (POC) requested — battery audit required',
-    fires: (d) => d.inflightNeeds.requiresPoc === 'yes',
+    fires: (d) => d.inflightNeeds.requiresPoc === 'yes'
   },
   {
     id: 'R-EQ-04',
@@ -46,19 +47,19 @@ const RULES: EquipmentRule[] = [
       if (hours === null || minutes === null) return false;
       const requiredHours = (minutes / 60) * 1.5;
       return hours < requiredHours;
-    },
+    }
   },
   {
     id: 'R-EQ-05',
     band: 'requires-review',
     description: 'Stretcher requested — sector-specific approval required',
-    fires: (d) => d.inflightNeeds.requiresStretcher === 'yes',
+    fires: (d) => d.inflightNeeds.requiresStretcher === 'yes'
   },
   {
     id: 'R-EQ-06',
     band: 'requires-review',
     description: 'Infant incubator requested — sector-specific approval required',
-    fires: (d) => d.inflightNeeds.requiresIncubator === 'yes',
+    fires: (d) => d.inflightNeeds.requiresIncubator === 'yes'
   },
   {
     id: 'R-EQ-07',
@@ -66,13 +67,13 @@ const RULES: EquipmentRule[] = [
     description: 'IV pump or other battery-powered device — IATA DGR clearance required',
     fires: (d) =>
       d.inflightNeeds.requiresIvPump === 'yes' ||
-      d.cabinMeds.dangerousGoodsBatteryDeclaration === 'yes',
+      d.cabinMeds.dangerousGoodsBatteryDeclaration === 'yes'
   },
   {
     id: 'R-EQ-08',
     band: 'fit-with-conditions',
     description: 'Medical escort requested — flight crew briefing required',
-    fires: (d) => d.inflightNeeds.requiresMedicalEscort === 'yes',
+    fires: (d) => d.inflightNeeds.requiresMedicalEscort === 'yes'
   },
   {
     id: 'R-EQ-09',
@@ -81,8 +82,8 @@ const RULES: EquipmentRule[] = [
     fires: (d) =>
       d.inflightNeeds.wheelchairType === 'WCHR' ||
       d.inflightNeeds.wheelchairType === 'WCHS' ||
-      d.inflightNeeds.wheelchairType === 'WCHC',
-  },
+      d.inflightNeeds.wheelchairType === 'WCHC'
+  }
 ];
 
 export function applyEquipmentRules(data: MedifAssessment): FiredRule[] {
@@ -93,7 +94,7 @@ export function applyEquipmentRules(data: MedifAssessment): FiredRule[] {
         ruleId: r.id,
         category: 'equipment',
         band: r.band,
-        description: r.description,
+        description: r.description
       });
     }
   }

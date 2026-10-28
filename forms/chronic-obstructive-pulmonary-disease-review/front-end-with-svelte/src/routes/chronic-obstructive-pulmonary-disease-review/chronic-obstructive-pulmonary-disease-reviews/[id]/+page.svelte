@@ -1,138 +1,138 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { page } from '$app/state';
-	import { assessment } from '#lib/stores/assessment.svelte.js';
-	import RestoreBanner from '#lib/components/ui/RestoreBanner.svelte';
-	import { gradeCopdReview } from '#lib/engine/copd-review-grader.js';
-	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
-	import { sampleAssessments } from '#lib/data/sample-reports.js';
+  import { goto } from '$app/navigation';
+  import { page } from '$app/state';
+  import { assessment } from '#lib/stores/assessment.svelte.js';
+  import RestoreBanner from '#lib/components/ui/RestoreBanner.svelte';
+  import { gradeCopdReview } from '#lib/engine/copd-review-grader.js';
+  import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+  import { sampleAssessments } from '#lib/data/sample-reports.js';
 
-	import Form from '#lib/components/ui/Form.svelte';
-	import { Button, ErrorSummary, Progress } from "@lilydesignsystem/svelte-headless";
-	import StepList from '#lib/components/ui/StepList.svelte';
-	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+  import Form from '#lib/components/ui/Form.svelte';
+  import { Button, ErrorSummary, Progress } from '@lilydesignsystem/svelte-headless';
+  import StepList from '#lib/components/ui/StepList.svelte';
+  import StepListItem from '#lib/components/ui/StepListItem.svelte';
 
-	import Step1Context from '#lib/components/steps/Step1Context.svelte';
-	import Step2Diagnosis from '#lib/components/steps/Step2Diagnosis.svelte';
-	import Step3Spirometry from '#lib/components/steps/Step3Spirometry.svelte';
-	import Step4Symptoms from '#lib/components/steps/Step4Symptoms.svelte';
-	import Step5Exacerbations from '#lib/components/steps/Step5Exacerbations.svelte';
-	import Step6Smoking from '#lib/components/steps/Step6Smoking.svelte';
-	import Step7Inhaler from '#lib/components/steps/Step7Inhaler.svelte';
-	import Step8Vaccinations from '#lib/components/steps/Step8Vaccinations.svelte';
-	import Step9Rehab from '#lib/components/steps/Step9Rehab.svelte';
-	import Step10SelfManagement from '#lib/components/steps/Step10SelfManagement.svelte';
-	import Step11Summary from '#lib/components/steps/Step11Summary.svelte';
+  import Step1Context from '#lib/components/steps/Step1Context.svelte';
+  import Step2Diagnosis from '#lib/components/steps/Step2Diagnosis.svelte';
+  import Step3Spirometry from '#lib/components/steps/Step3Spirometry.svelte';
+  import Step4Symptoms from '#lib/components/steps/Step4Symptoms.svelte';
+  import Step5Exacerbations from '#lib/components/steps/Step5Exacerbations.svelte';
+  import Step6Smoking from '#lib/components/steps/Step6Smoking.svelte';
+  import Step7Inhaler from '#lib/components/steps/Step7Inhaler.svelte';
+  import Step8Vaccinations from '#lib/components/steps/Step8Vaccinations.svelte';
+  import Step9Rehab from '#lib/components/steps/Step9Rehab.svelte';
+  import Step10SelfManagement from '#lib/components/steps/Step10SelfManagement.svelte';
+  import Step11Summary from '#lib/components/steps/Step11Summary.svelte';
 
-	const plural = 'chronic-obstructive-pulmonary-disease-reviews';
+  const plural = 'chronic-obstructive-pulmonary-disease-reviews';
 
-	let errors = $state<{ id: string; message: string }[]>([]);
+  let errors = $state<{ id: string; message: string }[]>([]);
 
-	const id = $derived(page.params.id ?? 'new');
-	const isNew = $derived(id === 'new');
+  const id = $derived(page.params.id ?? 'new');
+  const isNew = $derived(id === 'new');
 
-	// Hydrate the wizard whenever the route id changes: a saved draft for that id
-	// wins, otherwise seed from the matching sample review (existing id) or a
-	// blank draft (new).
-	$effect(() => {
-		const seed = sampleAssessments.find((s) => s.id === id)?.data;
-		if (assessment.id !== id) {
-			assessment.loadForId(id, seed);
-			errors = [];
-		}
-	});
+  // Hydrate the wizard whenever the route id changes: a saved draft for that id
+  // wins, otherwise seed from the matching sample review (existing id) or a
+  // blank draft (new).
+  $effect(() => {
+    const seed = sampleAssessments.find((s) => s.id === id)?.data;
+    if (assessment.id !== id) {
+      assessment.loadForId(id, seed);
+      errors = [];
+    }
+  });
 
-	function validate(): boolean {
-		const d = assessment.data;
-		const found: { id: string; message: string }[] = [];
-		if (d.context.clinicianName.trim() === '') {
-			found.push({ id: 'context-clinicianName', message: 'Reviewing clinician name is required.' });
-		}
-		if (d.context.clinicianRole === '') {
-			found.push({ id: 'context-clinicianRole', message: 'Clinician role is required.' });
-		}
-		if (d.context.reviewType === '') {
-			found.push({ id: 'context-reviewType', message: 'Review type is required.' });
-		}
-		if (d.context.patientIdentifier.trim() === '') {
-			found.push({
-				id: 'context-patientIdentifier',
-				message: 'Patient identifier is required.'
-			});
-		}
-		if (d.context.ageBand === '') {
-			found.push({ id: 'context-ageBand', message: 'Age band is required.' });
-		}
-		if (d.context.sex === '') {
-			found.push({ id: 'context-sex', message: 'Sex is required.' });
-		}
-		if (d.smoking.smokingStatus === '') {
-			found.push({ id: 'smoking-smokingStatus', message: 'Smoking status is required.' });
-		}
-		errors = found;
-		return found.length === 0;
-	}
+  function validate(): boolean {
+    const d = assessment.data;
+    const found: { id: string; message: string }[] = [];
+    if (d.context.clinicianName.trim() === '') {
+      found.push({ id: 'context-clinicianName', message: 'Reviewing clinician name is required.' });
+    }
+    if (d.context.clinicianRole === '') {
+      found.push({ id: 'context-clinicianRole', message: 'Clinician role is required.' });
+    }
+    if (d.context.reviewType === '') {
+      found.push({ id: 'context-reviewType', message: 'Review type is required.' });
+    }
+    if (d.context.patientIdentifier.trim() === '') {
+      found.push({
+        id: 'context-patientIdentifier',
+        message: 'Patient identifier is required.'
+      });
+    }
+    if (d.context.ageBand === '') {
+      found.push({ id: 'context-ageBand', message: 'Age band is required.' });
+    }
+    if (d.context.sex === '') {
+      found.push({ id: 'context-sex', message: 'Sex is required.' });
+    }
+    if (d.smoking.smokingStatus === '') {
+      found.push({ id: 'smoking-smokingStatus', message: 'Smoking status is required.' });
+    }
+    errors = found;
+    return found.length === 0;
+  }
 
-	function submit() {
-		if (!validate()) {
-			document.querySelector('.error-summary')?.scrollIntoView({ behavior: 'smooth' });
-			return;
-		}
-		assessment.result = gradeCopdReview(assessment.data);
-		goto(`/chronic-obstructive-pulmonary-disease-review/${plural}/${id}/report`);
-	}
+  function submit() {
+    if (!validate()) {
+      document.querySelector('.error-summary')?.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+    assessment.result = gradeCopdReview(assessment.data);
+    goto(`/chronic-obstructive-pulmonary-disease-review/${plural}/${id}/report`);
+  }
 
-	function startOver() {
-		const seed = sampleAssessments.find((s) => s.id === id)?.data;
-		assessment.reset();
-		assessment.loadForId(id, seed);
-		errors = [];
-	}
+  function startOver() {
+    const seed = sampleAssessments.find((s) => s.id === id)?.data;
+    assessment.reset();
+    assessment.loadForId(id, seed);
+    errors = [];
+  }
 </script>
 
 <main class="mx-16 px-4 py-6">
-	<h1 class="text-2xl font-bold text-base-content">
-		{isNew ? 'New COPD review' : `COPD review ${id}`}
-	</h1>
-	<p class="mt-1 text-sm text-base-content/70">
-		Complete the eleven sections; the GOLD grade, ABE group, and review completeness are computed
-		on submit. This is a severity-classification instrument — there is no numeric score.
-	</p>
-	<Progress label="Review sections" value={TOTAL_STEPS} max={TOTAL_STEPS} />
-	<StepList label="Review sections" current={TOTAL_STEPS}>
-		{#each steps as step (step.number)}
-			<StepListItem status="finished" label={step.title}>{step.shortTitle}</StepListItem>
-		{/each}
-	</StepList>
+  <h1 class="text-2xl font-bold text-base-content">
+    {isNew ? 'New COPD review' : `COPD review ${id}`}
+  </h1>
+  <p class="mt-1 text-sm text-base-content/70">
+    Complete the eleven sections; the GOLD grade, ABE group, and review completeness are computed on
+    submit. This is a severity-classification instrument — there is no numeric score.
+  </p>
+  <Progress label="Review sections" value={TOTAL_STEPS} max={TOTAL_STEPS} />
+  <StepList label="Review sections" current={TOTAL_STEPS}>
+    {#each steps as step (step.number)}
+      <StepListItem status="finished" label={step.title}>{step.shortTitle}</StepListItem>
+    {/each}
+  </StepList>
 
-	{#if errors.length > 0}
-		<ErrorSummary title="Please fix the following before submitting" class="mb-6">
-			<ul>
-				{#each errors as e (e.id)}
-					<li><a href={`#${e.id}`}>{e.message}</a></li>
-				{/each}
-			</ul>
-		</ErrorSummary>
-	{/if}
+  {#if errors.length > 0}
+    <ErrorSummary title="Please fix the following before submitting" class="mb-6">
+      <ul>
+        {#each errors as e (e.id)}
+          <li><a href={`#${e.id}`}>{e.message}</a></li>
+        {/each}
+      </ul>
+    </ErrorSummary>
+  {/if}
 
-	<RestoreBanner show={assessment.hadDraftAtLoad} onDiscard={startOver} />
+  <RestoreBanner show={assessment.hadDraftAtLoad} onDiscard={startOver} />
 
-	<Form label="COPD review" onsubmit={submit}>
-		<Step1Context />
-		<Step2Diagnosis />
-		<Step3Spirometry />
-		<Step4Symptoms />
-		<Step5Exacerbations />
-		<Step6Smoking />
-		<Step7Inhaler />
-		<Step8Vaccinations />
-		<Step9Rehab />
-		<Step10SelfManagement />
-		<Step11Summary />
+  <Form label="COPD review" onsubmit={submit}>
+    <Step1Context />
+    <Step2Diagnosis />
+    <Step3Spirometry />
+    <Step4Symptoms />
+    <Step5Exacerbations />
+    <Step6Smoking />
+    <Step7Inhaler />
+    <Step8Vaccinations />
+    <Step9Rehab />
+    <Step10SelfManagement />
+    <Step11Summary />
 
-		<div class="button-group">
-			<Button type="submit" data-variant="primary">Grade &amp; view report</Button>
-			<Button data-variant="danger" onclick={startOver}>Start over</Button>
-		</div>
-	</Form>
+    <div class="button-group">
+      <Button type="submit" data-variant="primary">Grade &amp; view report</Button>
+      <Button data-variant="danger" onclick={startOver}>Start over</Button>
+    </div>
+  </Form>
 </main>

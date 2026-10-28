@@ -1,9 +1,9 @@
 import type { DeathCertificate, ValidationResult, ValidityClass } from './types';
 import {
-	coronerReferralIndicated,
-	missingPartIa,
-	unacceptableSoleCause,
-	underlyingCause
+  coronerReferralIndicated,
+  missingPartIa,
+  unacceptableSoleCause,
+  underlyingCause
 } from './mccd-rules';
 import { detectFlaggedIssues } from './flagged-issues';
 
@@ -29,9 +29,9 @@ import { detectFlaggedIssues } from './flagged-issues';
 
 /** Assign the single validity class (spec §4). */
 export function deriveValidityClass(d: DeathCertificate): ValidityClass {
-	if (coronerReferralIndicated(d)) return 'refer-to-coroner';
-	if (missingPartIa(d) || unacceptableSoleCause(d)) return 'incomplete';
-	return 'valid';
+  if (coronerReferralIndicated(d)) return 'refer-to-coroner';
+  if (missingPartIa(d) || unacceptableSoleCause(d)) return 'incomplete';
+  return 'valid';
 }
 
 /**
@@ -40,11 +40,11 @@ export function deriveValidityClass(d: DeathCertificate): ValidityClass {
  * NOT discharge the certifying doctor's statutory duty to consider referral.
  */
 export function validateCertificate(d: DeathCertificate): ValidationResult {
-	return {
-		validityClass: deriveValidityClass(d),
-		underlyingCause: underlyingCause(d),
-		coronerReferralIndicated: coronerReferralIndicated(d),
-		flaggedIssues: detectFlaggedIssues(d),
-		timestamp: new Date().toISOString()
-	};
+  return {
+    validityClass: deriveValidityClass(d),
+    underlyingCause: underlyingCause(d),
+    coronerReferralIndicated: coronerReferralIndicated(d),
+    flaggedIssues: detectFlaggedIssues(d),
+    timestamp: new Date().toISOString()
+  };
 }

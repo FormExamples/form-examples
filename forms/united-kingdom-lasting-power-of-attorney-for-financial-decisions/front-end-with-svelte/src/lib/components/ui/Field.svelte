@@ -5,7 +5,7 @@
   let {
     label,
     hint = '',
-    children,
+    children
   }: { label: string; hint?: string; children: Snippet } = $props();
 </script>
 

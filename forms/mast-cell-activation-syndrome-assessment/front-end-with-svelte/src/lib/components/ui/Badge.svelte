@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { mcasScoreLabel, mcasScoreColor } from '#lib/engine/utils.js';
+  import { mcasScoreLabel, mcasScoreColor } from '#lib/engine/utils.js';
 
-	let {
-		score
-	}: {
-		score: number;
-	} = $props();
+  let {
+    score
+  }: {
+    score: number;
+  } = $props();
 
-	const colorClass = $derived(mcasScoreColor(score));
-	const label = $derived(mcasScoreLabel(score));
+  const colorClass = $derived(mcasScoreColor(score));
+  const label = $derived(mcasScoreLabel(score));
 </script>
 
 <span class="inline-block rounded-full border px-4 py-1.5 text-sm font-bold {colorClass}">
-	{label}
+  {label}
 </span>

@@ -15,37 +15,34 @@ import { dlqiCategory } from './utils';
  *   21-30 = Extremely large effect on patient's life
  */
 export function calculateDLQI(data: AssessmentData): {
-	dlqiScore: number;
-	dlqiCategoryLabel: string;
-	firedRules: FiredRule[];
+  dlqiScore: number;
+  dlqiCategoryLabel: string;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
-	const q = data.dlqiQuestionnaire;
+  const firedRules: FiredRule[] = [];
+  const q = data.dlqiQuestionnaire;
 
-	const scores: (number | null)[] = [
-		q.q1, q.q2, q.q3, q.q4, q.q5,
-		q.q6, q.q7, q.q8, q.q9, q.q10
-	];
+  const scores: (number | null)[] = [q.q1, q.q2, q.q3, q.q4, q.q5, q.q6, q.q7, q.q8, q.q9, q.q10];
 
-	let dlqiScore = 0;
+  let dlqiScore = 0;
 
-	for (let i = 0; i < scores.length; i++) {
-		const score = scores[i];
-		if (score !== null && score > 0) {
-			const question = dlqiQuestions[i];
-			firedRules.push({
-				id: question.id,
-				domain: question.domain,
-				description: question.text,
-				score
-			});
-			dlqiScore += score;
-		} else if (score !== null) {
-			dlqiScore += score;
-		}
-	}
+  for (let i = 0; i < scores.length; i++) {
+    const score = scores[i];
+    if (score !== null && score > 0) {
+      const question = dlqiQuestions[i];
+      firedRules.push({
+        id: question.id,
+        domain: question.domain,
+        description: question.text,
+        score
+      });
+      dlqiScore += score;
+    } else if (score !== null) {
+      dlqiScore += score;
+    }
+  }
 
-	const dlqiCategoryLabel = dlqiCategory(dlqiScore);
+  const dlqiCategoryLabel = dlqiCategory(dlqiScore);
 
-	return { dlqiScore, dlqiCategoryLabel, firedRules };
+  return { dlqiScore, dlqiCategoryLabel, firedRules };
 }

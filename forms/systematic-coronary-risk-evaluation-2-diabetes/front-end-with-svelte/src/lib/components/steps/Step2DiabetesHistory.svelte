@@ -4,14 +4,19 @@
   import Field from '#lib/components/ui/Field.svelte';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
   import Select from '#lib/components/ui/Select.svelte';
-  import { RadioGroup } from "@lilydesignsystem/svelte-headless";
+  import { RadioGroup } from '@lilydesignsystem/svelte-headless';
 
   const d = assessment.data.diabetesHistory;
 </script>
 
 <Fieldset legend="Step 2 \u2014 Diabetes history">
   <div class="field-grid">
-    <Field label="Diabetes type" inputId="step-2-diabetesType" required error={assessment.errors['step-2-diabetesType']}>
+    <Field
+      label="Diabetes type"
+      inputId="step-2-diabetesType"
+      required
+      error={assessment.errors['step-2-diabetesType']}
+    >
       <Select id="step-2-diabetesType" label="Diabetes type" bind:value={d.diabetesType}>
         <option value="">\u2014 Select \u2014</option>
         <option value="type1">Type 1</option>
@@ -44,7 +49,13 @@
 
   <div class="field-grid">
     <Field label="HbA1c value" inputId="step-2-hba1cValue">
-      <NumberInput id="step-2-hba1cValue" label="HbA1c value" min={0} step="0.1" bind:value={d.hba1cValue} />
+      <NumberInput
+        id="step-2-hba1cValue"
+        label="HbA1c value"
+        min={0}
+        step="0.1"
+        bind:value={d.hba1cValue}
+      />
     </Field>
     <Field label="HbA1c unit">
       <RadioGroup label="HbA1c unit">
@@ -69,7 +80,11 @@
   </Field>
 
   <Field label="Current diabetes treatment" inputId="step-2-diabetesTreatment">
-    <Select id="step-2-diabetesTreatment" label="Current diabetes treatment" bind:value={d.diabetesTreatment}>
+    <Select
+      id="step-2-diabetesTreatment"
+      label="Current diabetes treatment"
+      bind:value={d.diabetesTreatment}
+    >
       <option value="">\u2014 Select \u2014</option>
       <option value="diet">Diet only</option>
       <option value="oral">Oral medication only</option>

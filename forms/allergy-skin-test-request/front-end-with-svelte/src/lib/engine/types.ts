@@ -8,74 +8,74 @@
 // history are booleans mirroring the BOOLEAN columns in the SQL source of truth.
 
 export type TestType =
-	| 'skin-prick-test'
-	| 'intradermal-test'
-	| 'patch-test'
-	| 'specific-ige-blood'
-	| 'drug-provocation-challenge'
-	| 'other'
-	| '';
+  | 'skin-prick-test'
+  | 'intradermal-test'
+  | 'patch-test'
+  | 'specific-ige-blood'
+  | 'drug-provocation-challenge'
+  | 'other'
+  | '';
 
 export type Indication =
-	| 'suspected-food-allergy'
-	| 'suspected-drug-allergy'
-	| 'rhinitis-asthma'
-	| 'anaphylaxis-investigation'
-	| 'venom-allergy'
-	| 'contact-dermatitis'
-	| 'urticaria'
-	| 'other'
-	| '';
+  | 'suspected-food-allergy'
+  | 'suspected-drug-allergy'
+  | 'rhinitis-asthma'
+  | 'anaphylaxis-investigation'
+  | 'venom-allergy'
+  | 'contact-dermatitis'
+  | 'urticaria'
+  | 'other'
+  | '';
 
 export type Urgency = 'routine' | 'urgent' | '';
 
 export interface Clinician {
-	clinicianName: string;
-	clinicianRole: string;
-	registrationBody: string;
-	registrationNumber: string;
-	requesterContact: string;
-	supervisingConsultant: string;
-	siteName: string;
-	referralDate: string;
+  clinicianName: string;
+  clinicianRole: string;
+  registrationBody: string;
+  registrationNumber: string;
+  requesterContact: string;
+  supervisingConsultant: string;
+  siteName: string;
+  referralDate: string;
 }
 
 export interface Patient {
-	firstName: string;
-	lastName: string;
-	dateOfBirth: string;
-	nhsNumber: string;
-	interpreterRequired: boolean;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  nhsNumber: string;
+  interpreterRequired: boolean;
 }
 
 export interface Test {
-	testType: TestType;
-	allergenAeroallergens: boolean;
-	allergenFood: boolean;
-	allergenDrug: boolean;
-	allergenVenom: boolean;
-	allergenLatex: boolean;
-	allergenContact: boolean;
+  testType: TestType;
+  allergenAeroallergens: boolean;
+  allergenFood: boolean;
+  allergenDrug: boolean;
+  allergenVenom: boolean;
+  allergenLatex: boolean;
+  allergenContact: boolean;
 }
 
 export interface IndicationSection {
-	primaryIndication: Indication;
-	clinicalQuestion: string;
-	clinicalDetails: string;
+  primaryIndication: Indication;
+  clinicalQuestion: string;
+  clinicalDetails: string;
 }
 
 export interface Safety {
-	previousAnaphylaxis: boolean;
-	onAntihistamines: boolean;
-	onBetaBlocker: boolean;
-	currentSkinDisease: boolean;
+  previousAnaphylaxis: boolean;
+  onAntihistamines: boolean;
+  onBetaBlocker: boolean;
+  currentSkinDisease: boolean;
 }
 
 export interface Triage {
-	urgency: Urgency;
-	requestedByDate: string;
-	setting: string;
-	notes: string;
+  urgency: Urgency;
+  requestedByDate: string;
+  setting: string;
+  notes: string;
 }
 
 // ──────────────────────────────────────────────
@@ -83,12 +83,12 @@ export interface Triage {
 // ──────────────────────────────────────────────
 
 export interface RequestData {
-	clinician: Clinician;
-	patient: Patient;
-	test: Test;
-	indication: IndicationSection;
-	safety: Safety;
-	triage: Triage;
+  clinician: Clinician;
+  patient: Patient;
+  test: Test;
+  indication: IndicationSection;
+  safety: Safety;
+  triage: Triage;
 }
 
 // ──────────────────────────────────────────────
@@ -96,9 +96,7 @@ export interface RequestData {
 // ──────────────────────────────────────────────
 
 export type AppropriatenessBand =
-	| 'usually-appropriate'
-	| 'may-be-appropriate'
-	| 'usually-not-appropriate';
+  'usually-appropriate' | 'may-be-appropriate' | 'usually-not-appropriate';
 
 export type ValidityBand = 'ok' | 'caution' | 'contraindicated';
 
@@ -110,34 +108,34 @@ export type FlagPriority = 'high' | 'medium' | 'low';
 
 /** A rule that fired during grading, contributing to one of the four axes. */
 export interface FiredRule {
-	ruleId: string;
-	axis: string;
-	category: string;
-	description: string;
+  ruleId: string;
+  axis: string;
+  category: string;
+  description: string;
 }
 
 /** A safety flag detected independently of the four axes. */
 export interface SafetyFlag {
-	flagId: string;
-	category: string;
-	priority: FlagPriority;
-	description: string;
-	suggestedAction: string;
+  flagId: string;
+  category: string;
+  priority: FlagPriority;
+  description: string;
+  suggestedAction: string;
 }
 
 /** The complete, deterministic grading result for one request. */
 export interface GradingResult {
-	appropriatenessScore: number;
-	appropriatenessBand: AppropriatenessBand;
-	validitySafetyBand: ValidityBand;
-	completenessPercent: number;
-	triageTier: TriageTier;
-	targetTimeframe: string;
-	recommendation: Recommendation;
-	recommendationLabel: string;
-	firedRules: FiredRule[];
-	flags: SafetyFlag[];
-	timestamp: string;
+  appropriatenessScore: number;
+  appropriatenessBand: AppropriatenessBand;
+  validitySafetyBand: ValidityBand;
+  completenessPercent: number;
+  triageTier: TriageTier;
+  targetTimeframe: string;
+  recommendation: Recommendation;
+  recommendationLabel: string;
+  firedRules: FiredRule[];
+  flags: SafetyFlag[];
+  timestamp: string;
 }
 
 // ──────────────────────────────────────────────
@@ -145,8 +143,8 @@ export interface GradingResult {
 // ──────────────────────────────────────────────
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
-	section: keyof RequestData | 'review';
+  number: number;
+  title: string;
+  shortTitle: string;
+  section: keyof RequestData | 'review';
 }

@@ -1,17 +1,17 @@
 <script lang="ts">
-	import { mrsSeverityLabel, mrsSeverityColor } from '#lib/engine/utils.js';
-	import type { MRSSeverity } from '#lib/engine/types.js';
+  import { mrsSeverityLabel, mrsSeverityColor } from '#lib/engine/utils.js';
+  import type { MRSSeverity } from '#lib/engine/types.js';
 
-	let {
-		severity
-	}: {
-		severity: MRSSeverity;
-	} = $props();
+  let {
+    severity
+  }: {
+    severity: MRSSeverity;
+  } = $props();
 
-	const colorClass = $derived(mrsSeverityColor(severity));
-	const label = $derived(mrsSeverityLabel(severity));
+  const colorClass = $derived(mrsSeverityColor(severity));
+  const label = $derived(mrsSeverityLabel(severity));
 </script>
 
 <span class="inline-block rounded-full border px-4 py-1.5 text-sm font-bold {colorClass}">
-	{label}
+  {label}
 </span>

@@ -93,7 +93,7 @@ export function suggestExpiry(birthDate: string, issueDate: string): string {
   if (!issueDate) return '';
   const age = ageInYears(birthDate, issueDate);
   const issue = new Date(issueDate);
-  const years = (age !== null && (age < 16 || age >= 70)) ? 1 : 2;
+  const years = age !== null && (age < 16 || age >= 70) ? 1 : 2;
   const expiry = new Date(issue);
   expiry.setFullYear(issue.getFullYear() + years);
   return expiry.toISOString().slice(0, 10);

@@ -13,12 +13,7 @@ export type ReportStatus = 'preliminary' | 'final' | 'amended' | 'cancelled' | '
 
 /** Performed bronchoscopy procedure. */
 export type Procedure =
-	| 'flexible-bronchoscopy'
-	| 'ebus'
-	| 'rigid-bronchoscopy'
-	| 'bronchoalveolar-lavage'
-	| 'other'
-	| '';
+  'flexible-bronchoscopy' | 'ebus' | 'rigid-bronchoscopy' | 'bronchoalveolar-lavage' | 'other' | '';
 
 /** Sedation actually used. */
 export type SedationUsed = 'none' | 'local' | 'conscious' | 'deep' | 'general' | '';
@@ -39,12 +34,12 @@ export type FollowUpUrgency = 'routine' | 'recommended' | 'urgent' | 'critical-a
 
 /** Overall recommendation. */
 export type Recommendation =
-	| 'no-action'
-	| 'routine-follow-up'
-	| 'further-imaging'
-	| 'specialist-referral'
-	| 'urgent-review'
-	| '';
+  | 'no-action'
+  | 'routine-follow-up'
+  | 'further-imaging'
+  | 'specialist-referral'
+  | 'urgent-review'
+  | '';
 
 // ─── Structured findings ───
 
@@ -53,13 +48,13 @@ export type Recommendation =
  * classification, severity, and flags.
  */
 export interface StructuredFindings {
-	endobronchialLesion: boolean;
-	mucosalAbnormality: boolean;
-	extrinsicCompression: boolean;
-	bleeding: boolean;
-	foreignBody: boolean;
-	secretionsPurulent: boolean;
-	normalExamination: boolean;
+  endobronchialLesion: boolean;
+  mucosalAbnormality: boolean;
+  extrinsicCompression: boolean;
+  bleeding: boolean;
+  foreignBody: boolean;
+  secretionsPurulent: boolean;
+  normalExamination: boolean;
 }
 
 // ─── The result/report record (sql/04) ───
@@ -69,46 +64,46 @@ export interface StructuredFindings {
  * interpretation grade is computed from.
  */
 export interface BronchoscopyResult {
-	// Report identification
-	reportingClinician: string;
-	originatingRequestReference: string;
-	reportStatus: ReportStatus;
-	performedDate: string;
-	reportedDate: string;
+  // Report identification
+  reportingClinician: string;
+  originatingRequestReference: string;
+  reportStatus: ReportStatus;
+  performedDate: string;
+  reportedDate: string;
 
-	// Procedure
-	procedure: Procedure;
-	sedationUsed: SedationUsed;
-	extentExamined: string;
+  // Procedure
+  procedure: Procedure;
+  sedationUsed: SedationUsed;
+  extentExamined: string;
 
-	// Clinical context
-	clinicalHistory: string;
+  // Clinical context
+  clinicalHistory: string;
 
-	// Findings
-	findingsNarrative: string;
-	endobronchialLesion: boolean;
-	mucosalAbnormality: boolean;
-	extrinsicCompression: boolean;
-	bleeding: boolean;
-	foreignBody: boolean;
-	secretionsPurulent: boolean;
-	normalExamination: boolean;
-	lesionLocation: string;
+  // Findings
+  findingsNarrative: string;
+  endobronchialLesion: boolean;
+  mucosalAbnormality: boolean;
+  extrinsicCompression: boolean;
+  bleeding: boolean;
+  foreignBody: boolean;
+  secretionsPurulent: boolean;
+  normalExamination: boolean;
+  lesionLocation: string;
 
-	// Sampling and complication
-	samplesTaken: string;
-	complication: Complication;
+  // Sampling and complication
+  samplesTaken: string;
+  complication: Complication;
 
-	// Impression and follow-up
-	impression: string;
-	reportingCategory: string;
-	recommendedFollowUp: string;
+  // Impression and follow-up
+  impression: string;
+  reportingCategory: string;
+  recommendedFollowUp: string;
 
-	// Critical-result communication and sign-off
-	criticalResultCommunicated: boolean;
-	reportedTo: string;
-	clinicianNotes: string;
-	signed: boolean;
+  // Critical-result communication and sign-off
+  criticalResultCommunicated: boolean;
+  reportedTo: string;
+  clinicianNotes: string;
+  signed: boolean;
 }
 
 // ─── Grading types (sql/05, sql/06, sql/07) ───
@@ -118,35 +113,35 @@ export type Axis = 'classification' | 'severity' | 'completeness' | 'follow-up';
 
 /** Flag category (mirrors the sql/07 CHECK constraint). */
 export type FlagCategory =
-	| 'critical-result-alert'
-	| 'incidental-finding'
-	| 'discrepancy-with-request'
-	| 'abnormal-requiring-action'
-	| 'urgent-referral'
-	| 'inadequate-technique'
-	| 'unexpected-finding'
-	| 'missing-impression'
-	| 'missing-measurement'
-	| 'other';
+  | 'critical-result-alert'
+  | 'incidental-finding'
+  | 'discrepancy-with-request'
+  | 'abnormal-requiring-action'
+  | 'urgent-referral'
+  | 'inadequate-technique'
+  | 'unexpected-finding'
+  | 'missing-impression'
+  | 'missing-measurement'
+  | 'other';
 
 /** Flag priority. */
 export type FlagPriority = 'low' | 'medium' | 'high';
 
 /** A single rule that fired during grading (audit trail). */
 export interface FiredRule {
-	ruleId: string;
-	axis: Axis;
-	category: string;
-	description: string;
+  ruleId: string;
+  axis: Axis;
+  category: string;
+  description: string;
 }
 
 /** A safety-critical flag, independent of the four axes. */
 export interface Flag {
-	flagId: string;
-	category: FlagCategory;
-	priority: FlagPriority;
-	description: string;
-	suggestedAction: string;
+  flagId: string;
+  category: FlagCategory;
+  priority: FlagPriority;
+  description: string;
+  suggestedAction: string;
 }
 
 /**
@@ -154,44 +149,44 @@ export interface Flag {
  * sql/05_create_table_bronchoscopy_test_result_grade.sql.
  */
 export interface GradingResult {
-	// Axis A
-	resultClassification: ResultClassification;
-	// Axis B
-	abnormalitySeverity: AbnormalitySeverity;
-	reportingCategory: string;
-	// Axis C
-	reportCompletenessPercent: number;
-	// Axis D
-	followUpUrgency: FollowUpUrgency;
-	targetTimeframe: string;
-	recommendedAction: string;
-	// Overall
-	recommendation: Recommendation;
-	firedRules: FiredRule[];
-	flags: Flag[];
-	gradedAt: string;
+  // Axis A
+  resultClassification: ResultClassification;
+  // Axis B
+  abnormalitySeverity: AbnormalitySeverity;
+  reportingCategory: string;
+  // Axis C
+  reportCompletenessPercent: number;
+  // Axis D
+  followUpUrgency: FollowUpUrgency;
+  targetTimeframe: string;
+  recommendedAction: string;
+  // Overall
+  recommendation: Recommendation;
+  firedRules: FiredRule[];
+  flags: Flag[];
+  gradedAt: string;
 }
 
 // ─── Step configuration ───
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
+  number: number;
+  title: string;
+  shortTitle: string;
 }
 
 // ─── Dashboard row ───
 
 /** A graded report row for the dashboard table. */
 export interface ReportRow {
-	id: string;
-	patientName: string;
-	procedure: Procedure;
-	reportStatus: ReportStatus;
-	reportedDate: string;
-	resultClassification: ResultClassification;
-	abnormalitySeverity: AbnormalitySeverity;
-	followUpUrgency: FollowUpUrgency;
-	reportCompletenessPercent: number;
-	flagCount: number;
+  id: string;
+  patientName: string;
+  procedure: Procedure;
+  reportStatus: ReportStatus;
+  reportedDate: string;
+  resultClassification: ResultClassification;
+  abnormalitySeverity: AbnormalitySeverity;
+  followUpUrgency: FollowUpUrgency;
+  reportCompletenessPercent: number;
+  flagCount: number;
 }

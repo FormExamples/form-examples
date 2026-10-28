@@ -1,9 +1,4 @@
-import type {
-  ClavienDindoGrade,
-  CompositeRisk,
-  FiredRule,
-  OperationNote,
-} from './types.js';
+import type { ClavienDindoGrade, CompositeRisk, FiredRule, OperationNote } from './types.js';
 
 /**
  * Map a Clavien–Dindo grade to the composite-risk band it drives.
@@ -50,8 +45,8 @@ export function applyClavienDindoRules(data: OperationNote): {
         instrument: 'clavien-dindo',
         grade,
         category: 'complication',
-        description: `Clavien–Dindo grade ${grade} intra-operative complication`,
-      },
-    ],
+        description: `Clavien–Dindo grade ${grade} intra-operative complication`
+      }
+    ]
   };
 }

@@ -2,7 +2,7 @@
   import { store } from '#lib/state.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { DateInput, TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { DateInput, TextAreaInput, TextInput } from '@lilydesignsystem/svelte-headless';
   import Select from '#lib/components/ui/Select.svelte';
 </script>
 
@@ -55,10 +55,7 @@
       />
     </Field>
     <Field label="Specimens urgent">
-      <Select
-        label="Specimens urgent"
-        bind:value={store.data.drainsPacksSpecimens.specimensUrgent}
-      >
+      <Select label="Specimens urgent" bind:value={store.data.drainsPacksSpecimens.specimensUrgent}>
         <option value="">—</option>
         <option value="yes">Urgent</option>
         <option value="no">Routine</option>

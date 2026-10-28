@@ -24,14 +24,14 @@
     { value: 'end-of-life-care', label: 'End-of-life care' },
     { value: 'daily-routine', label: 'Daily routine' },
     { value: 'medical-treatment', label: 'Medical treatment' },
-    { value: 'other', label: 'Other' },
+    { value: 'other', label: 'Other' }
   ];
 </script>
 
 <div class="space-y-4">
   <p class="text-sm text-base-content/70">
-    Preferences are <strong>non-binding</strong> guidance. Attorneys should have regard to
-    them but are not legally required to follow them.
+    Preferences are <strong>non-binding</strong> guidance. Attorneys should have regard to them but are
+    not legally required to follow them.
   </p>
 
   {#each prefs as p, i (i)}
@@ -42,7 +42,12 @@
           Remove
         </button>
       </header>
-      <SelectField label="Category" bind:value={p.category} options={CATEGORIES} onchange={changed} />
+      <SelectField
+        label="Category"
+        bind:value={p.category}
+        options={CATEGORIES}
+        onchange={changed}
+      />
       <TextAreaInput label="Statement" bind:value={p.statement} rows={3} onchange={changed} />
     </section>
   {/each}

@@ -8,12 +8,19 @@
 <section>
   <h2 class="text-xl font-semibold mb-4">Step 3 — Trip details</h2>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <TextField label="Airline IATA code" bind:value={store.data.trip.airlineIataCode} hint="e.g. EK, BA, QR" />
+    <TextField
+      label="Airline IATA code"
+      bind:value={store.data.trip.airlineIataCode}
+      hint="e.g. EK, BA, QR"
+    />
     <TextField label="Airline name" bind:value={store.data.trip.airlineName} />
     <TextField label="Outbound flight number" bind:value={store.data.trip.outboundFlightNumber} />
     <TextField label="Outbound date" type="date" bind:value={store.data.trip.outboundDate} />
     <TextField label="Outbound origin (IATA)" bind:value={store.data.trip.outboundOriginIata} />
-    <TextField label="Outbound destination (IATA)" bind:value={store.data.trip.outboundDestinationIata} />
+    <TextField
+      label="Outbound destination (IATA)"
+      bind:value={store.data.trip.outboundDestinationIata}
+    />
     <TextField label="Return flight number" bind:value={store.data.trip.returnFlightNumber} />
     <TextField label="Return date" type="date" bind:value={store.data.trip.returnDate} />
     <SelectField
@@ -23,7 +30,7 @@
         { value: 'economy', label: 'Economy' },
         { value: 'premium-economy', label: 'Premium economy' },
         { value: 'business', label: 'Business' },
-        { value: 'first', label: 'First' },
+        { value: 'first', label: 'First' }
       ]}
     />
     <NumberField

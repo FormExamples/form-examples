@@ -20,7 +20,7 @@ describe('agileChecklistSchema', () => {
         organisationName: '',
         yearsInAgile: null,
         assessmentDate: '',
-        assessmentPeriod: '',
+        assessmentPeriod: ''
       },
       answers: { t01: 'yes', t02: 'no' },
       actionPlan: {
@@ -29,8 +29,8 @@ describe('agileChecklistSchema', () => {
         topAction3: '',
         coachNotes: '',
         signedAt: '',
-        overallNotes: '',
-      },
+        overallNotes: ''
+      }
     };
     const parsed = agileChecklistSchema.parse(partial);
     expect(parsed.answers.t01).toBe('yes');
@@ -45,7 +45,7 @@ describe('agileChecklistSchema', () => {
   it('rejects an invalid answer value', () => {
     const bad = {
       ...createEmptyChecklist(),
-      answers: { ...createEmptyChecklist().answers, t01: 'maybe' },
+      answers: { ...createEmptyChecklist().answers, t01: 'maybe' }
     };
     expect(agileChecklistSchema.safeParse(bad).success).toBe(false);
   });
@@ -82,8 +82,8 @@ describe('safeParseChecklist', () => {
     expect(
       safeParseChecklist({
         answers: {},
-        actionPlan: createEmptyChecklist().actionPlan,
-      }),
+        actionPlan: createEmptyChecklist().actionPlan
+      })
     ).toBeNull();
   });
 
@@ -91,7 +91,7 @@ describe('safeParseChecklist', () => {
     const v = createEmptyChecklist();
     const tampered = {
       ...v,
-      answers: { ...v.answers, malicious: 'yes', t01: 'yes' },
+      answers: { ...v.answers, malicious: 'yes', t01: 'yes' }
     };
     const parsed = safeParseChecklist(tampered);
     expect(parsed).not.toBeNull();

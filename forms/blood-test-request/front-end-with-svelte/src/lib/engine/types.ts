@@ -12,20 +12,20 @@
 
 /** Primary clinical indication for the request. */
 export type PrimaryIndication =
-	| 'routine-monitoring'
-	| 'anaemia'
-	| 'fatigue'
-	| 'infection'
-	| 'diabetes-monitoring'
-	| 'thyroid-symptoms'
-	| 'cardiovascular-risk'
-	| 'liver-disease'
-	| 'renal-monitoring'
-	| 'anticoagulation-monitoring'
-	| 'pre-operative'
-	| 'suspected-malignancy'
-	| 'other'
-	| '';
+  | 'routine-monitoring'
+  | 'anaemia'
+  | 'fatigue'
+  | 'infection'
+  | 'diabetes-monitoring'
+  | 'thyroid-symptoms'
+  | 'cardiovascular-risk'
+  | 'liver-disease'
+  | 'renal-monitoring'
+  | 'anticoagulation-monitoring'
+  | 'pre-operative'
+  | 'suspected-malignancy'
+  | 'other'
+  | '';
 
 /** Whether the specimen has already been collected. */
 export type SpecimenCollected = 'yes' | 'no' | '';
@@ -37,16 +37,14 @@ export type FastingStatus = 'fasting' | 'non-fasting' | 'unknown' | '';
 export type Urgency = 'routine' | 'urgent' | 'stat' | '';
 
 /** Care setting the request originates from. */
-export type Setting = 'gp-surgery' | 'hospital-ward' | 'outpatient' | 'community' | 'emergency' | '';
+export type Setting =
+  'gp-surgery' | 'hospital-ward' | 'outpatient' | 'community' | 'emergency' | '';
 
 // ─── Axis enumerations (grade) ───
 
 /** Axis A — request appropriateness (1–9 ordinal). */
 export type AppropriatenessBand =
-	| 'usually-appropriate'
-	| 'may-be-appropriate'
-	| 'usually-not-appropriate'
-	| '';
+  'usually-appropriate' | 'may-be-appropriate' | 'usually-not-appropriate' | '';
 
 /** Axis B — pre-analytical / specimen safety. */
 export type PreanalyticalBand = 'ok' | 'caution' | 'reject-risk' | '';
@@ -61,22 +59,22 @@ export type Recommendation = 'accept' | 'query-referrer' | 'redirect' | 'reject'
 
 /** Requesting clinician and contact details. */
 export interface ClinicianSection {
-	clinicianName: string;
-	clinicianRole: string;
-	registrationBody: string;
-	registrationNumber: string;
-	requesterContact: string;
-	supervisingConsultant: string;
-	siteName: string;
-	referralDate: string;
+  clinicianName: string;
+  clinicianRole: string;
+  registrationBody: string;
+  registrationNumber: string;
+  requesterContact: string;
+  supervisingConsultant: string;
+  siteName: string;
+  referralDate: string;
 }
 
 /** Patient identification. */
 export interface PatientSection {
-	firstName: string;
-	lastName: string;
-	dateOfBirth: string;
-	nhsNumber: string;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  nhsNumber: string;
 }
 
 /**
@@ -84,56 +82,56 @@ export interface PatientSection {
  * should be selected for a request to be actionable.
  */
 export interface PanelsSection {
-	fullBloodCount: boolean;
-	ureaElectrolytes: boolean;
-	liverFunction: boolean;
-	thyroidFunction: boolean;
-	hba1c: boolean;
-	lipidProfile: boolean;
-	cReactiveProtein: boolean;
-	coagulationScreen: boolean;
-	boneProfile: boolean;
-	ferritinIron: boolean;
-	vitaminB12Folate: boolean;
-	vitaminD: boolean;
-	hba1cMonitoring: boolean;
-	glucose: boolean;
-	inr: boolean;
-	bloodCulture: boolean;
-	groupAndSave: boolean;
-	crossmatch: boolean;
-	troponin: boolean;
-	dDimer: boolean;
-	amylaseLipase: boolean;
+  fullBloodCount: boolean;
+  ureaElectrolytes: boolean;
+  liverFunction: boolean;
+  thyroidFunction: boolean;
+  hba1c: boolean;
+  lipidProfile: boolean;
+  cReactiveProtein: boolean;
+  coagulationScreen: boolean;
+  boneProfile: boolean;
+  ferritinIron: boolean;
+  vitaminB12Folate: boolean;
+  vitaminD: boolean;
+  hba1cMonitoring: boolean;
+  glucose: boolean;
+  inr: boolean;
+  bloodCulture: boolean;
+  groupAndSave: boolean;
+  crossmatch: boolean;
+  troponin: boolean;
+  dDimer: boolean;
+  amylaseLipase: boolean;
 }
 
 /** Clinical context for the request. */
 export interface ClinicalSection {
-	primaryIndication: PrimaryIndication;
-	clinicalDetails: string;
-	relevantMedications: string;
+  primaryIndication: PrimaryIndication;
+  clinicalDetails: string;
+  relevantMedications: string;
 }
 
 /** Pre-analytical and specimen-handling information. */
 export interface PreanalyticalSection {
-	fastingRequired: boolean;
-	fastingStatus: FastingStatus;
-	specimenCollected: SpecimenCollected;
-	collectionDate: string;
-	collectionTime: string;
+  fastingRequired: boolean;
+  fastingStatus: FastingStatus;
+  specimenCollected: SpecimenCollected;
+  collectionDate: string;
+  collectionTime: string;
 }
 
 /** Patient-safety factors. */
 export interface SafetySection {
-	knownBloodBorneVirus: boolean;
-	difficultVenousAccess: boolean;
+  knownBloodBorneVirus: boolean;
+  difficultVenousAccess: boolean;
 }
 
 /** Triage and submission details. */
 export interface TriageSection {
-	urgency: Urgency;
-	setting: Setting;
-	notes: string;
+  urgency: Urgency;
+  setting: Setting;
+  notes: string;
 }
 
 /**
@@ -141,13 +139,13 @@ export interface TriageSection {
  * grade is computed from.
  */
 export interface BloodTestRequest {
-	clinician: ClinicianSection;
-	patient: PatientSection;
-	panels: PanelsSection;
-	clinical: ClinicalSection;
-	preanalytical: PreanalyticalSection;
-	safety: SafetySection;
-	triage: TriageSection;
+  clinician: ClinicianSection;
+  patient: PatientSection;
+  panels: PanelsSection;
+  clinical: ClinicalSection;
+  preanalytical: PreanalyticalSection;
+  safety: SafetySection;
+  triage: TriageSection;
 }
 
 /** The boolean field name of a single panel. */
@@ -160,87 +158,87 @@ export type Axis = 'appropriateness' | 'preanalytical' | 'completeness' | 'triag
 
 /** Flag category (mirrors the SQL grade_flag CHECK constraint). */
 export type FlagCategory =
-	| 'duplicate-recent-test'
-	| 'retest-interval-breach'
-	| 'fasting-required-not-met'
-	| 'missing-clinical-details'
-	| 'missing-indication'
-	| 'blood-borne-virus-precaution'
-	| 'stat-critical'
-	| 'no-test-selected'
-	| 'other';
+  | 'duplicate-recent-test'
+  | 'retest-interval-breach'
+  | 'fasting-required-not-met'
+  | 'missing-clinical-details'
+  | 'missing-indication'
+  | 'blood-borne-virus-precaution'
+  | 'stat-critical'
+  | 'no-test-selected'
+  | 'other';
 
 /** Flag priority. */
 export type FlagPriority = 'low' | 'medium' | 'high';
 
 /** A single rule that fired during grading (audit trail). */
 export interface FiredRule {
-	ruleId: string;
-	axis: Axis;
-	category: string;
-	description: string;
+  ruleId: string;
+  axis: Axis;
+  category: string;
+  description: string;
 }
 
 /** A safety-critical flag, independent of the four axes. */
 export interface Flag {
-	flagId: string;
-	category: FlagCategory;
-	priority: FlagPriority;
-	description: string;
-	suggestedAction: string;
+  flagId: string;
+  category: FlagCategory;
+  priority: FlagPriority;
+  description: string;
+  suggestedAction: string;
 }
 
 /** Optional engine context passed to the flag detector. */
 export interface FlagContext {
-	fastingViolation?: boolean;
-	preanalyticalBand?: PreanalyticalBand;
-	triageTier?: TriageTier;
+  fastingViolation?: boolean;
+  preanalyticalBand?: PreanalyticalBand;
+  triageTier?: TriageTier;
 }
 
 /** The computed four-axis vetting grade. */
 export interface GradingResult {
-	// Axis A
-	appropriatenessScore: number;
-	appropriatenessBand: AppropriatenessBand;
-	// Axis B
-	preanalyticalBand: PreanalyticalBand;
-	fastingViolation: boolean;
-	// Axis C
-	completenessPercent: number;
-	// Axis D
-	triageTier: TriageTier;
-	targetTimeframe: string;
-	// Derived
-	testsSelectedCount: number;
-	recommendation: Recommendation;
-	recommendationLabel: string;
-	firedRules: FiredRule[];
-	flags: Flag[];
-	gradedAt: string;
+  // Axis A
+  appropriatenessScore: number;
+  appropriatenessBand: AppropriatenessBand;
+  // Axis B
+  preanalyticalBand: PreanalyticalBand;
+  fastingViolation: boolean;
+  // Axis C
+  completenessPercent: number;
+  // Axis D
+  triageTier: TriageTier;
+  targetTimeframe: string;
+  // Derived
+  testsSelectedCount: number;
+  recommendation: Recommendation;
+  recommendationLabel: string;
+  firedRules: FiredRule[];
+  flags: Flag[];
+  gradedAt: string;
 }
 
 // ─── Step configuration ───
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
+  number: number;
+  title: string;
+  shortTitle: string;
 }
 
 // ─── Dashboard row ───
 
 /** A graded request row for the vetting dashboard table. */
 export interface RequestRow {
-	id: string;
-	referralDate: string;
-	patient: string;
-	nhs: string;
-	testsSelectedCount: number;
-	indication: PrimaryIndication;
-	appropriatenessBand: AppropriatenessBand;
-	preanalyticalBand: PreanalyticalBand;
-	completenessPercent: number;
-	triageTier: TriageTier;
-	recommendation: Recommendation;
-	flagCount: number;
+  id: string;
+  referralDate: string;
+  patient: string;
+  nhs: string;
+  testsSelectedCount: number;
+  indication: PrimaryIndication;
+  appropriatenessBand: AppropriatenessBand;
+  preanalyticalBand: PreanalyticalBand;
+  completenessPercent: number;
+  triageTier: TriageTier;
+  recommendation: Recommendation;
+  flagCount: number;
 }

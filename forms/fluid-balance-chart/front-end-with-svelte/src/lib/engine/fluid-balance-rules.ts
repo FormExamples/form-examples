@@ -42,8 +42,8 @@ export const ANURIA_ABSOLUTE_ML = 100;
  * `hoursObserved` yields the unscaled 24-hour threshold.
  */
 export function significantBalanceThresholdMl(hoursObserved: number): number {
-	const scale = hoursObserved > 0 ? hoursObserved / 24 : 1;
-	return SIGNIFICANT_BALANCE_ML_PER_24H * scale;
+  const scale = hoursObserved > 0 ? hoursObserved / 24 : 1;
+  return SIGNIFICANT_BALANCE_ML_PER_24H * scale;
 }
 
 /**
@@ -52,28 +52,28 @@ export function significantBalanceThresholdMl(hoursObserved: number): number {
  * of the net-balance sign.
  */
 export function classifyFluidStatus(args: {
-	netBalanceMl: number;
-	urineOutputRateMlPerKgPerHour: number | null;
-	hoursObserved: number;
-	positiveThresholdMl: number;
-	negativeThresholdMl: number;
+  netBalanceMl: number;
+  urineOutputRateMlPerKgPerHour: number | null;
+  hoursObserved: number;
+  positiveThresholdMl: number;
+  negativeThresholdMl: number;
 }): FluidStatus {
-	const {
-		netBalanceMl,
-		urineOutputRateMlPerKgPerHour,
-		hoursObserved,
-		positiveThresholdMl,
-		negativeThresholdMl
-	} = args;
+  const {
+    netBalanceMl,
+    urineOutputRateMlPerKgPerHour,
+    hoursObserved,
+    positiveThresholdMl,
+    negativeThresholdMl
+  } = args;
 
-	if (
-		urineOutputRateMlPerKgPerHour !== null &&
-		hoursObserved >= OLIGURIA_MIN_HOURS &&
-		urineOutputRateMlPerKgPerHour < OLIGURIA_RATE_ML_PER_KG_PER_HOUR
-	) {
-		return 'oliguria';
-	}
-	if (netBalanceMl >= positiveThresholdMl) return 'positive';
-	if (netBalanceMl <= -negativeThresholdMl) return 'negative';
-	return 'balanced';
+  if (
+    urineOutputRateMlPerKgPerHour !== null &&
+    hoursObserved >= OLIGURIA_MIN_HOURS &&
+    urineOutputRateMlPerKgPerHour < OLIGURIA_RATE_ML_PER_KG_PER_HOUR
+  ) {
+    return 'oliguria';
+  }
+  if (netBalanceMl >= positiveThresholdMl) return 'positive';
+  if (netBalanceMl <= -negativeThresholdMl) return 'negative';
+  return 'balanced';
 }

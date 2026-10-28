@@ -34,12 +34,7 @@ export type CertificateProviderProfession =
   | '';
 
 export type CertificateProviderRelationship =
-  | 'professional'
-  | 'friend'
-  | 'colleague'
-  | 'neighbour'
-  | 'other'
-  | '';
+  'professional' | 'friend' | 'colleague' | 'neighbour' | 'other' | '';
 
 export type DecisionRule = 'jointly' | 'jointly-and-severally' | 'mixed' | '';
 
@@ -66,7 +61,8 @@ export type InstructionCategory =
   | 'other'
   | '';
 
-export type SignerRole = 'donor' | 'certificate-provider' | 'attorney' | 'replacement-attorney' | '';
+export type SignerRole =
+  'donor' | 'certificate-provider' | 'attorney' | 'replacement-attorney' | '';
 
 export type SignatureMethod = 'wet-ink' | 'electronic' | 'mark-with-witness' | '';
 

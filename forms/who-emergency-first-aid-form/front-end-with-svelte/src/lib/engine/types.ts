@@ -13,17 +13,17 @@ export type Sex = 'male' | 'female' | 'unknown' | '';
 // ──────────────────────────────────────────────
 
 export interface ContactPerson {
-	name: string;
-	contactInformation: string;
+  name: string;
+  contactInformation: string;
 }
 
 export interface PatientIdentification {
-	patientName: string;
-	dateOfBirth: string;
-	age: number | null;
-	sex: Sex;
-	patientContactInformation: string;
-	contactPerson: ContactPerson;
+  patientName: string;
+  dateOfBirth: string;
+  age: number | null;
+  sex: Sex;
+  patientContactInformation: string;
+  contactPerson: ContactPerson;
 }
 
 // ──────────────────────────────────────────────
@@ -31,22 +31,22 @@ export interface PatientIdentification {
 // ──────────────────────────────────────────────
 
 export interface ReferralFacility {
-	name: string;
-	focalPoint: string;
-	phoneNumber: string;
+  name: string;
+  focalPoint: string;
+  phoneNumber: string;
 }
 
 export interface AmbulanceService {
-	name: string;
-	focalPoint: string;
-	phoneNumber: string;
+  name: string;
+  focalPoint: string;
+  phoneNumber: string;
 }
 
 export interface ReferralTransport {
-	referralFacility: ReferralFacility;
-	ambulance: AmbulanceService;
-	eventDateTime: string;
-	departureDateTime: string;
+  referralFacility: ReferralFacility;
+  ambulance: AmbulanceService;
+  eventDateTime: string;
+  departureDateTime: string;
 }
 
 // ──────────────────────────────────────────────
@@ -54,10 +54,10 @@ export interface ReferralTransport {
 // ──────────────────────────────────────────────
 
 export interface Situation {
-	medical: boolean;
-	trauma: boolean;
-	pregnant: YesNoUnknown;
-	whatHappened: string;
+  medical: boolean;
+  trauma: boolean;
+  pregnant: YesNoUnknown;
+  whatHappened: string;
 }
 
 // ──────────────────────────────────────────────
@@ -65,8 +65,8 @@ export interface Situation {
 // ──────────────────────────────────────────────
 
 export interface Background {
-	pastMedicalAndSurgicalHistory: string;
-	currentMedicationsOrAllergies: string;
+  pastMedicalAndSurgicalHistory: string;
+  currentMedicationsOrAllergies: string;
 }
 
 // ──────────────────────────────────────────────
@@ -74,18 +74,18 @@ export interface Background {
 // ──────────────────────────────────────────────
 
 export interface MajorBleedingInterventions {
-	directPressure: boolean;
-	deepWoundPacking: boolean;
-	tourniquet: boolean;
-	tourniquetApplicationTime: string;
-	uterineMassage: boolean;
-	none: boolean;
+  directPressure: boolean;
+  deepWoundPacking: boolean;
+  tourniquet: boolean;
+  tourniquetApplicationTime: string;
+  uterineMassage: boolean;
+  none: boolean;
 }
 
 export interface MajorBleeding {
-	assessmentNormal: boolean;
-	assessmentFindings: string;
-	interventions: MajorBleedingInterventions;
+  assessmentNormal: boolean;
+  assessmentFindings: string;
+  interventions: MajorBleedingInterventions;
 }
 
 // ──────────────────────────────────────────────
@@ -93,17 +93,17 @@ export interface MajorBleeding {
 // ──────────────────────────────────────────────
 
 export interface AirwayInterventions {
-	neckImmobilization: boolean;
-	headTiltChinLift: boolean;
-	jawThrust: boolean;
-	chokingCare: boolean;
-	none: boolean;
+  neckImmobilization: boolean;
+  headTiltChinLift: boolean;
+  jawThrust: boolean;
+  chokingCare: boolean;
+  none: boolean;
 }
 
 export interface Airway {
-	assessmentNormal: boolean;
-	assessmentFindings: string;
-	interventions: AirwayInterventions;
+  assessmentNormal: boolean;
+  assessmentFindings: string;
+  interventions: AirwayInterventions;
 }
 
 // ──────────────────────────────────────────────
@@ -111,14 +111,14 @@ export interface Airway {
 // ──────────────────────────────────────────────
 
 export interface BreathingInterventions {
-	maintainedPositionOfComfort: boolean;
-	none: boolean;
+  maintainedPositionOfComfort: boolean;
+  none: boolean;
 }
 
 export interface Breathing {
-	assessmentNormal: boolean;
-	assessmentFindings: string;
-	interventions: BreathingInterventions;
+  assessmentNormal: boolean;
+  assessmentFindings: string;
+  interventions: BreathingInterventions;
 }
 
 // ──────────────────────────────────────────────
@@ -126,18 +126,18 @@ export interface Breathing {
 // ──────────────────────────────────────────────
 
 export interface CirculationInterventions {
-	pelvicBinder: boolean;
-	controlMinorBleeding: boolean;
-	fractureCare: boolean;
-	oralHydration: boolean;
-	leftLateralPosition: boolean;
-	none: boolean;
+  pelvicBinder: boolean;
+  controlMinorBleeding: boolean;
+  fractureCare: boolean;
+  oralHydration: boolean;
+  leftLateralPosition: boolean;
+  none: boolean;
 }
 
 export interface Circulation {
-	assessmentNormal: boolean;
-	assessmentFindings: string;
-	interventions: CirculationInterventions;
+  assessmentNormal: boolean;
+  assessmentFindings: string;
+  interventions: CirculationInterventions;
 }
 
 // ──────────────────────────────────────────────
@@ -145,18 +145,18 @@ export interface Circulation {
 // ──────────────────────────────────────────────
 
 export interface DisabilityInterventions {
-	spinalImmobilisation: boolean;
-	glucoseGiven: boolean;
-	seizureCare: boolean;
-	highTemperatureCare: boolean;
-	lowTemperatureCare: boolean;
-	none: boolean;
+  spinalImmobilisation: boolean;
+  glucoseGiven: boolean;
+  seizureCare: boolean;
+  highTemperatureCare: boolean;
+  lowTemperatureCare: boolean;
+  none: boolean;
 }
 
 export interface Disability {
-	assessmentNormal: boolean;
-	assessmentFindings: string;
-	interventions: DisabilityInterventions;
+  assessmentNormal: boolean;
+  assessmentFindings: string;
+  interventions: DisabilityInterventions;
 }
 
 // ──────────────────────────────────────────────
@@ -164,20 +164,20 @@ export interface Disability {
 // ──────────────────────────────────────────────
 
 export interface ExposureInterventions {
-	recoveryPosition: boolean;
-	burnCare: boolean;
-	woundCare: boolean;
-	drowningCare: boolean;
-	snakebiteCare: boolean;
-	none: boolean;
+  recoveryPosition: boolean;
+  burnCare: boolean;
+  woundCare: boolean;
+  drowningCare: boolean;
+  snakebiteCare: boolean;
+  none: boolean;
 }
 
 export interface Exposure {
-	assessmentNormal: boolean;
-	assessmentFindings: string;
-	interventions: ExposureInterventions;
-	medicationTakenNone: boolean;
-	medicationTakenDetails: string;
+  assessmentNormal: boolean;
+  assessmentFindings: string;
+  interventions: ExposureInterventions;
+  medicationTakenNone: boolean;
+  medicationTakenDetails: string;
 }
 
 // ──────────────────────────────────────────────
@@ -185,20 +185,20 @@ export interface Exposure {
 // ──────────────────────────────────────────────
 
 export interface Precautions {
-	highlyInfectiousDisease: boolean;
-	spinalImmobilization: boolean;
-	possibleFracture: boolean;
-	fallRisk: boolean;
-	alteredMentalStatus: boolean;
-	other: boolean;
-	otherDetails: string;
+  highlyInfectiousDisease: boolean;
+  spinalImmobilization: boolean;
+  possibleFracture: boolean;
+  fallRisk: boolean;
+  alteredMentalStatus: boolean;
+  other: boolean;
+  otherDetails: string;
 }
 
 export interface Recommendations {
-	transportPlan: string;
-	problemsAnticipated: string;
-	otherConcerns: string;
-	precautions: Precautions;
+  transportPlan: string;
+  problemsAnticipated: string;
+  otherConcerns: string;
+  precautions: Precautions;
 }
 
 // ──────────────────────────────────────────────
@@ -206,10 +206,10 @@ export interface Recommendations {
 // ──────────────────────────────────────────────
 
 export interface ResponderDetails {
-	name: string;
-	signature: string;
-	contactInformation: string;
-	cfarOrganization: string;
+  name: string;
+  signature: string;
+  contactInformation: string;
+  cfarOrganization: string;
 }
 
 // ──────────────────────────────────────────────
@@ -217,18 +217,18 @@ export interface ResponderDetails {
 // ──────────────────────────────────────────────
 
 export interface AssessmentData {
-	patientIdentification: PatientIdentification;
-	referralTransport: ReferralTransport;
-	situation: Situation;
-	background: Background;
-	majorBleeding: MajorBleeding;
-	airway: Airway;
-	breathing: Breathing;
-	circulation: Circulation;
-	disability: Disability;
-	exposure: Exposure;
-	recommendations: Recommendations;
-	responderDetails: ResponderDetails;
+  patientIdentification: PatientIdentification;
+  referralTransport: ReferralTransport;
+  situation: Situation;
+  background: Background;
+  majorBleeding: MajorBleeding;
+  airway: Airway;
+  breathing: Breathing;
+  circulation: Circulation;
+  disability: Disability;
+  exposure: Exposure;
+  recommendations: Recommendations;
+  responderDetails: ResponderDetails;
 }
 
 // ──────────────────────────────────────────────
@@ -240,47 +240,47 @@ export type SectionKey = keyof AssessmentData;
 
 /** A single validation rule that may fire against the assessment data. */
 export interface ValidationRule {
-	id: string;
-	section: SectionKey;
-	description: string;
-	/** True if the rule applies given the conditional logic of the form. */
-	applies: (data: AssessmentData) => boolean;
-	/** True if the rule is satisfied; false if it has fired (i.e. is incomplete). */
-	isSatisfied: (data: AssessmentData) => boolean;
+  id: string;
+  section: SectionKey;
+  description: string;
+  /** True if the rule applies given the conditional logic of the form. */
+  applies: (data: AssessmentData) => boolean;
+  /** True if the rule is satisfied; false if it has fired (i.e. is incomplete). */
+  isSatisfied: (data: AssessmentData) => boolean;
 }
 
 /** A rule that has fired (the field is required but unanswered). */
 export interface FiredRule {
-	id: string;
-	section: SectionKey;
-	description: string;
+  id: string;
+  section: SectionKey;
+  description: string;
 }
 
 /** Per-section completeness summary. */
 export interface SectionCompleteness {
-	section: SectionKey;
-	required: number;
-	satisfied: number;
-	missing: FiredRule[];
+  section: SectionKey;
+  required: number;
+  satisfied: number;
+  missing: FiredRule[];
 }
 
 /** Result of running the completeness validator. */
 export interface ValidationResult {
-	complete: boolean;
-	totalRequired: number;
-	totalSatisfied: number;
-	sections: SectionCompleteness[];
-	missing: FiredRule[];
+  complete: boolean;
+  totalRequired: number;
+  totalSatisfied: number;
+  sections: SectionCompleteness[];
+  missing: FiredRule[];
 }
 
 /** Priority for clinician-relevant flags. */
 export type FlagPriority = 'urgent' | 'high' | 'medium' | 'low';
 
 export interface FlaggedIssue {
-	id: string;
-	category: string;
-	message: string;
-	priority: FlagPriority;
+  id: string;
+  category: string;
+  message: string;
+  priority: FlagPriority;
 }
 
 // ──────────────────────────────────────────────
@@ -295,18 +295,18 @@ export interface FlaggedIssue {
  * summarised by its completeness status and its highest outstanding flag.
  */
 export interface CfarResult {
-	validation: ValidationResult;
-	flags: FlaggedIssue[];
-	/** Whether every applicable required field is answered. */
-	complete: boolean;
-	/** Count of flags at each priority level. */
-	urgentCount: number;
-	highCount: number;
-	mediumCount: number;
-	lowCount: number;
-	/** The highest-priority flag present, or null if the record is clear. */
-	topPriority: FlagPriority | null;
-	timestamp: string;
+  validation: ValidationResult;
+  flags: FlaggedIssue[];
+  /** Whether every applicable required field is answered. */
+  complete: boolean;
+  /** Count of flags at each priority level. */
+  urgentCount: number;
+  highCount: number;
+  mediumCount: number;
+  lowCount: number;
+  /** The highest-priority flag present, or null if the record is clear. */
+  topPriority: FlagPriority | null;
+  timestamp: string;
 }
 
 // ──────────────────────────────────────────────
@@ -314,8 +314,8 @@ export interface CfarResult {
 // ──────────────────────────────────────────────
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
-	section: SectionKey;
+  number: number;
+  title: string;
+  shortTitle: string;
+  section: SectionKey;
 }

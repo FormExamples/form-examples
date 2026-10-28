@@ -46,15 +46,15 @@ class OperationNoteStore {
    */
   steps = $derived(
     STEPS.map((s) => {
-    const filled = countStepFilled(this.data, s.number);
-    let status: 'waiting' | 'in-progress' | 'finished' | 'error' = 'waiting';
+      const filled = countStepFilled(this.data, s.number);
+      let status: 'waiting' | 'in-progress' | 'finished' | 'error' = 'waiting';
       if (filled >= 3) status = 'finished';
       else if (filled > 0) status = 'in-progress';
-    if (this.errors && Object.keys(this.errors).some((k) => k.startsWith(`step-${s.number}-`))) {
-      status = 'error';
-    }
-    return { ...s, status, filled };
-    }),
+      if (this.errors && Object.keys(this.errors).some((k) => k.startsWith(`step-${s.number}-`))) {
+        status = 'error';
+      }
+      return { ...s, status, filled };
+    })
   );
 
   constructor() {
@@ -97,14 +97,14 @@ class OperationNoteStore {
     }
     deepAssign(
       this.data as unknown as Record<string, unknown>,
-      (draft ?? seed ?? createDefaultOperationNote()) as unknown as Record<string, unknown>,
+      (draft ?? seed ?? createDefaultOperationNote()) as unknown as Record<string, unknown>
     );
   }
 
   reset() {
     deepAssign(
       this.data as unknown as Record<string, unknown>,
-      createDefaultOperationNote() as unknown as Record<string, unknown>,
+      createDefaultOperationNote() as unknown as Record<string, unknown>
     );
     this.currentStep = 1;
     this.errors = {};
@@ -126,14 +126,11 @@ class OperationNoteStore {
    */
   validate(): ValidationErrors {
     const e: ValidationErrors = {};
-    if (!this.data.operation.hospital)
-      e['step-1-hospital'] = 'Enter the hospital name';
+    if (!this.data.operation.hospital) e['step-1-hospital'] = 'Enter the hospital name';
     if (!this.data.operation.theatreNumber)
       e['step-1-theatre-number'] = 'Enter the theatre or OR number';
-    if (!this.data.patient.firstName)
-      e['step-2-first-name'] = 'Enter the patient first name';
-    if (!this.data.patient.lastName)
-      e['step-2-last-name'] = 'Enter the patient last name';
+    if (!this.data.patient.firstName) e['step-2-first-name'] = 'Enter the patient first name';
+    if (!this.data.patient.lastName) e['step-2-last-name'] = 'Enter the patient last name';
     if (!this.data.diagnosesAndProcedures.performedProcedures)
       e['step-4-performed-procedures'] = 'Document the procedure(s) actually performed';
     if (
@@ -141,7 +138,8 @@ class OperationNoteStore {
       this.data.signOff.surgeonOverrideRisk !== this.result.compositeRisk &&
       !this.data.signOff.surgeonOverrideReason.trim()
     ) {
-      e['step-12-override-reason'] = 'Document the reason for overriding the computed composite risk';
+      e['step-12-override-reason'] =
+        'Document the reason for overriding the computed composite risk';
     }
     if (!this.data.signOff.electronicSignatureName)
       e['step-12-signature'] = 'Sign the operation note electronically';
@@ -167,7 +165,7 @@ function estimatePercentComplete(d: OperationNote): number {
     }
   }
   if (total === 0) return 0;
-  return Math.round(filled / total * 100);
+  return Math.round((filled / total) * 100);
 }
 
 /**
@@ -186,19 +184,32 @@ function countStepFilled(d: OperationNote, stepNumber: number): number {
 
 function sectionForStep(d: OperationNote, n: number): unknown {
   switch (n) {
-    case 1: return d.operation;
-    case 2: return d.patient;
-    case 3: return d.team;
-    case 4: return d.diagnosesAndProcedures;
-    case 5: return d.anaesthesia;
-    case 6: return d.positionPrepApproach;
-    case 7: return d.operativeFindings;
-    case 8: return d.materialsImplants;
-    case 9: return d.drainsPacksSpecimens;
-    case 10: return d.safetyCountsEbl;
-    case 11: return d.postOperativePlan;
-    case 12: return d.signOff;
-    default: return null;
+    case 1:
+      return d.operation;
+    case 2:
+      return d.patient;
+    case 3:
+      return d.team;
+    case 4:
+      return d.diagnosesAndProcedures;
+    case 5:
+      return d.anaesthesia;
+    case 6:
+      return d.positionPrepApproach;
+    case 7:
+      return d.operativeFindings;
+    case 8:
+      return d.materialsImplants;
+    case 9:
+      return d.drainsPacksSpecimens;
+    case 10:
+      return d.safetyCountsEbl;
+    case 11:
+      return d.postOperativePlan;
+    case 12:
+      return d.signOff;
+    default:
+      return null;
   }
 }
 

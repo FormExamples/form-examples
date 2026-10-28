@@ -34,8 +34,7 @@
       {disabled}
       class={`text-area-input ${className}`}
       bind:value
-      {...restProps}
-    ></textarea>
+      {...restProps}></textarea>
   </div>
 {:else}
   <textarea
@@ -46,6 +45,5 @@
     {required}
     {disabled}
     bind:value
-    {...restProps}
-  ></textarea>
+    {...restProps}></textarea>
 {/if}

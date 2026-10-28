@@ -1,9 +1,9 @@
 import type {
-	DexaRequest,
-	GradingResult,
-	Recommendation,
-	AppropriatenessBand,
-	RadiationDoseBand
+  DexaRequest,
+  GradingResult,
+  Recommendation,
+  AppropriatenessBand,
+  RadiationDoseBand
 } from './types';
 import { gradeAppropriateness } from './appropriateness-rules';
 import { gradeSafety } from './safety-rules';
@@ -13,10 +13,10 @@ import { detectFlags } from './flagged-issues';
 
 /** Human-readable recommendation labels. */
 export const RECOMMENDATION_LABELS: Record<string, string> = {
-	accept: 'Accept and book',
-	'query-referrer': 'Query the referrer',
-	redirect: 'Redirect / defer',
-	reject: 'Reject'
+  accept: 'Accept and book',
+  'query-referrer': 'Query the referrer',
+  redirect: 'Redirect / defer',
+  reject: 'Reject'
 };
 
 /**
@@ -24,14 +24,14 @@ export const RECOMMENDATION_LABELS: Record<string, string> = {
  * axes. The least-alarming option wins only when nothing escalates.
  */
 export function deriveRecommendation(
-	appropriatenessBand: AppropriatenessBand,
-	radiationDoseBand: RadiationDoseBand,
-	completenessPercent: number
+  appropriatenessBand: AppropriatenessBand,
+  radiationDoseBand: RadiationDoseBand,
+  completenessPercent: number
 ): Recommendation {
-	if (radiationDoseBand === 'high') return 'redirect';
-	if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
-	if (completenessPercent < 50) return 'query-referrer';
-	return 'accept';
+  if (radiationDoseBand === 'high') return 'redirect';
+  if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
+  if (completenessPercent < 50) return 'query-referrer';
+  return 'accept';
 }
 
 /**
@@ -52,44 +52,44 @@ export function deriveRecommendation(
  * effects, no network calls, no I/O.
  */
 export function calculateGrade(data: DexaRequest): GradingResult {
-	const firedRules = [];
+  const firedRules = [];
 
-	// Axis A — appropriateness (with FRAX adjustment).
-	const appr = gradeAppropriateness(data);
-	firedRules.push(...appr.firedRules);
+  // Axis A — appropriateness (with FRAX adjustment).
+  const appr = gradeAppropriateness(data);
+  firedRules.push(...appr.firedRules);
 
-	// Axis B — radiation safety.
-	const safety = gradeSafety(data);
-	firedRules.push(...safety.firedRules);
+  // Axis B — radiation safety.
+  const safety = gradeSafety(data);
+  firedRules.push(...safety.firedRules);
 
-	// Axis C — completeness.
-	const completeness = gradeCompleteness(data);
-	firedRules.push(...completeness.firedRules);
+  // Axis C — completeness.
+  const completeness = gradeCompleteness(data);
+  firedRules.push(...completeness.firedRules);
 
-	// Axis D — triage.
-	const triage = gradeTriage(data);
-	firedRules.push(...triage.firedRules);
+  // Axis D — triage.
+  const triage = gradeTriage(data);
+  firedRules.push(...triage.firedRules);
 
-	const recommendation = deriveRecommendation(
-		appr.appropriatenessBand,
-		safety.radiationDoseBand,
-		completeness.completenessPercent
-	);
+  const recommendation = deriveRecommendation(
+    appr.appropriatenessBand,
+    safety.radiationDoseBand,
+    completeness.completenessPercent
+  );
 
-	const flags = detectFlags(data);
+  const flags = detectFlags(data);
 
-	return {
-		appropriatenessScore: appr.appropriatenessScore,
-		appropriatenessBand: appr.appropriatenessBand,
-		radiationDoseBand: safety.radiationDoseBand,
-		safetyNote: safety.safetyNote,
-		completenessPercent: completeness.completenessPercent,
-		triageTier: triage.triageTier,
-		targetTimeframe: triage.targetTimeframe,
-		recommendation,
-		recommendationLabel: RECOMMENDATION_LABELS[recommendation] || recommendation,
-		firedRules,
-		flags,
-		gradedAt: new Date().toISOString()
-	};
+  return {
+    appropriatenessScore: appr.appropriatenessScore,
+    appropriatenessBand: appr.appropriatenessBand,
+    radiationDoseBand: safety.radiationDoseBand,
+    safetyNote: safety.safetyNote,
+    completenessPercent: completeness.completenessPercent,
+    triageTier: triage.triageTier,
+    targetTimeframe: triage.targetTimeframe,
+    recommendation,
+    recommendationLabel: RECOMMENDATION_LABELS[recommendation] || recommendation,
+    firedRules,
+    flags,
+    gradedAt: new Date().toISOString()
+  };
 }

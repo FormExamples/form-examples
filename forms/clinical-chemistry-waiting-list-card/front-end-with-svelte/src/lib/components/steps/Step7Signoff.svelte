@@ -21,12 +21,11 @@
       id="signoff-additional-notes"
       class="text-area-input"
       rows="3"
-      bind:value={store.data.signoff.additionalNotes}
-    ></textarea>
+      bind:value={store.data.signoff.additionalNotes}></textarea>
   </div>
 
   <p class="hint">
-    The Waiting Time Status, days-to-target, days-to-breach, and any flagged
-    issues are computed against today's date when you submit the card.
+    The Waiting Time Status, days-to-target, days-to-breach, and any flagged issues are computed
+    against today's date when you submit the card.
   </p>
 </fieldset>

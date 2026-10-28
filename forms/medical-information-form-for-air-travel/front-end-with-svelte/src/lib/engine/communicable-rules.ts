@@ -14,20 +14,20 @@ const RULES: CommunicableRule[] = [
     id: 'R-CD-01',
     band: 'unfit-to-fly',
     description: 'Active communicable disease in infectious period',
-    fires: (d) => d.communicable.communicableDiseaseStatus === 'infectious',
+    fires: (d) => d.communicable.communicableDiseaseStatus === 'infectious'
   },
   {
     id: 'R-CD-02',
     band: 'requires-review',
     description: 'Convalescent communicable disease — clearance certificate required',
-    fires: (d) => d.communicable.communicableDiseaseStatus === 'convalescent',
+    fires: (d) => d.communicable.communicableDiseaseStatus === 'convalescent'
   },
   {
     id: 'R-CD-03',
     band: 'unfit-to-fly',
     description: 'Isolation precautions required',
-    fires: (d) => d.communicable.isolationRequired === 'yes',
-  },
+    fires: (d) => d.communicable.isolationRequired === 'yes'
+  }
 ];
 
 export function applyCommunicableRules(data: MedifAssessment): FiredRule[] {
@@ -38,7 +38,7 @@ export function applyCommunicableRules(data: MedifAssessment): FiredRule[] {
         ruleId: r.id,
         category: 'communicable',
         band: r.band,
-        description: r.description,
+        description: r.description
       });
     }
   }

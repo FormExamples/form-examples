@@ -3,7 +3,7 @@
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
   import Select from '#lib/components/ui/Select.svelte';
-  import { RadioGroup } from "@lilydesignsystem/svelte-headless";
+  import { RadioGroup } from '@lilydesignsystem/svelte-headless';
 
   const d = assessment.data.medicalConditions;
 
@@ -47,10 +47,20 @@
     <Field label="Erectile dysfunction?">
       <RadioGroup label="Erectile dysfunction?">
         <label class="radio-input">
-          <input type="radio" name="hasErectileDysfunction" value="yes" bind:group={d.hasErectileDysfunction} /> Yes
+          <input
+            type="radio"
+            name="hasErectileDysfunction"
+            value="yes"
+            bind:group={d.hasErectileDysfunction}
+          /> Yes
         </label>
         <label class="radio-input">
-          <input type="radio" name="hasErectileDysfunction" value="no" bind:group={d.hasErectileDysfunction} /> No
+          <input
+            type="radio"
+            name="hasErectileDysfunction"
+            value="no"
+            bind:group={d.hasErectileDysfunction}
+          /> No
         </label>
       </RadioGroup>
     </Field>

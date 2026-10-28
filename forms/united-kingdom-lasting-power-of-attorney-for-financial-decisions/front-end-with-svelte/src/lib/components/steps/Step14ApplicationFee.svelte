@@ -9,22 +9,25 @@
 
   const paymentOptions = [
     { value: 'card', label: 'Pay by debit or credit card (the OPG will phone for details)' },
-    { value: 'cheque', label: 'Pay by cheque (make payable to "Office of the Public Guardian")' },
+    { value: 'cheque', label: 'Pay by cheque (make payable to "Office of the Public Guardian")' }
   ];
 </script>
 
 <section>
   <h2 class="text-xl font-semibold mb-2">Step 14 &mdash; Application fee (LP1F section 14)</h2>
   <p class="text-sm text-base-content/70 mb-3">
-    The standard LPA registration fee is &pound;82. If the donor is on a low income or
-    means-tested benefits, a reduction or exemption may apply (use LPA120A).
+    The standard LPA registration fee is &pound;82. If the donor is on a low income or means-tested
+    benefits, a reduction or exemption may apply (use LPA120A).
   </p>
 
   <RadioGroup name="paymentMethod" options={paymentOptions} bind:value={app.paymentMethod} />
 
   {#if app.paymentMethod === 'card'}
     <div class="mt-3">
-      <Field label="Phone number for card payment" hint="The OPG will call this number to take card details.">
+      <Field
+        label="Phone number for card payment"
+        hint="The OPG will call this number to take card details."
+      >
         <TextInput type="tel" bind:value={app.cardPaymentPhone} />
       </Field>
     </div>
@@ -40,10 +43,7 @@
         Download form LPA120A from the OPG and attach evidence of low income or benefits.
       </p>
       <div class="ml-6">
-        <CheckboxField
-          label="LPA120A evidence is attached"
-          bind:checked={app.hasLpa120aEvidence}
-        />
+        <CheckboxField label="LPA120A evidence is attached" bind:checked={app.hasLpa120aEvidence} />
       </div>
     {/if}
 

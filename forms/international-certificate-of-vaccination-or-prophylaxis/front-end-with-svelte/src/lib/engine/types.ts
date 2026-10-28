@@ -3,14 +3,7 @@
 // null for unanswered numeric or date fields.
 
 export type Disease =
-  | 'yellow-fever'
-  | 'polio'
-  | 'smallpox'
-  | 'cholera'
-  | 'meningococcal'
-  | 'covid-19'
-  | 'other'
-  | '';
+  'yellow-fever' | 'polio' | 'smallpox' | 'cholera' | 'meningococcal' | 'covid-19' | 'other' | '';
 
 export type Sex = 'male' | 'female' | 'other' | 'unspecified' | '';
 
@@ -28,8 +21,8 @@ export interface VaccinationEntry {
   anatomicalSite: string;
   doseAmountValue: number | null;
   doseAmountUnit: string;
-  vaccinationDate: string;             // ISO date YYYY-MM-DD or ''
-  vaccinationTime: string;             // HH:MM or ''
+  vaccinationDate: string; // ISO date YYYY-MM-DD or ''
+  vaccinationTime: string; // HH:MM or ''
   administeringClinicianSignatureDataUrl: string;
   administeringClinicianProfessionalStatus: string;
   validityStartsOn: string;
@@ -122,7 +115,7 @@ export function emptyEntry(index = 1): VaccinationEntry {
     validityEndsOn: '',
     validityIsLifetime: '',
     centreStampImageDataUrl: '',
-    centreStampApplied: '',
+    centreStampApplied: ''
   };
 }
 
@@ -137,20 +130,20 @@ export function emptyCertificate(): Certificate {
       travelDocumentKind: '',
       travelDocumentNumber: '',
       consentedToDataSharing: '',
-      signatureImageDataUrl: '',
+      signatureImageDataUrl: ''
     },
     clinician: {
       name: '',
       professionalStatus: '',
       registrationBody: '',
       registrationNumber: '',
-      signatureImageDataUrl: '',
+      signatureImageDataUrl: ''
     },
     center: {
       name: '',
       whoDesignationReference: '',
       countryAsIso31661Alpha3: '',
-      uniformStampImageDataUrl: '',
+      uniformStampImageDataUrl: ''
     },
     primaryLanguageAsBcp47: 'en',
     secondaryLanguageAsBcp47: 'fr',
@@ -163,6 +156,6 @@ export function emptyCertificate(): Certificate {
     medicalWaiver: '',
     medicalWaiverReason: '',
     electronicSignatureDataUrl: '',
-    entries: [emptyEntry(1)],
+    entries: [emptyEntry(1)]
   };
 }

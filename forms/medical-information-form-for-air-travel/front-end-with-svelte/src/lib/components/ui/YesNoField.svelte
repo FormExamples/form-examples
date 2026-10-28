@@ -7,7 +7,7 @@
     label,
     value = $bindable(),
     hint = '',
-    required = false,
+    required = false
   }: { label: string; value: YesNo; hint?: string; required?: boolean } = $props();
 </script>
 

@@ -2,13 +2,17 @@
   import { store } from '#lib/stores/assessment.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { DateInput, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { DateInput, TextInput } from '@lilydesignsystem/svelte-headless';
   import Select from '#lib/components/ui/Select.svelte';
 </script>
 
 <Fieldset legend="Step 1 — Clinician identification">
   <div class="field-grid">
-    <Field label="Clinician name" inputId="step-1-clinician-name" error={store.errors['step-1-clinician-name']}>
+    <Field
+      label="Clinician name"
+      inputId="step-1-clinician-name"
+      error={store.errors['step-1-clinician-name']}
+    >
       <TextInput
         id="step-1-clinician-name"
         label="Clinician name"
@@ -44,7 +48,11 @@
     <Field label="Site">
       <TextInput label="Site" bind:value={store.data.clinician.siteName} />
     </Field>
-    <Field label="Assessment date" inputId="step-1-assessment-date" error={store.errors['step-1-assessment-date']}>
+    <Field
+      label="Assessment date"
+      inputId="step-1-assessment-date"
+      error={store.errors['step-1-assessment-date']}
+    >
       <DateInput
         id="step-1-assessment-date"
         label="Assessment date"

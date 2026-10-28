@@ -1,54 +1,54 @@
 <script lang="ts">
-	import { assessment } from '#lib/stores/assessment.svelte.js';
-	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import TextInput from '#lib/components/ui/TextInput.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
-	import Select from '#lib/components/ui/Select.svelte';
+  import { assessment } from '#lib/stores/assessment.svelte.js';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import TextInput from '#lib/components/ui/TextInput.svelte';
+  import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+  import Select from '#lib/components/ui/Select.svelte';
 
-	const s = assessment.data.symptomOnset;
+  const s = assessment.data.symptomOnset;
 </script>
 
 <Fieldset title="Symptom Onset" description="Time and manner of symptom presentation">
-	<TextInput
-		label="Symptom Onset Time"
-		name="onsetTime"
-		type="text"
-		bind:value={s.onsetTime}
-		placeholder="e.g., 2026-03-08T14:30"
-		required
-	/>
+  <TextInput
+    label="Symptom Onset Time"
+    name="onsetTime"
+    type="text"
+    bind:value={s.onsetTime}
+    placeholder="e.g., 2026-03-08T14:30"
+    required
+  />
 
-	<TextInput
-		label="Last Known Well"
-		name="lastKnownWell"
-		type="text"
-		bind:value={s.lastKnownWell}
-		placeholder="e.g., 2026-03-08T12:00"
-	/>
+  <TextInput
+    label="Last Known Well"
+    name="lastKnownWell"
+    type="text"
+    bind:value={s.lastKnownWell}
+    placeholder="e.g., 2026-03-08T12:00"
+  />
 
-	<RadioGroup
-		label="Symptom Progression"
-		name="symptomProgression"
-		options={[
-			{ value: 'sudden', label: 'Sudden' },
-			{ value: 'gradual', label: 'Gradual' },
-			{ value: 'fluctuating', label: 'Fluctuating' },
-			{ value: 'improving', label: 'Improving' }
-		]}
-		bind:value={s.symptomProgression}
-		required
-	/>
+  <RadioGroup
+    label="Symptom Progression"
+    name="symptomProgression"
+    options={[
+      { value: 'sudden', label: 'Sudden' },
+      { value: 'gradual', label: 'Gradual' },
+      { value: 'fluctuating', label: 'Fluctuating' },
+      { value: 'improving', label: 'Improving' }
+    ]}
+    bind:value={s.symptomProgression}
+    required
+  />
 
-	<Select
-		label="Mode of Arrival"
-		name="modeOfArrival"
-		options={[
-			{ value: 'ambulance', label: 'Ambulance' },
-			{ value: 'private-vehicle', label: 'Private Vehicle' },
-			{ value: 'walk-in', label: 'Walk-in' },
-			{ value: 'transfer', label: 'Hospital Transfer' }
-		]}
-		bind:value={s.modeOfArrival}
-		required
-	/>
+  <Select
+    label="Mode of Arrival"
+    name="modeOfArrival"
+    options={[
+      { value: 'ambulance', label: 'Ambulance' },
+      { value: 'private-vehicle', label: 'Private Vehicle' },
+      { value: 'walk-in', label: 'Walk-in' },
+      { value: 'transfer', label: 'Hospital Transfer' }
+    ]}
+    bind:value={s.modeOfArrival}
+    required
+  />
 </Fieldset>

@@ -6,35 +6,30 @@
 //
 // Every function here is pure.
 
-import type {
-  DomainEvaluation,
-  DomainKey,
-  MustRisk,
-  PerioperativeOptimization,
-} from "./types";
-import { num, round1 } from "./utils";
+import type { DomainEvaluation, DomainKey, MustRisk, PerioperativeOptimization } from './types';
+import { num, round1 } from './utils';
 
 export const DOMAIN_ORDER: DomainKey[] = [
-  "anaemia",
-  "glycaemic-control",
-  "smoking",
-  "alcohol",
-  "nutrition",
-  "physical-fitness",
-  "medication",
-  "cardiorespiratory",
+  'anaemia',
+  'glycaemic-control',
+  'smoking',
+  'alcohol',
+  'nutrition',
+  'physical-fitness',
+  'medication',
+  'cardiorespiratory'
 ];
 
 /** Display labels for the domains. */
 export const DOMAIN_LABELS: Record<DomainKey, string> = {
-  anaemia: "Anaemia and iron deficiency",
-  "glycaemic-control": "Glycaemic control",
-  smoking: "Smoking",
-  alcohol: "Alcohol",
-  nutrition: "Nutrition",
-  "physical-fitness": "Physical fitness",
-  medication: "Medication",
-  cardiorespiratory: "Cardiorespiratory",
+  anaemia: 'Anaemia and iron deficiency',
+  'glycaemic-control': 'Glycaemic control',
+  smoking: 'Smoking',
+  alcohol: 'Alcohol',
+  nutrition: 'Nutrition',
+  'physical-fitness': 'Physical fitness',
+  medication: 'Medication',
+  cardiorespiratory: 'Cardiorespiratory'
 };
 
 // ----------------------------------------------------------------------
@@ -51,9 +46,7 @@ export function computeBmi(data: PerioperativeOptimization): number | null {
 }
 
 /** Percentage unintentional weight loss against the usual weight, or null. */
-export function computeWeightLossPercent(
-  data: PerioperativeOptimization,
-): number | null {
+export function computeWeightLossPercent(data: PerioperativeOptimization): number | null {
   const current = num(data.nutrition.weightAsKg);
   const usual = num(data.nutrition.usualWeightAsKg);
   if (current === null || usual === null || usual <= 0) return null;
@@ -64,9 +57,7 @@ export function computeWeightLossPercent(
  * MUST total, 0 to 6, exactly as in the sibling nutrition forms:
  * BMI score + unplanned weight-loss score + acute disease effect.
  */
-export function computeMustScore(
-  data: PerioperativeOptimization,
-): number | null {
+export function computeMustScore(data: PerioperativeOptimization): number | null {
   const bmi = computeBmi(data);
   const pct = computeWeightLossPercent(data);
 
@@ -76,18 +67,11 @@ export function computeMustScore(
   let lossScore: number | null = null;
   if (pct !== null) {
     lossScore =
-      data.nutrition.weightLossIsIntentional === "yes"
-        ? 0
-        : pct > 10
-          ? 2
-          : pct >= 5
-            ? 1
-            : 0;
+      data.nutrition.weightLossIsIntentional === 'yes' ? 0 : pct > 10 ? 2 : pct >= 5 ? 1 : 0;
   }
 
   const acuteScore =
-    data.nutrition.acutelyIll === "yes" &&
-    data.nutrition.noNutritionalIntakeOver5Days === "yes"
+    data.nutrition.acutelyIll === 'yes' && data.nutrition.noNutritionalIntakeOver5Days === 'yes'
       ? 2
       : 0;
 
@@ -97,20 +81,18 @@ export function computeMustScore(
 
 /** MUST risk category from the total. */
 export function mustRisk(total: number | null): MustRisk {
-  if (total === null) return "";
-  if (total === 0) return "low";
-  if (total === 1) return "medium";
-  return "high";
+  if (total === null) return '';
+  if (total === 0) return 'low';
+  if (total === 1) return 'medium';
+  return 'high';
 }
 
 /** AUDIT-C total, 0 to 12, or null when no component is answered. */
-export function computeAuditCScore(
-  data: PerioperativeOptimization,
-): number | null {
+export function computeAuditCScore(data: PerioperativeOptimization): number | null {
   const parts = [
     num(data.alcohol.auditCFrequency),
     num(data.alcohol.auditCTypicalQuantity),
-    num(data.alcohol.auditCBingeFrequency),
+    num(data.alcohol.auditCBingeFrequency)
   ];
   if (parts.every((p) => p === null)) return null;
   return parts.reduce<number>((sum, p) => sum + (p ?? 0), 0);
@@ -123,7 +105,7 @@ export function computeAuditCScore(
  */
 export function computeFriedPhenotypeScore(data: PerioperativeOptimization): {
   score: number | null;
-  category: "robust" | "pre-frail" | "frail" | "";
+  category: 'robust' | 'pre-frail' | 'frail' | '';
 } {
   const f = data.frailty;
   const criteria = [
@@ -131,12 +113,12 @@ export function computeFriedPhenotypeScore(data: PerioperativeOptimization): {
     f.friedSlowness,
     f.friedLowPhysicalActivity,
     f.friedExhaustion,
-    f.friedUnintentionalWeightLoss,
+    f.friedUnintentionalWeightLoss
   ];
-  if (criteria.every((c) => c === "")) return { score: null, category: "" };
+  if (criteria.every((c) => c === '')) return { score: null, category: '' };
 
-  const score = criteria.filter((c) => c === "yes").length;
-  const category = score === 0 ? "robust" : score <= 2 ? "pre-frail" : "frail";
+  const score = criteria.filter((c) => c === 'yes').length;
+  const category = score === 0 ? 'robust' : score <= 2 ? 'pre-frail' : 'frail';
   return { score, category };
 }
 
@@ -154,9 +136,8 @@ function evaluateAnaemia(data: PerioperativeOptimization): DomainEvaluation {
   const sex = data.patient.sex;
 
   // Intravenous iron works in 4 weeks; oral needs 8.
-  const leadTimeWeeks =
-    data.anaemia.anaemiaTreatmentRoute === "intravenous" ? 4 : 8;
-  const started = data.anaemia.anaemiaTreatmentStarted === "yes";
+  const leadTimeWeeks = data.anaemia.anaemiaTreatmentRoute === 'intravenous' ? 4 : 8;
+  const started = data.anaemia.anaemiaTreatmentStarted === 'yes';
   // The domain applies only once at least one of its own lab values has
   // actually been recorded — an entirely blank domain has nothing to say
   // "optimized" about and must report 'not-applicable' instead.
@@ -168,32 +149,32 @@ function evaluateAnaemia(data: PerioperativeOptimization): DomainEvaluation {
       applicable: true,
       leadTimeWeeks,
       started,
-      ruleId: "R-ANAEMIA-5",
+      ruleId: 'R-ANAEMIA-5',
       finding: `Haemoglobin ${hb} g/L is below 80 — severe anaemia.`,
       intervention:
-        "Urgent haematology review and iron replacement; consider transfusion. Surgery is normally deferred.",
+        'Urgent haematology review and iron replacement; consider transfusion. Surgery is normally deferred.'
     };
   }
-  if (sex === "male" && hb !== null && hb < 130) {
+  if (sex === 'male' && hb !== null && hb < 130) {
     return {
       triggered: true,
       applicable: true,
       leadTimeWeeks,
       started,
-      ruleId: "R-ANAEMIA-1",
+      ruleId: 'R-ANAEMIA-1',
       finding: `Haemoglobin ${hb} g/L is below the WHO threshold of 130 g/L for men.`,
-      intervention: "Investigate the cause and start iron replacement.",
+      intervention: 'Investigate the cause and start iron replacement.'
     };
   }
-  if (sex === "female" && hb !== null && hb < 120) {
+  if (sex === 'female' && hb !== null && hb < 120) {
     return {
       triggered: true,
       applicable: true,
       leadTimeWeeks,
       started,
-      ruleId: "R-ANAEMIA-2",
+      ruleId: 'R-ANAEMIA-2',
       finding: `Haemoglobin ${hb} g/L is below the WHO threshold of 120 g/L for women.`,
-      intervention: "Investigate the cause and start iron replacement.",
+      intervention: 'Investigate the cause and start iron replacement.'
     };
   }
   if (ferritin !== null && ferritin < 30) {
@@ -202,28 +183,22 @@ function evaluateAnaemia(data: PerioperativeOptimization): DomainEvaluation {
       applicable: true,
       leadTimeWeeks,
       started,
-      ruleId: "R-ANAEMIA-3",
+      ruleId: 'R-ANAEMIA-3',
       finding: `Ferritin ${ferritin} µg/L is below 30 — absolute iron deficiency.`,
       intervention:
-        "Start iron replacement and investigate the cause; iron deficiency in an adult may indicate gastrointestinal blood loss.",
+        'Start iron replacement and investigate the cause; iron deficiency in an adult may indicate gastrointestinal blood loss.'
     };
   }
-  if (
-    ferritin !== null &&
-    ferritin >= 30 &&
-    ferritin <= 100 &&
-    tsat !== null &&
-    tsat < 20
-  ) {
+  if (ferritin !== null && ferritin >= 30 && ferritin <= 100 && tsat !== null && tsat < 20) {
     return {
       triggered: true,
       applicable: true,
       leadTimeWeeks,
       started,
-      ruleId: "R-ANAEMIA-4",
+      ruleId: 'R-ANAEMIA-4',
       finding: `Ferritin ${ferritin} µg/L with transferrin saturation ${tsat}% — functional iron deficiency.`,
       intervention:
-        "Start iron replacement; consider the intravenous route where absorption is impaired.",
+        'Start iron replacement; consider the intravenous route where absorption is impaired.'
     };
   }
   return {
@@ -231,23 +206,19 @@ function evaluateAnaemia(data: PerioperativeOptimization): DomainEvaluation {
     applicable,
     leadTimeWeeks,
     started,
-    ruleId: "",
-    finding: "",
-    intervention: "",
+    ruleId: '',
+    finding: '',
+    intervention: ''
   };
 }
 
-function evaluateGlycaemicControl(
-  data: PerioperativeOptimization,
-): DomainEvaluation {
+function evaluateGlycaemicControl(data: PerioperativeOptimization): DomainEvaluation {
   const hba1c = num(data.glycaemic.hba1cMmolPerMol);
   const leadTimeWeeks = 12;
-  const started = data.glycaemic.diabetesTeamReview === "yes";
+  const started = data.glycaemic.diabetesTeamReview === 'yes';
 
   // The domain applies when the patient has diabetes or a raised HbA1c.
-  const hasDiabetes =
-    data.glycaemic.diabetesType !== "" &&
-    data.glycaemic.diabetesType !== "none";
+  const hasDiabetes = data.glycaemic.diabetesType !== '' && data.glycaemic.diabetesType !== 'none';
   const applicable = hasDiabetes || hba1c !== null;
 
   if (hba1c !== null && hba1c >= 69) {
@@ -256,10 +227,10 @@ function evaluateGlycaemicControl(
       applicable: true,
       leadTimeWeeks,
       started,
-      ruleId: "R-GLYC-2",
+      ruleId: 'R-GLYC-2',
       finding: `HbA1c ${hba1c} mmol/mol is at or above the CPOC deferral threshold of 69 mmol/mol (8.5%).`,
       intervention:
-        "Diabetes-team review and medication adjustment. Surgery is normally deferred until glycaemia improves.",
+        'Diabetes-team review and medication adjustment. Surgery is normally deferred until glycaemia improves.'
     };
   }
   if (hba1c !== null && hba1c >= 48) {
@@ -268,10 +239,9 @@ function evaluateGlycaemicControl(
       applicable: true,
       leadTimeWeeks,
       started,
-      ruleId: "R-GLYC-1",
+      ruleId: 'R-GLYC-1',
       finding: `HbA1c ${hba1c} mmol/mol is at or above the optimization threshold of 48 mmol/mol.`,
-      intervention:
-        "Diabetes-team review, medication adjustment, and structured education.",
+      intervention: 'Diabetes-team review, medication adjustment, and structured education.'
     };
   }
   return {
@@ -279,28 +249,27 @@ function evaluateGlycaemicControl(
     applicable,
     leadTimeWeeks,
     started,
-    ruleId: "",
-    finding: "",
-    intervention: "",
+    ruleId: '',
+    finding: '',
+    intervention: ''
   };
 }
 
 function evaluateSmoking(data: PerioperativeOptimization): DomainEvaluation {
   const leadTimeWeeks = 4;
-  const started = data.smoking.smokingCessationAccepted === "yes";
-  const applicable =
-    data.smoking.smokingStatus !== "" && data.smoking.smokingStatus !== "never";
+  const started = data.smoking.smokingCessationAccepted === 'yes';
+  const applicable = data.smoking.smokingStatus !== '' && data.smoking.smokingStatus !== 'never';
 
-  if (data.smoking.smokingStatus === "current") {
+  if (data.smoking.smokingStatus === 'current') {
     return {
       triggered: true,
       applicable: true,
       leadTimeWeeks,
       started,
-      ruleId: "R-SMOKE-1",
-      finding: "The patient currently smokes.",
+      ruleId: 'R-SMOKE-1',
+      finding: 'The patient currently smokes.',
       intervention:
-        "Very brief advice, referral to a stop-smoking service, and nicotine replacement therapy. Four weeks of abstinence measurably reduces respiratory complications.",
+        'Very brief advice, referral to a stop-smoking service, and nicotine replacement therapy. Four weeks of abstinence measurably reduces respiratory complications.'
     };
   }
   return {
@@ -308,9 +277,9 @@ function evaluateSmoking(data: PerioperativeOptimization): DomainEvaluation {
     applicable,
     leadTimeWeeks,
     started,
-    ruleId: "",
-    finding: "",
-    intervention: "",
+    ruleId: '',
+    finding: '',
+    intervention: ''
   };
 }
 
@@ -319,7 +288,7 @@ function evaluateAlcohol(data: PerioperativeOptimization): DomainEvaluation {
   const auditC = computeAuditCScore(data);
   const sex = data.patient.sex;
   const leadTimeWeeks = 4;
-  const started = data.alcohol.alcoholReductionPlanAgreed === "yes";
+  const started = data.alcohol.alcoholReductionPlanAgreed === 'yes';
   // The domain applies only once at least one of its own measures has
   // actually been recorded — an entirely blank domain must report
   // 'not-applicable', not a falsely-reassuring 'optimized'.
@@ -331,10 +300,10 @@ function evaluateAlcohol(data: PerioperativeOptimization): DomainEvaluation {
       applicable: true,
       leadTimeWeeks,
       started,
-      ruleId: "R-ALCOHOL-4",
+      ruleId: 'R-ALCOHOL-4',
       finding: `AUDIT-C score ${auditC} indicates a high level of drinking, with a risk of withdrawal in hospital.`,
       intervention:
-        "Referral to alcohol services and a withdrawal-prevention plan for the admission.",
+        'Referral to alcohol services and a withdrawal-prevention plan for the admission.'
     };
   }
   if (units !== null && units > 14) {
@@ -343,32 +312,32 @@ function evaluateAlcohol(data: PerioperativeOptimization): DomainEvaluation {
       applicable: true,
       leadTimeWeeks,
       started,
-      ruleId: "R-ALCOHOL-1",
+      ruleId: 'R-ALCOHOL-1',
       finding: `Alcohol intake of ${units} units per week is above the United Kingdom low-risk guideline of 14.`,
       intervention:
-        "Brief intervention and a reduction plan. Four weeks of abstinence improves immune and haemostatic function.",
+        'Brief intervention and a reduction plan. Four weeks of abstinence improves immune and haemostatic function.'
     };
   }
-  if (sex === "male" && auditC !== null && auditC >= 5) {
+  if (sex === 'male' && auditC !== null && auditC >= 5) {
     return {
       triggered: true,
       applicable: true,
       leadTimeWeeks,
       started,
-      ruleId: "R-ALCOHOL-2",
+      ruleId: 'R-ALCOHOL-2',
       finding: `AUDIT-C score ${auditC} is at or above the threshold of 5 for men.`,
-      intervention: "Brief intervention and a reduction plan.",
+      intervention: 'Brief intervention and a reduction plan.'
     };
   }
-  if (sex === "female" && auditC !== null && auditC >= 4) {
+  if (sex === 'female' && auditC !== null && auditC >= 4) {
     return {
       triggered: true,
       applicable: true,
       leadTimeWeeks,
       started,
-      ruleId: "R-ALCOHOL-3",
+      ruleId: 'R-ALCOHOL-3',
       finding: `AUDIT-C score ${auditC} is at or above the threshold of 4 for women.`,
-      intervention: "Brief intervention and a reduction plan.",
+      intervention: 'Brief intervention and a reduction plan.'
     };
   }
   return {
@@ -376,9 +345,9 @@ function evaluateAlcohol(data: PerioperativeOptimization): DomainEvaluation {
     applicable,
     leadTimeWeeks,
     started,
-    ruleId: "",
-    finding: "",
-    intervention: "",
+    ruleId: '',
+    finding: '',
+    intervention: ''
   };
 }
 
@@ -387,8 +356,8 @@ function evaluateNutrition(data: PerioperativeOptimization): DomainEvaluation {
   const pct = computeWeightLossPercent(data);
   const leadTimeWeeks = 3;
   const started =
-    data.nutrition.oralNutritionalSupplements === "yes" ||
-    data.nutrition.dietitianReferral === "yes";
+    data.nutrition.oralNutritionalSupplements === 'yes' ||
+    data.nutrition.dietitianReferral === 'yes';
   // The domain applies only once at least one of its own measures has
   // actually been recorded — an entirely blank domain must report
   // 'not-applicable', not a falsely-reassuring 'optimized'.
@@ -400,26 +369,22 @@ function evaluateNutrition(data: PerioperativeOptimization): DomainEvaluation {
       applicable: true,
       leadTimeWeeks,
       started,
-      ruleId: "R-NUTRITION-1",
+      ruleId: 'R-NUTRITION-1',
       finding: `MUST score ${must} indicates high malnutrition risk.`,
       intervention:
-        "Dietitian referral, food fortification, and oral nutritional supplements; immunonutrition where indicated.",
+        'Dietitian referral, food fortification, and oral nutritional supplements; immunonutrition where indicated.'
     };
   }
-  if (
-    pct !== null &&
-    pct > 10 &&
-    data.nutrition.weightLossIsIntentional !== "yes"
-  ) {
+  if (pct !== null && pct > 10 && data.nutrition.weightLossIsIntentional !== 'yes') {
     return {
       triggered: true,
       applicable: true,
       leadTimeWeeks,
       started,
-      ruleId: "R-NUTRITION-2",
+      ruleId: 'R-NUTRITION-2',
       finding: `Unintentional weight loss of ${pct}% exceeds 10%.`,
       intervention:
-        "Dietitian referral and nutritional support; investigate the cause of the weight loss.",
+        'Dietitian referral and nutritional support; investigate the cause of the weight loss.'
     };
   }
   return {
@@ -427,29 +392,26 @@ function evaluateNutrition(data: PerioperativeOptimization): DomainEvaluation {
     applicable,
     leadTimeWeeks,
     started,
-    ruleId: "",
-    finding: "",
-    intervention: "",
+    ruleId: '',
+    finding: '',
+    intervention: ''
   };
 }
 
-function evaluatePhysicalFitness(
-  data: PerioperativeOptimization,
-): DomainEvaluation {
+function evaluatePhysicalFitness(data: PerioperativeOptimization): DomainEvaluation {
   const mets = num(data.fitness.metabolicEquivalents);
   const dasi = num(data.fitness.dukeActivityStatusIndex);
   const walk = num(data.fitness.sixMinuteWalkMetres);
   const at = num(data.fitness.cpetAnaerobicThreshold);
   const leadTimeWeeks = 6;
-  const started = data.fitness.prehabilitationEnrolled === "yes";
+  const started = data.fitness.prehabilitationEnrolled === 'yes';
   // The domain applies only once at least one of its own measures has
   // actually been recorded — an entirely blank domain must report
   // 'not-applicable', not a falsely-reassuring 'optimized'.
-  const applicable =
-    mets !== null || dasi !== null || walk !== null || at !== null;
+  const applicable = mets !== null || dasi !== null || walk !== null || at !== null;
 
   const intervention =
-    "A tailored prehabilitation programme combining aerobic and resistance exercise, ideally multimodal alongside the nutrition and psychological domains.";
+    'A tailored prehabilitation programme combining aerobic and resistance exercise, ideally multimodal alongside the nutrition and psychological domains.';
 
   if (at !== null && at < 11) {
     return {
@@ -457,9 +419,9 @@ function evaluatePhysicalFitness(
       applicable: true,
       leadTimeWeeks,
       started,
-      ruleId: "R-FITNESS-4",
+      ruleId: 'R-FITNESS-4',
       finding: `CPET anaerobic threshold ${at} ml/kg/min is below 11.`,
-      intervention,
+      intervention
     };
   }
   if (mets !== null && mets < 4) {
@@ -468,9 +430,9 @@ function evaluatePhysicalFitness(
       applicable: true,
       leadTimeWeeks,
       started,
-      ruleId: "R-FITNESS-1",
+      ruleId: 'R-FITNESS-1',
       finding: `Estimated ${mets} metabolic equivalents is below the threshold of 4.`,
-      intervention,
+      intervention
     };
   }
   if (dasi !== null && dasi < 34) {
@@ -479,9 +441,9 @@ function evaluatePhysicalFitness(
       applicable: true,
       leadTimeWeeks,
       started,
-      ruleId: "R-FITNESS-2",
+      ruleId: 'R-FITNESS-2',
       finding: `Duke Activity Status Index ${dasi} is below 34.`,
-      intervention,
+      intervention
     };
   }
   if (walk !== null && walk < 400) {
@@ -490,9 +452,9 @@ function evaluatePhysicalFitness(
       applicable: true,
       leadTimeWeeks,
       started,
-      ruleId: "R-FITNESS-3",
+      ruleId: 'R-FITNESS-3',
       finding: `Six-minute walk distance ${walk} m is below 400 m.`,
-      intervention,
+      intervention
     };
   }
   return {
@@ -500,45 +462,41 @@ function evaluatePhysicalFitness(
     applicable,
     leadTimeWeeks,
     started,
-    ruleId: "",
-    finding: "",
-    intervention: "",
+    ruleId: '',
+    finding: '',
+    intervention: ''
   };
 }
 
 /** The medicine classes that need a perioperative hold-and-restart plan. */
-const HOLD_REQUIRING: Array<
-  [keyof PerioperativeOptimization["medication"], string]
-> = [
-  ["takesAnticoagulant", "an anticoagulant"],
-  ["takesAntiplatelet", "an antiplatelet"],
-  ["takesAceInhibitorOrArb", "an ACE inhibitor or ARB"],
-  ["takesSglt2Inhibitor", "an SGLT2 inhibitor"],
-  ["takesGlp1Agonist", "a GLP-1 receptor agonist"],
-  ["takesCorticosteroid", "a systemic corticosteroid"],
-  ["takesImmunosuppressant", "an immunosuppressant"],
-  ["takesHormoneTherapy", "hormone therapy"],
+const HOLD_REQUIRING: Array<[keyof PerioperativeOptimization['medication'], string]> = [
+  ['takesAnticoagulant', 'an anticoagulant'],
+  ['takesAntiplatelet', 'an antiplatelet'],
+  ['takesAceInhibitorOrArb', 'an ACE inhibitor or ARB'],
+  ['takesSglt2Inhibitor', 'an SGLT2 inhibitor'],
+  ['takesGlp1Agonist', 'a GLP-1 receptor agonist'],
+  ['takesCorticosteroid', 'a systemic corticosteroid'],
+  ['takesImmunosuppressant', 'an immunosuppressant'],
+  ['takesHormoneTherapy', 'hormone therapy']
 ];
 
 function evaluateMedication(data: PerioperativeOptimization): DomainEvaluation {
   const leadTimeWeeks = 1;
-  const planAgreed = data.medication.medicationHoldPlanAgreed === "yes";
-  const inUse = HOLD_REQUIRING.filter(
-    ([field]) => data.medication[field] === "yes",
-  );
+  const planAgreed = data.medication.medicationHoldPlanAgreed === 'yes';
+  const inUse = HOLD_REQUIRING.filter(([field]) => data.medication[field] === 'yes');
   const applicable = inUse.length > 0;
 
   if (inUse.length > 0 && !planAgreed) {
-    const names = inUse.map(([, label]) => label).join(", ");
+    const names = inUse.map(([, label]) => label).join(', ');
     return {
       triggered: true,
       applicable: true,
       leadTimeWeeks,
       started: false,
-      ruleId: "R-MEDICATION-1",
+      ruleId: 'R-MEDICATION-1',
       finding: `In use without an agreed hold-and-restart plan: ${names}.`,
       intervention:
-        "Agree a hold-and-restart plan with the prescriber and record it before admission.",
+        'Agree a hold-and-restart plan with the prescriber and record it before admission.'
     };
   }
   return {
@@ -546,15 +504,13 @@ function evaluateMedication(data: PerioperativeOptimization): DomainEvaluation {
     applicable,
     leadTimeWeeks,
     started: planAgreed,
-    ruleId: "",
-    finding: "",
-    intervention: "",
+    ruleId: '',
+    finding: '',
+    intervention: ''
   };
 }
 
-function evaluateCardiorespiratory(
-  data: PerioperativeOptimization,
-): DomainEvaluation {
+function evaluateCardiorespiratory(data: PerioperativeOptimization): DomainEvaluation {
   const sbp = num(data.cardioresp.systolicBp);
   const dbp = num(data.cardioresp.diastolicBp);
   const ef = num(data.cardioresp.ejectionFractionPercent);
@@ -562,8 +518,8 @@ function evaluateCardiorespiratory(
   const spo2 = num(data.cardioresp.oxygenSaturationPercent);
   const leadTimeWeeks = 4;
   const started =
-    data.cardioresp.inhalerTechniqueChecked === "yes" ||
-    data.plan.referralCardiorespiratory === "yes";
+    data.cardioresp.inhalerTechniqueChecked === 'yes' ||
+    data.plan.referralCardiorespiratory === 'yes';
   // The domain applies only once at least one of its own measures has
   // actually been recorded — an entirely blank domain must report
   // 'not-applicable', not a falsely-reassuring 'optimized'.
@@ -573,8 +529,8 @@ function evaluateCardiorespiratory(
     ef !== null ||
     stopBang !== null ||
     spo2 !== null ||
-    data.cardioresp.asthmaControl !== "" ||
-    data.cardioresp.copdControl !== "";
+    data.cardioresp.asthmaControl !== '' ||
+    data.cardioresp.copdControl !== '';
 
   if (ef !== null && ef < 40) {
     return {
@@ -582,10 +538,9 @@ function evaluateCardiorespiratory(
       applicable: true,
       leadTimeWeeks,
       started,
-      ruleId: "R-CARDIORESP-3",
+      ruleId: 'R-CARDIORESP-3',
       finding: `Ejection fraction ${ef}% is below 40% — impaired left ventricular function.`,
-      intervention:
-        "Cardiology review before surgery; consider enhanced perioperative care.",
+      intervention: 'Cardiology review before surgery; consider enhanced perioperative care.'
     };
   }
   if ((sbp !== null && sbp >= 180) || (dbp !== null && dbp >= 110)) {
@@ -594,27 +549,24 @@ function evaluateCardiorespiratory(
       applicable: true,
       leadTimeWeeks,
       started,
-      ruleId: "R-CARDIORESP-1",
-      finding: `Blood pressure ${sbp ?? "—"}/${dbp ?? "—"} mmHg meets the deferral threshold of 180/110.`,
-      intervention:
-        "Antihypertensive review and repeat measurement before surgery.",
+      ruleId: 'R-CARDIORESP-1',
+      finding: `Blood pressure ${sbp ?? '—'}/${dbp ?? '—'} mmHg meets the deferral threshold of 180/110.`,
+      intervention: 'Antihypertensive review and repeat measurement before surgery.'
     };
   }
   if (
-    data.cardioresp.asthmaControl === "uncontrolled" ||
-    data.cardioresp.copdControl === "uncontrolled"
+    data.cardioresp.asthmaControl === 'uncontrolled' ||
+    data.cardioresp.copdControl === 'uncontrolled'
   ) {
-    const which =
-      data.cardioresp.asthmaControl === "uncontrolled" ? "Asthma" : "COPD";
+    const which = data.cardioresp.asthmaControl === 'uncontrolled' ? 'Asthma' : 'COPD';
     return {
       triggered: true,
       applicable: true,
       leadTimeWeeks,
       started,
-      ruleId: "R-CARDIORESP-2",
+      ruleId: 'R-CARDIORESP-2',
       finding: `${which} is uncontrolled.`,
-      intervention:
-        "Respiratory review, inhaler technique and adherence check, and a rescue plan.",
+      intervention: 'Respiratory review, inhaler technique and adherence check, and a rescue plan.'
     };
   }
   if (spo2 !== null && spo2 < 92) {
@@ -623,26 +575,20 @@ function evaluateCardiorespiratory(
       applicable: true,
       leadTimeWeeks,
       started,
-      ruleId: "R-CARDIORESP-5",
+      ruleId: 'R-CARDIORESP-5',
       finding: `Oxygen saturation ${spo2}% on room air is below 92%.`,
-      intervention:
-        "Respiratory review and investigation of the cause before surgery.",
+      intervention: 'Respiratory review and investigation of the cause before surgery.'
     };
   }
-  if (
-    stopBang !== null &&
-    stopBang >= 5 &&
-    data.cardioresp.sleepApnoeaDiagnosis !== "yes"
-  ) {
+  if (stopBang !== null && stopBang >= 5 && data.cardioresp.sleepApnoeaDiagnosis !== 'yes') {
     return {
       triggered: true,
       applicable: true,
       leadTimeWeeks,
       started,
-      ruleId: "R-CARDIORESP-4",
+      ruleId: 'R-CARDIORESP-4',
       finding: `STOP-BANG score ${stopBang} indicates a high probability of obstructive sleep apnoea, which has not been assessed.`,
-      intervention:
-        "Refer for a sleep study; plan for postoperative monitoring and opioid caution.",
+      intervention: 'Refer for a sleep study; plan for postoperative monitoring and opioid caution.'
     };
   }
   return {
@@ -650,9 +596,9 @@ function evaluateCardiorespiratory(
     applicable,
     leadTimeWeeks,
     started,
-    ruleId: "",
-    finding: "",
-    intervention: "",
+    ruleId: '',
+    finding: '',
+    intervention: ''
   };
 }
 
@@ -662,11 +608,11 @@ export const DOMAIN_EVALUATORS: Record<
   (d: PerioperativeOptimization) => DomainEvaluation
 > = {
   anaemia: evaluateAnaemia,
-  "glycaemic-control": evaluateGlycaemicControl,
+  'glycaemic-control': evaluateGlycaemicControl,
   smoking: evaluateSmoking,
   alcohol: evaluateAlcohol,
   nutrition: evaluateNutrition,
-  "physical-fitness": evaluatePhysicalFitness,
+  'physical-fitness': evaluatePhysicalFitness,
   medication: evaluateMedication,
-  cardiorespiratory: evaluateCardiorespiratory,
+  cardiorespiratory: evaluateCardiorespiratory
 };

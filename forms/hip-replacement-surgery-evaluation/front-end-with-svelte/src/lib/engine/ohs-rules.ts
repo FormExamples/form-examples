@@ -9,33 +9,33 @@ import type { FiredRule, HipReplacementSurgeryEvaluation, OhsCategory } from './
 import { num, rule } from './utils';
 
 export interface OhsResult {
-	total: number;
-	itemsAnswered: number;
-	category: OhsCategory;
-	firedRules: FiredRule[];
+  total: number;
+  itemsAnswered: number;
+  category: OhsCategory;
+  firedRules: FiredRule[];
 }
 
 const OHS_ITEM_KEYS = [
-	'painSeverity',
-	'washingAndDrying',
-	'transport',
-	'dressingSocks',
-	'shopping',
-	'walkingPain',
-	'limping',
-	'kneeling',
-	'nightPain',
-	'workInterference',
-	'givingWay',
-	'stairs'
+  'painSeverity',
+  'washingAndDrying',
+  'transport',
+  'dressingSocks',
+  'shopping',
+  'walkingPain',
+  'limping',
+  'kneeling',
+  'nightPain',
+  'workInterference',
+  'givingWay',
+  'stairs'
 ] as const;
 
 /** Derive the OHS category from the total, per this form's four-band convention. */
 export function ohsCategoryFromTotal(total: number): OhsCategory {
-	if (total <= 19) return 'severe';
-	if (total <= 29) return 'moderate';
-	if (total <= 39) return 'mild-to-moderate';
-	return 'satisfactory';
+  if (total <= 19) return 'severe';
+  if (total <= 29) return 'moderate';
+  if (total <= 39) return 'mild-to-moderate';
+  return 'satisfactory';
 }
 
 /**
@@ -44,31 +44,31 @@ export function ohsCategoryFromTotal(total: number): OhsCategory {
  * defensive so partial data still produces a deterministic result).
  */
 export function scoreOhs(data: HipReplacementSurgeryEvaluation): OhsResult {
-	const firedRules: FiredRule[] = [];
-	let total = 0;
-	let itemsAnswered = 0;
+  const firedRules: FiredRule[] = [];
+  let total = 0;
+  let itemsAnswered = 0;
 
-	for (const key of OHS_ITEM_KEYS) {
-		const value = num(data.ohs[key]);
-		if (value !== null) {
-			total += value;
-			itemsAnswered += 1;
-		}
-	}
+  for (const key of OHS_ITEM_KEYS) {
+    const value = num(data.ohs[key]);
+    if (value !== null) {
+      total += value;
+      itemsAnswered += 1;
+    }
+  }
 
-	const category = ohsCategoryFromTotal(total);
+  const category = ohsCategoryFromTotal(total);
 
-	firedRules.push(
-		rule(
-			'R-OHS-TOTAL',
-			'ohs',
-			'total',
-			total,
-			category,
-			'oxford-hip-score',
-			`Oxford Hip Score total ${total} of 48 falls in the ${category} band.`
-		)
-	);
+  firedRules.push(
+    rule(
+      'R-OHS-TOTAL',
+      'ohs',
+      'total',
+      total,
+      category,
+      'oxford-hip-score',
+      `Oxford Hip Score total ${total} of 48 falls in the ${category} band.`
+    )
+  );
 
-	return { total, itemsAnswered, category, firedRules };
+  return { total, itemsAnswered, category, firedRules };
 }

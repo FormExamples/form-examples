@@ -40,9 +40,9 @@ class MetricsStore {
   result = $derived<MetricsSummaryResult>(summariseMetrics(this.data));
 
   /** Crude completeness measure for the Lily Progress bar (0-100). */
-  percentComplete = $derived(TOTAL_METRICS === 0
-    ? 0
-    : Math.round(this.result.reportedCount / TOTAL_METRICS * 100));
+  percentComplete = $derived(
+    TOTAL_METRICS === 0 ? 0 : Math.round((this.result.reportedCount / TOTAL_METRICS) * 100)
+  );
 
   /**
    * True once a saved draft was found for the current id/store on
@@ -102,15 +102,15 @@ class MetricsStore {
     }
     deepAssign(
       this.data as unknown as Record<string, unknown>,
-      (draft ?? seed ?? createDefaultMetrics()) as unknown as Record<string, unknown>,
+      (draft ?? seed ?? createDefaultMetrics()) as unknown as Record<string, unknown>
     );
   }
 
   reset() {
-  	this.hadDraftAtLoad = false;
+    this.hadDraftAtLoad = false;
     deepAssign(
       this.data as unknown as Record<string, unknown>,
-      createDefaultMetrics() as unknown as Record<string, unknown>,
+      createDefaultMetrics() as unknown as Record<string, unknown>
     );
     this.currentStep = 1;
     if (browser) {

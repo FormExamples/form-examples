@@ -1,28 +1,33 @@
 <script lang="ts">
-	import Field from '#lib/components/ui/Field.svelte';
-	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import { DateInput, TextInput } from "@lilydesignsystem/svelte-headless";
-	import { request } from '#lib/stores/request.svelte.js';
+  import Field from '#lib/components/ui/Field.svelte';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import { DateInput, TextInput } from '@lilydesignsystem/svelte-headless';
+  import { request } from '#lib/stores/request.svelte.js';
 
-	const d = request.data.patient;
+  const d = request.data.patient;
 </script>
 
 <Fieldset legend="2. Patient Identification">
-	<p class="hint">Patient demographics used to label and match the specimen.</p>
+  <p class="hint">Patient demographics used to label and match the specimen.</p>
 
-	<Field label="First name" inputId="firstName" required>
-		<TextInput id="firstName" label="First name" bind:value={d.firstName} required />
-	</Field>
+  <Field label="First name" inputId="firstName" required>
+    <TextInput id="firstName" label="First name" bind:value={d.firstName} required />
+  </Field>
 
-	<Field label="Last name" inputId="lastName" required>
-		<TextInput id="lastName" label="Last name" bind:value={d.lastName} required />
-	</Field>
+  <Field label="Last name" inputId="lastName" required>
+    <TextInput id="lastName" label="Last name" bind:value={d.lastName} required />
+  </Field>
 
-	<Field label="Date of birth" inputId="dateOfBirth">
-		<DateInput id="dateOfBirth" label="Date of birth" bind:value={d.dateOfBirth} />
-	</Field>
+  <Field label="Date of birth" inputId="dateOfBirth">
+    <DateInput id="dateOfBirth" label="Date of birth" bind:value={d.dateOfBirth} />
+  </Field>
 
-	<Field label="NHS number" inputId="nhsNumber">
-		<TextInput id="nhsNumber" label="NHS number" placeholder="NNN NNN NNNN" bind:value={d.nhsNumber} />
-	</Field>
+  <Field label="NHS number" inputId="nhsNumber">
+    <TextInput
+      id="nhsNumber"
+      label="NHS number"
+      placeholder="NNN NNN NNNN"
+      bind:value={d.nhsNumber}
+    />
+  </Field>
 </Fieldset>

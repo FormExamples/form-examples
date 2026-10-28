@@ -3,36 +3,41 @@ import type { StepConfig, AssessmentData } from '#lib/engine/types.js';
 export const TOTAL_STEPS = 9;
 
 export const steps: StepConfig[] = [
-	{ number: 1, title: 'Assessment context', shortTitle: 'Context', section: 'context' },
-	{ number: 2, title: 'Patient identification', shortTitle: 'Patient', section: 'identification' },
-	{ number: 3, title: 'Hypertension', shortTitle: 'Hypertension', section: 'hypertension' },
-	{ number: 4, title: 'Renal and liver function', shortTitle: 'Organ function', section: 'organFunction' },
-	{ number: 5, title: 'Stroke history', shortTitle: 'Stroke', section: 'stroke' },
-	{ number: 6, title: 'Bleeding history', shortTitle: 'Bleeding', section: 'bleeding' },
-	{ number: 7, title: 'Labile INR', shortTitle: 'Labile INR', section: 'labileInr' },
-	{ number: 8, title: 'Drugs and alcohol', shortTitle: 'Drugs / alcohol', section: 'drugsAlcohol' },
-	{ number: 9, title: 'Summary and score', shortTitle: 'Summary', section: 'note' }
+  { number: 1, title: 'Assessment context', shortTitle: 'Context', section: 'context' },
+  { number: 2, title: 'Patient identification', shortTitle: 'Patient', section: 'identification' },
+  { number: 3, title: 'Hypertension', shortTitle: 'Hypertension', section: 'hypertension' },
+  {
+    number: 4,
+    title: 'Renal and liver function',
+    shortTitle: 'Organ function',
+    section: 'organFunction'
+  },
+  { number: 5, title: 'Stroke history', shortTitle: 'Stroke', section: 'stroke' },
+  { number: 6, title: 'Bleeding history', shortTitle: 'Bleeding', section: 'bleeding' },
+  { number: 7, title: 'Labile INR', shortTitle: 'Labile INR', section: 'labileInr' },
+  { number: 8, title: 'Drugs and alcohol', shortTitle: 'Drugs / alcohol', section: 'drugsAlcohol' },
+  { number: 9, title: 'Summary and score', shortTitle: 'Summary', section: 'note' }
 ];
 
 export function getVisibleSteps(_data: AssessmentData): StepConfig[] {
-	// All steps are always visible in the HAS-BLED assessment.
-	return steps;
+  // All steps are always visible in the HAS-BLED assessment.
+  return steps;
 }
 
 export function getNextStep(current: number, data: AssessmentData): number | null {
-	const visible = getVisibleSteps(data);
-	const idx = visible.findIndex((s) => s.number === current);
-	if (idx === -1 || idx >= visible.length - 1) return null;
-	return visible[idx + 1].number;
+  const visible = getVisibleSteps(data);
+  const idx = visible.findIndex((s) => s.number === current);
+  if (idx === -1 || idx >= visible.length - 1) return null;
+  return visible[idx + 1].number;
 }
 
 export function getPrevStep(current: number, data: AssessmentData): number | null {
-	const visible = getVisibleSteps(data);
-	const idx = visible.findIndex((s) => s.number === current);
-	if (idx <= 0) return null;
-	return visible[idx - 1].number;
+  const visible = getVisibleSteps(data);
+  const idx = visible.findIndex((s) => s.number === current);
+  if (idx <= 0) return null;
+  return visible[idx - 1].number;
 }
 
 export function isStepVisible(stepNumber: number, _data: AssessmentData): boolean {
-	return steps.some((s) => s.number === stepNumber);
+  return steps.some((s) => s.number === stepNumber);
 }

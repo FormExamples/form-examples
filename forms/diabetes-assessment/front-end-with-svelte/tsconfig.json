@@ -1,6 +1,4 @@
 {
-	"extends": "$app/tsconfig",
-	"include": [
-		"src"
-	]
+  "extends": "$app/tsconfig",
+  "include": ["src"]
 }

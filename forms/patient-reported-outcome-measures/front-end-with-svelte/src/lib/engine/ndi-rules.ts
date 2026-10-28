@@ -12,36 +12,35 @@ import type { NdiBand, NdiResponse, NdiResult } from './types';
 type NdiValue = NdiResponse[keyof NdiResponse];
 
 export const NDI_FIELDS: Array<keyof NdiResponse> = [
-	'painIntensity',
-	'personalCare',
-	'lifting',
-	'reading',
-	'headache',
-	'concentration',
-	'work',
-	'driving',
-	'sleeping',
-	'recreation'
+  'painIntensity',
+  'personalCare',
+  'lifting',
+  'reading',
+  'headache',
+  'concentration',
+  'work',
+  'driving',
+  'sleeping',
+  'recreation'
 ];
 
 export function computeNdi(data: NdiResponse): NdiResult {
-	const answered = NDI_FIELDS.map((f) => data[f]).filter(
-		(v): v is Exclude<NdiValue, null | undefined> => v !== null && v !== undefined
-	);
+  const answered = NDI_FIELDS.map((f) => data[f]).filter(
+    (v): v is Exclude<NdiValue, null | undefined> => v !== null && v !== undefined
+  );
 
-	const rawScore = (answered as number[]).reduce((a, b) => a + b, 0);
-	const answeredSections = answered.length;
-	const percentageScore =
-		answeredSections === 0 ? null : (rawScore / (5 * answeredSections)) * 100;
+  const rawScore = (answered as number[]).reduce((a, b) => a + b, 0);
+  const answeredSections = answered.length;
+  const percentageScore = answeredSections === 0 ? null : (rawScore / (5 * answeredSections)) * 100;
 
-	let band: NdiBand = '';
-	if (percentageScore !== null) {
-		if (percentageScore < 5) band = 'no-disability';
-		else if (percentageScore < 15) band = 'mild';
-		else if (percentageScore < 25) band = 'moderate';
-		else if (percentageScore < 35) band = 'severe';
-		else band = 'complete';
-	}
+  let band: NdiBand = '';
+  if (percentageScore !== null) {
+    if (percentageScore < 5) band = 'no-disability';
+    else if (percentageScore < 15) band = 'mild';
+    else if (percentageScore < 25) band = 'moderate';
+    else if (percentageScore < 35) band = 'severe';
+    else band = 'complete';
+  }
 
-	return { rawScore, answeredSections, percentageScore, band };
+  return { rawScore, answeredSections, percentageScore, band };
 }

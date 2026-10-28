@@ -3,7 +3,7 @@
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
-  import { RadioGroup, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { RadioGroup, TextInput } from '@lilydesignsystem/svelte-headless';
 
   const cl = assessment.data.cholesterolLipids;
 </script>
@@ -13,16 +13,40 @@
 
   <div class="field-grid">
     <Field label="Total cholesterol (mg/dL)" inputId="step-4-totalCholesterol">
-      <NumberInput id="step-4-totalCholesterol" label="Total cholesterol" min={50} max={500} bind:value={cl.totalCholesterol} />
+      <NumberInput
+        id="step-4-totalCholesterol"
+        label="Total cholesterol"
+        min={50}
+        max={500}
+        bind:value={cl.totalCholesterol}
+      />
     </Field>
     <Field label="HDL cholesterol (mg/dL)" inputId="step-4-hdlCholesterol">
-      <NumberInput id="step-4-hdlCholesterol" label="HDL cholesterol" min={10} max={200} bind:value={cl.hdlCholesterol} />
+      <NumberInput
+        id="step-4-hdlCholesterol"
+        label="HDL cholesterol"
+        min={10}
+        max={200}
+        bind:value={cl.hdlCholesterol}
+      />
     </Field>
     <Field label="LDL cholesterol (mg/dL)" inputId="step-4-ldlCholesterol">
-      <NumberInput id="step-4-ldlCholesterol" label="LDL cholesterol" min={10} max={400} bind:value={cl.ldlCholesterol} />
+      <NumberInput
+        id="step-4-ldlCholesterol"
+        label="LDL cholesterol"
+        min={10}
+        max={400}
+        bind:value={cl.ldlCholesterol}
+      />
     </Field>
     <Field label="Triglycerides (mg/dL)" inputId="step-4-triglycerides">
-      <NumberInput id="step-4-triglycerides" label="Triglycerides" min={10} max={1000} bind:value={cl.triglycerides} />
+      <NumberInput
+        id="step-4-triglycerides"
+        label="Triglycerides"
+        min={10}
+        max={1000}
+        bind:value={cl.triglycerides}
+      />
     </Field>
   </div>
 

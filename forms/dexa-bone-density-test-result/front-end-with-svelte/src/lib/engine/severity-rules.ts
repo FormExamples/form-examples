@@ -1,8 +1,8 @@
 import type {
-	DexaBoneDensityResult,
-	ResultClassification,
-	AbnormalitySeverity,
-	FiredRule
+  DexaBoneDensityResult,
+  ResultClassification,
+  AbnormalitySeverity,
+  FiredRule
 } from './types';
 import { effectiveWhoClassification, hasCriticalFinding } from './utils';
 
@@ -20,66 +20,65 @@ import { effectiveWhoClassification, hasCriticalFinding } from './utils';
  * The recorded / derived WHO classification is the structured-reporting label.
  */
 export function gradeSeverity(
-	r: DexaBoneDensityResult,
-	classification: ResultClassification
+  r: DexaBoneDensityResult,
+  classification: ResultClassification
 ): {
-	abnormalitySeverity: AbnormalitySeverity;
-	reportingCategory: string;
-	firedRules: FiredRule[];
+  abnormalitySeverity: AbnormalitySeverity;
+  reportingCategory: string;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
-	const who = effectiveWhoClassification(r);
+  const firedRules: FiredRule[] = [];
+  const who = effectiveWhoClassification(r);
 
-	if (hasCriticalFinding(r)) {
-		firedRules.push({
-			ruleId: 'R-SEV-MAJOR-01',
-			axis: 'severity',
-			category: 'severe-osteoporosis',
-			description:
-				'Severe (established) osteoporosis; abnormality severity graded major.'
-		});
-		return {
-			abnormalitySeverity: 'major',
-			reportingCategory: 'severe-osteoporosis',
-			firedRules
-		};
-	}
+  if (hasCriticalFinding(r)) {
+    firedRules.push({
+      ruleId: 'R-SEV-MAJOR-01',
+      axis: 'severity',
+      category: 'severe-osteoporosis',
+      description: 'Severe (established) osteoporosis; abnormality severity graded major.'
+    });
+    return {
+      abnormalitySeverity: 'major',
+      reportingCategory: 'severe-osteoporosis',
+      firedRules
+    };
+  }
 
-	if (who === 'osteoporosis') {
-		firedRules.push({
-			ruleId: 'R-SEV-MAJOR-02',
-			axis: 'severity',
-			category: 'osteoporosis',
-			description: 'Osteoporosis (T ≤ −2.5); abnormality severity graded major.'
-		});
-		return { abnormalitySeverity: 'major', reportingCategory: 'osteoporosis', firedRules };
-	}
+  if (who === 'osteoporosis') {
+    firedRules.push({
+      ruleId: 'R-SEV-MAJOR-02',
+      axis: 'severity',
+      category: 'osteoporosis',
+      description: 'Osteoporosis (T ≤ −2.5); abnormality severity graded major.'
+    });
+    return { abnormalitySeverity: 'major', reportingCategory: 'osteoporosis', firedRules };
+  }
 
-	if (who === 'osteopenia') {
-		firedRules.push({
-			ruleId: 'R-SEV-MODERATE-01',
-			axis: 'severity',
-			category: 'osteopenia',
-			description: 'Osteopenia (low bone mass); abnormality severity graded moderate.'
-		});
-		return { abnormalitySeverity: 'moderate', reportingCategory: 'osteopenia', firedRules };
-	}
+  if (who === 'osteopenia') {
+    firedRules.push({
+      ruleId: 'R-SEV-MODERATE-01',
+      axis: 'severity',
+      category: 'osteopenia',
+      description: 'Osteopenia (low bone mass); abnormality severity graded moderate.'
+    });
+    return { abnormalitySeverity: 'moderate', reportingCategory: 'osteopenia', firedRules };
+  }
 
-	if (classification === 'inconclusive') {
-		firedRules.push({
-			ruleId: 'R-SEV-NONE-02',
-			axis: 'severity',
-			category: 'inconclusive',
-			description: 'Inconclusive study; abnormality severity not established.'
-		});
-		return { abnormalitySeverity: 'none', reportingCategory: 'indeterminate', firedRules };
-	}
+  if (classification === 'inconclusive') {
+    firedRules.push({
+      ruleId: 'R-SEV-NONE-02',
+      axis: 'severity',
+      category: 'inconclusive',
+      description: 'Inconclusive study; abnormality severity not established.'
+    });
+    return { abnormalitySeverity: 'none', reportingCategory: 'indeterminate', firedRules };
+  }
 
-	firedRules.push({
-		ruleId: 'R-SEV-NONE-01',
-		axis: 'severity',
-		category: 'normal-bone-density',
-		description: 'Normal bone density; abnormality severity graded none.'
-	});
-	return { abnormalitySeverity: 'none', reportingCategory: 'normal', firedRules };
+  firedRules.push({
+    ruleId: 'R-SEV-NONE-01',
+    axis: 'severity',
+    category: 'normal-bone-density',
+    description: 'Normal bone density; abnormality severity graded none.'
+  });
+  return { abnormalitySeverity: 'none', reportingCategory: 'normal', firedRules };
 }

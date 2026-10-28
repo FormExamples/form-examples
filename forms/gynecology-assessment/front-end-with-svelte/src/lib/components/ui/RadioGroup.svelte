@@ -1,6 +1,9 @@
 <script lang="ts">
   // RadioGroup — Lily Svelte headless contract.
-  interface Option { value: string; label: string }
+  interface Option {
+    value: string;
+    label: string;
+  }
   let {
     class: className = '',
     label,

@@ -82,7 +82,7 @@ export const CHECKLIST_ITEMS: [keyof RoomChecklist, string][] = [
   ['wallSeepageWaterLeakage', 'Wall Seepage / Water Leakage'],
   ['electricityPointsLights', 'Electricity Points / Lights'],
   ['ceilingTiles', 'Ceiling / Tiles'],
-  ['doorKnobsStopper', 'Door / Knobs / Stopper'],
+  ['doorKnobsStopper', 'Door / Knobs / Stopper']
 ];
 
 /** Pure tally of checked vs. unchecked checkpoints. See summary.ts. */

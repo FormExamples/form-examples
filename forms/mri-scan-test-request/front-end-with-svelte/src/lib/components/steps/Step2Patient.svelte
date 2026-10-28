@@ -1,60 +1,76 @@
 <script lang="ts">
-	import { request } from '#lib/stores/request.svelte.js';
-	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import Field from '#lib/components/ui/Field.svelte';
-	import { CheckboxInput, DateInput, TextInput } from "@lilydesignsystem/svelte-headless";
-	import NumberInput from '#lib/components/ui/NumberInput.svelte';
+  import { request } from '#lib/stores/request.svelte.js';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import Field from '#lib/components/ui/Field.svelte';
+  import { CheckboxInput, DateInput, TextInput } from '@lilydesignsystem/svelte-headless';
+  import NumberInput from '#lib/components/ui/NumberInput.svelte';
 
-	const d = request.data.patient;
+  const d = request.data.patient;
 </script>
 
 <Fieldset legend="Patient identification">
-	<p class="hint">Patient demographics and access needs.</p>
+  <p class="hint">Patient demographics and access needs.</p>
 
-	<div class="field-grid">
-		<Field label="First name" required inputId="firstName">
-			<TextInput id="firstName" label="First name" required bind:value={d.firstName} />
-		</Field>
-		<Field label="Last name" required inputId="lastName">
-			<TextInput id="lastName" label="Last name" required bind:value={d.lastName} />
-		</Field>
-	</div>
+  <div class="field-grid">
+    <Field label="First name" required inputId="firstName">
+      <TextInput id="firstName" label="First name" required bind:value={d.firstName} />
+    </Field>
+    <Field label="Last name" required inputId="lastName">
+      <TextInput id="lastName" label="Last name" required bind:value={d.lastName} />
+    </Field>
+  </div>
 
-	<div class="field-grid">
-		<Field label="Date of birth" inputId="dob">
-			<DateInput id="dob" label="Date of birth" bind:value={d.dateOfBirth} />
-		</Field>
-		<Field label="NHS number" inputId="nhsNumber">
-			<TextInput id="nhsNumber" label="NHS number" placeholder="NNN NNN NNNN" bind:value={d.nhsNumber} />
-		</Field>
-	</div>
+  <div class="field-grid">
+    <Field label="Date of birth" inputId="dob">
+      <DateInput id="dob" label="Date of birth" bind:value={d.dateOfBirth} />
+    </Field>
+    <Field label="NHS number" inputId="nhsNumber">
+      <TextInput
+        id="nhsNumber"
+        label="NHS number"
+        placeholder="NNN NNN NNNN"
+        bind:value={d.nhsNumber}
+      />
+    </Field>
+  </div>
 
-	<Field label="Weight (kg)" inputId="weightKg">
-		<NumberInput id="weightKg" label="Weight" min={0} max={500} step={0.1} bind:value={d.weightKg} />
-	</Field>
+  <Field label="Weight (kg)" inputId="weightKg">
+    <NumberInput
+      id="weightKg"
+      label="Weight"
+      min={0}
+      max={500}
+      step={0.1}
+      bind:value={d.weightKg}
+    />
+  </Field>
 
-	<Field label="Interpreter required">
-		<label class="checkbox-row">
-			<CheckboxInput id="interpreterRequired" label="Interpreter required" bind:checked={d.interpreterRequired} />
-			Interpreter required
-		</label>
-	</Field>
+  <Field label="Interpreter required">
+    <label class="checkbox-row">
+      <CheckboxInput
+        id="interpreterRequired"
+        label="Interpreter required"
+        bind:checked={d.interpreterRequired}
+      />
+      Interpreter required
+    </label>
+  </Field>
 </Fieldset>
 
 <style>
-	.field-grid {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 1rem;
-	}
-	@media (max-width: 640px) {
-		.field-grid {
-			grid-template-columns: 1fr;
-		}
-	}
-	.checkbox-row {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-	}
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  @media (max-width: 640px) {
+    .field-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
 </style>

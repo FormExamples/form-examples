@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { riskScoreLabel, riskScoreColor } from '#lib/engine/utils.js';
+  import { riskScoreLabel, riskScoreColor } from '#lib/engine/utils.js';
 
-	let {
-		score
-	}: {
-		score: number;
-	} = $props();
+  let {
+    score
+  }: {
+    score: number;
+  } = $props();
 
-	const colorClass = $derived(riskScoreColor(score));
-	const label = $derived(riskScoreLabel(score));
+  const colorClass = $derived(riskScoreColor(score));
+  const label = $derived(riskScoreLabel(score));
 </script>
 
 <span class="inline-block rounded-full border px-4 py-1.5 text-sm font-bold {colorClass}">
-	{label}
+  {label}
 </span>

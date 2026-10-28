@@ -8,9 +8,9 @@
 <section>
   <h2 class="text-xl font-semibold mb-2">Step 4 &mdash; Replacement attorneys (LP1F section 4)</h2>
   <p class="text-sm text-base-content/70 mb-3">
-    Zero or more people who step in if an original attorney can no longer act. Strongly
-    recommended when attorneys are appointed jointly. Optional &ldquo;when and how&rdquo; override
-    continues on LPC sheet 2 if long.
+    Zero or more people who step in if an original attorney can no longer act. Strongly recommended
+    when attorneys are appointed jointly. Optional &ldquo;when and how&rdquo; override continues on
+    LPC sheet 2 if long.
   </p>
 
   <div class="space-y-4">
@@ -26,11 +26,11 @@
             Remove
           </button>
         </div>
-        <PersonCard
-          bind:person={store.data.replacementAttorneys[i].person}
-          showBankruptcyFlags
-        />
-        <Field label="Step-in condition (optional)" hint="When and how this replacement takes over.">
+        <PersonCard bind:person={store.data.replacementAttorneys[i].person} showBankruptcyFlags />
+        <Field
+          label="Step-in condition (optional)"
+          hint="When and how this replacement takes over."
+        >
           <TextareaInput
             bind:value={store.data.replacementAttorneys[i].replacementStepInCondition}
             rows={2}

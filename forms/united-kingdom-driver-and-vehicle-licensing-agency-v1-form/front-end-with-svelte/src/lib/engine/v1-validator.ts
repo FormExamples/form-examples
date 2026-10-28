@@ -10,35 +10,35 @@ import { v1Rules } from './v1-rules';
  * has skipped.
  */
 export function validateV1(data: AssessmentData): {
-	firedValidations: FiredValidation[];
-	isComplete: boolean;
-	completionRatio: number;
+  firedValidations: FiredValidation[];
+  isComplete: boolean;
+  completionRatio: number;
 } {
-	const firedValidations: FiredValidation[] = [];
-	let satisfiedCount = 0;
+  const firedValidations: FiredValidation[] = [];
+  let satisfiedCount = 0;
 
-	for (const rule of v1Rules) {
-		try {
-			const ok = rule.evaluate(data);
-			if (ok) {
-				satisfiedCount++;
-			} else {
-				firedValidations.push({
-					id: rule.id,
-					section: rule.section,
-					severity: rule.severity,
-					description: rule.description,
-					message: rule.message
-				});
-			}
-		} catch (e) {
-			console.warn(`DVLA V1 rule ${rule.id} evaluation failed:`, e);
-		}
-	}
+  for (const rule of v1Rules) {
+    try {
+      const ok = rule.evaluate(data);
+      if (ok) {
+        satisfiedCount++;
+      } else {
+        firedValidations.push({
+          id: rule.id,
+          section: rule.section,
+          severity: rule.severity,
+          description: rule.description,
+          message: rule.message
+        });
+      }
+    } catch (e) {
+      console.warn(`DVLA V1 rule ${rule.id} evaluation failed:`, e);
+    }
+  }
 
-	const errorCount = firedValidations.filter((f) => f.severity === 'error').length;
-	const isComplete = errorCount === 0;
-	const completionRatio = v1Rules.length === 0 ? 1 : satisfiedCount / v1Rules.length;
+  const errorCount = firedValidations.filter((f) => f.severity === 'error').length;
+  const isComplete = errorCount === 0;
+  const completionRatio = v1Rules.length === 0 ? 1 : satisfiedCount / v1Rules.length;
 
-	return { firedValidations, isComplete, completionRatio };
+  return { firedValidations, isComplete, completionRatio };
 }

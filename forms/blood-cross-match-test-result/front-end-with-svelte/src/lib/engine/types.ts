@@ -13,11 +13,7 @@ export type ReportStatus = 'preliminary' | 'final' | 'amended' | 'cancelled' | '
 
 /** Test the result reports against. */
 export type RequestType =
-	| 'group-and-save'
-	| 'crossmatch'
-	| 'antibody-screen'
-	| 'emergency-issue'
-	| '';
+  'group-and-save' | 'crossmatch' | 'antibody-screen' | 'emergency-issue' | '';
 
 /** Determined ABO group. */
 export type AboGroup = 'a' | 'b' | 'o' | 'ab' | '';
@@ -30,20 +26,11 @@ export type AntibodyScreenResult = 'negative' | 'positive' | '';
 
 /** Crossmatch / compatibility outcome. */
 export type CrossmatchResult =
-	| 'compatible'
-	| 'incompatible'
-	| 'electronic-issue'
-	| 'not-performed'
-	| '';
+  'compatible' | 'incompatible' | 'electronic-issue' | 'not-performed' | '';
 
 /** Blood component the result relates to. */
 export type Component =
-	| 'red-cells'
-	| 'platelets'
-	| 'fresh-frozen-plasma'
-	| 'cryoprecipitate'
-	| 'none'
-	| '';
+  'red-cells' | 'platelets' | 'fresh-frozen-plasma' | 'cryoprecipitate' | 'none' | '';
 
 /** Overall result status. */
 export type OverallResultStatus = 'normal' | 'abnormal' | 'critical' | '';
@@ -61,12 +48,12 @@ export type FollowUpUrgency = 'routine' | 'recommended' | 'urgent' | 'critical-a
 
 /** Overall recommendation. */
 export type Recommendation =
-	| 'no-action'
-	| 'routine-follow-up'
-	| 'further-testing'
-	| 'specialist-referral'
-	| 'urgent-review'
-	| '';
+  | 'no-action'
+  | 'routine-follow-up'
+  | 'further-testing'
+  | 'specialist-referral'
+  | 'urgent-review'
+  | '';
 
 // ─── The result/report record (sql/04) ───
 
@@ -75,47 +62,47 @@ export type Recommendation =
  * source-of-truth record the four-axis interpretation grade is computed from.
  */
 export interface BloodCrossMatchResult {
-	// Report identification
-	reportingClinician: string;
-	originatingRequestReference: string;
-	reportStatus: ReportStatus;
-	performedDate: string;
-	reportedDate: string;
+  // Report identification
+  reportingClinician: string;
+  originatingRequestReference: string;
+  reportStatus: ReportStatus;
+  performedDate: string;
+  reportedDate: string;
 
-	// Test requested / context
-	requestType: RequestType;
-	clinicalHistory: string;
+  // Test requested / context
+  requestType: RequestType;
+  clinicalHistory: string;
 
-	// ABO / Rh grouping
-	aboGroup: AboGroup;
-	rhdGroup: RhdGroup;
-	historicalGroupConcordant: boolean;
+  // ABO / Rh grouping
+  aboGroup: AboGroup;
+  rhdGroup: RhdGroup;
+  historicalGroupConcordant: boolean;
 
-	// Antibody screen / identification
-	antibodyScreenResult: AntibodyScreenResult;
-	antibodiesIdentified: string;
+  // Antibody screen / identification
+  antibodyScreenResult: AntibodyScreenResult;
+  antibodiesIdentified: string;
 
-	// Crossmatch / compatibility
-	crossmatchResult: CrossmatchResult;
-	component: Component;
-	unitsCrossmatched: number | null;
-	unitsAvailable: number | null;
-	specialRequirements: string;
+  // Crossmatch / compatibility
+  crossmatchResult: CrossmatchResult;
+  component: Component;
+  unitsCrossmatched: number | null;
+  unitsAvailable: number | null;
+  specialRequirements: string;
 
-	// Identity / sample safety
-	twoSampleRuleMet: boolean;
+  // Identity / sample safety
+  twoSampleRuleMet: boolean;
 
-	// Overall result and interpretation
-	overallResultStatus: OverallResultStatus;
-	findingsNarrative: string;
-	impression: string;
-	recommendedFollowUp: string;
+  // Overall result and interpretation
+  overallResultStatus: OverallResultStatus;
+  findingsNarrative: string;
+  impression: string;
+  recommendedFollowUp: string;
 
-	// Critical-result communication and sign-off
-	criticalResultCommunicated: boolean;
-	reportedTo: string;
-	clinicianNotes: string;
-	signed: boolean;
+  // Critical-result communication and sign-off
+  criticalResultCommunicated: boolean;
+  reportedTo: string;
+  clinicianNotes: string;
+  signed: boolean;
 }
 
 // ─── Grading types (sql/05, sql/06, sql/07) ───
@@ -125,35 +112,35 @@ export type Axis = 'classification' | 'severity' | 'completeness' | 'follow-up';
 
 /** Flag category (mirrors the sql/07 CHECK constraint). */
 export type FlagCategory =
-	| 'critical-result-alert'
-	| 'incidental-finding'
-	| 'discrepancy-with-request'
-	| 'abnormal-requiring-action'
-	| 'urgent-referral'
-	| 'inadequate-technique'
-	| 'unexpected-finding'
-	| 'missing-impression'
-	| 'missing-measurement'
-	| 'other';
+  | 'critical-result-alert'
+  | 'incidental-finding'
+  | 'discrepancy-with-request'
+  | 'abnormal-requiring-action'
+  | 'urgent-referral'
+  | 'inadequate-technique'
+  | 'unexpected-finding'
+  | 'missing-impression'
+  | 'missing-measurement'
+  | 'other';
 
 /** Flag priority. */
 export type FlagPriority = 'low' | 'medium' | 'high';
 
 /** A single rule that fired during grading (audit trail). */
 export interface FiredRule {
-	ruleId: string;
-	axis: Axis;
-	category: string;
-	description: string;
+  ruleId: string;
+  axis: Axis;
+  category: string;
+  description: string;
 }
 
 /** A safety-critical flag, independent of the four axes. */
 export interface Flag {
-	flagId: string;
-	category: FlagCategory;
-	priority: FlagPriority;
-	description: string;
-	suggestedAction: string;
+  flagId: string;
+  category: FlagCategory;
+  priority: FlagPriority;
+  description: string;
+  suggestedAction: string;
 }
 
 /**
@@ -161,44 +148,44 @@ export interface Flag {
  * sql/05_create_table_blood_cross_match_test_result_grade.sql.
  */
 export interface GradingResult {
-	// Axis A
-	resultClassification: ResultClassification;
-	// Axis B
-	abnormalitySeverity: AbnormalitySeverity;
-	reportingCategory: string;
-	// Axis C
-	reportCompletenessPercent: number;
-	// Axis D
-	followUpUrgency: FollowUpUrgency;
-	targetTimeframe: string;
-	recommendedAction: string;
-	// Overall
-	recommendation: Recommendation;
-	firedRules: FiredRule[];
-	flags: Flag[];
-	gradedAt: string;
+  // Axis A
+  resultClassification: ResultClassification;
+  // Axis B
+  abnormalitySeverity: AbnormalitySeverity;
+  reportingCategory: string;
+  // Axis C
+  reportCompletenessPercent: number;
+  // Axis D
+  followUpUrgency: FollowUpUrgency;
+  targetTimeframe: string;
+  recommendedAction: string;
+  // Overall
+  recommendation: Recommendation;
+  firedRules: FiredRule[];
+  flags: Flag[];
+  gradedAt: string;
 }
 
 // ─── Step configuration ───
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
+  number: number;
+  title: string;
+  shortTitle: string;
 }
 
 // ─── Dashboard row ───
 
 /** A graded report row for the dashboard table. */
 export interface ReportRow {
-	id: string;
-	patientName: string;
-	requestType: RequestType;
-	reportStatus: ReportStatus;
-	reportedDate: string;
-	resultClassification: ResultClassification;
-	abnormalitySeverity: AbnormalitySeverity;
-	followUpUrgency: FollowUpUrgency;
-	reportCompletenessPercent: number;
-	flagCount: number;
+  id: string;
+  patientName: string;
+  requestType: RequestType;
+  reportStatus: ReportStatus;
+  reportedDate: string;
+  resultClassification: ResultClassification;
+  abnormalitySeverity: AbnormalitySeverity;
+  followUpUrgency: FollowUpUrgency;
+  reportCompletenessPercent: number;
+  flagCount: number;
 }

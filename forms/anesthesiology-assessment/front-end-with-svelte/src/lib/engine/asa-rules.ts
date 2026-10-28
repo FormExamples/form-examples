@@ -10,20 +10,20 @@ import { asaClassLabel } from './utils';
 
 /** Risk level for a given ASA class. Returns 'low' for an empty class. */
 export function asaRiskFromClass(klass: AsaClass): RiskLevel {
-	switch (klass) {
-		case 'i':
-		case 'ii':
-			return 'low';
-		case 'iii':
-			return 'medium';
-		case 'iv':
-			return 'high';
-		case 'v':
-		case 'vi':
-			return 'critical';
-		default:
-			return 'low';
-	}
+  switch (klass) {
+    case 'i':
+    case 'ii':
+      return 'low';
+    case 'iii':
+      return 'medium';
+    case 'iv':
+      return 'high';
+    case 'v':
+    case 'vi':
+      return 'critical';
+    default:
+      return 'low';
+  }
 }
 
 /**
@@ -31,17 +31,17 @@ export function asaRiskFromClass(klass: AsaClass): RiskLevel {
  * an emergency flag, the resulting risk level, and the audit-trail rule entry.
  */
 export function evaluateAsa(d: AssessmentData): AsaResult {
-	const klass = d.investigationsAndPlan.asaClass;
-	const emergency = d.investigationsAndPlan.emergencyCase === 'yes';
-	const riskLevel = asaRiskFromClass(klass);
-	const firedRules = [];
-	if (klass) {
-		firedRules.push({
-			id: 'ASA-001',
-			category: 'ASA Physical Status',
-			description: `${asaClassLabel(klass)}${emergency ? ' (Emergency)' : ''}`,
-			riskLevel
-		});
-	}
-	return { class: klass, emergency, riskLevel, firedRules };
+  const klass = d.investigationsAndPlan.asaClass;
+  const emergency = d.investigationsAndPlan.emergencyCase === 'yes';
+  const riskLevel = asaRiskFromClass(klass);
+  const firedRules = [];
+  if (klass) {
+    firedRules.push({
+      id: 'ASA-001',
+      category: 'ASA Physical Status',
+      description: `${asaClassLabel(klass)}${emergency ? ' (Emergency)' : ''}`,
+      riskLevel
+    });
+  }
+  return { class: klass, emergency, riskLevel, firedRules };
 }

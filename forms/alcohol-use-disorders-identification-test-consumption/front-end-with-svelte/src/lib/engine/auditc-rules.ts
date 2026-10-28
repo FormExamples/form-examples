@@ -2,10 +2,10 @@ import type { AuditcRule, ItemScore } from './types';
 
 /** Coerce an item value (0-4 or null) to a clamped 0-4 point. */
 export function toPoint(v: ItemScore | number | string | null | undefined): number {
-	if (v === null || v === undefined || v === '') return 0;
-	const n = Number(v);
-	if (!Number.isFinite(n)) return 0;
-	return Math.max(0, Math.min(4, Math.round(n)));
+  if (v === null || v === undefined || v === '') return 0;
+  const n = Number(v);
+  if (!Number.isFinite(n)) return 0;
+  return Math.max(0, Math.min(4, Math.round(n)));
 }
 
 /**
@@ -18,34 +18,33 @@ export function toPoint(v: ItemScore | number | string | null | undefined): numb
  * derives the risk band. Rows mirror the `audit_c_grade_rule` SQL table.
  */
 export const auditcRules: AuditcRule[] = [
-	// ─── ITEM 1: FREQUENCY OF DRINKING (Q1) ───────────────────────
-	{
-		id: 'R-ITEM-1-FREQUENCY-01',
-		item: 'frequency-of-drinking',
-		field: 'frequencyOfDrinking',
-		category: 'consumption-item',
-		description: 'Q1 — how often the patient has a drink containing alcohol',
-		points: (d) => toPoint(d.items.frequencyOfDrinking)
-	},
+  // ─── ITEM 1: FREQUENCY OF DRINKING (Q1) ───────────────────────
+  {
+    id: 'R-ITEM-1-FREQUENCY-01',
+    item: 'frequency-of-drinking',
+    field: 'frequencyOfDrinking',
+    category: 'consumption-item',
+    description: 'Q1 — how often the patient has a drink containing alcohol',
+    points: (d) => toPoint(d.items.frequencyOfDrinking)
+  },
 
-	// ─── ITEM 2: TYPICAL QUANTITY (Q2) ────────────────────────────
-	{
-		id: 'R-ITEM-2-QUANTITY-01',
-		item: 'typical-quantity',
-		field: 'typicalQuantity',
-		category: 'consumption-item',
-		description: 'Q2 — typical number of UK units on a day when drinking',
-		points: (d) => toPoint(d.items.typicalQuantity)
-	},
+  // ─── ITEM 2: TYPICAL QUANTITY (Q2) ────────────────────────────
+  {
+    id: 'R-ITEM-2-QUANTITY-01',
+    item: 'typical-quantity',
+    field: 'typicalQuantity',
+    category: 'consumption-item',
+    description: 'Q2 — typical number of UK units on a day when drinking',
+    points: (d) => toPoint(d.items.typicalQuantity)
+  },
 
-	// ─── ITEM 3: HEAVY EPISODIC DRINKING (Q3) ─────────────────────
-	{
-		id: 'R-ITEM-3-BINGE-01',
-		item: 'heavy-episode-frequency',
-		field: 'heavyEpisodeFrequency',
-		category: 'consumption-item',
-		description:
-			'Q3 — how often the patient has >= 6 (female) / >= 8 (male) units in one session',
-		points: (d) => toPoint(d.items.heavyEpisodeFrequency)
-	}
+  // ─── ITEM 3: HEAVY EPISODIC DRINKING (Q3) ─────────────────────
+  {
+    id: 'R-ITEM-3-BINGE-01',
+    item: 'heavy-episode-frequency',
+    field: 'heavyEpisodeFrequency',
+    category: 'consumption-item',
+    description: 'Q3 — how often the patient has >= 6 (female) / >= 8 (male) units in one session',
+    points: (d) => toPoint(d.items.heavyEpisodeFrequency)
+  }
 ];

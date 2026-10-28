@@ -1,108 +1,108 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { page } from '$app/state';
-	import { store } from '#lib/stores/checklist.svelte.js';
-	import RestoreBanner from '#lib/components/ui/RestoreBanner.svelte';
-	import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
-	import { sampleChecklists } from '#lib/data/sample-reports.js';
+  import { goto } from '$app/navigation';
+  import { page } from '$app/state';
+  import { store } from '#lib/stores/checklist.svelte.js';
+  import RestoreBanner from '#lib/components/ui/RestoreBanner.svelte';
+  import { steps, TOTAL_STEPS } from '#lib/config/steps.js';
+  import { sampleChecklists } from '#lib/data/sample-reports.js';
 
-	import Form from '#lib/components/ui/Form.svelte';
-	import { Button, ErrorSummary, Progress } from "@lilydesignsystem/svelte-headless";
-	import StepList from '#lib/components/ui/StepList.svelte';
-	import StepListItem from '#lib/components/ui/StepListItem.svelte';
+  import Form from '#lib/components/ui/Form.svelte';
+  import { Button, ErrorSummary, Progress } from '@lilydesignsystem/svelte-headless';
+  import StepList from '#lib/components/ui/StepList.svelte';
+  import StepListItem from '#lib/components/ui/StepListItem.svelte';
 
-	import Step1CaseDetails from '#lib/components/steps/Step1CaseDetails.svelte';
-	import Step2SignIn from '#lib/components/steps/Step2SignIn.svelte';
-	import Step3TimeOut from '#lib/components/steps/Step3TimeOut.svelte';
-	import Step4SignOut from '#lib/components/steps/Step4SignOut.svelte';
-	import Step5Summary from '#lib/components/steps/Step5Summary.svelte';
+  import Step1CaseDetails from '#lib/components/steps/Step1CaseDetails.svelte';
+  import Step2SignIn from '#lib/components/steps/Step2SignIn.svelte';
+  import Step3TimeOut from '#lib/components/steps/Step3TimeOut.svelte';
+  import Step4SignOut from '#lib/components/steps/Step4SignOut.svelte';
+  import Step5Summary from '#lib/components/steps/Step5Summary.svelte';
 
-	let errors = $state<{ id: string; message: string }[]>([]);
+  let errors = $state<{ id: string; message: string }[]>([]);
 
-	const id = $derived(page.params.id ?? 'new');
-	const isNew = $derived(id === 'new');
+  const id = $derived(page.params.id ?? 'new');
+  const isNew = $derived(id === 'new');
 
-	// Hydrate the wizard whenever the route id changes: a saved draft for that id
-	// wins, otherwise seed from the matching sample checklist (existing id) or a
-	// blank draft (new).
-	$effect(() => {
-		const seed = sampleChecklists.find((s) => s.id === id)?.data;
-		if (store.id !== id) {
-			store.loadForId(id, seed);
-			errors = [];
-		}
-	});
+  // Hydrate the wizard whenever the route id changes: a saved draft for that id
+  // wins, otherwise seed from the matching sample checklist (existing id) or a
+  // blank draft (new).
+  $effect(() => {
+    const seed = sampleChecklists.find((s) => s.id === id)?.data;
+    if (store.id !== id) {
+      store.loadForId(id, seed);
+      errors = [];
+    }
+  });
 
-	function validate(): boolean {
-		const d = store.data;
-		const found: { id: string; message: string }[] = [];
-		if (d.plannedProcedure.trim() === '') {
-			found.push({ id: 'plannedProcedure', message: 'Planned procedure is required.' });
-		}
-		if (d.caseDate === '') {
-			found.push({ id: 'caseDate', message: 'Case date is required.' });
-		}
-		errors = found;
-		return found.length === 0;
-	}
+  function validate(): boolean {
+    const d = store.data;
+    const found: { id: string; message: string }[] = [];
+    if (d.plannedProcedure.trim() === '') {
+      found.push({ id: 'plannedProcedure', message: 'Planned procedure is required.' });
+    }
+    if (d.caseDate === '') {
+      found.push({ id: 'caseDate', message: 'Case date is required.' });
+    }
+    errors = found;
+    return found.length === 0;
+  }
 
-	function submit() {
-		if (!validate()) {
-			document.querySelector('.error-summary')?.scrollIntoView({ behavior: 'smooth' });
-			return;
-		}
-		store.result = {
-			status: store.status,
-			flags: store.flags,
-			generatedAt: new Date().toISOString()
-		};
-		goto(`/who-surgical-safety-checklist/who-surgical-safety-checklists/${id}/report`);
-	}
+  function submit() {
+    if (!validate()) {
+      document.querySelector('.error-summary')?.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+    store.result = {
+      status: store.status,
+      flags: store.flags,
+      generatedAt: new Date().toISOString()
+    };
+    goto(`/who-surgical-safety-checklist/who-surgical-safety-checklists/${id}/report`);
+  }
 
-	function startOver() {
-		const seed = sampleChecklists.find((s) => s.id === id)?.data;
-		store.reset();
-		store.loadForId(id, seed);
-		errors = [];
-	}
+  function startOver() {
+    const seed = sampleChecklists.find((s) => s.id === id)?.data;
+    store.reset();
+    store.loadForId(id, seed);
+    errors = [];
+  }
 </script>
 
 <main class="mx-16 px-4 py-6">
-	<h1 class="text-2xl font-bold text-base-content">
-		{isNew ? 'New surgical safety checklist' : `Surgical safety checklist ${id}`}
-	</h1>
-	<p class="mt-1 text-sm text-base-content/70">
-		Complete the five sections; the lifecycle status and safety flags are computed on submit.
-	</p>
-	<Progress label="Checklist sections" value={TOTAL_STEPS} max={TOTAL_STEPS} />
-	<StepList label="Checklist sections" current={TOTAL_STEPS}>
-		{#each steps as step (step.number)}
-			<StepListItem status="finished" label={step.title}>{step.shortTitle}</StepListItem>
-		{/each}
-	</StepList>
+  <h1 class="text-2xl font-bold text-base-content">
+    {isNew ? 'New surgical safety checklist' : `Surgical safety checklist ${id}`}
+  </h1>
+  <p class="mt-1 text-sm text-base-content/70">
+    Complete the five sections; the lifecycle status and safety flags are computed on submit.
+  </p>
+  <Progress label="Checklist sections" value={TOTAL_STEPS} max={TOTAL_STEPS} />
+  <StepList label="Checklist sections" current={TOTAL_STEPS}>
+    {#each steps as step (step.number)}
+      <StepListItem status="finished" label={step.title}>{step.shortTitle}</StepListItem>
+    {/each}
+  </StepList>
 
-	{#if errors.length > 0}
-		<ErrorSummary title="Please fix the following before submitting" class="mb-6">
-			<ul>
-				{#each errors as e (e.id)}
-					<li><a href={`#${e.id}`}>{e.message}</a></li>
-				{/each}
-			</ul>
-		</ErrorSummary>
-	{/if}
+  {#if errors.length > 0}
+    <ErrorSummary title="Please fix the following before submitting" class="mb-6">
+      <ul>
+        {#each errors as e (e.id)}
+          <li><a href={`#${e.id}`}>{e.message}</a></li>
+        {/each}
+      </ul>
+    </ErrorSummary>
+  {/if}
 
-	<RestoreBanner show={store.hadDraftAtLoad} onDiscard={startOver} />
+  <RestoreBanner show={store.hadDraftAtLoad} onDiscard={startOver} />
 
-	<Form label="WHO Surgical Safety Checklist" onsubmit={submit}>
-		<Step1CaseDetails />
-		<Step2SignIn />
-		<Step3TimeOut />
-		<Step4SignOut />
-		<Step5Summary />
+  <Form label="WHO Surgical Safety Checklist" onsubmit={submit}>
+    <Step1CaseDetails />
+    <Step2SignIn />
+    <Step3TimeOut />
+    <Step4SignOut />
+    <Step5Summary />
 
-		<div class="button-group">
-			<Button type="submit" data-variant="primary">Compute status &amp; view report</Button>
-			<Button data-variant="danger" onclick={startOver}>Start over</Button>
-		</div>
-	</Form>
+    <div class="button-group">
+      <Button type="submit" data-variant="primary">Compute status &amp; view report</Button>
+      <Button data-variant="danger" onclick={startOver}>Start over</Button>
+    </div>
+  </Form>
 </main>

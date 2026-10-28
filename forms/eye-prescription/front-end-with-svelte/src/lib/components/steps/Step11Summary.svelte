@@ -25,36 +25,71 @@
   }
 </script>
 
-<StepCard step={11} title="Summary & sign-off" description="Live classification — recomputed as you fill the form above.">
+<StepCard
+  step={11}
+  title="Summary & sign-off"
+  description="Live classification — recomputed as you fill the form above."
+>
   <div class="rounded border border-primary bg-primary/10 p-4 mb-4 text-sm space-y-1">
     <h3 class="font-semibold text-primary mb-1">Live classification</h3>
-    <div><strong>Right eye:</strong>
-      <span class="inline-block px-2 py-0.5 mr-1 rounded-full bg-base-100 border border-primary text-xs">{classLabel(r.rightEyeSphereClass)}</span>
-      <span class="inline-block px-2 py-0.5 rounded-full bg-base-100 border border-primary text-xs">{classLabel(r.rightEyeCylinderClass)}</span>
-    </div>
-    <div><strong>Left eye:</strong>
-      <span class="inline-block px-2 py-0.5 mr-1 rounded-full bg-base-100 border border-primary text-xs">{classLabel(r.leftEyeSphereClass)}</span>
-      <span class="inline-block px-2 py-0.5 rounded-full bg-base-100 border border-primary text-xs">{classLabel(r.leftEyeCylinderClass)}</span>
+    <div>
+      <strong>Right eye:</strong>
+      <span
+        class="inline-block px-2 py-0.5 mr-1 rounded-full bg-base-100 border border-primary text-xs"
+        >{classLabel(r.rightEyeSphereClass)}</span
+      >
+      <span class="inline-block px-2 py-0.5 rounded-full bg-base-100 border border-primary text-xs"
+        >{classLabel(r.rightEyeCylinderClass)}</span
+      >
     </div>
     <div>
-      <strong>Presbyopia:</strong> <span class="inline-block px-2 py-0.5 rounded-full bg-base-100 border border-primary text-xs">{classLabel(r.presbyopiaClass)}</span>
-      <strong class="ml-3">Anisometropia:</strong> {r.anisometropia === null ? '—' : fmtDioptres(r.anisometropia)} D
-      <strong class="ml-3">Prism:</strong> {r.prismPresent ? 'present' : 'none'}
+      <strong>Left eye:</strong>
+      <span
+        class="inline-block px-2 py-0.5 mr-1 rounded-full bg-base-100 border border-primary text-xs"
+        >{classLabel(r.leftEyeSphereClass)}</span
+      >
+      <span class="inline-block px-2 py-0.5 rounded-full bg-base-100 border border-primary text-xs"
+        >{classLabel(r.leftEyeCylinderClass)}</span
+      >
+    </div>
+    <div>
+      <strong>Presbyopia:</strong>
+      <span class="inline-block px-2 py-0.5 rounded-full bg-base-100 border border-primary text-xs"
+        >{classLabel(r.presbyopiaClass)}</span
+      >
+      <strong class="ml-3">Anisometropia:</strong>
+      {r.anisometropia === null ? '—' : fmtDioptres(r.anisometropia)} D
+      <strong class="ml-3">Prism:</strong>
+      {r.prismPresent ? 'present' : 'none'}
     </div>
     <div>
       <strong>Complexity:</strong>
-      <span class="inline-block px-2 py-0.5 rounded-full text-xs font-semibold {complexityClass(effective)}">{effective}</span>
+      <span
+        class="inline-block px-2 py-0.5 rounded-full text-xs font-semibold {complexityClass(
+          effective
+        )}">{effective}</span
+      >
       {#if assessment.data.grade.overrideComplexity}
-        <span class="inline-block px-2 py-0.5 rounded-full bg-base-100 border border-primary text-xs ml-1">overridden from {r.complexity}</span>
+        <span
+          class="inline-block px-2 py-0.5 rounded-full bg-base-100 border border-primary text-xs ml-1"
+          >overridden from {r.complexity}</span
+        >
       {/if}
     </div>
     <div>
       <strong>Flags ({r.additionalFlags.length}):</strong>
       {#if r.additionalFlags.length === 0}
-        <span class="inline-block px-2 py-0.5 rounded-full bg-base-100 border border-primary text-xs">none</span>
+        <span
+          class="inline-block px-2 py-0.5 rounded-full bg-base-100 border border-primary text-xs"
+          >none</span
+        >
       {:else}
         {#each r.additionalFlags as f (f.flagId)}
-          <span class="inline-block px-2 py-0.5 mr-1 rounded-full text-xs border {priorityClass(f.priority)}">{f.category}</span>
+          <span
+            class="inline-block px-2 py-0.5 mr-1 rounded-full text-xs border {priorityClass(
+              f.priority
+            )}">{f.category}</span
+          >
         {/each}
       {/if}
     </div>
@@ -62,7 +97,14 @@
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4">
     <FormField label="Follow-up interval (months)">
-      <input class={input} type="number" step="1" min="1" max="60" bind:value={assessment.data.grade.followUpIntervalMonths} />
+      <input
+        class={input}
+        type="number"
+        step="1"
+        min="1"
+        max="60"
+        bind:value={assessment.data.grade.followUpIntervalMonths}
+      />
     </FormField>
     <FormField label="Complexity override">
       <select class={input} bind:value={assessment.data.grade.overrideComplexity}>
@@ -89,7 +131,9 @@
     <ul class="space-y-2">
       {#each r.additionalFlags as f (f.flagId)}
         <li class="border-l-4 pl-3 py-2 rounded {priorityClass(f.priority)}">
-          <div class="text-xs uppercase tracking-wide font-semibold opacity-70">{f.category} · {f.priority} · {f.eye}</div>
+          <div class="text-xs uppercase tracking-wide font-semibold opacity-70">
+            {f.category} · {f.priority} · {f.eye}
+          </div>
           <div class="text-sm">{f.description}</div>
           <div class="text-xs italic opacity-80 mt-1">{f.suggestedAction}</div>
         </li>

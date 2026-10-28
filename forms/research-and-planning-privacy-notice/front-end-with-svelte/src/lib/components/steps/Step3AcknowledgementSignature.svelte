@@ -2,7 +2,12 @@
   import { assessment } from '#lib/stores/assessment.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { CheckboxInput, DateInput, RadioGroup, TextInput } from "@lilydesignsystem/svelte-headless";
+  import {
+    CheckboxInput,
+    DateInput,
+    RadioGroup,
+    TextInput
+  } from '@lilydesignsystem/svelte-headless';
 
   const ack = assessment.data.acknowledgementSignature;
 
@@ -13,31 +18,19 @@
 
 <Fieldset legend="Step 3 — Opt-Out Preference, Acknowledgement & Signature">
   <p class="hint">
-    Record your Type 1 and National Data Opt-Out preferences, then
-    acknowledge and sign.
+    Record your Type 1 and National Data Opt-Out preferences, then acknowledge and sign.
   </p>
 
   <Field label="Type 1 opt-out (from this practice)">
     <RadioGroup label="Type 1 opt-out" id="ack-type1OptOut">
       <label>
-        <input
-          type="radio"
-          class="radio-input"
-          bind:group={ack.type1OptOut}
-          value="opt-in"
-        />
-        Opt in — I consent to my information being used for research and
-        planning purposes
+        <input type="radio" class="radio-input" bind:group={ack.type1OptOut} value="opt-in" />
+        Opt in — I consent to my information being used for research and planning purposes
       </label>
       <label>
-        <input
-          type="radio"
-          class="radio-input"
-          bind:group={ack.type1OptOut}
-          value="opt-out"
-        />
-        Opt out — I do not want my identifiable information shared from this
-        practice for research or planning
+        <input type="radio" class="radio-input" bind:group={ack.type1OptOut} value="opt-out" />
+        Opt out — I do not want my identifiable information shared from this practice for research or
+        planning
       </label>
     </RadioGroup>
   </Field>
@@ -51,8 +44,8 @@
           bind:group={ack.nationalDataOptOut}
           value="opt-in"
         />
-        Opt in — I allow my confidential patient information to be used for
-        research and planning across the NHS
+        Opt in — I allow my confidential patient information to be used for research and planning across
+        the NHS
       </label>
       <label>
         <input
@@ -61,17 +54,20 @@
           bind:group={ack.nationalDataOptOut}
           value="opt-out"
         />
-        Opt out — I do not want my data used beyond my individual care and
-        treatment
+        Opt out — I do not want my data used beyond my individual care and treatment
       </label>
     </RadioGroup>
   </Field>
 
   <Field label="Acknowledgement" required>
     <label class="ack-label">
-      <CheckboxInput id="ack-agreed" label="I confirm I have read and understood the notice" bind:checked={ack.agreed} />
-      I confirm I have read and understood the research and planning privacy
-      notice and my opt-out choices above.
+      <CheckboxInput
+        id="ack-agreed"
+        label="I confirm I have read and understood the notice"
+        bind:checked={ack.agreed}
+      />
+      I confirm I have read and understood the research and planning privacy notice and my opt-out choices
+      above.
     </label>
   </Field>
 

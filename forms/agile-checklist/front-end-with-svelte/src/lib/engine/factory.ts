@@ -19,7 +19,7 @@ export function createEmptyChecklist(): AgileChecklist {
       organisationName: '',
       yearsInAgile: null,
       assessmentDate: '',
-      assessmentPeriod: '',
+      assessmentPeriod: ''
     },
     answers: emptyAnswers(),
     actionPlan: {
@@ -28,7 +28,7 @@ export function createEmptyChecklist(): AgileChecklist {
       topAction3: '',
       coachNotes: '',
       signedAt: '',
-      overallNotes: '',
-    },
+      overallNotes: ''
+    }
   };
 }

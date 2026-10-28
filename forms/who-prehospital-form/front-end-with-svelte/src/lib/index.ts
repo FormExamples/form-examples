@@ -5,23 +5,19 @@ export { validatePrehospital } from './engine/prehospital-validator';
 export { detectFlaggedIssues } from './engine/flagged-issues';
 export { gradePrehospital } from './engine/prehospital-grader';
 export {
-	gcsTotal,
-	hasAirwayIntervention,
-	hasBreathingIntervention,
-	hasIvAccessOrFluids,
-	hasAnyHighRiskSign,
-	hasNumber,
-	hasText,
-	isInjury,
-	isYesNoAnswered,
-	isYesNoUnknownAnswered,
-	priorityColor,
-	priorityLabel,
-	sectionLabel
+  gcsTotal,
+  hasAirwayIntervention,
+  hasBreathingIntervention,
+  hasIvAccessOrFluids,
+  hasAnyHighRiskSign,
+  hasNumber,
+  hasText,
+  isInjury,
+  isYesNoAnswered,
+  isYesNoUnknownAnswered,
+  priorityColor,
+  priorityLabel,
+  sectionLabel
 } from './engine/utils';
-export {
-	assessment,
-	createDefaultAssessment,
-	emptyReassessment
-} from './stores/assessment.svelte';
+export { assessment, createDefaultAssessment, emptyReassessment } from './stores/assessment.svelte';
 export { steps, TOTAL_STEPS } from './config/steps';

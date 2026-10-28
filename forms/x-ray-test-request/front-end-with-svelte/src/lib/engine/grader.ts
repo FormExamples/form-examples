@@ -1,4 +1,10 @@
-import type { XRayRequest, GradingResult, Recommendation, AppropriatenessBand, RadiationSafetyBand } from './types';
+import type {
+  XRayRequest,
+  GradingResult,
+  Recommendation,
+  AppropriatenessBand,
+  RadiationSafetyBand
+} from './types';
 import { scoreAppropriateness } from './appropriateness-rules';
 import { scoreRadiationSafety } from './safety-rules';
 import { scoreCompleteness } from './completeness-rules';
@@ -7,10 +13,10 @@ import { detectFlags } from './flagged-issues';
 
 /** Human-readable overall recommendation labels. */
 export const RECOMMENDATION_LABELS: Record<string, string> = {
-	accept: 'Accept and book',
-	'query-referrer': 'Query the referrer',
-	redirect: 'Redirect to another modality',
-	reject: 'Reject'
+  accept: 'Accept and book',
+  'query-referrer': 'Query the referrer',
+  redirect: 'Redirect to another modality',
+  reject: 'Reject'
 };
 
 /**
@@ -18,15 +24,15 @@ export const RECOMMENDATION_LABELS: Record<string, string> = {
  * axes. Least-alarming wins only when nothing escalates.
  */
 export function deriveRecommendation(
-	apprBand: AppropriatenessBand,
-	radiationSafetyBand: RadiationSafetyBand,
-	completenessPercent: number
+  apprBand: AppropriatenessBand,
+  radiationSafetyBand: RadiationSafetyBand,
+  completenessPercent: number
 ): Recommendation {
-	if (radiationSafetyBand === 'contraindicated') return 'reject';
-	if (apprBand === 'usually-not-appropriate') return 'query-referrer';
-	if (radiationSafetyBand === 'caution') return 'query-referrer';
-	if (completenessPercent < 50) return 'query-referrer';
-	return 'accept';
+  if (radiationSafetyBand === 'contraindicated') return 'reject';
+  if (apprBand === 'usually-not-appropriate') return 'query-referrer';
+  if (radiationSafetyBand === 'caution') return 'query-referrer';
+  if (completenessPercent < 50) return 'query-referrer';
+  return 'accept';
 }
 
 /**
@@ -47,40 +53,40 @@ export function deriveRecommendation(
  * No side effects, no network calls, no I/O.
  */
 export function calculateGrade(data: XRayRequest): GradingResult {
-	const firedRules = [];
+  const firedRules = [];
 
-	// Axis A — appropriateness.
-	const appr = scoreAppropriateness(data.request.bodyRegion, data.request.primaryIndication);
-	if (appr.firedRule) firedRules.push(appr.firedRule);
+  // Axis A — appropriateness.
+  const appr = scoreAppropriateness(data.request.bodyRegion, data.request.primaryIndication);
+  if (appr.firedRule) firedRules.push(appr.firedRule);
 
-	// Axis B — radiation safety + dose band.
-	const safety = scoreRadiationSafety(data);
-	for (const r of safety.firedRules) firedRules.push(r);
+  // Axis B — radiation safety + dose band.
+  const safety = scoreRadiationSafety(data);
+  for (const r of safety.firedRules) firedRules.push(r);
 
-	// Axis C — completeness.
-	const completeness = scoreCompleteness(data);
-	for (const m of completeness.missing) firedRules.push(m);
+  // Axis C — completeness.
+  const completeness = scoreCompleteness(data);
+  for (const m of completeness.missing) firedRules.push(m);
 
-	// Axis D — triage.
-	const triage = scoreTriage(data);
-	for (const r of triage.firedRules) firedRules.push(r);
+  // Axis D — triage.
+  const triage = scoreTriage(data);
+  for (const r of triage.firedRules) firedRules.push(r);
 
-	const recommendation = deriveRecommendation(appr.band, safety.band, completeness.percent);
+  const recommendation = deriveRecommendation(appr.band, safety.band, completeness.percent);
 
-	const flags = detectFlags(data, { doseBand: safety.doseBand });
+  const flags = detectFlags(data, { doseBand: safety.doseBand });
 
-	return {
-		appropriatenessScore: appr.score,
-		appropriatenessBand: appr.band,
-		radiationSafetyBand: safety.band,
-		radiationDoseBand: safety.doseBand,
-		completenessPercent: completeness.percent,
-		triageTier: triage.tier,
-		targetTimeframe: triage.targetTimeframe,
-		recommendation,
-		recommendationLabel: RECOMMENDATION_LABELS[recommendation] ?? recommendation,
-		firedRules,
-		flags,
-		gradedAt: new Date().toISOString()
-	};
+  return {
+    appropriatenessScore: appr.score,
+    appropriatenessBand: appr.band,
+    radiationSafetyBand: safety.band,
+    radiationDoseBand: safety.doseBand,
+    completenessPercent: completeness.percent,
+    triageTier: triage.tier,
+    targetTimeframe: triage.targetTimeframe,
+    recommendation,
+    recommendationLabel: RECOMMENDATION_LABELS[recommendation] ?? recommendation,
+    firedRules,
+    flags,
+    gradedAt: new Date().toISOString()
+  };
 }

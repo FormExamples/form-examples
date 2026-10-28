@@ -7,21 +7,21 @@ import { detectFlaggedIssues } from './flagged-issues';
  * that mirrors the `anaesthetic_record_grade_rule` SQL table.
  */
 export function evaluateRules(data: AssessmentData): FiredRule[] {
-	return mandatoryRules.map((rule) => {
-		let satisfied = false;
-		try {
-			satisfied = !!rule.satisfied(data);
-		} catch (e) {
-			// Rule evaluation failed — log for debugging but treat as unsatisfied.
-			console.warn(`Mandatory rule ${rule.id} evaluation failed:`, e);
-		}
-		return {
-			id: rule.id,
-			category: rule.category,
-			label: rule.label,
-			satisfied
-		};
-	});
+  return mandatoryRules.map((rule) => {
+    let satisfied = false;
+    try {
+      satisfied = !!rule.satisfied(data);
+    } catch (e) {
+      // Rule evaluation failed — log for debugging but treat as unsatisfied.
+      console.warn(`Mandatory rule ${rule.id} evaluation failed:`, e);
+    }
+    return {
+      id: rule.id,
+      category: rule.category,
+      label: rule.label,
+      satisfied
+    };
+  });
 }
 
 /**
@@ -37,37 +37,37 @@ export function evaluateRules(data: AssessmentData): FiredRule[] {
  * `flagged-issues.ts` and attached to the result.
  */
 export function calculateGrade(data: AssessmentData): GradingResult {
-	const firedRules = evaluateRules(data);
+  const firedRules = evaluateRules(data);
 
-	const total = firedRules.length;
-	const satisfied = firedRules.filter((r) => r.satisfied).length;
-	const completenessPercent = total > 0 ? Math.round((100 * satisfied) / total) : 0;
+  const total = firedRules.length;
+  const satisfied = firedRules.filter((r) => r.satisfied).length;
+  const completenessPercent = total > 0 ? Math.round((100 * satisfied) / total) : 0;
 
-	const criticalMissing = firedRules.filter(
-		(r) => r.category === 'critical' && !r.satisfied
-	).length;
-	const noncriticalMissing = firedRules.filter(
-		(r) => r.category === 'noncritical' && !r.satisfied
-	).length;
+  const criticalMissing = firedRules.filter(
+    (r) => r.category === 'critical' && !r.satisfied
+  ).length;
+  const noncriticalMissing = firedRules.filter(
+    (r) => r.category === 'noncritical' && !r.satisfied
+  ).length;
 
-	let status: CompletenessStatus;
-	if (criticalMissing > 0) {
-		status = 'incomplete';
-	} else if (noncriticalMissing > 0) {
-		status = 'partial';
-	} else {
-		status = 'complete';
-	}
+  let status: CompletenessStatus;
+  if (criticalMissing > 0) {
+    status = 'incomplete';
+  } else if (noncriticalMissing > 0) {
+    status = 'partial';
+  } else {
+    status = 'complete';
+  }
 
-	const flaggedIssues = detectFlaggedIssues(data, noncriticalMissing);
+  const flaggedIssues = detectFlaggedIssues(data, noncriticalMissing);
 
-	return {
-		status,
-		completenessPercent,
-		firedRules,
-		criticalMissing,
-		noncriticalMissing,
-		flaggedIssues,
-		timestamp: new Date().toISOString()
-	};
+  return {
+    status,
+    completenessPercent,
+    firedRules,
+    criticalMissing,
+    noncriticalMissing,
+    flaggedIssues,
+    timestamp: new Date().toISOString()
+  };
 }

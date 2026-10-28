@@ -26,7 +26,11 @@
       </Select>
     </Field>
     <Field label="FEV1 (% predicted)">
-      <NumberInput label="FEV1 (% predicted)" step="0.1" bind:value={store.data.respiratory.pftFev1PercentPredicted} />
+      <NumberInput
+        label="FEV1 (% predicted)"
+        step="0.1"
+        bind:value={store.data.respiratory.pftFev1PercentPredicted}
+      />
     </Field>
     <Field label="Smoking status">
       <Select label="Smoking status" bind:value={store.data.respiratory.smokingStatus}>

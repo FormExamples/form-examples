@@ -8,7 +8,11 @@
 
 <Fieldset legend="Step 2 — Product">
   <div class="field-grid">
-    <Field label="Product name" inputId="step-2-product-name" error={store.errors['step-2-product-name']}>
+    <Field
+      label="Product name"
+      inputId="step-2-product-name"
+      error={store.errors['step-2-product-name']}
+    >
       <TextInput
         id="step-2-product-name"
         label="Product name"
@@ -23,7 +27,11 @@
       <TextAreaInput label="Description" rows={2} bind:value={store.data.product.description} />
     </Field>
     <Field label="Intended purpose" class="field-span-2">
-      <TextAreaInput label="Intended purpose" rows={2} bind:value={store.data.product.intendedPurpose} />
+      <TextAreaInput
+        label="Intended purpose"
+        rows={2}
+        bind:value={store.data.product.intendedPurpose}
+      />
     </Field>
     <Field label="Product type">
       <Select label="Product type" bind:value={store.data.product.productType}>

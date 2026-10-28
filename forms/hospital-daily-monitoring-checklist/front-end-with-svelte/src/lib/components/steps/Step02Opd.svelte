@@ -19,7 +19,11 @@
 </script>
 
 <Fieldset legend="Step 2 — Section 1 — OPD (11 checkpoints)">
-  <p class="hint">Front-of-house patient flow: reception, registration, senior-citizen counter, complaint box, doctors’ chambers, dispensary, grievance redressal, minor OT, plaster/injection room, referral register, and medicine availability.</p>
+  <p class="hint">
+    Front-of-house patient flow: reception, registration, senior-citizen counter, complaint box,
+    doctors’ chambers, dispensary, grievance redressal, minor OT, plaster/injection room, referral
+    register, and medicine availability.
+  </p>
 
   {#each groups as group, gi (gi)}
     {#if group.subsection}

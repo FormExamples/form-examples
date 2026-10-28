@@ -9,10 +9,7 @@ function addDays(yyyymmdd: string, days: number): string {
 function monthsBetween(start: string, end: string): number {
   const a = new Date(`${start}T00:00:00Z`);
   const b = new Date(`${end}T00:00:00Z`);
-  return (
-    (b.getUTCFullYear() - a.getUTCFullYear()) * 12 +
-    (b.getUTCMonth() - a.getUTCMonth())
-  );
+  return (b.getUTCFullYear() - a.getUTCFullYear()) * 12 + (b.getUTCMonth() - a.getUTCMonth());
 }
 
 function todayIso(): string {
@@ -30,7 +27,7 @@ export function validateCertificate(cert: Certificate): ValidationReport {
     fired.push({
       code: 'VAL012',
       severity: 'error',
-      message: 'Certificate languages must include English or French (IHR Annex 6).',
+      message: 'Certificate languages must include English or French (IHR Annex 6).'
     });
   }
 
@@ -39,7 +36,11 @@ export function validateCertificate(cert: Certificate): ValidationReport {
 
     // VAL001 — vaccination date not in the future
     if (entry.vaccinationDate && entry.vaccinationDate > today) {
-      fired.push({ code: 'VAL001', severity: 'error', message: `${label}: vaccination date is in the future.` });
+      fired.push({
+        code: 'VAL001',
+        severity: 'error',
+        message: `${label}: vaccination date is in the future.`
+      });
     }
 
     // VAL002 — validity start >= vaccination date
@@ -48,7 +49,11 @@ export function validateCertificate(cert: Certificate): ValidationReport {
       entry.validityStartsOn &&
       entry.validityStartsOn < entry.vaccinationDate
     ) {
-      fired.push({ code: 'VAL002', severity: 'error', message: `${label}: validity start is before vaccination date.` });
+      fired.push({
+        code: 'VAL002',
+        severity: 'error',
+        message: `${label}: validity start is before vaccination date.`
+      });
     }
 
     // VAL003 — yellow-fever validity start = vaccination + 10 days
@@ -58,7 +63,7 @@ export function validateCertificate(cert: Certificate): ValidationReport {
         fired.push({
           code: 'VAL003',
           severity: 'error',
-          message: `${label}: yellow-fever validity start must equal vaccination date + 10 days.`,
+          message: `${label}: yellow-fever validity start must equal vaccination date + 10 days.`
         });
       }
     }
@@ -72,13 +77,17 @@ export function validateCertificate(cert: Certificate): ValidationReport {
       fired.push({
         code: 'VAL004',
         severity: 'warning',
-        message: `${label}: yellow-fever validity end overridden to lifetime per 2016 IHR amendment.`,
+        message: `${label}: yellow-fever validity end overridden to lifetime per 2016 IHR amendment.`
       });
     }
 
     // VAL005 — manufacturer + batch required
     if (!entry.manufacturer || !entry.batchNumber) {
-      fired.push({ code: 'VAL005', severity: 'error', message: `${label}: manufacturer and batch number are required.` });
+      fired.push({
+        code: 'VAL005',
+        severity: 'error',
+        message: `${label}: manufacturer and batch number are required.`
+      });
     }
 
     // VAL006 — clinician signature must be present
@@ -86,13 +95,17 @@ export function validateCertificate(cert: Certificate): ValidationReport {
       fired.push({
         code: 'VAL006',
         severity: 'error',
-        message: `${label}: handwritten clinician signature is required (stamps are not acceptable).`,
+        message: `${label}: handwritten clinician signature is required (stamps are not acceptable).`
       });
     }
 
     // VAL007 — centre stamp required
     if (!entry.centreStampImageDataUrl && entry.centreStampApplied !== 'yes') {
-      fired.push({ code: 'VAL007', severity: 'error', message: `${label}: official centre stamp is required.` });
+      fired.push({
+        code: 'VAL007',
+        severity: 'error',
+        message: `${label}: official centre stamp is required.`
+      });
     }
 
     // VAL008 / VAL009 — yellow-fever age window
@@ -102,14 +115,14 @@ export function validateCertificate(cert: Certificate): ValidationReport {
         fired.push({
           code: 'VAL008',
           severity: 'warning',
-          message: `${label}: vaccinee is younger than 9 months; yellow-fever vaccination is contraindicated.`,
+          message: `${label}: vaccinee is younger than 9 months; yellow-fever vaccination is contraindicated.`
         });
       }
       if (months / 12 > 60) {
         fired.push({
           code: 'VAL009',
           severity: 'warning',
-          message: `${label}: vaccinee is older than 60 years; yellow-fever vaccination needs clinician review.`,
+          message: `${label}: vaccinee is older than 60 years; yellow-fever vaccination needs clinician review.`
         });
       }
     }
@@ -117,7 +130,10 @@ export function validateCertificate(cert: Certificate): ValidationReport {
     perEntry.push({
       entryIndex: entry.entryIndex,
       validFrom: entry.validityStartsOn,
-      validUntil: entry.validityIsLifetime === 'yes' || !entry.validityEndsOn ? 'lifetime' : entry.validityEndsOn,
+      validUntil:
+        entry.validityIsLifetime === 'yes' || !entry.validityEndsOn
+          ? 'lifetime'
+          : entry.validityEndsOn
     });
   }
 
@@ -126,7 +142,8 @@ export function validateCertificate(cert: Certificate): ValidationReport {
     fired.push({
       code: 'VAL010',
       severity: 'warning',
-      message: 'Vaccinee declared pregnancy or breastfeeding; yellow-fever vaccination is contraindicated.',
+      message:
+        'Vaccinee declared pregnancy or breastfeeding; yellow-fever vaccination is contraindicated.'
     });
   }
   // VAL011 — declared immunosuppression
@@ -134,7 +151,7 @@ export function validateCertificate(cert: Certificate): ValidationReport {
     fired.push({
       code: 'VAL011',
       severity: 'warning',
-      message: 'Vaccinee declared immunosuppression; yellow-fever vaccination is contraindicated.',
+      message: 'Vaccinee declared immunosuppression; yellow-fever vaccination is contraindicated.'
     });
   }
 
@@ -142,6 +159,6 @@ export function validateCertificate(cert: Certificate): ValidationReport {
     validityComputedAt: new Date().toISOString(),
     overallValid: fired.every((r) => r.severity !== 'error'),
     firedRules: fired,
-    perEntryValidity: perEntry,
+    perEntryValidity: perEntry
   };
 }

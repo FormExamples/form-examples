@@ -7,59 +7,59 @@ import type { CrossMatchRequest } from './types';
  * from the HTML front-end's `emptyRequest()` source of truth.
  */
 export function createDefaultRequest(): CrossMatchRequest {
-	return {
-		clinician: {
-			clinicianName: '',
-			clinicianRole: '',
-			registrationBody: '',
-			registrationNumber: '',
-			requesterContact: '',
-			supervisingConsultant: '',
-			siteName: '',
-			referralDate: ''
-		},
-		patient: {
-			firstName: '',
-			lastName: '',
-			dateOfBirth: '',
-			nhsNumber: '',
-			positivePatientIdConfirmed: false
-		},
-		request: {
-			requestType: '',
-			component: '',
-			unitsRequired: null,
-			requestedByDate: '',
-			requiredByDatetime: ''
-		},
-		indication: {
-			primaryIndication: '',
-			clinicalDetails: '',
-			currentHaemoglobin: null,
-			currentPlatelets: null,
-			acuteCoronarySyndrome: false
-		},
-		history: {
-			patientBloodGroup: '',
-			knownAntibodies: false,
-			antibodyDetail: '',
-			previousTransfusion: false,
-			previousTransfusionReaction: false,
-			pregnant: false
-		},
-		sample: {
-			sampleCollected: '',
-			collectionDatetime: '',
-			twoSampleRuleMet: false,
-			labellingCheckComplete: false
-		},
-		triage: {
-			urgency: '',
-			massiveHaemorrhage: false,
-			activeUncontrolledBleeding: false,
-			haemodynamicallyUnstable: false,
-			setting: '',
-			notes: ''
-		}
-	};
+  return {
+    clinician: {
+      clinicianName: '',
+      clinicianRole: '',
+      registrationBody: '',
+      registrationNumber: '',
+      requesterContact: '',
+      supervisingConsultant: '',
+      siteName: '',
+      referralDate: ''
+    },
+    patient: {
+      firstName: '',
+      lastName: '',
+      dateOfBirth: '',
+      nhsNumber: '',
+      positivePatientIdConfirmed: false
+    },
+    request: {
+      requestType: '',
+      component: '',
+      unitsRequired: null,
+      requestedByDate: '',
+      requiredByDatetime: ''
+    },
+    indication: {
+      primaryIndication: '',
+      clinicalDetails: '',
+      currentHaemoglobin: null,
+      currentPlatelets: null,
+      acuteCoronarySyndrome: false
+    },
+    history: {
+      patientBloodGroup: '',
+      knownAntibodies: false,
+      antibodyDetail: '',
+      previousTransfusion: false,
+      previousTransfusionReaction: false,
+      pregnant: false
+    },
+    sample: {
+      sampleCollected: '',
+      collectionDatetime: '',
+      twoSampleRuleMet: false,
+      labellingCheckComplete: false
+    },
+    triage: {
+      urgency: '',
+      massiveHaemorrhage: false,
+      activeUncontrolledBleeding: false,
+      haemodynamicallyUnstable: false,
+      setting: '',
+      notes: ''
+    }
+  };
 }

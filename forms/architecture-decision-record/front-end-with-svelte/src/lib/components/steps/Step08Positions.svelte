@@ -11,7 +11,9 @@
   <div class="grid gap-3">
     {#each store.data.positions as position, i (i)}
       <div
-        class="border rounded p-3 {position.isChosen ? 'bg-primary/10 border-primary' : 'bg-base-200 border-base-300'}"
+        class="border rounded p-3 {position.isChosen
+          ? 'bg-primary/10 border-primary'
+          : 'bg-base-200 border-base-300'}"
       >
         <div class="flex justify-between items-center mb-2">
           <span class="font-medium text-sm">Position {i + 1}</span>
@@ -31,19 +33,32 @@
           </label>
           <label class="block">
             <span class="text-sm text-base-content">Model or diagram URL</span>
-            <input type="url" class="w-full border rounded px-2 py-1" bind:value={position.modelOrDiagramUrl} />
+            <input
+              type="url"
+              class="w-full border rounded px-2 py-1"
+              bind:value={position.modelOrDiagramUrl}
+            />
           </label>
           <label class="block md:col-span-2">
             <span class="text-sm text-base-content">Description</span>
-            <textarea class="w-full border rounded px-2 py-1 font-mono text-sm" rows="3" bind:value={position.description}></textarea>
+            <textarea
+              class="w-full border rounded px-2 py-1 font-mono text-sm"
+              rows="3"
+              bind:value={position.description}></textarea>
           </label>
           <label class="block">
             <span class="text-sm text-base-content">Pros (one per line)</span>
-            <textarea class="w-full border rounded px-2 py-1 font-mono text-sm" rows="3" bind:value={position.pros}></textarea>
+            <textarea
+              class="w-full border rounded px-2 py-1 font-mono text-sm"
+              rows="3"
+              bind:value={position.pros}></textarea>
           </label>
           <label class="block">
             <span class="text-sm text-base-content">Cons (one per line)</span>
-            <textarea class="w-full border rounded px-2 py-1 font-mono text-sm" rows="3" bind:value={position.cons}></textarea>
+            <textarea
+              class="w-full border rounded px-2 py-1 font-mono text-sm"
+              rows="3"
+              bind:value={position.cons}></textarea>
           </label>
           <label class="block md:col-span-2 flex items-center gap-2">
             <input

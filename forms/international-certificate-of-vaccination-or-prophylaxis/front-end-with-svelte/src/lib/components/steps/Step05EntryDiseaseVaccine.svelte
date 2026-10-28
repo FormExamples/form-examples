@@ -54,7 +54,13 @@
   </div>
   <div class="field">
     <label class="label" for="doseValue">Dose amount</label>
-    <input id="doseValue" type="number" step="0.001" class="number-input" bind:value={e.doseAmountValue} />
+    <input
+      id="doseValue"
+      type="number"
+      step="0.001"
+      class="number-input"
+      bind:value={e.doseAmountValue}
+    />
   </div>
   <div class="field">
     <label class="label" for="doseUnit">Dose unit</label>

@@ -31,7 +31,7 @@ export interface DashboardRow {
 function build(
   reportingPeriod: Partial<HospitalDashboardMetrics['reportingPeriod']>,
   recordedValues: Record<string, number>,
-  summary: Partial<HospitalDashboardMetrics['summary']> = {},
+  summary: Partial<HospitalDashboardMetrics['summary']> = {}
 ): HospitalDashboardMetrics {
   const d = createDefaultMetrics();
   d.reportingPeriod = { ...d.reportingPeriod, ...reportingPeriod };
@@ -52,10 +52,10 @@ function complete(): HospitalDashboardMetrics {
       hospitalName: 'Aurora District Hospital',
       periodMonth: 5,
       periodYear: 2026,
-      preparedByName: 'Dr. Alice Hopper',
+      preparedByName: 'Dr. Alice Hopper'
     },
     values,
-    { overallNotes: 'All 67 metrics reported this period.' },
+    { overallNotes: 'All 67 metrics reported this period.' }
   );
 }
 
@@ -72,10 +72,13 @@ function mostlyComplete(): HospitalDashboardMetrics {
       hospitalName: 'Borealis Community Health Centre',
       periodMonth: 5,
       periodYear: 2026,
-      preparedByName: 'Bao Nguyen',
+      preparedByName: 'Bao Nguyen'
     },
     values,
-    { overallNotes: 'OVR metrics pending from quality office; radiology awaiting radiation-safety officer sign-off.' },
+    {
+      overallNotes:
+        'OVR metrics pending from quality office; radiology awaiting radiation-safety officer sign-off.'
+    }
   );
 }
 
@@ -90,9 +93,9 @@ function halfway(): HospitalDashboardMetrics {
       hospitalName: 'Cobalt General Hospital',
       periodMonth: 6,
       periodYear: 2026,
-      preparedByName: 'Carmen Diaz',
+      preparedByName: 'Carmen Diaz'
     },
-    values,
+    values
   );
 }
 
@@ -103,18 +106,46 @@ function justStarted(): HospitalDashboardMetrics {
       hospitalName: 'Dusk Regional Medical Centre',
       periodMonth: 7,
       periodYear: 2026,
-      preparedByName: 'Dmitri Volkov',
+      preparedByName: 'Dmitri Volkov'
     },
-    {},
+    {}
   );
 }
 
 /** The sample reports, keyed by stable id (used to seed the wizard). */
 export const sampleReports: SampleReport[] = [
-  { id: 'HDM-2026-0001', hospitalName: 'Aurora District Hospital', preparedByName: 'Dr. Alice Hopper', periodMonth: 5, periodYear: 2026, data: complete() },
-  { id: 'HDM-2026-0002', hospitalName: 'Borealis Community Health Centre', preparedByName: 'Bao Nguyen', periodMonth: 5, periodYear: 2026, data: mostlyComplete() },
-  { id: 'HDM-2026-0003', hospitalName: 'Cobalt General Hospital', preparedByName: 'Carmen Diaz', periodMonth: 6, periodYear: 2026, data: halfway() },
-  { id: 'HDM-2026-0004', hospitalName: 'Dusk Regional Medical Centre', preparedByName: 'Dmitri Volkov', periodMonth: 7, periodYear: 2026, data: justStarted() },
+  {
+    id: 'HDM-2026-0001',
+    hospitalName: 'Aurora District Hospital',
+    preparedByName: 'Dr. Alice Hopper',
+    periodMonth: 5,
+    periodYear: 2026,
+    data: complete()
+  },
+  {
+    id: 'HDM-2026-0002',
+    hospitalName: 'Borealis Community Health Centre',
+    preparedByName: 'Bao Nguyen',
+    periodMonth: 5,
+    periodYear: 2026,
+    data: mostlyComplete()
+  },
+  {
+    id: 'HDM-2026-0003',
+    hospitalName: 'Cobalt General Hospital',
+    preparedByName: 'Carmen Diaz',
+    periodMonth: 6,
+    periodYear: 2026,
+    data: halfway()
+  },
+  {
+    id: 'HDM-2026-0004',
+    hospitalName: 'Dusk Regional Medical Centre',
+    preparedByName: 'Dmitri Volkov',
+    periodMonth: 7,
+    periodYear: 2026,
+    data: justStarted()
+  }
 ];
 
 /** Dashboard rows derived by running the shared engine over each sample. */
@@ -128,6 +159,6 @@ export const sampleReportRows: DashboardRow[] = sampleReports.map((s) => {
     preparedByName: s.data.reportingPeriod.preparedByName,
     period: month && year ? `${String(month).padStart(2, '0')}/${year}` : '—',
     reportedCount: result.reportedCount,
-    totalCount: result.totalCount,
+    totalCount: result.totalCount
   };
 });

@@ -29,28 +29,28 @@ export const SEVERE_LOW = 1.9;
  * corrected calcium value. Boundaries 2.20 and 2.60 are inclusive-to-normal.
  */
 export const classificationRules: ClassificationRule[] = [
-	{
-		id: 'R-CLASSIFY-HYPOCALCAEMIA-01',
-		instrument: 'classification',
-		band: 'hypocalcaemia',
-		category: 'reference-range',
-		description: 'Corrected calcium below 2.20 mmol/L — hypocalcaemia',
-		evaluate: (c) => c < LOW
-	},
-	{
-		id: 'R-CLASSIFY-NORMAL-01',
-		instrument: 'classification',
-		band: 'normal',
-		category: 'reference-range',
-		description: 'Corrected calcium within 2.20-2.60 mmol/L — normal adult reference range',
-		evaluate: (c) => c >= LOW && c <= HIGH
-	},
-	{
-		id: 'R-CLASSIFY-HYPERCALCAEMIA-01',
-		instrument: 'classification',
-		band: 'hypercalcaemia',
-		category: 'reference-range',
-		description: 'Corrected calcium above 2.60 mmol/L — hypercalcaemia',
-		evaluate: (c) => c > HIGH
-	}
+  {
+    id: 'R-CLASSIFY-HYPOCALCAEMIA-01',
+    instrument: 'classification',
+    band: 'hypocalcaemia',
+    category: 'reference-range',
+    description: 'Corrected calcium below 2.20 mmol/L — hypocalcaemia',
+    evaluate: (c) => c < LOW
+  },
+  {
+    id: 'R-CLASSIFY-NORMAL-01',
+    instrument: 'classification',
+    band: 'normal',
+    category: 'reference-range',
+    description: 'Corrected calcium within 2.20-2.60 mmol/L — normal adult reference range',
+    evaluate: (c) => c >= LOW && c <= HIGH
+  },
+  {
+    id: 'R-CLASSIFY-HYPERCALCAEMIA-01',
+    instrument: 'classification',
+    band: 'hypercalcaemia',
+    category: 'reference-range',
+    description: 'Corrected calcium above 2.60 mmol/L — hypercalcaemia',
+    evaluate: (c) => c > HIGH
+  }
 ];

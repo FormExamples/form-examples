@@ -2,7 +2,7 @@
   import { assessment } from '#lib/stores/assessment.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { DateInput, RadioGroup, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { DateInput, RadioGroup, TextInput } from '@lilydesignsystem/svelte-headless';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
   import Select from '#lib/components/ui/Select.svelte';
 
@@ -36,10 +36,24 @@
 
   <div class="field-grid">
     <Field label="Height (cm)" inputId="step-1-heightCm">
-      <NumberInput id="step-1-heightCm" label="Height (cm)" min={50} max={250} step="0.1" bind:value={d.heightCm} />
+      <NumberInput
+        id="step-1-heightCm"
+        label="Height (cm)"
+        min={50}
+        max={250}
+        step="0.1"
+        bind:value={d.heightCm}
+      />
     </Field>
     <Field label="Weight (kg)" inputId="step-1-weightKg">
-      <NumberInput id="step-1-weightKg" label="Weight (kg)" min={20} max={300} step="0.1" bind:value={d.weightKg} />
+      <NumberInput
+        id="step-1-weightKg"
+        label="Weight (kg)"
+        min={20}
+        max={300}
+        step="0.1"
+        bind:value={d.weightKg}
+      />
     </Field>
   </div>
 

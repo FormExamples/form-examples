@@ -1,21 +1,21 @@
 import type {
-	AssessmentData,
-	FiredRule,
-	GradingResult,
-	ManagementAction,
-	ResultClass
+  AssessmentData,
+  FiredRule,
+  GradingResult,
+  ManagementAction,
+  ResultClass
 } from './types';
 import {
-	DEFAULT_THRESHOLD,
-	INADEQUATE_SAMPLE,
-	classificationRules,
-	type BranchKey
+  DEFAULT_THRESHOLD,
+  INADEQUATE_SAMPLE,
+  classificationRules,
+  type BranchKey
 } from './bowel-fit-rules';
 import { detectFlaggedIssues } from './flagged-issues';
 
 /** True when a numeric value is present (not null/undefined/NaN). */
 export function hasNumber(n: number | null | undefined): n is number {
-	return n !== null && n !== undefined && !Number.isNaN(n);
+  return n !== null && n !== undefined && !Number.isNaN(n);
 }
 
 /**
@@ -42,64 +42,64 @@ export function hasNumber(n: number | null | undefined): n is number {
  * negative) and drives the incomplete-result flag.
  */
 export function gradeFit(data: AssessmentData): GradingResult {
-	const kitReturned = data.kit.kitReturned;
-	const sampleAdequacy = data.kit.sampleAdequacy;
-	const faecalHb = data.result.faecalHaemoglobinUgG;
-	const threshold = hasNumber(data.result.thresholdApplied)
-		? data.result.thresholdApplied
-		: DEFAULT_THRESHOLD;
-	const redFlagSymptoms = data.symptoms.redFlagSymptoms;
+  const kitReturned = data.kit.kitReturned;
+  const sampleAdequacy = data.kit.sampleAdequacy;
+  const faecalHb = data.result.faecalHaemoglobinUgG;
+  const threshold = hasNumber(data.result.thresholdApplied)
+    ? data.result.thresholdApplied
+    : DEFAULT_THRESHOLD;
+  const redFlagSymptoms = data.symptoms.redFlagSymptoms;
 
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	let resultClass: ResultClass = '';
-	let managementAction: ManagementAction = '';
-	let status: 'complete' | 'incomplete' | '' = '';
+  let resultClass: ResultClass;
+  let managementAction: ManagementAction;
+  let status: 'complete' | 'incomplete' | '';
 
-	const push = (key: BranchKey) => {
-		firedRules.push(classificationRules[key]);
-	};
+  const push = (key: BranchKey) => {
+    firedRules.push(classificationRules[key]);
+  };
 
-	// ─── Priority-ordered classification (first match wins) ─────────
-	if (kitReturned === 'no') {
-		resultClass = '';
-		managementAction = 'repeat-kit';
-		status = 'complete';
-		push('non-return');
-	} else if (INADEQUATE_SAMPLE.indexOf(sampleAdequacy) !== -1) {
-		resultClass = 'spoilt';
-		managementAction = 'repeat-kit';
-		status = 'complete';
-		push('spoilt');
-	} else if (hasNumber(faecalHb) && faecalHb >= threshold) {
-		resultClass = 'positive';
-		managementAction = 'refer-colonoscopy';
-		status = 'complete';
-		push('positive');
-	} else if (hasNumber(faecalHb) && faecalHb < threshold) {
-		resultClass = 'negative';
-		managementAction = 'routine-recall';
-		status = 'complete';
-		push('negative');
-	} else {
-		// Returned (or return unknown) and not inadequate, but no numeric result.
-		resultClass = '';
-		managementAction = 'repeat-kit';
-		status = 'incomplete';
-		push('incomplete');
-	}
+  // ─── Priority-ordered classification (first match wins) ─────────
+  if (kitReturned === 'no') {
+    resultClass = '';
+    managementAction = 'repeat-kit';
+    status = 'complete';
+    push('non-return');
+  } else if (INADEQUATE_SAMPLE.indexOf(sampleAdequacy) !== -1) {
+    resultClass = 'spoilt';
+    managementAction = 'repeat-kit';
+    status = 'complete';
+    push('spoilt');
+  } else if (hasNumber(faecalHb) && faecalHb >= threshold) {
+    resultClass = 'positive';
+    managementAction = 'refer-colonoscopy';
+    status = 'complete';
+    push('positive');
+  } else if (hasNumber(faecalHb) && faecalHb < threshold) {
+    resultClass = 'negative';
+    managementAction = 'routine-recall';
+    status = 'complete';
+    push('negative');
+  } else {
+    // Returned (or return unknown) and not inadequate, but no numeric result.
+    resultClass = '';
+    managementAction = 'repeat-kit';
+    status = 'incomplete';
+    push('incomplete');
+  }
 
-	// ─── Symptomatic pathway (independent of the numeric result) ────
-	const symptomaticPathway = redFlagSymptoms === 'yes';
-	if (symptomaticPathway) push('symptomatic');
+  // ─── Symptomatic pathway (independent of the numeric result) ────
+  const symptomaticPathway = redFlagSymptoms === 'yes';
+  if (symptomaticPathway) push('symptomatic');
 
-	return {
-		resultClass,
-		managementAction,
-		symptomaticPathway,
-		status,
-		firedRules,
-		flaggedIssues: detectFlaggedIssues(data, { resultClass, symptomaticPathway, status }),
-		timestamp: new Date().toISOString()
-	};
+  return {
+    resultClass,
+    managementAction,
+    symptomaticPathway,
+    status,
+    firedRules,
+    flaggedIssues: detectFlaggedIssues(data, { resultClass, symptomaticPathway, status }),
+    timestamp: new Date().toISOString()
+  };
 }

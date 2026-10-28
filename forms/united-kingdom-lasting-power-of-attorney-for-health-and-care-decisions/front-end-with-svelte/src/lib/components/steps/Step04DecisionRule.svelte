@@ -18,7 +18,7 @@
     options={[
       { value: 'jointly', label: 'Jointly (all must agree on every decision)' },
       { value: 'jointly-and-severally', label: 'Jointly and severally (any may decide alone)' },
-      { value: 'mixed', label: 'Jointly for some decisions and severally for others' },
+      { value: 'mixed', label: 'Jointly for some decisions and severally for others' }
     ]}
     hint="LP1H s.3, MCA 2005 s.10(4)"
   />
@@ -35,8 +35,8 @@
 
   {#if app.decisionRule === 'jointly' && app.replacementAttorneys.length > 0}
     <div class="rounded border border-warning bg-warning/10 p-4 text-sm text-warning">
-      Joint decision-making with replacement attorneys can cause the whole LPA to collapse if
-      any one attorney drops out (R-MCA-JOINT-COLLAPSE).
+      Joint decision-making with replacement attorneys can cause the whole LPA to collapse if any
+      one attorney drops out (R-MCA-JOINT-COLLAPSE).
     </div>
   {/if}
 </div>

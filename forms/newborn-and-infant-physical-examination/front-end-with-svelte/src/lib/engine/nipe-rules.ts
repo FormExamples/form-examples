@@ -16,64 +16,62 @@ export const LOW_SAT = 95;
  * `newborn_and_infant_physical_examination_grade_rule` SQL table.
  */
 export const nipeReferRules: NipeRule[] = [
-	// ─── EYES ──────────────────────────────────────────────────────
-	{
-		id: 'R-EYES-REFER-01',
-		component: 'eyes',
-		category: 'component-result',
-		description: 'Absent or abnormal red reflex, or abnormal external eye appearance',
-		evaluate: (d) =>
-			d.eyes.eyesRedReflexRight === 'absent' ||
-			d.eyes.eyesRedReflexLeft === 'absent' ||
-			d.eyes.eyesAppearance === 'abnormal'
-	},
+  // ─── EYES ──────────────────────────────────────────────────────
+  {
+    id: 'R-EYES-REFER-01',
+    component: 'eyes',
+    category: 'component-result',
+    description: 'Absent or abnormal red reflex, or abnormal external eye appearance',
+    evaluate: (d) =>
+      d.eyes.eyesRedReflexRight === 'absent' ||
+      d.eyes.eyesRedReflexLeft === 'absent' ||
+      d.eyes.eyesAppearance === 'abnormal'
+  },
 
-	// ─── HEART ─────────────────────────────────────────────────────
-	{
-		id: 'R-HEART-REFER-01',
-		component: 'heart',
-		category: 'component-result',
-		description:
-			'Heart murmur, weak or absent femoral pulse, central cyanosis, or oxygen saturation below 95%',
-		evaluate: (d) =>
-			d.heart.heartMurmur === 'present' ||
-			d.heart.femoralPulsesRight === 'weak' ||
-			d.heart.femoralPulsesRight === 'absent' ||
-			d.heart.femoralPulsesLeft === 'weak' ||
-			d.heart.femoralPulsesLeft === 'absent' ||
-			d.heart.centralCyanosis === 'present' ||
-			(d.heart.oxygenSaturationPreductal !== null &&
-				d.heart.oxygenSaturationPreductal < LOW_SAT) ||
-			(d.heart.oxygenSaturationPostductal !== null &&
-				d.heart.oxygenSaturationPostductal < LOW_SAT)
-	},
+  // ─── HEART ─────────────────────────────────────────────────────
+  {
+    id: 'R-HEART-REFER-01',
+    component: 'heart',
+    category: 'component-result',
+    description:
+      'Heart murmur, weak or absent femoral pulse, central cyanosis, or oxygen saturation below 95%',
+    evaluate: (d) =>
+      d.heart.heartMurmur === 'present' ||
+      d.heart.femoralPulsesRight === 'weak' ||
+      d.heart.femoralPulsesRight === 'absent' ||
+      d.heart.femoralPulsesLeft === 'weak' ||
+      d.heart.femoralPulsesLeft === 'absent' ||
+      d.heart.centralCyanosis === 'present' ||
+      (d.heart.oxygenSaturationPreductal !== null && d.heart.oxygenSaturationPreductal < LOW_SAT) ||
+      (d.heart.oxygenSaturationPostductal !== null && d.heart.oxygenSaturationPostductal < LOW_SAT)
+  },
 
-	// ─── HIPS ──────────────────────────────────────────────────────
-	{
-		id: 'R-HIPS-REFER-01',
-		component: 'hips',
-		category: 'component-result',
-		description:
-			'Positive Barlow or Ortolani, limited hip abduction, or a hip risk factor (breech or first-degree family history)',
-		evaluate: (d) =>
-			d.hips.barlowTest === 'positive' ||
-			d.hips.ortolaniTest === 'positive' ||
-			d.hips.hipAbduction === 'limited' ||
-			d.riskFactors.breechPresentation === 'yes' ||
-			d.riskFactors.familyHistoryHipProblems === 'yes'
-	},
+  // ─── HIPS ──────────────────────────────────────────────────────
+  {
+    id: 'R-HIPS-REFER-01',
+    component: 'hips',
+    category: 'component-result',
+    description:
+      'Positive Barlow or Ortolani, limited hip abduction, or a hip risk factor (breech or first-degree family history)',
+    evaluate: (d) =>
+      d.hips.barlowTest === 'positive' ||
+      d.hips.ortolaniTest === 'positive' ||
+      d.hips.hipAbduction === 'limited' ||
+      d.riskFactors.breechPresentation === 'yes' ||
+      d.riskFactors.familyHistoryHipProblems === 'yes'
+  },
 
-	// ─── TESTES (boys) ─────────────────────────────────────────────
-	{
-		id: 'R-TESTES-REFER-01',
-		component: 'testes',
-		category: 'component-result',
-		description: 'One or both testes undescended or not palpable',
-		evaluate: (d) =>
-			d.identification.sex === 'male' &&
-			(d.testes.testisRight === 'undescended' ||
-				d.testes.testisRight === 'not-palpable' ||
-				d.testes.testisLeft === 'undescended' ||
-				d.testes.testisLeft === 'not-palpable')
-	}
+  // ─── TESTES (boys) ─────────────────────────────────────────────
+  {
+    id: 'R-TESTES-REFER-01',
+    component: 'testes',
+    category: 'component-result',
+    description: 'One or both testes undescended or not palpable',
+    evaluate: (d) =>
+      d.identification.sex === 'male' &&
+      (d.testes.testisRight === 'undescended' ||
+        d.testes.testisRight === 'not-palpable' ||
+        d.testes.testisLeft === 'undescended' ||
+        d.testes.testisLeft === 'not-palpable')
+  }
 ];

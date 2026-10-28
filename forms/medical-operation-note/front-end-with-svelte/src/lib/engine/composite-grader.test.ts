@@ -153,7 +153,8 @@ describe('calculateOperationGrade', () => {
     const data = createEmptyOperationNote();
     data.safetyCountsEbl.estimatedBloodLossMl = 2000; // high-risk
     data.signOff.surgeonOverrideRisk = 'complicated';
-    data.signOff.surgeonOverrideReason = 'Bleeding from known liver capsule; controlled within 2 min';
+    data.signOff.surgeonOverrideReason =
+      'Bleeding from known liver capsule; controlled within 2 min';
     const r = calculateOperationGrade(data);
     expect(r.compositeRisk).toBe('high-risk');
     expect(r.finalRisk).toBe('complicated');
@@ -181,7 +182,9 @@ describe('calculateOperationGrade', () => {
     const data = createEmptyOperationNote();
     data.signOff.documentationGap = 'yes';
     const r = calculateOperationGrade(data);
-    expect(r.additionalFlags.some((f) => f.category === 'documentation-gap' && f.priority === 'low')).toBe(true);
+    expect(
+      r.additionalFlags.some((f) => f.category === 'documentation-gap' && f.priority === 'low')
+    ).toBe(true);
   });
 
   it('all counts agreed → countsAgreed true', () => {

@@ -18,7 +18,7 @@
     options,
     hint = '',
     required = false,
-    onchange,
+    onchange
   }: Props = $props();
 
   const id = `s-${Math.random().toString(36).slice(2, 10)}`;
@@ -28,12 +28,7 @@
   <label for={id} class="label" data-required={required || undefined}>
     {label}
   </label>
-  <select
-    {id}
-    bind:value
-    onchange={() => onchange?.()}
-    class="select"
-  >
+  <select {id} bind:value onchange={() => onchange?.()} class="select">
     <option value="">— select —</option>
     {#each options as opt (opt.value)}
       <option value={opt.value}>{opt.label}</option>

@@ -15,9 +15,9 @@ export const GRADED_CYTOLOGY = ['negative', 'borderline', 'low-grade', 'high-gra
  * guard against here).
  */
 export function notEligible(d: AssessmentData): boolean {
-	const age = d.identification.age;
-	const ageOut = age !== null && (age < MIN_AGE || age > MAX_AGE);
-	return d.eligibility.previouslyCeased === 'yes' || ageOut;
+  const age = d.identification.age;
+  const ageOut = age !== null && (age < MIN_AGE || age > MAX_AGE);
+  return d.eligibility.previouslyCeased === 'yes' || ageOut;
 }
 
 /**
@@ -33,96 +33,93 @@ export function notEligible(d: AssessmentData): boolean {
  * (rule_id, category, result_class, management_action, description).
  */
 export const classificationRules: ClassificationRule[] = [
-	// ─── 1. ELIGIBILITY GATE ───────────────────────────────────────
-	{
-		id: 'R-CEASE-NOT-ELIGIBLE-01',
-		category: 'eligibility',
-		resultClass: 'cease-not-eligible',
-		managementAction: 'cease-screening',
-		description:
-			'Age outside the routine 25-64 range, or the person has formally ceased screening — cease; no recall.',
-		evaluate: (d) => notEligible(d)
-	},
+  // ─── 1. ELIGIBILITY GATE ───────────────────────────────────────
+  {
+    id: 'R-CEASE-NOT-ELIGIBLE-01',
+    category: 'eligibility',
+    resultClass: 'cease-not-eligible',
+    managementAction: 'cease-screening',
+    description:
+      'Age outside the routine 25-64 range, or the person has formally ceased screening — cease; no recall.',
+    evaluate: (d) => notEligible(d)
+  },
 
-	// ─── 2. ADEQUACY GATE ──────────────────────────────────────────
-	{
-		id: 'R-INADEQUATE-01',
-		category: 'adequacy',
-		resultClass: 'inadequate',
-		managementAction: 'repeat-sample-3-months',
-		description:
-			'Sample inadequate / unsatisfactory — never HPV-classified; repeat in ~3 months (3 consecutive inadequate -> colposcopy).',
-		evaluate: (d) => d.adequacy.sampleAdequacy === 'inadequate'
-	},
+  // ─── 2. ADEQUACY GATE ──────────────────────────────────────────
+  {
+    id: 'R-INADEQUATE-01',
+    category: 'adequacy',
+    resultClass: 'inadequate',
+    managementAction: 'repeat-sample-3-months',
+    description:
+      'Sample inadequate / unsatisfactory — never HPV-classified; repeat in ~3 months (3 consecutive inadequate -> colposcopy).',
+    evaluate: (d) => d.adequacy.sampleAdequacy === 'inadequate'
+  },
 
-	// ─── 3. hrHPV PRIMARY — NEGATIVE ───────────────────────────────
-	{
-		id: 'R-HPV-NEGATIVE-01',
-		category: 'hpv-primary',
-		resultClass: 'hpv-negative',
-		managementAction: 'routine-recall',
-		description:
-			'hrHPV not detected on an adequate sample — return to routine recall at the age-appropriate interval.',
-		evaluate: (d) => d.hpv.hpvResult === 'negative'
-	},
+  // ─── 3. hrHPV PRIMARY — NEGATIVE ───────────────────────────────
+  {
+    id: 'R-HPV-NEGATIVE-01',
+    category: 'hpv-primary',
+    resultClass: 'hpv-negative',
+    managementAction: 'routine-recall',
+    description:
+      'hrHPV not detected on an adequate sample — return to routine recall at the age-appropriate interval.',
+    evaluate: (d) => d.hpv.hpvResult === 'negative'
+  },
 
-	// ─── 4. hrHPV POSITIVE + REFLEX CYTOLOGY NORMAL ────────────────
-	{
-		id: 'R-HPV-POSITIVE-CYTOLOGY-NORMAL-01',
-		category: 'reflex-cytology',
-		resultClass: 'hpv-positive-cytology-normal',
-		managementAction: 'early-repeat-12-months',
-		description:
-			'hrHPV detected, reflex cytology negative — early repeat HPV test at 12 months.',
-		evaluate: (d) =>
-			d.hpv.hpvResult === 'positive' && d.cytology.cytologyGrade === 'negative'
-	},
+  // ─── 4. hrHPV POSITIVE + REFLEX CYTOLOGY NORMAL ────────────────
+  {
+    id: 'R-HPV-POSITIVE-CYTOLOGY-NORMAL-01',
+    category: 'reflex-cytology',
+    resultClass: 'hpv-positive-cytology-normal',
+    managementAction: 'early-repeat-12-months',
+    description: 'hrHPV detected, reflex cytology negative — early repeat HPV test at 12 months.',
+    evaluate: (d) => d.hpv.hpvResult === 'positive' && d.cytology.cytologyGrade === 'negative'
+  },
 
-	// ─── 5. hrHPV POSITIVE + LOW-GRADE / BORDERLINE ────────────────
-	{
-		id: 'R-HPV-POSITIVE-CYTOLOGY-ABNORMAL-LOW-01',
-		category: 'reflex-cytology',
-		resultClass: 'hpv-positive-cytology-abnormal-low',
-		managementAction: 'colposcopy-referral',
-		description:
-			'hrHPV detected, borderline or low-grade dyskaryosis — routine colposcopy referral.',
-		evaluate: (d) =>
-			d.hpv.hpvResult === 'positive' &&
-			(d.cytology.cytologyGrade === 'borderline' || d.cytology.cytologyGrade === 'low-grade')
-	},
+  // ─── 5. hrHPV POSITIVE + LOW-GRADE / BORDERLINE ────────────────
+  {
+    id: 'R-HPV-POSITIVE-CYTOLOGY-ABNORMAL-LOW-01',
+    category: 'reflex-cytology',
+    resultClass: 'hpv-positive-cytology-abnormal-low',
+    managementAction: 'colposcopy-referral',
+    description:
+      'hrHPV detected, borderline or low-grade dyskaryosis — routine colposcopy referral.',
+    evaluate: (d) =>
+      d.hpv.hpvResult === 'positive' &&
+      (d.cytology.cytologyGrade === 'borderline' || d.cytology.cytologyGrade === 'low-grade')
+  },
 
-	// ─── 6. hrHPV POSITIVE + HIGH-GRADE ────────────────────────────
-	{
-		id: 'R-HPV-POSITIVE-CYTOLOGY-ABNORMAL-HIGH-01',
-		category: 'reflex-cytology',
-		resultClass: 'hpv-positive-cytology-abnormal-high',
-		managementAction: 'urgent-colposcopy-referral',
-		description:
-			'hrHPV detected, high-grade dyskaryosis / ?glandular / ?invasive — urgent colposcopy referral.',
-		evaluate: (d) =>
-			d.hpv.hpvResult === 'positive' && d.cytology.cytologyGrade === 'high-grade'
-	},
+  // ─── 6. hrHPV POSITIVE + HIGH-GRADE ────────────────────────────
+  {
+    id: 'R-HPV-POSITIVE-CYTOLOGY-ABNORMAL-HIGH-01',
+    category: 'reflex-cytology',
+    resultClass: 'hpv-positive-cytology-abnormal-high',
+    managementAction: 'urgent-colposcopy-referral',
+    description:
+      'hrHPV detected, high-grade dyskaryosis / ?glandular / ?invasive — urgent colposcopy referral.',
+    evaluate: (d) => d.hpv.hpvResult === 'positive' && d.cytology.cytologyGrade === 'high-grade'
+  },
 
-	// ─── 7. hrHPV POSITIVE + CYTOLOGY OUTSTANDING ──────────────────
-	{
-		id: 'R-HPV-POSITIVE-CYTOLOGY-PENDING-01',
-		category: 'reflex-cytology',
-		resultClass: 'hpv-positive-cytology-pending',
-		managementAction: 'awaiting-cytology',
-		description:
-			'hrHPV detected but reflex cytology not yet a graded value — awaiting reflex cytology.',
-		evaluate: (d) =>
-			d.hpv.hpvResult === 'positive' && GRADED_CYTOLOGY.indexOf(d.cytology.cytologyGrade) === -1
-	},
+  // ─── 7. hrHPV POSITIVE + CYTOLOGY OUTSTANDING ──────────────────
+  {
+    id: 'R-HPV-POSITIVE-CYTOLOGY-PENDING-01',
+    category: 'reflex-cytology',
+    resultClass: 'hpv-positive-cytology-pending',
+    managementAction: 'awaiting-cytology',
+    description:
+      'hrHPV detected but reflex cytology not yet a graded value — awaiting reflex cytology.',
+    evaluate: (d) =>
+      d.hpv.hpvResult === 'positive' && GRADED_CYTOLOGY.indexOf(d.cytology.cytologyGrade) === -1
+  },
 
-	// ─── 8. PENDING FALLBACK ───────────────────────────────────────
-	{
-		id: 'R-PENDING-01',
-		category: 'pending',
-		resultClass: 'pending',
-		managementAction: 'awaiting-result',
-		description:
-			'Adequate sample but the primary hrHPV result is not yet recorded — awaiting result.',
-		evaluate: () => true
-	}
+  // ─── 8. PENDING FALLBACK ───────────────────────────────────────
+  {
+    id: 'R-PENDING-01',
+    category: 'pending',
+    resultClass: 'pending',
+    managementAction: 'awaiting-result',
+    description:
+      'Adequate sample but the primary hrHPV result is not yet recorded — awaiting result.',
+    evaluate: () => true
+  }
 ];

@@ -11,9 +11,9 @@ import type {
   DomainStatus,
   GradingResult,
   PerioperativeOptimization,
-  Readiness,
-} from "./types";
-import { num } from "./utils";
+  Readiness
+} from './types';
+import { num } from './utils';
 import {
   DOMAIN_EVALUATORS,
   DOMAIN_ORDER,
@@ -22,29 +22,25 @@ import {
   computeFriedPhenotypeScore,
   computeMustScore,
   computeWeightLossPercent,
-  mustRisk,
-} from "./domain-rules";
-import { detectFlags } from "./flagged-issues";
-import {
-  gateDomain,
-  recommendedEarliestSurgeryDate,
-  weeksBetween,
-} from "./gating";
+  mustRisk
+} from './domain-rules';
+import { detectFlags } from './flagged-issues';
+import { gateDomain, recommendedEarliestSurgeryDate, weeksBetween } from './gating';
 
 export const READINESS_ORDER: Readiness[] = [
-  "ready",
-  "optimization-in-progress",
-  "optimization-required",
-  "defer-surgery",
+  'ready',
+  'optimization-in-progress',
+  'optimization-required',
+  'defer-surgery'
 ];
 
 /** Map a domain status onto the readiness band it implies. */
 export const STATUS_TO_READINESS: Record<DomainStatus, Readiness> = {
-  optimized: "ready",
-  "not-applicable": "ready",
-  "in-progress": "optimization-in-progress",
-  "action-required": "optimization-required",
-  "insufficient-time": "defer-surgery",
+  optimized: 'ready',
+  'not-applicable': 'ready',
+  'in-progress': 'optimization-in-progress',
+  'action-required': 'optimization-required',
+  'insufficient-time': 'defer-surgery'
 };
 
 /** Return whichever of two readiness bands is worse. */
@@ -58,12 +54,10 @@ export function worse(a: Readiness, b: Readiness): Readiness {
  * @param {object} data - the assessment data model from emptyAssessment()
  * @returns {object} the grading result
  */
-export function calculateOptimization(
-  data: PerioperativeOptimization,
-): GradingResult {
+export function calculateOptimization(data: PerioperativeOptimization): GradingResult {
   const weeksToSurgery = weeksBetween(
     data.assessment.assessmentDate,
-    data.procedure.plannedSurgeryDate,
+    data.procedure.plannedSurgeryDate
   );
   const gatingApplied = weeksToSurgery !== null;
 
@@ -80,36 +74,30 @@ export function calculateOptimization(
       interventionStarted: evaluation.started,
       ruleId: evaluation.ruleId,
       finding: evaluation.finding,
-      intervention: evaluation.intervention,
+      intervention: evaluation.intervention
     };
   });
 
   // --- Composite readiness (max-grade) --------------------------------------
-  let computedReadiness: Readiness = "ready";
+  let computedReadiness: Readiness = 'ready';
   for (const d of domains) {
-    computedReadiness = worse(
-      computedReadiness,
-      STATUS_TO_READINESS[d.status] ?? "ready",
-    );
+    computedReadiness = worse(computedReadiness, STATUS_TO_READINESS[d.status] ?? 'ready');
   }
 
   // Two findings force a deferral regardless of the time available, because
   // they are unsafe to operate on rather than merely unoptimized.
   const hb = num(data.anaemia.haemoglobinGPerL);
   const hba1c = num(data.glycaemic.hba1cMmolPerMol);
-  if (hb !== null && hb < 80) computedReadiness = "defer-surgery";
-  if (hba1c !== null && hba1c >= 69) computedReadiness = "defer-surgery";
+  if (hb !== null && hb < 80) computedReadiness = 'defer-surgery';
+  if (hba1c !== null && hba1c >= 69) computedReadiness = 'defer-surgery';
 
   // --- Clinician override -----------------------------------------------------
   // Changes the band only. Safety flags below are computed independently.
   const override = data.signoff.overrideReadiness;
-  const finalReadiness: Readiness = READINESS_ORDER.includes(
-    override as Readiness,
-  )
+  const finalReadiness: Readiness = READINESS_ORDER.includes(override as Readiness)
     ? (override as Readiness)
     : computedReadiness;
-  const overrideReason =
-    finalReadiness !== computedReadiness ? data.signoff.overrideReason : "";
+  const overrideReason = finalReadiness !== computedReadiness ? data.signoff.overrideReason : '';
 
   // --- Derived instrument scores ------------------------------------------------
   const mustScore = computeMustScore(data);
@@ -119,19 +107,16 @@ export function calculateOptimization(
     domains,
     mustScore,
     auditCScore,
-    weeksToSurgery,
+    weeksToSurgery
   });
   const fried = computeFriedPhenotypeScore(data);
 
   const counts = {
-    optimized: domains.filter(
-      (d) => d.status === "optimized" || d.status === "not-applicable",
-    ).length,
-    inProgress: domains.filter((d) => d.status === "in-progress").length,
-    actionRequired: domains.filter((d) => d.status === "action-required")
+    optimized: domains.filter((d) => d.status === 'optimized' || d.status === 'not-applicable')
       .length,
-    insufficientTime: domains.filter((d) => d.status === "insufficient-time")
-      .length,
+    inProgress: domains.filter((d) => d.status === 'in-progress').length,
+    actionRequired: domains.filter((d) => d.status === 'action-required').length,
+    insufficientTime: domains.filter((d) => d.status === 'insufficient-time').length
   };
 
   return {
@@ -152,11 +137,11 @@ export function calculateOptimization(
     computedReadiness,
     finalReadiness,
     overrideReason,
-    gateDecision: data.signoff.gateDecision as GradingResult["gateDecision"],
+    gateDecision: data.signoff.gateDecision as GradingResult['gateDecision'],
     recommendedEarliestSurgeryDate: recommendedEarliestSurgeryDate(
       domains,
-      data.procedure.plannedSurgeryDate,
+      data.procedure.plannedSurgeryDate
     ),
-    flags,
+    flags
   };
 }

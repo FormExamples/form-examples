@@ -1,9 +1,4 @@
-import type {
-  AdditionalFlag,
-  AgileChecklist,
-  Answer,
-  SectionScore,
-} from './types.js';
+import type { AdditionalFlag, AgileChecklist, Answer, SectionScore } from './types.js';
 
 const SECTION_LOW_THRESHOLD = 50;
 const SECTION_IMBALANCE_THRESHOLD = 30;
@@ -32,7 +27,8 @@ export function detectAdditionalFlags(data: AgileChecklist, ctx: Context): Addit
       section: 'teams',
       triggeringItems: [],
       description: `Teams section scored ${ctx.teams.percent.toFixed(0)}% — autonomy and finishing habits are weak.`,
-      suggestedAction: 'Run a focused retrospective on autonomy, finishing work, and decision authority.',
+      suggestedAction:
+        'Run a focused retrospective on autonomy, finishing work, and decision authority.'
     });
   }
   if (ctx.stakeholders.percent !== null && ctx.stakeholders.percent < SECTION_LOW_THRESHOLD) {
@@ -43,7 +39,8 @@ export function detectAdditionalFlags(data: AgileChecklist, ctx: Context): Addit
       section: 'stakeholders',
       triggeringItems: [],
       description: `Stakeholders section scored ${ctx.stakeholders.percent.toFixed(0)}% — sponsorship is the binding constraint.`,
-      suggestedAction: 'Brief executive sponsors on agile delegation; renegotiate explicit decision rights.',
+      suggestedAction:
+        'Brief executive sponsors on agile delegation; renegotiate explicit decision rights.'
     });
   }
   if (ctx.practices.percent !== null && ctx.practices.percent < SECTION_LOW_THRESHOLD) {
@@ -54,13 +51,14 @@ export function detectAdditionalFlags(data: AgileChecklist, ctx: Context): Addit
       section: 'practices',
       triggeringItems: [],
       description: `Practices section scored ${ctx.practices.percent.toFixed(0)}% — operating practices are working against agility.`,
-      suggestedAction: 'Address finished-over-WIP, quality-over-deadline, and blame culture as system-level changes.',
+      suggestedAction:
+        'Address finished-over-WIP, quality-over-deadline, and blame culture as system-level changes.'
     });
   }
 
   // Section imbalance (any pair > 30 points apart)
   const definedScores = [ctx.teams, ctx.stakeholders, ctx.practices].filter(
-    (s) => s.percent !== null,
+    (s) => s.percent !== null
   ) as Array<SectionScore & { percent: number }>;
   if (definedScores.length >= 2) {
     let maxSpread = 0;
@@ -68,7 +66,7 @@ export function detectAdditionalFlags(data: AgileChecklist, ctx: Context): Addit
       for (let j = i + 1; j < definedScores.length; j += 1) {
         maxSpread = Math.max(
           maxSpread,
-          Math.abs(definedScores[i].percent - definedScores[j].percent),
+          Math.abs(definedScores[i].percent - definedScores[j].percent)
         );
       }
     }
@@ -80,7 +78,8 @@ export function detectAdditionalFlags(data: AgileChecklist, ctx: Context): Addit
         section: '',
         triggeringItems: [],
         description: `Section spread is ${maxSpread.toFixed(0)} percentage points — adoption is uneven across audiences.`,
-        suggestedAction: 'Align coaching across teams, stakeholders, and practices so improvements are not undone elsewhere.',
+        suggestedAction:
+          'Align coaching across teams, stakeholders, and practices so improvements are not undone elsewhere.'
       });
     }
   }
@@ -93,8 +92,10 @@ export function detectAdditionalFlags(data: AgileChecklist, ctx: Context): Addit
       priority: 'high',
       section: '',
       triggeringItems: ['t08', 'p12'],
-      description: 'Teams wait on others (t08=no) and the organisation values WIP over finished work (p12=no).',
-      suggestedAction: 'Set explicit WIP limits and prioritise finishing in-flight work over starting new work.',
+      description:
+        'Teams wait on others (t08=no) and the organisation values WIP over finished work (p12=no).',
+      suggestedAction:
+        'Set explicit WIP limits and prioritise finishing in-flight work over starting new work.'
     });
   }
   if (isNo(data.answers.s09) && isNo(data.answers.s10)) {
@@ -104,8 +105,10 @@ export function detectAdditionalFlags(data: AgileChecklist, ctx: Context): Addit
       priority: 'high',
       section: 'stakeholders',
       triggeringItems: ['s09', 's10'],
-      description: 'Stakeholders neither support experiments (s09=no) nor tolerate failed ones (s10=no).',
-      suggestedAction: 'Negotiate a formal experiment budget with the sponsor; agree explicitly that some experiments will fail.',
+      description:
+        'Stakeholders neither support experiments (s09=no) nor tolerate failed ones (s10=no).',
+      suggestedAction:
+        'Negotiate a formal experiment budget with the sponsor; agree explicitly that some experiments will fail.'
     });
   }
   if (isNo(data.answers.t17) && isNo(data.answers.t18)) {
@@ -115,8 +118,10 @@ export function detectAdditionalFlags(data: AgileChecklist, ctx: Context): Addit
       priority: 'medium',
       section: 'teams',
       triggeringItems: ['t17', 't18'],
-      description: 'Teams neither seek (t17=no) nor improve (t18=no) skills — long-term capability is decaying.',
-      suggestedAction: 'Schedule recurring learning time and pair people deliberately on unfamiliar work.',
+      description:
+        'Teams neither seek (t17=no) nor improve (t18=no) skills — long-term capability is decaying.',
+      suggestedAction:
+        'Schedule recurring learning time and pair people deliberately on unfamiliar work.'
     });
   }
 
@@ -132,8 +137,10 @@ export function detectAdditionalFlags(data: AgileChecklist, ctx: Context): Addit
       priority: 'high',
       section: '',
       triggeringItems: psychTriggers,
-      description: 'Psychological safety is at risk — dissent, sustained authority, or blameless problem-solving is missing.',
-      suggestedAction: 'Address safety before adding rituals or processes; nothing else compounds without it.',
+      description:
+        'Psychological safety is at risk — dissent, sustained authority, or blameless problem-solving is missing.',
+      suggestedAction:
+        'Address safety before adding rituals or processes; nothing else compounds without it.'
     });
   }
 
@@ -146,7 +153,7 @@ export function detectAdditionalFlags(data: AgileChecklist, ctx: Context): Addit
       section: '',
       triggeringItems: [],
       description: `Only ${ctx.answeredCount} of 57 items answered; the composite maturity is not reportable below 30.`,
-      suggestedAction: 'Complete more items before relying on the maturity result.',
+      suggestedAction: 'Complete more items before relying on the maturity result.'
     });
   }
 

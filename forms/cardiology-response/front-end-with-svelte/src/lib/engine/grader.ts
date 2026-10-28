@@ -1,9 +1,4 @@
-import type {
-	CardiologyResponse,
-	GradingResult,
-	Recommendation,
-	FiredRule
-} from './types';
+import type { CardiologyResponse, GradingResult, Recommendation, FiredRule } from './types';
 import { classifyResponse } from './classification-rules';
 import { gradeSeverity } from './severity-rules';
 import { gradeCompleteness } from './completeness-rules';
@@ -29,58 +24,58 @@ import { detectFlags } from './flagged-issues';
  * No side effects, no network calls, no I/O.
  */
 export function calculateGrade(response: CardiologyResponse): GradingResult {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	// Axis A
-	const a = classifyResponse(response);
-	firedRules.push(...a.firedRules);
+  // Axis A
+  const a = classifyResponse(response);
+  firedRules.push(...a.firedRules);
 
-	// Axis B
-	const b = gradeSeverity(response, a.responseClassification);
-	firedRules.push(...b.firedRules);
+  // Axis B
+  const b = gradeSeverity(response, a.responseClassification);
+  firedRules.push(...b.firedRules);
 
-	// Axis C
-	const c = gradeCompleteness(response);
-	firedRules.push(...c.firedRules);
+  // Axis C
+  const c = gradeCompleteness(response);
+  firedRules.push(...c.firedRules);
 
-	// Axis D
-	const d = gradeFollowUp(response, a.responseClassification, b.severity);
-	firedRules.push(...d.firedRules);
+  // Axis D
+  const d = gradeFollowUp(response, a.responseClassification, b.severity);
+  firedRules.push(...d.firedRules);
 
-	const recommendation = deriveRecommendation(
-		a.responseClassification,
-		b.severity,
-		d.followUpUrgency
-	);
+  const recommendation = deriveRecommendation(
+    a.responseClassification,
+    b.severity,
+    d.followUpUrgency
+  );
 
-	const flags = detectFlags(response);
+  const flags = detectFlags(response);
 
-	return {
-		responseClassification: a.responseClassification,
-		severity: b.severity,
-		severityCategory: b.severityCategory,
-		completenessPercent: c.completenessPercent,
-		followUpUrgency: d.followUpUrgency,
-		targetTimeframe: d.targetTimeframe,
-		recommendedAction: d.recommendedAction,
-		recommendation,
-		firedRules,
-		flags,
-		gradedAt: new Date().toISOString()
-	};
+  return {
+    responseClassification: a.responseClassification,
+    severity: b.severity,
+    severityCategory: b.severityCategory,
+    completenessPercent: c.completenessPercent,
+    followUpUrgency: d.followUpUrgency,
+    targetTimeframe: d.targetTimeframe,
+    recommendedAction: d.recommendedAction,
+    recommendation,
+    firedRules,
+    flags,
+    gradedAt: new Date().toISOString()
+  };
 }
 
 /** Derives the overall recommendation from the graded axes. */
 function deriveRecommendation(
-	classification: string,
-	severity: string,
-	urgency: string
+  classification: string,
+  severity: string,
+  urgency: string
 ): Recommendation {
-	if (urgency === 'critical-alert') return 'urgent-review';
-	if (severity === 'major') return 'specialist-management';
-	if (classification === 'inconclusive') return 'further-investigation';
-	if (severity === 'moderate') return 'further-investigation';
-	if (severity === 'minor') return 'routine-follow-up';
-	if (classification === 'no-abnormality') return 'no-action';
-	return 'routine-follow-up';
+  if (urgency === 'critical-alert') return 'urgent-review';
+  if (severity === 'major') return 'specialist-management';
+  if (classification === 'inconclusive') return 'further-investigation';
+  if (severity === 'moderate') return 'further-investigation';
+  if (severity === 'minor') return 'routine-follow-up';
+  if (classification === 'no-abnormality') return 'no-action';
+  return 'routine-follow-up';
 }

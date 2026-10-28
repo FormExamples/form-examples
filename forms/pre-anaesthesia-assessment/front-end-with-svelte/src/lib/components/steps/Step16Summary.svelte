@@ -4,7 +4,7 @@
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
   import Select from '#lib/components/ui/Select.svelte';
-  import { TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { TextAreaInput, TextInput } from '@lilydesignsystem/svelte-headless';
 
   const r = $derived(store.result);
 
@@ -12,7 +12,7 @@
     ['discussionProcedure', 'Procedure'],
     ['discussionAnaesthetic', 'Anaesthetic'],
     ['discussionRisksBenefits', 'Risks / benefits'],
-    ['discussionAlternatives', 'Alternatives'],
+    ['discussionAlternatives', 'Alternatives']
   ] as const;
 </script>
 
@@ -32,7 +32,7 @@
     <details class="fired-rules">
       <summary>Fired rules ({r.firedRules.length})</summary>
       <ul>
-        {#each r.firedRules as f}
+        {#each r.firedRules as f (f.ruleId)}
           <li><code>{f.ruleId}</code> [{f.instrument}] — {f.description}</li>
         {/each}
       </ul>
@@ -74,7 +74,11 @@
       />
     </Field>
     <Field label="Clinician notes" class="field-span-2">
-      <TextAreaInput label="Clinician notes" rows={4} bind:value={store.data.summary.clinicianNotes} />
+      <TextAreaInput
+        label="Clinician notes"
+        rows={4}
+        bind:value={store.data.summary.clinicianNotes}
+      />
     </Field>
   </div>
 
@@ -99,7 +103,7 @@
   </div>
   <h4 class="step-subhead">Discussion held regarding</h4>
   <div class="field-grid field-grid-4">
-    {#each discussionTopics as [key, label]}
+    {#each discussionTopics as [key, label] (key)}
       <Field {label}>
         <Select {label} bind:value={store.data.summary[key]}>
           <option value="">—</option>
@@ -111,8 +115,7 @@
   </div>
 
   <p class="signoff-note">
-    By signing, the clinician confirms that the assessment above was made on
-    objective findings and that the anaesthesia plan is appropriate. Signed
-    timestamp will be added on submission.
+    By signing, the clinician confirms that the assessment above was made on objective findings and
+    that the anaesthesia plan is appropriate. Signed timestamp will be added on submission.
   </p>
 </Fieldset>

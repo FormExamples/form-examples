@@ -42,11 +42,7 @@
   const errorId = $derived(`${fieldId}-error`);
 </script>
 
-<div
-  class={`field ${className}`}
-  data-required={required || undefined}
-  {...restProps}
->
+<div class={`field ${className}`} data-required={required || undefined} {...restProps}>
   <label class="label" for={fieldId} data-required={required || undefined}>
     {label}
   </label>

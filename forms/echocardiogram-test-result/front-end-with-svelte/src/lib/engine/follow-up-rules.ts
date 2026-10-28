@@ -1,9 +1,9 @@
 import type {
-	EchocardiogramResult,
-	ResultClassification,
-	AbnormalitySeverity,
-	FollowUpUrgency,
-	FiredRule
+  EchocardiogramResult,
+  ResultClassification,
+  AbnormalitySeverity,
+  FollowUpUrgency,
+  FiredRule
 } from './types';
 import { hasCriticalFinding } from './utils';
 
@@ -16,110 +16,111 @@ import { hasCriticalFinding } from './utils';
  * rule fires.
  */
 export function gradeFollowUp(
-	r: EchocardiogramResult,
-	classification: ResultClassification,
-	severity: AbnormalitySeverity
+  r: EchocardiogramResult,
+  classification: ResultClassification,
+  severity: AbnormalitySeverity
 ): {
-	followUpUrgency: FollowUpUrgency;
-	targetTimeframe: string;
-	recommendedAction: string;
-	firedRules: FiredRule[];
+  followUpUrgency: FollowUpUrgency;
+  targetTimeframe: string;
+  recommendedAction: string;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	// ─── critical-alert: auto-escalation invariant ───
-	if (hasCriticalFinding(r) || classification === 'critical') {
-		firedRules.push({
-			ruleId: 'R-FU-CRITICAL-01',
-			axis: 'follow-up',
-			category: 'critical-result',
-			description:
-				'Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes.'
-		});
-		return {
-			followUpUrgency: 'critical-alert',
-			targetTimeframe: 'immediate',
-			recommendedAction:
-				'Communicate the critical result directly to the referrer now and document the conversation.',
-			firedRules
-		};
-	}
+  // ─── critical-alert: auto-escalation invariant ───
+  if (hasCriticalFinding(r) || classification === 'critical') {
+    firedRules.push({
+      ruleId: 'R-FU-CRITICAL-01',
+      axis: 'follow-up',
+      category: 'critical-result',
+      description:
+        'Critical finding auto-escalates follow-up urgency to critical-alert regardless of the other axes.'
+    });
+    return {
+      followUpUrgency: 'critical-alert',
+      targetTimeframe: 'immediate',
+      recommendedAction:
+        'Communicate the critical result directly to the referrer now and document the conversation.',
+      firedRules
+    };
+  }
 
-	// ─── urgent ───
-	if (severity === 'major') {
-		firedRules.push({
-			ruleId: 'R-FU-URGENT-01',
-			axis: 'follow-up',
-			category: 'major-abnormality',
-			description: 'Major abnormality present; follow-up urgency graded urgent.'
-		});
-		return {
-			followUpUrgency: 'urgent',
-			targetTimeframe: 'within 24 hours',
-			recommendedAction: 'Arrange urgent cardiology review and expedite onward referral.',
-			firedRules
-		};
-	}
+  // ─── urgent ───
+  if (severity === 'major') {
+    firedRules.push({
+      ruleId: 'R-FU-URGENT-01',
+      axis: 'follow-up',
+      category: 'major-abnormality',
+      description: 'Major abnormality present; follow-up urgency graded urgent.'
+    });
+    return {
+      followUpUrgency: 'urgent',
+      targetTimeframe: 'within 24 hours',
+      recommendedAction: 'Arrange urgent cardiology review and expedite onward referral.',
+      firedRules
+    };
+  }
 
-	// ─── recommended ───
-	if (severity === 'moderate') {
-		firedRules.push({
-			ruleId: 'R-FU-RECOMMENDED-01',
-			axis: 'follow-up',
-			category: 'moderate-abnormality',
-			description: 'Moderate abnormality present; follow-up recommended.'
-		});
-		return {
-			followUpUrgency: 'recommended',
-			targetTimeframe: 'within 6 weeks',
-			recommendedAction: 'Recommend cardiology review or surveillance echo as clinically indicated.',
-			firedRules
-		};
-	}
+  // ─── recommended ───
+  if (severity === 'moderate') {
+    firedRules.push({
+      ruleId: 'R-FU-RECOMMENDED-01',
+      axis: 'follow-up',
+      category: 'moderate-abnormality',
+      description: 'Moderate abnormality present; follow-up recommended.'
+    });
+    return {
+      followUpUrgency: 'recommended',
+      targetTimeframe: 'within 6 weeks',
+      recommendedAction:
+        'Recommend cardiology review or surveillance echo as clinically indicated.',
+      firedRules
+    };
+  }
 
-	if (classification === 'inconclusive') {
-		firedRules.push({
-			ruleId: 'R-FU-RECOMMENDED-02',
-			axis: 'follow-up',
-			category: 'inconclusive',
-			description: 'Inconclusive study; repeat or alternative imaging recommended.'
-		});
-		return {
-			followUpUrgency: 'recommended',
-			targetTimeframe: 'within 6 weeks',
-			recommendedAction:
-				'Recommend a repeat or alternative study (e.g. TOE or contrast echo) to resolve the inconclusive study.',
-			firedRules
-		};
-	}
+  if (classification === 'inconclusive') {
+    firedRules.push({
+      ruleId: 'R-FU-RECOMMENDED-02',
+      axis: 'follow-up',
+      category: 'inconclusive',
+      description: 'Inconclusive study; repeat or alternative imaging recommended.'
+    });
+    return {
+      followUpUrgency: 'recommended',
+      targetTimeframe: 'within 6 weeks',
+      recommendedAction:
+        'Recommend a repeat or alternative study (e.g. TOE or contrast echo) to resolve the inconclusive study.',
+      firedRules
+    };
+  }
 
-	if (severity === 'minor') {
-		firedRules.push({
-			ruleId: 'R-FU-RECOMMENDED-03',
-			axis: 'follow-up',
-			category: 'minor-abnormality',
-			description: 'Minor abnormality; surveillance follow-up recommended.'
-		});
-		return {
-			followUpUrgency: 'recommended',
-			targetTimeframe: 'per surveillance guidance',
-			recommendedAction:
-				'Arrange surveillance echo per the relevant valve-disease / cardiomyopathy pathway.',
-			firedRules
-		};
-	}
+  if (severity === 'minor') {
+    firedRules.push({
+      ruleId: 'R-FU-RECOMMENDED-03',
+      axis: 'follow-up',
+      category: 'minor-abnormality',
+      description: 'Minor abnormality; surveillance follow-up recommended.'
+    });
+    return {
+      followUpUrgency: 'recommended',
+      targetTimeframe: 'per surveillance guidance',
+      recommendedAction:
+        'Arrange surveillance echo per the relevant valve-disease / cardiomyopathy pathway.',
+      firedRules
+    };
+  }
 
-	// ─── routine: least-urgent band, no rule fired ───
-	firedRules.push({
-		ruleId: 'R-FU-ROUTINE-01',
-		axis: 'follow-up',
-		category: 'normal',
-		description: 'No escalation rule fired; routine follow-up only.'
-	});
-	return {
-		followUpUrgency: 'routine',
-		targetTimeframe: 'no specific follow-up',
-		recommendedAction: 'No specific echocardiographic follow-up required; manage per usual care.',
-		firedRules
-	};
+  // ─── routine: least-urgent band, no rule fired ───
+  firedRules.push({
+    ruleId: 'R-FU-ROUTINE-01',
+    axis: 'follow-up',
+    category: 'normal',
+    description: 'No escalation rule fired; routine follow-up only.'
+  });
+  return {
+    followUpUrgency: 'routine',
+    targetTimeframe: 'no specific follow-up',
+    recommendedAction: 'No specific echocardiographic follow-up required; manage per usual care.',
+    firedRules
+  };
 }

@@ -15,10 +15,7 @@ export function riskRank(r: CompositeRisk): number {
 
 const CD_ORDER: ClavienDindoGrade[] = ['0', 'I', 'II', 'IIIa', 'IIIb', 'IVa', 'IVb', 'V'];
 
-export function maxClavienDindo(
-  a: ClavienDindoGrade,
-  b: ClavienDindoGrade,
-): ClavienDindoGrade {
+export function maxClavienDindo(a: ClavienDindoGrade, b: ClavienDindoGrade): ClavienDindoGrade {
   return CD_ORDER.indexOf(a) >= CD_ORDER.indexOf(b) ? a : b;
 }
 
@@ -42,10 +39,7 @@ export function bloodLossBand(ml: number | null): BloodLossBand {
   return 'massive';
 }
 
-export function computeBmi(
-  weightKg: number | null,
-  heightCm: number | null,
-): number | null {
+export function computeBmi(weightKg: number | null, heightCm: number | null): number | null {
   if (weightKg === null || heightCm === null || heightCm <= 0) return null;
   const m = heightCm / 100;
   return Math.round((weightKg / (m * m)) * 10) / 10;
@@ -58,7 +52,7 @@ export function totalTransfusionUnits(
   prbc: number | null,
   ffp: number | null,
   plt: number | null,
-  cryo: number | null,
+  cryo: number | null
 ): number {
   return (prbc ?? 0) + (ffp ?? 0) + (plt ?? 0) + (cryo ?? 0);
 }
@@ -66,11 +60,16 @@ export function totalTransfusionUnits(
 /** Human-readable label for a composite operative-risk band. */
 export function compositeRiskLabel(r: CompositeRisk): string {
   switch (r) {
-    case 'routine': return 'Routine';
-    case 'complicated': return 'Complicated';
-    case 'high-risk': return 'High-risk';
-    case 'critical': return 'Critical';
-    default: return '—';
+    case 'routine':
+      return 'Routine';
+    case 'complicated':
+      return 'Complicated';
+    case 'high-risk':
+      return 'High-risk';
+    case 'critical':
+      return 'Critical';
+    default:
+      return '—';
   }
 }
 
@@ -81,11 +80,16 @@ export function compositeRiskLabel(r: CompositeRisk): string {
  */
 export function compositeRiskColor(r: CompositeRisk): string {
   switch (r) {
-    case 'routine': return 'bg-success text-success-content border-success';
-    case 'complicated': return 'bg-warning text-warning-content border-warning';
-    case 'high-risk': return 'bg-error text-error-content border-error';
-    case 'critical': return 'bg-error text-error-content border-error';
-    default: return 'bg-base-300 text-base-content border-base-300';
+    case 'routine':
+      return 'bg-success text-success-content border-success';
+    case 'complicated':
+      return 'bg-warning text-warning-content border-warning';
+    case 'high-risk':
+      return 'bg-error text-error-content border-error';
+    case 'critical':
+      return 'bg-error text-error-content border-error';
+    default:
+      return 'bg-base-300 text-base-content border-base-300';
   }
 }
 

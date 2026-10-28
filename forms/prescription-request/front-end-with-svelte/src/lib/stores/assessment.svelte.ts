@@ -130,7 +130,7 @@ class AssessmentStore {
   }
 
   reset() {
-  	this.hadDraftAtLoad = false;
+    this.hadDraftAtLoad = false;
     deepAssign(
       this.data as unknown as Record<string, unknown>,
       createDefaultAssessment() as unknown as Record<string, unknown>

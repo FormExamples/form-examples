@@ -11,13 +11,13 @@ export type AllergySeverity = 'mild' | 'moderate' | 'anaphylaxis' | '';
 // ──────────────────────────────────────────────
 
 export interface Demographics {
-	firstName: string;
-	lastName: string;
-	dateOfBirth: string;
-	sex: Sex;
-	weight: number | null;
-	height: number | null;
-	bmi: number | null;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  sex: Sex;
+  weight: number | null;
+  height: number | null;
+  bmi: number | null;
 }
 
 // ──────────────────────────────────────────────
@@ -25,11 +25,11 @@ export interface Demographics {
 // ──────────────────────────────────────────────
 
 export interface ChiefComplaint {
-	primaryJointComplaint: string;
-	onsetDate: string;
-	durationMonths: number | null;
-	morningStiffnessDurationMinutes: number | null;
-	symmetricInvolvement: YesNo;
+  primaryJointComplaint: string;
+  onsetDate: string;
+  durationMonths: number | null;
+  morningStiffnessDurationMinutes: number | null;
+  symmetricInvolvement: YesNo;
 }
 
 // ──────────────────────────────────────────────
@@ -37,10 +37,10 @@ export interface ChiefComplaint {
 // ──────────────────────────────────────────────
 
 export interface JointAssessment {
-	tenderJointCount28: number | null;
-	swollenJointCount28: number | null;
-	painVAS: number | null;
-	patientGlobalVAS: number | null;
+  tenderJointCount28: number | null;
+  swollenJointCount28: number | null;
+  painVAS: number | null;
+  patientGlobalVAS: number | null;
 }
 
 // ──────────────────────────────────────────────
@@ -48,13 +48,21 @@ export interface JointAssessment {
 // ──────────────────────────────────────────────
 
 export interface DiseaseHistory {
-	primaryDiagnosis: 'rheumatoid-arthritis' | 'psoriatic-arthritis' | 'ankylosing-spondylitis' | 'systemic-lupus' | 'gout' | 'osteoarthritis' | 'other' | '';
-	diagnosisDate: string;
-	diseaseDurationYears: number | null;
-	previousDMARDs: string;
-	previousBiologics: string;
-	remissionPeriods: YesNo;
-	remissionDetails: string;
+  primaryDiagnosis:
+    | 'rheumatoid-arthritis'
+    | 'psoriatic-arthritis'
+    | 'ankylosing-spondylitis'
+    | 'systemic-lupus'
+    | 'gout'
+    | 'osteoarthritis'
+    | 'other'
+    | '';
+  diagnosisDate: string;
+  diseaseDurationYears: number | null;
+  previousDMARDs: string;
+  previousBiologics: string;
+  remissionPeriods: YesNo;
+  remissionDetails: string;
 }
 
 // ──────────────────────────────────────────────
@@ -62,16 +70,16 @@ export interface DiseaseHistory {
 // ──────────────────────────────────────────────
 
 export interface ExtraArticularFeatures {
-	rheumatoidNodules: YesNo;
-	skinRash: YesNo;
-	skinRashDetails: string;
-	eyeDryness: YesNo;
-	uveitis: YesNo;
-	uveitisDetails: string;
-	interstitialLungDisease: YesNo;
-	ildDetails: string;
-	cardiovascularInvolvement: YesNo;
-	cardiovascularDetails: string;
+  rheumatoidNodules: YesNo;
+  skinRash: YesNo;
+  skinRashDetails: string;
+  eyeDryness: YesNo;
+  uveitis: YesNo;
+  uveitisDetails: string;
+  interstitialLungDisease: YesNo;
+  ildDetails: string;
+  cardiovascularInvolvement: YesNo;
+  cardiovascularDetails: string;
 }
 
 // ──────────────────────────────────────────────
@@ -79,19 +87,19 @@ export interface ExtraArticularFeatures {
 // ──────────────────────────────────────────────
 
 export interface LaboratoryResults {
-	esr: number | null;
-	crp: number | null;
-	rheumatoidFactor: YesNo;
-	antiCCP: YesNo;
-	ana: YesNo;
-	hlaB27: YesNo;
-	haemoglobin: number | null;
-	whiteBloodCellCount: number | null;
-	plateletCount: number | null;
-	creatinine: number | null;
-	egfr: number | null;
-	alt: number | null;
-	ast: number | null;
+  esr: number | null;
+  crp: number | null;
+  rheumatoidFactor: YesNo;
+  antiCCP: YesNo;
+  ana: YesNo;
+  hlaB27: YesNo;
+  haemoglobin: number | null;
+  whiteBloodCellCount: number | null;
+  plateletCount: number | null;
+  creatinine: number | null;
+  egfr: number | null;
+  alt: number | null;
+  ast: number | null;
 }
 
 // ──────────────────────────────────────────────
@@ -99,18 +107,18 @@ export interface LaboratoryResults {
 // ──────────────────────────────────────────────
 
 export interface Medication {
-	name: string;
-	dose: string;
-	frequency: string;
+  name: string;
+  dose: string;
+  frequency: string;
 }
 
 export interface CurrentMedications {
-	dmards: Medication[];
-	biologics: Medication[];
-	nsaids: Medication[];
-	steroids: Medication[];
-	painMedication: Medication[];
-	supplements: Medication[];
+  dmards: Medication[];
+  biologics: Medication[];
+  nsaids: Medication[];
+  steroids: Medication[];
+  painMedication: Medication[];
+  supplements: Medication[];
 }
 
 // ──────────────────────────────────────────────
@@ -118,14 +126,14 @@ export interface CurrentMedications {
 // ──────────────────────────────────────────────
 
 export interface Allergy {
-	allergen: string;
-	reaction: string;
-	severity: AllergySeverity;
+  allergen: string;
+  reaction: string;
+  severity: AllergySeverity;
 }
 
 export interface Allergies {
-	drugAllergies: Allergy[];
-	latexAllergy: YesNo;
+  drugAllergies: Allergy[];
+  latexAllergy: YesNo;
 }
 
 // ──────────────────────────────────────────────
@@ -133,13 +141,13 @@ export interface Allergies {
 // ──────────────────────────────────────────────
 
 export interface FunctionalAssessment {
-	haqDiScore: number | null;
-	gripStrengthLeft: number | null;
-	gripStrengthRight: number | null;
-	walkingAbility: 'independent' | 'with-aid' | 'wheelchair' | 'bedbound' | '';
-	adlLimitations: string;
-	workDisability: YesNo;
-	workDisabilityDetails: string;
+  haqDiScore: number | null;
+  gripStrengthLeft: number | null;
+  gripStrengthRight: number | null;
+  walkingAbility: 'independent' | 'with-aid' | 'wheelchair' | 'bedbound' | '';
+  adlLimitations: string;
+  workDisability: YesNo;
+  workDisabilityDetails: string;
 }
 
 // ──────────────────────────────────────────────
@@ -147,18 +155,18 @@ export interface FunctionalAssessment {
 // ──────────────────────────────────────────────
 
 export interface ComorbiditiesSocial {
-	cardiovascularRisk: YesNo;
-	cardiovascularRiskDetails: string;
-	osteoporosis: YesNo;
-	osteoporosisOnTreatment: YesNo;
-	recentInfections: YesNo;
-	recentInfectionDetails: string;
-	tuberculosisScreening: YesNo;
-	vaccinationStatusUpToDate: YesNo;
-	vaccinationDetails: string;
-	smoking: 'current' | 'ex' | 'never' | '';
-	smokingPackYears: number | null;
-	exerciseFrequency: 'none' | 'occasional' | 'regular' | 'daily' | '';
+  cardiovascularRisk: YesNo;
+  cardiovascularRiskDetails: string;
+  osteoporosis: YesNo;
+  osteoporosisOnTreatment: YesNo;
+  recentInfections: YesNo;
+  recentInfectionDetails: string;
+  tuberculosisScreening: YesNo;
+  vaccinationStatusUpToDate: YesNo;
+  vaccinationDetails: string;
+  smoking: 'current' | 'ex' | 'never' | '';
+  smokingPackYears: number | null;
+  exerciseFrequency: 'none' | 'occasional' | 'regular' | 'daily' | '';
 }
 
 // ──────────────────────────────────────────────
@@ -166,16 +174,16 @@ export interface ComorbiditiesSocial {
 // ──────────────────────────────────────────────
 
 export interface AssessmentData {
-	demographics: Demographics;
-	chiefComplaint: ChiefComplaint;
-	jointAssessment: JointAssessment;
-	diseaseHistory: DiseaseHistory;
-	extraArticularFeatures: ExtraArticularFeatures;
-	laboratoryResults: LaboratoryResults;
-	currentMedications: CurrentMedications;
-	allergies: Allergies;
-	functionalAssessment: FunctionalAssessment;
-	comorbiditiesSocial: ComorbiditiesSocial;
+  demographics: Demographics;
+  chiefComplaint: ChiefComplaint;
+  jointAssessment: JointAssessment;
+  diseaseHistory: DiseaseHistory;
+  extraArticularFeatures: ExtraArticularFeatures;
+  laboratoryResults: LaboratoryResults;
+  currentMedications: CurrentMedications;
+  allergies: Allergies;
+  functionalAssessment: FunctionalAssessment;
+  comorbiditiesSocial: ComorbiditiesSocial;
 }
 
 // ──────────────────────────────────────────────
@@ -185,31 +193,31 @@ export interface AssessmentData {
 export type DiseaseActivity = 'remission' | 'low' | 'moderate' | 'high';
 
 export interface DAS28Rule {
-	id: string;
-	category: string;
-	description: string;
-	evaluate: (data: AssessmentData) => boolean;
+  id: string;
+  category: string;
+  description: string;
+  evaluate: (data: AssessmentData) => boolean;
 }
 
 export interface FiredRule {
-	id: string;
-	category: string;
-	description: string;
+  id: string;
+  category: string;
+  description: string;
 }
 
 export interface AdditionalFlag {
-	id: string;
-	category: string;
-	message: string;
-	priority: 'high' | 'medium' | 'low';
+  id: string;
+  category: string;
+  message: string;
+  priority: 'high' | 'medium' | 'low';
 }
 
 export interface GradingResult {
-	das28Score: number | null;
-	diseaseActivity: DiseaseActivity | null;
-	firedRules: FiredRule[];
-	additionalFlags: AdditionalFlag[];
-	timestamp: string;
+  das28Score: number | null;
+  diseaseActivity: DiseaseActivity | null;
+  firedRules: FiredRule[];
+  additionalFlags: AdditionalFlag[];
+  timestamp: string;
 }
 
 // ──────────────────────────────────────────────
@@ -217,10 +225,10 @@ export interface GradingResult {
 // ──────────────────────────────────────────────
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
-	section: keyof AssessmentData;
-	isConditional?: boolean;
-	shouldShow?: (data: AssessmentData) => boolean;
+  number: number;
+  title: string;
+  shortTitle: string;
+  section: keyof AssessmentData;
+  isConditional?: boolean;
+  shouldShow?: (data: AssessmentData) => boolean;
 }

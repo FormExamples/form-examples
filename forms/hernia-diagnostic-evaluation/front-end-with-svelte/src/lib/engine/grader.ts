@@ -11,13 +11,19 @@
 // `insufficient-time` domain forces `defer-surgery`.
 
 import {
-	assessReducibility,
-	classifyHernia,
-	computeUrgency,
-	screenRedFlags
+  assessReducibility,
+  classifyHernia,
+  computeUrgency,
+  screenRedFlags
 } from './classification-rules';
 import { detectFlags } from './flagged-issues';
-import type { FiredRule, GradingResult, HerniaDiagnosticEvaluation, ManagementPlan, UrgencyBand } from './types';
+import type {
+  FiredRule,
+  GradingResult,
+  HerniaDiagnosticEvaluation,
+  ManagementPlan,
+  UrgencyBand
+} from './types';
 import { ageInYears } from './utils';
 
 export const URGENCY_ORDER: UrgencyBand[] = ['routine', 'soon', 'urgent', 'emergency'];
@@ -27,18 +33,18 @@ export const URGENCY_ORDER: UrgencyBand[] = ['routine', 'soon', 'urgent', 'emerg
  * management-plan options offered on step 13.
  */
 export function deriveRecommendation(urgency: UrgencyBand): ManagementPlan {
-	switch (urgency) {
-		case 'emergency':
-			return 'emergency-referral';
-		case 'urgent':
-			return 'urgent-referral';
-		case 'soon':
-			return 'elective-repair-referral';
-		case 'routine':
-			return 'watchful-waiting';
-		default:
-			return '';
-	}
+  switch (urgency) {
+    case 'emergency':
+      return 'emergency-referral';
+    case 'urgent':
+      return 'urgent-referral';
+    case 'soon':
+      return 'elective-repair-referral';
+    case 'routine':
+      return 'watchful-waiting';
+    default:
+      return '';
+  }
 }
 
 /**
@@ -47,67 +53,67 @@ export function deriveRecommendation(urgency: UrgencyBand): ManagementPlan {
  * computed from recorded data rather than from `Date.now()`.
  */
 export function calculateHerniaEvaluation(data: HerniaDiagnosticEvaluation): GradingResult {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	const age = ageInYears(data.patient.birthDate, data.clinician.assessmentDate);
+  const age = ageInYears(data.patient.birthDate, data.clinician.assessmentDate);
 
-	// --- Classification (step 9) ---------------------------------------------
-	const classification = classifyHernia(data);
-	firedRules.push(...classification.firedRules);
+  // --- Classification (step 9) ---------------------------------------------
+  const classification = classifyHernia(data);
+  firedRules.push(...classification.firedRules);
 
-	// --- Reducibility (step 7) -------------------------------------------------
-	const reducibility = assessReducibility(data);
-	firedRules.push(...reducibility.firedRules);
+  // --- Reducibility (step 7) -------------------------------------------------
+  const reducibility = assessReducibility(data);
+  firedRules.push(...reducibility.firedRules);
 
-	// --- Red-flag screen (step 8) -----------------------------------------------
-	const redFlag = screenRedFlags(data);
-	firedRules.push(...redFlag.firedRules);
+  // --- Red-flag screen (step 8) -----------------------------------------------
+  const redFlag = screenRedFlags(data);
+  firedRules.push(...redFlag.firedRules);
 
-	// --- Urgency band (red-flag-first) ------------------------------------------
-	const urgencyResult = computeUrgency(data, reducibility, redFlag);
-	firedRules.push(...urgencyResult.firedRules);
-	const computedUrgency = urgencyResult.urgency;
+  // --- Urgency band (red-flag-first) ------------------------------------------
+  const urgencyResult = computeUrgency(data, reducibility, redFlag);
+  firedRules.push(...urgencyResult.firedRules);
+  const computedUrgency = urgencyResult.urgency;
 
-	// --- Clinician override ------------------------------------------------------
-	// The override changes the urgency band only. Safety flags are computed
-	// independently below and are always reported.
-	const override = data.summary.overrideUrgency;
-	const finalUrgency: UrgencyBand =
-		override && URGENCY_ORDER.includes(override) ? override : computedUrgency;
-	const overrideReason = finalUrgency !== computedUrgency ? data.summary.overrideReason : '';
+  // --- Clinician override ------------------------------------------------------
+  // The override changes the urgency band only. Safety flags are computed
+  // independently below and are always reported.
+  const override = data.summary.overrideUrgency;
+  const finalUrgency: UrgencyBand =
+    override && URGENCY_ORDER.includes(override) ? override : computedUrgency;
+  const overrideReason = finalUrgency !== computedUrgency ? data.summary.overrideReason : '';
 
-	const flags = detectFlags(data, { reducibility, redFlag, age });
+  const flags = detectFlags(data, { reducibility, redFlag, age });
 
-	return {
-		herniaType: classification.herniaType,
-		herniaSubtype: classification.herniaSubtype,
-		ehsClassification: classification.ehsClassification,
-		ehsSizeGrade: classification.ehsSizeGrade,
-		reducibilityStatus: reducibility.status,
-		anyRedFlag: redFlag.anyRedFlag,
-		computedUrgency,
-		finalUrgency,
-		overrideReason,
-		recommendation: deriveRecommendation(finalUrgency),
-		firedRules,
-		flags
-	};
+  return {
+    herniaType: classification.herniaType,
+    herniaSubtype: classification.herniaSubtype,
+    ehsClassification: classification.ehsClassification,
+    ehsSizeGrade: classification.ehsSizeGrade,
+    reducibilityStatus: reducibility.status,
+    anyRedFlag: redFlag.anyRedFlag,
+    computedUrgency,
+    finalUrgency,
+    overrideReason,
+    recommendation: deriveRecommendation(finalUrgency),
+    firedRules,
+    flags
+  };
 }
 
 /** Display labels for the urgency bands. */
 export const URGENCY_LABELS: Record<UrgencyBand, string> = {
-	routine: 'Routine',
-	soon: 'Soon (elective referral)',
-	urgent: 'Urgent',
-	emergency: 'Emergency',
-	'': 'Not yet computed'
+  routine: 'Routine',
+  soon: 'Soon (elective referral)',
+  urgent: 'Urgent',
+  emergency: 'Emergency',
+  '': 'Not yet computed'
 };
 
 /** Display labels for the overall recommendation. */
 export const RECOMMENDATION_LABELS: Record<string, string> = {
-	'watchful-waiting': 'Watchful waiting',
-	'elective-repair-referral': 'Elective repair referral',
-	'urgent-referral': 'Urgent referral',
-	'emergency-referral': 'Emergency referral',
-	conservative: 'Conservative management'
+  'watchful-waiting': 'Watchful waiting',
+  'elective-repair-referral': 'Elective repair referral',
+  'urgent-referral': 'Urgent referral',
+  'emergency-referral': 'Emergency referral',
+  conservative: 'Conservative management'
 };

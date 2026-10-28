@@ -11,7 +11,9 @@
 
 <Fieldset legend="Vaccinee signature & consent">
   <div class="field">
-    <label class="label" for="patientSignature">Signature (typed name as proxy for handwritten signature)</label>
+    <label class="label" for="patientSignature"
+      >Signature (typed name as proxy for handwritten signature)</label
+    >
     <input id="patientSignature" class="text-input" bind:value={c.patient.signatureImageDataUrl} />
   </div>
   <label class="flex items-center gap-2">

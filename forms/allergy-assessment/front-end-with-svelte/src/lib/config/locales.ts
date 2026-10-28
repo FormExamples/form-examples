@@ -5,16 +5,16 @@
 
 /** A selectable UI locale: a BCP 47 tag and a human-readable label. */
 export interface LocaleOption {
-	value: string;
-	label: string;
+  value: string;
+  label: string;
 }
 
 /** Every seeded locale, in catalogue order. */
 export const LOCALE_OPTIONS: LocaleOption[] = [
-	{ value: 'en-GB', label: 'English (UK)' },
-	{ value: 'en-US', label: 'English (US)' },
-	{ value: 'cy-GB', label: 'Cymraeg' },
-	{ value: 'de-DE', label: 'Deutsch' }
+  { value: 'en-GB', label: 'English (UK)' },
+  { value: 'en-US', label: 'English (US)' },
+  { value: 'cy-GB', label: 'Cymraeg' },
+  { value: 'de-DE', label: 'Deutsch' }
 ];
 
 /** The gold-standard default locale. */

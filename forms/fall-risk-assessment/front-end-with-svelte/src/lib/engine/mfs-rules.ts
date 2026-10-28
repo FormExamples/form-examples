@@ -14,69 +14,68 @@ import type { AssessmentData, MfsItem } from './types';
 
 /** The six Morse Fall Scale items, in presentation order. */
 export const mfsItems: MfsItem[] = [
-	{
-		id: 'MFS-001',
-		field: 'historyOfFalling',
-		label: 'History of falling',
-		description:
-			'Has the patient fallen within the last 3 months, or on the current admission?',
-		options: [
-			{ score: 0, label: 'No' },
-			{ score: 25, label: 'Yes' }
-		]
-	},
-	{
-		id: 'MFS-002',
-		field: 'secondaryDiagnosis',
-		label: 'Secondary diagnosis',
-		description: 'Does the patient have more than one medical diagnosis listed on the chart?',
-		options: [
-			{ score: 0, label: 'No' },
-			{ score: 15, label: 'Yes' }
-		]
-	},
-	{
-		id: 'MFS-003',
-		field: 'ambulatoryAid',
-		label: 'Ambulatory aid',
-		description: 'What ambulatory aid does the patient use to walk?',
-		options: [
-			{ score: 0, label: 'None / bed rest / wheelchair / nurse' },
-			{ score: 15, label: 'Crutches / cane / walker' },
-			{ score: 30, label: 'Furniture (uses furniture for support)' }
-		]
-	},
-	{
-		id: 'MFS-004',
-		field: 'ivOrHeparinLock',
-		label: 'IV / heparin lock',
-		description: 'Does the patient have an intravenous line or heparin/saline lock in place?',
-		options: [
-			{ score: 0, label: 'No' },
-			{ score: 20, label: 'Yes' }
-		]
-	},
-	{
-		id: 'MFS-005',
-		field: 'gaitTransferring',
-		label: 'Gait / transferring',
-		description: 'How does the patient walk and transfer?',
-		options: [
-			{ score: 0, label: 'Normal / bed rest / immobile' },
-			{ score: 10, label: 'Weak (slow, stooped, but able)' },
-			{ score: 20, label: 'Impaired (clutches, unsteady, jerky)' }
-		]
-	},
-	{
-		id: 'MFS-006',
-		field: 'mentalStatus',
-		label: 'Mental status',
-		description: 'How does the patient assess their own ability to ambulate?',
-		options: [
-			{ score: 0, label: 'Oriented to own ability' },
-			{ score: 15, label: 'Forgets / overestimates own ability' }
-		]
-	}
+  {
+    id: 'MFS-001',
+    field: 'historyOfFalling',
+    label: 'History of falling',
+    description: 'Has the patient fallen within the last 3 months, or on the current admission?',
+    options: [
+      { score: 0, label: 'No' },
+      { score: 25, label: 'Yes' }
+    ]
+  },
+  {
+    id: 'MFS-002',
+    field: 'secondaryDiagnosis',
+    label: 'Secondary diagnosis',
+    description: 'Does the patient have more than one medical diagnosis listed on the chart?',
+    options: [
+      { score: 0, label: 'No' },
+      { score: 15, label: 'Yes' }
+    ]
+  },
+  {
+    id: 'MFS-003',
+    field: 'ambulatoryAid',
+    label: 'Ambulatory aid',
+    description: 'What ambulatory aid does the patient use to walk?',
+    options: [
+      { score: 0, label: 'None / bed rest / wheelchair / nurse' },
+      { score: 15, label: 'Crutches / cane / walker' },
+      { score: 30, label: 'Furniture (uses furniture for support)' }
+    ]
+  },
+  {
+    id: 'MFS-004',
+    field: 'ivOrHeparinLock',
+    label: 'IV / heparin lock',
+    description: 'Does the patient have an intravenous line or heparin/saline lock in place?',
+    options: [
+      { score: 0, label: 'No' },
+      { score: 20, label: 'Yes' }
+    ]
+  },
+  {
+    id: 'MFS-005',
+    field: 'gaitTransferring',
+    label: 'Gait / transferring',
+    description: 'How does the patient walk and transfer?',
+    options: [
+      { score: 0, label: 'Normal / bed rest / immobile' },
+      { score: 10, label: 'Weak (slow, stooped, but able)' },
+      { score: 20, label: 'Impaired (clutches, unsteady, jerky)' }
+    ]
+  },
+  {
+    id: 'MFS-006',
+    field: 'mentalStatus',
+    label: 'Mental status',
+    description: 'How does the patient assess their own ability to ambulate?',
+    options: [
+      { score: 0, label: 'Oriented to own ability' },
+      { score: 15, label: 'Forgets / overestimates own ability' }
+    ]
+  }
 ];
 
 // ──────────────────────────────────────────────
@@ -87,30 +86,29 @@ export const mfsItems: MfsItem[] = [
 // ──────────────────────────────────────────────
 
 export const ancillaryRules = {
-	isAnticoagulated(d: AssessmentData): boolean {
-		return d.medicationReview.anticoagulants === 'yes';
-	},
-	hasRecurrentFallsWithInjury(d: AssessmentData): boolean {
-		return d.fallHistory.recurrentFallsWithInjury === 'yes';
-	},
-	hasRecentInjuriousFall(d: AssessmentData): boolean {
-		return (
-			d.fallHistory.hasFallenInPastYear === 'yes' &&
-			d.fallHistory.mostRecentFallInjurious === 'yes'
-		);
-	},
-	hasSevereOrthostaticHypotension(d: AssessmentData): boolean {
-		return d.mobilityGait.orthostaticHypotensionSevere === 'yes';
-	},
-	hasDementia(d: AssessmentData): boolean {
-		return d.cognitive.dementiaDiagnosis === 'yes';
-	},
-	hipProtectorsAbsent(d: AssessmentData): boolean {
-		return d.environmental.hipProtectorsUsed === 'no';
-	},
-	hasPolypharmacy(d: AssessmentData): boolean {
-		// Explicit "yes" or auto-detect: 4 or more medications listed.
-		if (d.medicationReview.polypharmacy === 'yes') return true;
-		return (d.medicationReview.medications || []).length >= 4;
-	}
+  isAnticoagulated(d: AssessmentData): boolean {
+    return d.medicationReview.anticoagulants === 'yes';
+  },
+  hasRecurrentFallsWithInjury(d: AssessmentData): boolean {
+    return d.fallHistory.recurrentFallsWithInjury === 'yes';
+  },
+  hasRecentInjuriousFall(d: AssessmentData): boolean {
+    return (
+      d.fallHistory.hasFallenInPastYear === 'yes' && d.fallHistory.mostRecentFallInjurious === 'yes'
+    );
+  },
+  hasSevereOrthostaticHypotension(d: AssessmentData): boolean {
+    return d.mobilityGait.orthostaticHypotensionSevere === 'yes';
+  },
+  hasDementia(d: AssessmentData): boolean {
+    return d.cognitive.dementiaDiagnosis === 'yes';
+  },
+  hipProtectorsAbsent(d: AssessmentData): boolean {
+    return d.environmental.hipProtectorsUsed === 'no';
+  },
+  hasPolypharmacy(d: AssessmentData): boolean {
+    // Explicit "yes" or auto-detect: 4 or more medications listed.
+    if (d.medicationReview.polypharmacy === 'yes') return true;
+    return (d.medicationReview.medications || []).length >= 4;
+  }
 };

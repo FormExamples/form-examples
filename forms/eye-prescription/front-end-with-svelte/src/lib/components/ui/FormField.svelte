@@ -6,7 +6,7 @@
     label,
     hint = '',
     required = false,
-    children,
+    children
   }: {
     label: string;
     hint?: string;

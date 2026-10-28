@@ -11,8 +11,8 @@
 <div class="space-y-4">
   <p class="text-sm text-base-content/80">
     Under MCA 2005 s.11(7) the donor must choose <strong>Option A</strong> or
-    <strong>Option B</strong> on life-sustaining treatment. Without an explicit choice
-    attorneys have no authority over life-sustaining treatment.
+    <strong>Option B</strong> on life-sustaining treatment. Without an explicit choice attorneys have
+    no authority over life-sustaining treatment.
   </p>
 
   <fieldset class="space-y-3">
@@ -30,8 +30,7 @@
       <div>
         <div class="font-medium text-base-content">Option A</div>
         <p class="text-sm text-base-content/70">
-          Attorneys <em>may</em> give or refuse consent to life-sustaining treatment on the
-          donor's behalf.
+          Attorneys <em>may</em> give or refuse consent to life-sustaining treatment on the donor's behalf.
         </p>
       </div>
     </label>
@@ -48,8 +47,8 @@
       <div>
         <div class="font-medium text-base-content">Option B</div>
         <p class="text-sm text-base-content/70">
-          Attorneys do <em>not</em> have authority over life-sustaining treatment. The
-          decision falls to clinicians under MCA s.4 best-interests, or to a valid ADRT.
+          Attorneys do <em>not</em> have authority over life-sustaining treatment. The decision falls
+          to clinicians under MCA s.4 best-interests, or to a valid ADRT.
         </p>
       </div>
     </label>

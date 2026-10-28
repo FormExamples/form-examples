@@ -14,11 +14,22 @@
     bind:items={store.data.glossaryTerms}
     title="Glossary terms (max 25)"
     max={25}
-    create={() => ({ ordinal: store.data.glossaryTerms.length + 1, term: '', definition: '' })}>
+    create={() => ({ ordinal: store.data.glossaryTerms.length + 1, term: '', definition: '' })}
+  >
     {#snippet children(gt, _i)}
       <div class="grid grid-cols-2 gap-2 mb-1">
-        <input type="text" placeholder="Term" class="border rounded px-2 py-1" bind:value={gt.term} />
-        <input type="text" placeholder="Definition" class="border rounded px-2 py-1" bind:value={gt.definition} />
+        <input
+          type="text"
+          placeholder="Term"
+          class="border rounded px-2 py-1"
+          bind:value={gt.term}
+        />
+        <input
+          type="text"
+          placeholder="Definition"
+          class="border rounded px-2 py-1"
+          bind:value={gt.definition}
+        />
       </div>
     {/snippet}
   </RepeatList>
@@ -40,10 +51,16 @@
 
     <h4 class="text-sm font-semibold text-base-content/70 mb-2">Completeness by section</h4>
     <ul class="grid grid-cols-2 md:grid-cols-3 gap-1 mb-3 text-sm">
-      {#each Object.entries(result.completenessBySection) as [n, c]}
+      {#each Object.entries(result.completenessBySection) as [n, c] (n)}
         <li class="flex gap-1">
           <span class="text-base-content/60">§{n}</span>
-          <span class="capitalize font-medium {c === 'complete' ? 'text-success' : c === 'partial' ? 'text-warning' : 'text-error'}">{c}</span>
+          <span
+            class="capitalize font-medium {c === 'complete'
+              ? 'text-success'
+              : c === 'partial'
+                ? 'text-warning'
+                : 'text-error'}">{c}</span
+          >
         </li>
       {/each}
     </ul>
@@ -51,8 +68,10 @@
     {#if result.firedRules.length > 0}
       <h4 class="text-sm font-semibold text-base-content/70 mb-2">Fired rules</h4>
       <ul class="text-sm mb-3 space-y-1">
-        {#each result.firedRules as rule}
-          <li><span class="font-mono text-xs text-base-content/60">{rule.ruleId}</span> — {rule.description}</li>
+        {#each result.firedRules as rule (rule.ruleId)}
+          <li>
+            <span class="font-mono text-xs text-base-content/60">{rule.ruleId}</span> — {rule.description}
+          </li>
         {/each}
       </ul>
     {/if}
@@ -86,11 +105,17 @@
     </label>
     <label class="block md:col-span-2">
       <span class="text-sm text-base-content/80">Override reason</span>
-      <textarea rows="2" class="w-full border rounded px-2 py-1" bind:value={store.data.finalMaturityOverrideReason}></textarea>
+      <textarea
+        rows="2"
+        class="w-full border rounded px-2 py-1"
+        bind:value={store.data.finalMaturityOverrideReason}></textarea>
     </label>
     <label class="block md:col-span-2">
       <span class="text-sm text-base-content/80">Additional notes</span>
-      <textarea rows="3" class="w-full border rounded px-2 py-1" bind:value={store.data.additionalNotes}></textarea>
+      <textarea
+        rows="3"
+        class="w-full border rounded px-2 py-1"
+        bind:value={store.data.additionalNotes}></textarea>
     </label>
     <label class="block">
       <span class="text-sm text-base-content/80">Signed by</span>
@@ -98,7 +123,11 @@
     </label>
     <label class="block">
       <span class="text-sm text-base-content/80">Signed at</span>
-      <input type="datetime-local" class="w-full border rounded px-2 py-1" bind:value={store.data.signedAt} />
+      <input
+        type="datetime-local"
+        class="w-full border rounded px-2 py-1"
+        bind:value={store.data.signedAt}
+      />
     </label>
   </div>
 </section>

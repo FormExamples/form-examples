@@ -15,46 +15,45 @@ import type { CamRule } from './types';
  * still be detected by `flagged-issues.ts`.
  */
 export const camRules: CamRule[] = [
-	// ─── FEATURE 1: ACUTE ONSET AND FLUCTUATING COURSE ────────────
-	{
-		id: 'R-FEATURE-1-POSITIVE-01',
-		featureNumber: 1,
-		feature: 'acute-onset-fluctuating',
-		category: 'feature-evaluation',
-		description:
-			'Feature 1 — acute change in mental status from baseline with a fluctuating course',
-		evaluate: (d) => d.feature1.acuteOnsetFluctuating === 'present'
-	},
+  // ─── FEATURE 1: ACUTE ONSET AND FLUCTUATING COURSE ────────────
+  {
+    id: 'R-FEATURE-1-POSITIVE-01',
+    featureNumber: 1,
+    feature: 'acute-onset-fluctuating',
+    category: 'feature-evaluation',
+    description:
+      'Feature 1 — acute change in mental status from baseline with a fluctuating course',
+    evaluate: (d) => d.feature1.acuteOnsetFluctuating === 'present'
+  },
 
-	// ─── FEATURE 2: INATTENTION ───────────────────────────────────
-	{
-		id: 'R-FEATURE-2-POSITIVE-01',
-		featureNumber: 2,
-		feature: 'inattention',
-		category: 'feature-evaluation',
-		description:
-			'Feature 2 — difficulty focusing attention, confirmed by a formal attention test',
-		evaluate: (d) => d.feature2.inattention === 'present'
-	},
+  // ─── FEATURE 2: INATTENTION ───────────────────────────────────
+  {
+    id: 'R-FEATURE-2-POSITIVE-01',
+    featureNumber: 2,
+    feature: 'inattention',
+    category: 'feature-evaluation',
+    description: 'Feature 2 — difficulty focusing attention, confirmed by a formal attention test',
+    evaluate: (d) => d.feature2.inattention === 'present'
+  },
 
-	// ─── FEATURE 3: DISORGANISED THINKING ─────────────────────────
-	{
-		id: 'R-FEATURE-3-POSITIVE-01',
-		featureNumber: 3,
-		feature: 'disorganised-thinking',
-		category: 'feature-evaluation',
-		description:
-			'Feature 3 — disorganised or incoherent thinking (rambling, illogical, unpredictable switching)',
-		evaluate: (d) => d.feature3.disorganisedThinking === 'present'
-	},
+  // ─── FEATURE 3: DISORGANISED THINKING ─────────────────────────
+  {
+    id: 'R-FEATURE-3-POSITIVE-01',
+    featureNumber: 3,
+    feature: 'disorganised-thinking',
+    category: 'feature-evaluation',
+    description:
+      'Feature 3 — disorganised or incoherent thinking (rambling, illogical, unpredictable switching)',
+    evaluate: (d) => d.feature3.disorganisedThinking === 'present'
+  },
 
-	// ─── FEATURE 4: ALTERED LEVEL OF CONSCIOUSNESS ────────────────
-	{
-		id: 'R-FEATURE-4-POSITIVE-01',
-		featureNumber: 4,
-		feature: 'altered-consciousness',
-		category: 'feature-evaluation',
-		description: 'Feature 4 — level of consciousness anything other than alert',
-		evaluate: (d) => d.feature4.alteredConsciousness === 'present'
-	}
+  // ─── FEATURE 4: ALTERED LEVEL OF CONSCIOUSNESS ────────────────
+  {
+    id: 'R-FEATURE-4-POSITIVE-01',
+    featureNumber: 4,
+    feature: 'altered-consciousness',
+    category: 'feature-evaluation',
+    description: 'Feature 4 — level of consciousness anything other than alert',
+    evaluate: (d) => d.feature4.alteredConsciousness === 'present'
+  }
 ];

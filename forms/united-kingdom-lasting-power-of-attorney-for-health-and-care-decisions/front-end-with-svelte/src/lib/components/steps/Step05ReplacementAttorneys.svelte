@@ -29,14 +29,13 @@
     { value: 'sibling', label: 'Sibling' },
     { value: 'friend', label: 'Friend' },
     { value: 'professional', label: 'Professional' },
-    { value: 'other', label: 'Other' },
+    { value: 'other', label: 'Other' }
   ];
 </script>
 
 <div class="space-y-6">
   <p class="text-sm text-base-content/70">
-    0 to 4 replacement attorneys. They step in if a primary attorney is unable or unwilling
-    to act.
+    0 to 4 replacement attorneys. They step in if a primary attorney is unable or unwilling to act.
   </p>
 
   {#each reps as r, i (i)}

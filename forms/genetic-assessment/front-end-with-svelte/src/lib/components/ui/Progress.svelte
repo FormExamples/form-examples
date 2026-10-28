@@ -9,4 +9,5 @@
   }: { label: string; value?: number; max?: number; [key: string]: unknown } = $props();
 </script>
 
-<progress class={`progress ${className}`} aria-label={label} {value} {max} {...restProps}></progress>
+<progress class={`progress ${className}`} aria-label={label} {value} {max} {...restProps}
+></progress>

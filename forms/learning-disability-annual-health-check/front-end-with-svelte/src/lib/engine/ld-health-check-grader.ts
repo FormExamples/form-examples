@@ -1,9 +1,9 @@
 import type {
-	AssessmentData,
-	CompletenessStatus,
-	ComponentStatus,
-	FiredRule,
-	GradingResult
+  AssessmentData,
+  CompletenessStatus,
+  ComponentStatus,
+  FiredRule,
+  GradingResult
 } from './types';
 import { componentRules } from './ld-health-check-rules';
 import { detectFlaggedIssues } from './flagged-issues';
@@ -13,21 +13,19 @@ import { detectFlaggedIssues } from './flagged-issues';
  * per-component completed flags (spec §4).
  */
 export function computeComponentStatuses(data: AssessmentData): ComponentStatus[] {
-	return componentRules.map((rule) => ({
-		id: rule.component,
-		group: rule.group,
-		label: rule.label,
-		completed: rule.completed(data) === true
-	}));
+  return componentRules.map((rule) => ({
+    id: rule.component,
+    group: rule.group,
+    label: rule.label,
+    completed: rule.completed(data) === true
+  }));
 }
 
 /**
  * Is the Health Action Plan complete — produced AND shared (spec §4)?
  */
 export function isHealthActionPlanComplete(data: AssessmentData): boolean {
-	return (
-		data.plan.healthActionPlanProduced === 'yes' && data.plan.healthActionPlanShared === 'yes'
-	);
+  return data.plan.healthActionPlanProduced === 'yes' && data.plan.healthActionPlanShared === 'yes';
 }
 
 /**
@@ -42,62 +40,62 @@ export function isHealthActionPlanComplete(data: AssessmentData): boolean {
  * it the status is always `incomplete` even if every component was completed.
  */
 export function calculateGrade(data: AssessmentData): {
-	status: CompletenessStatus;
-	completenessPercent: number;
-	healthActionPlanComplete: boolean;
-	componentStatuses: ComponentStatus[];
-	completedCount: number;
-	firedRules: FiredRule[];
+  status: CompletenessStatus;
+  completenessPercent: number;
+  healthActionPlanComplete: boolean;
+  componentStatuses: ComponentStatus[];
+  completedCount: number;
+  firedRules: FiredRule[];
 } {
-	const componentStatuses = computeComponentStatuses(data);
-	const total = componentStatuses.length; // 18
-	const completedCount = componentStatuses.filter((c) => c.completed).length;
-	const completenessPercent = total > 0 ? Math.round((100 * completedCount) / total) : 0;
+  const componentStatuses = computeComponentStatuses(data);
+  const total = componentStatuses.length; // 18
+  const completedCount = componentStatuses.filter((c) => c.completed).length;
+  const completenessPercent = total > 0 ? Math.round((100 * completedCount) / total) : 0;
 
-	const healthActionPlanComplete = isHealthActionPlanComplete(data);
+  const healthActionPlanComplete = isHealthActionPlanComplete(data);
 
-	const status: CompletenessStatus =
-		completedCount === total && healthActionPlanComplete ? 'complete' : 'incomplete';
+  const status: CompletenessStatus =
+    completedCount === total && healthActionPlanComplete ? 'complete' : 'incomplete';
 
-	// Audit trail: one row per completed component, mirroring grade_rule.
-	const firedRules: FiredRule[] = [];
-	for (let i = 0; i < componentRules.length; i++) {
-		const rule = componentRules[i];
-		if (componentStatuses[i].completed) {
-			firedRules.push({
-				id: rule.id,
-				component: rule.component,
-				category: rule.category,
-				description: rule.description
-			});
-		}
-	}
-	firedRules.push({
-		id: 'R-COMPLETENESS-01',
-		component: 'completeness',
-		category: 'completeness',
-		description:
-			completedCount === total
-				? `All ${total} required components completed (${completenessPercent}%)`
-				: `${completedCount} of ${total} required components completed (${completenessPercent}%)`
-	});
-	firedRules.push({
-		id: 'R-HEALTH-ACTION-PLAN-01',
-		component: 'health-action-plan',
-		category: 'health-action-plan',
-		description: healthActionPlanComplete
-			? 'Health Action Plan produced and shared with the person'
-			: 'Health Action Plan not produced and shared — required for a complete check'
-	});
+  // Audit trail: one row per completed component, mirroring grade_rule.
+  const firedRules: FiredRule[] = [];
+  for (let i = 0; i < componentRules.length; i++) {
+    const rule = componentRules[i];
+    if (componentStatuses[i].completed) {
+      firedRules.push({
+        id: rule.id,
+        component: rule.component,
+        category: rule.category,
+        description: rule.description
+      });
+    }
+  }
+  firedRules.push({
+    id: 'R-COMPLETENESS-01',
+    component: 'completeness',
+    category: 'completeness',
+    description:
+      completedCount === total
+        ? `All ${total} required components completed (${completenessPercent}%)`
+        : `${completedCount} of ${total} required components completed (${completenessPercent}%)`
+  });
+  firedRules.push({
+    id: 'R-HEALTH-ACTION-PLAN-01',
+    component: 'health-action-plan',
+    category: 'health-action-plan',
+    description: healthActionPlanComplete
+      ? 'Health Action Plan produced and shared with the person'
+      : 'Health Action Plan not produced and shared — required for a complete check'
+  });
 
-	return {
-		status,
-		completenessPercent,
-		healthActionPlanComplete,
-		componentStatuses,
-		completedCount,
-		firedRules
-	};
+  return {
+    status,
+    completenessPercent,
+    healthActionPlanComplete,
+    componentStatuses,
+    completedCount,
+    firedRules
+  };
 }
 
 /**
@@ -115,16 +113,16 @@ export function calculateGrade(data: AssessmentData): {
  * This is the canonical engine entry point (spec §6).
  */
 export function calculateHealthCheckGrade(data: AssessmentData): GradingResult {
-	const grade = calculateGrade(data);
-	const flags = detectFlaggedIssues(data, grade.status);
+  const grade = calculateGrade(data);
+  const flags = detectFlaggedIssues(data, grade.status);
 
-	return {
-		status: grade.status,
-		completenessPercent: grade.completenessPercent,
-		healthActionPlanComplete: grade.healthActionPlanComplete,
-		componentStatuses: grade.componentStatuses,
-		firedRules: grade.firedRules,
-		flags,
-		timestamp: new Date().toISOString()
-	};
+  return {
+    status: grade.status,
+    completenessPercent: grade.completenessPercent,
+    healthActionPlanComplete: grade.healthActionPlanComplete,
+    componentStatuses: grade.componentStatuses,
+    firedRules: grade.firedRules,
+    flags,
+    timestamp: new Date().toISOString()
+  };
 }

@@ -23,70 +23,70 @@ export type ExamAttempt = 'first-attempt' | 'retest' | '';
 export type Outcome = 'pass' | 'fail' | '';
 
 export interface CandidateExaminerScenario {
-	candidateFirstName: string;
-	candidateLastName: string;
-	candidateId: string;
-	attempt: ExamAttempt;
-	examinerName: string;
-	sessionDate: string;
-	stationLocation: string;
-	scenarioSummary: string;
-	chiefComplaintGiven: string;
+  candidateFirstName: string;
+  candidateLastName: string;
+  candidateId: string;
+  attempt: ExamAttempt;
+  examinerName: string;
+  sessionDate: string;
+  stationLocation: string;
+  scenarioSummary: string;
+  chiefComplaintGiven: string;
 }
 
 export interface SceneSizeUp {
-	ppePrecautions: TriState; // critical
-	sceneSafe: TriState; // critical
-	mechanismOrNature: TriState;
-	numberOfPatients: TriState;
-	additionalResources: TriState;
-	considersCspine: TriState;
+  ppePrecautions: TriState; // critical
+  sceneSafe: TriState; // critical
+  mechanismOrNature: TriState;
+  numberOfPatients: TriState;
+  additionalResources: TriState;
+  considersCspine: TriState;
 }
 
 export interface PrimarySurvey {
-	generalImpression: TriState;
-	mentalStatus: TriState;
-	airway: TriState; // critical
-	breathing: TriState; // critical
-	oxygenTherapy: TriState; // critical
-	circulation: TriState; // critical
-	transportPriority: TriState; // critical
+  generalImpression: TriState;
+  mentalStatus: TriState;
+  airway: TriState; // critical
+  breathing: TriState; // critical
+  oxygenTherapy: TriState; // critical
+  circulation: TriState; // critical
+  transportPriority: TriState; // critical
 }
 
 export interface HistorySecondaryAssessment {
-	chiefComplaint: TriState;
-	historyOnsetOpqrst: TriState;
-	sampleSignsSymptoms: TriState;
-	sampleAllergies: TriState;
-	sampleMedications: TriState;
-	samplePastHistory: TriState;
-	sampleLastIntake: TriState;
-	sampleEvents: TriState;
-	focusedExam: TriState;
-	baselineVitalsBp: TriState;
-	baselineVitalsPulse: TriState;
-	baselineVitalsRespirations: TriState;
-	fieldImpression: TriState;
-	interventions: TriState;
+  chiefComplaint: TriState;
+  historyOnsetOpqrst: TriState;
+  sampleSignsSymptoms: TriState;
+  sampleAllergies: TriState;
+  sampleMedications: TriState;
+  samplePastHistory: TriState;
+  sampleLastIntake: TriState;
+  sampleEvents: TriState;
+  focusedExam: TriState;
+  baselineVitalsBp: TriState;
+  baselineVitalsPulse: TriState;
+  baselineVitalsRespirations: TriState;
+  fieldImpression: TriState;
+  interventions: TriState;
 }
 
 export interface Reassessment {
-	repeatsMentalStatus: TriState;
-	repeatsAirway: TriState;
-	repeatsBreathing: TriState;
-	repeatsCirculation: TriState;
-	repeatsVitals: TriState;
-	repeatsFocusedExam: TriState;
-	evaluatesInterventions: TriState;
-	transportInterventions: TriState;
-	fifteenMinuteCall: TriState; // critical
+  repeatsMentalStatus: TriState;
+  repeatsAirway: TriState;
+  repeatsBreathing: TriState;
+  repeatsCirculation: TriState;
+  repeatsVitals: TriState;
+  repeatsFocusedExam: TriState;
+  evaluatesInterventions: TriState;
+  transportInterventions: TriState;
+  fifteenMinuteCall: TriState; // critical
 }
 
 export interface CriticalCriteriaReview {
-	dangerousIntervention: TriState; // critical
-	spinalProtection: TriState; // critical
-	examinerNotes: string;
-	debriefNotes: string;
+  dangerousIntervention: TriState; // critical
+  spinalProtection: TriState; // critical
+  examinerNotes: string;
+  debriefNotes: string;
 }
 
 // ──────────────────────────────────────────────
@@ -94,12 +94,12 @@ export interface CriticalCriteriaReview {
 // ──────────────────────────────────────────────
 
 export interface AssessmentData {
-	candidateExaminerScenario: CandidateExaminerScenario;
-	sceneSizeUp: SceneSizeUp;
-	primarySurvey: PrimarySurvey;
-	historySecondaryAssessment: HistorySecondaryAssessment;
-	reassessment: Reassessment;
-	criticalCriteriaReview: CriticalCriteriaReview;
+  candidateExaminerScenario: CandidateExaminerScenario;
+  sceneSizeUp: SceneSizeUp;
+  primarySurvey: PrimarySurvey;
+  historySecondaryAssessment: HistorySecondaryAssessment;
+  reassessment: Reassessment;
+  criticalCriteriaReview: CriticalCriteriaReview;
 }
 
 // ──────────────────────────────────────────────
@@ -108,45 +108,45 @@ export interface AssessmentData {
 
 /** A single declarative checklist rule. */
 export interface PsychomotorRule {
-	id: string;
-	step: number;
-	category: string;
-	label: string;
-	critical: boolean;
-	points: number;
-	evaluate: (data: AssessmentData) => TriState;
+  id: string;
+  step: number;
+  category: string;
+  label: string;
+  critical: boolean;
+  points: number;
+  evaluate: (data: AssessmentData) => TriState;
 }
 
 /** A rule after evaluation, with the recorded status and points awarded. */
 export interface FiredRule {
-	id: string;
-	step: number;
-	category: string;
-	description: string;
-	critical: boolean;
-	points: number;
-	status: TriState;
-	pointsAwarded: number;
+  id: string;
+  step: number;
+  category: string;
+  description: string;
+  critical: boolean;
+  points: number;
+  status: TriState;
+  pointsAwarded: number;
 }
 
 export interface AdditionalFlag {
-	id: string;
-	category: string;
-	message: string;
-	priority: 'high' | 'medium' | 'low';
+  id: string;
+  category: string;
+  message: string;
+  priority: 'high' | 'medium' | 'low';
 }
 
 export interface GradingResult {
-	outcome: Outcome;
-	points: number;
-	maxPoints: number;
-	percent: number;
-	criticalFailures: FiredRule[];
-	firedRules: FiredRule[];
-	additionalFlags: AdditionalFlag[];
-	answeredCount: number;
-	totalRules: number;
-	timestamp: string;
+  outcome: Outcome;
+  points: number;
+  maxPoints: number;
+  percent: number;
+  criticalFailures: FiredRule[];
+  firedRules: FiredRule[];
+  additionalFlags: AdditionalFlag[];
+  answeredCount: number;
+  totalRules: number;
+  timestamp: string;
 }
 
 // ──────────────────────────────────────────────
@@ -154,8 +154,8 @@ export interface GradingResult {
 // ──────────────────────────────────────────────
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
-	section: keyof AssessmentData;
+  number: number;
+  title: string;
+  shortTitle: string;
+  section: keyof AssessmentData;
 }

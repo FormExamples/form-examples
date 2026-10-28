@@ -68,8 +68,10 @@ export function detectAdditionalFlags(card: WaitingListCard, todayIso: string): 
       flagId: 'F-INTERPRETER-001',
       category: 'interpreter-required',
       priority: 'medium',
-      description: 'Patient requires an interpreter but no booking is recorded in the appointment access notes.',
-      suggestedAction: 'Book the interpreter and record the booking reference in the appointment access notes.'
+      description:
+        'Patient requires an interpreter but no booking is recorded in the appointment access notes.',
+      suggestedAction:
+        'Book the interpreter and record the booking reference in the appointment access notes.'
     });
   }
 

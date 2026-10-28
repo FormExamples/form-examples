@@ -85,7 +85,7 @@ describe('buildMarkdown', () => {
     data.adr.title = 'X';
     data.notes = [
       { notedAt: '2026-05-08T10:00:00Z', notedBy: 'Lin Chen', body: 'Aligned with platform.' },
-      { notedAt: '2026-05-09T11:30:00Z', notedBy: '',         body: 'Security review pending.' }
+      { notedAt: '2026-05-09T11:30:00Z', notedBy: '', body: 'Security review pending.' }
     ];
     const md = buildMarkdown(data);
 

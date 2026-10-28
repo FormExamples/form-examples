@@ -1,14 +1,11 @@
-import { browser } from "$app/env";
-import { createDefaultAssessment } from "#lib/engine/defaults.js";
-import { calculateOptimization } from "#lib/engine/grader.js";
-import type {
-  GradingResult,
-  PerioperativeOptimization,
-} from "#lib/engine/types.js";
+import { browser } from '$app/env';
+import { createDefaultAssessment } from '#lib/engine/defaults.js';
+import { calculateOptimization } from '#lib/engine/grader.js';
+import type { GradingResult, PerioperativeOptimization } from '#lib/engine/types.js';
 
 /** localStorage draft key for a given assessment id (defaults to `new`). */
 function storageKey(id: string): string {
-  return `perioperative-optimization.front-end-with-svelte.${id || "new"}.v1`;
+  return `perioperative-optimization.front-end-with-svelte.${id || 'new'}.v1`;
 }
 
 /**
@@ -19,7 +16,7 @@ function storageKey(id: string): string {
  */
 class AssessmentStore {
   data = $state<PerioperativeOptimization>(createDefaultAssessment());
-  id = $state<string>("new");
+  id = $state<string>('new');
   submitted = $state<boolean>(false);
 
   /** The live grading result, recomputed whenever any field changes. */
@@ -37,7 +34,7 @@ class AssessmentStore {
    * user typed would reach the engine.
    */
   load(id: string): void {
-    this.id = id || "new";
+    this.id = id || 'new';
     this.submitted = false;
     const fresh = createDefaultAssessment();
 
@@ -46,11 +43,9 @@ class AssessmentStore {
         const raw = localStorage.getItem(storageKey(this.id));
         if (raw) {
           const parsed = JSON.parse(raw) as Partial<PerioperativeOptimization>;
-          for (const key of Object.keys(fresh) as Array<
-            keyof PerioperativeOptimization
-          >) {
+          for (const key of Object.keys(fresh) as Array<keyof PerioperativeOptimization>) {
             const stored = parsed[key];
-            if (stored && typeof stored === "object") {
+            if (stored && typeof stored === 'object') {
               Object.assign(fresh[key] as object, stored);
             }
           }
@@ -65,9 +60,7 @@ class AssessmentStore {
 
   /** Copy every section of `next` into the live state, preserving identity. */
   private assign(next: PerioperativeOptimization): void {
-    for (const key of Object.keys(next) as Array<
-      keyof PerioperativeOptimization
-    >) {
+    for (const key of Object.keys(next) as Array<keyof PerioperativeOptimization>) {
       Object.assign(this.data[key] as object, next[key] as object);
     }
   }

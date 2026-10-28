@@ -3,7 +3,7 @@ import type {
   CompositeRisk,
   FiredRule,
   Lpa,
-  ValidationResult,
+  ValidationResult
 } from '#lib/types.js';
 import { applyBlockerRules } from './blocker-rules.js';
 import { applyFlagRules } from './flag-rules.js';
@@ -11,10 +11,7 @@ import { computeValidityBand } from './band-rules.js';
 
 // Max-grade composite risk. Any blocker promotes to critical; otherwise
 // the worst flag wins (high > moderate > low). Default low.
-function computeCompositeRisk(
-  firedRules: FiredRule[],
-  flags: AdditionalFlag[],
-): CompositeRisk {
+function computeCompositeRisk(firedRules: FiredRule[], flags: AdditionalFlag[]): CompositeRisk {
   if (firedRules.length > 0) return 'critical';
   if (flags.some((f) => f.priority === 'high')) return 'high';
   if (flags.some((f) => f.priority === 'moderate')) return 'moderate';
@@ -30,6 +27,6 @@ export function validateLpa(lpa: Lpa): ValidationResult {
     validityBand,
     compositeRisk,
     firedRules,
-    additionalFlags,
+    additionalFlags
   };
 }

@@ -5,7 +5,7 @@
     step,
     title,
     description = '',
-    children,
+    children
   }: {
     step: number;
     title: string;

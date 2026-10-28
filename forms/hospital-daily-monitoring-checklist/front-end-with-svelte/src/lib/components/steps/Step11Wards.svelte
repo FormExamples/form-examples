@@ -19,7 +19,9 @@
 </script>
 
 <Fieldset legend="Step 11 — Section 10 — Wards (5 checkpoints)">
-  <p class="hint">Ward mattress/sheets/drugs, clinician rounds, record keeping, staffing, and patient feedback.</p>
+  <p class="hint">
+    Ward mattress/sheets/drugs, clinician rounds, record keeping, staffing, and patient feedback.
+  </p>
 
   {#each groups as group, gi (gi)}
     {#if group.subsection}

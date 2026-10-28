@@ -1,5 +1,5 @@
 import { redirect } from '@sveltejs/kit';
 
 export function GET() {
-	redirect(307, '/sleep-study-test-result/');
+  redirect(307, '/sleep-study-test-result/');
 }

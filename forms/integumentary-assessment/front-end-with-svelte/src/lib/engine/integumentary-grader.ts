@@ -13,11 +13,11 @@ import { detectAdditionalFlags } from './flagged-issues';
  *   19-23  -> No Risk
  */
 export function classifyBradenScore(score: number): RiskLevel {
-	if (score <= 9) return 'very-high-risk';
-	if (score <= 12) return 'high-risk';
-	if (score <= 14) return 'moderate-risk';
-	if (score <= 18) return 'mild-risk';
-	return 'no-risk';
+  if (score <= 9) return 'very-high-risk';
+  if (score <= 12) return 'high-risk';
+  if (score <= 14) return 'moderate-risk';
+  if (score <= 18) return 'mild-risk';
+  return 'no-risk';
 }
 
 /**
@@ -29,40 +29,40 @@ export function classifyBradenScore(score: number): RiskLevel {
  * extreme of 6.
  */
 export function calculateIntegumentaryGrade(data: AssessmentData): GradingResult {
-	const firedRules: FiredRule[] = [];
-	let totalScore = 0;
-	let answeredCount = 0;
+  const firedRules: FiredRule[] = [];
+  let totalScore = 0;
+  let answeredCount = 0;
 
-	for (const rule of bradenRules) {
-		try {
-			const score = rule.evaluate(data);
-			if (score > 0) {
-				answeredCount++;
-				totalScore += score;
-				firedRules.push({
-					id: rule.id,
-					category: rule.category,
-					description: rule.description,
-					score,
-					maxScore: rule.maxScore
-				});
-			}
-		} catch (e) {
-			// Rule evaluation failed - log for debugging but continue grading
-			console.warn(`Braden rule ${rule.id} evaluation failed:`, e);
-		}
-	}
+  for (const rule of bradenRules) {
+    try {
+      const score = rule.evaluate(data);
+      if (score > 0) {
+        answeredCount++;
+        totalScore += score;
+        firedRules.push({
+          id: rule.id,
+          category: rule.category,
+          description: rule.description,
+          score,
+          maxScore: rule.maxScore
+        });
+      }
+    } catch (e) {
+      // Rule evaluation failed - log for debugging but continue grading
+      console.warn(`Braden rule ${rule.id} evaluation failed:`, e);
+    }
+  }
 
-	const bradenScore = answeredCount === 0 ? 23 : totalScore;
-	const riskLevel = classifyBradenScore(bradenScore);
-	const additionalFlags = detectAdditionalFlags(data);
+  const bradenScore = answeredCount === 0 ? 23 : totalScore;
+  const riskLevel = classifyBradenScore(bradenScore);
+  const additionalFlags = detectAdditionalFlags(data);
 
-	return {
-		bradenScore,
-		riskLevel,
-		answeredCount,
-		firedRules,
-		additionalFlags,
-		timestamp: new Date().toISOString()
-	};
+  return {
+    bradenScore,
+    riskLevel,
+    answeredCount,
+    firedRules,
+    additionalFlags,
+    timestamp: new Date().toISOString()
+  };
 }

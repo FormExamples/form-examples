@@ -2,15 +2,14 @@
   import { assessment } from '#lib/stores/assessment.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { DateInput, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { DateInput, TextInput } from '@lilydesignsystem/svelte-headless';
 
   const rd = assessment.data.recipientDetails;
 </script>
 
 <Fieldset legend="Step 1 — Recipient Details">
   <p class="hint">
-    Enter the details of the patient acknowledging the research and planning
-    privacy notice.
+    Enter the details of the patient acknowledging the research and planning privacy notice.
   </p>
 
   <Field label="Organisation Name" inputId="rd-organisationName" required>
@@ -40,10 +39,6 @@
     />
   </Field>
   <Field label="Date of Birth (optional)" inputId="rd-recipientDob">
-    <DateInput
-      id="rd-recipientDob"
-      label="Date of Birth"
-      bind:value={rd.recipientDob}
-    />
+    <DateInput id="rd-recipientDob" label="Date of Birth" bind:value={rd.recipientDob} />
   </Field>
 </Fieldset>

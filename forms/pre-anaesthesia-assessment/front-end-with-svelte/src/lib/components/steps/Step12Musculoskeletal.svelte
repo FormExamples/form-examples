@@ -29,17 +29,17 @@
     </Field>
     <Field label="Hip ROM">
       <Select label="Hip ROM" bind:value={store.data.musculoskeletal.jointRomHip}>
-        {#each rom as v}<option value={v}>{v || '—'}</option>{/each}
+        {#each rom as v (v)}<option value={v}>{v || '—'}</option>{/each}
       </Select>
     </Field>
     <Field label="Shoulder ROM">
       <Select label="Shoulder ROM" bind:value={store.data.musculoskeletal.jointRomShoulder}>
-        {#each rom as v}<option value={v}>{v || '—'}</option>{/each}
+        {#each rom as v (v)}<option value={v}>{v || '—'}</option>{/each}
       </Select>
     </Field>
     <Field label="Neck ROM">
       <Select label="Neck ROM" bind:value={store.data.musculoskeletal.jointRomNeck}>
-        {#each rom as v}<option value={v}>{v || '—'}</option>{/each}
+        {#each rom as v (v)}<option value={v}>{v || '—'}</option>{/each}
       </Select>
     </Field>
     <Field label="Pressure ulcer risk">

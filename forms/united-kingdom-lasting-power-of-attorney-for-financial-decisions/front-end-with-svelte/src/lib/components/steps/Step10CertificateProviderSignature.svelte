@@ -15,7 +15,7 @@
   // Ensure exactly one certificate-provider signature exists at LP1F section 10.
   function ensureCpSignature() {
     let sig = store.data.signatures.find(
-      (s) => s.role === 'certificate_provider' && s.lp1fSection === 10,
+      (s) => s.role === 'certificate_provider' && s.lp1fSection === 10
     );
     if (!sig) {
       sig = {
@@ -27,7 +27,7 @@
         signedOn: '',
         signedOnBehalfFullName: '',
         isWitnessed: false,
-        witness: null,
+        witness: null
       };
       store.data.signatures.push(sig);
     }
@@ -38,15 +38,18 @@
 
   const knowsDonorOptions = [
     { value: 'friend', label: 'A friend who has known the donor personally for at least 2 years' },
-    { value: 'professional', label: 'A professional (GP, solicitor, registered social worker, etc.)' },
+    {
+      value: 'professional',
+      label: 'A professional (GP, solicitor, registered social worker, etc.)'
+    }
   ];
 </script>
 
 <section>
   <h2 class="text-xl font-semibold mb-2">Step 10 &mdash; Certificate provider (LP1F section 10)</h2>
   <p class="text-sm text-base-content/70 mb-3">
-    The certificate provider confirms the donor understands the LPA and is not under pressure
-    to make it. They must be independent of the donor and attorneys.
+    The certificate provider confirms the donor understands the LPA and is not under pressure to
+    make it. They must be independent of the donor and attorneys.
   </p>
 
   <div class="space-y-4">
@@ -67,11 +70,7 @@
     <AddressInput bind:address={cp.person.address} />
 
     <Field label="How the certificate provider knows the donor">
-      <RadioGroup
-        name="knowsDonorAs"
-        options={knowsDonorOptions}
-        bind:value={cp.knowsDonorAs}
-      />
+      <RadioGroup name="knowsDonorAs" options={knowsDonorOptions} bind:value={cp.knowsDonorAs} />
     </Field>
 
     <div class="space-y-1">

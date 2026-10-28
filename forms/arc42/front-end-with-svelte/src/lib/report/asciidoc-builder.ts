@@ -21,18 +21,38 @@ function buildIntroduction(d: Arc42Documentation): string {
   lines.push(d.introduction || '_No introduction provided._');
   lines.push('');
   lines.push('=== Business Goals\n');
-  lines.push(tableRows(['#', 'Name', 'Description'], d.businessGoals.map((g) => [String(g.ordinal), g.name, g.description])));
+  lines.push(
+    tableRows(
+      ['#', 'Name', 'Description'],
+      d.businessGoals.map((g) => [String(g.ordinal), g.name, g.description])
+    )
+  );
   lines.push('=== Quality Goals\n');
-  lines.push(tableRows(['#', 'Name', 'Priority', 'Scenario'], d.qualityGoals.map((g) => [String(g.ordinal), g.name, g.priority, g.scenario])));
+  lines.push(
+    tableRows(
+      ['#', 'Name', 'Priority', 'Scenario'],
+      d.qualityGoals.map((g) => [String(g.ordinal), g.name, g.priority, g.scenario])
+    )
+  );
   lines.push('=== Stakeholders\n');
-  lines.push(tableRows(['#', 'Name', 'Role', 'Concerns'], d.stakeholders.map((s) => [String(s.ordinal), s.name, s.role, s.concerns])));
+  lines.push(
+    tableRows(
+      ['#', 'Name', 'Role', 'Concerns'],
+      d.stakeholders.map((s) => [String(s.ordinal), s.name, s.role, s.concerns])
+    )
+  );
   return lines.join('\n');
 }
 
 function buildConstraints(d: Arc42Documentation): string {
   const lines: string[] = [];
   lines.push('== §2 Constraints\n');
-  lines.push(tableRows(['#', 'Kind', 'Name', 'Description'], d.constraintItems.map((c) => [String(c.ordinal), c.kind, c.name, c.description])));
+  lines.push(
+    tableRows(
+      ['#', 'Kind', 'Name', 'Description'],
+      d.constraintItems.map((c) => [String(c.ordinal), c.kind, c.name, c.description])
+    )
+  );
   return lines.join('\n');
 }
 
@@ -46,7 +66,19 @@ function buildContext(d: Arc42Documentation): string {
   lines.push(d.technicalContextDescription || '_No description provided._');
   lines.push('');
   lines.push('=== Context Partners\n');
-  lines.push(tableRows(['#', 'Kind', 'Name', 'Interface', 'Protocol', 'Direction'], d.contextPartners.map((p) => [String(p.ordinal), p.kind, p.name, p.interfaceDescription, p.protocol, p.direction])));
+  lines.push(
+    tableRows(
+      ['#', 'Kind', 'Name', 'Interface', 'Protocol', 'Direction'],
+      d.contextPartners.map((p) => [
+        String(p.ordinal),
+        p.kind,
+        p.name,
+        p.interfaceDescription,
+        p.protocol,
+        p.direction
+      ])
+    )
+  );
   return lines.join('\n');
 }
 
@@ -56,7 +88,12 @@ function buildSolutionStrategy(d: Arc42Documentation): string {
   lines.push(d.solutionStrategySummary || '_No summary provided._');
   lines.push('');
   lines.push('=== Technology Decisions\n');
-  lines.push(tableRows(['#', 'Category', 'Choice', 'Rationale'], d.technologyDecisions.map((t) => [String(t.ordinal), t.category, t.choice, t.rationale])));
+  lines.push(
+    tableRows(
+      ['#', 'Category', 'Choice', 'Rationale'],
+      d.technologyDecisions.map((t) => [String(t.ordinal), t.category, t.choice, t.rationale])
+    )
+  );
   lines.push('=== Top-Level Decomposition\n');
   lines.push(d.topLevelDecompositionSummary || '_Not described._');
   lines.push('');
@@ -75,7 +112,18 @@ function buildBuildingBlocks(d: Arc42Documentation): string {
   lines.push('== §5 Building Block View\n');
   lines.push(d.buildingBlockOverview || '_No overview provided._');
   lines.push('');
-  lines.push(tableRows(['#', 'Parent', 'Name', 'Responsibility', 'Interfaces'], d.buildingBlocks.map((b) => [String(b.ordinal), b.parentOrdinal !== null ? String(b.parentOrdinal) : '', b.name, b.responsibility, b.interfaces])));
+  lines.push(
+    tableRows(
+      ['#', 'Parent', 'Name', 'Responsibility', 'Interfaces'],
+      d.buildingBlocks.map((b) => [
+        String(b.ordinal),
+        b.parentOrdinal !== null ? String(b.parentOrdinal) : '',
+        b.name,
+        b.responsibility,
+        b.interfaces
+      ])
+    )
+  );
   return lines.join('\n');
 }
 
@@ -84,7 +132,17 @@ function buildRuntime(d: Arc42Documentation): string {
   lines.push('== §6 Runtime View\n');
   lines.push(d.runtimeOverview || '_No overview provided._');
   lines.push('');
-  lines.push(tableRows(['#', 'Name', 'Trigger', 'Steps Summary'], d.runtimeScenarios.map((r) => [String(r.ordinal), r.name, r.triggerDescription, r.stepsSummary])));
+  lines.push(
+    tableRows(
+      ['#', 'Name', 'Trigger', 'Steps Summary'],
+      d.runtimeScenarios.map((r) => [
+        String(r.ordinal),
+        r.name,
+        r.triggerDescription,
+        r.stepsSummary
+      ])
+    )
+  );
   return lines.join('\n');
 }
 
@@ -93,7 +151,12 @@ function buildDeployment(d: Arc42Documentation): string {
   lines.push('== §7 Deployment View\n');
   lines.push(d.deploymentOverview || '_No overview provided._');
   lines.push('');
-  lines.push(tableRows(['#', 'Environment', 'Node', 'Responsibility'], d.deploymentNodes.map((n) => [String(n.ordinal), n.environment, n.nodeName, n.responsibility])));
+  lines.push(
+    tableRows(
+      ['#', 'Environment', 'Node', 'Responsibility'],
+      d.deploymentNodes.map((n) => [String(n.ordinal), n.environment, n.nodeName, n.responsibility])
+    )
+  );
   return lines.join('\n');
 }
 
@@ -102,7 +165,12 @@ function buildCrosscutting(d: Arc42Documentation): string {
   lines.push('== §8 Crosscutting Concepts\n');
   lines.push(d.crosscuttingOverview || '_No overview provided._');
   lines.push('');
-  lines.push(tableRows(['#', 'Name', 'Description'], d.crosscuttingConcepts.map((c) => [String(c.ordinal), c.name, c.description])));
+  lines.push(
+    tableRows(
+      ['#', 'Name', 'Description'],
+      d.crosscuttingConcepts.map((c) => [String(c.ordinal), c.name, c.description])
+    )
+  );
   return lines.join('\n');
 }
 
@@ -133,21 +201,50 @@ function buildQuality(d: Arc42Documentation): string {
   lines.push('== §10 Quality Requirements\n');
   lines.push(d.qualityTreeSummary || '_No summary provided._');
   lines.push('');
-  lines.push(tableRows(['#', 'Source', 'Stimulus', 'Artifact', 'Response', 'Measure'], d.qualityScenarios.map((q) => [String(q.ordinal), q.source, q.stimulus, q.artifact, q.response, q.measure])));
+  lines.push(
+    tableRows(
+      ['#', 'Source', 'Stimulus', 'Artifact', 'Response', 'Measure'],
+      d.qualityScenarios.map((q) => [
+        String(q.ordinal),
+        q.source,
+        q.stimulus,
+        q.artifact,
+        q.response,
+        q.measure
+      ])
+    )
+  );
   return lines.join('\n');
 }
 
 function buildRisks(d: Arc42Documentation): string {
   const lines: string[] = [];
   lines.push('== §11 Risks & Technical Debt\n');
-  lines.push(tableRows(['#', 'Kind', 'Name', 'Probability', 'Impact', 'Mitigation'], d.riskItems.map((r) => [String(r.ordinal), r.kind, r.name, r.probability, r.impact, r.mitigation])));
+  lines.push(
+    tableRows(
+      ['#', 'Kind', 'Name', 'Probability', 'Impact', 'Mitigation'],
+      d.riskItems.map((r) => [
+        String(r.ordinal),
+        r.kind,
+        r.name,
+        r.probability,
+        r.impact,
+        r.mitigation
+      ])
+    )
+  );
   return lines.join('\n');
 }
 
 function buildGlossary(d: Arc42Documentation): string {
   const lines: string[] = [];
   lines.push('== §12 Glossary\n');
-  lines.push(tableRows(['Term', 'Definition'], d.glossaryTerms.map((g) => [g.term, g.definition])));
+  lines.push(
+    tableRows(
+      ['Term', 'Definition'],
+      d.glossaryTerms.map((g) => [g.term, g.definition])
+    )
+  );
   return lines.join('\n');
 }
 
@@ -208,6 +305,6 @@ export function buildAsciiDocBundle(d: Arc42Documentation): AsciiDocFile[] {
     { filename: '09_design_decisions.adoc', content: buildDesignDecisions(d) },
     { filename: '10_quality_requirements.adoc', content: buildQuality(d) },
     { filename: '11_technical_risks.adoc', content: buildRisks(d) },
-    { filename: '12_glossary.adoc', content: buildGlossary(d) },
+    { filename: '12_glossary.adoc', content: buildGlossary(d) }
   ];
 }

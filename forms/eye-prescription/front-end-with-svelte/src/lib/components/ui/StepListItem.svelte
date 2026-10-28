@@ -1,33 +1,33 @@
 <script lang="ts">
-	// StepListItem — Lily Svelte headless contract.
-	//
-	// Emits: <li class="step-list-item" data-status="…" aria-current="step|undefined">.
-	import type { Snippet } from 'svelte';
+  // StepListItem — Lily Svelte headless contract.
+  //
+  // Emits: <li class="step-list-item" data-status="…" aria-current="step|undefined">.
+  import type { Snippet } from 'svelte';
 
-	type Status = 'waiting' | 'in-progress' | 'finished' | 'error';
+  type Status = 'waiting' | 'in-progress' | 'finished' | 'error';
 
-	let {
-		class: className = '',
-		status = 'waiting',
-		current = false,
-		label = undefined,
-		children,
-		...restProps
-	}: {
-		status?: Status;
-		current?: boolean;
-		label?: string;
-		children: Snippet;
-		[key: string]: unknown;
-	} = $props();
+  let {
+    class: className = '',
+    status = 'waiting',
+    current = false,
+    label = undefined,
+    children,
+    ...restProps
+  }: {
+    status?: Status;
+    current?: boolean;
+    label?: string;
+    children: Snippet;
+    [key: string]: unknown;
+  } = $props();
 </script>
 
 <li
-	class={`step-list-item ${className}`}
-	data-status={status}
-	aria-current={current ? 'step' : undefined}
-	aria-label={label}
-	{...restProps}
+  class={`step-list-item ${className}`}
+  data-status={status}
+  aria-current={current ? 'step' : undefined}
+  aria-label={label}
+  {...restProps}
 >
-	{@render children?.()}
+  {@render children?.()}
 </li>

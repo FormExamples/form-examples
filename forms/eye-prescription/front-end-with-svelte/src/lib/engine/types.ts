@@ -7,27 +7,35 @@
 export type SphereClass =
   | ''
   | 'emmetropia'
-  | 'low-myopia' | 'moderate-myopia' | 'high-myopia'
-  | 'low-hyperopia' | 'moderate-hyperopia' | 'high-hyperopia';
+  | 'low-myopia'
+  | 'moderate-myopia'
+  | 'high-myopia'
+  | 'low-hyperopia'
+  | 'moderate-hyperopia'
+  | 'high-hyperopia';
 
 export type CylinderClass =
-  | ''
-  | 'none'
-  | 'mild-astigmatism' | 'moderate-astigmatism' | 'high-astigmatism';
+  '' | 'none' | 'mild-astigmatism' | 'moderate-astigmatism' | 'high-astigmatism';
 
 export type PresbyopiaClass =
-  | ''
-  | 'none'
-  | 'early-presbyopia' | 'established-presbyopia' | 'advanced-presbyopia';
+  '' | 'none' | 'early-presbyopia' | 'established-presbyopia' | 'advanced-presbyopia';
 
 export type Complexity = '' | 'simple' | 'moderate' | 'complex';
 export type Priority = '' | 'low' | 'medium' | 'high';
 
 export type FlagCategory =
-  | 'high-myopia' | 'high-hyperopia' | 'high-astigmatism'
-  | 'anisometropia' | 'prism-present' | 'presbyopia'
-  | 'paediatric' | 'prescription-expired' | 'significant-change-from-prior'
-  | 'ocular-pathology' | 'refer-ophthalmology' | 'other';
+  | 'high-myopia'
+  | 'high-hyperopia'
+  | 'high-astigmatism'
+  | 'anisometropia'
+  | 'prism-present'
+  | 'presbyopia'
+  | 'paediatric'
+  | 'prescription-expired'
+  | 'significant-change-from-prior'
+  | 'ocular-pathology'
+  | 'refer-ophthalmology'
+  | 'other';
 
 export type EyeSide = 'right' | 'left' | 'both' | '';
 export type BaseHorizontal = '' | 'in' | 'out';
@@ -64,8 +72,14 @@ export interface Examination {
   expiryDate: string;
   reasonForSightTest:
     | ''
-    | 'routine' | 'symptoms' | 'follow-up' | 'pre-employment'
-    | 'driving-licence' | 'after-pathology' | 'second-opinion' | 'other';
+    | 'routine'
+    | 'symptoms'
+    | 'follow-up'
+    | 'pre-employment'
+    | 'driving-licence'
+    | 'after-pathology'
+    | 'second-opinion'
+    | 'other';
   priorPrescriptionDate: string;
   priorSphereRight: number | null;
   priorSphereLeft: number | null;
@@ -116,12 +130,22 @@ export interface PupillaryDistance {
 export interface LensRecommendation {
   lensType:
     | ''
-    | 'single-vision-distance' | 'single-vision-near' | 'single-vision-intermediate'
-    | 'bifocal' | 'trifocal' | 'varifocal' | 'occupational-varifocal';
+    | 'single-vision-distance'
+    | 'single-vision-near'
+    | 'single-vision-intermediate'
+    | 'bifocal'
+    | 'trifocal'
+    | 'varifocal'
+    | 'occupational-varifocal';
   material:
     | ''
-    | 'cr-39' | 'trivex' | 'polycarbonate'
-    | 'mid-index-1.60' | 'high-index-1.67' | 'high-index-1.74' | 'glass';
+    | 'cr-39'
+    | 'trivex'
+    | 'polycarbonate'
+    | 'mid-index-1.60'
+    | 'high-index-1.67'
+    | 'high-index-1.74'
+    | 'glass';
   refractiveIndex: number | null;
   aspheric: boolean;
   coatingAntiReflective: boolean;

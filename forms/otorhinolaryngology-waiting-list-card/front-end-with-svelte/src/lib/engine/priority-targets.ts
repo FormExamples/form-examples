@@ -12,7 +12,7 @@ export const PRIORITY_TARGET_WEEKS: Record<Exclude<ClinicalPriority, ''>, number
   P3: 12,
   P4: 18,
   P5: 26, // 6 months
-  P6: null, // removed from list — no target applies
+  P6: null // removed from list — no target applies
 };
 
 // 18-week NHS RTT consultant-led standard. Always enforced regardless of

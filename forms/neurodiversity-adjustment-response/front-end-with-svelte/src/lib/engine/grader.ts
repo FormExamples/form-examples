@@ -1,11 +1,11 @@
 import type {
-	NeurodiversityAdjustmentResponse,
-	GradingResult,
-	LegalRiskBand,
-	Recommendation,
-	FollowUpUrgency,
-	OverallDecision,
-	FiredRule
+  NeurodiversityAdjustmentResponse,
+  GradingResult,
+  LegalRiskBand,
+  Recommendation,
+  FollowUpUrgency,
+  OverallDecision,
+  FiredRule
 } from './types';
 import { classifyOutcome } from './outcome-rules';
 import { gradeLegalRisk } from './legal-risk-rules';
@@ -36,40 +36,40 @@ import { anyAgreed, recommendationLabel } from './utils';
  * No side effects, no network calls, no I/O.
  */
 export function calculateGrade(response: NeurodiversityAdjustmentResponse): GradingResult {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	// Axis A
-	const a = classifyOutcome(response);
-	firedRules.push(...a.firedRules);
+  // Axis A
+  const a = classifyOutcome(response);
+  firedRules.push(...a.firedRules);
 
-	// Axis B
-	const b = gradeLegalRisk(response);
-	firedRules.push(...b.firedRules);
+  // Axis B
+  const b = gradeLegalRisk(response);
+  firedRules.push(...b.firedRules);
 
-	// Axis C
-	const c = gradeCompleteness(response);
-	firedRules.push(...c.firedRules);
+  // Axis C
+  const c = gradeCompleteness(response);
+  firedRules.push(...c.firedRules);
 
-	// Axis D (depends on the legal-risk band)
-	const d = gradeFollowUp(response, b.legalRiskBand);
-	firedRules.push(...d.firedRules);
+  // Axis D (depends on the legal-risk band)
+  const d = gradeFollowUp(response, b.legalRiskBand);
+  firedRules.push(...d.firedRules);
 
-	const recommendation = deriveRecommendation(response, b.legalRiskBand, d.followUpUrgency);
+  const recommendation = deriveRecommendation(response, b.legalRiskBand, d.followUpUrgency);
 
-	const flags = detectFlags(response, b.legalRiskBand, c.completenessPercent);
+  const flags = detectFlags(response, b.legalRiskBand, c.completenessPercent);
 
-	return {
-		outcomeClassification: a.outcomeClassification,
-		legalRiskBand: b.legalRiskBand,
-		completenessPercent: c.completenessPercent,
-		followUpUrgency: d.followUpUrgency,
-		targetTimeframe: d.targetTimeframe,
-		recommendation,
-		recommendationLabel: recommendationLabel(recommendation),
-		firedRules,
-		flags,
-		gradedAt: new Date().toISOString()
-	};
+  return {
+    outcomeClassification: a.outcomeClassification,
+    legalRiskBand: b.legalRiskBand,
+    completenessPercent: c.completenessPercent,
+    followUpUrgency: d.followUpUrgency,
+    targetTimeframe: d.targetTimeframe,
+    recommendation,
+    recommendationLabel: recommendationLabel(recommendation),
+    firedRules,
+    flags,
+    gradedAt: new Date().toISOString()
+  };
 }
 
 /**
@@ -79,24 +79,24 @@ export function calculateGrade(response: NeurodiversityAdjustmentResponse): Grad
  * review, and deferred-without-OH.
  */
 function deriveRecommendation(
-	r: NeurodiversityAdjustmentResponse,
-	legalRiskBand: LegalRiskBand,
-	_followUpUrgency: FollowUpUrgency
+  r: NeurodiversityAdjustmentResponse,
+  legalRiskBand: LegalRiskBand,
+  _followUpUrgency: FollowUpUrgency
 ): Recommendation {
-	if (r.escalated) return 'escalate-to-hr';
-	if (legalRiskBand === 'high-risk') return 'reconsider-decision';
-	if (anyAgreed(r) && r.reviewScheduled === false) return 'schedule-review';
-	const deferred: OverallDecision = 'deferred';
-	if (r.overallDecision === deferred && r.occupationalHealthReferred === false) {
-		return 'seek-occupational-health';
-	}
-	// A decline with nothing agreed, not escalated, and not high-risk (i.e. a
-	// justified decline, or an unjustified one that hasn't yet been escalated)
-	// has nothing to "implement" — record the decline rather than falling
-	// through to that misleading default.
-	const declined: OverallDecision = 'declined';
-	if (r.overallDecision === declined) {
-		return 'record-decline';
-	}
-	return 'implement';
+  if (r.escalated) return 'escalate-to-hr';
+  if (legalRiskBand === 'high-risk') return 'reconsider-decision';
+  if (anyAgreed(r) && r.reviewScheduled === false) return 'schedule-review';
+  const deferred: OverallDecision = 'deferred';
+  if (r.overallDecision === deferred && r.occupationalHealthReferred === false) {
+    return 'seek-occupational-health';
+  }
+  // A decline with nothing agreed, not escalated, and not high-risk (i.e. a
+  // justified decline, or an unjustified one that hasn't yet been escalated)
+  // has nothing to "implement" — record the decline rather than falling
+  // through to that misleading default.
+  const declined: OverallDecision = 'declined';
+  if (r.overallDecision === declined) {
+    return 'record-decline';
+  }
+  return 'implement';
 }

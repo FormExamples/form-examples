@@ -7,21 +7,21 @@
 // `js/grader.js`.
 
 import type {
-	HearingRequest,
-	GradingResult,
-	Recommendation,
-	AppropriatenessBand,
-	FiredRule
+  HearingRequest,
+  GradingResult,
+  Recommendation,
+  AppropriatenessBand,
+  FiredRule
 } from './types';
 import { scoreAppropriateness, scoreTriage, scoreCompleteness, scorePriority } from './rules';
 import { detectFlags } from './flagged-issues';
 
 /** Human-readable label for each overall recommendation. */
 export const RECOMMENDATION_LABELS: Record<string, string> = {
-	accept: 'Accept and book',
-	'query-referrer': 'Query the referrer',
-	redirect: 'Redirect to a more suitable test',
-	reject: 'Reject'
+  accept: 'Accept and book',
+  'query-referrer': 'Query the referrer',
+  redirect: 'Redirect to a more suitable test',
+  reject: 'Reject'
 };
 
 /**
@@ -29,12 +29,12 @@ export const RECOMMENDATION_LABELS: Record<string, string> = {
  * axes. Least-alarming wins only when nothing escalates.
  */
 export function deriveRecommendation(
-	appropriatenessBand: AppropriatenessBand,
-	completenessPercent: number
+  appropriatenessBand: AppropriatenessBand,
+  completenessPercent: number
 ): Recommendation {
-	if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
-	if (completenessPercent < 50) return 'query-referrer';
-	return 'accept';
+  if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
+  if (completenessPercent < 50) return 'query-referrer';
+  return 'accept';
 }
 
 /**
@@ -51,39 +51,39 @@ export function deriveRecommendation(
  * other axes.
  */
 export function calculateGrade(data: HearingRequest): GradingResult {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	// Axis A — appropriateness.
-	const appr = scoreAppropriateness(data.request.primaryIndication, data.request.testType);
-	if (appr.firedRule) firedRules.push(appr.firedRule);
+  // Axis A — appropriateness.
+  const appr = scoreAppropriateness(data.request.primaryIndication, data.request.testType);
+  if (appr.firedRule) firedRules.push(appr.firedRule);
 
-	// Axis B — urgency triage.
-	const triage = scoreTriage(data);
-	for (const r of triage.firedRules) firedRules.push(r);
+  // Axis B — urgency triage.
+  const triage = scoreTriage(data);
+  for (const r of triage.firedRules) firedRules.push(r);
 
-	// Axis C — completeness.
-	const completeness = scoreCompleteness(data);
-	for (const m of completeness.missing) firedRules.push(m);
+  // Axis C — completeness.
+  const completeness = scoreCompleteness(data);
+  for (const m of completeness.missing) firedRules.push(m);
 
-	// Axis D — clinical priority (composite of acuity + appropriateness).
-	const priority = scorePriority(triage.tier, appr.band);
-	if (priority.firedRule) firedRules.push(priority.firedRule);
+  // Axis D — clinical priority (composite of acuity + appropriateness).
+  const priority = scorePriority(triage.tier, appr.band);
+  if (priority.firedRule) firedRules.push(priority.firedRule);
 
-	const recommendation = deriveRecommendation(appr.band, completeness.percent);
+  const recommendation = deriveRecommendation(appr.band, completeness.percent);
 
-	const flags = detectFlags(data);
+  const flags = detectFlags(data);
 
-	return {
-		appropriatenessScore: appr.score,
-		appropriatenessBand: appr.band,
-		triageTier: triage.tier,
-		targetTimeframe: triage.targetTimeframe,
-		completenessPercent: completeness.percent,
-		priorityBand: priority.band,
-		recommendation,
-		recommendationLabel: RECOMMENDATION_LABELS[recommendation] || recommendation,
-		firedRules,
-		flags,
-		gradedAt: new Date().toISOString()
-	};
+  return {
+    appropriatenessScore: appr.score,
+    appropriatenessBand: appr.band,
+    triageTier: triage.tier,
+    targetTimeframe: triage.targetTimeframe,
+    completenessPercent: completeness.percent,
+    priorityBand: priority.band,
+    recommendation,
+    recommendationLabel: RECOMMENDATION_LABELS[recommendation] || recommendation,
+    firedRules,
+    flags,
+    gradedAt: new Date().toISOString()
+  };
 }

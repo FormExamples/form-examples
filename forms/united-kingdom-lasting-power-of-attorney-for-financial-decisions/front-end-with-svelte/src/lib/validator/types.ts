@@ -20,5 +20,5 @@ export type {
   ValidityBand,
   CompositeRisk,
   RulePriority,
-  FlagPriority,
+  FlagPriority
 } from '#lib/types.js';

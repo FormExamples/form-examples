@@ -7,52 +7,52 @@ import type { MicrobiologyRequest } from './types';
  * rehydrated from localStorage.
  */
 export function createDefaultRequest(): MicrobiologyRequest {
-	return {
-		clinician: {
-			clinicianName: '',
-			clinicianRole: '',
-			registrationBody: '',
-			registrationNumber: '',
-			requesterContact: '',
-			supervisingConsultant: '',
-			siteName: '',
-			referralDate: ''
-		},
-		patient: {
-			firstName: '',
-			lastName: '',
-			dateOfBirth: '',
-			nhsNumber: ''
-		},
-		specimen: {
-			specimenType: '',
-			specimenSiteDetail: '',
-			specimenCollected: '',
-			collectionDatetime: ''
-		},
-		tests: {
-			cultureAndSensitivity: false,
-			gramStain: false,
-			acidFastBacilliTb: false,
-			fungalCulture: false,
-			pcrMolecular: false,
-			cDifficileToxin: false,
-			mrsaScreen: false
-		},
-		clinical: {
-			primaryIndication: '',
-			clinicalDetails: '',
-			fever: false,
-			currentAntibiotics: false,
-			antibioticName: '',
-			recentTravel: false,
-			immunocompromised: false
-		},
-		triage: {
-			urgency: '',
-			requestedByDate: '',
-			setting: '',
-			notes: ''
-		}
-	};
+  return {
+    clinician: {
+      clinicianName: '',
+      clinicianRole: '',
+      registrationBody: '',
+      registrationNumber: '',
+      requesterContact: '',
+      supervisingConsultant: '',
+      siteName: '',
+      referralDate: ''
+    },
+    patient: {
+      firstName: '',
+      lastName: '',
+      dateOfBirth: '',
+      nhsNumber: ''
+    },
+    specimen: {
+      specimenType: '',
+      specimenSiteDetail: '',
+      specimenCollected: '',
+      collectionDatetime: ''
+    },
+    tests: {
+      cultureAndSensitivity: false,
+      gramStain: false,
+      acidFastBacilliTb: false,
+      fungalCulture: false,
+      pcrMolecular: false,
+      cDifficileToxin: false,
+      mrsaScreen: false
+    },
+    clinical: {
+      primaryIndication: '',
+      clinicalDetails: '',
+      fever: false,
+      currentAntibiotics: false,
+      antibioticName: '',
+      recentTravel: false,
+      immunocompromised: false
+    },
+    triage: {
+      urgency: '',
+      requestedByDate: '',
+      setting: '',
+      notes: ''
+    }
+  };
 }

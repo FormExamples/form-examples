@@ -7,7 +7,7 @@
   let {
     name,
     options,
-    value = $bindable(''),
+    value = $bindable('')
   }: {
     name: string;
     options: Option[];

@@ -14,77 +14,77 @@ import { tinettiCategory } from './utils';
  *   0-18  = High fall risk
  */
 export function calculateTinetti(data: AssessmentData): {
-	tinettiTotal: number;
-	balanceScore: number;
-	gaitScore: number;
-	tinettiCategoryLabel: string;
-	firedRules: FiredRule[];
+  tinettiTotal: number;
+  balanceScore: number;
+  gaitScore: number;
+  tinettiCategoryLabel: string;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
-	const bal = data.balanceAssessment;
-	const gait = data.gaitAssessment;
+  const firedRules: FiredRule[] = [];
+  const bal = data.balanceAssessment;
+  const gait = data.gaitAssessment;
 
-	const balanceScores: (number | null)[] = [
-		bal.sittingBalance,
-		bal.risesFromChair,
-		bal.attemptingToRise,
-		bal.immediateStandingBalance,
-		bal.standingBalance,
-		bal.nudgedBalance,
-		bal.eyesClosed,
-		bal.turning360,
-		bal.sittingDown
-	];
+  const balanceScores: (number | null)[] = [
+    bal.sittingBalance,
+    bal.risesFromChair,
+    bal.attemptingToRise,
+    bal.immediateStandingBalance,
+    bal.standingBalance,
+    bal.nudgedBalance,
+    bal.eyesClosed,
+    bal.turning360,
+    bal.sittingDown
+  ];
 
-	const gaitScores: (number | null)[] = [
-		gait.initiationOfGait,
-		gait.stepLength,
-		gait.stepHeight,
-		gait.stepSymmetry,
-		gait.stepContinuity,
-		gait.path,
-		gait.trunk,
-		gait.walkingStance
-	];
+  const gaitScores: (number | null)[] = [
+    gait.initiationOfGait,
+    gait.stepLength,
+    gait.stepHeight,
+    gait.stepSymmetry,
+    gait.stepContinuity,
+    gait.path,
+    gait.trunk,
+    gait.walkingStance
+  ];
 
-	let balanceScore = 0;
-	for (let i = 0; i < balanceScores.length; i++) {
-		const score = balanceScores[i];
-		if (score !== null) {
-			const item = tinettiBalanceItems[i];
-			if (score > 0) {
-				firedRules.push({
-					id: item.id,
-					domain: 'Balance',
-					description: item.text,
-					score
-				});
-			}
-			balanceScore += score;
-		}
-	}
+  let balanceScore = 0;
+  for (let i = 0; i < balanceScores.length; i++) {
+    const score = balanceScores[i];
+    if (score !== null) {
+      const item = tinettiBalanceItems[i];
+      if (score > 0) {
+        firedRules.push({
+          id: item.id,
+          domain: 'Balance',
+          description: item.text,
+          score
+        });
+      }
+      balanceScore += score;
+    }
+  }
 
-	let gaitScore = 0;
-	for (let i = 0; i < gaitScores.length; i++) {
-		const score = gaitScores[i];
-		if (score !== null) {
-			const item = tinettiGaitItems[i];
-			if (score > 0) {
-				firedRules.push({
-					id: item.id,
-					domain: 'Gait',
-					description: item.text,
-					score
-				});
-			}
-			gaitScore += score;
-		}
-	}
+  let gaitScore = 0;
+  for (let i = 0; i < gaitScores.length; i++) {
+    const score = gaitScores[i];
+    if (score !== null) {
+      const item = tinettiGaitItems[i];
+      if (score > 0) {
+        firedRules.push({
+          id: item.id,
+          domain: 'Gait',
+          description: item.text,
+          score
+        });
+      }
+      gaitScore += score;
+    }
+  }
 
-	const tinettiTotal = balanceScore + gaitScore;
-	const tinettiCategoryLabel = tinettiCategory(tinettiTotal);
+  const tinettiTotal = balanceScore + gaitScore;
+  const tinettiCategoryLabel = tinettiCategory(tinettiTotal);
 
-	return { tinettiTotal, balanceScore, gaitScore, tinettiCategoryLabel, firedRules };
+  return { tinettiTotal, balanceScore, gaitScore, tinettiCategoryLabel, firedRules };
 }
 
 /**
@@ -94,16 +94,16 @@ export function calculateTinetti(data: AssessmentData): {
  * aligned.
  */
 export function gradeMobility(data: AssessmentData): GradingResult {
-	const { tinettiTotal, balanceScore, gaitScore, tinettiCategoryLabel, firedRules } =
-		calculateTinetti(data);
-	const additionalFlags = detectAdditionalFlags(data);
-	return {
-		tinettiTotal,
-		balanceScore,
-		gaitScore,
-		tinettiCategory: tinettiCategoryLabel,
-		firedRules,
-		additionalFlags,
-		timestamp: new Date().toISOString()
-	};
+  const { tinettiTotal, balanceScore, gaitScore, tinettiCategoryLabel, firedRules } =
+    calculateTinetti(data);
+  const additionalFlags = detectAdditionalFlags(data);
+  return {
+    tinettiTotal,
+    balanceScore,
+    gaitScore,
+    tinettiCategory: tinettiCategoryLabel,
+    firedRules,
+    additionalFlags,
+    timestamp: new Date().toISOString()
+  };
 }

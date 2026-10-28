@@ -19,7 +19,9 @@
 </script>
 
 <Fieldset legend="Step 10 — Section 9 — Labour Room (4 checkpoints)">
-  <p class="hint">Labour room staffing, resuscitation equipment, labour table condition, and cleanliness.</p>
+  <p class="hint">
+    Labour room staffing, resuscitation equipment, labour table condition, and cleanliness.
+  </p>
 
   {#each groups as group, gi (gi)}
     {#if group.subsection}

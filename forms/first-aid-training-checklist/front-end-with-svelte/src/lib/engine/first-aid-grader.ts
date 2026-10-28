@@ -17,69 +17,69 @@ import { detectAdditionalFlags } from './flagged-issues';
 export const NEEDS_DEVELOPMENT_DEFICIENCY_LIMIT = 2;
 
 export function gradeFirstAid(data: AssessmentData): GradingResult {
-	const firedRules: FiredRule[] = [];
-	const criticalFailures: FiredRule[] = [];
-	const deficiencies: FiredRule[] = [];
-	let answeredCount = 0;
-	let passedCount = 0;
+  const firedRules: FiredRule[] = [];
+  const criticalFailures: FiredRule[] = [];
+  const deficiencies: FiredRule[] = [];
+  let answeredCount = 0;
+  let passedCount = 0;
 
-	for (const rule of fawRules) {
-		let status: FiredRule['status'] = '';
-		try {
-			status = rule.evaluate(data);
-		} catch (e) {
-			console.warn(`FAW rule ${rule.id} evaluation failed:`, e);
-			status = '';
-		}
+  for (const rule of fawRules) {
+    let status: FiredRule['status'];
+    try {
+      status = rule.evaluate(data);
+    } catch (e) {
+      console.warn(`FAW rule ${rule.id} evaluation failed:`, e);
+      status = '';
+    }
 
-		const entry: FiredRule = {
-			id: rule.id,
-			step: rule.step,
-			category: rule.category,
-			description: rule.label,
-			critical: rule.critical,
-			status
-		};
-		firedRules.push(entry);
+    const entry: FiredRule = {
+      id: rule.id,
+      step: rule.step,
+      category: rule.category,
+      description: rule.label,
+      critical: rule.critical,
+      status
+    };
+    firedRules.push(entry);
 
-		if (status === 'yes' || status === 'no') answeredCount++;
-		if (status === 'yes') passedCount++;
+    if (status === 'yes' || status === 'no') answeredCount++;
+    if (status === 'yes') passedCount++;
 
-		if (status === 'no') {
-			if (rule.critical) {
-				criticalFailures.push(entry);
-			} else {
-				deficiencies.push(entry);
-			}
-		}
-	}
+    if (status === 'no') {
+      if (rule.critical) {
+        criticalFailures.push(entry);
+      } else {
+        deficiencies.push(entry);
+      }
+    }
+  }
 
-	let outcome: Outcome = '';
-	if (criticalFailures.length > 0) {
-		outcome = 'fail';
-	} else if (deficiencies.length > NEEDS_DEVELOPMENT_DEFICIENCY_LIMIT) {
-		outcome = 'fail';
-	} else if (deficiencies.length >= 1) {
-		outcome = 'needs-development';
-	} else if (answeredCount === 0) {
-		// Nothing assessed yet — surface a neutral "fail" on submission so the
-		// examiner is prompted to actually mark items, but don't claim success.
-		outcome = 'fail';
-	} else {
-		outcome = 'pass';
-	}
+  let outcome: Outcome;
+  if (criticalFailures.length > 0) {
+    outcome = 'fail';
+  } else if (deficiencies.length > NEEDS_DEVELOPMENT_DEFICIENCY_LIMIT) {
+    outcome = 'fail';
+  } else if (deficiencies.length >= 1) {
+    outcome = 'needs-development';
+  } else if (answeredCount === 0) {
+    // Nothing assessed yet — surface a neutral "fail" on submission so the
+    // examiner is prompted to actually mark items, but don't claim success.
+    outcome = 'fail';
+  } else {
+    outcome = 'pass';
+  }
 
-	const additionalFlags = detectAdditionalFlags(data, { criticalFailures, deficiencies });
+  const additionalFlags = detectAdditionalFlags(data, { criticalFailures, deficiencies });
 
-	return {
-		outcome,
-		criticalFailures,
-		deficiencies,
-		firedRules,
-		additionalFlags,
-		answeredCount,
-		passedCount,
-		totalRules: fawRules.length,
-		timestamp: new Date().toISOString()
-	};
+  return {
+    outcome,
+    criticalFailures,
+    deficiencies,
+    firedRules,
+    additionalFlags,
+    answeredCount,
+    passedCount,
+    totalRules: fawRules.length,
+    timestamp: new Date().toISOString()
+  };
 }

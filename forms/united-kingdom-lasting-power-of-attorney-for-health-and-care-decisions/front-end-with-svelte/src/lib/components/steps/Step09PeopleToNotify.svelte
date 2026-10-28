@@ -27,7 +27,7 @@
     { value: 'sibling', label: 'Sibling' },
     { value: 'friend', label: 'Friend' },
     { value: 'professional', label: 'Professional' },
-    { value: 'other', label: 'Other' },
+    { value: 'other', label: 'Other' }
   ];
 </script>
 

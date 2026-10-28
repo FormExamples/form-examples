@@ -11,119 +11,119 @@ import type { HealthScreeningQuestionnaire } from './types';
  * fields.
  */
 export function createDefaultQuestionnaire(): HealthScreeningQuestionnaire {
-	return {
-		status: 'draft',
-		context: {
-			screeningPurpose: '',
-			siteName: '',
-			assessmentDate: '',
-			assessmentMode: ''
-		},
-		assessor: {
-			name: '',
-			email: '',
-			phone: '',
-			role: '',
-			registrationBody: '',
-			registrationNumber: '',
-			employer: ''
-		},
-		patient: {
-			name: '',
-			birthDate: '',
-			sex: '',
-			identifierType: '',
-			identifierValue: '',
-			email: '',
-			phone: '',
-			emergencyContactName: '',
-			emergencyContactRelationship: '',
-			emergencyContactPhone: ''
-		},
-		activityDiet: {
-			usualActivityLevel: '',
-			moderateExerciseDaysPerWeek: null,
-			fruitAndVegetablePortionsPerDay: null,
-			dietNotes: ''
-		},
-		smokingAlcohol: {
-			smokingStatus: '',
-			cigarettesPerDay: null,
-			auditCFrequency: null,
-			auditCTypicalQuantity: null,
-			auditCBingeFrequency: null
-		},
-		medicalHistory: {
-			conditionDiabetes: '',
-			conditionHypertension: '',
-			conditionAsthma: '',
-			conditionCopd: '',
-			conditionHeartDisease: '',
-			conditionKidneyDisease: '',
-			conditionThyroid: '',
-			conditionOther: '',
-			pastSurgeries: '',
-			currentMedications: '',
-			knownDrugAllergies: ''
-		},
-		familyHistory: {
-			familyHistoryPrematureCardiacEvent: '',
-			familyHistoryOther: ''
-		},
-		symptoms: {
-			symptomUnexplainedChestPain: '',
-			symptomDizzySpellsOrFainting: '',
-			symptomPersistentCoughOver3Weeks: '',
-			symptomUnexplainedWeightLoss: '',
-			symptomJointPainRestrictingMovement: '',
-			symptomShortnessOfBreathOnExertion: '',
-			symptomPalpitations: ''
-		},
-		parq: {
-			parqDiagnosedHeartCondition: '',
-			parqChestPainAtRest: '',
-			parqChestPainDuringActivity: '',
-			parqDizzinessOrLossOfConsciousness: '',
-			parqOtherChronicMedicalCondition: '',
-			parqPrescribedMedicationForChronicCondition: '',
-			parqBoneOrJointProblem: ''
-		},
-		vitals: {
-			heightAsCm: null,
-			weightAsKg: null,
-			restingBloodPressureSystolic: null,
-			restingBloodPressureDiastolic: null,
-			restingHeartRate: null
-		},
-		occupational: {
-			jobRole: '',
-			physicalDemandsOfRole: '',
-			exposureNoise: '',
-			exposureChemicals: '',
-			exposureManualHandling: '',
-			exposureOther: '',
-			exposureOtherDetail: ''
-		},
-		wellbeing: {
-			stressLevel: null,
-			sleepQuality: null,
-			mentalHealthConcern: '',
-			mentalHealthConcernNote: ''
-		},
-		vaccination: {
-			vaccinationUpToDate: '',
-			vaccinationGapsNote: ''
-		},
-		consent: {
-			consentToScreening: '',
-			informationAccurateConfirmed: '',
-			interpreterRequired: ''
-		},
-		summary: {
-			overrideRiskBand: '',
-			overrideReason: '',
-			notes: '',
-			signedByName: ''
-		}
-	};
+  return {
+    status: 'draft',
+    context: {
+      screeningPurpose: '',
+      siteName: '',
+      assessmentDate: '',
+      assessmentMode: ''
+    },
+    assessor: {
+      name: '',
+      email: '',
+      phone: '',
+      role: '',
+      registrationBody: '',
+      registrationNumber: '',
+      employer: ''
+    },
+    patient: {
+      name: '',
+      birthDate: '',
+      sex: '',
+      identifierType: '',
+      identifierValue: '',
+      email: '',
+      phone: '',
+      emergencyContactName: '',
+      emergencyContactRelationship: '',
+      emergencyContactPhone: ''
+    },
+    activityDiet: {
+      usualActivityLevel: '',
+      moderateExerciseDaysPerWeek: null,
+      fruitAndVegetablePortionsPerDay: null,
+      dietNotes: ''
+    },
+    smokingAlcohol: {
+      smokingStatus: '',
+      cigarettesPerDay: null,
+      auditCFrequency: null,
+      auditCTypicalQuantity: null,
+      auditCBingeFrequency: null
+    },
+    medicalHistory: {
+      conditionDiabetes: '',
+      conditionHypertension: '',
+      conditionAsthma: '',
+      conditionCopd: '',
+      conditionHeartDisease: '',
+      conditionKidneyDisease: '',
+      conditionThyroid: '',
+      conditionOther: '',
+      pastSurgeries: '',
+      currentMedications: '',
+      knownDrugAllergies: ''
+    },
+    familyHistory: {
+      familyHistoryPrematureCardiacEvent: '',
+      familyHistoryOther: ''
+    },
+    symptoms: {
+      symptomUnexplainedChestPain: '',
+      symptomDizzySpellsOrFainting: '',
+      symptomPersistentCoughOver3Weeks: '',
+      symptomUnexplainedWeightLoss: '',
+      symptomJointPainRestrictingMovement: '',
+      symptomShortnessOfBreathOnExertion: '',
+      symptomPalpitations: ''
+    },
+    parq: {
+      parqDiagnosedHeartCondition: '',
+      parqChestPainAtRest: '',
+      parqChestPainDuringActivity: '',
+      parqDizzinessOrLossOfConsciousness: '',
+      parqOtherChronicMedicalCondition: '',
+      parqPrescribedMedicationForChronicCondition: '',
+      parqBoneOrJointProblem: ''
+    },
+    vitals: {
+      heightAsCm: null,
+      weightAsKg: null,
+      restingBloodPressureSystolic: null,
+      restingBloodPressureDiastolic: null,
+      restingHeartRate: null
+    },
+    occupational: {
+      jobRole: '',
+      physicalDemandsOfRole: '',
+      exposureNoise: '',
+      exposureChemicals: '',
+      exposureManualHandling: '',
+      exposureOther: '',
+      exposureOtherDetail: ''
+    },
+    wellbeing: {
+      stressLevel: null,
+      sleepQuality: null,
+      mentalHealthConcern: '',
+      mentalHealthConcernNote: ''
+    },
+    vaccination: {
+      vaccinationUpToDate: '',
+      vaccinationGapsNote: ''
+    },
+    consent: {
+      consentToScreening: '',
+      informationAccurateConfirmed: '',
+      interpreterRequired: ''
+    },
+    summary: {
+      overrideRiskBand: '',
+      overrideReason: '',
+      notes: '',
+      signedByName: ''
+    }
+  };
 }

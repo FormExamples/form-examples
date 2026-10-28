@@ -16,7 +16,7 @@ export function createEmptyAssessment(): AgileAssessment {
       organisationName: '',
       yearsInAgile: null,
       assessmentDate: '',
-      assessmentPeriod: '',
+      assessmentPeriod: ''
     },
     responses: Array.from({ length: TOTAL_PRINCIPLES }, emptyResponse),
     actionPlan: {
@@ -25,7 +25,7 @@ export function createEmptyAssessment(): AgileAssessment {
       topAction3: '',
       coachNotes: '',
       signedAt: '',
-      overallNotes: '',
-    },
+      overallNotes: ''
+    }
   };
 }

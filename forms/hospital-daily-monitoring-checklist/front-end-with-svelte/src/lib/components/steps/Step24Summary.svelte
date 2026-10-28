@@ -2,7 +2,7 @@
   import { store } from '#lib/stores/assessment.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { DateInput, TextAreaInput } from "@lilydesignsystem/svelte-headless";
+  import { DateInput, TextAreaInput } from '@lilydesignsystem/svelte-headless';
   import { summariseChecklist } from '#lib/engine/summary.js';
   import { TOTAL_ITEMS } from '#lib/config/items.js';
 
@@ -11,9 +11,9 @@
 
 <Fieldset legend="Step 24 — Summary &amp; sign-off">
   <p class="hint">
-    A tally of checkpoints answered and any marked <strong>needs attention</strong>,
-    grouped by area, followed by overall notes, an action plan, and sign-off.
-    This is an operational tally, not a scored grading engine.
+    A tally of checkpoints answered and any marked <strong>needs attention</strong>, grouped by
+    area, followed by overall notes, an action plan, and sign-off. This is an operational tally, not
+    a scored grading engine.
   </p>
 
   <div class="summary-box">
@@ -75,7 +75,9 @@
     padding: 0.75rem 1rem;
     margin: 0 0 1rem;
   }
-  .summary-box p { margin: 0 0 0.25rem; }
+  .summary-box p {
+    margin: 0 0 0.25rem;
+  }
   .needs-attention-list {
     background: var(--color-danger-bg);
     border: 1px solid var(--color-danger);
@@ -104,6 +106,12 @@
     color: var(--color-muted);
     margin-right: 0.375rem;
   }
-  .section-title { font-weight: 600; }
-  .remarks { color: var(--color-muted); font-style: italic; margin-left: 0.375rem; }
+  .section-title {
+    font-weight: 600;
+  }
+  .remarks {
+    color: var(--color-muted);
+    font-style: italic;
+    margin-left: 0.375rem;
+  }
 </style>

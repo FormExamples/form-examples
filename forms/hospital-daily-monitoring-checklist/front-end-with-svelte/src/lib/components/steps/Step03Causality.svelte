@@ -19,7 +19,10 @@
 </script>
 
 <Fieldset legend="Step 3 — Section 2 — Causality (4 checkpoints)">
-  <p class="hint">Emergency (casualty) readiness: staff duty roster, emergency tray, emergency ward status, and life-saving skill/equipment.</p>
+  <p class="hint">
+    Emergency (casualty) readiness: staff duty roster, emergency tray, emergency ward status, and
+    life-saving skill/equipment.
+  </p>
 
   {#each groups as group, gi (gi)}
     {#if group.subsection}

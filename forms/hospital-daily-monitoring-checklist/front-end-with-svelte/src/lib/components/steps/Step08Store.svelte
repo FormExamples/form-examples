@@ -19,7 +19,9 @@
 </script>
 
 <Fieldset legend="Step 8 — Section 7 — Store (4 checkpoints)">
-  <p class="hint">Drug store staffing, storage order/cleanliness, security, and expiry (FEFO) checks.</p>
+  <p class="hint">
+    Drug store staffing, storage order/cleanliness, security, and expiry (FEFO) checks.
+  </p>
 
   {#each groups as group, gi (gi)}
     {#if group.subsection}

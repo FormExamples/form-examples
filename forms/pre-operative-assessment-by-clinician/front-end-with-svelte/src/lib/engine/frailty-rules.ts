@@ -1,4 +1,4 @@
-import type { ClinicianAssessment, FiredRule } from "./types.js";
+import type { ClinicianAssessment, FiredRule } from './types.js';
 
 /**
  * Fried Frailty Phenotype (Fried et al., J Gerontol A Biol Sci Med Sci 2001).
@@ -9,7 +9,7 @@ import type { ClinicianAssessment, FiredRule } from "./types.js";
  */
 export function computeFriedPhenotypeScore(data: ClinicianAssessment): {
   score: number | null;
-  category: "robust" | "pre-frail" | "frail" | "";
+  category: 'robust' | 'pre-frail' | 'frail' | '';
 } {
   const fc = data.functionalCapacity;
   const criteria = [
@@ -17,12 +17,12 @@ export function computeFriedPhenotypeScore(data: ClinicianAssessment): {
     fc.friedSlowness,
     fc.friedLowPhysicalActivity,
     fc.friedExhaustion,
-    fc.friedUnintentionalWeightLoss,
+    fc.friedUnintentionalWeightLoss
   ];
-  if (criteria.every((c) => c === "")) return { score: null, category: "" };
+  if (criteria.every((c) => c === '')) return { score: null, category: '' };
 
-  const score = criteria.filter((c) => c === "yes").length;
-  const category = score === 0 ? "robust" : score <= 2 ? "pre-frail" : "frail";
+  const score = criteria.filter((c) => c === 'yes').length;
+  const category = score === 0 ? 'robust' : score <= 2 ? 'pre-frail' : 'frail';
   return { score, category };
 }
 
@@ -33,22 +33,21 @@ export function applyFrailtyRules(data: ClinicianAssessment): FiredRule[] {
   if (cfs !== null) {
     rules.push({
       ruleId: `R-CFS-${cfs}`,
-      instrument: "frailty",
+      instrument: 'frailty',
       grade: String(cfs),
-      category: "functional",
-      description: `Clinical Frailty Scale ${cfs}`,
+      category: 'functional',
+      description: `Clinical Frailty Scale ${cfs}`
     });
   }
 
-  const { score: friedScore, category: friedCategory } =
-    computeFriedPhenotypeScore(data);
+  const { score: friedScore, category: friedCategory } = computeFriedPhenotypeScore(data);
   if (friedScore !== null) {
     rules.push({
       ruleId: `R-FRIED-${friedScore}`,
-      instrument: "frailty",
+      instrument: 'frailty',
       grade: friedCategory,
-      category: "functional",
-      description: `Fried Frailty Phenotype ${friedScore}/5 (${friedCategory})`,
+      category: 'functional',
+      description: `Fried Frailty Phenotype ${friedScore}/5 (${friedCategory})`
     });
   }
 
@@ -56,10 +55,10 @@ export function applyFrailtyRules(data: ClinicianAssessment): FiredRule[] {
   if (rai !== null) {
     rules.push({
       ruleId: `R-RAI-${rai}`,
-      instrument: "frailty",
+      instrument: 'frailty',
       grade: String(rai),
-      category: "functional",
-      description: `Risk Analysis Index ${rai}`,
+      category: 'functional',
+      description: `Risk Analysis Index ${rai}`
     });
   }
 

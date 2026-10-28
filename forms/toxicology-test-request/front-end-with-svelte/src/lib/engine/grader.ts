@@ -1,10 +1,10 @@
 import type {
-	ToxicologyRequest,
-	GradingResult,
-	Recommendation,
-	AppropriatenessBand,
-	TimingBand,
-	FiredRule
+  ToxicologyRequest,
+  GradingResult,
+  Recommendation,
+  AppropriatenessBand,
+  TimingBand,
+  FiredRule
 } from './types';
 import { scoreAppropriateness } from './appropriateness-rules';
 import { evaluateTiming } from './timing-rules';
@@ -29,41 +29,41 @@ import { recommendationLabel } from './utils';
  * the fired-rule audit trail, and safety flags. No side effects, no I/O.
  */
 export function calculateGrade(request: ToxicologyRequest): GradingResult {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	// Axis A — appropriateness.
-	const a = scoreAppropriateness(request);
-	firedRules.push(...a.firedRules);
+  // Axis A — appropriateness.
+  const a = scoreAppropriateness(request);
+  firedRules.push(...a.firedRules);
 
-	// Axis B — ingestion-timing validity.
-	const b = evaluateTiming(request);
-	firedRules.push(...b.firedRules);
+  // Axis B — ingestion-timing validity.
+  const b = evaluateTiming(request);
+  firedRules.push(...b.firedRules);
 
-	// Axis C — completeness.
-	const c = scoreCompleteness(request);
-	firedRules.push(...c.firedRules);
+  // Axis C — completeness.
+  const c = scoreCompleteness(request);
+  firedRules.push(...c.firedRules);
 
-	// Axis D — triage.
-	const d = scoreTriage(request);
-	firedRules.push(...d.firedRules);
+  // Axis D — triage.
+  const d = scoreTriage(request);
+  firedRules.push(...d.firedRules);
 
-	const recommendation = deriveRecommendation(a.band, b.band, c.completenessPercent);
+  const recommendation = deriveRecommendation(a.band, b.band, c.completenessPercent);
 
-	const flags = detectFlags(request, { timingBand: b.band });
+  const flags = detectFlags(request, { timingBand: b.band });
 
-	return {
-		appropriatenessScore: a.score,
-		appropriatenessBand: a.band,
-		timingBand: b.band,
-		completenessPercent: c.completenessPercent,
-		triageTier: d.triageTier,
-		targetTimeframe: d.targetTimeframe,
-		recommendation,
-		recommendationLabel: recommendationLabel(recommendation),
-		firedRules,
-		flags,
-		gradedAt: new Date().toISOString()
-	};
+  return {
+    appropriatenessScore: a.score,
+    appropriatenessBand: a.band,
+    timingBand: b.band,
+    completenessPercent: c.completenessPercent,
+    triageTier: d.triageTier,
+    targetTimeframe: d.targetTimeframe,
+    recommendation,
+    recommendationLabel: recommendationLabel(recommendation),
+    firedRules,
+    flags,
+    gradedAt: new Date().toISOString()
+  };
 }
 
 /**
@@ -71,12 +71,12 @@ export function calculateGrade(request: ToxicologyRequest): GradingResult {
  * four axes. Least-alarming wins only when nothing escalates.
  */
 function deriveRecommendation(
-	appropriatenessBand: AppropriatenessBand,
-	timingBand: TimingBand,
-	completenessPercent: number
+  appropriatenessBand: AppropriatenessBand,
+  timingBand: TimingBand,
+  completenessPercent: number
 ): Recommendation {
-	if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
-	if (timingBand === 'invalid') return 'query-referrer';
-	if (completenessPercent < 50) return 'query-referrer';
-	return 'accept';
+  if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
+  if (timingBand === 'invalid') return 'query-referrer';
+  if (completenessPercent < 50) return 'query-referrer';
+  return 'accept';
 }

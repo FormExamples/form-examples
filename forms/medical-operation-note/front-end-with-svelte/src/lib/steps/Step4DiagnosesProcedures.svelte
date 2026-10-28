@@ -2,7 +2,7 @@
   import { store } from '#lib/state.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { TextAreaInput, TextInput } from '@lilydesignsystem/svelte-headless';
   import Select from '#lib/components/ui/Select.svelte';
 </script>
 
@@ -42,10 +42,7 @@
       />
     </Field>
     <Field label="OPCS-4 codes" class="field-span-2">
-      <TextInput
-        label="OPCS-4 codes"
-        bind:value={store.data.diagnosesAndProcedures.opcs4Codes}
-      />
+      <TextInput label="OPCS-4 codes" bind:value={store.data.diagnosesAndProcedures.opcs4Codes} />
     </Field>
     <Field label="Urgency (NCEPOD)">
       <Select label="Urgency (NCEPOD)" bind:value={store.data.diagnosesAndProcedures.urgency}>

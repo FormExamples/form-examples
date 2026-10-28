@@ -13,7 +13,7 @@
       category: '',
       statement: '',
       lawfulnessAssessed: '',
-      contradictsAdrt: '',
+      contradictsAdrt: ''
     });
     changed();
   }
@@ -29,14 +29,14 @@
     { value: 'religion-and-belief', label: 'Religion and belief' },
     { value: 'food-and-drink', label: 'Food and drink' },
     { value: 'end-of-life-care', label: 'End-of-life care' },
-    { value: 'other', label: 'Other' },
+    { value: 'other', label: 'Other' }
   ];
 </script>
 
 <div class="space-y-4">
   <p class="text-sm text-base-content/80">
-    Instructions are <strong>binding</strong>. Attorneys must follow them. Instructions must
-    be lawful, possible, and consistent with any Advance Decision to Refuse Treatment.
+    Instructions are <strong>binding</strong>. Attorneys must follow them. Instructions must be
+    lawful, possible, and consistent with any Advance Decision to Refuse Treatment.
   </p>
 
   {#each instructions as ins, i (i)}
@@ -47,7 +47,12 @@
           Remove
         </button>
       </header>
-      <SelectField label="Category" bind:value={ins.category} options={CATEGORIES} onchange={changed} />
+      <SelectField
+        label="Category"
+        bind:value={ins.category}
+        options={CATEGORIES}
+        onchange={changed}
+      />
       <TextAreaInput label="Statement" bind:value={ins.statement} rows={3} onchange={changed} />
       <YesNoField
         label="Lawfulness assessed by solicitor or certificate provider?"

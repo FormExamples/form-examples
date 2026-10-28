@@ -3,7 +3,7 @@
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
-  import { RadioGroup, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { RadioGroup, TextInput } from '@lilydesignsystem/svelte-headless';
 
   const d = assessment.data.lipidProfile;
 </script>
@@ -13,16 +13,44 @@
 
   <div class="field-grid">
     <Field label="Total cholesterol (mmol/L)" inputId="step-5-totalCholesterol">
-      <NumberInput id="step-5-totalCholesterol" label="Total cholesterol" min={0} max={20} step="0.01" bind:value={d.totalCholesterol} />
+      <NumberInput
+        id="step-5-totalCholesterol"
+        label="Total cholesterol"
+        min={0}
+        max={20}
+        step="0.01"
+        bind:value={d.totalCholesterol}
+      />
     </Field>
     <Field label="HDL cholesterol (mmol/L)" inputId="step-5-hdlCholesterol">
-      <NumberInput id="step-5-hdlCholesterol" label="HDL cholesterol" min={0} max={10} step="0.01" bind:value={d.hdlCholesterol} />
+      <NumberInput
+        id="step-5-hdlCholesterol"
+        label="HDL cholesterol"
+        min={0}
+        max={10}
+        step="0.01"
+        bind:value={d.hdlCholesterol}
+      />
     </Field>
     <Field label="LDL cholesterol (mmol/L)" inputId="step-5-ldlCholesterol">
-      <NumberInput id="step-5-ldlCholesterol" label="LDL cholesterol" min={0} max={15} step="0.01" bind:value={d.ldlCholesterol} />
+      <NumberInput
+        id="step-5-ldlCholesterol"
+        label="LDL cholesterol"
+        min={0}
+        max={15}
+        step="0.01"
+        bind:value={d.ldlCholesterol}
+      />
     </Field>
     <Field label="Triglycerides (mmol/L)" inputId="step-5-triglycerides">
-      <NumberInput id="step-5-triglycerides" label="Triglycerides" min={0} max={30} step="0.01" bind:value={d.triglycerides} />
+      <NumberInput
+        id="step-5-triglycerides"
+        label="Triglycerides"
+        min={0}
+        max={30}
+        step="0.01"
+        bind:value={d.triglycerides}
+      />
     </Field>
   </div>
 
@@ -64,10 +92,20 @@
   >
     <RadioGroup label="On other lipid-lowering therapy">
       <label class="radio-input">
-        <input type="radio" name="onOtherLipidTherapy" value="yes" bind:group={d.onOtherLipidTherapy} /> Yes
+        <input
+          type="radio"
+          name="onOtherLipidTherapy"
+          value="yes"
+          bind:group={d.onOtherLipidTherapy}
+        /> Yes
       </label>
       <label class="radio-input">
-        <input type="radio" name="onOtherLipidTherapy" value="no" bind:group={d.onOtherLipidTherapy} /> No
+        <input
+          type="radio"
+          name="onOtherLipidTherapy"
+          value="no"
+          bind:group={d.onOtherLipidTherapy}
+        /> No
       </label>
     </RadioGroup>
   </Field>

@@ -28,11 +28,11 @@ export const HIGH_RISK_CLASSES = ['anticoagulant', 'insulin', 'opioid'];
  * intentional AND carries both an intended action and a rationale.
  */
 export function isIntentional(d: Discrepancy): boolean {
-	return (
-		d.intentional === 'yes' &&
-		(d.intendedAction || '').trim() !== '' &&
-		(d.rationale || '').trim() !== ''
-	);
+  return (
+    d.intentional === 'yes' &&
+    (d.intendedAction || '').trim() !== '' &&
+    (d.rationale || '').trim() !== ''
+  );
 }
 
 /**
@@ -40,14 +40,14 @@ export function isIntentional(d: Discrepancy): boolean {
  * documented intentional decision — i.e. explicitly `intentional !== 'yes'`.
  */
 export function isUnintentional(d: Discrepancy): boolean {
-	return d.intentional !== 'yes';
+  return d.intentional !== 'yes';
 }
 
 /** Whether any discrepancy is missing its intended action or rationale. */
 export function anyMissingActionOrRationale(discrepancies: Discrepancy[]): boolean {
-	return discrepancies.some(
-		(d) => (d.intendedAction || '').trim() === '' || (d.rationale || '').trim() === ''
-	);
+  return discrepancies.some(
+    (d) => (d.intendedAction || '').trim() === '' || (d.rationale || '').trim() === ''
+  );
 }
 
 /**
@@ -55,7 +55,7 @@ export function anyMissingActionOrRationale(discrepancies: Discrepancy[]): boole
  * carries a drug name; a row with no drug name is an unreviewed placeholder.
  */
 export function lineItemNeedsReview(li: LineItem): boolean {
-	return (li.drugName || '').trim() === '';
+  return (li.drugName || '').trim() === '';
 }
 
 /**
@@ -63,7 +63,7 @@ export function lineItemNeedsReview(li: LineItem): boolean {
  * allergies or a positive "no known drug allergies").
  */
 export function allergyStatusDocumented(allergyStatus: string): boolean {
-	return allergyStatus === 'documented' || allergyStatus === 'no-known-drug-allergies';
+  return allergyStatus === 'documented' || allergyStatus === 'no-known-drug-allergies';
 }
 
 /**
@@ -73,23 +73,23 @@ export function allergyStatusDocumented(allergyStatus: string): boolean {
  * discrepancy high-risk.
  */
 export function discrepancyTouchesHighRisk(d: Discrepancy, lineItems: LineItem[]): boolean {
-	const refs = `${d.bpmhItemRef || ''} ${d.inpatientItemRef || ''}`.toLowerCase();
-	return lineItems.some((li) => {
-		if (!HIGH_RISK_CLASSES.includes(li.highRiskClass)) return false;
-		const name = (li.drugName || '').trim().toLowerCase();
-		return name !== '' && refs.includes(name);
-	});
+  const refs = `${d.bpmhItemRef || ''} ${d.inpatientItemRef || ''}`.toLowerCase();
+  return lineItems.some((li) => {
+    if (!HIGH_RISK_CLASSES.includes(li.highRiskClass)) return false;
+    const name = (li.drugName || '').trim().toLowerCase();
+    return name !== '' && refs.includes(name);
+  });
 }
 
 /** Derive the reconciliation status (spec §4, first match wins). */
 export function deriveStatus(
-	data: ReconciliationData,
-	counts: { sourceCount: number; unintentionalCount: number }
+  data: ReconciliationData,
+  counts: { sourceCount: number; unintentionalCount: number }
 ): ReconciliationStatus {
-	if (counts.sourceCount < MINIMUM_SOURCES) return 'incomplete';
-	if (!allergyStatusDocumented(data.allergyReview.allergyStatus)) return 'incomplete';
-	if ((data.lineItems || []).some(lineItemNeedsReview)) return 'incomplete';
-	if (counts.unintentionalCount > 0) return 'discrepancies-outstanding';
-	if (anyMissingActionOrRationale(data.discrepancies || [])) return 'discrepancies-outstanding';
-	return 'complete';
+  if (counts.sourceCount < MINIMUM_SOURCES) return 'incomplete';
+  if (!allergyStatusDocumented(data.allergyReview.allergyStatus)) return 'incomplete';
+  if ((data.lineItems || []).some(lineItemNeedsReview)) return 'incomplete';
+  if (counts.unintentionalCount > 0) return 'discrepancies-outstanding';
+  if (anyMissingActionOrRationale(data.discrepancies || [])) return 'discrepancies-outstanding';
+  return 'complete';
 }

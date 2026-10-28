@@ -5,7 +5,7 @@ import type {
   LpaApplication,
   PersonToNotify,
   RegistrationApplication,
-  ReplacementAttorney,
+  ReplacementAttorney
 } from './types.js';
 
 export function emptyDonor(): Donor {
@@ -24,7 +24,7 @@ export function emptyDonor(): Donor {
     jurisdiction: '',
     preferredLanguage: '',
     capacityDeclared: '',
-    capacityDeclaredAt: '',
+    capacityDeclaredAt: ''
   };
 }
 
@@ -41,14 +41,14 @@ export function emptyAttorney(): Attorney {
     postcode: '',
     relationshipToDonor: '',
     isBankrupt: '',
-    capacityDeclared: '',
+    capacityDeclared: ''
   };
 }
 
 export function emptyReplacementAttorney(): ReplacementAttorney {
   return {
     ...emptyAttorney(),
-    replacementTrigger: '',
+    replacementTrigger: ''
   };
 }
 
@@ -69,7 +69,7 @@ export function emptyCertificateProvider(): CertificateProvider {
     relationshipToDonor: '',
     declaredNotFamily: '',
     declaredNotEmployee: '',
-    declaredNotAttorney: '',
+    declaredNotAttorney: ''
   };
 }
 
@@ -83,7 +83,7 @@ export function emptyPersonToNotify(): PersonToNotify {
     postalAddressAsFullText: '',
     countryAsIso31661Alpha2: '',
     postcode: '',
-    relationshipToDonor: '',
+    relationshipToDonor: ''
   };
 }
 
@@ -95,7 +95,7 @@ export function emptyRegistrationApplication(): RegistrationApplication {
     feeRemission: '',
     feeRemissionReason: '',
     submittedAt: '',
-    submissionChannel: '',
+    submissionChannel: ''
   };
 }
 
@@ -115,6 +115,6 @@ export function emptyLpaApplication(): LpaApplication {
     preferences: [],
     instructions: [],
     signatures: [],
-    registration: emptyRegistrationApplication(),
+    registration: emptyRegistrationApplication()
   };
 }

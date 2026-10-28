@@ -1,10 +1,10 @@
 import type {
-	UrinalysisRequest,
-	GradingResult,
-	Recommendation,
-	AppropriatenessBand,
-	PreanalyticalBand,
-	FiredRule
+  UrinalysisRequest,
+  GradingResult,
+  Recommendation,
+  AppropriatenessBand,
+  PreanalyticalBand,
+  FiredRule
 } from './types';
 import { gradeAppropriateness } from './appropriateness-rules';
 import { gradePreanalytical } from './preanalytical-rules';
@@ -32,49 +32,49 @@ import { countSelectedTests, recommendationLabel } from './utils';
  * No side effects, no network calls, no I/O.
  */
 export function calculateGrade(request: UrinalysisRequest): GradingResult {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	// Axis A — appropriateness.
-	const a = gradeAppropriateness(request);
-	firedRules.push(...a.firedRules);
+  // Axis A — appropriateness.
+  const a = gradeAppropriateness(request);
+  firedRules.push(...a.firedRules);
 
-	// Axis B — preanalytical specimen suitability.
-	const b = gradePreanalytical(request);
-	firedRules.push(...b.firedRules);
+  // Axis B — preanalytical specimen suitability.
+  const b = gradePreanalytical(request);
+  firedRules.push(...b.firedRules);
 
-	// Axis C — completeness.
-	const c = gradeCompleteness(request);
-	firedRules.push(...c.firedRules);
+  // Axis C — completeness.
+  const c = gradeCompleteness(request);
+  firedRules.push(...c.firedRules);
 
-	// Axis D — triage.
-	const d = gradeTriage(request);
-	firedRules.push(...d.firedRules);
+  // Axis D — triage.
+  const d = gradeTriage(request);
+  firedRules.push(...d.firedRules);
 
-	const noTestSelected = countSelectedTests(request.tests) === 0;
+  const noTestSelected = countSelectedTests(request.tests) === 0;
 
-	const recommendation = deriveRecommendation(
-		a.appropriatenessBand,
-		b.preanalyticalBand,
-		c.completenessPercent,
-		noTestSelected
-	);
+  const recommendation = deriveRecommendation(
+    a.appropriatenessBand,
+    b.preanalyticalBand,
+    c.completenessPercent,
+    noTestSelected
+  );
 
-	const flags = detectFlags(request);
+  const flags = detectFlags(request);
 
-	return {
-		appropriatenessScore: a.score,
-		appropriatenessBand: a.appropriatenessBand,
-		preanalyticalBand: b.preanalyticalBand,
-		specimenNote: b.note,
-		completenessPercent: c.completenessPercent,
-		triageTier: d.triageTier,
-		targetTimeframe: d.targetTimeframe,
-		recommendation,
-		recommendationLabel: recommendationLabel(recommendation),
-		firedRules,
-		flags,
-		gradedAt: new Date().toISOString()
-	};
+  return {
+    appropriatenessScore: a.score,
+    appropriatenessBand: a.appropriatenessBand,
+    preanalyticalBand: b.preanalyticalBand,
+    specimenNote: b.note,
+    completenessPercent: c.completenessPercent,
+    triageTier: d.triageTier,
+    targetTimeframe: d.targetTimeframe,
+    recommendation,
+    recommendationLabel: recommendationLabel(recommendation),
+    firedRules,
+    flags,
+    gradedAt: new Date().toISOString()
+  };
 }
 
 /**
@@ -82,14 +82,14 @@ export function calculateGrade(request: UrinalysisRequest): GradingResult {
  * four axes. Least-alarming wins only when nothing escalates.
  */
 export function deriveRecommendation(
-	appropriatenessBand: AppropriatenessBand,
-	preanalyticalBand: PreanalyticalBand,
-	completenessPercent: number,
-	noTestSelected: boolean
+  appropriatenessBand: AppropriatenessBand,
+  preanalyticalBand: PreanalyticalBand,
+  completenessPercent: number,
+  noTestSelected: boolean
 ): Recommendation {
-	if (noTestSelected) return 'query-referrer';
-	if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
-	if (preanalyticalBand === 'reject-risk') return 'reject';
-	if (completenessPercent < 50) return 'query-referrer';
-	return 'accept';
+  if (noTestSelected) return 'query-referrer';
+  if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
+  if (preanalyticalBand === 'reject-risk') return 'reject';
+  if (completenessPercent < 50) return 'query-referrer';
+  return 'accept';
 }

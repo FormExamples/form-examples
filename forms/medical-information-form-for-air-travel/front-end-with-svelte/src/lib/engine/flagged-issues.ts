@@ -16,7 +16,7 @@ export function detectSafetyFlags(data: MedifAssessment): SafetyFlag[] {
       category: 'cardiac',
       priority: 'high',
       description: `Acute myocardial infarction ${miDays} days ago`,
-      suggestedAction: 'Do not fly until ≥ 7 days post-MI and cardiology cleared.',
+      suggestedAction: 'Do not fly until ≥ 7 days post-MI and cardiology cleared.'
     });
   }
   if (data.cardiovascular.unstableAngina === 'yes') {
@@ -25,7 +25,7 @@ export function detectSafetyFlags(data: MedifAssessment): SafetyFlag[] {
       category: 'cardiac',
       priority: 'medium',
       description: 'Unstable angina declared',
-      suggestedAction: 'Cardiology review and symptom control before clearance.',
+      suggestedAction: 'Cardiology review and symptom control before clearance.'
     });
   }
 
@@ -37,7 +37,7 @@ export function detectSafetyFlags(data: MedifAssessment): SafetyFlag[] {
       category: 'pulmonary',
       priority: 'high',
       description: `Pneumothorax ${ptxDays} days ago — gas expansion risk at cabin altitude`,
-      suggestedAction: 'Confirm complete lung re-expansion radiographically before travel.',
+      suggestedAction: 'Confirm complete lung re-expansion radiographically before travel.'
     });
   }
 
@@ -52,7 +52,7 @@ export function detectSafetyFlags(data: MedifAssessment): SafetyFlag[] {
       category: 'gas-expansion',
       priority: 'high',
       description: `Trapped gas in body cavity: ${data.recentEvents.cabinGasRisk}`,
-      suggestedAction: 'Defer flight per surgical team; commercial cabin pressure expands gas ~30%.',
+      suggestedAction: 'Defer flight per surgical team; commercial cabin pressure expands gas ~30%.'
     });
   }
 
@@ -63,7 +63,7 @@ export function detectSafetyFlags(data: MedifAssessment): SafetyFlag[] {
       category: 'pulmonary',
       priority: 'high',
       description: `Resting SpO₂ ${data.respiratory.restingSpo2Percent}% on room air`,
-      suggestedAction: 'In-flight oxygen mandatory; consider deferring travel.',
+      suggestedAction: 'In-flight oxygen mandatory; consider deferring travel.'
     });
   }
 
@@ -77,7 +77,7 @@ export function detectSafetyFlags(data: MedifAssessment): SafetyFlag[] {
       category: 'oxygen',
       priority: 'high',
       description: `Supplemental oxygen flow ${data.inflightNeeds.oxygenFlowRateLpm} L/min`,
-      suggestedAction: 'Dangerous-goods declaration; coordinate with airline medical desk.',
+      suggestedAction: 'Dangerous-goods declaration; coordinate with airline medical desk.'
     });
   }
 
@@ -88,7 +88,7 @@ export function detectSafetyFlags(data: MedifAssessment): SafetyFlag[] {
       category: 'haematology',
       priority: 'high',
       description: `Haemoglobin ${data.cabinMeds.haemoglobinGPerL} g/L`,
-      suggestedAction: 'Transfuse or defer travel until Hb ≥ 80 g/L.',
+      suggestedAction: 'Transfuse or defer travel until Hb ≥ 80 g/L.'
     });
   }
 
@@ -104,7 +104,7 @@ export function detectSafetyFlags(data: MedifAssessment): SafetyFlag[] {
       category: 'obstetric',
       priority: 'high',
       description: `Singleton pregnancy at ${gw} weeks (>36)`,
-      suggestedAction: 'Most carriers refuse carriage; ground transport recommended.',
+      suggestedAction: 'Most carriers refuse carriage; ground transport recommended.'
     });
   }
   if (
@@ -117,7 +117,7 @@ export function detectSafetyFlags(data: MedifAssessment): SafetyFlag[] {
       category: 'obstetric',
       priority: 'high',
       description: `Multiple pregnancy at ${gw} weeks (>32)`,
-      suggestedAction: 'Most carriers refuse carriage for multiple pregnancies > 32 weeks.',
+      suggestedAction: 'Most carriers refuse carriage for multiple pregnancies > 32 weeks.'
     });
   }
 
@@ -128,7 +128,8 @@ export function detectSafetyFlags(data: MedifAssessment): SafetyFlag[] {
       category: 'communicable',
       priority: 'high',
       description: 'Active infectious communicable disease',
-      suggestedAction: 'Defer travel until non-infectious; notify public-health authority if required.',
+      suggestedAction:
+        'Defer travel until non-infectious; notify public-health authority if required.'
     });
   }
 
@@ -139,7 +140,7 @@ export function detectSafetyFlags(data: MedifAssessment): SafetyFlag[] {
       category: 'mental-health',
       priority: 'medium',
       description: 'Recent psychiatric event declared',
-      suggestedAction: 'Confirm escort, medication plan, and behavioural risk assessment.',
+      suggestedAction: 'Confirm escort, medication plan, and behavioural risk assessment.'
     });
   }
 
@@ -149,8 +150,9 @@ export function detectSafetyFlags(data: MedifAssessment): SafetyFlag[] {
       flagId: 'F-EQ-DG-BATTERY',
       category: 'equipment',
       priority: 'medium',
-      description: 'Battery-powered medical device carried — IATA Dangerous Goods Regulations apply',
-      suggestedAction: 'Submit DG paperwork; verify lithium-ion ratings ≤ 160 Wh.',
+      description:
+        'Battery-powered medical device carried — IATA Dangerous Goods Regulations apply',
+      suggestedAction: 'Submit DG paperwork; verify lithium-ion ratings ≤ 160 Wh.'
     });
   }
 
@@ -165,7 +167,7 @@ export function detectSafetyFlags(data: MedifAssessment): SafetyFlag[] {
       category: 'mobility',
       priority: 'low',
       description: `Wheelchair assistance requested (${data.inflightNeeds.wheelchairType})`,
-      suggestedAction: 'Confirm gate-to-seat handover and arrival assistance.',
+      suggestedAction: 'Confirm gate-to-seat handover and arrival assistance.'
     });
   }
 

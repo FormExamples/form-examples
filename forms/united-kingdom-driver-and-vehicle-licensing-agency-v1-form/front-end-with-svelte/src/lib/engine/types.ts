@@ -5,11 +5,7 @@
 export type YesNo = 'yes' | 'no' | '';
 
 /** Eyesight standard self-declaration. */
-export type EyesightStandard =
-	| 'yes-without-correction'
-	| 'yes-with-correction'
-	| 'no'
-	| '';
+export type EyesightStandard = 'yes-without-correction' | 'yes-with-correction' | 'no' | '';
 
 /** Which eye is affected, for monocular declarations. */
 export type WhichEye = 'left' | 'right' | '';
@@ -18,25 +14,13 @@ export type WhichEye = 'left' | 'right' | '';
 export type WhichEyes = 'both' | 'left' | 'right' | '';
 
 /** Origin of monocular vision. */
-export type MonocularDuration =
-	| 'since-birth-or-childhood'
-	| 'health-or-injury'
-	| '';
+export type MonocularDuration = 'since-birth-or-childhood' | 'health-or-injury' | '';
 
 /** Whether the patient has adapted to monocular vision. */
-export type MonocularAdaptation =
-	| 'adapted-advised'
-	| 'adapted-self'
-	| 'not-adapted'
-	| '';
+export type MonocularAdaptation = 'adapted-advised' | 'adapted-self' | 'not-adapted' | '';
 
 /** Cause of visual field problem, when not solely an eye condition. */
-export type VisualFieldCause =
-	| 'brain-tumour'
-	| 'head-injury'
-	| 'stroke'
-	| 'other'
-	| '';
+export type VisualFieldCause = 'brain-tumour' | 'head-injury' | 'stroke' | 'other' | '';
 
 /** Contact preference (for healthcare professional or DVLA correspondence). */
 export type ContactPreference = 'email' | 'sms' | '';
@@ -46,14 +30,14 @@ export type ContactPreference = 'email' | 'sms' | '';
 // ──────────────────────────────────────────────
 
 export interface PersonalDetails {
-	title: string;
-	fullName: string;
-	dateOfBirth: string;
-	address: string;
-	postcode: string;
-	email: string;
-	contactNumber: string;
-	changeOfDetails: string;
+  title: string;
+  fullName: string;
+  dateOfBirth: string;
+  address: string;
+  postcode: string;
+  email: string;
+  contactNumber: string;
+  changeOfDetails: string;
 }
 
 // ──────────────────────────────────────────────
@@ -61,32 +45,32 @@ export interface PersonalDetails {
 // ──────────────────────────────────────────────
 
 export interface GpDetails {
-	name: string;
-	surgeryName: string;
-	address: string;
-	town: string;
-	postcode: string;
-	contactNumber: string;
-	email: string;
-	dateLastSeen: string;
+  name: string;
+  surgeryName: string;
+  address: string;
+  town: string;
+  postcode: string;
+  contactNumber: string;
+  email: string;
+  dateLastSeen: string;
 }
 
 export interface ConsultantDetails {
-	name: string;
-	speciality: string;
-	department: string;
-	hospitalName: string;
-	address: string;
-	town: string;
-	postcode: string;
-	contactNumber: string;
-	email: string;
-	dateLastSeen: string;
+  name: string;
+  speciality: string;
+  department: string;
+  hospitalName: string;
+  address: string;
+  town: string;
+  postcode: string;
+  contactNumber: string;
+  email: string;
+  dateLastSeen: string;
 }
 
 export interface HealthcareProfessionals {
-	gp: GpDetails;
-	consultant: ConsultantDetails;
+  gp: GpDetails;
+  consultant: ConsultantDetails;
 }
 
 // ──────────────────────────────────────────────
@@ -94,7 +78,7 @@ export interface HealthcareProfessionals {
 // ──────────────────────────────────────────────
 
 export interface EyesightStandards {
-	meetsStandard: EyesightStandard;
+  meetsStandard: EyesightStandard;
 }
 
 // ──────────────────────────────────────────────
@@ -102,11 +86,11 @@ export interface EyesightStandards {
 // ──────────────────────────────────────────────
 
 export interface VisionInBothEyes {
-	hasVisionInBothEyes: YesNo;
-	whichEye: WhichEye;
-	duration: MonocularDuration;
-	adaptation: MonocularAdaptation;
-	monocularDeclarationConfirmed: boolean;
+  hasVisionInBothEyes: YesNo;
+  whichEye: WhichEye;
+  duration: MonocularDuration;
+  adaptation: MonocularAdaptation;
+  monocularDeclarationConfirmed: boolean;
 }
 
 // ──────────────────────────────────────────────
@@ -114,10 +98,10 @@ export interface VisionInBothEyes {
 // ──────────────────────────────────────────────
 
 export interface FieldOfVision {
-	hasProblem: YesNo;
-	causedSolelyByEyeCondition: YesNo;
-	cause: VisualFieldCause;
-	causeOtherDetails: string;
+  hasProblem: YesNo;
+  causedSolelyByEyeCondition: YesNo;
+  cause: VisualFieldCause;
+  causeOtherDetails: string;
 }
 
 // ──────────────────────────────────────────────
@@ -125,8 +109,8 @@ export interface FieldOfVision {
 // ──────────────────────────────────────────────
 
 export interface Glaucoma {
-	hasCondition: YesNo;
-	whichEyes: WhichEyes;
+  hasCondition: YesNo;
+  whichEyes: WhichEyes;
 }
 
 // ──────────────────────────────────────────────
@@ -134,8 +118,8 @@ export interface Glaucoma {
 // ──────────────────────────────────────────────
 
 export interface RetinitisPigmentosa {
-	hasCondition: YesNo;
-	whichEyes: WhichEyes;
+  hasCondition: YesNo;
+  whichEyes: WhichEyes;
 }
 
 // ──────────────────────────────────────────────
@@ -143,11 +127,11 @@ export interface RetinitisPigmentosa {
 // ──────────────────────────────────────────────
 
 export interface LaserTreatment {
-	hasHadTreatment: YesNo;
-	leftEyeFirstDate: string;
-	rightEyeFirstDate: string;
-	leftEyeLastDate: string;
-	rightEyeLastDate: string;
+  hasHadTreatment: YesNo;
+  leftEyeFirstDate: string;
+  rightEyeFirstDate: string;
+  leftEyeLastDate: string;
+  rightEyeLastDate: string;
 }
 
 // ──────────────────────────────────────────────
@@ -155,10 +139,10 @@ export interface LaserTreatment {
 // ──────────────────────────────────────────────
 
 export interface Blepharospasm {
-	hasCondition: YesNo;
-	whichEyes: WhichEyes;
-	hasHadTreatment: YesNo;
-	adequatelyControlled: YesNo;
+  hasCondition: YesNo;
+  whichEyes: WhichEyes;
+  hasHadTreatment: YesNo;
+  adequatelyControlled: YesNo;
 }
 
 // ──────────────────────────────────────────────
@@ -166,8 +150,8 @@ export interface Blepharospasm {
 // ──────────────────────────────────────────────
 
 export interface NightBlindness {
-	hasCondition: YesNo;
-	whichEyes: WhichEyes;
+  hasCondition: YesNo;
+  whichEyes: WhichEyes;
 }
 
 // ──────────────────────────────────────────────
@@ -175,12 +159,12 @@ export interface NightBlindness {
 // ──────────────────────────────────────────────
 
 export interface DoubleVision {
-	hasCondition: YesNo;
-	controlled: YesNo;
-	sameForSixMonthsOrMore: YesNo;
-	doubleVisionDeclarationConfirmed: boolean;
-	declarationSignatureName: string;
-	declarationDate: string;
+  hasCondition: YesNo;
+  controlled: YesNo;
+  sameForSixMonthsOrMore: YesNo;
+  doubleVisionDeclarationConfirmed: boolean;
+  declarationSignatureName: string;
+  declarationDate: string;
 }
 
 // ──────────────────────────────────────────────
@@ -188,8 +172,8 @@ export interface DoubleVision {
 // ──────────────────────────────────────────────
 
 export interface OtherVisionConditions {
-	hasOther: YesNo;
-	details: string;
+  hasOther: YesNo;
+  details: string;
 }
 
 // ──────────────────────────────────────────────
@@ -197,8 +181,8 @@ export interface OtherVisionConditions {
 // ──────────────────────────────────────────────
 
 export interface RecentContact {
-	hadContact: YesNo;
-	dateOfContact: string;
+  hadContact: YesNo;
+  dateOfContact: string;
 }
 
 // ──────────────────────────────────────────────
@@ -206,13 +190,13 @@ export interface RecentContact {
 // ──────────────────────────────────────────────
 
 export interface Authorisation {
-	declarationConfirmed: boolean;
-	name: string;
-	signature: string;
-	date: string;
-	authoriseElectronicCorrespondence: YesNo;
-	contactPreferenceFromHealthcareProfessional: ContactPreference;
-	contactPreferenceFromDvla: ContactPreference;
+  declarationConfirmed: boolean;
+  name: string;
+  signature: string;
+  date: string;
+  authoriseElectronicCorrespondence: YesNo;
+  contactPreferenceFromHealthcareProfessional: ContactPreference;
+  contactPreferenceFromDvla: ContactPreference;
 }
 
 // ──────────────────────────────────────────────
@@ -220,20 +204,20 @@ export interface Authorisation {
 // ──────────────────────────────────────────────
 
 export interface AssessmentData {
-	personalDetails: PersonalDetails;
-	healthcareProfessionals: HealthcareProfessionals;
-	eyesightStandards: EyesightStandards;
-	visionInBothEyes: VisionInBothEyes;
-	fieldOfVision: FieldOfVision;
-	glaucoma: Glaucoma;
-	retinitisPigmentosa: RetinitisPigmentosa;
-	laserTreatment: LaserTreatment;
-	blepharospasm: Blepharospasm;
-	nightBlindness: NightBlindness;
-	doubleVision: DoubleVision;
-	otherVisionConditions: OtherVisionConditions;
-	recentContact: RecentContact;
-	authorisation: Authorisation;
+  personalDetails: PersonalDetails;
+  healthcareProfessionals: HealthcareProfessionals;
+  eyesightStandards: EyesightStandards;
+  visionInBothEyes: VisionInBothEyes;
+  fieldOfVision: FieldOfVision;
+  glaucoma: Glaucoma;
+  retinitisPigmentosa: RetinitisPigmentosa;
+  laserTreatment: LaserTreatment;
+  blepharospasm: Blepharospasm;
+  nightBlindness: NightBlindness;
+  doubleVision: DoubleVision;
+  otherVisionConditions: OtherVisionConditions;
+  recentContact: RecentContact;
+  authorisation: Authorisation;
 }
 
 // ──────────────────────────────────────────────
@@ -244,37 +228,37 @@ export type ValidationSeverity = 'error' | 'warning' | 'info';
 
 /** A validation rule applied to the active branch of the form. */
 export interface ValidationRule {
-	id: string;
-	section: keyof AssessmentData;
-	severity: ValidationSeverity;
-	description: string;
-	/** Returns true when the rule is satisfied (no issue). */
-	evaluate: (data: AssessmentData) => boolean;
-	/** Human-readable issue message when the rule fails. */
-	message: string;
+  id: string;
+  section: keyof AssessmentData;
+  severity: ValidationSeverity;
+  description: string;
+  /** Returns true when the rule is satisfied (no issue). */
+  evaluate: (data: AssessmentData) => boolean;
+  /** Human-readable issue message when the rule fails. */
+  message: string;
 }
 
 export interface FiredValidation {
-	id: string;
-	section: keyof AssessmentData;
-	severity: ValidationSeverity;
-	description: string;
-	message: string;
+  id: string;
+  section: keyof AssessmentData;
+  severity: ValidationSeverity;
+  description: string;
+  message: string;
 }
 
 export interface FlaggedIssue {
-	id: string;
-	category: string;
-	message: string;
-	priority: 'urgent' | 'high' | 'medium' | 'low';
+  id: string;
+  category: string;
+  message: string;
+  priority: 'urgent' | 'high' | 'medium' | 'low';
 }
 
 export interface ValidationResult {
-	isComplete: boolean;
-	completionRatio: number;
-	firedValidations: FiredValidation[];
-	flaggedIssues: FlaggedIssue[];
-	timestamp: string;
+  isComplete: boolean;
+  completionRatio: number;
+  firedValidations: FiredValidation[];
+  flaggedIssues: FlaggedIssue[];
+  timestamp: string;
 }
 
 // ──────────────────────────────────────────────
@@ -282,8 +266,8 @@ export interface ValidationResult {
 // ──────────────────────────────────────────────
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
-	section: keyof AssessmentData;
+  number: number;
+  title: string;
+  shortTitle: string;
+  section: keyof AssessmentData;
 }

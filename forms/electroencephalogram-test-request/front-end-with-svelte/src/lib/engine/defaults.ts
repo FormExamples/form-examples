@@ -7,45 +7,45 @@ import type { EegRequest } from './types';
  * shape used by every other front-end.
  */
 export function createDefaultRequest(): EegRequest {
-	return {
-		clinician: {
-			clinicianName: '',
-			clinicianRole: '',
-			registrationBody: '',
-			registrationNumber: '',
-			requesterContact: '',
-			supervisingConsultant: '',
-			siteName: '',
-			referralDate: ''
-		},
-		patient: {
-			firstName: '',
-			lastName: '',
-			dateOfBirth: '',
-			nhsNumber: '',
-			interpreterRequired: false
-		},
-		request: {
-			eegType: '',
-			primaryIndication: '',
-			clinicalQuestion: '',
-			relevantHistory: ''
-		},
-		context: {
-			seizureFrequency: '',
-			currentAntiepileptics: '',
-			firstSeizure: false,
-			knownEpilepsy: false
-		},
-		redFlags: {
-			recentSeizure: false,
-			suspectedStatusEpilepticus: false
-		},
-		triage: {
-			urgency: '',
-			requestedByDate: '',
-			setting: '',
-			notes: ''
-		}
-	};
+  return {
+    clinician: {
+      clinicianName: '',
+      clinicianRole: '',
+      registrationBody: '',
+      registrationNumber: '',
+      requesterContact: '',
+      supervisingConsultant: '',
+      siteName: '',
+      referralDate: ''
+    },
+    patient: {
+      firstName: '',
+      lastName: '',
+      dateOfBirth: '',
+      nhsNumber: '',
+      interpreterRequired: false
+    },
+    request: {
+      eegType: '',
+      primaryIndication: '',
+      clinicalQuestion: '',
+      relevantHistory: ''
+    },
+    context: {
+      seizureFrequency: '',
+      currentAntiepileptics: '',
+      firstSeizure: false,
+      knownEpilepsy: false
+    },
+    redFlags: {
+      recentSeizure: false,
+      suspectedStatusEpilepticus: false
+    },
+    triage: {
+      urgency: '',
+      requestedByDate: '',
+      setting: '',
+      notes: ''
+    }
+  };
 }

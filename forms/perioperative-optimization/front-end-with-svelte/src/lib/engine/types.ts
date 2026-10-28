@@ -15,85 +15,78 @@
 // ──────────────────────────────────────────────
 
 /** Tri-state yes / no / unanswered, matching the SQL CHECK constraints. */
-export type YesNo = "yes" | "no" | "";
+export type YesNo = 'yes' | 'no' | '';
 
 /** Assessment lifecycle status. */
-export type AssessmentStatus = "draft" | "submitted" | "reviewed" | "urgent";
+export type AssessmentStatus = 'draft' | 'submitted' | 'reviewed' | 'urgent';
 
 /** The eight optimization domains. */
 export type DomainKey =
-  | "anaemia"
-  | "glycaemic-control"
-  | "smoking"
-  | "alcohol"
-  | "nutrition"
-  | "physical-fitness"
-  | "medication"
-  | "cardiorespiratory";
+  | 'anaemia'
+  | 'glycaemic-control'
+  | 'smoking'
+  | 'alcohol'
+  | 'nutrition'
+  | 'physical-fitness'
+  | 'medication'
+  | 'cardiorespiratory';
 
 /** Per-domain status after time-to-surgery gating. */
 export type DomainStatus =
-  | "optimized"
-  | "in-progress"
-  | "action-required"
-  | "insufficient-time"
-  | "not-applicable";
+  'optimized' | 'in-progress' | 'action-required' | 'insufficient-time' | 'not-applicable';
 
 /** Composite surgical readiness band, by max-grade across the domains. */
 export type Readiness =
-  | "ready"
-  | "optimization-in-progress"
-  | "optimization-required"
-  | "defer-surgery";
+  'ready' | 'optimization-in-progress' | 'optimization-required' | 'defer-surgery';
 
 /** The explicit human decision recorded at sign-off. */
 export type GateDecision =
-  | "proceed"
-  | "proceed-with-prehabilitation"
-  | "defer-and-optimize"
-  | "accept-unoptimized-risk"
-  | "mdt-review"
-  | "cancel"
-  | "";
+  | 'proceed'
+  | 'proceed-with-prehabilitation'
+  | 'defer-and-optimize'
+  | 'accept-unoptimized-risk'
+  | 'mdt-review'
+  | 'cancel'
+  | '';
 
 /** MUST risk category. */
-export type MustRisk = "low" | "medium" | "high" | "";
+export type MustRisk = 'low' | 'medium' | 'high' | '';
 
 /** Safety-flag priority. */
-export type FlagPriority = "low" | "medium" | "high";
+export type FlagPriority = 'low' | 'medium' | 'high';
 
 /** Safety-flag category, mirroring the SQL CHECK constraint on grade_flag. */
 export type FlagCategory =
-  | "severe-anaemia"
-  | "iron-deficiency-untreated"
-  | "hba1c-above-threshold"
-  | "undiagnosed-diabetes"
-  | "sglt2-inhibitor-not-held"
-  | "glp1-agonist-aspiration-risk"
-  | "anticoagulation-plan-missing"
-  | "insufficient-time-to-optimize"
-  | "active-smoker-major-surgery"
-  | "alcohol-dependence-risk"
-  | "high-malnutrition-risk"
-  | "poor-functional-capacity"
-  | "severe-frailty"
-  | "uncontrolled-hypertension"
-  | "cardiac-optimization-required"
-  | "respiratory-optimization-required"
-  | "osa-unassessed"
-  | "renal-optimization-required"
-  | "prior-anaesthetic-complication"
-  | "cognitive-assessment-indicated"
-  | "sarcopenia-risk"
-  | "dehydration-aki-risk"
-  | "rebound-glycaemic-risk"
-  | "psychological-support-required"
-  | "social-support-gap"
-  | "capacity-concern"
-  | "pregnancy"
-  | "paediatric"
-  | "safeguarding"
-  | "other";
+  | 'severe-anaemia'
+  | 'iron-deficiency-untreated'
+  | 'hba1c-above-threshold'
+  | 'undiagnosed-diabetes'
+  | 'sglt2-inhibitor-not-held'
+  | 'glp1-agonist-aspiration-risk'
+  | 'anticoagulation-plan-missing'
+  | 'insufficient-time-to-optimize'
+  | 'active-smoker-major-surgery'
+  | 'alcohol-dependence-risk'
+  | 'high-malnutrition-risk'
+  | 'poor-functional-capacity'
+  | 'severe-frailty'
+  | 'uncontrolled-hypertension'
+  | 'cardiac-optimization-required'
+  | 'respiratory-optimization-required'
+  | 'osa-unassessed'
+  | 'renal-optimization-required'
+  | 'prior-anaesthetic-complication'
+  | 'cognitive-assessment-indicated'
+  | 'sarcopenia-risk'
+  | 'dehydration-aki-risk'
+  | 'rebound-glycaemic-risk'
+  | 'psychological-support-required'
+  | 'social-support-gap'
+  | 'capacity-concern'
+  | 'pregnancy'
+  | 'paediatric'
+  | 'safeguarding'
+  | 'other';
 
 /** One safety flag raised independently of the readiness band. */
 export interface AdditionalFlag {
@@ -186,13 +179,13 @@ export interface MedicationSection {
   takesAceInhibitorOrArb: YesNo;
   takesSglt2Inhibitor: YesNo;
   takesGlp1Agonist: YesNo;
-  glp1Formulation: "daily" | "weekly" | "";
+  glp1Formulation: 'daily' | 'weekly' | '';
   glp1HeldPerGuideline: YesNo;
   glp1ExtendedClearFluidsConfirmed: YesNo;
   glp1GiSymptoms: YesNo;
   glp1GiSymptomsDetails: string;
   glp1GastricUltrasoundPerformed: YesNo;
-  glp1GastricUltrasoundFindings: "empty" | "low-risk" | "full-stomach" | "";
+  glp1GastricUltrasoundFindings: 'empty' | 'low-risk' | 'full-stomach' | '';
   takesCorticosteroid: YesNo;
   takesImmunosuppressant: YesNo;
   takesHormoneTherapy: YesNo;
@@ -403,7 +396,7 @@ export interface PlanSection {
 /** Wizard section: signoff. */
 export interface SignoffSection {
   /** Blank, or one of the Readiness bands, when the clinician overrides. */
-  overrideReadiness: Readiness | "";
+  overrideReadiness: Readiness | '';
   overrideReason: string;
   gateDecision: GateDecision;
   additionalNotes: string;
@@ -475,7 +468,7 @@ export interface GradingResult {
   dukeActivityStatusIndex: number | null;
   clinicalFrailtyScale: number | null;
   friedPhenotypeScore: number | null;
-  friedFrailtyCategory: "robust" | "pre-frail" | "frail" | "";
+  friedFrailtyCategory: 'robust' | 'pre-frail' | 'frail' | '';
   computedReadiness: Readiness;
   finalReadiness: Readiness;
   overrideReason: string;

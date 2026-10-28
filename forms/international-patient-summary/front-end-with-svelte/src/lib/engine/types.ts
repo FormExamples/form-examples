@@ -16,83 +16,83 @@ export type ResultInterpretation = 'low' | 'normal' | 'high' | 'critical' | '';
 export type AuthoringStatus = 'draft' | 'final' | '';
 
 export interface PatientDemographics {
-	givenName: string;
-	familyName: string;
-	dateOfBirth: string;
-	sex: Sex;
-	nationalIdentifier: string;
-	addressLine: string;
-	city: string;
-	postalCode: string;
-	country: string;
-	preferredLanguage: string;
-	contactPhone: string;
+  givenName: string;
+  familyName: string;
+  dateOfBirth: string;
+  sex: Sex;
+  nationalIdentifier: string;
+  addressLine: string;
+  city: string;
+  postalCode: string;
+  country: string;
+  preferredLanguage: string;
+  contactPhone: string;
 }
 
 export interface Problem {
-	description: string;
-	icd10Code: string;
-	onsetDate: string;
-	status: ProblemStatus;
+  description: string;
+  icd10Code: string;
+  onsetDate: string;
+  status: ProblemStatus;
 }
 
 export interface Medication {
-	name: string;
-	atcCode: string;
-	dose: string;
-	frequency: string;
-	route: string;
+  name: string;
+  atcCode: string;
+  dose: string;
+  frequency: string;
+  route: string;
 }
 
 export interface Allergy {
-	substance: string;
-	reaction: string;
-	severity: ClinicalSeverity;
-	criticality: AllergyCriticality;
+  substance: string;
+  reaction: string;
+  severity: ClinicalSeverity;
+  criticality: AllergyCriticality;
 }
 
 export interface Immunisation {
-	vaccine: string;
-	date: string;
-	lotNumber: string;
+  vaccine: string;
+  date: string;
+  lotNumber: string;
 }
 
 export interface Procedure {
-	description: string;
-	date: string;
-	performer: string;
+  description: string;
+  date: string;
+  performer: string;
 }
 
 export interface Result {
-	testName: string;
-	value: string;
-	unit: string;
-	interpretation: ResultInterpretation;
-	date: string;
+  testName: string;
+  value: string;
+  unit: string;
+  interpretation: ResultInterpretation;
+  date: string;
 }
 
 export interface Device {
-	description: string;
-	udi: string;
-	implantDate: string;
+  description: string;
+  udi: string;
+  implantDate: string;
 }
 
 export interface AdvanceDirective {
-	dnrInPlace: YesNo;
-	livingWillInPlace: YesNo;
-	consentToShareEu: YesNo;
-	directiveNotes: string;
+  dnrInPlace: YesNo;
+  livingWillInPlace: YesNo;
+  consentToShareEu: YesNo;
+  directiveNotes: string;
 }
 
 export interface AuthoringClinician {
-	clinicianName: string;
-	clinicianRole: string;
-	organisation: string;
-	country: string;
-	email: string;
-	phone: string;
-	signoffDate: string;
-	authoringStatus: AuthoringStatus;
+  clinicianName: string;
+  clinicianRole: string;
+  organisation: string;
+  country: string;
+  email: string;
+  phone: string;
+  signoffDate: string;
+  authoringStatus: AuthoringStatus;
 }
 
 // ──────────────────────────────────────────────
@@ -100,16 +100,16 @@ export interface AuthoringClinician {
 // ──────────────────────────────────────────────
 
 export interface AssessmentData {
-	patientDemographics: PatientDemographics;
-	problemList: Problem[];
-	medicationSummary: Medication[];
-	allergiesIntolerances: Allergy[];
-	immunisations: Immunisation[];
-	procedures: Procedure[];
-	resultsInvestigations: Result[];
-	medicalDevices: Device[];
-	advanceDirectives: AdvanceDirective;
-	authoringClinician: AuthoringClinician;
+  patientDemographics: PatientDemographics;
+  problemList: Problem[];
+  medicationSummary: Medication[];
+  allergiesIntolerances: Allergy[];
+  immunisations: Immunisation[];
+  procedures: Procedure[];
+  resultsInvestigations: Result[];
+  medicalDevices: Device[];
+  advanceDirectives: AdvanceDirective;
+  authoringClinician: AuthoringClinician;
 }
 
 // ──────────────────────────────────────────────
@@ -122,39 +122,39 @@ export type RuleStatus = 'ok' | 'empty' | 'optional';
 
 /** A declarative IPS section-population rule. */
 export interface IPSRule {
-	id: string;
-	category: string;
-	description: string;
-	mandatory: boolean;
-	evaluate: (data: AssessmentData) => 'ok' | 'empty';
+  id: string;
+  category: string;
+  description: string;
+  mandatory: boolean;
+  evaluate: (data: AssessmentData) => 'ok' | 'empty';
 }
 
 /** A rule after evaluation, recorded in the per-section audit trail. */
 export interface FiredRule {
-	id: string;
-	category: string;
-	description: string;
-	status: RuleStatus;
-	mandatory: boolean;
+  id: string;
+  category: string;
+  description: string;
+  status: RuleStatus;
+  mandatory: boolean;
 }
 
 /** A clinician-facing flag raised independently of completeness grading. */
 export interface AdditionalFlag {
-	id: string;
-	category: string;
-	message: string;
-	priority: 'urgent' | 'high' | 'medium' | 'low';
+  id: string;
+  category: string;
+  message: string;
+  priority: 'urgent' | 'high' | 'medium' | 'low';
 }
 
 export interface GradingResult {
-	completenessLevel: CompletenessLevel;
-	mandatoryPopulated: number;
-	mandatoryTotal: number;
-	optionalPopulated: number;
-	optionalTotal: number;
-	firedRules: FiredRule[];
-	additionalFlags: AdditionalFlag[];
-	timestamp: string;
+  completenessLevel: CompletenessLevel;
+  mandatoryPopulated: number;
+  mandatoryTotal: number;
+  optionalPopulated: number;
+  optionalTotal: number;
+  firedRules: FiredRule[];
+  additionalFlags: AdditionalFlag[];
+  timestamp: string;
 }
 
 // ──────────────────────────────────────────────
@@ -162,8 +162,8 @@ export interface GradingResult {
 // ──────────────────────────────────────────────
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
-	section: keyof AssessmentData;
+  number: number;
+  title: string;
+  shortTitle: string;
+  section: keyof AssessmentData;
 }

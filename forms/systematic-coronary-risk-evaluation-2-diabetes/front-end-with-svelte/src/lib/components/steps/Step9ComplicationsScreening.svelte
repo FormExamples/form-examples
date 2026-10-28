@@ -3,7 +3,7 @@
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
-  import { DateInput, RadioGroup } from "@lilydesignsystem/svelte-headless";
+  import { DateInput, RadioGroup } from '@lilydesignsystem/svelte-headless';
   import Select from '#lib/components/ui/Select.svelte';
 
   const d = assessment.data.complicationsScreening;
@@ -12,7 +12,11 @@
 <Fieldset legend="Step 9 \u2014 Complications screening">
   <div class="field-grid">
     <Field label="Retinopathy status" inputId="step-9-retinopathyStatus">
-      <Select id="step-9-retinopathyStatus" label="Retinopathy status" bind:value={d.retinopathyStatus}>
+      <Select
+        id="step-9-retinopathyStatus"
+        label="Retinopathy status"
+        bind:value={d.retinopathyStatus}
+      >
         <option value="">\u2014 Select \u2014</option>
         <option value="none">None</option>
         <option value="background">Background (R1)</option>
@@ -37,16 +41,30 @@
   >
     <RadioGroup label="Neuropathy symptoms">
       <label class="radio-input">
-        <input type="radio" name="neuropathySymptoms" value="yes" bind:group={d.neuropathySymptoms} /> Yes
+        <input
+          type="radio"
+          name="neuropathySymptoms"
+          value="yes"
+          bind:group={d.neuropathySymptoms}
+        /> Yes
       </label>
       <label class="radio-input">
-        <input type="radio" name="neuropathySymptoms" value="no" bind:group={d.neuropathySymptoms} /> No
+        <input
+          type="radio"
+          name="neuropathySymptoms"
+          value="no"
+          bind:group={d.neuropathySymptoms}
+        /> No
       </label>
     </RadioGroup>
   </Field>
 
   <Field label="10g monofilament test" inputId="step-9-monofilamentTest">
-    <Select id="step-9-monofilamentTest" label="10g monofilament test" bind:value={d.monofilamentTest}>
+    <Select
+      id="step-9-monofilamentTest"
+      label="10g monofilament test"
+      bind:value={d.monofilamentTest}
+    >
       <option value="">\u2014 Select \u2014</option>
       <option value="normal">Normal</option>
       <option value="abnormal">Abnormal</option>
@@ -89,13 +107,28 @@
   <Field label="Erectile dysfunction">
     <RadioGroup label="Erectile dysfunction">
       <label class="radio-input">
-        <input type="radio" name="erectileDysfunction" value="yes" bind:group={d.erectileDysfunction} /> Yes
+        <input
+          type="radio"
+          name="erectileDysfunction"
+          value="yes"
+          bind:group={d.erectileDysfunction}
+        /> Yes
       </label>
       <label class="radio-input">
-        <input type="radio" name="erectileDysfunction" value="no" bind:group={d.erectileDysfunction} /> No
+        <input
+          type="radio"
+          name="erectileDysfunction"
+          value="no"
+          bind:group={d.erectileDysfunction}
+        /> No
       </label>
       <label class="radio-input">
-        <input type="radio" name="erectileDysfunction" value="notApplicable" bind:group={d.erectileDysfunction} /> Not applicable
+        <input
+          type="radio"
+          name="erectileDysfunction"
+          value="notApplicable"
+          bind:group={d.erectileDysfunction}
+        /> Not applicable
       </label>
     </RadioGroup>
   </Field>

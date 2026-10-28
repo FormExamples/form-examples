@@ -4,9 +4,24 @@ export const TOTAL_STEPS = 5;
 
 export const steps: StepConfig[] = [
   { number: 1, title: 'Patient Information', shortTitle: 'Patient', section: 'patientInformation' },
-  { number: 2, title: 'Clinician Information', shortTitle: 'Clinician', section: 'clinicianInformation' },
-  { number: 3, title: 'Prescription Details', shortTitle: 'Prescription', section: 'prescriptionDetails' },
-  { number: 4, title: 'Substitution Options', shortTitle: 'Substitution', section: 'substitutionOptions' },
+  {
+    number: 2,
+    title: 'Clinician Information',
+    shortTitle: 'Clinician',
+    section: 'clinicianInformation'
+  },
+  {
+    number: 3,
+    title: 'Prescription Details',
+    shortTitle: 'Prescription',
+    section: 'prescriptionDetails'
+  },
+  {
+    number: 4,
+    title: 'Substitution Options',
+    shortTitle: 'Substitution',
+    section: 'substitutionOptions'
+  },
   { number: 5, title: 'Request Type', shortTitle: 'Request', section: 'requestType' }
 ];
 

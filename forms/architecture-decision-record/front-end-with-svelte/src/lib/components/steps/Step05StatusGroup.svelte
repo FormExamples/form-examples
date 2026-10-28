@@ -10,19 +10,37 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <label class="block">
       <span class="text-sm text-base-content">Slug (URL-safe identifier)</span>
-      <input type="text" class="w-full border rounded px-2 py-1" placeholder="use-postgres-for-primary-storage" bind:value={store.data.adr.slug} />
+      <input
+        type="text"
+        class="w-full border rounded px-2 py-1"
+        placeholder="use-postgres-for-primary-storage"
+        bind:value={store.data.adr.slug}
+      />
     </label>
     <label class="block">
       <span class="text-sm text-base-content">Number (sequential, optional)</span>
-      <input type="number" class="w-full border rounded px-2 py-1" bind:value={store.data.adr.number} />
+      <input
+        type="number"
+        class="w-full border rounded px-2 py-1"
+        bind:value={store.data.adr.number}
+      />
     </label>
     <label class="block md:col-span-2">
       <span class="text-sm text-base-content">Title</span>
-      <input id="adr-title" type="text" class="w-full border rounded px-2 py-1" bind:value={store.data.adr.title} />
+      <input
+        id="adr-title"
+        type="text"
+        class="w-full border rounded px-2 py-1"
+        bind:value={store.data.adr.title}
+      />
     </label>
     <label class="block">
       <span class="text-sm text-base-content">Decision date</span>
-      <input type="date" class="w-full border rounded px-2 py-1" bind:value={store.data.adr.decisionDate} />
+      <input
+        type="date"
+        class="w-full border rounded px-2 py-1"
+        bind:value={store.data.adr.decisionDate}
+      />
     </label>
     <label class="block">
       <span class="text-sm text-base-content">Status</span>

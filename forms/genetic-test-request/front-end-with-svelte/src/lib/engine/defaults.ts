@@ -9,45 +9,45 @@ import type { GeneticTestRequest } from './types';
  * the sample fixtures spread it.
  */
 export function createDefaultRequest(): GeneticTestRequest {
-	return {
-		clinician: {
-			clinicianName: '',
-			clinicianRole: '',
-			registrationBody: '',
-			registrationNumber: '',
-			requesterContact: '',
-			supervisingConsultant: '',
-			siteName: '',
-			referralDate: ''
-		},
-		patient: {
-			firstName: '',
-			lastName: '',
-			dateOfBirth: '',
-			nhsNumber: '',
-			addressLine: ''
-		},
-		request: {
-			testType: '',
-			primaryIndication: '',
-			clinicalQuestion: '',
-			requestedByDate: ''
-		},
-		clinical: {
-			clinicalDetails: '',
-			suspectedCondition: '',
-			familyHistory: '',
-			affectedRelativeTested: false
-		},
-		consent: {
-			consentObtained: false,
-			geneticCounsellingOffered: false
-		},
-		triage: {
-			specimenType: '',
-			urgency: '',
-			setting: '',
-			notes: ''
-		}
-	};
+  return {
+    clinician: {
+      clinicianName: '',
+      clinicianRole: '',
+      registrationBody: '',
+      registrationNumber: '',
+      requesterContact: '',
+      supervisingConsultant: '',
+      siteName: '',
+      referralDate: ''
+    },
+    patient: {
+      firstName: '',
+      lastName: '',
+      dateOfBirth: '',
+      nhsNumber: '',
+      addressLine: ''
+    },
+    request: {
+      testType: '',
+      primaryIndication: '',
+      clinicalQuestion: '',
+      requestedByDate: ''
+    },
+    clinical: {
+      clinicalDetails: '',
+      suspectedCondition: '',
+      familyHistory: '',
+      affectedRelativeTested: false
+    },
+    consent: {
+      consentObtained: false,
+      geneticCounsellingOffered: false
+    },
+    triage: {
+      specimenType: '',
+      urgency: '',
+      setting: '',
+      notes: ''
+    }
+  };
 }

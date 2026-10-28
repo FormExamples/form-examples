@@ -21,16 +21,16 @@ import { detectAdditionalFlags } from './flagged-issues';
  * Critical-override is applied separately by `calculateFallRiskGrade`.
  */
 export function classifyMfsScore(score: number): Severity {
-	if (score >= 45) return 'high';
-	if (score >= 25) return 'moderate';
-	return 'low';
+  if (score >= 45) return 'high';
+  if (score >= 25) return 'moderate';
+  return 'low';
 }
 
 /** Look up the option label for an MFS field's selected score. */
 function mfsOptionLabel(item: MfsItem, score: number | null): string {
-	if (score === null || score === undefined) return '';
-	const opt = item.options.find((o) => o.score === score);
-	return opt ? opt.label : '';
+  if (score === null || score === undefined) return '';
+  const opt = item.options.find((o) => o.score === score);
+  return opt ? opt.label : '';
 }
 
 /**
@@ -38,48 +38,48 @@ function mfsOptionLabel(item: MfsItem, score: number | null): string {
  * apply the Critical-override, and collect the additional flags.
  */
 export function calculateFallRiskGrade(data: AssessmentData): GradingResult {
-	const firedRules: FiredRule[] = [];
-	let mfsScore = 0;
-	let answeredCount = 0;
+  const firedRules: FiredRule[] = [];
+  let mfsScore = 0;
+  let answeredCount = 0;
 
-	for (const item of mfsItems) {
-		const value = data.mfs ? data.mfs[item.field] : null;
-		if (value !== null && value !== undefined) {
-			answeredCount++;
-			mfsScore += value;
-			firedRules.push({
-				id: item.id,
-				category: item.label,
-				description: mfsOptionLabel(item, value) || item.description,
-				score: value
-			});
-		}
-	}
+  for (const item of mfsItems) {
+    const value = data.mfs ? data.mfs[item.field] : null;
+    if (value !== null && value !== undefined) {
+      answeredCount++;
+      mfsScore += value;
+      firedRules.push({
+        id: item.id,
+        category: item.label,
+        description: mfsOptionLabel(item, value) || item.description,
+        score: value
+      });
+    }
+  }
 
-	const baseSeverity = classifyMfsScore(mfsScore);
+  const baseSeverity = classifyMfsScore(mfsScore);
 
-	const criticalReasons: string[] = [];
-	if (ancillaryRules.hasRecurrentFallsWithInjury(data)) {
-		criticalReasons.push('Recurrent falls with injury');
-	}
-	if (ancillaryRules.isAnticoagulated(data)) {
-		criticalReasons.push('Anticoagulated patient');
-	}
-	if (mfsScore >= 75) {
-		criticalReasons.push(`MFS ${mfsScore} (>= 75)`);
-	}
+  const criticalReasons: string[] = [];
+  if (ancillaryRules.hasRecurrentFallsWithInjury(data)) {
+    criticalReasons.push('Recurrent falls with injury');
+  }
+  if (ancillaryRules.isAnticoagulated(data)) {
+    criticalReasons.push('Anticoagulated patient');
+  }
+  if (mfsScore >= 75) {
+    criticalReasons.push(`MFS ${mfsScore} (>= 75)`);
+  }
 
-	const criticalOverride = criticalReasons.length > 0;
-	const severity: Severity = criticalOverride ? 'critical' : baseSeverity;
+  const criticalOverride = criticalReasons.length > 0;
+  const severity: Severity = criticalOverride ? 'critical' : baseSeverity;
 
-	return {
-		mfsScore,
-		severity,
-		criticalOverride,
-		criticalReasons,
-		answeredCount,
-		firedRules,
-		additionalFlags: detectAdditionalFlags(data),
-		timestamp: new Date().toISOString()
-	};
+  return {
+    mfsScore,
+    severity,
+    criticalOverride,
+    criticalReasons,
+    answeredCount,
+    firedRules,
+    additionalFlags: detectAdditionalFlags(data),
+    timestamp: new Date().toISOString()
+  };
 }

@@ -1,10 +1,10 @@
 import type {
-	EligibilityResult,
-	EligibleConditionCode,
-	FiredRule,
-	Fp92aApplication,
-	Outcome,
-	RedirectTarget
+  EligibilityResult,
+  EligibleConditionCode,
+  FiredRule,
+  Fp92aApplication,
+  Outcome,
+  RedirectTarget
 } from './types';
 import { fp92aRules } from './fp92a-rules';
 import { detectAdditionalFlags } from './flagged-issues';
@@ -39,97 +39,93 @@ import { addYears, ageInYears, isFilled, priorityOrder, todayIso } from './utils
  * The function is pure: no mutation, no side effects.
  */
 export function evaluateFp92a(data: Fp92aApplication): EligibilityResult {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	for (const rule of fp92aRules) {
-		try {
-			if (rule.evaluate(data)) {
-				firedRules.push({
-					id: rule.id,
-					category: rule.category,
-					priority: rule.priority,
-					description: rule.description,
-					message: rule.message,
-					contributingConditionCode: rule.contributingConditionCode ?? ''
-				});
-			}
-		} catch (e) {
-			console.warn(`FP92A rule ${rule.id} evaluation failed:`, e);
-		}
-	}
+  for (const rule of fp92aRules) {
+    try {
+      if (rule.evaluate(data)) {
+        firedRules.push({
+          id: rule.id,
+          category: rule.category,
+          priority: rule.priority,
+          description: rule.description,
+          message: rule.message,
+          contributingConditionCode: rule.contributingConditionCode ?? ''
+        });
+      }
+    } catch (e) {
+      console.warn(`FP92A rule ${rule.id} evaluation failed:`, e);
+    }
+  }
 
-	firedRules.sort((a, b) => priorityOrder(a.priority) - priorityOrder(b.priority));
+  firedRules.sort((a, b) => priorityOrder(a.priority) - priorityOrder(b.priority));
 
-	// Eligible conditions = codes from fired eligible-condition rules.
-	const eligibleConditions: EligibleConditionCode[] = [];
-	for (const r of firedRules) {
-		if (r.category === 'eligible-condition' && r.contributingConditionCode !== '') {
-			if (!eligibleConditions.includes(r.contributingConditionCode)) {
-				eligibleConditions.push(r.contributingConditionCode);
-			}
-		}
-	}
+  // Eligible conditions = codes from fired eligible-condition rules.
+  const eligibleConditions: EligibleConditionCode[] = [];
+  for (const r of firedRules) {
+    if (r.category === 'eligible-condition' && r.contributingConditionCode !== '') {
+      if (!eligibleConditions.includes(r.contributingConditionCode)) {
+        eligibleConditions.push(r.contributingConditionCode);
+      }
+    }
+  }
 
-	// Redirect target.
-	const redirectTo: RedirectTarget = (() => {
-		if (
-			firedRules.some(
-				(r) => r.category === 'redirect' && r.id === 'FP92A-REDIRECT-PREGNANCY'
-			)
-		) {
-			return 'FW8';
-		}
-		if (firedRules.some((r) => r.category === 'redirect')) {
-			return 'age-exemption';
-		}
-		return '';
-	})();
+  // Redirect target.
+  const redirectTo: RedirectTarget = (() => {
+    if (firedRules.some((r) => r.category === 'redirect' && r.id === 'FP92A-REDIRECT-PREGNANCY')) {
+      return 'FW8';
+    }
+    if (firedRules.some((r) => r.category === 'redirect')) {
+      return 'age-exemption';
+    }
+    return '';
+  })();
 
-	// Outcome.
-	const hasAnySelectedCondition = data.qualifyingConditions.some((c) => c.selected);
-	const hasCancerPending = data.qualifyingConditions.some(
-		(c) => c.selected && c.code === 'cancer-or-effects' && c.histologyConfirmed === 'pending'
-	);
-	const hasDisabilityHomecareUnsure = data.qualifyingConditions.some(
-		(c) =>
-			c.selected &&
-			c.code === 'continuing-physical-disability' &&
-			c.cannotLeaveHomeUnaided === '' &&
-			c.disabilityExpectedToBePermanent !== 'no'
-	);
+  // Outcome.
+  const hasAnySelectedCondition = data.qualifyingConditions.some((c) => c.selected);
+  const hasCancerPending = data.qualifyingConditions.some(
+    (c) => c.selected && c.code === 'cancer-or-effects' && c.histologyConfirmed === 'pending'
+  );
+  const hasDisabilityHomecareUnsure = data.qualifyingConditions.some(
+    (c) =>
+      c.selected &&
+      c.code === 'continuing-physical-disability' &&
+      c.cannotLeaveHomeUnaided === '' &&
+      c.disabilityExpectedToBePermanent !== 'no'
+  );
 
-	let outcome: Outcome;
-	if (eligibleConditions.length > 0 && redirectTo === '') {
-		outcome = 'eligible';
-	} else if (
-		hasAnySelectedCondition &&
-		eligibleConditions.length === 0 &&
-		(hasCancerPending || hasDisabilityHomecareUnsure)
-	) {
-		outcome = 'requires-clarification';
-	} else {
-		outcome = 'ineligible';
-	}
+  let outcome: Outcome;
+  if (eligibleConditions.length > 0 && redirectTo === '') {
+    outcome = 'eligible';
+  } else if (
+    hasAnySelectedCondition &&
+    eligibleConditions.length === 0 &&
+    (hasCancerPending || hasDisabilityHomecareUnsure)
+  ) {
+    outcome = 'requires-clarification';
+  } else {
+    outcome = 'ineligible';
+  }
 
-	// Validity window: 5 years from completion date, or today as a fallback.
-	const fromDate = isFilled(data.practitioner.completionDate)
-		? data.practitioner.completionDate
-		: todayIso();
-	const validFrom = outcome === 'eligible' ? fromDate : '';
-	const validUntil = outcome === 'eligible' ? addYears(fromDate, 5) : '';
+  // Validity window: 5 years from completion date, or today as a fallback.
+  const fromDate = isFilled(data.practitioner.completionDate)
+    ? data.practitioner.completionDate
+    : todayIso();
+  const validFrom = outcome === 'eligible' ? fromDate : '';
+  const validUntil = outcome === 'eligible' ? addYears(fromDate, 5) : '';
 
-	const additionalFlags = detectAdditionalFlags(data);
-	const ageYears = ageInYears(data.patient.birthDate);
+  const additionalFlags = detectAdditionalFlags(data);
+  const ageYears = ageInYears(data.patient.birthDate);
 
-	return {
-		outcome,
-		eligibleConditions,
-		firedRules,
-		additionalFlags,
-		validFrom,
-		validUntil,
-		redirectTo,
-		ageYears,
-		timestamp: new Date().toISOString()
-	};
+  return {
+    outcome,
+    eligibleConditions,
+    firedRules,
+    additionalFlags,
+    validFrom,
+    validUntil,
+    redirectTo,
+    ageYears,
+    timestamp: new Date().toISOString()
+  };
 }

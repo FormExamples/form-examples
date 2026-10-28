@@ -7,7 +7,10 @@
 </script>
 
 <Fieldset legend="Step 7 — Category 6 — Outpatient Department (OPD) Metrics (9 metrics)">
-  <p class="hint">New registrations, OPD statistics, staffing ratios, visit and appointment volumes by department and physician, new-visit rate, and walk-in rate.</p>
+  <p class="hint">
+    New registrations, OPD statistics, staffing ratios, visit and appointment volumes by department
+    and physician, new-visit rate, and walk-in rate.
+  </p>
 
   {#each metrics as metric (metric.id)}
     <MetricRow {metric} />

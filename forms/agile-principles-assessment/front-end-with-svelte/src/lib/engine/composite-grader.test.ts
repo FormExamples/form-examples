@@ -124,7 +124,7 @@ describe('calculateMaturity composite paths', () => {
     expect(result.maturity).toBe('ad-hoc');
     expect(result.meanScore).toBe(1);
     expect(
-      result.additionalFlags.filter((f) => f.category === 'critical-principle-gap').length,
+      result.additionalFlags.filter((f) => f.category === 'critical-principle-gap').length
     ).toBe(12);
   });
 
@@ -153,7 +153,7 @@ describe('per-principle flag mapping', () => {
     { idx: 8, category: 'technical-debt', priority: 'high' },
     { idx: 9, category: 'over-engineering', priority: 'medium' },
     { idx: 10, category: 'command-and-control', priority: 'high' },
-    { idx: 11, category: 'no-retrospective', priority: 'high' },
+    { idx: 11, category: 'no-retrospective', priority: 'high' }
   ];
 
   it.each(cases)(
@@ -166,7 +166,7 @@ describe('per-principle flag mapping', () => {
       expect(f).toBeDefined();
       expect(f?.priority).toBe(priority);
       expect(f?.principleNumber).toBe(idx + 1);
-    },
+    }
   );
 });
 

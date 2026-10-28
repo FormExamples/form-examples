@@ -1,8 +1,8 @@
 import type {
-	ElectroencephalogramResult,
-	ResultClassification,
-	AbnormalitySeverity,
-	FiredRule
+  ElectroencephalogramResult,
+  ResultClassification,
+  AbnormalitySeverity,
+  FiredRule
 } from './types';
 import { hasCriticalFinding } from './utils';
 
@@ -22,68 +22,72 @@ import { hasCriticalFinding } from './utils';
  * structured-reporting workflows.
  */
 export function gradeSeverity(
-	r: ElectroencephalogramResult,
-	classification: ResultClassification
+  r: ElectroencephalogramResult,
+  classification: ResultClassification
 ): {
-	abnormalitySeverity: AbnormalitySeverity;
-	reportingCategory: string;
-	firedRules: FiredRule[];
+  abnormalitySeverity: AbnormalitySeverity;
+  reportingCategory: string;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	if (hasCriticalFinding(r)) {
-		firedRules.push({
-			ruleId: 'R-SEV-MAJOR-01',
-			axis: 'severity',
-			category: 'critical-finding',
-			description: 'Critical finding present; abnormality severity graded major.'
-		});
-		return { abnormalitySeverity: 'major', reportingCategory: 'critical-epileptiform', firedRules };
-	}
+  if (hasCriticalFinding(r)) {
+    firedRules.push({
+      ruleId: 'R-SEV-MAJOR-01',
+      axis: 'severity',
+      category: 'critical-finding',
+      description: 'Critical finding present; abnormality severity graded major.'
+    });
+    return { abnormalitySeverity: 'major', reportingCategory: 'critical-epileptiform', firedRules };
+  }
 
-	const actionable =
-		r.focalSlowing ||
-		r.generalisedSlowing ||
-		r.photoparoxysmalResponse ||
-		r.backgroundRhythm === 'abnormal';
+  const actionable =
+    r.focalSlowing ||
+    r.generalisedSlowing ||
+    r.photoparoxysmalResponse ||
+    r.backgroundRhythm === 'abnormal';
 
-	if (actionable) {
-		firedRules.push({
-			ruleId: 'R-SEV-MODERATE-01',
-			axis: 'severity',
-			category: 'actionable-finding',
-			description:
-				'An actionable abnormal finding (focal slowing, generalised slowing, photoparoxysmal response, or abnormal background) is present; severity graded moderate.'
-		});
-		return { abnormalitySeverity: 'moderate', reportingCategory: 'abnormal-background', firedRules };
-	}
+  if (actionable) {
+    firedRules.push({
+      ruleId: 'R-SEV-MODERATE-01',
+      axis: 'severity',
+      category: 'actionable-finding',
+      description:
+        'An actionable abnormal finding (focal slowing, generalised slowing, photoparoxysmal response, or abnormal background) is present; severity graded moderate.'
+    });
+    return {
+      abnormalitySeverity: 'moderate',
+      reportingCategory: 'abnormal-background',
+      firedRules
+    };
+  }
 
-	if (r.backgroundRhythm === 'excess-slow' || r.backgroundRhythm === 'asymmetric') {
-		firedRules.push({
-			ruleId: 'R-SEV-MINOR-01',
-			axis: 'severity',
-			category: 'minor-background',
-			description:
-				'A minor background abnormality (excess slowing or asymmetry) only; abnormality severity graded minor.'
-		});
-		return { abnormalitySeverity: 'minor', reportingCategory: 'minor-background', firedRules };
-	}
+  if (r.backgroundRhythm === 'excess-slow' || r.backgroundRhythm === 'asymmetric') {
+    firedRules.push({
+      ruleId: 'R-SEV-MINOR-01',
+      axis: 'severity',
+      category: 'minor-background',
+      description:
+        'A minor background abnormality (excess slowing or asymmetry) only; abnormality severity graded minor.'
+    });
+    return { abnormalitySeverity: 'minor', reportingCategory: 'minor-background', firedRules };
+  }
 
-	if (classification === 'inconclusive') {
-		firedRules.push({
-			ruleId: 'R-SEV-NONE-02',
-			axis: 'severity',
-			category: 'inconclusive',
-			description: 'Inconclusive study; abnormality severity not established.'
-		});
-		return { abnormalitySeverity: 'none', reportingCategory: 'indeterminate', firedRules };
-	}
+  if (classification === 'inconclusive') {
+    firedRules.push({
+      ruleId: 'R-SEV-NONE-02',
+      axis: 'severity',
+      category: 'inconclusive',
+      description: 'Inconclusive study; abnormality severity not established.'
+    });
+    return { abnormalitySeverity: 'none', reportingCategory: 'indeterminate', firedRules };
+  }
 
-	firedRules.push({
-		ruleId: 'R-SEV-NONE-01',
-		axis: 'severity',
-		category: 'no-abnormal-finding',
-		description: 'No abnormal finding; abnormality severity graded none.'
-	});
-	return { abnormalitySeverity: 'none', reportingCategory: 'normal', firedRules };
+  firedRules.push({
+    ruleId: 'R-SEV-NONE-01',
+    axis: 'severity',
+    category: 'no-abnormal-finding',
+    description: 'No abnormal finding; abnormality severity graded none.'
+  });
+  return { abnormalitySeverity: 'none', reportingCategory: 'normal', firedRules };
 }

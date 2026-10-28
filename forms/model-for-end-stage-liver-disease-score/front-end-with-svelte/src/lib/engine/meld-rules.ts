@@ -53,49 +53,49 @@ export const MELD3_ALBUMIN_HIGH = 3.5;
  * integer MELD score. Contiguous, non-overlapping bands per spec §8.
  */
 export const bandRules: BandRule[] = [
-	{
-		id: 'R-BAND-LOW-01',
-		instrument: 'band',
-		band: 'low',
-		category: 'mortality-band',
-		description: 'MELD score ≤ 9 — low estimated 3-month mortality (~2%)',
-		percent: 2,
-		evaluate: (s) => s <= 9
-	},
-	{
-		id: 'R-BAND-MODERATE-01',
-		instrument: 'band',
-		band: 'moderate',
-		category: 'mortality-band',
-		description: 'MELD score 10–19 — moderate estimated 3-month mortality (~6%)',
-		percent: 6,
-		evaluate: (s) => s >= 10 && s <= 19
-	},
-	{
-		id: 'R-BAND-HIGH-01',
-		instrument: 'band',
-		band: 'high',
-		category: 'mortality-band',
-		description: 'MELD score 20–29 — high estimated 3-month mortality (~20%)',
-		percent: 20,
-		evaluate: (s) => s >= 20 && s <= 29
-	},
-	{
-		id: 'R-BAND-VERY-HIGH-01',
-		instrument: 'band',
-		band: 'very-high',
-		category: 'mortality-band',
-		description: 'MELD score 30–39 — very high estimated 3-month mortality (~53%)',
-		percent: 53,
-		evaluate: (s) => s >= 30 && s <= 39
-	},
-	{
-		id: 'R-BAND-EXTREME-01',
-		instrument: 'band',
-		band: 'extreme',
-		category: 'mortality-band',
-		description: 'MELD score ≥ 40 — extreme estimated 3-month mortality (~71%)',
-		percent: 71,
-		evaluate: (s) => s >= 40
-	}
+  {
+    id: 'R-BAND-LOW-01',
+    instrument: 'band',
+    band: 'low',
+    category: 'mortality-band',
+    description: 'MELD score ≤ 9 — low estimated 3-month mortality (~2%)',
+    percent: 2,
+    evaluate: (s) => s <= 9
+  },
+  {
+    id: 'R-BAND-MODERATE-01',
+    instrument: 'band',
+    band: 'moderate',
+    category: 'mortality-band',
+    description: 'MELD score 10–19 — moderate estimated 3-month mortality (~6%)',
+    percent: 6,
+    evaluate: (s) => s >= 10 && s <= 19
+  },
+  {
+    id: 'R-BAND-HIGH-01',
+    instrument: 'band',
+    band: 'high',
+    category: 'mortality-band',
+    description: 'MELD score 20–29 — high estimated 3-month mortality (~20%)',
+    percent: 20,
+    evaluate: (s) => s >= 20 && s <= 29
+  },
+  {
+    id: 'R-BAND-VERY-HIGH-01',
+    instrument: 'band',
+    band: 'very-high',
+    category: 'mortality-band',
+    description: 'MELD score 30–39 — very high estimated 3-month mortality (~53%)',
+    percent: 53,
+    evaluate: (s) => s >= 30 && s <= 39
+  },
+  {
+    id: 'R-BAND-EXTREME-01',
+    instrument: 'band',
+    band: 'extreme',
+    category: 'mortality-band',
+    description: 'MELD score ≥ 40 — extreme estimated 3-month mortality (~71%)',
+    percent: 71,
+    evaluate: (s) => s >= 40
+  }
 ];

@@ -8,33 +8,31 @@ import { detectAdditionalFlags } from './flagged-issues';
  * defaulting to CFS 1 for very fit patients with no fired rules.
  */
 export function calculateCFS(data: AssessmentData): {
-	cfsScore: CFSScore;
-	firedRules: FiredRule[];
+  cfsScore: CFSScore;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	for (const rule of cfsRules) {
-		try {
-			if (rule.evaluate(data)) {
-				firedRules.push({
-					id: rule.id,
-					domain: rule.domain,
-					description: rule.description,
-					score: rule.score
-				});
-			}
-		} catch (e) {
-			// Rule evaluation failed - log for debugging but continue grading
-			console.warn(`CFS rule ${rule.id} evaluation failed:`, e);
-		}
-	}
+  for (const rule of cfsRules) {
+    try {
+      if (rule.evaluate(data)) {
+        firedRules.push({
+          id: rule.id,
+          domain: rule.domain,
+          description: rule.description,
+          score: rule.score
+        });
+      }
+    } catch (e) {
+      // Rule evaluation failed - log for debugging but continue grading
+      console.warn(`CFS rule ${rule.id} evaluation failed:`, e);
+    }
+  }
 
-	const cfsScore: CFSScore =
-		firedRules.length === 0
-			? 1
-			: (Math.max(...firedRules.map((r) => r.score)) as CFSScore);
+  const cfsScore: CFSScore =
+    firedRules.length === 0 ? 1 : (Math.max(...firedRules.map((r) => r.score)) as CFSScore);
 
-	return { cfsScore, firedRules };
+  return { cfsScore, firedRules };
 }
 
 /**
@@ -43,12 +41,12 @@ export function calculateCFS(data: AssessmentData): {
  * the wizard report and the dashboard rows are derived from.
  */
 export function gradeAssessment(data: AssessmentData): GradingResult {
-	const { cfsScore, firedRules } = calculateCFS(data);
-	const additionalFlags = detectAdditionalFlags(data);
-	return {
-		cfsScore,
-		firedRules,
-		additionalFlags,
-		timestamp: new Date().toISOString()
-	};
+  const { cfsScore, firedRules } = calculateCFS(data);
+  const additionalFlags = detectAdditionalFlags(data);
+  return {
+    cfsScore,
+    firedRules,
+    additionalFlags,
+    timestamp: new Date().toISOString()
+  };
 }

@@ -8,15 +8,28 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <label class="block">
       <span class="text-sm text-base-content">Author name</span>
-      <input id="author-name" type="text" class="w-full border rounded px-2 py-1" bind:value={store.data.author.name} />
+      <input
+        id="author-name"
+        type="text"
+        class="w-full border rounded px-2 py-1"
+        bind:value={store.data.author.name}
+      />
     </label>
     <label class="block">
       <span class="text-sm text-base-content">Email</span>
-      <input type="email" class="w-full border rounded px-2 py-1" bind:value={store.data.author.email} />
+      <input
+        type="email"
+        class="w-full border rounded px-2 py-1"
+        bind:value={store.data.author.email}
+      />
     </label>
     <label class="block">
       <span class="text-sm text-base-content">Phone</span>
-      <input type="tel" class="w-full border rounded px-2 py-1" bind:value={store.data.author.phone} />
+      <input
+        type="tel"
+        class="w-full border rounded px-2 py-1"
+        bind:value={store.data.author.phone}
+      />
     </label>
     <label class="block">
       <span class="text-sm text-base-content">Role</span>
@@ -36,11 +49,19 @@
     </label>
     <label class="block">
       <span class="text-sm text-base-content">Organization (free text)</span>
-      <input type="text" class="w-full border rounded px-2 py-1" bind:value={store.data.author.organizationName} />
+      <input
+        type="text"
+        class="w-full border rounded px-2 py-1"
+        bind:value={store.data.author.organizationName}
+      />
     </label>
     <label class="block">
       <span class="text-sm text-base-content">Team</span>
-      <input type="text" class="w-full border rounded px-2 py-1" bind:value={store.data.author.teamName} />
+      <input
+        type="text"
+        class="w-full border rounded px-2 py-1"
+        bind:value={store.data.author.teamName}
+      />
     </label>
   </div>
 </section>

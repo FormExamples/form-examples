@@ -6,83 +6,83 @@ import type { AssessmentData, ClerkingRecord, ComponentRule } from './types';
  * camelCase SQL column name.
  */
 export function flatten(data: AssessmentData): ClerkingRecord {
-	return {
-		...data.encounter,
-		...data.identification,
-		...data.history,
-		...data.vitals,
-		...data.examination,
-		...data.assessment
-	};
+  return {
+    ...data.encounter,
+    ...data.identification,
+    ...data.history,
+    ...data.vitals,
+    ...data.examination,
+    ...data.assessment
+  };
 }
 
 /** Trim helper — treats null / undefined / non-strings as empty. */
 export function nonEmpty(v: unknown): boolean {
-	return typeof v === 'string' && v.trim() !== '';
+  return typeof v === 'string' && v.trim() !== '';
 }
 
 /** Normal vital-sign ranges per spec §3; a recorded value outside is abnormal. */
 export const VITAL_RANGES: Record<
-	string,
-	{ min: number; max: number; unit: string; label: string }
+  string,
+  { min: number; max: number; unit: string; label: string }
 > = {
-	temperature: { min: 36.1, max: 38.0, unit: '°C', label: 'Temperature' },
-	heartRate: { min: 51, max: 90, unit: 'bpm', label: 'Heart rate' },
-	respiratoryRate: { min: 12, max: 20, unit: '/min', label: 'Respiratory rate' },
-	systolicBloodPressure: { min: 111, max: 219, unit: 'mmHg', label: 'Systolic blood pressure' },
-	oxygenSaturation: { min: 96, max: 100, unit: '%', label: 'Oxygen saturation' }
+  temperature: { min: 36.1, max: 38.0, unit: '°C', label: 'Temperature' },
+  heartRate: { min: 51, max: 90, unit: 'bpm', label: 'Heart rate' },
+  respiratoryRate: { min: 12, max: 20, unit: '/min', label: 'Respiratory rate' },
+  systolicBloodPressure: { min: 111, max: 219, unit: 'mmHg', label: 'Systolic blood pressure' },
+  oxygenSaturation: { min: 96, max: 100, unit: '%', label: 'Oxygen saturation' }
 };
 
 /** The four core examination systems the core-examination component requires. */
 export const CORE_EXAM_FIELDS: { field: keyof ClerkingRecord; label: string }[] = [
-	{ field: 'examCardiovascular', label: 'Cardiovascular' },
-	{ field: 'examRespiratory', label: 'Respiratory' },
-	{ field: 'examAbdominal', label: 'Abdominal' },
-	{ field: 'examNeurological', label: 'Neurological' }
+  { field: 'examCardiovascular', label: 'Cardiovascular' },
+  { field: 'examRespiratory', label: 'Respiratory' },
+  { field: 'examAbdominal', label: 'Abdominal' },
+  { field: 'examNeurological', label: 'Neurological' }
 ];
 
 /** The required history sections that drive the incomplete-history flag. */
 export const REQUIRED_HISTORY_FIELDS: { field: keyof ClerkingRecord; label: string }[] = [
-	{ field: 'presentingComplaint', label: 'Presenting complaint' },
-	{ field: 'historyOfPresentingComplaint', label: 'History of presenting complaint' },
-	{ field: 'pastMedicalSurgicalHistory', label: 'Past medical and surgical history' },
-	{ field: 'drugHistory', label: 'Drug history' },
-	{ field: 'socialHistory', label: 'Social history' },
-	{ field: 'systemsReview', label: 'Systems review' }
+  { field: 'presentingComplaint', label: 'Presenting complaint' },
+  { field: 'historyOfPresentingComplaint', label: 'History of presenting complaint' },
+  { field: 'pastMedicalSurgicalHistory', label: 'Past medical and surgical history' },
+  { field: 'drugHistory', label: 'Drug history' },
+  { field: 'socialHistory', label: 'Social history' },
+  { field: 'systemsReview', label: 'Systems review' }
 ];
 
 /** Allergy status is documented when recorded and not 'not-documented'. */
 export function allergyDocumented(r: ClerkingRecord): boolean {
-	return r.allergyStatus !== '' && r.allergyStatus !== 'not-documented' && r.allergyStatus != null;
+  return r.allergyStatus !== '' && r.allergyStatus !== 'not-documented' && r.allergyStatus != null;
 }
 
 /** At least one vital sign (numeric or consciousness level) has been recorded. */
 export function anyVitalRecorded(r: ClerkingRecord): boolean {
-	return (
-		r.temperature != null ||
-		r.heartRate != null ||
-		r.respiratoryRate != null ||
-		r.systolicBloodPressure != null ||
-		r.oxygenSaturation != null ||
-		nonEmpty(r.consciousnessLevel)
-	);
+  return (
+    r.temperature != null ||
+    r.heartRate != null ||
+    r.respiratoryRate != null ||
+    r.systolicBloodPressure != null ||
+    r.oxygenSaturation != null ||
+    nonEmpty(r.consciousnessLevel)
+  );
 }
 
 /** All four core examination systems examined or explicitly deferred. */
 export function coreExamAddressed(r: ClerkingRecord): boolean {
-	return CORE_EXAM_FIELDS.every((c) => nonEmpty(r[c.field]));
+  return CORE_EXAM_FIELDS.every((c) => nonEmpty(r[c.field]));
 }
 
 /** Core exam systems not yet examined or deferred. */
 export function missingCoreExam(r: ClerkingRecord): string[] {
-	return CORE_EXAM_FIELDS.filter((c) => !nonEmpty(r[c.field])).map((c) => c.label);
+  return CORE_EXAM_FIELDS.filter((c) => !nonEmpty(r[c.field])).map((c) => c.label);
 }
 
 /** Required history sections left blank (plus allergy status if undocumented). */
 export function missingHistory(r: ClerkingRecord): string[] {
-	const missing = REQUIRED_HISTORY_FIELDS.filter((h) => !nonEmpty(r[h.field])).map((h) => h.label);
-	if (!allergyDocumented(r)) missing.push('Allergy status');
-	return missing;
+  const missing = REQUIRED_HISTORY_FIELDS.filter((h) => !nonEmpty(r[h.field])).map((h) => h.label);
+  if (!allergyDocumented(r)) missing.push('Allergy status');
+  return missing;
 }
 
 /**
@@ -91,19 +91,21 @@ export function missingHistory(r: ClerkingRecord): string[] {
  * as anything other than 'alert'.
  */
 export function abnormalVitals(r: ClerkingRecord): string[] {
-	const abnormal: string[] = [];
-	for (const key of Object.keys(VITAL_RANGES)) {
-		const v = (r as unknown as Record<string, number | null>)[key];
-		if (v === null || v === undefined) continue;
-		const range = VITAL_RANGES[key];
-		if (v < range.min || v > range.max) {
-			abnormal.push(`${range.label} ${v}${range.unit} (normal ${range.min}-${range.max}${range.unit})`);
-		}
-	}
-	if (nonEmpty(r.consciousnessLevel) && r.consciousnessLevel !== 'alert') {
-		abnormal.push(`Consciousness level not alert (${r.consciousnessLevel})`);
-	}
-	return abnormal;
+  const abnormal: string[] = [];
+  for (const key of Object.keys(VITAL_RANGES)) {
+    const v = (r as unknown as Record<string, number | null>)[key];
+    if (v === null || v === undefined) continue;
+    const range = VITAL_RANGES[key];
+    if (v < range.min || v > range.max) {
+      abnormal.push(
+        `${range.label} ${v}${range.unit} (normal ${range.min}-${range.max}${range.unit})`
+      );
+    }
+  }
+  if (nonEmpty(r.consciousnessLevel) && r.consciousnessLevel !== 'alert') {
+    abnormal.push(`Consciousness level not alert (${r.consciousnessLevel})`);
+  }
+  return abnormal;
 }
 
 /**
@@ -115,94 +117,94 @@ export function abnormalVitals(r: ClerkingRecord): string[] {
  * table.
  */
 export const componentRules: ComponentRule[] = [
-	{
-		id: 'R-COMPONENT-PRESENTING-COMPLAINT-01',
-		component: 'presenting-complaint',
-		label: 'Presenting complaint',
-		section: 'history',
-		category: 'required-component',
-		description: 'Presenting complaint documented',
-		evaluate: (r) => nonEmpty(r.presentingComplaint)
-	},
-	{
-		id: 'R-COMPONENT-HISTORY-OF-PRESENTING-COMPLAINT-01',
-		component: 'history-of-presenting-complaint',
-		label: 'History of presenting complaint',
-		section: 'history',
-		category: 'required-component',
-		description: 'History of the presenting complaint documented',
-		evaluate: (r) => nonEmpty(r.historyOfPresentingComplaint)
-	},
-	{
-		id: 'R-COMPONENT-PAST-MEDICAL-SURGICAL-HISTORY-01',
-		component: 'past-medical-surgical-history',
-		label: 'Past medical and surgical history',
-		section: 'history',
-		category: 'required-component',
-		description: 'Past medical and surgical history documented (or explicit "nil")',
-		evaluate: (r) => nonEmpty(r.pastMedicalSurgicalHistory)
-	},
-	{
-		id: 'R-COMPONENT-DRUG-HISTORY-AND-ALLERGIES-01',
-		component: 'drug-history-and-allergies',
-		label: 'Drug history and allergies',
-		section: 'history',
-		category: 'required-component',
-		description: 'Drug history documented and allergy status explicitly recorded',
-		evaluate: (r) => nonEmpty(r.drugHistory) && allergyDocumented(r)
-	},
-	{
-		id: 'R-COMPONENT-SOCIAL-HISTORY-01',
-		component: 'social-history',
-		label: 'Social history',
-		section: 'history',
-		category: 'required-component',
-		description: 'Social history documented',
-		evaluate: (r) => nonEmpty(r.socialHistory)
-	},
-	{
-		id: 'R-COMPONENT-SYSTEMS-REVIEW-01',
-		component: 'systems-review',
-		label: 'Systems review',
-		section: 'history',
-		category: 'required-component',
-		description: 'Systems review documented',
-		evaluate: (r) => nonEmpty(r.systemsReview)
-	},
-	{
-		id: 'R-COMPONENT-VITAL-SIGNS-01',
-		component: 'vital-signs',
-		label: 'Vital signs',
-		section: 'vitals',
-		category: 'required-component',
-		description: 'At least one vital sign recorded',
-		evaluate: (r) => anyVitalRecorded(r)
-	},
-	{
-		id: 'R-COMPONENT-CORE-EXAMINATION-01',
-		component: 'core-examination',
-		label: 'Core examination',
-		section: 'examination',
-		category: 'required-component',
-		description: 'All four core systems examined or explicitly deferred',
-		evaluate: (r) => coreExamAddressed(r)
-	},
-	{
-		id: 'R-COMPONENT-IMPRESSION-01',
-		component: 'impression',
-		label: 'Impression / problem list',
-		section: 'impression',
-		category: 'required-component',
-		description: 'Working impression / problem list documented',
-		evaluate: (r) => nonEmpty(r.impression)
-	},
-	{
-		id: 'R-COMPONENT-MANAGEMENT-PLAN-01',
-		component: 'management-plan',
-		label: 'Management plan',
-		section: 'plan',
-		category: 'required-component',
-		description: 'Management plan documented',
-		evaluate: (r) => nonEmpty(r.managementPlan)
-	}
+  {
+    id: 'R-COMPONENT-PRESENTING-COMPLAINT-01',
+    component: 'presenting-complaint',
+    label: 'Presenting complaint',
+    section: 'history',
+    category: 'required-component',
+    description: 'Presenting complaint documented',
+    evaluate: (r) => nonEmpty(r.presentingComplaint)
+  },
+  {
+    id: 'R-COMPONENT-HISTORY-OF-PRESENTING-COMPLAINT-01',
+    component: 'history-of-presenting-complaint',
+    label: 'History of presenting complaint',
+    section: 'history',
+    category: 'required-component',
+    description: 'History of the presenting complaint documented',
+    evaluate: (r) => nonEmpty(r.historyOfPresentingComplaint)
+  },
+  {
+    id: 'R-COMPONENT-PAST-MEDICAL-SURGICAL-HISTORY-01',
+    component: 'past-medical-surgical-history',
+    label: 'Past medical and surgical history',
+    section: 'history',
+    category: 'required-component',
+    description: 'Past medical and surgical history documented (or explicit "nil")',
+    evaluate: (r) => nonEmpty(r.pastMedicalSurgicalHistory)
+  },
+  {
+    id: 'R-COMPONENT-DRUG-HISTORY-AND-ALLERGIES-01',
+    component: 'drug-history-and-allergies',
+    label: 'Drug history and allergies',
+    section: 'history',
+    category: 'required-component',
+    description: 'Drug history documented and allergy status explicitly recorded',
+    evaluate: (r) => nonEmpty(r.drugHistory) && allergyDocumented(r)
+  },
+  {
+    id: 'R-COMPONENT-SOCIAL-HISTORY-01',
+    component: 'social-history',
+    label: 'Social history',
+    section: 'history',
+    category: 'required-component',
+    description: 'Social history documented',
+    evaluate: (r) => nonEmpty(r.socialHistory)
+  },
+  {
+    id: 'R-COMPONENT-SYSTEMS-REVIEW-01',
+    component: 'systems-review',
+    label: 'Systems review',
+    section: 'history',
+    category: 'required-component',
+    description: 'Systems review documented',
+    evaluate: (r) => nonEmpty(r.systemsReview)
+  },
+  {
+    id: 'R-COMPONENT-VITAL-SIGNS-01',
+    component: 'vital-signs',
+    label: 'Vital signs',
+    section: 'vitals',
+    category: 'required-component',
+    description: 'At least one vital sign recorded',
+    evaluate: (r) => anyVitalRecorded(r)
+  },
+  {
+    id: 'R-COMPONENT-CORE-EXAMINATION-01',
+    component: 'core-examination',
+    label: 'Core examination',
+    section: 'examination',
+    category: 'required-component',
+    description: 'All four core systems examined or explicitly deferred',
+    evaluate: (r) => coreExamAddressed(r)
+  },
+  {
+    id: 'R-COMPONENT-IMPRESSION-01',
+    component: 'impression',
+    label: 'Impression / problem list',
+    section: 'impression',
+    category: 'required-component',
+    description: 'Working impression / problem list documented',
+    evaluate: (r) => nonEmpty(r.impression)
+  },
+  {
+    id: 'R-COMPONENT-MANAGEMENT-PLAN-01',
+    component: 'management-plan',
+    label: 'Management plan',
+    section: 'plan',
+    category: 'required-component',
+    description: 'Management plan documented',
+    evaluate: (r) => nonEmpty(r.managementPlan)
+  }
 ];

@@ -21,11 +21,11 @@
     } else {
       // Clear out any stray applicant signatures if the donor is applying.
       const hasStrayApplicant = store.data.signatures.some(
-        (s) => s.role === 'applicant' && s.lp1fSection === 15,
+        (s) => s.role === 'applicant' && s.lp1fSection === 15
       );
       if (hasStrayApplicant) {
         store.data.signatures = store.data.signatures.filter(
-          (s) => !(s.role === 'applicant' && s.lp1fSection === 15),
+          (s) => !(s.role === 'applicant' && s.lp1fSection === 15)
         );
       }
       if (selectedAttorneyIds.length > 0) selectedAttorneyIds = [];
@@ -45,17 +45,12 @@
     const wantedIds = new Set(selectedAttorneyIds);
     // Drop any applicant signatures whose attorney is no longer selected.
     store.data.signatures = store.data.signatures.filter(
-      (s) =>
-        !(s.role === 'applicant' && s.lp1fSection === 15) ||
-        wantedIds.has(s.signatoryPersonId),
+      (s) => !(s.role === 'applicant' && s.lp1fSection === 15) || wantedIds.has(s.signatoryPersonId)
     );
     // Add placeholders for newly selected attorneys.
     for (const id of selectedAttorneyIds) {
       const exists = store.data.signatures.some(
-        (s) =>
-          s.role === 'applicant' &&
-          s.lp1fSection === 15 &&
-          s.signatoryPersonId === id,
+        (s) => s.role === 'applicant' && s.lp1fSection === 15 && s.signatoryPersonId === id
       );
       if (!exists) {
         store.data.signatures.push({
@@ -67,7 +62,7 @@
           signedOn: '',
           signedOnBehalfFullName: '',
           isWitnessed: false,
-          witness: null,
+          witness: null
         });
       }
     }
@@ -75,15 +70,15 @@
 
   const applicantOptions = [
     { value: 'donor', label: 'The donor is applying to register the LPA' },
-    { value: 'attorneys', label: 'One or more attorneys are applying to register the LPA' },
+    { value: 'attorneys', label: 'One or more attorneys are applying to register the LPA' }
   ];
 </script>
 
 <section>
   <h2 class="text-xl font-semibold mb-2">Step 12 &mdash; Applicant (LP1F section 12)</h2>
   <p class="text-sm text-base-content/70 mb-3">
-    Only the donor or one or more attorneys may apply to register the LPA. When attorneys
-    are appointed jointly, every joint attorney must apply (and sign section 15).
+    Only the donor or one or more attorneys may apply to register the LPA. When attorneys are
+    appointed jointly, every joint attorney must apply (and sign section 15).
   </p>
 
   <RadioGroup
@@ -111,7 +106,8 @@
                 toggleAttorney(a.person.id, (e.currentTarget as HTMLInputElement).checked)}
             />
             <span class="text-sm text-base-content/80">
-              Attorney #{a.ordinal} &mdash; {a.person.firstNames} {a.person.lastName}
+              Attorney #{a.ordinal} &mdash; {a.person.firstNames}
+              {a.person.lastName}
             </span>
           </label>
           {#if selectedAttorneyIds.includes(a.person.id)}

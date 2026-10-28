@@ -2,7 +2,7 @@
   import { assessment } from '#lib/stores/assessment.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { DateInput, TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { DateInput, TextAreaInput, TextInput } from '@lilydesignsystem/svelte-headless';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
   import Alert from '#lib/components/ui/Alert.svelte';
 
@@ -41,6 +41,9 @@
   </Field>
 
   <Alert type="info" heading="Ready to calculate?">
-    <p>Click "Submit and view report" below to calculate the 10-year CVD risk, heart age, and review any flagged issues.</p>
+    <p>
+      Click "Submit and view report" below to calculate the 10-year CVD risk, heart age, and review
+      any flagged issues.
+    </p>
   </Alert>
 </Fieldset>

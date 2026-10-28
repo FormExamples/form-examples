@@ -9,9 +9,8 @@
 
 <Fieldset legend="Step 3 — Stakeholders (14 items)">
   <p class="hint">
-    Behaviours of sponsors, executives, and other people outside the team
-    whose decisions shape what the team can do — trust, delegation,
-    experimentation, communication.
+    Behaviours of sponsors, executives, and other people outside the team whose decisions shape what
+    the team can do — trust, delegation, experimentation, communication.
   </p>
 
   <div class="section-progress">

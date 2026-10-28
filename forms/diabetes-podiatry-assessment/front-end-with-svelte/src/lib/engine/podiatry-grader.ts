@@ -28,12 +28,12 @@ import { detectFlaggedIssues } from './flagged-issues';
  * and a pulses status, and both must be tested (not `not-tested` / `''`).
  */
 export function footComplete(foot: FootExam): boolean {
-	return (
-		foot.neuropathyStatus !== '' &&
-		foot.neuropathyStatus !== 'not-tested' &&
-		foot.pulsesStatus !== '' &&
-		foot.pulsesStatus !== 'not-tested'
-	);
+  return (
+    foot.neuropathyStatus !== '' &&
+    foot.neuropathyStatus !== 'not-tested' &&
+    foot.pulsesStatus !== '' &&
+    foot.pulsesStatus !== 'not-tested'
+  );
 }
 
 /**
@@ -41,7 +41,7 @@ export function footComplete(foot: FootExam): boolean {
  * status recorded (and tested); otherwise incomplete.
  */
 export function computeStatus(d: AssessmentData): Status {
-	return footComplete(d.rightFoot) && footComplete(d.leftFoot) ? 'complete' : 'incomplete';
+  return footComplete(d.rightFoot) && footComplete(d.leftFoot) ? 'complete' : 'incomplete';
 }
 
 /**
@@ -49,10 +49,10 @@ export function computeStatus(d: AssessmentData): Status {
  * renal replacement therapy.
  */
 export function computeOverallRisk(ctx: ReturnType<typeof deriveContext>): Risk {
-	if (ctx.onRenalReplacementTherapy && RISK_SEVERITY[ctx.worstFootRisk] < RISK_SEVERITY['high']) {
-		return 'high';
-	}
-	return ctx.worstFootRisk;
+  if (ctx.onRenalReplacementTherapy && RISK_SEVERITY[ctx.worstFootRisk] < RISK_SEVERITY['high']) {
+    return 'high';
+  }
+  return ctx.worstFootRisk;
 }
 
 /**
@@ -60,48 +60,48 @@ export function computeOverallRisk(ctx: ReturnType<typeof deriveContext>): Risk 
  * classification for the supplied assessment data.
  */
 export function calculateGrade(data: AssessmentData): GradingResult {
-	const timestamp = new Date().toISOString();
-	const ctx = deriveContext(data);
-	const overallRisk = computeOverallRisk(ctx);
+  const timestamp = new Date().toISOString();
+  const ctx = deriveContext(data);
+  const overallRisk = computeOverallRisk(ctx);
 
-	let winner = reviewRules[reviewRules.length - 1];
-	for (const rule of reviewRules) {
-		try {
-			if (rule.evaluate(ctx)) {
-				winner = rule;
-				break;
-			}
-		} catch (e) {
-			// Rule evaluation failed - log for debugging but continue grading.
-			console.warn(`Diabetes-podiatry-assessment rule ${rule.id} evaluation failed:`, e);
-		}
-	}
+  let winner = reviewRules[reviewRules.length - 1];
+  for (const rule of reviewRules) {
+    try {
+      if (rule.evaluate(ctx)) {
+        winner = rule;
+        break;
+      }
+    } catch (e) {
+      // Rule evaluation failed - log for debugging but continue grading.
+      console.warn(`Diabetes-podiatry-assessment rule ${rule.id} evaluation failed:`, e);
+    }
+  }
 
-	const status = computeStatus(data);
+  const status = computeStatus(data);
 
-	const firedRules: FiredRule[] = [
-		{
-			id: winner.id,
-			stage: winner.stage,
-			category: winner.category,
-			description: winner.description
-		}
-	];
+  const firedRules: FiredRule[] = [
+    {
+      id: winner.id,
+      stage: winner.stage,
+      category: winner.category,
+      description: winner.description
+    }
+  ];
 
-	const result: GradingResult = {
-		rightFootRisk: ctx.rightFootRisk,
-		leftFootRisk: ctx.leftFootRisk,
-		overallRisk,
-		reviewPathway: winner.reviewPathway,
-		reviewIntervalMonths: winner.intervalMonths,
-		referral: winner.referral,
-		status,
-		firedRules,
-		flaggedIssues: [],
-		timestamp
-	};
+  const result: GradingResult = {
+    rightFootRisk: ctx.rightFootRisk,
+    leftFootRisk: ctx.leftFootRisk,
+    overallRisk,
+    reviewPathway: winner.reviewPathway,
+    reviewIntervalMonths: winner.intervalMonths,
+    referral: winner.referral,
+    status,
+    firedRules,
+    flaggedIssues: [],
+    timestamp
+  };
 
-	result.flaggedIssues = detectFlaggedIssues(data, { status, overallRisk });
+  result.flaggedIssues = detectFlaggedIssues(data, { status, overallRisk });
 
-	return result;
+  return result;
 }

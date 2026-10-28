@@ -64,7 +64,7 @@ export function createEmptyChecklist(): WhoSurgicalSafetyChecklist {
     signOutCoordinatorRole: '',
     signOutCompletedAt: '',
 
-    teamMembers: [],
+    teamMembers: []
   };
 }
 
@@ -76,6 +76,6 @@ export function createEmptyTeamMember(): TeamMember {
     name: '',
     role: '',
     introducedDuringTimeOut: '',
-    notes: '',
+    notes: ''
   };
 }

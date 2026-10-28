@@ -41,7 +41,11 @@
 
   <div class="field">
     <label class="label" for="appointment-type">Appointment type</label>
-    <select id="appointment-type" class="select" bind:value={store.data.appointment.appointmentType}>
+    <select
+      id="appointment-type"
+      class="select"
+      bind:value={store.data.appointment.appointmentType}
+    >
       <option value="">— select —</option>
       <option value="first-outpatient">First outpatient</option>
       <option value="follow-up">Follow-up</option>
@@ -84,8 +88,7 @@
       id="appointment-site-address"
       class="text-area-input"
       rows="2"
-      bind:value={store.data.appointment.siteAddress}
-    ></textarea>
+      bind:value={store.data.appointment.siteAddress}></textarea>
   </div>
 
   <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -139,8 +142,7 @@
       class="text-area-input"
       rows="2"
       placeholder="Transport, parking, directions."
-      bind:value={store.data.appointment.travelNotes}
-    ></textarea>
+      bind:value={store.data.appointment.travelNotes}></textarea>
   </div>
 
   <div class="field">
@@ -150,7 +152,6 @@
       class="text-area-input"
       rows="2"
       placeholder="Step-free access, BSL interpreter booked, etc."
-      bind:value={store.data.appointment.accessNotes}
-    ></textarea>
+      bind:value={store.data.appointment.accessNotes}></textarea>
   </div>
 </fieldset>

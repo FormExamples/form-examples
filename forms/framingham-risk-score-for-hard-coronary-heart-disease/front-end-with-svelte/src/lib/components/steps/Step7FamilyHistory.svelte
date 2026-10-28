@@ -2,14 +2,17 @@
   import { assessment } from '#lib/stores/assessment.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { RadioGroup, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { RadioGroup, TextInput } from '@lilydesignsystem/svelte-headless';
   import Select from '#lib/components/ui/Select.svelte';
 
   const f = assessment.data.familyHistory;
 </script>
 
 <Fieldset legend="Step 7 \u2014 Family history">
-  <p class="hint">Family history of premature CHD is an important risk modifier not captured in the core Framingham equation.</p>
+  <p class="hint">
+    Family history of premature CHD is an important risk modifier not captured in the core
+    Framingham equation.
+  </p>
 
   <Field label="Family history of coronary heart disease?">
     <RadioGroup label="Family history of coronary heart disease?">
@@ -47,10 +50,20 @@
   <Field label="Family history of stroke?">
     <RadioGroup label="Family history of stroke?">
       <label class="radio-input">
-        <input type="radio" name="familyStrokeHistory" value="yes" bind:group={f.familyStrokeHistory} /> Yes
+        <input
+          type="radio"
+          name="familyStrokeHistory"
+          value="yes"
+          bind:group={f.familyStrokeHistory}
+        /> Yes
       </label>
       <label class="radio-input">
-        <input type="radio" name="familyStrokeHistory" value="no" bind:group={f.familyStrokeHistory} /> No
+        <input
+          type="radio"
+          name="familyStrokeHistory"
+          value="no"
+          bind:group={f.familyStrokeHistory}
+        /> No
       </label>
     </RadioGroup>
   </Field>
@@ -58,10 +71,20 @@
   <Field label="Family history of diabetes?">
     <RadioGroup label="Family history of diabetes?">
       <label class="radio-input">
-        <input type="radio" name="familyDiabetesHistory" value="yes" bind:group={f.familyDiabetesHistory} /> Yes
+        <input
+          type="radio"
+          name="familyDiabetesHistory"
+          value="yes"
+          bind:group={f.familyDiabetesHistory}
+        /> Yes
       </label>
       <label class="radio-input">
-        <input type="radio" name="familyDiabetesHistory" value="no" bind:group={f.familyDiabetesHistory} /> No
+        <input
+          type="radio"
+          name="familyDiabetesHistory"
+          value="no"
+          bind:group={f.familyDiabetesHistory}
+        /> No
       </label>
     </RadioGroup>
   </Field>

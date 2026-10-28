@@ -19,7 +19,11 @@
 </script>
 
 <Fieldset legend="Step 21 — Section 20 — Hospital Waste Management (10 checkpoints)">
-  <p class="hint">Biomedical waste collection, segregation, record-keeping, transportation, disposal, sharps/rubber/glass/plastics handling, colour-coded bins, polythene changes, and staff protective gear.</p>
+  <p class="hint">
+    Biomedical waste collection, segregation, record-keeping, transportation, disposal,
+    sharps/rubber/glass/plastics handling, colour-coded bins, polythene changes, and staff
+    protective gear.
+  </p>
 
   {#each groups as group, gi (gi)}
     {#if group.subsection}

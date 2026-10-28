@@ -13,17 +13,17 @@ export type ModeOfTransfer = 'ground' | 'air' | 'sea' | '';
 // ──────────────────────────────────────────────
 
 export interface EmergencyContact {
-	name: string;
-	contactInformation: string;
+  name: string;
+  contactInformation: string;
 }
 
 export interface PatientIdentification {
-	patientLastName: string;
-	patientFirstName: string;
-	dateOfBirth: string;
-	sex: Sex;
-	patientContactInformation: string;
-	emergencyContact: EmergencyContact;
+  patientLastName: string;
+  patientFirstName: string;
+  dateOfBirth: string;
+  sex: Sex;
+  patientContactInformation: string;
+  emergencyContact: EmergencyContact;
 }
 
 // ──────────────────────────────────────────────
@@ -31,26 +31,26 @@ export interface PatientIdentification {
 // ──────────────────────────────────────────────
 
 export interface FacilityDetails {
-	name: string;
-	focalPoint: string;
-	phoneNumber: string;
+  name: string;
+  focalPoint: string;
+  phoneNumber: string;
 }
 
 export interface AmbulanceDetails {
-	name: string;
-	focalPoint: string;
-	phoneNumber: string;
+  name: string;
+  focalPoint: string;
+  phoneNumber: string;
 }
 
 export interface FacilityAndTransport {
-	initiatingFacility: FacilityDetails;
-	reasonForReferral: string;
-	referralFacilityContacted: boolean;
-	referralFacility: FacilityDetails;
-	ambulance: AmbulanceDetails;
-	transferDecisionDateTime: string;
-	departureDateTime: string;
-	modeOfTransfer: ModeOfTransfer;
+  initiatingFacility: FacilityDetails;
+  reasonForReferral: string;
+  referralFacilityContacted: boolean;
+  referralFacility: FacilityDetails;
+  ambulance: AmbulanceDetails;
+  transferDecisionDateTime: string;
+  departureDateTime: string;
+  modeOfTransfer: ModeOfTransfer;
 }
 
 // ──────────────────────────────────────────────
@@ -58,11 +58,11 @@ export interface FacilityAndTransport {
 // ──────────────────────────────────────────────
 
 export interface Situation {
-	chiefComplaint: string;
-	primaryDiagnosis: string;
-	pregnant: YesNoUnknown;
-	otherAcuteDiagnoses: string;
-	treatmentsInitiated: string;
+  chiefComplaint: string;
+  primaryDiagnosis: string;
+  pregnant: YesNoUnknown;
+  otherAcuteDiagnoses: string;
+  treatmentsInitiated: string;
 }
 
 // ──────────────────────────────────────────────
@@ -70,21 +70,21 @@ export interface Situation {
 // ──────────────────────────────────────────────
 
 export interface AbcdeEntry {
-	findingNormal: boolean;
-	findingDetails: string;
-	interventionNone: boolean;
-	interventionDetails: string;
+  findingNormal: boolean;
+  findingDetails: string;
+  interventionNone: boolean;
+  interventionDetails: string;
 }
 
 export interface Background {
-	historyOfPresentIllness: string;
-	pastMedicalAndSurgicalHistory: string;
-	airway: AbcdeEntry;
-	breathing: AbcdeEntry;
-	circulation: AbcdeEntry;
-	disability: AbcdeEntry;
-	exposure: AbcdeEntry;
-	otherSignificantTreatments: string;
+  historyOfPresentIllness: string;
+  pastMedicalAndSurgicalHistory: string;
+  airway: AbcdeEntry;
+  breathing: AbcdeEntry;
+  circulation: AbcdeEntry;
+  disability: AbcdeEntry;
+  exposure: AbcdeEntry;
+  otherSignificantTreatments: string;
 }
 
 // ──────────────────────────────────────────────
@@ -92,18 +92,18 @@ export interface Background {
 // ──────────────────────────────────────────────
 
 export interface VitalSigns {
-	heartRate: number | null;
-	respiratoryRate: number | null;
-	systolicBloodPressure: number | null;
-	diastolicBloodPressure: number | null;
-	temperatureCelsius: number | null;
-	oxygenSaturation: number | null;
-	glasgowComaScale: number | null;
+  heartRate: number | null;
+  respiratoryRate: number | null;
+  systolicBloodPressure: number | null;
+  diastolicBloodPressure: number | null;
+  temperatureCelsius: number | null;
+  oxygenSaturation: number | null;
+  glasgowComaScale: number | null;
 }
 
 export interface Assessment {
-	clinicalAssessment: string;
-	vitalSigns: VitalSigns;
+  clinicalAssessment: string;
+  vitalSigns: VitalSigns;
 }
 
 // ──────────────────────────────────────────────
@@ -111,20 +111,20 @@ export interface Assessment {
 // ──────────────────────────────────────────────
 
 export interface Precautions {
-	highlyInfectiousDisease: boolean;
-	spinalPrecautions: boolean;
-	weightBearingRestrictions: boolean;
-	fallRisk: boolean;
-	aspirationRisk: boolean;
-	other: boolean;
-	otherDetails: string;
+  highlyInfectiousDisease: boolean;
+  spinalPrecautions: boolean;
+  weightBearingRestrictions: boolean;
+  fallRisk: boolean;
+  aspirationRisk: boolean;
+  other: boolean;
+  otherDetails: string;
 }
 
 export interface Recommendations {
-	treatmentPlanDuringTransport: string;
-	potentialWorseningOfCondition: string;
-	cautionsRegardingPriorTherapies: string;
-	precautions: Precautions;
+  treatmentPlanDuringTransport: string;
+  potentialWorseningOfCondition: string;
+  cautionsRegardingPriorTherapies: string;
+  precautions: Precautions;
 }
 
 // ──────────────────────────────────────────────
@@ -132,9 +132,9 @@ export interface Recommendations {
 // ──────────────────────────────────────────────
 
 export interface InitiatingProviderSignoff {
-	providerName: string;
-	signature: string;
-	signatureDate: string;
+  providerName: string;
+  signature: string;
+  signatureDate: string;
 }
 
 // ──────────────────────────────────────────────
@@ -142,10 +142,10 @@ export interface InitiatingProviderSignoff {
 // ──────────────────────────────────────────────
 
 export interface ReferralFacilityReceipt {
-	patientArrivalDateTime: string;
-	receivingProviderName: string;
-	receivingProviderSignature: string;
-	feedbackProvidedToInitiatingFacility: boolean;
+  patientArrivalDateTime: string;
+  receivingProviderName: string;
+  receivingProviderSignature: string;
+  feedbackProvidedToInitiatingFacility: boolean;
 }
 
 // ──────────────────────────────────────────────
@@ -153,14 +153,14 @@ export interface ReferralFacilityReceipt {
 // ──────────────────────────────────────────────
 
 export interface AssessmentData {
-	patientIdentification: PatientIdentification;
-	facilityAndTransport: FacilityAndTransport;
-	situation: Situation;
-	background: Background;
-	assessment: Assessment;
-	recommendations: Recommendations;
-	initiatingProviderSignoff: InitiatingProviderSignoff;
-	referralFacilityReceipt: ReferralFacilityReceipt;
+  patientIdentification: PatientIdentification;
+  facilityAndTransport: FacilityAndTransport;
+  situation: Situation;
+  background: Background;
+  assessment: Assessment;
+  recommendations: Recommendations;
+  initiatingProviderSignoff: InitiatingProviderSignoff;
+  referralFacilityReceipt: ReferralFacilityReceipt;
 }
 
 // ──────────────────────────────────────────────
@@ -172,47 +172,47 @@ export type SectionKey = keyof AssessmentData;
 
 /** A single validation rule that may fire against the assessment data. */
 export interface ValidationRule {
-	id: string;
-	section: SectionKey;
-	description: string;
-	/** True if the rule applies given the conditional logic of the form. */
-	applies: (data: AssessmentData) => boolean;
-	/** True if the rule is satisfied; false if it has fired (i.e. is incomplete). */
-	isSatisfied: (data: AssessmentData) => boolean;
+  id: string;
+  section: SectionKey;
+  description: string;
+  /** True if the rule applies given the conditional logic of the form. */
+  applies: (data: AssessmentData) => boolean;
+  /** True if the rule is satisfied; false if it has fired (i.e. is incomplete). */
+  isSatisfied: (data: AssessmentData) => boolean;
 }
 
 /** A rule that has fired (the field is required but unanswered). */
 export interface FiredRule {
-	id: string;
-	section: SectionKey;
-	description: string;
+  id: string;
+  section: SectionKey;
+  description: string;
 }
 
 /** Per-section completeness summary. */
 export interface SectionCompleteness {
-	section: SectionKey;
-	required: number;
-	satisfied: number;
-	missing: FiredRule[];
+  section: SectionKey;
+  required: number;
+  satisfied: number;
+  missing: FiredRule[];
 }
 
 /** Result of running the completeness validator. */
 export interface ValidationResult {
-	complete: boolean;
-	totalRequired: number;
-	totalSatisfied: number;
-	sections: SectionCompleteness[];
-	missing: FiredRule[];
+  complete: boolean;
+  totalRequired: number;
+  totalSatisfied: number;
+  sections: SectionCompleteness[];
+  missing: FiredRule[];
 }
 
 /** Priority for clinician-relevant flags. */
 export type FlagPriority = 'urgent' | 'high' | 'medium' | 'low';
 
 export interface FlaggedIssue {
-	id: string;
-	category: string;
-	message: string;
-	priority: FlagPriority;
+  id: string;
+  category: string;
+  message: string;
+  priority: FlagPriority;
 }
 
 // ──────────────────────────────────────────────
@@ -220,8 +220,8 @@ export interface FlaggedIssue {
 // ──────────────────────────────────────────────
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
-	section: SectionKey;
+  number: number;
+  title: string;
+  shortTitle: string;
+  section: SectionKey;
 }

@@ -2,7 +2,7 @@
   import { store } from '#lib/state.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { TextAreaInput, TextInput } from '@lilydesignsystem/svelte-headless';
   import Select from '#lib/components/ui/Select.svelte';
 </script>
 
@@ -24,7 +24,10 @@
       <TextInput label="Screws / plates" bind:value={store.data.materialsImplants.screwsPlates} />
     </Field>
     <Field label="Prosthetic joints">
-      <TextInput label="Prosthetic joints" bind:value={store.data.materialsImplants.prostheticJoints} />
+      <TextInput
+        label="Prosthetic joints"
+        bind:value={store.data.materialsImplants.prostheticJoints}
+      />
     </Field>
     <Field label="Vascular grafts">
       <TextInput label="Vascular grafts" bind:value={store.data.materialsImplants.vascularGrafts} />
@@ -40,7 +43,10 @@
       />
     </Field>
     <Field label="Registry submitted">
-      <Select label="Registry submitted" bind:value={store.data.materialsImplants.registrySubmitted}>
+      <Select
+        label="Registry submitted"
+        bind:value={store.data.materialsImplants.registrySubmitted}
+      >
         <option value="">—</option>
         <option value="yes">Yes</option>
         <option value="no">No / pending</option>

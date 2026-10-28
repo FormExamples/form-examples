@@ -47,58 +47,58 @@ export const BOUNDARY_MARGIN = 3;
  * band is inclusive of its lower bound (≥ 90, ≥ 60, ≥ 45, ≥ 30, ≥ 15).
  */
 export const stageRules: StageRule[] = [
-	{
-		id: 'R-STAGE-G1-01',
-		instrument: 'staging',
-		band: 'G1',
-		category: 'g-stage',
-		label: 'Normal or high',
-		description: 'eGFR ≥ 90 mL/min/1.73 m² — G1 (normal or high)',
-		evaluate: (e) => e >= G1_MIN
-	},
-	{
-		id: 'R-STAGE-G2-01',
-		instrument: 'staging',
-		band: 'G2',
-		category: 'g-stage',
-		label: 'Mildly decreased',
-		description: 'eGFR 60–89 mL/min/1.73 m² — G2 (mildly decreased)',
-		evaluate: (e) => e >= G2_MIN && e < G1_MIN
-	},
-	{
-		id: 'R-STAGE-G3A-01',
-		instrument: 'staging',
-		band: 'G3a',
-		category: 'g-stage',
-		label: 'Mildly to moderately decreased',
-		description: 'eGFR 45–59 mL/min/1.73 m² — G3a (mildly to moderately decreased)',
-		evaluate: (e) => e >= G3A_MIN && e < G2_MIN
-	},
-	{
-		id: 'R-STAGE-G3B-01',
-		instrument: 'staging',
-		band: 'G3b',
-		category: 'g-stage',
-		label: 'Moderately to severely decreased',
-		description: 'eGFR 30–44 mL/min/1.73 m² — G3b (moderately to severely decreased)',
-		evaluate: (e) => e >= G3B_MIN && e < G3A_MIN
-	},
-	{
-		id: 'R-STAGE-G4-01',
-		instrument: 'staging',
-		band: 'G4',
-		category: 'g-stage',
-		label: 'Severely decreased',
-		description: 'eGFR 15–29 mL/min/1.73 m² — G4 (severely decreased)',
-		evaluate: (e) => e >= G4_MIN && e < G3B_MIN
-	},
-	{
-		id: 'R-STAGE-G5-01',
-		instrument: 'staging',
-		band: 'G5',
-		category: 'g-stage',
-		label: 'Kidney failure',
-		description: 'eGFR < 15 mL/min/1.73 m² — G5 (kidney failure)',
-		evaluate: (e) => e < G4_MIN
-	}
+  {
+    id: 'R-STAGE-G1-01',
+    instrument: 'staging',
+    band: 'G1',
+    category: 'g-stage',
+    label: 'Normal or high',
+    description: 'eGFR ≥ 90 mL/min/1.73 m² — G1 (normal or high)',
+    evaluate: (e) => e >= G1_MIN
+  },
+  {
+    id: 'R-STAGE-G2-01',
+    instrument: 'staging',
+    band: 'G2',
+    category: 'g-stage',
+    label: 'Mildly decreased',
+    description: 'eGFR 60–89 mL/min/1.73 m² — G2 (mildly decreased)',
+    evaluate: (e) => e >= G2_MIN && e < G1_MIN
+  },
+  {
+    id: 'R-STAGE-G3A-01',
+    instrument: 'staging',
+    band: 'G3a',
+    category: 'g-stage',
+    label: 'Mildly to moderately decreased',
+    description: 'eGFR 45–59 mL/min/1.73 m² — G3a (mildly to moderately decreased)',
+    evaluate: (e) => e >= G3A_MIN && e < G2_MIN
+  },
+  {
+    id: 'R-STAGE-G3B-01',
+    instrument: 'staging',
+    band: 'G3b',
+    category: 'g-stage',
+    label: 'Moderately to severely decreased',
+    description: 'eGFR 30–44 mL/min/1.73 m² — G3b (moderately to severely decreased)',
+    evaluate: (e) => e >= G3B_MIN && e < G3A_MIN
+  },
+  {
+    id: 'R-STAGE-G4-01',
+    instrument: 'staging',
+    band: 'G4',
+    category: 'g-stage',
+    label: 'Severely decreased',
+    description: 'eGFR 15–29 mL/min/1.73 m² — G4 (severely decreased)',
+    evaluate: (e) => e >= G4_MIN && e < G3B_MIN
+  },
+  {
+    id: 'R-STAGE-G5-01',
+    instrument: 'staging',
+    band: 'G5',
+    category: 'g-stage',
+    label: 'Kidney failure',
+    description: 'eGFR < 15 mL/min/1.73 m² — G5 (kidney failure)',
+    evaluate: (e) => e < G4_MIN
+  }
 ];

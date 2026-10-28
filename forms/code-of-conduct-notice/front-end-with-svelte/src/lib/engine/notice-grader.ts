@@ -9,13 +9,13 @@ import { detectAdditionalFlags } from './flagged-issues';
  * dashboard, so they stay aligned.
  */
 export function calculateNoticeGrade(data: AssessmentData): GradingResult {
-	const { completeness, status, firedRules } = validateForm(data);
-	const additionalFlags = detectAdditionalFlags(data);
-	return {
-		completenessPercent: completeness,
-		status,
-		firedRules,
-		additionalFlags,
-		timestamp: new Date().toISOString()
-	};
+  const { completeness, status, firedRules } = validateForm(data);
+  const additionalFlags = detectAdditionalFlags(data);
+  return {
+    completenessPercent: completeness,
+    status,
+    firedRules,
+    additionalFlags,
+    timestamp: new Date().toISOString()
+  };
 }

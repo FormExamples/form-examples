@@ -11,7 +11,7 @@
     showTrustCorporation = false,
     showBankruptcyFlags = false,
     showEmail = true,
-    idPrefix = '',
+    idPrefix = ''
   }: {
     person: Person;
     showTrustCorporation?: boolean;
@@ -37,7 +37,10 @@
       <TextInput bind:value={person.otherNames} />
     </Field>
     <Field label="Date of birth">
-      <DateInput id={idPrefix ? `${idPrefix}-dateOfBirth` : undefined} bind:value={person.dateOfBirth} />
+      <DateInput
+        id={idPrefix ? `${idPrefix}-dateOfBirth` : undefined}
+        bind:value={person.dateOfBirth}
+      />
     </Field>
     {#if showEmail}
       <Field label="Email">
@@ -50,7 +53,10 @@
   </div>
   <AddressInput bind:address={person.address} />
   {#if showTrustCorporation}
-    <CheckboxField label="This attorney is a trust corporation" bind:checked={person.isTrustCorporation} />
+    <CheckboxField
+      label="This attorney is a trust corporation"
+      bind:checked={person.isTrustCorporation}
+    />
     {#if person.isTrustCorporation}
       <Field label="Trust corporation number">
         <TextInput bind:value={person.trustCorporationNumber} />
@@ -60,7 +66,10 @@
   {#if showBankruptcyFlags}
     <div class="space-y-1">
       <CheckboxField label="Currently bankrupt" bind:checked={person.isBankrupt} />
-      <CheckboxField label="Subject to a debt relief order" bind:checked={person.hasDebtReliefOrder} />
+      <CheckboxField
+        label="Subject to a debt relief order"
+        bind:checked={person.hasDebtReliefOrder}
+      />
     </div>
   {/if}
 </div>

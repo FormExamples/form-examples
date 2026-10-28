@@ -5,9 +5,7 @@
 
   let { principleNumber }: { principleNumber: number } = $props();
 
-  const principle = $derived(
-    PRINCIPLES.find((p) => p.number === principleNumber) ?? PRINCIPLES[0],
-  );
+  const principle = $derived(PRINCIPLES.find((p) => p.number === principleNumber) ?? PRINCIPLES[0]);
   const idx = $derived(principleNumber - 1);
   const stepIndex = $derived(principleNumber + 1); // step 2..13 covers principles 1..12
 </script>
@@ -25,10 +23,7 @@
     <legend class="block text-sm font-medium text-base-content/70 mb-2">
       How well does this describe your team / organisation today?
     </legend>
-    <LikertScale
-      name="principle-{principleNumber}"
-      bind:value={store.data.responses[idx].score}
-    />
+    <LikertScale name="principle-{principleNumber}" bind:value={store.data.responses[idx].score} />
   </fieldset>
 
   <label class="block">
@@ -37,7 +32,6 @@
       rows="3"
       class="w-full border border-base-300 rounded px-2 py-1 text-sm"
       placeholder="Concrete examples, blockers, or evidence — these populate the action plan."
-      bind:value={store.data.responses[idx].comment}
-    ></textarea>
+      bind:value={store.data.responses[idx].comment}></textarea>
   </label>
 </section>

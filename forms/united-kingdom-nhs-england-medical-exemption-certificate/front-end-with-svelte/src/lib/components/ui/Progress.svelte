@@ -14,10 +14,5 @@
   } = $props();
 </script>
 
-<progress
-  class={`progress ${className}`}
-  aria-label={label}
-  {value}
-  {max}
-  {...restProps}
+<progress class={`progress ${className}`} aria-label={label} {value} {max} {...restProps}
 ></progress>

@@ -9,44 +9,28 @@
 // ─── Enumerations (mirror the SQL CHECK constraints) ───
 
 /** Report lifecycle status. */
-export type ReportStatus =
-	| 'preliminary'
-	| 'interim'
-	| 'final'
-	| 'amended'
-	| 'cancelled'
-	| '';
+export type ReportStatus = 'preliminary' | 'interim' | 'final' | 'amended' | 'cancelled' | '';
 
 /** Cultured specimen type. */
 export type SpecimenType =
-	| 'blood-culture'
-	| 'urine'
-	| 'wound-swab'
-	| 'sputum'
-	| 'throat-swab'
-	| 'stool'
-	| 'csf'
-	| 'tissue'
-	| 'catheter-tip'
-	| 'genital-swab'
-	| 'other'
-	| '';
+  | 'blood-culture'
+  | 'urine'
+  | 'wound-swab'
+  | 'sputum'
+  | 'throat-swab'
+  | 'stool'
+  | 'csf'
+  | 'tissue'
+  | 'catheter-tip'
+  | 'genital-swab'
+  | 'other'
+  | '';
 
 /** Pre-analytical specimen condition on receipt. */
-export type SpecimenCondition =
-	| 'satisfactory'
-	| 'contaminated'
-	| 'insufficient'
-	| 'delayed'
-	| '';
+export type SpecimenCondition = 'satisfactory' | 'contaminated' | 'insufficient' | 'delayed' | '';
 
 /** Overall culture outcome. */
-export type CultureResult =
-	| 'no-growth'
-	| 'mixed-growth'
-	| 'significant-growth'
-	| 'positive'
-	| '';
+export type CultureResult = 'no-growth' | 'mixed-growth' | 'significant-growth' | 'positive' | '';
 
 /** A specialised three-state test result. */
 export type TestResult = 'positive' | 'negative' | 'not-tested' | '';
@@ -64,12 +48,12 @@ export type FollowUpUrgency = 'routine' | 'recommended' | 'urgent' | 'critical-a
 
 /** Overall recommendation. */
 export type Recommendation =
-	| 'no-action'
-	| 'routine-follow-up'
-	| 'further-testing'
-	| 'specialist-referral'
-	| 'urgent-review'
-	| '';
+  | 'no-action'
+  | 'routine-follow-up'
+  | 'further-testing'
+  | 'specialist-referral'
+  | 'urgent-review'
+  | '';
 
 // ─── The result/report record (sql/04) ───
 
@@ -78,51 +62,51 @@ export type Recommendation =
  * four-axis interpretation grade is computed from.
  */
 export interface MicrobiologyCultureResult {
-	// Report identification
-	reportingClinician: string;
-	originatingRequestReference: string;
-	reportStatus: ReportStatus;
-	performedDate: string;
-	reportedDate: string;
+  // Report identification
+  reportingClinician: string;
+  originatingRequestReference: string;
+  reportStatus: ReportStatus;
+  performedDate: string;
+  reportedDate: string;
 
-	// Specimen
-	specimenType: SpecimenType;
-	specimenSiteDetail: string;
-	specimenCondition: SpecimenCondition;
+  // Specimen
+  specimenType: SpecimenType;
+  specimenSiteDetail: string;
+  specimenCondition: SpecimenCondition;
 
-	// Clinical context
-	clinicalHistory: string;
+  // Clinical context
+  clinicalHistory: string;
 
-	// Microscopy and culture
-	gramStainResult: string;
-	cultureResult: CultureResult;
-	organismIsolated: string;
-	secondOrganismIsolated: string;
-	colonyCount: string;
+  // Microscopy and culture
+  gramStainResult: string;
+  cultureResult: CultureResult;
+  organismIsolated: string;
+  secondOrganismIsolated: string;
+  colonyCount: string;
 
-	// Sensitivities and resistance
-	antibioticSensitivities: string;
-	resistanceMrsa: boolean;
-	resistanceEsbl: boolean;
-	resistanceCpe: boolean;
+  // Sensitivities and resistance
+  antibioticSensitivities: string;
+  resistanceMrsa: boolean;
+  resistanceEsbl: boolean;
+  resistanceCpe: boolean;
 
-	// Specialised tests
-	cDifficileToxin: TestResult;
-	acidFastBacilli: TestResult;
-	pcrResult: string;
+  // Specialised tests
+  cDifficileToxin: TestResult;
+  acidFastBacilli: TestResult;
+  pcrResult: string;
 
-	// Findings and interpretation
-	criticalOrganism: boolean;
-	findingsNarrative: string;
-	impression: string;
-	reportingCategory: string;
-	recommendedFollowUp: string;
+  // Findings and interpretation
+  criticalOrganism: boolean;
+  findingsNarrative: string;
+  impression: string;
+  reportingCategory: string;
+  recommendedFollowUp: string;
 
-	// Critical-result communication and sign-off
-	criticalResultCommunicated: boolean;
-	reportedTo: string;
-	clinicianNotes: string;
-	signed: boolean;
+  // Critical-result communication and sign-off
+  criticalResultCommunicated: boolean;
+  reportedTo: string;
+  clinicianNotes: string;
+  signed: boolean;
 }
 
 // ─── Grading types (sql/05, sql/06, sql/07) ───
@@ -132,35 +116,35 @@ export type Axis = 'classification' | 'severity' | 'completeness' | 'follow-up';
 
 /** Flag category (mirrors the sql/07 CHECK constraint). */
 export type FlagCategory =
-	| 'critical-result-alert'
-	| 'incidental-finding'
-	| 'discrepancy-with-request'
-	| 'abnormal-requiring-action'
-	| 'urgent-referral'
-	| 'inadequate-technique'
-	| 'unexpected-finding'
-	| 'missing-impression'
-	| 'missing-measurement'
-	| 'other';
+  | 'critical-result-alert'
+  | 'incidental-finding'
+  | 'discrepancy-with-request'
+  | 'abnormal-requiring-action'
+  | 'urgent-referral'
+  | 'inadequate-technique'
+  | 'unexpected-finding'
+  | 'missing-impression'
+  | 'missing-measurement'
+  | 'other';
 
 /** Flag priority. */
 export type FlagPriority = 'low' | 'medium' | 'high';
 
 /** A single rule that fired during grading (audit trail). */
 export interface FiredRule {
-	ruleId: string;
-	axis: Axis;
-	category: string;
-	description: string;
+  ruleId: string;
+  axis: Axis;
+  category: string;
+  description: string;
 }
 
 /** A safety-critical flag, independent of the four axes. */
 export interface Flag {
-	flagId: string;
-	category: FlagCategory;
-	priority: FlagPriority;
-	description: string;
-	suggestedAction: string;
+  flagId: string;
+  category: FlagCategory;
+  priority: FlagPriority;
+  description: string;
+  suggestedAction: string;
 }
 
 /**
@@ -168,44 +152,44 @@ export interface Flag {
  * sql/05_create_table_microbiology_culture_test_result_grade.sql.
  */
 export interface GradingResult {
-	// Axis A
-	resultClassification: ResultClassification;
-	// Axis B
-	abnormalitySeverity: AbnormalitySeverity;
-	reportingCategory: string;
-	// Axis C
-	reportCompletenessPercent: number;
-	// Axis D
-	followUpUrgency: FollowUpUrgency;
-	targetTimeframe: string;
-	recommendedAction: string;
-	// Overall
-	recommendation: Recommendation;
-	firedRules: FiredRule[];
-	flags: Flag[];
-	gradedAt: string;
+  // Axis A
+  resultClassification: ResultClassification;
+  // Axis B
+  abnormalitySeverity: AbnormalitySeverity;
+  reportingCategory: string;
+  // Axis C
+  reportCompletenessPercent: number;
+  // Axis D
+  followUpUrgency: FollowUpUrgency;
+  targetTimeframe: string;
+  recommendedAction: string;
+  // Overall
+  recommendation: Recommendation;
+  firedRules: FiredRule[];
+  flags: Flag[];
+  gradedAt: string;
 }
 
 // ─── Step configuration ───
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
+  number: number;
+  title: string;
+  shortTitle: string;
 }
 
 // ─── Dashboard row ───
 
 /** A graded report row for the dashboard table. */
 export interface ReportRow {
-	id: string;
-	patientName: string;
-	specimenType: SpecimenType;
-	reportStatus: ReportStatus;
-	reportedDate: string;
-	resultClassification: ResultClassification;
-	abnormalitySeverity: AbnormalitySeverity;
-	followUpUrgency: FollowUpUrgency;
-	reportCompletenessPercent: number;
-	flagCount: number;
+  id: string;
+  patientName: string;
+  specimenType: SpecimenType;
+  reportStatus: ReportStatus;
+  reportedDate: string;
+  resultClassification: ResultClassification;
+  abnormalitySeverity: AbnormalitySeverity;
+  followUpUrgency: FollowUpUrgency;
+  reportCompletenessPercent: number;
+  flagCount: number;
 }

@@ -45,15 +45,15 @@ describe('summariseChecklist', () => {
           id: '1.4',
           sectionTitle: 'OPD',
           text: 'Complaint Box.',
-          remarks: 'Complaint box missing key.',
+          remarks: 'Complaint box missing key.'
         },
         {
           id: '6.2.4',
           sectionTitle: 'Diagnostic Facility',
           text: 'Radiation Safety Officer nominated.',
-          remarks: 'RSO not nominated.',
-        },
-      ]),
+          remarks: 'RSO not nominated.'
+        }
+      ])
     );
     expect(result.sectionsWithNeedsAttention).toEqual([1, 6]);
   });
@@ -72,8 +72,8 @@ describe('summariseChecklist', () => {
         id: '16',
         sectionTitle: 'Fire Fighting Equipment',
         text: 'Fire fighting equipment.',
-        remarks: 'Extinguisher expired.',
-      },
+        remarks: 'Extinguisher expired.'
+      }
     ]);
     expect(result.sectionsWithNeedsAttention).toEqual([16]);
   });

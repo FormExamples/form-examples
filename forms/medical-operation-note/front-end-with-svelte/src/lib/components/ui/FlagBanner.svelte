@@ -10,7 +10,7 @@
         ? 'bg-error text-error-content border-error'
         : risk === 'complicated'
           ? 'bg-warning text-warning-content border-warning'
-          : 'bg-success text-success-content border-success',
+          : 'bg-success text-success-content border-success'
   );
 </script>
 

@@ -1,10 +1,10 @@
 import type { AssessmentData, FiredRule, GradingResult } from './types';
 import {
-	kdigoRules,
-	resolveEgfr,
-	resolveGfrCategory,
-	resolveAlbuminuriaCategory,
-	kdigoCompositeRisk
+  kdigoRules,
+  resolveEgfr,
+  resolveGfrCategory,
+  resolveAlbuminuriaCategory,
+  kdigoCompositeRisk
 } from './kdigo-rules';
 import { detectAdditionalFlags } from './flagged-issues';
 
@@ -27,39 +27,39 @@ import { detectAdditionalFlags } from './flagged-issues';
  *   G5 (<15)     Very High Very High  Very High
  */
 export function calculateKdigo(data: AssessmentData): GradingResult {
-	const firedRules: FiredRule[] = [];
-	for (const rule of kdigoRules) {
-		try {
-			const value = rule.evaluate(data);
-			if (value) {
-				firedRules.push({
-					id: rule.id,
-					category: rule.category,
-					description: rule.description,
-					value
-				});
-			}
-		} catch (e) {
-			// Rule evaluation failed - log for debugging but continue grading
-			console.warn(`KDIGO rule ${rule.id} evaluation failed:`, e);
-		}
-	}
+  const firedRules: FiredRule[] = [];
+  for (const rule of kdigoRules) {
+    try {
+      const value = rule.evaluate(data);
+      if (value) {
+        firedRules.push({
+          id: rule.id,
+          category: rule.category,
+          description: rule.description,
+          value
+        });
+      }
+    } catch (e) {
+      // Rule evaluation failed - log for debugging but continue grading
+      console.warn(`KDIGO rule ${rule.id} evaluation failed:`, e);
+    }
+  }
 
-	const gfrCategory = resolveGfrCategory(data) || '';
-	const albuminuriaCategory = resolveAlbuminuriaCategory(data) || '';
-	const riskLevel = kdigoCompositeRisk(gfrCategory, albuminuriaCategory);
-	const egfr = resolveEgfr(data);
-	const acr = typeof data.urineTests.acr === 'number' ? data.urineTests.acr : null;
-	const additionalFlags = detectAdditionalFlags(data);
+  const gfrCategory = resolveGfrCategory(data) || '';
+  const albuminuriaCategory = resolveAlbuminuriaCategory(data) || '';
+  const riskLevel = kdigoCompositeRisk(gfrCategory, albuminuriaCategory);
+  const egfr = resolveEgfr(data);
+  const acr = typeof data.urineTests.acr === 'number' ? data.urineTests.acr : null;
+  const additionalFlags = detectAdditionalFlags(data);
 
-	return {
-		gfrCategory,
-		albuminuriaCategory,
-		riskLevel,
-		egfr,
-		acr,
-		firedRules,
-		additionalFlags,
-		timestamp: new Date().toISOString()
-	};
+  return {
+    gfrCategory,
+    albuminuriaCategory,
+    riskLevel,
+    egfr,
+    acr,
+    firedRules,
+    additionalFlags,
+    timestamp: new Date().toISOString()
+  };
 }

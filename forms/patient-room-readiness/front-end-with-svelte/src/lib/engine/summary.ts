@@ -1,4 +1,8 @@
-import { CHECKLIST_ITEMS, type PatientRoomReadinessChecklist, type ReadinessSummary } from './types.js';
+import {
+  CHECKLIST_ITEMS,
+  type PatientRoomReadinessChecklist,
+  type ReadinessSummary
+} from './types.js';
 
 /**
  * Tally checklist results: count checked, and list unchecked checkpoint

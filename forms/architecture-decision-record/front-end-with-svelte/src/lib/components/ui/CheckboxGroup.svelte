@@ -12,6 +12,12 @@
 </script>
 
 <!-- svelte-ignore a11y_no_redundant_roles -->
-<fieldset class={`checkbox-group ${className}`} role="group" aria-label={label} {disabled} {...restProps}>
+<fieldset
+  class={`checkbox-group ${className}`}
+  role="group"
+  aria-label={label}
+  {disabled}
+  {...restProps}
+>
   {@render children?.()}
 </fieldset>

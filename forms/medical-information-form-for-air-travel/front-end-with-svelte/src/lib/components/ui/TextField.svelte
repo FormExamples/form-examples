@@ -10,7 +10,7 @@
     placeholder = '',
     hint = '',
     required = false,
-    id = undefined,
+    id = undefined
   }: {
     label: string;
     value: string;
@@ -22,26 +22,22 @@
   } = $props();
 
   const lilyClass = $derived(
-    type === 'email' ? 'email-input' :
-    type === 'date' ? 'date-input' :
-    type === 'time' ? 'time-input' :
-    type === 'tel' ? 'tel-input' :
-    'text-input',
+    type === 'email'
+      ? 'email-input'
+      : type === 'date'
+        ? 'date-input'
+        : type === 'time'
+          ? 'time-input'
+          : type === 'tel'
+            ? 'tel-input'
+            : 'text-input'
   );
 </script>
 
 <div class="field" data-required={required || undefined}>
   <label class="label" data-required={required || undefined}>
     <span>{label}</span>
-    <input
-      {id}
-      {type}
-      {placeholder}
-      class={lilyClass}
-      aria-label={label}
-      bind:value
-      {required}
-    />
+    <input {id} {type} {placeholder} class={lilyClass} aria-label={label} bind:value {required} />
   </label>
   {#if hint}<p class="hint">{hint}</p>{/if}
 </div>

@@ -15,13 +15,15 @@
 <section>
   <h2 class="text-xl font-semibold mb-2">Step 15 — Notes</h2>
   <p class="text-sm text-base-content/70 mb-4">
-    Tyree &amp; Akerman §14: discussion log captured during socialisation.
-    Append-only; each note is timestamped.
+    Tyree &amp; Akerman §14: discussion log captured during socialisation. Append-only; each note is
+    timestamped.
   </p>
 
   <div class="grid gap-2 mb-4">
     {#if store.data.notes.length === 0}
-      <p class="text-sm text-base-content/60 italic">No notes yet. Add one as you socialise the decision.</p>
+      <p class="text-sm text-base-content/60 italic">
+        No notes yet. Add one as you socialise the decision.
+      </p>
     {/if}
     {#each store.data.notes as note, i (i)}
       <div class="border-l-4 border-primary bg-base-200 p-2 rounded">
@@ -45,7 +47,10 @@
     </label>
     <label class="block">
       <span class="text-sm text-base-content">Body</span>
-      <textarea class="w-full border rounded px-2 py-1 font-mono text-sm" rows="2" bind:value={pendingBody}></textarea>
+      <textarea
+        class="w-full border rounded px-2 py-1 font-mono text-sm"
+        rows="2"
+        bind:value={pendingBody}></textarea>
     </label>
   </div>
   <button

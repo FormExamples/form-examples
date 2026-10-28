@@ -12,17 +12,17 @@ export type ValidityStatus = 'draft' | 'complete' | 'valid' | 'invalid';
 // ──────────────────────────────────────────────
 
 export interface PersonalInformation {
-	fullLegalName: string;
-	dateOfBirth: string;
-	nhsNumber: string;
-	address: string;
-	postcode: string;
-	telephone: string;
-	email: string;
-	gpName: string;
-	gpPractice: string;
-	gpAddress: string;
-	gpTelephone: string;
+  fullLegalName: string;
+  dateOfBirth: string;
+  nhsNumber: string;
+  address: string;
+  postcode: string;
+  telephone: string;
+  email: string;
+  gpName: string;
+  gpPractice: string;
+  gpAddress: string;
+  gpTelephone: string;
 }
 
 // ──────────────────────────────────────────────
@@ -30,14 +30,14 @@ export interface PersonalInformation {
 // ──────────────────────────────────────────────
 
 export interface CapacityDeclaration {
-	confirmsCapacity: YesNo;
-	understandsConsequences: YesNo;
-	noUndueInfluence: YesNo;
-	professionalCapacityAssessment: YesNo;
-	assessedByName: string;
-	assessedByRole: string;
-	assessmentDate: string;
-	assessmentDetails: string;
+  confirmsCapacity: YesNo;
+  understandsConsequences: YesNo;
+  noUndueInfluence: YesNo;
+  professionalCapacityAssessment: YesNo;
+  assessedByName: string;
+  assessedByRole: string;
+  assessmentDate: string;
+  assessmentDetails: string;
 }
 
 // ──────────────────────────────────────────────
@@ -45,9 +45,9 @@ export interface CapacityDeclaration {
 // ──────────────────────────────────────────────
 
 export interface Circumstances {
-	specificCircumstances: string;
-	medicalConditions: string;
-	situationsDescription: string;
+  specificCircumstances: string;
+  medicalConditions: string;
+  situationsDescription: string;
 }
 
 // ──────────────────────────────────────────────
@@ -55,19 +55,19 @@ export interface Circumstances {
 // ──────────────────────────────────────────────
 
 export interface TreatmentRefusal {
-	treatment: string;
-	refused: YesNo;
-	specification: string;
+  treatment: string;
+  refused: YesNo;
+  specification: string;
 }
 
 export interface TreatmentsRefusedGeneral {
-	antibiotics: TreatmentRefusal;
-	bloodTransfusion: TreatmentRefusal;
-	ivFluids: TreatmentRefusal;
-	tubeFeeding: TreatmentRefusal;
-	dialysis: TreatmentRefusal;
-	ventilation: TreatmentRefusal;
-	otherTreatments: TreatmentRefusal[];
+  antibiotics: TreatmentRefusal;
+  bloodTransfusion: TreatmentRefusal;
+  ivFluids: TreatmentRefusal;
+  tubeFeeding: TreatmentRefusal;
+  dialysis: TreatmentRefusal;
+  ventilation: TreatmentRefusal;
+  otherTreatments: TreatmentRefusal[];
 }
 
 // ──────────────────────────────────────────────
@@ -75,17 +75,17 @@ export interface TreatmentsRefusedGeneral {
 // ──────────────────────────────────────────────
 
 export interface LifeSustainingRefusal {
-	treatment: string;
-	refused: YesNo;
-	evenIfLifeAtRisk: YesNo;
-	specification: string;
+  treatment: string;
+  refused: YesNo;
+  evenIfLifeAtRisk: YesNo;
+  specification: string;
 }
 
 export interface TreatmentsRefusedLifeSustaining {
-	cpr: LifeSustainingRefusal;
-	mechanicalVentilation: LifeSustainingRefusal;
-	artificialNutritionHydration: LifeSustainingRefusal;
-	otherLifeSustaining: LifeSustainingRefusal[];
+  cpr: LifeSustainingRefusal;
+  mechanicalVentilation: LifeSustainingRefusal;
+  artificialNutritionHydration: LifeSustainingRefusal;
+  otherLifeSustaining: LifeSustainingRefusal[];
 }
 
 // ──────────────────────────────────────────────
@@ -93,11 +93,11 @@ export interface TreatmentsRefusedLifeSustaining {
 // ──────────────────────────────────────────────
 
 export interface ExceptionsConditions {
-	hasExceptions: YesNo;
-	exceptionsDescription: string;
-	hasTimeLimitations: YesNo;
-	timeLimitationsDescription: string;
-	invalidatingConditions: string;
+  hasExceptions: YesNo;
+  exceptionsDescription: string;
+  hasTimeLimitations: YesNo;
+  timeLimitationsDescription: string;
+  invalidatingConditions: string;
 }
 
 // ──────────────────────────────────────────────
@@ -105,10 +105,10 @@ export interface ExceptionsConditions {
 // ──────────────────────────────────────────────
 
 export interface OtherWishes {
-	preferredCareSetting: string;
-	comfortMeasures: string;
-	spiritualReligiousWishes: string;
-	otherPreferences: string;
+  preferredCareSetting: string;
+  comfortMeasures: string;
+  spiritualReligiousWishes: string;
+  otherPreferences: string;
 }
 
 // ──────────────────────────────────────────────
@@ -116,12 +116,12 @@ export interface OtherWishes {
 // ──────────────────────────────────────────────
 
 export interface LastingPowerOfAttorney {
-	hasLPA: YesNo;
-	lpaType: 'health-and-welfare' | 'property-and-financial' | 'both' | '';
-	lpaRegistered: YesNo;
-	lpaRegistrationDate: string;
-	doneeNames: string;
-	relationshipBetweenADRTAndLPA: string;
+  hasLPA: YesNo;
+  lpaType: 'health-and-welfare' | 'property-and-financial' | 'both' | '';
+  lpaRegistered: YesNo;
+  lpaRegistrationDate: string;
+  doneeNames: string;
+  relationshipBetweenADRTAndLPA: string;
 }
 
 // ──────────────────────────────────────────────
@@ -129,12 +129,12 @@ export interface LastingPowerOfAttorney {
 // ──────────────────────────────────────────────
 
 export interface HealthcareProfessionalReview {
-	reviewedByClinicianName: string;
-	reviewedByClinicianRole: string;
-	reviewDate: string;
-	clinicalOpinionOnCapacity: string;
-	anyConcerns: YesNo;
-	concernsDetails: string;
+  reviewedByClinicianName: string;
+  reviewedByClinicianRole: string;
+  reviewDate: string;
+  clinicalOpinionOnCapacity: string;
+  anyConcerns: YesNo;
+  concernsDetails: string;
 }
 
 // ──────────────────────────────────────────────
@@ -142,19 +142,19 @@ export interface HealthcareProfessionalReview {
 // ──────────────────────────────────────────────
 
 export interface LegalSignatures {
-	patientSignature: YesNo;
-	patientStatementOfUnderstanding: YesNo;
-	patientSignatureDate: string;
-	witnessSignature: YesNo;
-	witnessName: string;
-	witnessAddress: string;
-	witnessSignatureDate: string;
-	lifeSustainingWrittenStatement: YesNo;
-	lifeSustainingStatementText: string;
-	lifeSustainingSignature: YesNo;
-	lifeSustainingWitnessSignature: YesNo;
-	lifeSustainingWitnessName: string;
-	lifeSustainingWitnessAddress: string;
+  patientSignature: YesNo;
+  patientStatementOfUnderstanding: YesNo;
+  patientSignatureDate: string;
+  witnessSignature: YesNo;
+  witnessName: string;
+  witnessAddress: string;
+  witnessSignatureDate: string;
+  lifeSustainingWrittenStatement: YesNo;
+  lifeSustainingStatementText: string;
+  lifeSustainingSignature: YesNo;
+  lifeSustainingWitnessSignature: YesNo;
+  lifeSustainingWitnessName: string;
+  lifeSustainingWitnessAddress: string;
 }
 
 // ──────────────────────────────────────────────
@@ -162,15 +162,15 @@ export interface LegalSignatures {
 // ──────────────────────────────────────────────
 
 export interface Medication {
-	name: string;
-	dose: string;
-	frequency: string;
+  name: string;
+  dose: string;
+  frequency: string;
 }
 
 export interface Allergy {
-	allergen: string;
-	reaction: string;
-	severity: AllergySeverity;
+  allergen: string;
+  reaction: string;
+  severity: AllergySeverity;
 }
 
 // ──────────────────────────────────────────────
@@ -178,16 +178,16 @@ export interface Allergy {
 // ──────────────────────────────────────────────
 
 export interface AssessmentData {
-	personalInformation: PersonalInformation;
-	capacityDeclaration: CapacityDeclaration;
-	circumstances: Circumstances;
-	treatmentsRefusedGeneral: TreatmentsRefusedGeneral;
-	treatmentsRefusedLifeSustaining: TreatmentsRefusedLifeSustaining;
-	exceptionsConditions: ExceptionsConditions;
-	otherWishes: OtherWishes;
-	lastingPowerOfAttorney: LastingPowerOfAttorney;
-	healthcareProfessionalReview: HealthcareProfessionalReview;
-	legalSignatures: LegalSignatures;
+  personalInformation: PersonalInformation;
+  capacityDeclaration: CapacityDeclaration;
+  circumstances: Circumstances;
+  treatmentsRefusedGeneral: TreatmentsRefusedGeneral;
+  treatmentsRefusedLifeSustaining: TreatmentsRefusedLifeSustaining;
+  exceptionsConditions: ExceptionsConditions;
+  otherWishes: OtherWishes;
+  lastingPowerOfAttorney: LastingPowerOfAttorney;
+  healthcareProfessionalReview: HealthcareProfessionalReview;
+  legalSignatures: LegalSignatures;
 }
 
 // ──────────────────────────────────────────────
@@ -195,32 +195,32 @@ export interface AssessmentData {
 // ──────────────────────────────────────────────
 
 export interface ValidityRule {
-	id: string;
-	category: string;
-	description: string;
-	severity: 'critical' | 'required' | 'recommended';
-	evaluate: (data: AssessmentData) => boolean;
+  id: string;
+  category: string;
+  description: string;
+  severity: 'critical' | 'required' | 'recommended';
+  evaluate: (data: AssessmentData) => boolean;
 }
 
 export interface FiredRule {
-	id: string;
-	category: string;
-	description: string;
-	severity: 'critical' | 'required' | 'recommended';
+  id: string;
+  category: string;
+  description: string;
+  severity: 'critical' | 'required' | 'recommended';
 }
 
 export interface AdditionalFlag {
-	id: string;
-	category: string;
-	message: string;
-	priority: 'high' | 'medium' | 'low';
+  id: string;
+  category: string;
+  message: string;
+  priority: 'high' | 'medium' | 'low';
 }
 
 export interface GradingResult {
-	validityStatus: ValidityStatus;
-	firedRules: FiredRule[];
-	additionalFlags: AdditionalFlag[];
-	timestamp: string;
+  validityStatus: ValidityStatus;
+  firedRules: FiredRule[];
+  additionalFlags: AdditionalFlag[];
+  timestamp: string;
 }
 
 // ──────────────────────────────────────────────
@@ -228,8 +228,8 @@ export interface GradingResult {
 // ──────────────────────────────────────────────
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
-	section: keyof AssessmentData;
+  number: number;
+  title: string;
+  shortTitle: string;
+  section: keyof AssessmentData;
 }

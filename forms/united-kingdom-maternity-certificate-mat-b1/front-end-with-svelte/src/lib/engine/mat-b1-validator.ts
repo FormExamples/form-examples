@@ -23,56 +23,62 @@ import { priorityOrder, weeksBetween } from './utils';
  * The function does *not* mutate `data` and emits no side effects.
  */
 export function validateMatB1(data: AssessmentData): ValidationResult {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	for (const rule of matB1Rules) {
-		// Skip Part A / Part B rules when no certificate type is selected;
-		// MATB1-CERT-001 covers the missing selection.
-		if (data.certificateType === '' && (rule.id.startsWith('MATB1-A-') || rule.id.startsWith('MATB1-B-'))) {
-			continue;
-		}
-		// Skip doctor / midwife rules when no issuer type is selected;
-		// MATB1-ISS-001 covers the missing selection.
-		if (data.issuer.issuerType === '' && (rule.id.startsWith('MATB1-DR-') || rule.id.startsWith('MATB1-MW-'))) {
-			continue;
-		}
+  for (const rule of matB1Rules) {
+    // Skip Part A / Part B rules when no certificate type is selected;
+    // MATB1-CERT-001 covers the missing selection.
+    if (
+      data.certificateType === '' &&
+      (rule.id.startsWith('MATB1-A-') || rule.id.startsWith('MATB1-B-'))
+    ) {
+      continue;
+    }
+    // Skip doctor / midwife rules when no issuer type is selected;
+    // MATB1-ISS-001 covers the missing selection.
+    if (
+      data.issuer.issuerType === '' &&
+      (rule.id.startsWith('MATB1-DR-') || rule.id.startsWith('MATB1-MW-'))
+    ) {
+      continue;
+    }
 
-		try {
-			if (rule.evaluate(data)) {
-				firedRules.push({
-					id: rule.id,
-					category: rule.category,
-					priority: rule.priority,
-					description: rule.description,
-					message: rule.message
-				});
-			}
-		} catch (e) {
-			console.warn(`MAT B1 rule ${rule.id} evaluation failed:`, e);
-		}
-	}
+    try {
+      if (rule.evaluate(data)) {
+        firedRules.push({
+          id: rule.id,
+          category: rule.category,
+          priority: rule.priority,
+          description: rule.description,
+          message: rule.message
+        });
+      }
+    } catch (e) {
+      console.warn(`MAT B1 rule ${rule.id} evaluation failed:`, e);
+    }
+  }
 
-	firedRules.sort((a, b) => priorityOrder(a.priority) - priorityOrder(b.priority));
+  firedRules.sort((a, b) => priorityOrder(a.priority) - priorityOrder(b.priority));
 
-	const additionalFlags = detectAdditionalFlags(data);
+  const additionalFlags = detectAdditionalFlags(data);
 
-	const complete = firedRules.filter((r) => r.category === 'completeness').length === 0;
+  const complete = firedRules.filter((r) => r.category === 'completeness').length === 0;
 
-	const weeksBeforeEwc =
-		data.certificateType === 'pre'
-			? weeksBetween(
-					data.preConfinement.examinationDate,
-					data.preConfinement.expectedDateOfConfinement
-				)
-			: null;
+  const weeksBeforeEwc =
+    data.certificateType === 'pre'
+      ? weeksBetween(
+          data.preConfinement.examinationDate,
+          data.preConfinement.expectedDateOfConfinement
+        )
+      : null;
 
-	return {
-		complete,
-		certificateType: data.certificateType,
-		issuerType: data.issuer.issuerType,
-		firedRules,
-		additionalFlags,
-		weeksBeforeEwc,
-		timestamp: new Date().toISOString()
-	};
+  return {
+    complete,
+    certificateType: data.certificateType,
+    issuerType: data.issuer.issuerType,
+    firedRules,
+    additionalFlags,
+    weeksBeforeEwc,
+    timestamp: new Date().toISOString()
+  };
 }

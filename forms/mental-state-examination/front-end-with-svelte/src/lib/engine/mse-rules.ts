@@ -6,13 +6,13 @@ import type { AssessmentData, DomainRule } from './types';
  * tables.
  */
 export const DOMAINS: { section: keyof AssessmentData; domain: string; label: string }[] = [
-	{ section: 'appearance', domain: 'appearance-behaviour', label: 'Appearance and behaviour' },
-	{ section: 'speech', domain: 'speech', label: 'Speech' },
-	{ section: 'emotion', domain: 'emotion', label: 'Emotion (mood and affect)' },
-	{ section: 'perception', domain: 'perception', label: 'Perception' },
-	{ section: 'thought', domain: 'thought', label: 'Thought (form and content)' },
-	{ section: 'insight', domain: 'insight', label: 'Insight and judgement' },
-	{ section: 'cognition', domain: 'cognition', label: 'Cognition' }
+  { section: 'appearance', domain: 'appearance-behaviour', label: 'Appearance and behaviour' },
+  { section: 'speech', domain: 'speech', label: 'Speech' },
+  { section: 'emotion', domain: 'emotion', label: 'Emotion (mood and affect)' },
+  { section: 'perception', domain: 'perception', label: 'Perception' },
+  { section: 'thought', domain: 'thought', label: 'Thought (form and content)' },
+  { section: 'insight', domain: 'insight', label: 'Insight and judgement' },
+  { section: 'cognition', domain: 'cognition', label: 'Cognition' }
 ];
 
 /**
@@ -21,12 +21,12 @@ export const DOMAINS: { section: keyof AssessmentData; domain: string; label: st
  * a completeness instrument, not a numeric score.
  */
 export function sectionDocumented(data: AssessmentData, section: keyof AssessmentData): boolean {
-	const group = data[section] as unknown as Record<string, unknown> | undefined;
-	if (!group) return false;
-	return Object.keys(group).some((k) => {
-		const v = group[k];
-		return v !== null && v !== undefined && String(v).trim() !== '';
-	});
+  const group = data[section] as unknown as Record<string, unknown> | undefined;
+  if (!group) return false;
+  return Object.keys(group).some((k) => {
+    const v = group[k];
+    return v !== null && v !== undefined && String(v).trim() !== '';
+  });
 }
 
 /**
@@ -37,11 +37,11 @@ export function sectionDocumented(data: AssessmentData, section: keyof Assessmen
  * mirror the `mental_state_examination_grade_rule` SQL table.
  */
 export const domainRules: DomainRule[] = DOMAINS.map((d, idx) => ({
-	id: `R-DOMAIN-${String(idx + 1).padStart(2, '0')}-${d.domain.toUpperCase()}`,
-	section: d.section,
-	domain: d.domain,
-	category: 'domain-documentation',
-	label: d.label,
-	description: `${d.label} domain documented (at least one finding recorded)`,
-	satisfied: (data: AssessmentData) => sectionDocumented(data, d.section)
+  id: `R-DOMAIN-${String(idx + 1).padStart(2, '0')}-${d.domain.toUpperCase()}`,
+  section: d.section,
+  domain: d.domain,
+  category: 'domain-documentation',
+  label: d.label,
+  description: `${d.label} domain documented (at least one finding recorded)`,
+  satisfied: (data: AssessmentData) => sectionDocumented(data, d.section)
 }));

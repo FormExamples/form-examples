@@ -4,24 +4,24 @@ import { safeParseAssessment } from './schema';
 
 /** One successfully imported row. */
 export interface AcceptedImport {
-	lineNumber: number; // 1-based, matches editor line numbers
-	assessment: AgileConsultingScorecardAssessment;
-	grade: GradeResult;
+  lineNumber: number; // 1-based, matches editor line numbers
+  assessment: AgileConsultingScorecardAssessment;
+  grade: GradeResult;
 }
 
 /** One rejected row, with a human-readable diagnostic. */
 export interface RejectedImport {
-	lineNumber: number;
-	rawLine: string;
-	error: string;
+  lineNumber: number;
+  rawLine: string;
+  error: string;
 }
 
 export interface BulkImportResult {
-	accepted: AcceptedImport[];
-	rejected: RejectedImport[];
-	totalLines: number;
-	skippedBlank: number;
-	skippedComment: number;
+  accepted: AcceptedImport[];
+  rejected: RejectedImport[];
+  totalLines: number;
+  skippedBlank: number;
+  skippedComment: number;
 }
 
 /**
@@ -41,67 +41,66 @@ export interface BulkImportResult {
  * to do about partial failures.
  */
 export function parseJsonl(text: string): BulkImportResult {
-	const lines = text.split(/\r?\n/);
-	const accepted: AcceptedImport[] = [];
-	const rejected: RejectedImport[] = [];
-	let skippedBlank = 0;
-	let skippedComment = 0;
+  const lines = text.split(/\r?\n/);
+  const accepted: AcceptedImport[] = [];
+  const rejected: RejectedImport[] = [];
+  let skippedBlank = 0;
+  let skippedComment = 0;
 
-	for (let i = 0; i < lines.length; i++) {
-		const lineNumber = i + 1;
-		const raw = lines[i];
-		const trimmed = raw.trim();
-		if (trimmed.length === 0) {
-			skippedBlank++;
-			continue;
-		}
-		if (trimmed.startsWith('#')) {
-			skippedComment++;
-			continue;
-		}
+  for (let i = 0; i < lines.length; i++) {
+    const lineNumber = i + 1;
+    const raw = lines[i];
+    const trimmed = raw.trim();
+    if (trimmed.length === 0) {
+      skippedBlank++;
+      continue;
+    }
+    if (trimmed.startsWith('#')) {
+      skippedComment++;
+      continue;
+    }
 
-		let parsed: unknown;
-		try {
-			parsed = JSON.parse(trimmed);
-		} catch (e) {
-			rejected.push({
-				lineNumber,
-				rawLine: raw,
-				error: `JSON parse error: ${e instanceof Error ? e.message : String(e)}`,
-			});
-			continue;
-		}
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(trimmed);
+    } catch (e) {
+      rejected.push({
+        lineNumber,
+        rawLine: raw,
+        error: `JSON parse error: ${e instanceof Error ? e.message : String(e)}`
+      });
+      continue;
+    }
 
-		const result = safeParseAssessment(parsed);
-		if (!result.success) {
-			const summary = result.error.issues
-				.slice(0, 5)
-				.map((iss) => `${iss.path.join('.')}: ${iss.message}`)
-				.join('; ');
-			const extra = result.error.issues.length > 5
-				? ` (+${result.error.issues.length - 5} more)`
-				: '';
-			rejected.push({
-				lineNumber,
-				rawLine: raw,
-				error: `schema validation failed: ${summary}${extra}`,
-			});
-			continue;
-		}
+    const result = safeParseAssessment(parsed);
+    if (!result.success) {
+      const summary = result.error.issues
+        .slice(0, 5)
+        .map((iss) => `${iss.path.join('.')}: ${iss.message}`)
+        .join('; ');
+      const extra =
+        result.error.issues.length > 5 ? ` (+${result.error.issues.length - 5} more)` : '';
+      rejected.push({
+        lineNumber,
+        rawLine: raw,
+        error: `schema validation failed: ${summary}${extra}`
+      });
+      continue;
+    }
 
-		const assessment = result.data;
-		accepted.push({
-			lineNumber,
-			assessment,
-			grade: gradeScorecard(assessment),
-		});
-	}
+    const assessment = result.data;
+    accepted.push({
+      lineNumber,
+      assessment,
+      grade: gradeScorecard(assessment)
+    });
+  }
 
-	return {
-		accepted,
-		rejected,
-		totalLines: lines.length,
-		skippedBlank,
-		skippedComment,
-	};
+  return {
+    accepted,
+    rejected,
+    totalLines: lines.length,
+    skippedBlank,
+    skippedComment
+  };
 }

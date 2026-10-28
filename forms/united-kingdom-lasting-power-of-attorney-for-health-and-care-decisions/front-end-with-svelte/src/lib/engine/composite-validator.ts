@@ -4,7 +4,7 @@ import type {
   LpaApplication,
   LpaValidityResult,
   RuleSeverity,
-  ValidityStatus,
+  ValidityStatus
 } from './types.js';
 import { applyDonorRules } from './donor-rules.js';
 import { applyAttorneyRules } from './attorney-rules.js';
@@ -18,7 +18,7 @@ const SEVERITY_RANK: Record<RuleSeverity, number> = {
   fatal: 4,
   high: 3,
   medium: 2,
-  informational: 1,
+  informational: 1
 };
 
 function worstSeverity(rules: FiredRule[]): RuleSeverity | null {
@@ -59,9 +59,7 @@ function countPopulatedRequiredFields(app: LpaApplication): number {
   if (
     app.attorneys.length > 0 &&
     app.attorneys.every((_, idx) =>
-      app.signatures.some(
-        (s) => s.signerRole === 'attorney' && s.signerIndex === idx && s.signedAt,
-      ),
+      app.signatures.some((s) => s.signerRole === 'attorney' && s.signerIndex === idx && s.signedAt)
     )
   ) {
     n++;
@@ -85,7 +83,7 @@ export function calculateLpaValidity(app: LpaApplication): LpaValidityResult {
     ...applyCertificateProviderRules(app),
     ...applySignatureOrderRules(app),
     ...applyInstructionRules(app),
-    ...applyRegistrationRules(app),
+    ...applyRegistrationRules(app)
   ];
   const additionalFlags = detectAdditionalFlags(app);
 
@@ -112,6 +110,6 @@ export function calculateLpaValidity(app: LpaApplication): LpaValidityResult {
     firedRules,
     additionalFlags,
     engineVersion: ENGINE_VERSION,
-    computedAt: new Date().toISOString(),
+    computedAt: new Date().toISOString()
   };
 }

@@ -6,7 +6,9 @@
   const metrics = metricsForCategory(1);
 </script>
 
-<Fieldset legend="Step 2 — Category 1 — Antibiotics, Narcotics &amp; Culture Monitoring (3 metrics)">
+<Fieldset
+  legend="Step 2 — Category 1 — Antibiotics, Narcotics &amp; Culture Monitoring (3 metrics)"
+>
   <p class="hint">Antibiotics issuing, culture results, and narcotics issuing.</p>
 
   {#each metrics as metric (metric.id)}

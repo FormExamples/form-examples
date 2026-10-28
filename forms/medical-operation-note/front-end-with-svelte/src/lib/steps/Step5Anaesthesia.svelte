@@ -2,7 +2,7 @@
   import { store } from '#lib/state.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { Hint, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { Hint, TextInput } from '@lilydesignsystem/svelte-headless';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
   import Select from '#lib/components/ui/Select.svelte';
 </script>
@@ -38,13 +38,22 @@
       <TextInput label="Maintenance agent" bind:value={store.data.anaesthesia.maintenanceAgent} />
     </Field>
     <Field label="Neuromuscular blockade">
-      <TextInput label="Neuromuscular blockade" bind:value={store.data.anaesthesia.neuromuscularBlockade} />
+      <TextInput
+        label="Neuromuscular blockade"
+        bind:value={store.data.anaesthesia.neuromuscularBlockade}
+      />
     </Field>
     <Field label="Regional block details">
-      <TextInput label="Regional block details" bind:value={store.data.anaesthesia.regionalBlockDetails} />
+      <TextInput
+        label="Regional block details"
+        bind:value={store.data.anaesthesia.regionalBlockDetails}
+      />
     </Field>
     <Field label="Lines and monitoring" class="field-span-2">
-      <TextInput label="Lines and monitoring" bind:value={store.data.anaesthesia.linesAndMonitoring} />
+      <TextInput
+        label="Lines and monitoring"
+        bind:value={store.data.anaesthesia.linesAndMonitoring}
+      />
     </Field>
     <Field label="Crystalloid (mL)">
       <NumberInput label="Crystalloid (mL)" bind:value={store.data.anaesthesia.crystalloidMl} />
@@ -58,9 +67,8 @@
     <Field label="Anaesthetic events" class="field-span-2">
       <TextInput label="Anaesthetic events" bind:value={store.data.anaesthesia.events} />
       <Hint>
-        Comma-separated tokens. Recognised: failed-intubation, awareness,
-        anaphylaxis, malignant-hyperthermia, sux-apnoea, hypotension,
-        hypertension, bronchospasm, laryngospasm.
+        Comma-separated tokens. Recognised: failed-intubation, awareness, anaphylaxis,
+        malignant-hyperthermia, sux-apnoea, hypotension, hypertension, bronchospasm, laryngospasm.
       </Hint>
     </Field>
   </div>

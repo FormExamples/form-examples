@@ -1,5 +1,8 @@
 import type { TDocumentDefinitions, Content } from 'pdfmake/interfaces';
-import type { ChecklistSummaryResult, HospitalDailyMonitoringChecklist } from '#lib/engine/types.js';
+import type {
+  ChecklistSummaryResult,
+  HospitalDailyMonitoringChecklist
+} from '#lib/engine/types.js';
 import { CHECKLIST_ITEMS, SECTIONS } from '#lib/config/items.js';
 import { statusLabel } from '#lib/engine/utils.js';
 
@@ -10,7 +13,7 @@ import { statusLabel } from '#lib/engine/utils.js';
  */
 export function buildPdfDocument(
   data: HospitalDailyMonitoringChecklist,
-  result: ChecklistSummaryResult,
+  result: ChecklistSummaryResult
 ): TDocumentDefinitions {
   const needsAttentionContent: Content = result.needsAttentionItems.length
     ? {
@@ -22,17 +25,17 @@ export function buildPdfDocument(
               { text: 'ID', bold: true },
               { text: 'Area', bold: true },
               { text: 'Checkpoint', bold: true },
-              { text: 'Remarks', bold: true },
+              { text: 'Remarks', bold: true }
             ],
             ...result.needsAttentionItems.map((item) => [
               item.id,
               item.sectionTitle,
               item.text,
-              item.remarks || '—',
-            ]),
-          ],
+              item.remarks || '—'
+            ])
+          ]
         },
-        margin: [0, 4, 0, 8],
+        margin: [0, 4, 0, 8]
       }
     : { text: 'No checkpoints marked needs-attention.', italics: true, margin: [0, 4, 0, 8] };
 
@@ -47,7 +50,7 @@ export function buildPdfDocument(
             { text: 'ID', bold: true },
             { text: 'Checkpoint', bold: true },
             { text: 'Status', bold: true },
-            { text: 'Remarks', bold: true },
+            { text: 'Remarks', bold: true }
           ],
           ...items.map((item) => {
             const response = data.items[item.id];
@@ -55,17 +58,14 @@ export function buildPdfDocument(
               item.id,
               item.text,
               statusLabel(response?.status ?? ''),
-              response?.remarks || '—',
+              response?.remarks || '—'
             ];
-          }),
-        ],
+          })
+        ]
       },
-      margin: [0, 2, 0, 8],
+      margin: [0, 2, 0, 8]
     };
-    return [
-      { text: `${section.number}. ${section.title}`, style: 'h3' },
-      table,
-    ];
+    return [{ text: `${section.number}. ${section.title}`, style: 'h3' }, table];
   });
 
   return {
@@ -78,18 +78,21 @@ export function buildPdfDocument(
       {
         text: `Inspecting officer: ${data.inspectionDetails.inspectingOfficerName || '—'} (${
           data.inspectionDetails.inspectingOfficerDesignation || '—'
-        })`,
+        })`
       },
       { text: ' ' },
       { text: 'Summary', style: 'h2' },
       {
-        text: `${result.answeredCount} of 97 checkpoints answered · ${result.needsAttentionCount} needing attention across ${result.sectionsWithNeedsAttention.length} area(s).`,
+        text: `${result.answeredCount} of 97 checkpoints answered · ${result.needsAttentionCount} needing attention across ${result.sectionsWithNeedsAttention.length} area(s).`
       },
       { text: ' ' },
       { text: 'Needs-attention checkpoints', style: 'h2' },
       needsAttentionContent,
       ...(data.summary.overallNotes
-        ? ([{ text: 'Overall notes', style: 'h2' }, { text: data.summary.overallNotes }] as Content[])
+        ? ([
+            { text: 'Overall notes', style: 'h2' },
+            { text: data.summary.overallNotes }
+          ] as Content[])
         : []),
       ...(data.summary.actionPlan
         ? ([{ text: 'Action plan', style: 'h2' }, { text: data.summary.actionPlan }] as Content[])
@@ -99,13 +102,13 @@ export function buildPdfDocument(
         : []),
       { text: ' ' },
       { text: 'Per-checkpoint answers', style: 'h2' },
-      ...perCheckpointSections,
+      ...perCheckpointSections
     ],
     styles: {
       h1: { fontSize: 18, bold: true, margin: [0, 0, 0, 8] },
       h2: { fontSize: 13, bold: true, margin: [0, 8, 0, 4] },
-      h3: { fontSize: 11, bold: true, margin: [0, 6, 0, 2] },
+      h3: { fontSize: 11, bold: true, margin: [0, 6, 0, 2] }
     },
-    defaultStyle: { fontSize: 8 },
+    defaultStyle: { fontSize: 8 }
   };
 }

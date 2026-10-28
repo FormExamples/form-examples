@@ -9,7 +9,7 @@ export function detectAdditionalFlags(app: LpaApplication): AdditionalFlag[] {
       category: 'bilingual-donor',
       priority: 'low',
       description: 'Donor preferred language is Welsh; offer the Cymraeg LP1H form path.',
-      suggestedAction: 'Use the Welsh-language LP1H template (Welsh Language (Wales) Measure 2011).',
+      suggestedAction: 'Use the Welsh-language LP1H template (Welsh Language (Wales) Measure 2011).'
     });
   }
 
@@ -22,7 +22,8 @@ export function detectAdditionalFlags(app: LpaApplication): AdditionalFlag[] {
       category: 'foreign-domicile',
       priority: 'medium',
       description: 'Donor habitual residence appears to be outside the United Kingdom.',
-      suggestedAction: 'Refer to a solicitor for jurisdictional advice; LP1H applies to England and Wales only.',
+      suggestedAction:
+        'Refer to a solicitor for jurisdictional advice; LP1H applies to England and Wales only.'
     });
   }
 
@@ -33,7 +34,8 @@ export function detectAdditionalFlags(app: LpaApplication): AdditionalFlag[] {
         category: 'attorney-bankrupt',
         priority: 'low',
         description: `Attorney #${idx + 1} is bankrupt. Bankruptcy bars Property and Financial Affairs LPAs, not H&W.`,
-        suggestedAction: 'Inform the attorney that bankruptcy does not bar them from acting on a Health and Welfare LPA.',
+        suggestedAction:
+          'Inform the attorney that bankruptcy does not bar them from acting on a Health and Welfare LPA.'
       });
     }
   });
@@ -43,8 +45,9 @@ export function detectAdditionalFlags(app: LpaApplication): AdditionalFlag[] {
       flagId: 'F-ADRT-CONFLICT-001',
       category: 'adrt-conflict',
       priority: 'high',
-      description: 'At least one instruction contradicts a known Advance Decision to Refuse Treatment.',
-      suggestedAction: 'Reconcile the LPA instructions with the donor’s ADRT before submission.',
+      description:
+        'At least one instruction contradicts a known Advance Decision to Refuse Treatment.',
+      suggestedAction: 'Reconcile the LPA instructions with the donor’s ADRT before submission.'
     });
   }
 
@@ -56,8 +59,9 @@ export function detectAdditionalFlags(app: LpaApplication): AdditionalFlag[] {
       flagId: 'F-SOLICITOR-001',
       category: 'solicitor-recommended',
       priority: 'medium',
-      description: 'LPA combines Option A life-sustaining-treatment authority with medical-treatment limits; complex interaction.',
-      suggestedAction: 'Refer to a solicitor to confirm the instructions are unambiguous.',
+      description:
+        'LPA combines Option A life-sustaining-treatment authority with medical-treatment limits; complex interaction.',
+      suggestedAction: 'Refer to a solicitor to confirm the instructions are unambiguous.'
     });
   }
 

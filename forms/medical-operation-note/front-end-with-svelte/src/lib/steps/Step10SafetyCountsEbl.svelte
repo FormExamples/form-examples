@@ -2,7 +2,7 @@
   import { store } from '#lib/state.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { Hint, TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { Hint, TextAreaInput, TextInput } from '@lilydesignsystem/svelte-headless';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
   import Select from '#lib/components/ui/Select.svelte';
 </script>
@@ -11,10 +11,16 @@
   <h3 class="step-subhead">Counts (WHO Sign-Out)</h3>
   <div class="field-grid field-grid-3">
     <Field label="Swab — first count">
-      <NumberInput label="Swab — first count" bind:value={store.data.safetyCountsEbl.swabCountFirst} />
+      <NumberInput
+        label="Swab — first count"
+        bind:value={store.data.safetyCountsEbl.swabCountFirst}
+      />
     </Field>
     <Field label="Swab — final count">
-      <NumberInput label="Swab — final count" bind:value={store.data.safetyCountsEbl.swabCountFinal} />
+      <NumberInput
+        label="Swab — final count"
+        bind:value={store.data.safetyCountsEbl.swabCountFinal}
+      />
     </Field>
     <Field label="Swab agreed">
       <Select label="Swab agreed" bind:value={store.data.safetyCountsEbl.swabCountAgreed}>
@@ -24,10 +30,16 @@
       </Select>
     </Field>
     <Field label="Needle — first count">
-      <NumberInput label="Needle — first count" bind:value={store.data.safetyCountsEbl.needleCountFirst} />
+      <NumberInput
+        label="Needle — first count"
+        bind:value={store.data.safetyCountsEbl.needleCountFirst}
+      />
     </Field>
     <Field label="Needle — final count">
-      <NumberInput label="Needle — final count" bind:value={store.data.safetyCountsEbl.needleCountFinal} />
+      <NumberInput
+        label="Needle — final count"
+        bind:value={store.data.safetyCountsEbl.needleCountFinal}
+      />
     </Field>
     <Field label="Needle agreed">
       <Select label="Needle agreed" bind:value={store.data.safetyCountsEbl.needleCountAgreed}>
@@ -37,13 +49,22 @@
       </Select>
     </Field>
     <Field label="Instrument — first count">
-      <NumberInput label="Instrument — first count" bind:value={store.data.safetyCountsEbl.instrumentCountFirst} />
+      <NumberInput
+        label="Instrument — first count"
+        bind:value={store.data.safetyCountsEbl.instrumentCountFirst}
+      />
     </Field>
     <Field label="Instrument — final count">
-      <NumberInput label="Instrument — final count" bind:value={store.data.safetyCountsEbl.instrumentCountFinal} />
+      <NumberInput
+        label="Instrument — final count"
+        bind:value={store.data.safetyCountsEbl.instrumentCountFinal}
+      />
     </Field>
     <Field label="Instrument agreed">
-      <Select label="Instrument agreed" bind:value={store.data.safetyCountsEbl.instrumentCountAgreed}>
+      <Select
+        label="Instrument agreed"
+        bind:value={store.data.safetyCountsEbl.instrumentCountAgreed}
+      >
         <option value="">—</option>
         <option value="yes">Yes</option>
         <option value="no">No</option>
@@ -73,10 +94,16 @@
       <NumberInput label="FFP (units)" bind:value={store.data.safetyCountsEbl.ffpUnits} />
     </Field>
     <Field label="Platelets (units)">
-      <NumberInput label="Platelets (units)" bind:value={store.data.safetyCountsEbl.plateletsUnits} />
+      <NumberInput
+        label="Platelets (units)"
+        bind:value={store.data.safetyCountsEbl.plateletsUnits}
+      />
     </Field>
     <Field label="Cryoprecipitate (units)">
-      <NumberInput label="Cryoprecipitate (units)" bind:value={store.data.safetyCountsEbl.cryoUnits} />
+      <NumberInput
+        label="Cryoprecipitate (units)"
+        bind:value={store.data.safetyCountsEbl.cryoUnits}
+      />
     </Field>
     <Field label="Massive haemorrhage protocol activated">
       <Select
@@ -93,10 +120,7 @@
   <h3 class="step-subhead">Complications</h3>
   <div class="field-grid">
     <Field label="Clavien–Dindo grade">
-      <Select
-        label="Clavien–Dindo grade"
-        bind:value={store.data.safetyCountsEbl.clavienDindoGrade}
-      >
+      <Select label="Clavien–Dindo grade" bind:value={store.data.safetyCountsEbl.clavienDindoGrade}>
         <option value="">—</option>
         <option value="0">0 — no complication</option>
         <option value="I">I</option>
@@ -152,10 +176,7 @@
       </Select>
     </Field>
     <Field label="Equipment problem">
-      <Select
-        label="Equipment problem"
-        bind:value={store.data.safetyCountsEbl.equipmentProblem}
-      >
+      <Select label="Equipment problem" bind:value={store.data.safetyCountsEbl.equipmentProblem}>
         <option value="">—</option>
         <option value="yes">Yes</option>
         <option value="no">No</option>
@@ -167,8 +188,8 @@
         bind:value={store.data.safetyCountsEbl.neverEventFlags}
       />
       <Hint>
-        Comma-separated tokens. Recognised: wrong-site, wrong-side,
-        wrong-patient, wrong-procedure, wrong-implant.
+        Comma-separated tokens. Recognised: wrong-site, wrong-side, wrong-patient, wrong-procedure,
+        wrong-implant.
       </Hint>
     </Field>
   </div>

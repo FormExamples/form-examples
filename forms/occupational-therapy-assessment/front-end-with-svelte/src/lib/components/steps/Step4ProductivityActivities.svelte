@@ -1,38 +1,65 @@
 <script lang="ts">
-	import { assessment } from '#lib/stores/assessment.svelte.js';
-	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import Field from '#lib/components/ui/Field.svelte';
-	import { RadioGroup, TextAreaInput } from "@lilydesignsystem/svelte-headless";
+  import { assessment } from '#lib/stores/assessment.svelte.js';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import Field from '#lib/components/ui/Field.svelte';
+  import { RadioGroup, TextAreaInput } from '@lilydesignsystem/svelte-headless';
 
-	const p = assessment.data.productivityActivities;
+  const p = assessment.data.productivityActivities;
 
-	const difficultyOptions = [
-		{ value: 'none', label: 'No difficulty' },
-		{ value: 'some', label: 'Some difficulty' },
-		{ value: 'significant', label: 'Significant difficulty' },
-		{ value: 'unable', label: 'Unable to perform' }
-	];
+  const difficultyOptions = [
+    { value: 'none', label: 'No difficulty' },
+    { value: 'some', label: 'Some difficulty' },
+    { value: 'significant', label: 'Significant difficulty' },
+    { value: 'unable', label: 'Unable to perform' }
+  ];
 
-	const areas = [
-		{ key: 'paidWork', label: 'Paid/Unpaid Work', desc: 'Employment tasks, volunteer work, work responsibilities' },
-		{ key: 'householdManagement', label: 'Household Management', desc: 'Cleaning, laundry, cooking, home maintenance' },
-		{ key: 'education', label: 'Education/Training', desc: 'School, courses, professional development' }
-	] as const;
+  const areas = [
+    {
+      key: 'paidWork',
+      label: 'Paid/Unpaid Work',
+      desc: 'Employment tasks, volunteer work, work responsibilities'
+    },
+    {
+      key: 'householdManagement',
+      label: 'Household Management',
+      desc: 'Cleaning, laundry, cooking, home maintenance'
+    },
+    {
+      key: 'education',
+      label: 'Education/Training',
+      desc: 'School, courses, professional development'
+    }
+  ] as const;
 </script>
 
 <Fieldset legend="Productivity Activities">
-	<p class="hint">Assess your ability to perform work and productive tasks.</p>
+  <p class="hint">Assess your ability to perform work and productive tasks.</p>
 
-	{#each areas as area (area.key)}
-		<Field label={area.label} description={area.desc} required>
-			<RadioGroup label={`${area.label} difficulty`}>
-				{#each difficultyOptions as opt (opt.value)}
-					<label><input type="radio" class="radio-input" name={`${area.key}Difficulty`} value={opt.value} bind:group={p[area.key].difficulty} required />{opt.label}</label>
-				{/each}
-			</RadioGroup>
-		</Field>
-		<Field label={`${area.label} details`} inputId={`${area.key}Details`}>
-			<TextAreaInput id={`${area.key}Details`} label={`${area.label} details`} rows={2} placeholder="Describe any specific difficulties..." bind:value={p[area.key].details} />
-		</Field>
-	{/each}
+  {#each areas as area (area.key)}
+    <Field label={area.label} description={area.desc} required>
+      <RadioGroup label={`${area.label} difficulty`}>
+        {#each difficultyOptions as opt (opt.value)}
+          <label
+            ><input
+              type="radio"
+              class="radio-input"
+              name={`${area.key}Difficulty`}
+              value={opt.value}
+              bind:group={p[area.key].difficulty}
+              required
+            />{opt.label}</label
+          >
+        {/each}
+      </RadioGroup>
+    </Field>
+    <Field label={`${area.label} details`} inputId={`${area.key}Details`}>
+      <TextAreaInput
+        id={`${area.key}Details`}
+        label={`${area.label} details`}
+        rows={2}
+        placeholder="Describe any specific difficulties..."
+        bind:value={p[area.key].details}
+      />
+    </Field>
+  {/each}
 </Fieldset>

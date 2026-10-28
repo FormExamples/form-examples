@@ -17,50 +17,50 @@ import { hasCriticalValue, hasAnyAbnormalValue, hasSpecimenQualityIssue } from '
  * Rule IDs are stable and identical across every front-end and the back-end.
  */
 export function classifyResult(r: CoagulationResult): {
-	resultClassification: ResultClassification;
-	firedRules: FiredRule[];
+  resultClassification: ResultClassification;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	if (hasCriticalValue(r)) {
-		firedRules.push({
-			ruleId: 'R-CLASS-CRITICAL-01',
-			axis: 'classification',
-			category: 'critical-value',
-			description:
-				'A critical value (INR > 8, fibrinogen < 1.0 g/L, a DIC picture, or a flagged critical result) is present; classified as critical.'
-		});
-		return { resultClassification: 'critical', firedRules };
-	}
+  if (hasCriticalValue(r)) {
+    firedRules.push({
+      ruleId: 'R-CLASS-CRITICAL-01',
+      axis: 'classification',
+      category: 'critical-value',
+      description:
+        'A critical value (INR > 8, fibrinogen < 1.0 g/L, a DIC picture, or a flagged critical result) is present; classified as critical.'
+    });
+    return { resultClassification: 'critical', firedRules };
+  }
 
-	if (hasSpecimenQualityIssue(r) && r.impression.trim() === '') {
-		firedRules.push({
-			ruleId: 'R-CLASS-INCONCLUSIVE-01',
-			axis: 'classification',
-			category: 'specimen-quality',
-			description:
-				'Specimen condition compromises interpretation and no impression was recorded; classified as inconclusive.'
-		});
-		return { resultClassification: 'inconclusive', firedRules };
-	}
+  if (hasSpecimenQualityIssue(r) && r.impression.trim() === '') {
+    firedRules.push({
+      ruleId: 'R-CLASS-INCONCLUSIVE-01',
+      axis: 'classification',
+      category: 'specimen-quality',
+      description:
+        'Specimen condition compromises interpretation and no impression was recorded; classified as inconclusive.'
+    });
+    return { resultClassification: 'inconclusive', firedRules };
+  }
 
-	if (r.overallResultStatus === 'abnormal' || hasAnyAbnormalValue(r)) {
-		firedRules.push({
-			ruleId: 'R-CLASS-ABNORMAL-01',
-			axis: 'classification',
-			category: 'abnormal-value',
-			description:
-				'The reported status is abnormal or one or more result values are outside the reference range; classified as abnormal.'
-		});
-		return { resultClassification: 'abnormal', firedRules };
-	}
+  if (r.overallResultStatus === 'abnormal' || hasAnyAbnormalValue(r)) {
+    firedRules.push({
+      ruleId: 'R-CLASS-ABNORMAL-01',
+      axis: 'classification',
+      category: 'abnormal-value',
+      description:
+        'The reported status is abnormal or one or more result values are outside the reference range; classified as abnormal.'
+    });
+    return { resultClassification: 'abnormal', firedRules };
+  }
 
-	firedRules.push({
-		ruleId: 'R-CLASS-NORMAL-01',
-		axis: 'classification',
-		category: 'no-abnormal-value',
-		description:
-			'No abnormal or critical result values on a satisfactory specimen; classified as normal.'
-	});
-	return { resultClassification: 'normal', firedRules };
+  firedRules.push({
+    ruleId: 'R-CLASS-NORMAL-01',
+    axis: 'classification',
+    category: 'no-abnormal-value',
+    description:
+      'No abnormal or critical result values on a satisfactory specimen; classified as normal.'
+  });
+  return { resultClassification: 'normal', firedRules };
 }

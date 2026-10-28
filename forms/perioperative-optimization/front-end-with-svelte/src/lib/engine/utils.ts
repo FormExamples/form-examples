@@ -7,7 +7,7 @@ export function round1(n: number): number {
 
 /** Coerce a possibly-empty numeric field to a number or null. */
 export function num(v: number | string | null | undefined): number | null {
-  if (v === null || v === undefined || v === "") return null;
+  if (v === null || v === undefined || v === '') return null;
   const n = Number(v);
   return Number.isFinite(n) ? n : null;
 }
@@ -17,10 +17,7 @@ export function num(v: number | string | null | undefined): number | null {
  * unknown. The assessment date is passed in rather than read from the clock so
  * the engine stays pure.
  */
-export function ageInYears(
-  birthDate: string,
-  assessmentDate: string,
-): number | null {
+export function ageInYears(birthDate: string, assessmentDate: string): number | null {
   if (!birthDate || !assessmentDate) return null;
   const born = new Date(birthDate);
   const at = new Date(assessmentDate);
@@ -33,7 +30,7 @@ export function ageInYears(
 
 /** Title-case a kebab-case value for display. */
 export function titleCase(s: string): string {
-  return String(s || "")
-    .replace(/[-_]/g, " ")
+  return String(s || '')
+    .replace(/[-_]/g, ' ')
     .replace(/\b\w/g, (c) => c.toUpperCase());
 }

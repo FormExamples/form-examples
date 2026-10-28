@@ -16,77 +16,81 @@ import { satisfactionCategory } from './utils';
  *   1.0 - 1.4 = Very Poor
  */
 export function calculateSatisfaction(data: AssessmentData): {
-	compositeScore: number;
-	category: string;
-	domainScores: DomainScore[];
-	answeredCount: number;
+  compositeScore: number;
+  category: string;
+  domainScores: DomainScore[];
+  answeredCount: number;
 } {
-	const domainMap = new Map<string, DomainScore>();
-	let totalSum = 0;
-	let totalCount = 0;
+  const domainMap = new Map<string, DomainScore>();
+  let totalSum = 0;
+  let totalCount = 0;
 
-	for (const question of satisfactionQuestions) {
-		const score = getScoreForQuestion(data, question.domain, question.field);
-		if (score === null) continue;
+  for (const question of satisfactionQuestions) {
+    const score = getScoreForQuestion(data, question.domain, question.field);
+    if (score === null) continue;
 
-		totalSum += score;
-		totalCount++;
+    totalSum += score;
+    totalCount++;
 
-		if (!domainMap.has(question.domain)) {
-			domainMap.set(question.domain, {
-				domain: question.domain,
-				mean: 0,
-				count: 0,
-				questions: []
-			});
-		}
+    if (!domainMap.has(question.domain)) {
+      domainMap.set(question.domain, {
+        domain: question.domain,
+        mean: 0,
+        count: 0,
+        questions: []
+      });
+    }
 
-		const domain = domainMap.get(question.domain)!;
-		domain.count++;
-		domain.questions.push({ id: question.id, text: question.text, score });
-	}
+    const domain = domainMap.get(question.domain)!;
+    domain.count++;
+    domain.questions.push({ id: question.id, text: question.text, score });
+  }
 
-	// Calculate domain means
-	for (const domain of domainMap.values()) {
-		const sum = domain.questions.reduce((acc, q) => acc + q.score, 0);
-		domain.mean = parseFloat((sum / domain.count).toFixed(2));
-	}
+  // Calculate domain means
+  for (const domain of domainMap.values()) {
+    const sum = domain.questions.reduce((acc, q) => acc + q.score, 0);
+    domain.mean = parseFloat((sum / domain.count).toFixed(2));
+  }
 
-	const compositeScore = totalCount > 0
-		? parseFloat((totalSum / totalCount).toFixed(2))
-		: 0;
+  const compositeScore = totalCount > 0 ? parseFloat((totalSum / totalCount).toFixed(2)) : 0;
 
-	const category = totalCount > 0 ? satisfactionCategory(compositeScore) : 'No responses';
+  const category = totalCount > 0 ? satisfactionCategory(compositeScore) : 'No responses';
 
-	return {
-		compositeScore,
-		category,
-		domainScores: Array.from(domainMap.values()),
-		answeredCount: totalCount
-	};
+  return {
+    compositeScore,
+    category,
+    domainScores: Array.from(domainMap.values()),
+    answeredCount: totalCount
+  };
 }
 
 function getScoreForQuestion(
-	data: AssessmentData,
-	domain: string,
-	field: string
+  data: AssessmentData,
+  domain: string,
+  field: string
 ): LikertScore | null {
-	switch (domain) {
-		case 'Access & Scheduling':
-			return data.accessScheduling[field as keyof typeof data.accessScheduling] as LikertScore | null;
-		case 'Communication':
-			return data.communication[field as keyof typeof data.communication] as LikertScore | null;
-		case 'Staff & Professionalism':
-			return data.staffProfessionalism[field as keyof typeof data.staffProfessionalism] as LikertScore | null;
-		case 'Care Quality':
-			return data.careQuality[field as keyof typeof data.careQuality] as LikertScore | null;
-		case 'Environment':
-			return data.environment[field as keyof typeof data.environment] as LikertScore | null;
-		case 'Overall Satisfaction': {
-			if (field === 'comments') return null;
-			return data.overallSatisfaction[field as keyof typeof data.overallSatisfaction] as LikertScore | null;
-		}
-		default:
-			return null;
-	}
+  switch (domain) {
+    case 'Access & Scheduling':
+      return data.accessScheduling[
+        field as keyof typeof data.accessScheduling
+      ] as LikertScore | null;
+    case 'Communication':
+      return data.communication[field as keyof typeof data.communication] as LikertScore | null;
+    case 'Staff & Professionalism':
+      return data.staffProfessionalism[
+        field as keyof typeof data.staffProfessionalism
+      ] as LikertScore | null;
+    case 'Care Quality':
+      return data.careQuality[field as keyof typeof data.careQuality] as LikertScore | null;
+    case 'Environment':
+      return data.environment[field as keyof typeof data.environment] as LikertScore | null;
+    case 'Overall Satisfaction': {
+      if (field === 'comments') return null;
+      return data.overallSatisfaction[
+        field as keyof typeof data.overallSatisfaction
+      ] as LikertScore | null;
+    }
+    default:
+      return null;
+  }
 }

@@ -91,17 +91,32 @@ export function emptyAdrFormData(): AdrFormData {
   return {
     author: { name: '', email: '', phone: '', role: '', organizationName: '', teamName: '' },
     organization: {
-      name: '', legalName: '', industry: '', domain: '',
-      countryAsIso31661Alpha2: '', description: ''
+      name: '',
+      legalName: '',
+      industry: '',
+      domain: '',
+      countryAsIso31661Alpha2: '',
+      description: ''
     },
     adr: {
-      slug: '', number: '', title: '', decisionDate: '',
-      status: 'pending', decisionGroup: '',
-      issue: '', decision: '', assumptions: '', constraints: '',
-      argument: '', implications: '',
-      relatedDecisions: '', relatedRequirements: '',
-      relatedArtifacts: '', relatedPrinciples: '',
-      signedOffBy: '', signedOffAt: ''
+      slug: '',
+      number: '',
+      title: '',
+      decisionDate: '',
+      status: 'pending',
+      decisionGroup: '',
+      issue: '',
+      decision: '',
+      assumptions: '',
+      constraints: '',
+      argument: '',
+      implications: '',
+      relatedDecisions: '',
+      relatedRequirements: '',
+      relatedArtifacts: '',
+      relatedPrinciples: '',
+      signedOffBy: '',
+      signedOffAt: ''
     },
     positions: [
       { name: '', description: '', modelOrDiagramUrl: '', isChosen: false, pros: '', cons: '' }

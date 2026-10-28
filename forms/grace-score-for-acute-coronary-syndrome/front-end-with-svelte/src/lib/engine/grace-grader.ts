@@ -1,22 +1,22 @@
 import type { AssessmentData, FiredContributor, GradingResult, RiskBand } from './types';
 import {
-	AGE_BANDS,
-	CARDIAC_ARREST_POINTS,
-	CREATININE_BANDS,
-	ELEVATED_ENZYMES_POINTS,
-	HEART_RATE_BANDS,
-	IN_HOSPITAL_THRESHOLDS,
-	KILLIP_POINTS,
-	SBP_BANDS,
-	SIX_MONTH_THRESHOLDS,
-	ST_DEVIATION_POINTS
+  AGE_BANDS,
+  CARDIAC_ARREST_POINTS,
+  CREATININE_BANDS,
+  ELEVATED_ENZYMES_POINTS,
+  HEART_RATE_BANDS,
+  IN_HOSPITAL_THRESHOLDS,
+  KILLIP_POINTS,
+  SBP_BANDS,
+  SIX_MONTH_THRESHOLDS,
+  ST_DEVIATION_POINTS
 } from './grace-rules';
 import {
-	bandForTotal,
-	bandLookup,
-	invasiveStrategyText,
-	normaliseCreatinine,
-	worseBand
+  bandForTotal,
+  bandLookup,
+  invasiveStrategyText,
+  normaliseCreatinine,
+  worseBand
 } from './utils';
 import { detectFlaggedIssues } from './flagged-issues';
 
@@ -47,141 +47,141 @@ import { detectFlaggedIssues } from './flagged-issues';
  * zero-risk); `flagged-issues.ts` raises a data-completeness flag separately.
  */
 export function calculateGraceGrade(data: AssessmentData): GradingResult {
-	const ageYears = data.identification.ageYears;
-	const heartRate = data.haemodynamics.heartRate;
-	const systolicBP = data.haemodynamics.systolicBloodPressure;
-	const creatinineMgdl = normaliseCreatinine(
-		data.renal.serumCreatinine,
-		data.renal.serumCreatinineUnit
-	);
-	const killipClass = data.heartFailure.killipClass;
-	const arrest = data.highRiskFeatures.cardiacArrestAtAdmission;
-	const stDeviation = data.highRiskFeatures.stSegmentDeviation;
-	const enzymes = data.highRiskFeatures.elevatedCardiacEnzymes;
+  const ageYears = data.identification.ageYears;
+  const heartRate = data.haemodynamics.heartRate;
+  const systolicBP = data.haemodynamics.systolicBloodPressure;
+  const creatinineMgdl = normaliseCreatinine(
+    data.renal.serumCreatinine,
+    data.renal.serumCreatinineUnit
+  );
+  const killipClass = data.heartFailure.killipClass;
+  const arrest = data.highRiskFeatures.cardiacArrestAtAdmission;
+  const stDeviation = data.highRiskFeatures.stSegmentDeviation;
+  const enzymes = data.highRiskFeatures.elevatedCardiacEnzymes;
 
-	const age = bandLookup(ageYears, AGE_BANDS);
-	const hr = bandLookup(heartRate, HEART_RATE_BANDS);
-	const sbp = bandLookup(systolicBP, SBP_BANDS);
-	const creat = bandLookup(creatinineMgdl, CREATININE_BANDS);
+  const age = bandLookup(ageYears, AGE_BANDS);
+  const hr = bandLookup(heartRate, HEART_RATE_BANDS);
+  const sbp = bandLookup(systolicBP, SBP_BANDS);
+  const creat = bandLookup(creatinineMgdl, CREATININE_BANDS);
 
-	const agePoints = age.points;
-	const heartRatePoints = hr.points;
-	const sbpPoints = sbp.points;
-	const creatininePoints = creat.points;
-	const killipPoints = killipClass === '' ? 0 : KILLIP_POINTS[killipClass];
-	const arrestPoints = arrest === 'yes' ? CARDIAC_ARREST_POINTS : 0;
-	const stPoints = stDeviation === 'yes' ? ST_DEVIATION_POINTS : 0;
-	const enzymePoints = enzymes === 'yes' ? ELEVATED_ENZYMES_POINTS : 0;
+  const agePoints = age.points;
+  const heartRatePoints = hr.points;
+  const sbpPoints = sbp.points;
+  const creatininePoints = creat.points;
+  const killipPoints = killipClass === '' ? 0 : KILLIP_POINTS[killipClass];
+  const arrestPoints = arrest === 'yes' ? CARDIAC_ARREST_POINTS : 0;
+  const stPoints = stDeviation === 'yes' ? ST_DEVIATION_POINTS : 0;
+  const enzymePoints = enzymes === 'yes' ? ELEVATED_ENZYMES_POINTS : 0;
 
-	const gracePoints =
-		agePoints +
-		heartRatePoints +
-		sbpPoints +
-		creatininePoints +
-		killipPoints +
-		arrestPoints +
-		stPoints +
-		enzymePoints;
+  const gracePoints =
+    agePoints +
+    heartRatePoints +
+    sbpPoints +
+    creatininePoints +
+    killipPoints +
+    arrestPoints +
+    stPoints +
+    enzymePoints;
 
-	const inHospitalMortalityBand: RiskBand = bandForTotal(gracePoints, IN_HOSPITAL_THRESHOLDS);
-	const sixMonthMortalityBand: RiskBand = bandForTotal(gracePoints, SIX_MONTH_THRESHOLDS);
-	const riskCategory: RiskBand = worseBand(inHospitalMortalityBand, sixMonthMortalityBand);
-	const invasiveStrategy = invasiveStrategyText(riskCategory);
+  const inHospitalMortalityBand: RiskBand = bandForTotal(gracePoints, IN_HOSPITAL_THRESHOLDS);
+  const sixMonthMortalityBand: RiskBand = bandForTotal(gracePoints, SIX_MONTH_THRESHOLDS);
+  const riskCategory: RiskBand = worseBand(inHospitalMortalityBand, sixMonthMortalityBand);
+  const invasiveStrategy = invasiveStrategyText(riskCategory);
 
-	// Per-variable audit rows (mirror the grade_rule table). Only variables that
-	// contribute points, or the yes/no contributors when present, are recorded.
-	const firedContributors: FiredContributor[] = [
-		{
-			id: 'R-AGE-01',
-			variable: 'age',
-			points: agePoints,
-			category: 'grace-variable',
-			description: `Age band ${age.label} years`
-		},
-		{
-			id: 'R-HEART-RATE-01',
-			variable: 'heart-rate',
-			points: heartRatePoints,
-			category: 'grace-variable',
-			description: `Heart rate band ${hr.label} beats/min`
-		},
-		{
-			id: 'R-SYSTOLIC-BLOOD-PRESSURE-01',
-			variable: 'systolic-blood-pressure',
-			points: sbpPoints,
-			category: 'grace-variable',
-			description: `Systolic BP band ${sbp.label} mmHg (inverse weight)`
-		},
-		{
-			id: 'R-CREATININE-01',
-			variable: 'creatinine',
-			points: creatininePoints,
-			category: 'grace-variable',
-			description: `Serum creatinine band ${creat.label} mg/dL`
-		},
-		{
-			id: 'R-KILLIP-01',
-			variable: 'killip',
-			points: killipPoints,
-			category: 'grace-variable',
-			description: `Killip class ${killipClass || 'not recorded'}`
-		}
-	];
-	if (arrestPoints > 0) {
-		firedContributors.push({
-			id: 'R-CARDIAC-ARREST-01',
-			variable: 'cardiac-arrest',
-			points: arrestPoints,
-			category: 'grace-variable',
-			description: 'Cardiac arrest at admission'
-		});
-	}
-	if (stPoints > 0) {
-		firedContributors.push({
-			id: 'R-ST-DEVIATION-01',
-			variable: 'st-deviation',
-			points: stPoints,
-			category: 'grace-variable',
-			description: 'ST-segment deviation on admission ECG'
-		});
-	}
-	if (enzymePoints > 0) {
-		firedContributors.push({
-			id: 'R-ELEVATED-ENZYMES-01',
-			variable: 'elevated-enzymes',
-			points: enzymePoints,
-			category: 'grace-variable',
-			description: 'Elevated cardiac enzymes / troponin'
-		});
-	}
+  // Per-variable audit rows (mirror the grade_rule table). Only variables that
+  // contribute points, or the yes/no contributors when present, are recorded.
+  const firedContributors: FiredContributor[] = [
+    {
+      id: 'R-AGE-01',
+      variable: 'age',
+      points: agePoints,
+      category: 'grace-variable',
+      description: `Age band ${age.label} years`
+    },
+    {
+      id: 'R-HEART-RATE-01',
+      variable: 'heart-rate',
+      points: heartRatePoints,
+      category: 'grace-variable',
+      description: `Heart rate band ${hr.label} beats/min`
+    },
+    {
+      id: 'R-SYSTOLIC-BLOOD-PRESSURE-01',
+      variable: 'systolic-blood-pressure',
+      points: sbpPoints,
+      category: 'grace-variable',
+      description: `Systolic BP band ${sbp.label} mmHg (inverse weight)`
+    },
+    {
+      id: 'R-CREATININE-01',
+      variable: 'creatinine',
+      points: creatininePoints,
+      category: 'grace-variable',
+      description: `Serum creatinine band ${creat.label} mg/dL`
+    },
+    {
+      id: 'R-KILLIP-01',
+      variable: 'killip',
+      points: killipPoints,
+      category: 'grace-variable',
+      description: `Killip class ${killipClass || 'not recorded'}`
+    }
+  ];
+  if (arrestPoints > 0) {
+    firedContributors.push({
+      id: 'R-CARDIAC-ARREST-01',
+      variable: 'cardiac-arrest',
+      points: arrestPoints,
+      category: 'grace-variable',
+      description: 'Cardiac arrest at admission'
+    });
+  }
+  if (stPoints > 0) {
+    firedContributors.push({
+      id: 'R-ST-DEVIATION-01',
+      variable: 'st-deviation',
+      points: stPoints,
+      category: 'grace-variable',
+      description: 'ST-segment deviation on admission ECG'
+    });
+  }
+  if (enzymePoints > 0) {
+    firedContributors.push({
+      id: 'R-ELEVATED-ENZYMES-01',
+      variable: 'elevated-enzymes',
+      points: enzymePoints,
+      category: 'grace-variable',
+      description: 'Elevated cardiac enzymes / troponin'
+    });
+  }
 
-	// Record the derived risk-category decision as a `band` audit row.
-	firedContributors.push({
-		id: 'R-BAND-01',
-		variable: 'band',
-		points: 0,
-		category: 'risk-band',
-		description:
-			`GRACE ${gracePoints} — in-hospital ${inHospitalMortalityBand}, ` +
-			`6-month ${sixMonthMortalityBand}; overall ${riskCategory} (worse band).`
-	});
+  // Record the derived risk-category decision as a `band` audit row.
+  firedContributors.push({
+    id: 'R-BAND-01',
+    variable: 'band',
+    points: 0,
+    category: 'risk-band',
+    description:
+      `GRACE ${gracePoints} — in-hospital ${inHospitalMortalityBand}, ` +
+      `6-month ${sixMonthMortalityBand}; overall ${riskCategory} (worse band).`
+  });
 
-	return {
-		agePoints,
-		heartRatePoints,
-		sbpPoints,
-		creatininePoints,
-		killipPoints,
-		arrestPoints,
-		stPoints,
-		enzymePoints,
-		gracePoints,
-		inHospitalMortalityBand,
-		sixMonthMortalityBand,
-		riskCategory,
-		invasiveStrategy,
-		firedContributors,
-		flaggedIssues: detectFlaggedIssues(data, riskCategory),
-		timestamp: new Date().toISOString()
-	};
+  return {
+    agePoints,
+    heartRatePoints,
+    sbpPoints,
+    creatininePoints,
+    killipPoints,
+    arrestPoints,
+    stPoints,
+    enzymePoints,
+    gracePoints,
+    inHospitalMortalityBand,
+    sixMonthMortalityBand,
+    riskCategory,
+    invasiveStrategy,
+    firedContributors,
+    flaggedIssues: detectFlaggedIssues(data, riskCategory),
+    timestamp: new Date().toISOString()
+  };
 }

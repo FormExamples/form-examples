@@ -9,9 +9,7 @@
 
   // Ensure exactly one signature exists for the donor at LP1F section 9.
   function ensureDonorSignature() {
-    let sig = store.data.signatures.find(
-      (s) => s.role === 'donor' && s.lp1fSection === 9,
-    );
+    let sig = store.data.signatures.find((s) => s.role === 'donor' && s.lp1fSection === 9);
     if (!sig) {
       sig = {
         id: `sig-donor-${store.data.donor.id}`,
@@ -25,8 +23,8 @@
         witness: {
           person: createEmptyPerson(),
           witnessSignatureBlobPath: '',
-          witnessedOn: '',
-        },
+          witnessedOn: ''
+        }
       };
       store.data.signatures.push(sig);
     }
@@ -39,15 +37,18 @@
 <section>
   <h2 class="text-xl font-semibold mb-2">Step 9 &mdash; Donor signature (LP1F section 9)</h2>
   <p class="text-sm text-base-content/70 mb-3">
-    The donor signs in the presence of an adult witness. The witness must not be the donor or
-    one of the attorneys. If the donor cannot physically sign, attach LPC continuation sheet 3.
+    The donor signs in the presence of an adult witness. The witness must not be the donor or one of
+    the attorneys. If the donor cannot physically sign, attach LPC continuation sheet 3.
   </p>
   <div class="space-y-4">
     <SignaturePad bind:value={donorSig.signatureBlobPath} label="Donor signature" />
     <Field label="Date signed">
       <DateInput bind:value={donorSig.signedOn} />
     </Field>
-    <Field label="Signed on behalf (full name, optional)" hint="Only complete if the donor cannot sign and another adult signs at the donor's direction; requires LPC sheet 3.">
+    <Field
+      label="Signed on behalf (full name, optional)"
+      hint="Only complete if the donor cannot sign and another adult signs at the donor's direction; requires LPC sheet 3."
+    >
       <TextInput bind:value={donorSig.signedOnBehalfFullName} />
     </Field>
 
@@ -62,7 +63,10 @@
         </Field>
       </div>
       <AddressInput bind:address={donorSig.witness.person.address} />
-      <SignaturePad bind:value={donorSig.witness.witnessSignatureBlobPath} label="Witness signature" />
+      <SignaturePad
+        bind:value={donorSig.witness.witnessSignatureBlobPath}
+        label="Witness signature"
+      />
       <Field label="Witness date">
         <DateInput bind:value={donorSig.witness.witnessedOn} />
       </Field>

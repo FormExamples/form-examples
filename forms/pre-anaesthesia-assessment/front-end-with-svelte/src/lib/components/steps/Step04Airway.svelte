@@ -4,7 +4,7 @@
   import Field from '#lib/components/ui/Field.svelte';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
   import Select from '#lib/components/ui/Select.svelte';
-  import { TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { TextAreaInput, TextInput } from '@lilydesignsystem/svelte-headless';
 
   const sb = [
     ['stopbangSnoring', 'Loud snoring'],
@@ -14,7 +14,7 @@
     ['stopbangBmiGt35', 'BMI > 35'],
     ['stopbangAgeGt50', 'Age > 50'],
     ['stopbangNeckGt40', 'Neck > 40 cm'],
-    ['stopbangMale', 'Male'],
+    ['stopbangMale', 'Male']
   ] as const;
 </script>
 
@@ -30,10 +30,18 @@
       </Select>
     </Field>
     <Field label="Thyromental distance (cm)">
-      <NumberInput label="Thyromental distance (cm)" step="0.1" bind:value={store.data.airway.thyromentalDistanceCm} />
+      <NumberInput
+        label="Thyromental distance (cm)"
+        step="0.1"
+        bind:value={store.data.airway.thyromentalDistanceCm}
+      />
     </Field>
     <Field label="Mouth opening (cm)">
-      <NumberInput label="Mouth opening (cm)" step="0.1" bind:value={store.data.airway.mouthOpeningCm} />
+      <NumberInput
+        label="Mouth opening (cm)"
+        step="0.1"
+        bind:value={store.data.airway.mouthOpeningCm}
+      />
     </Field>
     <Field label="Neck ROM">
       <Select label="Neck ROM" bind:value={store.data.airway.neckRom}>
@@ -54,7 +62,10 @@
       </Select>
     </Field>
     <Field label="Prior difficult intubation">
-      <Select label="Prior difficult intubation" bind:value={store.data.airway.priorDifficultIntubation}>
+      <Select
+        label="Prior difficult intubation"
+        bind:value={store.data.airway.priorDifficultIntubation}
+      >
         <option value="">—</option>
         <option value="yes">Yes</option>
         <option value="no">No</option>
@@ -72,7 +83,10 @@
       />
     </Field>
     <Field label="Previous anaesthetic issues">
-      <Select label="Previous anaesthetic issues" bind:value={store.data.airway.previousAnaestheticIssues}>
+      <Select
+        label="Previous anaesthetic issues"
+        bind:value={store.data.airway.previousAnaestheticIssues}
+      >
         <option value="">—</option>
         <option value="yes">Yes</option>
         <option value="no">No</option>
@@ -104,7 +118,7 @@
 
   <h3 class="step-subhead">STOP-BANG</h3>
   <div class="field-grid field-grid-4">
-    {#each sb as [key, label]}
+    {#each sb as [key, label] (key)}
       <Field {label}>
         <Select {label} bind:value={store.data.airway[key]}>
           <option value="">—</option>

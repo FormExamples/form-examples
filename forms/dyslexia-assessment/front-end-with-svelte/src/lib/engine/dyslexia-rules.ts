@@ -19,58 +19,58 @@ import type { DyslexiaRule } from './types';
 //   DYS-009 Processing speed
 
 export const dyslexiaRules: DyslexiaRule[] = [
-	{
-		id: 'DYS-001',
-		category: 'Reading',
-		description: 'Reading fluency standardised score',
-		evaluate: (d) => d.readingAssessment.readingFluencyScore
-	},
-	{
-		id: 'DYS-002',
-		category: 'Reading',
-		description: 'Reading comprehension standardised score',
-		evaluate: (d) => d.readingAssessment.readingComprehensionScore
-	},
-	{
-		id: 'DYS-003',
-		category: 'Writing & Spelling',
-		description: 'Spelling accuracy standardised score',
-		evaluate: (d) => d.writingSpelling.spellingAccuracyScore
-	},
-	{
-		id: 'DYS-004',
-		category: 'Writing & Spelling',
-		description: 'Written expression standardised score',
-		evaluate: (d) => d.writingSpelling.writtenExpressionScore
-	},
-	{
-		id: 'DYS-005',
-		category: 'Phonological Processing',
-		description: 'Phonological awareness standardised score',
-		evaluate: (d) => d.phonologicalProcessing.phonologicalAwarenessScore
-	},
-	{
-		id: 'DYS-006',
-		category: 'Phonological Processing',
-		description: 'Phonological memory standardised score',
-		evaluate: (d) => d.phonologicalProcessing.phonologicalMemoryScore
-	},
-	{
-		id: 'DYS-007',
-		category: 'Phonological Processing',
-		description: 'Rapid naming standardised score',
-		evaluate: (d) => d.phonologicalProcessing.rapidNamingScore
-	},
-	{
-		id: 'DYS-008',
-		category: 'Working Memory & Processing Speed',
-		description: 'Working memory standardised score',
-		evaluate: (d) => d.workingMemoryProcessingSpeed.workingMemoryScore
-	},
-	{
-		id: 'DYS-009',
-		category: 'Working Memory & Processing Speed',
-		description: 'Processing speed standardised score',
-		evaluate: (d) => d.workingMemoryProcessingSpeed.processingSpeedScore
-	}
+  {
+    id: 'DYS-001',
+    category: 'Reading',
+    description: 'Reading fluency standardised score',
+    evaluate: (d) => d.readingAssessment.readingFluencyScore
+  },
+  {
+    id: 'DYS-002',
+    category: 'Reading',
+    description: 'Reading comprehension standardised score',
+    evaluate: (d) => d.readingAssessment.readingComprehensionScore
+  },
+  {
+    id: 'DYS-003',
+    category: 'Writing & Spelling',
+    description: 'Spelling accuracy standardised score',
+    evaluate: (d) => d.writingSpelling.spellingAccuracyScore
+  },
+  {
+    id: 'DYS-004',
+    category: 'Writing & Spelling',
+    description: 'Written expression standardised score',
+    evaluate: (d) => d.writingSpelling.writtenExpressionScore
+  },
+  {
+    id: 'DYS-005',
+    category: 'Phonological Processing',
+    description: 'Phonological awareness standardised score',
+    evaluate: (d) => d.phonologicalProcessing.phonologicalAwarenessScore
+  },
+  {
+    id: 'DYS-006',
+    category: 'Phonological Processing',
+    description: 'Phonological memory standardised score',
+    evaluate: (d) => d.phonologicalProcessing.phonologicalMemoryScore
+  },
+  {
+    id: 'DYS-007',
+    category: 'Phonological Processing',
+    description: 'Rapid naming standardised score',
+    evaluate: (d) => d.phonologicalProcessing.rapidNamingScore
+  },
+  {
+    id: 'DYS-008',
+    category: 'Working Memory & Processing Speed',
+    description: 'Working memory standardised score',
+    evaluate: (d) => d.workingMemoryProcessingSpeed.workingMemoryScore
+  },
+  {
+    id: 'DYS-009',
+    category: 'Working Memory & Processing Speed',
+    description: 'Processing speed standardised score',
+    evaluate: (d) => d.workingMemoryProcessingSpeed.processingSpeedScore
+  }
 ];

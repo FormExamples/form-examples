@@ -8,23 +8,19 @@
 // ──────────────────────────────────────────────
 
 /** Requested test type. */
-export type TestType =
-	| '24-hour-abpm'
-	| 'home-blood-pressure-monitoring'
-	| 'other'
-	| '';
+export type TestType = '24-hour-abpm' | 'home-blood-pressure-monitoring' | 'other' | '';
 
 /** Primary clinical indication for the request. */
 export type Indication =
-	| 'diagnose-hypertension'
-	| 'white-coat-hypertension'
-	| 'masked-hypertension'
-	| 'resistant-hypertension'
-	| 'treatment-monitoring'
-	| 'hypotension-symptoms'
-	| 'pregnancy-hypertension'
-	| 'other'
-	| '';
+  | 'diagnose-hypertension'
+  | 'white-coat-hypertension'
+  | 'masked-hypertension'
+  | 'resistant-hypertension'
+  | 'treatment-monitoring'
+  | 'hypotension-symptoms'
+  | 'pregnancy-hypertension'
+  | 'other'
+  | '';
 
 /** Requested urgency / triage tier. */
 export type Urgency = 'routine' | 'urgent' | 'emergency' | '';
@@ -34,50 +30,50 @@ export type Urgency = 'routine' | 'urgent' | 'emergency' | '';
 // ──────────────────────────────────────────────
 
 export interface Clinician {
-	clinicianName: string;
-	clinicianRole: string;
-	registrationBody: string;
-	registrationNumber: string;
-	requesterContact: string;
-	supervisingConsultant: string;
-	siteName: string;
-	referralDate: string;
+  clinicianName: string;
+  clinicianRole: string;
+  registrationBody: string;
+  registrationNumber: string;
+  requesterContact: string;
+  supervisingConsultant: string;
+  siteName: string;
+  referralDate: string;
 }
 
 export interface Patient {
-	firstName: string;
-	lastName: string;
-	dateOfBirth: string;
-	nhsNumber: string;
-	bodyMassIndex: number | null;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  nhsNumber: string;
+  bodyMassIndex: number | null;
 }
 
 export interface RequestDetails {
-	testType: TestType;
-	primaryIndication: Indication;
-	clinicalQuestion: string;
-	relevantHistory: string;
+  testType: TestType;
+  primaryIndication: Indication;
+  clinicalQuestion: string;
+  relevantHistory: string;
 }
 
 export interface BloodPressure {
-	clinicBpSystolic: number | null;
-	clinicBpDiastolic: number | null;
-	onAntihypertensives: boolean;
-	currentMedications: string;
+  clinicBpSystolic: number | null;
+  clinicBpDiastolic: number | null;
+  onAntihypertensives: boolean;
+  currentMedications: string;
 }
 
 export interface Symptoms {
-	symptomDizziness: boolean;
-	symptomHeadache: boolean;
-	atrialFibrillation: boolean;
-	pregnant: boolean;
+  symptomDizziness: boolean;
+  symptomHeadache: boolean;
+  atrialFibrillation: boolean;
+  pregnant: boolean;
 }
 
 export interface Triage {
-	urgency: Urgency;
-	requestedByDate: string;
-	setting: string;
-	notes: string;
+  urgency: Urgency;
+  requestedByDate: string;
+  setting: string;
+  notes: string;
 }
 
 // ──────────────────────────────────────────────
@@ -85,12 +81,12 @@ export interface Triage {
 // ──────────────────────────────────────────────
 
 export interface AbpmRequest {
-	clinician: Clinician;
-	patient: Patient;
-	request: RequestDetails;
-	bloodPressure: BloodPressure;
-	symptoms: Symptoms;
-	triage: Triage;
+  clinician: Clinician;
+  patient: Patient;
+  request: RequestDetails;
+  bloodPressure: BloodPressure;
+  symptoms: Symptoms;
+  triage: Triage;
 }
 
 // ──────────────────────────────────────────────
@@ -99,9 +95,7 @@ export interface AbpmRequest {
 
 /** Axis A — appropriateness band (NICE NG136 1-9 ordinal). */
 export type AppropriatenessBand =
-	| 'usually-appropriate'
-	| 'may-be-appropriate'
-	| 'usually-not-appropriate';
+  'usually-appropriate' | 'may-be-appropriate' | 'usually-not-appropriate';
 
 /** Axis B — oscillometric measurement suitability band (BIHS). */
 export type SuitabilityBand = 'ok' | 'caution' | 'limited';
@@ -116,34 +110,34 @@ export type FlagPriority = 'high' | 'medium' | 'low';
 
 /** A rule that fired during grading (stable rule IDs across all front/back-ends). */
 export interface FiredRule {
-	ruleId: string;
-	axis: string;
-	category: string;
-	description: string;
+  ruleId: string;
+  axis: string;
+  category: string;
+  description: string;
 }
 
 /** A safety flag detected independently of the axes. */
 export interface SafetyFlag {
-	flagId: string;
-	category: string;
-	priority: FlagPriority;
-	description: string;
-	suggestedAction: string;
+  flagId: string;
+  category: string;
+  priority: FlagPriority;
+  description: string;
+  suggestedAction: string;
 }
 
 /** The full grading result produced by `calculateGrade`. */
 export interface GradingResult {
-	appropriatenessScore: number;
-	appropriatenessBand: AppropriatenessBand;
-	suitabilityBand: SuitabilityBand;
-	completenessPercent: number;
-	triageTier: TriageTier;
-	targetTimeframe: string;
-	recommendation: Recommendation;
-	recommendationLabel: string;
-	firedRules: FiredRule[];
-	flags: SafetyFlag[];
-	timestamp: string;
+  appropriatenessScore: number;
+  appropriatenessBand: AppropriatenessBand;
+  suitabilityBand: SuitabilityBand;
+  completenessPercent: number;
+  triageTier: TriageTier;
+  targetTimeframe: string;
+  recommendation: Recommendation;
+  recommendationLabel: string;
+  firedRules: FiredRule[];
+  flags: SafetyFlag[];
+  timestamp: string;
 }
 
 // ──────────────────────────────────────────────
@@ -151,8 +145,8 @@ export interface GradingResult {
 // ──────────────────────────────────────────────
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
-	section: keyof AbpmRequest;
+  number: number;
+  title: string;
+  shortTitle: string;
+  section: keyof AbpmRequest;
 }

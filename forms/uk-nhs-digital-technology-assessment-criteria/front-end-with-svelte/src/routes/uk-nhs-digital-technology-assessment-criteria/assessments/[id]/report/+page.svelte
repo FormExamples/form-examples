@@ -19,19 +19,23 @@
   });
 
   const alertType = $derived(
-    r.outcome === 'meets' ? 'success' : r.outcome === 'does-not-meet' ? 'error' : 'warning',
+    r.outcome === 'meets' ? 'success' : r.outcome === 'does-not-meet' ? 'error' : 'warning'
   );
 </script>
 
 {#if store.submitted}
   <header class="page-header no-print">
-    <div class="page-header-inner" style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
+    <div
+      class="page-header-inner"
+      style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;"
+    >
       <h1>DTAC assessment report</h1>
       <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
         <Button data-variant="secondary" onclick={() => window.print()}>Print</Button>
         <Button
           data-variant="secondary"
-          onclick={() => goto(`/uk-nhs-digital-technology-assessment-criteria/assessments/${id}`)}>Edit</Button
+          onclick={() => goto(`/uk-nhs-digital-technology-assessment-criteria/assessments/${id}`)}
+          >Edit</Button
         >
       </div>
     </div>
@@ -45,7 +49,10 @@
         <section>
           <h3>Supplier</h3>
           <p>{d.supplier.name || '—'}</p>
-          <p class="subtle">{d.supplier.companyRegistrationNumber} {d.supplier.countryOfRegistration}</p>
+          <p class="subtle">
+            {d.supplier.companyRegistrationNumber}
+            {d.supplier.countryOfRegistration}
+          </p>
         </section>
         <section>
           <h3>Product</h3>
@@ -55,17 +62,21 @@
         <section>
           <h3>Assessor</h3>
           <p>{d.assessor.name || '—'} ({d.assessor.role || '—'})</p>
-          <p class="subtle">{d.assessment.assessmentDate ?? '—'} · DTAC {d.assessment.dtacVersion || '—'}</p>
+          <p class="subtle">
+            {d.assessment.assessmentDate ?? '—'} · DTAC {d.assessment.dtacVersion || '—'}
+          </p>
         </section>
       </div>
 
       <Alert type={alertType} heading={`Outcome: ${r.outcomeLabel}`}>
         <p>
-          Mandatory {r.mandatoryMet}/{r.mandatoryTotal} met · advisory {r.advisoryMet}/{r.advisoryTotal} met
+          Mandatory {r.mandatoryMet}/{r.mandatoryTotal} met · advisory {r.advisoryMet}/{r.advisoryTotal}
+          met
         </p>
         {#if d.assessment.finalOutcome && d.assessment.finalOutcome !== r.outcome}
           <p class="override">
-            Assessor final outcome: {d.assessment.finalOutcome} — {d.assessment.assessorOverrideReason}
+            Assessor final outcome: {d.assessment.finalOutcome} — {d.assessment
+              .assessorOverrideReason}
           </p>
         {/if}
       </Alert>
@@ -86,7 +97,9 @@
         <ul>
           {#each r.firedRules as rule (rule.ruleId)}
             <li>
-              <strong>{rule.criterionId.toUpperCase()}</strong> ({rule.status}, {rule.mandatory ? 'mandatory' : 'advisory'}):
+              <strong>{rule.criterionId.toUpperCase()}</strong> ({rule.status}, {rule.mandatory
+                ? 'mandatory'
+                : 'advisory'}):
               {rule.description}
             </li>
           {/each}

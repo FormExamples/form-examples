@@ -1,9 +1,9 @@
 import type {
-	NeurodiversityAdjustmentRequest,
-	GradingResult,
-	Recommendation,
-	ImpactBand,
-	FiredRule
+  NeurodiversityAdjustmentRequest,
+  GradingResult,
+  Recommendation,
+  ImpactBand,
+  FiredRule
 } from './types';
 import { gradeEligibility } from './eligibility-rules';
 import { gradeImpact } from './impact-rules';
@@ -33,40 +33,40 @@ import { recommendationLabel } from './utils';
  * No side effects, no network calls, no I/O.
  */
 export function calculateGrade(request: NeurodiversityAdjustmentRequest): GradingResult {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	// Axis A
-	const a = gradeEligibility(request);
-	firedRules.push(...a.firedRules);
+  // Axis A
+  const a = gradeEligibility(request);
+  firedRules.push(...a.firedRules);
 
-	// Axis B
-	const b = gradeImpact(request);
-	firedRules.push(...b.firedRules);
+  // Axis B
+  const b = gradeImpact(request);
+  firedRules.push(...b.firedRules);
 
-	// Axis C
-	const c = gradeCompleteness(request);
-	firedRules.push(...c.firedRules);
+  // Axis C
+  const c = gradeCompleteness(request);
+  firedRules.push(...c.firedRules);
 
-	// Axis D
-	const d = gradePriority(request);
-	firedRules.push(...d.firedRules);
+  // Axis D
+  const d = gradePriority(request);
+  firedRules.push(...d.firedRules);
 
-	const recommendation = deriveRecommendation(request, c.completenessPercent, b.impactBand);
+  const recommendation = deriveRecommendation(request, c.completenessPercent, b.impactBand);
 
-	const flags = detectFlags(request, a.eligibilityBand, b.impactBand);
+  const flags = detectFlags(request, a.eligibilityBand, b.impactBand);
 
-	return {
-		eligibilityBand: a.eligibilityBand,
-		impactBand: b.impactBand,
-		completenessPercent: c.completenessPercent,
-		priorityTier: d.priorityTier,
-		targetTimeframe: d.targetTimeframe,
-		recommendation,
-		recommendationLabel: recommendationLabel(recommendation),
-		firedRules,
-		flags,
-		gradedAt: new Date().toISOString()
-	};
+  return {
+    eligibilityBand: a.eligibilityBand,
+    impactBand: b.impactBand,
+    completenessPercent: c.completenessPercent,
+    priorityTier: d.priorityTier,
+    targetTimeframe: d.targetTimeframe,
+    recommendation,
+    recommendationLabel: recommendationLabel(recommendation),
+    firedRules,
+    flags,
+    gradedAt: new Date().toISOString()
+  };
 }
 
 /**
@@ -77,16 +77,16 @@ export function calculateGrade(request: NeurodiversityAdjustmentRequest): Gradin
  * 4. otherwise → progress to an adjustments meeting.
  */
 function deriveRecommendation(
-	request: NeurodiversityAdjustmentRequest,
-	completenessPercent: number,
-	impactBand: ImpactBand
+  request: NeurodiversityAdjustmentRequest,
+  completenessPercent: number,
+  impactBand: ImpactBand
 ): Recommendation {
-	if (completenessPercent < 50) return 'request-more-detail';
-	if (impactBand === 'high-risk' && request.occupationalHealthInvolved === false) {
-		return 'seek-occupational-health';
-	}
-	if (request.adjustmentEquipmentTechnology === true && request.accessToWorkInvolved === false) {
-		return 'signpost-access-to-work';
-	}
-	return 'progress-to-meeting';
+  if (completenessPercent < 50) return 'request-more-detail';
+  if (impactBand === 'high-risk' && request.occupationalHealthInvolved === false) {
+    return 'seek-occupational-health';
+  }
+  if (request.adjustmentEquipmentTechnology === true && request.accessToWorkInvolved === false) {
+    return 'signpost-access-to-work';
+  }
+  return 'progress-to-meeting';
 }

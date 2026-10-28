@@ -19,7 +19,10 @@
 </script>
 
 <Fieldset legend="Step 7 — Section 6 — Diagnostic Facility (11 checkpoints)">
-  <p class="hint">Pathology Lab and Radio Imaging: staff, equipment, consumables, investigation range, report turnaround, and radiation safety.</p>
+  <p class="hint">
+    Pathology Lab and Radio Imaging: staff, equipment, consumables, investigation range, report
+    turnaround, and radiation safety.
+  </p>
 
   {#each groups as group, gi (gi)}
     {#if group.subsection}

@@ -2,7 +2,7 @@
   import { assessment } from '#lib/stores/assessment.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { RadioGroup, TextAreaInput } from "@lilydesignsystem/svelte-headless";
+  import { RadioGroup, TextAreaInput } from '@lilydesignsystem/svelte-headless';
 
   const mh = assessment.data.medicalHistory;
 </script>
@@ -55,10 +55,20 @@
     <Field label="Peripheral arterial disease?">
       <RadioGroup label="Peripheral arterial disease?">
         <label class="radio-input">
-          <input type="radio" name="peripheralArterialDisease" value="yes" bind:group={mh.peripheralArterialDisease} /> Yes
+          <input
+            type="radio"
+            name="peripheralArterialDisease"
+            value="yes"
+            bind:group={mh.peripheralArterialDisease}
+          /> Yes
         </label>
         <label class="radio-input">
-          <input type="radio" name="peripheralArterialDisease" value="no" bind:group={mh.peripheralArterialDisease} /> No
+          <input
+            type="radio"
+            name="peripheralArterialDisease"
+            value="no"
+            bind:group={mh.peripheralArterialDisease}
+          /> No
         </label>
       </RadioGroup>
     </Field>
@@ -67,10 +77,20 @@
   <Field label="Atrial fibrillation?">
     <RadioGroup label="Atrial fibrillation?">
       <label class="radio-input">
-        <input type="radio" name="atrialFibrillation" value="yes" bind:group={mh.atrialFibrillation} /> Yes
+        <input
+          type="radio"
+          name="atrialFibrillation"
+          value="yes"
+          bind:group={mh.atrialFibrillation}
+        /> Yes
       </label>
       <label class="radio-input">
-        <input type="radio" name="atrialFibrillation" value="no" bind:group={mh.atrialFibrillation} /> No
+        <input
+          type="radio"
+          name="atrialFibrillation"
+          value="no"
+          bind:group={mh.atrialFibrillation}
+        /> No
       </label>
     </RadioGroup>
   </Field>

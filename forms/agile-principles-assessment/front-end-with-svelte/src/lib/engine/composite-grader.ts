@@ -57,7 +57,7 @@ export function calculateMaturity(data: AgileAssessment): GradingResult {
     maturity,
     perPrincipleBands,
     firedRules,
-    additionalFlags,
+    additionalFlags
   };
 }
 

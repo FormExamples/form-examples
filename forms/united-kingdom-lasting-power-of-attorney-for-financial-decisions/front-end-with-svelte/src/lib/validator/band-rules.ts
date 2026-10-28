@@ -9,13 +9,10 @@ export function computeValidityBand(lpa: Lpa): ValidityBand {
   if (lpa.status === 'submitted') return 'submitted';
 
   const donorSigned = lpa.signatures.some(
-    (s) => s.role === 'donor' && s.lp1fSection === 9 && !!s.signedOn,
+    (s) => s.role === 'donor' && s.lp1fSection === 9 && !!s.signedOn
   );
   const cpSigned = lpa.signatures.some(
-    (s) =>
-      s.role === 'certificate_provider' &&
-      s.lp1fSection === 10 &&
-      !!s.signedOn,
+    (s) => s.role === 'certificate_provider' && s.lp1fSection === 10 && !!s.signedOn
   );
   const allAttorneysSigned =
     lpa.attorneys.length > 0 &&
@@ -25,12 +22,12 @@ export function computeValidityBand(lpa: Lpa): ValidityBand {
           (s.role === 'attorney' || s.role === 'replacement_attorney') &&
           s.lp1fSection === 11 &&
           s.signatoryPersonId === a.person.id &&
-          !!s.signedOn,
-      ),
+          !!s.signedOn
+      )
     );
 
   const section15Signed = lpa.signatures.some(
-    (s) => s.role === 'applicant' && s.lp1fSection === 15 && !!s.signedOn,
+    (s) => s.role === 'applicant' && s.lp1fSection === 15 && !!s.signedOn
   );
 
   const feeOk =
@@ -38,13 +35,7 @@ export function computeValidityBand(lpa: Lpa): ValidityBand {
     (!lpa.registrationApplication.reducedFeeRequested ||
       lpa.registrationApplication.hasLpa120aEvidence);
 
-  if (
-    donorSigned &&
-    cpSigned &&
-    allAttorneysSigned &&
-    section15Signed &&
-    feeOk
-  ) {
+  if (donorSigned && cpSigned && allAttorneysSigned && section15Signed && feeOk) {
     return 'ready_for_registration';
   }
   if (donorSigned && cpSigned && allAttorneysSigned) {

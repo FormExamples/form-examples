@@ -1,16 +1,10 @@
-import type {
-  AgileChecklist,
-  Band,
-  GradingResult,
-  Maturity,
-  SectionScore,
-} from './types.js';
+import type { AgileChecklist, Band, GradingResult, Maturity, SectionScore } from './types.js';
 import {
   PRACTICES_ITEMS,
   STAKEHOLDERS_ITEMS,
   TEAMS_ITEMS,
   type ItemDef,
-  type SectionId,
+  type SectionId
 } from '#lib/config/items.js';
 import { applyMaturityRules } from './maturity-rules.js';
 import { detectAdditionalFlags } from './flagged-issues.js';
@@ -36,7 +30,7 @@ export function deriveMaturity(overallPercent: number | null): Maturity {
 function scoreSection(
   section: SectionId,
   items: ItemDef[],
-  answers: Record<string, string>,
+  answers: Record<string, string>
 ): SectionScore {
   let yesCount = 0;
   let noCount = 0;
@@ -61,7 +55,7 @@ function scoreSection(
     unansweredCount,
     applicableCount,
     percent,
-    band: bandFor(percent),
+    band: bandFor(percent)
   };
 }
 
@@ -71,9 +65,15 @@ export function calculateMaturity(data: AgileChecklist): GradingResult {
   const practices = scoreSection('practices', PRACTICES_ITEMS, data.answers);
 
   const answeredCount =
-    teams.yesCount + teams.noCount + teams.notApplicableCount +
-    stakeholders.yesCount + stakeholders.noCount + stakeholders.notApplicableCount +
-    practices.yesCount + practices.noCount + practices.notApplicableCount;
+    teams.yesCount +
+    teams.noCount +
+    teams.notApplicableCount +
+    stakeholders.yesCount +
+    stakeholders.noCount +
+    stakeholders.notApplicableCount +
+    practices.yesCount +
+    practices.noCount +
+    practices.notApplicableCount;
 
   const sectionPercents = [teams.percent, stakeholders.percent, practices.percent];
   const definedPercents = sectionPercents.filter((p): p is number => p !== null);
@@ -91,7 +91,7 @@ export function calculateMaturity(data: AgileChecklist): GradingResult {
     teams,
     stakeholders,
     practices,
-    answeredCount,
+    answeredCount
   });
 
   return {
@@ -102,7 +102,7 @@ export function calculateMaturity(data: AgileChecklist): GradingResult {
     overallPercent,
     maturity,
     firedRules,
-    additionalFlags,
+    additionalFlags
   };
 }
 

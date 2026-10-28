@@ -4,13 +4,16 @@
   import Field from '#lib/components/ui/Field.svelte';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
   import Select from '#lib/components/ui/Select.svelte';
-  import { TextInput } from "@lilydesignsystem/svelte-headless";
+  import { TextInput } from '@lilydesignsystem/svelte-headless';
 </script>
 
 <Fieldset legend="Step 8 — Renal and hepatic">
   <div class="field-grid field-grid-3">
     <Field label="Creatinine (umol/L)">
-      <NumberInput label="Creatinine (umol/L)" bind:value={store.data.renalHepatic.creatinineUmolL} />
+      <NumberInput
+        label="Creatinine (umol/L)"
+        bind:value={store.data.renalHepatic.creatinineUmolL}
+      />
     </Field>
     <Field label="eGFR">
       <NumberInput label="eGFR" bind:value={store.data.renalHepatic.egfrMlMin173m2} />
@@ -39,7 +42,11 @@
       <NumberInput label="Bilirubin (umol/L)" bind:value={store.data.renalHepatic.bilirubinUmolL} />
     </Field>
     <Field label="Albumin (g/L)">
-      <NumberInput label="Albumin (g/L)" step="0.1" bind:value={store.data.renalHepatic.albuminGL} />
+      <NumberInput
+        label="Albumin (g/L)"
+        step="0.1"
+        bind:value={store.data.renalHepatic.albuminGL}
+      />
     </Field>
     <Field label="ALT (U/L)">
       <NumberInput label="ALT (U/L)" bind:value={store.data.renalHepatic.altUL} />
@@ -61,7 +68,10 @@
       </Select>
     </Field>
     <Field label="Urinalysis findings" class="field-span-2">
-      <TextInput label="Urinalysis findings" bind:value={store.data.renalHepatic.urinalysisFindings} />
+      <TextInput
+        label="Urinalysis findings"
+        bind:value={store.data.renalHepatic.urinalysisFindings}
+      />
     </Field>
   </div>
 </Fieldset>

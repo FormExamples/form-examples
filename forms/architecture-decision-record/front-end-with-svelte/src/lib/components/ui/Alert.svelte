@@ -22,7 +22,14 @@
   const ariaLive = $derived(live ?? (role === 'alert' ? 'assertive' : 'polite'));
 </script>
 
-<div class={`alert ${className}`} {role} aria-live={ariaLive} aria-atomic="true" data-type={type} {...restProps}>
+<div
+  class={`alert ${className}`}
+  {role}
+  aria-live={ariaLive}
+  aria-atomic="true"
+  data-type={type}
+  {...restProps}
+>
   {#if heading}<p><strong>{heading}</strong></p>{/if}
   {@render children?.()}
 </div>

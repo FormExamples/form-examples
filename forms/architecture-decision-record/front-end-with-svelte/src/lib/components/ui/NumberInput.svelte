@@ -10,7 +10,27 @@
     required = false,
     disabled = false,
     ...restProps
-  }: { label: string; value?: number | null; min?: number; max?: number; step?: number | string; required?: boolean; disabled?: boolean; [key: string]: unknown } = $props();
+  }: {
+    label: string;
+    value?: number | null;
+    min?: number;
+    max?: number;
+    step?: number | string;
+    required?: boolean;
+    disabled?: boolean;
+    [key: string]: unknown;
+  } = $props();
 </script>
 
-<input class={`number-input ${className}`} type="number" aria-label={label} bind:value {min} {max} {step} {required} {disabled} {...restProps} />
+<input
+  class={`number-input ${className}`}
+  type="number"
+  aria-label={label}
+  bind:value
+  {min}
+  {max}
+  {step}
+  {required}
+  {disabled}
+  {...restProps}
+/>

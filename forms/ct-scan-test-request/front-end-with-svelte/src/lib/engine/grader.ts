@@ -9,12 +9,12 @@
 // ──────────────────────────────────────────────
 
 import type {
-	AppropriatenessBand,
-	ContrastSafetyBand,
-	CtScanRequest,
-	FiredRule,
-	GradingResult,
-	Recommendation
+  AppropriatenessBand,
+  ContrastSafetyBand,
+  CtScanRequest,
+  FiredRule,
+  GradingResult,
+  Recommendation
 } from './types';
 import { gradeAppropriateness } from './appropriateness-rules';
 import { evaluateContrastSafety, evaluateDose } from './safety-rules';
@@ -27,14 +27,14 @@ import { detectFlags } from './flagged-issues';
  * axes. Least-alarming wins only when nothing escalates.
  */
 export function deriveRecommendation(
-	apprBand: AppropriatenessBand,
-	contrastSafetyBand: ContrastSafetyBand,
-	completenessPercent: number
+  apprBand: AppropriatenessBand,
+  contrastSafetyBand: ContrastSafetyBand,
+  completenessPercent: number
 ): Recommendation {
-	if (contrastSafetyBand === 'contraindicated') return 'redirect';
-	if (apprBand === 'usually-not-appropriate') return 'query-referrer';
-	if (completenessPercent < 50) return 'query-referrer';
-	return 'accept';
+  if (contrastSafetyBand === 'contraindicated') return 'redirect';
+  if (apprBand === 'usually-not-appropriate') return 'query-referrer';
+  if (completenessPercent < 50) return 'query-referrer';
+  return 'accept';
 }
 
 /**
@@ -50,50 +50,50 @@ export function deriveRecommendation(
  * Plus an overall recommendation, the fired-rule audit trail, and safety flags.
  */
 export function calculateGrade(data: CtScanRequest): GradingResult {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	// Axis A — appropriateness.
-	const appr = gradeAppropriateness(data.request.primaryIndication, data.request.bodyRegion);
-	firedRules.push(...appr.firedRules);
+  // Axis A — appropriateness.
+  const appr = gradeAppropriateness(data.request.primaryIndication, data.request.bodyRegion);
+  firedRules.push(...appr.firedRules);
 
-	// Axis B — radiation & contrast safety.
-	const dose = evaluateDose(data.request.bodyRegion);
-	firedRules.push(...dose.firedRules);
-	const contrast = evaluateContrastSafety(data.contrast);
-	firedRules.push(...contrast.firedRules);
+  // Axis B — radiation & contrast safety.
+  const dose = evaluateDose(data.request.bodyRegion);
+  firedRules.push(...dose.firedRules);
+  const contrast = evaluateContrastSafety(data.contrast);
+  firedRules.push(...contrast.firedRules);
 
-	// Axis C — completeness.
-	const completeness = gradeCompleteness(data);
-	firedRules.push(...completeness.firedRules);
+  // Axis C — completeness.
+  const completeness = gradeCompleteness(data);
+  firedRules.push(...completeness.firedRules);
 
-	// Axis D — triage.
-	const triage = gradeTriage(data);
-	firedRules.push(...triage.firedRules);
+  // Axis D — triage.
+  const triage = gradeTriage(data);
+  firedRules.push(...triage.firedRules);
 
-	const recommendation = deriveRecommendation(
-		appr.appropriatenessBand,
-		contrast.contrastSafetyBand,
-		completeness.completenessPercent
-	);
+  const recommendation = deriveRecommendation(
+    appr.appropriatenessBand,
+    contrast.contrastSafetyBand,
+    completeness.completenessPercent
+  );
 
-	const flags = detectFlags(data, {
-		estimatedDoseBand: dose.estimatedDoseBand,
-		contrastSafetyBand: contrast.contrastSafetyBand,
-		renalRisk: contrast.renalRisk
-	});
+  const flags = detectFlags(data, {
+    estimatedDoseBand: dose.estimatedDoseBand,
+    contrastSafetyBand: contrast.contrastSafetyBand,
+    renalRisk: contrast.renalRisk
+  });
 
-	return {
-		appropriatenessScore: appr.appropriatenessScore,
-		appropriatenessBand: appr.appropriatenessBand,
-		contrastSafetyBand: contrast.contrastSafetyBand,
-		estimatedDoseBand: dose.estimatedDoseBand,
-		renalRisk: contrast.renalRisk,
-		completenessPercent: completeness.completenessPercent,
-		triageTier: triage.triageTier,
-		targetTimeframe: triage.targetTimeframe,
-		recommendation,
-		firedRules,
-		flags,
-		gradedAt: new Date().toISOString()
-	};
+  return {
+    appropriatenessScore: appr.appropriatenessScore,
+    appropriatenessBand: appr.appropriatenessBand,
+    contrastSafetyBand: contrast.contrastSafetyBand,
+    estimatedDoseBand: dose.estimatedDoseBand,
+    renalRisk: contrast.renalRisk,
+    completenessPercent: completeness.completenessPercent,
+    triageTier: triage.triageTier,
+    targetTimeframe: triage.targetTimeframe,
+    recommendation,
+    firedRules,
+    flags,
+    gradedAt: new Date().toISOString()
+  };
 }

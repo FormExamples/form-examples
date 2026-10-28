@@ -2,7 +2,7 @@
   import { store } from '#lib/stores/assessment.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { TextInput } from "@lilydesignsystem/svelte-headless";
+  import { TextInput } from '@lilydesignsystem/svelte-headless';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
   import Select from '#lib/components/ui/Select.svelte';
 </script>
@@ -53,7 +53,10 @@
       <TextInput label="DVT prophylaxis" bind:value={store.data.anaesthesiaPlan.dvtProphylaxis} />
     </Field>
     <Field label="Antibiotic prophylaxis">
-      <TextInput label="Antibiotic prophylaxis" bind:value={store.data.anaesthesiaPlan.antibioticProphylaxis} />
+      <TextInput
+        label="Antibiotic prophylaxis"
+        bind:value={store.data.anaesthesiaPlan.antibioticProphylaxis}
+      />
     </Field>
     <Field label="Disposition">
       <Select label="Disposition" bind:value={store.data.anaesthesiaPlan.postOpDisposition}>
@@ -66,7 +69,10 @@
       </Select>
     </Field>
     <Field label="LOS (days)">
-      <NumberInput label="LOS (days)" bind:value={store.data.anaesthesiaPlan.anticipatedLengthOfStayDays} />
+      <NumberInput
+        label="LOS (days)"
+        bind:value={store.data.anaesthesiaPlan.anticipatedLengthOfStayDays}
+      />
     </Field>
     <Field label="VTE risk assessment">
       <Select label="VTE risk assessment" bind:value={store.data.anaesthesiaPlan.vteRiskLevel}>
@@ -77,7 +83,10 @@
       </Select>
     </Field>
     <Field label="COVID-19 screening / PCR">
-      <Select label="COVID-19 screening / PCR" bind:value={store.data.anaesthesiaPlan.covidScreeningResult}>
+      <Select
+        label="COVID-19 screening / PCR"
+        bind:value={store.data.anaesthesiaPlan.covidScreeningResult}
+      >
         <option value="">—</option>
         <option value="not-tested">Not tested</option>
         <option value="negative">Negative</option>
@@ -90,7 +99,10 @@
   <h3 class="step-subhead">Discharge planning</h3>
   <div class="field-grid">
     <Field label="Planned discharge destination">
-      <Select label="Planned discharge destination" bind:value={store.data.anaesthesiaPlan.dischargeDestination}>
+      <Select
+        label="Planned discharge destination"
+        bind:value={store.data.anaesthesiaPlan.dischargeDestination}
+      >
         <option value="">—</option>
         <option value="home">Home</option>
         <option value="home-with-support">Home with support</option>
@@ -101,7 +113,10 @@
       </Select>
     </Field>
     <Field label="Social services involvement">
-      <Select label="Social services involvement" bind:value={store.data.anaesthesiaPlan.socialServicesInvolvement}>
+      <Select
+        label="Social services involvement"
+        bind:value={store.data.anaesthesiaPlan.socialServicesInvolvement}
+      >
         <option value="">—</option>
         <option value="yes">Yes</option>
         <option value="no">No</option>
@@ -118,7 +133,10 @@
       </Select>
     </Field>
     <Field label="Follow-up requirements" class="field-span-2">
-      <TextInput label="Follow-up requirements" bind:value={store.data.anaesthesiaPlan.followUpRequirements} />
+      <TextInput
+        label="Follow-up requirements"
+        bind:value={store.data.anaesthesiaPlan.followUpRequirements}
+      />
     </Field>
   </div>
 </Fieldset>

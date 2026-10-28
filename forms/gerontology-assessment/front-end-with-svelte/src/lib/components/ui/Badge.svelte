@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { cfsScoreLabel, cfsScoreColor } from '#lib/engine/utils.js';
+  import { cfsScoreLabel, cfsScoreColor } from '#lib/engine/utils.js';
 
-	let {
-		grade
-	}: {
-		grade: number;
-	} = $props();
+  let {
+    grade
+  }: {
+    grade: number;
+  } = $props();
 
-	const colorClass = $derived(cfsScoreColor(grade));
-	const label = $derived(cfsScoreLabel(grade));
+  const colorClass = $derived(cfsScoreColor(grade));
+  const label = $derived(cfsScoreLabel(grade));
 </script>
 
 <span class="inline-block rounded-full border px-4 py-1.5 text-sm font-bold {colorClass}">
-	{label}
+  {label}
 </span>

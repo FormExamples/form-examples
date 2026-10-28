@@ -1,5 +1,5 @@
 import { redirect } from '@sveltejs/kit';
 
 export function GET() {
-	redirect(307, '/public-health-waiting-list-card/');
+  redirect(307, '/public-health-waiting-list-card/');
 }

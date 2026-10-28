@@ -9,11 +9,18 @@
 </script>
 
 <Fieldset legend="Step 8 \u2014 Lifestyle factors">
-  <p class="hint">Lifestyle factors provide additional context for clinical decision-making beyond the core risk score.</p>
+  <p class="hint">
+    Lifestyle factors provide additional context for clinical decision-making beyond the core risk
+    score.
+  </p>
 
   <div class="field-grid">
     <Field label="Physical activity level" inputId="step-8-physicalActivity">
-      <Select id="step-8-physicalActivity" label="Physical activity level" bind:value={l.physicalActivity}>
+      <Select
+        id="step-8-physicalActivity"
+        label="Physical activity level"
+        bind:value={l.physicalActivity}
+      >
         <option value="">\u2014 Select \u2014</option>
         <option value="sedentary">Sedentary</option>
         <option value="light">Light</option>
@@ -22,7 +29,11 @@
       </Select>
     </Field>
     <Field label="Alcohol consumption" inputId="step-8-alcoholConsumption">
-      <Select id="step-8-alcoholConsumption" label="Alcohol consumption" bind:value={l.alcoholConsumption}>
+      <Select
+        id="step-8-alcoholConsumption"
+        label="Alcohol consumption"
+        bind:value={l.alcoholConsumption}
+      >
         <option value="">\u2014 Select \u2014</option>
         <option value="none">None</option>
         <option value="moderate">Moderate</option>
@@ -47,14 +58,7 @@
       </Select>
     </Field>
     <Field label="BMI (if known)" inputId="step-8-bmi">
-      <NumberInput
-        id="step-8-bmi"
-        label="BMI"
-        step="0.1"
-        min={10}
-        max={80}
-        bind:value={l.bmi}
-      />
+      <NumberInput id="step-8-bmi" label="BMI" step="0.1" min={10} max={80} bind:value={l.bmi} />
     </Field>
     <Field label="Waist circumference (cm)" inputId="step-8-waistCircumferenceCm">
       <NumberInput

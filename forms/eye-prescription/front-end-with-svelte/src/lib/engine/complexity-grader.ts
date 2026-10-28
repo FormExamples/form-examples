@@ -21,13 +21,15 @@ export function computeComplexity(i: ComplexityInputs): Exclude<Complexity, ''> 
   if (
     isHighBand(i.rightEyeSphereClass, i.rightEyeCylinderClass) ||
     isHighBand(i.leftEyeSphereClass, i.leftEyeCylinderClass)
-  ) return 'complex';
+  )
+    return 'complex';
   if (i.prismPresent) return 'complex';
-  if (i.anisometropia !== null && i.anisometropia > 2.00) return 'complex';
+  if (i.anisometropia !== null && i.anisometropia > 2.0) return 'complex';
   if (i.presbyopiaClass !== 'none' && i.presbyopiaClass !== '') return 'moderate';
   if (
     isModerateBand(i.rightEyeSphereClass, i.rightEyeCylinderClass) ||
     isModerateBand(i.leftEyeSphereClass, i.leftEyeCylinderClass)
-  ) return 'moderate';
+  )
+    return 'moderate';
   return 'simple';
 }

@@ -10,15 +10,15 @@
   const recipientOptions = [
     { value: 'donor', label: 'Send to the donor' },
     { value: 'attorney', label: 'Send to one of the attorneys' },
-    { value: 'other', label: 'Send to someone else (e.g. solicitor)' },
+    { value: 'other', label: 'Send to someone else (e.g. solicitor)' }
   ];
 </script>
 
 <section>
   <h2 class="text-xl font-semibold mb-2">Step 13 &mdash; Who receives the LPA (LP1F section 13)</h2>
   <p class="text-sm text-base-content/70 mb-3">
-    Choose who the OPG should send the registered LPA to, and how they would like to be
-    contacted about the application.
+    Choose who the OPG should send the registered LPA to, and how they would like to be contacted
+    about the application.
   </p>
 
   <RadioGroup

@@ -1,5 +1,8 @@
 import { browser } from '$app/env';
-import type { ChecklistSummaryResult, HospitalDailyMonitoringChecklist } from '#lib/engine/types.js';
+import type {
+  ChecklistSummaryResult,
+  HospitalDailyMonitoringChecklist
+} from '#lib/engine/types.js';
 import { createEmptyAssessment } from '#lib/engine/factory.js';
 import { summariseChecklist } from '#lib/engine/summary.js';
 import { TOTAL_STEPS } from '#lib/config/steps.js';
@@ -40,9 +43,9 @@ class AssessmentStore {
   result = $derived<ChecklistSummaryResult>(summariseChecklist(this.data));
 
   /** Crude completeness measure for the Lily Progress bar (0-100). */
-  percentComplete = $derived(TOTAL_ITEMS === 0
-    ? 0
-    : Math.round(this.result.answeredCount / TOTAL_ITEMS * 100));
+  percentComplete = $derived(
+    TOTAL_ITEMS === 0 ? 0 : Math.round((this.result.answeredCount / TOTAL_ITEMS) * 100)
+  );
 
   /**
    * True once a saved draft was found for the current id/store on
@@ -102,15 +105,15 @@ class AssessmentStore {
     }
     deepAssign(
       this.data as unknown as Record<string, unknown>,
-      (draft ?? seed ?? createDefaultAssessment()) as unknown as Record<string, unknown>,
+      (draft ?? seed ?? createDefaultAssessment()) as unknown as Record<string, unknown>
     );
   }
 
   reset() {
-  	this.hadDraftAtLoad = false;
+    this.hadDraftAtLoad = false;
     deepAssign(
       this.data as unknown as Record<string, unknown>,
-      createDefaultAssessment() as unknown as Record<string, unknown>,
+      createDefaultAssessment() as unknown as Record<string, unknown>
     );
     this.currentStep = 1;
     if (browser) {

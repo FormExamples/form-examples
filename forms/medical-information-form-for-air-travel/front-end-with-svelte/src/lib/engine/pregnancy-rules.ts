@@ -18,7 +18,7 @@ const RULES: PregnancyRule[] = [
     fires: (d) =>
       d.pregnancy.isPregnant === 'yes' &&
       d.pregnancy.pregnancyType === 'singleton' &&
-      (d.pregnancy.gestationWeeks ?? 0) > 36,
+      (d.pregnancy.gestationWeeks ?? 0) > 36
   },
   {
     id: 'R-PR-02',
@@ -27,7 +27,7 @@ const RULES: PregnancyRule[] = [
     fires: (d) =>
       d.pregnancy.isPregnant === 'yes' &&
       (d.pregnancy.pregnancyType === 'twins' || d.pregnancy.pregnancyType === 'multiple') &&
-      (d.pregnancy.gestationWeeks ?? 0) > 32,
+      (d.pregnancy.gestationWeeks ?? 0) > 32
   },
   {
     id: 'R-PR-03',
@@ -38,7 +38,7 @@ const RULES: PregnancyRule[] = [
       if (d.pregnancy.pregnancyType !== 'singleton') return false;
       const w = d.pregnancy.gestationWeeks ?? 0;
       return w >= 28 && w <= 36;
-    },
+    }
   },
   {
     id: 'R-PR-04',
@@ -50,15 +50,15 @@ const RULES: PregnancyRule[] = [
         return false;
       const w = d.pregnancy.gestationWeeks ?? 0;
       return w >= 24 && w <= 32;
-    },
+    }
   },
   {
     id: 'R-PR-05',
     band: 'requires-review',
     description: 'Pregnancy complications declared',
     fires: (d) =>
-      d.pregnancy.isPregnant === 'yes' && d.pregnancy.pregnancyComplications.trim().length > 0,
-  },
+      d.pregnancy.isPregnant === 'yes' && d.pregnancy.pregnancyComplications.trim().length > 0
+  }
 ];
 
 export function applyPregnancyRules(data: MedifAssessment): FiredRule[] {
@@ -69,7 +69,7 @@ export function applyPregnancyRules(data: MedifAssessment): FiredRule[] {
         ruleId: r.id,
         category: 'pregnancy',
         band: r.band,
-        description: r.description,
+        description: r.description
       });
     }
   }

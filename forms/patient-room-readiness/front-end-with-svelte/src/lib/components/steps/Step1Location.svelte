@@ -2,7 +2,7 @@
   import { store } from '#lib/stores/checklist.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { TextInput } from "@lilydesignsystem/svelte-headless";
+  import { TextInput } from '@lilydesignsystem/svelte-headless';
 </script>
 
 <Fieldset legend="Step 1 — Location">
@@ -43,6 +43,8 @@
     gap: 1rem;
   }
   @media (max-width: 640px) {
-    .field-grid { grid-template-columns: 1fr; }
+    .field-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

@@ -6,46 +6,46 @@ import type { SleepStudyRequest } from './types';
  * fields, and `false` for boolean symptom / risk fields.
  */
 export function createDefaultRequest(): SleepStudyRequest {
-	return {
-		clinician: {
-			clinicianName: '',
-			clinicianRole: '',
-			registrationBody: '',
-			registrationNumber: '',
-			requesterContact: '',
-			supervisingConsultant: '',
-			siteName: '',
-			referralDate: ''
-		},
-		patient: {
-			firstName: '',
-			lastName: '',
-			dateOfBirth: '',
-			nhsNumber: '',
-			bodyMassIndex: null,
-			interpreterRequired: false
-		},
-		request: {
-			studyType: '',
-			primaryIndication: '',
-			clinicalQuestion: '',
-			relevantHistory: ''
-		},
-		scores: {
-			epworthScore: null,
-			stopBangScore: null,
-			neckCircumferenceCm: null
-		},
-		symptoms: {
-			witnessedApnoeas: false,
-			occupationalDriver: false,
-			cardiovascularDisease: false
-		},
-		triage: {
-			urgency: '',
-			requestedByDate: '',
-			setting: '',
-			notes: ''
-		}
-	};
+  return {
+    clinician: {
+      clinicianName: '',
+      clinicianRole: '',
+      registrationBody: '',
+      registrationNumber: '',
+      requesterContact: '',
+      supervisingConsultant: '',
+      siteName: '',
+      referralDate: ''
+    },
+    patient: {
+      firstName: '',
+      lastName: '',
+      dateOfBirth: '',
+      nhsNumber: '',
+      bodyMassIndex: null,
+      interpreterRequired: false
+    },
+    request: {
+      studyType: '',
+      primaryIndication: '',
+      clinicalQuestion: '',
+      relevantHistory: ''
+    },
+    scores: {
+      epworthScore: null,
+      stopBangScore: null,
+      neckCircumferenceCm: null
+    },
+    symptoms: {
+      witnessedApnoeas: false,
+      occupationalDriver: false,
+      cardiovascularDisease: false
+    },
+    triage: {
+      urgency: '',
+      requestedByDate: '',
+      setting: '',
+      notes: ''
+    }
+  };
 }

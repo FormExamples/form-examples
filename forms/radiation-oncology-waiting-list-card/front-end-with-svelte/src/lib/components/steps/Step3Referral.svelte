@@ -47,8 +47,7 @@
       id="referral-reason"
       class="text-area-input"
       rows="3"
-      bind:value={store.data.referral.reasonForReferral}
-    ></textarea>
+      bind:value={store.data.referral.reasonForReferral}></textarea>
   </div>
 
   <div class="field">
@@ -57,8 +56,7 @@
       id="referral-presenting-condition"
       class="text-area-input"
       rows="3"
-      bind:value={store.data.referral.presentingCondition}
-    ></textarea>
+      bind:value={store.data.referral.presentingCondition}></textarea>
   </div>
 
   <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">

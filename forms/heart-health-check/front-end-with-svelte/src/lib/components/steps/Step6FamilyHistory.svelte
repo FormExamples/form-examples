@@ -3,7 +3,7 @@
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
   import Select from '#lib/components/ui/Select.svelte';
-  import { RadioGroup } from "@lilydesignsystem/svelte-headless";
+  import { RadioGroup } from '@lilydesignsystem/svelte-headless';
 
   const d = assessment.data.familyHistory;
 </script>
@@ -24,7 +24,11 @@
 
   {#if d.familyCVDUnder60 === 'yes'}
     <Field label="Relationship" inputId="step-6-familyCVDRelationship">
-      <Select id="step-6-familyCVDRelationship" label="Relationship" bind:value={d.familyCVDRelationship}>
+      <Select
+        id="step-6-familyCVDRelationship"
+        label="Relationship"
+        bind:value={d.familyCVDRelationship}
+      >
         <option value="">\u2014 Select \u2014</option>
         <option value="parent">Parent</option>
         <option value="sibling">Sibling</option>
@@ -37,10 +41,20 @@
   <Field label="Family history of diabetes?">
     <RadioGroup label="Family history of diabetes?">
       <label class="radio-input">
-        <input type="radio" name="familyDiabetesHistory" value="yes" bind:group={d.familyDiabetesHistory} /> Yes
+        <input
+          type="radio"
+          name="familyDiabetesHistory"
+          value="yes"
+          bind:group={d.familyDiabetesHistory}
+        /> Yes
       </label>
       <label class="radio-input">
-        <input type="radio" name="familyDiabetesHistory" value="no" bind:group={d.familyDiabetesHistory} /> No
+        <input
+          type="radio"
+          name="familyDiabetesHistory"
+          value="no"
+          bind:group={d.familyDiabetesHistory}
+        /> No
       </label>
     </RadioGroup>
   </Field>

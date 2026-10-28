@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { completenessLabel, completenessColor } from '#lib/engine/utils.js';
+  import { completenessLabel, completenessColor } from '#lib/engine/utils.js';
 
-	let {
-		score
-	}: {
-		score: number;
-	} = $props();
+  let {
+    score
+  }: {
+    score: number;
+  } = $props();
 
-	const colorClass = $derived(completenessColor(score));
-	const label = $derived(completenessLabel(score));
+  const colorClass = $derived(completenessColor(score));
+  const label = $derived(completenessLabel(score));
 </script>
 
 <span class="inline-block rounded-full border px-4 py-1.5 text-sm font-bold {colorClass}">
-	{label}
+  {label}
 </span>

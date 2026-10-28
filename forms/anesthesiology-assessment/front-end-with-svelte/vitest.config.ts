@@ -3,14 +3,14 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 import path from 'path';
 
 export default defineConfig({
-	plugins: [svelte({ compilerOptions: { runes: true } })],
-	resolve: {
-		alias: {
-			$lib: path.resolve(__dirname, 'src/lib'),
-			'$app/env': path.resolve(__dirname, 'src/test/app-environment-stub.ts')
-		}
-	},
-	test: {
-		include: ['src/**/*.test.ts']
-	}
+  plugins: [svelte({ compilerOptions: { runes: true } })],
+  resolve: {
+    alias: {
+      $lib: path.resolve(__dirname, 'src/lib'),
+      '$app/env': path.resolve(__dirname, 'src/test/app-environment-stub.ts')
+    }
+  },
+  test: {
+    include: ['src/**/*.test.ts']
+  }
 });

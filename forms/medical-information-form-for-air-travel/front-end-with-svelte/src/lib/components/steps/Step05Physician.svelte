@@ -7,7 +7,11 @@
 <section>
   <h2 class="text-xl font-semibold mb-4">Step 5 — Attending physician</h2>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <TextField id="physicianName" label="Physician name" bind:value={store.data.physician.physicianName} />
+    <TextField
+      id="physicianName"
+      label="Physician name"
+      bind:value={store.data.physician.physicianName}
+    />
     <TextField label="Specialty" bind:value={store.data.physician.specialty} />
     <SelectField
       label="Registration body"
@@ -16,7 +20,7 @@
         { value: 'GMC', label: 'GMC' },
         { value: 'NMC', label: 'NMC' },
         { value: 'HCPC', label: 'HCPC' },
-        { value: 'other', label: 'Other' },
+        { value: 'other', label: 'Other' }
       ]}
     />
     <TextField label="Registration number" bind:value={store.data.physician.registrationNumber} />

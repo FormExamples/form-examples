@@ -1,15 +1,15 @@
 /** Calculate age from date of birth string. */
 export function calculateAge(dob: string): number | null {
-	if (!dob) return null;
-	const birth = new Date(dob);
-	if (isNaN(birth.getTime())) return null;
-	const today = new Date();
-	let age = today.getFullYear() - birth.getFullYear();
-	const m = today.getMonth() - birth.getMonth();
-	if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) {
-		age--;
-	}
-	return age;
+  if (!dob) return null;
+  const birth = new Date(dob);
+  if (isNaN(birth.getTime())) return null;
+  const today = new Date();
+  let age = today.getFullYear() - birth.getFullYear();
+  const m = today.getMonth() - birth.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) {
+    age--;
+  }
+  return age;
 }
 
 /**
@@ -20,21 +20,21 @@ export function calculateAge(dob: string): number | null {
  *   31-40 = Severe symptom burden
  */
 export function mcasCategory(score: number): string {
-	if (score <= 10) return 'Minimal';
-	if (score <= 20) return 'Mild';
-	if (score <= 30) return 'Moderate';
-	return 'Severe';
+  if (score <= 10) return 'Minimal';
+  if (score <= 20) return 'Mild';
+  if (score <= 30) return 'Moderate';
+  return 'Severe';
 }
 
 /** MCAS score label for display. */
 export function mcasScoreLabel(score: number): string {
-	return `MCAS ${score}/40 - ${mcasCategory(score)}`;
+  return `MCAS ${score}/40 - ${mcasCategory(score)}`;
 }
 
 /** MCAS score colour class. */
 export function mcasScoreColor(score: number): string {
-	if (score <= 10) return 'bg-success text-success-content border-success';
-	if (score <= 20) return 'bg-info text-info-content border-info';
-	if (score <= 30) return 'bg-warning text-warning-content border-warning';
-	return 'bg-error text-error-content border-error';
+  if (score <= 10) return 'bg-success text-success-content border-success';
+  if (score <= 20) return 'bg-info text-info-content border-info';
+  if (score <= 30) return 'bg-warning text-warning-content border-warning';
+  return 'bg-error text-error-content border-error';
 }

@@ -11,10 +11,9 @@ export function singleAttorneyNoReplacement(lpa: Lpa): AdditionalFlag | null {
     priority: 'moderate',
     citation: 'LP12 Guide part A4',
     fieldPath: 'replacementAttorneys',
-    message:
-      'Only one attorney is appointed and no replacement attorney is listed.',
+    message: 'Only one attorney is appointed and no replacement attorney is listed.',
     remediation:
-      'The LPA will become useless if the single attorney loses capacity or is unable to act. Strongly recommended: add a replacement attorney in section 4.',
+      'The LPA will become useless if the single attorney loses capacity or is unable to act. Strongly recommended: add a replacement attorney in section 4.'
   };
 }
 
@@ -27,7 +26,7 @@ export function onlyWhenNoCapacitySelected(lpa: Lpa): AdditionalFlag | null {
     fieldPath: 'whenAttorneysCanAct',
     message: 'Attorneys can act only when the donor has no capacity.',
     remediation:
-      'This option restricts the LPA to incapacity only and means attorneys cannot help with finances while you still have capacity. Banks and other organisations may also require evidence of incapacity each time. Consider "as soon as the LPA is registered".',
+      'This option restricts the LPA to incapacity only and means attorneys cannot help with finances while you still have capacity. Banks and other organisations may also require evidence of incapacity each time. Consider "as soon as the LPA is registered".'
   };
 }
 
@@ -40,7 +39,7 @@ export function noPeopleToNotify(lpa: Lpa): AdditionalFlag | null {
     fieldPath: 'peopleToNotify',
     message: 'No people-to-notify are listed.',
     remediation:
-      'People-to-notify give an external safeguarding check. Strongly recommended: list at least one trusted person who is not an attorney.',
+      'People-to-notify give an external safeguarding check. Strongly recommended: list at least one trusted person who is not an attorney.'
   };
 }
 
@@ -53,7 +52,7 @@ export function instructionsLong(lpa: Lpa): AdditionalFlag | null {
     fieldPath: 'instructionsText',
     message: 'Instructions are longer than 500 characters.',
     remediation:
-      'Long or complex instructions can be legally incorrect and may cause the OPG to reject the LPA. Consider redrafting with a solicitor, or moving content into "preferences" (which are non-binding guidance).',
+      'Long or complex instructions can be legally incorrect and may cause the OPG to reject the LPA. Consider redrafting with a solicitor, or moving content into "preferences" (which are non-binding guidance).'
   };
 }
 
@@ -66,13 +65,13 @@ export function preferencesEmpty(lpa: Lpa): AdditionalFlag | null {
     fieldPath: 'preferencesText',
     message: 'Both preferences and instructions are empty.',
     remediation:
-      'Optional. The donor may want to leave non-binding preferences (e.g. "consult my children before selling the family home").',
+      'Optional. The donor may want to leave non-binding preferences (e.g. "consult my children before selling the family home").'
   };
 }
 
 export function attorneyEmailMissing(lpa: Lpa): AdditionalFlag | null {
   const anyMissing = lpa.attorneys.some(
-    (a) => !a.person.email.trim() && !a.person.isTrustCorporation,
+    (a) => !a.person.email.trim() && !a.person.isTrustCorporation
   );
   if (!anyMissing) return null;
   return {
@@ -82,7 +81,7 @@ export function attorneyEmailMissing(lpa: Lpa): AdditionalFlag | null {
     fieldPath: 'attorneys[*].person.email',
     message: 'One or more attorneys have no email address.',
     remediation:
-      'Optional. OPG can deal with attorneys by post; email speeds up later correspondence.',
+      'Optional. OPG can deal with attorneys by post; email speeds up later correspondence.'
   };
 }
 
@@ -96,7 +95,7 @@ export function emergencyContactMissing(lpa: Lpa): AdditionalFlag | null {
     fieldPath: 'registrationRecipient',
     message: 'No preferred contact method selected.',
     remediation:
-      'Optional. Set a contact preference so OPG knows how to reach the donor or applicant.',
+      'Optional. Set a contact preference so OPG knows how to reach the donor or applicant.'
   };
 }
 
@@ -111,16 +110,14 @@ export function reducedFeeWithoutLPA120A(lpa: Lpa): AdditionalFlag | null {
     fieldPath: 'registrationApplication.hasLpa120aEvidence',
     message: 'Reduced fee requested without LPA120A evidence.',
     remediation:
-      'If you are asking for a reduced or waived fee, you must complete form LPA120A and attach evidence (bank statement, benefit letter, payslip). Without this the OPG will charge the full fee or return the form.',
+      'If you are asking for a reduced or waived fee, you must complete form LPA120A and attach evidence (bank statement, benefit letter, payslip). Without this the OPG will charge the full fee or return the form.'
   };
 }
 
 export function overFourAttorneysFlag(lpa: Lpa): AdditionalFlag | null {
   // Counterpart of the blocker; reported as a high flag during draft.
   if (lpa.attorneys.length <= 4) return null;
-  const hasSheet1 = lpa.continuationSheets.some(
-    (s) => s.kind === '1_additional_people',
-  );
+  const hasSheet1 = lpa.continuationSheets.some((s) => s.kind === '1_additional_people');
   if (hasSheet1) return null;
   return {
     ruleId: 'OverFourAttorneysNoContinuation',
@@ -129,7 +126,7 @@ export function overFourAttorneysFlag(lpa: Lpa): AdditionalFlag | null {
     fieldPath: 'continuationSheets[kind=1_additional_people]',
     message: 'More than 4 attorneys but no LPC sheet 1 attached.',
     remediation:
-      'LP1F only has space for 4 attorneys. Attach LPC continuation sheet 1 for the rest.',
+      'LP1F only has space for 4 attorneys. Attach LPC continuation sheet 1 for the rest.'
   };
 }
 
@@ -142,7 +139,7 @@ export const FLAG_RULES: ((lpa: Lpa) => AdditionalFlag | null)[] = [
   instructionsLong,
   preferencesEmpty,
   attorneyEmailMissing,
-  emergencyContactMissing,
+  emergencyContactMissing
 ];
 
 export function applyFlagRules(lpa: Lpa): AdditionalFlag[] {

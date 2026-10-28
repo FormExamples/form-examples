@@ -1,11 +1,6 @@
 import type { FitnessBand } from './types.js';
 
-const BAND_ORDER: FitnessBand[] = [
-  'fit',
-  'fit-with-conditions',
-  'requires-review',
-  'unfit-to-fly',
-];
+const BAND_ORDER: FitnessBand[] = ['fit', 'fit-with-conditions', 'requires-review', 'unfit-to-fly'];
 
 export function maxBand(a: FitnessBand, b: FitnessBand): FitnessBand {
   return BAND_ORDER.indexOf(a) >= BAND_ORDER.indexOf(b) ? a : b;

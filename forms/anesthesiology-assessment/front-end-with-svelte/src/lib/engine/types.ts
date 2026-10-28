@@ -37,207 +37,207 @@ export type PostOpDestination = 'ward' | 'hdu' | 'icu' | '';
 export type RiskLevel = 'low' | 'medium' | 'high' | 'critical';
 
 export interface Demographics {
-	firstName: string;
-	lastName: string;
-	dateOfBirth: string;
-	sex: Sex;
-	nhsNumber: string;
-	addressLine1: string;
-	addressLine2: string;
-	city: string;
-	postcode: string;
-	phone: string;
-	email: string;
-	emergencyName: string;
-	emergencyPhone: string;
-	emergencyRelationship: string;
-	gpName: string;
-	gpPractice: string;
-	gpPhone: string;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  sex: Sex;
+  nhsNumber: string;
+  addressLine1: string;
+  addressLine2: string;
+  city: string;
+  postcode: string;
+  phone: string;
+  email: string;
+  emergencyName: string;
+  emergencyPhone: string;
+  emergencyRelationship: string;
+  gpName: string;
+  gpPractice: string;
+  gpPhone: string;
 }
 
 export interface PlannedSurgery {
-	procedureName: string;
-	surgeonName: string;
-	surgeryDate: string;
-	surgeryGrade: SurgeryGrade;
-	proposedAnaesthesia: AnaesthesiaType;
+  procedureName: string;
+  surgeonName: string;
+  surgeryDate: string;
+  surgeryGrade: SurgeryGrade;
+  proposedAnaesthesia: AnaesthesiaType;
 }
 
 export interface MedicalHistory {
-	// Cardiovascular
-	hypertension: YesNo;
-	ischaemicHeartDisease: YesNo;
-	heartFailure: YesNo;
-	valvularDisease: YesNo;
-	arrhythmia: YesNo;
-	peripheralVascularDisease: YesNo;
-	dvtPe: YesNo;
-	// Respiratory
-	asthma: YesNo;
-	copd: YesNo;
-	sleepApnea: YesNo;
-	recentUrti: YesNo;
-	// Neurological
-	epilepsy: YesNo;
-	strokeTia: YesNo;
-	neuromuscularDisease: YesNo;
-	// Endocrine
-	diabetesType1: YesNo;
-	diabetesType2: YesNo;
-	thyroidDisease: YesNo;
-	adrenalInsufficiency: YesNo;
-	// Renal
-	chronicKidneyDisease: YesNo;
-	dialysis: YesNo;
-	// Hepatic
-	liverDisease: YesNo;
-	jaundice: YesNo;
-	cirrhosis: YesNo;
-	// Haematologic
-	anaemia: YesNo;
-	bleedingDisorder: YesNo;
-	clottingDisorder: YesNo;
-	// Gastrointestinal
-	gord: YesNo;
-	pepticUlcer: YesNo;
-	// Musculoskeletal
-	rheumatoidArthritis: YesNo;
-	limitedMobility: YesNo;
-	// Psychiatric
-	anxiety: YesNo;
-	depression: YesNo;
-	otherPsychiatric: YesNo;
-	otherDetails: string;
+  // Cardiovascular
+  hypertension: YesNo;
+  ischaemicHeartDisease: YesNo;
+  heartFailure: YesNo;
+  valvularDisease: YesNo;
+  arrhythmia: YesNo;
+  peripheralVascularDisease: YesNo;
+  dvtPe: YesNo;
+  // Respiratory
+  asthma: YesNo;
+  copd: YesNo;
+  sleepApnea: YesNo;
+  recentUrti: YesNo;
+  // Neurological
+  epilepsy: YesNo;
+  strokeTia: YesNo;
+  neuromuscularDisease: YesNo;
+  // Endocrine
+  diabetesType1: YesNo;
+  diabetesType2: YesNo;
+  thyroidDisease: YesNo;
+  adrenalInsufficiency: YesNo;
+  // Renal
+  chronicKidneyDisease: YesNo;
+  dialysis: YesNo;
+  // Hepatic
+  liverDisease: YesNo;
+  jaundice: YesNo;
+  cirrhosis: YesNo;
+  // Haematologic
+  anaemia: YesNo;
+  bleedingDisorder: YesNo;
+  clottingDisorder: YesNo;
+  // Gastrointestinal
+  gord: YesNo;
+  pepticUlcer: YesNo;
+  // Musculoskeletal
+  rheumatoidArthritis: YesNo;
+  limitedMobility: YesNo;
+  // Psychiatric
+  anxiety: YesNo;
+  depression: YesNo;
+  otherPsychiatric: YesNo;
+  otherDetails: string;
 }
 
 export interface Medication {
-	name: string;
-	dose: string;
-	frequency: string;
-	route: MedicationRoute;
+  name: string;
+  dose: string;
+  frequency: string;
+  route: MedicationRoute;
 }
 
 export interface Medications {
-	list: Medication[];
-	onAnticoagulants: YesNo;
-	onAntiplatelets: YesNo;
-	onInsulin: YesNo;
-	onSteroids: YesNo;
-	onMaois: YesNo;
+  list: Medication[];
+  onAnticoagulants: YesNo;
+  onAntiplatelets: YesNo;
+  onInsulin: YesNo;
+  onSteroids: YesNo;
+  onMaois: YesNo;
 }
 
 export interface Allergy {
-	allergen: string;
-	type: AllergyType;
-	reaction: string;
-	severity: AllergySeverity;
+  allergen: string;
+  type: AllergyType;
+  reaction: string;
+  severity: AllergySeverity;
 }
 
 export interface Allergies {
-	list: Allergy[];
-	latexAllergy: YesNo;
+  list: Allergy[];
+  latexAllergy: YesNo;
 }
 
 export interface PreviousOperation {
-	procedureName: string;
-	year: number | null;
-	anaesthesiaType: PrevAnaesthesiaType;
+  procedureName: string;
+  year: number | null;
+  anaesthesiaType: PrevAnaesthesiaType;
 }
 
 export interface PreviousAnaesthesia {
-	operations: PreviousOperation[];
-	difficultIntubation: boolean;
-	ponv: boolean;
-	awareness: boolean;
-	slowRecovery: boolean;
-	allergicReaction: boolean;
-	otherComplication: boolean;
-	otherComplicationDetails: string;
-	malignantHyperthermia: YesNoUnknown;
-	familyAnaestheticComplications: YesNoUnknown;
-	familyAnaestheticDetails: string;
+  operations: PreviousOperation[];
+  difficultIntubation: boolean;
+  ponv: boolean;
+  awareness: boolean;
+  slowRecovery: boolean;
+  allergicReaction: boolean;
+  otherComplication: boolean;
+  otherComplicationDetails: string;
+  malignantHyperthermia: YesNoUnknown;
+  familyAnaestheticComplications: YesNoUnknown;
+  familyAnaestheticDetails: string;
 }
 
 export interface SocialHistory {
-	smoking: SmokingStatus;
-	packYears: number | null;
-	alcoholUnitsPerWeek: number | null;
-	recreationalDrugUse: YesNo;
-	recreationalDrugDetails: string;
-	canClimbTwoFlights: YesNo;
-	exerciseTolerance: ExerciseTolerance;
-	occupation: string;
-	pregnancyStatus: PregnancyStatus;
-	// STOP-BANG subjective items
-	snoresLoudly: YesNo;
-	tiredDuringDay: YesNo;
-	observedApnea: YesNo;
+  smoking: SmokingStatus;
+  packYears: number | null;
+  alcoholUnitsPerWeek: number | null;
+  recreationalDrugUse: YesNo;
+  recreationalDrugDetails: string;
+  canClimbTwoFlights: YesNo;
+  exerciseTolerance: ExerciseTolerance;
+  occupation: string;
+  pregnancyStatus: PregnancyStatus;
+  // STOP-BANG subjective items
+  snoresLoudly: YesNo;
+  tiredDuringDay: YesNo;
+  observedApnea: YesNo;
 }
 
 export interface VitalSigns {
-	systolicBp: number | null;
-	diastolicBp: number | null;
-	heartRate: number | null;
-	respiratoryRate: number | null;
-	spo2: number | null;
-	temperature: number | null;
-	height: number | null;
-	weight: number | null;
-	bmi: number | null;
-	neckCircumference: number | null;
+  systolicBp: number | null;
+  diastolicBp: number | null;
+  heartRate: number | null;
+  respiratoryRate: number | null;
+  spo2: number | null;
+  temperature: number | null;
+  height: number | null;
+  weight: number | null;
+  bmi: number | null;
+  neckCircumference: number | null;
 }
 
 export interface PhysicalExam {
-	mallampatiClass: MallampatiClass;
-	mouthOpening: number | null;
-	thyromentalDistance: number | null;
-	neckMobility: NeckMobility;
-	dentitionIntact: boolean;
-	dentitionDentures: boolean;
-	dentitionLooseTeeth: boolean;
-	dentitionCrowns: boolean;
-	dentitionProminentIncisors: boolean;
-	jawProtrusion: JawProtrusion;
-	heartSounds: HeartSounds;
-	peripheralEdema: PeripheralEdema;
-	jvp: JVP;
-	breathSounds: BreathSounds;
-	accessoryMuscleUse: YesNo;
+  mallampatiClass: MallampatiClass;
+  mouthOpening: number | null;
+  thyromentalDistance: number | null;
+  neckMobility: NeckMobility;
+  dentitionIntact: boolean;
+  dentitionDentures: boolean;
+  dentitionLooseTeeth: boolean;
+  dentitionCrowns: boolean;
+  dentitionProminentIncisors: boolean;
+  jawProtrusion: JawProtrusion;
+  heartSounds: HeartSounds;
+  peripheralEdema: PeripheralEdema;
+  jvp: JVP;
+  breathSounds: BreathSounds;
+  accessoryMuscleUse: YesNo;
 }
 
 export interface InvestigationsAndPlan {
-	fbcStatus: InvestigationStatus;
-	fbcNotes: string;
-	ueStatus: InvestigationStatus;
-	ueNotes: string;
-	lftsStatus: InvestigationStatus;
-	lftsNotes: string;
-	coagStatus: InvestigationStatus;
-	coagNotes: string;
-	hba1cStatus: InvestigationStatus;
-	hba1cNotes: string;
-	ecgStatus: InvestigationStatus;
-	ecgNotes: string;
-	cxrStatus: InvestigationStatus;
-	cxrNotes: string;
-	echoStatus: InvestigationStatus;
-	echoNotes: string;
-	otherInvestigation: string;
-	otherInvestigationStatus: InvestigationStatus;
-	// RCRI clinician confirmations (criteria 2, 3, 4, 6)
-	rcriIschaemicHeartDisease: YesNo;
-	rcriCongestiveHeartFailure: YesNo;
-	rcriCerebrovascularDisease: YesNo;
-	rcriHighCreatinine: YesNo;
-	// ASA classification
-	asaClass: AsaClass;
-	emergencyCase: YesNo;
-	// Anaesthetic plan
-	proposedTechnique: AnaesthesiaType;
-	airwayPlan: AirwayPlan;
-	postOpDestination: PostOpDestination;
-	specialRequirements: string;
+  fbcStatus: InvestigationStatus;
+  fbcNotes: string;
+  ueStatus: InvestigationStatus;
+  ueNotes: string;
+  lftsStatus: InvestigationStatus;
+  lftsNotes: string;
+  coagStatus: InvestigationStatus;
+  coagNotes: string;
+  hba1cStatus: InvestigationStatus;
+  hba1cNotes: string;
+  ecgStatus: InvestigationStatus;
+  ecgNotes: string;
+  cxrStatus: InvestigationStatus;
+  cxrNotes: string;
+  echoStatus: InvestigationStatus;
+  echoNotes: string;
+  otherInvestigation: string;
+  otherInvestigationStatus: InvestigationStatus;
+  // RCRI clinician confirmations (criteria 2, 3, 4, 6)
+  rcriIschaemicHeartDisease: YesNo;
+  rcriCongestiveHeartFailure: YesNo;
+  rcriCerebrovascularDisease: YesNo;
+  rcriHighCreatinine: YesNo;
+  // ASA classification
+  asaClass: AsaClass;
+  emergencyCase: YesNo;
+  // Anaesthetic plan
+  proposedTechnique: AnaesthesiaType;
+  airwayPlan: AirwayPlan;
+  postOpDestination: PostOpDestination;
+  specialRequirements: string;
 }
 
 // ──────────────────────────────────────────────
@@ -245,16 +245,16 @@ export interface InvestigationsAndPlan {
 // ──────────────────────────────────────────────
 
 export interface AssessmentData {
-	demographics: Demographics;
-	plannedSurgery: PlannedSurgery;
-	medicalHistory: MedicalHistory;
-	medications: Medications;
-	allergies: Allergies;
-	previousAnaesthesia: PreviousAnaesthesia;
-	socialHistory: SocialHistory;
-	vitalSigns: VitalSigns;
-	physicalExam: PhysicalExam;
-	investigationsAndPlan: InvestigationsAndPlan;
+  demographics: Demographics;
+  plannedSurgery: PlannedSurgery;
+  medicalHistory: MedicalHistory;
+  medications: Medications;
+  allergies: Allergies;
+  previousAnaesthesia: PreviousAnaesthesia;
+  socialHistory: SocialHistory;
+  vitalSigns: VitalSigns;
+  physicalExam: PhysicalExam;
+  investigationsAndPlan: InvestigationsAndPlan;
 }
 
 // ──────────────────────────────────────────────
@@ -263,61 +263,61 @@ export interface AssessmentData {
 
 /** A single rule that fired during scoring, carrying its own risk band. */
 export interface FiredRule {
-	id: string;
-	category: string;
-	description: string;
-	riskLevel: RiskLevel;
+  id: string;
+  category: string;
+  description: string;
+  riskLevel: RiskLevel;
 }
 
 /** Result of the ASA Physical Status sub-grader. */
 export interface AsaResult {
-	class: AsaClass;
-	emergency: boolean;
-	riskLevel: RiskLevel;
-	firedRules: FiredRule[];
+  class: AsaClass;
+  emergency: boolean;
+  riskLevel: RiskLevel;
+  firedRules: FiredRule[];
 }
 
 /** Result of the Mallampati / airway-difficulty sub-grader. */
 export interface AirwayResult {
-	mallampatiClass: MallampatiClass;
-	mediumFactors: number;
-	riskLevel: RiskLevel;
-	firedRules: FiredRule[];
+  mallampatiClass: MallampatiClass;
+  mediumFactors: number;
+  riskLevel: RiskLevel;
+  firedRules: FiredRule[];
 }
 
 /** Result of the Revised Cardiac Risk Index (Lee) sub-grader. */
 export interface RcriResult {
-	score: number;
-	macePercent: number;
-	riskLevel: RiskLevel;
-	firedRules: FiredRule[];
+  score: number;
+  macePercent: number;
+  riskLevel: RiskLevel;
+  firedRules: FiredRule[];
 }
 
 /** Result of the STOP-BANG OSA screening sub-grader. */
 export interface StopbangResult {
-	score: number;
-	riskLevel: RiskLevel;
-	firedRules: FiredRule[];
+  score: number;
+  riskLevel: RiskLevel;
+  firedRules: FiredRule[];
 }
 
 /** A safety-critical clinician-facing flag, independent of the four scores. */
 export interface AdditionalFlag {
-	id: string;
-	category: string;
-	message: string;
-	priority: 'urgent' | 'high' | 'medium' | 'low';
+  id: string;
+  category: string;
+  message: string;
+  priority: 'urgent' | 'high' | 'medium' | 'low';
 }
 
 /** Composite grading output consumed by the wizard, report, and dashboard. */
 export interface GradingResult {
-	asa: AsaResult;
-	airway: AirwayResult;
-	rcri: RcriResult;
-	stopbang: StopbangResult;
-	overallRisk: RiskLevel;
-	firedRules: FiredRule[];
-	additionalFlags: AdditionalFlag[];
-	timestamp: string;
+  asa: AsaResult;
+  airway: AirwayResult;
+  rcri: RcriResult;
+  stopbang: StopbangResult;
+  overallRisk: RiskLevel;
+  firedRules: FiredRule[];
+  additionalFlags: AdditionalFlag[];
+  timestamp: string;
 }
 
 // ──────────────────────────────────────────────
@@ -325,8 +325,8 @@ export interface GradingResult {
 // ──────────────────────────────────────────────
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
-	section: keyof AssessmentData;
+  number: number;
+  title: string;
+  shortTitle: string;
+  section: keyof AssessmentData;
 }

@@ -1,39 +1,41 @@
 <script lang="ts">
-	import { assessment } from '#lib/stores/assessment.svelte.js';
-	import { aldreteScore, ALDRETE_OPTIONS } from '#lib/engine/pacu-rules.js';
-	import { scoreColor } from '#lib/engine/utils.js';
-	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import Field from '#lib/components/ui/Field.svelte';
-	import { RadioGroup } from "@lilydesignsystem/svelte-headless";
+  import { assessment } from '#lib/stores/assessment.svelte.js';
+  import { aldreteScore, ALDRETE_OPTIONS } from '#lib/engine/pacu-rules.js';
+  import { scoreColor } from '#lib/engine/utils.js';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import Field from '#lib/components/ui/Field.svelte';
+  import { RadioGroup } from '@lilydesignsystem/svelte-headless';
 
-	const s = assessment.data.oxygenSaturation;
-	const options = ALDRETE_OPTIONS.oxygenSaturation;
-	const score = $derived(aldreteScore('oxygenSaturation', s.oxygenSaturation));
+  const s = assessment.data.oxygenSaturation;
+  const options = ALDRETE_OPTIONS.oxygenSaturation;
+  const score = $derived(aldreteScore('oxygenSaturation', s.oxygenSaturation));
 </script>
 
 <Fieldset legend="Step 7 of 10 — Aldrete — oxygen saturation">
-	<p class="hint">SpO2 and supplemental-oxygen need. This parameter gates discharge-readiness: it must score 2.</p>
+  <p class="hint">
+    SpO2 and supplemental-oxygen need. This parameter gates discharge-readiness: it must score 2.
+  </p>
 
-	<Field label="Aldrete — oxygen saturation">
-		<RadioGroup label="Aldrete — oxygen saturation">
-			{#each options as opt (opt.value)}
-				<label>
-					<input
-						type="radio"
-						class="radio-input"
-						name="oxygenSaturation-oxygenSaturation"
-						value={opt.value}
-						bind:group={s.oxygenSaturation}
-					/>
-					{opt.label}
-				</label>
-			{/each}
-		</RadioGroup>
-	</Field>
+  <Field label="Aldrete — oxygen saturation">
+    <RadioGroup label="Aldrete — oxygen saturation">
+      {#each options as opt (opt.value)}
+        <label>
+          <input
+            type="radio"
+            class="radio-input"
+            name="oxygenSaturation-oxygenSaturation"
+            value={opt.value}
+            bind:group={s.oxygenSaturation}
+          />
+          {opt.label}
+        </label>
+      {/each}
+    </RadioGroup>
+  </Field>
 
-	<Field label="Parameter sub-score">
-		<span class="inline-block rounded-full border px-3 py-1 text-sm font-bold {scoreColor(score)}">
-			{score} of 2
-		</span>
-	</Field>
+  <Field label="Parameter sub-score">
+    <span class="inline-block rounded-full border px-3 py-1 text-sm font-bold {scoreColor(score)}">
+      {score} of 2
+    </span>
+  </Field>
 </Fieldset>

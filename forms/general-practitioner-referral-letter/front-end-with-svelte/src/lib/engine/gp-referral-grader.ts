@@ -27,24 +27,24 @@ import { detectFlaggedIssues } from './flagged-issues';
  * FiredRule per applicable mandatory field with its satisfied state.
  */
 export function evaluateRules(referral: AssessmentData): FiredRule[] {
-	const fired: FiredRule[] = [];
-	for (const field of mandatoryFor(referral)) {
-		let satisfied = false;
-		try {
-			satisfied = field.present(referral) === true;
-		} catch (e) {
-			// Rule evaluation failed — log for debugging but continue grading.
-			console.warn(`Referral rule ${field.id} evaluation failed:`, e);
-		}
-		fired.push({
-			id: field.id,
-			rule: field.rule,
-			satisfied,
-			category: field.category,
-			description: field.description
-		});
-	}
-	return fired;
+  const fired: FiredRule[] = [];
+  for (const field of mandatoryFor(referral)) {
+    let satisfied = false;
+    try {
+      satisfied = field.present(referral) === true;
+    } catch (e) {
+      // Rule evaluation failed — log for debugging but continue grading.
+      console.warn(`Referral rule ${field.id} evaluation failed:`, e);
+    }
+    fired.push({
+      id: field.id,
+      rule: field.rule,
+      satisfied,
+      category: field.category,
+      description: field.description
+    });
+  }
+  return fired;
 }
 
 /**
@@ -52,25 +52,25 @@ export function evaluateRules(referral: AssessmentData): FiredRule[] {
  * selected urgency.
  */
 export function completeness(referral: AssessmentData): {
-	presentCount: number;
-	mandatoryCount: number;
-	completenessPercent: number;
-	allPresent: boolean;
+  presentCount: number;
+  mandatoryCount: number;
+  completenessPercent: number;
+  allPresent: boolean;
 } {
-	const mandatory = mandatoryFor(referral);
-	let present = 0;
-	for (const field of mandatory) {
-		if (field.present(referral) === true) present++;
-	}
-	const mandatoryCount = mandatory.length;
-	const completenessPercent =
-		mandatoryCount === 0 ? 0 : Math.round((100 * present) / mandatoryCount);
-	return {
-		presentCount: present,
-		mandatoryCount,
-		completenessPercent,
-		allPresent: mandatoryCount > 0 && present === mandatoryCount
-	};
+  const mandatory = mandatoryFor(referral);
+  let present = 0;
+  for (const field of mandatory) {
+    if (field.present(referral) === true) present++;
+  }
+  const mandatoryCount = mandatory.length;
+  const completenessPercent =
+    mandatoryCount === 0 ? 0 : Math.round((100 * present) / mandatoryCount);
+  return {
+    presentCount: present,
+    mandatoryCount,
+    completenessPercent,
+    allPresent: mandatoryCount > 0 && present === mandatoryCount
+  };
 }
 
 /**
@@ -78,7 +78,7 @@ export function completeness(referral: AssessmentData): {
  * to the pathways in index.md; '' when not yet selected.
  */
 export function classifyUrgency(referral: AssessmentData): Urgency {
-	return referral.urgencyInfo.urgency;
+  return referral.urgencyInfo.urgency;
 }
 
 /**
@@ -86,19 +86,19 @@ export function classifyUrgency(referral: AssessmentData): Urgency {
  * supplied referral, plus the independently-detected referral flags.
  */
 export function gradeReferral(referral: AssessmentData): GradingResult {
-	const firedRules = evaluateRules(referral);
-	const c = completeness(referral);
+  const firedRules = evaluateRules(referral);
+  const c = completeness(referral);
 
-	const status: Status = c.allPresent ? 'Complete' : 'Incomplete';
+  const status: Status = c.allPresent ? 'Complete' : 'Incomplete';
 
-	return {
-		status,
-		urgency: classifyUrgency(referral),
-		completenessPercent: c.completenessPercent,
-		presentCount: c.presentCount,
-		mandatoryCount: c.mandatoryCount,
-		firedRules,
-		flaggedIssues: detectFlaggedIssues(referral),
-		timestamp: new Date().toISOString()
-	};
+  return {
+    status,
+    urgency: classifyUrgency(referral),
+    completenessPercent: c.completenessPercent,
+    presentCount: c.presentCount,
+    mandatoryCount: c.mandatoryCount,
+    firedRules,
+    flaggedIssues: detectFlaggedIssues(referral),
+    timestamp: new Date().toISOString()
+  };
 }

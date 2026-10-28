@@ -19,7 +19,9 @@
 </script>
 
 <Fieldset legend="Step 5 — Section 4 — H.R. status check attendance (2 checkpoints)">
-  <p class="hint">Staff attendance and behaviour, for both medical/para-medical and support staff.</p>
+  <p class="hint">
+    Staff attendance and behaviour, for both medical/para-medical and support staff.
+  </p>
 
   {#each groups as group, gi (gi)}
     {#if group.subsection}

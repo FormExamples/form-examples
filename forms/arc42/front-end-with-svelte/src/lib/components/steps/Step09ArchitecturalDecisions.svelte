@@ -16,11 +16,17 @@
       status: '',
       context: '',
       decision: '',
-      consequences: '',
-    })}>
+      consequences: ''
+    })}
+  >
     {#snippet children(adr, _i)}
       <div class="grid grid-cols-2 gap-2 mb-1">
-        <input type="text" placeholder="Title" class="border rounded px-2 py-1" bind:value={adr.title} />
+        <input
+          type="text"
+          placeholder="Title"
+          class="border rounded px-2 py-1"
+          bind:value={adr.title}
+        />
         <select class="border rounded px-2 py-1" bind:value={adr.status}>
           <option value="">Status —</option>
           <option value="draft">Draft</option>
@@ -30,9 +36,21 @@
           <option value="superseded">Superseded</option>
         </select>
       </div>
-      <textarea rows="2" placeholder="Context" class="w-full border rounded px-2 py-1 mb-1" bind:value={adr.context}></textarea>
-      <textarea rows="2" placeholder="Decision" class="w-full border rounded px-2 py-1 mb-1" bind:value={adr.decision}></textarea>
-      <textarea rows="2" placeholder="Consequences" class="w-full border rounded px-2 py-1" bind:value={adr.consequences}></textarea>
+      <textarea
+        rows="2"
+        placeholder="Context"
+        class="w-full border rounded px-2 py-1 mb-1"
+        bind:value={adr.context}></textarea>
+      <textarea
+        rows="2"
+        placeholder="Decision"
+        class="w-full border rounded px-2 py-1 mb-1"
+        bind:value={adr.decision}></textarea>
+      <textarea
+        rows="2"
+        placeholder="Consequences"
+        class="w-full border rounded px-2 py-1"
+        bind:value={adr.consequences}></textarea>
     {/snippet}
   </RepeatList>
 </section>

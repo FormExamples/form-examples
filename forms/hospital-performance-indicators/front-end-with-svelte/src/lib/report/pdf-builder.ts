@@ -9,26 +9,22 @@ import { CATEGORIES, PERFORMANCE_INDICATORS } from '#lib/config/indicators.js';
  */
 export function buildPdfDocument(
   data: HospitalPerformanceIndicators,
-  result: IndicatorsSummaryResult,
+  result: IndicatorsSummaryResult
 ): TDocumentDefinitions {
   const categoryTallyContent: Content = {
     table: {
       widths: ['auto', '*', 'auto'],
       headerRows: 1,
       body: [
-        [
-          { text: 'Perspective', bold: true, colSpan: 2 },
-          {},
-          { text: 'Recorded', bold: true },
-        ],
+        [{ text: 'Perspective', bold: true, colSpan: 2 }, {}, { text: 'Recorded', bold: true }],
         ...result.categoryCounts.map((c) => [
           c.category,
           c.categoryTitle,
-          `${c.reported} / ${c.total}`,
-        ]),
-      ],
+          `${c.reported} / ${c.total}`
+        ])
+      ]
     },
-    margin: [0, 4, 0, 8],
+    margin: [0, 4, 0, 8]
   };
 
   const perIndicatorSections: Content[] = CATEGORIES.flatMap((category) => {
@@ -42,7 +38,7 @@ export function buildPdfDocument(
             { text: 'ID', bold: true },
             { text: 'Indicator', bold: true },
             { text: 'Value', bold: true },
-            { text: 'Notes', bold: true },
+            { text: 'Notes', bold: true }
           ],
           ...indicators.map((indicator) => {
             const response = data.items[indicator.id];
@@ -50,17 +46,14 @@ export function buildPdfDocument(
               indicator.id,
               indicator.text,
               response?.value != null ? String(response.value) : '—',
-              response?.notes || '—',
+              response?.notes || '—'
             ];
-          }),
-        ],
+          })
+        ]
       },
-      margin: [0, 2, 0, 8],
+      margin: [0, 2, 0, 8]
     };
-    return [
-      { text: `${category.number}. ${category.title}`, style: 'h3' },
-      table,
-    ];
+    return [{ text: `${category.number}. ${category.title}`, style: 'h3' }, table];
   });
 
   return {
@@ -72,31 +65,34 @@ export function buildPdfDocument(
       {
         text: `Period: ${data.reportingPeriod.periodMonth ?? '—'} / ${
           data.reportingPeriod.periodYear ?? '—'
-        }`,
+        }`
       },
       { text: ' ' },
       { text: 'Summary', style: 'h2' },
       {
-        text: `${result.reportedCount} of ${result.totalCount} indicators recorded. This is a completeness tally, not a scored grading engine.`,
+        text: `${result.reportedCount} of ${result.totalCount} indicators recorded. This is a completeness tally, not a scored grading engine.`
       },
       { text: ' ' },
       { text: 'Recorded by perspective', style: 'h2' },
       categoryTallyContent,
       ...(data.summary.overallNotes
-        ? ([{ text: 'Overall notes', style: 'h2' }, { text: data.summary.overallNotes }] as Content[])
+        ? ([
+            { text: 'Overall notes', style: 'h2' },
+            { text: data.summary.overallNotes }
+          ] as Content[])
         : []),
       ...(data.summary.signedAt
         ? ([{ text: `Signed at: ${data.summary.signedAt}` }] as Content[])
         : []),
       { text: ' ' },
       { text: 'Per-indicator values', style: 'h2' },
-      ...perIndicatorSections,
+      ...perIndicatorSections
     ],
     styles: {
       h1: { fontSize: 18, bold: true, margin: [0, 0, 0, 8] },
       h2: { fontSize: 13, bold: true, margin: [0, 8, 0, 4] },
-      h3: { fontSize: 11, bold: true, margin: [0, 6, 0, 2] },
+      h3: { fontSize: 11, bold: true, margin: [0, 6, 0, 2] }
     },
-    defaultStyle: { fontSize: 8 },
+    defaultStyle: { fontSize: 8 }
   };
 }

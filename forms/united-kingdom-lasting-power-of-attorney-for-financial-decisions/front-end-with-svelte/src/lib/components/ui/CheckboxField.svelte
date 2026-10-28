@@ -2,7 +2,7 @@
   // CheckboxField — Lily Svelte headless contract (checkbox-input).
   let {
     label,
-    checked = $bindable(false),
+    checked = $bindable(false)
   }: {
     label: string;
     checked: boolean;

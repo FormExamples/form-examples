@@ -16,7 +16,10 @@
       case 'ad-hoc':
         return { class: 'bg-error/10 border-error text-error', label: 'AD-HOC' };
       default:
-        return { class: 'bg-base-200 border-base-300 text-base-content/80', label: 'INSUFFICIENT DATA' };
+        return {
+          class: 'bg-base-200 border-base-300 text-base-content/80',
+          label: 'INSUFFICIENT DATA'
+        };
     }
   });
 </script>

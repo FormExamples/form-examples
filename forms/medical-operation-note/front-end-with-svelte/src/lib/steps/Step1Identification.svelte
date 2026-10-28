@@ -2,7 +2,7 @@
   import { store } from '#lib/state.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { TextInput } from "@lilydesignsystem/svelte-headless";
+  import { TextInput } from '@lilydesignsystem/svelte-headless';
   import Select from '#lib/components/ui/Select.svelte';
 </script>
 
@@ -16,7 +16,11 @@
         aria-invalid={store.errors['step-1-hospital'] ? 'true' : undefined}
       />
     </Field>
-    <Field label="Theatre / OR number" inputId="step-1-theatre-number" error={store.errors['step-1-theatre-number']}>
+    <Field
+      label="Theatre / OR number"
+      inputId="step-1-theatre-number"
+      error={store.errors['step-1-theatre-number']}
+    >
       <TextInput
         id="step-1-theatre-number"
         label="Theatre / OR number"

@@ -10,21 +10,33 @@
   <h2 class="text-xl font-semibold mb-4">Step 10 — Pregnancy and obstetric history</h2>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <YesNoField label="Currently pregnant?" bind:value={store.data.pregnancy.isPregnant} />
-    <NumberField label="Gestation weeks" min={0} max={45} bind:value={store.data.pregnancy.gestationWeeks} />
+    <NumberField
+      label="Gestation weeks"
+      min={0}
+      max={45}
+      bind:value={store.data.pregnancy.gestationWeeks}
+    />
     <SelectField
       label="Pregnancy type"
       bind:value={store.data.pregnancy.pregnancyType}
       options={[
         { value: 'singleton', label: 'Singleton' },
         { value: 'twins', label: 'Twins' },
-        { value: 'multiple', label: 'Multiple' },
+        { value: 'multiple', label: 'Multiple' }
       ]}
     />
     <label class="block md:col-span-2">
       <span class="text-sm text-base-content/80">Pregnancy complications</span>
-      <textarea rows="2" class="w-full border rounded px-2 py-1" bind:value={store.data.pregnancy.pregnancyComplications}></textarea>
+      <textarea
+        rows="2"
+        class="w-full border rounded px-2 py-1"
+        bind:value={store.data.pregnancy.pregnancyComplications}></textarea>
     </label>
-    <TextField label="Expected delivery date" type="date" bind:value={store.data.pregnancy.expectedDeliveryDate} />
+    <TextField
+      label="Expected delivery date"
+      type="date"
+      bind:value={store.data.pregnancy.expectedDeliveryDate}
+    />
     <TextField label="Obstetrician contact" bind:value={store.data.pregnancy.obstetricianContact} />
   </div>
 </section>

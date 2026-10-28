@@ -18,31 +18,31 @@ import { worstRisk } from './utils';
  * the composite perioperative risk, the fired-rule audit trail, and flags.
  */
 export function gradeAssessment(d: AssessmentData): GradingResult {
-	const asa = evaluateAsa(d);
-	const airway = evaluateAirway(d);
-	const rcri = evaluateRcri(d);
-	const stopbang = evaluateStopbang(d);
+  const asa = evaluateAsa(d);
+  const airway = evaluateAirway(d);
+  const rcri = evaluateRcri(d);
+  const stopbang = evaluateStopbang(d);
 
-	let overallRisk = worstRisk('low', asa.riskLevel);
-	overallRisk = worstRisk(overallRisk, airway.riskLevel);
-	overallRisk = worstRisk(overallRisk, rcri.riskLevel);
-	overallRisk = worstRisk(overallRisk, stopbang.riskLevel);
+  let overallRisk = worstRisk('low', asa.riskLevel);
+  overallRisk = worstRisk(overallRisk, airway.riskLevel);
+  overallRisk = worstRisk(overallRisk, rcri.riskLevel);
+  overallRisk = worstRisk(overallRisk, stopbang.riskLevel);
 
-	const firedRules: FiredRule[] = [
-		...asa.firedRules,
-		...airway.firedRules,
-		...rcri.firedRules,
-		...stopbang.firedRules
-	];
+  const firedRules: FiredRule[] = [
+    ...asa.firedRules,
+    ...airway.firedRules,
+    ...rcri.firedRules,
+    ...stopbang.firedRules
+  ];
 
-	return {
-		asa,
-		airway,
-		rcri,
-		stopbang,
-		overallRisk,
-		firedRules,
-		additionalFlags: detectAdditionalFlags(d),
-		timestamp: new Date().toISOString()
-	};
+  return {
+    asa,
+    airway,
+    rcri,
+    stopbang,
+    overallRisk,
+    firedRules,
+    additionalFlags: detectAdditionalFlags(d),
+    timestamp: new Date().toISOString()
+  };
 }

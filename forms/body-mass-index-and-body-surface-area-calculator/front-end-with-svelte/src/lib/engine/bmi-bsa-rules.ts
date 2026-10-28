@@ -61,52 +61,52 @@ export const BMI_MAX = 80;
  * bounds are inclusive; the first matching rule wins (list is ascending).
  */
 export const categoryRules: CategoryRule[] = [
-	{
-		id: 'T-WHO-UNDERWEIGHT-01',
-		instrument: 'bmi-category',
-		band: 'underweight',
-		category: 'who-weight-status',
-		description: 'BMI below 18.5 kg/m² — underweight',
-		evaluate: (bmi) => bmi < BMI_NORMAL
-	},
-	{
-		id: 'T-WHO-NORMAL-01',
-		instrument: 'bmi-category',
-		band: 'normal',
-		category: 'who-weight-status',
-		description: 'BMI 18.5-24.9 kg/m² — normal (healthy) weight',
-		evaluate: (bmi) => bmi >= BMI_NORMAL && bmi < BMI_OVERWEIGHT
-	},
-	{
-		id: 'T-WHO-OVERWEIGHT-01',
-		instrument: 'bmi-category',
-		band: 'overweight',
-		category: 'who-weight-status',
-		description: 'BMI 25.0-29.9 kg/m² — overweight (pre-obesity)',
-		evaluate: (bmi) => bmi >= BMI_OVERWEIGHT && bmi < BMI_OBESE_1
-	},
-	{
-		id: 'T-WHO-OBESE-1-01',
-		instrument: 'bmi-category',
-		band: 'obese-class-1',
-		category: 'who-weight-status',
-		description: 'BMI 30.0-34.9 kg/m² — obese class I',
-		evaluate: (bmi) => bmi >= BMI_OBESE_1 && bmi < BMI_OBESE_2
-	},
-	{
-		id: 'T-WHO-OBESE-2-01',
-		instrument: 'bmi-category',
-		band: 'obese-class-2',
-		category: 'who-weight-status',
-		description: 'BMI 35.0-39.9 kg/m² — obese class II',
-		evaluate: (bmi) => bmi >= BMI_OBESE_2 && bmi < BMI_OBESE_3
-	},
-	{
-		id: 'T-WHO-OBESE-3-01',
-		instrument: 'bmi-category',
-		band: 'obese-class-3',
-		category: 'who-weight-status',
-		description: 'BMI 40.0 kg/m² or above — obese class III',
-		evaluate: (bmi) => bmi >= BMI_OBESE_3
-	}
+  {
+    id: 'T-WHO-UNDERWEIGHT-01',
+    instrument: 'bmi-category',
+    band: 'underweight',
+    category: 'who-weight-status',
+    description: 'BMI below 18.5 kg/m² — underweight',
+    evaluate: (bmi) => bmi < BMI_NORMAL
+  },
+  {
+    id: 'T-WHO-NORMAL-01',
+    instrument: 'bmi-category',
+    band: 'normal',
+    category: 'who-weight-status',
+    description: 'BMI 18.5-24.9 kg/m² — normal (healthy) weight',
+    evaluate: (bmi) => bmi >= BMI_NORMAL && bmi < BMI_OVERWEIGHT
+  },
+  {
+    id: 'T-WHO-OVERWEIGHT-01',
+    instrument: 'bmi-category',
+    band: 'overweight',
+    category: 'who-weight-status',
+    description: 'BMI 25.0-29.9 kg/m² — overweight (pre-obesity)',
+    evaluate: (bmi) => bmi >= BMI_OVERWEIGHT && bmi < BMI_OBESE_1
+  },
+  {
+    id: 'T-WHO-OBESE-1-01',
+    instrument: 'bmi-category',
+    band: 'obese-class-1',
+    category: 'who-weight-status',
+    description: 'BMI 30.0-34.9 kg/m² — obese class I',
+    evaluate: (bmi) => bmi >= BMI_OBESE_1 && bmi < BMI_OBESE_2
+  },
+  {
+    id: 'T-WHO-OBESE-2-01',
+    instrument: 'bmi-category',
+    band: 'obese-class-2',
+    category: 'who-weight-status',
+    description: 'BMI 35.0-39.9 kg/m² — obese class II',
+    evaluate: (bmi) => bmi >= BMI_OBESE_2 && bmi < BMI_OBESE_3
+  },
+  {
+    id: 'T-WHO-OBESE-3-01',
+    instrument: 'bmi-category',
+    band: 'obese-class-3',
+    category: 'who-weight-status',
+    description: 'BMI 40.0 kg/m² or above — obese class III',
+    evaluate: (bmi) => bmi >= BMI_OBESE_3
+  }
 ];

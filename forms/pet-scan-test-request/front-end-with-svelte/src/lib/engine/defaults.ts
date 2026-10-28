@@ -7,51 +7,51 @@ import type { PetScanRequest } from './types';
  * newly-added fields default correctly when older saved state is rehydrated.
  */
 export function createDefault(): PetScanRequest {
-	return {
-		clinician: {
-			clinicianName: '',
-			clinicianRole: '',
-			registrationBody: '',
-			registrationNumber: '',
-			requesterContact: '',
-			supervisingConsultant: '',
-			siteName: '',
-			referralDate: ''
-		},
-		patient: {
-			firstName: '',
-			lastName: '',
-			dateOfBirth: '',
-			nhsNumber: '',
-			weightKg: null,
-			setting: '',
-			interpreterRequired: false
-		},
-		request: {
-			scanType: '',
-			primaryIndication: '',
-			clinicalQuestion: ''
-		},
-		context: {
-			primaryTumourSite: '',
-			relevantHistory: '',
-			recentChemoRadiotherapy: ''
-		},
-		preparation: {
-			diabetes: false,
-			bloodGlucoseMmolL: null,
-			pregnancyStatus: '',
-			breastfeeding: false,
-			egfr: null,
-			claustrophobia: false
-		},
-		justification: {
-			irMeRJustification: '',
-			urgency: ''
-		},
-		triage: {
-			requestedByDate: '',
-			notes: ''
-		}
-	};
+  return {
+    clinician: {
+      clinicianName: '',
+      clinicianRole: '',
+      registrationBody: '',
+      registrationNumber: '',
+      requesterContact: '',
+      supervisingConsultant: '',
+      siteName: '',
+      referralDate: ''
+    },
+    patient: {
+      firstName: '',
+      lastName: '',
+      dateOfBirth: '',
+      nhsNumber: '',
+      weightKg: null,
+      setting: '',
+      interpreterRequired: false
+    },
+    request: {
+      scanType: '',
+      primaryIndication: '',
+      clinicalQuestion: ''
+    },
+    context: {
+      primaryTumourSite: '',
+      relevantHistory: '',
+      recentChemoRadiotherapy: ''
+    },
+    preparation: {
+      diabetes: false,
+      bloodGlucoseMmolL: null,
+      pregnancyStatus: '',
+      breastfeeding: false,
+      egfr: null,
+      claustrophobia: false
+    },
+    justification: {
+      irMeRJustification: '',
+      urgency: ''
+    },
+    triage: {
+      requestedByDate: '',
+      notes: ''
+    }
+  };
 }

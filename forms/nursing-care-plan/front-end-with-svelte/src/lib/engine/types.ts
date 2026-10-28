@@ -39,20 +39,20 @@ export type Priority = 'high' | 'medium' | 'low';
  * Mirrors the four `*_risk_*` column families on `nursing_care_plan`.
  */
 export interface RiskGroup {
-	done: YesNo;
-	level: RiskLevel;
-	/** ISO date or ''. */
-	assessedOn: string;
-	actioned: YesNo;
+  done: YesNo;
+  level: RiskLevel;
+  /** ISO date or ''. */
+  assessedOn: string;
+  actioned: YesNo;
 }
 
 /** A SMART goal (child of a problem). Mirrors `nursing_care_plan_goal`. */
 export interface Goal {
-	id: string;
-	goalText: string;
-	/** ISO target / review date or ''. */
-	targetDate: string;
-	met: MetStatus;
+  id: string;
+  goalText: string;
+  /** ISO target / review date or ''. */
+  targetDate: string;
+  met: MetStatus;
 }
 
 /**
@@ -60,9 +60,9 @@ export interface Goal {
  * `nursing_care_plan_intervention`.
  */
 export interface Intervention {
-	id: string;
-	interventionText: string;
-	carriedOut: CarriedOut;
+  id: string;
+  interventionText: string;
+  carriedOut: CarriedOut;
 }
 
 /**
@@ -70,59 +70,59 @@ export interface Intervention {
  * evaluation. Mirrors `nursing_care_plan_problem` plus its child arrays.
  */
 export interface Problem {
-	id: string;
-	problemStatement: string;
-	adlCategory: string;
-	actualOrPotential: ActualOrPotential;
-	assessmentData: string;
-	linkedRisk: LinkedRisk;
-	goals: Goal[];
-	interventions: Intervention[];
-	evaluationNote: string;
-	goalMet: MetStatus;
-	/** ISO date or ''. */
-	nextReviewDate: string;
+  id: string;
+  problemStatement: string;
+  adlCategory: string;
+  actualOrPotential: ActualOrPotential;
+  assessmentData: string;
+  linkedRisk: LinkedRisk;
+  goals: Goal[];
+  interventions: Intervention[];
+  evaluationNote: string;
+  goalMet: MetStatus;
+  /** ISO date or ''. */
+  nextReviewDate: string;
 }
 
 /** Step 1 — plan context (parent header fields). */
 export interface PlanContext {
-	nurseName: string;
-	nurseRole: NurseRole;
-	nmcNumber: string;
-	/** ISO-ish datetime-local string; '' when unset. */
-	authoredAt: string;
-	careSetting: CareSetting;
-	planType: PlanType;
-	modelUsed: string;
+  nurseName: string;
+  nurseRole: NurseRole;
+  nmcNumber: string;
+  /** ISO-ish datetime-local string; '' when unset. */
+  authoredAt: string;
+  careSetting: CareSetting;
+  planType: PlanType;
+  modelUsed: string;
 }
 
 /** Step 2 — patient identification (parent header fields). */
 export interface Patient {
-	patientIdentifier: string;
-	patientName: string;
-	/** ISO date or ''. */
-	dateOfBirth: string;
-	sex: Sex;
-	wardLocation: string;
+  patientIdentifier: string;
+  patientName: string;
+  /** ISO date or ''. */
+  dateOfBirth: string;
+  sex: Sex;
+  wardLocation: string;
 }
 
 /** Step 8 — handover / sign-off summary. */
 export interface Summary {
-	handoverNote: string;
-	/** ISO date or ''. */
-	reviewDate: string;
+  handoverNote: string;
+  /** ISO date or ''. */
+  reviewDate: string;
 }
 
 /** The full nursing-care-plan data model (parent header + child problems). */
 export interface CarePlan {
-	planContext: PlanContext;
-	patient: Patient;
-	fallsRisk: RiskGroup;
-	pressureUlcerRisk: RiskGroup;
-	vteRisk: RiskGroup;
-	nutritionRisk: RiskGroup;
-	problems: Problem[];
-	summary: Summary;
+  planContext: PlanContext;
+  patient: Patient;
+  fallsRisk: RiskGroup;
+  pressureUlcerRisk: RiskGroup;
+  vteRisk: RiskGroup;
+  nutritionRisk: RiskGroup;
+  problems: Problem[];
+  summary: Summary;
 }
 
 // ──────────────────────────────────────────────
@@ -131,36 +131,36 @@ export interface CarePlan {
 
 /** A single per-problem completeness audit row (mirrors the grade_rule table). */
 export interface FiredRule {
-	id: string;
-	problemId: string;
-	problemLabel: string;
-	element: 'goal' | 'intervention' | 'evaluation';
-	present: boolean;
-	description: string;
+  id: string;
+  problemId: string;
+  problemLabel: string;
+  element: 'goal' | 'intervention' | 'evaluation';
+  present: boolean;
+  description: string;
 }
 
 /** A clinician-facing flagged issue (mirrors the grade_flag table). */
 export interface FlaggedIssue {
-	id: string;
-	category: string;
-	priority: Priority;
-	message: string;
+  id: string;
+  category: string;
+  priority: Priority;
+  message: string;
 }
 
 /** The per-problem completeness class. */
 export interface ProblemClass {
-	problemId: string;
-	completenessClass: CompletenessClass;
+  problemId: string;
+  completenessClass: CompletenessClass;
 }
 
 /** The full grading result for one care plan. */
 export interface GradingResult {
-	status: PlanStatus;
-	completenessPercent: number;
-	problemClasses: ProblemClass[];
-	firedRules: FiredRule[];
-	flags: FlaggedIssue[];
-	timestamp: string;
+  status: PlanStatus;
+  completenessPercent: number;
+  problemClasses: ProblemClass[];
+  firedRules: FiredRule[];
+  flags: FlaggedIssue[];
+  timestamp: string;
 }
 
 // ──────────────────────────────────────────────
@@ -168,9 +168,9 @@ export interface GradingResult {
 // ──────────────────────────────────────────────
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
-	/** Which data section / wizard concern this step edits. */
-	section: string;
+  number: number;
+  title: string;
+  shortTitle: string;
+  /** Which data section / wizard concern this step edits. */
+  section: string;
 }

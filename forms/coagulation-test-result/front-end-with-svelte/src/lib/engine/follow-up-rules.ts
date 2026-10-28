@@ -1,9 +1,9 @@
 import type {
-	CoagulationResult,
-	ResultClassification,
-	AbnormalitySeverity,
-	FollowUpUrgency,
-	FiredRule
+  CoagulationResult,
+  ResultClassification,
+  AbnormalitySeverity,
+  FollowUpUrgency,
+  FiredRule
 } from './types';
 import { hasCriticalValue, hasIsolatedApttProlongation } from './utils';
 
@@ -16,118 +16,118 @@ import { hasCriticalValue, hasIsolatedApttProlongation } from './utils';
  * fires.
  */
 export function gradeFollowUp(
-	r: CoagulationResult,
-	classification: ResultClassification,
-	severity: AbnormalitySeverity
+  r: CoagulationResult,
+  classification: ResultClassification,
+  severity: AbnormalitySeverity
 ): {
-	followUpUrgency: FollowUpUrgency;
-	targetTimeframe: string;
-	recommendedAction: string;
-	firedRules: FiredRule[];
+  followUpUrgency: FollowUpUrgency;
+  targetTimeframe: string;
+  recommendedAction: string;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	// ─── critical-alert: auto-escalation invariant ───
-	if (hasCriticalValue(r) || classification === 'critical') {
-		firedRules.push({
-			ruleId: 'R-FU-CRITICAL-01',
-			axis: 'follow-up',
-			category: 'critical-result',
-			description:
-				'Critical value auto-escalates follow-up urgency to critical-alert regardless of the other axes.'
-		});
-		return {
-			followUpUrgency: 'critical-alert',
-			targetTimeframe: 'immediate',
-			recommendedAction:
-				'Communicate the critical result directly to the referrer now, consider reversal / replacement therapy, and document the conversation.',
-			firedRules
-		};
-	}
+  // ─── critical-alert: auto-escalation invariant ───
+  if (hasCriticalValue(r) || classification === 'critical') {
+    firedRules.push({
+      ruleId: 'R-FU-CRITICAL-01',
+      axis: 'follow-up',
+      category: 'critical-result',
+      description:
+        'Critical value auto-escalates follow-up urgency to critical-alert regardless of the other axes.'
+    });
+    return {
+      followUpUrgency: 'critical-alert',
+      targetTimeframe: 'immediate',
+      recommendedAction:
+        'Communicate the critical result directly to the referrer now, consider reversal / replacement therapy, and document the conversation.',
+      firedRules
+    };
+  }
 
-	// ─── urgent ───
-	if (severity === 'major') {
-		firedRules.push({
-			ruleId: 'R-FU-URGENT-01',
-			axis: 'follow-up',
-			category: 'major-abnormality',
-			description: 'Major abnormality present; follow-up urgency graded urgent.'
-		});
-		return {
-			followUpUrgency: 'urgent',
-			targetTimeframe: 'within 24 hours',
-			recommendedAction: 'Arrange urgent clinical review and expedite onward referral.',
-			firedRules
-		};
-	}
+  // ─── urgent ───
+  if (severity === 'major') {
+    firedRules.push({
+      ruleId: 'R-FU-URGENT-01',
+      axis: 'follow-up',
+      category: 'major-abnormality',
+      description: 'Major abnormality present; follow-up urgency graded urgent.'
+    });
+    return {
+      followUpUrgency: 'urgent',
+      targetTimeframe: 'within 24 hours',
+      recommendedAction: 'Arrange urgent clinical review and expedite onward referral.',
+      firedRules
+    };
+  }
 
-	// ─── recommended ───
-	// The isolated-APTT-prolongation check must run before the generic
-	// `severity === 'moderate'` branch below: gradeSeverity's own R-SEV-
-	// MODERATE-02 already grades every isolated-APTT case 'moderate' (mirroring
-	// the same specific-before-generic precedence gradeSeverity uses for its
-	// R-SEV-MODERATE-02 vs R-SEV-MODERATE-01), so the generic branch would
-	// otherwise always intercept first and this dedicated, more actionable
-	// recommendation (mixing studies / factor or inhibitor work-up) would
-	// never be reachable.
-	if (hasIsolatedApttProlongation(r)) {
-		firedRules.push({
-			ruleId: 'R-FU-RECOMMENDED-03',
-			axis: 'follow-up',
-			category: 'isolated-aptt-prolongation',
-			description:
-				'Isolated APTT prolongation; mixing studies / factor or inhibitor work-up recommended.'
-		});
-		return {
-			followUpUrgency: 'recommended',
-			targetTimeframe: 'within 2 weeks',
-			recommendedAction:
-				'Recommend mixing studies and factor / inhibitor work-up to characterise the isolated APTT prolongation.',
-			firedRules
-		};
-	}
+  // ─── recommended ───
+  // The isolated-APTT-prolongation check must run before the generic
+  // `severity === 'moderate'` branch below: gradeSeverity's own R-SEV-
+  // MODERATE-02 already grades every isolated-APTT case 'moderate' (mirroring
+  // the same specific-before-generic precedence gradeSeverity uses for its
+  // R-SEV-MODERATE-02 vs R-SEV-MODERATE-01), so the generic branch would
+  // otherwise always intercept first and this dedicated, more actionable
+  // recommendation (mixing studies / factor or inhibitor work-up) would
+  // never be reachable.
+  if (hasIsolatedApttProlongation(r)) {
+    firedRules.push({
+      ruleId: 'R-FU-RECOMMENDED-03',
+      axis: 'follow-up',
+      category: 'isolated-aptt-prolongation',
+      description:
+        'Isolated APTT prolongation; mixing studies / factor or inhibitor work-up recommended.'
+    });
+    return {
+      followUpUrgency: 'recommended',
+      targetTimeframe: 'within 2 weeks',
+      recommendedAction:
+        'Recommend mixing studies and factor / inhibitor work-up to characterise the isolated APTT prolongation.',
+      firedRules
+    };
+  }
 
-	if (severity === 'moderate') {
-		firedRules.push({
-			ruleId: 'R-FU-RECOMMENDED-01',
-			axis: 'follow-up',
-			category: 'moderate-abnormality',
-			description: 'Moderate abnormality present; follow-up recommended.'
-		});
-		return {
-			followUpUrgency: 'recommended',
-			targetTimeframe: 'within 2 weeks',
-			recommendedAction: 'Recommend repeat testing or specialist referral as clinically indicated.',
-			firedRules
-		};
-	}
+  if (severity === 'moderate') {
+    firedRules.push({
+      ruleId: 'R-FU-RECOMMENDED-01',
+      axis: 'follow-up',
+      category: 'moderate-abnormality',
+      description: 'Moderate abnormality present; follow-up recommended.'
+    });
+    return {
+      followUpUrgency: 'recommended',
+      targetTimeframe: 'within 2 weeks',
+      recommendedAction: 'Recommend repeat testing or specialist referral as clinically indicated.',
+      firedRules
+    };
+  }
 
-	if (classification === 'inconclusive') {
-		firedRules.push({
-			ruleId: 'R-FU-RECOMMENDED-02',
-			axis: 'follow-up',
-			category: 'inconclusive',
-			description: 'Inconclusive result; repeat sampling recommended.'
-		});
-		return {
-			followUpUrgency: 'recommended',
-			targetTimeframe: 'within 2 weeks',
-			recommendedAction: 'Recommend a repeat specimen to resolve the inconclusive result.',
-			firedRules
-		};
-	}
+  if (classification === 'inconclusive') {
+    firedRules.push({
+      ruleId: 'R-FU-RECOMMENDED-02',
+      axis: 'follow-up',
+      category: 'inconclusive',
+      description: 'Inconclusive result; repeat sampling recommended.'
+    });
+    return {
+      followUpUrgency: 'recommended',
+      targetTimeframe: 'within 2 weeks',
+      recommendedAction: 'Recommend a repeat specimen to resolve the inconclusive result.',
+      firedRules
+    };
+  }
 
-	// ─── routine: least-urgent band, no rule fired ───
-	firedRules.push({
-		ruleId: 'R-FU-ROUTINE-01',
-		axis: 'follow-up',
-		category: 'normal',
-		description: 'No escalation rule fired; routine follow-up only.'
-	});
-	return {
-		followUpUrgency: 'routine',
-		targetTimeframe: 'no specific follow-up',
-		recommendedAction: 'No specific follow-up required; manage per usual care.',
-		firedRules
-	};
+  // ─── routine: least-urgent band, no rule fired ───
+  firedRules.push({
+    ruleId: 'R-FU-ROUTINE-01',
+    axis: 'follow-up',
+    category: 'normal',
+    description: 'No escalation rule fired; routine follow-up only.'
+  });
+  return {
+    followUpUrgency: 'routine',
+    targetTimeframe: 'no specific follow-up',
+    recommendedAction: 'No specific follow-up required; manage per usual care.',
+    firedRules
+  };
 }

@@ -18,7 +18,7 @@ const MAJOR = new Set([
   'awareness',
   'anaphylaxis',
   'malignant-hyperthermia',
-  'sux-apnoea',
+  'sux-apnoea'
 ]);
 const MINOR = new Set(['hypotension', 'hypertension', 'bronchospasm', 'laryngospasm']);
 
@@ -46,7 +46,7 @@ export function applyAnaestheticEventRules(data: OperationNote): {
         instrument: 'anaesthetic-event',
         grade: 'major',
         category: 'anaesthesia',
-        description: `Major anaesthetic event: ${t}`,
+        description: `Major anaesthetic event: ${t}`
       });
     } else if (MINOR.has(t)) {
       minorTokens.push(t);
@@ -55,7 +55,7 @@ export function applyAnaestheticEventRules(data: OperationNote): {
         instrument: 'anaesthetic-event',
         grade: 'minor',
         category: 'anaesthesia',
-        description: `Minor anaesthetic event: ${t}`,
+        description: `Minor anaesthetic event: ${t}`
       });
     }
   }

@@ -19,7 +19,9 @@
 </script>
 
 <Fieldset legend="Step 13 — Section 12 — Water Supply (6 checkpoints)">
-  <p class="hint">Drinking water, water cooler, overhead tanks, taps/fittings, washroom, and washbasins.</p>
+  <p class="hint">
+    Drinking water, water cooler, overhead tanks, taps/fittings, washroom, and washbasins.
+  </p>
 
   {#each groups as group, gi (gi)}
     {#if group.subsection}

@@ -13,15 +13,15 @@ export type AgeCategory = 'infant' | 'child' | 'adult' | '';
 
 /** Mode of arrival. */
 export type ArrivalMode =
-	| 'ambulance'
-	| 'car-private'
-	| 'car-taxi'
-	| 'motor-2-3-private'
-	| 'motor-2-3-taxi'
-	| 'public-transport'
-	| 'walk'
-	| 'other'
-	| '';
+  | 'ambulance'
+  | 'car-private'
+  | 'car-taxi'
+  | 'motor-2-3-private'
+  | 'motor-2-3-taxi'
+  | 'public-transport'
+  | 'walk'
+  | 'other'
+  | '';
 
 /** AVPU scale (Disability). */
 export type Avpu = 'A' | 'V' | 'P' | 'U' | '';
@@ -49,12 +49,12 @@ export type LossOfConsciousnessDuration = 'under-5min' | '5-29min' | '30min-24hr
 
 /** Intent of injury. */
 export type IntentOfInjury =
-	| 'unintentional'
-	| 'intentional-self-harm'
-	| 'intentional-assault'
-	| 'legal-political-war'
-	| 'unknown'
-	| '';
+  | 'unintentional'
+  | 'intentional-self-harm'
+  | 'intentional-assault'
+  | 'legal-political-war'
+  | 'unknown'
+  | '';
 
 /** Substance use within 6 hours of injury. */
 export type SubstanceUseStatus = 'unknown' | 'none' | 'reported' | 'evidence' | '';
@@ -72,7 +72,8 @@ export type RoadRole = 'driver' | 'passenger' | 'pedestrian' | '';
 export type FastPeritoneum = 'negative' | 'indeterminate' | 'free-fluid' | '';
 
 /** FAST chest base result. */
-export type FastChest = 'negative' | 'indeterminate' | 'pneumothorax' | 'pleural-fluid' | 'pericardial-effusion' | '';
+export type FastChest =
+  'negative' | 'indeterminate' | 'pneumothorax' | 'pleural-fluid' | 'pericardial-effusion' | '';
 
 /** Side L/R/bilateral indicator. */
 export type Laterality = 'left' | 'right' | 'bilateral' | '';
@@ -82,45 +83,45 @@ export type Laterality = 'left' | 'right' | 'bilateral' | '';
 // ──────────────────────────────────────────────
 
 export interface PatientRegistration {
-	hospitalRegistrationNumber: string;
-	surname: string;
-	firstName: string;
-	dateOfBirth: string;
-	age: number | null;
-	ageCategory: AgeCategory;
-	sex: Sex;
-	racialAndEthnicIdentity: string;
-	racialAndEthnicIdentityUnknown: boolean;
-	interpreterRequired: YesNo;
-	occupation: string;
-	contactPerson: string;
-	contactPhone: string;
-	contactRelation: string;
-	dateOfArrival: string;
-	timeOfArrival: string;
-	arrivalMode: ArrivalMode;
-	patientResidence: string;
-	patientResidenceUnknown: boolean;
-	injuryLocation: string;
-	injuryLocationUnknown: boolean;
-	priorFacilitiesCount: number | null;
-	referredFrom: string;
-	safeAtHome: YesNo;
-	weightKg: number | null;
-	vaccinationsStatus: VaccinationsStatus;
-	vaccinationsDate: string;
-	pregnant: PregnantStatus;
-	pregnancyReported: boolean;
-	pregnancyTestingDone: boolean;
-	lastMenstrualCycle: string;
-	gravida: number | null;
-	para: number | null;
-	lmpUnknown: boolean;
-	tobaccoUse: boolean;
-	alcoholUse: boolean;
-	drugUse: boolean;
-	ivDrugUse: boolean;
-	substanceUseUnknown: boolean;
+  hospitalRegistrationNumber: string;
+  surname: string;
+  firstName: string;
+  dateOfBirth: string;
+  age: number | null;
+  ageCategory: AgeCategory;
+  sex: Sex;
+  racialAndEthnicIdentity: string;
+  racialAndEthnicIdentityUnknown: boolean;
+  interpreterRequired: YesNo;
+  occupation: string;
+  contactPerson: string;
+  contactPhone: string;
+  contactRelation: string;
+  dateOfArrival: string;
+  timeOfArrival: string;
+  arrivalMode: ArrivalMode;
+  patientResidence: string;
+  patientResidenceUnknown: boolean;
+  injuryLocation: string;
+  injuryLocationUnknown: boolean;
+  priorFacilitiesCount: number | null;
+  referredFrom: string;
+  safeAtHome: YesNo;
+  weightKg: number | null;
+  vaccinationsStatus: VaccinationsStatus;
+  vaccinationsDate: string;
+  pregnant: PregnantStatus;
+  pregnancyReported: boolean;
+  pregnancyTestingDone: boolean;
+  lastMenstrualCycle: string;
+  gravida: number | null;
+  para: number | null;
+  lmpUnknown: boolean;
+  tobaccoUse: boolean;
+  alcoholUse: boolean;
+  drugUse: boolean;
+  ivDrugUse: boolean;
+  substanceUseUnknown: boolean;
 }
 
 // ──────────────────────────────────────────────
@@ -128,24 +129,24 @@ export interface PatientRegistration {
 // ──────────────────────────────────────────────
 
 export interface InitialVitals {
-	time: string;
-	tempC: number | null;
-	bpSystolic: number | null;
-	bpDiastolic: number | null;
-	pulse: number | null;
-	respiratoryRate: number | null;
-	spo2: number | null;
-	spo2OnOxygen: string;
-	painScore: number | null;
+  time: string;
+  tempC: number | null;
+  bpSystolic: number | null;
+  bpDiastolic: number | null;
+  pulse: number | null;
+  respiratoryRate: number | null;
+  spo2: number | null;
+  spo2OnOxygen: string;
+  painScore: number | null;
 }
 
 export interface ChiefComplaintAndVitals {
-	chiefComplaint: string;
-	allergies: string;
-	allergiesUnknown: boolean;
-	initialVitals: InitialVitals;
-	deadOnArrival: boolean;
-	timeOfDeath: string;
+  chiefComplaint: string;
+  allergies: string;
+  allergiesUnknown: boolean;
+  initialVitals: InitialVitals;
+  deadOnArrival: boolean;
+  timeOfDeath: string;
 }
 
 // ──────────────────────────────────────────────
@@ -153,51 +154,51 @@ export interface ChiefComplaintAndVitals {
 // ──────────────────────────────────────────────
 
 export interface HighRiskSigns {
-	// A/B
-	redStridor: boolean;
-	redCyanosis: boolean;
-	redRespiratoryDistress: boolean;
-	// C
-	redPoorPerfusion: boolean;
-	redWeakFastPulse: boolean;
-	redCapRefillOver3: boolean;
-	redHeavyBleeding: boolean;
-	redAdultHrAbnormal: boolean;
-	redChildLethargy: boolean;
-	redChildSunkenEyes: boolean;
-	redChildSlowSkinPinch: boolean;
-	redChildPoorDrinking: boolean;
-	// D
-	redUnresponsive: boolean;
-	redAcuteConvulsions: boolean;
-	redHypoglycaemia: boolean;
-	redAcuteFocalNeuroDeficit: boolean;
-	redAlteredMentalStatusWithFeverEtc: boolean;
-	// Other
-	redThreatenedLimb: boolean;
-	redSnakeBite: boolean;
-	redPoisoningChemicalExposure: boolean;
-	redViolentOrAggressive: boolean;
-	redAcuteTesticularPainOrPriapism: boolean;
-	redAdultSevereChestOrAbdoPain: boolean;
-	redPregnantWithHighRiskFindings: boolean;
-	redInfantUnder8Days: boolean;
-	redInfantUnder2MonthsAbnormalTemp: boolean;
-	// General trauma
-	traumaFallTwiceHeight: boolean;
-	traumaAllPenetrating: boolean;
-	traumaPenetratingDistalUncontrolledBleeding: boolean;
-	traumaCrushInjury: boolean;
-	traumaPolytrauma: boolean;
-	traumaBleedingDisorderOrAnticoag: boolean;
-	traumaPregnant: boolean;
-	// Road traffic
-	rtHighSpeedCrash: boolean;
-	rtPedestrianOrCyclistHit: boolean;
-	rtOtherInVehicleDied: boolean;
-	rtNoSeatbelt: boolean;
-	rtTrappedOrThrown: boolean;
-	rtDeadOnArrival: boolean;
+  // A/B
+  redStridor: boolean;
+  redCyanosis: boolean;
+  redRespiratoryDistress: boolean;
+  // C
+  redPoorPerfusion: boolean;
+  redWeakFastPulse: boolean;
+  redCapRefillOver3: boolean;
+  redHeavyBleeding: boolean;
+  redAdultHrAbnormal: boolean;
+  redChildLethargy: boolean;
+  redChildSunkenEyes: boolean;
+  redChildSlowSkinPinch: boolean;
+  redChildPoorDrinking: boolean;
+  // D
+  redUnresponsive: boolean;
+  redAcuteConvulsions: boolean;
+  redHypoglycaemia: boolean;
+  redAcuteFocalNeuroDeficit: boolean;
+  redAlteredMentalStatusWithFeverEtc: boolean;
+  // Other
+  redThreatenedLimb: boolean;
+  redSnakeBite: boolean;
+  redPoisoningChemicalExposure: boolean;
+  redViolentOrAggressive: boolean;
+  redAcuteTesticularPainOrPriapism: boolean;
+  redAdultSevereChestOrAbdoPain: boolean;
+  redPregnantWithHighRiskFindings: boolean;
+  redInfantUnder8Days: boolean;
+  redInfantUnder2MonthsAbnormalTemp: boolean;
+  // General trauma
+  traumaFallTwiceHeight: boolean;
+  traumaAllPenetrating: boolean;
+  traumaPenetratingDistalUncontrolledBleeding: boolean;
+  traumaCrushInjury: boolean;
+  traumaPolytrauma: boolean;
+  traumaBleedingDisorderOrAnticoag: boolean;
+  traumaPregnant: boolean;
+  // Road traffic
+  rtHighSpeedCrash: boolean;
+  rtPedestrianOrCyclistHit: boolean;
+  rtOtherInVehicleDied: boolean;
+  rtNoSeatbelt: boolean;
+  rtTrappedOrThrown: boolean;
+  rtDeadOnArrival: boolean;
 }
 
 // ──────────────────────────────────────────────
@@ -205,10 +206,10 @@ export interface HighRiskSigns {
 // ──────────────────────────────────────────────
 
 export interface Triage {
-	category: TriageCategory;
-	triagedFor: string;
-	providerAssessmentDate: string;
-	providerAssessmentTime: string;
+  category: TriageCategory;
+  triagedFor: string;
+  providerAssessmentDate: string;
+  providerAssessmentTime: string;
 }
 
 // ──────────────────────────────────────────────
@@ -216,25 +217,25 @@ export interface Triage {
 // ──────────────────────────────────────────────
 
 export interface Airway {
-	normal: boolean;
-	swelling: boolean;
-	stridor: boolean;
-	voiceChanges: boolean;
-	burns: boolean;
-	obstructedByTongue: boolean;
-	obstructedByBlood: boolean;
-	obstructedBySecretion: boolean;
-	obstructedByVomit: boolean;
-	obstructedByForeignBody: boolean;
-	interventionRepositioning: boolean;
-	interventionSuction: boolean;
-	interventionOpa: boolean;
-	interventionNpa: boolean;
-	interventionLma: boolean;
-	interventionBvm: boolean;
-	interventionEtt: boolean;
-	spineStabilized: SpineStabilized;
-	notes: string;
+  normal: boolean;
+  swelling: boolean;
+  stridor: boolean;
+  voiceChanges: boolean;
+  burns: boolean;
+  obstructedByTongue: boolean;
+  obstructedByBlood: boolean;
+  obstructedBySecretion: boolean;
+  obstructedByVomit: boolean;
+  obstructedByForeignBody: boolean;
+  interventionRepositioning: boolean;
+  interventionSuction: boolean;
+  interventionOpa: boolean;
+  interventionNpa: boolean;
+  interventionLma: boolean;
+  interventionBvm: boolean;
+  interventionEtt: boolean;
+  spineStabilized: SpineStabilized;
+  notes: string;
 }
 
 // ──────────────────────────────────────────────
@@ -242,29 +243,29 @@ export interface Airway {
 // ──────────────────────────────────────────────
 
 export interface Breathing {
-	normal: boolean;
-	spontaneousRespiratoryRate: number | null;
-	chestRiseShallow: boolean;
-	chestRiseRetractions: boolean;
-	chestRiseParadoxical: boolean;
-	tracheaMidline: boolean;
-	tracheaDeviatedLeft: boolean;
-	tracheaDeviatedRight: boolean;
-	breathSoundsLeft: string;
-	breathSoundsRight: string;
-	cyanosis: boolean;
-	oxygenLitres: number | null;
-	oxygenNasalCannula: boolean;
-	oxygenMask: boolean;
-	oxygenNonRebreather: boolean;
-	oxygenBvm: boolean;
-	oxygenCpapBipap: boolean;
-	oxygenVentilator: boolean;
-	chestTubeLeftSize: string;
-	chestTubeLeftDepth: string;
-	chestTubeRightSize: string;
-	chestTubeRightDepth: string;
-	notes: string;
+  normal: boolean;
+  spontaneousRespiratoryRate: number | null;
+  chestRiseShallow: boolean;
+  chestRiseRetractions: boolean;
+  chestRiseParadoxical: boolean;
+  tracheaMidline: boolean;
+  tracheaDeviatedLeft: boolean;
+  tracheaDeviatedRight: boolean;
+  breathSoundsLeft: string;
+  breathSoundsRight: string;
+  cyanosis: boolean;
+  oxygenLitres: number | null;
+  oxygenNasalCannula: boolean;
+  oxygenMask: boolean;
+  oxygenNonRebreather: boolean;
+  oxygenBvm: boolean;
+  oxygenCpapBipap: boolean;
+  oxygenVentilator: boolean;
+  chestTubeLeftSize: string;
+  chestTubeLeftDepth: string;
+  chestTubeRightSize: string;
+  chestTubeRightDepth: string;
+  notes: string;
 }
 
 // ──────────────────────────────────────────────
@@ -272,38 +273,38 @@ export interface Breathing {
 // ──────────────────────────────────────────────
 
 export interface Circulation {
-	normal: boolean;
-	skinWarm: boolean;
-	skinDry: boolean;
-	skinCool: boolean;
-	skinMoist: boolean;
-	skinPale: boolean;
-	capillaryRefillUnder3: boolean;
-	capillaryRefillSeconds: number | null;
-	pulsesWeak: boolean;
-	pulsesAsymmetric: boolean;
-	jvd: YesNo;
-	unstablePelvis: YesNo;
-	bleedingControlDirectPressure: boolean;
-	bleedingControlBandage: boolean;
-	bleedingControlTourniquet: boolean;
-	accessIvLocation: string;
-	accessIvSize: string;
-	accessCentralLocation: string;
-	accessCentralSize: string;
-	accessIoLocation: string;
-	accessIoSize: string;
-	accessLine2Location: string;
-	accessLine2Size: string;
-	ivfMls: number | null;
-	ivfNs: boolean;
-	ivfLr: boolean;
-	ivfOther: string;
-	bloodOrdered: boolean;
-	bloodGiven: boolean;
-	bloodTypeAmount: string;
-	pelvisStabilized: PelvisStabilized;
-	notes: string;
+  normal: boolean;
+  skinWarm: boolean;
+  skinDry: boolean;
+  skinCool: boolean;
+  skinMoist: boolean;
+  skinPale: boolean;
+  capillaryRefillUnder3: boolean;
+  capillaryRefillSeconds: number | null;
+  pulsesWeak: boolean;
+  pulsesAsymmetric: boolean;
+  jvd: YesNo;
+  unstablePelvis: YesNo;
+  bleedingControlDirectPressure: boolean;
+  bleedingControlBandage: boolean;
+  bleedingControlTourniquet: boolean;
+  accessIvLocation: string;
+  accessIvSize: string;
+  accessCentralLocation: string;
+  accessCentralSize: string;
+  accessIoLocation: string;
+  accessIoSize: string;
+  accessLine2Location: string;
+  accessLine2Size: string;
+  ivfMls: number | null;
+  ivfNs: boolean;
+  ivfLr: boolean;
+  ivfOther: string;
+  bloodOrdered: boolean;
+  bloodGiven: boolean;
+  bloodTypeAmount: string;
+  pelvisStabilized: PelvisStabilized;
+  notes: string;
 }
 
 // ──────────────────────────────────────────────
@@ -311,28 +312,28 @@ export interface Circulation {
 // ──────────────────────────────────────────────
 
 export interface Disability {
-	normal: boolean;
-	avpu: Avpu;
-	gcsTotal: number | null;
-	gcsEye: number | null;
-	gcsVerbal: number | null;
-	gcsMotor: number | null;
-	gcsQualified: boolean;
-	movesRue: boolean;
-	movesLue: boolean;
-	movesRle: boolean;
-	movesLle: boolean;
-	pupilSizeLeft: number | null;
-	pupilSizeRight: number | null;
-	pupilReactivityLeft: string;
-	pupilReactivityRight: string;
-	bloodGlucose: number | null;
-	interventionGlucose: boolean;
-	interventionAntidote: boolean;
-	interventionAntiepileptic: boolean;
-	interventionRaiseHeadOfBed: boolean;
-	interventionOther: string;
-	notes: string;
+  normal: boolean;
+  avpu: Avpu;
+  gcsTotal: number | null;
+  gcsEye: number | null;
+  gcsVerbal: number | null;
+  gcsMotor: number | null;
+  gcsQualified: boolean;
+  movesRue: boolean;
+  movesLue: boolean;
+  movesRle: boolean;
+  movesLle: boolean;
+  pupilSizeLeft: number | null;
+  pupilSizeRight: number | null;
+  pupilReactivityLeft: string;
+  pupilReactivityRight: string;
+  bloodGlucose: number | null;
+  interventionGlucose: boolean;
+  interventionAntidote: boolean;
+  interventionAntiepileptic: boolean;
+  interventionRaiseHeadOfBed: boolean;
+  interventionOther: string;
+  notes: string;
 }
 
 // ──────────────────────────────────────────────
@@ -340,16 +341,16 @@ export interface Disability {
 // ──────────────────────────────────────────────
 
 export interface ExposureAndFast {
-	exposedCompletely: boolean;
-	exposureNotes: string;
-	fastNormal: boolean;
-	fastNotIndicated: boolean;
-	fastNotAvailable: boolean;
-	fastPeritoneum: FastPeritoneum;
-	fastChest: FastChest;
-	fastChestPneumothoraxSide: Laterality;
-	fastChestPleuralFluidSide: Laterality;
-	fastNotes: string;
+  exposedCompletely: boolean;
+  exposureNotes: string;
+  fastNormal: boolean;
+  fastNotIndicated: boolean;
+  fastNotAvailable: boolean;
+  fastPeritoneum: FastPeritoneum;
+  fastChest: FastChest;
+  fastChestPneumothoraxSide: Laterality;
+  fastChestPleuralFluidSide: Laterality;
+  fastNotes: string;
 }
 
 // ──────────────────────────────────────────────
@@ -357,47 +358,47 @@ export interface ExposureAndFast {
 // ──────────────────────────────────────────────
 
 export interface InjuryHistory {
-	placeOfInjury: string;
-	placeOfInjuryUnknown: boolean;
-	activityAtTimeOfInjury: string;
-	activityAtTimeOfInjuryUnknown: boolean;
-	mechRoadTrafficIncident: boolean;
-	mechRoadRole: RoadRole;
-	mechPatientVehicle: string;
-	mechImpactedWith: string;
-	mechAirbag: boolean;
-	mechSeatbelt: boolean;
-	mechHelmet: boolean;
-	mechExtricated: boolean;
-	mechEjected: boolean;
-	mechFallFrom: string;
-	mechHitByFallingObject: boolean;
-	mechStabCut: boolean;
-	mechGunshot: boolean;
-	mechSexualAssault: boolean;
-	mechOtherBluntForce: boolean;
-	mechSuffocationChokingHanging: boolean;
-	mechDrowning: boolean;
-	mechDrowningLifeVest: YesNo;
-	mechBurnCausedBy: string;
-	mechPoisoningToxicExposure: boolean;
-	mechUnknown: boolean;
-	firstCareSought: string;
-	prehospitalCareProvider: PrehospitalCareProvider;
-	prehospitalCareGiven: string;
-	dateOfInjury: string;
-	timeOfInjury: string;
-	lossOfConsciousnessDuration: LossOfConsciousnessDuration;
-	headTrauma: boolean;
-	neckTrauma: boolean;
-	otherTraumaDetails: string;
-	intent: IntentOfInjury;
-	assaultedBy: string;
-	hoursSinceLastMeal: number | null;
-	hoursSinceLastMealUnknown: boolean;
-	substanceUseStatus: SubstanceUseStatus;
-	substanceAlcohol: boolean;
-	substanceOther: string;
+  placeOfInjury: string;
+  placeOfInjuryUnknown: boolean;
+  activityAtTimeOfInjury: string;
+  activityAtTimeOfInjuryUnknown: boolean;
+  mechRoadTrafficIncident: boolean;
+  mechRoadRole: RoadRole;
+  mechPatientVehicle: string;
+  mechImpactedWith: string;
+  mechAirbag: boolean;
+  mechSeatbelt: boolean;
+  mechHelmet: boolean;
+  mechExtricated: boolean;
+  mechEjected: boolean;
+  mechFallFrom: string;
+  mechHitByFallingObject: boolean;
+  mechStabCut: boolean;
+  mechGunshot: boolean;
+  mechSexualAssault: boolean;
+  mechOtherBluntForce: boolean;
+  mechSuffocationChokingHanging: boolean;
+  mechDrowning: boolean;
+  mechDrowningLifeVest: YesNo;
+  mechBurnCausedBy: string;
+  mechPoisoningToxicExposure: boolean;
+  mechUnknown: boolean;
+  firstCareSought: string;
+  prehospitalCareProvider: PrehospitalCareProvider;
+  prehospitalCareGiven: string;
+  dateOfInjury: string;
+  timeOfInjury: string;
+  lossOfConsciousnessDuration: LossOfConsciousnessDuration;
+  headTrauma: boolean;
+  neckTrauma: boolean;
+  otherTraumaDetails: string;
+  intent: IntentOfInjury;
+  assaultedBy: string;
+  hoursSinceLastMeal: number | null;
+  hoursSinceLastMealUnknown: boolean;
+  substanceUseStatus: SubstanceUseStatus;
+  substanceAlcohol: boolean;
+  substanceOther: string;
 }
 
 // ──────────────────────────────────────────────
@@ -405,23 +406,23 @@ export interface InjuryHistory {
 // ──────────────────────────────────────────────
 
 export interface PastHistories {
-	pmhNone: boolean;
-	pmhUnknown: boolean;
-	pmhHtn: boolean;
-	pmhDm: boolean;
-	pmhCopd: boolean;
-	pmhPsych: boolean;
-	pmhRenalDisease: boolean;
-	pmhOther: string;
-	medicationsNone: boolean;
-	medicationsUnknown: boolean;
-	medications: string;
-	pastSurgeriesNone: boolean;
-	pastSurgeriesUnknown: boolean;
-	pastSurgeries: string;
-	familyHistoryNone: boolean;
-	familyHistoryUnknown: boolean;
-	familyHistory: string;
+  pmhNone: boolean;
+  pmhUnknown: boolean;
+  pmhHtn: boolean;
+  pmhDm: boolean;
+  pmhCopd: boolean;
+  pmhPsych: boolean;
+  pmhRenalDisease: boolean;
+  pmhOther: string;
+  medicationsNone: boolean;
+  medicationsUnknown: boolean;
+  medications: string;
+  pastSurgeriesNone: boolean;
+  pastSurgeriesUnknown: boolean;
+  pastSurgeries: string;
+  familyHistoryNone: boolean;
+  familyHistoryUnknown: boolean;
+  familyHistory: string;
 }
 
 // ──────────────────────────────────────────────
@@ -429,23 +430,23 @@ export interface PastHistories {
 // ──────────────────────────────────────────────
 
 export interface PeEntry {
-	normal: boolean;
-	notes: string;
+  normal: boolean;
+  notes: string;
 }
 
 export interface PhysicalExam {
-	general: PeEntry;
-	neuroPsych: PeEntry;
-	heent: PeEntry;
-	neck: PeEntry;
-	respiratory: PeEntry;
-	cardiac: PeEntry;
-	abdominal: PeEntry;
-	pelvis: PeEntry;
-	guRectal: PeEntry;
-	musculoskeletal: PeEntry;
-	skin: PeEntry;
-	areaOfInjuryDetail: string;
+  general: PeEntry;
+  neuroPsych: PeEntry;
+  heent: PeEntry;
+  neck: PeEntry;
+  respiratory: PeEntry;
+  cardiac: PeEntry;
+  abdominal: PeEntry;
+  pelvis: PeEntry;
+  guRectal: PeEntry;
+  musculoskeletal: PeEntry;
+  skin: PeEntry;
+  areaOfInjuryDetail: string;
 }
 
 // ──────────────────────────────────────────────
@@ -453,7 +454,7 @@ export interface PhysicalExam {
 // ──────────────────────────────────────────────
 
 export interface AssessmentAndPlan {
-	narrative: string;
+  narrative: string;
 }
 
 // ──────────────────────────────────────────────
@@ -461,29 +462,29 @@ export interface AssessmentAndPlan {
 // ──────────────────────────────────────────────
 
 export interface LabEntry {
-	ordered: boolean;
-	result: string;
+  ordered: boolean;
+  result: string;
 }
 
 export interface ImagingEntry {
-	ordered: boolean;
-	result: string;
+  ordered: boolean;
+  result: string;
 }
 
 export interface Diagnostics {
-	labHgb: LabEntry;
-	labBloodType: LabEntry;
-	labChemistry: LabEntry;
-	labHepatic: LabEntry;
-	labUpt: LabEntry;
-	labOther: LabEntry;
-	imgChestRadiograph: ImagingEntry;
-	imgPelvicRadiograph: ImagingEntry;
-	imgHeadCt: ImagingEntry;
-	imgCspine: ImagingEntry;
-	imgChestAbdomenCt: ImagingEntry;
-	imgExtremityRadiograph: ImagingEntry;
-	imgOther: ImagingEntry;
+  labHgb: LabEntry;
+  labBloodType: LabEntry;
+  labChemistry: LabEntry;
+  labHepatic: LabEntry;
+  labUpt: LabEntry;
+  labOther: LabEntry;
+  imgChestRadiograph: ImagingEntry;
+  imgPelvicRadiograph: ImagingEntry;
+  imgHeadCt: ImagingEntry;
+  imgCspine: ImagingEntry;
+  imgChestAbdomenCt: ImagingEntry;
+  imgExtremityRadiograph: ImagingEntry;
+  imgOther: ImagingEntry;
 }
 
 // ──────────────────────────────────────────────
@@ -491,31 +492,31 @@ export interface Diagnostics {
 // ──────────────────────────────────────────────
 
 export interface MedicationEntry {
-	medicationAndDose: string;
-	timeGiven: string;
-	initials: string;
+  medicationAndDose: string;
+  timeGiven: string;
+  initials: string;
 }
 
 export interface ProcedureEntry {
-	procedure: string;
-	timeGiven: string;
-	initials: string;
+  procedure: string;
+  timeGiven: string;
+  initials: string;
 }
 
 export interface MedicationsAndProcedures {
-	ivfMls: number | null;
-	ivfType: string;
-	bloodUnits: string;
-	analgesia: string;
-	antimicrobials: string;
-	tetanus: string;
-	medications: MedicationEntry[];
-	procIntubation: boolean;
-	procThoracostomy: boolean;
-	procSplintingReduction: boolean;
-	procLacerationRepair: boolean;
-	procOther: string;
-	procedures: ProcedureEntry[];
+  ivfMls: number | null;
+  ivfType: string;
+  bloodUnits: string;
+  analgesia: string;
+  antimicrobials: string;
+  tetanus: string;
+  medications: MedicationEntry[];
+  procIntubation: boolean;
+  procThoracostomy: boolean;
+  procSplintingReduction: boolean;
+  procLacerationRepair: boolean;
+  procOther: string;
+  procedures: ProcedureEntry[];
 }
 
 // ──────────────────────────────────────────────
@@ -523,16 +524,16 @@ export interface MedicationsAndProcedures {
 // ──────────────────────────────────────────────
 
 export interface Reassessment {
-	time: string;
-	tempC: number | null;
-	pulse: number | null;
-	bpSystolic: number | null;
-	bpDiastolic: number | null;
-	respiratoryRate: number | null;
-	spo2: number | null;
-	spo2OnOxygen: string;
-	conditionSame: boolean;
-	conditionChanges: string;
+  time: string;
+  tempC: number | null;
+  pulse: number | null;
+  bpSystolic: number | null;
+  bpDiastolic: number | null;
+  respiratoryRate: number | null;
+  spo2: number | null;
+  spo2OnOxygen: string;
+  conditionSame: boolean;
+  conditionChanges: string;
 }
 
 // ──────────────────────────────────────────────
@@ -540,31 +541,31 @@ export interface Reassessment {
 // ──────────────────────────────────────────────
 
 export interface FinalVitals {
-	tempC: number | null;
-	pulse: number | null;
-	bpSystolic: number | null;
-	bpDiastolic: number | null;
-	respiratoryRate: number | null;
-	spo2: number | null;
-	spo2OnOxygen: string;
+  tempC: number | null;
+  pulse: number | null;
+  bpSystolic: number | null;
+  bpDiastolic: number | null;
+  respiratoryRate: number | null;
+  spo2: number | null;
+  spo2OnOxygen: string;
 }
 
 export interface DispositionData {
-	checklistCompleted: YesNo;
-	edDepartureDate: string;
-	edDepartureTime: string;
-	finalVitals: FinalVitals;
-	diagnosesImpressions: string;
-	disposition: Disposition;
-	admitWard: AdmitWard;
-	transferTo: string;
-	dischargePlanDiscussed: YesNo;
-	leftWithoutBeingSeen: boolean;
-	diedCause: string;
-	acceptingProvider: string;
-	emergencyUnitProvider: string;
-	signature: string;
-	signatureDate: string;
+  checklistCompleted: YesNo;
+  edDepartureDate: string;
+  edDepartureTime: string;
+  finalVitals: FinalVitals;
+  diagnosesImpressions: string;
+  disposition: Disposition;
+  admitWard: AdmitWard;
+  transferTo: string;
+  dischargePlanDiscussed: YesNo;
+  leftWithoutBeingSeen: boolean;
+  diedCause: string;
+  acceptingProvider: string;
+  emergencyUnitProvider: string;
+  signature: string;
+  signatureDate: string;
 }
 
 // ──────────────────────────────────────────────
@@ -572,23 +573,23 @@ export interface DispositionData {
 // ──────────────────────────────────────────────
 
 export interface AssessmentData {
-	patientRegistration: PatientRegistration;
-	chiefComplaintAndVitals: ChiefComplaintAndVitals;
-	highRiskSigns: HighRiskSigns;
-	triage: Triage;
-	airway: Airway;
-	breathing: Breathing;
-	circulation: Circulation;
-	disability: Disability;
-	exposureAndFast: ExposureAndFast;
-	injuryHistory: InjuryHistory;
-	pastHistories: PastHistories;
-	physicalExam: PhysicalExam;
-	assessmentAndPlan: AssessmentAndPlan;
-	diagnostics: Diagnostics;
-	medicationsAndProcedures: MedicationsAndProcedures;
-	reassessment: Reassessment;
-	disposition: DispositionData;
+  patientRegistration: PatientRegistration;
+  chiefComplaintAndVitals: ChiefComplaintAndVitals;
+  highRiskSigns: HighRiskSigns;
+  triage: Triage;
+  airway: Airway;
+  breathing: Breathing;
+  circulation: Circulation;
+  disability: Disability;
+  exposureAndFast: ExposureAndFast;
+  injuryHistory: InjuryHistory;
+  pastHistories: PastHistories;
+  physicalExam: PhysicalExam;
+  assessmentAndPlan: AssessmentAndPlan;
+  diagnostics: Diagnostics;
+  medicationsAndProcedures: MedicationsAndProcedures;
+  reassessment: Reassessment;
+  disposition: DispositionData;
 }
 
 // ──────────────────────────────────────────────
@@ -600,45 +601,45 @@ export type SectionKey = keyof AssessmentData;
 
 /** A single validation rule that may fire against the assessment data. */
 export interface ValidationRule {
-	id: string;
-	section: SectionKey;
-	description: string;
-	applies: (data: AssessmentData) => boolean;
-	isSatisfied: (data: AssessmentData) => boolean;
+  id: string;
+  section: SectionKey;
+  description: string;
+  applies: (data: AssessmentData) => boolean;
+  isSatisfied: (data: AssessmentData) => boolean;
 }
 
 /** A rule that has fired (the field is required but unanswered). */
 export interface FiredRule {
-	id: string;
-	section: SectionKey;
-	description: string;
+  id: string;
+  section: SectionKey;
+  description: string;
 }
 
 /** Per-section completeness summary. */
 export interface SectionCompleteness {
-	section: SectionKey;
-	required: number;
-	satisfied: number;
-	missing: FiredRule[];
+  section: SectionKey;
+  required: number;
+  satisfied: number;
+  missing: FiredRule[];
 }
 
 /** Result of running the completeness validator. */
 export interface ValidationResult {
-	complete: boolean;
-	totalRequired: number;
-	totalSatisfied: number;
-	sections: SectionCompleteness[];
-	missing: FiredRule[];
+  complete: boolean;
+  totalRequired: number;
+  totalSatisfied: number;
+  sections: SectionCompleteness[];
+  missing: FiredRule[];
 }
 
 /** Priority for clinician-relevant flags. */
 export type FlagPriority = 'urgent' | 'high' | 'medium' | 'low';
 
 export interface FlaggedIssue {
-	id: string;
-	category: string;
-	message: string;
-	priority: FlagPriority;
+  id: string;
+  category: string;
+  message: string;
+  priority: FlagPriority;
 }
 
 /**
@@ -650,20 +651,20 @@ export interface FlaggedIssue {
  * and dashboard all consume this single result so they stay aligned.
  */
 export interface EuTraumaResult {
-	validation: ValidationResult;
-	flags: FlaggedIssue[];
-	/** Assigned triage category (RED / YELLOW / GREEN), or '' when not triaged. */
-	triage: TriageCategory;
-	/** Whether every applicable required field is answered. */
-	complete: boolean;
-	/** Count of flags at each priority level. */
-	urgentCount: number;
-	highCount: number;
-	mediumCount: number;
-	lowCount: number;
-	/** The highest-priority flag present, or null if the record is clear. */
-	topPriority: FlagPriority | null;
-	timestamp: string;
+  validation: ValidationResult;
+  flags: FlaggedIssue[];
+  /** Assigned triage category (RED / YELLOW / GREEN), or '' when not triaged. */
+  triage: TriageCategory;
+  /** Whether every applicable required field is answered. */
+  complete: boolean;
+  /** Count of flags at each priority level. */
+  urgentCount: number;
+  highCount: number;
+  mediumCount: number;
+  lowCount: number;
+  /** The highest-priority flag present, or null if the record is clear. */
+  topPriority: FlagPriority | null;
+  timestamp: string;
 }
 
 // ──────────────────────────────────────────────
@@ -671,8 +672,8 @@ export interface EuTraumaResult {
 // ──────────────────────────────────────────────
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
-	section: SectionKey;
+  number: number;
+  title: string;
+  shortTitle: string;
+  section: SectionKey;
 }

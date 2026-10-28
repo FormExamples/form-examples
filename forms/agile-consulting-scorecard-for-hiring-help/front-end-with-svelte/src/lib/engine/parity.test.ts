@@ -17,14 +17,14 @@ import type { AgileConsultingScorecardAssessment, GradeResult } from './types';
 const SAMPLES_DIR = resolve(__dirname, '../../../../samples');
 
 describe('engine parity — golden samples', () => {
-	it('matches sample-grade.json on sample-assessment.json', () => {
-		const assessment: AgileConsultingScorecardAssessment = JSON.parse(
-			readFileSync(resolve(SAMPLES_DIR, 'sample-assessment.json'), 'utf8'),
-		);
-		const expected: GradeResult = JSON.parse(
-			readFileSync(resolve(SAMPLES_DIR, 'sample-grade.json'), 'utf8'),
-		);
-		const actual = gradeScorecard(assessment);
-		expect(actual).toEqual(expected);
-	});
+  it('matches sample-grade.json on sample-assessment.json', () => {
+    const assessment: AgileConsultingScorecardAssessment = JSON.parse(
+      readFileSync(resolve(SAMPLES_DIR, 'sample-assessment.json'), 'utf8')
+    );
+    const expected: GradeResult = JSON.parse(
+      readFileSync(resolve(SAMPLES_DIR, 'sample-grade.json'), 'utf8')
+    );
+    const actual = gradeScorecard(assessment);
+    expect(actual).toEqual(expected);
+  });
 });

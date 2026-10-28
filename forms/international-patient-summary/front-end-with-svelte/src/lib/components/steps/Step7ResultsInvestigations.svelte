@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { assessment } from '#lib/stores/assessment.svelte.js';
-	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import ResultEntry from '#lib/components/ui/ResultEntry.svelte';
+  import { assessment } from '#lib/stores/assessment.svelte.js';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import ResultEntry from '#lib/components/ui/ResultEntry.svelte';
 
-	const d = assessment.data;
+  const d = assessment.data;
 </script>
 
 <Fieldset legend="Results & Investigations">
-	<p class="hint">Recent diagnostic results and investigations relevant to ongoing care.</p>
-	<ResultEntry bind:results={d.resultsInvestigations} />
+  <p class="hint">Recent diagnostic results and investigations relevant to ongoing care.</p>
+  <ResultEntry bind:results={d.resultsInvestigations} />
 </Fieldset>

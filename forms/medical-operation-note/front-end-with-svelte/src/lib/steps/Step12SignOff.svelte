@@ -4,7 +4,7 @@
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
   import Select from '#lib/components/ui/Select.svelte';
-  import { TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { TextAreaInput, TextInput } from '@lilydesignsystem/svelte-headless';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
 
   const r = $derived(store.result);
@@ -70,11 +70,7 @@
       />
     </Field>
     <Field label="Attestation" class="field-span-2">
-      <TextAreaInput
-        label="Attestation"
-        rows={3}
-        bind:value={store.data.signOff.attestation}
-      />
+      <TextAreaInput label="Attestation" rows={3} bind:value={store.data.signOff.attestation} />
     </Field>
     <Field
       label="Electronic signature (printed name)"
@@ -107,8 +103,8 @@
   </div>
 
   <p class="signoff-note">
-    By signing, the lead surgeon attests that the operation note above is a
-    true contemporaneous record of the procedure performed and that the
-    post-operative plan has been communicated to the recovery and ward teams.
+    By signing, the lead surgeon attests that the operation note above is a true contemporaneous
+    record of the procedure performed and that the post-operative plan has been communicated to the
+    recovery and ward teams.
   </p>
 </Fieldset>

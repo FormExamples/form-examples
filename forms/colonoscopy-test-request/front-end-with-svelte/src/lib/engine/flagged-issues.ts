@@ -12,14 +12,14 @@ import type { ColonoscopyRequest, Flag } from './types';
 
 /** Optional engine context propagated from the urgency axis. */
 export interface FlagContext {
-	twoWeekWaitEligible?: boolean;
-	twoWeekWaitRationale?: string;
+  twoWeekWaitEligible?: boolean;
+  twoWeekWaitRationale?: string;
 }
 
 /** True when a FIT result has been recorded. */
 function fitRecorded(d: ColonoscopyRequest): boolean {
-	const fit = d.redFlags.fitResultUgG;
-	return fit !== null && fit !== undefined && (fit as unknown as string) !== '';
+  const fit = d.redFlags.fitResultUgG;
+  return fit !== null && fit !== undefined && (fit as unknown as string) !== '';
 }
 
 /**
@@ -27,108 +27,112 @@ function fitRecorded(d: ColonoscopyRequest): boolean {
  * indications where FIT triages the cancer pathway.
  */
 function fitExpected(d: ColonoscopyRequest): boolean {
-	const ind = d.request.primaryIndication;
-	const symptomatic = [
-		'rectal-bleeding',
-		'change-in-bowel-habit',
-		'iron-deficiency-anaemia',
-		'positive-fit',
-		'chronic-diarrhoea',
-		'abdominal-mass'
-	];
-	if (symptomatic.includes(ind)) return true;
-	return (
-		d.redFlags.weightLoss || d.redFlags.anaemia || d.redFlags.abdominalMass || d.redFlags.rectalBleeding
-	);
+  const ind = d.request.primaryIndication;
+  const symptomatic = [
+    'rectal-bleeding',
+    'change-in-bowel-habit',
+    'iron-deficiency-anaemia',
+    'positive-fit',
+    'chronic-diarrhoea',
+    'abdominal-mass'
+  ];
+  if (symptomatic.includes(ind)) return true;
+  return (
+    d.redFlags.weightLoss ||
+    d.redFlags.anaemia ||
+    d.redFlags.abdominalMass ||
+    d.redFlags.rectalBleeding
+  );
 }
 
 /** Detect safety flags for a colonoscopy request. */
 export function detectFlags(data: ColonoscopyRequest, context?: FlagContext): Flag[] {
-	const flags: Flag[] = [];
-	const ctx = context ?? {};
+  const flags: Flag[] = [];
+  const ctx = context ?? {};
 
-	// --- Suspected cancer (two-week-wait) ---
-	if (ctx.twoWeekWaitEligible === true) {
-		flags.push({
-			flagId: 'F-SUSPECTED-CANCER-2WW-001',
-			category: 'suspected-cancer-2ww',
-			priority: 'high',
-			description:
-				ctx.twoWeekWaitRationale ||
-				'Request meets NICE NG12 / DG56 suspected-cancer two-week-wait criteria.',
-			suggestedAction:
-				'Book on the suspected-cancer two-week-wait pathway; ensure the patient is informed and tracked.'
-		});
-	}
+  // --- Suspected cancer (two-week-wait) ---
+  if (ctx.twoWeekWaitEligible === true) {
+    flags.push({
+      flagId: 'F-SUSPECTED-CANCER-2WW-001',
+      category: 'suspected-cancer-2ww',
+      priority: 'high',
+      description:
+        ctx.twoWeekWaitRationale ||
+        'Request meets NICE NG12 / DG56 suspected-cancer two-week-wait criteria.',
+      suggestedAction:
+        'Book on the suspected-cancer two-week-wait pathway; ensure the patient is informed and tracked.'
+    });
+  }
 
-	// --- High bleeding risk on anticoagulant ---
-	if (data.medication.takingAnticoagulant === true) {
-		flags.push({
-			flagId: 'F-HIGH-BLEEDING-RISK-ANTICOAG-001',
-			category: 'high-bleeding-risk-anticoag',
-			priority: 'high',
-			description: data.medication.anticoagulantAgent
-				? `Patient is taking an anticoagulant (${data.medication.anticoagulantAgent}).`
-				: 'Patient is taking an anticoagulant.',
-			suggestedAction:
-				'Plan periprocedural anticoagulant management per BSG / ESGE before booking a high-risk lower-GI procedure.'
-		});
-	}
+  // --- High bleeding risk on anticoagulant ---
+  if (data.medication.takingAnticoagulant === true) {
+    flags.push({
+      flagId: 'F-HIGH-BLEEDING-RISK-ANTICOAG-001',
+      category: 'high-bleeding-risk-anticoag',
+      priority: 'high',
+      description: data.medication.anticoagulantAgent
+        ? `Patient is taking an anticoagulant (${data.medication.anticoagulantAgent}).`
+        : 'Patient is taking an anticoagulant.',
+      suggestedAction:
+        'Plan periprocedural anticoagulant management per BSG / ESGE before booking a high-risk lower-GI procedure.'
+    });
+  }
 
-	// --- Unfit for bowel preparation ---
-	if (data.fitness.fitForBowelPrep === false) {
-		flags.push({
-			flagId: 'F-UNFIT-FOR-PREP-001',
-			category: 'unfit-for-prep',
-			priority: 'medium',
-			description: 'Patient is not assessed as fit to take bowel preparation.',
-			suggestedAction:
-				'Confirm bowel-prep fitness; consider CT colonography or an adjusted regimen for frail / renal-impaired patients.'
-		});
-	}
+  // --- Unfit for bowel preparation ---
+  if (data.fitness.fitForBowelPrep === false) {
+    flags.push({
+      flagId: 'F-UNFIT-FOR-PREP-001',
+      category: 'unfit-for-prep',
+      priority: 'medium',
+      description: 'Patient is not assessed as fit to take bowel preparation.',
+      suggestedAction:
+        'Confirm bowel-prep fitness; consider CT colonography or an adjusted regimen for frail / renal-impaired patients.'
+    });
+  }
 
-	// --- ASA IV (or V) ---
-	if (data.fitness.asaGrade === 'IV' || data.fitness.asaGrade === 'V') {
-		flags.push({
-			flagId: 'F-ASA-IV-001',
-			category: 'asa-iv',
-			priority: 'high',
-			description: `ASA physical-status grade ${data.fitness.asaGrade} — severe systemic disease.`,
-			suggestedAction:
-				'Seek senior / anaesthetic review before sedation; consider an alternative or deferred procedure.'
-		});
-	}
+  // --- ASA IV (or V) ---
+  if (data.fitness.asaGrade === 'IV' || data.fitness.asaGrade === 'V') {
+    flags.push({
+      flagId: 'F-ASA-IV-001',
+      category: 'asa-iv',
+      priority: 'high',
+      description: `ASA physical-status grade ${data.fitness.asaGrade} — severe systemic disease.`,
+      suggestedAction:
+        'Seek senior / anaesthetic review before sedation; consider an alternative or deferred procedure.'
+    });
+  }
 
-	// --- Missing FIT ---
-	if (!fitRecorded(data) && fitExpected(data)) {
-		flags.push({
-			flagId: 'F-MISSING-FIT-001',
-			category: 'missing-fit',
-			priority: 'medium',
-			description: 'No FIT result recorded for a symptomatic lower-GI referral.',
-			suggestedAction: 'Request a quantitative FIT to guide the colorectal-cancer pathway (NICE DG56).'
-		});
-	}
+  // --- Missing FIT ---
+  if (!fitRecorded(data) && fitExpected(data)) {
+    flags.push({
+      flagId: 'F-MISSING-FIT-001',
+      category: 'missing-fit',
+      priority: 'medium',
+      description: 'No FIT result recorded for a symptomatic lower-GI referral.',
+      suggestedAction:
+        'Request a quantitative FIT to guide the colorectal-cancer pathway (NICE DG56).'
+    });
+  }
 
-	// --- Completeness / data-quality flags ---
-	if (!data.request.primaryIndication) {
-		flags.push({
-			flagId: 'F-MISSING-INDICATION-001',
-			category: 'missing-indication',
-			priority: 'medium',
-			description: 'No primary clinical indication recorded.',
-			suggestedAction: 'Query the referrer for the clinical indication before vetting.'
-		});
-	}
-	if (!data.request.clinicalQuestion || data.request.clinicalQuestion.trim() === '') {
-		flags.push({
-			flagId: 'F-MISSING-CLINICAL-QUESTION-001',
-			category: 'missing-clinical-question',
-			priority: 'medium',
-			description: 'No specific clinical question recorded.',
-			suggestedAction: 'Query the referrer for the specific question the procedure should answer.'
-		});
-	}
+  // --- Completeness / data-quality flags ---
+  if (!data.request.primaryIndication) {
+    flags.push({
+      flagId: 'F-MISSING-INDICATION-001',
+      category: 'missing-indication',
+      priority: 'medium',
+      description: 'No primary clinical indication recorded.',
+      suggestedAction: 'Query the referrer for the clinical indication before vetting.'
+    });
+  }
+  if (!data.request.clinicalQuestion || data.request.clinicalQuestion.trim() === '') {
+    flags.push({
+      flagId: 'F-MISSING-CLINICAL-QUESTION-001',
+      category: 'missing-clinical-question',
+      priority: 'medium',
+      description: 'No specific clinical question recorded.',
+      suggestedAction: 'Query the referrer for the specific question the procedure should answer.'
+    });
+  }
 
-	return flags;
+  return flags;
 }

@@ -10,7 +10,7 @@ import {
   peopleToNotifyExceedsFive,
   personToNotifyIsAttorney,
   attorneyWitnessIsDonor,
-  overFourAttorneysNoContinuation,
+  overFourAttorneysNoContinuation
 } from './blocker-rules.js';
 import { createEmptyLpa, createEmptyPerson } from '#lib/factory.js';
 
@@ -83,7 +83,7 @@ describe('blocker rules', () => {
         noRestrictionsOnActing: true,
         isRelatedToDonorOrAttorney: false,
         isCareHomeOwnerOrEmployee: false,
-        eligibilityConfirmationAt: '',
+        eligibilityConfirmationAt: ''
       };
       const result = certificateProviderIsAttorney(lpa);
       expect(result).not.toBeNull();
@@ -111,8 +111,8 @@ describe('blocker rules', () => {
         witness: {
           person: attorneyPerson,
           witnessSignatureBlobPath: '',
-          witnessedOn: '',
-        },
+          witnessedOn: ''
+        }
       });
       const result = witnessIsAttorney(lpa);
       expect(result).not.toBeNull();
@@ -162,7 +162,7 @@ describe('blocker rules', () => {
       lpa.replacementAttorneys.push({
         person: createEmptyPerson(),
         ordinal: 1,
-        replacementStepInCondition: '',
+        replacementStepInCondition: ''
       });
       expect(jointlyButNoReplacement(lpa)).toBeNull();
     });
@@ -228,8 +228,8 @@ describe('blocker rules', () => {
         witness: {
           person: { ...lpa.donor },
           witnessSignatureBlobPath: '',
-          witnessedOn: '',
-        },
+          witnessedOn: ''
+        }
       });
       expect(attorneyWitnessIsDonor(lpa)?.ruleId).toBe('AttorneyWitnessIsDonor');
     });
@@ -243,9 +243,7 @@ describe('blocker rules', () => {
         p.dateOfBirth = '1980-01-01';
         lpa.attorneys.push({ person: p, ordinal: i });
       }
-      expect(overFourAttorneysNoContinuation(lpa)?.ruleId).toBe(
-        'OverFourAttorneysNoContinuation',
-      );
+      expect(overFourAttorneysNoContinuation(lpa)?.ruleId).toBe('OverFourAttorneysNoContinuation');
     });
 
     it('does not fire with 4 attorneys', () => {

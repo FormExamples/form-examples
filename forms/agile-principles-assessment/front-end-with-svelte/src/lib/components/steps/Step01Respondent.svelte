@@ -15,11 +15,13 @@
 <section>
   <h2 class="text-xl font-semibold mb-3">Step 1 — Respondent identification</h2>
   <p class="text-sm text-base-content/70 mb-4">
-    Tell us who is completing this assessment and which team or organisation
-    you are scoring. None of these fields affect the maturity calculation.
+    Tell us who is completing this assessment and which team or organisation you are scoring. None
+    of these fields affect the maturity calculation.
   </p>
 
-  <label class="flex items-start gap-3 mb-4 p-3 border border-base-300 rounded bg-base-200 cursor-pointer">
+  <label
+    class="flex items-start gap-3 mb-4 p-3 border border-base-300 rounded bg-base-200 cursor-pointer"
+  >
     <input
       type="checkbox"
       class="mt-1"
@@ -29,9 +31,8 @@
     <span class="text-sm">
       <span class="font-medium">Submit anonymously.</span>
       <span class="text-base-content/70">
-        When checked, name, email, and role are cleared and excluded from the
-        report. Team and organisation context are still recorded so coaching
-        aggregates can group the response.
+        When checked, name, email, and role are cleared and excluded from the report. Team and
+        organisation context are still recorded so coaching aggregates can group the response.
       </span>
     </span>
   </label>

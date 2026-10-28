@@ -68,7 +68,7 @@ export function calculateOperationGrade(data: OperationNote): GradingResult {
       category: 'transfusion',
       description: mhpActivated
         ? 'Massive haemorrhage protocol activated'
-        : `${totalTransfusionUnits(data.safetyCountsEbl.prbcUnits, data.safetyCountsEbl.ffpUnits, data.safetyCountsEbl.plateletsUnits, data.safetyCountsEbl.cryoUnits)} blood-product units transfused (≥ 4 PRBC)`,
+        : `${totalTransfusionUnits(data.safetyCountsEbl.prbcUnits, data.safetyCountsEbl.ffpUnits, data.safetyCountsEbl.plateletsUnits, data.safetyCountsEbl.cryoUnits)} blood-product units transfused (≥ 4 PRBC)`
     });
   }
 
@@ -81,7 +81,7 @@ export function calculateOperationGrade(data: OperationNote): GradingResult {
       instrument: 'composite',
       grade: 'complicated',
       category: 'approach',
-      description: 'Planned minimally-invasive case converted to open',
+      description: 'Planned minimally-invasive case converted to open'
     });
   }
 
@@ -96,7 +96,7 @@ export function calculateOperationGrade(data: OperationNote): GradingResult {
         instrument: 'composite',
         grade: 'critical',
         category: 'asa',
-        description: `ASA ${asa} — moribund / brain-dead patient`,
+        description: `ASA ${asa} — moribund / brain-dead patient`
       });
     } else if (asa === 4) {
       asaRisk = 'high-risk';
@@ -105,7 +105,7 @@ export function calculateOperationGrade(data: OperationNote): GradingResult {
         instrument: 'composite',
         grade: 'high-risk',
         category: 'asa',
-        description: 'ASA IV — severe systemic disease threatening life',
+        description: 'ASA IV — severe systemic disease threatening life'
       });
     }
   }
@@ -119,7 +119,7 @@ export function calculateOperationGrade(data: OperationNote): GradingResult {
       instrument: 'composite',
       grade: 'high-risk',
       category: 'disposition',
-      description: 'Unplanned escalation of post-op disposition',
+      description: 'Unplanned escalation of post-op disposition'
     });
   }
 
@@ -133,7 +133,7 @@ export function calculateOperationGrade(data: OperationNote): GradingResult {
     transfusionRisk,
     conversionRisk,
     asaRisk,
-    dispositionRisk,
+    dispositionRisk
   ].reduce<CompositeRisk>((acc, r) => maxRisk(acc, r), 'routine');
 
   const additionalFlags = detectAdditionalFlags(data);
@@ -150,6 +150,6 @@ export function calculateOperationGrade(data: OperationNote): GradingResult {
     bloodLossBand: bl.band,
     countsAgreed: counts.countsAgreed,
     firedRules,
-    additionalFlags,
+    additionalFlags
   };
 }

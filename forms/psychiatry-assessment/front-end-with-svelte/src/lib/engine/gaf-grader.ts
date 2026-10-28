@@ -9,32 +9,32 @@ import { detectAdditionalFlags } from './flagged-issues';
  * A score of 100 with no fired rules indicates superior functioning.
  */
 export function calculateGAF(data: AssessmentData): {
-	gafScore: GAFScore;
-	firedRules: FiredRule[];
+  gafScore: GAFScore;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	for (const rule of gafRules) {
-		try {
-			if (rule.evaluate(data)) {
-				firedRules.push({
-					id: rule.id,
-					domain: rule.domain,
-					description: rule.description,
-					scoreImpact: rule.scoreImpact
-				});
-			}
-		} catch (e) {
-			// Rule evaluation failed - log for debugging but continue grading
-			console.warn(`GAF rule ${rule.id} evaluation failed:`, e);
-		}
-	}
+  for (const rule of gafRules) {
+    try {
+      if (rule.evaluate(data)) {
+        firedRules.push({
+          id: rule.id,
+          domain: rule.domain,
+          description: rule.description,
+          scoreImpact: rule.scoreImpact
+        });
+      }
+    } catch (e) {
+      // Rule evaluation failed - log for debugging but continue grading
+      console.warn(`GAF rule ${rule.id} evaluation failed:`, e);
+    }
+  }
 
-	// Calculate GAF score: start at 100, subtract impacts, clamp to 1-100
-	const totalImpact = firedRules.reduce((sum, r) => sum + r.scoreImpact, 0);
-	const gafScore: GAFScore = Math.max(1, Math.min(100, 100 - totalImpact));
+  // Calculate GAF score: start at 100, subtract impacts, clamp to 1-100
+  const totalImpact = firedRules.reduce((sum, r) => sum + r.scoreImpact, 0);
+  const gafScore: GAFScore = Math.max(1, Math.min(100, 100 - totalImpact));
 
-	return { gafScore, firedRules };
+  return { gafScore, firedRules };
 }
 
 /**
@@ -43,11 +43,11 @@ export function calculateGAF(data: AssessmentData): {
  * used by both the wizard report and the clinician dashboard.
  */
 export function gradeAssessment(data: AssessmentData): GradingResult {
-	const { gafScore, firedRules } = calculateGAF(data);
-	return {
-		gafScore,
-		firedRules,
-		additionalFlags: detectAdditionalFlags(data),
-		timestamp: new Date().toISOString()
-	};
+  const { gafScore, firedRules } = calculateGAF(data);
+  return {
+    gafScore,
+    firedRules,
+    additionalFlags: detectAdditionalFlags(data),
+    timestamp: new Date().toISOString()
+  };
 }

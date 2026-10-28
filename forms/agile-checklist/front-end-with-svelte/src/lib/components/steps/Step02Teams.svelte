@@ -9,9 +9,10 @@
 
 <Fieldset legend="Step 2 — Teams (25 items)">
   <p class="hint">
-    Concrete behaviours of the people doing the work — autonomy, collaboration,
-    learning, finishing, and motivation. Answer <strong>Yes</strong> when the
-    behaviour is reliably true today, <strong>No</strong> when it is not, and
+    Concrete behaviours of the people doing the work — autonomy, collaboration, learning, finishing,
+    and motivation. Answer <strong>Yes</strong> when the behaviour is reliably true today,
+    <strong>No</strong>
+    when it is not, and
     <strong>N/A</strong> when the item does not apply.
   </p>
 

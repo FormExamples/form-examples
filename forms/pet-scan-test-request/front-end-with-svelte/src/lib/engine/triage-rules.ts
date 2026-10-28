@@ -11,14 +11,14 @@ import type { PetScanRequest, TriageTier, FiredRule } from './types';
 export const TRIAGE_ORDER: TriageTier[] = ['routine', 'urgent', 'emergency'];
 
 export const TARGET_TIMEFRAMES: Record<string, string> = {
-	routine: 'Within 2-4 weeks',
-	urgent: 'Within 3-7 days',
-	emergency: 'Within 24-48 hours'
+  routine: 'Within 2-4 weeks',
+  urgent: 'Within 3-7 days',
+  emergency: 'Within 24-48 hours'
 };
 
 /** Return whichever of two triage tiers is more severe. */
 export function maxTier(a: TriageTier, b: TriageTier): TriageTier {
-	return TRIAGE_ORDER.indexOf(a) >= TRIAGE_ORDER.indexOf(b) ? a : b;
+  return TRIAGE_ORDER.indexOf(a) >= TRIAGE_ORDER.indexOf(b) ? a : b;
 }
 
 /**
@@ -26,27 +26,27 @@ export function maxTier(a: TriageTier, b: TriageTier): TriageTier {
  * from the requested urgency.
  */
 export function scoreTriage(data: PetScanRequest): {
-	tier: TriageTier;
-	targetTimeframe: string;
-	firedRules: FiredRule[];
+  tier: TriageTier;
+  targetTimeframe: string;
+  firedRules: FiredRule[];
 } {
-	const requested = data.justification.urgency || 'routine';
-	const tier: TriageTier = (TRIAGE_ORDER as string[]).includes(requested)
-		? (requested as TriageTier)
-		: 'routine';
+  const requested = data.justification.urgency || 'routine';
+  const tier: TriageTier = (TRIAGE_ORDER as string[]).includes(requested)
+    ? (requested as TriageTier)
+    : 'routine';
 
-	const firedRules: FiredRule[] = [
-		{
-			ruleId: 'R-TRIAGE-REQUESTED',
-			axis: 'triage',
-			category: 'requested',
-			description: `Triage follows the requested urgency (${tier}).`
-		}
-	];
+  const firedRules: FiredRule[] = [
+    {
+      ruleId: 'R-TRIAGE-REQUESTED',
+      axis: 'triage',
+      category: 'requested',
+      description: `Triage follows the requested urgency (${tier}).`
+    }
+  ];
 
-	return {
-		tier,
-		targetTimeframe: TARGET_TIMEFRAMES[tier] ?? '',
-		firedRules
-	};
+  return {
+    tier,
+    targetTimeframe: TARGET_TIMEFRAMES[tier] ?? '',
+    firedRules
+  };
 }

@@ -7,10 +7,10 @@ import type { AssessmentData, OttawaRule } from './types';
  * either is unanswered, this is false for the purpose of the decision.
  */
 export function unableToBearWeight(d: AssessmentData): boolean {
-	return (
-		d.weightBearing.ableToBearWeightImmediately === 'no' &&
-		d.weightBearing.ableToBearWeightNow === 'no'
-	);
+  return (
+    d.weightBearing.ableToBearWeightImmediately === 'no' &&
+    d.weightBearing.ableToBearWeightNow === 'no'
+  );
 }
 
 /**
@@ -25,61 +25,61 @@ export function unableToBearWeight(d: AssessmentData): boolean {
  * SQL table (rule_id, region, criterion, description).
  */
 export const ottawaRules: OttawaRule[] = [
-	// ─── ANKLE CRITERION A1: LATERAL MALLEOLUS ────────────────────
-	{
-		id: 'A1',
-		region: 'ankle',
-		criterion: 'lateral-malleolus-tenderness',
-		description:
-			'Bone tenderness at the posterior edge or tip of the lateral malleolus (distal 6 cm of the fibula)',
-		evaluate: (d) => d.ankleTenderness.lateralMalleolusTenderness === 'yes'
-	},
+  // ─── ANKLE CRITERION A1: LATERAL MALLEOLUS ────────────────────
+  {
+    id: 'A1',
+    region: 'ankle',
+    criterion: 'lateral-malleolus-tenderness',
+    description:
+      'Bone tenderness at the posterior edge or tip of the lateral malleolus (distal 6 cm of the fibula)',
+    evaluate: (d) => d.ankleTenderness.lateralMalleolusTenderness === 'yes'
+  },
 
-	// ─── ANKLE CRITERION A2: MEDIAL MALLEOLUS ─────────────────────
-	{
-		id: 'A2',
-		region: 'ankle',
-		criterion: 'medial-malleolus-tenderness',
-		description:
-			'Bone tenderness at the posterior edge or tip of the medial malleolus (distal 6 cm of the tibia)',
-		evaluate: (d) => d.ankleTenderness.medialMalleolusTenderness === 'yes'
-	},
+  // ─── ANKLE CRITERION A2: MEDIAL MALLEOLUS ─────────────────────
+  {
+    id: 'A2',
+    region: 'ankle',
+    criterion: 'medial-malleolus-tenderness',
+    description:
+      'Bone tenderness at the posterior edge or tip of the medial malleolus (distal 6 cm of the tibia)',
+    evaluate: (d) => d.ankleTenderness.medialMalleolusTenderness === 'yes'
+  },
 
-	// ─── ANKLE CRITERION A3: UNABLE TO BEAR WEIGHT ────────────────
-	{
-		id: 'A3',
-		region: 'ankle',
-		criterion: 'unable-to-bear-weight',
-		description:
-			'Inability to bear weight — cannot take four steps both immediately after the injury and at assessment',
-		evaluate: (d) => unableToBearWeight(d)
-	},
+  // ─── ANKLE CRITERION A3: UNABLE TO BEAR WEIGHT ────────────────
+  {
+    id: 'A3',
+    region: 'ankle',
+    criterion: 'unable-to-bear-weight',
+    description:
+      'Inability to bear weight — cannot take four steps both immediately after the injury and at assessment',
+    evaluate: (d) => unableToBearWeight(d)
+  },
 
-	// ─── FOOT CRITERION F1: BASE OF FIFTH METATARSAL ──────────────
-	{
-		id: 'F1',
-		region: 'foot',
-		criterion: 'fifth-metatarsal-base-tenderness',
-		description: 'Bone tenderness at the base of the fifth metatarsal',
-		evaluate: (d) => d.footTenderness.fifthMetatarsalBaseTenderness === 'yes'
-	},
+  // ─── FOOT CRITERION F1: BASE OF FIFTH METATARSAL ──────────────
+  {
+    id: 'F1',
+    region: 'foot',
+    criterion: 'fifth-metatarsal-base-tenderness',
+    description: 'Bone tenderness at the base of the fifth metatarsal',
+    evaluate: (d) => d.footTenderness.fifthMetatarsalBaseTenderness === 'yes'
+  },
 
-	// ─── FOOT CRITERION F2: NAVICULAR ─────────────────────────────
-	{
-		id: 'F2',
-		region: 'foot',
-		criterion: 'navicular-tenderness',
-		description: 'Bone tenderness at the navicular',
-		evaluate: (d) => d.footTenderness.navicularTenderness === 'yes'
-	},
+  // ─── FOOT CRITERION F2: NAVICULAR ─────────────────────────────
+  {
+    id: 'F2',
+    region: 'foot',
+    criterion: 'navicular-tenderness',
+    description: 'Bone tenderness at the navicular',
+    evaluate: (d) => d.footTenderness.navicularTenderness === 'yes'
+  },
 
-	// ─── FOOT CRITERION F3: UNABLE TO BEAR WEIGHT ─────────────────
-	{
-		id: 'F3',
-		region: 'foot',
-		criterion: 'unable-to-bear-weight',
-		description:
-			'Inability to bear weight — cannot take four steps both immediately after the injury and at assessment',
-		evaluate: (d) => unableToBearWeight(d)
-	}
+  // ─── FOOT CRITERION F3: UNABLE TO BEAR WEIGHT ─────────────────
+  {
+    id: 'F3',
+    region: 'foot',
+    criterion: 'unable-to-bear-weight',
+    description:
+      'Inability to bear weight — cannot take four steps both immediately after the injury and at assessment',
+    evaluate: (d) => unableToBearWeight(d)
+  }
 ];

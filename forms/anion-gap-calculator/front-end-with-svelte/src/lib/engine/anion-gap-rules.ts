@@ -32,37 +32,36 @@ export const VERY_HIGH = 20;
  * upper bound (16 with potassium, 12 without) are inclusive-to-normal.
  */
 export const classificationRules: ClassificationRule[] = [
-	{
-		id: 'R-CLASSIFY-VERY-HIGH-01',
-		instrument: 'classification',
-		band: 'very-high',
-		category: 'reference-range',
-		description: 'Anion gap at or above 20 mmol/L — very high, urgent',
-		evaluate: (v) => v >= VERY_HIGH
-	},
-	{
-		id: 'R-CLASSIFY-HIGH-01',
-		instrument: 'classification',
-		band: 'high',
-		category: 'reference-range',
-		description:
-			'Anion gap above the normal upper bound — high anion gap metabolic acidosis',
-		evaluate: (v, _low, high) => v > high
-	},
-	{
-		id: 'R-CLASSIFY-LOW-01',
-		instrument: 'classification',
-		band: 'low',
-		category: 'reference-range',
-		description: 'Anion gap below 8 mmol/L — low',
-		evaluate: (v, low) => v < low
-	},
-	{
-		id: 'R-CLASSIFY-NORMAL-01',
-		instrument: 'classification',
-		band: 'normal',
-		category: 'reference-range',
-		description: 'Anion gap within the normal reference range',
-		evaluate: (v, low, high) => v >= low && v <= high
-	}
+  {
+    id: 'R-CLASSIFY-VERY-HIGH-01',
+    instrument: 'classification',
+    band: 'very-high',
+    category: 'reference-range',
+    description: 'Anion gap at or above 20 mmol/L — very high, urgent',
+    evaluate: (v) => v >= VERY_HIGH
+  },
+  {
+    id: 'R-CLASSIFY-HIGH-01',
+    instrument: 'classification',
+    band: 'high',
+    category: 'reference-range',
+    description: 'Anion gap above the normal upper bound — high anion gap metabolic acidosis',
+    evaluate: (v, _low, high) => v > high
+  },
+  {
+    id: 'R-CLASSIFY-LOW-01',
+    instrument: 'classification',
+    band: 'low',
+    category: 'reference-range',
+    description: 'Anion gap below 8 mmol/L — low',
+    evaluate: (v, low) => v < low
+  },
+  {
+    id: 'R-CLASSIFY-NORMAL-01',
+    instrument: 'classification',
+    band: 'normal',
+    category: 'reference-range',
+    description: 'Anion gap within the normal reference range',
+    evaluate: (v, low, high) => v >= low && v <= high
+  }
 ];

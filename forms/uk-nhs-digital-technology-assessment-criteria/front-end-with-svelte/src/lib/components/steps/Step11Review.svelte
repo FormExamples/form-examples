@@ -12,8 +12,8 @@
 
 <Fieldset legend="Step 11 — Review and outcome">
   <p class="text-sm">
-    Computed outcome: <strong>{r.outcomeLabel}</strong> — mandatory {r.mandatoryMet}/{r.mandatoryTotal} met,
-    advisory {r.advisoryMet}/{r.advisoryTotal} met.
+    Computed outcome: <strong>{r.outcomeLabel}</strong> — mandatory {r.mandatoryMet}/{r.mandatoryTotal}
+    met, advisory {r.advisoryMet}/{r.advisoryTotal} met.
   </p>
   <ul class="text-sm">
     {#each SECTIONS as s (s.id)}

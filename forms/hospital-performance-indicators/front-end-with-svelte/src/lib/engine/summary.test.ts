@@ -1,7 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { createEmptyIndicators } from './factory.js';
 import { summariseIndicators } from './summary.js';
-import { PERFORMANCE_INDICATORS, TOTAL_INDICATORS, TOTAL_CATEGORIES } from '#lib/config/indicators.js';
+import {
+  PERFORMANCE_INDICATORS,
+  TOTAL_INDICATORS,
+  TOTAL_CATEGORIES
+} from '#lib/config/indicators.js';
 
 describe('summariseIndicators', () => {
   it('reports zero recorded on a blank report', () => {
@@ -49,7 +53,7 @@ describe('summariseIndicators', () => {
       category: 1,
       categoryTitle: 'Finance Indicators',
       reported: 2,
-      total: 9,
+      total: 9
     });
 
     const cat2 = result.categoryCounts.find((c) => c.category === 2);
@@ -57,7 +61,7 @@ describe('summariseIndicators', () => {
       category: 2,
       categoryTitle: 'Process Indicators',
       reported: 1,
-      total: 28,
+      total: 28
     });
 
     const cat4 = result.categoryCounts.find((c) => c.category === 4);
@@ -65,7 +69,7 @@ describe('summariseIndicators', () => {
       category: 4,
       categoryTitle: 'Customer Indicators',
       reported: 0,
-      total: 5,
+      total: 5
     });
   });
 });

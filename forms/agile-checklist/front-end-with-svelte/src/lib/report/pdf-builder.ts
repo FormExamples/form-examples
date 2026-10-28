@@ -7,7 +7,10 @@ import { maturityLabel, pctOrDash } from '#lib/engine/utils.js';
  * Build the pdfmake document definition for an agile checklist report. Pure —
  * no pdfmake runtime import — so it can run on the server in the PDF endpoint.
  */
-export function buildPdfDocument(data: AgileChecklist, result: GradingResult): TDocumentDefinitions {
+export function buildPdfDocument(
+  data: AgileChecklist,
+  result: GradingResult
+): TDocumentDefinitions {
   const itemRows: Content = {
     table: {
       widths: ['auto', 'auto', '*', 'auto'],
@@ -17,32 +20,32 @@ export function buildPdfDocument(data: AgileChecklist, result: GradingResult): T
           { text: 'ID', bold: true },
           { text: 'Section', bold: true },
           { text: 'Item', bold: true },
-          { text: 'Answer', bold: true },
+          { text: 'Answer', bold: true }
         ],
         ...ALL_ITEMS.map((item) => [
           item.id,
           SECTION_LABEL[item.section],
           item.text,
-          (data.answers[item.id] || '—').toString().toUpperCase(),
-        ]),
-      ],
+          (data.answers[item.id] || '—').toString().toUpperCase()
+        ])
+      ]
     },
-    margin: [0, 4, 0, 8],
+    margin: [0, 4, 0, 8]
   };
 
   const flagsList: Content = result.additionalFlags.length
     ? {
         ul: result.additionalFlags.map(
-          (f) => `[${f.priority.toUpperCase()}] ${f.description} — ${f.suggestedAction}`,
+          (f) => `[${f.priority.toUpperCase()}] ${f.description} — ${f.suggestedAction}`
         ),
-        margin: [0, 4, 0, 8],
+        margin: [0, 4, 0, 8]
       }
     : { text: 'No operational flags raised.', italics: true, margin: [0, 4, 0, 8] };
 
   const actions: string[] = [
     data.actionPlan.topAction1,
     data.actionPlan.topAction2,
-    data.actionPlan.topAction3,
+    data.actionPlan.topAction3
   ].filter((a) => a.trim().length > 0);
 
   const actionContent: Content = actions.length
@@ -54,7 +57,7 @@ export function buildPdfDocument(data: AgileChecklist, result: GradingResult): T
     content: [
       { text: 'Agile Checklist', style: 'h1' },
       {
-        text: `Respondent: ${data.respondent.fullName || '—'} (${data.respondent.role || '—'})`,
+        text: `Respondent: ${data.respondent.fullName || '—'} (${data.respondent.role || '—'})`
       },
       { text: `Team: ${data.respondent.teamName || '—'}` },
       { text: `Organisation: ${data.respondent.organisationName || '—'}` },
@@ -63,13 +66,13 @@ export function buildPdfDocument(data: AgileChecklist, result: GradingResult): T
       { text: 'Composite maturity', style: 'h2' },
       {
         text: `${maturityLabel(result.maturity).toUpperCase()} — overall ${pctOrDash(
-          result.overallPercent,
-        )} (${result.answeredCount} of 57 answered)`,
+          result.overallPercent
+        )} (${result.answeredCount} of 57 answered)`
       },
       {
         text: `Teams: ${pctOrDash(result.teams.percent)} (${result.teams.band})  ·  Stakeholders: ${pctOrDash(
-          result.stakeholders.percent,
-        )} (${result.stakeholders.band})  ·  Practices: ${pctOrDash(result.practices.percent)} (${result.practices.band})`,
+          result.stakeholders.percent
+        )} (${result.stakeholders.band})  ·  Practices: ${pctOrDash(result.practices.percent)} (${result.practices.band})`
       },
       { text: ' ' },
       { text: 'Operational flags', style: 'h2' },
@@ -79,16 +82,16 @@ export function buildPdfDocument(data: AgileChecklist, result: GradingResult): T
       ...(data.actionPlan.coachNotes
         ? ([
             { text: 'Coach notes', style: 'h2' },
-            { text: data.actionPlan.coachNotes },
+            { text: data.actionPlan.coachNotes }
           ] as Content[])
         : []),
       { text: 'Per-item answers', style: 'h2' },
-      itemRows,
+      itemRows
     ],
     styles: {
       h1: { fontSize: 18, bold: true, margin: [0, 0, 0, 8] },
-      h2: { fontSize: 13, bold: true, margin: [0, 8, 0, 4] },
+      h2: { fontSize: 13, bold: true, margin: [0, 8, 0, 4] }
     },
-    defaultStyle: { fontSize: 9 },
+    defaultStyle: { fontSize: 9 }
   };
 }

@@ -2,7 +2,7 @@
   import { assessment } from '#lib/stores/assessment.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { CheckboxInput, DateInput, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { CheckboxInput, DateInput, TextInput } from '@lilydesignsystem/svelte-headless';
 
   const ack = assessment.data.acknowledgementSignature;
 
@@ -12,9 +12,7 @@
 </script>
 
 <Fieldset legend="Step 3 — Acknowledgement & Signature">
-  <p class="hint">
-    Please confirm you have read and understood the code of conduct.
-  </p>
+  <p class="hint">Please confirm you have read and understood the code of conduct.</p>
 
   <Field label="Acknowledgement" required>
     <label class="ack-label">
@@ -23,9 +21,8 @@
         label="I have read and agree to uphold the Code of Conduct"
         bind:checked={ack.agreed}
       />
-      I have read, understood, and agree to uphold the above Code of Conduct
-      principles. I will abide by these principles in every professional
-      interaction with patients and colleagues.
+      I have read, understood, and agree to uphold the above Code of Conduct principles. I will abide
+      by these principles in every professional interaction with patients and colleagues.
     </label>
   </Field>
 

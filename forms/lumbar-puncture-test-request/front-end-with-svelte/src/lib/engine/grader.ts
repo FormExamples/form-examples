@@ -1,17 +1,12 @@
 import type {
-	LumbarPunctureRequest,
-	GradingResult,
-	Recommendation,
-	AppropriatenessBand,
-	ContraindicationBand,
-	FiredRule
+  LumbarPunctureRequest,
+  GradingResult,
+  Recommendation,
+  AppropriatenessBand,
+  ContraindicationBand,
+  FiredRule
 } from './types';
-import {
-	scoreAppropriateness,
-	scoreSafety,
-	scoreCompleteness,
-	scoreTriage
-} from './rules';
+import { scoreAppropriateness, scoreSafety, scoreCompleteness, scoreTriage } from './rules';
 import { detectFlags } from './flagged-issues';
 
 /**
@@ -35,43 +30,43 @@ import { detectFlags } from './flagged-issues';
  * No side effects, no network calls, no I/O.
  */
 export function calculateGrade(data: LumbarPunctureRequest): GradingResult {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	// Axis A — appropriateness.
-	const appr = scoreAppropriateness(
-		data.procedure.primaryIndication,
-		data.procedure.procedureIntent
-	);
-	firedRules.push(appr.firedRule);
+  // Axis A — appropriateness.
+  const appr = scoreAppropriateness(
+    data.procedure.primaryIndication,
+    data.procedure.procedureIntent
+  );
+  firedRules.push(appr.firedRule);
 
-	// Axis B — safety / contraindication.
-	const safety = scoreSafety(data);
-	firedRules.push(...safety.firedRules);
+  // Axis B — safety / contraindication.
+  const safety = scoreSafety(data);
+  firedRules.push(...safety.firedRules);
 
-	// Axis C — completeness.
-	const completeness = scoreCompleteness(data);
-	firedRules.push(...completeness.missing);
+  // Axis C — completeness.
+  const completeness = scoreCompleteness(data);
+  firedRules.push(...completeness.missing);
 
-	// Axis D — triage.
-	const triage = scoreTriage(data);
-	firedRules.push(...triage.firedRules);
+  // Axis D — triage.
+  const triage = scoreTriage(data);
+  firedRules.push(...triage.firedRules);
 
-	const recommendation = deriveRecommendation(appr.band, safety.band, completeness.percent);
+  const recommendation = deriveRecommendation(appr.band, safety.band, completeness.percent);
 
-	const flags = detectFlags(data);
+  const flags = detectFlags(data);
 
-	return {
-		appropriatenessScore: appr.score,
-		appropriatenessBand: appr.band,
-		contraindicationBand: safety.band,
-		completenessPercent: completeness.percent,
-		triageTier: triage.tier,
-		targetTimeframe: triage.targetTimeframe,
-		recommendation,
-		firedRules,
-		flags,
-		gradedAt: new Date().toISOString()
-	};
+  return {
+    appropriatenessScore: appr.score,
+    appropriatenessBand: appr.band,
+    contraindicationBand: safety.band,
+    completenessPercent: completeness.percent,
+    triageTier: triage.tier,
+    targetTimeframe: triage.targetTimeframe,
+    recommendation,
+    firedRules,
+    flags,
+    gradedAt: new Date().toISOString()
+  };
 }
 
 /**
@@ -79,13 +74,13 @@ export function calculateGrade(data: LumbarPunctureRequest): GradingResult {
  * Least-alarming wins only when nothing escalates.
  */
 export function deriveRecommendation(
-	appropriatenessBand: AppropriatenessBand,
-	contraindicationBand: ContraindicationBand,
-	completenessPercent: number
+  appropriatenessBand: AppropriatenessBand,
+  contraindicationBand: ContraindicationBand,
+  completenessPercent: number
 ): Recommendation {
-	if (contraindicationBand === 'contraindicated') return 'reject';
-	if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
-	if (contraindicationBand === 'caution') return 'query-referrer';
-	if (completenessPercent < 50) return 'query-referrer';
-	return 'accept';
+  if (contraindicationBand === 'contraindicated') return 'reject';
+  if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
+  if (contraindicationBand === 'caution') return 'query-referrer';
+  if (completenessPercent < 50) return 'query-referrer';
+  return 'accept';
 }

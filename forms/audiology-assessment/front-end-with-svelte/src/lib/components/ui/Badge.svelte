@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { hearingGradeLabel, hearingGradeColor } from '#lib/engine/utils.js';
+  import { hearingGradeLabel, hearingGradeColor } from '#lib/engine/utils.js';
 
-	let {
-		grade
-	}: {
-		grade: string;
-	} = $props();
+  let {
+    grade
+  }: {
+    grade: string;
+  } = $props();
 
-	const colorClass = $derived(hearingGradeColor(grade));
-	const label = $derived(hearingGradeLabel(grade));
+  const colorClass = $derived(hearingGradeColor(grade));
+  const label = $derived(hearingGradeLabel(grade));
 </script>
 
 <span class="inline-block rounded-full border px-4 py-1.5 text-sm font-bold {colorClass}">
-	{label}
+  {label}
 </span>

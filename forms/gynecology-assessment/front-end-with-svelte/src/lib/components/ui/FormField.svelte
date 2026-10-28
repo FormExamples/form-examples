@@ -7,7 +7,7 @@
     label,
     id,
     hint = '',
-    children,
+    children
   }: { label: string; id: string; hint?: string; children: Snippet } = $props();
 </script>
 

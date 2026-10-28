@@ -1,9 +1,9 @@
 import type {
-	SleepStudyRequest,
-	GradingResult,
-	Recommendation,
-	AppropriatenessBand,
-	FiredRule
+  SleepStudyRequest,
+  GradingResult,
+  Recommendation,
+  AppropriatenessBand,
+  FiredRule
 } from './types';
 import { gradeAppropriateness } from './appropriateness-rules';
 import { gradePriority } from './priority-rules';
@@ -13,10 +13,10 @@ import { detectFlags } from './flagged-issues';
 
 /** Display labels for the overall vetting recommendation. */
 export const RECOMMENDATION_LABELS: Record<string, string> = {
-	accept: 'Accept and book',
-	'query-referrer': 'Query the referrer',
-	redirect: 'Redirect to a more suitable study',
-	reject: 'Reject'
+  accept: 'Accept and book',
+  'query-referrer': 'Query the referrer',
+  redirect: 'Redirect to a more suitable study',
+  reject: 'Reject'
 };
 
 /**
@@ -35,40 +35,40 @@ export const RECOMMENDATION_LABELS: Record<string, string> = {
  * guidance). No side effects, no network calls, no I/O.
  */
 export function calculateGrade(request: SleepStudyRequest): GradingResult {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	// Axis A — appropriateness.
-	const a = gradeAppropriateness(request);
-	firedRules.push(...a.firedRules);
+  // Axis A — appropriateness.
+  const a = gradeAppropriateness(request);
+  firedRules.push(...a.firedRules);
 
-	// Axis B — clinical priority.
-	const b = gradePriority(request);
-	firedRules.push(...b.firedRules);
+  // Axis B — clinical priority.
+  const b = gradePriority(request);
+  firedRules.push(...b.firedRules);
 
-	// Axis C — completeness.
-	const c = gradeCompleteness(request);
-	firedRules.push(...c.firedRules);
+  // Axis C — completeness.
+  const c = gradeCompleteness(request);
+  firedRules.push(...c.firedRules);
 
-	// Axis D — triage.
-	const d = gradeTriage(request);
-	firedRules.push(...d.firedRules);
+  // Axis D — triage.
+  const d = gradeTriage(request);
+  firedRules.push(...d.firedRules);
 
-	const recommendation = deriveRecommendation(a.appropriatenessBand, c.completenessPercent);
-	const flags = detectFlags(request);
+  const recommendation = deriveRecommendation(a.appropriatenessBand, c.completenessPercent);
+  const flags = detectFlags(request);
 
-	return {
-		appropriatenessScore: a.appropriatenessScore,
-		appropriatenessBand: a.appropriatenessBand,
-		priorityBand: b.priorityBand,
-		completenessPercent: c.completenessPercent,
-		triageTier: d.triageTier,
-		targetTimeframe: d.targetTimeframe,
-		recommendation,
-		recommendationLabel: RECOMMENDATION_LABELS[recommendation] ?? recommendation,
-		firedRules,
-		flags,
-		gradedAt: new Date().toISOString()
-	};
+  return {
+    appropriatenessScore: a.appropriatenessScore,
+    appropriatenessBand: a.appropriatenessBand,
+    priorityBand: b.priorityBand,
+    completenessPercent: c.completenessPercent,
+    triageTier: d.triageTier,
+    targetTimeframe: d.targetTimeframe,
+    recommendation,
+    recommendationLabel: RECOMMENDATION_LABELS[recommendation] ?? recommendation,
+    firedRules,
+    flags,
+    gradedAt: new Date().toISOString()
+  };
 }
 
 /**
@@ -77,10 +77,10 @@ export function calculateGrade(request: SleepStudyRequest): GradingResult {
  * routed back to the referrer; otherwise the request is accepted for booking.
  */
 export function deriveRecommendation(
-	appropriatenessBand: AppropriatenessBand,
-	completenessPercent: number
+  appropriatenessBand: AppropriatenessBand,
+  completenessPercent: number
 ): Recommendation {
-	if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
-	if (completenessPercent < 50) return 'query-referrer';
-	return 'accept';
+  if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
+  if (completenessPercent < 50) return 'query-referrer';
+  return 'accept';
 }

@@ -2,7 +2,7 @@
   import { store } from '#lib/state.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { TextAreaInput, TextInput } from '@lilydesignsystem/svelte-headless';
   import Select from '#lib/components/ui/Select.svelte';
 </script>
 
@@ -49,7 +49,10 @@
       />
     </Field>
     <Field label="Antibiotics plan">
-      <TextInput label="Antibiotics plan" bind:value={store.data.postOperativePlan.antibioticsPlan} />
+      <TextInput
+        label="Antibiotics plan"
+        bind:value={store.data.postOperativePlan.antibioticsPlan}
+      />
     </Field>
     <Field label="VTE prophylaxis">
       <TextInput label="VTE prophylaxis" bind:value={store.data.postOperativePlan.vteProphylaxis} />
@@ -70,10 +73,7 @@
       />
     </Field>
     <Field label="Follow-up plan" class="field-span-2">
-      <TextInput
-        label="Follow-up plan"
-        bind:value={store.data.postOperativePlan.followUpPlan}
-      />
+      <TextInput label="Follow-up plan" bind:value={store.data.postOperativePlan.followUpPlan} />
     </Field>
     <Field label="Special instructions" class="field-span-2">
       <TextAreaInput
@@ -93,10 +93,7 @@
       </Select>
     </Field>
     <Field label="Debrief completed">
-      <Select
-        label="Debrief completed"
-        bind:value={store.data.postOperativePlan.debriefCompleted}
-      >
+      <Select label="Debrief completed" bind:value={store.data.postOperativePlan.debriefCompleted}>
         <option value="">—</option>
         <option value="yes">Yes</option>
         <option value="no">No</option>

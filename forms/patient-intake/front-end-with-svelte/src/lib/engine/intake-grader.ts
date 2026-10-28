@@ -7,35 +7,35 @@ import { intakeRules } from './intake-rules';
  * defaulting to Low for healthy patients with no fired rules.
  */
 export function calculateRiskLevel(data: AssessmentData): {
-	riskLevel: RiskLevel;
-	firedRules: FiredRule[];
+  riskLevel: RiskLevel;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	for (const rule of intakeRules) {
-		try {
-			if (rule.evaluate(data)) {
-				firedRules.push({
-					id: rule.id,
-					category: rule.category,
-					description: rule.description,
-					riskLevel: rule.riskLevel
-				});
-			}
-		} catch (e) {
-			// Rule evaluation failed - log for debugging but continue grading
-			console.warn(`Intake rule ${rule.id} evaluation failed:`, e);
-		}
-	}
+  for (const rule of intakeRules) {
+    try {
+      if (rule.evaluate(data)) {
+        firedRules.push({
+          id: rule.id,
+          category: rule.category,
+          description: rule.description,
+          riskLevel: rule.riskLevel
+        });
+      }
+    } catch (e) {
+      // Rule evaluation failed - log for debugging but continue grading
+      console.warn(`Intake rule ${rule.id} evaluation failed:`, e);
+    }
+  }
 
-	const riskOrder: Record<RiskLevel, number> = { low: 0, medium: 1, high: 2 };
+  const riskOrder: Record<RiskLevel, number> = { low: 0, medium: 1, high: 2 };
 
-	const riskLevel: RiskLevel =
-		firedRules.length === 0
-			? 'low'
-			: firedRules.reduce<RiskLevel>((max, r) => {
-					return riskOrder[r.riskLevel] > riskOrder[max] ? r.riskLevel : max;
-				}, 'low');
+  const riskLevel: RiskLevel =
+    firedRules.length === 0
+      ? 'low'
+      : firedRules.reduce<RiskLevel>((max, r) => {
+          return riskOrder[r.riskLevel] > riskOrder[max] ? r.riskLevel : max;
+        }, 'low');
 
-	return { riskLevel, firedRules };
+  return { riskLevel, firedRules };
 }

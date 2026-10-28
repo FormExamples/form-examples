@@ -1,11 +1,11 @@
 import type {
-	EyeVisionRequest,
-	GradingResult,
-	Recommendation,
-	AppropriatenessBand,
-	TriageTier,
-	PriorityBand,
-	FiredRule
+  EyeVisionRequest,
+  GradingResult,
+  Recommendation,
+  AppropriatenessBand,
+  TriageTier,
+  PriorityBand,
+  FiredRule
 } from './types';
 import { scoreAppropriateness } from './appropriateness-rules';
 import { scoreTriage } from './triage-rules';
@@ -15,10 +15,10 @@ import { detectFlags } from './flagged-issues';
 
 /** Human-readable labels for the overall recommendation. */
 export const RECOMMENDATION_LABELS: Record<string, string> = {
-	accept: 'Accept and book',
-	'query-referrer': 'Query the referrer',
-	redirect: 'Redirect to a more suitable test',
-	reject: 'Reject'
+  accept: 'Accept and book',
+  'query-referrer': 'Query the referrer',
+  redirect: 'Redirect to a more suitable test',
+  reject: 'Reject'
 };
 
 /**
@@ -26,14 +26,14 @@ export const RECOMMENDATION_LABELS: Record<string, string> = {
  * axes. The least-alarming recommendation wins only when nothing escalates.
  */
 export function deriveRecommendation(
-	appropriatenessBand: AppropriatenessBand,
-	_triageTier: TriageTier,
-	completenessPercent: number,
-	_priorityBand: PriorityBand
+  appropriatenessBand: AppropriatenessBand,
+  _triageTier: TriageTier,
+  completenessPercent: number,
+  _priorityBand: PriorityBand
 ): Recommendation {
-	if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
-	if (completenessPercent < 50) return 'query-referrer';
-	return 'accept';
+  if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
+  if (completenessPercent < 50) return 'query-referrer';
+  return 'accept';
 }
 
 /**
@@ -54,44 +54,44 @@ export function deriveRecommendation(
  * tier to emergency regardless of the other axes. No side effects, no I/O.
  */
 export function calculateGrade(data: EyeVisionRequest): GradingResult {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	// Axis A — appropriateness.
-	const appr = scoreAppropriateness(data.request.primaryIndication, data.request.testType);
-	if (appr.firedRule) firedRules.push(appr.firedRule);
+  // Axis A — appropriateness.
+  const appr = scoreAppropriateness(data.request.primaryIndication, data.request.testType);
+  if (appr.firedRule) firedRules.push(appr.firedRule);
 
-	// Axis B — urgency / triage.
-	const triage = scoreTriage(data);
-	for (const r of triage.firedRules) firedRules.push(r);
+  // Axis B — urgency / triage.
+  const triage = scoreTriage(data);
+  for (const r of triage.firedRules) firedRules.push(r);
 
-	// Axis C — completeness.
-	const completeness = scoreCompleteness(data);
-	for (const m of completeness.missing) firedRules.push(m);
+  // Axis C — completeness.
+  const completeness = scoreCompleteness(data);
+  for (const m of completeness.missing) firedRules.push(m);
 
-	// Axis D — clinical priority.
-	const priority = scorePriority(data);
-	for (const r of priority.firedRules) firedRules.push(r);
+  // Axis D — clinical priority.
+  const priority = scorePriority(data);
+  for (const r of priority.firedRules) firedRules.push(r);
 
-	const recommendation = deriveRecommendation(
-		appr.band,
-		triage.tier,
-		completeness.percent,
-		priority.band
-	);
+  const recommendation = deriveRecommendation(
+    appr.band,
+    triage.tier,
+    completeness.percent,
+    priority.band
+  );
 
-	const flags = detectFlags(data);
+  const flags = detectFlags(data);
 
-	return {
-		appropriatenessScore: appr.score,
-		appropriatenessBand: appr.band,
-		triageTier: triage.tier,
-		targetTimeframe: triage.targetTimeframe,
-		completenessPercent: completeness.percent,
-		priorityBand: priority.band,
-		recommendation,
-		recommendationLabel: RECOMMENDATION_LABELS[recommendation] || recommendation,
-		firedRules,
-		flags,
-		gradedAt: new Date().toISOString()
-	};
+  return {
+    appropriatenessScore: appr.score,
+    appropriatenessBand: appr.band,
+    triageTier: triage.tier,
+    targetTimeframe: triage.targetTimeframe,
+    completenessPercent: completeness.percent,
+    priorityBand: priority.band,
+    recommendation,
+    recommendationLabel: RECOMMENDATION_LABELS[recommendation] || recommendation,
+    firedRules,
+    flags,
+    gradedAt: new Date().toISOString()
+  };
 }

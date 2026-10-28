@@ -1,14 +1,14 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
+  import type { Snippet } from 'svelte';
 
-	let {
-		class: className = '',
-		label,
-		children,
-		...restProps
-	}: { label: string; children: Snippet; [key: string]: unknown } = $props();
+  let {
+    class: className = '',
+    label,
+    children,
+    ...restProps
+  }: { label: string; children: Snippet; [key: string]: unknown } = $props();
 </script>
 
 <fieldset class={`radio-group ${className}`} role="radiogroup" aria-label={label} {...restProps}>
-	{@render children?.()}
+  {@render children?.()}
 </fieldset>

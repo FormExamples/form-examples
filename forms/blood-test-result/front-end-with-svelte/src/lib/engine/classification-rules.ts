@@ -16,60 +16,59 @@ import { hasCriticalValue, hasAnyClassifiableAbnormality, hasAnyResultValue } fr
  * Rule IDs are stable and identical across every front-end and the back-end.
  */
 export function classifyResult(r: BloodTestResult): {
-	resultClassification: ResultClassification;
-	firedRules: FiredRule[];
+  resultClassification: ResultClassification;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	if (hasCriticalValue(r)) {
-		firedRules.push({
-			ruleId: 'R-CLASS-CRITICAL-01',
-			axis: 'classification',
-			category: 'critical-value',
-			description:
-				'A critical (panic) value is present; classified as critical.'
-		});
-		return { resultClassification: 'critical', firedRules };
-	}
+  if (hasCriticalValue(r)) {
+    firedRules.push({
+      ruleId: 'R-CLASS-CRITICAL-01',
+      axis: 'classification',
+      category: 'critical-value',
+      description: 'A critical (panic) value is present; classified as critical.'
+    });
+    return { resultClassification: 'critical', firedRules };
+  }
 
-	if (!hasAnyResultValue(r) && r.impression.trim() === '') {
-		firedRules.push({
-			ruleId: 'R-CLASS-INCONCLUSIVE-01',
-			axis: 'classification',
-			category: 'no-result-values',
-			description:
-				'No analyte result values were measured and no impression was recorded; classified as inconclusive.'
-		});
-		return { resultClassification: 'inconclusive', firedRules };
-	}
+  if (!hasAnyResultValue(r) && r.impression.trim() === '') {
+    firedRules.push({
+      ruleId: 'R-CLASS-INCONCLUSIVE-01',
+      axis: 'classification',
+      category: 'no-result-values',
+      description:
+        'No analyte result values were measured and no impression was recorded; classified as inconclusive.'
+    });
+    return { resultClassification: 'inconclusive', firedRules };
+  }
 
-	if (r.specimenCondition === 'insufficient' && r.impression.trim() === '') {
-		firedRules.push({
-			ruleId: 'R-CLASS-INCONCLUSIVE-02',
-			axis: 'classification',
-			category: 'inadequate-specimen',
-			description:
-				'Specimen was insufficient and no impression was recorded; classified as inconclusive.'
-		});
-		return { resultClassification: 'inconclusive', firedRules };
-	}
+  if (r.specimenCondition === 'insufficient' && r.impression.trim() === '') {
+    firedRules.push({
+      ruleId: 'R-CLASS-INCONCLUSIVE-02',
+      axis: 'classification',
+      category: 'inadequate-specimen',
+      description:
+        'Specimen was insufficient and no impression was recorded; classified as inconclusive.'
+    });
+    return { resultClassification: 'inconclusive', firedRules };
+  }
 
-	if (hasAnyClassifiableAbnormality(r)) {
-		firedRules.push({
-			ruleId: 'R-CLASS-ABNORMAL-01',
-			axis: 'classification',
-			category: 'abnormal-result',
-			description:
-				'One or more abnormal results are present, or a structured band (eGFR CKD stage or HbA1c band) deviates from normal; classified as abnormal.'
-		});
-		return { resultClassification: 'abnormal', firedRules };
-	}
+  if (hasAnyClassifiableAbnormality(r)) {
+    firedRules.push({
+      ruleId: 'R-CLASS-ABNORMAL-01',
+      axis: 'classification',
+      category: 'abnormal-result',
+      description:
+        'One or more abnormal results are present, or a structured band (eGFR CKD stage or HbA1c band) deviates from normal; classified as abnormal.'
+    });
+    return { resultClassification: 'abnormal', firedRules };
+  }
 
-	firedRules.push({
-		ruleId: 'R-CLASS-NORMAL-01',
-		axis: 'classification',
-		category: 'no-abnormal-result',
-		description: 'No abnormal results on an adequate specimen; classified as normal.'
-	});
-	return { resultClassification: 'normal', firedRules };
+  firedRules.push({
+    ruleId: 'R-CLASS-NORMAL-01',
+    axis: 'classification',
+    category: 'no-abnormal-result',
+    description: 'No abnormal results on an adequate specimen; classified as normal.'
+  });
+  return { resultClassification: 'normal', firedRules };
 }

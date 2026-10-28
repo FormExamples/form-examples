@@ -18,8 +18,13 @@
   }
 </script>
 
-<Fieldset legend="Step 22 — Section 21 — Observance & Practice of Infection Control Protocols (5 checkpoints)">
-  <p class="hint">Infection control observance in OT, ICU, labour room, hand-wash practice, and protective gloves/apron.</p>
+<Fieldset
+  legend="Step 22 — Section 21 — Observance & Practice of Infection Control Protocols (5 checkpoints)"
+>
+  <p class="hint">
+    Infection control observance in OT, ICU, labour room, hand-wash practice, and protective
+    gloves/apron.
+  </p>
 
   {#each groups as group, gi (gi)}
     {#if group.subsection}

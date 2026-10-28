@@ -12,10 +12,10 @@ import { computeEq5d } from './eq5d-rules';
 import type { AllScoresResult, PatientReportedOutcomeMeasures } from './types';
 
 export function computeAllScores(data: PatientReportedOutcomeMeasures): AllScoresResult {
-	return {
-		sf36: computeSf36(data.sf36),
-		ndi: computeNdi(data.ndi),
-		mjoa: computeMjoa(data.mjoa),
-		eq5d: computeEq5d(data.eq5d)
-	};
+  return {
+    sf36: computeSf36(data.sf36),
+    ndi: computeNdi(data.ndi),
+    mjoa: computeMjoa(data.mjoa),
+    eq5d: computeEq5d(data.eq5d)
+  };
 }

@@ -1,10 +1,10 @@
 import type {
-	MicrobiologyRequest,
-	GradingResult,
-	Recommendation,
-	AppropriatenessBand,
-	PreanalyticalBand,
-	FiredRule
+  MicrobiologyRequest,
+  GradingResult,
+  Recommendation,
+  AppropriatenessBand,
+  PreanalyticalBand,
+  FiredRule
 } from './types';
 import { scoreAppropriateness } from './appropriateness-rules';
 import { scorePreanalytical } from './preanalytical-rules';
@@ -30,52 +30,52 @@ import { detectFlags } from './flagged-issues';
  * across every front-end and the back-end.
  */
 export function calculateGrade(data: MicrobiologyRequest): GradingResult {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	// Axis A — appropriateness.
-	const appr = scoreAppropriateness(
-		data.clinical.primaryIndication,
-		data.specimen.specimenType,
-		data.tests
-	);
-	if (appr.firedRule) firedRules.push(appr.firedRule);
+  // Axis A — appropriateness.
+  const appr = scoreAppropriateness(
+    data.clinical.primaryIndication,
+    data.specimen.specimenType,
+    data.tests
+  );
+  if (appr.firedRule) firedRules.push(appr.firedRule);
 
-	// Axis B — pre-analytical / specimen safety.
-	const preanalytical = scorePreanalytical(data);
-	firedRules.push(...preanalytical.firedRules);
+  // Axis B — pre-analytical / specimen safety.
+  const preanalytical = scorePreanalytical(data);
+  firedRules.push(...preanalytical.firedRules);
 
-	// Axis C — completeness.
-	const completeness = scoreCompleteness(data);
-	firedRules.push(...completeness.firedRules);
+  // Axis C — completeness.
+  const completeness = scoreCompleteness(data);
+  firedRules.push(...completeness.firedRules);
 
-	// Axis D — triage.
-	const triage = scoreTriage(data);
-	firedRules.push(...triage.firedRules);
+  // Axis D — triage.
+  const triage = scoreTriage(data);
+  firedRules.push(...triage.firedRules);
 
-	const recommendation = deriveRecommendation(appr.band, preanalytical.band, completeness.percent);
+  const recommendation = deriveRecommendation(appr.band, preanalytical.band, completeness.percent);
 
-	const flags = detectFlags(data);
+  const flags = detectFlags(data);
 
-	return {
-		appropriatenessScore: appr.score,
-		appropriatenessBand: appr.band,
-		preanalyticalBand: preanalytical.band,
-		completenessPercent: completeness.percent,
-		triageTier: triage.tier,
-		targetTimeframe: triage.targetTimeframe,
-		recommendation,
-		firedRules,
-		flags,
-		gradedAt: new Date().toISOString()
-	};
+  return {
+    appropriatenessScore: appr.score,
+    appropriatenessBand: appr.band,
+    preanalyticalBand: preanalytical.band,
+    completenessPercent: completeness.percent,
+    triageTier: triage.tier,
+    targetTimeframe: triage.targetTimeframe,
+    recommendation,
+    firedRules,
+    flags,
+    gradedAt: new Date().toISOString()
+  };
 }
 
 /** Mapping from recommendation key to its display label. */
 export const RECOMMENDATION_LABELS: Record<string, string> = {
-	accept: 'Accept and process',
-	'query-referrer': 'Query the referrer',
-	redirect: 'Redirect to a more suitable test',
-	reject: 'Reject'
+  accept: 'Accept and process',
+  'query-referrer': 'Query the referrer',
+  redirect: 'Redirect to a more suitable test',
+  reject: 'Reject'
 };
 
 /**
@@ -83,13 +83,13 @@ export const RECOMMENDATION_LABELS: Record<string, string> = {
  * least-alarming recommendation wins only when nothing escalates.
  */
 export function deriveRecommendation(
-	appropriatenessBand: AppropriatenessBand,
-	preanalyticalBand: PreanalyticalBand,
-	completenessPercent: number
+  appropriatenessBand: AppropriatenessBand,
+  preanalyticalBand: PreanalyticalBand,
+  completenessPercent: number
 ): Recommendation {
-	if (preanalyticalBand === 'reject-risk') return 'reject';
-	if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
-	if (completenessPercent < 50) return 'query-referrer';
-	if (preanalyticalBand === 'caution') return 'query-referrer';
-	return 'accept';
+  if (preanalyticalBand === 'reject-risk') return 'reject';
+  if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
+  if (completenessPercent < 50) return 'query-referrer';
+  if (preanalyticalBand === 'caution') return 'query-referrer';
+  return 'accept';
 }

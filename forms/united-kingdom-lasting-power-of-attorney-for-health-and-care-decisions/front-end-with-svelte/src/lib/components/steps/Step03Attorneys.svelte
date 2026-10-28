@@ -28,7 +28,7 @@
     { value: 'sibling', label: 'Sibling' },
     { value: 'friend', label: 'Friend' },
     { value: 'professional', label: 'Professional' },
-    { value: 'other', label: 'Other' },
+    { value: 'other', label: 'Other' }
   ];
 </script>
 
@@ -52,7 +52,13 @@
       <div class="grid gap-3 sm:grid-cols-2">
         <FormField label="Given names" required bind:value={att.givenNames} onchange={changed} />
         <FormField label="Family name" required bind:value={att.familyName} onchange={changed} />
-        <FormField label="Date of birth" type="date" required bind:value={att.birthDate} onchange={changed} />
+        <FormField
+          label="Date of birth"
+          type="date"
+          required
+          bind:value={att.birthDate}
+          onchange={changed}
+        />
         <SelectField
           label="Relationship to donor"
           bind:value={att.relationshipToDonor}
@@ -74,11 +80,7 @@
           hint="Informational only — bankruptcy bar applies to P&FA LPAs."
           onchange={changed}
         />
-        <YesNoField
-          label="Capacity to act?"
-          bind:value={att.capacityDeclared}
-          onchange={changed}
-        />
+        <YesNoField label="Capacity to act?" bind:value={att.capacityDeclared} onchange={changed} />
       </div>
     </section>
   {/each}

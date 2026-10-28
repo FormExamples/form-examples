@@ -15,12 +15,22 @@
         { value: 'none', label: 'None' },
         { value: 'infectious', label: 'Infectious' },
         { value: 'convalescent', label: 'Convalescent' },
-        { value: 'cleared', label: 'Cleared' },
+        { value: 'cleared', label: 'Cleared' }
       ]}
     />
-    <TextField label="Last symptom date" type="date" bind:value={store.data.communicable.lastSymptomDate} />
-    <YesNoField label="Isolation required?" bind:value={store.data.communicable.isolationRequired} />
+    <TextField
+      label="Last symptom date"
+      type="date"
+      bind:value={store.data.communicable.lastSymptomDate}
+    />
+    <YesNoField
+      label="Isolation required?"
+      bind:value={store.data.communicable.isolationRequired}
+    />
     <TextField label="Vaccination status" bind:value={store.data.communicable.vaccinationStatus} />
-    <TextField label="Current antimicrobials" bind:value={store.data.communicable.currentAntimicrobials} />
+    <TextField
+      label="Current antimicrobials"
+      bind:value={store.data.communicable.currentAntimicrobials}
+    />
   </div>
 </section>

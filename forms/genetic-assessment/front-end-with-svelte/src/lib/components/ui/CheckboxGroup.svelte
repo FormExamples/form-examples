@@ -2,7 +2,10 @@
   // CheckboxGroup — Lily Svelte headless contract.
   // Emits: <fieldset class="checkbox-group" role="group"> with labelled
   // <input class="checkbox-input"> children.
-  interface Option { value: string; label: string }
+  interface Option {
+    value: string;
+    label: string;
+  }
   let {
     class: className = '',
     label,

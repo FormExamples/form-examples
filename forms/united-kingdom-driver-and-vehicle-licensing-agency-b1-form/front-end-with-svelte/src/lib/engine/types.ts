@@ -21,16 +21,16 @@ export type ContactChannel = 'email' | 'sms' | '';
 // ──────────────────────────────────────────────
 
 export interface PersonalDetails {
-	title: string;
-	fullName: string;
-	dateOfBirth: string;
-	addressLine1: string;
-	addressLine2: string;
-	addressLine3: string;
-	postcode: string;
-	email: string;
-	contactNumber: string;
-	changeOfDetails: string;
+  title: string;
+  fullName: string;
+  dateOfBirth: string;
+  addressLine1: string;
+  addressLine2: string;
+  addressLine3: string;
+  postcode: string;
+  email: string;
+  contactNumber: string;
+  changeOfDetails: string;
 }
 
 // ──────────────────────────────────────────────
@@ -38,34 +38,34 @@ export interface PersonalDetails {
 // ──────────────────────────────────────────────
 
 export interface GpDetails {
-	gpName: string;
-	surgeryName: string;
-	addressLine1: string;
-	addressLine2: string;
-	town: string;
-	postcode: string;
-	contactNumber: string;
-	email: string;
-	dateLastSeen: string;
+  gpName: string;
+  surgeryName: string;
+  addressLine1: string;
+  addressLine2: string;
+  town: string;
+  postcode: string;
+  contactNumber: string;
+  email: string;
+  dateLastSeen: string;
 }
 
 export interface ConsultantDetails {
-	consultantName: string;
-	speciality: string;
-	department: string;
-	hospitalName: string;
-	addressLine1: string;
-	addressLine2: string;
-	town: string;
-	postcode: string;
-	contactNumber: string;
-	email: string;
-	dateLastSeen: string;
+  consultantName: string;
+  speciality: string;
+  department: string;
+  hospitalName: string;
+  addressLine1: string;
+  addressLine2: string;
+  town: string;
+  postcode: string;
+  contactNumber: string;
+  email: string;
+  dateLastSeen: string;
 }
 
 export interface HealthcareProfessionals {
-	gp: GpDetails;
-	consultant: ConsultantDetails;
+  gp: GpDetails;
+  consultant: ConsultantDetails;
 }
 
 // ──────────────────────────────────────────────
@@ -73,17 +73,17 @@ export interface HealthcareProfessionals {
 // ──────────────────────────────────────────────
 
 export interface ConditionHistory {
-	brainHaemorrhage: boolean;
-	brainHaemorrhageDate: string;
-	brainHaemorrhageDetails: string;
-	severeHeadInjury: boolean;
-	severeHeadInjuryDate: string;
-	severeHeadInjuryDetails: string;
-	otherCondition: boolean;
-	otherConditionDate: string;
-	otherConditionDetails: string;
-	brainSurgeryDate: string;
-	brainSurgeryNotApplicable: boolean;
+  brainHaemorrhage: boolean;
+  brainHaemorrhageDate: string;
+  brainHaemorrhageDetails: string;
+  severeHeadInjury: boolean;
+  severeHeadInjuryDate: string;
+  severeHeadInjuryDetails: string;
+  otherCondition: boolean;
+  otherConditionDate: string;
+  otherConditionDetails: string;
+  brainSurgeryDate: string;
+  brainSurgeryNotApplicable: boolean;
 }
 
 // ──────────────────────────────────────────────
@@ -91,11 +91,11 @@ export interface ConditionHistory {
 // ──────────────────────────────────────────────
 
 export interface TreatmentProvider {
-	lastSeen: LastSeenProvider;
-	gpLastContactDate: string;
-	gpNextContactDate: string;
-	consultantLastContactDate: string;
-	consultantNextContactDate: string;
+  lastSeen: LastSeenProvider;
+  gpLastContactDate: string;
+  gpNextContactDate: string;
+  consultantLastContactDate: string;
+  consultantNextContactDate: string;
 }
 
 // ──────────────────────────────────────────────
@@ -103,8 +103,8 @@ export interface TreatmentProvider {
 // ──────────────────────────────────────────────
 
 export interface Blackouts {
-	hadBlackouts: YesNo;
-	blackoutDate: string;
+  hadBlackouts: YesNo;
+  blackoutDate: string;
 }
 
 // ──────────────────────────────────────────────
@@ -112,42 +112,42 @@ export interface Blackouts {
 // ──────────────────────────────────────────────
 
 export interface FirstEverSeizure {
-	date: string;
-	details: string;
+  date: string;
+  details: string;
 }
 
 export interface MultipleSeizureDetails {
-	twoOrMoreWithinFiveYears: YesNo;
-	firstAwakeSeizureDate: string;
-	firstAsleepSeizureDate: string;
-	lastTwoAwakeSeizureDate1: string;
-	lastTwoAwakeSeizureDate2: string;
-	lastTwoAsleepSeizureDate1: string;
-	lastTwoAsleepSeizureDate2: string;
-	firstSleepAttackAfterLastAwakeAttackDate: string;
-	affectedConsciousness: YesNo;
-	wouldHaveAffectedDriving: YesNo;
-	attackDescription: string;
-	resultOfMedicationAdvice: YesNo;
-	dateMedicationStartedToReduce: string;
-	previousMedicationRestarted: YesNo;
-	datePreviousMedicationRestarted: string;
-	dateOfLastSeizurePriorToWithdrawal: string;
-	provokedSeizureDetails: string;
+  twoOrMoreWithinFiveYears: YesNo;
+  firstAwakeSeizureDate: string;
+  firstAsleepSeizureDate: string;
+  lastTwoAwakeSeizureDate1: string;
+  lastTwoAwakeSeizureDate2: string;
+  lastTwoAsleepSeizureDate1: string;
+  lastTwoAsleepSeizureDate2: string;
+  firstSleepAttackAfterLastAwakeAttackDate: string;
+  affectedConsciousness: YesNo;
+  wouldHaveAffectedDriving: YesNo;
+  attackDescription: string;
+  resultOfMedicationAdvice: YesNo;
+  dateMedicationStartedToReduce: string;
+  previousMedicationRestarted: YesNo;
+  datePreviousMedicationRestarted: string;
+  dateOfLastSeizurePriorToWithdrawal: string;
+  provokedSeizureDetails: string;
 }
 
 export interface EpilepsyDeclaration {
-	declarationAccepted: boolean;
-	signedName: string;
-	signatureDate: string;
+  declarationAccepted: boolean;
+  signedName: string;
+  signatureDate: string;
 }
 
 export interface Seizures {
-	hadSeizures: YesNo;
-	diagnosis: SeizureDiagnosis;
-	firstEver: FirstEverSeizure;
-	multiple: MultipleSeizureDetails;
-	epilepsyDeclaration: EpilepsyDeclaration;
+  hadSeizures: YesNo;
+  diagnosis: SeizureDiagnosis;
+  firstEver: FirstEverSeizure;
+  multiple: MultipleSeizureDetails;
+  epilepsyDeclaration: EpilepsyDeclaration;
 }
 
 // ──────────────────────────────────────────────
@@ -155,15 +155,15 @@ export interface Seizures {
 // ──────────────────────────────────────────────
 
 export interface MedicationEntry {
-	name: string;
-	startDate: string;
-	endDate: string;
+  name: string;
+  startDate: string;
+  endDate: string;
 }
 
 export interface Medication {
-	noMedicationTaken: boolean;
-	entries: MedicationEntry[];
-	makesDrowsyOrConfused: YesNo;
+  noMedicationTaken: boolean;
+  entries: MedicationEntry[];
+  makesDrowsyOrConfused: YesNo;
 }
 
 // ──────────────────────────────────────────────
@@ -171,8 +171,8 @@ export interface Medication {
 // ──────────────────────────────────────────────
 
 export interface VpShunt {
-	hadVpShuntOrDrain: YesNo;
-	procedureDate: string;
+  hadVpShuntOrDrain: YesNo;
+  procedureDate: string;
 }
 
 // ──────────────────────────────────────────────
@@ -180,8 +180,8 @@ export interface VpShunt {
 // ──────────────────────────────────────────────
 
 export interface DailyLiving {
-	needsHelp: YesNo;
-	helpDetails: string;
+  needsHelp: YesNo;
+  helpDetails: string;
 }
 
 // ──────────────────────────────────────────────
@@ -189,10 +189,10 @@ export interface DailyLiving {
 // ──────────────────────────────────────────────
 
 export interface DoubleVision {
-	hasDoubleVision: YesNo;
-	suppressedOrControlled: YesNo;
-	correctionMethod: DiplopiaCorrection;
-	correctionMethodOther: string;
+  hasDoubleVision: YesNo;
+  suppressedOrControlled: YesNo;
+  correctionMethod: DiplopiaCorrection;
+  correctionMethodOther: string;
 }
 
 // ──────────────────────────────────────────────
@@ -200,8 +200,8 @@ export interface DoubleVision {
 // ──────────────────────────────────────────────
 
 export interface Eyesight {
-	hasEyesightProblems: YesNo;
-	details: string;
+  hasEyesightProblems: YesNo;
+  details: string;
 }
 
 // ──────────────────────────────────────────────
@@ -209,9 +209,9 @@ export interface Eyesight {
 // ──────────────────────────────────────────────
 
 export interface VehicleAdaptations {
-	needsAdaptations: YesNo;
-	previouslyDeclared: YesNo;
-	additionalControlsFitted: YesNo;
+  needsAdaptations: YesNo;
+  previouslyDeclared: YesNo;
+  additionalControlsFitted: YesNo;
 }
 
 // ──────────────────────────────────────────────
@@ -219,12 +219,12 @@ export interface VehicleAdaptations {
 // ──────────────────────────────────────────────
 
 export interface Authorisation {
-	declarationAccepted: boolean;
-	name: string;
-	signatureDate: string;
-	electronicCorrespondenceConsent: YesNo;
-	dvlaContactPreference: ContactChannel;
-	healthcareContactPreference: ContactChannel;
+  declarationAccepted: boolean;
+  name: string;
+  signatureDate: string;
+  electronicCorrespondenceConsent: YesNo;
+  dvlaContactPreference: ContactChannel;
+  healthcareContactPreference: ContactChannel;
 }
 
 // ──────────────────────────────────────────────
@@ -232,19 +232,19 @@ export interface Authorisation {
 // ──────────────────────────────────────────────
 
 export interface AssessmentData {
-	personalDetails: PersonalDetails;
-	healthcareProfessionals: HealthcareProfessionals;
-	conditionHistory: ConditionHistory;
-	treatmentProvider: TreatmentProvider;
-	blackouts: Blackouts;
-	seizures: Seizures;
-	medication: Medication;
-	vpShunt: VpShunt;
-	dailyLiving: DailyLiving;
-	doubleVision: DoubleVision;
-	eyesight: Eyesight;
-	vehicleAdaptations: VehicleAdaptations;
-	authorisation: Authorisation;
+  personalDetails: PersonalDetails;
+  healthcareProfessionals: HealthcareProfessionals;
+  conditionHistory: ConditionHistory;
+  treatmentProvider: TreatmentProvider;
+  blackouts: Blackouts;
+  seizures: Seizures;
+  medication: Medication;
+  vpShunt: VpShunt;
+  dailyLiving: DailyLiving;
+  doubleVision: DoubleVision;
+  eyesight: Eyesight;
+  vehicleAdaptations: VehicleAdaptations;
+  authorisation: Authorisation;
 }
 
 // ──────────────────────────────────────────────
@@ -256,47 +256,47 @@ export type SectionKey = keyof AssessmentData;
 
 /** A single validation rule that may fire against the assessment data. */
 export interface ValidationRule {
-	id: string;
-	section: SectionKey;
-	description: string;
-	/** True if the rule applies given the conditional logic of the form. */
-	applies: (data: AssessmentData) => boolean;
-	/** True if the rule is satisfied; false if it has fired (i.e. is incomplete). */
-	isSatisfied: (data: AssessmentData) => boolean;
+  id: string;
+  section: SectionKey;
+  description: string;
+  /** True if the rule applies given the conditional logic of the form. */
+  applies: (data: AssessmentData) => boolean;
+  /** True if the rule is satisfied; false if it has fired (i.e. is incomplete). */
+  isSatisfied: (data: AssessmentData) => boolean;
 }
 
 /** A rule that has fired (the field is required but unanswered). */
 export interface FiredRule {
-	id: string;
-	section: SectionKey;
-	description: string;
+  id: string;
+  section: SectionKey;
+  description: string;
 }
 
 /** Per-section completeness summary. */
 export interface SectionCompleteness {
-	section: SectionKey;
-	required: number;
-	satisfied: number;
-	missing: FiredRule[];
+  section: SectionKey;
+  required: number;
+  satisfied: number;
+  missing: FiredRule[];
 }
 
 /** Result of running the completeness validator. */
 export interface ValidationResult {
-	complete: boolean;
-	totalRequired: number;
-	totalSatisfied: number;
-	sections: SectionCompleteness[];
-	missing: FiredRule[];
+  complete: boolean;
+  totalRequired: number;
+  totalSatisfied: number;
+  sections: SectionCompleteness[];
+  missing: FiredRule[];
 }
 
 /** Priority for clinician-relevant flags. */
 export type FlagPriority = 'urgent' | 'high' | 'medium' | 'low';
 
 export interface FlaggedIssue {
-	id: string;
-	category: string;
-	message: string;
-	priority: FlagPriority;
+  id: string;
+  category: string;
+  message: string;
+  priority: FlagPriority;
 }
 
 // ──────────────────────────────────────────────
@@ -304,8 +304,8 @@ export interface FlaggedIssue {
 // ──────────────────────────────────────────────
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
-	section: SectionKey;
+  number: number;
+  title: string;
+  shortTitle: string;
+  section: SectionKey;
 }

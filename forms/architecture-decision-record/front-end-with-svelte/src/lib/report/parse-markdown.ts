@@ -2,8 +2,16 @@ import { emptyAdrFormData, type AdrFormData, type Status, type DecisionGroup } f
 
 const VALID_STATUSES: Status[] = ['pending', 'decided', 'approved', 'superseded', 'deprecated'];
 const VALID_GROUPS: DecisionGroup[] = [
-  '', 'business', 'data', 'integration', 'presentation',
-  'security', 'infrastructure', 'operations', 'governance', 'other'
+  '',
+  'business',
+  'data',
+  'integration',
+  'presentation',
+  'security',
+  'infrastructure',
+  'operations',
+  'governance',
+  'other'
 ];
 
 function asStatus(s: string): Status | null {

@@ -95,15 +95,15 @@ class LpaStore {
     }
     deepAssign(
       this.data as unknown as Record<string, unknown>,
-      (draft ?? seed ?? createDefaultLpa()) as unknown as Record<string, unknown>,
+      (draft ?? seed ?? createDefaultLpa()) as unknown as Record<string, unknown>
     );
   }
 
   reset() {
-  	this.hadDraftAtLoad = false;
+    this.hadDraftAtLoad = false;
     deepAssign(
       this.data as unknown as Record<string, unknown>,
-      createDefaultLpa() as unknown as Record<string, unknown>,
+      createDefaultLpa() as unknown as Record<string, unknown>
     );
     this.currentStep = 1;
     if (browser) {
@@ -118,7 +118,7 @@ class LpaStore {
   addAttorney() {
     this.data.attorneys.push({
       person: createEmptyPerson(),
-      ordinal: this.data.attorneys.length + 1,
+      ordinal: this.data.attorneys.length + 1
     });
   }
 
@@ -133,7 +133,7 @@ class LpaStore {
     this.data.replacementAttorneys.push({
       person: createEmptyPerson(),
       ordinal: this.data.replacementAttorneys.length + 1,
-      replacementStepInCondition: '',
+      replacementStepInCondition: ''
     });
   }
 
@@ -148,7 +148,7 @@ class LpaStore {
     if (this.data.peopleToNotify.length >= 5) return;
     this.data.peopleToNotify.push({
       person: createEmptyPerson(),
-      ordinal: this.data.peopleToNotify.length + 1,
+      ordinal: this.data.peopleToNotify.length + 1
     });
   }
 
@@ -169,7 +169,7 @@ class LpaStore {
         noRestrictionsOnActing: false,
         isRelatedToDonorOrAttorney: false,
         isCareHomeOwnerOrEmployee: false,
-        eligibilityConfirmationAt: '',
+        eligibilityConfirmationAt: ''
       };
     }
   }

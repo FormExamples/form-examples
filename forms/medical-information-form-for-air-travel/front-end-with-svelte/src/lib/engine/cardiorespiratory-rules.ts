@@ -15,8 +15,7 @@ const RULES: CardioRespRule[] = [
     id: 'R-CR-01',
     band: 'unfit-to-fly',
     description: 'Resting SpO₂ < 85 % on room air',
-    fires: (d) =>
-      d.respiratory.restingSpo2Percent !== null && d.respiratory.restingSpo2Percent < 85,
+    fires: (d) => d.respiratory.restingSpo2Percent !== null && d.respiratory.restingSpo2Percent < 85
   },
   {
     id: 'R-CR-02',
@@ -25,26 +24,25 @@ const RULES: CardioRespRule[] = [
     fires: (d) => {
       const v = d.respiratory.restingSpo2Percent;
       return v !== null && v >= 85 && v < 92;
-    },
+    }
   },
   {
     id: 'R-CR-03',
     band: 'requires-review',
     description: 'Hypoxic challenge test failed',
-    fires: (d) => d.respiratory.hypoxicChallengeResult === 'fail',
+    fires: (d) => d.respiratory.hypoxicChallengeResult === 'fail'
   },
   {
     id: 'R-CR-04',
     band: 'fit-with-conditions',
     description: 'Hypoxic challenge test borderline — in-flight oxygen recommended',
-    fires: (d) => d.respiratory.hypoxicChallengeResult === 'borderline',
+    fires: (d) => d.respiratory.hypoxicChallengeResult === 'borderline'
   },
   {
     id: 'R-CR-05',
     band: 'unfit-to-fly',
     description: 'Severe anaemia (haemoglobin < 75 g/L)',
-    fires: (d) =>
-      d.cabinMeds.haemoglobinGPerL !== null && d.cabinMeds.haemoglobinGPerL < 75,
+    fires: (d) => d.cabinMeds.haemoglobinGPerL !== null && d.cabinMeds.haemoglobinGPerL < 75
   },
   {
     id: 'R-CR-06',
@@ -53,37 +51,37 @@ const RULES: CardioRespRule[] = [
     fires: (d) => {
       const v = d.cabinMeds.haemoglobinGPerL;
       return v !== null && v >= 75 && v < 100;
-    },
+    }
   },
   {
     id: 'R-CR-07',
     band: 'requires-review',
     description: 'Unstable angina',
-    fires: (d) => d.cardiovascular.unstableAngina === 'yes',
+    fires: (d) => d.cardiovascular.unstableAngina === 'yes'
   },
   {
     id: 'R-CR-08',
     band: 'requires-review',
     description: 'NYHA functional class IV (heart failure at rest)',
-    fires: (d) => d.cardiovascular.nyhaClass === 'IV',
+    fires: (d) => d.cardiovascular.nyhaClass === 'IV'
   },
   {
     id: 'R-CR-09',
     band: 'fit-with-conditions',
     description: 'NYHA functional class III',
-    fires: (d) => d.cardiovascular.nyhaClass === 'III',
+    fires: (d) => d.cardiovascular.nyhaClass === 'III'
   },
   {
     id: 'R-CR-10',
     band: 'requires-review',
     description: 'Severe uncontrolled asthma',
-    fires: (d) => d.respiratory.asthmaSeverity === 'severe-uncontrolled',
+    fires: (d) => d.respiratory.asthmaSeverity === 'severe-uncontrolled'
   },
   {
     id: 'R-CR-11',
     band: 'requires-review',
     description: 'Severe COPD',
-    fires: (d) => d.respiratory.copdSeverity === 'severe',
+    fires: (d) => d.respiratory.copdSeverity === 'severe'
   },
   {
     id: 'R-CR-12',
@@ -92,8 +90,8 @@ const RULES: CardioRespRule[] = [
     fires: (d) =>
       d.respiratory.cpapOrBipapUse === 'cpap' ||
       d.respiratory.cpapOrBipapUse === 'bipap' ||
-      d.respiratory.cpapOrBipapUse === 'both',
-  },
+      d.respiratory.cpapOrBipapUse === 'both'
+  }
 ];
 
 export function applyCardioRespRules(data: MedifAssessment): FiredRule[] {
@@ -104,7 +102,7 @@ export function applyCardioRespRules(data: MedifAssessment): FiredRule[] {
         ruleId: r.id,
         category: 'cardiorespiratory',
         band: r.band,
-        description: r.description,
+        description: r.description
       });
     }
   }

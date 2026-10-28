@@ -4,7 +4,7 @@
   import Field from '#lib/components/ui/Field.svelte';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
   import Select from '#lib/components/ui/Select.svelte';
-  import { RadioGroup } from "@lilydesignsystem/svelte-headless";
+  import { RadioGroup } from '@lilydesignsystem/svelte-headless';
 
   const d = assessment.data.demographicsEthnicity;
 </script>
@@ -13,7 +13,12 @@
   <p class="hint">Required for QRISK3 risk calculation.</p>
 
   <div class="field-grid">
-    <Field label="Age (years)" inputId="step-2-age" required error={assessment.errors['step-2-age']}>
+    <Field
+      label="Age (years)"
+      inputId="step-2-age"
+      required
+      error={assessment.errors['step-2-age']}
+    >
       <NumberInput
         id="step-2-age"
         label="Age"

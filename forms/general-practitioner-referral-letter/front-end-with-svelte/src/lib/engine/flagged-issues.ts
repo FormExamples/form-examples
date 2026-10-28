@@ -6,11 +6,11 @@ import { MANDATORY_ALWAYS, nonEmpty } from './gp-referral-rules';
  * in `gp-referral-rules.ts`. Used by the mandatory-information-missing flag.
  */
 function missingMandatoryFields(r: AssessmentData): string[] {
-	const missing: string[] = [];
-	for (const field of MANDATORY_ALWAYS) {
-		if (field.present(r) !== true) missing.push(field.label);
-	}
-	return missing;
+  const missing: string[] = [];
+  for (const field of MANDATORY_ALWAYS) {
+    if (field.present(r) !== true) missing.push(field.label);
+  }
+  return missing;
 }
 
 /**
@@ -31,100 +31,99 @@ function missingMandatoryFields(r: AssessmentData): string[] {
  * (flag_id, category, priority, description, suggested_action).
  */
 export function detectFlaggedIssues(referral: AssessmentData): FlaggedIssue[] {
-	const flags: FlaggedIssue[] = [];
+  const flags: FlaggedIssue[] = [];
 
-	const urgency = referral.urgencyInfo.urgency;
+  const urgency = referral.urgencyInfo.urgency;
 
-	// ─── Suspected-cancer pathway (HIGH) ────────────────────────
-	if (urgency === 'two-week-wait') {
-		flags.push({
-			id: 'F-SUSPECTED-CANCER-PATHWAY-001',
-			category: 'suspected-cancer-pathway',
-			priority: 'high',
-			description:
-				'This is a suspected-cancer (two-week-wait) referral — it must be routed on the suspected-cancer pathway, not as a routine referral.',
-			suggestedAction:
-				'Name the NICE NG12 criterion and the tumour-site pathway, and book on the two-week-wait pathway so the patient is seen within two weeks.'
-		});
-	}
+  // ─── Suspected-cancer pathway (HIGH) ────────────────────────
+  if (urgency === 'two-week-wait') {
+    flags.push({
+      id: 'F-SUSPECTED-CANCER-PATHWAY-001',
+      category: 'suspected-cancer-pathway',
+      priority: 'high',
+      description:
+        'This is a suspected-cancer (two-week-wait) referral — it must be routed on the suspected-cancer pathway, not as a routine referral.',
+      suggestedAction:
+        'Name the NICE NG12 criterion and the tumour-site pathway, and book on the two-week-wait pathway so the patient is seen within two weeks.'
+    });
+  }
 
-	// ─── Emergency features (HIGH) ──────────────────────────────
-	if (urgency === 'emergency' || nonEmpty(referral.clinical.redFlagSymptoms)) {
-		flags.push({
-			id: 'F-EMERGENCY-FEATURES-001',
-			category: 'emergency-features',
-			priority: 'high',
-			description:
-				'Emergency features are present (emergency urgency selected or a red-flag symptom documented) — a routine referral letter is not appropriate.',
-			suggestedAction:
-				'Arrange same-day assessment or call 999 / acute admission now; do not send this as a routine letter.'
-		});
-	}
+  // ─── Emergency features (HIGH) ──────────────────────────────
+  if (urgency === 'emergency' || nonEmpty(referral.clinical.redFlagSymptoms)) {
+    flags.push({
+      id: 'F-EMERGENCY-FEATURES-001',
+      category: 'emergency-features',
+      priority: 'high',
+      description:
+        'Emergency features are present (emergency urgency selected or a red-flag symptom documented) — a routine referral letter is not appropriate.',
+      suggestedAction:
+        'Arrange same-day assessment or call 999 / acute admission now; do not send this as a routine letter.'
+    });
+  }
 
-	// ─── Mandatory information missing (HIGH) ───────────────────
-	const missing = missingMandatoryFields(referral);
-	if (missing.length > 0) {
-		flags.push({
-			id: 'F-MANDATORY-INFORMATION-MISSING-001',
-			category: 'mandatory-information-missing',
-			priority: 'high',
-			description: `One or more mandatory fields are missing: ${missing.join(
-				', '
-			)}. The receiving service may reject or bounce the referral.`,
-			suggestedAction:
-				'Complete the missing mandatory field(s) so the referral is sendable.'
-		});
-	}
+  // ─── Mandatory information missing (HIGH) ───────────────────
+  const missing = missingMandatoryFields(referral);
+  if (missing.length > 0) {
+    flags.push({
+      id: 'F-MANDATORY-INFORMATION-MISSING-001',
+      category: 'mandatory-information-missing',
+      priority: 'high',
+      description: `One or more mandatory fields are missing: ${missing.join(
+        ', '
+      )}. The receiving service may reject or bounce the referral.`,
+      suggestedAction: 'Complete the missing mandatory field(s) so the referral is sendable.'
+    });
+  }
 
-	// ─── Urgency information missing (MEDIUM) ───────────────────
-	const urgencyReasonMissing =
-		(urgency === 'urgent' || urgency === 'two-week-wait') &&
-		!nonEmpty(referral.urgencyInfo.urgencyReason);
-	const cancerDetailMissing =
-		urgency === 'two-week-wait' &&
-		(!nonEmpty(referral.urgencyInfo.suspectedCancerCriterion) ||
-			!nonEmpty(referral.urgencyInfo.suspectedCancerPathway));
-	if (urgencyReasonMissing || cancerDetailMissing) {
-		flags.push({
-			id: 'F-URGENCY-INFORMATION-MISSING-001',
-			category: 'urgency-information-missing',
-			priority: 'medium',
-			description:
-				'An urgent or two-week-wait referral is selected but the urgency reason, suspected-cancer criterion, or pathway is missing.',
-			suggestedAction:
-				'Record the urgency reason and, for two-week-wait, the named criterion and tumour-site pathway.'
-		});
-	}
+  // ─── Urgency information missing (MEDIUM) ───────────────────
+  const urgencyReasonMissing =
+    (urgency === 'urgent' || urgency === 'two-week-wait') &&
+    !nonEmpty(referral.urgencyInfo.urgencyReason);
+  const cancerDetailMissing =
+    urgency === 'two-week-wait' &&
+    (!nonEmpty(referral.urgencyInfo.suspectedCancerCriterion) ||
+      !nonEmpty(referral.urgencyInfo.suspectedCancerPathway));
+  if (urgencyReasonMissing || cancerDetailMissing) {
+    flags.push({
+      id: 'F-URGENCY-INFORMATION-MISSING-001',
+      category: 'urgency-information-missing',
+      priority: 'medium',
+      description:
+        'An urgent or two-week-wait referral is selected but the urgency reason, suspected-cancer criterion, or pathway is missing.',
+      suggestedAction:
+        'Record the urgency reason and, for two-week-wait, the named criterion and tumour-site pathway.'
+    });
+  }
 
-	// ─── Consent not documented (MEDIUM) ────────────────────────
-	if (referral.expectations.consentToShare !== 'yes') {
-		flags.push({
-			id: 'F-CONSENT-NOT-DOCUMENTED-001',
-			category: 'consent-not-documented',
-			priority: 'medium',
-			description:
-				'Consent to share information with the receiving service is not documented — the referral remains sendable but consent should be recorded.',
-			suggestedAction:
-				'Record that the patient consented to the referral and to information-sharing, per Montgomery v Lanarkshire (2015).'
-		});
-	}
+  // ─── Consent not documented (MEDIUM) ────────────────────────
+  if (referral.expectations.consentToShare !== 'yes') {
+    flags.push({
+      id: 'F-CONSENT-NOT-DOCUMENTED-001',
+      category: 'consent-not-documented',
+      priority: 'medium',
+      description:
+        'Consent to share information with the receiving service is not documented — the referral remains sendable but consent should be recorded.',
+      suggestedAction:
+        'Record that the patient consented to the referral and to information-sharing, per Montgomery v Lanarkshire (2015).'
+    });
+  }
 
-	// ─── No safety-netting recorded (LOW) ───────────────────────
-	if (!nonEmpty(referral.expectations.safetyNetting)) {
-		flags.push({
-			id: 'F-NO-SAFETY-NETTING-001',
-			category: 'no-safety-netting',
-			priority: 'low',
-			description:
-				'No safety-netting advice or follow-up is documented for the patient while awaiting the appointment.',
-			suggestedAction:
-				'Record the safety-netting advice given to the patient and when to seek further help.'
-		});
-	}
+  // ─── No safety-netting recorded (LOW) ───────────────────────
+  if (!nonEmpty(referral.expectations.safetyNetting)) {
+    flags.push({
+      id: 'F-NO-SAFETY-NETTING-001',
+      category: 'no-safety-netting',
+      priority: 'low',
+      description:
+        'No safety-netting advice or follow-up is documented for the patient while awaiting the appointment.',
+      suggestedAction:
+        'Record the safety-netting advice given to the patient and when to seek further help.'
+    });
+  }
 
-	// Sort: high > medium > low.
-	const priorityOrder: Record<string, number> = { high: 0, medium: 1, low: 2 };
-	flags.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
+  // Sort: high > medium > low.
+  const priorityOrder: Record<string, number> = { high: 0, medium: 1, low: 2 };
+  flags.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
 
-	return flags;
+  return flags;
 }

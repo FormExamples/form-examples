@@ -28,11 +28,7 @@ export function todayIso(now: Date = new Date()): string {
 // status stays consistent everywhere.
 // ---------------------------------------------------------------------------
 
-import type {
-  ClinicalPriority,
-  FlagPriority,
-  WaitingTimeStatus
-} from './types.js';
+import type { ClinicalPriority, FlagPriority, WaitingTimeStatus } from './types.js';
 
 /** Human-readable label for a Waiting Time Status band. */
 export function waitingTimeStatusLabel(status: WaitingTimeStatus): string {

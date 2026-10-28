@@ -1,10 +1,10 @@
 import type {
-	FluoroscopyRequest,
-	GradingResult,
-	Recommendation,
-	AppropriatenessBand,
-	SafetyBand,
-	FiredRule
+  FluoroscopyRequest,
+  GradingResult,
+  Recommendation,
+  AppropriatenessBand,
+  SafetyBand,
+  FiredRule
 } from './types';
 import { scoreAppropriateness } from './appropriateness-rules';
 import { scoreRadiationDose } from './radiation-dose-rules';
@@ -35,54 +35,54 @@ import { isBariumStudy } from './utils';
  * No side effects, no network calls, no I/O.
  */
 export function calculateGrade(data: FluoroscopyRequest): GradingResult {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	// Axis A — appropriateness.
-	const appr = scoreAppropriateness(data.request.primaryIndication, data.request.studyType);
-	if (appr.firedRule) firedRules.push(appr.firedRule);
+  // Axis A — appropriateness.
+  const appr = scoreAppropriateness(data.request.primaryIndication, data.request.studyType);
+  if (appr.firedRule) firedRules.push(appr.firedRule);
 
-	// Axis B — radiation dose.
-	const dose = scoreRadiationDose(data.request.studyType);
-	if (dose.firedRule) firedRules.push(dose.firedRule);
+  // Axis B — radiation dose.
+  const dose = scoreRadiationDose(data.request.studyType);
+  if (dose.firedRule) firedRules.push(dose.firedRule);
 
-	// Axis B — safety band.
-	const safety = scoreSafety(data);
-	for (const r of safety.firedRules) firedRules.push(r);
+  // Axis B — safety band.
+  const safety = scoreSafety(data);
+  for (const r of safety.firedRules) firedRules.push(r);
 
-	// Axis C — completeness.
-	const completeness = scoreCompleteness(data);
-	for (const m of completeness.missing) firedRules.push(m);
+  // Axis C — completeness.
+  const completeness = scoreCompleteness(data);
+  for (const m of completeness.missing) firedRules.push(m);
 
-	// Axis D — triage.
-	const triage = scoreTriage(data);
-	for (const r of triage.firedRules) firedRules.push(r);
+  // Axis D — triage.
+  const triage = scoreTriage(data);
+  for (const r of triage.firedRules) firedRules.push(r);
 
-	const suspectedPerforationBarium =
-		data.request.primaryIndication === 'suspected-perforation' &&
-		isBariumStudy(data.request.studyType);
+  const suspectedPerforationBarium =
+    data.request.primaryIndication === 'suspected-perforation' &&
+    isBariumStudy(data.request.studyType);
 
-	const recommendation = deriveRecommendation(
-		appr.band,
-		safety.band,
-		completeness.percent,
-		suspectedPerforationBarium
-	);
+  const recommendation = deriveRecommendation(
+    appr.band,
+    safety.band,
+    completeness.percent,
+    suspectedPerforationBarium
+  );
 
-	const flags = detectFlags(data, { radiationDoseBand: dose.band });
+  const flags = detectFlags(data, { radiationDoseBand: dose.band });
 
-	return {
-		appropriatenessScore: appr.score,
-		appropriatenessBand: appr.band,
-		safetyBand: safety.band,
-		radiationDoseBand: dose.band,
-		completenessPercent: completeness.percent,
-		triageTier: triage.tier,
-		targetTimeframe: triage.targetTimeframe,
-		recommendation,
-		firedRules,
-		flags,
-		gradedAt: new Date().toISOString()
-	};
+  return {
+    appropriatenessScore: appr.score,
+    appropriatenessBand: appr.band,
+    safetyBand: safety.band,
+    radiationDoseBand: dose.band,
+    completenessPercent: completeness.percent,
+    triageTier: triage.tier,
+    targetTimeframe: triage.targetTimeframe,
+    recommendation,
+    firedRules,
+    flags,
+    gradedAt: new Date().toISOString()
+  };
 }
 
 /**
@@ -91,16 +91,16 @@ export function calculateGrade(data: FluoroscopyRequest): GradingResult {
  * of the other axes. Least-alarming wins only when nothing escalates.
  */
 export function deriveRecommendation(
-	appropriatenessBand: AppropriatenessBand,
-	safetyBand: SafetyBand,
-	completenessPercent: number,
-	suspectedPerforationBarium: boolean
+  appropriatenessBand: AppropriatenessBand,
+  safetyBand: SafetyBand,
+  completenessPercent: number,
+  suspectedPerforationBarium: boolean
 ): Recommendation {
-	if (safetyBand === 'contraindicated') {
-		// Barium-vs-perforation has a clear safe redirect target.
-		return suspectedPerforationBarium ? 'redirect' : 'query-referrer';
-	}
-	if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
-	if (completenessPercent < 50) return 'query-referrer';
-	return 'accept';
+  if (safetyBand === 'contraindicated') {
+    // Barium-vs-perforation has a clear safe redirect target.
+    return suspectedPerforationBarium ? 'redirect' : 'query-referrer';
+  }
+  if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
+  if (completenessPercent < 50) return 'query-referrer';
+  return 'accept';
 }

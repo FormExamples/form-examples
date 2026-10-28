@@ -7,25 +7,14 @@
 export type ClinicalPriority = 'P1a' | 'P1b' | 'P2' | 'P3' | 'P4' | 'P5' | 'P6' | '';
 
 export type WaitingTimeStatus =
-  | 'within-target'
-  | 'approaching-breach'
-  | 'breached'
-  | 'long-wait'
-  | '';
+  'within-target' | 'approaching-breach' | 'breached' | 'long-wait' | '';
 
 export type CardStatus = 'draft' | 'submitted' | 'reviewed' | 'closed';
 
 export type YesNo = 'yes' | 'no' | '';
 
 export type ReferralSource =
-  | 'gp'
-  | 'consultant'
-  | 'a-and-e'
-  | 'self'
-  | 'community'
-  | 'screening'
-  | 'other'
-  | '';
+  'gp' | 'consultant' | 'a-and-e' | 'self' | 'community' | 'screening' | 'other' | '';
 
 export type ExpectedProcedureType =
   | 'first-outpatient-appointment'
@@ -52,12 +41,7 @@ export type AppointmentType =
   | '';
 
 export type AppointmentStatus =
-  | 'scheduled'
-  | 'confirmed'
-  | 'rebooked'
-  | 'cancelled'
-  | 'attended'
-  | 'did-not-attend';
+  'scheduled' | 'confirmed' | 'rebooked' | 'cancelled' | 'attended' | 'did-not-attend';
 
 export type PreferredContactChannel = 'sms' | 'email' | 'phone' | 'letter' | 'nhs-app' | '';
 

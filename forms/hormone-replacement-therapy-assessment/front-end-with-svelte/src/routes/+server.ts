@@ -1,5 +1,5 @@
 import { redirect } from '@sveltejs/kit';
 
 export function GET() {
-	redirect(307, '/hormone-replacement-therapy-assessment/');
+  redirect(307, '/hormone-replacement-therapy-assessment/');
 }

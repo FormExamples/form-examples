@@ -19,7 +19,9 @@
 </script>
 
 <Fieldset legend="Step 15 — Section 14 — Diet (6 checkpoints)">
-  <p class="hint">Diet staffing, food items/timings, utensils, food trolley, water supply, and cleanliness.</p>
+  <p class="hint">
+    Diet staffing, food items/timings, utensils, food trolley, water supply, and cleanliness.
+  </p>
 
   {#each groups as group, gi (gi)}
     {#if group.subsection}

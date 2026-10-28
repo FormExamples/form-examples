@@ -33,13 +33,13 @@ export function summariseMetrics(data: HospitalDashboardMetrics): MetricsSummary
       category: category.number,
       categoryTitle: category.title,
       reported: tally.reported,
-      total: tally.total,
+      total: tally.total
     };
   });
 
   return {
     reportedCount,
     totalCount: DASHBOARD_METRICS.length,
-    categoryCounts,
+    categoryCounts
   };
 }

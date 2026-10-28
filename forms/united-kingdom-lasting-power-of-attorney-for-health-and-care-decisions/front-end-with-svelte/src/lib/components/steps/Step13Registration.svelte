@@ -24,7 +24,7 @@
       options={[
         { value: 'donor', label: 'Donor' },
         { value: 'attorney', label: 'One attorney' },
-        { value: 'attorneys-jointly', label: 'All attorneys jointly' },
+        { value: 'attorneys-jointly', label: 'All attorneys jointly' }
       ]}
     />
     <FormField
@@ -49,7 +49,7 @@
       options={[
         { value: 'none', label: 'None — full fee' },
         { value: 'half', label: 'Half remission (50%)' },
-        { value: 'full-exempt', label: 'Full exemption' },
+        { value: 'full-exempt', label: 'Full exemption' }
       ]}
     />
     {#if reg.feeRemission !== '' && reg.feeRemission !== 'none'}
@@ -64,10 +64,13 @@
             { value: 'income-support', label: 'Receives Income Support' },
             { value: 'pension-credit-guarantee', label: 'Pension Credit (guarantee element)' },
             { value: 'housing-benefit', label: 'Housing Benefit' },
-            { value: 'employment-and-support-allowance', label: 'Employment and Support Allowance' },
+            {
+              value: 'employment-and-support-allowance',
+              label: 'Employment and Support Allowance'
+            },
             { value: 'jobseekers-allowance', label: 'Jobseeker’s Allowance (income-based)' },
             { value: 'working-tax-credit', label: 'Working Tax Credit (with disability element)' },
-            { value: 'other', label: 'Other' },
+            { value: 'other', label: 'Other' }
           ]}
         />
       </div>
@@ -79,7 +82,7 @@
       options={[
         { value: 'post', label: 'Post' },
         { value: 'opg-digital', label: 'OPG digital (Powers of Attorney Act 2023)' },
-        { value: 'solicitor-portal', label: 'Solicitor portal' },
+        { value: 'solicitor-portal', label: 'Solicitor portal' }
       ]}
     />
     <FormField

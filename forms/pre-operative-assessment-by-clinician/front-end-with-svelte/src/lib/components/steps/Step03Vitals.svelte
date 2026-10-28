@@ -24,7 +24,11 @@
       <NumberInput label="SpO2 (%)" step="0.1" bind:value={store.data.vitals.spo2Percent} />
     </Field>
     <Field label="Temperature (degC)">
-      <NumberInput label="Temperature (degC)" step="0.1" bind:value={store.data.vitals.temperatureCelsius} />
+      <NumberInput
+        label="Temperature (degC)"
+        step="0.1"
+        bind:value={store.data.vitals.temperatureCelsius}
+      />
     </Field>
     <Field label="On room air?">
       <Select label="On room air?" bind:value={store.data.vitals.onRoomAir}>
@@ -34,10 +38,19 @@
       </Select>
     </Field>
     <Field label="O2 flow (L/min)">
-      <NumberInput label="O2 flow (L/min)" step="0.1" bind:value={store.data.vitals.supplementalOxygenLitres} />
+      <NumberInput
+        label="O2 flow (L/min)"
+        step="0.1"
+        bind:value={store.data.vitals.supplementalOxygenLitres}
+      />
     </Field>
     <Field label="Pain score 0-10">
-      <NumberInput label="Pain score 0-10" min={0} max={10} bind:value={store.data.vitals.painScore010} />
+      <NumberInput
+        label="Pain score 0-10"
+        min={0}
+        max={10}
+        bind:value={store.data.vitals.painScore010}
+      />
     </Field>
   </div>
 </Fieldset>

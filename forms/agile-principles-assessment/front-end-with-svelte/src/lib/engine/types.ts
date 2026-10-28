@@ -1,12 +1,7 @@
 export type LikertScore = 1 | 2 | 3 | 4 | 5 | null;
 
 export type Maturity =
-  | 'optimising'
-  | 'mature'
-  | 'developing'
-  | 'initial'
-  | 'ad-hoc'
-  | 'insufficient-data';
+  'optimising' | 'mature' | 'developing' | 'initial' | 'ad-hoc' | 'insufficient-data';
 
 export type PrincipleBand = 'high' | 'mid' | 'low' | 'unanswered';
 
@@ -90,10 +85,10 @@ export interface AdditionalFlag {
 
 export interface GradingResult {
   answeredCount: number;
-  meanScore: number | null;          // unweighted mean (kept for trend continuity)
-  weightedMeanScore: number | null;  // weighted mean (= meanScore when no weights customised)
-  weightsCustomised: boolean;        // true if any weight differs from 1.0
-  maturity: Maturity;                // derived from weightedMeanScore
+  meanScore: number | null; // unweighted mean (kept for trend continuity)
+  weightedMeanScore: number | null; // weighted mean (= meanScore when no weights customised)
+  weightsCustomised: boolean; // true if any weight differs from 1.0
+  maturity: Maturity; // derived from weightedMeanScore
   perPrincipleBands: PrincipleBand[];
   firedRules: FiredRule[];
   additionalFlags: AdditionalFlag[];

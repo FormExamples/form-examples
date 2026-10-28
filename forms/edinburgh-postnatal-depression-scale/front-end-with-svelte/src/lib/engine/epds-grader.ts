@@ -6,7 +6,7 @@ import { detectFlaggedIssues } from './flagged-issues';
  * Compute the ten reverse-corrected item scores. Unanswered items map to null.
  */
 export function computeItemScores(data: AssessmentData): (number | null)[] {
-	return epdsItems.map((item) => scoreForOption(item.direction, data.items[item.field]));
+  return epdsItems.map((item) => scoreForOption(item.direction, data.items[item.field]));
 }
 
 /**
@@ -27,102 +27,102 @@ export function computeItemScores(data: AssessmentData): (number | null)[] {
  * drives the urgent flagged issue.
  */
 export function calculateEpdsGrade(data: AssessmentData): GradingResult {
-	const rawScores = computeItemScores(data);
+  const rawScores = computeItemScores(data);
 
-	// For the total, a missing item contributes 0.
-	const itemScores = rawScores.map((s) => (s === null ? 0 : s));
-	const totalScore = itemScores.reduce((sum, s) => sum + s, 0);
+  // For the total, a missing item contributes 0.
+  const itemScores = rawScores.map((s) => (s === null ? 0 : s));
+  const totalScore = itemScores.reduce((sum, s) => sum + s, 0);
 
-	const band: Band = totalScore >= 13 ? 'likely' : totalScore >= 10 ? 'possible' : 'lower';
+  const band: Band = totalScore >= 13 ? 'likely' : totalScore >= 10 ? 'possible' : 'lower';
 
-	const item10Score = itemScores[9];
-	const selfHarmFlag = rawScores[9] !== null && rawScores[9] > 0;
+  const item10Score = itemScores[9];
+  const selfHarmFlag = rawScores[9] !== null && rawScores[9] > 0;
 
-	// Anxiety subscale (EPDS-3A): items 3, 4 and 5 (spec §5).
-	const anxietySubscale = itemScores[2] + itemScores[3] + itemScores[4];
+  // Anxiety subscale (EPDS-3A): items 3, 4 and 5 (spec §5).
+  const anxietySubscale = itemScores[2] + itemScores[3] + itemScores[4];
 
-	const firedItems: FiredItem[] = [];
+  const firedItems: FiredItem[] = [];
 
-	// One audit row per item that contributed points.
-	epdsItems.forEach((item, i) => {
-		const score = itemScores[i];
-		if (score > 0) {
-			firedItems.push({
-				id: `R-ITEM-${item.number}-SCORE`,
-				parameter: 'item',
-				points: score,
-				category: 'item-score',
-				description:
-					`Item ${item.number} (${item.statement}) scored ${score} of 3` +
-					(item.direction === 'reverse' ? ' (reverse-scored)' : '')
-			});
-		}
-	});
+  // One audit row per item that contributed points.
+  epdsItems.forEach((item, i) => {
+    const score = itemScores[i];
+    if (score > 0) {
+      firedItems.push({
+        id: `R-ITEM-${item.number}-SCORE`,
+        parameter: 'item',
+        points: score,
+        category: 'item-score',
+        description:
+          `Item ${item.number} (${item.statement}) scored ${score} of 3` +
+          (item.direction === 'reverse' ? ' (reverse-scored)' : '')
+      });
+    }
+  });
 
-	// Total audit row.
-	firedItems.push({
-		id: 'R-TOTAL-SCORE',
-		parameter: 'total',
-		points: totalScore,
-		category: 'total-score',
-		description: `Summed EPDS total ${totalScore} of 30`
-	});
+  // Total audit row.
+  firedItems.push({
+    id: 'R-TOTAL-SCORE',
+    parameter: 'total',
+    points: totalScore,
+    category: 'total-score',
+    description: `Summed EPDS total ${totalScore} of 30`
+  });
 
-	// Band audit row.
-	firedItems.push({
-		id: 'R-BAND',
-		parameter: 'band',
-		points: 0,
-		category: 'band-threshold',
-		description:
-			band === 'likely'
-				? 'Total >= 13 — likely depression band'
-				: band === 'possible'
-					? 'Total >= 10 and < 13 — possible depression band'
-					: 'Total < 10 — lower-likelihood band'
-	});
+  // Band audit row.
+  firedItems.push({
+    id: 'R-BAND',
+    parameter: 'band',
+    points: 0,
+    category: 'band-threshold',
+    description:
+      band === 'likely'
+        ? 'Total >= 13 — likely depression band'
+        : band === 'possible'
+          ? 'Total >= 10 and < 13 — possible depression band'
+          : 'Total < 10 — lower-likelihood band'
+  });
 
-	// Self-harm audit row (only when item 10 is positive).
-	if (selfHarmFlag) {
-		firedItems.push({
-			id: 'R-ITEM-10-SELF-HARM',
-			parameter: 'self-harm',
-			points: item10Score,
-			category: 'safety',
-			description:
-				`Item 10 (thoughts of self-harm) scored ${item10Score} of 3 — ` +
-				'mandatory self-harm flag regardless of the total score'
-		});
-	}
+  // Self-harm audit row (only when item 10 is positive).
+  if (selfHarmFlag) {
+    firedItems.push({
+      id: 'R-ITEM-10-SELF-HARM',
+      parameter: 'self-harm',
+      points: item10Score,
+      category: 'safety',
+      description:
+        `Item 10 (thoughts of self-harm) scored ${item10Score} of 3 — ` +
+        'mandatory self-harm flag regardless of the total score'
+    });
+  }
 
-	// Anxiety-subscale audit row (only when elevated).
-	if (anxietySubscale >= 4) {
-		firedItems.push({
-			id: 'R-ANXIETY-SUBSCALE',
-			parameter: 'anxiety-subscale',
-			points: anxietySubscale,
-			category: 'anxiety-subscale',
-			description: `Anxiety subscale (items 3, 4, 5) scored ${anxietySubscale} of 9 (EPDS-3A >= 4)`
-		});
-	}
+  // Anxiety-subscale audit row (only when elevated).
+  if (anxietySubscale >= 4) {
+    firedItems.push({
+      id: 'R-ANXIETY-SUBSCALE',
+      parameter: 'anxiety-subscale',
+      points: anxietySubscale,
+      category: 'anxiety-subscale',
+      description: `Anxiety subscale (items 3, 4, 5) scored ${anxietySubscale} of 9 (EPDS-3A >= 4)`
+    });
+  }
 
-	const flaggedIssues = detectFlaggedIssues(data, {
-		itemScores,
-		totalScore,
-		item10Score,
-		selfHarmFlag,
-		anxietySubscale
-	});
+  const flaggedIssues = detectFlaggedIssues(data, {
+    itemScores,
+    totalScore,
+    item10Score,
+    selfHarmFlag,
+    anxietySubscale
+  });
 
-	return {
-		itemScores,
-		totalScore,
-		band,
-		item10Score,
-		selfHarmFlag,
-		anxietySubscale,
-		firedItems,
-		flaggedIssues,
-		timestamp: new Date().toISOString()
-	};
+  return {
+    itemScores,
+    totalScore,
+    band,
+    item10Score,
+    selfHarmFlag,
+    anxietySubscale,
+    firedItems,
+    flaggedIssues,
+    timestamp: new Date().toISOString()
+  };
 }

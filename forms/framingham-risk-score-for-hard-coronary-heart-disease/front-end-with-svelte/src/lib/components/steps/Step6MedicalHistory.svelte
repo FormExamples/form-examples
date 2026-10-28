@@ -2,7 +2,7 @@
   import { assessment } from '#lib/stores/assessment.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { RadioGroup, TextAreaInput } from "@lilydesignsystem/svelte-headless";
+  import { RadioGroup, TextAreaInput } from '@lilydesignsystem/svelte-headless';
 
   const m = assessment.data.medicalHistory;
 
@@ -17,26 +17,19 @@
 </script>
 
 <Fieldset legend="Step 6 \u2014 Medical history">
-  <p class="hint">The Framingham score targets patients without diabetes or prior CHD; flag any pre-existing conditions.</p>
+  <p class="hint">
+    The Framingham score targets patients without diabetes or prior CHD; flag any pre-existing
+    conditions.
+  </p>
 
   {#each yn as item (item.key)}
     <Field label={item.label}>
       <RadioGroup label={item.label}>
         <label class="radio-input">
-          <input
-            type="radio"
-            name={item.key}
-            value="yes"
-            bind:group={m[item.key]}
-          /> Yes
+          <input type="radio" name={item.key} value="yes" bind:group={m[item.key]} /> Yes
         </label>
         <label class="radio-input">
-          <input
-            type="radio"
-            name={item.key}
-            value="no"
-            bind:group={m[item.key]}
-          /> No
+          <input type="radio" name={item.key} value="no" bind:group={m[item.key]} /> No
         </label>
       </RadioGroup>
     </Field>

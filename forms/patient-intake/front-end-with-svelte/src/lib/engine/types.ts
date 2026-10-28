@@ -16,104 +16,104 @@ export type CommunicationPreference = 'phone' | 'email' | 'text' | 'post' | '';
 export type RiskLevel = 'low' | 'medium' | 'high';
 
 export interface PersonalInformation {
-	fullName: string;
-	dateOfBirth: string;
-	sex: Sex;
-	addressLine1: string;
-	addressLine2: string;
-	city: string;
-	postcode: string;
-	phone: string;
-	email: string;
-	emergencyContactName: string;
-	emergencyContactPhone: string;
-	emergencyContactRelationship: string;
+  fullName: string;
+  dateOfBirth: string;
+  sex: Sex;
+  addressLine1: string;
+  addressLine2: string;
+  city: string;
+  postcode: string;
+  phone: string;
+  email: string;
+  emergencyContactName: string;
+  emergencyContactPhone: string;
+  emergencyContactRelationship: string;
 }
 
 export interface InsuranceAndId {
-	insuranceProvider: string;
-	policyNumber: string;
-	nhsNumber: string;
-	gpName: string;
-	gpPracticeName: string;
-	gpPhone: string;
+  insuranceProvider: string;
+  policyNumber: string;
+  nhsNumber: string;
+  gpName: string;
+  gpPracticeName: string;
+  gpPhone: string;
 }
 
 export interface ReasonForVisit {
-	primaryReason: string;
-	urgencyLevel: UrgencyLevel;
-	referringProvider: string;
-	symptomDuration: string;
-	additionalDetails: string;
+  primaryReason: string;
+  urgencyLevel: UrgencyLevel;
+  referringProvider: string;
+  symptomDuration: string;
+  additionalDetails: string;
 }
 
 export interface MedicalHistory {
-	chronicConditions: string[];
-	previousSurgeries: string;
-	previousHospitalizations: string;
-	ongoingTreatments: string;
+  chronicConditions: string[];
+  previousSurgeries: string;
+  previousHospitalizations: string;
+  ongoingTreatments: string;
 }
 
 export interface Medication {
-	name: string;
-	dose: string;
-	frequency: string;
-	prescriber: string;
+  name: string;
+  dose: string;
+  frequency: string;
+  prescriber: string;
 }
 
 export interface Allergy {
-	allergen: string;
-	allergyType: AllergyType;
-	reaction: string;
-	severity: AllergySeverity;
+  allergen: string;
+  allergyType: AllergyType;
+  reaction: string;
+  severity: AllergySeverity;
 }
 
 export interface FamilyHistory {
-	heartDisease: YesNo;
-	heartDiseaseDetails: string;
-	cancer: YesNo;
-	cancerDetails: string;
-	diabetes: YesNo;
-	diabetesDetails: string;
-	stroke: YesNo;
-	strokeDetails: string;
-	mentalIllness: YesNo;
-	mentalIllnessDetails: string;
-	geneticConditions: YesNo;
-	geneticConditionsDetails: string;
+  heartDisease: YesNo;
+  heartDiseaseDetails: string;
+  cancer: YesNo;
+  cancerDetails: string;
+  diabetes: YesNo;
+  diabetesDetails: string;
+  stroke: YesNo;
+  strokeDetails: string;
+  mentalIllness: YesNo;
+  mentalIllnessDetails: string;
+  geneticConditions: YesNo;
+  geneticConditionsDetails: string;
 }
 
 export interface SocialHistory {
-	smokingStatus: SmokingStatus;
-	smokingPackYears: number | null;
-	alcoholFrequency: AlcoholFrequency;
-	alcoholUnitsPerWeek: number | null;
-	drugUse: DrugUseFrequency;
-	drugDetails: string;
-	occupation: string;
-	exerciseFrequency: ExerciseFrequency;
-	dietQuality: DietQuality;
+  smokingStatus: SmokingStatus;
+  smokingPackYears: number | null;
+  alcoholFrequency: AlcoholFrequency;
+  alcoholUnitsPerWeek: number | null;
+  drugUse: DrugUseFrequency;
+  drugDetails: string;
+  occupation: string;
+  exerciseFrequency: ExerciseFrequency;
+  dietQuality: DietQuality;
 }
 
 export interface ReviewOfSystems {
-	constitutional: string;
-	heent: string;
-	cardiovascular: string;
-	respiratory: string;
-	gastrointestinal: string;
-	genitourinary: string;
-	musculoskeletal: string;
-	neurological: string;
-	psychiatric: string;
-	skin: string;
+  constitutional: string;
+  heent: string;
+  cardiovascular: string;
+  respiratory: string;
+  gastrointestinal: string;
+  genitourinary: string;
+  musculoskeletal: string;
+  neurological: string;
+  psychiatric: string;
+  skin: string;
 }
 
 export interface ConsentAndPreferences {
-	consentToTreatment: YesNo;
-	privacyAcknowledgement: YesNo;
-	communicationPreference: CommunicationPreference;
-	advanceDirectives: YesNo;
-	advanceDirectiveDetails: string;
+  consentToTreatment: YesNo;
+  privacyAcknowledgement: YesNo;
+  communicationPreference: CommunicationPreference;
+  advanceDirectives: YesNo;
+  advanceDirectiveDetails: string;
 }
 
 // ──────────────────────────────────────────────
@@ -121,16 +121,16 @@ export interface ConsentAndPreferences {
 // ──────────────────────────────────────────────
 
 export interface AssessmentData {
-	personalInformation: PersonalInformation;
-	insuranceAndId: InsuranceAndId;
-	reasonForVisit: ReasonForVisit;
-	medicalHistory: MedicalHistory;
-	medications: Medication[];
-	allergies: Allergy[];
-	familyHistory: FamilyHistory;
-	socialHistory: SocialHistory;
-	reviewOfSystems: ReviewOfSystems;
-	consentAndPreferences: ConsentAndPreferences;
+  personalInformation: PersonalInformation;
+  insuranceAndId: InsuranceAndId;
+  reasonForVisit: ReasonForVisit;
+  medicalHistory: MedicalHistory;
+  medications: Medication[];
+  allergies: Allergy[];
+  familyHistory: FamilyHistory;
+  socialHistory: SocialHistory;
+  reviewOfSystems: ReviewOfSystems;
+  consentAndPreferences: ConsentAndPreferences;
 }
 
 // ──────────────────────────────────────────────
@@ -138,32 +138,32 @@ export interface AssessmentData {
 // ──────────────────────────────────────────────
 
 export interface IntakeRule {
-	id: string;
-	category: string;
-	description: string;
-	riskLevel: RiskLevel;
-	evaluate: (data: AssessmentData) => boolean;
+  id: string;
+  category: string;
+  description: string;
+  riskLevel: RiskLevel;
+  evaluate: (data: AssessmentData) => boolean;
 }
 
 export interface FiredRule {
-	id: string;
-	category: string;
-	description: string;
-	riskLevel: RiskLevel;
+  id: string;
+  category: string;
+  description: string;
+  riskLevel: RiskLevel;
 }
 
 export interface AdditionalFlag {
-	id: string;
-	category: string;
-	message: string;
-	priority: 'high' | 'medium' | 'low';
+  id: string;
+  category: string;
+  message: string;
+  priority: 'high' | 'medium' | 'low';
 }
 
 export interface GradingResult {
-	riskLevel: RiskLevel;
-	firedRules: FiredRule[];
-	additionalFlags: AdditionalFlag[];
-	timestamp: string;
+  riskLevel: RiskLevel;
+  firedRules: FiredRule[];
+  additionalFlags: AdditionalFlag[];
+  timestamp: string;
 }
 
 // ──────────────────────────────────────────────
@@ -171,8 +171,8 @@ export interface GradingResult {
 // ──────────────────────────────────────────────
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
-	section: keyof AssessmentData | 'medications' | 'allergies';
+  number: number;
+  title: string;
+  shortTitle: string;
+  section: keyof AssessmentData | 'medications' | 'allergies';
 }

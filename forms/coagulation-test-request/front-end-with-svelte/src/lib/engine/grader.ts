@@ -6,27 +6,27 @@
 // across every front-end and the back-end.
 
 import type {
-	CoagulationTestRequest,
-	GradingResult,
-	Recommendation,
-	AppropriatenessBand,
-	PreanalyticalBand,
-	FiredRule
+  CoagulationTestRequest,
+  GradingResult,
+  Recommendation,
+  AppropriatenessBand,
+  PreanalyticalBand,
+  FiredRule
 } from './types';
 import {
-	scoreAppropriateness,
-	evaluatePreanalytical,
-	scoreCompleteness,
-	scoreTriage
+  scoreAppropriateness,
+  evaluatePreanalytical,
+  scoreCompleteness,
+  scoreTriage
 } from './rules';
 import { detectFlags } from './flags';
 
 /** Human-readable label for each overall recommendation. */
 export const RECOMMENDATION_LABELS: Record<string, string> = {
-	accept: 'Accept and process',
-	'query-referrer': 'Query the referrer',
-	redirect: 'Redirect to a more suitable test',
-	reject: 'Reject specimen'
+  accept: 'Accept and process',
+  'query-referrer': 'Query the referrer',
+  redirect: 'Redirect to a more suitable test',
+  reject: 'Reject specimen'
 };
 
 /**
@@ -34,14 +34,14 @@ export const RECOMMENDATION_LABELS: Record<string, string> = {
  * from the four axes. Least-alarming wins only when nothing escalates.
  */
 export function deriveRecommendation(
-	appropriatenessBand: AppropriatenessBand,
-	preanalyticalBand: PreanalyticalBand,
-	completenessPercent: number
+  appropriatenessBand: AppropriatenessBand,
+  preanalyticalBand: PreanalyticalBand,
+  completenessPercent: number
 ): Recommendation {
-	if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
-	if (preanalyticalBand === 'reject-risk') return 'reject';
-	if (completenessPercent < 50) return 'query-referrer';
-	return 'accept';
+  if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
+  if (preanalyticalBand === 'reject-risk') return 'reject';
+  if (completenessPercent < 50) return 'query-referrer';
+  return 'accept';
 }
 
 /**
@@ -56,39 +56,39 @@ export function deriveRecommendation(
  * tier to stat regardless of the other axes. No side effects, no I/O.
  */
 export function calculateGrade(data: CoagulationTestRequest): GradingResult {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	// Axis A — appropriateness.
-	const appr = scoreAppropriateness(data.clinical.primaryIndication, data.tests);
-	firedRules.push(appr.firedRule);
+  // Axis A — appropriateness.
+  const appr = scoreAppropriateness(data.clinical.primaryIndication, data.tests);
+  firedRules.push(appr.firedRule);
 
-	// Axis B — pre-analytical / specimen safety.
-	const pre = evaluatePreanalytical(data.specimen);
-	firedRules.push(pre.firedRule);
+  // Axis B — pre-analytical / specimen safety.
+  const pre = evaluatePreanalytical(data.specimen);
+  firedRules.push(pre.firedRule);
 
-	// Axis C — completeness.
-	const completeness = scoreCompleteness(data);
-	firedRules.push(...completeness.missing);
+  // Axis C — completeness.
+  const completeness = scoreCompleteness(data);
+  firedRules.push(...completeness.missing);
 
-	// Axis D — triage.
-	const triage = scoreTriage(data);
-	firedRules.push(...triage.firedRules);
+  // Axis D — triage.
+  const triage = scoreTriage(data);
+  firedRules.push(...triage.firedRules);
 
-	const recommendation = deriveRecommendation(appr.band, pre.band, completeness.percent);
+  const recommendation = deriveRecommendation(appr.band, pre.band, completeness.percent);
 
-	const flags = detectFlags(data, { preanalyticalBand: pre.band });
+  const flags = detectFlags(data, { preanalyticalBand: pre.band });
 
-	return {
-		appropriatenessScore: appr.score,
-		appropriatenessBand: appr.band,
-		preanalyticalBand: pre.band,
-		completenessPercent: completeness.percent,
-		triageTier: triage.tier,
-		targetTimeframe: triage.targetTimeframe,
-		recommendation,
-		recommendationLabel: RECOMMENDATION_LABELS[recommendation] || recommendation,
-		firedRules,
-		flags,
-		gradedAt: new Date().toISOString()
-	};
+  return {
+    appropriatenessScore: appr.score,
+    appropriatenessBand: appr.band,
+    preanalyticalBand: pre.band,
+    completenessPercent: completeness.percent,
+    triageTier: triage.tier,
+    targetTimeframe: triage.targetTimeframe,
+    recommendation,
+    recommendationLabel: RECOMMENDATION_LABELS[recommendation] || recommendation,
+    firedRules,
+    flags,
+    gradedAt: new Date().toISOString()
+  };
 }

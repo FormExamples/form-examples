@@ -1,9 +1,9 @@
 import type {
-	AssessmentData,
-	FiredRule,
-	SectionCompleteness,
-	SectionKey,
-	ValidationResult
+  AssessmentData,
+  FiredRule,
+  SectionCompleteness,
+  SectionKey,
+  ValidationResult
 } from './types';
 import { b1Rules } from './b1-rules';
 
@@ -20,60 +20,60 @@ import { b1Rules } from './b1-rules';
  * outstanding for the patient.
  */
 export function validateB1(data: AssessmentData): ValidationResult {
-	const sectionMap = new Map<SectionKey, SectionCompleteness>();
-	const missing: FiredRule[] = [];
-	let totalRequired = 0;
-	let totalSatisfied = 0;
+  const sectionMap = new Map<SectionKey, SectionCompleteness>();
+  const missing: FiredRule[] = [];
+  let totalRequired = 0;
+  let totalSatisfied = 0;
 
-	for (const rule of b1Rules) {
-		let applies = false;
-		try {
-			applies = rule.applies(data);
-		} catch (e) {
-			console.warn(`B1 rule ${rule.id} applies() failed:`, e);
-		}
-		if (!applies) continue;
+  for (const rule of b1Rules) {
+    let applies = false;
+    try {
+      applies = rule.applies(data);
+    } catch (e) {
+      console.warn(`B1 rule ${rule.id} applies() failed:`, e);
+    }
+    if (!applies) continue;
 
-		totalRequired++;
+    totalRequired++;
 
-		let satisfied = false;
-		try {
-			satisfied = rule.isSatisfied(data);
-		} catch (e) {
-			console.warn(`B1 rule ${rule.id} isSatisfied() failed:`, e);
-		}
+    let satisfied = false;
+    try {
+      satisfied = rule.isSatisfied(data);
+    } catch (e) {
+      console.warn(`B1 rule ${rule.id} isSatisfied() failed:`, e);
+    }
 
-		const bucket = sectionMap.get(rule.section) ?? {
-			section: rule.section,
-			required: 0,
-			satisfied: 0,
-			missing: []
-		};
-		bucket.required++;
+    const bucket = sectionMap.get(rule.section) ?? {
+      section: rule.section,
+      required: 0,
+      satisfied: 0,
+      missing: []
+    };
+    bucket.required++;
 
-		if (satisfied) {
-			totalSatisfied++;
-			bucket.satisfied++;
-		} else {
-			const fired: FiredRule = {
-				id: rule.id,
-				section: rule.section,
-				description: rule.description
-			};
-			missing.push(fired);
-			bucket.missing.push(fired);
-		}
+    if (satisfied) {
+      totalSatisfied++;
+      bucket.satisfied++;
+    } else {
+      const fired: FiredRule = {
+        id: rule.id,
+        section: rule.section,
+        description: rule.description
+      };
+      missing.push(fired);
+      bucket.missing.push(fired);
+    }
 
-		sectionMap.set(rule.section, bucket);
-	}
+    sectionMap.set(rule.section, bucket);
+  }
 
-	const sections: SectionCompleteness[] = Array.from(sectionMap.values());
+  const sections: SectionCompleteness[] = Array.from(sectionMap.values());
 
-	return {
-		complete: missing.length === 0,
-		totalRequired,
-		totalSatisfied,
-		sections,
-		missing
-	};
+  return {
+    complete: missing.length === 0,
+    totalRequired,
+    totalSatisfied,
+    sections,
+    missing
+  };
 }

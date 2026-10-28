@@ -10,57 +10,57 @@ import type { BiopsyRequestData } from './types';
  * tests and sample data without pulling in `$app` runtime dependencies.
  */
 export function createDefaultRequest(): BiopsyRequestData {
-	return {
-		clinician: {
-			clinicianName: '',
-			clinicianRole: '',
-			registrationBody: '',
-			registrationNumber: '',
-			requesterContact: '',
-			supervisingConsultant: '',
-			siteName: '',
-			referralDate: ''
-		},
-		patient: {
-			firstName: '',
-			lastName: '',
-			dateOfBirth: '',
-			nhsNumber: '',
-			bodyMassIndex: null
-		},
-		procedure: {
-			biopsySite: '',
-			biopsyMethod: '',
-			laterality: '',
-			imagingGuidanceRequired: false,
-			setting: ''
-		},
-		indication: {
-			primaryIndication: '',
-			clinicalQuestion: '',
-			relevantHistory: ''
-		},
-		lesion: {
-			lesionDescription: '',
-			lesionSize: null,
-			lesionLocation: '',
-			imagingCorrelate: '',
-			previousFinding: ''
-		},
-		bleeding: {
-			takingAnticoagulant: false,
-			anticoagulantAgent: '',
-			takingAntiplatelet: false,
-			antiplateletAgent: '',
-			inr: null,
-			plateletCount: null,
-			bleedingDisorder: false,
-			immunosuppressed: false
-		},
-		triage: {
-			urgency: '',
-			requestedByDate: '',
-			notes: ''
-		}
-	};
+  return {
+    clinician: {
+      clinicianName: '',
+      clinicianRole: '',
+      registrationBody: '',
+      registrationNumber: '',
+      requesterContact: '',
+      supervisingConsultant: '',
+      siteName: '',
+      referralDate: ''
+    },
+    patient: {
+      firstName: '',
+      lastName: '',
+      dateOfBirth: '',
+      nhsNumber: '',
+      bodyMassIndex: null
+    },
+    procedure: {
+      biopsySite: '',
+      biopsyMethod: '',
+      laterality: '',
+      imagingGuidanceRequired: false,
+      setting: ''
+    },
+    indication: {
+      primaryIndication: '',
+      clinicalQuestion: '',
+      relevantHistory: ''
+    },
+    lesion: {
+      lesionDescription: '',
+      lesionSize: null,
+      lesionLocation: '',
+      imagingCorrelate: '',
+      previousFinding: ''
+    },
+    bleeding: {
+      takingAnticoagulant: false,
+      anticoagulantAgent: '',
+      takingAntiplatelet: false,
+      antiplateletAgent: '',
+      inr: null,
+      plateletCount: null,
+      bleedingDisorder: false,
+      immunosuppressed: false
+    },
+    triage: {
+      urgency: '',
+      requestedByDate: '',
+      notes: ''
+    }
+  };
 }

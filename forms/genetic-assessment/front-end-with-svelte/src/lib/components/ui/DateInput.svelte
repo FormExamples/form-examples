@@ -9,7 +9,25 @@
     required = false,
     disabled = false,
     ...restProps
-  }: { label: string; value?: string; min?: string; max?: string; required?: boolean; disabled?: boolean; [key: string]: unknown } = $props();
+  }: {
+    label: string;
+    value?: string;
+    min?: string;
+    max?: string;
+    required?: boolean;
+    disabled?: boolean;
+    [key: string]: unknown;
+  } = $props();
 </script>
 
-<input class={`date-input ${className}`} type="date" aria-label={label} bind:value {min} {max} {required} {disabled} {...restProps} />
+<input
+  class={`date-input ${className}`}
+  type="date"
+  aria-label={label}
+  bind:value
+  {min}
+  {max}
+  {required}
+  {disabled}
+  {...restProps}
+/>

@@ -2,15 +2,13 @@
   import { assessment } from '#lib/stores/assessment.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { TextInput } from "@lilydesignsystem/svelte-headless";
+  import { TextInput } from '@lilydesignsystem/svelte-headless';
 
   const rd = assessment.data.recipientDetails;
 </script>
 
 <Fieldset legend="Step 1 — Recipient Details">
-  <p class="hint">
-    Enter the details of the person acknowledging the code of conduct.
-  </p>
+  <p class="hint">Enter the details of the person acknowledging the code of conduct.</p>
 
   <Field label="Organisation Name" inputId="rd-organisationName" required>
     <TextInput

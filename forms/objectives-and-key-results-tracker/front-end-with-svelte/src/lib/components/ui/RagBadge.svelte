@@ -8,7 +8,9 @@
 </script>
 
 {#if band}
-  <span class="inline-block rounded border px-3 py-1 font-bold {cls[band]}">{band.toUpperCase()}</span>
+  <span class="inline-block rounded border px-3 py-1 font-bold {cls[band]}"
+    >{band.toUpperCase()}</span
+  >
 {:else}
   <span class="inline-block text-base-content/60">(not computed)</span>
 {/if}

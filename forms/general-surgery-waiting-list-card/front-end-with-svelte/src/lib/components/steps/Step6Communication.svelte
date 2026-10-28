@@ -32,7 +32,6 @@
       class="text-area-input"
       rows="3"
       placeholder="Preferred times to contact, language and interpreter needs, accessibility (BSL, large print, easy read)."
-      bind:value={store.data.communication.communicationNotes}
-    ></textarea>
+      bind:value={store.data.communication.communicationNotes}></textarea>
   </div>
 </fieldset>

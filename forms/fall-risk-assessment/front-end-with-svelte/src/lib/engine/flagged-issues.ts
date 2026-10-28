@@ -24,163 +24,162 @@ import { mfsItems, ancillaryRules } from './mfs-rules';
  * grader) to avoid a circular import between the grader and this module.
  */
 function isHighRisk(data: AssessmentData): boolean {
-	let mfsScore = 0;
-	for (const item of mfsItems) {
-		const value = data.mfs ? data.mfs[item.field] : null;
-		if (value !== null && value !== undefined) mfsScore += value;
-	}
-	return (
-		mfsScore >= 45 ||
-		ancillaryRules.hasRecurrentFallsWithInjury(data) ||
-		ancillaryRules.isAnticoagulated(data)
-	);
+  let mfsScore = 0;
+  for (const item of mfsItems) {
+    const value = data.mfs ? data.mfs[item.field] : null;
+    if (value !== null && value !== undefined) mfsScore += value;
+  }
+  return (
+    mfsScore >= 45 ||
+    ancillaryRules.hasRecurrentFallsWithInjury(data) ||
+    ancillaryRules.isAnticoagulated(data)
+  );
 }
 
 /** Detect additional clinician-facing flags for the fall-prevention plan. */
 export function detectAdditionalFlags(data: AssessmentData): AdditionalFlag[] {
-	const flags: AdditionalFlag[] = [];
+  const flags: AdditionalFlag[] = [];
 
-	// ─── HIGH priority ──────────────────────────────────────────
-	if (ancillaryRules.hasRecentInjuriousFall(data)) {
-		const detail = data.fallHistory.mostRecentFallInjuryDetails;
-		flags.push({
-			id: 'FLAG-FALL-001',
-			category: 'Fall History',
-			message: `Recent injurious fall${detail ? `: ${detail}` : '.'}`,
-			priority: 'high'
-		});
-	}
+  // ─── HIGH priority ──────────────────────────────────────────
+  if (ancillaryRules.hasRecentInjuriousFall(data)) {
+    const detail = data.fallHistory.mostRecentFallInjuryDetails;
+    flags.push({
+      id: 'FLAG-FALL-001',
+      category: 'Fall History',
+      message: `Recent injurious fall${detail ? `: ${detail}` : '.'}`,
+      priority: 'high'
+    });
+  }
 
-	if (ancillaryRules.isAnticoagulated(data)) {
-		flags.push({
-			id: 'FLAG-MED-001',
-			category: 'Medications',
-			message:
-				'Patient is on anticoagulant therapy — markedly elevated bleeding risk if a fall occurs.',
-			priority: 'high'
-		});
-	}
+  if (ancillaryRules.isAnticoagulated(data)) {
+    flags.push({
+      id: 'FLAG-MED-001',
+      category: 'Medications',
+      message:
+        'Patient is on anticoagulant therapy — markedly elevated bleeding risk if a fall occurs.',
+      priority: 'high'
+    });
+  }
 
-	if (ancillaryRules.hasSevereOrthostaticHypotension(data)) {
-		flags.push({
-			id: 'FLAG-MOB-001',
-			category: 'Mobility',
-			message:
-				'Severe orthostatic hypotension — review antihypertensives and assess hydration / vasoactive medications.',
-			priority: 'high'
-		});
-	}
+  if (ancillaryRules.hasSevereOrthostaticHypotension(data)) {
+    flags.push({
+      id: 'FLAG-MOB-001',
+      category: 'Mobility',
+      message:
+        'Severe orthostatic hypotension — review antihypertensives and assess hydration / vasoactive medications.',
+      priority: 'high'
+    });
+  }
 
-	if (ancillaryRules.hasDementia(data)) {
-		flags.push({
-			id: 'FLAG-COG-001',
-			category: 'Cognition',
-			message:
-				'Diagnosis of dementia — increased fall risk; consider supervision, environmental cues, and carer education.',
-			priority: 'high'
-		});
-	}
+  if (ancillaryRules.hasDementia(data)) {
+    flags.push({
+      id: 'FLAG-COG-001',
+      category: 'Cognition',
+      message:
+        'Diagnosis of dementia — increased fall risk; consider supervision, environmental cues, and carer education.',
+      priority: 'high'
+    });
+  }
 
-	// Hip protectors absent for a high-risk patient.
-	if (ancillaryRules.hipProtectorsAbsent(data) && isHighRisk(data)) {
-		flags.push({
-			id: 'FLAG-ENV-001',
-			category: 'Environment',
-			message:
-				'High fall risk without hip protectors — consider hip protectors for fracture prevention.',
-			priority: 'high'
-		});
-	}
+  // Hip protectors absent for a high-risk patient.
+  if (ancillaryRules.hipProtectorsAbsent(data) && isHighRisk(data)) {
+    flags.push({
+      id: 'FLAG-ENV-001',
+      category: 'Environment',
+      message:
+        'High fall risk without hip protectors — consider hip protectors for fracture prevention.',
+      priority: 'high'
+    });
+  }
 
-	// ─── MEDIUM priority ────────────────────────────────────────
-	if (ancillaryRules.hasPolypharmacy(data)) {
-		const count = (data.medicationReview.medications || []).length;
-		flags.push({
-			id: 'FLAG-MED-002',
-			category: 'Medications',
-			message:
-				count >= 4
-					? `Polypharmacy detected (${count} medications) — schedule a medication review.`
-					: 'Polypharmacy reported — schedule a medication review.',
-			priority: 'medium'
-		});
-	}
+  // ─── MEDIUM priority ────────────────────────────────────────
+  if (ancillaryRules.hasPolypharmacy(data)) {
+    const count = (data.medicationReview.medications || []).length;
+    flags.push({
+      id: 'FLAG-MED-002',
+      category: 'Medications',
+      message:
+        count >= 4
+          ? `Polypharmacy detected (${count} medications) — schedule a medication review.`
+          : 'Polypharmacy reported — schedule a medication review.',
+      priority: 'medium'
+    });
+  }
 
-	if (data.medicationReview.sedativesOrHypnotics === 'yes') {
-		flags.push({
-			id: 'FLAG-MED-003',
-			category: 'Medications',
-			message:
-				'Sedatives or hypnotics in use — consider deprescribing; counsel on night-time fall risk.',
-			priority: 'medium'
-		});
-	}
+  if (data.medicationReview.sedativesOrHypnotics === 'yes') {
+    flags.push({
+      id: 'FLAG-MED-003',
+      category: 'Medications',
+      message:
+        'Sedatives or hypnotics in use — consider deprescribing; counsel on night-time fall risk.',
+      priority: 'medium'
+    });
+  }
 
-	if (
-		data.visionSensory.visionImpairment === 'yes' &&
-		data.visionSensory.visionCorrected !== 'yes'
-	) {
-		flags.push({
-			id: 'FLAG-VIS-001',
-			category: 'Vision',
-			message: 'Vision impairment uncorrected — refer for ophthalmology / optometry review.',
-			priority: 'medium'
-		});
-	}
+  if (
+    data.visionSensory.visionImpairment === 'yes' &&
+    data.visionSensory.visionCorrected !== 'yes'
+  ) {
+    flags.push({
+      id: 'FLAG-VIS-001',
+      category: 'Vision',
+      message: 'Vision impairment uncorrected — refer for ophthalmology / optometry review.',
+      priority: 'medium'
+    });
+  }
 
-	// Environmental hazards: one combined flag listing the active hazards.
-	const envHazards: string[] = [];
-	if (data.environmental.loosThrowRugs === 'yes') envHazards.push('loose throw rugs');
-	if (data.environmental.clutteredWalkways === 'yes') envHazards.push('cluttered walkways');
-	if (data.environmental.poorLighting === 'yes') envHazards.push('poor lighting');
-	if (data.environmental.stairsWithoutHandrails === 'yes')
-		envHazards.push('stairs without handrails');
-	if (data.environmental.bathroomGrabBarsAbsent === 'yes')
-		envHazards.push('no bathroom grab bars');
-	if (data.environmental.bedHeightProblem === 'yes') envHazards.push('unsuitable bed height');
+  // Environmental hazards: one combined flag listing the active hazards.
+  const envHazards: string[] = [];
+  if (data.environmental.loosThrowRugs === 'yes') envHazards.push('loose throw rugs');
+  if (data.environmental.clutteredWalkways === 'yes') envHazards.push('cluttered walkways');
+  if (data.environmental.poorLighting === 'yes') envHazards.push('poor lighting');
+  if (data.environmental.stairsWithoutHandrails === 'yes')
+    envHazards.push('stairs without handrails');
+  if (data.environmental.bathroomGrabBarsAbsent === 'yes') envHazards.push('no bathroom grab bars');
+  if (data.environmental.bedHeightProblem === 'yes') envHazards.push('unsuitable bed height');
 
-	if (envHazards.length > 0) {
-		flags.push({
-			id: 'FLAG-ENV-002',
-			category: 'Environment',
-			message: `Environmental hazards present: ${envHazards.join(', ')}.`,
-			priority: 'medium'
-		});
-	}
+  if (envHazards.length > 0) {
+    flags.push({
+      id: 'FLAG-ENV-002',
+      category: 'Environment',
+      message: `Environmental hazards present: ${envHazards.join(', ')}.`,
+      priority: 'medium'
+    });
+  }
 
-	if (data.environmental.unsuitableFootwear === 'yes') {
-		flags.push({
-			id: 'FLAG-ENV-003',
-			category: 'Environment',
-			message: 'Unsuitable footwear — recommend well-fitting non-slip shoes.',
-			priority: 'medium'
-		});
-	}
+  if (data.environmental.unsuitableFootwear === 'yes') {
+    flags.push({
+      id: 'FLAG-ENV-003',
+      category: 'Environment',
+      message: 'Unsuitable footwear — recommend well-fitting non-slip shoes.',
+      priority: 'medium'
+    });
+  }
 
-	// ─── LOW priority ───────────────────────────────────────────
-	if (data.previousInterventions.interventionDeclined === 'yes') {
-		flags.push({
-			id: 'FLAG-INT-001',
-			category: 'Interventions',
-			message:
-				'Patient has declined a recommended fall-prevention intervention — document, educate, revisit.',
-			priority: 'low'
-		});
-	}
+  // ─── LOW priority ───────────────────────────────────────────
+  if (data.previousInterventions.interventionDeclined === 'yes') {
+    flags.push({
+      id: 'FLAG-INT-001',
+      category: 'Interventions',
+      message:
+        'Patient has declined a recommended fall-prevention intervention — document, educate, revisit.',
+      priority: 'low'
+    });
+  }
 
-	if (data.previousInterventions.missedReferral === 'yes') {
-		flags.push({
-			id: 'FLAG-INT-002',
-			category: 'Interventions',
-			message:
-				'Previous referral missed — re-issue (falls clinic, physiotherapy, occupational therapy as appropriate).',
-			priority: 'low'
-		});
-	}
+  if (data.previousInterventions.missedReferral === 'yes') {
+    flags.push({
+      id: 'FLAG-INT-002',
+      category: 'Interventions',
+      message:
+        'Previous referral missed — re-issue (falls clinic, physiotherapy, occupational therapy as appropriate).',
+      priority: 'low'
+    });
+  }
 
-	// Sort: high > medium > low.
-	const priorityOrder = { high: 0, medium: 1, low: 2 };
-	flags.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
+  // Sort: high > medium > low.
+  const priorityOrder = { high: 0, medium: 1, low: 2 };
+  flags.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
 
-	return flags;
+  return flags;
 }

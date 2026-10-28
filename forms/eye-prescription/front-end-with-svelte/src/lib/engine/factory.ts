@@ -1,6 +1,4 @@
-import type {
-  EyePrescription, EyeRefraction
-} from './types.js';
+import type { EyePrescription, EyeRefraction } from './types.js';
 
 export function createEmptyEye(): EyeRefraction {
   return {
@@ -12,7 +10,7 @@ export function createEmptyEye(): EyeRefraction {
     prismHorizontalDiopters: 0,
     baseHorizontal: '',
     prismVerticalDiopters: 0,
-    baseVertical: '',
+    baseVertical: ''
   };
 }
 
@@ -27,7 +25,7 @@ export function createEmptyPrescription(): EyePrescription {
       postcode: '',
       countryAsIso31661Alpha2: 'GB',
       email: '',
-      phone: '',
+      phone: ''
     },
     patient: {
       name: '',
@@ -38,7 +36,7 @@ export function createEmptyPrescription(): EyePrescription {
       postalAddressAsFullText: '',
       countryAsIso31661Alpha2: 'GB',
       postcode: '',
-      unitedKingdomNhsNumber: '',
+      unitedKingdomNhsNumber: ''
     },
     examination: {
       examinationDate: '',
@@ -49,22 +47,36 @@ export function createEmptyPrescription(): EyePrescription {
       priorPrescriptionDate: '',
       priorSphereRight: null,
       priorSphereLeft: null,
-      notes: '',
+      notes: ''
     },
     visualAcuity: {
-      distanceRightUnaided: '', distanceLeftUnaided: '', distanceBinocularUnaided: '',
-      distanceRightCorrected: '', distanceLeftCorrected: '', distanceBinocularCorrected: '',
-      nearRightUnaided: '', nearLeftUnaided: '', nearBinocularUnaided: '',
-      nearRightCorrected: '', nearLeftCorrected: '', nearBinocularCorrected: '',
-      pinholeRight: '', pinholeLeft: '',
-      dominantEye: '',
+      distanceRightUnaided: '',
+      distanceLeftUnaided: '',
+      distanceBinocularUnaided: '',
+      distanceRightCorrected: '',
+      distanceLeftCorrected: '',
+      distanceBinocularCorrected: '',
+      nearRightUnaided: '',
+      nearLeftUnaided: '',
+      nearBinocularUnaided: '',
+      nearRightCorrected: '',
+      nearLeftCorrected: '',
+      nearBinocularCorrected: '',
+      pinholeRight: '',
+      pinholeLeft: '',
+      dominantEye: ''
     },
     rightEye: createEmptyEye(),
     leftEye: createEmptyEye(),
     pupillaryDistance: {
-      distanceTotalMm: null, distanceRightMm: null, distanceLeftMm: null,
-      nearTotalMm: null, nearRightMm: null, nearLeftMm: null,
-      segmentHeightRightMm: null, segmentHeightLeftMm: null,
+      distanceTotalMm: null,
+      distanceRightMm: null,
+      distanceLeftMm: null,
+      nearTotalMm: null,
+      nearRightMm: null,
+      nearLeftMm: null,
+      segmentHeightRightMm: null,
+      segmentHeightLeftMm: null
     },
     lensRecommendation: {
       lensType: '',
@@ -80,25 +92,31 @@ export function createEmptyPrescription(): EyePrescription {
       coatingUv400: false,
       tintDescription: '',
       tintPercent: null,
-      dispenserNotes: '',
+      dispenserNotes: ''
     },
     ocularHealth: {
-      slitLampRight: '', slitLampLeft: '',
-      fundusRight: '', fundusLeft: '',
-      intraocularPressureRightMmhg: null, intraocularPressureLeftMmhg: null,
-      cupToDiscRatioRight: null, cupToDiscRatioLeft: null,
-      octPerformed: false, octFindings: '',
-      fieldsPerformed: false, fieldsFindings: '',
+      slitLampRight: '',
+      slitLampLeft: '',
+      fundusRight: '',
+      fundusLeft: '',
+      intraocularPressureRightMmhg: null,
+      intraocularPressureLeftMmhg: null,
+      cupToDiscRatioRight: null,
+      cupToDiscRatioLeft: null,
+      octPerformed: false,
+      octFindings: '',
+      fieldsPerformed: false,
+      fieldsFindings: '',
       pathologyFlag: false,
       referOphthalmology: false,
-      referralReason: '',
+      referralReason: ''
     },
     grade: {
       overrideComplexity: '',
       overrideReason: '',
       followUpIntervalMonths: null,
       prescriberNotes: '',
-      signedAt: false,
-    },
+      signedAt: false
+    }
   };
 }

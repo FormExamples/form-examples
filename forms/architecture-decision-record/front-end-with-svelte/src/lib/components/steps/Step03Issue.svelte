@@ -11,6 +11,5 @@
     class="w-full border rounded px-2 py-1 font-mono text-sm"
     rows="6"
     placeholder="What is the architectural design issue? Why now?"
-    bind:value={store.data.adr.issue}
-  ></textarea>
+    bind:value={store.data.adr.issue}></textarea>
 </section>

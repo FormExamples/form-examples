@@ -45,8 +45,7 @@ export const prescriptionRules: PrescriptionRule[] = [
     description: 'Clinician contact information missing',
     priorityLevel: 'urgent',
     evaluate: (d) =>
-      d.clinicianInformation.phone.trim() === '' &&
-      d.clinicianInformation.email.trim() === ''
+      d.clinicianInformation.phone.trim() === '' && d.clinicianInformation.email.trim() === ''
   },
   {
     id: 'RX-CMP-002',
@@ -54,8 +53,7 @@ export const prescriptionRules: PrescriptionRule[] = [
     description: 'Patient contact information missing',
     priorityLevel: 'urgent',
     evaluate: (d) =>
-      d.patientInformation.phone.trim() === '' &&
-      d.patientInformation.email.trim() === ''
+      d.patientInformation.phone.trim() === '' && d.patientInformation.email.trim() === ''
   },
   {
     id: 'RX-CMP-003',

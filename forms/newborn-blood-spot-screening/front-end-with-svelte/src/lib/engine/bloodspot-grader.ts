@@ -14,41 +14,41 @@
 
 import type { BloodspotScreening, GradingResult } from './types';
 import {
-	computeAgeAtSampleDays,
-	deriveOverallOutcome,
-	deriveReferralStatus,
-	deriveReferrals,
-	deriveSampleQuality,
-	normaliseConditionResults
+  computeAgeAtSampleDays,
+  deriveOverallOutcome,
+  deriveReferralStatus,
+  deriveReferrals,
+  deriveSampleQuality,
+  normaliseConditionResults
 } from './bloodspot-rules';
 import { detectFlaggedIssues } from './flagged-issues';
 
 /** Classify a newborn blood spot screening record. */
 export function gradeBloodspot(data: BloodspotScreening): GradingResult {
-	const ageAtSampleDays = computeAgeAtSampleDays(
-		data.babyId.dateOfBirth,
-		data.sampleEvent.sampleDate
-	);
+  const ageAtSampleDays = computeAgeAtSampleDays(
+    data.babyId.dateOfBirth,
+    data.sampleEvent.sampleDate
+  );
 
-	const conditionResults = normaliseConditionResults(data);
-	const referrals = deriveReferrals(conditionResults);
-	const overallOutcome = deriveOverallOutcome(conditionResults);
-	const referralStatus = deriveReferralStatus(overallOutcome);
-	const sampleQuality = deriveSampleQuality(data, ageAtSampleDays);
-	const flaggedIssues = detectFlaggedIssues(data, {
-		conditionResults,
-		sampleQuality,
-		ageAtSampleDays
-	});
+  const conditionResults = normaliseConditionResults(data);
+  const referrals = deriveReferrals(conditionResults);
+  const overallOutcome = deriveOverallOutcome(conditionResults);
+  const referralStatus = deriveReferralStatus(overallOutcome);
+  const sampleQuality = deriveSampleQuality(data, ageAtSampleDays);
+  const flaggedIssues = detectFlaggedIssues(data, {
+    conditionResults,
+    sampleQuality,
+    ageAtSampleDays
+  });
 
-	return {
-		ageAtSampleDays,
-		conditionResults,
-		referrals,
-		overallOutcome,
-		referralStatus,
-		sampleQuality,
-		flaggedIssues,
-		timestamp: new Date().toISOString()
-	};
+  return {
+    ageAtSampleDays,
+    conditionResults,
+    referrals,
+    overallOutcome,
+    referralStatus,
+    sampleQuality,
+    flaggedIssues,
+    timestamp: new Date().toISOString()
+  };
 }

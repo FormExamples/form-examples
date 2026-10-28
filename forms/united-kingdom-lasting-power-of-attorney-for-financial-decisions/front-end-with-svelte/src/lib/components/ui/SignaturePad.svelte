@@ -1,7 +1,7 @@
 <script lang="ts">
   let {
     value = $bindable(''),
-    label = 'Signature (typed)',
+    label = 'Signature (typed)'
   }: {
     value: string;
     label?: string;

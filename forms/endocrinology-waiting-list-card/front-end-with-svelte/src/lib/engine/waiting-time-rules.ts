@@ -27,7 +27,8 @@ export function calculateWaitingTime(card: WaitingListCard, todayIso: string): W
   const daysWaited = daysBetween(clockStart, todayIso);
   const weeksWaited = weeksBetween(clockStart, todayIso);
 
-  const daysToTarget = target !== null && daysWaited !== null ? Math.round(target * 7) - daysWaited : null;
+  const daysToTarget =
+    target !== null && daysWaited !== null ? Math.round(target * 7) - daysWaited : null;
   const daysToBreach = daysWaited !== null ? RTT_BREACH_WEEKS * 7 - daysWaited : null;
 
   const firedRules: FiredRule[] = [];
@@ -82,10 +83,7 @@ export function calculateWaitingTime(card: WaitingListCard, todayIso: string): W
     };
   }
 
-  if (
-    (daysToTarget !== null && daysToTarget < 0) ||
-    (daysToBreach !== null && daysToBreach < 0)
-  ) {
+  if ((daysToTarget !== null && daysToTarget < 0) || (daysToBreach !== null && daysToBreach < 0)) {
     if (daysToTarget !== null && daysToTarget < 0) {
       firedRules.push({
         ruleId: 'R-WTS-TARGET-001',

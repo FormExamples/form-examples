@@ -9,53 +9,47 @@
 // ─── Enumerations (mirror the SQL CHECK constraints) ───
 
 /** Report lifecycle status. */
-export type ReportStatus =
-	| 'preliminary'
-	| 'final'
-	| 'amended'
-	| 'supplementary'
-	| 'cancelled'
-	| '';
+export type ReportStatus = 'preliminary' | 'final' | 'amended' | 'supplementary' | 'cancelled' | '';
 
 /** Anatomical biopsy site. */
 export type BiopsySite =
-	| 'skin'
-	| 'breast'
-	| 'lymph-node'
-	| 'liver'
-	| 'kidney'
-	| 'prostate'
-	| 'lung'
-	| 'bone-marrow'
-	| 'gi-tract'
-	| 'thyroid'
-	| 'soft-tissue'
-	| 'other'
-	| '';
+  | 'skin'
+  | 'breast'
+  | 'lymph-node'
+  | 'liver'
+  | 'kidney'
+  | 'prostate'
+  | 'lung'
+  | 'bone-marrow'
+  | 'gi-tract'
+  | 'thyroid'
+  | 'soft-tissue'
+  | 'other'
+  | '';
 
 /** Biopsy method / procedure. */
 export type BiopsyMethod =
-	| 'punch'
-	| 'excision'
-	| 'incision'
-	| 'core-needle'
-	| 'fine-needle-aspiration'
-	| 'image-guided'
-	| 'endoscopic'
-	| 'other'
-	| '';
+  | 'punch'
+  | 'excision'
+  | 'incision'
+  | 'core-needle'
+  | 'fine-needle-aspiration'
+  | 'image-guided'
+  | 'endoscopic'
+  | 'other'
+  | '';
 
 /** Diagnostic adequacy of the specimen. */
 export type SpecimenAdequacy = 'adequate' | 'suboptimal' | 'inadequate' | '';
 
 /** Histological differentiation grade. */
 export type HistologicalGrade =
-	| 'well-differentiated'
-	| 'moderately-differentiated'
-	| 'poorly-differentiated'
-	| 'undifferentiated'
-	| 'not-applicable'
-	| '';
+  | 'well-differentiated'
+  | 'moderately-differentiated'
+  | 'poorly-differentiated'
+  | 'undifferentiated'
+  | 'not-applicable'
+  | '';
 
 /** Resection-margin status. */
 export type ResectionMargins = 'clear' | 'involved' | 'close' | 'not-applicable' | '';
@@ -73,12 +67,7 @@ export type FollowUpUrgency = 'routine' | 'recommended' | 'urgent' | 'critical-a
 
 /** Overall recommendation. */
 export type Recommendation =
-	| 'no-action'
-	| 'routine-follow-up'
-	| 'further-testing'
-	| 'specialist-referral'
-	| 'urgent-mdt'
-	| '';
+  'no-action' | 'routine-follow-up' | 'further-testing' | 'specialist-referral' | 'urgent-mdt' | '';
 
 // ─── The result/report record (sql/04) ───
 
@@ -87,49 +76,49 @@ export type Recommendation =
  * four-axis interpretation grade is computed from.
  */
 export interface BiopsyResult {
-	// Report identification
-	reportingClinician: string;
-	originatingRequestReference: string;
-	reportStatus: ReportStatus;
-	performedDate: string;
-	reportedDate: string;
+  // Report identification
+  reportingClinician: string;
+  originatingRequestReference: string;
+  reportStatus: ReportStatus;
+  performedDate: string;
+  reportedDate: string;
 
-	// Specimen / procedure
-	biopsySite: BiopsySite;
-	biopsyMethod: BiopsyMethod;
-	specimenAdequacy: SpecimenAdequacy;
+  // Specimen / procedure
+  biopsySite: BiopsySite;
+  biopsyMethod: BiopsyMethod;
+  specimenAdequacy: SpecimenAdequacy;
 
-	// Clinical context
-	clinicalHistory: string;
-	comparisonWithPrevious: string;
+  // Clinical context
+  clinicalHistory: string;
+  comparisonWithPrevious: string;
 
-	// Macroscopic and microscopic description
-	macroscopicDescription: string;
-	microscopicDescription: string;
+  // Macroscopic and microscopic description
+  macroscopicDescription: string;
+  microscopicDescription: string;
 
-	// Diagnosis and grading
-	diagnosis: string;
-	malignancyPresent: boolean;
-	tumourType: string;
-	histologicalGrade: HistologicalGrade;
-	resectionMargins: ResectionMargins;
-	lymphovascularInvasion: boolean;
+  // Diagnosis and grading
+  diagnosis: string;
+  malignancyPresent: boolean;
+  tumourType: string;
+  histologicalGrade: HistologicalGrade;
+  resectionMargins: ResectionMargins;
+  lymphovascularInvasion: boolean;
 
-	// Ancillary tests
-	immunohistochemistry: string;
-	molecularResults: string;
-	snomedCode: string;
+  // Ancillary tests
+  immunohistochemistry: string;
+  molecularResults: string;
+  snomedCode: string;
 
-	// Conclusion and follow-up
-	impression: string;
-	reportingCategory: string;
-	recommendedFollowUp: string;
+  // Conclusion and follow-up
+  impression: string;
+  reportingCategory: string;
+  recommendedFollowUp: string;
 
-	// Critical-result communication and sign-off
-	criticalResultCommunicated: boolean;
-	reportedTo: string;
-	clinicianNotes: string;
-	signed: boolean;
+  // Critical-result communication and sign-off
+  criticalResultCommunicated: boolean;
+  reportedTo: string;
+  clinicianNotes: string;
+  signed: boolean;
 }
 
 // ─── Grading types (sql/05, sql/06, sql/07) ───
@@ -139,35 +128,35 @@ export type Axis = 'classification' | 'severity' | 'completeness' | 'follow-up';
 
 /** Flag category (mirrors the sql/07 CHECK constraint). */
 export type FlagCategory =
-	| 'critical-result-alert'
-	| 'incidental-finding'
-	| 'discrepancy-with-request'
-	| 'abnormal-requiring-action'
-	| 'urgent-referral'
-	| 'inadequate-technique'
-	| 'unexpected-finding'
-	| 'missing-impression'
-	| 'missing-measurement'
-	| 'other';
+  | 'critical-result-alert'
+  | 'incidental-finding'
+  | 'discrepancy-with-request'
+  | 'abnormal-requiring-action'
+  | 'urgent-referral'
+  | 'inadequate-technique'
+  | 'unexpected-finding'
+  | 'missing-impression'
+  | 'missing-measurement'
+  | 'other';
 
 /** Flag priority. */
 export type FlagPriority = 'low' | 'medium' | 'high';
 
 /** A single rule that fired during grading (audit trail). */
 export interface FiredRule {
-	ruleId: string;
-	axis: Axis;
-	category: string;
-	description: string;
+  ruleId: string;
+  axis: Axis;
+  category: string;
+  description: string;
 }
 
 /** A safety-critical flag, independent of the four axes. */
 export interface Flag {
-	flagId: string;
-	category: FlagCategory;
-	priority: FlagPriority;
-	description: string;
-	suggestedAction: string;
+  flagId: string;
+  category: FlagCategory;
+  priority: FlagPriority;
+  description: string;
+  suggestedAction: string;
 }
 
 /**
@@ -175,44 +164,44 @@ export interface Flag {
  * sql/05_create_table_biopsy_test_result_grade.sql.
  */
 export interface GradingResult {
-	// Axis A
-	resultClassification: ResultClassification;
-	// Axis B
-	abnormalitySeverity: AbnormalitySeverity;
-	reportingCategory: string;
-	// Axis C
-	reportCompletenessPercent: number;
-	// Axis D
-	followUpUrgency: FollowUpUrgency;
-	targetTimeframe: string;
-	recommendedAction: string;
-	// Overall
-	recommendation: Recommendation;
-	firedRules: FiredRule[];
-	flags: Flag[];
-	gradedAt: string;
+  // Axis A
+  resultClassification: ResultClassification;
+  // Axis B
+  abnormalitySeverity: AbnormalitySeverity;
+  reportingCategory: string;
+  // Axis C
+  reportCompletenessPercent: number;
+  // Axis D
+  followUpUrgency: FollowUpUrgency;
+  targetTimeframe: string;
+  recommendedAction: string;
+  // Overall
+  recommendation: Recommendation;
+  firedRules: FiredRule[];
+  flags: Flag[];
+  gradedAt: string;
 }
 
 // ─── Step configuration ───
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
+  number: number;
+  title: string;
+  shortTitle: string;
 }
 
 // ─── Dashboard row ───
 
 /** A graded report row for the dashboard table. */
 export interface ReportRow {
-	id: string;
-	patientName: string;
-	biopsySite: BiopsySite;
-	reportStatus: ReportStatus;
-	reportedDate: string;
-	resultClassification: ResultClassification;
-	abnormalitySeverity: AbnormalitySeverity;
-	followUpUrgency: FollowUpUrgency;
-	reportCompletenessPercent: number;
-	flagCount: number;
+  id: string;
+  patientName: string;
+  biopsySite: BiopsySite;
+  reportStatus: ReportStatus;
+  reportedDate: string;
+  resultClassification: ResultClassification;
+  abnormalitySeverity: AbnormalitySeverity;
+  followUpUrgency: FollowUpUrgency;
+  reportCompletenessPercent: number;
+  flagCount: number;
 }

@@ -2,7 +2,7 @@
   import { store } from '#lib/stores/checklist.svelte.js';
   import { CHECKLIST_ITEMS } from '#lib/engine/types.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
-  import { CheckboxInput } from "@lilydesignsystem/svelte-headless";
+  import { CheckboxInput } from '@lilydesignsystem/svelte-headless';
 
   const r = $derived(store.result);
 </script>
@@ -19,7 +19,7 @@
       <label class="checklist-item" for={`checklist-${field}`}>
         <CheckboxInput
           id={`checklist-${field}`}
-          label={label}
+          {label}
           bind:checked={store.data.checklist[field]}
         />
         <span>{label}</span>
@@ -54,9 +54,13 @@
     cursor: pointer;
   }
   @media (max-width: 900px) {
-    .checklist-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .checklist-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
   @media (max-width: 560px) {
-    .checklist-grid { grid-template-columns: 1fr; }
+    .checklist-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

@@ -8,7 +8,7 @@
     id,
     hint = '',
     required = false,
-    children,
+    children
   }: { label: string; id: string; hint?: string; required?: boolean; children: Snippet } = $props();
 </script>
 

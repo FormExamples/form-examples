@@ -2,7 +2,7 @@
   import { store } from '#lib/stores/assessment.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { DateInput, TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { DateInput, TextAreaInput, TextInput } from '@lilydesignsystem/svelte-headless';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
   import Select from '#lib/components/ui/Select.svelte';
 </script>
@@ -52,7 +52,12 @@
 
   <h3 class="step-subhead">Planned procedure</h3>
   <div class="field-grid">
-    <Field label="Planned procedure" class="field-span-2" inputId="step-2-planned-procedure" error={store.errors['step-2-planned-procedure']}>
+    <Field
+      label="Planned procedure"
+      class="field-span-2"
+      inputId="step-2-planned-procedure"
+      error={store.errors['step-2-planned-procedure']}
+    >
       <TextInput
         id="step-2-planned-procedure"
         label="Planned procedure"
@@ -79,7 +84,11 @@
         <option value="immediate">Immediate</option>
       </Select>
     </Field>
-    <Field label="Surgical severity (NICE NG45)" inputId="step-2-surgical-severity" error={store.errors['step-2-surgical-severity']}>
+    <Field
+      label="Surgical severity (NICE NG45)"
+      inputId="step-2-surgical-severity"
+      error={store.errors['step-2-surgical-severity']}
+    >
       <Select
         id="step-2-surgical-severity"
         label="Surgical severity (NICE NG45)"
@@ -104,10 +113,16 @@
       </Select>
     </Field>
     <Field label="Anticipated blood loss (mL)">
-      <NumberInput label="Anticipated blood loss (mL)" bind:value={store.data.surgery.anticipatedBloodLossMl} />
+      <NumberInput
+        label="Anticipated blood loss (mL)"
+        bind:value={store.data.surgery.anticipatedBloodLossMl}
+      />
     </Field>
     <Field label="Anticipated duration (min)">
-      <NumberInput label="Anticipated duration (min)" bind:value={store.data.surgery.anticipatedDurationMinutes} />
+      <NumberInput
+        label="Anticipated duration (min)"
+        bind:value={store.data.surgery.anticipatedDurationMinutes}
+      />
     </Field>
     <Field label="Consultant surgeon">
       <TextInput label="Consultant surgeon" bind:value={store.data.surgery.consultantSurgeon} />

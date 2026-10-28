@@ -18,38 +18,38 @@
 //   otherwise                                       -> 'incomplete'
 
 import type {
-	AssessmentData,
-	CompletenessStatus,
-	FiredRule,
-	GradingResult,
-	RequiredComponent,
-	SectionPresence,
-	SectionStatus
+  AssessmentData,
+  CompletenessStatus,
+  FiredRule,
+  GradingResult,
+  RequiredComponent,
+  SectionPresence,
+  SectionStatus
 } from './types';
 import { requiredComponents, sectionPresence } from './soap-note-rules';
 import { detectFlaggedIssues } from './flagged-issues';
 
 /** The four SOAP sections, in order. */
 export const SOAP_SECTIONS: { section: string; label: string }[] = [
-	{ section: 'subjective', label: 'Subjective' },
-	{ section: 'objective', label: 'Objective' },
-	{ section: 'assessment', label: 'Assessment' },
-	{ section: 'plan', label: 'Plan' }
+  { section: 'subjective', label: 'Subjective' },
+  { section: 'objective', label: 'Objective' },
+  { section: 'assessment', label: 'Assessment' },
+  { section: 'plan', label: 'Plan' }
 ];
 
 /** Build the per-SOAP-section presence rows for the report. */
 export function sectionStatuses(presence: SectionPresence): SectionStatus[] {
-	const map: Record<string, boolean> = {
-		subjective: presence.subjectivePresent,
-		objective: presence.objectivePresent,
-		assessment: presence.assessmentPresent,
-		plan: presence.planPresent
-	};
-	return SOAP_SECTIONS.map((s) => ({
-		section: s.section,
-		label: s.label,
-		present: !!map[s.section]
-	}));
+  const map: Record<string, boolean> = {
+    subjective: presence.subjectivePresent,
+    objective: presence.objectivePresent,
+    assessment: presence.assessmentPresent,
+    plan: presence.planPresent
+  };
+  return SOAP_SECTIONS.map((s) => ({
+    section: s.section,
+    label: s.label,
+    present: !!map[s.section]
+  }));
 }
 
 /**
@@ -57,34 +57,33 @@ export function sectionStatuses(presence: SectionPresence): SectionStatus[] {
  * know whether a high-priority flag has fired).
  */
 export function calculateGrade(data: AssessmentData): {
-	presence: SectionPresence;
-	completenessPercent: number;
-	components: RequiredComponent[];
-	presentCount: number;
-	totalCount: number;
-	firedRules: FiredRule[];
+  presence: SectionPresence;
+  completenessPercent: number;
+  components: RequiredComponent[];
+  presentCount: number;
+  totalCount: number;
+  firedRules: FiredRule[];
 } {
-	const presence = sectionPresence(data);
-	const components = requiredComponents(data);
-	const totalCount = components.length;
-	const presentCount = components.filter((c) => c.present).length;
-	const completenessPercent =
-		totalCount > 0 ? Math.round((100 * presentCount) / totalCount) : 0;
+  const presence = sectionPresence(data);
+  const components = requiredComponents(data);
+  const totalCount = components.length;
+  const presentCount = components.filter((c) => c.present).length;
+  const completenessPercent = totalCount > 0 ? Math.round((100 * presentCount) / totalCount) : 0;
 
-	// Audit trail: one row per PRESENT required component, mirroring grade_rule.
-	const firedRules: FiredRule[] = [];
-	for (const c of components) {
-		if (c.present) {
-			firedRules.push({
-				id: c.id,
-				section: c.section,
-				category: c.category,
-				description: c.description
-			});
-		}
-	}
+  // Audit trail: one row per PRESENT required component, mirroring grade_rule.
+  const firedRules: FiredRule[] = [];
+  for (const c of components) {
+    if (c.present) {
+      firedRules.push({
+        id: c.id,
+        section: c.section,
+        category: c.category,
+        description: c.description
+      });
+    }
+  }
 
-	return { presence, completenessPercent, components, presentCount, totalCount, firedRules };
+  return { presence, completenessPercent, components, presentCount, totalCount, firedRules };
 }
 
 /**
@@ -92,41 +91,41 @@ export function calculateGrade(data: AssessmentData): {
  * This is the canonical engine entry point (spec §6).
  */
 export function calculateSoapGrade(data: AssessmentData): GradingResult {
-	const grade = calculateGrade(data);
-	const { presence, completenessPercent, presentCount, totalCount } = grade;
+  const grade = calculateGrade(data);
+  const { presence, completenessPercent, presentCount, totalCount } = grade;
 
-	const flags = detectFlaggedIssues(data, { presence, completenessPercent });
-	const hasHighFlag = flags.some((f) => f.priority === 'high');
+  const flags = detectFlaggedIssues(data, { presence, completenessPercent });
+  const hasHighFlag = flags.some((f) => f.priority === 'high');
 
-	let status: CompletenessStatus;
-	if (!presence.assessmentPresent || !presence.planPresent) {
-		status = 'incomplete';
-	} else if (completenessPercent === 100 && !hasHighFlag) {
-		status = 'complete';
-	} else if (presence.assessmentPresent && presence.planPresent) {
-		status = 'partial';
-	} else {
-		status = 'incomplete';
-	}
+  let status: CompletenessStatus;
+  if (!presence.assessmentPresent || !presence.planPresent) {
+    status = 'incomplete';
+  } else if (completenessPercent === 100 && !hasHighFlag) {
+    status = 'complete';
+  } else if (presence.assessmentPresent && presence.planPresent) {
+    status = 'partial';
+  } else {
+    status = 'incomplete';
+  }
 
-	const firedRules = grade.firedRules.slice();
-	firedRules.push({
-		id: 'R-COMPLETENESS-01',
-		section: 'completeness',
-		category: 'completeness',
-		description:
-			status === 'complete'
-				? `All ${totalCount} required components present — note complete (100%)`
-				: `${presentCount} of ${totalCount} required components present — note ${status} (${completenessPercent}%)`
-	});
+  const firedRules = grade.firedRules.slice();
+  firedRules.push({
+    id: 'R-COMPLETENESS-01',
+    section: 'completeness',
+    category: 'completeness',
+    description:
+      status === 'complete'
+        ? `All ${totalCount} required components present — note complete (100%)`
+        : `${presentCount} of ${totalCount} required components present — note ${status} (${completenessPercent}%)`
+  });
 
-	return {
-		status,
-		completenessPercent,
-		sectionStatuses: sectionStatuses(presence),
-		presence,
-		firedRules,
-		flags,
-		timestamp: new Date().toISOString()
-	};
+  return {
+    status,
+    completenessPercent,
+    sectionStatuses: sectionStatuses(presence),
+    presence,
+    firedRules,
+    flags,
+    timestamp: new Date().toISOString()
+  };
 }

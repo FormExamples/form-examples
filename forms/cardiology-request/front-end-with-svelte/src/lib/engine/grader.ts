@@ -1,11 +1,11 @@
 import type {
-	CardiologyRequest,
-	GradingResult,
-	Recommendation,
-	AppropriatenessBand,
-	SafetyBand,
-	TriageTier,
-	FiredRule
+  CardiologyRequest,
+  GradingResult,
+  Recommendation,
+  AppropriatenessBand,
+  SafetyBand,
+  TriageTier,
+  FiredRule
 } from './types';
 import { gradeAppropriateness } from './appropriateness-rules';
 import { gradeSafety } from './safety-rules';
@@ -34,44 +34,44 @@ import { detectFlags } from './flagged-issues';
  * No side effects, no network calls, no I/O.
  */
 export function calculateGrade(request: CardiologyRequest): GradingResult {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	// Axis A
-	const a = gradeAppropriateness(request);
-	firedRules.push(...a.firedRules);
+  // Axis A
+  const a = gradeAppropriateness(request);
+  firedRules.push(...a.firedRules);
 
-	// Axis B
-	const b = gradeSafety(request);
-	firedRules.push(...b.firedRules);
+  // Axis B
+  const b = gradeSafety(request);
+  firedRules.push(...b.firedRules);
 
-	// Axis C
-	const c = gradeCompleteness(request);
-	firedRules.push(...c.firedRules);
+  // Axis C
+  const c = gradeCompleteness(request);
+  firedRules.push(...c.firedRules);
 
-	// Axis D (depends on the safety band)
-	const d = gradeTriage(request, b.safetyBand);
-	firedRules.push(...d.firedRules);
+  // Axis D (depends on the safety band)
+  const d = gradeTriage(request, b.safetyBand);
+  firedRules.push(...d.firedRules);
 
-	const recommendation = deriveRecommendation(
-		a.appropriatenessBand,
-		b.safetyBand,
-		c.completenessPercent,
-		d.triageTier
-	);
+  const recommendation = deriveRecommendation(
+    a.appropriatenessBand,
+    b.safetyBand,
+    c.completenessPercent,
+    d.triageTier
+  );
 
-	const flags = detectFlags(request);
+  const flags = detectFlags(request);
 
-	return {
-		appropriatenessBand: a.appropriatenessBand,
-		safetyBand: b.safetyBand,
-		completenessPercent: c.completenessPercent,
-		triageTier: d.triageTier,
-		targetTimeframe: d.targetTimeframe,
-		recommendation,
-		firedRules,
-		flags,
-		gradedAt: new Date().toISOString()
-	};
+  return {
+    appropriatenessBand: a.appropriatenessBand,
+    safetyBand: b.safetyBand,
+    completenessPercent: c.completenessPercent,
+    triageTier: d.triageTier,
+    targetTimeframe: d.targetTimeframe,
+    recommendation,
+    firedRules,
+    flags,
+    gradedAt: new Date().toISOString()
+  };
 }
 
 /**
@@ -85,26 +85,26 @@ export function calculateGrade(request: CardiologyRequest): GradingResult {
  * - accept: an appropriate, sufficiently complete referral.
  */
 function deriveRecommendation(
-	appropriateness: AppropriatenessBand,
-	safety: SafetyBand,
-	completeness: number,
-	triage: TriageTier
+  appropriateness: AppropriatenessBand,
+  safety: SafetyBand,
+  completeness: number,
+  triage: TriageTier
 ): Recommendation {
-	// An emergency is always accepted onto the acute pathway.
-	if (triage === 'emergency') return 'accept';
+  // An emergency is always accepted onto the acute pathway.
+  if (triage === 'emergency') return 'accept';
 
-	if (appropriateness === 'usually-not-appropriate' && safety === 'ok') {
-		return 'reject';
-	}
+  if (appropriateness === 'usually-not-appropriate' && safety === 'ok') {
+    return 'reject';
+  }
 
-	if (appropriateness === 'may-be-appropriate' && safety === 'ok' && completeness < 60) {
-		return 'redirect';
-	}
+  if (appropriateness === 'may-be-appropriate' && safety === 'ok' && completeness < 60) {
+    return 'redirect';
+  }
 
-	// A red flag or a materially incomplete request needs clarification.
-	if (safety === 'red-flag' && completeness < 70) return 'query-referrer';
-	if (completeness < 50) return 'query-referrer';
-	if (appropriateness === 'may-be-appropriate' && completeness < 70) return 'query-referrer';
+  // A red flag or a materially incomplete request needs clarification.
+  if (safety === 'red-flag' && completeness < 70) return 'query-referrer';
+  if (completeness < 50) return 'query-referrer';
+  if (appropriateness === 'may-be-appropriate' && completeness < 70) return 'query-referrer';
 
-	return 'accept';
+  return 'accept';
 }

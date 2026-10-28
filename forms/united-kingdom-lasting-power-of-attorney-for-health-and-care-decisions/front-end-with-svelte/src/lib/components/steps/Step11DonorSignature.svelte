@@ -19,7 +19,7 @@
         witnessName: '',
         witnessAddress: '',
         witnessSignedAt: '',
-        witnessIsAttorney: '',
+        witnessIsAttorney: ''
       };
       lpaStore.application.signatures.push(s);
       changed();
@@ -31,8 +31,8 @@
 
 <div class="space-y-4">
   <p class="text-sm text-base-content/80">
-    The donor must sign <strong>first</strong>, before the certificate provider and the
-    attorneys (R-MCA-ORDER-DONOR-FIRST).
+    The donor must sign <strong>first</strong>, before the certificate provider and the attorneys
+    (R-MCA-ORDER-DONOR-FIRST).
   </p>
 
   <div class="grid gap-3 sm:grid-cols-2">
@@ -49,7 +49,7 @@
       options={[
         { value: 'wet-ink', label: 'Wet-ink' },
         { value: 'electronic', label: 'Electronic' },
-        { value: 'mark-with-witness', label: 'Mark with witness (donor unable to sign)' },
+        { value: 'mark-with-witness', label: 'Mark with witness (donor unable to sign)' }
       ]}
       onchange={changed}
     />

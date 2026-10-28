@@ -5,7 +5,7 @@
 
   // Lily Svelte headless contract — local shape-equivalent components.
   import Form from '#lib/components/ui/Form.svelte';
-  import { Button, ErrorSummary, Panel, Progress } from "@lilydesignsystem/svelte-headless";
+  import { Button, ErrorSummary, Panel, Progress } from '@lilydesignsystem/svelte-headless';
   import StepList from '#lib/components/ui/StepList.svelte';
   import StepListItem from '#lib/components/ui/StepListItem.svelte';
 
@@ -95,10 +95,9 @@
 <main class="mx-16">
   <div class="intro">
     <p>
-      Inspector data-entry wizard for the room-readiness checklist. Identify
-      the building and room, confirm each of the 25 fixture / fabric
-      checkpoints, and sign off with your name, email, and inspection date
-      and time. There is no clinical grading here — just a tally of what is
+      Inspector data-entry wizard for the room-readiness checklist. Identify the building and room,
+      confirm each of the 25 fixture / fabric checkpoints, and sign off with your name, email, and
+      inspection date and time. There is no clinical grading here — just a tally of what is
       confirmed and what still needs attention.
     </p>
   </div>
@@ -147,7 +146,8 @@
           {store.data.location.buildingNameOrNumber || '—'} /
           {store.data.location.roomNameOrNumber || '—'}
           — inspected by {store.data.inspector.name || '—'}
-          on {store.data.inspection.date || '—'} {store.data.inspection.time}
+          on {store.data.inspection.date || '—'}
+          {store.data.inspection.time}
         </p>
 
         <h3>Checklist result</h3>
@@ -176,8 +176,8 @@
 
 <footer class="page-footer">
   <p>
-    A facilities/housekeeping readiness sign-off, not a clinical instrument.
-    Transcribed verbatim from a hospital housekeeping room-readiness proforma.
+    A facilities/housekeeping readiness sign-off, not a clinical instrument. Transcribed verbatim
+    from a hospital housekeeping room-readiness proforma.
   </p>
 </footer>
 

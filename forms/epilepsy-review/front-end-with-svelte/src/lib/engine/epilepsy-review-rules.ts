@@ -20,17 +20,17 @@ import { filled } from './utils';
  * controlled   = seizures present but stable/decreasing (everything else).
  */
 export function classifyControl(data: AssessmentData): SeizureControl {
-	const s = data.seizures;
-	const uncontrolled =
-		s.seizureTrend === 'increasing' ||
-		data.injuries.statusEpilepticus === 'yes' ||
-		s.seizureFrequency === 'weekly' ||
-		s.seizureFrequency === 'daily';
+  const s = data.seizures;
+  const uncontrolled =
+    s.seizureTrend === 'increasing' ||
+    data.injuries.statusEpilepticus === 'yes' ||
+    s.seizureFrequency === 'weekly' ||
+    s.seizureFrequency === 'daily';
 
-	const seizureFree =
-		!uncontrolled && (s.seizureFrequency === 'none' || s.seizureTrend === 'seizure-free');
+  const seizureFree =
+    !uncontrolled && (s.seizureFrequency === 'none' || s.seizureTrend === 'seizure-free');
 
-	return uncontrolled ? 'uncontrolled' : seizureFree ? 'seizure-free' : 'controlled';
+  return uncontrolled ? 'uncontrolled' : seizureFree ? 'seizure-free' : 'controlled';
 }
 
 /**
@@ -41,66 +41,66 @@ export function classifyControl(data: AssessmentData): SeizureControl {
  * potential.
  */
 export const COMPONENTS: ComponentRule[] = [
-	{
-		component: 'seizure',
-		label: 'Seizure type and frequency',
-		gate: true,
-		satisfied: (d) => filled(d.seizures.seizureFrequency)
-	},
-	{
-		component: 'medication',
-		label: 'Anti-seizure medication and adherence',
-		gate: true,
-		satisfied: (d) => filled(d.medication.asmAdherence)
-	},
-	{
-		component: 'triggers',
-		label: 'Triggers',
-		satisfied: (d) => filled(d.triggers.triggers)
-	},
-	{
-		component: 'sudep',
-		label: 'SUDEP risk discussion',
-		satisfied: (d) => filled(d.sudep.sudepDiscussed)
-	},
-	{
-		component: 'injuries-status',
-		label: 'Injuries and status epilepticus',
-		satisfied: (d) => filled(d.injuries.statusEpilepticus) || filled(d.injuries.seizureInjury)
-	},
-	{
-		component: 'safety',
-		label: 'Safety (DVLA driving / bathing)',
-		satisfied: (d) =>
-			filled(d.safety.dvlaEligible) ||
-			filled(d.safety.currentlyDriving) ||
-			filled(d.safety.bathingAdviceGiven)
-	},
-	{
-		component: 'mental-health',
-		label: 'Mental health',
-		satisfied: (d) => filled(d.mentalHealth.mentalHealthConcern)
-	},
-	{
-		component: 'care-plan',
-		label: 'Care plan',
-		satisfied: (d) => filled(d.summary.carePlan) || filled(d.summary.nextReviewDue)
-	},
-	{
-		component: 'valproate-ppp',
-		label: 'Valproate and pregnancy prevention',
-		applicable: (d) => d.childbearing.womanOfChildbearingPotential === 'yes',
-		satisfied: (d) => filled(d.childbearing.onValproate)
-	},
-	{
-		component: 'folic-acid',
-		label: 'Folic acid',
-		applicable: (d) => d.childbearing.womanOfChildbearingPotential === 'yes',
-		satisfied: (d) => filled(d.childbearing.folicAcid)
-	}
+  {
+    component: 'seizure',
+    label: 'Seizure type and frequency',
+    gate: true,
+    satisfied: (d) => filled(d.seizures.seizureFrequency)
+  },
+  {
+    component: 'medication',
+    label: 'Anti-seizure medication and adherence',
+    gate: true,
+    satisfied: (d) => filled(d.medication.asmAdherence)
+  },
+  {
+    component: 'triggers',
+    label: 'Triggers',
+    satisfied: (d) => filled(d.triggers.triggers)
+  },
+  {
+    component: 'sudep',
+    label: 'SUDEP risk discussion',
+    satisfied: (d) => filled(d.sudep.sudepDiscussed)
+  },
+  {
+    component: 'injuries-status',
+    label: 'Injuries and status epilepticus',
+    satisfied: (d) => filled(d.injuries.statusEpilepticus) || filled(d.injuries.seizureInjury)
+  },
+  {
+    component: 'safety',
+    label: 'Safety (DVLA driving / bathing)',
+    satisfied: (d) =>
+      filled(d.safety.dvlaEligible) ||
+      filled(d.safety.currentlyDriving) ||
+      filled(d.safety.bathingAdviceGiven)
+  },
+  {
+    component: 'mental-health',
+    label: 'Mental health',
+    satisfied: (d) => filled(d.mentalHealth.mentalHealthConcern)
+  },
+  {
+    component: 'care-plan',
+    label: 'Care plan',
+    satisfied: (d) => filled(d.summary.carePlan) || filled(d.summary.nextReviewDue)
+  },
+  {
+    component: 'valproate-ppp',
+    label: 'Valproate and pregnancy prevention',
+    applicable: (d) => d.childbearing.womanOfChildbearingPotential === 'yes',
+    satisfied: (d) => filled(d.childbearing.onValproate)
+  },
+  {
+    component: 'folic-acid',
+    label: 'Folic acid',
+    applicable: (d) => d.childbearing.womanOfChildbearingPotential === 'yes',
+    satisfied: (d) => filled(d.childbearing.folicAcid)
+  }
 ];
 
 /** Whether a component is required (applicable) for the given data. */
 export function componentApplicable(component: ComponentRule, data: AssessmentData): boolean {
-	return component.applicable ? component.applicable(data) === true : true;
+  return component.applicable ? component.applicable(data) === true : true;
 }

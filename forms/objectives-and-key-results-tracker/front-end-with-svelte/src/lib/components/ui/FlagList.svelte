@@ -6,7 +6,9 @@
 {#if flags.length}
   <ul class="mt-3 list-inside list-disc text-base-content/80">
     {#each flags as f (f.flagCode)}
-      <li><span class="font-mono text-sm">[{f.priority}]</span> <strong>{f.flagCode}</strong>: {f.description}</li>
+      <li>
+        <span class="font-mono text-sm">[{f.priority}]</span> <strong>{f.flagCode}</strong>: {f.description}
+      </li>
     {/each}
   </ul>
 {:else}

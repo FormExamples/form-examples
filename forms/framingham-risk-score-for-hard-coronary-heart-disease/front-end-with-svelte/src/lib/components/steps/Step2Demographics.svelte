@@ -4,13 +4,15 @@
   import Field from '#lib/components/ui/Field.svelte';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
   import Select from '#lib/components/ui/Select.svelte';
-  import { RadioGroup } from "@lilydesignsystem/svelte-headless";
+  import { RadioGroup } from '@lilydesignsystem/svelte-headless';
 
   const d = assessment.data.demographics;
 </script>
 
 <Fieldset legend="Step 2 \u2014 Demographics">
-  <p class="hint">Age and sex are required for the Framingham calculation. Valid age range: 30\u201379.</p>
+  <p class="hint">
+    Age and sex are required for the Framingham calculation. Valid age range: 30\u201379.
+  </p>
 
   <div class="field-grid">
     <Field
@@ -28,11 +30,7 @@
         aria-invalid={assessment.errors['step-2-age'] ? 'true' : undefined}
       />
     </Field>
-    <Field
-      label="Sex"
-      required
-      error={assessment.errors['step-2-sex']}
-    >
+    <Field label="Sex" required error={assessment.errors['step-2-sex']}>
       <RadioGroup label="Sex">
         <label class="radio-input">
           <input type="radio" name="sex" value="male" bind:group={d.sex} /> Male

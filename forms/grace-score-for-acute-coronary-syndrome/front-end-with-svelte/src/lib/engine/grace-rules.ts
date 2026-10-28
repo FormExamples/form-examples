@@ -21,55 +21,55 @@ import type { KillipClass, PointBand, RiskBand } from './types';
 
 // ─── Variable 1: age (years) — monotonically increasing ───────────────
 export const AGE_BANDS: PointBand[] = [
-	{ upTo: 29, points: 0, label: '< 30' },
-	{ upTo: 39, points: 8, label: '30-39' },
-	{ upTo: 49, points: 25, label: '40-49' },
-	{ upTo: 59, points: 41, label: '50-59' },
-	{ upTo: 69, points: 58, label: '60-69' },
-	{ upTo: 79, points: 75, label: '70-79' },
-	{ upTo: 89, points: 91, label: '80-89' },
-	{ upTo: Infinity, points: 100, label: '>= 90' }
+  { upTo: 29, points: 0, label: '< 30' },
+  { upTo: 39, points: 8, label: '30-39' },
+  { upTo: 49, points: 25, label: '40-49' },
+  { upTo: 59, points: 41, label: '50-59' },
+  { upTo: 69, points: 58, label: '60-69' },
+  { upTo: 79, points: 75, label: '70-79' },
+  { upTo: 89, points: 91, label: '80-89' },
+  { upTo: Infinity, points: 100, label: '>= 90' }
 ];
 
 // ─── Variable 2: heart rate (beats/min) — increasing ──────────────────
 export const HEART_RATE_BANDS: PointBand[] = [
-	{ upTo: 49, points: 0, label: '< 50' },
-	{ upTo: 69, points: 3, label: '50-69' },
-	{ upTo: 89, points: 9, label: '70-89' },
-	{ upTo: 109, points: 15, label: '90-109' },
-	{ upTo: 149, points: 24, label: '110-149' },
-	{ upTo: 199, points: 38, label: '150-199' },
-	{ upTo: Infinity, points: 46, label: '>= 200' }
+  { upTo: 49, points: 0, label: '< 50' },
+  { upTo: 69, points: 3, label: '50-69' },
+  { upTo: 89, points: 9, label: '70-89' },
+  { upTo: 109, points: 15, label: '90-109' },
+  { upTo: 149, points: 24, label: '110-149' },
+  { upTo: 199, points: 38, label: '150-199' },
+  { upTo: Infinity, points: 46, label: '>= 200' }
 ];
 
 // ─── Variable 3: systolic BP (mmHg) — INVERSE (lower scores higher) ────
 export const SBP_BANDS: PointBand[] = [
-	{ upTo: 79, points: 58, label: '< 80' },
-	{ upTo: 99, points: 53, label: '80-99' },
-	{ upTo: 119, points: 43, label: '100-119' },
-	{ upTo: 139, points: 34, label: '120-139' },
-	{ upTo: 159, points: 24, label: '140-159' },
-	{ upTo: 199, points: 10, label: '160-199' },
-	{ upTo: Infinity, points: 0, label: '>= 200' }
+  { upTo: 79, points: 58, label: '< 80' },
+  { upTo: 99, points: 53, label: '80-99' },
+  { upTo: 119, points: 43, label: '100-119' },
+  { upTo: 139, points: 34, label: '120-139' },
+  { upTo: 159, points: 24, label: '140-159' },
+  { upTo: 199, points: 10, label: '160-199' },
+  { upTo: Infinity, points: 0, label: '>= 200' }
 ];
 
 // ─── Variable 4: serum creatinine (mg/dL, normalised) — increasing ────
 export const CREATININE_BANDS: PointBand[] = [
-	{ upTo: 0.39, points: 1, label: '0-0.39' },
-	{ upTo: 0.79, points: 4, label: '0.4-0.79' },
-	{ upTo: 1.19, points: 7, label: '0.8-1.19' },
-	{ upTo: 1.59, points: 10, label: '1.2-1.59' },
-	{ upTo: 1.99, points: 13, label: '1.6-1.99' },
-	{ upTo: 3.99, points: 21, label: '2.0-3.99' },
-	{ upTo: Infinity, points: 28, label: '>= 4.0' }
+  { upTo: 0.39, points: 1, label: '0-0.39' },
+  { upTo: 0.79, points: 4, label: '0.4-0.79' },
+  { upTo: 1.19, points: 7, label: '0.8-1.19' },
+  { upTo: 1.59, points: 10, label: '1.2-1.59' },
+  { upTo: 1.99, points: 13, label: '1.6-1.99' },
+  { upTo: 3.99, points: 21, label: '2.0-3.99' },
+  { upTo: Infinity, points: 28, label: '>= 4.0' }
 ];
 
 // ─── Variable 5: Killip class (heart-failure severity) ────────────────
 export const KILLIP_POINTS: Record<Exclude<KillipClass, ''>, number> = {
-	I: 0,
-	II: 20,
-	III: 39,
-	IV: 59
+  I: 0,
+  II: 20,
+  III: 39,
+  IV: 59
 };
 
 // ─── Variables 6-8: fixed yes/no increments ───────────────────────────
@@ -79,8 +79,8 @@ export const ELEVATED_ENZYMES_POINTS = 14;
 
 // ─── Mortality-band thresholds (spec §4) ──────────────────────────────
 export interface BandThresholds {
-	low: number;
-	intermediate: number;
+  low: number;
+  intermediate: number;
 }
 export const IN_HOSPITAL_THRESHOLDS: BandThresholds = { low: 108, intermediate: 140 };
 export const SIX_MONTH_THRESHOLDS: BandThresholds = { low: 88, intermediate: 118 };

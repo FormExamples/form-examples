@@ -33,7 +33,14 @@
       </select>
     </FormField>
     <FormField label="Refractive index">
-      <input class={input} type="number" step="0.001" min="1" max="2" bind:value={assessment.data.lensRecommendation.refractiveIndex} />
+      <input
+        class={input}
+        type="number"
+        step="0.001"
+        min="1"
+        max="2"
+        bind:value={assessment.data.lensRecommendation.refractiveIndex}
+      />
     </FormField>
     <FormField label="Aspheric design">
       <label class={cbLabel}>
@@ -44,19 +51,62 @@
   </div>
   <h3 class="text-sm font-semibold text-base-content/70 mt-4 mb-2">Coatings</h3>
   <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
-    <label class={cbLabel}><input type="checkbox" bind:checked={assessment.data.lensRecommendation.coatingAntiReflective} /> Anti-reflective</label>
-    <label class={cbLabel}><input type="checkbox" bind:checked={assessment.data.lensRecommendation.coatingScratchResistant} /> Scratch-resistant</label>
-    <label class={cbLabel}><input type="checkbox" bind:checked={assessment.data.lensRecommendation.coatingHydrophobic} /> Hydrophobic</label>
-    <label class={cbLabel}><input type="checkbox" bind:checked={assessment.data.lensRecommendation.coatingBlueLight} /> Blue-light</label>
-    <label class={cbLabel}><input type="checkbox" bind:checked={assessment.data.lensRecommendation.coatingPhotochromic} /> Photochromic</label>
-    <label class={cbLabel}><input type="checkbox" bind:checked={assessment.data.lensRecommendation.coatingPolarised} /> Polarised</label>
-    <label class={cbLabel}><input type="checkbox" bind:checked={assessment.data.lensRecommendation.coatingUv400} /> UV-400</label>
+    <label class={cbLabel}
+      ><input
+        type="checkbox"
+        bind:checked={assessment.data.lensRecommendation.coatingAntiReflective}
+      /> Anti-reflective</label
+    >
+    <label class={cbLabel}
+      ><input
+        type="checkbox"
+        bind:checked={assessment.data.lensRecommendation.coatingScratchResistant}
+      /> Scratch-resistant</label
+    >
+    <label class={cbLabel}
+      ><input
+        type="checkbox"
+        bind:checked={assessment.data.lensRecommendation.coatingHydrophobic}
+      /> Hydrophobic</label
+    >
+    <label class={cbLabel}
+      ><input type="checkbox" bind:checked={assessment.data.lensRecommendation.coatingBlueLight} /> Blue-light</label
+    >
+    <label class={cbLabel}
+      ><input
+        type="checkbox"
+        bind:checked={assessment.data.lensRecommendation.coatingPhotochromic}
+      /> Photochromic</label
+    >
+    <label class={cbLabel}
+      ><input type="checkbox" bind:checked={assessment.data.lensRecommendation.coatingPolarised} /> Polarised</label
+    >
+    <label class={cbLabel}
+      ><input type="checkbox" bind:checked={assessment.data.lensRecommendation.coatingUv400} /> UV-400</label
+    >
   </div>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4">
-    <FormField label="Tint description"><input class={input} type="text" placeholder="brown / grey / G15" bind:value={assessment.data.lensRecommendation.tintDescription} /></FormField>
-    <FormField label="Tint density (%)"><input class={input} type="number" step="5" min="0" max="100" bind:value={assessment.data.lensRecommendation.tintPercent} /></FormField>
+    <FormField label="Tint description"
+      ><input
+        class={input}
+        type="text"
+        placeholder="brown / grey / G15"
+        bind:value={assessment.data.lensRecommendation.tintDescription}
+      /></FormField
+    >
+    <FormField label="Tint density (%)"
+      ><input
+        class={input}
+        type="number"
+        step="5"
+        min="0"
+        max="100"
+        bind:value={assessment.data.lensRecommendation.tintPercent}
+      /></FormField
+    >
   </div>
   <FormField label="Dispenser notes">
-    <textarea class={input} rows="2" bind:value={assessment.data.lensRecommendation.dispenserNotes}></textarea>
+    <textarea class={input} rows="2" bind:value={assessment.data.lensRecommendation.dispenserNotes}
+    ></textarea>
   </FormField>
 </StepCard>

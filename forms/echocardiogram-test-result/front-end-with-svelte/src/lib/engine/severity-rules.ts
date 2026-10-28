@@ -1,16 +1,16 @@
 import type {
-	EchocardiogramResult,
-	ResultClassification,
-	AbnormalitySeverity,
-	FiredRule
+  EchocardiogramResult,
+  ResultClassification,
+  AbnormalitySeverity,
+  FiredRule
 } from './types';
 import {
-	hasCriticalFinding,
-	hasSevereValveDisease,
-	hasModerateValveDisease,
-	hasSevereLvImpairment,
-	hasAnyValveDisease,
-	hasAnyLvImpairment
+  hasCriticalFinding,
+  hasSevereValveDisease,
+  hasModerateValveDisease,
+  hasSevereLvImpairment,
+  hasAnyValveDisease,
+  hasAnyLvImpairment
 } from './utils';
 
 /**
@@ -30,80 +30,87 @@ import {
  * structured-reporting workflows.
  */
 export function gradeSeverity(
-	r: EchocardiogramResult,
-	classification: ResultClassification
+  r: EchocardiogramResult,
+  classification: ResultClassification
 ): {
-	abnormalitySeverity: AbnormalitySeverity;
-	reportingCategory: string;
-	firedRules: FiredRule[];
+  abnormalitySeverity: AbnormalitySeverity;
+  reportingCategory: string;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	if (hasCriticalFinding(r)) {
-		firedRules.push({
-			ruleId: 'R-SEV-MAJOR-01',
-			axis: 'severity',
-			category: 'critical-finding',
-			description: 'Critical finding present; abnormality severity graded major.'
-		});
-		const category = hasSevereValveDisease(r)
-			? 'severe-valve-disease'
-			: hasSevereLvImpairment(r)
-				? 'severe-lv-impairment'
-				: 'critical-actionable';
-		return { abnormalitySeverity: 'major', reportingCategory: category, firedRules };
-	}
+  if (hasCriticalFinding(r)) {
+    firedRules.push({
+      ruleId: 'R-SEV-MAJOR-01',
+      axis: 'severity',
+      category: 'critical-finding',
+      description: 'Critical finding present; abnormality severity graded major.'
+    });
+    const category = hasSevereValveDisease(r)
+      ? 'severe-valve-disease'
+      : hasSevereLvImpairment(r)
+        ? 'severe-lv-impairment'
+        : 'critical-actionable';
+    return { abnormalitySeverity: 'major', reportingCategory: category, firedRules };
+  }
 
-	if (hasModerateValveDisease(r) || r.lvFunction === 'moderately-impaired') {
-		firedRules.push({
-			ruleId: 'R-SEV-MODERATE-01',
-			axis: 'severity',
-			category: 'moderate-abnormality',
-			description:
-				'Moderate valve disease or moderate LV impairment is present; severity graded moderate.'
-		});
-		return { abnormalitySeverity: 'moderate', reportingCategory: 'moderate-abnormality', firedRules };
-	}
+  if (hasModerateValveDisease(r) || r.lvFunction === 'moderately-impaired') {
+    firedRules.push({
+      ruleId: 'R-SEV-MODERATE-01',
+      axis: 'severity',
+      category: 'moderate-abnormality',
+      description:
+        'Moderate valve disease or moderate LV impairment is present; severity graded moderate.'
+    });
+    return {
+      abnormalitySeverity: 'moderate',
+      reportingCategory: 'moderate-abnormality',
+      firedRules
+    };
+  }
 
-	if (r.regionalWallMotionAbnormality) {
-		firedRules.push({
-			ruleId: 'R-SEV-MODERATE-02',
-			axis: 'severity',
-			category: 'regional-wall-motion',
-			description: 'A regional wall-motion abnormality is present; severity graded moderate.'
-		});
-		return { abnormalitySeverity: 'moderate', reportingCategory: 'regional-wall-motion', firedRules };
-	}
+  if (r.regionalWallMotionAbnormality) {
+    firedRules.push({
+      ruleId: 'R-SEV-MODERATE-02',
+      axis: 'severity',
+      category: 'regional-wall-motion',
+      description: 'A regional wall-motion abnormality is present; severity graded moderate.'
+    });
+    return {
+      abnormalitySeverity: 'moderate',
+      reportingCategory: 'regional-wall-motion',
+      firedRules
+    };
+  }
 
-	const minor =
-		hasAnyValveDisease(r) || hasAnyLvImpairment(r) || r.lvHypertrophy;
+  const minor = hasAnyValveDisease(r) || hasAnyLvImpairment(r) || r.lvHypertrophy;
 
-	if (minor) {
-		firedRules.push({
-			ruleId: 'R-SEV-MINOR-01',
-			axis: 'severity',
-			category: 'minor-abnormality',
-			description:
-				'Mild valve disease, mild LV impairment, or LV hypertrophy only; abnormality severity graded minor.'
-		});
-		return { abnormalitySeverity: 'minor', reportingCategory: 'minor-abnormality', firedRules };
-	}
+  if (minor) {
+    firedRules.push({
+      ruleId: 'R-SEV-MINOR-01',
+      axis: 'severity',
+      category: 'minor-abnormality',
+      description:
+        'Mild valve disease, mild LV impairment, or LV hypertrophy only; abnormality severity graded minor.'
+    });
+    return { abnormalitySeverity: 'minor', reportingCategory: 'minor-abnormality', firedRules };
+  }
 
-	if (classification === 'inconclusive') {
-		firedRules.push({
-			ruleId: 'R-SEV-NONE-02',
-			axis: 'severity',
-			category: 'inconclusive',
-			description: 'Inconclusive study; abnormality severity not established.'
-		});
-		return { abnormalitySeverity: 'none', reportingCategory: 'indeterminate', firedRules };
-	}
+  if (classification === 'inconclusive') {
+    firedRules.push({
+      ruleId: 'R-SEV-NONE-02',
+      axis: 'severity',
+      category: 'inconclusive',
+      description: 'Inconclusive study; abnormality severity not established.'
+    });
+    return { abnormalitySeverity: 'none', reportingCategory: 'indeterminate', firedRules };
+  }
 
-	firedRules.push({
-		ruleId: 'R-SEV-NONE-01',
-		axis: 'severity',
-		category: 'no-abnormal-finding',
-		description: 'No abnormal finding; abnormality severity graded none.'
-	});
-	return { abnormalitySeverity: 'none', reportingCategory: 'normal', firedRules };
+  firedRules.push({
+    ruleId: 'R-SEV-NONE-01',
+    axis: 'severity',
+    category: 'no-abnormal-finding',
+    description: 'No abnormal finding; abnormality severity graded none.'
+  });
+  return { abnormalitySeverity: 'none', reportingCategory: 'normal', firedRules };
 }

@@ -7,48 +7,48 @@ import type { UltrasoundRequest } from './types';
  * is rehydrated from localStorage.
  */
 export function createDefaultRequest(): UltrasoundRequest {
-	return {
-		clinician: {
-			clinicianName: '',
-			clinicianRole: '',
-			registrationBody: '',
-			registrationNumber: '',
-			requesterContact: '',
-			supervisingConsultant: '',
-			siteName: '',
-			referralDate: ''
-		},
-		patient: {
-			firstName: '',
-			lastName: '',
-			dateOfBirth: '',
-			nhsNumber: '',
-			bodyMassIndex: null,
-			interpreterRequired: false
-		},
-		request: {
-			bodyRegion: '',
-			laterality: '',
-			primaryIndication: '',
-			clinicalQuestion: '',
-			relevantHistory: '',
-			previousScanFinding: '',
-			previousScanDate: ''
-		},
-		prep: {
-			fastingRequired: false,
-			fullBladderRequired: false
-		},
-		redFlags: {
-			suspectedDvt: false,
-			suspectedTesticularTorsion: false,
-			suspectedAaa: false
-		},
-		triage: {
-			urgency: '',
-			requestedByDate: '',
-			setting: '',
-			notes: ''
-		}
-	};
+  return {
+    clinician: {
+      clinicianName: '',
+      clinicianRole: '',
+      registrationBody: '',
+      registrationNumber: '',
+      requesterContact: '',
+      supervisingConsultant: '',
+      siteName: '',
+      referralDate: ''
+    },
+    patient: {
+      firstName: '',
+      lastName: '',
+      dateOfBirth: '',
+      nhsNumber: '',
+      bodyMassIndex: null,
+      interpreterRequired: false
+    },
+    request: {
+      bodyRegion: '',
+      laterality: '',
+      primaryIndication: '',
+      clinicalQuestion: '',
+      relevantHistory: '',
+      previousScanFinding: '',
+      previousScanDate: ''
+    },
+    prep: {
+      fastingRequired: false,
+      fullBladderRequired: false
+    },
+    redFlags: {
+      suspectedDvt: false,
+      suspectedTesticularTorsion: false,
+      suspectedAaa: false
+    },
+    triage: {
+      urgency: '',
+      requestedByDate: '',
+      setting: '',
+      notes: ''
+    }
+  };
 }

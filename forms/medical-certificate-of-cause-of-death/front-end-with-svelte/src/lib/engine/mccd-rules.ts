@@ -20,7 +20,7 @@ import type { DeathCertificate } from './types';
 
 /** True when the value is a non-empty (trimmed) string. */
 export function nonEmpty(s: unknown): boolean {
-	return typeof s === 'string' && s.trim() !== '';
+  return typeof s === 'string' && s.trim() !== '';
 }
 
 /**
@@ -29,14 +29,14 @@ export function nonEmpty(s: unknown): boolean {
  * not be issued until the coroner has considered the case (spec §4).
  */
 export const CORONER_REASONS: string[] = [
-	'unnatural',
-	'violent',
-	'suspicious',
-	'unknown-cause',
-	'industrial-disease',
-	'medical-procedure',
-	'custody',
-	'no-attending-practitioner'
+  'unnatural',
+  'violent',
+  'suspicious',
+  'unknown-cause',
+  'industrial-disease',
+  'medical-procedure',
+  'custody',
+  'no-attending-practitioner'
 ];
 
 /**
@@ -46,42 +46,42 @@ export const CORONER_REASONS: string[] = [
  * punctuation removed). ONS guidance requires an underlying disease be stated.
  */
 export const MODES: string[] = [
-	'cardiac arrest',
-	'cardiac failure',
-	'cardiorespiratory arrest',
-	'cardio-respiratory arrest',
-	'cardiopulmonary arrest',
-	'respiratory arrest',
-	'respiratory failure',
-	'asystole',
-	'ventricular fibrillation',
-	'old age',
-	'organ failure',
-	'multi organ failure',
-	'multi-organ failure',
-	'multiorgan failure',
-	'liver failure',
-	'renal failure',
-	'kidney failure',
-	'heart failure',
-	'syncope',
-	'coma',
-	'shock',
-	'brain death',
-	'brainstem death',
-	'vagal inhibition',
-	'uraemia',
-	'exhaustion',
-	'debility',
-	'frailty'
+  'cardiac arrest',
+  'cardiac failure',
+  'cardiorespiratory arrest',
+  'cardio-respiratory arrest',
+  'cardiopulmonary arrest',
+  'respiratory arrest',
+  'respiratory failure',
+  'asystole',
+  'ventricular fibrillation',
+  'old age',
+  'organ failure',
+  'multi organ failure',
+  'multi-organ failure',
+  'multiorgan failure',
+  'liver failure',
+  'renal failure',
+  'kidney failure',
+  'heart failure',
+  'syncope',
+  'coma',
+  'shock',
+  'brain death',
+  'brainstem death',
+  'vagal inhibition',
+  'uraemia',
+  'exhaustion',
+  'debility',
+  'frailty'
 ];
 
 const MODE_SET: Record<string, boolean> = MODES.reduce(
-	(set, m) => {
-		set[m] = true;
-		return set;
-	},
-	{} as Record<string, boolean>
+  (set, m) => {
+    set[m] = true;
+    return set;
+  },
+  {} as Record<string, boolean>
 );
 
 /**
@@ -89,20 +89,20 @@ const MODE_SET: Record<string, boolean> = MODES.reduce(
  * trim, collapse internal whitespace, and strip trailing punctuation.
  */
 export function normalise(text: string): string {
-	return String(text || '')
-		.toLowerCase()
-		.replace(/\s+/g, ' ')
-		.trim()
-		.replace(/[.,;:]+$/, '')
-		.trim();
+  return String(text || '')
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
+    .trim()
+    .replace(/[.,;:]+$/, '')
+    .trim();
 }
 
 /** True when a coroner-referral criterion is asserted (spec §4). */
 export function coronerReferralIndicated(d: DeathCertificate): boolean {
-	return (
-		d.referral.referredToCoroner === 'yes' ||
-		CORONER_REASONS.indexOf(d.referral.coronerReason) !== -1
-	);
+  return (
+    d.referral.referredToCoroner === 'yes' ||
+    CORONER_REASONS.indexOf(d.referral.coronerReason) !== -1
+  );
 }
 
 /**
@@ -111,28 +111,30 @@ export function coronerReferralIndicated(d: DeathCertificate): boolean {
  * the unacceptable-mode list.
  */
 export function soleCause(d: DeathCertificate): string {
-	const lines = [d.partI.causeIaCondition, d.partI.causeIbCondition, d.partI.causeIcCondition].filter(
-		nonEmpty
-	);
-	const partIiPresent = nonEmpty(d.partII.partIiConditions);
-	if (lines.length === 1 && !partIiPresent) return lines[0];
-	return '';
+  const lines = [
+    d.partI.causeIaCondition,
+    d.partI.causeIbCondition,
+    d.partI.causeIcCondition
+  ].filter(nonEmpty);
+  const partIiPresent = nonEmpty(d.partII.partIiConditions);
+  if (lines.length === 1 && !partIiPresent) return lines[0];
+  return '';
 }
 
 /** True when the normalised text is a recognised unacceptable mode of death. */
 export function isUnacceptableMode(text: string): boolean {
-	return MODE_SET[normalise(text)] === true;
+  return MODE_SET[normalise(text)] === true;
 }
 
 /** True when the only cause given is a recognised mode of death (spec §4). */
 export function unacceptableSoleCause(d: DeathCertificate): boolean {
-	const sole = soleCause(d);
-	return sole !== '' && isUnacceptableMode(sole);
+  const sole = soleCause(d);
+  return sole !== '' && isUnacceptableMode(sole);
 }
 
 /** True when Part I(a), the required direct cause, is not recorded. */
 export function missingPartIa(d: DeathCertificate): boolean {
-	return !nonEmpty(d.partI.causeIaCondition);
+  return !nonEmpty(d.partI.causeIaCondition);
 }
 
 /**
@@ -140,10 +142,10 @@ export function missingPartIa(d: DeathCertificate): boolean {
  * completed line sits below an empty line above it (spec §4).
  */
 export function illogicalSequence(d: DeathCertificate): boolean {
-	const ia = nonEmpty(d.partI.causeIaCondition);
-	const ib = nonEmpty(d.partI.causeIbCondition);
-	const ic = nonEmpty(d.partI.causeIcCondition);
-	return (ib && !ia) || (ic && !ib);
+  const ia = nonEmpty(d.partI.causeIaCondition);
+  const ib = nonEmpty(d.partI.causeIbCondition);
+  const ic = nonEmpty(d.partI.causeIcCondition);
+  return (ib && !ia) || (ic && !ib);
 }
 
 /**
@@ -151,8 +153,8 @@ export function illogicalSequence(d: DeathCertificate): boolean {
  * I(a)); '' when Part I is empty (spec §4).
  */
 export function underlyingCause(d: DeathCertificate): string {
-	if (nonEmpty(d.partI.causeIcCondition)) return d.partI.causeIcCondition.trim();
-	if (nonEmpty(d.partI.causeIbCondition)) return d.partI.causeIbCondition.trim();
-	if (nonEmpty(d.partI.causeIaCondition)) return d.partI.causeIaCondition.trim();
-	return '';
+  if (nonEmpty(d.partI.causeIcCondition)) return d.partI.causeIcCondition.trim();
+  if (nonEmpty(d.partI.causeIbCondition)) return d.partI.causeIbCondition.trim();
+  if (nonEmpty(d.partI.causeIaCondition)) return d.partI.causeIaCondition.trim();
+  return '';
 }

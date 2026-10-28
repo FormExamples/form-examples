@@ -8,36 +8,36 @@ import { collectScoredItems, calculateCompositeScore } from './utils';
  * If fewer than 2 scored items are answered and no HbA1c, returns "draft" status.
  */
 export function calculateControl(data: AssessmentData): {
-	controlLevel: ControlLevel;
-	controlScore: number;
-	firedRules: FiredRule[];
+  controlLevel: ControlLevel;
+  controlScore: number;
+  firedRules: FiredRule[];
 } {
-	// Check if enough items are answered
-	const items = collectScoredItems(data);
-	const answeredCount = items.filter((x) => x !== null).length;
-	const hasHba1c = data.glycaemicControl.hba1cValue !== null;
+  // Check if enough items are answered
+  const items = collectScoredItems(data);
+  const answeredCount = items.filter((x) => x !== null).length;
+  const hasHba1c = data.glycaemicControl.hba1cValue !== null;
 
-	if (answeredCount < 2 && !hasHba1c) {
-		return { controlLevel: 'draft', controlScore: 0, firedRules: [] };
-	}
+  if (answeredCount < 2 && !hasHba1c) {
+    return { controlLevel: 'draft', controlScore: 0, firedRules: [] };
+  }
 
-	// Calculate composite score
-	const score = calculateCompositeScore(data) ?? 0;
+  // Calculate composite score
+  const score = calculateCompositeScore(data) ?? 0;
 
-	// Fire rules
-	const firedRules = evaluateRules(data);
+  // Fire rules
+  const firedRules = evaluateRules(data);
 
-	// Determine control level from composite score
-	let controlLevel: ControlLevel;
-	if (score <= 20) {
-		controlLevel = 'veryPoor';
-	} else if (score <= 40) {
-		controlLevel = 'poor';
-	} else if (score < 65) {
-		controlLevel = 'suboptimal';
-	} else {
-		controlLevel = 'wellControlled';
-	}
+  // Determine control level from composite score
+  let controlLevel: ControlLevel;
+  if (score <= 20) {
+    controlLevel = 'veryPoor';
+  } else if (score <= 40) {
+    controlLevel = 'poor';
+  } else if (score < 65) {
+    controlLevel = 'suboptimal';
+  } else {
+    controlLevel = 'wellControlled';
+  }
 
-	return { controlLevel, controlScore: score, firedRules };
+  return { controlLevel, controlScore: score, firedRules };
 }

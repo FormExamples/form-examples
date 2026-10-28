@@ -7,8 +7,8 @@ import { detectFlaggedIssues } from './flagged-issues';
  * it is explicitly marked ungradable.
  */
 export function eyeComplete(eye: EyeGrade): boolean {
-	if (eye.ungradable === 'yes') return true;
-	return eye.retinopathy !== '' && eye.maculopathy !== '';
+  if (eye.ungradable === 'yes') return true;
+  return eye.retinopathy !== '' && eye.maculopathy !== '';
 }
 
 /**
@@ -16,7 +16,7 @@ export function eyeComplete(eye: EyeGrade): boolean {
  * marked ungradable); otherwise incomplete.
  */
 export function computeStatus(d: AssessmentData): Status {
-	return eyeComplete(d.rightEye) && eyeComplete(d.leftEye) ? 'complete' : 'incomplete';
+  return eyeComplete(d.rightEye) && eyeComplete(d.leftEye) ? 'complete' : 'incomplete';
 }
 
 /**
@@ -39,45 +39,45 @@ export function computeStatus(d: AssessmentData): Status {
  *   otherwise (R0, not low-risk eligible)                  -> routine-12-month     (12)
  */
 export function calculateGrade(data: AssessmentData): GradingResult {
-	const timestamp = new Date().toISOString();
-	const ctx = deriveContext(data);
+  const timestamp = new Date().toISOString();
+  const ctx = deriveContext(data);
 
-	let winner = classificationRules[classificationRules.length - 1];
-	for (const rule of classificationRules) {
-		try {
-			if (rule.evaluate(ctx)) {
-				winner = rule;
-				break;
-			}
-		} catch (e) {
-			// Rule evaluation failed - log for debugging but continue grading.
-			console.warn(`Diabetes-eye-screening rule ${rule.id} evaluation failed:`, e);
-		}
-	}
+  let winner = classificationRules[classificationRules.length - 1];
+  for (const rule of classificationRules) {
+    try {
+      if (rule.evaluate(ctx)) {
+        winner = rule;
+        break;
+      }
+    } catch (e) {
+      // Rule evaluation failed - log for debugging but continue grading.
+      console.warn(`Diabetes-eye-screening rule ${rule.id} evaluation failed:`, e);
+    }
+  }
 
-	const status = computeStatus(data);
+  const status = computeStatus(data);
 
-	const firedRules: FiredRule[] = [
-		{
-			id: winner.id,
-			stage: winner.stage,
-			category: winner.category,
-			description: winner.description
-		}
-	];
+  const firedRules: FiredRule[] = [
+    {
+      id: winner.id,
+      stage: winner.stage,
+      category: winner.category,
+      description: winner.description
+    }
+  ];
 
-	return {
-		rightEyeGrade: data.rightEye,
-		leftEyeGrade: data.leftEye,
-		worstRetinopathy: ctx.worstRetinopathy,
-		worstMaculopathy: ctx.worstMaculopathy,
-		anyUngradable: ctx.anyUngradable,
-		recallPathway: winner.outcome,
-		recallIntervalMonths: winner.intervalMonths,
-		referral: winner.referral,
-		status,
-		firedRules,
-		flaggedIssues: detectFlaggedIssues(data, { status }),
-		timestamp
-	};
+  return {
+    rightEyeGrade: data.rightEye,
+    leftEyeGrade: data.leftEye,
+    worstRetinopathy: ctx.worstRetinopathy,
+    worstMaculopathy: ctx.worstMaculopathy,
+    anyUngradable: ctx.anyUngradable,
+    recallPathway: winner.outcome,
+    recallIntervalMonths: winner.intervalMonths,
+    referral: winner.referral,
+    status,
+    firedRules,
+    flaggedIssues: detectFlaggedIssues(data, { status }),
+    timestamp
+  };
 }

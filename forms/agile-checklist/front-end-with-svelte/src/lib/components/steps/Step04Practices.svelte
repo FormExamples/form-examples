@@ -9,8 +9,8 @@
 
 <Fieldset legend="Step 4 — Practices (18 items)">
   <p class="hint">
-    Operating practices that bind teams and stakeholders together — pace of
-    decisions, focus on finished work, transparency, and scope discipline.
+    Operating practices that bind teams and stakeholders together — pace of decisions, focus on
+    finished work, transparency, and scope discipline.
   </p>
 
   <div class="section-progress">

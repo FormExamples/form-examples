@@ -2,7 +2,7 @@
   import { store } from '#lib/stores/checklist.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { TextAreaInput, TextInput } from '@lilydesignsystem/svelte-headless';
   import FlagBanner from '../ui/FlagBanner.svelte';
 
   const r = $derived(store.result);
@@ -24,9 +24,7 @@
     <p><strong>Items answered:</strong> {r.answeredCount} / 57</p>
     <p>
       <strong>Overall:</strong>
-      {r.overallPercent !== null
-        ? `${r.overallPercent.toFixed(0)}% yes`
-        : '— (insufficient data)'}
+      {r.overallPercent !== null ? `${r.overallPercent.toFixed(0)}% yes` : '— (insufficient data)'}
     </p>
     <p><strong>Composite maturity:</strong> {r.maturity.toUpperCase()}</p>
   </div>
@@ -98,9 +96,8 @@
   </Field>
 
   <p class="signoff-note">
-    The maturity result is intended to seed coaching conversations and
-    retrospective items. It is a self-report; cross-team aggregation should
-    be done before drawing organisation-wide conclusions.
+    The maturity result is intended to seed coaching conversations and retrospective items. It is a
+    self-report; cross-team aggregation should be done before drawing organisation-wide conclusions.
   </p>
 </Fieldset>
 
@@ -112,7 +109,9 @@
     padding: 0.75rem 1rem;
     margin: 0 0 1rem;
   }
-  .summary-box p { margin: 0 0 0.25rem; }
+  .summary-box p {
+    margin: 0 0 0.25rem;
+  }
   .band-list {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
@@ -120,8 +119,16 @@
     padding: 0.75rem 1rem;
     margin: 0 0 1rem;
   }
-  .band-list h3 { font-weight: 600; margin: 0 0 0.5rem; font-size: 0.9375rem; }
-  .band-list ul { list-style: none; padding: 0; margin: 0; }
+  .band-list h3 {
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    font-size: 0.9375rem;
+  }
+  .band-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
   .band-list li {
     display: flex;
     justify-content: space-between;
@@ -129,13 +136,41 @@
     margin: 0.25rem 0;
     font-size: 0.875rem;
   }
-  .band-high { color: var(--color-success); font-weight: 600; }
-  .band-mid { color: var(--color-warning); font-weight: 600; }
-  .band-low { color: var(--color-danger); font-weight: 600; }
-  .band-unanswered { color: var(--color-muted); font-weight: 600; }
-  .fired-rules { margin: 0 0 1rem; }
-  .fired-rules summary { cursor: pointer; font-weight: 500; font-size: 0.875rem; }
-  .fired-rules ul { margin: 0.5rem 0 0 1.25rem; padding: 0; font-size: 0.875rem; }
-  .fired-rules code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
-  .signoff-note { font-size: 0.875rem; color: var(--color-muted); margin-top: 1rem; }
+  .band-high {
+    color: var(--color-success);
+    font-weight: 600;
+  }
+  .band-mid {
+    color: var(--color-warning);
+    font-weight: 600;
+  }
+  .band-low {
+    color: var(--color-danger);
+    font-weight: 600;
+  }
+  .band-unanswered {
+    color: var(--color-muted);
+    font-weight: 600;
+  }
+  .fired-rules {
+    margin: 0 0 1rem;
+  }
+  .fired-rules summary {
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.875rem;
+  }
+  .fired-rules ul {
+    margin: 0.5rem 0 0 1.25rem;
+    padding: 0;
+    font-size: 0.875rem;
+  }
+  .fired-rules code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .signoff-note {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    margin-top: 1rem;
+  }
 </style>

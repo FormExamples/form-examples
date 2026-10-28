@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { devScreenLabel, devScreenColor } from '#lib/engine/utils.js';
+  import { devScreenLabel, devScreenColor } from '#lib/engine/utils.js';
 
-	let {
-		result
-	}: {
-		result: string;
-	} = $props();
+  let {
+    result
+  }: {
+    result: string;
+  } = $props();
 
-	const colorClass = $derived(devScreenColor(result));
-	const label = $derived(devScreenLabel(result));
+  const colorClass = $derived(devScreenColor(result));
+  const label = $derived(devScreenLabel(result));
 </script>
 
 <span class="inline-block rounded-full border px-4 py-1.5 text-sm font-bold {colorClass}">
-	{label}
+  {label}
 </span>

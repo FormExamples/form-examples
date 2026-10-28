@@ -5,9 +5,6 @@ import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-	plugins: [
-		tailwindcss(),
-		sveltekit({ preprocess: vitePreprocess(), adapter: adapter() })
-	],
-	test: { include: ['src/**/*.test.ts'] }
+  plugins: [tailwindcss(), sveltekit({ preprocess: vitePreprocess(), adapter: adapter() })],
+  test: { include: ['src/**/*.test.ts'] }
 });

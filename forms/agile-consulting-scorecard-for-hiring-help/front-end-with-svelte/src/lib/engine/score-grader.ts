@@ -12,36 +12,36 @@ import { bandToRecommendation, totalToBand } from './utils';
 // Algorithm: sum-of-points. One point per "yes" answer across the 16 items.
 // The band is read from a fixed table (see `utils.totalToBand`).
 export function gradeScorecard(data: AgileConsultingScorecardAssessment): GradeResult {
-	const manifesto = gradeManifesto(data.manifesto);
-	const principles = gradePrinciples(data.principles);
+  const manifesto = gradeManifesto(data.manifesto);
+  const principles = gradePrinciples(data.principles);
 
-	const scoreTotal = manifesto.subtotal + principles.subtotal;
-	const computedBand = totalToBand(scoreTotal);
-	const recommendation = bandToRecommendation(computedBand);
+  const scoreTotal = manifesto.subtotal + principles.subtotal;
+  const computedBand = totalToBand(scoreTotal);
+  const recommendation = bandToRecommendation(computedBand);
 
-	const firedRules: FiredRule[] = [
-		...manifesto.firedRules,
-		...principles.firedRules,
-		{
-			ruleId: `R-COMPOSITE-${computedBand.toUpperCase()}`,
-			instrument: 'composite',
-			itemNumber: null,
-			grade: computedBand,
-			pointsAwarded: 0,
-			category: 'composite',
-			description: `Total ${scoreTotal}/16 places the organization in the "${computedBand}" readiness band.`,
-		},
-	];
+  const firedRules: FiredRule[] = [
+    ...manifesto.firedRules,
+    ...principles.firedRules,
+    {
+      ruleId: `R-COMPOSITE-${computedBand.toUpperCase()}`,
+      instrument: 'composite',
+      itemNumber: null,
+      grade: computedBand,
+      pointsAwarded: 0,
+      category: 'composite',
+      description: `Total ${scoreTotal}/16 places the organization in the "${computedBand}" readiness band.`
+    }
+  ];
 
-	const additionalFlags = computeFlags(data);
+  const additionalFlags = computeFlags(data);
 
-	return {
-		scoreTotal,
-		manifestoSubtotal: manifesto.subtotal,
-		principlesSubtotal: principles.subtotal,
-		computedBand,
-		recommendation,
-		firedRules,
-		additionalFlags,
-	};
+  return {
+    scoreTotal,
+    manifestoSubtotal: manifesto.subtotal,
+    principlesSubtotal: principles.subtotal,
+    computedBand,
+    recommendation,
+    firedRules,
+    additionalFlags
+  };
 }

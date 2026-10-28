@@ -28,7 +28,7 @@ function build(
   checkedCount: number,
   location: PatientRoomReadinessChecklist['location'],
   inspector: PatientRoomReadinessChecklist['inspector'],
-  inspection: PatientRoomReadinessChecklist['inspection'],
+  inspection: PatientRoomReadinessChecklist['inspection']
 ): PatientRoomReadinessChecklist {
   const d = createDefaultAssessment();
   d.location = { ...d.location, ...location };
@@ -46,7 +46,7 @@ function fullyReady(): PatientRoomReadinessChecklist {
     25,
     { buildingNameOrNumber: 'Building A', roomNameOrNumber: 'Room 204' },
     { name: 'Priya Shah', email: 'priya.shah@example.org' },
-    { date: '2026-07-10', time: '08:15' },
+    { date: '2026-07-10', time: '08:15' }
   );
 }
 
@@ -56,7 +56,7 @@ function mostlyReady(): PatientRoomReadinessChecklist {
     21,
     { buildingNameOrNumber: 'Building A', roomNameOrNumber: 'Room 211' },
     { name: 'Tom Okafor', email: 'tom.okafor@example.org' },
-    { date: '2026-07-11', time: '09:40' },
+    { date: '2026-07-11', time: '09:40' }
   );
 }
 
@@ -66,7 +66,7 @@ function needsAttention(): PatientRoomReadinessChecklist {
     13,
     { buildingNameOrNumber: 'Building B', roomNameOrNumber: 'Room 108' },
     { name: 'Sofia Marín', email: 'sofia.marin@example.org' },
-    { date: '2026-07-12', time: '14:05' },
+    { date: '2026-07-12', time: '14:05' }
   );
 }
 
@@ -76,16 +76,40 @@ function freshlyStarted(): PatientRoomReadinessChecklist {
     3,
     { buildingNameOrNumber: 'Building C', roomNameOrNumber: 'Room 302' },
     { name: 'Liam Brennan', email: 'liam.brennan@example.org' },
-    { date: '2026-07-13', time: '07:20' },
+    { date: '2026-07-13', time: '07:20' }
   );
 }
 
 /** The sample checklists, keyed by stable id (used to seed the wizard). */
 export const sampleAssessments: SampleAssessment[] = [
-  { id: 'PRR-2026-0001', building: 'Building A', room: 'Room 204', assessedDate: '2026-07-10', data: fullyReady() },
-  { id: 'PRR-2026-0002', building: 'Building A', room: 'Room 211', assessedDate: '2026-07-11', data: mostlyReady() },
-  { id: 'PRR-2026-0003', building: 'Building B', room: 'Room 108', assessedDate: '2026-07-12', data: needsAttention() },
-  { id: 'PRR-2026-0004', building: 'Building C', room: 'Room 302', assessedDate: '2026-07-13', data: freshlyStarted() },
+  {
+    id: 'PRR-2026-0001',
+    building: 'Building A',
+    room: 'Room 204',
+    assessedDate: '2026-07-10',
+    data: fullyReady()
+  },
+  {
+    id: 'PRR-2026-0002',
+    building: 'Building A',
+    room: 'Room 211',
+    assessedDate: '2026-07-11',
+    data: mostlyReady()
+  },
+  {
+    id: 'PRR-2026-0003',
+    building: 'Building B',
+    room: 'Room 108',
+    assessedDate: '2026-07-12',
+    data: needsAttention()
+  },
+  {
+    id: 'PRR-2026-0004',
+    building: 'Building C',
+    room: 'Room 302',
+    assessedDate: '2026-07-13',
+    data: freshlyStarted()
+  }
 ];
 
 /** Dashboard rows derived by running the shared tally over each sample. */
@@ -98,6 +122,6 @@ export const sampleAssessmentRows: DashboardRow[] = sampleAssessments.map((s) =>
     assessedDate: s.assessedDate,
     checkedCount: g.checkedCount,
     totalCount: g.totalCount,
-    inspectorName: s.data.inspector.name,
+    inspectorName: s.data.inspector.name
   };
 });

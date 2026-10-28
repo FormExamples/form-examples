@@ -4,7 +4,7 @@ import {
   findCertificateProviderSignature,
   findDonorSignature,
   isSignedBefore,
-  signatureSignedAt,
+  signatureSignedAt
 } from './utils.js';
 
 export function applySignatureOrderRules(app: LpaApplication): FiredRule[] {
@@ -21,7 +21,7 @@ export function applySignatureOrderRules(app: LpaApplication): FiredRule[] {
       ruleFamily: 'signature-order',
       sourceCitation: 'LP1H s.9',
       description: 'Donor has not signed the LPA.',
-      suggestedCorrection: 'Capture the donor’s signature and dated witness statement on LP1H s.9.',
+      suggestedCorrection: 'Capture the donor’s signature and dated witness statement on LP1H s.9.'
     });
   }
 
@@ -32,7 +32,7 @@ export function applySignatureOrderRules(app: LpaApplication): FiredRule[] {
       ruleFamily: 'signature-order',
       sourceCitation: 'LP1H s.10',
       description: 'Certificate provider has not signed the LPA.',
-      suggestedCorrection: 'The certificate provider must sign LP1H s.10 before the attorneys sign.',
+      suggestedCorrection: 'The certificate provider must sign LP1H s.10 before the attorneys sign.'
     });
   }
 
@@ -43,7 +43,8 @@ export function applySignatureOrderRules(app: LpaApplication): FiredRule[] {
       ruleFamily: 'signature-order',
       sourceCitation: 'LP1H s.11',
       description: 'Not every named attorney has signed and dated the LPA.',
-      suggestedCorrection: 'Every attorney must sign LP1H s.11 after the donor and the certificate provider.',
+      suggestedCorrection:
+        'Every attorney must sign LP1H s.11 after the donor and the certificate provider.'
     });
   }
 
@@ -54,7 +55,8 @@ export function applySignatureOrderRules(app: LpaApplication): FiredRule[] {
       ruleFamily: 'signature-order',
       sourceCitation: 'LPA Regs 2007 Sch.1',
       description: 'Donor must sign before the certificate provider.',
-      suggestedCorrection: 'The donor signs first, then the certificate provider, then the attorneys.',
+      suggestedCorrection:
+        'The donor signs first, then the certificate provider, then the attorneys.'
     });
   }
 
@@ -67,7 +69,8 @@ export function applySignatureOrderRules(app: LpaApplication): FiredRule[] {
           ruleFamily: 'signature-order',
           sourceCitation: 'LPA Regs 2007 Sch.1',
           description: 'Certificate provider must sign before any attorney.',
-          suggestedCorrection: 'Ensure the certificate-provider signature date precedes every attorney signature date.',
+          suggestedCorrection:
+            'Ensure the certificate-provider signature date precedes every attorney signature date.'
         });
         break;
       }
@@ -82,7 +85,7 @@ export function applySignatureOrderRules(app: LpaApplication): FiredRule[] {
         ruleFamily: 'signature-order',
         sourceCitation: 'LPA Regs 2007 Sch.1',
         description: 'A signature witness must not be an attorney named in this LPA.',
-        suggestedCorrection: 'Choose a witness who is not an attorney.',
+        suggestedCorrection: 'Choose a witness who is not an attorney.'
       });
       break;
     }
@@ -99,7 +102,7 @@ export function applySignatureOrderRules(app: LpaApplication): FiredRule[] {
         ruleFamily: 'signature-order',
         sourceCitation: 'LPA Regs 2007 Sch.1',
         description: 'The witness on the donor’s signature appears to be the donor themselves.',
-        suggestedCorrection: 'Choose an independent witness for the donor’s signature.',
+        suggestedCorrection: 'Choose an independent witness for the donor’s signature.'
       });
     }
   }

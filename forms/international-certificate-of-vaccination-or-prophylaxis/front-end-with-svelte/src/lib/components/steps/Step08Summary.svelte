@@ -7,7 +7,10 @@
   const report = $derived(validateCertificate(c));
 </script>
 
-<Fieldset legend="Summary & sign-off" description="Live validation preview; the full report is generated on submit.">
+<Fieldset
+  legend="Summary & sign-off"
+  description="Live validation preview; the full report is generated on submit."
+>
   <div class="rounded-lg border border-base-300 bg-base-100 p-4">
     <h3 class="font-semibold text-base-content">Validation preview</h3>
     {#if report.firedRules.length === 0}
@@ -16,7 +19,9 @@
       <ul class="mt-2 space-y-1 text-sm">
         {#each report.firedRules as r (r.code)}
           <li class="flex items-start gap-2">
-            <span class="rounded px-1.5 py-0.5 text-xs font-bold uppercase {severityColor(r.severity)}">
+            <span
+              class="rounded px-1.5 py-0.5 text-xs font-bold uppercase {severityColor(r.severity)}"
+            >
               {r.severity}
             </span>
             <span class="text-base-content/80">[{r.code}] {r.message}</span>
@@ -34,7 +39,8 @@
   </div>
   <div class="field">
     <label class="label" for="waiverReason">Medical waiver reason</label>
-    <textarea id="waiverReason" class="text-area-input" rows="3" bind:value={c.medicalWaiverReason}></textarea>
+    <textarea id="waiverReason" class="text-area-input" rows="3" bind:value={c.medicalWaiverReason}
+    ></textarea>
   </div>
   <div class="field">
     <label class="label" for="electronicSignature">Electronic signature (typed)</label>

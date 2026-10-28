@@ -14,7 +14,7 @@ export function createEmptyOperationNote(): OperationNote {
       anaesthesiaStartAt: '',
       knifeToSkinAt: '',
       endOfSurgeryAt: '',
-      caseEndAt: '',
+      caseEndAt: ''
     },
     patient: {
       nhsNumber: '',
@@ -28,7 +28,7 @@ export function createEmptyOperationNote(): OperationNote {
       allergiesSummary: '',
       consentStatus: '',
       sideMarked: '',
-      whoSignInCompleted: '',
+      whoSignInCompleted: ''
     },
     team: [],
     diagnosesAndProcedures: {
@@ -39,7 +39,7 @@ export function createEmptyOperationNote(): OperationNote {
       opcs4Codes: '',
       urgency: '',
       laterality: '',
-      indication: '',
+      indication: ''
     },
     anaesthesia: {
       type: '',
@@ -52,7 +52,7 @@ export function createEmptyOperationNote(): OperationNote {
       crystalloidMl: null,
       colloidMl: null,
       bloodMl: null,
-      events: '',
+      events: ''
     },
     positionPrepApproach: {
       patientPosition: '',
@@ -66,14 +66,14 @@ export function createEmptyOperationNote(): OperationNote {
       tourniquetSite: '',
       tourniquetPressureMmHg: null,
       tourniquetTimeOnAt: '',
-      tourniquetTimeOffAt: '',
+      tourniquetTimeOffAt: ''
     },
     operativeFindings: {
       techniqueSteps: '',
       pathologyFound: '',
       anatomicalAnomalies: '',
       intraOpPhotographsTaken: '',
-      frozenSectionRequested: '',
+      frozenSectionRequested: ''
     },
     materialsImplants: {
       sutures: '',
@@ -85,7 +85,7 @@ export function createEmptyOperationNote(): OperationNote {
       vascularGrafts: '',
       lotSerialBatchExpiry: '',
       manufacturer: '',
-      registrySubmitted: '',
+      registrySubmitted: ''
     },
     drainsPacksSpecimens: {
       drainsPlaced: '',
@@ -95,7 +95,7 @@ export function createEmptyOperationNote(): OperationNote {
       ngTube: '',
       specimensSent: '',
       specimensPathologyDestination: '',
-      specimensUrgent: '',
+      specimensUrgent: ''
     },
     safetyCountsEbl: {
       swabCountFirst: null,
@@ -121,7 +121,7 @@ export function createEmptyOperationNote(): OperationNote {
       neverEventFlags: '',
       intraOperativeArrest: '',
       specimenLabellingIssue: '',
-      equipmentProblem: '',
+      equipmentProblem: ''
     },
     postOperativePlan: {
       recoveryDestination: '',
@@ -138,7 +138,7 @@ export function createEmptyOperationNote(): OperationNote {
       followUpPlan: '',
       specialInstructions: '',
       whoSignOutCompleted: '',
-      debriefCompleted: '',
+      debriefCompleted: ''
     },
     signOff: {
       asaPhysicalStatus: null,
@@ -147,7 +147,7 @@ export function createEmptyOperationNote(): OperationNote {
       attestation: '',
       electronicSignatureName: '',
       dictationTimestamp: '',
-      documentationGap: '',
-    },
+      documentationGap: ''
+    }
   };
 }

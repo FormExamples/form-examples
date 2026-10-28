@@ -22,7 +22,11 @@
       />
     </Field>
     <Field label="Activity intensity" inputId="step-8-activityIntensity">
-      <Select id="step-8-activityIntensity" label="Activity intensity" bind:value={d.activityIntensity}>
+      <Select
+        id="step-8-activityIntensity"
+        label="Activity intensity"
+        bind:value={d.activityIntensity}
+      >
         <option value="">\u2014 Select \u2014</option>
         <option value="light">Light (walking, yoga)</option>
         <option value="moderate">Moderate (brisk walking, cycling)</option>

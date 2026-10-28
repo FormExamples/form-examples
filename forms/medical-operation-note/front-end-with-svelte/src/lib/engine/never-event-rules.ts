@@ -17,7 +17,7 @@ const KNOWN_TOKENS = new Set([
   'wrong-side',
   'wrong-patient',
   'wrong-procedure',
-  'wrong-implant',
+  'wrong-implant'
 ]);
 
 export function applyNeverEventRules(data: OperationNote): {
@@ -40,7 +40,7 @@ export function applyNeverEventRules(data: OperationNote): {
       instrument: 'never-event',
       grade: 'critical',
       category: 'never-event',
-      description: `Never-event suspicion: ${t}`,
+      description: `Never-event suspicion: ${t}`
     });
   }
 
@@ -51,7 +51,7 @@ export function applyNeverEventRules(data: OperationNote): {
       instrument: 'never-event',
       grade: 'critical',
       category: 'never-event',
-      description: 'Retained foreign body declared',
+      description: 'Retained foreign body declared'
     });
   }
 
@@ -61,18 +61,18 @@ export function applyNeverEventRules(data: OperationNote): {
       instrument: 'never-event',
       grade: 'critical',
       category: 'arrest',
-      description: 'Intra-operative cardiac or respiratory arrest',
+      description: 'Intra-operative cardiac or respiratory arrest'
     });
   }
 
-  const fired = tokens.length > 0 || retainedForeignBody ||
-    data.safetyCountsEbl.intraOperativeArrest === 'yes';
+  const fired =
+    tokens.length > 0 || retainedForeignBody || data.safetyCountsEbl.intraOperativeArrest === 'yes';
 
   return {
     fired,
     risk: fired ? 'critical' : 'routine',
     firedRules,
     tokens,
-    retainedForeignBody,
+    retainedForeignBody
   };
 }

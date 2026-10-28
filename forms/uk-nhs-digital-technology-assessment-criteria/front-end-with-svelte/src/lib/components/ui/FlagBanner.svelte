@@ -8,7 +8,7 @@
       ? 'bg-error/10 border-error text-error-content'
       : outcome === 'conditional' || outcome === 'incomplete'
         ? 'bg-warning/10 border-warning text-warning-content'
-        : 'bg-success/10 border-success text-success-content',
+        : 'bg-success/10 border-success text-success-content'
   );
 </script>
 

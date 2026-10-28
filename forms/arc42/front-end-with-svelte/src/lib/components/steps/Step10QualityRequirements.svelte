@@ -8,7 +8,10 @@
 
   <label class="block mb-4">
     <span class="text-sm text-base-content/80">Quality tree summary</span>
-    <textarea rows="4" class="w-full border rounded px-2 py-1" bind:value={store.data.qualityTreeSummary}></textarea>
+    <textarea
+      rows="4"
+      class="w-full border rounded px-2 py-1"
+      bind:value={store.data.qualityTreeSummary}></textarea>
   </label>
 
   <RepeatList
@@ -21,16 +24,42 @@
       stimulus: '',
       artifact: '',
       response: '',
-      measure: '',
-    })}>
+      measure: ''
+    })}
+  >
     {#snippet children(qs, _i)}
       <div class="grid grid-cols-2 gap-2 mb-1">
-        <input type="text" placeholder="Source" class="border rounded px-2 py-1" bind:value={qs.source} />
-        <input type="text" placeholder="Stimulus" class="border rounded px-2 py-1" bind:value={qs.stimulus} />
-        <input type="text" placeholder="Artifact" class="border rounded px-2 py-1" bind:value={qs.artifact} />
-        <input type="text" placeholder="Response" class="border rounded px-2 py-1" bind:value={qs.response} />
+        <input
+          type="text"
+          placeholder="Source"
+          class="border rounded px-2 py-1"
+          bind:value={qs.source}
+        />
+        <input
+          type="text"
+          placeholder="Stimulus"
+          class="border rounded px-2 py-1"
+          bind:value={qs.stimulus}
+        />
+        <input
+          type="text"
+          placeholder="Artifact"
+          class="border rounded px-2 py-1"
+          bind:value={qs.artifact}
+        />
+        <input
+          type="text"
+          placeholder="Response"
+          class="border rounded px-2 py-1"
+          bind:value={qs.response}
+        />
       </div>
-      <input type="text" placeholder="Measure" class="w-full border rounded px-2 py-1" bind:value={qs.measure} />
+      <input
+        type="text"
+        placeholder="Measure"
+        class="w-full border rounded px-2 py-1"
+        bind:value={qs.measure}
+      />
     {/snippet}
   </RepeatList>
 </section>

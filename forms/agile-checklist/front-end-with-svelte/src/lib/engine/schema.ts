@@ -13,17 +13,10 @@ const roleSchema = z.enum([
   'agile-coach',
   'executive-sponsor',
   'other',
-  '',
+  ''
 ]);
 
-const periodSchema = z.enum([
-  'sprint',
-  'quarter',
-  'half-year',
-  'annual',
-  'ad-hoc',
-  '',
-]);
+const periodSchema = z.enum(['sprint', 'quarter', 'half-year', 'annual', 'ad-hoc', '']);
 
 export const respondentSchema = z.object({
   fullName: z.string().default(''),
@@ -33,7 +26,7 @@ export const respondentSchema = z.object({
   organisationName: z.string().default(''),
   yearsInAgile: z.number().int().min(0).max(50).nullable().default(null),
   assessmentDate: z.string().default(''),
-  assessmentPeriod: periodSchema.default(''),
+  assessmentPeriod: periodSchema.default('')
 });
 
 export const actionPlanSchema = z.object({
@@ -42,7 +35,7 @@ export const actionPlanSchema = z.object({
   topAction3: z.string().default(''),
   coachNotes: z.string().default(''),
   signedAt: z.string().default(''),
-  overallNotes: z.string().default(''),
+  overallNotes: z.string().default('')
 });
 
 /**
@@ -62,13 +55,13 @@ const answersSchema = z.preprocess(
     }
     return out;
   },
-  z.record(z.string(), answerSchema),
+  z.record(z.string(), answerSchema)
 );
 
 export const agileChecklistSchema = z.object({
   respondent: respondentSchema,
   answers: answersSchema,
-  actionPlan: actionPlanSchema,
+  actionPlan: actionPlanSchema
 });
 
 export type AgileChecklistInput = z.input<typeof agileChecklistSchema>;

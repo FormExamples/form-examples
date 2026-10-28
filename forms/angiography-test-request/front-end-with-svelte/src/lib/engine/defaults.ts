@@ -7,54 +7,54 @@ import type { RequestData } from './types';
  * state is rehydrated from localStorage.
  */
 export function createDefaultRequest(): RequestData {
-	return {
-		clinician: {
-			clinicianName: '',
-			clinicianRole: '',
-			registrationBody: '',
-			registrationNumber: '',
-			requesterContact: '',
-			supervisingConsultant: '',
-			siteName: '',
-			referralDate: ''
-		},
-		patient: {
-			firstName: '',
-			lastName: '',
-			dateOfBirth: '',
-			nhsNumber: '',
-			bodyMassIndex: null,
-			interpreterRequired: false
-		},
-		request: {
-			angiographyType: '',
-			bodyRegion: '',
-			primaryIndication: '',
-			clinicalQuestion: '',
-			relevantHistory: ''
-		},
-		contrast: {
-			contrastRequired: '',
-			egfr: null,
-			contrastAllergy: false,
-			diabetes: false,
-			metformin: false
-		},
-		bleeding: {
-			takingAnticoagulant: false,
-			anticoagulantAgent: '',
-			takingAntiplatelet: false,
-			bleedingDisorder: false
-		},
-		pregnancy: {
-			pregnancyStatus: '',
-			irMeRJustification: ''
-		},
-		triage: {
-			urgency: '',
-			requestedByDate: '',
-			setting: '',
-			notes: ''
-		}
-	};
+  return {
+    clinician: {
+      clinicianName: '',
+      clinicianRole: '',
+      registrationBody: '',
+      registrationNumber: '',
+      requesterContact: '',
+      supervisingConsultant: '',
+      siteName: '',
+      referralDate: ''
+    },
+    patient: {
+      firstName: '',
+      lastName: '',
+      dateOfBirth: '',
+      nhsNumber: '',
+      bodyMassIndex: null,
+      interpreterRequired: false
+    },
+    request: {
+      angiographyType: '',
+      bodyRegion: '',
+      primaryIndication: '',
+      clinicalQuestion: '',
+      relevantHistory: ''
+    },
+    contrast: {
+      contrastRequired: '',
+      egfr: null,
+      contrastAllergy: false,
+      diabetes: false,
+      metformin: false
+    },
+    bleeding: {
+      takingAnticoagulant: false,
+      anticoagulantAgent: '',
+      takingAntiplatelet: false,
+      bleedingDisorder: false
+    },
+    pregnancy: {
+      pregnancyStatus: '',
+      irMeRJustification: ''
+    },
+    triage: {
+      urgency: '',
+      requestedByDate: '',
+      setting: '',
+      notes: ''
+    }
+  };
 }

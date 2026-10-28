@@ -4,7 +4,7 @@ import {
   isSignInComplete,
   isTimeOutComplete,
   isSignOutComplete,
-  isAnythingAnswered,
+  isAnythingAnswered
 } from './completion.js';
 import { createEmptyChecklist } from './factory.js';
 import type { WhoSurgicalSafetyChecklist } from './types.js';

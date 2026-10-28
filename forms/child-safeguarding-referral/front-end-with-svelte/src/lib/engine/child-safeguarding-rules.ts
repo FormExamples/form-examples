@@ -19,7 +19,7 @@ import type { AssessmentData, FieldSlot, SafeguardingRule } from './types';
 
 const nonEmpty = (s: string): boolean => typeof s === 'string' && s.trim() !== '';
 const hasNumber = (n: number | null | undefined): boolean =>
-	typeof n === 'number' && !Number.isNaN(n);
+  typeof n === 'number' && !Number.isNaN(n);
 
 /**
  * A consent / information-sharing basis is documented when consent was given,
@@ -28,11 +28,11 @@ const hasNumber = (n: number | null | undefined): boolean =>
  * Shared by the mandatory rule, the grader, and the flags module.
  */
 export function consentBasisOk(r: AssessmentData): boolean {
-	if (r.consent.consentStatus === 'given') return true;
-	return (
-		r.consent.sharingBasisWithoutConsent === 'risk-of-serious-harm' ||
-		r.consent.sharingBasisWithoutConsent === 'seeking-consent-increases-risk'
-	);
+  if (r.consent.consentStatus === 'given') return true;
+  return (
+    r.consent.sharingBasisWithoutConsent === 'risk-of-serious-harm' ||
+    r.consent.sharingBasisWithoutConsent === 'seeking-consent-increases-risk'
+  );
 }
 
 /**
@@ -40,81 +40,81 @@ export function consentBasisOk(r: AssessmentData): boolean {
  * email). One of the two is mandatory.
  */
 export function hasReferrerContact(r: AssessmentData): boolean {
-	return nonEmpty(r.referrer.referrerPhone) || nonEmpty(r.referrer.referrerEmail);
+  return nonEmpty(r.referrer.referrerPhone) || nonEmpty(r.referrer.referrerEmail);
 }
 
 /** True when the child is identifiable in time: a date of birth OR an age. */
 export function hasChildDobOrAge(r: AssessmentData): boolean {
-	return nonEmpty(r.child.childDateOfBirth) || hasNumber(r.child.childAge);
+  return nonEmpty(r.child.childDateOfBirth) || hasNumber(r.child.childAge);
 }
 
 /** True when the additional-categories free text lists sexual abuse. */
 export function additionalSexual(r: AssessmentData): boolean {
-	return /(^|[,;\s])sexual($|[,;\s])/i.test(r.category.additionalCategories || '');
+  return /(^|[,;\s])sexual($|[,;\s])/i.test(r.category.additionalCategories || '');
 }
 
 export const mandatoryRules: SafeguardingRule[] = [
-	// ─── R1: REFERRER IDENTIFIED WITH A CONTACT ───────────────────
-	{
-		id: 'R-REFERRER-01',
-		rule: 'referrer',
-		category: 'referrer-details',
-		description:
-			'The referrer is identified by name and at least one contact route (phone or email) is recorded',
-		evaluate: (r) => nonEmpty(r.referrer.referrerName) && hasReferrerContact(r)
-	},
+  // ─── R1: REFERRER IDENTIFIED WITH A CONTACT ───────────────────
+  {
+    id: 'R-REFERRER-01',
+    rule: 'referrer',
+    category: 'referrer-details',
+    description:
+      'The referrer is identified by name and at least one contact route (phone or email) is recorded',
+    evaluate: (r) => nonEmpty(r.referrer.referrerName) && hasReferrerContact(r)
+  },
 
-	// ─── R2: CHILD IDENTIFIED ─────────────────────────────────────
-	{
-		id: 'R-CHILD-01',
-		rule: 'child',
-		category: 'child-details',
-		description: 'The child is identified by name and a date of birth or age is recorded',
-		evaluate: (r) => nonEmpty(r.child.childName) && hasChildDobOrAge(r)
-	},
+  // ─── R2: CHILD IDENTIFIED ─────────────────────────────────────
+  {
+    id: 'R-CHILD-01',
+    rule: 'child',
+    category: 'child-details',
+    description: 'The child is identified by name and a date of birth or age is recorded',
+    evaluate: (r) => nonEmpty(r.child.childName) && hasChildDobOrAge(r)
+  },
 
-	// ─── R3: CONCERN DESCRIBED ────────────────────────────────────
-	{
-		id: 'R-CONCERN-01',
-		rule: 'concern',
-		category: 'the-concern',
-		description: 'The concern or allegation is described',
-		evaluate: (r) => nonEmpty(r.concern.concernDescription)
-	},
+  // ─── R3: CONCERN DESCRIBED ────────────────────────────────────
+  {
+    id: 'R-CONCERN-01',
+    rule: 'concern',
+    category: 'the-concern',
+    description: 'The concern or allegation is described',
+    evaluate: (r) => nonEmpty(r.concern.concernDescription)
+  },
 
-	// ─── R4: PRIMARY CATEGORY OF ABUSE ────────────────────────────
-	{
-		id: 'R-CATEGORY-01',
-		rule: 'category',
-		category: 'category-of-abuse',
-		description:
-			'A primary category of abuse is selected (physical, emotional, sexual, or neglect)',
-		evaluate: (r) =>
-			r.category.primaryCategory === 'physical' ||
-			r.category.primaryCategory === 'emotional' ||
-			r.category.primaryCategory === 'sexual' ||
-			r.category.primaryCategory === 'neglect'
-	},
+  // ─── R4: PRIMARY CATEGORY OF ABUSE ────────────────────────────
+  {
+    id: 'R-CATEGORY-01',
+    rule: 'category',
+    category: 'category-of-abuse',
+    description:
+      'A primary category of abuse is selected (physical, emotional, sexual, or neglect)',
+    evaluate: (r) =>
+      r.category.primaryCategory === 'physical' ||
+      r.category.primaryCategory === 'emotional' ||
+      r.category.primaryCategory === 'sexual' ||
+      r.category.primaryCategory === 'neglect'
+  },
 
-	// ─── R5: IMMEDIATE-DANGER QUESTION ANSWERED ───────────────────
-	{
-		id: 'R-IMMEDIATE-DANGER-01',
-		rule: 'immediateDanger',
-		category: 'immediate-risk',
-		description:
-			'The immediate-danger question is answered so the referral can be routed for urgency',
-		evaluate: (r) => r.risk.immediateDanger === 'yes' || r.risk.immediateDanger === 'no'
-	},
+  // ─── R5: IMMEDIATE-DANGER QUESTION ANSWERED ───────────────────
+  {
+    id: 'R-IMMEDIATE-DANGER-01',
+    rule: 'immediateDanger',
+    category: 'immediate-risk',
+    description:
+      'The immediate-danger question is answered so the referral can be routed for urgency',
+    evaluate: (r) => r.risk.immediateDanger === 'yes' || r.risk.immediateDanger === 'no'
+  },
 
-	// ─── R6: CONSENT / INFORMATION-SHARING BASIS ──────────────────
-	{
-		id: 'R-CONSENT-BASIS-01',
-		rule: 'consentBasis',
-		category: 'consent-and-sharing',
-		description:
-			'A consent / information-sharing basis is documented: consent given, or a lawful basis for sharing without consent (Working Together 2023)',
-		evaluate: (r) => consentBasisOk(r)
-	}
+  // ─── R6: CONSENT / INFORMATION-SHARING BASIS ──────────────────
+  {
+    id: 'R-CONSENT-BASIS-01',
+    rule: 'consentBasis',
+    category: 'consent-and-sharing',
+    description:
+      'A consent / information-sharing basis is documented: consent given, or a lawful basis for sharing without consent (Working Together 2023)',
+    evaluate: (r) => consentBasisOk(r)
+  }
 ];
 
 /**
@@ -124,35 +124,35 @@ export const mandatoryRules: SafeguardingRule[] = [
  * enters the denominator when the child / family are recorded as unaware.
  */
 export const completenessSlots: FieldSlot[] = [
-	// Mandatory
-	{ key: 'referrerName', present: (r) => nonEmpty(r.referrer.referrerName) },
-	{ key: 'referrerContact', present: (r) => hasReferrerContact(r) },
-	{ key: 'childName', present: (r) => nonEmpty(r.child.childName) },
-	{ key: 'childDobOrAge', present: (r) => hasChildDobOrAge(r) },
-	{ key: 'concernDescription', present: (r) => nonEmpty(r.concern.concernDescription) },
-	{ key: 'primaryCategory', present: (r) => nonEmpty(r.category.primaryCategory) },
-	{ key: 'immediateDanger', present: (r) => nonEmpty(r.risk.immediateDanger) },
-	{ key: 'consentBasis', present: (r) => consentBasisOk(r) },
-	// Recommended
-	{ key: 'referrerRole', present: (r) => nonEmpty(r.referrer.referrerRole) },
-	{ key: 'referrerOrganisation', present: (r) => nonEmpty(r.referrer.referrerOrganisation) },
-	{ key: 'relationshipToChild', present: (r) => nonEmpty(r.referrer.relationshipToChild) },
-	{ key: 'childSex', present: (r) => nonEmpty(r.child.childSex) },
-	{ key: 'childAddress', present: (r) => nonEmpty(r.child.childAddress) },
-	{ key: 'carers', present: (r) => nonEmpty(r.family.carers) },
-	{ key: 'householdMembers', present: (r) => nonEmpty(r.family.householdMembers) },
-	{ key: 'professionalsInvolved', present: (r) => nonEmpty(r.family.professionalsInvolved) },
-	{ key: 'concernOnset', present: (r) => nonEmpty(r.concern.concernOnset) },
-	{ key: 'presentingEvidence', present: (r) => nonEmpty(r.category.presentingEvidence) },
-	{ key: 'childWhereabouts', present: (r) => nonEmpty(r.risk.childWhereabouts) },
-	{ key: 'whoWithChild', present: (r) => nonEmpty(r.risk.whoWithChild) },
-	{ key: 'familyAware', present: (r) => nonEmpty(r.consent.familyAware) },
-	{ key: 'requestedAction', present: (r) => nonEmpty(r.action.requestedAction) },
-	{ key: 'referrerDeclaration', present: (r) => nonEmpty(r.action.referrerDeclaration) },
-	// Conditional recommended slot
-	{
-		key: 'unsafeToInformReason',
-		present: (r) => nonEmpty(r.consent.unsafeToInformReason),
-		applies: (r) => r.consent.familyAware === 'no'
-	}
+  // Mandatory
+  { key: 'referrerName', present: (r) => nonEmpty(r.referrer.referrerName) },
+  { key: 'referrerContact', present: (r) => hasReferrerContact(r) },
+  { key: 'childName', present: (r) => nonEmpty(r.child.childName) },
+  { key: 'childDobOrAge', present: (r) => hasChildDobOrAge(r) },
+  { key: 'concernDescription', present: (r) => nonEmpty(r.concern.concernDescription) },
+  { key: 'primaryCategory', present: (r) => nonEmpty(r.category.primaryCategory) },
+  { key: 'immediateDanger', present: (r) => nonEmpty(r.risk.immediateDanger) },
+  { key: 'consentBasis', present: (r) => consentBasisOk(r) },
+  // Recommended
+  { key: 'referrerRole', present: (r) => nonEmpty(r.referrer.referrerRole) },
+  { key: 'referrerOrganisation', present: (r) => nonEmpty(r.referrer.referrerOrganisation) },
+  { key: 'relationshipToChild', present: (r) => nonEmpty(r.referrer.relationshipToChild) },
+  { key: 'childSex', present: (r) => nonEmpty(r.child.childSex) },
+  { key: 'childAddress', present: (r) => nonEmpty(r.child.childAddress) },
+  { key: 'carers', present: (r) => nonEmpty(r.family.carers) },
+  { key: 'householdMembers', present: (r) => nonEmpty(r.family.householdMembers) },
+  { key: 'professionalsInvolved', present: (r) => nonEmpty(r.family.professionalsInvolved) },
+  { key: 'concernOnset', present: (r) => nonEmpty(r.concern.concernOnset) },
+  { key: 'presentingEvidence', present: (r) => nonEmpty(r.category.presentingEvidence) },
+  { key: 'childWhereabouts', present: (r) => nonEmpty(r.risk.childWhereabouts) },
+  { key: 'whoWithChild', present: (r) => nonEmpty(r.risk.whoWithChild) },
+  { key: 'familyAware', present: (r) => nonEmpty(r.consent.familyAware) },
+  { key: 'requestedAction', present: (r) => nonEmpty(r.action.requestedAction) },
+  { key: 'referrerDeclaration', present: (r) => nonEmpty(r.action.referrerDeclaration) },
+  // Conditional recommended slot
+  {
+    key: 'unsafeToInformReason',
+    present: (r) => nonEmpty(r.consent.unsafeToInformReason),
+    applies: (r) => r.consent.familyAware === 'no'
+  }
 ];

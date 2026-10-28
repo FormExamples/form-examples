@@ -19,7 +19,10 @@
 </script>
 
 <Fieldset legend="Step 9 — Section 8 — O.T. / ICU (5 checkpoints)">
-  <p class="hint">Operating theatre and ICU: anaesthetist, support staff, equipment, duty roster/infection control, and drug/linen sterilisation.</p>
+  <p class="hint">
+    Operating theatre and ICU: anaesthetist, support staff, equipment, duty roster/infection
+    control, and drug/linen sterilisation.
+  </p>
 
   {#each groups as group, gi (gi)}
     {#if group.subsection}

@@ -1,10 +1,10 @@
 import type {
-	PetScanRequest,
-	GradingResult,
-	Recommendation,
-	AppropriatenessBand,
-	PrepSafetyBand,
-	FiredRule
+  PetScanRequest,
+  GradingResult,
+  Recommendation,
+  AppropriatenessBand,
+  PrepSafetyBand,
+  FiredRule
 } from './types';
 import { scoreAppropriateness } from './appropriateness-rules';
 import { scorePrepSafety, scoreRadiationDose } from './safety-rules';
@@ -14,10 +14,10 @@ import { detectFlags } from './flagged-issues';
 
 /** Overall recommendation display labels. */
 export const RECOMMENDATION_LABELS: Record<string, string> = {
-	accept: 'Accept and book',
-	'query-referrer': 'Query the referrer',
-	redirect: 'Redirect to a more suitable scan',
-	reject: 'Reject'
+  accept: 'Accept and book',
+  'query-referrer': 'Query the referrer',
+  redirect: 'Redirect to a more suitable scan',
+  reject: 'Reject'
 };
 
 /**
@@ -25,15 +25,15 @@ export const RECOMMENDATION_LABELS: Record<string, string> = {
  * axes. Least-alarming wins only when nothing escalates.
  */
 export function deriveRecommendation(
-	appropriatenessBand: AppropriatenessBand,
-	prepSafetyBand: PrepSafetyBand,
-	completenessPercent: number
+  appropriatenessBand: AppropriatenessBand,
+  prepSafetyBand: PrepSafetyBand,
+  completenessPercent: number
 ): Recommendation {
-	if (prepSafetyBand === 'contraindicated') return 'reject';
-	if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
-	if (prepSafetyBand === 'caution') return 'query-referrer';
-	if (completenessPercent < 50) return 'query-referrer';
-	return 'accept';
+  if (prepSafetyBand === 'contraindicated') return 'reject';
+  if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
+  if (prepSafetyBand === 'caution') return 'query-referrer';
+  if (completenessPercent < 50) return 'query-referrer';
+  return 'accept';
 }
 
 /**
@@ -53,41 +53,41 @@ export function deriveRecommendation(
  * flag regardless of appropriateness. No side effects, no network calls, no I/O.
  */
 export function calculateGrade(data: PetScanRequest): GradingResult {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	// Axis A — appropriateness.
-	const appr = scoreAppropriateness(data.request.primaryIndication, data.request.scanType);
-	firedRules.push(...appr.firedRules);
+  // Axis A — appropriateness.
+  const appr = scoreAppropriateness(data.request.primaryIndication, data.request.scanType);
+  firedRules.push(...appr.firedRules);
 
-	// Axis B — preparation safety & radiation dose.
-	const prep = scorePrepSafety(data);
-	firedRules.push(...prep.firedRules);
-	const dose = scoreRadiationDose(data.request.scanType);
-	firedRules.push(...dose.firedRules);
+  // Axis B — preparation safety & radiation dose.
+  const prep = scorePrepSafety(data);
+  firedRules.push(...prep.firedRules);
+  const dose = scoreRadiationDose(data.request.scanType);
+  firedRules.push(...dose.firedRules);
 
-	// Axis C — completeness.
-	const completeness = scoreCompleteness(data);
-	firedRules.push(...completeness.firedRules);
+  // Axis C — completeness.
+  const completeness = scoreCompleteness(data);
+  firedRules.push(...completeness.firedRules);
 
-	// Axis D — triage.
-	const triage = scoreTriage(data);
-	firedRules.push(...triage.firedRules);
+  // Axis D — triage.
+  const triage = scoreTriage(data);
+  firedRules.push(...triage.firedRules);
 
-	const recommendation = deriveRecommendation(appr.band, prep.band, completeness.percent);
+  const recommendation = deriveRecommendation(appr.band, prep.band, completeness.percent);
 
-	const flags = detectFlags(data, { radiationDoseBand: dose.band });
+  const flags = detectFlags(data, { radiationDoseBand: dose.band });
 
-	return {
-		appropriatenessScore: appr.score,
-		appropriatenessBand: appr.band,
-		prepSafetyBand: prep.band,
-		radiationDoseBand: dose.band,
-		completenessPercent: completeness.percent,
-		triageTier: triage.tier,
-		targetTimeframe: triage.targetTimeframe,
-		recommendation,
-		firedRules,
-		flags,
-		gradedAt: new Date().toISOString()
-	};
+  return {
+    appropriatenessScore: appr.score,
+    appropriatenessBand: appr.band,
+    prepSafetyBand: prep.band,
+    radiationDoseBand: dose.band,
+    completenessPercent: completeness.percent,
+    triageTier: triage.tier,
+    targetTimeframe: triage.targetTimeframe,
+    recommendation,
+    firedRules,
+    flags,
+    gradedAt: new Date().toISOString()
+  };
 }

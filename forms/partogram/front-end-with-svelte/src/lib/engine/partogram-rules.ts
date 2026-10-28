@@ -49,7 +49,7 @@ export const MS_PER_HOUR = 1000 * 60 * 60;
 
 /** Coerce a value to a finite number, or null when absent / non-numeric. */
 export function num(v: unknown): number | null {
-	return typeof v === 'number' && !Number.isNaN(v) && Number.isFinite(v) ? v : null;
+  return typeof v === 'number' && !Number.isNaN(v) && Number.isFinite(v) ? v : null;
 }
 
 /**
@@ -57,17 +57,17 @@ export function num(v: unknown): number | null {
  * null when either timestamp is missing or unparseable.
  */
 export function elapsedHours(startAt: string, observedAt: string): number | null {
-	if (!startAt || !observedAt) return null;
-	const start = Date.parse(startAt);
-	const obs = Date.parse(observedAt);
-	if (Number.isNaN(start) || Number.isNaN(obs)) return null;
-	const hours = (obs - start) / MS_PER_HOUR;
-	return hours < 0 ? 0 : hours;
+  if (!startAt || !observedAt) return null;
+  const start = Date.parse(startAt);
+  const obs = Date.parse(observedAt);
+  if (Number.isNaN(start) || Number.isNaN(obs)) return null;
+  const hours = (obs - start) / MS_PER_HOUR;
+  return hours < 0 ? 0 : hours;
 }
 
 /** Expected dilatation (cm) on the alert line at elapsed time t hours. */
 export function alertLineExpectedCm(t: number): number {
-	return ALERT_LINE_START_CM + t;
+  return ALERT_LINE_START_CM + t;
 }
 
 /**
@@ -75,14 +75,14 @@ export function alertLineExpectedCm(t: number): number {
  * (four hours to the right of the alert line): 4 + (t - 4) = t.
  */
 export function actionLineExpectedCm(t: number): number {
-	return t;
+  return t;
 }
 
 /** Classify labour progress for a plotted point D at elapsed time t (spec §4). */
 export function classifyProgress(dilatationCm: number, t: number): ProgressClassification {
-	const alert = alertLineExpectedCm(t);
-	const action = actionLineExpectedCm(t);
-	if (dilatationCm >= alert) return 'normal';
-	if (dilatationCm > action) return 'alertLineCrossed';
-	return 'actionLineCrossed';
+  const alert = alertLineExpectedCm(t);
+  const action = actionLineExpectedCm(t);
+  if (dilatationCm >= alert) return 'normal';
+  if (dilatationCm > action) return 'alertLineCrossed';
+  return 'actionLineCrossed';
 }

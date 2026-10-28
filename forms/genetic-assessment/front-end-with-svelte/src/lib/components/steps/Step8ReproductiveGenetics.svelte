@@ -1,30 +1,68 @@
 <script lang="ts">
-	import { assessment } from '#lib/stores/assessment.svelte.js';
-	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+  import { assessment } from '#lib/stores/assessment.svelte.js';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import RadioGroup from '#lib/components/ui/RadioGroup.svelte';
+  import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
 
-	const rg = assessment.data.reproductiveGenetics;
-	const yesNo = [
-		{ value: 'yes', label: 'Yes' },
-		{ value: 'no', label: 'No' }
-	];
+  const rg = assessment.data.reproductiveGenetics;
+  const yesNo = [
+    { value: 'yes', label: 'Yes' },
+    { value: 'no', label: 'No' }
+  ];
 </script>
 
-<Fieldset title="Reproductive Genetics" description="Reproductive history relevant to genetic assessment">
-	<RadioGroup label="Have you experienced recurrent miscarriages (3 or more)?" name="recurrentMiscarriages" options={yesNo} bind:value={rg.recurrentMiscarriages} />
+<Fieldset
+  title="Reproductive Genetics"
+  description="Reproductive history relevant to genetic assessment"
+>
+  <RadioGroup
+    label="Have you experienced recurrent miscarriages (3 or more)?"
+    name="recurrentMiscarriages"
+    options={yesNo}
+    bind:value={rg.recurrentMiscarriages}
+  />
 
-	<RadioGroup label="Have you been diagnosed with infertility?" name="infertility" options={yesNo} bind:value={rg.infertility} />
+  <RadioGroup
+    label="Have you been diagnosed with infertility?"
+    name="infertility"
+    options={yesNo}
+    bind:value={rg.infertility}
+  />
 
-	<RadioGroup label="Have you had a previous child affected by a genetic condition?" name="previousAffectedChild" options={yesNo} bind:value={rg.previousAffectedChild} />
-	{#if rg.previousAffectedChild === 'yes'}
-		<TextAreaInput label="Please provide details" name="previousAffectedChildDetails" bind:value={rg.previousAffectedChildDetails} placeholder="Describe the condition affecting the child..." />
-	{/if}
+  <RadioGroup
+    label="Have you had a previous child affected by a genetic condition?"
+    name="previousAffectedChild"
+    options={yesNo}
+    bind:value={rg.previousAffectedChild}
+  />
+  {#if rg.previousAffectedChild === 'yes'}
+    <TextAreaInput
+      label="Please provide details"
+      name="previousAffectedChildDetails"
+      bind:value={rg.previousAffectedChildDetails}
+      placeholder="Describe the condition affecting the child..."
+    />
+  {/if}
 
-	<RadioGroup label="Are you and your partner related by blood (consanguineous)?" name="reproConsanguinity" options={yesNo} bind:value={rg.consanguinity} />
+  <RadioGroup
+    label="Are you and your partner related by blood (consanguineous)?"
+    name="reproConsanguinity"
+    options={yesNo}
+    bind:value={rg.consanguinity}
+  />
 
-	<RadioGroup label="Are you a known carrier of a genetic condition?" name="carrierStatus" options={yesNo} bind:value={rg.carrierStatus} />
-	{#if rg.carrierStatus === 'yes'}
-		<TextAreaInput label="Please provide details" name="carrierStatusDetails" bind:value={rg.carrierStatusDetails} placeholder="Which condition(s) are you a carrier for?" />
-	{/if}
+  <RadioGroup
+    label="Are you a known carrier of a genetic condition?"
+    name="carrierStatus"
+    options={yesNo}
+    bind:value={rg.carrierStatus}
+  />
+  {#if rg.carrierStatus === 'yes'}
+    <TextAreaInput
+      label="Please provide details"
+      name="carrierStatusDetails"
+      bind:value={rg.carrierStatusDetails}
+      placeholder="Which condition(s) are you a carrier for?"
+    />
+  {/if}
 </Fieldset>

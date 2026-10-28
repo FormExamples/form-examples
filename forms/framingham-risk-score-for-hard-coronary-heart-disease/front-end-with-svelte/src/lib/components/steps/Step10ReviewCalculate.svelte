@@ -2,14 +2,22 @@
   import { assessment } from '#lib/stores/assessment.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { DateInput, RadioGroup, TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
+  import {
+    DateInput,
+    RadioGroup,
+    TextAreaInput,
+    TextInput
+  } from '@lilydesignsystem/svelte-headless';
 
   const r = assessment.data.reviewCalculate;
   const data = assessment.data;
 </script>
 
 <Fieldset legend="Step 10 \u2014 Review and calculate">
-  <p class="hint">Review the assessment and provide clinician details before calculating the Framingham Risk Score.</p>
+  <p class="hint">
+    Review the assessment and provide clinician details before calculating the Framingham Risk
+    Score.
+  </p>
 
   <div class="field-grid">
     <Field label="Clinician name" inputId="step-10-clinicianName">

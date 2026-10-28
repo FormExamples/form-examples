@@ -16,60 +16,60 @@ import type { Eq5dResponse, Eq5dResult } from './types';
 type Eq5dDimensionKey = Exclude<keyof Eq5dResponse, 'vasScore'>;
 
 export const EQ5D_DIMENSIONS: Eq5dDimensionKey[] = [
-	'mobility',
-	'selfCare',
-	'usualActivities',
-	'painDiscomfort',
-	'anxietyDepression'
+  'mobility',
+  'selfCare',
+  'usualActivities',
+  'painDiscomfort',
+  'anxietyDepression'
 ];
 
 const LEVEL_2_COEFFICIENTS: Record<Eq5dDimensionKey, number> = {
-	mobility: 0.069,
-	selfCare: 0.104,
-	usualActivities: 0.036,
-	painDiscomfort: 0.123,
-	anxietyDepression: 0.071
+  mobility: 0.069,
+  selfCare: 0.104,
+  usualActivities: 0.036,
+  painDiscomfort: 0.123,
+  anxietyDepression: 0.071
 };
 
 const LEVEL_3_COEFFICIENTS: Record<Eq5dDimensionKey, number> = {
-	mobility: 0.314,
-	selfCare: 0.214,
-	usualActivities: 0.094,
-	painDiscomfort: 0.386,
-	anxietyDepression: 0.236
+  mobility: 0.314,
+  selfCare: 0.214,
+  usualActivities: 0.094,
+  painDiscomfort: 0.386,
+  anxietyDepression: 0.236
 };
 
 const CONSTANT_TERM = 0.081;
 const N3_TERM = 0.269;
 
 export function computeEq5d(data: Eq5dResponse): Eq5dResult {
-	const levels = EQ5D_DIMENSIONS.map((d) => data[d]);
-	const allAnswered = levels.every((v) => v === 1 || v === 2 || v === 3);
+  const levels = EQ5D_DIMENSIONS.map((d) => data[d]);
+  const allAnswered = levels.every((v) => v === 1 || v === 2 || v === 3);
 
-	const healthStateDescriptor = allAnswered ? levels.join('') : '';
+  const healthStateDescriptor = allAnswered ? levels.join('') : '';
 
-	let ukIndexValue: number | null = null;
-	if (allAnswered) {
-		if (healthStateDescriptor === '11111') {
-			ukIndexValue = 1.0;
-		} else {
-			let index = 1.0;
-			index -= CONSTANT_TERM;
-			let anyLevel3 = false;
-			for (const dim of EQ5D_DIMENSIONS) {
-				const level = data[dim];
-				if (level === 2) index -= LEVEL_2_COEFFICIENTS[dim];
-				if (level === 3) {
-					index -= LEVEL_3_COEFFICIENTS[dim];
-					anyLevel3 = true;
-				}
-			}
-			if (anyLevel3) index -= N3_TERM;
-			ukIndexValue = index;
-		}
-	}
+  let ukIndexValue: number | null = null;
+  if (allAnswered) {
+    if (healthStateDescriptor === '11111') {
+      ukIndexValue = 1.0;
+    } else {
+      let index = 1.0;
+      index -= CONSTANT_TERM;
+      let anyLevel3 = false;
+      for (const dim of EQ5D_DIMENSIONS) {
+        const level = data[dim];
+        if (level === 2) index -= LEVEL_2_COEFFICIENTS[dim];
+        if (level === 3) {
+          index -= LEVEL_3_COEFFICIENTS[dim];
+          anyLevel3 = true;
+        }
+      }
+      if (anyLevel3) index -= N3_TERM;
+      ukIndexValue = index;
+    }
+  }
 
-	const vasScore = data.vasScore === null || data.vasScore === undefined ? null : data.vasScore;
+  const vasScore = data.vasScore === null || data.vasScore === undefined ? null : data.vasScore;
 
-	return { healthStateDescriptor, ukIndexValue, vasScore };
+  return { healthStateDescriptor, ukIndexValue, vasScore };
 }

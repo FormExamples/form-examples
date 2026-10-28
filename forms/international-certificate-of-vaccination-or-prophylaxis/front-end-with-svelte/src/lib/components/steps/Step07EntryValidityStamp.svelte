@@ -4,7 +4,10 @@
   const e = $derived(certificateStore.data.entries[0]);
 </script>
 
-<Fieldset legend="Vaccination entry — validity & stamp" description="Yellow fever validity starts 10 days after vaccination and is lifetime per the 2016 IHR amendment.">
+<Fieldset
+  legend="Vaccination entry — validity & stamp"
+  description="Yellow fever validity starts 10 days after vaccination and is lifetime per the 2016 IHR amendment."
+>
   <div class="field">
     <label class="label" for="validityStart">Validity starts on</label>
     <input id="validityStart" type="date" class="date-input" bind:value={e.validityStartsOn} />
@@ -14,7 +17,9 @@
     <input id="validityEnd" type="date" class="date-input" bind:value={e.validityEndsOn} />
   </div>
   <div class="field">
-    <label class="label" for="lifetime">Validity is lifetime (yellow fever per 2016 IHR amendment)</label>
+    <label class="label" for="lifetime"
+      >Validity is lifetime (yellow fever per 2016 IHR amendment)</label
+    >
     <select id="lifetime" class="select" bind:value={e.validityIsLifetime}>
       <option value="">No</option><option value="yes">Yes</option>
     </select>

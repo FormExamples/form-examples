@@ -10,9 +10,7 @@ export function buildPdfDocDefinition(d: Arc42Documentation, result: MaturityRes
   const h3 = (text: string) => ({ text, style: 'h3', margin: [0, 8, 0, 4] });
   const para = (text: string) => ({ text: text || '—', margin: [0, 0, 0, 6] });
   const bullet = (items: string[]) =>
-    items.length === 0
-      ? para('—')
-      : { ul: items.map((i) => i || '—'), margin: [0, 0, 0, 6] };
+    items.length === 0 ? para('—') : { ul: items.map((i) => i || '—'), margin: [0, 0, 0, 6] };
 
   const table = (headers: string[], rows: string[][]): Content =>
     rows.length === 0
@@ -23,11 +21,11 @@ export function buildPdfDocDefinition(d: Arc42Documentation, result: MaturityRes
             widths: headers.map(() => '*'),
             body: [
               headers.map((h) => ({ text: h, bold: true, fillColor: '#e2e8f0' })),
-              ...rows.map((r) => r.map((c) => c || '—')),
-            ],
+              ...rows.map((r) => r.map((c) => c || '—'))
+            ]
           },
           layout: 'lightHorizontalLines',
-          margin: [0, 0, 0, 8],
+          margin: [0, 0, 0, 8]
         };
 
   const completenessLabel = (c: string) =>
@@ -45,7 +43,7 @@ export function buildPdfDocDefinition(d: Arc42Documentation, result: MaturityRes
     9: 'Architectural Decisions',
     10: 'Quality Requirements',
     11: 'Risks & Technical Debt',
-    12: 'Glossary',
+    12: 'Glossary'
   };
 
   const content: Content[] = [
@@ -56,16 +54,16 @@ export function buildPdfDocDefinition(d: Arc42Documentation, result: MaturityRes
         [
           { text: `Version: ${d.architecture.version || '—'}`, margin: [0, 0, 0, 2] },
           { text: `Owner: ${d.architecture.owner || '—'}`, margin: [0, 0, 0, 2] },
-          { text: `Status: ${d.architecture.status || '—'}`, margin: [0, 0, 0, 2] },
+          { text: `Status: ${d.architecture.status || '—'}`, margin: [0, 0, 0, 2] }
         ],
         [
           { text: `Author: ${d.authorName || '—'}`, margin: [0, 0, 0, 2] },
           { text: `Role: ${d.authorRole || '—'}`, margin: [0, 0, 0, 2] },
-          { text: `Date: ${d.documentDate || '—'}`, margin: [0, 0, 0, 2] },
-        ],
+          { text: `Date: ${d.documentDate || '—'}`, margin: [0, 0, 0, 2] }
+        ]
       ],
       columnGap: 20,
-      margin: [0, 0, 0, 12],
+      margin: [0, 0, 0, 12]
     },
     d.architecture.description ? para(d.architecture.description) : '',
 
@@ -75,24 +73,24 @@ export function buildPdfDocDefinition(d: Arc42Documentation, result: MaturityRes
     h3('Business Goals'),
     table(
       ['#', 'Name', 'Description'],
-      d.businessGoals.map((g) => [String(g.ordinal), g.name, g.description]),
+      d.businessGoals.map((g) => [String(g.ordinal), g.name, g.description])
     ),
     h3('Quality Goals'),
     table(
       ['#', 'Name', 'Priority', 'Scenario'],
-      d.qualityGoals.map((g) => [String(g.ordinal), g.name, g.priority, g.scenario]),
+      d.qualityGoals.map((g) => [String(g.ordinal), g.name, g.priority, g.scenario])
     ),
     h3('Stakeholders'),
     table(
       ['#', 'Name', 'Role', 'Concerns'],
-      d.stakeholders.map((s) => [String(s.ordinal), s.name, s.role, s.concerns]),
+      d.stakeholders.map((s) => [String(s.ordinal), s.name, s.role, s.concerns])
     ),
 
     // §2 Constraints
     h2('§2 Constraints'),
     table(
       ['#', 'Kind', 'Name', 'Description'],
-      d.constraintItems.map((c) => [String(c.ordinal), c.kind, c.name, c.description]),
+      d.constraintItems.map((c) => [String(c.ordinal), c.kind, c.name, c.description])
     ),
 
     // §3 Context & Scope
@@ -110,8 +108,8 @@ export function buildPdfDocDefinition(d: Arc42Documentation, result: MaturityRes
         p.name,
         p.interfaceDescription,
         p.protocol,
-        p.direction,
-      ]),
+        p.direction
+      ])
     ),
 
     // §4 Solution Strategy
@@ -120,7 +118,7 @@ export function buildPdfDocDefinition(d: Arc42Documentation, result: MaturityRes
     h3('Technology Decisions'),
     table(
       ['#', 'Category', 'Choice', 'Rationale'],
-      d.technologyDecisions.map((t) => [String(t.ordinal), t.category, t.choice, t.rationale]),
+      d.technologyDecisions.map((t) => [String(t.ordinal), t.category, t.choice, t.rationale])
     ),
     h3('Top-Level Decomposition'),
     para(d.topLevelDecompositionSummary),
@@ -137,8 +135,8 @@ export function buildPdfDocDefinition(d: Arc42Documentation, result: MaturityRes
         b.parentOrdinal !== null ? String(b.parentOrdinal) : '—',
         b.name,
         b.responsibility,
-        b.interfaces,
-      ]),
+        b.interfaces
+      ])
     ),
 
     // §6 Runtime View
@@ -150,8 +148,8 @@ export function buildPdfDocDefinition(d: Arc42Documentation, result: MaturityRes
         String(r.ordinal),
         r.name,
         r.triggerDescription,
-        r.stepsSummary,
-      ]),
+        r.stepsSummary
+      ])
     ),
 
     // §7 Deployment View
@@ -159,12 +157,7 @@ export function buildPdfDocDefinition(d: Arc42Documentation, result: MaturityRes
     para(d.deploymentOverview),
     table(
       ['#', 'Environment', 'Node', 'Responsibility'],
-      d.deploymentNodes.map((n) => [
-        String(n.ordinal),
-        n.environment,
-        n.nodeName,
-        n.responsibility,
-      ]),
+      d.deploymentNodes.map((n) => [String(n.ordinal), n.environment, n.nodeName, n.responsibility])
     ),
 
     // §8 Crosscutting Concepts
@@ -172,7 +165,7 @@ export function buildPdfDocDefinition(d: Arc42Documentation, result: MaturityRes
     para(d.crosscuttingOverview),
     table(
       ['#', 'Name', 'Description'],
-      d.crosscuttingConcepts.map((c) => [String(c.ordinal), c.name, c.description]),
+      d.crosscuttingConcepts.map((c) => [String(c.ordinal), c.name, c.description])
     ),
 
     // §9 Architectural Decisions (ADRs)
@@ -184,7 +177,7 @@ export function buildPdfDocDefinition(d: Arc42Documentation, result: MaturityRes
       { text: 'Decision', bold: true, margin: [0, 4, 0, 2] },
       para(adr.decision),
       { text: 'Consequences', bold: true, margin: [0, 4, 0, 2] },
-      para(adr.consequences),
+      para(adr.consequences)
     ]),
     d.architecturalDecisions.length === 0 ? para('No ADRs recorded.') : '',
 
@@ -199,8 +192,8 @@ export function buildPdfDocDefinition(d: Arc42Documentation, result: MaturityRes
         q.stimulus,
         q.artifact,
         q.response,
-        q.measure,
-      ]),
+        q.measure
+      ])
     ),
 
     // §11 Risks & Technical Debt
@@ -213,32 +206,38 @@ export function buildPdfDocDefinition(d: Arc42Documentation, result: MaturityRes
         r.name,
         r.probability,
         r.impact,
-        r.mitigation,
-      ]),
+        r.mitigation
+      ])
     ),
 
     // §12 Glossary
     h2('§12 Glossary'),
     table(
       ['Term', 'Definition'],
-      d.glossaryTerms.map((g) => [g.term, g.definition]),
+      d.glossaryTerms.map((g) => [g.term, g.definition])
     ),
 
     // Maturity Report
     h2('Maturity Report'),
-    { text: `Computed Maturity: ${result.computedMaturity.toUpperCase()}`, bold: true, margin: [0, 0, 0, 4] },
-    { text: `Final Maturity: ${result.finalMaturity.toUpperCase()}`, bold: true, margin: [0, 0, 0, 8] },
-    d.finalMaturityOverride
-      ? para(`Override reason: ${d.finalMaturityOverrideReason || '—'}`)
-      : '',
+    {
+      text: `Computed Maturity: ${result.computedMaturity.toUpperCase()}`,
+      bold: true,
+      margin: [0, 0, 0, 4]
+    },
+    {
+      text: `Final Maturity: ${result.finalMaturity.toUpperCase()}`,
+      bold: true,
+      margin: [0, 0, 0, 8]
+    },
+    d.finalMaturityOverride ? para(`Override reason: ${d.finalMaturityOverrideReason || '—'}`) : '',
 
     h3('Completeness by Section'),
     table(
       ['Section', 'Completeness'],
       Array.from({ length: 12 }, (_, i) => [
         `§${i + 1} ${sectionNames[i + 1]}`,
-        completenessLabel(result.completenessBySection[i + 1] ?? 'empty'),
-      ]),
+        completenessLabel(result.completenessBySection[i + 1] ?? 'empty')
+      ])
     ),
 
     h3('Fired Rules'),
@@ -251,8 +250,8 @@ export function buildPdfDocDefinition(d: Arc42Documentation, result: MaturityRes
       ? para('None.')
       : bullet(
           result.additionalFlags.map(
-            (f) => `[${f.priority.toUpperCase()}] ${f.category}: ${f.description}`,
-          ),
+            (f) => `[${f.priority.toUpperCase()}] ${f.category}: ${f.description}`
+          )
         ),
 
     d.recommendation
@@ -261,7 +260,10 @@ export function buildPdfDocDefinition(d: Arc42Documentation, result: MaturityRes
     d.additionalNotes ? para(`Notes: ${d.additionalNotes}`) : '',
     d.signedBy
       ? para(`Signed: ${d.signedBy}   Date: ${d.signedAt || '—'}`)
-      : { text: '\n\nSigned: ____________________________   Date: _______________', margin: [0, 30, 0, 0] },
+      : {
+          text: '\n\nSigned: ____________________________   Date: _______________',
+          margin: [0, 30, 0, 0]
+        }
   ].filter(Boolean);
 
   return {
@@ -269,8 +271,8 @@ export function buildPdfDocDefinition(d: Arc42Documentation, result: MaturityRes
     styles: {
       title: { fontSize: 20, bold: true, margin: [0, 0, 0, 10] },
       h2: { fontSize: 15, bold: true, color: '#1d4ed8', margin: [0, 12, 0, 6] },
-      h3: { fontSize: 12, bold: true, margin: [0, 8, 0, 4] },
+      h3: { fontSize: 12, bold: true, margin: [0, 8, 0, 4] }
     },
-    defaultStyle: { fontSize: 10 },
+    defaultStyle: { fontSize: 10 }
   };
 }

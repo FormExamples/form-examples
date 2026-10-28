@@ -22,20 +22,20 @@ export type Priority = 'high' | 'medium' | 'low';
 
 /** Step 1 — assessment context. */
 export interface Context {
-	clinicianName: string;
-	clinicianRole: ClinicianRole;
-	/** ISO-ish datetime-local string; '' when unset. */
-	assessedAt: string;
-	careSetting: CareSetting;
-	presentingComplaint: string;
+  clinicianName: string;
+  clinicianRole: ClinicianRole;
+  /** ISO-ish datetime-local string; '' when unset. */
+  assessedAt: string;
+  careSetting: CareSetting;
+  presentingComplaint: string;
 }
 
 /** Step 2 — patient identification. `age` drives criterion 1 (age < 50). */
 export interface Identification {
-	patientIdentifier: string;
-	/** Years; objective value behind criterion 1. */
-	age: number | null;
-	sex: Sex;
+  patientIdentifier: string;
+  /** Years; objective value behind criterion 1. */
+  age: number | null;
+  sex: Sex;
 }
 
 /**
@@ -43,15 +43,15 @@ export interface Identification {
  * probability of PE is 'low'.
  */
 export interface Pretest {
-	pretestProbability: PretestProbability;
+  pretestProbability: PretestProbability;
 }
 
 /** Step 4 — vital signs. Objective values behind criteria 2 and 3. */
 export interface Vitals {
-	/** Beats/min; criterion 2 (< 100). */
-	heartRate: number | null;
-	/** SpO2 %; criterion 3 (>= 95). */
-	oxygenSaturation: number | null;
+  /** Beats/min; criterion 2 (< 100). */
+  heartRate: number | null;
+  /** SpO2 %; criterion 3 (>= 95). */
+  oxygenSaturation: number | null;
 }
 
 /**
@@ -59,31 +59,31 @@ export interface Vitals {
  * only when 'no' (the reassuring state is positively documented).
  */
 export interface Criteria {
-	/** Criterion 4. */
-	unilateralLegSwelling: YesNo;
-	/** Criterion 5. */
-	haemoptysis: YesNo;
-	/** Criterion 6. */
-	recentSurgeryOrTrauma: YesNo;
-	/** Criterion 7. */
-	priorVenousThromboembolism: YesNo;
-	/** Criterion 8. */
-	oestrogenUse: YesNo;
+  /** Criterion 4. */
+  unilateralLegSwelling: YesNo;
+  /** Criterion 5. */
+  haemoptysis: YesNo;
+  /** Criterion 6. */
+  recentSurgeryOrTrauma: YesNo;
+  /** Criterion 7. */
+  priorVenousThromboembolism: YesNo;
+  /** Criterion 8. */
+  oestrogenUse: YesNo;
 }
 
 /** Step 6 — summary and result. */
 export interface ResultNotes {
-	clinicalNote: string;
+  clinicalNote: string;
 }
 
 /** The full PERC assessment data model. */
 export interface AssessmentData {
-	context: Context;
-	identification: Identification;
-	pretest: Pretest;
-	vitals: Vitals;
-	criteria: Criteria;
-	result: ResultNotes;
+  context: Context;
+  identification: Identification;
+  pretest: Pretest;
+  vitals: Vitals;
+  criteria: Criteria;
+  result: ResultNotes;
 }
 
 // ──────────────────────────────────────────────
@@ -92,68 +92,68 @@ export interface AssessmentData {
 
 /** The evaluated state of a single PERC criterion. */
 export interface CriterionResult {
-	/** 1..8. */
-	number: number;
-	/** kebab-case criterion key mirroring SQL. */
-	criterion: string;
-	/** true when the reassuring state holds. */
-	satisfied: boolean;
-	/** Short human label. */
-	label: string;
+  /** 1..8. */
+  number: number;
+  /** kebab-case criterion key mirroring SQL. */
+  criterion: string;
+  /** true when the reassuring state holds. */
+  satisfied: boolean;
+  /** Short human label. */
+  label: string;
 }
 
 /** A single evaluated / derived rule row (mirrors the grade_rule SQL table). */
 export interface FiredRule {
-	/** Stable rule id, e.g. R-AGE-UNDER-50-01. */
-	id: string;
-	/** criterion | gate | composite */
-	instrument: string;
-	/** Criterion satisfied (null for gate / composite rows). */
-	satisfied: boolean | null;
-	/** satisfied | failed | applicable | not-applicable | perc-negative | perc-positive */
-	outcome: string;
-	category: string;
-	description: string;
+  /** Stable rule id, e.g. R-AGE-UNDER-50-01. */
+  id: string;
+  /** criterion | gate | composite */
+  instrument: string;
+  /** Criterion satisfied (null for gate / composite rows). */
+  satisfied: boolean | null;
+  /** satisfied | failed | applicable | not-applicable | perc-negative | perc-positive */
+  outcome: string;
+  category: string;
+  description: string;
 }
 
 /** A clinician-facing safety flag (mirrors the grade_flag SQL table). */
 export interface FlaggedIssue {
-	id: string;
-	category: string;
-	priority: Priority;
-	description: string;
-	suggestedAction: string;
+  id: string;
+  category: string;
+  priority: Priority;
+  description: string;
+  suggestedAction: string;
 }
 
 /** A PERC criterion rule. */
 export interface PercRule {
-	id: string;
-	/** 1..8. */
-	number: number;
-	/** kebab-case criterion key mirroring SQL. */
-	criterion: string;
-	/** Short human label. */
-	label: string;
-	category: string;
-	/** Reassuring-state description. */
-	description: string;
-	/** true when the criterion is SATISFIED. */
-	evaluate: (data: AssessmentData) => boolean;
+  id: string;
+  /** 1..8. */
+  number: number;
+  /** kebab-case criterion key mirroring SQL. */
+  criterion: string;
+  /** Short human label. */
+  label: string;
+  category: string;
+  /** Reassuring-state description. */
+  description: string;
+  /** true when the criterion is SATISFIED. */
+  evaluate: (data: AssessmentData) => boolean;
 }
 
 /** The full classification result for one assessment. */
 export interface GradingResult {
-	classification: Classification;
-	allCriteriaSatisfied: boolean;
-	/** pretestProbability === 'low'. */
-	applicable: boolean;
-	/** One per criterion. */
-	criterionResults: CriterionResult[];
-	/** Subset of [1..8] that failed. */
-	failedCriteria: number[];
-	firedRules: FiredRule[];
-	flaggedIssues: FlaggedIssue[];
-	timestamp: string;
+  classification: Classification;
+  allCriteriaSatisfied: boolean;
+  /** pretestProbability === 'low'. */
+  applicable: boolean;
+  /** One per criterion. */
+  criterionResults: CriterionResult[];
+  /** Subset of [1..8] that failed. */
+  failedCriteria: number[];
+  firedRules: FiredRule[];
+  flaggedIssues: FlaggedIssue[];
+  timestamp: string;
 }
 
 // ──────────────────────────────────────────────
@@ -161,8 +161,8 @@ export interface GradingResult {
 // ──────────────────────────────────────────────
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
-	section: keyof AssessmentData;
+  number: number;
+  title: string;
+  shortTitle: string;
+  section: keyof AssessmentData;
 }

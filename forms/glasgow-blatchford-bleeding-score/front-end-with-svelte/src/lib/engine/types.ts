@@ -19,59 +19,59 @@ export type Priority = 'high' | 'medium' | 'low' | 'info';
 
 /** Step 1 — assessment context. */
 export interface Context {
-	clinicianName: string;
-	clinicianRole: ClinicianRole;
-	/** ISO-ish datetime-local string; '' when unset. */
-	assessedAt: string;
-	careSetting: CareSetting;
-	presentingComplaint: PresentingComplaint;
+  clinicianName: string;
+  clinicianRole: ClinicianRole;
+  /** ISO-ish datetime-local string; '' when unset. */
+  assessedAt: string;
+  careSetting: CareSetting;
+  presentingComplaint: PresentingComplaint;
 }
 
 /** Step 2 — patient identification. */
 export interface Identification {
-	patientIdentifier: string;
-	ageBand: AgeBand;
-	/** Selects the haemoglobin band table. */
-	sex: Sex;
+  patientIdentifier: string;
+  ageBand: AgeBand;
+  /** Selects the haemoglobin band table. */
+  sex: Sex;
 }
 
 /** Step 3 — laboratory markers (parameters 1 and 2/3). */
 export interface Labs {
-	/** mmol/L; parameter 1. */
-	bloodUrea: number | null;
-	/** g/L; parameters 2/3 (sex-specific bands). */
-	haemoglobin: number | null;
+  /** mmol/L; parameter 1. */
+  bloodUrea: number | null;
+  /** g/L; parameters 2/3 (sex-specific bands). */
+  haemoglobin: number | null;
 }
 
 /** Step 4 — haemodynamics (parameters 4 and 5). */
 export interface Haemodynamics {
-	/** mmHg; parameter 4. */
-	systolicBloodPressure: number | null;
-	/** beats/min; parameter 5. */
-	pulse: number | null;
+  /** mmHg; parameter 4. */
+  systolicBloodPressure: number | null;
+  /** beats/min; parameter 5. */
+  pulse: number | null;
 }
 
 /** Step 5 — clinical markers (parameters 6-9). */
 export interface ClinicalMarkers {
-	melaenaPresent: YesNo;
-	syncope: YesNo;
-	hepaticDisease: YesNo;
-	cardiacFailure: YesNo;
+  melaenaPresent: YesNo;
+  syncope: YesNo;
+  hepaticDisease: YesNo;
+  cardiacFailure: YesNo;
 }
 
 /** Step 6 — clinician free-text note. */
 export interface Note {
-	clinicalNote: string;
+  clinicalNote: string;
 }
 
 /** The full Glasgow-Blatchford assessment data model. */
 export interface AssessmentData {
-	context: Context;
-	identification: Identification;
-	labs: Labs;
-	haemodynamics: Haemodynamics;
-	clinicalMarkers: ClinicalMarkers;
-	note: Note;
+  context: Context;
+  identification: Identification;
+  labs: Labs;
+  haemodynamics: Haemodynamics;
+  clinicalMarkers: ClinicalMarkers;
+  note: Note;
 }
 
 // ──────────────────────────────────────────────
@@ -80,58 +80,58 @@ export interface AssessmentData {
 
 /** A single fired rule row (mirrors the grade_rule SQL table). */
 export interface FiredRule {
-	/** Stable rule id, e.g. R-BLOOD-UREA-6POINT-01. */
-	id: string;
-	/**
-	 * blood-urea | haemoglobin | systolic-blood-pressure | pulse | melaena |
-	 * syncope | hepatic-disease | cardiac-failure | band.
-	 */
-	parameter: string;
-	/** Points contributed for the parameter, or null. */
-	points: number | null;
-	category: string;
-	description: string;
+  /** Stable rule id, e.g. R-BLOOD-UREA-6POINT-01. */
+  id: string;
+  /**
+   * blood-urea | haemoglobin | systolic-blood-pressure | pulse | melaena |
+   * syncope | hepatic-disease | cardiac-failure | band.
+   */
+  parameter: string;
+  /** Points contributed for the parameter, or null. */
+  points: number | null;
+  category: string;
+  description: string;
 }
 
 /** A clinician-facing safety flag (mirrors the grade_flag SQL table). */
 export interface FlaggedIssue {
-	id: string;
-	category: string;
-	priority: Priority;
-	description: string;
-	suggestedAction: string;
+  id: string;
+  category: string;
+  priority: Priority;
+  description: string;
+  suggestedAction: string;
 }
 
 /** A declarative per-parameter scoring rule. */
 export interface GbsRule {
-	id: string;
-	parameter: string;
-	/** Points awarded when the rule fires. */
-	points: number;
-	category: string;
-	description: string;
-	evaluate: (d: AssessmentData) => boolean;
+  id: string;
+  parameter: string;
+  /** Points awarded when the rule fires. */
+  points: number;
+  category: string;
+  description: string;
+  evaluate: (d: AssessmentData) => boolean;
 }
 
 /** The full grading result for one assessment. */
 export interface GradingResult {
-	bloodUreaPoints: 0 | 2 | 3 | 4 | 6;
-	haemoglobinPoints: 0 | 1 | 3 | 6;
-	systolicBloodPressurePoints: 0 | 1 | 2 | 3;
-	pulsePoint: 0 | 1;
-	melaenaPoint: 0 | 1;
-	syncopePoint: 0 | 2;
-	hepaticDiseasePoint: 0 | 2;
-	cardiacFailurePoint: 0 | 2;
-	/** 0..23. */
-	gbsScore: number;
-	riskBand: RiskBand;
-	recommendedManagement: string;
-	/** True only once all eight parameters are answered and sex is known. */
-	complete: boolean;
-	firedRules: FiredRule[];
-	flaggedIssues: FlaggedIssue[];
-	timestamp: string;
+  bloodUreaPoints: 0 | 2 | 3 | 4 | 6;
+  haemoglobinPoints: 0 | 1 | 3 | 6;
+  systolicBloodPressurePoints: 0 | 1 | 2 | 3;
+  pulsePoint: 0 | 1;
+  melaenaPoint: 0 | 1;
+  syncopePoint: 0 | 2;
+  hepaticDiseasePoint: 0 | 2;
+  cardiacFailurePoint: 0 | 2;
+  /** 0..23. */
+  gbsScore: number;
+  riskBand: RiskBand;
+  recommendedManagement: string;
+  /** True only once all eight parameters are answered and sex is known. */
+  complete: boolean;
+  firedRules: FiredRule[];
+  flaggedIssues: FlaggedIssue[];
+  timestamp: string;
 }
 
 // ──────────────────────────────────────────────
@@ -139,8 +139,8 @@ export interface GradingResult {
 // ──────────────────────────────────────────────
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
-	section: keyof AssessmentData;
+  number: number;
+  title: string;
+  shortTitle: string;
+  section: keyof AssessmentData;
 }

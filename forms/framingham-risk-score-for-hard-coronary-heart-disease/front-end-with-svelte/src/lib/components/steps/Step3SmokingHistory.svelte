@@ -3,7 +3,7 @@
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
-  import { RadioGroup } from "@lilydesignsystem/svelte-headless";
+  import { RadioGroup } from '@lilydesignsystem/svelte-headless';
 
   const s = assessment.data.smokingHistory;
 </script>
@@ -14,10 +14,12 @@
   <Field label="Current smoking status">
     <RadioGroup label="Current smoking status">
       <label class="radio-input">
-        <input type="radio" name="smokingStatus" value="current" bind:group={s.smokingStatus} /> Current smoker
+        <input type="radio" name="smokingStatus" value="current" bind:group={s.smokingStatus} /> Current
+        smoker
       </label>
       <label class="radio-input">
-        <input type="radio" name="smokingStatus" value="former" bind:group={s.smokingStatus} /> Former smoker
+        <input type="radio" name="smokingStatus" value="former" bind:group={s.smokingStatus} /> Former
+        smoker
       </label>
       <label class="radio-input">
         <input type="radio" name="smokingStatus" value="never" bind:group={s.smokingStatus} /> Never smoked

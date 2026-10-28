@@ -2,7 +2,7 @@
   import { assessment } from '#lib/stores/assessment.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { TextAreaInput } from "@lilydesignsystem/svelte-headless";
+  import { TextAreaInput } from '@lilydesignsystem/svelte-headless';
   import Select from '#lib/components/ui/Select.svelte';
 
   const d = assessment.data.riskAssessmentSummary;
@@ -59,7 +59,11 @@
   </Field>
 
   <Field label="Follow-up interval" inputId="step-10-followUpInterval">
-    <Select id="step-10-followUpInterval" label="Follow-up interval" bind:value={d.followUpInterval}>
+    <Select
+      id="step-10-followUpInterval"
+      label="Follow-up interval"
+      bind:value={d.followUpInterval}
+    >
       <option value="">\u2014 Select \u2014</option>
       <option value="3months">3 months</option>
       <option value="6months">6 months</option>

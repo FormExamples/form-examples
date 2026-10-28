@@ -1,8 +1,8 @@
 import type {
-	BloodTestResult,
-	ResultClassification,
-	AbnormalitySeverity,
-	FiredRule
+  BloodTestResult,
+  ResultClassification,
+  AbnormalitySeverity,
+  FiredRule
 } from './types';
 import { hasCriticalValue, hasAbnormalResult, structuredReportingCategory } from './utils';
 
@@ -22,72 +22,75 @@ import { hasCriticalValue, hasAbnormalResult, structuredReportingCategory } from
  * the reporter supplied one, it takes precedence.
  */
 export function gradeSeverity(
-	r: BloodTestResult,
-	classification: ResultClassification
+  r: BloodTestResult,
+  classification: ResultClassification
 ): {
-	abnormalitySeverity: AbnormalitySeverity;
-	reportingCategory: string;
-	firedRules: FiredRule[];
+  abnormalitySeverity: AbnormalitySeverity;
+  reportingCategory: string;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
-	const structured = structuredReportingCategory(r);
-	const category = r.reportingCategory.trim() !== '' ? r.reportingCategory.trim() : structured;
+  const firedRules: FiredRule[] = [];
+  const structured = structuredReportingCategory(r);
+  const category = r.reportingCategory.trim() !== '' ? r.reportingCategory.trim() : structured;
 
-	if (hasCriticalValue(r)) {
-		firedRules.push({
-			ruleId: 'R-SEV-MAJOR-01',
-			axis: 'severity',
-			category: 'critical-value',
-			description: 'Critical (panic) value present; abnormality severity graded major.'
-		});
-		return {
-			abnormalitySeverity: 'major',
-			reportingCategory: category || 'critical-actionable',
-			firedRules
-		};
-	}
+  if (hasCriticalValue(r)) {
+    firedRules.push({
+      ruleId: 'R-SEV-MAJOR-01',
+      axis: 'severity',
+      category: 'critical-value',
+      description: 'Critical (panic) value present; abnormality severity graded major.'
+    });
+    return {
+      abnormalitySeverity: 'major',
+      reportingCategory: category || 'critical-actionable',
+      firedRules
+    };
+  }
 
-	if (hasAbnormalResult(r)) {
-		firedRules.push({
-			ruleId: 'R-SEV-MODERATE-01',
-			axis: 'severity',
-			category: 'abnormal-result',
-			description:
-				'One or more abnormal results are present; abnormality severity graded moderate.'
-		});
-		return {
-			abnormalitySeverity: 'moderate',
-			reportingCategory: category || 'abnormal',
-			firedRules
-		};
-	}
+  if (hasAbnormalResult(r)) {
+    firedRules.push({
+      ruleId: 'R-SEV-MODERATE-01',
+      axis: 'severity',
+      category: 'abnormal-result',
+      description: 'One or more abnormal results are present; abnormality severity graded moderate.'
+    });
+    return {
+      abnormalitySeverity: 'moderate',
+      reportingCategory: category || 'abnormal',
+      firedRules
+    };
+  }
 
-	if (structured !== '' && !structured.includes('G1') && !structured.includes('normal')) {
-		firedRules.push({
-			ruleId: 'R-SEV-MINOR-01',
-			axis: 'severity',
-			category: 'structured-band',
-			description:
-				'A structured-reporting band deviates from normal but no result was flagged abnormal; severity graded minor.'
-		});
-		return { abnormalitySeverity: 'minor', reportingCategory: category, firedRules };
-	}
+  if (structured !== '' && !structured.includes('G1') && !structured.includes('normal')) {
+    firedRules.push({
+      ruleId: 'R-SEV-MINOR-01',
+      axis: 'severity',
+      category: 'structured-band',
+      description:
+        'A structured-reporting band deviates from normal but no result was flagged abnormal; severity graded minor.'
+    });
+    return { abnormalitySeverity: 'minor', reportingCategory: category, firedRules };
+  }
 
-	if (classification === 'inconclusive') {
-		firedRules.push({
-			ruleId: 'R-SEV-NONE-02',
-			axis: 'severity',
-			category: 'inconclusive',
-			description: 'Inconclusive study; abnormality severity not established.'
-		});
-		return { abnormalitySeverity: 'none', reportingCategory: category || 'indeterminate', firedRules };
-	}
+  if (classification === 'inconclusive') {
+    firedRules.push({
+      ruleId: 'R-SEV-NONE-02',
+      axis: 'severity',
+      category: 'inconclusive',
+      description: 'Inconclusive study; abnormality severity not established.'
+    });
+    return {
+      abnormalitySeverity: 'none',
+      reportingCategory: category || 'indeterminate',
+      firedRules
+    };
+  }
 
-	firedRules.push({
-		ruleId: 'R-SEV-NONE-01',
-		axis: 'severity',
-		category: 'no-abnormal-result',
-		description: 'No abnormal result; abnormality severity graded none.'
-	});
-	return { abnormalitySeverity: 'none', reportingCategory: category || 'normal', firedRules };
+  firedRules.push({
+    ruleId: 'R-SEV-NONE-01',
+    axis: 'severity',
+    category: 'no-abnormal-result',
+    description: 'No abnormal result; abnormality severity graded none.'
+  });
+  return { abnormalitySeverity: 'none', reportingCategory: category || 'normal', firedRules };
 }

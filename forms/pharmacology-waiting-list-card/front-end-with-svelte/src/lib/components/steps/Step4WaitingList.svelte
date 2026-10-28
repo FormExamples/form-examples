@@ -46,8 +46,7 @@
       class="text-area-input"
       rows="3"
       placeholder="Plain-language description of what the patient is waiting to do."
-      bind:value={store.data.waitingList.procedureDescription}
-    ></textarea>
+      bind:value={store.data.waitingList.procedureDescription}></textarea>
   </div>
 
   <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">

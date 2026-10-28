@@ -11,53 +11,53 @@ import { detectAdditionalFlags } from './flagged-issues';
  * Severity order: severe > moderate > mild > subclinical > normal > '' (not assessed).
  */
 export function calculateGrades(data: AssessmentData): GradingResult {
-	const axisGrades: AxisGrade[] = [];
-	const firedRules: FiredRule[] = [];
-	let overall: AxisStatus = '';
+  const axisGrades: AxisGrade[] = [];
+  const firedRules: FiredRule[] = [];
+  let overall: AxisStatus = '';
 
-	for (const rule of axisRules) {
-		try {
-			const { status, findings } = rule.evaluate(data);
-			const rationale =
-				findings.length === 0
-					? status === 'normal'
-						? 'Indices within reference range.'
-						: status === ''
-							? 'No data provided.'
-							: 'Status derived from clinical features.'
-					: findings.join(' ');
+  for (const rule of axisRules) {
+    try {
+      const { status, findings } = rule.evaluate(data);
+      const rationale =
+        findings.length === 0
+          ? status === 'normal'
+            ? 'Indices within reference range.'
+            : status === ''
+              ? 'No data provided.'
+              : 'Status derived from clinical features.'
+          : findings.join(' ');
 
-			axisGrades.push({
-				axis: rule.axis,
-				status,
-				rationale,
-				contributingFindings: findings
-			});
+      axisGrades.push({
+        axis: rule.axis,
+        status,
+        rationale,
+        contributingFindings: findings
+      });
 
-			if (status !== '') {
-				overall = maxStatus(overall, status);
-				firedRules.push({
-					id: rule.id,
-					category: rule.axis,
-					description: rule.description,
-					status
-				});
-			}
-		} catch (e) {
-			// Rule evaluation failed - log for debugging but continue grading.
-			console.warn(`Axis rule ${rule.id} evaluation failed:`, e);
-		}
-	}
+      if (status !== '') {
+        overall = maxStatus(overall, status);
+        firedRules.push({
+          id: rule.id,
+          category: rule.axis,
+          description: rule.description,
+          status
+        });
+      }
+    } catch (e) {
+      // Rule evaluation failed - log for debugging but continue grading.
+      console.warn(`Axis rule ${rule.id} evaluation failed:`, e);
+    }
+  }
 
-	// Count graded (assessed) axes (informational).
-	const answeredCount = axisGrades.filter((g) => g.status !== '').length;
+  // Count graded (assessed) axes (informational).
+  const answeredCount = axisGrades.filter((g) => g.status !== '').length;
 
-	return {
-		axisGrades,
-		overallStatus: overall || 'normal',
-		answeredCount,
-		firedRules,
-		additionalFlags: detectAdditionalFlags(data),
-		timestamp: new Date().toISOString()
-	};
+  return {
+    axisGrades,
+    overallStatus: overall || 'normal',
+    answeredCount,
+    firedRules,
+    additionalFlags: detectAdditionalFlags(data),
+    timestamp: new Date().toISOString()
+  };
 }

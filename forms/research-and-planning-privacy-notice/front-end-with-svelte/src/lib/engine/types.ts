@@ -3,18 +3,18 @@
 // ──────────────────────────────────────────────
 
 export interface RecipientDetails {
-	organisationName: string;
-	recipientName: string;
-	recipientNhsNumber: string;
-	recipientDob: string;
+  organisationName: string;
+  recipientName: string;
+  recipientNhsNumber: string;
+  recipientDob: string;
 }
 
 export interface AcknowledgementSignature {
-	agreed: boolean;
-	type1OptOut: 'opt-in' | 'opt-out' | '';
-	nationalDataOptOut: 'opt-in' | 'opt-out' | '';
-	recipientTypedFullName: string;
-	recipientTypedDate: string;
+  agreed: boolean;
+  type1OptOut: 'opt-in' | 'opt-out' | '';
+  nationalDataOptOut: 'opt-in' | 'opt-out' | '';
+  recipientTypedFullName: string;
+  recipientTypedDate: string;
 }
 
 // ──────────────────────────────────────────────
@@ -22,8 +22,8 @@ export interface AcknowledgementSignature {
 // ──────────────────────────────────────────────
 
 export interface AssessmentData {
-	recipientDetails: RecipientDetails;
-	acknowledgementSignature: AcknowledgementSignature;
+  recipientDetails: RecipientDetails;
+  acknowledgementSignature: AcknowledgementSignature;
 }
 
 // ──────────────────────────────────────────────
@@ -31,32 +31,32 @@ export interface AssessmentData {
 // ──────────────────────────────────────────────
 
 export interface ValidationRule {
-	id: string;
-	section: string;
-	field: string;
-	message: string;
+  id: string;
+  section: string;
+  field: string;
+  message: string;
 }
 
 export interface FiredRule {
-	id: string;
-	section: string;
-	description: string;
-	field: string;
+  id: string;
+  section: string;
+  description: string;
+  field: string;
 }
 
 export interface AdditionalFlag {
-	id: string;
-	category: string;
-	message: string;
-	priority: 'high' | 'medium' | 'low';
+  id: string;
+  category: string;
+  message: string;
+  priority: 'high' | 'medium' | 'low';
 }
 
 export interface GradingResult {
-	completenessPercent: number;
-	status: 'Complete' | 'Incomplete';
-	firedRules: FiredRule[];
-	additionalFlags: AdditionalFlag[];
-	timestamp: string;
+  completenessPercent: number;
+  status: 'Complete' | 'Incomplete';
+  firedRules: FiredRule[];
+  additionalFlags: AdditionalFlag[];
+  timestamp: string;
 }
 
 // ──────────────────────────────────────────────
@@ -64,8 +64,8 @@ export interface GradingResult {
 // ──────────────────────────────────────────────
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
-	section: keyof AssessmentData | 'researchPlanningPrivacyNotice';
+  number: number;
+  title: string;
+  shortTitle: string;
+  section: keyof AssessmentData | 'researchPlanningPrivacyNotice';
 }

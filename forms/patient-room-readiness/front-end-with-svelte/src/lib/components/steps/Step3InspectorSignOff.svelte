@@ -2,7 +2,7 @@
   import { store } from '#lib/stores/checklist.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { DateInput, EmailInput, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { DateInput, EmailInput, TextInput } from '@lilydesignsystem/svelte-headless';
   import TimeInput from '#lib/components/ui/TimeInput.svelte';
 </script>
 
@@ -53,6 +53,8 @@
     gap: 1rem;
   }
   @media (max-width: 640px) {
-    .field-grid { grid-template-columns: 1fr; }
+    .field-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

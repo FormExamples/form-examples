@@ -13,12 +13,7 @@
 
 export type ClinicianRole = 'midwife' | 'health-visitor' | 'gp' | 'perinatal-mh' | 'other' | '';
 export type CareSetting =
-	| 'maternity'
-	| 'community'
-	| 'general-practice'
-	| 'perinatal-mh'
-	| 'other'
-	| '';
+  'maternity' | 'community' | 'general-practice' | 'perinatal-mh' | 'other' | '';
 export type PerinatalStage = 'antenatal' | 'postnatal' | '';
 export type AgeBand = 'under-20' | '20-29' | '30-39' | '40-plus' | '';
 export type AssistanceNeeded = 'none' | 'interpreter' | 'clinician-read' | 'other' | '';
@@ -27,22 +22,22 @@ export type Priority = 'urgent' | 'high' | 'medium' | 'low';
 
 /** Step 1 — assessment context. */
 export interface Context {
-	clinicianName: string;
-	clinicianRole: ClinicianRole;
-	careSetting: CareSetting;
-	/** ISO-ish datetime-local string; '' when unset. */
-	assessedAt: string;
-	perinatalStage: PerinatalStage;
-	/** Gestational week (antenatal) or postnatal week; null when unset. */
-	perinatalWeek: number | null;
+  clinicianName: string;
+  clinicianRole: ClinicianRole;
+  careSetting: CareSetting;
+  /** ISO-ish datetime-local string; '' when unset. */
+  assessedAt: string;
+  perinatalStage: PerinatalStage;
+  /** Gestational week (antenatal) or postnatal week; null when unset. */
+  perinatalWeek: number | null;
 }
 
 /** Step 2 — respondent identification. */
 export interface Identification {
-	respondentIdentifier: string;
-	ageBand: AgeBand;
-	preferredLanguage: string;
-	assistanceNeeded: AssistanceNeeded;
+  respondentIdentifier: string;
+  ageBand: AgeBand;
+  preferredLanguage: string;
+  assistanceNeeded: AssistanceNeeded;
 }
 
 /**
@@ -50,29 +45,29 @@ export interface Identification {
  * index 0..3 (printed order), or null when unanswered.
  */
 export interface Items {
-	item1: number | null;
-	item2: number | null;
-	item3: number | null;
-	item4: number | null;
-	item5: number | null;
-	item6: number | null;
-	item7: number | null;
-	item8: number | null;
-	item9: number | null;
-	item10: number | null;
+  item1: number | null;
+  item2: number | null;
+  item3: number | null;
+  item4: number | null;
+  item5: number | null;
+  item6: number | null;
+  item7: number | null;
+  item8: number | null;
+  item9: number | null;
+  item10: number | null;
 }
 
 /** Step 6 — clinician free-text note. */
 export interface Note {
-	clinicalNote: string;
+  clinicalNote: string;
 }
 
 /** The full EPDS assessment data model. */
 export interface AssessmentData {
-	context: Context;
-	identification: Identification;
-	items: Items;
-	note: Note;
+  context: Context;
+  identification: Identification;
+  items: Items;
+  note: Note;
 }
 
 // ──────────────────────────────────────────────
@@ -81,54 +76,54 @@ export interface AssessmentData {
 
 /** A single scored/derived audit row (mirrors the grade_rule SQL table). */
 export interface FiredItem {
-	/** Stable rule id, e.g. R-ITEM-10-SCORE. */
-	id: string;
-	/** item | total | band | self-harm | anxiety-subscale */
-	parameter: string;
-	/** Points contributed (0..3), where applicable. */
-	points: number;
-	category: string;
-	description: string;
+  /** Stable rule id, e.g. R-ITEM-10-SCORE. */
+  id: string;
+  /** item | total | band | self-harm | anxiety-subscale */
+  parameter: string;
+  /** Points contributed (0..3), where applicable. */
+  points: number;
+  category: string;
+  description: string;
 }
 
 /** A clinician-facing safety flag (mirrors the grade_flag SQL table). */
 export interface FlaggedIssue {
-	id: string;
-	category: string;
-	priority: Priority;
-	description: string;
-	suggestedAction: string;
+  id: string;
+  category: string;
+  priority: Priority;
+  description: string;
+  suggestedAction: string;
 }
 
 /** A single EPDS item definition. */
 export interface EpdsItem {
-	/** 1..10 */
-	number: number;
-	/** State key: 'item1' .. 'item10'. */
-	field: keyof Items;
-	/** The item statement (past 7 days). */
-	statement: string;
-	direction: 'normal' | 'reverse';
-	/** Four option labels in printed order (index 0..3). */
-	options: string[];
+  /** 1..10 */
+  number: number;
+  /** State key: 'item1' .. 'item10'. */
+  field: keyof Items;
+  /** The item statement (past 7 days). */
+  statement: string;
+  direction: 'normal' | 'reverse';
+  /** Four option labels in printed order (index 0..3). */
+  options: string[];
 }
 
 /** The full grading result for one assessment. */
 export interface GradingResult {
-	/** Ten entries, each 0..3 (reverse-corrected; missing → 0). */
-	itemScores: number[];
-	/** 0..30 */
-	totalScore: number;
-	band: Band;
-	/** Item 10 reverse-corrected score 0..3. */
-	item10Score: number;
-	/** Item 10 score > 0 (independent of the total). */
-	selfHarmFlag: boolean;
-	/** Anxiety subscale (EPDS-3A): items 3, 4 and 5, 0..9. */
-	anxietySubscale: number;
-	firedItems: FiredItem[];
-	flaggedIssues: FlaggedIssue[];
-	timestamp: string;
+  /** Ten entries, each 0..3 (reverse-corrected; missing → 0). */
+  itemScores: number[];
+  /** 0..30 */
+  totalScore: number;
+  band: Band;
+  /** Item 10 reverse-corrected score 0..3. */
+  item10Score: number;
+  /** Item 10 score > 0 (independent of the total). */
+  selfHarmFlag: boolean;
+  /** Anxiety subscale (EPDS-3A): items 3, 4 and 5, 0..9. */
+  anxietySubscale: number;
+  firedItems: FiredItem[];
+  flaggedIssues: FlaggedIssue[];
+  timestamp: string;
 }
 
 // ──────────────────────────────────────────────
@@ -136,8 +131,8 @@ export interface GradingResult {
 // ──────────────────────────────────────────────
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
-	section: keyof AssessmentData;
+  number: number;
+  title: string;
+  shortTitle: string;
+  section: keyof AssessmentData;
 }

@@ -16,8 +16,9 @@
       name: '',
       probability: '',
       impact: '',
-      mitigation: '',
-    })}>
+      mitigation: ''
+    })}
+  >
     {#snippet children(r, _i)}
       <div class="grid grid-cols-2 gap-2 mb-1">
         <select class="border rounded px-2 py-1" bind:value={r.kind}>
@@ -25,7 +26,12 @@
           <option value="risk">Risk</option>
           <option value="technical-debt">Technical debt</option>
         </select>
-        <input type="text" placeholder="Name" class="border rounded px-2 py-1" bind:value={r.name} />
+        <input
+          type="text"
+          placeholder="Name"
+          class="border rounded px-2 py-1"
+          bind:value={r.name}
+        />
         <select class="border rounded px-2 py-1" bind:value={r.probability}>
           <option value="">Probability —</option>
           <option value="high">High</option>
@@ -39,7 +45,11 @@
           <option value="low">Low</option>
         </select>
       </div>
-      <textarea rows="2" placeholder="Mitigation" class="w-full border rounded px-2 py-1" bind:value={r.mitigation}></textarea>
+      <textarea
+        rows="2"
+        placeholder="Mitigation"
+        class="w-full border rounded px-2 py-1"
+        bind:value={r.mitigation}></textarea>
     {/snippet}
   </RepeatList>
 </section>

@@ -1,14 +1,14 @@
 import type {
-	EyeVisionResult,
-	ResultClassification,
-	AbnormalitySeverity,
-	FiredRule
+  EyeVisionResult,
+  ResultClassification,
+  AbnormalitySeverity,
+  FiredRule
 } from './types';
 import {
-	hasCriticalFinding,
-	hasAnyAbnormalFinding,
-	hasReferableRetinopathy,
-	hasElevatedIop
+  hasCriticalFinding,
+  hasAnyAbnormalFinding,
+  hasReferableRetinopathy,
+  hasElevatedIop
 } from './utils';
 
 /**
@@ -17,22 +17,21 @@ import {
  * (e.g. R2M1). Falls back to a short descriptive label otherwise.
  */
 function reportingCategoryFor(r: EyeVisionResult): string {
-	const rGrade =
-		r.retinopathyGrade === 'none'
-			? 'R0'
-			: r.retinopathyGrade === 'background'
-				? 'R1'
-				: r.retinopathyGrade === 'pre-proliferative'
-					? 'R2'
-					: r.retinopathyGrade === 'proliferative'
-						? 'R3'
-						: '';
-	const mGrade =
-		r.retinopathyGrade === 'maculopathy' || r.macularAbnormality ? 'M1' : '';
-	const composite = `${rGrade}${mGrade}`;
-	if (composite !== '') return composite;
-	if (hasAnyAbnormalFinding(r)) return 'actionable-finding';
-	return 'normal';
+  const rGrade =
+    r.retinopathyGrade === 'none'
+      ? 'R0'
+      : r.retinopathyGrade === 'background'
+        ? 'R1'
+        : r.retinopathyGrade === 'pre-proliferative'
+          ? 'R2'
+          : r.retinopathyGrade === 'proliferative'
+            ? 'R3'
+            : '';
+  const mGrade = r.retinopathyGrade === 'maculopathy' || r.macularAbnormality ? 'M1' : '';
+  const composite = `${rGrade}${mGrade}`;
+  if (composite !== '') return composite;
+  if (hasAnyAbnormalFinding(r)) return 'actionable-finding';
+  return 'normal';
 }
 
 /**
@@ -53,80 +52,80 @@ function reportingCategoryFor(r: EyeVisionResult): string {
  * structured-reporting workflows.
  */
 export function gradeSeverity(
-	r: EyeVisionResult,
-	classification: ResultClassification
+  r: EyeVisionResult,
+  classification: ResultClassification
 ): {
-	abnormalitySeverity: AbnormalitySeverity;
-	reportingCategory: string;
-	firedRules: FiredRule[];
+  abnormalitySeverity: AbnormalitySeverity;
+  reportingCategory: string;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
-	const reportingCategory = reportingCategoryFor(r);
+  const firedRules: FiredRule[] = [];
+  const reportingCategory = reportingCategoryFor(r);
 
-	if (hasCriticalFinding(r)) {
-		firedRules.push({
-			ruleId: 'R-SEV-MAJOR-01',
-			axis: 'severity',
-			category: 'critical-finding',
-			description: 'Critical finding present; abnormality severity graded major.'
-		});
-		return { abnormalitySeverity: 'major', reportingCategory, firedRules };
-	}
+  if (hasCriticalFinding(r)) {
+    firedRules.push({
+      ruleId: 'R-SEV-MAJOR-01',
+      axis: 'severity',
+      category: 'critical-finding',
+      description: 'Critical finding present; abnormality severity graded major.'
+    });
+    return { abnormalitySeverity: 'major', reportingCategory, firedRules };
+  }
 
-	if (hasReferableRetinopathy(r)) {
-		firedRules.push({
-			ruleId: 'R-SEV-MAJOR-02',
-			axis: 'severity',
-			category: 'referable-retinopathy',
-			description:
-				'Referable diabetic retinopathy (pre-proliferative, proliferative, or maculopathy) is present; abnormality severity graded major.'
-		});
-		return { abnormalitySeverity: 'major', reportingCategory, firedRules };
-	}
+  if (hasReferableRetinopathy(r)) {
+    firedRules.push({
+      ruleId: 'R-SEV-MAJOR-02',
+      axis: 'severity',
+      category: 'referable-retinopathy',
+      description:
+        'Referable diabetic retinopathy (pre-proliferative, proliferative, or maculopathy) is present; abnormality severity graded major.'
+    });
+    return { abnormalitySeverity: 'major', reportingCategory, firedRules };
+  }
 
-	const actionable =
-		r.opticDiscAbnormality ||
-		r.macularAbnormality ||
-		r.visualFieldResult === 'bilateral-defect' ||
-		hasElevatedIop(r);
+  const actionable =
+    r.opticDiscAbnormality ||
+    r.macularAbnormality ||
+    r.visualFieldResult === 'bilateral-defect' ||
+    hasElevatedIop(r);
 
-	if (actionable) {
-		firedRules.push({
-			ruleId: 'R-SEV-MODERATE-01',
-			axis: 'severity',
-			category: 'actionable-finding',
-			description:
-				'An actionable abnormal finding (optic-disc abnormality, macular abnormality, bilateral field defect, or elevated intraocular pressure) is present; severity graded moderate.'
-		});
-		return { abnormalitySeverity: 'moderate', reportingCategory, firedRules };
-	}
+  if (actionable) {
+    firedRules.push({
+      ruleId: 'R-SEV-MODERATE-01',
+      axis: 'severity',
+      category: 'actionable-finding',
+      description:
+        'An actionable abnormal finding (optic-disc abnormality, macular abnormality, bilateral field defect, or elevated intraocular pressure) is present; severity graded moderate.'
+    });
+    return { abnormalitySeverity: 'moderate', reportingCategory, firedRules };
+  }
 
-	if (hasAnyAbnormalFinding(r)) {
-		firedRules.push({
-			ruleId: 'R-SEV-MINOR-01',
-			axis: 'severity',
-			category: 'minor-finding',
-			description:
-				'A minor structured abnormal finding (e.g. reduced acuity, unilateral field defect, or background retinopathy) is present; abnormality severity graded minor.'
-		});
-		return { abnormalitySeverity: 'minor', reportingCategory, firedRules };
-	}
+  if (hasAnyAbnormalFinding(r)) {
+    firedRules.push({
+      ruleId: 'R-SEV-MINOR-01',
+      axis: 'severity',
+      category: 'minor-finding',
+      description:
+        'A minor structured abnormal finding (e.g. reduced acuity, unilateral field defect, or background retinopathy) is present; abnormality severity graded minor.'
+    });
+    return { abnormalitySeverity: 'minor', reportingCategory, firedRules };
+  }
 
-	if (classification === 'inconclusive') {
-		firedRules.push({
-			ruleId: 'R-SEV-NONE-02',
-			axis: 'severity',
-			category: 'inconclusive',
-			description: 'Inconclusive study; abnormality severity not established.'
-		});
-		return { abnormalitySeverity: 'none', reportingCategory: 'indeterminate', firedRules };
-	}
+  if (classification === 'inconclusive') {
+    firedRules.push({
+      ruleId: 'R-SEV-NONE-02',
+      axis: 'severity',
+      category: 'inconclusive',
+      description: 'Inconclusive study; abnormality severity not established.'
+    });
+    return { abnormalitySeverity: 'none', reportingCategory: 'indeterminate', firedRules };
+  }
 
-	firedRules.push({
-		ruleId: 'R-SEV-NONE-01',
-		axis: 'severity',
-		category: 'no-abnormal-finding',
-		description: 'No abnormal finding; abnormality severity graded none.'
-	});
-	return { abnormalitySeverity: 'none', reportingCategory, firedRules };
+  firedRules.push({
+    ruleId: 'R-SEV-NONE-01',
+    axis: 'severity',
+    category: 'no-abnormal-finding',
+    description: 'No abnormal finding; abnormality severity graded none.'
+  });
+  return { abnormalitySeverity: 'none', reportingCategory, firedRules };
 }

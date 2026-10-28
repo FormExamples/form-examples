@@ -1,15 +1,15 @@
 /** Calculate age from date of birth string. */
 export function calculateAge(dob: string): number | null {
-	if (!dob) return null;
-	const birth = new Date(dob);
-	if (isNaN(birth.getTime())) return null;
-	const today = new Date();
-	let age = today.getFullYear() - birth.getFullYear();
-	const m = today.getMonth() - birth.getMonth();
-	if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) {
-		age--;
-	}
-	return age;
+  if (!dob) return null;
+  const birth = new Date(dob);
+  if (isNaN(birth.getTime())) return null;
+  const today = new Date();
+  let age = today.getFullYear() - birth.getFullYear();
+  const m = today.getMonth() - birth.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) {
+    age--;
+  }
+  return age;
 }
 
 /**
@@ -20,27 +20,30 @@ export function calculateAge(dob: string): number | null {
  *   16-21 = Severe sleep disturbance
  */
 export function psqiCategory(score: number): string {
-	if (score <= 5) return 'Good sleep quality';
-	if (score <= 10) return 'Poor sleep quality';
-	if (score <= 15) return 'Sleep disorder likely';
-	return 'Severe sleep disturbance';
+  if (score <= 5) return 'Good sleep quality';
+  if (score <= 10) return 'Poor sleep quality';
+  if (score <= 15) return 'Sleep disorder likely';
+  return 'Severe sleep disturbance';
 }
 
 /** PSQI score label for display. */
 export function psqiScoreLabel(score: number): string {
-	return `PSQI ${score}/21 - ${psqiCategory(score)}`;
+  return `PSQI ${score}/21 - ${psqiCategory(score)}`;
 }
 
 /** PSQI score colour class. */
 export function psqiScoreColor(score: number): string {
-	if (score <= 5) return 'bg-success text-success-content border-success';
-	if (score <= 10) return 'bg-warning text-warning-content border-warning';
-	if (score <= 15) return 'bg-warning text-warning-content border-warning';
-	return 'bg-error text-error-content border-error';
+  if (score <= 5) return 'bg-success text-success-content border-success';
+  if (score <= 10) return 'bg-warning text-warning-content border-warning';
+  if (score <= 15) return 'bg-warning text-warning-content border-warning';
+  return 'bg-error text-error-content border-error';
 }
 
 /** Calculate sleep efficiency percentage. */
-export function sleepEfficiencyCalc(hoursAsleep: number | null, hoursInBed: number | null): number | null {
-	if (hoursAsleep === null || hoursInBed === null || hoursInBed <= 0) return null;
-	return (hoursAsleep / hoursInBed) * 100;
+export function sleepEfficiencyCalc(
+  hoursAsleep: number | null,
+  hoursInBed: number | null
+): number | null {
+  if (hoursAsleep === null || hoursInBed === null || hoursInBed <= 0) return null;
+  return (hoursAsleep / hoursInBed) * 100;
 }

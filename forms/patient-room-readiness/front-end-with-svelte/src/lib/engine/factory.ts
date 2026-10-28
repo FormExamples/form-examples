@@ -8,7 +8,7 @@ export function createEmptyChecklist(): PatientRoomReadinessChecklist {
   return {
     location: {
       buildingNameOrNumber: '',
-      roomNameOrNumber: '',
+      roomNameOrNumber: ''
     },
     checklist: {
       patientCotMattressSideRailings: false,
@@ -35,15 +35,15 @@ export function createEmptyChecklist(): PatientRoomReadinessChecklist {
       wallSeepageWaterLeakage: false,
       electricityPointsLights: false,
       ceilingTiles: false,
-      doorKnobsStopper: false,
+      doorKnobsStopper: false
     },
     inspector: {
       name: '',
-      email: '',
+      email: ''
     },
     inspection: {
       date: '',
-      time: '',
-    },
+      time: ''
+    }
   };
 }

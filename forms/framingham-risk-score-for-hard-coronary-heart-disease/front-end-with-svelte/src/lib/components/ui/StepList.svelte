@@ -17,11 +17,6 @@
   } = $props();
 </script>
 
-<ol
-  class={`step-list ${className}`}
-  aria-label={label}
-  data-current={current}
-  {...restProps}
->
+<ol class={`step-list ${className}`} aria-label={label} data-current={current} {...restProps}>
   {@render children?.()}
 </ol>

@@ -8,19 +8,35 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <label class="block">
       <span class="text-sm text-base-content">Organization name</span>
-      <input type="text" class="w-full border rounded px-2 py-1" bind:value={store.data.organization.name} />
+      <input
+        type="text"
+        class="w-full border rounded px-2 py-1"
+        bind:value={store.data.organization.name}
+      />
     </label>
     <label class="block">
       <span class="text-sm text-base-content">Legal name</span>
-      <input type="text" class="w-full border rounded px-2 py-1" bind:value={store.data.organization.legalName} />
+      <input
+        type="text"
+        class="w-full border rounded px-2 py-1"
+        bind:value={store.data.organization.legalName}
+      />
     </label>
     <label class="block">
       <span class="text-sm text-base-content">Industry</span>
-      <input type="text" class="w-full border rounded px-2 py-1" bind:value={store.data.organization.industry} />
+      <input
+        type="text"
+        class="w-full border rounded px-2 py-1"
+        bind:value={store.data.organization.industry}
+      />
     </label>
     <label class="block">
       <span class="text-sm text-base-content">Domain (e.g. example.com)</span>
-      <input type="text" class="w-full border rounded px-2 py-1" bind:value={store.data.organization.domain} />
+      <input
+        type="text"
+        class="w-full border rounded px-2 py-1"
+        bind:value={store.data.organization.domain}
+      />
     </label>
     <label class="block">
       <span class="text-sm text-base-content">Country (ISO 3166-1 alpha-2)</span>
@@ -33,7 +49,10 @@
     </label>
     <label class="block md:col-span-2">
       <span class="text-sm text-base-content">Description</span>
-      <textarea class="w-full border rounded px-2 py-1 font-mono text-sm" rows="3" bind:value={store.data.organization.description}></textarea>
+      <textarea
+        class="w-full border rounded px-2 py-1 font-mono text-sm"
+        rows="3"
+        bind:value={store.data.organization.description}></textarea>
     </label>
   </div>
 </section>

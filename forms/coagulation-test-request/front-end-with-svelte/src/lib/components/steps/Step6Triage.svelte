@@ -1,46 +1,46 @@
 <script lang="ts">
-	import Field from '#lib/components/ui/Field.svelte';
-	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import Select from '#lib/components/ui/Select.svelte';
-	import { DateInput, TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
-	import { request } from '#lib/stores/request.svelte.js';
+  import Field from '#lib/components/ui/Field.svelte';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import Select from '#lib/components/ui/Select.svelte';
+  import { DateInput, TextAreaInput, TextInput } from '@lilydesignsystem/svelte-headless';
+  import { request } from '#lib/stores/request.svelte.js';
 
-	const t = request.data.triage;
+  const t = request.data.triage;
 </script>
 
 <Fieldset legend="6. Triage">
-	<p class="hint">Requested urgency, site, setting, and notes.</p>
+  <p class="hint">Requested urgency, site, setting, and notes.</p>
 
-	<div class="grid gap-4 sm:grid-cols-2">
-		<Field label="Requested urgency" inputId="urgency" required>
-			<Select id="urgency" label="Requested urgency" bind:value={t.urgency} required>
-				<option value="">Select…</option>
-				<option value="routine">Routine</option>
-				<option value="urgent">Urgent</option>
-				<option value="stat">Stat (immediate)</option>
-			</Select>
-		</Field>
-		<Field label="Requested-by date" inputId="requestedByDate">
-			<DateInput id="requestedByDate" label="Requested-by date" bind:value={t.requestedByDate} />
-		</Field>
-	</div>
+  <div class="grid gap-4 sm:grid-cols-2">
+    <Field label="Requested urgency" inputId="urgency" required>
+      <Select id="urgency" label="Requested urgency" bind:value={t.urgency} required>
+        <option value="">Select…</option>
+        <option value="routine">Routine</option>
+        <option value="urgent">Urgent</option>
+        <option value="stat">Stat (immediate)</option>
+      </Select>
+    </Field>
+    <Field label="Requested-by date" inputId="requestedByDate">
+      <DateInput id="requestedByDate" label="Requested-by date" bind:value={t.requestedByDate} />
+    </Field>
+  </div>
 
-	<div class="grid gap-4 sm:grid-cols-2">
-		<Field label="Site / clinic name" inputId="triageSiteName">
-			<TextInput id="triageSiteName" label="Site / clinic name" bind:value={t.siteName} />
-		</Field>
-		<Field label="Care setting" inputId="setting">
-			<Select id="setting" label="Care setting" bind:value={t.setting}>
-				<option value="">Select…</option>
-				<option value="outpatient">Outpatient</option>
-				<option value="inpatient">Inpatient</option>
-				<option value="community">Community</option>
-				<option value="emergency">Emergency</option>
-			</Select>
-		</Field>
-	</div>
+  <div class="grid gap-4 sm:grid-cols-2">
+    <Field label="Site / clinic name" inputId="triageSiteName">
+      <TextInput id="triageSiteName" label="Site / clinic name" bind:value={t.siteName} />
+    </Field>
+    <Field label="Care setting" inputId="setting">
+      <Select id="setting" label="Care setting" bind:value={t.setting}>
+        <option value="">Select…</option>
+        <option value="outpatient">Outpatient</option>
+        <option value="inpatient">Inpatient</option>
+        <option value="community">Community</option>
+        <option value="emergency">Emergency</option>
+      </Select>
+    </Field>
+  </div>
 
-	<Field label="Notes" inputId="notes">
-		<TextAreaInput id="notes" label="Notes" rows={3} bind:value={t.notes} />
-	</Field>
+  <Field label="Notes" inputId="notes">
+    <TextAreaInput id="notes" label="Notes" rows={3} bind:value={t.notes} />
+  </Field>
 </Fieldset>

@@ -1,8 +1,4 @@
-import type {
-	AgileConsultingScorecardAssessment,
-	Band,
-	GradeResult,
-} from './types';
+import type { AgileConsultingScorecardAssessment, Band, GradeResult } from './types';
 import { bandToRecommendation } from './utils';
 
 /**
@@ -26,52 +22,52 @@ import { bandToRecommendation } from './utils';
  *   - the canonical recommendation slug.
  */
 export interface PreTenderSummary {
-	$schemaVersion: 1;
-	organization: {
-		organizationName: string;
-		sector: string;
-		sizeBand: string;
-	};
-	assessment: {
-		assessmentDate: string;
-	};
-	score: {
-		total: number;
-		manifestoSubtotal: number;
-		principlesSubtotal: number;
-		band: Band;
-		recommendation: string;
-	};
-	flags: Array<{
-		category: string;
-		priority: 'low' | 'medium' | 'high';
-	}>;
+  $schemaVersion: 1;
+  organization: {
+    organizationName: string;
+    sector: string;
+    sizeBand: string;
+  };
+  assessment: {
+    assessmentDate: string;
+  };
+  score: {
+    total: number;
+    manifestoSubtotal: number;
+    principlesSubtotal: number;
+    band: Band;
+    recommendation: string;
+  };
+  flags: Array<{
+    category: string;
+    priority: 'low' | 'medium' | 'high';
+  }>;
 }
 
 export function toPreTenderSummary(
-	data: AgileConsultingScorecardAssessment,
-	grade: GradeResult,
+  data: AgileConsultingScorecardAssessment,
+  grade: GradeResult
 ): PreTenderSummary {
-	return {
-		$schemaVersion: 1,
-		organization: {
-			organizationName: data.organization.organizationName,
-			sector: data.organization.sector,
-			sizeBand: data.organization.sizeBand,
-		},
-		assessment: {
-			assessmentDate: data.assessment.assessmentDate,
-		},
-		score: {
-			total: grade.scoreTotal,
-			manifestoSubtotal: grade.manifestoSubtotal,
-			principlesSubtotal: grade.principlesSubtotal,
-			band: grade.computedBand,
-			recommendation: bandToRecommendation(grade.computedBand),
-		},
-		flags: grade.additionalFlags.map((f) => ({
-			category: f.category,
-			priority: f.priority,
-		})),
-	};
+  return {
+    $schemaVersion: 1,
+    organization: {
+      organizationName: data.organization.organizationName,
+      sector: data.organization.sector,
+      sizeBand: data.organization.sizeBand
+    },
+    assessment: {
+      assessmentDate: data.assessment.assessmentDate
+    },
+    score: {
+      total: grade.scoreTotal,
+      manifestoSubtotal: grade.manifestoSubtotal,
+      principlesSubtotal: grade.principlesSubtotal,
+      band: grade.computedBand,
+      recommendation: bandToRecommendation(grade.computedBand)
+    },
+    flags: grade.additionalFlags.map((f) => ({
+      category: f.category,
+      priority: f.priority
+    }))
+  };
 }

@@ -1,20 +1,20 @@
 import type {
-	AbeGroup,
-	AssessmentData,
-	Axis,
-	FiredRule,
-	GoldGrade,
-	GradingResult,
-	ReviewStatus
+  AbeGroup,
+  AssessmentData,
+  Axis,
+  FiredRule,
+  GoldGrade,
+  GradingResult,
+  ReviewStatus
 } from './types';
 import {
-	abeGroupOf,
-	coreComponents,
-	copdRules,
-	exacerbationRiskOf,
-	goldGradeOf,
-	supportingComponents,
-	symptomBurdenOf
+  abeGroupOf,
+  coreComponents,
+  copdRules,
+  exacerbationRiskOf,
+  goldGradeOf,
+  supportingComponents,
+  symptomBurdenOf
 } from './copd-review-rules';
 import { detectFlaggedIssues } from './flagged-issues';
 
@@ -37,22 +37,22 @@ import { detectFlaggedIssues } from './flagged-issues';
  * (one per gold / symptom / exacerbation / abe axis).
  */
 export function evaluateRules(data: AssessmentData): FiredRule[] {
-	const fired: FiredRule[] = [];
-	for (const rule of copdRules) {
-		try {
-			if (rule.evaluate(data)) {
-				fired.push({
-					id: rule.id,
-					section: rule.section,
-					category: rule.category,
-					description: rule.description
-				});
-			}
-		} catch (e) {
-			console.warn(`COPD rule ${rule.id} evaluation failed:`, e);
-		}
-	}
-	return fired;
+  const fired: FiredRule[] = [];
+  for (const rule of copdRules) {
+    try {
+      if (rule.evaluate(data)) {
+        fired.push({
+          id: rule.id,
+          section: rule.section,
+          category: rule.category,
+          description: rule.description
+        });
+      }
+    } catch (e) {
+      console.warn(`COPD rule ${rule.id} evaluation failed:`, e);
+    }
+  }
+  return fired;
 }
 
 /**
@@ -60,67 +60,67 @@ export function evaluateRules(data: AssessmentData): FiredRule[] {
  * component (`fired` is mutated).
  */
 export function computeReviewStatus(data: AssessmentData, fired: FiredRule[]): ReviewStatus {
-	const missingCore = coreComponents.filter((c) => !c.present(data));
-	const missingSupporting = supportingComponents.filter((c) => !c.present(data));
+  const missingCore = coreComponents.filter((c) => !c.present(data));
+  const missingSupporting = supportingComponents.filter((c) => !c.present(data));
 
-	for (const c of missingCore) {
-		fired.push({
-			id: `R-COMPLETENESS-CORE-${c.id.toUpperCase()}`,
-			section: 'completeness',
-			category: 'required-component',
-			description: `Core review element missing: ${c.label}`
-		});
-	}
-	for (const c of missingSupporting) {
-		fired.push({
-			id: `R-COMPLETENESS-SUPPORTING-${c.id.toUpperCase()}`,
-			section: 'completeness',
-			category: 'supporting-component',
-			description: `Supporting review item missing: ${c.label}`
-		});
-	}
+  for (const c of missingCore) {
+    fired.push({
+      id: `R-COMPLETENESS-CORE-${c.id.toUpperCase()}`,
+      section: 'completeness',
+      category: 'required-component',
+      description: `Core review element missing: ${c.label}`
+    });
+  }
+  for (const c of missingSupporting) {
+    fired.push({
+      id: `R-COMPLETENESS-SUPPORTING-${c.id.toUpperCase()}`,
+      section: 'completeness',
+      category: 'supporting-component',
+      description: `Supporting review item missing: ${c.label}`
+    });
+  }
 
-	let status: ReviewStatus;
-	if (missingCore.length > 0) {
-		status = 'incomplete';
-	} else if (missingSupporting.length > 0) {
-		status = 'partial';
-	} else {
-		status = 'complete';
-	}
+  let status: ReviewStatus;
+  if (missingCore.length > 0) {
+    status = 'incomplete';
+  } else if (missingSupporting.length > 0) {
+    status = 'partial';
+  } else {
+    status = 'complete';
+  }
 
-	fired.push({
-		id: `R-COMPLETENESS-${status.toUpperCase()}-01`,
-		section: 'completeness',
-		category: 'review-status',
-		description:
-			status === 'complete'
-				? 'All core and supporting review elements recorded — review is complete'
-				: status === 'partial'
-					? 'All core elements recorded but one or more supporting items missing — review is partial'
-					: 'One or more core review elements missing — review is incomplete'
-	});
+  fired.push({
+    id: `R-COMPLETENESS-${status.toUpperCase()}-01`,
+    section: 'completeness',
+    category: 'review-status',
+    description:
+      status === 'complete'
+        ? 'All core and supporting review elements recorded — review is complete'
+        : status === 'partial'
+          ? 'All core elements recorded but one or more supporting items missing — review is partial'
+          : 'One or more core review elements missing — review is incomplete'
+  });
 
-	return status;
+  return status;
 }
 
 /** The grade portion (no flags yet): the four axes plus the completeness grade. */
 export function calculateGrade(data: AssessmentData): {
-	goldGrade: GoldGrade;
-	symptomBurden: Axis;
-	exacerbationRisk: Axis;
-	abeGroup: AbeGroup;
-	reviewStatus: ReviewStatus;
-	firedRules: FiredRule[];
+  goldGrade: GoldGrade;
+  symptomBurden: Axis;
+  exacerbationRisk: Axis;
+  abeGroup: AbeGroup;
+  reviewStatus: ReviewStatus;
+  firedRules: FiredRule[];
 } {
-	const firedRules = evaluateRules(data);
-	const goldGrade = goldGradeOf(data);
-	const symptomBurden = symptomBurdenOf(data);
-	const exacerbationRisk = exacerbationRiskOf(data);
-	const abeGroup = abeGroupOf(data);
-	const reviewStatus = computeReviewStatus(data, firedRules);
+  const firedRules = evaluateRules(data);
+  const goldGrade = goldGradeOf(data);
+  const symptomBurden = symptomBurdenOf(data);
+  const exacerbationRisk = exacerbationRiskOf(data);
+  const abeGroup = abeGroupOf(data);
+  const reviewStatus = computeReviewStatus(data, firedRules);
 
-	return { goldGrade, symptomBurden, exacerbationRisk, abeGroup, reviewStatus, firedRules };
+  return { goldGrade, symptomBurden, exacerbationRisk, abeGroup, reviewStatus, firedRules };
 }
 
 /**
@@ -130,20 +130,20 @@ export function calculateGrade(data: AssessmentData): {
  * clinician-facing flags independently.
  */
 export function gradeCopdReview(data: AssessmentData): GradingResult {
-	const grade = calculateGrade(data);
-	const flags = detectFlaggedIssues(data, {
-		abeGroup: grade.abeGroup,
-		reviewStatus: grade.reviewStatus
-	});
+  const grade = calculateGrade(data);
+  const flags = detectFlaggedIssues(data, {
+    abeGroup: grade.abeGroup,
+    reviewStatus: grade.reviewStatus
+  });
 
-	return {
-		goldGrade: grade.goldGrade,
-		symptomBurden: grade.symptomBurden,
-		exacerbationRisk: grade.exacerbationRisk,
-		abeGroup: grade.abeGroup,
-		reviewStatus: grade.reviewStatus,
-		firedRules: grade.firedRules,
-		flags,
-		timestamp: new Date().toISOString()
-	};
+  return {
+    goldGrade: grade.goldGrade,
+    symptomBurden: grade.symptomBurden,
+    exacerbationRisk: grade.exacerbationRisk,
+    abeGroup: grade.abeGroup,
+    reviewStatus: grade.reviewStatus,
+    firedRules: grade.firedRules,
+    flags,
+    timestamp: new Date().toISOString()
+  };
 }

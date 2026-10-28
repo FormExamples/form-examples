@@ -4,10 +4,17 @@
   const c = $derived(certificateStore.data);
 </script>
 
-<Fieldset legend="Travel context" description="Destination and declared clinical considerations relevant to contraindications.">
+<Fieldset
+  legend="Travel context"
+  description="Destination and declared clinical considerations relevant to contraindications."
+>
   <div class="field">
     <label class="label" for="destinations">Destination countries (space-separated alpha-3)</label>
-    <input id="destinations" class="text-input" bind:value={c.destinationCountriesAsIso31661Alpha3} />
+    <input
+      id="destinations"
+      class="text-input"
+      bind:value={c.destinationCountriesAsIso31661Alpha3}
+    />
   </div>
   <div class="field">
     <label class="label" for="arrivalDate">Planned arrival date</label>

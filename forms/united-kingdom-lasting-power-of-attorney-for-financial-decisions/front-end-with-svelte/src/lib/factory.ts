@@ -12,7 +12,7 @@ export function createEmptyAddress(): Address {
     addressLine2: '',
     addressLine3: '',
     postcode: '',
-    countryAsIso3166_1Alpha2: 'GB',
+    countryAsIso3166_1Alpha2: 'GB'
   };
 }
 
@@ -30,7 +30,7 @@ export function createEmptyPerson(): Person {
     isTrustCorporation: false,
     trustCorporationNumber: '',
     isBankrupt: false,
-    hasDebtReliefOrder: false,
+    hasDebtReliefOrder: false
   };
 }
 
@@ -51,7 +51,7 @@ export function createEmptyLpa(): Lpa {
       preferencesOverflowText: '',
       instructionsOverflowText: '',
       decisionsJointlyOverflowText: '',
-      replacementStepInOverflowText: '',
+      replacementStepInOverflowText: ''
     },
     legalRightsAcknowledged: false,
     signatures: [],
@@ -66,7 +66,7 @@ export function createEmptyLpa(): Lpa {
       repeatCaseNumber: '',
       paymentReference: '',
       paymentDate: '',
-      paymentAmount: null,
+      paymentAmount: null
     },
     registrationRecipient: {
       recipientKind: '',
@@ -83,11 +83,11 @@ export function createEmptyLpa(): Lpa {
       otherAddressLine1: '',
       otherAddressLine2: '',
       otherAddressLine3: '',
-      otherPostcode: '',
+      otherPostcode: ''
     },
     opgReferenceNumber: '',
     opgRegistrationDate: '',
     status: 'draft',
-    signedDate: '',
+    signedDate: ''
   };
 }

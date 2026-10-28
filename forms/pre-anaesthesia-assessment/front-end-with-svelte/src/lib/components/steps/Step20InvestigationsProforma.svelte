@@ -2,7 +2,7 @@
   import Field from '#lib/components/ui/Field.svelte';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
-  import { TextInput } from "@lilydesignsystem/svelte-headless";
+  import { TextInput } from '@lilydesignsystem/svelte-headless';
 
   import { store } from '#lib/stores/assessment.svelte.js';
 
@@ -50,13 +50,13 @@
     ['twoDEcho', '2D Echo'],
     ['tmt', 'TMT'],
     ['ctScan', 'CT (scan)'],
-    ['mri', 'MRI'],
+    ['mri', 'MRI']
   ] as const;
 </script>
 
 <Fieldset legend="Step 20 — Investigations">
   <div class="field-grid field-grid-3">
-    {#each textFields as [key, label]}
+    {#each textFields as [key, label] (key)}
       <Field {label}>
         <TextInput {label} bind:value={i[key]} />
       </Field>

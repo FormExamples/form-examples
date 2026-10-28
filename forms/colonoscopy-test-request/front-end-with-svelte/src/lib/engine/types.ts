@@ -14,31 +14,26 @@ export type Procedure = 'colonoscopy' | 'flexible-sigmoidoscopy' | 'ct-colonogra
 
 /** Primary clinical indication for the request. */
 export type Indication =
-	| 'rectal-bleeding'
-	| 'change-in-bowel-habit'
-	| 'iron-deficiency-anaemia'
-	| 'positive-fit'
-	| 'abdominal-mass'
-	| 'ibd-diagnosis'
-	| 'ibd-surveillance'
-	| 'polyp-surveillance'
-	| 'crc-screening'
-	| 'abnormal-imaging'
-	| 'chronic-diarrhoea'
-	| 'other'
-	| '';
+  | 'rectal-bleeding'
+  | 'change-in-bowel-habit'
+  | 'iron-deficiency-anaemia'
+  | 'positive-fit'
+  | 'abdominal-mass'
+  | 'ibd-diagnosis'
+  | 'ibd-surveillance'
+  | 'polyp-surveillance'
+  | 'crc-screening'
+  | 'abnormal-imaging'
+  | 'chronic-diarrhoea'
+  | 'other'
+  | '';
 
 /** Care setting the request originates from. */
 export type Setting = 'outpatient' | 'inpatient' | 'community' | 'emergency' | '';
 
 /** Requesting clinician role. */
 export type ClinicianRole =
-	| 'gastroenterologist'
-	| 'colorectal-surgeon'
-	| 'gp'
-	| 'nurse-endoscopist'
-	| 'other'
-	| '';
+  'gastroenterologist' | 'colorectal-surgeon' | 'gp' | 'nurse-endoscopist' | 'other' | '';
 
 /** Diabetes medication category. */
 export type DiabetesMedication = 'none' | 'oral' | 'insulin' | '';
@@ -53,10 +48,7 @@ export type Urgency = 'routine' | 'urgent' | 'two-week-wait' | 'emergency' | '';
 
 /** Axis A — appropriateness band. */
 export type AppropriatenessBand =
-	| 'usually-appropriate'
-	| 'may-be-appropriate'
-	| 'usually-not-appropriate'
-	| '';
+  'usually-appropriate' | 'may-be-appropriate' | 'usually-not-appropriate' | '';
 
 /** Axis B — cancer-pathway triage tier. */
 export type TriageTier = 'routine' | 'urgent' | 'two-week-wait' | 'emergency' | '';
@@ -71,67 +63,67 @@ export type Recommendation = 'accept' | 'query-referrer' | 'redirect' | 'reject'
 
 /** Requesting clinician details. */
 export interface ClinicianSection {
-	clinicianName: string;
-	clinicianRole: ClinicianRole;
-	registrationBody: string;
-	registrationNumber: string;
-	requesterContact: string;
-	supervisingConsultant: string;
-	siteName: string;
-	referralDate: string;
+  clinicianName: string;
+  clinicianRole: ClinicianRole;
+  registrationBody: string;
+  registrationNumber: string;
+  requesterContact: string;
+  supervisingConsultant: string;
+  siteName: string;
+  referralDate: string;
 }
 
 /** Patient identification and demographics. */
 export interface PatientSection {
-	firstName: string;
-	lastName: string;
-	dateOfBirth: string;
-	nhsNumber: string;
-	bodyMassIndex: number | null;
-	setting: Setting;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  nhsNumber: string;
+  bodyMassIndex: number | null;
+  setting: Setting;
 }
 
 /** Requested procedure, indication, and clinical question. */
 export interface RequestSection {
-	procedure: Procedure;
-	primaryIndication: Indication;
-	clinicalQuestion: string;
-	relevantHistory: string;
+  procedure: Procedure;
+  primaryIndication: Indication;
+  clinicalQuestion: string;
+  relevantHistory: string;
 }
 
 /** Lower-GI red flags and triage labs. */
 export interface RedFlagsSection {
-	weightLoss: boolean;
-	anaemia: boolean;
-	abdominalMass: boolean;
-	rectalBleeding: boolean;
-	fitResultUgG: number | null;
-	haemoglobinGL: number | null;
+  weightLoss: boolean;
+  anaemia: boolean;
+  abdominalMass: boolean;
+  rectalBleeding: boolean;
+  fitResultUgG: number | null;
+  haemoglobinGL: number | null;
 }
 
 /** Anticoagulant / antiplatelet / diabetes medication. */
 export interface MedicationSection {
-	takingAnticoagulant: boolean;
-	anticoagulantAgent: string;
-	takingAntiplatelet: boolean;
-	antiplateletAgent: string;
-	diabetesMedication: DiabetesMedication;
+  takingAnticoagulant: boolean;
+  anticoagulantAgent: string;
+  takingAntiplatelet: boolean;
+  antiplateletAgent: string;
+  diabetesMedication: DiabetesMedication;
 }
 
 /** Bowel-prep fitness, renal function, and ASA grade. */
 export interface FitnessSection {
-	fitForBowelPrep: boolean;
-	bowelPrepAgent: string;
-	chronicKidneyDisease: boolean;
-	egfrMlMin: number | null;
-	asaGrade: AsaGrade;
+  fitForBowelPrep: boolean;
+  bowelPrepAgent: string;
+  chronicKidneyDisease: boolean;
+  egfrMlMin: number | null;
+  asaGrade: AsaGrade;
 }
 
 /** Requested urgency, requested-by date, and notes. */
 export interface TriageSection {
-	urgency: Urgency;
-	requestedByDate: string;
-	notes: string;
+  urgency: Urgency;
+  requestedByDate: string;
+  notes: string;
 }
 
 /**
@@ -139,13 +131,13 @@ export interface TriageSection {
  * four-axis vetting grade is computed from.
  */
 export interface ColonoscopyRequest {
-	clinician: ClinicianSection;
-	patient: PatientSection;
-	request: RequestSection;
-	redFlags: RedFlagsSection;
-	medication: MedicationSection;
-	fitness: FitnessSection;
-	triage: TriageSection;
+  clinician: ClinicianSection;
+  patient: PatientSection;
+  request: RequestSection;
+  redFlags: RedFlagsSection;
+  medication: MedicationSection;
+  fitness: FitnessSection;
+  triage: TriageSection;
 }
 
 // ─── Grading types ───
@@ -155,78 +147,78 @@ export type Axis = 'appropriateness' | 'urgency' | 'completeness' | 'risk';
 
 /** Flag category (mirrors the sql grade_flag CHECK constraint). */
 export type FlagCategory =
-	| 'suspected-cancer-2ww'
-	| 'high-bleeding-risk-anticoag'
-	| 'unfit-for-prep'
-	| 'asa-iv'
-	| 'missing-fit'
-	| 'missing-indication'
-	| 'missing-clinical-question'
-	| 'other';
+  | 'suspected-cancer-2ww'
+  | 'high-bleeding-risk-anticoag'
+  | 'unfit-for-prep'
+  | 'asa-iv'
+  | 'missing-fit'
+  | 'missing-indication'
+  | 'missing-clinical-question'
+  | 'other';
 
 /** Flag priority. */
 export type FlagPriority = 'low' | 'medium' | 'high';
 
 /** A single rule that fired during grading (audit trail). */
 export interface FiredRule {
-	ruleId: string;
-	axis: Axis;
-	category: string;
-	description: string;
+  ruleId: string;
+  axis: Axis;
+  category: string;
+  description: string;
 }
 
 /** A safety-critical flag, independent of the four axes. */
 export interface Flag {
-	flagId: string;
-	category: FlagCategory;
-	priority: FlagPriority;
-	description: string;
-	suggestedAction: string;
+  flagId: string;
+  category: FlagCategory;
+  priority: FlagPriority;
+  description: string;
+  suggestedAction: string;
 }
 
 /** The computed four-axis vetting grade. */
 export interface GradingResult {
-	// Axis A
-	appropriatenessScore: number;
-	appropriatenessBand: AppropriatenessBand;
-	// Axis B
-	triageTier: TriageTier;
-	targetTimeframe: string;
-	twoWeekWaitEligible: boolean;
-	twoWeekWaitRationale: string;
-	// Axis C
-	completenessPercent: number;
-	// Axis D
-	riskBand: RiskBand;
-	anticoagulantAction: string;
-	// Overall
-	recommendation: Recommendation;
-	recommendationLabel: string;
-	firedRules: FiredRule[];
-	flags: Flag[];
-	gradedAt: string;
+  // Axis A
+  appropriatenessScore: number;
+  appropriatenessBand: AppropriatenessBand;
+  // Axis B
+  triageTier: TriageTier;
+  targetTimeframe: string;
+  twoWeekWaitEligible: boolean;
+  twoWeekWaitRationale: string;
+  // Axis C
+  completenessPercent: number;
+  // Axis D
+  riskBand: RiskBand;
+  anticoagulantAction: string;
+  // Overall
+  recommendation: Recommendation;
+  recommendationLabel: string;
+  firedRules: FiredRule[];
+  flags: Flag[];
+  gradedAt: string;
 }
 
 // ─── Step configuration ───
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
+  number: number;
+  title: string;
+  shortTitle: string;
 }
 
 // ─── Dashboard row ───
 
 /** A graded request row for the vetting dashboard table. */
 export interface RequestRow {
-	id: string;
-	patientName: string;
-	procedure: Procedure;
-	primaryIndication: Indication;
-	appropriatenessBand: AppropriatenessBand;
-	triageTier: TriageTier;
-	completenessPercent: number;
-	riskBand: RiskBand;
-	recommendation: Recommendation;
-	flagCount: number;
+  id: string;
+  patientName: string;
+  procedure: Procedure;
+  primaryIndication: Indication;
+  appropriatenessBand: AppropriatenessBand;
+  triageTier: TriageTier;
+  completenessPercent: number;
+  riskBand: RiskBand;
+  recommendation: Recommendation;
+  flagCount: number;
 }

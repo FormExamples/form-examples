@@ -19,7 +19,13 @@
     hint="Any other names the donor has been known by (LP1H s.1)."
     onchange={changed}
   />
-  <FormField label="Date of birth" type="date" required bind:value={donor.birthDate} onchange={changed} />
+  <FormField
+    label="Date of birth"
+    type="date"
+    required
+    bind:value={donor.birthDate}
+    onchange={changed}
+  />
   <FormField label="Email" type="email" bind:value={donor.email} onchange={changed} />
   <FormField label="Telephone" type="tel" bind:value={donor.phone} onchange={changed} />
   <div class="sm:col-span-2">
@@ -50,7 +56,7 @@
     onchange={changed}
     options={[
       { value: 'england', label: 'England' },
-      { value: 'wales', label: 'Wales' },
+      { value: 'wales', label: 'Wales' }
     ]}
   />
   <SelectField
@@ -59,7 +65,7 @@
     onchange={changed}
     options={[
       { value: 'en', label: 'English' },
-      { value: 'cy', label: 'Cymraeg (Welsh)' },
+      { value: 'cy', label: 'Cymraeg (Welsh)' }
     ]}
   />
   <YesNoField

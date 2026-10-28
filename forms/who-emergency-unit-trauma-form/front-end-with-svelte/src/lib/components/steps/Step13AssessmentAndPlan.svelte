@@ -1,21 +1,21 @@
 <script lang="ts">
-	import { assessment } from '#lib/stores/assessment.svelte.js';
-	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
+  import { assessment } from '#lib/stores/assessment.svelte.js';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import TextAreaInput from '#lib/components/ui/TextAreaInput.svelte';
 
-	const a = assessment.data.assessmentAndPlan;
+  const a = assessment.data.assessmentAndPlan;
 </script>
 
 <Fieldset
-	title="Assessment & Plan"
-	description="Summary, differential diagnosis and plan for diagnostics, intervention and consults."
+  title="Assessment & Plan"
+  description="Summary, differential diagnosis and plan for diagnostics, intervention and consults."
 >
-	<TextAreaInput
-		label="Narrative"
-		name="apNarrative"
-		bind:value={a.narrative}
-		rows={8}
-		required
-		placeholder="Summary, differential diagnoses, plan for imaging / interventions / consults."
-	/>
+  <TextAreaInput
+    label="Narrative"
+    name="apNarrative"
+    bind:value={a.narrative}
+    rows={8}
+    required
+    placeholder="Summary, differential diagnoses, plan for imaging / interventions / consults."
+  />
 </Fieldset>

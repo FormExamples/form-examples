@@ -1,21 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { calculateMaturity } from './maturity-grader.js';
 import { createEmptyDocumentation } from './factory.js';
-import type { Arc42Documentation } from './types.js';
-
-function fillSection1Complete(d: Arc42Documentation) {
-  d.introduction = 'x';
-  d.businessGoals = [{ ordinal: 1, name: 'g', description: '' }];
-  d.qualityGoals = [
-    { ordinal: 1, name: 'a', priority: 'high', scenario: 's' },
-    { ordinal: 2, name: 'b', priority: 'high', scenario: 's' },
-    { ordinal: 3, name: 'c', priority: 'medium', scenario: 's' },
-  ];
-  d.stakeholders = [
-    { ordinal: 1, name: 'a', role: 'b', concerns: 'c' },
-    { ordinal: 2, name: 'd', role: 'e', concerns: 'f' },
-  ];
-}
 
 describe('calculateMaturity', () => {
   it('Draft when documentation is empty', () => {
@@ -36,9 +21,13 @@ describe('calculateMaturity', () => {
     d.runtimeScenarios = [{ ordinal: 1, name: 'n', triggerDescription: 't', stepsSummary: '' }]; // partial: empty stepsSummary
     d.deploymentOverview = 'o';
     d.crosscuttingOverview = 'o';
-    d.architecturalDecisions = [{ ordinal: 1, title: 't', status: 'draft', context: '', decision: '', consequences: '' }];
+    d.architecturalDecisions = [
+      { ordinal: 1, title: 't', status: 'draft', context: '', decision: '', consequences: '' }
+    ];
     d.qualityTreeSummary = 'q';
-    d.riskItems = [{ ordinal: 1, kind: 'risk', name: 'n', probability: 'low', impact: 'low', mitigation: '' }]; // partial: no mitigation
+    d.riskItems = [
+      { ordinal: 1, kind: 'risk', name: 'n', probability: 'low', impact: 'low', mitigation: '' }
+    ]; // partial: no mitigation
     d.glossaryTerms = [{ ordinal: 1, term: 't', definition: 'd' }];
     const r = calculateMaturity(d);
     expect(r.computedMaturity).toBe('reviewable');
@@ -56,6 +45,8 @@ describe('calculateMaturity', () => {
   it('reports fired flags via additionalFlags', () => {
     const r = calculateMaturity(createEmptyDocumentation());
     expect(r.additionalFlags.length).toBeGreaterThan(0);
-    expect(r.additionalFlags.every((f) => ['high', 'medium', 'low'].includes(f.priority))).toBe(true);
+    expect(r.additionalFlags.every((f) => ['high', 'medium', 'low'].includes(f.priority))).toBe(
+      true
+    );
   });
 });

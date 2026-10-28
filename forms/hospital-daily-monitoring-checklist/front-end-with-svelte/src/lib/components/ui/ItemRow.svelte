@@ -6,14 +6,17 @@
   // pattern this mirrors.
   import { store } from '#lib/stores/assessment.svelte.js';
   import type { ChecklistItemDef } from '#lib/config/items.js';
-  import { RadioGroup, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { RadioGroup, TextInput } from '@lilydesignsystem/svelte-headless';
 
   let { item }: { item: ChecklistItemDef } = $props();
 
-  const STATUS_OPTIONS: { value: 'satisfactory' | 'needs-attention' | 'not-applicable'; label: string }[] = [
+  const STATUS_OPTIONS: {
+    value: 'satisfactory' | 'needs-attention' | 'not-applicable';
+    label: string;
+  }[] = [
     { value: 'satisfactory', label: 'Satisfactory' },
     { value: 'needs-attention', label: 'Needs attention' },
-    { value: 'not-applicable', label: 'N/A' },
+    { value: 'not-applicable', label: 'N/A' }
   ];
 
   const response = $derived(store.data.items[item.id]);
@@ -55,7 +58,9 @@
     padding: 0.75rem 0;
     border-bottom: 1px solid var(--color-border);
   }
-  .item-row:last-child { border-bottom: 0; }
+  .item-row:last-child {
+    border-bottom: 0;
+  }
   .item-row-header {
     display: grid;
     grid-template-columns: auto 1fr;

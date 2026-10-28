@@ -40,9 +40,7 @@ export function personEquals(a: Person, b: Person): boolean {
   if (a.id && b.id && a.id === b.id) return true;
   if (!a.dateOfBirth || !b.dateOfBirth) return false;
   if (a.dateOfBirth !== b.dateOfBirth) return false;
-  return (
-    namesEqual(a.firstNames, b.firstNames) && namesEqual(a.lastName, b.lastName)
-  );
+  return namesEqual(a.firstNames, b.firstNames) && namesEqual(a.lastName, b.lastName);
 }
 
 // Is the person identifiable by any of the populated fields? Used to

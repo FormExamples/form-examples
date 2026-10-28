@@ -16,12 +16,12 @@ export function createEmptyIndicators(): HospitalPerformanceIndicators {
       hospitalName: '',
       periodMonth: null,
       periodYear: null,
-      preparedByName: '',
+      preparedByName: ''
     },
     items: emptyItems(),
     summary: {
       overallNotes: '',
-      signedAt: '',
-    },
+      signedAt: ''
+    }
   };
 }

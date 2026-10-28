@@ -15,52 +15,46 @@ export type CommunicationBand = 0 | 1 | 2 | 3 | null;
 
 /** Healthcare profession of the candidate sitting the Medicine sub-test. */
 export type Profession =
-	| 'medicine'
-	| 'nursing'
-	| 'dentistry'
-	| 'pharmacy'
-	| 'physiotherapy'
-	| 'other'
-	| '';
+  'medicine' | 'nursing' | 'dentistry' | 'pharmacy' | 'physiotherapy' | 'other' | '';
 
 export type YesNo = 'yes' | 'no' | '';
 
 export interface CandidateDetails {
-	candidateNumber: string;
-	firstName: string;
-	lastName: string;
-	dateOfTest: string;
-	profession: Profession;
-	firstLanguage: string;
-	testVenue: string;
-	assessorName: string;
+  candidateNumber: string;
+  firstName: string;
+  lastName: string;
+  dateOfTest: string;
+  profession: Profession;
+  firstLanguage: string;
+  testVenue: string;
+  assessorName: string;
 }
 
 /** A single role-play scenario (Interview / Clinical explanation). */
 export interface RolePlay {
-	setting: string;
-	patientRole: string;
-	candidateTask: string;
-	notes: string;
-	completed: YesNo;
+  setting: string;
+  patientRole: string;
+  candidateTask: string;
+  notes: string;
+  completed: YesNo;
 }
 
 /** The four linguistic criteria, each scored 0-6. */
 export interface LinguisticCriteria {
-	intelligibility: LinguisticBand;
-	fluency: LinguisticBand;
-	appropriatenessOfLanguage: LinguisticBand;
-	resourcesOfGrammarAndExpression: LinguisticBand;
+  intelligibility: LinguisticBand;
+  fluency: LinguisticBand;
+  appropriatenessOfLanguage: LinguisticBand;
+  resourcesOfGrammarAndExpression: LinguisticBand;
 }
 
 /** The five clinical-communication criteria, each scored 0-3. */
 export interface ClinicalCommunication {
-	relationshipBuilding: CommunicationBand;
-	understandingPatientPerspective: CommunicationBand;
-	providingStructure: CommunicationBand;
-	informationGathering: CommunicationBand;
-	informationGiving: CommunicationBand;
-	examinerComments: string;
+  relationshipBuilding: CommunicationBand;
+  understandingPatientPerspective: CommunicationBand;
+  providingStructure: CommunicationBand;
+  informationGathering: CommunicationBand;
+  informationGiving: CommunicationBand;
+  examinerComments: string;
 }
 
 // ──────────────────────────────────────────────
@@ -68,11 +62,11 @@ export interface ClinicalCommunication {
 // ──────────────────────────────────────────────
 
 export interface AssessmentData {
-	candidateDetails: CandidateDetails;
-	rolePlay1: RolePlay;
-	rolePlay2: RolePlay;
-	linguisticCriteria: LinguisticCriteria;
-	clinicalCommunication: ClinicalCommunication;
+  candidateDetails: CandidateDetails;
+  rolePlay1: RolePlay;
+  rolePlay2: RolePlay;
+  linguisticCriteria: LinguisticCriteria;
+  clinicalCommunication: ClinicalCommunication;
 }
 
 // ──────────────────────────────────────────────
@@ -86,44 +80,44 @@ export type OetGrade = 'A' | 'B' | 'C+' | 'C' | 'D' | 'E';
 export type Outcome = 'pass' | 'refer';
 
 export interface OetRule {
-	id: string;
-	criterion: string;
-	description: string;
-	/** Severity 1 (minor) – 4 (severe weakness), used for the report Badge. */
-	grade: number;
-	evaluate: (data: AssessmentData) => boolean;
+  id: string;
+  criterion: string;
+  description: string;
+  /** Severity 1 (minor) – 4 (severe weakness), used for the report Badge. */
+  grade: number;
+  evaluate: (data: AssessmentData) => boolean;
 }
 
 export interface FiredRule {
-	id: string;
-	criterion: string;
-	description: string;
-	grade: number;
+  id: string;
+  criterion: string;
+  description: string;
+  grade: number;
 }
 
 export interface AdditionalFlag {
-	id: string;
-	category: string;
-	message: string;
-	priority: 'high' | 'medium' | 'low';
+  id: string;
+  category: string;
+  message: string;
+  priority: 'high' | 'medium' | 'low';
 }
 
 export interface GradingResult {
-	/** Sum of the four linguistic bands (0-24). */
-	linguisticTotal: number;
-	linguisticMax: number;
-	/** Sum of the five clinical-communication bands (0-15). */
-	communicationTotal: number;
-	communicationMax: number;
-	/** Combined raw band total (0-39). */
-	rawTotal: number;
-	/** OET 0-500 scaled score. */
-	score: number;
-	grade: OetGrade;
-	outcome: Outcome;
-	firedRules: FiredRule[];
-	additionalFlags: AdditionalFlag[];
-	timestamp: string;
+  /** Sum of the four linguistic bands (0-24). */
+  linguisticTotal: number;
+  linguisticMax: number;
+  /** Sum of the five clinical-communication bands (0-15). */
+  communicationTotal: number;
+  communicationMax: number;
+  /** Combined raw band total (0-39). */
+  rawTotal: number;
+  /** OET 0-500 scaled score. */
+  score: number;
+  grade: OetGrade;
+  outcome: Outcome;
+  firedRules: FiredRule[];
+  additionalFlags: AdditionalFlag[];
+  timestamp: string;
 }
 
 // ──────────────────────────────────────────────
@@ -131,8 +125,8 @@ export interface GradingResult {
 // ──────────────────────────────────────────────
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
-	section: keyof AssessmentData;
+  number: number;
+  title: string;
+  shortTitle: string;
+  section: keyof AssessmentData;
 }

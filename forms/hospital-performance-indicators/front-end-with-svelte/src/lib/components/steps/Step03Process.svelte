@@ -8,8 +8,8 @@
 
 <Fieldset legend="Step 3 — Perspective 2 — Process Indicators (28 indicators)">
   <p class="hint">
-    Clinical process, safety, and operational-flow indicators — the largest
-    perspective in the Balanced Scorecard.
+    Clinical process, safety, and operational-flow indicators — the largest perspective in the
+    Balanced Scorecard.
   </p>
 
   {#each indicators as indicator (indicator.id)}

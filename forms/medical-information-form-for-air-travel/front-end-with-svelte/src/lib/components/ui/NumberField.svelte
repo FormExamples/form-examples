@@ -10,7 +10,7 @@
     step = 'any',
     unit = '',
     hint = '',
-    required = false,
+    required = false
   }: {
     label: string;
     value: number | null;

@@ -2,7 +2,7 @@
   import { store } from '#lib/state.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { TextAreaInput } from "@lilydesignsystem/svelte-headless";
+  import { TextAreaInput } from '@lilydesignsystem/svelte-headless';
   import Select from '#lib/components/ui/Select.svelte';
 </script>
 
@@ -30,14 +30,20 @@
       />
     </Field>
     <Field label="Intra-operative photographs taken">
-      <Select label="Intra-operative photographs taken" bind:value={store.data.operativeFindings.intraOpPhotographsTaken}>
+      <Select
+        label="Intra-operative photographs taken"
+        bind:value={store.data.operativeFindings.intraOpPhotographsTaken}
+      >
         <option value="">—</option>
         <option value="yes">Yes</option>
         <option value="no">No</option>
       </Select>
     </Field>
     <Field label="Frozen-section requested">
-      <Select label="Frozen-section requested" bind:value={store.data.operativeFindings.frozenSectionRequested}>
+      <Select
+        label="Frozen-section requested"
+        bind:value={store.data.operativeFindings.frozenSectionRequested}
+      >
         <option value="">—</option>
         <option value="yes">Yes</option>
         <option value="no">No</option>

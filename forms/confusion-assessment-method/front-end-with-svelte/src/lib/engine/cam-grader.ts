@@ -7,11 +7,11 @@ import { detectFlaggedIssues } from './flagged-issues';
  * the RASS score is -4 or -5 (unrousable).
  */
 export function isUnableToAssess(data: AssessmentData): boolean {
-	return (
-		data.context.camVariant === 'cam-icu' &&
-		data.feature4.rassScore !== null &&
-		(data.feature4.rassScore === -4 || data.feature4.rassScore === -5)
-	);
+  return (
+    data.context.camVariant === 'cam-icu' &&
+    data.feature4.rassScore !== null &&
+    (data.feature4.rassScore === -4 || data.feature4.rassScore === -5)
+  );
 }
 
 /**
@@ -19,29 +19,29 @@ export function isUnableToAssess(data: AssessmentData): boolean {
  * feature number plus an audit trail of fired rules.
  */
 export function evaluateFeatures(data: AssessmentData): {
-	positives: Record<number, boolean>;
-	firedRules: FiredRule[];
+  positives: Record<number, boolean>;
+  firedRules: FiredRule[];
 } {
-	const positives: Record<number, boolean> = {};
-	const firedRules: FiredRule[] = [];
-	for (const rule of camRules) {
-		let positive = false;
-		try {
-			positive = rule.evaluate(data) === true;
-		} catch (e) {
-			// Rule evaluation failed - log for debugging but continue grading.
-			console.warn(`CAM rule ${rule.id} evaluation failed:`, e);
-		}
-		positives[rule.featureNumber] = positive;
-		firedRules.push({
-			id: rule.id,
-			feature: rule.feature,
-			positive,
-			category: rule.category,
-			description: `${rule.description} — ${positive ? 'POSITIVE' : 'negative'}`
-		});
-	}
-	return { positives, firedRules };
+  const positives: Record<number, boolean> = {};
+  const firedRules: FiredRule[] = [];
+  for (const rule of camRules) {
+    let positive = false;
+    try {
+      positive = rule.evaluate(data) === true;
+    } catch (e) {
+      // Rule evaluation failed - log for debugging but continue grading.
+      console.warn(`CAM rule ${rule.id} evaluation failed:`, e);
+    }
+    positives[rule.featureNumber] = positive;
+    firedRules.push({
+      id: rule.id,
+      feature: rule.feature,
+      positive,
+      category: rule.category,
+      description: `${rule.description} — ${positive ? 'POSITIVE' : 'negative'}`
+    });
+  }
+  return { positives, firedRules };
 }
 
 /**
@@ -59,71 +59,71 @@ export function evaluateFeatures(data: AssessmentData): {
  * positive-feature set is empty.
  */
 export function calculateCamGrade(data: AssessmentData): GradingResult {
-	const motoricSubtype = data.observations.motoricSubtype;
-	const timestamp = new Date().toISOString();
+  const motoricSubtype = data.observations.motoricSubtype;
+  const timestamp = new Date().toISOString();
 
-	// ─── Arousal gate (CAM-ICU RASS -4/-5) ──────────────────────────
-	if (isUnableToAssess(data)) {
-		const classification: Classification = 'unable-to-assess';
-		return {
-			classification,
-			deliriumPresent: null,
-			positiveFeatures: [],
-			feature1Positive: null,
-			feature2Positive: null,
-			feature3Positive: null,
-			feature4Positive: null,
-			motoricSubtype,
-			firedRules: [
-				{
-					id: 'R-AROUSAL-GATE-01',
-					feature: 'arousal',
-					positive: null,
-					category: 'arousal-gate',
-					description: `CAM-ICU RASS ${data.feature4.rassScore} (unrousable) — cannot assess; classification unable-to-assess`
-				}
-			],
-			flaggedIssues: detectFlaggedIssues(data, classification),
-			timestamp
-		};
-	}
+  // ─── Arousal gate (CAM-ICU RASS -4/-5) ──────────────────────────
+  if (isUnableToAssess(data)) {
+    const classification: Classification = 'unable-to-assess';
+    return {
+      classification,
+      deliriumPresent: null,
+      positiveFeatures: [],
+      feature1Positive: null,
+      feature2Positive: null,
+      feature3Positive: null,
+      feature4Positive: null,
+      motoricSubtype,
+      firedRules: [
+        {
+          id: 'R-AROUSAL-GATE-01',
+          feature: 'arousal',
+          positive: null,
+          category: 'arousal-gate',
+          description: `CAM-ICU RASS ${data.feature4.rassScore} (unrousable) — cannot assess; classification unable-to-assess`
+        }
+      ],
+      flaggedIssues: detectFlaggedIssues(data, classification),
+      timestamp
+    };
+  }
 
-	// ─── Evaluate the four features ─────────────────────────────────
-	const { positives, firedRules } = evaluateFeatures(data);
-	const f1 = positives[1];
-	const f2 = positives[2];
-	const f3 = positives[3];
-	const f4 = positives[4];
+  // ─── Evaluate the four features ─────────────────────────────────
+  const { positives, firedRules } = evaluateFeatures(data);
+  const f1 = positives[1];
+  const f2 = positives[2];
+  const f3 = positives[3];
+  const f4 = positives[4];
 
-	// ─── Fixed CAM diagnostic algorithm ─────────────────────────────
-	const deliriumPresent = f1 && f2 && (f3 || f4);
-	const classification: Classification = deliriumPresent ? 'present' : 'absent';
+  // ─── Fixed CAM diagnostic algorithm ─────────────────────────────
+  const deliriumPresent = f1 && f2 && (f3 || f4);
+  const classification: Classification = deliriumPresent ? 'present' : 'absent';
 
-	const positiveFeatures = [1, 2, 3, 4].filter((n) => positives[n]);
+  const positiveFeatures = [1, 2, 3, 4].filter((n) => positives[n]);
 
-	// Record the algorithm-combiner decision as an audit row, mirroring the
-	// grade_rule table's `algorithm` feature.
-	firedRules.push({
-		id: 'R-ALGORITHM-01',
-		feature: 'algorithm',
-		positive: null,
-		category: 'algorithm-combiner',
-		description: deliriumPresent
-			? '1 AND 2 AND (3 OR 4) satisfied — delirium present'
-			: '1 AND 2 AND (3 OR 4) not satisfied — delirium absent'
-	});
+  // Record the algorithm-combiner decision as an audit row, mirroring the
+  // grade_rule table's `algorithm` feature.
+  firedRules.push({
+    id: 'R-ALGORITHM-01',
+    feature: 'algorithm',
+    positive: null,
+    category: 'algorithm-combiner',
+    description: deliriumPresent
+      ? '1 AND 2 AND (3 OR 4) satisfied — delirium present'
+      : '1 AND 2 AND (3 OR 4) not satisfied — delirium absent'
+  });
 
-	return {
-		classification,
-		deliriumPresent,
-		positiveFeatures,
-		feature1Positive: f1,
-		feature2Positive: f2,
-		feature3Positive: f3,
-		feature4Positive: f4,
-		motoricSubtype,
-		firedRules,
-		flaggedIssues: detectFlaggedIssues(data, classification),
-		timestamp
-	};
+  return {
+    classification,
+    deliriumPresent,
+    positiveFeatures,
+    feature1Positive: f1,
+    feature2Positive: f2,
+    feature3Positive: f3,
+    feature4Positive: f4,
+    motoricSubtype,
+    firedRules,
+    flaggedIssues: detectFlaggedIssues(data, classification),
+    timestamp
+  };
 }

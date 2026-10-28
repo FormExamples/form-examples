@@ -1,17 +1,17 @@
-export type YesNo = "yes" | "no" | "";
+export type YesNo = 'yes' | 'no' | '';
 
 export interface Clinician {
   clinicianName: string;
   clinicianRole:
-    | "anaesthetist"
-    | "surgeon"
-    | "preop-nurse"
-    | "perioperative-physician"
-    | "geriatrician"
-    | "pharmacist"
-    | "other"
-    | "";
-  registrationBody: "GMC" | "NMC" | "HCPC" | "GPhC" | "other" | "";
+    | 'anaesthetist'
+    | 'surgeon'
+    | 'preop-nurse'
+    | 'perioperative-physician'
+    | 'geriatrician'
+    | 'pharmacist'
+    | 'other'
+    | '';
+  registrationBody: 'GMC' | 'NMC' | 'HCPC' | 'GPhC' | 'other' | '';
   registrationNumber: string;
   siteName: string;
   assessmentDate: string;
@@ -24,7 +24,7 @@ export interface Patient {
   dateOfBirth: string;
   nhsNumber: string;
   hospitalNumber: string;
-  sex: "male" | "female" | "other" | "";
+  sex: 'male' | 'female' | 'other' | '';
   weightKg: number | null;
   heightCm: number | null;
 }
@@ -33,9 +33,9 @@ export interface SurgeryPlan {
   plannedProcedure: string;
   indicationForSurgery: string;
   surgicalSpecialty: string;
-  urgency: "elective" | "urgent" | "emergency" | "immediate" | "";
-  laterality: "left" | "right" | "bilateral" | "midline" | "na" | "";
-  surgicalSeverity: "minor" | "intermediate" | "major" | "major-plus" | "";
+  urgency: 'elective' | 'urgent' | 'emergency' | 'immediate' | '';
+  laterality: 'left' | 'right' | 'bilateral' | 'midline' | 'na' | '';
+  surgicalSeverity: 'minor' | 'intermediate' | 'major' | 'major-plus' | '';
   anticipatedBloodLossMl: number | null;
   anticipatedDurationMinutes: number | null;
   consultantSurgeon: string;
@@ -57,16 +57,15 @@ export interface Vitals {
 }
 
 export interface Airway {
-  mallampatiClass: "I" | "II" | "III" | "IV" | "";
+  mallampatiClass: 'I' | 'II' | 'III' | 'IV' | '';
   thyromentalDistanceCm: number | null;
   mouthOpeningCm: number | null;
   interIncisorGapCm: number | null;
-  neckRom: "full" | "reduced" | "severely-limited" | "";
-  cervicalSpineStability: "stable" | "limited" | "unstable" | "";
-  dentition:
-    "good" | "loose-teeth" | "caps-crowns" | "edentulous" | "dentures" | "";
+  neckRom: 'full' | 'reduced' | 'severely-limited' | '';
+  cervicalSpineStability: 'stable' | 'limited' | 'unstable' | '';
+  dentition: 'good' | 'loose-teeth' | 'caps-crowns' | 'edentulous' | 'dentures' | '';
   beard: YesNo;
-  upperLipBiteTest: "I" | "II" | "III" | "";
+  upperLipBiteTest: 'I' | 'II' | 'III' | '';
   priorDifficultIntubation: YesNo;
   previousSurgeries: string;
   previousAnaestheticIssues: YesNo;
@@ -85,23 +84,16 @@ export interface Airway {
 }
 
 export interface Cardiovascular {
-  heartRhythm:
-    | "sinus"
-    | "atrial-fibrillation"
-    | "flutter"
-    | "heart-block"
-    | "paced"
-    | "other"
-    | "";
+  heartRhythm: 'sinus' | 'atrial-fibrillation' | 'flutter' | 'heart-block' | 'paced' | 'other' | '';
   murmurPresent: YesNo;
   murmurDescription: string;
-  peripheralPulses: "normal" | "reduced" | "absent" | "";
+  peripheralPulses: 'normal' | 'reduced' | 'absent' | '';
   jvpRaised: YesNo;
-  peripheralOedema: "none" | "mild" | "moderate" | "severe" | "";
+  peripheralOedema: 'none' | 'mild' | 'moderate' | 'severe' | '';
   ecgPerformed: YesNo;
   ecgRhythm: string;
   ecgRateBpm: number | null;
-  ecgAxis: "normal" | "left" | "right" | "extreme" | "";
+  ecgAxis: 'normal' | 'left' | 'right' | 'extreme' | '';
   ecgIschaemicChanges: YesNo;
   ecgNotes: string;
   echoPerformed: YesNo;
@@ -117,21 +109,21 @@ export interface Cardiovascular {
 }
 
 export interface Respiratory {
-  breathSounds: "normal" | "reduced" | "bronchial" | "silent" | "";
+  breathSounds: 'normal' | 'reduced' | 'bronchial' | 'silent' | '';
   wheeze: YesNo;
   crackles: YesNo;
   crepitations: YesNo;
   chestWallDeformity: YesNo;
-  asthma: "none" | "controlled" | "uncontrolled" | "";
-  copd: "none" | "mild" | "moderate" | "severe" | "";
+  asthma: 'none' | 'controlled' | 'uncontrolled' | '';
+  copd: 'none' | 'mild' | 'moderate' | 'severe' | '';
   cxrPerformed: YesNo;
   cxrFindings: string;
   pftPerformed: YesNo;
   pftFev1PercentPredicted: number | null;
   pftFev1FvcRatio: number | null;
-  smokingStatus: "never" | "ex" | "current" | "";
+  smokingStatus: 'never' | 'ex' | 'current' | '';
   packYears: number | null;
-  covidHistory: "never" | "recovered" | "recent" | "long-covid" | "";
+  covidHistory: 'never' | 'recovered' | 'recent' | 'long-covid' | '';
   daysSinceCovid: number | null;
   covidUnresolvedSymptoms: YesNo;
 }
@@ -141,14 +133,14 @@ export interface Neurological {
   gcsEye: number | null;
   gcsVerbal: number | null;
   gcsMotor: number | null;
-  cognitionTool: "AMT-4" | "MOCA" | "MMSE" | "none" | "";
+  cognitionTool: 'AMT-4' | 'MOCA' | 'MMSE' | 'none' | '';
   cognitionScore: number | null;
-  cognitiveImpairment: "none" | "mild" | "moderate" | "severe" | "";
+  cognitiveImpairment: 'none' | 'mild' | 'moderate' | 'severe' | '';
   capacityConcern: YesNo;
   cranialNervesNotes: string;
-  motorPower: "normal" | "reduced" | "severely-reduced" | "";
+  motorPower: 'normal' | 'reduced' | 'severely-reduced' | '';
   sensoryNotes: string;
-  reflexes: "normal" | "hyperreflexic" | "hyporeflexic" | "absent" | "";
+  reflexes: 'normal' | 'hyperreflexic' | 'hyporeflexic' | 'absent' | '';
   recentStrokeTia: YesNo;
   daysSinceStrokeTia: number | null;
   seizureDisorder: YesNo;
@@ -160,16 +152,15 @@ export interface RenalHepatic {
   ureaMmolL: number | null;
   potassiumMmolL: number | null;
   sodiumMmolL: number | null;
-  dialysisStatus:
-    "none" | "peritoneal" | "haemodialysis" | "haemofiltration" | "";
-  ckdStage: "1" | "2" | "3a" | "3b" | "4" | "5" | "";
+  dialysisStatus: 'none' | 'peritoneal' | 'haemodialysis' | 'haemofiltration' | '';
+  ckdStage: '1' | '2' | '3a' | '3b' | '4' | '5' | '';
   bilirubinUmolL: number | null;
   altUL: number | null;
   astUL: number | null;
   alpUL: number | null;
   albuminGL: number | null;
-  chronicLiverDisease: "none" | "compensated" | "decompensated" | "";
-  childPughClass: "A" | "B" | "C" | "";
+  chronicLiverDisease: 'none' | 'compensated' | 'decompensated' | '';
+  childPughClass: 'A' | 'B' | 'C' | '';
   urinalysisFindings: string;
 }
 
@@ -185,50 +176,49 @@ export interface Haematology {
   fibrinogenGL: number | null;
   onAnticoagulant: YesNo;
   anticoagulantType:
-    | "warfarin"
-    | "apixaban"
-    | "rivaroxaban"
-    | "edoxaban"
-    | "dabigatran"
-    | "lmwh"
-    | "heparin-iv"
-    | "aspirin"
-    | "clopidogrel"
-    | "ticagrelor"
-    | "none"
-    | "";
+    | 'warfarin'
+    | 'apixaban'
+    | 'rivaroxaban'
+    | 'edoxaban'
+    | 'dabigatran'
+    | 'lmwh'
+    | 'heparin-iv'
+    | 'aspirin'
+    | 'clopidogrel'
+    | 'ticagrelor'
+    | 'none'
+    | '';
   anticoagulantHoldPlan: string;
-  groupAndSave: "not-required" | "ordered" | "valid" | "expired" | "";
+  groupAndSave: 'not-required' | 'ordered' | 'valid' | 'expired' | '';
   crossmatchUnits: number | null;
   lastTransfusionDate: string;
-  anaemiaSeverity: "none" | "mild" | "moderate" | "severe" | "";
+  anaemiaSeverity: 'none' | 'mild' | 'moderate' | 'severe' | '';
 }
 
 export interface Endocrine {
-  diabetesType: "none" | "type-1" | "type-2" | "gestational" | "other" | "";
+  diabetesType: 'none' | 'type-1' | 'type-2' | 'gestational' | 'other' | '';
   diabetesOnInsulin: YesNo;
   hba1cMmolMol: number | null;
   fastingGlucoseMmolL: number | null;
   randomGlucoseMmolL: number | null;
-  diabetesControl: "well-controlled" | "suboptimal" | "poor" | "";
+  diabetesControl: 'well-controlled' | 'suboptimal' | 'poor' | '';
   diabetesComplications: string;
-  thyroidStatus: "euthyroid" | "hypothyroid" | "hyperthyroid" | "";
+  thyroidStatus: 'euthyroid' | 'hypothyroid' | 'hyperthyroid' | '';
   tshMuL: number | null;
-  adrenalStatus: "normal" | "addisons" | "cushings" | "on-steroid-cover" | "";
+  adrenalStatus: 'normal' | 'addisons' | 'cushings' | 'on-steroid-cover' | '';
   onLongTermSteroids: YesNo;
   steroidDoseMg: number | null;
   steroidCoverPlan: string;
 }
 
 export interface Gastrointestinal {
-  abdominalExam:
-    "normal" | "distended" | "tender" | "organomegaly" | "other" | "";
+  abdominalExam: 'normal' | 'distended' | 'tender' | 'organomegaly' | 'other' | '';
   abdominalNotes: string;
-  refluxSymptoms: "none" | "occasional" | "frequent" | "severe" | "";
+  refluxSymptoms: 'none' | 'occasional' | 'frequent' | 'severe' | '';
   hiatusHernia: YesNo;
   previousGastricSurgery: YesNo;
   ngTube: YesNo;
-  stoma: "none" | "colostomy" | "ileostomy" | "urostomy" | "gastrostomy" | "";
+  stoma: 'none' | 'colostomy' | 'ileostomy' | 'urostomy' | 'gastrostomy' | '';
   fastingConfirmed: YesNo;
   lastSolidFoodAt: string;
   lastClearFluidAt: string;
@@ -237,79 +227,64 @@ export interface Gastrointestinal {
 
 export interface Musculoskeletal {
   spineExam:
-    | "normal"
-    | "scoliosis"
-    | "kyphosis"
-    | "previous-surgery"
-    | "ankylosing-spondylitis"
-    | "other"
-    | "";
+    | 'normal'
+    | 'scoliosis'
+    | 'kyphosis'
+    | 'previous-surgery'
+    | 'ankylosing-spondylitis'
+    | 'other'
+    | '';
   spineNotes: string;
-  neuraxialSuitable: "yes" | "no" | "unsure" | "";
-  jointRomHip: "full" | "reduced" | "severely-limited" | "";
-  jointRomShoulder: "full" | "reduced" | "severely-limited" | "";
-  jointRomNeck: "full" | "reduced" | "severely-limited" | "";
-  skinIvAccess: "good" | "difficult" | "very-difficult" | "";
-  skinBlockSite: "intact" | "infected" | "tattooed" | "scarred" | "";
-  pressureUlcerRisk: "low" | "moderate" | "high" | "very-high" | "";
+  neuraxialSuitable: 'yes' | 'no' | 'unsure' | '';
+  jointRomHip: 'full' | 'reduced' | 'severely-limited' | '';
+  jointRomShoulder: 'full' | 'reduced' | 'severely-limited' | '';
+  jointRomNeck: 'full' | 'reduced' | 'severely-limited' | '';
+  skinIvAccess: 'good' | 'difficult' | 'very-difficult' | '';
+  skinBlockSite: 'intact' | 'infected' | 'tattooed' | 'scarred' | '';
+  pressureUlcerRisk: 'low' | 'moderate' | 'high' | 'very-high' | '';
 }
 
 export interface Medication {
   name: string;
   dose: string;
-  route:
-    "oral" | "iv" | "im" | "sc" | "inhaled" | "topical" | "pr" | "other" | "";
+  route: 'oral' | 'iv' | 'im' | 'sc' | 'inhaled' | 'topical' | 'pr' | 'other' | '';
   frequency: string;
   indication: string;
   class:
-    | "anticoagulant"
-    | "antiplatelet"
-    | "antihypertensive"
-    | "ace-inhibitor"
-    | "arb"
-    | "beta-blocker"
-    | "diuretic"
-    | "insulin"
-    | "oral-hypoglycaemic"
-    | "steroid"
-    | "opioid"
-    | "benzodiazepine"
-    | "ssri"
-    | "other"
-    | "";
+    | 'anticoagulant'
+    | 'antiplatelet'
+    | 'antihypertensive'
+    | 'ace-inhibitor'
+    | 'arb'
+    | 'beta-blocker'
+    | 'diuretic'
+    | 'insulin'
+    | 'oral-hypoglycaemic'
+    | 'steroid'
+    | 'opioid'
+    | 'benzodiazepine'
+    | 'ssri'
+    | 'other'
+    | '';
   perioperativeAction:
-    | "continue"
-    | "hold-on-day"
-    | "hold-n-days"
-    | "stop"
-    | "switch"
-    | "bridge"
-    | "";
+    'continue' | 'hold-on-day' | 'hold-n-days' | 'stop' | 'switch' | 'bridge' | '';
   perioperativeNotes: string;
   lastDoseAt: string;
 }
 
 export interface Allergy {
   allergen: string;
-  category:
-    | "drug"
-    | "latex"
-    | "food"
-    | "adhesive"
-    | "contrast"
-    | "environment"
-    | "other"
-    | "";
+  category: 'drug' | 'latex' | 'food' | 'adhesive' | 'contrast' | 'environment' | 'other' | '';
   reactionType:
-    | "anaphylaxis"
-    | "rash"
-    | "urticaria"
-    | "angioedema"
-    | "gi-upset"
-    | "bronchospasm"
-    | "other"
-    | "";
-  reactionSeverity: "mild" | "moderate" | "severe" | "life-threatening" | "";
+    | 'anaphylaxis'
+    | 'rash'
+    | 'urticaria'
+    | 'angioedema'
+    | 'gi-upset'
+    | 'bronchospasm'
+    | 'other'
+    | '';
+  reactionSeverity: 'mild' | 'moderate' | 'severe' | 'life-threatening' | '';
   reactionNotes: string;
   verified: YesNo;
 }
@@ -326,15 +301,15 @@ export interface FunctionalCapacity {
   cpetVo2PeakMlKgMin: number | null;
   cpetAnaerobicThresholdMlKgMin: number | null;
   cpetNotes: string;
-  malnutritionRisk: "none" | "low" | "medium" | "high" | "";
+  malnutritionRisk: 'none' | 'low' | 'medium' | 'high' | '';
   unintentionalWeightLossKg: number | null;
   livingSituation:
-    | "independent"
-    | "lives-with-family"
-    | "sheltered-housing"
-    | "residential-care"
-    | "nursing-home"
-    | "";
+    | 'independent'
+    | 'lives-with-family'
+    | 'sheltered-housing'
+    | 'residential-care'
+    | 'nursing-home'
+    | '';
   supportAtHome: YesNo;
   mobilityStatus: string;
   fallsRiskWithinYear: YesNo;
@@ -352,8 +327,7 @@ export interface FunctionalCapacity {
   miniCogScore: number | null;
   // Prehabilitation planning.
   prehabilitationIndicated: YesNo;
-  prehabilitationType:
-    "nutrition" | "aerobic" | "resistance" | "multimodal" | "other" | "";
+  prehabilitationType: 'nutrition' | 'aerobic' | 'resistance' | 'multimodal' | 'other' | '';
   prehabilitationStartDate: string;
   proteinSupplementationRecommended: YesNo;
 }
@@ -361,74 +335,54 @@ export interface FunctionalCapacity {
 export interface Glp1Management {
   onGlp1ReceptorAgonist: YesNo;
   glp1AgonistName:
-    | "semaglutide"
-    | "tirzepatide"
-    | "dulaglutide"
-    | "liraglutide"
-    | "exenatide"
-    | "other"
-    | "";
-  glp1Formulation: "daily" | "weekly" | "";
+    'semaglutide' | 'tirzepatide' | 'dulaglutide' | 'liraglutide' | 'exenatide' | 'other' | '';
+  glp1Formulation: 'daily' | 'weekly' | '';
   glp1LastDoseAt: string;
   glp1HeldPerGuideline: YesNo;
   glp1ExtendedClearFluidsConfirmed: YesNo;
   glp1GiSymptoms: YesNo;
   glp1GiSymptomsDetails: string;
   glp1GastricUltrasoundPerformed: YesNo;
-  glp1GastricUltrasoundFindings: "empty" | "low-risk" | "full-stomach" | "";
+  glp1GastricUltrasoundFindings: 'empty' | 'low-risk' | 'full-stomach' | '';
   glp1FullStomachPrecautionsPlanned: YesNo;
   glp1Notes: string;
 }
 
 export interface AnaesthesiaPlan {
   technique:
-    | "ga"
-    | "regional"
-    | "neuraxial"
-    | "sedation"
-    | "mac"
-    | "local"
-    | "combined-ga-regional"
-    | "";
-  airwayPlan:
-    | "face-mask"
-    | "supraglottic"
-    | "ett"
-    | "awake-fibreoptic"
-    | "surgical-airway"
-    | "";
+    'ga' | 'regional' | 'neuraxial' | 'sedation' | 'mac' | 'local' | 'combined-ga-regional' | '';
+  airwayPlan: 'face-mask' | 'supraglottic' | 'ett' | 'awake-fibreoptic' | 'surgical-airway' | '';
   rsiPlanned: YesNo;
-  monitoringLevel:
-    "standard" | "invasive-arterial" | "invasive-cvc" | "cardiac-output" | "";
+  monitoringLevel: 'standard' | 'invasive-arterial' | 'invasive-cvc' | 'cardiac-output' | '';
   analgesiaPlan: string;
   regionalBlockPlanned: string;
   dvtProphylaxis: string;
   antibioticProphylaxis: string;
-  postOpDisposition: "day-case" | "ward" | "enhanced-care" | "hdu" | "icu" | "";
+  postOpDisposition: 'day-case' | 'ward' | 'enhanced-care' | 'hdu' | 'icu' | '';
   anticipatedLengthOfStayDays: number | null;
   specialEquipment: string;
   bloodProductsRequired: string;
-  vteRiskLevel: "low" | "medium" | "high" | "";
-  covidScreeningResult: "not-tested" | "negative" | "positive" | "pending" | "";
+  vteRiskLevel: 'low' | 'medium' | 'high' | '';
+  covidScreeningResult: 'not-tested' | 'negative' | 'positive' | 'pending' | '';
   dischargeDestination:
-    | "home"
-    | "home-with-support"
-    | "residential-care"
-    | "nursing-home"
-    | "rehabilitation"
-    | "other"
-    | "";
+    | 'home'
+    | 'home-with-support'
+    | 'residential-care'
+    | 'nursing-home'
+    | 'rehabilitation'
+    | 'other'
+    | '';
   followUpRequirements: string;
   socialServicesInvolvement: YesNo;
   reablementPhysiotherapyNeeds: YesNo;
 }
 
 export interface Summary {
-  finalAsaGrade: "I" | "II" | "III" | "IV" | "V" | "VI" | "";
+  finalAsaGrade: 'I' | 'II' | 'III' | 'IV' | 'V' | 'VI' | '';
   overrideReason: string;
-  recommendation: "proceed" | "optimise-first" | "mdt-review" | "cancel" | "";
+  recommendation: 'proceed' | 'optimise-first' | 'mdt-review' | 'cancel' | '';
   clinicianNotes: string;
-  consentStatus: "obtained" | "pending" | "declined" | "unable-to-consent" | "";
+  consentStatus: 'obtained' | 'pending' | 'declined' | 'unable-to-consent' | '';
   interpreterRequired: YesNo;
   discussionProcedure: YesNo;
   discussionAnaesthetic: YesNo;
@@ -459,13 +413,13 @@ export interface ClinicianAssessment {
   summary: Summary;
 }
 
-export type AsaGrade = "I" | "II" | "III" | "IV" | "V" | "VI";
-export type CompositeRisk = "low" | "moderate" | "high" | "critical";
-export type FlagPriority = "low" | "medium" | "high";
+export type AsaGrade = 'I' | 'II' | 'III' | 'IV' | 'V' | 'VI';
+export type CompositeRisk = 'low' | 'moderate' | 'high' | 'critical';
+export type FlagPriority = 'low' | 'medium' | 'high';
 
 export interface FiredRule {
   ruleId: string;
-  instrument: "asa" | "mallampati" | "rcri" | "stopbang" | "frailty";
+  instrument: 'asa' | 'mallampati' | 'rcri' | 'stopbang' | 'frailty';
   grade: string;
   category: string;
   description: string;
@@ -474,34 +428,34 @@ export interface FiredRule {
 export interface AdditionalFlag {
   flagId: string;
   category:
-    | "difficult-airway"
-    | "severe-cardiac"
-    | "severe-respiratory"
-    | "severe-renal"
-    | "severe-hepatic"
-    | "severe-anaemia"
-    | "coagulopathy"
-    | "uncontrolled-diabetes"
-    | "severe-frailty"
-    | "recent-covid-19"
-    | "fasting-violation"
-    | "missing-crossmatch"
-    | "high-risk-medication"
-    | "capacity-concern"
-    | "paediatric"
-    | "pregnancy"
-    | "safeguarding"
-    | "malignant-hyperthermia"
-    | "latex-allergy"
-    | "sux-apnoea"
-    | "pseudocholinesterase-deficiency"
-    | "malnutrition-risk"
-    | "glp1-aspiration-risk"
-    | "cognitive-assessment-indicated"
-    | "sarcopenia-risk"
-    | "dehydration-aki-risk"
-    | "rebound-glycaemic-risk"
-    | "other";
+    | 'difficult-airway'
+    | 'severe-cardiac'
+    | 'severe-respiratory'
+    | 'severe-renal'
+    | 'severe-hepatic'
+    | 'severe-anaemia'
+    | 'coagulopathy'
+    | 'uncontrolled-diabetes'
+    | 'severe-frailty'
+    | 'recent-covid-19'
+    | 'fasting-violation'
+    | 'missing-crossmatch'
+    | 'high-risk-medication'
+    | 'capacity-concern'
+    | 'paediatric'
+    | 'pregnancy'
+    | 'safeguarding'
+    | 'malignant-hyperthermia'
+    | 'latex-allergy'
+    | 'sux-apnoea'
+    | 'pseudocholinesterase-deficiency'
+    | 'malnutrition-risk'
+    | 'glp1-aspiration-risk'
+    | 'cognitive-assessment-indicated'
+    | 'sarcopenia-risk'
+    | 'dehydration-aki-risk'
+    | 'rebound-glycaemic-risk'
+    | 'other';
   priority: FlagPriority;
   description: string;
   suggestedAction: string;
@@ -509,15 +463,15 @@ export interface AdditionalFlag {
 
 export interface GradingResult {
   computedAsaGrade: AsaGrade;
-  finalAsaGrade: AsaGrade | "";
-  asaEmergencySuffix: "E" | "";
+  finalAsaGrade: AsaGrade | '';
+  asaEmergencySuffix: 'E' | '';
   overrideReason: string;
-  mallampatiClass: "I" | "II" | "III" | "IV" | "";
+  mallampatiClass: 'I' | 'II' | 'III' | 'IV' | '';
   rcriScore: number;
   stopbangScore: number;
   frailtyScale: number | null;
   friedPhenotypeScore: number | null;
-  friedFrailtyCategory: "robust" | "pre-frail" | "frail" | "";
+  friedFrailtyCategory: 'robust' | 'pre-frail' | 'frail' | '';
   compositeRisk: CompositeRisk;
   firedRules: FiredRule[];
   additionalFlags: AdditionalFlag[];

@@ -11,6 +11,5 @@
     class="w-full border rounded px-2 py-1 font-mono text-sm"
     rows="6"
     placeholder="One constraint per line."
-    bind:value={store.data.adr.constraints}
-  ></textarea>
+    bind:value={store.data.adr.constraints}></textarea>
 </section>

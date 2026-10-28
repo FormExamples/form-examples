@@ -97,7 +97,7 @@ class CardStore {
   }
 
   reset() {
-  	this.hadDraftAtLoad = false;
+    this.hadDraftAtLoad = false;
     deepAssign(
       this.data as unknown as Record<string, unknown>,
       createEmptyCard() as unknown as Record<string, unknown>

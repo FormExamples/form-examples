@@ -9,15 +9,7 @@
     hint?: string;
     onchange?: () => void;
   }
-  let {
-    label,
-    value = $bindable(),
-    min,
-    max,
-    step,
-    hint = '',
-    onchange,
-  }: Props = $props();
+  let { label, value = $bindable(), min, max, step, hint = '', onchange }: Props = $props();
   const id = `n-${Math.random().toString(36).slice(2, 10)}`;
 </script>
 

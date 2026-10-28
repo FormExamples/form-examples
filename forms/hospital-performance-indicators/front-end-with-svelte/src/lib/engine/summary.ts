@@ -1,4 +1,8 @@
-import type { CategoryCount, HospitalPerformanceIndicators, IndicatorsSummaryResult } from './types.js';
+import type {
+  CategoryCount,
+  HospitalPerformanceIndicators,
+  IndicatorsSummaryResult
+} from './types.js';
 import { CATEGORIES, PERFORMANCE_INDICATORS } from '#lib/config/indicators.js';
 
 /**
@@ -34,13 +38,13 @@ export function summariseIndicators(data: HospitalPerformanceIndicators): Indica
       category: category.number,
       categoryTitle: category.title,
       reported: tally.reported,
-      total: tally.total,
+      total: tally.total
     };
   });
 
   return {
     reportedCount,
     totalCount: PERFORMANCE_INDICATORS.length,
-    categoryCounts,
+    categoryCounts
   };
 }

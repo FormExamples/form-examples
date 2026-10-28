@@ -8,35 +8,35 @@ import { classifyACTScore } from './utils';
  * Questions that have not been answered (score 0) are excluded from the total.
  */
 export function calculateACT(data: AssessmentData): {
-	actScore: ACTScore;
-	controlLevel: ControlLevel;
-	firedRules: FiredRule[];
+  actScore: ACTScore;
+  controlLevel: ControlLevel;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
-	let totalScore = 0;
-	let answeredCount = 0;
+  const firedRules: FiredRule[] = [];
+  let totalScore = 0;
+  let answeredCount = 0;
 
-	for (const rule of actRules) {
-		try {
-			const score = rule.evaluate(data);
-			if (score > 0) {
-				answeredCount++;
-				totalScore += score;
-				firedRules.push({
-					id: rule.id,
-					category: rule.category,
-					description: rule.description,
-					score
-				});
-			}
-		} catch (e) {
-			console.warn(`ACT rule ${rule.id} evaluation failed:`, e);
-		}
-	}
+  for (const rule of actRules) {
+    try {
+      const score = rule.evaluate(data);
+      if (score > 0) {
+        answeredCount++;
+        totalScore += score;
+        firedRules.push({
+          id: rule.id,
+          category: rule.category,
+          description: rule.description,
+          score
+        });
+      }
+    } catch (e) {
+      console.warn(`ACT rule ${rule.id} evaluation failed:`, e);
+    }
+  }
 
-	// If no questions answered, default to maximum score (well-controlled)
-	const actScore: ACTScore = answeredCount === 0 ? 25 : totalScore;
-	const controlLevel = classifyACTScore(actScore);
+  // If no questions answered, default to maximum score (well-controlled)
+  const actScore: ACTScore = answeredCount === 0 ? 25 : totalScore;
+  const controlLevel = classifyACTScore(actScore);
 
-	return { actScore, controlLevel, firedRules };
+  return { actScore, controlLevel, firedRules };
 }

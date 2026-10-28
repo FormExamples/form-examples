@@ -13,18 +13,20 @@ export function evaluateFitnessToFly(data: MedifAssessment): GradingResult {
     ...applyRecentEventRules(data),
     ...applyCardioRespRules(data),
     ...applyPregnancyRules(data),
-    ...applyCommunicableRules(data),
+    ...applyCommunicableRules(data)
   ];
 
   const fitnessBand: FitnessBand = firedRules.reduce<FitnessBand>(
     (acc, r) => maxBand(acc, r.band),
-    'fit',
+    'fit'
   );
 
   const safetyFlags = detectSafetyFlags(data);
 
   const baseDate =
-    data.signoff.physicianSignatureDate || data.physician.signatureDate || new Date().toISOString().slice(0, 10);
+    data.signoff.physicianSignatureDate ||
+    data.physician.signatureDate ||
+    new Date().toISOString().slice(0, 10);
   const validUntil = addDaysIso(baseDate, 14);
 
   return {
@@ -32,6 +34,6 @@ export function evaluateFitnessToFly(data: MedifAssessment): GradingResult {
     firedRules,
     safetyFlags,
     deskRecommendation: deskRecommendationFor(fitnessBand),
-    validUntil,
+    validUntil
   };
 }

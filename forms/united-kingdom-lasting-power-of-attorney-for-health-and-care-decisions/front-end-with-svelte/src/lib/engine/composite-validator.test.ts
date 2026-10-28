@@ -4,7 +4,7 @@ import {
   emptyAttorney,
   emptyCertificateProvider,
   emptyLpaApplication,
-  emptyPersonToNotify,
+  emptyPersonToNotify
 } from './factory.js';
 import type { LpaApplication } from './types.js';
 
@@ -27,7 +27,7 @@ function makeReadyToRegister(): LpaApplication {
     jurisdiction: 'wales',
     preferredLanguage: 'en',
     capacityDeclared: 'yes',
-    capacityDeclaredAt: '2026-05-01T09:00:00Z',
+    capacityDeclaredAt: '2026-05-01T09:00:00Z'
   };
 
   app.attorneys = [
@@ -40,8 +40,8 @@ function makeReadyToRegister(): LpaApplication {
       countryAsIso31661Alpha2: 'GB',
       relationshipToDonor: 'child',
       isBankrupt: 'no',
-      capacityDeclared: 'yes',
-    },
+      capacityDeclared: 'yes'
+    }
   ];
 
   app.certificateProvider = {
@@ -57,7 +57,7 @@ function makeReadyToRegister(): LpaApplication {
     relationshipToDonor: 'professional',
     declaredNotFamily: 'yes',
     declaredNotEmployee: 'yes',
-    declaredNotAttorney: 'yes',
+    declaredNotAttorney: 'yes'
   };
 
   app.peopleToNotify = [];
@@ -74,7 +74,7 @@ function makeReadyToRegister(): LpaApplication {
       witnessName: 'David Thomas',
       witnessAddress: '3 King Edward VII Avenue, Cardiff',
       witnessSignedAt: '2026-05-01T09:00:00Z',
-      witnessIsAttorney: 'no',
+      witnessIsAttorney: 'no'
     },
     {
       signerRole: 'certificate-provider',
@@ -84,7 +84,7 @@ function makeReadyToRegister(): LpaApplication {
       witnessName: 'Eira Williams',
       witnessAddress: '4 King Edward VII Avenue, Cardiff',
       witnessSignedAt: '2026-05-01T10:00:00Z',
-      witnessIsAttorney: 'no',
+      witnessIsAttorney: 'no'
     },
     {
       signerRole: 'attorney',
@@ -94,8 +94,8 @@ function makeReadyToRegister(): LpaApplication {
       witnessName: 'David Thomas',
       witnessAddress: '3 King Edward VII Avenue, Cardiff',
       witnessSignedAt: '2026-05-01T11:00:00Z',
-      witnessIsAttorney: 'no',
-    },
+      witnessIsAttorney: 'no'
+    }
   ];
 
   app.registration = {
@@ -105,7 +105,7 @@ function makeReadyToRegister(): LpaApplication {
     feeRemission: 'none',
     feeRemissionReason: '',
     submittedAt: '',
-    submissionChannel: 'post',
+    submissionChannel: 'post'
   };
 
   return app;
@@ -242,8 +242,8 @@ describe('calculateLpaValidity', () => {
         category: 'end-of-life-care',
         statement: 'My attorneys may arrange assisted dying for me.',
         lawfulnessAssessed: 'yes',
-        contradictsAdrt: 'no',
-      },
+        contradictsAdrt: 'no'
+      }
     ];
     const result = calculateLpaValidity(app);
     expect(result.firedRules.some((r) => r.ruleId.startsWith('R-MCA-COP-PROHIBITED'))).toBe(true);
@@ -257,8 +257,8 @@ describe('calculateLpaValidity', () => {
         category: 'medical-treatment-limit',
         statement: 'Consent to dialysis even if my ADRT refuses it.',
         lawfulnessAssessed: 'yes',
-        contradictsAdrt: 'yes',
-      },
+        contradictsAdrt: 'yes'
+      }
     ];
     const result = calculateLpaValidity(app);
     expect(result.additionalFlags.some((f) => f.category === 'adrt-conflict')).toBe(true);

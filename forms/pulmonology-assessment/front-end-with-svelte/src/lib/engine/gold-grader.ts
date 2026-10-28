@@ -10,41 +10,39 @@ import { detectAdditionalFlags } from './flagged-issues';
  * Also computes the ABCD group classification.
  */
 export function calculateGold(data: AssessmentData): {
-	goldStage: GoldStage;
-	abcdGroup: AbcdGroup;
-	firedRules: FiredRule[];
+  goldStage: GoldStage;
+  abcdGroup: AbcdGroup;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	for (const rule of goldRules) {
-		try {
-			if (rule.evaluate(data)) {
-				firedRules.push({
-					id: rule.id,
-					system: rule.system,
-					description: rule.description,
-					stage: rule.stage
-				});
-			}
-		} catch (e) {
-			// Rule evaluation failed - log for debugging but continue grading
-			console.warn(`GOLD rule ${rule.id} evaluation failed:`, e);
-		}
-	}
+  for (const rule of goldRules) {
+    try {
+      if (rule.evaluate(data)) {
+        firedRules.push({
+          id: rule.id,
+          system: rule.system,
+          description: rule.description,
+          stage: rule.stage
+        });
+      }
+    } catch (e) {
+      // Rule evaluation failed - log for debugging but continue grading
+      console.warn(`GOLD rule ${rule.id} evaluation failed:`, e);
+    }
+  }
 
-	const goldStage: GoldStage =
-		firedRules.length === 0
-			? 1
-			: (Math.max(...firedRules.map((r) => r.stage)) as GoldStage);
+  const goldStage: GoldStage =
+    firedRules.length === 0 ? 1 : (Math.max(...firedRules.map((r) => r.stage)) as GoldStage);
 
-	const abcdGroup = determineAbcdGroup(
-		data.symptomAssessment.catScore,
-		data.symptomAssessment.mmrcDyspnoea,
-		data.exacerbationHistory.exacerbationsPerYear,
-		data.exacerbationHistory.hospitalizationsPerYear
-	) as AbcdGroup;
+  const abcdGroup = determineAbcdGroup(
+    data.symptomAssessment.catScore,
+    data.symptomAssessment.mmrcDyspnoea,
+    data.exacerbationHistory.exacerbationsPerYear,
+    data.exacerbationHistory.hospitalizationsPerYear
+  ) as AbcdGroup;
 
-	return { goldStage, abcdGroup, firedRules };
+  return { goldStage, abcdGroup, firedRules };
 }
 
 /**
@@ -53,13 +51,13 @@ export function calculateGold(data: AssessmentData): {
  * Both the wizard and the dashboard derive their output from this one function.
  */
 export function gradeAssessment(data: AssessmentData): GradingResult {
-	const { goldStage, abcdGroup, firedRules } = calculateGold(data);
-	const additionalFlags = detectAdditionalFlags(data);
-	return {
-		goldStage,
-		abcdGroup,
-		firedRules,
-		additionalFlags,
-		timestamp: new Date().toISOString()
-	};
+  const { goldStage, abcdGroup, firedRules } = calculateGold(data);
+  const additionalFlags = detectAdditionalFlags(data);
+  return {
+    goldStage,
+    abcdGroup,
+    firedRules,
+    additionalFlags,
+    timestamp: new Date().toISOString()
+  };
 }

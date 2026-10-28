@@ -7,9 +7,8 @@
 <section>
   <h2 class="text-xl font-semibold mb-4">Step 1 — Submitting agent</h2>
   <p class="text-sm text-base-content/70 mb-4">
-    Identify who is filing this MEDIF (passenger themselves, accessible-travel
-    agent, attending clinician, or family member) and the airline booking
-    reference.
+    Identify who is filing this MEDIF (passenger themselves, accessible-travel agent, attending
+    clinician, or family member) and the airline booking reference.
   </p>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <TextField label="Name" bind:value={store.data.submitter.submitterName} />
@@ -20,7 +19,7 @@
         { value: 'passenger', label: 'Passenger' },
         { value: 'agent', label: 'Accessible-travel agent' },
         { value: 'clinician', label: 'Clinician' },
-        { value: 'family-member', label: 'Family member' },
+        { value: 'family-member', label: 'Family member' }
       ]}
     />
     <TextField label="Email" type="email" bind:value={store.data.submitter.submitterEmail} />

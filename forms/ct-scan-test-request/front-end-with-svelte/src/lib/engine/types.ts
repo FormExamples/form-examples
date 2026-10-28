@@ -11,35 +11,35 @@
 
 /** CT body region requested. */
 export type BodyRegion =
-	| 'head'
-	| 'neck'
-	| 'chest'
-	| 'abdomen'
-	| 'pelvis'
-	| 'abdomen-pelvis'
-	| 'spine'
-	| 'ct-angiogram'
-	| 'ct-colonography'
-	| 'whole-body'
-	| 'extremity'
-	| 'other'
-	| '';
+  | 'head'
+  | 'neck'
+  | 'chest'
+  | 'abdomen'
+  | 'pelvis'
+  | 'abdomen-pelvis'
+  | 'spine'
+  | 'ct-angiogram'
+  | 'ct-colonography'
+  | 'whole-body'
+  | 'extremity'
+  | 'other'
+  | '';
 
 /** Primary clinical indication for the request. */
 export type Indication =
-	| 'trauma'
-	| 'suspected-stroke'
-	| 'suspected-malignancy'
-	| 'cancer-staging'
-	| 'pulmonary-embolism'
-	| 'abdominal-pain'
-	| 'renal-colic'
-	| 'infection-abscess'
-	| 'pre-surgical-planning'
-	| 'follow-up-surveillance'
-	| 'headache'
-	| 'other'
-	| '';
+  | 'trauma'
+  | 'suspected-stroke'
+  | 'suspected-malignancy'
+  | 'cancer-staging'
+  | 'pulmonary-embolism'
+  | 'abdominal-pain'
+  | 'renal-colic'
+  | 'infection-abscess'
+  | 'pre-surgical-planning'
+  | 'follow-up-surveillance'
+  | 'headache'
+  | 'other'
+  | '';
 
 /** Contrast requirement. */
 export type ContrastRequired = 'none' | 'iv-iodinated' | 'oral' | 'both' | 'unknown' | '';
@@ -49,12 +49,7 @@ export type ContrastReaction = 'none' | 'mild' | 'moderate' | 'severe' | 'unknow
 
 /** Pregnancy status. */
 export type PregnancyStatus =
-	| 'not-pregnant'
-	| 'pregnant'
-	| 'possible'
-	| 'unknown'
-	| 'not-applicable'
-	| '';
+  'not-pregnant' | 'pregnant' | 'possible' | 'unknown' | 'not-applicable' | '';
 
 /** Requested triage urgency. */
 export type Urgency = 'routine' | 'urgent' | 'emergency' | '';
@@ -66,10 +61,7 @@ export type Setting = 'outpatient' | 'inpatient' | 'community' | 'emergency' | '
 
 /** Axis A — appropriateness band. */
 export type AppropriatenessBand =
-	| 'usually-appropriate'
-	| 'may-be-appropriate'
-	| 'usually-not-appropriate'
-	| '';
+  'usually-appropriate' | 'may-be-appropriate' | 'usually-not-appropriate' | '';
 
 /** Axis B — contrast-safety band. */
 export type ContrastSafetyBand = 'safe' | 'caution' | 'contraindicated' | '';
@@ -87,62 +79,62 @@ export type Recommendation = 'accept' | 'query-referrer' | 'redirect' | 'reject'
 
 /** Requesting-clinician section. */
 export interface ClinicianSection {
-	clinicianName: string;
-	clinicianRole: string;
-	registrationBody: string;
-	registrationNumber: string;
-	requesterContact: string;
-	supervisingConsultant: string;
-	siteName: string;
-	referralDate: string;
+  clinicianName: string;
+  clinicianRole: string;
+  registrationBody: string;
+  registrationNumber: string;
+  requesterContact: string;
+  supervisingConsultant: string;
+  siteName: string;
+  referralDate: string;
 }
 
 /** Patient-identification section. */
 export interface PatientSection {
-	firstName: string;
-	lastName: string;
-	dateOfBirth: string;
-	nhsNumber: string;
-	weightKg: number | null;
-	interpreterRequired: boolean;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  nhsNumber: string;
+  weightKg: number | null;
+  interpreterRequired: boolean;
 }
 
 /** Requested-examination section. */
 export interface RequestSection {
-	bodyRegion: BodyRegion;
-	primaryIndication: Indication;
-	clinicalQuestion: string;
+  bodyRegion: BodyRegion;
+  primaryIndication: Indication;
+  clinicalQuestion: string;
 }
 
 /** Clinical-context section. */
 export interface ContextSection {
-	relevantHistory: string;
-	relevantPreviousImaging: string;
+  relevantHistory: string;
+  relevantPreviousImaging: string;
 }
 
 /** Contrast & renal-safety section. */
 export interface ContrastSection {
-	contrastRequired: ContrastRequired;
-	egfr: number | null;
-	iodineContrastAllergy: boolean;
-	previousContrastReaction: ContrastReaction;
-	metformin: boolean;
-	diabetes: boolean;
-	renalImpairment: boolean;
+  contrastRequired: ContrastRequired;
+  egfr: number | null;
+  iodineContrastAllergy: boolean;
+  previousContrastReaction: ContrastReaction;
+  metformin: boolean;
+  diabetes: boolean;
+  renalImpairment: boolean;
 }
 
 /** Radiation-safety section. */
 export interface RadiationSection {
-	pregnancyStatus: PregnancyStatus;
-	irMeRJustification: string;
+  pregnancyStatus: PregnancyStatus;
+  irMeRJustification: string;
 }
 
 /** Triage & setting section. */
 export interface TriageSection {
-	urgency: Urgency;
-	setting: Setting;
-	requestedByDate: string;
-	notes: string;
+  urgency: Urgency;
+  setting: Setting;
+  requestedByDate: string;
+  notes: string;
 }
 
 /**
@@ -150,13 +142,13 @@ export interface TriageSection {
  * is computed from.
  */
 export interface CtScanRequest {
-	clinician: ClinicianSection;
-	patient: PatientSection;
-	request: RequestSection;
-	context: ContextSection;
-	contrast: ContrastSection;
-	radiation: RadiationSection;
-	triage: TriageSection;
+  clinician: ClinicianSection;
+  patient: PatientSection;
+  request: RequestSection;
+  context: ContextSection;
+  contrast: ContrastSection;
+  radiation: RadiationSection;
+  triage: TriageSection;
 }
 
 // ─── Grading types ───
@@ -166,80 +158,80 @@ export type Axis = 'appropriateness' | 'safety' | 'completeness' | 'triage';
 
 /** Flag category (mirrors the SQL grade_flag CHECK constraint). */
 export type FlagCategory =
-	| 'pregnancy'
-	| 'contrast-allergy'
-	| 'renal-impairment'
-	| 'metformin-contrast'
-	| 'high-radiation-dose'
-	| 'unjustified-exposure'
-	| 'missing-indication'
-	| 'missing-clinical-question'
-	| 'missing-egfr'
-	| 'other';
+  | 'pregnancy'
+  | 'contrast-allergy'
+  | 'renal-impairment'
+  | 'metformin-contrast'
+  | 'high-radiation-dose'
+  | 'unjustified-exposure'
+  | 'missing-indication'
+  | 'missing-clinical-question'
+  | 'missing-egfr'
+  | 'other';
 
 /** Flag priority. */
 export type FlagPriority = 'low' | 'medium' | 'high';
 
 /** A single rule that fired during grading (audit trail). */
 export interface FiredRule {
-	ruleId: string;
-	axis: Axis;
-	category: string;
-	description: string;
+  ruleId: string;
+  axis: Axis;
+  category: string;
+  description: string;
 }
 
 /** A safety-critical flag, independent of the four axes. */
 export interface Flag {
-	flagId: string;
-	category: FlagCategory;
-	priority: FlagPriority;
-	description: string;
-	suggestedAction: string;
+  flagId: string;
+  category: FlagCategory;
+  priority: FlagPriority;
+  description: string;
+  suggestedAction: string;
 }
 
 /** The computed four-axis vetting grade. */
 export interface GradingResult {
-	// Axis A
-	appropriatenessScore: number;
-	appropriatenessBand: AppropriatenessBand;
-	// Axis B
-	contrastSafetyBand: ContrastSafetyBand;
-	estimatedDoseBand: DoseBand;
-	renalRisk: boolean;
-	// Axis C
-	completenessPercent: number;
-	// Axis D
-	triageTier: TriageTier;
-	targetTimeframe: string;
-	// Overall
-	recommendation: Recommendation;
-	firedRules: FiredRule[];
-	flags: Flag[];
-	gradedAt: string;
+  // Axis A
+  appropriatenessScore: number;
+  appropriatenessBand: AppropriatenessBand;
+  // Axis B
+  contrastSafetyBand: ContrastSafetyBand;
+  estimatedDoseBand: DoseBand;
+  renalRisk: boolean;
+  // Axis C
+  completenessPercent: number;
+  // Axis D
+  triageTier: TriageTier;
+  targetTimeframe: string;
+  // Overall
+  recommendation: Recommendation;
+  firedRules: FiredRule[];
+  flags: Flag[];
+  gradedAt: string;
 }
 
 // ─── Step configuration ───
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
+  number: number;
+  title: string;
+  shortTitle: string;
 }
 
 // ─── Dashboard row ───
 
 /** A graded request row for the vetting dashboard table. */
 export interface RequestRow {
-	id: string;
-	patientName: string;
-	bodyRegion: BodyRegion;
-	primaryIndication: Indication;
-	appropriatenessScore: number;
-	appropriatenessBand: AppropriatenessBand;
-	contrastSafetyBand: ContrastSafetyBand;
-	estimatedDoseBand: DoseBand;
-	completenessPercent: number;
-	triageTier: TriageTier;
-	recommendation: Recommendation;
-	flagCount: number;
+  id: string;
+  patientName: string;
+  bodyRegion: BodyRegion;
+  primaryIndication: Indication;
+  appropriatenessScore: number;
+  appropriatenessBand: AppropriatenessBand;
+  contrastSafetyBand: ContrastSafetyBand;
+  estimatedDoseBand: DoseBand;
+  completenessPercent: number;
+  triageTier: TriageTier;
+  recommendation: Recommendation;
+  flagCount: number;
 }

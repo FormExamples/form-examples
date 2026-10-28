@@ -7,24 +7,24 @@ import { detectFlaggedIssues } from './flagged-issues';
  * each carrying the 0/1/2 points it contributed.
  */
 export function evaluateParameters(data: AssessmentData): FiredParameter[] {
-	const fired: FiredParameter[] = [];
-	for (const rule of aldreteRules) {
-		try {
-			const value = rule.get(data);
-			const points = aldreteScore(rule.parameter, value);
-			fired.push({
-				id: rule.id,
-				parameter: rule.parameter,
-				points,
-				category: rule.category,
-				description: rule.description
-			});
-		} catch (e) {
-			// Rule evaluation failed - log for debugging but continue grading.
-			console.warn(`Aldrete rule ${rule.id} evaluation failed:`, e);
-		}
-	}
-	return fired;
+  const fired: FiredParameter[] = [];
+  for (const rule of aldreteRules) {
+    try {
+      const value = rule.get(data);
+      const points = aldreteScore(rule.parameter, value);
+      fired.push({
+        id: rule.id,
+        parameter: rule.parameter,
+        points,
+        category: rule.category,
+        description: rule.description
+      });
+    } catch (e) {
+      // Rule evaluation failed - log for debugging but continue grading.
+      console.warn(`Aldrete rule ${rule.id} evaluation failed:`, e);
+    }
+  }
+  return fired;
 }
 
 /**
@@ -32,25 +32,25 @@ export function evaluateParameters(data: AssessmentData): FiredParameter[] {
  * unless the case is ambulatory AND all five criteria are supplied.
  */
 export function calculatePadss(data: AssessmentData): {
-	total: number | null;
-	streetFit: boolean | null;
+  total: number | null;
+  streetFit: boolean | null;
 } {
-	if (data.identification.ambulatoryCase !== 'yes') {
-		return { total: null, streetFit: null };
-	}
-	const p = data.padss;
-	const parts = [
-		padssScore('padssVitalSigns', p.padssVitalSigns),
-		padssScore('padssAmbulation', p.padssAmbulation),
-		padssScore('padssNauseaVomiting', p.padssNauseaVomiting),
-		padssScore('padssPain', p.padssPain),
-		padssScore('padssSurgicalBleeding', p.padssSurgicalBleeding)
-	];
-	if (parts.some((s) => s === null)) {
-		return { total: null, streetFit: null };
-	}
-	const total = (parts as number[]).reduce((a, b) => a + b, 0);
-	return { total, streetFit: total >= 9 };
+  if (data.identification.ambulatoryCase !== 'yes') {
+    return { total: null, streetFit: null };
+  }
+  const p = data.padss;
+  const parts = [
+    padssScore('padssVitalSigns', p.padssVitalSigns),
+    padssScore('padssAmbulation', p.padssAmbulation),
+    padssScore('padssNauseaVomiting', p.padssNauseaVomiting),
+    padssScore('padssPain', p.padssPain),
+    padssScore('padssSurgicalBleeding', p.padssSurgicalBleeding)
+  ];
+  if (parts.some((s) => s === null)) {
+    return { total: null, streetFit: null };
+  }
+  const total = (parts as number[]).reduce((a, b) => a + b, 0);
+  return { total, streetFit: total >= 9 };
 }
 
 /**
@@ -71,76 +71,76 @@ export function calculatePadss(data: AssessmentData): {
  * 0; `flagged-issues.ts` raises a data-completeness flag separately.
  */
 export function calculatePacuGrade(data: AssessmentData): GradingResult {
-	const firedParameters = evaluateParameters(data);
-	const scoreOf = (parameter: string): 0 | 1 | 2 =>
-		(firedParameters.find((f) => f.parameter === parameter)?.points ?? 0) as 0 | 1 | 2;
+  const firedParameters = evaluateParameters(data);
+  const scoreOf = (parameter: string): 0 | 1 | 2 =>
+    (firedParameters.find((f) => f.parameter === parameter)?.points ?? 0) as 0 | 1 | 2;
 
-	const activityScore = scoreOf('activity');
-	const respirationScore = scoreOf('respiration');
-	const circulationScore = scoreOf('circulation');
-	const consciousnessScore = scoreOf('consciousness');
-	const oxygenSaturationScore = scoreOf('oxygenSaturation');
+  const activityScore = scoreOf('activity');
+  const respirationScore = scoreOf('respiration');
+  const circulationScore = scoreOf('circulation');
+  const consciousnessScore = scoreOf('consciousness');
+  const oxygenSaturationScore = scoreOf('oxygenSaturation');
 
-	const aldreteTotal =
-		activityScore +
-		respirationScore +
-		circulationScore +
-		consciousnessScore +
-		oxygenSaturationScore;
+  const aldreteTotal =
+    activityScore +
+    respirationScore +
+    circulationScore +
+    consciousnessScore +
+    oxygenSaturationScore;
 
-	const readinessBand: ReadinessBand =
-		aldreteTotal >= 9 && oxygenSaturationScore === 2 ? 'discharge-ready' : 'not-ready';
+  const readinessBand: ReadinessBand =
+    aldreteTotal >= 9 && oxygenSaturationScore === 2 ? 'discharge-ready' : 'not-ready';
 
-	const { total: padssTotal, streetFit: padssStreetFit } = calculatePadss(data);
+  const { total: padssTotal, streetFit: padssStreetFit } = calculatePadss(data);
 
-	// Record the derived readiness-band decision as a `band` audit row.
-	firedParameters.push({
-		id: 'R-BAND-01',
-		parameter: 'band',
-		points: 0,
-		category: 'readiness-band',
-		description:
-			readinessBand === 'discharge-ready'
-				? `Aldrete ${aldreteTotal}/10 with SpO2 parameter met — discharge-ready`
-				: aldreteTotal >= 9
-					? `Aldrete ${aldreteTotal}/10 but oxygen-saturation parameter below 2 — not ready`
-					: `Aldrete ${aldreteTotal}/10 below the discharge threshold — not ready`
-	});
+  // Record the derived readiness-band decision as a `band` audit row.
+  firedParameters.push({
+    id: 'R-BAND-01',
+    parameter: 'band',
+    points: 0,
+    category: 'readiness-band',
+    description:
+      readinessBand === 'discharge-ready'
+        ? `Aldrete ${aldreteTotal}/10 with SpO2 parameter met — discharge-ready`
+        : aldreteTotal >= 9
+          ? `Aldrete ${aldreteTotal}/10 but oxygen-saturation parameter below 2 — not ready`
+          : `Aldrete ${aldreteTotal}/10 below the discharge threshold — not ready`
+  });
 
-	// When PADSS was scored, record it as an audit row too.
-	if (padssTotal !== null) {
-		firedParameters.push({
-			id: 'R-PADSS-01',
-			parameter: 'padss',
-			points: padssTotal,
-			category: 'padss-total',
-			description: padssStreetFit
-				? `PADSS ${padssTotal}/10 — street-fit for discharge home`
-				: `PADSS ${padssTotal}/10 — not yet street-fit`
-		});
-	}
+  // When PADSS was scored, record it as an audit row too.
+  if (padssTotal !== null) {
+    firedParameters.push({
+      id: 'R-PADSS-01',
+      parameter: 'padss',
+      points: padssTotal,
+      category: 'padss-total',
+      description: padssStreetFit
+        ? `PADSS ${padssTotal}/10 — street-fit for discharge home`
+        : `PADSS ${padssTotal}/10 — not yet street-fit`
+    });
+  }
 
-	const flaggedIssues = detectFlaggedIssues(data, {
-		activityScore,
-		respirationScore,
-		circulationScore,
-		consciousnessScore,
-		oxygenSaturationScore,
-		aldreteTotal
-	});
+  const flaggedIssues = detectFlaggedIssues(data, {
+    activityScore,
+    respirationScore,
+    circulationScore,
+    consciousnessScore,
+    oxygenSaturationScore,
+    aldreteTotal
+  });
 
-	return {
-		activityScore,
-		respirationScore,
-		circulationScore,
-		consciousnessScore,
-		oxygenSaturationScore,
-		aldreteTotal,
-		readinessBand,
-		padssTotal,
-		padssStreetFit,
-		firedParameters,
-		flaggedIssues,
-		timestamp: new Date().toISOString()
-	};
+  return {
+    activityScore,
+    respirationScore,
+    circulationScore,
+    consciousnessScore,
+    oxygenSaturationScore,
+    aldreteTotal,
+    readinessBand,
+    padssTotal,
+    padssStreetFit,
+    firedParameters,
+    flaggedIssues,
+    timestamp: new Date().toISOString()
+  };
 }

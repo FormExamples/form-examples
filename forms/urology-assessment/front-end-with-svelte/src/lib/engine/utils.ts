@@ -1,15 +1,15 @@
 /** Calculate age from date of birth string. */
 export function calculateAge(dob: string): number | null {
-	if (!dob) return null;
-	const birth = new Date(dob);
-	if (isNaN(birth.getTime())) return null;
-	const today = new Date();
-	let age = today.getFullYear() - birth.getFullYear();
-	const m = today.getMonth() - birth.getMonth();
-	if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) {
-		age--;
-	}
-	return age;
+  if (!dob) return null;
+  const birth = new Date(dob);
+  if (isNaN(birth.getTime())) return null;
+  const today = new Date();
+  let age = today.getFullYear() - birth.getFullYear();
+  const m = today.getMonth() - birth.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) {
+    age--;
+  }
+  return age;
 }
 
 /**
@@ -19,21 +19,21 @@ export function calculateAge(dob: string): number | null {
  *   20-35 = Severe symptoms
  */
 export function ipssCategory(score: number): string {
-	if (score <= 7) return 'Mild';
-	if (score <= 19) return 'Moderate';
-	return 'Severe';
+  if (score <= 7) return 'Mild';
+  if (score <= 19) return 'Moderate';
+  return 'Severe';
 }
 
 /** IPSS score label for display. */
 export function ipssScoreLabel(score: number): string {
-	return `IPSS ${score}/35 - ${ipssCategory(score)}`;
+  return `IPSS ${score}/35 - ${ipssCategory(score)}`;
 }
 
 /** IPSS score colour class. */
 export function ipssScoreColor(score: number): string {
-	if (score <= 7) return 'bg-success text-success-content border-success';
-	if (score <= 19) return 'bg-warning text-warning-content border-warning';
-	return 'bg-error text-error-content border-error';
+  if (score <= 7) return 'bg-success text-success-content border-success';
+  if (score <= 19) return 'bg-warning text-warning-content border-warning';
+  return 'bg-error text-error-content border-error';
 }
 
 /**
@@ -47,14 +47,22 @@ export function ipssScoreColor(score: number): string {
  *   6 = Terrible
  */
 export function qolLabel(score: number): string {
-	switch (score) {
-		case 0: return 'Delighted';
-		case 1: return 'Pleased';
-		case 2: return 'Mostly satisfied';
-		case 3: return 'Mixed';
-		case 4: return 'Mostly dissatisfied';
-		case 5: return 'Unhappy';
-		case 6: return 'Terrible';
-		default: return '';
-	}
+  switch (score) {
+    case 0:
+      return 'Delighted';
+    case 1:
+      return 'Pleased';
+    case 2:
+      return 'Mostly satisfied';
+    case 3:
+      return 'Mixed';
+    case 4:
+      return 'Mostly dissatisfied';
+    case 5:
+      return 'Unhappy';
+    case 6:
+      return 'Terrible';
+    default:
+      return '';
+  }
 }

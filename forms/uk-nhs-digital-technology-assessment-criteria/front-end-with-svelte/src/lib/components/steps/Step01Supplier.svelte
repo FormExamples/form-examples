@@ -7,7 +7,11 @@
 
 <Fieldset legend="Step 1 — Supplier">
   <div class="field-grid">
-    <Field label="Supplier name" inputId="step-1-supplier-name" error={store.errors['step-1-supplier-name']}>
+    <Field
+      label="Supplier name"
+      inputId="step-1-supplier-name"
+      error={store.errors['step-1-supplier-name']}
+    >
       <TextInput
         id="step-1-supplier-name"
         label="Supplier name"
@@ -19,19 +23,32 @@
       <TextInput label="Trading name" bind:value={store.data.supplier.tradingName} />
     </Field>
     <Field label="Company registration number">
-      <TextInput label="Company registration number" bind:value={store.data.supplier.companyRegistrationNumber} />
+      <TextInput
+        label="Company registration number"
+        bind:value={store.data.supplier.companyRegistrationNumber}
+      />
     </Field>
     <Field label="Country of registration">
-      <TextInput label="Country of registration" bind:value={store.data.supplier.countryOfRegistration} />
+      <TextInput
+        label="Country of registration"
+        bind:value={store.data.supplier.countryOfRegistration}
+      />
     </Field>
     <Field label="ICO registration number">
-      <TextInput label="ICO registration number" bind:value={store.data.supplier.icoRegistrationNumber} />
+      <TextInput
+        label="ICO registration number"
+        bind:value={store.data.supplier.icoRegistrationNumber}
+      />
     </Field>
     <Field label="Website">
       <TextInput label="Website" bind:value={store.data.supplier.website} />
     </Field>
     <Field label="Postal address" class="field-span-2">
-      <TextAreaInput label="Postal address" rows={2} bind:value={store.data.supplier.postalAddress} />
+      <TextAreaInput
+        label="Postal address"
+        rows={2}
+        bind:value={store.data.supplier.postalAddress}
+      />
     </Field>
     <Field label="Postcode">
       <TextInput label="Postcode" bind:value={store.data.supplier.postcode} />

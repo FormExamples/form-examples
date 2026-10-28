@@ -4,7 +4,7 @@
   import Field from '#lib/components/ui/Field.svelte';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
   import Select from '#lib/components/ui/Select.svelte';
-  import { RadioGroup } from "@lilydesignsystem/svelte-headless";
+  import { RadioGroup } from '@lilydesignsystem/svelte-headless';
 
   const mh = assessment.data.metabolicHealth;
 </script>
@@ -37,7 +37,14 @@
 
   <div class="field-grid">
     <Field label="HbA1c value" inputId="step-5-hba1cValue">
-      <NumberInput id="step-5-hba1cValue" label="HbA1c value" min={2} max={200} step="0.1" bind:value={mh.hba1cValue} />
+      <NumberInput
+        id="step-5-hba1cValue"
+        label="HbA1c value"
+        min={2}
+        max={200}
+        step="0.1"
+        bind:value={mh.hba1cValue}
+      />
     </Field>
     <Field label="HbA1c unit" inputId="step-5-hba1cUnit">
       <Select id="step-5-hba1cUnit" label="HbA1c unit" bind:value={mh.hba1cUnit}>
@@ -49,7 +56,13 @@
   </div>
 
   <Field label="Fasting glucose (mg/dL)" inputId="step-5-fastingGlucose">
-    <NumberInput id="step-5-fastingGlucose" label="Fasting glucose" min={30} max={600} bind:value={mh.fastingGlucose} />
+    <NumberInput
+      id="step-5-fastingGlucose"
+      label="Fasting glucose"
+      min={30}
+      max={600}
+      bind:value={mh.fastingGlucose}
+    />
   </Field>
 
   <div class="field-grid">

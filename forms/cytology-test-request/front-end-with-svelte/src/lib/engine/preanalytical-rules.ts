@@ -15,79 +15,78 @@ export const CAUTION_HOURS = 24;
 
 /** Hours elapsed between a collection ISO date-time and now; null if unknown. */
 export function hoursSinceCollection(collectionDatetime: string): number | null {
-	if (!collectionDatetime) return null;
-	const t = Date.parse(collectionDatetime);
-	if (Number.isNaN(t)) return null;
-	return (Date.now() - t) / (1000 * 60 * 60);
+  if (!collectionDatetime) return null;
+  const t = Date.parse(collectionDatetime);
+  if (Number.isNaN(t)) return null;
+  return (Date.now() - t) / (1000 * 60 * 60);
 }
 
 /** Evaluate pre-analytical specimen adequacy. */
 export function evaluatePreanalytical(data: CytologyRequest): {
-	band: PreanalyticalBand;
-	firedRule: FiredRule | null;
+  band: PreanalyticalBand;
+  firedRule: FiredRule | null;
 } {
-	const collected = data.collection.specimenCollected;
+  const collected = data.collection.specimenCollected;
 
-	if (collected !== 'yes') {
-		// Specimen not yet collected: no degradation risk, but flagged elsewhere.
-		return {
-			band: 'ok',
-			firedRule: {
-				ruleId: 'R-PREANALYTICAL-NOT-COLLECTED',
-				axis: 'preanalytical',
-				category: 'collection',
-				description:
-					'Specimen not yet collected — pre-analytical adequacy assessed at collection.'
-			}
-		};
-	}
+  if (collected !== 'yes') {
+    // Specimen not yet collected: no degradation risk, but flagged elsewhere.
+    return {
+      band: 'ok',
+      firedRule: {
+        ruleId: 'R-PREANALYTICAL-NOT-COLLECTED',
+        axis: 'preanalytical',
+        category: 'collection',
+        description: 'Specimen not yet collected — pre-analytical adequacy assessed at collection.'
+      }
+    };
+  }
 
-	const elapsed = hoursSinceCollection(data.collection.collectionDatetime);
+  const elapsed = hoursSinceCollection(data.collection.collectionDatetime);
 
-	if (elapsed === null) {
-		return {
-			band: 'caution',
-			firedRule: {
-				ruleId: 'R-PREANALYTICAL-NO-TIMING',
-				axis: 'preanalytical',
-				category: 'timing',
-				description:
-					'Specimen collected but collection date-time is missing — confirm timing and fixation.'
-			}
-		};
-	}
+  if (elapsed === null) {
+    return {
+      band: 'caution',
+      firedRule: {
+        ruleId: 'R-PREANALYTICAL-NO-TIMING',
+        axis: 'preanalytical',
+        category: 'timing',
+        description:
+          'Specimen collected but collection date-time is missing — confirm timing and fixation.'
+      }
+    };
+  }
 
-	if (elapsed > STALE_HOURS) {
-		return {
-			band: 'reject-risk',
-			firedRule: {
-				ruleId: 'R-PREANALYTICAL-STALE',
-				axis: 'preanalytical',
-				category: 'timing',
-				description: `Specimen collected more than ${STALE_HOURS}h ago — degradation risk; confirm fixation or recollect.`
-			}
-		};
-	}
+  if (elapsed > STALE_HOURS) {
+    return {
+      band: 'reject-risk',
+      firedRule: {
+        ruleId: 'R-PREANALYTICAL-STALE',
+        axis: 'preanalytical',
+        category: 'timing',
+        description: `Specimen collected more than ${STALE_HOURS}h ago — degradation risk; confirm fixation or recollect.`
+      }
+    };
+  }
 
-	if (elapsed > CAUTION_HOURS) {
-		return {
-			band: 'caution',
-			firedRule: {
-				ruleId: 'R-PREANALYTICAL-AGEING',
-				axis: 'preanalytical',
-				category: 'timing',
-				description: `Specimen collected more than ${CAUTION_HOURS}h ago — process promptly; confirm fixation.`
-			}
-		};
-	}
+  if (elapsed > CAUTION_HOURS) {
+    return {
+      band: 'caution',
+      firedRule: {
+        ruleId: 'R-PREANALYTICAL-AGEING',
+        axis: 'preanalytical',
+        category: 'timing',
+        description: `Specimen collected more than ${CAUTION_HOURS}h ago — process promptly; confirm fixation.`
+      }
+    };
+  }
 
-	return {
-		band: 'ok',
-		firedRule: {
-			ruleId: 'R-PREANALYTICAL-FRESH',
-			axis: 'preanalytical',
-			category: 'timing',
-			description: 'Specimen collected recently and within acceptable pre-analytical window.'
-		}
-	};
+  return {
+    band: 'ok',
+    firedRule: {
+      ruleId: 'R-PREANALYTICAL-FRESH',
+      axis: 'preanalytical',
+      category: 'timing',
+      description: 'Specimen collected recently and within acceptable pre-analytical window.'
+    }
+  };
 }

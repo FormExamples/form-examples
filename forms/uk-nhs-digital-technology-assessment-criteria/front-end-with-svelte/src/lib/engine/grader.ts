@@ -1,5 +1,5 @@
-import { CRITERIA, SECTIONS } from "./criteria.js";
-import { detectFlags } from "./flags.js";
+import { CRITERIA, SECTIONS } from './criteria.js';
+import { detectFlags } from './flags.js';
 import type {
   Criterion,
   CriterionAnswer,
@@ -7,8 +7,8 @@ import type {
   FiredRule,
   GradingResult,
   Outcome,
-  SectionResult,
-} from "./types.js";
+  SectionResult
+} from './types.js';
 
 // DTAC grader. Pure and deterministic.
 //   does-not-meet : any applicable mandatory criterion is not-met
@@ -17,22 +17,22 @@ import type {
 //   meets         : every applicable mandatory criterion met
 
 export const OUTCOME_LABELS: Record<Outcome, string> = {
-  meets: "Meets the criteria",
-  conditional: "Meets with conditions",
-  "does-not-meet": "Does not meet the criteria",
-  incomplete: "Incomplete",
+  meets: 'Meets the criteria',
+  conditional: 'Meets with conditions',
+  'does-not-meet': 'Does not meet the criteria',
+  incomplete: 'Incomplete'
 };
 
 export function sectionResult(
   items: Criterion[],
-  criteria: Record<string, CriterionAnswer>,
+  criteria: Record<string, CriterionAnswer>
 ): SectionResult {
-  const applicable = items.filter((c) => criteria[c.id] !== "not-applicable");
+  const applicable = items.filter((c) => criteria[c.id] !== 'not-applicable');
   const mand = applicable.filter((c) => c.mandatory);
-  if (mand.some((c) => criteria[c.id] === "not-met")) return "not-met";
-  if (mand.some((c) => criteria[c.id] === "")) return "incomplete";
-  if (applicable.every((c) => criteria[c.id] === "met")) return "met";
-  return "partially-met";
+  if (mand.some((c) => criteria[c.id] === 'not-met')) return 'not-met';
+  if (mand.some((c) => criteria[c.id] === '')) return 'incomplete';
+  if (applicable.every((c) => criteria[c.id] === 'met')) return 'met';
+  return 'partially-met';
 }
 
 export function calculateGrade(data: DtacAssessment): GradingResult {
@@ -43,23 +43,23 @@ export function calculateGrade(data: DtacAssessment): GradingResult {
   let advisoryTotal = 0;
   let advisoryMet = 0;
   for (const c of CRITERIA) {
-    const status = criteria[c.id] || "";
-    if (status === "not-applicable") continue;
+    const status = criteria[c.id] || '';
+    if (status === 'not-applicable') continue;
     if (c.mandatory) {
       mandatoryTotal++;
-      if (status === "met") mandatoryMet++;
+      if (status === 'met') mandatoryMet++;
     } else {
       advisoryTotal++;
-      if (status === "met") advisoryMet++;
+      if (status === 'met') advisoryMet++;
     }
-    if (status === "not-met" || status === "partially-met") {
+    if (status === 'not-met' || status === 'partially-met') {
       firedRules.push({
-        ruleId: "R-" + c.id.toUpperCase() + "-" + (status === "not-met" ? "NOT-MET" : "PARTIAL"),
+        ruleId: 'R-' + c.id.toUpperCase() + '-' + (status === 'not-met' ? 'NOT-MET' : 'PARTIAL'),
         section: c.section,
         criterionId: c.id,
         status,
         mandatory: c.mandatory,
-        description: c.description,
+        description: c.description
       });
     }
   }
@@ -67,14 +67,14 @@ export function calculateGrade(data: DtacAssessment): GradingResult {
   for (const s of SECTIONS) {
     sections[s.id] = sectionResult(
       CRITERIA.filter((c) => c.section === s.id),
-      criteria,
+      criteria
     );
   }
-  const mand = CRITERIA.filter((c) => c.mandatory && criteria[c.id] !== "not-applicable");
-  let outcome: Outcome = "meets";
-  if (mand.some((c) => criteria[c.id] === "not-met")) outcome = "does-not-meet";
-  else if (mand.some((c) => !criteria[c.id])) outcome = "incomplete";
-  else if (mand.some((c) => criteria[c.id] === "partially-met")) outcome = "conditional";
+  const mand = CRITERIA.filter((c) => c.mandatory && criteria[c.id] !== 'not-applicable');
+  let outcome: Outcome = 'meets';
+  if (mand.some((c) => criteria[c.id] === 'not-met')) outcome = 'does-not-meet';
+  else if (mand.some((c) => !criteria[c.id])) outcome = 'incomplete';
+  else if (mand.some((c) => criteria[c.id] === 'partially-met')) outcome = 'conditional';
 
   const result: GradingResult = {
     outcome,
@@ -85,7 +85,7 @@ export function calculateGrade(data: DtacAssessment): GradingResult {
     advisoryMet,
     sections,
     firedRules,
-    flags: [],
+    flags: []
   };
   result.flags = detectFlags(data, result);
   return result;

@@ -1,12 +1,12 @@
 import type { AssessmentData, FiredRule, GradingResult, ParameterPoint } from './types';
 import {
-	albuminPoints,
-	ascitesPoints,
-	bilirubinPoints,
-	childPughRules,
-	classBand,
-	coagulationPoints,
-	encephalopathyPoints
+  albuminPoints,
+  ascitesPoints,
+  bilirubinPoints,
+  childPughRules,
+  classBand,
+  coagulationPoints,
+  encephalopathyPoints
 } from './child-pugh-rules';
 import { detectFlaggedIssues } from './flagged-issues';
 
@@ -15,23 +15,23 @@ import { detectFlaggedIssues } from './flagged-issues';
  * answered parameter).
  */
 export function evaluateRules(data: AssessmentData): FiredRule[] {
-	const fired: FiredRule[] = [];
-	for (const rule of childPughRules) {
-		try {
-			if (rule.evaluate(data)) {
-				fired.push({
-					id: rule.id,
-					parameter: rule.parameter,
-					points: rule.points,
-					category: rule.category,
-					description: rule.description
-				});
-			}
-		} catch (e) {
-			console.warn(`Child-Pugh rule ${rule.id} evaluation failed:`, e);
-		}
-	}
-	return fired;
+  const fired: FiredRule[] = [];
+  for (const rule of childPughRules) {
+    try {
+      if (rule.evaluate(data)) {
+        fired.push({
+          id: rule.id,
+          parameter: rule.parameter,
+          points: rule.points,
+          category: rule.category,
+          description: rule.description
+        });
+      }
+    } catch (e) {
+      console.warn(`Child-Pugh rule ${rule.id} evaluation failed:`, e);
+    }
+  }
+  return fired;
 }
 
 /**
@@ -52,56 +52,56 @@ export function evaluateRules(data: AssessmentData): FiredRule[] {
  * true only once all five parameters are answered.
  */
 export function calculateChildPughGrade(data: AssessmentData): GradingResult {
-	const bilirubinPoint = bilirubinPoints(data);
-	const albuminPoint = albuminPoints(data);
-	const coagulationPoint = coagulationPoints(data);
-	const ascitesPoint = ascitesPoints(data);
-	const encephalopathyPoint = encephalopathyPoints(data);
+  const bilirubinPoint = bilirubinPoints(data);
+  const albuminPoint = albuminPoints(data);
+  const coagulationPoint = coagulationPoints(data);
+  const ascitesPoint = ascitesPoints(data);
+  const encephalopathyPoint = encephalopathyPoints(data);
 
-	const points: ParameterPoint[] = [
-		bilirubinPoint,
-		albuminPoint,
-		coagulationPoint,
-		ascitesPoint,
-		encephalopathyPoint
-	];
-	const complete = points.every((p) => p !== null);
-	const childPughScore = points.reduce<number>((sum, p) => sum + (p ?? 0), 0);
+  const points: ParameterPoint[] = [
+    bilirubinPoint,
+    albuminPoint,
+    coagulationPoint,
+    ascitesPoint,
+    encephalopathyPoint
+  ];
+  const complete = points.every((p) => p !== null);
+  const childPughScore = points.reduce<number>((sum, p) => sum + (p ?? 0), 0);
 
-	const band = classBand(childPughScore);
-	const firedRules = evaluateRules(data);
+  const band = classBand(childPughScore);
+  const firedRules = evaluateRules(data);
 
-	// Record the derived class decision as a `class` audit row, mirroring the
-	// grade_rule table's `class` parameter.
-	firedRules.push({
-		id: `R-CLASS-${band.childPughClass}-01`,
-		parameter: 'class',
-		points: null,
-		category: 'class-band',
-		description:
-			`Child-Pugh total ${childPughScore}${complete ? '' : ' (partial)'} → ` +
-			`Class ${band.childPughClass}; ~1-year survival ${band.oneYearSurvival}, ` +
-			`~2-year survival ${band.twoYearSurvival}; ` +
-			`peri-operative risk ${band.surgicalRisk}`
-	});
+  // Record the derived class decision as a `class` audit row, mirroring the
+  // grade_rule table's `class` parameter.
+  firedRules.push({
+    id: `R-CLASS-${band.childPughClass}-01`,
+    parameter: 'class',
+    points: null,
+    category: 'class-band',
+    description:
+      `Child-Pugh total ${childPughScore}${complete ? '' : ' (partial)'} → ` +
+      `Class ${band.childPughClass}; ~1-year survival ${band.oneYearSurvival}, ` +
+      `~2-year survival ${band.twoYearSurvival}; ` +
+      `peri-operative risk ${band.surgicalRisk}`
+  });
 
-	const result: GradingResult = {
-		bilirubinPoint,
-		albuminPoint,
-		coagulationPoint,
-		ascitesPoint,
-		encephalopathyPoint,
-		childPughScore,
-		childPughClass: band.childPughClass,
-		oneYearSurvival: band.oneYearSurvival,
-		twoYearSurvival: band.twoYearSurvival,
-		surgicalRisk: band.surgicalRisk,
-		complete,
-		firedRules,
-		flaggedIssues: [],
-		timestamp: new Date().toISOString()
-	};
+  const result: GradingResult = {
+    bilirubinPoint,
+    albuminPoint,
+    coagulationPoint,
+    ascitesPoint,
+    encephalopathyPoint,
+    childPughScore,
+    childPughClass: band.childPughClass,
+    oneYearSurvival: band.oneYearSurvival,
+    twoYearSurvival: band.twoYearSurvival,
+    surgicalRisk: band.surgicalRisk,
+    complete,
+    firedRules,
+    flaggedIssues: [],
+    timestamp: new Date().toISOString()
+  };
 
-	result.flaggedIssues = detectFlaggedIssues(data, result);
-	return result;
+  result.flaggedIssues = detectFlaggedIssues(data, result);
+  return result;
 }

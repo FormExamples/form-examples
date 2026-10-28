@@ -10,9 +10,23 @@
     disabled = false,
     children,
     ...restProps
-  }: { label: string; value?: string; required?: boolean; disabled?: boolean; children: Snippet; [key: string]: unknown } = $props();
+  }: {
+    label: string;
+    value?: string;
+    required?: boolean;
+    disabled?: boolean;
+    children: Snippet;
+    [key: string]: unknown;
+  } = $props();
 </script>
 
-<select class={`select ${className}`} aria-label={label} bind:value {required} {disabled} {...restProps}>
+<select
+  class={`select ${className}`}
+  aria-label={label}
+  bind:value
+  {required}
+  {disabled}
+  {...restProps}
+>
   {@render children?.()}
 </select>

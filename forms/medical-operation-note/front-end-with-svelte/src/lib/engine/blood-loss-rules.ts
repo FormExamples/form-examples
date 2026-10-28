@@ -1,9 +1,4 @@
-import type {
-  BloodLossBand,
-  CompositeRisk,
-  FiredRule,
-  OperationNote,
-} from './types.js';
+import type { BloodLossBand, CompositeRisk, FiredRule, OperationNote } from './types.js';
 import { bloodLossBand } from './utils.js';
 
 /**
@@ -47,7 +42,7 @@ export function applyBloodLossRules(data: OperationNote): {
       instrument: 'blood-loss',
       grade: band,
       category: 'haemorrhage',
-      description: `Estimated blood loss ${ebl ?? 0} mL — ${band} band`,
+      description: `Estimated blood loss ${ebl ?? 0} mL — ${band} band`
     });
   }
 
@@ -57,7 +52,7 @@ export function applyBloodLossRules(data: OperationNote): {
       instrument: 'blood-loss',
       grade: 'massive',
       category: 'haemorrhage',
-      description: `EBL ${ebl ?? 0} mL exceeds 1500 mL — massive haemorrhage threshold`,
+      description: `EBL ${ebl ?? 0} mL exceeds 1500 mL — massive haemorrhage threshold`
     });
   }
 

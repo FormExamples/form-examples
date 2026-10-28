@@ -1,8 +1,8 @@
 import type {
-	NerveConductionStudyResult,
-	ResultClassification,
-	AbnormalitySeverity,
-	FiredRule
+  NerveConductionStudyResult,
+  ResultClassification,
+  AbnormalitySeverity,
+  FiredRule
 } from './types';
 import { hasCriticalFinding, hasAnyAbnormalFinding } from './utils';
 
@@ -22,74 +22,75 @@ import { hasCriticalFinding, hasAnyAbnormalFinding } from './utils';
  * when present.
  */
 export function gradeSeverity(
-	r: NerveConductionStudyResult,
-	classification: ResultClassification
+  r: NerveConductionStudyResult,
+  classification: ResultClassification
 ): {
-	abnormalitySeverity: AbnormalitySeverity;
-	reportingCategory: string;
-	firedRules: FiredRule[];
+  abnormalitySeverity: AbnormalitySeverity;
+  reportingCategory: string;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
-	const category = deriveReportingCategory(r);
+  const firedRules: FiredRule[] = [];
+  const category = deriveReportingCategory(r);
 
-	if (hasCriticalFinding(r)) {
-		firedRules.push({
-			ruleId: 'R-SEV-MAJOR-01',
-			axis: 'severity',
-			category: 'critical-finding',
-			description: 'Critical finding present; abnormality severity graded major.'
-		});
-		return { abnormalitySeverity: 'major', reportingCategory: category, firedRules };
-	}
+  if (hasCriticalFinding(r)) {
+    firedRules.push({
+      ruleId: 'R-SEV-MAJOR-01',
+      axis: 'severity',
+      category: 'critical-finding',
+      description: 'Critical finding present; abnormality severity graded major.'
+    });
+    return { abnormalitySeverity: 'major', reportingCategory: category, firedRules };
+  }
 
-	if (hasAnyAbnormalFinding(r) && r.severity === 'severe') {
-		firedRules.push({
-			ruleId: 'R-SEV-MAJOR-02',
-			axis: 'severity',
-			category: 'severe-abnormality',
-			description: 'Severe electrodiagnostic abnormality present; abnormality severity graded major.'
-		});
-		return { abnormalitySeverity: 'major', reportingCategory: category, firedRules };
-	}
+  if (hasAnyAbnormalFinding(r) && r.severity === 'severe') {
+    firedRules.push({
+      ruleId: 'R-SEV-MAJOR-02',
+      axis: 'severity',
+      category: 'severe-abnormality',
+      description:
+        'Severe electrodiagnostic abnormality present; abnormality severity graded major.'
+    });
+    return { abnormalitySeverity: 'major', reportingCategory: category, firedRules };
+  }
 
-	if (hasAnyAbnormalFinding(r) && r.severity === 'mild') {
-		firedRules.push({
-			ruleId: 'R-SEV-MINOR-01',
-			axis: 'severity',
-			category: 'mild-abnormality',
-			description: 'Mild electrodiagnostic abnormality present; abnormality severity graded minor.'
-		});
-		return { abnormalitySeverity: 'minor', reportingCategory: category, firedRules };
-	}
+  if (hasAnyAbnormalFinding(r) && r.severity === 'mild') {
+    firedRules.push({
+      ruleId: 'R-SEV-MINOR-01',
+      axis: 'severity',
+      category: 'mild-abnormality',
+      description: 'Mild electrodiagnostic abnormality present; abnormality severity graded minor.'
+    });
+    return { abnormalitySeverity: 'minor', reportingCategory: category, firedRules };
+  }
 
-	if (hasAnyAbnormalFinding(r)) {
-		firedRules.push({
-			ruleId: 'R-SEV-MODERATE-01',
-			axis: 'severity',
-			category: 'abnormal-finding',
-			description:
-				'An abnormal structured finding is present; abnormality severity graded moderate.'
-		});
-		return { abnormalitySeverity: 'moderate', reportingCategory: category, firedRules };
-	}
+  if (hasAnyAbnormalFinding(r)) {
+    firedRules.push({
+      ruleId: 'R-SEV-MODERATE-01',
+      axis: 'severity',
+      category: 'abnormal-finding',
+      description:
+        'An abnormal structured finding is present; abnormality severity graded moderate.'
+    });
+    return { abnormalitySeverity: 'moderate', reportingCategory: category, firedRules };
+  }
 
-	if (classification === 'inconclusive') {
-		firedRules.push({
-			ruleId: 'R-SEV-NONE-02',
-			axis: 'severity',
-			category: 'inconclusive',
-			description: 'Inconclusive study; abnormality severity not established.'
-		});
-		return { abnormalitySeverity: 'none', reportingCategory: 'indeterminate', firedRules };
-	}
+  if (classification === 'inconclusive') {
+    firedRules.push({
+      ruleId: 'R-SEV-NONE-02',
+      axis: 'severity',
+      category: 'inconclusive',
+      description: 'Inconclusive study; abnormality severity not established.'
+    });
+    return { abnormalitySeverity: 'none', reportingCategory: 'indeterminate', firedRules };
+  }
 
-	firedRules.push({
-		ruleId: 'R-SEV-NONE-01',
-		axis: 'severity',
-		category: 'no-abnormal-finding',
-		description: 'No abnormal finding; abnormality severity graded none.'
-	});
-	return { abnormalitySeverity: 'none', reportingCategory: 'normal', firedRules };
+  firedRules.push({
+    ruleId: 'R-SEV-NONE-01',
+    axis: 'severity',
+    category: 'no-abnormal-finding',
+    description: 'No abnormal finding; abnormality severity graded none.'
+  });
+  return { abnormalitySeverity: 'none', reportingCategory: 'normal', firedRules };
 }
 
 /**
@@ -98,19 +99,19 @@ export function gradeSeverity(
  * pattern, and severity.
  */
 function deriveReportingCategory(r: NerveConductionStudyResult): string {
-	if (r.reportingCategory.trim() !== '') return r.reportingCategory.trim();
+  if (r.reportingCategory.trim() !== '') return r.reportingCategory.trim();
 
-	const parts: string[] = [];
-	if (r.motorNeuroneDiseaseFeatures) parts.push('motor-neurone-disease');
-	else if (r.carpalTunnelSyndrome) parts.push('carpal-tunnel-syndrome');
-	else if (r.peripheralNeuropathy) parts.push('peripheral-neuropathy');
-	else if (r.radiculopathy) parts.push('radiculopathy');
-	else if (r.myopathy) parts.push('myopathy');
-	else if (r.neuromuscularJunctionDisorder) parts.push('neuromuscular-junction-disorder');
+  const parts: string[] = [];
+  if (r.motorNeuroneDiseaseFeatures) parts.push('motor-neurone-disease');
+  else if (r.carpalTunnelSyndrome) parts.push('carpal-tunnel-syndrome');
+  else if (r.peripheralNeuropathy) parts.push('peripheral-neuropathy');
+  else if (r.radiculopathy) parts.push('radiculopathy');
+  else if (r.myopathy) parts.push('myopathy');
+  else if (r.neuromuscularJunctionDisorder) parts.push('neuromuscular-junction-disorder');
 
-	if (parts.length === 0) return 'normal';
+  if (parts.length === 0) return 'normal';
 
-	if (r.severity && r.severity !== 'not-applicable') parts.push(r.severity);
-	if (r.pattern && r.pattern !== 'not-applicable') parts.push(r.pattern);
-	return parts.join('-');
+  if (r.severity && r.severity !== 'not-applicable') parts.push(r.severity);
+  if (r.pattern && r.pattern !== 'not-applicable') parts.push(r.pattern);
+  return parts.join('-');
 }

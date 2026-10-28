@@ -57,14 +57,7 @@
   {/if}
 
   <Field label="BMI (override)" inputId="step-9-bmi">
-    <NumberInput
-      id="step-9-bmi"
-      label="BMI"
-      min={10}
-      max={80}
-      step="0.1"
-      bind:value={d.bmi}
-    />
+    <NumberInput id="step-9-bmi" label="BMI" min={10} max={80} step="0.1" bind:value={d.bmi} />
   </Field>
 
   <Field label="Waist circumference (cm)" inputId="step-9-waistCircumferenceCm">

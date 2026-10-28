@@ -14,7 +14,7 @@
     rows = 4,
     placeholder = '',
     hint = '',
-    onchange,
+    onchange
   }: Props = $props();
   const id = `t-${Math.random().toString(36).slice(2, 10)}`;
 </script>
@@ -27,7 +27,6 @@
     {placeholder}
     bind:value
     oninput={() => onchange?.()}
-    class="text-area-input"
-  ></textarea>
+    class="text-area-input"></textarea>
   {#if hint}<span class="hint">{hint}</span>{/if}
 </div>

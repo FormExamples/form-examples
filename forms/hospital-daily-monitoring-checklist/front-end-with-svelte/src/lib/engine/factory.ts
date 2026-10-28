@@ -17,13 +17,13 @@ export function createEmptyAssessment(): HospitalDailyMonitoringChecklist {
       departmentOrSite: '',
       inspectionDate: '',
       inspectingOfficerName: '',
-      inspectingOfficerDesignation: '',
+      inspectingOfficerDesignation: ''
     },
     items: emptyItems(),
     summary: {
       overallNotes: '',
       actionPlan: '',
-      signedAt: '',
-    },
+      signedAt: ''
+    }
   };
 }

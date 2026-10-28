@@ -23,6 +23,13 @@
   }
 </script>
 
-<form class={`form ${className}`} aria-label={label} onsubmit={handleSubmit} {onreset} novalidate {...restProps}>
+<form
+  class={`form ${className}`}
+  aria-label={label}
+  onsubmit={handleSubmit}
+  {onreset}
+  novalidate
+  {...restProps}
+>
   {@render children?.()}
 </form>

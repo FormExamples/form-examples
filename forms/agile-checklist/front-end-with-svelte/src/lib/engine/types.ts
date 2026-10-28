@@ -3,12 +3,7 @@ import type { SectionId } from '#lib/config/items.js';
 export type Answer = 'yes' | 'no' | 'not-applicable' | '';
 
 export type Maturity =
-  | 'optimising'
-  | 'mature'
-  | 'developing'
-  | 'initial'
-  | 'ad-hoc'
-  | 'insufficient-data';
+  'optimising' | 'mature' | 'developing' | 'initial' | 'ad-hoc' | 'insufficient-data';
 
 export type Band = 'high' | 'mid' | 'low' | 'unanswered';
 
@@ -69,7 +64,7 @@ export interface SectionScore {
   notApplicableCount: number;
   unansweredCount: number;
   applicableCount: number; // yes + no
-  percent: number | null;  // null when applicableCount === 0
+  percent: number | null; // null when applicableCount === 0
   band: Band;
 }
 

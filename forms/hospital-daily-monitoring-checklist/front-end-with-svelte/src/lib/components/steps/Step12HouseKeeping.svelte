@@ -19,7 +19,9 @@
 </script>
 
 <Fieldset legend="Step 12 — Section 11 — House Keeping (8 checkpoints)">
-  <p class="hint">Housekeeping across OPD, wards, OT/ICU, labour room, premises, drainages, and toilets.</p>
+  <p class="hint">
+    Housekeeping across OPD, wards, OT/ICU, labour room, premises, drainages, and toilets.
+  </p>
 
   {#each groups as group, gi (gi)}
     {#if group.subsection}

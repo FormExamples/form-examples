@@ -24,63 +24,63 @@ import { detectFlags } from './flagged-issues';
  * No side effects, no network calls, no I/O.
  */
 export function calculateGrade(result: TumorMarkerResult): GradingResult {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	// Axis A
-	const a = classifyResult(result);
-	firedRules.push(...a.firedRules);
+  // Axis A
+  const a = classifyResult(result);
+  firedRules.push(...a.firedRules);
 
-	// Axis B
-	const b = gradeSeverity(result, a.resultClassification);
-	firedRules.push(...b.firedRules);
+  // Axis B
+  const b = gradeSeverity(result, a.resultClassification);
+  firedRules.push(...b.firedRules);
 
-	// Axis C
-	const c = gradeCompleteness(result);
-	firedRules.push(...c.firedRules);
+  // Axis C
+  const c = gradeCompleteness(result);
+  firedRules.push(...c.firedRules);
 
-	// Axis D
-	const d = gradeFollowUp(result, a.resultClassification, b.abnormalitySeverity);
-	firedRules.push(...d.firedRules);
+  // Axis D
+  const d = gradeFollowUp(result, a.resultClassification, b.abnormalitySeverity);
+  firedRules.push(...d.firedRules);
 
-	const recommendation = deriveRecommendation(
-		a.resultClassification,
-		b.abnormalitySeverity,
-		d.followUpUrgency
-	);
+  const recommendation = deriveRecommendation(
+    a.resultClassification,
+    b.abnormalitySeverity,
+    d.followUpUrgency
+  );
 
-	const flags = detectFlags(result);
+  const flags = detectFlags(result);
 
-	return {
-		resultClassification: a.resultClassification,
-		abnormalitySeverity: b.abnormalitySeverity,
-		reportingCategory: b.reportingCategory,
-		reportCompletenessPercent: c.reportCompletenessPercent,
-		followUpUrgency: d.followUpUrgency,
-		targetTimeframe: d.targetTimeframe,
-		recommendedAction: d.recommendedAction,
-		recommendation,
-		firedRules,
-		flags,
-		gradedAt: new Date().toISOString()
-	};
+  return {
+    resultClassification: a.resultClassification,
+    abnormalitySeverity: b.abnormalitySeverity,
+    reportingCategory: b.reportingCategory,
+    reportCompletenessPercent: c.reportCompletenessPercent,
+    followUpUrgency: d.followUpUrgency,
+    targetTimeframe: d.targetTimeframe,
+    recommendedAction: d.recommendedAction,
+    recommendation,
+    firedRules,
+    flags,
+    gradedAt: new Date().toISOString()
+  };
 }
 
 /** Derives the overall recommendation from the graded axes. */
 function deriveRecommendation(
-	classification: string,
-	severity: string,
-	urgency: string
+  classification: string,
+  severity: string,
+  urgency: string
 ): Recommendation {
-	if (urgency === 'critical-alert') return 'urgent-review';
-	if (severity === 'major') return 'specialist-referral';
-	// 'moderate' shares 'repeat-marker' with 'inconclusive', aligned with
-	// every sibling *-test-result engine's pattern (moderate and inconclusive
-	// both map to that engine's own "repeat/re-test" recommendation, placed
-	// between the major and minor tiers) — 'moderate' must not be MORE
-	// alarming than 'major'.
-	if (classification === 'inconclusive') return 'repeat-marker';
-	if (severity === 'moderate') return 'repeat-marker';
-	if (severity === 'minor') return 'routine-follow-up';
-	if (classification === 'normal') return 'no-action';
-	return 'routine-follow-up';
+  if (urgency === 'critical-alert') return 'urgent-review';
+  if (severity === 'major') return 'specialist-referral';
+  // 'moderate' shares 'repeat-marker' with 'inconclusive', aligned with
+  // every sibling *-test-result engine's pattern (moderate and inconclusive
+  // both map to that engine's own "repeat/re-test" recommendation, placed
+  // between the major and minor tiers) — 'moderate' must not be MORE
+  // alarming than 'major'.
+  if (classification === 'inconclusive') return 'repeat-marker';
+  if (severity === 'moderate') return 'repeat-marker';
+  if (severity === 'minor') return 'routine-follow-up';
+  if (classification === 'normal') return 'no-action';
+  return 'routine-follow-up';
 }

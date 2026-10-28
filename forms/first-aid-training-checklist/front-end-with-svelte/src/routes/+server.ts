@@ -1,5 +1,5 @@
 import { redirect } from '@sveltejs/kit';
 
 export function GET() {
-	redirect(307, '/first-aid-training-checklist/');
+  redirect(307, '/first-aid-training-checklist/');
 }

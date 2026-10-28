@@ -28,21 +28,25 @@
     { value: 'imca', label: 'Independent Mental Capacity Advocate' },
     { value: 'psychiatrist', label: 'Psychiatrist' },
     { value: 'psychologist', label: 'Psychologist' },
-    { value: 'other-registered-professional', label: 'Other registered professional' },
+    { value: 'other-registered-professional', label: 'Other registered professional' }
   ];
 </script>
 
 <div class="space-y-4">
   <p class="text-sm text-base-content/70">
-    The certificate provider certifies that the donor understands the LPA and is not under
-    undue pressure. Cannot be a family member, business partner, employee, or attorney.
+    The certificate provider certifies that the donor understands the LPA and is not under undue
+    pressure. Cannot be a family member, business partner, employee, or attorney.
   </p>
 
   <div class="grid gap-3 sm:grid-cols-2">
     <FormField label="Given names" required bind:value={cp.givenNames} onchange={changed} />
     <FormField label="Family name" required bind:value={cp.familyName} onchange={changed} />
     <div class="sm:col-span-2">
-      <FormField label="Postal address" bind:value={cp.postalAddressAsFullText} onchange={changed} />
+      <FormField
+        label="Postal address"
+        bind:value={cp.postalAddressAsFullText}
+        onchange={changed}
+      />
     </div>
     <FormField label="Email" type="email" bind:value={cp.email} onchange={changed} />
     <FormField label="Telephone" type="tel" bind:value={cp.phone} onchange={changed} />
@@ -55,7 +59,7 @@
     onchange={changed}
     options={[
       { value: 'skill-based', label: 'Skill-based (registered profession)' },
-      { value: 'knowledge-based', label: 'Knowledge-based (known donor ≥ 2 years)' },
+      { value: 'knowledge-based', label: 'Knowledge-based (known donor ≥ 2 years)' }
     ]}
   />
 

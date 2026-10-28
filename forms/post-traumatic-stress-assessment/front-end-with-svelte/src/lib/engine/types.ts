@@ -3,16 +3,16 @@
 // ──────────────────────────────────────────────
 
 export interface Demographics {
-	firstName: string;
-	lastName: string;
-	dateOfBirth: string;
-	sex: 'male' | 'female' | 'other' | '';
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  sex: 'male' | 'female' | 'other' | '';
 }
 
 export interface TraumaEvent {
-	eventDescription: string;
-	eventDate: string;
-	isOngoing: boolean;
+  eventDescription: string;
+  eventDate: string;
+  isOngoing: boolean;
 }
 
 // 20 items of the PCL-5, each rated 0 (Not at all) to 4 (Extremely)
@@ -23,35 +23,35 @@ export interface TraumaEvent {
 export type PclItemScore = 0 | 1 | 2 | 3 | 4 | null;
 
 export interface ClusterBIntrusion {
-	item1RepeatedDisturbingMemories: PclItemScore;
-	item2RepeatedDisturbingDreams: PclItemScore;
-	item3FeelingReliving: PclItemScore;
-	item4FeelingUpsetByReminders: PclItemScore;
-	item5StrongPhysicalReactions: PclItemScore;
+  item1RepeatedDisturbingMemories: PclItemScore;
+  item2RepeatedDisturbingDreams: PclItemScore;
+  item3FeelingReliving: PclItemScore;
+  item4FeelingUpsetByReminders: PclItemScore;
+  item5StrongPhysicalReactions: PclItemScore;
 }
 
 export interface ClusterCAvoidance {
-	item6AvoidingMemoriesThoughtsFeelings: PclItemScore;
-	item7AvoidingExternalReminders: PclItemScore;
+  item6AvoidingMemoriesThoughtsFeelings: PclItemScore;
+  item7AvoidingExternalReminders: PclItemScore;
 }
 
 export interface ClusterDNegativeAlterations {
-	item8TroubleRememberingImportantParts: PclItemScore;
-	item9StrongNegativeBeliefs: PclItemScore;
-	item10BlamingSelfOrOthers: PclItemScore;
-	item11StrongNegativeFeelings: PclItemScore;
-	item12LossOfInterest: PclItemScore;
-	item13FeelingDistantFromOthers: PclItemScore;
-	item14TroubleExperiencingPositiveFeelings: PclItemScore;
+  item8TroubleRememberingImportantParts: PclItemScore;
+  item9StrongNegativeBeliefs: PclItemScore;
+  item10BlamingSelfOrOthers: PclItemScore;
+  item11StrongNegativeFeelings: PclItemScore;
+  item12LossOfInterest: PclItemScore;
+  item13FeelingDistantFromOthers: PclItemScore;
+  item14TroubleExperiencingPositiveFeelings: PclItemScore;
 }
 
 export interface ClusterEArousalReactivity {
-	item15IrritableOrAggressive: PclItemScore;
-	item16RecklessOrSelfDestructive: PclItemScore;
-	item17SuperAlertOrOnGuard: PclItemScore;
-	item18JumpyOrEasilyStartled: PclItemScore;
-	item19DifficultyConcentrating: PclItemScore;
-	item20TroubleSleeping: PclItemScore;
+  item15IrritableOrAggressive: PclItemScore;
+  item16RecklessOrSelfDestructive: PclItemScore;
+  item17SuperAlertOrOnGuard: PclItemScore;
+  item18JumpyOrEasilyStartled: PclItemScore;
+  item19DifficultyConcentrating: PclItemScore;
+  item20TroubleSleeping: PclItemScore;
 }
 
 // ──────────────────────────────────────────────
@@ -59,12 +59,12 @@ export interface ClusterEArousalReactivity {
 // ──────────────────────────────────────────────
 
 export interface AssessmentData {
-	demographics: Demographics;
-	traumaEvent: TraumaEvent;
-	clusterBIntrusion: ClusterBIntrusion;
-	clusterCAvoidance: ClusterCAvoidance;
-	clusterDNegativeAlterations: ClusterDNegativeAlterations;
-	clusterEArousalReactivity: ClusterEArousalReactivity;
+  demographics: Demographics;
+  traumaEvent: TraumaEvent;
+  clusterBIntrusion: ClusterBIntrusion;
+  clusterCAvoidance: ClusterCAvoidance;
+  clusterDNegativeAlterations: ClusterDNegativeAlterations;
+  clusterEArousalReactivity: ClusterEArousalReactivity;
 }
 
 // ──────────────────────────────────────────────
@@ -74,34 +74,34 @@ export interface AssessmentData {
 export type SeverityCategory = 'Minimal' | 'Mild' | 'Moderate' | 'Severe';
 
 export interface ClusterScores {
-	b: number;
-	c: number;
-	d: number;
-	e: number;
+  b: number;
+  c: number;
+  d: number;
+  e: number;
 }
 
 export interface FiredRule {
-	id: string;
-	category: string;
-	description: string;
-	severity: 'low' | 'medium' | 'high' | 'critical';
+  id: string;
+  category: string;
+  description: string;
+  severity: 'low' | 'medium' | 'high' | 'critical';
 }
 
 export interface AdditionalFlag {
-	id: string;
-	category: string;
-	message: string;
-	priority: 'high' | 'medium' | 'low';
+  id: string;
+  category: string;
+  message: string;
+  priority: 'high' | 'medium' | 'low';
 }
 
 export interface GradingResult {
-	totalScore: number;                    // 0-80
-	category: SeverityCategory;
-	probableDsm5Diagnosis: boolean;        // cluster thresholds met at item-level ≥ 2
-	clusterScores: ClusterScores;
-	firedRules: FiredRule[];
-	additionalFlags: AdditionalFlag[];
-	timestamp: string;
+  totalScore: number; // 0-80
+  category: SeverityCategory;
+  probableDsm5Diagnosis: boolean; // cluster thresholds met at item-level ≥ 2
+  clusterScores: ClusterScores;
+  firedRules: FiredRule[];
+  additionalFlags: AdditionalFlag[];
+  timestamp: string;
 }
 
 // ──────────────────────────────────────────────
@@ -109,8 +109,8 @@ export interface GradingResult {
 // ──────────────────────────────────────────────
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
-	section: keyof AssessmentData;
+  number: number;
+  title: string;
+  shortTitle: string;
+  section: keyof AssessmentData;
 }

@@ -46,7 +46,10 @@ export function buildPdfDocument(
           widths: ['*', '*'],
           body: [
             [
-              field('Name', `${data.patientInformation.firstName} ${data.patientInformation.lastName}`),
+              field(
+                'Name',
+                `${data.patientInformation.firstName} ${data.patientInformation.lastName}`
+              ),
               field('NHS Number', data.patientInformation.nhsNumber || 'N/A')
             ],
             [
@@ -65,7 +68,10 @@ export function buildPdfDocument(
           widths: ['*', '*'],
           body: [
             [
-              field('Name', `${data.clinicianInformation.firstName} ${data.clinicianInformation.lastName}`),
+              field(
+                'Name',
+                `${data.clinicianInformation.firstName} ${data.clinicianInformation.lastName}`
+              ),
               field('NHS Employee No.', data.clinicianInformation.nhsEmployeeNumber || 'N/A')
             ],
             [
@@ -93,7 +99,14 @@ export function buildPdfDocument(
             ],
             [
               field('Request Date', data.prescriptionDetails.requestDate || 'N/A'),
-              field('Type', data.requestType.isNewPrescription === 'yes' ? 'New' : data.requestType.isNewPrescription === 'no' ? 'Refill' : 'N/A')
+              field(
+                'Type',
+                data.requestType.isNewPrescription === 'yes'
+                  ? 'New'
+                  : data.requestType.isNewPrescription === 'no'
+                    ? 'Refill'
+                    : 'N/A'
+              )
             ]
           ]
         },
@@ -115,13 +128,16 @@ export function buildPdfDocument(
         ? [
             sectionHeader('Flagged Issues for Clinician'),
             {
-              ul: result.additionalFlags.map(
-                (f) => ({
-                  text: `[${f.priority.toUpperCase()}] ${f.category}: ${f.message}`,
-                  color: f.priority === 'high' ? '#dc2626' : f.priority === 'medium' ? '#d97706' : '#4b5563',
-                  margin: [0, 2, 0, 2] as [number, number, number, number]
-                })
-              ),
+              ul: result.additionalFlags.map((f) => ({
+                text: `[${f.priority.toUpperCase()}] ${f.category}: ${f.message}`,
+                color:
+                  f.priority === 'high'
+                    ? '#dc2626'
+                    : f.priority === 'medium'
+                      ? '#d97706'
+                      : '#4b5563',
+                margin: [0, 2, 0, 2] as [number, number, number, number]
+              })),
               margin: [0, 0, 0, 16] as [number, number, number, number]
             }
           ]
@@ -173,10 +189,7 @@ function sectionHeader(text: string) {
 
 function field(label: string, value: string) {
   return {
-    text: [
-      { text: `${label}: `, bold: true, color: '#6b7280' },
-      { text: value }
-    ],
+    text: [{ text: `${label}: `, bold: true, color: '#6b7280' }, { text: value }],
     margin: [0, 4, 0, 4] as [number, number, number, number]
   };
 }

@@ -9,51 +9,51 @@ import { ratedCount, ratedValues, workingWellCount, anyNotWorking } from './util
  * across every front-end and the back-end.
  */
 export function classifyEffectiveness(r: NeurodiversityAdjustmentReview): {
-	effectivenessBand: EffectivenessBand;
-	firedRules: FiredRule[];
+  effectivenessBand: EffectivenessBand;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
-	const rated = ratedValues(r);
+  const firedRules: FiredRule[] = [];
+  const rated = ratedValues(r);
 
-	// 1. Nothing rated → not-yet-assessed.
-	if (ratedCount(r) === 0) {
-		firedRules.push({
-			ruleId: 'R-EFFECT-NOT-ASSESSED',
-			axis: 'effectiveness',
-			category: 'not-yet-assessed',
-			description: 'No adjustments in place have been rated yet.'
-		});
-		return { effectivenessBand: 'not-yet-assessed', firedRules };
-	}
+  // 1. Nothing rated → not-yet-assessed.
+  if (ratedCount(r) === 0) {
+    firedRules.push({
+      ruleId: 'R-EFFECT-NOT-ASSESSED',
+      axis: 'effectiveness',
+      category: 'not-yet-assessed',
+      description: 'No adjustments in place have been rated yet.'
+    });
+    return { effectivenessBand: 'not-yet-assessed', firedRules };
+  }
 
-	// 2. Every rated adjustment is working well → effective.
-	if (rated.every((v) => v === 'working-well')) {
-		firedRules.push({
-			ruleId: 'R-EFFECT-EFFECTIVE',
-			axis: 'effectiveness',
-			category: 'effective',
-			description: 'All rated adjustments are working well.'
-		});
-		return { effectivenessBand: 'effective', firedRules };
-	}
+  // 2. Every rated adjustment is working well → effective.
+  if (rated.every((v) => v === 'working-well')) {
+    firedRules.push({
+      ruleId: 'R-EFFECT-EFFECTIVE',
+      axis: 'effectiveness',
+      category: 'effective',
+      description: 'All rated adjustments are working well.'
+    });
+    return { effectivenessBand: 'effective', firedRules };
+  }
 
-	// 3. Nothing is working well and at least one is not working → ineffective.
-	if (workingWellCount(r) === 0 && anyNotWorking(r)) {
-		firedRules.push({
-			ruleId: 'R-EFFECT-INEFFECTIVE',
-			axis: 'effectiveness',
-			category: 'ineffective',
-			description: 'No adjustment is working well and at least one is not working.'
-		});
-		return { effectivenessBand: 'ineffective', firedRules };
-	}
+  // 3. Nothing is working well and at least one is not working → ineffective.
+  if (workingWellCount(r) === 0 && anyNotWorking(r)) {
+    firedRules.push({
+      ruleId: 'R-EFFECT-INEFFECTIVE',
+      axis: 'effectiveness',
+      category: 'ineffective',
+      description: 'No adjustment is working well and at least one is not working.'
+    });
+    return { effectivenessBand: 'ineffective', firedRules };
+  }
 
-	// 4. Otherwise a mix → partially-effective.
-	firedRules.push({
-		ruleId: 'R-EFFECT-PARTIAL',
-		axis: 'effectiveness',
-		category: 'partially-effective',
-		description: 'A mix of working and not-fully-working adjustments.'
-	});
-	return { effectivenessBand: 'partially-effective', firedRules };
+  // 4. Otherwise a mix → partially-effective.
+  firedRules.push({
+    ruleId: 'R-EFFECT-PARTIAL',
+    axis: 'effectiveness',
+    category: 'partially-effective',
+    description: 'A mix of working and not-fully-working adjustments.'
+  });
+  return { effectivenessBand: 'partially-effective', firedRules };
 }

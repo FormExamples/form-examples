@@ -20,29 +20,29 @@
 import { criterionRegistry } from './rules';
 import { detectAdditionalFlags } from './flagged-issues';
 import type {
-	AssessmentData,
-	CriterionScore,
-	FiredRule,
-	GradingResult,
-	LinguisticField,
-	OETGrade
+  AssessmentData,
+  CriterionScore,
+  FiredRule,
+  GradingResult,
+  LinguisticField,
+  OETGrade
 } from './types';
 
 /** Map a 0-500 scaled score to a grade. */
 export function classifyScaledScore(score: number): OETGrade {
-	if (score >= 450) return 'A';
-	if (score >= 350) return 'B';
-	if (score >= 300) return 'C+';
-	if (score >= 200) return 'C';
-	if (score >= 100) return 'D';
-	return 'E';
+  if (score >= 450) return 'A';
+  if (score >= 350) return 'B';
+  if (score >= 300) return 'C+';
+  if (score >= 200) return 'C';
+  if (score >= 100) return 'D';
+  return 'E';
 }
 
 /** Coerce a value to a finite number, otherwise return null. */
 function toNumOrNull(v: unknown): number | null {
-	if (v === null || v === undefined || v === '') return null;
-	const n = Number(v);
-	return Number.isFinite(n) ? n : null;
+  if (v === null || v === undefined || v === '') return null;
+  const n = Number(v);
+  return Number.isFinite(n) ? n : null;
 }
 
 /**
@@ -51,92 +51,99 @@ function toNumOrNull(v: unknown): number | null {
  * completion still produces a meaningful figure).
  */
 function meanOrSingle(a: unknown, b: unknown): number | null {
-	const x = toNumOrNull(a);
-	const y = toNumOrNull(b);
-	if (x === null && y === null) return null;
-	if (x === null) return y;
-	if (y === null) return x;
-	return (x + y) / 2;
+  const x = toNumOrNull(a);
+  const y = toNumOrNull(b);
+  if (x === null && y === null) return null;
+  if (x === null) return y;
+  if (y === null) return x;
+  return (x + y) / 2;
 }
 
 /** Round to 1 decimal place for display. */
 function round1(n: number): number {
-	return Math.round(n * 10) / 10;
+  return Math.round(n * 10) / 10;
 }
 
 /** Pure scoring engine (without flags). */
-export function gradeOET(data: AssessmentData): Omit<GradingResult, 'additionalFlags' | 'timestamp'> {
-	const perCriterionScores: CriterionScore[] = [];
-	const firedRules: FiredRule[] = [];
+export function gradeOET(
+  data: AssessmentData
+): Omit<GradingResult, 'additionalFlags' | 'timestamp'> {
+  const perCriterionScores: CriterionScore[] = [];
+  const firedRules: FiredRule[] = [];
 
-	let linguisticTotal = 0;
-	let clinicalTotal = 0;
+  let linguisticTotal = 0;
+  let clinicalTotal = 0;
 
-	for (const c of criterionRegistry) {
-		if (c.domain === 'linguistic') {
-			const field = c.dataField as LinguisticField;
-			const rp1 = toNumOrNull(data.linguisticRolePlay1?.[field]);
-			const rp2 = toNumOrNull(data.linguisticRolePlay2?.[field]);
-			const mean = meanOrSingle(rp1, rp2);
-			perCriterionScores.push({
-				id: c.id,
-				domain: 'linguistic',
-				label: c.label,
-				maxScore: c.maxScore,
-				rolePlay1Score: rp1,
-				rolePlay2Score: rp2,
-				meanScore: mean === null ? null : round1(mean)
-			});
-			if (mean !== null) {
-				linguisticTotal += mean;
-				firedRules.push({ id: c.id, category: 'Linguistic', description: c.label, score: round1(mean) });
-			}
-		} else {
-			const v = toNumOrNull(
-				(data.clinicalIndicators as unknown as Record<string, unknown>)?.[c.dataField]
-			);
-			perCriterionScores.push({
-				id: c.id,
-				domain: 'clinical',
-				label: c.label,
-				maxScore: c.maxScore,
-				rolePlay1Score: null,
-				rolePlay2Score: null,
-				meanScore: v
-			});
-			if (v !== null) {
-				clinicalTotal += v;
-				firedRules.push({
-					id: c.id,
-					category: 'Clinical Communication',
-					description: c.label,
-					score: v
-				});
-			}
-		}
-	}
+  for (const c of criterionRegistry) {
+    if (c.domain === 'linguistic') {
+      const field = c.dataField as LinguisticField;
+      const rp1 = toNumOrNull(data.linguisticRolePlay1?.[field]);
+      const rp2 = toNumOrNull(data.linguisticRolePlay2?.[field]);
+      const mean = meanOrSingle(rp1, rp2);
+      perCriterionScores.push({
+        id: c.id,
+        domain: 'linguistic',
+        label: c.label,
+        maxScore: c.maxScore,
+        rolePlay1Score: rp1,
+        rolePlay2Score: rp2,
+        meanScore: mean === null ? null : round1(mean)
+      });
+      if (mean !== null) {
+        linguisticTotal += mean;
+        firedRules.push({
+          id: c.id,
+          category: 'Linguistic',
+          description: c.label,
+          score: round1(mean)
+        });
+      }
+    } else {
+      const v = toNumOrNull(
+        (data.clinicalIndicators as unknown as Record<string, unknown>)?.[c.dataField]
+      );
+      perCriterionScores.push({
+        id: c.id,
+        domain: 'clinical',
+        label: c.label,
+        maxScore: c.maxScore,
+        rolePlay1Score: null,
+        rolePlay2Score: null,
+        meanScore: v
+      });
+      if (v !== null) {
+        clinicalTotal += v;
+        firedRules.push({
+          id: c.id,
+          category: 'Clinical Communication',
+          description: c.label,
+          score: v
+        });
+      }
+    }
+  }
 
-	const rawTotal = linguisticTotal + clinicalTotal;
-	const scaledScore = Math.round((rawTotal / 39) * 500);
-	const grade = classifyScaledScore(scaledScore);
+  const rawTotal = linguisticTotal + clinicalTotal;
+  const scaledScore = Math.round((rawTotal / 39) * 500);
+  const grade = classifyScaledScore(scaledScore);
 
-	return {
-		linguisticTotal: round1(linguisticTotal),
-		clinicalTotal: round1(clinicalTotal),
-		rawTotal: round1(rawTotal),
-		scaledScore,
-		grade,
-		perCriterionScores,
-		firedRules
-	};
+  return {
+    linguisticTotal: round1(linguisticTotal),
+    clinicalTotal: round1(clinicalTotal),
+    rawTotal: round1(rawTotal),
+    scaledScore,
+    grade,
+    perCriterionScores,
+    firedRules
+  };
 }
 
 /** Full grading result including flags and a timestamp. */
 export function gradeAssessment(data: AssessmentData): GradingResult {
-	const core = gradeOET(data);
-	return {
-		...core,
-		additionalFlags: detectAdditionalFlags(data, core),
-		timestamp: new Date().toISOString()
-	};
+  const core = gradeOET(data);
+  return {
+    ...core,
+    additionalFlags: detectAdditionalFlags(data, core),
+    timestamp: new Date().toISOString()
+  };
 }

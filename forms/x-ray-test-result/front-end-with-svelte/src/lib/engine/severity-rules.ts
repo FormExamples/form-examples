@@ -1,9 +1,4 @@
-import type {
-	XRayResult,
-	ResultClassification,
-	AbnormalitySeverity,
-	FiredRule
-} from './types';
+import type { XRayResult, ResultClassification, AbnormalitySeverity, FiredRule } from './types';
 import { hasCriticalFinding, hasOnlyIncidentalFinding } from './utils';
 
 /**
@@ -22,82 +17,86 @@ import { hasCriticalFinding, hasOnlyIncidentalFinding } from './utils';
  * preferred when present.
  */
 export function gradeSeverity(
-	r: XRayResult,
-	classification: ResultClassification
+  r: XRayResult,
+  classification: ResultClassification
 ): {
-	abnormalitySeverity: AbnormalitySeverity;
-	reportingCategory: string;
-	firedRules: FiredRule[];
+  abnormalitySeverity: AbnormalitySeverity;
+  reportingCategory: string;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
-	const override = r.reportingCategory.trim();
+  const firedRules: FiredRule[] = [];
+  const override = r.reportingCategory.trim();
 
-	if (hasCriticalFinding(r)) {
-		firedRules.push({
-			ruleId: 'R-SEV-MAJOR-01',
-			axis: 'severity',
-			category: 'critical-finding',
-			description: 'Critical finding present; abnormality severity graded major.'
-		});
-		return {
-			abnormalitySeverity: 'major',
-			reportingCategory: override || 'critical-actionable',
-			firedRules
-		};
-	}
+  if (hasCriticalFinding(r)) {
+    firedRules.push({
+      ruleId: 'R-SEV-MAJOR-01',
+      axis: 'severity',
+      category: 'critical-finding',
+      description: 'Critical finding present; abnormality severity graded major.'
+    });
+    return {
+      abnormalitySeverity: 'major',
+      reportingCategory: override || 'critical-actionable',
+      firedRules
+    };
+  }
 
-	const actionable =
-		r.fracture ||
-		r.dislocation ||
-		r.consolidation ||
-		r.pleuralEffusion ||
-		r.foreignBody ||
-		r.bonyLesion;
+  const actionable =
+    r.fracture ||
+    r.dislocation ||
+    r.consolidation ||
+    r.pleuralEffusion ||
+    r.foreignBody ||
+    r.bonyLesion;
 
-	if (actionable) {
-		firedRules.push({
-			ruleId: 'R-SEV-MODERATE-01',
-			axis: 'severity',
-			category: 'actionable-finding',
-			description:
-				'An actionable abnormal finding (fracture, dislocation, consolidation, pleural effusion, foreign body, or bony lesion) is present; severity graded moderate.'
-		});
-		return {
-			abnormalitySeverity: 'moderate',
-			reportingCategory: override || 'abnormal-acute',
-			firedRules
-		};
-	}
+  if (actionable) {
+    firedRules.push({
+      ruleId: 'R-SEV-MODERATE-01',
+      axis: 'severity',
+      category: 'actionable-finding',
+      description:
+        'An actionable abnormal finding (fracture, dislocation, consolidation, pleural effusion, foreign body, or bony lesion) is present; severity graded moderate.'
+    });
+    return {
+      abnormalitySeverity: 'moderate',
+      reportingCategory: override || 'abnormal-acute',
+      firedRules
+    };
+  }
 
-	if (hasOnlyIncidentalFinding(r)) {
-		firedRules.push({
-			ruleId: 'R-SEV-MINOR-01',
-			axis: 'severity',
-			category: 'incidental-finding',
-			description: 'Incidental finding(s) only; abnormality severity graded minor.'
-		});
-		return { abnormalitySeverity: 'minor', reportingCategory: override || 'incidental', firedRules };
-	}
+  if (hasOnlyIncidentalFinding(r)) {
+    firedRules.push({
+      ruleId: 'R-SEV-MINOR-01',
+      axis: 'severity',
+      category: 'incidental-finding',
+      description: 'Incidental finding(s) only; abnormality severity graded minor.'
+    });
+    return {
+      abnormalitySeverity: 'minor',
+      reportingCategory: override || 'incidental',
+      firedRules
+    };
+  }
 
-	if (classification === 'inconclusive') {
-		firedRules.push({
-			ruleId: 'R-SEV-NONE-02',
-			axis: 'severity',
-			category: 'inconclusive',
-			description: 'Inconclusive study; abnormality severity not established.'
-		});
-		return {
-			abnormalitySeverity: 'none',
-			reportingCategory: override || 'indeterminate',
-			firedRules
-		};
-	}
+  if (classification === 'inconclusive') {
+    firedRules.push({
+      ruleId: 'R-SEV-NONE-02',
+      axis: 'severity',
+      category: 'inconclusive',
+      description: 'Inconclusive study; abnormality severity not established.'
+    });
+    return {
+      abnormalitySeverity: 'none',
+      reportingCategory: override || 'indeterminate',
+      firedRules
+    };
+  }
 
-	firedRules.push({
-		ruleId: 'R-SEV-NONE-01',
-		axis: 'severity',
-		category: 'no-abnormal-finding',
-		description: 'No abnormal finding; abnormality severity graded none.'
-	});
-	return { abnormalitySeverity: 'none', reportingCategory: override || 'normal', firedRules };
+  firedRules.push({
+    ruleId: 'R-SEV-NONE-01',
+    axis: 'severity',
+    category: 'no-abnormal-finding',
+    description: 'No abnormal finding; abnormality severity graded none.'
+  });
+  return { abnormalitySeverity: 'none', reportingCategory: override || 'normal', firedRules };
 }

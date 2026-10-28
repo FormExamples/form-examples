@@ -22,11 +22,11 @@ import type { AssessmentData, ComponentRule } from './types';
  * no-carer / yes / no) counts as a recorded, completed component (spec §4).
  */
 export const NOT_RECORDED = new Set<string>([
-	'',
-	'not-recorded',
-	'not-assessed',
-	'not-reviewed',
-	'not-done'
+  '',
+  'not-recorded',
+  'not-assessed',
+  'not-reviewed',
+  'not-done'
 ]);
 
 /**
@@ -34,7 +34,7 @@ export const NOT_RECORDED = new Set<string>([
  * the "not carried out" sentinels.
  */
 export function isRecorded(value: unknown): boolean {
-	return value !== null && value !== undefined && !NOT_RECORDED.has(String(value));
+  return value !== null && value !== undefined && !NOT_RECORDED.has(String(value));
 }
 
 /**
@@ -45,168 +45,168 @@ export function isRecorded(value: unknown): boolean {
  * syndrome-specific (1), and carer and social (1).
  */
 export const componentRules: ComponentRule[] = [
-	{
-		id: 'R-COMPONENT-REASONABLE-ADJUSTMENTS',
-		component: 'reasonable-adjustments',
-		group: 'adjustments',
-		category: 'component',
-		label: 'Reasonable adjustments & communication',
-		description: 'Reasonable adjustments and communication needs considered and recorded',
-		completed: (d) => isRecorded(d.adjustments.reasonableAdjustmentsRecorded)
-	},
-	{
-		id: 'R-COMPONENT-WEIGHT-BMI',
-		component: 'weight-bmi',
-		group: 'physical',
-		category: 'component',
-		label: 'Weight and BMI',
-		description: 'Weight and body-mass index recorded (or declined)',
-		completed: (d) => isRecorded(d.physical.weightBmiStatus)
-	},
-	{
-		id: 'R-COMPONENT-BLOOD-PRESSURE',
-		component: 'blood-pressure',
-		group: 'physical',
-		category: 'component',
-		label: 'Blood pressure',
-		description: 'Blood pressure recorded',
-		completed: (d) => isRecorded(d.physical.bloodPressureStatus)
-	},
-	{
-		id: 'R-COMPONENT-EPILEPSY',
-		component: 'epilepsy',
-		group: 'physical',
-		category: 'component',
-		label: 'Epilepsy review',
-		description: 'Epilepsy reviewed (or not applicable)',
-		completed: (d) => isRecorded(d.physical.epilepsyStatus)
-	},
-	{
-		id: 'R-COMPONENT-CONSTIPATION',
-		component: 'constipation',
-		group: 'physical',
-		category: 'component',
-		label: 'Constipation',
-		description: 'Constipation assessed',
-		completed: (d) => isRecorded(d.physical.constipationStatus)
-	},
-	{
-		id: 'R-COMPONENT-DYSPHAGIA',
-		component: 'dysphagia',
-		group: 'physical',
-		category: 'component',
-		label: 'Dysphagia (swallowing)',
-		description: 'Swallowing / dysphagia assessed',
-		completed: (d) => isRecorded(d.physical.dysphagiaStatus)
-	},
-	{
-		id: 'R-COMPONENT-CONTINENCE',
-		component: 'continence',
-		group: 'physical',
-		category: 'component',
-		label: 'Continence',
-		description: 'Continence assessed',
-		completed: (d) => isRecorded(d.physical.continenceStatus)
-	},
-	{
-		id: 'R-COMPONENT-MOBILITY-FALLS',
-		component: 'mobility-falls',
-		group: 'physical',
-		category: 'component',
-		label: 'Mobility and falls',
-		description: 'Mobility and falls assessed',
-		completed: (d) => isRecorded(d.physical.mobilityFallsStatus)
-	},
-	{
-		id: 'R-COMPONENT-DENTAL',
-		component: 'dental',
-		group: 'physical',
-		category: 'component',
-		label: 'Dental / oral health',
-		description: 'Dental and oral health assessed',
-		completed: (d) => isRecorded(d.physical.dentalStatus)
-	},
-	{
-		id: 'R-COMPONENT-VISION',
-		component: 'vision',
-		group: 'physical',
-		category: 'component',
-		label: 'Vision',
-		description: 'Vision assessed',
-		completed: (d) => isRecorded(d.physical.visionStatus)
-	},
-	{
-		id: 'R-COMPONENT-HEARING',
-		component: 'hearing',
-		group: 'physical',
-		category: 'component',
-		label: 'Hearing',
-		description: 'Hearing assessed',
-		completed: (d) => isRecorded(d.physical.hearingStatus)
-	},
-	{
-		id: 'R-COMPONENT-FOOT-HEALTH',
-		component: 'foot-health',
-		group: 'physical',
-		category: 'component',
-		label: 'Foot health',
-		description: 'Foot health assessed',
-		completed: (d) => isRecorded(d.physical.footHealthStatus)
-	},
-	{
-		id: 'R-COMPONENT-SKIN',
-		component: 'skin',
-		group: 'physical',
-		category: 'component',
-		label: 'Skin',
-		description: 'Skin assessed',
-		completed: (d) => isRecorded(d.physical.skinStatus)
-	},
-	{
-		id: 'R-COMPONENT-SCREENING-IMMUNISATION',
-		component: 'screening-immunisation',
-		group: 'screening',
-		category: 'component',
-		label: 'Screening & immunisation uptake',
-		description: 'Eligible cancer-screening uptake and immunisation uptake recorded',
-		completed: (d) =>
-			isRecorded(d.screening.cancerScreeningStatus) && isRecorded(d.screening.immunisationStatus)
-	},
-	{
-		id: 'R-COMPONENT-MEDICATION-REVIEW',
-		component: 'medication-review',
-		group: 'medication',
-		category: 'component',
-		label: 'Medication review (incl. STOMP)',
-		description: 'Medication list reconciled at the check',
-		completed: (d) => isRecorded(d.medication.medicationReconciled)
-	},
-	{
-		id: 'R-COMPONENT-MENTAL-HEALTH-BEHAVIOUR',
-		component: 'mental-health-behaviour',
-		group: 'mental',
-		category: 'component',
-		label: 'Mental health & behaviour',
-		description: 'Mental health and behaviour that challenges assessed',
-		completed: (d) =>
-			isRecorded(d.mental.mentalHealthStatus) && isRecorded(d.mental.behaviourStatus)
-	},
-	{
-		id: 'R-COMPONENT-SYNDROME-SPECIFIC',
-		component: 'syndrome-specific',
-		group: 'syndrome',
-		category: 'component',
-		label: 'Syndrome-specific checks',
-		description: 'Syndrome-specific health checks done (or not applicable)',
-		completed: (d) => isRecorded(d.syndrome.syndromeSpecificStatus)
-	},
-	{
-		id: 'R-COMPONENT-CARER-SOCIAL',
-		component: 'carer-social',
-		group: 'carer',
-		category: 'component',
-		label: 'Carer & social',
-		description: 'Carer needs and social circumstances considered (or no carer)',
-		completed: (d: AssessmentData) => isRecorded(d.carer.carerNeedsStatus)
-	}
+  {
+    id: 'R-COMPONENT-REASONABLE-ADJUSTMENTS',
+    component: 'reasonable-adjustments',
+    group: 'adjustments',
+    category: 'component',
+    label: 'Reasonable adjustments & communication',
+    description: 'Reasonable adjustments and communication needs considered and recorded',
+    completed: (d) => isRecorded(d.adjustments.reasonableAdjustmentsRecorded)
+  },
+  {
+    id: 'R-COMPONENT-WEIGHT-BMI',
+    component: 'weight-bmi',
+    group: 'physical',
+    category: 'component',
+    label: 'Weight and BMI',
+    description: 'Weight and body-mass index recorded (or declined)',
+    completed: (d) => isRecorded(d.physical.weightBmiStatus)
+  },
+  {
+    id: 'R-COMPONENT-BLOOD-PRESSURE',
+    component: 'blood-pressure',
+    group: 'physical',
+    category: 'component',
+    label: 'Blood pressure',
+    description: 'Blood pressure recorded',
+    completed: (d) => isRecorded(d.physical.bloodPressureStatus)
+  },
+  {
+    id: 'R-COMPONENT-EPILEPSY',
+    component: 'epilepsy',
+    group: 'physical',
+    category: 'component',
+    label: 'Epilepsy review',
+    description: 'Epilepsy reviewed (or not applicable)',
+    completed: (d) => isRecorded(d.physical.epilepsyStatus)
+  },
+  {
+    id: 'R-COMPONENT-CONSTIPATION',
+    component: 'constipation',
+    group: 'physical',
+    category: 'component',
+    label: 'Constipation',
+    description: 'Constipation assessed',
+    completed: (d) => isRecorded(d.physical.constipationStatus)
+  },
+  {
+    id: 'R-COMPONENT-DYSPHAGIA',
+    component: 'dysphagia',
+    group: 'physical',
+    category: 'component',
+    label: 'Dysphagia (swallowing)',
+    description: 'Swallowing / dysphagia assessed',
+    completed: (d) => isRecorded(d.physical.dysphagiaStatus)
+  },
+  {
+    id: 'R-COMPONENT-CONTINENCE',
+    component: 'continence',
+    group: 'physical',
+    category: 'component',
+    label: 'Continence',
+    description: 'Continence assessed',
+    completed: (d) => isRecorded(d.physical.continenceStatus)
+  },
+  {
+    id: 'R-COMPONENT-MOBILITY-FALLS',
+    component: 'mobility-falls',
+    group: 'physical',
+    category: 'component',
+    label: 'Mobility and falls',
+    description: 'Mobility and falls assessed',
+    completed: (d) => isRecorded(d.physical.mobilityFallsStatus)
+  },
+  {
+    id: 'R-COMPONENT-DENTAL',
+    component: 'dental',
+    group: 'physical',
+    category: 'component',
+    label: 'Dental / oral health',
+    description: 'Dental and oral health assessed',
+    completed: (d) => isRecorded(d.physical.dentalStatus)
+  },
+  {
+    id: 'R-COMPONENT-VISION',
+    component: 'vision',
+    group: 'physical',
+    category: 'component',
+    label: 'Vision',
+    description: 'Vision assessed',
+    completed: (d) => isRecorded(d.physical.visionStatus)
+  },
+  {
+    id: 'R-COMPONENT-HEARING',
+    component: 'hearing',
+    group: 'physical',
+    category: 'component',
+    label: 'Hearing',
+    description: 'Hearing assessed',
+    completed: (d) => isRecorded(d.physical.hearingStatus)
+  },
+  {
+    id: 'R-COMPONENT-FOOT-HEALTH',
+    component: 'foot-health',
+    group: 'physical',
+    category: 'component',
+    label: 'Foot health',
+    description: 'Foot health assessed',
+    completed: (d) => isRecorded(d.physical.footHealthStatus)
+  },
+  {
+    id: 'R-COMPONENT-SKIN',
+    component: 'skin',
+    group: 'physical',
+    category: 'component',
+    label: 'Skin',
+    description: 'Skin assessed',
+    completed: (d) => isRecorded(d.physical.skinStatus)
+  },
+  {
+    id: 'R-COMPONENT-SCREENING-IMMUNISATION',
+    component: 'screening-immunisation',
+    group: 'screening',
+    category: 'component',
+    label: 'Screening & immunisation uptake',
+    description: 'Eligible cancer-screening uptake and immunisation uptake recorded',
+    completed: (d) =>
+      isRecorded(d.screening.cancerScreeningStatus) && isRecorded(d.screening.immunisationStatus)
+  },
+  {
+    id: 'R-COMPONENT-MEDICATION-REVIEW',
+    component: 'medication-review',
+    group: 'medication',
+    category: 'component',
+    label: 'Medication review (incl. STOMP)',
+    description: 'Medication list reconciled at the check',
+    completed: (d) => isRecorded(d.medication.medicationReconciled)
+  },
+  {
+    id: 'R-COMPONENT-MENTAL-HEALTH-BEHAVIOUR',
+    component: 'mental-health-behaviour',
+    group: 'mental',
+    category: 'component',
+    label: 'Mental health & behaviour',
+    description: 'Mental health and behaviour that challenges assessed',
+    completed: (d) =>
+      isRecorded(d.mental.mentalHealthStatus) && isRecorded(d.mental.behaviourStatus)
+  },
+  {
+    id: 'R-COMPONENT-SYNDROME-SPECIFIC',
+    component: 'syndrome-specific',
+    group: 'syndrome',
+    category: 'component',
+    label: 'Syndrome-specific checks',
+    description: 'Syndrome-specific health checks done (or not applicable)',
+    completed: (d) => isRecorded(d.syndrome.syndromeSpecificStatus)
+  },
+  {
+    id: 'R-COMPONENT-CARER-SOCIAL',
+    component: 'carer-social',
+    group: 'carer',
+    category: 'component',
+    label: 'Carer & social',
+    description: 'Carer needs and social circumstances considered (or no carer)',
+    completed: (d: AssessmentData) => isRecorded(d.carer.carerNeedsStatus)
+  }
 ];

@@ -8,30 +8,30 @@ import { completenessPercent, validationStatus } from './utils';
  * for each required field that is missing or empty.
  */
 export function validateForm(data: AssessmentData): {
-	completeness: number;
-	status: 'Complete' | 'Incomplete';
-	firedRules: FiredRule[];
+  completeness: number;
+  status: 'Complete' | 'Incomplete';
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	for (const rule of validationRules) {
-		const section = data[rule.section as keyof AssessmentData];
-		const value = (section as unknown as Record<string, unknown>)[rule.field];
+  for (const rule of validationRules) {
+    const section = data[rule.section as keyof AssessmentData];
+    const value = (section as unknown as Record<string, unknown>)[rule.field];
 
-		if (value === '' || value === null || value === undefined) {
-			firedRules.push({
-				id: rule.id,
-				section: rule.section,
-				description: rule.message,
-				field: rule.field
-			});
-		}
-	}
+    if (value === '' || value === null || value === undefined) {
+      firedRules.push({
+        id: rule.id,
+        section: rule.section,
+        description: rule.message,
+        field: rule.field
+      });
+    }
+  }
 
-	const totalRequired = validationRules.length;
-	const completedCount = totalRequired - firedRules.length;
-	const completeness = completenessPercent(completedCount, totalRequired);
-	const status = validationStatus(completeness);
+  const totalRequired = validationRules.length;
+  const completedCount = totalRequired - firedRules.length;
+  const completeness = completenessPercent(completedCount, totalRequired);
+  const status = validationStatus(completeness);
 
-	return { completeness, status, firedRules };
+  return { completeness, status, firedRules };
 }

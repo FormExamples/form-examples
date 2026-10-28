@@ -3,26 +3,26 @@ import { computeSafetyFlags } from '#lib/checklist/flags.js';
 import { computeStatus } from '#lib/checklist/completion.js';
 import { createEmptyChecklist } from '#lib/checklist/factory.js';
 import type {
-	ChecklistStatus,
-	SafetyFlag,
-	WhoSurgicalSafetyChecklist
+  ChecklistStatus,
+  SafetyFlag,
+  WhoSurgicalSafetyChecklist
 } from '#lib/checklist/types.js';
 
 /** localStorage draft key for a given checklist id (defaults to `new`). */
 function storageKey(id: string): string {
-	return `who-surgical-safety-checklist.front-end-with-svelte.${id || 'new'}.v1`;
+  return `who-surgical-safety-checklist.front-end-with-svelte.${id || 'new'}.v1`;
 }
 
 /** A blank WHO Surgical Safety Checklist with every field at its unanswered default. */
 export function createDefaultChecklist(): WhoSurgicalSafetyChecklist {
-	return createEmptyChecklist();
+  return createEmptyChecklist();
 }
 
 /** A computed snapshot taken when the wizard is submitted, used to guard the report route. */
 export interface ChecklistResult {
-	status: ChecklistStatus;
-	flags: SafetyFlag[];
-	generatedAt: string;
+  status: ChecklistStatus;
+  flags: SafetyFlag[];
+  generatedAt: string;
 }
 
 /**
@@ -31,98 +31,98 @@ export interface ChecklistResult {
  * Drafts are keyed by checklist id so each record edits independently.
  */
 class ChecklistStore {
-	data = $state<WhoSurgicalSafetyChecklist>(createEmptyChecklist());
-	result = $state<ChecklistResult | null>(null);
-	/**
-	 * The id of the record currently loaded into the store (`new`
-	 * for a fresh draft). Starts as `''`, not `'new'`: the wizard
-	 * page only calls loadForId() when `store.id !== id`, so if this
-	 * defaulted to the literal string `'new'` the very first visit
-	 * to the (very common) `/new` route would never call
-	 * loadForId() at all -- any saved draft for `new` would be
-	 * silently ignored on every fresh page load. `''` never
-	 * collides with a real route id.
-	 */
-	id = $state('');
+  data = $state<WhoSurgicalSafetyChecklist>(createEmptyChecklist());
+  result = $state<ChecklistResult | null>(null);
+  /**
+   * The id of the record currently loaded into the store (`new`
+   * for a fresh draft). Starts as `''`, not `'new'`: the wizard
+   * page only calls loadForId() when `store.id !== id`, so if this
+   * defaulted to the literal string `'new'` the very first visit
+   * to the (very common) `/new` route would never call
+   * loadForId() at all -- any saved draft for `new` would be
+   * silently ignored on every fresh page load. `''` never
+   * collides with a real route id.
+   */
+  id = $state('');
 
-	/** Live safety flags computed by the shared engine. */
-	flags = $derived<SafetyFlag[]>(computeSafetyFlags(this.data));
-	/** Live lifecycle status computed by the shared engine. */
-	status = $derived<ChecklistStatus>(computeStatus(this.data));
+  /** Live safety flags computed by the shared engine. */
+  flags = $derived<SafetyFlag[]>(computeSafetyFlags(this.data));
+  /** Live lifecycle status computed by the shared engine. */
+  status = $derived<ChecklistStatus>(computeStatus(this.data));
 
-	/**
-	 * True once a saved draft was found for the current id/store on
-	 * load -- read by RestoreBanner.svelte to tell the user their
-	 * progress was restored rather than silently repopulating fields
-	 * with no explanation. Mirrors the HTML front-end's
-	 * window.__FORM_STATE__.hadDraftAtLoad.
-	 */
-	hadDraftAtLoad = $state(false);
-	// True once loadForId() has run for the first time. Guards the
-	// persistence effect below: without it, the effect's very first
-	// (immediate) run persists the *blank* initial data before
-	// loadForId() ever gets a chance to read a previously-saved draft
-	// from localStorage -- silently clobbering it with blank data on
-	// every fresh page load.
-	#loaded = false;
+  /**
+   * True once a saved draft was found for the current id/store on
+   * load -- read by RestoreBanner.svelte to tell the user their
+   * progress was restored rather than silently repopulating fields
+   * with no explanation. Mirrors the HTML front-end's
+   * window.__FORM_STATE__.hadDraftAtLoad.
+   */
+  hadDraftAtLoad = $state(false);
+  // True once loadForId() has run for the first time. Guards the
+  // persistence effect below: without it, the effect's very first
+  // (immediate) run persists the *blank* initial data before
+  // loadForId() ever gets a chance to read a previously-saved draft
+  // from localStorage -- silently clobbering it with blank data on
+  // every fresh page load.
+  #loaded = false;
 
-	constructor() {
-		if (browser) {
-			$effect.root(() => {
-				$effect(() => {
-					const key = storageKey(this.id);
-					const snapshot = JSON.stringify(this.data);
-					if (!this.#loaded) return;
-					localStorage.setItem(key, snapshot);
-				});
-			});
-		}
-	}
+  constructor() {
+    if (browser) {
+      $effect.root(() => {
+        $effect(() => {
+          const key = storageKey(this.id);
+          const snapshot = JSON.stringify(this.data);
+          if (!this.#loaded) return;
+          localStorage.setItem(key, snapshot);
+        });
+      });
+    }
+  }
 
-	/**
-	 * Load the checklist for `id` into the store. A saved draft for that id (in
-	 * localStorage) takes precedence; otherwise the `seed` checklist is used
-	 * (e.g. a sample for an existing id), falling back to a blank draft.
-	 *
-	 * The data is merged in place (nested object identities preserved) rather
-	 * than reassigned, so step components that captured a section reference stay
-	 * bound to live state.
-	 */
-	loadForId(id: string, seed?: WhoSurgicalSafetyChecklist) {
-		const key = id || 'new';
-		this.id = key;
-		this.result = null;
+  /**
+   * Load the checklist for `id` into the store. A saved draft for that id (in
+   * localStorage) takes precedence; otherwise the `seed` checklist is used
+   * (e.g. a sample for an existing id), falling back to a blank draft.
+   *
+   * The data is merged in place (nested object identities preserved) rather
+   * than reassigned, so step components that captured a section reference stay
+   * bound to live state.
+   */
+  loadForId(id: string, seed?: WhoSurgicalSafetyChecklist) {
+    const key = id || 'new';
+    this.id = key;
+    this.result = null;
 
-		let draft: WhoSurgicalSafetyChecklist | null = null;
-		if (browser) {
-			const raw = localStorage.getItem(storageKey(key));
-			this.hadDraftAtLoad = raw !== null;
-			this.#loaded = true;
-			if (raw) {
-				try {
-					draft = JSON.parse(raw) as WhoSurgicalSafetyChecklist;
-				} catch {
-					// Ignore corrupt storage.
-				}
-			}
-		}
-		deepAssign(
-			this.data as unknown as Record<string, unknown>,
-			(draft ?? seed ?? createEmptyChecklist()) as unknown as Record<string, unknown>
-		);
-	}
+    let draft: WhoSurgicalSafetyChecklist | null = null;
+    if (browser) {
+      const raw = localStorage.getItem(storageKey(key));
+      this.hadDraftAtLoad = raw !== null;
+      this.#loaded = true;
+      if (raw) {
+        try {
+          draft = JSON.parse(raw) as WhoSurgicalSafetyChecklist;
+        } catch {
+          // Ignore corrupt storage.
+        }
+      }
+    }
+    deepAssign(
+      this.data as unknown as Record<string, unknown>,
+      (draft ?? seed ?? createEmptyChecklist()) as unknown as Record<string, unknown>
+    );
+  }
 
-	reset() {
-		this.hadDraftAtLoad = false;
-		deepAssign(
-			this.data as unknown as Record<string, unknown>,
-			createEmptyChecklist() as unknown as Record<string, unknown>
-		);
-		this.result = null;
-		if (browser) {
-			localStorage.removeItem(storageKey(this.id));
-		}
-	}
+  reset() {
+    this.hadDraftAtLoad = false;
+    deepAssign(
+      this.data as unknown as Record<string, unknown>,
+      createEmptyChecklist() as unknown as Record<string, unknown>
+    );
+    this.result = null;
+    if (browser) {
+      localStorage.removeItem(storageKey(this.id));
+    }
+  }
 }
 
 /**
@@ -132,15 +132,15 @@ class ChecklistStore {
  * them — reactive when a new checklist is loaded.
  */
 function deepAssign(target: Record<string, unknown>, source: Record<string, unknown>) {
-	for (const key of Object.keys(source)) {
-		const sv = source[key];
-		const tv = target[key];
-		if (sv && typeof sv === 'object' && !Array.isArray(sv) && tv && typeof tv === 'object') {
-			deepAssign(tv as Record<string, unknown>, sv as Record<string, unknown>);
-		} else {
-			target[key] = sv;
-		}
-	}
+  for (const key of Object.keys(source)) {
+    const sv = source[key];
+    const tv = target[key];
+    if (sv && typeof sv === 'object' && !Array.isArray(sv) && tv && typeof tv === 'object') {
+      deepAssign(tv as Record<string, unknown>, sv as Record<string, unknown>);
+    } else {
+      target[key] = sv;
+    }
+  }
 }
 
 export const store = new ChecklistStore();

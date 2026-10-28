@@ -5,7 +5,7 @@ import {
   noPeopleToNotify,
   instructionsLong,
   reducedFeeWithoutLPA120A,
-  overFourAttorneysFlag,
+  overFourAttorneysFlag
 } from './flag-rules.js';
 import { createEmptyLpa, createEmptyPerson } from '#lib/factory.js';
 
@@ -14,9 +14,7 @@ describe('flag rules', () => {
     it('fires when there is one attorney and no replacement', () => {
       const lpa = createEmptyLpa();
       lpa.attorneys.push({ person: createEmptyPerson(), ordinal: 1 });
-      expect(singleAttorneyNoReplacement(lpa)?.ruleId).toBe(
-        'SingleAttorneyNoReplacement',
-      );
+      expect(singleAttorneyNoReplacement(lpa)?.ruleId).toBe('SingleAttorneyNoReplacement');
     });
 
     it('does not fire when a replacement attorney is listed', () => {
@@ -25,7 +23,7 @@ describe('flag rules', () => {
       lpa.replacementAttorneys.push({
         person: createEmptyPerson(),
         ordinal: 1,
-        replacementStepInCondition: '',
+        replacementStepInCondition: ''
       });
       expect(singleAttorneyNoReplacement(lpa)).toBeNull();
     });
@@ -42,9 +40,7 @@ describe('flag rules', () => {
     it('fires when section 5 = only_when_no_capacity', () => {
       const lpa = createEmptyLpa();
       lpa.whenAttorneysCanAct = 'only_when_no_capacity';
-      expect(onlyWhenNoCapacitySelected(lpa)?.ruleId).toBe(
-        'OnlyWhenNoCapacitySelected',
-      );
+      expect(onlyWhenNoCapacitySelected(lpa)?.ruleId).toBe('OnlyWhenNoCapacitySelected');
     });
 
     it('does not fire when section 5 = as_soon_as_registered', () => {
@@ -85,9 +81,7 @@ describe('flag rules', () => {
       const lpa = createEmptyLpa();
       lpa.registrationApplication.reducedFeeRequested = true;
       lpa.registrationApplication.hasLpa120aEvidence = false;
-      expect(reducedFeeWithoutLPA120A(lpa)?.ruleId).toBe(
-        'ReducedFeeWithoutLPA120A',
-      );
+      expect(reducedFeeWithoutLPA120A(lpa)?.ruleId).toBe('ReducedFeeWithoutLPA120A');
     });
 
     it('does not fire when LPA120A evidence is provided', () => {

@@ -1,5 +1,5 @@
 import { redirect } from '@sveltejs/kit';
 
 export function GET() {
-	redirect(307, '/ottawa-knee-rule/');
+  redirect(307, '/ottawa-knee-rule/');
 }

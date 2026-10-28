@@ -27,7 +27,13 @@
   </Field>
 
   <Field label="Urine ACR (mg/g)" inputId="step-6-urineAcr">
-    <NumberInput id="step-6-urineAcr" label="Urine ACR" min={0} max={5000} bind:value={rf.urineAcr} />
+    <NumberInput
+      id="step-6-urineAcr"
+      label="Urine ACR"
+      min={0}
+      max={5000}
+      bind:value={rf.urineAcr}
+    />
   </Field>
 
   <Field label="CKD stage" inputId="step-6-ckdStage">

@@ -6,17 +6,9 @@
 //   - camelCase property names
 //   - all dates are ISO-8601 'YYYY-MM-DD' strings
 
-export type DecisionMode =
-  | 'single_attorney'
-  | 'jointly_and_severally'
-  | 'jointly'
-  | 'mixed'
-  | '';
+export type DecisionMode = 'single_attorney' | 'jointly_and_severally' | 'jointly' | 'mixed' | '';
 
-export type WhenAttorneysCanAct =
-  | 'as_soon_as_registered'
-  | 'only_when_no_capacity'
-  | '';
+export type WhenAttorneysCanAct = 'as_soon_as_registered' | 'only_when_no_capacity' | '';
 
 export type LpaStatus =
   | 'draft'

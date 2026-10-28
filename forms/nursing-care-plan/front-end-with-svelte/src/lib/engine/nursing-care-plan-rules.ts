@@ -15,12 +15,12 @@ import type { CompletenessClass, FiredRule, Problem } from './types';
 
 /** True when the problem carries at least one goal. */
 export function hasGoal(p: Problem): boolean {
-	return Array.isArray(p.goals) && p.goals.length > 0;
+  return Array.isArray(p.goals) && p.goals.length > 0;
 }
 
 /** True when the problem carries at least one intervention. */
 export function hasIntervention(p: Problem): boolean {
-	return Array.isArray(p.interventions) && p.interventions.length > 0;
+  return Array.isArray(p.interventions) && p.interventions.length > 0;
 }
 
 /**
@@ -29,9 +29,9 @@ export function hasIntervention(p: Problem): boolean {
  * `goalMet` ('') counts as not evaluated.
  */
 export function hasEvaluation(p: Problem): boolean {
-	const note = (p.evaluationNote || '').trim();
-	const met = p.goalMet || '';
-	return note !== '' || (met !== '' && met !== 'not-evaluated');
+  const note = (p.evaluationNote || '').trim();
+  const met = p.goalMet || '';
+  return note !== '' || (met !== '' && met !== 'not-evaluated');
 }
 
 /**
@@ -41,12 +41,12 @@ export function hasEvaluation(p: Problem): boolean {
  *   Incomplete — none of the three (a problem statement only)
  */
 export function classifyProblem(p: Problem): CompletenessClass {
-	const g = hasGoal(p);
-	const i = hasIntervention(p);
-	const e = hasEvaluation(p);
-	if (g && i && e) return 'complete';
-	if (g || i || e) return 'partial';
-	return 'incomplete';
+  const g = hasGoal(p);
+  const i = hasIntervention(p);
+  const e = hasEvaluation(p);
+  if (g && i && e) return 'complete';
+  if (g || i || e) return 'partial';
+  return 'incomplete';
 }
 
 /**
@@ -57,36 +57,36 @@ export function classifyProblem(p: Problem): CompletenessClass {
  * @param index zero-based index of the problem within the plan
  */
 export function problemFiredRules(p: Problem, index: number): FiredRule[] {
-	const label = `Problem ${index + 1}`;
-	const g = hasGoal(p);
-	const i = hasIntervention(p);
-	const e = hasEvaluation(p);
-	return [
-		{
-			id: `${p.id}-goal`,
-			problemId: p.id,
-			problemLabel: label,
-			element: 'goal',
-			present: g,
-			description: g ? `${label}: goal recorded (${p.goals.length})` : `${label}: no goal recorded`
-		},
-		{
-			id: `${p.id}-intervention`,
-			problemId: p.id,
-			problemLabel: label,
-			element: 'intervention',
-			present: i,
-			description: i
-				? `${label}: intervention recorded (${p.interventions.length})`
-				: `${label}: no intervention recorded`
-		},
-		{
-			id: `${p.id}-evaluation`,
-			problemId: p.id,
-			problemLabel: label,
-			element: 'evaluation',
-			present: e,
-			description: e ? `${label}: evaluation recorded` : `${label}: no evaluation recorded`
-		}
-	];
+  const label = `Problem ${index + 1}`;
+  const g = hasGoal(p);
+  const i = hasIntervention(p);
+  const e = hasEvaluation(p);
+  return [
+    {
+      id: `${p.id}-goal`,
+      problemId: p.id,
+      problemLabel: label,
+      element: 'goal',
+      present: g,
+      description: g ? `${label}: goal recorded (${p.goals.length})` : `${label}: no goal recorded`
+    },
+    {
+      id: `${p.id}-intervention`,
+      problemId: p.id,
+      problemLabel: label,
+      element: 'intervention',
+      present: i,
+      description: i
+        ? `${label}: intervention recorded (${p.interventions.length})`
+        : `${label}: no intervention recorded`
+    },
+    {
+      id: `${p.id}-evaluation`,
+      problemId: p.id,
+      problemLabel: label,
+      element: 'evaluation',
+      present: e,
+      description: e ? `${label}: evaluation recorded` : `${label}: no evaluation recorded`
+    }
+  ];
 }

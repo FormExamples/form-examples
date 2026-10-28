@@ -1,10 +1,10 @@
 import type {
-	NeurodiversityAdjustmentReview,
-	GradingResult,
-	EffectivenessBand,
-	WellbeingRiskBand,
-	Recommendation,
-	FiredRule
+  NeurodiversityAdjustmentReview,
+  GradingResult,
+  EffectivenessBand,
+  WellbeingRiskBand,
+  Recommendation,
+  FiredRule
 } from './types';
 import { classifyEffectiveness } from './effectiveness-rules';
 import { gradeWellbeing } from './wellbeing-rules';
@@ -35,57 +35,57 @@ import { anyNotWorking, recommendationLabel } from './utils';
  * No side effects, no network calls, no I/O.
  */
 export function calculateGrade(review: NeurodiversityAdjustmentReview): GradingResult {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	// Axis A
-	const a = classifyEffectiveness(review);
-	firedRules.push(...a.firedRules);
+  // Axis A
+  const a = classifyEffectiveness(review);
+  firedRules.push(...a.firedRules);
 
-	// Axis B
-	const b = gradeWellbeing(review);
-	firedRules.push(...b.firedRules);
+  // Axis B
+  const b = gradeWellbeing(review);
+  firedRules.push(...b.firedRules);
 
-	// Axis C
-	const c = gradeCompleteness(review);
-	firedRules.push(...c.firedRules);
+  // Axis C
+  const c = gradeCompleteness(review);
+  firedRules.push(...c.firedRules);
 
-	// Axis D (depends on the wellbeing-risk band)
-	const d = gradeNextStep(review, b.wellbeingRiskBand);
-	firedRules.push(...d.firedRules);
+  // Axis D (depends on the wellbeing-risk band)
+  const d = gradeNextStep(review, b.wellbeingRiskBand);
+  firedRules.push(...d.firedRules);
 
-	const recommendation = deriveRecommendation(review, a.effectivenessBand, b.wellbeingRiskBand);
+  const recommendation = deriveRecommendation(review, a.effectivenessBand, b.wellbeingRiskBand);
 
-	const flags = detectFlags(review, c.completenessPercent);
+  const flags = detectFlags(review, c.completenessPercent);
 
-	return {
-		effectivenessBand: a.effectivenessBand,
-		wellbeingRiskBand: b.wellbeingRiskBand,
-		completenessPercent: c.completenessPercent,
-		nextStepUrgency: d.nextStepUrgency,
-		targetTimeframe: d.targetTimeframe,
-		recommendation,
-		recommendationLabel: recommendationLabel(recommendation),
-		firedRules,
-		flags,
-		gradedAt: new Date().toISOString()
-	};
+  return {
+    effectivenessBand: a.effectivenessBand,
+    wellbeingRiskBand: b.wellbeingRiskBand,
+    completenessPercent: c.completenessPercent,
+    nextStepUrgency: d.nextStepUrgency,
+    targetTimeframe: d.targetTimeframe,
+    recommendation,
+    recommendationLabel: recommendationLabel(recommendation),
+    firedRules,
+    flags,
+    gradedAt: new Date().toISOString()
+  };
 }
 
 /**
  * Derives the overall recommendation. First match wins, per the engine spec.
  */
 function deriveRecommendation(
-	r: NeurodiversityAdjustmentReview,
-	effectivenessBand: EffectivenessBand,
-	wellbeingRiskBand: WellbeingRiskBand
+  r: NeurodiversityAdjustmentReview,
+  effectivenessBand: EffectivenessBand,
+  wellbeingRiskBand: WellbeingRiskBand
 ): Recommendation {
-	if (r.escalated) return 'escalate-to-hr';
-	if (effectivenessBand === 'ineffective' && r.occupationalHealthRereferral === false) {
-		return 'seek-occupational-health';
-	}
-	if (wellbeingRiskBand === 'high-risk' || anyNotWorking(r) || r.changesNeeded === true) {
-		return 'adjust-adjustments';
-	}
-	if (r.nextReviewDate.trim() === '') return 'schedule-next-review';
-	return 'maintain';
+  if (r.escalated) return 'escalate-to-hr';
+  if (effectivenessBand === 'ineffective' && r.occupationalHealthRereferral === false) {
+    return 'seek-occupational-health';
+  }
+  if (wellbeingRiskBand === 'high-risk' || anyNotWorking(r) || r.changesNeeded === true) {
+    return 'adjust-adjustments';
+  }
+  if (r.nextReviewDate.trim() === '') return 'schedule-next-review';
+  return 'maintain';
 }

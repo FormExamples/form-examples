@@ -1,2 +1,4 @@
-declare global { namespace App {} }
+declare global {
+  namespace App {}
+}
 export {};

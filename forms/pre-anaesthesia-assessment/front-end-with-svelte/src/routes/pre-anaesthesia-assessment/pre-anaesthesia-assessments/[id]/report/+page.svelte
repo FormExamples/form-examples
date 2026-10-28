@@ -3,7 +3,7 @@
   import { page } from '$app/state';
   import { store } from '#lib/stores/assessment.svelte.js';
   import FlagBanner from '#lib/components/ui/FlagBanner.svelte';
-  import { Button, Panel } from "@lilydesignsystem/svelte-headless";
+  import { Button, Panel } from '@lilydesignsystem/svelte-headless';
   import Alert from '#lib/components/ui/Alert.svelte';
 
   const id = $derived(page.params.id ?? 'new');
@@ -25,7 +25,7 @@
         ? 'warning'
         : r.compositeRisk === 'moderate'
           ? 'warning'
-          : 'success',
+          : 'success'
   );
 
   let pdfError = $state('');
@@ -36,7 +36,7 @@
       const res = await fetch(`/pre-anaesthesia-assessments/${id}/report/pdf`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ data: store.data, result: store.result }),
+        body: JSON.stringify({ data: store.data, result: store.result })
       });
       if (res.ok) {
         const blob = await res.blob();
@@ -57,7 +57,10 @@
 
 {#if store.submitted}
   <header class="page-header no-print">
-    <div class="page-header-inner" style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
+    <div
+      class="page-header-inner"
+      style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;"
+    >
       <h1>Pre-anaesthesia assessment report</h1>
       <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
         {#if pdfError}
@@ -67,7 +70,8 @@
         <Button data-variant="secondary" onclick={() => window.print()}>Print</Button>
         <Button
           data-variant="secondary"
-          onclick={() => goto(`/pre-anaesthesia-assessment/pre-anaesthesia-assessments/${id}`)}>Edit</Button
+          onclick={() => goto(`/pre-anaesthesia-assessment/pre-anaesthesia-assessments/${id}`)}
+          >Edit</Button
         >
       </div>
     </div>
@@ -83,7 +87,8 @@
           <p>{d.clinician.clinicianName} ({d.clinician.clinicianRole})</p>
           <p class="subtle">{d.clinician.registrationBody} {d.clinician.registrationNumber}</p>
           <p class="subtle">
-            {d.clinician.assessmentDate} {d.clinician.assessmentTime} — {d.clinician.siteName}
+            {d.clinician.assessmentDate}
+            {d.clinician.assessmentTime} — {d.clinician.siteName}
           </p>
         </section>
         <section>
@@ -98,14 +103,15 @@
 
       <Alert type={compositeAlertType} heading={`Composite risk: ${r.compositeRisk.toUpperCase()}`}>
         <p>
-          <strong>Computed ASA:</strong> {r.computedAsaGrade}{r.asaEmergencySuffix}
+          <strong>Computed ASA:</strong>
+          {r.computedAsaGrade}{r.asaEmergencySuffix}
           {#if d.summary.finalAsaGrade && d.summary.finalAsaGrade !== r.computedAsaGrade}
             <span class="override">→ Clinician final: {d.summary.finalAsaGrade}</span>
           {/if}
         </p>
         <p>
-          Mallampati {r.mallampatiClass || '—'} · RCRI {r.rcriScore} · STOP-BANG {r.stopbangScore} ·
-          CFS {r.frailtyScale ?? '—'}
+          Mallampati {r.mallampatiClass || '—'} · RCRI {r.rcriScore} · STOP-BANG {r.stopbangScore} · CFS
+          {r.frailtyScale ?? '—'}
         </p>
         <p><strong>Recommendation:</strong> {d.summary.recommendation || '—'}</p>
       </Alert>

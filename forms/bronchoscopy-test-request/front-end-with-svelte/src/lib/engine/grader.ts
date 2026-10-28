@@ -1,9 +1,9 @@
 import type {
-	BronchoscopyRequest,
-	GradingResult,
-	Recommendation,
-	AppropriatenessBand,
-	FiredRule
+  BronchoscopyRequest,
+  GradingResult,
+  Recommendation,
+  AppropriatenessBand,
+  FiredRule
 } from './types';
 import { gradeAppropriateness } from './appropriateness-rules';
 import { gradeUrgency } from './urgency-rules';
@@ -30,42 +30,42 @@ import { detectFlags } from './flagged-issues';
  * network calls, no I/O.
  */
 export function calculateGrade(request: BronchoscopyRequest): GradingResult {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	// Axis A — appropriateness.
-	const a = gradeAppropriateness(request);
-	firedRules.push(...a.firedRules);
+  // Axis A — appropriateness.
+  const a = gradeAppropriateness(request);
+  firedRules.push(...a.firedRules);
 
-	// Axis B — cancer-pathway urgency.
-	const b = gradeUrgency(request);
-	firedRules.push(...b.firedRules);
+  // Axis B — cancer-pathway urgency.
+  const b = gradeUrgency(request);
+  firedRules.push(...b.firedRules);
 
-	// Axis C — completeness.
-	const c = gradeCompleteness(request);
-	firedRules.push(...c.firedRules);
+  // Axis C — completeness.
+  const c = gradeCompleteness(request);
+  firedRules.push(...c.firedRules);
 
-	// Axis D — pre-procedure risk.
-	const d = gradeRisk(request);
-	firedRules.push(...d.firedRules);
+  // Axis D — pre-procedure risk.
+  const d = gradeRisk(request);
+  firedRules.push(...d.firedRules);
 
-	const recommendation = deriveRecommendation(a.appropriatenessBand, c.completenessPercent);
+  const recommendation = deriveRecommendation(a.appropriatenessBand, c.completenessPercent);
 
-	const flags = detectFlags(request, { twoWeekWaitEligible: b.twoWeekWaitEligible });
+  const flags = detectFlags(request, { twoWeekWaitEligible: b.twoWeekWaitEligible });
 
-	return {
-		appropriatenessScore: a.appropriatenessScore,
-		appropriatenessBand: a.appropriatenessBand,
-		triageTier: b.triageTier,
-		targetTimeframe: b.targetTimeframe,
-		twoWeekWaitEligible: b.twoWeekWaitEligible,
-		completenessPercent: c.completenessPercent,
-		riskBand: d.riskBand,
-		anticoagulantAction: d.anticoagulantAction,
-		recommendation,
-		firedRules,
-		flags,
-		gradedAt: new Date().toISOString()
-	};
+  return {
+    appropriatenessScore: a.appropriatenessScore,
+    appropriatenessBand: a.appropriatenessBand,
+    triageTier: b.triageTier,
+    targetTimeframe: b.targetTimeframe,
+    twoWeekWaitEligible: b.twoWeekWaitEligible,
+    completenessPercent: c.completenessPercent,
+    riskBand: d.riskBand,
+    anticoagulantAction: d.anticoagulantAction,
+    recommendation,
+    firedRules,
+    flags,
+    gradedAt: new Date().toISOString()
+  };
 }
 
 /**
@@ -77,10 +77,10 @@ export function calculateGrade(request: BronchoscopyRequest): GradingResult {
  * - accept: an appropriate, sufficiently complete request.
  */
 export function deriveRecommendation(
-	appropriatenessBand: AppropriatenessBand,
-	completenessPercent: number
+  appropriatenessBand: AppropriatenessBand,
+  completenessPercent: number
 ): Recommendation {
-	if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
-	if (completenessPercent < 50) return 'query-referrer';
-	return 'accept';
+  if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
+  if (completenessPercent < 50) return 'query-referrer';
+  return 'accept';
 }

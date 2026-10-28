@@ -79,8 +79,7 @@
       id="patient-postal-address"
       class="text-area-input"
       rows="3"
-      bind:value={store.data.patient.postalAddressAsFullText}
-    ></textarea>
+      bind:value={store.data.patient.postalAddressAsFullText}></textarea>
   </div>
 
   <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -134,8 +133,7 @@
       class="text-area-input"
       rows="2"
       placeholder="e.g. BSL interpreter, step-free access, large print"
-      bind:value={store.data.patient.accessibilityNeeds}
-    ></textarea>
+      bind:value={store.data.patient.accessibilityNeeds}></textarea>
   </div>
 
   <div class="field">

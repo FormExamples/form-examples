@@ -28,11 +28,11 @@
       ? value
       : current !== undefined && total
         ? Math.round((current / total) * 100)
-        : undefined,
+        : undefined
   );
   const computedMax = $derived(value !== undefined ? max : 100);
   const percent = $derived(
-    current !== undefined && total ? Math.round((current / total) * 100) : null,
+    current !== undefined && total ? Math.round((current / total) * 100) : null
   );
 </script>
 

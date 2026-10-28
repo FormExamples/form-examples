@@ -1,7 +1,7 @@
 import type {
   ChecklistSummaryResult,
   HospitalDailyMonitoringChecklist,
-  NeedsAttentionItem,
+  NeedsAttentionItem
 } from './types.js';
 import { CHECKLIST_ITEMS } from '#lib/config/items.js';
 
@@ -10,9 +10,7 @@ import { CHECKLIST_ITEMS } from '#lib/config/items.js';
  * `not-applicable` and unanswered checkpoints never count as needs-attention;
  * only checkpoints explicitly marked `needs-attention` are tallied and listed.
  */
-export function summariseChecklist(
-  data: HospitalDailyMonitoringChecklist,
-): ChecklistSummaryResult {
+export function summariseChecklist(data: HospitalDailyMonitoringChecklist): ChecklistSummaryResult {
   let answeredCount = 0;
   let needsAttentionCount = 0;
   const needsAttentionItems: NeedsAttentionItem[] = [];
@@ -30,7 +28,7 @@ export function summariseChecklist(
         id: item.id,
         sectionTitle: item.sectionTitle,
         text: item.text,
-        remarks: response?.remarks ?? '',
+        remarks: response?.remarks ?? ''
       });
       sections.add(item.section);
     }
@@ -40,6 +38,6 @@ export function summariseChecklist(
     answeredCount,
     needsAttentionCount,
     needsAttentionItems,
-    sectionsWithNeedsAttention: Array.from(sections).sort((a, b) => a - b),
+    sectionsWithNeedsAttention: Array.from(sections).sort((a, b) => a - b)
   };
 }

@@ -12,23 +12,6 @@ function answerAll(value: Answer): ReturnType<typeof createEmptyChecklist> {
   return data;
 }
 
-function answerSection(
-  section: 'teams' | 'stakeholders' | 'practices',
-  value: Answer,
-): ReturnType<typeof createEmptyChecklist> {
-  const data = createEmptyChecklist();
-  const items =
-    section === 'teams'
-      ? TEAMS_ITEMS
-      : section === 'stakeholders'
-        ? STAKEHOLDERS_ITEMS
-        : PRACTICES_ITEMS;
-  for (const item of items) {
-    data.answers[item.id] = value;
-  }
-  return data;
-}
-
 describe('bandFor', () => {
   it('high at >=75', () => {
     expect(bandFor(75)).toBe('high');
@@ -129,9 +112,9 @@ describe('calculateMaturity', () => {
 
   it('section-imbalance flag fires when spread > 30 points', () => {
     const data = createEmptyChecklist();
-    for (const it of TEAMS_ITEMS) data.answers[it.id] = 'yes';        // 100%
+    for (const it of TEAMS_ITEMS) data.answers[it.id] = 'yes'; // 100%
     for (const it of STAKEHOLDERS_ITEMS) data.answers[it.id] = 'yes'; // 100%
-    for (const it of PRACTICES_ITEMS) data.answers[it.id] = 'no';     // 0%
+    for (const it of PRACTICES_ITEMS) data.answers[it.id] = 'no'; // 0%
     const r = calculateMaturity(data);
     expect(r.additionalFlags.some((f) => f.category === 'section-imbalance')).toBe(true);
   });

@@ -3,7 +3,7 @@
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
-  import { RadioGroup } from "@lilydesignsystem/svelte-headless";
+  import { RadioGroup } from '@lilydesignsystem/svelte-headless';
 
   const d = assessment.data.bloodPressure;
 </script>
@@ -13,10 +13,22 @@
 
   <div class="field-grid">
     <Field label="Systolic BP (mmHg)" inputId="step-3-systolicBP" required>
-      <NumberInput id="step-3-systolicBP" label="Systolic BP" min={70} max={250} bind:value={d.systolicBP} />
+      <NumberInput
+        id="step-3-systolicBP"
+        label="Systolic BP"
+        min={70}
+        max={250}
+        bind:value={d.systolicBP}
+      />
     </Field>
     <Field label="Diastolic BP (mmHg)" inputId="step-3-diastolicBP">
-      <NumberInput id="step-3-diastolicBP" label="Diastolic BP" min={40} max={150} bind:value={d.diastolicBP} />
+      <NumberInput
+        id="step-3-diastolicBP"
+        label="Diastolic BP"
+        min={40}
+        max={150}
+        bind:value={d.diastolicBP}
+      />
     </Field>
   </div>
 

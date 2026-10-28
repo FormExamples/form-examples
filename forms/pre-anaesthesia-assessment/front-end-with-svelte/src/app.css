@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /*
  * Gold standard: the default theme is the Lily Design System *light* theme.
@@ -45,38 +45,14 @@
   --color-surface: var(--color-base-100);
   --color-text: var(--color-base-content);
   --color-border: var(--color-base-300);
-  --color-border-strong: color-mix(
-    in oklab,
-    var(--color-base-300),
-    var(--color-base-content) 28%
-  );
+  --color-border-strong: color-mix(in oklab, var(--color-base-300), var(--color-base-content) 28%);
   --color-focus: var(--color-primary);
-  --color-muted: color-mix(
-    in oklab,
-    var(--color-base-content) 62%,
-    var(--color-base-100)
-  );
-  --color-primary-light: color-mix(
-    in oklab,
-    var(--color-primary) 15%,
-    var(--color-base-100)
-  );
+  --color-muted: color-mix(in oklab, var(--color-base-content) 62%, var(--color-base-100));
+  --color-primary-light: color-mix(in oklab, var(--color-primary) 15%, var(--color-base-100));
   --color-danger: var(--color-error);
-  --color-danger-bg: color-mix(
-    in oklab,
-    var(--color-error) 16%,
-    var(--color-base-100)
-  );
-  --color-warning-bg: color-mix(
-    in oklab,
-    var(--color-warning) 20%,
-    var(--color-base-100)
-  );
-  --color-success-bg: color-mix(
-    in oklab,
-    var(--color-success) 18%,
-    var(--color-base-100)
-  );
+  --color-danger-bg: color-mix(in oklab, var(--color-error) 16%, var(--color-base-100));
+  --color-warning-bg: color-mix(in oklab, var(--color-warning) 20%, var(--color-base-100));
+  --color-success-bg: color-mix(in oklab, var(--color-success) 18%, var(--color-base-100));
   --content-width: 56rem;
 }
 
@@ -89,9 +65,9 @@ body {
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
-    "Segoe UI",
+    'Segoe UI',
     Roboto,
-    "Helvetica Neue",
+    'Helvetica Neue',
     Arial,
     sans-serif;
   font-size: 16px;
@@ -230,37 +206,37 @@ body {
   font-size: 0.75rem;
   font-weight: 600;
 }
-.step-list-item[data-status="finished"] {
+.step-list-item[data-status='finished'] {
   color: var(--color-success);
   border-color: var(--color-success);
   background: var(--color-success-bg);
 }
-.step-list-item[data-status="finished"]::before {
+.step-list-item[data-status='finished']::before {
   background: var(--color-success);
   color: white;
-  content: "✓";
+  content: '✓';
 }
-.step-list-item[data-status="in-progress"],
-.step-list-item[aria-current="step"] {
+.step-list-item[data-status='in-progress'],
+.step-list-item[aria-current='step'] {
   color: var(--color-primary);
   border-color: var(--color-primary);
   background: var(--color-primary-light);
   font-weight: 600;
 }
-.step-list-item[data-status="in-progress"]::before,
-.step-list-item[aria-current="step"]::before {
+.step-list-item[data-status='in-progress']::before,
+.step-list-item[aria-current='step']::before {
   background: var(--color-primary);
   color: white;
 }
-.step-list-item[data-status="error"] {
+.step-list-item[data-status='error'] {
   color: var(--color-danger);
   border-color: var(--color-danger);
   background: var(--color-danger-bg);
 }
-.step-list-item[data-status="error"]::before {
+.step-list-item[data-status='error']::before {
   background: var(--color-danger);
   color: white;
-  content: "!";
+  content: '!';
 }
 
 /* Lily: .form, .fieldset, .field, .label, .hint */
@@ -305,7 +281,7 @@ body {
   font-size: 0.9375rem;
 }
 .label[data-required]::after {
-  content: "*";
+  content: '*';
   color: var(--color-danger);
   margin-left: 0.125rem;
 }
@@ -360,12 +336,12 @@ body {
   outline-offset: 1px;
 }
 
-.text-input[aria-invalid="true"],
-.text-area-input[aria-invalid="true"],
-.email-input[aria-invalid="true"],
-.number-input[aria-invalid="true"],
-.date-input[aria-invalid="true"],
-.select[aria-invalid="true"] {
+.text-input[aria-invalid='true'],
+.text-area-input[aria-invalid='true'],
+.email-input[aria-invalid='true'],
+.number-input[aria-invalid='true'],
+.date-input[aria-invalid='true'],
+.select[aria-invalid='true'] {
   border-color: var(--color-danger);
 }
 
@@ -404,10 +380,10 @@ body {
    controls uniformly (no @tailwindcss/forms plugin here to tell them
    apart), so an unchecked checkbox and an unchecked radio render as the
    same indistinguishable rounded shape otherwise. */
-input[type="checkbox"].checkbox-input {
+input[type='checkbox'].checkbox-input {
   border-radius: 0.25rem;
 }
-input[type="radio"].radio-input {
+input[type='radio'].radio-input {
   border-radius: 9999px;
 }
 
@@ -440,21 +416,21 @@ input[type="radio"].radio-input {
   opacity: 0.5;
   cursor: not-allowed;
 }
-.button[data-variant="primary"] {
+.button[data-variant='primary'] {
   background: var(--color-primary);
   color: white;
   border-color: var(--color-primary);
 }
-.button[data-variant="primary"]:hover:not(:disabled) {
+.button[data-variant='primary']:hover:not(:disabled) {
   background: var(--color-primary-dark);
   border-color: var(--color-primary-dark);
 }
-.button[data-variant="danger"] {
+.button[data-variant='danger'] {
   background: var(--color-surface);
   color: var(--color-danger);
   border-color: var(--color-danger);
 }
-.button[data-variant="danger"]:hover:not(:disabled) {
+.button[data-variant='danger']:hover:not(:disabled) {
   background: var(--color-danger-bg);
 }
 
@@ -510,19 +486,19 @@ input[type="radio"].radio-input {
   background: var(--color-bg);
   margin: 0.75rem 0;
 }
-.alert[data-type="info"] {
+.alert[data-type='info'] {
   background: var(--color-primary-light);
   border-color: var(--color-primary);
 }
-.alert[data-type="success"] {
+.alert[data-type='success'] {
   background: var(--color-success-bg);
   border-color: var(--color-success);
 }
-.alert[data-type="warning"] {
+.alert[data-type='warning'] {
   background: var(--color-warning-bg);
   border-color: var(--color-warning);
 }
-.alert[data-type="error"] {
+.alert[data-type='error'] {
   background: var(--color-danger-bg);
   border-color: var(--color-danger);
 }
@@ -686,7 +662,7 @@ input[type="radio"].radio-input {
   color: inherit;
   cursor: pointer;
   line-height: 1;
-  font-family: system-ui, "Segoe UI Symbol", "Apple Symbols", sans-serif;
+  font-family: system-ui, 'Segoe UI Symbol', 'Apple Symbols', sans-serif;
   font-size: 1.125em;
 }
 .theme-picker-button:focus-visible,
@@ -726,31 +702,31 @@ input[type="radio"].radio-input {
 .locale-picker-option[data-active] {
   background: var(--color-primary-light);
 }
-.theme-picker-option[aria-selected="true"],
-.locale-picker-option[aria-selected="true"] {
+.theme-picker-option[aria-selected='true'],
+.locale-picker-option[aria-selected='true'] {
   font-weight: 600;
 }
 
 /* Lily text-size-picker -- WCAG 2.2 1.4.4 (Resize Text) / 1.4.12 (Text Spacing). */
-:root[data-text-size="smallest"] {
+:root[data-text-size='smallest'] {
   font-size: 75%;
 }
-:root[data-text-size="smaller"] {
+:root[data-text-size='smaller'] {
   font-size: 87.5%;
 }
-:root[data-text-size="small"] {
+:root[data-text-size='small'] {
   font-size: 93.75%;
 }
-:root[data-text-size="normal"] {
+:root[data-text-size='normal'] {
   font-size: 100%;
 }
-:root[data-text-size="large"] {
+:root[data-text-size='large'] {
   font-size: 112.5%;
 }
-:root[data-text-size="larger"] {
+:root[data-text-size='larger'] {
   font-size: 125%;
 }
-:root[data-text-size="largest"] {
+:root[data-text-size='largest'] {
   font-size: 150%;
 }
 /* Lily: .text-size-picker (headless button + listbox). No upstream theme
@@ -768,7 +744,7 @@ input[type="radio"].radio-input {
   color: inherit;
   cursor: pointer;
   line-height: 1;
-  font-family: system-ui, "Segoe UI Symbol", "Apple Symbols", sans-serif;
+  font-family: system-ui, 'Segoe UI Symbol', 'Apple Symbols', sans-serif;
   font-size: 1.125em;
 }
 .text-size-picker-button:focus-visible {
@@ -803,7 +779,7 @@ input[type="radio"].radio-input {
 .text-size-picker-option[data-active] {
   background: var(--color-primary-light);
 }
-.text-size-picker-option[aria-selected="true"] {
+.text-size-picker-option[aria-selected='true'] {
   font-weight: 600;
 }
 
@@ -820,7 +796,7 @@ input[type="radio"].radio-input {
   color: inherit;
   cursor: pointer;
   line-height: 1;
-  font-family: system-ui, "Segoe UI Symbol", "Apple Symbols", sans-serif;
+  font-family: system-ui, 'Segoe UI Symbol', 'Apple Symbols', sans-serif;
   font-size: 1.125em;
 }
 .share-picker-button:focus-visible {

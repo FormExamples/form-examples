@@ -27,7 +27,12 @@
   </div>
   <div class="field">
     <label class="label" for="nationality">Nationality (ISO 3166-1 alpha-3)</label>
-    <input id="nationality" class="text-input" maxlength="3" bind:value={c.patient.nationalityAsIso31661Alpha3} />
+    <input
+      id="nationality"
+      class="text-input"
+      maxlength="3"
+      bind:value={c.patient.nationalityAsIso31661Alpha3}
+    />
   </div>
   <div class="field">
     <label class="label" for="travelDocKind">Travel document kind</label>

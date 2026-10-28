@@ -16,12 +16,24 @@
       <NumberInput id="step-6-egfr" label="eGFR" min={0} max={200} bind:value={d.egfr} />
     </Field>
     <Field label="Creatinine (\u00b5mol/L)" inputId="step-6-creatinine">
-      <NumberInput id="step-6-creatinine" label="Creatinine" min={0} max={2000} bind:value={d.creatinine} />
+      <NumberInput
+        id="step-6-creatinine"
+        label="Creatinine"
+        min={0}
+        max={2000}
+        bind:value={d.creatinine}
+      />
     </Field>
   </div>
 
   <Field label="Urine ACR (mg/mmol)" inputId="step-6-urineAcr">
-    <NumberInput id="step-6-urineAcr" label="Urine ACR" min={0} step="0.1" bind:value={d.urineAcr} />
+    <NumberInput
+      id="step-6-urineAcr"
+      label="Urine ACR"
+      min={0}
+      step="0.1"
+      bind:value={d.urineAcr}
+    />
   </Field>
 
   <div class="field-grid">

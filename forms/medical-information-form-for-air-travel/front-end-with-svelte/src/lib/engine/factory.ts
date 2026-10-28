@@ -8,7 +8,7 @@ export function createEmptyAssessment(): MedifAssessment {
       submitterEmail: '',
       submitterPhone: '',
       submitterOrganisation: '',
-      airlineBookingReference: '',
+      airlineBookingReference: ''
     },
     passenger: {
       firstName: '',
@@ -20,7 +20,7 @@ export function createEmptyAssessment(): MedifAssessment {
       nationalHealthId: '',
       address: '',
       emergencyContactName: '',
-      emergencyContactPhone: '',
+      emergencyContactPhone: ''
     },
     trip: {
       airlineIataCode: '',
@@ -34,7 +34,7 @@ export function createEmptyAssessment(): MedifAssessment {
       cabinClass: '',
       sectorDurationMinutes: null,
       transitAirportsIata: '',
-      specialAssistanceCodes: '',
+      specialAssistanceCodes: ''
     },
     reasons: {
       reasonEquipment: '',
@@ -43,7 +43,7 @@ export function createEmptyAssessment(): MedifAssessment {
       reasonCommunicableDisease: '',
       reasonPregnancy: '',
       reasonMobilityEscort: '',
-      reasonPsychiatric: '',
+      reasonPsychiatric: ''
     },
     physician: {
       physicianName: '',
@@ -54,7 +54,7 @@ export function createEmptyAssessment(): MedifAssessment {
       email: '',
       phone: '',
       address: '',
-      signatureDate: '',
+      signatureDate: ''
     },
     diagnosis: {
       primaryDiagnosis: '',
@@ -63,7 +63,7 @@ export function createEmptyAssessment(): MedifAssessment {
       currentTreatment: '',
       lastAdmissionDate: '',
       lastDischargeDate: '',
-      lastSpecialistReviewDate: '',
+      lastSpecialistReviewDate: ''
     },
     cardiovascular: {
       restingSystolicBp: null,
@@ -75,7 +75,7 @@ export function createEmptyAssessment(): MedifAssessment {
       onAnticoagulant: '',
       pacemakerOrIcd: '',
       exerciseToleranceMetres: null,
-      unstableAngina: '',
+      unstableAngina: ''
     },
     respiratory: {
       restingSpo2Percent: null,
@@ -85,7 +85,7 @@ export function createEmptyAssessment(): MedifAssessment {
       asthmaSeverity: '',
       copdSeverity: '',
       cpapOrBipapUse: '',
-      recentPulmonaryEmbolismDate: '',
+      recentPulmonaryEmbolismDate: ''
     },
     recentEvents: {
       lastSurgeryDate: '',
@@ -94,7 +94,7 @@ export function createEmptyAssessment(): MedifAssessment {
       recentFractureCast: '',
       recentDvtDate: '',
       scubaDivingWithin24h: '',
-      recentStrokeDate: '',
+      recentStrokeDate: ''
     },
     pregnancy: {
       isPregnant: '',
@@ -102,14 +102,14 @@ export function createEmptyAssessment(): MedifAssessment {
       pregnancyType: '',
       pregnancyComplications: '',
       expectedDeliveryDate: '',
-      obstetricianContact: '',
+      obstetricianContact: ''
     },
     communicable: {
       communicableDiseaseStatus: '',
       lastSymptomDate: '',
       isolationRequired: '',
       vaccinationStatus: '',
-      currentAntimicrobials: '',
+      currentAntimicrobials: ''
     },
     inflightNeeds: {
       requiresSupplementalOxygen: '',
@@ -125,7 +125,7 @@ export function createEmptyAssessment(): MedifAssessment {
       requiresExtraSeat: '',
       requiresAccessibleLavatory: '',
       wheelchairType: '',
-      accompanyingCarer: '',
+      accompanyingCarer: ''
     },
     cabinMeds: {
       regularMedications: '',
@@ -134,14 +134,14 @@ export function createEmptyAssessment(): MedifAssessment {
       sharpsInCabin: '',
       refrigeratedMedication: '',
       customsDocumentationAvailable: '',
-      haemoglobinGPerL: null,
+      haemoglobinGPerL: null
     },
     signoff: {
       physicianDeclaration: '',
       physicianSignatureName: '',
       physicianSignatureDate: '',
       validUntilDate: '',
-      additionalNotes: '',
-    },
+      additionalNotes: ''
+    }
   };
 }

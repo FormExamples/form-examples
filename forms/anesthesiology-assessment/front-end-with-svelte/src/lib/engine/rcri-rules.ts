@@ -13,85 +13,85 @@
 import type { AssessmentData, FiredRule, RcriResult, RiskLevel } from './types';
 
 export function rcriRiskFromScore(score: number): RiskLevel {
-	if (score >= 3) return 'critical';
-	if (score === 2) return 'high';
-	if (score === 1) return 'medium';
-	return 'low';
+  if (score >= 3) return 'critical';
+  if (score === 2) return 'high';
+  if (score === 1) return 'medium';
+  return 'low';
 }
 
 export function rcriMacePercent(score: number): number {
-	if (score >= 3) return 5.4;
-	if (score === 2) return 2.4;
-	if (score === 1) return 1.0;
-	return 0.4;
+  if (score >= 3) return 5.4;
+  if (score === 2) return 2.4;
+  if (score === 1) return 1.0;
+  return 0.4;
 }
 
 export function evaluateRcri(d: AssessmentData): RcriResult {
-	const grade = d.plannedSurgery.surgeryGrade;
-	const ip = d.investigationsAndPlan;
-	const meds = d.medications;
-	const firedRules: FiredRule[] = [];
-	let score = 0;
+  const grade = d.plannedSurgery.surgeryGrade;
+  const ip = d.investigationsAndPlan;
+  const meds = d.medications;
+  const firedRules: FiredRule[] = [];
+  let score = 0;
 
-	if (grade === 'major' || grade === 'complex') {
-		score++;
-		firedRules.push({
-			id: 'RCRI-001',
-			category: 'Cardiac',
-			description: `High-risk surgery (${grade}).`,
-			riskLevel: 'medium'
-		});
-	}
-	if (ip.rcriIschaemicHeartDisease === 'yes') {
-		score++;
-		firedRules.push({
-			id: 'RCRI-002',
-			category: 'Cardiac',
-			description: 'History of ischaemic heart disease.',
-			riskLevel: 'medium'
-		});
-	}
-	if (ip.rcriCongestiveHeartFailure === 'yes') {
-		score++;
-		firedRules.push({
-			id: 'RCRI-003',
-			category: 'Cardiac',
-			description: 'History of congestive heart failure.',
-			riskLevel: 'medium'
-		});
-	}
-	if (ip.rcriCerebrovascularDisease === 'yes') {
-		score++;
-		firedRules.push({
-			id: 'RCRI-004',
-			category: 'Cardiac',
-			description: 'History of cerebrovascular disease (stroke / TIA).',
-			riskLevel: 'medium'
-		});
-	}
-	if (meds.onInsulin === 'yes') {
-		score++;
-		firedRules.push({
-			id: 'RCRI-005',
-			category: 'Cardiac',
-			description: 'Insulin-dependent diabetes.',
-			riskLevel: 'medium'
-		});
-	}
-	if (ip.rcriHighCreatinine === 'yes') {
-		score++;
-		firedRules.push({
-			id: 'RCRI-006',
-			category: 'Cardiac',
-			description: 'Serum creatinine >177 µmol/L (>2 mg/dL).',
-			riskLevel: 'medium'
-		});
-	}
+  if (grade === 'major' || grade === 'complex') {
+    score++;
+    firedRules.push({
+      id: 'RCRI-001',
+      category: 'Cardiac',
+      description: `High-risk surgery (${grade}).`,
+      riskLevel: 'medium'
+    });
+  }
+  if (ip.rcriIschaemicHeartDisease === 'yes') {
+    score++;
+    firedRules.push({
+      id: 'RCRI-002',
+      category: 'Cardiac',
+      description: 'History of ischaemic heart disease.',
+      riskLevel: 'medium'
+    });
+  }
+  if (ip.rcriCongestiveHeartFailure === 'yes') {
+    score++;
+    firedRules.push({
+      id: 'RCRI-003',
+      category: 'Cardiac',
+      description: 'History of congestive heart failure.',
+      riskLevel: 'medium'
+    });
+  }
+  if (ip.rcriCerebrovascularDisease === 'yes') {
+    score++;
+    firedRules.push({
+      id: 'RCRI-004',
+      category: 'Cardiac',
+      description: 'History of cerebrovascular disease (stroke / TIA).',
+      riskLevel: 'medium'
+    });
+  }
+  if (meds.onInsulin === 'yes') {
+    score++;
+    firedRules.push({
+      id: 'RCRI-005',
+      category: 'Cardiac',
+      description: 'Insulin-dependent diabetes.',
+      riskLevel: 'medium'
+    });
+  }
+  if (ip.rcriHighCreatinine === 'yes') {
+    score++;
+    firedRules.push({
+      id: 'RCRI-006',
+      category: 'Cardiac',
+      description: 'Serum creatinine >177 µmol/L (>2 mg/dL).',
+      riskLevel: 'medium'
+    });
+  }
 
-	return {
-		score,
-		macePercent: rcriMacePercent(score),
-		riskLevel: rcriRiskFromScore(score),
-		firedRules
-	};
+  return {
+    score,
+    macePercent: rcriMacePercent(score),
+    riskLevel: rcriRiskFromScore(score),
+    firedRules
+  };
 }

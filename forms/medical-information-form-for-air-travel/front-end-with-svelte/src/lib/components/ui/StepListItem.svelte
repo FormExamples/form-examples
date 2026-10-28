@@ -12,9 +12,21 @@
     label = undefined,
     children,
     ...restProps
-  }: { status?: Status; current?: boolean; label?: string; children: Snippet; [key: string]: unknown } = $props();
+  }: {
+    status?: Status;
+    current?: boolean;
+    label?: string;
+    children: Snippet;
+    [key: string]: unknown;
+  } = $props();
 </script>
 
-<li class={`step-list-item ${className}`} data-status={status} aria-current={current ? 'step' : undefined} aria-label={label} {...restProps}>
+<li
+  class={`step-list-item ${className}`}
+  data-status={status}
+  aria-current={current ? 'step' : undefined}
+  aria-label={label}
+  {...restProps}
+>
   {@render children?.()}
 </li>

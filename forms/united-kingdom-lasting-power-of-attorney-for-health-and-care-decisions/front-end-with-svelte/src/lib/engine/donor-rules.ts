@@ -15,7 +15,7 @@ export function applyDonorRules(app: LpaApplication): FiredRule[] {
       ruleFamily: 'donor',
       sourceCitation: 'MCA 2005 s.9(2)(c)',
       description: `Donor age at signing is ${age}; must be 18 or older.`,
-      suggestedCorrection: 'The donor must be at least 18 years old at the date of signing the LPA.',
+      suggestedCorrection: 'The donor must be at least 18 years old at the date of signing the LPA.'
     });
   }
 
@@ -26,7 +26,8 @@ export function applyDonorRules(app: LpaApplication): FiredRule[] {
       ruleFamily: 'donor',
       sourceCitation: 'MCA 2005 s.9(2)(b)',
       description: 'Donor has not declared mental capacity at signing.',
-      suggestedCorrection: 'The donor must confirm they understand the LPA and have capacity at the time of signing.',
+      suggestedCorrection:
+        'The donor must confirm they understand the LPA and have capacity at the time of signing.'
     });
   }
 
@@ -37,7 +38,8 @@ export function applyDonorRules(app: LpaApplication): FiredRule[] {
       ruleFamily: 'donor',
       sourceCitation: 'MCA 2005 (extent — England and Wales only)',
       description: 'LP1H applies only to England and Wales; donor jurisdiction must be set.',
-      suggestedCorrection: 'Select England or Wales as the donor jurisdiction. Scotland and Northern Ireland use different schemes.',
+      suggestedCorrection:
+        'Select England or Wales as the donor jurisdiction. Scotland and Northern Ireland use different schemes.'
     });
   }
 
@@ -48,7 +50,7 @@ export function applyDonorRules(app: LpaApplication): FiredRule[] {
       ruleFamily: 'donor',
       sourceCitation: 'LP1H s.1',
       description: 'Donor given names and family name must both be populated.',
-      suggestedCorrection: 'Enter the donor’s full legal name as it appears on identification.',
+      suggestedCorrection: 'Enter the donor’s full legal name as it appears on identification.'
     });
   }
 
@@ -59,7 +61,7 @@ export function applyDonorRules(app: LpaApplication): FiredRule[] {
       ruleFamily: 'donor',
       sourceCitation: 'LP1H s.1',
       description: 'Donor postal address is required.',
-      suggestedCorrection: 'Enter the donor’s current postal address.',
+      suggestedCorrection: 'Enter the donor’s current postal address.'
     });
   }
 
@@ -70,7 +72,7 @@ export function applyDonorRules(app: LpaApplication): FiredRule[] {
       ruleFamily: 'donor',
       sourceCitation: 'LP1H s.1',
       description: 'Donor date of birth is required.',
-      suggestedCorrection: 'Enter the donor’s date of birth.',
+      suggestedCorrection: 'Enter the donor’s date of birth.'
     });
   }
 

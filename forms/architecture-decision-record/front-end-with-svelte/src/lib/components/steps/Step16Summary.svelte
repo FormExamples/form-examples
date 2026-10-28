@@ -10,11 +10,20 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <label class="block">
       <span class="text-sm text-base-content">Signed off by</span>
-      <input type="text" class="w-full border rounded px-2 py-1" bind:value={store.data.adr.signedOffBy} />
+      <input
+        type="text"
+        class="w-full border rounded px-2 py-1"
+        bind:value={store.data.adr.signedOffBy}
+      />
     </label>
     <label class="block">
       <span class="text-sm text-base-content">Signed off at (ISO timestamp)</span>
-      <input type="text" class="w-full border rounded px-2 py-1" placeholder="2026-05-08T10:00:00Z" bind:value={store.data.adr.signedOffAt} />
+      <input
+        type="text"
+        class="w-full border rounded px-2 py-1"
+        placeholder="2026-05-08T10:00:00Z"
+        bind:value={store.data.adr.signedOffAt}
+      />
     </label>
   </div>
 </section>

@@ -15,7 +15,13 @@
       <input id="patientName" class={input} type="text" bind:value={assessment.data.patient.name} />
     </FormField>
     <FormField label="Date of birth" required>
-      <input id="patientBirthDate" class={input} type="date" bind:value={assessment.data.patient.birthDate} onblur={onBirthBlur} />
+      <input
+        id="patientBirthDate"
+        class={input}
+        type="date"
+        bind:value={assessment.data.patient.birthDate}
+        onblur={onBirthBlur}
+      />
     </FormField>
     <FormField label="Sex">
       <select class={input} bind:value={assessment.data.patient.sex}>
@@ -27,16 +33,29 @@
       </select>
     </FormField>
     <FormField label="NHS number">
-      <input class={input} type="text" bind:value={assessment.data.patient.unitedKingdomNhsNumber} />
+      <input
+        class={input}
+        type="text"
+        bind:value={assessment.data.patient.unitedKingdomNhsNumber}
+      />
     </FormField>
     <FormField label="Address">
-      <input class={input} type="text" bind:value={assessment.data.patient.postalAddressAsFullText} />
+      <input
+        class={input}
+        type="text"
+        bind:value={assessment.data.patient.postalAddressAsFullText}
+      />
     </FormField>
     <FormField label="Postcode">
       <input class={input} type="text" bind:value={assessment.data.patient.postcode} />
     </FormField>
     <FormField label="Country">
-      <input class={input} type="text" maxlength="2" bind:value={assessment.data.patient.countryAsIso31661Alpha2} />
+      <input
+        class={input}
+        type="text"
+        maxlength="2"
+        bind:value={assessment.data.patient.countryAsIso31661Alpha2}
+      />
     </FormField>
     <FormField label="Email">
       <input class={input} type="email" bind:value={assessment.data.patient.email} />

@@ -9,45 +9,45 @@ import type { NuclearMedicineRequest } from './types';
  * older saved state is rehydrated from localStorage.
  */
 export function createDefault(): NuclearMedicineRequest {
-	return {
-		clinician: {
-			clinicianName: '',
-			clinicianRole: '',
-			registrationBody: '',
-			registrationNumber: '',
-			requesterContact: '',
-			supervisingConsultant: '',
-			siteName: '',
-			referralDate: ''
-		},
-		patient: {
-			firstName: '',
-			lastName: '',
-			dateOfBirth: '',
-			nhsNumber: '',
-			weightKg: null
-		},
-		request: {
-			scanType: '',
-			primaryIndication: '',
-			clinicalQuestion: '',
-			relevantHistory: ''
-		},
-		safety: {
-			pregnancyStatus: '',
-			breastfeeding: false,
-			egfr: null,
-			recentOtherNuclearScan: false
-		},
-		justification: {
-			irMeRJustification: '',
-			supervisingConsultant: ''
-		},
-		triage: {
-			urgency: '',
-			requestedByDate: '',
-			setting: '',
-			notes: ''
-		}
-	};
+  return {
+    clinician: {
+      clinicianName: '',
+      clinicianRole: '',
+      registrationBody: '',
+      registrationNumber: '',
+      requesterContact: '',
+      supervisingConsultant: '',
+      siteName: '',
+      referralDate: ''
+    },
+    patient: {
+      firstName: '',
+      lastName: '',
+      dateOfBirth: '',
+      nhsNumber: '',
+      weightKg: null
+    },
+    request: {
+      scanType: '',
+      primaryIndication: '',
+      clinicalQuestion: '',
+      relevantHistory: ''
+    },
+    safety: {
+      pregnancyStatus: '',
+      breastfeeding: false,
+      egfr: null,
+      recentOtherNuclearScan: false
+    },
+    justification: {
+      irMeRJustification: '',
+      supervisingConsultant: ''
+    },
+    triage: {
+      urgency: '',
+      requestedByDate: '',
+      setting: '',
+      notes: ''
+    }
+  };
 }

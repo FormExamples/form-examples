@@ -1,15 +1,12 @@
 <script lang="ts">
   import type { Answer } from '#lib/engine/types.js';
 
-  let {
-    name,
-    value = $bindable(),
-  }: { name: string; value: Answer } = $props();
+  let { name, value = $bindable() }: { name: string; value: Answer } = $props();
 
   const OPTIONS: { v: Exclude<Answer, ''>; label: string }[] = [
     { v: 'yes', label: 'Yes' },
     { v: 'no', label: 'No' },
-    { v: 'not-applicable', label: 'N/A' },
+    { v: 'not-applicable', label: 'N/A' }
   ];
 
   function pick(v: Exclude<Answer, ''>) {

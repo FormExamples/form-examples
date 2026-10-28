@@ -6,9 +6,9 @@
 <section id="step-attorneys">
   <h2 class="text-xl font-semibold mb-2">Step 2 &mdash; Attorneys (LP1F section 2)</h2>
   <p class="text-sm text-base-content/70 mb-3">
-    One or more people (or a single trust corporation) who will make financial decisions for the donor.
-    Each attorney must be 18+, not bankrupt, and not subject to a debt relief order. If you appoint
-    more than 4 attorneys, attach LPC continuation sheet 1.
+    One or more people (or a single trust corporation) who will make financial decisions for the
+    donor. Each attorney must be 18+, not bankrupt, and not subject to a debt relief order. If you
+    appoint more than 4 attorneys, attach LPC continuation sheet 1.
   </p>
 
   <div class="space-y-4">

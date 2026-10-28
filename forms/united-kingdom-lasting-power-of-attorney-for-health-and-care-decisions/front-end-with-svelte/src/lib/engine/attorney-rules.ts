@@ -17,7 +17,7 @@ export function applyAttorneyRules(app: LpaApplication): FiredRule[] {
       ruleFamily: 'attorney',
       sourceCitation: 'MCA 2005 s.10(1)',
       description: 'At least one attorney must be named.',
-      suggestedCorrection: 'Name 1 to 4 attorneys on LP1H s.2.',
+      suggestedCorrection: 'Name 1 to 4 attorneys on LP1H s.2.'
     });
   }
 
@@ -28,7 +28,7 @@ export function applyAttorneyRules(app: LpaApplication): FiredRule[] {
       ruleFamily: 'attorney',
       sourceCitation: 'LP1H s.2',
       description: `Too many attorneys: ${attorneys.length}; maximum is 4.`,
-      suggestedCorrection: 'Reduce the number of attorneys to four or fewer.',
+      suggestedCorrection: 'Reduce the number of attorneys to four or fewer.'
     });
   }
 
@@ -39,7 +39,7 @@ export function applyAttorneyRules(app: LpaApplication): FiredRule[] {
       ruleFamily: 'attorney',
       sourceCitation: 'LP1H s.4',
       description: `Too many replacement attorneys: ${replacementAttorneys.length}; maximum is 4.`,
-      suggestedCorrection: 'Reduce the number of replacement attorneys to four or fewer.',
+      suggestedCorrection: 'Reduce the number of replacement attorneys to four or fewer.'
     });
   }
 
@@ -52,7 +52,7 @@ export function applyAttorneyRules(app: LpaApplication): FiredRule[] {
         ruleFamily: 'attorney',
         sourceCitation: 'MCA 2005 s.10(1)(a)',
         description: `Attorney #${idx + 1} (${a.givenNames} ${a.familyName}) is ${age} years old; must be 18 or older.`,
-        suggestedCorrection: 'All attorneys must be at least 18 years old.',
+        suggestedCorrection: 'All attorneys must be at least 18 years old.'
       });
     }
     if (a.capacityDeclared !== 'yes') {
@@ -62,7 +62,7 @@ export function applyAttorneyRules(app: LpaApplication): FiredRule[] {
         ruleFamily: 'attorney',
         sourceCitation: 'MCA 2005 s.10(1)(b)',
         description: `Attorney #${idx + 1} has not declared capacity to act.`,
-        suggestedCorrection: 'Each attorney must confirm they have capacity to act.',
+        suggestedCorrection: 'Each attorney must confirm they have capacity to act.'
       });
     }
     if (
@@ -77,7 +77,7 @@ export function applyAttorneyRules(app: LpaApplication): FiredRule[] {
         ruleFamily: 'attorney',
         sourceCitation: 'MCA 2005 s.10(1)',
         description: `Attorney #${idx + 1} appears to be the donor; an attorney cannot be the donor.`,
-        suggestedCorrection: 'Remove the donor from the attorney list.',
+        suggestedCorrection: 'Remove the donor from the attorney list.'
       });
     }
   });
@@ -99,7 +99,7 @@ export function applyAttorneyRules(app: LpaApplication): FiredRule[] {
         ruleFamily: 'attorney',
         sourceCitation: 'LP1H s.2',
         description: `Duplicate attorney appears in positions ${positions.join(', ')}.`,
-        suggestedCorrection: 'Each attorney must be listed only once.',
+        suggestedCorrection: 'Each attorney must be listed only once.'
       });
       break;
     }
@@ -114,7 +114,7 @@ export function applyAttorneyRules(app: LpaApplication): FiredRule[] {
         ruleFamily: 'attorney',
         sourceCitation: 'MCA 2005 s.10(1)(a)',
         description: `Replacement attorney #${idx + 1} is ${age} years old; must be 18 or older.`,
-        suggestedCorrection: 'All replacement attorneys must be at least 18 years old.',
+        suggestedCorrection: 'All replacement attorneys must be at least 18 years old.'
       });
     }
     const rKey = attorneyKey(r);
@@ -125,7 +125,8 @@ export function applyAttorneyRules(app: LpaApplication): FiredRule[] {
         ruleFamily: 'attorney',
         sourceCitation: 'OPG LP12',
         description: `Replacement attorney #${idx + 1} is also named as a primary attorney.`,
-        suggestedCorrection: 'A person cannot be both a primary and a replacement attorney in the same LPA.',
+        suggestedCorrection:
+          'A person cannot be both a primary and a replacement attorney in the same LPA.'
       });
     }
   });
@@ -138,7 +139,7 @@ export function applyAttorneyRules(app: LpaApplication): FiredRule[] {
         ruleFamily: 'attorney',
         sourceCitation: 'MCA 2005 s.10(2) (note: bankruptcy bar applies only to P&FA LPAs)',
         description: `Attorney #${idx + 1} is bankrupt. Bankruptcy does not bar an H&W LPA but raises a flag for transparency.`,
-        suggestedCorrection: 'No correction required for an H&W LPA; the attorney can still act.',
+        suggestedCorrection: 'No correction required for an H&W LPA; the attorney can still act.'
       });
     }
   });
@@ -150,7 +151,7 @@ export function applyAttorneyRules(app: LpaApplication): FiredRule[] {
       ruleFamily: 'attorney',
       sourceCitation: 'LP1H s.3',
       description: 'The donor must choose how the attorneys decide together.',
-      suggestedCorrection: 'Select jointly, jointly-and-severally, or mixed on LP1H s.3.',
+      suggestedCorrection: 'Select jointly, jointly-and-severally, or mixed on LP1H s.3.'
     });
   }
 
@@ -160,8 +161,9 @@ export function applyAttorneyRules(app: LpaApplication): FiredRule[] {
       severity: 'high',
       ruleFamily: 'attorney',
       sourceCitation: 'LPA Regs 2007 Sch.1',
-      description: 'Mixed decision-making was selected without specifying which decisions are joint.',
-      suggestedCorrection: 'List the decisions that must be made jointly when mixed is selected.',
+      description:
+        'Mixed decision-making was selected without specifying which decisions are joint.',
+      suggestedCorrection: 'List the decisions that must be made jointly when mixed is selected.'
     });
   }
 
@@ -171,8 +173,10 @@ export function applyAttorneyRules(app: LpaApplication): FiredRule[] {
       severity: 'medium',
       ruleFamily: 'attorney',
       sourceCitation: 'OPG LP12 (joint cascade)',
-      description: 'Jointly-acting attorneys collapse the whole LPA if any one drops out; replacements may not help.',
-      suggestedCorrection: 'Consider jointly-and-severally or mixed if you want replacement attorneys to take over.',
+      description:
+        'Jointly-acting attorneys collapse the whole LPA if any one drops out; replacements may not help.',
+      suggestedCorrection:
+        'Consider jointly-and-severally or mixed if you want replacement attorneys to take over.'
     });
   }
 

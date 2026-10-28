@@ -16,27 +16,20 @@
 
 export type YesNo = 'yes' | 'no' | '';
 export type Sex = 'female' | 'male' | 'other' | 'unknown' | '';
-export type DoctorGrade =
-	| 'consultant'
-	| 'sas'
-	| 'registrar'
-	| 'foundation'
-	| 'gp'
-	| 'other'
-	| '';
+export type DoctorGrade = 'consultant' | 'sas' | 'registrar' | 'foundation' | 'gp' | 'other' | '';
 export type SeenAfterDeathBy = 'certifier' | 'another-practitioner' | 'not-seen' | '';
 export type CoronerReason =
-	| 'unnatural'
-	| 'violent'
-	| 'suspicious'
-	| 'unknown-cause'
-	| 'industrial-disease'
-	| 'medical-procedure'
-	| 'custody'
-	| 'no-attending-practitioner'
-	| 'other'
-	| 'none'
-	| '';
+  | 'unnatural'
+  | 'violent'
+  | 'suspicious'
+  | 'unknown-cause'
+  | 'industrial-disease'
+  | 'medical-procedure'
+  | 'custody'
+  | 'no-attending-practitioner'
+  | 'other'
+  | 'none'
+  | '';
 export type MedicalExaminerStatus = 'scrutinised' | 'discussed' | 'pending' | 'not-required' | '';
 
 export type ValidityClass = 'valid' | 'incomplete' | 'refer-to-coroner';
@@ -44,69 +37,69 @@ export type Priority = 'high' | 'medium' | 'low';
 
 /** Step 1 — certification context. */
 export interface Certification {
-	certifyingDoctorName: string;
-	certifyingDoctorGrade: DoctorGrade;
-	gmcReference: string;
-	placeOfCertification: string;
-	/** ISO date string; null when unset. */
-	certificationDate: string | null;
-	attendedDeceased: YesNo;
-	/** ISO date string; null when unset. */
-	lastSeenAliveDate: string | null;
+  certifyingDoctorName: string;
+  certifyingDoctorGrade: DoctorGrade;
+  gmcReference: string;
+  placeOfCertification: string;
+  /** ISO date string; null when unset. */
+  certificationDate: string | null;
+  attendedDeceased: YesNo;
+  /** ISO date string; null when unset. */
+  lastSeenAliveDate: string | null;
 }
 
 /** Step 2 — deceased identification. */
 export interface Deceased {
-	deceasedName: string;
-	sex: Sex;
-	/** ISO date string; null when unset. */
-	dateOfBirth: string | null;
-	ageYears: number | null;
-	patientIdentifier: string;
+  deceasedName: string;
+  sex: Sex;
+  /** ISO date string; null when unset. */
+  dateOfBirth: string | null;
+  ageYears: number | null;
+  patientIdentifier: string;
 }
 
 /** Step 3 — death details. */
 export interface Death {
-	/** ISO date string; null when unset. */
-	dateOfDeath: string | null;
-	/** HH:MM string; null when unset. */
-	timeOfDeath: string | null;
-	placeOfDeath: string;
-	seenAfterDeathBy: SeenAfterDeathBy;
+  /** ISO date string; null when unset. */
+  dateOfDeath: string | null;
+  /** HH:MM string; null when unset. */
+  timeOfDeath: string | null;
+  placeOfDeath: string;
+  seenAfterDeathBy: SeenAfterDeathBy;
 }
 
 /** Step 4 — Part I direct causal sequence (I(a) -> I(b) -> I(c)). */
 export interface PartI {
-	causeIaCondition: string;
-	causeIaInterval: string;
-	causeIbCondition: string;
-	causeIbInterval: string;
-	causeIcCondition: string;
-	causeIcInterval: string;
+  causeIaCondition: string;
+  causeIaInterval: string;
+  causeIbCondition: string;
+  causeIbInterval: string;
+  causeIcCondition: string;
+  causeIcInterval: string;
 }
 
 /** Step 5 — Part II contributory conditions. */
 export interface PartII {
-	partIiConditions: string;
-	partIiInterval: string;
+  partIiConditions: string;
+  partIiInterval: string;
 }
 
 /** Step 6 — coroner and medical-examiner referral. */
 export interface Referral {
-	referredToCoroner: YesNo;
-	coronerReason: CoronerReason;
-	medicalExaminerStatus: MedicalExaminerStatus;
-	certifierNote: string;
+  referredToCoroner: YesNo;
+  coronerReason: CoronerReason;
+  medicalExaminerStatus: MedicalExaminerStatus;
+  certifierNote: string;
 }
 
 /** The full Medical Certificate of Cause of Death data model. */
 export interface DeathCertificate {
-	certification: Certification;
-	deceased: Deceased;
-	death: Death;
-	partI: PartI;
-	partII: PartII;
-	referral: Referral;
+  certification: Certification;
+  deceased: Deceased;
+  death: Death;
+  partI: PartI;
+  partII: PartII;
+  referral: Referral;
 }
 
 // ──────────────────────────────────────────────
@@ -115,21 +108,21 @@ export interface DeathCertificate {
 
 /** A certifier- / examiner-facing statutory / safety / governance flag (mirrors grade_flag). */
 export interface FlaggedIssue {
-	id: string;
-	category: string;
-	priority: Priority;
-	description: string;
-	suggestedAction: string;
+  id: string;
+  category: string;
+  priority: Priority;
+  description: string;
+  suggestedAction: string;
 }
 
 /** The full validity classification result for one certificate. */
 export interface ValidationResult {
-	validityClass: ValidityClass;
-	/** '' when Part I is empty. */
-	underlyingCause: string;
-	coronerReferralIndicated: boolean;
-	flaggedIssues: FlaggedIssue[];
-	timestamp: string;
+  validityClass: ValidityClass;
+  /** '' when Part I is empty. */
+  underlyingCause: string;
+  coronerReferralIndicated: boolean;
+  flaggedIssues: FlaggedIssue[];
+  timestamp: string;
 }
 
 // ──────────────────────────────────────────────
@@ -137,8 +130,8 @@ export interface ValidationResult {
 // ──────────────────────────────────────────────
 
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
-	section: keyof DeathCertificate;
+  number: number;
+  title: string;
+  shortTitle: string;
+  section: keyof DeathCertificate;
 }

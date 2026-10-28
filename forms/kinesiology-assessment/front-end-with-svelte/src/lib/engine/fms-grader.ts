@@ -18,61 +18,61 @@ import { fmsCategory } from './utils';
  * scores is used. If pain is present during any movement, the score is 0.
  */
 export function calculateFMS(data: AssessmentData): {
-	fmsScore: number;
-	fmsCategoryLabel: string;
-	firedRules: FiredRule[];
+  fmsScore: number;
+  fmsCategoryLabel: string;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
-	const p = data.fmsPatterns;
+  const firedRules: FiredRule[] = [];
+  const p = data.fmsPatterns;
 
-	const patternScores = [
-		p.deepSquat,
-		p.hurdleStep,
-		p.inLineLunge,
-		p.shoulderMobility,
-		p.activeStraightLegRaise,
-		p.trunkStabilityPushUp,
-		p.rotaryStability
-	];
+  const patternScores = [
+    p.deepSquat,
+    p.hurdleStep,
+    p.inLineLunge,
+    p.shoulderMobility,
+    p.activeStraightLegRaise,
+    p.trunkStabilityPushUp,
+    p.rotaryStability
+  ];
 
-	let fmsScore = 0;
+  let fmsScore = 0;
 
-	for (let i = 0; i < patternScores.length; i++) {
-		const pattern = patternScores[i];
-		const definition = fmsPatterns[i];
+  for (let i = 0; i < patternScores.length; i++) {
+    const pattern = patternScores[i];
+    const definition = fmsPatterns[i];
 
-		// If pain during movement, score is 0
-		if (pattern.painDuringMovement) {
-			firedRules.push({
-				id: definition.id,
-				pattern: definition.pattern,
-				description: `Pain during ${definition.pattern} - score set to 0`,
-				score: 0
-			});
-			continue;
-		}
+    // If pain during movement, score is 0
+    if (pattern.painDuringMovement) {
+      firedRules.push({
+        id: definition.id,
+        pattern: definition.pattern,
+        description: `Pain during ${definition.pattern} - score set to 0`,
+        score: 0
+      });
+      continue;
+    }
 
-		// For bilateral tests, use the lower of left/right scores
-		let effectiveScore: number | null = pattern.score;
+    // For bilateral tests, use the lower of left/right scores
+    let effectiveScore: number | null = pattern.score;
 
-		if (pattern.leftScore !== null && pattern.rightScore !== null) {
-			effectiveScore = Math.min(pattern.leftScore, pattern.rightScore);
-		} else if (pattern.leftScore !== null || pattern.rightScore !== null) {
-			effectiveScore = pattern.leftScore ?? pattern.rightScore;
-		}
+    if (pattern.leftScore !== null && pattern.rightScore !== null) {
+      effectiveScore = Math.min(pattern.leftScore, pattern.rightScore);
+    } else if (pattern.leftScore !== null || pattern.rightScore !== null) {
+      effectiveScore = pattern.leftScore ?? pattern.rightScore;
+    }
 
-		if (effectiveScore !== null) {
-			firedRules.push({
-				id: definition.id,
-				pattern: definition.pattern,
-				description: definition.description,
-				score: effectiveScore
-			});
-			fmsScore += effectiveScore;
-		}
-	}
+    if (effectiveScore !== null) {
+      firedRules.push({
+        id: definition.id,
+        pattern: definition.pattern,
+        description: definition.description,
+        score: effectiveScore
+      });
+      fmsScore += effectiveScore;
+    }
+  }
 
-	const fmsCategoryLabel = fmsCategory(fmsScore);
+  const fmsCategoryLabel = fmsCategory(fmsScore);
 
-	return { fmsScore, fmsCategoryLabel, firedRules };
+  return { fmsScore, fmsCategoryLabel, firedRules };
 }

@@ -22,99 +22,99 @@ import { detectAdditionalFlags } from './flagged-issues';
  *   31-40 = Severe symptom burden
  */
 export function calculateMCASScore(data: AssessmentData): {
-	symptomScore: number;
-	mcasCategoryLabel: string;
-	organSystemsAffected: number;
-	firedRules: FiredRule[];
+  symptomScore: number;
+  mcasCategoryLabel: string;
+  organSystemsAffected: number;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
-	let totalScore = 0;
-	let systemsAffected = 0;
+  const firedRules: FiredRule[] = [];
+  let totalScore = 0;
+  let systemsAffected = 0;
 
-	// ─── Dermatological ─────────────────────────────────
-	const dermSymptoms: [string, SymptomDetail][] = [
-		['Flushing', data.dermatologicalSymptoms.flushing],
-		['Urticaria', data.dermatologicalSymptoms.urticaria],
-		['Angioedema', data.dermatologicalSymptoms.angioedema],
-		['Pruritus', data.dermatologicalSymptoms.pruritus]
-	];
-	const dermScore = scoreOrganSystem('MCAS-DERM', 'Dermatological', dermSymptoms, firedRules);
-	totalScore += dermScore;
-	if (dermScore > 0) systemsAffected++;
+  // ─── Dermatological ─────────────────────────────────
+  const dermSymptoms: [string, SymptomDetail][] = [
+    ['Flushing', data.dermatologicalSymptoms.flushing],
+    ['Urticaria', data.dermatologicalSymptoms.urticaria],
+    ['Angioedema', data.dermatologicalSymptoms.angioedema],
+    ['Pruritus', data.dermatologicalSymptoms.pruritus]
+  ];
+  const dermScore = scoreOrganSystem('MCAS-DERM', 'Dermatological', dermSymptoms, firedRules);
+  totalScore += dermScore;
+  if (dermScore > 0) systemsAffected++;
 
-	// ─── Gastrointestinal ───────────────────────────────
-	const giSymptoms: [string, SymptomDetail][] = [
-		['Abdominal Pain', data.gastrointestinalSymptoms.abdominalPain],
-		['Nausea', data.gastrointestinalSymptoms.nausea],
-		['Diarrhea', data.gastrointestinalSymptoms.diarrhea],
-		['Bloating', data.gastrointestinalSymptoms.bloating]
-	];
-	const giScore = scoreOrganSystem('MCAS-GI', 'Gastrointestinal', giSymptoms, firedRules);
-	totalScore += giScore;
-	if (giScore > 0) systemsAffected++;
+  // ─── Gastrointestinal ───────────────────────────────
+  const giSymptoms: [string, SymptomDetail][] = [
+    ['Abdominal Pain', data.gastrointestinalSymptoms.abdominalPain],
+    ['Nausea', data.gastrointestinalSymptoms.nausea],
+    ['Diarrhea', data.gastrointestinalSymptoms.diarrhea],
+    ['Bloating', data.gastrointestinalSymptoms.bloating]
+  ];
+  const giScore = scoreOrganSystem('MCAS-GI', 'Gastrointestinal', giSymptoms, firedRules);
+  totalScore += giScore;
+  if (giScore > 0) systemsAffected++;
 
-	// ─── Cardiovascular ─────────────────────────────────
-	const cvSymptoms: [string, SymptomDetail][] = [
-		['Tachycardia', data.cardiovascularSymptoms.tachycardia],
-		['Hypotension', data.cardiovascularSymptoms.hypotension],
-		['Presyncope', data.cardiovascularSymptoms.presyncope],
-		['Syncope', data.cardiovascularSymptoms.syncope]
-	];
-	const cvScore = scoreOrganSystem('MCAS-CV', 'Cardiovascular', cvSymptoms, firedRules);
-	totalScore += cvScore;
-	if (cvScore > 0) systemsAffected++;
+  // ─── Cardiovascular ─────────────────────────────────
+  const cvSymptoms: [string, SymptomDetail][] = [
+    ['Tachycardia', data.cardiovascularSymptoms.tachycardia],
+    ['Hypotension', data.cardiovascularSymptoms.hypotension],
+    ['Presyncope', data.cardiovascularSymptoms.presyncope],
+    ['Syncope', data.cardiovascularSymptoms.syncope]
+  ];
+  const cvScore = scoreOrganSystem('MCAS-CV', 'Cardiovascular', cvSymptoms, firedRules);
+  totalScore += cvScore;
+  if (cvScore > 0) systemsAffected++;
 
-	// ─── Respiratory ────────────────────────────────────
-	const respSymptoms: [string, SymptomDetail][] = [
-		['Wheezing', data.respiratorySymptoms.wheezing],
-		['Dyspnea', data.respiratorySymptoms.dyspnea],
-		['Nasal Congestion', data.respiratorySymptoms.nasalCongestion],
-		['Throat Tightening', data.respiratorySymptoms.throatTightening]
-	];
-	const respScore = scoreOrganSystem('MCAS-RESP', 'Respiratory', respSymptoms, firedRules);
-	totalScore += respScore;
-	if (respScore > 0) systemsAffected++;
+  // ─── Respiratory ────────────────────────────────────
+  const respSymptoms: [string, SymptomDetail][] = [
+    ['Wheezing', data.respiratorySymptoms.wheezing],
+    ['Dyspnea', data.respiratorySymptoms.dyspnea],
+    ['Nasal Congestion', data.respiratorySymptoms.nasalCongestion],
+    ['Throat Tightening', data.respiratorySymptoms.throatTightening]
+  ];
+  const respScore = scoreOrganSystem('MCAS-RESP', 'Respiratory', respSymptoms, firedRules);
+  totalScore += respScore;
+  if (respScore > 0) systemsAffected++;
 
-	// ─── Neurological ───────────────────────────────────
-	const neuroSymptoms: [string, SymptomDetail][] = [
-		['Headache', data.neurologicalSymptoms.headache],
-		['Brain Fog', data.neurologicalSymptoms.brainFog],
-		['Dizziness', data.neurologicalSymptoms.dizziness],
-		['Fatigue', data.neurologicalSymptoms.fatigue]
-	];
-	const neuroScore = scoreOrganSystem('MCAS-NEURO', 'Neurological', neuroSymptoms, firedRules);
-	totalScore += neuroScore;
-	if (neuroScore > 0) systemsAffected++;
+  // ─── Neurological ───────────────────────────────────
+  const neuroSymptoms: [string, SymptomDetail][] = [
+    ['Headache', data.neurologicalSymptoms.headache],
+    ['Brain Fog', data.neurologicalSymptoms.brainFog],
+    ['Dizziness', data.neurologicalSymptoms.dizziness],
+    ['Fatigue', data.neurologicalSymptoms.fatigue]
+  ];
+  const neuroScore = scoreOrganSystem('MCAS-NEURO', 'Neurological', neuroSymptoms, firedRules);
+  totalScore += neuroScore;
+  if (neuroScore > 0) systemsAffected++;
 
-	// Cap score at 40
-	const symptomScore = Math.min(totalScore, 40);
-	const mcasCategoryLabel = mcasCategory(symptomScore);
+  // Cap score at 40
+  const symptomScore = Math.min(totalScore, 40);
+  const mcasCategoryLabel = mcasCategory(symptomScore);
 
-	return { symptomScore, mcasCategoryLabel, organSystemsAffected: systemsAffected, firedRules };
+  return { symptomScore, mcasCategoryLabel, organSystemsAffected: systemsAffected, firedRules };
 }
 
 function scoreOrganSystem(
-	domainId: string,
-	domainName: string,
-	symptoms: [string, SymptomDetail][],
-	firedRules: FiredRule[]
+  domainId: string,
+  domainName: string,
+  symptoms: [string, SymptomDetail][],
+  firedRules: FiredRule[]
 ): number {
-	let domainScore = 0;
+  let domainScore = 0;
 
-	for (const [name, symptom] of symptoms) {
-		const severity = symptom.severity;
-		if (severity !== null && severity > 0) {
-			firedRules.push({
-				id: `${domainId}-${name.replace(/\s+/g, '-').toUpperCase()}`,
-				domain: domainName,
-				description: `${name}: severity ${severity}/3, frequency ${symptom.frequency || 'not specified'}`,
-				score: severity
-			});
-			domainScore += severity;
-		}
-	}
+  for (const [name, symptom] of symptoms) {
+    const severity = symptom.severity;
+    if (severity !== null && severity > 0) {
+      firedRules.push({
+        id: `${domainId}-${name.replace(/\s+/g, '-').toUpperCase()}`,
+        domain: domainName,
+        description: `${name}: severity ${severity}/3, frequency ${symptom.frequency || 'not specified'}`,
+        score: severity
+      });
+      domainScore += severity;
+    }
+  }
 
-	return domainScore;
+  return domainScore;
 }
 
 /**
@@ -123,14 +123,14 @@ function scoreOrganSystem(
  * dashboard consume.
  */
 export function calculateMCASGrade(data: AssessmentData): GradingResult {
-	const { symptomScore, mcasCategoryLabel, organSystemsAffected, firedRules } =
-		calculateMCASScore(data);
-	return {
-		symptomScore,
-		mcasCategory: mcasCategoryLabel,
-		organSystemsAffected,
-		firedRules,
-		additionalFlags: detectAdditionalFlags(data),
-		timestamp: new Date().toISOString()
-	};
+  const { symptomScore, mcasCategoryLabel, organSystemsAffected, firedRules } =
+    calculateMCASScore(data);
+  return {
+    symptomScore,
+    mcasCategory: mcasCategoryLabel,
+    organSystemsAffected,
+    firedRules,
+    additionalFlags: detectAdditionalFlags(data),
+    timestamp: new Date().toISOString()
+  };
 }

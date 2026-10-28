@@ -17,11 +17,11 @@ import type { Candidacy, FiredRule, GradingResult, HipReplacementSurgeryEvaluati
 import { ageInYears, calculateBmi, num, rule } from './utils';
 
 const CANDIDACY_VALUES: Candidacy[] = [
-	'strong-candidate',
-	'candidate',
-	'continue-conservative',
-	'not-indicated',
-	'mdt-review'
+  'strong-candidate',
+  'candidate',
+  'continue-conservative',
+  'not-indicated',
+  'mdt-review'
 ];
 
 /**
@@ -30,85 +30,85 @@ const CANDIDACY_VALUES: Candidacy[] = [
  * exhausted.
  */
 export function deriveCandidacy(
-	ohsTotal: number,
-	kellgrenLawrenceGrade: number | null,
-	conservativeMeasuresExhausted: string
+  ohsTotal: number,
+  kellgrenLawrenceGrade: number | null,
+  conservativeMeasuresExhausted: string
 ): { candidacy: Candidacy; firedRules: FiredRule[] } {
-	const firedRules: FiredRule[] = [];
-	const kl = kellgrenLawrenceGrade;
+  const firedRules: FiredRule[] = [];
+  const kl = kellgrenLawrenceGrade;
 
-	if (conservativeMeasuresExhausted === 'no') {
-		firedRules.push(
-			rule(
-				'R-CANDIDACY-CONSERVATIVE-NOT-EXHAUSTED',
-				'conservative',
-				'exhausted',
-				null,
-				'continue-conservative',
-				'candidacy',
-				'Conservative measures have not been exhausted, so surgery is not yet indicated regardless of the Oxford Hip Score or imaging grade.'
-			)
-		);
-		return { candidacy: 'continue-conservative', firedRules };
-	}
+  if (conservativeMeasuresExhausted === 'no') {
+    firedRules.push(
+      rule(
+        'R-CANDIDACY-CONSERVATIVE-NOT-EXHAUSTED',
+        'conservative',
+        'exhausted',
+        null,
+        'continue-conservative',
+        'candidacy',
+        'Conservative measures have not been exhausted, so surgery is not yet indicated regardless of the Oxford Hip Score or imaging grade.'
+      )
+    );
+    return { candidacy: 'continue-conservative', firedRules };
+  }
 
-	if (ohsTotal >= 40 || (kl !== null && kl <= 1)) {
-		firedRules.push(
-			rule(
-				'R-CANDIDACY-NOT-INDICATED',
-				'composite',
-				'candidacy',
-				ohsTotal,
-				'not-indicated',
-				'candidacy',
-				`Oxford Hip Score ${ohsTotal} is 40 or above, or the Kellgren and Lawrence grade is 1 or below: surgery is not currently indicated.`
-			)
-		);
-		return { candidacy: 'not-indicated', firedRules };
-	}
+  if (ohsTotal >= 40 || (kl !== null && kl <= 1)) {
+    firedRules.push(
+      rule(
+        'R-CANDIDACY-NOT-INDICATED',
+        'composite',
+        'candidacy',
+        ohsTotal,
+        'not-indicated',
+        'candidacy',
+        `Oxford Hip Score ${ohsTotal} is 40 or above, or the Kellgren and Lawrence grade is 1 or below: surgery is not currently indicated.`
+      )
+    );
+    return { candidacy: 'not-indicated', firedRules };
+  }
 
-	if (ohsTotal <= 19 && kl !== null && kl >= 3) {
-		firedRules.push(
-			rule(
-				'R-CANDIDACY-STRONG',
-				'composite',
-				'candidacy',
-				ohsTotal,
-				'strong-candidate',
-				'candidacy',
-				`Oxford Hip Score ${ohsTotal} is 19 or below with Kellgren and Lawrence grade ${kl}: a strong candidate for surgery.`
-			)
-		);
-		return { candidacy: 'strong-candidate', firedRules };
-	}
+  if (ohsTotal <= 19 && kl !== null && kl >= 3) {
+    firedRules.push(
+      rule(
+        'R-CANDIDACY-STRONG',
+        'composite',
+        'candidacy',
+        ohsTotal,
+        'strong-candidate',
+        'candidacy',
+        `Oxford Hip Score ${ohsTotal} is 19 or below with Kellgren and Lawrence grade ${kl}: a strong candidate for surgery.`
+      )
+    );
+    return { candidacy: 'strong-candidate', firedRules };
+  }
 
-	if (ohsTotal <= 29 && kl !== null && kl >= 2) {
-		firedRules.push(
-			rule(
-				'R-CANDIDACY-CANDIDATE',
-				'composite',
-				'candidacy',
-				ohsTotal,
-				'candidate',
-				'candidacy',
-				`Oxford Hip Score ${ohsTotal} is 29 or below with Kellgren and Lawrence grade ${kl}: a candidate for surgery.`
-			)
-		);
-		return { candidacy: 'candidate', firedRules };
-	}
+  if (ohsTotal <= 29 && kl !== null && kl >= 2) {
+    firedRules.push(
+      rule(
+        'R-CANDIDACY-CANDIDATE',
+        'composite',
+        'candidacy',
+        ohsTotal,
+        'candidate',
+        'candidacy',
+        `Oxford Hip Score ${ohsTotal} is 29 or below with Kellgren and Lawrence grade ${kl}: a candidate for surgery.`
+      )
+    );
+    return { candidacy: 'candidate', firedRules };
+  }
 
-	firedRules.push(
-		rule(
-			'R-CANDIDACY-MDT-REVIEW',
-			'composite',
-			'candidacy',
-			ohsTotal,
-			'mdt-review',
-			'candidacy',
-			`Oxford Hip Score ${ohsTotal} and Kellgren and Lawrence grade ${kl ?? 'unknown'} form a mixed or borderline picture requiring multidisciplinary-team review.`
-		)
-	);
-	return { candidacy: 'mdt-review', firedRules };
+  firedRules.push(
+    rule(
+      'R-CANDIDACY-MDT-REVIEW',
+      'composite',
+      'candidacy',
+      ohsTotal,
+      'mdt-review',
+      'candidacy',
+      `Oxford Hip Score ${ohsTotal} and Kellgren and Lawrence grade ${kl ?? 'unknown'} form a mixed or borderline picture requiring multidisciplinary-team review.`
+    )
+  );
+  return { candidacy: 'mdt-review', firedRules };
 }
 
 /**
@@ -117,74 +117,74 @@ export function deriveCandidacy(
  * computed from recorded data rather than from `Date.now()`.
  */
 export function calculateHipEvaluation(data: HipReplacementSurgeryEvaluation): GradingResult {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	const age = ageInYears(data.patient.birthDate, data.clinician.assessmentDate);
-	const bmi = calculateBmi(data.patient.heightAsCm, data.patient.weightAsKg);
+  const age = ageInYears(data.patient.birthDate, data.clinician.assessmentDate);
+  const bmi = calculateBmi(data.patient.heightAsCm, data.patient.weightAsKg);
 
-	// --- Oxford Hip Score (primary instrument) ------------------------------
-	const ohs = scoreOhs(data);
-	firedRules.push(...ohs.firedRules);
+  // --- Oxford Hip Score (primary instrument) ------------------------------
+  const ohs = scoreOhs(data);
+  firedRules.push(...ohs.firedRules);
 
-	const kellgrenLawrenceGrade = num(data.imaging.kellgrenLawrenceGrade);
-	if (kellgrenLawrenceGrade !== null) {
-		firedRules.push(
-			rule(
-				'R-IMAGING-KL-GRADE',
-				'imaging',
-				'kellgren-lawrence',
-				kellgrenLawrenceGrade,
-				String(kellgrenLawrenceGrade),
-				'radiographic-grading',
-				`Kellgren and Lawrence grade ${kellgrenLawrenceGrade}.`
-			)
-		);
-	}
+  const kellgrenLawrenceGrade = num(data.imaging.kellgrenLawrenceGrade);
+  if (kellgrenLawrenceGrade !== null) {
+    firedRules.push(
+      rule(
+        'R-IMAGING-KL-GRADE',
+        'imaging',
+        'kellgren-lawrence',
+        kellgrenLawrenceGrade,
+        String(kellgrenLawrenceGrade),
+        'radiographic-grading',
+        `Kellgren and Lawrence grade ${kellgrenLawrenceGrade}.`
+      )
+    );
+  }
 
-	// --- Surgical candidacy ---------------------------------------------------
-	const { candidacy: computedCandidacy, firedRules: candidacyRules } = deriveCandidacy(
-		ohs.total,
-		kellgrenLawrenceGrade,
-		data.conservative.conservativeMeasuresExhausted
-	);
-	firedRules.push(...candidacyRules);
+  // --- Surgical candidacy ---------------------------------------------------
+  const { candidacy: computedCandidacy, firedRules: candidacyRules } = deriveCandidacy(
+    ohs.total,
+    kellgrenLawrenceGrade,
+    data.conservative.conservativeMeasuresExhausted
+  );
+  firedRules.push(...candidacyRules);
 
-	// --- Clinician override -----------------------------------------------------
-	// The override changes the candidacy recommendation only. Safety flags are
-	// computed independently below and are always reported.
-	const override = data.summary.overrideCandidacy;
-	const finalCandidacy: Candidacy =
-		override && CANDIDACY_VALUES.includes(override) ? override : computedCandidacy;
-	const overrideReason = finalCandidacy !== computedCandidacy ? data.summary.overrideReason : '';
+  // --- Clinician override -----------------------------------------------------
+  // The override changes the candidacy recommendation only. Safety flags are
+  // computed independently below and are always reported.
+  const override = data.summary.overrideCandidacy;
+  const finalCandidacy: Candidacy =
+    override && CANDIDACY_VALUES.includes(override) ? override : computedCandidacy;
+  const overrideReason = finalCandidacy !== computedCandidacy ? data.summary.overrideReason : '';
 
-	const flags = detectFlags(data, { bmi, age });
+  const flags = detectFlags(data, { bmi, age });
 
-	return {
-		ohsTotal: ohs.total,
-		ohsCategory: ohs.category,
-		bmi,
-		kellgrenLawrenceGrade,
-		computedCandidacy,
-		finalCandidacy,
-		overrideReason,
-		firedRules,
-		flags
-	};
+  return {
+    ohsTotal: ohs.total,
+    ohsCategory: ohs.category,
+    bmi,
+    kellgrenLawrenceGrade,
+    computedCandidacy,
+    finalCandidacy,
+    overrideReason,
+    firedRules,
+    flags
+  };
 }
 
 /** Display labels for the OHS category bands. */
 export const OHS_CATEGORY_LABELS: Record<string, string> = {
-	severe: 'Severe (0–19)',
-	moderate: 'Moderate (20–29)',
-	'mild-to-moderate': 'Mild-to-moderate (30–39)',
-	satisfactory: 'Satisfactory (40–48)'
+  severe: 'Severe (0–19)',
+  moderate: 'Moderate (20–29)',
+  'mild-to-moderate': 'Mild-to-moderate (30–39)',
+  satisfactory: 'Satisfactory (40–48)'
 };
 
 /** Display labels for the surgical-candidacy recommendation. */
 export const CANDIDACY_LABELS: Record<string, string> = {
-	'strong-candidate': 'Strong candidate for surgery',
-	candidate: 'Candidate for surgery',
-	'continue-conservative': 'Continue conservative management',
-	'not-indicated': 'Not currently indicated',
-	'mdt-review': 'Multidisciplinary-team review'
+  'strong-candidate': 'Strong candidate for surgery',
+  candidate: 'Candidate for surgery',
+  'continue-conservative': 'Continue conservative management',
+  'not-indicated': 'Not currently indicated',
+  'mdt-review': 'Multidisciplinary-team review'
 };

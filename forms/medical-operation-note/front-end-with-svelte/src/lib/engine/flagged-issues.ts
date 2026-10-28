@@ -24,16 +24,14 @@ export function detectAdditionalFlags(data: OperationNote): AdditionalFlag[] {
 
   // Incorrect count
   const anyDisagreed =
-    s.swabCountAgreed === 'no' ||
-    s.needleCountAgreed === 'no' ||
-    s.instrumentCountAgreed === 'no';
+    s.swabCountAgreed === 'no' || s.needleCountAgreed === 'no' || s.instrumentCountAgreed === 'no';
   if (anyDisagreed) {
     flags.push({
       flagId: 'F-INCORRECT-COUNT',
       category: 'incorrect-count',
       priority: 'high',
       description: 'Swab / needle / instrument count discrepancy unresolved at sign-out',
-      suggestedAction: 'X-ray; theatre lockdown; document resolution before patient leaves theatre.',
+      suggestedAction: 'X-ray; theatre lockdown; document resolution before patient leaves theatre.'
     });
   }
 
@@ -44,7 +42,8 @@ export function detectAdditionalFlags(data: OperationNote): AdditionalFlag[] {
       category: 'retained-foreign-body',
       priority: 'high',
       description: 'Retained foreign body declared',
-      suggestedAction: 'Statutory NHS England Never Event notification; duty of candour; patient-safety incident report.',
+      suggestedAction:
+        'Statutory NHS England Never Event notification; duty of candour; patient-safety incident report.'
     });
   }
 
@@ -59,7 +58,8 @@ export function detectAdditionalFlags(data: OperationNote): AdditionalFlag[] {
       category: 'never-event',
       priority: 'high',
       description: `Never-event suspicion: ${neverEventTokens.join(', ')}`,
-      suggestedAction: 'Statutory NHS England Never Event notification; duty of candour; root-cause analysis.',
+      suggestedAction:
+        'Statutory NHS England Never Event notification; duty of candour; root-cause analysis.'
     });
   }
 
@@ -76,7 +76,8 @@ export function detectAdditionalFlags(data: OperationNote): AdditionalFlag[] {
         category: 'unplanned-icu-admission',
         priority: 'high',
         description: `Unplanned escalation of disposition${intensive ? ` to ${p.recoveryDestination.toUpperCase()}` : ''}`,
-        suggestedAction: 'Critical-care handover; ICU/HDU bed confirmation; consultant intensivist notification.',
+        suggestedAction:
+          'Critical-care handover; ICU/HDU bed confirmation; consultant intensivist notification.'
       });
     }
   }
@@ -89,7 +90,8 @@ export function detectAdditionalFlags(data: OperationNote): AdditionalFlag[] {
       category: 'massive-haemorrhage',
       priority: 'high',
       description: `EBL ${s.estimatedBloodLossMl ?? 0} mL — ${band} band`,
-      suggestedAction: 'Activate massive haemorrhage protocol if not already; blood-bank communication; haematology review.',
+      suggestedAction:
+        'Activate massive haemorrhage protocol if not already; blood-bank communication; haematology review.'
     });
   }
 
@@ -104,7 +106,8 @@ export function detectAdditionalFlags(data: OperationNote): AdditionalFlag[] {
         s.massiveHaemorrhageProtocolActivated === 'yes'
           ? 'Massive haemorrhage protocol activated'
           : `≥ 4 units PRBC intra-operatively (${totalTransfusionUnits(s.prbcUnits, s.ffpUnits, s.plateletsUnits, s.cryoUnits)} total units)`,
-      suggestedAction: 'Continue MHP; tranexamic acid; near-patient testing; consultant haematologist input.',
+      suggestedAction:
+        'Continue MHP; tranexamic acid; near-patient testing; consultant haematologist input.'
     });
   }
 
@@ -115,7 +118,7 @@ export function detectAdditionalFlags(data: OperationNote): AdditionalFlag[] {
       category: 'conversion-to-open',
       priority: 'medium',
       description: 'Planned minimally-invasive case converted to open',
-      suggestedAction: 'Document reason; revisit post-op analgesia and length-of-stay planning.',
+      suggestedAction: 'Document reason; revisit post-op analgesia and length-of-stay planning.'
     });
   }
 
@@ -126,7 +129,7 @@ export function detectAdditionalFlags(data: OperationNote): AdditionalFlag[] {
       category: 'intra-operative-arrest',
       priority: 'high',
       description: 'Cardiac or respiratory arrest in theatre',
-      suggestedAction: 'Critical-care admission; family communication; M&M referral; debrief.',
+      suggestedAction: 'Critical-care admission; family communication; M&M referral; debrief.'
     });
   }
 
@@ -136,7 +139,13 @@ export function detectAdditionalFlags(data: OperationNote): AdditionalFlag[] {
     .map((t) => t.trim().toLowerCase())
     .filter((t) => t.length > 0);
   const majorAnaestheticEvents = events.filter((t) =>
-    ['failed-intubation', 'awareness', 'anaphylaxis', 'malignant-hyperthermia', 'sux-apnoea'].includes(t),
+    [
+      'failed-intubation',
+      'awareness',
+      'anaphylaxis',
+      'malignant-hyperthermia',
+      'sux-apnoea'
+    ].includes(t)
   );
   if (majorAnaestheticEvents.length > 0) {
     flags.push({
@@ -144,23 +153,21 @@ export function detectAdditionalFlags(data: OperationNote): AdditionalFlag[] {
       category: 'anaesthetic-incident',
       priority: 'high',
       description: `Major anaesthetic event: ${majorAnaestheticEvents.join(', ')}`,
-      suggestedAction: 'Critical-incident report; anaesthetic alert on record; consultant anaesthetist debrief.',
+      suggestedAction:
+        'Critical-incident report; anaesthetic alert on record; consultant anaesthetist debrief.'
     });
   }
 
   // Implant registry pending
   const hasImplants =
-    m.mesh.trim() ||
-    m.screwsPlates.trim() ||
-    m.prostheticJoints.trim() ||
-    m.vascularGrafts.trim();
+    m.mesh.trim() || m.screwsPlates.trim() || m.prostheticJoints.trim() || m.vascularGrafts.trim();
   if (hasImplants && m.registrySubmitted !== 'yes') {
     flags.push({
       flagId: 'F-IMPLANT-REGISTRY',
       category: 'implant-registry-pending',
       priority: 'medium',
       description: 'Implant placed but registry submission not yet confirmed',
-      suggestedAction: 'Submit to relevant registry (NJR, BHIVR, ODEP) within trust deadline.',
+      suggestedAction: 'Submit to relevant registry (NJR, BHIVR, ODEP) within trust deadline.'
     });
   }
 
@@ -171,7 +178,7 @@ export function detectAdditionalFlags(data: OperationNote): AdditionalFlag[] {
       category: 'specimen-labelling-issue',
       priority: 'medium',
       description: 'Specimen sent without complete labelling or chain-of-custody',
-      suggestedAction: 'Pathology lab contact; relabel under witness; document discrepancy.',
+      suggestedAction: 'Pathology lab contact; relabel under witness; document discrepancy.'
     });
   }
 
@@ -182,7 +189,7 @@ export function detectAdditionalFlags(data: OperationNote): AdditionalFlag[] {
       category: 'equipment-problem',
       priority: 'medium',
       description: 'Equipment failure or sterility breach',
-      suggestedAction: 'Quarantine equipment; report on Datix; theatre coordinator notification.',
+      suggestedAction: 'Quarantine equipment; report on Datix; theatre coordinator notification.'
     });
   }
 
@@ -193,7 +200,8 @@ export function detectAdditionalFlags(data: OperationNote): AdditionalFlag[] {
       category: 'documentation-gap',
       priority: 'low',
       description: 'Required field missing at sign-off',
-      suggestedAction: 'Complete missing fields before electronic signature; addendum if post-signature.',
+      suggestedAction:
+        'Complete missing fields before electronic signature; addendum if post-signature.'
     });
   }
 

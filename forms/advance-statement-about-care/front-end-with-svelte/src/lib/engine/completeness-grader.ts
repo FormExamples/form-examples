@@ -11,75 +11,75 @@ import { detectFlaggedIssues } from './flagged-issues';
  *   - Verified: complete + witnessed + signed by healthcare professional
  */
 export function calculateCompleteness(data: StatementData): CompletenessResult {
-	const missingSections: MissingSection[] = [];
-	let completedCount = 0;
-	const totalCount = completenessRules.length;
+  const missingSections: MissingSection[] = [];
+  let completedCount = 0;
+  const totalCount = completenessRules.length;
 
-	for (const rule of completenessRules) {
-		try {
-			if (rule.evaluate(data)) {
-				completedCount++;
-			} else {
-				missingSections.push({
-					id: rule.id,
-					section: rule.section,
-					description: rule.description,
-					required: rule.required
-				});
-			}
-		} catch (e) {
-			// Rule evaluation failed - treat as missing
-			console.warn(`Completeness rule ${rule.id} evaluation failed:`, e);
-			missingSections.push({
-				id: rule.id,
-				section: rule.section,
-				description: rule.description,
-				required: rule.required
-			});
-		}
-	}
+  for (const rule of completenessRules) {
+    try {
+      if (rule.evaluate(data)) {
+        completedCount++;
+      } else {
+        missingSections.push({
+          id: rule.id,
+          section: rule.section,
+          description: rule.description,
+          required: rule.required
+        });
+      }
+    } catch (e) {
+      // Rule evaluation failed - treat as missing
+      console.warn(`Completeness rule ${rule.id} evaluation failed:`, e);
+      missingSections.push({
+        id: rule.id,
+        section: rule.section,
+        description: rule.description,
+        required: rule.required
+      });
+    }
+  }
 
-	const flaggedIssues = detectFlaggedIssues(data);
-	const missingRequired = missingSections.filter((s) => s.required);
-	const level = determineLevel(data, missingRequired.length, completedCount);
+  const flaggedIssues = detectFlaggedIssues(data);
+  const missingRequired = missingSections.filter((s) => s.required);
+  const level = determineLevel(data, missingRequired.length, completedCount);
 
-	return {
-		level,
-		missingSections,
-		flaggedIssues,
-		completedCount,
-		totalCount,
-		timestamp: new Date().toISOString()
-	};
+  return {
+    level,
+    missingSections,
+    flaggedIssues,
+    completedCount,
+    totalCount,
+    timestamp: new Date().toISOString()
+  };
 }
 
 function determineLevel(
-	data: StatementData,
-	missingRequiredCount: number,
-	completedCount: number
+  data: StatementData,
+  missingRequiredCount: number,
+  completedCount: number
 ): CompletenessLevel {
-	// Verified: all required complete + witnessed + healthcare professional acknowledged
-	const isWitnessed =
-		data.signaturesWitnesses.witnessName.trim() !== '' &&
-		data.signaturesWitnesses.witnessSignature.trim() !== '';
-	const isProfessionalAcknowledged =
-		data.signaturesWitnesses.healthcareProfessionalName.trim() !== '' &&
-		data.signaturesWitnesses.healthcareProfessionalSignature.trim() !== '';
+  // Verified: all required complete + witnessed + healthcare professional acknowledged
+  const isWitnessed =
+    data.signaturesWitnesses.witnessName.trim() !== '' &&
+    data.signaturesWitnesses.witnessSignature.trim() !== '';
+  const isProfessionalAcknowledged =
+    data.signaturesWitnesses.healthcareProfessionalName.trim() !== '' &&
+    data.signaturesWitnesses.healthcareProfessionalSignature.trim() !== '';
 
-	if (missingRequiredCount === 0 && isWitnessed && isProfessionalAcknowledged) {
-		return 'verified';
-	}
+  if (missingRequiredCount === 0 && isWitnessed && isProfessionalAcknowledged) {
+    return 'verified';
+  }
 
-	// Complete: all required sections filled
-	if (missingRequiredCount === 0) {
-		return 'complete';
-	}
+  // Complete: all required sections filled
+  if (missingRequiredCount === 0) {
+    return 'complete';
+  }
 
-	// Partial: at least some sections completed
-	if (completedCount > 0) {
-		return 'partial';
-	}
+  // Partial: at least some sections completed
+  if (completedCount > 0) {
+    return 'partial';
+  }
 
-	// Incomplete: nothing filled
-	return 'incomplete';
+  // Incomplete: nothing filled
+  return 'incomplete';
 }

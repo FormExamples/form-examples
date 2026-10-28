@@ -35,13 +35,5 @@
 
 <div class="field">
   <label class="label" for={name} data-required={required || undefined}>{label}</label>
-  <input
-    id={name}
-    {name}
-    {type}
-    {placeholder}
-    {required}
-    class={inputClass}
-    bind:value
-  />
+  <input id={name} {name} {type} {placeholder} {required} class={inputClass} bind:value />
 </div>

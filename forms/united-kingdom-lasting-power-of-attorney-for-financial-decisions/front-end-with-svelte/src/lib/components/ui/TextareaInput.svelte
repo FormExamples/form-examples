@@ -4,7 +4,7 @@
     value = $bindable(''),
     rows = 4,
     maxlength = 2000,
-    placeholder = '',
+    placeholder = ''
   }: {
     value: string;
     rows?: number;
@@ -13,11 +13,5 @@
   } = $props();
 </script>
 
-<textarea
-  {rows}
-  {maxlength}
-  {placeholder}
-  bind:value
-  class="text-area-input"
-></textarea>
+<textarea {rows} {maxlength} {placeholder} bind:value class="text-area-input"></textarea>
 <span class="hint">{value.length} / {maxlength}</span>

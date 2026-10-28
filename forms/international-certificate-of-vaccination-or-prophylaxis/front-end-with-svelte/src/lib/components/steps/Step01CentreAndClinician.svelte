@@ -4,7 +4,10 @@
   const c = $derived(certificateStore.data);
 </script>
 
-<Fieldset legend="Centre & clinician" description="The WHO-designated vaccination centre and the supervising clinician.">
+<Fieldset
+  legend="Centre & clinician"
+  description="The WHO-designated vaccination centre and the supervising clinician."
+>
   <div class="field">
     <label class="label" for="centreName">Centre name</label>
     <input id="centreName" class="text-input" bind:value={c.center.name} />
@@ -15,7 +18,12 @@
   </div>
   <div class="field">
     <label class="label" for="centreCountry">Centre country (ISO 3166-1 alpha-3)</label>
-    <input id="centreCountry" class="text-input" maxlength="3" bind:value={c.center.countryAsIso31661Alpha3} />
+    <input
+      id="centreCountry"
+      class="text-input"
+      maxlength="3"
+      bind:value={c.center.countryAsIso31661Alpha3}
+    />
   </div>
   <div class="field">
     <label class="label" for="clinicianName">Supervising clinician name</label>

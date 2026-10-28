@@ -6,7 +6,12 @@ export interface StepConfig {
 }
 
 export const STEPS: StepConfig[] = [
-  { number: 1, slug: 'practitioner', title: 'Practitioner identification', shortTitle: 'Practitioner' },
+  {
+    number: 1,
+    slug: 'practitioner',
+    title: 'Practitioner identification',
+    shortTitle: 'Practitioner'
+  },
   { number: 2, slug: 'patient', title: 'Patient identification', shortTitle: 'Patient' },
   { number: 3, slug: 'referral', title: 'Referral details', shortTitle: 'Referral' },
   { number: 4, slug: 'waiting-list', title: 'Waiting list entry', shortTitle: 'Waiting list' },

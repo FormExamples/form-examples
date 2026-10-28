@@ -4,7 +4,10 @@
   const e = $derived(certificateStore.data.entries[0]);
 </script>
 
-<Fieldset legend="Vaccination entry — administration" description="The administering clinician must sign each entry by hand; stamps are not acceptable.">
+<Fieldset
+  legend="Vaccination entry — administration"
+  description="The administering clinician must sign each entry by hand; stamps are not acceptable."
+>
   <div class="field">
     <label class="label" for="vaccinationDate">Date of vaccination</label>
     <input id="vaccinationDate" type="date" class="date-input" bind:value={e.vaccinationDate} />
@@ -14,8 +17,13 @@
     <input id="vaccinationTime" type="time" class="time-input" bind:value={e.vaccinationTime} />
   </div>
   <div class="field">
-    <label class="label" for="adminSignature">Administering clinician signature (typed/drawn)</label>
-    <input id="adminSignature" class="text-input" bind:value={e.administeringClinicianSignatureDataUrl} />
+    <label class="label" for="adminSignature">Administering clinician signature (typed/drawn)</label
+    >
+    <input
+      id="adminSignature"
+      class="text-input"
+      bind:value={e.administeringClinicianSignatureDataUrl}
+    />
   </div>
   <div class="field">
     <label class="label" for="adminStatus">Administering clinician professional status</label>

@@ -37,7 +37,10 @@
         {r.weightedMeanScore !== null ? r.weightedMeanScore.toFixed(2) : '— (insufficient data)'}
       </p>
     {/if}
-    <p><strong>Composite maturity:</strong> {r.maturity.toUpperCase()}{r.weightsCustomised ? ' (weighted)' : ''}</p>
+    <p>
+      <strong>Composite maturity:</strong>
+      {r.maturity.toUpperCase()}{r.weightsCustomised ? ' (weighted)' : ''}
+    </p>
   </div>
 
   <FlagBanner flags={r.additionalFlags} maturity={r.maturity} />
@@ -67,9 +70,8 @@
     </summary>
     <p class="text-xs text-base-content/70 mt-2">
       Weight each principle between <strong>0.5</strong> (half-weight) and
-      <strong>2.0</strong> (double-weight). Default is <strong>1.0</strong>.
-      Weights only affect the weighted mean and the composite maturity; the
-      unweighted mean remains visible above.
+      <strong>2.0</strong> (double-weight). Default is <strong>1.0</strong>. Weights only affect the
+      weighted mean and the composite maturity; the unweighted mean remains visible above.
     </p>
     <ul class="mt-3 space-y-2 text-sm">
       {#each PRINCIPLES as p (p.number)}
@@ -104,7 +106,8 @@
         {#each r.firedRules as f (f.ruleId)}
           <li>
             <code class="text-xs">{f.ruleId}</code>
-            — P{f.principleNumber} {f.band.toUpperCase()}: {f.description || '(no coaching note)'}
+            — P{f.principleNumber}
+            {f.band.toUpperCase()}: {f.description || '(no coaching note)'}
           </li>
         {/each}
       </ul>
@@ -141,22 +144,19 @@
       <textarea
         rows="3"
         class="w-full border border-base-300 rounded px-2 py-1"
-        bind:value={store.data.actionPlan.coachNotes}
-      ></textarea>
+        bind:value={store.data.actionPlan.coachNotes}></textarea>
     </label>
     <label class="block">
       <span class="text-sm font-medium text-base-content/70">Overall notes</span>
       <textarea
         rows="3"
         class="w-full border border-base-300 rounded px-2 py-1"
-        bind:value={store.data.actionPlan.overallNotes}
-      ></textarea>
+        bind:value={store.data.actionPlan.overallNotes}></textarea>
     </label>
   </div>
 
   <p class="text-sm text-base-content/70">
-    The maturity result is intended to seed coaching conversations and
-    retrospective items. It is a self-report; cross-team aggregation should
-    be done before drawing organisation-wide conclusions.
+    The maturity result is intended to seed coaching conversations and retrospective items. It is a
+    self-report; cross-team aggregation should be done before drawing organisation-wide conclusions.
   </p>
 </section>

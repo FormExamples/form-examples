@@ -1,50 +1,74 @@
 <script lang="ts">
-	import { assessment } from '#lib/stores/assessment.svelte.js';
-	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import Field from '#lib/components/ui/Field.svelte';
-	import { DateInput, TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { assessment } from '#lib/stores/assessment.svelte.js';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import Field from '#lib/components/ui/Field.svelte';
+  import { DateInput, TextAreaInput, TextInput } from '@lilydesignsystem/svelte-headless';
 
-	const s = assessment.data.sx;
+  const s = assessment.data.sx;
 </script>
 
 <Fieldset legend="Symptoms">
-	<p class="hint">The observable signals — what the issue looks like from the outside.</p>
+  <p class="hint">The observable signals — what the issue looks like from the outside.</p>
 
-	<Field label="External signals" inputId="sxExternalSignals" description="Visible symptoms users or monitoring can observe.">
-		<TextAreaInput id="sxExternalSignals" label="External signals" rows={3} bind:value={s.sxExternalSignals} />
-	</Field>
+  <Field
+    label="External signals"
+    inputId="sxExternalSignals"
+    description="Visible symptoms users or monitoring can observe."
+  >
+    <TextAreaInput
+      id="sxExternalSignals"
+      label="External signals"
+      rows={3}
+      bind:value={s.sxExternalSignals}
+    />
+  </Field>
 
-	<Field label="Alert IDs" inputId="sxAlertIds">
-		<TextInput id="sxAlertIds" label="Alert IDs" placeholder="e.g. PD-1234, GRAFANA-77" bind:value={s.sxAlertIds} />
-	</Field>
+  <Field label="Alert IDs" inputId="sxAlertIds">
+    <TextInput
+      id="sxAlertIds"
+      label="Alert IDs"
+      placeholder="e.g. PD-1234, GRAFANA-77"
+      bind:value={s.sxAlertIds}
+    />
+  </Field>
 
-	<Field label="Error messages" inputId="sxErrorMessages">
-		<TextAreaInput id="sxErrorMessages" label="Error messages" rows={3} bind:value={s.sxErrorMessages} />
-	</Field>
+  <Field label="Error messages" inputId="sxErrorMessages">
+    <TextAreaInput
+      id="sxErrorMessages"
+      label="Error messages"
+      rows={3}
+      bind:value={s.sxErrorMessages}
+    />
+  </Field>
 
-	<div class="field-grid">
-		<Field label="Screenshots URL" inputId="sxScreenshotsUrl">
-			<TextInput id="sxScreenshotsUrl" label="Screenshots URL" type="url" bind:value={s.sxScreenshotsUrl} />
-		</Field>
-		<Field label="Logs URL" inputId="sxLogsUrl">
-			<TextInput id="sxLogsUrl" label="Logs URL" type="url" bind:value={s.sxLogsUrl} />
-		</Field>
-	</div>
+  <div class="field-grid">
+    <Field label="Screenshots URL" inputId="sxScreenshotsUrl">
+      <TextInput
+        id="sxScreenshotsUrl"
+        label="Screenshots URL"
+        type="url"
+        bind:value={s.sxScreenshotsUrl}
+      />
+    </Field>
+    <Field label="Logs URL" inputId="sxLogsUrl">
+      <TextInput id="sxLogsUrl" label="Logs URL" type="url" bind:value={s.sxLogsUrl} />
+    </Field>
+  </div>
 
-	<Field label="First observed at" inputId="sxFirstObservedAt">
-		<DateInput id="sxFirstObservedAt" label="First observed at" bind:value={s.sxFirstObservedAt} />
-	</Field>
+  <Field label="First observed at" inputId="sxFirstObservedAt">
+    <DateInput id="sxFirstObservedAt" label="First observed at" bind:value={s.sxFirstObservedAt} />
+  </Field>
 </Fieldset>
 
 <style>
-	.field-grid {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 1rem;
-	}
-	@media (max-width: 640px) {
-		.field-grid {
-			grid-template-columns: 1fr;
-		}
-	}
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  @media (max-width: 640px) {
+    .field-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>

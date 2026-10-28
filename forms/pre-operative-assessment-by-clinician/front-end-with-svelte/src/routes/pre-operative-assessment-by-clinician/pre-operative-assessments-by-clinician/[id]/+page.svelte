@@ -6,7 +6,7 @@
 
   // Lily Svelte headless contract — local shape-equivalent components.
   import Form from '#lib/components/ui/Form.svelte';
-  import { Button, ErrorSummary, Progress } from "@lilydesignsystem/svelte-headless";
+  import { Button, ErrorSummary, Progress } from '@lilydesignsystem/svelte-headless';
   import StepList from '#lib/components/ui/StepList.svelte';
   import StepListItem from '#lib/components/ui/StepListItem.svelte';
 
@@ -29,16 +29,29 @@
   import Step16 from '#lib/components/steps/Step16Summary.svelte';
 
   const stepComponents = [
-    Step01, Step02, Step03, Step04, Step05, Step06, Step07, Step08,
-    Step09, Step10, Step11, Step12, Step13, Step14, Step15, Step16,
+    Step01,
+    Step02,
+    Step03,
+    Step04,
+    Step05,
+    Step06,
+    Step07,
+    Step08,
+    Step09,
+    Step10,
+    Step11,
+    Step12,
+    Step13,
+    Step14,
+    Step15,
+    Step16
   ];
 
   const id = $derived(page.params.id ?? 'new');
   const isNew = $derived(id === 'new');
 
   const title = 'Pre-operative Assessment by Clinician';
-  const subtitle =
-    'ASA Physical Status, Mallampati, RCRI, STOP-BANG, and Clinical Frailty Scale.';
+  const subtitle = 'ASA Physical Status, Mallampati, RCRI, STOP-BANG, and Clinical Frailty Scale.';
 
   // Hydrate the wizard whenever the route id changes: a saved draft for that id
   // wins, otherwise seed from the matching sample assessment (existing id) or a
@@ -66,7 +79,9 @@
     }
     store.errorSummaryHidden = true;
     store.submitted = true;
-    goto(`/pre-operative-assessment-by-clinician/pre-operative-assessments-by-clinician/${id}/report`);
+    goto(
+      `/pre-operative-assessment-by-clinician/pre-operative-assessments-by-clinician/${id}/report`
+    );
   }
 
   function onReset() {
@@ -112,11 +127,10 @@
 <main class="mx-16">
   <div class="intro">
     <p>
-      Clinician data-entry wizard for the pre-operative assessment.
-      Document objective findings across 16 body-system sections; the
-      engine computes the ASA Physical Status grade, Mallampati class,
-      RCRI score, STOP-BANG score, and Clinical Frailty Scale, and emits
-      a composite perioperative risk plus a list of safety flags.
+      Clinician data-entry wizard for the pre-operative assessment. Document objective findings
+      across 16 body-system sections; the engine computes the ASA Physical Status grade, Mallampati
+      class, RCRI score, STOP-BANG score, and Clinical Frailty Scale, and emits a composite
+      perioperative risk plus a list of safety flags.
     </p>
   </div>
 
@@ -156,11 +170,9 @@
 
 <footer class="page-footer">
   <p>
-    ASA Physical Status Classification, Mallampati airway score, Revised
-    Cardiac Risk Index (Lee 1999), STOP-BANG (Chung 2008), and Clinical
-    Frailty Scale (Rockwood 2005) are validated clinical instruments.
-    This screening tool is for clinical decision support; final ASA
-    grading and anaesthesia planning remain the responsibility of the
-    signing clinician.
+    ASA Physical Status Classification, Mallampati airway score, Revised Cardiac Risk Index (Lee
+    1999), STOP-BANG (Chung 2008), and Clinical Frailty Scale (Rockwood 2005) are validated clinical
+    instruments. This screening tool is for clinical decision support; final ASA grading and
+    anaesthesia planning remain the responsibility of the signing clinician.
   </p>
 </footer>

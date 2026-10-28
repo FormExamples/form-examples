@@ -10,4 +10,6 @@
   }: { label: string; children: Snippet; [key: string]: unknown } = $props();
 </script>
 
-<section class={`panel ${className}`} aria-label={label} {...restProps}>{@render children?.()}</section>
+<section class={`panel ${className}`} aria-label={label} {...restProps}>
+  {@render children?.()}
+</section>

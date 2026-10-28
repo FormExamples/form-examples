@@ -10,8 +10,7 @@ export function detectAdditionalFlags(data: AssessmentData): AdditionalFlag[] {
   // ─── Emergency with incomplete info ───────────────────
   if (
     data.requestType.isEmergency === 'yes' &&
-    (data.clinicianInformation.phone.trim() === '' ||
-      data.patientInformation.phone.trim() === '')
+    (data.clinicianInformation.phone.trim() === '' || data.patientInformation.phone.trim() === '')
   ) {
     flags.push({
       id: 'FLAG-EMERG-INCOMPLETE',
@@ -86,10 +85,7 @@ export function detectAdditionalFlags(data: AssessmentData): AdditionalFlag[] {
   }
 
   // ─── Refill without date ──────────────────────────────
-  if (
-    data.requestType.isNewPrescription === 'no' &&
-    data.prescriptionDetails.requestDate === ''
-  ) {
+  if (data.requestType.isNewPrescription === 'no' && data.prescriptionDetails.requestDate === '') {
     flags.push({
       id: 'FLAG-REFILL-001',
       category: 'Completeness',

@@ -3,7 +3,7 @@
   import type { SurgicalTeamMember } from '#lib/engine/types.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { Button, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { Button, TextInput } from '@lilydesignsystem/svelte-headless';
   import Select from '#lib/components/ui/Select.svelte';
 
   function add() {
@@ -11,7 +11,7 @@
       role: '',
       name: '',
       registrationBody: '',
-      registrationNumber: '',
+      registrationNumber: ''
     };
     store.data.team = [...store.data.team, m];
   }
@@ -23,8 +23,8 @@
 
 <Fieldset legend="Step 3 — Surgical team">
   <p class="hint">
-    Record the lead surgeon, assistants, anaesthetist, ODP, scrub nurse,
-    circulating nurse, and any students present.
+    Record the lead surgeon, assistants, anaesthetist, ODP, scrub nurse, circulating nurse, and any
+    students present.
   </p>
 
   {#each store.data.team as member, i (i)}

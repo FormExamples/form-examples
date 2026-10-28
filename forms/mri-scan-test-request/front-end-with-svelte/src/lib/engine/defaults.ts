@@ -9,63 +9,63 @@ import type { MriRequest } from './types';
  * older saved state is rehydrated from localStorage.
  */
 export function createDefault(): MriRequest {
-	return {
-		clinician: {
-			clinicianName: '',
-			clinicianRole: '',
-			registrationBody: '',
-			registrationNumber: '',
-			requesterContact: '',
-			supervisingConsultant: '',
-			siteName: '',
-			referralDate: ''
-		},
-		patient: {
-			firstName: '',
-			lastName: '',
-			dateOfBirth: '',
-			nhsNumber: '',
-			weightKg: null,
-			interpreterRequired: false
-		},
-		request: {
-			bodyRegion: '',
-			primaryIndication: '',
-			clinicalQuestion: '',
-			relevantHistory: ''
-		},
-		contrast: {
-			contrastRequired: '',
-			egfr: null,
-			previousGadoliniumReaction: '',
-			pregnancyStatus: ''
-		},
-		// MRI safety screen — full ferromagnetic / electronic implant checklist.
-		safety: {
-			pacemakerOrIcd: false,
-			cochlearImplant: false,
-			aneurysmClip: false,
-			metallicForeignBodyEye: false,
-			shrapnelOrMetalFragments: false,
-			programmableShunt: false,
-			neurostimulator: false,
-			metalImplantOrProsthesis: false,
-			insulinPump: false,
-			claustrophobia: false,
-			mriSafetyStatus: ''
-		},
-		priorImaging: {
-			relevantPreviousImaging: ''
-		},
-		logistics: {
-			weightVersusBoreLimit: '',
-			setting: '',
-			siteName: ''
-		},
-		triage: {
-			urgency: '',
-			requestedByDate: '',
-			notes: ''
-		}
-	};
+  return {
+    clinician: {
+      clinicianName: '',
+      clinicianRole: '',
+      registrationBody: '',
+      registrationNumber: '',
+      requesterContact: '',
+      supervisingConsultant: '',
+      siteName: '',
+      referralDate: ''
+    },
+    patient: {
+      firstName: '',
+      lastName: '',
+      dateOfBirth: '',
+      nhsNumber: '',
+      weightKg: null,
+      interpreterRequired: false
+    },
+    request: {
+      bodyRegion: '',
+      primaryIndication: '',
+      clinicalQuestion: '',
+      relevantHistory: ''
+    },
+    contrast: {
+      contrastRequired: '',
+      egfr: null,
+      previousGadoliniumReaction: '',
+      pregnancyStatus: ''
+    },
+    // MRI safety screen — full ferromagnetic / electronic implant checklist.
+    safety: {
+      pacemakerOrIcd: false,
+      cochlearImplant: false,
+      aneurysmClip: false,
+      metallicForeignBodyEye: false,
+      shrapnelOrMetalFragments: false,
+      programmableShunt: false,
+      neurostimulator: false,
+      metalImplantOrProsthesis: false,
+      insulinPump: false,
+      claustrophobia: false,
+      mriSafetyStatus: ''
+    },
+    priorImaging: {
+      relevantPreviousImaging: ''
+    },
+    logistics: {
+      weightVersusBoreLimit: '',
+      setting: '',
+      siteName: ''
+    },
+    triage: {
+      urgency: '',
+      requestedByDate: '',
+      notes: ''
+    }
+  };
 }

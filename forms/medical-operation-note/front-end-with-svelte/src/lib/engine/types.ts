@@ -74,7 +74,8 @@ export interface DiagnosesAndProcedures {
 }
 
 export interface Anaesthesia {
-  type: 'ga' | 'regional' | 'neuraxial' | 'sedation' | 'mac' | 'local' | 'combined-ga-regional' | '';
+  type:
+    'ga' | 'regional' | 'neuraxial' | 'sedation' | 'mac' | 'local' | 'combined-ga-regional' | '';
   airway: 'face-mask' | 'supraglottic' | 'ett' | 'awake-fibreoptic' | 'surgical-airway' | '';
   inductionAgent: string;
   maintenanceAgent: string;
@@ -164,7 +165,8 @@ export interface SafetyCountsEbl {
 }
 
 export interface PostOperativePlan {
-  recoveryDestination: 'pacu' | 'ward' | 'enhanced-care' | 'hdu' | 'icu' | 'day-case-discharge' | '';
+  recoveryDestination:
+    'pacu' | 'ward' | 'enhanced-care' | 'hdu' | 'icu' | 'day-case-discharge' | '';
   /** True if the actual disposition is more intensive than the planned one (driver for unplanned-icu flag) */
   unplannedEscalation: YesNo;
   monitoringFrequency: string;
@@ -212,12 +214,7 @@ export interface OperationNote {
 export interface FiredRule {
   ruleId: string;
   instrument:
-    | 'composite'
-    | 'clavien-dindo'
-    | 'blood-loss'
-    | 'counts'
-    | 'never-event'
-    | 'anaesthetic-event';
+    'composite' | 'clavien-dindo' | 'blood-loss' | 'counts' | 'never-event' | 'anaesthetic-event';
   grade: string;
   category: string;
   description: string;

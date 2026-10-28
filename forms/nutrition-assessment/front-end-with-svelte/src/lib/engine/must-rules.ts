@@ -14,54 +14,54 @@ import type { MUSTRule } from './types';
  * An evaluate() result of -1 indicates the step was not answered.
  */
 export const mustRules: MUSTRule[] = [
-	{
-		id: 'MUST-001',
-		category: 'BMI Score',
-		description: 'Body Mass Index (BMI) category.',
-		evaluate: (d) => {
-			switch (d.nutritionalScreening.bmiCategory) {
-				case '>=20':
-					return 0;
-				case '18.5-20':
-					return 1;
-				case '<18.5':
-					return 2;
-				default:
-					return -1;
-			}
-		}
-	},
-	{
-		id: 'MUST-002',
-		category: 'Weight Loss Score',
-		description: 'Unplanned weight loss in the past 3-6 months.',
-		evaluate: (d) => {
-			switch (d.nutritionalScreening.weightLossCategory) {
-				case '<5':
-					return 0;
-				case '5-10':
-					return 1;
-				case '>10':
-					return 2;
-				default:
-					return -1;
-			}
-		}
-	},
-	{
-		id: 'MUST-003',
-		category: 'Acute Disease Effect Score',
-		description:
-			'Acutely ill and there has been or is likely to be no nutritional intake for >5 days.',
-		evaluate: (d) => {
-			switch (d.nutritionalScreening.acuteDisease) {
-				case 'none':
-					return 0;
-				case 'acutely-ill-no-intake-5d':
-					return 2;
-				default:
-					return -1;
-			}
-		}
-	}
+  {
+    id: 'MUST-001',
+    category: 'BMI Score',
+    description: 'Body Mass Index (BMI) category.',
+    evaluate: (d) => {
+      switch (d.nutritionalScreening.bmiCategory) {
+        case '>=20':
+          return 0;
+        case '18.5-20':
+          return 1;
+        case '<18.5':
+          return 2;
+        default:
+          return -1;
+      }
+    }
+  },
+  {
+    id: 'MUST-002',
+    category: 'Weight Loss Score',
+    description: 'Unplanned weight loss in the past 3-6 months.',
+    evaluate: (d) => {
+      switch (d.nutritionalScreening.weightLossCategory) {
+        case '<5':
+          return 0;
+        case '5-10':
+          return 1;
+        case '>10':
+          return 2;
+        default:
+          return -1;
+      }
+    }
+  },
+  {
+    id: 'MUST-003',
+    category: 'Acute Disease Effect Score',
+    description:
+      'Acutely ill and there has been or is likely to be no nutritional intake for >5 days.',
+    evaluate: (d) => {
+      switch (d.nutritionalScreening.acuteDisease) {
+        case 'none':
+          return 0;
+        case 'acutely-ill-no-intake-5d':
+          return 2;
+        default:
+          return -1;
+      }
+    }
+  }
 ];

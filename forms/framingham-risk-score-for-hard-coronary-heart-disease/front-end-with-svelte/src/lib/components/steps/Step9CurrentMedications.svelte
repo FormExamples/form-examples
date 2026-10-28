@@ -2,7 +2,7 @@
   import { assessment } from '#lib/stores/assessment.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { RadioGroup, TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { RadioGroup, TextAreaInput, TextInput } from '@lilydesignsystem/svelte-headless';
 
   const med = assessment.data.currentMedications;
 
@@ -14,7 +14,9 @@
 </script>
 
 <Fieldset legend="Step 9 \u2014 Current medications">
-  <p class="hint">Current medication use helps identify treatment gaps and informs clinical recommendations.</p>
+  <p class="hint">
+    Current medication use helps identify treatment gaps and informs clinical recommendations.
+  </p>
 
   {#each yn as item (item.key)}
     <Field label={item.label}>

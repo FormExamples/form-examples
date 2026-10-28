@@ -36,6 +36,6 @@ export function createEmptyDocumentation(): Arc42Documentation {
     signedBy: '',
     signedAt: '',
     finalMaturityOverride: '',
-    finalMaturityOverrideReason: '',
+    finalMaturityOverrideReason: ''
   };
 }

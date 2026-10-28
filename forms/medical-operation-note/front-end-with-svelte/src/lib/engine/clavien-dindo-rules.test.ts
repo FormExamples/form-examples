@@ -1,8 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import {
-  applyClavienDindoRules,
-  clavienDindoToRisk,
-} from './clavien-dindo-rules.js';
+import { applyClavienDindoRules, clavienDindoToRisk } from './clavien-dindo-rules.js';
 import { createEmptyOperationNote } from './factory.js';
 
 describe('clavienDindoToRisk', () => {
@@ -66,7 +63,7 @@ describe('applyClavienDindoRules', () => {
       'IIIb',
       'IVa',
       'IVb',
-      'V',
+      'V'
     ];
     const ids = grades.map((g) => {
       const data = createEmptyOperationNote();

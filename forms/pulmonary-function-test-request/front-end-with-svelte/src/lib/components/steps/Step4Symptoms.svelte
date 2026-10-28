@@ -1,20 +1,22 @@
 <script lang="ts">
-	import Field from '#lib/components/ui/Field.svelte';
-	import Fieldset from '#lib/components/ui/Fieldset.svelte';
-	import { CheckboxGroup, CheckboxInput } from "@lilydesignsystem/svelte-headless";
-	import { request } from '#lib/stores/request.svelte.js';
+  import Field from '#lib/components/ui/Field.svelte';
+  import Fieldset from '#lib/components/ui/Fieldset.svelte';
+  import { CheckboxGroup, CheckboxInput } from '@lilydesignsystem/svelte-headless';
+  import { request } from '#lib/stores/request.svelte.js';
 
-	const d = request.data.symptoms;
+  const d = request.data.symptoms;
 </script>
 
 <Fieldset legend="4. Symptoms">
-	<p class="hint">Respiratory symptoms relevant to the requested test.</p>
+  <p class="hint">Respiratory symptoms relevant to the requested test.</p>
 
-	<Field label="Respiratory symptoms" inputId="symptoms">
-		<CheckboxGroup label="Respiratory symptoms">
-			<label><CheckboxInput label="Breathlessness" bind:checked={d.breathlessness} /> Breathlessness</label>
-			<label><CheckboxInput label="Cough" bind:checked={d.cough} /> Cough</label>
-			<label><CheckboxInput label="Wheeze" bind:checked={d.wheeze} /> Wheeze</label>
-		</CheckboxGroup>
-	</Field>
+  <Field label="Respiratory symptoms" inputId="symptoms">
+    <CheckboxGroup label="Respiratory symptoms">
+      <label
+        ><CheckboxInput label="Breathlessness" bind:checked={d.breathlessness} /> Breathlessness</label
+      >
+      <label><CheckboxInput label="Cough" bind:checked={d.cough} /> Cough</label>
+      <label><CheckboxInput label="Wheeze" bind:checked={d.wheeze} /> Wheeze</label>
+    </CheckboxGroup>
+  </Field>
 </Fieldset>

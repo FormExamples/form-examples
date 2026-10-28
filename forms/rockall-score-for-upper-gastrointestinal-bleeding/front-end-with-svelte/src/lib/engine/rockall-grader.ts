@@ -1,12 +1,12 @@
 import type { AssessmentData, FiredRule, GradingResult } from './types';
 import {
-	agePoints,
-	comorbidityPoints,
-	diagnosisPoints,
-	riskBand,
-	rockallRules,
-	shockPoints,
-	stigmataPoints
+  agePoints,
+  comorbidityPoints,
+  diagnosisPoints,
+  riskBand,
+  rockallRules,
+  shockPoints,
+  stigmataPoints
 } from './rockall-rules';
 import { detectFlaggedIssues } from './flagged-issues';
 
@@ -14,23 +14,23 @@ import { detectFlaggedIssues } from './flagged-issues';
  * Evaluate the declarative rule table and collect the rows that fired.
  */
 export function evaluateRules(data: AssessmentData): FiredRule[] {
-	const fired: FiredRule[] = [];
-	for (const rule of rockallRules) {
-		try {
-			if (rule.evaluate(data)) {
-				fired.push({
-					id: rule.id,
-					parameter: rule.parameter,
-					points: rule.points,
-					category: rule.category,
-					description: rule.description
-				});
-			}
-		} catch (e) {
-			console.warn(`Rockall rule ${rule.id} evaluation failed:`, e);
-		}
-	}
-	return fired;
+  const fired: FiredRule[] = [];
+  for (const rule of rockallRules) {
+    try {
+      if (rule.evaluate(data)) {
+        fired.push({
+          id: rule.id,
+          parameter: rule.parameter,
+          points: rule.points,
+          category: rule.category,
+          description: rule.description
+        });
+      }
+    } catch (e) {
+      console.warn(`Rockall rule ${rule.id} evaluation failed:`, e);
+    }
+  }
+  return fired;
 }
 
 /**
@@ -55,49 +55,49 @@ export function evaluateRules(data: AssessmentData): FiredRule[] {
  * `flagged-issues.ts` raises a data-completeness flag separately.
  */
 export function calculateRockallGrade(data: AssessmentData): GradingResult {
-	const age = agePoints(data);
-	const shock = shockPoints(data);
-	const comorbidity = comorbidityPoints(data);
-	const clinicalRockallScore = age + shock + comorbidity;
+  const age = agePoints(data);
+  const shock = shockPoints(data);
+  const comorbidity = comorbidityPoints(data);
+  const clinicalRockallScore = age + shock + comorbidity;
 
-	const endoscopyDone = data.endoscopy.endoscopyPerformed === 'yes';
-	const diagnosis = diagnosisPoints(data);
-	const stigmata = stigmataPoints(data);
-	const fullRockallScore = endoscopyDone ? clinicalRockallScore + diagnosis + stigmata : null;
+  const endoscopyDone = data.endoscopy.endoscopyPerformed === 'yes';
+  const diagnosis = diagnosisPoints(data);
+  const stigmata = stigmataPoints(data);
+  const fullRockallScore = endoscopyDone ? clinicalRockallScore + diagnosis + stigmata : null;
 
-	const band = riskBand(clinicalRockallScore, fullRockallScore);
-	const score = fullRockallScore !== null ? fullRockallScore : clinicalRockallScore;
+  const band = riskBand(clinicalRockallScore, fullRockallScore);
+  const score = fullRockallScore !== null ? fullRockallScore : clinicalRockallScore;
 
-	const firedRules = evaluateRules(data);
+  const firedRules = evaluateRules(data);
 
-	// Record the derived risk-band decision as a `band` audit row, mirroring the
-	// grade_rule table's `band` parameter.
-	firedRules.push({
-		id: `R-BAND-${band.toUpperCase()}-01`,
-		parameter: 'band',
-		points: null,
-		category: 'risk-band',
-		description: endoscopyDone
-			? `Full Rockall score ${fullRockallScore} of 11 → ${band} risk`
-			: `Clinical Rockall score ${clinicalRockallScore} of 7 (pre-endoscopy) → ${band}`
-	});
+  // Record the derived risk-band decision as a `band` audit row, mirroring the
+  // grade_rule table's `band` parameter.
+  firedRules.push({
+    id: `R-BAND-${band.toUpperCase()}-01`,
+    parameter: 'band',
+    points: null,
+    category: 'risk-band',
+    description: endoscopyDone
+      ? `Full Rockall score ${fullRockallScore} of 11 → ${band} risk`
+      : `Clinical Rockall score ${clinicalRockallScore} of 7 (pre-endoscopy) → ${band}`
+  });
 
-	const result: GradingResult = {
-		agePoints: age,
-		shockPoints: shock,
-		comorbidityPoints: comorbidity,
-		clinicalRockallScore,
-		diagnosisPoints: diagnosis,
-		stigmataPoints: stigmata,
-		fullRockallScore,
-		riskBand: band,
-		score,
-		endoscopyDone,
-		firedRules,
-		flaggedIssues: [],
-		timestamp: new Date().toISOString()
-	};
+  const result: GradingResult = {
+    agePoints: age,
+    shockPoints: shock,
+    comorbidityPoints: comorbidity,
+    clinicalRockallScore,
+    diagnosisPoints: diagnosis,
+    stigmataPoints: stigmata,
+    fullRockallScore,
+    riskBand: band,
+    score,
+    endoscopyDone,
+    firedRules,
+    flaggedIssues: [],
+    timestamp: new Date().toISOString()
+  };
 
-	result.flaggedIssues = detectFlaggedIssues(data, result);
-	return result;
+  result.flaggedIssues = detectFlaggedIssues(data, result);
+  return result;
 }

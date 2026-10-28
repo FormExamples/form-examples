@@ -2,7 +2,10 @@
   // RadioGroup — Lily Svelte headless contract.
   // Emits: <fieldset class="radio-group" role="radiogroup"> with labelled
   // <input class="radio-input"> children.
-  interface Option { value: string; label: string }
+  interface Option {
+    value: string;
+    label: string;
+  }
   let {
     class: className = '',
     label,

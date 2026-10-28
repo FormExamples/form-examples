@@ -1,10 +1,10 @@
 import type {
-	PulmonaryFunctionTestRequest,
-	GradingResult,
-	Recommendation,
-	AppropriatenessBand,
-	ContraindicationBand,
-	FiredRule
+  PulmonaryFunctionTestRequest,
+  GradingResult,
+  Recommendation,
+  AppropriatenessBand,
+  ContraindicationBand,
+  FiredRule
 } from './types';
 import { gradeAppropriateness } from './appropriateness-rules';
 import { gradeSafety } from './safety-rules';
@@ -31,44 +31,44 @@ import { detectFlags } from './flagged-issues';
  * No side effects, no network calls, no I/O.
  */
 export function calculateGrade(request: PulmonaryFunctionTestRequest): GradingResult {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	// Axis A — appropriateness.
-	const a = gradeAppropriateness(request);
-	firedRules.push(...a.firedRules);
+  // Axis A — appropriateness.
+  const a = gradeAppropriateness(request);
+  firedRules.push(...a.firedRules);
 
-	// Axis B — safety / contraindication.
-	const b = gradeSafety(request);
-	firedRules.push(...b.firedRules);
+  // Axis B — safety / contraindication.
+  const b = gradeSafety(request);
+  firedRules.push(...b.firedRules);
 
-	// Axis C — completeness.
-	const c = gradeCompleteness(request);
-	firedRules.push(...c.firedRules);
+  // Axis C — completeness.
+  const c = gradeCompleteness(request);
+  firedRules.push(...c.firedRules);
 
-	// Axis D — triage.
-	const d = gradeTriage(request);
-	firedRules.push(...d.firedRules);
+  // Axis D — triage.
+  const d = gradeTriage(request);
+  firedRules.push(...d.firedRules);
 
-	const recommendation = deriveRecommendation(
-		a.appropriatenessBand,
-		b.contraindicationBand,
-		c.completenessPercent
-	);
+  const recommendation = deriveRecommendation(
+    a.appropriatenessBand,
+    b.contraindicationBand,
+    c.completenessPercent
+  );
 
-	const flags = detectFlags(request);
+  const flags = detectFlags(request);
 
-	return {
-		appropriatenessScore: a.appropriatenessScore,
-		appropriatenessBand: a.appropriatenessBand,
-		contraindicationBand: b.contraindicationBand,
-		completenessPercent: c.completenessPercent,
-		triageTier: d.triageTier,
-		targetTimeframe: d.targetTimeframe,
-		recommendation,
-		firedRules,
-		flags,
-		gradedAt: new Date().toISOString()
-	};
+  return {
+    appropriatenessScore: a.appropriatenessScore,
+    appropriatenessBand: a.appropriatenessBand,
+    contraindicationBand: b.contraindicationBand,
+    completenessPercent: c.completenessPercent,
+    triageTier: d.triageTier,
+    targetTimeframe: d.targetTimeframe,
+    recommendation,
+    firedRules,
+    flags,
+    gradedAt: new Date().toISOString()
+  };
 }
 
 /**
@@ -77,12 +77,12 @@ export function calculateGrade(request: PulmonaryFunctionTestRequest): GradingRe
  * wins only when nothing escalates.
  */
 export function deriveRecommendation(
-	appropriatenessBand: AppropriatenessBand,
-	contraindicationBand: ContraindicationBand,
-	completenessPercent: number
+  appropriatenessBand: AppropriatenessBand,
+  contraindicationBand: ContraindicationBand,
+  completenessPercent: number
 ): Recommendation {
-	if (contraindicationBand === 'contraindicated') return 'redirect';
-	if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
-	if (completenessPercent < 50) return 'query-referrer';
-	return 'accept';
+  if (contraindicationBand === 'contraindicated') return 'redirect';
+  if (appropriatenessBand === 'usually-not-appropriate') return 'query-referrer';
+  if (completenessPercent < 50) return 'query-referrer';
+  return 'accept';
 }

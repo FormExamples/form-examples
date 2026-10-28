@@ -201,12 +201,7 @@ export interface MedifAssessment {
 export interface FiredRule {
   ruleId: string;
   category:
-    | 'equipment'
-    | 'recent-event'
-    | 'cardiorespiratory'
-    | 'pregnancy'
-    | 'communicable'
-    | 'other';
+    'equipment' | 'recent-event' | 'cardiorespiratory' | 'pregnancy' | 'communicable' | 'other';
   band: FitnessBand;
   description: string;
 }

@@ -2,7 +2,7 @@
   import { assessment } from '#lib/stores/assessment.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { DateInput, TextAreaInput, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { DateInput, TextAreaInput, TextInput } from '@lilydesignsystem/svelte-headless';
   import Select from '#lib/components/ui/Select.svelte';
 
   const rc = assessment.data.reviewCalculate;
@@ -29,13 +29,21 @@
   </Field>
 
   <Field label="Clinical notes" inputId="step-10-clinicalNotes">
-    <TextAreaInput id="step-10-clinicalNotes" label="Clinical notes" rows={4} bind:value={rc.clinicalNotes} />
+    <TextAreaInput
+      id="step-10-clinicalNotes"
+      label="Clinical notes"
+      rows={4}
+      bind:value={rc.clinicalNotes}
+    />
   </Field>
 
   <div class="summary-box">
     <p><strong>Assessment summary</strong></p>
     <p><strong>Patient:</strong> {data.patientInformation.fullName || 'Not provided'}</p>
-    <p><strong>Age / sex:</strong> {data.demographics.age ?? 'N/A'} / {data.demographics.sex || 'N/A'}</p>
+    <p>
+      <strong>Age / sex:</strong>
+      {data.demographics.age ?? 'N/A'} / {data.demographics.sex || 'N/A'}
+    </p>
     <p><strong>Systolic BP:</strong> {data.bloodPressure.systolicBp ?? 'N/A'}</p>
     <p><strong>Total cholesterol:</strong> {data.cholesterolLipids.totalCholesterol ?? 'N/A'}</p>
     <p><strong>Diabetes:</strong> {data.metabolicHealth.hasDiabetes || 'N/A'}</p>

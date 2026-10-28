@@ -22,11 +22,15 @@
   } = $props();
 
   const lilyClass = $derived(
-    type === 'email' ? 'email-input' :
-    type === 'date' ? 'date-input' :
-    type === 'time' ? 'time-input' :
-    type === 'tel' ? 'tel-input' :
-    'text-input',
+    type === 'email'
+      ? 'email-input'
+      : type === 'date'
+        ? 'date-input'
+        : type === 'time'
+          ? 'time-input'
+          : type === 'tel'
+            ? 'tel-input'
+            : 'text-input'
   );
 </script>
 

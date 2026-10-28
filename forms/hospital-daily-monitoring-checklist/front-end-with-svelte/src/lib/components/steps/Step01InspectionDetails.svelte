@@ -2,14 +2,13 @@
   import { store } from '#lib/stores/assessment.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { DateInput, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { DateInput, TextInput } from '@lilydesignsystem/svelte-headless';
 </script>
 
 <Fieldset legend="Step 1 — Inspection details">
   <p class="hint">
-    Record the hospital or site, the department or site visited (if narrower
-    than the whole hospital), the inspection date, and the inspecting
-    officer's name and designation.
+    Record the hospital or site, the department or site visited (if narrower than the whole
+    hospital), the inspection date, and the inspecting officer's name and designation.
   </p>
 
   <div class="field-grid">
@@ -59,6 +58,8 @@
     gap: 1rem;
   }
   @media (max-width: 640px) {
-    .field-grid { grid-template-columns: 1fr; }
+    .field-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

@@ -11,10 +11,10 @@ import { num, rule } from './utils';
  * all three are unanswered.
  */
 export function computeAuditCScore(data: HealthScreeningQuestionnaire): number | null {
-	const s = data.smokingAlcohol;
-	const parts = [num(s.auditCFrequency), num(s.auditCTypicalQuantity), num(s.auditCBingeFrequency)];
-	if (parts.every((p) => p === null)) return null;
-	return parts.reduce<number>((sum, p) => sum + (p ?? 0), 0);
+  const s = data.smokingAlcohol;
+  const parts = [num(s.auditCFrequency), num(s.auditCTypicalQuantity), num(s.auditCBingeFrequency)];
+  if (parts.every((p) => p === null)) return null;
+  return parts.reduce<number>((sum, p) => sum + (p ?? 0), 0);
 }
 
 /**
@@ -24,29 +24,29 @@ export function computeAuditCScore(data: HealthScreeningQuestionnaire): number |
  * so the band never under-calls risk.
  */
 export function computeAuditCBand(data: HealthScreeningQuestionnaire): AuditCBand {
-	const score = computeAuditCScore(data);
-	if (score === null) return '';
-	if (score >= 8) return 'higher-risk';
-	const sex = data.patient.sex;
-	const atRiskThreshold = sex === 'male' ? 5 : 4;
-	if (score >= atRiskThreshold) return 'increasing-risk';
-	return 'low';
+  const score = computeAuditCScore(data);
+  if (score === null) return '';
+  if (score >= 8) return 'higher-risk';
+  const sex = data.patient.sex;
+  const atRiskThreshold = sex === 'male' ? 5 : 4;
+  if (score >= atRiskThreshold) return 'increasing-risk';
+  return 'low';
 }
 
 /** Fired-rule audit trail for AUDIT-C. */
 export function evaluateAuditC(data: HealthScreeningQuestionnaire): FiredRule[] {
-	const score = computeAuditCScore(data);
-	const band = computeAuditCBand(data);
-	if (score === null || !band) return [];
-	return [
-		rule(
-			'R-AUDITC-SCORE',
-			'audit-c',
-			'AUDIT-C total',
-			score,
-			band,
-			'audit-c-band',
-			`AUDIT-C score ${score} of 12 is banded ${band}.`
-		)
-	];
+  const score = computeAuditCScore(data);
+  const band = computeAuditCBand(data);
+  if (score === null || !band) return [];
+  return [
+    rule(
+      'R-AUDITC-SCORE',
+      'audit-c',
+      'AUDIT-C total',
+      score,
+      band,
+      'audit-c-band',
+      `AUDIT-C score ${score} of 12 is banded ${band}.`
+    )
+  ];
 }

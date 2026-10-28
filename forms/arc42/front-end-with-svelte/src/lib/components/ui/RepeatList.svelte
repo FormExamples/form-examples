@@ -8,7 +8,7 @@
     addLabel = 'Add',
     max,
     create,
-    children,
+    children
   }: {
     items: T[];
     title: string;
@@ -42,12 +42,7 @@
   {#each items as item, i (i)}
     <div class="field">
       {@render children(item, i)}
-      <button
-        type="button"
-        class="button"
-        data-variant="remove"
-        onclick={() => remove(i)}
-      >
+      <button type="button" class="button" data-variant="remove" onclick={() => remove(i)}>
         Remove
       </button>
     </div>

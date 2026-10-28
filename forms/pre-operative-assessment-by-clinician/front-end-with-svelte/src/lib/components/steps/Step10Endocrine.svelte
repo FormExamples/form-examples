@@ -2,7 +2,7 @@
   import { store } from '#lib/stores/assessment.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { TextInput } from "@lilydesignsystem/svelte-headless";
+  import { TextInput } from '@lilydesignsystem/svelte-headless';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
   import Select from '#lib/components/ui/Select.svelte';
 </script>
@@ -30,7 +30,11 @@
       <NumberInput label="HbA1c (mmol/mol)" bind:value={store.data.endocrine.hba1cMmolMol} />
     </Field>
     <Field label="Fasting glucose (mmol/L)">
-      <NumberInput label="Fasting glucose (mmol/L)" step="0.1" bind:value={store.data.endocrine.fastingGlucoseMmolL} />
+      <NumberInput
+        label="Fasting glucose (mmol/L)"
+        step="0.1"
+        bind:value={store.data.endocrine.fastingGlucoseMmolL}
+      />
     </Field>
     <Field label="Control">
       <Select label="Control" bind:value={store.data.endocrine.diabetesControl}>
@@ -56,7 +60,11 @@
       </Select>
     </Field>
     <Field label="Steroid dose (mg prednisolone-eq.)">
-      <NumberInput label="Steroid dose (mg prednisolone-eq.)" step="0.1" bind:value={store.data.endocrine.steroidDoseMg} />
+      <NumberInput
+        label="Steroid dose (mg prednisolone-eq.)"
+        step="0.1"
+        bind:value={store.data.endocrine.steroidDoseMg}
+      />
     </Field>
     <Field label="Steroid cover plan" class="field-span-3">
       <TextInput label="Steroid cover plan" bind:value={store.data.endocrine.steroidCoverPlan} />

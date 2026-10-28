@@ -16,79 +16,77 @@ import type { WellsRule } from './types';
  * malignancy +1.
  */
 export const wellsRules: WellsRule[] = [
-	// ─── CRITERION 1: CLINICAL SIGNS OF DVT (+3) ──────────────────
-	{
-		id: 'R-DVT-SIGNS-01',
-		criterion: 'dvt-signs',
-		points: 3,
-		category: 'clinical-sign',
-		description:
-			'Clinical signs and symptoms of DVT (leg swelling and pain on palpation of the deep veins)',
-		evaluate: (d) => d.criteria.dvtSigns === 'yes'
-	},
+  // ─── CRITERION 1: CLINICAL SIGNS OF DVT (+3) ──────────────────
+  {
+    id: 'R-DVT-SIGNS-01',
+    criterion: 'dvt-signs',
+    points: 3,
+    category: 'clinical-sign',
+    description:
+      'Clinical signs and symptoms of DVT (leg swelling and pain on palpation of the deep veins)',
+    evaluate: (d) => d.criteria.dvtSigns === 'yes'
+  },
 
-	// ─── CRITERION 2: PE MOST LIKELY (+3) ─────────────────────────
-	{
-		id: 'R-PE-MOST-LIKELY-01',
-		criterion: 'pe-most-likely',
-		points: 3,
-		category: 'gestalt',
-		description: 'PE is the number-one diagnosis, or equally likely',
-		evaluate: (d) => d.criteria.peMostLikely === 'yes'
-	},
+  // ─── CRITERION 2: PE MOST LIKELY (+3) ─────────────────────────
+  {
+    id: 'R-PE-MOST-LIKELY-01',
+    criterion: 'pe-most-likely',
+    points: 3,
+    category: 'gestalt',
+    description: 'PE is the number-one diagnosis, or equally likely',
+    evaluate: (d) => d.criteria.peMostLikely === 'yes'
+  },
 
-	// ─── CRITERION 3: HEART RATE > 100 (+1.5) ─────────────────────
-	{
-		id: 'R-HEART-RATE-OVER-100-01',
-		criterion: 'heart-rate-over-100',
-		points: 1.5,
-		category: 'tachycardia',
-		description: 'Heart rate greater than 100 beats per minute',
-		evaluate: (d) =>
-			typeof d.observations.heartRate === 'number' &&
-			!Number.isNaN(d.observations.heartRate) &&
-			d.observations.heartRate > 100
-	},
+  // ─── CRITERION 3: HEART RATE > 100 (+1.5) ─────────────────────
+  {
+    id: 'R-HEART-RATE-OVER-100-01',
+    criterion: 'heart-rate-over-100',
+    points: 1.5,
+    category: 'tachycardia',
+    description: 'Heart rate greater than 100 beats per minute',
+    evaluate: (d) =>
+      typeof d.observations.heartRate === 'number' &&
+      !Number.isNaN(d.observations.heartRate) &&
+      d.observations.heartRate > 100
+  },
 
-	// ─── CRITERION 4: IMMOBILISATION OR SURGERY (+1.5) ────────────
-	{
-		id: 'R-IMMOBILISATION-SURGERY-01',
-		criterion: 'immobilisation-surgery',
-		points: 1.5,
-		category: 'immobilisation',
-		description:
-			'Immobilisation for at least 3 days, or surgery in the previous 4 weeks',
-		evaluate: (d) => d.criteria.immobilisationSurgery === 'yes'
-	},
+  // ─── CRITERION 4: IMMOBILISATION OR SURGERY (+1.5) ────────────
+  {
+    id: 'R-IMMOBILISATION-SURGERY-01',
+    criterion: 'immobilisation-surgery',
+    points: 1.5,
+    category: 'immobilisation',
+    description: 'Immobilisation for at least 3 days, or surgery in the previous 4 weeks',
+    evaluate: (d) => d.criteria.immobilisationSurgery === 'yes'
+  },
 
-	// ─── CRITERION 5: PREVIOUS DVT / PE (+1.5) ────────────────────
-	{
-		id: 'R-PREVIOUS-DVT-PE-01',
-		criterion: 'previous-dvt-pe',
-		points: 1.5,
-		category: 'previous-vte',
-		description: 'Previous, objectively diagnosed DVT or PE',
-		evaluate: (d) => d.criteria.previousDvtPe === 'yes'
-	},
+  // ─── CRITERION 5: PREVIOUS DVT / PE (+1.5) ────────────────────
+  {
+    id: 'R-PREVIOUS-DVT-PE-01',
+    criterion: 'previous-dvt-pe',
+    points: 1.5,
+    category: 'previous-vte',
+    description: 'Previous, objectively diagnosed DVT or PE',
+    evaluate: (d) => d.criteria.previousDvtPe === 'yes'
+  },
 
-	// ─── CRITERION 6: HAEMOPTYSIS (+1) ────────────────────────────
-	{
-		id: 'R-HAEMOPTYSIS-01',
-		criterion: 'haemoptysis',
-		points: 1,
-		category: 'haemoptysis',
-		description: 'Haemoptysis',
-		evaluate: (d) => d.criteria.haemoptysis === 'yes'
-	},
+  // ─── CRITERION 6: HAEMOPTYSIS (+1) ────────────────────────────
+  {
+    id: 'R-HAEMOPTYSIS-01',
+    criterion: 'haemoptysis',
+    points: 1,
+    category: 'haemoptysis',
+    description: 'Haemoptysis',
+    evaluate: (d) => d.criteria.haemoptysis === 'yes'
+  },
 
-	// ─── CRITERION 7: MALIGNANCY (+1) ─────────────────────────────
-	{
-		id: 'R-MALIGNANCY-01',
-		criterion: 'malignancy',
-		points: 1,
-		category: 'malignancy',
-		description:
-			'Malignancy on treatment, treated within the last 6 months, or palliative',
-		evaluate: (d) => d.criteria.malignancy === 'yes'
-	}
+  // ─── CRITERION 7: MALIGNANCY (+1) ─────────────────────────────
+  {
+    id: 'R-MALIGNANCY-01',
+    criterion: 'malignancy',
+    points: 1,
+    category: 'malignancy',
+    description: 'Malignancy on treatment, treated within the last 6 months, or palliative',
+    evaluate: (d) => d.criteria.malignancy === 'yes'
+  }
 ];

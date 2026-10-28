@@ -8,33 +8,31 @@ import { detectAdditionalFlags } from './flagged-issues';
  * defaulting to MRC 1 for patients with no fired rules.
  */
 export function calculateMRC(data: AssessmentData): {
-	mrcGrade: MRCGrade;
-	firedRules: FiredRule[];
+  mrcGrade: MRCGrade;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
+  const firedRules: FiredRule[] = [];
 
-	for (const rule of mrcRules) {
-		try {
-			if (rule.evaluate(data)) {
-				firedRules.push({
-					id: rule.id,
-					system: rule.system,
-					description: rule.description,
-					grade: rule.grade
-				});
-			}
-		} catch (e) {
-			// Rule evaluation failed - log for debugging but continue grading
-			console.warn(`MRC rule ${rule.id} evaluation failed:`, e);
-		}
-	}
+  for (const rule of mrcRules) {
+    try {
+      if (rule.evaluate(data)) {
+        firedRules.push({
+          id: rule.id,
+          system: rule.system,
+          description: rule.description,
+          grade: rule.grade
+        });
+      }
+    } catch (e) {
+      // Rule evaluation failed - log for debugging but continue grading
+      console.warn(`MRC rule ${rule.id} evaluation failed:`, e);
+    }
+  }
 
-	const mrcGrade: MRCGrade =
-		firedRules.length === 0
-			? 1
-			: (Math.max(...firedRules.map((r) => r.grade)) as MRCGrade);
+  const mrcGrade: MRCGrade =
+    firedRules.length === 0 ? 1 : (Math.max(...firedRules.map((r) => r.grade)) as MRCGrade);
 
-	return { mrcGrade, firedRules };
+  return { mrcGrade, firedRules };
 }
 
 /**
@@ -44,12 +42,12 @@ export function calculateMRC(data: AssessmentData): {
  * by both the wizard (on submit) and the dashboard (to derive rows).
  */
 export function calculateRespirologyGrade(data: AssessmentData): GradingResult {
-	const { mrcGrade, firedRules } = calculateMRC(data);
-	const additionalFlags = detectAdditionalFlags(data);
-	return {
-		mrcGrade,
-		firedRules,
-		additionalFlags,
-		timestamp: new Date().toISOString()
-	};
+  const { mrcGrade, firedRules } = calculateMRC(data);
+  const additionalFlags = detectAdditionalFlags(data);
+  return {
+    mrcGrade,
+    firedRules,
+    additionalFlags,
+    timestamp: new Date().toISOString()
+  };
 }

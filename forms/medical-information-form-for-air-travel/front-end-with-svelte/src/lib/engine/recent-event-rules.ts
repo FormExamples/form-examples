@@ -20,7 +20,7 @@ const RULES: RecentRule[] = [
     fires: (d) => {
       const n = daysBetween(d.cardiovascular.recentMiDate);
       return n !== null && n >= 0 && n < 7;
-    },
+    }
   },
   {
     id: 'R-RE-02',
@@ -29,7 +29,7 @@ const RULES: RecentRule[] = [
     fires: (d) => {
       const n = daysBetween(d.cardiovascular.recentMiDate);
       return n !== null && n >= 7 && n <= 21;
-    },
+    }
   },
   {
     id: 'R-RE-03',
@@ -38,16 +38,17 @@ const RULES: RecentRule[] = [
     fires: (d) => {
       const n = daysBetween(d.respiratory.recentPneumothoraxDate);
       return n !== null && n >= 0 && n < 14;
-    },
+    }
   },
   {
     id: 'R-RE-04',
     band: 'unfit-to-fly',
-    description: 'Recent intra-ocular, intra-cranial, or intra-abdominal gas — expansion at altitude',
+    description:
+      'Recent intra-ocular, intra-cranial, or intra-abdominal gas — expansion at altitude',
     fires: (d) =>
       d.recentEvents.cabinGasRisk === 'intra-ocular-gas' ||
       d.recentEvents.cabinGasRisk === 'intra-cranial-gas' ||
-      d.recentEvents.cabinGasRisk === 'intra-abdominal-gas',
+      d.recentEvents.cabinGasRisk === 'intra-abdominal-gas'
   },
   {
     id: 'R-RE-05',
@@ -56,7 +57,7 @@ const RULES: RecentRule[] = [
     fires: (d) => {
       const n = daysBetween(d.recentEvents.lastSurgeryDate);
       return n !== null && n >= 0 && n <= 10;
-    },
+    }
   },
   {
     id: 'R-RE-06',
@@ -65,7 +66,7 @@ const RULES: RecentRule[] = [
     fires: (d) => {
       const n = daysBetween(d.recentEvents.lastSurgeryDate);
       return n !== null && n >= 11 && n <= 14;
-    },
+    }
   },
   {
     id: 'R-RE-07',
@@ -74,7 +75,7 @@ const RULES: RecentRule[] = [
     fires: (d) => {
       const n = daysBetween(d.respiratory.recentPulmonaryEmbolismDate);
       return n !== null && n >= 0 && n < 42;
-    },
+    }
   },
   {
     id: 'R-RE-08',
@@ -83,7 +84,7 @@ const RULES: RecentRule[] = [
     fires: (d) => {
       const n = daysBetween(d.recentEvents.recentDvtDate);
       return n !== null && n >= 0 && n < 28;
-    },
+    }
   },
   {
     id: 'R-RE-09',
@@ -92,20 +93,21 @@ const RULES: RecentRule[] = [
     fires: (d) => {
       const n = daysBetween(d.recentEvents.recentStrokeDate);
       return n !== null && n >= 0 && n < 14;
-    },
+    }
   },
   {
     id: 'R-RE-10',
     band: 'unfit-to-fly',
     description: 'Scuba diving within 24 hours of departure — decompression risk',
-    fires: (d) => d.recentEvents.scubaDivingWithin24h === 'yes',
+    fires: (d) => d.recentEvents.scubaDivingWithin24h === 'yes'
   },
   {
     id: 'R-RE-11',
     band: 'fit-with-conditions',
-    description: 'Recent fracture with plaster cast in situ — split cast or seat allocation required',
-    fires: (d) => d.recentEvents.recentFractureCast === 'yes',
-  },
+    description:
+      'Recent fracture with plaster cast in situ — split cast or seat allocation required',
+    fires: (d) => d.recentEvents.recentFractureCast === 'yes'
+  }
 ];
 
 export function applyRecentEventRules(data: MedifAssessment): FiredRule[] {
@@ -116,7 +118,7 @@ export function applyRecentEventRules(data: MedifAssessment): FiredRule[] {
         ruleId: r.id,
         category: 'recent-event',
         band: r.band,
-        description: r.description,
+        description: r.description
       });
     }
   }

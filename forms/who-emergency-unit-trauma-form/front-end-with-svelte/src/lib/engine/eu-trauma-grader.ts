@@ -14,27 +14,27 @@ import { detectFlaggedIssues } from './flagged-issues';
  * grade.
  */
 export function gradeEuTrauma(data: AssessmentData): EuTraumaResult {
-	const validation = validateEuTrauma(data);
-	const flags = detectFlaggedIssues(data);
+  const validation = validateEuTrauma(data);
+  const flags = detectFlaggedIssues(data);
 
-	const urgentCount = flags.filter((f) => f.priority === 'urgent').length;
-	const highCount = flags.filter((f) => f.priority === 'high').length;
-	const mediumCount = flags.filter((f) => f.priority === 'medium').length;
-	const lowCount = flags.filter((f) => f.priority === 'low').length;
+  const urgentCount = flags.filter((f) => f.priority === 'urgent').length;
+  const highCount = flags.filter((f) => f.priority === 'high').length;
+  const mediumCount = flags.filter((f) => f.priority === 'medium').length;
+  const lowCount = flags.filter((f) => f.priority === 'low').length;
 
-	const order: FlagPriority[] = ['urgent', 'high', 'medium', 'low'];
-	const topPriority = order.find((p) => flags.some((f) => f.priority === p)) ?? null;
+  const order: FlagPriority[] = ['urgent', 'high', 'medium', 'low'];
+  const topPriority = order.find((p) => flags.some((f) => f.priority === p)) ?? null;
 
-	return {
-		validation,
-		flags,
-		triage: data.triage.category,
-		complete: validation.complete,
-		urgentCount,
-		highCount,
-		mediumCount,
-		lowCount,
-		topPriority,
-		timestamp: new Date().toISOString()
-	};
+  return {
+    validation,
+    flags,
+    triage: data.triage.category,
+    complete: validation.complete,
+    urgentCount,
+    highCount,
+    mediumCount,
+    lowCount,
+    topPriority,
+    timestamp: new Date().toISOString()
+  };
 }

@@ -2,15 +2,15 @@
   import { store } from '#lib/stores/checklist.svelte.js';
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import Field from '#lib/components/ui/Field.svelte';
-  import { DateInput, EmailInput, TextInput } from "@lilydesignsystem/svelte-headless";
+  import { DateInput, EmailInput, TextInput } from '@lilydesignsystem/svelte-headless';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
   import Select from '#lib/components/ui/Select.svelte';
 </script>
 
 <Fieldset legend="Step 1 — Respondent identification">
   <p class="hint">
-    Tell us who is completing this checklist and which team or organisation you
-    are scoring. None of these fields affect the maturity calculation.
+    Tell us who is completing this checklist and which team or organisation you are scoring. None of
+    these fields affect the maturity calculation.
   </p>
 
   <div class="field-grid">
@@ -22,11 +22,7 @@
       />
     </Field>
     <Field label="Email" inputId="respondent-email">
-      <EmailInput
-        id="respondent-email"
-        label="Email"
-        bind:value={store.data.respondent.email}
-      />
+      <EmailInput id="respondent-email" label="Email" bind:value={store.data.respondent.email} />
     </Field>
     <Field label="Role" inputId="respondent-role">
       <Select id="respondent-role" label="Role" bind:value={store.data.respondent.role}>
@@ -95,6 +91,8 @@
     gap: 1rem;
   }
   @media (max-width: 640px) {
-    .field-grid { grid-template-columns: 1fr; }
+    .field-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

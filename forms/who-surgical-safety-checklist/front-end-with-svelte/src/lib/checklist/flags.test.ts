@@ -18,27 +18,21 @@ describe('computeSafetyFlags', () => {
   it('does not flag identity-not-confirmed once item 1 is yes', () => {
     const c = createEmptyChecklist();
     c.signInIdentitySiteProcedureConsent = 'yes';
-    expect(computeSafetyFlags(c).map((f) => f.flag)).not.toContain(
-      'identity-not-confirmed',
-    );
+    expect(computeSafetyFlags(c).map((f) => f.flag)).not.toContain('identity-not-confirmed');
   });
 
   it('flags site-not-marked when laterality is left and site marking is blank during Sign In', () => {
     const c = createEmptyChecklist();
     c.laterality = 'left';
     c.signInIdentitySiteProcedureConsent = 'yes';
-    expect(computeSafetyFlags(c).map((f) => f.flag)).toContain(
-      'site-not-marked',
-    );
+    expect(computeSafetyFlags(c).map((f) => f.flag)).toContain('site-not-marked');
   });
 
   it('does not flag site-not-marked when laterality is midline', () => {
     const c = createEmptyChecklist();
     c.laterality = 'midline';
     c.signInIdentitySiteProcedureConsent = 'yes';
-    expect(computeSafetyFlags(c).map((f) => f.flag)).not.toContain(
-      'site-not-marked',
-    );
+    expect(computeSafetyFlags(c).map((f) => f.flag)).not.toContain('site-not-marked');
   });
 
   it('does not flag site-not-marked when site_marked = not-applicable', () => {
@@ -46,43 +40,33 @@ describe('computeSafetyFlags', () => {
     c.laterality = 'left';
     c.signInIdentitySiteProcedureConsent = 'yes';
     c.signInSiteMarked = 'not-applicable';
-    expect(computeSafetyFlags(c).map((f) => f.flag)).not.toContain(
-      'site-not-marked',
-    );
+    expect(computeSafetyFlags(c).map((f) => f.flag)).not.toContain('site-not-marked');
   });
 
   it('flags anaesthesia-check-incomplete when Sign In started but item 3 not yes', () => {
     const c = createEmptyChecklist();
     c.signInIdentitySiteProcedureConsent = 'yes';
-    expect(computeSafetyFlags(c).map((f) => f.flag)).toContain(
-      'anaesthesia-check-incomplete',
-    );
+    expect(computeSafetyFlags(c).map((f) => f.flag)).toContain('anaesthesia-check-incomplete');
   });
 
   it('clears anaesthesia-check-incomplete when item 3 is yes', () => {
     const c = createEmptyChecklist();
     c.signInIdentitySiteProcedureConsent = 'yes';
     c.signInAnaesthesiaCheckComplete = 'yes';
-    expect(computeSafetyFlags(c).map((f) => f.flag)).not.toContain(
-      'anaesthesia-check-incomplete',
-    );
+    expect(computeSafetyFlags(c).map((f) => f.flag)).not.toContain('anaesthesia-check-incomplete');
   });
 
   it('flags pulse-oximeter-not-functioning when Sign In started but item 4 not yes', () => {
     const c = createEmptyChecklist();
     c.signInIdentitySiteProcedureConsent = 'yes';
-    expect(computeSafetyFlags(c).map((f) => f.flag)).toContain(
-      'pulse-oximeter-not-functioning',
-    );
+    expect(computeSafetyFlags(c).map((f) => f.flag)).toContain('pulse-oximeter-not-functioning');
   });
 
   it('flags known-allergy-flagged with detail when signInKnownAllergy = yes', () => {
     const c = createEmptyChecklist();
     c.signInKnownAllergy = 'yes';
     c.signInKnownAllergyDetail = 'Penicillin — anaphylaxis';
-    const flag = computeSafetyFlags(c).find(
-      (f) => f.flag === 'known-allergy-flagged',
-    );
+    const flag = computeSafetyFlags(c).find((f) => f.flag === 'known-allergy-flagged');
     expect(flag).toBeDefined();
     expect(flag?.priority).toBe('high');
     expect(flag?.message).toContain('Penicillin');
@@ -91,42 +75,32 @@ describe('computeSafetyFlags', () => {
   it('flags difficult-airway-risk when difficult-airway answer is yes-equipment-available', () => {
     const c = createEmptyChecklist();
     c.signInDifficultAirwayAspirationRisk = 'yes-equipment-available';
-    expect(computeSafetyFlags(c).map((f) => f.flag)).toContain(
-      'difficult-airway-risk',
-    );
+    expect(computeSafetyFlags(c).map((f) => f.flag)).toContain('difficult-airway-risk');
   });
 
   it('flags high-blood-loss-risk when blood-loss answer is yes-two-ivs-and-fluids-planned', () => {
     const c = createEmptyChecklist();
     c.signInBloodLossRisk = 'yes-two-ivs-and-fluids-planned';
-    expect(computeSafetyFlags(c).map((f) => f.flag)).toContain(
-      'high-blood-loss-risk',
-    );
+    expect(computeSafetyFlags(c).map((f) => f.flag)).toContain('high-blood-loss-risk');
   });
 
   it('flags antibiotic-prophylaxis-missed when Time Out started but item 3 not answered or NA', () => {
     const c = createEmptyChecklist();
     c.timeOutTeamIntroductionsConfirmed = 'yes';
-    expect(computeSafetyFlags(c).map((f) => f.flag)).toContain(
-      'antibiotic-prophylaxis-missed',
-    );
+    expect(computeSafetyFlags(c).map((f) => f.flag)).toContain('antibiotic-prophylaxis-missed');
   });
 
   it('does not flag antibiotic-prophylaxis-missed when set to not-applicable', () => {
     const c = createEmptyChecklist();
     c.timeOutTeamIntroductionsConfirmed = 'yes';
     c.timeOutAntibioticProphylaxisWithin60Min = 'not-applicable';
-    expect(computeSafetyFlags(c).map((f) => f.flag)).not.toContain(
-      'antibiotic-prophylaxis-missed',
-    );
+    expect(computeSafetyFlags(c).map((f) => f.flag)).not.toContain('antibiotic-prophylaxis-missed');
   });
 
   it('flags sterility-not-confirmed when Time Out started but item 8 not yes', () => {
     const c = createEmptyChecklist();
     c.timeOutTeamIntroductionsConfirmed = 'yes';
-    expect(computeSafetyFlags(c).map((f) => f.flag)).toContain(
-      'sterility-not-confirmed',
-    );
+    expect(computeSafetyFlags(c).map((f) => f.flag)).toContain('sterility-not-confirmed');
   });
 
   it('flags imaging-missing when Time Out started but item 10 not answered or NA', () => {
@@ -141,33 +115,25 @@ describe('computeSafetyFlags', () => {
     const c = createEmptyChecklist();
     c.timeOutTeamIntroductionsConfirmed = 'yes';
     c.timeOutEssentialImagingDisplayed = 'yes';
-    expect(computeSafetyFlags(c).map((f) => f.flag)).not.toContain(
-      'imaging-missing',
-    );
+    expect(computeSafetyFlags(c).map((f) => f.flag)).not.toContain('imaging-missing');
   });
 
   it('flags count-discrepancy when counts confirmed is no', () => {
     const c = createEmptyChecklist();
     c.signOutCountsConfirmed = 'no';
-    expect(computeSafetyFlags(c).map((f) => f.flag)).toContain(
-      'count-discrepancy',
-    );
+    expect(computeSafetyFlags(c).map((f) => f.flag)).toContain('count-discrepancy');
   });
 
   it('flags specimen-labelling-missed when specimens labelled is no', () => {
     const c = createEmptyChecklist();
     c.signOutSpecimensLabelled = 'no';
-    expect(computeSafetyFlags(c).map((f) => f.flag)).toContain(
-      'specimen-labelling-missed',
-    );
+    expect(computeSafetyFlags(c).map((f) => f.flag)).toContain('specimen-labelling-missed');
   });
 
   it('does not flag specimen-labelling-missed when specimens labelled is not-applicable', () => {
     const c = createEmptyChecklist();
     c.signOutSpecimensLabelled = 'not-applicable';
-    expect(computeSafetyFlags(c).map((f) => f.flag)).not.toContain(
-      'specimen-labelling-missed',
-    );
+    expect(computeSafetyFlags(c).map((f) => f.flag)).not.toContain('specimen-labelling-missed');
   });
 
   it('flags equipment-problem when free-text content is present', () => {
@@ -182,9 +148,7 @@ describe('computeSafetyFlags', () => {
   it('does not flag equipment-problem for whitespace-only content', () => {
     const c = createEmptyChecklist();
     c.signOutEquipmentProblems = '   ';
-    expect(computeSafetyFlags(c).map((f) => f.flag)).not.toContain(
-      'equipment-problem',
-    );
+    expect(computeSafetyFlags(c).map((f) => f.flag)).not.toContain('equipment-problem');
   });
 
   it('accumulates multiple flags simultaneously', () => {

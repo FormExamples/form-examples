@@ -9,15 +9,15 @@
 // ──────────────────────────────────────────────
 
 export type {
-	AdrFormData,
-	Status,
-	DecisionGroup,
-	AuthorRole,
-	Author,
-	Organization,
-	Position,
-	Note,
-	ArchitectureDecisionRecord
+  AdrFormData,
+  Status,
+  DecisionGroup,
+  AuthorRole,
+  Author,
+  Organization,
+  Position,
+  Note,
+  ArchitectureDecisionRecord
 } from '#lib/types.js';
 
 import type { Status } from '#lib/types.js';
@@ -30,35 +30,35 @@ export type FlagPriority = 'high' | 'medium' | 'low';
 
 /** A single governance or completeness issue surfaced by the engine. */
 export interface AdrFlag {
-	id: string;
-	category: string;
-	message: string;
-	priority: FlagPriority;
+  id: string;
+  category: string;
+  message: string;
+  priority: FlagPriority;
 }
 
 /** The result of evaluating an ADR draft. */
 export interface AdrEvaluation {
-	/** Workflow status carried through from the record. */
-	status: Status;
-	/** Number of core template sections that have content. */
-	filledSections: number;
-	/** Total number of core template sections measured. */
-	totalSections: number;
-	/** Completeness as a whole-number percentage (0–100). */
-	completeness: number;
-	/** How many alternative positions were recorded. */
-	positionCount: number;
-	/** The name of the chosen position, or '' if none is marked chosen. */
-	chosenPosition: string;
-	/** Governance/completeness flags, highest priority first. */
-	flags: AdrFlag[];
-	/** ISO timestamp of when the evaluation ran. */
-	timestamp: string;
+  /** Workflow status carried through from the record. */
+  status: Status;
+  /** Number of core template sections that have content. */
+  filledSections: number;
+  /** Total number of core template sections measured. */
+  totalSections: number;
+  /** Completeness as a whole-number percentage (0–100). */
+  completeness: number;
+  /** How many alternative positions were recorded. */
+  positionCount: number;
+  /** The name of the chosen position, or '' if none is marked chosen. */
+  chosenPosition: string;
+  /** Governance/completeness flags, highest priority first. */
+  flags: AdrFlag[];
+  /** ISO timestamp of when the evaluation ran. */
+  timestamp: string;
 }
 
 /** A wizard step definition. */
 export interface StepConfig {
-	number: number;
-	title: string;
-	shortTitle: string;
+  number: number;
+  title: string;
+  shortTitle: string;
 }

@@ -13,37 +13,34 @@ import { ipssCategory } from './utils';
  *   20-35 = Severe symptoms
  */
 export function calculateIPSS(data: AssessmentData): {
-	ipssScore: number;
-	ipssCategoryLabel: string;
-	firedRules: FiredRule[];
+  ipssScore: number;
+  ipssCategoryLabel: string;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
-	const q = data.ipssQuestionnaire;
+  const firedRules: FiredRule[] = [];
+  const q = data.ipssQuestionnaire;
 
-	const scores: (number | null)[] = [
-		q.q1, q.q2, q.q3, q.q4, q.q5,
-		q.q6, q.q7
-	];
+  const scores: (number | null)[] = [q.q1, q.q2, q.q3, q.q4, q.q5, q.q6, q.q7];
 
-	let ipssScore = 0;
+  let ipssScore = 0;
 
-	for (let i = 0; i < scores.length; i++) {
-		const score = scores[i];
-		if (score !== null && score > 0) {
-			const question = ipssQuestions[i];
-			firedRules.push({
-				id: question.id,
-				domain: question.domain,
-				description: question.text,
-				score
-			});
-			ipssScore += score;
-		} else if (score !== null) {
-			ipssScore += score;
-		}
-	}
+  for (let i = 0; i < scores.length; i++) {
+    const score = scores[i];
+    if (score !== null && score > 0) {
+      const question = ipssQuestions[i];
+      firedRules.push({
+        id: question.id,
+        domain: question.domain,
+        description: question.text,
+        score
+      });
+      ipssScore += score;
+    } else if (score !== null) {
+      ipssScore += score;
+    }
+  }
 
-	const ipssCategoryLabel = ipssCategory(ipssScore);
+  const ipssCategoryLabel = ipssCategory(ipssScore);
 
-	return { ipssScore, ipssCategoryLabel, firedRules };
+  return { ipssScore, ipssCategoryLabel, firedRules };
 }

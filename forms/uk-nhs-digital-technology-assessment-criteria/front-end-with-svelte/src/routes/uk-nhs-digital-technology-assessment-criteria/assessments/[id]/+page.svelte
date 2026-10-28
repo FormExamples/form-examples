@@ -23,7 +23,17 @@
   import Step11 from '#lib/components/steps/Step11Review.svelte';
 
   const stepComponents = [
-    Step01, Step02, Step03, Step04, Step05, Step06, Step07, Step08, Step09, Step10, Step11,
+    Step01,
+    Step02,
+    Step03,
+    Step04,
+    Step05,
+    Step06,
+    Step07,
+    Step08,
+    Step09,
+    Step10,
+    Step11
   ];
 
   const base = '/uk-nhs-digital-technology-assessment-criteria/assessments';
@@ -98,9 +108,9 @@
 <main class="mx-16">
   <div class="intro">
     <p>
-      Record the supplier, product and assessor, then mark each DTAC criterion met, partially met, not
-      met or not applicable. The engine computes a result per section, an overall outcome and flagged
-      issues as you go.
+      Record the supplier, product and assessor, then mark each DTAC criterion met, partially met,
+      not met or not applicable. The engine computes a result per section, an overall outcome and
+      flagged issues as you go.
     </p>
   </div>
 

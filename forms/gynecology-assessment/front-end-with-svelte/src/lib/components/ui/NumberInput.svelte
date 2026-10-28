@@ -38,7 +38,9 @@
 <div class="field">
   {#if label}
     <label class="label" for={name} data-required={required || undefined}>
-      {label}{#if unit}<span class="hint" style="display:inline; margin-left:0.25rem;">({unit})</span>{/if}
+      {label}{#if unit}<span class="hint" style="display:inline; margin-left:0.25rem;"
+          >({unit})</span
+        >{/if}
     </label>
   {/if}
   <input

@@ -1,17 +1,14 @@
 <script lang="ts">
   import type { LikertScore } from '#lib/engine/types.js';
 
-  let {
-    name,
-    value = $bindable(),
-  }: { name: string; value: LikertScore } = $props();
+  let { name, value = $bindable() }: { name: string; value: LikertScore } = $props();
 
   const OPTIONS: { score: 1 | 2 | 3 | 4 | 5; label: string }[] = [
     { score: 1, label: 'Strongly disagree' },
     { score: 2, label: 'Disagree' },
     { score: 3, label: 'Neutral / partial' },
     { score: 4, label: 'Agree' },
-    { score: 5, label: 'Strongly agree' },
+    { score: 5, label: 'Strongly agree' }
   ];
 
   function pick(s: 1 | 2 | 3 | 4 | 5) {

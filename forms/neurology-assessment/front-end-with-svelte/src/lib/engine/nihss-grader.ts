@@ -9,34 +9,34 @@ import { nihssSeverityLabel } from './utils';
  * NIHSS 0 = no stroke symptoms, 42 = maximum severity.
  */
 export function calculateNIHSS(data: AssessmentData): {
-	nihssScore: number;
-	nihssSeverity: string;
-	firedRules: FiredRule[];
+  nihssScore: number;
+  nihssSeverity: string;
+  firedRules: FiredRule[];
 } {
-	const firedRules: FiredRule[] = [];
-	let totalScore = 0;
+  const firedRules: FiredRule[] = [];
+  let totalScore = 0;
 
-	for (const rule of nihssRules) {
-		try {
-			const score = rule.evaluate(data);
-			if (score > 0) {
-				firedRules.push({
-					id: rule.id,
-					category: rule.category,
-					description: rule.description,
-					score
-				});
-			}
-			totalScore += score;
-		} catch (e) {
-			// Rule evaluation failed - log for debugging but continue scoring
-			console.warn(`NIHSS rule ${rule.id} evaluation failed:`, e);
-		}
-	}
+  for (const rule of nihssRules) {
+    try {
+      const score = rule.evaluate(data);
+      if (score > 0) {
+        firedRules.push({
+          id: rule.id,
+          category: rule.category,
+          description: rule.description,
+          score
+        });
+      }
+      totalScore += score;
+    } catch (e) {
+      // Rule evaluation failed - log for debugging but continue scoring
+      console.warn(`NIHSS rule ${rule.id} evaluation failed:`, e);
+    }
+  }
 
-	const nihssSeverity = nihssSeverityLabel(totalScore);
+  const nihssSeverity = nihssSeverityLabel(totalScore);
 
-	return { nihssScore: totalScore, nihssSeverity, firedRules };
+  return { nihssScore: totalScore, nihssSeverity, firedRules };
 }
 
 /**
@@ -45,13 +45,13 @@ export function calculateNIHSS(data: AssessmentData): {
  * {@link GradingResult} shared by the wizard, report, and dashboard.
  */
 export function gradeAssessment(data: AssessmentData): GradingResult {
-	const { nihssScore, nihssSeverity, firedRules } = calculateNIHSS(data);
-	const additionalFlags = detectAdditionalFlags(data);
-	return {
-		nihssScore,
-		nihssSeverity,
-		firedRules,
-		additionalFlags,
-		timestamp: new Date().toISOString()
-	};
+  const { nihssScore, nihssSeverity, firedRules } = calculateNIHSS(data);
+  const additionalFlags = detectAdditionalFlags(data);
+  return {
+    nihssScore,
+    nihssSeverity,
+    firedRules,
+    additionalFlags,
+    timestamp: new Date().toISOString()
+  };
 }

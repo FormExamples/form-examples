@@ -3,7 +3,7 @@
   import Fieldset from '#lib/components/ui/Fieldset.svelte';
   import NumberInput from '#lib/components/ui/NumberInput.svelte';
   import Select from '#lib/components/ui/Select.svelte';
-  import { TextInput } from "@lilydesignsystem/svelte-headless";
+  import { TextInput } from '@lilydesignsystem/svelte-headless';
 
   import { store } from '#lib/stores/assessment.svelte.js';
 
@@ -50,7 +50,7 @@
     ['cortisonePrednisoneSteroid', 'Cortisone / prednisone / steroid'],
     ['bloodTransfusionHistory', 'H/o blood transfusion'],
     ['chemotherapyDrugs', 'Chemotherapy drugs'],
-    ['radiotherapy', 'Radiotherapy'],
+    ['radiotherapy', 'Radiotherapy']
   ] as const;
 
   const anginaTriggerOptions = [
@@ -59,13 +59,13 @@
     { value: 'walking-flat-200m', label: 'Walking on flat 200 metres' },
     { value: 'walking-flat-lt-50m', label: 'Walking on flat < 50 metres' },
     { value: 'at-rest', label: 'At rest' },
-    { value: 'at-night', label: 'At night' },
+    { value: 'at-night', label: 'At night' }
   ] as const;
 
   const dyspnoeaSubtypeOptions = [
     { value: 'at-rest', label: 'At rest' },
     { value: 'on-lying-flat', label: 'On lying flat' },
-    { value: 'wakes-at-night-gasping', label: 'Wake at night gasping for breath' },
+    { value: 'wakes-at-night-gasping', label: 'Wake at night gasping for breath' }
   ] as const;
 
   function toggleArrayValue<T extends string>(arr: T[], value: T): T[] {
@@ -74,22 +74,34 @@
 </script>
 
 <Fieldset legend="Step 18 — Past medical history">
-  <p class="hint">Cardiovascular, respiratory, endocrine, neurological, renal/hepatic and other conditions</p>
+  <p class="hint">
+    Cardiovascular, respiratory, endocrine, neurological, renal/hepatic and other conditions
+  </p>
 
   <div class="field-grid field-grid-3">
-    {#each simpleItems as [key, label]}
-      <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m[key]} /> {label}</label>
+    {#each simpleItems as [key, label] (key)}
+      <label class="checkbox-label"
+        ><input type="checkbox" class="checkbox-input" bind:checked={m[key]} /> {label}</label
+      >
     {/each}
   </div>
 
   <h3 class="step-subhead">MI</h3>
-  <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.mi} /> MI</label>
+  <label class="checkbox-label"
+    ><input type="checkbox" class="checkbox-input" bind:checked={m.mi} /> MI</label
+  >
   {#if m.mi}
-    <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.miWithinPast6Months} /> Within the past 6 months</label>
+    <label class="checkbox-label"
+      ><input type="checkbox" class="checkbox-input" bind:checked={m.miWithinPast6Months} /> Within the
+      past 6 months</label
+    >
   {/if}
 
   <h3 class="step-subhead">Angina or chest pain</h3>
-  <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.anginaOrChestPain} /> Angina or chest pain</label>
+  <label class="checkbox-label"
+    ><input type="checkbox" class="checkbox-input" bind:checked={m.anginaOrChestPain} /> Angina or chest
+    pain</label
+  >
   {#if m.anginaOrChestPain}
     <p class="hint">What brings on the pain?</p>
     <div class="field-grid field-grid-3">
@@ -100,14 +112,17 @@
             class="checkbox-input"
             checked={m.anginaTriggers.includes(opt.value)}
             onchange={() => (m.anginaTriggers = toggleArrayValue(m.anginaTriggers, opt.value))}
-          /> {opt.label}
+          />
+          {opt.label}
         </label>
       {/each}
     </div>
   {/if}
 
   <h3 class="step-subhead">Dyspnoea</h3>
-  <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.dyspnoea} /> Dyspnoea</label>
+  <label class="checkbox-label"
+    ><input type="checkbox" class="checkbox-input" bind:checked={m.dyspnoea} /> Dyspnoea</label
+  >
   {#if m.dyspnoea}
     <div class="field-grid field-grid-3">
       {#each dyspnoeaSubtypeOptions as opt (opt.value)}
@@ -117,22 +132,36 @@
             class="checkbox-input"
             checked={m.dyspnoeaSubtypes.includes(opt.value)}
             onchange={() => (m.dyspnoeaSubtypes = toggleArrayValue(m.dyspnoeaSubtypes, opt.value))}
-          /> {opt.label}
+          />
+          {opt.label}
         </label>
       {/each}
     </div>
   {/if}
 
   <h3 class="step-subhead">Pacemaker</h3>
-  <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.pacemaker} /> Pacemaker</label>
+  <label class="checkbox-label"
+    ><input type="checkbox" class="checkbox-input" bind:checked={m.pacemaker} /> Pacemaker</label
+  >
   {#if m.pacemaker}
-    <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.pacemakerLastCheckWithin6Months} /> Last check within 6 months</label>
+    <label class="checkbox-label"
+      ><input
+        type="checkbox"
+        class="checkbox-input"
+        bind:checked={m.pacemakerLastCheckWithin6Months}
+      /> Last check within 6 months</label
+    >
   {/if}
 
   <h3 class="step-subhead">Stenting</h3>
-  <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.stenting} /> Stenting</label>
+  <label class="checkbox-label"
+    ><input type="checkbox" class="checkbox-input" bind:checked={m.stenting} /> Stenting</label
+  >
   {#if m.stenting}
-    <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.stentingWithinPast6Months} /> Within the past 6 months</label>
+    <label class="checkbox-label"
+      ><input type="checkbox" class="checkbox-input" bind:checked={m.stentingWithinPast6Months} /> Within
+      the past 6 months</label
+    >
     <Field label="Type of stent?" inputId="stentType">
       <Select id="stentType" label="Type of stent?" bind:value={m.stentType}>
         <option value="">-- Select --</option>
@@ -144,15 +173,27 @@
   {/if}
 
   <h3 class="step-subhead">Cardiac surgery</h3>
-  <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.cardiacSurgery} /> Cardiac surgery</label>
+  <label class="checkbox-label"
+    ><input type="checkbox" class="checkbox-input" bind:checked={m.cardiacSurgery} /> Cardiac surgery</label
+  >
   {#if m.cardiacSurgery}
-    <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.cardiacSurgeryWithinPastYear} /> Within the past year</label>
+    <label class="checkbox-label"
+      ><input
+        type="checkbox"
+        class="checkbox-input"
+        bind:checked={m.cardiacSurgeryWithinPastYear}
+      /> Within the past year</label
+    >
   {/if}
 
   <h3 class="step-subhead">Sleep apnoea</h3>
-  <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.sleepApnoea} /> Sleep apnoea</label>
+  <label class="checkbox-label"
+    ><input type="checkbox" class="checkbox-input" bind:checked={m.sleepApnoea} /> Sleep apnoea</label
+  >
   {#if m.sleepApnoea}
-    <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.sleepApnoeaUsingCpap} /> Using CPAP</label>
+    <label class="checkbox-label"
+      ><input type="checkbox" class="checkbox-input" bind:checked={m.sleepApnoeaUsingCpap} /> Using CPAP</label
+    >
   {/if}
   <Field label="STOP-Bang risk" inputId="stopBangRisk">
     <Select id="stopBangRisk" label="STOP-Bang risk" bind:value={m.stopBangRisk}>
@@ -164,27 +205,53 @@
   </Field>
 
   <h3 class="step-subhead">Diabetes mellitus</h3>
-  <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.diabetesMellitus} /> Diabetes mellitus</label>
+  <label class="checkbox-label"
+    ><input type="checkbox" class="checkbox-input" bind:checked={m.diabetesMellitus} /> Diabetes mellitus</label
+  >
   {#if m.diabetesMellitus}
     <div class="field-grid field-grid-3">
-      <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.diabetesDietControlled} /> Diet controlled</label>
-      <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.diabetesDrugControlled} /> Drug controlled</label>
-      <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.diabetesInsulinControlled} /> Insulin controlled</label>
-      <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.diabetesHba1cOver69} /> HbA1c &gt; 69 mmol/mol</label>
+      <label class="checkbox-label"
+        ><input type="checkbox" class="checkbox-input" bind:checked={m.diabetesDietControlled} /> Diet
+        controlled</label
+      >
+      <label class="checkbox-label"
+        ><input type="checkbox" class="checkbox-input" bind:checked={m.diabetesDrugControlled} /> Drug
+        controlled</label
+      >
+      <label class="checkbox-label"
+        ><input type="checkbox" class="checkbox-input" bind:checked={m.diabetesInsulinControlled} /> Insulin
+        controlled</label
+      >
+      <label class="checkbox-label"
+        ><input type="checkbox" class="checkbox-input" bind:checked={m.diabetesHba1cOver69} /> HbA1c &gt;
+        69 mmol/mol</label
+      >
     </div>
   {/if}
 
   <h3 class="step-subhead">Stroke / TIA</h3>
-  <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.strokeOrTia} /> Stroke / TIA</label>
+  <label class="checkbox-label"
+    ><input type="checkbox" class="checkbox-input" bind:checked={m.strokeOrTia} /> Stroke / TIA</label
+  >
   {#if m.strokeOrTia}
-    <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.strokeWithin3Months} /> Within 3 months</label>
+    <label class="checkbox-label"
+      ><input type="checkbox" class="checkbox-input" bind:checked={m.strokeWithin3Months} /> Within 3
+      months</label
+    >
     <Field label="Residual disability, if any" inputId="strokeResidual">
-      <TextInput id="strokeResidual" label="Residual disability, if any" bind:value={m.strokeResidualDisability} />
+      <TextInput
+        id="strokeResidual"
+        label="Residual disability, if any"
+        bind:value={m.strokeResidualDisability}
+      />
     </Field>
   {/if}
 
   <h3 class="step-subhead">Epilepsy or seizures</h3>
-  <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.epilepsyOrSeizures} /> Epilepsy or seizures</label>
+  <label class="checkbox-label"
+    ><input type="checkbox" class="checkbox-input" bind:checked={m.epilepsyOrSeizures} /> Epilepsy or
+    seizures</label
+  >
   {#if m.epilepsyOrSeizures}
     <Field label="Control" inputId="epilepsyControl">
       <Select id="epilepsyControl" label="Control" bind:value={m.epilepsyControl}>
@@ -197,38 +264,65 @@
   {/if}
 
   <h3 class="step-subhead">Other neurological disease</h3>
-  <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.otherNeurologicalDisease} /> Other neurological disease</label>
+  <label class="checkbox-label"
+    ><input type="checkbox" class="checkbox-input" bind:checked={m.otherNeurologicalDisease} /> Other
+    neurological disease</label
+  >
   {#if m.otherNeurologicalDisease}
     <Field label="Please provide details" inputId="otherNeuroDetails">
-      <TextInput id="otherNeuroDetails" label="Please provide details" bind:value={m.otherNeurologicalDiseaseDetails} />
+      <TextInput
+        id="otherNeuroDetails"
+        label="Please provide details"
+        bind:value={m.otherNeurologicalDiseaseDetails}
+      />
     </Field>
   {/if}
 
   <h3 class="step-subhead">Brain or spinal cord surgery</h3>
-  <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.brainOrSpinalCordSurgery} /> Brain or spinal cord surgery</label>
+  <label class="checkbox-label"
+    ><input type="checkbox" class="checkbox-input" bind:checked={m.brainOrSpinalCordSurgery} /> Brain
+    or spinal cord surgery</label
+  >
   <Field label="4AT score">
     <NumberInput label="4AT score" bind:value={m.fourAtScore} min={0} max={12} />
   </Field>
 
   <h3 class="step-subhead">Renal impairment</h3>
-  <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.renalImpairment} /> Renal impairment</label>
+  <label class="checkbox-label"
+    ><input type="checkbox" class="checkbox-input" bind:checked={m.renalImpairment} /> Renal impairment</label
+  >
   {#if m.renalImpairment}
     <div class="field-grid field-grid-3">
-      <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.ckdStage3} /> CKD stage 3</label>
-      <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.ckdStage4OrHemodialysis} /> CKD stage &ge; 4 or on haemodialysis</label>
+      <label class="checkbox-label"
+        ><input type="checkbox" class="checkbox-input" bind:checked={m.ckdStage3} /> CKD stage 3</label
+      >
+      <label class="checkbox-label"
+        ><input type="checkbox" class="checkbox-input" bind:checked={m.ckdStage4OrHemodialysis} /> CKD
+        stage &ge; 4 or on haemodialysis</label
+      >
     </div>
   {/if}
 
   <h3 class="step-subhead">DVT or PE</h3>
-  <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.dvtOrPe} /> DVT or PE</label>
+  <label class="checkbox-label"
+    ><input type="checkbox" class="checkbox-input" bind:checked={m.dvtOrPe} /> DVT or PE</label
+  >
   {#if m.dvtOrPe}
-    <label class="checkbox-label"><input type="checkbox" class="checkbox-input" bind:checked={m.dvtOrPeWithinPast3Months} /> Within the past 3 months</label>
+    <label class="checkbox-label"
+      ><input type="checkbox" class="checkbox-input" bind:checked={m.dvtOrPeWithinPast3Months} /> Within
+      the past 3 months</label
+    >
   {/if}
 
   <h3 class="step-subhead">Functional status and medications</h3>
   <div class="field-grid field-grid-3">
     <Field label="Duke Activity Status Index">
-      <NumberInput label="Duke Activity Status Index" bind:value={m.dukeActivityStatusIndex} min={0} max={100} />
+      <NumberInput
+        label="Duke Activity Status Index"
+        bind:value={m.dukeActivityStatusIndex}
+        min={0}
+        max={100}
+      />
     </Field>
     <Field label="METs score">
       <NumberInput label="METs score" step="0.1" bind:value={m.metsScore} min={0} max={20} />

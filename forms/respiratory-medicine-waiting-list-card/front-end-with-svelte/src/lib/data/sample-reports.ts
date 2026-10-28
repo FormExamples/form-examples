@@ -34,11 +34,44 @@ export interface DashboardRow {
 function withinTarget(): WaitingListCard {
   const c = createEmptyCard();
   c.status = 'submitted';
-  c.practitioner = { ...c.practitioner, name: 'Dr Sara Patel', role: 'consultant', organisationName: 'Royal Orthopaedic Hospital' };
-  c.patient = { ...c.patient, name: 'Alice Anderson', unitedKingdomNhsNumber: '485 777 3456', email: 'alice.anderson@example.com', phone: '07700 900123' };
-  c.referral = { ...c.referral, referralSource: 'gp', referralDate: '2026-04-28', reasonForReferral: 'Right knee osteoarthritis', presentingCondition: 'Progressive knee pain', suspectedCancer: 'no' };
-  c.waitingList = { ...c.waitingList, listName: 'Orthopaedic — knee replacement', specialty: 'Trauma & Orthopaedics', procedureDescription: 'Right total knee replacement', clinicalPriority: 'P4', rttClockStartDate: '2026-05-01', expectedProcedureType: 'inpatient-procedure', expectedWaitWeeks: 16 };
-  c.appointment = { ...c.appointment, appointmentDate: '2026-07-10', appointmentType: 'pre-assessment', siteName: 'Royal Orthopaedic Hospital — Outpatients', status: 'confirmed' };
+  c.practitioner = {
+    ...c.practitioner,
+    name: 'Dr Sara Patel',
+    role: 'consultant',
+    organisationName: 'Royal Orthopaedic Hospital'
+  };
+  c.patient = {
+    ...c.patient,
+    name: 'Alice Anderson',
+    unitedKingdomNhsNumber: '485 777 3456',
+    email: 'alice.anderson@example.com',
+    phone: '07700 900123'
+  };
+  c.referral = {
+    ...c.referral,
+    referralSource: 'gp',
+    referralDate: '2026-04-28',
+    reasonForReferral: 'Right knee osteoarthritis',
+    presentingCondition: 'Progressive knee pain',
+    suspectedCancer: 'no'
+  };
+  c.waitingList = {
+    ...c.waitingList,
+    listName: 'Orthopaedic — knee replacement',
+    specialty: 'Trauma & Orthopaedics',
+    procedureDescription: 'Right total knee replacement',
+    clinicalPriority: 'P4',
+    rttClockStartDate: '2026-05-01',
+    expectedProcedureType: 'inpatient-procedure',
+    expectedWaitWeeks: 16
+  };
+  c.appointment = {
+    ...c.appointment,
+    appointmentDate: '2026-07-10',
+    appointmentType: 'pre-assessment',
+    siteName: 'Royal Orthopaedic Hospital — Outpatients',
+    status: 'confirmed'
+  };
   c.communication = { ...c.communication, consentToReminders: 'yes' };
   return c;
 }
@@ -47,11 +80,44 @@ function withinTarget(): WaitingListCard {
 function approachingBreach(): WaitingListCard {
   const c = createEmptyCard();
   c.status = 'submitted';
-  c.practitioner = { ...c.practitioner, name: 'Mr Tom Wilkins', role: 'consultant', organisationName: "St Mary's Hospital" };
-  c.patient = { ...c.patient, name: 'Brian Brown', unitedKingdomNhsNumber: '623 998 1122', email: 'brian.brown@example.com', phone: '07700 900456' };
-  c.referral = { ...c.referral, referralSource: 'gp', referralDate: '2026-03-08', reasonForReferral: 'Symptomatic gallstones', presentingCondition: 'Recurrent biliary colic', suspectedCancer: 'no' };
-  c.waitingList = { ...c.waitingList, listName: 'General Surgery — cholecystectomy', specialty: 'General Surgery', procedureDescription: 'Laparoscopic cholecystectomy', clinicalPriority: 'P4', rttClockStartDate: '2026-03-10', expectedProcedureType: 'day-case-procedure', expectedWaitWeeks: 17 };
-  c.appointment = { ...c.appointment, appointmentDate: '2026-07-05', appointmentType: 'procedure', siteName: "St Mary's Hospital — Day Surgery Unit", status: 'scheduled' };
+  c.practitioner = {
+    ...c.practitioner,
+    name: 'Mr Tom Wilkins',
+    role: 'consultant',
+    organisationName: "St Mary's Hospital"
+  };
+  c.patient = {
+    ...c.patient,
+    name: 'Brian Brown',
+    unitedKingdomNhsNumber: '623 998 1122',
+    email: 'brian.brown@example.com',
+    phone: '07700 900456'
+  };
+  c.referral = {
+    ...c.referral,
+    referralSource: 'gp',
+    referralDate: '2026-03-08',
+    reasonForReferral: 'Symptomatic gallstones',
+    presentingCondition: 'Recurrent biliary colic',
+    suspectedCancer: 'no'
+  };
+  c.waitingList = {
+    ...c.waitingList,
+    listName: 'General Surgery — cholecystectomy',
+    specialty: 'General Surgery',
+    procedureDescription: 'Laparoscopic cholecystectomy',
+    clinicalPriority: 'P4',
+    rttClockStartDate: '2026-03-10',
+    expectedProcedureType: 'day-case-procedure',
+    expectedWaitWeeks: 17
+  };
+  c.appointment = {
+    ...c.appointment,
+    appointmentDate: '2026-07-05',
+    appointmentType: 'procedure',
+    siteName: "St Mary's Hospital — Day Surgery Unit",
+    status: 'scheduled'
+  };
   c.communication = { ...c.communication, consentToReminders: 'yes' };
   return c;
 }
@@ -60,11 +126,44 @@ function approachingBreach(): WaitingListCard {
 function breached(): WaitingListCard {
   const c = createEmptyCard();
   c.status = 'submitted';
-  c.practitioner = { ...c.practitioner, name: 'Dr Helen Macleod', role: 'consultant', organisationName: 'Cardiothoracic Centre' };
-  c.patient = { ...c.patient, name: 'Catherine Carter', unitedKingdomNhsNumber: '711 442 5566', email: 'catherine.carter@example.com', phone: '07700 900789' };
-  c.referral = { ...c.referral, referralSource: 'consultant', referralDate: '2026-04-30', reasonForReferral: 'Suspected lung malignancy on imaging', presentingCondition: 'Chest mass on CT', suspectedCancer: 'yes' };
-  c.waitingList = { ...c.waitingList, listName: 'Cardiothoracic — rapid access', specialty: 'Cardiology', procedureDescription: 'Diagnostic bronchoscopy', clinicalPriority: 'P2', rttClockStartDate: '2026-05-01', expectedProcedureType: 'diagnostic', expectedWaitWeeks: 4 };
-  c.appointment = { ...c.appointment, appointmentDate: '2026-07-20', appointmentType: 'diagnostic', siteName: 'Cardiothoracic Centre — Rapid Access Clinic', status: 'scheduled' };
+  c.practitioner = {
+    ...c.practitioner,
+    name: 'Dr Helen Macleod',
+    role: 'consultant',
+    organisationName: 'Cardiothoracic Centre'
+  };
+  c.patient = {
+    ...c.patient,
+    name: 'Catherine Carter',
+    unitedKingdomNhsNumber: '711 442 5566',
+    email: 'catherine.carter@example.com',
+    phone: '07700 900789'
+  };
+  c.referral = {
+    ...c.referral,
+    referralSource: 'consultant',
+    referralDate: '2026-04-30',
+    reasonForReferral: 'Suspected lung malignancy on imaging',
+    presentingCondition: 'Chest mass on CT',
+    suspectedCancer: 'yes'
+  };
+  c.waitingList = {
+    ...c.waitingList,
+    listName: 'Cardiothoracic — rapid access',
+    specialty: 'Cardiology',
+    procedureDescription: 'Diagnostic bronchoscopy',
+    clinicalPriority: 'P2',
+    rttClockStartDate: '2026-05-01',
+    expectedProcedureType: 'diagnostic',
+    expectedWaitWeeks: 4
+  };
+  c.appointment = {
+    ...c.appointment,
+    appointmentDate: '2026-07-20',
+    appointmentType: 'diagnostic',
+    siteName: 'Cardiothoracic Centre — Rapid Access Clinic',
+    status: 'scheduled'
+  };
   c.communication = { ...c.communication, consentToReminders: 'yes' };
   return c;
 }
@@ -73,10 +172,36 @@ function breached(): WaitingListCard {
 function longWait(): WaitingListCard {
   const c = createEmptyCard();
   c.status = 'submitted';
-  c.practitioner = { ...c.practitioner, name: 'Mr Rohit Singh', role: 'consultant', organisationName: 'ENT Centre' };
-  c.patient = { ...c.patient, name: 'Eleanor Evans', unitedKingdomNhsNumber: '935 110 4477', interpreterRequired: 'no' };
-  c.referral = { ...c.referral, referralSource: 'gp', referralDate: '2025-03-28', reasonForReferral: 'Recurrent tonsillitis', presentingCondition: 'Chronic tonsillitis', suspectedCancer: 'no' };
-  c.waitingList = { ...c.waitingList, listName: 'ENT — tonsillectomy', specialty: 'ENT', procedureDescription: 'Tonsillectomy', clinicalPriority: 'P4', rttClockStartDate: '2025-04-01', expectedProcedureType: 'day-case-procedure', expectedWaitWeeks: 26 };
+  c.practitioner = {
+    ...c.practitioner,
+    name: 'Mr Rohit Singh',
+    role: 'consultant',
+    organisationName: 'ENT Centre'
+  };
+  c.patient = {
+    ...c.patient,
+    name: 'Eleanor Evans',
+    unitedKingdomNhsNumber: '935 110 4477',
+    interpreterRequired: 'no'
+  };
+  c.referral = {
+    ...c.referral,
+    referralSource: 'gp',
+    referralDate: '2025-03-28',
+    reasonForReferral: 'Recurrent tonsillitis',
+    presentingCondition: 'Chronic tonsillitis',
+    suspectedCancer: 'no'
+  };
+  c.waitingList = {
+    ...c.waitingList,
+    listName: 'ENT — tonsillectomy',
+    specialty: 'ENT',
+    procedureDescription: 'Tonsillectomy',
+    clinicalPriority: 'P4',
+    rttClockStartDate: '2025-04-01',
+    expectedProcedureType: 'day-case-procedure',
+    expectedWaitWeeks: 26
+  };
   c.appointment = { ...c.appointment, status: 'scheduled' };
   c.communication = { ...c.communication, consentToReminders: 'no' };
   return c;

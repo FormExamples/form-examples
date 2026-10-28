@@ -8,7 +8,11 @@
 
 <Fieldset legend="Step 3 — Assessor and assessment">
   <div class="field-grid">
-    <Field label="Assessor name" inputId="step-3-assessor-name" error={store.errors['step-3-assessor-name']}>
+    <Field
+      label="Assessor name"
+      inputId="step-3-assessor-name"
+      error={store.errors['step-3-assessor-name']}
+    >
       <TextInput
         id="step-3-assessor-name"
         label="Assessor name"
@@ -38,24 +42,44 @@
       </Select>
     </Field>
     <Field label="Commissioning organisation">
-      <TextInput label="Commissioning organisation" bind:value={store.data.assessment.commissioningOrganisation} />
+      <TextInput
+        label="Commissioning organisation"
+        bind:value={store.data.assessment.commissioningOrganisation}
+      />
     </Field>
     <Field label="DTAC version assessed against">
       <TextInput label="DTAC version" bind:value={store.data.assessment.dtacVersion} />
     </Field>
-    <Field label="Assessment date" inputId="step-3-assessment-date" error={store.errors['step-3-assessment-date']}>
+    <Field
+      label="Assessment date"
+      inputId="step-3-assessment-date"
+      error={store.errors['step-3-assessment-date']}
+    >
       <DateInput
         id="step-3-assessment-date"
         label="Assessment date"
-        bind:value={() => store.data.assessment.assessmentDate ?? undefined, (v) => (store.data.assessment.assessmentDate = v || null)}
+        bind:value={
+          () => store.data.assessment.assessmentDate ?? undefined,
+          (v) => (store.data.assessment.assessmentDate = v || null)
+        }
         aria-invalid={store.errors['step-3-assessment-date'] ? 'true' : undefined}
       />
     </Field>
     <Field label="Review due date">
-      <DateInput label="Review due date" bind:value={() => store.data.assessment.reviewDueDate ?? undefined, (v) => (store.data.assessment.reviewDueDate = v || null)} />
+      <DateInput
+        label="Review due date"
+        bind:value={
+          () => store.data.assessment.reviewDueDate ?? undefined,
+          (v) => (store.data.assessment.reviewDueDate = v || null)
+        }
+      />
     </Field>
     <Field label="Assessor notes" class="field-span-2">
-      <TextAreaInput label="Assessor notes" rows={3} bind:value={store.data.assessment.assessorNotes} />
+      <TextAreaInput
+        label="Assessor notes"
+        rows={3}
+        bind:value={store.data.assessment.assessorNotes}
+      />
     </Field>
   </div>
 </Fieldset>
