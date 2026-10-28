@@ -1,0 +1,189 @@
+#!/usr/bin/env python3
+"""bin/svelte-lint-format-refactor — add and enforce ESLint + Prettier in every
+form's `front-end-with-svelte/`.
+
+Each Svelte front-end is its own standalone pnpm project, so each carries its
+own lint/format config. The three config files are copied verbatim from
+`etc/svelte-lint-format/` (`eslint.config.js`, `.prettierrc`, `.prettierignore`),
+and `package.json` gets the matching dev dependencies and four scripts:
+`lint`, `lint:fix`, `format`, `format:check`. CI then runs
+`pnpm run lint && pnpm run format:check` per front-end alongside `check`,
+`build` and `vitest`, which is what enforces it.
+
+Deliberate choices, proven on the `agile-checklist` pilot:
+
+  * `svelte/no-navigation-without-resolve` is off: links are root-absolute
+    (`/<slug>/…`) and no front-end sets `kit.paths.base`, so `resolve()` would
+    churn every link without changing any URL.
+  * `static/themes/` is in `.prettierignore`: those vendored theme catalogues
+    must stay byte-identical fleet-wide (`bin/test-vendored-uniformity`), and
+    Prettier would reformat them.
+  * `pnpm-lock.yaml` and `*.md` are not formatted.
+
+Three steps, so the tooling and the one-time reformat land as separate commits:
+
+  --setup   write the config files, patch package.json, `pnpm install`
+  --format  `prettier --write` + `eslint --fix`; prints any ESLint errors left
+            for hand-fixing (exit non-zero if any project still has some)
+  --check   static CI drift detector: config files byte-equal to the templates,
+            scripts and dev dependencies present (no install, no network)
+
+Usage:
+  bin/svelte-lint-format-refactor --setup  <slug>... | --all
+  bin/svelte-lint-format-refactor --format <slug>... | --all
+  bin/svelte-lint-format-refactor --check  [<slug>... | --all]
+  bin/svelte-lint-format-refactor --dry-run --setup --all
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import pathlib
+import subprocess
+import sys
+from concurrent.futures import ThreadPoolExecutor
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+FORMS = ROOT / "forms"
+TEMPLATES = ROOT / "etc" / "svelte-lint-format"
+CONFIG_FILES = ["eslint.config.js", ".prettierrc", ".prettierignore"]
+
+SCRIPTS = {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+}
+
+DEV_DEPENDENCIES = {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.13.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-svelte": "^3.23.1",
+    "globals": "^17.13.0",
+    "prettier": "^3.9.10",
+    "prettier-plugin-svelte": "^4.1.1",
+    "svelte-eslint-parser": "^1.10.0",
+    "typescript-eslint": "^8.72.1",
+}
+
+WORKERS = 6
+
+
+def front_ends(slugs: list[str], all_forms: bool) -> list[pathlib.Path]:
+    if all_forms or not slugs:
+        slugs = sorted(p.name for p in FORMS.iterdir() if p.is_dir())
+    found = []
+    for slug in slugs:
+        fe = FORMS / slug / "front-end-with-svelte"
+        if (fe / "package.json").is_file():
+            found.append(fe)
+        else:
+            print(f"skip {slug}: no front-end-with-svelte/package.json", file=sys.stderr)
+    return found
+
+
+def patched_package_json(text: str) -> str:
+    """Return package.json text with the lint/format scripts and dev deps in place."""
+    pkg = json.loads(text)
+    scripts = pkg.setdefault("scripts", {})
+    for name, cmd in SCRIPTS.items():
+        scripts[name] = cmd
+    dev = pkg.setdefault("devDependencies", {})
+    for name, version in DEV_DEPENDENCIES.items():
+        dev.setdefault(name, version)
+    pkg["devDependencies"] = dict(sorted(dev.items()))
+    return json.dumps(pkg, indent=2, ensure_ascii=False) + "\n"
+
+
+def drift(fe: pathlib.Path) -> list[str]:
+    problems = []
+    for name in CONFIG_FILES:
+        target = fe / name
+        if not target.is_file():
+            problems.append(f"missing {name}")
+        elif target.read_bytes() != (TEMPLATES / name).read_bytes():
+            problems.append(f"{name} differs from etc/svelte-lint-format/{name}")
+    pkg = json.loads((fe / "package.json").read_text())
+    for name, cmd in SCRIPTS.items():
+        if pkg.get("scripts", {}).get(name) != cmd:
+            problems.append(f"script {name!r} is not {cmd!r}")
+    for name in DEV_DEPENDENCIES:
+        if name not in pkg.get("devDependencies", {}):
+            problems.append(f"devDependency {name} missing")
+    return problems
+
+
+def run(cmd: list[str], cwd: pathlib.Path) -> subprocess.CompletedProcess:
+    return subprocess.run(cmd, cwd=cwd, capture_output=True, text=True)
+
+
+def setup(fe: pathlib.Path, dry_run: bool) -> tuple[str, bool]:
+    slug = fe.parent.name
+    if not drift(fe):
+        return f"ok      {slug}", True
+    if dry_run:
+        return f"would   {slug}: {'; '.join(drift(fe))}", True
+    for name in CONFIG_FILES:
+        (fe / name).write_bytes((TEMPLATES / name).read_bytes())
+    pkg_path = fe / "package.json"
+    pkg_path.write_text(patched_package_json(pkg_path.read_text()))
+    result = run(["pnpm", "install", "--no-frozen-lockfile"], fe)
+    if result.returncode != 0:
+        return f"FAIL    {slug}: pnpm install\n{result.stdout[-800:]}{result.stderr[-800:]}", False
+    return f"updated {slug}", True
+
+
+def format_one(fe: pathlib.Path, dry_run: bool) -> tuple[str, bool]:
+    slug = fe.parent.name
+    if not (fe / "node_modules").is_dir():
+        return f"FAIL    {slug}: no node_modules (run --setup first)", False
+    if dry_run:
+        result = run(["pnpm", "exec", "prettier", "--check", "."], fe)
+        return f"{'ok     ' if result.returncode == 0 else 'would  '} {slug}", True
+    result = run(["pnpm", "exec", "prettier", "--write", "."], fe)
+    if result.returncode != 0:
+        return f"FAIL    {slug}: prettier\n{result.stdout[-800:]}{result.stderr[-800:]}", False
+    result = run(["pnpm", "exec", "eslint", ".", "--fix"], fe)
+    if result.returncode != 0:
+        return f"LINT    {slug}\n{result.stdout.strip()}{result.stderr.strip()}", False
+    return f"ok      {slug}", True
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    mode = ap.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--setup", action="store_true")
+    mode.add_argument("--format", action="store_true")
+    mode.add_argument("--check", action="store_true")
+    ap.add_argument("--all", action="store_true", help="every form's Svelte front-end")
+    ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("slugs", nargs="*")
+    args = ap.parse_args()
+
+    targets = front_ends(args.slugs, args.all)
+
+    if args.check:
+        bad = 0
+        for fe in targets:
+            problems = drift(fe)
+            if problems:
+                bad += 1
+                print(f"{fe.parent.name}: " + "; ".join(problems))
+        print(f"svelte-lint-format-refactor: {len(targets) - bad}/{len(targets)} front-ends current")
+        return 1 if bad else 0
+
+    step = setup if args.setup else format_one
+    failed = 0
+    with ThreadPoolExecutor(max_workers=WORKERS) as pool:
+        for line, ok in pool.map(lambda fe: step(fe, args.dry_run), targets):
+            if not ok or not line.startswith("ok"):
+                print(line, flush=True)
+            failed += 0 if ok else 1
+    print(f"svelte-lint-format-refactor: {len(targets) - failed}/{len(targets)} succeeded")
+    return 1 if failed else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
