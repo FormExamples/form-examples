@@ -220,6 +220,9 @@ jobs:
       - name: Svelte pnpm-workspace.yaml is correct (packages field + esbuild allow)
         run: bin/svelte-pnpm-workspace-fix --check --all
 
+      - name: Svelte ESLint + Prettier config has no drift
+        run: bin/svelte-lint-format-refactor --check --all
+
       - name: Validate XML against DTDs
         run: |
           failed=0
@@ -516,7 +519,7 @@ jobs:
           node-version: '26'
           cache: pnpm
           cache-dependency-path: forms/*/front-end-with-svelte/pnpm-lock.yaml
-      - name: check / build / vitest each front-end in this shard
+      - name: lint / format / check / build / vitest each front-end in this shard
         run: |
           # Each front-end-with-svelte is its own pnpm project (own
           # pnpm-lock.yaml + pnpm-workspace.yaml), so `pnpm install
@@ -533,6 +536,8 @@ jobs:
             echo "::group::$slug"
             ( cd "$app" \
               && pnpm install --frozen-lockfile \
+              && pnpm run lint \
+              && pnpm run format:check \
               && pnpm run check \
               && pnpm run build \
               && pnpm exec vitest run ) || { echo "::error::$slug failed"; fail=1; }

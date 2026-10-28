@@ -86,6 +86,10 @@ the superseded one-shots, and the rest) are catalogued in
 repo's own 40KB target. Each has a `--check` CI drift detector, listed in the
 Verify block below; `docs/tools.md` has every tool's generated header.
 
+### Svelte lint and format
+
+- `bin/svelte-lint-format-refactor [--setup|--format|--check] [--all|<slug>…]` — add and enforce ESLint + Prettier in every `front-end-with-svelte/`: copies the templates in `etc/svelte-lint-format/` (`eslint.config.js`, `.prettierrc`, `.prettierignore`), adds the dev dependencies and `lint` / `lint:fix` / `format` / `format:check` scripts (`--setup`), runs `prettier --write` + `eslint --fix` and lists what is left to hand-fix (`--format`). `--check` is the static CI drift detector; CI runs `pnpm run lint && pnpm run format:check` per front-end. `static/themes/` is Prettier-ignored (vendored, must stay byte-identical)
+
 ### Specs
 
 - `bin/generate-llms-txt.py [--check] [<slug>…]` — generate per-form `llms.txt` (llmstxt.org format, derived from `index.md`); `--check` is the CI drift detector
@@ -202,6 +206,7 @@ bin/svelte-locale-select-refactor --check      # Svelte LocaleSelect drift detec
 bin/html-theme-locale-select-refactor --check  # HTML theme/locale-select drift detector (also re-syncs theme CSS)
 bin/svelte-theme-css-sync --check              # Svelte theme CSS re-sync drift detector
 bin/svelte-pnpm-workspace-fix --check --all    # Svelte pnpm-workspace.yaml packages-field + esbuild-allow drift detector
+bin/svelte-lint-format-refactor --check --all # Svelte ESLint + Prettier config/scripts/dev-dependency drift detector
 bin/svelte-vitest-app-env-alias-fix --check --all # Svelte vitest.config.ts $app/environment -> $app/env alias-key drift detector
 bin/svelte-kit-3-theme-url-fix.py --check      # Svelte sv-migrate themesUrl-fix drift detector (one-shot)
 bin/svelte-autosave-restore-fix --check        # Svelte autosave-restore bug fix + restore-banner drift detector

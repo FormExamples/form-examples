@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-102 tools.
+103 tools.
 
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -73,6 +73,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/svelte-lily-picker-defaults`](#svelte-lily-picker-defaults)
 - [`bin/svelte-lily-pnpm-migrate`](#svelte-lily-pnpm-migrate)
 - [`bin/svelte-lily-scope-rename`](#svelte-lily-scope-rename)
+- [`bin/svelte-lint-format-refactor`](#svelte-lint-format-refactor)
 - [`bin/svelte-locale-select-refactor`](#svelte-locale-select-refactor)
 - [`bin/svelte-pnpm-workspace-fix`](#svelte-pnpm-workspace-fix)
 - [`bin/svelte-share-button-refactor`](#svelte-share-button-refactor)
@@ -2451,6 +2452,45 @@ Usage:
   bin/svelte-lily-scope-rename --apply <slug>...
 
 Idempotent: re-running after a full --apply makes no further changes.
+```
+
+<h2 id="svelte-lint-format-refactor"><code>bin/svelte-lint-format-refactor</code></h2>
+
+```text
+bin/svelte-lint-format-refactor — add and enforce ESLint + Prettier in every
+form's `front-end-with-svelte/`.
+
+Each Svelte front-end is its own standalone pnpm project, so each carries its
+own lint/format config. The three config files are copied verbatim from
+`etc/svelte-lint-format/` (`eslint.config.js`, `.prettierrc`, `.prettierignore`),
+and `package.json` gets the matching dev dependencies and four scripts:
+`lint`, `lint:fix`, `format`, `format:check`. CI then runs
+`pnpm run lint && pnpm run format:check` per front-end alongside `check`,
+`build` and `vitest`, which is what enforces it.
+
+Deliberate choices, proven on the `agile-checklist` pilot:
+
+  * `svelte/no-navigation-without-resolve` is off: links are root-absolute
+    (`/<slug>/…`) and no front-end sets `kit.paths.base`, so `resolve()` would
+    churn every link without changing any URL.
+  * `static/themes/` is in `.prettierignore`: those vendored theme catalogues
+    must stay byte-identical fleet-wide (`bin/test-vendored-uniformity`), and
+    Prettier would reformat them.
+  * `pnpm-lock.yaml` and `*.md` are not formatted.
+
+Three steps, so the tooling and the one-time reformat land as separate commits:
+
+  --setup   write the config files, patch package.json, `pnpm install`
+  --format  `prettier --write` + `eslint --fix`; prints any ESLint errors left
+            for hand-fixing (exit non-zero if any project still has some)
+  --check   static CI drift detector: config files byte-equal to the templates,
+            scripts and dev dependencies present (no install, no network)
+
+Usage:
+  bin/svelte-lint-format-refactor --setup  <slug>... | --all
+  bin/svelte-lint-format-refactor --format <slug>... | --all
+  bin/svelte-lint-format-refactor --check  [<slug>... | --all]
+  bin/svelte-lint-format-refactor --dry-run --setup --all
 ```
 
 <h2 id="svelte-locale-select-refactor"><code>bin/svelte-locale-select-refactor</code></h2>
