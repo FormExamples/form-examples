@@ -24,8 +24,8 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0(svelte@5.57.2)
       '@lilydesignsystem/svelte-text-size-picker':
-        specifier: ^0.2.0
-        version: 0.2.0(svelte@5.57.2)
+        specifier: ^0.3.0
+        version: 0.3.0(svelte@5.57.2)
       '@lilydesignsystem/svelte-theme-picker':
         specifier: ^0.2.0
         version: 0.2.0(svelte@5.57.2)
@@ -249,6 +249,12 @@ packages:
     peerDependencies:
       svelte: ^5.0.0
 
+  '@lilydesignsystem/svelte-headless@0.4.0':
+    resolution: {integrity: sha512-zrHBMmliIK6ic+eKH4ZE0AJ+kWnAf5su1SRv7AlU2YcEx4Q3hm0MruApaIjgOAc2UxjJjT2UBIldw2y40CVURQ==}
+    engines: {node: '=26'}
+    peerDependencies:
+      svelte: ^5.0.0
+
   '@lilydesignsystem/svelte-link-picker@0.1.1':
     resolution: {integrity: sha512-TmgAbQ45eeR16J6GxBlfepp7iNKzL5LUBozCCBDbDZTbmWz+I9J/OEsy39XsQy3D4LCJMnQ1o2qoAbUny7ncog==}
     engines: {node: '=26'}
@@ -281,6 +287,12 @@ packages:
 
   '@lilydesignsystem/svelte-text-size-picker@0.2.0':
     resolution: {integrity: sha512-iTtks4b/IqM5S1EyKyErDq7LuyJ986XRNGJP8imF52FUDBV6e5T6KlBMVJqSnxLvi+EpaZaVODb2TpFRLYXekw==}
+    engines: {node: '=26'}
+    peerDependencies:
+      svelte: ^5.0.0
+
+  '@lilydesignsystem/svelte-text-size-picker@0.3.0':
+    resolution: {integrity: sha512-s1wM1R/v0EPz7OjHV04Rhr1kpx4s1XWs6SU/dwNjFV9Ekk1iagj0Zs1W5MrWGrml7n3KPof5lkV72ogkMG57qQ==}
     engines: {node: '=26'}
     peerDependencies:
       svelte: ^5.0.0
@@ -1028,6 +1040,11 @@ snapshots:
       aria-query: 5.3.2
       svelte: 5.57.2
 
+  '@lilydesignsystem/svelte-headless@0.4.0(svelte@5.57.2)':
+    dependencies:
+      aria-query: 5.3.2
+      svelte: 5.57.2
+
   '@lilydesignsystem/svelte-link-picker@0.1.1(svelte@5.57.2)':
     dependencies:
       '@lilydesignsystem/svelte-headless': 0.2.0(svelte@5.57.2)
@@ -1061,6 +1078,11 @@ snapshots:
   '@lilydesignsystem/svelte-text-size-picker@0.2.0(svelte@5.57.2)':
     dependencies:
       '@lilydesignsystem/svelte-headless': 0.2.0(svelte@5.57.2)
+      svelte: 5.57.2
+
+  '@lilydesignsystem/svelte-text-size-picker@0.3.0(svelte@5.57.2)':
+    dependencies:
+      '@lilydesignsystem/svelte-headless': 0.4.0(svelte@5.57.2)
       svelte: 5.57.2
 
   '@lilydesignsystem/svelte-theme-picker@0.2.0(svelte@5.57.2)':
