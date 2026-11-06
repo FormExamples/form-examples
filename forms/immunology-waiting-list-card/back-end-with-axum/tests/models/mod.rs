@@ -1,0 +1,7 @@
+mod immunology_waiting_list_card_appointments;
+mod immunology_waiting_list_card_grade_flags;
+mod immunology_waiting_list_card_grade_rules;
+mod immunology_waiting_list_card_grades;
+mod immunology_waiting_list_cards;
+mod patients;
+mod practitioners;

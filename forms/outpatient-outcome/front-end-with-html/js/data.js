@@ -4,7 +4,7 @@
 // The four rows mirror the SvelteKit sample reports (gradeA / gradeB / gradeD /
 // gradeE) and their grades / flag counts are the exact output of the shared
 // OOCG engine over those assessments — worked so the HTML dashboard shows the
-// same values the Svelte and Loco stacks compute. Note: the "grade D" sample
+// same values the Svelte and Axum stacks compute. Note: the "grade D" sample
 // grades to an overall E because two PROM instruments worsened (PROM > worst
 // of the other three domains).
 

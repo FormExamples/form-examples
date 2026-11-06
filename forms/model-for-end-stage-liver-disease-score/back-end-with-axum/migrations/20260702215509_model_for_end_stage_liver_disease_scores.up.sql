@@ -1,0 +1,30 @@
+CREATE TABLE IF NOT EXISTS "model_for_end_stage_liver_disease_scores" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "clinician_name" varchar NOT NULL DEFAULT '',
+    "clinician_role" varchar NOT NULL DEFAULT '',
+    "assessed_at" timestamp with time zone NULL,
+    "care_setting" varchar NOT NULL DEFAULT '',
+    "meld_variant" varchar NOT NULL DEFAULT '',
+    "patient_identifier" varchar NOT NULL DEFAULT '',
+    "age_band" varchar NOT NULL DEFAULT '',
+    "sex" varchar NOT NULL DEFAULT '',
+    "bilirubin" double precision NULL,
+    "bilirubin_unit" varchar NOT NULL DEFAULT '',
+    "inr" double precision NULL,
+    "creatinine" double precision NULL,
+    "creatinine_unit" varchar NOT NULL DEFAULT '',
+    "dialysis_sessions_past_week" integer NULL,
+    "cvvhd_24h" varchar NOT NULL DEFAULT '',
+    "sodium" double precision NULL,
+    "albumin" double precision NULL,
+    "clinical_note" text NOT NULL DEFAULT '',
+    "patient_id" uuid NOT NULL,
+    "clinician_id" uuid NULL,
+    CONSTRAINT "fk-model_for_end_stage_liver_disease_scores-patient_id-to-patients" FOREIGN KEY ("patient_id") REFERENCES "patients" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-model_for_end_stage_liver_disease_scores-clinician_id-to-clinicians" FOREIGN KEY ("clinician_id") REFERENCES "clinicians" (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+ALTER TABLE model_for_end_stage_liver_disease_scores ALTER COLUMN id SET DEFAULT gen_random_uuid();

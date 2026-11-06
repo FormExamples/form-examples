@@ -27,7 +27,7 @@ Authorization form for releasing medical records, validated for completeness of 
 medical-records-release-permission/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

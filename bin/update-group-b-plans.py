@@ -92,7 +92,7 @@ SvelteKit patient front-end implemented. {summary}
 Remaining work:
 
 - Build front-end-dashboard-with-svelte (SVAR DataGrid)
-- Build back-end-with-loco Rust JSON API back-end (axum + Loco; JSON only)
+- Build back-end-with-axum Rust JSON API back-end (axum + Axum; JSON only)
 - PDF report generation via SvelteKit server endpoint
 - End-to-end Playwright tests
 - Clinical safety case documentation

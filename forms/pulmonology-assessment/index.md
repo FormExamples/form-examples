@@ -29,7 +29,7 @@ Respiratory evaluation using GOLD (Global Initiative for Chronic Obstructive Lun
 pulmonology-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

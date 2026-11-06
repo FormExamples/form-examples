@@ -41,7 +41,7 @@
 - [x] TypeSpec hand-written from the SQL schema.
 
 ## Full-stack scaffolding
-- [x] `back-end-with-loco-setup` — executable shell
+- [x] `back-end-with-axum-setup` — executable shell
       script of `cargo loco generate scaffold` calls.
 
 ## Front-ends
@@ -54,7 +54,7 @@
       table with sample data, browser smoke test passing.
 
 ## Full-stack backend
-- [x] `back-end-with-loco/` — Loco 0.16 + axum 0.8 +
+- [x] `back-end-with-axum/` — Loco 0.16 + axum 0.8 +
       SeaORM + Loco JSON API.
 
 ## Tests

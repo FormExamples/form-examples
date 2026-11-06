@@ -1,0 +1,1 @@
+DROP TABLE "medical_information_form_for_air_travel_grade_flags";

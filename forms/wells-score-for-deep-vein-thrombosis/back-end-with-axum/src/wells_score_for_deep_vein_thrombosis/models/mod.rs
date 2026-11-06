@@ -1,0 +1,6 @@
+pub mod clinicians;
+pub mod patients;
+pub mod wells_score_for_deep_vein_thromboses;
+pub mod wells_score_for_deep_vein_thrombosis_grade_flags;
+pub mod wells_score_for_deep_vein_thrombosis_grade_rules;
+pub mod wells_score_for_deep_vein_thrombosis_grades;

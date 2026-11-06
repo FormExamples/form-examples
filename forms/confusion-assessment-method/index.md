@@ -150,7 +150,7 @@ confusion-assessment-method/
   protobuf/                                         # Protocol Buffers .proto schemas (generated)
   front-end-with-html/                              # HTML + Lily wizard + dashboard
   front-end-with-svelte/                            # SvelteKit + Lily wizard + dashboard
-  back-end-with-loco/                               # Rust axum + Loco JSON API
+  back-end-with-axum/                               # Rust axum + axa + sqlx JSON API
 ```
 
 ## Clinical references

@@ -18,6 +18,65 @@ for them.
 
 ### Changed
 
+- **Every error is now RFC 9457 `application/problem+json`** in every form's back-end,
+  through `axa-problem`: `axa::Error`, extractor refusals, unknown routes, panics, and
+  timeouts. A client reading `error` or `description` must move to `title` and `detail`.
+  `openapi.yaml` publishes the `Problem` schema. See ADR-8.
+- **`axa` 0.5 in every form's back-end**, up from 0.3. The pool now lives in
+  `AppContext::db`, `/_readiness` asks it directly, and `--help` describes the form.
+- **`openapi.yaml` now describes the real API.** Paths carry `/api` and the crates'
+  snake_case names, and creates and deletes answer `200`, as they always did. The
+  combined document a crate serves lists only routes it has, so a table with no
+  controller has a per-entity file and no entry there.
+- **`db down`, `db reset`, and `db truncate` now need `AXA_DESTROY_DATA=true`**, and
+  only run in development or test.
+- **The auth scaffold is gone from every form's back-end**: the nine `/api/auth`
+  routes, the `users` table, mail, and password hashing. Nothing used them, and no
+  form route required them. See ADR-7. A database migrated since the Axum move needs
+  `db reset`.
+- **List routes are paged** with `axa-pagination`, at the limits `openapi.yaml`
+  already published: `limit` 100 by default and 1000 at most. `offset` stops at
+  100000, and answers report `x-total-count`, `x-limit`, and `x-offset`. A list now
+  returns its first 100 rows unless asked for more.
+- **`axa` 0.3 in every form's back-end.** `start` now goes through `server::run`,
+  `check` prints the effective settings, and `/_readiness` answers 503 when the
+  database stops answering, which it did not check before.
+- **The local database role is now `postgres`, not `loco`,** following axa's
+  default URL `postgres://postgres:postgres@localhost:5432/<form>_<env>`. An existing
+  local setup needs that role, or `DATABASE_URL` set. Setup scripts and CI follow.
+- **`serde-saphyr` replaces `serde_yaml` for fixtures**, which removes the
+  unmaintained `unsafe-libyaml`. Both parsers read all 2,559 fixture files the same.
+- **`deny.toml` accepts no advisories.** `RUSTSEC-2023-0071` left with jsonwebtoken.
+- **Unused dependencies removed:** `opentelemetry`, `opentelemetry_sdk`,
+  `opentelemetry-otlp`, `tracing-opentelemetry`, `axum-prometheus`, `regex`, `rstest`,
+  and `tracing-subscriber`. The crates never exported metrics or traces, and
+  `arc42/07` no longer says they do.
+- **`db truncate` now empties the form's tables**, where it only emptied `users`.
+
+### Fixed
+
+- **`db down` and `db truncate` are refused in production**, like `db reset`. They
+  had no guard.
+- **Loco and SeaORM replaced by plain Axum, `axa`, and sqlx** in every form's
+  back-end, and `back-end-with-loco` renamed to `back-end-with-axum`. Migrations
+  are now plain `.up.sql` and `.down.sql` files, settings come from the
+  environment (`config/*.yaml` is gone), and paging, model errors, and seeding live
+  in an identical `support/` module per crate. The generated schema matches the
+  old one exactly in all 360 forms. See ADR-6 in `arc42/`.
+- **MSRV raised to 1.97**, which `axa` requires.
+- **`/api/auth`, mail, and seeding** keep their behaviour, with these differences
+  on purpose: production requires `JWT_SECRET` and `DATABASE_URL`, CORS is off in
+  production until `CORS_ALLOWED_ORIGINS` lists origins, and outside production
+  mail is logged unless `SMTP_ENABLE` is set.
+
+### Removed
+
+- The `bin/loco-*` one-shot refactors and drift checks that only applied to Loco,
+  including `loco-migration-defaults` and `loco-migration-nullability`.
+- `examples/playground.rs` and each crate's `migration/` and `config/`.
+
+### Changed
+
 - **Applied `spec/lily-design-system-svelte-with-picker-bar/` fleet-wide:
   Lily default theme order, Lily default text-size scale, retired
   `DateTimePicker`.** New tool `bin/svelte-lily-picker-defaults
@@ -137,7 +196,7 @@ for them.
   disk.** Every form's checklist began life as `bin/create-form`'s
   scaffold template; fleet-wide tooling since has built almost all of
   that work directly (SQL migrations, generated XML/FHIR/protobuf/OpenAPI,
-  `front-end-with-html/`, `front-end-with-svelte/`, `back-end-with-loco/`,
+  `front-end-with-html/`, `front-end-with-svelte/`, `back-end-with-axum/`,
   `doc/` pages, ...) without ever going back to tick the original
   per-form list — 1856 stale `- [ ]` lines found in `tasks.md` fleet-wide,
   plus another 69 in `plan.md` once the sweep was extended there too.
@@ -903,7 +962,7 @@ for them.
   `front-end-form-with-*`/`front-end-dashboard-with-*` layout, SVAR
   dashboards, `full-stack-with-loco-tera-htmx-alpine/`) rewritten to the
   current 355-form / `front-end-with-html` + `front-end-with-svelte` +
-  `back-end-with-loco` reality; and `scripts/generate-forms-data.ts`
+  `back-end-with-axum` reality; and `scripts/generate-forms-data.ts`
   listed *any* directory under `forms/` (picking up `doc/`, `fhir/`,
   `lily-spec/`, `lily-svelte-spec/` as 4 bogus entries on the public
   Forms page) rather than requiring an `index.md`.
@@ -951,13 +1010,13 @@ this section gathers the `[Unreleased]` history that shipped as v1.0.0.
 ### Added
 
 - `#![forbid(unsafe_code)]` on every crate root in every form's
-  `back-end-with-loco/` — the library, the `-cli` binary, the `migration`
+  `back-end-with-axum/` — the library, the `-cli` binary, the `migration`
   library, and the integration-test target — 1,412 crate roots across 355
   crates. Nothing in these crates needs `unsafe`, and `forbid`, unlike `deny`,
   cannot be reopened by a later inner `allow`.
-- `bin/loco-forbid-unsafe`, the tool that applies and gates the above, with
+- `bin/axum-forbid-unsafe`, the tool that applies and gates the above, with
   `--check` wired into the CI drift job. Every form's generated
-  `back-end-with-loco-setup` script now calls it as its final step, so a newly
+  `back-end-with-axum-setup` script now calls it as its final step, so a newly
   scaffolded crate arrives with the attribute already in place.
 - Repository-level special files for public repositories: `AI_STATEMENT.md`,
   `BENCHMARKS.md`, `CHANGELOG.md`, `CODEOWNERS`, `COMPARISONS.md`,
@@ -1152,7 +1211,7 @@ this section gathers the `[Unreleased]` history that shipped as v1.0.0.
 
 ### Changed
 
-- Route layouts settled: Loco crates under `back-end-with-loco/src/<snake>/`,
+- Route layouts settled: Loco crates under `back-end-with-axum/src/<snake>/`,
   Svelte routes nested under `src/routes/<form-kebab-case>/`.
 - Every HTML front-end converted from classic `window.<Namespace>` scripts to
   native ES modules, with `spec/es-modules.md` and a `--check` gate.

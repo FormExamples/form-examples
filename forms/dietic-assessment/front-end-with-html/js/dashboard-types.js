@@ -55,7 +55,7 @@
 /**
  * Response from `GET /api/dietic_assessments`.
  *
- * The Loco back-end returns a bare JSON array of `AssessmentRow` objects; the
+ * The Axum back-end returns a bare JSON array of `AssessmentRow` objects; the
  * dashboard accepts either a bare array or an `{ items, total }` envelope so a
  * future paginated response is forwards-compatible.
  *

@@ -19,5 +19,5 @@ are delete restricted. Foreign-key targets are created before their referencers.
 | 06 | `06_create_table_confusion_assessment_method_grade_rule.sql` | `confusion_assessment_method_grade_rule` | audit trail of fired classification rules |
 | 07 | `07_create_table_confusion_assessment_method_grade_flag.sql` | `confusion_assessment_method_grade_flag` | red-flag issues with priority and suggested action |
 
-Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Loco
+Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Axum
 setup script) are derived from these migrations and are never hand-edited.

@@ -1,0 +1,1 @@
+DROP TABLE "estimated_glomerular_filtration_rate_calculators";

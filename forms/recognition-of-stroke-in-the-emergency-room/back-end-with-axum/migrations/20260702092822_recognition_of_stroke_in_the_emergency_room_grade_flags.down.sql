@@ -1,0 +1,1 @@
+DROP TABLE "recognition_of_stroke_in_the_emergency_room_grade_flags";

@@ -2,7 +2,7 @@
 
 PostgreSQL migrations for the biopsy histopathology result (report). This
 directory is the **schema source of truth**; all other representations (XML,
-FHIR R5, protobuf, TypeSpec, OpenAPI, Loco) are generated from it.
+FHIR R5, protobuf, TypeSpec, OpenAPI, Axum) are generated from it.
 
 ## Migration order
 

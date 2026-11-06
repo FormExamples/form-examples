@@ -1,0 +1,8 @@
+pub mod openapi;
+
+pub mod clinician;
+pub mod edinburgh_postnatal_depression_scale;
+pub mod edinburgh_postnatal_depression_scale_grade;
+pub mod edinburgh_postnatal_depression_scale_grade_flag;
+pub mod edinburgh_postnatal_depression_scale_grade_rule;
+pub mod patient;

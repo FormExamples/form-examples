@@ -52,7 +52,7 @@
 - [x] `front-end-with-html/` — HTML review table.
 
 ## Full-stack backend
-- [x] `back-end-with-loco/` — Loco 0.16 + axum 0.8
+- [x] `back-end-with-axum/` — Loco 0.16 + axum 0.8
       + SeaORM + Loco JSON API.
 
 ## Tests
@@ -72,7 +72,7 @@ representations/Rust backend. Continuing the build-out:
       — 25 new columns. Verified applies cleanly against the full
       migration stack.
 - [x] Regenerated XML, FHIR R5, protobuf, OpenAPI representations.
-- [x] Rust back-end-with-loco updated to match: new migration + 25 new
+- [x] Rust back-end-with-axum updated to match: new migration + 25 new
       entity/controller fields. Verified via `cargo check` (clean) and
       `cargo test` (40/40 passing) and `bin/test-form` (PASS).
 - [x] front-end-with-html/ — 25 new fields added to the existing steps

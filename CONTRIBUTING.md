@@ -3,7 +3,7 @@
 This is a spec-driven monorepo of 356 medical / administrative forms. Each form
 carries a full stack — SQL schema, generated representations (XML, FHIR R5,
 Protocol Buffers, OpenAPI), two front-ends (HTML and SvelteKit), and a Rust
-back-end (axum + Loco). The uniformity is the point: one shared design proven
+back-end (axum + axa + sqlx). The uniformity is the point: one shared design proven
 across many clinical domains. Contributions must preserve that uniformity.
 
 ## Ways to contribute
@@ -54,19 +54,19 @@ doc under [`AGENTS/`](AGENTS) and [`forms/`](forms) before changing code.
 ## Environment
 
 - **Python 3.12+** — the generators (`bin/*.py`).
-- **PostgreSQL 18** — the SQL apply gate and Loco back-end tests.
+- **PostgreSQL 18** — the SQL apply gate and Axum back-end tests.
 - **Node 26+** and **pnpm** — the SvelteKit front-ends and the E2E harness.
 - **Rust (stable; most crates are edition 2021, a few 2024)** with the
-  `x86_64-unknown-linux-musl` target and `clippy` — the Loco back-ends.
+  `x86_64-unknown-linux-musl` target and `clippy` — the Axum back-ends.
 - **xmllint** (`libxml2-utils`) — XML/DTD validation.
 - **Java 21** — the HL7 FHIR validator (CI only).
 
 ### Rust build performance (356 crates)
 
-Each `forms/<slug>/back-end-with-loco/` is its own self-contained workspace
+Each `forms/<slug>/back-end-with-axum/` is its own self-contained workspace
 (there is no repo-root `Cargo.toml` uniting them), so a plain `cargo build`
 gives every one of the 356 crates its own `target/` directory — tens of GB
-in aggregate, with the same dependency versions (loco-rs, sea-orm, tokio, …)
+in aggregate, with the same dependency versions (axa, sqlx, tokio, …)
 compiled from scratch 356 times over. Two independent fixes, both safe to
 set globally in `~/.cargo/config.toml`:
 
@@ -99,7 +99,7 @@ The workflow is **spec → code → regenerate → verify**, never the reverse:
 ## Generated artefacts — never hand-edit
 
 `forms.tsv`, `docs/tools.md`, each form's `sql/schema.sql`, `xml/`, `fhir/r5/`,
-`protobuf/`, `openapi/`, `back-end-with-loco-setup`, `back-end-with-loco/deny.toml`,
+`protobuf/`, `openapi/`, `back-end-with-axum-setup`, `back-end-with-axum/deny.toml`,
 `llms.txt`, `examples/assessment.json`, and `examples/fhir-bundle.json` are all
 generated. After a schema change, regenerate:
 
@@ -111,8 +111,8 @@ python3 bin/xml-representations/generate-xml-representations.py
 python3 bin/fhir-r5/generate-fhir-r5-representations.py
 python3 bin/protobuf/generate-protobuf-representations.py
 python3 bin/openapi/generate-openapi-representations.py
-python3 bin/back-end-with-loco/generate-back-end-with-loco-setup.py
-python3 bin/generate-loco-deny-config.py
+python3 bin/back-end-with-axum/generate-back-end-with-axum-setup.py
+python3 bin/generate-axum-deny-config.py
 python3 bin/generate-llms-txt.py
 python3 bin/generate-changelog-and-examples.py
 ```
@@ -130,7 +130,7 @@ bin/test-sql-apply                     # apply every form's migrations on a scra
 bin/test-examples-conformance          # example fixtures match SQL schema
 bin/test-tutorials                     # docs/tutorials/ reference only existing tools/paths
 bin/test-engines                       # HTML scoring engines load and run headless
-bin/test-loco-routes                   # every Loco crate exposes its domain HTTP API
+bin/test-axum-routes                   # every Axum crate exposes its domain HTTP API
 bin/test-vendored-uniformity           # vendored themes + helpers uniform fleet-wide
 bin/test-personas                      # personas.json vs each form's actual scoring engine
 bin/test-tools                         # every generator/Lily --check gate
@@ -138,12 +138,9 @@ bin/lily-html-refactor --check --all   # Lily HTML class contract
 bin/lily-svelte-refactor --check --all # Lily Svelte class contract
 bin/lily-sync --check                  # Lily HTML snapshot
 bin/lily-svelte-sync --check           # Lily Svelte snapshot
-bin/back-end-with-loco/generate-loco-agents.py --list-stale # back-end AGENTS.md staleness
-bin/loco-config-refactor --check --all # Loco queue + observability conventions
-bin/loco-forbid-unsafe --check --all   # #![forbid(unsafe_code)] in every crate root
-bin/loco-seed-base-rename --check --all      # seed() unused-base-param drift
-bin/loco-test-auth-header-fix --check --all  # test auth_header() redundant-& drift
-bin/generate-loco-deny-config.py --check # Loco deny.toml drift
+bin/back-end-with-axum/generate-axum-agents.py --list-stale # back-end AGENTS.md staleness
+bin/axum-forbid-unsafe --check --all   # #![forbid(unsafe_code)] in every crate root
+bin/generate-axum-deny-config.py --check # Axum deny.toml drift
 bin/node-current-version-set --check   # spec/node-current-version/ drift
 bin/test-e2e --html                    # Playwright smoke + axe-core a11y (HTML)
 ```
@@ -152,13 +149,13 @@ Per crate, `cargo deny --all-features check` (run in CI as part of the
 sharded Rust job) verifies the supply-chain policy: licenses, security
 advisories, banned crates, and trusted sources.
 
-The SQL apply gate and the Loco tests need a Postgres reachable via `PGHOST` /
+The SQL apply gate and the Axum tests need a Postgres reachable via `PGHOST` /
 `PGPORT` / `PGUSER` (default `localhost:5432`, user `loco`). A throwaway local
 instance:
 
 ```sh
 PGDATA=$(mktemp -d)/data; SOCK=$(mktemp -d)
-initdb -D "$PGDATA" -U loco --auth=trust
+initdb -D "$PGDATA" -U postgres --auth=trust
 pg_ctl -D "$PGDATA" -o "-p 5433 -k $SOCK -c listen_addresses=''" start
 PGHOST="$SOCK" PGPORT=5433 PGUSER=loco bin/test-sql-apply
 ```

@@ -34,7 +34,7 @@
 - [x] `fhir/r5/` — `bin/fhir-r5/generate-fhir-r5-representations.py`
 - [x] `protobuf/` — `bin/protobuf/generate-protobuf-representations.py`
 - [x] `openapi/` — `bin/openapi/generate-openapi-representations.py`
-- [x] `back-end-with-loco-setup` — `bin/back-end-with-loco/generate-back-end-with-loco-setup.py`
+- [x] `back-end-with-axum-setup` — `bin/back-end-with-axum/generate-back-end-with-axum-setup.py`
 - [x] `CHANGELOG.md` + `examples/` — `bin/generate-changelog-and-examples.py`
 - [x] `llms.txt` — `bin/generate-llms-txt.py`
 - [x] `bin/test-examples-conformance health-screening-questionnaire` passes.
@@ -88,7 +88,7 @@
 - [x] `bin/loco-rs-1-migration` — loco-rs 1.0.1, `i64` ids.
 - [x] `bin/loco-migration-defaults` — 71 columns gained `sql/`-matching defaults.
 - [x] `bin/loco-migration-nullability` — 0 drift (no nullable-unique columns).
-- [x] `bin/generate-loco-deny-config.py` — `deny.toml`.
+- [x] `bin/generate-axum-deny-config.py` — `deny.toml`.
 - [x] `cargo build` — green.
 - [x] `cargo test` — green.
 

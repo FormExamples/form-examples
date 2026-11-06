@@ -34,8 +34,8 @@
 
 ## Phase 5 — Full-stack backend
 
-- [x] `back-end-with-loco-setup` — scaffold generator script
-- [x] `back-end-with-loco/` — Rust Loco crate
+- [x] `back-end-with-axum-setup` — scaffold generator script
+- [x] `back-end-with-axum/` — Rust Loco crate
 - [ ] HTMX + Alpine.js base layout (`templates/base.html.tera`)
 - [x] SeaORM migrations mirroring `sql/`
 - [ ] Validation engine port to Rust

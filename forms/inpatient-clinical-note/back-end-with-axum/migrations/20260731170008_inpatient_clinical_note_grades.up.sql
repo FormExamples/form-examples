@@ -1,0 +1,30 @@
+CREATE TABLE IF NOT EXISTS "inpatient_clinical_note_grades" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "status" varchar NOT NULL DEFAULT '',
+    "completeness_percent" integer NULL,
+    "required_component_count" integer NULL,
+    "documented_component_count" integer NULL,
+    "acuity_band" varchar NOT NULL DEFAULT '',
+    "computed_acuity_band" varchar NOT NULL DEFAULT '',
+    "news2_total" integer NULL,
+    "header_documented" varchar NOT NULL DEFAULT '',
+    "interval_history_documented" varchar NOT NULL DEFAULT '',
+    "observations_documented" varchar NOT NULL DEFAULT '',
+    "examination_documented" varchar NOT NULL DEFAULT '',
+    "investigations_documented" varchar NOT NULL DEFAULT '',
+    "problems_documented" varchar NOT NULL DEFAULT '',
+    "medications_documented" varchar NOT NULL DEFAULT '',
+    "risk_assessments_documented" varchar NOT NULL DEFAULT '',
+    "impression_documented" varchar NOT NULL DEFAULT '',
+    "plan_documented" varchar NOT NULL DEFAULT '',
+    "escalation_documented" varchar NOT NULL DEFAULT '',
+    "communication_documented" varchar NOT NULL DEFAULT '',
+    "graded_at" timestamp with time zone NOT NULL,
+    "inpatient_clinical_note_id" uuid NOT NULL,
+    CONSTRAINT "fk-inpatient_clinical_note_grades-inpatient_clinical_note_id-to-inpatient_clinical_notes" FOREIGN KEY ("inpatient_clinical_note_id") REFERENCES "inpatient_clinical_notes" (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+ALTER TABLE inpatient_clinical_note_grades ALTER COLUMN id SET DEFAULT gen_random_uuid();

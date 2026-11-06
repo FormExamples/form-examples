@@ -1,0 +1,1 @@
+DROP TABLE "model_for_end_stage_liver_disease_score_grade_rules";

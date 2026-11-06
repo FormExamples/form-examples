@@ -58,8 +58,8 @@ test_repository() {
     forms_tsv_current_or_err
     examples_conform_or_err
     file_exists_or_err "$top/AGENTS/front-end-with-sveltekit-tailwind-svar.md"
-    file_exists_or_err "$top/AGENTS/back-end-with-loco.md"
-    file_exists_or_err "$top/AGENTS/back-end-with-loco-setup.md"
+    file_exists_or_err "$top/AGENTS/back-end-with-axum.md"
+    file_exists_or_err "$top/AGENTS/back-end-with-axum-setup.md"
     file_exists_or_err "$top/AGENTS/sql.md"  
     file_exists_or_err "$top/AGENTS/xml-representations.md"  
 }

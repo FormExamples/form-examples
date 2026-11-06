@@ -1,0 +1,5 @@
+mod clinicians;
+mod hernia_diagnostic_evaluation_grade_flags;
+mod hernia_diagnostic_evaluation_grades;
+mod hernia_diagnostic_evaluations;
+mod patients;

@@ -1,0 +1,31 @@
+CREATE TABLE IF NOT EXISTS "genetic_test_requests" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "status" varchar NOT NULL DEFAULT 'draft',
+    "site_name" varchar NOT NULL DEFAULT '',
+    "setting" varchar NOT NULL DEFAULT '',
+    "referral_date" date NULL,
+    "requested_by_date" date NULL,
+    "test_type" varchar NOT NULL DEFAULT '',
+    "primary_indication" varchar NOT NULL DEFAULT '',
+    "clinical_question" varchar NOT NULL DEFAULT '',
+    "clinical_details" varchar NOT NULL DEFAULT '',
+    "family_history" varchar NOT NULL DEFAULT '',
+    "suspected_condition" varchar NOT NULL DEFAULT '',
+    "consent_obtained" boolean NOT NULL DEFAULT false,
+    "genetic_counselling_offered" boolean NOT NULL DEFAULT false,
+    "affected_relative_tested" boolean NOT NULL DEFAULT false,
+    "specimen_type" varchar NOT NULL DEFAULT '',
+    "urgency" varchar NOT NULL DEFAULT 'routine',
+    "supervising_consultant" varchar NOT NULL DEFAULT '',
+    "requester_contact" varchar NOT NULL DEFAULT '',
+    "notes" varchar NOT NULL DEFAULT '',
+    "patient_id" uuid NOT NULL,
+    "clinician_id" uuid NOT NULL,
+    CONSTRAINT "fk-genetic_test_requests-patient_id-to-patients" FOREIGN KEY ("patient_id") REFERENCES "patients" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-genetic_test_requests-clinician_id-to-clinicians" FOREIGN KEY ("clinician_id") REFERENCES "clinicians" (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+ALTER TABLE genetic_test_requests ALTER COLUMN id SET DEFAULT gen_random_uuid();

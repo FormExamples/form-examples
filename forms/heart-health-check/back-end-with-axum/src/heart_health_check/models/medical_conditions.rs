@@ -1,0 +1,72 @@
+//! medical_conditions model.
+
+use serde::{Deserialize, Serialize};
+
+use crate::support::prelude::*;
+
+/// One row.
+#[allow(missing_docs)]
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize, sqlx::FromRow)]
+#[serde(rename_all = "camelCase")]
+pub struct Model {
+    pub created_at: DateTimeWithTimeZone,
+    pub updated_at: DateTimeWithTimeZone,
+    pub id: Uuid,
+    pub deleted_at: Option<DateTimeWithTimeZone>,
+    pub has_diabetes: String,
+    pub has_atrial_fibrillation: String,
+    pub has_rheumatoid_arthritis: String,
+    pub has_chronic_kidney_disease: String,
+    pub has_migraine: String,
+    pub has_severe_mental_illness: String,
+    pub has_erectile_dysfunction: String,
+    pub on_atypical_antipsychotic: String,
+    pub on_corticosteroids: String,
+    pub assessment_id: Uuid,
+}
+
+impl Model {
+    /// One page of rows in a stable order, and how many rows there are in all.
+    ///
+    /// # Errors
+    ///
+    /// Propagates the database error.
+    pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Self>, i64)> {
+        let (limit, offset) = crate::support::paging::bounds(page);
+        let rows =
+            sqlx::query_as("SELECT * FROM medical_conditions ORDER BY id LIMIT $1 OFFSET $2")
+                .bind(limit)
+                .bind(offset)
+                .fetch_all(db)
+                .await?;
+        let total = sqlx::query_scalar("SELECT COUNT(*) FROM medical_conditions")
+            .fetch_one(db)
+            .await?;
+        Ok((rows, total))
+    }
+
+    /// The row with this id, if there is one.
+    ///
+    /// # Errors
+    ///
+    /// Propagates the database error.
+    pub async fn find_by_id(db: &PgPool, id: Uuid) -> sqlx::Result<Option<Self>> {
+        sqlx::query_as("SELECT * FROM medical_conditions WHERE id = $1")
+            .bind(id)
+            .fetch_optional(db)
+            .await
+    }
+
+    /// Delete the row with this id.
+    ///
+    /// # Errors
+    ///
+    /// Propagates the database error.
+    pub async fn delete(db: &PgPool, id: Uuid) -> sqlx::Result<()> {
+        sqlx::query("DELETE FROM medical_conditions WHERE id = $1")
+            .bind(id)
+            .execute(db)
+            .await?;
+        Ok(())
+    }
+}

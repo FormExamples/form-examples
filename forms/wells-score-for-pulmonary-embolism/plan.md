@@ -6,8 +6,8 @@ Implementation roadmap. See [`spec/index.md`](./spec/index.md) for the contract.
 
 All four layers are built as of 2026-07-02: foundation docs (`index.md`,
 `spec/index.md`, `AGENTS.md`, `plan.md`, `tasks.md`); SQL migrations plus the
-generated representations (XML, FHIR R5, protobuf, OpenAPI, Loco setup); both
-consolidated front-ends (HTML + Lily and SvelteKit + Lily); and the Loco
+generated representations (XML, FHIR R5, protobuf, OpenAPI, Axum setup); both
+consolidated front-ends (HTML + Lily and SvelteKit + Lily); and the Axum
 JSON-API back-end — plus `CHANGELOG.md` and `examples/`.
 
 ## Roadmap
@@ -18,7 +18,7 @@ JSON-API back-end — plus `CHANGELOG.md` and `examples/`.
    (six yes/no enums + measured heart rate), timestamps; UUIDv4 PK. Source of
    truth.
 3. **Generated representations** — run the XML, FHIR R5, protobuf, OpenAPI, and
-   Loco setup generators.
+   Axum setup generators.
 4. **Scoring engine** — `types.ts`, `utils.ts`, `wells-pe-rules.ts`,
    `wells-pe-grader.ts`, `flagged-issues.ts` with Vitest tests covering
    threshold boundaries (heart rate 100/101, two-level 4/4.5, three-level 1.5/2
@@ -26,7 +26,7 @@ JSON-API back-end — plus `CHANGELOG.md` and `examples/`.
 5. **Front-ends** — consolidated `front-end-with-html` (Lily wizard + dashboard)
    and `front-end-with-svelte` (Lily; RESTful `/<plural>/` list + `/<plural>/[id]`
    form).
-6. **Back-end** — `back-end-with-loco` Rust axum + Loco JSON API, relational
+6. **Back-end** — `back-end-with-axum` Rust axum + axa JSON API, relational
    per-table schema.
 7. **Verify** — `bin/test-form wells-score-for-pulmonary-embolism`, Lily drift
    checks, spec / changelog drift checks.

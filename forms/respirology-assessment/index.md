@@ -29,7 +29,7 @@ Respiratory evaluation using the MRC (Medical Research Council) Dyspnoea Scale w
 respirology-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

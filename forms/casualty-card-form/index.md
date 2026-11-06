@@ -16,7 +16,7 @@ casualty-card-form/
 ├── front-end-with-svelte/            # SvelteKit form
 ├── front-end-with-svelte/       # Dashboard
 ├── front-end-with-html/              # HTML form (scaffold)
-├── back-end-with-loco/   # Rust backend
+├── back-end-with-axum/   # Rust backend
 ├── db/                                    # SQL migrations
 └── doc/                                   # Documentation
 ```

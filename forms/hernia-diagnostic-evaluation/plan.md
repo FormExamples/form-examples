@@ -15,7 +15,7 @@ Full-stack build complete as of 2026-08-14.
 | Scoring engine (`front-end-with-svelte/src/lib/engine/`) | complete — 35 Vitest boundary cases pass |
 | `front-end-with-html/` | complete — Lily HTML drift-check clean, standalone Node engine-parity check passes |
 | `front-end-with-svelte/` (UI) | complete — `pnpm check`/`pnpm test`/`pnpm build` pass, Lily Svelte drift-check clean |
-| `back-end-with-loco/` | complete — loco-rs 1.0.1, `cargo build` + 28 `cargo test` pass |
+| `back-end-with-axum/` | complete — loco-rs 1.0.1, `cargo build` + 28 `cargo test` pass |
 
 `bin/test-form hernia-diagnostic-evaluation` passes.
 
@@ -92,5 +92,5 @@ used by `dietic-assessment` and `perioperative-optimization`.
   hazard H-08.
 - `cargo deny --all-features check` is expected to fail fleet-wide on
   RUSTSEC-2023-0071 (`rsa`, transitive via SeaORM's MySQL driver) — the
-  canonical reference crate `forms/medical-operation-note/back-end-with-loco`
+  canonical reference crate `forms/medical-operation-note/back-end-with-axum`
   fails identically, so this is not specific to this form.

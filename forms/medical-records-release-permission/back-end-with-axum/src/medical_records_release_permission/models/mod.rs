@@ -1,0 +1,13 @@
+pub mod authorization_periods;
+pub mod authorized_recipients;
+pub mod clinicians;
+pub mod patient_rights;
+pub mod patients;
+pub mod purpose_of_releases;
+pub mod records_to_releases;
+pub mod release_forms;
+pub mod restrictions_limitations;
+pub mod signature_consents;
+pub mod validation_additional_flags;
+pub mod validation_fired_rules;
+pub mod validation_results;

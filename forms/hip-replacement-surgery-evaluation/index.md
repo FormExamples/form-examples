@@ -127,8 +127,8 @@ hip-replacement-surgery-evaluation/
   openapi/                     # generated OpenAPI 3.1 specifications
   front-end-with-html/         # single-page wizard + dashboard (Lily, no build)
   front-end-with-svelte/       # SvelteKit wizard + dashboard
-  back-end-with-loco/          # Rust axum + Loco JSON API
-  back-end-with-loco-setup     # generated scaffold script
+  back-end-with-axum/          # Rust axum + axa + sqlx JSON API
+  back-end-with-axum-setup     # generated scaffold script
 ```
 
 ## Clinical references

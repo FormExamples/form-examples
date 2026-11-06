@@ -1,0 +1,120 @@
+#![allow(clippy::missing_errors_doc)]
+#![allow(clippy::unnecessary_struct_initialization)]
+#![allow(clippy::unused_async)]
+use crate::support::prelude::*;
+use serde::{Deserialize, Serialize};
+
+use crate::models::lpa_registration_applications::Model;
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Params {
+    pub deleted_at: Option<DateTimeWithTimeZone>,
+    pub lpa_id: Uuid,
+    pub applicant_role: String,
+    pub applicant_signed_at: Option<DateTimeWithTimeZone>,
+    pub fee_amount_pounds: f64,
+    pub fee_remission: String,
+    pub fee_remission_reason: String,
+    pub submitted_at: Option<DateTimeWithTimeZone>,
+    pub submission_channel: String,
+}
+
+impl Params {
+    /// Insert a row.
+    async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
+        sqlx::query_as(
+            "INSERT INTO lpa_registration_applications (deleted_at, lpa_id, applicant_role, \
+            applicant_signed_at, fee_amount_pounds, fee_remission, fee_remission_reason, \
+            submitted_at, submission_channel) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) \
+            RETURNING *",
+        )
+        .bind(self.deleted_at)
+        .bind(self.lpa_id)
+        .bind(&self.applicant_role)
+        .bind(self.applicant_signed_at)
+        .bind(self.fee_amount_pounds)
+        .bind(&self.fee_remission)
+        .bind(&self.fee_remission_reason)
+        .bind(self.submitted_at)
+        .bind(&self.submission_channel)
+        .fetch_one(db)
+        .await
+    }
+
+    /// Update the row with this id, if there is one.
+    async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
+        sqlx::query_as(
+            "UPDATE lpa_registration_applications SET deleted_at = $2, lpa_id = $3, \
+            applicant_role = $4, applicant_signed_at = $5, fee_amount_pounds = $6, \
+            fee_remission = $7, fee_remission_reason = $8, submitted_at = $9, \
+            submission_channel = $10, updated_at = now() WHERE id = $1 RETURNING *",
+        )
+        .bind(id)
+        .bind(self.deleted_at)
+        .bind(self.lpa_id)
+        .bind(&self.applicant_role)
+        .bind(self.applicant_signed_at)
+        .bind(self.fee_amount_pounds)
+        .bind(&self.fee_remission)
+        .bind(&self.fee_remission_reason)
+        .bind(self.submitted_at)
+        .bind(&self.submission_channel)
+        .fetch_optional(db)
+        .await
+    }
+}
+
+async fn load_item(ctx: &AppContext, id: Uuid) -> Result<Model> {
+    let item = Model::find_by_id(&db(ctx), id).await?;
+    item.ok_or_else(|| Error::NotFound)
+}
+
+#[debug_handler]
+pub async fn list(
+    State(ctx): State<AppContext>,
+    Query(params): Query<PageParams>,
+) -> Result<Response> {
+    let page = paging::resolve(&params)?;
+    let (rows, total) = Model::page(&db(&ctx), page).await?;
+    paging::respond(page, total, rows)
+}
+
+#[debug_handler]
+pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    let item = params.insert(&db(&ctx)).await?;
+    format::json(item)
+}
+
+#[debug_handler]
+pub async fn update(
+    Path(id): Path<Uuid>,
+    State(ctx): State<AppContext>,
+    Json(params): Json<Params>,
+) -> Result<Response> {
+    let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
+    format::json(item)
+}
+
+#[debug_handler]
+pub async fn remove(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
+    load_item(&ctx, id).await?;
+    Model::delete(&db(&ctx), id).await?;
+    format::empty()
+}
+
+#[debug_handler]
+pub async fn get_one(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
+    format::json(load_item(&ctx, id).await?)
+}
+
+pub fn routes() -> Routes {
+    Routes::new()
+        .prefix("api/lpa_registration_applications/")
+        .add("/", get(list))
+        .add("/", post(add))
+        .add("{id}", get(get_one))
+        .add("{id}", delete(remove))
+        .add("{id}", put(update))
+        .add("{id}", patch(update))
+}

@@ -33,7 +33,7 @@ System headless conventions: [`../../AGENTS-front-end-html.md`](../../AGENTS-fro
 
 ## Back-end wiring
 
-`js/api.js` is the only module that talks to the Loco API (base
+`js/api.js` is the only module that talks to the Axum API (base
 `http://localhost:5150`, override via `window.__API_BASE__` or `?api=`). The
 dashboard joins six GETs client-side; `form-app.js` calls `saveFitNote` after
 grading and shows the result in `#save-status`. Sample-data fallback must stay.

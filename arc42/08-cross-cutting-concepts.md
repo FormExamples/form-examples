@@ -50,7 +50,7 @@ and `bin/lily-svelte-sync`.
 ## 8.3 The generator pipeline and drift gates
 
 SQL is the source of truth; Python generators project it to XML/DTD, FHIR R5
-JSON, Protocol Buffers, OpenAPI 3.1, and the Loco scaffold script (see
+JSON, Protocol Buffers, OpenAPI 3.1, and the Axum scaffold script (see
 [§4.2](04-solution-strategy.md), [§6.3](06-runtime-view.md)). Generators are
 **deterministic and idempotent**: correct regeneration yields zero diff. Every
 generator and mechanical refactor exposes a `--check` mode used as a CI **drift

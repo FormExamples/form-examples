@@ -204,8 +204,8 @@ united-kingdom-lasting-power-of-attorney-for-financial-decisions/
   front-end-with-svelte/                           # SvelteKit single-page wizard
   front-end-with-html/                        # review dashboard (HTML table)
   front-end-with-svelte/                      # review dashboard (SVAR Grid)
-  back-end-with-loco/                # Rust backend + server-rendered UI
-  back-end-with-loco-setup           # `cargo loco generate scaffold` setup script
+  back-end-with-axum/                # Rust backend + server-rendered UI
+  back-end-with-axum-setup           # `cargo run -- generate scaffold` setup script
 ```
 
 ## Legal references

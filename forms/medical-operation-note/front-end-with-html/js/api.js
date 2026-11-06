@@ -1,7 +1,7 @@
 // Backend API client for the theatre dashboard.
 //
 // Mirrors the SvelteKit dashboard's `src/lib/api/operationNotes.ts`. The
-// backend lives at http://localhost:5150 (Loco / axum); the dashboard
+// backend lives at http://localhost:5150 (Axum / axum); the dashboard
 // endpoint returns either a bare JSON array of `OperationNoteRow` objects
 // or a `{ items, total }` envelope. When the fetch fails (CORS, network,
 // server down) or returns an empty list, callers fall back to the sample

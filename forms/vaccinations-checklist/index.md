@@ -38,7 +38,7 @@ Immunization status tracking for healthcare workers and patients covering routin
 vaccinations-checklist/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

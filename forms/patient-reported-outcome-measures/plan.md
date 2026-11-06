@@ -12,7 +12,7 @@
 5. Front-end-with-svelte — SvelteKit wizard mirroring the HTML
    front-end + dashboard; scoring engine as TypeScript with unit tests
    per instrument.
-6. Back-end-with-loco — Rust axum + Loco JSON API, 1:1 raw + score
+6. Back-end-with-loco — Rust axum + axa JSON API, 1:1 raw + score
    entities.
 7. Verify — `bin/test-form patient-reported-outcome-measures`,
    `bin/lily-html-refactor --check`, `bin/lily-svelte-refactor --check`,

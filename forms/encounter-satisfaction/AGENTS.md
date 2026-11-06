@@ -9,7 +9,7 @@ Patient encounter satisfaction survey for collecting feedback on healthcare expe
 - ./plan.md - Development roadmap
 - ./tasks.md - Task tracking
 - ./front-end-with-svelte/ - SvelteKit single-page wizard + dashboard (SVAR DataGrid)
-- ./back-end-with-loco/ - Full-stack option (to be built)
+- ./back-end-with-axum/ - Full-stack option (to be built)
 
 ## Scoring system
 

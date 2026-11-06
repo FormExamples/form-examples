@@ -17,5 +17,5 @@ are delete restricted. Foreign-key targets are created before their referencers.
 | 06 | `06_create_table_grace_score_for_acute_coronary_syndrome_grade_rule.sql` | `grace_score_for_acute_coronary_syndrome_grade_rule` | audit trail of fired per-variable point contributors |
 | 07 | `07_create_table_grace_score_for_acute_coronary_syndrome_grade_flag.sql` | `grace_score_for_acute_coronary_syndrome_grade_flag` | red-flag issues with priority and suggested action |
 
-Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Loco
+Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Axum
 setup script) are derived from these migrations and are never hand-edited.

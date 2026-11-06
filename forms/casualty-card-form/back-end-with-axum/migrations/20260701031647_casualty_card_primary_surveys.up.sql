@@ -1,0 +1,33 @@
+CREATE TABLE IF NOT EXISTS "casualty_card_primary_surveys" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "airway_status" text NOT NULL DEFAULT '',
+    "airway_adjuncts" text NOT NULL DEFAULT '',
+    "c_spine_immobilised" text NOT NULL DEFAULT '',
+    "breathing_effort" text NOT NULL DEFAULT '',
+    "chest_movement" text NOT NULL DEFAULT '',
+    "breath_sounds" text NOT NULL DEFAULT '',
+    "trachea_position" text NOT NULL DEFAULT '',
+    "pulse_character" text NOT NULL DEFAULT '',
+    "skin_colour" text NOT NULL DEFAULT '',
+    "skin_temperature" text NOT NULL DEFAULT '',
+    "capillary_refill" text NOT NULL DEFAULT '',
+    "haemorrhage" text NOT NULL DEFAULT '',
+    "iv_access" text NOT NULL DEFAULT '',
+    "gcs_eye" integer NULL,
+    "gcs_verbal" integer NULL,
+    "gcs_motor" integer NULL,
+    "gcs_total" integer NULL,
+    "pupils" text NOT NULL DEFAULT '',
+    "blood_glucose_disability" text NOT NULL DEFAULT '',
+    "limb_movements" text NOT NULL DEFAULT '',
+    "skin_examination" text NOT NULL DEFAULT '',
+    "injuries_identified" text NOT NULL DEFAULT '',
+    "log_roll_findings" text NOT NULL DEFAULT '',
+    "casualty_card_id" uuid NOT NULL,
+    CONSTRAINT "fk-casualty_card_primary_surveys-casualty_card_id-to-casualty_cards" FOREIGN KEY ("casualty_card_id") REFERENCES "casualty_cards" (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+ALTER TABLE casualty_card_primary_surveys ALTER COLUMN id SET DEFAULT gen_random_uuid();

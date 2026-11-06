@@ -28,7 +28,7 @@ Autism spectrum screening using the AQ-10 questionnaire with sensory and develop
 autism-assessment/
   front-end-with-svelte/             # Patient questionnaire
   front-end-with-svelte/        # Dashboard
-  back-end-with-loco/    # Full-stack option
+  back-end-with-axum/    # Full-stack option
 ```
 
 ## Technology

@@ -1,3 +1,0 @@
-mod users;
-
-mod patients;

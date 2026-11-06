@@ -31,7 +31,7 @@ Each form is delivered as:
 - SQL migrations (Liquibase-style, PostgreSQL) — the **source of truth** for data shape;
 - generated XML + DTD, FHIR HL7 R5 JSON, Protocol Buffers, and OpenAPI 3.1 per SQL entity;
 - two front-ends (a wizard and a dashboard) in **HTML + Lily** and in **SvelteKit + Lily**;
-- one back-end Rust JSON API crate (axum + Loco).
+- one back-end Rust JSON API crate (axum + axa + sqlx).
 
 ## 1.2 Quality goals
 

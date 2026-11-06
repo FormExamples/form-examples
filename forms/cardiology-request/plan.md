@@ -3,7 +3,7 @@
 ## Current status
 
 Full gold-standard build. SQL schema (source of truth) and per-form
-documentation are in place; generated derivatives, front-ends, and the Loco
+documentation are in place; generated derivatives, front-ends, and the Axum
 back-end crate follow.
 
 ## Why this form exists
@@ -33,10 +33,10 @@ the **request** half of the pair with [`cardiology-response`](../cardiology-resp
 1. [x] SQL migrations (patient, clinician, request, grade, grade_rule, grade_flag)
 2. [x] index.md / AGENTS.md / plan.md / tasks.md / doc
 3. [x] Generated representations (XML, FHIR R5, protobuf, OpenAPI)
-4. [x] Loco setup script, examples, spec, CHANGELOG.md
+4. [x] Axum setup script, examples, spec, CHANGELOG.md
 5. [x] front-end-with-html (consolidated HTML wizard + dashboard + JS four-axis engine)
 6. [x] front-end-with-svelte (consolidated SvelteKit wizard + dashboard + TS engine)
-7. [x] back-end-with-loco (Rust JSON API crate; cargo check + engine tests pass)
+7. [x] back-end-with-axum (Rust JSON API crate; cargo check + engine tests pass)
 
 ## Future enhancements
 

@@ -12,7 +12,7 @@ Created 2026-08-13. Per-phase checkboxes live in [`tasks.md`](./tasks.md).
 | `examples/`, `CHANGELOG.md`, `llms.txt` | generated |
 | `front-end-with-html/` | complete |
 | `front-end-with-svelte/` | complete |
-| `back-end-with-loco/` | complete |
+| `back-end-with-axum/` | complete |
 
 ## Why this form exists
 
@@ -75,7 +75,7 @@ Acceptance: `bin/test-sql-apply perioperative-optimization` passes.
 ### Phase 3 — Generated representations
 
 XML/DTD, FHIR R5, protobuf, OpenAPI, then the SQL comment and combined-schema
-generators, then the Loco setup script, CHANGELOG/examples, `llms.txt`, and
+generators, then the Axum setup script, CHANGELOG/examples, `llms.txt`, and
 `forms.tsv`.
 
 Acceptance: every generator's `--check` reports no drift and

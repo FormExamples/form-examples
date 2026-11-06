@@ -50,7 +50,7 @@
 /**
  * Response from `GET /api/cardiology_responses`.
  *
- * The Loco backend returns a bare JSON array of `ResponseRow` objects; the
+ * The Axum backend returns a bare JSON array of `ResponseRow` objects; the
  * dashboard accepts either a bare array or an `{ items, total }` envelope so
  * future paginated responses are forwards-compatible.
  *

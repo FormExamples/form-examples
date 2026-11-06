@@ -11,7 +11,7 @@ See [`index.md`](../index.md).
 
 ## 2. Scope
 
-In scope: schema, approval engine, front-ends (HTML and SvelteKit) and Loco
+In scope: schema, approval engine, front-ends (HTML and SvelteKit) and Axum
 JSON API. Out of scope: statutory issuing, authentication, employer delivery.
 
 ## 3. Scoring system
@@ -30,7 +30,7 @@ migrations 05–07: `outcome`, `approvalStatus`, `durationDays`,
 ## 5. Artefacts
 
 `sql` is the source of truth; `xml`, `fhir`, `protobuf`, `openapi` and the
-Loco setup script are generated. The HTML and SvelteKit front-ends and the Loco back-end are implemented and
+Axum setup script are generated. The HTML and SvelteKit front-ends and the Axum back-end are implemented and
 wired together. The back-end serves plain REST JSON at `/api/employees`,
 `/api/clinicians`, `/api/medical_fit_notes`, `/api/medical_fit_note_grades`,
 `/api/medical_fit_note_grade_rules` and `/api/medical_fit_note_grade_flags`

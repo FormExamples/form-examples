@@ -30,7 +30,7 @@ In scope:
 - Per-form schema (SQL migrations as the source of truth for data shape).
 - Generated representations (XML, FHIR R5 JSON, Protocol Buffers, OpenAPI).
 - Four front-ends per form (form + dashboard, each in HTML and SvelteKit).
-- One Rust back-end JSON API implementation per form (axum + Loco).
+- One Rust back-end JSON API implementation per form (axum + axa + sqlx).
 - Cross-cutting documentation, agent instructions, and verification.
 
 Out of scope (today):
@@ -63,7 +63,7 @@ forms/<slug>/spec/index.md      (source of truth for BEHAVIOUR)
         │
         ├──► front-end-with-html/             (HTML wizard + dashboard, one dir)
         ├──► front-end-with-svelte/           (SvelteKit app; /<plural>/ list + /<plural>/[id] form)
-        └──► back-end-with-loco/              (Rust JSON API back-end)
+        └──► back-end-with-axum/              (Rust JSON API back-end)
 ```
 
 **Rule:** generated artefacts are never hand-edited. Hand-edits to
@@ -128,8 +128,8 @@ own bands map onto ESI where the mapping is not self-evident.
 | `openapi/`                                      | `bin/openapi/generate-openapi-representations.py` | **yes** |
 | `front-end-with-html/`                          | author + `bin/lily-html-refactor` for mechanical class swaps | partial |
 | `front-end-with-svelte/`                        | author              | no         |
-| `back-end-with-loco/`                           | author              | no         |
-| `back-end-with-loco-setup`                      | `bin/back-end-with-loco/generate-back-end-with-loco-setup.py` | **yes** |
+| `back-end-with-axum/`                           | author              | no         |
+| `back-end-with-axum-setup`                      | `bin/back-end-with-axum/generate-back-end-with-axum-setup.py` | **yes** |
 
 `bin/test-form <slug>` asserts every required path exists and is non-empty.
 
@@ -167,13 +167,13 @@ own bands map onto ESI where the mapping is not self-evident.
 
 ## 6. Back-end contract
 
-- One Rust crate per form under `back-end-with-loco/`.
+- One Rust crate per form under `back-end-with-axum/`.
 - `serde(rename_all = "camelCase")` on every struct shared with the
   front-end.
 - **JSON API only.** No HTML rendering, no Tera templates, no HTMX, no
   Alpine.js, no static assets, no Lily Design System. The canonical
   resource is `/api/assessments` (list, create, read, update, submit,
-  result); see [`AGENTS/back-end-with-loco.md`](AGENTS/back-end-with-loco.md).
+  result); see [`AGENTS/back-end-with-axum.md`](AGENTS/back-end-with-axum.md).
 - Database name pattern: `<slug_snake>_development`, `<slug_snake>_test`,
   `<slug_snake>_production`. Connection string for production lives in
   `DATABASE_URL`.
@@ -232,17 +232,16 @@ bin/html-helpers-picker-rename --check        # HTML text-size-chooser/share-cho
 bin/generate-llms-txt.py --check      # per-form llms.txt drift detector
 bin/generate-spec.py --check          # per-form spec/ presence check (specs are hand-maintained)
 bin/generate-changelog-and-examples.py --check # CHANGELOG + examples/ drift detector
-bin/back-end-with-loco/generate-back-end-with-loco-setup.py --check # Loco setup-script drift detector
-bin/back-end-with-loco/generate-loco-agents.py --list-stale # back-end AGENTS.md staleness check
-bin/loco-config-refactor --check --all # Loco background-queue + observability drift detector
-bin/generate-loco-deny-config.py --check # Loco deny.toml drift detector
+bin/back-end-with-axum/generate-back-end-with-axum-setup.py --check # Axum setup-script drift detector
+bin/back-end-with-axum/generate-axum-agents.py --list-stale # back-end AGENTS.md staleness check
+bin/generate-axum-deny-config.py --check # Axum deny.toml drift detector
 bin/generate-forms-tsv.py --check     # forms.tsv drift detector
 bin/generate-tools-doc.py --check     # docs/tools.md drift detector
 bin/openapi/generate-openapi-combined.py --check # per-form combined openapi.yaml drift detector
 bin/test-examples-conformance         # example fixtures vs sql/ schema conformance
 bin/test-tutorials                    # docs/tutorials/ reference only existing tools/paths
 bin/test-engines                      # HTML scoring engines load and run headless
-bin/test-loco-routes                  # every Loco crate exposes its domain HTTP API
+bin/test-axum-routes                  # every Axum crate exposes its domain HTTP API
 bin/test-vendored-uniformity          # vendored themes + Svelte helpers byte-identical fleet-wide
 bin/test-personas                     # personas.json vs each form's actual scoring engine
 bin/test-e2e --html                   # Playwright smoke + axe-core a11y sweep (HTML)
@@ -258,7 +257,7 @@ Per-stack acceptance (run from each form's stack directory):
 
 ```sh
 pnpm install && pnpm check && pnpm test    # SvelteKit
-cargo build && cargo test && cargo clippy  # Loco/Rust
+cargo build && cargo test && cargo clippy  # Axum/Rust
 ```
 
 ## 10. Spec-driven development workflow

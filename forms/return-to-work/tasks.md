@@ -53,9 +53,9 @@
 - [x] `front-end-with-html/` — HTML review table.
 
 ## Full-stack backend
-- [x] `back-end-with-loco/` — Loco 0.16 + axum 0.8
+- [x] `back-end-with-axum/` — Loco 0.16 + axum 0.8
       + SeaORM + Loco JSON API.
-- [x] `back-end-with-loco-new/` — scaffold
+- [x] `back-end-with-axum-new/` — scaffold
       generator (`00-new.sh`).
 
 ## Tests

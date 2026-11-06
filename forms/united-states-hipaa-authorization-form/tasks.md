@@ -48,9 +48,9 @@
 - [x] `front-end-with-html/` — HTML review table.
 
 ## Full-stack backend
-- [x] `back-end-with-loco/` — Loco 0.16 + axum 0.8 +
+- [x] `back-end-with-axum/` — Loco 0.16 + axum 0.8 +
       SeaORM + Loco JSON API.
-- [x] `back-end-with-loco-setup` — scaffold generator.
+- [x] `back-end-with-axum-setup` — scaffold generator.
 
 ## Tests
 - [x] Vitest unit tests for the validation engine.

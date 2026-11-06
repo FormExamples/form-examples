@@ -2,7 +2,7 @@
 
 Status: **implemented** as of 2026-08-29. Applied fleet-wide (355 forms,
 710 `Cargo.toml`/`migration/Cargo.toml` files) via
-[`bin/loco-msrv-set`](../../bin/loco-msrv-set), MSRV set to **1.96** (stable
+[`bin/axum-msrv-set`](../../bin/axum-msrv-set), MSRV set to **1.96** (stable
 was 1.98 at the time). Verified against a real `rustc +1.96` (installed via
 `rustup`), not merely declared: `cargo +1.96 check --all-targets --workspace`
 run directly on a full CI shard's worth of crates (45) plus both structural
@@ -13,11 +13,11 @@ disk-exhaustion reasons that job already guards against.
 
 **Repo-structure adaptation.** This monorepo has no single root Cargo
 workspace for the guidance below to apply to directly — each form's
-`back-end-with-loco/` is its own self-contained workspace. The same
+`back-end-with-axum/` is its own self-contained workspace. The same
 `[workspace.package]` / `rust-version.workspace = true` pattern from the
 rule below is applied once per form (355 times) rather than once at a
 repo root that doesn't exist; `migration/Cargo.toml` is a confirmed member
-of that same implicit per-form workspace (its `loco-rs = { workspace =
+of that same implicit per-form workspace (its `axa = { workspace =
 true }` dependency only resolves because it is).
 
 This workspace's **Minimum Supported Rust Version (MSRV)** is **the current

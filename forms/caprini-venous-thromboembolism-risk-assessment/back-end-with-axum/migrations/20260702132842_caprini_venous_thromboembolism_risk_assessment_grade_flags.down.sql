@@ -1,0 +1,1 @@
+DROP TABLE "caprini_venous_thromboembolism_risk_assessment_grade_flags";

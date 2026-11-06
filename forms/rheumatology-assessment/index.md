@@ -29,7 +29,7 @@ Rheumatological evaluation using the DAS28 (Disease Activity Score in 28 joints)
 rheumatology-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "819b8df8-17c8-58e9-ab5b-5088679433f7"
+  deletedAt: null
+  flagId: "Test flagId"
+  category: "missing-receipt"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"
+  expenseReimbursementGradeId: "63721472-1f2c-5fdd-900b-6a6f8d1b7602"

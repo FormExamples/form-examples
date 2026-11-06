@@ -112,8 +112,8 @@ respiratory-medicine-waiting-list-card/
   front-end-with-svelte/                       # SvelteKit single-page wizard
   front-end-with-html/                    # static dashboard
   front-end-with-svelte/                  # SvelteKit + SVAR DataGrid
-  back-end-with-loco/            # Rust axum + Loco JSON API back-end
-  back-end-with-loco-setup       # generated scaffold script
+  back-end-with-axum/            # Rust axum + axa + sqlx JSON API back-end
+  back-end-with-axum-setup       # generated scaffold script
 ```
 
 ## Clinical and policy references

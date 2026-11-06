@@ -1,0 +1,74 @@
+//! parkland_formula_for_burns_grades model.
+
+use serde::{Deserialize, Serialize};
+
+use crate::support::prelude::*;
+
+/// One row.
+#[allow(missing_docs)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize, sqlx::FromRow)]
+#[serde(rename_all = "camelCase")]
+pub struct Model {
+    pub created_at: DateTimeWithTimeZone,
+    pub updated_at: DateTimeWithTimeZone,
+    pub id: Uuid,
+    pub deleted_at: Option<DateTimeWithTimeZone>,
+    pub total_24h_volume_ml: Option<f64>,
+    pub first_8h_volume_ml: Option<f64>,
+    pub next_16h_volume_ml: Option<f64>,
+    pub hours_since_injury: Option<f64>,
+    pub remaining_first_8h_hours: Option<f64>,
+    pub first_8h_rate_ml_h: Option<f64>,
+    pub next_16h_rate_ml_h: Option<f64>,
+    pub urine_output_target_min_ml_h: Option<f64>,
+    pub urine_output_target_max_ml_h: Option<f64>,
+    pub graded_at: DateTimeWithTimeZone,
+    pub parkland_formula_for_burns_id: Uuid,
+}
+
+impl Model {
+    /// One page of rows in a stable order, and how many rows there are in all.
+    ///
+    /// # Errors
+    ///
+    /// Propagates the database error.
+    pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Self>, i64)> {
+        let (limit, offset) = crate::support::paging::bounds(page);
+        let rows = sqlx::query_as(
+            "SELECT * FROM parkland_formula_for_burns_grades ORDER BY id LIMIT $1 OFFSET $2",
+        )
+        .bind(limit)
+        .bind(offset)
+        .fetch_all(db)
+        .await?;
+        let total = sqlx::query_scalar("SELECT COUNT(*) FROM parkland_formula_for_burns_grades")
+            .fetch_one(db)
+            .await?;
+        Ok((rows, total))
+    }
+
+    /// The row with this id, if there is one.
+    ///
+    /// # Errors
+    ///
+    /// Propagates the database error.
+    pub async fn find_by_id(db: &PgPool, id: Uuid) -> sqlx::Result<Option<Self>> {
+        sqlx::query_as("SELECT * FROM parkland_formula_for_burns_grades WHERE id = $1")
+            .bind(id)
+            .fetch_optional(db)
+            .await
+    }
+
+    /// Delete the row with this id.
+    ///
+    /// # Errors
+    ///
+    /// Propagates the database error.
+    pub async fn delete(db: &PgPool, id: Uuid) -> sqlx::Result<()> {
+        sqlx::query("DELETE FROM parkland_formula_for_burns_grades WHERE id = $1")
+            .bind(id)
+            .execute(db)
+            .await?;
+        Ok(())
+    }
+}

@@ -9,7 +9,7 @@ Pool / beach lifeguard certification checklist aligned with the RLSS UK National
 - ./plan.md - Development roadmap
 - ./tasks.md - Task tracking
 - ./front-end-with-svelte/ - SvelteKit single-page wizard + dashboard (SVAR DataGrid)
-- ./back-end-with-loco/ - Full-stack Rust backend
+- ./back-end-with-axum/ - Full-stack Rust backend
 
 ## Scoring system
 
@@ -50,9 +50,9 @@ Pool / beach lifeguard certification checklist aligned with the RLSS UK National
 
 ## Backend
 
-- Rust edition 2024 with Loco 0.16 framework
+- Rust edition 2024 with Axum 0.16 framework
 - axum 0.8 web framework
-- SeaORM 1.1 with PostgreSQL
+- sqlx 1.1 with PostgreSQL
 - Engine types mirror TypeScript with serde(rename_all = "camelCase")
 
 ## Conventions

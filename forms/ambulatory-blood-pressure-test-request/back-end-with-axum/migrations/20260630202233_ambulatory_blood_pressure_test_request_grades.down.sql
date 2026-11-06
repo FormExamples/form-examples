@@ -1,0 +1,1 @@
+DROP TABLE "ambulatory_blood_pressure_test_request_grades";

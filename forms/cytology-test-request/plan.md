@@ -4,7 +4,7 @@
 
 Scaffolded to foundation depth: SQL schema (source of truth) and the form's
 documentation are in place. Generated derivatives (XML, FHIR R5, protobuf,
-OpenAPI, Loco setup, examples, spec, changelog), front-end apps, and the Loco
+OpenAPI, Axum setup, examples, spec, changelog), front-end apps, and the Axum
 back-end crate are the remaining depth work.
 
 ## Why this form exists
@@ -35,12 +35,12 @@ NG12 guidance.
 
 1. [x] SQL migrations (patient, clinician, request, grade, grade_rule, grade_flag)
 2. [ ] Generated representations (XML, FHIR R5, protobuf, OpenAPI)
-3. [ ] Loco setup script, examples, spec.md, CHANGELOG.md
+3. [ ] Axum setup script, examples, spec.md, CHANGELOG.md
 4. [x] index.md / AGENTS.md / plan.md / tasks.md / doc
 5. [ ] front-end-with-html (HTML wizard + JS four-axis engine)
 6. [ ] front-end-with-svelte (SvelteKit wizard + TS engine)
 7. [ ] front-end-with-html / front-end-with-svelte
-8. [ ] back-end-with-loco (Rust JSON API; cargo test requires Postgres)
+8. [ ] back-end-with-axum (Rust JSON API; cargo test requires Postgres)
 
 ## Future enhancements
 

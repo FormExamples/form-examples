@@ -19,7 +19,7 @@ toolchain-version policy.
 
 The target version is read from spec/node-current-version/index.md's
 "Node current version is N." line, not hardcoded here, so re-running this
-after the spec is bumped (mirroring bin/loco-msrv-set's pattern for Rust)
+after the spec is bumped (mirroring bin/axum-msrv-set's pattern for Rust)
 needs no code change.
 
 Usage:

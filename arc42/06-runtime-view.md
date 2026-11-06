@@ -44,7 +44,7 @@ Key points:
 
 ## 6.2 JSON-API request flow (back-end)
 
-The Loco crate exposes the canonical `/api/assessments` resource. Grading runs
+The Axum crate exposes the canonical `/api/assessments` resource. Grading runs
 server-side through the Rust mirror of the engine.
 
 ```mermaid
@@ -52,7 +52,7 @@ sequenceDiagram
   participant Client
   participant Axum as axum controller
   participant Engine as Rust engine
-  participant DB as PostgreSQL (SeaORM)
+  participant DB as PostgreSQL (sqlx)
 
   Client->>Axum: POST /api/assessments (draft)
   Axum->>DB: insert <form> record
@@ -70,7 +70,7 @@ sequenceDiagram
 
 Every request/response is `application/json; charset=utf-8` with camelCase
 keys; 4xx responses are JSON error envelopes. No HTML, no redirects. Requests
-are traced via OpenTelemetry and counted at the Prometheus `/metrics` endpoint.
+are logged with their request id and route.
 
 ## 6.3 The generator pipeline run (build-time)
 
@@ -84,7 +84,7 @@ flowchart LR
   gen --> fhir[fhir/r5/]
   gen --> proto[protobuf/]
   gen --> oapi[openapi/]
-  gen --> loco[back-end-with-loco-setup]
+  gen --> loco[back-end-with-axum-setup]
   xml & fhir & proto & oapi & loco --> check[bin/*-check drift gates]
   check -->|zero drift| done[green]
   check -->|drift| fail[non-zero exit]

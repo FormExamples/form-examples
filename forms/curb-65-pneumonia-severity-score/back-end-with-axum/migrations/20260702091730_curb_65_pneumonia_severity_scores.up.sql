@@ -1,0 +1,33 @@
+CREATE TABLE IF NOT EXISTS "curb_65_pneumonia_severity_scores" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "clinician_name" varchar NOT NULL DEFAULT '',
+    "clinician_role" varchar NOT NULL DEFAULT '',
+    "assessed_at" timestamp with time zone NULL,
+    "care_setting" varchar NOT NULL DEFAULT '',
+    "patient_identifier" varchar NOT NULL DEFAULT '',
+    "sex" varchar NOT NULL DEFAULT '',
+    "age_years" integer NULL,
+    "confusion_present" varchar NOT NULL DEFAULT '',
+    "amt_score" integer NULL,
+    "urea_measured" varchar NOT NULL DEFAULT '',
+    "urea_mmol_l" double precision NULL,
+    "respiratory_rate" integer NULL,
+    "systolic_bp" integer NULL,
+    "diastolic_bp" integer NULL,
+    "oxygen_saturation" integer NULL,
+    "temperature_c" double precision NULL,
+    "significant_comorbidity" varchar NOT NULL DEFAULT '',
+    "multilobar_changes" varchar NOT NULL DEFAULT '',
+    "clinician_override_band" varchar NOT NULL DEFAULT '',
+    "override_reason" text NOT NULL DEFAULT '',
+    "clinical_note" text NOT NULL DEFAULT '',
+    "patient_id" uuid NOT NULL,
+    "clinician_id" uuid NULL,
+    CONSTRAINT "fk-curb_65_pneumonia_severity_scores-patient_id-to-patients" FOREIGN KEY ("patient_id") REFERENCES "patients" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-curb_65_pneumonia_severity_scores-clinician_id-to-clinicians" FOREIGN KEY ("clinician_id") REFERENCES "clinicians" (id) ON DELETE SET NULL ON UPDATE NO ACTION
+);
+
+ALTER TABLE curb_65_pneumonia_severity_scores ALTER COLUMN id SET DEFAULT gen_random_uuid();

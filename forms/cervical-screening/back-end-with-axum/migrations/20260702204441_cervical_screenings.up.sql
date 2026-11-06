@@ -1,0 +1,30 @@
+CREATE TABLE IF NOT EXISTS "cervical_screenings" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "care_setting" varchar NOT NULL DEFAULT '',
+    "sample_taker_role" varchar NOT NULL DEFAULT '',
+    "sample_taken_at" timestamp with time zone NULL,
+    "patient_identifier" varchar NOT NULL DEFAULT '',
+    "age" integer NULL,
+    "recall_interval" varchar NOT NULL DEFAULT '',
+    "screen_due_date" date NULL,
+    "last_screen_date" date NULL,
+    "overdue" varchar NOT NULL DEFAULT '',
+    "previously_ceased" varchar NOT NULL DEFAULT '',
+    "consent_given" varchar NOT NULL DEFAULT '',
+    "symptomatic" varchar NOT NULL DEFAULT '',
+    "symptom_detail" text NOT NULL DEFAULT '',
+    "sample_adequacy" varchar NOT NULL DEFAULT '',
+    "inadequate_reason" varchar NOT NULL DEFAULT '',
+    "hpv_result" varchar NOT NULL DEFAULT '',
+    "cytology_grade" varchar NOT NULL DEFAULT '',
+    "clinical_context" text NOT NULL DEFAULT '',
+    "patient_id" uuid NOT NULL,
+    "clinician_id" uuid NULL,
+    CONSTRAINT "fk-cervical_screenings-patient_id-to-patients" FOREIGN KEY ("patient_id") REFERENCES "patients" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-cervical_screenings-clinician_id-to-clinicians" FOREIGN KEY ("clinician_id") REFERENCES "clinicians" (id) ON DELETE SET NULL ON UPDATE NO ACTION
+);
+
+ALTER TABLE cervical_screenings ALTER COLUMN id SET DEFAULT gen_random_uuid();

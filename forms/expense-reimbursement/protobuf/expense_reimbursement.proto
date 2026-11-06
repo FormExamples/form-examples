@@ -1,0 +1,56 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: expense_reimbursement
+
+syntax = "proto3";
+
+package form_examples.expense_reimbursement;
+
+enum ExpenseReimbursementStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DRAFT = 1;  // draft
+  STATUS_SUBMITTED = 2;  // submitted
+  STATUS_UNDER_REVIEW = 3;  // under-review
+  STATUS_APPROVED = 4;  // approved
+  STATUS_PARTIALLY_APPROVED = 5;  // partially-approved
+  STATUS_REJECTED = 6;  // rejected
+  STATUS_PAID = 7;  // paid
+  STATUS_WITHDRAWN = 8;  // withdrawn
+}
+
+enum ExpenseReimbursementRepaymentMethodEnum {
+  REPAYMENTMETHOD_UNSPECIFIED = 0;
+  REPAYMENTMETHOD_PAYROLL = 1;  // payroll
+  REPAYMENTMETHOD_BANK_TRANSFER = 2;  // bank-transfer
+  REPAYMENTMETHOD_CHEQUE = 3;  // cheque
+  REPAYMENTMETHOD_CASH = 4;  // cash
+  REPAYMENTMETHOD_OTHER = 5;  // other
+}
+
+message ExpenseReimbursement {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string worker_id = 5;  // UUID — uuid
+  string manager_id = 6;  // UUID — uuid
+  ExpenseReimbursementStatusEnum status = 7;  // VARCHAR(20)
+  string claim_date = 8;  // DATE — iso 8601 date
+  string claim_period_start_date = 9;  // DATE — iso 8601 date
+  string claim_period_end_date = 10;  // DATE — iso 8601 date
+  string claim_title = 11;  // VARCHAR(255) — max 255 chars
+  string business_purpose = 12;  // TEXT
+  string project_or_cost_code = 13;  // VARCHAR(64) — max 64 chars
+  string currency_as_iso_4217 = 14;  // CHAR(3) — max 3 chars
+  double total_amount = 15;  // NUMERIC(12, 2) — numeric(12, 2)
+  double total_vat_amount = 16;  // NUMERIC(12, 2) — numeric(12, 2)
+  double advance_already_received_amount = 17;  // NUMERIC(12, 2) — numeric(12, 2)
+  double amount_to_repay = 18;  // NUMERIC(12, 2) — numeric(12, 2)
+  ExpenseReimbursementRepaymentMethodEnum repayment_method = 19;  // VARCHAR(20)
+  string bank_account_name = 20;  // VARCHAR(255) — max 255 chars
+  string bank_account_last_four = 21;  // CHAR(4) — max 4 chars
+  bool declaration_expenses_were_incurred_wholly_for_work = 22;  // BOOLEAN
+  bool declaration_no_duplicate_claim = 23;  // BOOLEAN
+  bool declaration_receipts_attached = 24;  // BOOLEAN
+  string declaration_signed_name = 25;  // VARCHAR(255) — max 255 chars
+  string declaration_signed_at = 26;  // TIMESTAMPTZ — iso 8601
+}

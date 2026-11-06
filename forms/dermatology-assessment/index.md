@@ -33,7 +33,7 @@ Dermatological quality of life evaluation using the DLQI (Dermatology Life Quali
 dermatology-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

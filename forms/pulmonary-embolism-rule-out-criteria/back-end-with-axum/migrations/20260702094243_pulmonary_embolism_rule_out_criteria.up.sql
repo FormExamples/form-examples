@@ -1,0 +1,30 @@
+CREATE TABLE IF NOT EXISTS "pulmonary_embolism_rule_out_criteria" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "status" varchar NOT NULL DEFAULT 'draft',
+    "patient_identifier" varchar NOT NULL DEFAULT '',
+    "assessed_at" timestamp with time zone NULL,
+    "care_setting" varchar NOT NULL DEFAULT '',
+    "presenting_complaint" text NOT NULL DEFAULT '',
+    "age" double precision NULL,
+    "heart_rate" double precision NULL,
+    "oxygen_saturation" double precision NULL,
+    "pretest_probability" varchar NOT NULL DEFAULT '',
+    "age_under_50" varchar NOT NULL DEFAULT '',
+    "heart_rate_under_100" varchar NOT NULL DEFAULT '',
+    "spo2_at_least_95" varchar NOT NULL DEFAULT '',
+    "no_unilateral_leg_swelling" varchar NOT NULL DEFAULT '',
+    "no_haemoptysis" varchar NOT NULL DEFAULT '',
+    "no_recent_surgery_trauma" varchar NOT NULL DEFAULT '',
+    "no_prior_dvt_pe" varchar NOT NULL DEFAULT '',
+    "no_oestrogen_use" varchar NOT NULL DEFAULT '',
+    "clinical_notes" text NOT NULL DEFAULT '',
+    "patient_id" uuid NOT NULL,
+    "clinician_id" uuid NULL,
+    CONSTRAINT "fk-pulmonary_embolism_rule_out_criteria-patient_id-to-patients" FOREIGN KEY ("patient_id") REFERENCES "patients" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-pulmonary_embolism_rule_out_criteria-clinician_id-to-clinicians" FOREIGN KEY ("clinician_id") REFERENCES "clinicians" (id) ON DELETE SET NULL ON UPDATE NO ACTION
+);
+
+ALTER TABLE pulmonary_embolism_rule_out_criteria ALTER COLUMN id SET DEFAULT gen_random_uuid();

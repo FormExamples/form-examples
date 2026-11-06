@@ -85,7 +85,7 @@ bronchoscopy-test-request/
   front-end-with-svelte/       # SvelteKit single-page wizard
   front-end-with-html/    # vetting dashboard (HTML table)
   front-end-with-svelte/  # vetting dashboard (SVAR Grid)
-  back-end-with-loco/               # Rust axum + Loco JSON API
+  back-end-with-axum/               # Rust axum + axa + sqlx JSON API
 ```
 
 ## Clinical references

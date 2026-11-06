@@ -8,7 +8,7 @@ spec before code.
 
 Pure approval function over rules R-01 to R-09; worst effect wins. Never
 hand-edit generated artefacts (`xml/`, `fhir/`, `protobuf/`, `openapi/`,
-`back-end-with-loco-setup`).
+`back-end-with-axum-setup`).
 
 ## Entities
 

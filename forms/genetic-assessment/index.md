@@ -29,7 +29,7 @@ Genetic counselling referral assessment using weighted risk factor scoring acros
 genetic-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

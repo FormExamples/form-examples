@@ -15,7 +15,7 @@ engine, and generates a clinical report with flagged issues.
 - Protocol Buffers `.proto` schemas per SQL entity (generated).
 - OpenAPI 3.1 `.yaml` specifications per SQL entity (generated).
 - Four front-end implementations per form (form + dashboard, each in HTML and SvelteKit).
-- One Rust back-end JSON API implementation per form (axum + Loco).
+- One Rust back-end JSON API implementation per form (axum + axa + sqlx).
 - Lily Design System HTML headless contract for every HTML front-end.
 - Lily Design System Svelte headless contract for every SvelteKit front-end.
 
@@ -83,8 +83,8 @@ Update the spec before changing code. See `spec.md` §10 for the workflow.
 ├── AGENTS/                         # Per-stack agent documentation
 │   ├── fhir-r5.md
 │   ├── front-end-with-sveltekit-tailwind-svar.md
-│   ├── back-end-with-loco.md
-│   ├── back-end-with-loco-setup.md
+│   ├── back-end-with-axum.md
+│   ├── back-end-with-axum-setup.md
 │   ├── openapi.md
 │   ├── protobuf.md
 │   ├── sql.md
@@ -131,8 +131,8 @@ forms/<slug>/
   openapi/                                         # OpenAPI 3.1 .yaml specifications (generated)
   front-end-with-html/                             # Questionnaire + dashboard (HTML + Lily; index.html + dashboard.html)
   front-end-with-svelte/                           # Questionnaire + dashboard (SvelteKit + Lily); RESTful routes
-  back-end-with-loco/                              # Back-end Rust JSON API (axum + Loco)
-  back-end-with-loco-setup                         # Scaffold generator (executable script; generated)
+  back-end-with-axum/                              # Back-end Rust JSON API (axum + axa + sqlx)
+  back-end-with-axum-setup                         # Scaffold generator (executable script; generated)
 ```
 
 ## Design patterns
@@ -154,9 +154,9 @@ forms/<slug>/
 
 ### Back-end
 
-- Loco framework with axum routing (default port 5150).
+- Axum framework with axum routing (default port 5150).
 - Rust scoring engine mirrors TypeScript types with `serde(rename_all = "camelCase")`.
-- SeaORM entities against PostgreSQL 18.
+- sqlx entities against PostgreSQL 18.
 - JSON API only — no HTML rendering, no Tera templates, no HTMX, no Alpine.js, no static assets.
 - Canonical resource at `/api/assessments` (list, create, read, update, submit, result).
 
@@ -167,8 +167,8 @@ See the per-stack agent docs:
 - [Front-end with HTML / Lily Design System headless](forms/AGENTS-front-end-html.md)
 - [Front-end with SvelteKit / Lily Design System Svelte headless](forms/AGENTS-front-end-svelte.md)
 - [Front-end with SvelteKit / Tailwind / SVAR](AGENTS/front-end-with-sveltekit-tailwind-svar.md)
-- [Back-end with Rust / axum / Loco (JSON API)](AGENTS/back-end-with-loco.md)
-- [Back-end scaffold generator (setup script)](AGENTS/back-end-with-loco-setup.md)
+- [Back-end with Rust / axum / Axum (JSON API)](AGENTS/back-end-with-axum.md)
+- [Back-end scaffold generator (setup script)](AGENTS/back-end-with-axum-setup.md)
 - [SQL migrations](AGENTS/sql.md)
 - [XML representations](AGENTS/xml-representations.md)
 - [FHIR HL7 R5 representations](AGENTS/fhir-r5.md)
@@ -189,14 +189,13 @@ See the per-stack agent docs:
 - `bin/fhir-r5/generate-fhir-r5-representations.py` — FHIR R5 JSON per SQL entity
 - `bin/protobuf/generate-protobuf-representations.py` — Protocol Buffers per SQL entity
 - `bin/openapi/generate-openapi-representations.py` — OpenAPI 3.1 per SQL entity
-- `bin/back-end-with-loco/generate-back-end-with-loco-setup.py` — Loco setup script per form
+- `bin/back-end-with-axum/generate-back-end-with-axum-setup.py` — Axum setup script per form
 - `bin/lily-html-refactor` — mechanical Lily HTML class swaps; `--check` is the CI drift detector
 - `bin/lily-sync` — snapshot Lily HTML component specs and pin the upstream commit
 - `bin/lily-svelte-refactor` — mechanical Lily Svelte class swaps; `--check` is the CI drift detector
 - `bin/lily-svelte-sync` — snapshot Lily Svelte component sources and pin the upstream commit
 - `bin/es-modules-refactor` — convert HTML front-end JS to native ES modules; `--check` is the CI drift detector
-- `bin/loco-config-refactor` — Loco background-queue + observability conventions; `--check` is the CI drift detector
-- `bin/generate-loco-deny-config.py` — write each Loco crate's cargo-deny `deny.toml` policy; `--check` is the CI drift detector
+- `bin/generate-axum-deny-config.py` — write each Axum crate's cargo-deny `deny.toml` policy; `--check` is the CI drift detector
 - `bin/generate-spec.py` — scaffold per-form `spec/index.md` from `index.md`
 - `bin/generate-llms-txt.py` — generate per-form `llms.txt`; `--check` is the CI drift detector
 - `bin/generate-changelog-and-examples.py` — scaffold per-form `CHANGELOG.md` + `examples/`; `--check` is the CI drift detector
@@ -227,42 +226,34 @@ See [`AGENTS.md`](AGENTS.md) `## Tools` and [`docs/tools.md`](docs/tools.md) for
 claude mcp add -t stdio -s project svelte -- pnpm dlx @sveltejs/mcp
 ```
 
-### Rust back-end
-
-Loco:
-
-```sh
-cargo install loco
-cargo install sea-orm-cli
-```
+The local default is the `postgres` role with the password `postgres`.
 
 Create role if needed via shell:
 
 ```sh
-createuser --host=localhost --port=5432 --username=postgres --login --createdb loco || :
+createuser --host=localhost --port=5432 --superuser --pwprompt postgres || :
 ```
 
 Create role if needed via psql:
 
 ```sql
-CREATE USER loco PASSWORD 'loco';
-ALTER USER loco CREATEDB;
+CREATE USER postgres SUPERUSER PASSWORD 'postgres';
 ```
 
 Create databases via shell (example for `pre-operative-assessment-by-clinician`):
 
 ```sh
-createdb --host=localhost --port=5432 --username=postgres --owner=loco pre_operative_assessment_by_clinician_development || :
-createdb --host=localhost --port=5432 --username=postgres --owner=loco pre_operative_assessment_by_clinician_test || :
-createdb --host=localhost --port=5432 --username=postgres --owner=loco pre_operative_assessment_by_clinician_production || :
+createdb --host=localhost --port=5432 --username=postgres --owner=postgres pre_operative_assessment_by_clinician_development || :
+createdb --host=localhost --port=5432 --username=postgres --owner=postgres pre_operative_assessment_by_clinician_test || :
+createdb --host=localhost --port=5432 --username=postgres --owner=postgres pre_operative_assessment_by_clinician_production || :
 ```
 
 Create databases via psql:
 
 ```sql
-CREATE DATABASE pre_operative_assessment_by_clinician_development OWNER loco;
-CREATE DATABASE pre_operative_assessment_by_clinician_test OWNER loco;
-CREATE DATABASE pre_operative_assessment_by_clinician_production OWNER loco;
+CREATE DATABASE pre_operative_assessment_by_clinician_development OWNER postgres;
+CREATE DATABASE pre_operative_assessment_by_clinician_test OWNER postgres;
+CREATE DATABASE pre_operative_assessment_by_clinician_production OWNER postgres;
 ```
 
 Create languages:
@@ -290,8 +281,7 @@ bin/lily-svelte-sync --check          # Lily Svelte spec-snapshot drift
 bin/generate-spec.py --check          # Per-form spec/ presence check
 bin/generate-changelog-and-examples.py --check # CHANGELOG + examples/ drift
 bin/generate-llms-txt.py --check      # Per-form llms.txt drift
-bin/loco-config-refactor --check --all # Loco queue + observability conventions
-bin/generate-loco-deny-config.py --check # Loco deny.toml drift
+bin/generate-axum-deny-config.py --check # Axum deny.toml drift
 bin/test-examples-conformance         # example fixtures vs sql/ schema conformance
 bin/test-e2e --html                   # Playwright smoke + axe-core a11y sweep (HTML)
 ```

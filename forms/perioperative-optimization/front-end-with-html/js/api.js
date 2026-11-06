@@ -1,6 +1,6 @@
 // Back-end API client for the Perioperative Optimization dashboard.
 //
-// The back-end lives at http://localhost:5150 (Loco / axum). When the fetch
+// The back-end lives at http://localhost:5150 (Axum / axum). When the fetch
 // fails (CORS, network, server down) or returns an empty list, callers fall
 // back to the sample data in `data.js` so the page is usable standalone.
 

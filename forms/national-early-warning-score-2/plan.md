@@ -4,8 +4,8 @@
 
 All four layers are built as of 2026-07-02: foundation docs (`index.md`,
 `spec/index.md`, `AGENTS.md`, `plan.md`, `tasks.md`); SQL migrations plus the
-generated representations (XML, FHIR R5, protobuf, OpenAPI, Loco setup); both
-consolidated front-ends (HTML + Lily and SvelteKit + Lily); and the Loco
+generated representations (XML, FHIR R5, protobuf, OpenAPI, Axum setup); both
+consolidated front-ends (HTML + Lily and SvelteKit + Lily); and the Axum
 JSON-API back-end — plus `CHANGELOG.md` and `examples/`.
 
 ## Roadmap
@@ -16,7 +16,7 @@ JSON-API back-end — plus `CHANGELOG.md` and `examples/`.
    `patient`, `observations`, `result`. UUIDv4 PKs; `created_at` / `updated_at`
    / `deleted_at` on every table. Source of truth.
 3. **Generated representations** — run the repo generators for XML, FHIR R5,
-   protobuf, OpenAPI, the Loco setup script, `CHANGELOG.md`, and `examples/`.
+   protobuf, OpenAPI, the Axum setup script, `CHANGELOG.md`, and `examples/`.
 4. **Scoring engine** — `types.ts`, `utils.ts`, `news2-rules.ts`,
    `news2-grader.ts`, `flagged-issues.ts`; pure functions with Vitest unit
    tests covering the RCP worked examples (Scale 1 and Scale 2), band

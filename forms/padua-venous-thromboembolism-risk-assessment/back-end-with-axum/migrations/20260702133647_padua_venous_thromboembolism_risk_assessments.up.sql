@@ -1,0 +1,33 @@
+CREATE TABLE IF NOT EXISTS "padua_venous_thromboembolism_risk_assessments" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "clinician_name" varchar NOT NULL DEFAULT '',
+    "clinician_role" varchar NOT NULL DEFAULT '',
+    "assessed_at" timestamp with time zone NULL,
+    "care_setting" varchar NOT NULL DEFAULT '',
+    "admission_reason" text NOT NULL DEFAULT '',
+    "patient_identifier" varchar NOT NULL DEFAULT '',
+    "age_years" double precision NULL,
+    "sex" varchar NOT NULL DEFAULT '',
+    "active_cancer" varchar NOT NULL DEFAULT '',
+    "previous_vte" varchar NOT NULL DEFAULT '',
+    "reduced_mobility" varchar NOT NULL DEFAULT '',
+    "known_thrombophilia" varchar NOT NULL DEFAULT '',
+    "recent_trauma_or_surgery" varchar NOT NULL DEFAULT '',
+    "heart_or_respiratory_failure" varchar NOT NULL DEFAULT '',
+    "acute_mi_or_ischaemic_stroke" varchar NOT NULL DEFAULT '',
+    "acute_infection_or_rheumatological" varchar NOT NULL DEFAULT '',
+    "body_mass_index" double precision NULL,
+    "ongoing_hormonal_treatment" varchar NOT NULL DEFAULT '',
+    "active_bleeding" varchar NOT NULL DEFAULT '',
+    "high_bleeding_risk" varchar NOT NULL DEFAULT '',
+    "clinical_note" text NOT NULL DEFAULT '',
+    "patient_id" uuid NOT NULL,
+    "clinician_id" uuid NULL,
+    CONSTRAINT "fk-padua_venous_thromboembolism_risk_assessments-patient_id-to-patients" FOREIGN KEY ("patient_id") REFERENCES "patients" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-padua_venous_thromboembolism_risk_assessments-clinician_id-to-clinicians" FOREIGN KEY ("clinician_id") REFERENCES "clinicians" (id) ON DELETE SET NULL ON UPDATE NO ACTION
+);
+
+ALTER TABLE padua_venous_thromboembolism_risk_assessments ALTER COLUMN id SET DEFAULT gen_random_uuid();

@@ -25,8 +25,8 @@ and the wizard table. See [`spec/index.md`](./spec/index.md) for the living spec
 - `./openapi/` — generated OpenAPI 3.1 `.yaml` specifications
 - `./front-end-with-html/` — HTML + Lily wizard (`index.html`) + dashboard
 - `./front-end-with-svelte/` — SvelteKit + Lily (`/<plural>/` list + `/<plural>/[id]` form)
-- `./back-end-with-loco/` — Rust axum + Loco JSON API
-- `./back-end-with-loco-setup` — generated scaffold script
+- `./back-end-with-axum/` — Rust axum + axa + sqlx JSON API
+- `./back-end-with-axum-setup` — generated scaffold script
 
 ## Scoring engine
 
@@ -90,7 +90,7 @@ Computed independently of the total score. Priority: high / medium / low.
 - UUIDv4 primary keys via `gen_random_uuid()`; `created_at`, `updated_at`,
   `deleted_at` timestamps on every table.
 - Import and export via JSON, XML, CSV, and TSV.
-- Generated artefacts (XML, FHIR, protobuf, OpenAPI, Loco setup) are never
+- Generated artefacts (XML, FHIR, protobuf, OpenAPI, Axum setup) are never
   hand-edited.
 
 ## Clinical grounding

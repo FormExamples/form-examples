@@ -50,8 +50,8 @@ PDF, and convertible to FHIR R5 Bundle, XML, JSON, CSV, or TSV.
 ## 5. Artefacts
 
 `sql` (source of truth) · `xml` · `fhir` · `protobuf` · `openapi` (generated) ·
-`front-end-with-html` · `front-end-with-svelte` · `back-end-with-loco` ·
-`back-end-with-loco-setup` (generated). Generated artefacts are never
+`front-end-with-html` · `front-end-with-svelte` · `back-end-with-axum` ·
+`back-end-with-axum-setup` (generated). Generated artefacts are never
 hand-edited; re-run the generators after schema changes.
 
 ## 6. Acceptance criteria

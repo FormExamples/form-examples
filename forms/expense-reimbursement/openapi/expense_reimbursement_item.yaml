@@ -1,0 +1,291 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: expense_reimbursement_item
+openapi: 3.1.0
+info:
+  title: Expense Reimbursement — ExpenseReimbursementItem
+  version: 1.0.0
+  description: One line item (a single receipt or purchase) within an expense reimbursement claim.
+paths:
+  /api/expense_reimbursement_items:
+    get:
+      summary: List ExpenseReimbursementItem records
+      operationId: listExpenseReimbursementItem
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100000
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ExpenseReimbursementItem records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ExpenseReimbursementItem"
+        "400":
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new ExpenseReimbursementItem
+      operationId: createExpenseReimbursementItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExpenseReimbursementItem"
+      responses:
+        "200":
+          description: The newly created ExpenseReimbursementItem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExpenseReimbursementItem"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/expense_reimbursement_items/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ExpenseReimbursementItem by id
+      operationId: getExpenseReimbursementItem
+      responses:
+        "200":
+          description: The requested ExpenseReimbursementItem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExpenseReimbursementItem"
+        "404":
+          description: ExpenseReimbursementItem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing ExpenseReimbursementItem
+      operationId: updateExpenseReimbursementItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExpenseReimbursementItem"
+      responses:
+        "200":
+          description: The updated ExpenseReimbursementItem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExpenseReimbursementItem"
+        "404":
+          description: ExpenseReimbursementItem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a ExpenseReimbursementItem
+      operationId: deleteExpenseReimbursementItem
+      responses:
+        "200":
+          description: ExpenseReimbursementItem deleted
+        "404":
+          description: ExpenseReimbursementItem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+        - type
+        - title
+        - status
+    ExpenseReimbursementItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Soft-delete timestamp; NULL when the row is live.
+        expense_reimbursement_id:
+          type: string
+          format: uuid
+          description: Foreign key to the expense_reimbursement table.
+        line_number:
+          type: integer
+          format: int32
+          description: Line number.
+        expense_date:
+          type: string
+          format: date
+          description: Expense date.
+        category:
+          type: string
+          enum:
+            - travel
+            - mileage
+            - accommodation
+            - meals
+            - equipment
+            - clothing-uniform
+            - training-course
+            - professional-fees
+            - registration-and-licensing
+            - books-and-subscriptions
+            - telephone-and-internet
+            - postage
+            - parking-and-tolls
+            - client-hospitality
+            - other
+            - ""
+          description: "Category. One of: travel, mileage, accommodation, meals, equipment, clothing-uniform, training-course, professional-fees, …."
+        description:
+          type: string
+          maxLength: 500
+          description: Description.
+        merchant:
+          type: string
+          maxLength: 255
+          description: Merchant.
+        currency_as_iso_4217:
+          type: string
+          maxLength: 3
+          description: Currency as iso 4217.
+        amount:
+          type: number
+          format: double
+          description: Amount.
+        vat_amount:
+          type: number
+          format: double
+          description: Vat amount.
+        exchange_rate_to_claim_currency:
+          type: number
+          format: double
+          description: Exchange rate to claim currency.
+        payment_method:
+          type: string
+          enum:
+            - personal-credit-card
+            - personal-debit-card
+            - cash
+            - other
+            - ""
+          description: "Payment method. One of: personal-credit-card, personal-debit-card, cash, other."
+        mileage_distance_miles:
+          type: number
+          format: double
+          description: Mileage distance miles.
+        receipt_attached:
+          type: boolean
+          description: Receipt attached.
+        receipt_reference:
+          type: string
+          maxLength: 255
+          description: Receipt reference.
+        receipt_missing_reason:
+          type: string
+          maxLength: 500
+          description: Receipt missing reason.
+        prior_approval_obtained:
+          type: boolean
+          description: Prior approval obtained.
+      required:
+        - created_at
+        - updated_at
+        - expense_reimbursement_id
+        - line_number
+        - category
+        - description
+        - merchant
+        - currency_as_iso_4217
+        - payment_method
+        - receipt_attached
+        - receipt_reference
+        - receipt_missing_reason
+        - prior_approval_obtained
+      description: One line item (a single receipt or purchase) within an expense reimbursement claim.

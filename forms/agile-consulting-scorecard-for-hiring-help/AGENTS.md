@@ -37,7 +37,7 @@ table. The unmodified design seed lives in [`seed.md`](./seed.md).
 - `./front-end-with-svelte/` — SVAR DataGrid dashboard with
   same-origin endpoints, per-row report drilldown at `/report/[id]`,
   bulk-import UI at `/import`, and a band-distribution stats panel
-- `./back-end-with-loco/` — Rust axum server (nine
+- `./back-end-with-axum/` — Rust axum server (nine
   HTTP endpoints), CLI grader, in-memory `ScorecardStore`, and the
   full scoring engine (grader + recommendations + pre-tender + diff +
   bulk-import; parity-tested against the TypeScript engine)
@@ -126,8 +126,8 @@ rendered in the report and FHIR Bundle.
 ## Backend stack
 
 - Rust edition 2024
-- Loco 0.16 framework on axum 0.8
-- SeaORM 1.1 with PostgreSQL 18
+- Axum 0.16 framework on axum 0.8
+- sqlx 1.1 with PostgreSQL 18
 - a JSON API (no server-rendered templates)
 - `serde(rename_all = "camelCase")` for front-end interop
 

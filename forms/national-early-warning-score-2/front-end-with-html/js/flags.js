@@ -1,7 +1,7 @@
 // Flagged-issue detection (safety-escalation flags). Computed independently of
 // the aggregate risk band (which the grader produces), this module raises
 // clinician-facing safety flags per spec §5. Rule/category IDs are shared with
-// the SvelteKit front-end and the Loco back-end, mirroring the
+// the SvelteKit front-end and the Axum back-end, mirroring the
 // `national_early_warning_score_2_grade_flag` SQL table
 // (flag_id, category, priority, description, suggested_action):
 //

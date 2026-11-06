@@ -56,7 +56,7 @@ most gates scan all 355 forms in well under a second.
 | `bin/generate-forms-tsv.py --check` | 355 forms | 0.04 s | ok |
 | `bin/lily-svelte-refactor --check --all` | 355 front-ends | 0.04 s | ok |
 | `bin/lily-html-refactor --check --all` | 355 front-ends | 0.05 s | ok |
-| `bin/generate-loco-deny-config.py --check` | 355 crates | 0.07 s | ok |
+| `bin/generate-axum-deny-config.py --check` | 355 crates | 0.07 s | ok |
 | `bin/generate-spec.py --check` | 355 specs | 0.07 s | ok |
 | `bin/generate-tools-doc.py --check` | 69 tools | 0.08 s | ok |
 | `bin/generate-llms-txt.py --check` | 355 forms | 0.14 s | ok |
@@ -64,13 +64,9 @@ most gates scan all 355 forms in well under a second.
 | `bin/page-header-layout-refactor --check` | 355 front-ends | 0.25 s | ok |
 | `bin/test-examples-conformance` | 355 fixtures vs schemas | 0.28 s | ok |
 | `bin/html-helpers-picker-rename --check` | 355 front-ends | 0.44 s | ok |
-| `bin/loco-migration-nullability --check --all` | 355 crates | 0.65 s | ok |
 | `bin/svelte-helpers-picker-rename --check` | 355 front-ends | 0.65 s | reported drift |
 | `bin/generate-changelog-and-examples.py --check` | 355 forms | 0.66 s | ok |
-| `bin/loco-config-refactor --check --all` | 355 crates | 0.85 s | ok |
-| `bin/loco-migration-defaults --check --all` | 355 crates | 0.96 s | ok |
 | `bin/test-engines` | 355 scoring engines | 0.97 s | fleet-wide FAIL (see below) |
-| `bin/loco-rs-1-migration --check --all` | 355 crates | 2.34 s | ok |
 | `bin/es-modules-refactor --check --all` | 355 front-ends | 5.70 s | reported drift |
 
 Roughly **10 seconds of wall clock covers twenty gates across every form in the
@@ -151,7 +147,7 @@ Where the time actually goes, and the choices behind it:
   the Playwright browsers are cached; the full end-to-end sweep is nightly
   rather than per-push.
 - **The expensive local loop is Rust, not this repository.** A cold
-  `cargo check` over a Loco crate dominates any repository-side cost by orders
+  `cargo check` over a Axum crate dominates any repository-side cost by orders
   of magnitude, which is why `sccache` is documented in the developer setup.
 
 ## Not measured, and honestly so
@@ -159,7 +155,7 @@ Where the time actually goes, and the choices behind it:
 No claim is made about any of the following, because none of it has been
 measured:
 
-- **API throughput or latency.** No load test exists against any Loco crate. The
+- **API throughput or latency.** No load test exists against any Axum crate. The
   back ends are example implementations; nobody has profiled one under
   concurrency.
 - **Scoring-engine microbenchmarks.** The engines are deterministic arithmetic
@@ -191,7 +187,6 @@ for gate in \
   "bin/lily-html-refactor --check --all" \
   "bin/lily-svelte-refactor --check --all" \
   "bin/test-examples-conformance" \
-  "bin/loco-config-refactor --check --all" \
   "bin/es-modules-refactor --check --all" ; do
   /usr/bin/time -p sh -c "$gate >/dev/null 2>&1"
 done

@@ -95,7 +95,7 @@ rule → `needs-correction`; otherwise `ready-to-register`.
         (front-end-with-svelte).
 11. [ ] Build HTML review table (front-end-with-html).
 12. [ ] Run `cargo loco generate scaffold` via
-        `back-end-with-loco-new/00-new.sh`.
+        `back-end-with-axum-new/00-new.sh`.
 13. [ ] Build Rust full-stack with axum/Loco JSON API.
 14. [ ] Unit-test validity engine (Vitest).
 15. [ ] Run `bin/test-form united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions`.

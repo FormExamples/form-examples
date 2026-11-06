@@ -14,6 +14,6 @@ REST operations cover:
 - generate the OPG submission packet
 - export FHIR R5 Bundle, XML, and OPG-ready PDF
 
-The TypeSpec file is the canonical API contract. The Loco backend's axum
+The TypeSpec file is the canonical API contract. The Axum backend's axum
 routes and the SvelteKit client's API client both derive from the
 compiled OpenAPI document.

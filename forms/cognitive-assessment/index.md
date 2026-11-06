@@ -32,7 +32,7 @@ Cognitive function screening using the MMSE (Mini-Mental State Examination) with
 cognitive-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

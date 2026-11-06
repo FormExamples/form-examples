@@ -1,0 +1,50 @@
+[workspace]
+
+[workspace.package]
+rust-version = "1.97"
+
+[package]
+name = "employee_onboarding_checklist"
+version = "0.1.0"
+edition = "2021"
+rust-version.workspace = true
+publish = false
+default-run = "employee_onboarding_checklist-cli"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[workspace.dependencies]
+axa = { version = "0.3", features = ["pagination", "queue", "sqlx"] }
+
+[dependencies]
+axa = { workspace = true }
+clap = { version = "4", features = ["derive"] }
+serde-saphyr = "2"
+sqlx = { version = "0.9", default-features = false, features = ["chrono", "derive", "json", "macros", "migrate", "postgres", "runtime-tokio", "tls-rustls-ring-webpki", "uuid"] }
+thiserror = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1" }
+tokio = { version = "1.54", default-features = false, features = [
+  "rt-multi-thread",
+  "signal",
+  "sync",
+] }
+async-trait = { version = "0.1" }
+axum = { version = "0.8" }
+tracing = { version = "0.1" }
+chrono = { version = "0.4", features = ["serde"] }
+validator = { version = "0.20", features = ["derive"] }
+uuid = { version = "1.29", features = ["serde", "v4"] }
+
+[[bin]]
+name = "employee_onboarding_checklist-cli"
+path = "src/employee_onboarding_checklist/bin/main.rs"
+required-features = []
+
+[dev-dependencies]
+axa = { workspace = true, features = ["testing"] }
+serial_test = { version = "3.5.0" }
+insta = { version = "1.49", features = ["redactions", "yaml", "filters"] }
+
+[lib]
+path = "src/employee_onboarding_checklist/lib.rs"

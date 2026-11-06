@@ -2,7 +2,7 @@
 
 Liquibase-formatted PostgreSQL migrations defining the canonical data model
 for the FP92A medical exemption application. The schema is the source of truth
-from which the XML, FHIR R5, Protocol Buffers, TypeSpec, and Rust SeaORM
+from which the XML, FHIR R5, Protocol Buffers, TypeSpec, and Rust sqlx
 entities are generated.
 
 See [`../AGENTS.md`](../AGENTS.md) for the form overview.

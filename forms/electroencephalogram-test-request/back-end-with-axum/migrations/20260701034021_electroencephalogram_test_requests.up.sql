@@ -1,0 +1,31 @@
+CREATE TABLE IF NOT EXISTS "electroencephalogram_test_requests" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "status" varchar NOT NULL DEFAULT 'draft',
+    "site_name" varchar NOT NULL DEFAULT '',
+    "setting" varchar NOT NULL DEFAULT '',
+    "referral_date" date NULL,
+    "requested_by_date" date NULL,
+    "eeg_type" varchar NOT NULL DEFAULT '',
+    "primary_indication" varchar NOT NULL DEFAULT '',
+    "clinical_question" varchar NOT NULL DEFAULT '',
+    "relevant_history" varchar NOT NULL DEFAULT '',
+    "seizure_frequency" varchar NOT NULL DEFAULT '',
+    "first_seizure" boolean NOT NULL DEFAULT false,
+    "known_epilepsy" boolean NOT NULL DEFAULT false,
+    "current_antiepileptics" varchar NOT NULL DEFAULT '',
+    "recent_seizure" boolean NOT NULL DEFAULT false,
+    "suspected_status_epilepticus" boolean NOT NULL DEFAULT false,
+    "urgency" varchar NOT NULL DEFAULT 'routine',
+    "supervising_consultant" varchar NOT NULL DEFAULT '',
+    "requester_contact" varchar NOT NULL DEFAULT '',
+    "notes" varchar NOT NULL DEFAULT '',
+    "patient_id" uuid NOT NULL,
+    "clinician_id" uuid NOT NULL,
+    CONSTRAINT "fk-electroencephalogram_test_requests-patient_id-to-patients" FOREIGN KEY ("patient_id") REFERENCES "patients" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-electroencephalogram_test_requests-clinician_id-to-clinicians" FOREIGN KEY ("clinician_id") REFERENCES "clinicians" (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+ALTER TABLE electroencephalogram_test_requests ALTER COLUMN id SET DEFAULT gen_random_uuid();

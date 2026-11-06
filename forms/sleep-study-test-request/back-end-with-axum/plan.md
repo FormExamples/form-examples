@@ -1,0 +1,11 @@
+# back-end-with-axum — plan
+
+Rust axum + Loco JSON API for the sleep study request. Generated scaffold is
+driven by `../back-end-with-axum-setup` (one `cargo loco generate scaffold
+--api` per SQL table, in FK-dependency order).
+
+- [ ] Setup script generated from `sql/`
+- [ ] `cargo loco new` crate materialized (requires loco CLI + Postgres)
+- [ ] Four-axis grading engine port (`src/engine/`)
+- [ ] JSON API: CRUD + submit/grade + dashboard
+- [ ] `cargo test` green (requires local Postgres test database)

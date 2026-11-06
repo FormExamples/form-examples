@@ -146,7 +146,7 @@ def stack_inventory(form_dir: Path) -> list[tuple[str, str]]:
         ("openapi", "generated"),
         ("front-end-with-html", "HTML + Lily (wizard + dashboard)"),
         ("front-end-with-svelte", "SvelteKit (wizard + dashboard)"),
-        ("back-end-with-loco", "Rust + Loco JSON API"),
+        ("back-end-with-axum", "Rust + Axum JSON API"),
     ]
     items: list[tuple[str, str]] = []
     for name, label in candidates:
@@ -285,7 +285,7 @@ def render_maintainer_skill(slug: str, form_dir: Path, index_md: str, agents_md:
         out.append(f"| `{name}` | {label} |")
     out.append("")
     out.append(
-        "Generated artefacts (`xml`, `fhir`, `protobuf`, `openapi`, the Loco "
+        "Generated artefacts (`xml`, `fhir`, `protobuf`, `openapi`, the Axum "
         "setup script, `CHANGELOG.md`, `examples/assessment.json`) are never "
         "hand-edited — regenerate them instead; see the tool catalogue in "
         "[`/AGENTS.md`](../../../../AGENTS.md)."

@@ -16,7 +16,7 @@ Follows [`forms/AGENTS-front-end-svelte.md`](../../AGENTS-front-end-svelte.md).
 - `src/lib/data/sample-reports.ts` samples mirror `examples/personas.json`;
   update them if the personas change.
 - `src/lib/api/medical-device-assessments.ts` is the only back-end client
-  (`VITE_API_BASE`, default `http://localhost:5150`; the Loco dev config
+  (`VITE_API_BASE`, default `http://localhost:5150`; the Axum dev config
   enables CORS). `fetchDashboardRows` joins assessments, grades and flags into
   `DashboardRow`s (dashboard keeps the sample rows when the API fails or is
   empty); `submitAssessment` is called by `assessment.save()` after submit:

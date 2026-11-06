@@ -1,8 +1,0 @@
-mod users;
-
-mod patients;
-mod clinicians;
-mod chronic_obstructive_pulmonary_disease_reviews;
-mod chronic_obstructive_pulmonary_disease_review_grades;
-mod chronic_obstructive_pulmonary_disease_review_grade_rules;
-mod chronic_obstructive_pulmonary_disease_review_grade_flags;

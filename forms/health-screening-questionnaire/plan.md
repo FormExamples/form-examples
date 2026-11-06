@@ -14,7 +14,7 @@ Foundation COMPLETE as of 2026-08-14. The form is full-stack.
 | `examples/`, `CHANGELOG.md`, `llms.txt` | generated |
 | `front-end-with-html/` | complete — Playwright smoke pass (14-step wizard, conditional step 10, validation, report, dashboard), `node js/cross-check.mjs` green |
 | `front-end-with-svelte/` | complete — `svelte-check` clean, 39 Vitest cases, `vite build` green, all routes wired |
-| `back-end-with-loco/` | complete — loco-rs 1.0.1, relational per-table schema, `i64` ids |
+| `back-end-with-axum/` | complete — loco-rs 1.0.1, relational per-table schema, `i64` ids |
 
 ## Why this form exists
 
@@ -62,7 +62,7 @@ instruments (PAR-Q+, AUDIT-C) and produces a referral recommendation.
 2. SQL migrations (`patient`, `assessor`, `health_screening_questionnaire`,
    `health_screening_questionnaire_grade`,
    `health_screening_questionnaire_grade_flag`).
-3. Regenerated derived representations (XML, FHIR R5, protobuf, OpenAPI, Loco
+3. Regenerated derived representations (XML, FHIR R5, protobuf, OpenAPI, Axum
    setup script, CHANGELOG + examples, llms.txt, combined `schema.sql`).
 4. Engine-first: pure TypeScript engine
    (`front-end-with-svelte/src/lib/engine/`), 39 Vitest boundary cases green

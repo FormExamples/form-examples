@@ -1,0 +1,9 @@
+mod arc42_documentations;
+mod architectures;
+mod building_blocks;
+mod business_goals;
+mod constraint_items;
+mod context_partners;
+mod quality_goals;
+mod stakeholders;
+mod technology_decisions;

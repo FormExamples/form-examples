@@ -18,5 +18,5 @@ referencers.
 | 06 | `06_create_table_four_a_test_for_delirium_grade_rule.sql` | `four_a_test_for_delirium_grade_rule` | audit trail of fired grading rules |
 | 07 | `07_create_table_four_a_test_for_delirium_grade_flag.sql` | `four_a_test_for_delirium_grade_flag` | red-flag issues with priority and suggested action |
 
-Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Loco
+Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Axum
 setup script) are derived from these migrations and are never hand-edited.

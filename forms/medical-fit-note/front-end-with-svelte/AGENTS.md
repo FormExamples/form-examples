@@ -20,7 +20,7 @@ spec is [`../spec/index.md`](../spec/index.md).
 ## Back-end wiring
 
 `src/lib/api/index.ts` (`fetchDashboardRows`, `saveFitNote`, covered by
-`index.test.ts` with a fake fetch) is the only module that talks to the Loco
+`index.test.ts` with a fake fetch) is the only module that talks to the Axum
 API; base from `VITE_API_BASE`. `store.save()` is called on submit and sets
 `saveState` / `saveMessage`, shown on the report page. Sample-data fallback on
 the dashboard must stay. Details: `index.md` "Back-end wiring".

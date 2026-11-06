@@ -37,7 +37,7 @@ Cardiovascular evaluation using CCS Angina Classification and NYHA Heart Failure
 cardiology-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

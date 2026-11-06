@@ -1,9 +1,0 @@
-mod users;
-
-mod patients;
-mod practitioners;
-mod immunology_waiting_list_cards;
-mod immunology_waiting_list_card_appointments;
-mod immunology_waiting_list_card_grades;
-mod immunology_waiting_list_card_grade_rules;
-mod immunology_waiting_list_card_grade_flags;

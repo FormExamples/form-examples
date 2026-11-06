@@ -1,0 +1,31 @@
+CREATE TABLE IF NOT EXISTS "national_early_warning_score_2s" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "status" varchar NOT NULL DEFAULT 'draft',
+    "observation_at" timestamp with time zone NULL,
+    "ward_or_location" varchar NOT NULL DEFAULT '',
+    "spo2_scale" varchar NOT NULL DEFAULT '',
+    "spo2_scale2_endorsed" varchar NOT NULL DEFAULT '',
+    "respiratory_rate" integer NULL,
+    "spo2" integer NULL,
+    "on_oxygen" varchar NOT NULL DEFAULT '',
+    "oxygen_device" varchar NOT NULL DEFAULT '',
+    "oxygen_flow_rate_l_min" double precision NULL,
+    "inspired_oxygen_fraction_percent" integer NULL,
+    "systolic_blood_pressure" integer NULL,
+    "pulse" integer NULL,
+    "consciousness_acvpu" varchar NOT NULL DEFAULT '',
+    "temperature" double precision NULL,
+    "is_under_16" varchar NOT NULL DEFAULT '',
+    "is_pregnant" varchar NOT NULL DEFAULT '',
+    "has_spinal_cord_injury" varchar NOT NULL DEFAULT '',
+    "clinical_notes" text NOT NULL DEFAULT '',
+    "patient_id" uuid NOT NULL,
+    "clinician_id" uuid NULL,
+    CONSTRAINT "fk-national_early_warning_score_2s-patient_id-to-patients" FOREIGN KEY ("patient_id") REFERENCES "patients" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-national_early_warning_score_2s-clinician_id-to-clinicians" FOREIGN KEY ("clinician_id") REFERENCES "clinicians" (id) ON DELETE SET NULL ON UPDATE NO ACTION
+);
+
+ALTER TABLE national_early_warning_score_2s ALTER COLUMN id SET DEFAULT gen_random_uuid();

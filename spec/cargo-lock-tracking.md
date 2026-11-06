@@ -1,25 +1,25 @@
-# Spec — Loco crates track Cargo.lock
+# Spec — Axum crates track Cargo.lock
 
 Status: **accepted** (2026-07-27). Applies to every form's
-`back-end-with-loco/` crate. This is a domain spec under the top-level
+`back-end-with-axum/` crate. This is a domain spec under the top-level
 [`spec.md`](../spec.md) §6 (back-end contract); read it before changing a
-Loco crate's `.gitignore`.
+Axum crate's `.gitignore`.
 
 ## 1. Decision
 
-Every `back-end-with-loco/` crate's `Cargo.lock` is **tracked in git**, not
+Every `back-end-with-axum/` crate's `Cargo.lock` is **tracked in git**, not
 ignored. `.gitignore` carries `!Cargo.lock` (or omits any `Cargo.lock` rule
 entirely), never a bare `Cargo.lock` ignore line.
 
 ## 2. Rationale
 
-- Each `back-end-with-loco/` crate builds a **binary** (`cargo loco start`,
+- Each `back-end-with-axum/` crate builds a **binary** (`cargo run -- start`,
   the management CLI) — not a library published for downstream `cargo`
   consumers to resolve themselves. The standard Rust guidance to commit
   `Cargo.lock` for binaries (and only omit it for libraries) applies
   directly.
 - Reproducible CI and reproducible `cargo deny check` results (see
-  [`AGENTS/back-end-with-loco.md`](../AGENTS/back-end-with-loco.md)
+  [`AGENTS/back-end-with-axum.md`](../AGENTS/back-end-with-axum.md)
   "Supply-chain policy") depend on every environment resolving the exact
   same dependency versions. An untracked lockfile lets CI silently resolve
   different transitive versions than a contributor's machine, which can
@@ -40,13 +40,8 @@ entirely), never a bare `Cargo.lock` ignore line.
 
 ## 4. Tooling and verification
 
-- `bin/loco-config-refactor [--all|<slug>] [--check]` applies the fix
-  mechanically (alongside its existing background-queue and observability
-  conventions) and is idempotent — a crate whose `.gitignore` already
-  tracks `Cargo.lock` is left untouched. `--check --all` is the CI drift
-  detector.
-- `git ls-files forms/*/back-end-with-loco/Cargo.lock | wc -l` should equal
-  the count of `back-end-with-loco/Cargo.toml` files (one lockfile tracked
+- `git ls-files forms/*/back-end-with-axum/Cargo.lock | wc -l` should equal
+  the count of `back-end-with-axum/Cargo.toml` files (one lockfile tracked
   per crate).
 
 ## 5. Out of scope

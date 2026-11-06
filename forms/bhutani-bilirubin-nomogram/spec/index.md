@@ -24,7 +24,7 @@ Full design description: [`index.md`](../index.md).
 
 In scope: the schema, classification engine (zone lookup + threshold
 comparison), two consolidated front-ends (`front-end-with-html`,
-`front-end-with-svelte`), the Rust Loco JSON-API crate, and the generated
+`front-end-with-svelte`), the Rust Axum JSON-API crate, and the generated
 representations (XML, FHIR R5, protobuf, OpenAPI). Out of scope: hosted
 deployment, authentication, multi-tenancy, diagnosis of jaundice aetiology, and
 infants outside the supported gestational range of the threshold charts.
@@ -168,8 +168,8 @@ CSV, or TSV.
 | `openapi` | generated |
 | `front-end-with-html` | HTML + Lily (wizard + dashboard) |
 | `front-end-with-svelte` | SvelteKit (wizard + dashboard) |
-| `back-end-with-loco` | Rust + Loco JSON API |
-| `back-end-with-loco-setup` | generated scaffold script |
+| `back-end-with-axum` | Rust + Axum JSON API |
+| `back-end-with-axum-setup` | generated scaffold script |
 
 Generated artefacts are never hand-edited; re-run the generators in
 [`/AGENTS.md`](../../../AGENTS.md) §Tools after schema changes.

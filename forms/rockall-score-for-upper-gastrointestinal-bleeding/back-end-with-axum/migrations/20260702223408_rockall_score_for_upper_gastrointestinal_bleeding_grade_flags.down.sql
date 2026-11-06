@@ -1,0 +1,1 @@
+DROP TABLE "rockall_score_for_upper_gastrointestinal_bleeding_grade_flags";

@@ -1,0 +1,11 @@
+#!/bin/sh
+set -euf
+
+form_snake_case=fall_risk_assessment
+
+createdb --host=localhost --port=5432 --username=postgres --owner=postgres "${form_snake_case}_development" || :
+createdb --host=localhost --port=5432 --username=postgres --owner=postgres "${form_snake_case}_test" || :
+createdb --host=localhost --port=5432 --username=postgres --owner=postgres "${form_snake_case}_production" || :
+
+cd "$(dirname "$0")/back-end-with-axum"
+cargo run -- db migrate

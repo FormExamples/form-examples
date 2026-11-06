@@ -27,14 +27,14 @@ A single form carries a complete vertical slice:
   spec. The spec is the source of truth for *behaviour*.
 - **`sql/`** — numbered PostgreSQL migrations. The source of truth for *data
   shape*. Everything structural downstream is generated from here.
-- **`xml/`, `fhir/r5/`, `protobuf/`, `openapi/`, `back-end-with-loco-setup`** —
+- **`xml/`, `fhir/r5/`, `protobuf/`, `openapi/`, `back-end-with-axum-setup`** —
   generated representations of the schema. Never hand-edited.
 - **`front-end-with-html/`** — a Lily headless HTML wizard (`index.html`) plus a
   `dashboard.html`, driven by a vanilla-JS engine in `js/`.
 - **`front-end-with-svelte/`** — a SvelteKit app using Lily Svelte components,
   routes nested under `src/routes/<slug>/`, RESTful `/<plural>/` list +
   `/<plural>/[id]` detail.
-- **`back-end-with-loco/`** — a Rust axum + Loco JSON API crate, one relational
+- **`back-end-with-axum/`** — a Rust axum + axa + sqlx JSON API crate, one relational
   table per SQL table.
 
 The three implementations of the scoring logic (JS, TypeScript, Rust) are kept
@@ -55,7 +55,7 @@ sql/                source of truth for DATA SHAPE
    ├─► fhir/r5/     FHIR HL7 R5 JSON
    ├─► protobuf/    .proto schemas
    ├─► openapi/     OpenAPI 3.1 YAML
-   └─► back-end-with-loco-setup   Loco scaffold script
+   └─► back-end-with-axum-setup   Axum scaffold script
 ```
 
 Behaviour (the scoring engine, the UI wizard) is authored by hand from the spec
@@ -73,10 +73,10 @@ flowchart TD
     SQL --> FHIR[fhir/r5/]
     SQL --> PB[protobuf/]
     SQL --> OAPI[openapi/]
-    SQL --> SETUP[back-end-with-loco-setup]
+    SQL --> SETUP[back-end-with-axum-setup]
     SPEC --> HTML[front-end-with-html/]
     SPEC --> SVELTE[front-end-with-svelte/]
-    SPEC --> LOCO[back-end-with-loco/]
+    SPEC --> LOCO[back-end-with-axum/]
     SQL -. shape .-> LOCO
     HTML -. golden vectors .- SVELTE
     SVELTE -. golden vectors .- LOCO
@@ -89,7 +89,7 @@ flowchart TD
 - [Scoring engines](scoring-engines.md) — the pure grading pattern in three
   languages.
 - [Lily Design System](lily.md) — the headless UI contract.
-- [Back end](back-end.md) — the Loco JSON API crate.
+- [Back end](back-end.md) — the Axum JSON API crate.
 - [Verification](verification.md) — every gate and what it proves.
 - [Tools reference](tools.md) — every `bin/` tool.
 - Root [`README.md`](../README.md), [`spec.md`](../spec.md),

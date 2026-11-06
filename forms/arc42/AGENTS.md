@@ -22,7 +22,7 @@ See [`index.md`](./index.md) for the full design and the 12-step wizard table.
 - `./fhir/r5/` — generated FHIR HL7 R5 JSON per SQL entity
 - `./front-end-with-svelte/` — SvelteKit single-page wizard + dashboard (SVAR DataGrid)
 - `./front-end-with-html/` — single-page HTML wizard (index.html) + dashboard (dashboard.html)
-- `./back-end-with-loco/` — placeholder
+- `./back-end-with-axum/` — placeholder
 
 ## Scoring engine
 

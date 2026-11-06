@@ -1,9 +1,0 @@
-pub mod auth;
-pub mod openapi;
-
-pub mod patient;
-pub mod clinician;
-pub mod body_mass_index_and_body_surface_area_calculator;
-pub mod body_mass_index_and_body_surface_area_calculator_grade;
-pub mod body_mass_index_and_body_surface_area_calculator_grade_rule;
-pub mod body_mass_index_and_body_surface_area_calculator_grade_flag;

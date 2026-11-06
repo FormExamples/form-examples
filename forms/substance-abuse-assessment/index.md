@@ -39,7 +39,7 @@ Substance use disorder evaluation using AUDIT (Alcohol Use Disorders Identificat
 substance-abuse-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

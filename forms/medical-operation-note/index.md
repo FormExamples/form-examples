@@ -133,8 +133,8 @@ medical-operation-note/
   front-end-with-svelte/                       # SvelteKit single-page op-note wizard
   front-end-with-html/                    # HTML review table
   front-end-with-svelte/                  # SvelteKit SVAR DataGrid review dashboard
-  back-end-with-loco/            # Rust axum + Loco JSON API back-end
-  back-end-with-loco-setup       # cargo loco scaffold script (generated)
+  back-end-with-axum/            # Rust axum + axa + sqlx JSON API back-end
+  back-end-with-axum-setup       # cargo run -- scaffold script (generated)
 ```
 
 ## Clinical grounding

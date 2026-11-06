@@ -1,0 +1,7 @@
+mod patients;
+mod pharmacology_waiting_list_card_appointments;
+mod pharmacology_waiting_list_card_grade_flags;
+mod pharmacology_waiting_list_card_grade_rules;
+mod pharmacology_waiting_list_card_grades;
+mod pharmacology_waiting_list_cards;
+mod practitioners;

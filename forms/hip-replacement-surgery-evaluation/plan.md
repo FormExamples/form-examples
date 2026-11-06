@@ -13,7 +13,7 @@ Created 2026-08-14. Foundation and full stack COMPLETE as of 2026-08-14.
 | Scoring engine (`front-end-with-svelte/src/lib/engine/`) | complete — 25/25 Vitest cases pass |
 | `front-end-with-svelte/` UI (steps, routes, dashboard, PDF) | complete — svelte-check clean, vite build succeeds |
 | `front-end-with-html/` | complete — 49/49 cross-check cases pass, Lily/ES-modules gates clean |
-| `back-end-with-loco/` | complete — loco-rs 1.0.1, `cargo build` + 28/28 tests pass |
+| `back-end-with-axum/` | complete — loco-rs 1.0.1, `cargo build` + 28/28 tests pass |
 
 `bin/test-form hip-replacement-surgery-evaluation` passes except for the
 intentionally-empty `typespec/` placeholder (left alone per the build

@@ -15,7 +15,7 @@
 - [x] `COMMENT ON TABLE` / `COMMENT ON COLUMN` on every table migration.
 
 ## Generated representations (done)
-- [x] `xml/`, `fhir/`, `protobuf/`, `openapi/`, `back-end-with-loco-setup`
+- [x] `xml/`, `fhir/`, `protobuf/`, `openapi/`, `back-end-with-axum-setup`
       generated, plus `CHANGELOG.md` and `examples/`.
 
 ## Scoring engine (done)
@@ -27,7 +27,7 @@
 - [x] `front-end-with-svelte/` — Lily RESTful list + form.
 
 ## Back-end (done)
-- [x] `back-end-with-loco/` — Rust axum + Loco JSON API.
+- [x] `back-end-with-axum/` — Rust axum + axa JSON API.
 
 ## Verify
 - [ ] `bin/test-form sequential-organ-failure-assessment` exits cleanly

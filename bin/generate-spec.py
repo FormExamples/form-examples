@@ -107,16 +107,16 @@ def stack_inventory(form_dir: Path) -> list[tuple[str, str]]:
         ("openapi", "generated"),
         ("front-end-with-html", "HTML + Lily (wizard + dashboard)"),
         ("front-end-with-svelte", "SvelteKit (wizard + dashboard)"),
-        ("back-end-with-loco", "Rust + Loco JSON API"),
+        ("back-end-with-axum", "Rust + Axum JSON API"),
     ]
     for name, label in candidates:
         path = form_dir / name
         present = (path.is_dir() and any(path.iterdir())) or (path.is_file() and path.stat().st_size > 0)
         items.append((name, label if present else f"{label} — not implemented"))
     # The setup file is a single executable, not a directory
-    setup = form_dir / "back-end-with-loco-setup"
+    setup = form_dir / "back-end-with-axum-setup"
     if setup.is_file() and setup.stat().st_size > 0:
-        items.append(("back-end-with-loco-setup", "generated scaffold script"))
+        items.append(("back-end-with-axum-setup", "generated scaffold script"))
     return items
 
 
@@ -152,7 +152,7 @@ def render_spec(slug: str, form_dir: Path) -> str:
     out.append("")
     out.append(
         "In scope: the schema, scoring engine, the two consolidated front-ends "
-        "(`front-end-with-html`, `front-end-with-svelte`), the Rust Loco JSON-API "
+        "(`front-end-with-html`, `front-end-with-svelte`), the Rust Axum JSON-API "
         "crate, and the generated representations (XML, FHIR R5, protobuf, "
         "OpenAPI) listed in §5. Out of scope: hosted deployment, authentication, "
         "multi-tenancy."
@@ -198,7 +198,7 @@ def render_spec(slug: str, form_dir: Path) -> str:
         out.append(f"| `{name}` | {label} |")
     out.append("")
     out.append(
-        "Generated artefacts (XML, FHIR R5, Protocol Buffers, OpenAPI, Loco "
+        "Generated artefacts (XML, FHIR R5, Protocol Buffers, OpenAPI, Axum "
         "setup script) are never hand-edited; re-run the generators in "
         "[`/AGENTS.md`](../../../AGENTS.md) §Tools after schema changes."
     )

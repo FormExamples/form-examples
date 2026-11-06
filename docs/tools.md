@@ -2,8 +2,11 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-103 tools.
+89 tools.
 
+- [`bin/axum-axa-upgrade`](#axum-axa-upgrade)
+- [`bin/axum-forbid-unsafe`](#axum-forbid-unsafe)
+- [`bin/axum-msrv-set`](#axum-msrv-set)
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
 - [`bin/create-form`](#create-form)
@@ -18,12 +21,12 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/forms-as-tsv`](#forms-as-tsv)
 - [`bin/forms-shard`](#forms-shard)
 - [`bin/generate-api-transcripts`](#generate-api-transcripts)
+- [`bin/generate-axum-deny-config.py`](#generate-axum-deny-configpy)
 - [`bin/generate-changelog-and-examples.py`](#generate-changelog-and-examplespy)
 - [`bin/generate-export-samples`](#generate-export-samples)
 - [`bin/generate-form-skills.py`](#generate-form-skillspy)
 - [`bin/generate-forms-tsv.py`](#generate-forms-tsvpy)
 - [`bin/generate-llms-txt.py`](#generate-llms-txtpy)
-- [`bin/generate-loco-deny-config.py`](#generate-loco-deny-configpy)
 - [`bin/generate-persona-dashboard-samples.py`](#generate-persona-dashboard-samplespy)
 - [`bin/generate-persona-fhir-bundles.py`](#generate-persona-fhir-bundlespy)
 - [`bin/generate-spec.py`](#generate-specpy)
@@ -41,29 +44,12 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/lily-svelte-sync`](#lily-svelte-sync)
 - [`bin/lily-svelte-theme-locale-select-refactor`](#lily-svelte-theme-locale-select-refactor)
 - [`bin/lily-sync`](#lily-sync)
-- [`bin/loco-camel-case-json-refactor`](#loco-camel-case-json-refactor)
-- [`bin/loco-config-refactor`](#loco-config-refactor)
-- [`bin/loco-forbid-unsafe`](#loco-forbid-unsafe)
-- [`bin/loco-integration-test-rollout`](#loco-integration-test-rollout)
-- [`bin/loco-migration-defaults`](#loco-migration-defaults)
-- [`bin/loco-migration-nullability`](#loco-migration-nullability)
-- [`bin/loco-missing-request-test-stubs-fix`](#loco-missing-request-test-stubs-fix)
-- [`bin/loco-msrv-set`](#loco-msrv-set)
-- [`bin/loco-rs-1-migration`](#loco-rs-1-migration)
-- [`bin/loco-seed-base-rename`](#loco-seed-base-rename)
-- [`bin/loco-seed-base-stray-usage-fix`](#loco-seed-base-stray-usage-fix)
-- [`bin/loco-seed-data-rollout`](#loco-seed-data-rollout)
-- [`bin/loco-serve-openapi-refactor`](#loco-serve-openapi-refactor)
-- [`bin/loco-test-auth-header-fix`](#loco-test-auth-header-fix)
-- [`bin/loco-test-max-connections-fix`](#loco-test-max-connections-fix)
-- [`bin/loco-uuid-pk-refactor`](#loco-uuid-pk-refactor)
 - [`bin/make-github-pages`](#make-github-pages)
 - [`bin/migrate-sql-filenames.py`](#migrate-sql-filenamespy)
 - [`bin/node-current-version-set`](#node-current-version-set)
 - [`bin/normalize`](#normalize)
 - [`bin/oxford-spelling-sweep`](#oxford-spelling-sweep)
 - [`bin/page-header-layout-refactor`](#page-header-layout-refactor)
-- [`bin/route-loco-layout`](#route-loco-layout)
 - [`bin/route-svelte-layout`](#route-svelte-layout)
 - [`bin/svelte-autosave-restore-fix`](#svelte-autosave-restore-fix)
 - [`bin/svelte-date-time-picker-vendor`](#svelte-date-time-picker-vendor)
@@ -84,12 +70,12 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/sync-form-tasks-checkboxes`](#sync-form-tasks-checkboxes)
 - [`bin/sync-from-skel-to-forms`](#sync-from-skel-to-forms)
 - [`bin/test`](#test)
+- [`bin/test-axum-project`](#test-axum-project)
+- [`bin/test-axum-routes`](#test-axum-routes)
 - [`bin/test-e2e`](#test-e2e)
 - [`bin/test-engines`](#test-engines)
 - [`bin/test-examples-conformance`](#test-examples-conformance)
 - [`bin/test-form`](#test-form)
-- [`bin/test-loco-project`](#test-loco-project)
-- [`bin/test-loco-routes`](#test-loco-routes)
 - [`bin/test-personas`](#test-personas)
 - [`bin/test-sql-apply`](#test-sql-apply)
 - [`bin/test-tools`](#test-tools)
@@ -102,11 +88,124 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/protobuf/generate-protobuf-representations.py`](#protobufgenerate-protobuf-representationspy)
 - [`bin/openapi/generate-openapi-combined.py`](#openapigenerate-openapi-combinedpy)
 - [`bin/openapi/generate-openapi-representations.py`](#openapigenerate-openapi-representationspy)
-- [`bin/back-end-with-loco/generate-back-end-with-loco-setup.py`](#back-end-with-locogenerate-back-end-with-loco-setuppy)
-- [`bin/back-end-with-loco/generate-loco-agents.py`](#back-end-with-locogenerate-loco-agentspy)
-- [`bin/back-end-with-loco/generate-rust-docs.py`](#back-end-with-locogenerate-rust-docspy)
+- [`bin/back-end-with-axum/generate-axum-agents.py`](#back-end-with-axumgenerate-axum-agentspy)
+- [`bin/back-end-with-axum/generate-back-end-with-axum-setup.py`](#back-end-with-axumgenerate-back-end-with-axum-setuppy)
+- [`bin/back-end-with-axum/generate-rust-docs.py`](#back-end-with-axumgenerate-rust-docspy)
 - [`bin/sql/generate-sql-combined.py`](#sqlgenerate-sql-combinedpy)
 - [`bin/sql/generate-sql-comments.py`](#sqlgenerate-sql-commentspy)
+
+<h2 id="axum-axa-upgrade"><code>bin/axum-axa-upgrade</code></h2>
+
+```text
+bin/axum-axa-upgrade — move each form's `back-end-with-axum/` to axa 0.5 and
+RFC 9457 errors through `axa-problem`.
+
+What it changes in a crate:
+
+  Cargo.toml                axa 0.5 with the `problem` feature; a `description`,
+                            which `--help` prints; `clap` removed
+  app.rs                    the pool goes in `AppContext::db`, so `/_readiness`
+                            asks it without a named check; the production guard
+                            uses `DbCommand::destroys_data`; `router` goes through
+                            `support::problem::apply`
+  bin/main.rs               `axa::cli::parse` in place of `Cli::parse`
+  support/mod.rs            `db` reads `ctx.db`; adds `pub mod problem`
+  support/problem.rs        copied from `migrate-from-loco/support/problem.rs`
+  tests/**/problem.rs       a request test of the failure shapes
+
+Every edit to a crate is planned and asserted before any is written, so a crate
+that differs from the expected shape stops with its name and stays untouched. A
+crate already moved is skipped, so the tool can be rerun. Cargo.lock is left to
+`cargo update -p axa`.
+
+Usage:
+  bin/axum-axa-upgrade <slug>...          # named forms
+  bin/axum-axa-upgrade --all              # every form's Axum crate
+  bin/axum-axa-upgrade --root DIR <slug>  # a copy of forms/ at DIR
+  bin/axum-axa-upgrade --check --all      # CI drift check (non-zero on drift)
+```
+
+<h2 id="axum-forbid-unsafe"><code>bin/axum-forbid-unsafe</code></h2>
+
+```text
+bin/axum-forbid-unsafe — add `#![forbid(unsafe_code)]` to every crate root
+in every form's `back-end-with-axum/`.
+
+Nothing in this monorepo's Rust needs `unsafe`: the crates are axum + axa + sqlx request handlers over a relational schema, and a fleet-wide grep before
+this tool was written found not one `unsafe` token in any crate source (the
+sole match was the word "unsafe" inside a doc comment). `forbid` — rather than
+`deny` — states that as a compiler-enforced invariant that a later inner
+`#![allow(unsafe_code)]` cannot quietly reopen.
+
+The attribute is per **crate root**, not per file, so each Cargo target needs
+its own. Every form's crate has exactly four:
+
+    src/<form_snake_case>/lib.rs           the library
+    src/<form_snake_case>/bin/main.rs      the `<form_snake_case>-cli` binary
+    migration/src/lib.rs                   the `migration` library
+    tests/<name>.rs                        the integration-test target
+                                           (`mod.rs` in 350 crates,
+                                           `engine_tests.rs` in 5)
+
+Insertion point, per file: after any leading `//!` crate-doc block and any
+leading blank lines, and before everything else — so the attribute lands above
+the existing `#![allow(...)]` runs (`migration/src/lib.rs` starts with two of
+them) rather than between them. A file that already carries the attribute is
+left alone: the twelve crates carrying hand-written rustdoc already have a
+`// Always start with high quality coding conventions.` block, and eight of
+those already had `#![forbid(unsafe_code)]` in `lib.rs` before this tool
+existed.
+
+This is an ongoing convention, not a one-shot migration. `cargo run -- generate
+scaffold` does not emit the attribute, so each form's generated
+`back-end-with-axum-setup` script calls this tool as its final step, right
+after `bin/route-loco-layout`; `--check` is the CI drift detector that catches
+a crate which skipped it.
+
+Usage:
+  bin/axum-forbid-unsafe <slug>...        # named forms
+  bin/axum-forbid-unsafe --all            # every form's Axum crate
+  bin/axum-forbid-unsafe --dry-run --all  # show what would change
+  bin/axum-forbid-unsafe --check --all    # CI drift check (non-zero on drift)
+  bin/axum-forbid-unsafe --verbose --all  # list every file touched
+```
+
+<h2 id="axum-msrv-set"><code>bin/axum-msrv-set</code></h2>
+
+```text
+bin/axum-msrv-set — set the Rust MSRV (current stable N-2) fleet-wide,
+per spec/rust-msrv-n-minus-2/.
+
+The spec's guidance assumes a single repo-root Cargo workspace
+(`[workspace.package]` with `rust-version`, every member crate inheriting
+via `rust-version.workspace = true`). This repo has no such root: each
+form's `back-end-with-axum/` is its OWN self-contained workspace (`[workspace]`
+with no explicit `members`, which still auto-includes `migration/` as a
+member via its path dependency — confirmed by `migration/Cargo.toml`'s
+`axa = { workspace = true }`). So the same pattern is applied 355 times,
+once per form's workspace, rather than once at a repo root that doesn't
+exist:
+
+- `back-end-with-axum/Cargo.toml` gains a `[workspace.package]` table with
+  `rust-version = "<MSRV>"`, and its own `[package]` gets
+  `rust-version.workspace = true`.
+- `back-end-with-axum/migration/Cargo.toml` (a member of the same implicit
+  workspace, confirmed above) gets `rust-version.workspace = true` too.
+
+MSRV is computed from the locally installed `rustc`'s stable version minus
+two minor releases (e.g. stable 1.98 -> MSRV 1.96), matching the spec's
+rule exactly: `--msrv` overrides this for a specific value instead.
+
+This is an ongoing convention, not a one-shot migration: it must be
+re-applied (with a new --msrv) every time stable Rust advances, per the
+spec's "Maintenance" section. `--check` is the CI drift detector.
+
+Usage:
+  bin/axum-msrv-set --msrv 1.96 <slug>...        # named forms
+  bin/axum-msrv-set --msrv 1.96 --all            # every form's Axum crate
+  bin/axum-msrv-set --msrv 1.96 --dry-run --all  # show what would change
+  bin/axum-msrv-set --msrv 1.96 --check --all    # CI drift check (non-zero on drift)
+```
 
 <h2 id="clean"><code>bin/clean</code></h2>
 
@@ -186,7 +285,7 @@ no-op. --check implies --dry-run and exits non-zero if any form would change.
 <h2 id="fill-full-stack-stubspy"><code>bin/fill-full-stack-stubs.py</code></h2>
 
 ```text
-Fill stub back-end-with-loco/ AGENTS.md, plan.md, index.md files across all
+Fill stub back-end-with-axum/ AGENTS.md, plan.md, index.md files across all
 forms.
 
 Replaces files that contain the placeholder phrase "Not yet implemented." with
@@ -320,7 +419,7 @@ bin/forms-shard <index> <total> — print the form slugs assigned to one
 ```text
 bin/generate-api-transcripts — record a real `examples/api-create.http`
 transcript (POST-then-GET against the live `patient` endpoint) for every
-Loco crate with the fleet's uniform `controllers/patient.rs` shape.
+Axum crate with the fleet's uniform `controllers/patient.rs` shape.
 
 tasks.md's "API transcripts per form" item asks for a *recorded*
 request/response against the seeded crate, not a reimplemented/faked
@@ -360,6 +459,29 @@ diffing), exits non-zero if any are pending. Default: capture and
 write. Requires a Postgres reachable at the crate's own configured
 `database.uri` (see CONTRIBUTING.md's scratch-Postgres recipe) with a
 role/database it can create.
+```
+
+<h2 id="generate-axum-deny-configpy"><code>bin/generate-axum-deny-config.py</code></h2>
+
+```text
+bin/generate-axum-deny-config.py — Write forms/<slug>/back-end-with-axum/deny.toml.
+
+Every Axum crate shares the same `axa` 0.16 dependency pin and
+therefore (near enough) the same dependency graph, so one canonical
+cargo-deny policy — advisories/licenses/bans/sources — applies to all of
+them verbatim. This script writes that byte-identical policy into every
+form's `back-end-with-axum/deny.toml`.
+
+Generated artefact: do not hand-edit. Idempotent — re-running with no
+upstream change is a no-op (same bytes). If a crate's dependency graph
+ever needs a crate-specific exception, add it here with a per-crate
+comment explaining why, rather than hand-editing the file in place (the
+next `--check`-clean regeneration would silently drop it).
+
+Usage:
+  bin/generate-axum-deny-config.py            # generate for every form
+  bin/generate-axum-deny-config.py <slug> ... # generate only the named forms
+  bin/generate-axum-deny-config.py --check    # exit non-zero if any deny.toml would change
 ```
 
 <h2 id="generate-changelog-and-examplespy"><code>bin/generate-changelog-and-examples.py</code></h2>
@@ -481,29 +603,6 @@ Usage:
   bin/generate-llms-txt.py            # generate for every form
   bin/generate-llms-txt.py <slug> ... # generate only the named forms
   bin/generate-llms-txt.py --check    # exit non-zero if any llms.txt would change
-```
-
-<h2 id="generate-loco-deny-configpy"><code>bin/generate-loco-deny-config.py</code></h2>
-
-```text
-bin/generate-loco-deny-config.py — Write forms/<slug>/back-end-with-loco/deny.toml.
-
-Every Loco crate shares the same `loco-rs` 0.16 dependency pin and
-therefore (near enough) the same dependency graph, so one canonical
-cargo-deny policy — advisories/licenses/bans/sources — applies to all of
-them verbatim. This script writes that byte-identical policy into every
-form's `back-end-with-loco/deny.toml`.
-
-Generated artefact: do not hand-edit. Idempotent — re-running with no
-upstream change is a no-op (same bytes). If a crate's dependency graph
-ever needs a crate-specific exception, add it here with a per-crate
-comment explaining why, rather than hand-editing the file in place (the
-next `--check`-clean regeneration would silently drop it).
-
-Usage:
-  bin/generate-loco-deny-config.py            # generate for every form
-  bin/generate-loco-deny-config.py <slug> ... # generate only the named forms
-  bin/generate-loco-deny-config.py --check    # exit non-zero if any deny.toml would change
 ```
 
 <h2 id="generate-persona-dashboard-samplespy"><code>bin/generate-persona-dashboard-samples.py</code></h2>
@@ -1121,722 +1220,6 @@ Usage:
 The tool is idempotent: re-running with no upstream changes is a no-op.
 ```
 
-<h2 id="loco-camel-case-json-refactor"><code>bin/loco-camel-case-json-refactor</code></h2>
-
-```text
-bin/loco-camel-case-json-refactor — mechanically add
-`#[serde(rename_all = "camelCase")]` to every domain-model struct in a
-Loco crate, so the JSON API actually emits/accepts camelCase keys —
-matching the repo's own convention ("camelCase on structs shared with the
-front-end") and every front-end's own serde/TypeScript types. Fixes
-tasks.md's "FINDING — API serves snake_case, not camelCase" for the
-domain structs (the ones that matter for front-end interop).
-
-Reference implementation: forms/medical-operation-note. Scope is
-deliberately narrower than the original finding's "283 crates + ~1400
-insta-snapshot regen" estimate: only the domain-specific controllers
-(`controllers/<table>.rs`, skipping the Loco-scaffolded `auth.rs` and the
-`openapi.rs` this repo added) and domain entities
-(`models/_entities/<table>.rs`, skipping the scaffolded `users.rs`) are
-touched — never `auth.rs` or `users.rs`. Checked directly against the
-fleet before writing this tool: every crate's only real (non-stub)
-`assert_debug_snapshot!` calls live in `tests/models/users.rs` and
-`tests/requests/auth.rs`; every domain-specific test file
-(`tests/models/<table>.rs`) is an unfilled scaffold stub with its
-`assert_debug_snapshot!` call commented out. Leaving `auth.rs`/`users.rs`
-untouched means this fix needs **no snapshot regeneration at all** —
-confirmed by running the full `cargo test` suite unchanged afterward on
-the reference crate and a sample.
-
-For each domain file, finds every `#[derive(...)]` line whose derive list
-contains both `Serialize` and `Deserialize` (there is exactly one such
-struct per file in every crate checked — the `Params` struct in a
-controller, the `Model` struct in an entity; a `Relation` enum's own
-derive never includes Serialize/Deserialize) and inserts
-`#[serde(rename_all = "camelCase")]` immediately after it — before any
-`#[sea_orm(...)]` attribute on the same struct, matching where this tool
-placed it by hand on the reference crate.
-
-serde's `rename_all` only affects `Serialize`/`Deserialize`; it does not
-touch SeaORM's own column mapping (`ColumnTrait` et al. key off the Rust
-field identifiers directly, not serde attributes), so this is safe
-alongside `#[sea_orm(...)]` on the same struct.
-
-Usage:
-    bin/loco-camel-case-json-refactor [--check] [--dry-run] [--all|<slug>...]
-
---check reports which crates would change, and exits non-zero if any
-change is pending (CI drift detector). --dry-run shows per-crate status
-without writing. Default (no flags): apply. Idempotent: a struct whose
-derive line is already immediately followed by
-`#[serde(rename_all = "camelCase")]` is left alone.
-```
-
-<h2 id="loco-config-refactor"><code>bin/loco-config-refactor</code></h2>
-
-```text
-bin/loco-config-refactor — mechanically refactor each form's
-`back-end-with-loco/` Loco crate to the canonical
-background-queue and observability conventions documented in
-`AGENTS/back-end-with-loco.md`:
-
-  - Postgres-backed background queue (`worker`, loco-rs 1.0's backend-
-    agnostic queue feature; the runtime backend is selected by `queue.kind:`
-    in `config/*.yaml`, not by a Cargo feature)
-  - The Redis-backed queue add-on (`worker_redis`) excluded
-  - OpenTelemetry OTLP exporter dependencies
-  - Prometheus `/metrics` dependency (`axum-prometheus`)
-  - `Cargo.lock` tracked in git (see `spec/cargo-lock-tracking.md`)
-
-Edits per Loco crate (a crate is any dir containing a `Cargo.toml` whose
-contents reference `loco-rs`):
-
-  Cargo.toml:
-    - Rewrite the `loco-rs = { ... }` declaration to set
-      `default-features = false` and an explicit features list that
-      includes `worker` and excludes `worker_redis`.
-    - Append OTel + Prometheus deps under `[dependencies]` if missing.
-
-  config/development.yaml, config/test.yaml, config/production.yaml:
-    - Set `workers.mode`: BackgroundQueue (development/production) or
-      ForegroundBlocking (test, so queued mailer jobs run inline).
-    - Insert/replace a `queue:` block with `kind: Postgres`, reusing the
-      same Postgres URI as the existing `database.uri` and setting
-      `dangerously_flush` and `num_workers` per environment.
-
-  .gitignore:
-    - Flip a bare `Cargo.lock` ignore line to `!Cargo.lock` so the
-      lockfile is tracked (binary crate — reproducible builds).
-
-The tool is idempotent: re-running on an already-refactored crate
-makes no further changes.
-
-Usage:
-  bin/loco-config-refactor <slug>              # one form
-  bin/loco-config-refactor --all               # every form's Loco crate
-  bin/loco-config-refactor --dry-run <slug>    # show what would change
-  bin/loco-config-refactor --check --all       # CI drift check (non-zero on drift)
-```
-
-<h2 id="loco-forbid-unsafe"><code>bin/loco-forbid-unsafe</code></h2>
-
-```text
-bin/loco-forbid-unsafe — add `#![forbid(unsafe_code)]` to every crate root
-in every form's `back-end-with-loco/`.
-
-Nothing in this monorepo's Rust needs `unsafe`: the crates are axum + Loco +
-SeaORM request handlers over a relational schema, and a fleet-wide grep before
-this tool was written found not one `unsafe` token in any crate source (the
-sole match was the word "unsafe" inside a doc comment). `forbid` — rather than
-`deny` — states that as a compiler-enforced invariant that a later inner
-`#![allow(unsafe_code)]` cannot quietly reopen.
-
-The attribute is per **crate root**, not per file, so each Cargo target needs
-its own. Every form's crate has exactly four:
-
-    src/<form_snake_case>/lib.rs           the library
-    src/<form_snake_case>/bin/main.rs      the `<form_snake_case>-cli` binary
-    migration/src/lib.rs                   the `migration` library
-    tests/<name>.rs                        the integration-test target
-                                           (`mod.rs` in 350 crates,
-                                           `engine_tests.rs` in 5)
-
-Insertion point, per file: after any leading `//!` crate-doc block and any
-leading blank lines, and before everything else — so the attribute lands above
-the existing `#![allow(...)]` runs (`migration/src/lib.rs` starts with two of
-them) rather than between them. A file that already carries the attribute is
-left alone: the twelve crates carrying hand-written rustdoc already have a
-`// Always start with high quality coding conventions.` block, and eight of
-those already had `#![forbid(unsafe_code)]` in `lib.rs` before this tool
-existed.
-
-This is an ongoing convention, not a one-shot migration. `cargo loco generate
-scaffold` does not emit the attribute, so each form's generated
-`back-end-with-loco-setup` script calls this tool as its final step, right
-after `bin/route-loco-layout`; `--check` is the CI drift detector that catches
-a crate which skipped it.
-
-Usage:
-  bin/loco-forbid-unsafe <slug>...        # named forms
-  bin/loco-forbid-unsafe --all            # every form's Loco crate
-  bin/loco-forbid-unsafe --dry-run --all  # show what would change
-  bin/loco-forbid-unsafe --check --all    # CI drift check (non-zero on drift)
-  bin/loco-forbid-unsafe --verbose --all  # list every file touched
-```
-
-<h2 id="loco-integration-test-rollout"><code>bin/loco-integration-test-rollout</code></h2>
-
-```text
-bin/loco-integration-test-rollout — Phase 1 of tasks.md's "Loco API
-integration test rollout (per crate)": upgrades every crate's scaffold-stub
-`tests/requests/patient.rs` (a bare "GET list returns 200 JSON" check) into a
-real POST-then-GET-then-list round-trip integration test, mirroring the
-hand-written `apgar-score` reference (`tests/requests/patients.rs`, itself
-fixed for camelCase by `bin/loco-camel-case-json-refactor`).
-
-Scoped to the `patient` table specifically (present in 336/356 crates) —
-not literally "every table in every crate" — because it is the one table
-every clinical form shares conceptually, and because its `Params` struct
-shape is NOT byte-identical fleet-wide (a direct fleet check found 8+
-distinct variants: some carry a `sex` CHECK-enum column, some don't; some
-carry fitness/vitals fields like `waist_as_cm`/`vo2_max`; some carry
-`deleted_at` in `Params`, most don't) — so this is a genuine per-crate
-generator, not a copy-vendor tool. Extending to other domain tables (the
-form's own main table, clinician, grade/grade_rule/grade_flag) is future,
-separate scope — those have far more per-form-specific shapes (FK chains,
-enum vocabularies) that a generic value-picker can't safely guess.
-
-For each crate: parses `controllers/patient.rs`'s `struct Params { ... }`
-field list (name + Rust type), cross-references `sql/*create_table_patient.sql`
-for CHECK-constrained enum columns (picks the first non-empty allowed value,
-mirroring `examples/assessment.json`'s own generator convention), converts
-each field name to camelCase (serde's own `RenameRule::CamelCase` algorithm,
-reimplemented here — verified against real `serde` output elsewhere this
-session), and emits a JSON body via small field-name heuristics (email,
-phone, postcode, NHS number, MRN, height/weight/BMI, etc.) falling back to a
-generic placeholder per Rust type. `deleted_at` (`Option<DateTimeWithTimeZone>`)
-is always omitted from the body — serde's derive treats a missing `Option<T>`
-key as `None` without an explicit `#[serde(default)]`, and there's no
-sensible "create" value for a soft-delete timestamp anyway.
-
-Usage:
-    bin/loco-integration-test-rollout [--check] [--dry-run] [--all|<slug>...]
-
---check reports which crates would change, and exits non-zero if any change
-is pending (CI drift detector). --dry-run shows per-crate status without
-writing. Default (no flags): apply. Idempotent: re-running after a full
-apply makes no further changes (the generated file's own marker comment is
-checked before regenerating).
-```
-
-<h2 id="loco-migration-defaults"><code>bin/loco-migration-defaults</code></h2>
-
-```text
-bin/loco-migration-defaults — mirror each form's `sql/` column defaults into
-its `back-end-with-loco/migration/`.
-
-`sql/` is the source of truth for every form's schema (see `AGENTS/sql.md`), and
-it declares most columns `NOT NULL DEFAULT <value>`. The Loco crates are
-bootstrapped by `cargo loco generate scaffold`, whose column DSL has no syntax
-for defaults, so every generated migration declares those same columns `NOT
-NULL` with no default at all. The back-end schema therefore disagrees with the
-schema it is supposed to mirror, and any insert that omits a column fails with a
-not-null violation instead of taking the documented default.
-
-This tool closes that gap by rewriting the plain `ColType` entries to their
-`*WithDefault` counterparts:
-
-    ("status",     ColType::String)   ->  ColType::StringWithDefault("draft".to_string())
-    ("vte_notes",  ColType::Text)     ->  ColType::TextWithDefault(String::new())
-    ("sort_order", ColType::Integer)  ->  ColType::IntegerWithDefault(0)
-
-Only columns that `sql/` declares `NOT NULL DEFAULT <literal>` are touched, and
-only where the migration's own column is a non-null scalar of a matching type.
-Defaults expressed as SQL function calls (`now()`, `gen_random_uuid()`) are
-handled by Loco itself and are ignored here.
-
-Tables are paired between the two representations by name, allowing for the
-singular/plural convention (`CREATE TABLE soap_note` <-> `create_table(m,
-"soap_notes")`). Columns are then matched by name *within* a paired table, so
-that a column name appearing in several tables with different defaults — such as
-`status` — is never crossed over.
-
-Anything the tool cannot confidently rewrite is reported rather than guessed at:
-
-  - a column `sql/` declares NOT NULL but the migration declares nullable
-    (a nullability divergence, which is a separate defect — not fixed here)
-  - a migration `ColType` with no `*WithDefault` counterpart
-  - a table in one representation with no counterpart in the other
-
-The tool is idempotent: a column already carrying a `*WithDefault` is left
-alone, so re-running changes nothing.
-
-Note that `cargo loco generate scaffold` still cannot express defaults, so
-re-scaffolding a crate from its `back-end-with-loco-setup` script reintroduces
-the divergence. Re-run this tool afterwards.
-
-Usage:
-  bin/loco-migration-defaults <slug>…            # named forms
-  bin/loco-migration-defaults --all              # every form's Loco crate
-  bin/loco-migration-defaults --dry-run --all    # show what would change
-  bin/loco-migration-defaults --check --all      # CI drift check (non-zero on drift)
-```
-
-<h2 id="loco-migration-nullability"><code>bin/loco-migration-nullability</code></h2>
-
-```text
-bin/loco-migration-nullability — restore each form's `sql/` column
-nullability in its `back-end-with-loco/` crate.
-
-`sql/` is the source of truth for every form's schema (see `AGENTS/sql.md`).
-Where it declares a column nullable, the Loco crate must agree — in the
-migration, in the generated entity, and in the controller's `Params` struct,
-all three of which have to move together or the entity starts lying about the
-database.
-
-The dominant case is a **nullable UNIQUE** column, of which
-`united_kingdom_nhs_number` is the archetype:
-
-    sql/        united_kingdom_nhs_number VARCHAR(20) UNIQUE       -- nullable
-    migration   ("united_kingdom_nhs_number", ColType::StringUniq) -- NOT NULL
-    entity      pub united_kingdom_nhs_number: String              -- NOT NULL
-
-Loco has no nullable-unique `ColType`: `StringUniq` is `NOT NULL UNIQUE`. The
-consequence is not cosmetic. A `NOT NULL UNIQUE` text column can hold the empty
-string exactly **once**, so the schema admits at most one patient without an NHS
-number — every subsequent one collides:
-
-    ERROR: duplicate key value violates unique constraint
-    DETAIL: Key (united_kingdom_nhs_number)=() already exists.
-
-`sql/` is right: under a nullable UNIQUE column, NULLs do not collide, so any
-number of patients may lack the identifier while those that have one stay
-unique. Overseas visitors and unidentified emergency admissions are ordinary,
-so this matters clinically.
-
-This tool restores that, per divergent column:
-
-  - migration — `ColType::XUniq` becomes `ColType::XNull`, and the uniqueness
-    is re-expressed as an explicit unique index appended to the same `up()`,
-    following the `m.create_index(Index::create()…)` idiom already used
-    elsewhere in the fleet. A plain `ColType::X` simply becomes `ColType::XNull`.
-  - entity — `pub col: T` becomes `pub col: Option<T>`.
-  - controller — the same field in the resource's `Params` struct.
-
-The opposite direction is handled too: a column `sql/` declares NOT NULL while
-the migration declares it nullable is tightened, and its entity and controller
-field lose the `Option<…>`. Note that Loco's `ColType` cannot express a
-`DEFAULT now()` on a timestamp, so such a column becomes NOT NULL without its
-default and callers must supply a value — a smaller divergence from `sql/` than
-admitting NULL, but not a perfect one.
-
-The tool is idempotent, and anything it cannot rewrite confidently is reported
-rather than guessed at.
-
-Two limits worth knowing:
-
-  - Controllers are located by their `use …_entities::<table>::` import. A
-    consolidated controller that imports differently — as
-    `architecture-decision-record` does — will not be found, and its `Params`
-    struct must be adjusted by hand.
-  - The tool only retypes struct fields. Hand-written logic *around* those
-    fields still has to be reworked, because the meaning of "absent" moves from
-    `None` to the empty string. `architecture-decision-record` needed exactly
-    that in its Markdown renderer.
-
-Usage:
-  bin/loco-migration-nullability <slug>…            # named forms
-  bin/loco-migration-nullability --all              # every form's Loco crate
-  bin/loco-migration-nullability --dry-run --all    # show what would change
-  bin/loco-migration-nullability --check --all      # CI drift check (non-zero on drift)
-```
-
-<h2 id="loco-missing-request-test-stubs-fix"><code>bin/loco-missing-request-test-stubs-fix</code></h2>
-
-```text
-bin/loco-missing-request-test-stubs-fix — scaffolds the missing domain
-`tests/requests/<table>.rs` stub for every crate found (via a direct fleet
-check, 2026-09-11) to have NO domain request test stubs whatsoever: only
-`auth.rs`/`prepare_data.rs` are wired in `tests/requests/mod.rs`, even
-though every domain controller exists and is routed. `cargo loco generate
-scaffold` normally emits one such stub per table as a side effect; these
-9 crates never got it (built via an earlier/different process, before the
-convention was consistently applied) — a real, pre-existing gap flagged
-in tasks.md's "Loco API integration test rollout" write-up, not something
-that tool's own patient-table generator touches (it upgrades an existing
-stub; it doesn't create new ones).
-
-For each affected crate, for every domain controller (skipping `auth.rs`,
-`openapi.rs`, `mod.rs`): reads that controller's own `routes()` function
-to find its real mounted route prefix (`.prefix("api/<plural>/")`) rather
-than independently re-deriving English pluralization (allergy -> allergies,
-not allergys) — Loco's own inflector already decided this once; asking it
-again by parsing the same source is more reliable than reimplementing it.
-Writes the fleet's standard scaffold-stub test (a GET-list-returns-200-JSON
-check, already carrying the trailing-slash / content-type fix applied
-fleet-wide earlier) at `tests/requests/<table>.rs`, and adds `pub mod
-<table>;` to `tests/requests/mod.rs`.
-
-Deliberately stops at parity with every OTHER crate's own stub depth — it
-does not also apply `bin/loco-integration-test-rollout`'s richer
-patient-table round-trip test; run that tool afterward (it is naturally
-idempotent and will pick up these crates' newly-created `patient.rs` stub
-on its next fleet-wide run).
-
-Usage:
-    bin/loco-missing-request-test-stubs-fix [--check] [--dry-run] [--all|<slug>...]
-
---check reports which crates would change, and exits non-zero if any
-change is pending (CI drift detector / completeness check — this is a
-one-shot fix for a specific found gap, not a routine scaffold-drift
-detector, since no generator produces this stub set automatically).
---dry-run shows per-crate status without writing.
-```
-
-<h2 id="loco-msrv-set"><code>bin/loco-msrv-set</code></h2>
-
-```text
-bin/loco-msrv-set — set the Rust MSRV (current stable N-2) fleet-wide,
-per spec/rust-msrv-n-minus-2/.
-
-The spec's guidance assumes a single repo-root Cargo workspace
-(`[workspace.package]` with `rust-version`, every member crate inheriting
-via `rust-version.workspace = true`). This repo has no such root: each
-form's `back-end-with-loco/` is its OWN self-contained workspace (`[workspace]`
-with no explicit `members`, which still auto-includes `migration/` as a
-member via its path dependency — confirmed by `migration/Cargo.toml`'s
-`loco-rs = { workspace = true }`). So the same pattern is applied 355 times,
-once per form's workspace, rather than once at a repo root that doesn't
-exist:
-
-- `back-end-with-loco/Cargo.toml` gains a `[workspace.package]` table with
-  `rust-version = "<MSRV>"`, and its own `[package]` gets
-  `rust-version.workspace = true`.
-- `back-end-with-loco/migration/Cargo.toml` (a member of the same implicit
-  workspace, confirmed above) gets `rust-version.workspace = true` too.
-
-MSRV is computed from the locally installed `rustc`'s stable version minus
-two minor releases (e.g. stable 1.98 -> MSRV 1.96), matching the spec's
-rule exactly: `--msrv` overrides this for a specific value instead.
-
-This is an ongoing convention, not a one-shot migration: it must be
-re-applied (with a new --msrv) every time stable Rust advances, per the
-spec's "Maintenance" section. `--check` is the CI drift detector.
-
-Usage:
-  bin/loco-msrv-set --msrv 1.96 <slug>...        # named forms
-  bin/loco-msrv-set --msrv 1.96 --all            # every form's Loco crate
-  bin/loco-msrv-set --msrv 1.96 --dry-run --all  # show what would change
-  bin/loco-msrv-set --msrv 1.96 --check --all    # CI drift check (non-zero on drift)
-```
-
-<h2 id="loco-rs-1-migration"><code>bin/loco-rs-1-migration</code></h2>
-
-```text
-bin/loco-rs-1-migration — one-shot loco-rs 0.16 -> 1.0.1 major-version
-migration for every form's `back-end-with-loco/` crate.
-
-loco-rs 1.0.1 (2026-07-31) is the framework's first stable release, bumping
-`sea-orm` 1.1 -> 2.0 along the way. Two changes hit every crate in this
-monorepo mechanically:
-
-  1. Feature-flag rename: `auth_jwt` -> `auth`, and the Postgres-only
-     background-queue feature `bg_pg` -> the now-backend-agnostic `worker`
-     (queue backend selection moved to the `config/*.yaml` `queue.kind:`
-     value, already `Postgres` in every crate — no YAML change needed).
-  2. `ColType::PkAuto` (used for every table's `id` column, and for every
-     `:references` foreign-key column, across all 348 crates — this repo
-     has never used `ColType::PkUuid`) now renders `BIGINT`/`BIGSERIAL`
-     instead of `INTEGER`/`SERIAL` (loco-rs 1.0 changelog: "Generated
-     primary/foreign keys are now 64-bit"). The generated migration SQL
-     changes the moment the crate recompiles against loco-rs 1.0's
-     `schema.rs`, even though no migration *source* line changed - so every
-     entity's `id`/`*_id` field, and every controller Param/Path/`load_item`
-     that carries one, must move `i32` -> `i64` to match.
-
-Confirmed by hand on the reference crate
-(forms/pre-operative-assessment-by-clinician/back-end-with-loco): after these
-edits, `cargo build --all-targets`, `cargo test`, and `cargo clippy` are all
-clean with zero migration-related errors. No other 0.16 -> 1.0 breaking change
-(raw `Statement` calls, manual `AppContext` construction, `PageResponse`,
-`Worker::perform_later`, `JWT::algorithm`, `Queue::None`) appears anywhere in
-this monorepo's Loco crates (grepped fleet-wide before writing this tool).
-
-What it rewrites, per crate:
-
-  Cargo.toml
-    loco-rs version 0.16 -> 1.0.1; feature list auth_jwt,bg_pg,... ->
-    auth,...,worker (alphabetical, matching existing style); sea-orm version
-    1.1 -> 2.0.
-  migration/Cargo.toml
-    sea-orm-migration version -> 2.0.
-  src/**/*.rs (entities, controllers, and any hand-written module)
-    Any `(id|*_id): i32` / `(id|*_id): Option<i32>` -> i64 / Option<i64>;
-    any `Path<i32>` -> `Path<i64>`. Matched by identifier shape (bare `id`
-    or `*_id`), not by file location, since one form
-    (inpatient-clinical-note) carries a hand-written grading module with the
-    same pattern outside controllers/_entities.
-
-Cargo.lock is deliberately NOT regenerated by this tool (that needs `cargo
-update`, which hits the network per crate) — run `cargo update` in each
-touched crate afterwards, or see bin/loco-rs-1-migration's companion fleet
-sweep in AGENTS/back-end-with-loco.md.
-
-This is a one-shot migration tool (like bin/migrate-sql-filenames.py), not an
-ongoing convention to re-enforce: once every crate is on loco-rs 1.0.1,
---check has nothing left to find and this tool has no more work to do.
-
-Usage:
-  bin/loco-rs-1-migration <slug>...        # named forms
-  bin/loco-rs-1-migration --all            # every form's Loco crate
-  bin/loco-rs-1-migration --dry-run --all  # show what would change
-  bin/loco-rs-1-migration --check --all    # CI drift check (non-zero on drift)
-```
-
-<h2 id="loco-seed-base-rename"><code>bin/loco-seed-base-rename</code></h2>
-
-```text
-bin/loco-seed-base-rename — rename the unused `base` param in every
-crate's `App::seed()` to `_base`.
-
-`loco new` scaffolds `async fn seed(ctx: &AppContext, base: &Path)` in
-src/<slug>/app.rs and never uses `base` in the body (fixtures load via
-`env!("CARGO_MANIFEST_DIR")` instead) — so `cargo clippy --all-targets --
--D warnings` fails every crate that still carries the bare name, which is
-346 of 355. This is a genuine, fleet-wide CI-breaking bug: the CI Rust job
-has never gone green on this repository (checked against its run history).
-`register_tasks` right above `seed` gets `#[allow(unused_variables)]` from
-the same scaffold template for the identical reason; `seed`'s parameter is
-simply renamed instead, matching the 9 crates that were already correct
-(6 hand-authored with `_ctx, _base`; 3 fixed ad hoc during earlier pedantic
-cleanup).
-
-Confirmed fleet-wide before writing this tool: `base` appears exactly once
-per file (the parameter declaration itself), so the rename is unconditionally
-safe — nothing else in `app.rs` references it.
-
-This is an ongoing convention, not a one-shot migration: `loco new` re-creates
-the same bare `base` on every newly scaffolded crate, so the generated
-`back-end-with-loco-setup` script calls this tool as a final step (after
-`bin/loco-forbid-unsafe`); `--check` is the CI drift detector that catches a
-crate which skipped it.
-
-Usage:
-  bin/loco-seed-base-rename <slug>...        # named forms
-  bin/loco-seed-base-rename --all            # every form's Loco crate
-  bin/loco-seed-base-rename --dry-run --all  # show what would change
-  bin/loco-seed-base-rename --check --all    # CI drift check (non-zero on drift)
-```
-
-<h2 id="loco-seed-base-stray-usage-fix"><code>bin/loco-seed-base-stray-usage-fix</code></h2>
-
-```text
-bin/loco-seed-base-stray-usage-fix — remove the stray `let _ = base;`
-line left behind in `App::seed()` after the route-nesting-layout move.
-
-When each form's fixtures moved from a caller-supplied `base` path to
-`src/<form_snake_case>/fixtures/` (resolved via `env!("CARGO_MANIFEST_DIR")`
-instead — see the route-layout convention in AGENTS.md), 11 forms' hand-
-edited `seed()` picked up an explanatory comment plus a `let _ = base;`
-line to silence the then-unused `base` parameter. `bin/loco-seed-base-
-rename` later renamed that same parameter to `_base` fleet-wide (the
-`_`-prefix convention already silences the warning on its own), but its
-mechanical sed-style rename touched only the parameter's declaration,
-not this stray body reference — so these 11 files were left with a
-`let _ = base;` referring to a binding that no longer exists, a hard
-compile error (E0425 `cannot find value 'base' in this scope`), not a
-lint. Found via a real, verified CI run: Rust CI shard 5/8 failed
-compiling `dietic_assessment` on exactly this error.
-
-The `_base` parameter itself is untouched (still intentionally unused,
-still correctly prefixed) — only the now-invalid `let _ = base;` line is
-removed; the explanatory comment above it, where present, stays.
-
-This is a one-shot fix, not an ongoing convention: no scaffold or other
-generator produces this stray line, so `--check` exists purely as a
-completeness/regression gate, not a routine CI drift detector.
-
-Usage:
-  bin/loco-seed-base-stray-usage-fix <slug>...        # named forms
-  bin/loco-seed-base-stray-usage-fix --all             # every form's Loco crate
-  bin/loco-seed-base-stray-usage-fix --dry-run --all   # show what would change
-  bin/loco-seed-base-stray-usage-fix --check --all     # drift check (non-zero on drift)
-```
-
-<h2 id="loco-seed-data-rollout"><code>bin/loco-seed-data-rollout</code></h2>
-
-```text
-bin/loco-seed-data-rollout — implement each Loco crate's empty `seed()`
-hook (tasks.md's "Loco seed data: per-crate seeder loading examples/
-typical fixture; document `cargo loco db seed`"), proven against a live
-scratch Postgres on `cardiology-request` before generalising.
-
-Every scaffolded crate ships `async fn seed(_ctx, _base) -> Result<()> {
-Ok(()) }` — a no-op. `cargo <bin> db seed --from src/fixtures` (the Loco
-CLI's own convention; `src/fixtures` is its default `--from`) calls this
-hook with `base` pointing at a fixtures directory; `loco_rs::db::seed::<A>`
-deserializes a YAML file straight into the entity's `Model` and batch-
-inserts it. This tool:
-
-  - Discovers each crate's domain tables from `models/_entities/*.rs`
-    (excluding `mod.rs`/`prelude.rs`/the Loco-scaffolded `users.rs` auth
-    table).
-  - Parses each table's `Model` struct fields (name, Rust type) the same
-    way `bin/loco-integration-test-rollout` parses a controller's
-    `Params` struct, and reuses its exact value-synthesis
-    (`pick_value`/`NAME_HEURISTICS`/CHECK-constraint cross-reference
-    against `sql/*.sql`) — copied in, not imported, matching this repo's
-    self-contained-tool convention.
-  - Detects each table's foreign keys (a `Uuid`-typed column literally
-    named `<other_table>_id` where `<other_table>` + `s` matches another
-    discovered table) and topologically sorts tables so a referenced row
-    is always seeded before the row that references it.
-  - Emits one deterministic UUID per table (stable across re-runs, so
-    `--check` is meaningful) via `uuid5` keyed on `<crate>:<table>`, one
-    YAML fixture per table under `src/fixtures/`, and a `seed()` body
-    that calls `db::seed::<T>()` in that same dependency order.
-
-**Every field's serialised key is converted to camelCase** to match
-`#[serde(rename_all = "camelCase")]` on every entity `Model` fleet-wide —
-missing this silently fails deserialization with a "missing field"
-error, since `loco_rs::db::seed` deserializes straight into `Model`
-(verified live on the cardiology-request pilot before writing this
-generic version).
-
-A crate is SKIPped, not guessed at, when: a field's Rust type isn't one
-`pick_value` already models, a `Uuid` FK column can't be resolved to a
-discovered table, or the dependency graph isn't a clean DAG (a cycle).
-
-Usage:
-    bin/loco-seed-data-rollout [--check] [--dry-run] [--all|<slug>...]
-
---check reports which crates would change, and exits non-zero if any
-change is pending (CI drift detector). --dry-run shows per-crate status
-without writing. Default (no flags): apply. Idempotent: a crate whose
-`seed()` already calls `db::seed` for every table it would generate is
-left alone.
-```
-
-<h2 id="loco-serve-openapi-refactor"><code>bin/loco-serve-openapi-refactor</code></h2>
-
-```text
-bin/loco-serve-openapi-refactor — mechanically add a `GET /api/openapi.yaml`
-route to every Loco crate, serving that form's combined OpenAPI 3.1 spec
-(`openapi/combined/openapi.yaml`, generated by
-`bin/openapi/generate-openapi-combined.py`).
-
-Reference implementation: forms/medical-operation-note. A new
-`controllers/openapi.rs` — byte-identical across every crate, since it
-only depends on the uniform `src/<form_snake_case>/controllers/` nesting
-depth, not on the form's own name — `include_str!`s the combined spec at
-compile time (so no runtime file path or deployment-time asset copy is
-needed) and serves it via Loco's own `format::yaml()` helper. Wired into
-each crate the same two mechanical ways as any other scaffold-generated
-controller:
-
-  1. `pub mod openapi;` added to `controllers/mod.rs`, right after the
-     existing `pub mod auth;` line.
-  2. `.add_route(crate::controllers::openapi::routes())` added to
-     `app.rs`'s `routes()`, right after `AppRoutes::with_default_routes()`.
-
-Crates missing either anchor line, or missing
-`openapi/combined/openapi.yaml` at the expected location, are left
-untouched and reported under "SKIP (needs manual handling)".
-
-Usage:
-    bin/loco-serve-openapi-refactor [--check] [--dry-run] [--all|<slug>...]
-
---check reports which crates would change, and exits non-zero if any
-change is pending (CI drift detector). --dry-run shows per-crate status
-without writing. Default (no flags): apply. Idempotent: a crate already
-carrying `controllers/openapi.rs` is left alone.
-```
-
-<h2 id="loco-test-auth-header-fix"><code>bin/loco-test-auth-header-fix</code></h2>
-
-```text
-bin/loco-test-auth-header-fix — drop the redundant `&` in every crate's
-test `auth_header()` helper.
-
-`loco new` scaffolds `tests/requests/prepare_data.rs` with
-`HeaderValue::from_str(&format!("Bearer {}", &token))` — the `&token` is
-redundant (`token: &str` is already a reference) and
-`clippy::useless_borrows_in_formatting` fails every crate that still
-carries it under `-D warnings`. Confirmed fleet-wide before writing this
-tool: `&token` appears exactly once per file, so the fix is unconditionally
-safe.
-
-Discovered alongside bin/loco-seed-base-rename while diagnosing why CI's
-Rust job has never gone green on this repository: both are `loco new`
-scaffold boilerplate, never touched by any of our generators, so the bug
-is identical and invariant across the fleet.
-
-This is an ongoing convention, not a one-shot migration: `loco new`
-re-creates the same redundant `&token` on every newly scaffolded crate, so
-the generated `back-end-with-loco-setup` script calls this tool as a final
-step; `--check` is the CI drift detector.
-
-Usage:
-  bin/loco-test-auth-header-fix <slug>...        # named forms
-  bin/loco-test-auth-header-fix --all            # every form's Loco crate
-  bin/loco-test-auth-header-fix --dry-run --all  # show what would change
-  bin/loco-test-auth-header-fix --check --all    # CI drift check (non-zero on drift)
-```
-
-<h2 id="loco-test-max-connections-fix"><code>bin/loco-test-max-connections-fix</code></h2>
-
-```text
-bin/loco-test-max-connections-fix — raise the scaffold's `max_connections: 1`
-default in every crate's config/test.yaml.
-
-`cargo loco generate scaffold` writes `max_connections:
-{{ get_env(name="DB_MAX_CONNECTIONS", default="1") }}` fleet-wide — a pool
-that admits exactly one connection at a time, paired with a 500ms
-`connect_timeout`. `cargo test` runs its test binary's tests concurrently
-across CPU threads by default; the moment two DB-touching tests in the same
-crate happen to run at once, the second blocks behind the first's single
-connection and times out if it takes longer than 500ms, surfacing as
-`SqlxError(PoolTimedOut)`. Found via a real, verified CI run: the nightly
-full-matrix sweep's Rust shard 3/8 failed exactly this way on
-`hearing-test-request` — 33 of its 35 tests passed; the 2 that lost the race
-for the single connection did not. This is not simple flakiness with no
-cause: it is a race with a deterministic mechanism, just an intermittent
-outcome, so it can resurface on any crate, not only this one.
-
-Raises the default to 10 — comfortable headroom for a CI runner's handful of
-parallel test threads against a single-purpose, freshly created database,
-well inside PostgreSQL's own default server-side `max_connections` of 100.
-Scoped to config/test.yaml only: this is specifically about `cargo test`'s
-concurrency, and the fleet's `config/development.yaml` carries the same
-scaffold default but isn't implicated in the observed failure.
-
-5 forms (the hand-authored gold-standard reference pair cardiology-
-request/-response and the neurodiversity-adjustment-request/-response/
--review trio) predate the `get_env(...)`-templated scaffold and carry a
-bare `max_connections: 1` instead — same bug, different literal shape.
-Handled as a second, narrower replacement.
-
-This is an ongoing convention, not a one-shot migration: a newly scaffolded
-crate inherits the same low default from whatever `cargo loco generate
-scaffold` version produced it, so `--check` is the CI drift detector.
-
-Usage:
-  bin/loco-test-max-connections-fix <slug>...        # named forms
-  bin/loco-test-max-connections-fix --all             # every form's Loco crate
-  bin/loco-test-max-connections-fix --dry-run --all   # show what would change
-  bin/loco-test-max-connections-fix --check --all     # CI drift check (non-zero on drift)
-```
-
-<h2 id="loco-uuid-pk-refactor"><code>bin/loco-uuid-pk-refactor</code></h2>
-
-```text
-loco-uuid-pk-refactor — move every Loco crate's domain tables from Loco's
-auto-increment integer `id` to a UUIDv4 primary key (`gen_random_uuid()`),
-matching the `sql/` source of truth.
-
-Usage:
-    bin/loco-uuid-pk-refactor [--check] [--dry-run] [--all | <slug>...]
-
-What it rewrites, per `forms/<slug>/back-end-with-loco/` (the `users` table
-and the auth controller are Loco framework code and are left on integer ids):
-
-- migration/src/m*.rs (domain tables): `("id", ColType::PkAuto)` becomes
-  `ColType::PkUuid` plus an `ALTER TABLE ... SET DEFAULT gen_random_uuid()`;
-  every reference in the `refs` slice gets an explicit `ColType::Uuid` /
-  `UuidNull` column (Loco's `create_table` hard-codes integer FK columns) and
-  a named reference so the column name is pinned.
-- src/<snake>/models/_entities/*.rs: `id: i64` -> `Uuid`
-  (`auto_increment = false`); foreign-key fields -> `Uuid` / `Option<Uuid>`.
-- src/<snake>/controllers/*.rs: `Path<i64>` / `id: i64` / FK params -> `Uuid`.
-- src/<snake>/fixtures/*.yaml: integer ids and FK ids -> deterministic UUIDs
-  (`00000000-0000-4000-8000-<12 hex digits of the integer>`), preserving
-  parent/child consistency.
-- tests/requests/*.rs: the scaffold round-trip assertions read the id as a
-  UUID string instead of `as_i64`.
-
-Idempotent. `--check` exits 1 if any crate would change (CI drift detector).
-```
-
 <h2 id="make-github-pages"><code>bin/make-github-pages</code></h2>
 
 ```text
@@ -1929,7 +1312,7 @@ toolchain-version policy.
 
 The target version is read from spec/node-current-version/index.md's
 "Node current version is N." line, not hardcoded here, so re-running this
-after the spec is bumped (mirroring bin/loco-msrv-set's pattern for Rust)
+after the spec is bumped (mirroring bin/axum-msrv-set's pattern for Rust)
 needs no code change.
 
 Usage:
@@ -2034,17 +1417,6 @@ Usage:
   bin/page-header-layout-refactor --apply   # write changes
 
 Idempotent: re-running after a full --apply makes no further changes.
-```
-
-<h2 id="route-loco-layout"><code>bin/route-loco-layout</code></h2>
-
-```text
-route-loco-layout <slug> : move a form's Loco crate source into the
- route layout  back-end-with-loco/src/<form_snake_case>/*.rs
-   - flat   (src/*.rs)            -> src/<snake>/*.rs
-   - nested (<snake>/src/*.rs +   -> src/<snake>/*.rs, crate files hoisted
-             top-level symlinks)     to back-end-with-loco/
- Idempotent: skips if src/<snake>/lib.rs already exists.
 ```
 
 <h2 id="route-svelte-layout"><code>bin/route-svelte-layout</code></h2>
@@ -2750,7 +2122,7 @@ Every form's `forms/<slug>/tasks.md` (and `plan.md`) began life as
 `bin/create-form`'s scaffold checklist. Fleet-wide tooling since then has
 built almost all of that work directly (SQL migrations, generated
 XML/FHIR/protobuf/OpenAPI, front-end-with-html/, front-end-with-svelte/,
-back-end-with-loco/, doc/ pages, ...) without ever going back to tick the
+back-end-with-axum/, doc/ pages, ...) without ever going back to tick the
 original per-form checklist -- so ~1900 `- [ ]` lines across the fleet
 describe work that is now actually done. The living, actually-maintained
 backlog is the root `tasks.md`; this tool only closes the loop on these
@@ -2799,6 +2171,28 @@ _No header documentation._
 
 ```text
 https://github.com/sixarm/unix-shell-script-kit
+```
+
+<h2 id="test-axum-project"><code>bin/test-axum-project</code></h2>
+
+```text
+https://github.com/sixarm/unix-shell-script-kit
+```
+
+<h2 id="test-axum-routes"><code>bin/test-axum-routes</code></h2>
+
+```text
+bin/test-axum-routes — assert every Axum crate exposes its domain HTTP API.
+
+ Each back-end-with-axum crate has a model per SQL table AND should register a
+ scaffold controller per domain table, wired into app.rs routes() via
+ `.add_route(controllers::<name>::routes())`. A crate whose routes() wires
+ only `auth::routes()` (a single add_route) has a full data layer but exposes
+ NO domain entities over HTTP — a real, easily-missed regression. This gate
+ catches it: every crate must wire at least two routes (auth + >=1 domain).
+
+ Usage: bin/test-axum-routes
+ Exit non-zero listing any crate that wires only auth.
 ```
 
 <h2 id="test-e2e"><code>bin/test-e2e</code></h2>
@@ -2866,30 +2260,8 @@ test-form: test one form directory in this project for implementation
      test-form pre-operative-assessment-by-clinician
 
  Structural checks print "Error: ..." lines and the script exits non-zero
- if any check failed. The Loco crate's `cargo test` is the only executable
+ if any check failed. The Axum crate's `cargo test` is the only executable
  gate (it needs the Rust toolchain and a running Postgres).
-```
-
-<h2 id="test-loco-project"><code>bin/test-loco-project</code></h2>
-
-```text
-https://github.com/sixarm/unix-shell-script-kit
-```
-
-<h2 id="test-loco-routes"><code>bin/test-loco-routes</code></h2>
-
-```text
-bin/test-loco-routes — assert every Loco crate exposes its domain HTTP API.
-
- Each back-end-with-loco crate has a model per SQL table AND should register a
- scaffold controller per domain table, wired into app.rs routes() via
- `.add_route(controllers::<name>::routes())`. A crate whose routes() wires
- only `auth::routes()` (a single add_route) has a full data layer but exposes
- NO domain entities over HTTP — a real, easily-missed regression. This gate
- catches it: every crate must wire at least two routes (auth + >=1 domain).
-
- Usage: bin/test-loco-routes
- Exit non-zero listing any crate that wires only auth.
 ```
 
 <h2 id="test-personas"><code>bin/test-personas</code></h2>
@@ -3105,6 +2477,10 @@ per form, so this merges every `forms/<slug>/openapi/*.yaml` into a single
 `components.schemas`, under a form-level `info` block. Paths and schema names do
 not collide across a form's entities, so the union is unambiguous.
 
+The per-entity files describe every SQL table, but not every table has a route.
+The combined document is what a crate serves at `GET /api/openapi.yaml`, so it
+keeps only the paths the crate's controllers declare, and the schemas those use.
+
 Generated artefact: do not hand-edit. Idempotent.
 
 Usage:
@@ -3135,36 +2511,13 @@ Conventions documented in AGENTS/openapi.md:
   - CHECK (... IN (...)) constraints become string enums.
 ```
 
-<h2 id="back-end-with-locogenerate-back-end-with-loco-setuppy"><code>bin/back-end-with-loco/generate-back-end-with-loco-setup.py</code></h2>
+<h2 id="back-end-with-axumgenerate-axum-agentspy"><code>bin/back-end-with-axum/generate-axum-agents.py</code></h2>
 
 ```text
-Generate setup script for subprojects from SQL migration files.
+bin/back-end-with-axum/generate-axum-agents.py — back-end AGENTS.md docs.
 
-For each form's sql/ directory, parses CREATE TABLE statements and
-emits a `setup.sh` script containing:
-
-- Create application databases for development, test, production (if not exists).
-- Create Cargo Loco commands to generate scaffolds.
-
-Tables are scaffolded in the same order as the form's sql/ 
-so that FK targets already exist when referencing tables are created.
-
-Loco field-type syntax:
-
-- Types: string, text, int, bigint, float, double, bool, date, ts, uuid,
-  json, jsonb, blob, references, references:<col>
-- Suffix `!` marks NOT NULL, suffix `^` marks UNIQUE, no suffix means nullable.
-- `id`, `created_at`, `updated_at` are added automatically by Loco and are
-  therefore skipped here.
-```
-
-<h2 id="back-end-with-locogenerate-loco-agentspy"><code>bin/back-end-with-loco/generate-loco-agents.py</code></h2>
-
-```text
-bin/back-end-with-loco/generate-loco-agents.py — back-end AGENTS.md docs.
-
-Regenerate a form's back-end-with-loco/AGENTS.md to describe the crate as it
-actually is: a Loco JSON API with a RESTful scaffold controller per domain
+Regenerate a form's back-end-with-axum/AGENTS.md to describe the crate as it
+actually is: a Axum JSON API with a RESTful scaffold controller per domain
 table (the relational per-table design), nested under src/<snake>/.
 
 Historically many of these docs described an obsolete design — a single
@@ -3173,16 +2526,39 @@ controller. That design no longer exists; this generator replaces such stale
 docs with an accurate description derived from the crate's real controllers.
 
 Usage:
-  bin/back-end-with-loco/generate-loco-agents.py <slug> ...   # named forms
-  bin/back-end-with-loco/generate-loco-agents.py --stale       # every crate
+  bin/back-end-with-axum/generate-axum-agents.py <slug> ...   # named forms
+  bin/back-end-with-axum/generate-axum-agents.py --stale       # every crate
                                                                # with stale docs
-  bin/back-end-with-loco/generate-loco-agents.py --list-stale  # just list them
+  bin/back-end-with-axum/generate-axum-agents.py --list-stale  # just list them
 ```
 
-<h2 id="back-end-with-locogenerate-rust-docspy"><code>bin/back-end-with-loco/generate-rust-docs.py</code></h2>
+<h2 id="back-end-with-axumgenerate-back-end-with-axum-setuppy"><code>bin/back-end-with-axum/generate-back-end-with-axum-setup.py</code></h2>
 
 ```text
-Insert rustdoc on undocumented `pub` items in the Loco back-end crates.
+Generate setup script for subprojects from SQL migration files.
+
+For each form's sql/ directory, parses CREATE TABLE statements and
+emits a `setup.sh` script containing:
+
+- Create application databases for development, test, production (if not exists).
+- Create Cargo Axum commands to generate scaffolds.
+
+Tables are scaffolded in the same order as the form's sql/ 
+so that FK targets already exist when referencing tables are created.
+
+Axum field-type syntax:
+
+- Types: string, text, int, bigint, float, double, bool, date, ts, uuid,
+  json, jsonb, blob, references, references:<col>
+- Suffix `!` marks NOT NULL, suffix `^` marks UNIQUE, no suffix means nullable.
+- `id`, `created_at`, `updated_at` are added automatically by Axum and are
+  therefore skipped here.
+```
+
+<h2 id="back-end-with-axumgenerate-rust-docspy"><code>bin/back-end-with-axum/generate-rust-docs.py</code></h2>
+
+```text
+Insert rustdoc on undocumented `pub` items in the Axum back-end crates.
 
 Idempotent: skips items that already carry a doc comment. Operates line-by-line
 with brace/context tracking so struct fields and enum variants are distinguished

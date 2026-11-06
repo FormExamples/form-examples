@@ -31,7 +31,7 @@ EXTRA_DIRS = [
     "fhir-r5",
     "protobuf",
     "openapi",
-    "back-end-with-loco",
+    "back-end-with-axum",
     "sql",
 ]
 

@@ -32,7 +32,7 @@
 /**
  * Response from `GET /api/return_to_works`.
  *
- * The Loco backend returns a bare JSON array of `DashboardRow` objects; the
+ * The Axum backend returns a bare JSON array of `DashboardRow` objects; the
  * dashboard accepts either a bare array or an `{ items, total }` envelope so
  * future paginated responses are forwards-compatible.
  *

@@ -8,7 +8,7 @@
 > flagged issues. Every form carries a full stack: a PostgreSQL SQL schema
 > (source of truth), generated representations (XML+DTD, FHIR HL7 R5,
 > Protocol Buffers, OpenAPI 3.1), two front-ends (HTML and SvelteKit, both on
-> the Lily Design System), and a Rust back-end JSON API (axum + Loco).
+> the Lily Design System), and a Rust back-end JSON API (axum + axa + sqlx).
 
 ## Site
 

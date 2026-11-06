@@ -25,6 +25,13 @@ dozens of languages.
 
 Reference: <https://spec.openapis.org/oas/v3.1.0>
 
+## Per-entity files and the served document
+
+The per-entity files describe every SQL table. `openapi/combined/openapi.yaml`,
+which a crate serves at `GET /api/openapi.yaml`, keeps only the paths its
+controllers declare, so it never lists a route that does not exist. A table with no
+controller therefore has a per-entity file and no entry in the combined document.
+
 ## Directory structure
 
 One `.yaml` file per top-level SQL entity. The assessment's per-section

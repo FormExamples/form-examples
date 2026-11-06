@@ -1,0 +1,1 @@
+DROP TABLE "centor_score_for_streptococcal_pharyngitis_grade_flags";

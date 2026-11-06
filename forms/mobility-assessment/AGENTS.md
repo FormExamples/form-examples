@@ -9,7 +9,7 @@ Balance and gait evaluation using the Tinetti Assessment Tool (Performance-Orien
 - ./plan.md - Development roadmap
 - ./tasks.md - Task tracking
 - ./front-end-with-svelte/ - SvelteKit single-page wizard + dashboard (SVAR DataGrid)
-- ./back-end-with-loco/ - Back-end JSON API; Rust + axum + Loco
+- ./back-end-with-axum/ - Back-end JSON API; Rust + axum + axa + sqlx
 
 ## Scoring system
 
@@ -50,9 +50,9 @@ Balance and gait evaluation using the Tinetti Assessment Tool (Performance-Orien
 
 ## Backend
 
-- Rust edition 2024 with Loco 0.16 framework
+- Rust edition 2024 with Axum 0.16 framework
 - axum 0.8 web framework
-- SeaORM 1.1 with PostgreSQL
+- sqlx 1.1 with PostgreSQL
 - Engine types mirror TypeScript with serde(rename_all = "camelCase")
 
 ## Conventions

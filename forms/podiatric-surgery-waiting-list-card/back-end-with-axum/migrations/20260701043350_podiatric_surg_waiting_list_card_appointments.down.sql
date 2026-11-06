@@ -1,0 +1,1 @@
+DROP TABLE "podiatric_surg_waiting_list_card_appointments";

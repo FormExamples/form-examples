@@ -1,0 +1,7 @@
+mod gen_practice_waiting_list_card_appointments;
+mod gen_practice_waiting_list_card_grade_flags;
+mod gen_practice_waiting_list_card_grade_rules;
+mod gen_practice_waiting_list_card_grades;
+mod gen_practice_waiting_list_cards;
+mod patients;
+mod practitioners;

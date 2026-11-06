@@ -42,7 +42,7 @@
 - [x] `fhir/r5/` — FHIR HL7 R5 JSON per SQL entity.
 - [x] `protobuf/` — Protocol Buffers schemas.
 - [x] `openapi/` — OpenAPI 3.1 specifications.
-- [x] `back-end-with-loco-setup` — scaffold script.
+- [x] `back-end-with-axum-setup` — scaffold script.
 - [x] `CHANGELOG.md` and `examples/`.
 - [x] `llms.txt`.
 - [x] `forms.tsv` regenerated at the repo root.
@@ -75,19 +75,19 @@
 - [x] `pnpm check` and `pnpm test` pass.
 - [x] Lily Svelte drift detectors pass.
 
-## Back-end with Loco
+## Back-end with Axum
 
-- [x] Run `back-end-with-loco-setup` to scaffold the crate.
+- [x] Run `back-end-with-axum-setup` to scaffold the crate.
 - [x] One migration + one entity per SQL table, relational (not JSONB).
 - [x] Controllers with `serde(rename_all = "camelCase")` params.
 - [x] `bin/loco-migration-defaults --check dietic-assessment` passes.
 - [x] `bin/loco-migration-nullability --check dietic-assessment` passes.
 - [x] `bin/loco-config-refactor --check dietic-assessment` passes.
-- [x] `bin/generate-loco-deny-config.py --check dietic-assessment` passes.
+- [x] `bin/generate-axum-deny-config.py --check dietic-assessment` passes.
 - [x] `cargo build` and `cargo test` pass (33 tests).
 - [ ] `cargo deny --all-features check` — fails on RUSTSEC-2023-0071 (`rsa`,
       transitive via SeaORM's MySQL driver). Fleet-wide: the canonical crate
-      `forms/medical-operation-note/back-end-with-loco` fails identically.
+      `forms/medical-operation-note/back-end-with-axum` fails identically.
 
 ## Verify
 

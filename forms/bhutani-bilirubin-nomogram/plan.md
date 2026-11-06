@@ -6,9 +6,9 @@ Implementation roadmap. See [`spec/index.md`](./spec/index.md) for the contract.
 
 All four layers built as of 2026-07-02: foundation docs (`index.md`,
 `spec/index.md`, `AGENTS.md`, `plan.md`, `tasks.md`); SQL migrations in `sql/`
-plus the generated representations (XML, FHIR R5, protobuf, OpenAPI, Loco
+plus the generated representations (XML, FHIR R5, protobuf, OpenAPI, Axum
 setup script); both consolidated front-ends (`front-end-with-html` and
-`front-end-with-svelte`); and the `back-end-with-loco` Rust JSON API.
+`front-end-with-svelte`); and the `back-end-with-axum` Rust JSON API.
 `CHANGELOG.md` and `examples/` are in place.
 
 ## Roadmap
@@ -19,7 +19,7 @@ setup script); both consolidated front-ends (`front-end-with-html` and
    `total_serum_bilirubin`, `measurement_method`), the six risk-factor flags, and
    timestamps; UUIDv4 PK. Source of truth.
 3. **Generated representations** — run the XML, FHIR R5, protobuf, OpenAPI, and
-   Loco setup generators.
+   Axum setup generators.
 4. **Classification engine** — `types.ts`, `utils.ts`, `bhutani-rules.ts` (the
    tabulated percentile + threshold curves and interpolation), `bhutani-grader.ts`,
    `flagged-issues.ts` with Vitest tests covering zone and threshold boundaries,
@@ -27,7 +27,7 @@ setup script); both consolidated front-ends (`front-end-with-html` and
 5. **Front-ends** — consolidated `front-end-with-html` (Lily wizard + dashboard)
    and `front-end-with-svelte` (Lily; RESTful `/<plural>/` list + `/<plural>/[id]`
    form).
-6. **Back-end** — `back-end-with-loco` Rust axum + Loco JSON API, relational
+6. **Back-end** — `back-end-with-axum` Rust axum + axa JSON API, relational
    per-table schema.
 7. **Verify** — `bin/test-form bhutani-bilirubin-nomogram`, Lily drift checks,
    spec / changelog drift checks.

@@ -29,7 +29,7 @@ classification** (normal / osteopenia / osteoporosis / severe osteoporosis).
 ## Source of truth
 
 `sql/` is the schema source of truth. After editing it, regenerate derived
-artefacts (XML, FHIR R5, protobuf, TypeSpec, OpenAPI, Loco setup, examples,
+artefacts (XML, FHIR R5, protobuf, TypeSpec, OpenAPI, Axum setup, examples,
 `spec/`, `CHANGELOG.md`) with the repo generators in `bin/` — never hand-edit
 generated files.
 

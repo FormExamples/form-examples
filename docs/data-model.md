@@ -1,7 +1,7 @@
 # Data model
 
 The `sql/` directory of each form is the **source of truth for data shape**.
-Every downstream representation (XML, FHIR, Protobuf, OpenAPI, the Loco crate) is
+Every downstream representation (XML, FHIR, Protobuf, OpenAPI, the Axum crate) is
 derived from it. This page describes the relational schema every form shares and
 walks a real example.
 

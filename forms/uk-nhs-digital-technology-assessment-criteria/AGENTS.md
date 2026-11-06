@@ -9,7 +9,7 @@ Records a DTAC assessment of a digital health technology: 47 criteria in seven s
 - `./doc/criteria-catalogue.md` — every criterion with its column name and mandatory flag
 - `./sql/` — Postgres migrations (source of truth)
 - `./xml/`, `./fhir/r5/`, `./protobuf/`, `./openapi/` — generated; never hand-edit
-- `./front-end-with-html/`, `./front-end-with-svelte/`, `./back-end-with-loco/` — not yet built (see `tasks.md`)
+- `./front-end-with-html/`, `./front-end-with-svelte/`, `./back-end-with-axum/` — not yet built (see `tasks.md`)
 
 ## Scoring engine (planned)
 

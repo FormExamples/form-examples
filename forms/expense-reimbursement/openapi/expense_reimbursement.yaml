@@ -1,0 +1,309 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: expense_reimbursement
+openapi: 3.1.0
+info:
+  title: Expense Reimbursement — ExpenseReimbursement
+  version: 1.0.0
+  description: "Expense reimbursement claim: a worker asks the employer to repay money the worker spent personally on work-related expenses."
+paths:
+  /api/expense_reimbursements:
+    get:
+      summary: List ExpenseReimbursement records
+      operationId: listExpenseReimbursement
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100000
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ExpenseReimbursement records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ExpenseReimbursement"
+        "400":
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new ExpenseReimbursement
+      operationId: createExpenseReimbursement
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExpenseReimbursement"
+      responses:
+        "200":
+          description: The newly created ExpenseReimbursement
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExpenseReimbursement"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/expense_reimbursements/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ExpenseReimbursement by id
+      operationId: getExpenseReimbursement
+      responses:
+        "200":
+          description: The requested ExpenseReimbursement
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExpenseReimbursement"
+        "404":
+          description: ExpenseReimbursement not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing ExpenseReimbursement
+      operationId: updateExpenseReimbursement
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExpenseReimbursement"
+      responses:
+        "200":
+          description: The updated ExpenseReimbursement
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExpenseReimbursement"
+        "404":
+          description: ExpenseReimbursement not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a ExpenseReimbursement
+      operationId: deleteExpenseReimbursement
+      responses:
+        "200":
+          description: ExpenseReimbursement deleted
+        "404":
+          description: ExpenseReimbursement not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+        - type
+        - title
+        - status
+    ExpenseReimbursement:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Soft-delete timestamp; NULL when the row is live.
+        worker_id:
+          type: string
+          format: uuid
+          description: Foreign key to the worker table.
+        manager_id:
+          type: string
+          format: uuid
+          description: Foreign key to the manager table.
+        status:
+          type: string
+          enum:
+            - draft
+            - submitted
+            - under-review
+            - approved
+            - partially-approved
+            - rejected
+            - paid
+            - withdrawn
+            - ""
+          description: Lifecycle status of this row.
+        claim_date:
+          type: string
+          format: date
+          description: Claim date.
+        claim_period_start_date:
+          type: string
+          format: date
+          description: Claim period start date.
+        claim_period_end_date:
+          type: string
+          format: date
+          description: Claim period end date.
+        claim_title:
+          type: string
+          maxLength: 255
+          description: Claim title.
+        business_purpose:
+          type: string
+          description: Business purpose.
+        project_or_cost_code:
+          type: string
+          maxLength: 64
+          description: Project or cost code.
+        currency_as_iso_4217:
+          type: string
+          maxLength: 3
+          description: Currency as iso 4217.
+        total_amount:
+          type: number
+          format: double
+          description: Total amount.
+        total_vat_amount:
+          type: number
+          format: double
+          description: Total vat amount.
+        advance_already_received_amount:
+          type: number
+          format: double
+          description: Advance already received amount.
+        amount_to_repay:
+          type: number
+          format: double
+          description: Amount to repay.
+        repayment_method:
+          type: string
+          enum:
+            - payroll
+            - bank-transfer
+            - cheque
+            - cash
+            - other
+            - ""
+          description: "Repayment method. One of: payroll, bank-transfer, cheque, cash, other."
+        bank_account_name:
+          type: string
+          maxLength: 255
+          description: Bank account name.
+        bank_account_last_four:
+          type: string
+          maxLength: 4
+          description: Bank account last four.
+        declaration_expenses_were_incurred_wholly_for_work:
+          type: boolean
+          description: Declaration expenses were incurred wholly for work.
+        declaration_no_duplicate_claim:
+          type: boolean
+          description: Declaration no duplicate claim.
+        declaration_receipts_attached:
+          type: boolean
+          description: Declaration receipts attached.
+        declaration_signed_name:
+          type: string
+          maxLength: 255
+          description: Declaration signed name.
+        declaration_signed_at:
+          type: string
+          format: date-time
+          description: Declaration signed at.
+      required:
+        - created_at
+        - updated_at
+        - worker_id
+        - manager_id
+        - status
+        - claim_title
+        - business_purpose
+        - project_or_cost_code
+        - currency_as_iso_4217
+        - repayment_method
+        - bank_account_name
+        - declaration_expenses_were_incurred_wholly_for_work
+        - declaration_no_duplicate_claim
+        - declaration_receipts_attached
+        - declaration_signed_name
+      description: "Expense reimbursement claim: a worker asks the employer to repay money the worker spent personally on work-related expenses."

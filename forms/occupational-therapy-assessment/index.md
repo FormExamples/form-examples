@@ -29,7 +29,7 @@ Functional performance evaluation using the COPM (Canadian Occupational Performa
 occupational-therapy-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

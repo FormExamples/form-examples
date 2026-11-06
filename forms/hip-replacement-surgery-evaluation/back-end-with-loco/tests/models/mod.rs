@@ -1,7 +1,0 @@
-mod users;
-
-mod patients;
-mod clinicians;
-mod hip_replacement_surgery_evaluations;
-mod hip_replacement_surgery_evaluation_grades;
-mod hip_replacement_surgery_evaluation_grade_flags;

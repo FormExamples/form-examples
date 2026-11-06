@@ -10,7 +10,7 @@
    details, 22 area steps, summary/sign-off) + dashboard.
 5. Front-end-with-svelte — SvelteKit wizard mirroring the HTML
    front-end + dashboard.
-6. Back-end-with-loco — Rust axum + Loco JSON API, relational
+6. Back-end-with-loco — Rust axum + axa JSON API, relational
    (parent + child entity) SeaORM models.
 7. Verify — `bin/test-form hospital-daily-monitoring-checklist`,
    `bin/lily-html-refactor --check`, `bin/lily-svelte-refactor --check`.

@@ -16,7 +16,7 @@ subscale and raises safety flags on risk-screen items for clinician review.
 - `./fhir/r5/` — generated FHIR HL7 R5 JSON per SQL entity
 - `./front-end-with-html/` — single-page HTML wizard (index.html) + dashboard (dashboard.html)
 - `./front-end-with-svelte/` — SvelteKit single-page wizard + dashboard (SVAR DataGrid)
-- `./back-end-with-loco/` — Rust backend with
+- `./back-end-with-axum/` — Rust backend with
   a JSON API
 
 ## Scoring system

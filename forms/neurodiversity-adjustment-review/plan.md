@@ -31,10 +31,10 @@ request / confirmation / review cycle.
 
 1. [x] SQL migrations (worker, manager, review, grade, grade_rule, grade_flag)
 2. [x] index.md / AGENTS.md / plan.md / tasks.md / spec
-3. [x] Generated representations (XML, FHIR R5, protobuf, OpenAPI, Loco setup, examples, CHANGELOG, llms.txt)
+3. [x] Generated representations (XML, FHIR R5, protobuf, OpenAPI, Axum setup, examples, CHANGELOG, llms.txt)
 4. [ ] front-end-with-html (wizard + dashboard + JS four-axis engine)
 5. [ ] front-end-with-svelte (SvelteKit wizard + dashboard + TS engine)
-6. [ ] back-end-with-loco (Rust JSON API crate)
+6. [ ] back-end-with-axum (Rust JSON API crate)
 
 ## Future enhancements
 

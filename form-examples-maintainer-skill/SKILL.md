@@ -24,7 +24,7 @@ The order is always:
 2. Change the source-of-truth code (`sql/` for schema; the front-end/back-end
    source for behavior).
 3. Regenerate every derived artefact from that source (see Generators,
-   below) — never hand-edit XML, FHIR, protobuf, OpenAPI, the Loco setup
+   below) — never hand-edit XML, FHIR, protobuf, OpenAPI, the Axum setup
    script, `CHANGELOG.md`, or `examples/`.
 4. Run the relevant verify gate(s) before committing.
 
@@ -42,8 +42,8 @@ forms/<slug>/
   examples/                   # assessment.json fixture + personas.json + FHIR Bundle
   front-end-with-html/        # Lily Design System headless HTML (index.html + dashboard.html)
   front-end-with-svelte/      # SvelteKit + Lily; routes under src/routes/<slug>/
-  back-end-with-loco/         # Rust axum + Loco JSON API; crate source under src/<form_snake_case>/
-  back-end-with-loco-setup    # generated `cargo loco generate scaffold` script
+  back-end-with-axum/         # Rust axum + axa + sqlx JSON API; crate source under src/<form_snake_case>/
+  back-end-with-axum-setup    # generated `cargo run -- generate scaffold` script
 ```
 
 ## Standard workflow for a new form
@@ -52,10 +52,10 @@ forms/<slug>/
 2. Fill in `index.md`, `spec/index.md`, `AGENTS.md`, `plan.md`, `tasks.md`.
 3. Author SQL migrations in `sql/`.
 4. Regenerate: `xml-representations`, `fhir-r5`, `protobuf`, `openapi`,
-   `back-end-with-loco/generate-back-end-with-loco-setup.py`,
+   `back-end-with-axum/generate-back-end-with-axum-setup.py`,
    `generate-changelog-and-examples.py`.
 5. Build both front-ends (HTML and SvelteKit), form + dashboard.
-6. Build the Loco back-end.
+6. Build the Axum back-end.
 7. `bin/lily-html-refactor --check --all` to confirm no Lily contract drift.
 8. `bin/test-form <slug>` to validate structure.
 9. Update `tasks.md`.
@@ -72,13 +72,9 @@ truth) or the generated [`docs/tools.md`](../docs/tools.md). Categories:
 - **SQL** — `bin/migrate-sql-filenames.py`,
   `bin/sql/generate-sql-comments.py`, `bin/sql/generate-sql-combined.py`.
 - **Generators (SQL → derived representations)** — the `xml-representations`,
-  `fhir-r5`, `protobuf`, `openapi`, `back-end-with-loco` generators, plus
+  `fhir-r5`, `protobuf`, `openapi`, `back-end-with-axum` generators, plus
   `generate-changelog-and-examples.py`.
-- **Loco back-end refactor / drift tools** — `loco-config-refactor`,
-  `loco-migration-defaults`, `loco-migration-nullability`,
-  `generate-loco-deny-config.py`, `loco-forbid-unsafe`,
-  `loco-seed-base-rename`, `loco-test-auth-header-fix`,
-  `loco-rs-1-migration`, `loco-msrv-set`, `loco-test-max-connections-fix`.
+  `generate-axum-deny-config.py`, `axum-forbid-unsafe`,
   Most have a `--check` mode that is the CI drift detector for that
   convention; several are one-shot migrations already applied fleet-wide
   (their header comment says so — do not re-run them as a gate).
@@ -126,9 +122,9 @@ before trusting it.
 
 The full, current list lives in `AGENTS.md`'s Verify section — run the
 subset relevant to what changed, or `bin/test` plus the specific drift
-detectors for the stack you touched (SQL, HTML/Lily, Svelte/Lily, Loco,
+detectors for the stack you touched (SQL, HTML/Lily, Svelte/Lily, Axum,
 specs/generators). Per-crate, `cargo deny --all-features check` runs from
-inside each `back-end-with-loco/`.
+inside each `back-end-with-axum/`.
 
 ## Conventions
 
@@ -141,5 +137,5 @@ inside each `back-end-with-loco/`.
 - UUIDv4 primary keys via `gen_random_uuid()`; every table has `created_at` /
   `updated_at` / `deleted_at`.
 - The whole form is one continuous single-page wizard — never multi-page.
-- Generated artefacts (XML, FHIR, protobuf, OpenAPI, Loco setup script,
+- Generated artefacts (XML, FHIR, protobuf, OpenAPI, Axum setup script,
   `CHANGELOG.md`, `examples/`) are never hand-edited; regenerate instead.

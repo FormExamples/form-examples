@@ -29,7 +29,7 @@
 - [x] `fhir/r5/` — generate FHIR R5 JSON per SQL table.
 - [x] `protobuf/` — generate `.proto` per SQL table.
 - [x] `openapi/` — generate `.yaml` per SQL table.
-- [x] `back-end-with-loco-setup` — generate Loco scaffold script.
+- [x] `back-end-with-axum-setup` — generate Axum setup script.
 
 ## SvelteKit practitioner form (`front-end-with-svelte/`)
 - [x] Engine: `types.ts`, `utils.ts`, `priority-targets.ts`,
@@ -49,7 +49,7 @@
 ## Static HTML dashboard (`front-end-with-html/`)
 - [x] Sortable HTML table mirroring the SvelteKit dashboard.
 
-## Rust full-stack (`back-end-with-loco/`)
+## Rust full-stack (`back-end-with-axum/`)
 - [x] `cargo loco new nuclear-medicine-waiting-list-card`.
 - [x] Run the generated scaffold script.
 - [x] Pure scoring engine ported from TypeScript.

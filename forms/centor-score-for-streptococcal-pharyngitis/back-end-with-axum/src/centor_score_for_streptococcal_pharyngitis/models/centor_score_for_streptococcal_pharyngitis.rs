@@ -1,0 +1,82 @@
+//! centor_score_for_streptococcal_pharyngitis model.
+
+use serde::{Deserialize, Serialize};
+
+use crate::support::prelude::*;
+
+/// One row.
+#[allow(missing_docs)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize, sqlx::FromRow)]
+#[serde(rename_all = "camelCase")]
+pub struct Model {
+    pub created_at: DateTimeWithTimeZone,
+    pub updated_at: DateTimeWithTimeZone,
+    pub id: Uuid,
+    pub deleted_at: Option<DateTimeWithTimeZone>,
+    pub clinician_name: String,
+    pub clinician_role: String,
+    pub assessed_at: Option<DateTimeWithTimeZone>,
+    pub care_setting: String,
+    pub patient_identifier: String,
+    pub age_years: Option<i32>,
+    pub sex: String,
+    pub tonsillar_exudate: String,
+    pub tender_anterior_cervical_nodes: String,
+    pub fever_over_38: String,
+    pub measured_temperature_celsius: Option<f64>,
+    pub absence_of_cough: String,
+    pub stridor_or_breathing_difficulty: String,
+    pub drooling_or_cannot_swallow: String,
+    pub trismus: String,
+    pub muffled_voice: String,
+    pub unilateral_neck_swelling: String,
+    pub clinical_note: String,
+    pub patient_id: Uuid,
+    pub clinician_id: Option<Uuid>,
+}
+
+impl Model {
+    /// One page of rows in a stable order, and how many rows there are in all.
+    ///
+    /// # Errors
+    ///
+    /// Propagates the database error.
+    pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Self>, i64)> {
+        let (limit, offset) = crate::support::paging::bounds(page);
+        let rows = sqlx::query_as("SELECT * FROM centor_score_for_streptococcal_pharyngitis ORDER BY id LIMIT $1 OFFSET $2")
+            .bind(limit)
+            .bind(offset)
+            .fetch_all(db)
+            .await?;
+        let total =
+            sqlx::query_scalar("SELECT COUNT(*) FROM centor_score_for_streptococcal_pharyngitis")
+                .fetch_one(db)
+                .await?;
+        Ok((rows, total))
+    }
+
+    /// The row with this id, if there is one.
+    ///
+    /// # Errors
+    ///
+    /// Propagates the database error.
+    pub async fn find_by_id(db: &PgPool, id: Uuid) -> sqlx::Result<Option<Self>> {
+        sqlx::query_as("SELECT * FROM centor_score_for_streptococcal_pharyngitis WHERE id = $1")
+            .bind(id)
+            .fetch_optional(db)
+            .await
+    }
+
+    /// Delete the row with this id.
+    ///
+    /// # Errors
+    ///
+    /// Propagates the database error.
+    pub async fn delete(db: &PgPool, id: Uuid) -> sqlx::Result<()> {
+        sqlx::query("DELETE FROM centor_score_for_streptococcal_pharyngitis WHERE id = $1")
+            .bind(id)
+            .execute(db)
+            .await?;
+        Ok(())
+    }
+}

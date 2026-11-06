@@ -58,9 +58,9 @@
 - [x] `front-end-with-html/` — HTML review table.
 
 ## Full-stack backend
-- [x] `back-end-with-loco-setup` shell script with all
+- [x] `back-end-with-axum-setup` shell script with all
       `cargo loco generate scaffold` calls.
-- [x] `back-end-with-loco/` — Loco 0.16 + axum 0.8
+- [x] `back-end-with-axum/` — Loco 0.16 + axum 0.8
       + SeaORM + Loco JSON API
 
 ## Tests

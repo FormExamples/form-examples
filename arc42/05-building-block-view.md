@@ -35,13 +35,13 @@ forms/<slug>/
   openapi/                 # OpenAPI 3.1 yaml             (generated)
   front-end-with-html/     # wizard (index.html) + dashboard (dashboard.html) + shared css/js  (author + Lily refactor)
   front-end-with-svelte/   # SvelteKit app; RESTful routes under src/routes/<slug>/            (author)
-  back-end-with-loco/      # Rust JSON API crate; source under src/<snake>/                     (author)
-  back-end-with-loco-setup # cargo loco scaffold script  (generated)
+  back-end-with-axum/      # Rust JSON API crate; source under src/<snake>/                     (author)
+  back-end-with-axum-setup # cargo run -- scaffold script  (generated)
 ```
 
 Ownership and generation status per path is tabulated in `spec.md` §4. The
 distinction that matters: **author-owned** (SQL, specs, engines, front-ends,
-back-end) versus **generated** (XML, FHIR, protobuf, OpenAPI, Loco setup).
+back-end) versus **generated** (XML, FHIR, protobuf, OpenAPI, Axum setup).
 
 ## 5.3 Level 1 — the `bin/` toolchain
 
@@ -51,10 +51,9 @@ The toolchain is the machine that keeps 286 forms uniform. Grouped by role:
 | ----- | ---------------- | ---- |
 | Scaffold & test | `create-form`, `test`, `test-form`, `test-sql-apply`, `test-tools` | Create a form; validate structure; apply SQL to a scratch DB |
 | SQL | `migrate-sql-filenames.py`, `sql/generate-sql-comments.py`, `sql/generate-sql-combined.py` | Canonical filenames; SQL comments; combined `schema.sql` |
-| Generators | `xml-representations/…`, `fhir-r5/…`, `protobuf/…`, `openapi/…`, `back-end-with-loco/…` | SQL → derived representations |
+| Generators | `xml-representations/…`, `fhir-r5/…`, `protobuf/…`, `openapi/…`, `back-end-with-axum/…` | SQL → derived representations |
 | Lily (HTML) | `lily-html-refactor`, `lily-sync` | Mechanical class swaps + drift; spec snapshot |
 | Lily (Svelte) | `lily-svelte-refactor`, `lily-svelte-status`, `lily-svelte-sync` | Class swaps + conformance report; spec snapshot |
-| Loco | `loco-config-refactor` | Background-queue + observability convention drift |
 | Specs & docs | `generate-llms-txt.py`, `generate-spec.py`, `generate-changelog-and-examples.py` | Per-form `llms.txt`, `spec/`, `CHANGELOG` + `examples/` |
 
 Most tools accept `--check` (CI drift detector) and `--dry-run`.
@@ -94,6 +93,6 @@ Forms with richer domains add more child tables. For example
 / `_grade_flag` trio — the pattern scales by adding relational child tables, not
 by widening one table. See [ADR-1](09-architecture-decisions.md).
 
-The two front-ends and the Loco crate each carry a mirror of the scoring
+The two front-ends and the Axum crate each carry a mirror of the scoring
 engine (`types → rules → grader → flagged-issues`) that reads the `<form>`
 record and writes the `<form>_grade` + `_grade_rule` + `_grade_flag` result.

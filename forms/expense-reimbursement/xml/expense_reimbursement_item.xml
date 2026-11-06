@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE expense_reimbursement_item SYSTEM "expense_reimbursement_item.dtd">
+<expense_reimbursement_item>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<expense_reimbursement_id>770e8400-e29b-41d4-a716-446655440002</expense_reimbursement_id>
+<line_number>2</line_number>
+<expense_date>2026-01-15</expense_date>
+<category>travel</category>
+<description>Example text.</description>
+<merchant></merchant>
+<currency_as_iso_4217></currency_as_iso_4217>
+<amount>0.0</amount>
+<vat_amount>0.0</vat_amount>
+<exchange_rate_to_claim_currency>72.0</exchange_rate_to_claim_currency>
+<payment_method>personal-credit-card</payment_method>
+<mileage_distance_miles>0.0</mileage_distance_miles>
+<receipt_attached>true</receipt_attached>
+<receipt_reference></receipt_reference>
+<receipt_missing_reason>Example text.</receipt_missing_reason>
+<prior_approval_obtained>true</prior_approval_obtained>
+</expense_reimbursement_item>

@@ -24,5 +24,5 @@ moderate-to-severe (41-60), or severe (61-88). The 12-item short form (`zbi12`,
 items 1,2,3,6,9,10,11,12,17,20,21,22) sums to 0-48 and bands lower (<17) or high
 (>=17). A missing item contributes 0 and raises a completeness flag.
 
-Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Loco
+Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Axum
 setup script) are derived from these migrations and are never hand-edited.

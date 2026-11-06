@@ -106,7 +106,7 @@ Note: Entitlement still depends on the EWC regardless of when benefits were clai
 united-kingdom-maternity-certificate-mat-b1/
   front-end-with-svelte/                         # Patient questionnaire
   front-end-with-svelte/                    # Dashboard
-  back-end-with-loco/    # Full-stack option
+  back-end-with-axum/    # Full-stack option
 ```
 
 ## Technology

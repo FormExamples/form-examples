@@ -74,10 +74,10 @@ where in the team's lifecycle the ADR is being captured.
      `file://`, no build step
    - `front-end-with-svelte/` — `pnpm dev`, then visit
      `http://localhost:5173`
-   - `back-end-with-loco/` — `cargo loco start`,
+   - `back-end-with-axum/` — `cargo run -- start`,
      then visit `http://localhost:5150/architecture_decision_records/new`
 2. Fill the 16-step wizard. The HTML and SvelteKit forms autosave to
-   `localStorage` under `adr.form.v1` as you type. The Loco backend
+   `localStorage` under `adr.form.v1` as you type. The Axum backend
    auto-numbers and auto-slugs the row on submit.
 3. Click **Generate Markdown ADR**. Copy the output or download the
    `.md` file into `docs/adr/NNNN-slug.md` in your project repo.
@@ -87,7 +87,7 @@ where in the team's lifecycle the ADR is being captured.
 1. Open a wizard.
 2. Click **Import .md** and pick the committed file.
 3. The wizard is populated from the Markdown (HTML and SvelteKit only —
-   the Loco wizard edits the row directly via `/edit`).
+   the Axum wizard edits the row directly via `/edit`).
 4. Re-generate Markdown when done; commit the updated file.
 
 ### Browse the register
@@ -97,16 +97,16 @@ where in the team's lifecycle the ADR is being captured.
   when wiring to a real backend.
 - `front-end-with-svelte/` — sortable / filterable register
   with status pills. Set `VITE_API_BASE_URL=http://localhost:5150` in
-  `.env.local` to read live from the Loco backend's `/api/adrs`
+  `.env.local` to read live from the Axum backend's `/api/adrs`
   endpoint. Clicking a row navigates to `/{slug}` for an inline
   Markdown view.
 
 ### Run the backend
 
 ```sh
-cd back-end-with-loco
-cargo loco db migrate
-cargo loco start
+cd back-end-with-axum
+cargo run -- db migrate
+cargo run -- start
 ```
 
 Routes:
@@ -141,7 +141,7 @@ architecture-decision-record/
   front-end-with-svelte/                    SvelteKit 2 + Svelte 5 wizard
   front-end-with-html/                 Decision register (HTML table)
   front-end-with-svelte/               Decision register (SVAR Grid)
-  back-end-with-loco/         Rust + Loco JSON API
+  back-end-with-axum/         Rust + Axum JSON API
 ```
 
 ## References

@@ -1,0 +1,247 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: expense_reimbursement_grade
+openapi: 3.1.0
+info:
+  title: Expense Reimbursement — ExpenseReimbursementGrade
+  version: 1.0.0
+  description: "Computed three-axis grade for an expense reimbursement claim: policy compliance, completeness and approval tier."
+paths:
+  /api/expense_reimbursement_grades:
+    get:
+      summary: List ExpenseReimbursementGrade records
+      operationId: listExpenseReimbursementGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100000
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of ExpenseReimbursementGrade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ExpenseReimbursementGrade"
+        "400":
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new ExpenseReimbursementGrade
+      operationId: createExpenseReimbursementGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExpenseReimbursementGrade"
+      responses:
+        "200":
+          description: The newly created ExpenseReimbursementGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExpenseReimbursementGrade"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/expense_reimbursement_grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ExpenseReimbursementGrade by id
+      operationId: getExpenseReimbursementGrade
+      responses:
+        "200":
+          description: The requested ExpenseReimbursementGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExpenseReimbursementGrade"
+        "404":
+          description: ExpenseReimbursementGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing ExpenseReimbursementGrade
+      operationId: updateExpenseReimbursementGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExpenseReimbursementGrade"
+      responses:
+        "200":
+          description: The updated ExpenseReimbursementGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExpenseReimbursementGrade"
+        "404":
+          description: ExpenseReimbursementGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a ExpenseReimbursementGrade
+      operationId: deleteExpenseReimbursementGrade
+      responses:
+        "200":
+          description: ExpenseReimbursementGrade deleted
+        "404":
+          description: ExpenseReimbursementGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+        - type
+        - title
+        - status
+    ExpenseReimbursementGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        deleted_at:
+          type: string
+          format: date-time
+          description: Soft-delete timestamp; NULL when the row is live.
+        expense_reimbursement_id:
+          type: string
+          format: uuid
+          description: Foreign key to the expense_reimbursement table.
+        compliance_band:
+          type: string
+          enum:
+            - compliant
+            - needs-review
+            - likely-ineligible
+            - ""
+          description: "Compliance band. One of: compliant, needs-review, likely-ineligible."
+        completeness_percent:
+          type: integer
+          format: int32
+          description: Completeness percent.
+        approval_tier:
+          type: string
+          enum:
+            - line-manager
+            - budget-holder
+            - finance-review
+            - ""
+          description: "Approval tier. One of: line-manager, budget-holder, finance-review."
+        recommendation:
+          type: string
+          enum:
+            - approve
+            - request-more-information
+            - escalate
+            - reject
+            - ""
+          description: "Recommendation. One of: approve, request-more-information, escalate, reject."
+        manager_notes:
+          type: string
+          description: Manager notes.
+        signed_at:
+          type: string
+          format: date-time
+          description: Signed at.
+        graded_at:
+          type: string
+          format: date-time
+          description: Graded at.
+      required:
+        - created_at
+        - updated_at
+        - expense_reimbursement_id
+        - compliance_band
+        - approval_tier
+        - recommendation
+        - manager_notes
+        - graded_at
+      description: "Computed three-axis grade for an expense reimbursement claim: policy compliance, completeness and approval tier."

@@ -43,7 +43,7 @@ Each form must have `00_create_extensions.sql` as the first migration so that
 - Foreign keys cascade on delete (`ON DELETE CASCADE`) within a form's own schema; foreign keys to shared tables use `ON DELETE RESTRICT`
 - `CHECK` constraints for enum-style values
 - Comprehensive `COMMENT ON TABLE` and `COMMENT ON COLUMN` for every table and column
-- snake_case column names, matching the Rust/SeaORM entity fields
+- snake_case column names, matching the Rust/sqlx entity fields
 - Strings use `TEXT`; avoid `VARCHAR(n)` unless a hard length constraint is enforced
 - Monetary values use `NUMERIC`, never `FLOAT`
 

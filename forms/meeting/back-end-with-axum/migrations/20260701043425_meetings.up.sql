@@ -1,0 +1,32 @@
+CREATE TABLE IF NOT EXISTS "meetings" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "status" varchar NOT NULL DEFAULT 'draft',
+    "title" varchar NOT NULL DEFAULT '',
+    "purpose" varchar NOT NULL DEFAULT '',
+    "long_description" text NOT NULL DEFAULT '',
+    "category" varchar NOT NULL DEFAULT '',
+    "visibility" varchar NOT NULL DEFAULT '',
+    "scheduled_start_at" timestamp with time zone NULL,
+    "scheduled_end_at" timestamp with time zone NULL,
+    "timezone" varchar NOT NULL DEFAULT '',
+    "location" varchar NOT NULL DEFAULT '',
+    "video_url" varchar NOT NULL DEFAULT '',
+    "phone_number" varchar NOT NULL DEFAULT '',
+    "dial_in_code" varchar NOT NULL DEFAULT '',
+    "joining_instructions" text NOT NULL DEFAULT '',
+    "calendar_uid" varchar NOT NULL DEFAULT '',
+    "summary" varchar NOT NULL DEFAULT '',
+    "actual_start_at" timestamp with time zone NULL,
+    "actual_end_at" timestamp with time zone NULL,
+    "overall_result" varchar NOT NULL DEFAULT '',
+    "additional_notes" text NOT NULL DEFAULT '',
+    "signed_by_name" varchar NOT NULL DEFAULT '',
+    "signed_at" timestamp with time zone NULL,
+    "organizer_id" uuid NOT NULL,
+    CONSTRAINT "fk-meetings-organizer_id-to-organizers" FOREIGN KEY ("organizer_id") REFERENCES "organizers" (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+ALTER TABLE meetings ALTER COLUMN id SET DEFAULT gen_random_uuid();

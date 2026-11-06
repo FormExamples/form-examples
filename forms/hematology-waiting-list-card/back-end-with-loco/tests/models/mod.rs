@@ -1,9 +1,0 @@
-mod users;
-
-mod patients;
-mod practitioners;
-mod hematology_waiting_list_cards;
-mod hematology_waiting_list_card_appointments;
-mod hematology_waiting_list_card_grades;
-mod hematology_waiting_list_card_grade_rules;
-mod hematology_waiting_list_card_grade_flags;

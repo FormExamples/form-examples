@@ -3,7 +3,7 @@
 ## Current status
 
 Full gold-standard build. SQL schema (source of truth) and per-form
-documentation are in place; generated derivatives, the front-end, and the Loco
+documentation are in place; generated derivatives, the front-end, and the Axum
 back-end crate follow.
 
 ## Why this form exists
@@ -33,9 +33,9 @@ follow-up urgency are explicit, auditable, and safely actioned. It is the
 1. [x] SQL migrations (patient, clinician, response, grade, grade_rule, grade_flag)
 2. [x] index.md / AGENTS.md / plan.md / tasks.md / doc
 3. [x] Generated representations (XML, FHIR R5, protobuf, OpenAPI)
-4. [x] Loco setup script, examples, spec, CHANGELOG.md
+4. [x] Axum setup script, examples, spec, CHANGELOG.md
 5. [x] front-end-with-svelte (consolidated SvelteKit wizard + TS engine)
-6. [x] back-end-with-loco (Rust JSON API crate; cargo check + engine tests pass)
+6. [x] back-end-with-axum (Rust JSON API crate; cargo check + engine tests pass)
 
 ## Future enhancements
 

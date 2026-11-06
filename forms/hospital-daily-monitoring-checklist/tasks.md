@@ -12,7 +12,7 @@
 - [x] `front-end-with-svelte/` — 24-step wizard + dashboard. Verified via
       `svelte-check` (0 errors), `vitest run` (4/4), and Playwright
       (24 fieldsets, 97 item rows, 0 console errors).
-- [x] `back-end-with-loco/` — Rust JSON API (parent + child SeaORM
+- [x] `back-end-with-axum/` — Rust JSON API (parent + child SeaORM
       entities). Verified via `cargo check` (clean) and `cargo test`
       (27/27 passing against a scratch Postgres); fixed a real
       fixture-path bug found while getting tests green.

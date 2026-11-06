@@ -1,0 +1,1 @@
+DROP TABLE "electroencephalogram_test_result_grade_rules";

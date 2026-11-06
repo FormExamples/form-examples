@@ -9,7 +9,7 @@ first; update the spec before code.
 Pure function: assessment state in, `{ computedClass, classSuffix,
 conformityRoute, firedRules, flags, readiness }` out. Highest class over all
 fired rules wins. Rule table is in `index.md`. Never hand-edit generated
-artefacts (`xml/`, `fhir/`, `protobuf/`, `openapi/`, `back-end-with-loco-setup`).
+artefacts (`xml/`, `fhir/`, `protobuf/`, `openapi/`, `back-end-with-axum-setup`).
 
 ## Entities
 

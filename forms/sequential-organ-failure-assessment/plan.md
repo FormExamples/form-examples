@@ -4,9 +4,9 @@
 
 Foundation docs authored 2026-07-01 (`index.md`, `spec/index.md`, `AGENTS.md`,
 `plan.md`, `tasks.md`). All four layers built as of 2026-07-02: SQL migrations
-plus the generated representations (XML, FHIR R5, protobuf, OpenAPI, Loco
+plus the generated representations (XML, FHIR R5, protobuf, OpenAPI, Axum
 setup), both consolidated front-ends (HTML + Lily and SvelteKit + Lily), and
-the Loco JSON-API back-end — plus `CHANGELOG.md` and `examples/`.
+the Axum JSON-API back-end — plus `CHANGELOG.md` and `examples/`.
 
 ## Why this form exists
 
@@ -42,7 +42,7 @@ sub-scores 3–4 require respiratory support.
 
 1. Author SQL migrations in `sql/` (one migration + one entity per table:
    patient, assessment, per-system rows or a single assessment row, grading result).
-2. Regenerate derived representations (XML, FHIR R5, protobuf, OpenAPI, Loco setup).
+2. Regenerate derived representations (XML, FHIR R5, protobuf, OpenAPI, Axum setup).
 3. Build the scoring engine and unit tests.
 4. Build the consolidated HTML front-end (wizard + dashboard, Lily).
 5. Build the consolidated SvelteKit front-end (RESTful list + form, Lily).

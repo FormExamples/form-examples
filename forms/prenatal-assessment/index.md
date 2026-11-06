@@ -29,7 +29,7 @@ Antenatal evaluation covering pregnancy details, obstetric history, vital signs,
 prenatal-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

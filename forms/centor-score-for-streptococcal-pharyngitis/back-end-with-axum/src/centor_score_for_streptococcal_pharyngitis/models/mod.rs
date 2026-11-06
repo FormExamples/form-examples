@@ -1,0 +1,6 @@
+pub mod centor_score_for_streptococcal_pharyngitis;
+pub mod centor_score_for_streptococcal_pharyngitis_grade_flags;
+pub mod centor_score_for_streptococcal_pharyngitis_grade_rules;
+pub mod centor_score_for_streptococcal_pharyngitis_grades;
+pub mod clinicians;
+pub mod patients;

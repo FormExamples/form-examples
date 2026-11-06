@@ -1,0 +1,32 @@
+CREATE TABLE IF NOT EXISTS "histopathology_test_requests" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "status" varchar NOT NULL DEFAULT 'draft',
+    "site_name" varchar NOT NULL DEFAULT '',
+    "setting" varchar NOT NULL DEFAULT '',
+    "referral_date" date NULL,
+    "requested_by_date" date NULL,
+    "specimen_type" varchar NOT NULL DEFAULT '',
+    "specimen_site" varchar NOT NULL DEFAULT '',
+    "number_of_specimens" integer NULL,
+    "fixative" varchar NOT NULL DEFAULT '',
+    "primary_indication" varchar NOT NULL DEFAULT '',
+    "clinical_question" varchar NOT NULL DEFAULT '',
+    "clinical_details" varchar NOT NULL DEFAULT '',
+    "provisional_diagnosis" varchar NOT NULL DEFAULT '',
+    "previous_histology" varchar NOT NULL DEFAULT '',
+    "urgent_frozen_section" boolean NOT NULL DEFAULT false,
+    "two_week_wait" boolean NOT NULL DEFAULT false,
+    "urgency" varchar NOT NULL DEFAULT 'routine',
+    "supervising_consultant" varchar NOT NULL DEFAULT '',
+    "requester_contact" varchar NOT NULL DEFAULT '',
+    "notes" varchar NOT NULL DEFAULT '',
+    "patient_id" uuid NOT NULL,
+    "clinician_id" uuid NOT NULL,
+    CONSTRAINT "fk-histopathology_test_requests-patient_id-to-patients" FOREIGN KEY ("patient_id") REFERENCES "patients" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-histopathology_test_requests-clinician_id-to-clinicians" FOREIGN KEY ("clinician_id") REFERENCES "clinicians" (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+ALTER TABLE histopathology_test_requests ALTER COLUMN id SET DEFAULT gen_random_uuid();

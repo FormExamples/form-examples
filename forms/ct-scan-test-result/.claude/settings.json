@@ -37,7 +37,7 @@
       "Bash(cargo build 2>&1 | head *)",
       "Bash(cargo build 2>&1 | tail *)",
       "Bash(cargo check *)",
-      "Bash(cargo loco *)",
+      "Bash(cargo run -- *)",
       "Bash(cargo run *)",
       "Bash(cargo test *)",
       "Bash(cargo test 2>&1)",

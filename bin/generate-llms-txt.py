@@ -69,7 +69,7 @@ def render_llms_txt(slug: str, form_dir: Path) -> str:
     out.append("- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)")
     out.append("- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)")
     out.append("- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)")
-    out.append("- [Rust Loco JSON-API back-end](back-end-with-loco/)")
+    out.append("- [Rust Axum JSON-API back-end](back-end-with-axum/)")
     out.append("")
     out.append("## Generated representations")
     out.append("")

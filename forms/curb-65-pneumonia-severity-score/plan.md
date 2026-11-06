@@ -4,9 +4,9 @@
 
 Foundation docs authored 2026-07-01 (`index.md`, `spec/index.md`, `AGENTS.md`,
 `plan.md`, `tasks.md`). All four layers built as of 2026-07-02: SQL migrations
-plus the generated representations (XML, FHIR R5, protobuf, OpenAPI, Loco
+plus the generated representations (XML, FHIR R5, protobuf, OpenAPI, Axum
 setup), both consolidated front-ends (HTML + Lily and SvelteKit + Lily), and
-the Loco JSON-API back-end — plus `CHANGELOG.md` and `examples/`. The `doc/`
+the Axum JSON-API back-end — plus `CHANGELOG.md` and `examples/`. The `doc/`
 clinical reference notes remain outstanding.
 
 ## Why this form exists
@@ -44,10 +44,10 @@ without immediate laboratory access.
 3. [ ] `doc/` clinical reference notes (criterion thresholds, mortality bands,
        CRB-65 mapping, BTS/NICE cross-walk).
 4. [x] SQL Liquibase migrations (assessment, grading_result, grading_flag).
-5. [x] Generate XML + DTD, FHIR R5, Protocol Buffers, OpenAPI, Loco setup script.
+5. [x] Generate XML + DTD, FHIR R5, Protocol Buffers, OpenAPI, Axum setup script.
 6. [x] Build `front-end-with-html/` (Lily wizard + dashboard).
 7. [x] Build `front-end-with-svelte/` (Lily wizard + RESTful dashboard).
-8. [x] Build `back-end-with-loco/` (axum + Loco JSON API).
+8. [x] Build `back-end-with-axum/` (axum + Loco JSON API).
 9. [x] Unit-test `curb65-grader.ts` (Vitest) at every boundary.
 10. [ ] `bin/test-form curb-65-pneumonia-severity-score`.
 

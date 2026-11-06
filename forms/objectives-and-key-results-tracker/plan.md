@@ -12,4 +12,4 @@ the current living spec.
 | 3 | front-end-with-svelte (SvelteKit wizard) | complete |
 | 4 | front-end-with-html (dashboard) | complete |
 | 5 | front-end-with-svelte (SVAR Grid dashboard) | complete |
-| 6 | back-end-with-loco | scaffold (path 2) — compiles, no live DB |
+| 6 | back-end-with-axum | scaffold (path 2) — compiles, no live DB |

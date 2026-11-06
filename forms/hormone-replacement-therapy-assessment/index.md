@@ -29,7 +29,7 @@ HRT eligibility and symptom assessment using the MRS (Menopause Rating Scale) co
 hormone-replacement-therapy-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

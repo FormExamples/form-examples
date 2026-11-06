@@ -20,7 +20,7 @@ Development roadmap and status. See [`index.md`](index.md) for the design and
 - [x] `fhir/r5/` — FHIR HL7 R5 JSON per SQL entity
 - [x] `protobuf/` — Protocol Buffers `.proto` per SQL entity
 - [x] `openapi/` — OpenAPI 3.1 `.yaml` per SQL entity
-- [x] `back-end-with-loco-setup` — Loco scaffold script
+- [x] `back-end-with-axum-setup` — Axum setup script
 - [x] `CHANGELOG.md` + `examples/` — fixtures and FHIR Bundle sample
 - [x] `llms.txt`
 
@@ -37,7 +37,7 @@ Development roadmap and status. See [`index.md`](index.md) for the design and
 
 ## Phase 4 — Back end
 
-- [x] `back-end-with-loco/` — Rust axum + Loco JSON API
+- [x] `back-end-with-axum/` — Rust axum + axa JSON API
 - [x] One SeaORM migration and one entity per SQL table
 - [x] REST controllers per entity, registered in `app.rs`
 - [x] Both engines ported to Rust, with 16 engine tests

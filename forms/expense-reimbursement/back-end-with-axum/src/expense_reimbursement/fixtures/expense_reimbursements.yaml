@@ -1,0 +1,26 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "28b9f69d-6240-5190-81e4-dbcbecb8e037"
+  deletedAt: null
+  status: "draft"
+  claimDate: "1990-01-01"
+  claimPeriodStartDate: "1990-01-01"
+  claimPeriodEndDate: "1990-01-01"
+  claimTitle: "Test claimTitle"
+  businessPurpose: "Test businessPurpose"
+  projectOrCostCode: "Test projectOrCostCode"
+  currencyAsIso4217: "Test currencyAsIso4217"
+  totalAmount: 1.0
+  totalVatAmount: 1.0
+  advanceAlreadyReceivedAmount: 1.0
+  amountToRepay: 1.0
+  repaymentMethod: "payroll"
+  bankAccountName: "Test bankAccountName"
+  bankAccountLastFour: "Test bankAccountLastFour"
+  declarationExpensesWereIncurredWhollyForWork: true
+  declarationNoDuplicateClaim: true
+  declarationReceiptsAttached: true
+  declarationSignedName: "Test declarationSignedName"
+  declarationSignedAt: "2026-01-01T00:00:00Z"
+  workerId: "cf26ec17-b599-5f60-a13f-56227d8dfdc3"
+  managerId: "a771708c-0c4f-55dc-97dd-dcde2251e7a4"

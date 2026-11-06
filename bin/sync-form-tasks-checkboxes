@@ -5,7 +5,7 @@ Every form's `forms/<slug>/tasks.md` (and `plan.md`) began life as
 `bin/create-form`'s scaffold checklist. Fleet-wide tooling since then has
 built almost all of that work directly (SQL migrations, generated
 XML/FHIR/protobuf/OpenAPI, front-end-with-html/, front-end-with-svelte/,
-back-end-with-loco/, doc/ pages, ...) without ever going back to tick the
+back-end-with-axum/, doc/ pages, ...) without ever going back to tick the
 original per-form checklist -- so ~1900 `- [ ]` lines across the fleet
 describe work that is now actually done. The living, actually-maintained
 backlog is the root `tasks.md`; this tool only closes the loop on these
@@ -172,14 +172,14 @@ def _has_validation_engine(form_dir: str) -> bool:
 
 
 def _has_rust_backend(form_dir: str) -> bool:
-    return artefact_exists(form_dir, "back-end-with-loco/Cargo.toml") and \
-        artefact_exists(form_dir, "back-end-with-loco/src")
+    return artefact_exists(form_dir, "back-end-with-axum/Cargo.toml") and \
+        artefact_exists(form_dir, "back-end-with-axum/src")
 
 
 def _has_derived_artefacts(form_dir: str) -> bool:
     return _any_exists(form_dir, "xml") and _any_exists(form_dir, "fhir/r5") and \
         _any_exists(form_dir, "protobuf") and _any_exists(form_dir, "openapi") and \
-        _any_exists(form_dir, "back-end-with-loco-setup")
+        _any_exists(form_dir, "back-end-with-axum-setup")
 
 
 # Exact-match, backtick-free scaffold phrasings whose completion is
@@ -192,7 +192,7 @@ PROSE_PREDICATES = {
     "Create SQL migration files": lambda d: artefact_exists(d, "sql"),
     "Generate XML representations and DTDs": lambda d: artefact_exists(d, "xml"),
     "Generate FHIR R5 JSON resources": lambda d: artefact_exists(d, "fhir/r5"),
-    "Add backend database migrations": lambda d: artefact_exists(d, "back-end-with-loco/migration"),
+    "Add backend database migrations": lambda d: artefact_exists(d, "back-end-with-axum/migration"),
     "Implement flagged issues detection": _has_flagged_issues,
     "Add Vitest unit tests for grading logic": _has_vitest_engine_tests,
     "Add Vitest unit tests for validation logic": _has_vitest_engine_tests,
@@ -201,11 +201,11 @@ PROSE_PREDICATES = {
     "Implement PDF report generation": _has_pdf_generation,
     "Implement PDF certificate generation": _has_pdf_generation,
     "Implement completeness validation engine": _has_validation_engine,
-    "Implement Rust backend with Loco/Tera": _has_rust_backend,
+    "Implement Rust backend with Axum/Tera": _has_rust_backend,
     "Implement Rust backend with engine types": _has_rust_backend,
     "Implement dashboard with HTML/CSS/JS": lambda d: artefact_exists(d, "front-end-with-html/dashboard.html"),
     "Implement clinician dashboard with HTML/CSS/JS": lambda d: artefact_exists(d, "front-end-with-html/dashboard.html"),
-    "Regenerate derived artefacts (XML, FHIR R5, protobuf, OpenAPI, Loco setup).": _has_derived_artefacts,
+    "Regenerate derived artefacts (XML, FHIR R5, protobuf, OpenAPI, Axum setup).": _has_derived_artefacts,
 }
 
 

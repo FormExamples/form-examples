@@ -1,0 +1,1 @@
+DROP TABLE "tumor_marker_test_result_grade_rules";

@@ -35,7 +35,7 @@ Reference: [MDCalc — PREVENT](https://www.mdcalc.com/calc/10491/predicting-ris
 predicting-risk-of-cardiovascular-disease-events/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

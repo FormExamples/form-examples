@@ -13,7 +13,7 @@
 - [x] FHIR R5 JSON (`fhir/r5/`)
 - [x] Protocol Buffers (`protobuf/`)
 - [x] OpenAPI 3.1 (`openapi/`)
-- [x] Loco setup script (`back-end-with-loco-setup`)
+- [x] Axum setup script (`back-end-with-axum-setup`)
 - [x] `schema.sql`, `examples/`, `spec.md`, `CHANGELOG.md`
 
 ## Documentation
@@ -31,5 +31,5 @@
 
 ## Back-end
 
-- [x] `back-end-with-loco` Rust JSON API crate
+- [x] `back-end-with-axum` Rust JSON API crate
 - [ ] `cargo test` green (requires local Postgres)

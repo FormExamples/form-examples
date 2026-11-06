@@ -20,7 +20,7 @@ Full design description: [`index.md`](../index.md).
 ## 2. Scope
 
 In scope: the schema, scoring engine, two consolidated front-ends
-(`front-end-with-html`, `front-end-with-svelte`), and the Rust `back-end-with-loco`
+(`front-end-with-html`, `front-end-with-svelte`), and the Rust `back-end-with-axum`
 JSON API. Out of scope: hosted deployment, authentication, multi-tenancy.
 
 ## 3. Data model
@@ -128,10 +128,10 @@ Bundle, XML, JSON, CSV, or TSV.
 | `openapi` | generated |
 | `front-end-with-html` | HTML + Lily (wizard + dashboard) — not implemented |
 | `front-end-with-svelte` | SvelteKit (wizard + dashboard) — not implemented |
-| `back-end-with-loco` | Rust + Loco JSON API — not implemented |
-| `back-end-with-loco-setup` | generated scaffold script |
+| `back-end-with-axum` | Rust + Axum JSON API — not implemented |
+| `back-end-with-axum-setup` | generated scaffold script |
 
-Generated artefacts (XML, FHIR R5, Protocol Buffers, OpenAPI, Loco setup script)
+Generated artefacts (XML, FHIR R5, Protocol Buffers, OpenAPI, Axum setup script)
 are never hand-edited; re-run the generators in [`/AGENTS.md`](../../../AGENTS.md)
 §Tools after schema changes.
 

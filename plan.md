@@ -26,8 +26,8 @@ carry-overs.
   `CITATION.cff`; ways-to-contribute in `CONTRIBUTING.md`; project-documents
   table in `index.md`.
 - `#![forbid(unsafe_code)]` on all 1,412 crate roots (355 crates × 4 targets),
-  via new `bin/loco-forbid-unsafe` with `--check` in CI; the generated
-  `back-end-with-loco-setup` scripts now apply it to freshly scaffolded crates.
+  via new `bin/axum-forbid-unsafe` with `--check` in CI; the generated
+  `back-end-with-axum-setup` scripts now apply it to freshly scaffolded crates.
 - Fixed the `#![warn(clippy::clippy::pedantic)]` unknown-lint typo (3 crates).
 - v1.0.0 tagged and released 2026-08-26.
 - 2026-08-27: checked GitHub's actual CI run history for the first time —
@@ -84,7 +84,7 @@ carry-overs.
    `html-theme-locale-select-refactor --check`, `svelte-theme-css-sync
    --check`, `svelte-kit-3-theme-url-fix.py --check`,
    `loco-migration-defaults --check`, `loco-migration-nullability --check`,
-   `loco-rs-1-migration --check`, `generate-loco-deny-config.py --check`.
+   `loco-rs-1-migration --check`, `generate-axum-deny-config.py --check`.
    A gate that only runs on a maintainer's machine protects nothing.
 7. **`bin/test` without Postgres dies 24 s in** at the first crate's
    `cargo test` (mass `PoolTimedOut`) instead of skipping with a notice
@@ -187,7 +187,7 @@ The build-out phase is essentially complete. Coverage is uniform:
 - **286 form directories** in `forms/`, every one with: `index.md`, `spec/`,
   `doc/`, `CHANGELOG.md`, `examples/`, `sql/` migrations, generated `xml/`,
   `fhir/r5/`, `protobuf/`, `openapi/`, `front-end-with-html/` (index +
-  dashboard), `front-end-with-svelte/`, and a `back-end-with-loco/` crate.
+  dashboard), `front-end-with-svelte/`, and a `back-end-with-axum/` crate.
 - Lily Svelte conformance: **284 PASS / 2 TODO**
   (`agile-consulting-scorecard-for-hiring-help`,
   `objectives-and-key-results-tracker`).

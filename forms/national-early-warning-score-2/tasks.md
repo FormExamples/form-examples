@@ -19,7 +19,7 @@
 - [x] Generated FHIR R5 JSON
 - [x] Generated protobuf `.proto`
 - [x] Generated OpenAPI 3.1 YAML
-- [x] Generated Loco setup script
+- [x] Generated Axum setup script
 - [x] Generated `CHANGELOG.md` + `examples/`
 
 ## Scoring engine
@@ -37,7 +37,7 @@
 
 ## Back-end
 
-- [x] `back-end-with-loco/` — Rust axum + Loco JSON API (relational per-table)
+- [x] `back-end-with-axum/` — Rust axum + axa JSON API (relational per-table)
 
 ## Verify
 

@@ -1,0 +1,1 @@
+DROP TABLE "grace_score_for_acute_coronary_syndrome_grade_rules";

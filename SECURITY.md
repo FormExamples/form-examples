@@ -20,7 +20,7 @@ vulnerable".
 **In scope**
 
 - An injection, authentication, authorization, or data-exposure flaw in a form's
-  `back-end-with-loco/` crate.
+  `back-end-with-axum/` crate.
 - A cross-site scripting, cross-site request forgery, or injection flaw in a
   form's `front-end-with-html/` or `front-end-with-svelte/`.
 - A SQL migration that grants more than it should, or an OpenAPI or FHIR
@@ -36,8 +36,8 @@ vulnerable".
 **Out of scope**
 
 - **The development defaults, which are development defaults on purpose.** Each
-  Loco crate ships a `config/development.yaml` with a scaffolded JWT secret, a
-  trust-auth local database, seed fixtures, and permissive local settings.
+  Axum crate falls back to a trust-auth local database, seed fixtures, and
+  permissive local settings outside production.
   These are committed so a reader can run the thing in one command. They are
   not a vulnerability in this repository; deploying them unchanged is a
   vulnerability in *your* deployment, and [`INSTALL.md`](INSTALL.md) says so.
@@ -127,12 +127,11 @@ fairer than letting you find out after the work.
 
 The honest checklist, because a security policy that omits it is decorative:
 
-- Replace every value in `config/development.yaml` and
-  `config/production.yaml` — the JWT secret above all — and load secrets from
-  the environment, never from a committed file.
-- Put the JSON API behind your own authentication and authorization. The
-  scaffolded crates demonstrate the data shape and the routes; they are not an
-  access-control design.
+- Set `DATABASE_URL` and every other setting from the environment. Production
+  refuses to boot without `DATABASE_URL`.
+- Put the JSON API behind your own authentication and authorization. **The crates
+  have none: every route, including patient records, is open to whoever can reach
+  it.** They demonstrate the data shape and the routes, not an access-control design.
 - Terminate TLS in front of it, and set your own CORS policy.
 - Re-run the supply-chain gate (`cargo deny --all-features check`) on your fork,
   on your schedule. This repository's dependency pins are current as of its last

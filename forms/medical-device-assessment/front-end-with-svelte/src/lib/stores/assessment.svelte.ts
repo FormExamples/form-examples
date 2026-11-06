@@ -168,7 +168,7 @@ class AssessmentStore {
 
   /**
    * POST the submitted assessment, its grade, fired rules and flags to the
-   * Loco API (see lib/api/medical-device-assessments.ts for the sequence).
+   * Axum API (see lib/api/medical-device-assessments.ts for the sequence).
    */
   async save() {
     this.saveStatus = { kind: 'saving', message: 'Saving to the server...' };

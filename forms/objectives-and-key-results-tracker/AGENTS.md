@@ -17,7 +17,7 @@ RAG thresholds, and risk flags. See the design spec at
 ## Per-stack documentation
 
 - [Front-end with SvelteKit / Tailwind / SVAR](../../AGENTS/front-end-with-sveltekit-tailwind-svar.md)
-- [Full-stack with Loco JSON API](../../AGENTS/back-end-with-loco.md)
+- [Full-stack with Axum JSON API](../../AGENTS/back-end-with-axum.md)
 - [SQL migrations](../../AGENTS/sql.md)
 - [XML representations](../../AGENTS/xml-representations.md)
 - [FHIR HL7 R5](../../AGENTS/fhir-r5.md)

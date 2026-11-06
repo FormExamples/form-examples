@@ -1,13 +1,13 @@
 # Backend API Reference
 
-REST API documentation for the Pre-Operative Assessment backend, built with Rust, Axum, and the Loco framework.
+REST API documentation for the Pre-Operative Assessment backend, built with Rust, Axum, and the Axum framework.
 
 ## Technology Stack
 
 | Component | Technology | Purpose |
 |-----------|-----------|---------|
-| Framework | Loco (Axum-based) | Opinionated Rust web framework |
-| ORM | SeaORM | Async ORM for PostgreSQL |
+| Framework | Axum (Axum-based) | Opinionated Rust web framework |
+| ORM | sqlx | Async ORM for PostgreSQL |
 | Language | Rust (edition 2024) | Memory-safe systems language |
 | Database | PostgreSQL 18 | Primary data store |
 | Serialization | serde + serde_json | JSON request/response handling |

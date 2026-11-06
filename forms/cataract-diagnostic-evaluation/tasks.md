@@ -34,7 +34,7 @@
 - [x] `fhir/r5/` — FHIR HL7 R5 JSON per SQL entity.
 - [x] `protobuf/` — Protocol Buffers schemas.
 - [x] `openapi/` — OpenAPI 3.1 specifications.
-- [x] `back-end-with-loco-setup` — scaffold script.
+- [x] `back-end-with-axum-setup` — scaffold script.
 - [x] `CHANGELOG.md` and `examples/`.
 - [x] `llms.txt`.
 - [x] `bin/test-examples-conformance cataract-diagnostic-evaluation` passes.
@@ -75,7 +75,7 @@
 - [x] `pnpm check` and `pnpm test` pass; `pnpm build` succeeds
 - [x] `bin/lily-svelte-refactor --check cataract-diagnostic-evaluation` passes
 
-## Back-end with Loco
+## Back-end with Axum
 
 - [x] `cargo loco generate scaffold` for each of the 5 tables (relational,
       per-table, `i64` ids), then upgraded to loco-rs 1.0.1

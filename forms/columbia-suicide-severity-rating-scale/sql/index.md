@@ -24,5 +24,5 @@ classification, and an audit trail of the rules and red-flag issues.
 | 06 | `06_create_table_columbia_suicide_severity_rating_scale_grade_rule.sql` | `columbia_suicide_severity_rating_scale_grade_rule` | audit trail of fired classification rules |
 | 07 | `07_create_table_columbia_suicide_severity_rating_scale_grade_flag.sql` | `columbia_suicide_severity_rating_scale_grade_flag` | red-flag issues with priority and suggested action |
 
-Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Loco
+Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Axum
 setup script) are derived from these migrations and are never hand-edited.

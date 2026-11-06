@@ -1,1 +1,0 @@
-mod architecture_decision_record;

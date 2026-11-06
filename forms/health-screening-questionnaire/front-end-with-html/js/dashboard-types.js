@@ -46,7 +46,7 @@
 /**
  * Response from `GET /api/health_screening_questionnaires`.
  *
- * The Loco back-end returns a bare JSON array of `QuestionnaireRow` objects;
+ * The Axum back-end returns a bare JSON array of `QuestionnaireRow` objects;
  * the dashboard accepts either a bare array or an `{ items, total }` envelope
  * so a future paginated response is forwards-compatible.
  *

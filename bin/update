@@ -33,8 +33,8 @@ update_claude() {
     - AGENTS.md
     - AGENTS/fhir-r5.md
     - AGENTS/front-end-with-sveltekit-tailwind-svar.md
-    - AGENTS/back-end-with-loco.md
-    - AGENTS/back-end-with-loco-setup.md
+    - AGENTS/back-end-with-axum.md
+    - AGENTS/back-end-with-axum-setup.md
     - AGENTS/sql.md
     - AGENTS/xml-representations.md
     - plan.md

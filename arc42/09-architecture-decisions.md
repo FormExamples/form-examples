@@ -18,7 +18,7 @@ their own table with a UUID PK and the timestamp trio.
 XML/FHIR/protobuf/OpenAPI generators project real columns, and the grading
 audit trail is queryable. (+) Every generated representation is meaningful. (−)
 More migrations and entities per form. The reference crate is
-`forms/medical-operation-note/back-end-with-loco/`; single-table JSONB is
+`forms/medical-operation-note/back-end-with-axum/`; single-table JSONB is
 explicitly wrong.
 
 ## ADR-2 — Route layout nesting (snake back-end, kebab Svelte, RESTful plural)
@@ -27,7 +27,7 @@ explicitly wrong.
 layout across stacks.
 
 **Decision.** Nest each stack under a per-form directory.
-- **Back-end:** all crate source under `back-end-with-loco/src/<form_snake_case>/`
+- **Back-end:** all crate source under `back-end-with-axum/src/<form_snake_case>/`
   (crate root keeps `Cargo.toml`, `config/`, `migration/`, `tests/`).
 - **Svelte:** all routes under `src/routes/<form-kebab-case>/`, served at
   `/<slug>/`, with a **RESTful collection** named by the pluralized slug:
@@ -85,3 +85,67 @@ regeneration idempotency (zero drift).
 is free. (+) Drift gates (`bin/*-generate-* --check`, `bin/test-sql-apply`) make
 this executable. (−) A shape change requires editing SQL then regenerating; a
 hand-edit to a generated file is silently overwritten (so it is forbidden).
+
+## ADR-6 — Plain Axum, axa, and sqlx replace Loco and SeaORM
+
+**Context.** Each back-end crate was a Loco application on SeaORM: a large
+dependency tree, YAML configuration, and a migration crate per form. The
+scaffolded crates use little of that framework, and the published `axa` and
+`axa-sqlx` crates cover what they do use.
+
+**Decision.** Each crate is ordinary Axum calling `axa` 0.3, with `axa-sqlx` for
+pooling and migrations. Models hold hand-written SQL run through sqlx. Migrations
+are plain `.up.sql` and `.down.sql` files. Settings come from the environment.
+Authentication, hashing, mail, and seeding stay in each crate's identical
+`support/` module, because axa leaves them to services. This supersedes the
+Loco-specific parts of ADR-2 and ADR-4; the Postgres-only queue stands.
+
+**Consequences.** (+) About 30% fewer transitive dependencies per crate. (+) A
+reviewer reads exactly the SQL that runs. (+) Production refuses to boot without
+`DATABASE_URL`, and refuses to issue tokens without `JWT_SECRET`. (−) Queries are
+checked by the test suite, not at compile time. (−) No generator scaffolds a new
+crate, so a new form starts from a copy of an existing one. (−) The drift checks
+between `sql/` and migrations (`loco-migration-defaults`,
+`loco-migration-nullability`) parsed Rust migrations and were retired with them.
+
+## ADR-7 — No built-in authentication; lists are paged
+
+**Context.** Every crate carried a Loco-era auth scaffold: nine routes, a `users`
+table, mail, and password hashing. No form controller and no front-end used it, so
+it looked like access control while protecting nothing, and it brought in
+`jsonwebtoken`, whose unused RSA and ECDSA code held two accepted advisories. List
+routes returned whole tables, although `openapi.yaml` published `limit` and `offset`.
+
+**Decision.** Remove the scaffold, and leave access control to whoever deploys a
+crate. Page every top-level list with `axa-pagination`, at the published limits.
+Remove the OpenTelemetry and Prometheus dependencies, which no code ever called, so
+the crates export neither metrics nor traces. This supersedes the auth, hashing, and
+mail parts of ADR-6 and the observability part of ADR-2.
+
+**Consequences.** (+) About 100 fewer locked packages per crate, and no accepted
+advisories in `deny.toml`. (+) A list cannot return an unbounded table. (+) The crates
+say plainly that they have no access control. (−) A deployment has to bring its own.
+(−) A client that read a list as complete now gets its first 100 rows, and must
+follow `x-total-count`. (−) A database migrated since ADR-6 has a recorded `users`
+migration that no longer exists, so it needs `db reset`.
+
+## ADR-8 — Errors are RFC 9457 problems
+
+**Context.** A failed request answered in one of three shapes: `axa::Error` wrote
+`{"error", "description"}`, Axum's extractors wrote plain text that quoted the input,
+and an unknown route wrote nothing. `axa` plans to move `Error` to
+`application/problem+json`, and `axa-problem` is published, but `axa` 0.5 does not
+convert yet.
+
+**Decision.** Each crate rewrites failed responses in `support/problem.rs`, built on
+`axa::problem::Problem`. A rewrite on the way out covers every source without
+touching a handler. It runs inside the middleware, ahead of compression, and again
+outside it, for the panics and timeouts the middleware answers. Health routes under
+`/_` keep their own bodies.
+
+**Consequences.** (+) A client handles one error shape, which `openapi.yaml`
+publishes. (+) `axa::Error` keeps logging the real cause, and no input is echoed.
+(−) An extractor refusal no longer says which field failed. (−) The rewrite parses a
+body that `axa::Error` has just written, and should go once `axa` writes problems
+itself. (−) A client reading `error` or `description` from an error body must move to
+`title` and `detail`.

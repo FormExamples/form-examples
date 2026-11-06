@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "d540a2e1-871e-5772-9818-a4eaa96a9469"
+  deletedAt: null
+  ruleId: "Test ruleId"
+  axis: "compliance"
+  category: "Test category"
+  description: "Test description"
+  expenseReimbursementGradeId: "63721472-1f2c-5fdd-900b-6a6f8d1b7602"

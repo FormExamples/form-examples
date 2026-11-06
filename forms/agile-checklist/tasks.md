@@ -45,7 +45,7 @@
 ## Pending
 
 - [ ] Wire Rust full-stack to PostgreSQL via SeaORM / Loco scaffolding
-      (`../back-end-with-loco-setup`)
+      (`../back-end-with-axum-setup`)
 
 - [x] Sister-form linkage with `agile-principles-assessment` —
       `/comparison` route in the SvelteKit dashboard accepts both forms'

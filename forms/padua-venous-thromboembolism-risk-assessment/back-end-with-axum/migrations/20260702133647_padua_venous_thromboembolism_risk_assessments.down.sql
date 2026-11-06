@@ -1,0 +1,1 @@
+DROP TABLE "padua_venous_thromboembolism_risk_assessments";

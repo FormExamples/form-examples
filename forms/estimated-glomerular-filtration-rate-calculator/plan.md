@@ -6,9 +6,9 @@ Implementation roadmap. See [`spec/index.md`](./spec/index.md) for the contract.
 
 All layers built as of 2026-07-02: foundation docs (`index.md`,
 `spec/index.md`, `AGENTS.md`, `plan.md`, `tasks.md`); SQL migrations plus
-generated representations (XML, FHIR R5, protobuf, OpenAPI, Loco setup);
+generated representations (XML, FHIR R5, protobuf, OpenAPI, Axum setup);
 both consolidated front-ends (`front-end-with-html` and
-`front-end-with-svelte`); the Loco JSON-API back-end; and `CHANGELOG.md` +
+`front-end-with-svelte`); the Axum JSON-API back-end; and `CHANGELOG.md` +
 `examples/`.
 
 ## Roadmap
@@ -19,7 +19,7 @@ both consolidated front-ends (`front-end-with-html` and
    `serum_creatinine`, `specimen_date`, `steady_state`, `equation`), timestamps;
    UUIDv4 PK. Source of truth.
 3. **Generated representations** — run the XML, FHIR R5, protobuf, OpenAPI, and
-   Loco setup generators.
+   Axum setup generators.
 4. **Calculation engine** — `types.ts`, `utils.ts`, `egfr-rules.ts`,
    `egfr-calculator.ts`, `flagged-issues.ts` with Vitest tests covering the
    µmol/L → mg/dL conversion, female/male branches, piecewise min/max, every
@@ -27,7 +27,7 @@ both consolidated front-ends (`front-end-with-html` and
 5. **Front-ends** — consolidated `front-end-with-html` (Lily wizard + dashboard)
    and `front-end-with-svelte` (Lily; RESTful `/<plural>/` list + `/<plural>/[id]`
    form).
-6. **Back-end** — `back-end-with-loco` Rust axum + Loco JSON API, relational
+6. **Back-end** — `back-end-with-axum` Rust axum + axa JSON API, relational
    per-table schema.
 7. **Verify** — `bin/test-form estimated-glomerular-filtration-rate-calculator`,
    Lily drift checks, spec / changelog drift checks.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fill stub back-end-with-loco/ AGENTS.md, plan.md, index.md files across all
+"""Fill stub back-end-with-axum/ AGENTS.md, plan.md, index.md files across all
 forms.
 
 Replaces files that contain the placeholder phrase "Not yet implemented." with
@@ -15,7 +15,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 FORMS_DIR = REPO_ROOT / "forms"
-SUBDIR_NAME = "back-end-with-loco"
+SUBDIR_NAME = "back-end-with-axum"
 STUB_PHRASE = "Not yet implemented."
 
 
@@ -80,7 +80,7 @@ def read_form_oneline(form_dir: Path) -> str:
 
 
 def index_md_template(title: str, oneline: str) -> str:
-    return f"""# {title}: Back-end with Rust Axum Loco (JSON API)
+    return f"""# {title}: Back-end with Rust Axum (JSON API)
 
 {oneline}
 
@@ -90,13 +90,13 @@ Pending implementation. Scaffold present (sql, generated setup
 script). Rust crate not yet authored.
 
 See [AGENTS.md](AGENTS.md) for the planned project layout, and the parent
-[AGENTS/back-end-with-loco.md](../../../AGENTS/back-end-with-loco.md)
+[AGENTS/back-end-with-axum.md](../../../AGENTS/back-end-with-axum.md)
 for the canonical back-end JSON API stack, conventions, and route plan.
 """
 
 
 def plan_md_template(title: str) -> str:
-    return f"""# Plan: {title}: Back-end with Rust Axum Loco (JSON API)
+    return f"""# Plan: {title}: Back-end with Rust Axum (JSON API)
 
 ## Current status
 
@@ -105,8 +105,8 @@ script). Rust crate not yet authored.
 
 ## Implementation plan
 
-1. Run the generated `back-end-with-loco-setup` script to scaffold the Loco
-   app and run `cargo loco generate scaffold ... --api` for each table in
+1. Run the generated `back-end-with-axum-setup` script to scaffold the Axum
+   app and run `cargo run -- generate scaffold ... --api` for each table in
    `sql/`.
 2. Author engine types, rules, grader, and flagged-issues mirroring the
    front-end-form-with-svelte engine, with `serde(rename_all = "camelCase")`
@@ -124,11 +124,11 @@ See [AGENTS.md](AGENTS.md) for the planned project structure.
 
 
 def agents_md_template(title: str, oneline: str) -> str:
-    return f"""# {title} -- Back-end with Rust Axum Loco (JSON API)
+    return f"""# {title} -- Back-end with Rust Axum (JSON API)
 
 {oneline}
 
-@../../../AGENTS/back-end-with-loco.md
+@../../../AGENTS/back-end-with-axum.md
 
 ## Status
 
@@ -138,8 +138,8 @@ script). Rust crate not yet authored.
 ## Project structure
 
 See the parent
-[AGENTS/back-end-with-loco.md](../../../AGENTS/back-end-with-loco.md)
-for the canonical Loco crate layout, scoring-engine module conventions,
+[AGENTS/back-end-with-axum.md](../../../AGENTS/back-end-with-axum.md)
+for the canonical Axum crate layout, scoring-engine module conventions,
 and the JSON API route plan. Per-form notes will be added here as the
 Rust implementation progresses.
 """

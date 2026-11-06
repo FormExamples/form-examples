@@ -383,5 +383,5 @@ Manual testing through the browser:
 | CSRF | SvelteKit built-in CSRF protection on form actions |
 | Data in transit | HTTPS required for production |
 | Data at rest | Backend uses PostgreSQL with parameterized queries; no raw SQL |
-| Injection | SeaORM parameterized queries prevent SQL injection; no shell execution |
+| Injection | sqlx parameterized queries prevent SQL injection; no shell execution |
 | Dependency vulnerabilities | Regular `pnpm audit`; minimal dependency tree |

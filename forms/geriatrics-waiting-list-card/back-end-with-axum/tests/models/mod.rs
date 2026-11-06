@@ -1,0 +1,7 @@
+mod geriatrics_waiting_list_card_appointments;
+mod geriatrics_waiting_list_card_grade_flags;
+mod geriatrics_waiting_list_card_grade_rules;
+mod geriatrics_waiting_list_card_grades;
+mod geriatrics_waiting_list_cards;
+mod patients;
+mod practitioners;

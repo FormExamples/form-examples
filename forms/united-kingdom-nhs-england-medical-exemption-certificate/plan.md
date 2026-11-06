@@ -34,9 +34,9 @@ ahead of printing and posting to NHSBSA Bridge House.
 
 ## Phase 4 — Full stack
 
-- [x] `back-end-with-loco-setup` — shell script of
+- [x] `back-end-with-axum-setup` — shell script of
       `cargo loco generate scaffold` calls aligned with the SQL.
-- [x] `back-end-with-loco/` — Rust axum + Loco JSON API crate with a working wizard and grade report.
+- [x] `back-end-with-axum/` — Rust axum + axa JSON API crate with a working wizard and grade report.
 
 ## Phase 5 — Verification
 

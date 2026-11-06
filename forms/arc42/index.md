@@ -62,7 +62,7 @@ arc42/
   front-end-with-html/                         # placeholder (follow-up session)
   front-end-with-html/                    # placeholder
   front-end-with-svelte/                  # placeholder
-  back-end-with-loco/            # placeholder
+  back-end-with-axum/            # placeholder
 ```
 
 ## References

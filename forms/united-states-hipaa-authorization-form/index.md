@@ -140,8 +140,8 @@ united-states-hipaa-authorization-form/
   front-end-with-svelte/                # SvelteKit single-page wizard
   front-end-with-html/             # HTML review table
   front-end-with-svelte/           # SVAR DataGrid review
-  back-end-with-loco/     # Rust axum + Loco JSON API back-end
-  back-end-with-loco-setup  # scaffold generator
+  back-end-with-axum/     # Rust axum + axa + sqlx JSON API back-end
+  back-end-with-axum-setup  # scaffold generator
 ```
 
 ## Patient rights under the HIPAA Privacy Rule

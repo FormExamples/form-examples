@@ -12,7 +12,7 @@ set -uf
 #     test-form pre-operative-assessment-by-clinician
 #
 # Structural checks print "Error: ..." lines and the script exits non-zero
-# if any check failed. The Loco crate's `cargo test` is the only executable
+# if any check failed. The Axum crate's `cargo test` is the only executable
 # gate (it needs the Rust toolchain and a running Postgres).
 
 ## https://github.com/sixarm/unix-shell-script-kit
@@ -65,7 +65,7 @@ ai_planing_exists_or_err() (
     file_size_or_err "$1/spec/index.md"
 )
 
-# Resolve the Loco crate root: either the directory itself (legacy layout
+# Resolve the Axum crate root: either the directory itself (legacy layout
 # with symlinked Cargo.toml) or the single nested <slug_snake>/ crate dir.
 loco_crate_root() (
     set +f  # this subshell needs pathname expansion
@@ -84,12 +84,12 @@ loco_crate_root() (
 
 rust_crate_exists_or_err() (
     directory_exists_or_err "$1"
-    crate="$(loco_crate_root "$1")" || { err "No Loco crate (Cargo.toml) under: $1"; return 0; }
+    crate="$(loco_crate_root "$1")" || { err "No Axum crate (Cargo.toml) under: $1"; return 0; }
     file_size_or_err "$crate/Cargo.toml"
     file_size_or_err "$crate/.gitignore"
     directory_exists_or_err "$crate/src"
     ## Back-end JSON API only — no Tera templates or server-rendered HTML.
-    ## (Loco's src/views/ holds JSON response shapers and is fine.)
+    ## (Axum's src/views/ holds JSON response shapers and is fine.)
     test ! -e "$crate/templates" || err "$crate/templates must not exist (back-end is JSON-only)"
     ! grep -Eq '^[ \t]*tera[ \t]*=' "$crate/Cargo.toml" || err "$crate/Cargo.toml must not depend on tera"
     if find "$crate/src" \( -name '*.tera' -o -name '*.html' \) 2>/dev/null | grep -q .; then
@@ -188,7 +188,7 @@ test_form() {
     test_form_xml "$form_dir"
     test_form_front_end_with_html "$form_dir"
     test_form_front_end_with_svelte "$form_dir"
-    rust_crate_exists_or_err "$form_dir/back-end-with-loco"
+    rust_crate_exists_or_err "$form_dir/back-end-with-axum"
 }
 
 test_dir_via_pnpm() {

@@ -1,0 +1,114 @@
+//! learning_disability_annual_health_checks model.
+
+use serde::{Deserialize, Serialize};
+
+use crate::support::prelude::*;
+
+/// One row.
+#[allow(missing_docs)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize, sqlx::FromRow)]
+#[serde(rename_all = "camelCase")]
+pub struct Model {
+    pub created_at: DateTimeWithTimeZone,
+    pub updated_at: DateTimeWithTimeZone,
+    pub id: Uuid,
+    pub deleted_at: Option<DateTimeWithTimeZone>,
+    pub clinician_name: String,
+    pub clinician_role: String,
+    pub checked_on: Option<Date>,
+    pub practice_name: String,
+    pub easy_read_invitation_sent: String,
+    pub pre_check_done: String,
+    pub person_identifier: String,
+    pub age_band: String,
+    pub sex: String,
+    pub ld_register_status: String,
+    pub main_carer: String,
+    pub communication_needs: String,
+    pub reasonable_adjustments_recorded: String,
+    pub health_passport: String,
+    pub consent_capacity_note: String,
+    pub weight_bmi_status: String,
+    pub bmi: Option<f64>,
+    pub blood_pressure_status: String,
+    pub epilepsy_status: String,
+    pub constipation_status: String,
+    pub dysphagia_status: String,
+    pub continence_status: String,
+    pub mobility_falls_status: String,
+    pub dental_status: String,
+    pub vision_status: String,
+    pub hearing_status: String,
+    pub foot_health_status: String,
+    pub skin_status: String,
+    pub physical_health_actions: String,
+    pub cancer_screening_status: String,
+    pub other_screening_status: String,
+    pub immunisation_status: String,
+    pub medication_reconciled: String,
+    pub psychotropic_prescribed: String,
+    pub psychotropic_indication: String,
+    pub psychotropic_last_reviewed: Option<Date>,
+    pub stomp_discussed: String,
+    pub medication_side_effects: String,
+    pub mental_health_status: String,
+    pub behaviour_status: String,
+    pub behaviour_triggers: String,
+    pub syndrome_specific_status: String,
+    pub carer_needs_status: String,
+    pub social_circumstances: String,
+    pub health_action_plan_produced: String,
+    pub health_action_plan_shared: String,
+    pub health_action_plan_actions: String,
+    pub clinician_note: String,
+    pub patient_id: Uuid,
+    pub clinician_id: Option<Uuid>,
+}
+
+impl Model {
+    /// One page of rows in a stable order, and how many rows there are in all.
+    ///
+    /// # Errors
+    ///
+    /// Propagates the database error.
+    pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Self>, i64)> {
+        let (limit, offset) = crate::support::paging::bounds(page);
+        let rows = sqlx::query_as(
+            "SELECT * FROM learning_disability_annual_health_checks ORDER BY id LIMIT $1 OFFSET $2",
+        )
+        .bind(limit)
+        .bind(offset)
+        .fetch_all(db)
+        .await?;
+        let total =
+            sqlx::query_scalar("SELECT COUNT(*) FROM learning_disability_annual_health_checks")
+                .fetch_one(db)
+                .await?;
+        Ok((rows, total))
+    }
+
+    /// The row with this id, if there is one.
+    ///
+    /// # Errors
+    ///
+    /// Propagates the database error.
+    pub async fn find_by_id(db: &PgPool, id: Uuid) -> sqlx::Result<Option<Self>> {
+        sqlx::query_as("SELECT * FROM learning_disability_annual_health_checks WHERE id = $1")
+            .bind(id)
+            .fetch_optional(db)
+            .await
+    }
+
+    /// Delete the row with this id.
+    ///
+    /// # Errors
+    ///
+    /// Propagates the database error.
+    pub async fn delete(db: &PgPool, id: Uuid) -> sqlx::Result<()> {
+        sqlx::query("DELETE FROM learning_disability_annual_health_checks WHERE id = $1")
+            .bind(id)
+            .execute(db)
+            .await?;
+        Ok(())
+    }
+}

@@ -6,9 +6,9 @@ Implementation roadmap. See [`spec/index.md`](./spec/index.md) for the contract.
 
 All four layers are built (2026-09-10): foundation docs (`index.md`,
 `spec/index.md`, `AGENTS.md`, `plan.md`, `tasks.md`); SQL migrations plus
-generated representations (XML, FHIR R5, protobuf, OpenAPI, Loco setup);
+generated representations (XML, FHIR R5, protobuf, OpenAPI, Axum setup);
 both consolidated front-ends (`front-end-with-html` and
-`front-end-with-svelte`, Lily-clean); and the `back-end-with-loco` Rust
+`front-end-with-svelte`, Lily-clean); and the `back-end-with-axum` Rust
 JSON-API crate. `CHANGELOG.md` and `examples/` are in place.
 `bin/test-form diabetes-podiatry-assessment` passes.
 
@@ -20,7 +20,7 @@ JSON-API crate. `CHANGELOG.md` and `examples/` are in place.
    and the grade / grade_rule / grade_flag trio in `sql/`. UUIDv4 PK. Source
    of truth. ✅
 3. **Generated representations** — run the XML, FHIR R5, protobuf, OpenAPI,
-   and Loco setup generators.
+   and Axum setup generators.
 4. **Classification engine** — `types.ts`, `utils.ts`, `podiatry-rules.ts`,
    `podiatry-grader.ts`, `flagged-issues.ts` with Vitest tests covering every
    risk category boundary, every override (active ulcer, suspected Charcot,
@@ -29,7 +29,7 @@ JSON-API crate. `CHANGELOG.md` and `examples/` are in place.
    dashboard) and `front-end-with-svelte` (Lily; RESTful
    `/diabetes-podiatry-assessments/` list +
    `/diabetes-podiatry-assessments/[id]` form).
-6. **Back-end** — `back-end-with-loco` Rust axum + Loco JSON API, relational
+6. **Back-end** — `back-end-with-axum` Rust axum + axa JSON API, relational
    per-table schema.
 7. **Verify** — `bin/test-form diabetes-podiatry-assessment`, Lily drift
    checks, spec / changelog drift checks.

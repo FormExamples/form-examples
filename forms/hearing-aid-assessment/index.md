@@ -28,7 +28,7 @@ Hearing aid candidacy evaluation using the HHIE-S (Hearing Handicap Inventory fo
 hearing-aid-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

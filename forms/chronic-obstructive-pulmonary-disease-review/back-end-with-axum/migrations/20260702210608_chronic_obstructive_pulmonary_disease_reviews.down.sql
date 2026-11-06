@@ -1,0 +1,1 @@
+DROP TABLE "chronic_obstructive_pulmonary_disease_reviews";

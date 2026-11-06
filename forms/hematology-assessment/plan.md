@@ -23,7 +23,7 @@ neutropenia, deranged coagulation).
 ## Future enhancements
 
 - Build front-end-with-svelte with SVAR DataGrid
-- Build back-end-with-loco Rust backend
+- Build back-end-with-axum Rust backend
 - Add input validation with Zod schemas
 - Add accessibility audit (axe-core)
 - Add end-to-end tests with Playwright

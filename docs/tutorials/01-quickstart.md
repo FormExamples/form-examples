@@ -1,7 +1,7 @@
 # Tutorial 1 — Quickstart: run one form locally
 
 This walkthrough runs a single form, **`apgar-score`**, three ways: its static
-HTML front-end, its SvelteKit front-end, and its Rust + Loco JSON API. By the
+HTML front-end, its SvelteKit front-end, and its Rust + Axum JSON API. By the
 end you will have the questionnaire open in a browser and the API answering
 `curl`.
 
@@ -13,7 +13,7 @@ fully-built form (a five-sign newborn score), so it is a good first target.
 - **Git** and a POSIX shell.
 - **Python 3** (for the static server) — already required by the toolchain.
 - **Node + [pnpm](https://pnpm.io/)** for the Svelte front-end.
-- **Rust** (stable, via [rustup](https://rustup.rs/)) and the Loco CLI for the
+- **Rust** (stable, via [rustup](https://rustup.rs/)) and the Axum CLI for the
   back-end: `cargo install loco`.
 - **PostgreSQL** client + server binaries (`initdb`, `pg_ctl`, `createdb`) for
   the back-end database.
@@ -72,16 +72,16 @@ pnpm run build          # production build
 pnpm exec vitest run    # engine unit tests
 ```
 
-## 3. The Loco JSON API (Rust back-end)
+## 3. The Axum JSON API (Rust back-end)
 
-The back-end is a Rust axum + Loco crate — one crate per form, one table per SQL
+The back-end is a Rust axum + axa + sqlx crate — one crate per form, one table per SQL
 entity. It reads `DATABASE_URL` (default
-`postgres://loco:loco@localhost:5432/apgar_score_test`) and needs a reachable
+`postgres://postgres:postgres@localhost:5432/apgar_score_test`) and needs a reachable
 Postgres.
 
 ### 3a. A throwaway Postgres
 
-If you already run Postgres on `localhost:5432` with a `loco` superuser, skip to
+If you already run Postgres on `localhost:5432` with a `postgres` superuser, skip to
 3b and use the default `DATABASE_URL`. Otherwise spin up a disposable instance
 (the same recipe as `CONTRIBUTING.md`, using a **short** socket directory
 because Unix socket paths are length-limited):
@@ -89,21 +89,21 @@ because Unix socket paths are length-limited):
 ```sh
 export PGDATA="$(mktemp -d)/data"
 export SOCK="$(mktemp -d)"
-initdb -D "$PGDATA" -U loco --auth=trust
+initdb -D "$PGDATA" -U postgres --auth=trust
 pg_ctl -D "$PGDATA" -o "-p 5433 -k $SOCK -c listen_addresses=''" start
-createdb -h "$SOCK" -p 5433 -U loco apgar_score_development
+createdb -h "$SOCK" -p 5433 -U postgres apgar_score_development
 ```
 
 ### 3b. Migrate and start
 
 ```sh
-cd forms/apgar-score/back-end-with-loco
+cd forms/apgar-score/back-end-with-axum
 export DATABASE_URL="postgres://loco@localhost/apgar_score_development?host=$SOCK&port=5433"
-cargo loco db migrate
-cargo loco start
+cargo run -- db migrate
+cargo run -- start
 ```
 
-Loco listens on `localhost:5150`. Controllers mount under the `api/` prefix, so
+Axum listens on `localhost:5150`. Controllers mount under the `api/` prefix, so
 in another shell:
 
 ```sh
@@ -127,7 +127,7 @@ pg_ctl -D "$PGDATA" stop
 ls forms/apgar-score/front-end-with-html/index.html
 ls forms/apgar-score/front-end-with-html/dashboard.html
 ls forms/apgar-score/front-end-with-svelte/package.json
-ls forms/apgar-score/back-end-with-loco/Cargo.toml
+ls forms/apgar-score/back-end-with-axum/Cargo.toml
 # Structural test for the whole form:
 bin/test-form apgar-score
 ```

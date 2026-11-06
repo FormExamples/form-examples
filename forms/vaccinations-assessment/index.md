@@ -32,7 +32,7 @@ Immunization-schedule compliance assessment covering childhood, adult, travel, a
 vaccinations-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

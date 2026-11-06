@@ -27,7 +27,7 @@
 - [x] FHIR R5 JSON generated.
 - [x] Protocol Buffers `.proto` generated.
 - [x] OpenAPI generated.
-- [x] Loco setup script generated.
+- [x] Axum setup script generated.
 
 ## Engine
 - [x] `types.ts`, `cam-rules.ts`, `cam-grader.ts`, `flagged-issues.ts`,
@@ -39,7 +39,7 @@
 - [x] `front-end-with-svelte/` — SvelteKit + Lily wizard + dashboard.
 
 ## Back-end
-- [x] `back-end-with-loco/` — Rust axum + Loco JSON API.
+- [x] `back-end-with-axum/` — Rust axum + axa JSON API.
 
 ## Tests
 - [ ] `bin/test-form confusion-assessment-method` passes (blocked by a

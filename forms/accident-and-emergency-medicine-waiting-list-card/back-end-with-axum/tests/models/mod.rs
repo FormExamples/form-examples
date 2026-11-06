@@ -1,0 +1,7 @@
+mod ae_medicine_waiting_list_card_appointments;
+mod ae_medicine_waiting_list_card_grade_flags;
+mod ae_medicine_waiting_list_card_grade_rules;
+mod ae_medicine_waiting_list_card_grades;
+mod ae_medicine_waiting_list_cards;
+mod patients;
+mod practitioners;

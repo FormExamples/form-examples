@@ -52,7 +52,7 @@ pass** end-to-end (33 form Vitest + 13 dashboard Vitest + 14 Cargo).
 
 ### High priority — REMAINING
 
-- **Full Loco app.** Run the `back-end-with-loco-setup`
+- **Full Loco app.** Run the `back-end-with-axum-setup`
   script to scaffold SeaORM entities and Loco controllers. Replace the
   thin axum server with Loco controllers wrapping the existing scoring
   engine.

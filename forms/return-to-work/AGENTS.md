@@ -31,9 +31,9 @@ table.
 - `./front-end-with-html/` — HTML review table
 - `./front-end-with-svelte/` — SvelteKit SVAR DataGrid review
   dashboard
-- `./back-end-with-loco/` — Rust backend with
+- `./back-end-with-axum/` — Rust backend with
   a JSON API
-- `./back-end-with-loco-new/` — scaffold generator
+- `./back-end-with-axum-new/` — scaffold generator
 
 ## Scoring engine
 
@@ -114,8 +114,8 @@ PDF report and FHIR Bundle.
 ## Backend stack
 
 - Rust edition 2024
-- Loco 0.16 framework on axum 0.8
-- SeaORM 1.1 with PostgreSQL
+- Axum 0.16 framework on axum 0.8
+- sqlx 1.1 with PostgreSQL
 - a JSON API (no server-rendered templates)
 - `serde(rename_all = "camelCase")` for front-end interop
 
