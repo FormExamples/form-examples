@@ -1,5 +1,6 @@
 mod db_commands;
 mod pagination;
+mod problem;
 mod readiness;
 
 pub mod clin_neurophys_waiting_list_card;

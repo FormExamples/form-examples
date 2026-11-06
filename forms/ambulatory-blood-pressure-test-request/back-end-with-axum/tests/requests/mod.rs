@@ -1,5 +1,6 @@
 mod db_commands;
 mod pagination;
+mod problem;
 mod readiness;
 
 pub mod ambulatory_blood_pressure_test_request;

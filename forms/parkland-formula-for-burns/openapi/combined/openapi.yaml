@@ -5,9 +5,9 @@ info:
   title: Parkland Formula for Burns — JSON API
   version: 1.0.0
   description: Combined OpenAPI specification for the Parkland Formula for Burns form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+    per-entity specs in this directory. One RESTful resource per routed SQL table.
 paths:
-  /clinicians:
+  /api/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -25,17 +25,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Clinician records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Clinician'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
       operationId: createClinician
@@ -46,15 +66,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Clinician'
       responses:
-        '201':
+        '200':
           description: The newly created Clinician
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Clinician'
         '400':
-          description: Validation error
-  /clinicians/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -74,6 +104,10 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
       operationId: updateClinician
@@ -92,294 +126,29 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Clinician
+      summary: Delete a Clinician
       operationId: deleteClinician
       responses:
-        '204':
+        '200':
           description: Clinician deleted
         '404':
           description: Clinician not found
-  /parkland-formula-for-burns-grade-flags:
-    get:
-      summary: List ParklandFormulaForBurnsGradeFlag records
-      operationId: listParklandFormulaForBurnsGradeFlag
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of ParklandFormulaForBurnsGradeFlag records
           content:
-            application/json:
+            application/problem+json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ParklandFormulaForBurnsGradeFlag'
-    post:
-      summary: Create a new ParklandFormulaForBurnsGradeFlag
-      operationId: createParklandFormulaForBurnsGradeFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ParklandFormulaForBurnsGradeFlag'
-      responses:
-        '201':
-          description: The newly created ParklandFormulaForBurnsGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ParklandFormulaForBurnsGradeFlag'
-        '400':
-          description: Validation error
-  /parkland-formula-for-burns-grade-flags/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one ParklandFormulaForBurnsGradeFlag by id
-      operationId: getParklandFormulaForBurnsGradeFlag
-      responses:
-        '200':
-          description: The requested ParklandFormulaForBurnsGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ParklandFormulaForBurnsGradeFlag'
-        '404':
-          description: ParklandFormulaForBurnsGradeFlag not found
-    patch:
-      summary: Update an existing ParklandFormulaForBurnsGradeFlag
-      operationId: updateParklandFormulaForBurnsGradeFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ParklandFormulaForBurnsGradeFlag'
-      responses:
-        '200':
-          description: The updated ParklandFormulaForBurnsGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ParklandFormulaForBurnsGradeFlag'
-        '404':
-          description: ParklandFormulaForBurnsGradeFlag not found
-    delete:
-      summary: Soft-delete a ParklandFormulaForBurnsGradeFlag
-      operationId: deleteParklandFormulaForBurnsGradeFlag
-      responses:
-        '204':
-          description: ParklandFormulaForBurnsGradeFlag deleted
-        '404':
-          description: ParklandFormulaForBurnsGradeFlag not found
-  /parkland-formula-for-burns-grade-rules:
-    get:
-      summary: List ParklandFormulaForBurnsGradeRule records
-      operationId: listParklandFormulaForBurnsGradeRule
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of ParklandFormulaForBurnsGradeRule records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ParklandFormulaForBurnsGradeRule'
-    post:
-      summary: Create a new ParklandFormulaForBurnsGradeRule
-      operationId: createParklandFormulaForBurnsGradeRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ParklandFormulaForBurnsGradeRule'
-      responses:
-        '201':
-          description: The newly created ParklandFormulaForBurnsGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ParklandFormulaForBurnsGradeRule'
-        '400':
-          description: Validation error
-  /parkland-formula-for-burns-grade-rules/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one ParklandFormulaForBurnsGradeRule by id
-      operationId: getParklandFormulaForBurnsGradeRule
-      responses:
-        '200':
-          description: The requested ParklandFormulaForBurnsGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ParklandFormulaForBurnsGradeRule'
-        '404':
-          description: ParklandFormulaForBurnsGradeRule not found
-    patch:
-      summary: Update an existing ParklandFormulaForBurnsGradeRule
-      operationId: updateParklandFormulaForBurnsGradeRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ParklandFormulaForBurnsGradeRule'
-      responses:
-        '200':
-          description: The updated ParklandFormulaForBurnsGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ParklandFormulaForBurnsGradeRule'
-        '404':
-          description: ParklandFormulaForBurnsGradeRule not found
-    delete:
-      summary: Soft-delete a ParklandFormulaForBurnsGradeRule
-      operationId: deleteParklandFormulaForBurnsGradeRule
-      responses:
-        '204':
-          description: ParklandFormulaForBurnsGradeRule deleted
-        '404':
-          description: ParklandFormulaForBurnsGradeRule not found
-  /parkland-formula-for-burns-grades:
-    get:
-      summary: List ParklandFormulaForBurnsGrade records
-      operationId: listParklandFormulaForBurnsGrade
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of ParklandFormulaForBurnsGrade records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ParklandFormulaForBurnsGrade'
-    post:
-      summary: Create a new ParklandFormulaForBurnsGrade
-      operationId: createParklandFormulaForBurnsGrade
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ParklandFormulaForBurnsGrade'
-      responses:
-        '201':
-          description: The newly created ParklandFormulaForBurnsGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ParklandFormulaForBurnsGrade'
-        '400':
-          description: Validation error
-  /parkland-formula-for-burns-grades/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one ParklandFormulaForBurnsGrade by id
-      operationId: getParklandFormulaForBurnsGrade
-      responses:
-        '200':
-          description: The requested ParklandFormulaForBurnsGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ParklandFormulaForBurnsGrade'
-        '404':
-          description: ParklandFormulaForBurnsGrade not found
-    patch:
-      summary: Update an existing ParklandFormulaForBurnsGrade
-      operationId: updateParklandFormulaForBurnsGrade
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ParklandFormulaForBurnsGrade'
-      responses:
-        '200':
-          description: The updated ParklandFormulaForBurnsGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ParklandFormulaForBurnsGrade'
-        '404':
-          description: ParklandFormulaForBurnsGrade not found
-    delete:
-      summary: Soft-delete a ParklandFormulaForBurnsGrade
-      operationId: deleteParklandFormulaForBurnsGrade
-      responses:
-        '204':
-          description: ParklandFormulaForBurnsGrade deleted
-        '404':
-          description: ParklandFormulaForBurnsGrade not found
-  /parkland-formula-for-burnses:
+                $ref: '#/components/schemas/Problem'
+  /api/parkland_formula_for_burns:
     get:
       summary: List ParklandFormulaForBurns records
       operationId: listParklandFormulaForBurns
@@ -397,17 +166,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ParklandFormulaForBurns records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ParklandFormulaForBurns'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ParklandFormulaForBurns
       operationId: createParklandFormulaForBurns
@@ -418,15 +207,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ParklandFormulaForBurns'
       responses:
-        '201':
+        '200':
           description: The newly created ParklandFormulaForBurns
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ParklandFormulaForBurns'
         '400':
-          description: Validation error
-  /parkland-formula-for-burnses/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/parkland_formula_for_burns/{id}:
     parameters:
     - name: id
       in: path
@@ -446,6 +245,10 @@ paths:
                 $ref: '#/components/schemas/ParklandFormulaForBurns'
         '404':
           description: ParklandFormulaForBurns not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ParklandFormulaForBurns
       operationId: updateParklandFormulaForBurns
@@ -464,15 +267,452 @@ paths:
                 $ref: '#/components/schemas/ParklandFormulaForBurns'
         '404':
           description: ParklandFormulaForBurns not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ParklandFormulaForBurns
+      summary: Delete a ParklandFormulaForBurns
       operationId: deleteParklandFormulaForBurns
       responses:
-        '204':
+        '200':
           description: ParklandFormulaForBurns deleted
         '404':
           description: ParklandFormulaForBurns not found
-  /patients:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/parkland_formula_for_burns_grade_flags:
+    get:
+      summary: List ParklandFormulaForBurnsGradeFlag records
+      operationId: listParklandFormulaForBurnsGradeFlag
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of ParklandFormulaForBurnsGradeFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ParklandFormulaForBurnsGradeFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new ParklandFormulaForBurnsGradeFlag
+      operationId: createParklandFormulaForBurnsGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParklandFormulaForBurnsGradeFlag'
+      responses:
+        '200':
+          description: The newly created ParklandFormulaForBurnsGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParklandFormulaForBurnsGradeFlag'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/parkland_formula_for_burns_grade_flags/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one ParklandFormulaForBurnsGradeFlag by id
+      operationId: getParklandFormulaForBurnsGradeFlag
+      responses:
+        '200':
+          description: The requested ParklandFormulaForBurnsGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParklandFormulaForBurnsGradeFlag'
+        '404':
+          description: ParklandFormulaForBurnsGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing ParklandFormulaForBurnsGradeFlag
+      operationId: updateParklandFormulaForBurnsGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParklandFormulaForBurnsGradeFlag'
+      responses:
+        '200':
+          description: The updated ParklandFormulaForBurnsGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParklandFormulaForBurnsGradeFlag'
+        '404':
+          description: ParklandFormulaForBurnsGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a ParklandFormulaForBurnsGradeFlag
+      operationId: deleteParklandFormulaForBurnsGradeFlag
+      responses:
+        '200':
+          description: ParklandFormulaForBurnsGradeFlag deleted
+        '404':
+          description: ParklandFormulaForBurnsGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/parkland_formula_for_burns_grade_rules:
+    get:
+      summary: List ParklandFormulaForBurnsGradeRule records
+      operationId: listParklandFormulaForBurnsGradeRule
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of ParklandFormulaForBurnsGradeRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ParklandFormulaForBurnsGradeRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new ParklandFormulaForBurnsGradeRule
+      operationId: createParklandFormulaForBurnsGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParklandFormulaForBurnsGradeRule'
+      responses:
+        '200':
+          description: The newly created ParklandFormulaForBurnsGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParklandFormulaForBurnsGradeRule'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/parkland_formula_for_burns_grade_rules/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one ParklandFormulaForBurnsGradeRule by id
+      operationId: getParklandFormulaForBurnsGradeRule
+      responses:
+        '200':
+          description: The requested ParklandFormulaForBurnsGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParklandFormulaForBurnsGradeRule'
+        '404':
+          description: ParklandFormulaForBurnsGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing ParklandFormulaForBurnsGradeRule
+      operationId: updateParklandFormulaForBurnsGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParklandFormulaForBurnsGradeRule'
+      responses:
+        '200':
+          description: The updated ParklandFormulaForBurnsGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParklandFormulaForBurnsGradeRule'
+        '404':
+          description: ParklandFormulaForBurnsGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a ParklandFormulaForBurnsGradeRule
+      operationId: deleteParklandFormulaForBurnsGradeRule
+      responses:
+        '200':
+          description: ParklandFormulaForBurnsGradeRule deleted
+        '404':
+          description: ParklandFormulaForBurnsGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/parkland_formula_for_burns_grades:
+    get:
+      summary: List ParklandFormulaForBurnsGrade records
+      operationId: listParklandFormulaForBurnsGrade
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of ParklandFormulaForBurnsGrade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ParklandFormulaForBurnsGrade'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new ParklandFormulaForBurnsGrade
+      operationId: createParklandFormulaForBurnsGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParklandFormulaForBurnsGrade'
+      responses:
+        '200':
+          description: The newly created ParklandFormulaForBurnsGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParklandFormulaForBurnsGrade'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/parkland_formula_for_burns_grades/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one ParklandFormulaForBurnsGrade by id
+      operationId: getParklandFormulaForBurnsGrade
+      responses:
+        '200':
+          description: The requested ParklandFormulaForBurnsGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParklandFormulaForBurnsGrade'
+        '404':
+          description: ParklandFormulaForBurnsGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing ParklandFormulaForBurnsGrade
+      operationId: updateParklandFormulaForBurnsGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParklandFormulaForBurnsGrade'
+      responses:
+        '200':
+          description: The updated ParklandFormulaForBurnsGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParklandFormulaForBurnsGrade'
+        '404':
+          description: ParklandFormulaForBurnsGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a ParklandFormulaForBurnsGrade
+      operationId: deleteParklandFormulaForBurnsGrade
+      responses:
+        '200':
+          description: ParklandFormulaForBurnsGrade deleted
+        '404':
+          description: ParklandFormulaForBurnsGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -490,17 +730,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Patient records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Patient'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
       operationId: createPatient
@@ -511,15 +771,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Patient'
       responses:
-        '201':
+        '200':
           description: The newly created Patient
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Patient'
         '400':
-          description: Validation error
-  /patients/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -539,6 +809,10 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
       operationId: updatePatient
@@ -557,14 +831,28 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Patient
+      summary: Delete a Patient
       operationId: deletePatient
       responses:
-        '204':
+        '200':
           description: Patient deleted
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     Clinician:
@@ -1074,3 +1362,26 @@ components:
       - sex
       - allergies_summary
       description: Patient demographic information used by the Parkland-formula burns-resuscitation record.
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+      - type
+      - title
+      - status

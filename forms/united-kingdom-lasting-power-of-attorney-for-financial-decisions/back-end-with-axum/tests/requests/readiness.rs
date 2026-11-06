@@ -2,8 +2,7 @@ use axa::testing::prelude::*;
 use serial_test::serial;
 use united_kingdom_lasting_power_of_attorney_for_financial_decisions::app::App;
 
-/// Without the check added in `App::context`, `/_readiness` would keep
-/// answering 200 with the database gone.
+/// `/_readiness` asks `ctx.db`, so it must fail with the database gone.
 #[tokio::test]
 #[serial]
 async fn readiness_fails_when_the_database_stops_answering() {

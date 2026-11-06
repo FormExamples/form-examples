@@ -5,9 +5,9 @@ info:
   title: 4AT — Rapid Delirium and Cognitive-Impairment Screen — JSON API
   version: 1.0.0
   description: Combined OpenAPI specification for the 4AT — Rapid Delirium and Cognitive-Impairment Screen
-    form, merged from the per-entity specs in this directory. One RESTful resource per SQL table.
+    form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table.
 paths:
-  /clinicians:
+  /api/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -25,17 +25,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Clinician records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Clinician'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
       operationId: createClinician
@@ -46,15 +66,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Clinician'
       responses:
-        '201':
+        '200':
           description: The newly created Clinician
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Clinician'
         '400':
-          description: Validation error
-  /clinicians/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -74,6 +104,10 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
       operationId: updateClinician
@@ -92,15 +126,29 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Clinician
+      summary: Delete a Clinician
       operationId: deleteClinician
       responses:
-        '204':
+        '200':
           description: Clinician deleted
         '404':
           description: Clinician not found
-  /four-a-test-for-delirium-grade-flags:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/four_a_test_for_delirium_grade_flags:
     get:
       summary: List FourATestForDeliriumGradeFlag records
       operationId: listFourATestForDeliriumGradeFlag
@@ -118,17 +166,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of FourATestForDeliriumGradeFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/FourATestForDeliriumGradeFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new FourATestForDeliriumGradeFlag
       operationId: createFourATestForDeliriumGradeFlag
@@ -139,15 +207,25 @@ paths:
             schema:
               $ref: '#/components/schemas/FourATestForDeliriumGradeFlag'
       responses:
-        '201':
+        '200':
           description: The newly created FourATestForDeliriumGradeFlag
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/FourATestForDeliriumGradeFlag'
         '400':
-          description: Validation error
-  /four-a-test-for-delirium-grade-flags/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/four_a_test_for_delirium_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -167,6 +245,10 @@ paths:
                 $ref: '#/components/schemas/FourATestForDeliriumGradeFlag'
         '404':
           description: FourATestForDeliriumGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing FourATestForDeliriumGradeFlag
       operationId: updateFourATestForDeliriumGradeFlag
@@ -185,15 +267,29 @@ paths:
                 $ref: '#/components/schemas/FourATestForDeliriumGradeFlag'
         '404':
           description: FourATestForDeliriumGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a FourATestForDeliriumGradeFlag
+      summary: Delete a FourATestForDeliriumGradeFlag
       operationId: deleteFourATestForDeliriumGradeFlag
       responses:
-        '204':
+        '200':
           description: FourATestForDeliriumGradeFlag deleted
         '404':
           description: FourATestForDeliriumGradeFlag not found
-  /four-a-test-for-delirium-grade-rules:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/four_a_test_for_delirium_grade_rules:
     get:
       summary: List FourATestForDeliriumGradeRule records
       operationId: listFourATestForDeliriumGradeRule
@@ -211,17 +307,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of FourATestForDeliriumGradeRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/FourATestForDeliriumGradeRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new FourATestForDeliriumGradeRule
       operationId: createFourATestForDeliriumGradeRule
@@ -232,15 +348,25 @@ paths:
             schema:
               $ref: '#/components/schemas/FourATestForDeliriumGradeRule'
       responses:
-        '201':
+        '200':
           description: The newly created FourATestForDeliriumGradeRule
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/FourATestForDeliriumGradeRule'
         '400':
-          description: Validation error
-  /four-a-test-for-delirium-grade-rules/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/four_a_test_for_delirium_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -260,6 +386,10 @@ paths:
                 $ref: '#/components/schemas/FourATestForDeliriumGradeRule'
         '404':
           description: FourATestForDeliriumGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing FourATestForDeliriumGradeRule
       operationId: updateFourATestForDeliriumGradeRule
@@ -278,15 +408,29 @@ paths:
                 $ref: '#/components/schemas/FourATestForDeliriumGradeRule'
         '404':
           description: FourATestForDeliriumGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a FourATestForDeliriumGradeRule
+      summary: Delete a FourATestForDeliriumGradeRule
       operationId: deleteFourATestForDeliriumGradeRule
       responses:
-        '204':
+        '200':
           description: FourATestForDeliriumGradeRule deleted
         '404':
           description: FourATestForDeliriumGradeRule not found
-  /four-a-test-for-delirium-grades:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/four_a_test_for_delirium_grades:
     get:
       summary: List FourATestForDeliriumGrade records
       operationId: listFourATestForDeliriumGrade
@@ -304,17 +448,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of FourATestForDeliriumGrade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/FourATestForDeliriumGrade'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new FourATestForDeliriumGrade
       operationId: createFourATestForDeliriumGrade
@@ -325,15 +489,25 @@ paths:
             schema:
               $ref: '#/components/schemas/FourATestForDeliriumGrade'
       responses:
-        '201':
+        '200':
           description: The newly created FourATestForDeliriumGrade
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/FourATestForDeliriumGrade'
         '400':
-          description: Validation error
-  /four-a-test-for-delirium-grades/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/four_a_test_for_delirium_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -353,6 +527,10 @@ paths:
                 $ref: '#/components/schemas/FourATestForDeliriumGrade'
         '404':
           description: FourATestForDeliriumGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing FourATestForDeliriumGrade
       operationId: updateFourATestForDeliriumGrade
@@ -371,15 +549,29 @@ paths:
                 $ref: '#/components/schemas/FourATestForDeliriumGrade'
         '404':
           description: FourATestForDeliriumGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a FourATestForDeliriumGrade
+      summary: Delete a FourATestForDeliriumGrade
       operationId: deleteFourATestForDeliriumGrade
       responses:
-        '204':
+        '200':
           description: FourATestForDeliriumGrade deleted
         '404':
           description: FourATestForDeliriumGrade not found
-  /four-a-test-for-deliriums:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/four_a_test_for_deliriums:
     get:
       summary: List FourATestForDelirium records
       operationId: listFourATestForDelirium
@@ -397,17 +589,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of FourATestForDelirium records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/FourATestForDelirium'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new FourATestForDelirium
       operationId: createFourATestForDelirium
@@ -418,15 +630,25 @@ paths:
             schema:
               $ref: '#/components/schemas/FourATestForDelirium'
       responses:
-        '201':
+        '200':
           description: The newly created FourATestForDelirium
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/FourATestForDelirium'
         '400':
-          description: Validation error
-  /four-a-test-for-deliriums/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/four_a_test_for_deliriums/{id}:
     parameters:
     - name: id
       in: path
@@ -446,6 +668,10 @@ paths:
                 $ref: '#/components/schemas/FourATestForDelirium'
         '404':
           description: FourATestForDelirium not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing FourATestForDelirium
       operationId: updateFourATestForDelirium
@@ -464,15 +690,29 @@ paths:
                 $ref: '#/components/schemas/FourATestForDelirium'
         '404':
           description: FourATestForDelirium not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a FourATestForDelirium
+      summary: Delete a FourATestForDelirium
       operationId: deleteFourATestForDelirium
       responses:
-        '204':
+        '200':
           description: FourATestForDelirium deleted
         '404':
           description: FourATestForDelirium not found
-  /patients:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -490,17 +730,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Patient records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Patient'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
       operationId: createPatient
@@ -511,15 +771,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Patient'
       responses:
-        '201':
+        '200':
           description: The newly created Patient
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Patient'
         '400':
-          description: Validation error
-  /patients/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -539,6 +809,10 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
       operationId: updatePatient
@@ -557,14 +831,28 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Patient
+      summary: Delete a Patient
       operationId: deletePatient
       responses:
-        '204':
+        '200':
           description: Patient deleted
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     Clinician:
@@ -1042,3 +1330,26 @@ components:
       - sex
       - allergies_summary
       description: Patient demographic information used by the 4AT delirium screen record.
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+      - type
+      - title
+      - status

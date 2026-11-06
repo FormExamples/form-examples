@@ -5,9 +5,9 @@ info:
   title: Zarit Burden Interview (ZBI) — JSON API
   version: 1.0.0
   description: Combined OpenAPI specification for the Zarit Burden Interview (ZBI) form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+    per-entity specs in this directory. One RESTful resource per routed SQL table.
 paths:
-  /clinicians:
+  /api/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -25,17 +25,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Clinician records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Clinician'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
       operationId: createClinician
@@ -46,15 +66,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Clinician'
       responses:
-        '201':
+        '200':
           description: The newly created Clinician
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Clinician'
         '400':
-          description: Validation error
-  /clinicians/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -74,6 +104,10 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
       operationId: updateClinician
@@ -92,15 +126,29 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Clinician
+      summary: Delete a Clinician
       operationId: deleteClinician
       responses:
-        '204':
+        '200':
           description: Clinician deleted
         '404':
           description: Clinician not found
-  /patients:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -118,17 +166,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Patient records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Patient'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
       operationId: createPatient
@@ -139,15 +207,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Patient'
       responses:
-        '201':
+        '200':
           description: The newly created Patient
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Patient'
         '400':
-          description: Validation error
-  /patients/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -167,6 +245,10 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
       operationId: updatePatient
@@ -185,15 +267,29 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Patient
+      summary: Delete a Patient
       operationId: deletePatient
       responses:
-        '204':
+        '200':
           description: Patient deleted
         '404':
           description: Patient not found
-  /zarit-burden-interview-grade-flags:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/zarit_burden_interview_grade_flags:
     get:
       summary: List ZaritBurdenInterviewGradeFlag records
       operationId: listZaritBurdenInterviewGradeFlag
@@ -211,17 +307,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ZaritBurdenInterviewGradeFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ZaritBurdenInterviewGradeFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ZaritBurdenInterviewGradeFlag
       operationId: createZaritBurdenInterviewGradeFlag
@@ -232,15 +348,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ZaritBurdenInterviewGradeFlag'
       responses:
-        '201':
+        '200':
           description: The newly created ZaritBurdenInterviewGradeFlag
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ZaritBurdenInterviewGradeFlag'
         '400':
-          description: Validation error
-  /zarit-burden-interview-grade-flags/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/zarit_burden_interview_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -260,6 +386,10 @@ paths:
                 $ref: '#/components/schemas/ZaritBurdenInterviewGradeFlag'
         '404':
           description: ZaritBurdenInterviewGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ZaritBurdenInterviewGradeFlag
       operationId: updateZaritBurdenInterviewGradeFlag
@@ -278,15 +408,29 @@ paths:
                 $ref: '#/components/schemas/ZaritBurdenInterviewGradeFlag'
         '404':
           description: ZaritBurdenInterviewGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ZaritBurdenInterviewGradeFlag
+      summary: Delete a ZaritBurdenInterviewGradeFlag
       operationId: deleteZaritBurdenInterviewGradeFlag
       responses:
-        '204':
+        '200':
           description: ZaritBurdenInterviewGradeFlag deleted
         '404':
           description: ZaritBurdenInterviewGradeFlag not found
-  /zarit-burden-interview-grade-rules:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/zarit_burden_interview_grade_rules:
     get:
       summary: List ZaritBurdenInterviewGradeRule records
       operationId: listZaritBurdenInterviewGradeRule
@@ -304,17 +448,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ZaritBurdenInterviewGradeRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ZaritBurdenInterviewGradeRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ZaritBurdenInterviewGradeRule
       operationId: createZaritBurdenInterviewGradeRule
@@ -325,15 +489,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ZaritBurdenInterviewGradeRule'
       responses:
-        '201':
+        '200':
           description: The newly created ZaritBurdenInterviewGradeRule
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ZaritBurdenInterviewGradeRule'
         '400':
-          description: Validation error
-  /zarit-burden-interview-grade-rules/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/zarit_burden_interview_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -353,6 +527,10 @@ paths:
                 $ref: '#/components/schemas/ZaritBurdenInterviewGradeRule'
         '404':
           description: ZaritBurdenInterviewGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ZaritBurdenInterviewGradeRule
       operationId: updateZaritBurdenInterviewGradeRule
@@ -371,15 +549,29 @@ paths:
                 $ref: '#/components/schemas/ZaritBurdenInterviewGradeRule'
         '404':
           description: ZaritBurdenInterviewGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ZaritBurdenInterviewGradeRule
+      summary: Delete a ZaritBurdenInterviewGradeRule
       operationId: deleteZaritBurdenInterviewGradeRule
       responses:
-        '204':
+        '200':
           description: ZaritBurdenInterviewGradeRule deleted
         '404':
           description: ZaritBurdenInterviewGradeRule not found
-  /zarit-burden-interview-grades:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/zarit_burden_interview_grades:
     get:
       summary: List ZaritBurdenInterviewGrade records
       operationId: listZaritBurdenInterviewGrade
@@ -397,17 +589,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ZaritBurdenInterviewGrade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ZaritBurdenInterviewGrade'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ZaritBurdenInterviewGrade
       operationId: createZaritBurdenInterviewGrade
@@ -418,15 +630,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ZaritBurdenInterviewGrade'
       responses:
-        '201':
+        '200':
           description: The newly created ZaritBurdenInterviewGrade
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ZaritBurdenInterviewGrade'
         '400':
-          description: Validation error
-  /zarit-burden-interview-grades/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/zarit_burden_interview_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -446,6 +668,10 @@ paths:
                 $ref: '#/components/schemas/ZaritBurdenInterviewGrade'
         '404':
           description: ZaritBurdenInterviewGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ZaritBurdenInterviewGrade
       operationId: updateZaritBurdenInterviewGrade
@@ -464,15 +690,29 @@ paths:
                 $ref: '#/components/schemas/ZaritBurdenInterviewGrade'
         '404':
           description: ZaritBurdenInterviewGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ZaritBurdenInterviewGrade
+      summary: Delete a ZaritBurdenInterviewGrade
       operationId: deleteZaritBurdenInterviewGrade
       responses:
-        '204':
+        '200':
           description: ZaritBurdenInterviewGrade deleted
         '404':
           description: ZaritBurdenInterviewGrade not found
-  /zarit-burden-interviews:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/zarit_burden_interviews:
     get:
       summary: List ZaritBurdenInterview records
       operationId: listZaritBurdenInterview
@@ -490,17 +730,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ZaritBurdenInterview records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ZaritBurdenInterview'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ZaritBurdenInterview
       operationId: createZaritBurdenInterview
@@ -511,15 +771,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ZaritBurdenInterview'
       responses:
-        '201':
+        '200':
           description: The newly created ZaritBurdenInterview
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ZaritBurdenInterview'
         '400':
-          description: Validation error
-  /zarit-burden-interviews/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/zarit_burden_interviews/{id}:
     parameters:
     - name: id
       in: path
@@ -539,6 +809,10 @@ paths:
                 $ref: '#/components/schemas/ZaritBurdenInterview'
         '404':
           description: ZaritBurdenInterview not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ZaritBurdenInterview
       operationId: updateZaritBurdenInterview
@@ -557,14 +831,28 @@ paths:
                 $ref: '#/components/schemas/ZaritBurdenInterview'
         '404':
           description: ZaritBurdenInterview not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ZaritBurdenInterview
+      summary: Delete a ZaritBurdenInterview
       operationId: deleteZaritBurdenInterview
       responses:
-        '204':
+        '200':
           description: ZaritBurdenInterview deleted
         '404':
           description: ZaritBurdenInterview not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     Clinician:
@@ -722,6 +1010,29 @@ components:
       - allergies_summary
       description: Patient demographic information for the care recipient assessed by the Zarit Burden
         Interview record.
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+      - type
+      - title
+      - status
     ZaritBurdenInterview:
       type: object
       properties:

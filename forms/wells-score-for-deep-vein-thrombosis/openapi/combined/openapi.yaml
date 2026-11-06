@@ -5,9 +5,9 @@ info:
   title: Wells Score for Deep Vein Thrombosis (DVT) — JSON API
   version: 1.0.0
   description: Combined OpenAPI specification for the Wells Score for Deep Vein Thrombosis (DVT) form,
-    merged from the per-entity specs in this directory. One RESTful resource per SQL table.
+    merged from the per-entity specs in this directory. One RESTful resource per routed SQL table.
 paths:
-  /clinicians:
+  /api/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -25,17 +25,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Clinician records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Clinician'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
       operationId: createClinician
@@ -46,15 +66,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Clinician'
       responses:
-        '201':
+        '200':
           description: The newly created Clinician
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Clinician'
         '400':
-          description: Validation error
-  /clinicians/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -74,6 +104,10 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
       operationId: updateClinician
@@ -92,15 +126,29 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Clinician
+      summary: Delete a Clinician
       operationId: deleteClinician
       responses:
-        '204':
+        '200':
           description: Clinician deleted
         '404':
           description: Clinician not found
-  /patients:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -118,17 +166,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Patient records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Patient'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
       operationId: createPatient
@@ -139,15 +207,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Patient'
       responses:
-        '201':
+        '200':
           description: The newly created Patient
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Patient'
         '400':
-          description: Validation error
-  /patients/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -167,6 +245,10 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
       operationId: updatePatient
@@ -185,15 +267,29 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Patient
+      summary: Delete a Patient
       operationId: deletePatient
       responses:
-        '204':
+        '200':
           description: Patient deleted
         '404':
           description: Patient not found
-  /wells-score-for-deep-vein-thrombosis-grade-flags:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/wells_score_for_deep_vein_thrombosis_grade_flags:
     get:
       summary: List WellsScoreForDeepVeinThrombosisGradeFlag records
       operationId: listWellsScoreForDeepVeinThrombosisGradeFlag
@@ -211,17 +307,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of WellsScoreForDeepVeinThrombosisGradeFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/WellsScoreForDeepVeinThrombosisGradeFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new WellsScoreForDeepVeinThrombosisGradeFlag
       operationId: createWellsScoreForDeepVeinThrombosisGradeFlag
@@ -232,15 +348,25 @@ paths:
             schema:
               $ref: '#/components/schemas/WellsScoreForDeepVeinThrombosisGradeFlag'
       responses:
-        '201':
+        '200':
           description: The newly created WellsScoreForDeepVeinThrombosisGradeFlag
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/WellsScoreForDeepVeinThrombosisGradeFlag'
         '400':
-          description: Validation error
-  /wells-score-for-deep-vein-thrombosis-grade-flags/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/wells_score_for_deep_vein_thrombosis_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -260,6 +386,10 @@ paths:
                 $ref: '#/components/schemas/WellsScoreForDeepVeinThrombosisGradeFlag'
         '404':
           description: WellsScoreForDeepVeinThrombosisGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing WellsScoreForDeepVeinThrombosisGradeFlag
       operationId: updateWellsScoreForDeepVeinThrombosisGradeFlag
@@ -278,15 +408,29 @@ paths:
                 $ref: '#/components/schemas/WellsScoreForDeepVeinThrombosisGradeFlag'
         '404':
           description: WellsScoreForDeepVeinThrombosisGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a WellsScoreForDeepVeinThrombosisGradeFlag
+      summary: Delete a WellsScoreForDeepVeinThrombosisGradeFlag
       operationId: deleteWellsScoreForDeepVeinThrombosisGradeFlag
       responses:
-        '204':
+        '200':
           description: WellsScoreForDeepVeinThrombosisGradeFlag deleted
         '404':
           description: WellsScoreForDeepVeinThrombosisGradeFlag not found
-  /wells-score-for-deep-vein-thrombosis-grade-rules:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/wells_score_for_deep_vein_thrombosis_grade_rules:
     get:
       summary: List WellsScoreForDeepVeinThrombosisGradeRule records
       operationId: listWellsScoreForDeepVeinThrombosisGradeRule
@@ -304,17 +448,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of WellsScoreForDeepVeinThrombosisGradeRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/WellsScoreForDeepVeinThrombosisGradeRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new WellsScoreForDeepVeinThrombosisGradeRule
       operationId: createWellsScoreForDeepVeinThrombosisGradeRule
@@ -325,15 +489,25 @@ paths:
             schema:
               $ref: '#/components/schemas/WellsScoreForDeepVeinThrombosisGradeRule'
       responses:
-        '201':
+        '200':
           description: The newly created WellsScoreForDeepVeinThrombosisGradeRule
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/WellsScoreForDeepVeinThrombosisGradeRule'
         '400':
-          description: Validation error
-  /wells-score-for-deep-vein-thrombosis-grade-rules/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/wells_score_for_deep_vein_thrombosis_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -353,6 +527,10 @@ paths:
                 $ref: '#/components/schemas/WellsScoreForDeepVeinThrombosisGradeRule'
         '404':
           description: WellsScoreForDeepVeinThrombosisGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing WellsScoreForDeepVeinThrombosisGradeRule
       operationId: updateWellsScoreForDeepVeinThrombosisGradeRule
@@ -371,15 +549,29 @@ paths:
                 $ref: '#/components/schemas/WellsScoreForDeepVeinThrombosisGradeRule'
         '404':
           description: WellsScoreForDeepVeinThrombosisGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a WellsScoreForDeepVeinThrombosisGradeRule
+      summary: Delete a WellsScoreForDeepVeinThrombosisGradeRule
       operationId: deleteWellsScoreForDeepVeinThrombosisGradeRule
       responses:
-        '204':
+        '200':
           description: WellsScoreForDeepVeinThrombosisGradeRule deleted
         '404':
           description: WellsScoreForDeepVeinThrombosisGradeRule not found
-  /wells-score-for-deep-vein-thrombosis-grades:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/wells_score_for_deep_vein_thrombosis_grades:
     get:
       summary: List WellsScoreForDeepVeinThrombosisGrade records
       operationId: listWellsScoreForDeepVeinThrombosisGrade
@@ -397,17 +589,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of WellsScoreForDeepVeinThrombosisGrade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/WellsScoreForDeepVeinThrombosisGrade'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new WellsScoreForDeepVeinThrombosisGrade
       operationId: createWellsScoreForDeepVeinThrombosisGrade
@@ -418,15 +630,25 @@ paths:
             schema:
               $ref: '#/components/schemas/WellsScoreForDeepVeinThrombosisGrade'
       responses:
-        '201':
+        '200':
           description: The newly created WellsScoreForDeepVeinThrombosisGrade
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/WellsScoreForDeepVeinThrombosisGrade'
         '400':
-          description: Validation error
-  /wells-score-for-deep-vein-thrombosis-grades/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/wells_score_for_deep_vein_thrombosis_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -446,6 +668,10 @@ paths:
                 $ref: '#/components/schemas/WellsScoreForDeepVeinThrombosisGrade'
         '404':
           description: WellsScoreForDeepVeinThrombosisGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing WellsScoreForDeepVeinThrombosisGrade
       operationId: updateWellsScoreForDeepVeinThrombosisGrade
@@ -464,107 +690,28 @@ paths:
                 $ref: '#/components/schemas/WellsScoreForDeepVeinThrombosisGrade'
         '404':
           description: WellsScoreForDeepVeinThrombosisGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a WellsScoreForDeepVeinThrombosisGrade
+      summary: Delete a WellsScoreForDeepVeinThrombosisGrade
       operationId: deleteWellsScoreForDeepVeinThrombosisGrade
       responses:
-        '204':
+        '200':
           description: WellsScoreForDeepVeinThrombosisGrade deleted
         '404':
           description: WellsScoreForDeepVeinThrombosisGrade not found
-  /wells-score-for-deep-vein-thrombosises:
-    get:
-      summary: List WellsScoreForDeepVeinThrombosis records
-      operationId: listWellsScoreForDeepVeinThrombosis
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of WellsScoreForDeepVeinThrombosis records
           content:
-            application/json:
+            application/problem+json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/WellsScoreForDeepVeinThrombosis'
-    post:
-      summary: Create a new WellsScoreForDeepVeinThrombosis
-      operationId: createWellsScoreForDeepVeinThrombosis
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/WellsScoreForDeepVeinThrombosis'
-      responses:
-        '201':
-          description: The newly created WellsScoreForDeepVeinThrombosis
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/WellsScoreForDeepVeinThrombosis'
-        '400':
-          description: Validation error
-  /wells-score-for-deep-vein-thrombosises/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one WellsScoreForDeepVeinThrombosis by id
-      operationId: getWellsScoreForDeepVeinThrombosis
-      responses:
-        '200':
-          description: The requested WellsScoreForDeepVeinThrombosis
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/WellsScoreForDeepVeinThrombosis'
-        '404':
-          description: WellsScoreForDeepVeinThrombosis not found
-    patch:
-      summary: Update an existing WellsScoreForDeepVeinThrombosis
-      operationId: updateWellsScoreForDeepVeinThrombosis
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/WellsScoreForDeepVeinThrombosis'
-      responses:
-        '200':
-          description: The updated WellsScoreForDeepVeinThrombosis
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/WellsScoreForDeepVeinThrombosis'
-        '404':
-          description: WellsScoreForDeepVeinThrombosis not found
-    delete:
-      summary: Soft-delete a WellsScoreForDeepVeinThrombosis
-      operationId: deleteWellsScoreForDeepVeinThrombosis
-      responses:
-        '204':
-          description: WellsScoreForDeepVeinThrombosis deleted
-        '404':
-          description: WellsScoreForDeepVeinThrombosis not found
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     Clinician:
@@ -718,175 +865,29 @@ components:
       - sex
       - allergies_summary
       description: Patient demographic information used by the Wells DVT assessment record.
-    WellsScoreForDeepVeinThrombosis:
+    Problem:
       type: object
+      description: RFC 9457 problem details
       properties:
-        id:
+        type:
           type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
+          description: A URI identifying the problem type
+        title:
           type: string
-          format: date-time
-          description: Timestamp when the record was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
-        patient_id:
-          type: string
-          format: uuid
-          description: Foreign key to the patient being assessed (restricts delete).
-        clinician_id:
-          type: string
-          format: uuid
-          description: Foreign key to the assessing clinician (restricts delete).
+          description: A short summary of the problem type
         status:
+          type: integer
+          description: The HTTP status code
+        detail:
           type: string
-          enum:
-          - draft
-          - submitted
-          - amended
-          - signed
-          - ''
-          description: 'Workflow status: draft, submitted, amended, or signed.'
-        patient_identifier:
+          description: An explanation of this occurrence
+        instance:
           type: string
-          maxLength: 64
-          description: Local patient identifier as recorded at the point of assessment.
-        assessed_at:
-          type: string
-          format: date-time
-          description: Date and time the assessment was carried out.
-        care_setting:
-          type: string
-          enum:
-          - emergency-department
-          - ambulatory
-          - acute-medical-unit
-          - dvt-clinic
-          - other
-          - ''
-          description: 'Care setting: emergency-department, ambulatory, acute-medical-unit, dvt-clinic,
-            or other.'
-        age_band:
-          type: string
-          enum:
-          - 18-39
-          - 40-64
-          - 65-74
-          - 75-84
-          - 85-plus
-          - ''
-          description: 'Adult age band: 18-39, 40-64, 65-74, 75-84, or 85-plus.'
-        symptomatic_leg:
-          type: string
-          enum:
-          - left
-          - right
-          - ''
-          description: 'Symptomatic leg: left or right.'
-        active_cancer:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: 'Criterion 1 (+1): active cancer, ongoing, within 6 months, or palliative.'
-        paralysis_or_immobilisation:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: 'Criterion 2 (+1): paralysis, paresis, or recent plaster immobilisation of the
-            lower limb.'
-        recently_bedridden_or_surgery:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: 'Criterion 3 (+1): recently bedridden >= 3 days or major surgery within 12 weeks.'
-        localised_tenderness:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: 'Criterion 4 (+1): localised tenderness along the distribution of the deep venous
-            system.'
-        entire_leg_swollen:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: 'Criterion 5 (+1): entire leg swollen.'
-        calf_swelling_over_3cm:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: 'Criterion 6 (+1): calf swelling >= 3 cm compared with the asymptomatic side.'
-        pitting_oedema:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: 'Criterion 7 (+1): pitting oedema confined to the symptomatic leg.'
-        collateral_superficial_veins:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: 'Criterion 8 (+1): collateral (non-varicose) superficial veins.'
-        previously_documented_dvt:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: 'Criterion 9 (+1): previously documented DVT.'
-        alternative_diagnosis_as_likely:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: 'Adjustment (-2): an alternative diagnosis is at least as likely as DVT.'
-        clinical_notes:
-          type: string
-          description: Free-text clinical notes captured alongside the assessment.
+          description: A URI identifying this occurrence
       required:
-      - created_at
-      - updated_at
-      - patient_id
+      - type
+      - title
       - status
-      - patient_identifier
-      - care_setting
-      - age_band
-      - symptomatic_leg
-      - active_cancer
-      - paralysis_or_immobilisation
-      - recently_bedridden_or_surgery
-      - localised_tenderness
-      - entire_leg_swollen
-      - calf_swelling_over_3cm
-      - pitting_oedema
-      - collateral_superficial_veins
-      - previously_documented_dvt
-      - alternative_diagnosis_as_likely
-      - clinical_notes
-      description: 'Main Wells DVT assessment record: identification, context, and the nine clinical criterion
-        inputs plus the alternative-diagnosis adjustment.'
     WellsScoreForDeepVeinThrombosisGrade:
       type: object
       properties:

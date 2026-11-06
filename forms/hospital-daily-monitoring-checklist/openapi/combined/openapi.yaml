@@ -5,9 +5,9 @@ info:
   title: Hospital Daily Monitoring Checklist — JSON API
   version: 1.0.0
   description: Combined OpenAPI specification for the Hospital Daily Monitoring Checklist form, merged
-    from the per-entity specs in this directory. One RESTful resource per SQL table.
+    from the per-entity specs in this directory. One RESTful resource per routed SQL table.
 paths:
-  /hospital-daily-monitoring-checklist-items:
+  /api/hospital_daily_monitoring_checklist_items:
     get:
       summary: List HospitalDailyMonitoringChecklistItem records
       operationId: listHospitalDailyMonitoringChecklistItem
@@ -25,17 +25,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of HospitalDailyMonitoringChecklistItem records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/HospitalDailyMonitoringChecklistItem'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HospitalDailyMonitoringChecklistItem
       operationId: createHospitalDailyMonitoringChecklistItem
@@ -46,15 +66,25 @@ paths:
             schema:
               $ref: '#/components/schemas/HospitalDailyMonitoringChecklistItem'
       responses:
-        '201':
+        '200':
           description: The newly created HospitalDailyMonitoringChecklistItem
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HospitalDailyMonitoringChecklistItem'
         '400':
-          description: Validation error
-  /hospital-daily-monitoring-checklist-items/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/hospital_daily_monitoring_checklist_items/{id}:
     parameters:
     - name: id
       in: path
@@ -74,6 +104,10 @@ paths:
                 $ref: '#/components/schemas/HospitalDailyMonitoringChecklistItem'
         '404':
           description: HospitalDailyMonitoringChecklistItem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HospitalDailyMonitoringChecklistItem
       operationId: updateHospitalDailyMonitoringChecklistItem
@@ -92,15 +126,29 @@ paths:
                 $ref: '#/components/schemas/HospitalDailyMonitoringChecklistItem'
         '404':
           description: HospitalDailyMonitoringChecklistItem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a HospitalDailyMonitoringChecklistItem
+      summary: Delete a HospitalDailyMonitoringChecklistItem
       operationId: deleteHospitalDailyMonitoringChecklistItem
       responses:
-        '204':
+        '200':
           description: HospitalDailyMonitoringChecklistItem deleted
         '404':
           description: HospitalDailyMonitoringChecklistItem not found
-  /hospital-daily-monitoring-checklists:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/hospital_daily_monitoring_checklists:
     get:
       summary: List HospitalDailyMonitoringChecklist records
       operationId: listHospitalDailyMonitoringChecklist
@@ -118,17 +166,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of HospitalDailyMonitoringChecklist records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/HospitalDailyMonitoringChecklist'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HospitalDailyMonitoringChecklist
       operationId: createHospitalDailyMonitoringChecklist
@@ -139,15 +207,25 @@ paths:
             schema:
               $ref: '#/components/schemas/HospitalDailyMonitoringChecklist'
       responses:
-        '201':
+        '200':
           description: The newly created HospitalDailyMonitoringChecklist
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HospitalDailyMonitoringChecklist'
         '400':
-          description: Validation error
-  /hospital-daily-monitoring-checklists/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/hospital_daily_monitoring_checklists/{id}:
     parameters:
     - name: id
       in: path
@@ -167,6 +245,10 @@ paths:
                 $ref: '#/components/schemas/HospitalDailyMonitoringChecklist'
         '404':
           description: HospitalDailyMonitoringChecklist not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HospitalDailyMonitoringChecklist
       operationId: updateHospitalDailyMonitoringChecklist
@@ -185,14 +267,28 @@ paths:
                 $ref: '#/components/schemas/HospitalDailyMonitoringChecklist'
         '404':
           description: HospitalDailyMonitoringChecklist not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a HospitalDailyMonitoringChecklist
+      summary: Delete a HospitalDailyMonitoringChecklist
       operationId: deleteHospitalDailyMonitoringChecklist
       responses:
-        '204':
+        '200':
           description: HospitalDailyMonitoringChecklist deleted
         '404':
           description: HospitalDailyMonitoringChecklist not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     HospitalDailyMonitoringChecklist:
@@ -325,3 +421,26 @@ components:
       - status
       - remarks
       description: One answered checkpoint (of 97) within a daily-monitoring inspection round.
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+      - type
+      - title
+      - status

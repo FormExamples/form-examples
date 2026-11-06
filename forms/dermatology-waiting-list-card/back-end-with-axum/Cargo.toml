@@ -9,16 +9,16 @@ version = "0.1.0"
 edition = "2021"
 rust-version.workspace = true
 publish = false
+description = "Dermatology Waiting List Card back-end JSON API"
 default-run = "dermatology_waiting_list_card-cli"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [workspace.dependencies]
-axa = { version = "0.3", features = ["pagination", "queue", "sqlx"] }
+axa = { version = "0.5", features = ["pagination", "problem", "queue", "sqlx"] }
 
 [dependencies]
 axa = { workspace = true }
-clap = { version = "4", features = ["derive"] }
 serde-saphyr = "2"
 sqlx = { version = "0.9", default-features = false, features = ["chrono", "derive", "json", "macros", "migrate", "postgres", "runtime-tokio", "tls-rustls-ring-webpki", "uuid"] }
 thiserror = "2"

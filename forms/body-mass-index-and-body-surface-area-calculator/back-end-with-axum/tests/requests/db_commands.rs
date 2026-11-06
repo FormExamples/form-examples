@@ -4,7 +4,8 @@ use axa::Environment;
 use body_mass_index_and_body_surface_area_calculator::app::App;
 use serial_test::serial;
 
-/// Nothing but the guard in `App::db` stops these against a live database.
+/// `cli::parse` refuses these on the command line. This is for a call that
+/// reaches `App::db` any other way.
 #[tokio::test]
 #[serial]
 async fn destructive_db_commands_are_refused_in_production() {

@@ -1,5 +1,6 @@
 mod db_commands;
 mod pagination;
+mod problem;
 mod readiness;
 
 pub mod neuropsych_waiting_list_card;

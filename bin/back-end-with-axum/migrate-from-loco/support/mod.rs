@@ -5,6 +5,7 @@
 pub mod model;
 pub mod paging;
 pub mod prelude;
+pub mod problem;
 pub mod seed;
 
 use axa::{AppContext, Result};

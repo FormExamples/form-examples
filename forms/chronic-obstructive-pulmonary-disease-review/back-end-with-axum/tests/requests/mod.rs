@@ -1,5 +1,6 @@
 mod db_commands;
 mod pagination;
+mod problem;
 mod readiness;
 
 pub mod chronic_obstructive_pulmonary_disease_review;

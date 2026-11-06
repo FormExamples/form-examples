@@ -124,11 +124,11 @@ async fn post_with_bad_status_returns_400() {
         assert_eq!(res.status_code(), 400);
         let body: serde_json::Value = res.json();
         assert!(
-            body["description"]
+            body["detail"]
                 .as_str()
                 .unwrap_or("")
                 .contains("provisional"),
-            "expected description to name the rejected value: {body:?}"
+            "expected detail to name the rejected value: {body:?}"
         );
     })
     .await;

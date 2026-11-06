@@ -1,10 +1,13 @@
 #![forbid(unsafe_code)]
 
-use axa::cli::Cli;
 use body_mass_index_and_body_surface_area_calculator::app::App;
-use clap::Parser;
 
 #[tokio::main]
 async fn main() -> axa::Result<()> {
-    App::run(Cli::parse()).await
+    App::run(axa::cli::parse(
+        env!("CARGO_PKG_NAME"),
+        env!("CARGO_PKG_VERSION"),
+        env!("CARGO_PKG_DESCRIPTION"),
+    ))
+    .await
 }

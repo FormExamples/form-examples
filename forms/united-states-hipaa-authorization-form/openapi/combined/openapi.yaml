@@ -5,9 +5,9 @@ info:
   title: United States HIPAA Authorization Form — JSON API
   version: 1.0.0
   description: Combined OpenAPI specification for the United States HIPAA Authorization Form form, merged
-    from the per-entity specs in this directory. One RESTful resource per SQL table.
+    from the per-entity specs in this directory. One RESTful resource per routed SQL table.
 paths:
-  /authorized-recipients:
+  /api/authorized_recipients:
     get:
       summary: List AuthorizedRecipient records
       operationId: listAuthorizedRecipient
@@ -25,17 +25,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of AuthorizedRecipient records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/AuthorizedRecipient'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AuthorizedRecipient
       operationId: createAuthorizedRecipient
@@ -46,15 +66,25 @@ paths:
             schema:
               $ref: '#/components/schemas/AuthorizedRecipient'
       responses:
-        '201':
+        '200':
           description: The newly created AuthorizedRecipient
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthorizedRecipient'
         '400':
-          description: Validation error
-  /authorized-recipients/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/authorized_recipients/{id}:
     parameters:
     - name: id
       in: path
@@ -74,6 +104,10 @@ paths:
                 $ref: '#/components/schemas/AuthorizedRecipient'
         '404':
           description: AuthorizedRecipient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AuthorizedRecipient
       operationId: updateAuthorizedRecipient
@@ -92,15 +126,29 @@ paths:
                 $ref: '#/components/schemas/AuthorizedRecipient'
         '404':
           description: AuthorizedRecipient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a AuthorizedRecipient
+      summary: Delete a AuthorizedRecipient
       operationId: deleteAuthorizedRecipient
       responses:
-        '204':
+        '200':
           description: AuthorizedRecipient deleted
         '404':
           description: AuthorizedRecipient not found
-  /disclosing-sources:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/disclosing_sources:
     get:
       summary: List DisclosingSource records
       operationId: listDisclosingSource
@@ -118,17 +166,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of DisclosingSource records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/DisclosingSource'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new DisclosingSource
       operationId: createDisclosingSource
@@ -139,15 +207,25 @@ paths:
             schema:
               $ref: '#/components/schemas/DisclosingSource'
       responses:
-        '201':
+        '200':
           description: The newly created DisclosingSource
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DisclosingSource'
         '400':
-          description: Validation error
-  /disclosing-sources/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/disclosing_sources/{id}:
     parameters:
     - name: id
       in: path
@@ -167,6 +245,10 @@ paths:
                 $ref: '#/components/schemas/DisclosingSource'
         '404':
           description: DisclosingSource not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing DisclosingSource
       operationId: updateDisclosingSource
@@ -185,15 +267,29 @@ paths:
                 $ref: '#/components/schemas/DisclosingSource'
         '404':
           description: DisclosingSource not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a DisclosingSource
+      summary: Delete a DisclosingSource
       operationId: deleteDisclosingSource
       responses:
-        '204':
+        '200':
           description: DisclosingSource deleted
         '404':
           description: DisclosingSource not found
-  /expirations:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/expirations:
     get:
       summary: List Expiration records
       operationId: listExpiration
@@ -211,17 +307,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Expiration records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Expiration'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Expiration
       operationId: createExpiration
@@ -232,15 +348,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Expiration'
       responses:
-        '201':
+        '200':
           description: The newly created Expiration
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Expiration'
         '400':
-          description: Validation error
-  /expirations/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/expirations/{id}:
     parameters:
     - name: id
       in: path
@@ -260,6 +386,10 @@ paths:
                 $ref: '#/components/schemas/Expiration'
         '404':
           description: Expiration not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Expiration
       operationId: updateExpiration
@@ -278,15 +408,29 @@ paths:
                 $ref: '#/components/schemas/Expiration'
         '404':
           description: Expiration not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Expiration
+      summary: Delete a Expiration
       operationId: deleteExpiration
       responses:
-        '204':
+        '200':
           description: Expiration deleted
         '404':
           description: Expiration not found
-  /hipaa-authorizations:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/hipaa_authorizations:
     get:
       summary: List HipaaAuthorization records
       operationId: listHipaaAuthorization
@@ -304,17 +448,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of HipaaAuthorization records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/HipaaAuthorization'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HipaaAuthorization
       operationId: createHipaaAuthorization
@@ -325,15 +489,25 @@ paths:
             schema:
               $ref: '#/components/schemas/HipaaAuthorization'
       responses:
-        '201':
+        '200':
           description: The newly created HipaaAuthorization
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HipaaAuthorization'
         '400':
-          description: Validation error
-  /hipaa-authorizations/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/hipaa_authorizations/{id}:
     parameters:
     - name: id
       in: path
@@ -353,6 +527,10 @@ paths:
                 $ref: '#/components/schemas/HipaaAuthorization'
         '404':
           description: HipaaAuthorization not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HipaaAuthorization
       operationId: updateHipaaAuthorization
@@ -371,15 +549,29 @@ paths:
                 $ref: '#/components/schemas/HipaaAuthorization'
         '404':
           description: HipaaAuthorization not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a HipaaAuthorization
+      summary: Delete a HipaaAuthorization
       operationId: deleteHipaaAuthorization
       responses:
-        '204':
+        '200':
           description: HipaaAuthorization deleted
         '404':
           description: HipaaAuthorization not found
-  /patient-rights-acknowledgements:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patient_rights_acknowledgements:
     get:
       summary: List PatientRightsAcknowledgement records
       operationId: listPatientRightsAcknowledgement
@@ -397,17 +589,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of PatientRightsAcknowledgement records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/PatientRightsAcknowledgement'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PatientRightsAcknowledgement
       operationId: createPatientRightsAcknowledgement
@@ -418,15 +630,25 @@ paths:
             schema:
               $ref: '#/components/schemas/PatientRightsAcknowledgement'
       responses:
-        '201':
+        '200':
           description: The newly created PatientRightsAcknowledgement
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PatientRightsAcknowledgement'
         '400':
-          description: Validation error
-  /patient-rights-acknowledgements/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patient_rights_acknowledgements/{id}:
     parameters:
     - name: id
       in: path
@@ -446,6 +668,10 @@ paths:
                 $ref: '#/components/schemas/PatientRightsAcknowledgement'
         '404':
           description: PatientRightsAcknowledgement not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PatientRightsAcknowledgement
       operationId: updatePatientRightsAcknowledgement
@@ -464,15 +690,29 @@ paths:
                 $ref: '#/components/schemas/PatientRightsAcknowledgement'
         '404':
           description: PatientRightsAcknowledgement not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a PatientRightsAcknowledgement
+      summary: Delete a PatientRightsAcknowledgement
       operationId: deletePatientRightsAcknowledgement
       responses:
-        '204':
+        '200':
           description: PatientRightsAcknowledgement deleted
         '404':
           description: PatientRightsAcknowledgement not found
-  /patients:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -490,17 +730,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Patient records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Patient'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
       operationId: createPatient
@@ -511,15 +771,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Patient'
       responses:
-        '201':
+        '200':
           description: The newly created Patient
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Patient'
         '400':
-          description: Validation error
-  /patients/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -539,6 +809,10 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
       operationId: updatePatient
@@ -557,15 +831,29 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Patient
+      summary: Delete a Patient
       operationId: deletePatient
       responses:
-        '204':
+        '200':
           description: Patient deleted
         '404':
           description: Patient not found
-  /purpose-of-disclosures:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/purpose_of_disclosures:
     get:
       summary: List PurposeOfDisclosure records
       operationId: listPurposeOfDisclosure
@@ -583,17 +871,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of PurposeOfDisclosure records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/PurposeOfDisclosure'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PurposeOfDisclosure
       operationId: createPurposeOfDisclosure
@@ -604,15 +912,25 @@ paths:
             schema:
               $ref: '#/components/schemas/PurposeOfDisclosure'
       responses:
-        '201':
+        '200':
           description: The newly created PurposeOfDisclosure
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PurposeOfDisclosure'
         '400':
-          description: Validation error
-  /purpose-of-disclosures/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/purpose_of_disclosures/{id}:
     parameters:
     - name: id
       in: path
@@ -632,6 +950,10 @@ paths:
                 $ref: '#/components/schemas/PurposeOfDisclosure'
         '404':
           description: PurposeOfDisclosure not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PurposeOfDisclosure
       operationId: updatePurposeOfDisclosure
@@ -650,15 +972,29 @@ paths:
                 $ref: '#/components/schemas/PurposeOfDisclosure'
         '404':
           description: PurposeOfDisclosure not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a PurposeOfDisclosure
+      summary: Delete a PurposeOfDisclosure
       operationId: deletePurposeOfDisclosure
       responses:
-        '204':
+        '200':
           description: PurposeOfDisclosure deleted
         '404':
           description: PurposeOfDisclosure not found
-  /records-to-discloses:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/records_to_discloses:
     get:
       summary: List RecordsToDisclose records
       operationId: listRecordsToDisclose
@@ -676,17 +1012,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of RecordsToDisclose records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/RecordsToDisclose'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RecordsToDisclose
       operationId: createRecordsToDisclose
@@ -697,15 +1053,25 @@ paths:
             schema:
               $ref: '#/components/schemas/RecordsToDisclose'
       responses:
-        '201':
+        '200':
           description: The newly created RecordsToDisclose
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RecordsToDisclose'
         '400':
-          description: Validation error
-  /records-to-discloses/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/records_to_discloses/{id}:
     parameters:
     - name: id
       in: path
@@ -725,6 +1091,10 @@ paths:
                 $ref: '#/components/schemas/RecordsToDisclose'
         '404':
           description: RecordsToDisclose not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RecordsToDisclose
       operationId: updateRecordsToDisclose
@@ -743,15 +1113,29 @@ paths:
                 $ref: '#/components/schemas/RecordsToDisclose'
         '404':
           description: RecordsToDisclose not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a RecordsToDisclose
+      summary: Delete a RecordsToDisclose
       operationId: deleteRecordsToDisclose
       responses:
-        '204':
+        '200':
           description: RecordsToDisclose deleted
         '404':
           description: RecordsToDisclose not found
-  /signature-witnesses:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/signature_witnesses:
     get:
       summary: List SignatureWitness records
       operationId: listSignatureWitness
@@ -769,17 +1153,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of SignatureWitness records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/SignatureWitness'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new SignatureWitness
       operationId: createSignatureWitness
@@ -790,15 +1194,25 @@ paths:
             schema:
               $ref: '#/components/schemas/SignatureWitness'
       responses:
-        '201':
+        '200':
           description: The newly created SignatureWitness
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/SignatureWitness'
         '400':
-          description: Validation error
-  /signature-witnesses/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/signature_witnesses/{id}:
     parameters:
     - name: id
       in: path
@@ -818,6 +1232,10 @@ paths:
                 $ref: '#/components/schemas/SignatureWitness'
         '404':
           description: SignatureWitness not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing SignatureWitness
       operationId: updateSignatureWitness
@@ -836,15 +1254,29 @@ paths:
                 $ref: '#/components/schemas/SignatureWitness'
         '404':
           description: SignatureWitness not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a SignatureWitness
+      summary: Delete a SignatureWitness
       operationId: deleteSignatureWitness
       responses:
-        '204':
+        '200':
           description: SignatureWitness deleted
         '404':
           description: SignatureWitness not found
-  /signers:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/signers:
     get:
       summary: List Signer records
       operationId: listSigner
@@ -862,17 +1294,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Signer records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Signer'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Signer
       operationId: createSigner
@@ -883,15 +1335,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Signer'
       responses:
-        '201':
+        '200':
           description: The newly created Signer
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Signer'
         '400':
-          description: Validation error
-  /signers/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/signers/{id}:
     parameters:
     - name: id
       in: path
@@ -911,6 +1373,10 @@ paths:
                 $ref: '#/components/schemas/Signer'
         '404':
           description: Signer not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Signer
       operationId: updateSigner
@@ -929,15 +1395,29 @@ paths:
                 $ref: '#/components/schemas/Signer'
         '404':
           description: Signer not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Signer
+      summary: Delete a Signer
       operationId: deleteSigner
       responses:
-        '204':
+        '200':
           description: Signer deleted
         '404':
           description: Signer not found
-  /validation-additional-flags:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/validation_additional_flags:
     get:
       summary: List ValidationAdditionalFlag records
       operationId: listValidationAdditionalFlag
@@ -955,17 +1435,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ValidationAdditionalFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ValidationAdditionalFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ValidationAdditionalFlag
       operationId: createValidationAdditionalFlag
@@ -976,15 +1476,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ValidationAdditionalFlag'
       responses:
-        '201':
+        '200':
           description: The newly created ValidationAdditionalFlag
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationAdditionalFlag'
         '400':
-          description: Validation error
-  /validation-additional-flags/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/validation_additional_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -1004,6 +1514,10 @@ paths:
                 $ref: '#/components/schemas/ValidationAdditionalFlag'
         '404':
           description: ValidationAdditionalFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ValidationAdditionalFlag
       operationId: updateValidationAdditionalFlag
@@ -1022,15 +1536,29 @@ paths:
                 $ref: '#/components/schemas/ValidationAdditionalFlag'
         '404':
           description: ValidationAdditionalFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ValidationAdditionalFlag
+      summary: Delete a ValidationAdditionalFlag
       operationId: deleteValidationAdditionalFlag
       responses:
-        '204':
+        '200':
           description: ValidationAdditionalFlag deleted
         '404':
           description: ValidationAdditionalFlag not found
-  /validation-fired-rules:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/validation_fired_rules:
     get:
       summary: List ValidationFiredRule records
       operationId: listValidationFiredRule
@@ -1048,17 +1576,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ValidationFiredRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ValidationFiredRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ValidationFiredRule
       operationId: createValidationFiredRule
@@ -1069,15 +1617,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ValidationFiredRule'
       responses:
-        '201':
+        '200':
           description: The newly created ValidationFiredRule
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationFiredRule'
         '400':
-          description: Validation error
-  /validation-fired-rules/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/validation_fired_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -1097,6 +1655,10 @@ paths:
                 $ref: '#/components/schemas/ValidationFiredRule'
         '404':
           description: ValidationFiredRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ValidationFiredRule
       operationId: updateValidationFiredRule
@@ -1115,15 +1677,29 @@ paths:
                 $ref: '#/components/schemas/ValidationFiredRule'
         '404':
           description: ValidationFiredRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ValidationFiredRule
+      summary: Delete a ValidationFiredRule
       operationId: deleteValidationFiredRule
       responses:
-        '204':
+        '200':
           description: ValidationFiredRule deleted
         '404':
           description: ValidationFiredRule not found
-  /validation-results:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/validation_results:
     get:
       summary: List ValidationResult records
       operationId: listValidationResult
@@ -1141,17 +1717,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ValidationResult records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ValidationResult'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ValidationResult
       operationId: createValidationResult
@@ -1162,15 +1758,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ValidationResult'
       responses:
-        '201':
+        '200':
           description: The newly created ValidationResult
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationResult'
         '400':
-          description: Validation error
-  /validation-results/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/validation_results/{id}:
     parameters:
     - name: id
       in: path
@@ -1190,6 +1796,10 @@ paths:
                 $ref: '#/components/schemas/ValidationResult'
         '404':
           description: ValidationResult not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ValidationResult
       operationId: updateValidationResult
@@ -1208,14 +1818,28 @@ paths:
                 $ref: '#/components/schemas/ValidationResult'
         '404':
           description: ValidationResult not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ValidationResult
+      summary: Delete a ValidationResult
       operationId: deleteValidationResult
       responses:
-        '204':
+        '200':
           description: ValidationResult deleted
         '404':
           description: ValidationResult not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     AuthorizedRecipient:
@@ -1629,6 +2253,29 @@ components:
       - acknowledged_right_to_inspect_disclosed
       description: Patient acknowledgement of HIPAA-required statements. One-to-one child of hipaa_authorization.
         Required by 45 CFR § 164.508(c)(2).
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+      - type
+      - title
+      - status
     PurposeOfDisclosure:
       type: object
       properties:

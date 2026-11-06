@@ -4,7 +4,8 @@ use axa::Environment;
 use serial_test::serial;
 use tropical_medicine_waiting_list_card::app::App;
 
-/// Nothing but the guard in `App::db` stops these against a live database.
+/// `cli::parse` refuses these on the command line. This is for a call that
+/// reaches `App::db` any other way.
 #[tokio::test]
 #[serial]
 async fn destructive_db_commands_are_refused_in_production() {

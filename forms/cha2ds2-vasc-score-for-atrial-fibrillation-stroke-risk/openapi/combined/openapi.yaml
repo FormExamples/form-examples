@@ -5,9 +5,10 @@ info:
   title: CHA2DS2-VASc Score for Atrial Fibrillation Stroke Risk — JSON API
   version: 1.0.0
   description: Combined OpenAPI specification for the CHA2DS2-VASc Score for Atrial Fibrillation Stroke
-    Risk form, merged from the per-entity specs in this directory. One RESTful resource per SQL table.
+    Risk form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL
+    table.
 paths:
-  /cha2ds2-vasc-grade-flags:
+  /api/cha2ds2_vasc_grade_flags:
     get:
       summary: List Cha2ds2VascGradeFlag records
       operationId: listCha2ds2VascGradeFlag
@@ -25,17 +26,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Cha2ds2VascGradeFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Cha2ds2VascGradeFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Cha2ds2VascGradeFlag
       operationId: createCha2ds2VascGradeFlag
@@ -46,15 +67,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Cha2ds2VascGradeFlag'
       responses:
-        '201':
+        '200':
           description: The newly created Cha2ds2VascGradeFlag
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Cha2ds2VascGradeFlag'
         '400':
-          description: Validation error
-  /cha2ds2-vasc-grade-flags/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/cha2ds2_vasc_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -74,6 +105,10 @@ paths:
                 $ref: '#/components/schemas/Cha2ds2VascGradeFlag'
         '404':
           description: Cha2ds2VascGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Cha2ds2VascGradeFlag
       operationId: updateCha2ds2VascGradeFlag
@@ -92,15 +127,29 @@ paths:
                 $ref: '#/components/schemas/Cha2ds2VascGradeFlag'
         '404':
           description: Cha2ds2VascGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Cha2ds2VascGradeFlag
+      summary: Delete a Cha2ds2VascGradeFlag
       operationId: deleteCha2ds2VascGradeFlag
       responses:
-        '204':
+        '200':
           description: Cha2ds2VascGradeFlag deleted
         '404':
           description: Cha2ds2VascGradeFlag not found
-  /cha2ds2-vasc-grade-rules:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/cha2ds2_vasc_grade_rules:
     get:
       summary: List Cha2ds2VascGradeRule records
       operationId: listCha2ds2VascGradeRule
@@ -118,17 +167,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Cha2ds2VascGradeRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Cha2ds2VascGradeRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Cha2ds2VascGradeRule
       operationId: createCha2ds2VascGradeRule
@@ -139,15 +208,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Cha2ds2VascGradeRule'
       responses:
-        '201':
+        '200':
           description: The newly created Cha2ds2VascGradeRule
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Cha2ds2VascGradeRule'
         '400':
-          description: Validation error
-  /cha2ds2-vasc-grade-rules/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/cha2ds2_vasc_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -167,6 +246,10 @@ paths:
                 $ref: '#/components/schemas/Cha2ds2VascGradeRule'
         '404':
           description: Cha2ds2VascGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Cha2ds2VascGradeRule
       operationId: updateCha2ds2VascGradeRule
@@ -185,15 +268,29 @@ paths:
                 $ref: '#/components/schemas/Cha2ds2VascGradeRule'
         '404':
           description: Cha2ds2VascGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Cha2ds2VascGradeRule
+      summary: Delete a Cha2ds2VascGradeRule
       operationId: deleteCha2ds2VascGradeRule
       responses:
-        '204':
+        '200':
           description: Cha2ds2VascGradeRule deleted
         '404':
           description: Cha2ds2VascGradeRule not found
-  /cha2ds2-vasc-grades:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/cha2ds2_vasc_grades:
     get:
       summary: List Cha2ds2VascGrade records
       operationId: listCha2ds2VascGrade
@@ -211,17 +308,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Cha2ds2VascGrade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Cha2ds2VascGrade'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Cha2ds2VascGrade
       operationId: createCha2ds2VascGrade
@@ -232,15 +349,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Cha2ds2VascGrade'
       responses:
-        '201':
+        '200':
           description: The newly created Cha2ds2VascGrade
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Cha2ds2VascGrade'
         '400':
-          description: Validation error
-  /cha2ds2-vasc-grades/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/cha2ds2_vasc_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -260,6 +387,10 @@ paths:
                 $ref: '#/components/schemas/Cha2ds2VascGrade'
         '404':
           description: Cha2ds2VascGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Cha2ds2VascGrade
       operationId: updateCha2ds2VascGrade
@@ -278,15 +409,29 @@ paths:
                 $ref: '#/components/schemas/Cha2ds2VascGrade'
         '404':
           description: Cha2ds2VascGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Cha2ds2VascGrade
+      summary: Delete a Cha2ds2VascGrade
       operationId: deleteCha2ds2VascGrade
       responses:
-        '204':
+        '200':
           description: Cha2ds2VascGrade deleted
         '404':
           description: Cha2ds2VascGrade not found
-  /cha2ds2-vascs:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/cha2ds2_vascs:
     get:
       summary: List Cha2ds2Vasc records
       operationId: listCha2ds2Vasc
@@ -304,17 +449,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Cha2ds2Vasc records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Cha2ds2Vasc'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Cha2ds2Vasc
       operationId: createCha2ds2Vasc
@@ -325,15 +490,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Cha2ds2Vasc'
       responses:
-        '201':
+        '200':
           description: The newly created Cha2ds2Vasc
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Cha2ds2Vasc'
         '400':
-          description: Validation error
-  /cha2ds2-vascs/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/cha2ds2_vascs/{id}:
     parameters:
     - name: id
       in: path
@@ -353,6 +528,10 @@ paths:
                 $ref: '#/components/schemas/Cha2ds2Vasc'
         '404':
           description: Cha2ds2Vasc not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Cha2ds2Vasc
       operationId: updateCha2ds2Vasc
@@ -371,15 +550,29 @@ paths:
                 $ref: '#/components/schemas/Cha2ds2Vasc'
         '404':
           description: Cha2ds2Vasc not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Cha2ds2Vasc
+      summary: Delete a Cha2ds2Vasc
       operationId: deleteCha2ds2Vasc
       responses:
-        '204':
+        '200':
           description: Cha2ds2Vasc deleted
         '404':
           description: Cha2ds2Vasc not found
-  /clinicians:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -397,17 +590,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Clinician records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Clinician'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
       operationId: createClinician
@@ -418,15 +631,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Clinician'
       responses:
-        '201':
+        '200':
           description: The newly created Clinician
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Clinician'
         '400':
-          description: Validation error
-  /clinicians/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -446,6 +669,10 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
       operationId: updateClinician
@@ -464,15 +691,29 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Clinician
+      summary: Delete a Clinician
       operationId: deleteClinician
       responses:
-        '204':
+        '200':
           description: Clinician deleted
         '404':
           description: Clinician not found
-  /patients:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -490,17 +731,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Patient records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Patient'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
       operationId: createPatient
@@ -511,15 +772,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Patient'
       responses:
-        '201':
+        '200':
           description: The newly created Patient
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Patient'
         '400':
-          description: Validation error
-  /patients/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -539,6 +810,10 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
       operationId: updatePatient
@@ -557,14 +832,28 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Patient
+      summary: Delete a Patient
       operationId: deletePatient
       responses:
-        '204':
+        '200':
           description: Patient deleted
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     Cha2ds2Vasc:
@@ -1077,3 +1366,26 @@ components:
       - sex
       - allergies_summary
       description: Patient demographic information used by the CHA2DS2-VASc assessment record.
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+      - type
+      - title
+      - status

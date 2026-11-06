@@ -5,9 +5,9 @@ info:
   title: Obstetrics and Gynaecology Waiting List Card — JSON API
   version: 1.0.0
   description: Combined OpenAPI specification for the Obstetrics and Gynaecology Waiting List Card form,
-    merged from the per-entity specs in this directory. One RESTful resource per SQL table.
+    merged from the per-entity specs in this directory. One RESTful resource per routed SQL table.
 paths:
-  /obgyn-waiting-list-card-appointments:
+  /api/obgyn_waiting_list_card_appointments:
     get:
       summary: List ObgynWaitingListCardAppointment records
       operationId: listObgynWaitingListCardAppointment
@@ -25,17 +25,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ObgynWaitingListCardAppointment records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ObgynWaitingListCardAppointment'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ObgynWaitingListCardAppointment
       operationId: createObgynWaitingListCardAppointment
@@ -46,15 +66,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ObgynWaitingListCardAppointment'
       responses:
-        '201':
+        '200':
           description: The newly created ObgynWaitingListCardAppointment
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObgynWaitingListCardAppointment'
         '400':
-          description: Validation error
-  /obgyn-waiting-list-card-appointments/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/obgyn_waiting_list_card_appointments/{id}:
     parameters:
     - name: id
       in: path
@@ -74,6 +104,10 @@ paths:
                 $ref: '#/components/schemas/ObgynWaitingListCardAppointment'
         '404':
           description: ObgynWaitingListCardAppointment not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ObgynWaitingListCardAppointment
       operationId: updateObgynWaitingListCardAppointment
@@ -92,15 +126,29 @@ paths:
                 $ref: '#/components/schemas/ObgynWaitingListCardAppointment'
         '404':
           description: ObgynWaitingListCardAppointment not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ObgynWaitingListCardAppointment
+      summary: Delete a ObgynWaitingListCardAppointment
       operationId: deleteObgynWaitingListCardAppointment
       responses:
-        '204':
+        '200':
           description: ObgynWaitingListCardAppointment deleted
         '404':
           description: ObgynWaitingListCardAppointment not found
-  /obgyn-waiting-list-card-grade-flags:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/obgyn_waiting_list_card_grade_flags:
     get:
       summary: List ObgynWaitingListCardGradeFlag records
       operationId: listObgynWaitingListCardGradeFlag
@@ -118,17 +166,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ObgynWaitingListCardGradeFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ObgynWaitingListCardGradeFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ObgynWaitingListCardGradeFlag
       operationId: createObgynWaitingListCardGradeFlag
@@ -139,15 +207,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ObgynWaitingListCardGradeFlag'
       responses:
-        '201':
+        '200':
           description: The newly created ObgynWaitingListCardGradeFlag
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObgynWaitingListCardGradeFlag'
         '400':
-          description: Validation error
-  /obgyn-waiting-list-card-grade-flags/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/obgyn_waiting_list_card_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -167,6 +245,10 @@ paths:
                 $ref: '#/components/schemas/ObgynWaitingListCardGradeFlag'
         '404':
           description: ObgynWaitingListCardGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ObgynWaitingListCardGradeFlag
       operationId: updateObgynWaitingListCardGradeFlag
@@ -185,15 +267,29 @@ paths:
                 $ref: '#/components/schemas/ObgynWaitingListCardGradeFlag'
         '404':
           description: ObgynWaitingListCardGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ObgynWaitingListCardGradeFlag
+      summary: Delete a ObgynWaitingListCardGradeFlag
       operationId: deleteObgynWaitingListCardGradeFlag
       responses:
-        '204':
+        '200':
           description: ObgynWaitingListCardGradeFlag deleted
         '404':
           description: ObgynWaitingListCardGradeFlag not found
-  /obgyn-waiting-list-card-grade-rules:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/obgyn_waiting_list_card_grade_rules:
     get:
       summary: List ObgynWaitingListCardGradeRule records
       operationId: listObgynWaitingListCardGradeRule
@@ -211,17 +307,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ObgynWaitingListCardGradeRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ObgynWaitingListCardGradeRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ObgynWaitingListCardGradeRule
       operationId: createObgynWaitingListCardGradeRule
@@ -232,15 +348,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ObgynWaitingListCardGradeRule'
       responses:
-        '201':
+        '200':
           description: The newly created ObgynWaitingListCardGradeRule
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObgynWaitingListCardGradeRule'
         '400':
-          description: Validation error
-  /obgyn-waiting-list-card-grade-rules/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/obgyn_waiting_list_card_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -260,6 +386,10 @@ paths:
                 $ref: '#/components/schemas/ObgynWaitingListCardGradeRule'
         '404':
           description: ObgynWaitingListCardGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ObgynWaitingListCardGradeRule
       operationId: updateObgynWaitingListCardGradeRule
@@ -278,15 +408,29 @@ paths:
                 $ref: '#/components/schemas/ObgynWaitingListCardGradeRule'
         '404':
           description: ObgynWaitingListCardGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ObgynWaitingListCardGradeRule
+      summary: Delete a ObgynWaitingListCardGradeRule
       operationId: deleteObgynWaitingListCardGradeRule
       responses:
-        '204':
+        '200':
           description: ObgynWaitingListCardGradeRule deleted
         '404':
           description: ObgynWaitingListCardGradeRule not found
-  /obgyn-waiting-list-card-grades:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/obgyn_waiting_list_card_grades:
     get:
       summary: List ObgynWaitingListCardGrade records
       operationId: listObgynWaitingListCardGrade
@@ -304,17 +448,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ObgynWaitingListCardGrade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ObgynWaitingListCardGrade'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ObgynWaitingListCardGrade
       operationId: createObgynWaitingListCardGrade
@@ -325,15 +489,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ObgynWaitingListCardGrade'
       responses:
-        '201':
+        '200':
           description: The newly created ObgynWaitingListCardGrade
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObgynWaitingListCardGrade'
         '400':
-          description: Validation error
-  /obgyn-waiting-list-card-grades/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/obgyn_waiting_list_card_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -353,6 +527,10 @@ paths:
                 $ref: '#/components/schemas/ObgynWaitingListCardGrade'
         '404':
           description: ObgynWaitingListCardGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ObgynWaitingListCardGrade
       operationId: updateObgynWaitingListCardGrade
@@ -371,15 +549,29 @@ paths:
                 $ref: '#/components/schemas/ObgynWaitingListCardGrade'
         '404':
           description: ObgynWaitingListCardGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ObgynWaitingListCardGrade
+      summary: Delete a ObgynWaitingListCardGrade
       operationId: deleteObgynWaitingListCardGrade
       responses:
-        '204':
+        '200':
           description: ObgynWaitingListCardGrade deleted
         '404':
           description: ObgynWaitingListCardGrade not found
-  /obgyn-waiting-list-cards:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/obgyn_waiting_list_cards:
     get:
       summary: List ObgynWaitingListCard records
       operationId: listObgynWaitingListCard
@@ -397,17 +589,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ObgynWaitingListCard records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ObgynWaitingListCard'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ObgynWaitingListCard
       operationId: createObgynWaitingListCard
@@ -418,15 +630,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ObgynWaitingListCard'
       responses:
-        '201':
+        '200':
           description: The newly created ObgynWaitingListCard
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObgynWaitingListCard'
         '400':
-          description: Validation error
-  /obgyn-waiting-list-cards/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/obgyn_waiting_list_cards/{id}:
     parameters:
     - name: id
       in: path
@@ -446,6 +668,10 @@ paths:
                 $ref: '#/components/schemas/ObgynWaitingListCard'
         '404':
           description: ObgynWaitingListCard not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ObgynWaitingListCard
       operationId: updateObgynWaitingListCard
@@ -464,15 +690,29 @@ paths:
                 $ref: '#/components/schemas/ObgynWaitingListCard'
         '404':
           description: ObgynWaitingListCard not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ObgynWaitingListCard
+      summary: Delete a ObgynWaitingListCard
       operationId: deleteObgynWaitingListCard
       responses:
-        '204':
+        '200':
           description: ObgynWaitingListCard deleted
         '404':
           description: ObgynWaitingListCard not found
-  /patients:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -490,17 +730,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Patient records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Patient'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
       operationId: createPatient
@@ -511,15 +771,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Patient'
       responses:
-        '201':
+        '200':
           description: The newly created Patient
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Patient'
         '400':
-          description: Validation error
-  /patients/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -539,6 +809,10 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
       operationId: updatePatient
@@ -557,15 +831,29 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Patient
+      summary: Delete a Patient
       operationId: deletePatient
       responses:
-        '204':
+        '200':
           description: Patient deleted
         '404':
           description: Patient not found
-  /practitioners:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/practitioners:
     get:
       summary: List Practitioner records
       operationId: listPractitioner
@@ -583,17 +871,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Practitioner records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Practitioner'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
       operationId: createPractitioner
@@ -604,15 +912,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Practitioner'
       responses:
-        '201':
+        '200':
           description: The newly created Practitioner
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Practitioner'
         '400':
-          description: Validation error
-  /practitioners/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/practitioners/{id}:
     parameters:
     - name: id
       in: path
@@ -632,6 +950,10 @@ paths:
                 $ref: '#/components/schemas/Practitioner'
         '404':
           description: Practitioner not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
       operationId: updatePractitioner
@@ -650,14 +972,28 @@ paths:
                 $ref: '#/components/schemas/Practitioner'
         '404':
           description: Practitioner not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Practitioner
+      summary: Delete a Practitioner
       operationId: deletePractitioner
       responses:
-        '204':
+        '200':
           description: Practitioner deleted
         '404':
           description: Practitioner not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     ObgynWaitingListCard:
@@ -1337,3 +1673,26 @@ components:
       - site_name
       description: Practitioner who completes a obstetrics and gynaecology waiting list card on behalf
         of the patient.
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+      - type
+      - title
+      - status

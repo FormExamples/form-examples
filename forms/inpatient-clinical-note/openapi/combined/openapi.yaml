@@ -5,9 +5,9 @@ info:
   title: Inpatient Clinical Note — JSON API
   version: 1.0.0
   description: Combined OpenAPI specification for the Inpatient Clinical Note form, merged from the per-entity
-    specs in this directory. One RESTful resource per SQL table.
+    specs in this directory. One RESTful resource per routed SQL table.
 paths:
-  /clinicians:
+  /api/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -25,17 +25,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Clinician records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Clinician'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
       operationId: createClinician
@@ -46,15 +66,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Clinician'
       responses:
-        '201':
+        '200':
           description: The newly created Clinician
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Clinician'
         '400':
-          description: Validation error
-  /clinicians/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -74,6 +104,10 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
       operationId: updateClinician
@@ -92,15 +126,29 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Clinician
+      summary: Delete a Clinician
       operationId: deleteClinician
       responses:
-        '204':
+        '200':
           description: Clinician deleted
         '404':
           description: Clinician not found
-  /inpatient-clinical-note-grade-flags:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/inpatient_clinical_note_grade_flags:
     get:
       summary: List InpatientClinicalNoteGradeFlag records
       operationId: listInpatientClinicalNoteGradeFlag
@@ -118,17 +166,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of InpatientClinicalNoteGradeFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/InpatientClinicalNoteGradeFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InpatientClinicalNoteGradeFlag
       operationId: createInpatientClinicalNoteGradeFlag
@@ -139,15 +207,25 @@ paths:
             schema:
               $ref: '#/components/schemas/InpatientClinicalNoteGradeFlag'
       responses:
-        '201':
+        '200':
           description: The newly created InpatientClinicalNoteGradeFlag
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InpatientClinicalNoteGradeFlag'
         '400':
-          description: Validation error
-  /inpatient-clinical-note-grade-flags/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/inpatient_clinical_note_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -167,6 +245,10 @@ paths:
                 $ref: '#/components/schemas/InpatientClinicalNoteGradeFlag'
         '404':
           description: InpatientClinicalNoteGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InpatientClinicalNoteGradeFlag
       operationId: updateInpatientClinicalNoteGradeFlag
@@ -185,15 +267,29 @@ paths:
                 $ref: '#/components/schemas/InpatientClinicalNoteGradeFlag'
         '404':
           description: InpatientClinicalNoteGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a InpatientClinicalNoteGradeFlag
+      summary: Delete a InpatientClinicalNoteGradeFlag
       operationId: deleteInpatientClinicalNoteGradeFlag
       responses:
-        '204':
+        '200':
           description: InpatientClinicalNoteGradeFlag deleted
         '404':
           description: InpatientClinicalNoteGradeFlag not found
-  /inpatient-clinical-note-grade-rules:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/inpatient_clinical_note_grade_rules:
     get:
       summary: List InpatientClinicalNoteGradeRule records
       operationId: listInpatientClinicalNoteGradeRule
@@ -211,17 +307,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of InpatientClinicalNoteGradeRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/InpatientClinicalNoteGradeRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InpatientClinicalNoteGradeRule
       operationId: createInpatientClinicalNoteGradeRule
@@ -232,15 +348,25 @@ paths:
             schema:
               $ref: '#/components/schemas/InpatientClinicalNoteGradeRule'
       responses:
-        '201':
+        '200':
           description: The newly created InpatientClinicalNoteGradeRule
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InpatientClinicalNoteGradeRule'
         '400':
-          description: Validation error
-  /inpatient-clinical-note-grade-rules/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/inpatient_clinical_note_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -260,6 +386,10 @@ paths:
                 $ref: '#/components/schemas/InpatientClinicalNoteGradeRule'
         '404':
           description: InpatientClinicalNoteGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InpatientClinicalNoteGradeRule
       operationId: updateInpatientClinicalNoteGradeRule
@@ -278,15 +408,29 @@ paths:
                 $ref: '#/components/schemas/InpatientClinicalNoteGradeRule'
         '404':
           description: InpatientClinicalNoteGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a InpatientClinicalNoteGradeRule
+      summary: Delete a InpatientClinicalNoteGradeRule
       operationId: deleteInpatientClinicalNoteGradeRule
       responses:
-        '204':
+        '200':
           description: InpatientClinicalNoteGradeRule deleted
         '404':
           description: InpatientClinicalNoteGradeRule not found
-  /inpatient-clinical-note-grades:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/inpatient_clinical_note_grades:
     get:
       summary: List InpatientClinicalNoteGrade records
       operationId: listInpatientClinicalNoteGrade
@@ -304,17 +448,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of InpatientClinicalNoteGrade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/InpatientClinicalNoteGrade'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InpatientClinicalNoteGrade
       operationId: createInpatientClinicalNoteGrade
@@ -325,15 +489,25 @@ paths:
             schema:
               $ref: '#/components/schemas/InpatientClinicalNoteGrade'
       responses:
-        '201':
+        '200':
           description: The newly created InpatientClinicalNoteGrade
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InpatientClinicalNoteGrade'
         '400':
-          description: Validation error
-  /inpatient-clinical-note-grades/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/inpatient_clinical_note_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -353,6 +527,10 @@ paths:
                 $ref: '#/components/schemas/InpatientClinicalNoteGrade'
         '404':
           description: InpatientClinicalNoteGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InpatientClinicalNoteGrade
       operationId: updateInpatientClinicalNoteGrade
@@ -371,15 +549,29 @@ paths:
                 $ref: '#/components/schemas/InpatientClinicalNoteGrade'
         '404':
           description: InpatientClinicalNoteGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a InpatientClinicalNoteGrade
+      summary: Delete a InpatientClinicalNoteGrade
       operationId: deleteInpatientClinicalNoteGrade
       responses:
-        '204':
+        '200':
           description: InpatientClinicalNoteGrade deleted
         '404':
           description: InpatientClinicalNoteGrade not found
-  /inpatient-clinical-note-investigations:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/inpatient_clinical_note_investigations:
     get:
       summary: List InpatientClinicalNoteInvestigation records
       operationId: listInpatientClinicalNoteInvestigation
@@ -397,17 +589,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of InpatientClinicalNoteInvestigation records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/InpatientClinicalNoteInvestigation'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InpatientClinicalNoteInvestigation
       operationId: createInpatientClinicalNoteInvestigation
@@ -418,15 +630,25 @@ paths:
             schema:
               $ref: '#/components/schemas/InpatientClinicalNoteInvestigation'
       responses:
-        '201':
+        '200':
           description: The newly created InpatientClinicalNoteInvestigation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InpatientClinicalNoteInvestigation'
         '400':
-          description: Validation error
-  /inpatient-clinical-note-investigations/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/inpatient_clinical_note_investigations/{id}:
     parameters:
     - name: id
       in: path
@@ -446,6 +668,10 @@ paths:
                 $ref: '#/components/schemas/InpatientClinicalNoteInvestigation'
         '404':
           description: InpatientClinicalNoteInvestigation not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InpatientClinicalNoteInvestigation
       operationId: updateInpatientClinicalNoteInvestigation
@@ -464,15 +690,29 @@ paths:
                 $ref: '#/components/schemas/InpatientClinicalNoteInvestigation'
         '404':
           description: InpatientClinicalNoteInvestigation not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a InpatientClinicalNoteInvestigation
+      summary: Delete a InpatientClinicalNoteInvestigation
       operationId: deleteInpatientClinicalNoteInvestigation
       responses:
-        '204':
+        '200':
           description: InpatientClinicalNoteInvestigation deleted
         '404':
           description: InpatientClinicalNoteInvestigation not found
-  /inpatient-clinical-note-jobs:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/inpatient_clinical_note_jobs:
     get:
       summary: List InpatientClinicalNoteJob records
       operationId: listInpatientClinicalNoteJob
@@ -490,17 +730,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of InpatientClinicalNoteJob records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/InpatientClinicalNoteJob'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InpatientClinicalNoteJob
       operationId: createInpatientClinicalNoteJob
@@ -511,15 +771,25 @@ paths:
             schema:
               $ref: '#/components/schemas/InpatientClinicalNoteJob'
       responses:
-        '201':
+        '200':
           description: The newly created InpatientClinicalNoteJob
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InpatientClinicalNoteJob'
         '400':
-          description: Validation error
-  /inpatient-clinical-note-jobs/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/inpatient_clinical_note_jobs/{id}:
     parameters:
     - name: id
       in: path
@@ -539,6 +809,10 @@ paths:
                 $ref: '#/components/schemas/InpatientClinicalNoteJob'
         '404':
           description: InpatientClinicalNoteJob not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InpatientClinicalNoteJob
       operationId: updateInpatientClinicalNoteJob
@@ -557,15 +831,29 @@ paths:
                 $ref: '#/components/schemas/InpatientClinicalNoteJob'
         '404':
           description: InpatientClinicalNoteJob not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a InpatientClinicalNoteJob
+      summary: Delete a InpatientClinicalNoteJob
       operationId: deleteInpatientClinicalNoteJob
       responses:
-        '204':
+        '200':
           description: InpatientClinicalNoteJob deleted
         '404':
           description: InpatientClinicalNoteJob not found
-  /inpatient-clinical-note-medication-changes:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/inpatient_clinical_note_medication_changes:
     get:
       summary: List InpatientClinicalNoteMedicationChange records
       operationId: listInpatientClinicalNoteMedicationChange
@@ -583,17 +871,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of InpatientClinicalNoteMedicationChange records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/InpatientClinicalNoteMedicationChange'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InpatientClinicalNoteMedicationChange
       operationId: createInpatientClinicalNoteMedicationChange
@@ -604,15 +912,25 @@ paths:
             schema:
               $ref: '#/components/schemas/InpatientClinicalNoteMedicationChange'
       responses:
-        '201':
+        '200':
           description: The newly created InpatientClinicalNoteMedicationChange
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InpatientClinicalNoteMedicationChange'
         '400':
-          description: Validation error
-  /inpatient-clinical-note-medication-changes/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/inpatient_clinical_note_medication_changes/{id}:
     parameters:
     - name: id
       in: path
@@ -632,6 +950,10 @@ paths:
                 $ref: '#/components/schemas/InpatientClinicalNoteMedicationChange'
         '404':
           description: InpatientClinicalNoteMedicationChange not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InpatientClinicalNoteMedicationChange
       operationId: updateInpatientClinicalNoteMedicationChange
@@ -650,15 +972,29 @@ paths:
                 $ref: '#/components/schemas/InpatientClinicalNoteMedicationChange'
         '404':
           description: InpatientClinicalNoteMedicationChange not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a InpatientClinicalNoteMedicationChange
+      summary: Delete a InpatientClinicalNoteMedicationChange
       operationId: deleteInpatientClinicalNoteMedicationChange
       responses:
-        '204':
+        '200':
           description: InpatientClinicalNoteMedicationChange deleted
         '404':
           description: InpatientClinicalNoteMedicationChange not found
-  /inpatient-clinical-note-problems:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/inpatient_clinical_note_problems:
     get:
       summary: List InpatientClinicalNoteProblem records
       operationId: listInpatientClinicalNoteProblem
@@ -676,17 +1012,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of InpatientClinicalNoteProblem records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/InpatientClinicalNoteProblem'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InpatientClinicalNoteProblem
       operationId: createInpatientClinicalNoteProblem
@@ -697,15 +1053,25 @@ paths:
             schema:
               $ref: '#/components/schemas/InpatientClinicalNoteProblem'
       responses:
-        '201':
+        '200':
           description: The newly created InpatientClinicalNoteProblem
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InpatientClinicalNoteProblem'
         '400':
-          description: Validation error
-  /inpatient-clinical-note-problems/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/inpatient_clinical_note_problems/{id}:
     parameters:
     - name: id
       in: path
@@ -725,6 +1091,10 @@ paths:
                 $ref: '#/components/schemas/InpatientClinicalNoteProblem'
         '404':
           description: InpatientClinicalNoteProblem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InpatientClinicalNoteProblem
       operationId: updateInpatientClinicalNoteProblem
@@ -743,15 +1113,29 @@ paths:
                 $ref: '#/components/schemas/InpatientClinicalNoteProblem'
         '404':
           description: InpatientClinicalNoteProblem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a InpatientClinicalNoteProblem
+      summary: Delete a InpatientClinicalNoteProblem
       operationId: deleteInpatientClinicalNoteProblem
       responses:
-        '204':
+        '200':
           description: InpatientClinicalNoteProblem deleted
         '404':
           description: InpatientClinicalNoteProblem not found
-  /inpatient-clinical-notes:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/inpatient_clinical_notes:
     get:
       summary: List InpatientClinicalNote records
       operationId: listInpatientClinicalNote
@@ -769,17 +1153,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of InpatientClinicalNote records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/InpatientClinicalNote'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new InpatientClinicalNote
       operationId: createInpatientClinicalNote
@@ -790,15 +1194,25 @@ paths:
             schema:
               $ref: '#/components/schemas/InpatientClinicalNote'
       responses:
-        '201':
+        '200':
           description: The newly created InpatientClinicalNote
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InpatientClinicalNote'
         '400':
-          description: Validation error
-  /inpatient-clinical-notes/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/inpatient_clinical_notes/{id}:
     parameters:
     - name: id
       in: path
@@ -818,6 +1232,10 @@ paths:
                 $ref: '#/components/schemas/InpatientClinicalNote'
         '404':
           description: InpatientClinicalNote not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing InpatientClinicalNote
       operationId: updateInpatientClinicalNote
@@ -836,15 +1254,29 @@ paths:
                 $ref: '#/components/schemas/InpatientClinicalNote'
         '404':
           description: InpatientClinicalNote not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a InpatientClinicalNote
+      summary: Delete a InpatientClinicalNote
       operationId: deleteInpatientClinicalNote
       responses:
-        '204':
+        '200':
           description: InpatientClinicalNote deleted
         '404':
           description: InpatientClinicalNote not found
-  /patients:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -862,17 +1294,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Patient records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Patient'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
       operationId: createPatient
@@ -883,15 +1335,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Patient'
       responses:
-        '201':
+        '200':
           description: The newly created Patient
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Patient'
         '400':
-          description: Validation error
-  /patients/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -911,6 +1373,10 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
       operationId: updatePatient
@@ -929,14 +1395,28 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Patient
+      summary: Delete a Patient
       operationId: deletePatient
       responses:
-        '204':
+        '200':
           description: Patient deleted
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     Clinician:
@@ -2690,3 +3170,26 @@ components:
       - sex
       - allergies_summary
       description: Patient demographic information used by the inpatient-clinical-note record.
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+      - type
+      - title
+      - status

@@ -2,8 +2,7 @@ use axa::testing::prelude::*;
 use serial_test::serial;
 use united_kingdom_driver_and_vehicle_licensing_agency_m1_form::app::App;
 
-/// Without the check added in `App::context`, `/_readiness` would keep
-/// answering 200 with the database gone.
+/// `/_readiness` asks `ctx.db`, so it must fail with the database gone.
 #[tokio::test]
 #[serial]
 async fn readiness_fails_when_the_database_stops_answering() {

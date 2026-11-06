@@ -5,9 +5,9 @@ info:
   title: Patient Room Readiness — JSON API
   version: 1.0.0
   description: Combined OpenAPI specification for the Patient Room Readiness form, merged from the per-entity
-    specs in this directory. One RESTful resource per SQL table.
+    specs in this directory. One RESTful resource per routed SQL table.
 paths:
-  /patient-room-readiness-checklists:
+  /api/patient_room_readiness_checklists:
     get:
       summary: List PatientRoomReadinessChecklist records
       operationId: listPatientRoomReadinessChecklist
@@ -25,17 +25,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of PatientRoomReadinessChecklist records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/PatientRoomReadinessChecklist'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PatientRoomReadinessChecklist
       operationId: createPatientRoomReadinessChecklist
@@ -46,15 +66,25 @@ paths:
             schema:
               $ref: '#/components/schemas/PatientRoomReadinessChecklist'
       responses:
-        '201':
+        '200':
           description: The newly created PatientRoomReadinessChecklist
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PatientRoomReadinessChecklist'
         '400':
-          description: Validation error
-  /patient-room-readiness-checklists/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patient_room_readiness_checklists/{id}:
     parameters:
     - name: id
       in: path
@@ -74,6 +104,10 @@ paths:
                 $ref: '#/components/schemas/PatientRoomReadinessChecklist'
         '404':
           description: PatientRoomReadinessChecklist not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PatientRoomReadinessChecklist
       operationId: updatePatientRoomReadinessChecklist
@@ -92,14 +126,28 @@ paths:
                 $ref: '#/components/schemas/PatientRoomReadinessChecklist'
         '404':
           description: PatientRoomReadinessChecklist not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a PatientRoomReadinessChecklist
+      summary: Delete a PatientRoomReadinessChecklist
       operationId: deletePatientRoomReadinessChecklist
       responses:
-        '204':
+        '200':
           description: PatientRoomReadinessChecklist deleted
         '404':
           description: PatientRoomReadinessChecklist not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     PatientRoomReadinessChecklist:
@@ -254,3 +302,26 @@ components:
       - inspector_email
       description: 'One room-readiness inspection: location, 25 fixed fixture/fabric checkpoints, inspector,
         and inspection date/time.'
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+      - type
+      - title
+      - status

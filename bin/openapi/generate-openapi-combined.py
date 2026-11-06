@@ -8,6 +8,10 @@ per form, so this merges every `forms/<slug>/openapi/*.yaml` into a single
 `components.schemas`, under a form-level `info` block. Paths and schema names do
 not collide across a form's entities, so the union is unambiguous.
 
+The per-entity files describe every SQL table, but not every table has a route.
+The combined document is what a crate serves at `GET /api/openapi.yaml`, so it
+keeps only the paths the crate's controllers declare, and the schemas those use.
+
 Generated artefact: do not hand-edit. Idempotent.
 
 Usage:
@@ -48,6 +52,23 @@ def entity_specs(slug: str) -> list[Path]:
     return sorted(p for p in d.glob("*.yaml") if p.name != COMBINED)
 
 
+def served_routes(slug: str) -> set[str]:
+    """The route prefixes the form's Axum controllers declare."""
+    routes: set[str] = set()
+    crate = FORMS_DIR / slug / "back-end-with-axum"
+    for path in crate.glob("src/*/controllers/*.rs"):
+        for prefix in re.findall(r'\.prefix\("/?([\w/-]+?)/?"\)', path.read_text()):
+            routes.add(f"/{prefix}")
+    return routes
+
+
+def referenced(paths: dict, schemas: dict) -> dict:
+    """The schemas `paths` refers to, including what those refer to."""
+    text = yaml.safe_dump(paths)
+    wanted = set(re.findall(r"#/components/schemas/(\w+)", text))
+    return {name: schema for name, schema in schemas.items() if name in wanted}
+
+
 def build(slug: str) -> str:
     paths: dict = {}
     schemas: dict = {}
@@ -58,6 +79,10 @@ def build(slug: str) -> str:
         for name, schema in ((spec.get("components") or {}).get("schemas") or {}).items():
             schemas[name] = schema
 
+    routes = served_routes(slug)
+    paths = {route: item for route, item in paths.items() if route.split("/{")[0] in routes}
+    schemas = referenced(paths, schemas)
+
     doc = {
         "openapi": "3.1.0",
         "info": {
@@ -66,7 +91,7 @@ def build(slug: str) -> str:
             "description": (
                 f"Combined OpenAPI specification for the {title_of(slug)} form, "
                 "merged from the per-entity specs in this directory. One RESTful "
-                "resource per SQL table."
+                "resource per routed SQL table."
             ),
         },
         "paths": dict(sorted(paths.items())),

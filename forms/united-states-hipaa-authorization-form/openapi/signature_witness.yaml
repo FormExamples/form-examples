@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Signature, date, and witness fields. One-to-one child of hipaa_authorization. Required by 45 CFR § 164.508(c)(1)(vi).
 paths:
-  /signature-witnesses:
+  /api/signature_witnesses:
     get:
       summary: List SignatureWitness records
       operationId: listSignatureWitness
@@ -24,17 +24,37 @@ paths:
           schema:
             type: integer
             minimum: 0
+            maximum: 100000
             default: 0
           required: false
       responses:
         "200":
           description: A page of SignatureWitness records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/SignatureWitness"
+        "400":
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new SignatureWitness
       operationId: createSignatureWitness
@@ -45,15 +65,25 @@ paths:
             schema:
               $ref: "#/components/schemas/SignatureWitness"
       responses:
-        "201":
+        "200":
           description: The newly created SignatureWitness
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/SignatureWitness"
         "400":
-          description: Validation error
-  /signature-witnesses/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/signature_witnesses/{id}:
     parameters:
       - name: id
         in: path
@@ -73,6 +103,10 @@ paths:
                 $ref: "#/components/schemas/SignatureWitness"
         "404":
           description: SignatureWitness not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing SignatureWitness
       operationId: updateSignatureWitness
@@ -91,16 +125,53 @@ paths:
                 $ref: "#/components/schemas/SignatureWitness"
         "404":
           description: SignatureWitness not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
-      summary: Soft-delete a SignatureWitness
+      summary: Delete a SignatureWitness
       operationId: deleteSignatureWitness
       responses:
-        "204":
+        "200":
           description: SignatureWitness deleted
         "404":
           description: SignatureWitness not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
 components:
   schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+        - type
+        - title
+        - status
     SignatureWitness:
       type: object
       properties:

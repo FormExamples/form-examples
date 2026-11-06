@@ -5,9 +5,9 @@ info:
   title: Toxicology Test Request — JSON API
   version: 1.0.0
   description: Combined OpenAPI specification for the Toxicology Test Request form, merged from the per-entity
-    specs in this directory. One RESTful resource per SQL table.
+    specs in this directory. One RESTful resource per routed SQL table.
 paths:
-  /clinicians:
+  /api/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -25,17 +25,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Clinician records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Clinician'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
       operationId: createClinician
@@ -46,15 +66,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Clinician'
       responses:
-        '201':
+        '200':
           description: The newly created Clinician
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Clinician'
         '400':
-          description: Validation error
-  /clinicians/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -74,6 +104,10 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
       operationId: updateClinician
@@ -92,15 +126,29 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Clinician
+      summary: Delete a Clinician
       operationId: deleteClinician
       responses:
-        '204':
+        '200':
           description: Clinician deleted
         '404':
           description: Clinician not found
-  /patients:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -118,17 +166,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Patient records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Patient'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
       operationId: createPatient
@@ -139,15 +207,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Patient'
       responses:
-        '201':
+        '200':
           description: The newly created Patient
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Patient'
         '400':
-          description: Validation error
-  /patients/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -167,6 +245,10 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
       operationId: updatePatient
@@ -185,15 +267,29 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Patient
+      summary: Delete a Patient
       operationId: deletePatient
       responses:
-        '204':
+        '200':
           description: Patient deleted
         '404':
           description: Patient not found
-  /toxicology-test-request-grade-flags:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/toxicology_test_request_grade_flags:
     get:
       summary: List ToxicologyTestRequestGradeFlag records
       operationId: listToxicologyTestRequestGradeFlag
@@ -211,17 +307,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ToxicologyTestRequestGradeFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ToxicologyTestRequestGradeFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ToxicologyTestRequestGradeFlag
       operationId: createToxicologyTestRequestGradeFlag
@@ -232,15 +348,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ToxicologyTestRequestGradeFlag'
       responses:
-        '201':
+        '200':
           description: The newly created ToxicologyTestRequestGradeFlag
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ToxicologyTestRequestGradeFlag'
         '400':
-          description: Validation error
-  /toxicology-test-request-grade-flags/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/toxicology_test_request_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -260,6 +386,10 @@ paths:
                 $ref: '#/components/schemas/ToxicologyTestRequestGradeFlag'
         '404':
           description: ToxicologyTestRequestGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ToxicologyTestRequestGradeFlag
       operationId: updateToxicologyTestRequestGradeFlag
@@ -278,15 +408,29 @@ paths:
                 $ref: '#/components/schemas/ToxicologyTestRequestGradeFlag'
         '404':
           description: ToxicologyTestRequestGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ToxicologyTestRequestGradeFlag
+      summary: Delete a ToxicologyTestRequestGradeFlag
       operationId: deleteToxicologyTestRequestGradeFlag
       responses:
-        '204':
+        '200':
           description: ToxicologyTestRequestGradeFlag deleted
         '404':
           description: ToxicologyTestRequestGradeFlag not found
-  /toxicology-test-request-grade-rules:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/toxicology_test_request_grade_rules:
     get:
       summary: List ToxicologyTestRequestGradeRule records
       operationId: listToxicologyTestRequestGradeRule
@@ -304,17 +448,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ToxicologyTestRequestGradeRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ToxicologyTestRequestGradeRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ToxicologyTestRequestGradeRule
       operationId: createToxicologyTestRequestGradeRule
@@ -325,15 +489,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ToxicologyTestRequestGradeRule'
       responses:
-        '201':
+        '200':
           description: The newly created ToxicologyTestRequestGradeRule
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ToxicologyTestRequestGradeRule'
         '400':
-          description: Validation error
-  /toxicology-test-request-grade-rules/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/toxicology_test_request_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -353,6 +527,10 @@ paths:
                 $ref: '#/components/schemas/ToxicologyTestRequestGradeRule'
         '404':
           description: ToxicologyTestRequestGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ToxicologyTestRequestGradeRule
       operationId: updateToxicologyTestRequestGradeRule
@@ -371,15 +549,29 @@ paths:
                 $ref: '#/components/schemas/ToxicologyTestRequestGradeRule'
         '404':
           description: ToxicologyTestRequestGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ToxicologyTestRequestGradeRule
+      summary: Delete a ToxicologyTestRequestGradeRule
       operationId: deleteToxicologyTestRequestGradeRule
       responses:
-        '204':
+        '200':
           description: ToxicologyTestRequestGradeRule deleted
         '404':
           description: ToxicologyTestRequestGradeRule not found
-  /toxicology-test-request-grades:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/toxicology_test_request_grades:
     get:
       summary: List ToxicologyTestRequestGrade records
       operationId: listToxicologyTestRequestGrade
@@ -397,17 +589,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ToxicologyTestRequestGrade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ToxicologyTestRequestGrade'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ToxicologyTestRequestGrade
       operationId: createToxicologyTestRequestGrade
@@ -418,15 +630,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ToxicologyTestRequestGrade'
       responses:
-        '201':
+        '200':
           description: The newly created ToxicologyTestRequestGrade
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ToxicologyTestRequestGrade'
         '400':
-          description: Validation error
-  /toxicology-test-request-grades/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/toxicology_test_request_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -446,6 +668,10 @@ paths:
                 $ref: '#/components/schemas/ToxicologyTestRequestGrade'
         '404':
           description: ToxicologyTestRequestGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ToxicologyTestRequestGrade
       operationId: updateToxicologyTestRequestGrade
@@ -464,15 +690,29 @@ paths:
                 $ref: '#/components/schemas/ToxicologyTestRequestGrade'
         '404':
           description: ToxicologyTestRequestGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ToxicologyTestRequestGrade
+      summary: Delete a ToxicologyTestRequestGrade
       operationId: deleteToxicologyTestRequestGrade
       responses:
-        '204':
+        '200':
           description: ToxicologyTestRequestGrade deleted
         '404':
           description: ToxicologyTestRequestGrade not found
-  /toxicology-test-requests:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/toxicology_test_requests:
     get:
       summary: List ToxicologyTestRequest records
       operationId: listToxicologyTestRequest
@@ -490,17 +730,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ToxicologyTestRequest records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ToxicologyTestRequest'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ToxicologyTestRequest
       operationId: createToxicologyTestRequest
@@ -511,15 +771,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ToxicologyTestRequest'
       responses:
-        '201':
+        '200':
           description: The newly created ToxicologyTestRequest
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ToxicologyTestRequest'
         '400':
-          description: Validation error
-  /toxicology-test-requests/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/toxicology_test_requests/{id}:
     parameters:
     - name: id
       in: path
@@ -539,6 +809,10 @@ paths:
                 $ref: '#/components/schemas/ToxicologyTestRequest'
         '404':
           description: ToxicologyTestRequest not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ToxicologyTestRequest
       operationId: updateToxicologyTestRequest
@@ -557,14 +831,28 @@ paths:
                 $ref: '#/components/schemas/ToxicologyTestRequest'
         '404':
           description: ToxicologyTestRequest not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ToxicologyTestRequest
+      summary: Delete a ToxicologyTestRequest
       operationId: deleteToxicologyTestRequest
       responses:
-        '204':
+        '200':
           description: ToxicologyTestRequest deleted
         '404':
           description: ToxicologyTestRequest not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     Clinician:
@@ -719,6 +1007,29 @@ components:
       - name
       - birth_date
       description: Patient
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+      - type
+      - title
+      - status
     ToxicologyTestRequest:
       type: object
       properties:

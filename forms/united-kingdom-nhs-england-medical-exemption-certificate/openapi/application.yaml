@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: FP92A medical exemption application instance.
 paths:
-  /applications:
+  /api/applications:
     get:
       summary: List Application records
       operationId: listApplication
@@ -24,17 +24,37 @@ paths:
           schema:
             type: integer
             minimum: 0
+            maximum: 100000
             default: 0
           required: false
       responses:
         "200":
           description: A page of Application records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/Application"
+        "400":
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Application
       operationId: createApplication
@@ -45,15 +65,25 @@ paths:
             schema:
               $ref: "#/components/schemas/Application"
       responses:
-        "201":
+        "200":
           description: The newly created Application
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Application"
         "400":
-          description: Validation error
-  /applications/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/applications/{id}:
     parameters:
       - name: id
         in: path
@@ -73,6 +103,10 @@ paths:
                 $ref: "#/components/schemas/Application"
         "404":
           description: Application not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Application
       operationId: updateApplication
@@ -91,16 +125,53 @@ paths:
                 $ref: "#/components/schemas/Application"
         "404":
           description: Application not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
-      summary: Soft-delete a Application
+      summary: Delete a Application
       operationId: deleteApplication
       responses:
-        "204":
+        "200":
           description: Application deleted
         "404":
           description: Application not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
 components:
   schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+        - type
+        - title
+        - status
     Application:
       type: object
       properties:

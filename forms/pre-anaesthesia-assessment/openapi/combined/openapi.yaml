@@ -5,9 +5,9 @@ info:
   title: Pre-Anaesthesia Assessment — JSON API
   version: 1.0.0
   description: Combined OpenAPI specification for the Pre-Anaesthesia Assessment form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+    per-entity specs in this directory. One RESTful resource per routed SQL table.
 paths:
-  /allergies:
+  /api/allergies:
     get:
       summary: List Allergy records
       operationId: listAllergy
@@ -25,17 +25,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Allergy records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Allergy'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Allergy
       operationId: createAllergy
@@ -46,15 +66,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Allergy'
       responses:
-        '201':
+        '200':
           description: The newly created Allergy
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Allergy'
         '400':
-          description: Validation error
-  /allergies/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/allergies/{id}:
     parameters:
     - name: id
       in: path
@@ -74,6 +104,10 @@ paths:
                 $ref: '#/components/schemas/Allergy'
         '404':
           description: Allergy not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Allergy
       operationId: updateAllergy
@@ -92,15 +126,29 @@ paths:
                 $ref: '#/components/schemas/Allergy'
         '404':
           description: Allergy not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Allergy
+      summary: Delete a Allergy
       operationId: deleteAllergy
       responses:
-        '204':
+        '200':
           description: Allergy deleted
         '404':
           description: Allergy not found
-  /clinicians:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -118,17 +166,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Clinician records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Clinician'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
       operationId: createClinician
@@ -139,15 +207,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Clinician'
       responses:
-        '201':
+        '200':
           description: The newly created Clinician
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Clinician'
         '400':
-          description: Validation error
-  /clinicians/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -167,6 +245,10 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
       operationId: updateClinician
@@ -185,15 +267,29 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Clinician
+      summary: Delete a Clinician
       operationId: deleteClinician
       responses:
-        '204':
+        '200':
           description: Clinician deleted
         '404':
           description: Clinician not found
-  /medications:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/medications:
     get:
       summary: List Medication records
       operationId: listMedication
@@ -211,17 +307,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Medication records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Medication'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Medication
       operationId: createMedication
@@ -232,15 +348,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Medication'
       responses:
-        '201':
+        '200':
           description: The newly created Medication
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Medication'
         '400':
-          description: Validation error
-  /medications/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/medications/{id}:
     parameters:
     - name: id
       in: path
@@ -260,6 +386,10 @@ paths:
                 $ref: '#/components/schemas/Medication'
         '404':
           description: Medication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Medication
       operationId: updateMedication
@@ -278,15 +408,29 @@ paths:
                 $ref: '#/components/schemas/Medication'
         '404':
           description: Medication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Medication
+      summary: Delete a Medication
       operationId: deleteMedication
       responses:
-        '204':
+        '200':
           description: Medication deleted
         '404':
           description: Medication not found
-  /patient-allergies:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patient_allergies:
     get:
       summary: List PatientAllergy records
       operationId: listPatientAllergy
@@ -304,17 +448,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of PatientAllergy records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/PatientAllergy'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PatientAllergy
       operationId: createPatientAllergy
@@ -325,15 +489,25 @@ paths:
             schema:
               $ref: '#/components/schemas/PatientAllergy'
       responses:
-        '201':
+        '200':
           description: The newly created PatientAllergy
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PatientAllergy'
         '400':
-          description: Validation error
-  /patient-allergies/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patient_allergies/{id}:
     parameters:
     - name: id
       in: path
@@ -353,6 +527,10 @@ paths:
                 $ref: '#/components/schemas/PatientAllergy'
         '404':
           description: PatientAllergy not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PatientAllergy
       operationId: updatePatientAllergy
@@ -371,15 +549,29 @@ paths:
                 $ref: '#/components/schemas/PatientAllergy'
         '404':
           description: PatientAllergy not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a PatientAllergy
+      summary: Delete a PatientAllergy
       operationId: deletePatientAllergy
       responses:
-        '204':
+        '200':
           description: PatientAllergy deleted
         '404':
           description: PatientAllergy not found
-  /patient-medications:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patient_medications:
     get:
       summary: List PatientMedication records
       operationId: listPatientMedication
@@ -397,17 +589,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of PatientMedication records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/PatientMedication'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PatientMedication
       operationId: createPatientMedication
@@ -418,15 +630,25 @@ paths:
             schema:
               $ref: '#/components/schemas/PatientMedication'
       responses:
-        '201':
+        '200':
           description: The newly created PatientMedication
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PatientMedication'
         '400':
-          description: Validation error
-  /patient-medications/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patient_medications/{id}:
     parameters:
     - name: id
       in: path
@@ -446,6 +668,10 @@ paths:
                 $ref: '#/components/schemas/PatientMedication'
         '404':
           description: PatientMedication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PatientMedication
       operationId: updatePatientMedication
@@ -464,15 +690,29 @@ paths:
                 $ref: '#/components/schemas/PatientMedication'
         '404':
           description: PatientMedication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a PatientMedication
+      summary: Delete a PatientMedication
       operationId: deletePatientMedication
       responses:
-        '204':
+        '200':
           description: PatientMedication deleted
         '404':
           description: PatientMedication not found
-  /patients:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -490,17 +730,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Patient records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Patient'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
       operationId: createPatient
@@ -511,15 +771,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Patient'
       responses:
-        '201':
+        '200':
           description: The newly created Patient
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Patient'
         '400':
-          description: Validation error
-  /patients/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -539,6 +809,10 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
       operationId: updatePatient
@@ -557,201 +831,29 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Patient
+      summary: Delete a Patient
       operationId: deletePatient
       responses:
-        '204':
+        '200':
           description: Patient deleted
         '404':
           description: Patient not found
-  /pre-anaesthesia-assessment-grade-flags:
-    get:
-      summary: List PreAnaesthesiaAssessmentGradeFlag records
-      operationId: listPreAnaesthesiaAssessmentGradeFlag
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of PreAnaesthesiaAssessmentGradeFlag records
           content:
-            application/json:
+            application/problem+json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PreAnaesthesiaAssessmentGradeFlag'
-    post:
-      summary: Create a new PreAnaesthesiaAssessmentGradeFlag
-      operationId: createPreAnaesthesiaAssessmentGradeFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PreAnaesthesiaAssessmentGradeFlag'
-      responses:
-        '201':
-          description: The newly created PreAnaesthesiaAssessmentGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PreAnaesthesiaAssessmentGradeFlag'
-        '400':
-          description: Validation error
-  /pre-anaesthesia-assessment-grade-flags/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one PreAnaesthesiaAssessmentGradeFlag by id
-      operationId: getPreAnaesthesiaAssessmentGradeFlag
-      responses:
-        '200':
-          description: The requested PreAnaesthesiaAssessmentGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PreAnaesthesiaAssessmentGradeFlag'
-        '404':
-          description: PreAnaesthesiaAssessmentGradeFlag not found
-    patch:
-      summary: Update an existing PreAnaesthesiaAssessmentGradeFlag
-      operationId: updatePreAnaesthesiaAssessmentGradeFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PreAnaesthesiaAssessmentGradeFlag'
-      responses:
-        '200':
-          description: The updated PreAnaesthesiaAssessmentGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PreAnaesthesiaAssessmentGradeFlag'
-        '404':
-          description: PreAnaesthesiaAssessmentGradeFlag not found
-    delete:
-      summary: Soft-delete a PreAnaesthesiaAssessmentGradeFlag
-      operationId: deletePreAnaesthesiaAssessmentGradeFlag
-      responses:
-        '204':
-          description: PreAnaesthesiaAssessmentGradeFlag deleted
-        '404':
-          description: PreAnaesthesiaAssessmentGradeFlag not found
-  /pre-anaesthesia-assessment-grade-rules:
-    get:
-      summary: List PreAnaesthesiaAssessmentGradeRule records
-      operationId: listPreAnaesthesiaAssessmentGradeRule
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of PreAnaesthesiaAssessmentGradeRule records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PreAnaesthesiaAssessmentGradeRule'
-    post:
-      summary: Create a new PreAnaesthesiaAssessmentGradeRule
-      operationId: createPreAnaesthesiaAssessmentGradeRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PreAnaesthesiaAssessmentGradeRule'
-      responses:
-        '201':
-          description: The newly created PreAnaesthesiaAssessmentGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PreAnaesthesiaAssessmentGradeRule'
-        '400':
-          description: Validation error
-  /pre-anaesthesia-assessment-grade-rules/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one PreAnaesthesiaAssessmentGradeRule by id
-      operationId: getPreAnaesthesiaAssessmentGradeRule
-      responses:
-        '200':
-          description: The requested PreAnaesthesiaAssessmentGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PreAnaesthesiaAssessmentGradeRule'
-        '404':
-          description: PreAnaesthesiaAssessmentGradeRule not found
-    patch:
-      summary: Update an existing PreAnaesthesiaAssessmentGradeRule
-      operationId: updatePreAnaesthesiaAssessmentGradeRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PreAnaesthesiaAssessmentGradeRule'
-      responses:
-        '200':
-          description: The updated PreAnaesthesiaAssessmentGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PreAnaesthesiaAssessmentGradeRule'
-        '404':
-          description: PreAnaesthesiaAssessmentGradeRule not found
-    delete:
-      summary: Soft-delete a PreAnaesthesiaAssessmentGradeRule
-      operationId: deletePreAnaesthesiaAssessmentGradeRule
-      responses:
-        '204':
-          description: PreAnaesthesiaAssessmentGradeRule deleted
-        '404':
-          description: PreAnaesthesiaAssessmentGradeRule not found
-  /pre-anaesthesia-assessment-grades:
+                $ref: '#/components/schemas/Problem'
+  /api/pre_anaesthesia_assessment_grades:
     get:
       summary: List PreAnaesthesiaAssessmentGrade records
       operationId: listPreAnaesthesiaAssessmentGrade
@@ -769,17 +871,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of PreAnaesthesiaAssessmentGrade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/PreAnaesthesiaAssessmentGrade'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PreAnaesthesiaAssessmentGrade
       operationId: createPreAnaesthesiaAssessmentGrade
@@ -790,15 +912,25 @@ paths:
             schema:
               $ref: '#/components/schemas/PreAnaesthesiaAssessmentGrade'
       responses:
-        '201':
+        '200':
           description: The newly created PreAnaesthesiaAssessmentGrade
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PreAnaesthesiaAssessmentGrade'
         '400':
-          description: Validation error
-  /pre-anaesthesia-assessment-grades/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/pre_anaesthesia_assessment_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -818,6 +950,10 @@ paths:
                 $ref: '#/components/schemas/PreAnaesthesiaAssessmentGrade'
         '404':
           description: PreAnaesthesiaAssessmentGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PreAnaesthesiaAssessmentGrade
       operationId: updatePreAnaesthesiaAssessmentGrade
@@ -836,15 +972,29 @@ paths:
                 $ref: '#/components/schemas/PreAnaesthesiaAssessmentGrade'
         '404':
           description: PreAnaesthesiaAssessmentGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a PreAnaesthesiaAssessmentGrade
+      summary: Delete a PreAnaesthesiaAssessmentGrade
       operationId: deletePreAnaesthesiaAssessmentGrade
       responses:
-        '204':
+        '200':
           description: PreAnaesthesiaAssessmentGrade deleted
         '404':
           description: PreAnaesthesiaAssessmentGrade not found
-  /pre-anaesthesia-assessments:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/pre_anaesthesia_assessments:
     get:
       summary: List PreAnaesthesiaAssessment records
       operationId: listPreAnaesthesiaAssessment
@@ -862,17 +1012,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of PreAnaesthesiaAssessment records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/PreAnaesthesiaAssessment'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PreAnaesthesiaAssessment
       operationId: createPreAnaesthesiaAssessment
@@ -883,15 +1053,25 @@ paths:
             schema:
               $ref: '#/components/schemas/PreAnaesthesiaAssessment'
       responses:
-        '201':
+        '200':
           description: The newly created PreAnaesthesiaAssessment
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PreAnaesthesiaAssessment'
         '400':
-          description: Validation error
-  /pre-anaesthesia-assessments/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/pre_anaesthesia_assessments/{id}:
     parameters:
     - name: id
       in: path
@@ -911,6 +1091,10 @@ paths:
                 $ref: '#/components/schemas/PreAnaesthesiaAssessment'
         '404':
           description: PreAnaesthesiaAssessment not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing PreAnaesthesiaAssessment
       operationId: updatePreAnaesthesiaAssessment
@@ -929,14 +1113,28 @@ paths:
                 $ref: '#/components/schemas/PreAnaesthesiaAssessment'
         '404':
           description: PreAnaesthesiaAssessment not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a PreAnaesthesiaAssessment
+      summary: Delete a PreAnaesthesiaAssessment
       operationId: deletePreAnaesthesiaAssessment
       responses:
-        '204':
+        '200':
           description: PreAnaesthesiaAssessment deleted
         '404':
           description: PreAnaesthesiaAssessment not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     Allergy:
@@ -3593,144 +3791,26 @@ components:
       - graded_at
       description: Computed and signed-off grading result. Stores both the engine-computed ASA grade and
         the clinician-final grade with an override reason.
-    PreAnaesthesiaAssessmentGradeFlag:
+    Problem:
       type: object
+      description: RFC 9457 problem details
       properties:
-        id:
+        type:
           type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
+          description: A URI identifying the problem type
+        title:
           type: string
-          format: date-time
-          description: Timestamp when this row was created.
-        updated_at:
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
           type: string
-          format: date-time
-          description: Timestamp when this row was updated most-recently.
-        deleted_at:
+          description: An explanation of this occurrence
+        instance:
           type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
-        pre_anaesthesia_assessment_grade_id:
-          type: string
-          format: uuid
-          description: Foreign key to the pre_anaesthesia_assessment_grade table.
-        flag_id:
-          type: string
-          maxLength: 50
-          description: Stable flag identifier (e.g. F-DIFFICULT-AIRWAY-001).
-        category:
-          type: string
-          enum:
-          - difficult-airway
-          - severe-cardiac
-          - severe-respiratory
-          - severe-renal
-          - severe-hepatic
-          - severe-anaemia
-          - coagulopathy
-          - uncontrolled-diabetes
-          - severe-frailty
-          - recent-covid-19
-          - fasting-violation
-          - missing-crossmatch
-          - high-risk-medication
-          - capacity-concern
-          - paediatric
-          - pregnancy
-          - safeguarding
-          - malignant-hyperthermia
-          - latex-allergy
-          - sux-apnoea
-          - pseudocholinesterase-deficiency
-          - malnutrition-risk
-          - other
-          - ''
-          description: Flag category.
-        priority:
-          type: string
-          enum:
-          - low
-          - medium
-          - high
-          - ''
-          description: 'Priority: low, medium, high.'
-        description:
-          type: string
-          maxLength: 500
-          description: Human-readable description of what fired the flag.
-        suggested_action:
-          type: string
-          maxLength: 500
-          description: Suggested clinical action (e.g. "prepare difficult-airway trolley").
+          description: A URI identifying this occurrence
       required:
-      - created_at
-      - updated_at
-      - pre_anaesthesia_assessment_grade_id
-      - flag_id
-      - category
-      - priority
-      - description
-      - suggested_action
-      description: Safety-critical flags that fire independently of the ASA grade, with priority and a
-        suggested action for the perioperative team.
-    PreAnaesthesiaAssessmentGradeRule:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
-        grade_id:
-          type: string
-          format: uuid
-          description: Foreign key to the parent grade.
-        rule_id:
-          type: string
-          maxLength: 30
-          description: Stable rule identifier (e.g. R-ASA-III-02).
-        instrument:
-          type: string
-          enum:
-          - asa
-          - mallampati
-          - rcri
-          - stopbang
-          - frailty
-          description: 'Scoring instrument the rule belongs to: asa, mallampati, rcri, stopbang, frailty.'
-        grade:
-          type: string
-          maxLength: 5
-          description: Grade contributed by this rule (e.g. III for ASA).
-        category:
-          type: string
-          maxLength: 50
-          description: Body-system or risk category (e.g. cardiovascular, respiratory).
-        description:
-          type: string
-          maxLength: 500
-          description: Human-readable description of why the rule fired.
-      required:
-      - created_at
-      - updated_at
-      - grade_id
-      - rule_id
-      - instrument
-      - grade
-      - category
-      - description
-      description: Audit trail of every ASA / Mallampati / RCRI / STOP-BANG / frailty rule that fired
-        for this assessment.
+      - type
+      - title
+      - status

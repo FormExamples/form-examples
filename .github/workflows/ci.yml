@@ -176,6 +176,8 @@ jobs:
       - name: Every Axum crate root forbids unsafe code
         run: bin/axum-forbid-unsafe --check --all
 
+      - name: Every Axum crate is on axa 0.5 with RFC 9457 errors
+        run: bin/axum-axa-upgrade --check --all
 
       - name: Axum deny.toml files are current
         run: python3 bin/generate-axum-deny-config.py --check

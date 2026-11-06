@@ -1,10 +1,13 @@
 #![forbid(unsafe_code)]
 
-use axa::cli::Cli;
-use clap::Parser;
 use united_kingdom_driver_and_vehicle_licensing_agency_v1_form::app::App;
 
 #[tokio::main]
 async fn main() -> axa::Result<()> {
-    App::run(Cli::parse()).await
+    App::run(axa::cli::parse(
+        env!("CARGO_PKG_NAME"),
+        env!("CARGO_PKG_VERSION"),
+        env!("CARGO_PKG_DESCRIPTION"),
+    ))
+    .await
 }

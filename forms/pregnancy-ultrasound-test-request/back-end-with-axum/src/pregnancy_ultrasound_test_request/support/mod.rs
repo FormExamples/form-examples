@@ -5,6 +5,7 @@
 pub mod model;
 pub mod paging;
 pub mod prelude;
+pub mod problem;
 pub mod seed;
 
 use axa::{AppContext, Result};
@@ -16,16 +17,10 @@ use sqlx::PgPool;
 
 pub use seed::seed;
 
-/// The database pool, which boot stores in the shared store.
-///
-/// # Panics
-///
-/// If boot did not install a pool, which is a programming error.
+/// The database pool.
 #[must_use]
 pub fn db(ctx: &AppContext) -> PgPool {
-    ctx.shared_store
-        .get::<PgPool>()
-        .expect("boot installs the database pool")
+    ctx.db.clone()
 }
 
 /// A YAML response.

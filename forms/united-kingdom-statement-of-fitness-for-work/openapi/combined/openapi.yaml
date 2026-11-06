@@ -5,9 +5,9 @@ info:
   title: United Kingdom Statement of Fitness for Work — JSON API
   version: 1.0.0
   description: Combined OpenAPI specification for the United Kingdom Statement of Fitness for Work form,
-    merged from the per-entity specs in this directory. One RESTful resource per SQL table.
+    merged from the per-entity specs in this directory. One RESTful resource per routed SQL table.
 paths:
-  /clinicians:
+  /api/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -25,17 +25,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Clinician records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Clinician'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
       operationId: createClinician
@@ -46,15 +66,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Clinician'
       responses:
-        '201':
+        '200':
           description: The newly created Clinician
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Clinician'
         '400':
-          description: Validation error
-  /clinicians/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -74,6 +104,10 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
       operationId: updateClinician
@@ -92,15 +126,29 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Clinician
+      summary: Delete a Clinician
       operationId: deleteClinician
       responses:
-        '204':
+        '200':
           description: Clinician deleted
         '404':
           description: Clinician not found
-  /medical-practices:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/medical_practices:
     get:
       summary: List MedicalPractice records
       operationId: listMedicalPractice
@@ -118,17 +166,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of MedicalPractice records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/MedicalPractice'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new MedicalPractice
       operationId: createMedicalPractice
@@ -139,15 +207,25 @@ paths:
             schema:
               $ref: '#/components/schemas/MedicalPractice'
       responses:
-        '201':
+        '200':
           description: The newly created MedicalPractice
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/MedicalPractice'
         '400':
-          description: Validation error
-  /medical-practices/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/medical_practices/{id}:
     parameters:
     - name: id
       in: path
@@ -167,6 +245,10 @@ paths:
                 $ref: '#/components/schemas/MedicalPractice'
         '404':
           description: MedicalPractice not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing MedicalPractice
       operationId: updateMedicalPractice
@@ -185,15 +267,29 @@ paths:
                 $ref: '#/components/schemas/MedicalPractice'
         '404':
           description: MedicalPractice not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a MedicalPractice
+      summary: Delete a MedicalPractice
       operationId: deleteMedicalPractice
       responses:
-        '204':
+        '200':
           description: MedicalPractice deleted
         '404':
           description: MedicalPractice not found
-  /patients:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -211,17 +307,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Patient records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Patient'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
       operationId: createPatient
@@ -232,15 +348,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Patient'
       responses:
-        '201':
+        '200':
           description: The newly created Patient
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Patient'
         '400':
-          description: Validation error
-  /patients/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -260,6 +386,10 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
       operationId: updatePatient
@@ -278,15 +408,29 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Patient
+      summary: Delete a Patient
       operationId: deletePatient
       responses:
-        '204':
+        '200':
           description: Patient deleted
         '404':
           description: Patient not found
-  /united-kingdom-statement-of-fitness-for-work-grade-flags:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/united_kingdom_statement_of_fitness_for_work_grade_flags:
     get:
       summary: List UnitedKingdomStatementOfFitnessForWorkGradeFlag records
       operationId: listUnitedKingdomStatementOfFitnessForWorkGradeFlag
@@ -304,17 +448,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of UnitedKingdomStatementOfFitnessForWorkGradeFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGradeFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomStatementOfFitnessForWorkGradeFlag
       operationId: createUnitedKingdomStatementOfFitnessForWorkGradeFlag
@@ -325,15 +489,25 @@ paths:
             schema:
               $ref: '#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGradeFlag'
       responses:
-        '201':
+        '200':
           description: The newly created UnitedKingdomStatementOfFitnessForWorkGradeFlag
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGradeFlag'
         '400':
-          description: Validation error
-  /united-kingdom-statement-of-fitness-for-work-grade-flags/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/united_kingdom_statement_of_fitness_for_work_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -353,6 +527,10 @@ paths:
                 $ref: '#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGradeFlag'
         '404':
           description: UnitedKingdomStatementOfFitnessForWorkGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomStatementOfFitnessForWorkGradeFlag
       operationId: updateUnitedKingdomStatementOfFitnessForWorkGradeFlag
@@ -371,15 +549,29 @@ paths:
                 $ref: '#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGradeFlag'
         '404':
           description: UnitedKingdomStatementOfFitnessForWorkGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a UnitedKingdomStatementOfFitnessForWorkGradeFlag
+      summary: Delete a UnitedKingdomStatementOfFitnessForWorkGradeFlag
       operationId: deleteUnitedKingdomStatementOfFitnessForWorkGradeFlag
       responses:
-        '204':
+        '200':
           description: UnitedKingdomStatementOfFitnessForWorkGradeFlag deleted
         '404':
           description: UnitedKingdomStatementOfFitnessForWorkGradeFlag not found
-  /united-kingdom-statement-of-fitness-for-work-grade-rules:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/united_kingdom_statement_of_fitness_for_work_grade_rules:
     get:
       summary: List UnitedKingdomStatementOfFitnessForWorkGradeRule records
       operationId: listUnitedKingdomStatementOfFitnessForWorkGradeRule
@@ -397,17 +589,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of UnitedKingdomStatementOfFitnessForWorkGradeRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGradeRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomStatementOfFitnessForWorkGradeRule
       operationId: createUnitedKingdomStatementOfFitnessForWorkGradeRule
@@ -418,15 +630,25 @@ paths:
             schema:
               $ref: '#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGradeRule'
       responses:
-        '201':
+        '200':
           description: The newly created UnitedKingdomStatementOfFitnessForWorkGradeRule
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGradeRule'
         '400':
-          description: Validation error
-  /united-kingdom-statement-of-fitness-for-work-grade-rules/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/united_kingdom_statement_of_fitness_for_work_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -446,6 +668,10 @@ paths:
                 $ref: '#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGradeRule'
         '404':
           description: UnitedKingdomStatementOfFitnessForWorkGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomStatementOfFitnessForWorkGradeRule
       operationId: updateUnitedKingdomStatementOfFitnessForWorkGradeRule
@@ -464,15 +690,29 @@ paths:
                 $ref: '#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGradeRule'
         '404':
           description: UnitedKingdomStatementOfFitnessForWorkGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a UnitedKingdomStatementOfFitnessForWorkGradeRule
+      summary: Delete a UnitedKingdomStatementOfFitnessForWorkGradeRule
       operationId: deleteUnitedKingdomStatementOfFitnessForWorkGradeRule
       responses:
-        '204':
+        '200':
           description: UnitedKingdomStatementOfFitnessForWorkGradeRule deleted
         '404':
           description: UnitedKingdomStatementOfFitnessForWorkGradeRule not found
-  /united-kingdom-statement-of-fitness-for-work-grades:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/united_kingdom_statement_of_fitness_for_work_grades:
     get:
       summary: List UnitedKingdomStatementOfFitnessForWorkGrade records
       operationId: listUnitedKingdomStatementOfFitnessForWorkGrade
@@ -490,17 +730,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of UnitedKingdomStatementOfFitnessForWorkGrade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGrade'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomStatementOfFitnessForWorkGrade
       operationId: createUnitedKingdomStatementOfFitnessForWorkGrade
@@ -511,15 +771,25 @@ paths:
             schema:
               $ref: '#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGrade'
       responses:
-        '201':
+        '200':
           description: The newly created UnitedKingdomStatementOfFitnessForWorkGrade
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGrade'
         '400':
-          description: Validation error
-  /united-kingdom-statement-of-fitness-for-work-grades/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/united_kingdom_statement_of_fitness_for_work_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -539,6 +809,10 @@ paths:
                 $ref: '#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGrade'
         '404':
           description: UnitedKingdomStatementOfFitnessForWorkGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomStatementOfFitnessForWorkGrade
       operationId: updateUnitedKingdomStatementOfFitnessForWorkGrade
@@ -557,15 +831,29 @@ paths:
                 $ref: '#/components/schemas/UnitedKingdomStatementOfFitnessForWorkGrade'
         '404':
           description: UnitedKingdomStatementOfFitnessForWorkGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a UnitedKingdomStatementOfFitnessForWorkGrade
+      summary: Delete a UnitedKingdomStatementOfFitnessForWorkGrade
       operationId: deleteUnitedKingdomStatementOfFitnessForWorkGrade
       responses:
-        '204':
+        '200':
           description: UnitedKingdomStatementOfFitnessForWorkGrade deleted
         '404':
           description: UnitedKingdomStatementOfFitnessForWorkGrade not found
-  /united-kingdom-statement-of-fitness-for-works:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/united_kingdom_statement_of_fitness_for_works:
     get:
       summary: List UnitedKingdomStatementOfFitnessForWork records
       operationId: listUnitedKingdomStatementOfFitnessForWork
@@ -583,17 +871,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of UnitedKingdomStatementOfFitnessForWork records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/UnitedKingdomStatementOfFitnessForWork'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new UnitedKingdomStatementOfFitnessForWork
       operationId: createUnitedKingdomStatementOfFitnessForWork
@@ -604,15 +912,25 @@ paths:
             schema:
               $ref: '#/components/schemas/UnitedKingdomStatementOfFitnessForWork'
       responses:
-        '201':
+        '200':
           description: The newly created UnitedKingdomStatementOfFitnessForWork
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnitedKingdomStatementOfFitnessForWork'
         '400':
-          description: Validation error
-  /united-kingdom-statement-of-fitness-for-works/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/united_kingdom_statement_of_fitness_for_works/{id}:
     parameters:
     - name: id
       in: path
@@ -632,6 +950,10 @@ paths:
                 $ref: '#/components/schemas/UnitedKingdomStatementOfFitnessForWork'
         '404':
           description: UnitedKingdomStatementOfFitnessForWork not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing UnitedKingdomStatementOfFitnessForWork
       operationId: updateUnitedKingdomStatementOfFitnessForWork
@@ -650,14 +972,28 @@ paths:
                 $ref: '#/components/schemas/UnitedKingdomStatementOfFitnessForWork'
         '404':
           description: UnitedKingdomStatementOfFitnessForWork not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a UnitedKingdomStatementOfFitnessForWork
+      summary: Delete a UnitedKingdomStatementOfFitnessForWork
       operationId: deleteUnitedKingdomStatementOfFitnessForWork
       responses:
-        '204':
+        '200':
           description: UnitedKingdomStatementOfFitnessForWork deleted
         '404':
           description: UnitedKingdomStatementOfFitnessForWork not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     Clinician:
@@ -859,6 +1195,29 @@ components:
       - updated_at
       - name
       description: Patient who is the subject of the fit note.
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+      - type
+      - title
+      - status
     UnitedKingdomStatementOfFitnessForWork:
       type: object
       properties:

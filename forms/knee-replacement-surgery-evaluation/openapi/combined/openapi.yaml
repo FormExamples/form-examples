@@ -5,9 +5,9 @@ info:
   title: Knee Replacement Surgery Evaluation — JSON API
   version: 1.0.0
   description: Combined OpenAPI specification for the Knee Replacement Surgery Evaluation form, merged
-    from the per-entity specs in this directory. One RESTful resource per SQL table.
+    from the per-entity specs in this directory. One RESTful resource per routed SQL table.
 paths:
-  /clinicians:
+  /api/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -25,17 +25,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Clinician records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Clinician'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
       operationId: createClinician
@@ -46,15 +66,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Clinician'
       responses:
-        '201':
+        '200':
           description: The newly created Clinician
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Clinician'
         '400':
-          description: Validation error
-  /clinicians/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -74,6 +104,10 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
       operationId: updateClinician
@@ -92,15 +126,29 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Clinician
+      summary: Delete a Clinician
       operationId: deleteClinician
       responses:
-        '204':
+        '200':
           description: Clinician deleted
         '404':
           description: Clinician not found
-  /knee-replacement-surgery-evaluation-grade-flags:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/knee_replacement_surgery_evaluation_grade_flags:
     get:
       summary: List KneeReplacementSurgeryEvaluationGradeFlag records
       operationId: listKneeReplacementSurgeryEvaluationGradeFlag
@@ -118,17 +166,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of KneeReplacementSurgeryEvaluationGradeFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/KneeReplacementSurgeryEvaluationGradeFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new KneeReplacementSurgeryEvaluationGradeFlag
       operationId: createKneeReplacementSurgeryEvaluationGradeFlag
@@ -139,15 +207,25 @@ paths:
             schema:
               $ref: '#/components/schemas/KneeReplacementSurgeryEvaluationGradeFlag'
       responses:
-        '201':
+        '200':
           description: The newly created KneeReplacementSurgeryEvaluationGradeFlag
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/KneeReplacementSurgeryEvaluationGradeFlag'
         '400':
-          description: Validation error
-  /knee-replacement-surgery-evaluation-grade-flags/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/knee_replacement_surgery_evaluation_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -167,6 +245,10 @@ paths:
                 $ref: '#/components/schemas/KneeReplacementSurgeryEvaluationGradeFlag'
         '404':
           description: KneeReplacementSurgeryEvaluationGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing KneeReplacementSurgeryEvaluationGradeFlag
       operationId: updateKneeReplacementSurgeryEvaluationGradeFlag
@@ -185,15 +267,29 @@ paths:
                 $ref: '#/components/schemas/KneeReplacementSurgeryEvaluationGradeFlag'
         '404':
           description: KneeReplacementSurgeryEvaluationGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a KneeReplacementSurgeryEvaluationGradeFlag
+      summary: Delete a KneeReplacementSurgeryEvaluationGradeFlag
       operationId: deleteKneeReplacementSurgeryEvaluationGradeFlag
       responses:
-        '204':
+        '200':
           description: KneeReplacementSurgeryEvaluationGradeFlag deleted
         '404':
           description: KneeReplacementSurgeryEvaluationGradeFlag not found
-  /knee-replacement-surgery-evaluation-grades:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/knee_replacement_surgery_evaluation_grades:
     get:
       summary: List KneeReplacementSurgeryEvaluationGrade records
       operationId: listKneeReplacementSurgeryEvaluationGrade
@@ -211,17 +307,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of KneeReplacementSurgeryEvaluationGrade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/KneeReplacementSurgeryEvaluationGrade'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new KneeReplacementSurgeryEvaluationGrade
       operationId: createKneeReplacementSurgeryEvaluationGrade
@@ -232,15 +348,25 @@ paths:
             schema:
               $ref: '#/components/schemas/KneeReplacementSurgeryEvaluationGrade'
       responses:
-        '201':
+        '200':
           description: The newly created KneeReplacementSurgeryEvaluationGrade
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/KneeReplacementSurgeryEvaluationGrade'
         '400':
-          description: Validation error
-  /knee-replacement-surgery-evaluation-grades/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/knee_replacement_surgery_evaluation_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -260,6 +386,10 @@ paths:
                 $ref: '#/components/schemas/KneeReplacementSurgeryEvaluationGrade'
         '404':
           description: KneeReplacementSurgeryEvaluationGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing KneeReplacementSurgeryEvaluationGrade
       operationId: updateKneeReplacementSurgeryEvaluationGrade
@@ -278,15 +408,29 @@ paths:
                 $ref: '#/components/schemas/KneeReplacementSurgeryEvaluationGrade'
         '404':
           description: KneeReplacementSurgeryEvaluationGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a KneeReplacementSurgeryEvaluationGrade
+      summary: Delete a KneeReplacementSurgeryEvaluationGrade
       operationId: deleteKneeReplacementSurgeryEvaluationGrade
       responses:
-        '204':
+        '200':
           description: KneeReplacementSurgeryEvaluationGrade deleted
         '404':
           description: KneeReplacementSurgeryEvaluationGrade not found
-  /knee-replacement-surgery-evaluations:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/knee_replacement_surgery_evaluations:
     get:
       summary: List KneeReplacementSurgeryEvaluation records
       operationId: listKneeReplacementSurgeryEvaluation
@@ -304,17 +448,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of KneeReplacementSurgeryEvaluation records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/KneeReplacementSurgeryEvaluation'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new KneeReplacementSurgeryEvaluation
       operationId: createKneeReplacementSurgeryEvaluation
@@ -325,15 +489,25 @@ paths:
             schema:
               $ref: '#/components/schemas/KneeReplacementSurgeryEvaluation'
       responses:
-        '201':
+        '200':
           description: The newly created KneeReplacementSurgeryEvaluation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/KneeReplacementSurgeryEvaluation'
         '400':
-          description: Validation error
-  /knee-replacement-surgery-evaluations/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/knee_replacement_surgery_evaluations/{id}:
     parameters:
     - name: id
       in: path
@@ -353,6 +527,10 @@ paths:
                 $ref: '#/components/schemas/KneeReplacementSurgeryEvaluation'
         '404':
           description: KneeReplacementSurgeryEvaluation not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing KneeReplacementSurgeryEvaluation
       operationId: updateKneeReplacementSurgeryEvaluation
@@ -371,15 +549,29 @@ paths:
                 $ref: '#/components/schemas/KneeReplacementSurgeryEvaluation'
         '404':
           description: KneeReplacementSurgeryEvaluation not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a KneeReplacementSurgeryEvaluation
+      summary: Delete a KneeReplacementSurgeryEvaluation
       operationId: deleteKneeReplacementSurgeryEvaluation
       responses:
-        '204':
+        '200':
           description: KneeReplacementSurgeryEvaluation deleted
         '404':
           description: KneeReplacementSurgeryEvaluation not found
-  /patients:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -397,17 +589,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Patient records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Patient'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
       operationId: createPatient
@@ -418,15 +630,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Patient'
       responses:
-        '201':
+        '200':
           description: The newly created Patient
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Patient'
         '400':
-          description: Validation error
-  /patients/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -446,6 +668,10 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
       operationId: updatePatient
@@ -464,14 +690,28 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Patient
+      summary: Delete a Patient
       operationId: deletePatient
       responses:
-        '204':
+        '200':
           description: Patient deleted
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     Clinician:
@@ -1404,3 +1644,26 @@ components:
       - name
       - sex
       description: Patient.
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+      - type
+      - title
+      - status

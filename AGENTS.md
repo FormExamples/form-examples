@@ -244,6 +244,7 @@ bin/back-end-with-axum/generate-axum-agents.py --list-stale # Back-end AGENTS.md
 bin/generate-axum-deny-config.py --check # Axum deny.toml drift detector
 bin/axum-forbid-unsafe --check --all # Axum #![forbid(unsafe_code)] crate-root drift detector
 bin/generate-api-transcripts --check   # per-form api-create.http drift detector (336/356; slow, real server)
+bin/axum-axa-upgrade --check --all # axa 0.5 + RFC 9457 problem details drift detector
 bin/axum-msrv-set --msrv 1.97 --check --all # Rust MSRV (rust-version) drift detector, per spec/rust-msrv-n-minus-2/
 bin/generate-forms-tsv.py --check     # forms.tsv drift detector
 bin/generate-tools-doc.py --check     # docs/tools.md drift detector

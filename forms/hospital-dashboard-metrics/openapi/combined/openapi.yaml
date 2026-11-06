@@ -5,9 +5,9 @@ info:
   title: Hospital Dashboard Metrics — JSON API
   version: 1.0.0
   description: Combined OpenAPI specification for the Hospital Dashboard Metrics form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+    per-entity specs in this directory. One RESTful resource per routed SQL table.
 paths:
-  /hospital-dashboard-metric-values:
+  /api/hospital_dashboard_metric_values:
     get:
       summary: List HospitalDashboardMetricValue records
       operationId: listHospitalDashboardMetricValue
@@ -25,17 +25,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of HospitalDashboardMetricValue records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/HospitalDashboardMetricValue'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HospitalDashboardMetricValue
       operationId: createHospitalDashboardMetricValue
@@ -46,15 +66,25 @@ paths:
             schema:
               $ref: '#/components/schemas/HospitalDashboardMetricValue'
       responses:
-        '201':
+        '200':
           description: The newly created HospitalDashboardMetricValue
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HospitalDashboardMetricValue'
         '400':
-          description: Validation error
-  /hospital-dashboard-metric-values/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/hospital_dashboard_metric_values/{id}:
     parameters:
     - name: id
       in: path
@@ -74,6 +104,10 @@ paths:
                 $ref: '#/components/schemas/HospitalDashboardMetricValue'
         '404':
           description: HospitalDashboardMetricValue not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HospitalDashboardMetricValue
       operationId: updateHospitalDashboardMetricValue
@@ -92,15 +126,29 @@ paths:
                 $ref: '#/components/schemas/HospitalDashboardMetricValue'
         '404':
           description: HospitalDashboardMetricValue not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a HospitalDashboardMetricValue
+      summary: Delete a HospitalDashboardMetricValue
       operationId: deleteHospitalDashboardMetricValue
       responses:
-        '204':
+        '200':
           description: HospitalDashboardMetricValue deleted
         '404':
           description: HospitalDashboardMetricValue not found
-  /hospital-dashboard-metricses:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/hospital_dashboard_metrics:
     get:
       summary: List HospitalDashboardMetrics records
       operationId: listHospitalDashboardMetrics
@@ -118,17 +166,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of HospitalDashboardMetrics records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/HospitalDashboardMetrics'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HospitalDashboardMetrics
       operationId: createHospitalDashboardMetrics
@@ -139,15 +207,25 @@ paths:
             schema:
               $ref: '#/components/schemas/HospitalDashboardMetrics'
       responses:
-        '201':
+        '200':
           description: The newly created HospitalDashboardMetrics
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HospitalDashboardMetrics'
         '400':
-          description: Validation error
-  /hospital-dashboard-metricses/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/hospital_dashboard_metrics/{id}:
     parameters:
     - name: id
       in: path
@@ -167,6 +245,10 @@ paths:
                 $ref: '#/components/schemas/HospitalDashboardMetrics'
         '404':
           description: HospitalDashboardMetrics not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HospitalDashboardMetrics
       operationId: updateHospitalDashboardMetrics
@@ -185,14 +267,28 @@ paths:
                 $ref: '#/components/schemas/HospitalDashboardMetrics'
         '404':
           description: HospitalDashboardMetrics not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a HospitalDashboardMetrics
+      summary: Delete a HospitalDashboardMetrics
       operationId: deleteHospitalDashboardMetrics
       responses:
-        '204':
+        '200':
           description: HospitalDashboardMetrics deleted
         '404':
           description: HospitalDashboardMetrics not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     HospitalDashboardMetricValue:
@@ -308,3 +404,26 @@ components:
       - status
       description: 'One hospital KPI reporting period: hospital/site, period month/year, prepared-by,
         and sign-off notes.'
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+      - type
+      - title
+      - status

@@ -5,9 +5,9 @@ info:
   title: Hospital Performance Indicators — JSON API
   version: 1.0.0
   description: Combined OpenAPI specification for the Hospital Performance Indicators form, merged from
-    the per-entity specs in this directory. One RESTful resource per SQL table.
+    the per-entity specs in this directory. One RESTful resource per routed SQL table.
 paths:
-  /hospital-performance-indicator-values:
+  /api/hospital_performance_indicator_values:
     get:
       summary: List HospitalPerformanceIndicatorValue records
       operationId: listHospitalPerformanceIndicatorValue
@@ -25,17 +25,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of HospitalPerformanceIndicatorValue records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/HospitalPerformanceIndicatorValue'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HospitalPerformanceIndicatorValue
       operationId: createHospitalPerformanceIndicatorValue
@@ -46,15 +66,25 @@ paths:
             schema:
               $ref: '#/components/schemas/HospitalPerformanceIndicatorValue'
       responses:
-        '201':
+        '200':
           description: The newly created HospitalPerformanceIndicatorValue
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HospitalPerformanceIndicatorValue'
         '400':
-          description: Validation error
-  /hospital-performance-indicator-values/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/hospital_performance_indicator_values/{id}:
     parameters:
     - name: id
       in: path
@@ -74,6 +104,10 @@ paths:
                 $ref: '#/components/schemas/HospitalPerformanceIndicatorValue'
         '404':
           description: HospitalPerformanceIndicatorValue not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HospitalPerformanceIndicatorValue
       operationId: updateHospitalPerformanceIndicatorValue
@@ -92,15 +126,29 @@ paths:
                 $ref: '#/components/schemas/HospitalPerformanceIndicatorValue'
         '404':
           description: HospitalPerformanceIndicatorValue not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a HospitalPerformanceIndicatorValue
+      summary: Delete a HospitalPerformanceIndicatorValue
       operationId: deleteHospitalPerformanceIndicatorValue
       responses:
-        '204':
+        '200':
           description: HospitalPerformanceIndicatorValue deleted
         '404':
           description: HospitalPerformanceIndicatorValue not found
-  /hospital-performance-indicatorses:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/hospital_performance_indicators:
     get:
       summary: List HospitalPerformanceIndicators records
       operationId: listHospitalPerformanceIndicators
@@ -118,17 +166,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of HospitalPerformanceIndicators records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/HospitalPerformanceIndicators'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new HospitalPerformanceIndicators
       operationId: createHospitalPerformanceIndicators
@@ -139,15 +207,25 @@ paths:
             schema:
               $ref: '#/components/schemas/HospitalPerformanceIndicators'
       responses:
-        '201':
+        '200':
           description: The newly created HospitalPerformanceIndicators
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HospitalPerformanceIndicators'
         '400':
-          description: Validation error
-  /hospital-performance-indicatorses/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/hospital_performance_indicators/{id}:
     parameters:
     - name: id
       in: path
@@ -167,6 +245,10 @@ paths:
                 $ref: '#/components/schemas/HospitalPerformanceIndicators'
         '404':
           description: HospitalPerformanceIndicators not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing HospitalPerformanceIndicators
       operationId: updateHospitalPerformanceIndicators
@@ -185,14 +267,28 @@ paths:
                 $ref: '#/components/schemas/HospitalPerformanceIndicators'
         '404':
           description: HospitalPerformanceIndicators not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a HospitalPerformanceIndicators
+      summary: Delete a HospitalPerformanceIndicators
       operationId: deleteHospitalPerformanceIndicators
       responses:
-        '204':
+        '200':
           description: HospitalPerformanceIndicators deleted
         '404':
           description: HospitalPerformanceIndicators not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     HospitalPerformanceIndicatorValue:
@@ -311,3 +407,26 @@ components:
       - status
       description: 'One hospital Balanced Scorecard reporting period: hospital/site, period month/year,
         prepared-by, and sign-off notes.'
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+      - type
+      - title
+      - status

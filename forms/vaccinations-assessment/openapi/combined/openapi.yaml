@@ -5,102 +5,9 @@ info:
   title: Vaccinations Assessment — JSON API
   version: 1.0.0
   description: Combined OpenAPI specification for the Vaccinations Assessment form, merged from the per-entity
-    specs in this directory. One RESTful resource per SQL table.
+    specs in this directory. One RESTful resource per routed SQL table.
 paths:
-  /additional-flags:
-    get:
-      summary: List AdditionalFlag records
-      operationId: listAdditionalFlag
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of AdditionalFlag records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/AdditionalFlag'
-    post:
-      summary: Create a new AdditionalFlag
-      operationId: createAdditionalFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AdditionalFlag'
-      responses:
-        '201':
-          description: The newly created AdditionalFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AdditionalFlag'
-        '400':
-          description: Validation error
-  /additional-flags/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one AdditionalFlag by id
-      operationId: getAdditionalFlag
-      responses:
-        '200':
-          description: The requested AdditionalFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AdditionalFlag'
-        '404':
-          description: AdditionalFlag not found
-    patch:
-      summary: Update an existing AdditionalFlag
-      operationId: updateAdditionalFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AdditionalFlag'
-      responses:
-        '200':
-          description: The updated AdditionalFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AdditionalFlag'
-        '404':
-          description: AdditionalFlag not found
-    delete:
-      summary: Soft-delete a AdditionalFlag
-      operationId: deleteAdditionalFlag
-      responses:
-        '204':
-          description: AdditionalFlag deleted
-        '404':
-          description: AdditionalFlag not found
-  /administration-records:
+  /api/administration_records:
     get:
       summary: List AdministrationRecord records
       operationId: listAdministrationRecord
@@ -118,17 +25,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of AdministrationRecord records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/AdministrationRecord'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AdministrationRecord
       operationId: createAdministrationRecord
@@ -139,15 +66,25 @@ paths:
             schema:
               $ref: '#/components/schemas/AdministrationRecord'
       responses:
-        '201':
+        '200':
           description: The newly created AdministrationRecord
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AdministrationRecord'
         '400':
-          description: Validation error
-  /administration-records/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/administration_records/{id}:
     parameters:
     - name: id
       in: path
@@ -167,6 +104,10 @@ paths:
                 $ref: '#/components/schemas/AdministrationRecord'
         '404':
           description: AdministrationRecord not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AdministrationRecord
       operationId: updateAdministrationRecord
@@ -185,15 +126,29 @@ paths:
                 $ref: '#/components/schemas/AdministrationRecord'
         '404':
           description: AdministrationRecord not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a AdministrationRecord
+      summary: Delete a AdministrationRecord
       operationId: deleteAdministrationRecord
       responses:
-        '204':
+        '200':
           description: AdministrationRecord deleted
         '404':
           description: AdministrationRecord not found
-  /adult-vaccinationses:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/adult_vaccinations:
     get:
       summary: List AdultVaccinations records
       operationId: listAdultVaccinations
@@ -211,17 +166,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of AdultVaccinations records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/AdultVaccinations'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new AdultVaccinations
       operationId: createAdultVaccinations
@@ -232,15 +207,25 @@ paths:
             schema:
               $ref: '#/components/schemas/AdultVaccinations'
       responses:
-        '201':
+        '200':
           description: The newly created AdultVaccinations
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AdultVaccinations'
         '400':
-          description: Validation error
-  /adult-vaccinationses/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/adult_vaccinations/{id}:
     parameters:
     - name: id
       in: path
@@ -260,6 +245,10 @@ paths:
                 $ref: '#/components/schemas/AdultVaccinations'
         '404':
           description: AdultVaccinations not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing AdultVaccinations
       operationId: updateAdultVaccinations
@@ -278,15 +267,29 @@ paths:
                 $ref: '#/components/schemas/AdultVaccinations'
         '404':
           description: AdultVaccinations not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a AdultVaccinations
+      summary: Delete a AdultVaccinations
       operationId: deleteAdultVaccinations
       responses:
-        '204':
+        '200':
           description: AdultVaccinations deleted
         '404':
           description: AdultVaccinations not found
-  /assessments:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessments:
     get:
       summary: List Assessment records
       operationId: listAssessment
@@ -304,17 +307,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Assessment records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Assessment'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Assessment
       operationId: createAssessment
@@ -325,15 +348,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Assessment'
       responses:
-        '201':
+        '200':
           description: The newly created Assessment
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Assessment'
         '400':
-          description: Validation error
-  /assessments/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessments/{id}:
     parameters:
     - name: id
       in: path
@@ -353,6 +386,10 @@ paths:
                 $ref: '#/components/schemas/Assessment'
         '404':
           description: Assessment not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Assessment
       operationId: updateAssessment
@@ -371,15 +408,29 @@ paths:
                 $ref: '#/components/schemas/Assessment'
         '404':
           description: Assessment not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Assessment
+      summary: Delete a Assessment
       operationId: deleteAssessment
       responses:
-        '204':
+        '200':
           description: Assessment deleted
         '404':
           description: Assessment not found
-  /childhood-vaccinationses:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/childhood_vaccinations:
     get:
       summary: List ChildhoodVaccinations records
       operationId: listChildhoodVaccinations
@@ -397,17 +448,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ChildhoodVaccinations records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ChildhoodVaccinations'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ChildhoodVaccinations
       operationId: createChildhoodVaccinations
@@ -418,15 +489,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ChildhoodVaccinations'
       responses:
-        '201':
+        '200':
           description: The newly created ChildhoodVaccinations
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ChildhoodVaccinations'
         '400':
-          description: Validation error
-  /childhood-vaccinationses/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/childhood_vaccinations/{id}:
     parameters:
     - name: id
       in: path
@@ -446,6 +527,10 @@ paths:
                 $ref: '#/components/schemas/ChildhoodVaccinations'
         '404':
           description: ChildhoodVaccinations not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ChildhoodVaccinations
       operationId: updateChildhoodVaccinations
@@ -464,15 +549,29 @@ paths:
                 $ref: '#/components/schemas/ChildhoodVaccinations'
         '404':
           description: ChildhoodVaccinations not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ChildhoodVaccinations
+      summary: Delete a ChildhoodVaccinations
       operationId: deleteChildhoodVaccinations
       responses:
-        '204':
+        '200':
           description: ChildhoodVaccinations deleted
         '404':
           description: ChildhoodVaccinations not found
-  /clinical-reviews:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/clinical_reviews:
     get:
       summary: List ClinicalReview records
       operationId: listClinicalReview
@@ -490,17 +589,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ClinicalReview records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ClinicalReview'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ClinicalReview
       operationId: createClinicalReview
@@ -511,15 +630,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ClinicalReview'
       responses:
-        '201':
+        '200':
           description: The newly created ClinicalReview
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ClinicalReview'
         '400':
-          description: Validation error
-  /clinical-reviews/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/clinical_reviews/{id}:
     parameters:
     - name: id
       in: path
@@ -539,6 +668,10 @@ paths:
                 $ref: '#/components/schemas/ClinicalReview'
         '404':
           description: ClinicalReview not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ClinicalReview
       operationId: updateClinicalReview
@@ -557,15 +690,29 @@ paths:
                 $ref: '#/components/schemas/ClinicalReview'
         '404':
           description: ClinicalReview not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ClinicalReview
+      summary: Delete a ClinicalReview
       operationId: deleteClinicalReview
       responses:
-        '204':
+        '200':
           description: ClinicalReview deleted
         '404':
           description: ClinicalReview not found
-  /clinicians:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -583,17 +730,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Clinician records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Clinician'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
       operationId: createClinician
@@ -604,15 +771,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Clinician'
       responses:
-        '201':
+        '200':
           description: The newly created Clinician
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Clinician'
         '400':
-          description: Validation error
-  /clinicians/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -632,6 +809,10 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
       operationId: updateClinician
@@ -650,15 +831,29 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Clinician
+      summary: Delete a Clinician
       operationId: deleteClinician
       responses:
-        '204':
+        '200':
           description: Clinician deleted
         '404':
           description: Clinician not found
-  /consent-informations:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/consent_informations:
     get:
       summary: List ConsentInformation records
       operationId: listConsentInformation
@@ -676,17 +871,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ConsentInformation records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ConsentInformation'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ConsentInformation
       operationId: createConsentInformation
@@ -697,15 +912,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ConsentInformation'
       responses:
-        '201':
+        '200':
           description: The newly created ConsentInformation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConsentInformation'
         '400':
-          description: Validation error
-  /consent-informations/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/consent_informations/{id}:
     parameters:
     - name: id
       in: path
@@ -725,6 +950,10 @@ paths:
                 $ref: '#/components/schemas/ConsentInformation'
         '404':
           description: ConsentInformation not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ConsentInformation
       operationId: updateConsentInformation
@@ -743,15 +972,29 @@ paths:
                 $ref: '#/components/schemas/ConsentInformation'
         '404':
           description: ConsentInformation not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ConsentInformation
+      summary: Delete a ConsentInformation
       operationId: deleteConsentInformation
       responses:
-        '204':
+        '200':
           description: ConsentInformation deleted
         '404':
           description: ConsentInformation not found
-  /contraindications-allergieses:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/contraindications_allergies:
     get:
       summary: List ContraindicationsAllergies records
       operationId: listContraindicationsAllergies
@@ -769,17 +1012,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ContraindicationsAllergies records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ContraindicationsAllergies'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ContraindicationsAllergies
       operationId: createContraindicationsAllergies
@@ -790,15 +1053,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ContraindicationsAllergies'
       responses:
-        '201':
+        '200':
           description: The newly created ContraindicationsAllergies
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ContraindicationsAllergies'
         '400':
-          description: Validation error
-  /contraindications-allergieses/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/contraindications_allergies/{id}:
     parameters:
     - name: id
       in: path
@@ -818,6 +1091,10 @@ paths:
                 $ref: '#/components/schemas/ContraindicationsAllergies'
         '404':
           description: ContraindicationsAllergies not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ContraindicationsAllergies
       operationId: updateContraindicationsAllergies
@@ -836,201 +1113,29 @@ paths:
                 $ref: '#/components/schemas/ContraindicationsAllergies'
         '404':
           description: ContraindicationsAllergies not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ContraindicationsAllergies
+      summary: Delete a ContraindicationsAllergies
       operationId: deleteContraindicationsAllergies
       responses:
-        '204':
+        '200':
           description: ContraindicationsAllergies deleted
         '404':
           description: ContraindicationsAllergies not found
-  /fired-rules:
-    get:
-      summary: List FiredRule records
-      operationId: listFiredRule
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of FiredRule records
           content:
-            application/json:
+            application/problem+json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/FiredRule'
-    post:
-      summary: Create a new FiredRule
-      operationId: createFiredRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/FiredRule'
-      responses:
-        '201':
-          description: The newly created FiredRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FiredRule'
-        '400':
-          description: Validation error
-  /fired-rules/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one FiredRule by id
-      operationId: getFiredRule
-      responses:
-        '200':
-          description: The requested FiredRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FiredRule'
-        '404':
-          description: FiredRule not found
-    patch:
-      summary: Update an existing FiredRule
-      operationId: updateFiredRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/FiredRule'
-      responses:
-        '200':
-          description: The updated FiredRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FiredRule'
-        '404':
-          description: FiredRule not found
-    delete:
-      summary: Soft-delete a FiredRule
-      operationId: deleteFiredRule
-      responses:
-        '204':
-          description: FiredRule deleted
-        '404':
-          description: FiredRule not found
-  /grades:
-    get:
-      summary: List Grade records
-      operationId: listGrade
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of Grade records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Grade'
-    post:
-      summary: Create a new Grade
-      operationId: createGrade
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Grade'
-      responses:
-        '201':
-          description: The newly created Grade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Grade'
-        '400':
-          description: Validation error
-  /grades/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one Grade by id
-      operationId: getGrade
-      responses:
-        '200':
-          description: The requested Grade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Grade'
-        '404':
-          description: Grade not found
-    patch:
-      summary: Update an existing Grade
-      operationId: updateGrade
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Grade'
-      responses:
-        '200':
-          description: The updated Grade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Grade'
-        '404':
-          description: Grade not found
-    delete:
-      summary: Soft-delete a Grade
-      operationId: deleteGrade
-      responses:
-        '204':
-          description: Grade deleted
-        '404':
-          description: Grade not found
-  /immunization-histories:
+                $ref: '#/components/schemas/Problem'
+  /api/immunization_histories:
     get:
       summary: List ImmunizationHistory records
       operationId: listImmunizationHistory
@@ -1048,17 +1153,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ImmunizationHistory records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ImmunizationHistory'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ImmunizationHistory
       operationId: createImmunizationHistory
@@ -1069,15 +1194,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ImmunizationHistory'
       responses:
-        '201':
+        '200':
           description: The newly created ImmunizationHistory
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ImmunizationHistory'
         '400':
-          description: Validation error
-  /immunization-histories/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/immunization_histories/{id}:
     parameters:
     - name: id
       in: path
@@ -1097,6 +1232,10 @@ paths:
                 $ref: '#/components/schemas/ImmunizationHistory'
         '404':
           description: ImmunizationHistory not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ImmunizationHistory
       operationId: updateImmunizationHistory
@@ -1115,15 +1254,29 @@ paths:
                 $ref: '#/components/schemas/ImmunizationHistory'
         '404':
           description: ImmunizationHistory not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ImmunizationHistory
+      summary: Delete a ImmunizationHistory
       operationId: deleteImmunizationHistory
       responses:
-        '204':
+        '200':
           description: ImmunizationHistory deleted
         '404':
           description: ImmunizationHistory not found
-  /occupational-vaccinationses:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/occupational_vaccinations:
     get:
       summary: List OccupationalVaccinations records
       operationId: listOccupationalVaccinations
@@ -1141,17 +1294,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of OccupationalVaccinations records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/OccupationalVaccinations'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OccupationalVaccinations
       operationId: createOccupationalVaccinations
@@ -1162,15 +1335,25 @@ paths:
             schema:
               $ref: '#/components/schemas/OccupationalVaccinations'
       responses:
-        '201':
+        '200':
           description: The newly created OccupationalVaccinations
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/OccupationalVaccinations'
         '400':
-          description: Validation error
-  /occupational-vaccinationses/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/occupational_vaccinations/{id}:
     parameters:
     - name: id
       in: path
@@ -1190,6 +1373,10 @@ paths:
                 $ref: '#/components/schemas/OccupationalVaccinations'
         '404':
           description: OccupationalVaccinations not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OccupationalVaccinations
       operationId: updateOccupationalVaccinations
@@ -1208,15 +1395,29 @@ paths:
                 $ref: '#/components/schemas/OccupationalVaccinations'
         '404':
           description: OccupationalVaccinations not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a OccupationalVaccinations
+      summary: Delete a OccupationalVaccinations
       operationId: deleteOccupationalVaccinations
       responses:
-        '204':
+        '200':
           description: OccupationalVaccinations deleted
         '404':
           description: OccupationalVaccinations not found
-  /patients:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1234,17 +1435,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Patient records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Patient'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
       operationId: createPatient
@@ -1255,15 +1476,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Patient'
       responses:
-        '201':
+        '200':
           description: The newly created Patient
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Patient'
         '400':
-          description: Validation error
-  /patients/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -1283,6 +1514,10 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
       operationId: updatePatient
@@ -1301,15 +1536,29 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Patient
+      summary: Delete a Patient
       operationId: deletePatient
       responses:
-        '204':
+        '200':
           description: Patient deleted
         '404':
           description: Patient not found
-  /travel-vaccinationses:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/travel_vaccinations:
     get:
       summary: List TravelVaccinations records
       operationId: listTravelVaccinations
@@ -1327,17 +1576,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of TravelVaccinations records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/TravelVaccinations'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new TravelVaccinations
       operationId: createTravelVaccinations
@@ -1348,15 +1617,25 @@ paths:
             schema:
               $ref: '#/components/schemas/TravelVaccinations'
       responses:
-        '201':
+        '200':
           description: The newly created TravelVaccinations
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/TravelVaccinations'
         '400':
-          description: Validation error
-  /travel-vaccinationses/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/travel_vaccinations/{id}:
     parameters:
     - name: id
       in: path
@@ -1376,6 +1655,10 @@ paths:
                 $ref: '#/components/schemas/TravelVaccinations'
         '404':
           description: TravelVaccinations not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing TravelVaccinations
       operationId: updateTravelVaccinations
@@ -1394,66 +1677,30 @@ paths:
                 $ref: '#/components/schemas/TravelVaccinations'
         '404':
           description: TravelVaccinations not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a TravelVaccinations
+      summary: Delete a TravelVaccinations
       operationId: deleteTravelVaccinations
       responses:
-        '204':
+        '200':
           description: TravelVaccinations deleted
         '404':
           description: TravelVaccinations not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
-    AdditionalFlag:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
-        grade_id:
-          type: string
-          format: uuid
-          description: Foreign key to the grade table.
-        flag_id:
-          type: string
-          maxLength: 30
-          description: Identifier of the additional flag (e.g. FLAG-VAX-001).
-        category:
-          type: string
-          maxLength: 50
-          description: Category grouping for the flag.
-        message:
-          type: string
-          description: Human-readable message describing the flag.
-        priority:
-          type: string
-          enum:
-          - high
-          - medium
-          - low
-          description: 'Flag priority: high, medium, or low.'
-      required:
-      - created_at
-      - updated_at
-      - grade_id
-      - flag_id
-      - category
-      - message
-      - priority
-      description: Additional flags raised during vaccination assessment. Many-to-one child of grade.
     AdministrationRecord:
       type: object
       properties:
@@ -1999,106 +2246,6 @@ components:
       - previous_anaphylaxis
       - anaphylaxis_details
       description: Contraindication and allergy screening for vaccination. One-to-one child of assessment.
-    FiredRule:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
-        grade_id:
-          type: string
-          format: uuid
-          description: Foreign key to the grade table.
-        rule_id:
-          type: string
-          maxLength: 30
-          description: Identifier of the vaccination rule that fired (e.g. VAX-001).
-        category:
-          type: string
-          maxLength: 50
-          description: Category the rule belongs to (e.g. Childhood, Adult, Contraindication).
-        description:
-          type: string
-          description: Description.
-        concern_level:
-          type: string
-          enum:
-          - high
-          - medium
-          - low
-          description: 'Concern level: high, medium, or low.'
-      required:
-      - created_at
-      - updated_at
-      - grade_id
-      - rule_id
-      - category
-      - description
-      - concern_level
-      description: Vaccination rules that fired during assessment grading. Many-to-one child of grade.
-    Grade:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
-        assessment_id:
-          type: string
-          format: uuid
-          description: Foreign key to the assessment table.
-        vaccination_level:
-          type: string
-          enum:
-          - upToDate
-          - partiallyComplete
-          - overdue
-          - contraindicated
-          - draft
-          - ''
-          description: 'Vaccination compliance level: upToDate, partiallyComplete, overdue, contraindicated,
-            or draft.'
-        vaccination_score:
-          type: integer
-          format: int32
-          description: Composite vaccination score (0-100).
-        graded_at:
-          type: string
-          format: date-time
-          description: Graded at.
-      required:
-      - created_at
-      - updated_at
-      - assessment_id
-      - vaccination_level
-      - vaccination_score
-      description: Grading result summarizing vaccination level and composite score. One-to-one child
-        of assessment.
     ImmunizationHistory:
       type: object
       properties:
@@ -2312,6 +2459,29 @@ components:
       - name
       - birth_date
       description: Patient
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+      - type
+      - title
+      - status
     TravelVaccinations:
       type: object
       properties:

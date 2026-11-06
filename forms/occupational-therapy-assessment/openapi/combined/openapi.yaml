@@ -5,9 +5,9 @@ info:
   title: Occupational Therapy Assessment — JSON API
   version: 1.0.0
   description: Combined OpenAPI specification for the Occupational Therapy Assessment form, merged from
-    the per-entity specs in this directory. One RESTful resource per SQL table.
+    the per-entity specs in this directory. One RESTful resource per routed SQL table.
 paths:
-  /assessments:
+  /api/assessments:
     get:
       summary: List Assessment records
       operationId: listAssessment
@@ -25,17 +25,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Assessment records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Assessment'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Assessment
       operationId: createAssessment
@@ -46,15 +66,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Assessment'
       responses:
-        '201':
+        '200':
           description: The newly created Assessment
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Assessment'
         '400':
-          description: Validation error
-  /assessments/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessments/{id}:
     parameters:
     - name: id
       in: path
@@ -74,6 +104,10 @@ paths:
                 $ref: '#/components/schemas/Assessment'
         '404':
           description: Assessment not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Assessment
       operationId: updateAssessment
@@ -92,15 +126,29 @@ paths:
                 $ref: '#/components/schemas/Assessment'
         '404':
           description: Assessment not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Assessment
+      summary: Delete a Assessment
       operationId: deleteAssessment
       responses:
-        '204':
+        '200':
           description: Assessment deleted
         '404':
           description: Assessment not found
-  /clinicians:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -118,17 +166,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Clinician records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Clinician'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
       operationId: createClinician
@@ -139,15 +207,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Clinician'
       responses:
-        '201':
+        '200':
           description: The newly created Clinician
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Clinician'
         '400':
-          description: Validation error
-  /clinicians/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -167,6 +245,10 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
       operationId: updateClinician
@@ -185,294 +267,29 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Clinician
+      summary: Delete a Clinician
       operationId: deleteClinician
       responses:
-        '204':
+        '200':
           description: Clinician deleted
         '404':
           description: Clinician not found
-  /grades:
-    get:
-      summary: List Grade records
-      operationId: listGrade
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of Grade records
           content:
-            application/json:
+            application/problem+json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Grade'
-    post:
-      summary: Create a new Grade
-      operationId: createGrade
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Grade'
-      responses:
-        '201':
-          description: The newly created Grade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Grade'
-        '400':
-          description: Validation error
-  /grades/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one Grade by id
-      operationId: getGrade
-      responses:
-        '200':
-          description: The requested Grade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Grade'
-        '404':
-          description: Grade not found
-    patch:
-      summary: Update an existing Grade
-      operationId: updateGrade
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Grade'
-      responses:
-        '200':
-          description: The updated Grade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Grade'
-        '404':
-          description: Grade not found
-    delete:
-      summary: Soft-delete a Grade
-      operationId: deleteGrade
-      responses:
-        '204':
-          description: Grade deleted
-        '404':
-          description: Grade not found
-  /grading-additional-flags:
-    get:
-      summary: List GradingAdditionalFlag records
-      operationId: listGradingAdditionalFlag
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of GradingAdditionalFlag records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/GradingAdditionalFlag'
-    post:
-      summary: Create a new GradingAdditionalFlag
-      operationId: createGradingAdditionalFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GradingAdditionalFlag'
-      responses:
-        '201':
-          description: The newly created GradingAdditionalFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GradingAdditionalFlag'
-        '400':
-          description: Validation error
-  /grading-additional-flags/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one GradingAdditionalFlag by id
-      operationId: getGradingAdditionalFlag
-      responses:
-        '200':
-          description: The requested GradingAdditionalFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GradingAdditionalFlag'
-        '404':
-          description: GradingAdditionalFlag not found
-    patch:
-      summary: Update an existing GradingAdditionalFlag
-      operationId: updateGradingAdditionalFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GradingAdditionalFlag'
-      responses:
-        '200':
-          description: The updated GradingAdditionalFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GradingAdditionalFlag'
-        '404':
-          description: GradingAdditionalFlag not found
-    delete:
-      summary: Soft-delete a GradingAdditionalFlag
-      operationId: deleteGradingAdditionalFlag
-      responses:
-        '204':
-          description: GradingAdditionalFlag deleted
-        '404':
-          description: GradingAdditionalFlag not found
-  /grading-fired-rules:
-    get:
-      summary: List GradingFiredRule records
-      operationId: listGradingFiredRule
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of GradingFiredRule records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/GradingFiredRule'
-    post:
-      summary: Create a new GradingFiredRule
-      operationId: createGradingFiredRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GradingFiredRule'
-      responses:
-        '201':
-          description: The newly created GradingFiredRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GradingFiredRule'
-        '400':
-          description: Validation error
-  /grading-fired-rules/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one GradingFiredRule by id
-      operationId: getGradingFiredRule
-      responses:
-        '200':
-          description: The requested GradingFiredRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GradingFiredRule'
-        '404':
-          description: GradingFiredRule not found
-    patch:
-      summary: Update an existing GradingFiredRule
-      operationId: updateGradingFiredRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GradingFiredRule'
-      responses:
-        '200':
-          description: The updated GradingFiredRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GradingFiredRule'
-        '404':
-          description: GradingFiredRule not found
-    delete:
-      summary: Soft-delete a GradingFiredRule
-      operationId: deleteGradingFiredRule
-      responses:
-        '204':
-          description: GradingFiredRule deleted
-        '404':
-          description: GradingFiredRule not found
-  /patients:
+                $ref: '#/components/schemas/Problem'
+  /api/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -490,17 +307,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Patient records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Patient'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
       operationId: createPatient
@@ -511,15 +348,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Patient'
       responses:
-        '201':
+        '200':
           description: The newly created Patient
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Patient'
         '400':
-          description: Validation error
-  /patients/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -539,6 +386,10 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
       operationId: updatePatient
@@ -557,14 +408,28 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Patient
+      summary: Delete a Patient
       operationId: deletePatient
       responses:
-        '204':
+        '200':
           description: Patient deleted
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     Assessment:
@@ -801,172 +666,6 @@ components:
       - registration_body
       - registration_number
       description: Clinician
-    Grade:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
-        assessment_id:
-          type: string
-          format: uuid
-          description: Foreign key to the assessment table.
-        performance_mean_score:
-          type: number
-          format: double
-          description: Mean COPM performance score across all rated occupational issues (1-10).
-        satisfaction_mean_score:
-          type: number
-          format: double
-          description: Mean COPM satisfaction score across all rated occupational issues (1-10).
-        performance_category:
-          type: string
-          enum:
-          - significant-issues
-          - moderate-concerns
-          - good-performance
-          - ''
-          description: 'Performance category: significant-issues (<5), moderate-concerns (5-7), good-performance
-            (>7), or empty.'
-        satisfaction_category:
-          type: string
-          enum:
-          - significant-issues
-          - moderate-concerns
-          - good-performance
-          - ''
-          description: 'Satisfaction category: significant-issues (<5), moderate-concerns (5-7), good-performance
-            (>7), or empty.'
-        graded_at:
-          type: string
-          format: date-time
-          description: Timestamp when the COPM grading was computed.
-      required:
-      - created_at
-      - updated_at
-      - assessment_id
-      - performance_category
-      - satisfaction_category
-      - graded_at
-      description: Computed COPM grading result for the occupational therapy assessment. One-to-one child
-        of assessment.
-    GradingAdditionalFlag:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
-        grade_id:
-          type: string
-          format: uuid
-          description: Foreign key to the grade table.
-        flag_id:
-          type: string
-          maxLength: 30
-          description: Identifier of the flag (e.g. FLAG-FALL-RISK-001, FLAG-COGNITION-001).
-        category:
-          type: string
-          maxLength: 100
-          description: Category of the flag (e.g. Safety, Cognitive, Environmental).
-        message:
-          type: string
-          description: Human-readable description of the flagged issue.
-        priority:
-          type: string
-          enum:
-          - high
-          - medium
-          - low
-          description: 'Priority level: high, medium, or low.'
-      required:
-      - created_at
-      - updated_at
-      - grade_id
-      - flag_id
-      - category
-      - message
-      - priority
-      description: Additional flags detected during occupational therapy assessment grading, such as safety
-        risks or urgent intervention needs.
-    GradingFiredRule:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
-        grade_id:
-          type: string
-          format: uuid
-          description: Foreign key to the grade table.
-        rule_id:
-          type: string
-          maxLength: 20
-          description: Identifier of the rule that fired (e.g. COPM-PERF-001, COPM-SAT-001).
-        category:
-          type: string
-          maxLength: 100
-          description: Category of the rule (e.g. Self-Care Performance, Productivity Satisfaction).
-        description:
-          type: string
-          description: Human-readable description of the rule and why it fired.
-        severity_level:
-          type: string
-          enum:
-          - significant-issues
-          - moderate-concerns
-          - good-performance
-          - ''
-          description: 'COPM category contributed by this rule: significant-issues, moderate-concerns,
-            good-performance, or empty.'
-      required:
-      - created_at
-      - updated_at
-      - grade_id
-      - rule_id
-      - category
-      - description
-      - severity_level
-      description: Individual COPM classification rules that evaluated to true during grading of the occupational
-        therapy assessment.
     Patient:
       type: object
       properties:
@@ -1045,3 +744,26 @@ components:
       - name
       - birth_date
       description: Patient
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+      - type
+      - title
+      - status

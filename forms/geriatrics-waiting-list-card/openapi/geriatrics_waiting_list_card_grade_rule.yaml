@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Audit trail of every waiting-time-status / clinical-priority / long-wait rule that fired during grading of a waiting list card.
 paths:
-  /geriatrics-waiting-list-card-grade-rules:
+  /api/geriatrics_waiting_list_card_grade_rules:
     get:
       summary: List GeriatricsWaitingListCardGradeRule records
       operationId: listGeriatricsWaitingListCardGradeRule
@@ -24,17 +24,37 @@ paths:
           schema:
             type: integer
             minimum: 0
+            maximum: 100000
             default: 0
           required: false
       responses:
         "200":
           description: A page of GeriatricsWaitingListCardGradeRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/GeriatricsWaitingListCardGradeRule"
+        "400":
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new GeriatricsWaitingListCardGradeRule
       operationId: createGeriatricsWaitingListCardGradeRule
@@ -45,15 +65,25 @@ paths:
             schema:
               $ref: "#/components/schemas/GeriatricsWaitingListCardGradeRule"
       responses:
-        "201":
+        "200":
           description: The newly created GeriatricsWaitingListCardGradeRule
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/GeriatricsWaitingListCardGradeRule"
         "400":
-          description: Validation error
-  /geriatrics-waiting-list-card-grade-rules/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/geriatrics_waiting_list_card_grade_rules/{id}:
     parameters:
       - name: id
         in: path
@@ -73,6 +103,10 @@ paths:
                 $ref: "#/components/schemas/GeriatricsWaitingListCardGradeRule"
         "404":
           description: GeriatricsWaitingListCardGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing GeriatricsWaitingListCardGradeRule
       operationId: updateGeriatricsWaitingListCardGradeRule
@@ -91,16 +125,53 @@ paths:
                 $ref: "#/components/schemas/GeriatricsWaitingListCardGradeRule"
         "404":
           description: GeriatricsWaitingListCardGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
-      summary: Soft-delete a GeriatricsWaitingListCardGradeRule
+      summary: Delete a GeriatricsWaitingListCardGradeRule
       operationId: deleteGeriatricsWaitingListCardGradeRule
       responses:
-        "204":
+        "200":
           description: GeriatricsWaitingListCardGradeRule deleted
         "404":
           description: GeriatricsWaitingListCardGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
 components:
   schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+        - type
+        - title
+        - status
     GeriatricsWaitingListCardGradeRule:
       type: object
       properties:

@@ -5,9 +5,9 @@ info:
   title: Neuropsychiatry Waiting List Card — JSON API
   version: 1.0.0
   description: Combined OpenAPI specification for the Neuropsychiatry Waiting List Card form, merged from
-    the per-entity specs in this directory. One RESTful resource per SQL table.
+    the per-entity specs in this directory. One RESTful resource per routed SQL table.
 paths:
-  /neuropsych-waiting-list-card-appointments:
+  /api/neuropsych_waiting_list_card_appointments:
     get:
       summary: List NeuropsychWaitingListCardAppointment records
       operationId: listNeuropsychWaitingListCardAppointment
@@ -25,17 +25,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of NeuropsychWaitingListCardAppointment records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/NeuropsychWaitingListCardAppointment'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NeuropsychWaitingListCardAppointment
       operationId: createNeuropsychWaitingListCardAppointment
@@ -46,15 +66,25 @@ paths:
             schema:
               $ref: '#/components/schemas/NeuropsychWaitingListCardAppointment'
       responses:
-        '201':
+        '200':
           description: The newly created NeuropsychWaitingListCardAppointment
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NeuropsychWaitingListCardAppointment'
         '400':
-          description: Validation error
-  /neuropsych-waiting-list-card-appointments/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/neuropsych_waiting_list_card_appointments/{id}:
     parameters:
     - name: id
       in: path
@@ -74,6 +104,10 @@ paths:
                 $ref: '#/components/schemas/NeuropsychWaitingListCardAppointment'
         '404':
           description: NeuropsychWaitingListCardAppointment not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NeuropsychWaitingListCardAppointment
       operationId: updateNeuropsychWaitingListCardAppointment
@@ -92,15 +126,29 @@ paths:
                 $ref: '#/components/schemas/NeuropsychWaitingListCardAppointment'
         '404':
           description: NeuropsychWaitingListCardAppointment not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a NeuropsychWaitingListCardAppointment
+      summary: Delete a NeuropsychWaitingListCardAppointment
       operationId: deleteNeuropsychWaitingListCardAppointment
       responses:
-        '204':
+        '200':
           description: NeuropsychWaitingListCardAppointment deleted
         '404':
           description: NeuropsychWaitingListCardAppointment not found
-  /neuropsych-waiting-list-card-grade-flags:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/neuropsych_waiting_list_card_grade_flags:
     get:
       summary: List NeuropsychWaitingListCardGradeFlag records
       operationId: listNeuropsychWaitingListCardGradeFlag
@@ -118,17 +166,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of NeuropsychWaitingListCardGradeFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/NeuropsychWaitingListCardGradeFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NeuropsychWaitingListCardGradeFlag
       operationId: createNeuropsychWaitingListCardGradeFlag
@@ -139,15 +207,25 @@ paths:
             schema:
               $ref: '#/components/schemas/NeuropsychWaitingListCardGradeFlag'
       responses:
-        '201':
+        '200':
           description: The newly created NeuropsychWaitingListCardGradeFlag
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NeuropsychWaitingListCardGradeFlag'
         '400':
-          description: Validation error
-  /neuropsych-waiting-list-card-grade-flags/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/neuropsych_waiting_list_card_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -167,6 +245,10 @@ paths:
                 $ref: '#/components/schemas/NeuropsychWaitingListCardGradeFlag'
         '404':
           description: NeuropsychWaitingListCardGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NeuropsychWaitingListCardGradeFlag
       operationId: updateNeuropsychWaitingListCardGradeFlag
@@ -185,15 +267,29 @@ paths:
                 $ref: '#/components/schemas/NeuropsychWaitingListCardGradeFlag'
         '404':
           description: NeuropsychWaitingListCardGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a NeuropsychWaitingListCardGradeFlag
+      summary: Delete a NeuropsychWaitingListCardGradeFlag
       operationId: deleteNeuropsychWaitingListCardGradeFlag
       responses:
-        '204':
+        '200':
           description: NeuropsychWaitingListCardGradeFlag deleted
         '404':
           description: NeuropsychWaitingListCardGradeFlag not found
-  /neuropsych-waiting-list-card-grade-rules:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/neuropsych_waiting_list_card_grade_rules:
     get:
       summary: List NeuropsychWaitingListCardGradeRule records
       operationId: listNeuropsychWaitingListCardGradeRule
@@ -211,17 +307,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of NeuropsychWaitingListCardGradeRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/NeuropsychWaitingListCardGradeRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NeuropsychWaitingListCardGradeRule
       operationId: createNeuropsychWaitingListCardGradeRule
@@ -232,15 +348,25 @@ paths:
             schema:
               $ref: '#/components/schemas/NeuropsychWaitingListCardGradeRule'
       responses:
-        '201':
+        '200':
           description: The newly created NeuropsychWaitingListCardGradeRule
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NeuropsychWaitingListCardGradeRule'
         '400':
-          description: Validation error
-  /neuropsych-waiting-list-card-grade-rules/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/neuropsych_waiting_list_card_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -260,6 +386,10 @@ paths:
                 $ref: '#/components/schemas/NeuropsychWaitingListCardGradeRule'
         '404':
           description: NeuropsychWaitingListCardGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NeuropsychWaitingListCardGradeRule
       operationId: updateNeuropsychWaitingListCardGradeRule
@@ -278,15 +408,29 @@ paths:
                 $ref: '#/components/schemas/NeuropsychWaitingListCardGradeRule'
         '404':
           description: NeuropsychWaitingListCardGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a NeuropsychWaitingListCardGradeRule
+      summary: Delete a NeuropsychWaitingListCardGradeRule
       operationId: deleteNeuropsychWaitingListCardGradeRule
       responses:
-        '204':
+        '200':
           description: NeuropsychWaitingListCardGradeRule deleted
         '404':
           description: NeuropsychWaitingListCardGradeRule not found
-  /neuropsych-waiting-list-card-grades:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/neuropsych_waiting_list_card_grades:
     get:
       summary: List NeuropsychWaitingListCardGrade records
       operationId: listNeuropsychWaitingListCardGrade
@@ -304,17 +448,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of NeuropsychWaitingListCardGrade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/NeuropsychWaitingListCardGrade'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NeuropsychWaitingListCardGrade
       operationId: createNeuropsychWaitingListCardGrade
@@ -325,15 +489,25 @@ paths:
             schema:
               $ref: '#/components/schemas/NeuropsychWaitingListCardGrade'
       responses:
-        '201':
+        '200':
           description: The newly created NeuropsychWaitingListCardGrade
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NeuropsychWaitingListCardGrade'
         '400':
-          description: Validation error
-  /neuropsych-waiting-list-card-grades/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/neuropsych_waiting_list_card_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -353,6 +527,10 @@ paths:
                 $ref: '#/components/schemas/NeuropsychWaitingListCardGrade'
         '404':
           description: NeuropsychWaitingListCardGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NeuropsychWaitingListCardGrade
       operationId: updateNeuropsychWaitingListCardGrade
@@ -371,15 +549,29 @@ paths:
                 $ref: '#/components/schemas/NeuropsychWaitingListCardGrade'
         '404':
           description: NeuropsychWaitingListCardGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a NeuropsychWaitingListCardGrade
+      summary: Delete a NeuropsychWaitingListCardGrade
       operationId: deleteNeuropsychWaitingListCardGrade
       responses:
-        '204':
+        '200':
           description: NeuropsychWaitingListCardGrade deleted
         '404':
           description: NeuropsychWaitingListCardGrade not found
-  /neuropsych-waiting-list-cards:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/neuropsych_waiting_list_cards:
     get:
       summary: List NeuropsychWaitingListCard records
       operationId: listNeuropsychWaitingListCard
@@ -397,17 +589,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of NeuropsychWaitingListCard records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/NeuropsychWaitingListCard'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NeuropsychWaitingListCard
       operationId: createNeuropsychWaitingListCard
@@ -418,15 +630,25 @@ paths:
             schema:
               $ref: '#/components/schemas/NeuropsychWaitingListCard'
       responses:
-        '201':
+        '200':
           description: The newly created NeuropsychWaitingListCard
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NeuropsychWaitingListCard'
         '400':
-          description: Validation error
-  /neuropsych-waiting-list-cards/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/neuropsych_waiting_list_cards/{id}:
     parameters:
     - name: id
       in: path
@@ -446,6 +668,10 @@ paths:
                 $ref: '#/components/schemas/NeuropsychWaitingListCard'
         '404':
           description: NeuropsychWaitingListCard not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NeuropsychWaitingListCard
       operationId: updateNeuropsychWaitingListCard
@@ -464,15 +690,29 @@ paths:
                 $ref: '#/components/schemas/NeuropsychWaitingListCard'
         '404':
           description: NeuropsychWaitingListCard not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a NeuropsychWaitingListCard
+      summary: Delete a NeuropsychWaitingListCard
       operationId: deleteNeuropsychWaitingListCard
       responses:
-        '204':
+        '200':
           description: NeuropsychWaitingListCard deleted
         '404':
           description: NeuropsychWaitingListCard not found
-  /patients:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -490,17 +730,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Patient records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Patient'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
       operationId: createPatient
@@ -511,15 +771,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Patient'
       responses:
-        '201':
+        '200':
           description: The newly created Patient
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Patient'
         '400':
-          description: Validation error
-  /patients/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -539,6 +809,10 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
       operationId: updatePatient
@@ -557,15 +831,29 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Patient
+      summary: Delete a Patient
       operationId: deletePatient
       responses:
-        '204':
+        '200':
           description: Patient deleted
         '404':
           description: Patient not found
-  /practitioners:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/practitioners:
     get:
       summary: List Practitioner records
       operationId: listPractitioner
@@ -583,17 +871,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Practitioner records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Practitioner'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
       operationId: createPractitioner
@@ -604,15 +912,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Practitioner'
       responses:
-        '201':
+        '200':
           description: The newly created Practitioner
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Practitioner'
         '400':
-          description: Validation error
-  /practitioners/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/practitioners/{id}:
     parameters:
     - name: id
       in: path
@@ -632,6 +950,10 @@ paths:
                 $ref: '#/components/schemas/Practitioner'
         '404':
           description: Practitioner not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
       operationId: updatePractitioner
@@ -650,14 +972,28 @@ paths:
                 $ref: '#/components/schemas/Practitioner'
         '404':
           description: Practitioner not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Practitioner
+      summary: Delete a Practitioner
       operationId: deletePractitioner
       responses:
-        '204':
+        '200':
           description: Practitioner deleted
         '404':
           description: Practitioner not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     NeuropsychWaitingListCard:
@@ -1336,3 +1672,26 @@ components:
       - organisation_ods_code
       - site_name
       description: Practitioner who completes a neuropsychiatry waiting list card on behalf of the patient.
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+      - type
+      - title
+      - status

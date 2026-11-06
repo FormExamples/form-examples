@@ -5,9 +5,9 @@ info:
   title: Biopsy Test Request — JSON API
   version: 1.0.0
   description: Combined OpenAPI specification for the Biopsy Test Request form, merged from the per-entity
-    specs in this directory. One RESTful resource per SQL table.
+    specs in this directory. One RESTful resource per routed SQL table.
 paths:
-  /biopsy-test-request-grade-flags:
+  /api/biopsy_test_request_grade_flags:
     get:
       summary: List BiopsyTestRequestGradeFlag records
       operationId: listBiopsyTestRequestGradeFlag
@@ -25,17 +25,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of BiopsyTestRequestGradeFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/BiopsyTestRequestGradeFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BiopsyTestRequestGradeFlag
       operationId: createBiopsyTestRequestGradeFlag
@@ -46,15 +66,25 @@ paths:
             schema:
               $ref: '#/components/schemas/BiopsyTestRequestGradeFlag'
       responses:
-        '201':
+        '200':
           description: The newly created BiopsyTestRequestGradeFlag
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BiopsyTestRequestGradeFlag'
         '400':
-          description: Validation error
-  /biopsy-test-request-grade-flags/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/biopsy_test_request_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -74,6 +104,10 @@ paths:
                 $ref: '#/components/schemas/BiopsyTestRequestGradeFlag'
         '404':
           description: BiopsyTestRequestGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BiopsyTestRequestGradeFlag
       operationId: updateBiopsyTestRequestGradeFlag
@@ -92,15 +126,29 @@ paths:
                 $ref: '#/components/schemas/BiopsyTestRequestGradeFlag'
         '404':
           description: BiopsyTestRequestGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a BiopsyTestRequestGradeFlag
+      summary: Delete a BiopsyTestRequestGradeFlag
       operationId: deleteBiopsyTestRequestGradeFlag
       responses:
-        '204':
+        '200':
           description: BiopsyTestRequestGradeFlag deleted
         '404':
           description: BiopsyTestRequestGradeFlag not found
-  /biopsy-test-request-grade-rules:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/biopsy_test_request_grade_rules:
     get:
       summary: List BiopsyTestRequestGradeRule records
       operationId: listBiopsyTestRequestGradeRule
@@ -118,17 +166,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of BiopsyTestRequestGradeRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/BiopsyTestRequestGradeRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BiopsyTestRequestGradeRule
       operationId: createBiopsyTestRequestGradeRule
@@ -139,15 +207,25 @@ paths:
             schema:
               $ref: '#/components/schemas/BiopsyTestRequestGradeRule'
       responses:
-        '201':
+        '200':
           description: The newly created BiopsyTestRequestGradeRule
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BiopsyTestRequestGradeRule'
         '400':
-          description: Validation error
-  /biopsy-test-request-grade-rules/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/biopsy_test_request_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -167,6 +245,10 @@ paths:
                 $ref: '#/components/schemas/BiopsyTestRequestGradeRule'
         '404':
           description: BiopsyTestRequestGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BiopsyTestRequestGradeRule
       operationId: updateBiopsyTestRequestGradeRule
@@ -185,15 +267,29 @@ paths:
                 $ref: '#/components/schemas/BiopsyTestRequestGradeRule'
         '404':
           description: BiopsyTestRequestGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a BiopsyTestRequestGradeRule
+      summary: Delete a BiopsyTestRequestGradeRule
       operationId: deleteBiopsyTestRequestGradeRule
       responses:
-        '204':
+        '200':
           description: BiopsyTestRequestGradeRule deleted
         '404':
           description: BiopsyTestRequestGradeRule not found
-  /biopsy-test-request-grades:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/biopsy_test_request_grades:
     get:
       summary: List BiopsyTestRequestGrade records
       operationId: listBiopsyTestRequestGrade
@@ -211,17 +307,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of BiopsyTestRequestGrade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/BiopsyTestRequestGrade'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BiopsyTestRequestGrade
       operationId: createBiopsyTestRequestGrade
@@ -232,15 +348,25 @@ paths:
             schema:
               $ref: '#/components/schemas/BiopsyTestRequestGrade'
       responses:
-        '201':
+        '200':
           description: The newly created BiopsyTestRequestGrade
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BiopsyTestRequestGrade'
         '400':
-          description: Validation error
-  /biopsy-test-request-grades/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/biopsy_test_request_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -260,6 +386,10 @@ paths:
                 $ref: '#/components/schemas/BiopsyTestRequestGrade'
         '404':
           description: BiopsyTestRequestGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BiopsyTestRequestGrade
       operationId: updateBiopsyTestRequestGrade
@@ -278,15 +408,29 @@ paths:
                 $ref: '#/components/schemas/BiopsyTestRequestGrade'
         '404':
           description: BiopsyTestRequestGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a BiopsyTestRequestGrade
+      summary: Delete a BiopsyTestRequestGrade
       operationId: deleteBiopsyTestRequestGrade
       responses:
-        '204':
+        '200':
           description: BiopsyTestRequestGrade deleted
         '404':
           description: BiopsyTestRequestGrade not found
-  /biopsy-test-requests:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/biopsy_test_requests:
     get:
       summary: List BiopsyTestRequest records
       operationId: listBiopsyTestRequest
@@ -304,17 +448,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of BiopsyTestRequest records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/BiopsyTestRequest'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new BiopsyTestRequest
       operationId: createBiopsyTestRequest
@@ -325,15 +489,25 @@ paths:
             schema:
               $ref: '#/components/schemas/BiopsyTestRequest'
       responses:
-        '201':
+        '200':
           description: The newly created BiopsyTestRequest
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BiopsyTestRequest'
         '400':
-          description: Validation error
-  /biopsy-test-requests/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/biopsy_test_requests/{id}:
     parameters:
     - name: id
       in: path
@@ -353,6 +527,10 @@ paths:
                 $ref: '#/components/schemas/BiopsyTestRequest'
         '404':
           description: BiopsyTestRequest not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing BiopsyTestRequest
       operationId: updateBiopsyTestRequest
@@ -371,15 +549,29 @@ paths:
                 $ref: '#/components/schemas/BiopsyTestRequest'
         '404':
           description: BiopsyTestRequest not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a BiopsyTestRequest
+      summary: Delete a BiopsyTestRequest
       operationId: deleteBiopsyTestRequest
       responses:
-        '204':
+        '200':
           description: BiopsyTestRequest deleted
         '404':
           description: BiopsyTestRequest not found
-  /clinicians:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -397,17 +589,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Clinician records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Clinician'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
       operationId: createClinician
@@ -418,15 +630,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Clinician'
       responses:
-        '201':
+        '200':
           description: The newly created Clinician
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Clinician'
         '400':
-          description: Validation error
-  /clinicians/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -446,6 +668,10 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
       operationId: updateClinician
@@ -464,15 +690,29 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Clinician
+      summary: Delete a Clinician
       operationId: deleteClinician
       responses:
-        '204':
+        '200':
           description: Clinician deleted
         '404':
           description: Clinician not found
-  /patients:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -490,17 +730,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Patient records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Patient'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
       operationId: createPatient
@@ -511,15 +771,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Patient'
       responses:
-        '201':
+        '200':
           description: The newly created Patient
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Patient'
         '400':
-          description: Validation error
-  /patients/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -539,6 +809,10 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
       operationId: updatePatient
@@ -557,14 +831,28 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Patient
+      summary: Delete a Patient
       operationId: deletePatient
       responses:
-        '204':
+        '200':
           description: Patient deleted
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     BiopsyTestRequest:
@@ -1153,3 +1441,26 @@ components:
       - name
       - birth_date
       description: Patient
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+      - type
+      - title
+      - status

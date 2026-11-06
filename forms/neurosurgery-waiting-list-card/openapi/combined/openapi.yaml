@@ -5,9 +5,9 @@ info:
   title: Neurosurgery Waiting List Card — JSON API
   version: 1.0.0
   description: Combined OpenAPI specification for the Neurosurgery Waiting List Card form, merged from
-    the per-entity specs in this directory. One RESTful resource per SQL table.
+    the per-entity specs in this directory. One RESTful resource per routed SQL table.
 paths:
-  /neurosurgery-waiting-list-card-appointments:
+  /api/neurosurgery_waiting_list_card_appointments:
     get:
       summary: List NeurosurgeryWaitingListCardAppointment records
       operationId: listNeurosurgeryWaitingListCardAppointment
@@ -25,17 +25,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of NeurosurgeryWaitingListCardAppointment records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/NeurosurgeryWaitingListCardAppointment'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NeurosurgeryWaitingListCardAppointment
       operationId: createNeurosurgeryWaitingListCardAppointment
@@ -46,15 +66,25 @@ paths:
             schema:
               $ref: '#/components/schemas/NeurosurgeryWaitingListCardAppointment'
       responses:
-        '201':
+        '200':
           description: The newly created NeurosurgeryWaitingListCardAppointment
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NeurosurgeryWaitingListCardAppointment'
         '400':
-          description: Validation error
-  /neurosurgery-waiting-list-card-appointments/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/neurosurgery_waiting_list_card_appointments/{id}:
     parameters:
     - name: id
       in: path
@@ -74,6 +104,10 @@ paths:
                 $ref: '#/components/schemas/NeurosurgeryWaitingListCardAppointment'
         '404':
           description: NeurosurgeryWaitingListCardAppointment not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NeurosurgeryWaitingListCardAppointment
       operationId: updateNeurosurgeryWaitingListCardAppointment
@@ -92,15 +126,29 @@ paths:
                 $ref: '#/components/schemas/NeurosurgeryWaitingListCardAppointment'
         '404':
           description: NeurosurgeryWaitingListCardAppointment not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a NeurosurgeryWaitingListCardAppointment
+      summary: Delete a NeurosurgeryWaitingListCardAppointment
       operationId: deleteNeurosurgeryWaitingListCardAppointment
       responses:
-        '204':
+        '200':
           description: NeurosurgeryWaitingListCardAppointment deleted
         '404':
           description: NeurosurgeryWaitingListCardAppointment not found
-  /neurosurgery-waiting-list-card-grade-flags:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/neurosurgery_waiting_list_card_grade_flags:
     get:
       summary: List NeurosurgeryWaitingListCardGradeFlag records
       operationId: listNeurosurgeryWaitingListCardGradeFlag
@@ -118,17 +166,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of NeurosurgeryWaitingListCardGradeFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/NeurosurgeryWaitingListCardGradeFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NeurosurgeryWaitingListCardGradeFlag
       operationId: createNeurosurgeryWaitingListCardGradeFlag
@@ -139,15 +207,25 @@ paths:
             schema:
               $ref: '#/components/schemas/NeurosurgeryWaitingListCardGradeFlag'
       responses:
-        '201':
+        '200':
           description: The newly created NeurosurgeryWaitingListCardGradeFlag
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NeurosurgeryWaitingListCardGradeFlag'
         '400':
-          description: Validation error
-  /neurosurgery-waiting-list-card-grade-flags/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/neurosurgery_waiting_list_card_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -167,6 +245,10 @@ paths:
                 $ref: '#/components/schemas/NeurosurgeryWaitingListCardGradeFlag'
         '404':
           description: NeurosurgeryWaitingListCardGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NeurosurgeryWaitingListCardGradeFlag
       operationId: updateNeurosurgeryWaitingListCardGradeFlag
@@ -185,15 +267,29 @@ paths:
                 $ref: '#/components/schemas/NeurosurgeryWaitingListCardGradeFlag'
         '404':
           description: NeurosurgeryWaitingListCardGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a NeurosurgeryWaitingListCardGradeFlag
+      summary: Delete a NeurosurgeryWaitingListCardGradeFlag
       operationId: deleteNeurosurgeryWaitingListCardGradeFlag
       responses:
-        '204':
+        '200':
           description: NeurosurgeryWaitingListCardGradeFlag deleted
         '404':
           description: NeurosurgeryWaitingListCardGradeFlag not found
-  /neurosurgery-waiting-list-card-grade-rules:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/neurosurgery_waiting_list_card_grade_rules:
     get:
       summary: List NeurosurgeryWaitingListCardGradeRule records
       operationId: listNeurosurgeryWaitingListCardGradeRule
@@ -211,17 +307,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of NeurosurgeryWaitingListCardGradeRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/NeurosurgeryWaitingListCardGradeRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NeurosurgeryWaitingListCardGradeRule
       operationId: createNeurosurgeryWaitingListCardGradeRule
@@ -232,15 +348,25 @@ paths:
             schema:
               $ref: '#/components/schemas/NeurosurgeryWaitingListCardGradeRule'
       responses:
-        '201':
+        '200':
           description: The newly created NeurosurgeryWaitingListCardGradeRule
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NeurosurgeryWaitingListCardGradeRule'
         '400':
-          description: Validation error
-  /neurosurgery-waiting-list-card-grade-rules/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/neurosurgery_waiting_list_card_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -260,6 +386,10 @@ paths:
                 $ref: '#/components/schemas/NeurosurgeryWaitingListCardGradeRule'
         '404':
           description: NeurosurgeryWaitingListCardGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NeurosurgeryWaitingListCardGradeRule
       operationId: updateNeurosurgeryWaitingListCardGradeRule
@@ -278,15 +408,29 @@ paths:
                 $ref: '#/components/schemas/NeurosurgeryWaitingListCardGradeRule'
         '404':
           description: NeurosurgeryWaitingListCardGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a NeurosurgeryWaitingListCardGradeRule
+      summary: Delete a NeurosurgeryWaitingListCardGradeRule
       operationId: deleteNeurosurgeryWaitingListCardGradeRule
       responses:
-        '204':
+        '200':
           description: NeurosurgeryWaitingListCardGradeRule deleted
         '404':
           description: NeurosurgeryWaitingListCardGradeRule not found
-  /neurosurgery-waiting-list-card-grades:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/neurosurgery_waiting_list_card_grades:
     get:
       summary: List NeurosurgeryWaitingListCardGrade records
       operationId: listNeurosurgeryWaitingListCardGrade
@@ -304,17 +448,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of NeurosurgeryWaitingListCardGrade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/NeurosurgeryWaitingListCardGrade'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NeurosurgeryWaitingListCardGrade
       operationId: createNeurosurgeryWaitingListCardGrade
@@ -325,15 +489,25 @@ paths:
             schema:
               $ref: '#/components/schemas/NeurosurgeryWaitingListCardGrade'
       responses:
-        '201':
+        '200':
           description: The newly created NeurosurgeryWaitingListCardGrade
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NeurosurgeryWaitingListCardGrade'
         '400':
-          description: Validation error
-  /neurosurgery-waiting-list-card-grades/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/neurosurgery_waiting_list_card_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -353,6 +527,10 @@ paths:
                 $ref: '#/components/schemas/NeurosurgeryWaitingListCardGrade'
         '404':
           description: NeurosurgeryWaitingListCardGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NeurosurgeryWaitingListCardGrade
       operationId: updateNeurosurgeryWaitingListCardGrade
@@ -371,15 +549,29 @@ paths:
                 $ref: '#/components/schemas/NeurosurgeryWaitingListCardGrade'
         '404':
           description: NeurosurgeryWaitingListCardGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a NeurosurgeryWaitingListCardGrade
+      summary: Delete a NeurosurgeryWaitingListCardGrade
       operationId: deleteNeurosurgeryWaitingListCardGrade
       responses:
-        '204':
+        '200':
           description: NeurosurgeryWaitingListCardGrade deleted
         '404':
           description: NeurosurgeryWaitingListCardGrade not found
-  /neurosurgery-waiting-list-cards:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/neurosurgery_waiting_list_cards:
     get:
       summary: List NeurosurgeryWaitingListCard records
       operationId: listNeurosurgeryWaitingListCard
@@ -397,17 +589,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of NeurosurgeryWaitingListCard records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/NeurosurgeryWaitingListCard'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NeurosurgeryWaitingListCard
       operationId: createNeurosurgeryWaitingListCard
@@ -418,15 +630,25 @@ paths:
             schema:
               $ref: '#/components/schemas/NeurosurgeryWaitingListCard'
       responses:
-        '201':
+        '200':
           description: The newly created NeurosurgeryWaitingListCard
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NeurosurgeryWaitingListCard'
         '400':
-          description: Validation error
-  /neurosurgery-waiting-list-cards/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/neurosurgery_waiting_list_cards/{id}:
     parameters:
     - name: id
       in: path
@@ -446,6 +668,10 @@ paths:
                 $ref: '#/components/schemas/NeurosurgeryWaitingListCard'
         '404':
           description: NeurosurgeryWaitingListCard not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NeurosurgeryWaitingListCard
       operationId: updateNeurosurgeryWaitingListCard
@@ -464,15 +690,29 @@ paths:
                 $ref: '#/components/schemas/NeurosurgeryWaitingListCard'
         '404':
           description: NeurosurgeryWaitingListCard not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a NeurosurgeryWaitingListCard
+      summary: Delete a NeurosurgeryWaitingListCard
       operationId: deleteNeurosurgeryWaitingListCard
       responses:
-        '204':
+        '200':
           description: NeurosurgeryWaitingListCard deleted
         '404':
           description: NeurosurgeryWaitingListCard not found
-  /patients:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -490,17 +730,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Patient records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Patient'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
       operationId: createPatient
@@ -511,15 +771,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Patient'
       responses:
-        '201':
+        '200':
           description: The newly created Patient
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Patient'
         '400':
-          description: Validation error
-  /patients/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -539,6 +809,10 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
       operationId: updatePatient
@@ -557,15 +831,29 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Patient
+      summary: Delete a Patient
       operationId: deletePatient
       responses:
-        '204':
+        '200':
           description: Patient deleted
         '404':
           description: Patient not found
-  /practitioners:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/practitioners:
     get:
       summary: List Practitioner records
       operationId: listPractitioner
@@ -583,17 +871,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Practitioner records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Practitioner'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Practitioner
       operationId: createPractitioner
@@ -604,15 +912,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Practitioner'
       responses:
-        '201':
+        '200':
           description: The newly created Practitioner
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Practitioner'
         '400':
-          description: Validation error
-  /practitioners/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/practitioners/{id}:
     parameters:
     - name: id
       in: path
@@ -632,6 +950,10 @@ paths:
                 $ref: '#/components/schemas/Practitioner'
         '404':
           description: Practitioner not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Practitioner
       operationId: updatePractitioner
@@ -650,14 +972,28 @@ paths:
                 $ref: '#/components/schemas/Practitioner'
         '404':
           description: Practitioner not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Practitioner
+      summary: Delete a Practitioner
       operationId: deletePractitioner
       responses:
-        '204':
+        '200':
           description: Practitioner deleted
         '404':
           description: Practitioner not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     NeurosurgeryWaitingListCard:
@@ -1336,3 +1672,26 @@ components:
       - organisation_ods_code
       - site_name
       description: Practitioner who completes a neurosurgery waiting list card on behalf of the patient.
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+      - type
+      - title
+      - status

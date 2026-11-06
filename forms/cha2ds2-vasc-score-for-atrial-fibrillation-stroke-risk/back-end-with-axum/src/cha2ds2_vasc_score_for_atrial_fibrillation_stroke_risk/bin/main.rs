@@ -1,10 +1,13 @@
 #![forbid(unsafe_code)]
 
-use axa::cli::Cli;
 use cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk::app::App;
-use clap::Parser;
 
 #[tokio::main]
 async fn main() -> axa::Result<()> {
-    App::run(Cli::parse()).await
+    App::run(axa::cli::parse(
+        env!("CARGO_PKG_NAME"),
+        env!("CARGO_PKG_VERSION"),
+        env!("CARGO_PKG_DESCRIPTION"),
+    ))
+    .await
 }

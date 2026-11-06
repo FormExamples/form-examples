@@ -5,9 +5,9 @@ info:
   title: Nursing Care Plan — JSON API
   version: 1.0.0
   description: Combined OpenAPI specification for the Nursing Care Plan form, merged from the per-entity
-    specs in this directory. One RESTful resource per SQL table.
+    specs in this directory. One RESTful resource per routed SQL table.
 paths:
-  /clinicians:
+  /api/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -25,17 +25,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Clinician records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Clinician'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
       operationId: createClinician
@@ -46,15 +66,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Clinician'
       responses:
-        '201':
+        '200':
           description: The newly created Clinician
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Clinician'
         '400':
-          description: Validation error
-  /clinicians/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -74,6 +104,10 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
       operationId: updateClinician
@@ -92,15 +126,29 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Clinician
+      summary: Delete a Clinician
       operationId: deleteClinician
       responses:
-        '204':
+        '200':
           description: Clinician deleted
         '404':
           description: Clinician not found
-  /nursing-care-plan-goals:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/nursing_care_plan_goals:
     get:
       summary: List NursingCarePlanGoal records
       operationId: listNursingCarePlanGoal
@@ -118,17 +166,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of NursingCarePlanGoal records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/NursingCarePlanGoal'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NursingCarePlanGoal
       operationId: createNursingCarePlanGoal
@@ -139,15 +207,25 @@ paths:
             schema:
               $ref: '#/components/schemas/NursingCarePlanGoal'
       responses:
-        '201':
+        '200':
           description: The newly created NursingCarePlanGoal
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NursingCarePlanGoal'
         '400':
-          description: Validation error
-  /nursing-care-plan-goals/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/nursing_care_plan_goals/{id}:
     parameters:
     - name: id
       in: path
@@ -167,6 +245,10 @@ paths:
                 $ref: '#/components/schemas/NursingCarePlanGoal'
         '404':
           description: NursingCarePlanGoal not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NursingCarePlanGoal
       operationId: updateNursingCarePlanGoal
@@ -185,15 +267,29 @@ paths:
                 $ref: '#/components/schemas/NursingCarePlanGoal'
         '404':
           description: NursingCarePlanGoal not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a NursingCarePlanGoal
+      summary: Delete a NursingCarePlanGoal
       operationId: deleteNursingCarePlanGoal
       responses:
-        '204':
+        '200':
           description: NursingCarePlanGoal deleted
         '404':
           description: NursingCarePlanGoal not found
-  /nursing-care-plan-grade-flags:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/nursing_care_plan_grade_flags:
     get:
       summary: List NursingCarePlanGradeFlag records
       operationId: listNursingCarePlanGradeFlag
@@ -211,17 +307,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of NursingCarePlanGradeFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/NursingCarePlanGradeFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NursingCarePlanGradeFlag
       operationId: createNursingCarePlanGradeFlag
@@ -232,15 +348,25 @@ paths:
             schema:
               $ref: '#/components/schemas/NursingCarePlanGradeFlag'
       responses:
-        '201':
+        '200':
           description: The newly created NursingCarePlanGradeFlag
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NursingCarePlanGradeFlag'
         '400':
-          description: Validation error
-  /nursing-care-plan-grade-flags/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/nursing_care_plan_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -260,6 +386,10 @@ paths:
                 $ref: '#/components/schemas/NursingCarePlanGradeFlag'
         '404':
           description: NursingCarePlanGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NursingCarePlanGradeFlag
       operationId: updateNursingCarePlanGradeFlag
@@ -278,15 +408,29 @@ paths:
                 $ref: '#/components/schemas/NursingCarePlanGradeFlag'
         '404':
           description: NursingCarePlanGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a NursingCarePlanGradeFlag
+      summary: Delete a NursingCarePlanGradeFlag
       operationId: deleteNursingCarePlanGradeFlag
       responses:
-        '204':
+        '200':
           description: NursingCarePlanGradeFlag deleted
         '404':
           description: NursingCarePlanGradeFlag not found
-  /nursing-care-plan-grade-rules:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/nursing_care_plan_grade_rules:
     get:
       summary: List NursingCarePlanGradeRule records
       operationId: listNursingCarePlanGradeRule
@@ -304,17 +448,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of NursingCarePlanGradeRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/NursingCarePlanGradeRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NursingCarePlanGradeRule
       operationId: createNursingCarePlanGradeRule
@@ -325,15 +489,25 @@ paths:
             schema:
               $ref: '#/components/schemas/NursingCarePlanGradeRule'
       responses:
-        '201':
+        '200':
           description: The newly created NursingCarePlanGradeRule
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NursingCarePlanGradeRule'
         '400':
-          description: Validation error
-  /nursing-care-plan-grade-rules/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/nursing_care_plan_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -353,6 +527,10 @@ paths:
                 $ref: '#/components/schemas/NursingCarePlanGradeRule'
         '404':
           description: NursingCarePlanGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NursingCarePlanGradeRule
       operationId: updateNursingCarePlanGradeRule
@@ -371,15 +549,29 @@ paths:
                 $ref: '#/components/schemas/NursingCarePlanGradeRule'
         '404':
           description: NursingCarePlanGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a NursingCarePlanGradeRule
+      summary: Delete a NursingCarePlanGradeRule
       operationId: deleteNursingCarePlanGradeRule
       responses:
-        '204':
+        '200':
           description: NursingCarePlanGradeRule deleted
         '404':
           description: NursingCarePlanGradeRule not found
-  /nursing-care-plan-grades:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/nursing_care_plan_grades:
     get:
       summary: List NursingCarePlanGrade records
       operationId: listNursingCarePlanGrade
@@ -397,17 +589,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of NursingCarePlanGrade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/NursingCarePlanGrade'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NursingCarePlanGrade
       operationId: createNursingCarePlanGrade
@@ -418,15 +630,25 @@ paths:
             schema:
               $ref: '#/components/schemas/NursingCarePlanGrade'
       responses:
-        '201':
+        '200':
           description: The newly created NursingCarePlanGrade
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NursingCarePlanGrade'
         '400':
-          description: Validation error
-  /nursing-care-plan-grades/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/nursing_care_plan_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -446,6 +668,10 @@ paths:
                 $ref: '#/components/schemas/NursingCarePlanGrade'
         '404':
           description: NursingCarePlanGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NursingCarePlanGrade
       operationId: updateNursingCarePlanGrade
@@ -464,15 +690,29 @@ paths:
                 $ref: '#/components/schemas/NursingCarePlanGrade'
         '404':
           description: NursingCarePlanGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a NursingCarePlanGrade
+      summary: Delete a NursingCarePlanGrade
       operationId: deleteNursingCarePlanGrade
       responses:
-        '204':
+        '200':
           description: NursingCarePlanGrade deleted
         '404':
           description: NursingCarePlanGrade not found
-  /nursing-care-plan-interventions:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/nursing_care_plan_interventions:
     get:
       summary: List NursingCarePlanIntervention records
       operationId: listNursingCarePlanIntervention
@@ -490,17 +730,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of NursingCarePlanIntervention records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/NursingCarePlanIntervention'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NursingCarePlanIntervention
       operationId: createNursingCarePlanIntervention
@@ -511,15 +771,25 @@ paths:
             schema:
               $ref: '#/components/schemas/NursingCarePlanIntervention'
       responses:
-        '201':
+        '200':
           description: The newly created NursingCarePlanIntervention
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NursingCarePlanIntervention'
         '400':
-          description: Validation error
-  /nursing-care-plan-interventions/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/nursing_care_plan_interventions/{id}:
     parameters:
     - name: id
       in: path
@@ -539,6 +809,10 @@ paths:
                 $ref: '#/components/schemas/NursingCarePlanIntervention'
         '404':
           description: NursingCarePlanIntervention not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NursingCarePlanIntervention
       operationId: updateNursingCarePlanIntervention
@@ -557,15 +831,29 @@ paths:
                 $ref: '#/components/schemas/NursingCarePlanIntervention'
         '404':
           description: NursingCarePlanIntervention not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a NursingCarePlanIntervention
+      summary: Delete a NursingCarePlanIntervention
       operationId: deleteNursingCarePlanIntervention
       responses:
-        '204':
+        '200':
           description: NursingCarePlanIntervention deleted
         '404':
           description: NursingCarePlanIntervention not found
-  /nursing-care-plan-problems:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/nursing_care_plan_problems:
     get:
       summary: List NursingCarePlanProblem records
       operationId: listNursingCarePlanProblem
@@ -583,17 +871,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of NursingCarePlanProblem records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/NursingCarePlanProblem'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NursingCarePlanProblem
       operationId: createNursingCarePlanProblem
@@ -604,15 +912,25 @@ paths:
             schema:
               $ref: '#/components/schemas/NursingCarePlanProblem'
       responses:
-        '201':
+        '200':
           description: The newly created NursingCarePlanProblem
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NursingCarePlanProblem'
         '400':
-          description: Validation error
-  /nursing-care-plan-problems/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/nursing_care_plan_problems/{id}:
     parameters:
     - name: id
       in: path
@@ -632,6 +950,10 @@ paths:
                 $ref: '#/components/schemas/NursingCarePlanProblem'
         '404':
           description: NursingCarePlanProblem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NursingCarePlanProblem
       operationId: updateNursingCarePlanProblem
@@ -650,15 +972,29 @@ paths:
                 $ref: '#/components/schemas/NursingCarePlanProblem'
         '404':
           description: NursingCarePlanProblem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a NursingCarePlanProblem
+      summary: Delete a NursingCarePlanProblem
       operationId: deleteNursingCarePlanProblem
       responses:
-        '204':
+        '200':
           description: NursingCarePlanProblem deleted
         '404':
           description: NursingCarePlanProblem not found
-  /nursing-care-plans:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/nursing_care_plans:
     get:
       summary: List NursingCarePlan records
       operationId: listNursingCarePlan
@@ -676,17 +1012,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of NursingCarePlan records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/NursingCarePlan'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new NursingCarePlan
       operationId: createNursingCarePlan
@@ -697,15 +1053,25 @@ paths:
             schema:
               $ref: '#/components/schemas/NursingCarePlan'
       responses:
-        '201':
+        '200':
           description: The newly created NursingCarePlan
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NursingCarePlan'
         '400':
-          description: Validation error
-  /nursing-care-plans/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/nursing_care_plans/{id}:
     parameters:
     - name: id
       in: path
@@ -725,6 +1091,10 @@ paths:
                 $ref: '#/components/schemas/NursingCarePlan'
         '404':
           description: NursingCarePlan not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing NursingCarePlan
       operationId: updateNursingCarePlan
@@ -743,15 +1113,29 @@ paths:
                 $ref: '#/components/schemas/NursingCarePlan'
         '404':
           description: NursingCarePlan not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a NursingCarePlan
+      summary: Delete a NursingCarePlan
       operationId: deleteNursingCarePlan
       responses:
-        '204':
+        '200':
           description: NursingCarePlan deleted
         '404':
           description: NursingCarePlan not found
-  /patients:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -769,17 +1153,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Patient records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Patient'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
       operationId: createPatient
@@ -790,15 +1194,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Patient'
       responses:
-        '201':
+        '200':
           description: The newly created Patient
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Patient'
         '400':
-          description: Validation error
-  /patients/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -818,6 +1232,10 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
       operationId: updatePatient
@@ -836,14 +1254,28 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Patient
+      summary: Delete a Patient
       operationId: deletePatient
       responses:
-        '204':
+        '200':
           description: Patient deleted
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     Clinician:
@@ -1580,3 +2012,26 @@ components:
       - sex
       - allergies_summary
       description: Patient demographic information used by the nursing care plan record.
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+      - type
+      - title
+      - status

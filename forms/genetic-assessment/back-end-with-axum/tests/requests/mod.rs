@@ -3,5 +3,6 @@ pub mod assessment_cancer_history;
 pub mod clinician;
 mod db_commands;
 mod pagination;
+mod problem;
 pub mod patient;
 mod readiness;

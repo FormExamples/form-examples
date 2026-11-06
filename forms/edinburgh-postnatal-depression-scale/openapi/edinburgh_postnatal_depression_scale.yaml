@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main EPDS assessment record: assessment context, respondent identification, and the ten already-reverse-corrected item responses (0-3 each, higher = more symptomatic)."
 paths:
-  /edinburgh-postnatal-depression-scales:
+  /api/edinburgh_postnatal_depression_scales:
     get:
       summary: List EdinburghPostnatalDepressionScale records
       operationId: listEdinburghPostnatalDepressionScale
@@ -24,17 +24,37 @@ paths:
           schema:
             type: integer
             minimum: 0
+            maximum: 100000
             default: 0
           required: false
       responses:
         "200":
           description: A page of EdinburghPostnatalDepressionScale records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/EdinburghPostnatalDepressionScale"
+        "400":
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new EdinburghPostnatalDepressionScale
       operationId: createEdinburghPostnatalDepressionScale
@@ -45,15 +65,25 @@ paths:
             schema:
               $ref: "#/components/schemas/EdinburghPostnatalDepressionScale"
       responses:
-        "201":
+        "200":
           description: The newly created EdinburghPostnatalDepressionScale
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/EdinburghPostnatalDepressionScale"
         "400":
-          description: Validation error
-  /edinburgh-postnatal-depression-scales/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/edinburgh_postnatal_depression_scales/{id}:
     parameters:
       - name: id
         in: path
@@ -73,6 +103,10 @@ paths:
                 $ref: "#/components/schemas/EdinburghPostnatalDepressionScale"
         "404":
           description: EdinburghPostnatalDepressionScale not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing EdinburghPostnatalDepressionScale
       operationId: updateEdinburghPostnatalDepressionScale
@@ -91,16 +125,53 @@ paths:
                 $ref: "#/components/schemas/EdinburghPostnatalDepressionScale"
         "404":
           description: EdinburghPostnatalDepressionScale not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
-      summary: Soft-delete a EdinburghPostnatalDepressionScale
+      summary: Delete a EdinburghPostnatalDepressionScale
       operationId: deleteEdinburghPostnatalDepressionScale
       responses:
-        "204":
+        "200":
           description: EdinburghPostnatalDepressionScale deleted
         "404":
           description: EdinburghPostnatalDepressionScale not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
 components:
   schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+        - type
+        - title
+        - status
     EdinburghPostnatalDepressionScale:
       type: object
       properties:

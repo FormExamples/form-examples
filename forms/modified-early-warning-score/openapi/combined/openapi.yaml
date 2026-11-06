@@ -5,9 +5,9 @@ info:
   title: Modified Early Warning Score (MEWS) — JSON API
   version: 1.0.0
   description: Combined OpenAPI specification for the Modified Early Warning Score (MEWS) form, merged
-    from the per-entity specs in this directory. One RESTful resource per SQL table.
+    from the per-entity specs in this directory. One RESTful resource per routed SQL table.
 paths:
-  /clinicians:
+  /api/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -25,17 +25,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Clinician records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Clinician'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
       operationId: createClinician
@@ -46,15 +66,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Clinician'
       responses:
-        '201':
+        '200':
           description: The newly created Clinician
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Clinician'
         '400':
-          description: Validation error
-  /clinicians/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -74,6 +104,10 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
       operationId: updateClinician
@@ -92,15 +126,29 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Clinician
+      summary: Delete a Clinician
       operationId: deleteClinician
       responses:
-        '204':
+        '200':
           description: Clinician deleted
         '404':
           description: Clinician not found
-  /modified-early-warning-score-grade-flags:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/modified_early_warning_score_grade_flags:
     get:
       summary: List ModifiedEarlyWarningScoreGradeFlag records
       operationId: listModifiedEarlyWarningScoreGradeFlag
@@ -118,17 +166,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ModifiedEarlyWarningScoreGradeFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ModifiedEarlyWarningScoreGradeFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ModifiedEarlyWarningScoreGradeFlag
       operationId: createModifiedEarlyWarningScoreGradeFlag
@@ -139,15 +207,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ModifiedEarlyWarningScoreGradeFlag'
       responses:
-        '201':
+        '200':
           description: The newly created ModifiedEarlyWarningScoreGradeFlag
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ModifiedEarlyWarningScoreGradeFlag'
         '400':
-          description: Validation error
-  /modified-early-warning-score-grade-flags/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/modified_early_warning_score_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -167,6 +245,10 @@ paths:
                 $ref: '#/components/schemas/ModifiedEarlyWarningScoreGradeFlag'
         '404':
           description: ModifiedEarlyWarningScoreGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ModifiedEarlyWarningScoreGradeFlag
       operationId: updateModifiedEarlyWarningScoreGradeFlag
@@ -185,15 +267,29 @@ paths:
                 $ref: '#/components/schemas/ModifiedEarlyWarningScoreGradeFlag'
         '404':
           description: ModifiedEarlyWarningScoreGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ModifiedEarlyWarningScoreGradeFlag
+      summary: Delete a ModifiedEarlyWarningScoreGradeFlag
       operationId: deleteModifiedEarlyWarningScoreGradeFlag
       responses:
-        '204':
+        '200':
           description: ModifiedEarlyWarningScoreGradeFlag deleted
         '404':
           description: ModifiedEarlyWarningScoreGradeFlag not found
-  /modified-early-warning-score-grade-rules:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/modified_early_warning_score_grade_rules:
     get:
       summary: List ModifiedEarlyWarningScoreGradeRule records
       operationId: listModifiedEarlyWarningScoreGradeRule
@@ -211,17 +307,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ModifiedEarlyWarningScoreGradeRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ModifiedEarlyWarningScoreGradeRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ModifiedEarlyWarningScoreGradeRule
       operationId: createModifiedEarlyWarningScoreGradeRule
@@ -232,15 +348,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ModifiedEarlyWarningScoreGradeRule'
       responses:
-        '201':
+        '200':
           description: The newly created ModifiedEarlyWarningScoreGradeRule
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ModifiedEarlyWarningScoreGradeRule'
         '400':
-          description: Validation error
-  /modified-early-warning-score-grade-rules/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/modified_early_warning_score_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -260,6 +386,10 @@ paths:
                 $ref: '#/components/schemas/ModifiedEarlyWarningScoreGradeRule'
         '404':
           description: ModifiedEarlyWarningScoreGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ModifiedEarlyWarningScoreGradeRule
       operationId: updateModifiedEarlyWarningScoreGradeRule
@@ -278,15 +408,29 @@ paths:
                 $ref: '#/components/schemas/ModifiedEarlyWarningScoreGradeRule'
         '404':
           description: ModifiedEarlyWarningScoreGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ModifiedEarlyWarningScoreGradeRule
+      summary: Delete a ModifiedEarlyWarningScoreGradeRule
       operationId: deleteModifiedEarlyWarningScoreGradeRule
       responses:
-        '204':
+        '200':
           description: ModifiedEarlyWarningScoreGradeRule deleted
         '404':
           description: ModifiedEarlyWarningScoreGradeRule not found
-  /modified-early-warning-score-grades:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/modified_early_warning_score_grades:
     get:
       summary: List ModifiedEarlyWarningScoreGrade records
       operationId: listModifiedEarlyWarningScoreGrade
@@ -304,17 +448,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ModifiedEarlyWarningScoreGrade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ModifiedEarlyWarningScoreGrade'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ModifiedEarlyWarningScoreGrade
       operationId: createModifiedEarlyWarningScoreGrade
@@ -325,15 +489,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ModifiedEarlyWarningScoreGrade'
       responses:
-        '201':
+        '200':
           description: The newly created ModifiedEarlyWarningScoreGrade
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ModifiedEarlyWarningScoreGrade'
         '400':
-          description: Validation error
-  /modified-early-warning-score-grades/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/modified_early_warning_score_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -353,6 +527,10 @@ paths:
                 $ref: '#/components/schemas/ModifiedEarlyWarningScoreGrade'
         '404':
           description: ModifiedEarlyWarningScoreGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ModifiedEarlyWarningScoreGrade
       operationId: updateModifiedEarlyWarningScoreGrade
@@ -371,15 +549,29 @@ paths:
                 $ref: '#/components/schemas/ModifiedEarlyWarningScoreGrade'
         '404':
           description: ModifiedEarlyWarningScoreGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ModifiedEarlyWarningScoreGrade
+      summary: Delete a ModifiedEarlyWarningScoreGrade
       operationId: deleteModifiedEarlyWarningScoreGrade
       responses:
-        '204':
+        '200':
           description: ModifiedEarlyWarningScoreGrade deleted
         '404':
           description: ModifiedEarlyWarningScoreGrade not found
-  /modified-early-warning-scores:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/modified_early_warning_scores:
     get:
       summary: List ModifiedEarlyWarningScore records
       operationId: listModifiedEarlyWarningScore
@@ -397,17 +589,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ModifiedEarlyWarningScore records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ModifiedEarlyWarningScore'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ModifiedEarlyWarningScore
       operationId: createModifiedEarlyWarningScore
@@ -418,15 +630,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ModifiedEarlyWarningScore'
       responses:
-        '201':
+        '200':
           description: The newly created ModifiedEarlyWarningScore
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ModifiedEarlyWarningScore'
         '400':
-          description: Validation error
-  /modified-early-warning-scores/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/modified_early_warning_scores/{id}:
     parameters:
     - name: id
       in: path
@@ -446,6 +668,10 @@ paths:
                 $ref: '#/components/schemas/ModifiedEarlyWarningScore'
         '404':
           description: ModifiedEarlyWarningScore not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ModifiedEarlyWarningScore
       operationId: updateModifiedEarlyWarningScore
@@ -464,15 +690,29 @@ paths:
                 $ref: '#/components/schemas/ModifiedEarlyWarningScore'
         '404':
           description: ModifiedEarlyWarningScore not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ModifiedEarlyWarningScore
+      summary: Delete a ModifiedEarlyWarningScore
       operationId: deleteModifiedEarlyWarningScore
       responses:
-        '204':
+        '200':
           description: ModifiedEarlyWarningScore deleted
         '404':
           description: ModifiedEarlyWarningScore not found
-  /patients:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -490,17 +730,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Patient records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Patient'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
       operationId: createPatient
@@ -511,15 +771,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Patient'
       responses:
-        '201':
+        '200':
           description: The newly created Patient
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Patient'
         '400':
-          description: Validation error
-  /patients/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -539,6 +809,10 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
       operationId: updatePatient
@@ -557,14 +831,28 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Patient
+      summary: Delete a Patient
       operationId: deletePatient
       responses:
-        '204':
+        '200':
           description: Patient deleted
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     Clinician:
@@ -1046,3 +1334,26 @@ components:
       - sex
       - allergies_summary
       description: Patient demographic information used by the MEWS observation record.
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+      - type
+      - title
+      - status

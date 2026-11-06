@@ -6,11 +6,10 @@ use axa::{
     boot::{BootResult, TestApp},
     cli::{Cli, Command, DbCommand, parse_vars},
     config::{Config, Defaults},
-    health::Checks,
     queue::{Queue, QueueOptions},
     routes::AppRoutes,
     server,
-    sqlx::{PoolConfig, dangerously_recreate, migrate, ping, revert, status},
+    sqlx::{dangerously_recreate, migrate, revert, status},
     task::Tasks,
     worker::WorkerMode,
 };
@@ -151,21 +150,8 @@ impl App {
     ///
     /// Fails when the database or the job queue cannot be reached.
     pub async fn context(environment: Environment, config: Config) -> Result<AppContext> {
-        let pool = axa::sqlx::connect(&PoolConfig {
-            uri: config.database.uri.clone(),
-            min_connections: config.database.min_connections,
-            max_connections: config.database.max_connections,
-            connect_timeout_ms: config.database.connect_timeout,
-            idle_timeout_ms: config.database.idle_timeout,
-        })
-        .await?;
-        let mut ctx = AppContext::new(environment, (), config);
-        ctx.shared_store.insert(pool.clone());
-        // `/_readiness` fails when the database stops answering.
-        ctx.health_checks = Checks::new().add("database", move || {
-            let pool = pool.clone();
-            async move { ping(&pool).await }
-        });
+        let pool = axa::db::connect(&config.database).await?;
+        let mut ctx = AppContext::new(environment, pool, config);
         if ctx.config.workers == WorkerMode::BackgroundQueue {
             let mut queue =
                 Queue::connect(&ctx.config.database.uri, QueueOptions::default()).await?;
@@ -181,7 +167,7 @@ impl App {
     ///
     /// Fails when a configured CORS origin is invalid.
     pub fn router(ctx: &AppContext) -> Result<Router> {
-        Self::routes(ctx).into_app(ctx.clone())
+        support::problem::apply(Self::routes(ctx), ctx)
     }
 
     /// Run a database command.
@@ -191,12 +177,7 @@ impl App {
     /// Refuses in production anything that destroys data, and otherwise
     /// propagates the database error.
     pub async fn db(ctx: &AppContext, command: DbCommand) -> Result<()> {
-        if ctx.environment.is_production_like()
-            && matches!(
-                command,
-                DbCommand::Down { .. } | DbCommand::Reset | DbCommand::Truncate
-            )
-        {
+        if command.destroys_data() && ctx.environment.is_production_like() {
             return Err(Error::string(
                 "db down, reset, and truncate are refused in production",
             ));

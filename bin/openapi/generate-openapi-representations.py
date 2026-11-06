@@ -203,21 +203,22 @@ def slug_title(slug):
     return ' '.join(part.capitalize() for part in slug.split('-') if part)
 
 
-def pluralize_kebab(snake_name):
-    """SQL snake_case table name → kebab-case URL plural.
+def pluralize_route(snake_name):
+    """SQL snake_case table name → the plural a form's back-end routes it under.
 
-    Rules (empirically derived from existing yamls):
+    Rules (read from the crates' controllers):
       consonant + 'y' → drop 'y', add 'ies'
-      ends in s/x/z/ch/sh → add 'es'
+      ends in ss/x/z/ch/sh → add 'es'
+      ends in any other s → unchanged
       otherwise → add 's'
     """
-    kebab = snake_name.replace('_', '-')
-    if len(kebab) >= 2 and kebab[-1] == 'y' and kebab[-2] not in 'aeiou':
-        return kebab[:-1] + 'ies'
-    last2 = kebab[-2:]
-    if kebab[-1] in 'sxz' or last2 in ('ch', 'sh'):
-        return kebab + 'es'
-    return kebab + 's'
+    if len(snake_name) >= 2 and snake_name[-1] == 'y' and snake_name[-2] not in 'aeiou':
+        return snake_name[:-1] + 'ies'
+    if snake_name.endswith(('ss', 'x', 'z', 'ch', 'sh')):
+        return snake_name + 'es'
+    if snake_name.endswith('s'):
+        return snake_name
+    return snake_name + 's'
 
 
 # ---------------------------------------------------------------------------
@@ -386,12 +387,49 @@ def emit_property(lines, indent, col, col_description):
         lines.append(f"{inner}description: {yaml_quote(col_description)}")
 
 
+def problem_response(L, code, description):
+    """An error response, which every form's back-end answers as RFC 9457."""
+    L.append(f'        "{code}":')
+    L.append(f"          description: {description}")
+    L.append("          content:")
+    L.append("            application/problem+json:")
+    L.append("              schema:")
+    L.append('                $ref: "#/components/schemas/Problem"')
+
+
+def emit_problem_schema(L):
+    """The RFC 9457 problem object, as `axa-problem` writes it."""
+    L.append("    Problem:")
+    L.append("      type: object")
+    L.append("      description: RFC 9457 problem details")
+    L.append("      properties:")
+    L.append("        type:")
+    L.append("          type: string")
+    L.append("          description: A URI identifying the problem type")
+    L.append("        title:")
+    L.append("          type: string")
+    L.append("          description: A short summary of the problem type")
+    L.append("        status:")
+    L.append("          type: integer")
+    L.append("          description: The HTTP status code")
+    L.append("        detail:")
+    L.append("          type: string")
+    L.append("          description: An explanation of this occurrence")
+    L.append("        instance:")
+    L.append("          type: string")
+    L.append("          description: A URI identifying this occurrence")
+    L.append("      required:")
+    L.append("        - type")
+    L.append("        - title")
+    L.append("        - status")
+
+
 def build_yaml(table_name, columns, form_slug, source_table_names,
                table_comment, column_comments):
     """Render a single OpenAPI 3.1 yaml document."""
     resource = snake_to_pascal(table_name)
     title = f"{slug_title(form_slug)} — {resource}"
-    plural = pluralize_kebab(table_name)
+    plural = pluralize_route(table_name)
     if table_comment:
         info_description = table_comment
         schema_description = table_comment
@@ -411,7 +449,7 @@ def build_yaml(table_name, columns, form_slug, source_table_names,
     L.append("  version: 1.0.0")
     L.append(f"  description: {yaml_quote(info_description)}")
     L.append("paths:")
-    L.append(f"  /{plural}:")
+    L.append(f"  /api/{plural}:")
     L.append("    get:")
     L.append(f"      summary: List {resource} records")
     L.append(f"      operationId: list{resource}")
@@ -429,17 +467,29 @@ def build_yaml(table_name, columns, form_slug, source_table_names,
     L.append("          schema:")
     L.append("            type: integer")
     L.append("            minimum: 0")
+    L.append("            maximum: 100000")
     L.append("            default: 0")
     L.append("          required: false")
     L.append("      responses:")
     L.append('        "200":')
     L.append(f"          description: A page of {resource} records")
+    L.append("          headers:")
+    for header, meaning in (
+        ("x-total-count", "Rows there are in all"),
+        ("x-limit", "The limit applied"),
+        ("x-offset", "The offset applied"),
+    ):
+        L.append(f"            {header}:")
+        L.append(f"              description: {meaning}")
+        L.append("              schema:")
+        L.append("                type: integer")
     L.append("          content:")
     L.append("            application/json:")
     L.append("              schema:")
     L.append("                type: array")
     L.append("                items:")
     L.append(f'                  $ref: "#/components/schemas/{resource}"')
+    problem_response(L, "400", "The offset is past the maximum")
     L.append("    post:")
     L.append(f"      summary: Create a new {resource}")
     L.append(f"      operationId: create{resource}")
@@ -450,15 +500,15 @@ def build_yaml(table_name, columns, form_slug, source_table_names,
     L.append("            schema:")
     L.append(f'              $ref: "#/components/schemas/{resource}"')
     L.append("      responses:")
-    L.append('        "201":')
+    L.append('        "200":')
     L.append(f"          description: The newly created {resource}")
     L.append("          content:")
     L.append("            application/json:")
     L.append("              schema:")
     L.append(f'                $ref: "#/components/schemas/{resource}"')
-    L.append('        "400":')
-    L.append("          description: Validation error")
-    L.append(f"  /{plural}/{{id}}:")
+    problem_response(L, "400", "The request was refused")
+    problem_response(L, "422", "The body does not match the schema")
+    L.append(f"  /api/{plural}/{{id}}:")
     L.append("    parameters:")
     L.append("      - name: id")
     L.append("        in: path")
@@ -476,8 +526,7 @@ def build_yaml(table_name, columns, form_slug, source_table_names,
     L.append("            application/json:")
     L.append("              schema:")
     L.append(f'                $ref: "#/components/schemas/{resource}"')
-    L.append('        "404":')
-    L.append(f"          description: {resource} not found")
+    problem_response(L, "404", f"{resource} not found")
     L.append("    patch:")
     L.append(f"      summary: Update an existing {resource}")
     L.append(f"      operationId: update{resource}")
@@ -494,18 +543,18 @@ def build_yaml(table_name, columns, form_slug, source_table_names,
     L.append("            application/json:")
     L.append("              schema:")
     L.append(f'                $ref: "#/components/schemas/{resource}"')
-    L.append('        "404":')
-    L.append(f"          description: {resource} not found")
+    problem_response(L, "404", f"{resource} not found")
+    problem_response(L, "422", "The body does not match the schema")
     L.append("    delete:")
-    L.append(f"      summary: Soft-delete a {resource}")
+    L.append(f"      summary: Delete a {resource}")
     L.append(f"      operationId: delete{resource}")
     L.append("      responses:")
-    L.append('        "204":')
+    L.append('        "200":')
     L.append(f"          description: {resource} deleted")
-    L.append('        "404":')
-    L.append(f"          description: {resource} not found")
+    problem_response(L, "404", f"{resource} not found")
     L.append("components:")
     L.append("  schemas:")
+    emit_problem_schema(L)
     L.append(f"    {resource}:")
     L.append("      type: object")
     L.append("      properties:")

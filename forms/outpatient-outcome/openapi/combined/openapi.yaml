@@ -5,9 +5,9 @@ info:
   title: Outpatient Outcome Report — JSON API
   version: 1.0.0
   description: Combined OpenAPI specification for the Outpatient Outcome Report form, merged from the
-    per-entity specs in this directory. One RESTful resource per SQL table.
+    per-entity specs in this directory. One RESTful resource per routed SQL table.
 paths:
-  /clinicians:
+  /api/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -25,17 +25,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Clinician records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Clinician'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
       operationId: createClinician
@@ -46,15 +66,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Clinician'
       responses:
-        '201':
+        '200':
           description: The newly created Clinician
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Clinician'
         '400':
-          description: Validation error
-  /clinicians/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -74,6 +104,10 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
       operationId: updateClinician
@@ -92,15 +126,29 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Clinician
+      summary: Delete a Clinician
       operationId: deleteClinician
       responses:
-        '204':
+        '200':
           description: Clinician deleted
         '404':
           description: Clinician not found
-  /outpatient-outcome-clinicals:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/outpatient_outcome_clinicals:
     get:
       summary: List OutpatientOutcomeClinical records
       operationId: listOutpatientOutcomeClinical
@@ -118,17 +166,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of OutpatientOutcomeClinical records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/OutpatientOutcomeClinical'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OutpatientOutcomeClinical
       operationId: createOutpatientOutcomeClinical
@@ -139,15 +207,25 @@ paths:
             schema:
               $ref: '#/components/schemas/OutpatientOutcomeClinical'
       responses:
-        '201':
+        '200':
           description: The newly created OutpatientOutcomeClinical
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/OutpatientOutcomeClinical'
         '400':
-          description: Validation error
-  /outpatient-outcome-clinicals/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/outpatient_outcome_clinicals/{id}:
     parameters:
     - name: id
       in: path
@@ -167,6 +245,10 @@ paths:
                 $ref: '#/components/schemas/OutpatientOutcomeClinical'
         '404':
           description: OutpatientOutcomeClinical not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OutpatientOutcomeClinical
       operationId: updateOutpatientOutcomeClinical
@@ -185,15 +267,29 @@ paths:
                 $ref: '#/components/schemas/OutpatientOutcomeClinical'
         '404':
           description: OutpatientOutcomeClinical not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a OutpatientOutcomeClinical
+      summary: Delete a OutpatientOutcomeClinical
       operationId: deleteOutpatientOutcomeClinical
       responses:
-        '204':
+        '200':
           description: OutpatientOutcomeClinical deleted
         '404':
           description: OutpatientOutcomeClinical not found
-  /outpatient-outcome-encounters:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/outpatient_outcome_encounters:
     get:
       summary: List OutpatientOutcomeEncounter records
       operationId: listOutpatientOutcomeEncounter
@@ -211,17 +307,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of OutpatientOutcomeEncounter records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/OutpatientOutcomeEncounter'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OutpatientOutcomeEncounter
       operationId: createOutpatientOutcomeEncounter
@@ -232,15 +348,25 @@ paths:
             schema:
               $ref: '#/components/schemas/OutpatientOutcomeEncounter'
       responses:
-        '201':
+        '200':
           description: The newly created OutpatientOutcomeEncounter
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/OutpatientOutcomeEncounter'
         '400':
-          description: Validation error
-  /outpatient-outcome-encounters/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/outpatient_outcome_encounters/{id}:
     parameters:
     - name: id
       in: path
@@ -260,6 +386,10 @@ paths:
                 $ref: '#/components/schemas/OutpatientOutcomeEncounter'
         '404':
           description: OutpatientOutcomeEncounter not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OutpatientOutcomeEncounter
       operationId: updateOutpatientOutcomeEncounter
@@ -278,15 +408,29 @@ paths:
                 $ref: '#/components/schemas/OutpatientOutcomeEncounter'
         '404':
           description: OutpatientOutcomeEncounter not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a OutpatientOutcomeEncounter
+      summary: Delete a OutpatientOutcomeEncounter
       operationId: deleteOutpatientOutcomeEncounter
       responses:
-        '204':
+        '200':
           description: OutpatientOutcomeEncounter deleted
         '404':
           description: OutpatientOutcomeEncounter not found
-  /outpatient-outcome-followups:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/outpatient_outcome_followups:
     get:
       summary: List OutpatientOutcomeFollowup records
       operationId: listOutpatientOutcomeFollowup
@@ -304,17 +448,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of OutpatientOutcomeFollowup records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/OutpatientOutcomeFollowup'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OutpatientOutcomeFollowup
       operationId: createOutpatientOutcomeFollowup
@@ -325,15 +489,25 @@ paths:
             schema:
               $ref: '#/components/schemas/OutpatientOutcomeFollowup'
       responses:
-        '201':
+        '200':
           description: The newly created OutpatientOutcomeFollowup
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/OutpatientOutcomeFollowup'
         '400':
-          description: Validation error
-  /outpatient-outcome-followups/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/outpatient_outcome_followups/{id}:
     parameters:
     - name: id
       in: path
@@ -353,6 +527,10 @@ paths:
                 $ref: '#/components/schemas/OutpatientOutcomeFollowup'
         '404':
           description: OutpatientOutcomeFollowup not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OutpatientOutcomeFollowup
       operationId: updateOutpatientOutcomeFollowup
@@ -371,294 +549,29 @@ paths:
                 $ref: '#/components/schemas/OutpatientOutcomeFollowup'
         '404':
           description: OutpatientOutcomeFollowup not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a OutpatientOutcomeFollowup
+      summary: Delete a OutpatientOutcomeFollowup
       operationId: deleteOutpatientOutcomeFollowup
       responses:
-        '204':
+        '200':
           description: OutpatientOutcomeFollowup deleted
         '404':
           description: OutpatientOutcomeFollowup not found
-  /outpatient-outcome-grade-flags:
-    get:
-      summary: List OutpatientOutcomeGradeFlag records
-      operationId: listOutpatientOutcomeGradeFlag
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of OutpatientOutcomeGradeFlag records
           content:
-            application/json:
+            application/problem+json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/OutpatientOutcomeGradeFlag'
-    post:
-      summary: Create a new OutpatientOutcomeGradeFlag
-      operationId: createOutpatientOutcomeGradeFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OutpatientOutcomeGradeFlag'
-      responses:
-        '201':
-          description: The newly created OutpatientOutcomeGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OutpatientOutcomeGradeFlag'
-        '400':
-          description: Validation error
-  /outpatient-outcome-grade-flags/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one OutpatientOutcomeGradeFlag by id
-      operationId: getOutpatientOutcomeGradeFlag
-      responses:
-        '200':
-          description: The requested OutpatientOutcomeGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OutpatientOutcomeGradeFlag'
-        '404':
-          description: OutpatientOutcomeGradeFlag not found
-    patch:
-      summary: Update an existing OutpatientOutcomeGradeFlag
-      operationId: updateOutpatientOutcomeGradeFlag
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OutpatientOutcomeGradeFlag'
-      responses:
-        '200':
-          description: The updated OutpatientOutcomeGradeFlag
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OutpatientOutcomeGradeFlag'
-        '404':
-          description: OutpatientOutcomeGradeFlag not found
-    delete:
-      summary: Soft-delete a OutpatientOutcomeGradeFlag
-      operationId: deleteOutpatientOutcomeGradeFlag
-      responses:
-        '204':
-          description: OutpatientOutcomeGradeFlag deleted
-        '404':
-          description: OutpatientOutcomeGradeFlag not found
-  /outpatient-outcome-grade-rules:
-    get:
-      summary: List OutpatientOutcomeGradeRule records
-      operationId: listOutpatientOutcomeGradeRule
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of OutpatientOutcomeGradeRule records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/OutpatientOutcomeGradeRule'
-    post:
-      summary: Create a new OutpatientOutcomeGradeRule
-      operationId: createOutpatientOutcomeGradeRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OutpatientOutcomeGradeRule'
-      responses:
-        '201':
-          description: The newly created OutpatientOutcomeGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OutpatientOutcomeGradeRule'
-        '400':
-          description: Validation error
-  /outpatient-outcome-grade-rules/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one OutpatientOutcomeGradeRule by id
-      operationId: getOutpatientOutcomeGradeRule
-      responses:
-        '200':
-          description: The requested OutpatientOutcomeGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OutpatientOutcomeGradeRule'
-        '404':
-          description: OutpatientOutcomeGradeRule not found
-    patch:
-      summary: Update an existing OutpatientOutcomeGradeRule
-      operationId: updateOutpatientOutcomeGradeRule
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OutpatientOutcomeGradeRule'
-      responses:
-        '200':
-          description: The updated OutpatientOutcomeGradeRule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OutpatientOutcomeGradeRule'
-        '404':
-          description: OutpatientOutcomeGradeRule not found
-    delete:
-      summary: Soft-delete a OutpatientOutcomeGradeRule
-      operationId: deleteOutpatientOutcomeGradeRule
-      responses:
-        '204':
-          description: OutpatientOutcomeGradeRule deleted
-        '404':
-          description: OutpatientOutcomeGradeRule not found
-  /outpatient-outcome-grades:
-    get:
-      summary: List OutpatientOutcomeGrade records
-      operationId: listOutpatientOutcomeGrade
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of OutpatientOutcomeGrade records
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/OutpatientOutcomeGrade'
-    post:
-      summary: Create a new OutpatientOutcomeGrade
-      operationId: createOutpatientOutcomeGrade
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OutpatientOutcomeGrade'
-      responses:
-        '201':
-          description: The newly created OutpatientOutcomeGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OutpatientOutcomeGrade'
-        '400':
-          description: Validation error
-  /outpatient-outcome-grades/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one OutpatientOutcomeGrade by id
-      operationId: getOutpatientOutcomeGrade
-      responses:
-        '200':
-          description: The requested OutpatientOutcomeGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OutpatientOutcomeGrade'
-        '404':
-          description: OutpatientOutcomeGrade not found
-    patch:
-      summary: Update an existing OutpatientOutcomeGrade
-      operationId: updateOutpatientOutcomeGrade
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OutpatientOutcomeGrade'
-      responses:
-        '200':
-          description: The updated OutpatientOutcomeGrade
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OutpatientOutcomeGrade'
-        '404':
-          description: OutpatientOutcomeGrade not found
-    delete:
-      summary: Soft-delete a OutpatientOutcomeGrade
-      operationId: deleteOutpatientOutcomeGrade
-      responses:
-        '204':
-          description: OutpatientOutcomeGrade deleted
-        '404':
-          description: OutpatientOutcomeGrade not found
-  /outpatient-outcome-operationals:
+                $ref: '#/components/schemas/Problem'
+  /api/outpatient_outcome_operationals:
     get:
       summary: List OutpatientOutcomeOperational records
       operationId: listOutpatientOutcomeOperational
@@ -676,17 +589,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of OutpatientOutcomeOperational records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/OutpatientOutcomeOperational'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OutpatientOutcomeOperational
       operationId: createOutpatientOutcomeOperational
@@ -697,15 +630,25 @@ paths:
             schema:
               $ref: '#/components/schemas/OutpatientOutcomeOperational'
       responses:
-        '201':
+        '200':
           description: The newly created OutpatientOutcomeOperational
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/OutpatientOutcomeOperational'
         '400':
-          description: Validation error
-  /outpatient-outcome-operationals/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/outpatient_outcome_operationals/{id}:
     parameters:
     - name: id
       in: path
@@ -725,6 +668,10 @@ paths:
                 $ref: '#/components/schemas/OutpatientOutcomeOperational'
         '404':
           description: OutpatientOutcomeOperational not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OutpatientOutcomeOperational
       operationId: updateOutpatientOutcomeOperational
@@ -743,15 +690,29 @@ paths:
                 $ref: '#/components/schemas/OutpatientOutcomeOperational'
         '404':
           description: OutpatientOutcomeOperational not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a OutpatientOutcomeOperational
+      summary: Delete a OutpatientOutcomeOperational
       operationId: deleteOutpatientOutcomeOperational
       responses:
-        '204':
+        '200':
           description: OutpatientOutcomeOperational deleted
         '404':
           description: OutpatientOutcomeOperational not found
-  /outpatient-outcome-prem-ffts:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/outpatient_outcome_prem_ffts:
     get:
       summary: List OutpatientOutcomePremFft records
       operationId: listOutpatientOutcomePremFft
@@ -769,17 +730,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of OutpatientOutcomePremFft records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/OutpatientOutcomePremFft'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OutpatientOutcomePremFft
       operationId: createOutpatientOutcomePremFft
@@ -790,15 +771,25 @@ paths:
             schema:
               $ref: '#/components/schemas/OutpatientOutcomePremFft'
       responses:
-        '201':
+        '200':
           description: The newly created OutpatientOutcomePremFft
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/OutpatientOutcomePremFft'
         '400':
-          description: Validation error
-  /outpatient-outcome-prem-ffts/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/outpatient_outcome_prem_ffts/{id}:
     parameters:
     - name: id
       in: path
@@ -818,6 +809,10 @@ paths:
                 $ref: '#/components/schemas/OutpatientOutcomePremFft'
         '404':
           description: OutpatientOutcomePremFft not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OutpatientOutcomePremFft
       operationId: updateOutpatientOutcomePremFft
@@ -836,15 +831,29 @@ paths:
                 $ref: '#/components/schemas/OutpatientOutcomePremFft'
         '404':
           description: OutpatientOutcomePremFft not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a OutpatientOutcomePremFft
+      summary: Delete a OutpatientOutcomePremFft
       operationId: deleteOutpatientOutcomePremFft
       responses:
-        '204':
+        '200':
           description: OutpatientOutcomePremFft deleted
         '404':
           description: OutpatientOutcomePremFft not found
-  /outpatient-outcome-prom-eq5d5ls:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/outpatient_outcome_prom_eq5d5ls:
     get:
       summary: List OutpatientOutcomePromEq5d5l records
       operationId: listOutpatientOutcomePromEq5d5l
@@ -862,17 +871,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of OutpatientOutcomePromEq5d5l records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/OutpatientOutcomePromEq5d5l'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OutpatientOutcomePromEq5d5l
       operationId: createOutpatientOutcomePromEq5d5l
@@ -883,15 +912,25 @@ paths:
             schema:
               $ref: '#/components/schemas/OutpatientOutcomePromEq5d5l'
       responses:
-        '201':
+        '200':
           description: The newly created OutpatientOutcomePromEq5d5l
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/OutpatientOutcomePromEq5d5l'
         '400':
-          description: Validation error
-  /outpatient-outcome-prom-eq5d5ls/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/outpatient_outcome_prom_eq5d5ls/{id}:
     parameters:
     - name: id
       in: path
@@ -911,6 +950,10 @@ paths:
                 $ref: '#/components/schemas/OutpatientOutcomePromEq5d5l'
         '404':
           description: OutpatientOutcomePromEq5d5l not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OutpatientOutcomePromEq5d5l
       operationId: updateOutpatientOutcomePromEq5d5l
@@ -929,15 +972,29 @@ paths:
                 $ref: '#/components/schemas/OutpatientOutcomePromEq5d5l'
         '404':
           description: OutpatientOutcomePromEq5d5l not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a OutpatientOutcomePromEq5d5l
+      summary: Delete a OutpatientOutcomePromEq5d5l
       operationId: deleteOutpatientOutcomePromEq5d5l
       responses:
-        '204':
+        '200':
           description: OutpatientOutcomePromEq5d5l deleted
         '404':
           description: OutpatientOutcomePromEq5d5l not found
-  /outpatient-outcome-prom-grcs:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/outpatient_outcome_prom_grcs:
     get:
       summary: List OutpatientOutcomePromGrc records
       operationId: listOutpatientOutcomePromGrc
@@ -955,17 +1012,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of OutpatientOutcomePromGrc records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/OutpatientOutcomePromGrc'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OutpatientOutcomePromGrc
       operationId: createOutpatientOutcomePromGrc
@@ -976,15 +1053,25 @@ paths:
             schema:
               $ref: '#/components/schemas/OutpatientOutcomePromGrc'
       responses:
-        '201':
+        '200':
           description: The newly created OutpatientOutcomePromGrc
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/OutpatientOutcomePromGrc'
         '400':
-          description: Validation error
-  /outpatient-outcome-prom-grcs/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/outpatient_outcome_prom_grcs/{id}:
     parameters:
     - name: id
       in: path
@@ -1004,6 +1091,10 @@ paths:
                 $ref: '#/components/schemas/OutpatientOutcomePromGrc'
         '404':
           description: OutpatientOutcomePromGrc not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OutpatientOutcomePromGrc
       operationId: updateOutpatientOutcomePromGrc
@@ -1022,15 +1113,29 @@ paths:
                 $ref: '#/components/schemas/OutpatientOutcomePromGrc'
         '404':
           description: OutpatientOutcomePromGrc not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a OutpatientOutcomePromGrc
+      summary: Delete a OutpatientOutcomePromGrc
       operationId: deleteOutpatientOutcomePromGrc
       responses:
-        '204':
+        '200':
           description: OutpatientOutcomePromGrc deleted
         '404':
           description: OutpatientOutcomePromGrc not found
-  /outpatient-outcome-prom-promises:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/outpatient_outcome_prom_promis:
     get:
       summary: List OutpatientOutcomePromPromis records
       operationId: listOutpatientOutcomePromPromis
@@ -1048,17 +1153,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of OutpatientOutcomePromPromis records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/OutpatientOutcomePromPromis'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OutpatientOutcomePromPromis
       operationId: createOutpatientOutcomePromPromis
@@ -1069,15 +1194,25 @@ paths:
             schema:
               $ref: '#/components/schemas/OutpatientOutcomePromPromis'
       responses:
-        '201':
+        '200':
           description: The newly created OutpatientOutcomePromPromis
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/OutpatientOutcomePromPromis'
         '400':
-          description: Validation error
-  /outpatient-outcome-prom-promises/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/outpatient_outcome_prom_promis/{id}:
     parameters:
     - name: id
       in: path
@@ -1097,6 +1232,10 @@ paths:
                 $ref: '#/components/schemas/OutpatientOutcomePromPromis'
         '404':
           description: OutpatientOutcomePromPromis not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OutpatientOutcomePromPromis
       operationId: updateOutpatientOutcomePromPromis
@@ -1115,108 +1254,29 @@ paths:
                 $ref: '#/components/schemas/OutpatientOutcomePromPromis'
         '404':
           description: OutpatientOutcomePromPromis not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a OutpatientOutcomePromPromis
+      summary: Delete a OutpatientOutcomePromPromis
       operationId: deleteOutpatientOutcomePromPromis
       responses:
-        '204':
+        '200':
           description: OutpatientOutcomePromPromis deleted
         '404':
           description: OutpatientOutcomePromPromis not found
-  /outpatient-outcome-signoffs:
-    get:
-      summary: List OutpatientOutcomeSignoff records
-      operationId: listOutpatientOutcomeSignoff
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of OutpatientOutcomeSignoff records
           content:
-            application/json:
+            application/problem+json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/OutpatientOutcomeSignoff'
-    post:
-      summary: Create a new OutpatientOutcomeSignoff
-      operationId: createOutpatientOutcomeSignoff
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OutpatientOutcomeSignoff'
-      responses:
-        '201':
-          description: The newly created OutpatientOutcomeSignoff
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OutpatientOutcomeSignoff'
-        '400':
-          description: Validation error
-  /outpatient-outcome-signoffs/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one OutpatientOutcomeSignoff by id
-      operationId: getOutpatientOutcomeSignoff
-      responses:
-        '200':
-          description: The requested OutpatientOutcomeSignoff
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OutpatientOutcomeSignoff'
-        '404':
-          description: OutpatientOutcomeSignoff not found
-    patch:
-      summary: Update an existing OutpatientOutcomeSignoff
-      operationId: updateOutpatientOutcomeSignoff
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OutpatientOutcomeSignoff'
-      responses:
-        '200':
-          description: The updated OutpatientOutcomeSignoff
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OutpatientOutcomeSignoff'
-        '404':
-          description: OutpatientOutcomeSignoff not found
-    delete:
-      summary: Soft-delete a OutpatientOutcomeSignoff
-      operationId: deleteOutpatientOutcomeSignoff
-      responses:
-        '204':
-          description: OutpatientOutcomeSignoff deleted
-        '404':
-          description: OutpatientOutcomeSignoff not found
-  /outpatient-outcomes:
+                $ref: '#/components/schemas/Problem'
+  /api/outpatient_outcomes:
     get:
       summary: List OutpatientOutcome records
       operationId: listOutpatientOutcome
@@ -1234,17 +1294,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of OutpatientOutcome records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/OutpatientOutcome'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new OutpatientOutcome
       operationId: createOutpatientOutcome
@@ -1255,15 +1335,25 @@ paths:
             schema:
               $ref: '#/components/schemas/OutpatientOutcome'
       responses:
-        '201':
+        '200':
           description: The newly created OutpatientOutcome
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/OutpatientOutcome'
         '400':
-          description: Validation error
-  /outpatient-outcomes/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/outpatient_outcomes/{id}:
     parameters:
     - name: id
       in: path
@@ -1283,6 +1373,10 @@ paths:
                 $ref: '#/components/schemas/OutpatientOutcome'
         '404':
           description: OutpatientOutcome not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing OutpatientOutcome
       operationId: updateOutpatientOutcome
@@ -1301,15 +1395,29 @@ paths:
                 $ref: '#/components/schemas/OutpatientOutcome'
         '404':
           description: OutpatientOutcome not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a OutpatientOutcome
+      summary: Delete a OutpatientOutcome
       operationId: deleteOutpatientOutcome
       responses:
-        '204':
+        '200':
           description: OutpatientOutcome deleted
         '404':
           description: OutpatientOutcome not found
-  /patients:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1327,17 +1435,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Patient records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Patient'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
       operationId: createPatient
@@ -1348,15 +1476,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Patient'
       responses:
-        '201':
+        '200':
           description: The newly created Patient
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Patient'
         '400':
-          description: Validation error
-  /patients/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -1376,6 +1514,10 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
       operationId: updatePatient
@@ -1394,14 +1536,28 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Patient
+      summary: Delete a Patient
       operationId: deletePatient
       responses:
-        '204':
+        '200':
           description: Patient deleted
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     Clinician:
@@ -1682,204 +1838,6 @@ components:
       - followup_notes
       description: 'Follow-up plan: disposition, next appointment date, onward referral, and clinician
         notes.'
-    OutpatientOutcomeGrade:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted i.e. soft-removed.
-        outpatient_outcome_id:
-          type: string
-          format: uuid
-          description: Foreign key to the parent assessment (unique, enforcing 1:1).
-        overall_grade:
-          type: string
-          enum:
-          - A
-          - B
-          - C
-          - D
-          - E
-          - ''
-          description: Overall OOCG grade A (best) - E (worst); equals the worst per-domain grade.
-        clinical_grade:
-          type: string
-          enum:
-          - A
-          - B
-          - C
-          - D
-          - E
-          - ''
-          description: Clinical-domain grade A-E (A=Resolved, B=Improved, C=Unchanged, D=Worsened, E=Died).
-        prom_grade:
-          type: string
-          enum:
-          - A
-          - B
-          - C
-          - D
-          - E
-          - ''
-          description: PROM-domain composite grade A-E over EQ-5D-5L, GRC, and PROMIS.
-        prem_grade:
-          type: string
-          enum:
-          - A
-          - B
-          - C
-          - D
-          - E
-          - ''
-          description: PREM-domain grade A-E from FFT response.
-        operational_grade:
-          type: string
-          enum:
-          - A
-          - B
-          - C
-          - D
-          - E
-          - ''
-          description: Operational-domain grade A-E from attendance outcome + wait vs target + modality.
-        result_notes:
-          type: string
-          description: Free-text clinician notes accompanying the grading result.
-        graded_at:
-          type: string
-          format: date-time
-          description: Graded at.
-      required:
-      - created_at
-      - updated_at
-      - outpatient_outcome_id
-      - overall_grade
-      - clinical_grade
-      - prom_grade
-      - prem_grade
-      - operational_grade
-      - result_notes
-      - graded_at
-      description: 'Outpatient Outcome Composite Grade (OOCG) result: four per-domain letter grades and
-        the overall grade (worst-of-four).'
-    OutpatientOutcomeGradeFlag:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted i.e. soft-removed.
-        grade_id:
-          type: string
-          format: uuid
-          description: Foreign key to the parent grading result.
-        flag_id:
-          type: string
-          maxLength: 50
-          description: Stable identifier of the flag.
-        category:
-          type: string
-          maxLength: 100
-          description: Category / domain of the flag.
-        description:
-          type: string
-          description: Human-readable description of the flag.
-        priority:
-          type: string
-          enum:
-          - low
-          - medium
-          - high
-          - critical
-          description: 'Priority: low, medium, high, critical.'
-      required:
-      - created_at
-      - updated_at
-      - grade_id
-      - flag_id
-      - category
-      - description
-      - priority
-      description: Safety / data-quality flags raised alongside the OOCG grading result (DNA, PROM worsening,
-        FFT Poor/Very Poor, wait-over-target, Worsened/Died, missing data).
-    OutpatientOutcomeGradeRule:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted i.e. soft-removed.
-        grade_id:
-          type: string
-          format: uuid
-          description: Foreign key to the parent grading result.
-        rule_id:
-          type: string
-          maxLength: 50
-          description: Stable identifier of the rule that fired.
-        category:
-          type: string
-          maxLength: 100
-          description: Category / domain of the rule (clinical, prom, prem, operational).
-        description:
-          type: string
-          description: Human-readable description of the rule condition.
-        severity_level:
-          type: string
-          enum:
-          - low
-          - medium
-          - high
-          - critical
-          - ''
-          description: 'Severity of the finding: low, medium, high, critical, or empty for non-severity
-            rules.'
-      required:
-      - created_at
-      - updated_at
-      - grade_id
-      - rule_id
-      - category
-      - description
-      - severity_level
-      description: Individual OOCG rules that evaluated to true during grading.
     OutpatientOutcomeOperational:
       type: object
       properties:
@@ -2087,52 +2045,6 @@ components:
       description: PROMIS Global Health Short Form v1.2 responses (10 items) and derived GPH/GMH T-scores.
         Public domain (NIH-funded). Scaffold uses linear approximation; production use requires official
         IRT calibration tables.
-    OutpatientOutcomeSignoff:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted i.e. soft-removed.
-        outpatient_outcome_id:
-          type: string
-          format: uuid
-          description: Foreign key to the parent assessment (unique, enforcing 1:1).
-        reporting_clinician_id:
-          type: string
-          format: uuid
-          description: Foreign key to the clinician who signed off; null if not linked.
-        reporting_clinician_name:
-          type: string
-          maxLength: 255
-          description: Typed name of the reporting clinician (redundant with clinician.name for audit).
-        reporting_clinician_role:
-          type: string
-          maxLength: 100
-          description: Role of the reporting clinician at time of sign-off.
-        signed_off_at:
-          type: string
-          format: date-time
-          description: Timestamp of sign-off; null when the report is still a draft.
-      required:
-      - created_at
-      - updated_at
-      - outpatient_outcome_id
-      - reporting_clinician_name
-      - reporting_clinician_role
-      description: 'Reporting clinician sign-off: who completed the report and when.'
     Patient:
       type: object
       properties:
@@ -2211,3 +2123,26 @@ components:
       - name
       - birth_date
       description: Patient
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+      - type
+      - title
+      - status

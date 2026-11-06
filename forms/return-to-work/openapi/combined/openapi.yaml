@@ -5,9 +5,9 @@ info:
   title: Return to Work — JSON API
   version: 1.0.0
   description: Combined OpenAPI specification for the Return to Work form, merged from the per-entity
-    specs in this directory. One RESTful resource per SQL table.
+    specs in this directory. One RESTful resource per routed SQL table.
 paths:
-  /clinicians:
+  /api/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -25,17 +25,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Clinician records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Clinician'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
       operationId: createClinician
@@ -46,15 +66,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Clinician'
       responses:
-        '201':
+        '200':
           description: The newly created Clinician
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Clinician'
         '400':
-          description: Validation error
-  /clinicians/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -74,6 +104,10 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
       operationId: updateClinician
@@ -92,15 +126,29 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Clinician
+      summary: Delete a Clinician
       operationId: deleteClinician
       responses:
-        '204':
+        '200':
           description: Clinician deleted
         '404':
           description: Clinician not found
-  /employers:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/employers:
     get:
       summary: List Employer records
       operationId: listEmployer
@@ -118,17 +166,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Employer records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Employer'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Employer
       operationId: createEmployer
@@ -139,15 +207,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Employer'
       responses:
-        '201':
+        '200':
           description: The newly created Employer
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Employer'
         '400':
-          description: Validation error
-  /employers/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/employers/{id}:
     parameters:
     - name: id
       in: path
@@ -167,6 +245,10 @@ paths:
                 $ref: '#/components/schemas/Employer'
         '404':
           description: Employer not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Employer
       operationId: updateEmployer
@@ -185,15 +267,29 @@ paths:
                 $ref: '#/components/schemas/Employer'
         '404':
           description: Employer not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Employer
+      summary: Delete a Employer
       operationId: deleteEmployer
       responses:
-        '204':
+        '200':
           description: Employer deleted
         '404':
           description: Employer not found
-  /patients:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -211,17 +307,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Patient records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Patient'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
       operationId: createPatient
@@ -232,15 +348,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Patient'
       responses:
-        '201':
+        '200':
           description: The newly created Patient
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Patient'
         '400':
-          description: Validation error
-  /patients/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -260,6 +386,10 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
       operationId: updatePatient
@@ -278,15 +408,29 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Patient
+      summary: Delete a Patient
       operationId: deletePatient
       responses:
-        '204':
+        '200':
           description: Patient deleted
         '404':
           description: Patient not found
-  /return-to-work-grade-flags:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/return_to_work_grade_flags:
     get:
       summary: List ReturnToWorkGradeFlag records
       operationId: listReturnToWorkGradeFlag
@@ -304,17 +448,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ReturnToWorkGradeFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ReturnToWorkGradeFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ReturnToWorkGradeFlag
       operationId: createReturnToWorkGradeFlag
@@ -325,15 +489,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ReturnToWorkGradeFlag'
       responses:
-        '201':
+        '200':
           description: The newly created ReturnToWorkGradeFlag
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReturnToWorkGradeFlag'
         '400':
-          description: Validation error
-  /return-to-work-grade-flags/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/return_to_work_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -353,6 +527,10 @@ paths:
                 $ref: '#/components/schemas/ReturnToWorkGradeFlag'
         '404':
           description: ReturnToWorkGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ReturnToWorkGradeFlag
       operationId: updateReturnToWorkGradeFlag
@@ -371,15 +549,29 @@ paths:
                 $ref: '#/components/schemas/ReturnToWorkGradeFlag'
         '404':
           description: ReturnToWorkGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ReturnToWorkGradeFlag
+      summary: Delete a ReturnToWorkGradeFlag
       operationId: deleteReturnToWorkGradeFlag
       responses:
-        '204':
+        '200':
           description: ReturnToWorkGradeFlag deleted
         '404':
           description: ReturnToWorkGradeFlag not found
-  /return-to-work-grade-rules:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/return_to_work_grade_rules:
     get:
       summary: List ReturnToWorkGradeRule records
       operationId: listReturnToWorkGradeRule
@@ -397,17 +589,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ReturnToWorkGradeRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ReturnToWorkGradeRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ReturnToWorkGradeRule
       operationId: createReturnToWorkGradeRule
@@ -418,15 +630,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ReturnToWorkGradeRule'
       responses:
-        '201':
+        '200':
           description: The newly created ReturnToWorkGradeRule
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReturnToWorkGradeRule'
         '400':
-          description: Validation error
-  /return-to-work-grade-rules/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/return_to_work_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -446,6 +668,10 @@ paths:
                 $ref: '#/components/schemas/ReturnToWorkGradeRule'
         '404':
           description: ReturnToWorkGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ReturnToWorkGradeRule
       operationId: updateReturnToWorkGradeRule
@@ -464,15 +690,29 @@ paths:
                 $ref: '#/components/schemas/ReturnToWorkGradeRule'
         '404':
           description: ReturnToWorkGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ReturnToWorkGradeRule
+      summary: Delete a ReturnToWorkGradeRule
       operationId: deleteReturnToWorkGradeRule
       responses:
-        '204':
+        '200':
           description: ReturnToWorkGradeRule deleted
         '404':
           description: ReturnToWorkGradeRule not found
-  /return-to-work-grades:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/return_to_work_grades:
     get:
       summary: List ReturnToWorkGrade records
       operationId: listReturnToWorkGrade
@@ -490,17 +730,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ReturnToWorkGrade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ReturnToWorkGrade'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ReturnToWorkGrade
       operationId: createReturnToWorkGrade
@@ -511,15 +771,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ReturnToWorkGrade'
       responses:
-        '201':
+        '200':
           description: The newly created ReturnToWorkGrade
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReturnToWorkGrade'
         '400':
-          description: Validation error
-  /return-to-work-grades/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/return_to_work_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -539,6 +809,10 @@ paths:
                 $ref: '#/components/schemas/ReturnToWorkGrade'
         '404':
           description: ReturnToWorkGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ReturnToWorkGrade
       operationId: updateReturnToWorkGrade
@@ -557,15 +831,29 @@ paths:
                 $ref: '#/components/schemas/ReturnToWorkGrade'
         '404':
           description: ReturnToWorkGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ReturnToWorkGrade
+      summary: Delete a ReturnToWorkGrade
       operationId: deleteReturnToWorkGrade
       responses:
-        '204':
+        '200':
           description: ReturnToWorkGrade deleted
         '404':
           description: ReturnToWorkGrade not found
-  /return-to-work-restrictions:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/return_to_work_restrictions:
     get:
       summary: List ReturnToWorkRestriction records
       operationId: listReturnToWorkRestriction
@@ -583,17 +871,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ReturnToWorkRestriction records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ReturnToWorkRestriction'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ReturnToWorkRestriction
       operationId: createReturnToWorkRestriction
@@ -604,15 +912,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ReturnToWorkRestriction'
       responses:
-        '201':
+        '200':
           description: The newly created ReturnToWorkRestriction
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReturnToWorkRestriction'
         '400':
-          description: Validation error
-  /return-to-work-restrictions/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/return_to_work_restrictions/{id}:
     parameters:
     - name: id
       in: path
@@ -632,6 +950,10 @@ paths:
                 $ref: '#/components/schemas/ReturnToWorkRestriction'
         '404':
           description: ReturnToWorkRestriction not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ReturnToWorkRestriction
       operationId: updateReturnToWorkRestriction
@@ -650,15 +972,29 @@ paths:
                 $ref: '#/components/schemas/ReturnToWorkRestriction'
         '404':
           description: ReturnToWorkRestriction not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ReturnToWorkRestriction
+      summary: Delete a ReturnToWorkRestriction
       operationId: deleteReturnToWorkRestriction
       responses:
-        '204':
+        '200':
           description: ReturnToWorkRestriction deleted
         '404':
           description: ReturnToWorkRestriction not found
-  /return-to-works:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/return_to_works:
     get:
       summary: List ReturnToWork records
       operationId: listReturnToWork
@@ -676,17 +1012,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of ReturnToWork records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ReturnToWork'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new ReturnToWork
       operationId: createReturnToWork
@@ -697,15 +1053,25 @@ paths:
             schema:
               $ref: '#/components/schemas/ReturnToWork'
       responses:
-        '201':
+        '200':
           description: The newly created ReturnToWork
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReturnToWork'
         '400':
-          description: Validation error
-  /return-to-works/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/return_to_works/{id}:
     parameters:
     - name: id
       in: path
@@ -725,6 +1091,10 @@ paths:
                 $ref: '#/components/schemas/ReturnToWork'
         '404':
           description: ReturnToWork not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing ReturnToWork
       operationId: updateReturnToWork
@@ -743,14 +1113,28 @@ paths:
                 $ref: '#/components/schemas/ReturnToWork'
         '404':
           description: ReturnToWork not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a ReturnToWork
+      summary: Delete a ReturnToWork
       operationId: deleteReturnToWork
       responses:
-        '204':
+        '200':
           description: ReturnToWork deleted
         '404':
           description: ReturnToWork not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     Clinician:
@@ -1043,6 +1427,29 @@ components:
       - dvla_group_1_licence_held
       - dvla_group_2_licence_held
       description: Patient (the employee) whose return to work is being assessed.
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+      - type
+      - title
+      - status
     ReturnToWork:
       type: object
       properties:

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed MEWS grading result: five per-parameter sub-scores, aggregate total (0-14), single-parameter trigger indicator, derived clinical-risk band, and recommended monitoring frequency. One row per observation record (1:1)."
 paths:
-  /modified-early-warning-score-grades:
+  /api/modified_early_warning_score_grades:
     get:
       summary: List ModifiedEarlyWarningScoreGrade records
       operationId: listModifiedEarlyWarningScoreGrade
@@ -24,17 +24,37 @@ paths:
           schema:
             type: integer
             minimum: 0
+            maximum: 100000
             default: 0
           required: false
       responses:
         "200":
           description: A page of ModifiedEarlyWarningScoreGrade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/ModifiedEarlyWarningScoreGrade"
+        "400":
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ModifiedEarlyWarningScoreGrade
       operationId: createModifiedEarlyWarningScoreGrade
@@ -45,15 +65,25 @@ paths:
             schema:
               $ref: "#/components/schemas/ModifiedEarlyWarningScoreGrade"
       responses:
-        "201":
+        "200":
           description: The newly created ModifiedEarlyWarningScoreGrade
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ModifiedEarlyWarningScoreGrade"
         "400":
-          description: Validation error
-  /modified-early-warning-score-grades/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/modified_early_warning_score_grades/{id}:
     parameters:
       - name: id
         in: path
@@ -73,6 +103,10 @@ paths:
                 $ref: "#/components/schemas/ModifiedEarlyWarningScoreGrade"
         "404":
           description: ModifiedEarlyWarningScoreGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing ModifiedEarlyWarningScoreGrade
       operationId: updateModifiedEarlyWarningScoreGrade
@@ -91,16 +125,53 @@ paths:
                 $ref: "#/components/schemas/ModifiedEarlyWarningScoreGrade"
         "404":
           description: ModifiedEarlyWarningScoreGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
-      summary: Soft-delete a ModifiedEarlyWarningScoreGrade
+      summary: Delete a ModifiedEarlyWarningScoreGrade
       operationId: deleteModifiedEarlyWarningScoreGrade
       responses:
-        "204":
+        "200":
           description: ModifiedEarlyWarningScoreGrade deleted
         "404":
           description: ModifiedEarlyWarningScoreGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
 components:
   schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+        - type
+        - title
+        - status
     ModifiedEarlyWarningScoreGrade:
       type: object
       properties:

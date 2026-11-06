@@ -6,9 +6,9 @@ info:
   version: 1.0.0
   description: Combined OpenAPI specification for the Recommended Summary Plan for Emergency Care and
     Treatment (ReSPECT) form, merged from the per-entity specs in this directory. One RESTful resource
-    per SQL table.
+    per routed SQL table.
 paths:
-  /clinicians:
+  /api/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -26,17 +26,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Clinician records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Clinician'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
       operationId: createClinician
@@ -47,15 +67,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Clinician'
       responses:
-        '201':
+        '200':
           description: The newly created Clinician
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Clinician'
         '400':
-          description: Validation error
-  /clinicians/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -75,6 +105,10 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Clinician
       operationId: updateClinician
@@ -93,15 +127,29 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Clinician
+      summary: Delete a Clinician
       operationId: deleteClinician
       responses:
-        '204':
+        '200':
           description: Clinician deleted
         '404':
           description: Clinician not found
-  /patients:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -119,17 +167,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of Patient records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Patient'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
       operationId: createPatient
@@ -140,15 +208,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Patient'
       responses:
-        '201':
+        '200':
           description: The newly created Patient
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Patient'
         '400':
-          description: Validation error
-  /patients/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -168,6 +246,10 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing Patient
       operationId: updatePatient
@@ -186,15 +268,29 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a Patient
+      summary: Delete a Patient
       operationId: deletePatient
       responses:
-        '204':
+        '200':
           description: Patient deleted
         '404':
           description: Patient not found
-  /respect-grade-flags:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/respect_grade_flags:
     get:
       summary: List RespectGradeFlag records
       operationId: listRespectGradeFlag
@@ -212,17 +308,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of RespectGradeFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/RespectGradeFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RespectGradeFlag
       operationId: createRespectGradeFlag
@@ -233,15 +349,25 @@ paths:
             schema:
               $ref: '#/components/schemas/RespectGradeFlag'
       responses:
-        '201':
+        '200':
           description: The newly created RespectGradeFlag
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RespectGradeFlag'
         '400':
-          description: Validation error
-  /respect-grade-flags/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/respect_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -261,6 +387,10 @@ paths:
                 $ref: '#/components/schemas/RespectGradeFlag'
         '404':
           description: RespectGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RespectGradeFlag
       operationId: updateRespectGradeFlag
@@ -279,15 +409,29 @@ paths:
                 $ref: '#/components/schemas/RespectGradeFlag'
         '404':
           description: RespectGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a RespectGradeFlag
+      summary: Delete a RespectGradeFlag
       operationId: deleteRespectGradeFlag
       responses:
-        '204':
+        '200':
           description: RespectGradeFlag deleted
         '404':
           description: RespectGradeFlag not found
-  /respect-grade-rules:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/respect_grade_rules:
     get:
       summary: List RespectGradeRule records
       operationId: listRespectGradeRule
@@ -305,17 +449,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of RespectGradeRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/RespectGradeRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RespectGradeRule
       operationId: createRespectGradeRule
@@ -326,15 +490,25 @@ paths:
             schema:
               $ref: '#/components/schemas/RespectGradeRule'
       responses:
-        '201':
+        '200':
           description: The newly created RespectGradeRule
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RespectGradeRule'
         '400':
-          description: Validation error
-  /respect-grade-rules/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/respect_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -354,6 +528,10 @@ paths:
                 $ref: '#/components/schemas/RespectGradeRule'
         '404':
           description: RespectGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RespectGradeRule
       operationId: updateRespectGradeRule
@@ -372,15 +550,29 @@ paths:
                 $ref: '#/components/schemas/RespectGradeRule'
         '404':
           description: RespectGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a RespectGradeRule
+      summary: Delete a RespectGradeRule
       operationId: deleteRespectGradeRule
       responses:
-        '204':
+        '200':
           description: RespectGradeRule deleted
         '404':
           description: RespectGradeRule not found
-  /respect-grades:
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/respect_grades:
     get:
       summary: List RespectGrade records
       operationId: listRespectGrade
@@ -398,17 +590,37 @@ paths:
         schema:
           type: integer
           minimum: 0
+          maximum: 100000
           default: 0
         required: false
       responses:
         '200':
           description: A page of RespectGrade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/RespectGrade'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new RespectGrade
       operationId: createRespectGrade
@@ -419,15 +631,25 @@ paths:
             schema:
               $ref: '#/components/schemas/RespectGrade'
       responses:
-        '201':
+        '200':
           description: The newly created RespectGrade
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RespectGrade'
         '400':
-          description: Validation error
-  /respect-grades/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/respect_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -447,6 +669,10 @@ paths:
                 $ref: '#/components/schemas/RespectGrade'
         '404':
           description: RespectGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     patch:
       summary: Update an existing RespectGrade
       operationId: updateRespectGrade
@@ -465,107 +691,28 @@ paths:
                 $ref: '#/components/schemas/RespectGrade'
         '404':
           description: RespectGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
-      summary: Soft-delete a RespectGrade
+      summary: Delete a RespectGrade
       operationId: deleteRespectGrade
       responses:
-        '204':
+        '200':
           description: RespectGrade deleted
         '404':
           description: RespectGrade not found
-  /respects:
-    get:
-      summary: List Respect records
-      operationId: listRespect
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 1000
-          default: 100
-        required: false
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-      responses:
-        '200':
-          description: A page of Respect records
           content:
-            application/json:
+            application/problem+json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Respect'
-    post:
-      summary: Create a new Respect
-      operationId: createRespect
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Respect'
-      responses:
-        '201':
-          description: The newly created Respect
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Respect'
-        '400':
-          description: Validation error
-  /respects/{id}:
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    get:
-      summary: Fetch one Respect by id
-      operationId: getRespect
-      responses:
-        '200':
-          description: The requested Respect
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Respect'
-        '404':
-          description: Respect not found
-    patch:
-      summary: Update an existing Respect
-      operationId: updateRespect
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Respect'
-      responses:
-        '200':
-          description: The updated Respect
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Respect'
-        '404':
-          description: Respect not found
-    delete:
-      summary: Soft-delete a Respect
-      operationId: deleteRespect
-      responses:
-        '204':
-          description: Respect deleted
-        '404':
-          description: Respect not found
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     Clinician:
@@ -720,211 +867,29 @@ components:
       - allergies_summary
       description: Patient demographic information for the person the ReSPECT emergency care and treatment
         plan is about.
-    Respect:
+    Problem:
       type: object
+      description: RFC 9457 problem details
       properties:
-        id:
+        type:
           type: string
-          format: uuid
-          description: Primary key UUID, auto-generated.
-        created_at:
+          description: A URI identifying the problem type
+        title:
           type: string
-          format: date-time
-          description: Timestamp when the record was created.
-        updated_at:
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
           type: string
-          format: date-time
-          description: Timestamp when the record was updated most-recently.
-        deleted_at:
+          description: An explanation of this occurrence
+        instance:
           type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
-        patient_id:
-          type: string
-          format: uuid
-          description: Foreign key to the patient this plan is about (restrict delete).
-        clinician_id:
-          type: string
-          format: uuid
-          description: Foreign key to the clinician who completed and signed the plan (restrict delete);
-            optional.
-        person_name:
-          type: string
-          description: 'Personal details: name of the person the plan is about.'
-        date_of_birth:
-          type: string
-          format: date
-          description: 'Personal details: the person''s date of birth.'
-        identifier:
-          type: string
-          description: 'Personal details: NHS / CHI number or local identifier.'
-        address:
-          type: string
-          description: 'Personal details: usual residence.'
-        key_contact:
-          type: string
-          description: 'Personal details: key contact / next-of-kin details.'
-        health_summary:
-          type: string
-          description: 'Summary of relevant health: brief clinical summary (mandatory content).'
-        diagnoses:
-          type: string
-          description: 'Summary of relevant health: relevant diagnoses.'
-        existing_documents:
-          type: string
-          description: 'Summary of relevant health: existing documents such as ADRT, LPA, or organ-donation
-            wishes.'
-        what_matters:
-          type: string
-          description: 'Preferences: the person''s values, priorities, and fears.'
-        care_preferences:
-          type: string
-          description: 'Preferences: the person''s preferences for care.'
-        priority_balance:
-          type: string
-          enum:
-          - sustain-life
-          - balanced
-          - comfort
-          - ''
-          description: 'Clinical recommendations: balance of priorities from life-sustaining to comfort
-            (sustain-life, balanced, or comfort).'
-        recommended_interventions:
-          type: string
-          description: 'Clinical recommendations: interventions recommended.'
-        not_recommended_interventions:
-          type: string
-          description: 'Clinical recommendations: interventions not recommended.'
-        cpr_recommendation:
-          type: string
-          enum:
-          - attempt
-          - do-not-attempt
-          - ''
-          description: 'CPR recommendation: attempt CPR, do-not-attempt CPR, or empty when undocumented
-            (the most safety-critical field).'
-        cpr_rationale:
-          type: string
-          description: 'CPR recommendation: clinical rationale for the recommendation.'
-        cpr_discussed:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: 'CPR recommendation: whether the recommendation was discussed with the person or
-            their proxy (yes/no).'
-        hospital_transfer:
-          type: string
-          enum:
-          - appropriate
-          - not-appropriate
-          - ''
-          description: 'Ceilings of treatment: whether hospital transfer is appropriate or not-appropriate.'
-        critical_care_admission:
-          type: string
-          enum:
-          - appropriate
-          - not-appropriate
-          - ''
-          description: 'Ceilings of treatment: whether critical-care admission is appropriate or not-appropriate.'
-        treatment_ceilings:
-          type: string
-          description: 'Ceilings of treatment: other agreed limits on treatment.'
-        has_capacity:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: 'Capacity and involvement: whether the person has capacity for this decision (yes/no);
-            drives the conditional capacity rule.'
-        capacity_assessment:
-          type: string
-          description: 'Capacity and involvement: assessment recorded where the person lacks capacity
-            (Mental Capacity Act 2005).'
-        involvement:
-          type: string
-          enum:
-          - person
-          - legal-proxy
-          - consultees
-          - ''
-          description: 'Capacity and involvement: who was involved in the decision (person, legal-proxy,
-            or consultees).'
-        proxy_details:
-          type: string
-          description: 'Capacity and involvement: welfare attorney, deputy, or consultee details.'
-        clinician_name:
-          type: string
-          description: 'Clinician sign-off: name of the completing clinician.'
-        clinician_role:
-          type: string
-          enum:
-          - doctor
-          - nurse
-          - paramedic
-          - other
-          - ''
-          description: 'Clinician sign-off: role of the completing clinician (doctor, nurse, paramedic,
-            or other).'
-        clinician_registration:
-          type: string
-          description: 'Clinician sign-off: GMC / NMC / HCPC registration number.'
-        signature:
-          type: string
-          description: 'Clinician sign-off: electronic signature; required for the plan to be valid.'
-        signed_at:
-          type: string
-          format: date-time
-          description: 'Clinician sign-off: date and time the plan was signed.'
-        senior_endorsement:
-          type: string
-          description: 'Clinician sign-off: senior clinician endorsement.'
-        emergency_contacts:
-          type: string
-          description: 'Clinician sign-off: emergency contacts.'
-        review_date:
-          type: string
-          format: date
-          description: 'Clinician sign-off: planned review date; drives the review-date-passed flag.'
+          description: A URI identifying this occurrence
       required:
-      - created_at
-      - updated_at
-      - patient_id
-      - person_name
-      - identifier
-      - address
-      - key_contact
-      - health_summary
-      - diagnoses
-      - existing_documents
-      - what_matters
-      - care_preferences
-      - priority_balance
-      - recommended_interventions
-      - not_recommended_interventions
-      - cpr_recommendation
-      - cpr_rationale
-      - cpr_discussed
-      - hospital_transfer
-      - critical_care_admission
-      - treatment_ceilings
-      - has_capacity
-      - capacity_assessment
-      - involvement
-      - proxy_details
-      - clinician_name
-      - clinician_role
-      - clinician_registration
-      - signature
-      - senior_endorsement
-      - emergency_contacts
-      description: 'Main ReSPECT record: one personalised emergency care and treatment plan created through
-        shared decision-making, covering the person''s summary of health, preferences, agreed clinical
-        recommendations, CPR recommendation, ceilings of treatment, capacity and involvement, and clinician
-        sign-off. Completeness grade, fired rules, and flags live in child tables. The short base name
-        `respect` is used because the full slug would exceed PostgreSQL''s 63-byte identifier limit.'
+      - type
+      - title
+      - status
     RespectGrade:
       type: object
       properties:
