@@ -187,10 +187,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         news2_result_id:
           type: string
           format: uuid

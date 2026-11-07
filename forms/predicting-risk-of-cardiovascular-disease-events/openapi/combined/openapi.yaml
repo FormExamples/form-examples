@@ -290,6 +290,429 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+  /api/grades:
+    get:
+      summary: List Grade records
+      operationId: listGrade
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of Grade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Grade'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new Grade
+      operationId: createGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Grade'
+      responses:
+        '200':
+          description: The newly created Grade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grade'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grades/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one Grade by id
+      operationId: getGrade
+      responses:
+        '200':
+          description: The requested Grade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grade'
+        '404':
+          description: Grade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing Grade
+      operationId: updateGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Grade'
+      responses:
+        '200':
+          description: The updated Grade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grade'
+        '404':
+          description: Grade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a Grade
+      operationId: deleteGrade
+      responses:
+        '200':
+          description: Grade deleted
+        '404':
+          description: Grade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grading_additional_flags:
+    get:
+      summary: List GradingAdditionalFlag records
+      operationId: listGradingAdditionalFlag
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of GradingAdditionalFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GradingAdditionalFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new GradingAdditionalFlag
+      operationId: createGradingAdditionalFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradingAdditionalFlag'
+      responses:
+        '200':
+          description: The newly created GradingAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingAdditionalFlag'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grading_additional_flags/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one GradingAdditionalFlag by id
+      operationId: getGradingAdditionalFlag
+      responses:
+        '200':
+          description: The requested GradingAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingAdditionalFlag'
+        '404':
+          description: GradingAdditionalFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing GradingAdditionalFlag
+      operationId: updateGradingAdditionalFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradingAdditionalFlag'
+      responses:
+        '200':
+          description: The updated GradingAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingAdditionalFlag'
+        '404':
+          description: GradingAdditionalFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a GradingAdditionalFlag
+      operationId: deleteGradingAdditionalFlag
+      responses:
+        '200':
+          description: GradingAdditionalFlag deleted
+        '404':
+          description: GradingAdditionalFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grading_fired_rules:
+    get:
+      summary: List GradingFiredRule records
+      operationId: listGradingFiredRule
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of GradingFiredRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GradingFiredRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new GradingFiredRule
+      operationId: createGradingFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradingFiredRule'
+      responses:
+        '200':
+          description: The newly created GradingFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingFiredRule'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grading_fired_rules/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one GradingFiredRule by id
+      operationId: getGradingFiredRule
+      responses:
+        '200':
+          description: The requested GradingFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingFiredRule'
+        '404':
+          description: GradingFiredRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing GradingFiredRule
+      operationId: updateGradingFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradingFiredRule'
+      responses:
+        '200':
+          description: The updated GradingFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingFiredRule'
+        '404':
+          description: GradingFiredRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a GradingFiredRule
+      operationId: deleteGradingFiredRule
+      responses:
+        '200':
+          description: GradingFiredRule deleted
+        '404':
+          description: GradingFiredRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/patients:
     get:
       summary: List Patient records
@@ -431,6 +854,147 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+  /api/pvt_rules:
+    get:
+      summary: List PvtRule records
+      operationId: listPvtRule
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of PvtRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PvtRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new PvtRule
+      operationId: createPvtRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PvtRule'
+      responses:
+        '200':
+          description: The newly created PvtRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PvtRule'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/pvt_rules/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one PvtRule by id
+      operationId: getPvtRule
+      responses:
+        '200':
+          description: The requested PvtRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PvtRule'
+        '404':
+          description: PvtRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing PvtRule
+      operationId: updatePvtRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PvtRule'
+      responses:
+        '200':
+          description: The updated PvtRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PvtRule'
+        '404':
+          description: PvtRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a PvtRule
+      operationId: deletePvtRule
+      responses:
+        '200':
+          description: PvtRule deleted
+        '404':
+          description: PvtRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
 components:
   schemas:
     Assessment:
@@ -448,10 +1012,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         patient_id:
           type: string
           format: uuid
@@ -485,10 +1045,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Soft-delete timestamp; NULL when the row is live.
         name:
           type: string
           description: Name.
@@ -545,6 +1101,159 @@ components:
       - registration_body
       - registration_number
       description: Clinician
+    Grade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        assessment_id:
+          type: string
+          format: uuid
+          description: FK to assessment (UNIQUE = 1:1 relationship).
+        risk_category:
+          type: string
+          enum:
+          - draft
+          - low
+          - borderline
+          - intermediate
+          - high
+          description: 'Computed risk category: draft (insufficient data), low (<5%), borderline (5-7.4%),
+            intermediate (7.5-19.9%), high (>=20%).'
+        ten_year_risk_percent:
+          type: number
+          format: double
+          description: Estimated 10-year CVD risk percentage (0.0-95.0).
+        thirty_year_risk_percent:
+          type: number
+          format: double
+          description: Estimated 30-year CVD risk percentage (0.0-95.0). Calculated as 10-year risk *
+            2.5, capped at 95%.
+        risk_category_override:
+          type: string
+          enum:
+          - low
+          - borderline
+          - intermediate
+          - high
+          description: Clinician-assigned risk category override. NULL means no override.
+        override_reason:
+          type: string
+          description: Free-text justification for overriding the computed risk category. Required when
+            override is set.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the grading engine produced this result.
+      required:
+      - created_at
+      - updated_at
+      - assessment_id
+      - risk_category
+      - ten_year_risk_percent
+      - thirty_year_risk_percent
+      - override_reason
+      - graded_at
+      description: 1:1 with assessment. Stores computed PREVENT risk category, 10-year and 30-year risk
+        percentages, and optional clinician override.
+    GradingAdditionalFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        grade_id:
+          type: string
+          format: uuid
+          description: FK to grade. One result may have many flags.
+        flag_id:
+          type: string
+          description: Application-side flag identifier (e.g. FLAG-CVD-001, FLAG-BP-001).
+        category:
+          type: string
+          description: Flag category (e.g. Eligibility, Blood Pressure, Cholesterol, Diabetes, Renal Function).
+        message:
+          type: string
+          description: Human-readable alert message for the clinician.
+        priority:
+          type: string
+          enum:
+          - high
+          - medium
+          - low
+          description: 'Alert priority: high, medium, or low.'
+      required:
+      - created_at
+      - updated_at
+      - grade_id
+      - flag_id
+      - category
+      - message
+      - priority
+      description: Many-to-one with grade. Safety-critical alerts detected by the flagged issues engine.
+    GradingFiredRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        grade_id:
+          type: string
+          format: uuid
+          description: FK to grade. One result may have many fired rules.
+        rule_code:
+          type: string
+          description: FK to pvt_rule catalogue. SET NULL on delete so audit rows survive rule removal.
+        rule_category:
+          type: string
+          description: Clinical category at grading time (denormalized from pvt_rule).
+        rule_description:
+          type: string
+          description: Rule description at grading time (denormalized from pvt_rule).
+        rule_risk_level:
+          type: string
+          enum:
+          - high
+          - medium
+          - low
+          description: 'Risk level at grading time: high, medium, or low (denormalized from pvt_rule).'
+      required:
+      - created_at
+      - updated_at
+      - grade_id
+      - rule_category
+      - rule_description
+      - rule_risk_level
+      description: Many-to-one with grade. Each row is one PVT risk rule that fired. Denormalized for
+        audit.
     Patient:
       type: object
       properties:
@@ -560,10 +1269,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was deleted a.k.a. soft-deleted.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Soft-delete timestamp; NULL when the row is live.
         name:
           type: string
           maxLength: 255
@@ -646,3 +1351,43 @@ components:
       - type
       - title
       - status
+    PvtRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        code:
+          type: string
+          description: Human-readable rule code (e.g. DM-001). UNIQUE stable identifier used by application
+            code and audit records.
+        category:
+          type: string
+          description: Clinical category (e.g. Blood Pressure, Cholesterol, Renal Function).
+        description:
+          type: string
+          description: Human-readable description of the rule condition.
+        risk_level:
+          type: string
+          enum:
+          - high
+          - medium
+          - low
+          description: 'Risk level: high, medium, or low.'
+      required:
+      - created_at
+      - updated_at
+      - code
+      - category
+      - description
+      - risk_level
+      description: Catalogue of 20 PVT risk rules evaluated during PREVENT risk grading.

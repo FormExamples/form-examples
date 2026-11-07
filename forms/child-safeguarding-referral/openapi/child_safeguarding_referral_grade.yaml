@@ -187,10 +187,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the row was most recently updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the row was soft-deleted.
         child_safeguarding_referral_id:
           type: string
           format: uuid

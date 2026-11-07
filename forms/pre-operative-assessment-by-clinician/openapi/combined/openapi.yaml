@@ -853,6 +853,288 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+  /api/pre_operative_assessment_by_clinician_grade_flags:
+    get:
+      summary: List PreOperativeAssessmentByClinicianGradeFlag records
+      operationId: listPreOperativeAssessmentByClinicianGradeFlag
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of PreOperativeAssessmentByClinicianGradeFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PreOperativeAssessmentByClinicianGradeFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new PreOperativeAssessmentByClinicianGradeFlag
+      operationId: createPreOperativeAssessmentByClinicianGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreOperativeAssessmentByClinicianGradeFlag'
+      responses:
+        '200':
+          description: The newly created PreOperativeAssessmentByClinicianGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreOperativeAssessmentByClinicianGradeFlag'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/pre_operative_assessment_by_clinician_grade_flags/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one PreOperativeAssessmentByClinicianGradeFlag by id
+      operationId: getPreOperativeAssessmentByClinicianGradeFlag
+      responses:
+        '200':
+          description: The requested PreOperativeAssessmentByClinicianGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreOperativeAssessmentByClinicianGradeFlag'
+        '404':
+          description: PreOperativeAssessmentByClinicianGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing PreOperativeAssessmentByClinicianGradeFlag
+      operationId: updatePreOperativeAssessmentByClinicianGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreOperativeAssessmentByClinicianGradeFlag'
+      responses:
+        '200':
+          description: The updated PreOperativeAssessmentByClinicianGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreOperativeAssessmentByClinicianGradeFlag'
+        '404':
+          description: PreOperativeAssessmentByClinicianGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a PreOperativeAssessmentByClinicianGradeFlag
+      operationId: deletePreOperativeAssessmentByClinicianGradeFlag
+      responses:
+        '200':
+          description: PreOperativeAssessmentByClinicianGradeFlag deleted
+        '404':
+          description: PreOperativeAssessmentByClinicianGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/pre_operative_assessment_by_clinician_grade_rules:
+    get:
+      summary: List PreOperativeAssessmentByClinicianGradeRule records
+      operationId: listPreOperativeAssessmentByClinicianGradeRule
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of PreOperativeAssessmentByClinicianGradeRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PreOperativeAssessmentByClinicianGradeRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new PreOperativeAssessmentByClinicianGradeRule
+      operationId: createPreOperativeAssessmentByClinicianGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreOperativeAssessmentByClinicianGradeRule'
+      responses:
+        '200':
+          description: The newly created PreOperativeAssessmentByClinicianGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreOperativeAssessmentByClinicianGradeRule'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/pre_operative_assessment_by_clinician_grade_rules/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one PreOperativeAssessmentByClinicianGradeRule by id
+      operationId: getPreOperativeAssessmentByClinicianGradeRule
+      responses:
+        '200':
+          description: The requested PreOperativeAssessmentByClinicianGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreOperativeAssessmentByClinicianGradeRule'
+        '404':
+          description: PreOperativeAssessmentByClinicianGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing PreOperativeAssessmentByClinicianGradeRule
+      operationId: updatePreOperativeAssessmentByClinicianGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreOperativeAssessmentByClinicianGradeRule'
+      responses:
+        '200':
+          description: The updated PreOperativeAssessmentByClinicianGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreOperativeAssessmentByClinicianGradeRule'
+        '404':
+          description: PreOperativeAssessmentByClinicianGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a PreOperativeAssessmentByClinicianGradeRule
+      operationId: deletePreOperativeAssessmentByClinicianGradeRule
+      responses:
+        '200':
+          description: PreOperativeAssessmentByClinicianGradeRule deleted
+        '404':
+          description: PreOperativeAssessmentByClinicianGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/pre_operative_assessment_by_clinician_grades:
     get:
       summary: List PreOperativeAssessmentByClinicianGrade records
@@ -1152,10 +1434,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         scientific_name:
           type: string
           description: Scientific name of the allergen, following WHO/IUIS taxonomy (e.g. Betula pendula
@@ -1195,10 +1473,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         name:
           type: string
           description: Name.
@@ -1270,10 +1544,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         international_nonproprietary_name:
           type: string
           description: International Nonproprietary Name (INN) of the medication, as designated by the
@@ -1302,10 +1572,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         name:
           type: string
           maxLength: 255
@@ -1380,10 +1646,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         patient_id:
           type: string
           format: uuid
@@ -1413,10 +1675,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         patient_id:
           type: string
           format: uuid
@@ -1446,10 +1704,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         patient_id:
           type: string
           format: uuid
@@ -3212,10 +3466,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         pre_operative_assessment_by_clinician_id:
           type: string
           format: uuid
@@ -3332,6 +3582,144 @@ components:
       - graded_at
       description: Computed and signed-off grading result. Stores both the engine-computed ASA grade and
         the clinician-final grade with an override reason.
+    PreOperativeAssessmentByClinicianGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated most-recently.
+        pre_operative_assessment_by_clinician_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the pre_operative_assessment_by_clinician_grade table.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-DIFFICULT-AIRWAY-001).
+        category:
+          type: string
+          enum:
+          - difficult-airway
+          - severe-cardiac
+          - severe-respiratory
+          - severe-renal
+          - severe-hepatic
+          - severe-anaemia
+          - coagulopathy
+          - uncontrolled-diabetes
+          - severe-frailty
+          - recent-covid-19
+          - fasting-violation
+          - missing-crossmatch
+          - high-risk-medication
+          - capacity-concern
+          - paediatric
+          - pregnancy
+          - safeguarding
+          - malignant-hyperthermia
+          - latex-allergy
+          - sux-apnoea
+          - pseudocholinesterase-deficiency
+          - malnutrition-risk
+          - glp1-aspiration-risk
+          - cognitive-assessment-indicated
+          - sarcopenia-risk
+          - dehydration-aki-risk
+          - rebound-glycaemic-risk
+          - other
+          - ''
+          description: Flag category.
+        priority:
+          type: string
+          enum:
+          - low
+          - medium
+          - high
+          - ''
+          description: 'Priority: low, medium, high.'
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: Suggested clinical action (e.g. "prepare difficult-airway trolley").
+      required:
+      - created_at
+      - updated_at
+      - pre_operative_assessment_by_clinician_grade_id
+      - flag_id
+      - category
+      - priority
+      - description
+      - suggested_action
+      description: Safety-critical flags that fire independently of the ASA grade, with priority and a
+        suggested action for the perioperative team.
+    PreOperativeAssessmentByClinicianGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 30
+          description: Stable rule identifier (e.g. R-ASA-III-02).
+        instrument:
+          type: string
+          enum:
+          - asa
+          - mallampati
+          - rcri
+          - stopbang
+          - frailty
+          description: 'Scoring instrument the rule belongs to: asa, mallampati, rcri, stopbang, frailty.'
+        grade:
+          type: string
+          maxLength: 5
+          description: Grade contributed by this rule (e.g. III for ASA).
+        category:
+          type: string
+          maxLength: 50
+          description: Body-system or risk category (e.g. cardiovascular, respiratory).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+      - created_at
+      - updated_at
+      - grade_id
+      - rule_id
+      - instrument
+      - grade
+      - category
+      - description
+      description: Audit trail of every ASA / Mallampati / RCRI / STOP-BANG / frailty rule that fired
+        for this assessment.
     Problem:
       type: object
       description: RFC 9457 problem details

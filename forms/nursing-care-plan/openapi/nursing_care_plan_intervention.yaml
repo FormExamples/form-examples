@@ -187,10 +187,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the row was most recently updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the row was soft-deleted.
         nursing_care_plan_problem_id:
           type: string
           format: uuid

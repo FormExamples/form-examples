@@ -1,0 +1,258 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: assessment_cancer_history
+openapi: 3.1.0
+info:
+  title: Genetic Assessment — AssessmentCancerHistory
+  version: 1.0.0
+  description: "Cancer history section: family cancer patterns, early onset, bilateral cancers, and known syndromes. One-to-one child of assessment."
+paths:
+  /api/assessment_cancer_histories:
+    get:
+      summary: List AssessmentCancerHistory records
+      operationId: listAssessmentCancerHistory
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100000
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AssessmentCancerHistory records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AssessmentCancerHistory"
+        "400":
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new AssessmentCancerHistory
+      operationId: createAssessmentCancerHistory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssessmentCancerHistory"
+      responses:
+        "200":
+          description: The newly created AssessmentCancerHistory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentCancerHistory"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/assessment_cancer_histories/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AssessmentCancerHistory by id
+      operationId: getAssessmentCancerHistory
+      responses:
+        "200":
+          description: The requested AssessmentCancerHistory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentCancerHistory"
+        "404":
+          description: AssessmentCancerHistory not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing AssessmentCancerHistory
+      operationId: updateAssessmentCancerHistory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssessmentCancerHistory"
+      responses:
+        "200":
+          description: The updated AssessmentCancerHistory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentCancerHistory"
+        "404":
+          description: AssessmentCancerHistory not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a AssessmentCancerHistory
+      operationId: deleteAssessmentCancerHistory
+      responses:
+        "200":
+          description: AssessmentCancerHistory deleted
+        "404":
+          description: AssessmentCancerHistory not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+        - type
+        - title
+        - status
+    AssessmentCancerHistory:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, enforcing 1:1).
+        family_cancer_history:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether there is a family history of cancer: yes, no, or empty string."
+        multiple_family_cancers:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether multiple family members have had cancer: yes, no, or empty string."
+        early_onset_cancer:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether any family member had cancer diagnosed before age 50: yes, no, or empty string."
+        bilateral_cancer:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether any family member had bilateral cancer (both sides of a paired organ): yes, no, or empty string."
+        rare_tumour_types:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether any family member had a rare tumour type: yes, no, or empty string."
+        rare_tumour_details:
+          type: string
+          description: Details of rare tumour types reported.
+        known_cancer_syndrome:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether a cancer predisposition syndrome is known in the family (e.g. BRCA, Lynch): yes, no, or empty string."
+        cancer_syndrome_details:
+          type: string
+          description: Details of known cancer predisposition syndromes.
+        cancer_risk_score:
+          type: integer
+          format: int32
+          description: Computed cancer genetics risk sub-score, NULL if not yet scored.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - family_cancer_history
+        - multiple_family_cancers
+        - early_onset_cancer
+        - bilateral_cancer
+        - rare_tumour_types
+        - rare_tumour_details
+        - known_cancer_syndrome
+        - cancer_syndrome_details
+      description: "Cancer history section: family cancer patterns, early onset, bilateral cancers, and known syndromes. One-to-one child of assessment."

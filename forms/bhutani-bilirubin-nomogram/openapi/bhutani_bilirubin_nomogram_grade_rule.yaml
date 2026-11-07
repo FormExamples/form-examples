@@ -187,10 +187,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the row was most recently updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the row was soft-deleted.
         bhutani_bilirubin_nomogram_grade_id:
           type: string
           format: uuid

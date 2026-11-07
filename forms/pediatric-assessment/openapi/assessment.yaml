@@ -1,5 +1,5 @@
 # Generated from sql/. Do not edit by hand.
-# SOURCE: assessment, assessment_current_medications, assessment_medication_item
+# SOURCE: assessment
 openapi: 3.1.0
 info:
   title: Pediatric Assessment — Assessment
@@ -187,10 +187,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         patient_id:
           type: string
           format: uuid
@@ -203,112 +199,9 @@ components:
             - reviewed
             - urgent
           description: "Lifecycle status: draft, submitted, reviewed, or urgent."
-        current_medications_deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
-        takes_regular_medications:
-          type: string
-          enum:
-            - "yes"
-            - "no"
-            - ""
-          description: Whether the child takes any regular prescribed medications.
-        takes_over_the_counter:
-          type: string
-          enum:
-            - "yes"
-            - "no"
-            - ""
-          description: Whether the child takes any over-the-counter medications.
-        over_the_counter_details:
-          type: string
-          description: Over the counter details.
-        takes_supplements:
-          type: string
-          enum:
-            - "yes"
-            - "no"
-            - ""
-          description: Whether the child takes any vitamin or nutritional supplements.
-        supplement_details:
-          type: string
-          description: Supplement details.
-        medication_adherence:
-          type: string
-          enum:
-            - good
-            - fair
-            - poor
-            - ""
-          description: "Reported medication adherence: good, fair, poor, or empty."
-        adverse_drug_reactions:
-          type: string
-          description: Free-text description of any adverse drug reactions experienced.
-        additional_notes:
-          type: string
-          description: Additional notes.
-        medication_item_deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
-        current_medications_id:
-          type: string
-          format: uuid
-          description: Foreign key to the assessment_current_medications table.
-        medication_name:
-          type: string
-          maxLength: 255
-          description: Name of the medication.
-        dose:
-          type: string
-          maxLength: 100
-          description: Dosage amount and unit (e.g. 5mg, 2.5ml).
-        frequency:
-          type: string
-          maxLength: 100
-          description: Dosing frequency (e.g. twice daily, as needed).
-        route:
-          type: string
-          enum:
-            - oral
-            - topical
-            - inhaled
-            - injection
-            - rectal
-            - other
-            - ""
-          description: "Route of administration: oral, topical, inhaled, injection, rectal, other, or empty."
-        indication:
-          type: string
-          description: Clinical indication for the medication.
-        prescribing_clinician:
-          type: string
-          maxLength: 255
-          description: Prescribing clinician.
-        sort_order:
-          type: integer
-          format: int32
-          description: Display order of the medication in the list.
       required:
         - created_at
         - updated_at
         - patient_id
         - status
-        - takes_regular_medications
-        - takes_over_the_counter
-        - over_the_counter_details
-        - takes_supplements
-        - supplement_details
-        - medication_adherence
-        - adverse_drug_reactions
-        - additional_notes
-        - current_medications_id
-        - medication_name
-        - dose
-        - frequency
-        - route
-        - indication
-        - prescribing_clinician
-        - sort_order
       description: Pediatric assessment form. Parent entity for all assessment sections covering child development screening.

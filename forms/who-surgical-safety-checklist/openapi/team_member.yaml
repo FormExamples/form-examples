@@ -187,10 +187,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted (soft delete).
         checklist_id:
           type: string
           format: uuid

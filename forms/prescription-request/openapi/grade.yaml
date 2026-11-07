@@ -187,10 +187,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         prescription_request_id:
           type: string
           format: uuid

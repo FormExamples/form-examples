@@ -306,10 +306,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the row was most recently updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the row was soft-deleted.
         hospital_name:
           type: string
           maxLength: 255
@@ -374,10 +370,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the row was most recently updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the row was soft-deleted.
         hospital_daily_monitoring_checklist_id:
           type: string
           format: uuid

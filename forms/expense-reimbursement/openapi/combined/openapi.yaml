@@ -1011,10 +1011,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Soft-delete timestamp; NULL when the row is live.
         worker_id:
           type: string
           format: uuid
@@ -1147,10 +1143,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Soft-delete timestamp; NULL when the row is live.
         expense_reimbursement_id:
           type: string
           format: uuid
@@ -1221,10 +1213,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Soft-delete timestamp; NULL when the row is live.
         expense_reimbursement_grade_id:
           type: string
           format: uuid
@@ -1289,10 +1277,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Soft-delete timestamp; NULL when the row is live.
         expense_reimbursement_grade_id:
           type: string
           format: uuid
@@ -1342,10 +1326,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Soft-delete timestamp; NULL when the row is live.
         expense_reimbursement_id:
           type: string
           format: uuid
@@ -1460,10 +1440,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Soft-delete timestamp; NULL when the row is live.
         name:
           type: string
           description: Name.
@@ -1545,10 +1521,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Soft-delete timestamp; NULL when the row is live.
         name:
           type: string
           maxLength: 255

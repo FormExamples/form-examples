@@ -1,0 +1,245 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: assessment_medication_item
+openapi: 3.1.0
+info:
+  title: Ophthalmology Assessment — AssessmentMedicationItem
+  version: 1.0.0
+  description: Individual medication entry with name, dose, frequency, route, and target eye.
+paths:
+  /api/assessment_medication_items:
+    get:
+      summary: List AssessmentMedicationItem records
+      operationId: listAssessmentMedicationItem
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100000
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AssessmentMedicationItem records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AssessmentMedicationItem"
+        "400":
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new AssessmentMedicationItem
+      operationId: createAssessmentMedicationItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssessmentMedicationItem"
+      responses:
+        "200":
+          description: The newly created AssessmentMedicationItem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentMedicationItem"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/assessment_medication_items/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AssessmentMedicationItem by id
+      operationId: getAssessmentMedicationItem
+      responses:
+        "200":
+          description: The requested AssessmentMedicationItem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentMedicationItem"
+        "404":
+          description: AssessmentMedicationItem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing AssessmentMedicationItem
+      operationId: updateAssessmentMedicationItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssessmentMedicationItem"
+      responses:
+        "200":
+          description: The updated AssessmentMedicationItem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentMedicationItem"
+        "404":
+          description: AssessmentMedicationItem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a AssessmentMedicationItem
+      operationId: deleteAssessmentMedicationItem
+      responses:
+        "200":
+          description: AssessmentMedicationItem deleted
+        "404":
+          description: AssessmentMedicationItem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+        - type
+        - title
+        - status
+    AssessmentMedicationItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        current_medications_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment_current_medications table.
+        medication_name:
+          type: string
+          maxLength: 255
+          description: Name of the medication.
+        dose:
+          type: string
+          maxLength: 100
+          description: Dose of the medication.
+        frequency:
+          type: string
+          maxLength: 100
+          description: Frequency of administration.
+        route:
+          type: string
+          enum:
+            - topical
+            - oral
+            - intravitreal
+            - periocular
+            - iv
+            - other
+            - ""
+          description: "Route of administration: topical, oral, intravitreal, periocular, iv, other, or empty."
+        eye:
+          type: string
+          enum:
+            - right
+            - left
+            - both
+            - systemic
+            - ""
+          description: "Target eye: right, left, both, systemic, or empty."
+        indication:
+          type: string
+          maxLength: 255
+          description: Indication for the medication.
+        sort_order:
+          type: integer
+          format: int32
+          description: Display order of the item within the list.
+      required:
+        - created_at
+        - updated_at
+        - current_medications_id
+        - medication_name
+        - dose
+        - frequency
+        - route
+        - eye
+        - indication
+        - sort_order
+      description: Individual medication entry with name, dose, frequency, route, and target eye.

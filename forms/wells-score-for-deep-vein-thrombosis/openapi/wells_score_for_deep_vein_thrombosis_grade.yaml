@@ -187,10 +187,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the row was most recently updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the row was soft-deleted.
         wells_score_for_deep_vein_thrombosis_id:
           type: string
           format: uuid

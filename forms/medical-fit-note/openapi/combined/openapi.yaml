@@ -870,10 +870,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Soft-delete timestamp; NULL when the row is live.
         name:
           type: string
           description: Name.
@@ -936,10 +932,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Soft-delete timestamp; NULL when the row is live.
         name:
           type: string
           maxLength: 255
@@ -997,10 +989,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Soft-delete timestamp; NULL when the row is live.
         employee_id:
           type: string
           format: uuid
@@ -1151,10 +1139,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Soft-delete timestamp; NULL when the row is live.
         medical_fit_note_id:
           type: string
           format: uuid
@@ -1209,10 +1193,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Soft-delete timestamp; NULL when the row is live.
         medical_fit_note_grade_id:
           type: string
           format: uuid
@@ -1278,10 +1258,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Soft-delete timestamp; NULL when the row is live.
         grade_id:
           type: string
           format: uuid

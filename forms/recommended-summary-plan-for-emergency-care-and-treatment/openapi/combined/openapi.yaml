@@ -730,10 +730,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         name:
           type: string
           description: Clinician full name as recorded on the plan.
@@ -798,10 +794,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         name:
           type: string
           maxLength: 255
@@ -905,10 +897,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the row was most recently updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the row was soft-deleted.
         respect_id:
           type: string
           format: uuid
@@ -952,10 +940,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the row was most recently updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the row was soft-deleted.
         respect_grade_id:
           type: string
           format: uuid
@@ -1020,10 +1004,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the row was most recently updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the row was soft-deleted.
         respect_grade_id:
           type: string
           format: uuid

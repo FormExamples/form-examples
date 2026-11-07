@@ -187,10 +187,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         code:
           type: string
           description: Human-readable rule code (e.g. DM-001). UNIQUE stable identifier used by application code and audit records.

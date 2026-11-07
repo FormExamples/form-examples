@@ -1434,10 +1434,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         name:
           type: string
           description: Clinician full name as recorded on the note.
@@ -1540,11 +1536,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed. Clinical notes are never
-            hard-deleted.
         patient_id:
           type: string
           format: uuid
@@ -2394,10 +2385,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the row was most recently updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the row was soft-deleted.
         inpatient_clinical_note_id:
           type: string
           format: uuid
@@ -2574,10 +2561,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the row was most recently updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the row was soft-deleted.
         inpatient_clinical_note_grade_id:
           type: string
           format: uuid
@@ -2647,10 +2630,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the row was most recently updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the row was soft-deleted.
         inpatient_clinical_note_grade_id:
           type: string
           format: uuid
@@ -2730,10 +2709,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the row was most recently updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the row was soft-deleted.
         inpatient_clinical_note_id:
           type: string
           format: uuid
@@ -2817,10 +2792,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the row was most recently updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the row was soft-deleted.
         inpatient_clinical_note_id:
           type: string
           format: uuid
@@ -2907,10 +2878,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the row was most recently updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the row was soft-deleted.
         inpatient_clinical_note_id:
           type: string
           format: uuid
@@ -3017,10 +2984,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the row was most recently updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the row was soft-deleted.
         inpatient_clinical_note_id:
           type: string
           format: uuid
@@ -3102,10 +3065,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         name:
           type: string
           maxLength: 255

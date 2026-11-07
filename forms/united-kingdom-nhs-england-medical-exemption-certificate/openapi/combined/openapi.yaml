@@ -7,6 +7,852 @@ info:
   description: Combined OpenAPI specification for the UK NHS England Medical Exemption Certificate (FP92A)
     form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table.
 paths:
+  /api/application_eligible_conditions:
+    get:
+      summary: List ApplicationEligibleCondition records
+      operationId: listApplicationEligibleCondition
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of ApplicationEligibleCondition records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApplicationEligibleCondition'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new ApplicationEligibleCondition
+      operationId: createApplicationEligibleCondition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationEligibleCondition'
+      responses:
+        '200':
+          description: The newly created ApplicationEligibleCondition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationEligibleCondition'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/application_eligible_conditions/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one ApplicationEligibleCondition by id
+      operationId: getApplicationEligibleCondition
+      responses:
+        '200':
+          description: The requested ApplicationEligibleCondition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationEligibleCondition'
+        '404':
+          description: ApplicationEligibleCondition not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing ApplicationEligibleCondition
+      operationId: updateApplicationEligibleCondition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationEligibleCondition'
+      responses:
+        '200':
+          description: The updated ApplicationEligibleCondition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationEligibleCondition'
+        '404':
+          description: ApplicationEligibleCondition not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a ApplicationEligibleCondition
+      operationId: deleteApplicationEligibleCondition
+      responses:
+        '200':
+          description: ApplicationEligibleCondition deleted
+        '404':
+          description: ApplicationEligibleCondition not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/applications:
+    get:
+      summary: List Application records
+      operationId: listApplication
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of Application records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Application'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new Application
+      operationId: createApplication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Application'
+      responses:
+        '200':
+          description: The newly created Application
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/applications/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one Application by id
+      operationId: getApplication
+      responses:
+        '200':
+          description: The requested Application
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '404':
+          description: Application not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing Application
+      operationId: updateApplication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Application'
+      responses:
+        '200':
+          description: The updated Application
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '404':
+          description: Application not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a Application
+      operationId: deleteApplication
+      responses:
+        '200':
+          description: Application deleted
+        '404':
+          description: Application not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/eligible_conditions:
+    get:
+      summary: List EligibleCondition records
+      operationId: listEligibleCondition
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of EligibleCondition records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EligibleCondition'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new EligibleCondition
+      operationId: createEligibleCondition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EligibleCondition'
+      responses:
+        '200':
+          description: The newly created EligibleCondition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EligibleCondition'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/eligible_conditions/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one EligibleCondition by id
+      operationId: getEligibleCondition
+      responses:
+        '200':
+          description: The requested EligibleCondition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EligibleCondition'
+        '404':
+          description: EligibleCondition not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing EligibleCondition
+      operationId: updateEligibleCondition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EligibleCondition'
+      responses:
+        '200':
+          description: The updated EligibleCondition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EligibleCondition'
+        '404':
+          description: EligibleCondition not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a EligibleCondition
+      operationId: deleteEligibleCondition
+      responses:
+        '200':
+          description: EligibleCondition deleted
+        '404':
+          description: EligibleCondition not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grade_additional_flags:
+    get:
+      summary: List GradeAdditionalFlag records
+      operationId: listGradeAdditionalFlag
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of GradeAdditionalFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GradeAdditionalFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new GradeAdditionalFlag
+      operationId: createGradeAdditionalFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradeAdditionalFlag'
+      responses:
+        '200':
+          description: The newly created GradeAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradeAdditionalFlag'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grade_additional_flags/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one GradeAdditionalFlag by id
+      operationId: getGradeAdditionalFlag
+      responses:
+        '200':
+          description: The requested GradeAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradeAdditionalFlag'
+        '404':
+          description: GradeAdditionalFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing GradeAdditionalFlag
+      operationId: updateGradeAdditionalFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradeAdditionalFlag'
+      responses:
+        '200':
+          description: The updated GradeAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradeAdditionalFlag'
+        '404':
+          description: GradeAdditionalFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a GradeAdditionalFlag
+      operationId: deleteGradeAdditionalFlag
+      responses:
+        '200':
+          description: GradeAdditionalFlag deleted
+        '404':
+          description: GradeAdditionalFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grade_fired_rules:
+    get:
+      summary: List GradeFiredRule records
+      operationId: listGradeFiredRule
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of GradeFiredRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GradeFiredRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new GradeFiredRule
+      operationId: createGradeFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradeFiredRule'
+      responses:
+        '200':
+          description: The newly created GradeFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradeFiredRule'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grade_fired_rules/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one GradeFiredRule by id
+      operationId: getGradeFiredRule
+      responses:
+        '200':
+          description: The requested GradeFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradeFiredRule'
+        '404':
+          description: GradeFiredRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing GradeFiredRule
+      operationId: updateGradeFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradeFiredRule'
+      responses:
+        '200':
+          description: The updated GradeFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradeFiredRule'
+        '404':
+          description: GradeFiredRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a GradeFiredRule
+      operationId: deleteGradeFiredRule
+      responses:
+        '200':
+          description: GradeFiredRule deleted
+        '404':
+          description: GradeFiredRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grades:
+    get:
+      summary: List Grade records
+      operationId: listGrade
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of Grade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Grade'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new Grade
+      operationId: createGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Grade'
+      responses:
+        '200':
+          description: The newly created Grade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grade'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grades/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one Grade by id
+      operationId: getGrade
+      responses:
+        '200':
+          description: The requested Grade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grade'
+        '404':
+          description: Grade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing Grade
+      operationId: updateGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Grade'
+      responses:
+        '200':
+          description: The updated Grade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grade'
+        '404':
+          description: Grade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a Grade
+      operationId: deleteGrade
+      responses:
+        '200':
+          description: Grade deleted
+        '404':
+          description: Grade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/patients:
     get:
       summary: List Patient records
@@ -291,6 +1137,539 @@ paths:
                 $ref: '#/components/schemas/Problem'
 components:
   schemas:
+    Application:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the applicant patient.
+        practitioner_id:
+          type: string
+          format: uuid
+          description: Foreign key to the signing practitioner.
+        status:
+          type: string
+          enum:
+          - draft
+          - ready-to-post
+          - posted
+          - issued
+          - rejected
+          - expired
+          - cancelled
+          description: 'Lifecycle status: draft, ready-to-post, posted, issued, rejected, expired, cancelled.'
+        application_kind:
+          type: string
+          enum:
+          - new
+          - renewal
+          - replacement
+          - ''
+          description: New application, renewal of an expiring certificate, or replacement of a lost certificate.
+        previous_certificate_number:
+          type: string
+          maxLength: 50
+          description: Certificate number of the previous certificate (renewal / replacement).
+        previous_certificate_expiry_date:
+          type: string
+          format: date
+          description: Expiry date of the previous certificate, used for renewal-window checks.
+        completed_date:
+          type: string
+          format: date
+          description: Date the practitioner completed and signed the FP92A.
+        posted_date:
+          type: string
+          format: date
+          description: Date the FP92A was posted to NHSBSA Bridge House.
+        received_by_nhsbsa_date:
+          type: string
+          format: date
+          description: Date the FP92A was acknowledged received by NHSBSA.
+        certificate_number:
+          type: string
+          maxLength: 50
+          description: Issued certificate number (populated once NHSBSA returns the issued certificate).
+        valid_from:
+          type: string
+          format: date
+          description: Date the issued certificate becomes valid.
+        valid_until:
+          type: string
+          format: date
+          description: Date the issued certificate expires (typically valid_from + 5 years).
+        practitioner_signature_present:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          - ''
+          description: Whether the practitioner has signed in ink before posting.
+        practitioner_declaration_text:
+          type: string
+          description: Free-text declaration as captured from the FP92A signature panel.
+        notes:
+          type: string
+          description: Internal notes about the application.
+      required:
+      - created_at
+      - updated_at
+      - patient_id
+      - practitioner_id
+      - status
+      - application_kind
+      - previous_certificate_number
+      - certificate_number
+      - practitioner_signature_present
+      - practitioner_declaration_text
+      - notes
+      description: FP92A medical exemption application instance.
+    ApplicationEligibleCondition:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        application_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent application.
+        eligible_condition_id:
+          type: string
+          format: uuid
+          description: Foreign key to the eligible condition (one of the ten NHSBSA-recognised conditions).
+        diagnosis_date:
+          type: string
+          format: date
+          description: Date the qualifying condition was diagnosed.
+        snomed_ct_code:
+          type: string
+          maxLength: 50
+          description: Optional SNOMED CT code for the patient-specific diagnosis.
+        icd10_code:
+          type: string
+          maxLength: 20
+          description: Optional ICD-10 code for the patient-specific diagnosis.
+        treatment_detail:
+          type: string
+          description: Free-text description of the current treatment regimen.
+        fistula_site:
+          type: string
+          enum:
+          - caecostomy
+          - colostomy
+          - laryngostomy
+          - ileostomy
+          - urostomy
+          - gastrostomy
+          - other
+          - ''
+          description: Anatomical site of the fistula (for the fistula condition).
+        appliance_type:
+          type: string
+          enum:
+          - one-piece-bag
+          - two-piece-bag
+          - continuous-dressing
+          - irrigation-kit
+          - other
+          - ''
+          description: Appliance worn for the fistula (bag, dressing, irrigation kit).
+        substitution_therapy:
+          type: string
+          maxLength: 255
+          description: Substitution therapy drug and dose (e.g. hydrocortisone 20mg AM / 10mg PM).
+        on_substitution_therapy:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          - ''
+          description: Whether the patient is on the substitution therapy required for eligibility.
+        diabetes_treatment_mode:
+          type: string
+          enum:
+          - insulin
+          - oral-hypoglycaemic
+          - insulin-and-oral
+          - glp1-agonist
+          - diet-only
+          - ''
+          description: How diabetes is being treated; diet-only excludes the patient from FP92A.
+        anticonvulsant:
+          type: string
+          description: Anticonvulsant drug and dose (for epilepsy).
+        continuous_anticonvulsant_therapy:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          - ''
+          description: Whether the patient receives continuous anticonvulsant therapy.
+        cannot_leave_home_unaided:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          - ''
+          description: Whether the patient is unable to leave home without the help of another person.
+        disability_carer_detail:
+          type: string
+          description: Description of the help / carer the patient depends on.
+        disability_expected_to_be_permanent:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          - ''
+          description: Practitioner judgement that the disability is permanent, not temporary.
+        cancer_site:
+          type: string
+          maxLength: 255
+          description: Anatomical site or type of cancer.
+        cancer_treatment_phase:
+          type: string
+          enum:
+          - active-treatment
+          - effects-of-cancer
+          - effects-of-treatment
+          - remission-with-ongoing-treatment
+          - palliative
+          - ''
+          description: Phase of cancer care - active treatment, effects of cancer, effects of treatment,
+            etc.
+        histology_confirmed:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          - pending
+          - ''
+          description: Whether a histological diagnosis has been confirmed for the cancer.
+        practitioner_attestation_notes:
+          type: string
+          description: Free-text notes from the practitioner supporting the attestation.
+      required:
+      - created_at
+      - updated_at
+      - application_id
+      - eligible_condition_id
+      - snomed_ct_code
+      - icd10_code
+      - treatment_detail
+      - fistula_site
+      - appliance_type
+      - substitution_therapy
+      - on_substitution_therapy
+      - diabetes_treatment_mode
+      - anticonvulsant
+      - continuous_anticonvulsant_therapy
+      - cannot_leave_home_unaided
+      - disability_carer_detail
+      - disability_expected_to_be_permanent
+      - cancer_site
+      - cancer_treatment_phase
+      - histology_confirmed
+      - practitioner_attestation_notes
+      description: Per-application qualifying conditions with condition-specific detail.
+    EligibleCondition:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        code:
+          type: string
+          enum:
+          - permanent-fistula
+          - hypoadrenalism
+          - diabetes-insipidus-or-hypopituitarism
+          - diabetes-mellitus-not-diet-only
+          - hypoparathyroidism
+          - myasthenia-gravis
+          - myxoedema
+          - epilepsy-on-anticonvulsant
+          - continuing-physical-disability
+          - cancer-or-effects
+          description: Machine-readable condition code from the closed NHSBSA list.
+        label:
+          type: string
+          maxLength: 255
+          description: Human-readable label matching the FP92A wording.
+        description:
+          type: string
+          description: Long-form description with NHSBSA inclusion / exclusion criteria.
+        requires_appliance_detail:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          description: Whether the application must capture appliance / dressing detail (fistula).
+        requires_substitution_therapy_detail:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          description: Whether the application must capture substitution-therapy detail (hypoadrenalism,
+            hypopituitarism, hypoparathyroidism, myxoedema).
+        requires_disability_attestation:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          description: Whether the practitioner must attest that the patient cannot leave home unaided.
+        requires_cancer_detail:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          description: Whether the application must capture cancer site and treatment phase.
+        excludes_diet_only_diabetes:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          description: Whether diet-only diabetes is explicitly excluded (true for diabetes mellitus).
+        snomed_ct_reference:
+          type: string
+          maxLength: 50
+          description: Optional SNOMED CT concept identifier for the condition.
+        icd10_reference:
+          type: string
+          maxLength: 20
+          description: Optional ICD-10 code for the condition.
+      required:
+      - created_at
+      - updated_at
+      - code
+      - label
+      - description
+      - requires_appliance_detail
+      - requires_substitution_therapy_detail
+      - requires_disability_attestation
+      - requires_cancer_detail
+      - excludes_diet_only_diabetes
+      - snomed_ct_reference
+      - icd10_reference
+      description: Closed list of the ten NHSBSA-recognised qualifying conditions for FP92A.
+    Grade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        application_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent application (one grade per application).
+        outcome:
+          type: string
+          enum:
+          - eligible
+          - ineligible
+          - requires-clarification
+          - ''
+          description: 'Eligibility outcome: eligible, ineligible, or requires-clarification.'
+        redirect_to:
+          type: string
+          enum:
+          - ''
+          - FW8
+          - age-exemption
+          - low-income-scheme
+          - hc1
+          - hc2
+          description: If ineligible on FP92A, suggested alternative exemption route.
+        result_category:
+          type: string
+          description: Headline category as a human-readable label.
+        result_score:
+          type: number
+          format: double
+          description: Numeric score (always 1.0 for eligible, 0.0 otherwise).
+        result_notes:
+          type: string
+          description: Free-text rationale or summary attached to the grade.
+        valid_from:
+          type: string
+          format: date
+          description: Date the certificate would become valid (typically completed_date).
+        valid_until:
+          type: string
+          format: date
+          description: Date the certificate would expire (typically valid_from + validity_years).
+        validity_years:
+          type: integer
+          format: int32
+          description: 'Number of years the certificate is valid for (NHSBSA default: 5).'
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp the grade was last (re-)computed.
+      required:
+      - created_at
+      - updated_at
+      - application_id
+      - outcome
+      - redirect_to
+      - result_category
+      - result_notes
+      - validity_years
+      - graded_at
+      description: Computed eligibility determination for an FP92A application.
+    GradeAdditionalFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 64
+          description: Stable identifier of the flag.
+        category:
+          type: string
+          enum:
+          - completeness
+          - data-quality
+          - workflow
+          - education
+          - safeguarding
+          - pregnancy
+          - age-exemption
+          - ''
+          description: Flag category for grouping in the UI.
+        description:
+          type: string
+          description: Human-readable description shown to the practitioner.
+        priority:
+          type: string
+          enum:
+          - low
+          - medium
+          - high
+          - ''
+          description: 'Display priority: low, medium, or high.'
+      required:
+      - created_at
+      - updated_at
+      - grade_id
+      - flag_id
+      - category
+      - description
+      - priority
+      description: Per-grade advisory flags surfaced to the practitioner.
+    GradeFiredRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 64
+          description: Stable identifier of the rule that fired.
+        category:
+          type: string
+          enum:
+          - eligible-condition
+          - disqualifying
+          - redirect
+          - completeness
+          - renewal
+          - ''
+          description: 'Rule category: eligible-condition, disqualifying, redirect, completeness, renewal.'
+        description:
+          type: string
+          description: Human-readable description of why the rule fired.
+        severity_level:
+          type: string
+          enum:
+          - info
+          - low
+          - medium
+          - high
+          - ''
+          description: Severity level for sorting / display.
+        contributing_condition_code:
+          type: string
+          description: Optional eligible-condition code the rule was evaluated against.
+      required:
+      - created_at
+      - updated_at
+      - grade_id
+      - rule_id
+      - category
+      - description
+      - severity_level
+      - contributing_condition_code
+      description: Audit trail of rules that fired when computing an eligibility grade.
     Patient:
       type: object
       properties:
@@ -306,10 +1685,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         title:
           type: string
           enum:
@@ -410,10 +1785,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         name:
           type: string
           maxLength: 255

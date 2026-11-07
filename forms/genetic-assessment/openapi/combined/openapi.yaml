@@ -7,6 +7,570 @@ info:
   description: Combined OpenAPI specification for the Genetic Assessment form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table.
 paths:
+  /api/assessment_cancer_histories:
+    get:
+      summary: List AssessmentCancerHistory records
+      operationId: listAssessmentCancerHistory
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of AssessmentCancerHistory records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssessmentCancerHistory'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new AssessmentCancerHistory
+      operationId: createAssessmentCancerHistory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentCancerHistory'
+      responses:
+        '200':
+          description: The newly created AssessmentCancerHistory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentCancerHistory'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_cancer_histories/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one AssessmentCancerHistory by id
+      operationId: getAssessmentCancerHistory
+      responses:
+        '200':
+          description: The requested AssessmentCancerHistory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentCancerHistory'
+        '404':
+          description: AssessmentCancerHistory not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing AssessmentCancerHistory
+      operationId: updateAssessmentCancerHistory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentCancerHistory'
+      responses:
+        '200':
+          description: The updated AssessmentCancerHistory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentCancerHistory'
+        '404':
+          description: AssessmentCancerHistory not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a AssessmentCancerHistory
+      operationId: deleteAssessmentCancerHistory
+      responses:
+        '200':
+          description: AssessmentCancerHistory deleted
+        '404':
+          description: AssessmentCancerHistory not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_cancer_history_items:
+    get:
+      summary: List AssessmentCancerHistoryItem records
+      operationId: listAssessmentCancerHistoryItem
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of AssessmentCancerHistoryItem records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssessmentCancerHistoryItem'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new AssessmentCancerHistoryItem
+      operationId: createAssessmentCancerHistoryItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentCancerHistoryItem'
+      responses:
+        '200':
+          description: The newly created AssessmentCancerHistoryItem
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentCancerHistoryItem'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_cancer_history_items/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one AssessmentCancerHistoryItem by id
+      operationId: getAssessmentCancerHistoryItem
+      responses:
+        '200':
+          description: The requested AssessmentCancerHistoryItem
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentCancerHistoryItem'
+        '404':
+          description: AssessmentCancerHistoryItem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing AssessmentCancerHistoryItem
+      operationId: updateAssessmentCancerHistoryItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentCancerHistoryItem'
+      responses:
+        '200':
+          description: The updated AssessmentCancerHistoryItem
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentCancerHistoryItem'
+        '404':
+          description: AssessmentCancerHistoryItem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a AssessmentCancerHistoryItem
+      operationId: deleteAssessmentCancerHistoryItem
+      responses:
+        '200':
+          description: AssessmentCancerHistoryItem deleted
+        '404':
+          description: AssessmentCancerHistoryItem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_family_pedigree_members:
+    get:
+      summary: List AssessmentFamilyPedigreeMember records
+      operationId: listAssessmentFamilyPedigreeMember
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of AssessmentFamilyPedigreeMember records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssessmentFamilyPedigreeMember'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new AssessmentFamilyPedigreeMember
+      operationId: createAssessmentFamilyPedigreeMember
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentFamilyPedigreeMember'
+      responses:
+        '200':
+          description: The newly created AssessmentFamilyPedigreeMember
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentFamilyPedigreeMember'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_family_pedigree_members/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one AssessmentFamilyPedigreeMember by id
+      operationId: getAssessmentFamilyPedigreeMember
+      responses:
+        '200':
+          description: The requested AssessmentFamilyPedigreeMember
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentFamilyPedigreeMember'
+        '404':
+          description: AssessmentFamilyPedigreeMember not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing AssessmentFamilyPedigreeMember
+      operationId: updateAssessmentFamilyPedigreeMember
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentFamilyPedigreeMember'
+      responses:
+        '200':
+          description: The updated AssessmentFamilyPedigreeMember
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentFamilyPedigreeMember'
+        '404':
+          description: AssessmentFamilyPedigreeMember not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a AssessmentFamilyPedigreeMember
+      operationId: deleteAssessmentFamilyPedigreeMember
+      responses:
+        '200':
+          description: AssessmentFamilyPedigreeMember deleted
+        '404':
+          description: AssessmentFamilyPedigreeMember not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_family_pedigrees:
+    get:
+      summary: List AssessmentFamilyPedigree records
+      operationId: listAssessmentFamilyPedigree
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of AssessmentFamilyPedigree records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssessmentFamilyPedigree'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new AssessmentFamilyPedigree
+      operationId: createAssessmentFamilyPedigree
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentFamilyPedigree'
+      responses:
+        '200':
+          description: The newly created AssessmentFamilyPedigree
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentFamilyPedigree'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_family_pedigrees/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one AssessmentFamilyPedigree by id
+      operationId: getAssessmentFamilyPedigree
+      responses:
+        '200':
+          description: The requested AssessmentFamilyPedigree
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentFamilyPedigree'
+        '404':
+          description: AssessmentFamilyPedigree not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing AssessmentFamilyPedigree
+      operationId: updateAssessmentFamilyPedigree
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentFamilyPedigree'
+      responses:
+        '200':
+          description: The updated AssessmentFamilyPedigree
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentFamilyPedigree'
+        '404':
+          description: AssessmentFamilyPedigree not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a AssessmentFamilyPedigree
+      operationId: deleteAssessmentFamilyPedigree
+      responses:
+        '200':
+          description: AssessmentFamilyPedigree deleted
+        '404':
+          description: AssessmentFamilyPedigree not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/assessments:
     get:
       summary: List Assessment records
@@ -289,6 +853,429 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+  /api/grades:
+    get:
+      summary: List Grade records
+      operationId: listGrade
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of Grade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Grade'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new Grade
+      operationId: createGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Grade'
+      responses:
+        '200':
+          description: The newly created Grade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grade'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grades/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one Grade by id
+      operationId: getGrade
+      responses:
+        '200':
+          description: The requested Grade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grade'
+        '404':
+          description: Grade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing Grade
+      operationId: updateGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Grade'
+      responses:
+        '200':
+          description: The updated Grade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grade'
+        '404':
+          description: Grade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a Grade
+      operationId: deleteGrade
+      responses:
+        '200':
+          description: Grade deleted
+        '404':
+          description: Grade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grading_additional_flags:
+    get:
+      summary: List GradingAdditionalFlag records
+      operationId: listGradingAdditionalFlag
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of GradingAdditionalFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GradingAdditionalFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new GradingAdditionalFlag
+      operationId: createGradingAdditionalFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradingAdditionalFlag'
+      responses:
+        '200':
+          description: The newly created GradingAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingAdditionalFlag'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grading_additional_flags/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one GradingAdditionalFlag by id
+      operationId: getGradingAdditionalFlag
+      responses:
+        '200':
+          description: The requested GradingAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingAdditionalFlag'
+        '404':
+          description: GradingAdditionalFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing GradingAdditionalFlag
+      operationId: updateGradingAdditionalFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradingAdditionalFlag'
+      responses:
+        '200':
+          description: The updated GradingAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingAdditionalFlag'
+        '404':
+          description: GradingAdditionalFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a GradingAdditionalFlag
+      operationId: deleteGradingAdditionalFlag
+      responses:
+        '200':
+          description: GradingAdditionalFlag deleted
+        '404':
+          description: GradingAdditionalFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grading_fired_rules:
+    get:
+      summary: List GradingFiredRule records
+      operationId: listGradingFiredRule
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of GradingFiredRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GradingFiredRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new GradingFiredRule
+      operationId: createGradingFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradingFiredRule'
+      responses:
+        '200':
+          description: The newly created GradingFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingFiredRule'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grading_fired_rules/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one GradingFiredRule by id
+      operationId: getGradingFiredRule
+      responses:
+        '200':
+          description: The requested GradingFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingFiredRule'
+        '404':
+          description: GradingFiredRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing GradingFiredRule
+      operationId: updateGradingFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradingFiredRule'
+      responses:
+        '200':
+          description: The updated GradingFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingFiredRule'
+        '404':
+          description: GradingFiredRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a GradingFiredRule
+      operationId: deleteGradingFiredRule
+      responses:
+        '200':
+          description: GradingFiredRule deleted
+        '404':
+          description: GradingFiredRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/patients:
     get:
       summary: List Patient records
@@ -447,10 +1434,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         patient_id:
           type: string
           format: uuid
@@ -463,10 +1446,31 @@ components:
           - reviewed
           - urgent
           description: 'Lifecycle status: draft, submitted, reviewed, or urgent.'
-        cancer_history_deleted_at:
+      required:
+      - created_at
+      - updated_at
+      - patient_id
+      - status
+      description: Genetic counselling referral assessment. Parent entity for all assessment sections.
+    AssessmentCancerHistory:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
           type: string
           format: date-time
-          description: Timestamp when this row was deleted.
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, enforcing 1:1).
         family_cancer_history:
           type: string
           enum:
@@ -522,10 +1526,35 @@ components:
           type: integer
           format: int32
           description: Computed cancer genetics risk sub-score, NULL if not yet scored.
-        cancer_history_item_deleted_at:
+      required:
+      - created_at
+      - updated_at
+      - assessment_id
+      - family_cancer_history
+      - multiple_family_cancers
+      - early_onset_cancer
+      - bilateral_cancer
+      - rare_tumour_types
+      - rare_tumour_details
+      - known_cancer_syndrome
+      - cancer_syndrome_details
+      description: 'Cancer history section: family cancer patterns, early onset, bilateral cancers, and
+        known syndromes. One-to-one child of assessment.'
+    AssessmentCancerHistoryItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
           type: string
           format: date-time
-          description: Timestamp when this row was deleted.
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
         cancer_history_id:
           type: string
           format: uuid
@@ -554,10 +1583,34 @@ components:
           type: integer
           format: int32
           description: Display order within the list.
-        family_pedigree_deleted_at:
+      required:
+      - created_at
+      - updated_at
+      - cancer_history_id
+      - relative_relationship
+      - cancer_type
+      - outcome
+      - sort_order
+      description: Individual family cancer entry with relative, cancer type, age at diagnosis, and outcome.
+    AssessmentFamilyPedigree:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
           type: string
           format: date-time
-          description: Timestamp when this row was deleted.
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, enforcing 1:1).
         total_first_degree_relatives:
           type: integer
           format: int32
@@ -596,10 +1649,32 @@ components:
           - 'no'
           - ''
           description: 'Whether a three-generation pedigree has been drawn: yes, no, or empty string.'
-        family_pedigree_member_deleted_at:
+      required:
+      - created_at
+      - updated_at
+      - assessment_id
+      - consanguinity_in_family
+      - consanguinity_details
+      - adoption_status
+      - pedigree_notes
+      - three_generation_pedigree_drawn
+      description: 'Family pedigree section: family structure, consanguinity, and adoption status. One-to-one
+        child of assessment.'
+    AssessmentFamilyPedigreeMember:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
           type: string
           format: date-time
-          description: Timestamp when this row was deleted.
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
         family_pedigree_id:
           type: string
           format: uuid
@@ -638,41 +1713,21 @@ components:
         medical_conditions:
           type: string
           description: Free-text list of medical conditions relevant to genetics.
-        family_pedigree_member_sort_order:
+        sort_order:
           type: integer
           format: int32
           description: Display order within the pedigree list.
       required:
       - created_at
       - updated_at
-      - patient_id
-      - status
-      - family_cancer_history
-      - multiple_family_cancers
-      - early_onset_cancer
-      - bilateral_cancer
-      - rare_tumour_types
-      - rare_tumour_details
-      - known_cancer_syndrome
-      - cancer_syndrome_details
-      - cancer_history_id
-      - relative_relationship
-      - cancer_type
-      - outcome
-      - sort_order
-      - consanguinity_in_family
-      - consanguinity_details
-      - adoption_status
-      - pedigree_notes
-      - three_generation_pedigree_drawn
       - family_pedigree_id
       - relationship
       - sex
       - alive
       - cause_of_death
       - medical_conditions
-      - family_pedigree_member_sort_order
-      description: Genetic counselling referral assessment. Parent entity for all assessment sections.
+      - sort_order
+      description: Individual family member within the pedigree.
     Clinician:
       type: object
       properties:
@@ -688,10 +1743,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Soft-delete timestamp; NULL when the row is live.
         name:
           type: string
           description: Name.
@@ -748,6 +1799,164 @@ components:
       - registration_body
       - registration_number
       description: Clinician
+    Grade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        risk_level:
+          type: string
+          enum:
+          - low
+          - moderate
+          - high
+          description: 'Overall risk classification: low, moderate, or high.'
+        total_risk_score:
+          type: integer
+          format: int32
+          description: Total weighted risk score across all genetics domains (0-6+).
+        cancer_genetics_score:
+          type: integer
+          format: int32
+          description: Risk sub-score for cancer genetics domain.
+        cardiovascular_genetics_score:
+          type: integer
+          format: int32
+          description: Risk sub-score for cardiovascular genetics domain.
+        neurogenetics_score:
+          type: integer
+          format: int32
+          description: Risk sub-score for neurogenetics domain.
+        reproductive_genetics_score:
+          type: integer
+          format: int32
+          description: Risk sub-score for reproductive genetics domain.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the grading was computed.
+      required:
+      - created_at
+      - updated_at
+      - assessment_id
+      - risk_level
+      - total_risk_score
+      - cancer_genetics_score
+      - cardiovascular_genetics_score
+      - neurogenetics_score
+      - reproductive_genetics_score
+      - graded_at
+      description: Computed genetic risk stratification result. 0-2 = Low, 3-5 = Moderate, 6+ = High.
+        One-to-one child of assessment.
+    GradingAdditionalFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the grade table.
+        flag_id:
+          type: string
+          maxLength: 30
+          description: Identifier of the flag (e.g. FLAG-PREG-001, FLAG-BRCA-001).
+        category:
+          type: string
+          maxLength: 100
+          description: Category of the flag (e.g. Cancer Genetics, Reproductive Genetics, Urgent Referral).
+        message:
+          type: string
+          description: Human-readable message describing the flagged concern.
+        priority:
+          type: string
+          enum:
+          - high
+          - medium
+          - low
+          description: 'Priority level: high, medium, or low.'
+      required:
+      - created_at
+      - updated_at
+      - grade_id
+      - flag_id
+      - category
+      - message
+      - priority
+      description: Additional safety-critical flags detected during genetic assessment grading (e.g. urgent
+        referral needed, pregnancy with known carrier status).
+    GradingFiredRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the grade table.
+        rule_id:
+          type: string
+          maxLength: 20
+          description: Identifier of the rule that fired (e.g. CG-001, CV-002, NG-003).
+        category:
+          type: string
+          maxLength: 100
+          description: Category of the rule (e.g. Cancer Genetics, Cardiovascular Genetics, Neurogenetics,
+            Reproductive Genetics).
+        description:
+          type: string
+          description: Human-readable description of the rule.
+        risk_level:
+          type: string
+          enum:
+          - low
+          - moderate
+          - high
+          - ''
+          description: 'Risk level contributed by this rule: low, moderate, high, or empty string.'
+      required:
+      - created_at
+      - updated_at
+      - grade_id
+      - rule_id
+      - category
+      - description
+      - risk_level
+      description: Individual genetic risk rules that evaluated to true during grading.
     Patient:
       type: object
       properties:
@@ -763,10 +1972,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was deleted a.k.a. soft-deleted.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Soft-delete timestamp; NULL when the row is live.
         name:
           type: string
           maxLength: 255

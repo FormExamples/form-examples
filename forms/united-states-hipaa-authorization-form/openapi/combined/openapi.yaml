@@ -1857,10 +1857,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         hipaa_authorization_id:
           type: string
           format: uuid
@@ -1931,10 +1927,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         hipaa_authorization_id:
           type: string
           format: uuid
@@ -1997,10 +1989,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         hipaa_authorization_id:
           type: string
           format: uuid
@@ -2053,10 +2041,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         patient_id:
           type: string
           format: uuid
@@ -2117,10 +2101,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted (soft-delete).
         name:
           type: string
           maxLength: 255
@@ -2185,10 +2165,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         hipaa_authorization_id:
           type: string
           format: uuid
@@ -2291,10 +2267,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         hipaa_authorization_id:
           type: string
           format: uuid
@@ -2347,10 +2319,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         hipaa_authorization_id:
           type: string
           format: uuid
@@ -2505,10 +2473,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         hipaa_authorization_id:
           type: string
           format: uuid
@@ -2603,10 +2567,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         hipaa_authorization_id:
           type: string
           format: uuid
@@ -2665,10 +2625,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         validation_result_id:
           type: string
           format: uuid
@@ -2725,10 +2681,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         validation_result_id:
           type: string
           format: uuid
@@ -2789,10 +2741,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         hipaa_authorization_id:
           type: string
           format: uuid

@@ -187,10 +187,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the row was most recently updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the row was soft-deleted.
         emergency_department_triage_note_grade_id:
           type: string
           format: uuid

@@ -289,6 +289,147 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+  /api/body_measurements:
+    get:
+      summary: List BodyMeasurements records
+      operationId: listBodyMeasurements
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of BodyMeasurements records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BodyMeasurements'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new BodyMeasurements
+      operationId: createBodyMeasurements
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyMeasurements'
+      responses:
+        '200':
+          description: The newly created BodyMeasurements
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BodyMeasurements'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/body_measurements/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one BodyMeasurements by id
+      operationId: getBodyMeasurements
+      responses:
+        '200':
+          description: The requested BodyMeasurements
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BodyMeasurements'
+        '404':
+          description: BodyMeasurements not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing BodyMeasurements
+      operationId: updateBodyMeasurements
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyMeasurements'
+      responses:
+        '200':
+          description: The updated BodyMeasurements
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BodyMeasurements'
+        '404':
+          description: BodyMeasurements not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a BodyMeasurements
+      operationId: deleteBodyMeasurements
+      responses:
+        '200':
+          description: BodyMeasurements deleted
+        '404':
+          description: BodyMeasurements not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/cholesterols:
     get:
       summary: List Cholesterol records
@@ -853,6 +994,429 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+  /api/grades:
+    get:
+      summary: List Grade records
+      operationId: listGrade
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of Grade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Grade'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new Grade
+      operationId: createGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Grade'
+      responses:
+        '200':
+          description: The newly created Grade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grade'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grades/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one Grade by id
+      operationId: getGrade
+      responses:
+        '200':
+          description: The requested Grade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grade'
+        '404':
+          description: Grade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing Grade
+      operationId: updateGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Grade'
+      responses:
+        '200':
+          description: The updated Grade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grade'
+        '404':
+          description: Grade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a Grade
+      operationId: deleteGrade
+      responses:
+        '200':
+          description: Grade deleted
+        '404':
+          description: Grade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grading_additional_flags:
+    get:
+      summary: List GradingAdditionalFlag records
+      operationId: listGradingAdditionalFlag
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of GradingAdditionalFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GradingAdditionalFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new GradingAdditionalFlag
+      operationId: createGradingAdditionalFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradingAdditionalFlag'
+      responses:
+        '200':
+          description: The newly created GradingAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingAdditionalFlag'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grading_additional_flags/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one GradingAdditionalFlag by id
+      operationId: getGradingAdditionalFlag
+      responses:
+        '200':
+          description: The requested GradingAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingAdditionalFlag'
+        '404':
+          description: GradingAdditionalFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing GradingAdditionalFlag
+      operationId: updateGradingAdditionalFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradingAdditionalFlag'
+      responses:
+        '200':
+          description: The updated GradingAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingAdditionalFlag'
+        '404':
+          description: GradingAdditionalFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a GradingAdditionalFlag
+      operationId: deleteGradingAdditionalFlag
+      responses:
+        '200':
+          description: GradingAdditionalFlag deleted
+        '404':
+          description: GradingAdditionalFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grading_fired_rules:
+    get:
+      summary: List GradingFiredRule records
+      operationId: listGradingFiredRule
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of GradingFiredRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GradingFiredRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new GradingFiredRule
+      operationId: createGradingFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradingFiredRule'
+      responses:
+        '200':
+          description: The newly created GradingFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingFiredRule'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grading_fired_rules/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one GradingFiredRule by id
+      operationId: getGradingFiredRule
+      responses:
+        '200':
+          description: The requested GradingFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingFiredRule'
+        '404':
+          description: GradingFiredRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing GradingFiredRule
+      operationId: updateGradingFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradingFiredRule'
+      responses:
+        '200':
+          description: The updated GradingFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingFiredRule'
+        '404':
+          description: GradingFiredRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a GradingFiredRule
+      operationId: deleteGradingFiredRule
+      responses:
+        '200':
+          description: GradingFiredRule deleted
+        '404':
+          description: GradingFiredRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/medical_conditions:
     get:
       summary: List MedicalConditions records
@@ -1135,6 +1699,288 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+  /api/physical_activity_diets:
+    get:
+      summary: List PhysicalActivityDiet records
+      operationId: listPhysicalActivityDiet
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of PhysicalActivityDiet records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PhysicalActivityDiet'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new PhysicalActivityDiet
+      operationId: createPhysicalActivityDiet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhysicalActivityDiet'
+      responses:
+        '200':
+          description: The newly created PhysicalActivityDiet
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhysicalActivityDiet'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/physical_activity_diets/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one PhysicalActivityDiet by id
+      operationId: getPhysicalActivityDiet
+      responses:
+        '200':
+          description: The requested PhysicalActivityDiet
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhysicalActivityDiet'
+        '404':
+          description: PhysicalActivityDiet not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing PhysicalActivityDiet
+      operationId: updatePhysicalActivityDiet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhysicalActivityDiet'
+      responses:
+        '200':
+          description: The updated PhysicalActivityDiet
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhysicalActivityDiet'
+        '404':
+          description: PhysicalActivityDiet not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a PhysicalActivityDiet
+      operationId: deletePhysicalActivityDiet
+      responses:
+        '200':
+          description: PhysicalActivityDiet deleted
+        '404':
+          description: PhysicalActivityDiet not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/review_calculates:
+    get:
+      summary: List ReviewCalculate records
+      operationId: listReviewCalculate
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of ReviewCalculate records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReviewCalculate'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new ReviewCalculate
+      operationId: createReviewCalculate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewCalculate'
+      responses:
+        '200':
+          description: The newly created ReviewCalculate
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewCalculate'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/review_calculates/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one ReviewCalculate by id
+      operationId: getReviewCalculate
+      responses:
+        '200':
+          description: The requested ReviewCalculate
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewCalculate'
+        '404':
+          description: ReviewCalculate not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing ReviewCalculate
+      operationId: updateReviewCalculate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewCalculate'
+      responses:
+        '200':
+          description: The updated ReviewCalculate
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewCalculate'
+        '404':
+          description: ReviewCalculate not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a ReviewCalculate
+      operationId: deleteReviewCalculate
+      responses:
+        '200':
+          description: ReviewCalculate deleted
+        '404':
+          description: ReviewCalculate not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/smoking_alcohols:
     get:
       summary: List SmokingAlcohol records
@@ -1293,10 +2139,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         patient_id:
           type: string
           format: uuid
@@ -1329,10 +2171,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         assessment_id:
           type: string
           format: uuid
@@ -1366,6 +2204,46 @@ components:
       - assessment_id
       - on_bp_treatment
       description: Blood pressure readings and antihypertensive treatment status.
+    BodyMeasurements:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        height_cm:
+          type: number
+          format: double
+          description: Patient height in centimetres.
+        weight_kg:
+          type: number
+          format: double
+          description: Patient weight in kilograms.
+        bmi:
+          type: number
+          format: double
+          description: Body mass index (can be overridden or calculated from height/weight).
+        waist_circumference_cm:
+          type: number
+          format: double
+          description: Waist circumference in centimetres.
+      required:
+      - created_at
+      - updated_at
+      - assessment_id
+      description: Body measurements for cardiovascular risk assessment.
     Cholesterol:
       type: object
       properties:
@@ -1381,10 +2259,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         assessment_id:
           type: string
           format: uuid
@@ -1429,10 +2303,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Soft-delete timestamp; NULL when the row is live.
         name:
           type: string
           description: Name.
@@ -1504,10 +2374,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         assessment_id:
           type: string
           format: uuid
@@ -1553,10 +2419,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         assessment_id:
           type: string
           format: uuid
@@ -1592,6 +2454,146 @@ components:
       - family_cvd_relationship
       - family_diabetes_history
       description: Family history of cardiovascular disease and diabetes.
+    Grade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, enforcing 1:1).
+        risk_category:
+          type: string
+          enum:
+          - draft
+          - low
+          - moderate
+          - high
+          description: 'Risk classification: draft, low, moderate, or high.'
+        ten_year_risk_percent:
+          type: number
+          format: double
+          description: Estimated 10-year cardiovascular disease risk percentage.
+        heart_age:
+          type: integer
+          format: int32
+          description: Estimated heart age in years.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the grading was last performed.
+      required:
+      - created_at
+      - updated_at
+      - assessment_id
+      - risk_category
+      - ten_year_risk_percent
+      description: Grading result summarizing 10-year CVD risk and heart age. One-to-one child of assessment.
+    GradingAdditionalFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the grade table.
+        flag_id:
+          type: string
+          maxLength: 30
+          description: Flag identifier (e.g. FLAG-BP-001).
+        category:
+          type: string
+          maxLength: 50
+          description: Clinical category of the flag (e.g. Blood Pressure, Eligibility).
+        message:
+          type: string
+          description: Human-readable description of the flagged issue.
+        priority:
+          type: string
+          enum:
+          - high
+          - medium
+          - low
+          description: 'Flag priority: high, medium, or low.'
+      required:
+      - created_at
+      - updated_at
+      - grade_id
+      - flag_id
+      - category
+      - message
+      - priority
+      description: Additional clinical flags raised during the Heart Health Check grading. Many-to-one
+        child of grade.
+    GradingFiredRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the grade table.
+        rule_id:
+          type: string
+          maxLength: 20
+          description: Rule identifier (e.g. HHC-001).
+        category:
+          type: string
+          maxLength: 50
+          description: Risk factor category (e.g. Blood Pressure, Diabetes).
+        description:
+          type: string
+          description: Human-readable description of the fired rule.
+        risk_level:
+          type: string
+          enum:
+          - high
+          - medium
+          - low
+          description: 'Risk level: high, medium, or low.'
+      required:
+      - created_at
+      - updated_at
+      - grade_id
+      - rule_id
+      - category
+      - description
+      - risk_level
+      description: Individual risk rules that fired during the Heart Health Check grading. Many-to-one
+        child of grade.
     MedicalConditions:
       type: object
       properties:
@@ -1607,10 +2609,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         assessment_id:
           type: string
           format: uuid
@@ -1708,10 +2706,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was deleted a.k.a. soft-deleted.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Soft-delete timestamp; NULL when the row is live.
         name:
           type: string
           maxLength: 255
@@ -1771,6 +2765,66 @@ components:
       - name
       - birth_date
       description: Patient
+    PhysicalActivityDiet:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        physical_activity_minutes_per_week:
+          type: integer
+          format: int32
+          description: Total minutes of physical activity per week.
+        activity_intensity:
+          type: string
+          enum:
+          - light
+          - moderate
+          - vigorous
+          - ''
+          description: 'Typical exercise intensity: light, moderate, vigorous, or empty.'
+        fruit_veg_portions_per_day:
+          type: integer
+          format: int32
+          description: Number of fruit and vegetable portions consumed per day.
+        diet_quality:
+          type: string
+          enum:
+          - poor
+          - fair
+          - good
+          - excellent
+          - ''
+          description: Self-reported overall diet quality.
+        salt_intake:
+          type: string
+          enum:
+          - low
+          - moderate
+          - high
+          - ''
+          description: Self-reported salt intake level.
+      required:
+      - created_at
+      - updated_at
+      - assessment_id
+      - activity_intensity
+      - diet_quality
+      - salt_intake
+      description: Physical activity and dietary habit data.
     Problem:
       type: object
       description: RFC 9457 problem details
@@ -1794,6 +2848,47 @@ components:
       - type
       - title
       - status
+    ReviewCalculate:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        clinician_name:
+          type: string
+          maxLength: 255
+          description: Name of the reviewing clinician.
+        review_date:
+          type: string
+          format: date
+          description: Date of the clinical review.
+        clinical_notes:
+          type: string
+          description: Free-text clinical notes from the reviewing clinician.
+        audit_score:
+          type: integer
+          format: int32
+          description: AUDIT (Alcohol Use Disorders Identification Test) score (0-40).
+      required:
+      - created_at
+      - updated_at
+      - assessment_id
+      - clinician_name
+      - clinical_notes
+      description: Clinician review information and AUDIT alcohol screening score.
     SmokingAlcohol:
       type: object
       properties:
@@ -1809,10 +2904,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         assessment_id:
           type: string
           format: uuid

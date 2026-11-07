@@ -289,6 +289,570 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+  /api/meeting_grade_flags:
+    get:
+      summary: List MeetingGradeFlag records
+      operationId: listMeetingGradeFlag
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of MeetingGradeFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MeetingGradeFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new MeetingGradeFlag
+      operationId: createMeetingGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MeetingGradeFlag'
+      responses:
+        '200':
+          description: The newly created MeetingGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeetingGradeFlag'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/meeting_grade_flags/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one MeetingGradeFlag by id
+      operationId: getMeetingGradeFlag
+      responses:
+        '200':
+          description: The requested MeetingGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeetingGradeFlag'
+        '404':
+          description: MeetingGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing MeetingGradeFlag
+      operationId: updateMeetingGradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MeetingGradeFlag'
+      responses:
+        '200':
+          description: The updated MeetingGradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeetingGradeFlag'
+        '404':
+          description: MeetingGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a MeetingGradeFlag
+      operationId: deleteMeetingGradeFlag
+      responses:
+        '200':
+          description: MeetingGradeFlag deleted
+        '404':
+          description: MeetingGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/meeting_grade_rules:
+    get:
+      summary: List MeetingGradeRule records
+      operationId: listMeetingGradeRule
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of MeetingGradeRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MeetingGradeRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new MeetingGradeRule
+      operationId: createMeetingGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MeetingGradeRule'
+      responses:
+        '200':
+          description: The newly created MeetingGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeetingGradeRule'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/meeting_grade_rules/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one MeetingGradeRule by id
+      operationId: getMeetingGradeRule
+      responses:
+        '200':
+          description: The requested MeetingGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeetingGradeRule'
+        '404':
+          description: MeetingGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing MeetingGradeRule
+      operationId: updateMeetingGradeRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MeetingGradeRule'
+      responses:
+        '200':
+          description: The updated MeetingGradeRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeetingGradeRule'
+        '404':
+          description: MeetingGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a MeetingGradeRule
+      operationId: deleteMeetingGradeRule
+      responses:
+        '200':
+          description: MeetingGradeRule deleted
+        '404':
+          description: MeetingGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/meeting_grades:
+    get:
+      summary: List MeetingGrade records
+      operationId: listMeetingGrade
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of MeetingGrade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MeetingGrade'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new MeetingGrade
+      operationId: createMeetingGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MeetingGrade'
+      responses:
+        '200':
+          description: The newly created MeetingGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeetingGrade'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/meeting_grades/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one MeetingGrade by id
+      operationId: getMeetingGrade
+      responses:
+        '200':
+          description: The requested MeetingGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeetingGrade'
+        '404':
+          description: MeetingGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing MeetingGrade
+      operationId: updateMeetingGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MeetingGrade'
+      responses:
+        '200':
+          description: The updated MeetingGrade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeetingGrade'
+        '404':
+          description: MeetingGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a MeetingGrade
+      operationId: deleteMeetingGrade
+      responses:
+        '200':
+          description: MeetingGrade deleted
+        '404':
+          description: MeetingGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/meeting_outcomes:
+    get:
+      summary: List MeetingOutcome records
+      operationId: listMeetingOutcome
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of MeetingOutcome records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MeetingOutcome'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new MeetingOutcome
+      operationId: createMeetingOutcome
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MeetingOutcome'
+      responses:
+        '200':
+          description: The newly created MeetingOutcome
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeetingOutcome'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/meeting_outcomes/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one MeetingOutcome by id
+      operationId: getMeetingOutcome
+      responses:
+        '200':
+          description: The requested MeetingOutcome
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeetingOutcome'
+        '404':
+          description: MeetingOutcome not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing MeetingOutcome
+      operationId: updateMeetingOutcome
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MeetingOutcome'
+      responses:
+        '200':
+          description: The updated MeetingOutcome
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeetingOutcome'
+        '404':
+          description: MeetingOutcome not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a MeetingOutcome
+      operationId: deleteMeetingOutcome
+      responses:
+        '200':
+          description: MeetingOutcome deleted
+        '404':
+          description: MeetingOutcome not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/meeting_outputs:
     get:
       summary: List MeetingOutput records
@@ -1152,10 +1716,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         meeting_id:
           type: string
           format: uuid
@@ -1238,10 +1798,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         meeting_id:
           type: string
           format: uuid
@@ -1300,10 +1856,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         organizer_id:
           type: string
           format: uuid
@@ -1452,6 +2004,324 @@ components:
       - signed_by_name
       description: A meeting record captured via a 10-step single-page wizard. Holds the invitation metadata,
         the 250-character summary, and the sign-off. Variable-length collections live in child tables.
+    MeetingGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        meeting_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent meeting row (unique, 1:1).
+        duration_minutes:
+          type: integer
+          format: int32
+          description: Derived duration in minutes from actual_start_at to actual_end_at, or scheduled
+            fallback.
+        agenda_item_count:
+          type: integer
+          format: int32
+          description: Derived count of agenda_item rows.
+        participant_count:
+          type: integer
+          format: int32
+          description: Derived count of participant rows.
+        accepted_count:
+          type: integer
+          format: int32
+          description: Derived count of participants with response_status = accepted.
+        declined_count:
+          type: integer
+          format: int32
+          description: Derived count of participants with response_status = declined.
+        attended_count:
+          type: integer
+          format: int32
+          description: Derived count of participants with attendance_status = present or late or remote.
+        action_item_count:
+          type: integer
+          format: int32
+          description: Derived count of action_item rows.
+        output_count:
+          type: integer
+          format: int32
+          description: Derived count of meeting_output rows.
+        outcome_count:
+          type: integer
+          format: int32
+          description: Derived count of meeting_outcome rows.
+        completion_status:
+          type: string
+          enum:
+          - planned
+          - in-progress
+          - complete
+          - incomplete
+          - ''
+          description: 'Completion status derived by validateMeeting: planned, in-progress, complete,
+            incomplete.'
+        overall_health:
+          type: string
+          enum:
+          - green
+          - amber
+          - red
+          - ''
+          description: 'Overall health: green (no flags), amber (low/medium flags), red (high-priority
+            flag fired).'
+        override_reason:
+          type: string
+          maxLength: 500
+          description: Reason the organiser overrode the engine-computed completion status, if any.
+        notes:
+          type: string
+          description: Free-text organiser sign-off notes.
+        signed_by:
+          type: string
+          maxLength: 255
+          description: Name or identifier of the organiser who signed off.
+        signed_at:
+          type: string
+          format: date-time
+          description: Timestamp of the organiser electronic signature.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the engine last computed the result.
+      required:
+      - created_at
+      - updated_at
+      - meeting_id
+      - agenda_item_count
+      - participant_count
+      - accepted_count
+      - declined_count
+      - attended_count
+      - action_item_count
+      - output_count
+      - outcome_count
+      - completion_status
+      - overall_health
+      - override_reason
+      - notes
+      - signed_by
+      - graded_at
+      description: Computed and signed-off validation result for a meeting. One-to-one with meeting. Stores
+        the derived counts and completion status from validateMeeting() plus the organiser sign-off.
+    MeetingGradeFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        meeting_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        flag_id:
+          type: string
+          maxLength: 50
+          description: Stable flag identifier (e.g. F-SUMMARY-OVER-LIMIT-001).
+        category:
+          type: string
+          enum:
+          - summary-over-limit
+          - no-organizer
+          - no-participants
+          - no-agenda
+          - no-outcomes
+          - no-summary
+          - start-after-end
+          - recurring-without-until
+          - action-item-overdue
+          - low-acceptance-rate
+          - low-attendance-rate
+          - over-running
+          - conflicting-resource
+          - confidential-content
+          - other
+          - ''
+          description: 'Flag category: summary-over-limit, no-participants, no-agenda, start-after-end,
+            etc.'
+        priority:
+          type: string
+          enum:
+          - low
+          - medium
+          - high
+          - ''
+          description: 'Flag priority: low, medium, or high.'
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of what fired the flag.
+        suggested_action:
+          type: string
+          maxLength: 500
+          description: Suggested action for the organiser (e.g. "shorten summary to 250 characters").
+      required:
+      - created_at
+      - updated_at
+      - meeting_grade_id
+      - flag_id
+      - category
+      - priority
+      - description
+      - suggested_action
+      description: Non-blocking validation flags that fire independently of the completion status. Surfaced
+        in the dashboard for the organiser to address.
+    MeetingGradeRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        meeting_grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent grade.
+        rule_id:
+          type: string
+          maxLength: 50
+          description: Stable rule identifier (e.g. R-SUMMARY-OVER-LIMIT, R-NO-AGENDA).
+        instrument:
+          type: string
+          enum:
+          - invitation
+          - agenda
+          - participants
+          - resources
+          - recurrence
+          - summary
+          - action-items
+          - outputs
+          - outcomes
+          - composite
+          - ''
+          description: Validation instrument the rule belongs to.
+        grade:
+          type: string
+          maxLength: 10
+          description: Grade contributed by this rule (e.g. red for blocking, amber for warning).
+        category:
+          type: string
+          maxLength: 50
+          description: Category for grouping rules in the report (e.g. data-quality, completeness, scheduling).
+        description:
+          type: string
+          maxLength: 500
+          description: Human-readable description of why the rule fired.
+      required:
+      - created_at
+      - updated_at
+      - meeting_grade_id
+      - rule_id
+      - instrument
+      - grade
+      - category
+      - description
+      description: Audit trail of every validation rule that fired for this meeting, across the validation
+        instruments (invitation, agenda, participants, resources, recurrence, summary, action-items, outputs,
+        outcomes, composite).
+    MeetingOutcome:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        meeting_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent meeting.
+        position:
+          type: integer
+          format: int32
+          description: Zero-based ordinal of the outcome in the list.
+        title:
+          type: string
+          maxLength: 255
+          description: Short title summarising the outcome.
+        category:
+          type: string
+          enum:
+          - goal-reached
+          - risk-identified
+          - risk-mitigated
+          - alignment-achieved
+          - decision
+          - blocker-cleared
+          - blocker-raised
+          - commitment
+          - no-outcome
+          - other
+          - ''
+          description: 'Outcome category: goal-reached, risk-identified, risk-mitigated, alignment-achieved,
+            decision, blocker-cleared, blocker-raised, commitment, no-outcome, other.'
+        description:
+          type: string
+          description: Free-text description of the outcome.
+        impact:
+          type: string
+          enum:
+          - low
+          - medium
+          - high
+          - strategic
+          - ''
+          description: 'Subjective impact rating: low, medium, high, strategic.'
+        related_action_item_id:
+          type: string
+          format: uuid
+          description: Optional foreign key to an action_item that captures the follow-up needed for this
+            outcome.
+      required:
+      - created_at
+      - updated_at
+      - meeting_id
+      - position
+      - title
+      - category
+      - description
+      - impact
+      description: 'The impact or change resulting from the meeting: goal reached, risk identified, alignment
+        achieved, decision recorded. Distinct from meeting_output: outputs are things, outcomes are changes.'
     MeetingOutput:
       type: object
       properties:
@@ -1467,10 +2337,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         meeting_id:
           type: string
           format: uuid
@@ -1535,10 +2401,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         name:
           type: string
           maxLength: 255
@@ -1623,10 +2485,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         meeting_id:
           type: string
           format: uuid
@@ -1736,10 +2594,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         meeting_id:
           type: string
           format: uuid
@@ -1821,10 +2675,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         meeting_id:
           type: string
           format: uuid

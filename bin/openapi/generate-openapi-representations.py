@@ -3,11 +3,10 @@
 
 For each form's sql/ directory, parses CREATE TABLE statements
 plus COMMENT ON TABLE / COMMENT ON COLUMN, and writes one .yaml file per
-top-level SQL entity into openapi/.
+SQL table into openapi/.
 
 Conventions documented in AGENTS/openapi.md:
-  - One .yaml per top-level table; assessment_<section> children fold
-    into a single assessment.yaml (mirrors FHIR R5, XML, protobuf).
+  - One .yaml per table, because each table has its own routes.
   - openapi: 3.1.0
   - info.title = "<Form Slug Titlecased> — <Resource>"
   - info.description = COMMENT ON TABLE (or the table name if absent)
@@ -23,7 +22,6 @@ from pathlib import Path
 
 FORMS_DIR = Path(__file__).resolve().parent.parent.parent / "forms"
 
-CHILD_SKIP_COLUMNS = {"id", "assessment_id", "created_at", "updated_at"}
 
 
 def parse_create_table(sql_text):
@@ -137,61 +135,6 @@ def parse_comments(sql_text):
         column_comments[(table, col)] = body
 
     return table_comments, column_comments
-
-
-def merge_assessment_tables(tables, column_comments):
-    """Fold every `assessment_<section>` child into the `assessment`
-    parent so we emit a single assessment.yaml per form. Mirrors the
-    fhir-r5/protobuf folding rule. Also rewrites column_comments for
-    section-prefixed columns that collide with the parent."""
-    parent_idx = None
-    children = []
-    keep_indices = []
-
-    for i, (name, cols) in enumerate(tables):
-        if name == "assessment":
-            parent_idx = i
-            keep_indices.append(i)
-        elif name.startswith("assessment_"):
-            section = name[len("assessment_"):]
-            children.append((name, section, cols))
-        else:
-            keep_indices.append(i)
-
-    if parent_idx is None or not children:
-        return list(tables), column_comments
-
-    parent_name, parent_cols = tables[parent_idx]
-    merged_cols = list(parent_cols)
-    taken = {c["name"] for c in merged_cols}
-
-    new_col_comments = dict(column_comments)
-
-    for child_table, section, child_cols in children:
-        for col in child_cols:
-            if col["name"] in CHILD_SKIP_COLUMNS:
-                continue
-            new_col = dict(col)
-            new_name = col["name"]
-            if new_name in taken:
-                new_name = f"{section}_{col['name']}"
-                new_col["name"] = new_name
-            merged_cols.append(new_col)
-            taken.add(new_name)
-
-            # Carry the child's COMMENT under the (parent, possibly-renamed) key.
-            src = (child_table, col["name"])
-            if src in column_comments:
-                new_col_comments[("assessment", new_name)] = column_comments[src]
-
-    out = []
-    for i in keep_indices:
-        name, cols = tables[i]
-        if i == parent_idx:
-            out.append((name, merged_cols))
-        else:
-            out.append((name, cols))
-    return out, new_col_comments
 
 
 def snake_to_pascal(name):
@@ -427,6 +370,8 @@ def emit_problem_schema(L):
 def build_yaml(table_name, columns, form_slug, source_table_names,
                table_comment, column_comments):
     """Render a single OpenAPI 3.1 yaml document."""
+    # deleted_at is server state: no request sets it and no response carries it.
+    columns = [c for c in columns if c['name'] != 'deleted_at']
     resource = snake_to_pascal(table_name)
     title = f"{slug_title(form_slug)} — {resource}"
     plural = pluralize_route(table_name)
@@ -603,12 +548,6 @@ def process_form(form_dir):
     table_comments, column_comments = parse_comments(all_sql)
 
     source_for = {name: [name] for name, _ in all_tables}
-    if any(n == "assessment" for n, _ in all_tables):
-        for n, _ in all_tables:
-            if n.startswith("assessment_"):
-                source_for["assessment"].append(n)
-
-    all_tables, column_comments = merge_assessment_tables(all_tables, column_comments)
     expected_files = {f"{t[0]}.yaml" for t in all_tables}
 
     openapi_dir.mkdir(exist_ok=True)

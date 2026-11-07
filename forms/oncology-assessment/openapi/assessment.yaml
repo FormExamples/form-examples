@@ -1,5 +1,5 @@
 # Generated from sql/. Do not edit by hand.
-# SOURCE: assessment, assessment_current_medications, assessment_medication_item
+# SOURCE: assessment
 openapi: 3.1.0
 info:
   title: Oncology Assessment — Assessment
@@ -187,10 +187,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         patient_id:
           type: string
           format: uuid
@@ -203,110 +199,9 @@ components:
             - reviewed
             - urgent
           description: "Lifecycle status: draft, submitted, reviewed, or urgent."
-        current_medications_deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
-        polypharmacy_concern:
-          type: string
-          enum:
-            - "yes"
-            - "no"
-            - ""
-          description: "Whether polypharmacy is a concern: yes, no, or empty."
-        drug_interactions_identified:
-          type: string
-          enum:
-            - "yes"
-            - "no"
-            - ""
-          description: "Whether drug interactions have been identified: yes, no, or empty."
-        drug_interaction_details:
-          type: string
-          description: Details of identified drug interactions.
-        complementary_medicines:
-          type: string
-          enum:
-            - "yes"
-            - "no"
-            - ""
-          description: "Whether the patient uses complementary or alternative medicines: yes, no, or empty."
-        complementary_medicine_details:
-          type: string
-          description: Details of complementary or alternative medicines being used.
-        medication_adherence:
-          type: string
-          enum:
-            - good
-            - partial
-            - poor
-            - ""
-          description: "Overall medication adherence: good, partial, poor, or empty."
-        medications_notes:
-          type: string
-          description: Additional clinician notes on medications.
-        medication_item_deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
-        current_medications_id:
-          type: string
-          format: uuid
-          description: Foreign key to the assessment_current_medications table.
-        medication_name:
-          type: string
-          maxLength: 255
-          description: Name of the medication.
-        dose:
-          type: string
-          maxLength: 100
-          description: Dose of the medication (e.g. 500mg, 10mg/kg).
-        frequency:
-          type: string
-          maxLength: 100
-          description: Frequency of administration (e.g. once daily, twice daily, PRN).
-        route:
-          type: string
-          enum:
-            - oral
-            - iv
-            - sc
-            - im
-            - topical
-            - inhaled
-            - rectal
-            - other
-            - ""
-          description: "Route of administration: oral, iv, sc, im, topical, inhaled, rectal, other, or empty."
-        indication:
-          type: string
-          maxLength: 255
-          description: Indication for the medication.
-        start_date:
-          type: string
-          format: date
-          description: Date the medication was started.
-        sort_order:
-          type: integer
-          format: int32
-          description: Display order of the item within the list.
       required:
         - created_at
         - updated_at
         - patient_id
         - status
-        - polypharmacy_concern
-        - drug_interactions_identified
-        - drug_interaction_details
-        - complementary_medicines
-        - complementary_medicine_details
-        - medication_adherence
-        - medications_notes
-        - current_medications_id
-        - medication_name
-        - dose
-        - frequency
-        - route
-        - indication
-        - sort_order
       description: Oncology assessment form using ECOG Performance Status. Parent entity for all assessment sections.

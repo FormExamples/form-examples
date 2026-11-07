@@ -1,0 +1,218 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: assessment_performance_ratings
+openapi: 3.1.0
+info:
+  title: Occupational Therapy Assessment — AssessmentPerformanceRatings
+  version: 1.0.0
+  description: "COPM performance ratings section: patient-rated performance scores (1-10) across occupational domains. One-to-one child of assessment."
+paths:
+  /api/assessment_performance_ratings:
+    get:
+      summary: List AssessmentPerformanceRatings records
+      operationId: listAssessmentPerformanceRatings
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100000
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AssessmentPerformanceRatings records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AssessmentPerformanceRatings"
+        "400":
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new AssessmentPerformanceRatings
+      operationId: createAssessmentPerformanceRatings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssessmentPerformanceRatings"
+      responses:
+        "200":
+          description: The newly created AssessmentPerformanceRatings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentPerformanceRatings"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/assessment_performance_ratings/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AssessmentPerformanceRatings by id
+      operationId: getAssessmentPerformanceRatings
+      responses:
+        "200":
+          description: The requested AssessmentPerformanceRatings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentPerformanceRatings"
+        "404":
+          description: AssessmentPerformanceRatings not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing AssessmentPerformanceRatings
+      operationId: updateAssessmentPerformanceRatings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssessmentPerformanceRatings"
+      responses:
+        "200":
+          description: The updated AssessmentPerformanceRatings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentPerformanceRatings"
+        "404":
+          description: AssessmentPerformanceRatings not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a AssessmentPerformanceRatings
+      operationId: deleteAssessmentPerformanceRatings
+      responses:
+        "200":
+          description: AssessmentPerformanceRatings deleted
+        "404":
+          description: AssessmentPerformanceRatings not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+        - type
+        - title
+        - status
+    AssessmentPerformanceRatings:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, enforcing 1:1).
+        overall_performance_score:
+          type: number
+          format: double
+          description: Overall COPM performance score (1-10), averaged across domains.
+        self_care_performance_score:
+          type: number
+          format: double
+          description: COPM performance score for self-care activities (1 = not able, 10 = able to do extremely well).
+        productivity_performance_score:
+          type: number
+          format: double
+          description: COPM performance score for productivity activities (1 = not able, 10 = able to do extremely well).
+        leisure_performance_score:
+          type: number
+          format: double
+          description: COPM performance score for leisure activities (1 = not able, 10 = able to do extremely well).
+        performance_notes:
+          type: string
+          description: Additional notes on performance ratings and observations.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - performance_notes
+      description: "COPM performance ratings section: patient-rated performance scores (1-10) across occupational domains. One-to-one child of assessment."

@@ -1,0 +1,237 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: assessment_range_of_motion
+openapi: 3.1.0
+info:
+  title: Orthopedic Assessment — AssessmentRangeOfMotion
+  version: 1.0.0
+  description: "Range of motion section header: joint, side, and overall status. One-to-one child of assessment."
+paths:
+  /api/assessment_range_of_motions:
+    get:
+      summary: List AssessmentRangeOfMotion records
+      operationId: listAssessmentRangeOfMotion
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100000
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AssessmentRangeOfMotion records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AssessmentRangeOfMotion"
+        "400":
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new AssessmentRangeOfMotion
+      operationId: createAssessmentRangeOfMotion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssessmentRangeOfMotion"
+      responses:
+        "200":
+          description: The newly created AssessmentRangeOfMotion
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentRangeOfMotion"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/assessment_range_of_motions/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AssessmentRangeOfMotion by id
+      operationId: getAssessmentRangeOfMotion
+      responses:
+        "200":
+          description: The requested AssessmentRangeOfMotion
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentRangeOfMotion"
+        "404":
+          description: AssessmentRangeOfMotion not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing AssessmentRangeOfMotion
+      operationId: updateAssessmentRangeOfMotion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssessmentRangeOfMotion"
+      responses:
+        "200":
+          description: The updated AssessmentRangeOfMotion
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentRangeOfMotion"
+        "404":
+          description: AssessmentRangeOfMotion not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a AssessmentRangeOfMotion
+      operationId: deleteAssessmentRangeOfMotion
+      responses:
+        "200":
+          description: AssessmentRangeOfMotion deleted
+        "404":
+          description: AssessmentRangeOfMotion not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+        - type
+        - title
+        - status
+    AssessmentRangeOfMotion:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, enforcing 1:1).
+        joint_assessed:
+          type: string
+          enum:
+            - shoulder
+            - elbow
+            - wrist
+            - hand
+            - hip
+            - knee
+            - ankle
+            - spine-cervical
+            - spine-lumbar
+            - other
+            - ""
+          description: Primary joint being assessed for range of motion.
+        side_assessed:
+          type: string
+          enum:
+            - left
+            - right
+            - bilateral
+            - ""
+          description: "Side assessed: left, right, bilateral, or empty."
+        overall_rom_status:
+          type: string
+          enum:
+            - full
+            - mildly-restricted
+            - moderately-restricted
+            - severely-restricted
+            - ""
+          description: "Overall range of motion status: full, mildly-restricted, moderately-restricted, severely-restricted, or empty."
+        range_of_motion_notes:
+          type: string
+          description: Additional notes on range of motion assessment.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - joint_assessed
+        - side_assessed
+        - overall_rom_status
+        - range_of_motion_notes
+      description: "Range of motion section header: joint, side, and overall status. One-to-one child of assessment."

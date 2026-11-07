@@ -187,10 +187,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted a.k.a. soft-removed.
         medical_information_form_for_air_travel_id:
           type: string
           format: uuid

@@ -7,6 +7,1416 @@ info:
   description: Combined OpenAPI specification for the Allergy Assessment form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table.
 paths:
+  /api/assessment_anaphylaxis_episodes:
+    get:
+      summary: List AssessmentAnaphylaxisEpisode records
+      operationId: listAssessmentAnaphylaxisEpisode
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of AssessmentAnaphylaxisEpisode records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssessmentAnaphylaxisEpisode'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new AssessmentAnaphylaxisEpisode
+      operationId: createAssessmentAnaphylaxisEpisode
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentAnaphylaxisEpisode'
+      responses:
+        '200':
+          description: The newly created AssessmentAnaphylaxisEpisode
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentAnaphylaxisEpisode'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_anaphylaxis_episodes/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one AssessmentAnaphylaxisEpisode by id
+      operationId: getAssessmentAnaphylaxisEpisode
+      responses:
+        '200':
+          description: The requested AssessmentAnaphylaxisEpisode
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentAnaphylaxisEpisode'
+        '404':
+          description: AssessmentAnaphylaxisEpisode not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing AssessmentAnaphylaxisEpisode
+      operationId: updateAssessmentAnaphylaxisEpisode
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentAnaphylaxisEpisode'
+      responses:
+        '200':
+          description: The updated AssessmentAnaphylaxisEpisode
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentAnaphylaxisEpisode'
+        '404':
+          description: AssessmentAnaphylaxisEpisode not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a AssessmentAnaphylaxisEpisode
+      operationId: deleteAssessmentAnaphylaxisEpisode
+      responses:
+        '200':
+          description: AssessmentAnaphylaxisEpisode deleted
+        '404':
+          description: AssessmentAnaphylaxisEpisode not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_anaphylaxis_histories:
+    get:
+      summary: List AssessmentAnaphylaxisHistory records
+      operationId: listAssessmentAnaphylaxisHistory
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of AssessmentAnaphylaxisHistory records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssessmentAnaphylaxisHistory'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new AssessmentAnaphylaxisHistory
+      operationId: createAssessmentAnaphylaxisHistory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentAnaphylaxisHistory'
+      responses:
+        '200':
+          description: The newly created AssessmentAnaphylaxisHistory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentAnaphylaxisHistory'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_anaphylaxis_histories/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one AssessmentAnaphylaxisHistory by id
+      operationId: getAssessmentAnaphylaxisHistory
+      responses:
+        '200':
+          description: The requested AssessmentAnaphylaxisHistory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentAnaphylaxisHistory'
+        '404':
+          description: AssessmentAnaphylaxisHistory not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing AssessmentAnaphylaxisHistory
+      operationId: updateAssessmentAnaphylaxisHistory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentAnaphylaxisHistory'
+      responses:
+        '200':
+          description: The updated AssessmentAnaphylaxisHistory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentAnaphylaxisHistory'
+        '404':
+          description: AssessmentAnaphylaxisHistory not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a AssessmentAnaphylaxisHistory
+      operationId: deleteAssessmentAnaphylaxisHistory
+      responses:
+        '200':
+          description: AssessmentAnaphylaxisHistory deleted
+        '404':
+          description: AssessmentAnaphylaxisHistory not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_current_managements:
+    get:
+      summary: List AssessmentCurrentManagement records
+      operationId: listAssessmentCurrentManagement
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of AssessmentCurrentManagement records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssessmentCurrentManagement'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new AssessmentCurrentManagement
+      operationId: createAssessmentCurrentManagement
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentCurrentManagement'
+      responses:
+        '200':
+          description: The newly created AssessmentCurrentManagement
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentCurrentManagement'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_current_managements/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one AssessmentCurrentManagement by id
+      operationId: getAssessmentCurrentManagement
+      responses:
+        '200':
+          description: The requested AssessmentCurrentManagement
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentCurrentManagement'
+        '404':
+          description: AssessmentCurrentManagement not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing AssessmentCurrentManagement
+      operationId: updateAssessmentCurrentManagement
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentCurrentManagement'
+      responses:
+        '200':
+          description: The updated AssessmentCurrentManagement
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentCurrentManagement'
+        '404':
+          description: AssessmentCurrentManagement not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a AssessmentCurrentManagement
+      operationId: deleteAssessmentCurrentManagement
+      responses:
+        '200':
+          description: AssessmentCurrentManagement deleted
+        '404':
+          description: AssessmentCurrentManagement not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_drug_allergies:
+    get:
+      summary: List AssessmentDrugAllergies records
+      operationId: listAssessmentDrugAllergies
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of AssessmentDrugAllergies records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssessmentDrugAllergies'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new AssessmentDrugAllergies
+      operationId: createAssessmentDrugAllergies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentDrugAllergies'
+      responses:
+        '200':
+          description: The newly created AssessmentDrugAllergies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentDrugAllergies'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_drug_allergies/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one AssessmentDrugAllergies by id
+      operationId: getAssessmentDrugAllergies
+      responses:
+        '200':
+          description: The requested AssessmentDrugAllergies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentDrugAllergies'
+        '404':
+          description: AssessmentDrugAllergies not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing AssessmentDrugAllergies
+      operationId: updateAssessmentDrugAllergies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentDrugAllergies'
+      responses:
+        '200':
+          description: The updated AssessmentDrugAllergies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentDrugAllergies'
+        '404':
+          description: AssessmentDrugAllergies not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a AssessmentDrugAllergies
+      operationId: deleteAssessmentDrugAllergies
+      responses:
+        '200':
+          description: AssessmentDrugAllergies deleted
+        '404':
+          description: AssessmentDrugAllergies not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_drug_allergy_items:
+    get:
+      summary: List AssessmentDrugAllergyItem records
+      operationId: listAssessmentDrugAllergyItem
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of AssessmentDrugAllergyItem records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssessmentDrugAllergyItem'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new AssessmentDrugAllergyItem
+      operationId: createAssessmentDrugAllergyItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentDrugAllergyItem'
+      responses:
+        '200':
+          description: The newly created AssessmentDrugAllergyItem
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentDrugAllergyItem'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_drug_allergy_items/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one AssessmentDrugAllergyItem by id
+      operationId: getAssessmentDrugAllergyItem
+      responses:
+        '200':
+          description: The requested AssessmentDrugAllergyItem
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentDrugAllergyItem'
+        '404':
+          description: AssessmentDrugAllergyItem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing AssessmentDrugAllergyItem
+      operationId: updateAssessmentDrugAllergyItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentDrugAllergyItem'
+      responses:
+        '200':
+          description: The updated AssessmentDrugAllergyItem
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentDrugAllergyItem'
+        '404':
+          description: AssessmentDrugAllergyItem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a AssessmentDrugAllergyItem
+      operationId: deleteAssessmentDrugAllergyItem
+      responses:
+        '200':
+          description: AssessmentDrugAllergyItem deleted
+        '404':
+          description: AssessmentDrugAllergyItem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_food_allergies:
+    get:
+      summary: List AssessmentFoodAllergies records
+      operationId: listAssessmentFoodAllergies
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of AssessmentFoodAllergies records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssessmentFoodAllergies'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new AssessmentFoodAllergies
+      operationId: createAssessmentFoodAllergies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentFoodAllergies'
+      responses:
+        '200':
+          description: The newly created AssessmentFoodAllergies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentFoodAllergies'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_food_allergies/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one AssessmentFoodAllergies by id
+      operationId: getAssessmentFoodAllergies
+      responses:
+        '200':
+          description: The requested AssessmentFoodAllergies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentFoodAllergies'
+        '404':
+          description: AssessmentFoodAllergies not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing AssessmentFoodAllergies
+      operationId: updateAssessmentFoodAllergies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentFoodAllergies'
+      responses:
+        '200':
+          description: The updated AssessmentFoodAllergies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentFoodAllergies'
+        '404':
+          description: AssessmentFoodAllergies not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a AssessmentFoodAllergies
+      operationId: deleteAssessmentFoodAllergies
+      responses:
+        '200':
+          description: AssessmentFoodAllergies deleted
+        '404':
+          description: AssessmentFoodAllergies not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_food_allergy_items:
+    get:
+      summary: List AssessmentFoodAllergyItem records
+      operationId: listAssessmentFoodAllergyItem
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of AssessmentFoodAllergyItem records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssessmentFoodAllergyItem'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new AssessmentFoodAllergyItem
+      operationId: createAssessmentFoodAllergyItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentFoodAllergyItem'
+      responses:
+        '200':
+          description: The newly created AssessmentFoodAllergyItem
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentFoodAllergyItem'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_food_allergy_items/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one AssessmentFoodAllergyItem by id
+      operationId: getAssessmentFoodAllergyItem
+      responses:
+        '200':
+          description: The requested AssessmentFoodAllergyItem
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentFoodAllergyItem'
+        '404':
+          description: AssessmentFoodAllergyItem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing AssessmentFoodAllergyItem
+      operationId: updateAssessmentFoodAllergyItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentFoodAllergyItem'
+      responses:
+        '200':
+          description: The updated AssessmentFoodAllergyItem
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentFoodAllergyItem'
+        '404':
+          description: AssessmentFoodAllergyItem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a AssessmentFoodAllergyItem
+      operationId: deleteAssessmentFoodAllergyItem
+      responses:
+        '200':
+          description: AssessmentFoodAllergyItem deleted
+        '404':
+          description: AssessmentFoodAllergyItem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_other_medications:
+    get:
+      summary: List AssessmentOtherMedication records
+      operationId: listAssessmentOtherMedication
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of AssessmentOtherMedication records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssessmentOtherMedication'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new AssessmentOtherMedication
+      operationId: createAssessmentOtherMedication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentOtherMedication'
+      responses:
+        '200':
+          description: The newly created AssessmentOtherMedication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentOtherMedication'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_other_medications/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one AssessmentOtherMedication by id
+      operationId: getAssessmentOtherMedication
+      responses:
+        '200':
+          description: The requested AssessmentOtherMedication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentOtherMedication'
+        '404':
+          description: AssessmentOtherMedication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing AssessmentOtherMedication
+      operationId: updateAssessmentOtherMedication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentOtherMedication'
+      responses:
+        '200':
+          description: The updated AssessmentOtherMedication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentOtherMedication'
+        '404':
+          description: AssessmentOtherMedication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a AssessmentOtherMedication
+      operationId: deleteAssessmentOtherMedication
+      responses:
+        '200':
+          description: AssessmentOtherMedication deleted
+        '404':
+          description: AssessmentOtherMedication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_test_result_items:
+    get:
+      summary: List AssessmentTestResultItem records
+      operationId: listAssessmentTestResultItem
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of AssessmentTestResultItem records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssessmentTestResultItem'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new AssessmentTestResultItem
+      operationId: createAssessmentTestResultItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentTestResultItem'
+      responses:
+        '200':
+          description: The newly created AssessmentTestResultItem
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentTestResultItem'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_test_result_items/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one AssessmentTestResultItem by id
+      operationId: getAssessmentTestResultItem
+      responses:
+        '200':
+          description: The requested AssessmentTestResultItem
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentTestResultItem'
+        '404':
+          description: AssessmentTestResultItem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing AssessmentTestResultItem
+      operationId: updateAssessmentTestResultItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentTestResultItem'
+      responses:
+        '200':
+          description: The updated AssessmentTestResultItem
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentTestResultItem'
+        '404':
+          description: AssessmentTestResultItem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a AssessmentTestResultItem
+      operationId: deleteAssessmentTestResultItem
+      responses:
+        '200':
+          description: AssessmentTestResultItem deleted
+        '404':
+          description: AssessmentTestResultItem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_testing_results:
+    get:
+      summary: List AssessmentTestingResults records
+      operationId: listAssessmentTestingResults
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of AssessmentTestingResults records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssessmentTestingResults'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new AssessmentTestingResults
+      operationId: createAssessmentTestingResults
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentTestingResults'
+      responses:
+        '200':
+          description: The newly created AssessmentTestingResults
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentTestingResults'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_testing_results/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one AssessmentTestingResults by id
+      operationId: getAssessmentTestingResults
+      responses:
+        '200':
+          description: The requested AssessmentTestingResults
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentTestingResults'
+        '404':
+          description: AssessmentTestingResults not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing AssessmentTestingResults
+      operationId: updateAssessmentTestingResults
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentTestingResults'
+      responses:
+        '200':
+          description: The updated AssessmentTestingResults
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentTestingResults'
+        '404':
+          description: AssessmentTestingResults not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a AssessmentTestingResults
+      operationId: deleteAssessmentTestingResults
+      responses:
+        '200':
+          description: AssessmentTestingResults deleted
+        '404':
+          description: AssessmentTestingResults not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/assessments:
     get:
       summary: List Assessment records
@@ -289,6 +1699,429 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+  /api/grades:
+    get:
+      summary: List Grade records
+      operationId: listGrade
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of Grade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Grade'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new Grade
+      operationId: createGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Grade'
+      responses:
+        '200':
+          description: The newly created Grade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grade'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grades/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one Grade by id
+      operationId: getGrade
+      responses:
+        '200':
+          description: The requested Grade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grade'
+        '404':
+          description: Grade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing Grade
+      operationId: updateGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Grade'
+      responses:
+        '200':
+          description: The updated Grade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grade'
+        '404':
+          description: Grade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a Grade
+      operationId: deleteGrade
+      responses:
+        '200':
+          description: Grade deleted
+        '404':
+          description: Grade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grading_additional_flags:
+    get:
+      summary: List GradingAdditionalFlag records
+      operationId: listGradingAdditionalFlag
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of GradingAdditionalFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GradingAdditionalFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new GradingAdditionalFlag
+      operationId: createGradingAdditionalFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradingAdditionalFlag'
+      responses:
+        '200':
+          description: The newly created GradingAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingAdditionalFlag'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grading_additional_flags/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one GradingAdditionalFlag by id
+      operationId: getGradingAdditionalFlag
+      responses:
+        '200':
+          description: The requested GradingAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingAdditionalFlag'
+        '404':
+          description: GradingAdditionalFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing GradingAdditionalFlag
+      operationId: updateGradingAdditionalFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradingAdditionalFlag'
+      responses:
+        '200':
+          description: The updated GradingAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingAdditionalFlag'
+        '404':
+          description: GradingAdditionalFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a GradingAdditionalFlag
+      operationId: deleteGradingAdditionalFlag
+      responses:
+        '200':
+          description: GradingAdditionalFlag deleted
+        '404':
+          description: GradingAdditionalFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grading_fired_rules:
+    get:
+      summary: List GradingFiredRule records
+      operationId: listGradingFiredRule
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of GradingFiredRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GradingFiredRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new GradingFiredRule
+      operationId: createGradingFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradingFiredRule'
+      responses:
+        '200':
+          description: The newly created GradingFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingFiredRule'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grading_fired_rules/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one GradingFiredRule by id
+      operationId: getGradingFiredRule
+      responses:
+        '200':
+          description: The requested GradingFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingFiredRule'
+        '404':
+          description: GradingFiredRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing GradingFiredRule
+      operationId: updateGradingFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradingFiredRule'
+      responses:
+        '200':
+          description: The updated GradingFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingFiredRule'
+        '404':
+          description: GradingFiredRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a GradingFiredRule
+      operationId: deleteGradingFiredRule
+      responses:
+        '200':
+          description: GradingFiredRule deleted
+        '404':
+          description: GradingFiredRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/patients:
     get:
       summary: List Patient records
@@ -447,10 +2280,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         patient_id:
           type: string
           format: uuid
@@ -662,126 +2491,104 @@ components:
         follow_up_schedule:
           type: string
           description: Follow up schedule.
-        drug_allergies_deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
-        has_drug_allergies:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: 'Has drug allergies. One of: yes, no.'
-        cross_reactivity_concerns:
-          type: string
-          description: Cross reactivity concerns.
-        drug_allergy_item_deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
-        drug_allergies_id:
+      required:
+      - created_at
+      - updated_at
+      - patient_id
+      - status
+      - known_allergens
+      - family_history_of_atopy
+      - family_atopy_details
+      - family_history_of_allergy
+      - family_allergy_details
+      - pollen_allergy
+      - dust_mite_allergy
+      - mould_allergy
+      - animal_dander_allergy
+      - latex_allergy
+      - insect_sting_allergy
+      - insect_sting_severity
+      - seasonal_pattern
+      - other_environmental_allergens
+      - asthma
+      - asthma_severity
+      - eczema
+      - eczema_severity
+      - rhinitis
+      - rhinitis_severity
+      - eosinophilic_oesophagitis
+      - mast_cell_disorders
+      - mast_cell_details
+      - mental_health_impact
+      - mental_health_details
+      - school_work_impact
+      - school_work_impact_details
+      - emergency_action_plan_status
+      - training_provided
+      - training_details
+      - follow_up_schedule
+      description: 'Flat assessment table: parent assessment merged with every assessment_<section> child.
+        Generated by bin/generate-sql-flat.py.'
+    AssessmentAnaphylaxisEpisode:
+      type: object
+      properties:
+        id:
           type: string
           format: uuid
-          description: Foreign key to the assessment_drug_allergies table.
-        allergen:
+          description: Primary key UUID, auto-generated.
+        created_at:
           type: string
-          maxLength: 255
-          description: Allergen.
-        reaction_type:
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
           type: string
-          maxLength: 255
-          description: Reaction type.
-        severity:
+          format: date-time
+          description: Timestamp when this row was updated.
+        anaphylaxis_history_id:
           type: string
-          enum:
-          - mild
-          - moderate
-          - severe
-          - anaphylaxis
-          - ''
-          description: 'Reaction severity: mild, moderate, severe, anaphylaxis, or empty string.'
-        timing:
+          format: uuid
+          description: Foreign key to the assessment_anaphylaxis_history table.
+        trigger_description:
           type: string
-          maxLength: 255
-          description: Timing.
-        alternatives_tolerated:
+          description: Trigger description.
+        symptoms:
           type: string
-          description: Alternatives tolerated.
+          description: Symptoms.
+        treatment_required:
+          type: string
+          description: Treatment required.
         sort_order:
           type: integer
           format: int32
           description: Sort order.
-        food_allergies_deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
-        has_food_allergies:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: 'Has food allergies. One of: yes, no.'
-        ige_type:
-          type: string
-          enum:
-          - IgE-mediated
-          - non-IgE-mediated
-          - mixed
-          - unknown
-          - ''
-          description: 'Ige type. One of: IgE-mediated, non-IgE-mediated, mixed, unknown.'
-        oral_allergy_syndrome:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: 'Oral allergy syndrome. One of: yes, no.'
-        dietary_restrictions:
-          type: string
-          description: Dietary restrictions.
-        food_allergy_item_deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
-        food_allergies_id:
+      required:
+      - created_at
+      - updated_at
+      - anaphylaxis_history_id
+      - trigger_description
+      - symptoms
+      - treatment_required
+      - sort_order
+      description: Individual anaphylaxis episode with trigger, symptoms, and treatment details.
+    AssessmentAnaphylaxisHistory:
+      type: object
+      properties:
+        id:
           type: string
           format: uuid
-          description: Foreign key to the assessment_food_allergies table.
-        food_allergy_item_allergen:
-          type: string
-          maxLength: 255
-          description: Allergen.
-        food_allergy_item_reaction_type:
-          type: string
-          maxLength: 255
-          description: Reaction type.
-        food_allergy_item_severity:
-          type: string
-          enum:
-          - mild
-          - moderate
-          - severe
-          - anaphylaxis
-          - ''
-          description: 'Severity. One of: mild, moderate, severe, anaphylaxis.'
-        food_allergy_item_timing:
-          type: string
-          maxLength: 255
-          description: Timing.
-        food_allergy_item_alternatives_tolerated:
-          type: string
-          description: Alternatives tolerated.
-        food_allergy_item_sort_order:
-          type: integer
-          format: int32
-          description: Sort order.
-        anaphylaxis_history_deleted_at:
+          description: Primary key UUID, auto-generated.
+        created_at:
           type: string
           format: date-time
-          description: Timestamp when this row was deleted.
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
         has_anaphylaxis_history:
           type: string
           enum:
@@ -807,94 +2614,34 @@ components:
           - 'no'
           - ''
           description: 'Action plan in place. One of: yes, no.'
-        anaphylaxis_episode_deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
-        anaphylaxis_history_id:
-          type: string
-          format: uuid
-          description: Foreign key to the assessment_anaphylaxis_history table.
-        trigger_description:
-          type: string
-          description: Trigger description.
-        symptoms:
-          type: string
-          description: Symptoms.
-        treatment_required:
-          type: string
-          description: Treatment required.
-        anaphylaxis_episode_sort_order:
-          type: integer
-          format: int32
-          description: Sort order.
-        testing_results_deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
-        skin_prick_tests_done:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: 'Skin prick tests done. One of: yes, no.'
-        specific_ige_done:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: 'Specific ige done. One of: yes, no.'
-        component_resolved_diagnostics_done:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: 'Component resolved diagnostics done. One of: yes, no.'
-        challenge_tests_done:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: 'Challenge tests done. One of: yes, no.'
-        patch_tests_done:
-          type: string
-          enum:
-          - 'yes'
-          - 'no'
-          - ''
-          description: 'Patch tests done. One of: yes, no.'
-        test_result_item_deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
-        testing_results_id:
+      required:
+      - created_at
+      - updated_at
+      - assessment_id
+      - has_anaphylaxis_history
+      - adrenaline_auto_injector_prescribed
+      - action_plan_in_place
+      description: Anaphylaxis history section including auto-injector and action plan status. One-to-one
+        child of assessment.
+    AssessmentCurrentManagement:
+      type: object
+      properties:
+        id:
           type: string
           format: uuid
-          description: Foreign key to the assessment_testing_results table.
-        test_type:
-          type: string
-          maxLength: 255
-          description: Test type.
-        test_result_item_allergen:
-          type: string
-          maxLength: 255
-          description: Allergen.
-        result:
-          type: string
-          maxLength: 255
-          description: Result.
-        test_result_item_sort_order:
-          type: integer
-          format: int32
-          description: Sort order.
-        current_management_deleted_at:
+          description: Primary key UUID, auto-generated.
+        created_at:
           type: string
           format: date-time
-          description: Timestamp when this row was deleted.
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
         antihistamines:
           type: string
           enum:
@@ -942,10 +2689,242 @@ components:
         allergen_avoidance_strategies:
           type: string
           description: Allergen avoidance strategies.
-        other_medication_deleted_at:
+      required:
+      - created_at
+      - updated_at
+      - assessment_id
+      - antihistamines
+      - antihistamine_details
+      - nasal_steroids
+      - adrenaline_auto_injector
+      - immunotherapy
+      - immunotherapy_details
+      - biologics
+      - biologic_details
+      - allergen_avoidance_strategies
+      description: 'Current allergy management: medications, immunotherapy, biologics, and avoidance strategies.
+        One-to-one child of assessment.'
+    AssessmentDrugAllergies:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
           type: string
           format: date-time
-          description: Timestamp when this row was deleted.
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        has_drug_allergies:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          - ''
+          description: 'Has drug allergies. One of: yes, no.'
+        cross_reactivity_concerns:
+          type: string
+          description: Cross reactivity concerns.
+      required:
+      - created_at
+      - updated_at
+      - assessment_id
+      - has_drug_allergies
+      - cross_reactivity_concerns
+      description: Drug allergies section header. One-to-one child of assessment.
+    AssessmentDrugAllergyItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        drug_allergies_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment_drug_allergies table.
+        allergen:
+          type: string
+          maxLength: 255
+          description: Allergen.
+        reaction_type:
+          type: string
+          maxLength: 255
+          description: Reaction type.
+        severity:
+          type: string
+          enum:
+          - mild
+          - moderate
+          - severe
+          - anaphylaxis
+          - ''
+          description: 'Reaction severity: mild, moderate, severe, anaphylaxis, or empty string.'
+        timing:
+          type: string
+          maxLength: 255
+          description: Timing.
+        alternatives_tolerated:
+          type: string
+          description: Alternatives tolerated.
+        sort_order:
+          type: integer
+          format: int32
+          description: Sort order.
+      required:
+      - created_at
+      - updated_at
+      - drug_allergies_id
+      - allergen
+      - reaction_type
+      - severity
+      - timing
+      - alternatives_tolerated
+      - sort_order
+      description: Individual drug allergy entry with allergen, reaction type, and severity.
+    AssessmentFoodAllergies:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        has_food_allergies:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          - ''
+          description: 'Has food allergies. One of: yes, no.'
+        ige_type:
+          type: string
+          enum:
+          - IgE-mediated
+          - non-IgE-mediated
+          - mixed
+          - unknown
+          - ''
+          description: 'Ige type. One of: IgE-mediated, non-IgE-mediated, mixed, unknown.'
+        oral_allergy_syndrome:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          - ''
+          description: 'Oral allergy syndrome. One of: yes, no.'
+        dietary_restrictions:
+          type: string
+          description: Dietary restrictions.
+      required:
+      - created_at
+      - updated_at
+      - assessment_id
+      - has_food_allergies
+      - ige_type
+      - oral_allergy_syndrome
+      - dietary_restrictions
+      description: Food allergies section header including IgE classification. One-to-one child of assessment.
+    AssessmentFoodAllergyItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        food_allergies_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment_food_allergies table.
+        allergen:
+          type: string
+          maxLength: 255
+          description: Allergen.
+        reaction_type:
+          type: string
+          maxLength: 255
+          description: Reaction type.
+        severity:
+          type: string
+          enum:
+          - mild
+          - moderate
+          - severe
+          - anaphylaxis
+          - ''
+          description: 'Severity. One of: mild, moderate, severe, anaphylaxis.'
+        timing:
+          type: string
+          maxLength: 255
+          description: Timing.
+        alternatives_tolerated:
+          type: string
+          description: Alternatives tolerated.
+        sort_order:
+          type: integer
+          format: int32
+          description: Sort order.
+      required:
+      - created_at
+      - updated_at
+      - food_allergies_id
+      - allergen
+      - reaction_type
+      - severity
+      - timing
+      - alternatives_tolerated
+      - sort_order
+      description: Individual food allergy entry with allergen, reaction type, and severity.
+    AssessmentOtherMedication:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
         current_management_id:
           type: string
           format: uuid
@@ -962,100 +2941,128 @@ components:
           type: string
           maxLength: 255
           description: Frequency.
-        other_medication_sort_order:
+        sort_order:
           type: integer
           format: int32
           description: Sort order.
       required:
       - created_at
       - updated_at
-      - patient_id
-      - status
-      - known_allergens
-      - family_history_of_atopy
-      - family_atopy_details
-      - family_history_of_allergy
-      - family_allergy_details
-      - pollen_allergy
-      - dust_mite_allergy
-      - mould_allergy
-      - animal_dander_allergy
-      - latex_allergy
-      - insect_sting_allergy
-      - insect_sting_severity
-      - seasonal_pattern
-      - other_environmental_allergens
-      - asthma
-      - asthma_severity
-      - eczema
-      - eczema_severity
-      - rhinitis
-      - rhinitis_severity
-      - eosinophilic_oesophagitis
-      - mast_cell_disorders
-      - mast_cell_details
-      - mental_health_impact
-      - mental_health_details
-      - school_work_impact
-      - school_work_impact_details
-      - emergency_action_plan_status
-      - training_provided
-      - training_details
-      - follow_up_schedule
-      - has_drug_allergies
-      - cross_reactivity_concerns
-      - drug_allergies_id
-      - allergen
-      - reaction_type
-      - severity
-      - timing
-      - alternatives_tolerated
+      - current_management_id
+      - medication_name
+      - dose
+      - frequency
       - sort_order
-      - has_food_allergies
-      - ige_type
-      - oral_allergy_syndrome
-      - dietary_restrictions
-      - food_allergies_id
-      - food_allergy_item_allergen
-      - food_allergy_item_reaction_type
-      - food_allergy_item_severity
-      - food_allergy_item_timing
-      - food_allergy_item_alternatives_tolerated
-      - food_allergy_item_sort_order
-      - has_anaphylaxis_history
-      - adrenaline_auto_injector_prescribed
-      - action_plan_in_place
-      - anaphylaxis_history_id
-      - trigger_description
-      - symptoms
-      - treatment_required
-      - anaphylaxis_episode_sort_order
+      description: Other medications the patient is taking, with name, dose, and frequency.
+    AssessmentTestResultItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        testing_results_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment_testing_results table.
+        test_type:
+          type: string
+          maxLength: 255
+          description: Test type.
+        allergen:
+          type: string
+          maxLength: 255
+          description: Allergen.
+        result:
+          type: string
+          maxLength: 255
+          description: Result.
+        sort_order:
+          type: integer
+          format: int32
+          description: Sort order.
+      required:
+      - created_at
+      - updated_at
+      - testing_results_id
+      - test_type
+      - allergen
+      - result
+      - sort_order
+      description: Individual test result entry with test type, allergen tested, and result.
+    AssessmentTestingResults:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        skin_prick_tests_done:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          - ''
+          description: 'Skin prick tests done. One of: yes, no.'
+        specific_ige_done:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          - ''
+          description: 'Specific ige done. One of: yes, no.'
+        component_resolved_diagnostics_done:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          - ''
+          description: 'Component resolved diagnostics done. One of: yes, no.'
+        challenge_tests_done:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          - ''
+          description: 'Challenge tests done. One of: yes, no.'
+        patch_tests_done:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          - ''
+          description: 'Patch tests done. One of: yes, no.'
+      required:
+      - created_at
+      - updated_at
+      - assessment_id
       - skin_prick_tests_done
       - specific_ige_done
       - component_resolved_diagnostics_done
       - challenge_tests_done
       - patch_tests_done
-      - testing_results_id
-      - test_type
-      - test_result_item_allergen
-      - result
-      - test_result_item_sort_order
-      - antihistamines
-      - antihistamine_details
-      - nasal_steroids
-      - adrenaline_auto_injector
-      - immunotherapy
-      - immunotherapy_details
-      - biologics
-      - biologic_details
-      - allergen_avoidance_strategies
-      - current_management_id
-      - medication_name
-      - dose
-      - frequency
-      - other_medication_sort_order
-      description: 'Flat assessment table: parent assessment merged with every assessment_<section> child.
-        Generated by bin/generate-sql-flat.py.'
+      description: 'Testing results section: which allergy tests have been performed. One-to-one child
+        of assessment.'
     Clinician:
       type: object
       properties:
@@ -1071,10 +3078,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Soft-delete timestamp; NULL when the row is live.
         name:
           type: string
           description: Name.
@@ -1131,6 +3134,141 @@ components:
       - registration_body
       - registration_number
       description: Clinician
+    Grade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        severity_level:
+          type: string
+          enum:
+          - mild
+          - moderate
+          - severe
+          description: 'Overall severity classification: mild, moderate, or severe.'
+        allergy_burden_score:
+          type: integer
+          format: int32
+          description: Weighted allergy burden score across all allergen categories.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the grading was computed.
+      required:
+      - created_at
+      - updated_at
+      - assessment_id
+      - severity_level
+      - allergy_burden_score
+      - graded_at
+      description: Computed allergy severity grading result. One-to-one child of assessment.
+    GradingAdditionalFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the grade table.
+        flag_id:
+          type: string
+          maxLength: 30
+          description: Identifier of the flag (e.g. FLAG-ANAPH-001, FLAG-LATEX-001).
+        category:
+          type: string
+          maxLength: 100
+          description: Category of the flag (e.g. Anaphylaxis, Drug Allergy, Environmental).
+        message:
+          type: string
+          description: Message.
+        priority:
+          type: string
+          enum:
+          - high
+          - medium
+          - low
+          description: 'Priority level: high, medium, or low.'
+      required:
+      - created_at
+      - updated_at
+      - grade_id
+      - flag_id
+      - category
+      - message
+      - priority
+      description: Additional safety-critical flags detected during allergy assessment grading.
+    GradingFiredRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the grade table.
+        rule_id:
+          type: string
+          maxLength: 20
+          description: Identifier of the rule that fired (e.g. AN-001, DA-002).
+        category:
+          type: string
+          maxLength: 100
+          description: Category of the rule (e.g. Anaphylaxis, Drug Allergy, Environmental).
+        description:
+          type: string
+          description: Description.
+        severity_level:
+          type: string
+          enum:
+          - mild
+          - moderate
+          - severe
+          - ''
+          description: 'Severity level contributed by this rule: mild, moderate, or severe.'
+      required:
+      - created_at
+      - updated_at
+      - grade_id
+      - rule_id
+      - category
+      - description
+      - severity_level
+      description: Individual allergy severity classification rules that evaluated to true during grading.
     Patient:
       type: object
       properties:
@@ -1146,10 +3284,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was deleted a.k.a. soft-deleted.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Soft-delete timestamp; NULL when the row is live.
         name:
           type: string
           maxLength: 255

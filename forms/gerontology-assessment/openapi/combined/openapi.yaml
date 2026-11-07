@@ -7,6 +7,288 @@ info:
   description: Combined OpenAPI specification for the Gerontology Assessment form, merged from the per-entity
     specs in this directory. One RESTful resource per routed SQL table.
 paths:
+  /api/assessment_polypharmacy_review_medications:
+    get:
+      summary: List AssessmentPolypharmacyReviewMedication records
+      operationId: listAssessmentPolypharmacyReviewMedication
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of AssessmentPolypharmacyReviewMedication records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssessmentPolypharmacyReviewMedication'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new AssessmentPolypharmacyReviewMedication
+      operationId: createAssessmentPolypharmacyReviewMedication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentPolypharmacyReviewMedication'
+      responses:
+        '200':
+          description: The newly created AssessmentPolypharmacyReviewMedication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentPolypharmacyReviewMedication'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_polypharmacy_review_medications/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one AssessmentPolypharmacyReviewMedication by id
+      operationId: getAssessmentPolypharmacyReviewMedication
+      responses:
+        '200':
+          description: The requested AssessmentPolypharmacyReviewMedication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentPolypharmacyReviewMedication'
+        '404':
+          description: AssessmentPolypharmacyReviewMedication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing AssessmentPolypharmacyReviewMedication
+      operationId: updateAssessmentPolypharmacyReviewMedication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentPolypharmacyReviewMedication'
+      responses:
+        '200':
+          description: The updated AssessmentPolypharmacyReviewMedication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentPolypharmacyReviewMedication'
+        '404':
+          description: AssessmentPolypharmacyReviewMedication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a AssessmentPolypharmacyReviewMedication
+      operationId: deleteAssessmentPolypharmacyReviewMedication
+      responses:
+        '200':
+          description: AssessmentPolypharmacyReviewMedication deleted
+        '404':
+          description: AssessmentPolypharmacyReviewMedication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_polypharmacy_reviews:
+    get:
+      summary: List AssessmentPolypharmacyReview records
+      operationId: listAssessmentPolypharmacyReview
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of AssessmentPolypharmacyReview records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssessmentPolypharmacyReview'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new AssessmentPolypharmacyReview
+      operationId: createAssessmentPolypharmacyReview
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentPolypharmacyReview'
+      responses:
+        '200':
+          description: The newly created AssessmentPolypharmacyReview
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentPolypharmacyReview'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/assessment_polypharmacy_reviews/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one AssessmentPolypharmacyReview by id
+      operationId: getAssessmentPolypharmacyReview
+      responses:
+        '200':
+          description: The requested AssessmentPolypharmacyReview
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentPolypharmacyReview'
+        '404':
+          description: AssessmentPolypharmacyReview not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing AssessmentPolypharmacyReview
+      operationId: updateAssessmentPolypharmacyReview
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentPolypharmacyReview'
+      responses:
+        '200':
+          description: The updated AssessmentPolypharmacyReview
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentPolypharmacyReview'
+        '404':
+          description: AssessmentPolypharmacyReview not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a AssessmentPolypharmacyReview
+      operationId: deleteAssessmentPolypharmacyReview
+      responses:
+        '200':
+          description: AssessmentPolypharmacyReview deleted
+        '404':
+          description: AssessmentPolypharmacyReview not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/assessments:
     get:
       summary: List Assessment records
@@ -289,6 +571,429 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+  /api/grades:
+    get:
+      summary: List Grade records
+      operationId: listGrade
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of Grade records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Grade'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new Grade
+      operationId: createGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Grade'
+      responses:
+        '200':
+          description: The newly created Grade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grade'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grades/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one Grade by id
+      operationId: getGrade
+      responses:
+        '200':
+          description: The requested Grade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grade'
+        '404':
+          description: Grade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing Grade
+      operationId: updateGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Grade'
+      responses:
+        '200':
+          description: The updated Grade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grade'
+        '404':
+          description: Grade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a Grade
+      operationId: deleteGrade
+      responses:
+        '200':
+          description: Grade deleted
+        '404':
+          description: Grade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grading_additional_flags:
+    get:
+      summary: List GradingAdditionalFlag records
+      operationId: listGradingAdditionalFlag
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of GradingAdditionalFlag records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GradingAdditionalFlag'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new GradingAdditionalFlag
+      operationId: createGradingAdditionalFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradingAdditionalFlag'
+      responses:
+        '200':
+          description: The newly created GradingAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingAdditionalFlag'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grading_additional_flags/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one GradingAdditionalFlag by id
+      operationId: getGradingAdditionalFlag
+      responses:
+        '200':
+          description: The requested GradingAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingAdditionalFlag'
+        '404':
+          description: GradingAdditionalFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing GradingAdditionalFlag
+      operationId: updateGradingAdditionalFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradingAdditionalFlag'
+      responses:
+        '200':
+          description: The updated GradingAdditionalFlag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingAdditionalFlag'
+        '404':
+          description: GradingAdditionalFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a GradingAdditionalFlag
+      operationId: deleteGradingAdditionalFlag
+      responses:
+        '200':
+          description: GradingAdditionalFlag deleted
+        '404':
+          description: GradingAdditionalFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grading_fired_rules:
+    get:
+      summary: List GradingFiredRule records
+      operationId: listGradingFiredRule
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+        required: false
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          default: 0
+        required: false
+      responses:
+        '200':
+          description: A page of GradingFiredRule records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GradingFiredRule'
+        '400':
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a new GradingFiredRule
+      operationId: createGradingFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradingFiredRule'
+      responses:
+        '200':
+          description: The newly created GradingFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingFiredRule'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/grading_fired_rules/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: Fetch one GradingFiredRule by id
+      operationId: getGradingFiredRule
+      responses:
+        '200':
+          description: The requested GradingFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingFiredRule'
+        '404':
+          description: GradingFiredRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    patch:
+      summary: Update an existing GradingFiredRule
+      operationId: updateGradingFiredRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradingFiredRule'
+      responses:
+        '200':
+          description: The updated GradingFiredRule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GradingFiredRule'
+        '404':
+          description: GradingFiredRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      summary: Delete a GradingFiredRule
+      operationId: deleteGradingFiredRule
+      responses:
+        '200':
+          description: GradingFiredRule deleted
+        '404':
+          description: GradingFiredRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/patients:
     get:
       summary: List Patient records
@@ -447,10 +1152,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         patient_id:
           type: string
           format: uuid
@@ -463,10 +1164,32 @@ components:
           - reviewed
           - urgent
           description: 'Lifecycle status: draft, submitted, reviewed, or urgent.'
-        polypharmacy_review_deleted_at:
+      required:
+      - created_at
+      - updated_at
+      - patient_id
+      - status
+      description: Gerontology assessment using the Clinical Frailty Scale. Parent entity for all assessment
+        sections.
+    AssessmentPolypharmacyReview:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
           type: string
           format: date-time
-          description: Timestamp when this row was deleted.
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, enforcing 1:1).
         total_regular_medications:
           type: integer
           format: int32
@@ -539,10 +1262,38 @@ components:
         polypharmacy_notes:
           type: string
           description: Free-text notes on polypharmacy review.
-        polypharmacy_review_medication_deleted_at:
+      required:
+      - created_at
+      - updated_at
+      - assessment_id
+      - polypharmacy_flag
+      - falls_risk_medications
+      - falls_risk_medication_details
+      - anticholinergic_burden
+      - drug_interactions_identified
+      - drug_interaction_details
+      - adherence_concerns
+      - adherence_details
+      - stopp_start_review_done
+      - deprescribing_opportunities
+      - polypharmacy_notes
+      description: 'Polypharmacy review section: medication counts, falls-risk drugs, anticholinergic
+        burden, and STOPP/START review. One-to-one child of assessment.'
+    AssessmentPolypharmacyReviewMedication:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
           type: string
           format: date-time
-          description: Timestamp when this row was deleted.
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
         polypharmacy_review_id:
           type: string
           format: uuid
@@ -589,19 +1340,6 @@ components:
       required:
       - created_at
       - updated_at
-      - patient_id
-      - status
-      - polypharmacy_flag
-      - falls_risk_medications
-      - falls_risk_medication_details
-      - anticholinergic_burden
-      - drug_interactions_identified
-      - drug_interaction_details
-      - adherence_concerns
-      - adherence_details
-      - stopp_start_review_done
-      - deprescribing_opportunities
-      - polypharmacy_notes
       - polypharmacy_review_id
       - medication_name
       - dose
@@ -610,8 +1348,7 @@ components:
       - indication
       - is_prn
       - sort_order
-      description: Gerontology assessment using the Clinical Frailty Scale. Parent entity for all assessment
-        sections.
+      description: Individual medication entry within the polypharmacy review.
     Clinician:
       type: object
       properties:
@@ -627,10 +1364,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Soft-delete timestamp; NULL when the row is live.
         name:
           type: string
           description: Name.
@@ -687,6 +1420,167 @@ components:
       - registration_body
       - registration_number
       description: Clinician
+    Grade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        cfs_score:
+          type: integer
+          format: int32
+          description: Clinical Frailty Scale score (1-9).
+        cfs_category:
+          type: string
+          enum:
+          - very-fit
+          - well
+          - managing-well
+          - vulnerable
+          - mildly-frail
+          - moderately-frail
+          - severely-frail
+          - very-severely-frail
+          - terminally-ill
+          - ''
+          description: 'CFS category: very-fit, well, managing-well, vulnerable, mildly-frail, moderately-frail,
+            severely-frail, very-severely-frail, terminally-ill, or empty string.'
+        functional_domain_score:
+          type: integer
+          format: int32
+          description: Sub-score for the functional assessment domain, NULL if not yet scored.
+        cognitive_domain_score:
+          type: integer
+          format: int32
+          description: Sub-score for the cognitive screening domain, NULL if not yet scored.
+        mobility_domain_score:
+          type: integer
+          format: int32
+          description: Sub-score for the mobility and falls domain, NULL if not yet scored.
+        nutrition_domain_score:
+          type: integer
+          format: int32
+          description: Sub-score for the nutrition domain, NULL if not yet scored.
+        polypharmacy_domain_score:
+          type: integer
+          format: int32
+          description: Sub-score for the polypharmacy review domain, NULL if not yet scored.
+        graded_at:
+          type: string
+          format: date-time
+          description: Timestamp when the grading was computed.
+      required:
+      - created_at
+      - updated_at
+      - assessment_id
+      - cfs_score
+      - cfs_category
+      - graded_at
+      description: Computed Clinical Frailty Scale result. CFS 1 = Very fit, 4 = Vulnerable, 7 = Severely
+        frail, 9 = Terminally ill. One-to-one child of assessment.
+    GradingAdditionalFlag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the grade table.
+        flag_id:
+          type: string
+          maxLength: 30
+          description: Identifier of the flag (e.g. FLAG-FALL-001, FLAG-DELIR-001, FLAG-SAFEG-001).
+        category:
+          type: string
+          maxLength: 100
+          description: Category of the flag (e.g. Falls Risk, Delirium, Malnutrition, Safeguarding).
+        message:
+          type: string
+          description: Human-readable message describing the flagged concern.
+        priority:
+          type: string
+          enum:
+          - high
+          - medium
+          - low
+          description: 'Priority level: high, medium, or low.'
+      required:
+      - created_at
+      - updated_at
+      - grade_id
+      - flag_id
+      - category
+      - message
+      - priority
+      description: Additional safety-critical flags detected during gerontology assessment grading (e.g.
+        falls risk, delirium, safeguarding concern).
+    GradingFiredRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        grade_id:
+          type: string
+          format: uuid
+          description: Foreign key to the grade table.
+        rule_id:
+          type: string
+          maxLength: 20
+          description: Identifier of the rule that fired (e.g. FA-001, CS-002, MF-003).
+        category:
+          type: string
+          maxLength: 100
+          description: Category of the rule (e.g. Functional, Cognitive, Mobility, Nutrition, Polypharmacy).
+        description:
+          type: string
+          description: Human-readable description of the rule.
+        cfs_contribution:
+          type: integer
+          format: int32
+          description: Contribution of this rule to the CFS score.
+      required:
+      - created_at
+      - updated_at
+      - grade_id
+      - rule_id
+      - category
+      - description
+      - cfs_contribution
+      description: Individual frailty rules that evaluated to true during CFS grading.
     Patient:
       type: object
       properties:
@@ -702,10 +1596,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was deleted a.k.a. soft-deleted.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Soft-delete timestamp; NULL when the row is live.
         name:
           type: string
           maxLength: 255

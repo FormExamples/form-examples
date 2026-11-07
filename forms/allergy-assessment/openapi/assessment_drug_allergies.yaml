@@ -1,0 +1,210 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: assessment_drug_allergies
+openapi: 3.1.0
+info:
+  title: Allergy Assessment — AssessmentDrugAllergies
+  version: 1.0.0
+  description: Drug allergies section header. One-to-one child of assessment.
+paths:
+  /api/assessment_drug_allergies:
+    get:
+      summary: List AssessmentDrugAllergies records
+      operationId: listAssessmentDrugAllergies
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100000
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AssessmentDrugAllergies records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AssessmentDrugAllergies"
+        "400":
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new AssessmentDrugAllergies
+      operationId: createAssessmentDrugAllergies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssessmentDrugAllergies"
+      responses:
+        "200":
+          description: The newly created AssessmentDrugAllergies
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentDrugAllergies"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/assessment_drug_allergies/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AssessmentDrugAllergies by id
+      operationId: getAssessmentDrugAllergies
+      responses:
+        "200":
+          description: The requested AssessmentDrugAllergies
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentDrugAllergies"
+        "404":
+          description: AssessmentDrugAllergies not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing AssessmentDrugAllergies
+      operationId: updateAssessmentDrugAllergies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssessmentDrugAllergies"
+      responses:
+        "200":
+          description: The updated AssessmentDrugAllergies
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentDrugAllergies"
+        "404":
+          description: AssessmentDrugAllergies not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a AssessmentDrugAllergies
+      operationId: deleteAssessmentDrugAllergies
+      responses:
+        "200":
+          description: AssessmentDrugAllergies deleted
+        "404":
+          description: AssessmentDrugAllergies not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+        - type
+        - title
+        - status
+    AssessmentDrugAllergies:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        has_drug_allergies:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Has drug allergies. One of: yes, no."
+        cross_reactivity_concerns:
+          type: string
+          description: Cross reactivity concerns.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - has_drug_allergies
+        - cross_reactivity_concerns
+      description: Drug allergies section header. One-to-one child of assessment.

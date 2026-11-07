@@ -1,0 +1,238 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: assessment_testing_results
+openapi: 3.1.0
+info:
+  title: Allergy Assessment — AssessmentTestingResults
+  version: 1.0.0
+  description: "Testing results section: which allergy tests have been performed. One-to-one child of assessment."
+paths:
+  /api/assessment_testing_results:
+    get:
+      summary: List AssessmentTestingResults records
+      operationId: listAssessmentTestingResults
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100000
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AssessmentTestingResults records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AssessmentTestingResults"
+        "400":
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new AssessmentTestingResults
+      operationId: createAssessmentTestingResults
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssessmentTestingResults"
+      responses:
+        "200":
+          description: The newly created AssessmentTestingResults
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentTestingResults"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/assessment_testing_results/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AssessmentTestingResults by id
+      operationId: getAssessmentTestingResults
+      responses:
+        "200":
+          description: The requested AssessmentTestingResults
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentTestingResults"
+        "404":
+          description: AssessmentTestingResults not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing AssessmentTestingResults
+      operationId: updateAssessmentTestingResults
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssessmentTestingResults"
+      responses:
+        "200":
+          description: The updated AssessmentTestingResults
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentTestingResults"
+        "404":
+          description: AssessmentTestingResults not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a AssessmentTestingResults
+      operationId: deleteAssessmentTestingResults
+      responses:
+        "200":
+          description: AssessmentTestingResults deleted
+        "404":
+          description: AssessmentTestingResults not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+        - type
+        - title
+        - status
+    AssessmentTestingResults:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment table.
+        skin_prick_tests_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Skin prick tests done. One of: yes, no."
+        specific_ige_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Specific ige done. One of: yes, no."
+        component_resolved_diagnostics_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Component resolved diagnostics done. One of: yes, no."
+        challenge_tests_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Challenge tests done. One of: yes, no."
+        patch_tests_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Patch tests done. One of: yes, no."
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - skin_prick_tests_done
+        - specific_ige_done
+        - component_resolved_diagnostics_done
+        - challenge_tests_done
+        - patch_tests_done
+      description: "Testing results section: which allergy tests have been performed. One-to-one child of assessment."

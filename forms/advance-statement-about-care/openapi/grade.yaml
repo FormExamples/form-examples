@@ -187,10 +187,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         assessment_id:
           type: string
           format: uuid
@@ -217,7 +213,6 @@ components:
       required:
         - created_at
         - updated_at
-        - deleted_at
         - assessment_id
         - completeness_level
         - sections_completed

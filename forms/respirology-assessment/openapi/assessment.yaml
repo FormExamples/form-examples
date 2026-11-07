@@ -1,5 +1,5 @@
 # Generated from sql/. Do not edit by hand.
-# SOURCE: assessment, assessment_current_medications, assessment_medication_item
+# SOURCE: assessment
 openapi: 3.1.0
 info:
   title: Respirology Assessment — Assessment
@@ -187,10 +187,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         patient_id:
           type: string
           format: uuid
@@ -203,131 +199,9 @@ components:
             - reviewed
             - urgent
           description: "Lifecycle status: draft, submitted, reviewed, or urgent."
-        current_medications_deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
-        takes_respiratory_medications:
-          type: string
-          enum:
-            - "yes"
-            - "no"
-            - ""
-          description: Whether the patient takes respiratory medications.
-        inhaler_use:
-          type: string
-          enum:
-            - "yes"
-            - "no"
-            - ""
-          description: Whether the patient uses inhaler devices.
-        inhaler_technique_assessed:
-          type: string
-          enum:
-            - "yes"
-            - "no"
-            - ""
-          description: Whether inhaler technique was assessed.
-        inhaler_technique_adequate:
-          type: string
-          enum:
-            - "yes"
-            - "no"
-            - ""
-          description: Whether inhaler technique is adequate.
-        long_term_oxygen_therapy:
-          type: string
-          enum:
-            - "yes"
-            - "no"
-            - ""
-          description: Whether the patient is on long-term oxygen therapy.
-        nebuliser_use:
-          type: string
-          enum:
-            - "yes"
-            - "no"
-            - ""
-          description: Whether the patient uses a nebuliser.
-        takes_other_medications:
-          type: string
-          enum:
-            - "yes"
-            - "no"
-            - ""
-          description: "Takes other medications. One of: yes, no."
-        medication_adherence:
-          type: string
-          enum:
-            - good
-            - fair
-            - poor
-            - ""
-          description: "Medication adherence: good, fair, poor, or empty."
-        adverse_drug_reactions:
-          type: string
-          description: Adverse drug reactions.
-        additional_notes:
-          type: string
-          description: Additional notes.
-        medication_item_deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
-        current_medications_id:
-          type: string
-          format: uuid
-          description: Foreign key to the assessment_current_medications table.
-        medication_name:
-          type: string
-          maxLength: 255
-          description: Name of the medication.
-        dose:
-          type: string
-          maxLength: 100
-          description: Dosage amount and unit.
-        frequency:
-          type: string
-          maxLength: 100
-          description: Dosing frequency.
-        route:
-          type: string
-          enum:
-            - inhaled
-            - oral
-            - nebulised
-            - subcutaneous
-            - intravenous
-            - other
-            - ""
-          description: "Route of administration: inhaled, oral, nebulised, subcutaneous, intravenous, other, or empty."
-        indication:
-          type: string
-          description: Indication.
-        sort_order:
-          type: integer
-          format: int32
-          description: Display order of the medication in the list.
       required:
         - created_at
         - updated_at
         - patient_id
         - status
-        - takes_respiratory_medications
-        - inhaler_use
-        - inhaler_technique_assessed
-        - inhaler_technique_adequate
-        - long_term_oxygen_therapy
-        - nebuliser_use
-        - takes_other_medications
-        - medication_adherence
-        - adverse_drug_reactions
-        - additional_notes
-        - current_medications_id
-        - medication_name
-        - dose
-        - frequency
-        - route
-        - indication
-        - sort_order
       description: Respirology assessment form. Parent entity for all sections covering the MRC (Medical Research Council) Dyspnoea Scale evaluation.

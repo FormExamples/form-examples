@@ -1,0 +1,236 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: assessment_surgery_item
+openapi: 3.1.0
+info:
+  title: Orthopedic Assessment — AssessmentSurgeryItem
+  version: 1.0.0
+  description: Individual previous orthopedic surgery entry with procedure, date, and outcome.
+paths:
+  /api/assessment_surgery_items:
+    get:
+      summary: List AssessmentSurgeryItem records
+      operationId: listAssessmentSurgeryItem
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100000
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AssessmentSurgeryItem records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AssessmentSurgeryItem"
+        "400":
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new AssessmentSurgeryItem
+      operationId: createAssessmentSurgeryItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssessmentSurgeryItem"
+      responses:
+        "200":
+          description: The newly created AssessmentSurgeryItem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentSurgeryItem"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/assessment_surgery_items/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AssessmentSurgeryItem by id
+      operationId: getAssessmentSurgeryItem
+      responses:
+        "200":
+          description: The requested AssessmentSurgeryItem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentSurgeryItem"
+        "404":
+          description: AssessmentSurgeryItem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing AssessmentSurgeryItem
+      operationId: updateAssessmentSurgeryItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssessmentSurgeryItem"
+      responses:
+        "200":
+          description: The updated AssessmentSurgeryItem
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentSurgeryItem"
+        "404":
+          description: AssessmentSurgeryItem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a AssessmentSurgeryItem
+      operationId: deleteAssessmentSurgeryItem
+      responses:
+        "200":
+          description: AssessmentSurgeryItem deleted
+        "404":
+          description: AssessmentSurgeryItem not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+        - type
+        - title
+        - status
+    AssessmentSurgeryItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        surgical_history_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment_surgical_history table.
+        procedure_name:
+          type: string
+          maxLength: 255
+          description: Name of the surgical procedure.
+        date_performed:
+          type: string
+          format: date
+          description: Date the surgery was performed.
+        surgeon:
+          type: string
+          maxLength: 255
+          description: Name of the operating surgeon.
+        hospital:
+          type: string
+          maxLength: 255
+          description: Hospital where the surgery was performed.
+        outcome:
+          type: string
+          enum:
+            - good
+            - fair
+            - poor
+            - complication
+            - ""
+          description: "Outcome of the surgery: good, fair, poor, complication, or empty."
+        outcome_details:
+          type: string
+          description: Details of the surgical outcome.
+        sort_order:
+          type: integer
+          format: int32
+          description: Display order of the item within the list.
+      required:
+        - created_at
+        - updated_at
+        - surgical_history_id
+        - procedure_name
+        - surgeon
+        - hospital
+        - outcome
+        - outcome_details
+        - sort_order
+      description: Individual previous orthopedic surgery entry with procedure, date, and outcome.

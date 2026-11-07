@@ -187,10 +187,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted i.e. soft-removed.
         grade_id:
           type: string
           format: uuid

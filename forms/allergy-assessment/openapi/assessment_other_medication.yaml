@@ -1,0 +1,218 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: assessment_other_medication
+openapi: 3.1.0
+info:
+  title: Allergy Assessment — AssessmentOtherMedication
+  version: 1.0.0
+  description: Other medications the patient is taking, with name, dose, and frequency.
+paths:
+  /api/assessment_other_medications:
+    get:
+      summary: List AssessmentOtherMedication records
+      operationId: listAssessmentOtherMedication
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100000
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AssessmentOtherMedication records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AssessmentOtherMedication"
+        "400":
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new AssessmentOtherMedication
+      operationId: createAssessmentOtherMedication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssessmentOtherMedication"
+      responses:
+        "200":
+          description: The newly created AssessmentOtherMedication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentOtherMedication"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/assessment_other_medications/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AssessmentOtherMedication by id
+      operationId: getAssessmentOtherMedication
+      responses:
+        "200":
+          description: The requested AssessmentOtherMedication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentOtherMedication"
+        "404":
+          description: AssessmentOtherMedication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing AssessmentOtherMedication
+      operationId: updateAssessmentOtherMedication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssessmentOtherMedication"
+      responses:
+        "200":
+          description: The updated AssessmentOtherMedication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentOtherMedication"
+        "404":
+          description: AssessmentOtherMedication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a AssessmentOtherMedication
+      operationId: deleteAssessmentOtherMedication
+      responses:
+        "200":
+          description: AssessmentOtherMedication deleted
+        "404":
+          description: AssessmentOtherMedication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+        - type
+        - title
+        - status
+    AssessmentOtherMedication:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        current_management_id:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment_current_management table.
+        medication_name:
+          type: string
+          maxLength: 255
+          description: Medication name.
+        dose:
+          type: string
+          maxLength: 255
+          description: Dose.
+        frequency:
+          type: string
+          maxLength: 255
+          description: Frequency.
+        sort_order:
+          type: integer
+          format: int32
+          description: Sort order.
+      required:
+        - created_at
+        - updated_at
+        - current_management_id
+        - medication_name
+        - dose
+        - frequency
+        - sort_order
+      description: Other medications the patient is taking, with name, dose, and frequency.

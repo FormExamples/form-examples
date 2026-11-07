@@ -1,0 +1,218 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: assessment_satisfaction_ratings
+openapi: 3.1.0
+info:
+  title: Occupational Therapy Assessment — AssessmentSatisfactionRatings
+  version: 1.0.0
+  description: "COPM satisfaction ratings section: patient-rated satisfaction scores (1-10) across occupational domains. One-to-one child of assessment."
+paths:
+  /api/assessment_satisfaction_ratings:
+    get:
+      summary: List AssessmentSatisfactionRatings records
+      operationId: listAssessmentSatisfactionRatings
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100000
+            default: 0
+          required: false
+      responses:
+        "200":
+          description: A page of AssessmentSatisfactionRatings records
+          headers:
+            x-total-count:
+              description: Rows there are in all
+              schema:
+                type: integer
+            x-limit:
+              description: The limit applied
+              schema:
+                type: integer
+            x-offset:
+              description: The offset applied
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AssessmentSatisfactionRatings"
+        "400":
+          description: The offset is past the maximum
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new AssessmentSatisfactionRatings
+      operationId: createAssessmentSatisfactionRatings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssessmentSatisfactionRatings"
+      responses:
+        "200":
+          description: The newly created AssessmentSatisfactionRatings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentSatisfactionRatings"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/assessment_satisfaction_ratings/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AssessmentSatisfactionRatings by id
+      operationId: getAssessmentSatisfactionRatings
+      responses:
+        "200":
+          description: The requested AssessmentSatisfactionRatings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentSatisfactionRatings"
+        "404":
+          description: AssessmentSatisfactionRatings not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing AssessmentSatisfactionRatings
+      operationId: updateAssessmentSatisfactionRatings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssessmentSatisfactionRatings"
+      responses:
+        "200":
+          description: The updated AssessmentSatisfactionRatings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentSatisfactionRatings"
+        "404":
+          description: AssessmentSatisfactionRatings not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a AssessmentSatisfactionRatings
+      operationId: deleteAssessmentSatisfactionRatings
+      responses:
+        "200":
+          description: AssessmentSatisfactionRatings deleted
+        "404":
+          description: AssessmentSatisfactionRatings not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+      required:
+        - type
+        - title
+        - status
+    AssessmentSatisfactionRatings:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, enforcing 1:1).
+        overall_satisfaction_score:
+          type: number
+          format: double
+          description: Overall COPM satisfaction score (1-10), averaged across domains.
+        self_care_satisfaction_score:
+          type: number
+          format: double
+          description: COPM satisfaction score for self-care activities (1 = not satisfied, 10 = extremely satisfied).
+        productivity_satisfaction_score:
+          type: number
+          format: double
+          description: COPM satisfaction score for productivity activities (1 = not satisfied, 10 = extremely satisfied).
+        leisure_satisfaction_score:
+          type: number
+          format: double
+          description: COPM satisfaction score for leisure activities (1 = not satisfied, 10 = extremely satisfied).
+        satisfaction_notes:
+          type: string
+          description: Additional notes on satisfaction ratings and observations.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - satisfaction_notes
+      description: "COPM satisfaction ratings section: patient-rated satisfaction scores (1-10) across occupational domains. One-to-one child of assessment."

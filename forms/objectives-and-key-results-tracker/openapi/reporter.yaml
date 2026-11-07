@@ -187,10 +187,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was soft-deleted.
         name:
           type: string
           description: Display name of the reporter.
