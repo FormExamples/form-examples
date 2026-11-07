@@ -47,9 +47,9 @@ anaesthetist reviews before signing the WHO Safer Surgery Checklist.
 
 The repo's docs must describe what actually exists before new work lands.
 
-- Remove the stale `back-end-with-axum/todo/` embedded subcrate (it uses Tera
-  templates, which the back-end conventions ban; it predates the JSON-API
-  refactor).
+- Done 2026-11-07: removed the stale `back-end-with-axum/todo/` embedded
+  subcrate (it used Tera templates, which the back-end conventions ban; it
+  predated the JSON-API refactor).
 - Fix stale references: `tasks.md` lists the pre-rename SQL filenames
   (`00-extensions.sql`…); `AGENTS.md` points at a `seeds/` directory that no
   longer exists (the CPOC PDF lives in `doc/`), claims an `asa-rules.test.ts`
