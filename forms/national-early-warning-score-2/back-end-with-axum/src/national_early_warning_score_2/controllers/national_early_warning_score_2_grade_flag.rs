@@ -40,8 +40,8 @@ impl Params {
         sqlx::query_as(
             "UPDATE national_early_warning_score_2_grade_flags SET \
             national_early_warning_score_2_grade_id = $2, flag_id = $3, category = $4, \
-            priority = $5, description = $6, suggested_action = $7, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            priority = $5, description = $6, suggested_action = $7, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.national_early_warning_score_2_grade_id)

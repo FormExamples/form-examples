@@ -2,11 +2,13 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-89 tools.
+91 tools.
 
 - [`bin/axum-axa-upgrade`](#axum-axa-upgrade)
+- [`bin/axum-entity-routes`](#axum-entity-routes)
 - [`bin/axum-forbid-unsafe`](#axum-forbid-unsafe)
 - [`bin/axum-msrv-set`](#axum-msrv-set)
+- [`bin/axum-soft-delete`](#axum-soft-delete)
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
 - [`bin/create-form`](#create-form)
@@ -125,6 +127,23 @@ Usage:
   bin/axum-axa-upgrade --check --all      # CI drift check (non-zero on drift)
 ```
 
+<h2 id="axum-entity-routes"><code>bin/axum-entity-routes</code></h2>
+
+```text
+Give every SQL table an HTTP route in its form's Axum crate.
+
+bin/axum-entity-routes [--check] [--root DIR] [--all|<slug>...]
+
+Each table in forms/<slug>/sql/ must be reachable through the crate's API.
+For a table no controller touches, this writes what is missing: the migration
+(from sql/, in the fleet's type mapping, parents first), the model, a
+controller under /api/<plural>, a request test, and the wiring. A table a
+hand-written controller already reads or writes counts as reachable, so the
+aggregate APIs of the cardiology and neurodiversity crates are left as they
+are. Run bin/axum-soft-delete afterwards; it owns the delete and filter SQL.
+--check lists every unreachable table and exits 1 if there is one.
+```
+
 <h2 id="axum-forbid-unsafe"><code>bin/axum-forbid-unsafe</code></h2>
 
 ```text
@@ -205,6 +224,25 @@ Usage:
   bin/axum-msrv-set --msrv 1.96 --all            # every form's Axum crate
   bin/axum-msrv-set --msrv 1.96 --dry-run --all  # show what would change
   bin/axum-msrv-set --msrv 1.96 --check --all    # CI drift check (non-zero on drift)
+```
+
+<h2 id="axum-soft-delete"><code>bin/axum-soft-delete</code></h2>
+
+```text
+Make every Axum crate's delete a true soft delete.
+
+bin/axum-soft-delete [--check] [--root DIR] [--all|<slug>...]
+
+DELETE sets deleted_at and cascades along the crate's ON DELETE CASCADE keys,
+in one statement, so a deleted assessment takes its grades with it. Every read
+and update then skips deleted rows, deleted_at leaves the request and response
+bodies, and a migration makes each unique index cover live rows only, so a
+deleted row cannot block its replacement. A key with ON DELETE SET NULL is
+left alone, because the reference still says what the row referred to.
+
+--check fails on a crate whose SQL is not in that shape, on a unique index
+migrated after that migration, and on a crate without tests/.../soft_delete.rs.
+A statement the tool cannot classify is listed for a person to read.
 ```
 
 <h2 id="clean"><code>bin/clean</code></h2>
@@ -2496,11 +2534,10 @@ Generate OpenAPI 3.1 (.yaml) representations from SQL migrations.
 
 For each form's sql/ directory, parses CREATE TABLE statements
 plus COMMENT ON TABLE / COMMENT ON COLUMN, and writes one .yaml file per
-top-level SQL entity into openapi/.
+SQL table into openapi/.
 
 Conventions documented in AGENTS/openapi.md:
-  - One .yaml per top-level table; assessment_<section> children fold
-    into a single assessment.yaml (mirrors FHIR R5, XML, protobuf).
+  - One .yaml per table, because each table has its own routes.
   - openapi: 3.1.0
   - info.title = "<Form Slug Titlecased> — <Resource>"
   - info.description = COMMENT ON TABLE (or the table name if absent)

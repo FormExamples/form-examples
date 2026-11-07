@@ -12,6 +12,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     pub id: Uuid,
+    #[serde(skip)]
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub active_cancer_points: Option<i32>,
     pub previous_vte_points: Option<i32>,
@@ -39,13 +40,17 @@ impl Model {
     /// Propagates the database error.
     pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Self>, i64)> {
         let (limit, offset) = crate::support::paging::bounds(page);
-        let rows = sqlx::query_as("SELECT * FROM padua_venous_thromboembolism_risk_assessment_grades ORDER BY id LIMIT $1 OFFSET $2")
-            .bind(limit)
-            .bind(offset)
-            .fetch_all(db)
-            .await?;
+        let rows = sqlx::query_as(
+            "SELECT * FROM padua_venous_thromboembolism_risk_assessment_grades WHERE \
+            deleted_at IS NULL ORDER BY id LIMIT $1 OFFSET $2",
+        )
+        .bind(limit)
+        .bind(offset)
+        .fetch_all(db)
+        .await?;
         let total = sqlx::query_scalar(
-            "SELECT COUNT(*) FROM padua_venous_thromboembolism_risk_assessment_grades",
+            "SELECT COUNT(*) FROM padua_venous_thromboembolism_risk_assessment_grades \
+            WHERE deleted_at IS NULL",
         )
         .fetch_one(db)
         .await?;
@@ -59,7 +64,8 @@ impl Model {
     /// Propagates the database error.
     pub async fn find_by_id(db: &PgPool, id: Uuid) -> sqlx::Result<Option<Self>> {
         sqlx::query_as(
-            "SELECT * FROM padua_venous_thromboembolism_risk_assessment_grades WHERE id = $1",
+            "SELECT * FROM padua_venous_thromboembolism_risk_assessment_grades WHERE id = \
+            $1 AND deleted_at IS NULL",
         )
         .bind(id)
         .fetch_optional(db)
@@ -73,7 +79,17 @@ impl Model {
     /// Propagates the database error.
     pub async fn delete(db: &PgPool, id: Uuid) -> sqlx::Result<()> {
         sqlx::query(
-            "DELETE FROM padua_venous_thromboembolism_risk_assessment_grades WHERE id = $1",
+            "WITH target AS (UPDATE padua_venous_thromboembolism_risk_assessment_grades \
+            SET deleted_at = now(), updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING id), child1 AS (UPDATE \
+            padua_venous_thromboembolism_risk_assessment_grade_rules SET deleted_at = \
+            now(), updated_at = now() WHERE \
+            padua_venous_thromboembolism_risk_assessment_grade_id IN (SELECT id FROM \
+            target) AND deleted_at IS NULL RETURNING id), child2 AS (UPDATE \
+            padua_venous_thromboembolism_risk_assessment_grade_flags SET deleted_at = \
+            now(), updated_at = now() WHERE \
+            padua_venous_thromboembolism_risk_assessment_grade_id IN (SELECT id FROM \
+            target) AND deleted_at IS NULL RETURNING id) SELECT count(*) FROM target",
         )
         .bind(id)
         .execute(db)

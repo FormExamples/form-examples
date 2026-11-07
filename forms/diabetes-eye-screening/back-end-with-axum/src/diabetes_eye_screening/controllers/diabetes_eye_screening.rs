@@ -82,13 +82,14 @@ impl Params {
         sqlx::query_as(
             "UPDATE diabetes_eye_screenings SET patient_id = $2, clinician_id = $3, \
             grader_name = $4, grader_role = $5, graded_at = $6, image_captured_at = $7, \
-            imaging_media = $8, patient_identifier = $9, age_band = $10, diabetes_type = $11, \
-            years_since_diagnosis = $12, previous_screen_date = $13, previous_screen_result = \
-            $14, right_retinopathy_grade = $15, right_maculopathy_grade = $16, \
-            right_photocoagulation = $17, right_ungradable = $18, right_visual_acuity = $19, \
-            left_retinopathy_grade = $20, left_maculopathy_grade = $21, left_photocoagulation \
-            = $22, left_ungradable = $23, left_visual_acuity = $24, clinical_context = $25, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            imaging_media = $8, patient_identifier = $9, age_band = $10, diabetes_type = \
+            $11, years_since_diagnosis = $12, previous_screen_date = $13, \
+            previous_screen_result = $14, right_retinopathy_grade = $15, \
+            right_maculopathy_grade = $16, right_photocoagulation = $17, \
+            right_ungradable = $18, right_visual_acuity = $19, left_retinopathy_grade = \
+            $20, left_maculopathy_grade = $21, left_photocoagulation = $22, \
+            left_ungradable = $23, left_visual_acuity = $24, clinical_context = $25, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

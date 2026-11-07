@@ -12,8 +12,6 @@ use crate::models::medical_device_assessments::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    /// Deleted at.
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Manufacturer ID.
     pub manufacturer_id: Uuid,
     /// Assessor ID.
@@ -104,28 +102,30 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO medical_device_assessments (deleted_at, manufacturer_id, assessor_id, \
+            "INSERT INTO medical_device_assessments (manufacturer_id, assessor_id, \
             status, assessment_date, device_name, model_or_catalogue_number, \
-            unique_device_identifier, intended_purpose, intended_user, target_jurisdiction, \
-            is_in_vitro_diagnostic, device_kind, contact_duration, body_site, \
-            channels_or_stores_body_substances, \
-            connected_to_active_device_class_iia_or_higher, reusable_surgical_instrument, \
-            active_therapeutic, active_diagnostic, administers_or_exchanges_energy, \
-            energy_potentially_hazardous, administers_or_removes_medicinal_substances, \
-            administration_potentially_hazardous, monitors_vital_physiological_parameters, \
-            closed_loop_therapy, software_purpose, software_worst_case_harm, \
-            contains_medicinal_substance, contains_human_or_animal_tissue, \
+            unique_device_identifier, intended_purpose, intended_user, \
+            target_jurisdiction, is_in_vitro_diagnostic, device_kind, contact_duration, \
+            body_site, channels_or_stores_body_substances, \
+            connected_to_active_device_class_iia_or_higher, \
+            reusable_surgical_instrument, active_therapeutic, active_diagnostic, \
+            administers_or_exchanges_energy, energy_potentially_hazardous, \
+            administers_or_removes_medicinal_substances, \
+            administration_potentially_hazardous, \
+            monitors_vital_physiological_parameters, closed_loop_therapy, \
+            software_purpose, software_worst_case_harm, contains_medicinal_substance, \
+            contains_human_or_animal_tissue, \
             contains_nanomaterial_with_high_exposure_potential, \
             composed_of_absorbed_substances, contraception_or_sti_prevention, \
             disinfects_or_cleans_devices, supplied_sterile, has_measuring_function, \
             clinical_evidence_status, risk_management_file_iso_14971, \
             quality_management_system_iso_13485, cybersecurity_assessment_done, \
-            post_market_surveillance_plan, unique_device_identifier_assigned, assessor_notes) \
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, \
-            $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, \
-            $33, $34, $35, $36, $37, $38, $39, $40, $41, $42, $43) RETURNING *",
+            post_market_surveillance_plan, unique_device_identifier_assigned, \
+            assessor_notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, \
+            $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, \
+            $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.manufacturer_id)
         .bind(self.assessor_id)
         .bind(&self.status)
@@ -175,31 +175,31 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE medical_device_assessments SET deleted_at = $2, manufacturer_id = $3, \
-            assessor_id = $4, status = $5, assessment_date = $6, device_name = $7, \
-            model_or_catalogue_number = $8, unique_device_identifier = $9, intended_purpose = \
-            $10, intended_user = $11, target_jurisdiction = $12, is_in_vitro_diagnostic = \
-            $13, device_kind = $14, contact_duration = $15, body_site = $16, \
-            channels_or_stores_body_substances = $17, \
-            connected_to_active_device_class_iia_or_higher = $18, \
-            reusable_surgical_instrument = $19, active_therapeutic = $20, active_diagnostic = \
-            $21, administers_or_exchanges_energy = $22, energy_potentially_hazardous = $23, \
-            administers_or_removes_medicinal_substances = $24, \
-            administration_potentially_hazardous = $25, \
-            monitors_vital_physiological_parameters = $26, closed_loop_therapy = $27, \
-            software_purpose = $28, software_worst_case_harm = $29, \
-            contains_medicinal_substance = $30, contains_human_or_animal_tissue = $31, \
-            contains_nanomaterial_with_high_exposure_potential = $32, \
-            composed_of_absorbed_substances = $33, contraception_or_sti_prevention = $34, \
-            disinfects_or_cleans_devices = $35, supplied_sterile = $36, \
-            has_measuring_function = $37, clinical_evidence_status = $38, \
-            risk_management_file_iso_14971 = $39, quality_management_system_iso_13485 = $40, \
-            cybersecurity_assessment_done = $41, post_market_surveillance_plan = $42, \
-            unique_device_identifier_assigned = $43, assessor_notes = $44, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            "UPDATE medical_device_assessments SET manufacturer_id = $2, assessor_id = \
+            $3, status = $4, assessment_date = $5, device_name = $6, \
+            model_or_catalogue_number = $7, unique_device_identifier = $8, \
+            intended_purpose = $9, intended_user = $10, target_jurisdiction = $11, \
+            is_in_vitro_diagnostic = $12, device_kind = $13, contact_duration = $14, \
+            body_site = $15, channels_or_stores_body_substances = $16, \
+            connected_to_active_device_class_iia_or_higher = $17, \
+            reusable_surgical_instrument = $18, active_therapeutic = $19, \
+            active_diagnostic = $20, administers_or_exchanges_energy = $21, \
+            energy_potentially_hazardous = $22, \
+            administers_or_removes_medicinal_substances = $23, \
+            administration_potentially_hazardous = $24, \
+            monitors_vital_physiological_parameters = $25, closed_loop_therapy = $26, \
+            software_purpose = $27, software_worst_case_harm = $28, \
+            contains_medicinal_substance = $29, contains_human_or_animal_tissue = $30, \
+            contains_nanomaterial_with_high_exposure_potential = $31, \
+            composed_of_absorbed_substances = $32, contraception_or_sti_prevention = \
+            $33, disinfects_or_cleans_devices = $34, supplied_sterile = $35, \
+            has_measuring_function = $36, clinical_evidence_status = $37, \
+            risk_management_file_iso_14971 = $38, quality_management_system_iso_13485 = \
+            $39, cybersecurity_assessment_done = $40, post_market_surveillance_plan = \
+            $41, unique_device_identifier_assigned = $42, assessor_notes = $43, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.manufacturer_id)
         .bind(self.assessor_id)
         .bind(&self.status)

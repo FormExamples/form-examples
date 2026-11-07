@@ -9,7 +9,6 @@ use crate::models::cystoscopy_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -42,17 +41,17 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO cystoscopy_test_results (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO cystoscopy_test_results (patient_id, clinician_id, \
             originating_request_reference, report_status, performed_date, reported_date, \
-            procedure, anaesthesia, clinical_history, bladder_tumour, inflammation_cystitis, \
-            bladder_stones, urethral_stricture, trabeculation, prostatic_enlargement, \
-            normal_examination, tumour_size_mm, tumour_appearance, biopsy_taken, \
-            complication, findings_narrative, impression, reporting_category, \
-            recommended_follow_up, critical_result_communicated, reported_to) VALUES ($1, $2, \
-            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, \
-            $20, $21, $22, $23, $24, $25, $26, $27) RETURNING *",
+            procedure, anaesthesia, clinical_history, bladder_tumour, \
+            inflammation_cystitis, bladder_stones, urethral_stricture, trabeculation, \
+            prostatic_enlargement, normal_examination, tumour_size_mm, \
+            tumour_appearance, biopsy_taken, complication, findings_narrative, \
+            impression, reporting_category, recommended_follow_up, \
+            critical_result_communicated, reported_to) VALUES ($1, $2, $3, $4, $5, $6, \
+            $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, \
+            $23, $24, $25, $26) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -86,19 +85,18 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE cystoscopy_test_results SET deleted_at = $2, patient_id = $3, clinician_id \
-            = $4, originating_request_reference = $5, report_status = $6, performed_date = \
-            $7, reported_date = $8, procedure = $9, anaesthesia = $10, clinical_history = \
-            $11, bladder_tumour = $12, inflammation_cystitis = $13, bladder_stones = $14, \
-            urethral_stricture = $15, trabeculation = $16, prostatic_enlargement = $17, \
-            normal_examination = $18, tumour_size_mm = $19, tumour_appearance = $20, \
-            biopsy_taken = $21, complication = $22, findings_narrative = $23, impression = \
-            $24, reporting_category = $25, recommended_follow_up = $26, \
-            critical_result_communicated = $27, reported_to = $28, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE cystoscopy_test_results SET patient_id = $2, clinician_id = $3, \
+            originating_request_reference = $4, report_status = $5, performed_date = $6, \
+            reported_date = $7, procedure = $8, anaesthesia = $9, clinical_history = \
+            $10, bladder_tumour = $11, inflammation_cystitis = $12, bladder_stones = \
+            $13, urethral_stricture = $14, trabeculation = $15, prostatic_enlargement = \
+            $16, normal_examination = $17, tumour_size_mm = $18, tumour_appearance = \
+            $19, biopsy_taken = $20, complication = $21, findings_narrative = $22, \
+            impression = $23, reporting_category = $24, recommended_follow_up = $25, \
+            critical_result_communicated = $26, reported_to = $27, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

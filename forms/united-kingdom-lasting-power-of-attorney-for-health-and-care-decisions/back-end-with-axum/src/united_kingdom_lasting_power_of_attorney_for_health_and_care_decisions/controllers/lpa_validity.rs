@@ -9,7 +9,6 @@ use crate::models::lpa_validities::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub lpa_id: Uuid,
     pub validity_status: String,
     pub completeness_score: i32,
@@ -23,11 +22,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO lpa_validities (deleted_at, lpa_id, validity_status, \
-            completeness_score, effective_date, computed_at, engine_version, notes) VALUES \
-            ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+            "INSERT INTO lpa_validities (lpa_id, validity_status, completeness_score, \
+            effective_date, computed_at, engine_version, notes) VALUES ($1, $2, $3, $4, \
+            $5, $6, $7) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.lpa_id)
         .bind(&self.validity_status)
         .bind(self.completeness_score)
@@ -42,12 +40,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE lpa_validities SET deleted_at = $2, lpa_id = $3, validity_status = $4, \
-            completeness_score = $5, effective_date = $6, computed_at = $7, engine_version = \
-            $8, notes = $9, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE lpa_validities SET lpa_id = $2, validity_status = $3, \
+            completeness_score = $4, effective_date = $5, computed_at = $6, \
+            engine_version = $7, notes = $8, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.lpa_id)
         .bind(&self.validity_status)
         .bind(self.completeness_score)

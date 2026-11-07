@@ -9,7 +9,6 @@ use crate::models::patients::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub name: String,
     pub birth_date: Date,
     pub sex: String,
@@ -25,12 +24,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO patients (deleted_at, name, birth_date, sex, email, phone, \
+            "INSERT INTO patients (name, birth_date, sex, email, phone, \
             postal_address_as_full_text, country_as_iso_3166_1_alpha_2, postcode, \
-            united_kingdom_nhs_number) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) \
+            united_kingdom_nhs_number) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) \
             RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(self.birth_date)
         .bind(&self.sex)
@@ -47,13 +45,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE patients SET deleted_at = $2, name = $3, birth_date = $4, sex = $5, email \
-            = $6, phone = $7, postal_address_as_full_text = $8, country_as_iso_3166_1_alpha_2 \
-            = $9, postcode = $10, united_kingdom_nhs_number = $11, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE patients SET name = $2, birth_date = $3, sex = $4, email = $5, phone \
+            = $6, postal_address_as_full_text = $7, country_as_iso_3166_1_alpha_2 = $8, \
+            postcode = $9, united_kingdom_nhs_number = $10, updated_at = now() WHERE id \
+            = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(self.birth_date)
         .bind(&self.sex)

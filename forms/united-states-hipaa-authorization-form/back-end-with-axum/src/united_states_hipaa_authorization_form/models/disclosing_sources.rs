@@ -12,6 +12,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     pub id: Uuid,
+    #[serde(skip)]
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub identification_mode: String,
     pub specific_persons_or_organizations: String,
@@ -29,15 +30,18 @@ impl Model {
     /// Propagates the database error.
     pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Self>, i64)> {
         let (limit, offset) = crate::support::paging::bounds(page);
-        let rows =
-            sqlx::query_as("SELECT * FROM disclosing_sources ORDER BY id LIMIT $1 OFFSET $2")
-                .bind(limit)
-                .bind(offset)
-                .fetch_all(db)
+        let rows = sqlx::query_as(
+            "SELECT * FROM disclosing_sources WHERE deleted_at IS NULL ORDER BY id LIMIT \
+            $1 OFFSET $2",
+        )
+        .bind(limit)
+        .bind(offset)
+        .fetch_all(db)
+        .await?;
+        let total =
+            sqlx::query_scalar("SELECT COUNT(*) FROM disclosing_sources WHERE deleted_at IS NULL")
+                .fetch_one(db)
                 .await?;
-        let total = sqlx::query_scalar("SELECT COUNT(*) FROM disclosing_sources")
-            .fetch_one(db)
-            .await?;
         Ok((rows, total))
     }
 
@@ -47,7 +51,7 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn find_by_id(db: &PgPool, id: Uuid) -> sqlx::Result<Option<Self>> {
-        sqlx::query_as("SELECT * FROM disclosing_sources WHERE id = $1")
+        sqlx::query_as("SELECT * FROM disclosing_sources WHERE id = $1 AND deleted_at IS NULL")
             .bind(id)
             .fetch_optional(db)
             .await
@@ -59,10 +63,13 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn delete(db: &PgPool, id: Uuid) -> sqlx::Result<()> {
-        sqlx::query("DELETE FROM disclosing_sources WHERE id = $1")
-            .bind(id)
-            .execute(db)
-            .await?;
+        sqlx::query(
+            "UPDATE disclosing_sources SET deleted_at = now(), updated_at = now() WHERE \
+            id = $1 AND deleted_at IS NULL",
+        )
+        .bind(id)
+        .execute(db)
+        .await?;
         Ok(())
     }
 }

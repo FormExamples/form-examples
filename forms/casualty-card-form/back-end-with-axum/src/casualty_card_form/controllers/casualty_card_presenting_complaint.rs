@@ -9,7 +9,6 @@ use crate::models::casualty_card_presenting_complaints::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub casualty_card_id: Uuid,
     pub chief_complaint: String,
     pub history_of_presenting_complaint: String,
@@ -30,13 +29,13 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO casualty_card_presenting_complaints (deleted_at, casualty_card_id, \
-            chief_complaint, history_of_presenting_complaint, onset, duration, character, \
-            severity, location, radiation, aggravating_factors, relieving_factors, \
-            associated_symptoms, previous_episodes, treatment_prior_to_arrival) VALUES ($1, \
-            $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *",
+            "INSERT INTO casualty_card_presenting_complaints (casualty_card_id, \
+            chief_complaint, history_of_presenting_complaint, onset, duration, \
+            character, severity, location, radiation, aggravating_factors, \
+            relieving_factors, associated_symptoms, previous_episodes, \
+            treatment_prior_to_arrival) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, \
+            $11, $12, $13, $14) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(&self.chief_complaint)
         .bind(&self.history_of_presenting_complaint)
@@ -58,15 +57,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE casualty_card_presenting_complaints SET deleted_at = $2, casualty_card_id \
-            = $3, chief_complaint = $4, history_of_presenting_complaint = $5, onset = $6, \
-            duration = $7, character = $8, severity = $9, location = $10, radiation = $11, \
-            aggravating_factors = $12, relieving_factors = $13, associated_symptoms = $14, \
-            previous_episodes = $15, treatment_prior_to_arrival = $16, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            "UPDATE casualty_card_presenting_complaints SET casualty_card_id = $2, \
+            chief_complaint = $3, history_of_presenting_complaint = $4, onset = $5, \
+            duration = $6, character = $7, severity = $8, location = $9, radiation = \
+            $10, aggravating_factors = $11, relieving_factors = $12, associated_symptoms \
+            = $13, previous_episodes = $14, treatment_prior_to_arrival = $15, updated_at \
+            = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(&self.chief_complaint)
         .bind(&self.history_of_presenting_complaint)

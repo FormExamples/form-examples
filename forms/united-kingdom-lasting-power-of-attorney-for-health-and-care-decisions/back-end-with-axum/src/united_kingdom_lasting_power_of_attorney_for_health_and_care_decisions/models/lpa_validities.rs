@@ -12,6 +12,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     pub id: Uuid,
+    #[serde(skip)]
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub validity_status: String,
     pub completeness_score: i32,
@@ -30,14 +31,18 @@ impl Model {
     /// Propagates the database error.
     pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Self>, i64)> {
         let (limit, offset) = crate::support::paging::bounds(page);
-        let rows = sqlx::query_as("SELECT * FROM lpa_validities ORDER BY id LIMIT $1 OFFSET $2")
-            .bind(limit)
-            .bind(offset)
-            .fetch_all(db)
-            .await?;
-        let total = sqlx::query_scalar("SELECT COUNT(*) FROM lpa_validities")
-            .fetch_one(db)
-            .await?;
+        let rows = sqlx::query_as(
+            "SELECT * FROM lpa_validities WHERE deleted_at IS NULL ORDER BY id LIMIT $1 \
+            OFFSET $2",
+        )
+        .bind(limit)
+        .bind(offset)
+        .fetch_all(db)
+        .await?;
+        let total =
+            sqlx::query_scalar("SELECT COUNT(*) FROM lpa_validities WHERE deleted_at IS NULL")
+                .fetch_one(db)
+                .await?;
         Ok((rows, total))
     }
 
@@ -47,7 +52,7 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn find_by_id(db: &PgPool, id: Uuid) -> sqlx::Result<Option<Self>> {
-        sqlx::query_as("SELECT * FROM lpa_validities WHERE id = $1")
+        sqlx::query_as("SELECT * FROM lpa_validities WHERE id = $1 AND deleted_at IS NULL")
             .bind(id)
             .fetch_optional(db)
             .await
@@ -59,10 +64,18 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn delete(db: &PgPool, id: Uuid) -> sqlx::Result<()> {
-        sqlx::query("DELETE FROM lpa_validities WHERE id = $1")
-            .bind(id)
-            .execute(db)
-            .await?;
+        sqlx::query(
+            "WITH target AS (UPDATE lpa_validities SET deleted_at = now(), updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING id), child1 AS (UPDATE \
+            lpa_validity_fired_rules SET deleted_at = now(), updated_at = now() WHERE \
+            lpa_validity_id IN (SELECT id FROM target) AND deleted_at IS NULL RETURNING \
+            id), child2 AS (UPDATE lpa_validity_additional_flags SET deleted_at = now(), \
+            updated_at = now() WHERE lpa_validity_id IN (SELECT id FROM target) AND \
+            deleted_at IS NULL RETURNING id) SELECT count(*) FROM target",
+        )
+        .bind(id)
+        .execute(db)
+        .await?;
         Ok(())
     }
 }

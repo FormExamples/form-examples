@@ -71,13 +71,14 @@ impl Params {
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
             "UPDATE centor_score_for_streptococcal_pharyngitis SET patient_id = $2, \
-            clinician_id = $3, clinician_name = $4, clinician_role = $5, assessed_at = $6, \
-            care_setting = $7, patient_identifier = $8, age_years = $9, sex = $10, \
-            tonsillar_exudate = $11, tender_anterior_cervical_nodes = $12, fever_over_38 = \
-            $13, measured_temperature_celsius = $14, absence_of_cough = $15, \
-            stridor_or_breathing_difficulty = $16, drooling_or_cannot_swallow = $17, trismus \
-            = $18, muffled_voice = $19, unilateral_neck_swelling = $20, clinical_note = $21, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            clinician_id = $3, clinician_name = $4, clinician_role = $5, assessed_at = \
+            $6, care_setting = $7, patient_identifier = $8, age_years = $9, sex = $10, \
+            tonsillar_exudate = $11, tender_anterior_cervical_nodes = $12, fever_over_38 \
+            = $13, measured_temperature_celsius = $14, absence_of_cough = $15, \
+            stridor_or_breathing_difficulty = $16, drooling_or_cannot_swallow = $17, \
+            trismus = $18, muffled_voice = $19, unilateral_neck_swelling = $20, \
+            clinical_note = $21, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

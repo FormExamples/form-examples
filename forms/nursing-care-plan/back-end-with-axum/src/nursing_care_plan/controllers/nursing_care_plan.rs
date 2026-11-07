@@ -9,7 +9,6 @@ use crate::models::nursing_care_plans::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
     pub nurse_name: String,
@@ -48,7 +47,7 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO nursing_care_plans (deleted_at, patient_id, clinician_id, nurse_name, \
+            "INSERT INTO nursing_care_plans (patient_id, clinician_id, nurse_name, \
             nurse_role, nmc_number, authored_at, care_setting, plan_type, model_used, \
             patient_identifier, patient_name, date_of_birth, sex, ward_location, \
             handover_note, review_date, falls_risk_done, falls_risk_level, \
@@ -56,12 +55,11 @@ impl Params {
             pressure_ulcer_risk_level, pressure_ulcer_risk_assessed_on, \
             pressure_ulcer_risk_actioned, vte_risk_done, vte_risk_level, \
             vte_risk_assessed_on, vte_risk_actioned, nutrition_risk_done, \
-            nutrition_risk_level, nutrition_risk_assessed_on, nutrition_risk_actioned) VALUES \
-            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, \
-            $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33) \
-            RETURNING *",
+            nutrition_risk_level, nutrition_risk_assessed_on, nutrition_risk_actioned) \
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, \
+            $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, \
+            $31, $32) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.nurse_name)
@@ -101,21 +99,20 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE nursing_care_plans SET deleted_at = $2, patient_id = $3, clinician_id = \
-            $4, nurse_name = $5, nurse_role = $6, nmc_number = $7, authored_at = $8, \
-            care_setting = $9, plan_type = $10, model_used = $11, patient_identifier = $12, \
-            patient_name = $13, date_of_birth = $14, sex = $15, ward_location = $16, \
-            handover_note = $17, review_date = $18, falls_risk_done = $19, falls_risk_level = \
-            $20, falls_risk_assessed_on = $21, falls_risk_actioned = $22, \
-            pressure_ulcer_risk_done = $23, pressure_ulcer_risk_level = $24, \
-            pressure_ulcer_risk_assessed_on = $25, pressure_ulcer_risk_actioned = $26, \
-            vte_risk_done = $27, vte_risk_level = $28, vte_risk_assessed_on = $29, \
-            vte_risk_actioned = $30, nutrition_risk_done = $31, nutrition_risk_level = $32, \
-            nutrition_risk_assessed_on = $33, nutrition_risk_actioned = $34, updated_at = \
-            now() WHERE id = $1 RETURNING *",
+            "UPDATE nursing_care_plans SET patient_id = $2, clinician_id = $3, nurse_name \
+            = $4, nurse_role = $5, nmc_number = $6, authored_at = $7, care_setting = $8, \
+            plan_type = $9, model_used = $10, patient_identifier = $11, patient_name = \
+            $12, date_of_birth = $13, sex = $14, ward_location = $15, handover_note = \
+            $16, review_date = $17, falls_risk_done = $18, falls_risk_level = $19, \
+            falls_risk_assessed_on = $20, falls_risk_actioned = $21, \
+            pressure_ulcer_risk_done = $22, pressure_ulcer_risk_level = $23, \
+            pressure_ulcer_risk_assessed_on = $24, pressure_ulcer_risk_actioned = $25, \
+            vte_risk_done = $26, vte_risk_level = $27, vte_risk_assessed_on = $28, \
+            vte_risk_actioned = $29, nutrition_risk_done = $30, nutrition_risk_level = \
+            $31, nutrition_risk_assessed_on = $32, nutrition_risk_actioned = $33, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.nurse_name)

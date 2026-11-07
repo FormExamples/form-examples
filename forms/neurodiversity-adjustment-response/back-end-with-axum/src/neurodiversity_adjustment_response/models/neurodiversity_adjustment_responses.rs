@@ -19,6 +19,7 @@ pub struct Model {
     /// ID.
     pub id: Uuid,
     /// Deleted at (soft-delete).
+    #[serde(skip)]
     pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Response lifecycle status.
     pub response_status: String,
@@ -99,15 +100,19 @@ impl Model {
     pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Self>, i64)> {
         let (limit, offset) = crate::support::paging::bounds(page);
         let rows = sqlx::query_as(
-            "SELECT * FROM neurodiversity_adjustment_responses ORDER BY id LIMIT $1 OFFSET $2",
+            "SELECT * FROM neurodiversity_adjustment_responses WHERE deleted_at IS NULL \
+            ORDER BY id LIMIT $1 OFFSET $2",
         )
         .bind(limit)
         .bind(offset)
         .fetch_all(db)
         .await?;
-        let total = sqlx::query_scalar("SELECT COUNT(*) FROM neurodiversity_adjustment_responses")
-            .fetch_one(db)
-            .await?;
+        let total = sqlx::query_scalar(
+            "SELECT COUNT(*) FROM neurodiversity_adjustment_responses WHERE deleted_at IS \
+            NULL",
+        )
+        .fetch_one(db)
+        .await?;
         Ok((rows, total))
     }
 
@@ -117,10 +122,13 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn find_by_id(db: &PgPool, id: Uuid) -> sqlx::Result<Option<Self>> {
-        sqlx::query_as("SELECT * FROM neurodiversity_adjustment_responses WHERE id = $1")
-            .bind(id)
-            .fetch_optional(db)
-            .await
+        sqlx::query_as(
+            "SELECT * FROM neurodiversity_adjustment_responses WHERE id = $1 AND \
+            deleted_at IS NULL",
+        )
+        .bind(id)
+        .fetch_optional(db)
+        .await
     }
 
     /// Delete the row with this id.
@@ -129,10 +137,24 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn delete(db: &PgPool, id: Uuid) -> sqlx::Result<()> {
-        sqlx::query("DELETE FROM neurodiversity_adjustment_responses WHERE id = $1")
-            .bind(id)
-            .execute(db)
-            .await?;
+        sqlx::query(
+            "WITH target AS (UPDATE neurodiversity_adjustment_responses SET deleted_at = \
+            now(), updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING \
+            id), child1 AS (UPDATE neurodiversity_adjustment_response_grades SET \
+            deleted_at = now(), updated_at = now() WHERE \
+            neurodiversity_adjustment_response_id IN (SELECT id FROM target) AND \
+            deleted_at IS NULL RETURNING id), child2 AS (UPDATE \
+            neurodiversity_adjustment_response_grade_rules SET deleted_at = now(), \
+            updated_at = now() WHERE neurodiversity_adjustment_response_grade_id IN \
+            (SELECT id FROM child1) AND deleted_at IS NULL RETURNING id), child3 AS \
+            (UPDATE neurodiversity_adjustment_response_grade_flags SET deleted_at = \
+            now(), updated_at = now() WHERE neurodiversity_adjustment_response_grade_id \
+            IN (SELECT id FROM child1) AND deleted_at IS NULL RETURNING id) SELECT \
+            count(*) FROM target",
+        )
+        .bind(id)
+        .execute(db)
+        .await?;
         Ok(())
     }
 }
@@ -226,19 +248,21 @@ impl Model {
     ) -> sqlx::Result<Self> {
         let now = Utc::now();
         sqlx::query_as(
-            "UPDATE neurodiversity_adjustment_responses SET updated_at = $2, deleted_at = \
-            NULL, worker_id = $3, manager_id = $4, response_status = $5, request_reference = \
-            $6, handling_method = $7, assessed_date = $8, responded_date = $9, effective_date \
-            = $10, overall_decision = $11, decision_rationale = $12, decline_reason_category \
-            = $13, agreed_working_environment = $14, agreed_equipment_technology = $15, \
-            agreed_working_arrangements = $16, agreed_communication = $17, \
-            agreed_support_mentoring = $18, agreed_recruitment_process = $19, \
-            agreed_policy_dress = $20, agreed_other = $21, agreed_adjustments_detail = $22, \
-            alternative_adjustments_detail = $23, trial_period = $24, trial_period_weeks = \
-            $25, review_scheduled = $26, review_date = $27, occupational_health_referred = \
-            $28, access_to_work_referred = $29, support_resources_detail = $30, \
+            "UPDATE neurodiversity_adjustment_responses SET updated_at = $2, worker_id = \
+            $3, manager_id = $4, response_status = $5, request_reference = $6, \
+            handling_method = $7, assessed_date = $8, responded_date = $9, \
+            effective_date = $10, overall_decision = $11, decision_rationale = $12, \
+            decline_reason_category = $13, agreed_working_environment = $14, \
+            agreed_equipment_technology = $15, agreed_working_arrangements = $16, \
+            agreed_communication = $17, agreed_support_mentoring = $18, \
+            agreed_recruitment_process = $19, agreed_policy_dress = $20, agreed_other = \
+            $21, agreed_adjustments_detail = $22, alternative_adjustments_detail = $23, \
+            trial_period = $24, trial_period_weeks = $25, review_scheduled = $26, \
+            review_date = $27, occupational_health_referred = $28, \
+            access_to_work_referred = $29, support_resources_detail = $30, \
             responsibilities_detail = $31, point_of_contact = $32, escalated = $33, \
-            escalation_detail = $34, notes = $35 WHERE id = $1 RETURNING *",
+            escalation_detail = $34, notes = $35 WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
         .bind(now)
@@ -285,10 +309,24 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn soft_delete(db: &PgPool, id: Uuid) -> sqlx::Result<()> {
-        sqlx::query("UPDATE neurodiversity_adjustment_responses SET deleted_at = now(), updated_at = now() WHERE id = $1")
-            .bind(id)
-            .execute(db)
-            .await?;
+        sqlx::query(
+            "WITH target AS (UPDATE neurodiversity_adjustment_responses SET deleted_at = \
+            now(), updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING \
+            id), child1 AS (UPDATE neurodiversity_adjustment_response_grades SET \
+            deleted_at = now(), updated_at = now() WHERE \
+            neurodiversity_adjustment_response_id IN (SELECT id FROM target) AND \
+            deleted_at IS NULL RETURNING id), child2 AS (UPDATE \
+            neurodiversity_adjustment_response_grade_rules SET deleted_at = now(), \
+            updated_at = now() WHERE neurodiversity_adjustment_response_grade_id IN \
+            (SELECT id FROM child1) AND deleted_at IS NULL RETURNING id), child3 AS \
+            (UPDATE neurodiversity_adjustment_response_grade_flags SET deleted_at = \
+            now(), updated_at = now() WHERE neurodiversity_adjustment_response_grade_id \
+            IN (SELECT id FROM child1) AND deleted_at IS NULL RETURNING id) SELECT \
+            count(*) FROM target",
+        )
+        .bind(id)
+        .execute(db)
+        .await?;
         Ok(())
     }
 }
@@ -366,14 +404,18 @@ pub async fn find_by_id(db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
 pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Model>, i64)> {
     let (limit, offset) = crate::support::paging::bounds(page);
     let rows = sqlx::query_as::<_, Model>(
-        "SELECT * FROM neurodiversity_adjustment_responses ORDER BY created_at DESC, id LIMIT $1 OFFSET $2",
+        "SELECT * FROM neurodiversity_adjustment_responses WHERE deleted_at IS NULL \
+            ORDER BY created_at DESC, id LIMIT $1 OFFSET $2",
     )
     .bind(limit)
     .bind(offset)
     .fetch_all(db)
     .await?;
-    let total = sqlx::query_scalar("SELECT COUNT(*) FROM neurodiversity_adjustment_responses")
-        .fetch_one(db)
-        .await?;
+    let total = sqlx::query_scalar(
+        "SELECT COUNT(*) FROM neurodiversity_adjustment_responses WHERE deleted_at IS \
+            NULL",
+    )
+    .fetch_one(db)
+    .await?;
     Ok((rows, total))
 }

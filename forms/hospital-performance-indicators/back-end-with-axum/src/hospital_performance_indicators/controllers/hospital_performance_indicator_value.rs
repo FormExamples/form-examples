@@ -12,8 +12,6 @@ use crate::models::hospital_performance_indicator_values::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    /// Deleted at.
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Hospital performance indicators ID.
     pub hospital_performance_indicators_id: Uuid,
     /// Indicator code.
@@ -34,12 +32,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO hospital_performance_indicator_values (deleted_at, \
-            hospital_performance_indicators_id, indicator_code, category_number, \
-            category_title, indicator_text, indicator_value, notes) VALUES ($1, $2, $3, $4, \
-            $5, $6, $7, $8) RETURNING *",
+            "INSERT INTO hospital_performance_indicator_values \
+            (hospital_performance_indicators_id, indicator_code, category_number, \
+            category_title, indicator_text, indicator_value, notes) VALUES ($1, $2, $3, \
+            $4, $5, $6, $7) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.hospital_performance_indicators_id)
         .bind(&self.indicator_code)
         .bind(self.category_number)
@@ -54,13 +51,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE hospital_performance_indicator_values SET deleted_at = $2, \
-            hospital_performance_indicators_id = $3, indicator_code = $4, category_number = \
-            $5, category_title = $6, indicator_text = $7, indicator_value = $8, notes = $9, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE hospital_performance_indicator_values SET \
+            hospital_performance_indicators_id = $2, indicator_code = $3, \
+            category_number = $4, category_title = $5, indicator_text = $6, \
+            indicator_value = $7, notes = $8, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.hospital_performance_indicators_id)
         .bind(&self.indicator_code)
         .bind(self.category_number)

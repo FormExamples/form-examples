@@ -9,7 +9,6 @@ use crate::models::casualty_card_allergies::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub casualty_card_id: Uuid,
     pub allergen: String,
     pub reaction: String,
@@ -21,10 +20,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO casualty_card_allergies (deleted_at, casualty_card_id, allergen, \
-            reaction, severity, sort_order) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+            "INSERT INTO casualty_card_allergies (casualty_card_id, allergen, reaction, \
+            severity, sort_order) VALUES ($1, $2, $3, $4, $5) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(&self.allergen)
         .bind(&self.reaction)
@@ -37,12 +35,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE casualty_card_allergies SET deleted_at = $2, casualty_card_id = $3, \
-            allergen = $4, reaction = $5, severity = $6, sort_order = $7, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            "UPDATE casualty_card_allergies SET casualty_card_id = $2, allergen = $3, \
+            reaction = $4, severity = $5, sort_order = $6, updated_at = now() WHERE id = \
+            $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(&self.allergen)
         .bind(&self.reaction)

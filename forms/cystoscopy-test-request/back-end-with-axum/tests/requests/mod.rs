@@ -9,3 +9,4 @@ pub mod cystoscopy_test_request_grade;
 pub mod cystoscopy_test_request_grade_flag;
 pub mod cystoscopy_test_request_grade_rule;
 pub mod patient;
+mod soft_delete;

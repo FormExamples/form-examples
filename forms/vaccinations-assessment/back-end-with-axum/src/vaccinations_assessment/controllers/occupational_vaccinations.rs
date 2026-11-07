@@ -9,7 +9,6 @@ use crate::models::occupational_vaccinations::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub occupation: String,
     pub healthcare_worker: String,
@@ -23,11 +22,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO occupational_vaccinations (deleted_at, assessment_id, occupation, \
-            healthcare_worker, hepatitis_b_occupational, influenza_occupational, varicella, \
-            bcg_tuberculosis) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+            "INSERT INTO occupational_vaccinations (assessment_id, occupation, \
+            healthcare_worker, hepatitis_b_occupational, influenza_occupational, \
+            varicella, bcg_tuberculosis) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.occupation)
         .bind(&self.healthcare_worker)
@@ -42,13 +40,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE occupational_vaccinations SET deleted_at = $2, assessment_id = $3, \
-            occupation = $4, healthcare_worker = $5, hepatitis_b_occupational = $6, \
-            influenza_occupational = $7, varicella = $8, bcg_tuberculosis = $9, updated_at = \
-            now() WHERE id = $1 RETURNING *",
+            "UPDATE occupational_vaccinations SET assessment_id = $2, occupation = $3, \
+            healthcare_worker = $4, hepatitis_b_occupational = $5, \
+            influenza_occupational = $6, varicella = $7, bcg_tuberculosis = $8, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.occupation)
         .bind(&self.healthcare_worker)

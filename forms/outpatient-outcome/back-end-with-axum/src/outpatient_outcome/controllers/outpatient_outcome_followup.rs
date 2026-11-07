@@ -9,7 +9,6 @@ use crate::models::outpatient_outcome_followups::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub outpatient_outcome_id: Uuid,
     pub disposition: String,
     pub next_appointment_date: Option<Date>,
@@ -21,11 +20,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO outpatient_outcome_followups (deleted_at, outpatient_outcome_id, \
-            disposition, next_appointment_date, onward_referral_specialty, followup_notes) \
-            VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+            "INSERT INTO outpatient_outcome_followups (outpatient_outcome_id, \
+            disposition, next_appointment_date, onward_referral_specialty, \
+            followup_notes) VALUES ($1, $2, $3, $4, $5) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.outpatient_outcome_id)
         .bind(&self.disposition)
         .bind(self.next_appointment_date)
@@ -38,12 +36,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE outpatient_outcome_followups SET deleted_at = $2, outpatient_outcome_id = \
-            $3, disposition = $4, next_appointment_date = $5, onward_referral_specialty = $6, \
-            followup_notes = $7, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE outpatient_outcome_followups SET outpatient_outcome_id = $2, \
+            disposition = $3, next_appointment_date = $4, onward_referral_specialty = \
+            $5, followup_notes = $6, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.outpatient_outcome_id)
         .bind(&self.disposition)
         .bind(self.next_appointment_date)

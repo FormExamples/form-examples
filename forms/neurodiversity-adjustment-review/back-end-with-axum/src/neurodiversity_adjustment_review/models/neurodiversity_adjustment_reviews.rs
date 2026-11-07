@@ -18,6 +18,7 @@ pub struct Model {
     /// ID.
     pub id: Uuid,
     /// Deleted at (soft-delete).
+    #[serde(skip)]
     pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Review lifecycle status.
     pub review_status: String,
@@ -84,15 +85,19 @@ impl Model {
     pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Self>, i64)> {
         let (limit, offset) = crate::support::paging::bounds(page);
         let rows = sqlx::query_as(
-            "SELECT * FROM neurodiversity_adjustment_reviews ORDER BY id LIMIT $1 OFFSET $2",
+            "SELECT * FROM neurodiversity_adjustment_reviews WHERE deleted_at IS NULL \
+            ORDER BY id LIMIT $1 OFFSET $2",
         )
         .bind(limit)
         .bind(offset)
         .fetch_all(db)
         .await?;
-        let total = sqlx::query_scalar("SELECT COUNT(*) FROM neurodiversity_adjustment_reviews")
-            .fetch_one(db)
-            .await?;
+        let total = sqlx::query_scalar(
+            "SELECT COUNT(*) FROM neurodiversity_adjustment_reviews WHERE deleted_at IS \
+            NULL",
+        )
+        .fetch_one(db)
+        .await?;
         Ok((rows, total))
     }
 
@@ -102,10 +107,13 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn find_by_id(db: &PgPool, id: Uuid) -> sqlx::Result<Option<Self>> {
-        sqlx::query_as("SELECT * FROM neurodiversity_adjustment_reviews WHERE id = $1")
-            .bind(id)
-            .fetch_optional(db)
-            .await
+        sqlx::query_as(
+            "SELECT * FROM neurodiversity_adjustment_reviews WHERE id = $1 AND deleted_at \
+            IS NULL",
+        )
+        .bind(id)
+        .fetch_optional(db)
+        .await
     }
 
     /// Delete the row with this id.
@@ -114,10 +122,24 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn delete(db: &PgPool, id: Uuid) -> sqlx::Result<()> {
-        sqlx::query("DELETE FROM neurodiversity_adjustment_reviews WHERE id = $1")
-            .bind(id)
-            .execute(db)
-            .await?;
+        sqlx::query(
+            "WITH target AS (UPDATE neurodiversity_adjustment_reviews SET deleted_at = \
+            now(), updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING \
+            id), child1 AS (UPDATE neurodiversity_adjustment_review_grades SET \
+            deleted_at = now(), updated_at = now() WHERE \
+            neurodiversity_adjustment_review_id IN (SELECT id FROM target) AND \
+            deleted_at IS NULL RETURNING id), child2 AS (UPDATE \
+            neurodiversity_adjustment_review_grade_rules SET deleted_at = now(), \
+            updated_at = now() WHERE neurodiversity_adjustment_review_grade_id IN \
+            (SELECT id FROM child1) AND deleted_at IS NULL RETURNING id), child3 AS \
+            (UPDATE neurodiversity_adjustment_review_grade_flags SET deleted_at = now(), \
+            updated_at = now() WHERE neurodiversity_adjustment_review_grade_id IN \
+            (SELECT id FROM child1) AND deleted_at IS NULL RETURNING id) SELECT count(*) \
+            FROM target",
+        )
+        .bind(id)
+        .execute(db)
+        .await?;
         Ok(())
     }
 }
@@ -202,17 +224,18 @@ impl Model {
     ) -> sqlx::Result<Self> {
         let now = Utc::now();
         sqlx::query_as(
-            "UPDATE neurodiversity_adjustment_reviews SET updated_at = $2, deleted_at = NULL, \
-            worker_id = $3, manager_id = $4, review_status = $5, response_reference = $6, \
+            "UPDATE neurodiversity_adjustment_reviews SET updated_at = $2, worker_id = \
+            $3, manager_id = $4, review_status = $5, response_reference = $6, \
             review_method = $7, review_date = $8, next_review_date = $9, \
-            effectiveness_working_environment = $10, effectiveness_equipment_technology = \
-            $11, effectiveness_working_arrangements = $12, effectiveness_communication = $13, \
-            effectiveness_support_mentoring = $14, effectiveness_recruitment_process = $15, \
-            effectiveness_policy_dress = $16, effectiveness_other = $17, worker_feedback = \
-            $18, worker_satisfied = $19, wellbeing_change = $20, barriers_detail = $21, \
-            changes_needed = $22, changes_detail = $23, updated_adjustments_detail = $24, \
-            occupational_health_rereferral = $25, escalated = $26, escalation_detail = $27, \
-            notes = $28 WHERE id = $1 RETURNING *",
+            effectiveness_working_environment = $10, effectiveness_equipment_technology \
+            = $11, effectiveness_working_arrangements = $12, effectiveness_communication \
+            = $13, effectiveness_support_mentoring = $14, \
+            effectiveness_recruitment_process = $15, effectiveness_policy_dress = $16, \
+            effectiveness_other = $17, worker_feedback = $18, worker_satisfied = $19, \
+            wellbeing_change = $20, barriers_detail = $21, changes_needed = $22, \
+            changes_detail = $23, updated_adjustments_detail = $24, \
+            occupational_health_rereferral = $25, escalated = $26, escalation_detail = \
+            $27, notes = $28 WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(now)
@@ -252,10 +275,24 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn soft_delete(db: &PgPool, id: Uuid) -> sqlx::Result<()> {
-        sqlx::query("UPDATE neurodiversity_adjustment_reviews SET deleted_at = now(), updated_at = now() WHERE id = $1")
-            .bind(id)
-            .execute(db)
-            .await?;
+        sqlx::query(
+            "WITH target AS (UPDATE neurodiversity_adjustment_reviews SET deleted_at = \
+            now(), updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING \
+            id), child1 AS (UPDATE neurodiversity_adjustment_review_grades SET \
+            deleted_at = now(), updated_at = now() WHERE \
+            neurodiversity_adjustment_review_id IN (SELECT id FROM target) AND \
+            deleted_at IS NULL RETURNING id), child2 AS (UPDATE \
+            neurodiversity_adjustment_review_grade_rules SET deleted_at = now(), \
+            updated_at = now() WHERE neurodiversity_adjustment_review_grade_id IN \
+            (SELECT id FROM child1) AND deleted_at IS NULL RETURNING id), child3 AS \
+            (UPDATE neurodiversity_adjustment_review_grade_flags SET deleted_at = now(), \
+            updated_at = now() WHERE neurodiversity_adjustment_review_grade_id IN \
+            (SELECT id FROM child1) AND deleted_at IS NULL RETURNING id) SELECT count(*) \
+            FROM target",
+        )
+        .bind(id)
+        .execute(db)
+        .await?;
         Ok(())
     }
 }
@@ -320,14 +357,18 @@ pub async fn find_by_id(db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
 pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Model>, i64)> {
     let (limit, offset) = crate::support::paging::bounds(page);
     let rows = sqlx::query_as::<_, Model>(
-        "SELECT * FROM neurodiversity_adjustment_reviews ORDER BY created_at DESC, id LIMIT $1 OFFSET $2",
+        "SELECT * FROM neurodiversity_adjustment_reviews WHERE deleted_at IS NULL \
+            ORDER BY created_at DESC, id LIMIT $1 OFFSET $2",
     )
     .bind(limit)
     .bind(offset)
     .fetch_all(db)
     .await?;
-    let total = sqlx::query_scalar("SELECT COUNT(*) FROM neurodiversity_adjustment_reviews")
-        .fetch_one(db)
-        .await?;
+    let total = sqlx::query_scalar(
+        "SELECT COUNT(*) FROM neurodiversity_adjustment_reviews WHERE deleted_at IS \
+            NULL",
+    )
+    .fetch_one(db)
+    .await?;
     Ok((rows, total))
 }

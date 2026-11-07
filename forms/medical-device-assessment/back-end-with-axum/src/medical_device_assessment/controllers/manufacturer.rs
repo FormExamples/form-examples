@@ -12,8 +12,6 @@ use crate::models::manufacturers::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    /// Deleted at.
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Name.
     pub name: String,
     /// Email.
@@ -38,13 +36,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO manufacturers (deleted_at, name, email, phone, \
-            postal_address_as_full_text, country_as_iso_3166_1_alpha_2, postcode, \
-            single_registration_number, authorized_representative_name, \
-            united_kingdom_responsible_person_name) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, \
-            $9, $10) RETURNING *",
+            "INSERT INTO manufacturers (name, email, phone, postal_address_as_full_text, \
+            country_as_iso_3166_1_alpha_2, postcode, single_registration_number, \
+            authorized_representative_name, united_kingdom_responsible_person_name) \
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(&self.email)
         .bind(&self.phone)
@@ -61,14 +57,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE manufacturers SET deleted_at = $2, name = $3, email = $4, phone = $5, \
-            postal_address_as_full_text = $6, country_as_iso_3166_1_alpha_2 = $7, postcode = \
-            $8, single_registration_number = $9, authorized_representative_name = $10, \
-            united_kingdom_responsible_person_name = $11, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE manufacturers SET name = $2, email = $3, phone = $4, \
+            postal_address_as_full_text = $5, country_as_iso_3166_1_alpha_2 = $6, \
+            postcode = $7, single_registration_number = $8, \
+            authorized_representative_name = $9, united_kingdom_responsible_person_name \
+            = $10, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(&self.email)
         .bind(&self.phone)

@@ -12,8 +12,6 @@ use crate::models::hospital_dashboard_metric_values::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    /// Deleted at.
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Hospital dashboard metrics ID.
     pub hospital_dashboard_metrics_id: Uuid,
     /// Metric code.
@@ -34,12 +32,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO hospital_dashboard_metric_values (deleted_at, \
-            hospital_dashboard_metrics_id, metric_code, category_number, category_title, \
-            metric_text, metric_value, notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) \
-            RETURNING *",
+            "INSERT INTO hospital_dashboard_metric_values (hospital_dashboard_metrics_id, \
+            metric_code, category_number, category_title, metric_text, metric_value, \
+            notes) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.hospital_dashboard_metrics_id)
         .bind(&self.metric_code)
         .bind(self.category_number)
@@ -54,13 +50,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE hospital_dashboard_metric_values SET deleted_at = $2, \
-            hospital_dashboard_metrics_id = $3, metric_code = $4, category_number = $5, \
-            category_title = $6, metric_text = $7, metric_value = $8, notes = $9, updated_at \
-            = now() WHERE id = $1 RETURNING *",
+            "UPDATE hospital_dashboard_metric_values SET hospital_dashboard_metrics_id = \
+            $2, metric_code = $3, category_number = $4, category_title = $5, metric_text \
+            = $6, metric_value = $7, notes = $8, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.hospital_dashboard_metrics_id)
         .bind(&self.metric_code)
         .bind(self.category_number)

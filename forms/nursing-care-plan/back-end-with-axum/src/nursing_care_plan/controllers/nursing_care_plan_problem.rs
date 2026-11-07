@@ -9,7 +9,6 @@ use crate::models::nursing_care_plan_problems::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub nursing_care_plan_id: Uuid,
     pub problem_statement: String,
     pub adl_category: String,
@@ -25,12 +24,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO nursing_care_plan_problems (deleted_at, nursing_care_plan_id, \
+            "INSERT INTO nursing_care_plan_problems (nursing_care_plan_id, \
             problem_statement, adl_category, actual_or_potential, assessment_data, \
-            linked_risk, evaluation_note, goal_met, next_review_date) VALUES ($1, $2, $3, $4, \
-            $5, $6, $7, $8, $9, $10) RETURNING *",
+            linked_risk, evaluation_note, goal_met, next_review_date) VALUES ($1, $2, \
+            $3, $4, $5, $6, $7, $8, $9) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.nursing_care_plan_id)
         .bind(&self.problem_statement)
         .bind(&self.adl_category)
@@ -47,13 +45,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE nursing_care_plan_problems SET deleted_at = $2, nursing_care_plan_id = $3, \
-            problem_statement = $4, adl_category = $5, actual_or_potential = $6, \
-            assessment_data = $7, linked_risk = $8, evaluation_note = $9, goal_met = $10, \
-            next_review_date = $11, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE nursing_care_plan_problems SET nursing_care_plan_id = $2, \
+            problem_statement = $3, adl_category = $4, actual_or_potential = $5, \
+            assessment_data = $6, linked_risk = $7, evaluation_note = $8, goal_met = $9, \
+            next_review_date = $10, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.nursing_care_plan_id)
         .bind(&self.problem_statement)
         .bind(&self.adl_category)

@@ -9,7 +9,6 @@ use crate::models::meeting_outputs::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub meeting_id: Uuid,
     pub position: i32,
     pub title: String,
@@ -23,10 +22,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO meeting_outputs (deleted_at, meeting_id, position, title, kind, url, \
-            description, owner_name) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+            "INSERT INTO meeting_outputs (meeting_id, position, title, kind, url, \
+            description, owner_name) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.meeting_id)
         .bind(self.position)
         .bind(&self.title)
@@ -41,12 +39,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE meeting_outputs SET deleted_at = $2, meeting_id = $3, position = $4, title \
-            = $5, kind = $6, url = $7, description = $8, owner_name = $9, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            "UPDATE meeting_outputs SET meeting_id = $2, position = $3, title = $4, kind \
+            = $5, url = $6, description = $7, owner_name = $8, updated_at = now() WHERE \
+            id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.meeting_id)
         .bind(self.position)
         .bind(&self.title)

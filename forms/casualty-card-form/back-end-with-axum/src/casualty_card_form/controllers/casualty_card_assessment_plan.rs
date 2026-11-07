@@ -9,7 +9,6 @@ use crate::models::casualty_card_assessment_plans::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub casualty_card_id: Uuid,
     pub working_diagnosis: String,
     pub differential_diagnoses: String,
@@ -21,11 +20,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO casualty_card_assessment_plans (deleted_at, casualty_card_id, \
+            "INSERT INTO casualty_card_assessment_plans (casualty_card_id, \
             working_diagnosis, differential_diagnoses, clinical_impression, \
-            risk_stratification) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+            risk_stratification) VALUES ($1, $2, $3, $4, $5) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(&self.working_diagnosis)
         .bind(&self.differential_diagnoses)
@@ -38,12 +36,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE casualty_card_assessment_plans SET deleted_at = $2, casualty_card_id = $3, \
-            working_diagnosis = $4, differential_diagnoses = $5, clinical_impression = $6, \
-            risk_stratification = $7, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE casualty_card_assessment_plans SET casualty_card_id = $2, \
+            working_diagnosis = $3, differential_diagnoses = $4, clinical_impression = \
+            $5, risk_stratification = $6, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(&self.working_diagnosis)
         .bind(&self.differential_diagnoses)

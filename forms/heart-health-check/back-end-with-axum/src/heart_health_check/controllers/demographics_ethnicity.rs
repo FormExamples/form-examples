@@ -9,7 +9,6 @@ use crate::models::demographics_ethnicities::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub age: Option<i32>,
     pub sex: String,
@@ -21,10 +20,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO demographics_ethnicities (deleted_at, assessment_id, age, sex, \
-            ethnicity, townsend_deprivation) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+            "INSERT INTO demographics_ethnicities (assessment_id, age, sex, ethnicity, \
+            townsend_deprivation) VALUES ($1, $2, $3, $4, $5) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.age)
         .bind(&self.sex)
@@ -37,12 +35,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE demographics_ethnicities SET deleted_at = $2, assessment_id = $3, age = \
-            $4, sex = $5, ethnicity = $6, townsend_deprivation = $7, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE demographics_ethnicities SET assessment_id = $2, age = $3, sex = $4, \
+            ethnicity = $5, townsend_deprivation = $6, updated_at = now() WHERE id = $1 \
+            AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.age)
         .bind(&self.sex)

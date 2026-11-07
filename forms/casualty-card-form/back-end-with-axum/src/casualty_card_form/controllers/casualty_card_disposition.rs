@@ -9,7 +9,6 @@ use crate::models::casualty_card_dispositions::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub casualty_card_id: Uuid,
     pub disposition: String,
     pub admitting_specialty: String,
@@ -32,14 +31,13 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO casualty_card_dispositions (deleted_at, casualty_card_id, \
-            disposition, admitting_specialty, admitting_consultant, ward, level_of_care, \
-            discharge_diagnosis, discharge_medications, discharge_instructions, follow_up, \
-            return_precautions, receiving_hospital, reason_for_transfer, mode_of_transfer, \
-            discharge_time, total_time_in_department) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, \
-            $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING *",
+            "INSERT INTO casualty_card_dispositions (casualty_card_id, disposition, \
+            admitting_specialty, admitting_consultant, ward, level_of_care, \
+            discharge_diagnosis, discharge_medications, discharge_instructions, \
+            follow_up, return_precautions, receiving_hospital, reason_for_transfer, \
+            mode_of_transfer, discharge_time, total_time_in_department) VALUES ($1, $2, \
+            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(&self.disposition)
         .bind(&self.admitting_specialty)
@@ -63,16 +61,15 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE casualty_card_dispositions SET deleted_at = $2, casualty_card_id = $3, \
-            disposition = $4, admitting_specialty = $5, admitting_consultant = $6, ward = $7, \
-            level_of_care = $8, discharge_diagnosis = $9, discharge_medications = $10, \
-            discharge_instructions = $11, follow_up = $12, return_precautions = $13, \
-            receiving_hospital = $14, reason_for_transfer = $15, mode_of_transfer = $16, \
-            discharge_time = $17, total_time_in_department = $18, updated_at = now() WHERE id \
-            = $1 RETURNING *",
+            "UPDATE casualty_card_dispositions SET casualty_card_id = $2, disposition = \
+            $3, admitting_specialty = $4, admitting_consultant = $5, ward = $6, \
+            level_of_care = $7, discharge_diagnosis = $8, discharge_medications = $9, \
+            discharge_instructions = $10, follow_up = $11, return_precautions = $12, \
+            receiving_hospital = $13, reason_for_transfer = $14, mode_of_transfer = $15, \
+            discharge_time = $16, total_time_in_department = $17, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(&self.disposition)
         .bind(&self.admitting_specialty)

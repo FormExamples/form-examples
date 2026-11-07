@@ -94,17 +94,18 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE medical_certificate_of_cause_of_deaths SET patient_id = $2, clinician_id = \
-            $3, certifying_doctor_name = $4, certifying_doctor_grade = $5, gmc_reference = \
-            $6, place_of_certification = $7, certification_date = $8, attended_deceased = $9, \
-            last_seen_alive_date = $10, deceased_name = $11, sex = $12, date_of_birth = $13, \
-            age_years = $14, patient_identifier = $15, date_of_death = $16, time_of_death = \
-            $17, place_of_death = $18, seen_after_death_by = $19, cause_ia_condition = $20, \
-            cause_ia_interval = $21, cause_ib_condition = $22, cause_ib_interval = $23, \
-            cause_ic_condition = $24, cause_ic_interval = $25, part_ii_conditions = $26, \
-            part_ii_interval = $27, referred_to_coroner = $28, coroner_reason = $29, \
-            medical_examiner_status = $30, certifier_note = $31, updated_at = now() WHERE id \
-            = $1 RETURNING *",
+            "UPDATE medical_certificate_of_cause_of_deaths SET patient_id = $2, \
+            clinician_id = $3, certifying_doctor_name = $4, certifying_doctor_grade = \
+            $5, gmc_reference = $6, place_of_certification = $7, certification_date = \
+            $8, attended_deceased = $9, last_seen_alive_date = $10, deceased_name = $11, \
+            sex = $12, date_of_birth = $13, age_years = $14, patient_identifier = $15, \
+            date_of_death = $16, time_of_death = $17, place_of_death = $18, \
+            seen_after_death_by = $19, cause_ia_condition = $20, cause_ia_interval = \
+            $21, cause_ib_condition = $22, cause_ib_interval = $23, cause_ic_condition = \
+            $24, cause_ic_interval = $25, part_ii_conditions = $26, part_ii_interval = \
+            $27, referred_to_coroner = $28, coroner_reason = $29, \
+            medical_examiner_status = $30, certifier_note = $31, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

@@ -1,0 +1,1 @@
+ALTER TABLE "united_kingdom_statement_of_fitness_for_works" ADD COLUMN "united_kingdom_statement_of_fitness_for_work_id" uuid NOT NULL REFERENCES "united_kingdom_statement_of_fitness_for_works" (id) ON DELETE CASCADE ON UPDATE CASCADE;

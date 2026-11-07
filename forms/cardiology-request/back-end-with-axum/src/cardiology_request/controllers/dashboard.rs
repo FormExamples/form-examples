@@ -27,7 +27,7 @@ async fn dashboard(
 
     let requests: Vec<cardiology_requests::Model> = sqlx::query_as(
         "SELECT * FROM cardiology_requests WHERE ($1::text IS NULL OR status = $1) \
-         ORDER BY created_at DESC LIMIT $2",
+            AND deleted_at IS NULL ORDER BY created_at DESC LIMIT $2",
     )
     .bind(params.status)
     .bind(i64::try_from(limit).unwrap_or(i64::MAX))
@@ -37,7 +37,8 @@ async fn dashboard(
     let mut items: Vec<Value> = Vec::with_capacity(requests.len());
     for request in &requests {
         let grade = sqlx::query_as::<_, cardiology_request_grades::Model>(
-            "SELECT * FROM cardiology_request_grades WHERE cardiology_request_id = $1",
+            "SELECT * FROM cardiology_request_grades WHERE cardiology_request_id = $1 AND \
+            deleted_at IS NULL",
         )
         .bind(request.id)
         .fetch_optional(&db(&ctx))

@@ -9,7 +9,6 @@ use crate::models::knee_replacement_surgery_evaluations::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub status: String,
@@ -99,38 +98,40 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO knee_replacement_surgery_evaluations (deleted_at, patient_id, \
-            clinician_id, status, site_name, assessment_date, assessment_time, knee_side, \
+            "INSERT INTO knee_replacement_surgery_evaluations (patient_id, clinician_id, \
+            status, site_name, assessment_date, assessment_time, knee_side, \
             symptom_duration_months, pain_at_rest_0_to_10, pain_on_activity_0_to_10, \
-            night_pain, prior_knee_surgery, prior_knee_surgery_type, prior_knee_surgery_date, \
-            prior_injury, prior_injury_detail, oks_pain_severity, oks_washing_and_drying, \
-            oks_transport, oks_walking_distance, oks_pain_sitting_or_lying, oks_limping, \
-            oks_kneeling, oks_night_pain_frequency, oks_pain_interfering_with_work, \
-            oks_giving_way, oks_shopping, oks_stairs, walking_distance_before_pain, \
-            stair_climbing_ability, stand_from_chair_unaided, walking_aid, flexion_degrees, \
-            extension_deficit_degrees, fixed_flexion_deformity_present, \
+            night_pain, prior_knee_surgery, prior_knee_surgery_type, \
+            prior_knee_surgery_date, prior_injury, prior_injury_detail, \
+            oks_pain_severity, oks_washing_and_drying, oks_transport, \
+            oks_walking_distance, oks_pain_sitting_or_lying, oks_limping, oks_kneeling, \
+            oks_night_pain_frequency, oks_pain_interfering_with_work, oks_giving_way, \
+            oks_shopping, oks_stairs, walking_distance_before_pain, \
+            stair_climbing_ability, stand_from_chair_unaided, walking_aid, \
+            flexion_degrees, extension_deficit_degrees, fixed_flexion_deformity_present, \
             fixed_flexion_deformity_degrees, coronal_deformity_type, \
             coronal_deformity_severity, ligament_acl, ligament_pcl, ligament_mcl, \
             ligament_lcl, patellar_tracking, quadriceps_strength_mrc, effusion_present, \
-            crepitus_present, weight_bearing_xray_performed, kellgren_lawrence_grade_medial, \
-            kellgren_lawrence_grade_lateral, kellgren_lawrence_grade_patellofemoral, \
-            mri_performed, mri_findings, ct_performed, ct_indication, physiotherapy_tried, \
-            physiotherapy_duration_weeks, weight_management_advice_given, injection_given, \
-            injection_type, injection_count, injection_response, nsaid_analgesic_trial, \
-            nsaid_analgesic_response, walking_aid_trial, conservative_measures_exhausted, \
-            diabetes_controlled, cardiac_disease, bleeding_disorder_or_anticoagulant, \
-            smoking_status, general_fitness_note, fbc_done, renal_function_done, \
-            clotting_done, ecg_done, mrsa_screen_done, urinalysis_done, \
-            risks_benefits_discussed, realistic_expectations_discussed, \
+            crepitus_present, weight_bearing_xray_performed, \
+            kellgren_lawrence_grade_medial, kellgren_lawrence_grade_lateral, \
+            kellgren_lawrence_grade_patellofemoral, mri_performed, mri_findings, \
+            ct_performed, ct_indication, physiotherapy_tried, \
+            physiotherapy_duration_weeks, weight_management_advice_given, \
+            injection_given, injection_type, injection_count, injection_response, \
+            nsaid_analgesic_trial, nsaid_analgesic_response, walking_aid_trial, \
+            conservative_measures_exhausted, diabetes_controlled, cardiac_disease, \
+            bleeding_disorder_or_anticoagulant, smoking_status, general_fitness_note, \
+            fbc_done, renal_function_done, clotting_done, ecg_done, mrsa_screen_done, \
+            urinalysis_done, risks_benefits_discussed, realistic_expectations_discussed, \
             patient_decision_aid_given, interpreter_required, plan_recommendation, \
-            target_list_date, responsible_surgeon) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, \
-            $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, \
-            $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, \
-            $41, $42, $43, $44, $45, $46, $47, $48, $49, $50, $51, $52, $53, $54, $55, $56, \
-            $57, $58, $59, $60, $61, $62, $63, $64, $65, $66, $67, $68, $69, $70, $71, $72, \
-            $73, $74, $75, $76, $77, $78, $79, $80, $81, $82, $83, $84) RETURNING *",
+            target_list_date, responsible_surgeon) VALUES ($1, $2, $3, $4, $5, $6, $7, \
+            $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, \
+            $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, \
+            $38, $39, $40, $41, $42, $43, $44, $45, $46, $47, $48, $49, $50, $51, $52, \
+            $53, $54, $55, $56, $57, $58, $59, $60, $61, $62, $63, $64, $65, $66, $67, \
+            $68, $69, $70, $71, $72, $73, $74, $75, $76, $77, $78, $79, $80, $81, $82, \
+            $83) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)
@@ -221,41 +222,43 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE knee_replacement_surgery_evaluations SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, status = $5, site_name = $6, assessment_date = $7, \
-            assessment_time = $8, knee_side = $9, symptom_duration_months = $10, \
-            pain_at_rest_0_to_10 = $11, pain_on_activity_0_to_10 = $12, night_pain = $13, \
-            prior_knee_surgery = $14, prior_knee_surgery_type = $15, prior_knee_surgery_date \
-            = $16, prior_injury = $17, prior_injury_detail = $18, oks_pain_severity = $19, \
-            oks_washing_and_drying = $20, oks_transport = $21, oks_walking_distance = $22, \
-            oks_pain_sitting_or_lying = $23, oks_limping = $24, oks_kneeling = $25, \
-            oks_night_pain_frequency = $26, oks_pain_interfering_with_work = $27, \
-            oks_giving_way = $28, oks_shopping = $29, oks_stairs = $30, \
-            walking_distance_before_pain = $31, stair_climbing_ability = $32, \
-            stand_from_chair_unaided = $33, walking_aid = $34, flexion_degrees = $35, \
-            extension_deficit_degrees = $36, fixed_flexion_deformity_present = $37, \
-            fixed_flexion_deformity_degrees = $38, coronal_deformity_type = $39, \
-            coronal_deformity_severity = $40, ligament_acl = $41, ligament_pcl = $42, \
-            ligament_mcl = $43, ligament_lcl = $44, patellar_tracking = $45, \
-            quadriceps_strength_mrc = $46, effusion_present = $47, crepitus_present = $48, \
-            weight_bearing_xray_performed = $49, kellgren_lawrence_grade_medial = $50, \
-            kellgren_lawrence_grade_lateral = $51, kellgren_lawrence_grade_patellofemoral = \
-            $52, mri_performed = $53, mri_findings = $54, ct_performed = $55, ct_indication = \
-            $56, physiotherapy_tried = $57, physiotherapy_duration_weeks = $58, \
-            weight_management_advice_given = $59, injection_given = $60, injection_type = \
-            $61, injection_count = $62, injection_response = $63, nsaid_analgesic_trial = \
-            $64, nsaid_analgesic_response = $65, walking_aid_trial = $66, \
-            conservative_measures_exhausted = $67, diabetes_controlled = $68, cardiac_disease \
-            = $69, bleeding_disorder_or_anticoagulant = $70, smoking_status = $71, \
-            general_fitness_note = $72, fbc_done = $73, renal_function_done = $74, \
-            clotting_done = $75, ecg_done = $76, mrsa_screen_done = $77, urinalysis_done = \
-            $78, risks_benefits_discussed = $79, realistic_expectations_discussed = $80, \
-            patient_decision_aid_given = $81, interpreter_required = $82, plan_recommendation \
-            = $83, target_list_date = $84, responsible_surgeon = $85, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            "UPDATE knee_replacement_surgery_evaluations SET patient_id = $2, \
+            clinician_id = $3, status = $4, site_name = $5, assessment_date = $6, \
+            assessment_time = $7, knee_side = $8, symptom_duration_months = $9, \
+            pain_at_rest_0_to_10 = $10, pain_on_activity_0_to_10 = $11, night_pain = \
+            $12, prior_knee_surgery = $13, prior_knee_surgery_type = $14, \
+            prior_knee_surgery_date = $15, prior_injury = $16, prior_injury_detail = \
+            $17, oks_pain_severity = $18, oks_washing_and_drying = $19, oks_transport = \
+            $20, oks_walking_distance = $21, oks_pain_sitting_or_lying = $22, \
+            oks_limping = $23, oks_kneeling = $24, oks_night_pain_frequency = $25, \
+            oks_pain_interfering_with_work = $26, oks_giving_way = $27, oks_shopping = \
+            $28, oks_stairs = $29, walking_distance_before_pain = $30, \
+            stair_climbing_ability = $31, stand_from_chair_unaided = $32, walking_aid = \
+            $33, flexion_degrees = $34, extension_deficit_degrees = $35, \
+            fixed_flexion_deformity_present = $36, fixed_flexion_deformity_degrees = \
+            $37, coronal_deformity_type = $38, coronal_deformity_severity = $39, \
+            ligament_acl = $40, ligament_pcl = $41, ligament_mcl = $42, ligament_lcl = \
+            $43, patellar_tracking = $44, quadriceps_strength_mrc = $45, \
+            effusion_present = $46, crepitus_present = $47, \
+            weight_bearing_xray_performed = $48, kellgren_lawrence_grade_medial = $49, \
+            kellgren_lawrence_grade_lateral = $50, \
+            kellgren_lawrence_grade_patellofemoral = $51, mri_performed = $52, \
+            mri_findings = $53, ct_performed = $54, ct_indication = $55, \
+            physiotherapy_tried = $56, physiotherapy_duration_weeks = $57, \
+            weight_management_advice_given = $58, injection_given = $59, injection_type \
+            = $60, injection_count = $61, injection_response = $62, \
+            nsaid_analgesic_trial = $63, nsaid_analgesic_response = $64, \
+            walking_aid_trial = $65, conservative_measures_exhausted = $66, \
+            diabetes_controlled = $67, cardiac_disease = $68, \
+            bleeding_disorder_or_anticoagulant = $69, smoking_status = $70, \
+            general_fitness_note = $71, fbc_done = $72, renal_function_done = $73, \
+            clotting_done = $74, ecg_done = $75, mrsa_screen_done = $76, urinalysis_done \
+            = $77, risks_benefits_discussed = $78, realistic_expectations_discussed = \
+            $79, patient_decision_aid_given = $80, interpreter_required = $81, \
+            plan_recommendation = $82, target_list_date = $83, responsible_surgeon = \
+            $84, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)

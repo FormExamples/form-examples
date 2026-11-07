@@ -12,8 +12,6 @@ use crate::models::medical_device_assessment_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    /// Deleted at.
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Medical device assessment ID.
     pub medical_device_assessment_id: Uuid,
     /// Computed device class.
@@ -42,13 +40,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO medical_device_assessment_grades (deleted_at, \
-            medical_device_assessment_id, computed_device_class, final_device_class, \
-            class_suffix, override_reason, conformity_route, determining_rule, \
-            regulatory_readiness, assessor_notes, signed_at, graded_at) VALUES ($1, $2, $3, \
-            $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *",
+            "INSERT INTO medical_device_assessment_grades (medical_device_assessment_id, \
+            computed_device_class, final_device_class, class_suffix, override_reason, \
+            conformity_route, determining_rule, regulatory_readiness, assessor_notes, \
+            signed_at, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.medical_device_assessment_id)
         .bind(&self.computed_device_class)
         .bind(&self.final_device_class)
@@ -67,14 +64,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE medical_device_assessment_grades SET deleted_at = $2, \
-            medical_device_assessment_id = $3, computed_device_class = $4, final_device_class \
-            = $5, class_suffix = $6, override_reason = $7, conformity_route = $8, \
-            determining_rule = $9, regulatory_readiness = $10, assessor_notes = $11, \
-            signed_at = $12, graded_at = $13, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE medical_device_assessment_grades SET medical_device_assessment_id = \
+            $2, computed_device_class = $3, final_device_class = $4, class_suffix = $5, \
+            override_reason = $6, conformity_route = $7, determining_rule = $8, \
+            regulatory_readiness = $9, assessor_notes = $10, signed_at = $11, graded_at \
+            = $12, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.medical_device_assessment_id)
         .bind(&self.computed_device_class)
         .bind(&self.final_device_class)

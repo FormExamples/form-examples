@@ -9,7 +9,6 @@ use crate::models::colonoscopy_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -45,18 +44,18 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO colonoscopy_test_results (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO colonoscopy_test_results (patient_id, clinician_id, \
             originating_request_reference, report_status, performed_date, reported_date, \
             procedure, extent_reached, bowel_preparation_quality, sedation_used, \
-            clinical_history, polyps_found, mass_lesion, diverticulosis, inflammation_ibd, \
-            angiodysplasia, bleeding_source_identified, normal_examination, polyp_count, \
-            largest_polyp_mm, biopsy_taken, polypectomy_performed, complication, \
-            findings_narrative, impression, reporting_category, recommended_follow_up, \
-            critical_result_communicated, reported_to) VALUES ($1, $2, $3, $4, $5, $6, $7, \
-            $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, \
-            $24, $25, $26, $27, $28, $29, $30) RETURNING *",
+            clinical_history, polyps_found, mass_lesion, diverticulosis, \
+            inflammation_ibd, angiodysplasia, bleeding_source_identified, \
+            normal_examination, polyp_count, largest_polyp_mm, biopsy_taken, \
+            polypectomy_performed, complication, findings_narrative, impression, \
+            reporting_category, recommended_follow_up, critical_result_communicated, \
+            reported_to) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, \
+            $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, \
+            $29) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -93,20 +92,19 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE colonoscopy_test_results SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, originating_request_reference = $5, report_status = $6, \
-            performed_date = $7, reported_date = $8, procedure = $9, extent_reached = $10, \
-            bowel_preparation_quality = $11, sedation_used = $12, clinical_history = $13, \
-            polyps_found = $14, mass_lesion = $15, diverticulosis = $16, inflammation_ibd = \
-            $17, angiodysplasia = $18, bleeding_source_identified = $19, normal_examination = \
-            $20, polyp_count = $21, largest_polyp_mm = $22, biopsy_taken = $23, \
-            polypectomy_performed = $24, complication = $25, findings_narrative = $26, \
-            impression = $27, reporting_category = $28, recommended_follow_up = $29, \
-            critical_result_communicated = $30, reported_to = $31, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE colonoscopy_test_results SET patient_id = $2, clinician_id = $3, \
+            originating_request_reference = $4, report_status = $5, performed_date = $6, \
+            reported_date = $7, procedure = $8, extent_reached = $9, \
+            bowel_preparation_quality = $10, sedation_used = $11, clinical_history = \
+            $12, polyps_found = $13, mass_lesion = $14, diverticulosis = $15, \
+            inflammation_ibd = $16, angiodysplasia = $17, bleeding_source_identified = \
+            $18, normal_examination = $19, polyp_count = $20, largest_polyp_mm = $21, \
+            biopsy_taken = $22, polypectomy_performed = $23, complication = $24, \
+            findings_narrative = $25, impression = $26, reporting_category = $27, \
+            recommended_follow_up = $28, critical_result_communicated = $29, reported_to \
+            = $30, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

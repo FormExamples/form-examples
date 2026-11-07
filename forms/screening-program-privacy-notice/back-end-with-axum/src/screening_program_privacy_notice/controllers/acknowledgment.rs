@@ -9,7 +9,6 @@ use crate::models::acknowledgments::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub confirmed: bool,
     pub full_name: String,
@@ -20,10 +19,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO acknowledgments (deleted_at, patient_id, confirmed, full_name, \
-            acknowledged_date) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+            "INSERT INTO acknowledgments (patient_id, confirmed, full_name, \
+            acknowledged_date) VALUES ($1, $2, $3, $4) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.confirmed)
         .bind(&self.full_name)
@@ -35,12 +33,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE acknowledgments SET deleted_at = $2, patient_id = $3, confirmed = $4, \
-            full_name = $5, acknowledged_date = $6, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE acknowledgments SET patient_id = $2, confirmed = $3, full_name = $4, \
+            acknowledged_date = $5, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.confirmed)
         .bind(&self.full_name)

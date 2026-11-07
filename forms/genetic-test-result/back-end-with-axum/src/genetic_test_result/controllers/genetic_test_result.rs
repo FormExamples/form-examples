@@ -9,7 +9,6 @@ use crate::models::genetic_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -42,18 +41,17 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO genetic_test_results (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO genetic_test_results (patient_id, clinician_id, \
             originating_request_reference, report_status, performed_date, reported_date, \
             test_type, genes_tested, sample_type, clinical_history, inheritance_pattern, \
-            variants_detected, variant_classification, zygosity, pathogenic_variant_found, \
-            vus_found, carrier_status_positive, secondary_finding, \
-            no_clinically_significant_variant, interpretation, impression, \
-            reporting_category, recommended_cascade_testing, recommended_follow_up, \
-            critical_result_communicated, reported_to) VALUES ($1, $2, $3, $4, $5, $6, $7, \
-            $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, \
-            $24, $25, $26, $27) RETURNING *",
+            variants_detected, variant_classification, zygosity, \
+            pathogenic_variant_found, vus_found, carrier_status_positive, \
+            secondary_finding, no_clinically_significant_variant, interpretation, \
+            impression, reporting_category, recommended_cascade_testing, \
+            recommended_follow_up, critical_result_communicated, reported_to) VALUES \
+            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, \
+            $18, $19, $20, $21, $22, $23, $24, $25, $26) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -87,19 +85,19 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE genetic_test_results SET deleted_at = $2, patient_id = $3, clinician_id = \
-            $4, originating_request_reference = $5, report_status = $6, performed_date = $7, \
-            reported_date = $8, test_type = $9, genes_tested = $10, sample_type = $11, \
-            clinical_history = $12, inheritance_pattern = $13, variants_detected = $14, \
-            variant_classification = $15, zygosity = $16, pathogenic_variant_found = $17, \
-            vus_found = $18, carrier_status_positive = $19, secondary_finding = $20, \
-            no_clinically_significant_variant = $21, interpretation = $22, impression = $23, \
-            reporting_category = $24, recommended_cascade_testing = $25, \
-            recommended_follow_up = $26, critical_result_communicated = $27, reported_to = \
-            $28, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE genetic_test_results SET patient_id = $2, clinician_id = $3, \
+            originating_request_reference = $4, report_status = $5, performed_date = $6, \
+            reported_date = $7, test_type = $8, genes_tested = $9, sample_type = $10, \
+            clinical_history = $11, inheritance_pattern = $12, variants_detected = $13, \
+            variant_classification = $14, zygosity = $15, pathogenic_variant_found = \
+            $16, vus_found = $17, carrier_status_positive = $18, secondary_finding = \
+            $19, no_clinically_significant_variant = $20, interpretation = $21, \
+            impression = $22, reporting_category = $23, recommended_cascade_testing = \
+            $24, recommended_follow_up = $25, critical_result_communicated = $26, \
+            reported_to = $27, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

@@ -115,18 +115,19 @@ impl Params {
         sqlx::query_as(
             "UPDATE child_safeguarding_referrals SET patient_id = $2, clinician_id = $3, \
             referrer_organisation = $4, referred_at = $5, relationship_to_child = $6, \
-            child_age = $7, child_setting = $8, child_reference = $9, child_ethnicity = $10, \
-            child_first_language = $11, child_disability = $12, carers = $13, \
+            child_age = $7, child_setting = $8, child_reference = $9, child_ethnicity = \
+            $10, child_first_language = $11, child_disability = $12, carers = $13, \
             household_members = $14, other_children = $15, professionals_involved = $16, \
             concern_description = $17, concern_onset = $18, child_disclosed = $19, \
-            referrer_observations = $20, primary_category = $21, additional_categories = $22, \
-            presenting_evidence = $23, immediate_danger = $24, child_whereabouts = $25, \
-            who_with_child = $26, alleged_person_in_contact = $27, other_children_at_risk = \
-            $28, consent_sought = $29, consent_status = $30, sharing_basis_without_consent = \
-            $31, family_aware = $32, unsafe_to_inform_reason = $33, agencies_contacted = $34, \
+            referrer_observations = $20, primary_category = $21, additional_categories = \
+            $22, presenting_evidence = $23, immediate_danger = $24, child_whereabouts = \
+            $25, who_with_child = $26, alleged_person_in_contact = $27, \
+            other_children_at_risk = $28, consent_sought = $29, consent_status = $30, \
+            sharing_basis_without_consent = $31, family_aware = $32, \
+            unsafe_to_inform_reason = $33, agencies_contacted = $34, \
             strategy_discussion_held = $35, previous_safeguarding_history = $36, \
-            requested_action = $37, referrer_declaration = $38, notes = $39, updated_at = \
-            now() WHERE id = $1 RETURNING *",
+            requested_action = $37, referrer_declaration = $38, notes = $39, updated_at \
+            = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

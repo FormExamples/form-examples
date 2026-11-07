@@ -9,7 +9,6 @@ use crate::models::quality_goals::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub arc42_documentation_id: Uuid,
     pub ordinal: i32,
     pub name: String,
@@ -21,10 +20,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO quality_goals (deleted_at, arc42_documentation_id, ordinal, name, \
-            priority, scenario) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+            "INSERT INTO quality_goals (arc42_documentation_id, ordinal, name, priority, \
+            scenario) VALUES ($1, $2, $3, $4, $5) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.arc42_documentation_id)
         .bind(self.ordinal)
         .bind(&self.name)
@@ -37,12 +35,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE quality_goals SET deleted_at = $2, arc42_documentation_id = $3, ordinal = \
-            $4, name = $5, priority = $6, scenario = $7, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE quality_goals SET arc42_documentation_id = $2, ordinal = $3, name = \
+            $4, priority = $5, scenario = $6, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.arc42_documentation_id)
         .bind(self.ordinal)
         .bind(&self.name)

@@ -9,7 +9,6 @@ use crate::models::patient_medications::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub medication_id: Uuid,
     pub dose: String,
@@ -32,13 +31,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO patient_medications (deleted_at, patient_id, medication_id, dose, \
-            frequency, route, indication, started_on, prescribed_by, adherence, \
-            hold_required, hold_start_before_days, restart_after_days, hold_plan_agreed, \
-            hold_plan_agreed_by, hold_plan_agreed_on, notes) VALUES ($1, $2, $3, $4, $5, $6, \
-            $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING *",
+            "INSERT INTO patient_medications (patient_id, medication_id, dose, frequency, \
+            route, indication, started_on, prescribed_by, adherence, hold_required, \
+            hold_start_before_days, restart_after_days, hold_plan_agreed, \
+            hold_plan_agreed_by, hold_plan_agreed_on, notes) VALUES ($1, $2, $3, $4, $5, \
+            $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.medication_id)
         .bind(&self.dose)
@@ -62,15 +60,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE patient_medications SET deleted_at = $2, patient_id = $3, medication_id = \
-            $4, dose = $5, frequency = $6, route = $7, indication = $8, started_on = $9, \
-            prescribed_by = $10, adherence = $11, hold_required = $12, hold_start_before_days \
-            = $13, restart_after_days = $14, hold_plan_agreed = $15, hold_plan_agreed_by = \
-            $16, hold_plan_agreed_on = $17, notes = $18, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE patient_medications SET patient_id = $2, medication_id = $3, dose = \
+            $4, frequency = $5, route = $6, indication = $7, started_on = $8, \
+            prescribed_by = $9, adherence = $10, hold_required = $11, \
+            hold_start_before_days = $12, restart_after_days = $13, hold_plan_agreed = \
+            $14, hold_plan_agreed_by = $15, hold_plan_agreed_on = $16, notes = $17, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.medication_id)
         .bind(&self.dose)

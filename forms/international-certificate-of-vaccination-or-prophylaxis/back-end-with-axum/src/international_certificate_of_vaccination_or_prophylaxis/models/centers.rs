@@ -12,6 +12,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     pub id: Uuid,
+    #[serde(skip)]
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub name: String,
     pub who_designation_reference: String,
@@ -36,12 +37,15 @@ impl Model {
     /// Propagates the database error.
     pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Self>, i64)> {
         let (limit, offset) = crate::support::paging::bounds(page);
-        let rows = sqlx::query_as("SELECT * FROM centers ORDER BY id LIMIT $1 OFFSET $2")
-            .bind(limit)
-            .bind(offset)
-            .fetch_all(db)
-            .await?;
-        let total = sqlx::query_scalar("SELECT COUNT(*) FROM centers")
+        let rows = sqlx::query_as(
+            "SELECT * FROM centers WHERE deleted_at IS NULL ORDER BY id LIMIT $1 OFFSET \
+            $2",
+        )
+        .bind(limit)
+        .bind(offset)
+        .fetch_all(db)
+        .await?;
+        let total = sqlx::query_scalar("SELECT COUNT(*) FROM centers WHERE deleted_at IS NULL")
             .fetch_one(db)
             .await?;
         Ok((rows, total))
@@ -53,7 +57,7 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn find_by_id(db: &PgPool, id: Uuid) -> sqlx::Result<Option<Self>> {
-        sqlx::query_as("SELECT * FROM centers WHERE id = $1")
+        sqlx::query_as("SELECT * FROM centers WHERE id = $1 AND deleted_at IS NULL")
             .bind(id)
             .fetch_optional(db)
             .await
@@ -65,10 +69,21 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn delete(db: &PgPool, id: Uuid) -> sqlx::Result<()> {
-        sqlx::query("DELETE FROM centers WHERE id = $1")
-            .bind(id)
-            .execute(db)
-            .await?;
+        sqlx::query(
+            "WITH target AS (UPDATE centers SET deleted_at = now(), updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING id), child1 AS (UPDATE \
+            international_certificate_of_vaccination_or_prophylaxes SET deleted_at = \
+            now(), updated_at = now() WHERE center_id IN (SELECT id FROM target) AND \
+            deleted_at IS NULL RETURNING id), child2 AS (UPDATE \
+            international_certificate_of_vaccination_or_prophylaxis_entries SET \
+            deleted_at = now(), updated_at = now() WHERE \
+            international_certificate_of_vaccination_or_prophylaxis_id IN (SELECT id \
+            FROM child1) AND deleted_at IS NULL RETURNING id) SELECT count(*) FROM \
+            target",
+        )
+        .bind(id)
+        .execute(db)
+        .await?;
         Ok(())
     }
 }

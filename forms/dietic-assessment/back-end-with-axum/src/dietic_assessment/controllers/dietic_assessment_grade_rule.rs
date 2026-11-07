@@ -9,7 +9,6 @@ use crate::models::dietic_assessment_grade_rules::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub dietic_assessment_grade_id: Uuid,
     pub rule_id: String,
     pub instrument: String,
@@ -24,11 +23,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO dietic_assessment_grade_rules (deleted_at, \
-            dietic_assessment_grade_id, rule_id, instrument, component, score, band, \
-            category, description) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
+            "INSERT INTO dietic_assessment_grade_rules (dietic_assessment_grade_id, \
+            rule_id, instrument, component, score, band, category, description) VALUES \
+            ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.dietic_assessment_grade_id)
         .bind(&self.rule_id)
         .bind(&self.instrument)
@@ -44,13 +42,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE dietic_assessment_grade_rules SET deleted_at = $2, \
-            dietic_assessment_grade_id = $3, rule_id = $4, instrument = $5, component = $6, \
-            score = $7, band = $8, category = $9, description = $10, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE dietic_assessment_grade_rules SET dietic_assessment_grade_id = $2, \
+            rule_id = $3, instrument = $4, component = $5, score = $6, band = $7, \
+            category = $8, description = $9, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.dietic_assessment_grade_id)
         .bind(&self.rule_id)
         .bind(&self.instrument)

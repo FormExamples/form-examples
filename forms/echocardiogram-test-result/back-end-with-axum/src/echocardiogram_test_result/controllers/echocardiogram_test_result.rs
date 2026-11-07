@@ -9,7 +9,6 @@ use crate::models::echocardiogram_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -46,20 +45,19 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO echocardiogram_test_results (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO echocardiogram_test_results (patient_id, clinician_id, \
             originating_request_reference, echo_type, performed_date, reported_date, \
-            report_status, study_quality, clinical_history, lv_ejection_fraction_percent, \
-            lv_function, lv_internal_diameter_diastole_mm, aortic_stenosis, \
-            aortic_regurgitation, mitral_stenosis, mitral_regurgitation, \
-            pulmonary_artery_systolic_pressure_mmhg, lv_hypertrophy, \
-            regional_wall_motion_abnormality, pericardial_effusion, vegetation, \
-            intracardiac_thrombus, normal_study, findings_narrative, \
-            comparison_with_previous, impression, reporting_category, recommended_follow_up, \
-            critical_result_communicated, reported_to) VALUES ($1, $2, $3, $4, $5, $6, $7, \
-            $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, \
-            $24, $25, $26, $27, $28, $29, $30, $31) RETURNING *",
+            report_status, study_quality, clinical_history, \
+            lv_ejection_fraction_percent, lv_function, lv_internal_diameter_diastole_mm, \
+            aortic_stenosis, aortic_regurgitation, mitral_stenosis, \
+            mitral_regurgitation, pulmonary_artery_systolic_pressure_mmhg, \
+            lv_hypertrophy, regional_wall_motion_abnormality, pericardial_effusion, \
+            vegetation, intracardiac_thrombus, normal_study, findings_narrative, \
+            comparison_with_previous, impression, reporting_category, \
+            recommended_follow_up, critical_result_communicated, reported_to) VALUES \
+            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, \
+            $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -97,21 +95,21 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE echocardiogram_test_results SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, originating_request_reference = $5, echo_type = $6, \
-            performed_date = $7, reported_date = $8, report_status = $9, study_quality = $10, \
-            clinical_history = $11, lv_ejection_fraction_percent = $12, lv_function = $13, \
-            lv_internal_diameter_diastole_mm = $14, aortic_stenosis = $15, \
-            aortic_regurgitation = $16, mitral_stenosis = $17, mitral_regurgitation = $18, \
-            pulmonary_artery_systolic_pressure_mmhg = $19, lv_hypertrophy = $20, \
-            regional_wall_motion_abnormality = $21, pericardial_effusion = $22, vegetation = \
-            $23, intracardiac_thrombus = $24, normal_study = $25, findings_narrative = $26, \
-            comparison_with_previous = $27, impression = $28, reporting_category = $29, \
-            recommended_follow_up = $30, critical_result_communicated = $31, reported_to = \
-            $32, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE echocardiogram_test_results SET patient_id = $2, clinician_id = $3, \
+            originating_request_reference = $4, echo_type = $5, performed_date = $6, \
+            reported_date = $7, report_status = $8, study_quality = $9, clinical_history \
+            = $10, lv_ejection_fraction_percent = $11, lv_function = $12, \
+            lv_internal_diameter_diastole_mm = $13, aortic_stenosis = $14, \
+            aortic_regurgitation = $15, mitral_stenosis = $16, mitral_regurgitation = \
+            $17, pulmonary_artery_systolic_pressure_mmhg = $18, lv_hypertrophy = $19, \
+            regional_wall_motion_abnormality = $20, pericardial_effusion = $21, \
+            vegetation = $22, intracardiac_thrombus = $23, normal_study = $24, \
+            findings_narrative = $25, comparison_with_previous = $26, impression = $27, \
+            reporting_category = $28, recommended_follow_up = $29, \
+            critical_result_communicated = $30, reported_to = $31, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

@@ -9,7 +9,6 @@ use crate::models::lpa_lst_choices::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub lpa_id: Uuid,
     pub lst_choice: String,
     pub donor_initialled: String,
@@ -20,10 +19,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO lpa_lst_choices (deleted_at, lpa_id, lst_choice, donor_initialled, \
-            initialled_at) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+            "INSERT INTO lpa_lst_choices (lpa_id, lst_choice, donor_initialled, \
+            initialled_at) VALUES ($1, $2, $3, $4) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.lpa_id)
         .bind(&self.lst_choice)
         .bind(&self.donor_initialled)
@@ -35,12 +33,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE lpa_lst_choices SET deleted_at = $2, lpa_id = $3, lst_choice = $4, \
-            donor_initialled = $5, initialled_at = $6, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE lpa_lst_choices SET lpa_id = $2, lst_choice = $3, donor_initialled = \
+            $4, initialled_at = $5, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.lpa_id)
         .bind(&self.lst_choice)
         .bind(&self.donor_initialled)

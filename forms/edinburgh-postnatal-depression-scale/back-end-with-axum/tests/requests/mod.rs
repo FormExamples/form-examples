@@ -9,3 +9,4 @@ pub mod edinburgh_postnatal_depression_scale_grade;
 pub mod edinburgh_postnatal_depression_scale_grade_flag;
 pub mod edinburgh_postnatal_depression_scale_grade_rule;
 pub mod patient;
+mod soft_delete;

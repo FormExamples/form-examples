@@ -9,7 +9,6 @@ use crate::models::cataract_diagnostic_evaluation_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub cataract_diagnostic_evaluation_id: Uuid,
     pub computed_locs_iii_severity_right: String,
     pub computed_locs_iii_severity_left: String,
@@ -27,14 +26,13 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO cataract_diagnostic_evaluation_grades (deleted_at, \
-            cataract_diagnostic_evaluation_id, computed_locs_iii_severity_right, \
+            "INSERT INTO cataract_diagnostic_evaluation_grades \
+            (cataract_diagnostic_evaluation_id, computed_locs_iii_severity_right, \
             computed_locs_iii_severity_left, computed_surgical_candidacy, \
             final_surgical_candidacy, override_reason, functional_impact_score, \
-            clinician_notes, signed_by_name, signed_at, graded_at) VALUES ($1, $2, $3, $4, \
-            $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *",
+            clinician_notes, signed_by_name, signed_at, graded_at) VALUES ($1, $2, $3, \
+            $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.cataract_diagnostic_evaluation_id)
         .bind(&self.computed_locs_iii_severity_right)
         .bind(&self.computed_locs_iii_severity_left)
@@ -53,15 +51,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE cataract_diagnostic_evaluation_grades SET deleted_at = $2, \
-            cataract_diagnostic_evaluation_id = $3, computed_locs_iii_severity_right = $4, \
-            computed_locs_iii_severity_left = $5, computed_surgical_candidacy = $6, \
-            final_surgical_candidacy = $7, override_reason = $8, functional_impact_score = \
-            $9, clinician_notes = $10, signed_by_name = $11, signed_at = $12, graded_at = \
-            $13, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE cataract_diagnostic_evaluation_grades SET \
+            cataract_diagnostic_evaluation_id = $2, computed_locs_iii_severity_right = \
+            $3, computed_locs_iii_severity_left = $4, computed_surgical_candidacy = $5, \
+            final_surgical_candidacy = $6, override_reason = $7, functional_impact_score \
+            = $8, clinician_notes = $9, signed_by_name = $10, signed_at = $11, graded_at \
+            = $12, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.cataract_diagnostic_evaluation_id)
         .bind(&self.computed_locs_iii_severity_right)
         .bind(&self.computed_locs_iii_severity_left)

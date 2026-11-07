@@ -9,7 +9,6 @@ use crate::models::hernia_diagnostic_evaluation_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub hernia_diagnostic_evaluation_id: Uuid,
     pub hernia_type: String,
     pub hernia_subtype: String,
@@ -30,14 +29,13 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO hernia_diagnostic_evaluation_grades (deleted_at, \
-            hernia_diagnostic_evaluation_id, hernia_type, hernia_subtype, ehs_classification, \
-            ehs_size_grade, reducibility_status, computed_urgency, final_urgency, \
-            override_reason, recommendation, clinician_notes, signed_by_name, signed_at, \
-            graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, \
-            $15) RETURNING *",
+            "INSERT INTO hernia_diagnostic_evaluation_grades \
+            (hernia_diagnostic_evaluation_id, hernia_type, hernia_subtype, \
+            ehs_classification, ehs_size_grade, reducibility_status, computed_urgency, \
+            final_urgency, override_reason, recommendation, clinician_notes, \
+            signed_by_name, signed_at, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, \
+            $8, $9, $10, $11, $12, $13, $14) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.hernia_diagnostic_evaluation_id)
         .bind(&self.hernia_type)
         .bind(&self.hernia_subtype)
@@ -59,15 +57,15 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE hernia_diagnostic_evaluation_grades SET deleted_at = $2, \
-            hernia_diagnostic_evaluation_id = $3, hernia_type = $4, hernia_subtype = $5, \
-            ehs_classification = $6, ehs_size_grade = $7, reducibility_status = $8, \
-            computed_urgency = $9, final_urgency = $10, override_reason = $11, recommendation \
-            = $12, clinician_notes = $13, signed_by_name = $14, signed_at = $15, graded_at = \
-            $16, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE hernia_diagnostic_evaluation_grades SET \
+            hernia_diagnostic_evaluation_id = $2, hernia_type = $3, hernia_subtype = $4, \
+            ehs_classification = $5, ehs_size_grade = $6, reducibility_status = $7, \
+            computed_urgency = $8, final_urgency = $9, override_reason = $10, \
+            recommendation = $11, clinician_notes = $12, signed_by_name = $13, signed_at \
+            = $14, graded_at = $15, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.hernia_diagnostic_evaluation_id)
         .bind(&self.hernia_type)
         .bind(&self.hernia_subtype)

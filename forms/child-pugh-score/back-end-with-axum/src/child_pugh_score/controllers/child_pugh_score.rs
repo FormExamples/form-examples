@@ -9,7 +9,6 @@ use crate::models::child_pugh_scores::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
     pub clinician_name: String,
@@ -33,14 +32,13 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO child_pugh_scores (deleted_at, patient_id, clinician_id, \
-            clinician_name, clinician_role, assessed_at, care_setting, aetiology, \
-            patient_identifier, age_band, sex, total_bilirubin_umol_l, serum_albumin_g_l, \
-            inr, prothrombin_time_seconds, ascites, hepatic_encephalopathy, clinical_note) \
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, \
-            $17, $18) RETURNING *",
+            "INSERT INTO child_pugh_scores (patient_id, clinician_id, clinician_name, \
+            clinician_role, assessed_at, care_setting, aetiology, patient_identifier, \
+            age_band, sex, total_bilirubin_umol_l, serum_albumin_g_l, inr, \
+            prothrombin_time_seconds, ascites, hepatic_encephalopathy, clinical_note) \
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, \
+            $16, $17) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.clinician_name)
@@ -65,15 +63,15 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE child_pugh_scores SET deleted_at = $2, patient_id = $3, clinician_id = $4, \
-            clinician_name = $5, clinician_role = $6, assessed_at = $7, care_setting = $8, \
-            aetiology = $9, patient_identifier = $10, age_band = $11, sex = $12, \
-            total_bilirubin_umol_l = $13, serum_albumin_g_l = $14, inr = $15, \
-            prothrombin_time_seconds = $16, ascites = $17, hepatic_encephalopathy = $18, \
-            clinical_note = $19, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE child_pugh_scores SET patient_id = $2, clinician_id = $3, \
+            clinician_name = $4, clinician_role = $5, assessed_at = $6, care_setting = \
+            $7, aetiology = $8, patient_identifier = $9, age_band = $10, sex = $11, \
+            total_bilirubin_umol_l = $12, serum_albumin_g_l = $13, inr = $14, \
+            prothrombin_time_seconds = $15, ascites = $16, hepatic_encephalopathy = $17, \
+            clinical_note = $18, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.clinician_name)

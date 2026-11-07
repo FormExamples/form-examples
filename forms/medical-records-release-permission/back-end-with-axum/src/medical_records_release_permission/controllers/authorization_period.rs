@@ -9,7 +9,6 @@ use crate::models::authorization_periods::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub release_form_id: Uuid,
     pub start_date: Date,
     pub end_date: Date,
@@ -20,10 +19,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO authorization_periods (deleted_at, release_form_id, start_date, \
-            end_date, single_use) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+            "INSERT INTO authorization_periods (release_form_id, start_date, end_date, \
+            single_use) VALUES ($1, $2, $3, $4) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.release_form_id)
         .bind(self.start_date)
         .bind(self.end_date)
@@ -35,12 +33,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE authorization_periods SET deleted_at = $2, release_form_id = $3, \
-            start_date = $4, end_date = $5, single_use = $6, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE authorization_periods SET release_form_id = $2, start_date = $3, \
+            end_date = $4, single_use = $5, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.release_form_id)
         .bind(self.start_date)
         .bind(self.end_date)

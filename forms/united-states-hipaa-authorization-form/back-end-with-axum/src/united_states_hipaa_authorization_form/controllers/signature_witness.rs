@@ -9,7 +9,6 @@ use crate::models::signature_witnesses::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub hipaa_authorization_id: Uuid,
     pub individual_signature_confirmed: String,
     pub individual_signature_image_uri: String,
@@ -29,14 +28,14 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO signature_witnesses (deleted_at, hipaa_authorization_id, \
-            individual_signature_confirmed, individual_signature_image_uri, signature_date, \
-            signed_at_location, parent_guardian_co_signature_required, parent_guardian_name, \
-            parent_guardian_signature_confirmed, parent_guardian_signature_date, \
-            witness_name, witness_signature_confirmed, witness_date, witness_role) VALUES \
-            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING *",
+            "INSERT INTO signature_witnesses (hipaa_authorization_id, \
+            individual_signature_confirmed, individual_signature_image_uri, \
+            signature_date, signed_at_location, parent_guardian_co_signature_required, \
+            parent_guardian_name, parent_guardian_signature_confirmed, \
+            parent_guardian_signature_date, witness_name, witness_signature_confirmed, \
+            witness_date, witness_role) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, \
+            $11, $12, $13) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.hipaa_authorization_id)
         .bind(&self.individual_signature_confirmed)
         .bind(&self.individual_signature_image_uri)
@@ -57,16 +56,16 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE signature_witnesses SET deleted_at = $2, hipaa_authorization_id = $3, \
-            individual_signature_confirmed = $4, individual_signature_image_uri = $5, \
-            signature_date = $6, signed_at_location = $7, \
-            parent_guardian_co_signature_required = $8, parent_guardian_name = $9, \
-            parent_guardian_signature_confirmed = $10, parent_guardian_signature_date = $11, \
-            witness_name = $12, witness_signature_confirmed = $13, witness_date = $14, \
-            witness_role = $15, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE signature_witnesses SET hipaa_authorization_id = $2, \
+            individual_signature_confirmed = $3, individual_signature_image_uri = $4, \
+            signature_date = $5, signed_at_location = $6, \
+            parent_guardian_co_signature_required = $7, parent_guardian_name = $8, \
+            parent_guardian_signature_confirmed = $9, parent_guardian_signature_date = \
+            $10, witness_name = $11, witness_signature_confirmed = $12, witness_date = \
+            $13, witness_role = $14, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.hipaa_authorization_id)
         .bind(&self.individual_signature_confirmed)
         .bind(&self.individual_signature_image_uri)

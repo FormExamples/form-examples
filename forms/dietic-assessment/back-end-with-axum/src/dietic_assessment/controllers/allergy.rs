@@ -9,7 +9,6 @@ use crate::models::allergies::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub scientific_name: String,
     pub european_union_name: String,
     pub united_states_name: String,
@@ -22,11 +21,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO allergies (deleted_at, scientific_name, european_union_name, \
-            united_states_name, cosmetic_name, kind, is_regulated_food_allergen) VALUES ($1, \
-            $2, $3, $4, $5, $6, $7) RETURNING *",
+            "INSERT INTO allergies (scientific_name, european_union_name, \
+            united_states_name, cosmetic_name, kind, is_regulated_food_allergen) VALUES \
+            ($1, $2, $3, $4, $5, $6) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.scientific_name)
         .bind(&self.european_union_name)
         .bind(&self.united_states_name)
@@ -40,12 +38,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE allergies SET deleted_at = $2, scientific_name = $3, european_union_name = \
-            $4, united_states_name = $5, cosmetic_name = $6, kind = $7, \
-            is_regulated_food_allergen = $8, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE allergies SET scientific_name = $2, european_union_name = $3, \
+            united_states_name = $4, cosmetic_name = $5, kind = $6, \
+            is_regulated_food_allergen = $7, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.scientific_name)
         .bind(&self.european_union_name)
         .bind(&self.united_states_name)

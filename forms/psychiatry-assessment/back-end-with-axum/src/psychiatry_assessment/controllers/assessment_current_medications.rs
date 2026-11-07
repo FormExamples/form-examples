@@ -9,7 +9,6 @@ use crate::models::assessment_current_medications::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub takes_psychiatric_medications: String,
     pub takes_other_medications: String,
@@ -27,13 +26,13 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO assessment_current_medications (deleted_at, assessment_id, \
-            takes_psychiatric_medications, takes_other_medications, medication_adherence, \
-            adherence_barriers, side_effects, clozapine_registered, depot_injection, \
-            depot_details, adverse_drug_reactions, additional_notes) VALUES ($1, $2, $3, $4, \
-            $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *",
+            "INSERT INTO assessment_current_medications (assessment_id, \
+            takes_psychiatric_medications, takes_other_medications, \
+            medication_adherence, adherence_barriers, side_effects, \
+            clozapine_registered, depot_injection, depot_details, \
+            adverse_drug_reactions, additional_notes) VALUES ($1, $2, $3, $4, $5, $6, \
+            $7, $8, $9, $10, $11) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.takes_psychiatric_medications)
         .bind(&self.takes_other_medications)
@@ -52,15 +51,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE assessment_current_medications SET deleted_at = $2, assessment_id = $3, \
-            takes_psychiatric_medications = $4, takes_other_medications = $5, \
-            medication_adherence = $6, adherence_barriers = $7, side_effects = $8, \
-            clozapine_registered = $9, depot_injection = $10, depot_details = $11, \
-            adverse_drug_reactions = $12, additional_notes = $13, updated_at = now() WHERE id \
-            = $1 RETURNING *",
+            "UPDATE assessment_current_medications SET assessment_id = $2, \
+            takes_psychiatric_medications = $3, takes_other_medications = $4, \
+            medication_adherence = $5, adherence_barriers = $6, side_effects = $7, \
+            clozapine_registered = $8, depot_injection = $9, depot_details = $10, \
+            adverse_drug_reactions = $11, additional_notes = $12, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.takes_psychiatric_medications)
         .bind(&self.takes_other_medications)

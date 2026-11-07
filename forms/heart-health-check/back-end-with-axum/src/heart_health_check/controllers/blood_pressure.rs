@@ -9,7 +9,6 @@ use crate::models::blood_pressures::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub systolic_bp: Option<i32>,
     pub systolic_bp_sd: Option<f64>,
@@ -22,11 +21,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO blood_pressures (deleted_at, assessment_id, systolic_bp, \
-            systolic_bp_sd, diastolic_bp, on_bp_treatment, number_of_bp_medications) VALUES \
-            ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+            "INSERT INTO blood_pressures (assessment_id, systolic_bp, systolic_bp_sd, \
+            diastolic_bp, on_bp_treatment, number_of_bp_medications) VALUES ($1, $2, $3, \
+            $4, $5, $6) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.systolic_bp)
         .bind(self.systolic_bp_sd)
@@ -40,12 +38,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE blood_pressures SET deleted_at = $2, assessment_id = $3, systolic_bp = $4, \
-            systolic_bp_sd = $5, diastolic_bp = $6, on_bp_treatment = $7, \
-            number_of_bp_medications = $8, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE blood_pressures SET assessment_id = $2, systolic_bp = $3, \
+            systolic_bp_sd = $4, diastolic_bp = $5, on_bp_treatment = $6, \
+            number_of_bp_medications = $7, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.systolic_bp)
         .bind(self.systolic_bp_sd)

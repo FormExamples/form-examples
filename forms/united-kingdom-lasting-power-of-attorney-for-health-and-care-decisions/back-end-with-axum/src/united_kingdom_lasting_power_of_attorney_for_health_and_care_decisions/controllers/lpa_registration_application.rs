@@ -9,7 +9,6 @@ use crate::models::lpa_registration_applications::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub lpa_id: Uuid,
     pub applicant_role: String,
     pub applicant_signed_at: Option<DateTimeWithTimeZone>,
@@ -24,12 +23,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO lpa_registration_applications (deleted_at, lpa_id, applicant_role, \
+            "INSERT INTO lpa_registration_applications (lpa_id, applicant_role, \
             applicant_signed_at, fee_amount_pounds, fee_remission, fee_remission_reason, \
-            submitted_at, submission_channel) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) \
+            submitted_at, submission_channel) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) \
             RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.lpa_id)
         .bind(&self.applicant_role)
         .bind(self.applicant_signed_at)
@@ -45,13 +43,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE lpa_registration_applications SET deleted_at = $2, lpa_id = $3, \
-            applicant_role = $4, applicant_signed_at = $5, fee_amount_pounds = $6, \
-            fee_remission = $7, fee_remission_reason = $8, submitted_at = $9, \
-            submission_channel = $10, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE lpa_registration_applications SET lpa_id = $2, applicant_role = $3, \
+            applicant_signed_at = $4, fee_amount_pounds = $5, fee_remission = $6, \
+            fee_remission_reason = $7, submitted_at = $8, submission_channel = $9, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.lpa_id)
         .bind(&self.applicant_role)
         .bind(self.applicant_signed_at)

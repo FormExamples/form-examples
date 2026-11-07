@@ -9,7 +9,6 @@ use crate::models::signature_consents::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub release_form_id: Uuid,
     pub patient_signature_confirmed: String,
     pub signature_date: Option<Date>,
@@ -23,12 +22,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO signature_consents (deleted_at, release_form_id, \
+            "INSERT INTO signature_consents (release_form_id, \
             patient_signature_confirmed, signature_date, witness_name, \
-            witness_signature_confirmed, witness_date, parent_guardian_name) VALUES ($1, $2, \
-            $3, $4, $5, $6, $7, $8) RETURNING *",
+            witness_signature_confirmed, witness_date, parent_guardian_name) VALUES ($1, \
+            $2, $3, $4, $5, $6, $7) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.release_form_id)
         .bind(&self.patient_signature_confirmed)
         .bind(self.signature_date)
@@ -43,13 +41,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE signature_consents SET deleted_at = $2, release_form_id = $3, \
-            patient_signature_confirmed = $4, signature_date = $5, witness_name = $6, \
-            witness_signature_confirmed = $7, witness_date = $8, parent_guardian_name = $9, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE signature_consents SET release_form_id = $2, \
+            patient_signature_confirmed = $3, signature_date = $4, witness_name = $5, \
+            witness_signature_confirmed = $6, witness_date = $7, parent_guardian_name = \
+            $8, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.release_form_id)
         .bind(&self.patient_signature_confirmed)
         .bind(self.signature_date)

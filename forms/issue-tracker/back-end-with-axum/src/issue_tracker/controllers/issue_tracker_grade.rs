@@ -9,7 +9,6 @@ use crate::models::issue_tracker_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub issue_tracker_id: Uuid,
     pub score_by_priority_rank: Option<i32>,
     pub score_by_severity_of_impact: Option<i32>,
@@ -32,15 +31,15 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO issue_tracker_grades (deleted_at, issue_tracker_id, \
-            score_by_priority_rank, score_by_severity_of_impact, \
-            score_by_magnitude_of_damage, score_by_harm_grade, score_by_failure_condition, \
+            "INSERT INTO issue_tracker_grades (issue_tracker_id, score_by_priority_rank, \
+            score_by_severity_of_impact, score_by_magnitude_of_damage, \
+            score_by_harm_grade, score_by_failure_condition, \
             score_by_moscow_requirement, score_by_frequency_percent, \
             computed_composite_priority, final_composite_priority, override_reason, \
-            recommendation, triage_notes, signed_by, signed_at, graded_at) VALUES ($1, $2, \
-            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING *",
+            recommendation, triage_notes, signed_by, signed_at, graded_at) VALUES ($1, \
+            $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING \
+            *",
         )
-        .bind(self.deleted_at)
         .bind(self.issue_tracker_id)
         .bind(self.score_by_priority_rank)
         .bind(self.score_by_severity_of_impact)
@@ -64,17 +63,16 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE issue_tracker_grades SET deleted_at = $2, issue_tracker_id = $3, \
-            score_by_priority_rank = $4, score_by_severity_of_impact = $5, \
-            score_by_magnitude_of_damage = $6, score_by_harm_grade = $7, \
-            score_by_failure_condition = $8, score_by_moscow_requirement = $9, \
-            score_by_frequency_percent = $10, computed_composite_priority = $11, \
-            final_composite_priority = $12, override_reason = $13, recommendation = $14, \
-            triage_notes = $15, signed_by = $16, signed_at = $17, graded_at = $18, updated_at \
-            = now() WHERE id = $1 RETURNING *",
+            "UPDATE issue_tracker_grades SET issue_tracker_id = $2, \
+            score_by_priority_rank = $3, score_by_severity_of_impact = $4, \
+            score_by_magnitude_of_damage = $5, score_by_harm_grade = $6, \
+            score_by_failure_condition = $7, score_by_moscow_requirement = $8, \
+            score_by_frequency_percent = $9, computed_composite_priority = $10, \
+            final_composite_priority = $11, override_reason = $12, recommendation = $13, \
+            triage_notes = $14, signed_by = $15, signed_at = $16, graded_at = $17, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.issue_tracker_id)
         .bind(self.score_by_priority_rank)
         .bind(self.score_by_severity_of_impact)

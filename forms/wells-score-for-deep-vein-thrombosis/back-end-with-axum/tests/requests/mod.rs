@@ -5,6 +5,7 @@ mod readiness;
 
 pub mod clinician;
 pub mod patient;
+mod soft_delete;
 pub mod wells_score_for_deep_vein_thrombosis;
 pub mod wells_score_for_deep_vein_thrombosis_grade;
 pub mod wells_score_for_deep_vein_thrombosis_grade_flag;

@@ -5,6 +5,7 @@ mod readiness;
 
 pub mod patient;
 pub mod practitioner;
+mod soft_delete;
 pub mod vasc_surgery_waiting_list_card;
 pub mod vasc_surgery_waiting_list_card_appointment;
 pub mod vasc_surgery_waiting_list_card_grade;

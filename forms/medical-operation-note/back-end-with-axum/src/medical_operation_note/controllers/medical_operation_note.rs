@@ -332,38 +332,41 @@ impl Params {
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
             "UPDATE medical_operation_notes SET status = $2, hospital_name = $3, \
-            theatre_number = $4, list_type = $5, case_start_at = $6, anaesthesia_start_at = \
-            $7, knife_to_skin_at = $8, end_of_surgery_at = $9, case_end_at = $10, \
-            consent_status = $11, side_marked = $12, sign_in_completed = $13, \
-            asa_physical_status = $14, pre_operative_diagnosis = $15, \
-            post_operative_diagnosis = $16, indication = $17, urgency = $18, laterality = \
-            $19, anaesthesia_type = $20, airway_management = $21, induction_agent = $22, \
-            maintenance_agent = $23, neuromuscular_blockade = $24, regional_block_description \
-            = $25, invasive_monitoring = $26, intraop_crystalloid_ml = $27, \
-            intraop_colloid_ml = $28, intraop_blood_ml = $29, intraop_urine_ml = $30, \
-            anaesthetic_event = $31, anaesthetic_event_description = $32, patient_position = \
-            $33, pressure_area_protection_notes = $34, prep_solution = $35, drape_type = $36, \
+            theatre_number = $4, list_type = $5, case_start_at = $6, \
+            anaesthesia_start_at = $7, knife_to_skin_at = $8, end_of_surgery_at = $9, \
+            case_end_at = $10, consent_status = $11, side_marked = $12, \
+            sign_in_completed = $13, asa_physical_status = $14, pre_operative_diagnosis \
+            = $15, post_operative_diagnosis = $16, indication = $17, urgency = $18, \
+            laterality = $19, anaesthesia_type = $20, airway_management = $21, \
+            induction_agent = $22, maintenance_agent = $23, neuromuscular_blockade = \
+            $24, regional_block_description = $25, invasive_monitoring = $26, \
+            intraop_crystalloid_ml = $27, intraop_colloid_ml = $28, intraop_blood_ml = \
+            $29, intraop_urine_ml = $30, anaesthetic_event = $31, \
+            anaesthetic_event_description = $32, patient_position = $33, \
+            pressure_area_protection_notes = $34, prep_solution = $35, drape_type = $36, \
             surgical_approach = $37, incision_type = $38, incision_length_cm = $39, \
             table_tilt = $40, tourniquet_used = $41, tourniquet_site = $42, \
-            tourniquet_pressure_mmhg = $43, tourniquet_on_at = $44, tourniquet_off_at = $45, \
-            converted_to_open = $46, conversion_reason = $47, operative_findings_summary = \
-            $48, pathology_found = $49, anatomical_anomalies = $50, intraop_photographs_taken \
-            = $51, frozen_section_requested = $52, swab_count_first_agreed = $53, \
+            tourniquet_pressure_mmhg = $43, tourniquet_on_at = $44, tourniquet_off_at = \
+            $45, converted_to_open = $46, conversion_reason = $47, \
+            operative_findings_summary = $48, pathology_found = $49, \
+            anatomical_anomalies = $50, intraop_photographs_taken = $51, \
+            frozen_section_requested = $52, swab_count_first_agreed = $53, \
             swab_count_final_agreed = $54, needle_count_first_agreed = $55, \
             needle_count_final_agreed = $56, instrument_count_first_agreed = $57, \
             instrument_count_final_agreed = $58, count_discrepancy_resolution = $59, \
             estimated_blood_loss_ml = $60, transfusion_given = $61, prbc_units = $62, \
             ffp_units = $63, platelet_units = $64, cryoprecipitate_units = $65, \
             cell_salvage_ml = $66, massive_haemorrhage_protocol_activated = $67, \
-            never_event_flagged = $68, never_event_description = $69, equipment_problem = \
-            $70, equipment_problem_description = $71, recovery_destination = $72, \
+            never_event_flagged = $68, never_event_description = $69, equipment_problem \
+            = $70, equipment_problem_description = $71, recovery_destination = $72, \
             monitoring_frequency = $73, iv_fluids_plan = $74, analgesia_plan = $75, \
             antibiotic_plan = $76, vte_prophylaxis_plan = $77, diet_plan = $78, \
             mobilisation_plan = $79, wound_care_plan = $80, follow_up_plan = $81, \
-            special_instructions = $82, sign_out_completed = $83, debrief_completed = $84, \
-            surgeon_override_grade = $85, surgeon_override_reason = $86, attestation_text = \
-            $87, electronic_signature = $88, dictated_at = $89, signed_at = $90, patient_id = \
-            $91, lead_surgeon_id = $92, updated_at = now() WHERE id = $1 RETURNING *",
+            special_instructions = $82, sign_out_completed = $83, debrief_completed = \
+            $84, surgeon_override_grade = $85, surgeon_override_reason = $86, \
+            attestation_text = $87, electronic_signature = $88, dictated_at = $89, \
+            signed_at = $90, patient_id = $91, lead_surgeon_id = $92, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(&self.status)

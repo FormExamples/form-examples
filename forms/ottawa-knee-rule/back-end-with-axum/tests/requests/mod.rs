@@ -9,3 +9,4 @@ pub mod ottawa_knee_rule_grade;
 pub mod ottawa_knee_rule_grade_flag;
 pub mod ottawa_knee_rule_grade_rule;
 pub mod patient;
+mod soft_delete;

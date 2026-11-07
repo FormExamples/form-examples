@@ -9,7 +9,6 @@ use crate::models::lpa_decision_rules::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub lpa_id: Uuid,
     pub decision_rule: String,
     pub joint_decision_set: String,
@@ -19,10 +18,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO lpa_decision_rules (deleted_at, lpa_id, decision_rule, \
-            joint_decision_set) VALUES ($1, $2, $3, $4) RETURNING *",
+            "INSERT INTO lpa_decision_rules (lpa_id, decision_rule, joint_decision_set) \
+            VALUES ($1, $2, $3) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.lpa_id)
         .bind(&self.decision_rule)
         .bind(&self.joint_decision_set)
@@ -33,11 +31,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE lpa_decision_rules SET deleted_at = $2, lpa_id = $3, decision_rule = $4, \
-            joint_decision_set = $5, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE lpa_decision_rules SET lpa_id = $2, decision_rule = $3, \
+            joint_decision_set = $4, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.lpa_id)
         .bind(&self.decision_rule)
         .bind(&self.joint_decision_set)

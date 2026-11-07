@@ -9,7 +9,6 @@ use crate::models::ct_scan_test_requests::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub status: String,
@@ -41,16 +40,15 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO ct_scan_test_requests (deleted_at, patient_id, clinician_id, status, \
+            "INSERT INTO ct_scan_test_requests (patient_id, clinician_id, status, \
             site_name, setting, referral_date, requested_by_date, body_region, \
             primary_indication, clinical_question, relevant_history, contrast_required, \
             pregnancy_status, egfr, previous_contrast_reaction, iodine_contrast_allergy, \
             metformin, diabetes, renal_impairment, weight_kg, relevant_previous_imaging, \
-            urgency, supervising_consultant, ir_me_r_justification, notes) VALUES ($1, $2, \
-            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, \
-            $20, $21, $22, $23, $24, $25, $26) RETURNING *",
+            urgency, supervising_consultant, ir_me_r_justification, notes) VALUES ($1, \
+            $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, \
+            $19, $20, $21, $22, $23, $24, $25) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)
@@ -83,18 +81,17 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE ct_scan_test_requests SET deleted_at = $2, patient_id = $3, clinician_id = \
-            $4, status = $5, site_name = $6, setting = $7, referral_date = $8, \
-            requested_by_date = $9, body_region = $10, primary_indication = $11, \
-            clinical_question = $12, relevant_history = $13, contrast_required = $14, \
-            pregnancy_status = $15, egfr = $16, previous_contrast_reaction = $17, \
-            iodine_contrast_allergy = $18, metformin = $19, diabetes = $20, renal_impairment \
-            = $21, weight_kg = $22, relevant_previous_imaging = $23, urgency = $24, \
-            supervising_consultant = $25, ir_me_r_justification = $26, notes = $27, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE ct_scan_test_requests SET patient_id = $2, clinician_id = $3, status \
+            = $4, site_name = $5, setting = $6, referral_date = $7, requested_by_date = \
+            $8, body_region = $9, primary_indication = $10, clinical_question = $11, \
+            relevant_history = $12, contrast_required = $13, pregnancy_status = $14, \
+            egfr = $15, previous_contrast_reaction = $16, iodine_contrast_allergy = $17, \
+            metformin = $18, diabetes = $19, renal_impairment = $20, weight_kg = $21, \
+            relevant_previous_imaging = $22, urgency = $23, supervising_consultant = \
+            $24, ir_me_r_justification = $25, notes = $26, updated_at = now() WHERE id = \
+            $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)

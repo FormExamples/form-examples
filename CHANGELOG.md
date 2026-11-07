@@ -16,7 +16,18 @@ for them.
 
 ## [Unreleased]
 
+### Added
+
+- **Every SQL table now has an HTTP route.** 182 tables, including the grades of 23
+  forms, could not be reached over HTTP, and most existed only in `sql/`. Each gained
+  what it lacked of a migration, a model, and routes, and
+  `bin/axum-entity-routes --check` keeps it so.
+
 ### Changed
+
+- **`DELETE` is a true soft delete.** It marks the row and whatever cascades from it,
+  reads and updates skip marked rows, and uniqueness covers live rows only.
+  `deleted_at` left every request and response. See ADR-9.
 
 - **Every error is now RFC 9457 `application/problem+json`** in every form's back-end,
   through `axa-problem`: `axa::Error`, extractor refusals, unknown routes, panics, and

@@ -9,3 +9,4 @@ pub mod cha2ds2_vasc_grade_flag;
 pub mod cha2ds2_vasc_grade_rule;
 pub mod clinician;
 pub mod patient;
+mod soft_delete;

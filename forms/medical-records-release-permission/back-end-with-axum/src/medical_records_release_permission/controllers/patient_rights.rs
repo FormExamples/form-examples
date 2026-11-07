@@ -9,7 +9,6 @@ use crate::models::patient_rights::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub release_form_id: Uuid,
     pub acknowledged_right_to_revoke: String,
     pub acknowledged_no_charge_for_access: String,
@@ -20,11 +19,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO patient_rights (deleted_at, release_form_id, \
-            acknowledged_right_to_revoke, acknowledged_no_charge_for_access, \
-            acknowledged_data_protection) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+            "INSERT INTO patient_rights (release_form_id, acknowledged_right_to_revoke, \
+            acknowledged_no_charge_for_access, acknowledged_data_protection) VALUES ($1, \
+            $2, $3, $4) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.release_form_id)
         .bind(&self.acknowledged_right_to_revoke)
         .bind(&self.acknowledged_no_charge_for_access)
@@ -36,12 +34,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE patient_rights SET deleted_at = $2, release_form_id = $3, \
-            acknowledged_right_to_revoke = $4, acknowledged_no_charge_for_access = $5, \
-            acknowledged_data_protection = $6, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE patient_rights SET release_form_id = $2, acknowledged_right_to_revoke \
+            = $3, acknowledged_no_charge_for_access = $4, acknowledged_data_protection = \
+            $5, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.release_form_id)
         .bind(&self.acknowledged_right_to_revoke)
         .bind(&self.acknowledged_no_charge_for_access)

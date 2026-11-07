@@ -141,24 +141,27 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE learning_disability_annual_health_checks SET patient_id = $2, clinician_id \
-            = $3, clinician_name = $4, clinician_role = $5, checked_on = $6, practice_name = \
-            $7, easy_read_invitation_sent = $8, pre_check_done = $9, person_identifier = $10, \
-            age_band = $11, sex = $12, ld_register_status = $13, main_carer = $14, \
-            communication_needs = $15, reasonable_adjustments_recorded = $16, health_passport \
-            = $17, consent_capacity_note = $18, weight_bmi_status = $19, bmi = $20, \
-            blood_pressure_status = $21, epilepsy_status = $22, constipation_status = $23, \
-            dysphagia_status = $24, continence_status = $25, mobility_falls_status = $26, \
-            dental_status = $27, vision_status = $28, hearing_status = $29, \
+            "UPDATE learning_disability_annual_health_checks SET patient_id = $2, \
+            clinician_id = $3, clinician_name = $4, clinician_role = $5, checked_on = \
+            $6, practice_name = $7, easy_read_invitation_sent = $8, pre_check_done = $9, \
+            person_identifier = $10, age_band = $11, sex = $12, ld_register_status = \
+            $13, main_carer = $14, communication_needs = $15, \
+            reasonable_adjustments_recorded = $16, health_passport = $17, \
+            consent_capacity_note = $18, weight_bmi_status = $19, bmi = $20, \
+            blood_pressure_status = $21, epilepsy_status = $22, constipation_status = \
+            $23, dysphagia_status = $24, continence_status = $25, mobility_falls_status \
+            = $26, dental_status = $27, vision_status = $28, hearing_status = $29, \
             foot_health_status = $30, skin_status = $31, physical_health_actions = $32, \
-            cancer_screening_status = $33, other_screening_status = $34, immunisation_status \
-            = $35, medication_reconciled = $36, psychotropic_prescribed = $37, \
-            psychotropic_indication = $38, psychotropic_last_reviewed = $39, stomp_discussed \
-            = $40, medication_side_effects = $41, mental_health_status = $42, \
-            behaviour_status = $43, behaviour_triggers = $44, syndrome_specific_status = $45, \
-            carer_needs_status = $46, social_circumstances = $47, health_action_plan_produced \
-            = $48, health_action_plan_shared = $49, health_action_plan_actions = $50, \
-            clinician_note = $51, updated_at = now() WHERE id = $1 RETURNING *",
+            cancer_screening_status = $33, other_screening_status = $34, \
+            immunisation_status = $35, medication_reconciled = $36, \
+            psychotropic_prescribed = $37, psychotropic_indication = $38, \
+            psychotropic_last_reviewed = $39, stomp_discussed = $40, \
+            medication_side_effects = $41, mental_health_status = $42, behaviour_status \
+            = $43, behaviour_triggers = $44, syndrome_specific_status = $45, \
+            carer_needs_status = $46, social_circumstances = $47, \
+            health_action_plan_produced = $48, health_action_plan_shared = $49, \
+            health_action_plan_actions = $50, clinician_note = $51, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

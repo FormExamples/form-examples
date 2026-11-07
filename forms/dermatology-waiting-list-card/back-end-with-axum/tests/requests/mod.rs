@@ -10,3 +10,4 @@ pub mod dermatology_waiting_list_card_grade_flag;
 pub mod dermatology_waiting_list_card_grade_rule;
 pub mod patient;
 pub mod practitioner;
+mod soft_delete;

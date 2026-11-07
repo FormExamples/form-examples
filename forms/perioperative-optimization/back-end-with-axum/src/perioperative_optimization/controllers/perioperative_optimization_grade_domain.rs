@@ -9,7 +9,6 @@ use crate::models::perioperative_optimization_grade_domains::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub perioperative_optimization_grade_id: Uuid,
     pub domain: String,
     pub status: String,
@@ -29,13 +28,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO perioperative_optimization_grade_domains (deleted_at, \
-            perioperative_optimization_grade_id, domain, status, triggered, lead_time_weeks, \
-            weeks_shortfall, rule_id, finding, intervention, intervention_started, \
-            referral_made, target_value, start_date) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, \
-            $9, $10, $11, $12, $13, $14) RETURNING *",
+            "INSERT INTO perioperative_optimization_grade_domains \
+            (perioperative_optimization_grade_id, domain, status, triggered, \
+            lead_time_weeks, weeks_shortfall, rule_id, finding, intervention, \
+            intervention_started, referral_made, target_value, start_date) VALUES ($1, \
+            $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.perioperative_optimization_grade_id)
         .bind(&self.domain)
         .bind(&self.status)
@@ -56,14 +54,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE perioperative_optimization_grade_domains SET deleted_at = $2, \
-            perioperative_optimization_grade_id = $3, domain = $4, status = $5, triggered = \
-            $6, lead_time_weeks = $7, weeks_shortfall = $8, rule_id = $9, finding = $10, \
-            intervention = $11, intervention_started = $12, referral_made = $13, target_value \
-            = $14, start_date = $15, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE perioperative_optimization_grade_domains SET \
+            perioperative_optimization_grade_id = $2, domain = $3, status = $4, \
+            triggered = $5, lead_time_weeks = $6, weeks_shortfall = $7, rule_id = $8, \
+            finding = $9, intervention = $10, intervention_started = $11, referral_made \
+            = $12, target_value = $13, start_date = $14, updated_at = now() WHERE id = \
+            $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.perioperative_optimization_grade_id)
         .bind(&self.domain)
         .bind(&self.status)

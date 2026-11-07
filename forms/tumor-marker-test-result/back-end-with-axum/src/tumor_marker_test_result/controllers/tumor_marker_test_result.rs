@@ -9,7 +9,6 @@ use crate::models::tumor_marker_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -46,18 +45,17 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO tumor_marker_test_results (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO tumor_marker_test_results (patient_id, clinician_id, \
             originating_request_reference, report_status, performed_date, reported_date, \
             specimen_condition, clinical_history, known_cancer_site, psa, ca125, ca19_9, \
             carcinoembryonic_antigen_cea, alpha_fetoprotein_afp, beta_hcg, ca15_3, \
-            lactate_dehydrogenase_ldh, calcitonin, chromogranin_a, previous_value, trend, \
-            comparison_with_previous, overall_result_status, markedly_elevated, \
+            lactate_dehydrogenase_ldh, calcitonin, chromogranin_a, previous_value, \
+            trend, comparison_with_previous, overall_result_status, markedly_elevated, \
             findings_narrative, impression, reporting_category, recommended_follow_up, \
-            critical_result_communicated, reported_to) VALUES ($1, $2, $3, $4, $5, $6, $7, \
-            $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, \
-            $24, $25, $26, $27, $28, $29, $30, $31) RETURNING *",
+            critical_result_communicated, reported_to) VALUES ($1, $2, $3, $4, $5, $6, \
+            $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, \
+            $23, $24, $25, $26, $27, $28, $29, $30) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -95,20 +93,20 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE tumor_marker_test_results SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, originating_request_reference = $5, report_status = $6, \
-            performed_date = $7, reported_date = $8, specimen_condition = $9, \
-            clinical_history = $10, known_cancer_site = $11, psa = $12, ca125 = $13, ca19_9 = \
-            $14, carcinoembryonic_antigen_cea = $15, alpha_fetoprotein_afp = $16, beta_hcg = \
-            $17, ca15_3 = $18, lactate_dehydrogenase_ldh = $19, calcitonin = $20, \
-            chromogranin_a = $21, previous_value = $22, trend = $23, comparison_with_previous \
-            = $24, overall_result_status = $25, markedly_elevated = $26, findings_narrative = \
-            $27, impression = $28, reporting_category = $29, recommended_follow_up = $30, \
-            critical_result_communicated = $31, reported_to = $32, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE tumor_marker_test_results SET patient_id = $2, clinician_id = $3, \
+            originating_request_reference = $4, report_status = $5, performed_date = $6, \
+            reported_date = $7, specimen_condition = $8, clinical_history = $9, \
+            known_cancer_site = $10, psa = $11, ca125 = $12, ca19_9 = $13, \
+            carcinoembryonic_antigen_cea = $14, alpha_fetoprotein_afp = $15, beta_hcg = \
+            $16, ca15_3 = $17, lactate_dehydrogenase_ldh = $18, calcitonin = $19, \
+            chromogranin_a = $20, previous_value = $21, trend = $22, \
+            comparison_with_previous = $23, overall_result_status = $24, \
+            markedly_elevated = $25, findings_narrative = $26, impression = $27, \
+            reporting_category = $28, recommended_follow_up = $29, \
+            critical_result_communicated = $30, reported_to = $31, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

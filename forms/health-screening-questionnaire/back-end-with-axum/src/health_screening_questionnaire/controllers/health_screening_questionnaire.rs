@@ -9,7 +9,6 @@ use crate::models::health_screening_questionnaires::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub assessor_id: Uuid,
     pub status: String,
@@ -81,36 +80,37 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO health_screening_questionnaires (deleted_at, patient_id, assessor_id, \
+            "INSERT INTO health_screening_questionnaires (patient_id, assessor_id, \
             status, screening_purpose, site_name, assessment_date, assessment_mode, \
             usual_activity_level, moderate_exercise_days_per_week, \
             fruit_and_vegetable_portions_per_day, diet_notes, smoking_status, \
             cigarettes_per_day, audit_c_frequency, audit_c_typical_quantity, \
             audit_c_binge_frequency, condition_diabetes, condition_hypertension, \
             condition_asthma, condition_copd, condition_heart_disease, \
-            condition_kidney_disease, condition_thyroid, condition_other, past_surgeries, \
-            current_medications, known_drug_allergies, \
+            condition_kidney_disease, condition_thyroid, condition_other, \
+            past_surgeries, current_medications, known_drug_allergies, \
             family_history_premature_cardiac_event, family_history_other, \
             symptom_unexplained_chest_pain, symptom_dizzy_spells_or_fainting, \
             symptom_persistent_cough_over_3_weeks, symptom_unexplained_weight_loss, \
-            symptom_joint_pain_restricting_movement, symptom_shortness_of_breath_on_exertion, \
-            symptom_palpitations, parq_diagnosed_heart_condition, parq_chest_pain_at_rest, \
+            symptom_joint_pain_restricting_movement, \
+            symptom_shortness_of_breath_on_exertion, symptom_palpitations, \
+            parq_diagnosed_heart_condition, parq_chest_pain_at_rest, \
             parq_chest_pain_during_activity, parq_dizziness_or_loss_of_consciousness, \
             parq_other_chronic_medical_condition, \
-            parq_prescribed_medication_for_chronic_condition, parq_bone_or_joint_problem, \
-            height_as_cm, weight_as_kg, body_mass_index, resting_blood_pressure_systolic, \
-            resting_blood_pressure_diastolic, resting_heart_rate, job_role, \
-            physical_demands_of_role, exposure_noise, exposure_chemicals, \
-            exposure_manual_handling, exposure_other, exposure_other_detail, stress_level, \
-            sleep_quality, mental_health_concern, mental_health_concern_note, \
-            vaccination_up_to_date, vaccination_gaps_note, consent_to_screening, \
-            information_accurate_confirmed, interpreter_required) VALUES ($1, $2, $3, $4, $5, \
-            $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, \
-            $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, \
-            $39, $40, $41, $42, $43, $44, $45, $46, $47, $48, $49, $50, $51, $52, $53, $54, \
-            $55, $56, $57, $58, $59, $60, $61, $62, $63, $64, $65, $66) RETURNING *",
+            parq_prescribed_medication_for_chronic_condition, \
+            parq_bone_or_joint_problem, height_as_cm, weight_as_kg, body_mass_index, \
+            resting_blood_pressure_systolic, resting_blood_pressure_diastolic, \
+            resting_heart_rate, job_role, physical_demands_of_role, exposure_noise, \
+            exposure_chemicals, exposure_manual_handling, exposure_other, \
+            exposure_other_detail, stress_level, sleep_quality, mental_health_concern, \
+            mental_health_concern_note, vaccination_up_to_date, vaccination_gaps_note, \
+            consent_to_screening, information_accurate_confirmed, interpreter_required) \
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, \
+            $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, \
+            $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42, $43, $44, $45, \
+            $46, $47, $48, $49, $50, $51, $52, $53, $54, $55, $56, $57, $58, $59, $60, \
+            $61, $62, $63, $64, $65) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.assessor_id)
         .bind(&self.status)
@@ -183,38 +183,41 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE health_screening_questionnaires SET deleted_at = $2, patient_id = $3, \
-            assessor_id = $4, status = $5, screening_purpose = $6, site_name = $7, \
-            assessment_date = $8, assessment_mode = $9, usual_activity_level = $10, \
-            moderate_exercise_days_per_week = $11, fruit_and_vegetable_portions_per_day = \
-            $12, diet_notes = $13, smoking_status = $14, cigarettes_per_day = $15, \
-            audit_c_frequency = $16, audit_c_typical_quantity = $17, audit_c_binge_frequency \
-            = $18, condition_diabetes = $19, condition_hypertension = $20, condition_asthma = \
-            $21, condition_copd = $22, condition_heart_disease = $23, \
-            condition_kidney_disease = $24, condition_thyroid = $25, condition_other = $26, \
-            past_surgeries = $27, current_medications = $28, known_drug_allergies = $29, \
-            family_history_premature_cardiac_event = $30, family_history_other = $31, \
-            symptom_unexplained_chest_pain = $32, symptom_dizzy_spells_or_fainting = $33, \
-            symptom_persistent_cough_over_3_weeks = $34, symptom_unexplained_weight_loss = \
-            $35, symptom_joint_pain_restricting_movement = $36, \
-            symptom_shortness_of_breath_on_exertion = $37, symptom_palpitations = $38, \
-            parq_diagnosed_heart_condition = $39, parq_chest_pain_at_rest = $40, \
-            parq_chest_pain_during_activity = $41, parq_dizziness_or_loss_of_consciousness = \
-            $42, parq_other_chronic_medical_condition = $43, \
-            parq_prescribed_medication_for_chronic_condition = $44, \
-            parq_bone_or_joint_problem = $45, height_as_cm = $46, weight_as_kg = $47, \
-            body_mass_index = $48, resting_blood_pressure_systolic = $49, \
-            resting_blood_pressure_diastolic = $50, resting_heart_rate = $51, job_role = $52, \
-            physical_demands_of_role = $53, exposure_noise = $54, exposure_chemicals = $55, \
-            exposure_manual_handling = $56, exposure_other = $57, exposure_other_detail = \
-            $58, stress_level = $59, sleep_quality = $60, mental_health_concern = $61, \
-            mental_health_concern_note = $62, vaccination_up_to_date = $63, \
-            vaccination_gaps_note = $64, consent_to_screening = $65, \
-            information_accurate_confirmed = $66, interpreter_required = $67, updated_at = \
-            now() WHERE id = $1 RETURNING *",
+            "UPDATE health_screening_questionnaires SET patient_id = $2, assessor_id = \
+            $3, status = $4, screening_purpose = $5, site_name = $6, assessment_date = \
+            $7, assessment_mode = $8, usual_activity_level = $9, \
+            moderate_exercise_days_per_week = $10, fruit_and_vegetable_portions_per_day \
+            = $11, diet_notes = $12, smoking_status = $13, cigarettes_per_day = $14, \
+            audit_c_frequency = $15, audit_c_typical_quantity = $16, \
+            audit_c_binge_frequency = $17, condition_diabetes = $18, \
+            condition_hypertension = $19, condition_asthma = $20, condition_copd = $21, \
+            condition_heart_disease = $22, condition_kidney_disease = $23, \
+            condition_thyroid = $24, condition_other = $25, past_surgeries = $26, \
+            current_medications = $27, known_drug_allergies = $28, \
+            family_history_premature_cardiac_event = $29, family_history_other = $30, \
+            symptom_unexplained_chest_pain = $31, symptom_dizzy_spells_or_fainting = \
+            $32, symptom_persistent_cough_over_3_weeks = $33, \
+            symptom_unexplained_weight_loss = $34, \
+            symptom_joint_pain_restricting_movement = $35, \
+            symptom_shortness_of_breath_on_exertion = $36, symptom_palpitations = $37, \
+            parq_diagnosed_heart_condition = $38, parq_chest_pain_at_rest = $39, \
+            parq_chest_pain_during_activity = $40, \
+            parq_dizziness_or_loss_of_consciousness = $41, \
+            parq_other_chronic_medical_condition = $42, \
+            parq_prescribed_medication_for_chronic_condition = $43, \
+            parq_bone_or_joint_problem = $44, height_as_cm = $45, weight_as_kg = $46, \
+            body_mass_index = $47, resting_blood_pressure_systolic = $48, \
+            resting_blood_pressure_diastolic = $49, resting_heart_rate = $50, job_role = \
+            $51, physical_demands_of_role = $52, exposure_noise = $53, \
+            exposure_chemicals = $54, exposure_manual_handling = $55, exposure_other = \
+            $56, exposure_other_detail = $57, stress_level = $58, sleep_quality = $59, \
+            mental_health_concern = $60, mental_health_concern_note = $61, \
+            vaccination_up_to_date = $62, vaccination_gaps_note = $63, \
+            consent_to_screening = $64, information_accurate_confirmed = $65, \
+            interpreter_required = $66, updated_at = now() WHERE id = $1 AND deleted_at \
+            IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.assessor_id)
         .bind(&self.status)

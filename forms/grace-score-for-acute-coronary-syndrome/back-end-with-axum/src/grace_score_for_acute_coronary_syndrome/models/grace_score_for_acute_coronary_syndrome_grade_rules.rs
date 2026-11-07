@@ -12,6 +12,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     pub id: Uuid,
+    #[serde(skip)]
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub rule_id: String,
     pub variable: String,
@@ -29,13 +30,17 @@ impl Model {
     /// Propagates the database error.
     pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Self>, i64)> {
         let (limit, offset) = crate::support::paging::bounds(page);
-        let rows = sqlx::query_as("SELECT * FROM grace_score_for_acute_coronary_syndrome_grade_rules ORDER BY id LIMIT $1 OFFSET $2")
-            .bind(limit)
-            .bind(offset)
-            .fetch_all(db)
-            .await?;
+        let rows = sqlx::query_as(
+            "SELECT * FROM grace_score_for_acute_coronary_syndrome_grade_rules WHERE \
+            deleted_at IS NULL ORDER BY id LIMIT $1 OFFSET $2",
+        )
+        .bind(limit)
+        .bind(offset)
+        .fetch_all(db)
+        .await?;
         let total = sqlx::query_scalar(
-            "SELECT COUNT(*) FROM grace_score_for_acute_coronary_syndrome_grade_rules",
+            "SELECT COUNT(*) FROM grace_score_for_acute_coronary_syndrome_grade_rules \
+            WHERE deleted_at IS NULL",
         )
         .fetch_one(db)
         .await?;
@@ -49,7 +54,8 @@ impl Model {
     /// Propagates the database error.
     pub async fn find_by_id(db: &PgPool, id: Uuid) -> sqlx::Result<Option<Self>> {
         sqlx::query_as(
-            "SELECT * FROM grace_score_for_acute_coronary_syndrome_grade_rules WHERE id = $1",
+            "SELECT * FROM grace_score_for_acute_coronary_syndrome_grade_rules WHERE id = \
+            $1 AND deleted_at IS NULL",
         )
         .bind(id)
         .fetch_optional(db)
@@ -63,7 +69,8 @@ impl Model {
     /// Propagates the database error.
     pub async fn delete(db: &PgPool, id: Uuid) -> sqlx::Result<()> {
         sqlx::query(
-            "DELETE FROM grace_score_for_acute_coronary_syndrome_grade_rules WHERE id = $1",
+            "UPDATE grace_score_for_acute_coronary_syndrome_grade_rules SET deleted_at = \
+            now(), updated_at = now() WHERE id = $1 AND deleted_at IS NULL",
         )
         .bind(id)
         .execute(db)

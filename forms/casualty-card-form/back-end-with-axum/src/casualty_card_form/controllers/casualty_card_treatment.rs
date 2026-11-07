@@ -9,7 +9,6 @@ use crate::models::casualty_card_treatments::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub casualty_card_id: Uuid,
     pub oxygen_therapy_device: String,
     pub oxygen_therapy_flow_rate: String,
@@ -20,11 +19,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO casualty_card_treatments (deleted_at, casualty_card_id, \
-            oxygen_therapy_device, oxygen_therapy_flow_rate, tetanus_prophylaxis) VALUES ($1, \
-            $2, $3, $4, $5) RETURNING *",
+            "INSERT INTO casualty_card_treatments (casualty_card_id, \
+            oxygen_therapy_device, oxygen_therapy_flow_rate, tetanus_prophylaxis) VALUES \
+            ($1, $2, $3, $4) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(&self.oxygen_therapy_device)
         .bind(&self.oxygen_therapy_flow_rate)
@@ -36,12 +34,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE casualty_card_treatments SET deleted_at = $2, casualty_card_id = $3, \
-            oxygen_therapy_device = $4, oxygen_therapy_flow_rate = $5, tetanus_prophylaxis = \
-            $6, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE casualty_card_treatments SET casualty_card_id = $2, \
+            oxygen_therapy_device = $3, oxygen_therapy_flow_rate = $4, \
+            tetanus_prophylaxis = $5, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(&self.oxygen_therapy_device)
         .bind(&self.oxygen_therapy_flow_rate)

@@ -9,7 +9,6 @@ use crate::models::dexa_bone_density_test_requests::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub status: String,
@@ -39,16 +38,15 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO dexa_bone_density_test_requests (deleted_at, patient_id, \
-            clinician_id, status, site_name, setting, referral_date, requested_by_date, \
-            scan_region, primary_indication, clinical_question, relevant_history, \
-            frax_major_fracture_percent, previous_fragility_fracture, long_term_steroids, \
-            menopause_status, parental_hip_fracture, weight_kg, previous_dexa, \
-            previous_dexa_date, urgency, supervising_consultant, requester_contact, notes) \
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, \
-            $17, $18, $19, $20, $21, $22, $23, $24) RETURNING *",
+            "INSERT INTO dexa_bone_density_test_requests (patient_id, clinician_id, \
+            status, site_name, setting, referral_date, requested_by_date, scan_region, \
+            primary_indication, clinical_question, relevant_history, \
+            frax_major_fracture_percent, previous_fragility_fracture, \
+            long_term_steroids, menopause_status, parental_hip_fracture, weight_kg, \
+            previous_dexa, previous_dexa_date, urgency, supervising_consultant, \
+            requester_contact, notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, \
+            $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)
@@ -79,18 +77,17 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE dexa_bone_density_test_requests SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, status = $5, site_name = $6, setting = $7, referral_date = $8, \
-            requested_by_date = $9, scan_region = $10, primary_indication = $11, \
-            clinical_question = $12, relevant_history = $13, frax_major_fracture_percent = \
-            $14, previous_fragility_fracture = $15, long_term_steroids = $16, \
-            menopause_status = $17, parental_hip_fracture = $18, weight_kg = $19, \
-            previous_dexa = $20, previous_dexa_date = $21, urgency = $22, \
-            supervising_consultant = $23, requester_contact = $24, notes = $25, updated_at = \
-            now() WHERE id = $1 RETURNING *",
+            "UPDATE dexa_bone_density_test_requests SET patient_id = $2, clinician_id = \
+            $3, status = $4, site_name = $5, setting = $6, referral_date = $7, \
+            requested_by_date = $8, scan_region = $9, primary_indication = $10, \
+            clinical_question = $11, relevant_history = $12, frax_major_fracture_percent \
+            = $13, previous_fragility_fracture = $14, long_term_steroids = $15, \
+            menopause_status = $16, parental_hip_fracture = $17, weight_kg = $18, \
+            previous_dexa = $19, previous_dexa_date = $20, urgency = $21, \
+            supervising_consultant = $22, requester_contact = $23, notes = $24, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)

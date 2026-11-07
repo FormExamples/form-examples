@@ -76,14 +76,15 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE curb_65_pneumonia_severity_scores SET patient_id = $2, clinician_id = $3, \
-            clinician_name = $4, clinician_role = $5, assessed_at = $6, care_setting = $7, \
-            patient_identifier = $8, sex = $9, age_years = $10, confusion_present = $11, \
-            amt_score = $12, urea_measured = $13, urea_mmol_l = $14, respiratory_rate = $15, \
-            systolic_bp = $16, diastolic_bp = $17, oxygen_saturation = $18, temperature_c = \
-            $19, significant_comorbidity = $20, multilobar_changes = $21, \
-            clinician_override_band = $22, override_reason = $23, clinical_note = $24, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE curb_65_pneumonia_severity_scores SET patient_id = $2, clinician_id = \
+            $3, clinician_name = $4, clinician_role = $5, assessed_at = $6, care_setting \
+            = $7, patient_identifier = $8, sex = $9, age_years = $10, confusion_present \
+            = $11, amt_score = $12, urea_measured = $13, urea_mmol_l = $14, \
+            respiratory_rate = $15, systolic_bp = $16, diastolic_bp = $17, \
+            oxygen_saturation = $18, temperature_c = $19, significant_comorbidity = $20, \
+            multilobar_changes = $21, clinician_override_band = $22, override_reason = \
+            $23, clinical_note = $24, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

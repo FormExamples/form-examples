@@ -9,7 +9,6 @@ use crate::models::holter_monitor_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -47,7 +46,7 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO holter_monitor_test_results (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO holter_monitor_test_results (patient_id, clinician_id, \
             originating_request_reference, report_status, monitor_type, performed_date, \
             reported_date, recording_duration_hours, analysed_percent, clinical_history, \
             predominant_rhythm, mean_heart_rate_bpm, minimum_heart_rate_bpm, \
@@ -55,12 +54,12 @@ impl Params {
             supraventricular_ectopic_percent, atrial_fibrillation_detected, \
             significant_pauses, ventricular_tachycardia, supraventricular_tachycardia, \
             high_grade_av_block, symptom_rhythm_correlation, normal_study, \
-            findings_narrative, comparison_with_previous, impression, reporting_category, \
-            recommended_follow_up, critical_result_communicated, reported_to) VALUES ($1, $2, \
-            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, \
-            $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32) RETURNING *",
+            findings_narrative, comparison_with_previous, impression, \
+            reporting_category, recommended_follow_up, critical_result_communicated, \
+            reported_to) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, \
+            $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, \
+            $29, $30, $31) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -99,23 +98,22 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE holter_monitor_test_results SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, originating_request_reference = $5, report_status = $6, \
-            monitor_type = $7, performed_date = $8, reported_date = $9, \
-            recording_duration_hours = $10, analysed_percent = $11, clinical_history = $12, \
-            predominant_rhythm = $13, mean_heart_rate_bpm = $14, minimum_heart_rate_bpm = \
-            $15, maximum_heart_rate_bpm = $16, longest_pause_seconds = $17, \
-            ventricular_ectopic_percent = $18, supraventricular_ectopic_percent = $19, \
-            atrial_fibrillation_detected = $20, significant_pauses = $21, \
-            ventricular_tachycardia = $22, supraventricular_tachycardia = $23, \
-            high_grade_av_block = $24, symptom_rhythm_correlation = $25, normal_study = $26, \
-            findings_narrative = $27, comparison_with_previous = $28, impression = $29, \
-            reporting_category = $30, recommended_follow_up = $31, \
-            critical_result_communicated = $32, reported_to = $33, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE holter_monitor_test_results SET patient_id = $2, clinician_id = $3, \
+            originating_request_reference = $4, report_status = $5, monitor_type = $6, \
+            performed_date = $7, reported_date = $8, recording_duration_hours = $9, \
+            analysed_percent = $10, clinical_history = $11, predominant_rhythm = $12, \
+            mean_heart_rate_bpm = $13, minimum_heart_rate_bpm = $14, \
+            maximum_heart_rate_bpm = $15, longest_pause_seconds = $16, \
+            ventricular_ectopic_percent = $17, supraventricular_ectopic_percent = $18, \
+            atrial_fibrillation_detected = $19, significant_pauses = $20, \
+            ventricular_tachycardia = $21, supraventricular_tachycardia = $22, \
+            high_grade_av_block = $23, symptom_rhythm_correlation = $24, normal_study = \
+            $25, findings_narrative = $26, comparison_with_previous = $27, impression = \
+            $28, reporting_category = $29, recommended_follow_up = $30, \
+            critical_result_communicated = $31, reported_to = $32, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

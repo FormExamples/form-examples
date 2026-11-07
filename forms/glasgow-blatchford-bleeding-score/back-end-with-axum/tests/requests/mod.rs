@@ -9,3 +9,4 @@ pub mod glasgow_blatchford_bleeding_score_grade;
 pub mod glasgow_blatchford_bleeding_score_grade_flag;
 pub mod glasgow_blatchford_bleeding_score_grade_rule;
 pub mod patient;
+mod soft_delete;

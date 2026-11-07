@@ -36,7 +36,8 @@ impl Params {
         sqlx::query_as(
             "UPDATE bhutani_bilirubin_nomogram_grade_rules SET \
             bhutani_bilirubin_nomogram_grade_id = $2, rule_id = $3, category = $4, \
-            description = $5, updated_at = now() WHERE id = $1 RETURNING *",
+            description = $5, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
         .bind(self.bhutani_bilirubin_nomogram_grade_id)

@@ -9,7 +9,6 @@ use crate::models::grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub compliance_status: String,
     pub overall_risk_level: String,
@@ -24,11 +23,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO grades (deleted_at, assessment_id, compliance_status, \
-            overall_risk_level, childhood_complete, occupational_complete, covid_complete, \
-            flu_current, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
+            "INSERT INTO grades (assessment_id, compliance_status, overall_risk_level, \
+            childhood_complete, occupational_complete, covid_complete, flu_current, \
+            graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.compliance_status)
         .bind(&self.overall_risk_level)
@@ -44,13 +42,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE grades SET deleted_at = $2, assessment_id = $3, compliance_status = $4, \
-            overall_risk_level = $5, childhood_complete = $6, occupational_complete = $7, \
-            covid_complete = $8, flu_current = $9, graded_at = $10, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE grades SET assessment_id = $2, compliance_status = $3, \
+            overall_risk_level = $4, childhood_complete = $5, occupational_complete = \
+            $6, covid_complete = $7, flu_current = $8, graded_at = $9, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.compliance_status)
         .bind(&self.overall_risk_level)

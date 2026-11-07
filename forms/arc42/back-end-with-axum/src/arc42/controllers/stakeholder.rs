@@ -9,7 +9,6 @@ use crate::models::stakeholders::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub arc42_documentation_id: Uuid,
     pub ordinal: i32,
     pub name: String,
@@ -21,10 +20,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO stakeholders (deleted_at, arc42_documentation_id, ordinal, name, \
-            role, concerns) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+            "INSERT INTO stakeholders (arc42_documentation_id, ordinal, name, role, \
+            concerns) VALUES ($1, $2, $3, $4, $5) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.arc42_documentation_id)
         .bind(self.ordinal)
         .bind(&self.name)
@@ -37,12 +35,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE stakeholders SET deleted_at = $2, arc42_documentation_id = $3, ordinal = \
-            $4, name = $5, role = $6, concerns = $7, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE stakeholders SET arc42_documentation_id = $2, ordinal = $3, name = \
+            $4, role = $5, concerns = $6, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.arc42_documentation_id)
         .bind(self.ordinal)
         .bind(&self.name)

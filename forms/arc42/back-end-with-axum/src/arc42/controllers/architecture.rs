@@ -9,7 +9,6 @@ use crate::models::architectures::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub name: String,
     pub version: String,
     pub owner: String,
@@ -21,10 +20,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO architectures (deleted_at, name, version, owner, status, description) \
-            VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+            "INSERT INTO architectures (name, version, owner, status, description) VALUES \
+            ($1, $2, $3, $4, $5) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(&self.version)
         .bind(&self.owner)
@@ -37,11 +35,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE architectures SET deleted_at = $2, name = $3, version = $4, owner = $5, \
-            status = $6, description = $7, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE architectures SET name = $2, version = $3, owner = $4, status = $5, \
+            description = $6, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(&self.version)
         .bind(&self.owner)

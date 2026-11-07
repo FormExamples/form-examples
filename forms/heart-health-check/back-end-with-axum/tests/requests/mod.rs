@@ -18,3 +18,4 @@ pub mod patient;
 mod physical_activity_diets_route;
 mod review_calculates_route;
 pub mod smoking_alcohol;
+mod soft_delete;

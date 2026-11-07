@@ -9,7 +9,6 @@ use crate::models::orthopaedics_waiting_list_card_appointments::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub orthopaedics_waiting_list_card_id: Uuid,
     pub appointment_date: Option<Date>,
     pub appointment_time: Option<String>,
@@ -30,13 +29,13 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO orthopaedics_waiting_list_card_appointments (deleted_at, \
-            orthopaedics_waiting_list_card_id, appointment_date, appointment_time, \
-            duration_minutes, appointment_type, site_name, site_address, clinic_name, room, \
-            clinician_name, clinician_team, status, travel_notes, access_notes) VALUES ($1, \
-            $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *",
+            "INSERT INTO orthopaedics_waiting_list_card_appointments \
+            (orthopaedics_waiting_list_card_id, appointment_date, appointment_time, \
+            duration_minutes, appointment_type, site_name, site_address, clinic_name, \
+            room, clinician_name, clinician_team, status, travel_notes, access_notes) \
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.orthopaedics_waiting_list_card_id)
         .bind(self.appointment_date)
         .bind(&self.appointment_time)
@@ -58,15 +57,15 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE orthopaedics_waiting_list_card_appointments SET deleted_at = $2, \
-            orthopaedics_waiting_list_card_id = $3, appointment_date = $4, appointment_time = \
-            $5, duration_minutes = $6, appointment_type = $7, site_name = $8, site_address = \
-            $9, clinic_name = $10, room = $11, clinician_name = $12, clinician_team = $13, \
-            status = $14, travel_notes = $15, access_notes = $16, updated_at = now() WHERE id \
-            = $1 RETURNING *",
+            "UPDATE orthopaedics_waiting_list_card_appointments SET \
+            orthopaedics_waiting_list_card_id = $2, appointment_date = $3, \
+            appointment_time = $4, duration_minutes = $5, appointment_type = $6, \
+            site_name = $7, site_address = $8, clinic_name = $9, room = $10, \
+            clinician_name = $11, clinician_team = $12, status = $13, travel_notes = \
+            $14, access_notes = $15, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.orthopaedics_waiting_list_card_id)
         .bind(self.appointment_date)
         .bind(&self.appointment_time)

@@ -36,9 +36,9 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE child_safeguarding_referral_grades SET child_safeguarding_referral_id = \
-            $2, status = $3, urgency = $4, completeness_percent = $5, graded_at = $6, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE child_safeguarding_referral_grades SET child_safeguarding_referral_id \
+            = $2, status = $3, urgency = $4, completeness_percent = $5, graded_at = $6, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.child_safeguarding_referral_id)

@@ -9,7 +9,6 @@ use crate::models::model_for_end_stage_liver_disease_score_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub model_for_end_stage_liver_disease_score_id: Uuid,
     pub bilirubin_mg_dl: Option<f64>,
     pub creatinine_mg_dl: Option<f64>,
@@ -25,13 +24,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO model_for_end_stage_liver_disease_score_grades (deleted_at, \
-            model_for_end_stage_liver_disease_score_id, bilirubin_mg_dl, creatinine_mg_dl, \
-            creatinine_adjusted, dialysis_rule_applied, meld_score, mortality_band, \
-            estimated_mortality_percent, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, \
-            $9, $10) RETURNING *",
+            "INSERT INTO model_for_end_stage_liver_disease_score_grades \
+            (model_for_end_stage_liver_disease_score_id, bilirubin_mg_dl, \
+            creatinine_mg_dl, creatinine_adjusted, dialysis_rule_applied, meld_score, \
+            mortality_band, estimated_mortality_percent, graded_at) VALUES ($1, $2, $3, \
+            $4, $5, $6, $7, $8, $9) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.model_for_end_stage_liver_disease_score_id)
         .bind(self.bilirubin_mg_dl)
         .bind(self.creatinine_mg_dl)
@@ -48,14 +46,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE model_for_end_stage_liver_disease_score_grades SET deleted_at = $2, \
-            model_for_end_stage_liver_disease_score_id = $3, bilirubin_mg_dl = $4, \
-            creatinine_mg_dl = $5, creatinine_adjusted = $6, dialysis_rule_applied = $7, \
-            meld_score = $8, mortality_band = $9, estimated_mortality_percent = $10, \
-            graded_at = $11, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE model_for_end_stage_liver_disease_score_grades SET \
+            model_for_end_stage_liver_disease_score_id = $2, bilirubin_mg_dl = $3, \
+            creatinine_mg_dl = $4, creatinine_adjusted = $5, dialysis_rule_applied = $6, \
+            meld_score = $7, mortality_band = $8, estimated_mortality_percent = $9, \
+            graded_at = $10, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.model_for_end_stage_liver_disease_score_id)
         .bind(self.bilirubin_mg_dl)
         .bind(self.creatinine_mg_dl)

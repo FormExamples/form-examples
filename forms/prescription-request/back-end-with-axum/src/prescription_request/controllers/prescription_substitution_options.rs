@@ -9,7 +9,6 @@ use crate::models::prescription_substitution_options::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub prescription_request_id: Uuid,
     pub allow_brand_substitution: String,
     pub allow_generic_substitution: String,
@@ -21,12 +20,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO prescription_substitution_options (deleted_at, \
-            prescription_request_id, allow_brand_substitution, allow_generic_substitution, \
-            allow_dosage_adjustment, substitution_notes) VALUES ($1, $2, $3, $4, $5, $6) \
+            "INSERT INTO prescription_substitution_options (prescription_request_id, \
+            allow_brand_substitution, allow_generic_substitution, \
+            allow_dosage_adjustment, substitution_notes) VALUES ($1, $2, $3, $4, $5) \
             RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.prescription_request_id)
         .bind(&self.allow_brand_substitution)
         .bind(&self.allow_generic_substitution)
@@ -39,13 +37,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE prescription_substitution_options SET deleted_at = $2, \
-            prescription_request_id = $3, allow_brand_substitution = $4, \
-            allow_generic_substitution = $5, allow_dosage_adjustment = $6, substitution_notes \
-            = $7, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE prescription_substitution_options SET prescription_request_id = $2, \
+            allow_brand_substitution = $3, allow_generic_substitution = $4, \
+            allow_dosage_adjustment = $5, substitution_notes = $6, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.prescription_request_id)
         .bind(&self.allow_brand_substitution)
         .bind(&self.allow_generic_substitution)

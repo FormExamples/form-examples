@@ -9,7 +9,6 @@ use crate::models::childhood_vaccinations::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub dtap_ipv_hib_hepb: Option<i32>,
     pub pneumococcal: Option<i32>,
@@ -24,11 +23,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO childhood_vaccinations (deleted_at, assessment_id, dtap_ipv_hib_hepb, \
-            pneumococcal, rotavirus, meningitis_b, mmr, hib_menc, preschool_booster) VALUES \
-            ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
+            "INSERT INTO childhood_vaccinations (assessment_id, dtap_ipv_hib_hepb, \
+            pneumococcal, rotavirus, meningitis_b, mmr, hib_menc, preschool_booster) \
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.dtap_ipv_hib_hepb)
         .bind(self.pneumococcal)
@@ -44,13 +42,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE childhood_vaccinations SET deleted_at = $2, assessment_id = $3, \
-            dtap_ipv_hib_hepb = $4, pneumococcal = $5, rotavirus = $6, meningitis_b = $7, mmr \
-            = $8, hib_menc = $9, preschool_booster = $10, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE childhood_vaccinations SET assessment_id = $2, dtap_ipv_hib_hepb = \
+            $3, pneumococcal = $4, rotavirus = $5, meningitis_b = $6, mmr = $7, hib_menc \
+            = $8, preschool_booster = $9, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.dtap_ipv_hib_hepb)
         .bind(self.pneumococcal)

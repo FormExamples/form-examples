@@ -9,3 +9,4 @@ pub mod cage_alcohol_questionnaire_grade_flag;
 pub mod cage_alcohol_questionnaire_grade_rule;
 pub mod clinician;
 pub mod patient;
+mod soft_delete;

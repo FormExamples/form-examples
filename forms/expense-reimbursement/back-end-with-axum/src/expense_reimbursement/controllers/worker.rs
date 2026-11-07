@@ -9,7 +9,6 @@ use crate::models::workers::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub name: String,
     pub email: Option<String>,
     pub phone: Option<String>,
@@ -26,12 +25,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO workers (deleted_at, name, email, phone, postal_address_as_full_text, \
+            "INSERT INTO workers (name, email, phone, postal_address_as_full_text, \
             country_as_iso_3166_1_alpha_2, postcode, employee_reference, job_title, \
-            department, cost_centre) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) \
+            department, cost_centre) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) \
             RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(&self.email)
         .bind(&self.phone)
@@ -49,13 +47,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE workers SET deleted_at = $2, name = $3, email = $4, phone = $5, \
-            postal_address_as_full_text = $6, country_as_iso_3166_1_alpha_2 = $7, postcode = \
-            $8, employee_reference = $9, job_title = $10, department = $11, cost_centre = \
-            $12, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE workers SET name = $2, email = $3, phone = $4, \
+            postal_address_as_full_text = $5, country_as_iso_3166_1_alpha_2 = $6, \
+            postcode = $7, employee_reference = $8, job_title = $9, department = $10, \
+            cost_centre = $11, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(&self.email)
         .bind(&self.phone)

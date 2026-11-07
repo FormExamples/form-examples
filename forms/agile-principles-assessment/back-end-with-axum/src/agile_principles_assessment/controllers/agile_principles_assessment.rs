@@ -9,7 +9,6 @@ use crate::models::agile_principles_assessments::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub respondent_id: Uuid,
     pub status: String,
     pub is_anonymous: bool,
@@ -58,21 +57,21 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO agile_principles_assessments (deleted_at, respondent_id, status, \
+            "INSERT INTO agile_principles_assessments (respondent_id, status, \
             is_anonymous, assessment_date, assessment_period, p01_customer_satisfaction, \
             p01_comment, p01_weight, p02_welcome_change, p02_comment, p02_weight, \
-            p03_deliver_frequently, p03_comment, p03_weight, p04_collaboration, p04_comment, \
-            p04_weight, p05_motivated_individuals, p05_comment, p05_weight, p06_face_to_face, \
-            p06_comment, p06_weight, p07_working_software, p07_comment, p07_weight, \
-            p08_sustainable_development, p08_comment, p08_weight, p09_technical_excellence, \
-            p09_comment, p09_weight, p10_simplicity, p10_comment, p10_weight, \
-            p11_self_organising_teams, p11_comment, p11_weight, p12_regular_reflection, \
-            p12_comment, p12_weight, overall_notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, \
-            $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, \
-            $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, \
-            $41, $42, $43) RETURNING *",
+            p03_deliver_frequently, p03_comment, p03_weight, p04_collaboration, \
+            p04_comment, p04_weight, p05_motivated_individuals, p05_comment, p05_weight, \
+            p06_face_to_face, p06_comment, p06_weight, p07_working_software, \
+            p07_comment, p07_weight, p08_sustainable_development, p08_comment, \
+            p08_weight, p09_technical_excellence, p09_comment, p09_weight, \
+            p10_simplicity, p10_comment, p10_weight, p11_self_organising_teams, \
+            p11_comment, p11_weight, p12_regular_reflection, p12_comment, p12_weight, \
+            overall_notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, \
+            $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, \
+            $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.respondent_id)
         .bind(&self.status)
         .bind(self.is_anonymous)
@@ -122,23 +121,24 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE agile_principles_assessments SET deleted_at = $2, respondent_id = $3, \
-            status = $4, is_anonymous = $5, assessment_date = $6, assessment_period = $7, \
-            p01_customer_satisfaction = $8, p01_comment = $9, p01_weight = $10, \
-            p02_welcome_change = $11, p02_comment = $12, p02_weight = $13, \
-            p03_deliver_frequently = $14, p03_comment = $15, p03_weight = $16, \
-            p04_collaboration = $17, p04_comment = $18, p04_weight = $19, \
-            p05_motivated_individuals = $20, p05_comment = $21, p05_weight = $22, \
-            p06_face_to_face = $23, p06_comment = $24, p06_weight = $25, p07_working_software \
-            = $26, p07_comment = $27, p07_weight = $28, p08_sustainable_development = $29, \
-            p08_comment = $30, p08_weight = $31, p09_technical_excellence = $32, p09_comment \
-            = $33, p09_weight = $34, p10_simplicity = $35, p10_comment = $36, p10_weight = \
-            $37, p11_self_organising_teams = $38, p11_comment = $39, p11_weight = $40, \
-            p12_regular_reflection = $41, p12_comment = $42, p12_weight = $43, overall_notes \
-            = $44, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE agile_principles_assessments SET respondent_id = $2, status = $3, \
+            is_anonymous = $4, assessment_date = $5, assessment_period = $6, \
+            p01_customer_satisfaction = $7, p01_comment = $8, p01_weight = $9, \
+            p02_welcome_change = $10, p02_comment = $11, p02_weight = $12, \
+            p03_deliver_frequently = $13, p03_comment = $14, p03_weight = $15, \
+            p04_collaboration = $16, p04_comment = $17, p04_weight = $18, \
+            p05_motivated_individuals = $19, p05_comment = $20, p05_weight = $21, \
+            p06_face_to_face = $22, p06_comment = $23, p06_weight = $24, \
+            p07_working_software = $25, p07_comment = $26, p07_weight = $27, \
+            p08_sustainable_development = $28, p08_comment = $29, p08_weight = $30, \
+            p09_technical_excellence = $31, p09_comment = $32, p09_weight = $33, \
+            p10_simplicity = $34, p10_comment = $35, p10_weight = $36, \
+            p11_self_organising_teams = $37, p11_comment = $38, p11_weight = $39, \
+            p12_regular_reflection = $40, p12_comment = $41, p12_weight = $42, \
+            overall_notes = $43, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.respondent_id)
         .bind(&self.status)
         .bind(self.is_anonymous)

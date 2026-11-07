@@ -9,7 +9,6 @@ use crate::models::people::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub title: String,
     pub first_names: String,
     pub last_name: String,
@@ -28,12 +27,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO people (deleted_at, title, first_names, last_name, other_names, \
+            "INSERT INTO people (title, first_names, last_name, other_names, \
             date_of_birth, email, phone, address_id, is_trust_corporation, \
-            trust_corporation_number, is_bankrupt, has_debt_relief_order) VALUES ($1, $2, $3, \
-            $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *",
+            trust_corporation_number, is_bankrupt, has_debt_relief_order) VALUES ($1, \
+            $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.title)
         .bind(&self.first_names)
         .bind(&self.last_name)
@@ -53,13 +51,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE people SET deleted_at = $2, title = $3, first_names = $4, last_name = $5, \
-            other_names = $6, date_of_birth = $7, email = $8, phone = $9, address_id = $10, \
-            is_trust_corporation = $11, trust_corporation_number = $12, is_bankrupt = $13, \
-            has_debt_relief_order = $14, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE people SET title = $2, first_names = $3, last_name = $4, other_names \
+            = $5, date_of_birth = $6, email = $7, phone = $8, address_id = $9, \
+            is_trust_corporation = $10, trust_corporation_number = $11, is_bankrupt = \
+            $12, has_debt_relief_order = $13, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.title)
         .bind(&self.first_names)
         .bind(&self.last_name)

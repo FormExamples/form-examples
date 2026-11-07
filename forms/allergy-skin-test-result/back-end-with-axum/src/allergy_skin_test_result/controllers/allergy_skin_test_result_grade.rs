@@ -9,7 +9,6 @@ use crate::models::allergy_skin_test_result_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub allergy_skin_test_result_id: Uuid,
     pub result_classification: String,
     pub abnormality_severity: String,
@@ -28,14 +27,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO allergy_skin_test_result_grades (deleted_at, \
-            allergy_skin_test_result_id, result_classification, abnormality_severity, \
-            reporting_category, report_completeness_percent, follow_up_urgency, \
-            target_timeframe, recommended_action, recommendation, clinician_notes, signed_at, \
-            graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) \
-            RETURNING *",
+            "INSERT INTO allergy_skin_test_result_grades (allergy_skin_test_result_id, \
+            result_classification, abnormality_severity, reporting_category, \
+            report_completeness_percent, follow_up_urgency, target_timeframe, \
+            recommended_action, recommendation, clinician_notes, signed_at, graded_at) \
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.allergy_skin_test_result_id)
         .bind(&self.result_classification)
         .bind(&self.abnormality_severity)
@@ -55,15 +52,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE allergy_skin_test_result_grades SET deleted_at = $2, \
-            allergy_skin_test_result_id = $3, result_classification = $4, \
-            abnormality_severity = $5, reporting_category = $6, report_completeness_percent = \
-            $7, follow_up_urgency = $8, target_timeframe = $9, recommended_action = $10, \
-            recommendation = $11, clinician_notes = $12, signed_at = $13, graded_at = $14, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE allergy_skin_test_result_grades SET allergy_skin_test_result_id = $2, \
+            result_classification = $3, abnormality_severity = $4, reporting_category = \
+            $5, report_completeness_percent = $6, follow_up_urgency = $7, \
+            target_timeframe = $8, recommended_action = $9, recommendation = $10, \
+            clinician_notes = $11, signed_at = $12, graded_at = $13, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.allergy_skin_test_result_id)
         .bind(&self.result_classification)
         .bind(&self.abnormality_severity)

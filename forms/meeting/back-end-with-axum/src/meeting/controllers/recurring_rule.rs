@@ -9,7 +9,6 @@ use crate::models::recurring_rules::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub meeting_id: Uuid,
     pub frequency: String,
     pub interval_count: i32,
@@ -27,12 +26,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO recurring_rules (deleted_at, meeting_id, frequency, interval_count, \
-            by_day_of_week, by_day_of_month, by_set_position, by_month_of_year, series_count, \
-            series_until, timezone, rrule_text) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, \
-            $10, $11, $12) RETURNING *",
+            "INSERT INTO recurring_rules (meeting_id, frequency, interval_count, \
+            by_day_of_week, by_day_of_month, by_set_position, by_month_of_year, \
+            series_count, series_until, timezone, rrule_text) VALUES ($1, $2, $3, $4, \
+            $5, $6, $7, $8, $9, $10, $11) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.meeting_id)
         .bind(&self.frequency)
         .bind(self.interval_count)
@@ -51,13 +49,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE recurring_rules SET deleted_at = $2, meeting_id = $3, frequency = $4, \
-            interval_count = $5, by_day_of_week = $6, by_day_of_month = $7, by_set_position = \
-            $8, by_month_of_year = $9, series_count = $10, series_until = $11, timezone = \
-            $12, rrule_text = $13, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE recurring_rules SET meeting_id = $2, frequency = $3, interval_count = \
+            $4, by_day_of_week = $5, by_day_of_month = $6, by_set_position = $7, \
+            by_month_of_year = $8, series_count = $9, series_until = $10, timezone = \
+            $11, rrule_text = $12, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.meeting_id)
         .bind(&self.frequency)
         .bind(self.interval_count)

@@ -9,7 +9,6 @@ use crate::models::lpa_attorneys::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub lpa_id: Uuid,
     pub attorney_id: Uuid,
     pub order_position: i32,
@@ -19,10 +18,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO lpa_attorneys (deleted_at, lpa_id, attorney_id, order_position) \
-            VALUES ($1, $2, $3, $4) RETURNING *",
+            "INSERT INTO lpa_attorneys (lpa_id, attorney_id, order_position) VALUES ($1, \
+            $2, $3) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.lpa_id)
         .bind(self.attorney_id)
         .bind(self.order_position)
@@ -33,11 +31,10 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE lpa_attorneys SET deleted_at = $2, lpa_id = $3, attorney_id = $4, \
-            order_position = $5, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE lpa_attorneys SET lpa_id = $2, attorney_id = $3, order_position = $4, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.lpa_id)
         .bind(self.attorney_id)
         .bind(self.order_position)

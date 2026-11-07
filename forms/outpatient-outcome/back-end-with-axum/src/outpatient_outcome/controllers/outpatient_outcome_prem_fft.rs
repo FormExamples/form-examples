@@ -9,7 +9,6 @@ use crate::models::outpatient_outcome_prem_ffts::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub outpatient_outcome_id: Uuid,
     pub fft_response: String,
     pub fft_comment: String,
@@ -19,10 +18,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO outpatient_outcome_prem_ffts (deleted_at, outpatient_outcome_id, \
-            fft_response, fft_comment) VALUES ($1, $2, $3, $4) RETURNING *",
+            "INSERT INTO outpatient_outcome_prem_ffts (outpatient_outcome_id, \
+            fft_response, fft_comment) VALUES ($1, $2, $3) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.outpatient_outcome_id)
         .bind(&self.fft_response)
         .bind(&self.fft_comment)
@@ -33,12 +31,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE outpatient_outcome_prem_ffts SET deleted_at = $2, outpatient_outcome_id = \
-            $3, fft_response = $4, fft_comment = $5, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE outpatient_outcome_prem_ffts SET outpatient_outcome_id = $2, \
+            fft_response = $3, fft_comment = $4, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.outpatient_outcome_id)
         .bind(&self.fft_response)
         .bind(&self.fft_comment)

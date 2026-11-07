@@ -38,7 +38,8 @@ impl Params {
         sqlx::query_as(
             "UPDATE abdominal_aortic_aneurysm_screening_grade_rules SET \
             abdominal_aortic_aneurysm_screening_grade_id = $2, rule_id = $3, stage = $4, \
-            category = $5, description = $6, updated_at = now() WHERE id = $1 RETURNING *",
+            category = $5, description = $6, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.abdominal_aortic_aneurysm_screening_grade_id)

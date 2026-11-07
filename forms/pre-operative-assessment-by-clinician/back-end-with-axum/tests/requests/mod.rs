@@ -13,3 +13,4 @@ pub mod pre_operative_assessment_by_clinician;
 pub mod pre_operative_assessment_by_clinician_grade;
 mod pre_operative_assessment_by_clinician_grade_flags_route;
 mod pre_operative_assessment_by_clinician_grade_rules_route;
+mod soft_delete;

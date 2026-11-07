@@ -14,3 +14,4 @@ mod eye_prescription_visual_acuities_route;
 mod eye_prescriptions_route;
 pub mod patient;
 mod prescribers_route;
+mod soft_delete;

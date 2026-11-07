@@ -19,6 +19,7 @@ pub struct Model {
     /// ID.
     pub id: Uuid,
     /// Deleted at (soft-delete).
+    #[serde(skip)]
     pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Free-text reference back to the originating referral request.
     pub originating_request_reference: String,
@@ -84,15 +85,19 @@ impl Model {
     /// Propagates the database error.
     pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Self>, i64)> {
         let (limit, offset) = crate::support::paging::bounds(page);
-        let rows =
-            sqlx::query_as("SELECT * FROM cardiology_responses ORDER BY id LIMIT $1 OFFSET $2")
-                .bind(limit)
-                .bind(offset)
-                .fetch_all(db)
-                .await?;
-        let total = sqlx::query_scalar("SELECT COUNT(*) FROM cardiology_responses")
-            .fetch_one(db)
-            .await?;
+        let rows = sqlx::query_as(
+            "SELECT * FROM cardiology_responses WHERE deleted_at IS NULL ORDER BY id \
+            LIMIT $1 OFFSET $2",
+        )
+        .bind(limit)
+        .bind(offset)
+        .fetch_all(db)
+        .await?;
+        let total = sqlx::query_scalar(
+            "SELECT COUNT(*) FROM cardiology_responses WHERE deleted_at IS NULL",
+        )
+        .fetch_one(db)
+        .await?;
         Ok((rows, total))
     }
 
@@ -102,7 +107,7 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn find_by_id(db: &PgPool, id: Uuid) -> sqlx::Result<Option<Self>> {
-        sqlx::query_as("SELECT * FROM cardiology_responses WHERE id = $1")
+        sqlx::query_as("SELECT * FROM cardiology_responses WHERE id = $1 AND deleted_at IS NULL")
             .bind(id)
             .fetch_optional(db)
             .await
@@ -114,10 +119,22 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn delete(db: &PgPool, id: Uuid) -> sqlx::Result<()> {
-        sqlx::query("DELETE FROM cardiology_responses WHERE id = $1")
-            .bind(id)
-            .execute(db)
-            .await?;
+        sqlx::query(
+            "WITH target AS (UPDATE cardiology_responses SET deleted_at = now(), \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING id), \
+            child1 AS (UPDATE cardiology_response_grades SET deleted_at = now(), \
+            updated_at = now() WHERE cardiology_response_id IN (SELECT id FROM target) \
+            AND deleted_at IS NULL RETURNING id), child2 AS (UPDATE \
+            cardiology_response_grade_rules SET deleted_at = now(), updated_at = now() \
+            WHERE cardiology_response_grade_id IN (SELECT id FROM child1) AND deleted_at \
+            IS NULL RETURNING id), child3 AS (UPDATE cardiology_response_grade_flags SET \
+            deleted_at = now(), updated_at = now() WHERE cardiology_response_grade_id IN \
+            (SELECT id FROM child1) AND deleted_at IS NULL RETURNING id) SELECT count(*) \
+            FROM target",
+        )
+        .bind(id)
+        .execute(db)
+        .await?;
         Ok(())
     }
 }
@@ -202,17 +219,18 @@ impl Model {
     ) -> sqlx::Result<Self> {
         let now = Utc::now();
         sqlx::query_as(
-            "UPDATE cardiology_responses SET updated_at = $2, deleted_at = NULL, patient_id = \
-            $3, clinician_id = $4, originating_request_reference = $5, response_status = $6, \
-            consultation_type = $7, assessed_date = $8, responded_date = $9, clinical_summary \
-            = $10, examination_findings = $11, investigations_performed = $12, \
-            ischaemia_or_cad = $13, significant_arrhythmia = $14, reduced_ejection_fraction = \
-            $15, significant_valve_disease = $16, structural_abnormality = $17, \
-            uncontrolled_hypertension = $18, non_cardiac_cause = $19, \
-            primary_diagnosis_category = $20, diagnosis_narrative = $21, \
-            lv_ejection_fraction_percent = $22, management_plan = $23, medication_changes = \
-            $24, recommended_follow_up = $25, critical_result = $26, \
-            critical_result_communicated = $27, reported_to = $28 WHERE id = $1 RETURNING *",
+            "UPDATE cardiology_responses SET updated_at = $2, patient_id = $3, \
+            clinician_id = $4, originating_request_reference = $5, response_status = $6, \
+            consultation_type = $7, assessed_date = $8, responded_date = $9, \
+            clinical_summary = $10, examination_findings = $11, investigations_performed \
+            = $12, ischaemia_or_cad = $13, significant_arrhythmia = $14, \
+            reduced_ejection_fraction = $15, significant_valve_disease = $16, \
+            structural_abnormality = $17, uncontrolled_hypertension = $18, \
+            non_cardiac_cause = $19, primary_diagnosis_category = $20, \
+            diagnosis_narrative = $21, lv_ejection_fraction_percent = $22, \
+            management_plan = $23, medication_changes = $24, recommended_follow_up = \
+            $25, critical_result = $26, critical_result_communicated = $27, reported_to \
+            = $28 WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(now)
@@ -253,7 +271,17 @@ impl Model {
     /// Propagates the database error.
     pub async fn soft_delete(db: &PgPool, id: Uuid) -> sqlx::Result<()> {
         sqlx::query(
-            "UPDATE cardiology_responses SET deleted_at = now(), updated_at = now() WHERE id = $1",
+            "WITH target AS (UPDATE cardiology_responses SET deleted_at = now(), \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING id), \
+            child1 AS (UPDATE cardiology_response_grades SET deleted_at = now(), \
+            updated_at = now() WHERE cardiology_response_id IN (SELECT id FROM target) \
+            AND deleted_at IS NULL RETURNING id), child2 AS (UPDATE \
+            cardiology_response_grade_rules SET deleted_at = now(), updated_at = now() \
+            WHERE cardiology_response_grade_id IN (SELECT id FROM child1) AND deleted_at \
+            IS NULL RETURNING id), child3 AS (UPDATE cardiology_response_grade_flags SET \
+            deleted_at = now(), updated_at = now() WHERE cardiology_response_grade_id IN \
+            (SELECT id FROM child1) AND deleted_at IS NULL RETURNING id) SELECT count(*) \
+            FROM target",
         )
         .bind(id)
         .execute(db)
@@ -323,14 +351,16 @@ pub async fn find_by_id(db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
 pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Model>, i64)> {
     let (limit, offset) = crate::support::paging::bounds(page);
     let rows = sqlx::query_as::<_, Model>(
-        "SELECT * FROM cardiology_responses ORDER BY created_at DESC, id LIMIT $1 OFFSET $2",
+        "SELECT * FROM cardiology_responses WHERE deleted_at IS NULL ORDER BY \
+            created_at DESC, id LIMIT $1 OFFSET $2",
     )
     .bind(limit)
     .bind(offset)
     .fetch_all(db)
     .await?;
-    let total = sqlx::query_scalar("SELECT COUNT(*) FROM cardiology_responses")
-        .fetch_one(db)
-        .await?;
+    let total =
+        sqlx::query_scalar("SELECT COUNT(*) FROM cardiology_responses WHERE deleted_at IS NULL")
+            .fetch_one(db)
+            .await?;
     Ok((rows, total))
 }

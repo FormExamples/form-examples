@@ -9,7 +9,6 @@ use crate::models::grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub prescription_request_id: Uuid,
     pub priority_level: String,
     pub rule_count: i32,
@@ -20,10 +19,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO grades (deleted_at, prescription_request_id, priority_level, \
-            rule_count, graded_at) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+            "INSERT INTO grades (prescription_request_id, priority_level, rule_count, \
+            graded_at) VALUES ($1, $2, $3, $4) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.prescription_request_id)
         .bind(&self.priority_level)
         .bind(self.rule_count)
@@ -35,11 +33,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE grades SET deleted_at = $2, prescription_request_id = $3, priority_level = \
-            $4, rule_count = $5, graded_at = $6, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE grades SET prescription_request_id = $2, priority_level = $3, \
+            rule_count = $4, graded_at = $5, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.prescription_request_id)
         .bind(&self.priority_level)
         .bind(self.rule_count)

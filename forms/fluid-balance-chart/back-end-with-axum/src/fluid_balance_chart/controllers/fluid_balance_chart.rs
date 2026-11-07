@@ -48,9 +48,10 @@ impl Params {
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
             "UPDATE fluid_balance_charts SET patient_id = $2, clinician_id = $3, \
-            clinician_name = $4, clinician_role = $5, patient_identifier = $6, ward_or_unit = \
-            $7, chart_start_at = $8, chart_period_hours = $9, weight_kg = $10, clinical_note \
-            = $11, updated_at = now() WHERE id = $1 RETURNING *",
+            clinician_name = $4, clinician_role = $5, patient_identifier = $6, \
+            ward_or_unit = $7, chart_start_at = $8, chart_period_hours = $9, weight_kg = \
+            $10, clinical_note = $11, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

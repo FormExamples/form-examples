@@ -9,7 +9,6 @@ use crate::models::adult_vaccinations::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub td_ipv_booster: Option<i32>,
     pub hpv: Option<i32>,
@@ -24,11 +23,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO adult_vaccinations (deleted_at, assessment_id, td_ipv_booster, hpv, \
-            meningitis_acwy, influenza_annual, covid19, shingles, pneumococcal_ppv) VALUES \
-            ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
+            "INSERT INTO adult_vaccinations (assessment_id, td_ipv_booster, hpv, \
+            meningitis_acwy, influenza_annual, covid19, shingles, pneumococcal_ppv) \
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.td_ipv_booster)
         .bind(self.hpv)
@@ -44,13 +42,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE adult_vaccinations SET deleted_at = $2, assessment_id = $3, td_ipv_booster \
-            = $4, hpv = $5, meningitis_acwy = $6, influenza_annual = $7, covid19 = $8, \
-            shingles = $9, pneumococcal_ppv = $10, updated_at = now() WHERE id = $1 RETURNING \
-            *",
+            "UPDATE adult_vaccinations SET assessment_id = $2, td_ipv_booster = $3, hpv = \
+            $4, meningitis_acwy = $5, influenza_annual = $6, covid19 = $7, shingles = \
+            $8, pneumococcal_ppv = $9, updated_at = now() WHERE id = $1 AND deleted_at \
+            IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.td_ipv_booster)
         .bind(self.hpv)

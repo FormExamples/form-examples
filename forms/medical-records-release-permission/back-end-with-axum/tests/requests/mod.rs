@@ -13,6 +13,7 @@ pub mod records_to_release;
 pub mod release_form;
 pub mod restrictions_limitations;
 pub mod signature_consent;
+mod soft_delete;
 pub mod validation_additional_flag;
 pub mod validation_fired_rule;
 pub mod validation_result;

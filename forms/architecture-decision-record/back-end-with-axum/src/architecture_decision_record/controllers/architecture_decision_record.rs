@@ -216,8 +216,22 @@ async fn render_markdown(ctx: &AppContext, item: &Model) -> Result<String> {
     let author = authors::Model::find_by_id(&db(ctx), item.author_id.unwrap_or_default()).await?;
     let org = organizations::Model::find_by_id(&db(ctx), item.organization_id.unwrap_or_default())
         .await?;
-    let positions = sqlx::query_as::<_, architecture_decision_record_positions::Model>("SELECT * FROM architecture_decision_record_positions WHERE architecture_decision_record_id = $1 ORDER BY ordinal ASC").bind(id).fetch_all(&db(ctx)).await?;
-    let notes = sqlx::query_as::<_, architecture_decision_record_notes::Model>("SELECT * FROM architecture_decision_record_notes WHERE architecture_decision_record_id = $1 ORDER BY noted_at ASC").bind(id).fetch_all(&db(ctx)).await?;
+    let positions = sqlx::query_as::<_, architecture_decision_record_positions::Model>(
+        "SELECT * FROM architecture_decision_record_positions WHERE \
+            architecture_decision_record_id = $1 AND deleted_at IS NULL ORDER BY ordinal \
+            ASC",
+    )
+    .bind(id)
+    .fetch_all(&db(ctx))
+    .await?;
+    let notes = sqlx::query_as::<_, architecture_decision_record_notes::Model>(
+        "SELECT * FROM architecture_decision_record_notes WHERE \
+            architecture_decision_record_id = $1 AND deleted_at IS NULL ORDER BY \
+            noted_at ASC",
+    )
+    .bind(id)
+    .fetch_all(&db(ctx))
+    .await?;
 
     let mut md = String::new();
     let heading = format!("{} — {}", pad4(item.number), item.title);
@@ -359,12 +373,14 @@ async fn api_show_by_slug(
     Path(slug): Path<String>,
     State(ctx): State<AppContext>,
 ) -> Result<Response> {
-    let item =
-        sqlx::query_as::<_, Model>("SELECT * FROM architecture_decision_records WHERE slug = $1")
-            .bind(&slug)
-            .fetch_optional(&db(&ctx))
-            .await?
-            .ok_or_else(|| Error::NotFound)?;
+    let item = sqlx::query_as::<_, Model>(
+        "SELECT * FROM architecture_decision_records WHERE slug = $1 AND deleted_at \
+            IS NULL",
+    )
+    .bind(&slug)
+    .fetch_optional(&db(&ctx))
+    .await?
+    .ok_or_else(|| Error::NotFound)?;
     let id = item.id;
     let author_name = authors::Model::find_by_id(&db(&ctx), item.author_id.unwrap_or_default())
         .await?
@@ -411,16 +427,18 @@ async fn api_index(
     let page = paging::resolve(&params)?;
     let (limit, offset) = paging::bounds(page);
     let rows = sqlx::query_as::<_, Model>(
-        "SELECT * FROM architecture_decision_records ORDER BY number ASC, id ASC \
-         LIMIT $1 OFFSET $2",
+        "SELECT * FROM architecture_decision_records WHERE deleted_at IS NULL ORDER \
+            BY number ASC, id ASC LIMIT $1 OFFSET $2",
     )
     .bind(limit)
     .bind(offset)
     .fetch_all(&db(&ctx))
     .await?;
-    let total: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM architecture_decision_records")
-        .fetch_one(&db(&ctx))
-        .await?;
+    let total: i64 = sqlx::query_scalar(
+        "SELECT COUNT(*) FROM architecture_decision_records WHERE deleted_at IS NULL",
+    )
+    .fetch_one(&db(&ctx))
+    .await?;
 
     let mut out: Vec<AdrRowApi> = Vec::with_capacity(rows.len());
     for r in rows {

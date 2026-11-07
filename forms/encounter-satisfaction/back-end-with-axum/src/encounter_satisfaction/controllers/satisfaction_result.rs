@@ -9,7 +9,6 @@ use crate::models::satisfaction_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub encounter_satisfaction_id: Uuid,
     pub composite_score: f64,
     pub category: String,
@@ -21,11 +20,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO satisfaction_results (deleted_at, encounter_satisfaction_id, \
-            composite_score, category, answered_count, scored_at) VALUES ($1, $2, $3, $4, $5, \
-            $6) RETURNING *",
+            "INSERT INTO satisfaction_results (encounter_satisfaction_id, \
+            composite_score, category, answered_count, scored_at) VALUES ($1, $2, $3, \
+            $4, $5) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.encounter_satisfaction_id)
         .bind(self.composite_score)
         .bind(&self.category)
@@ -38,12 +36,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE satisfaction_results SET deleted_at = $2, encounter_satisfaction_id = $3, \
-            composite_score = $4, category = $5, answered_count = $6, scored_at = $7, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE satisfaction_results SET encounter_satisfaction_id = $2, \
+            composite_score = $3, category = $4, answered_count = $5, scored_at = $6, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.encounter_satisfaction_id)
         .bind(self.composite_score)
         .bind(&self.category)

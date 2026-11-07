@@ -9,7 +9,6 @@ use crate::models::genetic_test_requests::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub status: String,
@@ -37,15 +36,14 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO genetic_test_requests (deleted_at, patient_id, clinician_id, status, \
+            "INSERT INTO genetic_test_requests (patient_id, clinician_id, status, \
             site_name, setting, referral_date, requested_by_date, test_type, \
             primary_indication, clinical_question, clinical_details, family_history, \
             suspected_condition, consent_obtained, genetic_counselling_offered, \
             affected_relative_tested, specimen_type, urgency, supervising_consultant, \
-            requester_contact, notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, \
-            $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22) RETURNING *",
+            requester_contact, notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, \
+            $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)
@@ -74,17 +72,16 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE genetic_test_requests SET deleted_at = $2, patient_id = $3, clinician_id = \
-            $4, status = $5, site_name = $6, setting = $7, referral_date = $8, \
-            requested_by_date = $9, test_type = $10, primary_indication = $11, \
-            clinical_question = $12, clinical_details = $13, family_history = $14, \
-            suspected_condition = $15, consent_obtained = $16, genetic_counselling_offered = \
-            $17, affected_relative_tested = $18, specimen_type = $19, urgency = $20, \
-            supervising_consultant = $21, requester_contact = $22, notes = $23, updated_at = \
-            now() WHERE id = $1 RETURNING *",
+            "UPDATE genetic_test_requests SET patient_id = $2, clinician_id = $3, status \
+            = $4, site_name = $5, setting = $6, referral_date = $7, requested_by_date = \
+            $8, test_type = $9, primary_indication = $10, clinical_question = $11, \
+            clinical_details = $12, family_history = $13, suspected_condition = $14, \
+            consent_obtained = $15, genetic_counselling_offered = $16, \
+            affected_relative_tested = $17, specimen_type = $18, urgency = $19, \
+            supervising_consultant = $20, requester_contact = $21, notes = $22, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)

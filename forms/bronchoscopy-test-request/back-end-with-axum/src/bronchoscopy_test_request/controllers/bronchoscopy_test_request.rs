@@ -9,7 +9,6 @@ use crate::models::bronchoscopy_test_requests::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub status: String,
@@ -44,17 +43,17 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO bronchoscopy_test_requests (deleted_at, patient_id, clinician_id, \
-            status, site_name, setting, referral_date, requested_by_date, procedure, \
-            primary_indication, clinical_question, relevant_history, symptom_haemoptysis, \
-            symptom_cough, symptom_breathlessness, symptom_weight_loss, imaging_findings, \
-            taking_anticoagulant, anticoagulant_agent, taking_antiplatelet, \
-            antiplatelet_agent, platelet_count, oxygen_dependent, asa_grade, sedation, \
-            urgency, supervising_consultant, requester_contact, notes) VALUES ($1, $2, $3, \
-            $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, \
-            $21, $22, $23, $24, $25, $26, $27, $28, $29) RETURNING *",
+            "INSERT INTO bronchoscopy_test_requests (patient_id, clinician_id, status, \
+            site_name, setting, referral_date, requested_by_date, procedure, \
+            primary_indication, clinical_question, relevant_history, \
+            symptom_haemoptysis, symptom_cough, symptom_breathlessness, \
+            symptom_weight_loss, imaging_findings, taking_anticoagulant, \
+            anticoagulant_agent, taking_antiplatelet, antiplatelet_agent, \
+            platelet_count, oxygen_dependent, asa_grade, sedation, urgency, \
+            supervising_consultant, requester_contact, notes) VALUES ($1, $2, $3, $4, \
+            $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, \
+            $21, $22, $23, $24, $25, $26, $27, $28) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)
@@ -90,19 +89,18 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE bronchoscopy_test_requests SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, status = $5, site_name = $6, setting = $7, referral_date = $8, \
-            requested_by_date = $9, procedure = $10, primary_indication = $11, \
-            clinical_question = $12, relevant_history = $13, symptom_haemoptysis = $14, \
-            symptom_cough = $15, symptom_breathlessness = $16, symptom_weight_loss = $17, \
-            imaging_findings = $18, taking_anticoagulant = $19, anticoagulant_agent = $20, \
-            taking_antiplatelet = $21, antiplatelet_agent = $22, platelet_count = $23, \
-            oxygen_dependent = $24, asa_grade = $25, sedation = $26, urgency = $27, \
-            supervising_consultant = $28, requester_contact = $29, notes = $30, updated_at = \
-            now() WHERE id = $1 RETURNING *",
+            "UPDATE bronchoscopy_test_requests SET patient_id = $2, clinician_id = $3, \
+            status = $4, site_name = $5, setting = $6, referral_date = $7, \
+            requested_by_date = $8, procedure = $9, primary_indication = $10, \
+            clinical_question = $11, relevant_history = $12, symptom_haemoptysis = $13, \
+            symptom_cough = $14, symptom_breathlessness = $15, symptom_weight_loss = \
+            $16, imaging_findings = $17, taking_anticoagulant = $18, anticoagulant_agent \
+            = $19, taking_antiplatelet = $20, antiplatelet_agent = $21, platelet_count = \
+            $22, oxygen_dependent = $23, asa_grade = $24, sedation = $25, urgency = $26, \
+            supervising_consultant = $27, requester_contact = $28, notes = $29, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)

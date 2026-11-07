@@ -9,7 +9,6 @@ use crate::models::angiography_test_requests::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub status: String,
@@ -43,17 +42,16 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO angiography_test_requests (deleted_at, patient_id, clinician_id, \
-            status, site_name, setting, referral_date, requested_by_date, angiography_type, \
+            "INSERT INTO angiography_test_requests (patient_id, clinician_id, status, \
+            site_name, setting, referral_date, requested_by_date, angiography_type, \
             body_region, primary_indication, clinical_question, relevant_history, \
             contrast_required, egfr, contrast_allergy, diabetes, metformin, \
             taking_anticoagulant, anticoagulant_agent, taking_antiplatelet, \
             bleeding_disorder, pregnancy_status, urgency, ir_me_r_justification, \
-            supervising_consultant, requester_contact, notes) VALUES ($1, $2, $3, $4, $5, $6, \
-            $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, \
-            $24, $25, $26, $27, $28) RETURNING *",
+            supervising_consultant, requester_contact, notes) VALUES ($1, $2, $3, $4, \
+            $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, \
+            $21, $22, $23, $24, $25, $26, $27) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)
@@ -88,19 +86,18 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE angiography_test_requests SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, status = $5, site_name = $6, setting = $7, referral_date = $8, \
-            requested_by_date = $9, angiography_type = $10, body_region = $11, \
-            primary_indication = $12, clinical_question = $13, relevant_history = $14, \
-            contrast_required = $15, egfr = $16, contrast_allergy = $17, diabetes = $18, \
-            metformin = $19, taking_anticoagulant = $20, anticoagulant_agent = $21, \
-            taking_antiplatelet = $22, bleeding_disorder = $23, pregnancy_status = $24, \
-            urgency = $25, ir_me_r_justification = $26, supervising_consultant = $27, \
-            requester_contact = $28, notes = $29, updated_at = now() WHERE id = $1 RETURNING \
-            *",
+            "UPDATE angiography_test_requests SET patient_id = $2, clinician_id = $3, \
+            status = $4, site_name = $5, setting = $6, referral_date = $7, \
+            requested_by_date = $8, angiography_type = $9, body_region = $10, \
+            primary_indication = $11, clinical_question = $12, relevant_history = $13, \
+            contrast_required = $14, egfr = $15, contrast_allergy = $16, diabetes = $17, \
+            metformin = $18, taking_anticoagulant = $19, anticoagulant_agent = $20, \
+            taking_antiplatelet = $21, bleeding_disorder = $22, pregnancy_status = $23, \
+            urgency = $24, ir_me_r_justification = $25, supervising_consultant = $26, \
+            requester_contact = $27, notes = $28, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)

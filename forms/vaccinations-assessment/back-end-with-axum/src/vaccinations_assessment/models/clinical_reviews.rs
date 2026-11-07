@@ -12,6 +12,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     pub id: Uuid,
+    #[serde(skip)]
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub post_vaccination_observation: Option<i32>,
     pub immediate_reaction: String,
@@ -32,14 +33,18 @@ impl Model {
     /// Propagates the database error.
     pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Self>, i64)> {
         let (limit, offset) = crate::support::paging::bounds(page);
-        let rows = sqlx::query_as("SELECT * FROM clinical_reviews ORDER BY id LIMIT $1 OFFSET $2")
-            .bind(limit)
-            .bind(offset)
-            .fetch_all(db)
-            .await?;
-        let total = sqlx::query_scalar("SELECT COUNT(*) FROM clinical_reviews")
-            .fetch_one(db)
-            .await?;
+        let rows = sqlx::query_as(
+            "SELECT * FROM clinical_reviews WHERE deleted_at IS NULL ORDER BY id LIMIT $1 \
+            OFFSET $2",
+        )
+        .bind(limit)
+        .bind(offset)
+        .fetch_all(db)
+        .await?;
+        let total =
+            sqlx::query_scalar("SELECT COUNT(*) FROM clinical_reviews WHERE deleted_at IS NULL")
+                .fetch_one(db)
+                .await?;
         Ok((rows, total))
     }
 
@@ -49,7 +54,7 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn find_by_id(db: &PgPool, id: Uuid) -> sqlx::Result<Option<Self>> {
-        sqlx::query_as("SELECT * FROM clinical_reviews WHERE id = $1")
+        sqlx::query_as("SELECT * FROM clinical_reviews WHERE id = $1 AND deleted_at IS NULL")
             .bind(id)
             .fetch_optional(db)
             .await
@@ -61,10 +66,13 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn delete(db: &PgPool, id: Uuid) -> sqlx::Result<()> {
-        sqlx::query("DELETE FROM clinical_reviews WHERE id = $1")
-            .bind(id)
-            .execute(db)
-            .await?;
+        sqlx::query(
+            "UPDATE clinical_reviews SET deleted_at = now(), updated_at = now() WHERE id \
+            = $1 AND deleted_at IS NULL",
+        )
+        .bind(id)
+        .execute(db)
+        .await?;
         Ok(())
     }
 }

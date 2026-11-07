@@ -103,17 +103,18 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE emergency_department_triage_notes SET patient_id = $2, clinician_id = $3, \
-            status = $4, nurse_name = $5, triaged_at = $6, care_setting = $7, arrival_mode = \
-            $8, arrived_at = $9, referral_source = $10, patient_identifier = $11, age_band = \
-            $12, presenting_complaint = $13, brief_history = $14, symptom_onset = $15, \
-            respiratory_rate = $16, spo2 = $17, on_oxygen = $18, systolic_bp = $19, pulse = \
-            $20, consciousness_acvpu = $21, temperature = $22, glasgow_coma_scale = $23, \
-            pain_score = $24, airway_threat = $25, breathing_inadequate = $26, \
-            circulation_shock = $27, haemorrhage_major = $28, consciousness_reduced = $29, \
-            seizure_active = $30, focal_neurology = $31, sepsis_features = $32, \
-            chest_pain_cardiac = $33, stroke_features = $34, paediatric_red_flag = $35, \
-            clinical_notes = $36, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE emergency_department_triage_notes SET patient_id = $2, clinician_id = \
+            $3, status = $4, nurse_name = $5, triaged_at = $6, care_setting = $7, \
+            arrival_mode = $8, arrived_at = $9, referral_source = $10, \
+            patient_identifier = $11, age_band = $12, presenting_complaint = $13, \
+            brief_history = $14, symptom_onset = $15, respiratory_rate = $16, spo2 = \
+            $17, on_oxygen = $18, systolic_bp = $19, pulse = $20, consciousness_acvpu = \
+            $21, temperature = $22, glasgow_coma_scale = $23, pain_score = $24, \
+            airway_threat = $25, breathing_inadequate = $26, circulation_shock = $27, \
+            haemorrhage_major = $28, consciousness_reduced = $29, seizure_active = $30, \
+            focal_neurology = $31, sepsis_features = $32, chest_pain_cardiac = $33, \
+            stroke_features = $34, paediatric_red_flag = $35, clinical_notes = $36, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

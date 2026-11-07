@@ -9,7 +9,6 @@ use crate::models::patient_medications::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub medication_id: Uuid,
 }
@@ -18,10 +17,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO patient_medications (deleted_at, patient_id, medication_id) VALUES \
-            ($1, $2, $3) RETURNING *",
+            "INSERT INTO patient_medications (patient_id, medication_id) VALUES ($1, $2) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.medication_id)
         .fetch_one(db)
@@ -31,11 +29,10 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE patient_medications SET deleted_at = $2, patient_id = $3, medication_id = \
-            $4, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE patient_medications SET patient_id = $2, medication_id = $3, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.medication_id)
         .fetch_optional(db)

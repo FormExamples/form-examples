@@ -1,0 +1,412 @@
+#!/usr/bin/env python3
+"""Make every Axum crate's delete a true soft delete.
+
+bin/axum-soft-delete [--check] [--root DIR] [--all|<slug>...]
+
+DELETE sets deleted_at and cascades along the crate's ON DELETE CASCADE keys,
+in one statement, so a deleted assessment takes its grades with it. Every read
+and update then skips deleted rows, deleted_at leaves the request and response
+bodies, and a migration makes each unique index cover live rows only, so a
+deleted row cannot block its replacement. A key with ON DELETE SET NULL is
+left alone, because the reference still says what the row referred to.
+
+--check fails on a crate whose SQL is not in that shape, on a unique index
+migrated after that migration, and on a crate without tests/.../soft_delete.rs.
+A statement the tool cannot classify is listed for a person to read.
+"""
+
+import argparse
+import re
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent / "lib"))
+import axum_crate as ac  # noqa: E402
+
+LIVE = "deleted_at IS NULL"
+COLUMNS = "20261107400000"
+STAMP = "20261107500000"
+UP = """-- A deleted row must not block its replacement, so uniqueness covers live rows.
+DO $$
+DECLARE
+    item record;
+    definition text;
+BEGIN
+    FOR item IN
+        SELECT i.indexrelid::regclass AS name, i.indrelid::regclass AS owner, c.conname
+        FROM pg_index i
+        JOIN pg_class t ON t.oid = i.indrelid
+        JOIN pg_namespace n ON n.oid = t.relnamespace
+        LEFT JOIN pg_constraint c ON c.conindid = i.indexrelid AND c.contype = 'u'
+        WHERE i.indisunique AND NOT i.indisprimary AND i.indpred IS NULL
+          AND n.nspname = current_schema()
+          AND EXISTS (
+              SELECT 1 FROM pg_attribute a
+              WHERE a.attrelid = i.indrelid AND a.attname = 'deleted_at'
+          )
+    LOOP
+        definition := pg_get_indexdef(item.name);
+        IF item.conname IS NULL THEN
+            EXECUTE format('DROP INDEX %s', item.name);
+        ELSE
+            EXECUTE format('ALTER TABLE %s DROP CONSTRAINT %I', item.owner, item.conname);
+        END IF;
+        EXECUTE definition || ' WHERE deleted_at IS NULL';
+    END LOOP;
+END
+$$;
+"""
+DOWN = """DO $$
+DECLARE
+    item record;
+BEGIN
+    FOR item IN
+        SELECT i.indexrelid::regclass AS name, pg_get_indexdef(i.indexrelid) AS definition
+        FROM pg_index i
+        JOIN pg_class t ON t.oid = i.indrelid
+        JOIN pg_namespace n ON n.oid = t.relnamespace
+        WHERE i.indisunique AND i.indpred IS NOT NULL AND n.nspname = current_schema()
+    LOOP
+        EXECUTE format('DROP INDEX %s', item.name);
+        EXECUTE replace(item.definition, ' WHERE (deleted_at IS NULL)', '');
+    END LOOP;
+END
+$$;
+"""
+LITERAL = re.compile(r'"((?:[^"\\]|\\.|\\\n)*)"')
+STAMPED = "SET deleted_at = now(), updated_at = now()"
+VALUES = {
+    "varchar": "''", "text": "''", "integer": "0", "bigint": "0", "double precision": "0",
+    "boolean": "false", "uuid": "gen_random_uuid()", "date": "'2026-01-01'", "time": "'00:00'",
+    "timestamp with time zone": "now()", "jsonb": "'{}'", "bytea": "''",
+}
+
+
+def children(tables):
+    found = {}
+    for table in tables.values():
+        for column in table.columns:
+            if column.references and column.on_delete == "CASCADE":
+                found.setdefault(column.references, []).append((table.name, column.name))
+    return found
+
+
+def cascade(name, kids, key="id"):
+    """One statement that marks the row and everything that cascades from it."""
+    first = f"UPDATE {name} {STAMPED} WHERE {key} = $1 AND {LIVE}"
+    if not kids.get(name):
+        return first
+    parts, count = [f"target AS ({first} RETURNING id)"], 0
+    pending = [("target", name, (name,))]
+    while pending:
+        alias, parent, path = pending.pop(0)
+        for child, column in kids.get(parent, []):
+            if child in path:
+                continue
+            count += 1
+            label = f"child{count}"
+            parts.append(
+                f"{label} AS (UPDATE {child} {STAMPED} WHERE {column} IN "
+                f"(SELECT id FROM {alias}) AND {LIVE} RETURNING id)"
+            )
+            pending.append((label, child, path + (child,)))
+    return "WITH " + ", ".join(parts) + " SELECT count(*) FROM target"
+
+
+def renumber(sql, gone):
+    def shift(match):
+        number = int(match[1])
+        return f"${number - 1}" if number > gone else match[0]
+    return re.sub(r"\$(\d+)", shift, sql)
+
+
+def rewrite(sql, tables, kids, notes):
+    """The soft-delete form of one statement, and how many binds it dropped."""
+    match = re.fullmatch(r"DELETE FROM (\w+) WHERE (\w+) = \$1", sql)
+    if match and match[1] in tables:
+        return cascade(match[1], kids, match[2]), 0
+    match = re.fullmatch(rf"UPDATE (\w+) {re.escape(STAMPED)} WHERE id = \$1", sql)
+    if match and match[1] in tables:
+        return cascade(match[1], kids), 0
+    match = re.match(rf"(?:WITH target AS \()?UPDATE (\w+) {re.escape(STAMPED)} WHERE (\w+) = \$1 AND {LIVE}", sql)
+    if match and match[1] in tables:
+        return cascade(match[1], kids, match[2]), 0
+    match = re.fullmatch(r"(SELECT (?:\*|COUNT\(\*\)) FROM (\w+))(?: WHERE (.*?))?( ORDER BY .*| LIMIT .*)?", sql)
+    if match and match[2] in tables and LIVE not in sql:
+        where = f"{match[3]} AND {LIVE}" if match[3] else LIVE
+        return f"{match[1]} WHERE {where}{match[4] or ''}", 0
+    match = re.fullmatch(r"INSERT INTO (\w+) \((.*?)\) VALUES \((.*?)\)(.*)", sql)
+    if match and "deleted_at" in match[2]:
+        names = [n.strip() for n in match[2].split(",")]
+        values = [v.strip() for v in match[3].split(",")]
+        index = names.index("deleted_at")
+        value = values[index]
+        del names[index], values[index]
+        text = f"INSERT INTO {match[1]} ({', '.join(names)}) VALUES ({', '.join(values)}){match[4]}"
+        if value.startswith("$"):
+            return renumber(text, int(value[1:])), 1
+        return text, 0
+    match = re.match(r"UPDATE (\w+) SET ", sql)
+    if match and match[1] in tables and STAMPED not in sql:
+        dropped = 0
+        gone = re.search(r"\bdeleted_at = (\$\d+|NULL), ", sql)
+        if gone:
+            sql = sql.replace(gone[0], "", 1)
+            if gone[1].startswith("$"):
+                sql = renumber(sql, int(gone[1][1:]))
+                dropped = 1
+        if LIVE not in sql:
+            sql = re.sub(r"( WHERE .*?)( RETURNING .*)?$", lambda m: f"{m[1]} AND {LIVE}{m[2] or ''}", sql)
+        return sql, dropped
+    if sql.startswith("SELECT MAX("):
+        return sql, 0  # A deleted row still holds its number.
+    if re.match(r"(SELECT|DELETE|UPDATE|WITH)\b", sql) and LIVE not in sql and re.search(r"\b(FROM|UPDATE|JOIN) \w+", sql):
+        if any(re.search(rf"\b{name}\b", sql) for name in tables):
+            notes.append(sql)
+    return sql, 0
+
+
+def literal(sql):
+    lines, line = [], ""
+    for word in sql.split(" "):
+        if line and len(line) + len(word) + 1 > 76:
+            lines.append(line + " ")
+            line = word
+        else:
+            line = f"{line} {word}" if line else word
+    lines.append(line)
+    joiner = "\\\n" + " " * 12
+    return '"' + joiner.join(lines) + '"'
+
+
+def transform(path, tables, kids, notes):
+    text = path.read_text()
+    dropped = 0
+
+    def replace(match):
+        nonlocal dropped
+        raw = match[1]
+        sql = re.sub(r"\\\n\s*", "", raw)
+        if not re.match(r"(SELECT|INSERT|UPDATE|DELETE|WITH)\b", sql):
+            return match[0]
+        new, count = rewrite(sql, tables, kids, notes)
+        dropped += count
+        return match[0] if new == sql else literal(new)
+
+    text = LITERAL.sub(replace, text)
+    removed = len(re.findall(r"^ *\.bind\((?:self|params|\w+)\.deleted_at\)\n", text, re.M))
+    if removed != dropped:
+        notes.append(f"{path.name}: dropped {dropped} placeholders, found {removed} binds")
+    text = re.sub(r"^ *\.bind\((?:self|params|\w+)\.deleted_at\)\n", "", text, flags=re.M)
+    text = text.replace("pub deleted_at: DateTimeWithTimeZone,", "pub deleted_at: Option<DateTimeWithTimeZone>,")
+    doc = r"(?: *///[^\n]*\n)*"
+    if path.parent.name == "controllers":
+        text = re.sub(rf"^{doc} *pub deleted_at: [^\n]*\n", "", text, flags=re.M)
+    elif "sqlx::FromRow" in text and "serde(skip)" not in text:
+        text = re.sub(r"^( *)pub deleted_at:", r"\1#[serde(skip)]\n\1pub deleted_at:", text, flags=re.M)
+    return text
+
+
+def routes(source):
+    """Crate table to its list path, for the tables with a controller."""
+    found = {}
+    for path in source.glob("controllers/*.rs"):
+        text = path.read_text()
+        prefix = re.search(r'\.prefix\("(api/[\w-]+)/?"\)', text)
+        if prefix and re.search(r"\bdelete\(", text):
+            found[prefix[1].removeprefix("api/").replace("-", "_")] = "/" + prefix[1]
+    return found
+
+
+def required_keys(table):
+    return [c for c in table.domain() if c.references and not c.nullable]
+
+
+def build(table, tables, made, lines):
+    """Statements that insert a row and any parent it requires; returns its variable."""
+    if table.name in made:
+        return made[table.name]
+    made[table.name] = None
+    names, values, binds = [], [], []
+    for column in table.domain():
+        if column.references and not column.nullable and column.references in tables:
+            parent = made.get(column.references) or build(tables[column.references], tables, made, lines)
+            names.append(column.name)
+            binds.append(parent)
+            values.append(f"${len(binds)}")
+        elif not column.nullable and column.default is None:
+            names.append(column.name)
+            values.append(VALUES[column.sql])
+    if names:
+        sql = f"INSERT INTO {table.name} ({', '.join(names)}) VALUES ({', '.join(values)}) RETURNING id"
+    else:
+        sql = f"INSERT INTO {table.name} DEFAULT VALUES RETURNING id"
+    name = f"row{len(lines)}"
+    bound = "".join(f"        .bind({b})\n" for b in binds)
+    lines.append(
+        f"        let {name}: Uuid = sqlx::query_scalar(\n            {literal(sql)},\n        )\n"
+        f"{bound}        .fetch_one(&ctx.db)\n        .await\n        .unwrap();\n"
+    )
+    made[table.name] = name
+    return name
+
+
+def subject(tables, kids, served):
+    """A routed table with a delete route, and a child that cascades if it has one."""
+    roots = sorted((t for t in tables.values() if t.name in served),
+                   key=lambda t: (-len(kids.get(t.name, [])), t.name))
+    if not roots:
+        return None, None
+    table = roots[0]
+    for child, _ in kids.get(table.name, []):
+        if child != table.name:
+            return table, tables[child]
+    return table, None
+
+
+UNIQUE_CHECK = '''
+        let unnarrowed: i64 = sqlx::query_scalar(
+            "SELECT count(*) FROM pg_index i JOIN pg_class c ON c.oid = i.indrelid JOIN \\
+            pg_namespace n ON n.oid = c.relnamespace JOIN pg_attribute a ON a.attrelid = \\
+            i.indrelid AND a.attname = 'deleted_at' WHERE i.indisunique AND NOT \\
+            i.indisprimary AND i.indpred IS NULL AND n.nspname = current_schema()",
+        )
+        .fetch_one(&ctx.db)
+        .await
+        .unwrap();
+        assert_eq!(unnarrowed, 0, "a deleted row can block its replacement");
+'''
+
+
+def hidden(name, variable, message):
+    return f'''
+        let hidden: bool = sqlx::query_scalar(
+            "SELECT deleted_at IS NOT NULL FROM {name} WHERE id = $1",
+        )
+        .bind({variable})
+        .fetch_one(&ctx.db)
+        .await
+        .unwrap();
+        assert!(hidden, "{message}");
+'''
+
+
+def test_source(table, child, tables, path, library, standalone):
+    head = "#![forbid(unsafe_code)]\n\n" if standalone else ""
+    made, lines = {}, []
+    parent = build(table, tables, made, lines)
+    checks = hidden(table.name, parent, "the row was removed, not marked")
+    if child is not None:
+        checks += hidden(child.name, build(child, tables, made, lines), "the delete did not cascade")
+    rows = "".join(lines)
+    return f'''{head}use axa::testing::prelude::*;
+use {library}::app::App;
+use serial_test::serial;
+use uuid::Uuid;
+
+#[tokio::test]
+#[serial]
+async fn delete_hides_the_row_and_keeps_it() {{
+    request::<App, _, _>(|request, ctx| async move {{
+{rows}
+        let path = format!("{path}/{{{parent}}}");
+        let live = request.get(&path).await;
+        assert_eq!(live.status_code(), 200);
+        let body = live.json::<serde_json::Value>();
+        assert!(body.get("deletedAt").is_none());
+
+        request.delete(&path).await.assert_status_success();
+        assert_eq!(request.get(&path).await.status_code(), 404);
+        assert_eq!(request.delete(&path).await.status_code(), 404);
+        let listed = request.get("{path}").await.json::<serde_json::Value>();
+        assert!(!listed.to_string().contains(&{parent}.to_string()));
+        let stale = request.patch(&path).json(&body).await;
+        assert!(!stale.status_code().is_success(), "an update reached a deleted row");
+{checks}{UNIQUE_CHECK}    }})
+    .await;
+}}
+'''
+
+
+def library_name(crate):
+    probe = crate / "tests/requests/pagination.rs"
+    if not probe.exists():
+        probe = next(p for p in sorted(crate.glob("tests/*.rs")) if "::app::App" in p.read_text())
+    return re.search(r"use (\w+)::app::App", probe.read_text())[1]
+
+
+def plan(crate, tables):
+    source = ac.source_dir(crate)
+    kids = children(tables)
+    edits, notes = {}, []
+    for path in sorted([*source.glob("models/*.rs"), *source.glob("controllers/*.rs")]):
+        if path.name == "mod.rs":
+            continue
+        new = transform(path, tables, kids, notes)
+        if new != path.read_text():
+            edits[path] = new
+    has_unique = any(c.unique for t in tables.values() for c in t.columns) or any(
+        "UNIQUE" in p.read_text() for p in crate.glob("migrations/*.up.sql"))
+    if has_unique:
+        edits[crate / "migrations" / f"{STAMP}_soft_delete_unique_live_rows.up.sql"] = UP
+        edits[crate / "migrations" / f"{STAMP}_soft_delete_unique_live_rows.down.sql"] = DOWN
+    absent = [name for name, t in tables.items() if "deleted_at" not in {c.name for c in t.columns}]
+    required = [name for name, t in tables.items()
+                if any(c.name == "deleted_at" and not c.nullable for c in t.columns)]
+    if absent or required:
+        up = "".join(f'ALTER TABLE "{n}" ADD COLUMN "deleted_at" timestamp with time zone NULL;\n' for n in absent)
+        up += "".join(f'ALTER TABLE "{n}" ALTER COLUMN "deleted_at" DROP NOT NULL;\n' for n in required)
+        down = "".join(f'ALTER TABLE "{n}" DROP COLUMN "deleted_at";\n' for n in absent)
+        down += "".join(f'ALTER TABLE "{n}" ALTER COLUMN "deleted_at" SET NOT NULL;\n' for n in required)
+        edits[crate / "migrations" / f"{COLUMNS}_soft_delete_columns.up.sql"] = up
+        edits[crate / "migrations" / f"{COLUMNS}_soft_delete_columns.down.sql"] = down
+    served = routes(source)
+    table, child = subject(tables, kids, served)
+    grouped = (crate / "tests" / "requests").is_dir()
+    target = crate / "tests" / ("requests/soft_delete.rs" if grouped else "soft_delete.rs")
+    if table is not None:
+        edits[target] = test_source(table, child, tables, served[table.name], library_name(crate), not grouped)
+    elif not target.exists():
+        notes.append("no delete route to test, so tests need a hand-written soft_delete.rs")
+    return edits, notes, grouped, target
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parent.parent)
+    parser.add_argument("slugs", nargs="*")
+    args = parser.parse_args()
+    drift, changed, noted = [], 0, []
+    for path in ac.crates(args.root, args.slugs, args.all):
+        crate = path if path.name == "back-end-with-axum" else path / "back-end-with-axum"
+        tables = ac.migration_tables(crate)
+        edits, notes, grouped, target = plan(crate, tables)
+        noted += [f"{crate.parent.name}: {note}" for note in notes]
+        for file, text in edits.items():
+            have = file.read_text() if file.exists() else None
+            if file == target:
+                same = have is not None
+            else:
+                same = have == text
+            if same:
+                continue
+            drift.append(str(file))
+            if not args.check:
+                file.write_text(text)
+        if not args.check and grouped:
+            mod = crate / "tests/requests/mod.rs"
+            text = mod.read_text()
+            if "mod soft_delete;" not in text:
+                mod.write_text(text.rstrip("\n") + "\nmod soft_delete;\n")
+        changed += 1
+    print("\n".join(sorted(set(noted))))
+    if args.check:
+        print("\n".join(drift))
+    print(f"{changed} crates, {len(drift)} files {'out of step' if args.check else 'written'}, {len(set(noted))} notes")
+    return 1 if args.check and (drift or noted) else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

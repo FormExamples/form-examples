@@ -9,7 +9,6 @@ use crate::models::nuclear_medicine_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -43,18 +42,18 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO nuclear_medicine_test_results (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO nuclear_medicine_test_results (patient_id, clinician_id, \
             originating_request_reference, report_status, performed_date, reported_date, \
             scan_type, radiopharmaceutical, injected_activity_mbq, examination_adequacy, \
-            clinical_history, comparison_with_previous, findings_narrative, abnormal_uptake, \
-            metastatic_pattern, perfusion_defect, photopenic_area, \
+            clinical_history, comparison_with_previous, findings_narrative, \
+            abnormal_uptake, metastatic_pattern, perfusion_defect, photopenic_area, \
             no_significant_abnormality, incidental_finding, ejection_fraction_percent, \
             split_function_left_percent, split_function_right_percent, impression, \
             reporting_category, recommended_follow_up, critical_result_communicated, \
-            reported_to) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, \
-            $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28) RETURNING *",
+            reported_to) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, \
+            $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -89,20 +88,20 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE nuclear_medicine_test_results SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, originating_request_reference = $5, report_status = $6, \
-            performed_date = $7, reported_date = $8, scan_type = $9, radiopharmaceutical = \
-            $10, injected_activity_mbq = $11, examination_adequacy = $12, clinical_history = \
-            $13, comparison_with_previous = $14, findings_narrative = $15, abnormal_uptake = \
-            $16, metastatic_pattern = $17, perfusion_defect = $18, photopenic_area = $19, \
-            no_significant_abnormality = $20, incidental_finding = $21, \
-            ejection_fraction_percent = $22, split_function_left_percent = $23, \
-            split_function_right_percent = $24, impression = $25, reporting_category = $26, \
-            recommended_follow_up = $27, critical_result_communicated = $28, reported_to = \
-            $29, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE nuclear_medicine_test_results SET patient_id = $2, clinician_id = $3, \
+            originating_request_reference = $4, report_status = $5, performed_date = $6, \
+            reported_date = $7, scan_type = $8, radiopharmaceutical = $9, \
+            injected_activity_mbq = $10, examination_adequacy = $11, clinical_history = \
+            $12, comparison_with_previous = $13, findings_narrative = $14, \
+            abnormal_uptake = $15, metastatic_pattern = $16, perfusion_defect = $17, \
+            photopenic_area = $18, no_significant_abnormality = $19, incidental_finding \
+            = $20, ejection_fraction_percent = $21, split_function_left_percent = $22, \
+            split_function_right_percent = $23, impression = $24, reporting_category = \
+            $25, recommended_follow_up = $26, critical_result_communicated = $27, \
+            reported_to = $28, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

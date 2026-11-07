@@ -8,3 +8,4 @@ pub mod knee_replacement_surgery_evaluation;
 pub mod knee_replacement_surgery_evaluation_grade;
 pub mod knee_replacement_surgery_evaluation_grade_flag;
 pub mod patient;
+mod soft_delete;

@@ -9,7 +9,6 @@ use crate::models::purpose_of_disclosures::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub hipaa_authorization_id: Uuid,
     pub purposes: String,
     pub primary_purpose: String,
@@ -20,10 +19,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO purpose_of_disclosures (deleted_at, hipaa_authorization_id, purposes, \
-            primary_purpose, other_details) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+            "INSERT INTO purpose_of_disclosures (hipaa_authorization_id, purposes, \
+            primary_purpose, other_details) VALUES ($1, $2, $3, $4) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.hipaa_authorization_id)
         .bind(&self.purposes)
         .bind(&self.primary_purpose)
@@ -35,12 +33,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE purpose_of_disclosures SET deleted_at = $2, hipaa_authorization_id = $3, \
-            purposes = $4, primary_purpose = $5, other_details = $6, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE purpose_of_disclosures SET hipaa_authorization_id = $2, purposes = \
+            $3, primary_purpose = $4, other_details = $5, updated_at = now() WHERE id = \
+            $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.hipaa_authorization_id)
         .bind(&self.purposes)
         .bind(&self.primary_purpose)

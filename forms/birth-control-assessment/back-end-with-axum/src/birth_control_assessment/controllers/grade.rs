@@ -9,7 +9,6 @@ use crate::models::grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub mec_category_coc: String,
     pub mec_category_pop: String,
@@ -25,12 +24,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO grades (deleted_at, assessment_id, mec_category_coc, \
-            mec_category_pop, mec_category_implant, mec_category_injection, mec_category_iud, \
-            mec_category_ius, overall_risk_level, graded_at) VALUES ($1, $2, $3, $4, $5, $6, \
-            $7, $8, $9, $10) RETURNING *",
+            "INSERT INTO grades (assessment_id, mec_category_coc, mec_category_pop, \
+            mec_category_implant, mec_category_injection, mec_category_iud, \
+            mec_category_ius, overall_risk_level, graded_at) VALUES ($1, $2, $3, $4, $5, \
+            $6, $7, $8, $9) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.mec_category_coc)
         .bind(&self.mec_category_pop)
@@ -47,13 +45,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE grades SET deleted_at = $2, assessment_id = $3, mec_category_coc = $4, \
-            mec_category_pop = $5, mec_category_implant = $6, mec_category_injection = $7, \
-            mec_category_iud = $8, mec_category_ius = $9, overall_risk_level = $10, graded_at \
-            = $11, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE grades SET assessment_id = $2, mec_category_coc = $3, \
+            mec_category_pop = $4, mec_category_implant = $5, mec_category_injection = \
+            $6, mec_category_iud = $7, mec_category_ius = $8, overall_risk_level = $9, \
+            graded_at = $10, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.mec_category_coc)
         .bind(&self.mec_category_pop)

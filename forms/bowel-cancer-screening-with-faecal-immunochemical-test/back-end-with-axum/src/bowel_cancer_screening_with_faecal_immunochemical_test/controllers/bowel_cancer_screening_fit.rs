@@ -75,10 +75,11 @@ impl Params {
             "UPDATE bowel_cancer_screening_fits SET patient_id = $2, clinician_id = $3, \
             reviewed_at = $4, screening_hub = $5, participant_identifier = $6, age = $7, \
             within_age_range = $8, recall_interval = $9, invitation_date = $10, \
-            previous_outcome = $11, last_screen_date = $12, kit_returned = $13, return_date = \
-            $14, sample_adequacy = $15, spoilt_reason = $16, faecal_haemoglobin_ug_g = $17, \
-            assay = $18, threshold_applied = $19, red_flag_symptoms = $20, clinical_note = \
-            $21, context = $22, updated_at = now() WHERE id = $1 RETURNING *",
+            previous_outcome = $11, last_screen_date = $12, kit_returned = $13, \
+            return_date = $14, sample_adequacy = $15, spoilt_reason = $16, \
+            faecal_haemoglobin_ug_g = $17, assay = $18, threshold_applied = $19, \
+            red_flag_symptoms = $20, clinical_note = $21, context = $22, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

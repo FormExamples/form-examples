@@ -179,6 +179,12 @@ jobs:
       - name: Every Axum crate is on axa 0.5 with RFC 9457 errors
         run: bin/axum-axa-upgrade --check --all
 
+      - name: Every SQL table has an HTTP route
+        run: bin/axum-entity-routes --check --all
+
+      - name: Every Axum delete is a soft delete
+        run: bin/axum-soft-delete --check --all
+
       - name: Axum deny.toml files are current
         run: python3 bin/generate-axum-deny-config.py --check
 

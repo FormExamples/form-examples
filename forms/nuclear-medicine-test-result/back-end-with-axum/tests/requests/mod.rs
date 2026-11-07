@@ -9,3 +9,4 @@ pub mod nuclear_medicine_test_result_grade;
 pub mod nuclear_medicine_test_result_grade_flag;
 pub mod nuclear_medicine_test_result_grade_rule;
 pub mod patient;
+mod soft_delete;

@@ -12,8 +12,6 @@ use crate::models::suppliers::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    /// Deleted at.
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Name.
     pub name: String,
     /// Trading name.
@@ -42,13 +40,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO suppliers (deleted_at, name, trading_name, \
-            company_registration_number, country_of_registration_as_iso_3166_1_alpha_2, \
-            ico_registration_number, website, postal_address_as_full_text, postcode, \
-            contact_name, contact_email, contact_phone) VALUES ($1, $2, $3, $4, $5, $6, $7, \
-            $8, $9, $10, $11, $12) RETURNING *",
+            "INSERT INTO suppliers (name, trading_name, company_registration_number, \
+            country_of_registration_as_iso_3166_1_alpha_2, ico_registration_number, \
+            website, postal_address_as_full_text, postcode, contact_name, contact_email, \
+            contact_phone) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(&self.trading_name)
         .bind(&self.company_registration_number)
@@ -67,14 +64,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE suppliers SET deleted_at = $2, name = $3, trading_name = $4, \
-            company_registration_number = $5, country_of_registration_as_iso_3166_1_alpha_2 = \
-            $6, ico_registration_number = $7, website = $8, postal_address_as_full_text = $9, \
-            postcode = $10, contact_name = $11, contact_email = $12, contact_phone = $13, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE suppliers SET name = $2, trading_name = $3, \
+            company_registration_number = $4, \
+            country_of_registration_as_iso_3166_1_alpha_2 = $5, ico_registration_number \
+            = $6, website = $7, postal_address_as_full_text = $8, postcode = $9, \
+            contact_name = $10, contact_email = $11, contact_phone = $12, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(&self.trading_name)
         .bind(&self.company_registration_number)

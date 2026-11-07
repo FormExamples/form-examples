@@ -9,7 +9,6 @@ use crate::models::child_pugh_score_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub child_pugh_score_id: Uuid,
     pub bilirubin_points: Option<i32>,
     pub albumin_points: Option<i32>,
@@ -28,13 +27,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO child_pugh_score_grades (deleted_at, child_pugh_score_id, \
-            bilirubin_points, albumin_points, coagulation_points, ascites_points, \
-            encephalopathy_points, total_score, child_pugh_class, one_year_survival, \
-            two_year_survival, surgical_risk, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, \
-            $8, $9, $10, $11, $12, $13) RETURNING *",
+            "INSERT INTO child_pugh_score_grades (child_pugh_score_id, bilirubin_points, \
+            albumin_points, coagulation_points, ascites_points, encephalopathy_points, \
+            total_score, child_pugh_class, one_year_survival, two_year_survival, \
+            surgical_risk, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, \
+            $11, $12) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.child_pugh_score_id)
         .bind(self.bilirubin_points)
         .bind(self.albumin_points)
@@ -54,15 +52,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE child_pugh_score_grades SET deleted_at = $2, child_pugh_score_id = $3, \
-            bilirubin_points = $4, albumin_points = $5, coagulation_points = $6, \
-            ascites_points = $7, encephalopathy_points = $8, total_score = $9, \
-            child_pugh_class = $10, one_year_survival = $11, two_year_survival = $12, \
-            surgical_risk = $13, graded_at = $14, updated_at = now() WHERE id = $1 RETURNING \
-            *",
+            "UPDATE child_pugh_score_grades SET child_pugh_score_id = $2, \
+            bilirubin_points = $3, albumin_points = $4, coagulation_points = $5, \
+            ascites_points = $6, encephalopathy_points = $7, total_score = $8, \
+            child_pugh_class = $9, one_year_survival = $10, two_year_survival = $11, \
+            surgical_risk = $12, graded_at = $13, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.child_pugh_score_id)
         .bind(self.bilirubin_points)
         .bind(self.albumin_points)

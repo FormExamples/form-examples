@@ -9,7 +9,6 @@ use crate::models::grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub depression_score: Option<i32>,
     pub depression_severity: String,
@@ -24,12 +23,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO grades (deleted_at, assessment_id, depression_score, \
-            depression_severity, anxiety_score, anxiety_severity, stress_score, \
-            stress_severity, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING \
-            *",
+            "INSERT INTO grades (assessment_id, depression_score, depression_severity, \
+            anxiety_score, anxiety_severity, stress_score, stress_severity, graded_at) \
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.depression_score)
         .bind(&self.depression_severity)
@@ -45,13 +42,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE grades SET deleted_at = $2, assessment_id = $3, depression_score = $4, \
-            depression_severity = $5, anxiety_score = $6, anxiety_severity = $7, stress_score \
-            = $8, stress_severity = $9, graded_at = $10, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE grades SET assessment_id = $2, depression_score = $3, \
+            depression_severity = $4, anxiety_score = $5, anxiety_severity = $6, \
+            stress_score = $7, stress_severity = $8, graded_at = $9, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.depression_score)
         .bind(&self.depression_severity)

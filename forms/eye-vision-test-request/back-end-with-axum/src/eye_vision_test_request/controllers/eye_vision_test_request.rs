@@ -9,7 +9,6 @@ use crate::models::eye_vision_test_requests::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub status: String,
@@ -39,16 +38,15 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO eye_vision_test_requests (deleted_at, patient_id, clinician_id, \
-            status, site_name, setting, referral_date, requested_by_date, test_type, \
-            laterality, primary_indication, clinical_question, relevant_history, \
+            "INSERT INTO eye_vision_test_requests (patient_id, clinician_id, status, \
+            site_name, setting, referral_date, requested_by_date, test_type, laterality, \
+            primary_indication, clinical_question, relevant_history, \
             symptom_reduced_vision, symptom_sudden_loss, symptom_flashes_floaters, \
             symptom_eye_pain, symptom_red_eye, diabetes, known_glaucoma, urgency, \
-            supervising_consultant, requester_contact, notes) VALUES ($1, $2, $3, $4, $5, $6, \
-            $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, \
-            $24) RETURNING *",
+            supervising_consultant, requester_contact, notes) VALUES ($1, $2, $3, $4, \
+            $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, \
+            $21, $22, $23) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)
@@ -79,17 +77,17 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE eye_vision_test_requests SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, status = $5, site_name = $6, setting = $7, referral_date = $8, \
-            requested_by_date = $9, test_type = $10, laterality = $11, primary_indication = \
-            $12, clinical_question = $13, relevant_history = $14, symptom_reduced_vision = \
-            $15, symptom_sudden_loss = $16, symptom_flashes_floaters = $17, symptom_eye_pain \
-            = $18, symptom_red_eye = $19, diabetes = $20, known_glaucoma = $21, urgency = \
-            $22, supervising_consultant = $23, requester_contact = $24, notes = $25, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE eye_vision_test_requests SET patient_id = $2, clinician_id = $3, \
+            status = $4, site_name = $5, setting = $6, referral_date = $7, \
+            requested_by_date = $8, test_type = $9, laterality = $10, primary_indication \
+            = $11, clinical_question = $12, relevant_history = $13, \
+            symptom_reduced_vision = $14, symptom_sudden_loss = $15, \
+            symptom_flashes_floaters = $16, symptom_eye_pain = $17, symptom_red_eye = \
+            $18, diabetes = $19, known_glaucoma = $20, urgency = $21, \
+            supervising_consultant = $22, requester_contact = $23, notes = $24, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)

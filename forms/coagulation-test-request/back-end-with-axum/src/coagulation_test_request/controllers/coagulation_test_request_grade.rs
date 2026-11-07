@@ -9,7 +9,6 @@ use crate::models::coagulation_test_request_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub coagulation_test_request_id: Uuid,
     pub appropriateness_score: Option<i32>,
     pub appropriateness_band: String,
@@ -27,13 +26,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO coagulation_test_request_grades (deleted_at, \
-            coagulation_test_request_id, appropriateness_score, appropriateness_band, \
-            preanalytical_band, completeness_percent, triage_tier, target_timeframe, \
-            recommendation, clinician_notes, signed_at, graded_at) VALUES ($1, $2, $3, $4, \
-            $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *",
+            "INSERT INTO coagulation_test_request_grades (coagulation_test_request_id, \
+            appropriateness_score, appropriateness_band, preanalytical_band, \
+            completeness_percent, triage_tier, target_timeframe, recommendation, \
+            clinician_notes, signed_at, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, \
+            $8, $9, $10, $11) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.coagulation_test_request_id)
         .bind(self.appropriateness_score)
         .bind(&self.appropriateness_band)
@@ -52,15 +50,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE coagulation_test_request_grades SET deleted_at = $2, \
-            coagulation_test_request_id = $3, appropriateness_score = $4, \
-            appropriateness_band = $5, preanalytical_band = $6, completeness_percent = $7, \
-            triage_tier = $8, target_timeframe = $9, recommendation = $10, clinician_notes = \
-            $11, signed_at = $12, graded_at = $13, updated_at = now() WHERE id = $1 RETURNING \
-            *",
+            "UPDATE coagulation_test_request_grades SET coagulation_test_request_id = $2, \
+            appropriateness_score = $3, appropriateness_band = $4, preanalytical_band = \
+            $5, completeness_percent = $6, triage_tier = $7, target_timeframe = $8, \
+            recommendation = $9, clinician_notes = $10, signed_at = $11, graded_at = \
+            $12, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.coagulation_test_request_id)
         .bind(self.appropriateness_score)
         .bind(&self.appropriateness_band)

@@ -9,7 +9,6 @@ use crate::models::centers::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub name: String,
     pub who_designation_reference: String,
     pub national_authority_reference: String,
@@ -29,14 +28,13 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO centers (deleted_at, name, who_designation_reference, \
+            "INSERT INTO centers (name, who_designation_reference, \
             national_authority_reference, email, phone, postal_address_as_full_text, \
             country_as_iso_3166_1_alpha_2, country_as_iso_3166_1_alpha_3, postcode, \
             uniform_stamp_image_data_url, authorised_diseases, designation_valid_from, \
-            designation_valid_until) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, \
-            $12, $13, $14) RETURNING *",
+            designation_valid_until) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, \
+            $11, $12, $13) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(&self.who_designation_reference)
         .bind(&self.national_authority_reference)
@@ -57,15 +55,15 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE centers SET deleted_at = $2, name = $3, who_designation_reference = $4, \
-            national_authority_reference = $5, email = $6, phone = $7, \
-            postal_address_as_full_text = $8, country_as_iso_3166_1_alpha_2 = $9, \
-            country_as_iso_3166_1_alpha_3 = $10, postcode = $11, uniform_stamp_image_data_url \
-            = $12, authorised_diseases = $13, designation_valid_from = $14, \
-            designation_valid_until = $15, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE centers SET name = $2, who_designation_reference = $3, \
+            national_authority_reference = $4, email = $5, phone = $6, \
+            postal_address_as_full_text = $7, country_as_iso_3166_1_alpha_2 = $8, \
+            country_as_iso_3166_1_alpha_3 = $9, postcode = $10, \
+            uniform_stamp_image_data_url = $11, authorised_diseases = $12, \
+            designation_valid_from = $13, designation_valid_until = $14, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(&self.who_designation_reference)
         .bind(&self.national_authority_reference)

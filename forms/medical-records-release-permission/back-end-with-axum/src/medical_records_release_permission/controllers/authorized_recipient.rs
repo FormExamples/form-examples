@@ -9,7 +9,6 @@ use crate::models::authorized_recipients::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub release_form_id: Uuid,
     pub recipient_name: String,
     pub recipient_organization: String,
@@ -23,11 +22,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO authorized_recipients (deleted_at, release_form_id, recipient_name, \
+            "INSERT INTO authorized_recipients (release_form_id, recipient_name, \
             recipient_organization, recipient_address, recipient_phone, recipient_email, \
-            recipient_role) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+            recipient_role) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.release_form_id)
         .bind(&self.recipient_name)
         .bind(&self.recipient_organization)
@@ -42,13 +40,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE authorized_recipients SET deleted_at = $2, release_form_id = $3, \
-            recipient_name = $4, recipient_organization = $5, recipient_address = $6, \
-            recipient_phone = $7, recipient_email = $8, recipient_role = $9, updated_at = \
-            now() WHERE id = $1 RETURNING *",
+            "UPDATE authorized_recipients SET release_form_id = $2, recipient_name = $3, \
+            recipient_organization = $4, recipient_address = $5, recipient_phone = $6, \
+            recipient_email = $7, recipient_role = $8, updated_at = now() WHERE id = $1 \
+            AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.release_form_id)
         .bind(&self.recipient_name)
         .bind(&self.recipient_organization)

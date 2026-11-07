@@ -12,3 +12,4 @@ pub mod anaesthetic_record_intra_operative_event;
 pub mod anaesthetic_record_timed_observation;
 pub mod clinician;
 pub mod patient;
+mod soft_delete;

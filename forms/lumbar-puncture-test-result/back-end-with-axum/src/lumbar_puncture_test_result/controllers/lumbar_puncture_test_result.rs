@@ -9,7 +9,6 @@ use crate::models::lumbar_puncture_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -49,20 +48,20 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO lumbar_puncture_test_results (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO lumbar_puncture_test_results (patient_id, clinician_id, \
             originating_request_reference, report_status, performed_date, reported_date, \
-            clinical_history, opening_pressure_cmh2o, csf_appearance, csf_white_cell_count, \
-            csf_red_cell_count, csf_protein_g_l, csf_glucose_mmol_l, csf_serum_glucose_ratio, \
-            csf_lactate_mmol_l, gram_stain_result, culture_result, pcr_result, \
-            oligoclonal_bands, xanthochromia, raised_protein, pleocytosis, low_glucose, \
-            bacterial_meningitis_pattern, viral_pattern, subarachnoid_haemorrhage_suggested, \
-            normal_csf, findings_narrative, impression, reporting_category, \
-            recommended_follow_up, critical_result_communicated, reported_to) VALUES ($1, $2, \
-            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, \
-            $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34) \
-            RETURNING *",
+            clinical_history, opening_pressure_cmh2o, csf_appearance, \
+            csf_white_cell_count, csf_red_cell_count, csf_protein_g_l, \
+            csf_glucose_mmol_l, csf_serum_glucose_ratio, csf_lactate_mmol_l, \
+            gram_stain_result, culture_result, pcr_result, oligoclonal_bands, \
+            xanthochromia, raised_protein, pleocytosis, low_glucose, \
+            bacterial_meningitis_pattern, viral_pattern, \
+            subarachnoid_haemorrhage_suggested, normal_csf, findings_narrative, \
+            impression, reporting_category, recommended_follow_up, \
+            critical_result_communicated, reported_to) VALUES ($1, $2, $3, $4, $5, $6, \
+            $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, \
+            $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -103,22 +102,21 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE lumbar_puncture_test_results SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, originating_request_reference = $5, report_status = $6, \
-            performed_date = $7, reported_date = $8, clinical_history = $9, \
-            opening_pressure_cmh2o = $10, csf_appearance = $11, csf_white_cell_count = $12, \
-            csf_red_cell_count = $13, csf_protein_g_l = $14, csf_glucose_mmol_l = $15, \
-            csf_serum_glucose_ratio = $16, csf_lactate_mmol_l = $17, gram_stain_result = $18, \
-            culture_result = $19, pcr_result = $20, oligoclonal_bands = $21, xanthochromia = \
-            $22, raised_protein = $23, pleocytosis = $24, low_glucose = $25, \
-            bacterial_meningitis_pattern = $26, viral_pattern = $27, \
-            subarachnoid_haemorrhage_suggested = $28, normal_csf = $29, findings_narrative = \
-            $30, impression = $31, reporting_category = $32, recommended_follow_up = $33, \
-            critical_result_communicated = $34, reported_to = $35, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE lumbar_puncture_test_results SET patient_id = $2, clinician_id = $3, \
+            originating_request_reference = $4, report_status = $5, performed_date = $6, \
+            reported_date = $7, clinical_history = $8, opening_pressure_cmh2o = $9, \
+            csf_appearance = $10, csf_white_cell_count = $11, csf_red_cell_count = $12, \
+            csf_protein_g_l = $13, csf_glucose_mmol_l = $14, csf_serum_glucose_ratio = \
+            $15, csf_lactate_mmol_l = $16, gram_stain_result = $17, culture_result = \
+            $18, pcr_result = $19, oligoclonal_bands = $20, xanthochromia = $21, \
+            raised_protein = $22, pleocytosis = $23, low_glucose = $24, \
+            bacterial_meningitis_pattern = $25, viral_pattern = $26, \
+            subarachnoid_haemorrhage_suggested = $27, normal_csf = $28, \
+            findings_narrative = $29, impression = $30, reporting_category = $31, \
+            recommended_follow_up = $32, critical_result_communicated = $33, reported_to \
+            = $34, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

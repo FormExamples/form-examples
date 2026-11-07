@@ -9,7 +9,6 @@ use crate::models::anaesthetic_record_intra_operative_events::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub anaesthetic_record_id: Uuid,
     pub event_type: String,
     pub occurred_at: Option<DateTimeWithTimeZone>,
@@ -20,11 +19,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO anaesthetic_record_intra_operative_events (deleted_at, \
-            anaesthetic_record_id, event_type, occurred_at, management) VALUES ($1, $2, $3, \
-            $4, $5) RETURNING *",
+            "INSERT INTO anaesthetic_record_intra_operative_events \
+            (anaesthetic_record_id, event_type, occurred_at, management) VALUES ($1, $2, \
+            $3, $4) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.anaesthetic_record_id)
         .bind(&self.event_type)
         .bind(self.occurred_at)
@@ -36,12 +34,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE anaesthetic_record_intra_operative_events SET deleted_at = $2, \
-            anaesthetic_record_id = $3, event_type = $4, occurred_at = $5, management = $6, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE anaesthetic_record_intra_operative_events SET anaesthetic_record_id = \
+            $2, event_type = $3, occurred_at = $4, management = $5, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.anaesthetic_record_id)
         .bind(&self.event_type)
         .bind(self.occurred_at)

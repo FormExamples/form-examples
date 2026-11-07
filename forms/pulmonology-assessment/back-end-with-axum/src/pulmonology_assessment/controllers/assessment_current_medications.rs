@@ -9,7 +9,6 @@ use crate::models::assessment_current_medications::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub inhaler_use: String,
     pub inhaler_technique_assessed: String,
@@ -32,15 +31,14 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO assessment_current_medications (deleted_at, assessment_id, \
-            inhaler_use, inhaler_technique_assessed, inhaler_technique_adequate, \
+            "INSERT INTO assessment_current_medications (assessment_id, inhaler_use, \
+            inhaler_technique_assessed, inhaler_technique_adequate, \
             short_acting_bronchodilator, saba_frequency, long_acting_bronchodilator, \
             inhaled_corticosteroid, combination_inhaler, long_term_oxygen_therapy, \
-            oxygen_flow_rate_lmin, oxygen_hours_per_day, nebuliser_use, oral_medications, \
-            medication_adherence, additional_notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, \
-            $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING *",
+            oxygen_flow_rate_lmin, oxygen_hours_per_day, nebuliser_use, \
+            oral_medications, medication_adherence, additional_notes) VALUES ($1, $2, \
+            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.inhaler_use)
         .bind(&self.inhaler_technique_assessed)
@@ -64,17 +62,16 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE assessment_current_medications SET deleted_at = $2, assessment_id = $3, \
-            inhaler_use = $4, inhaler_technique_assessed = $5, inhaler_technique_adequate = \
-            $6, short_acting_bronchodilator = $7, saba_frequency = $8, \
-            long_acting_bronchodilator = $9, inhaled_corticosteroid = $10, \
-            combination_inhaler = $11, long_term_oxygen_therapy = $12, oxygen_flow_rate_lmin \
-            = $13, oxygen_hours_per_day = $14, nebuliser_use = $15, oral_medications = $16, \
-            medication_adherence = $17, additional_notes = $18, updated_at = now() WHERE id = \
-            $1 RETURNING *",
+            "UPDATE assessment_current_medications SET assessment_id = $2, inhaler_use = \
+            $3, inhaler_technique_assessed = $4, inhaler_technique_adequate = $5, \
+            short_acting_bronchodilator = $6, saba_frequency = $7, \
+            long_acting_bronchodilator = $8, inhaled_corticosteroid = $9, \
+            combination_inhaler = $10, long_term_oxygen_therapy = $11, \
+            oxygen_flow_rate_lmin = $12, oxygen_hours_per_day = $13, nebuliser_use = \
+            $14, oral_medications = $15, medication_adherence = $16, additional_notes = \
+            $17, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.inhaler_use)
         .bind(&self.inhaler_technique_assessed)

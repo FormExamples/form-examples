@@ -9,7 +9,6 @@ use crate::models::assessment_current_medications::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub takes_regular_medications: String,
     pub takes_over_the_counter: String,
@@ -25,13 +24,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO assessment_current_medications (deleted_at, assessment_id, \
+            "INSERT INTO assessment_current_medications (assessment_id, \
             takes_regular_medications, takes_over_the_counter, over_the_counter_details, \
             takes_supplements, supplement_details, medication_adherence, \
-            adverse_drug_reactions, additional_notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, \
-            $9, $10) RETURNING *",
+            adverse_drug_reactions, additional_notes) VALUES ($1, $2, $3, $4, $5, $6, \
+            $7, $8, $9) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.takes_regular_medications)
         .bind(&self.takes_over_the_counter)
@@ -48,14 +46,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE assessment_current_medications SET deleted_at = $2, assessment_id = $3, \
-            takes_regular_medications = $4, takes_over_the_counter = $5, \
-            over_the_counter_details = $6, takes_supplements = $7, supplement_details = $8, \
-            medication_adherence = $9, adverse_drug_reactions = $10, additional_notes = $11, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE assessment_current_medications SET assessment_id = $2, \
+            takes_regular_medications = $3, takes_over_the_counter = $4, \
+            over_the_counter_details = $5, takes_supplements = $6, supplement_details = \
+            $7, medication_adherence = $8, adverse_drug_reactions = $9, additional_notes \
+            = $10, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.takes_regular_medications)
         .bind(&self.takes_over_the_counter)

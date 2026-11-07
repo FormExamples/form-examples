@@ -9,7 +9,6 @@ use crate::models::clinicians::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub name: String,
     pub email: Option<String>,
     pub phone: Option<String>,
@@ -27,12 +26,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO clinicians (deleted_at, name, email, phone, \
-            postal_address_as_full_text, country_as_iso_3166_1_alpha_2, postcode, role, \
-            registration_body, registration_number, employer, united_kingdom_nhs_number) \
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *",
+            "INSERT INTO clinicians (name, email, phone, postal_address_as_full_text, \
+            country_as_iso_3166_1_alpha_2, postcode, role, registration_body, \
+            registration_number, employer, united_kingdom_nhs_number) VALUES ($1, $2, \
+            $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(&self.email)
         .bind(&self.phone)
@@ -51,14 +49,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE clinicians SET deleted_at = $2, name = $3, email = $4, phone = $5, \
-            postal_address_as_full_text = $6, country_as_iso_3166_1_alpha_2 = $7, postcode = \
-            $8, role = $9, registration_body = $10, registration_number = $11, employer = \
-            $12, united_kingdom_nhs_number = $13, updated_at = now() WHERE id = $1 RETURNING \
-            *",
+            "UPDATE clinicians SET name = $2, email = $3, phone = $4, \
+            postal_address_as_full_text = $5, country_as_iso_3166_1_alpha_2 = $6, \
+            postcode = $7, role = $8, registration_body = $9, registration_number = $10, \
+            employer = $11, united_kingdom_nhs_number = $12, updated_at = now() WHERE id \
+            = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(&self.email)
         .bind(&self.phone)

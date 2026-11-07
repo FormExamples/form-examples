@@ -9,7 +9,6 @@ use crate::models::dexa_bone_density_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -42,7 +41,7 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO dexa_bone_density_test_results (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO dexa_bone_density_test_results (patient_id, clinician_id, \
             originating_request_reference, report_status, performed_date, reported_date, \
             scan_region, examination_adequacy, clinical_history, lumbar_spine_t_score, \
             lumbar_spine_z_score, femoral_neck_t_score, femoral_neck_z_score, \
@@ -50,11 +49,10 @@ impl Params {
             who_classification, frax_major_fracture_percent, frax_hip_fracture_percent, \
             vertebral_fracture_identified, comparison_with_previous, \
             percent_change_since_previous, impression, recommended_follow_up, \
-            critical_result_communicated, reported_to) VALUES ($1, $2, $3, $4, $5, $6, $7, \
-            $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, \
-            $24, $25, $26, $27) RETURNING *",
+            critical_result_communicated, reported_to) VALUES ($1, $2, $3, $4, $5, $6, \
+            $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, \
+            $23, $24, $25, $26) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -88,20 +86,20 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE dexa_bone_density_test_results SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, originating_request_reference = $5, report_status = $6, \
-            performed_date = $7, reported_date = $8, scan_region = $9, examination_adequacy = \
-            $10, clinical_history = $11, lumbar_spine_t_score = $12, lumbar_spine_z_score = \
-            $13, femoral_neck_t_score = $14, femoral_neck_z_score = $15, total_hip_t_score = \
-            $16, lowest_t_score = $17, bone_mineral_density_g_cm2 = $18, who_classification = \
-            $19, frax_major_fracture_percent = $20, frax_hip_fracture_percent = $21, \
-            vertebral_fracture_identified = $22, comparison_with_previous = $23, \
-            percent_change_since_previous = $24, impression = $25, recommended_follow_up = \
-            $26, critical_result_communicated = $27, reported_to = $28, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            "UPDATE dexa_bone_density_test_results SET patient_id = $2, clinician_id = \
+            $3, originating_request_reference = $4, report_status = $5, performed_date = \
+            $6, reported_date = $7, scan_region = $8, examination_adequacy = $9, \
+            clinical_history = $10, lumbar_spine_t_score = $11, lumbar_spine_z_score = \
+            $12, femoral_neck_t_score = $13, femoral_neck_z_score = $14, \
+            total_hip_t_score = $15, lowest_t_score = $16, bone_mineral_density_g_cm2 = \
+            $17, who_classification = $18, frax_major_fracture_percent = $19, \
+            frax_hip_fracture_percent = $20, vertebral_fracture_identified = $21, \
+            comparison_with_previous = $22, percent_change_since_previous = $23, \
+            impression = $24, recommended_follow_up = $25, critical_result_communicated \
+            = $26, reported_to = $27, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

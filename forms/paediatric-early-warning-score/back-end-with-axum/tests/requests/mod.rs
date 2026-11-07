@@ -9,3 +9,4 @@ pub mod paediatric_early_warning_score_grade;
 pub mod paediatric_early_warning_score_grade_flag;
 pub mod paediatric_early_warning_score_grade_rule;
 pub mod patient;
+mod soft_delete;

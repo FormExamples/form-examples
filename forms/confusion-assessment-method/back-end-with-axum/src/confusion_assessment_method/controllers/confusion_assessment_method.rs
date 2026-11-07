@@ -95,14 +95,14 @@ impl Params {
             assessor_name = $4, assessor_role = $5, assessed_at = $6, ward_unit = $7, \
             cam_variant = $8, patient_identifier = $9, age_band = $10, sex = $11, \
             cognitive_baseline = $12, collateral_source = $13, \
-            feature_acute_onset_fluctuating = $14, onset_timing = $15, feature_inattention = \
-            $16, attention_test = $17, feature_disorganised_thinking = $18, \
-            feature_altered_consciousness = $19, consciousness_level = $20, rass_score = $21, \
-            motoric_subtype = $22, hallucinations = $23, delusions = $24, \
-            sleep_wake_disturbance = $25, deliriogenic_medication = $26, \
-            deliriogenic_medication_detail = $27, suspected_precipitants = $28, \
-            recommended_actions = $29, clinical_note = $30, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            feature_acute_onset_fluctuating = $14, onset_timing = $15, \
+            feature_inattention = $16, attention_test = $17, \
+            feature_disorganised_thinking = $18, feature_altered_consciousness = $19, \
+            consciousness_level = $20, rass_score = $21, motoric_subtype = $22, \
+            hallucinations = $23, delusions = $24, sleep_wake_disturbance = $25, \
+            deliriogenic_medication = $26, deliriogenic_medication_detail = $27, \
+            suspected_precipitants = $28, recommended_actions = $29, clinical_note = \
+            $30, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

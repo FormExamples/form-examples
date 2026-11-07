@@ -92,16 +92,17 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE post_anaesthesia_care_unit_records SET patient_id = $2, clinician_id = $3, \
-            nurse_name = $4, nurse_role = $5, anaesthetist_name = $6, admitted_at = $7, \
-            anaesthetic_technique = $8, procedure = $9, patient_identifier = $10, age_band = \
-            $11, sex = $12, asa_status = $13, baseline_systolic_bp = $14, ambulatory_case = \
-            $15, activity = $16, respiration = $17, circulation = $18, consciousness = $19, \
-            oxygen_saturation = $20, airway_status = $21, pain_score = $22, ponv_severity = \
-            $23, analgesia_given = $24, antiemetics_given = $25, padss_vital_signs = $26, \
-            padss_ambulation = $27, padss_nausea_vomiting = $28, padss_pain = $29, \
-            padss_surgical_bleeding = $30, recovery_note = $31, updated_at = now() WHERE id = \
-            $1 RETURNING *",
+            "UPDATE post_anaesthesia_care_unit_records SET patient_id = $2, clinician_id \
+            = $3, nurse_name = $4, nurse_role = $5, anaesthetist_name = $6, admitted_at \
+            = $7, anaesthetic_technique = $8, procedure = $9, patient_identifier = $10, \
+            age_band = $11, sex = $12, asa_status = $13, baseline_systolic_bp = $14, \
+            ambulatory_case = $15, activity = $16, respiration = $17, circulation = $18, \
+            consciousness = $19, oxygen_saturation = $20, airway_status = $21, \
+            pain_score = $22, ponv_severity = $23, analgesia_given = $24, \
+            antiemetics_given = $25, padss_vital_signs = $26, padss_ambulation = $27, \
+            padss_nausea_vomiting = $28, padss_pain = $29, padss_surgical_bleeding = \
+            $30, recovery_note = $31, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

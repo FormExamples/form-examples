@@ -39,7 +39,7 @@ impl Params {
             "UPDATE medical_certificate_of_cause_of_death_grades SET \
             medical_certificate_of_cause_of_death_id = $2, validity_class = $3, \
             underlying_cause = $4, coroner_referral_indicated = $5, graded_at = $6, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.medical_certificate_of_cause_of_death_id)

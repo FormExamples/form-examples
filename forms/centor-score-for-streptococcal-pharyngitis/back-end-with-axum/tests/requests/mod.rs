@@ -9,3 +9,4 @@ pub mod centor_score_for_streptococcal_pharyngitis_grade_flag;
 pub mod centor_score_for_streptococcal_pharyngitis_grade_rule;
 pub mod clinician;
 pub mod patient;
+mod soft_delete;

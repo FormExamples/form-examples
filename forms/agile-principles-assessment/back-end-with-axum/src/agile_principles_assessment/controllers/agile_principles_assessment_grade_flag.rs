@@ -9,7 +9,6 @@ use crate::models::agile_principles_assessment_grade_flags::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub agile_principles_assessment_grade_id: Uuid,
     pub flag_id: String,
     pub category: String,
@@ -23,12 +22,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO agile_principles_assessment_grade_flags (deleted_at, \
-            agile_principles_assessment_grade_id, flag_id, category, priority, \
-            principle_number, description, suggested_action) VALUES ($1, $2, $3, $4, $5, $6, \
-            $7, $8) RETURNING *",
+            "INSERT INTO agile_principles_assessment_grade_flags \
+            (agile_principles_assessment_grade_id, flag_id, category, priority, \
+            principle_number, description, suggested_action) VALUES ($1, $2, $3, $4, $5, \
+            $6, $7) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.agile_principles_assessment_grade_id)
         .bind(&self.flag_id)
         .bind(&self.category)
@@ -43,13 +41,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE agile_principles_assessment_grade_flags SET deleted_at = $2, \
-            agile_principles_assessment_grade_id = $3, flag_id = $4, category = $5, priority \
-            = $6, principle_number = $7, description = $8, suggested_action = $9, updated_at \
-            = now() WHERE id = $1 RETURNING *",
+            "UPDATE agile_principles_assessment_grade_flags SET \
+            agile_principles_assessment_grade_id = $2, flag_id = $3, category = $4, \
+            priority = $5, principle_number = $6, description = $7, suggested_action = \
+            $8, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.agile_principles_assessment_grade_id)
         .bind(&self.flag_id)
         .bind(&self.category)

@@ -9,7 +9,6 @@ use crate::models::perioperative_optimization_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub perioperative_optimization_id: Uuid,
     pub weeks_to_surgery: Option<i32>,
     pub gating_applied: bool,
@@ -40,18 +39,17 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO perioperative_optimization_grades (deleted_at, \
-            perioperative_optimization_id, weeks_to_surgery, gating_applied, must_score, \
-            must_risk, audit_c_score, stop_bang_score, duke_activity_status_index, \
-            clinical_frailty_scale, fried_phenotype_score, fried_frailty_category, \
-            domains_optimized, domains_in_progress, domains_action_required, \
-            domains_insufficient_time, computed_readiness, final_readiness, override_reason, \
-            gate_decision, recommended_earliest_surgery_date, clinician_notes, \
-            signed_by_name, signed_at, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, \
-            $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25) \
-            RETURNING *",
+            "INSERT INTO perioperative_optimization_grades \
+            (perioperative_optimization_id, weeks_to_surgery, gating_applied, \
+            must_score, must_risk, audit_c_score, stop_bang_score, \
+            duke_activity_status_index, clinical_frailty_scale, fried_phenotype_score, \
+            fried_frailty_category, domains_optimized, domains_in_progress, \
+            domains_action_required, domains_insufficient_time, computed_readiness, \
+            final_readiness, override_reason, gate_decision, \
+            recommended_earliest_surgery_date, clinician_notes, signed_by_name, \
+            signed_at, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, \
+            $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.perioperative_optimization_id)
         .bind(self.weeks_to_surgery)
         .bind(self.gating_applied)
@@ -83,19 +81,18 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE perioperative_optimization_grades SET deleted_at = $2, \
-            perioperative_optimization_id = $3, weeks_to_surgery = $4, gating_applied = $5, \
-            must_score = $6, must_risk = $7, audit_c_score = $8, stop_bang_score = $9, \
-            duke_activity_status_index = $10, clinical_frailty_scale = $11, \
-            fried_phenotype_score = $12, fried_frailty_category = $13, domains_optimized = \
-            $14, domains_in_progress = $15, domains_action_required = $16, \
-            domains_insufficient_time = $17, computed_readiness = $18, final_readiness = $19, \
-            override_reason = $20, gate_decision = $21, recommended_earliest_surgery_date = \
-            $22, clinician_notes = $23, signed_by_name = $24, signed_at = $25, graded_at = \
-            $26, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE perioperative_optimization_grades SET perioperative_optimization_id = \
+            $2, weeks_to_surgery = $3, gating_applied = $4, must_score = $5, must_risk = \
+            $6, audit_c_score = $7, stop_bang_score = $8, duke_activity_status_index = \
+            $9, clinical_frailty_scale = $10, fried_phenotype_score = $11, \
+            fried_frailty_category = $12, domains_optimized = $13, domains_in_progress = \
+            $14, domains_action_required = $15, domains_insufficient_time = $16, \
+            computed_readiness = $17, final_readiness = $18, override_reason = $19, \
+            gate_decision = $20, recommended_earliest_surgery_date = $21, \
+            clinician_notes = $22, signed_by_name = $23, signed_at = $24, graded_at = \
+            $25, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.perioperative_optimization_id)
         .bind(self.weeks_to_surgery)
         .bind(self.gating_applied)

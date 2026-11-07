@@ -9,7 +9,6 @@ use crate::models::signers::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub hipaa_authorization_id: Uuid,
     pub relationship: String,
     pub representative_name: String,
@@ -21,12 +20,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO signers (deleted_at, hipaa_authorization_id, relationship, \
+            "INSERT INTO signers (hipaa_authorization_id, relationship, \
             representative_name, representative_authority_description, \
-            representative_authority_proof_attached) VALUES ($1, $2, $3, $4, $5, $6) \
+            representative_authority_proof_attached) VALUES ($1, $2, $3, $4, $5) \
             RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.hipaa_authorization_id)
         .bind(&self.relationship)
         .bind(&self.representative_name)
@@ -39,13 +37,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE signers SET deleted_at = $2, hipaa_authorization_id = $3, relationship = \
-            $4, representative_name = $5, representative_authority_description = $6, \
-            representative_authority_proof_attached = $7, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE signers SET hipaa_authorization_id = $2, relationship = $3, \
+            representative_name = $4, representative_authority_description = $5, \
+            representative_authority_proof_attached = $6, updated_at = now() WHERE id = \
+            $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.hipaa_authorization_id)
         .bind(&self.relationship)
         .bind(&self.representative_name)

@@ -62,8 +62,8 @@ impl Params {
             respiratory_rate_score = $4, spo2_score = $5, oxygen_score = $6, \
             blood_pressure_score = $7, pulse_score = $8, consciousness_score = $9, \
             temperature_score = $10, any_single_parameter_three = $11, risk_band = $12, \
-            monitoring_frequency = $13, recommendation = $14, graded_at = $15, updated_at = \
-            now() WHERE id = $1 RETURNING *",
+            monitoring_frequency = $13, recommendation = $14, graded_at = $15, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.national_early_warning_score_2_id)

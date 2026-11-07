@@ -9,7 +9,6 @@ use crate::models::pet_scan_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -43,18 +42,18 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO pet_scan_test_results (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO pet_scan_test_results (patient_id, clinician_id, \
             originating_request_reference, scan_type, report_status, performed_date, \
-            reported_date, clinical_history, blood_glucose_mmol_l, injected_activity_mbq, \
-            examination_adequacy, findings_narrative, hypermetabolic_lesion, nodal_uptake, \
-            distant_metastasis, no_abnormal_uptake, physiological_uptake_only, \
-            incidental_finding, suv_max, largest_lesion_size_mm, comparison_with_previous, \
-            treatment_response, impression, reporting_category, recommended_follow_up, \
-            critical_result_communicated, reported_to) VALUES ($1, $2, $3, $4, $5, $6, $7, \
-            $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, \
-            $24, $25, $26, $27, $28) RETURNING *",
+            reported_date, clinical_history, blood_glucose_mmol_l, \
+            injected_activity_mbq, examination_adequacy, findings_narrative, \
+            hypermetabolic_lesion, nodal_uptake, distant_metastasis, no_abnormal_uptake, \
+            physiological_uptake_only, incidental_finding, suv_max, \
+            largest_lesion_size_mm, comparison_with_previous, treatment_response, \
+            impression, reporting_category, recommended_follow_up, \
+            critical_result_communicated, reported_to) VALUES ($1, $2, $3, $4, $5, $6, \
+            $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, \
+            $23, $24, $25, $26, $27) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -89,20 +88,19 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE pet_scan_test_results SET deleted_at = $2, patient_id = $3, clinician_id = \
-            $4, originating_request_reference = $5, scan_type = $6, report_status = $7, \
-            performed_date = $8, reported_date = $9, clinical_history = $10, \
-            blood_glucose_mmol_l = $11, injected_activity_mbq = $12, examination_adequacy = \
-            $13, findings_narrative = $14, hypermetabolic_lesion = $15, nodal_uptake = $16, \
-            distant_metastasis = $17, no_abnormal_uptake = $18, physiological_uptake_only = \
-            $19, incidental_finding = $20, suv_max = $21, largest_lesion_size_mm = $22, \
-            comparison_with_previous = $23, treatment_response = $24, impression = $25, \
-            reporting_category = $26, recommended_follow_up = $27, \
-            critical_result_communicated = $28, reported_to = $29, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE pet_scan_test_results SET patient_id = $2, clinician_id = $3, \
+            originating_request_reference = $4, scan_type = $5, report_status = $6, \
+            performed_date = $7, reported_date = $8, clinical_history = $9, \
+            blood_glucose_mmol_l = $10, injected_activity_mbq = $11, \
+            examination_adequacy = $12, findings_narrative = $13, hypermetabolic_lesion \
+            = $14, nodal_uptake = $15, distant_metastasis = $16, no_abnormal_uptake = \
+            $17, physiological_uptake_only = $18, incidental_finding = $19, suv_max = \
+            $20, largest_lesion_size_mm = $21, comparison_with_previous = $22, \
+            treatment_response = $23, impression = $24, reporting_category = $25, \
+            recommended_follow_up = $26, critical_result_communicated = $27, reported_to \
+            = $28, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

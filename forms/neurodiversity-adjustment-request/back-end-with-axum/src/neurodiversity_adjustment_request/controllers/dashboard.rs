@@ -26,8 +26,8 @@ async fn dashboard(
     let limit = params.limit.unwrap_or(500);
 
     let requests: Vec<neurodiversity_adjustment_requests::Model> = sqlx::query_as(
-        "SELECT * FROM neurodiversity_adjustment_requests WHERE ($1::text IS NULL OR status = $1) \
-         ORDER BY created_at DESC LIMIT $2",
+        "SELECT * FROM neurodiversity_adjustment_requests WHERE ($1::text IS NULL OR \
+            status = $1) AND deleted_at IS NULL ORDER BY created_at DESC LIMIT $2",
     )
     .bind(params.status)
     .bind(i64::try_from(limit).unwrap_or(i64::MAX))
@@ -37,7 +37,8 @@ async fn dashboard(
     let mut items: Vec<Value> = Vec::with_capacity(requests.len());
     for request in &requests {
         let grade = sqlx::query_as::<_, neurodiversity_adjustment_request_grades::Model>(
-            "SELECT * FROM neurodiversity_adjustment_request_grades",
+            "SELECT * FROM neurodiversity_adjustment_request_grades WHERE deleted_at IS \
+            NULL",
         )
         .fetch_optional(&db(&ctx))
         .await?;

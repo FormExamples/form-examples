@@ -9,3 +9,4 @@ pub mod endoscopy_test_request_grade;
 pub mod endoscopy_test_request_grade_flag;
 pub mod endoscopy_test_request_grade_rule;
 pub mod patient;
+mod soft_delete;

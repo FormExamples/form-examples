@@ -137,24 +137,25 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE caprini_venous_thromboembolism_risk_assessments SET clinician_name = $2, \
-            clinician_role = $3, assessed_at = $4, care_setting = $5, admission_type = $6, \
-            patient_identifier = $7, age_band = $8, sex = $9, minor_surgery = $10, \
-            recent_major_surgery = $11, varicose_veins = $12, inflammatory_bowel_disease = \
-            $13, swollen_legs = $14, obesity = $15, acute_myocardial_infarction = $16, \
+            "UPDATE caprini_venous_thromboembolism_risk_assessments SET clinician_name = \
+            $2, clinician_role = $3, assessed_at = $4, care_setting = $5, admission_type \
+            = $6, patient_identifier = $7, age_band = $8, sex = $9, minor_surgery = $10, \
+            recent_major_surgery = $11, varicose_veins = $12, inflammatory_bowel_disease \
+            = $13, swollen_legs = $14, obesity = $15, acute_myocardial_infarction = $16, \
             congestive_heart_failure = $17, sepsis = $18, serious_lung_disease = $19, \
             abnormal_pulmonary_function = $20, medical_patient_bed_rest = $21, \
             oral_contraceptive_or_hrt = $22, pregnancy_or_postpartum = $23, \
-            adverse_pregnancy_history = $24, arthroscopic_surgery = $25, major_open_surgery = \
-            $26, laparoscopic_surgery = $27, malignancy = $28, confined_to_bed = $29, \
-            immobilising_cast = $30, central_venous_access = $31, history_of_vte = $32, \
-            family_history_of_thrombosis = $33, factor_v_leiden = $34, prothrombin_20210a = \
-            $35, lupus_anticoagulant = $36, anticardiolipin_antibodies = $37, \
-            elevated_homocysteine = $38, heparin_induced_thrombocytopenia = $39, \
-            other_thrombophilia = $40, stroke = $41, elective_arthroplasty = $42, \
-            hip_pelvis_leg_fracture = $43, acute_spinal_cord_injury = $44, multiple_trauma = \
-            $45, high_bleeding_risk = $46, clinical_note = $47, patient_id = $48, \
-            clinician_id = $49, updated_at = now() WHERE id = $1 RETURNING *",
+            adverse_pregnancy_history = $24, arthroscopic_surgery = $25, \
+            major_open_surgery = $26, laparoscopic_surgery = $27, malignancy = $28, \
+            confined_to_bed = $29, immobilising_cast = $30, central_venous_access = $31, \
+            history_of_vte = $32, family_history_of_thrombosis = $33, factor_v_leiden = \
+            $34, prothrombin_20210a = $35, lupus_anticoagulant = $36, \
+            anticardiolipin_antibodies = $37, elevated_homocysteine = $38, \
+            heparin_induced_thrombocytopenia = $39, other_thrombophilia = $40, stroke = \
+            $41, elective_arthroplasty = $42, hip_pelvis_leg_fracture = $43, \
+            acute_spinal_cord_injury = $44, multiple_trauma = $45, high_bleeding_risk = \
+            $46, clinical_note = $47, patient_id = $48, clinician_id = $49, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(&self.clinician_name)

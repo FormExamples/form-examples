@@ -9,7 +9,6 @@ use crate::models::issue_trackers::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub reporter_id: Uuid,
     pub status: String,
     pub reported_at: DateTimeWithTimeZone,
@@ -80,30 +79,31 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO issue_trackers (deleted_at, reporter_id, status, reported_at, \
-            discovered_at, started_at, resolved_at, issue_category, environment, system_name, \
+            "INSERT INTO issue_trackers (reporter_id, status, reported_at, discovered_at, \
+            started_at, resolved_at, issue_category, environment, system_name, \
             component, customer_or_project_tag, external_reference, cc_summary, \
-            cc_long_description, cc_reported_by_name, cc_reported_via, pt_discoverer_name, \
-            pt_affected_users_count, pt_affected_user_groups, pt_assignees, \
-            pt_stakeholders_to_inform, pt_observers, sx_external_signals, sx_alert_ids, \
-            sx_error_messages, sx_screenshots_url, sx_logs_url, sx_first_observed_at, \
-            fx_broken_components, fx_failed_services, fx_stuck_processes, fx_hardware_faults, \
-            fx_data_corruption, hx_related_issues, hx_prior_occurrences, \
-            hx_recent_change_url, hx_references, hx_timeline, ix_hypotheses, ix_repro_steps, \
+            cc_long_description, cc_reported_by_name, cc_reported_via, \
+            pt_discoverer_name, pt_affected_users_count, pt_affected_user_groups, \
+            pt_assignees, pt_stakeholders_to_inform, pt_observers, sx_external_signals, \
+            sx_alert_ids, sx_error_messages, sx_screenshots_url, sx_logs_url, \
+            sx_first_observed_at, fx_broken_components, fx_failed_services, \
+            fx_stuck_processes, fx_hardware_faults, fx_data_corruption, \
+            hx_related_issues, hx_prior_occurrences, hx_recent_change_url, \
+            hx_references, hx_timeline, ix_hypotheses, ix_repro_steps, \
             ix_diagnostic_queries, ix_tests_run, ix_blocking_unknowns, dx_root_cause, \
-            dx_contributing_causes, dx_scope, dx_confirmed, tx_mitigation_steps, tx_fix_plan, \
-            tx_workaround, tx_rollback_plan, tx_communication_plan, \
+            dx_contributing_causes, dx_scope, dx_confirmed, tx_mitigation_steps, \
+            tx_fix_plan, tx_workaround, tx_rollback_plan, tx_communication_plan, \
             px_expected_resolution_at, px_residual_risk, px_monitoring_plan, \
             px_recurrence_likelihood, px_lessons_learned, score_by_priority_rank, \
-            score_by_severity_of_impact, score_by_magnitude_of_damage, score_by_harm_grade, \
-            score_by_failure_condition, score_by_moscow_requirement, \
-            score_by_frequency_percent) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, \
-            $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, \
-            $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42, $43, \
-            $44, $45, $46, $47, $48, $49, $50, $51, $52, $53, $54, $55, $56, $57, $58, $59, \
-            $60, $61, $62, $63, $64, $65) RETURNING *",
+            score_by_severity_of_impact, score_by_magnitude_of_damage, \
+            score_by_harm_grade, score_by_failure_condition, \
+            score_by_moscow_requirement, score_by_frequency_percent) VALUES ($1, $2, $3, \
+            $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, \
+            $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, \
+            $35, $36, $37, $38, $39, $40, $41, $42, $43, $44, $45, $46, $47, $48, $49, \
+            $50, $51, $52, $53, $54, $55, $56, $57, $58, $59, $60, $61, $62, $63, $64) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.reporter_id)
         .bind(&self.status)
         .bind(self.reported_at)
@@ -175,32 +175,33 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE issue_trackers SET deleted_at = $2, reporter_id = $3, status = $4, \
-            reported_at = $5, discovered_at = $6, started_at = $7, resolved_at = $8, \
-            issue_category = $9, environment = $10, system_name = $11, component = $12, \
-            customer_or_project_tag = $13, external_reference = $14, cc_summary = $15, \
-            cc_long_description = $16, cc_reported_by_name = $17, cc_reported_via = $18, \
-            pt_discoverer_name = $19, pt_affected_users_count = $20, pt_affected_user_groups \
-            = $21, pt_assignees = $22, pt_stakeholders_to_inform = $23, pt_observers = $24, \
-            sx_external_signals = $25, sx_alert_ids = $26, sx_error_messages = $27, \
-            sx_screenshots_url = $28, sx_logs_url = $29, sx_first_observed_at = $30, \
-            fx_broken_components = $31, fx_failed_services = $32, fx_stuck_processes = $33, \
-            fx_hardware_faults = $34, fx_data_corruption = $35, hx_related_issues = $36, \
-            hx_prior_occurrences = $37, hx_recent_change_url = $38, hx_references = $39, \
-            hx_timeline = $40, ix_hypotheses = $41, ix_repro_steps = $42, \
-            ix_diagnostic_queries = $43, ix_tests_run = $44, ix_blocking_unknowns = $45, \
-            dx_root_cause = $46, dx_contributing_causes = $47, dx_scope = $48, dx_confirmed = \
-            $49, tx_mitigation_steps = $50, tx_fix_plan = $51, tx_workaround = $52, \
-            tx_rollback_plan = $53, tx_communication_plan = $54, px_expected_resolution_at = \
-            $55, px_residual_risk = $56, px_monitoring_plan = $57, px_recurrence_likelihood = \
-            $58, px_lessons_learned = $59, score_by_priority_rank = $60, \
-            score_by_severity_of_impact = $61, score_by_magnitude_of_damage = $62, \
-            score_by_harm_grade = $63, score_by_failure_condition = $64, \
-            score_by_moscow_requirement = $65, score_by_frequency_percent = $66, updated_at = \
-            now() WHERE id = $1 RETURNING *",
+            "UPDATE issue_trackers SET reporter_id = $2, status = $3, reported_at = $4, \
+            discovered_at = $5, started_at = $6, resolved_at = $7, issue_category = $8, \
+            environment = $9, system_name = $10, component = $11, \
+            customer_or_project_tag = $12, external_reference = $13, cc_summary = $14, \
+            cc_long_description = $15, cc_reported_by_name = $16, cc_reported_via = $17, \
+            pt_discoverer_name = $18, pt_affected_users_count = $19, \
+            pt_affected_user_groups = $20, pt_assignees = $21, pt_stakeholders_to_inform \
+            = $22, pt_observers = $23, sx_external_signals = $24, sx_alert_ids = $25, \
+            sx_error_messages = $26, sx_screenshots_url = $27, sx_logs_url = $28, \
+            sx_first_observed_at = $29, fx_broken_components = $30, fx_failed_services = \
+            $31, fx_stuck_processes = $32, fx_hardware_faults = $33, fx_data_corruption \
+            = $34, hx_related_issues = $35, hx_prior_occurrences = $36, \
+            hx_recent_change_url = $37, hx_references = $38, hx_timeline = $39, \
+            ix_hypotheses = $40, ix_repro_steps = $41, ix_diagnostic_queries = $42, \
+            ix_tests_run = $43, ix_blocking_unknowns = $44, dx_root_cause = $45, \
+            dx_contributing_causes = $46, dx_scope = $47, dx_confirmed = $48, \
+            tx_mitigation_steps = $49, tx_fix_plan = $50, tx_workaround = $51, \
+            tx_rollback_plan = $52, tx_communication_plan = $53, \
+            px_expected_resolution_at = $54, px_residual_risk = $55, px_monitoring_plan \
+            = $56, px_recurrence_likelihood = $57, px_lessons_learned = $58, \
+            score_by_priority_rank = $59, score_by_severity_of_impact = $60, \
+            score_by_magnitude_of_damage = $61, score_by_harm_grade = $62, \
+            score_by_failure_condition = $63, score_by_moscow_requirement = $64, \
+            score_by_frequency_percent = $65, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.reporter_id)
         .bind(&self.status)
         .bind(self.reported_at)

@@ -9,7 +9,6 @@ use crate::models::medical_practices::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub name: String,
     pub postal_address_as_full_text: String,
     pub country_as_iso_3166_1_alpha_2: Option<String>,
@@ -24,11 +23,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO medical_practices (deleted_at, name, postal_address_as_full_text, \
-            country_as_iso_3166_1_alpha_2, postcode, phone, email, ods_code, setting) VALUES \
-            ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
+            "INSERT INTO medical_practices (name, postal_address_as_full_text, \
+            country_as_iso_3166_1_alpha_2, postcode, phone, email, ods_code, setting) \
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(&self.postal_address_as_full_text)
         .bind(&self.country_as_iso_3166_1_alpha_2)
@@ -44,13 +42,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE medical_practices SET deleted_at = $2, name = $3, \
-            postal_address_as_full_text = $4, country_as_iso_3166_1_alpha_2 = $5, postcode = \
-            $6, phone = $7, email = $8, ods_code = $9, setting = $10, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            "UPDATE medical_practices SET name = $2, postal_address_as_full_text = $3, \
+            country_as_iso_3166_1_alpha_2 = $4, postcode = $5, phone = $6, email = $7, \
+            ods_code = $8, setting = $9, updated_at = now() WHERE id = $1 AND deleted_at \
+            IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(&self.postal_address_as_full_text)
         .bind(&self.country_as_iso_3166_1_alpha_2)

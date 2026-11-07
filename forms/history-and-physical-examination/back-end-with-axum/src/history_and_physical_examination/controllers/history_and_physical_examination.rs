@@ -104,18 +104,20 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE history_and_physical_examinations SET patient_id = $2, clinician_id = $3, \
-            clerked_at = $4, clinician_role = $5, registration_number = $6, care_setting = \
-            $7, admission_source = $8, patient_identifier = $9, age_band = $10, sex = $11, \
-            presenting_complaint = $12, history_of_presenting_complaint = $13, \
-            past_medical_surgical_history = $14, drug_history = $15, allergy_status = $16, \
-            allergy_detail = $17, family_history = $18, social_history = $19, systems_review \
-            = $20, temperature = $21, heart_rate = $22, respiratory_rate = $23, \
-            systolic_blood_pressure = $24, oxygen_saturation = $25, consciousness_level = \
-            $26, exam_cardiovascular = $27, exam_respiratory = $28, exam_abdominal = $29, \
-            exam_neurological = $30, exam_other = $31, investigations = $32, impression = \
-            $33, red_flag_findings = $34, management_plan = $35, clinical_note = $36, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE history_and_physical_examinations SET patient_id = $2, clinician_id = \
+            $3, clerked_at = $4, clinician_role = $5, registration_number = $6, \
+            care_setting = $7, admission_source = $8, patient_identifier = $9, age_band \
+            = $10, sex = $11, presenting_complaint = $12, \
+            history_of_presenting_complaint = $13, past_medical_surgical_history = $14, \
+            drug_history = $15, allergy_status = $16, allergy_detail = $17, \
+            family_history = $18, social_history = $19, systems_review = $20, \
+            temperature = $21, heart_rate = $22, respiratory_rate = $23, \
+            systolic_blood_pressure = $24, oxygen_saturation = $25, consciousness_level \
+            = $26, exam_cardiovascular = $27, exam_respiratory = $28, exam_abdominal = \
+            $29, exam_neurological = $30, exam_other = $31, investigations = $32, \
+            impression = $33, red_flag_findings = $34, management_plan = $35, \
+            clinical_note = $36, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

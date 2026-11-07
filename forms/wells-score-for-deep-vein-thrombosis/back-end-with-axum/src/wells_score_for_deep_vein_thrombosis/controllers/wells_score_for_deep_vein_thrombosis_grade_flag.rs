@@ -41,8 +41,8 @@ impl Params {
         sqlx::query_as(
             "UPDATE wells_score_for_deep_vein_thrombosis_grade_flags SET flag_id = $2, \
             category = $3, priority = $4, description = $5, suggested_action = $6, \
-            wells_score_for_deep_vein_thrombosis_grade_id = $7, updated_at = now() WHERE id = \
-            $1 RETURNING *",
+            wells_score_for_deep_vein_thrombosis_grade_id = $7, updated_at = now() WHERE \
+            id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(&self.flag_id)

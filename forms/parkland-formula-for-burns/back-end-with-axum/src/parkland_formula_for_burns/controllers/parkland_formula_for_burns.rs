@@ -9,7 +9,6 @@ use crate::models::parkland_formula_for_burns::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
     pub clinician_name: String,
@@ -33,14 +32,13 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO parkland_formula_for_burns (deleted_at, patient_id, clinician_id, \
-            clinician_name, clinician_role, care_setting, assessed_at, patient_identifier, \
-            age_band, sex, weight_kg, tbsa_percent, tbsa_method, injury_at, \
-            injury_time_known, inhalation_suspected, circumferential_or_deep, mechanism) \
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, \
-            $17, $18) RETURNING *",
+            "INSERT INTO parkland_formula_for_burns (patient_id, clinician_id, \
+            clinician_name, clinician_role, care_setting, assessed_at, \
+            patient_identifier, age_band, sex, weight_kg, tbsa_percent, tbsa_method, \
+            injury_at, injury_time_known, inhalation_suspected, circumferential_or_deep, \
+            mechanism) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, \
+            $14, $15, $16, $17) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.clinician_name)
@@ -65,15 +63,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE parkland_formula_for_burns SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, clinician_name = $5, clinician_role = $6, care_setting = $7, \
-            assessed_at = $8, patient_identifier = $9, age_band = $10, sex = $11, weight_kg = \
-            $12, tbsa_percent = $13, tbsa_method = $14, injury_at = $15, injury_time_known = \
-            $16, inhalation_suspected = $17, circumferential_or_deep = $18, mechanism = $19, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE parkland_formula_for_burns SET patient_id = $2, clinician_id = $3, \
+            clinician_name = $4, clinician_role = $5, care_setting = $6, assessed_at = \
+            $7, patient_identifier = $8, age_band = $9, sex = $10, weight_kg = $11, \
+            tbsa_percent = $12, tbsa_method = $13, injury_at = $14, injury_time_known = \
+            $15, inhalation_suspected = $16, circumferential_or_deep = $17, mechanism = \
+            $18, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.clinician_name)

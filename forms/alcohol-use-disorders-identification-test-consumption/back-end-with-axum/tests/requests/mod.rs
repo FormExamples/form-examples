@@ -9,3 +9,4 @@ pub mod audit_c_grade_flag;
 pub mod audit_c_grade_rule;
 pub mod clinician;
 pub mod patient;
+mod soft_delete;

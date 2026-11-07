@@ -9,7 +9,6 @@ use crate::models::medications::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub international_nonproprietary_name: String,
     pub description: String,
 }
@@ -18,10 +17,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO medications (deleted_at, international_nonproprietary_name, \
-            description) VALUES ($1, $2, $3) RETURNING *",
+            "INSERT INTO medications (international_nonproprietary_name, description) \
+            VALUES ($1, $2) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.international_nonproprietary_name)
         .bind(&self.description)
         .fetch_one(db)
@@ -31,11 +29,10 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE medications SET deleted_at = $2, international_nonproprietary_name = $3, \
-            description = $4, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE medications SET international_nonproprietary_name = $2, description = \
+            $3, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.international_nonproprietary_name)
         .bind(&self.description)
         .fetch_optional(db)

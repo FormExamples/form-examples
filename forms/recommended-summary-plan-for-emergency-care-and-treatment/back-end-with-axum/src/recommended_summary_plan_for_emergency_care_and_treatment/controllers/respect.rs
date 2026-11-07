@@ -101,15 +101,16 @@ impl Params {
         sqlx::query_as(
             "UPDATE respect SET patient_id = $2, clinician_id = $3, person_name = $4, \
             date_of_birth = $5, identifier = $6, address = $7, key_contact = $8, \
-            health_summary = $9, diagnoses = $10, existing_documents = $11, what_matters = \
-            $12, care_preferences = $13, priority_balance = $14, recommended_interventions = \
-            $15, not_recommended_interventions = $16, cpr_recommendation = $17, cpr_rationale \
-            = $18, cpr_discussed = $19, hospital_transfer = $20, critical_care_admission = \
-            $21, treatment_ceilings = $22, has_capacity = $23, capacity_assessment = $24, \
-            involvement = $25, proxy_details = $26, clinician_name = $27, clinician_role = \
-            $28, clinician_registration = $29, signature = $30, signed_at = $31, \
-            senior_endorsement = $32, emergency_contacts = $33, review_date = $34, updated_at \
-            = now() WHERE id = $1 RETURNING *",
+            health_summary = $9, diagnoses = $10, existing_documents = $11, what_matters \
+            = $12, care_preferences = $13, priority_balance = $14, \
+            recommended_interventions = $15, not_recommended_interventions = $16, \
+            cpr_recommendation = $17, cpr_rationale = $18, cpr_discussed = $19, \
+            hospital_transfer = $20, critical_care_admission = $21, treatment_ceilings = \
+            $22, has_capacity = $23, capacity_assessment = $24, involvement = $25, \
+            proxy_details = $26, clinician_name = $27, clinician_role = $28, \
+            clinician_registration = $29, signature = $30, signed_at = $31, \
+            senior_endorsement = $32, emergency_contacts = $33, review_date = $34, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

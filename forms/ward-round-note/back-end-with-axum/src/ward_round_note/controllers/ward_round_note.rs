@@ -9,7 +9,6 @@ use crate::models::ward_round_notes::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
     pub clinician_name: String,
@@ -46,19 +45,18 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO ward_round_notes (deleted_at, patient_id, clinician_id, \
-            clinician_name, clinician_grade, reviewed_at, ward, patient_identifier, \
-            admission_date, primary_diagnosis, overnight_events, no_overnight_events, \
-            problem_list, examination_summary, news2_total, news2_single_param_three, \
+            "INSERT INTO ward_round_notes (patient_id, clinician_id, clinician_name, \
+            clinician_grade, reviewed_at, ward, patient_identifier, admission_date, \
+            primary_diagnosis, overnight_events, no_overnight_events, problem_list, \
+            examination_summary, news2_total, news2_single_param_three, \
             observation_trend, investigations_reviewed, no_investigations_outstanding, \
             abnormal_result_flagged, abnormal_result_actioned, vte_status, \
             vte_prophylaxis_in_place, medication_changes, no_medication_changes, \
             plan_and_jobs, escalation_status, senior_review_present, \
-            estimated_discharge_date, discharge_not_estimable, clinical_note) VALUES ($1, $2, \
-            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, \
-            $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31) RETURNING *",
+            estimated_discharge_date, discharge_not_estimable, clinical_note) VALUES \
+            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, \
+            $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.clinician_name)
@@ -96,21 +94,20 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE ward_round_notes SET deleted_at = $2, patient_id = $3, clinician_id = $4, \
-            clinician_name = $5, clinician_grade = $6, reviewed_at = $7, ward = $8, \
-            patient_identifier = $9, admission_date = $10, primary_diagnosis = $11, \
-            overnight_events = $12, no_overnight_events = $13, problem_list = $14, \
-            examination_summary = $15, news2_total = $16, news2_single_param_three = $17, \
-            observation_trend = $18, investigations_reviewed = $19, \
-            no_investigations_outstanding = $20, abnormal_result_flagged = $21, \
-            abnormal_result_actioned = $22, vte_status = $23, vte_prophylaxis_in_place = $24, \
-            medication_changes = $25, no_medication_changes = $26, plan_and_jobs = $27, \
-            escalation_status = $28, senior_review_present = $29, estimated_discharge_date = \
-            $30, discharge_not_estimable = $31, clinical_note = $32, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE ward_round_notes SET patient_id = $2, clinician_id = $3, \
+            clinician_name = $4, clinician_grade = $5, reviewed_at = $6, ward = $7, \
+            patient_identifier = $8, admission_date = $9, primary_diagnosis = $10, \
+            overnight_events = $11, no_overnight_events = $12, problem_list = $13, \
+            examination_summary = $14, news2_total = $15, news2_single_param_three = \
+            $16, observation_trend = $17, investigations_reviewed = $18, \
+            no_investigations_outstanding = $19, abnormal_result_flagged = $20, \
+            abnormal_result_actioned = $21, vte_status = $22, vte_prophylaxis_in_place = \
+            $23, medication_changes = $24, no_medication_changes = $25, plan_and_jobs = \
+            $26, escalation_status = $27, senior_review_present = $28, \
+            estimated_discharge_date = $29, discharge_not_estimable = $30, clinical_note \
+            = $31, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.clinician_name)

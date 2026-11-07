@@ -9,7 +9,6 @@ use crate::models::body_mass_index_and_body_surface_area_calculators::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
     pub clinician_name: String,
@@ -30,13 +29,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO body_mass_index_and_body_surface_area_calculators (deleted_at, \
-            patient_id, clinician_id, clinician_name, clinician_role, assessed_at, \
-            care_setting, purpose, patient_identifier, age_band, sex, ancestry, height_cm, \
-            weight_kg, bsa_formula) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, \
-            $12, $13, $14, $15) RETURNING *",
+            "INSERT INTO body_mass_index_and_body_surface_area_calculators (patient_id, \
+            clinician_id, clinician_name, clinician_role, assessed_at, care_setting, \
+            purpose, patient_identifier, age_band, sex, ancestry, height_cm, weight_kg, \
+            bsa_formula) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, \
+            $14) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.clinician_name)
@@ -58,14 +56,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE body_mass_index_and_body_surface_area_calculators SET deleted_at = $2, \
-            patient_id = $3, clinician_id = $4, clinician_name = $5, clinician_role = $6, \
-            assessed_at = $7, care_setting = $8, purpose = $9, patient_identifier = $10, \
-            age_band = $11, sex = $12, ancestry = $13, height_cm = $14, weight_kg = $15, \
-            bsa_formula = $16, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE body_mass_index_and_body_surface_area_calculators SET patient_id = \
+            $2, clinician_id = $3, clinician_name = $4, clinician_role = $5, assessed_at \
+            = $6, care_setting = $7, purpose = $8, patient_identifier = $9, age_band = \
+            $10, sex = $11, ancestry = $12, height_cm = $13, weight_kg = $14, \
+            bsa_formula = $15, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.clinician_name)

@@ -206,30 +206,32 @@ impl Params {
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
             "UPDATE heart_failure_reviews SET patient_id = $2, clinician_id = $3, \
-            clinician_name = $4, clinician_role = $5, review_date = $6, care_setting = $7, \
-            review_type = $8, last_review_date = $9, patient_identifier = $10, age_band = \
-            $11, sex = $12, year_of_diagnosis = $13, heart_failure_type = $14, latest_lvef = \
-            $15, last_echo_date = $16, aetiology = $17, nyha_class = $18, breathlessness = \
-            $19, orthopnoea = $20, paroxysmal_nocturnal_dyspnoea = $21, fatigue = $22, \
-            change_since_last_review = $23, decompensation = $24, weight_kg = $25, \
-            weight_change_kg = $26, peripheral_oedema = $27, raised_jvp = $28, lung_crackles \
-            = $29, systolic_blood_pressure = $30, diastolic_blood_pressure = $31, heart_rate \
-            = $32, heart_rhythm = $33, nt_pro_bnp = $34, sodium = $35, potassium = $36, urea \
-            = $37, creatinine = $38, egfr = $39, haemoglobin = $40, ferritin = $41, \
-            transferrin_saturation = $42, hba1c = $43, bloods_date = $44, \
-            raas_inhibitor_status = $45, raas_inhibitor_agent = $46, raas_inhibitor_dose = \
-            $47, raas_inhibitor_at_target_dose = $48, raas_inhibitor_adherence = $49, \
-            beta_blocker_status = $50, beta_blocker_agent = $51, beta_blocker_dose = $52, \
-            beta_blocker_at_target_dose = $53, beta_blocker_adherence = $54, mra_status = \
-            $55, mra_agent = $56, mra_dose = $57, mra_at_target_dose = $58, mra_adherence = \
-            $59, sglt2_inhibitor_status = $60, sglt2_inhibitor_agent = $61, \
-            sglt2_inhibitor_dose = $62, sglt2_inhibitor_at_target_dose = $63, \
-            sglt2_inhibitor_adherence = $64, loop_diuretic_agent = $65, loop_diuretic_dose = \
-            $66, other_medications = $67, icd = $68, crt = $69, pacemaker = $70, \
-            device_check_status = $71, influenza_vaccination = $72, pneumococcal_vaccination \
-            = $73, covid_vaccination = $74, smoking_status = $75, alcohol_status = $76, \
-            daily_weights = $77, self_management_plan = $78, cardiac_rehab = $79, \
-            review_context = $80, updated_at = now() WHERE id = $1 RETURNING *",
+            clinician_name = $4, clinician_role = $5, review_date = $6, care_setting = \
+            $7, review_type = $8, last_review_date = $9, patient_identifier = $10, \
+            age_band = $11, sex = $12, year_of_diagnosis = $13, heart_failure_type = \
+            $14, latest_lvef = $15, last_echo_date = $16, aetiology = $17, nyha_class = \
+            $18, breathlessness = $19, orthopnoea = $20, paroxysmal_nocturnal_dyspnoea = \
+            $21, fatigue = $22, change_since_last_review = $23, decompensation = $24, \
+            weight_kg = $25, weight_change_kg = $26, peripheral_oedema = $27, raised_jvp \
+            = $28, lung_crackles = $29, systolic_blood_pressure = $30, \
+            diastolic_blood_pressure = $31, heart_rate = $32, heart_rhythm = $33, \
+            nt_pro_bnp = $34, sodium = $35, potassium = $36, urea = $37, creatinine = \
+            $38, egfr = $39, haemoglobin = $40, ferritin = $41, transferrin_saturation = \
+            $42, hba1c = $43, bloods_date = $44, raas_inhibitor_status = $45, \
+            raas_inhibitor_agent = $46, raas_inhibitor_dose = $47, \
+            raas_inhibitor_at_target_dose = $48, raas_inhibitor_adherence = $49, \
+            beta_blocker_status = $50, beta_blocker_agent = $51, beta_blocker_dose = \
+            $52, beta_blocker_at_target_dose = $53, beta_blocker_adherence = $54, \
+            mra_status = $55, mra_agent = $56, mra_dose = $57, mra_at_target_dose = $58, \
+            mra_adherence = $59, sglt2_inhibitor_status = $60, sglt2_inhibitor_agent = \
+            $61, sglt2_inhibitor_dose = $62, sglt2_inhibitor_at_target_dose = $63, \
+            sglt2_inhibitor_adherence = $64, loop_diuretic_agent = $65, \
+            loop_diuretic_dose = $66, other_medications = $67, icd = $68, crt = $69, \
+            pacemaker = $70, device_check_status = $71, influenza_vaccination = $72, \
+            pneumococcal_vaccination = $73, covid_vaccination = $74, smoking_status = \
+            $75, alcohol_status = $76, daily_weights = $77, self_management_plan = $78, \
+            cardiac_rehab = $79, review_context = $80, updated_at = now() WHERE id = $1 \
+            AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

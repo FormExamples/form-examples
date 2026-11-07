@@ -87,16 +87,17 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE general_practitioner_referral_letters SET patient_id = $2, clinician_id = \
-            $3, patient_identifier = $4, referrer_role = $5, referring_practice = $6, \
-            referral_date = $7, access_needs = $8, referral_specialty = $9, named_clinician = \
-            $10, receiving_organisation = $11, urgency = $12, urgency_reason = $13, \
-            suspected_cancer_criterion = $14, suspected_cancer_pathway = $15, \
-            reason_for_referral = $16, relevant_history = $17, presenting_problem = $18, \
-            symptom_duration = $19, red_flag_symptoms = $20, examination_findings = $21, \
-            investigation_results = $22, current_medications = $23, allergies = $24, \
-            patient_expectations = $25, consent_to_share = $26, safety_netting = $27, \
-            clinical_note = $28, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE general_practitioner_referral_letters SET patient_id = $2, \
+            clinician_id = $3, patient_identifier = $4, referrer_role = $5, \
+            referring_practice = $6, referral_date = $7, access_needs = $8, \
+            referral_specialty = $9, named_clinician = $10, receiving_organisation = \
+            $11, urgency = $12, urgency_reason = $13, suspected_cancer_criterion = $14, \
+            suspected_cancer_pathway = $15, reason_for_referral = $16, relevant_history \
+            = $17, presenting_problem = $18, symptom_duration = $19, red_flag_symptoms = \
+            $20, examination_findings = $21, investigation_results = $22, \
+            current_medications = $23, allergies = $24, patient_expectations = $25, \
+            consent_to_share = $26, safety_netting = $27, clinical_note = $28, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

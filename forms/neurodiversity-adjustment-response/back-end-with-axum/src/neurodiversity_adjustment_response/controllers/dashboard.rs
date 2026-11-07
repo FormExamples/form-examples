@@ -26,7 +26,8 @@ async fn dashboard(
 
     // Each grade row, newest first, paired with its parent response.
     let grades: Vec<neurodiversity_adjustment_response_grades::Model> = sqlx::query_as(
-        "SELECT * FROM neurodiversity_adjustment_response_grades ORDER BY graded_at DESC LIMIT $1",
+        "SELECT * FROM neurodiversity_adjustment_response_grades WHERE deleted_at IS \
+            NULL ORDER BY graded_at DESC LIMIT $1",
     )
     .bind(i64::try_from(limit).unwrap_or(i64::MAX))
     .fetch_all(&db(&ctx))

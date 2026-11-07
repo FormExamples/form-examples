@@ -72,14 +72,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE national_early_warning_score_2s SET patient_id = $2, clinician_id = $3, \
-            status = $4, observation_at = $5, ward_or_location = $6, spo2_scale = $7, \
-            spo2_scale2_endorsed = $8, respiratory_rate = $9, spo2 = $10, on_oxygen = $11, \
-            oxygen_device = $12, oxygen_flow_rate_l_min = $13, \
-            inspired_oxygen_fraction_percent = $14, systolic_blood_pressure = $15, pulse = \
-            $16, consciousness_acvpu = $17, temperature = $18, is_under_16 = $19, is_pregnant \
-            = $20, has_spinal_cord_injury = $21, clinical_notes = $22, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            "UPDATE national_early_warning_score_2s SET patient_id = $2, clinician_id = \
+            $3, status = $4, observation_at = $5, ward_or_location = $6, spo2_scale = \
+            $7, spo2_scale2_endorsed = $8, respiratory_rate = $9, spo2 = $10, on_oxygen \
+            = $11, oxygen_device = $12, oxygen_flow_rate_l_min = $13, \
+            inspired_oxygen_fraction_percent = $14, systolic_blood_pressure = $15, pulse \
+            = $16, consciousness_acvpu = $17, temperature = $18, is_under_16 = $19, \
+            is_pregnant = $20, has_spinal_cord_injury = $21, clinical_notes = $22, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

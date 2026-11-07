@@ -9,7 +9,6 @@ use crate::models::casualty_card_vital_signs::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub casualty_card_id: Uuid,
     pub heart_rate: Option<i32>,
     pub systolic_bp: Option<i32>,
@@ -33,14 +32,13 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO casualty_card_vital_signs (deleted_at, casualty_card_id, heart_rate, \
+            "INSERT INTO casualty_card_vital_signs (casualty_card_id, heart_rate, \
             systolic_bp, diastolic_bp, respiratory_rate, oxygen_saturation, \
             supplemental_oxygen, oxygen_flow_rate, temperature, blood_glucose, \
             consciousness_level, pupil_left_size, pupil_left_reactive, pupil_right_size, \
-            pupil_right_reactive, capillary_refill_time, weight) VALUES ($1, $2, $3, $4, $5, \
-            $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18) RETURNING *",
+            pupil_right_reactive, capillary_refill_time, weight) VALUES ($1, $2, $3, $4, \
+            $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(self.heart_rate)
         .bind(self.systolic_bp)
@@ -65,16 +63,15 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE casualty_card_vital_signs SET deleted_at = $2, casualty_card_id = $3, \
-            heart_rate = $4, systolic_bp = $5, diastolic_bp = $6, respiratory_rate = $7, \
-            oxygen_saturation = $8, supplemental_oxygen = $9, oxygen_flow_rate = $10, \
-            temperature = $11, blood_glucose = $12, consciousness_level = $13, \
-            pupil_left_size = $14, pupil_left_reactive = $15, pupil_right_size = $16, \
-            pupil_right_reactive = $17, capillary_refill_time = $18, weight = $19, updated_at \
-            = now() WHERE id = $1 RETURNING *",
+            "UPDATE casualty_card_vital_signs SET casualty_card_id = $2, heart_rate = $3, \
+            systolic_bp = $4, diastolic_bp = $5, respiratory_rate = $6, \
+            oxygen_saturation = $7, supplemental_oxygen = $8, oxygen_flow_rate = $9, \
+            temperature = $10, blood_glucose = $11, consciousness_level = $12, \
+            pupil_left_size = $13, pupil_left_reactive = $14, pupil_right_size = $15, \
+            pupil_right_reactive = $16, capillary_refill_time = $17, weight = $18, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(self.heart_rate)
         .bind(self.systolic_bp)

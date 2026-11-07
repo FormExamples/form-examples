@@ -9,3 +9,4 @@ pub mod newborn_blood_spot_screening_grade;
 pub mod newborn_blood_spot_screening_grade_flag;
 pub mod newborn_blood_spot_screening_grade_rule;
 pub mod patient;
+mod soft_delete;

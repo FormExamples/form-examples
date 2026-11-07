@@ -9,7 +9,6 @@ use crate::models::eye_vision_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -43,19 +42,18 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO eye_vision_test_results (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO eye_vision_test_results (patient_id, clinician_id, \
             originating_request_reference, report_status, test_type, performed_date, \
             reported_date, clinical_history, visual_acuity_right, visual_acuity_left, \
             intraocular_pressure_right_mmhg, intraocular_pressure_left_mmhg, \
             visual_field_result, reduced_visual_acuity, visual_field_defect, \
             raised_intraocular_pressure, diabetic_retinopathy, optic_disc_abnormality, \
-            macular_abnormality, normal_examination, retinopathy_grade, findings_narrative, \
-            impression, reporting_category, recommended_follow_up, \
-            critical_result_communicated, reported_to) VALUES ($1, $2, $3, $4, $5, $6, $7, \
-            $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, \
-            $24, $25, $26, $27, $28) RETURNING *",
+            macular_abnormality, normal_examination, retinopathy_grade, \
+            findings_narrative, impression, reporting_category, recommended_follow_up, \
+            critical_result_communicated, reported_to) VALUES ($1, $2, $3, $4, $5, $6, \
+            $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, \
+            $23, $24, $25, $26, $27) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -90,21 +88,20 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE eye_vision_test_results SET deleted_at = $2, patient_id = $3, clinician_id \
-            = $4, originating_request_reference = $5, report_status = $6, test_type = $7, \
-            performed_date = $8, reported_date = $9, clinical_history = $10, \
-            visual_acuity_right = $11, visual_acuity_left = $12, \
-            intraocular_pressure_right_mmhg = $13, intraocular_pressure_left_mmhg = $14, \
-            visual_field_result = $15, reduced_visual_acuity = $16, visual_field_defect = \
-            $17, raised_intraocular_pressure = $18, diabetic_retinopathy = $19, \
-            optic_disc_abnormality = $20, macular_abnormality = $21, normal_examination = \
-            $22, retinopathy_grade = $23, findings_narrative = $24, impression = $25, \
-            reporting_category = $26, recommended_follow_up = $27, \
-            critical_result_communicated = $28, reported_to = $29, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE eye_vision_test_results SET patient_id = $2, clinician_id = $3, \
+            originating_request_reference = $4, report_status = $5, test_type = $6, \
+            performed_date = $7, reported_date = $8, clinical_history = $9, \
+            visual_acuity_right = $10, visual_acuity_left = $11, \
+            intraocular_pressure_right_mmhg = $12, intraocular_pressure_left_mmhg = $13, \
+            visual_field_result = $14, reduced_visual_acuity = $15, visual_field_defect \
+            = $16, raised_intraocular_pressure = $17, diabetic_retinopathy = $18, \
+            optic_disc_abnormality = $19, macular_abnormality = $20, normal_examination \
+            = $21, retinopathy_grade = $22, findings_narrative = $23, impression = $24, \
+            reporting_category = $25, recommended_follow_up = $26, \
+            critical_result_communicated = $27, reported_to = $28, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

@@ -9,4 +9,5 @@ pub mod expense_reimbursement_grade_flag;
 pub mod expense_reimbursement_grade_rule;
 pub mod expense_reimbursement_item;
 pub mod manager;
+mod soft_delete;
 pub mod worker;

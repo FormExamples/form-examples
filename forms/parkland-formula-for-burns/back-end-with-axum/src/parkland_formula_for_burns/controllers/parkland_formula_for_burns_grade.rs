@@ -9,7 +9,6 @@ use crate::models::parkland_formula_for_burns_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub parkland_formula_for_burns_id: Uuid,
     pub total_24h_volume_ml: Option<f64>,
     pub first_8h_volume_ml: Option<f64>,
@@ -27,14 +26,13 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO parkland_formula_for_burns_grades (deleted_at, \
-            parkland_formula_for_burns_id, total_24h_volume_ml, first_8h_volume_ml, \
+            "INSERT INTO parkland_formula_for_burns_grades \
+            (parkland_formula_for_burns_id, total_24h_volume_ml, first_8h_volume_ml, \
             next_16h_volume_ml, hours_since_injury, remaining_first_8h_hours, \
             first_8h_rate_ml_h, next_16h_rate_ml_h, urine_output_target_min_ml_h, \
-            urine_output_target_max_ml_h, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, \
-            $9, $10, $11, $12) RETURNING *",
+            urine_output_target_max_ml_h, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, \
+            $8, $9, $10, $11) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.parkland_formula_for_burns_id)
         .bind(self.total_24h_volume_ml)
         .bind(self.first_8h_volume_ml)
@@ -53,15 +51,15 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE parkland_formula_for_burns_grades SET deleted_at = $2, \
-            parkland_formula_for_burns_id = $3, total_24h_volume_ml = $4, first_8h_volume_ml \
-            = $5, next_16h_volume_ml = $6, hours_since_injury = $7, remaining_first_8h_hours \
-            = $8, first_8h_rate_ml_h = $9, next_16h_rate_ml_h = $10, \
-            urine_output_target_min_ml_h = $11, urine_output_target_max_ml_h = $12, graded_at \
-            = $13, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE parkland_formula_for_burns_grades SET parkland_formula_for_burns_id = \
+            $2, total_24h_volume_ml = $3, first_8h_volume_ml = $4, next_16h_volume_ml = \
+            $5, hours_since_injury = $6, remaining_first_8h_hours = $7, \
+            first_8h_rate_ml_h = $8, next_16h_rate_ml_h = $9, \
+            urine_output_target_min_ml_h = $10, urine_output_target_max_ml_h = $11, \
+            graded_at = $12, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.parkland_formula_for_burns_id)
         .bind(self.total_24h_volume_ml)
         .bind(self.first_8h_volume_ml)

@@ -139,23 +139,25 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE newborn_and_infant_physical_examinations SET patient_id = $2, clinician_id \
-            = $3, practitioner_name = $4, practitioner_role = $5, examined_at = $6, \
-            examination_context = $7, care_setting = $8, baby_identifier = $9, baby_name = \
-            $10, date_of_birth = $11, sex = $12, gestational_age_weeks = $13, \
-            birth_weight_grams = $14, breech_presentation = $15, family_history_hip_problems \
-            = $16, antenatal_concerns = $17, eyes_red_reflex_right = $18, \
-            eyes_red_reflex_left = $19, eyes_appearance = $20, heart_murmur = $21, \
-            femoral_pulses_right = $22, femoral_pulses_left = $23, central_cyanosis = $24, \
-            oxygen_saturation_preductal = $25, oxygen_saturation_postductal = $26, \
-            barlow_test = $27, ortolani_test = $28, hip_abduction = $29, testis_right = $30, \
-            testis_left = $31, general_appearance = $32, skin = $33, head_and_fontanelles = \
-            $34, face_and_palate = $35, neck_and_clavicles = $36, chest_and_lungs = $37, \
-            abdomen = $38, genitalia = $39, anus_and_spine = $40, limbs_and_digits = $41, \
-            feet = $42, tone_and_movement = $43, weight_grams = $44, head_circumference_cm = \
-            $45, length_cm = $46, eyes_result_recorded = $47, heart_result_recorded = $48, \
-            hips_result_recorded = $49, testes_result_recorded = $50, clinical_note = $51, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE newborn_and_infant_physical_examinations SET patient_id = $2, \
+            clinician_id = $3, practitioner_name = $4, practitioner_role = $5, \
+            examined_at = $6, examination_context = $7, care_setting = $8, \
+            baby_identifier = $9, baby_name = $10, date_of_birth = $11, sex = $12, \
+            gestational_age_weeks = $13, birth_weight_grams = $14, breech_presentation = \
+            $15, family_history_hip_problems = $16, antenatal_concerns = $17, \
+            eyes_red_reflex_right = $18, eyes_red_reflex_left = $19, eyes_appearance = \
+            $20, heart_murmur = $21, femoral_pulses_right = $22, femoral_pulses_left = \
+            $23, central_cyanosis = $24, oxygen_saturation_preductal = $25, \
+            oxygen_saturation_postductal = $26, barlow_test = $27, ortolani_test = $28, \
+            hip_abduction = $29, testis_right = $30, testis_left = $31, \
+            general_appearance = $32, skin = $33, head_and_fontanelles = $34, \
+            face_and_palate = $35, neck_and_clavicles = $36, chest_and_lungs = $37, \
+            abdomen = $38, genitalia = $39, anus_and_spine = $40, limbs_and_digits = \
+            $41, feet = $42, tone_and_movement = $43, weight_grams = $44, \
+            head_circumference_cm = $45, length_cm = $46, eyes_result_recorded = $47, \
+            heart_result_recorded = $48, hips_result_recorded = $49, \
+            testes_result_recorded = $50, clinical_note = $51, updated_at = now() WHERE \
+            id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

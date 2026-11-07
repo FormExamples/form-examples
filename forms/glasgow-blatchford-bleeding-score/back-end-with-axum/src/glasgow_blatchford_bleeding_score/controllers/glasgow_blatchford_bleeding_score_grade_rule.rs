@@ -9,7 +9,6 @@ use crate::models::glasgow_blatchford_bleeding_score_grade_rules::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub glasgow_blatchford_bleeding_score_grade_id: Uuid,
     pub rule_id: String,
     pub parameter: String,
@@ -22,11 +21,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO glasgow_blatchford_bleeding_score_grade_rules (deleted_at, \
-            glasgow_blatchford_bleeding_score_grade_id, rule_id, parameter, points, category, \
-            description) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+            "INSERT INTO glasgow_blatchford_bleeding_score_grade_rules \
+            (glasgow_blatchford_bleeding_score_grade_id, rule_id, parameter, points, \
+            category, description) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.glasgow_blatchford_bleeding_score_grade_id)
         .bind(&self.rule_id)
         .bind(&self.parameter)
@@ -40,13 +38,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE glasgow_blatchford_bleeding_score_grade_rules SET deleted_at = $2, \
-            glasgow_blatchford_bleeding_score_grade_id = $3, rule_id = $4, parameter = $5, \
-            points = $6, category = $7, description = $8, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE glasgow_blatchford_bleeding_score_grade_rules SET \
+            glasgow_blatchford_bleeding_score_grade_id = $2, rule_id = $3, parameter = \
+            $4, points = $5, category = $6, description = $7, updated_at = now() WHERE \
+            id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.glasgow_blatchford_bleeding_score_grade_id)
         .bind(&self.rule_id)
         .bind(&self.parameter)

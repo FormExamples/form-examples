@@ -9,7 +9,6 @@ use crate::models::certificate_providers::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub title: String,
     pub given_names: String,
     pub family_name: String,
@@ -32,14 +31,13 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO certificate_providers (deleted_at, title, given_names, family_name, \
-            email, phone, postal_address_as_full_text, country_as_iso_3166_1_alpha_2, \
-            postcode, route, profession, profession_registration_number, years_known_donor, \
+            "INSERT INTO certificate_providers (title, given_names, family_name, email, \
+            phone, postal_address_as_full_text, country_as_iso_3166_1_alpha_2, postcode, \
+            route, profession, profession_registration_number, years_known_donor, \
             relationship_to_donor, declared_not_family, declared_not_employee, \
-            declared_not_attorney) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, \
-            $13, $14, $15, $16, $17) RETURNING *",
+            declared_not_attorney) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, \
+            $12, $13, $14, $15, $16) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.title)
         .bind(&self.given_names)
         .bind(&self.family_name)
@@ -63,15 +61,15 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE certificate_providers SET deleted_at = $2, title = $3, given_names = $4, \
-            family_name = $5, email = $6, phone = $7, postal_address_as_full_text = $8, \
-            country_as_iso_3166_1_alpha_2 = $9, postcode = $10, route = $11, profession = \
-            $12, profession_registration_number = $13, years_known_donor = $14, \
-            relationship_to_donor = $15, declared_not_family = $16, declared_not_employee = \
-            $17, declared_not_attorney = $18, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE certificate_providers SET title = $2, given_names = $3, family_name = \
+            $4, email = $5, phone = $6, postal_address_as_full_text = $7, \
+            country_as_iso_3166_1_alpha_2 = $8, postcode = $9, route = $10, profession = \
+            $11, profession_registration_number = $12, years_known_donor = $13, \
+            relationship_to_donor = $14, declared_not_family = $15, \
+            declared_not_employee = $16, declared_not_attorney = $17, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.title)
         .bind(&self.given_names)
         .bind(&self.family_name)

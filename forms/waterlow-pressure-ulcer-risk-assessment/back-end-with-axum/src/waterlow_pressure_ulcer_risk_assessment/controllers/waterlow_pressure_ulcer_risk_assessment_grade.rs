@@ -9,7 +9,6 @@ use crate::models::waterlow_pressure_ulcer_risk_assessment_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub waterlow_pressure_ulcer_risk_assessment_id: Uuid,
     pub build_points: Option<i32>,
     pub skin_points: Option<i32>,
@@ -31,15 +30,14 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO waterlow_pressure_ulcer_risk_assessment_grades (deleted_at, \
-            waterlow_pressure_ulcer_risk_assessment_id, build_points, skin_points, \
+            "INSERT INTO waterlow_pressure_ulcer_risk_assessment_grades \
+            (waterlow_pressure_ulcer_risk_assessment_id, build_points, skin_points, \
             sex_points, age_points, continence_points, mobility_points, \
             tissue_malnutrition_points, neurological_deficit_points, \
             major_surgery_trauma_points, medication_points, total_score, risk_band, \
-            prevention_actions, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, \
-            $11, $12, $13, $14, $15, $16) RETURNING *",
+            prevention_actions, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, \
+            $10, $11, $12, $13, $14, $15) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.waterlow_pressure_ulcer_risk_assessment_id)
         .bind(self.build_points)
         .bind(self.skin_points)
@@ -62,16 +60,16 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE waterlow_pressure_ulcer_risk_assessment_grades SET deleted_at = $2, \
-            waterlow_pressure_ulcer_risk_assessment_id = $3, build_points = $4, skin_points = \
-            $5, sex_points = $6, age_points = $7, continence_points = $8, mobility_points = \
-            $9, tissue_malnutrition_points = $10, neurological_deficit_points = $11, \
-            major_surgery_trauma_points = $12, medication_points = $13, total_score = $14, \
-            risk_band = $15, prevention_actions = $16, graded_at = $17, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            "UPDATE waterlow_pressure_ulcer_risk_assessment_grades SET \
+            waterlow_pressure_ulcer_risk_assessment_id = $2, build_points = $3, \
+            skin_points = $4, sex_points = $5, age_points = $6, continence_points = $7, \
+            mobility_points = $8, tissue_malnutrition_points = $9, \
+            neurological_deficit_points = $10, major_surgery_trauma_points = $11, \
+            medication_points = $12, total_score = $13, risk_band = $14, \
+            prevention_actions = $15, graded_at = $16, updated_at = now() WHERE id = $1 \
+            AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.waterlow_pressure_ulcer_risk_assessment_id)
         .bind(self.build_points)
         .bind(self.skin_points)

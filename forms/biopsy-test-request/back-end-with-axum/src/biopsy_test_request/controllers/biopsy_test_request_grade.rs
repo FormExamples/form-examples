@@ -9,7 +9,6 @@ use crate::models::biopsy_test_request_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub biopsy_test_request_id: Uuid,
     pub appropriateness_score: Option<i32>,
     pub appropriateness_band: String,
@@ -29,13 +28,13 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO biopsy_test_request_grades (deleted_at, biopsy_test_request_id, \
+            "INSERT INTO biopsy_test_request_grades (biopsy_test_request_id, \
             appropriateness_score, appropriateness_band, bleeding_risk_band, \
             anticoagulant_action, completeness_percent, triage_tier, target_timeframe, \
-            two_week_wait_eligible, recommendation, clinician_notes, signed_at, graded_at) \
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING *",
+            two_week_wait_eligible, recommendation, clinician_notes, signed_at, \
+            graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.biopsy_test_request_id)
         .bind(self.appropriateness_score)
         .bind(&self.appropriateness_band)
@@ -56,15 +55,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE biopsy_test_request_grades SET deleted_at = $2, biopsy_test_request_id = \
-            $3, appropriateness_score = $4, appropriateness_band = $5, bleeding_risk_band = \
-            $6, anticoagulant_action = $7, completeness_percent = $8, triage_tier = $9, \
-            target_timeframe = $10, two_week_wait_eligible = $11, recommendation = $12, \
-            clinician_notes = $13, signed_at = $14, graded_at = $15, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE biopsy_test_request_grades SET biopsy_test_request_id = $2, \
+            appropriateness_score = $3, appropriateness_band = $4, bleeding_risk_band = \
+            $5, anticoagulant_action = $6, completeness_percent = $7, triage_tier = $8, \
+            target_timeframe = $9, two_week_wait_eligible = $10, recommendation = $11, \
+            clinician_notes = $12, signed_at = $13, graded_at = $14, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.biopsy_test_request_id)
         .bind(self.appropriateness_score)
         .bind(&self.appropriateness_band)

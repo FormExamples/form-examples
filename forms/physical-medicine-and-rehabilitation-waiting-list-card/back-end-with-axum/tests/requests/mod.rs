@@ -10,3 +10,4 @@ pub mod pmr_waiting_list_card_grade;
 pub mod pmr_waiting_list_card_grade_flag;
 pub mod pmr_waiting_list_card_grade_rule;
 pub mod practitioner;
+mod soft_delete;

@@ -9,7 +9,6 @@ use crate::models::united_kingdom_statement_of_fitness_for_work_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub united_kingdom_statement_of_fitness_for_work_id: Uuid,
     pub fitness_category: String,
     pub adaptation_intensity: String,
@@ -30,15 +29,14 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO united_kingdom_statement_of_fitness_for_work_grades (deleted_at, \
-            united_kingdom_statement_of_fitness_for_work_id, fitness_category, \
+            "INSERT INTO united_kingdom_statement_of_fitness_for_work_grades \
+            (united_kingdom_statement_of_fitness_for_work_id, fitness_category, \
             adaptation_intensity, adaptation_count, period_days, period_compliance, \
-            recommendation, is_within_first_six_months_of_condition, is_valid, grader_notes, \
-            graded_at, clinician_override, clinician_override_reason, \
-            clinician_final_recommendation) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, \
-            $11, $12, $13, $14, $15) RETURNING *",
+            recommendation, is_within_first_six_months_of_condition, is_valid, \
+            grader_notes, graded_at, clinician_override, clinician_override_reason, \
+            clinician_final_recommendation) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, \
+            $10, $11, $12, $13, $14) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.united_kingdom_statement_of_fitness_for_work_id)
         .bind(&self.fitness_category)
         .bind(&self.adaptation_intensity)
@@ -60,17 +58,16 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE united_kingdom_statement_of_fitness_for_work_grades SET deleted_at = $2, \
-            united_kingdom_statement_of_fitness_for_work_id = $3, fitness_category = $4, \
-            adaptation_intensity = $5, adaptation_count = $6, period_days = $7, \
-            period_compliance = $8, recommendation = $9, \
-            is_within_first_six_months_of_condition = $10, is_valid = $11, grader_notes = \
-            $12, graded_at = $13, clinician_override = $14, clinician_override_reason = $15, \
-            clinician_final_recommendation = $16, updated_at = now() WHERE id = $1 RETURNING \
-            *",
+            "UPDATE united_kingdom_statement_of_fitness_for_work_grades SET \
+            united_kingdom_statement_of_fitness_for_work_id = $2, fitness_category = $3, \
+            adaptation_intensity = $4, adaptation_count = $5, period_days = $6, \
+            period_compliance = $7, recommendation = $8, \
+            is_within_first_six_months_of_condition = $9, is_valid = $10, grader_notes = \
+            $11, graded_at = $12, clinician_override = $13, clinician_override_reason = \
+            $14, clinician_final_recommendation = $15, updated_at = now() WHERE id = $1 \
+            AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.united_kingdom_statement_of_fitness_for_work_id)
         .bind(&self.fitness_category)
         .bind(&self.adaptation_intensity)

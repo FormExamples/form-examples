@@ -9,7 +9,6 @@ use crate::models::anaesthetic_record_timed_observations::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub anaesthetic_record_id: Uuid,
     pub observed_at: Option<DateTimeWithTimeZone>,
     pub systolic_blood_pressure: Option<f64>,
@@ -26,13 +25,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO anaesthetic_record_timed_observations (deleted_at, \
-            anaesthetic_record_id, observed_at, systolic_blood_pressure, \
-            diastolic_blood_pressure, heart_rate, spo2, end_tidal_co2, temperature, \
-            agent_percent, fresh_gas_flow_l) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, \
-            $11) RETURNING *",
+            "INSERT INTO anaesthetic_record_timed_observations (anaesthetic_record_id, \
+            observed_at, systolic_blood_pressure, diastolic_blood_pressure, heart_rate, \
+            spo2, end_tidal_co2, temperature, agent_percent, fresh_gas_flow_l) VALUES \
+            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.anaesthetic_record_id)
         .bind(self.observed_at)
         .bind(self.systolic_blood_pressure)
@@ -50,14 +47,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE anaesthetic_record_timed_observations SET deleted_at = $2, \
-            anaesthetic_record_id = $3, observed_at = $4, systolic_blood_pressure = $5, \
-            diastolic_blood_pressure = $6, heart_rate = $7, spo2 = $8, end_tidal_co2 = $9, \
-            temperature = $10, agent_percent = $11, fresh_gas_flow_l = $12, updated_at = \
-            now() WHERE id = $1 RETURNING *",
+            "UPDATE anaesthetic_record_timed_observations SET anaesthetic_record_id = $2, \
+            observed_at = $3, systolic_blood_pressure = $4, diastolic_blood_pressure = \
+            $5, heart_rate = $6, spo2 = $7, end_tidal_co2 = $8, temperature = $9, \
+            agent_percent = $10, fresh_gas_flow_l = $11, updated_at = now() WHERE id = \
+            $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.anaesthetic_record_id)
         .bind(self.observed_at)
         .bind(self.systolic_blood_pressure)

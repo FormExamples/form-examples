@@ -121,20 +121,22 @@ impl Params {
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
             "UPDATE mental_health_act_assessments SET patient_id = $2, clinician_id = $3, \
-            assessed_at = $4, location = $5, referral_source = $6, reason_for_assessment = \
-            $7, person_identifier = $8, age_band = $9, sex = $10, first_language = $11, \
-            amhp_name = $12, amhp_approved = $13, doctor1_name = $14, doctor1_gmc_number = \
-            $15, doctor1_section12_approved = $16, doctor1_examined_at = $17, doctor2_name = \
-            $18, doctor2_gmc_number = $19, doctor2_section12_approved = $20, \
-            doctor2_examined_at = $21, prior_acquaintance = $22, mental_disorder_present = \
-            $23, mental_disorder_evidence = $24, risk_to_own_health = $25, risk_to_own_safety \
+            assessed_at = $4, location = $5, referral_source = $6, reason_for_assessment \
+            = $7, person_identifier = $8, age_band = $9, sex = $10, first_language = \
+            $11, amhp_name = $12, amhp_approved = $13, doctor1_name = $14, \
+            doctor1_gmc_number = $15, doctor1_section12_approved = $16, \
+            doctor1_examined_at = $17, doctor2_name = $18, doctor2_gmc_number = $19, \
+            doctor2_section12_approved = $20, doctor2_examined_at = $21, \
+            prior_acquaintance = $22, mental_disorder_present = $23, \
+            mental_disorder_evidence = $24, risk_to_own_health = $25, risk_to_own_safety \
             = $26, risk_to_others = $27, risk_evidence = $28, risk_imminence = $29, \
             least_restrictive_met = $30, alternatives_considered = $31, \
             appropriate_treatment_available = $32, treatment_plan_summary = $33, \
             nearest_relative_identified = $34, nearest_relative_consulted = $35, \
-            nearest_relative_objection = $36, consultation_record = $37, recommended_section \
-            = $38, outcome = $39, bed_identified = $40, conveyance = $41, clinical_legal_note \
-            = $42, updated_at = now() WHERE id = $1 RETURNING *",
+            nearest_relative_objection = $36, consultation_record = $37, \
+            recommended_section = $38, outcome = $39, bed_identified = $40, conveyance = \
+            $41, clinical_legal_note = $42, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

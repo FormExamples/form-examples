@@ -109,17 +109,18 @@ impl Params {
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
             "UPDATE hypertension_reviews SET clinician_role = $2, reviewed_at = $3, \
-            practice_site = $4, patient_identifier = $5, age_band = $6, sex = $7, ethnicity = \
-            $8, diagnosis_date = $9, type2_diabetes = $10, chronic_kidney_disease = $11, \
-            established_cvd = $12, atrial_fibrillation = $13, clinic_systolic = $14, \
-            clinic_diastolic = $15, home_systolic = $16, home_diastolic = $17, \
-            monitoring_method = $18, postural_drop = $19, antihypertensive_agents = $20, \
-            adherence = $21, side_effects = $22, qrisk_percent = $23, smoking_status = $24, \
-            statin_therapy = $25, bmi = $26, lifestyle_advice = $27, serum_creatinine = $28, \
-            egfr = $29, serum_potassium = $30, hba1c = $31, total_cholesterol = $32, \
-            hdl_cholesterol = $33, urine_acr = $34, complications = $35, review_context = \
-            $36, patient_id = $37, clinician_id = $38, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            practice_site = $4, patient_identifier = $5, age_band = $6, sex = $7, \
+            ethnicity = $8, diagnosis_date = $9, type2_diabetes = $10, \
+            chronic_kidney_disease = $11, established_cvd = $12, atrial_fibrillation = \
+            $13, clinic_systolic = $14, clinic_diastolic = $15, home_systolic = $16, \
+            home_diastolic = $17, monitoring_method = $18, postural_drop = $19, \
+            antihypertensive_agents = $20, adherence = $21, side_effects = $22, \
+            qrisk_percent = $23, smoking_status = $24, statin_therapy = $25, bmi = $26, \
+            lifestyle_advice = $27, serum_creatinine = $28, egfr = $29, serum_potassium \
+            = $30, hba1c = $31, total_cholesterol = $32, hdl_cholesterol = $33, \
+            urine_acr = $34, complications = $35, review_context = $36, patient_id = \
+            $37, clinician_id = $38, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
         .bind(&self.clinician_role)

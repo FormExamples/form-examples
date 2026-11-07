@@ -9,7 +9,6 @@ use crate::models::medical_information_form_for_air_travel_grade_rules::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub medical_information_form_for_air_travel_grade_id: Uuid,
     pub rule_id: String,
     pub instrument: String,
@@ -22,12 +21,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO medical_information_form_for_air_travel_grade_rules (deleted_at, \
-            medical_information_form_for_air_travel_grade_id, rule_id, instrument, \
-            fitness_band, category, description) VALUES ($1, $2, $3, $4, $5, $6, $7) \
+            "INSERT INTO medical_information_form_for_air_travel_grade_rules \
+            (medical_information_form_for_air_travel_grade_id, rule_id, instrument, \
+            fitness_band, category, description) VALUES ($1, $2, $3, $4, $5, $6) \
             RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.medical_information_form_for_air_travel_grade_id)
         .bind(&self.rule_id)
         .bind(&self.instrument)
@@ -41,13 +39,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE medical_information_form_for_air_travel_grade_rules SET deleted_at = $2, \
-            medical_information_form_for_air_travel_grade_id = $3, rule_id = $4, instrument = \
-            $5, fitness_band = $6, category = $7, description = $8, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE medical_information_form_for_air_travel_grade_rules SET \
+            medical_information_form_for_air_travel_grade_id = $2, rule_id = $3, \
+            instrument = $4, fitness_band = $5, category = $6, description = $7, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.medical_information_form_for_air_travel_grade_id)
         .bind(&self.rule_id)
         .bind(&self.instrument)

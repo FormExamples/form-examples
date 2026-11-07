@@ -10,3 +10,4 @@ mod grading_additional_flags_route;
 mod grading_fired_rules_route;
 pub mod patient;
 mod reba_rules_route;
+mod soft_delete;

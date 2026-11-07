@@ -9,7 +9,6 @@ use crate::models::grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub balance_score: i32,
     pub gait_score: i32,
@@ -24,11 +23,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO grades (deleted_at, assessment_id, balance_score, gait_score, \
-            total_tinetti_score, fall_risk_category, tug_time_seconds, tug_risk_category, \
-            graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
+            "INSERT INTO grades (assessment_id, balance_score, gait_score, \
+            total_tinetti_score, fall_risk_category, tug_time_seconds, \
+            tug_risk_category, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.balance_score)
         .bind(self.gait_score)
@@ -44,13 +43,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE grades SET deleted_at = $2, assessment_id = $3, balance_score = $4, \
-            gait_score = $5, total_tinetti_score = $6, fall_risk_category = $7, \
-            tug_time_seconds = $8, tug_risk_category = $9, graded_at = $10, updated_at = \
-            now() WHERE id = $1 RETURNING *",
+            "UPDATE grades SET assessment_id = $2, balance_score = $3, gait_score = $4, \
+            total_tinetti_score = $5, fall_risk_category = $6, tug_time_seconds = $7, \
+            tug_risk_category = $8, graded_at = $9, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.balance_score)
         .bind(self.gait_score)

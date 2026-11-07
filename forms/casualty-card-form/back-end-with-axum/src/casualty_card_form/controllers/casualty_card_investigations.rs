@@ -9,7 +9,6 @@ use crate::models::casualty_card_investigations::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub casualty_card_id: Uuid,
     pub blood_tests: String,
     pub urinalysis: String,
@@ -23,11 +22,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO casualty_card_investigations (deleted_at, casualty_card_id, \
-            blood_tests, urinalysis, pregnancy_test, ecg_performed, ecg_findings, \
-            other_investigations) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+            "INSERT INTO casualty_card_investigations (casualty_card_id, blood_tests, \
+            urinalysis, pregnancy_test, ecg_performed, ecg_findings, \
+            other_investigations) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(&self.blood_tests)
         .bind(&self.urinalysis)
@@ -42,13 +40,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE casualty_card_investigations SET deleted_at = $2, casualty_card_id = $3, \
-            blood_tests = $4, urinalysis = $5, pregnancy_test = $6, ecg_performed = $7, \
-            ecg_findings = $8, other_investigations = $9, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE casualty_card_investigations SET casualty_card_id = $2, blood_tests = \
+            $3, urinalysis = $4, pregnancy_test = $5, ecg_performed = $6, ecg_findings = \
+            $7, other_investigations = $8, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(&self.blood_tests)
         .bind(&self.urinalysis)

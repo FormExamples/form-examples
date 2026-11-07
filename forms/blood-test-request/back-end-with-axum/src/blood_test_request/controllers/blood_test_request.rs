@@ -9,7 +9,6 @@ use crate::models::blood_test_requests::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub status: String,
@@ -56,20 +55,19 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO blood_test_requests (deleted_at, patient_id, clinician_id, status, \
+            "INSERT INTO blood_test_requests (patient_id, clinician_id, status, \
             site_name, setting, referral_date, full_blood_count, urea_electrolytes, \
             liver_function, thyroid_function, hba1c, lipid_profile, c_reactive_protein, \
-            coagulation_screen, bone_profile, ferritin_iron, vitamin_b12_folate, vitamin_d, \
-            hba1c_monitoring, glucose, inr, blood_culture, group_and_save, crossmatch, \
-            troponin, d_dimer, amylase_lipase, primary_indication, clinical_details, \
-            relevant_medications, fasting_required, fasting_status, specimen_collected, \
-            collection_datetime, known_blood_borne_virus, difficult_venous_access, urgency, \
-            supervising_consultant, requester_contact, notes) VALUES ($1, $2, $3, $4, $5, $6, \
-            $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, \
-            $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, \
-            $40, $41) RETURNING *",
+            coagulation_screen, bone_profile, ferritin_iron, vitamin_b12_folate, \
+            vitamin_d, hba1c_monitoring, glucose, inr, blood_culture, group_and_save, \
+            crossmatch, troponin, d_dimer, amylase_lipase, primary_indication, \
+            clinical_details, relevant_medications, fasting_required, fasting_status, \
+            specimen_collected, collection_datetime, known_blood_borne_virus, \
+            difficult_venous_access, urgency, supervising_consultant, requester_contact, \
+            notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, \
+            $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, \
+            $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)
@@ -117,22 +115,21 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE blood_test_requests SET deleted_at = $2, patient_id = $3, clinician_id = \
-            $4, status = $5, site_name = $6, setting = $7, referral_date = $8, \
-            full_blood_count = $9, urea_electrolytes = $10, liver_function = $11, \
-            thyroid_function = $12, hba1c = $13, lipid_profile = $14, c_reactive_protein = \
-            $15, coagulation_screen = $16, bone_profile = $17, ferritin_iron = $18, \
-            vitamin_b12_folate = $19, vitamin_d = $20, hba1c_monitoring = $21, glucose = $22, \
-            inr = $23, blood_culture = $24, group_and_save = $25, crossmatch = $26, troponin \
-            = $27, d_dimer = $28, amylase_lipase = $29, primary_indication = $30, \
-            clinical_details = $31, relevant_medications = $32, fasting_required = $33, \
-            fasting_status = $34, specimen_collected = $35, collection_datetime = $36, \
-            known_blood_borne_virus = $37, difficult_venous_access = $38, urgency = $39, \
-            supervising_consultant = $40, requester_contact = $41, notes = $42, updated_at = \
-            now() WHERE id = $1 RETURNING *",
+            "UPDATE blood_test_requests SET patient_id = $2, clinician_id = $3, status = \
+            $4, site_name = $5, setting = $6, referral_date = $7, full_blood_count = $8, \
+            urea_electrolytes = $9, liver_function = $10, thyroid_function = $11, hba1c \
+            = $12, lipid_profile = $13, c_reactive_protein = $14, coagulation_screen = \
+            $15, bone_profile = $16, ferritin_iron = $17, vitamin_b12_folate = $18, \
+            vitamin_d = $19, hba1c_monitoring = $20, glucose = $21, inr = $22, \
+            blood_culture = $23, group_and_save = $24, crossmatch = $25, troponin = $26, \
+            d_dimer = $27, amylase_lipase = $28, primary_indication = $29, \
+            clinical_details = $30, relevant_medications = $31, fasting_required = $32, \
+            fasting_status = $33, specimen_collected = $34, collection_datetime = $35, \
+            known_blood_borne_virus = $36, difficult_venous_access = $37, urgency = $38, \
+            supervising_consultant = $39, requester_contact = $40, notes = $41, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)

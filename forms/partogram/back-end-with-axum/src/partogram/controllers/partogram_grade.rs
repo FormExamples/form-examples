@@ -35,7 +35,7 @@ impl Params {
         sqlx::query_as(
             "UPDATE partogram_grades SET partogram_id = $2, progress_status = $3, \
             latest_dilatation_cm = $4, graded_at = $5, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.partogram_id)

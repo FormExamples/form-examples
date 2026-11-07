@@ -9,7 +9,6 @@ use crate::models::arc42_documentations::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub architecture_id: Uuid,
     pub author_name: String,
     pub author_role: String,
@@ -34,15 +33,15 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO arc42_documentations (deleted_at, architecture_id, author_name, \
-            author_role, document_date, introduction, business_context_description, \
+            "INSERT INTO arc42_documentations (architecture_id, author_name, author_role, \
+            document_date, introduction, business_context_description, \
             technical_context_description, solution_strategy_summary, \
             top_level_decomposition_summary, building_block_overview, runtime_overview, \
-            deployment_overview, crosscutting_overview, quality_tree_summary, recommendation, \
-            additional_notes, signed_by, signed_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, \
-            $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19) RETURNING *",
+            deployment_overview, crosscutting_overview, quality_tree_summary, \
+            recommendation, additional_notes, signed_by, signed_at) VALUES ($1, $2, $3, \
+            $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.architecture_id)
         .bind(&self.author_name)
         .bind(&self.author_role)
@@ -68,17 +67,16 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE arc42_documentations SET deleted_at = $2, architecture_id = $3, \
-            author_name = $4, author_role = $5, document_date = $6, introduction = $7, \
-            business_context_description = $8, technical_context_description = $9, \
-            solution_strategy_summary = $10, top_level_decomposition_summary = $11, \
-            building_block_overview = $12, runtime_overview = $13, deployment_overview = $14, \
-            crosscutting_overview = $15, quality_tree_summary = $16, recommendation = $17, \
-            additional_notes = $18, signed_by = $19, signed_at = $20, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            "UPDATE arc42_documentations SET architecture_id = $2, author_name = $3, \
+            author_role = $4, document_date = $5, introduction = $6, \
+            business_context_description = $7, technical_context_description = $8, \
+            solution_strategy_summary = $9, top_level_decomposition_summary = $10, \
+            building_block_overview = $11, runtime_overview = $12, deployment_overview = \
+            $13, crosscutting_overview = $14, quality_tree_summary = $15, recommendation \
+            = $16, additional_notes = $17, signed_by = $18, signed_at = $19, updated_at \
+            = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.architecture_id)
         .bind(&self.author_name)
         .bind(&self.author_role)

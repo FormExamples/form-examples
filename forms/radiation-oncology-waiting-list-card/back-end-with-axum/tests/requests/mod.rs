@@ -10,3 +10,4 @@ pub mod rad_onc_waiting_list_card_appointment;
 pub mod rad_onc_waiting_list_card_grade;
 pub mod rad_onc_waiting_list_card_grade_flag;
 pub mod rad_onc_waiting_list_card_grade_rule;
+mod soft_delete;

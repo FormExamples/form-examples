@@ -9,3 +9,4 @@ pub mod medical_certificate_of_cause_of_death_grade;
 pub mod medical_certificate_of_cause_of_death_grade_flag;
 pub mod medical_certificate_of_cause_of_death_grade_rule;
 pub mod patient;
+mod soft_delete;

@@ -9,7 +9,6 @@ use crate::models::lumbar_puncture_test_requests::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub status: String,
@@ -44,18 +43,18 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO lumbar_puncture_test_requests (deleted_at, patient_id, clinician_id, \
-            status, site_name, setting, referral_date, requested_by_date, procedure_intent, \
+            "INSERT INTO lumbar_puncture_test_requests (patient_id, clinician_id, status, \
+            site_name, setting, referral_date, requested_by_date, procedure_intent, \
             primary_indication, clinical_question, relevant_history, \
             suspected_raised_intracranial_pressure, focal_neurological_signs, \
-            reduced_consciousness, ct_head_status, taking_anticoagulant, anticoagulant_agent, \
-            taking_antiplatelet, antiplatelet_agent, inr, platelet_count, bleeding_disorder, \
-            local_skin_infection, opening_pressure_required, urgency, supervising_consultant, \
-            requester_contact, notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, \
-            $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, \
-            $28, $29) RETURNING *",
+            reduced_consciousness, ct_head_status, taking_anticoagulant, \
+            anticoagulant_agent, taking_antiplatelet, antiplatelet_agent, inr, \
+            platelet_count, bleeding_disorder, local_skin_infection, \
+            opening_pressure_required, urgency, supervising_consultant, \
+            requester_contact, notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, \
+            $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, \
+            $26, $27, $28) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)
@@ -91,20 +90,19 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE lumbar_puncture_test_requests SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, status = $5, site_name = $6, setting = $7, referral_date = $8, \
-            requested_by_date = $9, procedure_intent = $10, primary_indication = $11, \
-            clinical_question = $12, relevant_history = $13, \
-            suspected_raised_intracranial_pressure = $14, focal_neurological_signs = $15, \
-            reduced_consciousness = $16, ct_head_status = $17, taking_anticoagulant = $18, \
-            anticoagulant_agent = $19, taking_antiplatelet = $20, antiplatelet_agent = $21, \
-            inr = $22, platelet_count = $23, bleeding_disorder = $24, local_skin_infection = \
-            $25, opening_pressure_required = $26, urgency = $27, supervising_consultant = \
-            $28, requester_contact = $29, notes = $30, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE lumbar_puncture_test_requests SET patient_id = $2, clinician_id = $3, \
+            status = $4, site_name = $5, setting = $6, referral_date = $7, \
+            requested_by_date = $8, procedure_intent = $9, primary_indication = $10, \
+            clinical_question = $11, relevant_history = $12, \
+            suspected_raised_intracranial_pressure = $13, focal_neurological_signs = \
+            $14, reduced_consciousness = $15, ct_head_status = $16, taking_anticoagulant \
+            = $17, anticoagulant_agent = $18, taking_antiplatelet = $19, \
+            antiplatelet_agent = $20, inr = $21, platelet_count = $22, bleeding_disorder \
+            = $23, local_skin_infection = $24, opening_pressure_required = $25, urgency \
+            = $26, supervising_consultant = $27, requester_contact = $28, notes = $29, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)

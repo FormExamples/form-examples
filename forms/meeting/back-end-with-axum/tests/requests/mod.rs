@@ -15,3 +15,4 @@ pub mod organizer;
 pub mod participant;
 pub mod recurring_rule;
 pub mod resource;
+mod soft_delete;

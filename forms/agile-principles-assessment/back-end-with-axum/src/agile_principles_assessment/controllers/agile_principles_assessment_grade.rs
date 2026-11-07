@@ -9,7 +9,6 @@ use crate::models::agile_principles_assessment_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub agile_principles_assessment_id: Uuid,
     pub answered_count: i32,
     pub mean_score: Option<f64>,
@@ -28,13 +27,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO agile_principles_assessment_grades (deleted_at, \
-            agile_principles_assessment_id, answered_count, mean_score, weighted_mean_score, \
-            weights_customised, maturity, top_action_1, top_action_2, top_action_3, \
-            coach_notes, signed_at, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, \
-            $10, $11, $12, $13) RETURNING *",
+            "INSERT INTO agile_principles_assessment_grades \
+            (agile_principles_assessment_id, answered_count, mean_score, \
+            weighted_mean_score, weights_customised, maturity, top_action_1, \
+            top_action_2, top_action_3, coach_notes, signed_at, graded_at) VALUES ($1, \
+            $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.agile_principles_assessment_id)
         .bind(self.answered_count)
         .bind(self.mean_score)
@@ -54,14 +52,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE agile_principles_assessment_grades SET deleted_at = $2, \
-            agile_principles_assessment_id = $3, answered_count = $4, mean_score = $5, \
-            weighted_mean_score = $6, weights_customised = $7, maturity = $8, top_action_1 = \
-            $9, top_action_2 = $10, top_action_3 = $11, coach_notes = $12, signed_at = $13, \
-            graded_at = $14, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE agile_principles_assessment_grades SET agile_principles_assessment_id \
+            = $2, answered_count = $3, mean_score = $4, weighted_mean_score = $5, \
+            weights_customised = $6, maturity = $7, top_action_1 = $8, top_action_2 = \
+            $9, top_action_3 = $10, coach_notes = $11, signed_at = $12, graded_at = $13, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.agile_principles_assessment_id)
         .bind(self.answered_count)
         .bind(self.mean_score)

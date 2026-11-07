@@ -71,12 +71,13 @@ impl Params {
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
             "UPDATE partogram_observations SET partogram_id = $2, observed_at = $3, \
-            cervical_dilatation_cm = $4, descent_fifths = $5, contractions_per_10_min = $6, \
-            contraction_duration_band = $7, contraction_strength = $8, fetal_heart_rate = $9, \
-            liquor_state = $10, moulding = $11, systolic_blood_pressure = $12, \
-            diastolic_blood_pressure = $13, pulse = $14, temperature = $15, urine_volume_ml = \
-            $16, urine_protein = $17, urine_ketones = $18, urine_glucose = $19, oxytocin_rate \
-            = $20, drugs_and_fluids = $21, updated_at = now() WHERE id = $1 RETURNING *",
+            cervical_dilatation_cm = $4, descent_fifths = $5, contractions_per_10_min = \
+            $6, contraction_duration_band = $7, contraction_strength = $8, \
+            fetal_heart_rate = $9, liquor_state = $10, moulding = $11, \
+            systolic_blood_pressure = $12, diastolic_blood_pressure = $13, pulse = $14, \
+            temperature = $15, urine_volume_ml = $16, urine_protein = $17, urine_ketones \
+            = $18, urine_glucose = $19, oxytocin_rate = $20, drugs_and_fluids = $21, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.partogram_id)

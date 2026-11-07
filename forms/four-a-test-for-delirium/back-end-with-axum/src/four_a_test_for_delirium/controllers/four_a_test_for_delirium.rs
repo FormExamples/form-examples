@@ -61,11 +61,11 @@ impl Params {
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
             "UPDATE four_a_test_for_deliriums SET patient_id = $2, clinician_id = $3, \
-            patient_identifier = $4, patient_name = $5, date_of_birth = $6, assessment_date = \
-            $7, assessment_time = $8, setting = $9, assessor_name = $10, assessor_role = $11, \
-            alertness = $12, amt4 = $13, attention_months = $14, acute_change = $15, \
-            acute_change_source = $16, clinical_notes = $17, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            patient_identifier = $4, patient_name = $5, date_of_birth = $6, \
+            assessment_date = $7, assessment_time = $8, setting = $9, assessor_name = \
+            $10, assessor_role = $11, alertness = $12, amt4 = $13, attention_months = \
+            $14, acute_change = $15, acute_change_source = $16, clinical_notes = $17, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

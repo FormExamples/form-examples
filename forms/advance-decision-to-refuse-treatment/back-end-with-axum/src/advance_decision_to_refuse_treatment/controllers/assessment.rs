@@ -9,7 +9,6 @@ use crate::models::assessments::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub status: String,
     pub full_name: String,
@@ -99,8 +98,8 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO assessments (deleted_at, patient_id, status, full_name, address, \
-            postcode, date_of_birth, nhs_number, gp_name, gp_practice, gp_address, gp_phone, \
+            "INSERT INTO assessments (patient_id, status, full_name, address, postcode, \
+            date_of_birth, nhs_number, gp_name, gp_practice, gp_address, gp_phone, \
             has_mental_capacity, understands_consequences, made_voluntarily, \
             capacity_assessment_date, capacity_assessor_name, capacity_assessor_role, \
             capacity_notes, circumstances_description, specific_conditions, \
@@ -108,14 +107,16 @@ impl Params {
             applies_if_severely_brain_damaged, applies_if_advanced_dementia, \
             other_circumstances, refuses_cardiopulmonary_resuscitation, \
             refuses_mechanical_ventilation, refuses_artificial_nutrition, \
-            refuses_artificial_hydration, refuses_antibiotics, refuses_blood_transfusion, \
-            refuses_dialysis, other_treatments_refused, treatment_refusal_details, \
-            includes_life_sustaining_treatment, understands_may_result_in_death, \
-            life_sustaining_treatments_specified, is_written_and_signed, is_witnessed, \
-            witness_confirmation, has_exceptions, exception_details, pain_management_wishes, \
-            comfort_care_wishes, emergency_exception_details, condition_specific_exceptions, \
-            preferred_place_of_care, preferred_place_of_death, spiritual_or_religious_wishes, \
-            organ_donation_wishes, organ_donation_details, other_wishes, people_to_notify, \
+            refuses_artificial_hydration, refuses_antibiotics, \
+            refuses_blood_transfusion, refuses_dialysis, other_treatments_refused, \
+            treatment_refusal_details, includes_life_sustaining_treatment, \
+            understands_may_result_in_death, life_sustaining_treatments_specified, \
+            is_written_and_signed, is_witnessed, witness_confirmation, has_exceptions, \
+            exception_details, pain_management_wishes, comfort_care_wishes, \
+            emergency_exception_details, condition_specific_exceptions, \
+            preferred_place_of_care, preferred_place_of_death, \
+            spiritual_or_religious_wishes, organ_donation_wishes, \
+            organ_donation_details, other_wishes, people_to_notify, \
             has_health_welfare_lpa, lpa_registered_with_opg, lpa_registration_date, \
             attorney_name, attorney_address, attorney_phone, replacement_attorney_name, \
             lpa_authority_scope, lpa_conflicts_with_adrt, lpa_conflict_details, \
@@ -124,15 +125,15 @@ impl Params {
             reviewer_confirms_informed, clinical_notes, concerns_raised, \
             reviewer_signature_obtained, maker_signature_obtained, maker_signature_date, \
             witness_name, witness_address, witness_signature_obtained, \
-            witness_signature_date, second_witness_name, second_witness_signature_obtained, \
-            declaration_statement_agreed, legal_notes) VALUES ($1, $2, $3, $4, $5, $6, $7, \
-            $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, \
-            $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, \
-            $40, $41, $42, $43, $44, $45, $46, $47, $48, $49, $50, $51, $52, $53, $54, $55, \
-            $56, $57, $58, $59, $60, $61, $62, $63, $64, $65, $66, $67, $68, $69, $70, $71, \
-            $72, $73, $74, $75, $76, $77, $78, $79, $80, $81, $82, $83, $84) RETURNING *",
+            witness_signature_date, second_witness_name, \
+            second_witness_signature_obtained, declaration_statement_agreed, \
+            legal_notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, \
+            $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, \
+            $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42, $43, \
+            $44, $45, $46, $47, $48, $49, $50, $51, $52, $53, $54, $55, $56, $57, $58, \
+            $59, $60, $61, $62, $63, $64, $65, $66, $67, $68, $69, $70, $71, $72, $73, \
+            $74, $75, $76, $77, $78, $79, $80, $81, $82, $83) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(&self.status)
         .bind(&self.full_name)
@@ -223,43 +224,44 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE assessments SET deleted_at = $2, patient_id = $3, status = $4, full_name = \
-            $5, address = $6, postcode = $7, date_of_birth = $8, nhs_number = $9, gp_name = \
-            $10, gp_practice = $11, gp_address = $12, gp_phone = $13, has_mental_capacity = \
-            $14, understands_consequences = $15, made_voluntarily = $16, \
-            capacity_assessment_date = $17, capacity_assessor_name = $18, \
-            capacity_assessor_role = $19, capacity_notes = $20, circumstances_description = \
-            $21, specific_conditions = $22, applies_if_terminally_ill = $23, \
-            applies_if_permanently_unconscious = $24, applies_if_severely_brain_damaged = \
-            $25, applies_if_advanced_dementia = $26, other_circumstances = $27, \
-            refuses_cardiopulmonary_resuscitation = $28, refuses_mechanical_ventilation = \
-            $29, refuses_artificial_nutrition = $30, refuses_artificial_hydration = $31, \
-            refuses_antibiotics = $32, refuses_blood_transfusion = $33, refuses_dialysis = \
-            $34, other_treatments_refused = $35, treatment_refusal_details = $36, \
-            includes_life_sustaining_treatment = $37, understands_may_result_in_death = $38, \
-            life_sustaining_treatments_specified = $39, is_written_and_signed = $40, \
-            is_witnessed = $41, witness_confirmation = $42, has_exceptions = $43, \
-            exception_details = $44, pain_management_wishes = $45, comfort_care_wishes = $46, \
-            emergency_exception_details = $47, condition_specific_exceptions = $48, \
-            preferred_place_of_care = $49, preferred_place_of_death = $50, \
-            spiritual_or_religious_wishes = $51, organ_donation_wishes = $52, \
-            organ_donation_details = $53, other_wishes = $54, people_to_notify = $55, \
-            has_health_welfare_lpa = $56, lpa_registered_with_opg = $57, \
-            lpa_registration_date = $58, attorney_name = $59, attorney_address = $60, \
-            attorney_phone = $61, replacement_attorney_name = $62, lpa_authority_scope = $63, \
-            lpa_conflicts_with_adrt = $64, lpa_conflict_details = $65, \
-            reviewed_by_healthcare_professional = $66, reviewer_name = $67, reviewer_role = \
-            $68, reviewer_registration_number = $69, review_date = $70, \
-            reviewer_confirms_capacity = $71, reviewer_confirms_informed = $72, \
-            clinical_notes = $73, concerns_raised = $74, reviewer_signature_obtained = $75, \
-            maker_signature_obtained = $76, maker_signature_date = $77, witness_name = $78, \
-            witness_address = $79, witness_signature_obtained = $80, witness_signature_date = \
-            $81, second_witness_name = $82, second_witness_signature_obtained = $83, \
-            declaration_statement_agreed = $84, legal_notes = $85, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE assessments SET patient_id = $2, status = $3, full_name = $4, address \
+            = $5, postcode = $6, date_of_birth = $7, nhs_number = $8, gp_name = $9, \
+            gp_practice = $10, gp_address = $11, gp_phone = $12, has_mental_capacity = \
+            $13, understands_consequences = $14, made_voluntarily = $15, \
+            capacity_assessment_date = $16, capacity_assessor_name = $17, \
+            capacity_assessor_role = $18, capacity_notes = $19, \
+            circumstances_description = $20, specific_conditions = $21, \
+            applies_if_terminally_ill = $22, applies_if_permanently_unconscious = $23, \
+            applies_if_severely_brain_damaged = $24, applies_if_advanced_dementia = $25, \
+            other_circumstances = $26, refuses_cardiopulmonary_resuscitation = $27, \
+            refuses_mechanical_ventilation = $28, refuses_artificial_nutrition = $29, \
+            refuses_artificial_hydration = $30, refuses_antibiotics = $31, \
+            refuses_blood_transfusion = $32, refuses_dialysis = $33, \
+            other_treatments_refused = $34, treatment_refusal_details = $35, \
+            includes_life_sustaining_treatment = $36, understands_may_result_in_death = \
+            $37, life_sustaining_treatments_specified = $38, is_written_and_signed = \
+            $39, is_witnessed = $40, witness_confirmation = $41, has_exceptions = $42, \
+            exception_details = $43, pain_management_wishes = $44, comfort_care_wishes = \
+            $45, emergency_exception_details = $46, condition_specific_exceptions = $47, \
+            preferred_place_of_care = $48, preferred_place_of_death = $49, \
+            spiritual_or_religious_wishes = $50, organ_donation_wishes = $51, \
+            organ_donation_details = $52, other_wishes = $53, people_to_notify = $54, \
+            has_health_welfare_lpa = $55, lpa_registered_with_opg = $56, \
+            lpa_registration_date = $57, attorney_name = $58, attorney_address = $59, \
+            attorney_phone = $60, replacement_attorney_name = $61, lpa_authority_scope = \
+            $62, lpa_conflicts_with_adrt = $63, lpa_conflict_details = $64, \
+            reviewed_by_healthcare_professional = $65, reviewer_name = $66, \
+            reviewer_role = $67, reviewer_registration_number = $68, review_date = $69, \
+            reviewer_confirms_capacity = $70, reviewer_confirms_informed = $71, \
+            clinical_notes = $72, concerns_raised = $73, reviewer_signature_obtained = \
+            $74, maker_signature_obtained = $75, maker_signature_date = $76, \
+            witness_name = $77, witness_address = $78, witness_signature_obtained = $79, \
+            witness_signature_date = $80, second_witness_name = $81, \
+            second_witness_signature_obtained = $82, declaration_statement_agreed = $83, \
+            legal_notes = $84, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(&self.status)
         .bind(&self.full_name)

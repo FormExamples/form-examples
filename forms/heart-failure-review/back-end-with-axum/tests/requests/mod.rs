@@ -9,3 +9,4 @@ pub mod heart_failure_review_grade;
 pub mod heart_failure_review_grade_flag;
 pub mod heart_failure_review_grade_rule;
 pub mod patient;
+mod soft_delete;

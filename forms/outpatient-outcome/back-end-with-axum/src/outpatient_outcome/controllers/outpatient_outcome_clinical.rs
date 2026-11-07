@@ -9,7 +9,6 @@ use crate::models::outpatient_outcome_clinicals::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub outpatient_outcome_id: Uuid,
     pub presenting_complaint: String,
     pub diagnosis: String,
@@ -21,11 +20,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO outpatient_outcome_clinicals (deleted_at, outpatient_outcome_id, \
-            presenting_complaint, diagnosis, treatment_delivered, outcome_classification) \
-            VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+            "INSERT INTO outpatient_outcome_clinicals (outpatient_outcome_id, \
+            presenting_complaint, diagnosis, treatment_delivered, \
+            outcome_classification) VALUES ($1, $2, $3, $4, $5) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.outpatient_outcome_id)
         .bind(&self.presenting_complaint)
         .bind(&self.diagnosis)
@@ -38,12 +36,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE outpatient_outcome_clinicals SET deleted_at = $2, outpatient_outcome_id = \
-            $3, presenting_complaint = $4, diagnosis = $5, treatment_delivered = $6, \
-            outcome_classification = $7, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE outpatient_outcome_clinicals SET outpatient_outcome_id = $2, \
+            presenting_complaint = $3, diagnosis = $4, treatment_delivered = $5, \
+            outcome_classification = $6, updated_at = now() WHERE id = $1 AND deleted_at \
+            IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.outpatient_outcome_id)
         .bind(&self.presenting_complaint)
         .bind(&self.diagnosis)

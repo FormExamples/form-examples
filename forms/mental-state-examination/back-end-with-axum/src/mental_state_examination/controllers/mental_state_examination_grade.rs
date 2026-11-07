@@ -54,10 +54,10 @@ impl Params {
         sqlx::query_as(
             "UPDATE mental_state_examination_grades SET mental_state_examination_id = $2, \
             status = $3, risk_level = $4, completeness_percent = $5, \
-            appearance_behaviour_documented = $6, speech_documented = $7, emotion_documented \
-            = $8, perception_documented = $9, thought_documented = $10, insight_documented = \
-            $11, cognition_documented = $12, graded_at = $13, updated_at = now() WHERE id = \
-            $1 RETURNING *",
+            appearance_behaviour_documented = $6, speech_documented = $7, \
+            emotion_documented = $8, perception_documented = $9, thought_documented = \
+            $10, insight_documented = $11, cognition_documented = $12, graded_at = $13, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.mental_state_examination_id)

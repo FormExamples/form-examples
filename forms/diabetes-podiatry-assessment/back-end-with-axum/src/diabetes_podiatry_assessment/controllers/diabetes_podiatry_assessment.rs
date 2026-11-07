@@ -9,7 +9,6 @@ use crate::models::diabetes_podiatry_assessments::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
     pub assessed_at: Option<Date>,
@@ -47,7 +46,7 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO diabetes_podiatry_assessments (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO diabetes_podiatry_assessments (patient_id, clinician_id, \
             assessed_at, assessment_setting, diabetes_type, years_since_diagnosis, \
             on_renal_replacement_therapy, visual_acuity_impairment, self_care_ability, \
             footwear_appropriate, right_neuropathy_status, right_pulses_status, \
@@ -56,11 +55,10 @@ impl Params {
             right_suspected_charcot, left_neuropathy_status, left_pulses_status, \
             left_deformity, left_callus, left_skin_breakdown, left_active_ulcer, \
             left_ulcer_severity, left_previous_ulcer, left_previous_amputation, \
-            left_suspected_charcot, clinical_context) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, \
-            $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, \
-            $25, $26, $27, $28, $29, $30, $31, $32) RETURNING *",
+            left_suspected_charcot, clinical_context) VALUES ($1, $2, $3, $4, $5, $6, \
+            $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, \
+            $23, $24, $25, $26, $27, $28, $29, $30, $31) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(self.assessed_at)
@@ -99,21 +97,22 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE diabetes_podiatry_assessments SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, assessed_at = $5, assessment_setting = $6, diabetes_type = $7, \
-            years_since_diagnosis = $8, on_renal_replacement_therapy = $9, \
-            visual_acuity_impairment = $10, self_care_ability = $11, footwear_appropriate = \
-            $12, right_neuropathy_status = $13, right_pulses_status = $14, right_deformity = \
-            $15, right_callus = $16, right_skin_breakdown = $17, right_active_ulcer = $18, \
-            right_ulcer_severity = $19, right_previous_ulcer = $20, right_previous_amputation \
-            = $21, right_suspected_charcot = $22, left_neuropathy_status = $23, \
-            left_pulses_status = $24, left_deformity = $25, left_callus = $26, \
-            left_skin_breakdown = $27, left_active_ulcer = $28, left_ulcer_severity = $29, \
-            left_previous_ulcer = $30, left_previous_amputation = $31, left_suspected_charcot \
-            = $32, clinical_context = $33, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE diabetes_podiatry_assessments SET patient_id = $2, clinician_id = $3, \
+            assessed_at = $4, assessment_setting = $5, diabetes_type = $6, \
+            years_since_diagnosis = $7, on_renal_replacement_therapy = $8, \
+            visual_acuity_impairment = $9, self_care_ability = $10, footwear_appropriate \
+            = $11, right_neuropathy_status = $12, right_pulses_status = $13, \
+            right_deformity = $14, right_callus = $15, right_skin_breakdown = $16, \
+            right_active_ulcer = $17, right_ulcer_severity = $18, right_previous_ulcer = \
+            $19, right_previous_amputation = $20, right_suspected_charcot = $21, \
+            left_neuropathy_status = $22, left_pulses_status = $23, left_deformity = \
+            $24, left_callus = $25, left_skin_breakdown = $26, left_active_ulcer = $27, \
+            left_ulcer_severity = $28, left_previous_ulcer = $29, \
+            left_previous_amputation = $30, left_suspected_charcot = $31, \
+            clinical_context = $32, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(self.assessed_at)

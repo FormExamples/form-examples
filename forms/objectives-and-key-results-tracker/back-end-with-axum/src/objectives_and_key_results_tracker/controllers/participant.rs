@@ -9,7 +9,6 @@ use crate::models::participants::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub okr_objective_id: Uuid,
     pub role: String,
     pub name: String,
@@ -21,10 +20,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO participants (deleted_at, okr_objective_id, role, name, email, notes) \
-            VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+            "INSERT INTO participants (okr_objective_id, role, name, email, notes) VALUES \
+            ($1, $2, $3, $4, $5) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.okr_objective_id)
         .bind(&self.role)
         .bind(&self.name)
@@ -37,11 +35,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE participants SET deleted_at = $2, okr_objective_id = $3, role = $4, name = \
-            $5, email = $6, notes = $7, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE participants SET okr_objective_id = $2, role = $3, name = $4, email = \
+            $5, notes = $6, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.okr_objective_id)
         .bind(&self.role)
         .bind(&self.name)

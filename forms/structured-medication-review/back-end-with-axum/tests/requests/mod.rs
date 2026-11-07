@@ -5,6 +5,7 @@ mod readiness;
 
 pub mod clinician;
 pub mod patient;
+mod soft_delete;
 pub mod structured_medication_review;
 pub mod structured_medication_review_grade;
 pub mod structured_medication_review_grade_flag;

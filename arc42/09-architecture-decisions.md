@@ -149,3 +149,20 @@ publishes. (+) `axa::Error` keeps logging the real cause, and no input is echoed
 body that `axa::Error` has just written, and should go once `axa` writes problems
 itself. (−) A client reading `error` or `description` from an error body must move to
 `title` and `detail`.
+
+## ADR-9 — Deletes are soft, and cascade
+
+**Context.** `deleted_at` was on every table, but `DELETE` removed the row and its
+children, lists returned rows a client had marked, and a client could set the column.
+These are clinical records, which must outlive a mistaken or disputed delete.
+
+**Decision.** `DELETE` marks the row and follows every `ON DELETE CASCADE` key in one
+statement, so a deleted assessment takes its grades with it. A `SET NULL` key is left,
+because the reference still says what a row referred to. Reads and updates skip marked
+rows, `deleted_at` is in no body, and unique indexes cover live rows only.
+`bin/axum-soft-delete --check` holds this in CI.
+
+**Consequences.** (+) A deleted record survives, with the time it was deleted. (+) A
+deleted row cannot block its replacement. (−) The API offers no restore and no purge,
+so retention needs its own decision. (−) `sql/` still declares plain `UNIQUE`, and the
+crates' migrations narrow it.

@@ -44,8 +44,8 @@ impl Params {
         sqlx::query_as(
             "UPDATE soap_note_grades SET status = $2, completeness_percent = $3, \
             subjective_present = $4, objective_present = $5, assessment_present = $6, \
-            plan_present = $7, graded_at = $8, soap_note_id = $9, updated_at = now() WHERE id \
-            = $1 RETURNING *",
+            plan_present = $7, graded_at = $8, soap_note_id = $9, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(&self.status)

@@ -59,10 +59,11 @@ impl Params {
         sqlx::query_as(
             "UPDATE has_bled_score_for_major_bleeding_risk_grades SET \
             has_bled_score_for_major_bleeding_risk_id = $2, hypertension_points = $3, \
-            renal_points = $4, liver_points = $5, stroke_points = $6, bleeding_points = $7, \
-            labile_inr_points = $8, elderly_points = $9, drugs_points = $10, alcohol_points = \
-            $11, total_score = $12, risk_band = $13, modifiable_factors = $14, graded_at = \
-            $15, updated_at = now() WHERE id = $1 RETURNING *",
+            renal_points = $4, liver_points = $5, stroke_points = $6, bleeding_points = \
+            $7, labile_inr_points = $8, elderly_points = $9, drugs_points = $10, \
+            alcohol_points = $11, total_score = $12, risk_band = $13, modifiable_factors \
+            = $14, graded_at = $15, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
         .bind(self.has_bled_score_for_major_bleeding_risk_id)

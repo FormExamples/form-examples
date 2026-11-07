@@ -139,21 +139,23 @@ impl Params {
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
             "UPDATE mental_state_examinations SET patient_id = $2, clinician_id = $3, \
-            clinician_name = $4, clinician_role = $5, assessed_at = $6, care_setting = $7, \
-            assessment_reason = $8, patient_identifier = $9, age_band = $10, sex = $11, \
-            appearance_grooming = $12, appearance_eye_contact = $13, appearance_rapport = \
-            $14, appearance_psychomotor = $15, appearance_abnormal_movements = $16, \
-            appearance_notes = $17, speech_rate = $18, speech_volume = $19, speech_quantity = \
-            $20, speech_fluency = $21, speech_notes = $22, mood_subjective = $23, \
-            mood_descriptor = $24, affect_range = $25, affect_congruence = $26, \
-            affect_reactivity = $27, emotion_notes = $28, hallucinations_present = $29, \
-            command_hallucinations = $30, illusions = $31, depersonalisation = $32, \
-            derealisation = $33, perception_notes = $34, thought_form = $35, delusions = $36, \
-            obsessions = $37, suicidal_ideation = $38, homicidal_ideation = $39, \
-            self_harm_thoughts = $40, thought_notes = $41, insight_level = $42, \
-            treatment_understanding = $43, judgement = $44, insight_notes = $45, orientation \
-            = $46, attention = $47, memory = $48, cognitive_impression = $49, cognition_notes \
-            = $50, clinical_formulation = $51, updated_at = now() WHERE id = $1 RETURNING *",
+            clinician_name = $4, clinician_role = $5, assessed_at = $6, care_setting = \
+            $7, assessment_reason = $8, patient_identifier = $9, age_band = $10, sex = \
+            $11, appearance_grooming = $12, appearance_eye_contact = $13, \
+            appearance_rapport = $14, appearance_psychomotor = $15, \
+            appearance_abnormal_movements = $16, appearance_notes = $17, speech_rate = \
+            $18, speech_volume = $19, speech_quantity = $20, speech_fluency = $21, \
+            speech_notes = $22, mood_subjective = $23, mood_descriptor = $24, \
+            affect_range = $25, affect_congruence = $26, affect_reactivity = $27, \
+            emotion_notes = $28, hallucinations_present = $29, command_hallucinations = \
+            $30, illusions = $31, depersonalisation = $32, derealisation = $33, \
+            perception_notes = $34, thought_form = $35, delusions = $36, obsessions = \
+            $37, suicidal_ideation = $38, homicidal_ideation = $39, self_harm_thoughts = \
+            $40, thought_notes = $41, insight_level = $42, treatment_understanding = \
+            $43, judgement = $44, insight_notes = $45, orientation = $46, attention = \
+            $47, memory = $48, cognitive_impression = $49, cognition_notes = $50, \
+            clinical_formulation = $51, updated_at = now() WHERE id = $1 AND deleted_at \
+            IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

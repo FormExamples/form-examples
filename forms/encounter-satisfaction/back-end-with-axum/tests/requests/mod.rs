@@ -13,5 +13,6 @@ pub mod flagged_issue;
 pub mod overall_satisfaction;
 pub mod patient;
 pub mod satisfaction_result;
+mod soft_delete;
 pub mod staff_professionalism;
 pub mod visit_information;

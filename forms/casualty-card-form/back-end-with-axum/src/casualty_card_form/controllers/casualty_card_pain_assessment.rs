@@ -9,7 +9,6 @@ use crate::models::casualty_card_pain_assessments::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub casualty_card_id: Uuid,
     pub pain_present: String,
     pub pain_score: Option<i32>,
@@ -23,11 +22,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO casualty_card_pain_assessments (deleted_at, casualty_card_id, \
-            pain_present, pain_score, pain_location, pain_character, pain_onset, \
-            pain_severity_category) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+            "INSERT INTO casualty_card_pain_assessments (casualty_card_id, pain_present, \
+            pain_score, pain_location, pain_character, pain_onset, \
+            pain_severity_category) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(&self.pain_present)
         .bind(self.pain_score)
@@ -42,13 +40,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE casualty_card_pain_assessments SET deleted_at = $2, casualty_card_id = $3, \
-            pain_present = $4, pain_score = $5, pain_location = $6, pain_character = $7, \
-            pain_onset = $8, pain_severity_category = $9, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE casualty_card_pain_assessments SET casualty_card_id = $2, \
+            pain_present = $3, pain_score = $4, pain_location = $5, pain_character = $6, \
+            pain_onset = $7, pain_severity_category = $8, updated_at = now() WHERE id = \
+            $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(&self.pain_present)
         .bind(self.pain_score)

@@ -16,6 +16,7 @@ pub struct Model {
     /// ID.
     pub id: Uuid,
     /// Deleted at (soft-delete).
+    #[serde(skip)]
     pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Stable rule identifier (e.g. `R-CLASS-CRITICAL-01`).
     pub rule_id: String,
@@ -40,15 +41,19 @@ impl Model {
     pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Self>, i64)> {
         let (limit, offset) = crate::support::paging::bounds(page);
         let rows = sqlx::query_as(
-            "SELECT * FROM cardiology_response_grade_rules ORDER BY id LIMIT $1 OFFSET $2",
+            "SELECT * FROM cardiology_response_grade_rules WHERE deleted_at IS NULL ORDER \
+            BY id LIMIT $1 OFFSET $2",
         )
         .bind(limit)
         .bind(offset)
         .fetch_all(db)
         .await?;
-        let total = sqlx::query_scalar("SELECT COUNT(*) FROM cardiology_response_grade_rules")
-            .fetch_one(db)
-            .await?;
+        let total = sqlx::query_scalar(
+            "SELECT COUNT(*) FROM cardiology_response_grade_rules WHERE deleted_at IS \
+            NULL",
+        )
+        .fetch_one(db)
+        .await?;
         Ok((rows, total))
     }
 
@@ -58,10 +63,13 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn find_by_id(db: &PgPool, id: Uuid) -> sqlx::Result<Option<Self>> {
-        sqlx::query_as("SELECT * FROM cardiology_response_grade_rules WHERE id = $1")
-            .bind(id)
-            .fetch_optional(db)
-            .await
+        sqlx::query_as(
+            "SELECT * FROM cardiology_response_grade_rules WHERE id = $1 AND deleted_at \
+            IS NULL",
+        )
+        .bind(id)
+        .fetch_optional(db)
+        .await
     }
 
     /// Delete the row with this id.
@@ -70,10 +78,13 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn delete(db: &PgPool, id: Uuid) -> sqlx::Result<()> {
-        sqlx::query("DELETE FROM cardiology_response_grade_rules WHERE id = $1")
-            .bind(id)
-            .execute(db)
-            .await?;
+        sqlx::query(
+            "UPDATE cardiology_response_grade_rules SET deleted_at = now(), updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL",
+        )
+        .bind(id)
+        .execute(db)
+        .await?;
         Ok(())
     }
 }
@@ -84,7 +95,8 @@ impl Model {
 /// Returns a database error if the query fails.
 pub async fn list_for_grade(db: &PgPool, grade_id: Uuid) -> sqlx::Result<Vec<Model>> {
     sqlx::query_as::<_, Model>(
-        "SELECT * FROM cardiology_response_grade_rules WHERE cardiology_response_grade_id = $1",
+        "SELECT * FROM cardiology_response_grade_rules WHERE \
+            cardiology_response_grade_id = $1 AND deleted_at IS NULL",
     )
     .bind(grade_id)
     .fetch_all(db)

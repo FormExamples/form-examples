@@ -12,8 +12,6 @@ use crate::models::medical_fit_notes::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    /// Deleted at.
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Employee ID.
     pub employee_id: Uuid,
     /// Clinician ID.
@@ -62,16 +60,15 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO medical_fit_notes (deleted_at, employee_id, clinician_id, status, \
+            "INSERT INTO medical_fit_notes (employee_id, clinician_id, status, \
             assessment_date, assessment_method, diagnosis_primary, diagnosis_additional, \
             fitness_advice, period_from, period_to, period_duration_days, \
             reassessment_required, adjustment_phased_return, adjustment_altered_hours, \
-            adjustment_amended_duties, adjustment_workplace_adaptations, functional_effects, \
-            comments, employee_consent_to_share, clinician_declaration, signed_at) VALUES \
-            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, \
-            $19, $20, $21, $22) RETURNING *",
+            adjustment_amended_duties, adjustment_workplace_adaptations, \
+            functional_effects, comments, employee_consent_to_share, \
+            clinician_declaration, signed_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, \
+            $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.employee_id)
         .bind(self.clinician_id)
         .bind(&self.status)
@@ -100,18 +97,17 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE medical_fit_notes SET deleted_at = $2, employee_id = $3, clinician_id = \
-            $4, status = $5, assessment_date = $6, assessment_method = $7, diagnosis_primary \
-            = $8, diagnosis_additional = $9, fitness_advice = $10, period_from = $11, \
-            period_to = $12, period_duration_days = $13, reassessment_required = $14, \
-            adjustment_phased_return = $15, adjustment_altered_hours = $16, \
-            adjustment_amended_duties = $17, adjustment_workplace_adaptations = $18, \
-            functional_effects = $19, comments = $20, employee_consent_to_share = $21, \
-            clinician_declaration = $22, signed_at = $23, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE medical_fit_notes SET employee_id = $2, clinician_id = $3, status = \
+            $4, assessment_date = $5, assessment_method = $6, diagnosis_primary = $7, \
+            diagnosis_additional = $8, fitness_advice = $9, period_from = $10, period_to \
+            = $11, period_duration_days = $12, reassessment_required = $13, \
+            adjustment_phased_return = $14, adjustment_altered_hours = $15, \
+            adjustment_amended_duties = $16, adjustment_workplace_adaptations = $17, \
+            functional_effects = $18, comments = $19, employee_consent_to_share = $20, \
+            clinician_declaration = $21, signed_at = $22, updated_at = now() WHERE id = \
+            $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.employee_id)
         .bind(self.clinician_id)
         .bind(&self.status)

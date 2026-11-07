@@ -105,19 +105,20 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE columbia_suicide_severity_rating_scales SET patient_id = $2, clinician_id \
-            = $3, clinician_name = $4, clinician_role = $5, assessed_at = $6, care_setting = \
-            $7, scale_version = $8, reason_for_assessment = $9, patient_identifier = $10, \
-            age_band = $11, sex = $12, wish_to_be_dead = $13, non_specific_active_thoughts = \
-            $14, active_ideation_methods = $15, active_ideation_intent = $16, \
-            active_ideation_plan = $17, ideation_timeframe = $18, ideation_frequency = $19, \
-            ideation_duration = $20, ideation_controllability = $21, ideation_deterrents = \
-            $22, ideation_reasons = $23, actual_attempt = $24, interrupted_attempt = $25, \
-            aborted_attempt = $26, preparatory_acts = $27, non_suicidal_self_injury = $28, \
-            behaviour_recency = $29, lifetime_attempt_count = $30, most_recent_attempt_date = \
-            $31, actual_lethality = $32, potential_lethality = $33, access_to_lethal_means = \
-            $34, protective_factors = $35, clinical_note = $36, updated_at = now() WHERE id = \
-            $1 RETURNING *",
+            "UPDATE columbia_suicide_severity_rating_scales SET patient_id = $2, \
+            clinician_id = $3, clinician_name = $4, clinician_role = $5, assessed_at = \
+            $6, care_setting = $7, scale_version = $8, reason_for_assessment = $9, \
+            patient_identifier = $10, age_band = $11, sex = $12, wish_to_be_dead = $13, \
+            non_specific_active_thoughts = $14, active_ideation_methods = $15, \
+            active_ideation_intent = $16, active_ideation_plan = $17, ideation_timeframe \
+            = $18, ideation_frequency = $19, ideation_duration = $20, \
+            ideation_controllability = $21, ideation_deterrents = $22, ideation_reasons \
+            = $23, actual_attempt = $24, interrupted_attempt = $25, aborted_attempt = \
+            $26, preparatory_acts = $27, non_suicidal_self_injury = $28, \
+            behaviour_recency = $29, lifetime_attempt_count = $30, \
+            most_recent_attempt_date = $31, actual_lethality = $32, potential_lethality \
+            = $33, access_to_lethal_means = $34, protective_factors = $35, clinical_note \
+            = $36, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

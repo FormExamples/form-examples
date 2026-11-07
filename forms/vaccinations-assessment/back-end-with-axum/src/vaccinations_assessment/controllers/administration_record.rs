@@ -9,7 +9,6 @@ use crate::models::administration_records::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub vaccine_name: String,
     pub batch_number: String,
@@ -25,12 +24,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO administration_records (deleted_at, assessment_id, vaccine_name, \
+            "INSERT INTO administration_records (assessment_id, vaccine_name, \
             batch_number, expiry_date, administration_site, administration_route, \
-            dose_number, administered_by, administration_date) VALUES ($1, $2, $3, $4, $5, \
-            $6, $7, $8, $9, $10) RETURNING *",
+            dose_number, administered_by, administration_date) VALUES ($1, $2, $3, $4, \
+            $5, $6, $7, $8, $9) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.vaccine_name)
         .bind(&self.batch_number)
@@ -47,13 +45,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE administration_records SET deleted_at = $2, assessment_id = $3, \
-            vaccine_name = $4, batch_number = $5, expiry_date = $6, administration_site = $7, \
-            administration_route = $8, dose_number = $9, administered_by = $10, \
-            administration_date = $11, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE administration_records SET assessment_id = $2, vaccine_name = $3, \
+            batch_number = $4, expiry_date = $5, administration_site = $6, \
+            administration_route = $7, dose_number = $8, administered_by = $9, \
+            administration_date = $10, updated_at = now() WHERE id = $1 AND deleted_at \
+            IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.vaccine_name)
         .bind(&self.batch_number)

@@ -9,7 +9,6 @@ use crate::models::colonoscopy_test_request_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub colonoscopy_test_request_id: Uuid,
     pub appropriateness_score: Option<i32>,
     pub appropriateness_band: String,
@@ -30,14 +29,13 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO colonoscopy_test_request_grades (deleted_at, \
-            colonoscopy_test_request_id, appropriateness_score, appropriateness_band, \
-            triage_tier, target_timeframe, two_week_wait_eligible, two_week_wait_rationale, \
-            completeness_percent, risk_band, anticoagulant_action, recommendation, \
-            clinician_notes, signed_at, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, \
-            $9, $10, $11, $12, $13, $14, $15) RETURNING *",
+            "INSERT INTO colonoscopy_test_request_grades (colonoscopy_test_request_id, \
+            appropriateness_score, appropriateness_band, triage_tier, target_timeframe, \
+            two_week_wait_eligible, two_week_wait_rationale, completeness_percent, \
+            risk_band, anticoagulant_action, recommendation, clinician_notes, signed_at, \
+            graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, \
+            $14) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.colonoscopy_test_request_id)
         .bind(self.appropriateness_score)
         .bind(&self.appropriateness_band)
@@ -59,16 +57,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE colonoscopy_test_request_grades SET deleted_at = $2, \
-            colonoscopy_test_request_id = $3, appropriateness_score = $4, \
-            appropriateness_band = $5, triage_tier = $6, target_timeframe = $7, \
-            two_week_wait_eligible = $8, two_week_wait_rationale = $9, completeness_percent = \
-            $10, risk_band = $11, anticoagulant_action = $12, recommendation = $13, \
-            clinician_notes = $14, signed_at = $15, graded_at = $16, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE colonoscopy_test_request_grades SET colonoscopy_test_request_id = $2, \
+            appropriateness_score = $3, appropriateness_band = $4, triage_tier = $5, \
+            target_timeframe = $6, two_week_wait_eligible = $7, two_week_wait_rationale \
+            = $8, completeness_percent = $9, risk_band = $10, anticoagulant_action = \
+            $11, recommendation = $12, clinician_notes = $13, signed_at = $14, graded_at \
+            = $15, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.colonoscopy_test_request_id)
         .bind(self.appropriateness_score)
         .bind(&self.appropriateness_band)

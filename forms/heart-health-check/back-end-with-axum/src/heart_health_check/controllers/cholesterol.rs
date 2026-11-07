@@ -9,7 +9,6 @@ use crate::models::cholesterols::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub total_cholesterol: Option<f64>,
     pub hdl_cholesterol: Option<f64>,
@@ -21,11 +20,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO cholesterols (deleted_at, assessment_id, total_cholesterol, \
-            hdl_cholesterol, total_hdl_ratio, on_statin) VALUES ($1, $2, $3, $4, $5, $6) \
-            RETURNING *",
+            "INSERT INTO cholesterols (assessment_id, total_cholesterol, hdl_cholesterol, \
+            total_hdl_ratio, on_statin) VALUES ($1, $2, $3, $4, $5) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.total_cholesterol)
         .bind(self.hdl_cholesterol)
@@ -38,12 +35,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE cholesterols SET deleted_at = $2, assessment_id = $3, total_cholesterol = \
-            $4, hdl_cholesterol = $5, total_hdl_ratio = $6, on_statin = $7, updated_at = \
-            now() WHERE id = $1 RETURNING *",
+            "UPDATE cholesterols SET assessment_id = $2, total_cholesterol = $3, \
+            hdl_cholesterol = $4, total_hdl_ratio = $5, on_statin = $6, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.total_cholesterol)
         .bind(self.hdl_cholesterol)

@@ -12,8 +12,6 @@ use crate::models::hospital_daily_monitoring_checklist_items::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    /// Deleted at.
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Hospital daily monitoring checklist ID.
     pub hospital_daily_monitoring_checklist_id: Uuid,
     /// Item code.
@@ -34,11 +32,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO hospital_daily_monitoring_checklist_items (deleted_at, \
-            hospital_daily_monitoring_checklist_id, item_code, section_number, section_title, \
-            item_text, status, remarks) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+            "INSERT INTO hospital_daily_monitoring_checklist_items \
+            (hospital_daily_monitoring_checklist_id, item_code, section_number, \
+            section_title, item_text, status, remarks) VALUES ($1, $2, $3, $4, $5, $6, \
+            $7) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.hospital_daily_monitoring_checklist_id)
         .bind(&self.item_code)
         .bind(self.section_number)
@@ -53,13 +51,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE hospital_daily_monitoring_checklist_items SET deleted_at = $2, \
-            hospital_daily_monitoring_checklist_id = $3, item_code = $4, section_number = $5, \
-            section_title = $6, item_text = $7, status = $8, remarks = $9, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            "UPDATE hospital_daily_monitoring_checklist_items SET \
+            hospital_daily_monitoring_checklist_id = $2, item_code = $3, section_number \
+            = $4, section_title = $5, item_text = $6, status = $7, remarks = $8, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.hospital_daily_monitoring_checklist_id)
         .bind(&self.item_code)
         .bind(self.section_number)

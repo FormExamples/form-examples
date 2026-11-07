@@ -9,7 +9,6 @@ use crate::models::casualty_card_arrival_triages::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub casualty_card_id: Uuid,
     pub attendance_category: String,
     pub arrival_mode: String,
@@ -26,12 +25,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO casualty_card_arrival_triages (deleted_at, casualty_card_id, \
-            attendance_category, arrival_mode, referral_source, ambulance_incident_number, \
-            triage_time, triage_nurse, mts_flowchart, mts_category, mts_discriminator) VALUES \
-            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *",
+            "INSERT INTO casualty_card_arrival_triages (casualty_card_id, \
+            attendance_category, arrival_mode, referral_source, \
+            ambulance_incident_number, triage_time, triage_nurse, mts_flowchart, \
+            mts_category, mts_discriminator) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, \
+            $10) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(&self.attendance_category)
         .bind(&self.arrival_mode)
@@ -49,14 +48,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE casualty_card_arrival_triages SET deleted_at = $2, casualty_card_id = $3, \
-            attendance_category = $4, arrival_mode = $5, referral_source = $6, \
-            ambulance_incident_number = $7, triage_time = $8, triage_nurse = $9, \
-            mts_flowchart = $10, mts_category = $11, mts_discriminator = $12, updated_at = \
-            now() WHERE id = $1 RETURNING *",
+            "UPDATE casualty_card_arrival_triages SET casualty_card_id = $2, \
+            attendance_category = $3, arrival_mode = $4, referral_source = $5, \
+            ambulance_incident_number = $6, triage_time = $7, triage_nurse = $8, \
+            mts_flowchart = $9, mts_category = $10, mts_discriminator = $11, updated_at \
+            = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(&self.attendance_category)
         .bind(&self.arrival_mode)

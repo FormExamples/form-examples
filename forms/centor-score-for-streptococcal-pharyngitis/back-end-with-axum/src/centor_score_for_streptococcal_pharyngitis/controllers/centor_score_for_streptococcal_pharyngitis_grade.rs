@@ -43,8 +43,9 @@ impl Params {
         sqlx::query_as(
             "UPDATE centor_score_for_streptococcal_pharyngitis_grades SET \
             centor_score_for_streptococcal_pharyngitis_id = $2, centor_score = $3, \
-            age_modifier = $4, mcisaac_score = $5, risk_band = $6, management = $7, graded_at \
-            = $8, updated_at = now() WHERE id = $1 RETURNING *",
+            age_modifier = $4, mcisaac_score = $5, risk_band = $6, management = $7, \
+            graded_at = $8, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
         .bind(self.centor_score_for_streptococcal_pharyngitis_id)

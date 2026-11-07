@@ -9,7 +9,6 @@ use crate::models::knee_replacement_surgery_evaluation_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub knee_replacement_surgery_evaluation_id: Uuid,
     pub oks_total: Option<i32>,
     pub computed_oks_category: String,
@@ -28,14 +27,13 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO knee_replacement_surgery_evaluation_grades (deleted_at, \
-            knee_replacement_surgery_evaluation_id, oks_total, computed_oks_category, \
+            "INSERT INTO knee_replacement_surgery_evaluation_grades \
+            (knee_replacement_surgery_evaluation_id, oks_total, computed_oks_category, \
             final_oks_category, max_kellgren_lawrence_grade, computed_candidacy, \
-            final_candidacy, override_reason, clinician_notes, signed_by_name, signed_at, \
-            graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) \
-            RETURNING *",
+            final_candidacy, override_reason, clinician_notes, signed_by_name, \
+            signed_at, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, \
+            $12) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.knee_replacement_surgery_evaluation_id)
         .bind(self.oks_total)
         .bind(&self.computed_oks_category)
@@ -55,15 +53,15 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE knee_replacement_surgery_evaluation_grades SET deleted_at = $2, \
-            knee_replacement_surgery_evaluation_id = $3, oks_total = $4, \
-            computed_oks_category = $5, final_oks_category = $6, max_kellgren_lawrence_grade \
-            = $7, computed_candidacy = $8, final_candidacy = $9, override_reason = $10, \
-            clinician_notes = $11, signed_by_name = $12, signed_at = $13, graded_at = $14, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE knee_replacement_surgery_evaluation_grades SET \
+            knee_replacement_surgery_evaluation_id = $2, oks_total = $3, \
+            computed_oks_category = $4, final_oks_category = $5, \
+            max_kellgren_lawrence_grade = $6, computed_candidacy = $7, final_candidacy = \
+            $8, override_reason = $9, clinician_notes = $10, signed_by_name = $11, \
+            signed_at = $12, graded_at = $13, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.knee_replacement_surgery_evaluation_id)
         .bind(self.oks_total)
         .bind(&self.computed_oks_category)

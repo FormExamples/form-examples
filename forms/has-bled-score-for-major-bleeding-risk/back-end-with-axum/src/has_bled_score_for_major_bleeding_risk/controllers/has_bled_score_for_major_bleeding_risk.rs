@@ -70,14 +70,15 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE has_bled_score_for_major_bleeding_risks SET patient_id = $2, clinician_id \
-            = $3, clinician_name = $4, clinician_role = $5, assessed_at = $6, care_setting = \
-            $7, anticoagulation_status = $8, cha_ds_vasc_score = $9, patient_identifier = \
-            $10, age_years = $11, sex = $12, hypertension_uncontrolled = $13, \
-            abnormal_renal_function = $14, abnormal_liver_function = $15, stroke_history = \
-            $16, bleeding_history = $17, labile_inr = $18, antiplatelet_or_nsaid = $19, \
-            alcohol_units_per_week = $20, clinical_note = $21, updated_at = now() WHERE id = \
-            $1 RETURNING *",
+            "UPDATE has_bled_score_for_major_bleeding_risks SET patient_id = $2, \
+            clinician_id = $3, clinician_name = $4, clinician_role = $5, assessed_at = \
+            $6, care_setting = $7, anticoagulation_status = $8, cha_ds_vasc_score = $9, \
+            patient_identifier = $10, age_years = $11, sex = $12, \
+            hypertension_uncontrolled = $13, abnormal_renal_function = $14, \
+            abnormal_liver_function = $15, stroke_history = $16, bleeding_history = $17, \
+            labile_inr = $18, antiplatelet_or_nsaid = $19, alcohol_units_per_week = $20, \
+            clinical_note = $21, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

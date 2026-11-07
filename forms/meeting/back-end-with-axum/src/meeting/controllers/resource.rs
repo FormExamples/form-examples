@@ -9,7 +9,6 @@ use crate::models::resources::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub meeting_id: Uuid,
     pub position: i32,
     pub resource_type: String,
@@ -27,11 +26,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO resources (deleted_at, meeting_id, position, resource_type, name, \
-            quantity, unit, url, cost_amount, cost_currency, status, notes) VALUES ($1, $2, \
-            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *",
+            "INSERT INTO resources (meeting_id, position, resource_type, name, quantity, \
+            unit, url, cost_amount, cost_currency, status, notes) VALUES ($1, $2, $3, \
+            $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.meeting_id)
         .bind(self.position)
         .bind(&self.resource_type)
@@ -50,13 +48,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE resources SET deleted_at = $2, meeting_id = $3, position = $4, \
-            resource_type = $5, name = $6, quantity = $7, unit = $8, url = $9, cost_amount = \
-            $10, cost_currency = $11, status = $12, notes = $13, updated_at = now() WHERE id \
-            = $1 RETURNING *",
+            "UPDATE resources SET meeting_id = $2, position = $3, resource_type = $4, \
+            name = $5, quantity = $6, unit = $7, url = $8, cost_amount = $9, \
+            cost_currency = $10, status = $11, notes = $12, updated_at = now() WHERE id \
+            = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.meeting_id)
         .bind(self.position)
         .bind(&self.resource_type)

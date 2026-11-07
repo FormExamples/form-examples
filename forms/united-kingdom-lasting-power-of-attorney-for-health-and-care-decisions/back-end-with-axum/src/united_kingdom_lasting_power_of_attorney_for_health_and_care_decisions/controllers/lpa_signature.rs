@@ -9,7 +9,6 @@ use crate::models::lpa_signatures::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub lpa_id: Uuid,
     pub signer_role: String,
     pub signer_id: Option<Uuid>,
@@ -26,12 +25,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO lpa_signatures (deleted_at, lpa_id, signer_role, signer_id, \
-            signed_at, signature_method, signature_data, witness_name, witness_address, \
-            witness_signed_at, witness_is_attorney) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, \
-            $9, $10, $11) RETURNING *",
+            "INSERT INTO lpa_signatures (lpa_id, signer_role, signer_id, signed_at, \
+            signature_method, signature_data, witness_name, witness_address, \
+            witness_signed_at, witness_is_attorney) VALUES ($1, $2, $3, $4, $5, $6, $7, \
+            $8, $9, $10) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.lpa_id)
         .bind(&self.signer_role)
         .bind(self.signer_id)
@@ -49,13 +47,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE lpa_signatures SET deleted_at = $2, lpa_id = $3, signer_role = $4, \
-            signer_id = $5, signed_at = $6, signature_method = $7, signature_data = $8, \
-            witness_name = $9, witness_address = $10, witness_signed_at = $11, \
-            witness_is_attorney = $12, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE lpa_signatures SET lpa_id = $2, signer_role = $3, signer_id = $4, \
+            signed_at = $5, signature_method = $6, signature_data = $7, witness_name = \
+            $8, witness_address = $9, witness_signed_at = $10, witness_is_attorney = \
+            $11, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.lpa_id)
         .bind(&self.signer_role)
         .bind(self.signer_id)

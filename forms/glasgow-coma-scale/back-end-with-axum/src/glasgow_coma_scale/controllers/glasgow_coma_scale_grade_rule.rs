@@ -40,7 +40,7 @@ impl Params {
         sqlx::query_as(
             "UPDATE glasgow_coma_scale_grade_rules SET glasgow_coma_scale_grade_id = $2, \
             rule_id = $3, component = $4, points = $5, category = $6, description = $7, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.glasgow_coma_scale_grade_id)

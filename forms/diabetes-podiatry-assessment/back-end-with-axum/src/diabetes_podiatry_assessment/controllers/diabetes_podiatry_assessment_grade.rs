@@ -9,7 +9,6 @@ use crate::models::diabetes_podiatry_assessment_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub diabetes_podiatry_assessment_id: Uuid,
     pub right_foot_risk: String,
     pub left_foot_risk: String,
@@ -25,12 +24,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO diabetes_podiatry_assessment_grades (deleted_at, \
-            diabetes_podiatry_assessment_id, right_foot_risk, left_foot_risk, overall_risk, \
-            review_pathway, referral, review_interval_months, status, graded_at) VALUES ($1, \
-            $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *",
+            "INSERT INTO diabetes_podiatry_assessment_grades \
+            (diabetes_podiatry_assessment_id, right_foot_risk, left_foot_risk, \
+            overall_risk, review_pathway, referral, review_interval_months, status, \
+            graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.diabetes_podiatry_assessment_id)
         .bind(&self.right_foot_risk)
         .bind(&self.left_foot_risk)
@@ -47,13 +45,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE diabetes_podiatry_assessment_grades SET deleted_at = $2, \
-            diabetes_podiatry_assessment_id = $3, right_foot_risk = $4, left_foot_risk = $5, \
-            overall_risk = $6, review_pathway = $7, referral = $8, review_interval_months = \
-            $9, status = $10, graded_at = $11, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE diabetes_podiatry_assessment_grades SET \
+            diabetes_podiatry_assessment_id = $2, right_foot_risk = $3, left_foot_risk = \
+            $4, overall_risk = $5, review_pathway = $6, referral = $7, \
+            review_interval_months = $8, status = $9, graded_at = $10, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.diabetes_podiatry_assessment_id)
         .bind(&self.right_foot_risk)
         .bind(&self.left_foot_risk)

@@ -9,7 +9,6 @@ use crate::models::dietic_assessments::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub dietitian_id: Uuid,
     pub status: String,
@@ -262,7 +261,7 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO dietic_assessments (deleted_at, patient_id, dietitian_id, status, \
+            "INSERT INTO dietic_assessments (patient_id, dietitian_id, status, \
             assessment_date, assessment_time, site_name, service_name, setting, \
             appointment_type, planned_duration_minutes, interpreter_required, \
             interpreter_language, referral_source, referral_date, referral_reason, \
@@ -270,88 +269,93 @@ impl Params {
             condition_coeliac, condition_inflammatory_bowel_disease, \
             condition_chronic_kidney_disease, condition_liver_disease, condition_cancer, \
             condition_cardiovascular_disease, condition_respiratory_disease, \
-            condition_stroke, condition_dementia, condition_eating_disorder, condition_other, \
-            recent_surgery, recent_surgery_type, recent_surgery_date, \
-            gastrointestinal_surgery, current_symptoms, family_history, pregnancy_status, \
-            takes_prescription_medicines, takes_over_the_counter_medicines, \
-            takes_vitamin_supplements, takes_mineral_supplements, takes_herbal_products, \
+            condition_stroke, condition_dementia, condition_eating_disorder, \
+            condition_other, recent_surgery, recent_surgery_type, recent_surgery_date, \
+            gastrointestinal_surgery, current_symptoms, family_history, \
+            pregnancy_status, takes_prescription_medicines, \
+            takes_over_the_counter_medicines, takes_vitamin_supplements, \
+            takes_mineral_supplements, takes_herbal_products, \
             takes_oral_nutritional_supplements, oral_nutritional_supplement_detail, \
-            enteral_nutrition, enteral_route, enteral_tube_problem, parenteral_nutrition, \
-            drug_nutrient_interaction, drug_nutrient_interaction_detail, \
-            medication_adherence, medication_notes, measurement_method, height_as_cm, \
-            weight_as_kg, body_mass_index, mid_upper_arm_circumference_as_cm, \
-            calf_circumference_as_cm, waist_as_cm, usual_weight_as_kg, \
-            weight_3_months_ago_as_kg, weight_6_months_ago_as_kg, weight_loss_percent, \
-            weight_loss_is_intentional, weight_trend, clothes_or_jewellery_looser, \
-            oedema_present, oedema_adjustment_kg, ascites_present, amputation_present, \
-            amputation_adjustment_percent, anthropometry_notes, bloods_sample_date, \
-            albumin_g_per_l, c_reactive_protein_mg_per_l, haemoglobin_g_per_l, \
-            ferritin_ug_per_l, vitamin_b12_ng_per_l, folate_ug_per_l, vitamin_d_nmol_per_l, \
+            enteral_nutrition, enteral_route, enteral_tube_problem, \
+            parenteral_nutrition, drug_nutrient_interaction, \
+            drug_nutrient_interaction_detail, medication_adherence, medication_notes, \
+            measurement_method, height_as_cm, weight_as_kg, body_mass_index, \
+            mid_upper_arm_circumference_as_cm, calf_circumference_as_cm, waist_as_cm, \
+            usual_weight_as_kg, weight_3_months_ago_as_kg, weight_6_months_ago_as_kg, \
+            weight_loss_percent, weight_loss_is_intentional, weight_trend, \
+            clothes_or_jewellery_looser, oedema_present, oedema_adjustment_kg, \
+            ascites_present, amputation_present, amputation_adjustment_percent, \
+            anthropometry_notes, bloods_sample_date, albumin_g_per_l, \
+            c_reactive_protein_mg_per_l, haemoglobin_g_per_l, ferritin_ug_per_l, \
+            vitamin_b12_ng_per_l, folate_ug_per_l, vitamin_d_nmol_per_l, \
             hba1c_mmol_per_mol, sodium_mmol_per_l, potassium_mmol_per_l, \
             magnesium_mmol_per_l, phosphate_mmol_per_l, corrected_calcium_mmol_per_l, \
             urea_mmol_per_l, creatinine_umol_per_l, egfr_ml_per_min, \
             alanine_aminotransferase_u_per_l, bilirubin_umol_per_l, \
             total_cholesterol_mmol_per_l, triglycerides_mmol_per_l, biochemistry_notes, \
             subcutaneous_fat_loss, muscle_wasting_temples, muscle_wasting_clavicles, \
-            muscle_wasting_quadriceps, muscle_wasting_severity, peripheral_oedema_severity, \
-            oral_health, dentition, chewing_ability, tongue_and_mucosa, skin_condition, \
-            hair_condition, nail_condition, pressure_ulcer_present, pressure_ulcer_category, \
-            hand_grip_strength_kg, physical_exam_notes, meals_per_day, snacks_per_day, \
-            recall_breakfast, recall_mid_morning, recall_lunch, recall_afternoon, \
-            recall_dinner, recall_evening, portion_size, appetite, appetite_score_0_10, \
+            muscle_wasting_quadriceps, muscle_wasting_severity, \
+            peripheral_oedema_severity, oral_health, dentition, chewing_ability, \
+            tongue_and_mucosa, skin_condition, hair_condition, nail_condition, \
+            pressure_ulcer_present, pressure_ulcer_category, hand_grip_strength_kg, \
+            physical_exam_notes, meals_per_day, snacks_per_day, recall_breakfast, \
+            recall_mid_morning, recall_lunch, recall_afternoon, recall_dinner, \
+            recall_evening, portion_size, appetite, appetite_score_0_10, \
             proportion_of_usual_intake_percent, meals_out_per_week, takeaways_per_week, \
-            food_diary_completed, estimated_energy_intake_kcal, estimated_protein_intake_g, \
-            eats_alone, dietary_recall_notes, fluid_intake_ml_per_day, fluid_types, \
-            caffeinated_drinks_per_day, alcohol_units_per_week, thickened_fluids, \
-            thickened_fluids_iddsi_level, hydration_signs, fluid_restriction, \
-            fluid_restriction_ml_per_day, hydration_notes, has_food_allergy, \
-            has_food_intolerance, foods_avoided, avoidance_reason, dislikes, \
-            therapeutic_diet, dietary_pattern, religious_or_cultural_requirement, \
-            fasting_practice, texture_modified_diet, texture_modified_iddsi_level, \
-            preferences_notes, appetite_change, early_satiety, nausea, vomiting, dysphagia, \
-            dysphagia_screen_outcome, speech_and_language_therapy, reflux, abdominal_pain, \
-            bloating, bowel_frequency_per_week, bristol_stool_type, constipation, diarrhoea, \
+            food_diary_completed, estimated_energy_intake_kcal, \
+            estimated_protein_intake_g, eats_alone, dietary_recall_notes, \
+            fluid_intake_ml_per_day, fluid_types, caffeinated_drinks_per_day, \
+            alcohol_units_per_week, thickened_fluids, thickened_fluids_iddsi_level, \
+            hydration_signs, fluid_restriction, fluid_restriction_ml_per_day, \
+            hydration_notes, has_food_allergy, has_food_intolerance, foods_avoided, \
+            avoidance_reason, dislikes, therapeutic_diet, dietary_pattern, \
+            religious_or_cultural_requirement, fasting_practice, texture_modified_diet, \
+            texture_modified_iddsi_level, preferences_notes, appetite_change, \
+            early_satiety, nausea, vomiting, dysphagia, dysphagia_screen_outcome, \
+            speech_and_language_therapy, reflux, abdominal_pain, bloating, \
+            bowel_frequency_per_week, bristol_stool_type, constipation, diarrhoea, \
             stoma_present, stoma_output_ml_per_day, malabsorption_signs, \
-            gastrointestinal_notes, living_situation, who_shops, who_cooks, cooking_skills, \
-            cooking_confidence_0_10, has_cooker, has_fridge, has_freezer, has_microwave, \
-            food_budget_per_week, worried_food_would_run_out, skipped_meals_for_money, \
-            uses_food_bank, access_to_shops, has_transport, work_pattern, meal_support, \
-            social_support, environment_notes, activity_level, exercise_type, \
-            exercise_minutes_per_week, sedentary_hours_per_day, mobility, \
-            falls_in_last_12_months, sarcf_strength, sarcf_walking, sarcf_rising_from_chair, \
-            sarcf_climbing_stairs, sarcf_falls, eats_independently, \
-            feeding_assistance_required, function_notes, motivation_0_10, stage_of_change, \
-            self_efficacy_0_10, previous_attempts, barriers, scoff_make_yourself_sick, \
-            scoff_lost_control, scoff_lost_one_stone, scoff_believe_yourself_fat, \
-            scoff_food_dominates, mood, anxiety, cognitive_impairment, capacity_concern, \
-            safeguarding_concern, health_literacy, preferred_learning_style, \
-            patient_goal_in_own_words, acutely_ill, no_nutritional_intake_over_5_days, \
-            days_of_negligible_intake, nrs_2002_score, energy_requirement_kcal, \
-            protein_requirement_g, fluid_requirement_ml, requirement_equation, pes_problem, \
-            pes_etiology, pes_signs_symptoms, intervention_type, prescribed_supplement, \
-            prescribed_supplement_dose, texture_modification_plan, goal_1, goal_2, goal_3, \
-            education_provided, resources_given, monitoring_indicators, \
-            review_interval_weeks, review_date, onward_referral, additional_notes) VALUES \
-            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, \
-            $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, \
-            $35, $36, $37, $38, $39, $40, $41, $42, $43, $44, $45, $46, $47, $48, $49, $50, \
-            $51, $52, $53, $54, $55, $56, $57, $58, $59, $60, $61, $62, $63, $64, $65, $66, \
-            $67, $68, $69, $70, $71, $72, $73, $74, $75, $76, $77, $78, $79, $80, $81, $82, \
-            $83, $84, $85, $86, $87, $88, $89, $90, $91, $92, $93, $94, $95, $96, $97, $98, \
-            $99, $100, $101, $102, $103, $104, $105, $106, $107, $108, $109, $110, $111, \
-            $112, $113, $114, $115, $116, $117, $118, $119, $120, $121, $122, $123, $124, \
-            $125, $126, $127, $128, $129, $130, $131, $132, $133, $134, $135, $136, $137, \
-            $138, $139, $140, $141, $142, $143, $144, $145, $146, $147, $148, $149, $150, \
-            $151, $152, $153, $154, $155, $156, $157, $158, $159, $160, $161, $162, $163, \
-            $164, $165, $166, $167, $168, $169, $170, $171, $172, $173, $174, $175, $176, \
-            $177, $178, $179, $180, $181, $182, $183, $184, $185, $186, $187, $188, $189, \
-            $190, $191, $192, $193, $194, $195, $196, $197, $198, $199, $200, $201, $202, \
-            $203, $204, $205, $206, $207, $208, $209, $210, $211, $212, $213, $214, $215, \
-            $216, $217, $218, $219, $220, $221, $222, $223, $224, $225, $226, $227, $228, \
-            $229, $230, $231, $232, $233, $234, $235, $236, $237, $238, $239, $240, $241, \
-            $242, $243, $244, $245, $246, $247) RETURNING *",
+            gastrointestinal_notes, living_situation, who_shops, who_cooks, \
+            cooking_skills, cooking_confidence_0_10, has_cooker, has_fridge, \
+            has_freezer, has_microwave, food_budget_per_week, \
+            worried_food_would_run_out, skipped_meals_for_money, uses_food_bank, \
+            access_to_shops, has_transport, work_pattern, meal_support, social_support, \
+            environment_notes, activity_level, exercise_type, exercise_minutes_per_week, \
+            sedentary_hours_per_day, mobility, falls_in_last_12_months, sarcf_strength, \
+            sarcf_walking, sarcf_rising_from_chair, sarcf_climbing_stairs, sarcf_falls, \
+            eats_independently, feeding_assistance_required, function_notes, \
+            motivation_0_10, stage_of_change, self_efficacy_0_10, previous_attempts, \
+            barriers, scoff_make_yourself_sick, scoff_lost_control, \
+            scoff_lost_one_stone, scoff_believe_yourself_fat, scoff_food_dominates, \
+            mood, anxiety, cognitive_impairment, capacity_concern, safeguarding_concern, \
+            health_literacy, preferred_learning_style, patient_goal_in_own_words, \
+            acutely_ill, no_nutritional_intake_over_5_days, days_of_negligible_intake, \
+            nrs_2002_score, energy_requirement_kcal, protein_requirement_g, \
+            fluid_requirement_ml, requirement_equation, pes_problem, pes_etiology, \
+            pes_signs_symptoms, intervention_type, prescribed_supplement, \
+            prescribed_supplement_dose, texture_modification_plan, goal_1, goal_2, \
+            goal_3, education_provided, resources_given, monitoring_indicators, \
+            review_interval_weeks, review_date, onward_referral, additional_notes) \
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, \
+            $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, \
+            $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42, $43, $44, $45, \
+            $46, $47, $48, $49, $50, $51, $52, $53, $54, $55, $56, $57, $58, $59, $60, \
+            $61, $62, $63, $64, $65, $66, $67, $68, $69, $70, $71, $72, $73, $74, $75, \
+            $76, $77, $78, $79, $80, $81, $82, $83, $84, $85, $86, $87, $88, $89, $90, \
+            $91, $92, $93, $94, $95, $96, $97, $98, $99, $100, $101, $102, $103, $104, \
+            $105, $106, $107, $108, $109, $110, $111, $112, $113, $114, $115, $116, \
+            $117, $118, $119, $120, $121, $122, $123, $124, $125, $126, $127, $128, \
+            $129, $130, $131, $132, $133, $134, $135, $136, $137, $138, $139, $140, \
+            $141, $142, $143, $144, $145, $146, $147, $148, $149, $150, $151, $152, \
+            $153, $154, $155, $156, $157, $158, $159, $160, $161, $162, $163, $164, \
+            $165, $166, $167, $168, $169, $170, $171, $172, $173, $174, $175, $176, \
+            $177, $178, $179, $180, $181, $182, $183, $184, $185, $186, $187, $188, \
+            $189, $190, $191, $192, $193, $194, $195, $196, $197, $198, $199, $200, \
+            $201, $202, $203, $204, $205, $206, $207, $208, $209, $210, $211, $212, \
+            $213, $214, $215, $216, $217, $218, $219, $220, $221, $222, $223, $224, \
+            $225, $226, $227, $228, $229, $230, $231, $232, $233, $234, $235, $236, \
+            $237, $238, $239, $240, $241, $242, $243, $244, $245, $246) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.dietitian_id)
         .bind(&self.status)
@@ -605,100 +609,105 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE dietic_assessments SET deleted_at = $2, patient_id = $3, dietitian_id = \
-            $4, status = $5, assessment_date = $6, assessment_time = $7, site_name = $8, \
-            service_name = $9, setting = $10, appointment_type = $11, \
-            planned_duration_minutes = $12, interpreter_required = $13, interpreter_language \
-            = $14, referral_source = $15, referral_date = $16, referral_reason = $17, \
-            primary_condition = $18, consent_to_record = $19, accompanied_by = $20, \
-            condition_diabetes = $21, condition_coeliac = $22, \
-            condition_inflammatory_bowel_disease = $23, condition_chronic_kidney_disease = \
-            $24, condition_liver_disease = $25, condition_cancer = $26, \
-            condition_cardiovascular_disease = $27, condition_respiratory_disease = $28, \
-            condition_stroke = $29, condition_dementia = $30, condition_eating_disorder = \
-            $31, condition_other = $32, recent_surgery = $33, recent_surgery_type = $34, \
-            recent_surgery_date = $35, gastrointestinal_surgery = $36, current_symptoms = \
-            $37, family_history = $38, pregnancy_status = $39, takes_prescription_medicines = \
-            $40, takes_over_the_counter_medicines = $41, takes_vitamin_supplements = $42, \
-            takes_mineral_supplements = $43, takes_herbal_products = $44, \
-            takes_oral_nutritional_supplements = $45, oral_nutritional_supplement_detail = \
-            $46, enteral_nutrition = $47, enteral_route = $48, enteral_tube_problem = $49, \
-            parenteral_nutrition = $50, drug_nutrient_interaction = $51, \
-            drug_nutrient_interaction_detail = $52, medication_adherence = $53, \
-            medication_notes = $54, measurement_method = $55, height_as_cm = $56, \
-            weight_as_kg = $57, body_mass_index = $58, mid_upper_arm_circumference_as_cm = \
-            $59, calf_circumference_as_cm = $60, waist_as_cm = $61, usual_weight_as_kg = $62, \
-            weight_3_months_ago_as_kg = $63, weight_6_months_ago_as_kg = $64, \
-            weight_loss_percent = $65, weight_loss_is_intentional = $66, weight_trend = $67, \
-            clothes_or_jewellery_looser = $68, oedema_present = $69, oedema_adjustment_kg = \
-            $70, ascites_present = $71, amputation_present = $72, \
-            amputation_adjustment_percent = $73, anthropometry_notes = $74, \
-            bloods_sample_date = $75, albumin_g_per_l = $76, c_reactive_protein_mg_per_l = \
-            $77, haemoglobin_g_per_l = $78, ferritin_ug_per_l = $79, vitamin_b12_ng_per_l = \
-            $80, folate_ug_per_l = $81, vitamin_d_nmol_per_l = $82, hba1c_mmol_per_mol = $83, \
-            sodium_mmol_per_l = $84, potassium_mmol_per_l = $85, magnesium_mmol_per_l = $86, \
-            phosphate_mmol_per_l = $87, corrected_calcium_mmol_per_l = $88, urea_mmol_per_l = \
-            $89, creatinine_umol_per_l = $90, egfr_ml_per_min = $91, \
-            alanine_aminotransferase_u_per_l = $92, bilirubin_umol_per_l = $93, \
-            total_cholesterol_mmol_per_l = $94, triglycerides_mmol_per_l = $95, \
-            biochemistry_notes = $96, subcutaneous_fat_loss = $97, muscle_wasting_temples = \
-            $98, muscle_wasting_clavicles = $99, muscle_wasting_quadriceps = $100, \
-            muscle_wasting_severity = $101, peripheral_oedema_severity = $102, oral_health = \
-            $103, dentition = $104, chewing_ability = $105, tongue_and_mucosa = $106, \
-            skin_condition = $107, hair_condition = $108, nail_condition = $109, \
-            pressure_ulcer_present = $110, pressure_ulcer_category = $111, \
-            hand_grip_strength_kg = $112, physical_exam_notes = $113, meals_per_day = $114, \
-            snacks_per_day = $115, recall_breakfast = $116, recall_mid_morning = $117, \
-            recall_lunch = $118, recall_afternoon = $119, recall_dinner = $120, \
-            recall_evening = $121, portion_size = $122, appetite = $123, appetite_score_0_10 \
-            = $124, proportion_of_usual_intake_percent = $125, meals_out_per_week = $126, \
-            takeaways_per_week = $127, food_diary_completed = $128, \
-            estimated_energy_intake_kcal = $129, estimated_protein_intake_g = $130, \
-            eats_alone = $131, dietary_recall_notes = $132, fluid_intake_ml_per_day = $133, \
-            fluid_types = $134, caffeinated_drinks_per_day = $135, alcohol_units_per_week = \
-            $136, thickened_fluids = $137, thickened_fluids_iddsi_level = $138, \
-            hydration_signs = $139, fluid_restriction = $140, fluid_restriction_ml_per_day = \
-            $141, hydration_notes = $142, has_food_allergy = $143, has_food_intolerance = \
-            $144, foods_avoided = $145, avoidance_reason = $146, dislikes = $147, \
-            therapeutic_diet = $148, dietary_pattern = $149, \
-            religious_or_cultural_requirement = $150, fasting_practice = $151, \
-            texture_modified_diet = $152, texture_modified_iddsi_level = $153, \
-            preferences_notes = $154, appetite_change = $155, early_satiety = $156, nausea = \
-            $157, vomiting = $158, dysphagia = $159, dysphagia_screen_outcome = $160, \
-            speech_and_language_therapy = $161, reflux = $162, abdominal_pain = $163, \
-            bloating = $164, bowel_frequency_per_week = $165, bristol_stool_type = $166, \
-            constipation = $167, diarrhoea = $168, stoma_present = $169, \
-            stoma_output_ml_per_day = $170, malabsorption_signs = $171, \
-            gastrointestinal_notes = $172, living_situation = $173, who_shops = $174, \
-            who_cooks = $175, cooking_skills = $176, cooking_confidence_0_10 = $177, \
-            has_cooker = $178, has_fridge = $179, has_freezer = $180, has_microwave = $181, \
-            food_budget_per_week = $182, worried_food_would_run_out = $183, \
-            skipped_meals_for_money = $184, uses_food_bank = $185, access_to_shops = $186, \
-            has_transport = $187, work_pattern = $188, meal_support = $189, social_support = \
-            $190, environment_notes = $191, activity_level = $192, exercise_type = $193, \
-            exercise_minutes_per_week = $194, sedentary_hours_per_day = $195, mobility = \
-            $196, falls_in_last_12_months = $197, sarcf_strength = $198, sarcf_walking = \
-            $199, sarcf_rising_from_chair = $200, sarcf_climbing_stairs = $201, sarcf_falls = \
-            $202, eats_independently = $203, feeding_assistance_required = $204, \
-            function_notes = $205, motivation_0_10 = $206, stage_of_change = $207, \
-            self_efficacy_0_10 = $208, previous_attempts = $209, barriers = $210, \
-            scoff_make_yourself_sick = $211, scoff_lost_control = $212, scoff_lost_one_stone \
-            = $213, scoff_believe_yourself_fat = $214, scoff_food_dominates = $215, mood = \
-            $216, anxiety = $217, cognitive_impairment = $218, capacity_concern = $219, \
-            safeguarding_concern = $220, health_literacy = $221, preferred_learning_style = \
-            $222, patient_goal_in_own_words = $223, acutely_ill = $224, \
-            no_nutritional_intake_over_5_days = $225, days_of_negligible_intake = $226, \
-            nrs_2002_score = $227, energy_requirement_kcal = $228, protein_requirement_g = \
-            $229, fluid_requirement_ml = $230, requirement_equation = $231, pes_problem = \
-            $232, pes_etiology = $233, pes_signs_symptoms = $234, intervention_type = $235, \
-            prescribed_supplement = $236, prescribed_supplement_dose = $237, \
-            texture_modification_plan = $238, goal_1 = $239, goal_2 = $240, goal_3 = $241, \
-            education_provided = $242, resources_given = $243, monitoring_indicators = $244, \
-            review_interval_weeks = $245, review_date = $246, onward_referral = $247, \
-            additional_notes = $248, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE dietic_assessments SET patient_id = $2, dietitian_id = $3, status = \
+            $4, assessment_date = $5, assessment_time = $6, site_name = $7, service_name \
+            = $8, setting = $9, appointment_type = $10, planned_duration_minutes = $11, \
+            interpreter_required = $12, interpreter_language = $13, referral_source = \
+            $14, referral_date = $15, referral_reason = $16, primary_condition = $17, \
+            consent_to_record = $18, accompanied_by = $19, condition_diabetes = $20, \
+            condition_coeliac = $21, condition_inflammatory_bowel_disease = $22, \
+            condition_chronic_kidney_disease = $23, condition_liver_disease = $24, \
+            condition_cancer = $25, condition_cardiovascular_disease = $26, \
+            condition_respiratory_disease = $27, condition_stroke = $28, \
+            condition_dementia = $29, condition_eating_disorder = $30, condition_other = \
+            $31, recent_surgery = $32, recent_surgery_type = $33, recent_surgery_date = \
+            $34, gastrointestinal_surgery = $35, current_symptoms = $36, family_history \
+            = $37, pregnancy_status = $38, takes_prescription_medicines = $39, \
+            takes_over_the_counter_medicines = $40, takes_vitamin_supplements = $41, \
+            takes_mineral_supplements = $42, takes_herbal_products = $43, \
+            takes_oral_nutritional_supplements = $44, oral_nutritional_supplement_detail \
+            = $45, enteral_nutrition = $46, enteral_route = $47, enteral_tube_problem = \
+            $48, parenteral_nutrition = $49, drug_nutrient_interaction = $50, \
+            drug_nutrient_interaction_detail = $51, medication_adherence = $52, \
+            medication_notes = $53, measurement_method = $54, height_as_cm = $55, \
+            weight_as_kg = $56, body_mass_index = $57, mid_upper_arm_circumference_as_cm \
+            = $58, calf_circumference_as_cm = $59, waist_as_cm = $60, usual_weight_as_kg \
+            = $61, weight_3_months_ago_as_kg = $62, weight_6_months_ago_as_kg = $63, \
+            weight_loss_percent = $64, weight_loss_is_intentional = $65, weight_trend = \
+            $66, clothes_or_jewellery_looser = $67, oedema_present = $68, \
+            oedema_adjustment_kg = $69, ascites_present = $70, amputation_present = $71, \
+            amputation_adjustment_percent = $72, anthropometry_notes = $73, \
+            bloods_sample_date = $74, albumin_g_per_l = $75, c_reactive_protein_mg_per_l \
+            = $76, haemoglobin_g_per_l = $77, ferritin_ug_per_l = $78, \
+            vitamin_b12_ng_per_l = $79, folate_ug_per_l = $80, vitamin_d_nmol_per_l = \
+            $81, hba1c_mmol_per_mol = $82, sodium_mmol_per_l = $83, potassium_mmol_per_l \
+            = $84, magnesium_mmol_per_l = $85, phosphate_mmol_per_l = $86, \
+            corrected_calcium_mmol_per_l = $87, urea_mmol_per_l = $88, \
+            creatinine_umol_per_l = $89, egfr_ml_per_min = $90, \
+            alanine_aminotransferase_u_per_l = $91, bilirubin_umol_per_l = $92, \
+            total_cholesterol_mmol_per_l = $93, triglycerides_mmol_per_l = $94, \
+            biochemistry_notes = $95, subcutaneous_fat_loss = $96, \
+            muscle_wasting_temples = $97, muscle_wasting_clavicles = $98, \
+            muscle_wasting_quadriceps = $99, muscle_wasting_severity = $100, \
+            peripheral_oedema_severity = $101, oral_health = $102, dentition = $103, \
+            chewing_ability = $104, tongue_and_mucosa = $105, skin_condition = $106, \
+            hair_condition = $107, nail_condition = $108, pressure_ulcer_present = $109, \
+            pressure_ulcer_category = $110, hand_grip_strength_kg = $111, \
+            physical_exam_notes = $112, meals_per_day = $113, snacks_per_day = $114, \
+            recall_breakfast = $115, recall_mid_morning = $116, recall_lunch = $117, \
+            recall_afternoon = $118, recall_dinner = $119, recall_evening = $120, \
+            portion_size = $121, appetite = $122, appetite_score_0_10 = $123, \
+            proportion_of_usual_intake_percent = $124, meals_out_per_week = $125, \
+            takeaways_per_week = $126, food_diary_completed = $127, \
+            estimated_energy_intake_kcal = $128, estimated_protein_intake_g = $129, \
+            eats_alone = $130, dietary_recall_notes = $131, fluid_intake_ml_per_day = \
+            $132, fluid_types = $133, caffeinated_drinks_per_day = $134, \
+            alcohol_units_per_week = $135, thickened_fluids = $136, \
+            thickened_fluids_iddsi_level = $137, hydration_signs = $138, \
+            fluid_restriction = $139, fluid_restriction_ml_per_day = $140, \
+            hydration_notes = $141, has_food_allergy = $142, has_food_intolerance = \
+            $143, foods_avoided = $144, avoidance_reason = $145, dislikes = $146, \
+            therapeutic_diet = $147, dietary_pattern = $148, \
+            religious_or_cultural_requirement = $149, fasting_practice = $150, \
+            texture_modified_diet = $151, texture_modified_iddsi_level = $152, \
+            preferences_notes = $153, appetite_change = $154, early_satiety = $155, \
+            nausea = $156, vomiting = $157, dysphagia = $158, dysphagia_screen_outcome = \
+            $159, speech_and_language_therapy = $160, reflux = $161, abdominal_pain = \
+            $162, bloating = $163, bowel_frequency_per_week = $164, bristol_stool_type = \
+            $165, constipation = $166, diarrhoea = $167, stoma_present = $168, \
+            stoma_output_ml_per_day = $169, malabsorption_signs = $170, \
+            gastrointestinal_notes = $171, living_situation = $172, who_shops = $173, \
+            who_cooks = $174, cooking_skills = $175, cooking_confidence_0_10 = $176, \
+            has_cooker = $177, has_fridge = $178, has_freezer = $179, has_microwave = \
+            $180, food_budget_per_week = $181, worried_food_would_run_out = $182, \
+            skipped_meals_for_money = $183, uses_food_bank = $184, access_to_shops = \
+            $185, has_transport = $186, work_pattern = $187, meal_support = $188, \
+            social_support = $189, environment_notes = $190, activity_level = $191, \
+            exercise_type = $192, exercise_minutes_per_week = $193, \
+            sedentary_hours_per_day = $194, mobility = $195, falls_in_last_12_months = \
+            $196, sarcf_strength = $197, sarcf_walking = $198, sarcf_rising_from_chair = \
+            $199, sarcf_climbing_stairs = $200, sarcf_falls = $201, eats_independently = \
+            $202, feeding_assistance_required = $203, function_notes = $204, \
+            motivation_0_10 = $205, stage_of_change = $206, self_efficacy_0_10 = $207, \
+            previous_attempts = $208, barriers = $209, scoff_make_yourself_sick = $210, \
+            scoff_lost_control = $211, scoff_lost_one_stone = $212, \
+            scoff_believe_yourself_fat = $213, scoff_food_dominates = $214, mood = $215, \
+            anxiety = $216, cognitive_impairment = $217, capacity_concern = $218, \
+            safeguarding_concern = $219, health_literacy = $220, \
+            preferred_learning_style = $221, patient_goal_in_own_words = $222, \
+            acutely_ill = $223, no_nutritional_intake_over_5_days = $224, \
+            days_of_negligible_intake = $225, nrs_2002_score = $226, \
+            energy_requirement_kcal = $227, protein_requirement_g = $228, \
+            fluid_requirement_ml = $229, requirement_equation = $230, pes_problem = \
+            $231, pes_etiology = $232, pes_signs_symptoms = $233, intervention_type = \
+            $234, prescribed_supplement = $235, prescribed_supplement_dose = $236, \
+            texture_modification_plan = $237, goal_1 = $238, goal_2 = $239, goal_3 = \
+            $240, education_provided = $241, resources_given = $242, \
+            monitoring_indicators = $243, review_interval_weeks = $244, review_date = \
+            $245, onward_referral = $246, additional_notes = $247, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.dietitian_id)
         .bind(&self.status)

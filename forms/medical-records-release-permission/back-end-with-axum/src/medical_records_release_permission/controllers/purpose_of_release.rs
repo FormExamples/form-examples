@@ -9,7 +9,6 @@ use crate::models::purpose_of_releases::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub release_form_id: Uuid,
     pub purpose: String,
     pub other_details: String,
@@ -19,10 +18,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO purpose_of_releases (deleted_at, release_form_id, purpose, \
-            other_details) VALUES ($1, $2, $3, $4) RETURNING *",
+            "INSERT INTO purpose_of_releases (release_form_id, purpose, other_details) \
+            VALUES ($1, $2, $3) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.release_form_id)
         .bind(&self.purpose)
         .bind(&self.other_details)
@@ -33,11 +31,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE purpose_of_releases SET deleted_at = $2, release_form_id = $3, purpose = \
-            $4, other_details = $5, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE purpose_of_releases SET release_form_id = $2, purpose = $3, \
+            other_details = $4, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.release_form_id)
         .bind(&self.purpose)
         .bind(&self.other_details)

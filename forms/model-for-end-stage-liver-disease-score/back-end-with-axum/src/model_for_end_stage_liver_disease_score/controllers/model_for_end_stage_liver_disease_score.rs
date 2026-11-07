@@ -9,7 +9,6 @@ use crate::models::model_for_end_stage_liver_disease_scores::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
     pub clinician_name: String,
@@ -36,14 +35,13 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO model_for_end_stage_liver_disease_scores (deleted_at, patient_id, \
+            "INSERT INTO model_for_end_stage_liver_disease_scores (patient_id, \
             clinician_id, clinician_name, clinician_role, assessed_at, care_setting, \
-            meld_variant, patient_identifier, age_band, sex, bilirubin, bilirubin_unit, inr, \
-            creatinine, creatinine_unit, dialysis_sessions_past_week, cvvhd_24h, sodium, \
-            albumin, clinical_note) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, \
-            $12, $13, $14, $15, $16, $17, $18, $19, $20, $21) RETURNING *",
+            meld_variant, patient_identifier, age_band, sex, bilirubin, bilirubin_unit, \
+            inr, creatinine, creatinine_unit, dialysis_sessions_past_week, cvvhd_24h, \
+            sodium, albumin, clinical_note) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, \
+            $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.clinician_name)
@@ -71,16 +69,15 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE model_for_end_stage_liver_disease_scores SET deleted_at = $2, patient_id = \
-            $3, clinician_id = $4, clinician_name = $5, clinician_role = $6, assessed_at = \
-            $7, care_setting = $8, meld_variant = $9, patient_identifier = $10, age_band = \
-            $11, sex = $12, bilirubin = $13, bilirubin_unit = $14, inr = $15, creatinine = \
-            $16, creatinine_unit = $17, dialysis_sessions_past_week = $18, cvvhd_24h = $19, \
-            sodium = $20, albumin = $21, clinical_note = $22, updated_at = now() WHERE id = \
-            $1 RETURNING *",
+            "UPDATE model_for_end_stage_liver_disease_scores SET patient_id = $2, \
+            clinician_id = $3, clinician_name = $4, clinician_role = $5, assessed_at = \
+            $6, care_setting = $7, meld_variant = $8, patient_identifier = $9, age_band \
+            = $10, sex = $11, bilirubin = $12, bilirubin_unit = $13, inr = $14, \
+            creatinine = $15, creatinine_unit = $16, dialysis_sessions_past_week = $17, \
+            cvvhd_24h = $18, sodium = $19, albumin = $20, clinical_note = $21, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.clinician_name)

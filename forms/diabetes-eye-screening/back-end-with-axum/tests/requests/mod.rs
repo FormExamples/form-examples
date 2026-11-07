@@ -9,3 +9,4 @@ pub mod diabetes_eye_screening_grade;
 pub mod diabetes_eye_screening_grade_flag;
 pub mod diabetes_eye_screening_grade_rule;
 pub mod patient;
+mod soft_delete;

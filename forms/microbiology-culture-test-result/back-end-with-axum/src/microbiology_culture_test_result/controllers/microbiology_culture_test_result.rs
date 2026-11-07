@@ -9,7 +9,6 @@ use crate::models::microbiology_culture_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -45,19 +44,18 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO microbiology_culture_test_results (deleted_at, patient_id, \
-            clinician_id, originating_request_reference, report_status, performed_date, \
-            reported_date, specimen_type, specimen_site_detail, specimen_condition, \
-            clinical_history, gram_stain_result, culture_result, organism_isolated, \
+            "INSERT INTO microbiology_culture_test_results (patient_id, clinician_id, \
+            originating_request_reference, report_status, performed_date, reported_date, \
+            specimen_type, specimen_site_detail, specimen_condition, clinical_history, \
+            gram_stain_result, culture_result, organism_isolated, \
             second_organism_isolated, colony_count, antibiotic_sensitivities, \
             resistance_mrsa, resistance_esbl, resistance_cpe, c_difficile_toxin, \
-            acid_fast_bacilli, pcr_result, critical_organism, findings_narrative, impression, \
-            reporting_category, recommended_follow_up, critical_result_communicated, \
-            reported_to) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, \
-            $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30) \
-            RETURNING *",
+            acid_fast_bacilli, pcr_result, critical_organism, findings_narrative, \
+            impression, reporting_category, recommended_follow_up, \
+            critical_result_communicated, reported_to) VALUES ($1, $2, $3, $4, $5, $6, \
+            $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, \
+            $23, $24, $25, $26, $27, $28, $29) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -94,20 +92,19 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE microbiology_culture_test_results SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, originating_request_reference = $5, report_status = $6, \
-            performed_date = $7, reported_date = $8, specimen_type = $9, specimen_site_detail \
-            = $10, specimen_condition = $11, clinical_history = $12, gram_stain_result = $13, \
-            culture_result = $14, organism_isolated = $15, second_organism_isolated = $16, \
-            colony_count = $17, antibiotic_sensitivities = $18, resistance_mrsa = $19, \
-            resistance_esbl = $20, resistance_cpe = $21, c_difficile_toxin = $22, \
-            acid_fast_bacilli = $23, pcr_result = $24, critical_organism = $25, \
-            findings_narrative = $26, impression = $27, reporting_category = $28, \
-            recommended_follow_up = $29, critical_result_communicated = $30, reported_to = \
-            $31, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE microbiology_culture_test_results SET patient_id = $2, clinician_id = \
+            $3, originating_request_reference = $4, report_status = $5, performed_date = \
+            $6, reported_date = $7, specimen_type = $8, specimen_site_detail = $9, \
+            specimen_condition = $10, clinical_history = $11, gram_stain_result = $12, \
+            culture_result = $13, organism_isolated = $14, second_organism_isolated = \
+            $15, colony_count = $16, antibiotic_sensitivities = $17, resistance_mrsa = \
+            $18, resistance_esbl = $19, resistance_cpe = $20, c_difficile_toxin = $21, \
+            acid_fast_bacilli = $22, pcr_result = $23, critical_organism = $24, \
+            findings_narrative = $25, impression = $26, reporting_category = $27, \
+            recommended_follow_up = $28, critical_result_communicated = $29, reported_to \
+            = $30, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

@@ -9,7 +9,6 @@ use crate::models::pulmonary_function_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -47,19 +46,19 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO pulmonary_function_test_results (deleted_at, patient_id, \
-            clinician_id, originating_request_reference, test_type, performed_date, \
-            reported_date, report_status, test_quality, clinical_history, fev1_litres, \
+            "INSERT INTO pulmonary_function_test_results (patient_id, clinician_id, \
+            originating_request_reference, test_type, performed_date, reported_date, \
+            report_status, test_quality, clinical_history, fev1_litres, \
             fev1_percent_predicted, fvc_litres, fvc_percent_predicted, fev1_fvc_ratio, \
             peak_expiratory_flow, dlco_percent_predicted, ventilatory_pattern, severity, \
             bronchodilator_reversibility, airflow_obstruction, restriction, \
             reduced_gas_transfer, significant_reversibility, normal_spirometry, \
-            findings_narrative, comparison_with_previous, impression, reporting_category, \
-            recommended_follow_up, critical_result_communicated, reported_to) VALUES ($1, $2, \
-            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, \
-            $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32) RETURNING *",
+            findings_narrative, comparison_with_previous, impression, \
+            reporting_category, recommended_follow_up, critical_result_communicated, \
+            reported_to) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, \
+            $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, \
+            $29, $30, $31) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -98,21 +97,20 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE pulmonary_function_test_results SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, originating_request_reference = $5, test_type = $6, \
-            performed_date = $7, reported_date = $8, report_status = $9, test_quality = $10, \
-            clinical_history = $11, fev1_litres = $12, fev1_percent_predicted = $13, \
-            fvc_litres = $14, fvc_percent_predicted = $15, fev1_fvc_ratio = $16, \
-            peak_expiratory_flow = $17, dlco_percent_predicted = $18, ventilatory_pattern = \
-            $19, severity = $20, bronchodilator_reversibility = $21, airflow_obstruction = \
-            $22, restriction = $23, reduced_gas_transfer = $24, significant_reversibility = \
-            $25, normal_spirometry = $26, findings_narrative = $27, comparison_with_previous \
-            = $28, impression = $29, reporting_category = $30, recommended_follow_up = $31, \
-            critical_result_communicated = $32, reported_to = $33, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE pulmonary_function_test_results SET patient_id = $2, clinician_id = \
+            $3, originating_request_reference = $4, test_type = $5, performed_date = $6, \
+            reported_date = $7, report_status = $8, test_quality = $9, clinical_history \
+            = $10, fev1_litres = $11, fev1_percent_predicted = $12, fvc_litres = $13, \
+            fvc_percent_predicted = $14, fev1_fvc_ratio = $15, peak_expiratory_flow = \
+            $16, dlco_percent_predicted = $17, ventilatory_pattern = $18, severity = \
+            $19, bronchodilator_reversibility = $20, airflow_obstruction = $21, \
+            restriction = $22, reduced_gas_transfer = $23, significant_reversibility = \
+            $24, normal_spirometry = $25, findings_narrative = $26, \
+            comparison_with_previous = $27, impression = $28, reporting_category = $29, \
+            recommended_follow_up = $30, critical_result_communicated = $31, reported_to \
+            = $32, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

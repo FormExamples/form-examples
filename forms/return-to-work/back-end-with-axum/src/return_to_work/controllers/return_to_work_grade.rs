@@ -9,7 +9,6 @@ use crate::models::return_to_work_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub return_to_work_id: Uuid,
     pub fitness_statement: String,
     pub restriction_priority: String,
@@ -22,11 +21,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO return_to_work_grades (deleted_at, return_to_work_id, \
-            fitness_statement, restriction_priority, rule_count, flag_count, graded_at) \
-            VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+            "INSERT INTO return_to_work_grades (return_to_work_id, fitness_statement, \
+            restriction_priority, rule_count, flag_count, graded_at) VALUES ($1, $2, $3, \
+            $4, $5, $6) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.return_to_work_id)
         .bind(&self.fitness_statement)
         .bind(&self.restriction_priority)
@@ -40,12 +38,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE return_to_work_grades SET deleted_at = $2, return_to_work_id = $3, \
-            fitness_statement = $4, restriction_priority = $5, rule_count = $6, flag_count = \
-            $7, graded_at = $8, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE return_to_work_grades SET return_to_work_id = $2, fitness_statement = \
+            $3, restriction_priority = $4, rule_count = $5, flag_count = $6, graded_at = \
+            $7, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.return_to_work_id)
         .bind(&self.fitness_statement)
         .bind(&self.restriction_priority)

@@ -9,7 +9,6 @@ use crate::models::allergy_skin_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -41,17 +40,17 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO allergy_skin_test_results (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO allergy_skin_test_results (patient_id, clinician_id, \
             originating_request_reference, test_type, report_status, performed_date, \
-            reported_date, clinical_history, antihistamines_withheld, positive_control_valid, \
-            allergens_tested, wheal_sizes, specific_ige_results, sensitised_allergens, \
-            positive_reactions, sensitisation_confirmed, anaphylaxis_during_test, \
-            all_negative, test_invalid, interpretation, impression, reporting_category, \
-            recommended_follow_up, critical_result_communicated, reported_to) VALUES ($1, $2, \
-            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, \
-            $20, $21, $22, $23, $24, $25, $26) RETURNING *",
+            reported_date, clinical_history, antihistamines_withheld, \
+            positive_control_valid, allergens_tested, wheal_sizes, specific_ige_results, \
+            sensitised_allergens, positive_reactions, sensitisation_confirmed, \
+            anaphylaxis_during_test, all_negative, test_invalid, interpretation, \
+            impression, reporting_category, recommended_follow_up, \
+            critical_result_communicated, reported_to) VALUES ($1, $2, $3, $4, $5, $6, \
+            $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, \
+            $23, $24, $25) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -84,19 +83,19 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE allergy_skin_test_results SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, originating_request_reference = $5, test_type = $6, \
-            report_status = $7, performed_date = $8, reported_date = $9, clinical_history = \
-            $10, antihistamines_withheld = $11, positive_control_valid = $12, \
-            allergens_tested = $13, wheal_sizes = $14, specific_ige_results = $15, \
-            sensitised_allergens = $16, positive_reactions = $17, sensitisation_confirmed = \
-            $18, anaphylaxis_during_test = $19, all_negative = $20, test_invalid = $21, \
-            interpretation = $22, impression = $23, reporting_category = $24, \
-            recommended_follow_up = $25, critical_result_communicated = $26, reported_to = \
-            $27, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE allergy_skin_test_results SET patient_id = $2, clinician_id = $3, \
+            originating_request_reference = $4, test_type = $5, report_status = $6, \
+            performed_date = $7, reported_date = $8, clinical_history = $9, \
+            antihistamines_withheld = $10, positive_control_valid = $11, \
+            allergens_tested = $12, wheal_sizes = $13, specific_ige_results = $14, \
+            sensitised_allergens = $15, positive_reactions = $16, \
+            sensitisation_confirmed = $17, anaphylaxis_during_test = $18, all_negative = \
+            $19, test_invalid = $20, interpretation = $21, impression = $22, \
+            reporting_category = $23, recommended_follow_up = $24, \
+            critical_result_communicated = $25, reported_to = $26, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

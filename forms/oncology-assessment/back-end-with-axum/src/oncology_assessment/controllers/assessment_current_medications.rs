@@ -9,7 +9,6 @@ use crate::models::assessment_current_medications::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub polypharmacy_concern: String,
     pub drug_interactions_identified: String,
@@ -24,12 +23,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO assessment_current_medications (deleted_at, assessment_id, \
-            polypharmacy_concern, drug_interactions_identified, drug_interaction_details, \
-            complementary_medicines, complementary_medicine_details, medication_adherence, \
-            medications_notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
+            "INSERT INTO assessment_current_medications (assessment_id, \
+            polypharmacy_concern, drug_interactions_identified, \
+            drug_interaction_details, complementary_medicines, \
+            complementary_medicine_details, medication_adherence, medications_notes) \
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.polypharmacy_concern)
         .bind(&self.drug_interactions_identified)
@@ -45,14 +44,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE assessment_current_medications SET deleted_at = $2, assessment_id = $3, \
-            polypharmacy_concern = $4, drug_interactions_identified = $5, \
-            drug_interaction_details = $6, complementary_medicines = $7, \
-            complementary_medicine_details = $8, medication_adherence = $9, medications_notes \
-            = $10, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE assessment_current_medications SET assessment_id = $2, \
+            polypharmacy_concern = $3, drug_interactions_identified = $4, \
+            drug_interaction_details = $5, complementary_medicines = $6, \
+            complementary_medicine_details = $7, medication_adherence = $8, \
+            medications_notes = $9, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.polypharmacy_concern)
         .bind(&self.drug_interactions_identified)

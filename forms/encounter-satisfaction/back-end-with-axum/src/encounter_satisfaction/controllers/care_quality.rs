@@ -9,7 +9,6 @@ use crate::models::care_qualities::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub encounter_satisfaction_id: Uuid,
     pub involvement_in_decisions: Option<i32>,
     pub treatment_plan_explanation: Option<i32>,
@@ -20,11 +19,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO care_qualities (deleted_at, encounter_satisfaction_id, \
-            involvement_in_decisions, treatment_plan_explanation, confidence_in_care) VALUES \
-            ($1, $2, $3, $4, $5) RETURNING *",
+            "INSERT INTO care_qualities (encounter_satisfaction_id, \
+            involvement_in_decisions, treatment_plan_explanation, confidence_in_care) \
+            VALUES ($1, $2, $3, $4) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.encounter_satisfaction_id)
         .bind(self.involvement_in_decisions)
         .bind(self.treatment_plan_explanation)
@@ -36,12 +34,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE care_qualities SET deleted_at = $2, encounter_satisfaction_id = $3, \
-            involvement_in_decisions = $4, treatment_plan_explanation = $5, \
-            confidence_in_care = $6, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE care_qualities SET encounter_satisfaction_id = $2, \
+            involvement_in_decisions = $3, treatment_plan_explanation = $4, \
+            confidence_in_care = $5, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.encounter_satisfaction_id)
         .bind(self.involvement_in_decisions)
         .bind(self.treatment_plan_explanation)

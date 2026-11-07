@@ -9,7 +9,6 @@ use crate::models::lpa_instructions::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub lpa_id: Uuid,
     pub order_position: i32,
     pub category: String,
@@ -22,11 +21,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO lpa_instructions (deleted_at, lpa_id, order_position, category, \
-            statement, lawfulness_assessed, contradicts_adrt) VALUES ($1, $2, $3, $4, $5, $6, \
-            $7) RETURNING *",
+            "INSERT INTO lpa_instructions (lpa_id, order_position, category, statement, \
+            lawfulness_assessed, contradicts_adrt) VALUES ($1, $2, $3, $4, $5, $6) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.lpa_id)
         .bind(self.order_position)
         .bind(&self.category)
@@ -40,12 +38,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE lpa_instructions SET deleted_at = $2, lpa_id = $3, order_position = $4, \
-            category = $5, statement = $6, lawfulness_assessed = $7, contradicts_adrt = $8, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE lpa_instructions SET lpa_id = $2, order_position = $3, category = $4, \
+            statement = $5, lawfulness_assessed = $6, contradicts_adrt = $7, updated_at \
+            = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.lpa_id)
         .bind(self.order_position)
         .bind(&self.category)

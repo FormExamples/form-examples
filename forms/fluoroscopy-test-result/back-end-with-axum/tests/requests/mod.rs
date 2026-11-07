@@ -9,3 +9,4 @@ pub mod fluoroscopy_test_result_grade;
 pub mod fluoroscopy_test_result_grade_flag;
 pub mod fluoroscopy_test_result_grade_rule;
 pub mod patient;
+mod soft_delete;

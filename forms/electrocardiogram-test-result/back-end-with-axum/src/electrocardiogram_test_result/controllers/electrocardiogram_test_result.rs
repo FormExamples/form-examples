@@ -9,7 +9,6 @@ use crate::models::electrocardiogram_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -47,18 +46,18 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO electrocardiogram_test_results (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO electrocardiogram_test_results (patient_id, clinician_id, \
             originating_request_reference, report_status, ecg_type, performed_date, \
-            reported_date, recording_quality, clinical_history, ventricular_rate_bpm, rhythm, \
-            pr_interval_ms, qrs_duration_ms, qt_interval_ms, qtc_ms, cardiac_axis, \
-            st_elevation, st_depression, t_wave_inversion, pathological_q_waves, \
-            left_ventricular_hypertrophy, bundle_branch_block, ischaemia, normal_ecg, \
-            interpretation, comparison_with_previous, impression, reporting_category, \
-            recommended_follow_up, critical_result_communicated, reported_to) VALUES ($1, $2, \
-            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, \
-            $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32) RETURNING *",
+            reported_date, recording_quality, clinical_history, ventricular_rate_bpm, \
+            rhythm, pr_interval_ms, qrs_duration_ms, qt_interval_ms, qtc_ms, \
+            cardiac_axis, st_elevation, st_depression, t_wave_inversion, \
+            pathological_q_waves, left_ventricular_hypertrophy, bundle_branch_block, \
+            ischaemia, normal_ecg, interpretation, comparison_with_previous, impression, \
+            reporting_category, recommended_follow_up, critical_result_communicated, \
+            reported_to) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, \
+            $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, \
+            $29, $30, $31) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -97,20 +96,20 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE electrocardiogram_test_results SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, originating_request_reference = $5, report_status = $6, \
-            ecg_type = $7, performed_date = $8, reported_date = $9, recording_quality = $10, \
-            clinical_history = $11, ventricular_rate_bpm = $12, rhythm = $13, pr_interval_ms \
-            = $14, qrs_duration_ms = $15, qt_interval_ms = $16, qtc_ms = $17, cardiac_axis = \
-            $18, st_elevation = $19, st_depression = $20, t_wave_inversion = $21, \
-            pathological_q_waves = $22, left_ventricular_hypertrophy = $23, \
-            bundle_branch_block = $24, ischaemia = $25, normal_ecg = $26, interpretation = \
-            $27, comparison_with_previous = $28, impression = $29, reporting_category = $30, \
-            recommended_follow_up = $31, critical_result_communicated = $32, reported_to = \
-            $33, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE electrocardiogram_test_results SET patient_id = $2, clinician_id = \
+            $3, originating_request_reference = $4, report_status = $5, ecg_type = $6, \
+            performed_date = $7, reported_date = $8, recording_quality = $9, \
+            clinical_history = $10, ventricular_rate_bpm = $11, rhythm = $12, \
+            pr_interval_ms = $13, qrs_duration_ms = $14, qt_interval_ms = $15, qtc_ms = \
+            $16, cardiac_axis = $17, st_elevation = $18, st_depression = $19, \
+            t_wave_inversion = $20, pathological_q_waves = $21, \
+            left_ventricular_hypertrophy = $22, bundle_branch_block = $23, ischaemia = \
+            $24, normal_ecg = $25, interpretation = $26, comparison_with_previous = $27, \
+            impression = $28, reporting_category = $29, recommended_follow_up = $30, \
+            critical_result_communicated = $31, reported_to = $32, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

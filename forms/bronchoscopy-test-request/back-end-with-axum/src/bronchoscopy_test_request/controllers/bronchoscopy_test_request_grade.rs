@@ -9,7 +9,6 @@ use crate::models::bronchoscopy_test_request_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub bronchoscopy_test_request_id: Uuid,
     pub appropriateness_score: Option<i32>,
     pub appropriateness_band: String,
@@ -29,14 +28,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO bronchoscopy_test_request_grades (deleted_at, \
-            bronchoscopy_test_request_id, appropriateness_score, appropriateness_band, \
-            triage_tier, target_timeframe, two_week_wait_eligible, completeness_percent, \
-            risk_band, anticoagulant_action, recommendation, clinician_notes, signed_at, \
-            graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) \
-            RETURNING *",
+            "INSERT INTO bronchoscopy_test_request_grades (bronchoscopy_test_request_id, \
+            appropriateness_score, appropriateness_band, triage_tier, target_timeframe, \
+            two_week_wait_eligible, completeness_percent, risk_band, \
+            anticoagulant_action, recommendation, clinician_notes, signed_at, graded_at) \
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.bronchoscopy_test_request_id)
         .bind(self.appropriateness_score)
         .bind(&self.appropriateness_band)
@@ -57,15 +54,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE bronchoscopy_test_request_grades SET deleted_at = $2, \
-            bronchoscopy_test_request_id = $3, appropriateness_score = $4, \
-            appropriateness_band = $5, triage_tier = $6, target_timeframe = $7, \
-            two_week_wait_eligible = $8, completeness_percent = $9, risk_band = $10, \
-            anticoagulant_action = $11, recommendation = $12, clinician_notes = $13, \
-            signed_at = $14, graded_at = $15, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE bronchoscopy_test_request_grades SET bronchoscopy_test_request_id = \
+            $2, appropriateness_score = $3, appropriateness_band = $4, triage_tier = $5, \
+            target_timeframe = $6, two_week_wait_eligible = $7, completeness_percent = \
+            $8, risk_band = $9, anticoagulant_action = $10, recommendation = $11, \
+            clinician_notes = $12, signed_at = $13, graded_at = $14, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.bronchoscopy_test_request_id)
         .bind(self.appropriateness_score)
         .bind(&self.appropriateness_band)

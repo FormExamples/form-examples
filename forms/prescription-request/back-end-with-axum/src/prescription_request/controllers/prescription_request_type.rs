@@ -9,7 +9,6 @@ use crate::models::prescription_request_types::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub prescription_request_id: Uuid,
     pub is_new_prescription: String,
     pub is_emergency: String,
@@ -20,11 +19,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO prescription_request_types (deleted_at, prescription_request_id, \
-            is_new_prescription, is_emergency, additional_notes) VALUES ($1, $2, $3, $4, $5) \
+            "INSERT INTO prescription_request_types (prescription_request_id, \
+            is_new_prescription, is_emergency, additional_notes) VALUES ($1, $2, $3, $4) \
             RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.prescription_request_id)
         .bind(&self.is_new_prescription)
         .bind(&self.is_emergency)
@@ -36,12 +34,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE prescription_request_types SET deleted_at = $2, prescription_request_id = \
-            $3, is_new_prescription = $4, is_emergency = $5, additional_notes = $6, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE prescription_request_types SET prescription_request_id = $2, \
+            is_new_prescription = $3, is_emergency = $4, additional_notes = $5, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.prescription_request_id)
         .bind(&self.is_new_prescription)
         .bind(&self.is_emergency)

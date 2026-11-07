@@ -86,16 +86,16 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE soap_notes SET encountered_at = $2, care_setting = $3, encounter_type = \
-            $4, clinician_role = $5, patient_identifier = $6, presenting_complaint = $7, \
-            history_of_presenting_complaint = $8, patient_reported_symptoms = $9, \
+            "UPDATE soap_notes SET encountered_at = $2, care_setting = $3, encounter_type \
+            = $4, clinician_role = $5, patient_identifier = $6, presenting_complaint = \
+            $7, history_of_presenting_complaint = $8, patient_reported_symptoms = $9, \
             relevant_history = $10, red_flag_symptoms = $11, examination_findings = $12, \
-            vital_signs = $13, abnormal_vitals_present = $14, investigation_results = $15, \
-            primary_diagnosis = $16, problem_list = $17, differential = $18, \
+            vital_signs = $13, abnormal_vitals_present = $14, investigation_results = \
+            $15, primary_diagnosis = $16, problem_list = $17, differential = $18, \
             clinical_impression = $19, investigations_plan = $20, treatment_plan = $21, \
-            referrals = $22, follow_up = $23, safety_netting = $24, managed_at_home = $25, \
-            clinical_note = $26, patient_id = $27, clinician_id = $28, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            referrals = $22, follow_up = $23, safety_netting = $24, managed_at_home = \
+            $25, clinical_note = $26, patient_id = $27, clinician_id = $28, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.encountered_at)

@@ -9,7 +9,6 @@ use crate::models::blood_cross_match_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -42,18 +41,17 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO blood_cross_match_test_results (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO blood_cross_match_test_results (patient_id, clinician_id, \
             originating_request_reference, report_status, performed_date, reported_date, \
-            request_type, clinical_history, abo_group, rhd_group, antibody_screen_result, \
-            antibodies_identified, crossmatch_result, component, units_crossmatched, \
-            units_available, two_sample_rule_met, special_requirements, \
-            historical_group_concordant, overall_result_status, findings_narrative, \
-            impression, reporting_category, recommended_follow_up, \
-            critical_result_communicated, reported_to) VALUES ($1, $2, $3, $4, $5, $6, $7, \
-            $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, \
-            $24, $25, $26, $27) RETURNING *",
+            request_type, clinical_history, abo_group, rhd_group, \
+            antibody_screen_result, antibodies_identified, crossmatch_result, component, \
+            units_crossmatched, units_available, two_sample_rule_met, \
+            special_requirements, historical_group_concordant, overall_result_status, \
+            findings_narrative, impression, reporting_category, recommended_follow_up, \
+            critical_result_communicated, reported_to) VALUES ($1, $2, $3, $4, $5, $6, \
+            $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, \
+            $23, $24, $25, $26) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -87,20 +85,18 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE blood_cross_match_test_results SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, originating_request_reference = $5, report_status = $6, \
-            performed_date = $7, reported_date = $8, request_type = $9, clinical_history = \
-            $10, abo_group = $11, rhd_group = $12, antibody_screen_result = $13, \
-            antibodies_identified = $14, crossmatch_result = $15, component = $16, \
-            units_crossmatched = $17, units_available = $18, two_sample_rule_met = $19, \
-            special_requirements = $20, historical_group_concordant = $21, \
-            overall_result_status = $22, findings_narrative = $23, impression = $24, \
-            reporting_category = $25, recommended_follow_up = $26, \
-            critical_result_communicated = $27, reported_to = $28, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE blood_cross_match_test_results SET patient_id = $2, clinician_id = \
+            $3, originating_request_reference = $4, report_status = $5, performed_date = \
+            $6, reported_date = $7, request_type = $8, clinical_history = $9, abo_group \
+            = $10, rhd_group = $11, antibody_screen_result = $12, antibodies_identified \
+            = $13, crossmatch_result = $14, component = $15, units_crossmatched = $16, \
+            units_available = $17, two_sample_rule_met = $18, special_requirements = \
+            $19, historical_group_concordant = $20, overall_result_status = $21, \
+            findings_narrative = $22, impression = $23, reporting_category = $24, \
+            recommended_follow_up = $25, critical_result_communicated = $26, reported_to \
+            = $27, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

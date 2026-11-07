@@ -9,7 +9,6 @@ use crate::models::agile_principles_assessment_grade_rules::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub agile_principles_assessment_grade_id: Uuid,
     pub rule_id: String,
     pub principle_number: i32,
@@ -22,11 +21,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO agile_principles_assessment_grade_rules (deleted_at, \
-            agile_principles_assessment_grade_id, rule_id, principle_number, band, \
-            principle_slug, description) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+            "INSERT INTO agile_principles_assessment_grade_rules \
+            (agile_principles_assessment_grade_id, rule_id, principle_number, band, \
+            principle_slug, description) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.agile_principles_assessment_grade_id)
         .bind(&self.rule_id)
         .bind(self.principle_number)
@@ -40,13 +38,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE agile_principles_assessment_grade_rules SET deleted_at = $2, \
-            agile_principles_assessment_grade_id = $3, rule_id = $4, principle_number = $5, \
-            band = $6, principle_slug = $7, description = $8, updated_at = now() WHERE id = \
-            $1 RETURNING *",
+            "UPDATE agile_principles_assessment_grade_rules SET \
+            agile_principles_assessment_grade_id = $2, rule_id = $3, principle_number = \
+            $4, band = $5, principle_slug = $6, description = $7, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.agile_principles_assessment_grade_id)
         .bind(&self.rule_id)
         .bind(self.principle_number)

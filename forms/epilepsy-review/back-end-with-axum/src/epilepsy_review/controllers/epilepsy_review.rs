@@ -118,21 +118,21 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE epilepsy_reviews SET reviewer_name = $2, reviewer_role = $3, reviewed_at = \
-            $4, care_setting = $5, review_type = $6, months_since_last_review = $7, \
-            patient_identifier = $8, age_band = $9, sex = $10, epilepsy_type = $11, \
-            age_at_onset = $12, years_since_diagnosis = $13, learning_disability = $14, \
-            seizure_types = $15, seizure_frequency = $16, last_seizure_date = $17, \
-            seizure_free_months = $18, seizure_trend = $19, current_asms = $20, asm_adherence \
-            = $21, asm_side_effects = $22, drug_level = $23, triggers = $24, sudep_discussed \
-            = $25, status_epilepticus = $26, seizure_injury = $27, dvla_eligible = $28, \
-            currently_driving = $29, bathing_advice_given = $30, \
-            woman_of_childbearing_potential = $31, on_valproate = $32, \
-            pregnancy_prevention_programme = $33, folic_acid = $34, \
+            "UPDATE epilepsy_reviews SET reviewer_name = $2, reviewer_role = $3, \
+            reviewed_at = $4, care_setting = $5, review_type = $6, \
+            months_since_last_review = $7, patient_identifier = $8, age_band = $9, sex = \
+            $10, epilepsy_type = $11, age_at_onset = $12, years_since_diagnosis = $13, \
+            learning_disability = $14, seizure_types = $15, seizure_frequency = $16, \
+            last_seizure_date = $17, seizure_free_months = $18, seizure_trend = $19, \
+            current_asms = $20, asm_adherence = $21, asm_side_effects = $22, drug_level \
+            = $23, triggers = $24, sudep_discussed = $25, status_epilepticus = $26, \
+            seizure_injury = $27, dvla_eligible = $28, currently_driving = $29, \
+            bathing_advice_given = $30, woman_of_childbearing_potential = $31, \
+            on_valproate = $32, pregnancy_prevention_programme = $33, folic_acid = $34, \
             contraception_interaction_reviewed = $35, mental_health_concern = $36, \
             specialist_review_needed = $37, next_review_due = $38, care_plan = $39, \
-            review_context = $40, patient_id = $41, clinician_id = $42, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            review_context = $40, patient_id = $41, clinician_id = $42, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(&self.reviewer_name)

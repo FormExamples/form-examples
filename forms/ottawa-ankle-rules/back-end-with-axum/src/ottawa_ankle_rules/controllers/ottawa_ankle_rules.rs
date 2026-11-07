@@ -70,14 +70,15 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE ottawa_ankle_rules SET status = $2, patient_identifier = $3, assessed_at = \
-            $4, care_setting = $5, injured_side = $6, hours_since_injury = $7, age_years = \
-            $8, sex = $9, assessment_reliable = $10, malleolar_zone_pain = $11, \
-            lateral_malleolus_tenderness = $12, medial_malleolus_tenderness = $13, \
-            midfoot_zone_pain = $14, fifth_metatarsal_base_tenderness = $15, \
+            "UPDATE ottawa_ankle_rules SET status = $2, patient_identifier = $3, \
+            assessed_at = $4, care_setting = $5, injured_side = $6, hours_since_injury = \
+            $7, age_years = $8, sex = $9, assessment_reliable = $10, malleolar_zone_pain \
+            = $11, lateral_malleolus_tenderness = $12, medial_malleolus_tenderness = \
+            $13, midfoot_zone_pain = $14, fifth_metatarsal_base_tenderness = $15, \
             navicular_tenderness = $16, able_to_bear_weight_immediately = $17, \
             able_to_bear_weight_now = $18, clinical_notes = $19, patient_id = $20, \
-            clinician_id = $21, updated_at = now() WHERE id = $1 RETURNING *",
+            clinician_id = $21, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
         .bind(&self.status)

@@ -9,7 +9,6 @@ use crate::models::return_to_work_grade_flags::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub return_to_work_grade_id: Uuid,
     pub flag_code: String,
     pub flag_title: String,
@@ -23,11 +22,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO return_to_work_grade_flags (deleted_at, return_to_work_grade_id, \
-            flag_code, flag_title, flag_category, flag_priority, flag_evidence, \
-            flag_recommendation) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+            "INSERT INTO return_to_work_grade_flags (return_to_work_grade_id, flag_code, \
+            flag_title, flag_category, flag_priority, flag_evidence, \
+            flag_recommendation) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.return_to_work_grade_id)
         .bind(&self.flag_code)
         .bind(&self.flag_title)
@@ -42,13 +40,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE return_to_work_grade_flags SET deleted_at = $2, return_to_work_grade_id = \
-            $3, flag_code = $4, flag_title = $5, flag_category = $6, flag_priority = $7, \
-            flag_evidence = $8, flag_recommendation = $9, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE return_to_work_grade_flags SET return_to_work_grade_id = $2, \
+            flag_code = $3, flag_title = $4, flag_category = $5, flag_priority = $6, \
+            flag_evidence = $7, flag_recommendation = $8, updated_at = now() WHERE id = \
+            $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.return_to_work_grade_id)
         .bind(&self.flag_code)
         .bind(&self.flag_title)

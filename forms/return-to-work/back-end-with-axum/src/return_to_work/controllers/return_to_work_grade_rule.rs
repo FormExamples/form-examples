@@ -9,7 +9,6 @@ use crate::models::return_to_work_grade_rules::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub return_to_work_grade_id: Uuid,
     pub rule_code: String,
     pub rule_title: String,
@@ -24,11 +23,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO return_to_work_grade_rules (deleted_at, return_to_work_grade_id, \
-            rule_code, rule_title, rule_band, rule_priority, rule_kind, rule_evidence, \
-            rule_notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
+            "INSERT INTO return_to_work_grade_rules (return_to_work_grade_id, rule_code, \
+            rule_title, rule_band, rule_priority, rule_kind, rule_evidence, rule_notes) \
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.return_to_work_grade_id)
         .bind(&self.rule_code)
         .bind(&self.rule_title)
@@ -44,13 +42,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE return_to_work_grade_rules SET deleted_at = $2, return_to_work_grade_id = \
-            $3, rule_code = $4, rule_title = $5, rule_band = $6, rule_priority = $7, \
-            rule_kind = $8, rule_evidence = $9, rule_notes = $10, updated_at = now() WHERE id \
-            = $1 RETURNING *",
+            "UPDATE return_to_work_grade_rules SET return_to_work_grade_id = $2, \
+            rule_code = $3, rule_title = $4, rule_band = $5, rule_priority = $6, \
+            rule_kind = $7, rule_evidence = $8, rule_notes = $9, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.return_to_work_grade_id)
         .bind(&self.rule_code)
         .bind(&self.rule_title)

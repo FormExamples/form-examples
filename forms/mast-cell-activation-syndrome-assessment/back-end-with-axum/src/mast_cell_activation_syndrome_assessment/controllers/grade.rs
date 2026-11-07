@@ -9,7 +9,6 @@ use crate::models::grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub total_symptom_score: i32,
     pub dermatological_score: i32,
@@ -27,13 +26,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO grades (deleted_at, assessment_id, total_symptom_score, \
+            "INSERT INTO grades (assessment_id, total_symptom_score, \
             dermatological_score, gastrointestinal_score, cardiovascular_score, \
             respiratory_score, neurological_score, organ_system_count, severity_level, \
-            trigger_count, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, \
-            $12) RETURNING *",
+            trigger_count, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, \
+            $11) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.total_symptom_score)
         .bind(self.dermatological_score)
@@ -52,14 +50,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE grades SET deleted_at = $2, assessment_id = $3, total_symptom_score = $4, \
-            dermatological_score = $5, gastrointestinal_score = $6, cardiovascular_score = \
-            $7, respiratory_score = $8, neurological_score = $9, organ_system_count = $10, \
-            severity_level = $11, trigger_count = $12, graded_at = $13, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            "UPDATE grades SET assessment_id = $2, total_symptom_score = $3, \
+            dermatological_score = $4, gastrointestinal_score = $5, cardiovascular_score \
+            = $6, respiratory_score = $7, neurological_score = $8, organ_system_count = \
+            $9, severity_level = $10, trigger_count = $11, graded_at = $12, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.total_symptom_score)
         .bind(self.dermatological_score)

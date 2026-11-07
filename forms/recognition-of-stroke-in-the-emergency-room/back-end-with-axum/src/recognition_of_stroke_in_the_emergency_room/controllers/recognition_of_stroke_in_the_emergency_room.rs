@@ -71,13 +71,13 @@ impl Params {
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
             "UPDATE recognition_of_stroke_in_the_emergency_rooms SET patient_id = $2, \
-            clinician_id = $3, clinician_name = $4, clinician_role = $5, assessed_at = $6, \
-            care_setting = $7, symptom_onset_at = $8, patient_identifier = $9, age_band = \
-            $10, sex = $11, blood_glucose = $12, hypoglycaemia_corrected = $13, \
-            loss_of_consciousness = $14, seizure_activity = $15, facial_weakness = $16, \
-            arm_weakness = $17, leg_weakness = $18, speech_disturbance = $19, \
-            visual_field_defect = $20, clinical_note = $21, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            clinician_id = $3, clinician_name = $4, clinician_role = $5, assessed_at = \
+            $6, care_setting = $7, symptom_onset_at = $8, patient_identifier = $9, \
+            age_band = $10, sex = $11, blood_glucose = $12, hypoglycaemia_corrected = \
+            $13, loss_of_consciousness = $14, seizure_activity = $15, facial_weakness = \
+            $16, arm_weakness = $17, leg_weakness = $18, speech_disturbance = $19, \
+            visual_field_defect = $20, clinical_note = $21, updated_at = now() WHERE id \
+            = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

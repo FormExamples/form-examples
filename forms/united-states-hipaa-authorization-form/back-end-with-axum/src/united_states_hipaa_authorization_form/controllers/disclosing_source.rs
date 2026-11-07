@@ -9,7 +9,6 @@ use crate::models::disclosing_sources::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub hipaa_authorization_id: Uuid,
     pub identification_mode: String,
     pub specific_persons_or_organizations: String,
@@ -22,12 +21,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO disclosing_sources (deleted_at, hipaa_authorization_id, \
-            identification_mode, specific_persons_or_organizations, class_description, \
-            is_va_facility, is_part_2_program) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING \
-            *",
+            "INSERT INTO disclosing_sources (hipaa_authorization_id, identification_mode, \
+            specific_persons_or_organizations, class_description, is_va_facility, \
+            is_part_2_program) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.hipaa_authorization_id)
         .bind(&self.identification_mode)
         .bind(&self.specific_persons_or_organizations)
@@ -41,13 +38,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE disclosing_sources SET deleted_at = $2, hipaa_authorization_id = $3, \
-            identification_mode = $4, specific_persons_or_organizations = $5, \
-            class_description = $6, is_va_facility = $7, is_part_2_program = $8, updated_at = \
-            now() WHERE id = $1 RETURNING *",
+            "UPDATE disclosing_sources SET hipaa_authorization_id = $2, \
+            identification_mode = $3, specific_persons_or_organizations = $4, \
+            class_description = $5, is_va_facility = $6, is_part_2_program = $7, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.hipaa_authorization_id)
         .bind(&self.identification_mode)
         .bind(&self.specific_persons_or_organizations)

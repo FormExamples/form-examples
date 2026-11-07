@@ -9,7 +9,6 @@ use crate::models::restrictions_limitations::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub release_form_id: Uuid,
     pub exclude_hiv: String,
     pub exclude_substance_abuse: String,
@@ -23,12 +22,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO restrictions_limitations (deleted_at, release_form_id, exclude_hiv, \
+            "INSERT INTO restrictions_limitations (release_form_id, exclude_hiv, \
             exclude_substance_abuse, exclude_mental_health, exclude_genetic_info, \
-            exclude_sti, additional_restrictions) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) \
+            exclude_sti, additional_restrictions) VALUES ($1, $2, $3, $4, $5, $6, $7) \
             RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.release_form_id)
         .bind(&self.exclude_hiv)
         .bind(&self.exclude_substance_abuse)
@@ -43,13 +41,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE restrictions_limitations SET deleted_at = $2, release_form_id = $3, \
-            exclude_hiv = $4, exclude_substance_abuse = $5, exclude_mental_health = $6, \
-            exclude_genetic_info = $7, exclude_sti = $8, additional_restrictions = $9, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE restrictions_limitations SET release_form_id = $2, exclude_hiv = $3, \
+            exclude_substance_abuse = $4, exclude_mental_health = $5, \
+            exclude_genetic_info = $6, exclude_sti = $7, additional_restrictions = $8, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.release_form_id)
         .bind(&self.exclude_hiv)
         .bind(&self.exclude_substance_abuse)

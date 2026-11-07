@@ -9,7 +9,6 @@ use crate::models::consent_informations::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub information_provided: Option<i32>,
     pub risks_explained: Option<i32>,
@@ -24,12 +23,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO consent_informations (deleted_at, assessment_id, \
-            information_provided, risks_explained, benefits_explained, questions_answered, \
-            consent_given, consent_date, guardian_consent) VALUES ($1, $2, $3, $4, $5, $6, \
-            $7, $8, $9) RETURNING *",
+            "INSERT INTO consent_informations (assessment_id, information_provided, \
+            risks_explained, benefits_explained, questions_answered, consent_given, \
+            consent_date, guardian_consent) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.information_provided)
         .bind(self.risks_explained)
@@ -45,13 +43,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE consent_informations SET deleted_at = $2, assessment_id = $3, \
-            information_provided = $4, risks_explained = $5, benefits_explained = $6, \
-            questions_answered = $7, consent_given = $8, consent_date = $9, guardian_consent \
-            = $10, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE consent_informations SET assessment_id = $2, information_provided = \
+            $3, risks_explained = $4, benefits_explained = $5, questions_answered = $6, \
+            consent_given = $7, consent_date = $8, guardian_consent = $9, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.information_provided)
         .bind(self.risks_explained)

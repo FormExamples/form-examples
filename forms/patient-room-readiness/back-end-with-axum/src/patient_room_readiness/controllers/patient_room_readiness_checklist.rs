@@ -9,7 +9,6 @@ use crate::models::patient_room_readiness_checklists::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub building_name_or_number: String,
     pub room_name_or_number: String,
     pub patient_cot_mattress_side_railings: bool,
@@ -47,19 +46,19 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO patient_room_readiness_checklists (deleted_at, \
-            building_name_or_number, room_name_or_number, patient_cot_mattress_side_railings, \
-            attendant_cot_mattress, call_bell, cardiac_table_iv_stand, hot_kettle_glasses, \
-            linen_patient_dress, landline_numbers, refrigerator_fan, television_remote, \
-            dustbin, bath_towel_handtowels, wc_dustbins, washbasin_and_fittings, \
-            bucket_and_mug, geyser, soap_dispenser, toilet_kit, window_glass_grooves, \
-            sidewalls, curtain_blind, chair_sofa, wall_seepage_water_leakage, \
-            electricity_points_lights, ceiling_tiles, door_knobs_stopper, inspector_name, \
-            inspector_email, inspection_date, inspection_time) VALUES ($1, $2, $3, $4, $5, \
-            $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, \
-            $23, $24, $25, $26, $27, $28, $29, $30, $31, $32) RETURNING *",
+            "INSERT INTO patient_room_readiness_checklists (building_name_or_number, \
+            room_name_or_number, patient_cot_mattress_side_railings, \
+            attendant_cot_mattress, call_bell, cardiac_table_iv_stand, \
+            hot_kettle_glasses, linen_patient_dress, landline_numbers, refrigerator_fan, \
+            television_remote, dustbin, bath_towel_handtowels, wc_dustbins, \
+            washbasin_and_fittings, bucket_and_mug, geyser, soap_dispenser, toilet_kit, \
+            window_glass_grooves, sidewalls, curtain_blind, chair_sofa, \
+            wall_seepage_water_leakage, electricity_points_lights, ceiling_tiles, \
+            door_knobs_stopper, inspector_name, inspector_email, inspection_date, \
+            inspection_time) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, \
+            $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, \
+            $28, $29, $30, $31) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.building_name_or_number)
         .bind(&self.room_name_or_number)
         .bind(self.patient_cot_mattress_side_railings)
@@ -98,21 +97,21 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE patient_room_readiness_checklists SET deleted_at = $2, \
-            building_name_or_number = $3, room_name_or_number = $4, \
-            patient_cot_mattress_side_railings = $5, attendant_cot_mattress = $6, call_bell = \
-            $7, cardiac_table_iv_stand = $8, hot_kettle_glasses = $9, linen_patient_dress = \
-            $10, landline_numbers = $11, refrigerator_fan = $12, television_remote = $13, \
-            dustbin = $14, bath_towel_handtowels = $15, wc_dustbins = $16, \
-            washbasin_and_fittings = $17, bucket_and_mug = $18, geyser = $19, soap_dispenser \
-            = $20, toilet_kit = $21, window_glass_grooves = $22, sidewalls = $23, \
-            curtain_blind = $24, chair_sofa = $25, wall_seepage_water_leakage = $26, \
-            electricity_points_lights = $27, ceiling_tiles = $28, door_knobs_stopper = $29, \
-            inspector_name = $30, inspector_email = $31, inspection_date = $32, \
-            inspection_time = $33, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE patient_room_readiness_checklists SET building_name_or_number = $2, \
+            room_name_or_number = $3, patient_cot_mattress_side_railings = $4, \
+            attendant_cot_mattress = $5, call_bell = $6, cardiac_table_iv_stand = $7, \
+            hot_kettle_glasses = $8, linen_patient_dress = $9, landline_numbers = $10, \
+            refrigerator_fan = $11, television_remote = $12, dustbin = $13, \
+            bath_towel_handtowels = $14, wc_dustbins = $15, washbasin_and_fittings = \
+            $16, bucket_and_mug = $17, geyser = $18, soap_dispenser = $19, toilet_kit = \
+            $20, window_glass_grooves = $21, sidewalls = $22, curtain_blind = $23, \
+            chair_sofa = $24, wall_seepage_water_leakage = $25, \
+            electricity_points_lights = $26, ceiling_tiles = $27, door_knobs_stopper = \
+            $28, inspector_name = $29, inspector_email = $30, inspection_date = $31, \
+            inspection_time = $32, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.building_name_or_number)
         .bind(&self.room_name_or_number)
         .bind(self.patient_cot_mattress_side_railings)

@@ -9,7 +9,6 @@ use crate::models::lpa_person_to_notifies::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub lpa_id: Uuid,
     pub person_to_notify_id: Uuid,
     pub order_position: i32,
@@ -19,10 +18,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO lpa_person_to_notifies (deleted_at, lpa_id, person_to_notify_id, \
-            order_position) VALUES ($1, $2, $3, $4) RETURNING *",
+            "INSERT INTO lpa_person_to_notifies (lpa_id, person_to_notify_id, \
+            order_position) VALUES ($1, $2, $3) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.lpa_id)
         .bind(self.person_to_notify_id)
         .bind(self.order_position)
@@ -33,12 +31,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE lpa_person_to_notifies SET deleted_at = $2, lpa_id = $3, \
-            person_to_notify_id = $4, order_position = $5, updated_at = now() WHERE id = $1 \
+            "UPDATE lpa_person_to_notifies SET lpa_id = $2, person_to_notify_id = $3, \
+            order_position = $4, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
             RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.lpa_id)
         .bind(self.person_to_notify_id)
         .bind(self.order_position)

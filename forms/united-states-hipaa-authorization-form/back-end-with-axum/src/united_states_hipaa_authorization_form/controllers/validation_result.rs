@@ -9,7 +9,6 @@ use crate::models::validation_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub hipaa_authorization_id: Uuid,
     pub validity_status: String,
     pub completeness_score: i32,
@@ -22,11 +21,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO validation_results (deleted_at, hipaa_authorization_id, \
-            validity_status, completeness_score, completeness_status, validated_at, \
-            validator_version) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+            "INSERT INTO validation_results (hipaa_authorization_id, validity_status, \
+            completeness_score, completeness_status, validated_at, validator_version) \
+            VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.hipaa_authorization_id)
         .bind(&self.validity_status)
         .bind(self.completeness_score)
@@ -40,13 +38,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE validation_results SET deleted_at = $2, hipaa_authorization_id = $3, \
-            validity_status = $4, completeness_score = $5, completeness_status = $6, \
-            validated_at = $7, validator_version = $8, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE validation_results SET hipaa_authorization_id = $2, validity_status = \
+            $3, completeness_score = $4, completeness_status = $5, validated_at = $6, \
+            validator_version = $7, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.hipaa_authorization_id)
         .bind(&self.validity_status)
         .bind(self.completeness_score)

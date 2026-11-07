@@ -17,4 +17,5 @@ mod grades_route;
 pub mod immunization_history;
 pub mod occupational_vaccinations;
 pub mod patient;
+mod soft_delete;
 pub mod travel_vaccinations;

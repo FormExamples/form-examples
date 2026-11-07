@@ -1,0 +1,1 @@
+ALTER TABLE "grades" ALTER COLUMN "deleted_at" SET NOT NULL;

@@ -9,7 +9,6 @@ use crate::models::records_to_releases::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub release_form_id: Uuid,
     pub record_types: String,
     pub specific_date_range: String,
@@ -22,11 +21,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO records_to_releases (deleted_at, release_form_id, record_types, \
-            specific_date_range, date_from, date_to, specific_record_details) VALUES ($1, $2, \
-            $3, $4, $5, $6, $7) RETURNING *",
+            "INSERT INTO records_to_releases (release_form_id, record_types, \
+            specific_date_range, date_from, date_to, specific_record_details) VALUES \
+            ($1, $2, $3, $4, $5, $6) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.release_form_id)
         .bind(&self.record_types)
         .bind(&self.specific_date_range)
@@ -40,12 +38,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE records_to_releases SET deleted_at = $2, release_form_id = $3, \
-            record_types = $4, specific_date_range = $5, date_from = $6, date_to = $7, \
-            specific_record_details = $8, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE records_to_releases SET release_form_id = $2, record_types = $3, \
+            specific_date_range = $4, date_from = $5, date_to = $6, \
+            specific_record_details = $7, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.release_form_id)
         .bind(&self.record_types)
         .bind(&self.specific_date_range)

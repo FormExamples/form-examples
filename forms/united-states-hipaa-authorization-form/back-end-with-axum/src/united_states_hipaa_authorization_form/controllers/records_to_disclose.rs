@@ -9,7 +9,6 @@ use crate::models::records_to_discloses::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub hipaa_authorization_id: Uuid,
     pub include_medical_health: String,
     pub medical_health_initials: String,
@@ -35,17 +34,16 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO records_to_discloses (deleted_at, hipaa_authorization_id, \
+            "INSERT INTO records_to_discloses (hipaa_authorization_id, \
             include_medical_health, medical_health_initials, include_mental_health, \
             mental_health_initials, include_substance_use, substance_use_initials, \
             part2_redisclosure_notice_included, include_hiv_aids, hiv_aids_initials, \
             hiv_aids_state_consent_included, include_psychotherapy_notes, \
             include_genetic_information, include_reproductive_health, \
             section_7332_notice_included, date_range_specified, date_from, date_to, \
-            other_description) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, \
-            $13, $14, $15, $16, $17, $18, $19, $20) RETURNING *",
+            other_description) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, \
+            $12, $13, $14, $15, $16, $17, $18, $19) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.hipaa_authorization_id)
         .bind(&self.include_medical_health)
         .bind(&self.medical_health_initials)
@@ -72,18 +70,19 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE records_to_discloses SET deleted_at = $2, hipaa_authorization_id = $3, \
-            include_medical_health = $4, medical_health_initials = $5, include_mental_health \
-            = $6, mental_health_initials = $7, include_substance_use = $8, \
-            substance_use_initials = $9, part2_redisclosure_notice_included = $10, \
-            include_hiv_aids = $11, hiv_aids_initials = $12, hiv_aids_state_consent_included \
-            = $13, include_psychotherapy_notes = $14, include_genetic_information = $15, \
-            include_reproductive_health = $16, section_7332_notice_included = $17, \
-            date_range_specified = $18, date_from = $19, date_to = $20, other_description = \
-            $21, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE records_to_discloses SET hipaa_authorization_id = $2, \
+            include_medical_health = $3, medical_health_initials = $4, \
+            include_mental_health = $5, mental_health_initials = $6, \
+            include_substance_use = $7, substance_use_initials = $8, \
+            part2_redisclosure_notice_included = $9, include_hiv_aids = $10, \
+            hiv_aids_initials = $11, hiv_aids_state_consent_included = $12, \
+            include_psychotherapy_notes = $13, include_genetic_information = $14, \
+            include_reproductive_health = $15, section_7332_notice_included = $16, \
+            date_range_specified = $17, date_from = $18, date_to = $19, \
+            other_description = $20, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.hipaa_authorization_id)
         .bind(&self.include_medical_health)
         .bind(&self.medical_health_initials)

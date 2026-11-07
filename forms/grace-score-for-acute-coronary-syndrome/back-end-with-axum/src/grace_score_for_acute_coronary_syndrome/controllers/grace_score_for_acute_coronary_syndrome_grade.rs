@@ -44,8 +44,8 @@ impl Params {
             "UPDATE grace_score_for_acute_coronary_syndrome_grades SET \
             grace_score_for_acute_coronary_syndrome_id = $2, grace_score = $3, \
             in_hospital_risk_band = $4, six_month_risk_band = $5, overall_band = $6, \
-            invasive_strategy = $7, graded_at = $8, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            invasive_strategy = $7, graded_at = $8, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.grace_score_for_acute_coronary_syndrome_id)

@@ -9,7 +9,6 @@ use crate::models::assessment_current_medications::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub takes_respiratory_medications: String,
     pub inhaler_use: String,
@@ -27,14 +26,13 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO assessment_current_medications (deleted_at, assessment_id, \
+            "INSERT INTO assessment_current_medications (assessment_id, \
             takes_respiratory_medications, inhaler_use, inhaler_technique_assessed, \
             inhaler_technique_adequate, long_term_oxygen_therapy, nebuliser_use, \
             takes_other_medications, medication_adherence, adverse_drug_reactions, \
-            additional_notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) \
+            additional_notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) \
             RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.takes_respiratory_medications)
         .bind(&self.inhaler_use)
@@ -53,15 +51,15 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE assessment_current_medications SET deleted_at = $2, assessment_id = $3, \
-            takes_respiratory_medications = $4, inhaler_use = $5, inhaler_technique_assessed \
-            = $6, inhaler_technique_adequate = $7, long_term_oxygen_therapy = $8, \
-            nebuliser_use = $9, takes_other_medications = $10, medication_adherence = $11, \
-            adverse_drug_reactions = $12, additional_notes = $13, updated_at = now() WHERE id \
-            = $1 RETURNING *",
+            "UPDATE assessment_current_medications SET assessment_id = $2, \
+            takes_respiratory_medications = $3, inhaler_use = $4, \
+            inhaler_technique_assessed = $5, inhaler_technique_adequate = $6, \
+            long_term_oxygen_therapy = $7, nebuliser_use = $8, takes_other_medications = \
+            $9, medication_adherence = $10, adverse_drug_reactions = $11, \
+            additional_notes = $12, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.takes_respiratory_medications)
         .bind(&self.inhaler_use)

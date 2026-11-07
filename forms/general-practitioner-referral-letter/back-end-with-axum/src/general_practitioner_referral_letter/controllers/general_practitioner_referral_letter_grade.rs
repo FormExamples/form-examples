@@ -39,7 +39,7 @@ impl Params {
             "UPDATE general_practitioner_referral_letter_grades SET \
             general_practitioner_referral_letter_id = $2, status = $3, urgency = $4, \
             completeness_percent = $5, graded_at = $6, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.general_practitioner_referral_letter_id)

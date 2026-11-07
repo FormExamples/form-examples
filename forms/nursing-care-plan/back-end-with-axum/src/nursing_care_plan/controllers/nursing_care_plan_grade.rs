@@ -9,7 +9,6 @@ use crate::models::nursing_care_plan_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub nursing_care_plan_id: Uuid,
     pub status: String,
     pub completeness_percent: i32,
@@ -20,10 +19,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO nursing_care_plan_grades (deleted_at, nursing_care_plan_id, status, \
-            completeness_percent, graded_at) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+            "INSERT INTO nursing_care_plan_grades (nursing_care_plan_id, status, \
+            completeness_percent, graded_at) VALUES ($1, $2, $3, $4) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.nursing_care_plan_id)
         .bind(&self.status)
         .bind(self.completeness_percent)
@@ -35,12 +33,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE nursing_care_plan_grades SET deleted_at = $2, nursing_care_plan_id = $3, \
-            status = $4, completeness_percent = $5, graded_at = $6, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE nursing_care_plan_grades SET nursing_care_plan_id = $2, status = $3, \
+            completeness_percent = $4, graded_at = $5, updated_at = now() WHERE id = $1 \
+            AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.nursing_care_plan_id)
         .bind(&self.status)
         .bind(self.completeness_percent)

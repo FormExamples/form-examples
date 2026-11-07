@@ -11,3 +11,4 @@ mod okr_key_results_route;
 mod okr_objectives_route;
 pub mod participant;
 pub mod reporter;
+mod soft_delete;

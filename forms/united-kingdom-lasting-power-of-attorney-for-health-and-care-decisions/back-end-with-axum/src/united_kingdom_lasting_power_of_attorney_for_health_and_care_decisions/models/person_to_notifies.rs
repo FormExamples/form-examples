@@ -12,6 +12,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     pub id: Uuid,
+    #[serde(skip)]
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub title: String,
     pub given_names: String,
@@ -32,15 +33,18 @@ impl Model {
     /// Propagates the database error.
     pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Self>, i64)> {
         let (limit, offset) = crate::support::paging::bounds(page);
-        let rows =
-            sqlx::query_as("SELECT * FROM person_to_notifies ORDER BY id LIMIT $1 OFFSET $2")
-                .bind(limit)
-                .bind(offset)
-                .fetch_all(db)
+        let rows = sqlx::query_as(
+            "SELECT * FROM person_to_notifies WHERE deleted_at IS NULL ORDER BY id LIMIT \
+            $1 OFFSET $2",
+        )
+        .bind(limit)
+        .bind(offset)
+        .fetch_all(db)
+        .await?;
+        let total =
+            sqlx::query_scalar("SELECT COUNT(*) FROM person_to_notifies WHERE deleted_at IS NULL")
+                .fetch_one(db)
                 .await?;
-        let total = sqlx::query_scalar("SELECT COUNT(*) FROM person_to_notifies")
-            .fetch_one(db)
-            .await?;
         Ok((rows, total))
     }
 
@@ -50,7 +54,7 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn find_by_id(db: &PgPool, id: Uuid) -> sqlx::Result<Option<Self>> {
-        sqlx::query_as("SELECT * FROM person_to_notifies WHERE id = $1")
+        sqlx::query_as("SELECT * FROM person_to_notifies WHERE id = $1 AND deleted_at IS NULL")
             .bind(id)
             .fetch_optional(db)
             .await
@@ -62,10 +66,16 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn delete(db: &PgPool, id: Uuid) -> sqlx::Result<()> {
-        sqlx::query("DELETE FROM person_to_notifies WHERE id = $1")
-            .bind(id)
-            .execute(db)
-            .await?;
+        sqlx::query(
+            "WITH target AS (UPDATE person_to_notifies SET deleted_at = now(), updated_at \
+            = now() WHERE id = $1 AND deleted_at IS NULL RETURNING id), child1 AS \
+            (UPDATE lpa_person_to_notifies SET deleted_at = now(), updated_at = now() \
+            WHERE person_to_notify_id IN (SELECT id FROM target) AND deleted_at IS NULL \
+            RETURNING id) SELECT count(*) FROM target",
+        )
+        .bind(id)
+        .execute(db)
+        .await?;
         Ok(())
     }
 }

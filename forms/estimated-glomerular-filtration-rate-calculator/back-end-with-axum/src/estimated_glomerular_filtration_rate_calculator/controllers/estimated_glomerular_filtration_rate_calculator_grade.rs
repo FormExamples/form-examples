@@ -9,7 +9,6 @@ use crate::models::estimated_glomerular_filtration_rate_calculator_grades::Model
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub estimated_glomerular_filtration_rate_calculator_id: Uuid,
     pub serum_creatinine_mg_dl: Option<f64>,
     pub egfr_ml_min_1_73m2: Option<f64>,
@@ -22,12 +21,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO estimated_glomerular_filtration_rate_calculator_grades (deleted_at, \
-            estimated_glomerular_filtration_rate_calculator_id, serum_creatinine_mg_dl, \
-            egfr_ml_min_1_73m2, g_stage, g_stage_label, graded_at) VALUES ($1, $2, $3, $4, \
-            $5, $6, $7) RETURNING *",
+            "INSERT INTO estimated_glomerular_filtration_rate_calculator_grades \
+            (estimated_glomerular_filtration_rate_calculator_id, serum_creatinine_mg_dl, \
+            egfr_ml_min_1_73m2, g_stage, g_stage_label, graded_at) VALUES ($1, $2, $3, \
+            $4, $5, $6) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.estimated_glomerular_filtration_rate_calculator_id)
         .bind(self.serum_creatinine_mg_dl)
         .bind(self.egfr_ml_min_1_73m2)
@@ -41,13 +39,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE estimated_glomerular_filtration_rate_calculator_grades SET deleted_at = \
-            $2, estimated_glomerular_filtration_rate_calculator_id = $3, \
-            serum_creatinine_mg_dl = $4, egfr_ml_min_1_73m2 = $5, g_stage = $6, g_stage_label \
-            = $7, graded_at = $8, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE estimated_glomerular_filtration_rate_calculator_grades SET \
+            estimated_glomerular_filtration_rate_calculator_id = $2, \
+            serum_creatinine_mg_dl = $3, egfr_ml_min_1_73m2 = $4, g_stage = $5, \
+            g_stage_label = $6, graded_at = $7, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.estimated_glomerular_filtration_rate_calculator_id)
         .bind(self.serum_creatinine_mg_dl)
         .bind(self.egfr_ml_min_1_73m2)

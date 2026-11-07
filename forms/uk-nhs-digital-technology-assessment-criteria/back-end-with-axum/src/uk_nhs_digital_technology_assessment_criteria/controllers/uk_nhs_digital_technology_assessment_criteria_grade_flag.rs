@@ -12,8 +12,6 @@ use crate::models::uk_nhs_digital_technology_assessment_criteria_grade_flags::Mo
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    /// Deleted at.
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Uk NHS digital technology assessment criteria grade ID.
     pub uk_nhs_digital_technology_assessment_criteria_grade_id: Uuid,
     /// Flag ID.
@@ -31,10 +29,9 @@ impl Params {
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
             "INSERT INTO uk_nhs_digital_technology_assessment_criteria_grade_flags \
-            (deleted_at, uk_nhs_digital_technology_assessment_criteria_grade_id, flag_id, \
-            category, severity, message) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+            (uk_nhs_digital_technology_assessment_criteria_grade_id, flag_id, category, \
+            severity, message) VALUES ($1, $2, $3, $4, $5) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.uk_nhs_digital_technology_assessment_criteria_grade_id)
         .bind(&self.flag_id)
         .bind(&self.category)
@@ -47,13 +44,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE uk_nhs_digital_technology_assessment_criteria_grade_flags SET deleted_at = \
-            $2, uk_nhs_digital_technology_assessment_criteria_grade_id = $3, flag_id = $4, \
-            category = $5, severity = $6, message = $7, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE uk_nhs_digital_technology_assessment_criteria_grade_flags SET \
+            uk_nhs_digital_technology_assessment_criteria_grade_id = $2, flag_id = $3, \
+            category = $4, severity = $5, message = $6, updated_at = now() WHERE id = $1 \
+            AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.uk_nhs_digital_technology_assessment_criteria_grade_id)
         .bind(&self.flag_id)
         .bind(&self.category)

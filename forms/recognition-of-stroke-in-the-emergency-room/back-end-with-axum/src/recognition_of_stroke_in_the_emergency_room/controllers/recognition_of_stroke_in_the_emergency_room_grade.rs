@@ -38,8 +38,8 @@ impl Params {
         sqlx::query_as(
             "UPDATE recognition_of_stroke_in_the_emergency_room_grades SET \
             recognition_of_stroke_in_the_emergency_room_id = $2, rosier_score = $3, \
-            stroke_likely = $4, glucose_excluded = $5, graded_at = $6, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            stroke_likely = $4, glucose_excluded = $5, graded_at = $6, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.recognition_of_stroke_in_the_emergency_room_id)

@@ -9,7 +9,6 @@ use crate::models::mri_scan_test_requests::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub status: String,
@@ -47,19 +46,18 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO mri_scan_test_requests (deleted_at, patient_id, clinician_id, status, \
+            "INSERT INTO mri_scan_test_requests (patient_id, clinician_id, status, \
             site_name, setting, referral_date, requested_by_date, body_region, \
-            primary_indication, clinical_question, relevant_history, contrast_required, egfr, \
-            previous_gadolinium_reaction, pregnancy_status, pacemaker_or_icd, \
+            primary_indication, clinical_question, relevant_history, contrast_required, \
+            egfr, previous_gadolinium_reaction, pregnancy_status, pacemaker_or_icd, \
             cochlear_implant, aneurysm_clip, metallic_foreign_body_eye, \
             shrapnel_or_metal_fragments, programmable_shunt, neurostimulator, \
-            metal_implant_or_prosthesis, insulin_pump, claustrophobia, mri_safety_status, \
-            weight_kg, relevant_previous_imaging, urgency, supervising_consultant, notes) \
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, \
-            $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32) \
-            RETURNING *",
+            metal_implant_or_prosthesis, insulin_pump, claustrophobia, \
+            mri_safety_status, weight_kg, relevant_previous_imaging, urgency, \
+            supervising_consultant, notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, \
+            $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, \
+            $25, $26, $27, $28, $29, $30, $31) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)
@@ -98,20 +96,20 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE mri_scan_test_requests SET deleted_at = $2, patient_id = $3, clinician_id \
-            = $4, status = $5, site_name = $6, setting = $7, referral_date = $8, \
-            requested_by_date = $9, body_region = $10, primary_indication = $11, \
-            clinical_question = $12, relevant_history = $13, contrast_required = $14, egfr = \
-            $15, previous_gadolinium_reaction = $16, pregnancy_status = $17, pacemaker_or_icd \
-            = $18, cochlear_implant = $19, aneurysm_clip = $20, metallic_foreign_body_eye = \
-            $21, shrapnel_or_metal_fragments = $22, programmable_shunt = $23, neurostimulator \
-            = $24, metal_implant_or_prosthesis = $25, insulin_pump = $26, claustrophobia = \
-            $27, mri_safety_status = $28, weight_kg = $29, relevant_previous_imaging = $30, \
-            urgency = $31, supervising_consultant = $32, notes = $33, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            "UPDATE mri_scan_test_requests SET patient_id = $2, clinician_id = $3, status \
+            = $4, site_name = $5, setting = $6, referral_date = $7, requested_by_date = \
+            $8, body_region = $9, primary_indication = $10, clinical_question = $11, \
+            relevant_history = $12, contrast_required = $13, egfr = $14, \
+            previous_gadolinium_reaction = $15, pregnancy_status = $16, pacemaker_or_icd \
+            = $17, cochlear_implant = $18, aneurysm_clip = $19, \
+            metallic_foreign_body_eye = $20, shrapnel_or_metal_fragments = $21, \
+            programmable_shunt = $22, neurostimulator = $23, metal_implant_or_prosthesis \
+            = $24, insulin_pump = $25, claustrophobia = $26, mri_safety_status = $27, \
+            weight_kg = $28, relevant_previous_imaging = $29, urgency = $30, \
+            supervising_consultant = $31, notes = $32, updated_at = now() WHERE id = $1 \
+            AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)

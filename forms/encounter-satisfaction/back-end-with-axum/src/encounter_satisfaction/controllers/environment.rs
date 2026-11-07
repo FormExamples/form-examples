@@ -9,7 +9,6 @@ use crate::models::environments::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub encounter_satisfaction_id: Uuid,
     pub cleanliness: Option<i32>,
     pub waiting_area_comfort: Option<i32>,
@@ -20,10 +19,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO environments (deleted_at, encounter_satisfaction_id, cleanliness, \
-            waiting_area_comfort, privacy) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+            "INSERT INTO environments (encounter_satisfaction_id, cleanliness, \
+            waiting_area_comfort, privacy) VALUES ($1, $2, $3, $4) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.encounter_satisfaction_id)
         .bind(self.cleanliness)
         .bind(self.waiting_area_comfort)
@@ -35,12 +33,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE environments SET deleted_at = $2, encounter_satisfaction_id = $3, \
-            cleanliness = $4, waiting_area_comfort = $5, privacy = $6, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            "UPDATE environments SET encounter_satisfaction_id = $2, cleanliness = $3, \
+            waiting_area_comfort = $4, privacy = $5, updated_at = now() WHERE id = $1 \
+            AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.encounter_satisfaction_id)
         .bind(self.cleanliness)
         .bind(self.waiting_area_comfort)

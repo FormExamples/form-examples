@@ -9,7 +9,6 @@ use crate::models::model_for_end_stage_liver_disease_score_grade_rules::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub model_for_end_stage_liver_disease_score_grade_id: Uuid,
     pub rule_id: String,
     pub component: String,
@@ -22,12 +21,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO model_for_end_stage_liver_disease_score_grade_rules (deleted_at, \
-            model_for_end_stage_liver_disease_score_grade_id, rule_id, component, \
-            contribution, category, description) VALUES ($1, $2, $3, $4, $5, $6, $7) \
+            "INSERT INTO model_for_end_stage_liver_disease_score_grade_rules \
+            (model_for_end_stage_liver_disease_score_grade_id, rule_id, component, \
+            contribution, category, description) VALUES ($1, $2, $3, $4, $5, $6) \
             RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.model_for_end_stage_liver_disease_score_grade_id)
         .bind(&self.rule_id)
         .bind(&self.component)
@@ -41,13 +39,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE model_for_end_stage_liver_disease_score_grade_rules SET deleted_at = $2, \
-            model_for_end_stage_liver_disease_score_grade_id = $3, rule_id = $4, component = \
-            $5, contribution = $6, category = $7, description = $8, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE model_for_end_stage_liver_disease_score_grade_rules SET \
+            model_for_end_stage_liver_disease_score_grade_id = $2, rule_id = $3, \
+            component = $4, contribution = $5, category = $6, description = $7, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.model_for_end_stage_liver_disease_score_grade_id)
         .bind(&self.rule_id)
         .bind(&self.component)

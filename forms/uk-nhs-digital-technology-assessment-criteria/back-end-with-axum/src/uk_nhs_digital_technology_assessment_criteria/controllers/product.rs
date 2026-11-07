@@ -12,8 +12,6 @@ use crate::models::products::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    /// Deleted at.
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Supplier ID.
     pub supplier_id: Uuid,
     /// Name.
@@ -38,11 +36,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO products (deleted_at, supplier_id, name, version, description, \
+            "INSERT INTO products (supplier_id, name, version, description, \
             intended_purpose, product_type, medical_device_class, handles_patient_data, \
-            is_patient_facing) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *",
+            is_patient_facing) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.supplier_id)
         .bind(&self.name)
         .bind(&self.version)
@@ -59,13 +56,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE products SET deleted_at = $2, supplier_id = $3, name = $4, version = $5, \
-            description = $6, intended_purpose = $7, product_type = $8, medical_device_class \
-            = $9, handles_patient_data = $10, is_patient_facing = $11, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            "UPDATE products SET supplier_id = $2, name = $3, version = $4, description = \
+            $5, intended_purpose = $6, product_type = $7, medical_device_class = $8, \
+            handles_patient_data = $9, is_patient_facing = $10, updated_at = now() WHERE \
+            id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.supplier_id)
         .bind(&self.name)
         .bind(&self.version)

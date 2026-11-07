@@ -9,7 +9,6 @@ use crate::models::addresses::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub address_line_1: String,
     pub address_line_2: String,
     pub address_line_3: String,
@@ -21,11 +20,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO addresses (deleted_at, address_line_1, address_line_2, \
-            address_line_3, postcode, country_as_iso_3166_1_alpha_2) VALUES ($1, $2, $3, $4, \
-            $5, $6) RETURNING *",
+            "INSERT INTO addresses (address_line_1, address_line_2, address_line_3, \
+            postcode, country_as_iso_3166_1_alpha_2) VALUES ($1, $2, $3, $4, $5) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.address_line_1)
         .bind(&self.address_line_2)
         .bind(&self.address_line_3)
@@ -38,12 +36,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE addresses SET deleted_at = $2, address_line_1 = $3, address_line_2 = $4, \
-            address_line_3 = $5, postcode = $6, country_as_iso_3166_1_alpha_2 = $7, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE addresses SET address_line_1 = $2, address_line_2 = $3, \
+            address_line_3 = $4, postcode = $5, country_as_iso_3166_1_alpha_2 = $6, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.address_line_1)
         .bind(&self.address_line_2)
         .bind(&self.address_line_3)

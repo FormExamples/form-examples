@@ -12,8 +12,6 @@ use crate::models::hospital_performance_indicators::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    /// Deleted at.
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Hospital name.
     pub hospital_name: String,
     /// Period month.
@@ -34,11 +32,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO hospital_performance_indicators (deleted_at, hospital_name, \
-            period_month, period_year, prepared_by_name, overall_notes, status, signed_at) \
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+            "INSERT INTO hospital_performance_indicators (hospital_name, period_month, \
+            period_year, prepared_by_name, overall_notes, status, signed_at) VALUES ($1, \
+            $2, $3, $4, $5, $6, $7) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.hospital_name)
         .bind(self.period_month)
         .bind(self.period_year)
@@ -53,12 +50,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE hospital_performance_indicators SET deleted_at = $2, hospital_name = $3, \
-            period_month = $4, period_year = $5, prepared_by_name = $6, overall_notes = $7, \
-            status = $8, signed_at = $9, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE hospital_performance_indicators SET hospital_name = $2, period_month \
+            = $3, period_year = $4, prepared_by_name = $5, overall_notes = $6, status = \
+            $7, signed_at = $8, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.hospital_name)
         .bind(self.period_month)
         .bind(self.period_year)

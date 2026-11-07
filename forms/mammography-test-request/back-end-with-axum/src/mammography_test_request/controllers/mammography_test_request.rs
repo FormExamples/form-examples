@@ -9,7 +9,6 @@ use crate::models::mammography_test_requests::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub status: String,
@@ -43,17 +42,17 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO mammography_test_requests (deleted_at, patient_id, clinician_id, \
-            status, site_name, setting, referral_date, requested_by_date, exam_type, \
+            "INSERT INTO mammography_test_requests (patient_id, clinician_id, status, \
+            site_name, setting, referral_date, requested_by_date, exam_type, \
             primary_indication, clinical_question, relevant_history, laterality, \
             symptom_lump, symptom_pain, symptom_nipple_discharge, symptom_skin_change, \
             symptom_nipple_inversion, previous_mammogram, previous_mammogram_date, \
             family_history_breast_cancer, breast_implants, pregnancy_or_lactating, \
-            hormone_replacement_therapy, urgency, supervising_consultant, requester_contact, \
-            notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, \
-            $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28) RETURNING *",
+            hormone_replacement_therapy, urgency, supervising_consultant, \
+            requester_contact, notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, \
+            $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, \
+            $26, $27) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)
@@ -88,19 +87,19 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE mammography_test_requests SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, status = $5, site_name = $6, setting = $7, referral_date = $8, \
-            requested_by_date = $9, exam_type = $10, primary_indication = $11, \
-            clinical_question = $12, relevant_history = $13, laterality = $14, symptom_lump = \
-            $15, symptom_pain = $16, symptom_nipple_discharge = $17, symptom_skin_change = \
-            $18, symptom_nipple_inversion = $19, previous_mammogram = $20, \
-            previous_mammogram_date = $21, family_history_breast_cancer = $22, \
-            breast_implants = $23, pregnancy_or_lactating = $24, hormone_replacement_therapy \
-            = $25, urgency = $26, supervising_consultant = $27, requester_contact = $28, \
-            notes = $29, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE mammography_test_requests SET patient_id = $2, clinician_id = $3, \
+            status = $4, site_name = $5, setting = $6, referral_date = $7, \
+            requested_by_date = $8, exam_type = $9, primary_indication = $10, \
+            clinical_question = $11, relevant_history = $12, laterality = $13, \
+            symptom_lump = $14, symptom_pain = $15, symptom_nipple_discharge = $16, \
+            symptom_skin_change = $17, symptom_nipple_inversion = $18, \
+            previous_mammogram = $19, previous_mammogram_date = $20, \
+            family_history_breast_cancer = $21, breast_implants = $22, \
+            pregnancy_or_lactating = $23, hormone_replacement_therapy = $24, urgency = \
+            $25, supervising_consultant = $26, requester_contact = $27, notes = $28, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)

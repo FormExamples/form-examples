@@ -9,7 +9,6 @@ use crate::models::meetings::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub organizer_id: Uuid,
     pub status: String,
     pub title: String,
@@ -39,15 +38,14 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO meetings (deleted_at, organizer_id, status, title, purpose, \
-            long_description, category, visibility, scheduled_start_at, scheduled_end_at, \
-            timezone, location, video_url, phone_number, dial_in_code, joining_instructions, \
-            calendar_uid, summary, actual_start_at, actual_end_at, overall_result, \
-            additional_notes, signed_by_name, signed_at) VALUES ($1, $2, $3, $4, $5, $6, $7, \
-            $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, \
-            $24) RETURNING *",
+            "INSERT INTO meetings (organizer_id, status, title, purpose, \
+            long_description, category, visibility, scheduled_start_at, \
+            scheduled_end_at, timezone, location, video_url, phone_number, dial_in_code, \
+            joining_instructions, calendar_uid, summary, actual_start_at, actual_end_at, \
+            overall_result, additional_notes, signed_by_name, signed_at) VALUES ($1, $2, \
+            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, \
+            $19, $20, $21, $22, $23) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.organizer_id)
         .bind(&self.status)
         .bind(&self.title)
@@ -78,16 +76,16 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE meetings SET deleted_at = $2, organizer_id = $3, status = $4, title = $5, \
-            purpose = $6, long_description = $7, category = $8, visibility = $9, \
-            scheduled_start_at = $10, scheduled_end_at = $11, timezone = $12, location = $13, \
-            video_url = $14, phone_number = $15, dial_in_code = $16, joining_instructions = \
-            $17, calendar_uid = $18, summary = $19, actual_start_at = $20, actual_end_at = \
-            $21, overall_result = $22, additional_notes = $23, signed_by_name = $24, \
-            signed_at = $25, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE meetings SET organizer_id = $2, status = $3, title = $4, purpose = \
+            $5, long_description = $6, category = $7, visibility = $8, \
+            scheduled_start_at = $9, scheduled_end_at = $10, timezone = $11, location = \
+            $12, video_url = $13, phone_number = $14, dial_in_code = $15, \
+            joining_instructions = $16, calendar_uid = $17, summary = $18, \
+            actual_start_at = $19, actual_end_at = $20, overall_result = $21, \
+            additional_notes = $22, signed_by_name = $23, signed_at = $24, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.organizer_id)
         .bind(&self.status)
         .bind(&self.title)

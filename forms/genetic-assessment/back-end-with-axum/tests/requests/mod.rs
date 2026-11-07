@@ -12,3 +12,4 @@ mod pagination;
 pub mod patient;
 mod problem;
 mod readiness;
+mod soft_delete;

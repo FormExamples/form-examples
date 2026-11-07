@@ -9,3 +9,4 @@ pub mod diabetes_podiatry_assessment_grade;
 pub mod diabetes_podiatry_assessment_grade_flag;
 pub mod diabetes_podiatry_assessment_grade_rule;
 pub mod patient;
+mod soft_delete;

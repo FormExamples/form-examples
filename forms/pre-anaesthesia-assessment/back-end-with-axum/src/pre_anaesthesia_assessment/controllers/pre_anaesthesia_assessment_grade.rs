@@ -9,7 +9,6 @@ use crate::models::pre_anaesthesia_assessment_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub pre_anaesthesia_assessment_id: Uuid,
     pub computed_asa_grade: String,
     pub final_asa_grade: String,
@@ -30,14 +29,13 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO pre_anaesthesia_assessment_grades (deleted_at, \
-            pre_anaesthesia_assessment_id, computed_asa_grade, final_asa_grade, \
+            "INSERT INTO pre_anaesthesia_assessment_grades \
+            (pre_anaesthesia_assessment_id, computed_asa_grade, final_asa_grade, \
             asa_emergency_suffix, override_reason, mallampati_class, rcri_score, \
-            stopbang_score, frailty_scale, composite_risk, recommendation, clinician_notes, \
-            signed_at, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, \
-            $13, $14, $15) RETURNING *",
+            stopbang_score, frailty_scale, composite_risk, recommendation, \
+            clinician_notes, signed_at, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, \
+            $8, $9, $10, $11, $12, $13, $14) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.pre_anaesthesia_assessment_id)
         .bind(&self.computed_asa_grade)
         .bind(&self.final_asa_grade)
@@ -59,15 +57,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE pre_anaesthesia_assessment_grades SET deleted_at = $2, \
-            pre_anaesthesia_assessment_id = $3, computed_asa_grade = $4, final_asa_grade = \
-            $5, asa_emergency_suffix = $6, override_reason = $7, mallampati_class = $8, \
-            rcri_score = $9, stopbang_score = $10, frailty_scale = $11, composite_risk = $12, \
-            recommendation = $13, clinician_notes = $14, signed_at = $15, graded_at = $16, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE pre_anaesthesia_assessment_grades SET pre_anaesthesia_assessment_id = \
+            $2, computed_asa_grade = $3, final_asa_grade = $4, asa_emergency_suffix = \
+            $5, override_reason = $6, mallampati_class = $7, rcri_score = $8, \
+            stopbang_score = $9, frailty_scale = $10, composite_risk = $11, \
+            recommendation = $12, clinician_notes = $13, signed_at = $14, graded_at = \
+            $15, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.pre_anaesthesia_assessment_id)
         .bind(&self.computed_asa_grade)
         .bind(&self.final_asa_grade)

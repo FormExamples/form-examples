@@ -9,7 +9,6 @@ use crate::models::grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub normalized_score: f64,
     pub satisfaction_category: String,
@@ -27,13 +26,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO grades (deleted_at, assessment_id, normalized_score, \
-            satisfaction_category, domain_access_score, domain_communication_score, \
-            domain_clinical_care_score, domain_staff_score, domain_environment_score, \
-            domain_discharge_score, domain_overall_score, graded_at) VALUES ($1, $2, $3, $4, \
-            $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *",
+            "INSERT INTO grades (assessment_id, normalized_score, satisfaction_category, \
+            domain_access_score, domain_communication_score, domain_clinical_care_score, \
+            domain_staff_score, domain_environment_score, domain_discharge_score, \
+            domain_overall_score, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, \
+            $10, $11) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.normalized_score)
         .bind(&self.satisfaction_category)
@@ -52,15 +50,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE grades SET deleted_at = $2, assessment_id = $3, normalized_score = $4, \
-            satisfaction_category = $5, domain_access_score = $6, domain_communication_score \
-            = $7, domain_clinical_care_score = $8, domain_staff_score = $9, \
-            domain_environment_score = $10, domain_discharge_score = $11, \
-            domain_overall_score = $12, graded_at = $13, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE grades SET assessment_id = $2, normalized_score = $3, \
+            satisfaction_category = $4, domain_access_score = $5, \
+            domain_communication_score = $6, domain_clinical_care_score = $7, \
+            domain_staff_score = $8, domain_environment_score = $9, \
+            domain_discharge_score = $10, domain_overall_score = $11, graded_at = $12, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.normalized_score)
         .bind(&self.satisfaction_category)

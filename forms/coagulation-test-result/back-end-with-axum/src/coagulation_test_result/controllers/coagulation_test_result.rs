@@ -9,7 +9,6 @@ use crate::models::coagulation_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -44,18 +43,18 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO coagulation_test_results (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO coagulation_test_results (patient_id, clinician_id, \
             originating_request_reference, report_status, performed_date, reported_date, \
             specimen_condition, clinical_history, on_anticoagulant, anticoagulant_agent, \
-            prothrombin_time_seconds, inr, activated_partial_thromboplastin_time_seconds, \
-            aptt_ratio, fibrinogen_g_l, d_dimer, thrombin_time_seconds, factor_assays, \
-            overall_result_status, critical_value_present, critical_value_detail, \
-            findings_narrative, comparison_with_previous, impression, reporting_category, \
-            recommended_follow_up, critical_result_communicated, reported_to) VALUES ($1, $2, \
-            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, \
-            $20, $21, $22, $23, $24, $25, $26, $27, $28, $29) RETURNING *",
+            prothrombin_time_seconds, inr, \
+            activated_partial_thromboplastin_time_seconds, aptt_ratio, fibrinogen_g_l, \
+            d_dimer, thrombin_time_seconds, factor_assays, overall_result_status, \
+            critical_value_present, critical_value_detail, findings_narrative, \
+            comparison_with_previous, impression, reporting_category, \
+            recommended_follow_up, critical_result_communicated, reported_to) VALUES \
+            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, \
+            $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -91,21 +90,20 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE coagulation_test_results SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, originating_request_reference = $5, report_status = $6, \
-            performed_date = $7, reported_date = $8, specimen_condition = $9, \
-            clinical_history = $10, on_anticoagulant = $11, anticoagulant_agent = $12, \
-            prothrombin_time_seconds = $13, inr = $14, \
-            activated_partial_thromboplastin_time_seconds = $15, aptt_ratio = $16, \
-            fibrinogen_g_l = $17, d_dimer = $18, thrombin_time_seconds = $19, factor_assays = \
-            $20, overall_result_status = $21, critical_value_present = $22, \
-            critical_value_detail = $23, findings_narrative = $24, comparison_with_previous = \
-            $25, impression = $26, reporting_category = $27, recommended_follow_up = $28, \
-            critical_result_communicated = $29, reported_to = $30, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE coagulation_test_results SET patient_id = $2, clinician_id = $3, \
+            originating_request_reference = $4, report_status = $5, performed_date = $6, \
+            reported_date = $7, specimen_condition = $8, clinical_history = $9, \
+            on_anticoagulant = $10, anticoagulant_agent = $11, prothrombin_time_seconds \
+            = $12, inr = $13, activated_partial_thromboplastin_time_seconds = $14, \
+            aptt_ratio = $15, fibrinogen_g_l = $16, d_dimer = $17, thrombin_time_seconds \
+            = $18, factor_assays = $19, overall_result_status = $20, \
+            critical_value_present = $21, critical_value_detail = $22, \
+            findings_narrative = $23, comparison_with_previous = $24, impression = $25, \
+            reporting_category = $26, recommended_follow_up = $27, \
+            critical_result_communicated = $28, reported_to = $29, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

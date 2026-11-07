@@ -9,7 +9,6 @@ use crate::models::corrected_calcium_calculators::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
     pub clinician_name: String,
@@ -29,13 +28,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO corrected_calcium_calculators (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO corrected_calcium_calculators (patient_id, clinician_id, \
             clinician_name, clinician_role, assessed_at, care_setting, sample_reference, \
             patient_identifier, age_band, sex, total_calcium_mmol_l, albumin_g_l, \
-            symptomatic) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) \
+            symptomatic) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) \
             RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.clinician_name)
@@ -56,14 +54,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE corrected_calcium_calculators SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, clinician_name = $5, clinician_role = $6, assessed_at = $7, \
-            care_setting = $8, sample_reference = $9, patient_identifier = $10, age_band = \
-            $11, sex = $12, total_calcium_mmol_l = $13, albumin_g_l = $14, symptomatic = $15, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE corrected_calcium_calculators SET patient_id = $2, clinician_id = $3, \
+            clinician_name = $4, clinician_role = $5, assessed_at = $6, care_setting = \
+            $7, sample_reference = $8, patient_identifier = $9, age_band = $10, sex = \
+            $11, total_calcium_mmol_l = $12, albumin_g_l = $13, symptomatic = $14, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.clinician_name)

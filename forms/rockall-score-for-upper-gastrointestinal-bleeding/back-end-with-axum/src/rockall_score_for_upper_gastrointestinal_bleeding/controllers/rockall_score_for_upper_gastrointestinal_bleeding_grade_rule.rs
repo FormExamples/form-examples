@@ -9,7 +9,6 @@ use crate::models::rockall_score_for_upper_gastrointestinal_bleeding_grade_rules
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub rockall_score_for_upper_gastrointestinal_bleeding_grade_id: Uuid,
     pub rule_id: String,
     pub parameter: String,
@@ -23,11 +22,10 @@ impl Params {
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
             "INSERT INTO rockall_score_for_upper_gastrointestinal_bleeding_grade_rules \
-            (deleted_at, rockall_score_for_upper_gastrointestinal_bleeding_grade_id, rule_id, \
-            parameter, points, category, description) VALUES ($1, $2, $3, $4, $5, $6, $7) \
+            (rockall_score_for_upper_gastrointestinal_bleeding_grade_id, rule_id, \
+            parameter, points, category, description) VALUES ($1, $2, $3, $4, $5, $6) \
             RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.rockall_score_for_upper_gastrointestinal_bleeding_grade_id)
         .bind(&self.rule_id)
         .bind(&self.parameter)
@@ -42,12 +40,11 @@ impl Params {
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
             "UPDATE rockall_score_for_upper_gastrointestinal_bleeding_grade_rules SET \
-            deleted_at = $2, rockall_score_for_upper_gastrointestinal_bleeding_grade_id = $3, \
-            rule_id = $4, parameter = $5, points = $6, category = $7, description = $8, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            rockall_score_for_upper_gastrointestinal_bleeding_grade_id = $2, rule_id = \
+            $3, parameter = $4, points = $5, category = $6, description = $7, updated_at \
+            = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.rockall_score_for_upper_gastrointestinal_bleeding_grade_id)
         .bind(&self.rule_id)
         .bind(&self.parameter)

@@ -13,3 +13,4 @@ pub mod medication;
 pub mod patient;
 pub mod patient_allergy;
 pub mod patient_medication;
+mod soft_delete;

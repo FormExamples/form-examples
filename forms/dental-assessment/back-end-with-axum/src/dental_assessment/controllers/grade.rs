@@ -9,7 +9,6 @@ use crate::models::grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub dmft_score: i32,
     pub decayed_count: i32,
@@ -24,11 +23,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO grades (deleted_at, assessment_id, dmft_score, decayed_count, \
-            missing_count, filled_count, severity_level, periodontal_risk, graded_at) VALUES \
-            ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
+            "INSERT INTO grades (assessment_id, dmft_score, decayed_count, missing_count, \
+            filled_count, severity_level, periodontal_risk, graded_at) VALUES ($1, $2, \
+            $3, $4, $5, $6, $7, $8) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.dmft_score)
         .bind(self.decayed_count)
@@ -44,13 +42,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE grades SET deleted_at = $2, assessment_id = $3, dmft_score = $4, \
-            decayed_count = $5, missing_count = $6, filled_count = $7, severity_level = $8, \
-            periodontal_risk = $9, graded_at = $10, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE grades SET assessment_id = $2, dmft_score = $3, decayed_count = $4, \
+            missing_count = $5, filled_count = $6, severity_level = $7, periodontal_risk \
+            = $8, graded_at = $9, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.dmft_score)
         .bind(self.decayed_count)

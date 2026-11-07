@@ -9,7 +9,6 @@ use crate::models::assessment_range_of_motions::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub joint_assessed: String,
     pub side_assessed: String,
@@ -21,11 +20,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO assessment_range_of_motions (deleted_at, assessment_id, \
-            joint_assessed, side_assessed, overall_rom_status, range_of_motion_notes) VALUES \
-            ($1, $2, $3, $4, $5, $6) RETURNING *",
+            "INSERT INTO assessment_range_of_motions (assessment_id, joint_assessed, \
+            side_assessed, overall_rom_status, range_of_motion_notes) VALUES ($1, $2, \
+            $3, $4, $5) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.joint_assessed)
         .bind(&self.side_assessed)
@@ -38,12 +36,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE assessment_range_of_motions SET deleted_at = $2, assessment_id = $3, \
-            joint_assessed = $4, side_assessed = $5, overall_rom_status = $6, \
-            range_of_motion_notes = $7, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE assessment_range_of_motions SET assessment_id = $2, joint_assessed = \
+            $3, side_assessed = $4, overall_rom_status = $5, range_of_motion_notes = $6, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.joint_assessed)
         .bind(&self.side_assessed)

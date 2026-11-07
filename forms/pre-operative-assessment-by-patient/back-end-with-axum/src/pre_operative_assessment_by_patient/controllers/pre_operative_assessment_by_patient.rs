@@ -9,7 +9,6 @@ use crate::models::pre_operative_assessment_by_patients::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub weight: Option<f64>,
     pub height: Option<f64>,
@@ -149,50 +148,52 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO pre_operative_assessment_by_patients (deleted_at, patient_id, weight, \
+            "INSERT INTO pre_operative_assessment_by_patients (patient_id, weight, \
             height, bmi, planned_procedure, procedure_urgency, status, hypertension, \
             hypertension_controlled, ischemic_heart_disease, ihd_details, heart_failure, \
             heart_failure_nyha, valvular_disease, valvular_details, arrhythmia, \
-            arrhythmia_type, pacemaker, recent_mi, recent_mi_weeks, asthma, asthma_frequency, \
-            copd, copd_severity, osa, osa_cpap, smoking, smoking_pack_years, recent_urti, \
-            ckd, ckd_stage, dialysis, dialysis_type, liver_disease, cirrhosis, \
-            child_pugh_score, hepatitis, hepatitis_type, diabetes, diabetes_control, \
-            diabetes_on_insulin, thyroid_disease, thyroid_type, adrenal_insufficiency, \
-            stroke_or_tia, stroke_details, epilepsy, epilepsy_controlled, \
-            neuromuscular_disease, neuromuscular_details, raised_icp, bleeding_disorder, \
-            bleeding_details, on_anticoagulants, anticoagulant_type, sickle_cell_disease, \
-            sickle_cell_trait, anaemia, rheumatoid_arthritis, cervical_spine_issues, \
-            limited_neck_movement, limited_mouth_opening, dental_issues, dental_details, \
-            previous_difficult_airway, mallampati_score, gord, hiatus_hernia, nausea, name, \
-            dose, frequency, sort_order, allergen, reaction, severity, allergy_sort_order, \
-            previous_anaesthesia, anaesthesia_problems, anaesthesia_problem_details, \
-            family_mh_history, family_mh_details, ponv, alcohol, alcohol_units_per_week, \
-            recreational_drugs, drug_details, exercise_tolerance, estimated_mets, \
-            mobility_aids, recent_decline, possibly_pregnant, pregnancy_confirmed, \
-            gestation_weeks, cancer_history, cancer_history_details, mrsa_history, \
+            arrhythmia_type, pacemaker, recent_mi, recent_mi_weeks, asthma, \
+            asthma_frequency, copd, copd_severity, osa, osa_cpap, smoking, \
+            smoking_pack_years, recent_urti, ckd, ckd_stage, dialysis, dialysis_type, \
+            liver_disease, cirrhosis, child_pugh_score, hepatitis, hepatitis_type, \
+            diabetes, diabetes_control, diabetes_on_insulin, thyroid_disease, \
+            thyroid_type, adrenal_insufficiency, stroke_or_tia, stroke_details, \
+            epilepsy, epilepsy_controlled, neuromuscular_disease, neuromuscular_details, \
+            raised_icp, bleeding_disorder, bleeding_details, on_anticoagulants, \
+            anticoagulant_type, sickle_cell_disease, sickle_cell_trait, anaemia, \
+            rheumatoid_arthritis, cervical_spine_issues, limited_neck_movement, \
+            limited_mouth_opening, dental_issues, dental_details, \
+            previous_difficult_airway, mallampati_score, gord, hiatus_hernia, nausea, \
+            name, dose, frequency, sort_order, allergen, reaction, severity, \
+            allergy_sort_order, previous_anaesthesia, anaesthesia_problems, \
+            anaesthesia_problem_details, family_mh_history, family_mh_details, ponv, \
+            alcohol, alcohol_units_per_week, recreational_drugs, drug_details, \
+            exercise_tolerance, estimated_mets, mobility_aids, recent_decline, \
+            possibly_pregnant, pregnancy_confirmed, gestation_weeks, cancer_history, \
+            cancer_history_details, mrsa_history, \
             recent_hospital_or_care_home_admission, palpitations_or_blackouts, \
             heart_or_artery_surgery, swollen_ankles, snoring, snoring_loud, \
             collar_size_inches, daytime_sleepiness, observed_apnoea_episodes, \
             urinary_symptoms, urinary_catheter_history, prostate_problems, \
             personal_vte_history, family_vte_history, blood_transfusion_history, \
             joint_or_arthritis_problems, back_or_neck_problems, skin_conditions, \
-            pressure_sore_risk, bowel_problems, food_intolerances, food_intolerances_details, \
-            blood_donor, body_piercings, hearing_problems, vision_problems, balance_issues, \
-            contraceptive_or_hrt_use, last_menstrual_period, \
-            head_injury_requiring_hospitalisation, memory_concerns, dementia_diagnosis, \
-            depression_or_anxiety_history, depression_anxiety_impacts_daily_life, \
-            depression_anxiety_seen_doctor, learning_difficulties) VALUES ($1, $2, $3, $4, \
-            $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, \
-            $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, \
-            $38, $39, $40, $41, $42, $43, $44, $45, $46, $47, $48, $49, $50, $51, $52, $53, \
-            $54, $55, $56, $57, $58, $59, $60, $61, $62, $63, $64, $65, $66, $67, $68, $69, \
-            $70, $71, $72, $73, $74, $75, $76, $77, $78, $79, $80, $81, $82, $83, $84, $85, \
-            $86, $87, $88, $89, $90, $91, $92, $93, $94, $95, $96, $97, $98, $99, $100, $101, \
-            $102, $103, $104, $105, $106, $107, $108, $109, $110, $111, $112, $113, $114, \
-            $115, $116, $117, $118, $119, $120, $121, $122, $123, $124, $125, $126, $127, \
-            $128, $129, $130, $131, $132, $133, $134) RETURNING *",
+            pressure_sore_risk, bowel_problems, food_intolerances, \
+            food_intolerances_details, blood_donor, body_piercings, hearing_problems, \
+            vision_problems, balance_issues, contraceptive_or_hrt_use, \
+            last_menstrual_period, head_injury_requiring_hospitalisation, \
+            memory_concerns, dementia_diagnosis, depression_or_anxiety_history, \
+            depression_anxiety_impacts_daily_life, depression_anxiety_seen_doctor, \
+            learning_difficulties) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, \
+            $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, \
+            $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, \
+            $42, $43, $44, $45, $46, $47, $48, $49, $50, $51, $52, $53, $54, $55, $56, \
+            $57, $58, $59, $60, $61, $62, $63, $64, $65, $66, $67, $68, $69, $70, $71, \
+            $72, $73, $74, $75, $76, $77, $78, $79, $80, $81, $82, $83, $84, $85, $86, \
+            $87, $88, $89, $90, $91, $92, $93, $94, $95, $96, $97, $98, $99, $100, $101, \
+            $102, $103, $104, $105, $106, $107, $108, $109, $110, $111, $112, $113, \
+            $114, $115, $116, $117, $118, $119, $120, $121, $122, $123, $124, $125, \
+            $126, $127, $128, $129, $130, $131, $132, $133) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.weight)
         .bind(self.height)
@@ -333,53 +334,55 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE pre_operative_assessment_by_patients SET deleted_at = $2, patient_id = $3, \
-            weight = $4, height = $5, bmi = $6, planned_procedure = $7, procedure_urgency = \
-            $8, status = $9, hypertension = $10, hypertension_controlled = $11, \
-            ischemic_heart_disease = $12, ihd_details = $13, heart_failure = $14, \
-            heart_failure_nyha = $15, valvular_disease = $16, valvular_details = $17, \
-            arrhythmia = $18, arrhythmia_type = $19, pacemaker = $20, recent_mi = $21, \
-            recent_mi_weeks = $22, asthma = $23, asthma_frequency = $24, copd = $25, \
-            copd_severity = $26, osa = $27, osa_cpap = $28, smoking = $29, smoking_pack_years \
-            = $30, recent_urti = $31, ckd = $32, ckd_stage = $33, dialysis = $34, \
-            dialysis_type = $35, liver_disease = $36, cirrhosis = $37, child_pugh_score = \
-            $38, hepatitis = $39, hepatitis_type = $40, diabetes = $41, diabetes_control = \
-            $42, diabetes_on_insulin = $43, thyroid_disease = $44, thyroid_type = $45, \
-            adrenal_insufficiency = $46, stroke_or_tia = $47, stroke_details = $48, epilepsy \
-            = $49, epilepsy_controlled = $50, neuromuscular_disease = $51, \
-            neuromuscular_details = $52, raised_icp = $53, bleeding_disorder = $54, \
-            bleeding_details = $55, on_anticoagulants = $56, anticoagulant_type = $57, \
-            sickle_cell_disease = $58, sickle_cell_trait = $59, anaemia = $60, \
-            rheumatoid_arthritis = $61, cervical_spine_issues = $62, limited_neck_movement = \
-            $63, limited_mouth_opening = $64, dental_issues = $65, dental_details = $66, \
-            previous_difficult_airway = $67, mallampati_score = $68, gord = $69, \
-            hiatus_hernia = $70, nausea = $71, name = $72, dose = $73, frequency = $74, \
-            sort_order = $75, allergen = $76, reaction = $77, severity = $78, \
-            allergy_sort_order = $79, previous_anaesthesia = $80, anaesthesia_problems = $81, \
-            anaesthesia_problem_details = $82, family_mh_history = $83, family_mh_details = \
-            $84, ponv = $85, alcohol = $86, alcohol_units_per_week = $87, recreational_drugs \
-            = $88, drug_details = $89, exercise_tolerance = $90, estimated_mets = $91, \
-            mobility_aids = $92, recent_decline = $93, possibly_pregnant = $94, \
-            pregnancy_confirmed = $95, gestation_weeks = $96, cancer_history = $97, \
-            cancer_history_details = $98, mrsa_history = $99, \
-            recent_hospital_or_care_home_admission = $100, palpitations_or_blackouts = $101, \
-            heart_or_artery_surgery = $102, swollen_ankles = $103, snoring = $104, \
-            snoring_loud = $105, collar_size_inches = $106, daytime_sleepiness = $107, \
-            observed_apnoea_episodes = $108, urinary_symptoms = $109, \
-            urinary_catheter_history = $110, prostate_problems = $111, personal_vte_history = \
-            $112, family_vte_history = $113, blood_transfusion_history = $114, \
-            joint_or_arthritis_problems = $115, back_or_neck_problems = $116, skin_conditions \
-            = $117, pressure_sore_risk = $118, bowel_problems = $119, food_intolerances = \
-            $120, food_intolerances_details = $121, blood_donor = $122, body_piercings = \
-            $123, hearing_problems = $124, vision_problems = $125, balance_issues = $126, \
-            contraceptive_or_hrt_use = $127, last_menstrual_period = $128, \
-            head_injury_requiring_hospitalisation = $129, memory_concerns = $130, \
-            dementia_diagnosis = $131, depression_or_anxiety_history = $132, \
-            depression_anxiety_impacts_daily_life = $133, depression_anxiety_seen_doctor = \
-            $134, learning_difficulties = $135, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE pre_operative_assessment_by_patients SET patient_id = $2, weight = \
+            $3, height = $4, bmi = $5, planned_procedure = $6, procedure_urgency = $7, \
+            status = $8, hypertension = $9, hypertension_controlled = $10, \
+            ischemic_heart_disease = $11, ihd_details = $12, heart_failure = $13, \
+            heart_failure_nyha = $14, valvular_disease = $15, valvular_details = $16, \
+            arrhythmia = $17, arrhythmia_type = $18, pacemaker = $19, recent_mi = $20, \
+            recent_mi_weeks = $21, asthma = $22, asthma_frequency = $23, copd = $24, \
+            copd_severity = $25, osa = $26, osa_cpap = $27, smoking = $28, \
+            smoking_pack_years = $29, recent_urti = $30, ckd = $31, ckd_stage = $32, \
+            dialysis = $33, dialysis_type = $34, liver_disease = $35, cirrhosis = $36, \
+            child_pugh_score = $37, hepatitis = $38, hepatitis_type = $39, diabetes = \
+            $40, diabetes_control = $41, diabetes_on_insulin = $42, thyroid_disease = \
+            $43, thyroid_type = $44, adrenal_insufficiency = $45, stroke_or_tia = $46, \
+            stroke_details = $47, epilepsy = $48, epilepsy_controlled = $49, \
+            neuromuscular_disease = $50, neuromuscular_details = $51, raised_icp = $52, \
+            bleeding_disorder = $53, bleeding_details = $54, on_anticoagulants = $55, \
+            anticoagulant_type = $56, sickle_cell_disease = $57, sickle_cell_trait = \
+            $58, anaemia = $59, rheumatoid_arthritis = $60, cervical_spine_issues = $61, \
+            limited_neck_movement = $62, limited_mouth_opening = $63, dental_issues = \
+            $64, dental_details = $65, previous_difficult_airway = $66, mallampati_score \
+            = $67, gord = $68, hiatus_hernia = $69, nausea = $70, name = $71, dose = \
+            $72, frequency = $73, sort_order = $74, allergen = $75, reaction = $76, \
+            severity = $77, allergy_sort_order = $78, previous_anaesthesia = $79, \
+            anaesthesia_problems = $80, anaesthesia_problem_details = $81, \
+            family_mh_history = $82, family_mh_details = $83, ponv = $84, alcohol = $85, \
+            alcohol_units_per_week = $86, recreational_drugs = $87, drug_details = $88, \
+            exercise_tolerance = $89, estimated_mets = $90, mobility_aids = $91, \
+            recent_decline = $92, possibly_pregnant = $93, pregnancy_confirmed = $94, \
+            gestation_weeks = $95, cancer_history = $96, cancer_history_details = $97, \
+            mrsa_history = $98, recent_hospital_or_care_home_admission = $99, \
+            palpitations_or_blackouts = $100, heart_or_artery_surgery = $101, \
+            swollen_ankles = $102, snoring = $103, snoring_loud = $104, \
+            collar_size_inches = $105, daytime_sleepiness = $106, \
+            observed_apnoea_episodes = $107, urinary_symptoms = $108, \
+            urinary_catheter_history = $109, prostate_problems = $110, \
+            personal_vte_history = $111, family_vte_history = $112, \
+            blood_transfusion_history = $113, joint_or_arthritis_problems = $114, \
+            back_or_neck_problems = $115, skin_conditions = $116, pressure_sore_risk = \
+            $117, bowel_problems = $118, food_intolerances = $119, \
+            food_intolerances_details = $120, blood_donor = $121, body_piercings = $122, \
+            hearing_problems = $123, vision_problems = $124, balance_issues = $125, \
+            contraceptive_or_hrt_use = $126, last_menstrual_period = $127, \
+            head_injury_requiring_hospitalisation = $128, memory_concerns = $129, \
+            dementia_diagnosis = $130, depression_or_anxiety_history = $131, \
+            depression_anxiety_impacts_daily_life = $132, depression_anxiety_seen_doctor \
+            = $133, learning_difficulties = $134, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.weight)
         .bind(self.height)

@@ -9,7 +9,6 @@ use crate::models::grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub overall_highest_ukmec_category: i32,
     pub ukmec_cocp: Option<i32>,
@@ -30,13 +29,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO grades (deleted_at, assessment_id, overall_highest_ukmec_category, \
-            ukmec_cocp, ukmec_pop, ukmec_patch, ukmec_ring, ukmec_injection, ukmec_implant, \
-            ukmec_cu_iud, ukmec_lng_ius, ukmec_condom_male, ukmec_condom_female, \
-            ukmec_diaphragm, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, \
-            $12, $13, $14, $15) RETURNING *",
+            "INSERT INTO grades (assessment_id, overall_highest_ukmec_category, \
+            ukmec_cocp, ukmec_pop, ukmec_patch, ukmec_ring, ukmec_injection, \
+            ukmec_implant, ukmec_cu_iud, ukmec_lng_ius, ukmec_condom_male, \
+            ukmec_condom_female, ukmec_diaphragm, graded_at) VALUES ($1, $2, $3, $4, $5, \
+            $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.overall_highest_ukmec_category)
         .bind(self.ukmec_cocp)
@@ -58,15 +56,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE grades SET deleted_at = $2, assessment_id = $3, \
-            overall_highest_ukmec_category = $4, ukmec_cocp = $5, ukmec_pop = $6, ukmec_patch \
-            = $7, ukmec_ring = $8, ukmec_injection = $9, ukmec_implant = $10, ukmec_cu_iud = \
-            $11, ukmec_lng_ius = $12, ukmec_condom_male = $13, ukmec_condom_female = $14, \
-            ukmec_diaphragm = $15, graded_at = $16, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE grades SET assessment_id = $2, overall_highest_ukmec_category = $3, \
+            ukmec_cocp = $4, ukmec_pop = $5, ukmec_patch = $6, ukmec_ring = $7, \
+            ukmec_injection = $8, ukmec_implant = $9, ukmec_cu_iud = $10, ukmec_lng_ius \
+            = $11, ukmec_condom_male = $12, ukmec_condom_female = $13, ukmec_diaphragm = \
+            $14, graded_at = $15, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.overall_highest_ukmec_category)
         .bind(self.ukmec_cocp)

@@ -79,14 +79,16 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE glasgow_coma_scales SET patient_id = $2, clinician_id = $3, assessor_name \
-            = $4, assessor_role = $5, assessed_at = $6, setting = $7, reason = $8, intubated \
-            = $9, sedated = $10, paralysed = $11, eye_response = $12, eye_not_testable_reason \
-            = $13, verbal_response = $14, verbal_not_testable_reason = $15, motor_response = \
-            $16, motor_not_testable_reason = $17, left_pupil_reactivity = $18, \
-            right_pupil_reactivity = $19, left_pupil_size_mm = $20, right_pupil_size_mm = \
-            $21, previous_total = $22, previous_motor_score = $23, previous_assessed_at = \
-            $24, clinical_note = $25, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE glasgow_coma_scales SET patient_id = $2, clinician_id = $3, \
+            assessor_name = $4, assessor_role = $5, assessed_at = $6, setting = $7, \
+            reason = $8, intubated = $9, sedated = $10, paralysed = $11, eye_response = \
+            $12, eye_not_testable_reason = $13, verbal_response = $14, \
+            verbal_not_testable_reason = $15, motor_response = $16, \
+            motor_not_testable_reason = $17, left_pupil_reactivity = $18, \
+            right_pupil_reactivity = $19, left_pupil_size_mm = $20, right_pupil_size_mm \
+            = $21, previous_total = $22, previous_motor_score = $23, \
+            previous_assessed_at = $24, clinical_note = $25, updated_at = now() WHERE id \
+            = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

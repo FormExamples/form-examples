@@ -9,7 +9,6 @@ use crate::models::assessment_cancer_histories::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub family_cancer_history: String,
     pub multiple_family_cancers: String,
@@ -26,13 +25,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO assessment_cancer_histories (deleted_at, assessment_id, \
+            "INSERT INTO assessment_cancer_histories (assessment_id, \
             family_cancer_history, multiple_family_cancers, early_onset_cancer, \
-            bilateral_cancer, rare_tumour_types, rare_tumour_details, known_cancer_syndrome, \
-            cancer_syndrome_details, cancer_risk_score) VALUES ($1, $2, $3, $4, $5, $6, $7, \
-            $8, $9, $10, $11) RETURNING *",
+            bilateral_cancer, rare_tumour_types, rare_tumour_details, \
+            known_cancer_syndrome, cancer_syndrome_details, cancer_risk_score) VALUES \
+            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.family_cancer_history)
         .bind(&self.multiple_family_cancers)
@@ -50,14 +48,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE assessment_cancer_histories SET deleted_at = $2, assessment_id = $3, \
-            family_cancer_history = $4, multiple_family_cancers = $5, early_onset_cancer = \
-            $6, bilateral_cancer = $7, rare_tumour_types = $8, rare_tumour_details = $9, \
-            known_cancer_syndrome = $10, cancer_syndrome_details = $11, cancer_risk_score = \
-            $12, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE assessment_cancer_histories SET assessment_id = $2, \
+            family_cancer_history = $3, multiple_family_cancers = $4, early_onset_cancer \
+            = $5, bilateral_cancer = $6, rare_tumour_types = $7, rare_tumour_details = \
+            $8, known_cancer_syndrome = $9, cancer_syndrome_details = $10, \
+            cancer_risk_score = $11, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.family_cancer_history)
         .bind(&self.multiple_family_cancers)

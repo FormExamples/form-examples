@@ -12,8 +12,6 @@ use crate::models::uk_nhs_digital_technology_assessment_criteria::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    /// Deleted at.
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Supplier ID.
     pub supplier_id: Uuid,
     /// Product ID.
@@ -146,15 +144,16 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO uk_nhs_digital_technology_assessment_criteria (deleted_at, \
-            supplier_id, product_id, assessor_id, status, assessment_date, review_due_date, \
+            "INSERT INTO uk_nhs_digital_technology_assessment_criteria (supplier_id, \
+            product_id, assessor_id, status, assessment_date, review_due_date, \
             dtac_version, commissioning_organisation, a1_company_registered_in_uk, \
             a2_ico_registration_current, a3_senior_responsible_owner_named, \
             a4_incident_contact_published, section_a_notes, \
             b1_intended_use_and_users_defined, b2_evidence_of_benefit, \
-            b3_outcome_measures_defined, b4_cost_effectiveness_evidence, section_b_notes, \
-            c1_clinical_safety_officer_named, c2_clinical_risk_management_plan, \
-            c3_hazard_log_maintained, c4_clinical_safety_case_report, \
+            b3_outcome_measures_defined, b4_cost_effectiveness_evidence, \
+            section_b_notes, c1_clinical_safety_officer_named, \
+            c2_clinical_risk_management_plan, c3_hazard_log_maintained, \
+            c4_clinical_safety_case_report, \
             c5_clinical_safety_officer_registration_verified, \
             c6_medical_device_registration_if_applicable, c7_post_market_surveillance, \
             section_c_notes, d1_data_protection_officer_or_lead, d2_dpia_completed, \
@@ -164,22 +163,23 @@ impl Params {
             d9_data_subject_rights_supported, section_d_notes, \
             e1_cyber_essentials_plus_or_iso27001, e2_penetration_test_within_12_months, \
             e3_vulnerability_management, e4_encryption_in_transit_and_at_rest, \
-            e5_access_control_and_mfa, e6_audit_logging, e7_business_continuity_and_backup, \
-            e8_secure_development_lifecycle, e9_incident_response_and_breach_notification, \
-            section_e_notes, f1_open_standards_apis, f2_fhir_or_nhs_standard_apis, \
+            e5_access_control_and_mfa, e6_audit_logging, \
+            e7_business_continuity_and_backup, e8_secure_development_lifecycle, \
+            e9_incident_response_and_breach_notification, section_e_notes, \
+            f1_open_standards_apis, f2_fhir_or_nhs_standard_apis, \
             f3_nhs_number_supported, f4_clinical_terminology_standards, \
             f5_nhs_login_integration, f6_nhs_systems_integration_documented, \
-            f7_data_portability_export, section_f_notes, g1_user_research_with_target_users, \
-            g2_wcag_aa_conformance, g3_accessibility_statement_published, \
-            g4_nhs_service_manual_followed, g5_assistive_technology_tested, \
-            g6_digital_inclusion_considered, g7_user_feedback_mechanism, section_g_notes, \
-            assessor_notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, \
-            $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, \
-            $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42, $43, $44, $45, \
-            $46, $47, $48, $49, $50, $51, $52, $53, $54, $55, $56, $57, $58, $59, $60, $61, \
-            $62, $63, $64) RETURNING *",
+            f7_data_portability_export, section_f_notes, \
+            g1_user_research_with_target_users, g2_wcag_aa_conformance, \
+            g3_accessibility_statement_published, g4_nhs_service_manual_followed, \
+            g5_assistive_technology_tested, g6_digital_inclusion_considered, \
+            g7_user_feedback_mechanism, section_g_notes, assessor_notes) VALUES ($1, $2, \
+            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, \
+            $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, \
+            $34, $35, $36, $37, $38, $39, $40, $41, $42, $43, $44, $45, $46, $47, $48, \
+            $49, $50, $51, $52, $53, $54, $55, $56, $57, $58, $59, $60, $61, $62, $63) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.supplier_id)
         .bind(self.product_id)
         .bind(self.assessor_id)
@@ -253,41 +253,41 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE uk_nhs_digital_technology_assessment_criteria SET deleted_at = $2, \
-            supplier_id = $3, product_id = $4, assessor_id = $5, status = $6, assessment_date \
-            = $7, review_due_date = $8, dtac_version = $9, commissioning_organisation = $10, \
-            a1_company_registered_in_uk = $11, a2_ico_registration_current = $12, \
-            a3_senior_responsible_owner_named = $13, a4_incident_contact_published = $14, \
-            section_a_notes = $15, b1_intended_use_and_users_defined = $16, \
-            b2_evidence_of_benefit = $17, b3_outcome_measures_defined = $18, \
-            b4_cost_effectiveness_evidence = $19, section_b_notes = $20, \
-            c1_clinical_safety_officer_named = $21, c2_clinical_risk_management_plan = $22, \
-            c3_hazard_log_maintained = $23, c4_clinical_safety_case_report = $24, \
-            c5_clinical_safety_officer_registration_verified = $25, \
-            c6_medical_device_registration_if_applicable = $26, c7_post_market_surveillance = \
-            $27, section_c_notes = $28, d1_data_protection_officer_or_lead = $29, \
-            d2_dpia_completed = $30, d3_dspt_standards_met = $31, d4_lawful_basis_documented \
-            = $32, d5_controller_processor_roles_defined = $33, \
-            d6_data_location_and_transfers = $34, d7_retention_and_deletion_policy = $35, \
-            d8_privacy_notice_published = $36, d9_data_subject_rights_supported = $37, \
-            section_d_notes = $38, e1_cyber_essentials_plus_or_iso27001 = $39, \
-            e2_penetration_test_within_12_months = $40, e3_vulnerability_management = $41, \
-            e4_encryption_in_transit_and_at_rest = $42, e5_access_control_and_mfa = $43, \
-            e6_audit_logging = $44, e7_business_continuity_and_backup = $45, \
-            e8_secure_development_lifecycle = $46, \
-            e9_incident_response_and_breach_notification = $47, section_e_notes = $48, \
-            f1_open_standards_apis = $49, f2_fhir_or_nhs_standard_apis = $50, \
-            f3_nhs_number_supported = $51, f4_clinical_terminology_standards = $52, \
-            f5_nhs_login_integration = $53, f6_nhs_systems_integration_documented = $54, \
-            f7_data_portability_export = $55, section_f_notes = $56, \
-            g1_user_research_with_target_users = $57, g2_wcag_aa_conformance = $58, \
-            g3_accessibility_statement_published = $59, g4_nhs_service_manual_followed = $60, \
-            g5_assistive_technology_tested = $61, g6_digital_inclusion_considered = $62, \
-            g7_user_feedback_mechanism = $63, section_g_notes = $64, assessor_notes = $65, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE uk_nhs_digital_technology_assessment_criteria SET supplier_id = $2, \
+            product_id = $3, assessor_id = $4, status = $5, assessment_date = $6, \
+            review_due_date = $7, dtac_version = $8, commissioning_organisation = $9, \
+            a1_company_registered_in_uk = $10, a2_ico_registration_current = $11, \
+            a3_senior_responsible_owner_named = $12, a4_incident_contact_published = \
+            $13, section_a_notes = $14, b1_intended_use_and_users_defined = $15, \
+            b2_evidence_of_benefit = $16, b3_outcome_measures_defined = $17, \
+            b4_cost_effectiveness_evidence = $18, section_b_notes = $19, \
+            c1_clinical_safety_officer_named = $20, c2_clinical_risk_management_plan = \
+            $21, c3_hazard_log_maintained = $22, c4_clinical_safety_case_report = $23, \
+            c5_clinical_safety_officer_registration_verified = $24, \
+            c6_medical_device_registration_if_applicable = $25, \
+            c7_post_market_surveillance = $26, section_c_notes = $27, \
+            d1_data_protection_officer_or_lead = $28, d2_dpia_completed = $29, \
+            d3_dspt_standards_met = $30, d4_lawful_basis_documented = $31, \
+            d5_controller_processor_roles_defined = $32, d6_data_location_and_transfers \
+            = $33, d7_retention_and_deletion_policy = $34, d8_privacy_notice_published = \
+            $35, d9_data_subject_rights_supported = $36, section_d_notes = $37, \
+            e1_cyber_essentials_plus_or_iso27001 = $38, \
+            e2_penetration_test_within_12_months = $39, e3_vulnerability_management = \
+            $40, e4_encryption_in_transit_and_at_rest = $41, e5_access_control_and_mfa = \
+            $42, e6_audit_logging = $43, e7_business_continuity_and_backup = $44, \
+            e8_secure_development_lifecycle = $45, \
+            e9_incident_response_and_breach_notification = $46, section_e_notes = $47, \
+            f1_open_standards_apis = $48, f2_fhir_or_nhs_standard_apis = $49, \
+            f3_nhs_number_supported = $50, f4_clinical_terminology_standards = $51, \
+            f5_nhs_login_integration = $52, f6_nhs_systems_integration_documented = $53, \
+            f7_data_portability_export = $54, section_f_notes = $55, \
+            g1_user_research_with_target_users = $56, g2_wcag_aa_conformance = $57, \
+            g3_accessibility_statement_published = $58, g4_nhs_service_manual_followed = \
+            $59, g5_assistive_technology_tested = $60, g6_digital_inclusion_considered = \
+            $61, g7_user_feedback_mechanism = $62, section_g_notes = $63, assessor_notes \
+            = $64, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.supplier_id)
         .bind(self.product_id)
         .bind(self.assessor_id)

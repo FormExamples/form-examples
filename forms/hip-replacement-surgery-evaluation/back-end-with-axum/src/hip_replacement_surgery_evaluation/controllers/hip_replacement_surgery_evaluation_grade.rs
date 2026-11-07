@@ -9,7 +9,6 @@ use crate::models::hip_replacement_surgery_evaluation_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub hip_replacement_surgery_evaluation_id: Uuid,
     pub ohs_total: Option<i32>,
     pub ohs_category: String,
@@ -26,13 +25,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO hip_replacement_surgery_evaluation_grades (deleted_at, \
-            hip_replacement_surgery_evaluation_id, ohs_total, ohs_category, \
+            "INSERT INTO hip_replacement_surgery_evaluation_grades \
+            (hip_replacement_surgery_evaluation_id, ohs_total, ohs_category, \
             computed_candidacy, final_candidacy, override_reason, clinician_notes, \
-            signed_by_name, signed_at, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, \
-            $10, $11) RETURNING *",
+            signed_by_name, signed_at, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, \
+            $8, $9, $10) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.hip_replacement_surgery_evaluation_id)
         .bind(self.ohs_total)
         .bind(&self.ohs_category)
@@ -50,14 +48,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE hip_replacement_surgery_evaluation_grades SET deleted_at = $2, \
-            hip_replacement_surgery_evaluation_id = $3, ohs_total = $4, ohs_category = $5, \
-            computed_candidacy = $6, final_candidacy = $7, override_reason = $8, \
-            clinician_notes = $9, signed_by_name = $10, signed_at = $11, graded_at = $12, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE hip_replacement_surgery_evaluation_grades SET \
+            hip_replacement_surgery_evaluation_id = $2, ohs_total = $3, ohs_category = \
+            $4, computed_candidacy = $5, final_candidacy = $6, override_reason = $7, \
+            clinician_notes = $8, signed_by_name = $9, signed_at = $10, graded_at = $11, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.hip_replacement_surgery_evaluation_id)
         .bind(self.ohs_total)
         .bind(&self.ohs_category)

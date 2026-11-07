@@ -21,3 +21,4 @@ pub mod lpa_validity_additional_flag;
 pub mod lpa_validity_fired_rule;
 pub mod person_to_notify;
 pub mod replacement_attorney;
+mod soft_delete;

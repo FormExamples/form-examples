@@ -19,3 +19,4 @@ mod lpa_validation_results_route;
 mod lpa_validation_rules_route;
 mod lpa_witnesses_route;
 pub mod person;
+mod soft_delete;

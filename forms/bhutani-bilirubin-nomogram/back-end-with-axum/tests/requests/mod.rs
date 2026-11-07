@@ -9,3 +9,4 @@ pub mod bhutani_bilirubin_nomogram_grade_flag;
 pub mod bhutani_bilirubin_nomogram_grade_rule;
 pub mod clinician;
 pub mod patient;
+mod soft_delete;

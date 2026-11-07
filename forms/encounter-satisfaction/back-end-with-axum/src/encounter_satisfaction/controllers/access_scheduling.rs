@@ -9,7 +9,6 @@ use crate::models::access_schedulings::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub encounter_satisfaction_id: Uuid,
     pub ease_of_scheduling: Option<i32>,
     pub wait_for_appointment: Option<i32>,
@@ -20,11 +19,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO access_schedulings (deleted_at, encounter_satisfaction_id, \
-            ease_of_scheduling, wait_for_appointment, wait_in_waiting_room) VALUES ($1, $2, \
-            $3, $4, $5) RETURNING *",
+            "INSERT INTO access_schedulings (encounter_satisfaction_id, \
+            ease_of_scheduling, wait_for_appointment, wait_in_waiting_room) VALUES ($1, \
+            $2, $3, $4) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.encounter_satisfaction_id)
         .bind(self.ease_of_scheduling)
         .bind(self.wait_for_appointment)
@@ -36,12 +34,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE access_schedulings SET deleted_at = $2, encounter_satisfaction_id = $3, \
-            ease_of_scheduling = $4, wait_for_appointment = $5, wait_in_waiting_room = $6, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE access_schedulings SET encounter_satisfaction_id = $2, \
+            ease_of_scheduling = $3, wait_for_appointment = $4, wait_in_waiting_room = \
+            $5, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.encounter_satisfaction_id)
         .bind(self.ease_of_scheduling)
         .bind(self.wait_for_appointment)

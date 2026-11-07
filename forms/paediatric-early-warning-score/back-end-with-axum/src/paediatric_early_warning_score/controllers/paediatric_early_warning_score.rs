@@ -60,12 +60,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE paediatric_early_warning_scores SET patient_id = $2, clinician_id = $3, \
-            status = $4, observation_at = $5, care_setting = $6, age_band = $7, \
+            "UPDATE paediatric_early_warning_scores SET patient_id = $2, clinician_id = \
+            $3, status = $4, observation_at = $5, care_setting = $6, age_band = $7, \
             respiratory_rate = $8, respiratory_effort = $9, oxygen_saturation = $10, \
             supplemental_oxygen = $11, heart_rate = $12, capillary_refill = $13, \
             consciousness_acvpu = $14, nurse_concern = $15, parent_concern = $16, \
-            clinical_notes = $17, updated_at = now() WHERE id = $1 RETURNING *",
+            clinical_notes = $17, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

@@ -9,7 +9,6 @@ use crate::models::expense_reimbursement_items::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub expense_reimbursement_id: Uuid,
     pub line_number: i32,
     pub expense_date: Option<Date>,
@@ -32,14 +31,13 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO expense_reimbursement_items (deleted_at, expense_reimbursement_id, \
-            line_number, expense_date, category, description, merchant, currency_as_iso_4217, \
-            amount, vat_amount, exchange_rate_to_claim_currency, payment_method, \
-            mileage_distance_miles, receipt_attached, receipt_reference, \
-            receipt_missing_reason, prior_approval_obtained) VALUES ($1, $2, $3, $4, $5, $6, \
-            $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING *",
+            "INSERT INTO expense_reimbursement_items (expense_reimbursement_id, \
+            line_number, expense_date, category, description, merchant, \
+            currency_as_iso_4217, amount, vat_amount, exchange_rate_to_claim_currency, \
+            payment_method, mileage_distance_miles, receipt_attached, receipt_reference, \
+            receipt_missing_reason, prior_approval_obtained) VALUES ($1, $2, $3, $4, $5, \
+            $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.expense_reimbursement_id)
         .bind(self.line_number)
         .bind(self.expense_date)
@@ -63,16 +61,15 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE expense_reimbursement_items SET deleted_at = $2, expense_reimbursement_id \
-            = $3, line_number = $4, expense_date = $5, category = $6, description = $7, \
-            merchant = $8, currency_as_iso_4217 = $9, amount = $10, vat_amount = $11, \
-            exchange_rate_to_claim_currency = $12, payment_method = $13, \
-            mileage_distance_miles = $14, receipt_attached = $15, receipt_reference = $16, \
-            receipt_missing_reason = $17, prior_approval_obtained = $18, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            "UPDATE expense_reimbursement_items SET expense_reimbursement_id = $2, \
+            line_number = $3, expense_date = $4, category = $5, description = $6, \
+            merchant = $7, currency_as_iso_4217 = $8, amount = $9, vat_amount = $10, \
+            exchange_rate_to_claim_currency = $11, payment_method = $12, \
+            mileage_distance_miles = $13, receipt_attached = $14, receipt_reference = \
+            $15, receipt_missing_reason = $16, prior_approval_obtained = $17, updated_at \
+            = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.expense_reimbursement_id)
         .bind(self.line_number)
         .bind(self.expense_date)

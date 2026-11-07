@@ -9,3 +9,4 @@ pub mod lumbar_puncture_test_request_grade;
 pub mod lumbar_puncture_test_request_grade_flag;
 pub mod lumbar_puncture_test_request_grade_rule;
 pub mod patient;
+mod soft_delete;

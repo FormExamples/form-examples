@@ -9,7 +9,6 @@ use crate::models::angiography_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -44,18 +43,17 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO angiography_test_results (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO angiography_test_results (patient_id, clinician_id, \
             originating_request_reference, report_status, performed_date, reported_date, \
             angiography_type, body_region, contrast_used, examination_adequacy, \
             clinical_history, comparison_with_previous, findings_narrative, \
             significant_stenosis, occlusion, aneurysm, dissection, active_extravasation, \
             thrombus, normal_vessels, incidental_finding, max_stenosis_percent, \
-            intervention_performed, impression, reporting_category, recommended_follow_up, \
-            critical_result_communicated, reported_to) VALUES ($1, $2, $3, $4, $5, $6, $7, \
-            $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, \
-            $24, $25, $26, $27, $28, $29) RETURNING *",
+            intervention_performed, impression, reporting_category, \
+            recommended_follow_up, critical_result_communicated, reported_to) VALUES \
+            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, \
+            $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -91,20 +89,19 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE angiography_test_results SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, originating_request_reference = $5, report_status = $6, \
-            performed_date = $7, reported_date = $8, angiography_type = $9, body_region = \
-            $10, contrast_used = $11, examination_adequacy = $12, clinical_history = $13, \
-            comparison_with_previous = $14, findings_narrative = $15, significant_stenosis = \
-            $16, occlusion = $17, aneurysm = $18, dissection = $19, active_extravasation = \
-            $20, thrombus = $21, normal_vessels = $22, incidental_finding = $23, \
-            max_stenosis_percent = $24, intervention_performed = $25, impression = $26, \
-            reporting_category = $27, recommended_follow_up = $28, \
-            critical_result_communicated = $29, reported_to = $30, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE angiography_test_results SET patient_id = $2, clinician_id = $3, \
+            originating_request_reference = $4, report_status = $5, performed_date = $6, \
+            reported_date = $7, angiography_type = $8, body_region = $9, contrast_used = \
+            $10, examination_adequacy = $11, clinical_history = $12, \
+            comparison_with_previous = $13, findings_narrative = $14, \
+            significant_stenosis = $15, occlusion = $16, aneurysm = $17, dissection = \
+            $18, active_extravasation = $19, thrombus = $20, normal_vessels = $21, \
+            incidental_finding = $22, max_stenosis_percent = $23, intervention_performed \
+            = $24, impression = $25, reporting_category = $26, recommended_follow_up = \
+            $27, critical_result_communicated = $28, reported_to = $29, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

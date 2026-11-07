@@ -40,7 +40,8 @@ impl Params {
         sqlx::query_as(
             "UPDATE zarit_burden_interview_grades SET zarit_burden_interview_id = $2, \
             total_score = $3, max_score = $4, burden_band = $5, short_form_score = $6, \
-            graded_at = $7, updated_at = now() WHERE id = $1 RETURNING *",
+            graded_at = $7, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
         .bind(self.zarit_burden_interview_id)

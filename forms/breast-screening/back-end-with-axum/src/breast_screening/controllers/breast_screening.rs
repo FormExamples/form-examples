@@ -77,12 +77,13 @@ impl Params {
         sqlx::query_as(
             "UPDATE breast_screenings SET patient_id = $2, clinician_id = $3, \
             reporting_clinician_role = $4, reported_at = $5, screening_unit = $6, \
-            episode_type = $7, patient_identifier = $8, age_years = $9, last_screened_date = \
-            $10, higher_risk_surveillance = $11, symptomatic = $12, consent_given = $13, \
-            views_taken = $14, image_adequacy = $15, first_read_opinion = $16, \
-            second_read_opinion = $17, arbitration_outcome = $18, reading_outcome = $19, \
-            assessment_performed = $20, assessment_modalities = $21, imaging_classification = \
-            $22, clinical_context = $23, updated_at = now() WHERE id = $1 RETURNING *",
+            episode_type = $7, patient_identifier = $8, age_years = $9, \
+            last_screened_date = $10, higher_risk_surveillance = $11, symptomatic = $12, \
+            consent_given = $13, views_taken = $14, image_adequacy = $15, \
+            first_read_opinion = $16, second_read_opinion = $17, arbitration_outcome = \
+            $18, reading_outcome = $19, assessment_performed = $20, \
+            assessment_modalities = $21, imaging_classification = $22, clinical_context \
+            = $23, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

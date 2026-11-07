@@ -16,3 +16,4 @@ pub mod medical_operation_note_specimen;
 pub mod medical_operation_note_step;
 pub mod medical_operation_note_team_member;
 pub mod patient;
+mod soft_delete;

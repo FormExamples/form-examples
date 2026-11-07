@@ -9,7 +9,6 @@ use crate::models::expense_reimbursement_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub expense_reimbursement_id: Uuid,
     pub compliance_band: String,
     pub completeness_percent: Option<i32>,
@@ -24,12 +23,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO expense_reimbursement_grades (deleted_at, expense_reimbursement_id, \
+            "INSERT INTO expense_reimbursement_grades (expense_reimbursement_id, \
             compliance_band, completeness_percent, approval_tier, recommendation, \
-            manager_notes, signed_at, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) \
+            manager_notes, signed_at, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) \
             RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.expense_reimbursement_id)
         .bind(&self.compliance_band)
         .bind(self.completeness_percent)
@@ -45,13 +43,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE expense_reimbursement_grades SET deleted_at = $2, expense_reimbursement_id \
-            = $3, compliance_band = $4, completeness_percent = $5, approval_tier = $6, \
-            recommendation = $7, manager_notes = $8, signed_at = $9, graded_at = $10, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE expense_reimbursement_grades SET expense_reimbursement_id = $2, \
+            compliance_band = $3, completeness_percent = $4, approval_tier = $5, \
+            recommendation = $6, manager_notes = $7, signed_at = $8, graded_at = $9, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.expense_reimbursement_id)
         .bind(&self.compliance_band)
         .bind(self.completeness_percent)

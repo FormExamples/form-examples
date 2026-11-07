@@ -21,7 +21,8 @@ Repo-wide conventions applied to every table:
 
 - **UUIDv4 primary keys** via `gen_random_uuid()`.
 - **Timestamp trio** on every table: `created_at`, `updated_at`, `deleted_at`
-  (soft delete), with a `set_updated_at()` trigger.
+  (soft delete: `DELETE` marks the row and its cascading children, and the API
+  hides marked rows), with a `set_updated_at()` trigger.
 - **Empty-value sentinels:** `''` for unanswered text and enum fields (the
   `CHECK (x IN ('', …))` list includes the empty sentinel); `null` for
   unanswered numeric, date, and time fields — so an in-progress draft never

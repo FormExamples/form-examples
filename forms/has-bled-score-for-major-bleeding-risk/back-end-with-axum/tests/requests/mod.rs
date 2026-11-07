@@ -9,3 +9,4 @@ pub mod has_bled_score_for_major_bleeding_risk_grade;
 pub mod has_bled_score_for_major_bleeding_risk_grade_flag;
 pub mod has_bled_score_for_major_bleeding_risk_grade_rule;
 pub mod patient;
+mod soft_delete;

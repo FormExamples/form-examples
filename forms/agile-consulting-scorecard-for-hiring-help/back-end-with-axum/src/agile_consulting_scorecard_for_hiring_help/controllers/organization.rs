@@ -9,7 +9,6 @@ use crate::models::organizations::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub name: String,
     pub legal_name: String,
     pub sector: String,
@@ -25,11 +24,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO organizations (deleted_at, name, legal_name, sector, size_band, \
-            headcount, country, region, website, notes) VALUES ($1, $2, $3, $4, $5, $6, $7, \
-            $8, $9, $10) RETURNING *",
+            "INSERT INTO organizations (name, legal_name, sector, size_band, headcount, \
+            country, region, website, notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(&self.legal_name)
         .bind(&self.sector)
@@ -46,12 +44,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE organizations SET deleted_at = $2, name = $3, legal_name = $4, sector = \
-            $5, size_band = $6, headcount = $7, country = $8, region = $9, website = $10, \
-            notes = $11, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE organizations SET name = $2, legal_name = $3, sector = $4, size_band \
+            = $5, headcount = $6, country = $7, region = $8, website = $9, notes = $10, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(&self.legal_name)
         .bind(&self.sector)

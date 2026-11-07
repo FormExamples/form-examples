@@ -37,7 +37,7 @@ impl Params {
         sqlx::query_as(
             "UPDATE soap_note_grade_rules SET rule_id = $2, section = $3, category = $4, \
             description = $5, soap_note_grade_id = $6, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(&self.rule_id)

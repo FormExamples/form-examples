@@ -9,7 +9,6 @@ use crate::models::ambulatory_blood_pressure_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -47,20 +46,21 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO ambulatory_blood_pressure_test_results (deleted_at, patient_id, \
+            "INSERT INTO ambulatory_blood_pressure_test_results (patient_id, \
             clinician_id, originating_request_reference, monitoring_type, report_status, \
             performed_date, reported_date, valid_readings_percent, recording_adequate, \
             clinical_history, daytime_average_systolic, daytime_average_diastolic, \
             nighttime_average_systolic, nighttime_average_diastolic, \
             twenty_four_hour_average_systolic, twenty_four_hour_average_diastolic, \
-            nocturnal_dip_percent, dipper_status, hypertension_confirmed, white_coat_effect, \
-            masked_hypertension, severe_hypertension, nocturnal_hypertension, normal_study, \
-            findings_narrative, comparison_with_previous, impression, reporting_category, \
-            recommended_follow_up, critical_result_communicated, reported_to) VALUES ($1, $2, \
-            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, \
-            $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32) RETURNING *",
+            nocturnal_dip_percent, dipper_status, hypertension_confirmed, \
+            white_coat_effect, masked_hypertension, severe_hypertension, \
+            nocturnal_hypertension, normal_study, findings_narrative, \
+            comparison_with_previous, impression, reporting_category, \
+            recommended_follow_up, critical_result_communicated, reported_to) VALUES \
+            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, \
+            $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -99,22 +99,22 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE ambulatory_blood_pressure_test_results SET deleted_at = $2, patient_id = \
-            $3, clinician_id = $4, originating_request_reference = $5, monitoring_type = $6, \
-            report_status = $7, performed_date = $8, reported_date = $9, \
-            valid_readings_percent = $10, recording_adequate = $11, clinical_history = $12, \
-            daytime_average_systolic = $13, daytime_average_diastolic = $14, \
-            nighttime_average_systolic = $15, nighttime_average_diastolic = $16, \
-            twenty_four_hour_average_systolic = $17, twenty_four_hour_average_diastolic = \
-            $18, nocturnal_dip_percent = $19, dipper_status = $20, hypertension_confirmed = \
-            $21, white_coat_effect = $22, masked_hypertension = $23, severe_hypertension = \
-            $24, nocturnal_hypertension = $25, normal_study = $26, findings_narrative = $27, \
-            comparison_with_previous = $28, impression = $29, reporting_category = $30, \
-            recommended_follow_up = $31, critical_result_communicated = $32, reported_to = \
-            $33, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE ambulatory_blood_pressure_test_results SET patient_id = $2, \
+            clinician_id = $3, originating_request_reference = $4, monitoring_type = $5, \
+            report_status = $6, performed_date = $7, reported_date = $8, \
+            valid_readings_percent = $9, recording_adequate = $10, clinical_history = \
+            $11, daytime_average_systolic = $12, daytime_average_diastolic = $13, \
+            nighttime_average_systolic = $14, nighttime_average_diastolic = $15, \
+            twenty_four_hour_average_systolic = $16, twenty_four_hour_average_diastolic \
+            = $17, nocturnal_dip_percent = $18, dipper_status = $19, \
+            hypertension_confirmed = $20, white_coat_effect = $21, masked_hypertension = \
+            $22, severe_hypertension = $23, nocturnal_hypertension = $24, normal_study = \
+            $25, findings_narrative = $26, comparison_with_previous = $27, impression = \
+            $28, reporting_category = $29, recommended_follow_up = $30, \
+            critical_result_communicated = $31, reported_to = $32, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

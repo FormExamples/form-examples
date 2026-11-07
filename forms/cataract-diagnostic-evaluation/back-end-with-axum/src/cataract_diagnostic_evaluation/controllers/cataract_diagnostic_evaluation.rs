@@ -9,7 +9,6 @@ use crate::models::cataract_diagnostic_evaluations::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub status: String,
@@ -116,9 +115,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO cataract_diagnostic_evaluations (deleted_at, patient_id, \
-            clinician_id, status, assessment_date, assessment_time, blurred_vision, \
-            glare_or_halos, night_driving_difficulty, faded_colour_perception, \
+            "INSERT INTO cataract_diagnostic_evaluations (patient_id, clinician_id, \
+            status, assessment_date, assessment_time, blurred_vision, glare_or_halos, \
+            night_driving_difficulty, faded_colour_perception, \
             frequent_prescription_changes, symptom_duration_months, symptom_laterality, \
             presenting_complaint_notes, history_diabetes, history_prior_eye_surgery, \
             history_prior_eye_surgery_detail, history_ocular_trauma, history_uveitis, \
@@ -127,38 +126,40 @@ impl Params {
             unaided_va_logmar_right, unaided_va_logmar_left, unaided_va_snellen_right, \
             unaided_va_snellen_left, best_corrected_va_logmar_right, \
             best_corrected_va_logmar_left, best_corrected_va_snellen_right, \
-            best_corrected_va_snellen_left, pinhole_va_logmar_right, pinhole_va_logmar_left, \
-            pinhole_va_snellen_right, pinhole_va_snellen_left, refraction_sphere_right, \
-            refraction_sphere_left, refraction_cylinder_right, refraction_cylinder_left, \
-            refraction_axis_right, refraction_axis_left, refraction_stability, \
-            locs_iii_no_right, locs_iii_no_left, locs_iii_nc_right, locs_iii_nc_left, \
-            locs_iii_c_right, locs_iii_c_left, locs_iii_p_right, locs_iii_p_left, \
-            cataract_type_right, cataract_type_left, anterior_chamber_depth_right, \
-            anterior_chamber_depth_left, corneal_clarity_right, corneal_clarity_left, \
-            pupil_reaction_right, pupil_reaction_left, glare_acuity_result_right, \
-            glare_acuity_result_left, glare_functional_impact, \
-            intraocular_pressure_right_mmhg, intraocular_pressure_left_mmhg, \
-            tonometry_method, dilated_fundus_exam_performed, optic_disc_cup_disc_ratio_right, \
+            best_corrected_va_snellen_left, pinhole_va_logmar_right, \
+            pinhole_va_logmar_left, pinhole_va_snellen_right, pinhole_va_snellen_left, \
+            refraction_sphere_right, refraction_sphere_left, refraction_cylinder_right, \
+            refraction_cylinder_left, refraction_axis_right, refraction_axis_left, \
+            refraction_stability, locs_iii_no_right, locs_iii_no_left, \
+            locs_iii_nc_right, locs_iii_nc_left, locs_iii_c_right, locs_iii_c_left, \
+            locs_iii_p_right, locs_iii_p_left, cataract_type_right, cataract_type_left, \
+            anterior_chamber_depth_right, anterior_chamber_depth_left, \
+            corneal_clarity_right, corneal_clarity_left, pupil_reaction_right, \
+            pupil_reaction_left, glare_acuity_result_right, glare_acuity_result_left, \
+            glare_functional_impact, intraocular_pressure_right_mmhg, \
+            intraocular_pressure_left_mmhg, tonometry_method, \
+            dilated_fundus_exam_performed, optic_disc_cup_disc_ratio_right, \
             optic_disc_cup_disc_ratio_left, macula_findings_right, macula_findings_left, \
-            retinal_findings_right, retinal_findings_left, view_obscured_by_cataract_right, \
-            view_obscured_by_cataract_left, glaucoma_suspected, glaucoma_notes, \
-            amd_suspected, amd_notes, diabetic_retinopathy_suspected, \
-            diabetic_retinopathy_notes, biometry_performed, axial_length_right_mm, \
-            axial_length_left_mm, keratometry_k1_right, keratometry_k1_left, \
-            keratometry_k2_right, keratometry_k2_left, oct_performed, oct_findings, \
+            retinal_findings_right, retinal_findings_left, \
+            view_obscured_by_cataract_right, view_obscured_by_cataract_left, \
+            glaucoma_suspected, glaucoma_notes, amd_suspected, amd_notes, \
+            diabetic_retinopathy_suspected, diabetic_retinopathy_notes, \
+            biometry_performed, axial_length_right_mm, axial_length_left_mm, \
+            keratometry_k1_right, keratometry_k1_left, keratometry_k2_right, \
+            keratometry_k2_left, oct_performed, oct_findings, \
             calculated_iol_power_right, calculated_iol_power_left, \
             functional_difficulty_reading, functional_difficulty_driving, \
             functional_difficulty_daily_activities, functional_impact_notes, \
             management_recommendation, eye_for_surgery, risks_benefits_counselled, \
-            consent_discussed, management_notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, \
-            $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, \
-            $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, \
-            $42, $43, $44, $45, $46, $47, $48, $49, $50, $51, $52, $53, $54, $55, $56, $57, \
-            $58, $59, $60, $61, $62, $63, $64, $65, $66, $67, $68, $69, $70, $71, $72, $73, \
-            $74, $75, $76, $77, $78, $79, $80, $81, $82, $83, $84, $85, $86, $87, $88, $89, \
-            $90, $91, $92, $93, $94, $95, $96, $97, $98, $99, $100, $101) RETURNING *",
+            consent_discussed, management_notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, \
+            $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, \
+            $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, \
+            $39, $40, $41, $42, $43, $44, $45, $46, $47, $48, $49, $50, $51, $52, $53, \
+            $54, $55, $56, $57, $58, $59, $60, $61, $62, $63, $64, $65, $66, $67, $68, \
+            $69, $70, $71, $72, $73, $74, $75, $76, $77, $78, $79, $80, $81, $82, $83, \
+            $84, $85, $86, $87, $88, $89, $90, $91, $92, $93, $94, $95, $96, $97, $98, \
+            $99, $100) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)
@@ -266,52 +267,54 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE cataract_diagnostic_evaluations SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, status = $5, assessment_date = $6, assessment_time = $7, \
-            blurred_vision = $8, glare_or_halos = $9, night_driving_difficulty = $10, \
-            faded_colour_perception = $11, frequent_prescription_changes = $12, \
-            symptom_duration_months = $13, symptom_laterality = $14, \
-            presenting_complaint_notes = $15, history_diabetes = $16, \
-            history_prior_eye_surgery = $17, history_prior_eye_surgery_detail = $18, \
-            history_ocular_trauma = $19, history_uveitis = $20, history_steroid_use = $21, \
-            history_family_cataract = $22, history_smoking_status = $23, \
-            history_high_uv_exposure = $24, history_high_myopia = $25, medical_history_notes \
-            = $26, unaided_va_logmar_right = $27, unaided_va_logmar_left = $28, \
-            unaided_va_snellen_right = $29, unaided_va_snellen_left = $30, \
-            best_corrected_va_logmar_right = $31, best_corrected_va_logmar_left = $32, \
-            best_corrected_va_snellen_right = $33, best_corrected_va_snellen_left = $34, \
-            pinhole_va_logmar_right = $35, pinhole_va_logmar_left = $36, \
-            pinhole_va_snellen_right = $37, pinhole_va_snellen_left = $38, \
-            refraction_sphere_right = $39, refraction_sphere_left = $40, \
-            refraction_cylinder_right = $41, refraction_cylinder_left = $42, \
-            refraction_axis_right = $43, refraction_axis_left = $44, refraction_stability = \
-            $45, locs_iii_no_right = $46, locs_iii_no_left = $47, locs_iii_nc_right = $48, \
-            locs_iii_nc_left = $49, locs_iii_c_right = $50, locs_iii_c_left = $51, \
-            locs_iii_p_right = $52, locs_iii_p_left = $53, cataract_type_right = $54, \
-            cataract_type_left = $55, anterior_chamber_depth_right = $56, \
-            anterior_chamber_depth_left = $57, corneal_clarity_right = $58, \
-            corneal_clarity_left = $59, pupil_reaction_right = $60, pupil_reaction_left = \
-            $61, glare_acuity_result_right = $62, glare_acuity_result_left = $63, \
-            glare_functional_impact = $64, intraocular_pressure_right_mmhg = $65, \
-            intraocular_pressure_left_mmhg = $66, tonometry_method = $67, \
-            dilated_fundus_exam_performed = $68, optic_disc_cup_disc_ratio_right = $69, \
-            optic_disc_cup_disc_ratio_left = $70, macula_findings_right = $71, \
-            macula_findings_left = $72, retinal_findings_right = $73, retinal_findings_left = \
-            $74, view_obscured_by_cataract_right = $75, view_obscured_by_cataract_left = $76, \
-            glaucoma_suspected = $77, glaucoma_notes = $78, amd_suspected = $79, amd_notes = \
-            $80, diabetic_retinopathy_suspected = $81, diabetic_retinopathy_notes = $82, \
-            biometry_performed = $83, axial_length_right_mm = $84, axial_length_left_mm = \
-            $85, keratometry_k1_right = $86, keratometry_k1_left = $87, keratometry_k2_right \
-            = $88, keratometry_k2_left = $89, oct_performed = $90, oct_findings = $91, \
-            calculated_iol_power_right = $92, calculated_iol_power_left = $93, \
-            functional_difficulty_reading = $94, functional_difficulty_driving = $95, \
-            functional_difficulty_daily_activities = $96, functional_impact_notes = $97, \
-            management_recommendation = $98, eye_for_surgery = $99, risks_benefits_counselled \
-            = $100, consent_discussed = $101, management_notes = $102, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            "UPDATE cataract_diagnostic_evaluations SET patient_id = $2, clinician_id = \
+            $3, status = $4, assessment_date = $5, assessment_time = $6, blurred_vision \
+            = $7, glare_or_halos = $8, night_driving_difficulty = $9, \
+            faded_colour_perception = $10, frequent_prescription_changes = $11, \
+            symptom_duration_months = $12, symptom_laterality = $13, \
+            presenting_complaint_notes = $14, history_diabetes = $15, \
+            history_prior_eye_surgery = $16, history_prior_eye_surgery_detail = $17, \
+            history_ocular_trauma = $18, history_uveitis = $19, history_steroid_use = \
+            $20, history_family_cataract = $21, history_smoking_status = $22, \
+            history_high_uv_exposure = $23, history_high_myopia = $24, \
+            medical_history_notes = $25, unaided_va_logmar_right = $26, \
+            unaided_va_logmar_left = $27, unaided_va_snellen_right = $28, \
+            unaided_va_snellen_left = $29, best_corrected_va_logmar_right = $30, \
+            best_corrected_va_logmar_left = $31, best_corrected_va_snellen_right = $32, \
+            best_corrected_va_snellen_left = $33, pinhole_va_logmar_right = $34, \
+            pinhole_va_logmar_left = $35, pinhole_va_snellen_right = $36, \
+            pinhole_va_snellen_left = $37, refraction_sphere_right = $38, \
+            refraction_sphere_left = $39, refraction_cylinder_right = $40, \
+            refraction_cylinder_left = $41, refraction_axis_right = $42, \
+            refraction_axis_left = $43, refraction_stability = $44, locs_iii_no_right = \
+            $45, locs_iii_no_left = $46, locs_iii_nc_right = $47, locs_iii_nc_left = \
+            $48, locs_iii_c_right = $49, locs_iii_c_left = $50, locs_iii_p_right = $51, \
+            locs_iii_p_left = $52, cataract_type_right = $53, cataract_type_left = $54, \
+            anterior_chamber_depth_right = $55, anterior_chamber_depth_left = $56, \
+            corneal_clarity_right = $57, corneal_clarity_left = $58, \
+            pupil_reaction_right = $59, pupil_reaction_left = $60, \
+            glare_acuity_result_right = $61, glare_acuity_result_left = $62, \
+            glare_functional_impact = $63, intraocular_pressure_right_mmhg = $64, \
+            intraocular_pressure_left_mmhg = $65, tonometry_method = $66, \
+            dilated_fundus_exam_performed = $67, optic_disc_cup_disc_ratio_right = $68, \
+            optic_disc_cup_disc_ratio_left = $69, macula_findings_right = $70, \
+            macula_findings_left = $71, retinal_findings_right = $72, \
+            retinal_findings_left = $73, view_obscured_by_cataract_right = $74, \
+            view_obscured_by_cataract_left = $75, glaucoma_suspected = $76, \
+            glaucoma_notes = $77, amd_suspected = $78, amd_notes = $79, \
+            diabetic_retinopathy_suspected = $80, diabetic_retinopathy_notes = $81, \
+            biometry_performed = $82, axial_length_right_mm = $83, axial_length_left_mm \
+            = $84, keratometry_k1_right = $85, keratometry_k1_left = $86, \
+            keratometry_k2_right = $87, keratometry_k2_left = $88, oct_performed = $89, \
+            oct_findings = $90, calculated_iol_power_right = $91, \
+            calculated_iol_power_left = $92, functional_difficulty_reading = $93, \
+            functional_difficulty_driving = $94, functional_difficulty_daily_activities \
+            = $95, functional_impact_notes = $96, management_recommendation = $97, \
+            eye_for_surgery = $98, risks_benefits_counselled = $99, consent_discussed = \
+            $100, management_notes = $101, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)

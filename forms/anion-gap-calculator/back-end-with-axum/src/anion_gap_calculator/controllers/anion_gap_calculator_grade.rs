@@ -9,7 +9,6 @@ use crate::models::anion_gap_calculator_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub anion_gap_calculator_id: Uuid,
     pub anion_gap: Option<f64>,
     pub corrected_anion_gap: Option<f64>,
@@ -21,11 +20,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO anion_gap_calculator_grades (deleted_at, anion_gap_calculator_id, \
-            anion_gap, corrected_anion_gap, classification, graded_at) VALUES ($1, $2, $3, \
-            $4, $5, $6) RETURNING *",
+            "INSERT INTO anion_gap_calculator_grades (anion_gap_calculator_id, anion_gap, \
+            corrected_anion_gap, classification, graded_at) VALUES ($1, $2, $3, $4, $5) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.anion_gap_calculator_id)
         .bind(self.anion_gap)
         .bind(self.corrected_anion_gap)
@@ -38,12 +36,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE anion_gap_calculator_grades SET deleted_at = $2, anion_gap_calculator_id = \
-            $3, anion_gap = $4, corrected_anion_gap = $5, classification = $6, graded_at = \
-            $7, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE anion_gap_calculator_grades SET anion_gap_calculator_id = $2, \
+            anion_gap = $3, corrected_anion_gap = $4, classification = $5, graded_at = \
+            $6, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.anion_gap_calculator_id)
         .bind(self.anion_gap)
         .bind(self.corrected_anion_gap)

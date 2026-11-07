@@ -79,14 +79,15 @@ impl Params {
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
             "UPDATE padua_venous_thromboembolism_risk_assessments SET patient_id = $2, \
-            clinician_id = $3, clinician_name = $4, clinician_role = $5, assessed_at = $6, \
-            care_setting = $7, admission_reason = $8, patient_identifier = $9, age_years = \
-            $10, sex = $11, active_cancer = $12, previous_vte = $13, reduced_mobility = $14, \
-            known_thrombophilia = $15, recent_trauma_or_surgery = $16, \
-            heart_or_respiratory_failure = $17, acute_mi_or_ischaemic_stroke = $18, \
-            acute_infection_or_rheumatological = $19, body_mass_index = $20, \
-            ongoing_hormonal_treatment = $21, active_bleeding = $22, high_bleeding_risk = \
-            $23, clinical_note = $24, updated_at = now() WHERE id = $1 RETURNING *",
+            clinician_id = $3, clinician_name = $4, clinician_role = $5, assessed_at = \
+            $6, care_setting = $7, admission_reason = $8, patient_identifier = $9, \
+            age_years = $10, sex = $11, active_cancer = $12, previous_vte = $13, \
+            reduced_mobility = $14, known_thrombophilia = $15, recent_trauma_or_surgery \
+            = $16, heart_or_respiratory_failure = $17, acute_mi_or_ischaemic_stroke = \
+            $18, acute_infection_or_rheumatological = $19, body_mass_index = $20, \
+            ongoing_hormonal_treatment = $21, active_bleeding = $22, high_bleeding_risk \
+            = $23, clinical_note = $24, updated_at = now() WHERE id = $1 AND deleted_at \
+            IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

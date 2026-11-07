@@ -9,7 +9,6 @@ use crate::models::cardiac_stress_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -46,19 +45,19 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO cardiac_stress_test_results (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO cardiac_stress_test_results (patient_id, clinician_id, \
             originating_request_reference, report_status, performed_date, reported_date, \
             test_type, protocol, clinical_history, comparison_with_previous, \
-            maximum_heart_rate_bpm, percent_predicted_heart_rate, exercise_duration_minutes, \
-            mets_achieved, peak_blood_pressure, blood_pressure_response, \
-            ischaemic_st_changes, chest_pain_induced, arrhythmia_induced, terminated_early, \
-            test_positive, test_negative, test_inconclusive, reason_for_termination, \
-            duke_treadmill_score, impression, reporting_category, recommended_follow_up, \
-            critical_result_communicated, reported_to) VALUES ($1, $2, $3, $4, $5, $6, $7, \
-            $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, \
-            $24, $25, $26, $27, $28, $29, $30, $31) RETURNING *",
+            maximum_heart_rate_bpm, percent_predicted_heart_rate, \
+            exercise_duration_minutes, mets_achieved, peak_blood_pressure, \
+            blood_pressure_response, ischaemic_st_changes, chest_pain_induced, \
+            arrhythmia_induced, terminated_early, test_positive, test_negative, \
+            test_inconclusive, reason_for_termination, duke_treadmill_score, impression, \
+            reporting_category, recommended_follow_up, critical_result_communicated, \
+            reported_to) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, \
+            $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, \
+            $29, $30) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -96,21 +95,20 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE cardiac_stress_test_results SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, originating_request_reference = $5, report_status = $6, \
-            performed_date = $7, reported_date = $8, test_type = $9, protocol = $10, \
-            clinical_history = $11, comparison_with_previous = $12, maximum_heart_rate_bpm = \
-            $13, percent_predicted_heart_rate = $14, exercise_duration_minutes = $15, \
-            mets_achieved = $16, peak_blood_pressure = $17, blood_pressure_response = $18, \
-            ischaemic_st_changes = $19, chest_pain_induced = $20, arrhythmia_induced = $21, \
-            terminated_early = $22, test_positive = $23, test_negative = $24, \
-            test_inconclusive = $25, reason_for_termination = $26, duke_treadmill_score = \
-            $27, impression = $28, reporting_category = $29, recommended_follow_up = $30, \
-            critical_result_communicated = $31, reported_to = $32, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE cardiac_stress_test_results SET patient_id = $2, clinician_id = $3, \
+            originating_request_reference = $4, report_status = $5, performed_date = $6, \
+            reported_date = $7, test_type = $8, protocol = $9, clinical_history = $10, \
+            comparison_with_previous = $11, maximum_heart_rate_bpm = $12, \
+            percent_predicted_heart_rate = $13, exercise_duration_minutes = $14, \
+            mets_achieved = $15, peak_blood_pressure = $16, blood_pressure_response = \
+            $17, ischaemic_st_changes = $18, chest_pain_induced = $19, \
+            arrhythmia_induced = $20, terminated_early = $21, test_positive = $22, \
+            test_negative = $23, test_inconclusive = $24, reason_for_termination = $25, \
+            duke_treadmill_score = $26, impression = $27, reporting_category = $28, \
+            recommended_follow_up = $29, critical_result_communicated = $30, reported_to \
+            = $31, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

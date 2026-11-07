@@ -70,12 +70,13 @@ impl Params {
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
             "UPDATE cervical_screenings SET care_setting = $2, sample_taker_role = $3, \
-            sample_taken_at = $4, patient_identifier = $5, age = $6, recall_interval = $7, \
-            screen_due_date = $8, last_screen_date = $9, overdue = $10, previously_ceased = \
-            $11, consent_given = $12, symptomatic = $13, symptom_detail = $14, \
-            sample_adequacy = $15, inadequate_reason = $16, hpv_result = $17, cytology_grade \
-            = $18, clinical_context = $19, patient_id = $20, clinician_id = $21, updated_at = \
-            now() WHERE id = $1 RETURNING *",
+            sample_taken_at = $4, patient_identifier = $5, age = $6, recall_interval = \
+            $7, screen_due_date = $8, last_screen_date = $9, overdue = $10, \
+            previously_ceased = $11, consent_given = $12, symptomatic = $13, \
+            symptom_detail = $14, sample_adequacy = $15, inadequate_reason = $16, \
+            hpv_result = $17, cytology_grade = $18, clinical_context = $19, patient_id = \
+            $20, clinician_id = $21, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
         .bind(&self.care_setting)

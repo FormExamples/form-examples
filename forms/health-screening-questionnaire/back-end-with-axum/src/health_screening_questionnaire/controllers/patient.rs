@@ -9,7 +9,6 @@ use crate::models::patients::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub name: String,
     pub birth_date: Option<Date>,
     pub sex: String,
@@ -26,12 +25,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO patients (deleted_at, name, birth_date, sex, identifier_type, \
+            "INSERT INTO patients (name, birth_date, sex, identifier_type, \
             identifier_value, email, phone, emergency_contact_name, \
-            emergency_contact_relationship, emergency_contact_phone) VALUES ($1, $2, $3, $4, \
-            $5, $6, $7, $8, $9, $10, $11) RETURNING *",
+            emergency_contact_relationship, emergency_contact_phone) VALUES ($1, $2, $3, \
+            $4, $5, $6, $7, $8, $9, $10) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(self.birth_date)
         .bind(&self.sex)
@@ -49,13 +47,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE patients SET deleted_at = $2, name = $3, birth_date = $4, sex = $5, \
-            identifier_type = $6, identifier_value = $7, email = $8, phone = $9, \
-            emergency_contact_name = $10, emergency_contact_relationship = $11, \
-            emergency_contact_phone = $12, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE patients SET name = $2, birth_date = $3, sex = $4, identifier_type = \
+            $5, identifier_value = $6, email = $7, phone = $8, emergency_contact_name = \
+            $9, emergency_contact_relationship = $10, emergency_contact_phone = $11, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(self.birth_date)
         .bind(&self.sex)

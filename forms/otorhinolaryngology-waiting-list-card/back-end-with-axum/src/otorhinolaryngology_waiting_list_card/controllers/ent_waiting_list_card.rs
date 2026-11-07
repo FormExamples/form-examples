@@ -9,7 +9,6 @@ use crate::models::ent_waiting_list_cards::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub practitioner_id: Uuid,
     pub status: String,
@@ -42,17 +41,16 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO ent_waiting_list_cards (deleted_at, patient_id, practitioner_id, \
-            status, entry_date, entry_time, referral_source, referral_date, \
+            "INSERT INTO ent_waiting_list_cards (patient_id, practitioner_id, status, \
+            entry_date, entry_time, referral_source, referral_date, \
             referral_letter_reference, reason_for_referral, presenting_condition, \
             icd_10_code, snomed_ct_code, suspected_cancer, list_name, specialty, \
             sub_specialty, procedure_description, opcs_4_code, clinical_priority, \
             rtt_clock_start_date, expected_procedure_type, expected_wait_weeks, \
-            consent_to_reminders, communication_notes, additional_notes, signed_at) VALUES \
-            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, \
-            $19, $20, $21, $22, $23, $24, $25, $26, $27) RETURNING *",
+            consent_to_reminders, communication_notes, additional_notes, signed_at) \
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, \
+            $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.practitioner_id)
         .bind(&self.status)
@@ -86,19 +84,18 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE ent_waiting_list_cards SET deleted_at = $2, patient_id = $3, \
-            practitioner_id = $4, status = $5, entry_date = $6, entry_time = $7, \
-            referral_source = $8, referral_date = $9, referral_letter_reference = $10, \
-            reason_for_referral = $11, presenting_condition = $12, icd_10_code = $13, \
-            snomed_ct_code = $14, suspected_cancer = $15, list_name = $16, specialty = $17, \
-            sub_specialty = $18, procedure_description = $19, opcs_4_code = $20, \
-            clinical_priority = $21, rtt_clock_start_date = $22, expected_procedure_type = \
-            $23, expected_wait_weeks = $24, consent_to_reminders = $25, communication_notes = \
-            $26, additional_notes = $27, signed_at = $28, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE ent_waiting_list_cards SET patient_id = $2, practitioner_id = $3, \
+            status = $4, entry_date = $5, entry_time = $6, referral_source = $7, \
+            referral_date = $8, referral_letter_reference = $9, reason_for_referral = \
+            $10, presenting_condition = $11, icd_10_code = $12, snomed_ct_code = $13, \
+            suspected_cancer = $14, list_name = $15, specialty = $16, sub_specialty = \
+            $17, procedure_description = $18, opcs_4_code = $19, clinical_priority = \
+            $20, rtt_clock_start_date = $21, expected_procedure_type = $22, \
+            expected_wait_weeks = $23, consent_to_reminders = $24, communication_notes = \
+            $25, additional_notes = $26, signed_at = $27, updated_at = now() WHERE id = \
+            $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.practitioner_id)
         .bind(&self.status)

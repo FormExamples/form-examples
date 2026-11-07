@@ -9,7 +9,6 @@ use crate::models::biopsy_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -43,18 +42,17 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO biopsy_test_results (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO biopsy_test_results (patient_id, clinician_id, \
             originating_request_reference, report_status, performed_date, reported_date, \
             biopsy_site, biopsy_method, specimen_adequacy, clinical_history, \
             comparison_with_previous, macroscopic_description, microscopic_description, \
             diagnosis, malignancy_present, tumour_type, histological_grade, \
             resection_margins, lymphovascular_invasion, immunohistochemistry, \
             molecular_results, snomed_code, impression, reporting_category, \
-            recommended_follow_up, critical_result_communicated, reported_to) VALUES ($1, $2, \
-            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, \
-            $20, $21, $22, $23, $24, $25, $26, $27, $28) RETURNING *",
+            recommended_follow_up, critical_result_communicated, reported_to) VALUES \
+            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, \
+            $18, $19, $20, $21, $22, $23, $24, $25, $26, $27) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -89,20 +87,19 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE biopsy_test_results SET deleted_at = $2, patient_id = $3, clinician_id = \
-            $4, originating_request_reference = $5, report_status = $6, performed_date = $7, \
-            reported_date = $8, biopsy_site = $9, biopsy_method = $10, specimen_adequacy = \
-            $11, clinical_history = $12, comparison_with_previous = $13, \
-            macroscopic_description = $14, microscopic_description = $15, diagnosis = $16, \
-            malignancy_present = $17, tumour_type = $18, histological_grade = $19, \
-            resection_margins = $20, lymphovascular_invasion = $21, immunohistochemistry = \
-            $22, molecular_results = $23, snomed_code = $24, impression = $25, \
-            reporting_category = $26, recommended_follow_up = $27, \
-            critical_result_communicated = $28, reported_to = $29, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE biopsy_test_results SET patient_id = $2, clinician_id = $3, \
+            originating_request_reference = $4, report_status = $5, performed_date = $6, \
+            reported_date = $7, biopsy_site = $8, biopsy_method = $9, specimen_adequacy \
+            = $10, clinical_history = $11, comparison_with_previous = $12, \
+            macroscopic_description = $13, microscopic_description = $14, diagnosis = \
+            $15, malignancy_present = $16, tumour_type = $17, histological_grade = $18, \
+            resection_margins = $19, lymphovascular_invasion = $20, immunohistochemistry \
+            = $21, molecular_results = $22, snomed_code = $23, impression = $24, \
+            reporting_category = $25, recommended_follow_up = $26, \
+            critical_result_communicated = $27, reported_to = $28, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

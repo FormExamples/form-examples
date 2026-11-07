@@ -12,8 +12,6 @@ use crate::models::patient_reported_outcome_measures::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    /// Deleted at.
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Subject ID.
     pub subject_id: String,
     /// Visit.
@@ -142,30 +140,31 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO patient_reported_outcome_measures (deleted_at, subject_id, visit, \
-            assessment_date, general_health, health_change_vs_year_ago, vigorous_activities, \
-            moderate_activities, lifting_carrying_groceries, climbing_several_flights, \
-            climbing_one_flight, bending_kneeling_stooping, walking_more_than_mile, \
-            walking_several_hundred_yards, walking_one_hundred_yards, bathing_dressing, \
-            cut_down_time_physical, accomplished_less_physical, limited_in_kind_physical, \
+            "INSERT INTO patient_reported_outcome_measures (subject_id, visit, \
+            assessment_date, general_health, health_change_vs_year_ago, \
+            vigorous_activities, moderate_activities, lifting_carrying_groceries, \
+            climbing_several_flights, climbing_one_flight, bending_kneeling_stooping, \
+            walking_more_than_mile, walking_several_hundred_yards, \
+            walking_one_hundred_yards, bathing_dressing, cut_down_time_physical, \
+            accomplished_less_physical, limited_in_kind_physical, \
             difficulty_performing_physical, cut_down_time_emotional, \
             accomplished_less_emotional, less_careful_than_usual, \
             social_activities_interference, bodily_pain, pain_interference_with_work, \
             felt_full_of_life, very_nervous, so_down_in_dumps, felt_calm_peaceful, \
             lot_of_energy, downhearted_depressed, felt_worn_out, been_happy, felt_tired, \
             social_activities_interference_time, get_sick_easier, as_healthy_as_anybody, \
-            expect_health_worse, health_excellent, ndi_pain_intensity, ndi_personal_care, \
-            ndi_lifting, ndi_reading, ndi_headache, ndi_concentration, ndi_work, ndi_driving, \
-            ndi_sleeping, ndi_recreation, mjoa_motor_arms, mjoa_motor_legs, \
-            mjoa_sensation_arms, mjoa_sensation_legs, mjoa_sensation_trunk, \
-            mjoa_bladder_function, eq5d_mobility, eq5d_self_care, eq5d_usual_activities, \
-            eq5d_pain_discomfort, eq5d_anxiety_depression, eq5d_vas_score) VALUES ($1, $2, \
-            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, \
-            $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, \
-            $36, $37, $38, $39, $40, $41, $42, $43, $44, $45, $46, $47, $48, $49, $50, $51, \
-            $52, $53, $54, $55, $56, $57, $58, $59, $60, $61, $62) RETURNING *",
+            expect_health_worse, health_excellent, ndi_pain_intensity, \
+            ndi_personal_care, ndi_lifting, ndi_reading, ndi_headache, \
+            ndi_concentration, ndi_work, ndi_driving, ndi_sleeping, ndi_recreation, \
+            mjoa_motor_arms, mjoa_motor_legs, mjoa_sensation_arms, mjoa_sensation_legs, \
+            mjoa_sensation_trunk, mjoa_bladder_function, eq5d_mobility, eq5d_self_care, \
+            eq5d_usual_activities, eq5d_pain_discomfort, eq5d_anxiety_depression, \
+            eq5d_vas_score) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, \
+            $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, \
+            $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42, \
+            $43, $44, $45, $46, $47, $48, $49, $50, $51, $52, $53, $54, $55, $56, $57, \
+            $58, $59, $60, $61) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.subject_id)
         .bind(&self.visit)
         .bind(self.assessment_date)
@@ -234,33 +233,33 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE patient_reported_outcome_measures SET deleted_at = $2, subject_id = $3, \
-            visit = $4, assessment_date = $5, general_health = $6, health_change_vs_year_ago \
-            = $7, vigorous_activities = $8, moderate_activities = $9, \
-            lifting_carrying_groceries = $10, climbing_several_flights = $11, \
-            climbing_one_flight = $12, bending_kneeling_stooping = $13, \
-            walking_more_than_mile = $14, walking_several_hundred_yards = $15, \
-            walking_one_hundred_yards = $16, bathing_dressing = $17, cut_down_time_physical = \
-            $18, accomplished_less_physical = $19, limited_in_kind_physical = $20, \
-            difficulty_performing_physical = $21, cut_down_time_emotional = $22, \
-            accomplished_less_emotional = $23, less_careful_than_usual = $24, \
-            social_activities_interference = $25, bodily_pain = $26, \
-            pain_interference_with_work = $27, felt_full_of_life = $28, very_nervous = $29, \
-            so_down_in_dumps = $30, felt_calm_peaceful = $31, lot_of_energy = $32, \
-            downhearted_depressed = $33, felt_worn_out = $34, been_happy = $35, felt_tired = \
-            $36, social_activities_interference_time = $37, get_sick_easier = $38, \
-            as_healthy_as_anybody = $39, expect_health_worse = $40, health_excellent = $41, \
-            ndi_pain_intensity = $42, ndi_personal_care = $43, ndi_lifting = $44, ndi_reading \
-            = $45, ndi_headache = $46, ndi_concentration = $47, ndi_work = $48, ndi_driving = \
-            $49, ndi_sleeping = $50, ndi_recreation = $51, mjoa_motor_arms = $52, \
-            mjoa_motor_legs = $53, mjoa_sensation_arms = $54, mjoa_sensation_legs = $55, \
-            mjoa_sensation_trunk = $56, mjoa_bladder_function = $57, eq5d_mobility = $58, \
-            eq5d_self_care = $59, eq5d_usual_activities = $60, eq5d_pain_discomfort = $61, \
-            eq5d_anxiety_depression = $62, eq5d_vas_score = $63, updated_at = now() WHERE id \
-            = $1 RETURNING *",
+            "UPDATE patient_reported_outcome_measures SET subject_id = $2, visit = $3, \
+            assessment_date = $4, general_health = $5, health_change_vs_year_ago = $6, \
+            vigorous_activities = $7, moderate_activities = $8, \
+            lifting_carrying_groceries = $9, climbing_several_flights = $10, \
+            climbing_one_flight = $11, bending_kneeling_stooping = $12, \
+            walking_more_than_mile = $13, walking_several_hundred_yards = $14, \
+            walking_one_hundred_yards = $15, bathing_dressing = $16, \
+            cut_down_time_physical = $17, accomplished_less_physical = $18, \
+            limited_in_kind_physical = $19, difficulty_performing_physical = $20, \
+            cut_down_time_emotional = $21, accomplished_less_emotional = $22, \
+            less_careful_than_usual = $23, social_activities_interference = $24, \
+            bodily_pain = $25, pain_interference_with_work = $26, felt_full_of_life = \
+            $27, very_nervous = $28, so_down_in_dumps = $29, felt_calm_peaceful = $30, \
+            lot_of_energy = $31, downhearted_depressed = $32, felt_worn_out = $33, \
+            been_happy = $34, felt_tired = $35, social_activities_interference_time = \
+            $36, get_sick_easier = $37, as_healthy_as_anybody = $38, expect_health_worse \
+            = $39, health_excellent = $40, ndi_pain_intensity = $41, ndi_personal_care = \
+            $42, ndi_lifting = $43, ndi_reading = $44, ndi_headache = $45, \
+            ndi_concentration = $46, ndi_work = $47, ndi_driving = $48, ndi_sleeping = \
+            $49, ndi_recreation = $50, mjoa_motor_arms = $51, mjoa_motor_legs = $52, \
+            mjoa_sensation_arms = $53, mjoa_sensation_legs = $54, mjoa_sensation_trunk = \
+            $55, mjoa_bladder_function = $56, eq5d_mobility = $57, eq5d_self_care = $58, \
+            eq5d_usual_activities = $59, eq5d_pain_discomfort = $60, \
+            eq5d_anxiety_depression = $61, eq5d_vas_score = $62, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.subject_id)
         .bind(&self.visit)
         .bind(self.assessment_date)

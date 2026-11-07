@@ -40,9 +40,9 @@ impl Params {
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
             "UPDATE wells_score_for_deep_vein_thrombosis_grades SET wells_score = $2, \
-            two_level_band = $3, three_level_band = $4, recommended_pathway = $5, graded_at = \
-            $6, wells_score_for_deep_vein_thrombosis_id = $7, updated_at = now() WHERE id = \
-            $1 RETURNING *",
+            two_level_band = $3, three_level_band = $4, recommended_pathway = $5, \
+            graded_at = $6, wells_score_for_deep_vein_thrombosis_id = $7, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.wells_score)

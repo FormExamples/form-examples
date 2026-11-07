@@ -19,5 +19,6 @@ pub mod quality_goal;
 mod quality_scenarios_route;
 mod risk_items_route;
 mod runtime_scenarios_route;
+mod soft_delete;
 pub mod stakeholder;
 pub mod technology_decision;

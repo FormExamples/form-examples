@@ -9,7 +9,6 @@ use crate::models::body_mass_index_and_body_surface_area_calculator_grades::Mode
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub body_mass_index_and_body_surface_area_calculator_id: Uuid,
     pub bmi: Option<f64>,
     pub bmi_category: String,
@@ -22,12 +21,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO body_mass_index_and_body_surface_area_calculator_grades (deleted_at, \
-            body_mass_index_and_body_surface_area_calculator_id, bmi, bmi_category, \
-            bsa_mosteller, bsa_du_bois, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7) \
+            "INSERT INTO body_mass_index_and_body_surface_area_calculator_grades \
+            (body_mass_index_and_body_surface_area_calculator_id, bmi, bmi_category, \
+            bsa_mosteller, bsa_du_bois, graded_at) VALUES ($1, $2, $3, $4, $5, $6) \
             RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.body_mass_index_and_body_surface_area_calculator_id)
         .bind(self.bmi)
         .bind(&self.bmi_category)
@@ -41,13 +39,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE body_mass_index_and_body_surface_area_calculator_grades SET deleted_at = \
-            $2, body_mass_index_and_body_surface_area_calculator_id = $3, bmi = $4, \
-            bmi_category = $5, bsa_mosteller = $6, bsa_du_bois = $7, graded_at = $8, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE body_mass_index_and_body_surface_area_calculator_grades SET \
+            body_mass_index_and_body_surface_area_calculator_id = $2, bmi = $3, \
+            bmi_category = $4, bsa_mosteller = $5, bsa_du_bois = $6, graded_at = $7, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.body_mass_index_and_body_surface_area_calculator_id)
         .bind(self.bmi)
         .bind(&self.bmi_category)

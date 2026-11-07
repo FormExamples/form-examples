@@ -78,9 +78,9 @@ impl Params {
             "UPDATE medical_operation_note_implants SET category = $2, name = $3, \
             size_or_gauge = $4, quantity = $5, manufacturer = $6, lot_number = $7, \
             serial_number = $8, batch_number = $9, expiry_date = $10, udi_di = $11, \
-            implant_site = $12, registry_required = $13, registry_submitted = $14, notes = \
-            $15, medical_operation_note_id = $16, updated_at = now() WHERE id = $1 RETURNING \
-            *",
+            implant_site = $12, registry_required = $13, registry_submitted = $14, notes \
+            = $15, medical_operation_note_id = $16, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(&self.category)

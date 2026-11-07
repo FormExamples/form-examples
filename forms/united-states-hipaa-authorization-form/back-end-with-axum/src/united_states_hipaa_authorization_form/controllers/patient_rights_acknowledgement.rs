@@ -9,7 +9,6 @@ use crate::models::patient_rights_acknowledgements::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub hipaa_authorization_id: Uuid,
     pub acknowledged_right_to_revoke: String,
     pub acknowledged_revocation_procedure: String,
@@ -23,13 +22,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO patient_rights_acknowledgements (deleted_at, hipaa_authorization_id, \
+            "INSERT INTO patient_rights_acknowledgements (hipaa_authorization_id, \
             acknowledged_right_to_revoke, acknowledged_revocation_procedure, \
             acknowledged_no_conditioning, acknowledged_redisclosure_warning, \
-            acknowledged_right_to_copy, acknowledged_right_to_inspect_disclosed) VALUES ($1, \
-            $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+            acknowledged_right_to_copy, acknowledged_right_to_inspect_disclosed) VALUES \
+            ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.hipaa_authorization_id)
         .bind(&self.acknowledged_right_to_revoke)
         .bind(&self.acknowledged_revocation_procedure)
@@ -44,15 +42,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE patient_rights_acknowledgements SET deleted_at = $2, \
-            hipaa_authorization_id = $3, acknowledged_right_to_revoke = $4, \
-            acknowledged_revocation_procedure = $5, acknowledged_no_conditioning = $6, \
-            acknowledged_redisclosure_warning = $7, acknowledged_right_to_copy = $8, \
-            acknowledged_right_to_inspect_disclosed = $9, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE patient_rights_acknowledgements SET hipaa_authorization_id = $2, \
+            acknowledged_right_to_revoke = $3, acknowledged_revocation_procedure = $4, \
+            acknowledged_no_conditioning = $5, acknowledged_redisclosure_warning = $6, \
+            acknowledged_right_to_copy = $7, acknowledged_right_to_inspect_disclosed = \
+            $8, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.hipaa_authorization_id)
         .bind(&self.acknowledged_right_to_revoke)
         .bind(&self.acknowledged_revocation_procedure)

@@ -13,6 +13,7 @@ pub mod purpose_of_disclosure;
 pub mod records_to_disclose;
 pub mod signature_witness;
 pub mod signer;
+mod soft_delete;
 pub mod validation_additional_flag;
 pub mod validation_fired_rule;
 pub mod validation_result;

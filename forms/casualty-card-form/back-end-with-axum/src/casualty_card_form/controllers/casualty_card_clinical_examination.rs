@@ -9,7 +9,6 @@ use crate::models::casualty_card_clinical_examinations::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub casualty_card_id: Uuid,
     pub general_appearance: String,
     pub head_and_face: String,
@@ -29,13 +28,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO casualty_card_clinical_examinations (deleted_at, casualty_card_id, \
-            general_appearance, head_and_face, neck, chest_cardiovascular, chest_respiratory, \
-            abdomen, pelvis, musculoskeletal_limbs, neurological, skin, mental_state, \
-            body_diagram_notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, \
-            $13, $14) RETURNING *",
+            "INSERT INTO casualty_card_clinical_examinations (casualty_card_id, \
+            general_appearance, head_and_face, neck, chest_cardiovascular, \
+            chest_respiratory, abdomen, pelvis, musculoskeletal_limbs, neurological, \
+            skin, mental_state, body_diagram_notes) VALUES ($1, $2, $3, $4, $5, $6, $7, \
+            $8, $9, $10, $11, $12, $13) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(&self.general_appearance)
         .bind(&self.head_and_face)
@@ -56,14 +54,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE casualty_card_clinical_examinations SET deleted_at = $2, casualty_card_id \
-            = $3, general_appearance = $4, head_and_face = $5, neck = $6, \
-            chest_cardiovascular = $7, chest_respiratory = $8, abdomen = $9, pelvis = $10, \
-            musculoskeletal_limbs = $11, neurological = $12, skin = $13, mental_state = $14, \
-            body_diagram_notes = $15, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE casualty_card_clinical_examinations SET casualty_card_id = $2, \
+            general_appearance = $3, head_and_face = $4, neck = $5, chest_cardiovascular \
+            = $6, chest_respiratory = $7, abdomen = $8, pelvis = $9, \
+            musculoskeletal_limbs = $10, neurological = $11, skin = $12, mental_state = \
+            $13, body_diagram_notes = $14, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(&self.general_appearance)
         .bind(&self.head_and_face)

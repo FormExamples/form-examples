@@ -5,6 +5,7 @@ mod readiness;
 
 pub mod assessor;
 pub mod product;
+mod soft_delete;
 pub mod supplier;
 pub mod uk_nhs_digital_technology_assessment_criteria;
 pub mod uk_nhs_digital_technology_assessment_criteria_grade;

@@ -12,8 +12,6 @@ use crate::models::medical_device_assessment_grade_flags::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    /// Deleted at.
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Medical device assessment grade ID.
     pub medical_device_assessment_grade_id: Uuid,
     /// Flag ID.
@@ -32,11 +30,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO medical_device_assessment_grade_flags (deleted_at, \
-            medical_device_assessment_grade_id, flag_id, category, priority, description, \
-            suggested_action) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+            "INSERT INTO medical_device_assessment_grade_flags \
+            (medical_device_assessment_grade_id, flag_id, category, priority, \
+            description, suggested_action) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.medical_device_assessment_grade_id)
         .bind(&self.flag_id)
         .bind(&self.category)
@@ -50,13 +47,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE medical_device_assessment_grade_flags SET deleted_at = $2, \
-            medical_device_assessment_grade_id = $3, flag_id = $4, category = $5, priority = \
-            $6, description = $7, suggested_action = $8, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE medical_device_assessment_grade_flags SET \
+            medical_device_assessment_grade_id = $2, flag_id = $3, category = $4, \
+            priority = $5, description = $6, suggested_action = $7, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.medical_device_assessment_grade_id)
         .bind(&self.flag_id)
         .bind(&self.category)

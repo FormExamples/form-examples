@@ -9,7 +9,6 @@ use crate::models::lpa_validity_fired_rules::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub lpa_validity_id: Uuid,
     pub rule_id: String,
     pub severity: String,
@@ -23,11 +22,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO lpa_validity_fired_rules (deleted_at, lpa_validity_id, rule_id, \
-            severity, rule_family, source_citation, description, suggested_correction) VALUES \
-            ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+            "INSERT INTO lpa_validity_fired_rules (lpa_validity_id, rule_id, severity, \
+            rule_family, source_citation, description, suggested_correction) VALUES ($1, \
+            $2, $3, $4, $5, $6, $7) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.lpa_validity_id)
         .bind(&self.rule_id)
         .bind(&self.severity)
@@ -42,12 +40,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE lpa_validity_fired_rules SET deleted_at = $2, lpa_validity_id = $3, \
-            rule_id = $4, severity = $5, rule_family = $6, source_citation = $7, description \
-            = $8, suggested_correction = $9, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE lpa_validity_fired_rules SET lpa_validity_id = $2, rule_id = $3, \
+            severity = $4, rule_family = $5, source_citation = $6, description = $7, \
+            suggested_correction = $8, updated_at = now() WHERE id = $1 AND deleted_at \
+            IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.lpa_validity_id)
         .bind(&self.rule_id)
         .bind(&self.severity)

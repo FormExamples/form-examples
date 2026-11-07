@@ -9,7 +9,6 @@ use crate::models::medical_information_form_for_air_travel_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub medical_information_form_for_air_travel_id: Uuid,
     pub computed_fitness_band: String,
     pub final_fitness_band: String,
@@ -25,13 +24,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO medical_information_form_for_air_travel_grades (deleted_at, \
-            medical_information_form_for_air_travel_id, computed_fitness_band, \
+            "INSERT INTO medical_information_form_for_air_travel_grades \
+            (medical_information_form_for_air_travel_id, computed_fitness_band, \
             final_fitness_band, override_reason, desk_recommendation, physician_notes, \
-            valid_until, signed_at, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, \
-            $10) RETURNING *",
+            valid_until, signed_at, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, \
+            $9) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.medical_information_form_for_air_travel_id)
         .bind(&self.computed_fitness_band)
         .bind(&self.final_fitness_band)
@@ -48,14 +46,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE medical_information_form_for_air_travel_grades SET deleted_at = $2, \
-            medical_information_form_for_air_travel_id = $3, computed_fitness_band = $4, \
-            final_fitness_band = $5, override_reason = $6, desk_recommendation = $7, \
-            physician_notes = $8, valid_until = $9, signed_at = $10, graded_at = $11, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE medical_information_form_for_air_travel_grades SET \
+            medical_information_form_for_air_travel_id = $2, computed_fitness_band = $3, \
+            final_fitness_band = $4, override_reason = $5, desk_recommendation = $6, \
+            physician_notes = $7, valid_until = $8, signed_at = $9, graded_at = $10, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.medical_information_form_for_air_travel_id)
         .bind(&self.computed_fitness_band)
         .bind(&self.final_fitness_band)

@@ -179,25 +179,26 @@ impl RequestParams {
     ) -> sqlx::Result<neurodiversity_adjustment_requests::Model> {
         let now = Utc::now();
         sqlx::query_as(
-            "UPDATE neurodiversity_adjustment_requests SET updated_at = $2, deleted_at = NULL, \
-            worker_id = $3, manager_id = $4, status = $5, requested_by = $6, request_date = \
-            $7, requested_start_date = $8, condition_adhd = $9, condition_autism = $10, \
-            condition_dyslexia = $11, condition_dyspraxia = $12, condition_dyscalculia = $13, \
-            condition_tourettes = $14, condition_other = $15, condition_other_detail = $16, \
-            diagnosis_status = $17, considers_disability = $18, substantial_long_term_impact \
-            = $19, disclosure_consent = $20, difficulty_concentration = $21, \
-            difficulty_written_communication = $22, difficulty_organisation_time = $23, \
-            difficulty_sensory_overload = $24, difficulty_balance_coordination = $25, \
-            difficulty_social_communication = $26, difficulty_memory = $27, \
-            difficulty_burnout_wellbeing = $28, tasks_situations_affected = $29, \
-            worker_strengths = $30, adjustment_working_environment = $31, \
-            adjustment_equipment_technology = $32, adjustment_working_arrangements = $33, \
-            adjustment_communication = $34, adjustment_support_mentoring = $35, \
-            adjustment_recruitment_process = $36, adjustment_policy_dress = $37, \
-            adjustment_other = $38, adjustments_requested_detail = $39, \
-            supporting_evidence_type = $40, occupational_health_involved = $41, \
-            access_to_work_involved = $42, current_impact = $43, at_risk_of_absence = $44, \
-            urgency = $45, notes = $46 WHERE id = $1 RETURNING *",
+            "UPDATE neurodiversity_adjustment_requests SET updated_at = $2, worker_id = \
+            $3, manager_id = $4, status = $5, requested_by = $6, request_date = $7, \
+            requested_start_date = $8, condition_adhd = $9, condition_autism = $10, \
+            condition_dyslexia = $11, condition_dyspraxia = $12, condition_dyscalculia = \
+            $13, condition_tourettes = $14, condition_other = $15, \
+            condition_other_detail = $16, diagnosis_status = $17, considers_disability = \
+            $18, substantial_long_term_impact = $19, disclosure_consent = $20, \
+            difficulty_concentration = $21, difficulty_written_communication = $22, \
+            difficulty_organisation_time = $23, difficulty_sensory_overload = $24, \
+            difficulty_balance_coordination = $25, difficulty_social_communication = \
+            $26, difficulty_memory = $27, difficulty_burnout_wellbeing = $28, \
+            tasks_situations_affected = $29, worker_strengths = $30, \
+            adjustment_working_environment = $31, adjustment_equipment_technology = $32, \
+            adjustment_working_arrangements = $33, adjustment_communication = $34, \
+            adjustment_support_mentoring = $35, adjustment_recruitment_process = $36, \
+            adjustment_policy_dress = $37, adjustment_other = $38, \
+            adjustments_requested_detail = $39, supporting_evidence_type = $40, \
+            occupational_health_involved = $41, access_to_work_involved = $42, \
+            current_impact = $43, at_risk_of_absence = $44, urgency = $45, notes = $46 \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(now)
@@ -364,15 +365,19 @@ async fn list(State(ctx): State<AppContext>, Query(params): Query<PageParams>) -
     let page = paging::resolve(&params)?;
     let (limit, offset) = paging::bounds(page);
     let models = sqlx::query_as::<_, neurodiversity_adjustment_requests::Model>(
-        "SELECT * FROM neurodiversity_adjustment_requests ORDER BY created_at DESC, id LIMIT $1 OFFSET $2",
+        "SELECT * FROM neurodiversity_adjustment_requests WHERE deleted_at IS NULL \
+            ORDER BY created_at DESC, id LIMIT $1 OFFSET $2",
     )
     .bind(limit)
     .bind(offset)
     .fetch_all(&db(&ctx))
     .await?;
-    let total: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM neurodiversity_adjustment_requests")
-        .fetch_one(&db(&ctx))
-        .await?;
+    let total: i64 = sqlx::query_scalar(
+        "SELECT COUNT(*) FROM neurodiversity_adjustment_requests WHERE deleted_at IS \
+            NULL",
+    )
+    .fetch_one(&db(&ctx))
+    .await?;
     let headers = page.headers(u64::try_from(total).unwrap_or(0));
     Ok((headers, Json(json!({ "items": models, "total": total }))).into_response())
 }
@@ -426,7 +431,22 @@ async fn submit(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<R
     let mut txn = db(&ctx).begin().await?;
 
     // Idempotency: drop any prior grade (cascades rules + flags).
-    sqlx::query("DELETE FROM neurodiversity_adjustment_request_grades WHERE neurodiversity_adjustment_request_id = $1").bind(id).execute(&mut *txn).await?;
+    sqlx::query(
+        "WITH target AS (UPDATE neurodiversity_adjustment_request_grades SET \
+            deleted_at = now(), updated_at = now() WHERE \
+            neurodiversity_adjustment_request_id = $1 AND deleted_at IS NULL RETURNING \
+            id), child1 AS (UPDATE neurodiversity_adjustment_request_grade_rules SET \
+            deleted_at = now(), updated_at = now() WHERE \
+            neurodiversity_adjustment_request_grade_id IN (SELECT id FROM target) AND \
+            deleted_at IS NULL RETURNING id), child2 AS (UPDATE \
+            neurodiversity_adjustment_request_grade_flags SET deleted_at = now(), \
+            updated_at = now() WHERE neurodiversity_adjustment_request_grade_id IN \
+            (SELECT id FROM target) AND deleted_at IS NULL RETURNING id) SELECT count(*) \
+            FROM target",
+    )
+    .bind(id)
+    .execute(&mut *txn)
+    .await?;
 
     let grade_row = sqlx::query_as::<_, neurodiversity_adjustment_request_grades::Model>(
         "INSERT INTO neurodiversity_adjustment_request_grades (created_at, updated_at, \
@@ -487,7 +507,8 @@ async fn submit(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<R
 
     // Mark the request submitted alongside the grade, in the same transaction.
     sqlx::query(
-        "UPDATE neurodiversity_adjustment_requests SET status = $2, updated_at = $3 WHERE id = $1",
+        "UPDATE neurodiversity_adjustment_requests SET status = $2, updated_at = $3 \
+            WHERE id = $1 AND deleted_at IS NULL",
     )
     .bind(request.id)
     .bind("submitted".to_string())
@@ -504,12 +525,30 @@ async fn submit(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<R
 /// grade back, together with its fired-rule audit trail and compliance flags.
 #[debug_handler]
 async fn result(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
-    let grade = sqlx::query_as::<_, neurodiversity_adjustment_request_grades::Model>("SELECT * FROM neurodiversity_adjustment_request_grades WHERE neurodiversity_adjustment_request_id = $1").bind(id).fetch_optional(&db(&ctx)).await?
-        .ok_or_else(|| Error::NotFound)?;
+    let grade = sqlx::query_as::<_, neurodiversity_adjustment_request_grades::Model>(
+        "SELECT * FROM neurodiversity_adjustment_request_grades WHERE \
+            neurodiversity_adjustment_request_id = $1 AND deleted_at IS NULL",
+    )
+    .bind(id)
+    .fetch_optional(&db(&ctx))
+    .await?
+    .ok_or_else(|| Error::NotFound)?;
 
-    let rules = sqlx::query_as::<_, neurodiversity_adjustment_request_grade_rules::Model>("SELECT * FROM neurodiversity_adjustment_request_grade_rules WHERE neurodiversity_adjustment_request_grade_id = $1").bind(grade.id).fetch_all(&db(&ctx)).await?;
+    let rules = sqlx::query_as::<_, neurodiversity_adjustment_request_grade_rules::Model>(
+        "SELECT * FROM neurodiversity_adjustment_request_grade_rules WHERE \
+            neurodiversity_adjustment_request_grade_id = $1 AND deleted_at IS NULL",
+    )
+    .bind(grade.id)
+    .fetch_all(&db(&ctx))
+    .await?;
 
-    let flags = sqlx::query_as::<_, neurodiversity_adjustment_request_grade_flags::Model>("SELECT * FROM neurodiversity_adjustment_request_grade_flags WHERE neurodiversity_adjustment_request_grade_id = $1").bind(grade.id).fetch_all(&db(&ctx)).await?;
+    let flags = sqlx::query_as::<_, neurodiversity_adjustment_request_grade_flags::Model>(
+        "SELECT * FROM neurodiversity_adjustment_request_grade_flags WHERE \
+            neurodiversity_adjustment_request_grade_id = $1 AND deleted_at IS NULL",
+    )
+    .bind(grade.id)
+    .fetch_all(&db(&ctx))
+    .await?;
 
     Ok(Json(json!({
         "grade": grade,

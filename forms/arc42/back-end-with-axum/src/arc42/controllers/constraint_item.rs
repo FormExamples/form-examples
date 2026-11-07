@@ -9,7 +9,6 @@ use crate::models::constraint_items::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub arc42_documentation_id: Uuid,
     pub ordinal: i32,
     pub kind: String,
@@ -21,10 +20,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO constraint_items (deleted_at, arc42_documentation_id, ordinal, kind, \
-            name, description) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+            "INSERT INTO constraint_items (arc42_documentation_id, ordinal, kind, name, \
+            description) VALUES ($1, $2, $3, $4, $5) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.arc42_documentation_id)
         .bind(self.ordinal)
         .bind(&self.kind)
@@ -37,12 +35,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE constraint_items SET deleted_at = $2, arc42_documentation_id = $3, ordinal \
-            = $4, kind = $5, name = $6, description = $7, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE constraint_items SET arc42_documentation_id = $2, ordinal = $3, kind \
+            = $4, name = $5, description = $6, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.arc42_documentation_id)
         .bind(self.ordinal)
         .bind(&self.kind)

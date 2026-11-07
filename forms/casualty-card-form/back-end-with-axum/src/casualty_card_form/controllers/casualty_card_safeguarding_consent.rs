@@ -9,7 +9,6 @@ use crate::models::casualty_card_safeguarding_consents::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub casualty_card_id: Uuid,
     pub safeguarding_concern: String,
     pub safeguarding_type: String,
@@ -27,14 +26,13 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO casualty_card_safeguarding_consents (deleted_at, casualty_card_id, \
+            "INSERT INTO casualty_card_safeguarding_consents (casualty_card_id, \
             safeguarding_concern, safeguarding_type, referral_made, \
             mental_capacity_assessment, mental_health_act_status, consent_for_treatment, \
             completed_by_name, completed_by_role, completed_by_gmc_number, \
-            senior_reviewing_clinician) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, \
-            $12) RETURNING *",
+            senior_reviewing_clinician) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, \
+            $11) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(&self.safeguarding_concern)
         .bind(&self.safeguarding_type)
@@ -53,15 +51,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE casualty_card_safeguarding_consents SET deleted_at = $2, casualty_card_id \
-            = $3, safeguarding_concern = $4, safeguarding_type = $5, referral_made = $6, \
-            mental_capacity_assessment = $7, mental_health_act_status = $8, \
-            consent_for_treatment = $9, completed_by_name = $10, completed_by_role = $11, \
-            completed_by_gmc_number = $12, senior_reviewing_clinician = $13, updated_at = \
-            now() WHERE id = $1 RETURNING *",
+            "UPDATE casualty_card_safeguarding_consents SET casualty_card_id = $2, \
+            safeguarding_concern = $3, safeguarding_type = $4, referral_made = $5, \
+            mental_capacity_assessment = $6, mental_health_act_status = $7, \
+            consent_for_treatment = $8, completed_by_name = $9, completed_by_role = $10, \
+            completed_by_gmc_number = $11, senior_reviewing_clinician = $12, updated_at \
+            = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(&self.safeguarding_concern)
         .bind(&self.safeguarding_type)

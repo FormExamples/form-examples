@@ -9,7 +9,6 @@ use crate::models::united_kingdom_statement_of_fitness_for_works::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub medical_practice_id: Uuid,
@@ -40,7 +39,6 @@ pub struct Params {
     pub issued_at: Option<DateTimeWithTimeZone>,
     pub issued_via: String,
     pub issue_setting: String,
-    pub united_kingdom_statement_of_fitness_for_work_id: Uuid,
     pub safeguarding_concern: String,
     pub safeguarding_notes: String,
     pub clinician_signature_svg: String,
@@ -51,22 +49,20 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO united_kingdom_statement_of_fitness_for_works (deleted_at, \
-            patient_id, clinician_id, medical_practice_id, status, assessment_date, \
+            "INSERT INTO united_kingdom_statement_of_fitness_for_works (patient_id, \
+            clinician_id, medical_practice_id, status, assessment_date, \
             assessment_method, general_fitness_considered, diagnosis_text, \
             diagnosis_snomed_code, diagnosis_snomed_display, diagnosis_category, \
             condition_first_recorded_date, is_automatic_disability, is_non_medical, \
             fitness_for_work, adaptation_phased_return, adaptation_altered_hours, \
             adaptation_amended_duties, adaptation_workplace_adaptations, comments, \
-            period_type, period_duration_value, period_duration_unit, period_from, period_to, \
-            will_assess_again, planned_review_date, issued_at, issued_via, issue_setting, \
-            united_kingdom_statement_of_fitness_for_work_id, safeguarding_concern, \
-            safeguarding_notes, clinician_signature_svg, clinician_signed_at) VALUES ($1, $2, \
-            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, \
-            $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, \
-            $36) RETURNING *",
+            period_type, period_duration_value, period_duration_unit, period_from, \
+            period_to, will_assess_again, planned_review_date, issued_at, issued_via, \
+            issue_setting, safeguarding_concern, safeguarding_notes, \
+            clinician_signature_svg, clinician_signed_at) VALUES ($1, $2, $3, $4, $5, \
+            $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, \
+            $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(self.medical_practice_id)
@@ -97,7 +93,6 @@ impl Params {
         .bind(self.issued_at)
         .bind(&self.issued_via)
         .bind(&self.issue_setting)
-        .bind(self.united_kingdom_statement_of_fitness_for_work_id)
         .bind(&self.safeguarding_concern)
         .bind(&self.safeguarding_notes)
         .bind(&self.clinician_signature_svg)
@@ -109,23 +104,22 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE united_kingdom_statement_of_fitness_for_works SET deleted_at = $2, \
-            patient_id = $3, clinician_id = $4, medical_practice_id = $5, status = $6, \
-            assessment_date = $7, assessment_method = $8, general_fitness_considered = $9, \
-            diagnosis_text = $10, diagnosis_snomed_code = $11, diagnosis_snomed_display = \
-            $12, diagnosis_category = $13, condition_first_recorded_date = $14, \
-            is_automatic_disability = $15, is_non_medical = $16, fitness_for_work = $17, \
-            adaptation_phased_return = $18, adaptation_altered_hours = $19, \
-            adaptation_amended_duties = $20, adaptation_workplace_adaptations = $21, comments \
-            = $22, period_type = $23, period_duration_value = $24, period_duration_unit = \
-            $25, period_from = $26, period_to = $27, will_assess_again = $28, \
-            planned_review_date = $29, issued_at = $30, issued_via = $31, issue_setting = \
-            $32, united_kingdom_statement_of_fitness_for_work_id = $33, safeguarding_concern \
-            = $34, safeguarding_notes = $35, clinician_signature_svg = $36, \
-            clinician_signed_at = $37, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE united_kingdom_statement_of_fitness_for_works SET patient_id = $2, \
+            clinician_id = $3, medical_practice_id = $4, status = $5, assessment_date = \
+            $6, assessment_method = $7, general_fitness_considered = $8, diagnosis_text \
+            = $9, diagnosis_snomed_code = $10, diagnosis_snomed_display = $11, \
+            diagnosis_category = $12, condition_first_recorded_date = $13, \
+            is_automatic_disability = $14, is_non_medical = $15, fitness_for_work = $16, \
+            adaptation_phased_return = $17, adaptation_altered_hours = $18, \
+            adaptation_amended_duties = $19, adaptation_workplace_adaptations = $20, \
+            comments = $21, period_type = $22, period_duration_value = $23, \
+            period_duration_unit = $24, period_from = $25, period_to = $26, \
+            will_assess_again = $27, planned_review_date = $28, issued_at = $29, \
+            issued_via = $30, issue_setting = $31, safeguarding_concern = $32, \
+            safeguarding_notes = $33, clinician_signature_svg = $34, clinician_signed_at \
+            = $35, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(self.medical_practice_id)
@@ -156,7 +150,6 @@ impl Params {
         .bind(self.issued_at)
         .bind(&self.issued_via)
         .bind(&self.issue_setting)
-        .bind(self.united_kingdom_statement_of_fitness_for_work_id)
         .bind(&self.safeguarding_concern)
         .bind(&self.safeguarding_notes)
         .bind(&self.clinician_signature_svg)

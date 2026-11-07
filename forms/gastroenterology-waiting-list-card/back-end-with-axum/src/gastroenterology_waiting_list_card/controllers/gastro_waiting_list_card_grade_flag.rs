@@ -9,7 +9,6 @@ use crate::models::gastro_waiting_list_card_grade_flags::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub gastro_waiting_list_card_grade_id: Uuid,
     pub flag_id: String,
     pub category: String,
@@ -22,11 +21,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO gastro_waiting_list_card_grade_flags (deleted_at, \
-            gastro_waiting_list_card_grade_id, flag_id, category, priority, description, \
-            suggested_action) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+            "INSERT INTO gastro_waiting_list_card_grade_flags \
+            (gastro_waiting_list_card_grade_id, flag_id, category, priority, \
+            description, suggested_action) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.gastro_waiting_list_card_grade_id)
         .bind(&self.flag_id)
         .bind(&self.category)
@@ -40,13 +38,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE gastro_waiting_list_card_grade_flags SET deleted_at = $2, \
-            gastro_waiting_list_card_grade_id = $3, flag_id = $4, category = $5, priority = \
-            $6, description = $7, suggested_action = $8, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE gastro_waiting_list_card_grade_flags SET \
+            gastro_waiting_list_card_grade_id = $2, flag_id = $3, category = $4, \
+            priority = $5, description = $6, suggested_action = $7, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.gastro_waiting_list_card_grade_id)
         .bind(&self.flag_id)
         .bind(&self.category)

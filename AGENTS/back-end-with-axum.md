@@ -210,6 +210,8 @@ Every crate's `Cargo.lock` is committed, because each is a binary crate. See
 - `bin/axum-forbid-unsafe [--check] [--dry-run] [--verbose] [--all|<slug>…]` — add `#![forbid(unsafe_code)]` to each crate root
 - `bin/axum-msrv-set --msrv <version> [--check] [--dry-run] [--all|<slug>…]` — set the Rust MSRV fleet-wide
 - `bin/axum-axa-upgrade [--check] [--root <dir>] [--all|<slug>…]` — move crates to axa 0.5 and RFC 9457 errors, and check they stay there
+- `bin/axum-entity-routes [--check] [--root <dir>] [--all|<slug>…]` — give every `sql/` table a migration, model, controller, and test, unless a hand-written controller already reaches it. Run after adding a table, then run `bin/axum-soft-delete`
+- `bin/axum-soft-delete [--check] [--root <dir>] [--all|<slug>…]` — make `DELETE` mark and cascade, make reads and updates skip marked rows, narrow uniqueness to live rows, and take `deleted_at` out of every body
 - `bin/test-axum-routes` — assert every crate exposes its domain HTTP API
 - `bin/generate-api-transcripts [--check] [<slug>…]` — record a real `examples/api-create.http` transcript
 - `bin/back-end-with-axum/migrate-from-loco/` — the shared `support/` source, and a record of the one-shot conversion from Loco and SeaORM. The conversion predates ADR-7, so it still emits auth

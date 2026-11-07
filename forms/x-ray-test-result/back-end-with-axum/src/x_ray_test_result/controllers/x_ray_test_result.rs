@@ -9,7 +9,6 @@ use crate::models::x_ray_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -43,17 +42,16 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO x_ray_test_results (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO x_ray_test_results (patient_id, clinician_id, \
             originating_request_reference, report_status, performed_date, reported_date, \
-            body_region, laterality, projections, examination_adequacy, clinical_history, \
-            comparison_with_previous, findings_narrative, fracture, dislocation, \
-            consolidation, pneumothorax, pleural_effusion, foreign_body, free_air, \
-            bony_lesion, incidental_finding, impression, reporting_category, \
-            recommended_follow_up, critical_result_communicated, reported_to) VALUES ($1, $2, \
-            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, \
-            $20, $21, $22, $23, $24, $25, $26, $27, $28) RETURNING *",
+            body_region, laterality, projections, examination_adequacy, \
+            clinical_history, comparison_with_previous, findings_narrative, fracture, \
+            dislocation, consolidation, pneumothorax, pleural_effusion, foreign_body, \
+            free_air, bony_lesion, incidental_finding, impression, reporting_category, \
+            recommended_follow_up, critical_result_communicated, reported_to) VALUES \
+            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, \
+            $18, $19, $20, $21, $22, $23, $24, $25, $26, $27) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -88,19 +86,18 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE x_ray_test_results SET deleted_at = $2, patient_id = $3, clinician_id = \
-            $4, originating_request_reference = $5, report_status = $6, performed_date = $7, \
-            reported_date = $8, body_region = $9, laterality = $10, projections = $11, \
-            examination_adequacy = $12, clinical_history = $13, comparison_with_previous = \
-            $14, findings_narrative = $15, fracture = $16, dislocation = $17, consolidation = \
-            $18, pneumothorax = $19, pleural_effusion = $20, foreign_body = $21, free_air = \
-            $22, bony_lesion = $23, incidental_finding = $24, impression = $25, \
-            reporting_category = $26, recommended_follow_up = $27, \
-            critical_result_communicated = $28, reported_to = $29, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE x_ray_test_results SET patient_id = $2, clinician_id = $3, \
+            originating_request_reference = $4, report_status = $5, performed_date = $6, \
+            reported_date = $7, body_region = $8, laterality = $9, projections = $10, \
+            examination_adequacy = $11, clinical_history = $12, comparison_with_previous \
+            = $13, findings_narrative = $14, fracture = $15, dislocation = $16, \
+            consolidation = $17, pneumothorax = $18, pleural_effusion = $19, \
+            foreign_body = $20, free_air = $21, bony_lesion = $22, incidental_finding = \
+            $23, impression = $24, reporting_category = $25, recommended_follow_up = \
+            $26, critical_result_communicated = $27, reported_to = $28, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

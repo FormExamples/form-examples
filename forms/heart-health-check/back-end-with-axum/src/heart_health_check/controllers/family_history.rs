@@ -9,7 +9,6 @@ use crate::models::family_histories::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub family_cvd_under_60: String,
     pub family_cvd_relationship: String,
@@ -20,11 +19,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO family_histories (deleted_at, assessment_id, family_cvd_under_60, \
-            family_cvd_relationship, family_diabetes_history) VALUES ($1, $2, $3, $4, $5) \
+            "INSERT INTO family_histories (assessment_id, family_cvd_under_60, \
+            family_cvd_relationship, family_diabetes_history) VALUES ($1, $2, $3, $4) \
             RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.family_cvd_under_60)
         .bind(&self.family_cvd_relationship)
@@ -36,12 +34,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE family_histories SET deleted_at = $2, assessment_id = $3, \
-            family_cvd_under_60 = $4, family_cvd_relationship = $5, family_diabetes_history = \
-            $6, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE family_histories SET assessment_id = $2, family_cvd_under_60 = $3, \
+            family_cvd_relationship = $4, family_diabetes_history = $5, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.family_cvd_under_60)
         .bind(&self.family_cvd_relationship)

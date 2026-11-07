@@ -12,6 +12,7 @@ pub struct Model {
     pub created_at: DateTimeWithTimeZone,
     pub updated_at: DateTimeWithTimeZone,
     pub id: Uuid,
+    #[serde(skip)]
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub oks_total: Option<i32>,
     pub computed_oks_category: String,
@@ -35,15 +36,20 @@ impl Model {
     /// Propagates the database error.
     pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Self>, i64)> {
         let (limit, offset) = crate::support::paging::bounds(page);
-        let rows = sqlx::query_as("SELECT * FROM knee_replacement_surgery_evaluation_grades ORDER BY id LIMIT $1 OFFSET $2")
-            .bind(limit)
-            .bind(offset)
-            .fetch_all(db)
-            .await?;
-        let total =
-            sqlx::query_scalar("SELECT COUNT(*) FROM knee_replacement_surgery_evaluation_grades")
-                .fetch_one(db)
-                .await?;
+        let rows = sqlx::query_as(
+            "SELECT * FROM knee_replacement_surgery_evaluation_grades WHERE deleted_at IS \
+            NULL ORDER BY id LIMIT $1 OFFSET $2",
+        )
+        .bind(limit)
+        .bind(offset)
+        .fetch_all(db)
+        .await?;
+        let total = sqlx::query_scalar(
+            "SELECT COUNT(*) FROM knee_replacement_surgery_evaluation_grades WHERE \
+            deleted_at IS NULL",
+        )
+        .fetch_one(db)
+        .await?;
         Ok((rows, total))
     }
 
@@ -53,10 +59,13 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn find_by_id(db: &PgPool, id: Uuid) -> sqlx::Result<Option<Self>> {
-        sqlx::query_as("SELECT * FROM knee_replacement_surgery_evaluation_grades WHERE id = $1")
-            .bind(id)
-            .fetch_optional(db)
-            .await
+        sqlx::query_as(
+            "SELECT * FROM knee_replacement_surgery_evaluation_grades WHERE id = $1 AND \
+            deleted_at IS NULL",
+        )
+        .bind(id)
+        .fetch_optional(db)
+        .await
     }
 
     /// Delete the row with this id.
@@ -65,10 +74,18 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn delete(db: &PgPool, id: Uuid) -> sqlx::Result<()> {
-        sqlx::query("DELETE FROM knee_replacement_surgery_evaluation_grades WHERE id = $1")
-            .bind(id)
-            .execute(db)
-            .await?;
+        sqlx::query(
+            "WITH target AS (UPDATE knee_replacement_surgery_evaluation_grades SET \
+            deleted_at = now(), updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING id), child1 AS (UPDATE \
+            knee_replacement_surgery_evaluation_grade_flags SET deleted_at = now(), \
+            updated_at = now() WHERE knee_replacement_surgery_evaluation_grade_id IN \
+            (SELECT id FROM target) AND deleted_at IS NULL RETURNING id) SELECT count(*) \
+            FROM target",
+        )
+        .bind(id)
+        .execute(db)
+        .await?;
         Ok(())
     }
 }

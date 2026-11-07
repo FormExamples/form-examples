@@ -9,7 +9,6 @@ use crate::models::patients::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub name: String,
     pub birth_date: Option<Date>,
     pub sex_at_birth: String,
@@ -33,15 +32,14 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO patients (deleted_at, name, birth_date, sex_at_birth, \
-            nationality_as_iso_3166_1_alpha_2, passport_number, united_kingdom_nhs_number, \
-            national_health_id, email, phone, postal_address_as_full_text, \
-            country_as_iso_3166_1_alpha_2, postcode, emergency_contact_name, \
-            emergency_contact_relationship, emergency_contact_phone, weight_as_kg, \
-            height_as_cm) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, \
-            $14, $15, $16, $17, $18) RETURNING *",
+            "INSERT INTO patients (name, birth_date, sex_at_birth, \
+            nationality_as_iso_3166_1_alpha_2, passport_number, \
+            united_kingdom_nhs_number, national_health_id, email, phone, \
+            postal_address_as_full_text, country_as_iso_3166_1_alpha_2, postcode, \
+            emergency_contact_name, emergency_contact_relationship, \
+            emergency_contact_phone, weight_as_kg, height_as_cm) VALUES ($1, $2, $3, $4, \
+            $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(self.birth_date)
         .bind(&self.sex_at_birth)
@@ -66,16 +64,15 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE patients SET deleted_at = $2, name = $3, birth_date = $4, sex_at_birth = \
-            $5, nationality_as_iso_3166_1_alpha_2 = $6, passport_number = $7, \
-            united_kingdom_nhs_number = $8, national_health_id = $9, email = $10, phone = \
-            $11, postal_address_as_full_text = $12, country_as_iso_3166_1_alpha_2 = $13, \
-            postcode = $14, emergency_contact_name = $15, emergency_contact_relationship = \
-            $16, emergency_contact_phone = $17, weight_as_kg = $18, height_as_cm = $19, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE patients SET name = $2, birth_date = $3, sex_at_birth = $4, \
+            nationality_as_iso_3166_1_alpha_2 = $5, passport_number = $6, \
+            united_kingdom_nhs_number = $7, national_health_id = $8, email = $9, phone = \
+            $10, postal_address_as_full_text = $11, country_as_iso_3166_1_alpha_2 = $12, \
+            postcode = $13, emergency_contact_name = $14, emergency_contact_relationship \
+            = $15, emergency_contact_phone = $16, weight_as_kg = $17, height_as_cm = \
+            $18, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(self.birth_date)
         .bind(&self.sex_at_birth)

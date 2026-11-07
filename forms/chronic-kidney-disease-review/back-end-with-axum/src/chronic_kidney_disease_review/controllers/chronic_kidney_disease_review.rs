@@ -109,18 +109,19 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE chronic_kidney_disease_reviews SET patient_id = $2, clinician_id = $3, \
-            clinician_name = $4, clinician_role = $5, reviewed_at = $6, care_setting = $7, \
-            review_type = $8, patient_identifier = $9, age_band = $10, sex = $11, \
-            diabetes_status = $12, primary_cause = $13, months_since_diagnosis = $14, egfr = \
-            $15, egfr_sample_date = $16, previous_egfr = $17, previous_egfr_date = $18, acr = \
-            $19, acr_sample_date = $20, acr_measured = $21, systolic_blood_pressure = $22, \
-            diastolic_blood_pressure = $23, acei_or_arb_prescribed = $24, sglt2i_prescribed = \
-            $25, statin_prescribed = $26, nephrotoxic_drug_present = $27, \
-            nephrotoxic_dose_adjusted = $28, medication_review_completed = $29, hba1c = $30, \
-            potassium = $31, bicarbonate = $32, calcium = $33, phosphate = $34, pth = $35, \
-            haemoglobin = $36, referral_decision = $37, clinical_note = $38, updated_at = \
-            now() WHERE id = $1 RETURNING *",
+            "UPDATE chronic_kidney_disease_reviews SET patient_id = $2, clinician_id = \
+            $3, clinician_name = $4, clinician_role = $5, reviewed_at = $6, care_setting \
+            = $7, review_type = $8, patient_identifier = $9, age_band = $10, sex = $11, \
+            diabetes_status = $12, primary_cause = $13, months_since_diagnosis = $14, \
+            egfr = $15, egfr_sample_date = $16, previous_egfr = $17, previous_egfr_date \
+            = $18, acr = $19, acr_sample_date = $20, acr_measured = $21, \
+            systolic_blood_pressure = $22, diastolic_blood_pressure = $23, \
+            acei_or_arb_prescribed = $24, sglt2i_prescribed = $25, statin_prescribed = \
+            $26, nephrotoxic_drug_present = $27, nephrotoxic_dose_adjusted = $28, \
+            medication_review_completed = $29, hba1c = $30, potassium = $31, bicarbonate \
+            = $32, calcium = $33, phosphate = $34, pth = $35, haemoglobin = $36, \
+            referral_decision = $37, clinical_note = $38, updated_at = now() WHERE id = \
+            $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

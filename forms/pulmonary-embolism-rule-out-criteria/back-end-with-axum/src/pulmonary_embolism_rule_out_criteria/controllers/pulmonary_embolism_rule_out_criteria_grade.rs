@@ -41,8 +41,9 @@ impl Params {
         sqlx::query_as(
             "UPDATE pulmonary_embolism_rule_out_criteria_grades SET \
             pulmonary_embolism_rule_out_criteria_id = $2, classification = $3, \
-            all_criteria_satisfied = $4, applicable = $5, recommended_pathway = $6, graded_at \
-            = $7, updated_at = now() WHERE id = $1 RETURNING *",
+            all_criteria_satisfied = $4, applicable = $5, recommended_pathway = $6, \
+            graded_at = $7, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
         .bind(self.pulmonary_embolism_rule_out_criteria_id)

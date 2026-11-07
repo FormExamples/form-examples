@@ -105,15 +105,16 @@ impl Params {
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
             "UPDATE zarit_burden_interviews SET patient_id = $2, clinician_id = $3, \
-            practitioner_name = $4, practitioner_role = $5, assessed_at = $6, care_setting = \
-            $7, instrument_form = $8, carer_identifier = $9, carer_relationship = $10, \
-            carer_co_resident = $11, care_hours_per_week = $12, recipient_identifier = $13, \
-            recipient_condition = $14, item_1 = $15, item_2 = $16, item_3 = $17, item_4 = \
-            $18, item_5 = $19, item_6 = $20, item_7 = $21, item_8 = $22, item_9 = $23, \
-            item_10 = $24, item_11 = $25, item_12 = $26, item_13 = $27, item_14 = $28, \
-            item_15 = $29, item_16 = $30, item_17 = $31, item_18 = $32, item_19 = $33, \
-            item_20 = $34, item_21 = $35, item_22 = $36, clinical_note = $37, updated_at = \
-            now() WHERE id = $1 RETURNING *",
+            practitioner_name = $4, practitioner_role = $5, assessed_at = $6, \
+            care_setting = $7, instrument_form = $8, carer_identifier = $9, \
+            carer_relationship = $10, carer_co_resident = $11, care_hours_per_week = \
+            $12, recipient_identifier = $13, recipient_condition = $14, item_1 = $15, \
+            item_2 = $16, item_3 = $17, item_4 = $18, item_5 = $19, item_6 = $20, item_7 \
+            = $21, item_8 = $22, item_9 = $23, item_10 = $24, item_11 = $25, item_12 = \
+            $26, item_13 = $27, item_14 = $28, item_15 = $29, item_16 = $30, item_17 = \
+            $31, item_18 = $32, item_19 = $33, item_20 = $34, item_21 = $35, item_22 = \
+            $36, clinical_note = $37, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

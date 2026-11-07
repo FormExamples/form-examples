@@ -9,7 +9,6 @@ use crate::models::medications::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub international_nonproprietary_name: String,
     pub brand_name: String,
     pub kind: String,
@@ -21,11 +20,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO medications (deleted_at, international_nonproprietary_name, \
-            brand_name, kind, nutrient_interaction, description) VALUES ($1, $2, $3, $4, $5, \
-            $6) RETURNING *",
+            "INSERT INTO medications (international_nonproprietary_name, brand_name, \
+            kind, nutrient_interaction, description) VALUES ($1, $2, $3, $4, $5) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.international_nonproprietary_name)
         .bind(&self.brand_name)
         .bind(&self.kind)
@@ -38,12 +36,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE medications SET deleted_at = $2, international_nonproprietary_name = $3, \
-            brand_name = $4, kind = $5, nutrient_interaction = $6, description = $7, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE medications SET international_nonproprietary_name = $2, brand_name = \
+            $3, kind = $4, nutrient_interaction = $5, description = $6, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.international_nonproprietary_name)
         .bind(&self.brand_name)
         .bind(&self.kind)

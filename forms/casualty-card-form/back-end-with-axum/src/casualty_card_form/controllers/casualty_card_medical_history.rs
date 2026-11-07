@@ -9,7 +9,6 @@ use crate::models::casualty_card_medical_histories::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub casualty_card_id: Uuid,
     pub past_medical_history: String,
     pub past_surgical_history: String,
@@ -24,12 +23,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO casualty_card_medical_histories (deleted_at, casualty_card_id, \
+            "INSERT INTO casualty_card_medical_histories (casualty_card_id, \
             past_medical_history, past_surgical_history, tetanus_status, smoking_status, \
-            alcohol_consumption, recreational_drug_use, last_oral_intake) VALUES ($1, $2, $3, \
-            $4, $5, $6, $7, $8, $9) RETURNING *",
+            alcohol_consumption, recreational_drug_use, last_oral_intake) VALUES ($1, \
+            $2, $3, $4, $5, $6, $7, $8) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(&self.past_medical_history)
         .bind(&self.past_surgical_history)
@@ -45,13 +43,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE casualty_card_medical_histories SET deleted_at = $2, casualty_card_id = \
-            $3, past_medical_history = $4, past_surgical_history = $5, tetanus_status = $6, \
-            smoking_status = $7, alcohol_consumption = $8, recreational_drug_use = $9, \
-            last_oral_intake = $10, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE casualty_card_medical_histories SET casualty_card_id = $2, \
+            past_medical_history = $3, past_surgical_history = $4, tetanus_status = $5, \
+            smoking_status = $6, alcohol_consumption = $7, recreational_drug_use = $8, \
+            last_oral_intake = $9, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(&self.past_medical_history)
         .bind(&self.past_surgical_history)

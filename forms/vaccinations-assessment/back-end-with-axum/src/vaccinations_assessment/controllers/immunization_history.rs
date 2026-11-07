@@ -9,7 +9,6 @@ use crate::models::immunization_histories::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub has_vaccination_record: String,
     pub record_source: String,
@@ -24,13 +23,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO immunization_histories (deleted_at, assessment_id, \
-            has_vaccination_record, record_source, last_review_date, \
-            previous_adverse_reactions, adverse_reaction_details, immunocompromised, \
-            immunocompromised_details) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING \
-            *",
+            "INSERT INTO immunization_histories (assessment_id, has_vaccination_record, \
+            record_source, last_review_date, previous_adverse_reactions, \
+            adverse_reaction_details, immunocompromised, immunocompromised_details) \
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.has_vaccination_record)
         .bind(&self.record_source)
@@ -46,14 +43,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE immunization_histories SET deleted_at = $2, assessment_id = $3, \
-            has_vaccination_record = $4, record_source = $5, last_review_date = $6, \
-            previous_adverse_reactions = $7, adverse_reaction_details = $8, immunocompromised \
-            = $9, immunocompromised_details = $10, updated_at = now() WHERE id = $1 RETURNING \
-            *",
+            "UPDATE immunization_histories SET assessment_id = $2, has_vaccination_record \
+            = $3, record_source = $4, last_review_date = $5, previous_adverse_reactions \
+            = $6, adverse_reaction_details = $7, immunocompromised = $8, \
+            immunocompromised_details = $9, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.has_vaccination_record)
         .bind(&self.record_source)

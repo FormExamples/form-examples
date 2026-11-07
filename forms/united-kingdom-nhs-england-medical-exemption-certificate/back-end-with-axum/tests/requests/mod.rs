@@ -11,3 +11,4 @@ mod grade_fired_rules_route;
 mod grades_route;
 pub mod patient;
 pub mod practitioner;
+mod soft_delete;

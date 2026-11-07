@@ -61,12 +61,14 @@ impl Params {
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
             "UPDATE paediatric_early_warning_score_grades SET \
-            paediatric_early_warning_score_id = $2, aggregate_score = $3, max_parameter_score \
-            = $4, respiratory_rate_score = $5, respiratory_effort_score = $6, \
-            oxygen_saturation_score = $7, supplemental_oxygen_score = $8, heart_rate_score = \
-            $9, capillary_refill_score = $10, consciousness_score = $11, risk_band = $12, \
-            single_parameter_trigger = $13, concern_trigger = $14, monitoring_frequency = \
-            $15, graded_at = $16, updated_at = now() WHERE id = $1 RETURNING *",
+            paediatric_early_warning_score_id = $2, aggregate_score = $3, \
+            max_parameter_score = $4, respiratory_rate_score = $5, \
+            respiratory_effort_score = $6, oxygen_saturation_score = $7, \
+            supplemental_oxygen_score = $8, heart_rate_score = $9, \
+            capillary_refill_score = $10, consciousness_score = $11, risk_band = $12, \
+            single_parameter_trigger = $13, concern_trigger = $14, monitoring_frequency \
+            = $15, graded_at = $16, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
         .bind(self.paediatric_early_warning_score_id)

@@ -9,7 +9,6 @@ use crate::models::assessment_polypharmacy_reviews::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub total_regular_medications: Option<i32>,
     pub total_prn_medications: Option<i32>,
@@ -31,15 +30,15 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO assessment_polypharmacy_reviews (deleted_at, assessment_id, \
+            "INSERT INTO assessment_polypharmacy_reviews (assessment_id, \
             total_regular_medications, total_prn_medications, polypharmacy_flag, \
-            medication_review_date, falls_risk_medications, falls_risk_medication_details, \
-            anticholinergic_burden, drug_interactions_identified, drug_interaction_details, \
-            adherence_concerns, adherence_details, stopp_start_review_done, \
-            deprescribing_opportunities, polypharmacy_notes) VALUES ($1, $2, $3, $4, $5, $6, \
-            $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING *",
+            medication_review_date, falls_risk_medications, \
+            falls_risk_medication_details, anticholinergic_burden, \
+            drug_interactions_identified, drug_interaction_details, adherence_concerns, \
+            adherence_details, stopp_start_review_done, deprescribing_opportunities, \
+            polypharmacy_notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, \
+            $12, $13, $14, $15) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.total_regular_medications)
         .bind(self.total_prn_medications)
@@ -62,17 +61,16 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE assessment_polypharmacy_reviews SET deleted_at = $2, assessment_id = $3, \
-            total_regular_medications = $4, total_prn_medications = $5, polypharmacy_flag = \
-            $6, medication_review_date = $7, falls_risk_medications = $8, \
-            falls_risk_medication_details = $9, anticholinergic_burden = $10, \
-            drug_interactions_identified = $11, drug_interaction_details = $12, \
-            adherence_concerns = $13, adherence_details = $14, stopp_start_review_done = $15, \
-            deprescribing_opportunities = $16, polypharmacy_notes = $17, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            "UPDATE assessment_polypharmacy_reviews SET assessment_id = $2, \
+            total_regular_medications = $3, total_prn_medications = $4, \
+            polypharmacy_flag = $5, medication_review_date = $6, falls_risk_medications \
+            = $7, falls_risk_medication_details = $8, anticholinergic_burden = $9, \
+            drug_interactions_identified = $10, drug_interaction_details = $11, \
+            adherence_concerns = $12, adherence_details = $13, stopp_start_review_done = \
+            $14, deprescribing_opportunities = $15, polypharmacy_notes = $16, updated_at \
+            = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.total_regular_medications)
         .bind(self.total_prn_medications)

@@ -10,3 +10,4 @@ mod grading_additional_flags_route;
 mod grading_fired_rules_route;
 pub mod patient;
 pub mod pre_operative_assessment_by_patient;
+mod soft_delete;

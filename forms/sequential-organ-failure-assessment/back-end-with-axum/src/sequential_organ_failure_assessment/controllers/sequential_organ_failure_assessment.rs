@@ -88,15 +88,16 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE sequential_organ_failure_assessments SET patient_id = $2, clinician_id = \
-            $3, assessor_name = $4, assessor_role = $5, assessor_registration_number = $6, \
-            assessed_at = $7, care_location = $8, hours_since_admission = $9, \
-            patient_identifier = $10, age_years = $11, sex = $12, admission_diagnosis = $13, \
-            suspected_infection = $14, baseline_sofa_total = $15, pao2 = $16, fio2 = $17, \
-            pao2_fio2_ratio = $18, respiratory_support = $19, platelets = $20, bilirubin = \
-            $21, map = $22, vasopressor = $23, vasopressor_dose = $24, glasgow_coma_scale = \
-            $25, sedated = $26, creatinine = $27, urine_output = $28, clinical_note = $29, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE sequential_organ_failure_assessments SET patient_id = $2, \
+            clinician_id = $3, assessor_name = $4, assessor_role = $5, \
+            assessor_registration_number = $6, assessed_at = $7, care_location = $8, \
+            hours_since_admission = $9, patient_identifier = $10, age_years = $11, sex = \
+            $12, admission_diagnosis = $13, suspected_infection = $14, \
+            baseline_sofa_total = $15, pao2 = $16, fio2 = $17, pao2_fio2_ratio = $18, \
+            respiratory_support = $19, platelets = $20, bilirubin = $21, map = $22, \
+            vasopressor = $23, vasopressor_dose = $24, glasgow_coma_scale = $25, sedated \
+            = $26, creatinine = $27, urine_output = $28, clinical_note = $29, updated_at \
+            = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

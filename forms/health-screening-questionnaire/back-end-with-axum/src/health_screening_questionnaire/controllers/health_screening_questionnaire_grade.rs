@@ -9,7 +9,6 @@ use crate::models::health_screening_questionnaire_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub health_screening_questionnaire_id: Uuid,
     pub parq_plus_clearance: String,
     pub audit_c_score: Option<i32>,
@@ -29,14 +28,13 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO health_screening_questionnaire_grades (deleted_at, \
-            health_screening_questionnaire_id, parq_plus_clearance, audit_c_score, \
+            "INSERT INTO health_screening_questionnaire_grades \
+            (health_screening_questionnaire_id, parq_plus_clearance, audit_c_score, \
             audit_c_band, computed_risk_band, final_risk_band, computed_recommendation, \
             final_recommendation, override_reason, notes, signed_by_name, signed_at, \
-            graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) \
+            graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) \
             RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.health_screening_questionnaire_id)
         .bind(&self.parq_plus_clearance)
         .bind(self.audit_c_score)
@@ -57,15 +55,15 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE health_screening_questionnaire_grades SET deleted_at = $2, \
-            health_screening_questionnaire_id = $3, parq_plus_clearance = $4, audit_c_score = \
-            $5, audit_c_band = $6, computed_risk_band = $7, final_risk_band = $8, \
-            computed_recommendation = $9, final_recommendation = $10, override_reason = $11, \
-            notes = $12, signed_by_name = $13, signed_at = $14, graded_at = $15, updated_at = \
-            now() WHERE id = $1 RETURNING *",
+            "UPDATE health_screening_questionnaire_grades SET \
+            health_screening_questionnaire_id = $2, parq_plus_clearance = $3, \
+            audit_c_score = $4, audit_c_band = $5, computed_risk_band = $6, \
+            final_risk_band = $7, computed_recommendation = $8, final_recommendation = \
+            $9, override_reason = $10, notes = $11, signed_by_name = $12, signed_at = \
+            $13, graded_at = $14, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.health_screening_questionnaire_id)
         .bind(&self.parq_plus_clearance)
         .bind(self.audit_c_score)

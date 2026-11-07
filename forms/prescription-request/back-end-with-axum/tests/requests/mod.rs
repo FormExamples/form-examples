@@ -12,3 +12,4 @@ pub mod prescription_details;
 pub mod prescription_request;
 pub mod prescription_request_type;
 pub mod prescription_substitution_options;
+mod soft_delete;

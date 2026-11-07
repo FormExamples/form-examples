@@ -25,3 +25,4 @@ pub mod clinician;
 pub mod flagged_issue;
 pub mod news2_result;
 pub mod patient;
+mod soft_delete;

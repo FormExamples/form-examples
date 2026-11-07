@@ -11,8 +11,6 @@ use crate::models::inpatient_clinical_notes::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    /// Deleted at.
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Status.
     pub status: String,
     /// Note type.
@@ -264,49 +262,52 @@ impl Params {
     #[allow(clippy::too_many_lines)] // One bind per column.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO inpatient_clinical_notes (deleted_at, status, note_type, \
-            hospital_name, ward_name, bed_number, note_at, author_name, author_grade, \
+            "INSERT INTO inpatient_clinical_notes (status, note_type, hospital_name, \
+            ward_name, bed_number, note_at, author_name, author_grade, \
             author_registration_number, parent_specialty, responsible_consultant_name, \
-            consult_question, consult_requesting_team, procedure_performed, procedure_detail, \
-            procedure_consent, procedure_complications, transfer_from_ward, transfer_to_ward, \
-            transfer_reason, admission_at, admitting_specialty, admission_method, \
-            admission_reason, interval_history, no_interval_events, overnight_events, \
-            patient_reported_symptoms, nursing_concerns, pain_score, sleep_quality, \
-            oral_intake, bowels_last_opened, mobility_status, observed_at, respiratory_rate, \
-            oxygen_saturation, spo2_scale, oxygen_delivery, oxygen_flow_litres_per_minute, \
-            systolic_blood_pressure, diastolic_blood_pressure, pulse_rate, acvpu, \
-            temperature_celsius, news2_total, news2_derived_total, news2_trend, \
-            news2_applicable, news2_not_applicable_reason, examination_general, \
+            consult_question, consult_requesting_team, procedure_performed, \
+            procedure_detail, procedure_consent, procedure_complications, \
+            transfer_from_ward, transfer_to_ward, transfer_reason, admission_at, \
+            admitting_specialty, admission_method, admission_reason, interval_history, \
+            no_interval_events, overnight_events, patient_reported_symptoms, \
+            nursing_concerns, pain_score, sleep_quality, oral_intake, \
+            bowels_last_opened, mobility_status, observed_at, respiratory_rate, \
+            oxygen_saturation, spo2_scale, oxygen_delivery, \
+            oxygen_flow_litres_per_minute, systolic_blood_pressure, \
+            diastolic_blood_pressure, pulse_rate, acvpu, temperature_celsius, \
+            news2_total, news2_derived_total, news2_trend, news2_applicable, \
+            news2_not_applicable_reason, examination_general, \
             examination_cardiovascular, examination_respiratory, examination_abdominal, \
             examination_neurological, examination_musculoskeletal, \
-            examination_skin_and_wounds, examination_lines_and_drains, examination_other, \
-            no_investigations_reviewed, no_medication_changes, allergy_checked, \
-            medicines_reconciliation_status, antimicrobial_review_status, \
-            antimicrobial_review_at, vte_status, vte_prophylaxis, vte_assessed_at, vte_notes, \
-            falls_risk, falls_interventions, pressure_ulcer_risk, skin_integrity, \
-            pressure_ulcer_grade, pressure_ulcer_sites, delirium_screen, delirium_4at_score, \
-            delirium_notes, nutrition_screen, must_score, nutrition_plan, infection_status, \
-            isolation_status, organism, infection_precautions, safeguarding_concern, \
-            safeguarding_notes, safeguarding_referral_made, clinical_impression, \
-            differential_diagnosis, response_to_treatment, new_oxygen_requirement, \
-            new_confusion, sepsis_screen, arrest_call, critical_care_referral, \
-            new_organ_support, plan, escalation_status, escalation_action, ceiling_of_care, \
-            respect_status, dnacpr_status, senior_review_needed, senior_review_by, \
-            senior_review_at, estimated_discharge_date, discharge_planning_notes, \
-            family_communication, patient_communication, team_handover, consent_status, \
-            capacity_assessed, capacity_notes, author_override_acuity, \
-            author_override_reason, attestation_text, electronic_signature, signed_at, \
-            patient_id, author_id, responsible_consultant_id) VALUES ($1, $2, $3, $4, $5, $6, \
-            $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, \
-            $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, \
-            $40, $41, $42, $43, $44, $45, $46, $47, $48, $49, $50, $51, $52, $53, $54, $55, \
-            $56, $57, $58, $59, $60, $61, $62, $63, $64, $65, $66, $67, $68, $69, $70, $71, \
-            $72, $73, $74, $75, $76, $77, $78, $79, $80, $81, $82, $83, $84, $85, $86, $87, \
-            $88, $89, $90, $91, $92, $93, $94, $95, $96, $97, $98, $99, $100, $101, $102, \
-            $103, $104, $105, $106, $107, $108, $109, $110, $111, $112, $113, $114, $115, \
-            $116, $117, $118, $119, $120, $121, $122, $123) RETURNING *",
+            examination_skin_and_wounds, examination_lines_and_drains, \
+            examination_other, no_investigations_reviewed, no_medication_changes, \
+            allergy_checked, medicines_reconciliation_status, \
+            antimicrobial_review_status, antimicrobial_review_at, vte_status, \
+            vte_prophylaxis, vte_assessed_at, vte_notes, falls_risk, \
+            falls_interventions, pressure_ulcer_risk, skin_integrity, \
+            pressure_ulcer_grade, pressure_ulcer_sites, delirium_screen, \
+            delirium_4at_score, delirium_notes, nutrition_screen, must_score, \
+            nutrition_plan, infection_status, isolation_status, organism, \
+            infection_precautions, safeguarding_concern, safeguarding_notes, \
+            safeguarding_referral_made, clinical_impression, differential_diagnosis, \
+            response_to_treatment, new_oxygen_requirement, new_confusion, sepsis_screen, \
+            arrest_call, critical_care_referral, new_organ_support, plan, \
+            escalation_status, escalation_action, ceiling_of_care, respect_status, \
+            dnacpr_status, senior_review_needed, senior_review_by, senior_review_at, \
+            estimated_discharge_date, discharge_planning_notes, family_communication, \
+            patient_communication, team_handover, consent_status, capacity_assessed, \
+            capacity_notes, author_override_acuity, author_override_reason, \
+            attestation_text, electronic_signature, signed_at, patient_id, author_id, \
+            responsible_consultant_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, \
+            $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, \
+            $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, \
+            $41, $42, $43, $44, $45, $46, $47, $48, $49, $50, $51, $52, $53, $54, $55, \
+            $56, $57, $58, $59, $60, $61, $62, $63, $64, $65, $66, $67, $68, $69, $70, \
+            $71, $72, $73, $74, $75, $76, $77, $78, $79, $80, $81, $82, $83, $84, $85, \
+            $86, $87, $88, $89, $90, $91, $92, $93, $94, $95, $96, $97, $98, $99, $100, \
+            $101, $102, $103, $104, $105, $106, $107, $108, $109, $110, $111, $112, \
+            $113, $114, $115, $116, $117, $118, $119, $120, $121, $122) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.status)
         .bind(&self.note_type)
         .bind(&self.hospital_name)
@@ -437,51 +438,54 @@ impl Params {
     #[allow(clippy::too_many_lines)] // One bind per column.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE inpatient_clinical_notes SET deleted_at = $2, status = $3, note_type = $4, \
-            hospital_name = $5, ward_name = $6, bed_number = $7, note_at = $8, author_name = \
-            $9, author_grade = $10, author_registration_number = $11, parent_specialty = $12, \
-            responsible_consultant_name = $13, consult_question = $14, \
-            consult_requesting_team = $15, procedure_performed = $16, procedure_detail = $17, \
-            procedure_consent = $18, procedure_complications = $19, transfer_from_ward = $20, \
-            transfer_to_ward = $21, transfer_reason = $22, admission_at = $23, \
-            admitting_specialty = $24, admission_method = $25, admission_reason = $26, \
-            interval_history = $27, no_interval_events = $28, overnight_events = $29, \
-            patient_reported_symptoms = $30, nursing_concerns = $31, pain_score = $32, \
-            sleep_quality = $33, oral_intake = $34, bowels_last_opened = $35, mobility_status \
-            = $36, observed_at = $37, respiratory_rate = $38, oxygen_saturation = $39, \
-            spo2_scale = $40, oxygen_delivery = $41, oxygen_flow_litres_per_minute = $42, \
-            systolic_blood_pressure = $43, diastolic_blood_pressure = $44, pulse_rate = $45, \
-            acvpu = $46, temperature_celsius = $47, news2_total = $48, news2_derived_total = \
-            $49, news2_trend = $50, news2_applicable = $51, news2_not_applicable_reason = \
-            $52, examination_general = $53, examination_cardiovascular = $54, \
-            examination_respiratory = $55, examination_abdominal = $56, \
-            examination_neurological = $57, examination_musculoskeletal = $58, \
-            examination_skin_and_wounds = $59, examination_lines_and_drains = $60, \
-            examination_other = $61, no_investigations_reviewed = $62, no_medication_changes \
-            = $63, allergy_checked = $64, medicines_reconciliation_status = $65, \
-            antimicrobial_review_status = $66, antimicrobial_review_at = $67, vte_status = \
-            $68, vte_prophylaxis = $69, vte_assessed_at = $70, vte_notes = $71, falls_risk = \
-            $72, falls_interventions = $73, pressure_ulcer_risk = $74, skin_integrity = $75, \
-            pressure_ulcer_grade = $76, pressure_ulcer_sites = $77, delirium_screen = $78, \
-            delirium_4at_score = $79, delirium_notes = $80, nutrition_screen = $81, \
-            must_score = $82, nutrition_plan = $83, infection_status = $84, isolation_status \
-            = $85, organism = $86, infection_precautions = $87, safeguarding_concern = $88, \
-            safeguarding_notes = $89, safeguarding_referral_made = $90, clinical_impression = \
-            $91, differential_diagnosis = $92, response_to_treatment = $93, \
-            new_oxygen_requirement = $94, new_confusion = $95, sepsis_screen = $96, \
-            arrest_call = $97, critical_care_referral = $98, new_organ_support = $99, plan = \
-            $100, escalation_status = $101, escalation_action = $102, ceiling_of_care = $103, \
-            respect_status = $104, dnacpr_status = $105, senior_review_needed = $106, \
-            senior_review_by = $107, senior_review_at = $108, estimated_discharge_date = \
-            $109, discharge_planning_notes = $110, family_communication = $111, \
-            patient_communication = $112, team_handover = $113, consent_status = $114, \
-            capacity_assessed = $115, capacity_notes = $116, author_override_acuity = $117, \
-            author_override_reason = $118, attestation_text = $119, electronic_signature = \
-            $120, signed_at = $121, patient_id = $122, author_id = $123, \
-            responsible_consultant_id = $124, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE inpatient_clinical_notes SET status = $2, note_type = $3, \
+            hospital_name = $4, ward_name = $5, bed_number = $6, note_at = $7, \
+            author_name = $8, author_grade = $9, author_registration_number = $10, \
+            parent_specialty = $11, responsible_consultant_name = $12, consult_question \
+            = $13, consult_requesting_team = $14, procedure_performed = $15, \
+            procedure_detail = $16, procedure_consent = $17, procedure_complications = \
+            $18, transfer_from_ward = $19, transfer_to_ward = $20, transfer_reason = \
+            $21, admission_at = $22, admitting_specialty = $23, admission_method = $24, \
+            admission_reason = $25, interval_history = $26, no_interval_events = $27, \
+            overnight_events = $28, patient_reported_symptoms = $29, nursing_concerns = \
+            $30, pain_score = $31, sleep_quality = $32, oral_intake = $33, \
+            bowels_last_opened = $34, mobility_status = $35, observed_at = $36, \
+            respiratory_rate = $37, oxygen_saturation = $38, spo2_scale = $39, \
+            oxygen_delivery = $40, oxygen_flow_litres_per_minute = $41, \
+            systolic_blood_pressure = $42, diastolic_blood_pressure = $43, pulse_rate = \
+            $44, acvpu = $45, temperature_celsius = $46, news2_total = $47, \
+            news2_derived_total = $48, news2_trend = $49, news2_applicable = $50, \
+            news2_not_applicable_reason = $51, examination_general = $52, \
+            examination_cardiovascular = $53, examination_respiratory = $54, \
+            examination_abdominal = $55, examination_neurological = $56, \
+            examination_musculoskeletal = $57, examination_skin_and_wounds = $58, \
+            examination_lines_and_drains = $59, examination_other = $60, \
+            no_investigations_reviewed = $61, no_medication_changes = $62, \
+            allergy_checked = $63, medicines_reconciliation_status = $64, \
+            antimicrobial_review_status = $65, antimicrobial_review_at = $66, vte_status \
+            = $67, vte_prophylaxis = $68, vte_assessed_at = $69, vte_notes = $70, \
+            falls_risk = $71, falls_interventions = $72, pressure_ulcer_risk = $73, \
+            skin_integrity = $74, pressure_ulcer_grade = $75, pressure_ulcer_sites = \
+            $76, delirium_screen = $77, delirium_4at_score = $78, delirium_notes = $79, \
+            nutrition_screen = $80, must_score = $81, nutrition_plan = $82, \
+            infection_status = $83, isolation_status = $84, organism = $85, \
+            infection_precautions = $86, safeguarding_concern = $87, safeguarding_notes \
+            = $88, safeguarding_referral_made = $89, clinical_impression = $90, \
+            differential_diagnosis = $91, response_to_treatment = $92, \
+            new_oxygen_requirement = $93, new_confusion = $94, sepsis_screen = $95, \
+            arrest_call = $96, critical_care_referral = $97, new_organ_support = $98, \
+            plan = $99, escalation_status = $100, escalation_action = $101, \
+            ceiling_of_care = $102, respect_status = $103, dnacpr_status = $104, \
+            senior_review_needed = $105, senior_review_by = $106, senior_review_at = \
+            $107, estimated_discharge_date = $108, discharge_planning_notes = $109, \
+            family_communication = $110, patient_communication = $111, team_handover = \
+            $112, consent_status = $113, capacity_assessed = $114, capacity_notes = \
+            $115, author_override_acuity = $116, author_override_reason = $117, \
+            attestation_text = $118, electronic_signature = $119, signed_at = $120, \
+            patient_id = $121, author_id = $122, responsible_consultant_id = $123, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.status)
         .bind(&self.note_type)
         .bind(&self.hospital_name)

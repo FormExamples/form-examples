@@ -9,7 +9,6 @@ use crate::models::clin_neurophys_waiting_list_card_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub clin_neurophys_waiting_list_card_id: Uuid,
     pub waiting_time_status: String,
     pub clinical_priority: String,
@@ -27,13 +26,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO clin_neurophys_waiting_list_card_grades (deleted_at, \
-            clin_neurophys_waiting_list_card_id, waiting_time_status, clinical_priority, \
-            target_wait_weeks, days_waited, weeks_waited, days_to_target, days_to_breach, \
-            days_to_appointment, grader_notes, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, \
-            $8, $9, $10, $11, $12) RETURNING *",
+            "INSERT INTO clin_neurophys_waiting_list_card_grades \
+            (clin_neurophys_waiting_list_card_id, waiting_time_status, \
+            clinical_priority, target_wait_weeks, days_waited, weeks_waited, \
+            days_to_target, days_to_breach, days_to_appointment, grader_notes, \
+            graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.clin_neurophys_waiting_list_card_id)
         .bind(&self.waiting_time_status)
         .bind(&self.clinical_priority)
@@ -52,14 +50,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE clin_neurophys_waiting_list_card_grades SET deleted_at = $2, \
-            clin_neurophys_waiting_list_card_id = $3, waiting_time_status = $4, \
-            clinical_priority = $5, target_wait_weeks = $6, days_waited = $7, weeks_waited = \
-            $8, days_to_target = $9, days_to_breach = $10, days_to_appointment = $11, \
-            grader_notes = $12, graded_at = $13, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE clin_neurophys_waiting_list_card_grades SET \
+            clin_neurophys_waiting_list_card_id = $2, waiting_time_status = $3, \
+            clinical_priority = $4, target_wait_weeks = $5, days_waited = $6, \
+            weeks_waited = $7, days_to_target = $8, days_to_breach = $9, \
+            days_to_appointment = $10, grader_notes = $11, graded_at = $12, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.clin_neurophys_waiting_list_card_id)
         .bind(&self.waiting_time_status)
         .bind(&self.clinical_priority)

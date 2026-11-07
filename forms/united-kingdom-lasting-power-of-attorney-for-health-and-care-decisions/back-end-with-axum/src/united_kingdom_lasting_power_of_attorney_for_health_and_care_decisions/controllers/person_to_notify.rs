@@ -9,7 +9,6 @@ use crate::models::person_to_notifies::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub title: String,
     pub given_names: String,
     pub family_name: String,
@@ -25,12 +24,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO person_to_notifies (deleted_at, title, given_names, family_name, \
-            email, phone, postal_address_as_full_text, country_as_iso_3166_1_alpha_2, \
-            postcode, relationship_to_donor) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) \
-            RETURNING *",
+            "INSERT INTO person_to_notifies (title, given_names, family_name, email, \
+            phone, postal_address_as_full_text, country_as_iso_3166_1_alpha_2, postcode, \
+            relationship_to_donor) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING \
+            *",
         )
-        .bind(self.deleted_at)
         .bind(&self.title)
         .bind(&self.given_names)
         .bind(&self.family_name)
@@ -47,13 +45,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE person_to_notifies SET deleted_at = $2, title = $3, given_names = $4, \
-            family_name = $5, email = $6, phone = $7, postal_address_as_full_text = $8, \
-            country_as_iso_3166_1_alpha_2 = $9, postcode = $10, relationship_to_donor = $11, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE person_to_notifies SET title = $2, given_names = $3, family_name = \
+            $4, email = $5, phone = $6, postal_address_as_full_text = $7, \
+            country_as_iso_3166_1_alpha_2 = $8, postcode = $9, relationship_to_donor = \
+            $10, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.title)
         .bind(&self.given_names)
         .bind(&self.family_name)

@@ -9,7 +9,6 @@ use crate::models::colonoscopy_test_requests::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub status: String,
@@ -47,18 +46,18 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO colonoscopy_test_requests (deleted_at, patient_id, clinician_id, \
-            status, site_name, setting, referral_date, requested_by_date, procedure, \
-            primary_indication, clinical_question, relevant_history, red_flag_weight_loss, \
-            red_flag_anaemia, red_flag_abdominal_mass, red_flag_rectal_bleeding, \
-            fit_result_ug_g, haemoglobin_g_l, taking_anticoagulant, anticoagulant_agent, \
-            taking_antiplatelet, antiplatelet_agent, diabetes_medication, fit_for_bowel_prep, \
+            "INSERT INTO colonoscopy_test_requests (patient_id, clinician_id, status, \
+            site_name, setting, referral_date, requested_by_date, procedure, \
+            primary_indication, clinical_question, relevant_history, \
+            red_flag_weight_loss, red_flag_anaemia, red_flag_abdominal_mass, \
+            red_flag_rectal_bleeding, fit_result_ug_g, haemoglobin_g_l, \
+            taking_anticoagulant, anticoagulant_agent, taking_antiplatelet, \
+            antiplatelet_agent, diabetes_medication, fit_for_bowel_prep, \
             bowel_prep_agent, chronic_kidney_disease, egfr_ml_min, asa_grade, urgency, \
-            supervising_consultant, requester_contact, notes) VALUES ($1, $2, $3, $4, $5, $6, \
-            $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, \
-            $24, $25, $26, $27, $28, $29, $30, $31, $32) RETURNING *",
+            supervising_consultant, requester_contact, notes) VALUES ($1, $2, $3, $4, \
+            $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, \
+            $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)
@@ -97,20 +96,20 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE colonoscopy_test_requests SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, status = $5, site_name = $6, setting = $7, referral_date = $8, \
-            requested_by_date = $9, procedure = $10, primary_indication = $11, \
-            clinical_question = $12, relevant_history = $13, red_flag_weight_loss = $14, \
-            red_flag_anaemia = $15, red_flag_abdominal_mass = $16, red_flag_rectal_bleeding = \
-            $17, fit_result_ug_g = $18, haemoglobin_g_l = $19, taking_anticoagulant = $20, \
-            anticoagulant_agent = $21, taking_antiplatelet = $22, antiplatelet_agent = $23, \
-            diabetes_medication = $24, fit_for_bowel_prep = $25, bowel_prep_agent = $26, \
-            chronic_kidney_disease = $27, egfr_ml_min = $28, asa_grade = $29, urgency = $30, \
-            supervising_consultant = $31, requester_contact = $32, notes = $33, updated_at = \
-            now() WHERE id = $1 RETURNING *",
+            "UPDATE colonoscopy_test_requests SET patient_id = $2, clinician_id = $3, \
+            status = $4, site_name = $5, setting = $6, referral_date = $7, \
+            requested_by_date = $8, procedure = $9, primary_indication = $10, \
+            clinical_question = $11, relevant_history = $12, red_flag_weight_loss = $13, \
+            red_flag_anaemia = $14, red_flag_abdominal_mass = $15, \
+            red_flag_rectal_bleeding = $16, fit_result_ug_g = $17, haemoglobin_g_l = \
+            $18, taking_anticoagulant = $19, anticoagulant_agent = $20, \
+            taking_antiplatelet = $21, antiplatelet_agent = $22, diabetes_medication = \
+            $23, fit_for_bowel_prep = $24, bowel_prep_agent = $25, \
+            chronic_kidney_disease = $26, egfr_ml_min = $27, asa_grade = $28, urgency = \
+            $29, supervising_consultant = $30, requester_contact = $31, notes = $32, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)

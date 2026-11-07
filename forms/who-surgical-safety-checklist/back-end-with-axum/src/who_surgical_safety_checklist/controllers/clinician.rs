@@ -9,7 +9,6 @@ use crate::models::clinicians::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub name: String,
     pub email: Option<String>,
     pub phone: Option<String>,
@@ -24,11 +23,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO clinicians (deleted_at, name, email, phone, role, registration_body, \
-            registration_number, employee_number, united_kingdom_nhs_number) VALUES ($1, $2, \
-            $3, $4, $5, $6, $7, $8, $9) RETURNING *",
+            "INSERT INTO clinicians (name, email, phone, role, registration_body, \
+            registration_number, employee_number, united_kingdom_nhs_number) VALUES ($1, \
+            $2, $3, $4, $5, $6, $7, $8) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(&self.email)
         .bind(&self.phone)
@@ -44,12 +42,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE clinicians SET deleted_at = $2, name = $3, email = $4, phone = $5, role = \
-            $6, registration_body = $7, registration_number = $8, employee_number = $9, \
-            united_kingdom_nhs_number = $10, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE clinicians SET name = $2, email = $3, phone = $4, role = $5, \
+            registration_body = $6, registration_number = $7, employee_number = $8, \
+            united_kingdom_nhs_number = $9, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(&self.email)
         .bind(&self.phone)

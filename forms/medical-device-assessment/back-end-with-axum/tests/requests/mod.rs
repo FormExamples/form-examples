@@ -10,3 +10,4 @@ pub mod medical_device_assessment;
 pub mod medical_device_assessment_grade;
 pub mod medical_device_assessment_grade_flag;
 pub mod medical_device_assessment_grade_rule;
+mod soft_delete;

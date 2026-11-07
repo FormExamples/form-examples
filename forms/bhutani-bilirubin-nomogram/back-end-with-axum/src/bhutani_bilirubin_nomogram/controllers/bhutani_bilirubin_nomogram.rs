@@ -71,12 +71,13 @@ impl Params {
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
             "UPDATE bhutani_bilirubin_nomograms SET patient_id = $2, clinician_id = $3, \
-            clinician_name = $4, clinician_role = $5, assessed_at = $6, care_setting = $7, \
-            infant_identifier = $8, sex = $9, born_at = $10, gestational_age_weeks = $11, \
-            age_hours = $12, total_serum_bilirubin_umol_l = $13, measurement_method = $14, \
-            preterm_under_38 = $15, previous_sibling_jaundice = $16, exclusive_breastfeeding \
-            = $17, bruising = $18, blood_group_incompatibility = $19, early_onset_under_24h = \
-            $20, clinical_note = $21, updated_at = now() WHERE id = $1 RETURNING *",
+            clinician_name = $4, clinician_role = $5, assessed_at = $6, care_setting = \
+            $7, infant_identifier = $8, sex = $9, born_at = $10, gestational_age_weeks = \
+            $11, age_hours = $12, total_serum_bilirubin_umol_l = $13, measurement_method \
+            = $14, preterm_under_38 = $15, previous_sibling_jaundice = $16, \
+            exclusive_breastfeeding = $17, bruising = $18, blood_group_incompatibility = \
+            $19, early_onset_under_24h = $20, clinical_note = $21, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

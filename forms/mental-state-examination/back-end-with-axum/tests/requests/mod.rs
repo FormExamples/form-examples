@@ -9,3 +9,4 @@ pub mod mental_state_examination_grade;
 pub mod mental_state_examination_grade_flag;
 pub mod mental_state_examination_grade_rule;
 pub mod patient;
+mod soft_delete;

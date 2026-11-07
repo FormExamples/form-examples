@@ -9,7 +9,6 @@ use crate::models::travel_vaccinations::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub travel_planned: String,
     pub travel_destination: String,
@@ -25,12 +24,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO travel_vaccinations (deleted_at, assessment_id, travel_planned, \
+            "INSERT INTO travel_vaccinations (assessment_id, travel_planned, \
             travel_destination, hepatitis_a, hepatitis_b, typhoid, yellow_fever, rabies, \
-            japanese_encephalitis) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING \
+            japanese_encephalitis) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING \
             *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.travel_planned)
         .bind(&self.travel_destination)
@@ -47,13 +45,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE travel_vaccinations SET deleted_at = $2, assessment_id = $3, \
-            travel_planned = $4, travel_destination = $5, hepatitis_a = $6, hepatitis_b = $7, \
-            typhoid = $8, yellow_fever = $9, rabies = $10, japanese_encephalitis = $11, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE travel_vaccinations SET assessment_id = $2, travel_planned = $3, \
+            travel_destination = $4, hepatitis_a = $5, hepatitis_b = $6, typhoid = $7, \
+            yellow_fever = $8, rabies = $9, japanese_encephalitis = $10, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.travel_planned)
         .bind(&self.travel_destination)

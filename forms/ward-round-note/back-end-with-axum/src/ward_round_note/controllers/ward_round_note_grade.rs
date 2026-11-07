@@ -9,7 +9,6 @@ use crate::models::ward_round_note_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub ward_round_note_id: Uuid,
     pub status: String,
     pub completeness_percent: Option<i32>,
@@ -28,13 +27,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO ward_round_note_grades (deleted_at, ward_round_note_id, status, \
+            "INSERT INTO ward_round_note_grades (ward_round_note_id, status, \
             completeness_percent, header_documented, problems_documented, \
             examination_documented, investigations_documented, vte_documented, \
-            medication_documented, plan_documented, escalation_documented, graded_at) VALUES \
-            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *",
+            medication_documented, plan_documented, escalation_documented, graded_at) \
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.ward_round_note_id)
         .bind(&self.status)
         .bind(self.completeness_percent)
@@ -54,15 +52,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE ward_round_note_grades SET deleted_at = $2, ward_round_note_id = $3, \
-            status = $4, completeness_percent = $5, header_documented = $6, \
-            problems_documented = $7, examination_documented = $8, investigations_documented \
-            = $9, vte_documented = $10, medication_documented = $11, plan_documented = $12, \
-            escalation_documented = $13, graded_at = $14, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE ward_round_note_grades SET ward_round_note_id = $2, status = $3, \
+            completeness_percent = $4, header_documented = $5, problems_documented = $6, \
+            examination_documented = $7, investigations_documented = $8, vte_documented \
+            = $9, medication_documented = $10, plan_documented = $11, \
+            escalation_documented = $12, graded_at = $13, updated_at = now() WHERE id = \
+            $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.ward_round_note_id)
         .bind(&self.status)
         .bind(self.completeness_percent)

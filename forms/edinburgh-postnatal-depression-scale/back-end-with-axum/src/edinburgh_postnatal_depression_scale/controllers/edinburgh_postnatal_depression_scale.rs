@@ -76,13 +76,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE edinburgh_postnatal_depression_scales SET patient_id = $2, clinician_id = \
-            $3, clinician_name = $4, clinician_role = $5, care_setting = $6, assessed_at = \
-            $7, perinatal_stage = $8, perinatal_week = $9, respondent_identifier = $10, \
-            age_band = $11, preferred_language = $12, assistance_needed = $13, item_1 = $14, \
-            item_2 = $15, item_3 = $16, item_4 = $17, item_5 = $18, item_6 = $19, item_7 = \
-            $20, item_8 = $21, item_9 = $22, item_10 = $23, clinical_note = $24, updated_at = \
-            now() WHERE id = $1 RETURNING *",
+            "UPDATE edinburgh_postnatal_depression_scales SET patient_id = $2, \
+            clinician_id = $3, clinician_name = $4, clinician_role = $5, care_setting = \
+            $6, assessed_at = $7, perinatal_stage = $8, perinatal_week = $9, \
+            respondent_identifier = $10, age_band = $11, preferred_language = $12, \
+            assistance_needed = $13, item_1 = $14, item_2 = $15, item_3 = $16, item_4 = \
+            $17, item_5 = $18, item_6 = $19, item_7 = $20, item_8 = $21, item_9 = $22, \
+            item_10 = $23, clinical_note = $24, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

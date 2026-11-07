@@ -38,6 +38,11 @@ the SQL: `patients`, `clinicians`, `medical_operation_notes`, its child tables
 as the SQL: a UUIDv4 primary key via `gen_random_uuid()`, and
 `created_at` / `updated_at` / `deleted_at` timestamps.
 
+Every table in `sql/` is reachable over HTTP, through its own `/api/<plural>` routes
+or a hand-written aggregate. `DELETE` is a soft delete: one statement sets `deleted_at`
+on the row and along its `ON DELETE CASCADE` keys, and reads and updates then answer
+as if the row were gone. `deleted_at` is in no request or response body.
+
 Request/response structs that cross the wire to the front-end carry
 `serde(rename_all = "camelCase")`, so the JSON API speaks camelCase while Rust
 internals stay snake_case — the same boundary described in

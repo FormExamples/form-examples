@@ -9,7 +9,6 @@ use crate::models::echocardiogram_test_requests::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub status: String,
@@ -45,17 +44,16 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO echocardiogram_test_requests (deleted_at, patient_id, clinician_id, \
-            status, site_name, setting, referral_date, requested_by_date, echo_type, \
+            "INSERT INTO echocardiogram_test_requests (patient_id, clinician_id, status, \
+            site_name, setting, referral_date, requested_by_date, echo_type, \
             primary_indication, clinical_question, relevant_history, breathlessness, \
             chest_pain, palpitations, syncope, oedema, nyha_class, ecg_findings, \
             bnp_or_nt_probnp, known_murmur, previous_echo, previous_echo_date, \
             ejection_fraction_known, on_cardiotoxic_chemotherapy, relevant_medications, \
-            urgency, supervising_consultant, requester_contact, notes) VALUES ($1, $2, $3, \
-            $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, \
-            $21, $22, $23, $24, $25, $26, $27, $28, $29, $30) RETURNING *",
+            urgency, supervising_consultant, requester_contact, notes) VALUES ($1, $2, \
+            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, \
+            $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)
@@ -92,19 +90,18 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE echocardiogram_test_requests SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, status = $5, site_name = $6, setting = $7, referral_date = $8, \
-            requested_by_date = $9, echo_type = $10, primary_indication = $11, \
-            clinical_question = $12, relevant_history = $13, breathlessness = $14, chest_pain \
-            = $15, palpitations = $16, syncope = $17, oedema = $18, nyha_class = $19, \
-            ecg_findings = $20, bnp_or_nt_probnp = $21, known_murmur = $22, previous_echo = \
-            $23, previous_echo_date = $24, ejection_fraction_known = $25, \
-            on_cardiotoxic_chemotherapy = $26, relevant_medications = $27, urgency = $28, \
-            supervising_consultant = $29, requester_contact = $30, notes = $31, updated_at = \
-            now() WHERE id = $1 RETURNING *",
+            "UPDATE echocardiogram_test_requests SET patient_id = $2, clinician_id = $3, \
+            status = $4, site_name = $5, setting = $6, referral_date = $7, \
+            requested_by_date = $8, echo_type = $9, primary_indication = $10, \
+            clinical_question = $11, relevant_history = $12, breathlessness = $13, \
+            chest_pain = $14, palpitations = $15, syncope = $16, oedema = $17, \
+            nyha_class = $18, ecg_findings = $19, bnp_or_nt_probnp = $20, known_murmur = \
+            $21, previous_echo = $22, previous_echo_date = $23, ejection_fraction_known \
+            = $24, on_cardiotoxic_chemotherapy = $25, relevant_medications = $26, \
+            urgency = $27, supervising_consultant = $28, requester_contact = $29, notes \
+            = $30, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)

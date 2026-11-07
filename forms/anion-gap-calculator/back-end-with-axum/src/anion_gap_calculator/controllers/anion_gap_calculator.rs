@@ -9,7 +9,6 @@ use crate::models::anion_gap_calculators::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
     pub clinician_name: String,
@@ -32,14 +31,13 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO anion_gap_calculators (deleted_at, patient_id, clinician_id, \
-            clinician_name, clinician_role, calculated_at, care_setting, clinical_context, \
+            "INSERT INTO anion_gap_calculators (patient_id, clinician_id, clinician_name, \
+            clinician_role, calculated_at, care_setting, clinical_context, \
             patient_identifier, age_band, sex, sodium_mmol_l, potassium_mmol_l, \
-            chloride_mmol_l, bicarbonate_mmol_l, albumin_g_l, include_potassium) VALUES ($1, \
-            $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING \
-            *",
+            chloride_mmol_l, bicarbonate_mmol_l, albumin_g_l, include_potassium) VALUES \
+            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.clinician_name)
@@ -63,15 +61,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE anion_gap_calculators SET deleted_at = $2, patient_id = $3, clinician_id = \
-            $4, clinician_name = $5, clinician_role = $6, calculated_at = $7, care_setting = \
-            $8, clinical_context = $9, patient_identifier = $10, age_band = $11, sex = $12, \
-            sodium_mmol_l = $13, potassium_mmol_l = $14, chloride_mmol_l = $15, \
-            bicarbonate_mmol_l = $16, albumin_g_l = $17, include_potassium = $18, updated_at \
-            = now() WHERE id = $1 RETURNING *",
+            "UPDATE anion_gap_calculators SET patient_id = $2, clinician_id = $3, \
+            clinician_name = $4, clinician_role = $5, calculated_at = $6, care_setting = \
+            $7, clinical_context = $8, patient_identifier = $9, age_band = $10, sex = \
+            $11, sodium_mmol_l = $12, potassium_mmol_l = $13, chloride_mmol_l = $14, \
+            bicarbonate_mmol_l = $15, albumin_g_l = $16, include_potassium = $17, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.clinician_name)

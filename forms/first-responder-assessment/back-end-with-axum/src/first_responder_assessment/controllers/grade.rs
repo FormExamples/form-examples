@@ -9,7 +9,6 @@ use crate::models::grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub physical_fitness_level: String,
     pub clinical_skills_level: String,
@@ -25,12 +24,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO grades (deleted_at, assessment_id, physical_fitness_level, \
+            "INSERT INTO grades (assessment_id, physical_fitness_level, \
             clinical_skills_level, equipment_vehicle_level, communication_level, \
-            psychological_level, overall_competency, overall_fitness, graded_at) VALUES ($1, \
-            $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *",
+            psychological_level, overall_competency, overall_fitness, graded_at) VALUES \
+            ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.physical_fitness_level)
         .bind(&self.clinical_skills_level)
@@ -47,13 +45,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE grades SET deleted_at = $2, assessment_id = $3, physical_fitness_level = \
-            $4, clinical_skills_level = $5, equipment_vehicle_level = $6, communication_level \
-            = $7, psychological_level = $8, overall_competency = $9, overall_fitness = $10, \
-            graded_at = $11, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE grades SET assessment_id = $2, physical_fitness_level = $3, \
+            clinical_skills_level = $4, equipment_vehicle_level = $5, \
+            communication_level = $6, psychological_level = $7, overall_competency = $8, \
+            overall_fitness = $9, graded_at = $10, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.physical_fitness_level)
         .bind(&self.clinical_skills_level)

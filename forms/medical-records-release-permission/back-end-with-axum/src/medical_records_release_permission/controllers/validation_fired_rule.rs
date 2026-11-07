@@ -9,7 +9,6 @@ use crate::models::validation_fired_rules::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub validation_result_id: Uuid,
     pub rule_id: String,
     pub domain: String,
@@ -21,10 +20,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO validation_fired_rules (deleted_at, validation_result_id, rule_id, \
-            domain, description, score) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+            "INSERT INTO validation_fired_rules (validation_result_id, rule_id, domain, \
+            description, score) VALUES ($1, $2, $3, $4, $5) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.validation_result_id)
         .bind(&self.rule_id)
         .bind(&self.domain)
@@ -37,12 +35,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE validation_fired_rules SET deleted_at = $2, validation_result_id = $3, \
-            rule_id = $4, domain = $5, description = $6, score = $7, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE validation_fired_rules SET validation_result_id = $2, rule_id = $3, \
+            domain = $4, description = $5, score = $6, updated_at = now() WHERE id = $1 \
+            AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.validation_result_id)
         .bind(&self.rule_id)
         .bind(&self.domain)

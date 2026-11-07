@@ -12,8 +12,6 @@ use crate::models::hospital_daily_monitoring_checklists::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    /// Deleted at.
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Hospital name.
     pub hospital_name: String,
     /// Department or site.
@@ -38,12 +36,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO hospital_daily_monitoring_checklists (deleted_at, hospital_name, \
+            "INSERT INTO hospital_daily_monitoring_checklists (hospital_name, \
             department_or_site, inspection_date, inspecting_officer_name, \
-            inspecting_officer_designation, overall_notes, action_plan, status, signed_at) \
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *",
+            inspecting_officer_designation, overall_notes, action_plan, status, \
+            signed_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.hospital_name)
         .bind(&self.department_or_site)
         .bind(self.inspection_date)
@@ -60,13 +57,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE hospital_daily_monitoring_checklists SET deleted_at = $2, hospital_name = \
-            $3, department_or_site = $4, inspection_date = $5, inspecting_officer_name = $6, \
-            inspecting_officer_designation = $7, overall_notes = $8, action_plan = $9, status \
-            = $10, signed_at = $11, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE hospital_daily_monitoring_checklists SET hospital_name = $2, \
+            department_or_site = $3, inspection_date = $4, inspecting_officer_name = $5, \
+            inspecting_officer_designation = $6, overall_notes = $7, action_plan = $8, \
+            status = $9, signed_at = $10, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.hospital_name)
         .bind(&self.department_or_site)
         .bind(self.inspection_date)

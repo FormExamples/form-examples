@@ -39,7 +39,7 @@ impl Params {
             "UPDATE learning_disability_annual_health_check_grades SET \
             learning_disability_annual_health_check_id = $2, status = $3, \
             completeness_percent = $4, health_action_plan_complete = $5, graded_at = $6, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.learning_disability_annual_health_check_id)

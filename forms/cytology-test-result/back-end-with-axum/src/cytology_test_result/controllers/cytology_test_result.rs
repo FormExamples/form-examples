@@ -9,7 +9,6 @@ use crate::models::cytology_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -37,16 +36,16 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO cytology_test_results (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO cytology_test_results (patient_id, clinician_id, \
             originating_request_reference, report_status, performed_date, reported_date, \
-            specimen_type, specimen_adequacy, clinical_history, comparison_with_previous, \
-            cytology_result_category, hpv_result, malignancy_present, dysplasia_present, \
-            microscopic_description, diagnosis, impression, reporting_category, \
-            recommended_follow_up, critical_result_communicated, reported_to) VALUES ($1, $2, \
-            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, \
-            $20, $21, $22) RETURNING *",
+            specimen_type, specimen_adequacy, clinical_history, \
+            comparison_with_previous, cytology_result_category, hpv_result, \
+            malignancy_present, dysplasia_present, microscopic_description, diagnosis, \
+            impression, reporting_category, recommended_follow_up, \
+            critical_result_communicated, reported_to) VALUES ($1, $2, $3, $4, $5, $6, \
+            $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -75,17 +74,17 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE cytology_test_results SET deleted_at = $2, patient_id = $3, clinician_id = \
-            $4, originating_request_reference = $5, report_status = $6, performed_date = $7, \
-            reported_date = $8, specimen_type = $9, specimen_adequacy = $10, clinical_history \
-            = $11, comparison_with_previous = $12, cytology_result_category = $13, hpv_result \
-            = $14, malignancy_present = $15, dysplasia_present = $16, microscopic_description \
-            = $17, diagnosis = $18, impression = $19, reporting_category = $20, \
-            recommended_follow_up = $21, critical_result_communicated = $22, reported_to = \
-            $23, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE cytology_test_results SET patient_id = $2, clinician_id = $3, \
+            originating_request_reference = $4, report_status = $5, performed_date = $6, \
+            reported_date = $7, specimen_type = $8, specimen_adequacy = $9, \
+            clinical_history = $10, comparison_with_previous = $11, \
+            cytology_result_category = $12, hpv_result = $13, malignancy_present = $14, \
+            dysplasia_present = $15, microscopic_description = $16, diagnosis = $17, \
+            impression = $18, reporting_category = $19, recommended_follow_up = $20, \
+            critical_result_communicated = $21, reported_to = $22, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

@@ -18,3 +18,4 @@ pub mod outpatient_outcome_prom_grc;
 pub mod outpatient_outcome_prom_promis;
 mod outpatient_outcome_signoffs_route;
 pub mod patient;
+mod soft_delete;

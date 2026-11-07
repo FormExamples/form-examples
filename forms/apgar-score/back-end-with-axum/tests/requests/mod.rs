@@ -11,3 +11,4 @@ pub mod apgar_score_timepoint;
 pub mod clinician;
 pub mod patient;
 pub mod patients;
+mod soft_delete;

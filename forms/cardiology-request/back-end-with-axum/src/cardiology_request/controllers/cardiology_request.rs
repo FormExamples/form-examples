@@ -141,18 +141,19 @@ impl RequestParams {
     async fn update(self, db: &PgPool, id: Uuid) -> sqlx::Result<cardiology_requests::Model> {
         let now = Utc::now();
         sqlx::query_as(
-            "UPDATE cardiology_requests SET updated_at = $2, deleted_at = NULL, patient_id = \
-            $3, clinician_id = $4, status = $5, site_name = $6, setting = $7, referral_date = \
-            $8, requested_by_date = $9, requested_service = $10, referral_reason = $11, \
-            clinical_question = $12, relevant_history = $13, symptom_chest_pain = $14, \
-            chest_pain_character = $15, symptom_breathlessness = $16, nyha_class = $17, \
-            symptom_palpitations = $18, symptom_syncope = $19, symptom_oedema = $20, \
-            suspected_acs = $21, exertional_syncope = $22, new_onset_heart_failure = $23, \
-            ecg_done = $24, ecg_findings = $25, troponin_status = $26, bnp_status = $27, \
-            known_coronary_artery_disease = $28, previous_mi = $29, heart_failure = $30, \
-            valve_disease = $31, arrhythmia = $32, hypertension = $33, diabetes = $34, \
-            current_medications = $35, urgency = $36, supervising_consultant = $37, \
-            requester_contact = $38, notes = $39 WHERE id = $1 RETURNING *",
+            "UPDATE cardiology_requests SET updated_at = $2, patient_id = $3, \
+            clinician_id = $4, status = $5, site_name = $6, setting = $7, referral_date \
+            = $8, requested_by_date = $9, requested_service = $10, referral_reason = \
+            $11, clinical_question = $12, relevant_history = $13, symptom_chest_pain = \
+            $14, chest_pain_character = $15, symptom_breathlessness = $16, nyha_class = \
+            $17, symptom_palpitations = $18, symptom_syncope = $19, symptom_oedema = \
+            $20, suspected_acs = $21, exertional_syncope = $22, new_onset_heart_failure \
+            = $23, ecg_done = $24, ecg_findings = $25, troponin_status = $26, bnp_status \
+            = $27, known_coronary_artery_disease = $28, previous_mi = $29, heart_failure \
+            = $30, valve_disease = $31, arrhythmia = $32, hypertension = $33, diabetes = \
+            $34, current_medications = $35, urgency = $36, supervising_consultant = $37, \
+            requester_contact = $38, notes = $39 WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
         .bind(now)
@@ -290,15 +291,17 @@ async fn list(State(ctx): State<AppContext>, Query(params): Query<PageParams>) -
     let page = paging::resolve(&params)?;
     let (limit, offset) = paging::bounds(page);
     let models = sqlx::query_as::<_, cardiology_requests::Model>(
-        "SELECT * FROM cardiology_requests ORDER BY created_at DESC, id LIMIT $1 OFFSET $2",
+        "SELECT * FROM cardiology_requests WHERE deleted_at IS NULL ORDER BY \
+            created_at DESC, id LIMIT $1 OFFSET $2",
     )
     .bind(limit)
     .bind(offset)
     .fetch_all(&db(&ctx))
     .await?;
-    let total: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM cardiology_requests")
-        .fetch_one(&db(&ctx))
-        .await?;
+    let total: i64 =
+        sqlx::query_scalar("SELECT COUNT(*) FROM cardiology_requests WHERE deleted_at IS NULL")
+            .fetch_one(&db(&ctx))
+            .await?;
     let headers = page.headers(u64::try_from(total).unwrap_or(0));
     Ok((headers, Json(json!({ "items": models, "total": total }))).into_response())
 }
@@ -351,10 +354,19 @@ async fn submit(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<R
     let mut txn = db(&ctx).begin().await?;
 
     // Idempotency: drop any prior grade (cascades rules + flags).
-    sqlx::query("DELETE FROM cardiology_request_grades WHERE cardiology_request_id = $1")
-        .bind(id)
-        .execute(&mut *txn)
-        .await?;
+    sqlx::query(
+        "WITH target AS (UPDATE cardiology_request_grades SET deleted_at = now(), \
+            updated_at = now() WHERE cardiology_request_id = $1 AND deleted_at IS NULL \
+            RETURNING id), child1 AS (UPDATE cardiology_request_grade_rules SET \
+            deleted_at = now(), updated_at = now() WHERE cardiology_request_grade_id IN \
+            (SELECT id FROM target) AND deleted_at IS NULL RETURNING id), child2 AS \
+            (UPDATE cardiology_request_grade_flags SET deleted_at = now(), updated_at = \
+            now() WHERE cardiology_request_grade_id IN (SELECT id FROM target) AND \
+            deleted_at IS NULL RETURNING id) SELECT count(*) FROM target",
+    )
+    .bind(id)
+    .execute(&mut *txn)
+    .await?;
 
     let grade_row = sqlx::query_as::<_, cardiology_request_grades::Model>(
         "INSERT INTO cardiology_request_grades (created_at, updated_at, \
@@ -412,12 +424,15 @@ async fn submit(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<R
     }
 
     // Mark the request submitted alongside the grade, in the same transaction.
-    sqlx::query("UPDATE cardiology_requests SET status = $2, updated_at = $3 WHERE id = $1")
-        .bind(request.id)
-        .bind("submitted".to_string())
-        .bind(now)
-        .execute(&mut *txn)
-        .await?;
+    sqlx::query(
+        "UPDATE cardiology_requests SET status = $2, updated_at = $3 WHERE id = $1 \
+            AND deleted_at IS NULL",
+    )
+    .bind(request.id)
+    .bind("submitted".to_string())
+    .bind(now)
+    .execute(&mut *txn)
+    .await?;
 
     txn.commit().await?;
 
@@ -429,7 +444,8 @@ async fn submit(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<R
 #[debug_handler]
 async fn result(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
     let grade = sqlx::query_as::<_, cardiology_request_grades::Model>(
-        "SELECT * FROM cardiology_request_grades WHERE cardiology_request_id = $1",
+        "SELECT * FROM cardiology_request_grades WHERE cardiology_request_id = $1 AND \
+            deleted_at IS NULL",
     )
     .bind(id)
     .fetch_optional(&db(&ctx))
@@ -437,14 +453,16 @@ async fn result(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<R
     .ok_or_else(|| Error::NotFound)?;
 
     let rules = sqlx::query_as::<_, cardiology_request_grade_rules::Model>(
-        "SELECT * FROM cardiology_request_grade_rules WHERE cardiology_request_grade_id = $1",
+        "SELECT * FROM cardiology_request_grade_rules WHERE \
+            cardiology_request_grade_id = $1 AND deleted_at IS NULL",
     )
     .bind(grade.id)
     .fetch_all(&db(&ctx))
     .await?;
 
     let flags = sqlx::query_as::<_, cardiology_request_grade_flags::Model>(
-        "SELECT * FROM cardiology_request_grade_flags WHERE cardiology_request_grade_id = $1",
+        "SELECT * FROM cardiology_request_grade_flags WHERE \
+            cardiology_request_grade_id = $1 AND deleted_at IS NULL",
     )
     .bind(grade.id)
     .fetch_all(&db(&ctx))

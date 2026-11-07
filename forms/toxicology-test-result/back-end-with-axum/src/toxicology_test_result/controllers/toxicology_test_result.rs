@@ -9,7 +9,6 @@ use crate::models::toxicology_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -43,18 +42,18 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO toxicology_test_results (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO toxicology_test_results (patient_id, clinician_id, \
             originating_request_reference, report_status, performed_date, reported_date, \
             specimen_condition, clinical_history, suspected_agent, \
             time_since_ingestion_hours, paracetamol_level_mg_l, salicylate_level_mg_l, \
-            ethanol_level, lithium_level_mmol_l, digoxin_level, carboxyhaemoglobin_percent, \
-            drugs_of_abuse_screen, specific_drug_level, paracetamol_nomogram, \
-            overall_result_status, toxic_level_present, findings_narrative, impression, \
-            reporting_category, recommended_follow_up, critical_result_communicated, \
-            reported_to) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, \
-            $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28) RETURNING *",
+            ethanol_level, lithium_level_mmol_l, digoxin_level, \
+            carboxyhaemoglobin_percent, drugs_of_abuse_screen, specific_drug_level, \
+            paracetamol_nomogram, overall_result_status, toxic_level_present, \
+            findings_narrative, impression, reporting_category, recommended_follow_up, \
+            critical_result_communicated, reported_to) VALUES ($1, $2, $3, $4, $5, $6, \
+            $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, \
+            $23, $24, $25, $26, $27) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -89,20 +88,20 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE toxicology_test_results SET deleted_at = $2, patient_id = $3, clinician_id \
-            = $4, originating_request_reference = $5, report_status = $6, performed_date = \
-            $7, reported_date = $8, specimen_condition = $9, clinical_history = $10, \
-            suspected_agent = $11, time_since_ingestion_hours = $12, paracetamol_level_mg_l = \
-            $13, salicylate_level_mg_l = $14, ethanol_level = $15, lithium_level_mmol_l = \
-            $16, digoxin_level = $17, carboxyhaemoglobin_percent = $18, drugs_of_abuse_screen \
-            = $19, specific_drug_level = $20, paracetamol_nomogram = $21, \
-            overall_result_status = $22, toxic_level_present = $23, findings_narrative = $24, \
-            impression = $25, reporting_category = $26, recommended_follow_up = $27, \
-            critical_result_communicated = $28, reported_to = $29, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE toxicology_test_results SET patient_id = $2, clinician_id = $3, \
+            originating_request_reference = $4, report_status = $5, performed_date = $6, \
+            reported_date = $7, specimen_condition = $8, clinical_history = $9, \
+            suspected_agent = $10, time_since_ingestion_hours = $11, \
+            paracetamol_level_mg_l = $12, salicylate_level_mg_l = $13, ethanol_level = \
+            $14, lithium_level_mmol_l = $15, digoxin_level = $16, \
+            carboxyhaemoglobin_percent = $17, drugs_of_abuse_screen = $18, \
+            specific_drug_level = $19, paracetamol_nomogram = $20, overall_result_status \
+            = $21, toxic_level_present = $22, findings_narrative = $23, impression = \
+            $24, reporting_category = $25, recommended_follow_up = $26, \
+            critical_result_communicated = $27, reported_to = $28, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

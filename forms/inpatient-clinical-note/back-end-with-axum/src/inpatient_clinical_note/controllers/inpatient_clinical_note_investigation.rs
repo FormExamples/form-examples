@@ -11,8 +11,6 @@ use crate::models::inpatient_clinical_note_investigations::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    /// Deleted at.
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Sort order.
     pub sort_order: i32,
     /// Test name.
@@ -39,12 +37,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO inpatient_clinical_note_investigations (deleted_at, sort_order, \
-            test_name, category, requested_date, result_date, result_summary, abnormal, \
-            actioned, action_taken, inpatient_clinical_note_id) VALUES ($1, $2, $3, $4, $5, \
-            $6, $7, $8, $9, $10, $11) RETURNING *",
+            "INSERT INTO inpatient_clinical_note_investigations (sort_order, test_name, \
+            category, requested_date, result_date, result_summary, abnormal, actioned, \
+            action_taken, inpatient_clinical_note_id) VALUES ($1, $2, $3, $4, $5, $6, \
+            $7, $8, $9, $10) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.sort_order)
         .bind(&self.test_name)
         .bind(&self.category)
@@ -62,13 +59,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE inpatient_clinical_note_investigations SET deleted_at = $2, sort_order = \
-            $3, test_name = $4, category = $5, requested_date = $6, result_date = $7, \
-            result_summary = $8, abnormal = $9, actioned = $10, action_taken = $11, \
-            inpatient_clinical_note_id = $12, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE inpatient_clinical_note_investigations SET sort_order = $2, test_name \
+            = $3, category = $4, requested_date = $5, result_date = $6, result_summary = \
+            $7, abnormal = $8, actioned = $9, action_taken = $10, \
+            inpatient_clinical_note_id = $11, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.sort_order)
         .bind(&self.test_name)
         .bind(&self.category)

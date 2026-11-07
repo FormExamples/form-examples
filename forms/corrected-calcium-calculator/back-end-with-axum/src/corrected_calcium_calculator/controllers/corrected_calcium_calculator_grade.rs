@@ -9,7 +9,6 @@ use crate::models::corrected_calcium_calculator_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub corrected_calcium_calculator_id: Uuid,
     pub corrected_calcium_mmol_l: Option<f64>,
     pub classification: String,
@@ -20,11 +19,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO corrected_calcium_calculator_grades (deleted_at, \
-            corrected_calcium_calculator_id, corrected_calcium_mmol_l, classification, \
-            graded_at) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+            "INSERT INTO corrected_calcium_calculator_grades \
+            (corrected_calcium_calculator_id, corrected_calcium_mmol_l, classification, \
+            graded_at) VALUES ($1, $2, $3, $4) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.corrected_calcium_calculator_id)
         .bind(self.corrected_calcium_mmol_l)
         .bind(&self.classification)
@@ -36,12 +34,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE corrected_calcium_calculator_grades SET deleted_at = $2, \
-            corrected_calcium_calculator_id = $3, corrected_calcium_mmol_l = $4, \
-            classification = $5, graded_at = $6, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE corrected_calcium_calculator_grades SET \
+            corrected_calcium_calculator_id = $2, corrected_calcium_mmol_l = $3, \
+            classification = $4, graded_at = $5, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.corrected_calcium_calculator_id)
         .bind(self.corrected_calcium_mmol_l)
         .bind(&self.classification)

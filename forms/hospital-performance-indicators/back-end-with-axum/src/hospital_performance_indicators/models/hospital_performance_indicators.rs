@@ -15,6 +15,7 @@ pub struct Model {
     /// ID.
     pub id: Uuid,
     /// Deleted at.
+    #[serde(skip)]
     pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Hospital name.
     pub hospital_name: String,
@@ -43,15 +44,19 @@ impl Model {
     pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Self>, i64)> {
         let (limit, offset) = crate::support::paging::bounds(page);
         let rows = sqlx::query_as(
-            "SELECT * FROM hospital_performance_indicators ORDER BY id LIMIT $1 OFFSET $2",
+            "SELECT * FROM hospital_performance_indicators WHERE deleted_at IS NULL ORDER \
+            BY id LIMIT $1 OFFSET $2",
         )
         .bind(limit)
         .bind(offset)
         .fetch_all(db)
         .await?;
-        let total = sqlx::query_scalar("SELECT COUNT(*) FROM hospital_performance_indicators")
-            .fetch_one(db)
-            .await?;
+        let total = sqlx::query_scalar(
+            "SELECT COUNT(*) FROM hospital_performance_indicators WHERE deleted_at IS \
+            NULL",
+        )
+        .fetch_one(db)
+        .await?;
         Ok((rows, total))
     }
 
@@ -61,10 +66,13 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn find_by_id(db: &PgPool, id: Uuid) -> sqlx::Result<Option<Self>> {
-        sqlx::query_as("SELECT * FROM hospital_performance_indicators WHERE id = $1")
-            .bind(id)
-            .fetch_optional(db)
-            .await
+        sqlx::query_as(
+            "SELECT * FROM hospital_performance_indicators WHERE id = $1 AND deleted_at \
+            IS NULL",
+        )
+        .bind(id)
+        .fetch_optional(db)
+        .await
     }
 
     /// Delete the row with this id.
@@ -73,10 +81,17 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn delete(db: &PgPool, id: Uuid) -> sqlx::Result<()> {
-        sqlx::query("DELETE FROM hospital_performance_indicators WHERE id = $1")
-            .bind(id)
-            .execute(db)
-            .await?;
+        sqlx::query(
+            "WITH target AS (UPDATE hospital_performance_indicators SET deleted_at = \
+            now(), updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING \
+            id), child1 AS (UPDATE hospital_performance_indicator_values SET deleted_at \
+            = now(), updated_at = now() WHERE hospital_performance_indicators_id IN \
+            (SELECT id FROM target) AND deleted_at IS NULL RETURNING id) SELECT count(*) \
+            FROM target",
+        )
+        .bind(id)
+        .execute(db)
+        .await?;
         Ok(())
     }
 }

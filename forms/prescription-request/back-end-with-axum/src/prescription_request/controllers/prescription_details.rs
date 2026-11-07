@@ -9,7 +9,6 @@ use crate::models::prescription_details::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub prescription_request_id: Uuid,
     pub request_date: Date,
     pub medication_name: String,
@@ -23,11 +22,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO prescription_details (deleted_at, prescription_request_id, \
-            request_date, medication_name, dosage, frequency, route_of_administration, \
-            treatment_instructions) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+            "INSERT INTO prescription_details (prescription_request_id, request_date, \
+            medication_name, dosage, frequency, route_of_administration, \
+            treatment_instructions) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.prescription_request_id)
         .bind(self.request_date)
         .bind(&self.medication_name)
@@ -42,13 +40,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE prescription_details SET deleted_at = $2, prescription_request_id = $3, \
-            request_date = $4, medication_name = $5, dosage = $6, frequency = $7, \
-            route_of_administration = $8, treatment_instructions = $9, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            "UPDATE prescription_details SET prescription_request_id = $2, request_date = \
+            $3, medication_name = $4, dosage = $5, frequency = $6, \
+            route_of_administration = $7, treatment_instructions = $8, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.prescription_request_id)
         .bind(self.request_date)
         .bind(&self.medication_name)

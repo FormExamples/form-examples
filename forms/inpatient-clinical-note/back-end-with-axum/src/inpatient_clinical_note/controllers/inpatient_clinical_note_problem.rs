@@ -11,8 +11,6 @@ use crate::models::inpatient_clinical_note_problems::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    /// Deleted at.
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Sort order.
     pub sort_order: i32,
     /// Problem.
@@ -37,12 +35,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO inpatient_clinical_note_problems (deleted_at, sort_order, problem, \
-            category, status, priority, onset_date, snomed_code, progress_commentary, \
-            inpatient_clinical_note_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) \
+            "INSERT INTO inpatient_clinical_note_problems (sort_order, problem, category, \
+            status, priority, onset_date, snomed_code, progress_commentary, \
+            inpatient_clinical_note_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) \
             RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.sort_order)
         .bind(&self.problem)
         .bind(&self.category)
@@ -59,13 +56,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE inpatient_clinical_note_problems SET deleted_at = $2, sort_order = $3, \
-            problem = $4, category = $5, status = $6, priority = $7, onset_date = $8, \
-            snomed_code = $9, progress_commentary = $10, inpatient_clinical_note_id = $11, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE inpatient_clinical_note_problems SET sort_order = $2, problem = $3, \
+            category = $4, status = $5, priority = $6, onset_date = $7, snomed_code = \
+            $8, progress_commentary = $9, inpatient_clinical_note_id = $10, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.sort_order)
         .bind(&self.problem)
         .bind(&self.category)

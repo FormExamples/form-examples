@@ -9,7 +9,6 @@ use crate::models::overall_satisfactions::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub encounter_satisfaction_id: Uuid,
     pub overall_rating: Option<i32>,
     pub likely_to_recommend: Option<i32>,
@@ -21,11 +20,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO overall_satisfactions (deleted_at, encounter_satisfaction_id, \
-            overall_rating, likely_to_recommend, likely_to_return, comments) VALUES ($1, $2, \
-            $3, $4, $5, $6) RETURNING *",
+            "INSERT INTO overall_satisfactions (encounter_satisfaction_id, \
+            overall_rating, likely_to_recommend, likely_to_return, comments) VALUES ($1, \
+            $2, $3, $4, $5) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.encounter_satisfaction_id)
         .bind(self.overall_rating)
         .bind(self.likely_to_recommend)
@@ -38,12 +36,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE overall_satisfactions SET deleted_at = $2, encounter_satisfaction_id = $3, \
-            overall_rating = $4, likely_to_recommend = $5, likely_to_return = $6, comments = \
-            $7, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE overall_satisfactions SET encounter_satisfaction_id = $2, \
+            overall_rating = $3, likely_to_recommend = $4, likely_to_return = $5, \
+            comments = $6, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.encounter_satisfaction_id)
         .bind(self.overall_rating)
         .bind(self.likely_to_recommend)

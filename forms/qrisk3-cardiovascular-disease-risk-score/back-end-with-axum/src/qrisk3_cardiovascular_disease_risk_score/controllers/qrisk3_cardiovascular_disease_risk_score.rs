@@ -100,17 +100,19 @@ impl Params {
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
             "UPDATE qrisk3_cardiovascular_disease_risk_scores SET clinician_name = $2, \
-            clinician_role = $3, assessed_at = $4, care_setting = $5, patient_identifier = \
-            $6, age = $7, sex = $8, ethnicity = $9, townsend_score = $10, postcode = $11, \
-            smoking_status = $12, body_mass_index = $13, diabetes_status = $14, \
+            clinician_role = $3, assessed_at = $4, care_setting = $5, patient_identifier \
+            = $6, age = $7, sex = $8, ethnicity = $9, townsend_score = $10, postcode = \
+            $11, smoking_status = $12, body_mass_index = $13, diabetes_status = $14, \
             cholesterol_hdl_ratio = $15, systolic_blood_pressure = $16, \
             systolic_blood_pressure_sd = $17, on_blood_pressure_treatment = $18, \
-            family_history_chd = $19, atrial_fibrillation = $20, chronic_kidney_disease_stage \
-            = $21, migraine = $22, rheumatoid_arthritis = $23, systemic_lupus_erythematosus = \
-            $24, severe_mental_illness = $25, erectile_dysfunction = $26, \
-            on_atypical_antipsychotics = $27, on_corticosteroids = $28, has_established_cvd = \
-            $29, has_familial_hypercholesterolaemia = $30, clinical_note = $31, patient_id = \
-            $32, clinician_id = $33, updated_at = now() WHERE id = $1 RETURNING *",
+            family_history_chd = $19, atrial_fibrillation = $20, \
+            chronic_kidney_disease_stage = $21, migraine = $22, rheumatoid_arthritis = \
+            $23, systemic_lupus_erythematosus = $24, severe_mental_illness = $25, \
+            erectile_dysfunction = $26, on_atypical_antipsychotics = $27, \
+            on_corticosteroids = $28, has_established_cvd = $29, \
+            has_familial_hypercholesterolaemia = $30, clinical_note = $31, patient_id = \
+            $32, clinician_id = $33, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
         .bind(&self.clinician_name)

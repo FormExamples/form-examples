@@ -9,7 +9,6 @@ use crate::models::toxicology_test_result_grade_rules::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub toxicology_test_result_grade_id: Uuid,
     pub rule_id: String,
     pub axis: String,
@@ -21,11 +20,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO toxicology_test_result_grade_rules (deleted_at, \
-            toxicology_test_result_grade_id, rule_id, axis, category, description) VALUES \
-            ($1, $2, $3, $4, $5, $6) RETURNING *",
+            "INSERT INTO toxicology_test_result_grade_rules \
+            (toxicology_test_result_grade_id, rule_id, axis, category, description) \
+            VALUES ($1, $2, $3, $4, $5) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.toxicology_test_result_grade_id)
         .bind(&self.rule_id)
         .bind(&self.axis)
@@ -38,12 +36,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE toxicology_test_result_grade_rules SET deleted_at = $2, \
-            toxicology_test_result_grade_id = $3, rule_id = $4, axis = $5, category = $6, \
-            description = $7, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE toxicology_test_result_grade_rules SET \
+            toxicology_test_result_grade_id = $2, rule_id = $3, axis = $4, category = \
+            $5, description = $6, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.toxicology_test_result_grade_id)
         .bind(&self.rule_id)
         .bind(&self.axis)

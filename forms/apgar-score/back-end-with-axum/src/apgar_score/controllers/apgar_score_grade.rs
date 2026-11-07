@@ -50,7 +50,8 @@ impl Params {
             "UPDATE apgar_score_grades SET apgar_score_id = $2, total_one_minute = $3, \
             total_five_minute = $4, total_ten_minute = $5, band_one_minute = $6, \
             band_five_minute = $7, band_ten_minute = $8, summary_band = $9, trend = $10, \
-            graded_at = $11, updated_at = now() WHERE id = $1 RETURNING *",
+            graded_at = $11, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
         .bind(self.apgar_score_id)

@@ -9,7 +9,6 @@ use crate::models::outpatient_outcome_operationals::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub outpatient_outcome_id: Uuid,
     pub referral_date: Option<Date>,
     pub appointment_date: Option<Date>,
@@ -22,11 +21,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO outpatient_outcome_operationals (deleted_at, outpatient_outcome_id, \
+            "INSERT INTO outpatient_outcome_operationals (outpatient_outcome_id, \
             referral_date, appointment_date, wait_time_days, service_target_days, \
-            nhs_attendance_outcome) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+            nhs_attendance_outcome) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.outpatient_outcome_id)
         .bind(self.referral_date)
         .bind(self.appointment_date)
@@ -40,13 +38,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE outpatient_outcome_operationals SET deleted_at = $2, outpatient_outcome_id \
-            = $3, referral_date = $4, appointment_date = $5, wait_time_days = $6, \
-            service_target_days = $7, nhs_attendance_outcome = $8, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE outpatient_outcome_operationals SET outpatient_outcome_id = $2, \
+            referral_date = $3, appointment_date = $4, wait_time_days = $5, \
+            service_target_days = $6, nhs_attendance_outcome = $7, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.outpatient_outcome_id)
         .bind(self.referral_date)
         .bind(self.appointment_date)

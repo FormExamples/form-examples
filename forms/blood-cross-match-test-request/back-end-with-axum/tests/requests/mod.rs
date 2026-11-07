@@ -9,3 +9,4 @@ pub mod blood_cross_match_test_request_grade_flag;
 pub mod blood_cross_match_test_request_grade_rule;
 pub mod clinician;
 pub mod patient;
+mod soft_delete;

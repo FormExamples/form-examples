@@ -9,7 +9,6 @@ use crate::models::body_mass_index_and_body_surface_area_calculator_grade_flags:
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub body_mass_index_and_body_surface_area_calculator_grade_id: Uuid,
     pub flag_id: String,
     pub category: String,
@@ -23,11 +22,10 @@ impl Params {
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
             "INSERT INTO body_mass_index_and_body_surface_area_calculator_grade_flags \
-            (deleted_at, body_mass_index_and_body_surface_area_calculator_grade_id, flag_id, \
-            category, priority, description, suggested_action) VALUES ($1, $2, $3, $4, $5, \
-            $6, $7) RETURNING *",
+            (body_mass_index_and_body_surface_area_calculator_grade_id, flag_id, \
+            category, priority, description, suggested_action) VALUES ($1, $2, $3, $4, \
+            $5, $6) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.body_mass_index_and_body_surface_area_calculator_grade_id)
         .bind(&self.flag_id)
         .bind(&self.category)
@@ -42,12 +40,11 @@ impl Params {
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
             "UPDATE body_mass_index_and_body_surface_area_calculator_grade_flags SET \
-            deleted_at = $2, body_mass_index_and_body_surface_area_calculator_grade_id = $3, \
-            flag_id = $4, category = $5, priority = $6, description = $7, suggested_action = \
-            $8, updated_at = now() WHERE id = $1 RETURNING *",
+            body_mass_index_and_body_surface_area_calculator_grade_id = $2, flag_id = \
+            $3, category = $4, priority = $5, description = $6, suggested_action = $7, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.body_mass_index_and_body_surface_area_calculator_grade_id)
         .bind(&self.flag_id)
         .bind(&self.category)

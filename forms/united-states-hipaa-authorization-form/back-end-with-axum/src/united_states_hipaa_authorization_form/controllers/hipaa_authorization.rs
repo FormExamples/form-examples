@@ -9,7 +9,6 @@ use crate::models::hipaa_authorizations::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub status: String,
     pub state_template: String,
@@ -21,10 +20,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO hipaa_authorizations (deleted_at, patient_id, status, state_template, \
-            revoked_at, revocation_method) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+            "INSERT INTO hipaa_authorizations (patient_id, status, state_template, \
+            revoked_at, revocation_method) VALUES ($1, $2, $3, $4, $5) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(&self.status)
         .bind(&self.state_template)
@@ -37,12 +35,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE hipaa_authorizations SET deleted_at = $2, patient_id = $3, status = $4, \
-            state_template = $5, revoked_at = $6, revocation_method = $7, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            "UPDATE hipaa_authorizations SET patient_id = $2, status = $3, state_template \
+            = $4, revoked_at = $5, revocation_method = $6, updated_at = now() WHERE id = \
+            $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(&self.status)
         .bind(&self.state_template)

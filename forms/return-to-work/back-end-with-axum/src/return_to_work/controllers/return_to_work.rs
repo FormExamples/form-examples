@@ -9,7 +9,6 @@ use crate::models::return_to_works::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub employer_id: Option<Uuid>,
@@ -76,31 +75,32 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO return_to_works (deleted_at, patient_id, clinician_id, employer_id, \
-            status, statement_kind, assessment_date, assessment_time, absence_first_day, \
+            "INSERT INTO return_to_works (patient_id, clinician_id, employer_id, status, \
+            statement_kind, assessment_date, assessment_time, absence_first_day, \
             absence_total_calendar_days, prior_med3_reference, \
             prior_self_certification_reference, primary_diagnosis_text, \
             primary_diagnosis_snomed, primary_diagnosis_icd10, comorbid_conditions, \
             mechanism, workplace_cause, riddor_reference, current_medications, \
             ongoing_therapy, last_consultation_date, anticipated_recovery_trajectory, \
-            specialist_followup_required, mobility, manual_handling_capacity_kg, cognition, \
-            mood, sleep, pain_score_0_10, driving_capacity, standing_tolerance_minutes, \
-            sitting_tolerance_minutes, screen_tolerance_minutes, adl_independence, \
-            fitness_statement_computed, fitness_statement_final, clinician_override, \
-            clinician_override_reason, clinician_confidence, valid_from, valid_until, \
-            validity_weeks, reassessment_required, phased_return_applicable, \
-            phased_return_template, phased_return_target_date, phased_return_schedule_json, \
+            specialist_followup_required, mobility, manual_handling_capacity_kg, \
+            cognition, mood, sleep, pain_score_0_10, driving_capacity, \
+            standing_tolerance_minutes, sitting_tolerance_minutes, \
+            screen_tolerance_minutes, adl_independence, fitness_statement_computed, \
+            fitness_statement_final, clinician_override, clinician_override_reason, \
+            clinician_confidence, valid_from, valid_until, validity_weeks, \
+            reassessment_required, phased_return_applicable, phased_return_template, \
+            phased_return_target_date, phased_return_schedule_json, \
             phased_return_support_contact, workstation_review_required, \
             additional_adjustments_text, review_location, review_date, \
             occupational_health_referral_made, dvla_notification_required, \
             employer_oh_notified, return_to_work_meeting_scheduled, \
-            maternity_certificate_reference, final_notes, signature_svg, signed_at) VALUES \
-            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, \
-            $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, \
-            $35, $36, $37, $38, $39, $40, $41, $42, $43, $44, $45, $46, $47, $48, $49, $50, \
-            $51, $52, $53, $54, $55, $56, $57, $58, $59, $60, $61) RETURNING *",
+            maternity_certificate_reference, final_notes, signature_svg, signed_at) \
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, \
+            $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, \
+            $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42, $43, $44, $45, \
+            $46, $47, $48, $49, $50, $51, $52, $53, $54, $55, $56, $57, $58, $59, $60) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(self.employer_id)
@@ -168,34 +168,33 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE return_to_works SET deleted_at = $2, patient_id = $3, clinician_id = $4, \
-            employer_id = $5, status = $6, statement_kind = $7, assessment_date = $8, \
-            assessment_time = $9, absence_first_day = $10, absence_total_calendar_days = $11, \
-            prior_med3_reference = $12, prior_self_certification_reference = $13, \
-            primary_diagnosis_text = $14, primary_diagnosis_snomed = $15, \
-            primary_diagnosis_icd10 = $16, comorbid_conditions = $17, mechanism = $18, \
-            workplace_cause = $19, riddor_reference = $20, current_medications = $21, \
-            ongoing_therapy = $22, last_consultation_date = $23, \
-            anticipated_recovery_trajectory = $24, specialist_followup_required = $25, \
-            mobility = $26, manual_handling_capacity_kg = $27, cognition = $28, mood = $29, \
-            sleep = $30, pain_score_0_10 = $31, driving_capacity = $32, \
-            standing_tolerance_minutes = $33, sitting_tolerance_minutes = $34, \
-            screen_tolerance_minutes = $35, adl_independence = $36, \
-            fitness_statement_computed = $37, fitness_statement_final = $38, \
-            clinician_override = $39, clinician_override_reason = $40, clinician_confidence = \
-            $41, valid_from = $42, valid_until = $43, validity_weeks = $44, \
-            reassessment_required = $45, phased_return_applicable = $46, \
-            phased_return_template = $47, phased_return_target_date = $48, \
-            phased_return_schedule_json = $49, phased_return_support_contact = $50, \
-            workstation_review_required = $51, additional_adjustments_text = $52, \
-            review_location = $53, review_date = $54, occupational_health_referral_made = \
-            $55, dvla_notification_required = $56, employer_oh_notified = $57, \
-            return_to_work_meeting_scheduled = $58, maternity_certificate_reference = $59, \
-            final_notes = $60, signature_svg = $61, signed_at = $62, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE return_to_works SET patient_id = $2, clinician_id = $3, employer_id = \
+            $4, status = $5, statement_kind = $6, assessment_date = $7, assessment_time \
+            = $8, absence_first_day = $9, absence_total_calendar_days = $10, \
+            prior_med3_reference = $11, prior_self_certification_reference = $12, \
+            primary_diagnosis_text = $13, primary_diagnosis_snomed = $14, \
+            primary_diagnosis_icd10 = $15, comorbid_conditions = $16, mechanism = $17, \
+            workplace_cause = $18, riddor_reference = $19, current_medications = $20, \
+            ongoing_therapy = $21, last_consultation_date = $22, \
+            anticipated_recovery_trajectory = $23, specialist_followup_required = $24, \
+            mobility = $25, manual_handling_capacity_kg = $26, cognition = $27, mood = \
+            $28, sleep = $29, pain_score_0_10 = $30, driving_capacity = $31, \
+            standing_tolerance_minutes = $32, sitting_tolerance_minutes = $33, \
+            screen_tolerance_minutes = $34, adl_independence = $35, \
+            fitness_statement_computed = $36, fitness_statement_final = $37, \
+            clinician_override = $38, clinician_override_reason = $39, \
+            clinician_confidence = $40, valid_from = $41, valid_until = $42, \
+            validity_weeks = $43, reassessment_required = $44, phased_return_applicable \
+            = $45, phased_return_template = $46, phased_return_target_date = $47, \
+            phased_return_schedule_json = $48, phased_return_support_contact = $49, \
+            workstation_review_required = $50, additional_adjustments_text = $51, \
+            review_location = $52, review_date = $53, occupational_health_referral_made \
+            = $54, dvla_notification_required = $55, employer_oh_notified = $56, \
+            return_to_work_meeting_scheduled = $57, maternity_certificate_reference = \
+            $58, final_notes = $59, signature_svg = $60, signed_at = $61, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(self.employer_id)

@@ -9,7 +9,6 @@ use crate::models::lpas::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub donor_id: Uuid,
     pub certificate_provider_id: Option<Uuid>,
     pub form_version: String,
@@ -25,11 +24,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO lpas (deleted_at, donor_id, certificate_provider_id, form_version, \
-            jurisdiction, status, opg_reference, registered_at, effective_from, notes) VALUES \
-            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *",
+            "INSERT INTO lpas (donor_id, certificate_provider_id, form_version, \
+            jurisdiction, status, opg_reference, registered_at, effective_from, notes) \
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.donor_id)
         .bind(self.certificate_provider_id)
         .bind(&self.form_version)
@@ -46,13 +44,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE lpas SET deleted_at = $2, donor_id = $3, certificate_provider_id = $4, \
-            form_version = $5, jurisdiction = $6, status = $7, opg_reference = $8, \
-            registered_at = $9, effective_from = $10, notes = $11, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE lpas SET donor_id = $2, certificate_provider_id = $3, form_version = \
+            $4, jurisdiction = $5, status = $6, opg_reference = $7, registered_at = $8, \
+            effective_from = $9, notes = $10, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.donor_id)
         .bind(self.certificate_provider_id)
         .bind(&self.form_version)

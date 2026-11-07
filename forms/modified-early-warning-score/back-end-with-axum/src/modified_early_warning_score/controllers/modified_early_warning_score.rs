@@ -58,7 +58,8 @@ impl Params {
             status = $4, observation_at = $5, care_setting = $6, ward_or_location = $7, \
             systolic_blood_pressure = $8, heart_rate = $9, respiratory_rate = $10, \
             temperature = $11, consciousness_avpu = $12, previous_mews_score = $13, \
-            clinical_notes = $14, updated_at = now() WHERE id = $1 RETURNING *",
+            clinical_notes = $14, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

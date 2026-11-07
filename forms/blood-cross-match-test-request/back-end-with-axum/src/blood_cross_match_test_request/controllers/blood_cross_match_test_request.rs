@@ -9,7 +9,6 @@ use crate::models::blood_cross_match_test_requests::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub status: String,
@@ -42,17 +41,16 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO blood_cross_match_test_requests (deleted_at, patient_id, \
-            clinician_id, status, site_name, setting, referral_date, requested_by_date, \
-            request_type, component, units_required, primary_indication, clinical_details, \
-            patient_blood_group, known_antibodies, antibody_detail, previous_transfusion, \
-            previous_transfusion_reaction, pregnant, sample_collected, collection_datetime, \
-            two_sample_rule_met, required_by_datetime, urgency, supervising_consultant, \
-            requester_contact, notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, \
-            $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27) \
-            RETURNING *",
+            "INSERT INTO blood_cross_match_test_requests (patient_id, clinician_id, \
+            status, site_name, setting, referral_date, requested_by_date, request_type, \
+            component, units_required, primary_indication, clinical_details, \
+            patient_blood_group, known_antibodies, antibody_detail, \
+            previous_transfusion, previous_transfusion_reaction, pregnant, \
+            sample_collected, collection_datetime, two_sample_rule_met, \
+            required_by_datetime, urgency, supervising_consultant, requester_contact, \
+            notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, \
+            $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)
@@ -86,18 +84,18 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE blood_cross_match_test_requests SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, status = $5, site_name = $6, setting = $7, referral_date = $8, \
-            requested_by_date = $9, request_type = $10, component = $11, units_required = \
-            $12, primary_indication = $13, clinical_details = $14, patient_blood_group = $15, \
-            known_antibodies = $16, antibody_detail = $17, previous_transfusion = $18, \
-            previous_transfusion_reaction = $19, pregnant = $20, sample_collected = $21, \
-            collection_datetime = $22, two_sample_rule_met = $23, required_by_datetime = $24, \
-            urgency = $25, supervising_consultant = $26, requester_contact = $27, notes = \
-            $28, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE blood_cross_match_test_requests SET patient_id = $2, clinician_id = \
+            $3, status = $4, site_name = $5, setting = $6, referral_date = $7, \
+            requested_by_date = $8, request_type = $9, component = $10, units_required = \
+            $11, primary_indication = $12, clinical_details = $13, patient_blood_group = \
+            $14, known_antibodies = $15, antibody_detail = $16, previous_transfusion = \
+            $17, previous_transfusion_reaction = $18, pregnant = $19, sample_collected = \
+            $20, collection_datetime = $21, two_sample_rule_met = $22, \
+            required_by_datetime = $23, urgency = $24, supervising_consultant = $25, \
+            requester_contact = $26, notes = $27, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)

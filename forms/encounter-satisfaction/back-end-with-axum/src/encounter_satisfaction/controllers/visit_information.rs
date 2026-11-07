@@ -9,7 +9,6 @@ use crate::models::visit_informations::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub encounter_satisfaction_id: Uuid,
     pub visit_date: Option<Date>,
     pub department: String,
@@ -23,11 +22,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO visit_informations (deleted_at, encounter_satisfaction_id, \
-            visit_date, department, provider_name, visit_type, reason_for_visit, first_visit) \
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+            "INSERT INTO visit_informations (encounter_satisfaction_id, visit_date, \
+            department, provider_name, visit_type, reason_for_visit, first_visit) VALUES \
+            ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.encounter_satisfaction_id)
         .bind(self.visit_date)
         .bind(&self.department)
@@ -42,13 +40,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE visit_informations SET deleted_at = $2, encounter_satisfaction_id = $3, \
-            visit_date = $4, department = $5, provider_name = $6, visit_type = $7, \
-            reason_for_visit = $8, first_visit = $9, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE visit_informations SET encounter_satisfaction_id = $2, visit_date = \
+            $3, department = $4, provider_name = $5, visit_type = $6, reason_for_visit = \
+            $7, first_visit = $8, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.encounter_satisfaction_id)
         .bind(self.visit_date)
         .bind(&self.department)

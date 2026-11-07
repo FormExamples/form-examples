@@ -68,13 +68,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE grace_score_for_acute_coronary_syndromes SET patient_id = $2, clinician_id \
-            = $3, clinician_name = $4, clinician_role = $5, assessed_at = $6, care_setting = \
-            $7, presentation_type = $8, patient_identifier = $9, age_years = $10, sex = $11, \
-            heart_rate = $12, systolic_blood_pressure = $13, serum_creatinine = $14, \
-            serum_creatinine_unit = $15, killip_class = $16, cardiac_arrest_at_admission = \
-            $17, st_segment_deviation = $18, elevated_cardiac_enzymes = $19, clinical_note = \
-            $20, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE grace_score_for_acute_coronary_syndromes SET patient_id = $2, \
+            clinician_id = $3, clinician_name = $4, clinician_role = $5, assessed_at = \
+            $6, care_setting = $7, presentation_type = $8, patient_identifier = $9, \
+            age_years = $10, sex = $11, heart_rate = $12, systolic_blood_pressure = $13, \
+            serum_creatinine = $14, serum_creatinine_unit = $15, killip_class = $16, \
+            cardiac_arrest_at_admission = $17, st_segment_deviation = $18, \
+            elevated_cardiac_enzymes = $19, clinical_note = $20, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

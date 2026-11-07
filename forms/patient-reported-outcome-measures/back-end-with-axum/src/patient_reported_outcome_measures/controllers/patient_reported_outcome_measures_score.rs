@@ -12,8 +12,6 @@ use crate::models::patient_reported_outcome_measures_scores::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    /// Deleted at.
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Patient reported outcome measures ID.
     pub patient_reported_outcome_measures_id: Uuid,
     /// Sf36 pf.
@@ -60,15 +58,14 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO patient_reported_outcome_measures_scores (deleted_at, \
-            patient_reported_outcome_measures_id, sf36_pf, sf36_rp, sf36_bp, sf36_gh, \
+            "INSERT INTO patient_reported_outcome_measures_scores \
+            (patient_reported_outcome_measures_id, sf36_pf, sf36_rp, sf36_bp, sf36_gh, \
             sf36_vt, sf36_sf, sf36_re, sf36_mh, sf36_pcs_approx, sf36_mcs_approx, \
             ndi_raw_score, ndi_answered_sections, ndi_percentage_score, ndi_band, \
-            mjoa_total_score, mjoa_band, eq5d_health_state_descriptor, eq5d_uk_index_value, \
-            eq5d_vas_score) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, \
-            $14, $15, $16, $17, $18, $19, $20, $21) RETURNING *",
+            mjoa_total_score, mjoa_band, eq5d_health_state_descriptor, \
+            eq5d_uk_index_value, eq5d_vas_score) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, \
+            $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_reported_outcome_measures_id)
         .bind(self.sf36_pf)
         .bind(self.sf36_rp)
@@ -96,17 +93,16 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE patient_reported_outcome_measures_scores SET deleted_at = $2, \
-            patient_reported_outcome_measures_id = $3, sf36_pf = $4, sf36_rp = $5, sf36_bp = \
-            $6, sf36_gh = $7, sf36_vt = $8, sf36_sf = $9, sf36_re = $10, sf36_mh = $11, \
-            sf36_pcs_approx = $12, sf36_mcs_approx = $13, ndi_raw_score = $14, \
-            ndi_answered_sections = $15, ndi_percentage_score = $16, ndi_band = $17, \
-            mjoa_total_score = $18, mjoa_band = $19, eq5d_health_state_descriptor = $20, \
-            eq5d_uk_index_value = $21, eq5d_vas_score = $22, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE patient_reported_outcome_measures_scores SET \
+            patient_reported_outcome_measures_id = $2, sf36_pf = $3, sf36_rp = $4, \
+            sf36_bp = $5, sf36_gh = $6, sf36_vt = $7, sf36_sf = $8, sf36_re = $9, \
+            sf36_mh = $10, sf36_pcs_approx = $11, sf36_mcs_approx = $12, ndi_raw_score = \
+            $13, ndi_answered_sections = $14, ndi_percentage_score = $15, ndi_band = \
+            $16, mjoa_total_score = $17, mjoa_band = $18, eq5d_health_state_descriptor = \
+            $19, eq5d_uk_index_value = $20, eq5d_vas_score = $21, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_reported_outcome_measures_id)
         .bind(self.sf36_pf)
         .bind(self.sf36_rp)

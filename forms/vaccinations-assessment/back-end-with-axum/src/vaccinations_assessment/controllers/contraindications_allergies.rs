@@ -9,7 +9,6 @@ use crate::models::contraindications_allergies::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub egg_allergy: String,
     pub gelatin_allergy: String,
@@ -26,12 +25,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO contraindications_allergies (deleted_at, assessment_id, egg_allergy, \
+            "INSERT INTO contraindications_allergies (assessment_id, egg_allergy, \
             gelatin_allergy, latex_allergy, neomycin_allergy, pregnant, pregnancy_weeks, \
-            severe_illness, previous_anaphylaxis, anaphylaxis_details) VALUES ($1, $2, $3, \
-            $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *",
+            severe_illness, previous_anaphylaxis, anaphylaxis_details) VALUES ($1, $2, \
+            $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.egg_allergy)
         .bind(&self.gelatin_allergy)
@@ -49,14 +47,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE contraindications_allergies SET deleted_at = $2, assessment_id = $3, \
-            egg_allergy = $4, gelatin_allergy = $5, latex_allergy = $6, neomycin_allergy = \
-            $7, pregnant = $8, pregnancy_weeks = $9, severe_illness = $10, \
-            previous_anaphylaxis = $11, anaphylaxis_details = $12, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE contraindications_allergies SET assessment_id = $2, egg_allergy = $3, \
+            gelatin_allergy = $4, latex_allergy = $5, neomycin_allergy = $6, pregnant = \
+            $7, pregnancy_weeks = $8, severe_illness = $9, previous_anaphylaxis = $10, \
+            anaphylaxis_details = $11, updated_at = now() WHERE id = $1 AND deleted_at \
+            IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.egg_allergy)
         .bind(&self.gelatin_allergy)

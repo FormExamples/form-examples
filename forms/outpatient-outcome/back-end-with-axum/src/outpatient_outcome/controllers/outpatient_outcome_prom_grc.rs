@@ -9,7 +9,6 @@ use crate::models::outpatient_outcome_prom_grcs::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub outpatient_outcome_id: Uuid,
     pub global_rating_of_change: Option<i32>,
     pub self_rated_health: String,
@@ -19,10 +18,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO outpatient_outcome_prom_grcs (deleted_at, outpatient_outcome_id, \
-            global_rating_of_change, self_rated_health) VALUES ($1, $2, $3, $4) RETURNING *",
+            "INSERT INTO outpatient_outcome_prom_grcs (outpatient_outcome_id, \
+            global_rating_of_change, self_rated_health) VALUES ($1, $2, $3) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.outpatient_outcome_id)
         .bind(self.global_rating_of_change)
         .bind(&self.self_rated_health)
@@ -33,12 +31,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE outpatient_outcome_prom_grcs SET deleted_at = $2, outpatient_outcome_id = \
-            $3, global_rating_of_change = $4, self_rated_health = $5, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            "UPDATE outpatient_outcome_prom_grcs SET outpatient_outcome_id = $2, \
+            global_rating_of_change = $3, self_rated_health = $4, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.outpatient_outcome_id)
         .bind(self.global_rating_of_change)
         .bind(&self.self_rated_health)

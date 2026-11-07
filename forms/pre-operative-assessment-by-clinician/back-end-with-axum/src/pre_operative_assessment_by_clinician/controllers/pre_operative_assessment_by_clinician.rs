@@ -9,7 +9,6 @@ use crate::models::pre_operative_assessment_by_clinicians::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub status: String,
@@ -266,91 +265,98 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO pre_operative_assessment_by_clinicians (deleted_at, patient_id, \
+            "INSERT INTO pre_operative_assessment_by_clinicians (patient_id, \
             clinician_id, status, site_name, assessment_date, assessment_time, \
-            planned_procedure, surgical_specialty, urgency, laterality, surgical_severity, \
-            anticipated_blood_loss_ml, anticipated_duration_minutes, consultant_surgeon, \
-            planned_date, systolic_bp, diastolic_bp, heart_rate, respiratory_rate, \
-            spo2_percent, temperature_celsius, capillary_refill_seconds, pain_score_0_10, \
-            on_room_air, supplemental_oxygen_litres, mallampati_class, \
-            thyromental_distance_cm, mouth_opening_cm, inter_incisor_gap_cm, neck_rom, \
-            cervical_spine_stability, dentition, beard, upper_lip_bite_test, \
-            prior_difficult_intubation, stopbang_snoring, stopbang_tired, \
-            stopbang_observed_apnoea, stopbang_pressure, stopbang_bmi_gt35, \
-            stopbang_age_gt50, stopbang_neck_gt40, stopbang_male, airway_notes, heart_rhythm, \
-            murmur_present, murmur_description, peripheral_pulses, jvp_raised, \
-            peripheral_oedema, ecg_performed, ecg_rhythm, ecg_rate_bpm, ecg_axis, \
-            ecg_ischaemic_changes, ecg_notes, echo_performed, echo_ef_percent, echo_notes, \
-            history_ihd, history_chf, history_stroke_tia, recent_mi_within_3_months, \
-            pacemaker_or_icd, severe_valve_dysfunction, active_angina, breath_sounds, wheeze, \
-            crackles, crepitations, chest_wall_deformity, asthma, copd, cxr_performed, \
-            cxr_findings, pft_performed, pft_fev1_percent_predicted, pft_fev1_fvc_ratio, \
-            smoking_status, pack_years, covid_history, days_since_covid, \
-            covid_unresolved_symptoms, gcs_total, gcs_eye, gcs_verbal, gcs_motor, \
-            cognition_tool, cognition_score, cognitive_impairment, capacity_concern, \
-            cranial_nerves_notes, motor_power, sensory_notes, reflexes, recent_stroke_tia, \
-            days_since_stroke_tia, seizure_disorder, creatinine_umol_l, egfr_ml_min_1_73m2, \
-            urea_mmol_l, potassium_mmol_l, sodium_mmol_l, dialysis_status, ckd_stage, \
-            bilirubin_umol_l, alt_u_l, ast_u_l, alp_u_l, albumin_g_l, chronic_liver_disease, \
-            child_pugh_class, hb_g_l, wcc_10_9_l, platelets_10_9_l, mcv_fl, ferritin_ug_l, \
+            planned_procedure, surgical_specialty, urgency, laterality, \
+            surgical_severity, anticipated_blood_loss_ml, anticipated_duration_minutes, \
+            consultant_surgeon, planned_date, systolic_bp, diastolic_bp, heart_rate, \
+            respiratory_rate, spo2_percent, temperature_celsius, \
+            capillary_refill_seconds, pain_score_0_10, on_room_air, \
+            supplemental_oxygen_litres, mallampati_class, thyromental_distance_cm, \
+            mouth_opening_cm, inter_incisor_gap_cm, neck_rom, cervical_spine_stability, \
+            dentition, beard, upper_lip_bite_test, prior_difficult_intubation, \
+            stopbang_snoring, stopbang_tired, stopbang_observed_apnoea, \
+            stopbang_pressure, stopbang_bmi_gt35, stopbang_age_gt50, stopbang_neck_gt40, \
+            stopbang_male, airway_notes, heart_rhythm, murmur_present, \
+            murmur_description, peripheral_pulses, jvp_raised, peripheral_oedema, \
+            ecg_performed, ecg_rhythm, ecg_rate_bpm, ecg_axis, ecg_ischaemic_changes, \
+            ecg_notes, echo_performed, echo_ef_percent, echo_notes, history_ihd, \
+            history_chf, history_stroke_tia, recent_mi_within_3_months, \
+            pacemaker_or_icd, severe_valve_dysfunction, active_angina, breath_sounds, \
+            wheeze, crackles, crepitations, chest_wall_deformity, asthma, copd, \
+            cxr_performed, cxr_findings, pft_performed, pft_fev1_percent_predicted, \
+            pft_fev1_fvc_ratio, smoking_status, pack_years, covid_history, \
+            days_since_covid, covid_unresolved_symptoms, gcs_total, gcs_eye, gcs_verbal, \
+            gcs_motor, cognition_tool, cognition_score, cognitive_impairment, \
+            capacity_concern, cranial_nerves_notes, motor_power, sensory_notes, \
+            reflexes, recent_stroke_tia, days_since_stroke_tia, seizure_disorder, \
+            creatinine_umol_l, egfr_ml_min_1_73m2, urea_mmol_l, potassium_mmol_l, \
+            sodium_mmol_l, dialysis_status, ckd_stage, bilirubin_umol_l, alt_u_l, \
+            ast_u_l, alp_u_l, albumin_g_l, chronic_liver_disease, child_pugh_class, \
+            hb_g_l, wcc_10_9_l, platelets_10_9_l, mcv_fl, ferritin_ug_l, \
             transferrin_saturation_percent, inr, aptt_seconds, fibrinogen_g_l, \
-            on_anticoagulant, anticoagulant_type, anticoagulant_hold_plan, group_and_save, \
-            crossmatch_units, last_transfusion_date, anaemia_severity, diabetes_type, \
-            diabetes_on_insulin, hba1c_mmol_mol, fasting_glucose_mmol_l, \
-            random_glucose_mmol_l, diabetes_control, diabetes_complications, thyroid_status, \
-            tsh_mu_l, adrenal_status, on_long_term_steroids, steroid_dose_mg, \
-            steroid_cover_plan, abdominal_exam, abdominal_notes, reflux_symptoms, \
-            hiatus_hernia, previous_gastric_surgery, ng_tube, stoma, fasting_confirmed, \
-            last_solid_food_at, last_clear_fluid_at, rapid_sequence_induction_needed, \
-            spine_exam, spine_notes, neuraxial_suitable, joint_rom_hip, joint_rom_shoulder, \
-            joint_rom_neck, skin_iv_access, skin_block_site, pressure_ulcer_risk, name, dose, \
-            route, frequency, indication, class, perioperative_action, perioperative_notes, \
+            on_anticoagulant, anticoagulant_type, anticoagulant_hold_plan, \
+            group_and_save, crossmatch_units, last_transfusion_date, anaemia_severity, \
+            diabetes_type, diabetes_on_insulin, hba1c_mmol_mol, fasting_glucose_mmol_l, \
+            random_glucose_mmol_l, diabetes_control, diabetes_complications, \
+            thyroid_status, tsh_mu_l, adrenal_status, on_long_term_steroids, \
+            steroid_dose_mg, steroid_cover_plan, abdominal_exam, abdominal_notes, \
+            reflux_symptoms, hiatus_hernia, previous_gastric_surgery, ng_tube, stoma, \
+            fasting_confirmed, last_solid_food_at, last_clear_fluid_at, \
+            rapid_sequence_induction_needed, spine_exam, spine_notes, \
+            neuraxial_suitable, joint_rom_hip, joint_rom_shoulder, joint_rom_neck, \
+            skin_iv_access, skin_block_site, pressure_ulcer_risk, name, dose, route, \
+            frequency, indication, class, perioperative_action, perioperative_notes, \
             last_dose_at, on_glp1_receptor_agonist, glp1_agonist_name, glp1_formulation, \
-            glp1_last_dose_at, glp1_held_per_guideline, glp1_extended_clear_fluids_confirmed, \
-            glp1_gi_symptoms, glp1_gi_symptoms_details, glp1_gastric_ultrasound_performed, \
+            glp1_last_dose_at, glp1_held_per_guideline, \
+            glp1_extended_clear_fluids_confirmed, glp1_gi_symptoms, \
+            glp1_gi_symptoms_details, glp1_gastric_ultrasound_performed, \
             glp1_gastric_ultrasound_findings, glp1_full_stomach_precautions_planned, \
-            glp1_notes, allergen, category, reaction_type, reaction_severity, reaction_notes, \
-            verified, mets_estimate, dasi_score, ecog_performance_status, \
-            clinical_frailty_scale, six_minute_walk_metres, sts_one_minute_reps, tug_seconds, \
-            cpet_performed, cpet_vo2_peak_ml_kg_min, cpet_anaerobic_threshold_ml_kg_min, \
-            cpet_notes, malnutrition_risk, unintentional_weight_loss_kg, fried_weakness, \
-            fried_slowness, fried_low_physical_activity, fried_exhaustion, \
-            fried_unintentional_weight_loss, risk_analysis_index_score, mini_cog_performed, \
-            mini_cog_score, prehabilitation_indicated, prehabilitation_type, \
-            prehabilitation_start_date, protein_supplementation_recommended, technique, \
-            airway_plan, rsi_planned, monitoring_level, analgesia_plan, \
-            regional_block_planned, dvt_prophylaxis, antibiotic_prophylaxis, \
-            post_op_disposition, anticipated_length_of_stay_days, special_equipment, \
-            blood_products_required, hospital_number, indication_for_surgery, \
-            anaesthetist_name, previous_surgeries, previous_anaesthetic_issues, \
-            previous_anaesthetic_issues_details, family_history_anaesthetic_complications, \
+            glp1_notes, allergen, category, reaction_type, reaction_severity, \
+            reaction_notes, verified, mets_estimate, dasi_score, \
+            ecog_performance_status, clinical_frailty_scale, six_minute_walk_metres, \
+            sts_one_minute_reps, tug_seconds, cpet_performed, cpet_vo2_peak_ml_kg_min, \
+            cpet_anaerobic_threshold_ml_kg_min, cpet_notes, malnutrition_risk, \
+            unintentional_weight_loss_kg, fried_weakness, fried_slowness, \
+            fried_low_physical_activity, fried_exhaustion, \
+            fried_unintentional_weight_loss, risk_analysis_index_score, \
+            mini_cog_performed, mini_cog_score, prehabilitation_indicated, \
+            prehabilitation_type, prehabilitation_start_date, \
+            protein_supplementation_recommended, technique, airway_plan, rsi_planned, \
+            monitoring_level, analgesia_plan, regional_block_planned, dvt_prophylaxis, \
+            antibiotic_prophylaxis, post_op_disposition, \
+            anticipated_length_of_stay_days, special_equipment, blood_products_required, \
+            hospital_number, indication_for_surgery, anaesthetist_name, \
+            previous_surgeries, previous_anaesthetic_issues, \
+            previous_anaesthetic_issues_details, \
+            family_history_anaesthetic_complications, \
             family_history_anaesthetic_complications_details, urinalysis_findings, \
             living_situation, support_at_home, mobility_status, falls_risk_within_year, \
             vte_risk_level, covid_screening_result, discharge_destination, \
             follow_up_requirements, social_services_involvement, \
             reablement_physiotherapy_needs, consent_status, interpreter_required, \
             discussion_procedure, discussion_anaesthetic, discussion_risks_benefits, \
-            discussion_alternatives) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, \
-            $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, \
-            $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42, $43, \
-            $44, $45, $46, $47, $48, $49, $50, $51, $52, $53, $54, $55, $56, $57, $58, $59, \
-            $60, $61, $62, $63, $64, $65, $66, $67, $68, $69, $70, $71, $72, $73, $74, $75, \
-            $76, $77, $78, $79, $80, $81, $82, $83, $84, $85, $86, $87, $88, $89, $90, $91, \
-            $92, $93, $94, $95, $96, $97, $98, $99, $100, $101, $102, $103, $104, $105, $106, \
-            $107, $108, $109, $110, $111, $112, $113, $114, $115, $116, $117, $118, $119, \
-            $120, $121, $122, $123, $124, $125, $126, $127, $128, $129, $130, $131, $132, \
-            $133, $134, $135, $136, $137, $138, $139, $140, $141, $142, $143, $144, $145, \
-            $146, $147, $148, $149, $150, $151, $152, $153, $154, $155, $156, $157, $158, \
-            $159, $160, $161, $162, $163, $164, $165, $166, $167, $168, $169, $170, $171, \
-            $172, $173, $174, $175, $176, $177, $178, $179, $180, $181, $182, $183, $184, \
-            $185, $186, $187, $188, $189, $190, $191, $192, $193, $194, $195, $196, $197, \
-            $198, $199, $200, $201, $202, $203, $204, $205, $206, $207, $208, $209, $210, \
-            $211, $212, $213, $214, $215, $216, $217, $218, $219, $220, $221, $222, $223, \
-            $224, $225, $226, $227, $228, $229, $230, $231, $232, $233, $234, $235, $236, \
-            $237, $238, $239, $240, $241, $242, $243, $244, $245, $246, $247, $248, $249, \
-            $250, $251) RETURNING *",
+            discussion_alternatives) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, \
+            $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, \
+            $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, \
+            $41, $42, $43, $44, $45, $46, $47, $48, $49, $50, $51, $52, $53, $54, $55, \
+            $56, $57, $58, $59, $60, $61, $62, $63, $64, $65, $66, $67, $68, $69, $70, \
+            $71, $72, $73, $74, $75, $76, $77, $78, $79, $80, $81, $82, $83, $84, $85, \
+            $86, $87, $88, $89, $90, $91, $92, $93, $94, $95, $96, $97, $98, $99, $100, \
+            $101, $102, $103, $104, $105, $106, $107, $108, $109, $110, $111, $112, \
+            $113, $114, $115, $116, $117, $118, $119, $120, $121, $122, $123, $124, \
+            $125, $126, $127, $128, $129, $130, $131, $132, $133, $134, $135, $136, \
+            $137, $138, $139, $140, $141, $142, $143, $144, $145, $146, $147, $148, \
+            $149, $150, $151, $152, $153, $154, $155, $156, $157, $158, $159, $160, \
+            $161, $162, $163, $164, $165, $166, $167, $168, $169, $170, $171, $172, \
+            $173, $174, $175, $176, $177, $178, $179, $180, $181, $182, $183, $184, \
+            $185, $186, $187, $188, $189, $190, $191, $192, $193, $194, $195, $196, \
+            $197, $198, $199, $200, $201, $202, $203, $204, $205, $206, $207, $208, \
+            $209, $210, $211, $212, $213, $214, $215, $216, $217, $218, $219, $220, \
+            $221, $222, $223, $224, $225, $226, $227, $228, $229, $230, $231, $232, \
+            $233, $234, $235, $236, $237, $238, $239, $240, $241, $242, $243, $244, \
+            $245, $246, $247, $248, $249, $250) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)
@@ -608,93 +614,100 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE pre_operative_assessment_by_clinicians SET deleted_at = $2, patient_id = \
-            $3, clinician_id = $4, status = $5, site_name = $6, assessment_date = $7, \
-            assessment_time = $8, planned_procedure = $9, surgical_specialty = $10, urgency = \
-            $11, laterality = $12, surgical_severity = $13, anticipated_blood_loss_ml = $14, \
-            anticipated_duration_minutes = $15, consultant_surgeon = $16, planned_date = $17, \
-            systolic_bp = $18, diastolic_bp = $19, heart_rate = $20, respiratory_rate = $21, \
-            spo2_percent = $22, temperature_celsius = $23, capillary_refill_seconds = $24, \
-            pain_score_0_10 = $25, on_room_air = $26, supplemental_oxygen_litres = $27, \
-            mallampati_class = $28, thyromental_distance_cm = $29, mouth_opening_cm = $30, \
-            inter_incisor_gap_cm = $31, neck_rom = $32, cervical_spine_stability = $33, \
-            dentition = $34, beard = $35, upper_lip_bite_test = $36, \
-            prior_difficult_intubation = $37, stopbang_snoring = $38, stopbang_tired = $39, \
-            stopbang_observed_apnoea = $40, stopbang_pressure = $41, stopbang_bmi_gt35 = $42, \
-            stopbang_age_gt50 = $43, stopbang_neck_gt40 = $44, stopbang_male = $45, \
-            airway_notes = $46, heart_rhythm = $47, murmur_present = $48, murmur_description \
-            = $49, peripheral_pulses = $50, jvp_raised = $51, peripheral_oedema = $52, \
-            ecg_performed = $53, ecg_rhythm = $54, ecg_rate_bpm = $55, ecg_axis = $56, \
-            ecg_ischaemic_changes = $57, ecg_notes = $58, echo_performed = $59, \
-            echo_ef_percent = $60, echo_notes = $61, history_ihd = $62, history_chf = $63, \
-            history_stroke_tia = $64, recent_mi_within_3_months = $65, pacemaker_or_icd = \
-            $66, severe_valve_dysfunction = $67, active_angina = $68, breath_sounds = $69, \
-            wheeze = $70, crackles = $71, crepitations = $72, chest_wall_deformity = $73, \
-            asthma = $74, copd = $75, cxr_performed = $76, cxr_findings = $77, pft_performed \
-            = $78, pft_fev1_percent_predicted = $79, pft_fev1_fvc_ratio = $80, smoking_status \
-            = $81, pack_years = $82, covid_history = $83, days_since_covid = $84, \
-            covid_unresolved_symptoms = $85, gcs_total = $86, gcs_eye = $87, gcs_verbal = \
-            $88, gcs_motor = $89, cognition_tool = $90, cognition_score = $91, \
-            cognitive_impairment = $92, capacity_concern = $93, cranial_nerves_notes = $94, \
-            motor_power = $95, sensory_notes = $96, reflexes = $97, recent_stroke_tia = $98, \
-            days_since_stroke_tia = $99, seizure_disorder = $100, creatinine_umol_l = $101, \
-            egfr_ml_min_1_73m2 = $102, urea_mmol_l = $103, potassium_mmol_l = $104, \
-            sodium_mmol_l = $105, dialysis_status = $106, ckd_stage = $107, bilirubin_umol_l \
-            = $108, alt_u_l = $109, ast_u_l = $110, alp_u_l = $111, albumin_g_l = $112, \
-            chronic_liver_disease = $113, child_pugh_class = $114, hb_g_l = $115, wcc_10_9_l \
-            = $116, platelets_10_9_l = $117, mcv_fl = $118, ferritin_ug_l = $119, \
-            transferrin_saturation_percent = $120, inr = $121, aptt_seconds = $122, \
-            fibrinogen_g_l = $123, on_anticoagulant = $124, anticoagulant_type = $125, \
-            anticoagulant_hold_plan = $126, group_and_save = $127, crossmatch_units = $128, \
-            last_transfusion_date = $129, anaemia_severity = $130, diabetes_type = $131, \
-            diabetes_on_insulin = $132, hba1c_mmol_mol = $133, fasting_glucose_mmol_l = $134, \
-            random_glucose_mmol_l = $135, diabetes_control = $136, diabetes_complications = \
-            $137, thyroid_status = $138, tsh_mu_l = $139, adrenal_status = $140, \
-            on_long_term_steroids = $141, steroid_dose_mg = $142, steroid_cover_plan = $143, \
-            abdominal_exam = $144, abdominal_notes = $145, reflux_symptoms = $146, \
-            hiatus_hernia = $147, previous_gastric_surgery = $148, ng_tube = $149, stoma = \
-            $150, fasting_confirmed = $151, last_solid_food_at = $152, last_clear_fluid_at = \
-            $153, rapid_sequence_induction_needed = $154, spine_exam = $155, spine_notes = \
-            $156, neuraxial_suitable = $157, joint_rom_hip = $158, joint_rom_shoulder = $159, \
-            joint_rom_neck = $160, skin_iv_access = $161, skin_block_site = $162, \
-            pressure_ulcer_risk = $163, name = $164, dose = $165, route = $166, frequency = \
-            $167, indication = $168, class = $169, perioperative_action = $170, \
-            perioperative_notes = $171, last_dose_at = $172, on_glp1_receptor_agonist = $173, \
-            glp1_agonist_name = $174, glp1_formulation = $175, glp1_last_dose_at = $176, \
-            glp1_held_per_guideline = $177, glp1_extended_clear_fluids_confirmed = $178, \
-            glp1_gi_symptoms = $179, glp1_gi_symptoms_details = $180, \
-            glp1_gastric_ultrasound_performed = $181, glp1_gastric_ultrasound_findings = \
-            $182, glp1_full_stomach_precautions_planned = $183, glp1_notes = $184, allergen = \
-            $185, category = $186, reaction_type = $187, reaction_severity = $188, \
-            reaction_notes = $189, verified = $190, mets_estimate = $191, dasi_score = $192, \
-            ecog_performance_status = $193, clinical_frailty_scale = $194, \
-            six_minute_walk_metres = $195, sts_one_minute_reps = $196, tug_seconds = $197, \
-            cpet_performed = $198, cpet_vo2_peak_ml_kg_min = $199, \
-            cpet_anaerobic_threshold_ml_kg_min = $200, cpet_notes = $201, malnutrition_risk = \
-            $202, unintentional_weight_loss_kg = $203, fried_weakness = $204, fried_slowness \
-            = $205, fried_low_physical_activity = $206, fried_exhaustion = $207, \
-            fried_unintentional_weight_loss = $208, risk_analysis_index_score = $209, \
-            mini_cog_performed = $210, mini_cog_score = $211, prehabilitation_indicated = \
-            $212, prehabilitation_type = $213, prehabilitation_start_date = $214, \
-            protein_supplementation_recommended = $215, technique = $216, airway_plan = $217, \
-            rsi_planned = $218, monitoring_level = $219, analgesia_plan = $220, \
-            regional_block_planned = $221, dvt_prophylaxis = $222, antibiotic_prophylaxis = \
-            $223, post_op_disposition = $224, anticipated_length_of_stay_days = $225, \
-            special_equipment = $226, blood_products_required = $227, hospital_number = $228, \
-            indication_for_surgery = $229, anaesthetist_name = $230, previous_surgeries = \
-            $231, previous_anaesthetic_issues = $232, previous_anaesthetic_issues_details = \
-            $233, family_history_anaesthetic_complications = $234, \
-            family_history_anaesthetic_complications_details = $235, urinalysis_findings = \
-            $236, living_situation = $237, support_at_home = $238, mobility_status = $239, \
-            falls_risk_within_year = $240, vte_risk_level = $241, covid_screening_result = \
-            $242, discharge_destination = $243, follow_up_requirements = $244, \
-            social_services_involvement = $245, reablement_physiotherapy_needs = $246, \
-            consent_status = $247, interpreter_required = $248, discussion_procedure = $249, \
-            discussion_anaesthetic = $250, discussion_risks_benefits = $251, \
-            discussion_alternatives = $252, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE pre_operative_assessment_by_clinicians SET patient_id = $2, \
+            clinician_id = $3, status = $4, site_name = $5, assessment_date = $6, \
+            assessment_time = $7, planned_procedure = $8, surgical_specialty = $9, \
+            urgency = $10, laterality = $11, surgical_severity = $12, \
+            anticipated_blood_loss_ml = $13, anticipated_duration_minutes = $14, \
+            consultant_surgeon = $15, planned_date = $16, systolic_bp = $17, \
+            diastolic_bp = $18, heart_rate = $19, respiratory_rate = $20, spo2_percent = \
+            $21, temperature_celsius = $22, capillary_refill_seconds = $23, \
+            pain_score_0_10 = $24, on_room_air = $25, supplemental_oxygen_litres = $26, \
+            mallampati_class = $27, thyromental_distance_cm = $28, mouth_opening_cm = \
+            $29, inter_incisor_gap_cm = $30, neck_rom = $31, cervical_spine_stability = \
+            $32, dentition = $33, beard = $34, upper_lip_bite_test = $35, \
+            prior_difficult_intubation = $36, stopbang_snoring = $37, stopbang_tired = \
+            $38, stopbang_observed_apnoea = $39, stopbang_pressure = $40, \
+            stopbang_bmi_gt35 = $41, stopbang_age_gt50 = $42, stopbang_neck_gt40 = $43, \
+            stopbang_male = $44, airway_notes = $45, heart_rhythm = $46, murmur_present \
+            = $47, murmur_description = $48, peripheral_pulses = $49, jvp_raised = $50, \
+            peripheral_oedema = $51, ecg_performed = $52, ecg_rhythm = $53, ecg_rate_bpm \
+            = $54, ecg_axis = $55, ecg_ischaemic_changes = $56, ecg_notes = $57, \
+            echo_performed = $58, echo_ef_percent = $59, echo_notes = $60, history_ihd = \
+            $61, history_chf = $62, history_stroke_tia = $63, recent_mi_within_3_months \
+            = $64, pacemaker_or_icd = $65, severe_valve_dysfunction = $66, active_angina \
+            = $67, breath_sounds = $68, wheeze = $69, crackles = $70, crepitations = \
+            $71, chest_wall_deformity = $72, asthma = $73, copd = $74, cxr_performed = \
+            $75, cxr_findings = $76, pft_performed = $77, pft_fev1_percent_predicted = \
+            $78, pft_fev1_fvc_ratio = $79, smoking_status = $80, pack_years = $81, \
+            covid_history = $82, days_since_covid = $83, covid_unresolved_symptoms = \
+            $84, gcs_total = $85, gcs_eye = $86, gcs_verbal = $87, gcs_motor = $88, \
+            cognition_tool = $89, cognition_score = $90, cognitive_impairment = $91, \
+            capacity_concern = $92, cranial_nerves_notes = $93, motor_power = $94, \
+            sensory_notes = $95, reflexes = $96, recent_stroke_tia = $97, \
+            days_since_stroke_tia = $98, seizure_disorder = $99, creatinine_umol_l = \
+            $100, egfr_ml_min_1_73m2 = $101, urea_mmol_l = $102, potassium_mmol_l = \
+            $103, sodium_mmol_l = $104, dialysis_status = $105, ckd_stage = $106, \
+            bilirubin_umol_l = $107, alt_u_l = $108, ast_u_l = $109, alp_u_l = $110, \
+            albumin_g_l = $111, chronic_liver_disease = $112, child_pugh_class = $113, \
+            hb_g_l = $114, wcc_10_9_l = $115, platelets_10_9_l = $116, mcv_fl = $117, \
+            ferritin_ug_l = $118, transferrin_saturation_percent = $119, inr = $120, \
+            aptt_seconds = $121, fibrinogen_g_l = $122, on_anticoagulant = $123, \
+            anticoagulant_type = $124, anticoagulant_hold_plan = $125, group_and_save = \
+            $126, crossmatch_units = $127, last_transfusion_date = $128, \
+            anaemia_severity = $129, diabetes_type = $130, diabetes_on_insulin = $131, \
+            hba1c_mmol_mol = $132, fasting_glucose_mmol_l = $133, random_glucose_mmol_l \
+            = $134, diabetes_control = $135, diabetes_complications = $136, \
+            thyroid_status = $137, tsh_mu_l = $138, adrenal_status = $139, \
+            on_long_term_steroids = $140, steroid_dose_mg = $141, steroid_cover_plan = \
+            $142, abdominal_exam = $143, abdominal_notes = $144, reflux_symptoms = $145, \
+            hiatus_hernia = $146, previous_gastric_surgery = $147, ng_tube = $148, stoma \
+            = $149, fasting_confirmed = $150, last_solid_food_at = $151, \
+            last_clear_fluid_at = $152, rapid_sequence_induction_needed = $153, \
+            spine_exam = $154, spine_notes = $155, neuraxial_suitable = $156, \
+            joint_rom_hip = $157, joint_rom_shoulder = $158, joint_rom_neck = $159, \
+            skin_iv_access = $160, skin_block_site = $161, pressure_ulcer_risk = $162, \
+            name = $163, dose = $164, route = $165, frequency = $166, indication = $167, \
+            class = $168, perioperative_action = $169, perioperative_notes = $170, \
+            last_dose_at = $171, on_glp1_receptor_agonist = $172, glp1_agonist_name = \
+            $173, glp1_formulation = $174, glp1_last_dose_at = $175, \
+            glp1_held_per_guideline = $176, glp1_extended_clear_fluids_confirmed = $177, \
+            glp1_gi_symptoms = $178, glp1_gi_symptoms_details = $179, \
+            glp1_gastric_ultrasound_performed = $180, glp1_gastric_ultrasound_findings = \
+            $181, glp1_full_stomach_precautions_planned = $182, glp1_notes = $183, \
+            allergen = $184, category = $185, reaction_type = $186, reaction_severity = \
+            $187, reaction_notes = $188, verified = $189, mets_estimate = $190, \
+            dasi_score = $191, ecog_performance_status = $192, clinical_frailty_scale = \
+            $193, six_minute_walk_metres = $194, sts_one_minute_reps = $195, tug_seconds \
+            = $196, cpet_performed = $197, cpet_vo2_peak_ml_kg_min = $198, \
+            cpet_anaerobic_threshold_ml_kg_min = $199, cpet_notes = $200, \
+            malnutrition_risk = $201, unintentional_weight_loss_kg = $202, \
+            fried_weakness = $203, fried_slowness = $204, fried_low_physical_activity = \
+            $205, fried_exhaustion = $206, fried_unintentional_weight_loss = $207, \
+            risk_analysis_index_score = $208, mini_cog_performed = $209, mini_cog_score \
+            = $210, prehabilitation_indicated = $211, prehabilitation_type = $212, \
+            prehabilitation_start_date = $213, protein_supplementation_recommended = \
+            $214, technique = $215, airway_plan = $216, rsi_planned = $217, \
+            monitoring_level = $218, analgesia_plan = $219, regional_block_planned = \
+            $220, dvt_prophylaxis = $221, antibiotic_prophylaxis = $222, \
+            post_op_disposition = $223, anticipated_length_of_stay_days = $224, \
+            special_equipment = $225, blood_products_required = $226, hospital_number = \
+            $227, indication_for_surgery = $228, anaesthetist_name = $229, \
+            previous_surgeries = $230, previous_anaesthetic_issues = $231, \
+            previous_anaesthetic_issues_details = $232, \
+            family_history_anaesthetic_complications = $233, \
+            family_history_anaesthetic_complications_details = $234, urinalysis_findings \
+            = $235, living_situation = $236, support_at_home = $237, mobility_status = \
+            $238, falls_risk_within_year = $239, vte_risk_level = $240, \
+            covid_screening_result = $241, discharge_destination = $242, \
+            follow_up_requirements = $243, social_services_involvement = $244, \
+            reablement_physiotherapy_needs = $245, consent_status = $246, \
+            interpreter_required = $247, discussion_procedure = $248, \
+            discussion_anaesthetic = $249, discussion_risks_benefits = $250, \
+            discussion_alternatives = $251, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)

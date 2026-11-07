@@ -8,3 +8,4 @@ pub mod health_screening_questionnaire;
 pub mod health_screening_questionnaire_grade;
 pub mod health_screening_questionnaire_grade_flag;
 pub mod patient;
+mod soft_delete;

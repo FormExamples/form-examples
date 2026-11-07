@@ -9,7 +9,6 @@ use crate::models::clinicians::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub name: String,
     pub specialty: String,
     pub role: String,
@@ -27,12 +26,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO clinicians (deleted_at, name, specialty, role, registration_body, \
+            "INSERT INTO clinicians (name, specialty, role, registration_body, \
             registration_number, clinic_name, email, phone, postal_address_as_full_text, \
-            country_as_iso_3166_1_alpha_2, postcode) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, \
-            $9, $10, $11, $12) RETURNING *",
+            country_as_iso_3166_1_alpha_2, postcode) VALUES ($1, $2, $3, $4, $5, $6, $7, \
+            $8, $9, $10, $11) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(&self.specialty)
         .bind(&self.role)
@@ -51,13 +49,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE clinicians SET deleted_at = $2, name = $3, specialty = $4, role = $5, \
-            registration_body = $6, registration_number = $7, clinic_name = $8, email = $9, \
-            phone = $10, postal_address_as_full_text = $11, country_as_iso_3166_1_alpha_2 = \
-            $12, postcode = $13, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE clinicians SET name = $2, specialty = $3, role = $4, \
+            registration_body = $5, registration_number = $6, clinic_name = $7, email = \
+            $8, phone = $9, postal_address_as_full_text = $10, \
+            country_as_iso_3166_1_alpha_2 = $11, postcode = $12, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(&self.specialty)
         .bind(&self.role)

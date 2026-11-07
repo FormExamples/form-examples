@@ -9,7 +9,6 @@ use crate::models::agile_checklist_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub agile_checklist_id: Uuid,
     pub answered_count: i32,
     pub teams_yes_count: i32,
@@ -38,16 +37,15 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO agile_checklist_grades (deleted_at, agile_checklist_id, \
-            answered_count, teams_yes_count, teams_applicable_count, teams_percent, \
+            "INSERT INTO agile_checklist_grades (agile_checklist_id, answered_count, \
+            teams_yes_count, teams_applicable_count, teams_percent, \
             stakeholders_yes_count, stakeholders_applicable_count, stakeholders_percent, \
             practices_yes_count, practices_applicable_count, practices_percent, \
             overall_percent, teams_band, stakeholders_band, practices_band, maturity, \
             top_action_1, top_action_2, top_action_3, coach_notes, signed_at, graded_at) \
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, \
-            $17, $18, $19, $20, $21, $22, $23) RETURNING *",
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, \
+            $16, $17, $18, $19, $20, $21, $22) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.agile_checklist_id)
         .bind(self.answered_count)
         .bind(self.teams_yes_count)
@@ -77,17 +75,17 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE agile_checklist_grades SET deleted_at = $2, agile_checklist_id = $3, \
-            answered_count = $4, teams_yes_count = $5, teams_applicable_count = $6, \
-            teams_percent = $7, stakeholders_yes_count = $8, stakeholders_applicable_count = \
-            $9, stakeholders_percent = $10, practices_yes_count = $11, \
-            practices_applicable_count = $12, practices_percent = $13, overall_percent = $14, \
-            teams_band = $15, stakeholders_band = $16, practices_band = $17, maturity = $18, \
-            top_action_1 = $19, top_action_2 = $20, top_action_3 = $21, coach_notes = $22, \
-            signed_at = $23, graded_at = $24, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE agile_checklist_grades SET agile_checklist_id = $2, answered_count = \
+            $3, teams_yes_count = $4, teams_applicable_count = $5, teams_percent = $6, \
+            stakeholders_yes_count = $7, stakeholders_applicable_count = $8, \
+            stakeholders_percent = $9, practices_yes_count = $10, \
+            practices_applicable_count = $11, practices_percent = $12, overall_percent = \
+            $13, teams_band = $14, stakeholders_band = $15, practices_band = $16, \
+            maturity = $17, top_action_1 = $18, top_action_2 = $19, top_action_3 = $20, \
+            coach_notes = $21, signed_at = $22, graded_at = $23, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.agile_checklist_id)
         .bind(self.answered_count)
         .bind(self.teams_yes_count)

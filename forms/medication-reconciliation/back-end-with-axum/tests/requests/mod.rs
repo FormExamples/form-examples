@@ -13,3 +13,4 @@ pub mod medication_reconciliation_grade_rule;
 pub mod medication_reconciliation_information_source;
 pub mod medication_reconciliation_line_item;
 pub mod patient;
+mod soft_delete;

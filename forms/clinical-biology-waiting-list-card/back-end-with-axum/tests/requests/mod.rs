@@ -10,3 +10,4 @@ pub mod clin_biology_waiting_list_card_grade_flag;
 pub mod clin_biology_waiting_list_card_grade_rule;
 pub mod patient;
 pub mod practitioner;
+mod soft_delete;

@@ -9,7 +9,6 @@ use crate::models::pregnancy_ultrasound_test_requests::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub status: String,
@@ -58,22 +57,22 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO pregnancy_ultrasound_test_requests (deleted_at, patient_id, \
-            clinician_id, status, site_name, setting, referral_date, requested_by_date, \
+            "INSERT INTO pregnancy_ultrasound_test_requests (patient_id, clinician_id, \
+            status, site_name, setting, referral_date, requested_by_date, \
             last_menstrual_period_date, last_menstrual_period_reliability, \
             estimated_due_date, estimated_due_date_method, gestational_age_weeks, \
-            gestational_age_days, gravida, para, plurality, chorionicity, conception_method, \
-            rhesus_status, body_mass_index, requested_scan_type, primary_indication, \
-            clinical_question, relevant_history, previous_scan_finding, previous_scan_date, \
-            vaginal_bleeding, abdominal_pain, reduced_fetal_movements, suspected_ectopic, \
-            haemodynamically_unstable, hypertension, diabetes, previous_growth_restriction, \
-            previous_preterm_birth, previous_caesarean, smoker, urgency, \
-            supervising_consultant, requester_contact, interpreter_required, notes) VALUES \
-            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, \
-            $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, \
-            $35, $36, $37, $38, $39, $40, $41, $42, $43) RETURNING *",
+            gestational_age_days, gravida, para, plurality, chorionicity, \
+            conception_method, rhesus_status, body_mass_index, requested_scan_type, \
+            primary_indication, clinical_question, relevant_history, \
+            previous_scan_finding, previous_scan_date, vaginal_bleeding, abdominal_pain, \
+            reduced_fetal_movements, suspected_ectopic, haemodynamically_unstable, \
+            hypertension, diabetes, previous_growth_restriction, previous_preterm_birth, \
+            previous_caesarean, smoker, urgency, supervising_consultant, \
+            requester_contact, interpreter_required, notes) VALUES ($1, $2, $3, $4, $5, \
+            $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, \
+            $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, \
+            $37, $38, $39, $40, $41, $42) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)
@@ -123,24 +122,25 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE pregnancy_ultrasound_test_requests SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, status = $5, site_name = $6, setting = $7, referral_date = $8, \
-            requested_by_date = $9, last_menstrual_period_date = $10, \
-            last_menstrual_period_reliability = $11, estimated_due_date = $12, \
-            estimated_due_date_method = $13, gestational_age_weeks = $14, \
-            gestational_age_days = $15, gravida = $16, para = $17, plurality = $18, \
-            chorionicity = $19, conception_method = $20, rhesus_status = $21, body_mass_index \
-            = $22, requested_scan_type = $23, primary_indication = $24, clinical_question = \
-            $25, relevant_history = $26, previous_scan_finding = $27, previous_scan_date = \
-            $28, vaginal_bleeding = $29, abdominal_pain = $30, reduced_fetal_movements = $31, \
-            suspected_ectopic = $32, haemodynamically_unstable = $33, hypertension = $34, \
-            diabetes = $35, previous_growth_restriction = $36, previous_preterm_birth = $37, \
-            previous_caesarean = $38, smoker = $39, urgency = $40, supervising_consultant = \
-            $41, requester_contact = $42, interpreter_required = $43, notes = $44, updated_at \
-            = now() WHERE id = $1 RETURNING *",
+            "UPDATE pregnancy_ultrasound_test_requests SET patient_id = $2, clinician_id \
+            = $3, status = $4, site_name = $5, setting = $6, referral_date = $7, \
+            requested_by_date = $8, last_menstrual_period_date = $9, \
+            last_menstrual_period_reliability = $10, estimated_due_date = $11, \
+            estimated_due_date_method = $12, gestational_age_weeks = $13, \
+            gestational_age_days = $14, gravida = $15, para = $16, plurality = $17, \
+            chorionicity = $18, conception_method = $19, rhesus_status = $20, \
+            body_mass_index = $21, requested_scan_type = $22, primary_indication = $23, \
+            clinical_question = $24, relevant_history = $25, previous_scan_finding = \
+            $26, previous_scan_date = $27, vaginal_bleeding = $28, abdominal_pain = $29, \
+            reduced_fetal_movements = $30, suspected_ectopic = $31, \
+            haemodynamically_unstable = $32, hypertension = $33, diabetes = $34, \
+            previous_growth_restriction = $35, previous_preterm_birth = $36, \
+            previous_caesarean = $37, smoker = $38, urgency = $39, \
+            supervising_consultant = $40, requester_contact = $41, interpreter_required \
+            = $42, notes = $43, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)

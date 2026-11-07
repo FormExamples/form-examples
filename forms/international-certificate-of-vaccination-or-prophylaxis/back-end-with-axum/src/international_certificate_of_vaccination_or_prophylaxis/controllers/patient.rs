@@ -9,7 +9,6 @@ use crate::models::patients::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub surname: String,
     pub given_names: String,
     pub birth_date: Option<Date>,
@@ -31,14 +30,13 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO patients (deleted_at, surname, given_names, birth_date, sex, \
-            nationality_as_iso_3166_1_alpha_3, travel_document_kind, travel_document_number, \
-            travel_document_issuer_as_iso_3166_1_alpha_3, email, phone, \
-            postal_address_as_full_text, country_as_iso_3166_1_alpha_2, postcode, \
-            consented_to_data_sharing, signature_image_data_url) VALUES ($1, $2, $3, $4, $5, \
-            $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING *",
+            "INSERT INTO patients (surname, given_names, birth_date, sex, \
+            nationality_as_iso_3166_1_alpha_3, travel_document_kind, \
+            travel_document_number, travel_document_issuer_as_iso_3166_1_alpha_3, email, \
+            phone, postal_address_as_full_text, country_as_iso_3166_1_alpha_2, postcode, \
+            consented_to_data_sharing, signature_image_data_url) VALUES ($1, $2, $3, $4, \
+            $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.surname)
         .bind(&self.given_names)
         .bind(self.birth_date)
@@ -61,15 +59,15 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE patients SET deleted_at = $2, surname = $3, given_names = $4, birth_date = \
-            $5, sex = $6, nationality_as_iso_3166_1_alpha_3 = $7, travel_document_kind = $8, \
-            travel_document_number = $9, travel_document_issuer_as_iso_3166_1_alpha_3 = $10, \
-            email = $11, phone = $12, postal_address_as_full_text = $13, \
-            country_as_iso_3166_1_alpha_2 = $14, postcode = $15, consented_to_data_sharing = \
-            $16, signature_image_data_url = $17, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE patients SET surname = $2, given_names = $3, birth_date = $4, sex = \
+            $5, nationality_as_iso_3166_1_alpha_3 = $6, travel_document_kind = $7, \
+            travel_document_number = $8, travel_document_issuer_as_iso_3166_1_alpha_3 = \
+            $9, email = $10, phone = $11, postal_address_as_full_text = $12, \
+            country_as_iso_3166_1_alpha_2 = $13, postcode = $14, \
+            consented_to_data_sharing = $15, signature_image_data_url = $16, updated_at \
+            = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.surname)
         .bind(&self.given_names)
         .bind(self.birth_date)

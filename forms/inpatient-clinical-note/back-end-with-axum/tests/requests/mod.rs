@@ -13,3 +13,4 @@ pub mod inpatient_clinical_note_job;
 pub mod inpatient_clinical_note_medication_change;
 pub mod inpatient_clinical_note_problem;
 pub mod patient;
+mod soft_delete;

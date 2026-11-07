@@ -5,6 +5,7 @@ mod readiness;
 
 pub mod clinician;
 pub mod patient;
+mod soft_delete;
 pub mod toxicology_test_result;
 pub mod toxicology_test_result_grade;
 pub mod toxicology_test_result_grade_flag;

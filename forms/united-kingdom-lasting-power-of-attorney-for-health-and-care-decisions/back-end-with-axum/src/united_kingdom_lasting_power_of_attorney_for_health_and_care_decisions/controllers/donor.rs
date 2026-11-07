@@ -9,7 +9,6 @@ use crate::models::donors::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub title: String,
     pub given_names: String,
     pub family_name: String,
@@ -31,13 +30,13 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO donors (deleted_at, title, given_names, family_name, \
-            other_names_used, birth_date, email, phone, postal_address_as_full_text, \
-            country_as_iso_3166_1_alpha_2, postcode, united_kingdom_nhs_number, jurisdiction, \
-            preferred_language, capacity_declared, capacity_declared_at) VALUES ($1, $2, $3, \
-            $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING *",
+            "INSERT INTO donors (title, given_names, family_name, other_names_used, \
+            birth_date, email, phone, postal_address_as_full_text, \
+            country_as_iso_3166_1_alpha_2, postcode, united_kingdom_nhs_number, \
+            jurisdiction, preferred_language, capacity_declared, capacity_declared_at) \
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.title)
         .bind(&self.given_names)
         .bind(&self.family_name)
@@ -60,15 +59,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE donors SET deleted_at = $2, title = $3, given_names = $4, family_name = \
-            $5, other_names_used = $6, birth_date = $7, email = $8, phone = $9, \
-            postal_address_as_full_text = $10, country_as_iso_3166_1_alpha_2 = $11, postcode \
-            = $12, united_kingdom_nhs_number = $13, jurisdiction = $14, preferred_language = \
-            $15, capacity_declared = $16, capacity_declared_at = $17, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            "UPDATE donors SET title = $2, given_names = $3, family_name = $4, \
+            other_names_used = $5, birth_date = $6, email = $7, phone = $8, \
+            postal_address_as_full_text = $9, country_as_iso_3166_1_alpha_2 = $10, \
+            postcode = $11, united_kingdom_nhs_number = $12, jurisdiction = $13, \
+            preferred_language = $14, capacity_declared = $15, capacity_declared_at = \
+            $16, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.title)
         .bind(&self.given_names)
         .bind(&self.family_name)

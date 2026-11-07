@@ -9,7 +9,6 @@ use crate::models::casualty_card_demographics::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub casualty_card_id: Uuid,
     pub address: String,
     pub postcode: String,
@@ -24,11 +23,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO casualty_card_demographics (deleted_at, casualty_card_id, address, \
-            postcode, phone, email, ethnicity, preferred_language, interpreter_required) \
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
+            "INSERT INTO casualty_card_demographics (casualty_card_id, address, postcode, \
+            phone, email, ethnicity, preferred_language, interpreter_required) VALUES \
+            ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(&self.address)
         .bind(&self.postcode)
@@ -44,13 +42,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE casualty_card_demographics SET deleted_at = $2, casualty_card_id = $3, \
-            address = $4, postcode = $5, phone = $6, email = $7, ethnicity = $8, \
-            preferred_language = $9, interpreter_required = $10, updated_at = now() WHERE id \
-            = $1 RETURNING *",
+            "UPDATE casualty_card_demographics SET casualty_card_id = $2, address = $3, \
+            postcode = $4, phone = $5, email = $6, ethnicity = $7, preferred_language = \
+            $8, interpreter_required = $9, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.casualty_card_id)
         .bind(&self.address)
         .bind(&self.postcode)

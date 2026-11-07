@@ -9,7 +9,6 @@ use crate::models::ultrasound_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -43,17 +42,17 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO ultrasound_test_results (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO ultrasound_test_results (patient_id, clinician_id, \
             originating_request_reference, report_status, performed_date, reported_date, \
             body_region, laterality, examination_adequacy, clinical_history, \
-            comparison_with_previous, findings_narrative, mass_or_lesion, cyst, gallstones, \
-            hydronephrosis, free_fluid, dvt_present, aneurysm, organ_enlargement, \
-            incidental_finding, largest_lesion_size_mm, impression, reporting_category, \
-            recommended_follow_up, critical_result_communicated, reported_to) VALUES ($1, $2, \
-            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, \
-            $20, $21, $22, $23, $24, $25, $26, $27, $28) RETURNING *",
+            comparison_with_previous, findings_narrative, mass_or_lesion, cyst, \
+            gallstones, hydronephrosis, free_fluid, dvt_present, aneurysm, \
+            organ_enlargement, incidental_finding, largest_lesion_size_mm, impression, \
+            reporting_category, recommended_follow_up, critical_result_communicated, \
+            reported_to) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, \
+            $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -88,19 +87,18 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE ultrasound_test_results SET deleted_at = $2, patient_id = $3, clinician_id \
-            = $4, originating_request_reference = $5, report_status = $6, performed_date = \
-            $7, reported_date = $8, body_region = $9, laterality = $10, examination_adequacy \
-            = $11, clinical_history = $12, comparison_with_previous = $13, findings_narrative \
-            = $14, mass_or_lesion = $15, cyst = $16, gallstones = $17, hydronephrosis = $18, \
-            free_fluid = $19, dvt_present = $20, aneurysm = $21, organ_enlargement = $22, \
-            incidental_finding = $23, largest_lesion_size_mm = $24, impression = $25, \
-            reporting_category = $26, recommended_follow_up = $27, \
-            critical_result_communicated = $28, reported_to = $29, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE ultrasound_test_results SET patient_id = $2, clinician_id = $3, \
+            originating_request_reference = $4, report_status = $5, performed_date = $6, \
+            reported_date = $7, body_region = $8, laterality = $9, examination_adequacy \
+            = $10, clinical_history = $11, comparison_with_previous = $12, \
+            findings_narrative = $13, mass_or_lesion = $14, cyst = $15, gallstones = \
+            $16, hydronephrosis = $17, free_fluid = $18, dvt_present = $19, aneurysm = \
+            $20, organ_enlargement = $21, incidental_finding = $22, \
+            largest_lesion_size_mm = $23, impression = $24, reporting_category = $25, \
+            recommended_follow_up = $26, critical_result_communicated = $27, reported_to \
+            = $28, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

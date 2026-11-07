@@ -11,8 +11,6 @@ use crate::models::inpatient_clinical_note_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    /// Deleted at.
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Status.
     pub status: String,
     /// Completeness percent.
@@ -61,17 +59,16 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO inpatient_clinical_note_grades (deleted_at, status, \
-            completeness_percent, required_component_count, documented_component_count, \
-            acuity_band, computed_acuity_band, news2_total, header_documented, \
-            interval_history_documented, observations_documented, examination_documented, \
-            investigations_documented, problems_documented, medications_documented, \
-            risk_assessments_documented, impression_documented, plan_documented, \
-            escalation_documented, communication_documented, graded_at, \
-            inpatient_clinical_note_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, \
-            $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22) RETURNING *",
+            "INSERT INTO inpatient_clinical_note_grades (status, completeness_percent, \
+            required_component_count, documented_component_count, acuity_band, \
+            computed_acuity_band, news2_total, header_documented, \
+            interval_history_documented, observations_documented, \
+            examination_documented, investigations_documented, problems_documented, \
+            medications_documented, risk_assessments_documented, impression_documented, \
+            plan_documented, escalation_documented, communication_documented, graded_at, \
+            inpatient_clinical_note_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, \
+            $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.status)
         .bind(self.completeness_percent)
         .bind(self.required_component_count)
@@ -100,19 +97,19 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE inpatient_clinical_note_grades SET deleted_at = $2, status = $3, \
-            completeness_percent = $4, required_component_count = $5, \
-            documented_component_count = $6, acuity_band = $7, computed_acuity_band = $8, \
-            news2_total = $9, header_documented = $10, interval_history_documented = $11, \
-            observations_documented = $12, examination_documented = $13, \
-            investigations_documented = $14, problems_documented = $15, \
-            medications_documented = $16, risk_assessments_documented = $17, \
-            impression_documented = $18, plan_documented = $19, escalation_documented = $20, \
-            communication_documented = $21, graded_at = $22, inpatient_clinical_note_id = \
-            $23, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE inpatient_clinical_note_grades SET status = $2, completeness_percent \
+            = $3, required_component_count = $4, documented_component_count = $5, \
+            acuity_band = $6, computed_acuity_band = $7, news2_total = $8, \
+            header_documented = $9, interval_history_documented = $10, \
+            observations_documented = $11, examination_documented = $12, \
+            investigations_documented = $13, problems_documented = $14, \
+            medications_documented = $15, risk_assessments_documented = $16, \
+            impression_documented = $17, plan_documented = $18, escalation_documented = \
+            $19, communication_documented = $20, graded_at = $21, \
+            inpatient_clinical_note_id = $22, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.status)
         .bind(self.completeness_percent)
         .bind(self.required_component_count)

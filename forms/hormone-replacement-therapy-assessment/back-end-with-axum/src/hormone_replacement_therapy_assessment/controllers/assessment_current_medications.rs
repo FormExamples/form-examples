@@ -9,7 +9,6 @@ use crate::models::assessment_current_medications::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub takes_regular_medications: String,
     pub current_hrt: String,
@@ -30,14 +29,14 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO assessment_current_medications (deleted_at, assessment_id, \
+            "INSERT INTO assessment_current_medications (assessment_id, \
             takes_regular_medications, current_hrt, current_hrt_type, current_hrt_route, \
             current_hrt_duration, previous_hrt, previous_hrt_details, \
-            reason_for_stopping_hrt, takes_herbal_supplements, herbal_supplement_details, \
-            takes_anticoagulants, anticoagulant_details, medication_notes) VALUES ($1, $2, \
-            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *",
+            reason_for_stopping_hrt, takes_herbal_supplements, \
+            herbal_supplement_details, takes_anticoagulants, anticoagulant_details, \
+            medication_notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, \
+            $13, $14) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.takes_regular_medications)
         .bind(&self.current_hrt)
@@ -59,16 +58,15 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE assessment_current_medications SET deleted_at = $2, assessment_id = $3, \
-            takes_regular_medications = $4, current_hrt = $5, current_hrt_type = $6, \
-            current_hrt_route = $7, current_hrt_duration = $8, previous_hrt = $9, \
-            previous_hrt_details = $10, reason_for_stopping_hrt = $11, \
-            takes_herbal_supplements = $12, herbal_supplement_details = $13, \
-            takes_anticoagulants = $14, anticoagulant_details = $15, medication_notes = $16, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE assessment_current_medications SET assessment_id = $2, \
+            takes_regular_medications = $3, current_hrt = $4, current_hrt_type = $5, \
+            current_hrt_route = $6, current_hrt_duration = $7, previous_hrt = $8, \
+            previous_hrt_details = $9, reason_for_stopping_hrt = $10, \
+            takes_herbal_supplements = $11, herbal_supplement_details = $12, \
+            takes_anticoagulants = $13, anticoagulant_details = $14, medication_notes = \
+            $15, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.takes_regular_medications)
         .bind(&self.current_hrt)

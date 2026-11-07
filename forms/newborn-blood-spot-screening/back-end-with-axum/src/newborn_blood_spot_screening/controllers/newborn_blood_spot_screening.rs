@@ -91,14 +91,15 @@ impl Params {
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
             "UPDATE newborn_blood_spot_screenings SET patient_id = $2, clinician_id = $3, \
-            sample_taker_role = $4, care_setting = $5, record_date = $6, time_of_birth = $7, \
-            gestation_weeks = $8, previously_screened = $9, consent_given = $10, \
-            decline_reason = $11, sample_date = $12, sample_time = $13, age_at_sample_days = \
-            $14, sampling_site = $15, sample_notes = $16, sample_adequacy = $17, \
-            spot_quality_issue = $18, is_repeat = $19, repeat_reason = $20, scd_result = $21, \
-            cf_result = $22, cht_result = $23, pku_result = $24, mcadd_result = $25, \
-            msud_result = $26, iva_result = $27, ga1_result = $28, hcu_result = $29, \
-            clinical_context = $30, updated_at = now() WHERE id = $1 RETURNING *",
+            sample_taker_role = $4, care_setting = $5, record_date = $6, time_of_birth = \
+            $7, gestation_weeks = $8, previously_screened = $9, consent_given = $10, \
+            decline_reason = $11, sample_date = $12, sample_time = $13, \
+            age_at_sample_days = $14, sampling_site = $15, sample_notes = $16, \
+            sample_adequacy = $17, spot_quality_issue = $18, is_repeat = $19, \
+            repeat_reason = $20, scd_result = $21, cf_result = $22, cht_result = $23, \
+            pku_result = $24, mcadd_result = $25, msud_result = $26, iva_result = $27, \
+            ga1_result = $28, hcu_result = $29, clinical_context = $30, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

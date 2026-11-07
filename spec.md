@@ -174,6 +174,11 @@ own bands map onto ESI where the mapping is not self-evident.
   Alpine.js, no static assets, no Lily Design System. The canonical
   resource is `/api/assessments` (list, create, read, update, submit,
   result); see [`AGENTS/back-end-with-axum.md`](AGENTS/back-end-with-axum.md).
+- **Every SQL table is reachable over HTTP**, through its own `/api/<plural>` routes
+  or a hand-written aggregate.
+- **`DELETE` is a soft delete.** It sets `deleted_at` on the row and along its
+  `ON DELETE CASCADE` keys. Reads and updates skip marked rows, `deleted_at` is in no
+  request or response body, and uniqueness covers live rows only.
 - Database name pattern: `<slug_snake>_development`, `<slug_snake>_test`,
   `<slug_snake>_production`. Connection string for production lives in
   `DATABASE_URL`.

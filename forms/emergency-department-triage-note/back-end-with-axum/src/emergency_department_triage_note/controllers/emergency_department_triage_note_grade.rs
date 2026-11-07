@@ -46,8 +46,8 @@ impl Params {
             "UPDATE emergency_department_triage_note_grades SET \
             emergency_department_triage_note_id = $2, news2_total = $3, \
             news2_any_parameter_three = $4, priority_level = $5, priority_colour = $6, \
-            priority_name = $7, target_minutes = $8, graded_at = $9, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            priority_name = $7, target_minutes = $8, graded_at = $9, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.emergency_department_triage_note_id)

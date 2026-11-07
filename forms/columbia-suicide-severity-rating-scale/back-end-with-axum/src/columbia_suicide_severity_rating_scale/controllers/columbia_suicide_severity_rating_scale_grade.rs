@@ -45,9 +45,9 @@ impl Params {
         sqlx::query_as(
             "UPDATE columbia_suicide_severity_rating_scale_grades SET \
             columbia_suicide_severity_rating_scale_id = $2, ideation_level = $3, \
-            any_behaviour = $4, recent_behaviour = $5, risk_tier = $6, positive_features = \
-            $7, management_recommendation = $8, graded_at = $9, updated_at = now() WHERE id = \
-            $1 RETURNING *",
+            any_behaviour = $4, recent_behaviour = $5, risk_tier = $6, positive_features \
+            = $7, management_recommendation = $8, graded_at = $9, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.columbia_suicide_severity_rating_scale_id)

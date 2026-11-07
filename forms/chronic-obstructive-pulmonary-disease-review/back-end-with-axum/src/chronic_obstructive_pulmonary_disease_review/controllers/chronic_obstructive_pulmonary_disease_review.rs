@@ -124,20 +124,21 @@ impl Params {
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
             "UPDATE chronic_obstructive_pulmonary_disease_reviews SET patient_id = $2, \
-            clinician_id = $3, clinician_name = $4, clinician_role = $5, reviewed_at = $6, \
-            review_type = $7, patient_identifier = $8, age_band = $9, sex = $10, \
+            clinician_id = $3, clinician_name = $4, clinician_role = $5, reviewed_at = \
+            $6, review_type = $7, patient_identifier = $8, age_band = $9, sex = $10, \
             diagnosis_year = $11, spirometry_confirmed = $12, exposure_notes = $13, \
-            fev1_litres = $14, fev1_percent_predicted = $15, fvc_litres = $16, fev1_fvc_ratio \
-            = $17, spirometry_date = $18, mrc_grade = $19, mmrc_grade = $20, cat_score = $21, \
-            exacerbations_last_12m = $22, hospitalisations_last_12m = $23, \
-            last_exacerbation_date = $24, rescue_pack_courses = $25, smoking_status = $26, \
-            pack_years = $27, cessation_support_offered = $28, inhaled_therapy = $29, \
-            device_type = $30, inhaler_technique_checked = $31, inhaler_technique_adequate = \
-            $32, adherence = $33, influenza_vaccine = $34, pneumococcal_vaccine = $35, \
-            covid_vaccine = $36, pulmonary_rehab_status = $37, oxygen_use = $38, resting_spo2 \
-            = $39, comorbidities = $40, self_management_plan = $41, rescue_pack_supplied = \
-            $42, next_review_interval = $43, clinician_note = $44, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            fev1_litres = $14, fev1_percent_predicted = $15, fvc_litres = $16, \
+            fev1_fvc_ratio = $17, spirometry_date = $18, mrc_grade = $19, mmrc_grade = \
+            $20, cat_score = $21, exacerbations_last_12m = $22, \
+            hospitalisations_last_12m = $23, last_exacerbation_date = $24, \
+            rescue_pack_courses = $25, smoking_status = $26, pack_years = $27, \
+            cessation_support_offered = $28, inhaled_therapy = $29, device_type = $30, \
+            inhaler_technique_checked = $31, inhaler_technique_adequate = $32, adherence \
+            = $33, influenza_vaccine = $34, pneumococcal_vaccine = $35, covid_vaccine = \
+            $36, pulmonary_rehab_status = $37, oxygen_use = $38, resting_spo2 = $39, \
+            comorbidities = $40, self_management_plan = $41, rescue_pack_supplied = $42, \
+            next_review_interval = $43, clinician_note = $44, updated_at = now() WHERE \
+            id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)

@@ -9,7 +9,6 @@ use crate::models::fluoroscopy_test_requests::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub status: String,
@@ -36,15 +35,14 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO fluoroscopy_test_requests (deleted_at, patient_id, clinician_id, \
-            status, site_name, setting, referral_date, requested_by_date, study_type, \
+            "INSERT INTO fluoroscopy_test_requests (patient_id, clinician_id, status, \
+            site_name, setting, referral_date, requested_by_date, study_type, \
             primary_indication, clinical_question, relevant_history, pregnancy_status, \
             contrast_allergy, aspiration_risk, diabetes, urgency, ir_me_r_justification, \
-            supervising_consultant, requester_contact, notes) VALUES ($1, $2, $3, $4, $5, $6, \
-            $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21) RETURNING \
-            *",
+            supervising_consultant, requester_contact, notes) VALUES ($1, $2, $3, $4, \
+            $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)
@@ -72,16 +70,16 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE fluoroscopy_test_requests SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, status = $5, site_name = $6, setting = $7, referral_date = $8, \
-            requested_by_date = $9, study_type = $10, primary_indication = $11, \
-            clinical_question = $12, relevant_history = $13, pregnancy_status = $14, \
-            contrast_allergy = $15, aspiration_risk = $16, diabetes = $17, urgency = $18, \
-            ir_me_r_justification = $19, supervising_consultant = $20, requester_contact = \
-            $21, notes = $22, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE fluoroscopy_test_requests SET patient_id = $2, clinician_id = $3, \
+            status = $4, site_name = $5, setting = $6, referral_date = $7, \
+            requested_by_date = $8, study_type = $9, primary_indication = $10, \
+            clinical_question = $11, relevant_history = $12, pregnancy_status = $13, \
+            contrast_allergy = $14, aspiration_risk = $15, diabetes = $16, urgency = \
+            $17, ir_me_r_justification = $18, supervising_consultant = $19, \
+            requester_contact = $20, notes = $21, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)

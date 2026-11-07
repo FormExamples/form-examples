@@ -9,7 +9,6 @@ use crate::models::outpatient_outcome_prom_eq5d5ls::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub outpatient_outcome_id: Uuid,
 }
 
@@ -17,10 +16,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO outpatient_outcome_prom_eq5d5ls (deleted_at, outpatient_outcome_id) \
-            VALUES ($1, $2) RETURNING *",
+            "INSERT INTO outpatient_outcome_prom_eq5d5ls (outpatient_outcome_id) VALUES \
+            ($1) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.outpatient_outcome_id)
         .fetch_one(db)
         .await
@@ -29,11 +27,10 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE outpatient_outcome_prom_eq5d5ls SET deleted_at = $2, outpatient_outcome_id \
-            = $3, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE outpatient_outcome_prom_eq5d5ls SET outpatient_outcome_id = $2, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.outpatient_outcome_id)
         .fetch_optional(db)
         .await

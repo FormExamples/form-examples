@@ -9,7 +9,6 @@ use crate::models::glasgow_blatchford_bleeding_score_grades::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub glasgow_blatchford_bleeding_score_id: Uuid,
     pub blood_urea_points: Option<i32>,
     pub haemoglobin_points: Option<i32>,
@@ -29,14 +28,13 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO glasgow_blatchford_bleeding_score_grades (deleted_at, \
-            glasgow_blatchford_bleeding_score_id, blood_urea_points, haemoglobin_points, \
-            systolic_blood_pressure_points, pulse_point, melaena_point, syncope_point, \
-            hepatic_disease_point, cardiac_failure_point, total_score, risk_band, \
-            recommended_management, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, \
-            $10, $11, $12, $13, $14) RETURNING *",
+            "INSERT INTO glasgow_blatchford_bleeding_score_grades \
+            (glasgow_blatchford_bleeding_score_id, blood_urea_points, \
+            haemoglobin_points, systolic_blood_pressure_points, pulse_point, \
+            melaena_point, syncope_point, hepatic_disease_point, cardiac_failure_point, \
+            total_score, risk_band, recommended_management, graded_at) VALUES ($1, $2, \
+            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.glasgow_blatchford_bleeding_score_id)
         .bind(self.blood_urea_points)
         .bind(self.haemoglobin_points)
@@ -57,16 +55,15 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE glasgow_blatchford_bleeding_score_grades SET deleted_at = $2, \
-            glasgow_blatchford_bleeding_score_id = $3, blood_urea_points = $4, \
-            haemoglobin_points = $5, systolic_blood_pressure_points = $6, pulse_point = $7, \
-            melaena_point = $8, syncope_point = $9, hepatic_disease_point = $10, \
-            cardiac_failure_point = $11, total_score = $12, risk_band = $13, \
-            recommended_management = $14, graded_at = $15, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE glasgow_blatchford_bleeding_score_grades SET \
+            glasgow_blatchford_bleeding_score_id = $2, blood_urea_points = $3, \
+            haemoglobin_points = $4, systolic_blood_pressure_points = $5, pulse_point = \
+            $6, melaena_point = $7, syncope_point = $8, hepatic_disease_point = $9, \
+            cardiac_failure_point = $10, total_score = $11, risk_band = $12, \
+            recommended_management = $13, graded_at = $14, updated_at = now() WHERE id = \
+            $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.glasgow_blatchford_bleeding_score_id)
         .bind(self.blood_urea_points)
         .bind(self.haemoglobin_points)

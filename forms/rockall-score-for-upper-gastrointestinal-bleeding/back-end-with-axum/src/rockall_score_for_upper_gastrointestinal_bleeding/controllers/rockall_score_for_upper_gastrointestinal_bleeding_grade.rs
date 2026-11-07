@@ -9,7 +9,6 @@ use crate::models::rockall_score_for_upper_gastrointestinal_bleeding_grades::Mod
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub rockall_score_for_upper_gastrointestinal_bleeding_id: Uuid,
     pub age_points: Option<i32>,
     pub shock_points: Option<i32>,
@@ -26,13 +25,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO rockall_score_for_upper_gastrointestinal_bleeding_grades (deleted_at, \
-            rockall_score_for_upper_gastrointestinal_bleeding_id, age_points, shock_points, \
-            comorbidity_points, clinical_score, diagnosis_points, stigmata_points, \
-            full_score, risk_band, graded_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, \
-            $10, $11) RETURNING *",
+            "INSERT INTO rockall_score_for_upper_gastrointestinal_bleeding_grades \
+            (rockall_score_for_upper_gastrointestinal_bleeding_id, age_points, \
+            shock_points, comorbidity_points, clinical_score, diagnosis_points, \
+            stigmata_points, full_score, risk_band, graded_at) VALUES ($1, $2, $3, $4, \
+            $5, $6, $7, $8, $9, $10) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.rockall_score_for_upper_gastrointestinal_bleeding_id)
         .bind(self.age_points)
         .bind(self.shock_points)
@@ -50,14 +48,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE rockall_score_for_upper_gastrointestinal_bleeding_grades SET deleted_at = \
-            $2, rockall_score_for_upper_gastrointestinal_bleeding_id = $3, age_points = $4, \
-            shock_points = $5, comorbidity_points = $6, clinical_score = $7, diagnosis_points \
-            = $8, stigmata_points = $9, full_score = $10, risk_band = $11, graded_at = $12, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE rockall_score_for_upper_gastrointestinal_bleeding_grades SET \
+            rockall_score_for_upper_gastrointestinal_bleeding_id = $2, age_points = $3, \
+            shock_points = $4, comorbidity_points = $5, clinical_score = $6, \
+            diagnosis_points = $7, stigmata_points = $8, full_score = $9, risk_band = \
+            $10, graded_at = $11, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.rockall_score_for_upper_gastrointestinal_bleeding_id)
         .bind(self.age_points)
         .bind(self.shock_points)

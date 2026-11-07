@@ -9,7 +9,6 @@ use crate::models::expirations::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub hipaa_authorization_id: Uuid,
     pub kind: String,
     pub expiration_date: Option<Date>,
@@ -22,11 +21,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO expirations (deleted_at, hipaa_authorization_id, kind, \
-            expiration_date, expiration_event, duration_months, duration_label) VALUES ($1, \
-            $2, $3, $4, $5, $6, $7) RETURNING *",
+            "INSERT INTO expirations (hipaa_authorization_id, kind, expiration_date, \
+            expiration_event, duration_months, duration_label) VALUES ($1, $2, $3, $4, \
+            $5, $6) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.hipaa_authorization_id)
         .bind(&self.kind)
         .bind(self.expiration_date)
@@ -40,12 +38,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE expirations SET deleted_at = $2, hipaa_authorization_id = $3, kind = $4, \
-            expiration_date = $5, expiration_event = $6, duration_months = $7, duration_label \
-            = $8, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE expirations SET hipaa_authorization_id = $2, kind = $3, \
+            expiration_date = $4, expiration_event = $5, duration_months = $6, \
+            duration_label = $7, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
+            RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.hipaa_authorization_id)
         .bind(&self.kind)
         .bind(self.expiration_date)

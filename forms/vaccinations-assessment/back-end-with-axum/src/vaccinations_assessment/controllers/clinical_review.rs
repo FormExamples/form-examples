@@ -9,7 +9,6 @@ use crate::models::clinical_reviews::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub post_vaccination_observation: Option<i32>,
     pub immediate_reaction: String,
@@ -25,12 +24,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO clinical_reviews (deleted_at, assessment_id, \
-            post_vaccination_observation, immediate_reaction, reaction_details, \
-            next_dose_due, catch_up_schedule_needed, referral_needed, clinician_notes, \
-            reviewing_clinician) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *",
+            "INSERT INTO clinical_reviews (assessment_id, post_vaccination_observation, \
+            immediate_reaction, reaction_details, next_dose_due, \
+            catch_up_schedule_needed, referral_needed, clinician_notes, \
+            reviewing_clinician) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.post_vaccination_observation)
         .bind(&self.immediate_reaction)
@@ -47,14 +45,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE clinical_reviews SET deleted_at = $2, assessment_id = $3, \
-            post_vaccination_observation = $4, immediate_reaction = $5, reaction_details = \
-            $6, next_dose_due = $7, catch_up_schedule_needed = $8, referral_needed = $9, \
-            clinician_notes = $10, reviewing_clinician = $11, updated_at = now() WHERE id = \
-            $1 RETURNING *",
+            "UPDATE clinical_reviews SET assessment_id = $2, post_vaccination_observation \
+            = $3, immediate_reaction = $4, reaction_details = $5, next_dose_due = $6, \
+            catch_up_schedule_needed = $7, referral_needed = $8, clinician_notes = $9, \
+            reviewing_clinician = $10, updated_at = now() WHERE id = $1 AND deleted_at \
+            IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(self.post_vaccination_observation)
         .bind(&self.immediate_reaction)

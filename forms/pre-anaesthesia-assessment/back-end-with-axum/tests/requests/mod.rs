@@ -13,3 +13,4 @@ pub mod pre_anaesthesia_assessment;
 pub mod pre_anaesthesia_assessment_grade;
 mod pre_anaesthesia_assessment_grade_flags_route;
 mod pre_anaesthesia_assessment_grade_rules_route;
+mod soft_delete;

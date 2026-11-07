@@ -9,7 +9,6 @@ use crate::models::assessments::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub status: String,
     pub full_name: String,
@@ -90,36 +89,38 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO assessments (deleted_at, patient_id, status, full_name, address, \
-            postcode, date_of_birth, nhs_number, phone, email, gp_name, gp_practice, \
+            "INSERT INTO assessments (patient_id, status, full_name, address, postcode, \
+            date_of_birth, nhs_number, phone, email, gp_name, gp_practice, \
             reason_for_statement, current_health_status, current_diagnoses, \
             has_discussed_with_family, has_discussed_with_clinician, discussion_details, \
-            personal_values, quality_of_life_priorities, religious_beliefs, spiritual_needs, \
-            cultural_considerations, fears_and_concerns, things_that_matter_most, \
-            preferred_place_of_care, preferred_place_of_death, daily_routine_preferences, \
-            personal_care_preferences, food_and_drink_preferences, sleep_preferences, \
-            clothing_preferences, environment_preferences, pet_care_wishes, \
-            pain_management_preferences, attitude_to_hospital_admission, \
-            attitude_to_intensive_care, attitude_to_artificial_nutrition, \
-            attitude_to_artificial_hydration, medication_preferences, \
-            complementary_therapy_preferences, other_treatment_wishes, preferred_language, \
-            communication_aids, how_to_share_information, who_to_involve_in_decisions, \
+            personal_values, quality_of_life_priorities, religious_beliefs, \
+            spiritual_needs, cultural_considerations, fears_and_concerns, \
+            things_that_matter_most, preferred_place_of_care, preferred_place_of_death, \
+            daily_routine_preferences, personal_care_preferences, \
+            food_and_drink_preferences, sleep_preferences, clothing_preferences, \
+            environment_preferences, pet_care_wishes, pain_management_preferences, \
+            attitude_to_hospital_admission, attitude_to_intensive_care, \
+            attitude_to_artificial_nutrition, attitude_to_artificial_hydration, \
+            medication_preferences, complementary_therapy_preferences, \
+            other_treatment_wishes, preferred_language, communication_aids, \
+            how_to_share_information, who_to_involve_in_decisions, \
             information_sharing_restrictions, preferred_communication_style, \
             primary_contact_name, primary_contact_relationship, primary_contact_phone, \
-            primary_contact_email, secondary_contact_name, secondary_contact_relationship, \
-            secondary_contact_phone, people_who_should_visit, people_who_should_not_visit, \
+            primary_contact_email, secondary_contact_name, \
+            secondary_contact_relationship, secondary_contact_phone, \
+            people_who_should_visit, people_who_should_not_visit, \
             support_network_details, financial_arrangements, property_arrangements, \
-            insurance_details, will_location, has_lasting_power_of_attorney, lpa_details, \
-            funeral_wishes, burial_or_cremation, other_practical_matters, \
-            maker_signature_obtained, maker_signature_date, witness_name, witness_address, \
-            witness_signature_obtained, witness_signature_date, review_date, review_notes) \
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, \
-            $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, \
-            $33, $34, $35, $36, $37, $38, $39, $40, $41, $42, $43, $44, $45, $46, $47, $48, \
-            $49, $50, $51, $52, $53, $54, $55, $56, $57, $58, $59, $60, $61, $62, $63, $64, \
-            $65, $66, $67, $68, $69, $70, $71, $72, $73, $74, $75) RETURNING *",
+            insurance_details, will_location, has_lasting_power_of_attorney, \
+            lpa_details, funeral_wishes, burial_or_cremation, other_practical_matters, \
+            maker_signature_obtained, maker_signature_date, witness_name, \
+            witness_address, witness_signature_obtained, witness_signature_date, \
+            review_date, review_notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, \
+            $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, \
+            $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, \
+            $41, $42, $43, $44, $45, $46, $47, $48, $49, $50, $51, $52, $53, $54, $55, \
+            $56, $57, $58, $59, $60, $61, $62, $63, $64, $65, $66, $67, $68, $69, $70, \
+            $71, $72, $73, $74) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(&self.status)
         .bind(&self.full_name)
@@ -201,39 +202,40 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE assessments SET deleted_at = $2, patient_id = $3, status = $4, full_name = \
-            $5, address = $6, postcode = $7, date_of_birth = $8, nhs_number = $9, phone = \
-            $10, email = $11, gp_name = $12, gp_practice = $13, reason_for_statement = $14, \
-            current_health_status = $15, current_diagnoses = $16, has_discussed_with_family = \
-            $17, has_discussed_with_clinician = $18, discussion_details = $19, \
-            personal_values = $20, quality_of_life_priorities = $21, religious_beliefs = $22, \
-            spiritual_needs = $23, cultural_considerations = $24, fears_and_concerns = $25, \
-            things_that_matter_most = $26, preferred_place_of_care = $27, \
-            preferred_place_of_death = $28, daily_routine_preferences = $29, \
-            personal_care_preferences = $30, food_and_drink_preferences = $31, \
-            sleep_preferences = $32, clothing_preferences = $33, environment_preferences = \
-            $34, pet_care_wishes = $35, pain_management_preferences = $36, \
-            attitude_to_hospital_admission = $37, attitude_to_intensive_care = $38, \
-            attitude_to_artificial_nutrition = $39, attitude_to_artificial_hydration = $40, \
-            medication_preferences = $41, complementary_therapy_preferences = $42, \
-            other_treatment_wishes = $43, preferred_language = $44, communication_aids = $45, \
-            how_to_share_information = $46, who_to_involve_in_decisions = $47, \
-            information_sharing_restrictions = $48, preferred_communication_style = $49, \
-            primary_contact_name = $50, primary_contact_relationship = $51, \
-            primary_contact_phone = $52, primary_contact_email = $53, secondary_contact_name \
-            = $54, secondary_contact_relationship = $55, secondary_contact_phone = $56, \
-            people_who_should_visit = $57, people_who_should_not_visit = $58, \
-            support_network_details = $59, financial_arrangements = $60, \
-            property_arrangements = $61, insurance_details = $62, will_location = $63, \
-            has_lasting_power_of_attorney = $64, lpa_details = $65, funeral_wishes = $66, \
-            burial_or_cremation = $67, other_practical_matters = $68, \
-            maker_signature_obtained = $69, maker_signature_date = $70, witness_name = $71, \
-            witness_address = $72, witness_signature_obtained = $73, witness_signature_date = \
-            $74, review_date = $75, review_notes = $76, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE assessments SET patient_id = $2, status = $3, full_name = $4, address \
+            = $5, postcode = $6, date_of_birth = $7, nhs_number = $8, phone = $9, email \
+            = $10, gp_name = $11, gp_practice = $12, reason_for_statement = $13, \
+            current_health_status = $14, current_diagnoses = $15, \
+            has_discussed_with_family = $16, has_discussed_with_clinician = $17, \
+            discussion_details = $18, personal_values = $19, quality_of_life_priorities \
+            = $20, religious_beliefs = $21, spiritual_needs = $22, \
+            cultural_considerations = $23, fears_and_concerns = $24, \
+            things_that_matter_most = $25, preferred_place_of_care = $26, \
+            preferred_place_of_death = $27, daily_routine_preferences = $28, \
+            personal_care_preferences = $29, food_and_drink_preferences = $30, \
+            sleep_preferences = $31, clothing_preferences = $32, environment_preferences \
+            = $33, pet_care_wishes = $34, pain_management_preferences = $35, \
+            attitude_to_hospital_admission = $36, attitude_to_intensive_care = $37, \
+            attitude_to_artificial_nutrition = $38, attitude_to_artificial_hydration = \
+            $39, medication_preferences = $40, complementary_therapy_preferences = $41, \
+            other_treatment_wishes = $42, preferred_language = $43, communication_aids = \
+            $44, how_to_share_information = $45, who_to_involve_in_decisions = $46, \
+            information_sharing_restrictions = $47, preferred_communication_style = $48, \
+            primary_contact_name = $49, primary_contact_relationship = $50, \
+            primary_contact_phone = $51, primary_contact_email = $52, \
+            secondary_contact_name = $53, secondary_contact_relationship = $54, \
+            secondary_contact_phone = $55, people_who_should_visit = $56, \
+            people_who_should_not_visit = $57, support_network_details = $58, \
+            financial_arrangements = $59, property_arrangements = $60, insurance_details \
+            = $61, will_location = $62, has_lasting_power_of_attorney = $63, lpa_details \
+            = $64, funeral_wishes = $65, burial_or_cremation = $66, \
+            other_practical_matters = $67, maker_signature_obtained = $68, \
+            maker_signature_date = $69, witness_name = $70, witness_address = $71, \
+            witness_signature_obtained = $72, witness_signature_date = $73, review_date \
+            = $74, review_notes = $75, updated_at = now() WHERE id = $1 AND deleted_at \
+            IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(&self.status)
         .bind(&self.full_name)

@@ -11,8 +11,6 @@ use crate::models::inpatient_clinical_note_medication_changes::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    /// Deleted at.
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Sort order.
     pub sort_order: i32,
     /// Drug name.
@@ -45,12 +43,11 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO inpatient_clinical_note_medication_changes (deleted_at, sort_order, \
+            "INSERT INTO inpatient_clinical_note_medication_changes (sort_order, \
             drug_name, action, dose, route, frequency, indication, is_antimicrobial, \
-            review_date, stop_date, dmd_code, notes, inpatient_clinical_note_id) VALUES ($1, \
-            $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING *",
+            review_date, stop_date, dmd_code, notes, inpatient_clinical_note_id) VALUES \
+            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.sort_order)
         .bind(&self.drug_name)
         .bind(&self.action)
@@ -71,14 +68,13 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE inpatient_clinical_note_medication_changes SET deleted_at = $2, sort_order \
-            = $3, drug_name = $4, action = $5, dose = $6, route = $7, frequency = $8, \
-            indication = $9, is_antimicrobial = $10, review_date = $11, stop_date = $12, \
-            dmd_code = $13, notes = $14, inpatient_clinical_note_id = $15, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            "UPDATE inpatient_clinical_note_medication_changes SET sort_order = $2, \
+            drug_name = $3, action = $4, dose = $5, route = $6, frequency = $7, \
+            indication = $8, is_antimicrobial = $9, review_date = $10, stop_date = $11, \
+            dmd_code = $12, notes = $13, inpatient_clinical_note_id = $14, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.sort_order)
         .bind(&self.drug_name)
         .bind(&self.action)

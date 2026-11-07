@@ -9,7 +9,6 @@ use crate::models::perioperative_optimizations::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub status: String,
@@ -233,88 +232,95 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO perioperative_optimizations (deleted_at, patient_id, clinician_id, \
-            status, assessment_date, assessment_time, site_name, service_name, pathway_stage, \
+            "INSERT INTO perioperative_optimizations (patient_id, clinician_id, status, \
+            assessment_date, assessment_time, site_name, service_name, pathway_stage, \
             assessment_mode, referral_source, planned_procedure, surgical_specialty, \
-            consultant_surgeon, planned_surgery_date, urgency, surgical_severity, laterality, \
-            anticipated_blood_loss_ml, anticipated_length_of_stay_days, interpreter_required, \
-            interpreter_language, condition_cardiac, condition_respiratory, condition_renal, \
-            condition_hepatic, condition_stroke, condition_cancer, condition_rheumatological, \
-            condition_thyroid, condition_other, previous_surgery, previous_surgery_detail, \
+            consultant_surgeon, planned_surgery_date, urgency, surgical_severity, \
+            laterality, anticipated_blood_loss_ml, anticipated_length_of_stay_days, \
+            interpreter_required, interpreter_language, condition_cardiac, \
+            condition_respiratory, condition_renal, condition_hepatic, condition_stroke, \
+            condition_cancer, condition_rheumatological, condition_thyroid, \
+            condition_other, previous_surgery, previous_surgery_detail, \
             previous_anaesthetic_complication, previous_anaesthetic_complication_detail, \
             postoperative_nausea_history, difficult_airway_history, \
-            malignant_hyperthermia_history, venous_thromboembolism_history, family_history, \
-            pregnancy_status, takes_prescription_medicines, takes_over_the_counter_medicines, \
-            takes_herbal_products, takes_anticoagulant, takes_antiplatelet, \
-            takes_ace_inhibitor_or_arb, takes_sglt2_inhibitor, takes_glp1_agonist, \
-            glp1_formulation, glp1_held_per_guideline, glp1_extended_clear_fluids_confirmed, \
-            glp1_gi_symptoms, glp1_gi_symptoms_details, glp1_gastric_ultrasound_performed, \
-            glp1_gastric_ultrasound_findings, takes_corticosteroid, takes_immunosuppressant, \
-            takes_hormone_therapy, medication_hold_plan_agreed, \
-            medication_hold_plan_agreed_by, medication_adherence, medication_notes, \
-            has_drug_allergy, drug_allergy_detail, has_food_allergy, food_allergy_detail, \
-            has_latex_allergy, has_adhesive_allergy, has_contrast_allergy, allergy_severity, \
-            adrenaline_auto_injector, allergy_notes, bloods_sample_date, haemoglobin_g_per_l, \
-            mean_cell_volume_fl, ferritin_ug_per_l, transferrin_saturation_percent, \
-            vitamin_b12_ng_per_l, folate_ug_per_l, c_reactive_protein_mg_per_l, \
-            creatinine_umol_per_l, egfr_ml_per_min, anaemia_known_cause, \
-            anaemia_treatment_started, anaemia_treatment_route, anaemia_treatment_start_date, \
-            previous_transfusion, group_and_save_done, anaemia_notes, diabetes_type, \
-            diabetes_duration_years, hba1c_mmol_per_mol, hba1c_sample_date, \
-            capillary_glucose_mmol_per_l, diabetes_treatment, insulin_regimen, \
-            hypoglycaemia_awareness, diabetes_team_review, diabetes_team_review_date, \
-            foot_check_done, glycaemic_notes, smoking_status, cigarettes_per_day, pack_years, \
-            quit_date, smoking_cessation_offered, smoking_cessation_accepted, \
-            nicotine_replacement, vaping, smoking_notes, alcohol_units_per_week, \
-            audit_c_frequency, audit_c_typical_quantity, audit_c_binge_frequency, \
+            malignant_hyperthermia_history, venous_thromboembolism_history, \
+            family_history, pregnancy_status, takes_prescription_medicines, \
+            takes_over_the_counter_medicines, takes_herbal_products, \
+            takes_anticoagulant, takes_antiplatelet, takes_ace_inhibitor_or_arb, \
+            takes_sglt2_inhibitor, takes_glp1_agonist, glp1_formulation, \
+            glp1_held_per_guideline, glp1_extended_clear_fluids_confirmed, \
+            glp1_gi_symptoms, glp1_gi_symptoms_details, \
+            glp1_gastric_ultrasound_performed, glp1_gastric_ultrasound_findings, \
+            takes_corticosteroid, takes_immunosuppressant, takes_hormone_therapy, \
+            medication_hold_plan_agreed, medication_hold_plan_agreed_by, \
+            medication_adherence, medication_notes, has_drug_allergy, \
+            drug_allergy_detail, has_food_allergy, food_allergy_detail, \
+            has_latex_allergy, has_adhesive_allergy, has_contrast_allergy, \
+            allergy_severity, adrenaline_auto_injector, allergy_notes, \
+            bloods_sample_date, haemoglobin_g_per_l, mean_cell_volume_fl, \
+            ferritin_ug_per_l, transferrin_saturation_percent, vitamin_b12_ng_per_l, \
+            folate_ug_per_l, c_reactive_protein_mg_per_l, creatinine_umol_per_l, \
+            egfr_ml_per_min, anaemia_known_cause, anaemia_treatment_started, \
+            anaemia_treatment_route, anaemia_treatment_start_date, previous_transfusion, \
+            group_and_save_done, anaemia_notes, diabetes_type, diabetes_duration_years, \
+            hba1c_mmol_per_mol, hba1c_sample_date, capillary_glucose_mmol_per_l, \
+            diabetes_treatment, insulin_regimen, hypoglycaemia_awareness, \
+            diabetes_team_review, diabetes_team_review_date, foot_check_done, \
+            glycaemic_notes, smoking_status, cigarettes_per_day, pack_years, quit_date, \
+            smoking_cessation_offered, smoking_cessation_accepted, nicotine_replacement, \
+            vaping, smoking_notes, alcohol_units_per_week, audit_c_frequency, \
+            audit_c_typical_quantity, audit_c_binge_frequency, \
             alcohol_dependence_features, alcohol_reduction_plan_agreed, \
             alcohol_services_referral, recreational_drug_use, recreational_drug_detail, \
-            alcohol_notes, height_as_cm, weight_as_kg, body_mass_index, usual_weight_as_kg, \
-            weight_loss_percent, weight_loss_is_intentional, acutely_ill, \
-            no_nutritional_intake_over_5_days, appetite, oral_nutritional_supplements, \
-            immunonutrition, dietitian_referral, nutrition_notes, usual_activity_level, \
-            climbs_flight_of_stairs, metabolic_equivalents, duke_activity_status_index, \
-            six_minute_walk_metres, cpet_anaerobic_threshold, cpet_peak_vo2, \
-            grip_strength_kg, prehabilitation_offered, prehabilitation_enrolled, \
+            alcohol_notes, height_as_cm, weight_as_kg, body_mass_index, \
+            usual_weight_as_kg, weight_loss_percent, weight_loss_is_intentional, \
+            acutely_ill, no_nutritional_intake_over_5_days, appetite, \
+            oral_nutritional_supplements, immunonutrition, dietitian_referral, \
+            nutrition_notes, usual_activity_level, climbs_flight_of_stairs, \
+            metabolic_equivalents, duke_activity_status_index, six_minute_walk_metres, \
+            cpet_anaerobic_threshold, cpet_peak_vo2, grip_strength_kg, \
+            prehabilitation_offered, prehabilitation_enrolled, \
             prehabilitation_sessions_per_week, prehabilitation_start_date, \
             protein_supplementation_recommended, fitness_notes, clinical_frailty_scale, \
-            fried_weakness, fried_slowness, fried_low_physical_activity, fried_exhaustion, \
-            fried_unintentional_weight_loss, risk_analysis_index_score, mini_cog_performed, \
-            mini_cog_score, cognitive_screen_tool, cognitive_screen_score, \
-            cognitive_impairment, capacity_concern, falls_in_last_12_months, mobility_aid, \
-            living_situation, care_package, frailty_notes, systolic_bp, diastolic_bp, \
-            heart_rate, heart_rhythm, murmur_present, exercise_tolerance, \
-            ejection_fraction_percent, echo_date, asthma_control, copd_control, \
-            inhaler_technique_checked, rescue_steroids, spirometry_fev1_percent, \
-            stop_bang_score, sleep_apnoea_diagnosis, cpap_use, oxygen_saturation_percent, \
-            cardiorespiratory_notes, anxiety_level, depression_screen, understands_procedure, \
-            expectations_realistic, shared_decision_making_discussed, has_carer, \
-            transport_home_arranged, support_after_discharge, health_literacy, \
-            psychological_support_offered, social_notes, plan_anaemia, referral_anaemia, \
-            plan_glycaemic_control, referral_glycaemic_control, plan_smoking, \
-            referral_smoking, plan_alcohol, referral_alcohol, plan_nutrition, \
-            referral_nutrition, plan_physical_fitness, referral_physical_fitness, \
-            plan_medication, referral_medication, plan_cardiorespiratory, \
-            referral_cardiorespiratory, responsible_clinician, plan_agreed_with_patient, \
-            plan_shared_with_patient, next_review_date, plan_notes, gate_decision, \
-            additional_notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, \
-            $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, \
-            $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42, $43, $44, $45, \
-            $46, $47, $48, $49, $50, $51, $52, $53, $54, $55, $56, $57, $58, $59, $60, $61, \
-            $62, $63, $64, $65, $66, $67, $68, $69, $70, $71, $72, $73, $74, $75, $76, $77, \
-            $78, $79, $80, $81, $82, $83, $84, $85, $86, $87, $88, $89, $90, $91, $92, $93, \
-            $94, $95, $96, $97, $98, $99, $100, $101, $102, $103, $104, $105, $106, $107, \
-            $108, $109, $110, $111, $112, $113, $114, $115, $116, $117, $118, $119, $120, \
-            $121, $122, $123, $124, $125, $126, $127, $128, $129, $130, $131, $132, $133, \
-            $134, $135, $136, $137, $138, $139, $140, $141, $142, $143, $144, $145, $146, \
-            $147, $148, $149, $150, $151, $152, $153, $154, $155, $156, $157, $158, $159, \
-            $160, $161, $162, $163, $164, $165, $166, $167, $168, $169, $170, $171, $172, \
-            $173, $174, $175, $176, $177, $178, $179, $180, $181, $182, $183, $184, $185, \
-            $186, $187, $188, $189, $190, $191, $192, $193, $194, $195, $196, $197, $198, \
-            $199, $200, $201, $202, $203, $204, $205, $206, $207, $208, $209, $210, $211, \
-            $212, $213, $214, $215, $216, $217, $218) RETURNING *",
+            fried_weakness, fried_slowness, fried_low_physical_activity, \
+            fried_exhaustion, fried_unintentional_weight_loss, \
+            risk_analysis_index_score, mini_cog_performed, mini_cog_score, \
+            cognitive_screen_tool, cognitive_screen_score, cognitive_impairment, \
+            capacity_concern, falls_in_last_12_months, mobility_aid, living_situation, \
+            care_package, frailty_notes, systolic_bp, diastolic_bp, heart_rate, \
+            heart_rhythm, murmur_present, exercise_tolerance, ejection_fraction_percent, \
+            echo_date, asthma_control, copd_control, inhaler_technique_checked, \
+            rescue_steroids, spirometry_fev1_percent, stop_bang_score, \
+            sleep_apnoea_diagnosis, cpap_use, oxygen_saturation_percent, \
+            cardiorespiratory_notes, anxiety_level, depression_screen, \
+            understands_procedure, expectations_realistic, \
+            shared_decision_making_discussed, has_carer, transport_home_arranged, \
+            support_after_discharge, health_literacy, psychological_support_offered, \
+            social_notes, plan_anaemia, referral_anaemia, plan_glycaemic_control, \
+            referral_glycaemic_control, plan_smoking, referral_smoking, plan_alcohol, \
+            referral_alcohol, plan_nutrition, referral_nutrition, plan_physical_fitness, \
+            referral_physical_fitness, plan_medication, referral_medication, \
+            plan_cardiorespiratory, referral_cardiorespiratory, responsible_clinician, \
+            plan_agreed_with_patient, plan_shared_with_patient, next_review_date, \
+            plan_notes, gate_decision, additional_notes) VALUES ($1, $2, $3, $4, $5, $6, \
+            $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, \
+            $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, \
+            $38, $39, $40, $41, $42, $43, $44, $45, $46, $47, $48, $49, $50, $51, $52, \
+            $53, $54, $55, $56, $57, $58, $59, $60, $61, $62, $63, $64, $65, $66, $67, \
+            $68, $69, $70, $71, $72, $73, $74, $75, $76, $77, $78, $79, $80, $81, $82, \
+            $83, $84, $85, $86, $87, $88, $89, $90, $91, $92, $93, $94, $95, $96, $97, \
+            $98, $99, $100, $101, $102, $103, $104, $105, $106, $107, $108, $109, $110, \
+            $111, $112, $113, $114, $115, $116, $117, $118, $119, $120, $121, $122, \
+            $123, $124, $125, $126, $127, $128, $129, $130, $131, $132, $133, $134, \
+            $135, $136, $137, $138, $139, $140, $141, $142, $143, $144, $145, $146, \
+            $147, $148, $149, $150, $151, $152, $153, $154, $155, $156, $157, $158, \
+            $159, $160, $161, $162, $163, $164, $165, $166, $167, $168, $169, $170, \
+            $171, $172, $173, $174, $175, $176, $177, $178, $179, $180, $181, $182, \
+            $183, $184, $185, $186, $187, $188, $189, $190, $191, $192, $193, $194, \
+            $195, $196, $197, $198, $199, $200, $201, $202, $203, $204, $205, $206, \
+            $207, $208, $209, $210, $211, $212, $213, $214, $215, $216, $217) RETURNING \
+            *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)
@@ -539,92 +545,97 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE perioperative_optimizations SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, status = $5, assessment_date = $6, assessment_time = $7, \
-            site_name = $8, service_name = $9, pathway_stage = $10, assessment_mode = $11, \
-            referral_source = $12, planned_procedure = $13, surgical_specialty = $14, \
-            consultant_surgeon = $15, planned_surgery_date = $16, urgency = $17, \
-            surgical_severity = $18, laterality = $19, anticipated_blood_loss_ml = $20, \
-            anticipated_length_of_stay_days = $21, interpreter_required = $22, \
-            interpreter_language = $23, condition_cardiac = $24, condition_respiratory = $25, \
-            condition_renal = $26, condition_hepatic = $27, condition_stroke = $28, \
-            condition_cancer = $29, condition_rheumatological = $30, condition_thyroid = $31, \
-            condition_other = $32, previous_surgery = $33, previous_surgery_detail = $34, \
-            previous_anaesthetic_complication = $35, previous_anaesthetic_complication_detail \
-            = $36, postoperative_nausea_history = $37, difficult_airway_history = $38, \
-            malignant_hyperthermia_history = $39, venous_thromboembolism_history = $40, \
-            family_history = $41, pregnancy_status = $42, takes_prescription_medicines = $43, \
-            takes_over_the_counter_medicines = $44, takes_herbal_products = $45, \
-            takes_anticoagulant = $46, takes_antiplatelet = $47, takes_ace_inhibitor_or_arb = \
-            $48, takes_sglt2_inhibitor = $49, takes_glp1_agonist = $50, glp1_formulation = \
-            $51, glp1_held_per_guideline = $52, glp1_extended_clear_fluids_confirmed = $53, \
-            glp1_gi_symptoms = $54, glp1_gi_symptoms_details = $55, \
-            glp1_gastric_ultrasound_performed = $56, glp1_gastric_ultrasound_findings = $57, \
-            takes_corticosteroid = $58, takes_immunosuppressant = $59, takes_hormone_therapy \
-            = $60, medication_hold_plan_agreed = $61, medication_hold_plan_agreed_by = $62, \
-            medication_adherence = $63, medication_notes = $64, has_drug_allergy = $65, \
-            drug_allergy_detail = $66, has_food_allergy = $67, food_allergy_detail = $68, \
-            has_latex_allergy = $69, has_adhesive_allergy = $70, has_contrast_allergy = $71, \
-            allergy_severity = $72, adrenaline_auto_injector = $73, allergy_notes = $74, \
-            bloods_sample_date = $75, haemoglobin_g_per_l = $76, mean_cell_volume_fl = $77, \
-            ferritin_ug_per_l = $78, transferrin_saturation_percent = $79, \
-            vitamin_b12_ng_per_l = $80, folate_ug_per_l = $81, c_reactive_protein_mg_per_l = \
-            $82, creatinine_umol_per_l = $83, egfr_ml_per_min = $84, anaemia_known_cause = \
-            $85, anaemia_treatment_started = $86, anaemia_treatment_route = $87, \
-            anaemia_treatment_start_date = $88, previous_transfusion = $89, \
-            group_and_save_done = $90, anaemia_notes = $91, diabetes_type = $92, \
-            diabetes_duration_years = $93, hba1c_mmol_per_mol = $94, hba1c_sample_date = $95, \
-            capillary_glucose_mmol_per_l = $96, diabetes_treatment = $97, insulin_regimen = \
-            $98, hypoglycaemia_awareness = $99, diabetes_team_review = $100, \
-            diabetes_team_review_date = $101, foot_check_done = $102, glycaemic_notes = $103, \
-            smoking_status = $104, cigarettes_per_day = $105, pack_years = $106, quit_date = \
-            $107, smoking_cessation_offered = $108, smoking_cessation_accepted = $109, \
-            nicotine_replacement = $110, vaping = $111, smoking_notes = $112, \
-            alcohol_units_per_week = $113, audit_c_frequency = $114, audit_c_typical_quantity \
-            = $115, audit_c_binge_frequency = $116, alcohol_dependence_features = $117, \
-            alcohol_reduction_plan_agreed = $118, alcohol_services_referral = $119, \
-            recreational_drug_use = $120, recreational_drug_detail = $121, alcohol_notes = \
-            $122, height_as_cm = $123, weight_as_kg = $124, body_mass_index = $125, \
-            usual_weight_as_kg = $126, weight_loss_percent = $127, weight_loss_is_intentional \
-            = $128, acutely_ill = $129, no_nutritional_intake_over_5_days = $130, appetite = \
-            $131, oral_nutritional_supplements = $132, immunonutrition = $133, \
-            dietitian_referral = $134, nutrition_notes = $135, usual_activity_level = $136, \
-            climbs_flight_of_stairs = $137, metabolic_equivalents = $138, \
-            duke_activity_status_index = $139, six_minute_walk_metres = $140, \
-            cpet_anaerobic_threshold = $141, cpet_peak_vo2 = $142, grip_strength_kg = $143, \
-            prehabilitation_offered = $144, prehabilitation_enrolled = $145, \
-            prehabilitation_sessions_per_week = $146, prehabilitation_start_date = $147, \
-            protein_supplementation_recommended = $148, fitness_notes = $149, \
-            clinical_frailty_scale = $150, fried_weakness = $151, fried_slowness = $152, \
-            fried_low_physical_activity = $153, fried_exhaustion = $154, \
-            fried_unintentional_weight_loss = $155, risk_analysis_index_score = $156, \
-            mini_cog_performed = $157, mini_cog_score = $158, cognitive_screen_tool = $159, \
-            cognitive_screen_score = $160, cognitive_impairment = $161, capacity_concern = \
-            $162, falls_in_last_12_months = $163, mobility_aid = $164, living_situation = \
-            $165, care_package = $166, frailty_notes = $167, systolic_bp = $168, diastolic_bp \
-            = $169, heart_rate = $170, heart_rhythm = $171, murmur_present = $172, \
-            exercise_tolerance = $173, ejection_fraction_percent = $174, echo_date = $175, \
-            asthma_control = $176, copd_control = $177, inhaler_technique_checked = $178, \
-            rescue_steroids = $179, spirometry_fev1_percent = $180, stop_bang_score = $181, \
-            sleep_apnoea_diagnosis = $182, cpap_use = $183, oxygen_saturation_percent = $184, \
-            cardiorespiratory_notes = $185, anxiety_level = $186, depression_screen = $187, \
-            understands_procedure = $188, expectations_realistic = $189, \
-            shared_decision_making_discussed = $190, has_carer = $191, \
-            transport_home_arranged = $192, support_after_discharge = $193, health_literacy = \
-            $194, psychological_support_offered = $195, social_notes = $196, plan_anaemia = \
-            $197, referral_anaemia = $198, plan_glycaemic_control = $199, \
-            referral_glycaemic_control = $200, plan_smoking = $201, referral_smoking = $202, \
-            plan_alcohol = $203, referral_alcohol = $204, plan_nutrition = $205, \
-            referral_nutrition = $206, plan_physical_fitness = $207, \
-            referral_physical_fitness = $208, plan_medication = $209, referral_medication = \
-            $210, plan_cardiorespiratory = $211, referral_cardiorespiratory = $212, \
-            responsible_clinician = $213, plan_agreed_with_patient = $214, \
-            plan_shared_with_patient = $215, next_review_date = $216, plan_notes = $217, \
-            gate_decision = $218, additional_notes = $219, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE perioperative_optimizations SET patient_id = $2, clinician_id = $3, \
+            status = $4, assessment_date = $5, assessment_time = $6, site_name = $7, \
+            service_name = $8, pathway_stage = $9, assessment_mode = $10, \
+            referral_source = $11, planned_procedure = $12, surgical_specialty = $13, \
+            consultant_surgeon = $14, planned_surgery_date = $15, urgency = $16, \
+            surgical_severity = $17, laterality = $18, anticipated_blood_loss_ml = $19, \
+            anticipated_length_of_stay_days = $20, interpreter_required = $21, \
+            interpreter_language = $22, condition_cardiac = $23, condition_respiratory = \
+            $24, condition_renal = $25, condition_hepatic = $26, condition_stroke = $27, \
+            condition_cancer = $28, condition_rheumatological = $29, condition_thyroid = \
+            $30, condition_other = $31, previous_surgery = $32, previous_surgery_detail \
+            = $33, previous_anaesthetic_complication = $34, \
+            previous_anaesthetic_complication_detail = $35, postoperative_nausea_history \
+            = $36, difficult_airway_history = $37, malignant_hyperthermia_history = $38, \
+            venous_thromboembolism_history = $39, family_history = $40, pregnancy_status \
+            = $41, takes_prescription_medicines = $42, takes_over_the_counter_medicines \
+            = $43, takes_herbal_products = $44, takes_anticoagulant = $45, \
+            takes_antiplatelet = $46, takes_ace_inhibitor_or_arb = $47, \
+            takes_sglt2_inhibitor = $48, takes_glp1_agonist = $49, glp1_formulation = \
+            $50, glp1_held_per_guideline = $51, glp1_extended_clear_fluids_confirmed = \
+            $52, glp1_gi_symptoms = $53, glp1_gi_symptoms_details = $54, \
+            glp1_gastric_ultrasound_performed = $55, glp1_gastric_ultrasound_findings = \
+            $56, takes_corticosteroid = $57, takes_immunosuppressant = $58, \
+            takes_hormone_therapy = $59, medication_hold_plan_agreed = $60, \
+            medication_hold_plan_agreed_by = $61, medication_adherence = $62, \
+            medication_notes = $63, has_drug_allergy = $64, drug_allergy_detail = $65, \
+            has_food_allergy = $66, food_allergy_detail = $67, has_latex_allergy = $68, \
+            has_adhesive_allergy = $69, has_contrast_allergy = $70, allergy_severity = \
+            $71, adrenaline_auto_injector = $72, allergy_notes = $73, bloods_sample_date \
+            = $74, haemoglobin_g_per_l = $75, mean_cell_volume_fl = $76, \
+            ferritin_ug_per_l = $77, transferrin_saturation_percent = $78, \
+            vitamin_b12_ng_per_l = $79, folate_ug_per_l = $80, \
+            c_reactive_protein_mg_per_l = $81, creatinine_umol_per_l = $82, \
+            egfr_ml_per_min = $83, anaemia_known_cause = $84, anaemia_treatment_started \
+            = $85, anaemia_treatment_route = $86, anaemia_treatment_start_date = $87, \
+            previous_transfusion = $88, group_and_save_done = $89, anaemia_notes = $90, \
+            diabetes_type = $91, diabetes_duration_years = $92, hba1c_mmol_per_mol = \
+            $93, hba1c_sample_date = $94, capillary_glucose_mmol_per_l = $95, \
+            diabetes_treatment = $96, insulin_regimen = $97, hypoglycaemia_awareness = \
+            $98, diabetes_team_review = $99, diabetes_team_review_date = $100, \
+            foot_check_done = $101, glycaemic_notes = $102, smoking_status = $103, \
+            cigarettes_per_day = $104, pack_years = $105, quit_date = $106, \
+            smoking_cessation_offered = $107, smoking_cessation_accepted = $108, \
+            nicotine_replacement = $109, vaping = $110, smoking_notes = $111, \
+            alcohol_units_per_week = $112, audit_c_frequency = $113, \
+            audit_c_typical_quantity = $114, audit_c_binge_frequency = $115, \
+            alcohol_dependence_features = $116, alcohol_reduction_plan_agreed = $117, \
+            alcohol_services_referral = $118, recreational_drug_use = $119, \
+            recreational_drug_detail = $120, alcohol_notes = $121, height_as_cm = $122, \
+            weight_as_kg = $123, body_mass_index = $124, usual_weight_as_kg = $125, \
+            weight_loss_percent = $126, weight_loss_is_intentional = $127, acutely_ill = \
+            $128, no_nutritional_intake_over_5_days = $129, appetite = $130, \
+            oral_nutritional_supplements = $131, immunonutrition = $132, \
+            dietitian_referral = $133, nutrition_notes = $134, usual_activity_level = \
+            $135, climbs_flight_of_stairs = $136, metabolic_equivalents = $137, \
+            duke_activity_status_index = $138, six_minute_walk_metres = $139, \
+            cpet_anaerobic_threshold = $140, cpet_peak_vo2 = $141, grip_strength_kg = \
+            $142, prehabilitation_offered = $143, prehabilitation_enrolled = $144, \
+            prehabilitation_sessions_per_week = $145, prehabilitation_start_date = $146, \
+            protein_supplementation_recommended = $147, fitness_notes = $148, \
+            clinical_frailty_scale = $149, fried_weakness = $150, fried_slowness = $151, \
+            fried_low_physical_activity = $152, fried_exhaustion = $153, \
+            fried_unintentional_weight_loss = $154, risk_analysis_index_score = $155, \
+            mini_cog_performed = $156, mini_cog_score = $157, cognitive_screen_tool = \
+            $158, cognitive_screen_score = $159, cognitive_impairment = $160, \
+            capacity_concern = $161, falls_in_last_12_months = $162, mobility_aid = \
+            $163, living_situation = $164, care_package = $165, frailty_notes = $166, \
+            systolic_bp = $167, diastolic_bp = $168, heart_rate = $169, heart_rhythm = \
+            $170, murmur_present = $171, exercise_tolerance = $172, \
+            ejection_fraction_percent = $173, echo_date = $174, asthma_control = $175, \
+            copd_control = $176, inhaler_technique_checked = $177, rescue_steroids = \
+            $178, spirometry_fev1_percent = $179, stop_bang_score = $180, \
+            sleep_apnoea_diagnosis = $181, cpap_use = $182, oxygen_saturation_percent = \
+            $183, cardiorespiratory_notes = $184, anxiety_level = $185, \
+            depression_screen = $186, understands_procedure = $187, \
+            expectations_realistic = $188, shared_decision_making_discussed = $189, \
+            has_carer = $190, transport_home_arranged = $191, support_after_discharge = \
+            $192, health_literacy = $193, psychological_support_offered = $194, \
+            social_notes = $195, plan_anaemia = $196, referral_anaemia = $197, \
+            plan_glycaemic_control = $198, referral_glycaemic_control = $199, \
+            plan_smoking = $200, referral_smoking = $201, plan_alcohol = $202, \
+            referral_alcohol = $203, plan_nutrition = $204, referral_nutrition = $205, \
+            plan_physical_fitness = $206, referral_physical_fitness = $207, \
+            plan_medication = $208, referral_medication = $209, plan_cardiorespiratory = \
+            $210, referral_cardiorespiratory = $211, responsible_clinician = $212, \
+            plan_agreed_with_patient = $213, plan_shared_with_patient = $214, \
+            next_review_date = $215, plan_notes = $216, gate_decision = $217, \
+            additional_notes = $218, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.status)

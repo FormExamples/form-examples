@@ -9,7 +9,6 @@ use crate::models::waterlow_pressure_ulcer_risk_assessments::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
     pub nurse_name: String,
@@ -36,15 +35,14 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO waterlow_pressure_ulcer_risk_assessments (deleted_at, patient_id, \
+            "INSERT INTO waterlow_pressure_ulcer_risk_assessments (patient_id, \
             clinician_id, nurse_name, nurse_role, assessed_at, care_setting, \
-            assessment_reason, patient_identifier, age_band, sex, build_weight_for_height, \
-            skin_type, continence, mobility, tissue_malnutrition, neurological_deficit, \
-            major_surgery_trauma, medication, existing_pressure_damage, clinical_note) VALUES \
-            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, \
-            $19, $20, $21) RETURNING *",
+            assessment_reason, patient_identifier, age_band, sex, \
+            build_weight_for_height, skin_type, continence, mobility, \
+            tissue_malnutrition, neurological_deficit, major_surgery_trauma, medication, \
+            existing_pressure_damage, clinical_note) VALUES ($1, $2, $3, $4, $5, $6, $7, \
+            $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.nurse_name)
@@ -72,16 +70,16 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE waterlow_pressure_ulcer_risk_assessments SET deleted_at = $2, patient_id = \
-            $3, clinician_id = $4, nurse_name = $5, nurse_role = $6, assessed_at = $7, \
-            care_setting = $8, assessment_reason = $9, patient_identifier = $10, age_band = \
-            $11, sex = $12, build_weight_for_height = $13, skin_type = $14, continence = $15, \
-            mobility = $16, tissue_malnutrition = $17, neurological_deficit = $18, \
-            major_surgery_trauma = $19, medication = $20, existing_pressure_damage = $21, \
-            clinical_note = $22, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE waterlow_pressure_ulcer_risk_assessments SET patient_id = $2, \
+            clinician_id = $3, nurse_name = $4, nurse_role = $5, assessed_at = $6, \
+            care_setting = $7, assessment_reason = $8, patient_identifier = $9, age_band \
+            = $10, sex = $11, build_weight_for_height = $12, skin_type = $13, continence \
+            = $14, mobility = $15, tissue_malnutrition = $16, neurological_deficit = \
+            $17, major_surgery_trauma = $18, medication = $19, existing_pressure_damage \
+            = $20, clinical_note = $21, updated_at = now() WHERE id = $1 AND deleted_at \
+            IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.nurse_name)

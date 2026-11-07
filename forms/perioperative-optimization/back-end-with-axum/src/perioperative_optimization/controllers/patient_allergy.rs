@@ -9,7 +9,6 @@ use crate::models::patient_allergies::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub allergy_id: Uuid,
     pub reaction: String,
@@ -25,11 +24,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO patient_allergies (deleted_at, patient_id, allergy_id, reaction, \
-            severity, kind, diagnosis_method, onset_on, adrenaline_auto_injector, notes) \
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *",
+            "INSERT INTO patient_allergies (patient_id, allergy_id, reaction, severity, \
+            kind, diagnosis_method, onset_on, adrenaline_auto_injector, notes) VALUES \
+            ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.allergy_id)
         .bind(&self.reaction)
@@ -46,13 +44,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE patient_allergies SET deleted_at = $2, patient_id = $3, allergy_id = $4, \
-            reaction = $5, severity = $6, kind = $7, diagnosis_method = $8, onset_on = $9, \
-            adrenaline_auto_injector = $10, notes = $11, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE patient_allergies SET patient_id = $2, allergy_id = $3, reaction = \
+            $4, severity = $5, kind = $6, diagnosis_method = $7, onset_on = $8, \
+            adrenaline_auto_injector = $9, notes = $10, updated_at = now() WHERE id = $1 \
+            AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.allergy_id)
         .bind(&self.reaction)

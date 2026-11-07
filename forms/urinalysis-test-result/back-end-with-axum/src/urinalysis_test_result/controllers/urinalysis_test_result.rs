@@ -9,7 +9,6 @@ use crate::models::urinalysis_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -51,19 +50,18 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO urinalysis_test_results (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO urinalysis_test_results (patient_id, clinician_id, \
             originating_request_reference, report_status, performed_date, reported_date, \
             specimen_type, specimen_condition, clinical_history, leucocytes, nitrites, \
             protein, blood, glucose, ketones, bilirubin, ph, specific_gravity, \
             red_cell_count, white_cell_count, epithelial_cells, casts, organisms_seen, \
             crystals, culture_result, organism_isolated, colony_count_cfu_ml, \
-            antibiotic_sensitivities, overall_result_status, findings_narrative, impression, \
-            reporting_category, recommended_follow_up, critical_result_communicated, \
-            reported_to) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, \
-            $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, \
-            $31, $32, $33, $34, $35, $36) RETURNING *",
+            antibiotic_sensitivities, overall_result_status, findings_narrative, \
+            impression, reporting_category, recommended_follow_up, \
+            critical_result_communicated, reported_to) VALUES ($1, $2, $3, $4, $5, $6, \
+            $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, \
+            $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -106,21 +104,20 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE urinalysis_test_results SET deleted_at = $2, patient_id = $3, clinician_id \
-            = $4, originating_request_reference = $5, report_status = $6, performed_date = \
-            $7, reported_date = $8, specimen_type = $9, specimen_condition = $10, \
-            clinical_history = $11, leucocytes = $12, nitrites = $13, protein = $14, blood = \
-            $15, glucose = $16, ketones = $17, bilirubin = $18, ph = $19, specific_gravity = \
-            $20, red_cell_count = $21, white_cell_count = $22, epithelial_cells = $23, casts \
-            = $24, organisms_seen = $25, crystals = $26, culture_result = $27, \
-            organism_isolated = $28, colony_count_cfu_ml = $29, antibiotic_sensitivities = \
-            $30, overall_result_status = $31, findings_narrative = $32, impression = $33, \
-            reporting_category = $34, recommended_follow_up = $35, \
-            critical_result_communicated = $36, reported_to = $37, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE urinalysis_test_results SET patient_id = $2, clinician_id = $3, \
+            originating_request_reference = $4, report_status = $5, performed_date = $6, \
+            reported_date = $7, specimen_type = $8, specimen_condition = $9, \
+            clinical_history = $10, leucocytes = $11, nitrites = $12, protein = $13, \
+            blood = $14, glucose = $15, ketones = $16, bilirubin = $17, ph = $18, \
+            specific_gravity = $19, red_cell_count = $20, white_cell_count = $21, \
+            epithelial_cells = $22, casts = $23, organisms_seen = $24, crystals = $25, \
+            culture_result = $26, organism_isolated = $27, colony_count_cfu_ml = $28, \
+            antibiotic_sensitivities = $29, overall_result_status = $30, \
+            findings_narrative = $31, impression = $32, reporting_category = $33, \
+            recommended_follow_up = $34, critical_result_communicated = $35, reported_to \
+            = $36, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

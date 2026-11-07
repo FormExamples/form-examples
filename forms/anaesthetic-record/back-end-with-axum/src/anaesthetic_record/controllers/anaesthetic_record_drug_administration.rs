@@ -9,7 +9,6 @@ use crate::models::anaesthetic_record_drug_administrations::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub anaesthetic_record_id: Uuid,
     pub drug_name: String,
     pub dose: Option<f64>,
@@ -23,11 +22,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO anaesthetic_record_drug_administrations (deleted_at, \
-            anaesthetic_record_id, drug_name, dose, dose_unit, route, category, \
-            administered_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+            "INSERT INTO anaesthetic_record_drug_administrations (anaesthetic_record_id, \
+            drug_name, dose, dose_unit, route, category, administered_at) VALUES ($1, \
+            $2, $3, $4, $5, $6, $7) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.anaesthetic_record_id)
         .bind(&self.drug_name)
         .bind(self.dose)
@@ -42,13 +40,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE anaesthetic_record_drug_administrations SET deleted_at = $2, \
-            anaesthetic_record_id = $3, drug_name = $4, dose = $5, dose_unit = $6, route = \
-            $7, category = $8, administered_at = $9, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE anaesthetic_record_drug_administrations SET anaesthetic_record_id = \
+            $2, drug_name = $3, dose = $4, dose_unit = $5, route = $6, category = $7, \
+            administered_at = $8, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.anaesthetic_record_id)
         .bind(&self.drug_name)
         .bind(self.dose)

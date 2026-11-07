@@ -9,7 +9,6 @@ use crate::models::outpatient_outcomes::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub status: String,
 }
@@ -18,10 +17,9 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO outpatient_outcomes (deleted_at, patient_id, status) VALUES ($1, $2, \
-            $3) RETURNING *",
+            "INSERT INTO outpatient_outcomes (patient_id, status) VALUES ($1, $2) \
+            RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(&self.status)
         .fetch_one(db)
@@ -31,11 +29,10 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE outpatient_outcomes SET deleted_at = $2, patient_id = $3, status = $4, \
-            updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE outpatient_outcomes SET patient_id = $2, status = $3, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(&self.status)
         .fetch_optional(db)

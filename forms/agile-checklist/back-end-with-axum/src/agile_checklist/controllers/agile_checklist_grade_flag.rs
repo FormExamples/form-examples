@@ -9,7 +9,6 @@ use crate::models::agile_checklist_grade_flags::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub agile_checklist_grade_id: Uuid,
     pub flag_id: String,
     pub category: String,
@@ -24,11 +23,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO agile_checklist_grade_flags (deleted_at, agile_checklist_grade_id, \
-            flag_id, category, priority, section, triggering_items, description, \
-            suggested_action) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
+            "INSERT INTO agile_checklist_grade_flags (agile_checklist_grade_id, flag_id, \
+            category, priority, section, triggering_items, description, \
+            suggested_action) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.agile_checklist_grade_id)
         .bind(&self.flag_id)
         .bind(&self.category)
@@ -44,13 +42,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE agile_checklist_grade_flags SET deleted_at = $2, agile_checklist_grade_id \
-            = $3, flag_id = $4, category = $5, priority = $6, section = $7, triggering_items \
-            = $8, description = $9, suggested_action = $10, updated_at = now() WHERE id = $1 \
-            RETURNING *",
+            "UPDATE agile_checklist_grade_flags SET agile_checklist_grade_id = $2, \
+            flag_id = $3, category = $4, priority = $5, section = $6, triggering_items = \
+            $7, description = $8, suggested_action = $9, updated_at = now() WHERE id = \
+            $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.agile_checklist_grade_id)
         .bind(&self.flag_id)
         .bind(&self.category)

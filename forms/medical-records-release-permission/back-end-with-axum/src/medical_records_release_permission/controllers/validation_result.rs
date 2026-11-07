@@ -9,7 +9,6 @@ use crate::models::validation_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub release_form_id: Uuid,
     pub completeness_score: i32,
     pub completeness_status: String,
@@ -21,11 +20,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO validation_results (deleted_at, release_form_id, completeness_score, \
-            completeness_status, validation_status, validated_at) VALUES ($1, $2, $3, $4, $5, \
-            $6) RETURNING *",
+            "INSERT INTO validation_results (release_form_id, completeness_score, \
+            completeness_status, validation_status, validated_at) VALUES ($1, $2, $3, \
+            $4, $5) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.release_form_id)
         .bind(self.completeness_score)
         .bind(&self.completeness_status)
@@ -38,12 +36,11 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE validation_results SET deleted_at = $2, release_form_id = $3, \
-            completeness_score = $4, completeness_status = $5, validation_status = $6, \
-            validated_at = $7, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE validation_results SET release_form_id = $2, completeness_score = $3, \
+            completeness_status = $4, validation_status = $5, validated_at = $6, \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.release_form_id)
         .bind(self.completeness_score)
         .bind(&self.completeness_status)

@@ -9,7 +9,6 @@ use crate::models::employers::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub name: String,
     pub industry_sector: String,
     pub postal_address_as_full_text: Option<String>,
@@ -26,13 +25,12 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO employers (deleted_at, name, industry_sector, \
-            postal_address_as_full_text, country_as_iso_3166_1_alpha_2, postcode, \
-            occupational_health_contact_name, occupational_health_contact_email, \
-            occupational_health_contact_phone, hr_contact_name, hr_contact_email) VALUES ($1, \
-            $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *",
+            "INSERT INTO employers (name, industry_sector, postal_address_as_full_text, \
+            country_as_iso_3166_1_alpha_2, postcode, occupational_health_contact_name, \
+            occupational_health_contact_email, occupational_health_contact_phone, \
+            hr_contact_name, hr_contact_email) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, \
+            $9, $10) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(&self.industry_sector)
         .bind(&self.postal_address_as_full_text)
@@ -50,14 +48,14 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE employers SET deleted_at = $2, name = $3, industry_sector = $4, \
-            postal_address_as_full_text = $5, country_as_iso_3166_1_alpha_2 = $6, postcode = \
-            $7, occupational_health_contact_name = $8, occupational_health_contact_email = \
-            $9, occupational_health_contact_phone = $10, hr_contact_name = $11, \
-            hr_contact_email = $12, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE employers SET name = $2, industry_sector = $3, \
+            postal_address_as_full_text = $4, country_as_iso_3166_1_alpha_2 = $5, \
+            postcode = $6, occupational_health_contact_name = $7, \
+            occupational_health_contact_email = $8, occupational_health_contact_phone = \
+            $9, hr_contact_name = $10, hr_contact_email = $11, updated_at = now() WHERE \
+            id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.name)
         .bind(&self.industry_sector)
         .bind(&self.postal_address_as_full_text)

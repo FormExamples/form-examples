@@ -44,8 +44,8 @@ impl Params {
         sqlx::query_as(
             "UPDATE four_a_test_for_delirium_grades SET four_a_test_for_delirium_id = $2, \
             item1_score = $3, item2_score = $4, item3_score = $5, item4_score = $6, \
-            total_score = $7, interpretation = $8, graded_at = $9, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            total_score = $7, interpretation = $8, graded_at = $9, updated_at = now() \
+            WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.four_a_test_for_delirium_id)

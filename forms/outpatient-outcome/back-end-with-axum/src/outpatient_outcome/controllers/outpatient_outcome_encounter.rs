@@ -9,7 +9,6 @@ use crate::models::outpatient_outcome_encounters::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub outpatient_outcome_id: Uuid,
     pub clinic_date: Option<Date>,
     pub specialty: String,
@@ -22,11 +21,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO outpatient_outcome_encounters (deleted_at, outpatient_outcome_id, \
-            clinic_date, specialty, clinician_id, modality, appointment_type) VALUES ($1, $2, \
-            $3, $4, $5, $6, $7) RETURNING *",
+            "INSERT INTO outpatient_outcome_encounters (outpatient_outcome_id, \
+            clinic_date, specialty, clinician_id, modality, appointment_type) VALUES \
+            ($1, $2, $3, $4, $5, $6) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.outpatient_outcome_id)
         .bind(self.clinic_date)
         .bind(&self.specialty)
@@ -40,12 +38,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE outpatient_outcome_encounters SET deleted_at = $2, outpatient_outcome_id = \
-            $3, clinic_date = $4, specialty = $5, clinician_id = $6, modality = $7, \
-            appointment_type = $8, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE outpatient_outcome_encounters SET outpatient_outcome_id = $2, \
+            clinic_date = $3, specialty = $4, clinician_id = $5, modality = $6, \
+            appointment_type = $7, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.outpatient_outcome_id)
         .bind(self.clinic_date)
         .bind(&self.specialty)

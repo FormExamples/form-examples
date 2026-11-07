@@ -11,8 +11,6 @@ use crate::models::inpatient_clinical_note_grade_flags::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    /// Deleted at.
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     /// Flag ID.
     pub flag_id: String,
     /// Category.
@@ -31,11 +29,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO inpatient_clinical_note_grade_flags (deleted_at, flag_id, category, \
-            priority, description, suggested_action, inpatient_clinical_note_grade_id) VALUES \
-            ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+            "INSERT INTO inpatient_clinical_note_grade_flags (flag_id, category, \
+            priority, description, suggested_action, inpatient_clinical_note_grade_id) \
+            VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(&self.flag_id)
         .bind(&self.category)
         .bind(&self.priority)
@@ -49,13 +46,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE inpatient_clinical_note_grade_flags SET deleted_at = $2, flag_id = $3, \
-            category = $4, priority = $5, description = $6, suggested_action = $7, \
-            inpatient_clinical_note_grade_id = $8, updated_at = now() WHERE id = $1 RETURNING \
-            *",
+            "UPDATE inpatient_clinical_note_grade_flags SET flag_id = $2, category = $3, \
+            priority = $4, description = $5, suggested_action = $6, \
+            inpatient_clinical_note_grade_id = $7, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(&self.flag_id)
         .bind(&self.category)
         .bind(&self.priority)

@@ -9,7 +9,6 @@ use crate::models::nerve_conduction_study_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -44,18 +43,17 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO nerve_conduction_study_test_results (deleted_at, patient_id, \
-            clinician_id, originating_request_reference, report_status, performed_date, \
-            reported_date, study_type, region, laterality, study_adequacy, clinical_history, \
+            "INSERT INTO nerve_conduction_study_test_results (patient_id, clinician_id, \
+            originating_request_reference, report_status, performed_date, reported_date, \
+            study_type, region, laterality, study_adequacy, clinical_history, \
             comparison_with_previous, nerve_conduction_findings, emg_findings, \
             carpal_tunnel_syndrome, peripheral_neuropathy, radiculopathy, \
             motor_neurone_disease_features, myopathy, neuromuscular_junction_disorder, \
             normal_study, severity, pattern, impression, reporting_category, \
-            recommended_follow_up, critical_result_communicated, reported_to) VALUES ($1, $2, \
-            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, \
-            $20, $21, $22, $23, $24, $25, $26, $27, $28, $29) RETURNING *",
+            recommended_follow_up, critical_result_communicated, reported_to) VALUES \
+            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, \
+            $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -91,20 +89,19 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE nerve_conduction_study_test_results SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, originating_request_reference = $5, report_status = $6, \
-            performed_date = $7, reported_date = $8, study_type = $9, region = $10, \
-            laterality = $11, study_adequacy = $12, clinical_history = $13, \
-            comparison_with_previous = $14, nerve_conduction_findings = $15, emg_findings = \
-            $16, carpal_tunnel_syndrome = $17, peripheral_neuropathy = $18, radiculopathy = \
-            $19, motor_neurone_disease_features = $20, myopathy = $21, \
-            neuromuscular_junction_disorder = $22, normal_study = $23, severity = $24, \
-            pattern = $25, impression = $26, reporting_category = $27, recommended_follow_up \
-            = $28, critical_result_communicated = $29, reported_to = $30, updated_at = now() \
-            WHERE id = $1 RETURNING *",
+            "UPDATE nerve_conduction_study_test_results SET patient_id = $2, clinician_id \
+            = $3, originating_request_reference = $4, report_status = $5, performed_date \
+            = $6, reported_date = $7, study_type = $8, region = $9, laterality = $10, \
+            study_adequacy = $11, clinical_history = $12, comparison_with_previous = \
+            $13, nerve_conduction_findings = $14, emg_findings = $15, \
+            carpal_tunnel_syndrome = $16, peripheral_neuropathy = $17, radiculopathy = \
+            $18, motor_neurone_disease_features = $19, myopathy = $20, \
+            neuromuscular_junction_disorder = $21, normal_study = $22, severity = $23, \
+            pattern = $24, impression = $25, reporting_category = $26, \
+            recommended_follow_up = $27, critical_result_communicated = $28, reported_to \
+            = $29, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

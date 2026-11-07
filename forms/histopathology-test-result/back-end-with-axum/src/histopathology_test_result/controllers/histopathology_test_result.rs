@@ -9,7 +9,6 @@ use crate::models::histopathology_test_results::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
@@ -45,18 +44,17 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO histopathology_test_results (deleted_at, patient_id, clinician_id, \
+            "INSERT INTO histopathology_test_results (patient_id, clinician_id, \
             originating_request_reference, report_status, performed_date, reported_date, \
             specimen_type, specimen_site, specimen_adequacy, clinical_history, \
-            macroscopic_description, microscopic_description, diagnosis, malignancy_present, \
-            tumour_type, histological_grade, tnm_pt, tnm_pn, tnm_pm, resection_margins, \
-            lymphovascular_invasion, immunohistochemistry, snomed_code, \
-            comparison_with_previous, impression, reporting_category, recommended_follow_up, \
-            critical_result_communicated, reported_to) VALUES ($1, $2, $3, $4, $5, $6, $7, \
-            $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, \
-            $24, $25, $26, $27, $28, $29, $30) RETURNING *",
+            macroscopic_description, microscopic_description, diagnosis, \
+            malignancy_present, tumour_type, histological_grade, tnm_pt, tnm_pn, tnm_pm, \
+            resection_margins, lymphovascular_invasion, immunohistochemistry, \
+            snomed_code, comparison_with_previous, impression, reporting_category, \
+            recommended_follow_up, critical_result_communicated, reported_to) VALUES \
+            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, \
+            $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)
@@ -93,20 +91,19 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE histopathology_test_results SET deleted_at = $2, patient_id = $3, \
-            clinician_id = $4, originating_request_reference = $5, report_status = $6, \
-            performed_date = $7, reported_date = $8, specimen_type = $9, specimen_site = $10, \
-            specimen_adequacy = $11, clinical_history = $12, macroscopic_description = $13, \
-            microscopic_description = $14, diagnosis = $15, malignancy_present = $16, \
-            tumour_type = $17, histological_grade = $18, tnm_pt = $19, tnm_pn = $20, tnm_pm = \
-            $21, resection_margins = $22, lymphovascular_invasion = $23, immunohistochemistry \
-            = $24, snomed_code = $25, comparison_with_previous = $26, impression = $27, \
-            reporting_category = $28, recommended_follow_up = $29, \
-            critical_result_communicated = $30, reported_to = $31, updated_at = now() WHERE \
-            id = $1 RETURNING *",
+            "UPDATE histopathology_test_results SET patient_id = $2, clinician_id = $3, \
+            originating_request_reference = $4, report_status = $5, performed_date = $6, \
+            reported_date = $7, specimen_type = $8, specimen_site = $9, \
+            specimen_adequacy = $10, clinical_history = $11, macroscopic_description = \
+            $12, microscopic_description = $13, diagnosis = $14, malignancy_present = \
+            $15, tumour_type = $16, histological_grade = $17, tnm_pt = $18, tnm_pn = \
+            $19, tnm_pm = $20, resection_margins = $21, lymphovascular_invasion = $22, \
+            immunohistochemistry = $23, snomed_code = $24, comparison_with_previous = \
+            $25, impression = $26, reporting_category = $27, recommended_follow_up = \
+            $28, critical_result_communicated = $29, reported_to = $30, updated_at = \
+            now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.patient_id)
         .bind(self.clinician_id)
         .bind(&self.originating_request_reference)

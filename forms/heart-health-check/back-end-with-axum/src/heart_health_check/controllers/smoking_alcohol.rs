@@ -9,7 +9,6 @@ use crate::models::smoking_alcohols::Model;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
-    pub deleted_at: Option<DateTimeWithTimeZone>,
     pub assessment_id: Uuid,
     pub smoking_status: String,
     pub cigarettes_per_day: Option<i32>,
@@ -22,11 +21,10 @@ impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO smoking_alcohols (deleted_at, assessment_id, smoking_status, \
-            cigarettes_per_day, years_since_quit, alcohol_units_per_week, alcohol_frequency) \
-            VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+            "INSERT INTO smoking_alcohols (assessment_id, smoking_status, \
+            cigarettes_per_day, years_since_quit, alcohol_units_per_week, \
+            alcohol_frequency) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
         )
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.smoking_status)
         .bind(self.cigarettes_per_day)
@@ -40,12 +38,12 @@ impl Params {
     /// Update the row with this id, if there is one.
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
-            "UPDATE smoking_alcohols SET deleted_at = $2, assessment_id = $3, smoking_status = \
-            $4, cigarettes_per_day = $5, years_since_quit = $6, alcohol_units_per_week = $7, \
-            alcohol_frequency = $8, updated_at = now() WHERE id = $1 RETURNING *",
+            "UPDATE smoking_alcohols SET assessment_id = $2, smoking_status = $3, \
+            cigarettes_per_day = $4, years_since_quit = $5, alcohol_units_per_week = $6, \
+            alcohol_frequency = $7, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
         )
         .bind(id)
-        .bind(self.deleted_at)
         .bind(self.assessment_id)
         .bind(&self.smoking_status)
         .bind(self.cigarettes_per_day)
