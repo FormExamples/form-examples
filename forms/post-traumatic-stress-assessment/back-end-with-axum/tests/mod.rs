@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use axa::{AppContext, Result};
 use post_traumatic_stress_assessment::app::App;

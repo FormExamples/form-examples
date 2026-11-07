@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use anaesthetics_waiting_list_card::app::App;
 pub use anaesthetics_waiting_list_card::support::db;

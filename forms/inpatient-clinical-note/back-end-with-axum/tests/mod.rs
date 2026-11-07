@@ -5,7 +5,6 @@ mod grading;
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use axa::{AppContext, Result};
 use inpatient_clinical_note::app::App;

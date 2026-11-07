@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use advance_decision_to_refuse_treatment::app::App;
 pub use advance_decision_to_refuse_treatment::support::db;

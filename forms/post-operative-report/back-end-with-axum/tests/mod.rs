@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use axa::{AppContext, Result};
 use post_operative_report::app::App;

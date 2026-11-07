@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use ambulatory_blood_pressure_test_request::app::App;
 pub use ambulatory_blood_pressure_test_request::support::db;

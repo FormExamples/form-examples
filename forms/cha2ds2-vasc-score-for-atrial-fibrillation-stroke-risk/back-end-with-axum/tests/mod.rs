@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use axa::{AppContext, Result};
 use cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk::app::App;

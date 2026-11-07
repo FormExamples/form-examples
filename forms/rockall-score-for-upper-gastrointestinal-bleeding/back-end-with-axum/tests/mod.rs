@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use axa::{AppContext, Result};
 use rockall_score_for_upper_gastrointestinal_bleeding::app::App;

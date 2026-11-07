@@ -80,7 +80,6 @@
       "Bash(grep:*)",
       "Bash(ln -sfn index.md README.md)",
       "Bash(ln:*)",
-      "Bash(loco --help)",
       "Bash(ls -d */)",
       "Bash(ls:*)",
       "Bash(mise tasks *)",

@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use allergy_assessment::app::App;
 pub use allergy_assessment::support::db;

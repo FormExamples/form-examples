@@ -6,10 +6,7 @@
       "Bash(pnpm run build 2>&1)",
       "Bash(pnpm exec vitest run 2>&1)",
       "Bash(cd /Users/jph/git/formexamples/form-examples/forms/cognitive-assessment/front-end-clinician-dashboard-with-svelte && pnpm run build 2>&1)",
-      "Bash(cd /Users/jph/git/formexamples/form-examples/forms/cognitive-assessment/full-stack-with-loco-tera-htmx-alpine && cargo build 2>&1)",
-      "Bash(cd /Users/jph/git/formexamples/form-examples/forms/cognitive-assessment/full-stack-with-loco-tera-htmx-alpine && cargo test 2>&1)",
       "Bash(cd /Users/jph/git/formexamples/form-examples && bash bin/test-forms 2>&1 | grep \"cognitive-assessment\" | head -40)",
-      "Bash(touch /Users/jph/git/formexamples/form-examples/forms/cognitive-assessment/doc/.gitkeep && test -f /Users/jph/git/formexamples/form-examples/forms/cognitive-assessment/full-stack-with-loco-tera-htmx-alpine/.gitignore && echo \".gitignore exists\" || echo \".gitignore missing\")",
       "Bash(cd /Users/jph/git/formexamples/form-examples && bash bin/test-forms 2>&1 | grep \"cognitive-assessment\")"
     ]
   }

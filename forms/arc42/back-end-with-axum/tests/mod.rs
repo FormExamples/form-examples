@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use arc42::app::App;
 pub use arc42::support::db;

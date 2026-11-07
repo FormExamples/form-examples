@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use anesthesiology_assessment::app::App;
 pub use anesthesiology_assessment::support::db;

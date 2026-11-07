@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use accident_and_emergency_medicine_waiting_list_card::app::App;
 pub use accident_and_emergency_medicine_waiting_list_card::support::db;

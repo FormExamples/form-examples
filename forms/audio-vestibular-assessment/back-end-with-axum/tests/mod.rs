@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use audio_vestibular_assessment::app::App;
 pub use audio_vestibular_assessment::support::db;

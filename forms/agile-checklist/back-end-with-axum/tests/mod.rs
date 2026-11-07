@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use agile_checklist::app::App;
 pub use agile_checklist::support::db;

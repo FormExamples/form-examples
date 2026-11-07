@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use angiography_test_result::app::App;
 pub use angiography_test_result::support::db;

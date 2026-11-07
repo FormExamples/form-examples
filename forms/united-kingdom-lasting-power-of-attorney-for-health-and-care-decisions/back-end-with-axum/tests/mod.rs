@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use axa::{AppContext, Result};
 use united_kingdom_lasting_power_of_attorney_for_health_and_care_decisions::app::App;

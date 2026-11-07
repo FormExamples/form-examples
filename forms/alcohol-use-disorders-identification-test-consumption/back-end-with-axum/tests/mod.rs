@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use alcohol_use_disorders_identification_test_consumption::app::App;
 pub use alcohol_use_disorders_identification_test_consumption::support::db;

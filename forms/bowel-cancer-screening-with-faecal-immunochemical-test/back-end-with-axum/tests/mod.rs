@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use axa::{AppContext, Result};
 use bowel_cancer_screening_with_faecal_immunochemical_test::app::App;

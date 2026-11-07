@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use axa::{AppContext, Result};
 use united_kingdom_driver_and_vehicle_licensing_agency_m1_form::app::App;

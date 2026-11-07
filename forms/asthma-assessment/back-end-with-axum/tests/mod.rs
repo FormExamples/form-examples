@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use asthma_assessment::app::App;
 pub use asthma_assessment::support::db;

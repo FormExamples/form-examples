@@ -2,16 +2,16 @@
 //! line, and the boot used by tests. Everything here is an ordinary function.
 
 use axa::{
+    AppContext, Environment, Error, Result,
     boot::{BootResult, TestApp},
-    cli::{parse_vars, Cli, Command, DbCommand},
+    cli::{Cli, Command, DbCommand, parse_vars},
     config::{Config, Defaults},
     queue::{Queue, QueueOptions},
     routes::AppRoutes,
     server,
     sqlx::{dangerously_recreate, migrate, revert, status, truncate},
     task::Tasks,
-    worker::{BackgroundWorker, WorkerMode},
-    AppContext, Environment, Error, Result,
+    worker::WorkerMode,
 };
 use axum::Router;
 use sqlx::migrate::Migrator;
@@ -20,7 +20,6 @@ use sqlx::migrate::Migrator;
 use crate::{
     controllers,
     support::{self, db},
-    workers::downloader::DownloadWorker,
 };
 
 /// The schema, from `migrations/`.
@@ -65,7 +64,6 @@ impl App {
     /// Fails when a worker cannot be registered.
     #[allow(unused_variables)]
     pub fn connect_workers(ctx: &AppContext, queue: &mut Queue) -> Result<()> {
-        queue.register(DownloadWorker::build(ctx));
         Ok(())
     }
 

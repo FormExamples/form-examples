@@ -23,4 +23,3 @@ pub mod models;
 pub mod support;
 pub mod tasks;
 pub mod views;
-pub mod workers;

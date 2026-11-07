@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use autism_assessment::app::App;
 pub use autism_assessment::support::db;

@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use axa::{AppContext, Result};
 use framingham_risk_score_for_hard_coronary_heart_disease::app::App;

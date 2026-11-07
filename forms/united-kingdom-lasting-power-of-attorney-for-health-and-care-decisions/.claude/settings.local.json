@@ -9,7 +9,6 @@
       "Bash(pnpm install *)",
       "Bash(node *)",
       "Bash(chmod +x *)",
-      "Bash(mkdir -p /Users/jph/git/formexamples/form-examples/forms/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/full-stack-with-loco-tera-htmx-alpine/target)",
       "Bash(cargo build *)",
       "Bash(cargo test *)"
     ]

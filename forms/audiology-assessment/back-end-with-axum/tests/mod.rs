@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use audiology_assessment::app::App;
 pub use audiology_assessment::support::db;

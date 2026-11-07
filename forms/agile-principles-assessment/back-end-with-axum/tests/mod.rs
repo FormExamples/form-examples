@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use agile_principles_assessment::app::App;
 pub use agile_principles_assessment::support::db;

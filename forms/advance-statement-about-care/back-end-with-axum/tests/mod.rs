@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use advance_statement_about_care::app::App;
 pub use advance_statement_about_care::support::db;

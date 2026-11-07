@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use apgar_score::app::App;
 pub use apgar_score::support::db;

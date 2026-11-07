@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use attention_deficit_assessment::app::App;
 pub use attention_deficit_assessment::support::db;

@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use abdominal_aortic_aneurysm_screening::app::App;
 pub use abdominal_aortic_aneurysm_screening::support::db;

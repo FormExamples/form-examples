@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use agile_consulting_scorecard_for_hiring_help::app::App;
 pub use agile_consulting_scorecard_for_hiring_help::support::db;

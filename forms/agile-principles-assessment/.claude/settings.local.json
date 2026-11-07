@@ -6,7 +6,6 @@
       "Read(//Users/jph/git/formexamples/form-examples/**)",
       "Bash(python3 bin/xml-representations/generate-xml-representations.py)",
       "Bash(python3 bin/fhir-r5/generate-fhir-r5-representations.py)",
-      "Bash(python3 bin/full-stack-with-loco-tera-htmx-alpine/generate-full-stack-with-loco-tera-htmx-alpine-setup.py)",
       "mcp__svelte__svelte-autofixer",
       "Bash(pnpm install *)",
       "Bash(pnpm test *)",

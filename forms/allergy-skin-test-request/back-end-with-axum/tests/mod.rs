@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use allergy_skin_test_request::app::App;
 pub use allergy_skin_test_request::support::db;

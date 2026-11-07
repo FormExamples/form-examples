@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use anaesthetic_record::app::App;
 pub use anaesthetic_record::support::db;

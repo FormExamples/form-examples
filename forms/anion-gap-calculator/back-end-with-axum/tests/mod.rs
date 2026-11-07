@@ -3,7 +3,6 @@
 mod models;
 mod requests;
 mod tasks;
-mod workers;
 
 use anion_gap_calculator::app::App;
 pub use anion_gap_calculator::support::db;

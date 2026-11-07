@@ -45,7 +45,6 @@
       "Bash(cargo test:*)",
       "Bash(RUSTFLAGS=-Awarnings cargo test:*)",
       "WebFetch(domain:crates.io)",
-      "WebFetch(domain:loco.rs)",
       "WebFetch(domain:rust-lang.org)"
     ]
   }

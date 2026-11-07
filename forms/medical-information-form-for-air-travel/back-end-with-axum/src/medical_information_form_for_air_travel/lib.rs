@@ -7,4 +7,3 @@ pub mod initializers;
 pub mod models;
 pub mod support;
 pub mod tasks;
-pub mod workers;
