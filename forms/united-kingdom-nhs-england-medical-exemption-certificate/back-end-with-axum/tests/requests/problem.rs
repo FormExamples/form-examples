@@ -83,3 +83,53 @@ async fn the_middleware_cannot_escape_it() {
     assert_eq!(response.header("content-type"), "application/problem+json");
     assert_eq!(response.header("content-encoding"), "gzip");
 }
+
+/// The database refuses a value its CHECK constraint does not list, and axa answers
+/// the caller with `422`, naming neither the value nor the field.
+#[tokio::test]
+#[serial]
+async fn a_value_outside_a_check_is_unprocessable() {
+    request::<App, _, _>(|request, _ctx| async move {
+        let refused = serde_json::json!({
+            "title": "not-a-listed-value",
+            "surname": "Test surname",
+            "forenames": "Test forenames",
+            "name": "Test Patient",
+            "birthDate": "1990-01-01",
+            "sex": "female",
+            "email": "test.patient@example.com",
+            "phone": "+441234567890",
+            "postalAddressAsFullText": "10 Downing Street, London",
+            "countryAsIso31661Alpha2": "GB",
+            "postcode": "SW1A 2AA",
+            "unitedKingdomNhsNumber": "9434765928",
+            "fullTimeEducation": "yes",
+            "pregnancyStatus": "not-pregnant"
+        });
+        let response = request.post("/api/patients").json(&refused).await;
+        let (body, text) = problem!(response, 422);
+        assert_eq!(body["code"], "unprocessable_entity");
+        assert_eq!(body["detail"], "A value is outside what this field allows");
+        assert!(!text.contains("not-a-listed-value"));
+
+        // The same body with a listed value is stored, so the shape was never the fault.
+        let accepted = serde_json::json!({
+            "title": "Mr",
+            "surname": "Test surname",
+            "forenames": "Test forenames",
+            "name": "Test Patient",
+            "birthDate": "1990-01-01",
+            "sex": "female",
+            "email": "test.patient@example.com",
+            "phone": "+441234567890",
+            "postalAddressAsFullText": "10 Downing Street, London",
+            "countryAsIso31661Alpha2": "GB",
+            "postcode": "SW1A 2AA",
+            "unitedKingdomNhsNumber": "9434765928",
+            "fullTimeEducation": "yes",
+            "pregnancyStatus": "not-pregnant"
+        });
+        request.post("/api/patients").json(&accepted).await.assert_status_ok();
+    })
+    .await;
+}

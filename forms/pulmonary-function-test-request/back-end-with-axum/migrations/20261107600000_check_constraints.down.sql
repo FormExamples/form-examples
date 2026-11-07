@@ -1,0 +1,17 @@
+ALTER TABLE "pulmonary_function_test_request_grade_flags" DROP CONSTRAINT IF EXISTS "pulmonary_function_test_request_grade_flags_priority_check";
+ALTER TABLE "pulmonary_function_test_request_grade_flags" DROP CONSTRAINT IF EXISTS "pulmonary_function_test_request_grade_flags_category_check";
+ALTER TABLE "pulmonary_function_test_request_grade_rules" DROP CONSTRAINT IF EXISTS "pulmonary_function_test_request_grade_rules_axis_check";
+ALTER TABLE "pulmonary_function_test_request_grades" DROP CONSTRAINT IF EXISTS "pulmonary_function_test_request_grades_recommendation_check";
+ALTER TABLE "pulmonary_function_test_request_grades" DROP CONSTRAINT IF EXISTS "pulmonary_function_test_request_grades_triage_tier_check";
+ALTER TABLE "pulmonary_function_test_request_grades" DROP CONSTRAINT IF EXISTS "pulmonary_function_test_request_grades_completeness_pe_402c1e6a";
+ALTER TABLE "pulmonary_function_test_request_grades" DROP CONSTRAINT IF EXISTS "pulmonary_function_test_request_grades_contraindicatio_2f1411d8";
+ALTER TABLE "pulmonary_function_test_request_grades" DROP CONSTRAINT IF EXISTS "pulmonary_function_test_request_grades_appropriateness_fe9ceaab";
+ALTER TABLE "pulmonary_function_test_request_grades" DROP CONSTRAINT IF EXISTS "pulmonary_function_test_request_grades_appropriateness_8136a5a4";
+ALTER TABLE "pulmonary_function_test_requests" DROP CONSTRAINT IF EXISTS "pulmonary_function_test_requests_urgency_check";
+ALTER TABLE "pulmonary_function_test_requests" DROP CONSTRAINT IF EXISTS "pulmonary_function_test_requests_smoking_status_check";
+ALTER TABLE "pulmonary_function_test_requests" DROP CONSTRAINT IF EXISTS "pulmonary_function_test_requests_primary_indication_check";
+ALTER TABLE "pulmonary_function_test_requests" DROP CONSTRAINT IF EXISTS "pulmonary_function_test_requests_test_type_check";
+ALTER TABLE "pulmonary_function_test_requests" DROP CONSTRAINT IF EXISTS "pulmonary_function_test_requests_setting_check";
+ALTER TABLE "pulmonary_function_test_requests" DROP CONSTRAINT IF EXISTS "pulmonary_function_test_requests_status_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";

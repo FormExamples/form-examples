@@ -34,7 +34,7 @@ async fn delete_hides_the_row_and_keeps_it() {
         let row3: Uuid = sqlx::query_scalar(
             "INSERT INTO quick_sequential_organ_failure_assessment_grade_rules (rule_id, \
             criterion, quick_sequential_organ_failure_assessment_grade_id) VALUES ('', \
-            '', $1) RETURNING id",
+            'respiratory-rate', $1) RETURNING id",
         )
         .bind(row2)
         .fetch_one(&ctx.db)

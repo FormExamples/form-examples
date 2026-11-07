@@ -1,0 +1,13 @@
+ALTER TABLE "estimated_glomerular_filtration_rate_calculator_grade_flags" DROP CONSTRAINT IF EXISTS "estimated_glomerular_filtration_rate_calculator_grade__5ff4fc31";
+ALTER TABLE "estimated_glomerular_filtration_rate_calculator_grade_flags" DROP CONSTRAINT IF EXISTS "estimated_glomerular_filtration_rate_calculator_grade__0d6416cb";
+ALTER TABLE "estimated_glomerular_filtration_rate_calculator_grade_rules" DROP CONSTRAINT IF EXISTS "estimated_glomerular_filtration_rate_calculator_grade__b79f7167";
+ALTER TABLE "estimated_glomerular_filtration_rate_calculator_grade_rules" DROP CONSTRAINT IF EXISTS "estimated_glomerular_filtration_rate_calculator_grade__89b51c77";
+ALTER TABLE "estimated_glomerular_filtration_rate_calculator_grades" DROP CONSTRAINT IF EXISTS "estimated_glomerular_filtration_rate_calculator_grades_1bd66cf0";
+ALTER TABLE "estimated_glomerular_filtration_rate_calculators" DROP CONSTRAINT IF EXISTS "estimated_glomerular_filtration_rate_calculators_stead_33dfe5fd";
+ALTER TABLE "estimated_glomerular_filtration_rate_calculators" DROP CONSTRAINT IF EXISTS "estimated_glomerular_filtration_rate_calculators_sex_check";
+ALTER TABLE "estimated_glomerular_filtration_rate_calculators" DROP CONSTRAINT IF EXISTS "estimated_glomerular_filtration_rate_calculators_equation_check";
+ALTER TABLE "estimated_glomerular_filtration_rate_calculators" DROP CONSTRAINT IF EXISTS "estimated_glomerular_filtration_rate_calculators_care__838f92fa";
+ALTER TABLE "estimated_glomerular_filtration_rate_calculators" DROP CONSTRAINT IF EXISTS "estimated_glomerular_filtration_rate_calculators_clini_1f4741b2";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

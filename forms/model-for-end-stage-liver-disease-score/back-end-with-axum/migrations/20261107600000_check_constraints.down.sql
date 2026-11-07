@@ -1,0 +1,16 @@
+ALTER TABLE "model_for_end_stage_liver_disease_score_grade_flags" DROP CONSTRAINT IF EXISTS "model_for_end_stage_liver_disease_score_grade_flags_pr_a79aaf11";
+ALTER TABLE "model_for_end_stage_liver_disease_score_grade_flags" DROP CONSTRAINT IF EXISTS "model_for_end_stage_liver_disease_score_grade_flags_ca_bba3a389";
+ALTER TABLE "model_for_end_stage_liver_disease_score_grade_rules" DROP CONSTRAINT IF EXISTS "model_for_end_stage_liver_disease_score_grade_rules_co_552ef41a";
+ALTER TABLE "model_for_end_stage_liver_disease_score_grades" DROP CONSTRAINT IF EXISTS "model_for_end_stage_liver_disease_score_grades_mortali_64c46e54";
+ALTER TABLE "model_for_end_stage_liver_disease_score_grades" DROP CONSTRAINT IF EXISTS "model_for_end_stage_liver_disease_score_grades_meld_score_check";
+ALTER TABLE "model_for_end_stage_liver_disease_scores" DROP CONSTRAINT IF EXISTS "model_for_end_stage_liver_disease_scores_cvvhd_24h_check";
+ALTER TABLE "model_for_end_stage_liver_disease_scores" DROP CONSTRAINT IF EXISTS "model_for_end_stage_liver_disease_scores_creatinine_unit_check";
+ALTER TABLE "model_for_end_stage_liver_disease_scores" DROP CONSTRAINT IF EXISTS "model_for_end_stage_liver_disease_scores_bilirubin_unit_check";
+ALTER TABLE "model_for_end_stage_liver_disease_scores" DROP CONSTRAINT IF EXISTS "model_for_end_stage_liver_disease_scores_sex_check";
+ALTER TABLE "model_for_end_stage_liver_disease_scores" DROP CONSTRAINT IF EXISTS "model_for_end_stage_liver_disease_scores_age_band_check";
+ALTER TABLE "model_for_end_stage_liver_disease_scores" DROP CONSTRAINT IF EXISTS "model_for_end_stage_liver_disease_scores_meld_variant_check";
+ALTER TABLE "model_for_end_stage_liver_disease_scores" DROP CONSTRAINT IF EXISTS "model_for_end_stage_liver_disease_scores_care_setting_check";
+ALTER TABLE "model_for_end_stage_liver_disease_scores" DROP CONSTRAINT IF EXISTS "model_for_end_stage_liver_disease_scores_clinician_role_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

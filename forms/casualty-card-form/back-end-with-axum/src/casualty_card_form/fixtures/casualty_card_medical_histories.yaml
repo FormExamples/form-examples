@@ -4,8 +4,8 @@
   deletedAt: null
   pastMedicalHistory: "Test pastMedicalHistory"
   pastSurgicalHistory: "Test pastSurgicalHistory"
-  tetanusStatus: "Test tetanusStatus"
-  smokingStatus: "Test smokingStatus"
+  tetanusStatus: "up-to-date"
+  smokingStatus: "current"
   alcoholConsumption: "Test alcoholConsumption"
   recreationalDrugUse: "Test recreationalDrugUse"
   lastOralIntake: "Test lastOralIntake"

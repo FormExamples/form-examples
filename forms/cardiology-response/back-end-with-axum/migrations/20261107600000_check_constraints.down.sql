@@ -1,0 +1,14 @@
+ALTER TABLE "cardiology_response_grade_flags" DROP CONSTRAINT IF EXISTS "cardiology_response_grade_flags_priority_check";
+ALTER TABLE "cardiology_response_grade_flags" DROP CONSTRAINT IF EXISTS "cardiology_response_grade_flags_category_check";
+ALTER TABLE "cardiology_response_grade_rules" DROP CONSTRAINT IF EXISTS "cardiology_response_grade_rules_axis_check";
+ALTER TABLE "cardiology_response_grades" DROP CONSTRAINT IF EXISTS "cardiology_response_grades_recommendation_check";
+ALTER TABLE "cardiology_response_grades" DROP CONSTRAINT IF EXISTS "cardiology_response_grades_follow_up_urgency_check";
+ALTER TABLE "cardiology_response_grades" DROP CONSTRAINT IF EXISTS "cardiology_response_grades_completeness_percent_check";
+ALTER TABLE "cardiology_response_grades" DROP CONSTRAINT IF EXISTS "cardiology_response_grades_severity_check";
+ALTER TABLE "cardiology_response_grades" DROP CONSTRAINT IF EXISTS "cardiology_response_grades_response_classification_check";
+ALTER TABLE "cardiology_responses" DROP CONSTRAINT IF EXISTS "cardiology_responses_lv_ejection_fraction_percent_check";
+ALTER TABLE "cardiology_responses" DROP CONSTRAINT IF EXISTS "cardiology_responses_primary_diagnosis_category_check";
+ALTER TABLE "cardiology_responses" DROP CONSTRAINT IF EXISTS "cardiology_responses_consultation_type_check";
+ALTER TABLE "cardiology_responses" DROP CONSTRAINT IF EXISTS "cardiology_responses_response_status_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";

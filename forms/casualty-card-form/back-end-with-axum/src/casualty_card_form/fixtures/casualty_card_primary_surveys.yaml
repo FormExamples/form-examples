@@ -18,7 +18,7 @@
   gcsEye: 1
   gcsVerbal: 1
   gcsMotor: 1
-  gcsTotal: 1
+  gcsTotal: 3
   pupils: "Test pupils"
   bloodGlucoseDisability: "Test bloodGlucoseDisability"
   limbMovements: "Test limbMovements"

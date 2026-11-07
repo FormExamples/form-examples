@@ -81,8 +81,8 @@
   diabeticRetinopathySuspected: "yes"
   diabeticRetinopathyNotes: "Test diabeticRetinopathyNotes"
   biometryPerformed: "yes"
-  axialLengthRightMm: 1.0
-  axialLengthLeftMm: 1.0
+  axialLengthRightMm: 15
+  axialLengthLeftMm: 15
   keratometryK1Right: 1.0
   keratometryK1Left: 1.0
   keratometryK2Right: 1.0

@@ -3,7 +3,7 @@
   id: "00000000-0000-4000-8000-00000001aed5"
   deletedAt: null
   severityScore: 1
-  severityLevel: "Test severityLevel"
+  severityLevel: "mild"
   redFlagCount: 1
   urgentReferralRecommended: true
   gradedAt: "2026-01-01T00:00:00Z"

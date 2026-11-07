@@ -2,6 +2,6 @@
   updatedAt: "2026-01-01T00:00:00Z"
   id: "00000000-0000-4000-8000-00000003c772"
   deletedAt: null
-  riskCategory: "Test riskCategory"
+  riskCategory: "low"
   gradedAt: "2026-01-01T00:00:00Z"
   assessmentId: "00000000-0000-4000-8000-0000000a125a"

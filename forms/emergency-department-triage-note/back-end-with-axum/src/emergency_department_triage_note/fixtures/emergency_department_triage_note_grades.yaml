@@ -7,6 +7,6 @@
   priorityLevel: 1
   priorityColour: "red"
   priorityName: "Immediate"
-  targetMinutes: 1
+  targetMinutes: 0
   gradedAt: "2026-01-01T00:00:00Z"
   emergencyDepartmentTriageNoteId: "00000000-0000-4000-8000-00000002658b"

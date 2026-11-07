@@ -18,7 +18,7 @@ async fn delete_hides_the_row_and_keeps_it() {
                 .await
                 .unwrap();
         let row2: Uuid = sqlx::query_scalar(
-            "INSERT INTO okr_key_results (okr_objective_id, position) VALUES ($1, 0) \
+            "INSERT INTO okr_key_results (okr_objective_id, position) VALUES ($1, 1) \
             RETURNING id",
         )
         .bind(row1)

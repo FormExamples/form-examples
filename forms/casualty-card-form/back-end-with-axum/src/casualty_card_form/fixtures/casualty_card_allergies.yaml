@@ -4,6 +4,6 @@
   deletedAt: null
   allergen: "Test allergen"
   reaction: "Test reaction"
-  severity: "Test severity"
+  severity: "mild"
   sortOrder: 1
   casualtyCardId: "00000000-0000-4000-8000-000000039121"

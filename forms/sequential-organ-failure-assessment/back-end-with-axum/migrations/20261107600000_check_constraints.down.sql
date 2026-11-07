@@ -1,0 +1,13 @@
+ALTER TABLE "sequential_organ_failure_assessment_grade_flags" DROP CONSTRAINT IF EXISTS "sequential_organ_failure_assessment_grade_flags_priority_check";
+ALTER TABLE "sequential_organ_failure_assessment_grade_flags" DROP CONSTRAINT IF EXISTS "sequential_organ_failure_assessment_grade_flags_category_check";
+ALTER TABLE "sequential_organ_failure_assessment_grade_rules" DROP CONSTRAINT IF EXISTS "sequential_organ_failure_assessment_grade_rules_parameter_check";
+ALTER TABLE "sequential_organ_failure_assessment_grades" DROP CONSTRAINT IF EXISTS "sequential_organ_failure_assessment_grades_mortality_band_check";
+ALTER TABLE "sequential_organ_failure_assessments" DROP CONSTRAINT IF EXISTS "sequential_organ_failure_assessments_vasopressor_check";
+ALTER TABLE "sequential_organ_failure_assessments" DROP CONSTRAINT IF EXISTS "sequential_organ_failure_assessments_respiratory_support_check";
+ALTER TABLE "sequential_organ_failure_assessments" DROP CONSTRAINT IF EXISTS "sequential_organ_failure_assessments_suspected_infection_check";
+ALTER TABLE "sequential_organ_failure_assessments" DROP CONSTRAINT IF EXISTS "sequential_organ_failure_assessments_sex_check";
+ALTER TABLE "sequential_organ_failure_assessments" DROP CONSTRAINT IF EXISTS "sequential_organ_failure_assessments_care_location_check";
+ALTER TABLE "sequential_organ_failure_assessments" DROP CONSTRAINT IF EXISTS "sequential_organ_failure_assessments_assessor_role_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

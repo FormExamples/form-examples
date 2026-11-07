@@ -1,0 +1,17 @@
+ALTER TABLE "glasgow_coma_scale_grade_flags" DROP CONSTRAINT IF EXISTS "glasgow_coma_scale_grade_flags_priority_check";
+ALTER TABLE "glasgow_coma_scale_grade_flags" DROP CONSTRAINT IF EXISTS "glasgow_coma_scale_grade_flags_category_check";
+ALTER TABLE "glasgow_coma_scale_grade_rules" DROP CONSTRAINT IF EXISTS "glasgow_coma_scale_grade_rules_component_check";
+ALTER TABLE "glasgow_coma_scale_grades" DROP CONSTRAINT IF EXISTS "glasgow_coma_scale_grades_severity_band_check";
+ALTER TABLE "glasgow_coma_scales" DROP CONSTRAINT IF EXISTS "glasgow_coma_scales_right_pupil_reactivity_check";
+ALTER TABLE "glasgow_coma_scales" DROP CONSTRAINT IF EXISTS "glasgow_coma_scales_left_pupil_reactivity_check";
+ALTER TABLE "glasgow_coma_scales" DROP CONSTRAINT IF EXISTS "glasgow_coma_scales_motor_response_check";
+ALTER TABLE "glasgow_coma_scales" DROP CONSTRAINT IF EXISTS "glasgow_coma_scales_verbal_response_check";
+ALTER TABLE "glasgow_coma_scales" DROP CONSTRAINT IF EXISTS "glasgow_coma_scales_eye_response_check";
+ALTER TABLE "glasgow_coma_scales" DROP CONSTRAINT IF EXISTS "glasgow_coma_scales_paralysed_check";
+ALTER TABLE "glasgow_coma_scales" DROP CONSTRAINT IF EXISTS "glasgow_coma_scales_sedated_check";
+ALTER TABLE "glasgow_coma_scales" DROP CONSTRAINT IF EXISTS "glasgow_coma_scales_intubated_check";
+ALTER TABLE "glasgow_coma_scales" DROP CONSTRAINT IF EXISTS "glasgow_coma_scales_setting_check";
+ALTER TABLE "glasgow_coma_scales" DROP CONSTRAINT IF EXISTS "glasgow_coma_scales_assessor_role_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

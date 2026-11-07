@@ -2,8 +2,8 @@
   updatedAt: "2026-01-01T00:00:00Z"
   id: "00000000-0000-4000-8000-0000000c0237"
   deletedAt: null
-  jointAssessed: "Test jointAssessed"
-  sideAssessed: "Test sideAssessed"
-  overallRomStatus: "Test overallRomStatus"
+  jointAssessed: "shoulder"
+  sideAssessed: "left"
+  overallRomStatus: "full"
   rangeOfMotionNotes: "Test rangeOfMotionNotes"
   assessmentId: "00000000-0000-4000-8000-0000000bc589"

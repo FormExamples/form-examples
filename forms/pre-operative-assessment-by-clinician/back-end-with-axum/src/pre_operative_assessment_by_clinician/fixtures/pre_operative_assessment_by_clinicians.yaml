@@ -57,7 +57,7 @@
   ecgIschaemicChanges: "yes"
   ecgNotes: "Test ecgNotes"
   echoPerformed: "yes"
-  echoEfPercent: 1
+  echoEfPercent: 5
   echoNotes: "Test echoNotes"
   historyIhd: "yes"
   historyChf: "yes"
@@ -83,7 +83,7 @@
   covidHistory: "never"
   daysSinceCovid: 1
   covidUnresolvedSymptoms: "yes"
-  gcsTotal: 1
+  gcsTotal: 3
   gcsEye: 1
   gcsVerbal: 1
   gcsMotor: 1

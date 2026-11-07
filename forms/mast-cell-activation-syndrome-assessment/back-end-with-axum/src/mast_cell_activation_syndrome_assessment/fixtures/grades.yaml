@@ -9,7 +9,7 @@
   respiratoryScore: 1
   neurologicalScore: 1
   organSystemCount: 1
-  severityLevel: "Test severityLevel"
+  severityLevel: "mild"
   triggerCount: 1
   gradedAt: "2026-01-01T00:00:00Z"
   assessmentId: "00000000-0000-4000-8000-00000009ea58"

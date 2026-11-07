@@ -11,8 +11,8 @@
   primaryIndication: "diagnose-hypertension"
   clinicalQuestion: "Test clinicalQuestion"
   relevantHistory: "Test relevantHistory"
-  clinicBpSystolic: 1
-  clinicBpDiastolic: 1
+  clinicBpSystolic: 50
+  clinicBpDiastolic: 20
   onAntihypertensives: true
   currentMedications: "Test currentMedications"
   symptomDizziness: true

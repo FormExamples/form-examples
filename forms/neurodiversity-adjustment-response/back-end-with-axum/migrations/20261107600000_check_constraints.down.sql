@@ -1,0 +1,17 @@
+ALTER TABLE "neurodiversity_adjustment_response_grade_flags" DROP CONSTRAINT IF EXISTS "neurodiversity_adjustment_response_grade_flags_priority_check";
+ALTER TABLE "neurodiversity_adjustment_response_grade_flags" DROP CONSTRAINT IF EXISTS "neurodiversity_adjustment_response_grade_flags_category_check";
+ALTER TABLE "neurodiversity_adjustment_response_grade_rules" DROP CONSTRAINT IF EXISTS "neurodiversity_adjustment_response_grade_rules_axis_check";
+ALTER TABLE "neurodiversity_adjustment_response_grades" DROP CONSTRAINT IF EXISTS "neurodiversity_adjustment_response_grades_recommendation_check";
+ALTER TABLE "neurodiversity_adjustment_response_grades" DROP CONSTRAINT IF EXISTS "neurodiversity_adjustment_response_grades_follow_up_ur_a0662002";
+ALTER TABLE "neurodiversity_adjustment_response_grades" DROP CONSTRAINT IF EXISTS "neurodiversity_adjustment_response_grades_completeness_db7629d4";
+ALTER TABLE "neurodiversity_adjustment_response_grades" DROP CONSTRAINT IF EXISTS "neurodiversity_adjustment_response_grades_legal_risk_band_check";
+ALTER TABLE "neurodiversity_adjustment_response_grades" DROP CONSTRAINT IF EXISTS "neurodiversity_adjustment_response_grades_outcome_clas_97f9256b";
+ALTER TABLE "neurodiversity_adjustment_responses" DROP CONSTRAINT IF EXISTS "neurodiversity_adjustment_responses_trial_period_weeks_check";
+ALTER TABLE "neurodiversity_adjustment_responses" DROP CONSTRAINT IF EXISTS "neurodiversity_adjustment_responses_decline_reason_cat_ac5af574";
+ALTER TABLE "neurodiversity_adjustment_responses" DROP CONSTRAINT IF EXISTS "neurodiversity_adjustment_responses_overall_decision_check";
+ALTER TABLE "neurodiversity_adjustment_responses" DROP CONSTRAINT IF EXISTS "neurodiversity_adjustment_responses_handling_method_check";
+ALTER TABLE "neurodiversity_adjustment_responses" DROP CONSTRAINT IF EXISTS "neurodiversity_adjustment_responses_response_status_check";
+ALTER TABLE "managers" DROP CONSTRAINT IF EXISTS "managers_role_check";
+ALTER TABLE "workers" DROP CONSTRAINT IF EXISTS "workers_work_location_check";
+ALTER TABLE "workers" DROP CONSTRAINT IF EXISTS "workers_work_pattern_check";
+ALTER TABLE "workers" DROP CONSTRAINT IF EXISTS "workers_employment_type_check";

@@ -1,0 +1,13 @@
+ALTER TABLE "corrected_calcium_calculator_grade_flags" DROP CONSTRAINT IF EXISTS "corrected_calcium_calculator_grade_flags_priority_check";
+ALTER TABLE "corrected_calcium_calculator_grade_flags" DROP CONSTRAINT IF EXISTS "corrected_calcium_calculator_grade_flags_category_check";
+ALTER TABLE "corrected_calcium_calculator_grade_rules" DROP CONSTRAINT IF EXISTS "corrected_calcium_calculator_grade_rules_band_check";
+ALTER TABLE "corrected_calcium_calculator_grade_rules" DROP CONSTRAINT IF EXISTS "corrected_calcium_calculator_grade_rules_instrument_check";
+ALTER TABLE "corrected_calcium_calculator_grades" DROP CONSTRAINT IF EXISTS "corrected_calcium_calculator_grades_classification_check";
+ALTER TABLE "corrected_calcium_calculators" DROP CONSTRAINT IF EXISTS "corrected_calcium_calculators_symptomatic_check";
+ALTER TABLE "corrected_calcium_calculators" DROP CONSTRAINT IF EXISTS "corrected_calcium_calculators_sex_check";
+ALTER TABLE "corrected_calcium_calculators" DROP CONSTRAINT IF EXISTS "corrected_calcium_calculators_age_band_check";
+ALTER TABLE "corrected_calcium_calculators" DROP CONSTRAINT IF EXISTS "corrected_calcium_calculators_care_setting_check";
+ALTER TABLE "corrected_calcium_calculators" DROP CONSTRAINT IF EXISTS "corrected_calcium_calculators_clinician_role_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

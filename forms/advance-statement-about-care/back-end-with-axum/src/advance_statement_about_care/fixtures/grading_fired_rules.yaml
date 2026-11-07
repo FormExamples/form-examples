@@ -5,5 +5,5 @@
   ruleId: "Test ruleId"
   category: "Test category"
   description: "Test description"
-  completenessLevel: "Test completenessLevel"
+  completenessLevel: "complete"
   gradeId: "00000000-0000-4000-8000-0000000ce7ae"

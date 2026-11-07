@@ -1,0 +1,16 @@
+ALTER TABLE "abdominal_aortic_aneurysm_screening_grade_flags" DROP CONSTRAINT IF EXISTS "abdominal_aortic_aneurysm_screening_grade_flags_priority_check";
+ALTER TABLE "abdominal_aortic_aneurysm_screening_grade_flags" DROP CONSTRAINT IF EXISTS "abdominal_aortic_aneurysm_screening_grade_flags_category_check";
+ALTER TABLE "abdominal_aortic_aneurysm_screening_grade_rules" DROP CONSTRAINT IF EXISTS "abdominal_aortic_aneurysm_screening_grade_rules_stage_check";
+ALTER TABLE "abdominal_aortic_aneurysm_screening_grades" DROP CONSTRAINT IF EXISTS "abdominal_aortic_aneurysm_screening_grades_surveillanc_2f71b855";
+ALTER TABLE "abdominal_aortic_aneurysm_screening_grades" DROP CONSTRAINT IF EXISTS "abdominal_aortic_aneurysm_screening_grades_category_check";
+ALTER TABLE "abdominal_aortic_aneurysm_screenings" DROP CONSTRAINT IF EXISTS "abdominal_aortic_aneurysm_screenings_symptomatic_check";
+ALTER TABLE "abdominal_aortic_aneurysm_screenings" DROP CONSTRAINT IF EXISTS "abdominal_aortic_aneurysm_screenings_aorta_visualised_check";
+ALTER TABLE "abdominal_aortic_aneurysm_screenings" DROP CONSTRAINT IF EXISTS "abdominal_aortic_aneurysm_screenings_leaflet_provided_check";
+ALTER TABLE "abdominal_aortic_aneurysm_screenings" DROP CONSTRAINT IF EXISTS "abdominal_aortic_aneurysm_screenings_consent_given_check";
+ALTER TABLE "abdominal_aortic_aneurysm_screenings" DROP CONSTRAINT IF EXISTS "abdominal_aortic_aneurysm_screenings_scan_type_check";
+ALTER TABLE "abdominal_aortic_aneurysm_screenings" DROP CONSTRAINT IF EXISTS "abdominal_aortic_aneurysm_screenings_eligibility_route_check";
+ALTER TABLE "abdominal_aortic_aneurysm_screenings" DROP CONSTRAINT IF EXISTS "abdominal_aortic_aneurysm_screenings_sex_check";
+ALTER TABLE "abdominal_aortic_aneurysm_screenings" DROP CONSTRAINT IF EXISTS "abdominal_aortic_aneurysm_screenings_technician_role_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

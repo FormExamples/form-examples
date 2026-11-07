@@ -5,5 +5,5 @@
   flagId: "Test flagId"
   category: "Test category"
   description: "Test description"
-  priority: "Test priority"
+  priority: "low"
   gradeId: "00000000-0000-4000-8000-00000003b08e"

@@ -9,7 +9,7 @@
   oxygenSaturation: 1
   supplementalOxygen: "yes"
   oxygenFlowRate: "Test oxygenFlowRate"
-  temperature: 1.0
+  temperature: 25
   bloodGlucose: 1.0
   consciousnessLevel: "alert"
   pupilLeftSize: 1

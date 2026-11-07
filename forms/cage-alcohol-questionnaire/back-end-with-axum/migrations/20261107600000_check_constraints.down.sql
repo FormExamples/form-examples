@@ -1,0 +1,16 @@
+ALTER TABLE "cage_alcohol_questionnaire_grade_flags" DROP CONSTRAINT IF EXISTS "cage_alcohol_questionnaire_grade_flags_priority_check";
+ALTER TABLE "cage_alcohol_questionnaire_grade_flags" DROP CONSTRAINT IF EXISTS "cage_alcohol_questionnaire_grade_flags_category_check";
+ALTER TABLE "cage_alcohol_questionnaire_grade_rules" DROP CONSTRAINT IF EXISTS "cage_alcohol_questionnaire_grade_rules_parameter_check";
+ALTER TABLE "cage_alcohol_questionnaire_grades" DROP CONSTRAINT IF EXISTS "cage_alcohol_questionnaire_grades_interpretation_check";
+ALTER TABLE "cage_alcohol_questionnaire_grades" DROP CONSTRAINT IF EXISTS "cage_alcohol_questionnaire_grades_total_score_check";
+ALTER TABLE "cage_alcohol_questionnaires" DROP CONSTRAINT IF EXISTS "cage_alcohol_questionnaires_eye_opener_check";
+ALTER TABLE "cage_alcohol_questionnaires" DROP CONSTRAINT IF EXISTS "cage_alcohol_questionnaires_guilty_check";
+ALTER TABLE "cage_alcohol_questionnaires" DROP CONSTRAINT IF EXISTS "cage_alcohol_questionnaires_annoyed_check";
+ALTER TABLE "cage_alcohol_questionnaires" DROP CONSTRAINT IF EXISTS "cage_alcohol_questionnaires_cut_down_check";
+ALTER TABLE "cage_alcohol_questionnaires" DROP CONSTRAINT IF EXISTS "cage_alcohol_questionnaires_sex_check";
+ALTER TABLE "cage_alcohol_questionnaires" DROP CONSTRAINT IF EXISTS "cage_alcohol_questionnaires_age_band_check";
+ALTER TABLE "cage_alcohol_questionnaires" DROP CONSTRAINT IF EXISTS "cage_alcohol_questionnaires_care_setting_check";
+ALTER TABLE "cage_alcohol_questionnaires" DROP CONSTRAINT IF EXISTS "cage_alcohol_questionnaires_clinician_role_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

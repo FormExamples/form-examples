@@ -1,0 +1,13 @@
+ALTER TABLE "quick_sequential_organ_failure_assessment_grade_flags" DROP CONSTRAINT IF EXISTS "quick_sequential_organ_failure_assessment_grade_flags__0c610808";
+ALTER TABLE "quick_sequential_organ_failure_assessment_grade_flags" DROP CONSTRAINT IF EXISTS "quick_sequential_organ_failure_assessment_grade_flags__2c9aac3b";
+ALTER TABLE "quick_sequential_organ_failure_assessment_grade_rules" DROP CONSTRAINT IF EXISTS "quick_sequential_organ_failure_assessment_grade_rules__669f61aa";
+ALTER TABLE "quick_sequential_organ_failure_assessment_grades" DROP CONSTRAINT IF EXISTS "quick_sequential_organ_failure_assessment_grades_thres_ef24a1dd";
+ALTER TABLE "quick_sequential_organ_failure_assessment_grades" DROP CONSTRAINT IF EXISTS "quick_sequential_organ_failure_assessment_grades_risk__7d00ff5d";
+ALTER TABLE "quick_sequential_organ_failure_assessments" DROP CONSTRAINT IF EXISTS "quick_sequential_organ_failure_assessments_mentation_a_70af46f0";
+ALTER TABLE "quick_sequential_organ_failure_assessments" DROP CONSTRAINT IF EXISTS "quick_sequential_organ_failure_assessments_sex_check";
+ALTER TABLE "quick_sequential_organ_failure_assessments" DROP CONSTRAINT IF EXISTS "quick_sequential_organ_failure_assessments_age_band_check";
+ALTER TABLE "quick_sequential_organ_failure_assessments" DROP CONSTRAINT IF EXISTS "quick_sequential_organ_failure_assessments_care_setting_check";
+ALTER TABLE "quick_sequential_organ_failure_assessments" DROP CONSTRAINT IF EXISTS "quick_sequential_organ_failure_assessments_clinician_role_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

@@ -5,8 +5,8 @@
   balanceScore: 1
   gaitScore: 1
   totalTinettiScore: 1
-  fallRiskCategory: "Test fallRiskCategory"
+  fallRiskCategory: "high_fall_risk"
   tugTimeSeconds: 1.0
-  tugRiskCategory: "Test tugRiskCategory"
+  tugRiskCategory: "normal"
   gradedAt: "2026-01-01T00:00:00Z"
   assessmentId: "00000000-0000-4000-8000-000000067aad"

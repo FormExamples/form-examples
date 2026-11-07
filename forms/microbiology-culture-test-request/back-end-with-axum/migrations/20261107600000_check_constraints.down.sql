@@ -1,0 +1,17 @@
+ALTER TABLE "microbiology_culture_test_request_grade_flags" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_request_grade_flags_priority_check";
+ALTER TABLE "microbiology_culture_test_request_grade_flags" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_request_grade_flags_category_check";
+ALTER TABLE "microbiology_culture_test_request_grade_rules" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_request_grade_rules_axis_check";
+ALTER TABLE "microbiology_culture_test_request_grades" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_request_grades_recommendation_check";
+ALTER TABLE "microbiology_culture_test_request_grades" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_request_grades_triage_tier_check";
+ALTER TABLE "microbiology_culture_test_request_grades" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_request_grades_completeness__8d2a6d1d";
+ALTER TABLE "microbiology_culture_test_request_grades" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_request_grades_preanalytical_93145f4a";
+ALTER TABLE "microbiology_culture_test_request_grades" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_request_grades_appropriatene_a46ef2ab";
+ALTER TABLE "microbiology_culture_test_request_grades" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_request_grades_appropriatene_83442f99";
+ALTER TABLE "microbiology_culture_test_requests" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_requests_urgency_check";
+ALTER TABLE "microbiology_culture_test_requests" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_requests_specimen_collected_check";
+ALTER TABLE "microbiology_culture_test_requests" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_requests_primary_indication_check";
+ALTER TABLE "microbiology_culture_test_requests" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_requests_specimen_type_check";
+ALTER TABLE "microbiology_culture_test_requests" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_requests_setting_check";
+ALTER TABLE "microbiology_culture_test_requests" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_requests_status_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";

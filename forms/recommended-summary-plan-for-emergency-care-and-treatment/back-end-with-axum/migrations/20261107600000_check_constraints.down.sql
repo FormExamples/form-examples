@@ -1,0 +1,16 @@
+ALTER TABLE "respect_grade_flags" DROP CONSTRAINT IF EXISTS "respect_grade_flags_priority_check";
+ALTER TABLE "respect_grade_flags" DROP CONSTRAINT IF EXISTS "respect_grade_flags_category_check";
+ALTER TABLE "respect_grade_rules" DROP CONSTRAINT IF EXISTS "respect_grade_rules_satisfied_check";
+ALTER TABLE "respect_grade_rules" DROP CONSTRAINT IF EXISTS "respect_grade_rules_section_check";
+ALTER TABLE "respect_grades" DROP CONSTRAINT IF EXISTS "respect_grades_status_check";
+ALTER TABLE "respect" DROP CONSTRAINT IF EXISTS "respect_clinician_role_check";
+ALTER TABLE "respect" DROP CONSTRAINT IF EXISTS "respect_involvement_check";
+ALTER TABLE "respect" DROP CONSTRAINT IF EXISTS "respect_has_capacity_check";
+ALTER TABLE "respect" DROP CONSTRAINT IF EXISTS "respect_critical_care_admission_check";
+ALTER TABLE "respect" DROP CONSTRAINT IF EXISTS "respect_hospital_transfer_check";
+ALTER TABLE "respect" DROP CONSTRAINT IF EXISTS "respect_cpr_discussed_check";
+ALTER TABLE "respect" DROP CONSTRAINT IF EXISTS "respect_cpr_recommendation_check";
+ALTER TABLE "respect" DROP CONSTRAINT IF EXISTS "respect_priority_balance_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

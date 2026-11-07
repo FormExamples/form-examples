@@ -4,16 +4,16 @@
   deletedAt: null
   totalRegularMedications: 1
   totalPrnMedications: 1
-  polypharmacyFlag: "Test polypharmacyFlag"
+  polypharmacyFlag: "yes"
   medicationReviewDate: "1990-01-01"
-  fallsRiskMedications: "Test fallsRiskMedications"
+  fallsRiskMedications: "yes"
   fallsRiskMedicationDetails: "Test fallsRiskMedicationDetails"
-  anticholinergicBurden: "Test anticholinergicBurden"
-  drugInteractionsIdentified: "Test drugInteractionsIdentified"
+  anticholinergicBurden: "low"
+  drugInteractionsIdentified: "yes"
   drugInteractionDetails: "Test drugInteractionDetails"
-  adherenceConcerns: "Test adherenceConcerns"
+  adherenceConcerns: "yes"
   adherenceDetails: "Test adherenceDetails"
-  stoppStartReviewDone: "Test stoppStartReviewDone"
+  stoppStartReviewDone: "yes"
   deprescribingOpportunities: "Test deprescribingOpportunities"
   polypharmacyNotes: "Test polypharmacyNotes"
   assessmentId: "00000000-0000-4000-8000-00000007b36c"

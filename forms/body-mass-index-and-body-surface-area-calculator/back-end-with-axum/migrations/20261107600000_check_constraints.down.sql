@@ -1,0 +1,15 @@
+ALTER TABLE "body_mass_index_and_body_surface_area_calculator_grade_flags" DROP CONSTRAINT IF EXISTS "body_mass_index_and_body_surface_area_calculator_grade_34aff9cb";
+ALTER TABLE "body_mass_index_and_body_surface_area_calculator_grade_flags" DROP CONSTRAINT IF EXISTS "body_mass_index_and_body_surface_area_calculator_grade_0a21de6d";
+ALTER TABLE "body_mass_index_and_body_surface_area_calculator_grade_rules" DROP CONSTRAINT IF EXISTS "body_mass_index_and_body_surface_area_calculator_grade_e1bc9c93";
+ALTER TABLE "body_mass_index_and_body_surface_area_calculator_grade_rules" DROP CONSTRAINT IF EXISTS "body_mass_index_and_body_surface_area_calculator_grade_305c9c48";
+ALTER TABLE "body_mass_index_and_body_surface_area_calculator_grades" DROP CONSTRAINT IF EXISTS "body_mass_index_and_body_surface_area_calculator_grade_e7538662";
+ALTER TABLE "body_mass_index_and_body_surface_area_calculators" DROP CONSTRAINT IF EXISTS "body_mass_index_and_body_surface_area_calculators_bsa__028d0668";
+ALTER TABLE "body_mass_index_and_body_surface_area_calculators" DROP CONSTRAINT IF EXISTS "body_mass_index_and_body_surface_area_calculators_ance_ff9581ba";
+ALTER TABLE "body_mass_index_and_body_surface_area_calculators" DROP CONSTRAINT IF EXISTS "body_mass_index_and_body_surface_area_calculators_sex_check";
+ALTER TABLE "body_mass_index_and_body_surface_area_calculators" DROP CONSTRAINT IF EXISTS "body_mass_index_and_body_surface_area_calculators_age__c5e6a417";
+ALTER TABLE "body_mass_index_and_body_surface_area_calculators" DROP CONSTRAINT IF EXISTS "body_mass_index_and_body_surface_area_calculators_purpose_check";
+ALTER TABLE "body_mass_index_and_body_surface_area_calculators" DROP CONSTRAINT IF EXISTS "body_mass_index_and_body_surface_area_calculators_care_1a23f476";
+ALTER TABLE "body_mass_index_and_body_surface_area_calculators" DROP CONSTRAINT IF EXISTS "body_mass_index_and_body_surface_area_calculators_clin_efee2427";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

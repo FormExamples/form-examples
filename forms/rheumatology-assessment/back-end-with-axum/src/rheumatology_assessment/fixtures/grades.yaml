@@ -3,7 +3,7 @@
   id: "00000000-0000-4000-8000-0000000d29e7"
   deletedAt: null
   das28Score: 1.0
-  das28Method: "Test das28Method"
-  diseaseActivityLevel: "Test diseaseActivityLevel"
+  das28Method: "das28_esr"
+  diseaseActivityLevel: "remission"
   gradedAt: "2026-01-01T00:00:00Z"
   assessmentId: "00000000-0000-4000-8000-00000008751b"

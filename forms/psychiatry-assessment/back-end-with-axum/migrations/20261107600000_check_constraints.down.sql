@@ -1,0 +1,16 @@
+ALTER TABLE "grading_additional_flags" DROP CONSTRAINT IF EXISTS "grading_additional_flags_priority_check";
+ALTER TABLE "grading_fired_rules" DROP CONSTRAINT IF EXISTS "grading_fired_rules_gaf_impact_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_risk_classification_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_functional_impairment_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_symptom_severity_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_gaf_category_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_gaf_score_check";
+ALTER TABLE "assessment_medication_items" DROP CONSTRAINT IF EXISTS "assessment_medication_items_medication_type_check";
+ALTER TABLE "assessment_current_medications" DROP CONSTRAINT IF EXISTS "assessment_current_medications_depot_injection_check";
+ALTER TABLE "assessment_current_medications" DROP CONSTRAINT IF EXISTS "assessment_current_medications_clozapine_registered_check";
+ALTER TABLE "assessment_current_medications" DROP CONSTRAINT IF EXISTS "assessment_current_medications_medication_adherence_check";
+ALTER TABLE "assessment_current_medications" DROP CONSTRAINT IF EXISTS "assessment_current_medications_takes_other_medications_check";
+ALTER TABLE "assessment_current_medications" DROP CONSTRAINT IF EXISTS "assessment_current_medications_takes_psychiatric_medic_85a77f6f";
+ALTER TABLE "assessments" DROP CONSTRAINT IF EXISTS "assessments_status_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";

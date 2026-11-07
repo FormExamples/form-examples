@@ -2,10 +2,10 @@
   updatedAt: "2026-01-01T00:00:00Z"
   id: "00000000-0000-4000-8000-000000023634"
   deletedAt: null
-  discrepancyType: "Test discrepancyType"
+  discrepancyType: "omission"
   bpmhItemRef: "Test bpmhItemRef"
   inpatientItemRef: "Test inpatientItemRef"
-  intendedAction: "Test intendedAction"
+  intendedAction: "continue"
   rationale: "Test rationale"
   intentional: true
   medicationReconciliationId: "00000000-0000-4000-8000-00000005bf0a"

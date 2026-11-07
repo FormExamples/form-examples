@@ -45,7 +45,7 @@ const ALLOWED_COMPONENTS: &[&str] = &[
 async fn insert_clinician(db: &PgPool, name: &str, grade: &str) -> clinicians::Model {
     sqlx::query_as(
         "INSERT INTO clinicians (name, role, grade, specialty, registration_body, \
-         registration_number) VALUES ($1, 'doctor', $2, 'general-internal-medicine', \
+         registration_number) VALUES ($1, 'foundation-doctor', $2, 'general-internal-medicine', \
          'GMC', '0000000') RETURNING *",
     )
     .bind(name)
@@ -121,7 +121,7 @@ async fn seed_complete_note(db: &PgPool) -> Uuid {
     .bind("full-active-treatment".to_owned())
     .bind("Dr B. Nakamura".to_owned())
     .bind("Handed over to the night team.".to_owned())
-    .bind("capacitous-consent".to_owned())
+    .bind("consented".to_owned())
     .bind("yes".to_owned())
     .bind(patient_id)
     .bind(author_id)

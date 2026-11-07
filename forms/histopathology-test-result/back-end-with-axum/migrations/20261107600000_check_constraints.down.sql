@@ -1,0 +1,14 @@
+ALTER TABLE "histopathology_test_result_grade_flags" DROP CONSTRAINT IF EXISTS "histopathology_test_result_grade_flags_priority_check";
+ALTER TABLE "histopathology_test_result_grade_flags" DROP CONSTRAINT IF EXISTS "histopathology_test_result_grade_flags_category_check";
+ALTER TABLE "histopathology_test_result_grade_rules" DROP CONSTRAINT IF EXISTS "histopathology_test_result_grade_rules_axis_check";
+ALTER TABLE "histopathology_test_result_grades" DROP CONSTRAINT IF EXISTS "histopathology_test_result_grades_recommendation_check";
+ALTER TABLE "histopathology_test_result_grades" DROP CONSTRAINT IF EXISTS "histopathology_test_result_grades_follow_up_urgency_check";
+ALTER TABLE "histopathology_test_result_grades" DROP CONSTRAINT IF EXISTS "histopathology_test_result_grades_report_completeness__7a62b4cb";
+ALTER TABLE "histopathology_test_result_grades" DROP CONSTRAINT IF EXISTS "histopathology_test_result_grades_abnormality_severity_check";
+ALTER TABLE "histopathology_test_result_grades" DROP CONSTRAINT IF EXISTS "histopathology_test_result_grades_result_classification_check";
+ALTER TABLE "histopathology_test_results" DROP CONSTRAINT IF EXISTS "histopathology_test_results_resection_margins_check";
+ALTER TABLE "histopathology_test_results" DROP CONSTRAINT IF EXISTS "histopathology_test_results_histological_grade_check";
+ALTER TABLE "histopathology_test_results" DROP CONSTRAINT IF EXISTS "histopathology_test_results_specimen_adequacy_check";
+ALTER TABLE "histopathology_test_results" DROP CONSTRAINT IF EXISTS "histopathology_test_results_report_status_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";

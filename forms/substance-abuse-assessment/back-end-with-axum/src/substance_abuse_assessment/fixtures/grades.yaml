@@ -3,9 +3,9 @@
   id: "00000000-0000-4000-8000-000000076213"
   deletedAt: null
   auditScore: 1
-  auditRiskCategory: "Test auditRiskCategory"
+  auditRiskCategory: "low-risk"
   dastScore: 1
-  dastRiskCategory: "Test dastRiskCategory"
-  overallRiskLevel: "Test overallRiskLevel"
+  dastRiskCategory: "no-problems"
+  overallRiskLevel: "low"
   gradedAt: "2026-01-01T00:00:00Z"
   assessmentId: "00000000-0000-4000-8000-000000055fdc"

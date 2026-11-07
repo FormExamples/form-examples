@@ -1,0 +1,9 @@
+ALTER TABLE "fluid_balance_chart_grade_flags" DROP CONSTRAINT IF EXISTS "fluid_balance_chart_grade_flags_priority_check";
+ALTER TABLE "fluid_balance_chart_grade_flags" DROP CONSTRAINT IF EXISTS "fluid_balance_chart_grade_flags_category_check";
+ALTER TABLE "fluid_balance_chart_grades" DROP CONSTRAINT IF EXISTS "fluid_balance_chart_grades_fluid_status_check";
+ALTER TABLE "fluid_balance_chart_entries" DROP CONSTRAINT IF EXISTS "fluid_balance_chart_entries_category_check";
+ALTER TABLE "fluid_balance_chart_entries" DROP CONSTRAINT IF EXISTS "fluid_balance_chart_entries_direction_check";
+ALTER TABLE "fluid_balance_charts" DROP CONSTRAINT IF EXISTS "fluid_balance_charts_clinician_role_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

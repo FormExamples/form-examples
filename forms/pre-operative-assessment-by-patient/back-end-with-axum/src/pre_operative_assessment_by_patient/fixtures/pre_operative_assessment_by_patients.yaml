@@ -4,7 +4,7 @@
   deletedAt: null
   weight: 1.0
   height: 1.0
-  bmi: 1.0
+  bmi: 10
   plannedProcedure: "Test plannedProcedure"
   procedureUrgency: "elective"
   status: "in_progress"

@@ -2,5 +2,5 @@
   updatedAt: "2026-01-01T00:00:00Z"
   id: "00000000-0000-4000-8000-00000009d0b0"
   deletedAt: null
-  status: "Test status"
+  status: "draft"
   patientId: "00000000-0000-4000-8000-00000008c4f9"

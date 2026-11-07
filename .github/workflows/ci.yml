@@ -182,6 +182,9 @@ jobs:
       - name: Every Axum crate limits each client and seeds only in development
         run: bin/axum-axa-adopt --check --all
 
+      - name: Every Axum crate migrates the CHECK constraints from sql/
+        run: bin/axum-check-constraints --check --all
+
       - name: Every SQL table has an HTTP route
         run: bin/axum-entity-routes --check --all
 
@@ -307,6 +310,8 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y postgresql-client
       - name: Apply every form's migrations to a fresh scratch DB
         run: bin/test-sql-apply
+      - name: Every Axum fixture and test row satisfies the CHECK constraints
+        run: bin/axum-fixture-checks --check --all
 
   fhir:
     name: FHIR R5 validation

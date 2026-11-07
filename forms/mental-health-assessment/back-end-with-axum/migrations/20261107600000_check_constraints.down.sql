@@ -1,0 +1,14 @@
+ALTER TABLE "grading_additional_flags" DROP CONSTRAINT IF EXISTS "grading_additional_flags_priority_check";
+ALTER TABLE "grading_fired_rules" DROP CONSTRAINT IF EXISTS "grading_fired_rules_severity_level_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_risk_level_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_gad7_severity_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_gad7_total_score_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_phq9_severity_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_phq9_total_score_check";
+ALTER TABLE "assessment_current_medication_items" DROP CONSTRAINT IF EXISTS "assessment_current_medication_items_medication_class_check";
+ALTER TABLE "assessment_current_medications" DROP CONSTRAINT IF EXISTS "assessment_current_medications_side_effects_check";
+ALTER TABLE "assessment_current_medications" DROP CONSTRAINT IF EXISTS "assessment_current_medications_medication_adherence_check";
+ALTER TABLE "assessment_current_medications" DROP CONSTRAINT IF EXISTS "assessment_current_medications_taking_psychotropic_med_fafeee3c";
+ALTER TABLE "assessments" DROP CONSTRAINT IF EXISTS "assessments_status_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";

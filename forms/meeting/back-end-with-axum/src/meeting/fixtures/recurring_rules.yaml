@@ -4,7 +4,7 @@
   deletedAt: null
   frequency: "none"
   intervalCount: 1
-  byDayOfWeek: "Test byDayOfWeek"
+  byDayOfWeek: ""
   byDayOfMonth: 1
   bySetPosition: 1
   byMonthOfYear: 1

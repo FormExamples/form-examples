@@ -2,8 +2,8 @@
   updatedAt: "2026-01-01T00:00:00Z"
   id: "00000000-0000-4000-8000-0000000be988"
   deletedAt: null
-  whoSeverity: "Test whoSeverity"
-  nccMerpCategory: "Test nccMerpCategory"
-  overallRiskLevel: "Test overallRiskLevel"
+  whoSeverity: "near-miss"
+  nccMerpCategory: "A"
+  overallRiskLevel: "low"
   gradedAt: "2026-01-01T00:00:00Z"
   assessmentId: "00000000-0000-4000-8000-00000009604e"

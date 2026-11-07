@@ -3,7 +3,7 @@
   id: "00000000-0000-4000-8000-0000000c9937"
   deletedAt: null
   totalFmsScore: 1
-  riskCategory: "Test riskCategory"
+  riskCategory: "increased_injury_risk"
   asymmetryCount: 1
   painCount: 1
   gradedAt: "2026-01-01T00:00:00Z"

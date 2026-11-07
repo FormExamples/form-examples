@@ -96,6 +96,12 @@ impl Params {
 Queries are checked at runtime by the test suite, not at compile time, so a build
 needs no database. `UPDATE` statements set `updated_at = now()` themselves.
 
+The database enforces the CHECK constraints from `sql/`, through the migration
+`20261107600000_check_constraints` that `bin/axum-check-constraints` writes. Each is
+`NOT VALID`, so new writes are checked and rows already stored are not; run `ALTER
+TABLE ... VALIDATE CONSTRAINT` once old rows are fixed. `build.rs` makes Cargo rebuild
+when `migrations/` changes, because `sqlx::migrate!` embeds the files at compile time.
+
 ## JSON API contract
 
 Handlers take `State(ctx): State<AppContext>` and reach the database through
@@ -115,7 +121,8 @@ whose text would be dropped.
 `detail` carries the text of `Error::BadRequest` and `Error::CustomError`, so treat
 that text as public. `support/prelude.rs` exports `axa::extract::{Json, Path, Query}`
 in place of Axum's, so a refused request says what was wrong and quotes nothing. A
-violated unique or foreign key constraint answers `409`, and a `500` has no `detail`.
+violated unique or foreign key constraint answers `409`, a violated CHECK or NOT NULL
+constraint answers `422` (axa 0.6.2), and a `500` has no `detail`.
 Health routes under `/_` keep their own bodies.
 
 List routes use `params.resolve(PAGE_LIMITS)?`, `page.bounds()`, and
@@ -230,6 +237,8 @@ Every crate's `Cargo.lock` is committed, because each is a binary crate. See
 - `bin/axum-msrv-set --msrv <version> [--check] [--dry-run] [--all|<slug>…]` — set the Rust MSRV fleet-wide
 - `bin/axum-axa-upgrade [--check] [--root <dir>] [--all|<slug>…]` — move crates from axa 0.5 to 0.6, whose errors are RFC 9457 problems, and check they stay there
 - `bin/axum-axa-adopt [--check] [--root <dir>] [--all|<slug>…]` — take up axa 0.6's per-client rate limit and development-only `seed` task; `--check` also fails a list that skips `Page::respond`
+- `bin/axum-check-constraints [--check] [--root <dir>] [--all|<slug>…]` — migrate every `sql/` CHECK constraint the crate's tables can hold, `NOT VALID`, and write the `build.rs` that rebuilds when `migrations/` changes. Run after changing `sql/`, then run `bin/axum-fixture-checks`
+- `bin/axum-fixture-checks [--check] [--all|<slug>…]` — put an allowed value wherever a fixture or a test's literal `INSERT` breaks a CHECK constraint; needs Postgres
 - `bin/axum-entity-routes [--check] [--root <dir>] [--all|<slug>…]` — give every `sql/` table a migration, model, controller, and test, unless a hand-written controller already reaches it. Run after adding a table, then run `bin/axum-soft-delete`
 - `bin/axum-soft-delete [--check] [--root <dir>] [--all|<slug>…]` — make `DELETE` mark and cascade, make reads and updates skip marked rows, narrow uniqueness to live rows, and take `deleted_at` out of every body
 - `bin/test-axum-routes` — assert every crate exposes its domain HTTP API

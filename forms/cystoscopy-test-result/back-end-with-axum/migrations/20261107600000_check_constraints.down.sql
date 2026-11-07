@@ -1,0 +1,16 @@
+ALTER TABLE "cystoscopy_test_result_grade_flags" DROP CONSTRAINT IF EXISTS "cystoscopy_test_result_grade_flags_priority_check";
+ALTER TABLE "cystoscopy_test_result_grade_flags" DROP CONSTRAINT IF EXISTS "cystoscopy_test_result_grade_flags_category_check";
+ALTER TABLE "cystoscopy_test_result_grade_rules" DROP CONSTRAINT IF EXISTS "cystoscopy_test_result_grade_rules_axis_check";
+ALTER TABLE "cystoscopy_test_result_grades" DROP CONSTRAINT IF EXISTS "cystoscopy_test_result_grades_recommendation_check";
+ALTER TABLE "cystoscopy_test_result_grades" DROP CONSTRAINT IF EXISTS "cystoscopy_test_result_grades_follow_up_urgency_check";
+ALTER TABLE "cystoscopy_test_result_grades" DROP CONSTRAINT IF EXISTS "cystoscopy_test_result_grades_report_completeness_percent_check";
+ALTER TABLE "cystoscopy_test_result_grades" DROP CONSTRAINT IF EXISTS "cystoscopy_test_result_grades_abnormality_severity_check";
+ALTER TABLE "cystoscopy_test_result_grades" DROP CONSTRAINT IF EXISTS "cystoscopy_test_result_grades_result_classification_check";
+ALTER TABLE "cystoscopy_test_results" DROP CONSTRAINT IF EXISTS "cystoscopy_test_results_complication_check";
+ALTER TABLE "cystoscopy_test_results" DROP CONSTRAINT IF EXISTS "cystoscopy_test_results_tumour_appearance_check";
+ALTER TABLE "cystoscopy_test_results" DROP CONSTRAINT IF EXISTS "cystoscopy_test_results_tumour_size_mm_check";
+ALTER TABLE "cystoscopy_test_results" DROP CONSTRAINT IF EXISTS "cystoscopy_test_results_anaesthesia_check";
+ALTER TABLE "cystoscopy_test_results" DROP CONSTRAINT IF EXISTS "cystoscopy_test_results_procedure_check";
+ALTER TABLE "cystoscopy_test_results" DROP CONSTRAINT IF EXISTS "cystoscopy_test_results_report_status_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";

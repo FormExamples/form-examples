@@ -1,0 +1,16 @@
+ALTER TABLE "cystoscopy_test_request_grade_flags" DROP CONSTRAINT IF EXISTS "cystoscopy_test_request_grade_flags_priority_check";
+ALTER TABLE "cystoscopy_test_request_grade_flags" DROP CONSTRAINT IF EXISTS "cystoscopy_test_request_grade_flags_category_check";
+ALTER TABLE "cystoscopy_test_request_grade_rules" DROP CONSTRAINT IF EXISTS "cystoscopy_test_request_grade_rules_axis_check";
+ALTER TABLE "cystoscopy_test_request_grades" DROP CONSTRAINT IF EXISTS "cystoscopy_test_request_grades_recommendation_check";
+ALTER TABLE "cystoscopy_test_request_grades" DROP CONSTRAINT IF EXISTS "cystoscopy_test_request_grades_risk_band_check";
+ALTER TABLE "cystoscopy_test_request_grades" DROP CONSTRAINT IF EXISTS "cystoscopy_test_request_grades_completeness_percent_check";
+ALTER TABLE "cystoscopy_test_request_grades" DROP CONSTRAINT IF EXISTS "cystoscopy_test_request_grades_triage_tier_check";
+ALTER TABLE "cystoscopy_test_request_grades" DROP CONSTRAINT IF EXISTS "cystoscopy_test_request_grades_appropriateness_band_check";
+ALTER TABLE "cystoscopy_test_request_grades" DROP CONSTRAINT IF EXISTS "cystoscopy_test_request_grades_appropriateness_score_check";
+ALTER TABLE "cystoscopy_test_requests" DROP CONSTRAINT IF EXISTS "cystoscopy_test_requests_urgency_check";
+ALTER TABLE "cystoscopy_test_requests" DROP CONSTRAINT IF EXISTS "cystoscopy_test_requests_primary_indication_check";
+ALTER TABLE "cystoscopy_test_requests" DROP CONSTRAINT IF EXISTS "cystoscopy_test_requests_procedure_check";
+ALTER TABLE "cystoscopy_test_requests" DROP CONSTRAINT IF EXISTS "cystoscopy_test_requests_setting_check";
+ALTER TABLE "cystoscopy_test_requests" DROP CONSTRAINT IF EXISTS "cystoscopy_test_requests_status_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";

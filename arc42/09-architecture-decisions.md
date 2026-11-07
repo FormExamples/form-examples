@@ -210,3 +210,28 @@ health probes are never limited. (+) Fixtures cannot reach a production database
 so several replicas give a client several limits. (−) Behind a proxy, `TRUSTED_PROXIES`
 must list it, or every client shares the proxy's one limit. (−) Dashboard clients
 reading `items` must read the array, with the total in `x-total-count`.
+
+## ADR-12 — The database enforces the CHECK constraints in `sql/`
+
+**Context.** `sql/` declares 7,803 CHECK constraints, mostly the allowed values of an
+enum field. The crates' migrations were generated without them, so a crate stored
+anything: `"sex": "banana"` answered 200. The seed fixtures and test rows had been
+written to match, with values such as `status: "Test status"`.
+
+**Decision.** `bin/axum-check-constraints` writes one migration per crate holding every
+CHECK whose columns the crate's table has (7,781; 22 name a column the crate lacks).
+Each is added `NOT VALID`, so a database holding an old bad row still migrates and
+starts. `bin/axum-fixture-checks` gives the fixtures and test rows allowed values,
+judged by Postgres. Each crate gains a `build.rs`, because `sqlx::migrate!` embeds the
+migrations and Cargo did not rebuild when one was added.
+
+Every crate is on axa 0.6.2, which answers a broken CHECK or NOT NULL constraint as
+`422` `unprocessable_entity`, naming neither the value nor the field, and 351 crates
+test that with a value their CHECK does not list.
+
+**Consequences.** (+) Stored values are the ones the form offers, and a caller who
+sends another learns it is theirs to fix. (+) A new migration reaches the next build.
+(−) Rows stored before stay unchecked until someone runs `VALIDATE CONSTRAINT`. (−) The
+`422` does not say which field, so a client must check its own values against the
+OpenAPI enums. (−) A change to `sql/` must be followed by both tools.
+

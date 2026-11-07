@@ -2,11 +2,13 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-92 tools.
+94 tools.
 
 - [`bin/axum-axa-adopt`](#axum-axa-adopt)
 - [`bin/axum-axa-upgrade`](#axum-axa-upgrade)
+- [`bin/axum-check-constraints`](#axum-check-constraints)
 - [`bin/axum-entity-routes`](#axum-entity-routes)
+- [`bin/axum-fixture-checks`](#axum-fixture-checks)
 - [`bin/axum-forbid-unsafe`](#axum-forbid-unsafe)
 - [`bin/axum-msrv-set`](#axum-msrv-set)
 - [`bin/axum-soft-delete`](#axum-soft-delete)
@@ -169,6 +171,37 @@ Usage:
   bin/axum-axa-upgrade --check --all      # CI drift check (non-zero on drift)
 ```
 
+<h2 id="axum-check-constraints"><code>bin/axum-check-constraints</code></h2>
+
+```text
+bin/axum-check-constraints — give each form's `back-end-with-axum/` the CHECK
+constraints its `sql/` declares, so the database refuses what the form refuses.
+
+The crates' migrations were generated without them, so a crate stored any
+value: `"sex": "banana"` answered 200. This writes one migration per crate,
+`20261107600000_check_constraints`, holding every CHECK from `sql/` whose
+columns the crate's table has, each named as Postgres would name it
+(`<table>_<column>_check`; a name over 63 bytes is cut and ends in a
+hash of the whole, so two long names cannot collide).
+
+Each constraint is added `NOT VALID`: new writes are checked at once, and rows
+already stored are left alone, so a database holding an old bad row still
+migrates and starts. `ALTER TABLE ... VALIDATE CONSTRAINT` checks those rows
+once they are fixed.
+
+It also writes `build.rs`, which tells Cargo to rebuild when `migrations/`
+changes. `sqlx::migrate!` embeds the migrations at compile time, so without it
+a new migration file is silently left out of the next build.
+
+A CHECK naming a column the crate's table lacks is skipped and counted.
+
+Usage:
+  bin/axum-check-constraints <slug>...          # named forms
+  bin/axum-check-constraints --all              # every form's Axum crate
+  bin/axum-check-constraints --root DIR --all   # a copy of the repo at DIR
+  bin/axum-check-constraints --check --all      # CI drift check (non-zero on drift)
+```
+
 <h2 id="axum-entity-routes"><code>bin/axum-entity-routes</code></h2>
 
 ```text
@@ -184,6 +217,30 @@ hand-written controller already reads or writes counts as reachable, so the
 aggregate APIs of the cardiology and neurodiversity crates are left as they
 are. Run bin/axum-soft-delete afterwards; it owns the delete and filter SQL.
 --check lists every unreachable table and exits 1 if there is one.
+```
+
+<h2 id="axum-fixture-checks"><code>bin/axum-fixture-checks</code></h2>
+
+```text
+bin/axum-fixture-checks — make each Axum crate's seed fixtures and test rows
+satisfy the CHECK constraints that bin/axum-check-constraints migrates.
+
+The fixtures (`src/<form>/fixtures/*.yaml`) and the literal `INSERT`s in
+`tests/` were written before the crates had CHECK constraints, with values such
+as `status: "Test status"` or `0` for a score from 1 to 15. This finds each value
+a constraint refuses and puts in the first one it allows: the first non-empty
+value of an `IN (...)` list, the lowest bound of a range, or NULL where nothing
+else fits. Postgres judges every value, so the semantics are exact, NULL
+included. It needs no tables, only a connection, through PGHOST, PGPORT and
+PGUSER (default 127.0.0.1, 5432, postgres).
+
+A row it cannot satisfy is listed for a person to fix. `--check` changes
+nothing, lists every refused value, and exits non-zero if there is one.
+
+Usage:
+  bin/axum-fixture-checks <slug>...       # named forms
+  bin/axum-fixture-checks --all           # every form's Axum crate
+  bin/axum-fixture-checks --check --all   # report only (non-zero on a refused value)
 ```
 
 <h2 id="axum-forbid-unsafe"><code>bin/axum-forbid-unsafe</code></h2>

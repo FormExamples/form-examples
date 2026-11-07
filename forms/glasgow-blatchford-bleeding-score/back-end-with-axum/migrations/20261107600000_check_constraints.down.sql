@@ -1,0 +1,16 @@
+ALTER TABLE "glasgow_blatchford_bleeding_score_grade_flags" DROP CONSTRAINT IF EXISTS "glasgow_blatchford_bleeding_score_grade_flags_priority_check";
+ALTER TABLE "glasgow_blatchford_bleeding_score_grade_flags" DROP CONSTRAINT IF EXISTS "glasgow_blatchford_bleeding_score_grade_flags_category_check";
+ALTER TABLE "glasgow_blatchford_bleeding_score_grade_rules" DROP CONSTRAINT IF EXISTS "glasgow_blatchford_bleeding_score_grade_rules_parameter_check";
+ALTER TABLE "glasgow_blatchford_bleeding_score_grades" DROP CONSTRAINT IF EXISTS "glasgow_blatchford_bleeding_score_grades_risk_band_check";
+ALTER TABLE "glasgow_blatchford_bleeding_scores" DROP CONSTRAINT IF EXISTS "glasgow_blatchford_bleeding_scores_cardiac_failure_check";
+ALTER TABLE "glasgow_blatchford_bleeding_scores" DROP CONSTRAINT IF EXISTS "glasgow_blatchford_bleeding_scores_hepatic_disease_check";
+ALTER TABLE "glasgow_blatchford_bleeding_scores" DROP CONSTRAINT IF EXISTS "glasgow_blatchford_bleeding_scores_syncope_check";
+ALTER TABLE "glasgow_blatchford_bleeding_scores" DROP CONSTRAINT IF EXISTS "glasgow_blatchford_bleeding_scores_melaena_present_check";
+ALTER TABLE "glasgow_blatchford_bleeding_scores" DROP CONSTRAINT IF EXISTS "glasgow_blatchford_bleeding_scores_sex_check";
+ALTER TABLE "glasgow_blatchford_bleeding_scores" DROP CONSTRAINT IF EXISTS "glasgow_blatchford_bleeding_scores_age_band_check";
+ALTER TABLE "glasgow_blatchford_bleeding_scores" DROP CONSTRAINT IF EXISTS "glasgow_blatchford_bleeding_scores_presenting_complaint_check";
+ALTER TABLE "glasgow_blatchford_bleeding_scores" DROP CONSTRAINT IF EXISTS "glasgow_blatchford_bleeding_scores_care_setting_check";
+ALTER TABLE "glasgow_blatchford_bleeding_scores" DROP CONSTRAINT IF EXISTS "glasgow_blatchford_bleeding_scores_clinician_role_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

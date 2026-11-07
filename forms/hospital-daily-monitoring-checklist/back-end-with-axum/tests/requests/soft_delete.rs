@@ -15,7 +15,7 @@ async fn delete_hides_the_row_and_keeps_it() {
         .unwrap();
         let row1: Uuid = sqlx::query_scalar(
             "INSERT INTO hospital_daily_monitoring_checklist_items (item_code, \
-            section_number, hospital_daily_monitoring_checklist_id) VALUES ('', 0, $1) \
+            section_number, hospital_daily_monitoring_checklist_id) VALUES ('', 1, $1) \
             RETURNING id",
         )
         .bind(row0)

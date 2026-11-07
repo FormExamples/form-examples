@@ -3,8 +3,8 @@
   id: "00000000-0000-4000-8000-0000000c15bd"
   deletedAt: null
   entryAt: "2026-01-01T00:00:00Z"
-  direction: "Test direction"
-  category: "Test category"
+  direction: "intake"
+  category: "oral"
   description: "Test description"
   volumeMl: 1.0
   fluidBalanceChartId: "00000000-0000-4000-8000-00000006af10"

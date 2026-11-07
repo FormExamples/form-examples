@@ -4,7 +4,7 @@
   deletedAt: null
   hospitalName: "Test hospitalName"
   periodMonth: 1
-  periodYear: 1
+  periodYear: 2000
   preparedByName: "Test preparedByName"
   overallNotes: "Test overallNotes"
   status: "draft"

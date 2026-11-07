@@ -10,12 +10,12 @@
   validReadingsPercent: 1.0
   recordingAdequate: true
   clinicalHistory: "Test clinicalHistory"
-  daytimeAverageSystolic: 1.0
-  daytimeAverageDiastolic: 1.0
-  nighttimeAverageSystolic: 1.0
-  nighttimeAverageDiastolic: 1.0
-  twentyFourHourAverageSystolic: 1.0
-  twentyFourHourAverageDiastolic: 1.0
+  daytimeAverageSystolic: 50
+  daytimeAverageDiastolic: 20
+  nighttimeAverageSystolic: 50
+  nighttimeAverageDiastolic: 20
+  twentyFourHourAverageSystolic: 50
+  twentyFourHourAverageDiastolic: 20
   nocturnalDipPercent: 1.0
   dipperStatus: "dipper"
   hypertensionConfirmed: true

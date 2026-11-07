@@ -1,0 +1,349 @@
+#!/usr/bin/env python3
+"""bin/axum-fixture-checks — make each Axum crate's seed fixtures and test rows
+satisfy the CHECK constraints that bin/axum-check-constraints migrates.
+
+The fixtures (`src/<form>/fixtures/*.yaml`) and the literal `INSERT`s in
+`tests/` were written before the crates had CHECK constraints, with values such
+as `status: "Test status"` or `0` for a score from 1 to 15. This finds each value
+a constraint refuses and puts in the first one it allows: the first non-empty
+value of an `IN (...)` list, the lowest bound of a range, or NULL where nothing
+else fits. Postgres judges every value, so the semantics are exact, NULL
+included. It needs no tables, only a connection, through PGHOST, PGPORT and
+PGUSER (default 127.0.0.1, 5432, postgres).
+
+A row it cannot satisfy is listed for a person to fix. `--check` changes
+nothing, lists every refused value, and exits non-zero if there is one.
+
+Usage:
+  bin/axum-fixture-checks <slug>...       # named forms
+  bin/axum-fixture-checks --all           # every form's Axum crate
+  bin/axum-fixture-checks --check --all   # report only (non-zero on a refused value)
+"""
+
+from __future__ import annotations
+
+import argparse
+import os
+import re
+import subprocess
+import sys
+from dataclasses import dataclass, field
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent / "lib"))
+import axum_crate as ac  # noqa: E402
+
+STAMP = "20261107600000_check_constraints.up.sql"
+CONSTRAINT = re.compile(r'^ALTER TABLE "(\w+)" ADD CONSTRAINT "(\w+)" CHECK \((.*)\) NOT VALID;$', re.M)
+STRING = re.compile(r"'(?:[^']|'')*'")
+NUMBER = re.compile(r"(?<![\w.])-?\d+(?:\.\d+)?(?![\w.])")
+NUMERIC = {"integer", "bigint", "smallint", "double precision", "real", "numeric", "decimal"}
+TEXT = {"varchar", "text", "character varying"}
+
+
+@dataclass
+class Value:
+    """One value of one row, and how to put a new one back where it came from."""
+    column: str
+    literal: str  # as SQL
+    write: object  # callable(new_sql_literal) -> None
+    where: str
+
+
+@dataclass
+class Row:
+    table: str
+    values: dict[str, Value] = field(default_factory=dict)
+
+
+def quote(text: str) -> str:
+    return "'" + text.replace("'", "''") + "'"
+
+
+def names_in(expression: str) -> set[str]:
+    return set(re.findall(r"\b([a-z_][a-z0-9_]*)\b", STRING.sub("''", expression)))
+
+
+def camel(name: str) -> str:
+    head, *rest = name.split("_")
+    return head + "".join(part[:1].upper() + part[1:] for part in rest)
+
+
+# --- where rows come from -------------------------------------------------------
+
+YAML_LINE = re.compile(r'^(?P<lead>-?\s*)(?P<key>\w+):\s(?P<value>.*)$')
+
+
+def yaml_literal(raw: str) -> str:
+    raw = raw.strip()
+    if raw in ("null", "~", ""):
+        return "NULL"
+    if raw in ("true", "false"):
+        return raw
+    if raw.startswith('"') and raw.endswith('"'):
+        import json
+        return quote(json.loads(raw))
+    if raw.startswith("'") and raw.endswith("'"):
+        return quote(raw[1:-1].replace("''", "'"))
+    if NUMBER.fullmatch(raw):
+        return raw
+    return quote(raw)
+
+
+def yaml_text(sql: str) -> str:
+    if sql == "NULL":
+        return "null"
+    if sql.startswith("'"):
+        import json
+        return json.dumps(sql[1:-1].replace("''", "'"))
+    return sql
+
+
+class Fixture:
+    """A fixture file, kept as lines so a fix changes one value and nothing else."""
+
+    def __init__(self, path: Path, table, columns):
+        self.path, self.lines, self.dirty = path, path.read_text().split("\n"), False
+        by_key = {camel(c): c for c in columns} | {c: c for c in columns}
+        self.rows: list[Row] = []
+        for number, line in enumerate(self.lines):
+            match = YAML_LINE.match(line)
+            if not match:
+                continue
+            if match["lead"].startswith("-"):
+                self.rows.append(Row(table))
+            column = by_key.get(match["key"])
+            if column is None or not self.rows:
+                continue
+            self.rows[-1].values[column] = Value(
+                column, yaml_literal(match["value"]),
+                lambda new, n=number, m=match: self.set(n, m, new),
+                f"{path}:{number + 1}")
+
+    def set(self, number, match, new):
+        self.lines[number] = f'{match["lead"]}{match["key"]}: {yaml_text(new)}'
+        self.dirty = True
+
+    def save(self):
+        if self.dirty:
+            self.path.write_text("\n".join(self.lines))
+
+
+RUST_INSERT = re.compile(
+    r'INSERT INTO\s+"?(?P<table>\w+)"?\s*(?:\\\n\s*)?\((?P<cols>[^)]*)\)\s*(?:\\\n\s*)?VALUES\s*(?:\\\n\s*)?\(')
+
+
+def split_values(text: str, start: int) -> tuple[list[tuple[int, int]], int] | None:
+    """Spans of each top-level value in the VALUES list opening at `start`."""
+    spans, depth, quoted, begin = [], 1, False, start
+    index = start
+    while index < len(text):
+        char = text[index]
+        if char == "'":
+            quoted = not quoted
+        elif not quoted:
+            if char == "(":
+                depth += 1
+            elif char == ")":
+                depth -= 1
+                if depth == 0:
+                    spans.append((begin, index))
+                    return spans, index
+            elif char == "," and depth == 1:
+                spans.append((begin, index))
+                begin = index + 1
+        index += 1
+    return None
+
+
+def clean(text: str) -> str:
+    """A value as written in a Rust string, without its line continuations."""
+    return " ".join(text.replace("\\\n", " ").split())
+
+
+class RustSource:
+    """A test file's literal INSERT statements."""
+
+    def __init__(self, path: Path, tables):
+        self.path, self.text, self.edits = path, path.read_text(), []
+        self.rows: list[Row] = []
+        for match in RUST_INSERT.finditer(self.text):
+            table = match["table"]
+            if table not in tables:
+                continue
+            columns = [clean(c).strip('" ') for c in match["cols"].split(",")]
+            found = split_values(self.text, match.end())
+            if not found or len(found[0]) != len(columns):
+                continue
+            row = Row(table)
+            for column, (begin, end) in zip(columns, found[0]):
+                raw = clean(self.text[begin:end])
+                literal = "NULL" if raw.startswith("$") else raw
+                core = self.text[begin:end]
+                lead = len(core) - len(core.lstrip(" \\\n"))
+                tail = len(core) - len(core.rstrip(" \\\n"))
+                row.values[column] = Value(
+                    column, literal,
+                    lambda new, b=begin + lead, e=end - tail: self.edits.append((b, e, new)),
+                    f"{path}:{self.text.count(chr(10), 0, begin) + 1}")
+                if raw.startswith("$"):
+                    row.values[column].write = None  # a bind; leave it to the test
+            self.rows.append(row)
+
+    def save(self):
+        if not self.edits:
+            return
+        text = self.text
+        for begin, end, new in sorted(self.edits, reverse=True):
+            text = text[:begin] + new + text[end:]
+        self.path.write_text(text)
+
+
+# --- judging values -------------------------------------------------------------
+
+class Judge:
+    """Asks Postgres, in batches, whether expressions hold for given values."""
+
+    def __init__(self):
+        self.args = ["psql", "-X", "-q", "-A", "-t", "-F", "|",
+                     "-h", os.environ.get("PGHOST", "127.0.0.1"),
+                     "-p", os.environ.get("PGPORT", "5432"),
+                     "-U", os.environ.get("PGUSER", "postgres"), "-d", "postgres"]
+
+    def holds(self, questions: list[tuple[str, dict[str, tuple[str, str]]]]) -> list[bool | None]:
+        """For each (expression, {column: (literal, type)}), whether it is not false.
+        None means Postgres could not read the value as its type at all."""
+        if not questions:
+            return []
+        script = ["\\set ON_ERROR_STOP 0"]
+        for number, (expression, values) in enumerate(questions):
+            columns = ", ".join(f"CAST({lit} AS {kind}) AS {col}" for col, (lit, kind) in values.items())
+            select = f"SELECT {number}, coalesce(({expression}), true) FROM (SELECT {columns}) AS t;"
+            script.append(select if columns else f"SELECT {number}, coalesce(({expression}), true);")
+        result = subprocess.run(self.args, input="\n".join(script), capture_output=True, text=True)
+        answers: list[bool | None] = [None] * len(questions)
+        for line in result.stdout.splitlines():
+            number, _, verdict = line.partition("|")
+            if number.isdigit():
+                answers[int(number)] = verdict == "t"
+        return answers
+
+
+def candidates(expression: str, kind: str, nullable: bool) -> list[str]:
+    found: list[str] = []
+    if kind in TEXT:
+        found += [s for s in STRING.findall(expression) if s != "''"] + ["''", "'x'"]
+    elif kind in NUMERIC:
+        numbers = sorted({float(n) for n in NUMBER.findall(STRING.sub("''", expression))})
+        found += [(str(int(n)) if n.is_integer() else str(n)) for n in numbers] + ["0", "1"]
+    if nullable:
+        found.append("NULL")
+    seen, unique = set(), []
+    for item in found:
+        if item not in seen:
+            seen.add(item)
+            unique.append(item)
+    return unique
+
+
+# --- the crate ------------------------------------------------------------------
+
+def crate_rows(crate: Path):
+    up = crate / "migrations" / STAMP
+    if not up.is_file():
+        return {}, {}, []
+    checks: dict[str, list[tuple[str, str]]] = {}
+    for table, name, expression in CONSTRAINT.findall(up.read_text()):
+        checks.setdefault(table, []).append((name, expression))
+    tables = ac.migration_tables(crate)
+    sources = []
+    fixtures = next(iter(crate.glob("src/*/fixtures")), None)
+    if fixtures:
+        for path in sorted(fixtures.glob("*.yaml")):
+            if path.stem in tables and path.stem in checks:
+                sources.append(Fixture(path, path.stem, [c.name for c in tables[path.stem].columns]))
+    for path in sorted((crate / "tests").rglob("*.rs")):
+        if "INSERT INTO" in path.read_text():
+            sources.append(RustSource(path, tables))
+    return checks, tables, sources
+
+
+def questions_for(row: Row, checks, tables, override=None):
+    """Each check on the row's table that the row's values bear on."""
+    asked = []
+    kinds = {c.name: c.sql for c in tables[row.table].columns}
+    for name, expression in checks.get(row.table, []):
+        mentioned = names_in(expression) & set(kinds)
+        if not mentioned:
+            continue
+        values = {}
+        for column in sorted(mentioned):
+            if override and column == override[0]:
+                values[column] = (override[1], kinds[column])
+            elif column in row.values:
+                values[column] = (row.values[column].literal, kinds[column])
+            else:
+                values[column] = ("NULL", kinds[column])
+        if not any(column in row.values for column in mentioned):
+            continue
+        asked.append((name, expression, values))
+    return asked
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    parser.add_argument("slugs", nargs="*")
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--root", default=str(Path(__file__).resolve().parent.parent))
+    args = parser.parse_args()
+    if not args.all and not args.slugs:
+        parser.error("name forms, or pass --all")
+    crates = [c if c.name == "back-end-with-axum" else c / "back-end-with-axum"
+              for c in ac.crates(Path(args.root), args.slugs, args.all)]
+    judge = Judge()
+    refused, fixed, stuck = [], 0, []
+    for crate in crates:
+        checks, tables, sources = crate_rows(crate)
+        if not checks:
+            continue
+        rows = [(source, row) for source in sources for row in source.rows]
+        asked = [(source, row, q) for source, row in rows for q in questions_for(row, checks, tables)]
+        verdicts = judge.holds([(expression, values) for _, _, (_, expression, values) in asked])
+        for (source, row, (name, expression, values)), ok in zip(asked, verdicts):
+            if ok:
+                continue
+            column = next((c for c in sorted(values) if c in row.values and row.values[c].write), None)
+            where = row.values[column].where if column else next(iter(row.values.values())).where
+            refused.append(f"{crate.parent.name}: {where}: {name}")
+            if args.check or column is None:
+                if column is None:
+                    stuck.append(f"{crate.parent.name}: {where}: {name} (only bound values)")
+                continue
+            kinds = {c.name: (c.sql, c.nullable) for c in tables[row.table].columns}
+            kind, nullable = kinds[column]
+            options = candidates(expression, kind, nullable)
+            tried = judge.holds([(expression, {**values, column: (o, kind)}) for o in options])
+            choice = next((o for o, good in zip(options, tried) if good), None)
+            if choice is None:
+                stuck.append(f"{crate.parent.name}: {where}: {name}")
+                continue
+            row.values[column].literal = choice
+            row.values[column].write(choice)
+            fixed += 1
+        if not args.check:
+            for source in sources:
+                source.save()
+    if args.check:
+        for line in refused:
+            print(line)
+        print(f"{len(crates)} crates, {len(refused)} refused value(s)")
+        return 1 if refused else 0
+    for line in stuck:
+        print(f"left for a person: {line}")
+    print(f"axum-fixture-checks: {fixed} value(s) fixed, {len(stuck)} left for a person")
+    return 1 if stuck else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

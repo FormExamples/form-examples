@@ -101,3 +101,42 @@ async fn the_middleware_cannot_escape_it() {
     assert_eq!(response.header("content-type"), "application/problem+json");
     assert_eq!(response.header("content-encoding"), "gzip");
 }
+
+/// The database refuses a value its CHECK constraint does not list, and axa answers
+/// the caller with `422`, naming neither the value nor the field. The detail is the
+/// database's refusal, not a body that failed to parse.
+#[tokio::test]
+#[serial]
+async fn a_value_outside_a_check_is_unprocessable() {
+    request::<App, _, _>(|request, ctx| async move {
+        App::seed(&ctx).await.unwrap();
+        let refused = serde_json::json!({
+            "sf36Pf": 1.0,
+            "sf36Rp": 1.0,
+            "sf36Bp": 1.0,
+            "sf36Gh": 1.0,
+            "sf36Vt": 1.0,
+            "sf36Sf": 1.0,
+            "sf36Re": 1.0,
+            "sf36Mh": 1.0,
+            "sf36PcsApprox": 1.0,
+            "sf36McsApprox": 1.0,
+            "ndiRawScore": 1,
+            "ndiAnsweredSections": 1,
+            "ndiPercentageScore": 1.0,
+            "ndiBand": "not-a-listed-value",
+            "mjoaTotalScore": 1,
+            "mjoaBand": "mild",
+            "eq5dHealthStateDescriptor": "Test eq5dHealthStateDescriptor",
+            "eq5dUkIndexValue": 1.0,
+            "eq5dVasScore": 1.0,
+            "patientReportedOutcomeMeasuresId": "00000000-0000-4000-8000-00000008d669"
+        });
+        let response = request.post("/api/patient_reported_outcome_measures_scores").json(&refused).await;
+        let (body, text) = problem!(response, 422);
+        assert_eq!(body["code"], "unprocessable_entity");
+        assert_eq!(body["detail"], "A value is outside what this field allows");
+        assert!(!text.contains("not-a-listed-value"));
+    })
+    .await;
+}

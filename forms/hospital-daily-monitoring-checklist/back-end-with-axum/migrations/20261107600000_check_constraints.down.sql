@@ -1,0 +1,3 @@
+ALTER TABLE "hospital_daily_monitoring_checklist_items" DROP CONSTRAINT IF EXISTS "hospital_daily_monitoring_checklist_items_status_check";
+ALTER TABLE "hospital_daily_monitoring_checklist_items" DROP CONSTRAINT IF EXISTS "hospital_daily_monitoring_checklist_items_section_number_check";
+ALTER TABLE "hospital_daily_monitoring_checklists" DROP CONSTRAINT IF EXISTS "hospital_daily_monitoring_checklists_status_check";

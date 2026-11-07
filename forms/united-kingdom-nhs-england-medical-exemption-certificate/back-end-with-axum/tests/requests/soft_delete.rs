@@ -26,7 +26,7 @@ async fn delete_hides_the_row_and_keeps_it() {
         .await
         .unwrap();
         let row3: Uuid =
-            sqlx::query_scalar("INSERT INTO eligible_conditions (code) VALUES ('') RETURNING id")
+            sqlx::query_scalar("INSERT INTO eligible_conditions (code) VALUES ('permanent-fistula') RETURNING id")
                 .fetch_one(&ctx.db)
                 .await
                 .unwrap();

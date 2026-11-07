@@ -1,0 +1,16 @@
+ALTER TABLE "bowel_cancer_screening_fit_grade_flags" DROP CONSTRAINT IF EXISTS "bowel_cancer_screening_fit_grade_flags_priority_check";
+ALTER TABLE "bowel_cancer_screening_fit_grade_flags" DROP CONSTRAINT IF EXISTS "bowel_cancer_screening_fit_grade_flags_category_check";
+ALTER TABLE "bowel_cancer_screening_fit_grade_rules" DROP CONSTRAINT IF EXISTS "bowel_cancer_screening_fit_grade_rules_stage_check";
+ALTER TABLE "bowel_cancer_screening_fit_grades" DROP CONSTRAINT IF EXISTS "bowel_cancer_screening_fit_grades_status_check";
+ALTER TABLE "bowel_cancer_screening_fit_grades" DROP CONSTRAINT IF EXISTS "bowel_cancer_screening_fit_grades_management_action_check";
+ALTER TABLE "bowel_cancer_screening_fit_grades" DROP CONSTRAINT IF EXISTS "bowel_cancer_screening_fit_grades_result_class_check";
+ALTER TABLE "bowel_cancer_screening_fits" DROP CONSTRAINT IF EXISTS "bowel_cancer_screening_fits_red_flag_symptoms_check";
+ALTER TABLE "bowel_cancer_screening_fits" DROP CONSTRAINT IF EXISTS "bowel_cancer_screening_fits_spoilt_reason_check";
+ALTER TABLE "bowel_cancer_screening_fits" DROP CONSTRAINT IF EXISTS "bowel_cancer_screening_fits_sample_adequacy_check";
+ALTER TABLE "bowel_cancer_screening_fits" DROP CONSTRAINT IF EXISTS "bowel_cancer_screening_fits_kit_returned_check";
+ALTER TABLE "bowel_cancer_screening_fits" DROP CONSTRAINT IF EXISTS "bowel_cancer_screening_fits_previous_outcome_check";
+ALTER TABLE "bowel_cancer_screening_fits" DROP CONSTRAINT IF EXISTS "bowel_cancer_screening_fits_recall_interval_check";
+ALTER TABLE "bowel_cancer_screening_fits" DROP CONSTRAINT IF EXISTS "bowel_cancer_screening_fits_within_age_range_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

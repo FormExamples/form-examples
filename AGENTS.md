@@ -57,7 +57,7 @@ Mechanical fleet-wide maintenance tools for `back-end-with-axum/` crates
 `deny.toml`, `#![forbid(unsafe_code)]`, scaffold-bug fixups, the axa
 1.0.1 migration, MSRV, connection-pool sizing, `GET /api/openapi.yaml`,
 camelCase JSON, the axa 0.6 and RFC 9457 move, the rate limit and development-only
-seed) are catalogued in
+seed, the CHECK constraints) are catalogued in
 [`AGENTS/back-end-with-axum.md`](AGENTS/back-end-with-axum.md) §Fleet-wide
 maintenance tools, to keep this file under the repo's own 40KB target.
 Each has a `--check` CI drift detector, listed in the Verify block below.
@@ -247,6 +247,8 @@ bin/axum-forbid-unsafe --check --all # Axum #![forbid(unsafe_code)] crate-root d
 bin/generate-api-transcripts --check   # per-form api-create.http drift detector (336/356; slow, real server)
 bin/axum-axa-upgrade --check --all # axa 0.6 + RFC 9457 problem details drift detector
 bin/axum-axa-adopt --check --all   # per-client rate limit, development-only seed, Page::respond on every list
+bin/axum-check-constraints --check --all # sql/ CHECK constraints migrated into every crate, plus build.rs
+bin/axum-fixture-checks --check --all    # fixtures and test rows satisfy those CHECKs (needs Postgres)
 bin/axum-entity-routes --check --all # every SQL table reachable over HTTP
 bin/axum-soft-delete --check --all # DELETE marks and cascades; reads and updates skip deleted rows
 bin/axum-msrv-set --msrv 1.97 --check --all # Rust MSRV (rust-version) drift detector, per spec/rust-msrv-n-minus-2/

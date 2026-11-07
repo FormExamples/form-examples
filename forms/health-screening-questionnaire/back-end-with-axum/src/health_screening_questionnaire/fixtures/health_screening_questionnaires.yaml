@@ -46,9 +46,9 @@
   heightAsCm: 170.2
   weightAsKg: 70.4
   bodyMassIndex: 24.2
-  restingBloodPressureSystolic: 1
-  restingBloodPressureDiastolic: 1
-  restingHeartRate: 1
+  restingBloodPressureSystolic: 40
+  restingBloodPressureDiastolic: 20
+  restingHeartRate: 20
   jobRole: "Test jobRole"
   physicalDemandsOfRole: "sedentary"
   exposureNoise: "yes"

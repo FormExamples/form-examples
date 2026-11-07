@@ -73,8 +73,8 @@
   adrenalineAutoInjector: "yes"
   allergyNotes: "Test allergyNotes"
   bloodsSampleDate: "1990-01-01"
-  haemoglobinGPerL: 1.0
-  meanCellVolumeFl: 1.0
+  haemoglobinGPerL: 20
+  meanCellVolumeFl: 40
   ferritinUgPerL: 1.0
   transferrinSaturationPercent: 1.0
   vitaminB12NgPerL: 1.0
@@ -91,7 +91,7 @@
   anaemiaNotes: "Test anaemiaNotes"
   diabetesType: "none"
   diabetesDurationYears: 1.0
-  hba1cMmolPerMol: 1.0
+  hba1cMmolPerMol: 10
   hba1cSampleDate: "1990-01-01"
   capillaryGlucoseMmolPerL: 1.0
   diabetesTreatment: "diet-only"
@@ -165,13 +165,13 @@
   livingSituation: "alone"
   carePackage: "none"
   frailtyNotes: "Test frailtyNotes"
-  systolicBp: 1
-  diastolicBp: 1
-  heartRate: 1
+  systolicBp: 50
+  diastolicBp: 20
+  heartRate: 20
   heartRhythm: "sinus"
   murmurPresent: "yes"
   exerciseTolerance: "good"
-  ejectionFractionPercent: 1
+  ejectionFractionPercent: 5
   echoDate: "1990-01-01"
   asthmaControl: "none"
   copdControl: "none"
@@ -181,7 +181,7 @@
   stopBangScore: 1
   sleepApnoeaDiagnosis: "yes"
   cpapUse: "yes"
-  oxygenSaturationPercent: 1.0
+  oxygenSaturationPercent: 50
   cardiorespiratoryNotes: "Test cardiorespiratoryNotes"
   anxietyLevel: "none"
   depressionScreen: "negative"

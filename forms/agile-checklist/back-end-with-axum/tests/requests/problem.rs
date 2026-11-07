@@ -101,3 +101,28 @@ async fn the_middleware_cannot_escape_it() {
     assert_eq!(response.header("content-type"), "application/problem+json");
     assert_eq!(response.header("content-encoding"), "gzip");
 }
+
+/// The database refuses a value its CHECK constraint does not list, and axa answers
+/// the caller with `422`, naming neither the value nor the field. The detail is the
+/// database's refusal, not a body that failed to parse.
+#[tokio::test]
+#[serial]
+async fn a_value_outside_a_check_is_unprocessable() {
+    request::<App, _, _>(|request, ctx| async move {
+        App::seed(&ctx).await.unwrap();
+        let refused = serde_json::json!({
+            "fullName": "Test fullName",
+            "email": "test.patient@example.com",
+            "role": "not-a-listed-value",
+            "teamName": "Test teamName",
+            "organisationName": "Test organisationName",
+            "yearsInAgile": 1
+        });
+        let response = request.post("/api/respondents").json(&refused).await;
+        let (body, text) = problem!(response, 422);
+        assert_eq!(body["code"], "unprocessable_entity");
+        assert_eq!(body["detail"], "A value is outside what this field allows");
+        assert!(!text.contains("not-a-listed-value"));
+    })
+    .await;
+}

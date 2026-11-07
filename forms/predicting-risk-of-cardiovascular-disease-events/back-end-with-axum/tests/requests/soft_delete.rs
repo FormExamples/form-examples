@@ -22,7 +22,7 @@ async fn delete_hides_the_row_and_keeps_it() {
                 .unwrap();
         let row2: Uuid = sqlx::query_scalar(
             "INSERT INTO grades (assessment_id, risk_category, ten_year_risk_percent, \
-            thirty_year_risk_percent) VALUES ($1, '', 0, 0) RETURNING id",
+            thirty_year_risk_percent) VALUES ($1, 'draft', 0, 0) RETURNING id",
         )
         .bind(row1)
         .fetch_one(&ctx.db)
@@ -30,7 +30,7 @@ async fn delete_hides_the_row_and_keeps_it() {
         .unwrap();
         let row3: Uuid = sqlx::query_scalar(
             "INSERT INTO grading_fired_rules (grade_id, rule_category, rule_description, \
-            rule_risk_level) VALUES ($1, '', '', '') RETURNING id",
+            rule_risk_level) VALUES ($1, '', '', 'high') RETURNING id",
         )
         .bind(row2)
         .fetch_one(&ctx.db)

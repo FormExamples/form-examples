@@ -1,0 +1,14 @@
+ALTER TABLE "grading_additional_flags" DROP CONSTRAINT IF EXISTS "grading_additional_flags_priority_check";
+ALTER TABLE "grading_fired_rules" DROP CONSTRAINT IF EXISTS "grading_fired_rules_severity_level_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_sleep_quality_category_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_psqi_component7_daytime_dysfunction_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_psqi_component6_sleep_medication_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_psqi_component5_sleep_disturbances_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_psqi_component4_sleep_efficiency_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_psqi_component3_sleep_duration_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_psqi_component2_sleep_latency_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_psqi_component1_subjective_quality_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_psqi_global_score_check";
+ALTER TABLE "assessments" DROP CONSTRAINT IF EXISTS "assessments_status_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";

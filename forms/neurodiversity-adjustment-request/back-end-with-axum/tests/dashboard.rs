@@ -63,7 +63,7 @@ async fn the_dashboard_pairs_each_request_with_its_own_grade() {
             "INSERT INTO neurodiversity_adjustment_request_grades \
             (neurodiversity_adjustment_request_id, eligibility_band, impact_band, \
             priority_tier, target_timeframe, recommendation, manager_notes) VALUES ($1, \
-            'likely', '', '', '', '', '')",
+            'likely-covered', '', '', '', '', '')",
         )
         .bind(graded)
         .execute(&ctx.db)
@@ -78,7 +78,7 @@ async fn the_dashboard_pairs_each_request_with_its_own_grade() {
         for row in &rows {
             let id: Uuid = row["request"]["id"].as_str().unwrap().parse().unwrap();
             if id == graded {
-                assert_eq!(row["grade"]["eligibilityBand"], "likely");
+                assert_eq!(row["grade"]["eligibilityBand"], "likely-covered");
             } else {
                 assert_eq!(id, ungraded);
                 assert!(row["grade"].is_null(), "{row}");

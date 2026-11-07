@@ -1,0 +1,16 @@
+ALTER TABLE "curb_65_pneumonia_severity_score_grade_flags" DROP CONSTRAINT IF EXISTS "curb_65_pneumonia_severity_score_grade_flags_priority_check";
+ALTER TABLE "curb_65_pneumonia_severity_score_grade_flags" DROP CONSTRAINT IF EXISTS "curb_65_pneumonia_severity_score_grade_flags_category_check";
+ALTER TABLE "curb_65_pneumonia_severity_score_grade_rules" DROP CONSTRAINT IF EXISTS "curb_65_pneumonia_severity_score_grade_rules_criterion_check";
+ALTER TABLE "curb_65_pneumonia_severity_score_grades" DROP CONSTRAINT IF EXISTS "curb_65_pneumonia_severity_score_grades_risk_band_check";
+ALTER TABLE "curb_65_pneumonia_severity_score_grades" DROP CONSTRAINT IF EXISTS "curb_65_pneumonia_severity_score_grades_score_variant_check";
+ALTER TABLE "curb_65_pneumonia_severity_scores" DROP CONSTRAINT IF EXISTS "curb_65_pneumonia_severity_scores_clinician_override_band_check";
+ALTER TABLE "curb_65_pneumonia_severity_scores" DROP CONSTRAINT IF EXISTS "curb_65_pneumonia_severity_scores_multilobar_changes_check";
+ALTER TABLE "curb_65_pneumonia_severity_scores" DROP CONSTRAINT IF EXISTS "curb_65_pneumonia_severity_scores_significant_comorbidity_check";
+ALTER TABLE "curb_65_pneumonia_severity_scores" DROP CONSTRAINT IF EXISTS "curb_65_pneumonia_severity_scores_urea_measured_check";
+ALTER TABLE "curb_65_pneumonia_severity_scores" DROP CONSTRAINT IF EXISTS "curb_65_pneumonia_severity_scores_confusion_present_check";
+ALTER TABLE "curb_65_pneumonia_severity_scores" DROP CONSTRAINT IF EXISTS "curb_65_pneumonia_severity_scores_sex_check";
+ALTER TABLE "curb_65_pneumonia_severity_scores" DROP CONSTRAINT IF EXISTS "curb_65_pneumonia_severity_scores_care_setting_check";
+ALTER TABLE "curb_65_pneumonia_severity_scores" DROP CONSTRAINT IF EXISTS "curb_65_pneumonia_severity_scores_clinician_role_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

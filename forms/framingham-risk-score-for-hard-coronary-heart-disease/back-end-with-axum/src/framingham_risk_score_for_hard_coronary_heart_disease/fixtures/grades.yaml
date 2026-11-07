@@ -3,6 +3,6 @@
   id: "00000000-0000-4000-8000-000000099bf9"
   deletedAt: null
   tenYearRiskPercent: 1.0
-  riskCategory: "Test riskCategory"
+  riskCategory: "low"
   gradedAt: "2026-01-01T00:00:00Z"
   assessmentId: "00000000-0000-4000-8000-0000000ef7b7"

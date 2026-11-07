@@ -1,0 +1,14 @@
+ALTER TABLE "grading_additional_flags" DROP CONSTRAINT IF EXISTS "grading_additional_flags_priority_check";
+ALTER TABLE "grading_fired_rules" DROP CONSTRAINT IF EXISTS "grading_fired_rules_severity_level_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_urogenital_symptom_score_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_pelvic_symptom_score_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_menstrual_domain_score_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_total_symptom_score_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_severity_level_check";
+ALTER TABLE "assessment_current_medications" DROP CONSTRAINT IF EXISTS "assessment_current_medications_hormone_therapy_check";
+ALTER TABLE "assessment_current_medications" DROP CONSTRAINT IF EXISTS "assessment_current_medications_takes_herbal_supplements_check";
+ALTER TABLE "assessment_current_medications" DROP CONSTRAINT IF EXISTS "assessment_current_medications_takes_over_the_counter_check";
+ALTER TABLE "assessment_current_medications" DROP CONSTRAINT IF EXISTS "assessment_current_medications_takes_regular_medications_check";
+ALTER TABLE "assessments" DROP CONSTRAINT IF EXISTS "assessments_status_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";

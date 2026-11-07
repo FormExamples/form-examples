@@ -46,7 +46,7 @@
   diastolicBloodPressure: 1
   pulseRate: 1
   acvpu: "alert"
-  temperatureCelsius: "1.0"
+  temperatureCelsius: 20
   news2Total: 1
   news2DerivedTotal: 1
   news2Trend: "improving"

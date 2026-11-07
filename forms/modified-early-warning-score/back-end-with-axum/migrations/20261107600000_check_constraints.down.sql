@@ -1,0 +1,12 @@
+ALTER TABLE "modified_early_warning_score_grade_flags" DROP CONSTRAINT IF EXISTS "modified_early_warning_score_grade_flags_priority_check";
+ALTER TABLE "modified_early_warning_score_grade_flags" DROP CONSTRAINT IF EXISTS "modified_early_warning_score_grade_flags_category_check";
+ALTER TABLE "modified_early_warning_score_grade_rules" DROP CONSTRAINT IF EXISTS "modified_early_warning_score_grade_rules_band_check";
+ALTER TABLE "modified_early_warning_score_grade_rules" DROP CONSTRAINT IF EXISTS "modified_early_warning_score_grade_rules_instrument_check";
+ALTER TABLE "modified_early_warning_score_grades" DROP CONSTRAINT IF EXISTS "modified_early_warning_score_grades_risk_band_check";
+ALTER TABLE "modified_early_warning_score_grades" DROP CONSTRAINT IF EXISTS "modified_early_warning_score_grades_single_parameter_t_f298e4b7";
+ALTER TABLE "modified_early_warning_scores" DROP CONSTRAINT IF EXISTS "modified_early_warning_scores_consciousness_avpu_check";
+ALTER TABLE "modified_early_warning_scores" DROP CONSTRAINT IF EXISTS "modified_early_warning_scores_care_setting_check";
+ALTER TABLE "modified_early_warning_scores" DROP CONSTRAINT IF EXISTS "modified_early_warning_scores_status_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

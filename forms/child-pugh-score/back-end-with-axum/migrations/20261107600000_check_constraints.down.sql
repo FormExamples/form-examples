@@ -1,0 +1,15 @@
+ALTER TABLE "child_pugh_score_grade_flags" DROP CONSTRAINT IF EXISTS "child_pugh_score_grade_flags_priority_check";
+ALTER TABLE "child_pugh_score_grade_flags" DROP CONSTRAINT IF EXISTS "child_pugh_score_grade_flags_category_check";
+ALTER TABLE "child_pugh_score_grade_rules" DROP CONSTRAINT IF EXISTS "child_pugh_score_grade_rules_parameter_check";
+ALTER TABLE "child_pugh_score_grades" DROP CONSTRAINT IF EXISTS "child_pugh_score_grades_surgical_risk_check";
+ALTER TABLE "child_pugh_score_grades" DROP CONSTRAINT IF EXISTS "child_pugh_score_grades_child_pugh_class_check";
+ALTER TABLE "child_pugh_scores" DROP CONSTRAINT IF EXISTS "child_pugh_scores_hepatic_encephalopathy_check";
+ALTER TABLE "child_pugh_scores" DROP CONSTRAINT IF EXISTS "child_pugh_scores_ascites_check";
+ALTER TABLE "child_pugh_scores" DROP CONSTRAINT IF EXISTS "child_pugh_scores_sex_check";
+ALTER TABLE "child_pugh_scores" DROP CONSTRAINT IF EXISTS "child_pugh_scores_age_band_check";
+ALTER TABLE "child_pugh_scores" DROP CONSTRAINT IF EXISTS "child_pugh_scores_aetiology_check";
+ALTER TABLE "child_pugh_scores" DROP CONSTRAINT IF EXISTS "child_pugh_scores_care_setting_check";
+ALTER TABLE "child_pugh_scores" DROP CONSTRAINT IF EXISTS "child_pugh_scores_clinician_role_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

@@ -1,0 +1,12 @@
+ALTER TABLE "grading_additional_flags" DROP CONSTRAINT IF EXISTS "grading_additional_flags_priority_check";
+ALTER TABLE "grading_fired_rules" DROP CONSTRAINT IF EXISTS "grading_fired_rules_severity_check";
+ALTER TABLE "grading_fired_rules" DROP CONSTRAINT IF EXISTS "grading_fired_rules_subscale_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_stress_severity_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_stress_score_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_anxiety_severity_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_anxiety_score_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_depression_severity_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_depression_score_check";
+ALTER TABLE "assessments" DROP CONSTRAINT IF EXISTS "assessments_status_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";

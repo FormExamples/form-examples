@@ -9,7 +9,7 @@
   serviceName: "Test serviceName"
   setting: "outpatient-clinic"
   appointmentType: "initial"
-  plannedDurationMinutes: 1
+  plannedDurationMinutes: 5
   interpreterRequired: "yes"
   interpreterLanguage: "Test interpreterLanguage"
   referralSource: "general-practitioner"
@@ -56,12 +56,12 @@
   heightAsCm: 170.2
   weightAsKg: 70.4
   bodyMassIndex: 24.2
-  midUpperArmCircumferenceAsCm: 1.0
-  calfCircumferenceAsCm: 1.0
+  midUpperArmCircumferenceAsCm: 8
+  calfCircumferenceAsCm: 10
   waistAsCm: 85.0
   usualWeightAsKg: 70.4
-  weight3MonthsAgoAsKg: 1.0
-  weight6MonthsAgoAsKg: 1.0
+  weight3MonthsAgoAsKg: 15
+  weight6MonthsAgoAsKg: 15
   weightLossPercent: 1.0
   weightLossIsIntentional: "yes"
   weightTrend: "losing"

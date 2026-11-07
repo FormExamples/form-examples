@@ -21,7 +21,7 @@
   pulse: 1
   consciousnessAcvpu: "A"
   temperature: 1.0
-  glasgowComaScale: 1
+  glasgowComaScale: 3
   painScore: 1
   airwayThreat: "yes"
   breathingInadequate: "yes"

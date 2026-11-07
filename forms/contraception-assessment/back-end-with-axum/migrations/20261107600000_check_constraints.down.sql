@@ -1,0 +1,17 @@
+ALTER TABLE "grading_additional_flags" DROP CONSTRAINT IF EXISTS "grading_additional_flags_priority_check";
+ALTER TABLE "grading_fired_rules" DROP CONSTRAINT IF EXISTS "grading_fired_rules_severity_level_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_ukmec_diaphragm_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_ukmec_condom_female_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_ukmec_condom_male_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_ukmec_lng_ius_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_ukmec_cu_iud_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_ukmec_implant_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_ukmec_injection_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_ukmec_ring_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_ukmec_patch_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_ukmec_pop_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_ukmec_cocp_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_overall_highest_ukmec_category_check";
+ALTER TABLE "assessments" DROP CONSTRAINT IF EXISTS "assessments_status_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";

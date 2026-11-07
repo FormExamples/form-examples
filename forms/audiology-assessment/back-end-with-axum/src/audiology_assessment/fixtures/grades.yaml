@@ -5,8 +5,8 @@
   rightPtaDb: 1.0
   leftPtaDb: 1.0
   betterEarPtaDb: 1.0
-  rightHearingGrade: "Test rightHearingGrade"
-  leftHearingGrade: "Test leftHearingGrade"
-  overallHearingGrade: "Test overallHearingGrade"
+  rightHearingGrade: "normal"
+  leftHearingGrade: "normal"
+  overallHearingGrade: "normal"
   gradedAt: "2026-01-01T00:00:00Z"
   assessmentId: "00000000-0000-4000-8000-00000008f9a4"

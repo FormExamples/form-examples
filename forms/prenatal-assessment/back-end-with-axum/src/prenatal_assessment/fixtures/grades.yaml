@@ -2,10 +2,10 @@
   updatedAt: "2026-01-01T00:00:00Z"
   id: "00000000-0000-4000-8000-00000006899f"
   deletedAt: null
-  riskLevel: "Test riskLevel"
+  riskLevel: "low"
   riskScore: 1
-  obstetricRisk: "Test obstetricRisk"
-  medicalRisk: "Test medicalRisk"
-  mentalHealthRisk: "Test mentalHealthRisk"
+  obstetricRisk: "low"
+  medicalRisk: "low"
+  mentalHealthRisk: "low"
   gradedAt: "2026-01-01T00:00:00Z"
   assessmentId: "00000000-0000-4000-8000-00000004dc27"

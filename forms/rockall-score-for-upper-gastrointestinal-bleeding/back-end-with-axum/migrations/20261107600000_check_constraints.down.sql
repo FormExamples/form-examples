@@ -1,0 +1,14 @@
+ALTER TABLE "rockall_score_for_upper_gastrointestinal_bleeding_grade_flags" DROP CONSTRAINT IF EXISTS "rockall_score_for_upper_gastrointestinal_bleeding_grad_5d122045";
+ALTER TABLE "rockall_score_for_upper_gastrointestinal_bleeding_grade_flags" DROP CONSTRAINT IF EXISTS "rockall_score_for_upper_gastrointestinal_bleeding_grad_64f607f1";
+ALTER TABLE "rockall_score_for_upper_gastrointestinal_bleeding_grade_rules" DROP CONSTRAINT IF EXISTS "rockall_score_for_upper_gastrointestinal_bleeding_grad_6f57ce25";
+ALTER TABLE "rockall_score_for_upper_gastrointestinal_bleeding_grades" DROP CONSTRAINT IF EXISTS "rockall_score_for_upper_gastrointestinal_bleeding_grad_502b3c3a";
+ALTER TABLE "rockall_score_for_upper_gastrointestinal_bleedings" DROP CONSTRAINT IF EXISTS "rockall_score_for_upper_gastrointestinal_bleedings_sti_f631e22d";
+ALTER TABLE "rockall_score_for_upper_gastrointestinal_bleedings" DROP CONSTRAINT IF EXISTS "rockall_score_for_upper_gastrointestinal_bleedings_dia_5499b540";
+ALTER TABLE "rockall_score_for_upper_gastrointestinal_bleedings" DROP CONSTRAINT IF EXISTS "rockall_score_for_upper_gastrointestinal_bleedings_end_92af4eed";
+ALTER TABLE "rockall_score_for_upper_gastrointestinal_bleedings" DROP CONSTRAINT IF EXISTS "rockall_score_for_upper_gastrointestinal_bleedings_com_c81b456e";
+ALTER TABLE "rockall_score_for_upper_gastrointestinal_bleedings" DROP CONSTRAINT IF EXISTS "rockall_score_for_upper_gastrointestinal_bleedings_sex_check";
+ALTER TABLE "rockall_score_for_upper_gastrointestinal_bleedings" DROP CONSTRAINT IF EXISTS "rockall_score_for_upper_gastrointestinal_bleedings_car_c65f6c66";
+ALTER TABLE "rockall_score_for_upper_gastrointestinal_bleedings" DROP CONSTRAINT IF EXISTS "rockall_score_for_upper_gastrointestinal_bleedings_cli_e6b4d99b";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

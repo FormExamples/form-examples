@@ -6,5 +6,5 @@
   europeanUnionName: "Test europeanUnionName"
   unitedStatesName: "Test unitedStatesName"
   cosmeticName: "Test cosmeticName"
-  kind: "Test kind"
+  kind: "food"
   isRegulatedFoodAllergen: true

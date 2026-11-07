@@ -96,7 +96,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
         '422':
-          description: The body does not match the schema
+          description: The body does not match the schema, or a value is outside what its field allows
           content:
             application/problem+json:
               schema:
@@ -176,7 +176,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
         '422':
-          description: The body does not match the schema
+          description: The body does not match the schema, or a value is outside what its field allows
           content:
             application/problem+json:
               schema:

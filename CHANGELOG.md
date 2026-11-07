@@ -26,6 +26,12 @@ for them.
   minute, then answers `429` with `Retry-After`, through `axa-ratelimit`. Health probes
   are never limited. Behind a proxy, set `TRUSTED_PROXIES`. `openapi.yaml` publishes the
   `429` on every operation. See ADR-11.
+- **The database enforces the CHECK constraints in `sql/`.** No crate's migrations had
+  them, so any value was stored: `"sex": "banana"` answered 200. Each crate now migrates
+  its 7,781 CHECKs, `NOT VALID` so that existing rows still migrate, and 684 fixture
+  and test values that broke them were given allowed ones. A value a CHECK does not
+  list now answers `422` `unprocessable_entity`, through axa 0.6.2. A crate also gains
+  `build.rs`, so that a new migration reaches the next build. See ADR-12.
 
 ### Changed
 
@@ -75,6 +81,9 @@ for them.
 
 ### Fixed
 
+- The `inpatient-clinical-note` grading tests recorded a consent status of
+  `capacitous-consent`, which neither `sql/` nor either front-end offers. They use
+  `consented`.
 - `task seed` loaded fixtures in production. It now runs only in development and test.
 - The `neurodiversity-adjustment-request` dashboard showed one arbitrary grade against
   every request, because its lookup did not name the request. Each request now shows its

@@ -16,7 +16,7 @@
   glucose: "negative"
   ketones: "negative"
   bilirubin: "negative"
-  ph: 1.0
+  ph: 4
   specificGravity: 1.0
   redCellCount: "Test redCellCount"
   whiteCellCount: "Test whiteCellCount"

@@ -1,0 +1,16 @@
+ALTER TABLE "expense_reimbursement_grade_flags" DROP CONSTRAINT IF EXISTS "expense_reimbursement_grade_flags_priority_check";
+ALTER TABLE "expense_reimbursement_grade_flags" DROP CONSTRAINT IF EXISTS "expense_reimbursement_grade_flags_category_check";
+ALTER TABLE "expense_reimbursement_grade_rules" DROP CONSTRAINT IF EXISTS "expense_reimbursement_grade_rules_axis_check";
+ALTER TABLE "expense_reimbursement_grades" DROP CONSTRAINT IF EXISTS "expense_reimbursement_grades_recommendation_check";
+ALTER TABLE "expense_reimbursement_grades" DROP CONSTRAINT IF EXISTS "expense_reimbursement_grades_approval_tier_check";
+ALTER TABLE "expense_reimbursement_grades" DROP CONSTRAINT IF EXISTS "expense_reimbursement_grades_completeness_percent_check";
+ALTER TABLE "expense_reimbursement_grades" DROP CONSTRAINT IF EXISTS "expense_reimbursement_grades_compliance_band_check";
+ALTER TABLE "expense_reimbursement_items" DROP CONSTRAINT IF EXISTS "expense_reimbursement_items_mileage_distance_miles_check";
+ALTER TABLE "expense_reimbursement_items" DROP CONSTRAINT IF EXISTS "expense_reimbursement_items_payment_method_check";
+ALTER TABLE "expense_reimbursement_items" DROP CONSTRAINT IF EXISTS "expense_reimbursement_items_vat_amount_check";
+ALTER TABLE "expense_reimbursement_items" DROP CONSTRAINT IF EXISTS "expense_reimbursement_items_amount_check";
+ALTER TABLE "expense_reimbursement_items" DROP CONSTRAINT IF EXISTS "expense_reimbursement_items_category_check";
+ALTER TABLE "expense_reimbursement_items" DROP CONSTRAINT IF EXISTS "expense_reimbursement_items_line_number_check";
+ALTER TABLE "expense_reimbursements" DROP CONSTRAINT IF EXISTS "expense_reimbursements_repayment_method_check";
+ALTER TABLE "expense_reimbursements" DROP CONSTRAINT IF EXISTS "expense_reimbursements_status_check";
+ALTER TABLE "managers" DROP CONSTRAINT IF EXISTS "managers_role_check";
