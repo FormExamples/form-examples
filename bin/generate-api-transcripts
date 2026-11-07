@@ -8,10 +8,9 @@ request/response against the seeded crate, not a reimplemented/faked
 one — same fidelity rule this repo already applies to CSV/TSV export
 samples (bin/generate-export-samples drives the real wizard rather than
 reimplementing its serialiser). So this tool actually runs each crate:
-create/reset its dev database, migrate, seed
-(bin/loco-seed-data-rollout's fixtures), start the real server, POST a
-real request, GET it back, capture both real HTTP transcripts, stop the
-server.
+drop and recreate its database, migrate it with the axa CLI (`db
+migrate`), start the real server (`start`), POST a real request, GET it
+back, capture both real HTTP transcripts, stop the server.
 
 Reuses bin/loco-integration-test-rollout's own field-parsing and
 value-synthesis (copied in, not imported, matching this repo's
@@ -28,19 +27,25 @@ hand-named `RequestParams` on its main table) is SKIPped, not guessed
 at -- recording a meaningful transcript for those needs its own,
 per-crate scoping pass, not a generic patient-table body.
 
-This is SLOW: each crate needs its own migrate + seed + a real `cargo
-run ... start` (a fresh compile if not already built) + curl + shutdown
+This is SLOW: each crate needs its own migrate + a real `cargo run ...
+start` (a fresh compile if not already built) + a POST/GET + shutdown
 -- expect tens of seconds per crate even warm, not milliseconds. Not a
-CI gate; a manual, occasional generator.
+CI gate; a manual, occasional generator. `--jobs N` runs N crates at
+once, each on its own port and database.
 
 Usage:
     bin/generate-api-transcripts [--check] [<slug> ...]
 
 --check reports which forms would change (by re-running the capture and
-diffing), exits non-zero if any are pending. Default: capture and
-write. Requires a Postgres reachable at the crate's own configured
-`database.uri` (see CONTRIBUTING.md's scratch-Postgres recipe) with a
-role/database it can create.
+diffing with ids and timestamps masked, since a fresh row always gets
+new ones), exits non-zero if any are pending. Default: capture and
+write. The transcript always shows the crate's default port, whatever
+port the run used.
+
+Requires a Postgres where PGUSER can create databases, reached through
+PGHOST, PGPORT and PGUSER (default 127.0.0.1, 5432, postgres; see
+CONTRIBUTING.md's scratch-Postgres recipe). Each crate gets a fresh
+database named after its `defaults()` database plus `_transcript`.
 """
 
 import argparse
@@ -61,7 +66,12 @@ PARAMS_BLOCK_RE = re.compile(r"pub struct Params\s*\{(.*?)\n\s*\}", re.DOTALL)
 FIELD_RE = re.compile(r"pub\s+(\w+)\s*:\s*([^,\n]+?)\s*,?\s*$", re.MULTILINE)
 CHECK_ENUM_RE = re.compile(r"CHECK\s*\(\s*(\w+)\s+IN\s*\(([^)]+)\)\s*\)", re.IGNORECASE)
 PREFIX_RE = re.compile(r'\.prefix\("api/([^"/]+)/?"\)')
-PORT_RE = re.compile(r"^\s*port:\s*(\d+)", re.MULTILINE)
+PORT_RE = re.compile(r"^\s*port:\s*(\d+),", re.MULTILINE)
+DATABASE_RE = re.compile(r'^\s*database:\s*"([\w-]+)",', re.MULTILINE)
+VOLATILE_RE = re.compile(
+    r'("(?:id|createdAt|updatedAt)": )"[^"]*"'
+    r'|(GET http://localhost:\d+/api/[\w-]+/)[0-9a-f-]{36}'
+)
 BIN_NAME_RE = re.compile(r'name\s*=\s*"([\w-]+)"')
 
 
@@ -172,8 +182,13 @@ def build_patient_body(controller_text: str, sql_text: str) -> dict | None:
     return body if body else None
 
 
-def run(cmd: list[str], cwd: Path, timeout: int = 120) -> subprocess.CompletedProcess:
-    return subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, timeout=timeout)
+def run(cmd: list[str], cwd: Path, env: dict, timeout: int = 120) -> subprocess.CompletedProcess:
+    return subprocess.run(cmd, cwd=cwd, env=env, capture_output=True, text=True, timeout=timeout)
+
+
+def last_line(text: str) -> str:
+    lines = [l for l in (text or "").strip().splitlines() if l.strip()]
+    return lines[-1] if lines else "unknown"
 
 
 def find_bin_name(cargo_toml: str) -> str | None:
@@ -181,24 +196,42 @@ def find_bin_name(cargo_toml: str) -> str | None:
     return m.group(1) if m else None
 
 
-DB_URI_RE = re.compile(r"postgres://([\w-]+):([\w-]+)@([\w.]+):(\d+)/([\w-]+)")
+def pg_env() -> dict:
+    return {
+        "host": os.environ.get("PGHOST", "127.0.0.1"),
+        "port": os.environ.get("PGPORT", "5432"),
+        "user": os.environ.get("PGUSER", "postgres"),
+        "password": os.environ.get("PGPASSWORD", ""),
+    }
 
 
-def ensure_database(config_text: str) -> str | None:
-    """Parses the plain (non-templated) postgres://user:pass@host:port/db
-    URI out of development.yaml and creates the role/database if they
-    don't exist yet. Returns an error string, or None on success."""
-    m = DB_URI_RE.search(config_text)
-    if not m:
-        return "no plain postgres:// URI found in development.yaml (templated config?)"
-    user, password, host, port, dbname = m.groups()
-    psql = ["psql", "-h", host, "-p", port, "-U", "postgres", "-d", "postgres", "-v", "ON_ERROR_STOP=0", "-c"]
-    env = {**os.environ, "PGPASSWORD": "postgres"}
-    subprocess.run(psql + [f"CREATE ROLE {user} WITH LOGIN SUPERUSER PASSWORD '{password}';"],
-                    capture_output=True, text=True, env=env)
-    subprocess.run(psql + [f"CREATE DATABASE {dbname};"],
-                    capture_output=True, text=True, env=env)
+def fresh_database(name: str) -> str | None:
+    """Drops and recreates database `name`, so every capture starts from
+    an empty schema. Returns an error string, or None on success."""
+    pg = pg_env()
+    psql = ["psql", "-h", pg["host"], "-p", pg["port"], "-U", pg["user"], "-d", "postgres",
+            "-v", "ON_ERROR_STOP=1", "-c"]
+    for sql in (f'DROP DATABASE IF EXISTS "{name}" WITH (FORCE);', f'CREATE DATABASE "{name}";'):
+        r = subprocess.run(psql + [sql], capture_output=True, text=True)
+        if r.returncode != 0:
+            return f"cannot create database: {r.stderr.strip().splitlines()[-1] if r.stderr.strip() else 'psql failed'}"
     return None
+
+
+def database_url(name: str) -> str:
+    pg = pg_env()
+    auth = pg["user"] + (f":{pg['password']}" if pg["password"] else "")
+    return f"postgres://{auth}@{pg['host']}:{pg['port']}/{name}"
+
+
+def fresh_database_drop(name: str) -> None:
+    pg = pg_env()
+    subprocess.run(["psql", "-h", pg["host"], "-p", pg["port"], "-U", pg["user"], "-d", "postgres",
+                    "-c", f'DROP DATABASE IF EXISTS "{name}" WITH (FORCE);'], capture_output=True, text=True)
+
+
+def mask(text: str) -> str:
+    return VOLATILE_RE.sub(lambda m: (m.group(1) + '"…"') if m.group(1) else (m.group(2) + "…"), text)
 
 
 def wait_for_port(port: int, timeout: float = 20.0) -> bool:
@@ -207,7 +240,7 @@ def wait_for_port(port: int, timeout: float = 20.0) -> bool:
     deadline = time.time() + timeout
     while time.time() < deadline:
         try:
-            with socket.create_connection(("localhost", port), timeout=1):
+            with socket.create_connection(("127.0.0.1", port), timeout=1):
                 return True
         except OSError:
             time.sleep(0.5)
@@ -252,7 +285,7 @@ def render_transcript(slug: str, base_url: str, path: str, req_body: dict, post_
     )
 
 
-def capture_crate(slug: str, write: bool) -> tuple[str, str]:
+def capture_crate(slug: str, write: bool, run_port: int) -> tuple[str, str]:
     loco_dir = FORMS_DIR / slug / "back-end-with-axum"
     src_dirs = [d for d in loco_dir.glob("src/*/") if (d / "controllers" / "mod.rs").is_file()]
     if not src_dirs:
@@ -276,56 +309,58 @@ def capture_crate(slug: str, write: bool) -> tuple[str, str]:
         return "SKIP", "no .prefix(\"api/...\") found in controllers/patient.rs"
     path = f"/api/{m_prefix.group(1)}/"
 
-    config = (loco_dir / "config" / "development.yaml").read_text()
-    m_port = PORT_RE.search(config)
+    app_rs = (src_dir / "app.rs").read_text()
+    m_port = PORT_RE.search(app_rs)
     port = int(m_port.group(1)) if m_port else 5150
+    m_db = DATABASE_RE.search(app_rs)
+    if not m_db:
+        return "SKIP", "no database name in app.rs defaults()"
+    dbname = f"{m_db.group(1)}_transcript"
 
     cargo_toml = (loco_dir / "Cargo.toml").read_text()
     bin_name = find_bin_name(cargo_toml)
     if not bin_name:
         return "SKIP", "no [[bin]] in Cargo.toml"
 
-    db_err = ensure_database(config)
+    db_err = fresh_database(dbname)
     if db_err:
         return "SKIP", db_err
+    env = {**os.environ, "APP_ENV": "development", "DATABASE_URL": database_url(dbname)}
 
-    # migrate + seed (idempotent: automigrate mode + a fresh scratch DB).
-    migrate = run(["cargo", "run", "--bin", bin_name, "--", "db", "migrate"], loco_dir, timeout=180)
+    migrate = run(["cargo", "run", "-q", "--bin", bin_name, "--", "db", "migrate"], loco_dir, env, timeout=900)
     if migrate.returncode != 0:
-        return "SKIP", f"db migrate failed: {migrate.stderr.strip().splitlines()[-1] if migrate.stderr else 'unknown'}"
-    seed = run(["cargo", "run", "--bin", bin_name, "--", "db", "seed", "--from", "src/fixtures"], loco_dir, timeout=180)
-    if seed.returncode != 0:
-        return "SKIP", f"db seed failed: {seed.stderr.strip().splitlines()[-1] if seed.stderr else 'unknown'}"
+        return "SKIP", f"db migrate failed: {last_line(migrate.stderr)}"
 
     proc = subprocess.Popen(
-        ["cargo", "run", "--bin", bin_name, "--", "start"],
-        cwd=loco_dir, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+        ["cargo", "run", "-q", "--bin", bin_name, "--", "start",
+         "--binding", "127.0.0.1", "--port", str(run_port)],
+        cwd=loco_dir, env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
     )
     try:
-        if not wait_for_port(port, timeout=60):
-            return "SKIP", f"server never listened on port {port}"
-        base_url = f"http://localhost:{port}"
-        # POST mounts at the bare prefix (no trailing slash: `.add("/",
-        # post(add))` under a prefix that already ends in "/" would
-        # double up); GET-by-id keeps the prefix's own trailing slash
-        # before the id. Verified live, not assumed from the route
-        # source alone -- a trailing-slash POST 404s on this fleet.
-        post_status, post_resp = http_json("POST", f"{base_url}{path.rstrip('/')}", body)
-        if post_status != 200 or not isinstance(post_resp, dict) or "id" not in post_resp:
-            return "SKIP", f"POST {path.rstrip('/')} did not return a created record (status {post_status})"
+        if not wait_for_port(run_port, timeout=120):
+            return "SKIP", f"server never listened on port {run_port}"
+        run_url = f"http://127.0.0.1:{run_port}"
+        # POST mounts at the bare prefix (no trailing slash); GET-by-id
+        # keeps the prefix's own trailing slash before the id.
+        post_status, post_resp = http_json("POST", f"{run_url}{path.rstrip('/')}", body)
+        if post_status not in (200, 201) or not isinstance(post_resp, dict) or "id" not in post_resp:
+            detail = post_resp.get("detail") if isinstance(post_resp, dict) else None
+            return "SKIP", f"POST {path.rstrip('/')} did not return a created record (status {post_status}{': ' + detail if detail else ''})"
         rid = post_resp["id"]
-        get_status, get_resp = http_json("GET", f"{base_url}{path}{rid}")
+        get_status, get_resp = http_json("GET", f"{run_url}{path}{rid}")
     finally:
         proc.terminate()
         try:
             proc.wait(timeout=10)
         except subprocess.TimeoutExpired:
             proc.kill()
+        fresh_database_drop(dbname)
 
+    base_url = f"http://localhost:{port}"
     transcript = render_transcript(slug, base_url, path, body, post_status, post_resp, get_status, get_resp)
     out_path = FORMS_DIR / slug / "examples" / "api-create.http"
     current = out_path.read_text() if out_path.is_file() else None
-    if current == transcript:
+    if current is not None and mask(current) == mask(transcript):
         return "unchanged", "already up to date"
     if write:
         out_path.write_text(transcript)
@@ -336,6 +371,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("slugs", nargs="*", help="form slugs (default: every eligible form)")
     parser.add_argument("--check", action="store_true", help="report drift; exit 1 if any pending; don't write")
+    parser.add_argument("--jobs", type=int, default=1, help="crates to capture at once (default 1)")
     args = parser.parse_args()
 
     if args.slugs:
@@ -344,9 +380,28 @@ def main() -> int:
         out = subprocess.run(["bin/forms-as-kebab-case"], cwd=REPO_ROOT, capture_output=True, text=True)
         slugs = [s.strip() for s in out.stdout.splitlines() if s.strip()]
 
+    import queue
+    from concurrent.futures import ThreadPoolExecutor
+
+    jobs = max(1, args.jobs)
+    ports: queue.Queue[int] = queue.Queue()
+    for n in range(jobs):
+        ports.put(15150 + n)
+
+    def capture(slug: str) -> tuple[str, str]:
+        port = ports.get()
+        try:
+            return capture_crate(slug, not args.check, port)
+        except Exception as e:  # one crate's failure must not stop the run
+            return "SKIP", f"{type(e).__name__}: {e}"
+        finally:
+            ports.put(port)
+
+    with ThreadPoolExecutor(max_workers=jobs) as pool:
+        results = list(pool.map(capture, slugs))
+
     changed, unchanged, skipped = [], 0, {}
-    for slug in slugs:
-        status, detail = capture_crate(slug, write=not args.check)
+    for slug, (status, detail) in zip(slugs, results):
         if status == "changed":
             changed.append(slug)
             print(f"  {slug}: {detail}")

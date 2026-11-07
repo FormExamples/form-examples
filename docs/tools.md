@@ -466,10 +466,9 @@ request/response against the seeded crate, not a reimplemented/faked
 one — same fidelity rule this repo already applies to CSV/TSV export
 samples (bin/generate-export-samples drives the real wizard rather than
 reimplementing its serialiser). So this tool actually runs each crate:
-create/reset its dev database, migrate, seed
-(bin/loco-seed-data-rollout's fixtures), start the real server, POST a
-real request, GET it back, capture both real HTTP transcripts, stop the
-server.
+drop and recreate its database, migrate it with the axa CLI (`db
+migrate`), start the real server (`start`), POST a real request, GET it
+back, capture both real HTTP transcripts, stop the server.
 
 Reuses bin/loco-integration-test-rollout's own field-parsing and
 value-synthesis (copied in, not imported, matching this repo's
@@ -486,19 +485,25 @@ hand-named `RequestParams` on its main table) is SKIPped, not guessed
 at -- recording a meaningful transcript for those needs its own,
 per-crate scoping pass, not a generic patient-table body.
 
-This is SLOW: each crate needs its own migrate + seed + a real `cargo
-run ... start` (a fresh compile if not already built) + curl + shutdown
+This is SLOW: each crate needs its own migrate + a real `cargo run ...
+start` (a fresh compile if not already built) + a POST/GET + shutdown
 -- expect tens of seconds per crate even warm, not milliseconds. Not a
-CI gate; a manual, occasional generator.
+CI gate; a manual, occasional generator. `--jobs N` runs N crates at
+once, each on its own port and database.
 
 Usage:
     bin/generate-api-transcripts [--check] [<slug> ...]
 
 --check reports which forms would change (by re-running the capture and
-diffing), exits non-zero if any are pending. Default: capture and
-write. Requires a Postgres reachable at the crate's own configured
-`database.uri` (see CONTRIBUTING.md's scratch-Postgres recipe) with a
-role/database it can create.
+diffing with ids and timestamps masked, since a fresh row always gets
+new ones), exits non-zero if any are pending. Default: capture and
+write. The transcript always shows the crate's default port, whatever
+port the run used.
+
+Requires a Postgres where PGUSER can create databases, reached through
+PGHOST, PGPORT and PGUSER (default 127.0.0.1, 5432, postgres; see
+CONTRIBUTING.md's scratch-Postgres recipe). Each crate gets a fresh
+database named after its `defaults()` database plus `_transcript`.
 ```
 
 <h2 id="generate-axum-deny-configpy"><code>bin/generate-axum-deny-config.py</code></h2>

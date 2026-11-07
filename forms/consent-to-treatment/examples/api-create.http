@@ -26,9 +26,9 @@ HTTP 200
 Content-Type: application/json
 
 {
-  "createdAt": "2026-09-12T13:58:14.961232Z",
-  "updatedAt": "2026-09-12T13:58:14.961232Z",
-  "id": 814748,
+  "createdAt": "2026-11-07T14:26:14.391475Z",
+  "updatedAt": "2026-11-07T14:26:14.391475Z",
+  "id": "5c0b4f39-8156-4af1-acb1-a6055c234279",
   "name": "Test Patient",
   "birthDate": "1990-01-01",
   "email": "test.patient@example.com",
@@ -47,15 +47,15 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:5150/api/patients/814748
+GET http://localhost:5150/api/patients/5c0b4f39-8156-4af1-acb1-a6055c234279
 
 HTTP 200
 Content-Type: application/json
 
 {
-  "createdAt": "2026-09-12T13:58:14.961232Z",
-  "updatedAt": "2026-09-12T13:58:14.961232Z",
-  "id": 814748,
+  "createdAt": "2026-11-07T14:26:14.391475Z",
+  "updatedAt": "2026-11-07T14:26:14.391475Z",
+  "id": "5c0b4f39-8156-4af1-acb1-a6055c234279",
   "name": "Test Patient",
   "birthDate": "1990-01-01",
   "email": "test.patient@example.com",
