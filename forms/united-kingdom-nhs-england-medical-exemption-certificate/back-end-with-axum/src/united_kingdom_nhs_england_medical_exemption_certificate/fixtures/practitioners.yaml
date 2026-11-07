@@ -10,7 +10,7 @@
   registrationNumber: "Test registrationNumber"
   practiceName: "Test practiceName"
   practiceCode: "Test practiceCode"
-  practitionerCode: "Test practitionerCode"
+  practitionerCode: "Test practitionerCod"
   postalAddressAsFullText: "10 Downing Street, London"
   countryAsIso31661Alpha2: "GB"
   postcode: "SW1A 2AA"

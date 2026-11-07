@@ -1,0 +1,4 @@
+ALTER TABLE "patient_room_readiness_checklists" DROP CONSTRAINT IF EXISTS "patient_room_readiness_checklists_inspector_email_length";
+ALTER TABLE "patient_room_readiness_checklists" DROP CONSTRAINT IF EXISTS "patient_room_readiness_checklists_inspector_name_length";
+ALTER TABLE "patient_room_readiness_checklists" DROP CONSTRAINT IF EXISTS "patient_room_readiness_checklists_room_name_or_number_length";
+ALTER TABLE "patient_room_readiness_checklists" DROP CONSTRAINT IF EXISTS "patient_room_readiness_checklists_building_name_or_num_512b3fc5";

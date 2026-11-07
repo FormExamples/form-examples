@@ -19,38 +19,29 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            maximum: 100000
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of ZaritBurdenInterview records
+          description: A page of ZaritBurdenInterview records, with no total
           headers:
-            x-total-count:
-              description: Rows there are in all
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
               schema:
-                type: integer
-            x-limit:
-              description: The limit applied
-              schema:
-                type: integer
-            x-offset:
-              description: The offset applied
-              schema:
-                type: integer
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/ZaritBurdenInterview"
-        "400":
-          description: The offset is past the maximum
+        "422":
+          description: The limit or the cursor is not valid
           content:
             application/problem+json:
               schema:
@@ -191,6 +182,51 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing ZaritBurdenInterview
+      operationId: replaceZaritBurdenInterview
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ZaritBurdenInterview"
+      responses:
+        "200":
+          description: The updated ZaritBurdenInterview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ZaritBurdenInterview"
+        "404":
+          description: ZaritBurdenInterview not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ZaritBurdenInterview
       operationId: deleteZaritBurdenInterview
@@ -265,7 +301,7 @@ components:
           format: uuid
           description: Foreign key to the care recipient being cared for (delete restricted).
         clinician_id:
-          type: string
+          type: [string, 'null']
           format: uuid
           description: Foreign key to the administering practitioner (optional; delete restricted).
         practitioner_name:
@@ -283,7 +319,7 @@ components:
             - ""
           description: "Role of the administering practitioner: clinician, nurse, social-care, carer-support, or other."
         assessed_at:
-          type: string
+          type: [string, 'null']
           format: date-time
           description: Date and time the assessment was performed.
         care_setting:
@@ -324,7 +360,7 @@ components:
             - ""
           description: "Whether the carer lives with the care recipient: yes or no."
         care_hours_per_week:
-          type: number
+          type: [number, 'null']
           format: double
           description: Approximate hours of care provided per week.
         recipient_identifier:
@@ -341,91 +377,91 @@ components:
             - ""
           description: "Primary condition of the care recipient: dementia, chronic-illness, disability, or other."
         item_1:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Item 1 rating (0-4): feel asked to do more than you should for the relative."
         item_2:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Item 2 rating (0-4): not enough time for yourself."
         item_3:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Item 3 rating (0-4): stressed between caring and other responsibilities."
         item_4:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Item 4 rating (0-4): embarrassed by the relative's behaviour."
         item_5:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Item 5 rating (0-4): angry when around the relative."
         item_6:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Item 6 rating (0-4): relative affects your relationships with others negatively."
         item_7:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Item 7 rating (0-4): afraid about what the future holds for the relative."
         item_8:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Item 8 rating (0-4): the relative is dependent on you."
         item_9:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Item 9 rating (0-4): strained when around the relative."
         item_10:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Item 10 rating (0-4): your health has suffered because of caring."
         item_11:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Item 11 rating (0-4): not as much privacy as you would like."
         item_12:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Item 12 rating (0-4): social life has suffered."
         item_13:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Item 13 rating (0-4): uncomfortable having friends over because of the relative."
         item_14:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Item 14 rating (0-4): relative expects you to care as the only one they can depend on."
         item_15:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Item 15 rating (0-4): not enough money to care in addition to other expenses."
         item_16:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Item 16 rating (0-4): unable to care for the relative much longer."
         item_17:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Item 17 rating (0-4): lost control of your life since the relative's illness."
         item_18:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Item 18 rating (0-4): wish you could leave the care to someone else."
         item_19:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Item 19 rating (0-4): uncertain about what to do for the relative."
         item_20:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Item 20 rating (0-4): feel you should be doing more for the relative."
         item_21:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Item 21 rating (0-4): feel you could do a better job caring."
         item_22:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Item 22 rating (0-4): global burden — overall how burdened you feel caring."
         clinical_note:

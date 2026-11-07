@@ -19,38 +19,29 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            maximum: 100000
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of PregnancyUltrasoundTestRequest records
+          description: A page of PregnancyUltrasoundTestRequest records, with no total
           headers:
-            x-total-count:
-              description: Rows there are in all
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
               schema:
-                type: integer
-            x-limit:
-              description: The limit applied
-              schema:
-                type: integer
-            x-offset:
-              description: The offset applied
-              schema:
-                type: integer
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/PregnancyUltrasoundTestRequest"
-        "400":
-          description: The offset is past the maximum
+        "422":
+          description: The limit or the cursor is not valid
           content:
             application/problem+json:
               schema:
@@ -149,6 +140,51 @@ paths:
     patch:
       summary: Update an existing PregnancyUltrasoundTestRequest
       operationId: updatePregnancyUltrasoundTestRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PregnancyUltrasoundTestRequest"
+      responses:
+        "200":
+          description: The updated PregnancyUltrasoundTestRequest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PregnancyUltrasoundTestRequest"
+        "404":
+          description: PregnancyUltrasoundTestRequest not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing PregnancyUltrasoundTestRequest
+      operationId: replacePregnancyUltrasoundTestRequest
       requestBody:
         required: true
         content:
@@ -292,15 +328,15 @@ components:
             - ""
           description: "Care setting: outpatient, inpatient, community, emergency."
         referral_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the referral was made.
         requested_by_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date by which the scan is requested to be performed.
         last_menstrual_period_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: First day of the last menstrual period (LMP).
         last_menstrual_period_reliability:
@@ -312,7 +348,7 @@ components:
             - ""
           description: "Reliability of the LMP: reliable, uncertain, unknown."
         estimated_due_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Estimated due date (EDD).
         estimated_due_date_method:
@@ -325,19 +361,19 @@ components:
             - ""
           description: "How the EDD was derived: lmp, ultrasound, ivf, unknown."
         gestational_age_weeks:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Completed gestational weeks at the time of request (0-45).
         gestational_age_days:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Additional gestational days beyond completed weeks (0-6).
         gravida:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Gravida: total number of pregnancies."
         para:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Para: number of births beyond 24 weeks."
         plurality:
@@ -379,7 +415,7 @@ components:
             - ""
           description: "Maternal rhesus status: positive, negative, unknown."
         body_mass_index:
-          type: number
+          type: [number, 'null']
           format: double
           description: Maternal body mass index (BMI), affecting image quality and technique.
         requested_scan_type:
@@ -438,7 +474,7 @@ components:
           maxLength: 1000
           description: Finding from a previous scan being followed up.
         previous_scan_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date of the previous scan being followed up.
         vaginal_bleeding:

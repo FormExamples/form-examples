@@ -4,10 +4,10 @@
   deletedAt: null
   name: "Test Patient"
   birthDate: "1990-01-01"
-  socialSecurityNumber: "Test socialSecurityNumber"
+  socialSecurityNumber: "Test social"
   streetAddress: "Test streetAddress"
   city: "Test city"
-  state: "Test state"
-  zipCode: "Test zipCode"
+  state: "Te"
+  zipCode: "Test zipCo"
   phone: "+441234567890"
   email: "test.patient@example.com"

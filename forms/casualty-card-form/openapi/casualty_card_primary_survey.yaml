@@ -19,38 +19,29 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            maximum: 100000
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of CasualtyCardPrimarySurvey records
+          description: A page of CasualtyCardPrimarySurvey records, with no total
           headers:
-            x-total-count:
-              description: Rows there are in all
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
               schema:
-                type: integer
-            x-limit:
-              description: The limit applied
-              schema:
-                type: integer
-            x-offset:
-              description: The offset applied
-              schema:
-                type: integer
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/CasualtyCardPrimarySurvey"
-        "400":
-          description: The offset is past the maximum
+        "422":
+          description: The limit or the cursor is not valid
           content:
             application/problem+json:
               schema:
@@ -149,6 +140,51 @@ paths:
     patch:
       summary: Update an existing CasualtyCardPrimarySurvey
       operationId: updateCasualtyCardPrimarySurvey
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardPrimarySurvey"
+      responses:
+        "200":
+          description: The updated CasualtyCardPrimarySurvey
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardPrimarySurvey"
+        "404":
+          description: CasualtyCardPrimarySurvey not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing CasualtyCardPrimarySurvey
+      operationId: replaceCasualtyCardPrimarySurvey
       requestBody:
         required: true
         content:
@@ -319,19 +355,19 @@ components:
           type: string
           description: IV access details (e.g. 18G left ACF, none).
         gcs_eye:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Glasgow Coma Scale eye opening component (1-4). NULL if not assessed.
         gcs_verbal:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Glasgow Coma Scale verbal response component (1-5). NULL if not assessed.
         gcs_motor:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Glasgow Coma Scale motor response component (1-6). NULL if not assessed.
         gcs_total:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Glasgow Coma Scale total (3-15), auto-calculated from eye + verbal + motor. NULL if components not complete.
         pupils:

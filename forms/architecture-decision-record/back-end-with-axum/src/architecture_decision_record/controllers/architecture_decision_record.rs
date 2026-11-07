@@ -177,8 +177,8 @@ async fn add(State(ctx): State<AppContext>, Json(mut params): Json<Params>) -> R
             params.slug = Some(derived);
         }
     }
-    params.insert(&db(&ctx)).await?;
-    format::redirect("/architecture_decision_records")
+    let item = params.insert(&db(&ctx)).await?;
+    format::json(item)
 }
 
 fn bullets(text: &str) -> String {
@@ -422,9 +422,9 @@ struct AdrRowApi {
 #[debug_handler]
 async fn api_index(
     State(ctx): State<AppContext>,
-    Query(params): Query<PageParams>,
+    OriginalUri(uri): OriginalUri,
 ) -> Result<Response> {
-    let page = params.resolve(PAGE_LIMITS)?;
+    let page = cursor_page(&ctx, &uri)?;
     let (limit, offset) = page.bounds();
     let rows = sqlx::query_as::<_, Model>(
         "SELECT * FROM architecture_decision_records WHERE deleted_at IS NULL ORDER \
@@ -433,11 +433,6 @@ async fn api_index(
     .bind(limit)
     .bind(offset)
     .fetch_all(&db(&ctx))
-    .await?;
-    let total: i64 = sqlx::query_scalar(
-        "SELECT COUNT(*) FROM architecture_decision_records WHERE deleted_at IS NULL",
-    )
-    .fetch_one(&db(&ctx))
     .await?;
 
     let mut out: Vec<AdrRowApi> = Vec::with_capacity(rows.len());
@@ -457,22 +452,16 @@ async fn api_index(
             author_name,
         });
     }
-    Ok(page.respond(total, out))
+    Ok(page.respond(out))
 }
 
-/// Routes for the JSON register viewer under `/api/adrs`.
+/// Routes for the JSON register under `/api/adrs`: list, create, and read by slug.
 pub fn api_routes() -> Routes {
     Routes::new()
         .prefix("api/adrs")
         .add("/", get(api_index))
-        .add("{slug}", get(api_show_by_slug))
-}
-
-/// Routes for creating ADR rows under `/architecture_decision_records`.
-pub fn routes() -> Routes {
-    Routes::new()
-        .prefix("architecture_decision_records/")
         .add("/", post(add))
+        .add("{slug}", get(api_show_by_slug))
 }
 
 #[cfg(test)]

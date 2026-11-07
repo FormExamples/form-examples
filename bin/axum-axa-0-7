@@ -1,0 +1,135 @@
+#!/usr/bin/env python3
+"""bin/axum-axa-0-7 — move each form's `back-end-with-axum/` from axa 0.6 to 0.7.
+
+What it changes in a crate:
+
+  Cargo.toml                axa 0.7, and the `offset-pagination` feature, the new
+                            name of `pagination`
+  src, tests                `axa::offset_pagination` in place of `axa::pagination`,
+                            the old path, which 0.7 keeps only as an alias
+  Cargo.lock                `cargo update -p axa`, unless --no-lock
+
+Nothing else in 0.7 needs a change here: no crate builds a `config::Server` or a
+ratelimit `Verdict` by hand, and the queue starts with `Queue::connect`, which adds
+the new queue tables itself. The 0.7 additions that change behaviour (a `304` to a
+matching `If-None-Match`, dropping a client that stops reading after
+`SEND_STALL_TIMEOUT_SECONDS`) come with the standard stack and need no code.
+
+Every edit to a crate is planned and asserted before any is written, so a crate
+that differs from the expected shape stops with its name and stays untouched. A
+crate already moved is skipped, so the tool can be rerun.
+
+Usage:
+  bin/axum-axa-0-7 <slug>...          # named forms
+  bin/axum-axa-0-7 --all              # every form's Axum crate
+  bin/axum-axa-0-7 --all --no-lock    # leave Cargo.lock to `cargo update -p axa`
+  bin/axum-axa-0-7 --root DIR <slug>  # a copy of forms/ at DIR
+  bin/axum-axa-0-7 --check --all      # CI drift check (non-zero on drift)
+"""
+
+from __future__ import annotations
+
+import argparse
+import glob
+import os
+import re
+import subprocess
+import sys
+
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OLD_AXA = 'axa = { version = "0.6", features = ["pagination", "queue", "ratelimit", "sqlx"] }'
+NEW_AXA = 'axa = { version = "0.7", features = ["offset-pagination", "queue", "ratelimit", "sqlx"] }'
+# bin/axum-cursor-pagination then swaps offset paging for cursor paging, so the
+# check accepts either step.
+ON_07 = re.compile(r'^axa = \{ version = "0\.7", features = \["(?:offset|cursor)-pagination", "queue", "ratelimit", "sqlx"\] \}$', re.M)
+OLD_PATH = re.compile(r"\baxa::pagination::")
+OLD_PRELUDE = "    pagination::{Page, PageParams},\n"
+NEW_PRELUDE = "    offset_pagination::{Page, PageParams},\n"
+
+
+def sources(crate: str) -> list[str]:
+    """Every Rust file of a crate, its tests included."""
+    return sorted(glob.glob(f"{crate}/src/**/*.rs", recursive=True) + glob.glob(f"{crate}/tests/**/*.rs", recursive=True))
+
+
+def plan(crate: str) -> dict[str, str] | None:
+    """Every edit for a crate, or None when it is already moved."""
+    manifest = open(f"{crate}/Cargo.toml").read()
+    if ON_07.search(manifest):
+        return None
+    assert manifest.count(OLD_AXA) == 1, f"{crate}: expected the axa 0.6 line once"
+    edits = {f"{crate}/Cargo.toml": manifest.replace(OLD_AXA, NEW_AXA)}
+    preludes = glob.glob(f"{crate}/src/*/support/prelude.rs")
+    assert len(preludes) == 1, f"{crate}: expected one support/prelude.rs, found {preludes}"
+    for path in sources(crate):
+        text = open(path).read()
+        fresh = OLD_PATH.sub("axa::offset_pagination::", text)
+        if path == preludes[0]:
+            assert fresh.count(OLD_PRELUDE) == 1, f"{path}: expected the pagination import once"
+            fresh = fresh.replace(OLD_PRELUDE, NEW_PRELUDE)
+        if fresh != text:
+            edits[path] = fresh
+    return edits
+
+
+def drift(crate: str) -> str | None:
+    """Why a crate is not on axa 0.7, if it is not."""
+    if not ON_07.search(open(f"{crate}/Cargo.toml").read()):
+        return "Cargo.toml is not on axa 0.7"
+    if not re.search(r'^name = "axa"\nversion = "0\.7\.', open(f"{crate}/Cargo.lock").read(), re.M):
+        return "Cargo.lock is not on axa 0.7"
+    for path in sources(crate):
+        text = open(path).read()
+        if OLD_PATH.search(text) or OLD_PRELUDE in text:
+            return f"{os.path.relpath(path, crate)} uses axa::pagination, the old name of axa::offset_pagination"
+    return None
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    parser.add_argument("slugs", nargs="*")
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--no-lock", action="store_true")
+    parser.add_argument("--root", default=f"{REPO}/forms")
+    args = parser.parse_args()
+    if args.all:
+        crates = sorted(os.path.dirname(c) for c in glob.glob(f"{args.root}/*/back-end-with-axum/Cargo.toml"))
+    elif args.slugs:
+        crates = [f"{args.root}/{slug}/back-end-with-axum" for slug in args.slugs]
+    else:
+        parser.error("name forms, or pass --all")
+    if args.check:
+        bad = [(crate, why) for crate in crates if (why := drift(crate))]
+        for crate, why in bad:
+            print(f"{crate.split('/')[-2]}: {why}")
+        print(f"{len(crates) - len(bad)}/{len(crates)} crates on axa 0.7")
+        return 1 if bad else 0
+    # Plan everything first, so one odd crate leaves the fleet as it was.
+    try:
+        plans = [(crate, plan(crate)) for crate in crates]
+    except AssertionError as error:
+        print(f"stopped, nothing written: {error}", file=sys.stderr)
+        return 1
+    moved = 0
+    for crate, edits in plans:
+        if edits is None:
+            continue
+        for path, text in edits.items():
+            with open(path, "w") as handle:
+                handle.write(text)
+        moved += 1
+    failed = []
+    if not args.no_lock:
+        for crate, _ in plans:
+            if not re.search(r'^name = "axa"\nversion = "0\.7\.', open(f"{crate}/Cargo.lock").read(), re.M):
+                result = subprocess.run(["cargo", "update", "-q", "-p", "axa"], cwd=crate, capture_output=True, text=True)
+                if result.returncode:
+                    failed.append(crate)
+                    print(f"{crate.split('/')[-2]}: cargo update failed: {result.stderr.strip()[-300:]}", file=sys.stderr)
+    print(f"{moved} moved, {len(crates) - moved} already on axa 0.7")
+    return 1 if failed else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

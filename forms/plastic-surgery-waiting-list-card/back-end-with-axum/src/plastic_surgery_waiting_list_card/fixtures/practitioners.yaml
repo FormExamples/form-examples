@@ -9,6 +9,6 @@
   registrationBody: "GMC"
   registrationNumber: "Test registrationNumber"
   organisationName: "Test organisationName"
-  organisationOdsCode: "Test organisationOdsCode"
+  organisationOdsCode: "Test organisationOds"
   siteName: "Test siteName"
   countryAsIso31661Alpha2: "GB"

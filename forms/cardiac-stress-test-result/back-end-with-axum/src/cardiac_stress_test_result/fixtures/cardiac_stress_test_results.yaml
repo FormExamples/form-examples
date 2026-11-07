@@ -14,7 +14,7 @@
   percentPredictedHeartRate: 1.0
   exerciseDurationMinutes: 1.0
   metsAchieved: 1.0
-  peakBloodPressure: "Test peakBloodPressure"
+  peakBloodPressure: "Test peakBloodPressu"
   bloodPressureResponse: "normal"
   ischaemicStChanges: true
   chestPainInduced: true

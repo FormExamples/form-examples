@@ -5,7 +5,7 @@
   name: "Test Patient"
   tradingName: "Test tradingName"
   companyRegistrationNumber: "Test companyRegistrationNumber"
-  countryOfRegistrationAsIso31661Alpha2: "Test countryOfRegistrationAsIso31661Alpha2"
+  countryOfRegistrationAsIso31661Alpha2: "Te"
   icoRegistrationNumber: "Test icoRegistrationNumber"
   website: "Test website"
   postalAddressAsFullText: "10 Downing Street, London"

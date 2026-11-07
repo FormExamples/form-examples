@@ -129,22 +129,19 @@ pub struct Model {{
 pub type {alias} = Model;
 
 impl Model {{
-    /// One page of rows in a stable order, and how many rows there are in all.
+    /// One page of rows in a stable order, with one row more than the page
+    /// when more follow, which `CursorPage::respond` drops.
     ///
     /// # Errors
     ///
     /// Propagates the database error.
-    pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Self>, i64)> {{
+    pub async fn page(db: &PgPool, page: &axa::cursor_pagination::CursorPage) -> sqlx::Result<Vec<Self>> {{
         let (limit, offset) = page.bounds();
-        let rows = sqlx::query_as("SELECT * FROM {name} ORDER BY id LIMIT $1 OFFSET $2")
+        sqlx::query_as("SELECT * FROM {name} ORDER BY id LIMIT $1 OFFSET $2")
             .bind(limit)
             .bind(offset)
             .fetch_all(db)
-            .await?;
-        let total = sqlx::query_scalar("SELECT COUNT(*) FROM {name}")
-            .fetch_one(db)
-            .await?;
-        Ok((rows, total))
+            .await
     }}
 
     /// The row with this id, if there is one.
@@ -241,11 +238,11 @@ async fn load_item(ctx: &AppContext, id: Uuid) -> Result<Model> {{
 #[debug_handler]
 pub async fn list(
     State(ctx): State<AppContext>,
-    Query(params): Query<PageParams>,
+    OriginalUri(uri): OriginalUri,
 ) -> Result<Response> {{
-    let page = params.resolve(PAGE_LIMITS)?;
-    let (rows, total) = Model::page(&db(&ctx), page).await?;
-    Ok(page.respond(total, rows))
+    let page = cursor_page(&ctx, &uri)?;
+    let rows = Model::page(&db(&ctx), &page).await?;
+    Ok(page.respond(rows))
 }}
 
 /// Add.

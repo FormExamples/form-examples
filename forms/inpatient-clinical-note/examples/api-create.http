@@ -26,9 +26,9 @@ HTTP 200
 Content-Type: application/json
 
 {
-  "createdAt": "2026-11-07T14:35:18.738092Z",
-  "updatedAt": "2026-11-07T14:35:18.738092Z",
-  "id": "41deefea-2a37-4205-8c45-107a38fcf311",
+  "createdAt": "2026-11-07T17:51:48.811932Z",
+  "updatedAt": "2026-11-07T17:51:48.811932Z",
+  "id": "cbbaa272-e042-4678-b268-055bf27843fd",
   "name": "Test Patient",
   "birthDate": "1990-01-01",
   "sex": "female",
@@ -39,23 +39,23 @@ Content-Type: application/json
   "postcode": "SW1A 2AA",
   "unitedKingdomNhsNumber": "9434765928",
   "hospitalMrn": "MRN-000123",
-  "heightAsCm": "170.2",
-  "weightAsKg": "70.4",
-  "bodyMassIndex": "24.2",
+  "heightAsCm": 170.2,
+  "weightAsKg": 70.4,
+  "bodyMassIndex": 24.2,
   "allergiesSummary": "No known allergies"
 }
 
 ###
 
-GET http://localhost:5150/api/patients/41deefea-2a37-4205-8c45-107a38fcf311
+GET http://localhost:5150/api/patients/cbbaa272-e042-4678-b268-055bf27843fd
 
 HTTP 200
 Content-Type: application/json
 
 {
-  "createdAt": "2026-11-07T14:35:18.738092Z",
-  "updatedAt": "2026-11-07T14:35:18.738092Z",
-  "id": "41deefea-2a37-4205-8c45-107a38fcf311",
+  "createdAt": "2026-11-07T17:51:48.811932Z",
+  "updatedAt": "2026-11-07T17:51:48.811932Z",
+  "id": "cbbaa272-e042-4678-b268-055bf27843fd",
   "name": "Test Patient",
   "birthDate": "1990-01-01",
   "sex": "female",
@@ -66,8 +66,8 @@ Content-Type: application/json
   "postcode": "SW1A 2AA",
   "unitedKingdomNhsNumber": "9434765928",
   "hospitalMrn": "MRN-000123",
-  "heightAsCm": "170.2",
-  "weightAsKg": "70.4",
-  "bodyMassIndex": "24.2",
+  "heightAsCm": 170.2,
+  "weightAsKg": 70.4,
+  "bodyMassIndex": 24.2,
   "allergiesSummary": "No known allergies"
 }

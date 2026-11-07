@@ -8,8 +8,8 @@
   performedDate: "1990-01-01"
   reportedDate: "1990-01-01"
   clinicalHistory: "Test clinicalHistory"
-  visualAcuityRight: "Test visualAcuityRight"
-  visualAcuityLeft: "Test visualAcuityLeft"
+  visualAcuityRight: "Test visualAcuityRig"
+  visualAcuityLeft: "Test visualAcuityLef"
   intraocularPressureRightMmhg: 1.0
   intraocularPressureLeftMmhg: 1.0
   visualFieldResult: "full"

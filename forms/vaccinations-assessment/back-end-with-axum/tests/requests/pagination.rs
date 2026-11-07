@@ -1,38 +1,60 @@
+//! Lists come in signed cursor pages, with no total.
+
+use vaccinations_assessment::app::App;
 use axa::testing::prelude::*;
 use serde_json::Value;
 use serial_test::serial;
-use vaccinations_assessment::app::App;
 
-/// The limits `openapi.yaml` publishes for every list.
+/// A page of one row links to the next, whose cursor works only where it was
+/// made; the limits `openapi.yaml` publishes are refused, never clamped, outside
+/// their range.
 #[tokio::test]
 #[serial]
-async fn lists_come_in_pages() {
+async fn lists_come_in_cursor_pages() {
     request::<App, _, _>(|request, ctx| async move {
         App::seed(&ctx).await.unwrap();
+        // A second live row, so that a page of one has a next page. Any unique
+        // column of the copy is null, so it cannot clash.
+        sqlx::query(
+            "INSERT INTO administration_records SELECT (jsonb_populate_record(NULL::administration_records, to_jsonb(t) || \
+            jsonb_build_object('id', gen_random_uuid()))).* FROM administration_records t",
+        )
+        .execute(&ctx.db)
+        .await
+        .unwrap();
 
         let first = request.get("/api/administration_records?limit=1").await;
         first.assert_status_ok();
-        assert_eq!(first.header("x-total-count"), "1");
-        let first: Vec<Value> = first.json();
-        assert_eq!(first.len(), 1);
+        assert!(first.maybe_header("x-total-count").is_none());
+        let first_rows: Vec<Value> = first.json();
+        assert_eq!(first_rows.len(), 1);
+        let link = first.header("link");
+        let next = link
+            .to_str()
+            .unwrap()
+            .strip_prefix('<')
+            .and_then(|rest| rest.strip_suffix(">; rel=\"next\""))
+            .unwrap()
+            .to_string();
+        assert!(next.starts_with("/api/administration_records?limit=1&cursor="), "{next}");
 
-        let past: Vec<Value> = request
-            .get("/api/administration_records?limit=1&offset=1")
-            .await
-            .json();
-        assert!(past.is_empty());
+        let second = request.get(&next).await;
+        second.assert_status_ok();
+        assert!(second.maybe_header("link").is_none());
+        let second_rows: Vec<Value> = second.json();
+        assert_eq!(second_rows.len(), 1);
+        assert_ne!(first_rows[0]["id"], second_rows[0]["id"]);
 
-        let page = request.get("/api/administration_records").await;
-        assert_eq!(page.header("x-limit"), "100");
-        assert_eq!(page.header("x-offset"), "0");
-
-        let page = request.get("/api/administration_records?limit=5000").await;
-        assert_eq!(page.header("x-limit"), "1000");
-
-        let page = request
-            .get("/api/administration_records?offset=100001")
-            .await;
-        page.assert_status_bad_request();
+        let carried = format!("{next}&status=other");
+        for refused in [
+            carried.as_str(),
+            "/api/administration_records?cursor=forged",
+            "/api/administration_records?limit=0",
+            "/api/administration_records?limit=1001",
+            "/api/administration_records?limit=many",
+        ] {
+            request.get(refused).await.assert_status_unprocessable_entity();
+        }
     })
     .await;
 }

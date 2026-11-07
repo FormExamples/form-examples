@@ -49,18 +49,18 @@ async fn post_auto_numbers_and_auto_slugs() {
 
         // First POST: title only — backend assigns number=1 and slug derived from title.
         let res = request
-            .post("/architecture_decision_records")
+            .post("/api/adrs")
             .json(&serde_json::json!({
                 "authorId": author_id,
                 "organizationId": organization_id,
                 "title": "Use PostgreSQL for primary storage",
             }))
             .await;
-        assert_eq!(res.status_code(), 303);
+        assert_eq!(res.status_code(), 200);
 
         // Second POST: explicit number=99, no slug.
         let res = request
-            .post("/architecture_decision_records")
+            .post("/api/adrs")
             .json(&serde_json::json!({
                 "authorId": author_id,
                 "organizationId": organization_id,
@@ -68,18 +68,18 @@ async fn post_auto_numbers_and_auto_slugs() {
                 "number": 99,
             }))
             .await;
-        assert_eq!(res.status_code(), 303);
+        assert_eq!(res.status_code(), 200);
 
         // Third POST: no number → auto-assigns 100 (max + 1).
         let res = request
-            .post("/architecture_decision_records")
+            .post("/api/adrs")
             .json(&serde_json::json!({
                 "authorId": author_id,
                 "organizationId": organization_id,
                 "title": "After 99",
             }))
             .await;
-        assert_eq!(res.status_code(), 303);
+        assert_eq!(res.status_code(), 200);
 
         // GET /api/adrs returns the three rows with sane number / slug values.
         let res = request.get("/api/adrs").await;
@@ -113,7 +113,7 @@ async fn post_with_bad_status_returns_400() {
         let organization_id = seed_org(&ctx).await;
 
         let res = request
-            .post("/architecture_decision_records")
+            .post("/api/adrs")
             .json(&serde_json::json!({
                 "authorId": author_id,
                 "organizationId": organization_id,
@@ -142,7 +142,7 @@ async fn api_show_by_slug_returns_rendered_markdown() {
         let organization_id = seed_org(&ctx).await;
 
         request
-            .post("/architecture_decision_records")
+            .post("/api/adrs")
             .json(&serde_json::json!({
                 "authorId": author_id,
                 "organizationId": organization_id,

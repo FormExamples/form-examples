@@ -19,11 +19,11 @@ async fn can_create_and_read_back_patient() {
         let new_patient = serde_json::json!({
             "name": "Test Patient",
             "birthDate": "1990-01-01",
-            "socialSecurityNumber": "Test socialSecurityNumber",
+            "socialSecurityNumber": "123-45-6789",
             "streetAddress": "Test streetAddress",
             "city": "Test city",
-            "state": "Test state",
-            "zipCode": "Test zipCode",
+            "state": "CA",
+            "zipCode": "90210",
             "phone": "+441234567890",
             "email": "test.patient@example.com"
         });
@@ -68,11 +68,11 @@ async fn can_create_and_read_back_patient() {
         assert_eq!(fetched["id"].as_str(), Some(id.as_str()));
         assert_eq!(fetched["name"], "Test Patient");
         assert_eq!(fetched["birthDate"], "1990-01-01");
-        assert_eq!(fetched["socialSecurityNumber"], "Test socialSecurityNumber");
+        assert_eq!(fetched["socialSecurityNumber"], "123-45-6789");
         assert_eq!(fetched["streetAddress"], "Test streetAddress");
         assert_eq!(fetched["city"], "Test city");
-        assert_eq!(fetched["state"], "Test state");
-        assert_eq!(fetched["zipCode"], "Test zipCode");
+        assert_eq!(fetched["state"], "CA");
+        assert_eq!(fetched["zipCode"], "90210");
         assert_eq!(fetched["phone"], "+441234567890");
         assert_eq!(fetched["email"], "test.patient@example.com");
 

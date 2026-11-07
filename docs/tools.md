@@ -2,11 +2,13 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-94 tools.
+96 tools.
 
+- [`bin/axum-axa-0-7`](#axum-axa-0-7)
 - [`bin/axum-axa-adopt`](#axum-axa-adopt)
 - [`bin/axum-axa-upgrade`](#axum-axa-upgrade)
 - [`bin/axum-check-constraints`](#axum-check-constraints)
+- [`bin/axum-cursor-pagination`](#axum-cursor-pagination)
 - [`bin/axum-entity-routes`](#axum-entity-routes)
 - [`bin/axum-fixture-checks`](#axum-fixture-checks)
 - [`bin/axum-forbid-unsafe`](#axum-forbid-unsafe)
@@ -98,6 +100,37 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/back-end-with-axum/generate-rust-docs.py`](#back-end-with-axumgenerate-rust-docspy)
 - [`bin/sql/generate-sql-combined.py`](#sqlgenerate-sql-combinedpy)
 - [`bin/sql/generate-sql-comments.py`](#sqlgenerate-sql-commentspy)
+
+<h2 id="axum-axa-0-7"><code>bin/axum-axa-0-7</code></h2>
+
+```text
+bin/axum-axa-0-7 — move each form's `back-end-with-axum/` from axa 0.6 to 0.7.
+
+What it changes in a crate:
+
+  Cargo.toml                axa 0.7, and the `offset-pagination` feature, the new
+                            name of `pagination`
+  src, tests                `axa::offset_pagination` in place of `axa::pagination`,
+                            the old path, which 0.7 keeps only as an alias
+  Cargo.lock                `cargo update -p axa`, unless --no-lock
+
+Nothing else in 0.7 needs a change here: no crate builds a `config::Server` or a
+ratelimit `Verdict` by hand, and the queue starts with `Queue::connect`, which adds
+the new queue tables itself. The 0.7 additions that change behaviour (a `304` to a
+matching `If-None-Match`, dropping a client that stops reading after
+`SEND_STALL_TIMEOUT_SECONDS`) come with the standard stack and need no code.
+
+Every edit to a crate is planned and asserted before any is written, so a crate
+that differs from the expected shape stops with its name and stays untouched. A
+crate already moved is skipped, so the tool can be rerun.
+
+Usage:
+  bin/axum-axa-0-7 <slug>...          # named forms
+  bin/axum-axa-0-7 --all              # every form's Axum crate
+  bin/axum-axa-0-7 --all --no-lock    # leave Cargo.lock to `cargo update -p axa`
+  bin/axum-axa-0-7 --root DIR <slug>  # a copy of forms/ at DIR
+  bin/axum-axa-0-7 --check --all      # CI drift check (non-zero on drift)
+```
 
 <h2 id="axum-axa-adopt"><code>bin/axum-axa-adopt</code></h2>
 
@@ -193,6 +226,10 @@ It also writes `build.rs`, which tells Cargo to rebuild when `migrations/`
 changes. `sqlx::migrate!` embeds the migrations at compile time, so without it
 a new migration file is silently left out of the next build.
 
+A second migration, `20261107700000_length_constraints`, holds the lengths of
+`sql/`'s `VARCHAR(n)` and `CHAR(n)` columns as `char_length(column) <= n` checks,
+`NOT VALID` likewise, because the crates' columns were migrated without a length.
+
 A CHECK naming a column the crate's table lacks is skipped and counted.
 
 Usage:
@@ -200,6 +237,48 @@ Usage:
   bin/axum-check-constraints --all              # every form's Axum crate
   bin/axum-check-constraints --root DIR --all   # a copy of the repo at DIR
   bin/axum-check-constraints --check --all      # CI drift check (non-zero on drift)
+```
+
+<h2 id="axum-cursor-pagination"><code>bin/axum-cursor-pagination</code></h2>
+
+```text
+bin/axum-cursor-pagination — move each form's `back-end-with-axum/` lists from
+offset paging to axa's signed cursor paging.
+
+A list then takes `?limit=` and an opaque `?cursor=`, and answers a bare JSON
+array with `Link: <...>; rel="next"` while more rows follow. There is no total
+and no `?offset=`: a total counts rows a caller may not see, an offset is the
+caller's to choose, and a cursor is signed over its position and its query, so a
+caller cannot make one up, edit one, or carry it to another list or filter. A bad
+limit or cursor is a `422`, never clamped.
+
+What it changes in a crate:
+
+  Cargo.toml                the `cursor-pagination` feature in place of
+                            `offset-pagination`
+  support/mod.rs            `PAGE_LIMITS` as `CursorLimits`; `cursor_key`, which
+                            reads the `CURSOR_KEY` secret (required where the
+                            environment is production-like); `cursor_page`
+  support/prelude.rs        `CursorPage`, `OriginalUri` and `cursor_page`
+  app.rs                    `App::context` stores the key in the shared store
+  controllers               every generated `list` reads its page from the URI
+  models                    every `page` drops its `COUNT(*)` and returns rows only
+  tests/requests/           `pagination.rs` follows a `Link` and refuses forged,
+                            carried and out-of-range pages; `problem.rs` expects a
+                            `422` for a forged cursor
+
+The handful of hand-written lists (dashboards, the ADR index) are not generated,
+so `--check` names them until they are moved by hand.
+
+Every edit to a crate is planned and asserted before any is written, so a crate
+that differs from the expected shape stops with its name and stays untouched. A
+crate already moved is skipped, so the tool can be rerun.
+
+Usage:
+  bin/axum-cursor-pagination <slug>...          # named forms
+  bin/axum-cursor-pagination --all              # every form's Axum crate
+  bin/axum-cursor-pagination --root DIR <slug>  # a copy of forms/ at DIR
+  bin/axum-cursor-pagination --check --all      # CI drift check (non-zero on drift)
 ```
 
 <h2 id="axum-entity-routes"><code>bin/axum-entity-routes</code></h2>
@@ -229,8 +308,8 @@ The fixtures (`src/<form>/fixtures/*.yaml`) and the literal `INSERT`s in
 `tests/` were written before the crates had CHECK constraints, with values such
 as `status: "Test status"` or `0` for a score from 1 to 15. This finds each value
 a constraint refuses and puts in the first one it allows: the first non-empty
-value of an `IN (...)` list, the lowest bound of a range, or NULL where nothing
-else fits. Postgres judges every value, so the semantics are exact, NULL
+value of an `IN (...)` list, the lowest bound of a range, a value cut to its
+column's length, or NULL where nothing else fits. Postgres judges every value, so the semantics are exact, NULL
 included. It needs no tables, only a connection, through PGHOST, PGPORT and
 PGUSER (default 127.0.0.1, 5432, postgres).
 
@@ -2622,6 +2701,20 @@ not collide across a form's entities, so the union is unambiguous.
 The per-entity files describe every SQL table, but not every table has a route.
 The combined document is what a crate serves at `GET /api/openapi.yaml`, so it
 keeps only the paths the crate's controllers declare, and the schemas those use.
+Where a table's own controller (`controllers/<table>.rs`) serves it under another
+path than the generated plural, such as `/api/people` for `person`, the document
+uses the served path. A column `sql/` declares but the crate's table lacks is left
+out, so the document describes what is sent. Property names are camelCase, as the crates send them; the
+per-entity files keep the SQL column names, because they describe storage.
+
+Routes no SQL table describes, such as a dashboard or a `submit` action, are
+documented by hand in `forms/<slug>/openapi/hand/routes.yaml`, a fragment with
+`paths` and, if it needs them, `components.schemas`. It is merged in as written.
+Every document also describes `GET /api/openapi.yaml` itself, and an operation the
+crate does not serve, such as a `PUT` a hand-written controller lacks, is left out.
+
+`--check` fails when a combined document is stale, and when a route the crate
+serves is not documented, or a documented one is not served, method by method.
 
 Generated artefact: do not hand-edit. Idempotent.
 

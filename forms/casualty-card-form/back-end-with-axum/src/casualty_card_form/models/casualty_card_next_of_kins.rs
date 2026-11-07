@@ -22,27 +22,22 @@ pub struct Model {
 }
 
 impl Model {
-    /// One page of rows in a stable order, and how many rows there are in all.
+    /// One page of rows in a stable order, with one row more than the page
+    /// when more follow, which `CursorPage::respond` drops.
     ///
     /// # Errors
     ///
     /// Propagates the database error.
-    pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Self>, i64)> {
+    pub async fn page(db: &PgPool, page: &axa::cursor_pagination::CursorPage) -> sqlx::Result<Vec<Self>> {
         let (limit, offset) = page.bounds();
-        let rows = sqlx::query_as(
+        sqlx::query_as(
             "SELECT * FROM casualty_card_next_of_kins WHERE deleted_at IS NULL ORDER BY \
             id LIMIT $1 OFFSET $2",
         )
         .bind(limit)
         .bind(offset)
         .fetch_all(db)
-        .await?;
-        let total = sqlx::query_scalar(
-            "SELECT COUNT(*) FROM casualty_card_next_of_kins WHERE deleted_at IS NULL",
-        )
-        .fetch_one(db)
-        .await?;
-        Ok((rows, total))
+        .await
     }
 
     /// The row with this id, if there is one.

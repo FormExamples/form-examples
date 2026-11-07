@@ -19,38 +19,29 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            maximum: 100000
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of LumbarPunctureTestResult records
+          description: A page of LumbarPunctureTestResult records, with no total
           headers:
-            x-total-count:
-              description: Rows there are in all
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
               schema:
-                type: integer
-            x-limit:
-              description: The limit applied
-              schema:
-                type: integer
-            x-offset:
-              description: The offset applied
-              schema:
-                type: integer
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/LumbarPunctureTestResult"
-        "400":
-          description: The offset is past the maximum
+        "422":
+          description: The limit or the cursor is not valid
           content:
             application/problem+json:
               schema:
@@ -191,6 +182,51 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing LumbarPunctureTestResult
+      operationId: replaceLumbarPunctureTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LumbarPunctureTestResult"
+      responses:
+        "200":
+          description: The updated LumbarPunctureTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LumbarPunctureTestResult"
+        "404":
+          description: LumbarPunctureTestResult not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a LumbarPunctureTestResult
       operationId: deleteLumbarPunctureTestResult
@@ -282,11 +318,11 @@ components:
             - ""
           description: "Report lifecycle status: preliminary, final, amended, cancelled."
         performed_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the lumbar puncture was performed.
         reported_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the report was authored / signed.
         clinical_history:
@@ -294,7 +330,7 @@ components:
           maxLength: 1000
           description: Clinical history and the question the lumbar puncture was performed to answer.
         opening_pressure_cmh2o:
-          type: number
+          type: [number, 'null']
           format: double
           description: Manometry opening pressure in cm of CSF (normal adult range approximately 6-25 cmH2O when relaxed and laterally recumbent).
         csf_appearance:
@@ -308,27 +344,27 @@ components:
             - ""
           description: "Macroscopic CSF appearance: clear, cloudy, turbid, blood-stained, xanthochromic."
         csf_white_cell_count:
-          type: number
+          type: [number, 'null']
           format: double
           description: CSF white cell count in cells per microlitre (normal adult typically <5/uL; neutrophil predominance suggests bacterial infection).
         csf_red_cell_count:
-          type: number
+          type: [number, 'null']
           format: double
           description: CSF red cell count in cells per microlitre (raised in traumatic tap or subarachnoid haemorrhage).
         csf_protein_g_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: CSF total protein in g/L (normal adult typically 0.15-0.45 g/L; raised in bacterial meningitis and many other conditions).
         csf_glucose_mmol_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: CSF glucose in mmol/L (interpret against paired serum glucose; low in bacterial meningitis).
         csf_serum_glucose_ratio:
-          type: number
+          type: [number, 'null']
           format: double
           description: CSF:serum glucose ratio (normal approximately 0.6; <0.4 suggests bacterial meningitis).
         csf_lactate_mmol_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: CSF lactate in mmol/L (raised, typically >3.5 mmol/L, supports bacterial meningitis).
         gram_stain_result:

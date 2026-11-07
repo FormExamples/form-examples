@@ -19,38 +19,29 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            maximum: 100000
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of CervicalScreening records
+          description: A page of CervicalScreening records, with no total
           headers:
-            x-total-count:
-              description: Rows there are in all
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
               schema:
-                type: integer
-            x-limit:
-              description: The limit applied
-              schema:
-                type: integer
-            x-offset:
-              description: The offset applied
-              schema:
-                type: integer
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/CervicalScreening"
-        "400":
-          description: The offset is past the maximum
+        "422":
+          description: The limit or the cursor is not valid
           content:
             application/problem+json:
               schema:
@@ -191,6 +182,51 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing CervicalScreening
+      operationId: replaceCervicalScreening
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CervicalScreening"
+      responses:
+        "200":
+          description: The updated CervicalScreening
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CervicalScreening"
+        "404":
+          description: CervicalScreening not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a CervicalScreening
       operationId: deleteCervicalScreening
@@ -265,7 +301,7 @@ components:
           format: uuid
           description: Foreign key to the patient this screening documents (restrict delete).
         clinician_id:
-          type: string
+          type: [string, 'null']
           format: uuid
           description: Foreign key to the sample-taker clinician (restrict delete); optional.
         care_setting:
@@ -286,7 +322,7 @@ components:
             - ""
           description: "Role of the person taking the sample: practice-nurse, gp, smear-taker, or other."
         sample_taken_at:
-          type: string
+          type: [string, 'null']
           format: date-time
           description: Date and time the screening sample was taken.
         patient_identifier:
@@ -294,7 +330,7 @@ components:
           maxLength: 100
           description: Local patient or encounter identifier as recorded on the record.
         age:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Patient age in years; drives eligibility (25-64) and the recall interval.
         recall_interval:
@@ -306,11 +342,11 @@ components:
             - ""
           description: "Age-appropriate routine recall interval: three-yearly (25-49), five-yearly (50-64), or not-applicable."
         screen_due_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the screen was due.
         last_screen_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date of the most recent previous screening, when known.
         overdue:

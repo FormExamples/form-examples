@@ -18,7 +18,7 @@
   ndiBand: "no-disability"
   mjoaTotalScore: 1
   mjoaBand: "mild"
-  eq5dHealthStateDescriptor: "Test eq5dHealthStateDescriptor"
+  eq5dHealthStateDescriptor: "Test "
   eq5dUkIndexValue: 1.0
   eq5dVasScore: 1.0
   patientReportedOutcomeMeasuresId: "00000000-0000-4000-8000-00000008d669"

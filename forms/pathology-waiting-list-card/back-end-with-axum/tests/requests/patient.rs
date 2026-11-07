@@ -26,7 +26,7 @@ async fn can_create_and_read_back_patient() {
             "countryAsIso31661Alpha2": "GB",
             "postcode": "SW1A 2AA",
             "unitedKingdomNhsNumber": "9434765919",
-            "preferredLanguageAsIso6391": "Test preferredLanguageAsIso6391",
+            "preferredLanguageAsIso6391": "en",
             "interpreterRequired": "yes",
             "accessibilityNeeds": "Test accessibilityNeeds",
             "preferredContactChannel": "sms"
@@ -84,7 +84,7 @@ async fn can_create_and_read_back_patient() {
         assert_eq!(fetched["unitedKingdomNhsNumber"], "9434765919");
         assert_eq!(
             fetched["preferredLanguageAsIso6391"],
-            "Test preferredLanguageAsIso6391"
+            "en"
         );
         assert_eq!(fetched["interpreterRequired"], "yes");
         assert_eq!(fetched["accessibilityNeeds"], "Test accessibilityNeeds");

@@ -65,9 +65,8 @@ edition 2024 crates:
 
 | File | Provides |
 | --- | --- |
-| `mod.rs` | `db(&ctx)`, the pool from `ctx.db`, plus `yaml` |
+| `mod.rs` | `db(&ctx)`, the pool from `ctx.db`; `PAGE_LIMITS`, `cursor_key` and `cursor_page`; the rate limit; `yaml` |
 | `model.rs` | `ModelError` and its HTTP mapping |
-| `paging.rs` | The limits of every list route, and its `x-total-count` headers |
 | `problem.rs` | The router under the standard middleware, with every failure rewritten as a problem |
 | `seed.rs` | Loading a YAML fixture into a table |
 | `prelude.rs` | Common imports for handlers and models |
@@ -97,7 +96,8 @@ Queries are checked at runtime by the test suite, not at compile time, so a buil
 needs no database. `UPDATE` statements set `updated_at = now()` themselves.
 
 The database enforces the CHECK constraints from `sql/`, through the migration
-`20261107600000_check_constraints` that `bin/axum-check-constraints` writes. Each is
+`20261107600000_check_constraints` that `bin/axum-check-constraints` writes, and the
+`VARCHAR(n)` lengths, through `20261107700000_length_constraints`. Each is
 `NOT VALID`, so new writes are checked and rows already stored are not; run `ALTER
 TABLE ... VALIDATE CONSTRAINT` once old rows are fixed. `build.rs` makes Cargo rebuild
 when `migrations/` changes, because `sqlx::migrate!` embeds the files at compile time.
@@ -122,12 +122,14 @@ whose text would be dropped.
 that text as public. `support/prelude.rs` exports `axa::extract::{Json, Path, Query}`
 in place of Axum's, so a refused request says what was wrong and quotes nothing. A
 violated unique or foreign key constraint answers `409`, a violated CHECK or NOT NULL
-constraint answers `422` (axa 0.6.2), and a `500` has no `detail`.
+constraint answers `422` (axa 0.6.2 and later), and a `500` has no `detail`.
 Health routes under `/_` keep their own bodies.
 
-List routes use `params.resolve(PAGE_LIMITS)?`, `page.bounds()`, and
-`page.respond(total, rows)`. `PAGE_LIMITS` is in `support/mod.rs`. A list answers a
-bare array, never an `{items, total}` envelope; the total is in `x-total-count`.
+List routes take `OriginalUri(uri): OriginalUri`, and use `cursor_page(&ctx, &uri)?`,
+`page.bounds()` in the model, and `page.respond(rows)`. `PAGE_LIMITS`, `cursor_key`
+and `cursor_page` are in `support/mod.rs`, and `App::context` stores the key in
+`ctx.shared_store`. A list answers a bare array, never an `{items, total}` envelope,
+and there is no total.
 
 `App::router` limits each client to `RATE_LIMIT_REQUESTS` (600) in each
 `RATE_LIMIT_WINDOW_SECONDS` (60), both in `support/mod.rs`, with
@@ -168,6 +170,8 @@ Settings come from the environment, with defaults in `defaults()` in `app.rs`:
 - `LOG_LEVEL`, `LOG_FORMAT`, `LOG_FILTER`
 - `WORKER_MODE`
 - `SHUTDOWN_TIMEOUT_SECONDS` — how long requests and jobs get to finish (default 25)
+- `CURSOR_KEY` — the secret, at least 32 bytes, that signs list cursors; the same on every
+  replica, and required where the environment is production-like
 - `TRUSTED_PROXIES` — the proxies whose `X-Forwarded-For` is believed, so that the rate
   limit counts each client rather than the proxy
 
@@ -179,10 +183,19 @@ access control before it holds real data.
 
 ## Lists
 
-A list route takes `?limit=` (default 100, largest 1000) and `?offset=` (largest
-100000; past that it answers `400`), and reports `x-total-count`, `x-limit`, and
-`x-offset` in its response headers. A larger `limit` is clamped, not refused. Rows
-come back in a stable order, so a client can read every page.
+A list route takes `?limit=` (default 100, largest 1000) and an opaque `?cursor=`,
+through axa's `cursor-pagination`. While more rows follow, the response carries
+`Link: <...>; rel="next"`, and a client reads every page by following it. There is no
+total and no `?offset=`: a total would count rows a caller may not be allowed to see.
+A cursor is signed with HMAC-SHA256 over its position, the path and every filter, so
+a caller cannot forge one, edit one, or carry it to another list or filter. A bad
+cursor, or a `limit` that is zero, not a number, or over 1000, answers `422`; a limit
+is refused, never clamped. Rows come back in a stable order.
+
+The key is `CURSOR_KEY`, at least 32 bytes, and every replica must share it. A
+production-like environment refuses to start without it. Development and test fall
+back to a public key in the source. Changing the key invalidates the cursors already
+handed out, which then answer `422`.
 
 ## Destructive commands
 
@@ -237,6 +250,8 @@ Every crate's `Cargo.lock` is committed, because each is a binary crate. See
 - `bin/axum-msrv-set --msrv <version> [--check] [--dry-run] [--all|<slug>…]` — set the Rust MSRV fleet-wide
 - `bin/axum-axa-upgrade [--check] [--root <dir>] [--all|<slug>…]` — move crates from axa 0.5 to 0.6, whose errors are RFC 9457 problems, and check they stay there
 - `bin/axum-axa-adopt [--check] [--root <dir>] [--all|<slug>…]` — take up axa 0.6's per-client rate limit and development-only `seed` task; `--check` also fails a list that skips `Page::respond`
+- `bin/axum-axa-0-7 [--check] [--no-lock] [--root <dir>] [--all|<slug>…]` — move from axa 0.6 to 0.7: the `offset-pagination` feature and the `axa::offset_pagination` path, the new names of `pagination`, and `cargo update -p axa`
+- `bin/axum-cursor-pagination [--check] [--root <dir>] [--all|<slug>…]` — page every generated list by signed cursor instead of offset: `cursor_key` and `cursor_page` in `support/`, lists read the URI, models drop their `COUNT(*)`, tests follow `Link`; `--check` also names a hand-written list still paging by offset
 - `bin/axum-check-constraints [--check] [--root <dir>] [--all|<slug>…]` — migrate every `sql/` CHECK constraint the crate's tables can hold, `NOT VALID`, and write the `build.rs` that rebuilds when `migrations/` changes. Run after changing `sql/`, then run `bin/axum-fixture-checks`
 - `bin/axum-fixture-checks [--check] [--all|<slug>…]` — put an allowed value wherever a fixture or a test's literal `INSERT` breaks a CHECK constraint; needs Postgres
 - `bin/axum-entity-routes [--check] [--root <dir>] [--all|<slug>…]` — give every `sql/` table a migration, model, controller, and test, unless a hand-written controller already reaches it. Run after adding a table, then run `bin/axum-soft-delete`

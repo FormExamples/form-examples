@@ -19,38 +19,29 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            maximum: 100000
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of HipReplacementSurgeryEvaluation records
+          description: A page of HipReplacementSurgeryEvaluation records, with no total
           headers:
-            x-total-count:
-              description: Rows there are in all
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
               schema:
-                type: integer
-            x-limit:
-              description: The limit applied
-              schema:
-                type: integer
-            x-offset:
-              description: The offset applied
-              schema:
-                type: integer
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/HipReplacementSurgeryEvaluation"
-        "400":
-          description: The offset is past the maximum
+        "422":
+          description: The limit or the cursor is not valid
           content:
             application/problem+json:
               schema:
@@ -191,6 +182,51 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing HipReplacementSurgeryEvaluation
+      operationId: replaceHipReplacementSurgeryEvaluation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HipReplacementSurgeryEvaluation"
+      responses:
+        "200":
+          description: The updated HipReplacementSurgeryEvaluation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HipReplacementSurgeryEvaluation"
+        "404":
+          description: HipReplacementSurgeryEvaluation not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HipReplacementSurgeryEvaluation
       operationId: deleteHipReplacementSurgeryEvaluation
@@ -277,11 +313,11 @@ components:
             - urgent
           description: "Workflow status of the evaluation: draft, submitted, reviewed, or urgent."
         assessment_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the evaluation was conducted.
         assessment_time:
-          type: string
+          type: [string, 'null']
           format: time
           description: Time the evaluation was conducted.
         site_name:
@@ -297,15 +333,15 @@ components:
             - ""
           description: "Hip side affected: left, right, or bilateral."
         symptom_duration_months:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Duration of hip symptoms in months.
         pain_at_rest_0_10:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Pain severity at rest, 0 (none) to 10 (worst imaginable).
         pain_on_activity_0_10:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Pain severity on activity, 0 (none) to 10 (worst imaginable).
         night_pain:
@@ -336,51 +372,51 @@ components:
           type: string
           description: Description of the prior hip injury or dysplasia history.
         ohs_pain_severity:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Oxford Hip Score item 1: usual hip pain severity, 0 (worst) to 4 (best)."
         ohs_washing_and_drying:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Oxford Hip Score item 2: difficulty washing and drying yourself because of your hip, 0 (worst) to 4 (best)."
         ohs_transport:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Oxford Hip Score item 3: difficulty getting in and out of a car, or using public transport, because of your hip, 0 (worst) to 4 (best)."
         ohs_dressing_socks:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Oxford Hip Score item 4: difficulty putting on a pair of socks or stockings because of your hip, 0 (worst) to 4 (best)."
         ohs_shopping:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Oxford Hip Score item 5: ability to do the household shopping on your own, 0 (worst) to 4 (best)."
         ohs_walking_pain:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Oxford Hip Score item 6: pain experienced walking, 0 (worst) to 4 (best)."
         ohs_limping:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Oxford Hip Score item 7: limping when walking because of your hip, 0 (worst) to 4 (best)."
         ohs_kneeling:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Oxford Hip Score item 8: difficulty kneeling and getting up again afterwards because of your hip, 0 (worst) to 4 (best)."
         ohs_night_pain:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Oxford Hip Score item 9: how often has hip pain troubled you in bed at night, 0 (worst) to 4 (best)."
         ohs_work_interference:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Oxford Hip Score item 10: how much has hip pain interfered with your usual work, 0 (worst) to 4 (best)."
         ohs_giving_way:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Oxford Hip Score item 11: how often has the hip felt like it might suddenly give way or let you down, 0 (worst) to 4 (best)."
         ohs_stairs:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Oxford Hip Score item 12: ability to walk down a flight of stairs, 0 (worst) to 4 (best)."
         walking_distance_before_pain:
@@ -433,27 +469,27 @@ components:
             - ""
           description: Whether the Trendelenburg sign is positive, indicating hip abductor weakness relevant to surgical planning.
         leg_length_discrepancy_as_cm:
-          type: number
+          type: [number, 'null']
           format: double
           description: Measured leg-length discrepancy in cm; greater than 2cm affects surgical planning.
         flexion_degrees:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Hip flexion range of motion in degrees.
         internal_rotation_degrees:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Hip internal rotation range of motion in degrees.
         external_rotation_degrees:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Hip external rotation range of motion in degrees.
         abduction_degrees:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Hip abduction range of motion in degrees.
         adduction_degrees:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Hip adduction range of motion in degrees.
         fixed_flexion_deformity_present:
@@ -464,7 +500,7 @@ components:
             - ""
           description: Whether a fixed flexion deformity is present on examination.
         hip_abductor_strength_mrc:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Hip abductor muscle strength on the Medical Research Council (MRC) 0 to 5 scale.
         joint_stability:
@@ -492,7 +528,7 @@ components:
             - ""
           description: Whether a weight-bearing pelvic or hip X-ray was performed.
         kellgren_lawrence_grade:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Kellgren and Lawrence radiographic osteoarthritis grade, 0 (none) to 4 (severe).
         joint_space_narrowing:
@@ -545,7 +581,7 @@ components:
             - ""
           description: Whether physiotherapy has been tried as a conservative measure.
         physiotherapy_duration_weeks:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Duration of the physiotherapy trial in weeks.
         weight_management_advice_given:
@@ -563,7 +599,7 @@ components:
             - ""
           description: Whether an intra-articular steroid injection has been given as a conservative measure.
         steroid_injection_count:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Number of intra-articular steroid injections given.
         steroid_injection_response:
@@ -721,7 +757,7 @@ components:
             - ""
           description: "Clinician recommendation: total hip replacement, hip resurfacing, continue conservative management, MDT review, or not currently a candidate."
         target_list_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Target date to add the patient to the surgical waiting list, where applicable.
         responsible_surgeon:

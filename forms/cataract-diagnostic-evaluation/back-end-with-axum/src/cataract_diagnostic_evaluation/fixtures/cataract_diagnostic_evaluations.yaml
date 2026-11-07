@@ -26,16 +26,16 @@
   medicalHistoryNotes: "Test medicalHistoryNotes"
   unaidedVaLogmarRight: 1.0
   unaidedVaLogmarLeft: 1.0
-  unaidedVaSnellenRight: "Test unaidedVaSnellenRight"
-  unaidedVaSnellenLeft: "Test unaidedVaSnellenLeft"
+  unaidedVaSnellenRight: "Test unaidedVaSnelle"
+  unaidedVaSnellenLeft: "Test unaidedVaSnelle"
   bestCorrectedVaLogmarRight: 1.0
   bestCorrectedVaLogmarLeft: 1.0
-  bestCorrectedVaSnellenRight: "Test bestCorrectedVaSnellenRight"
-  bestCorrectedVaSnellenLeft: "Test bestCorrectedVaSnellenLeft"
+  bestCorrectedVaSnellenRight: "Test bestCorrectedVa"
+  bestCorrectedVaSnellenLeft: "Test bestCorrectedVa"
   pinholeVaLogmarRight: 1.0
   pinholeVaLogmarLeft: 1.0
-  pinholeVaSnellenRight: "Test pinholeVaSnellenRight"
-  pinholeVaSnellenLeft: "Test pinholeVaSnellenLeft"
+  pinholeVaSnellenRight: "Test pinholeVaSnelle"
+  pinholeVaSnellenLeft: "Test pinholeVaSnelle"
   refractionSphereRight: 1.0
   refractionSphereLeft: 1.0
   refractionCylinderRight: 1.0
@@ -59,8 +59,8 @@
   cornealClarityLeft: "clear"
   pupilReactionRight: "normal"
   pupilReactionLeft: "normal"
-  glareAcuityResultRight: "Test glareAcuityResultRight"
-  glareAcuityResultLeft: "Test glareAcuityResultLeft"
+  glareAcuityResultRight: "Test glareAcuityResu"
+  glareAcuityResultLeft: "Test glareAcuityResu"
   glareFunctionalImpact: "none"
   intraocularPressureRightMmhg: 1.0
   intraocularPressureLeftMmhg: 1.0

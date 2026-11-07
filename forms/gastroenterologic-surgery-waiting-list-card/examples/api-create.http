@@ -15,7 +15,7 @@ Content-Type: application/json
   "countryAsIso31661Alpha2": "GB",
   "postcode": "SW1A 2AA",
   "unitedKingdomNhsNumber": "9434765928",
-  "preferredLanguageAsIso6391": "Test preferredLanguageAsIso6391",
+  "preferredLanguageAsIso6391": "en",
   "interpreterRequired": "yes",
   "accessibilityNeeds": "Test accessibilityNeeds",
   "preferredContactChannel": "sms"
@@ -37,7 +37,7 @@ Content-Type: application/json
   "countryAsIso31661Alpha2": "GB",
   "postcode": "SW1A 2AA",
   "unitedKingdomNhsNumber": "9434765928",
-  "preferredLanguageAsIso6391": "Test preferredLanguageAsIso6391",
+  "preferredLanguageAsIso6391": "en",
   "interpreterRequired": "yes",
   "accessibilityNeeds": "Test accessibilityNeeds",
   "preferredContactChannel": "sms"
@@ -63,7 +63,7 @@ Content-Type: application/json
   "countryAsIso31661Alpha2": "GB",
   "postcode": "SW1A 2AA",
   "unitedKingdomNhsNumber": "9434765928",
-  "preferredLanguageAsIso6391": "Test preferredLanguageAsIso6391",
+  "preferredLanguageAsIso6391": "en",
   "interpreterRequired": "yes",
   "accessibilityNeeds": "Test accessibilityNeeds",
   "preferredContactChannel": "sms"

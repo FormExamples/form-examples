@@ -3,7 +3,7 @@
   id: "00000000-0000-4000-8000-00000002b5ed"
   deletedAt: null
   role: "planned-primary"
-  opcs4Code: "Test opcs4Code"
+  opcs4Code: "Test opcs4"
   name: "Test Patient"
   description: "Test description"
   laterality: "left"

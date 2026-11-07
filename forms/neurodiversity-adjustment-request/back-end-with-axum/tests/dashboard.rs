@@ -72,7 +72,8 @@ async fn the_dashboard_pairs_each_request_with_its_own_grade() {
 
         let page = request.get("/api/dashboard").await;
         page.assert_status_ok();
-        assert_eq!(page.header("x-total-count"), "2");
+        assert!(page.maybe_header("x-total-count").is_none());
+        assert!(page.maybe_header("link").is_none());
         let rows = page.json::<Vec<Value>>();
         assert_eq!(rows.len(), 2);
         for row in &rows {
@@ -86,8 +87,18 @@ async fn the_dashboard_pairs_each_request_with_its_own_grade() {
         }
 
         let page = request.get("/api/dashboard?limit=1").await;
-        assert_eq!(page.header("x-total-count"), "2");
         assert_eq!(page.json::<Vec<Value>>().len(), 1);
+        let link = page.header("link");
+        let next = link
+            .to_str()
+            .unwrap()
+            .strip_prefix('<')
+            .and_then(|rest| rest.strip_suffix(">; rel=\"next\""))
+            .unwrap()
+            .to_string();
+        let page = request.get(&next).await;
+        assert_eq!(page.json::<Vec<Value>>().len(), 1);
+        assert!(page.maybe_header("link").is_none());
     })
     .await;
 }

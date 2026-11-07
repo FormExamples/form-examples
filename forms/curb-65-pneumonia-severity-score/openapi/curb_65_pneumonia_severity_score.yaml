@@ -19,38 +19,29 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            maximum: 100000
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of Curb65PneumoniaSeverityScore records
+          description: A page of Curb65PneumoniaSeverityScore records, with no total
           headers:
-            x-total-count:
-              description: Rows there are in all
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
               schema:
-                type: integer
-            x-limit:
-              description: The limit applied
-              schema:
-                type: integer
-            x-offset:
-              description: The offset applied
-              schema:
-                type: integer
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/Curb65PneumoniaSeverityScore"
-        "400":
-          description: The offset is past the maximum
+        "422":
+          description: The limit or the cursor is not valid
           content:
             application/problem+json:
               schema:
@@ -191,6 +182,51 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing Curb65PneumoniaSeverityScore
+      operationId: replaceCurb65PneumoniaSeverityScore
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Curb65PneumoniaSeverityScore"
+      responses:
+        "200":
+          description: The updated Curb65PneumoniaSeverityScore
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Curb65PneumoniaSeverityScore"
+        "404":
+          description: Curb65PneumoniaSeverityScore not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Curb65PneumoniaSeverityScore
       operationId: deleteCurb65PneumoniaSeverityScore
@@ -265,7 +301,7 @@ components:
           format: uuid
           description: Foreign key to the patient being assessed (delete restricted).
         clinician_id:
-          type: string
+          type: [string, 'null']
           format: uuid
           description: Foreign key to the assessing clinician (optional; delete restricted).
         clinician_name:
@@ -285,7 +321,7 @@ components:
             - ""
           description: "Role of the assessing clinician: physician, general-practitioner, advanced-nurse-practitioner, nurse, paramedic, pharmacist, or other."
         assessed_at:
-          type: string
+          type: [string, 'null']
           format: date-time
           description: Date and time the assessment was performed.
         care_setting:
@@ -313,7 +349,7 @@ components:
             - ""
           description: "Patient sex recorded for the assessment: female, male, intersex, or unknown."
         age_years:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Criterion A65 — patient age in years, derived from date of birth and confirmed at assessment; scores 1 when >= 65.
         confusion_present:
@@ -324,7 +360,7 @@ components:
             - ""
           description: "Criterion C — whether new-onset confusion is present: yes, no, or unanswered."
         amt_score:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Supporting evidence for confusion — Abbreviated Mental Test score (0-10); not scored directly.
         urea_measured:
@@ -335,27 +371,27 @@ components:
             - ""
           description: Whether serum urea was measured; when no, the four-criterion CRB-65 fallback is computed instead of CURB-65.
         urea_mmol_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Criterion U — serum urea in millimoles per litre (mmol/L); scores 1 when > 7.
         respiratory_rate:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Criterion R — respiratory rate in breaths per minute; scores 1 when >= 30.
         systolic_bp:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Criterion B — systolic blood pressure in mmHg; scores 1 when < 90 (or diastolic <= 60).
         diastolic_bp:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Criterion B — diastolic blood pressure in mmHg; scores 1 when <= 60 (or systolic < 90).
         oxygen_saturation:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Advisory adjunct — peripheral oxygen saturation (SpO2) as a percentage; not scored, raises the hypoxia flag when < 92.
         temperature_c:
-          type: number
+          type: [number, 'null']
           format: double
           description: Advisory adjunct — body temperature in degrees Celsius; not scored.
         significant_comorbidity:

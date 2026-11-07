@@ -24,7 +24,7 @@ macro_rules! problem {
 async fn every_failure_is_a_problem() {
     request::<App, _, _>(|request, _ctx| async move {
         // axa's own error, whose text reaches the client.
-        let (body, _) = problem!(request.get("/api/centers?offset=100001").await, 400);
+        let (body, _) = problem!(request.get("/api/centers?cursor=forged").await, 422);
         assert!(body["detail"].is_string());
 
         // A route that does not exist, and a wrong method.
@@ -95,10 +95,10 @@ async fn a_value_outside_a_check_is_unprocessable() {
             "givenNames": "Test givenNames",
             "birthDate": "1990-01-01",
             "sex": "not-a-listed-value",
-            "nationalityAsIso31661Alpha3": "Test nationalityAsIso31661Alpha3",
+            "nationalityAsIso31661Alpha3": "GBR",
             "travelDocumentKind": "passport",
             "travelDocumentNumber": "Test travelDocumentNumber",
-            "travelDocumentIssuerAsIso31661Alpha3": "Test travelDocumentIssuerAsIso31661Alpha3",
+            "travelDocumentIssuerAsIso31661Alpha3": "GBR",
             "email": "test.patient@example.com",
             "phone": "+441234567890",
             "postalAddressAsFullText": "10 Downing Street, London",
@@ -119,10 +119,10 @@ async fn a_value_outside_a_check_is_unprocessable() {
             "givenNames": "Test givenNames",
             "birthDate": "1990-01-01",
             "sex": "male",
-            "nationalityAsIso31661Alpha3": "Test nationalityAsIso31661Alpha3",
+            "nationalityAsIso31661Alpha3": "GBR",
             "travelDocumentKind": "passport",
             "travelDocumentNumber": "Test travelDocumentNumber",
-            "travelDocumentIssuerAsIso31661Alpha3": "Test travelDocumentIssuerAsIso31661Alpha3",
+            "travelDocumentIssuerAsIso31661Alpha3": "GBR",
             "email": "test.patient@example.com",
             "phone": "+441234567890",
             "postalAddressAsFullText": "10 Downing Street, London",

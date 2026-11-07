@@ -19,38 +19,29 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            maximum: 100000
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of ApgarScore records
+          description: A page of ApgarScore records, with no total
           headers:
-            x-total-count:
-              description: Rows there are in all
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
               schema:
-                type: integer
-            x-limit:
-              description: The limit applied
-              schema:
-                type: integer
-            x-offset:
-              description: The offset applied
-              schema:
-                type: integer
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/ApgarScore"
-        "400":
-          description: The offset is past the maximum
+        "422":
+          description: The limit or the cursor is not valid
           content:
             application/problem+json:
               schema:
@@ -191,6 +182,51 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing ApgarScore
+      operationId: replaceApgarScore
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApgarScore"
+      responses:
+        "200":
+          description: The updated ApgarScore
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApgarScore"
+        "404":
+          description: ApgarScore not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ApgarScore
       operationId: deleteApgarScore
@@ -265,7 +301,7 @@ components:
           format: uuid
           description: Foreign key to the newborn patient being assessed (delete restricted).
         clinician_id:
-          type: string
+          type: [string, 'null']
           format: uuid
           description: Foreign key to the attending clinician (optional; delete restricted).
         clinician_name:
@@ -284,7 +320,7 @@ components:
             - ""
           description: "Role of the attending clinician: midwife, obstetrician, neonatologist, neonatal-nurse, paediatrician, or other."
         born_at:
-          type: string
+          type: [string, 'null']
           format: date-time
           description: Date and time of birth.
         care_setting:
@@ -299,7 +335,7 @@ components:
             - ""
           description: "Care setting where the birth took place: delivery-room, theatre, birth-centre, home, neonatal-unit, or other."
         gestational_age_weeks:
-          type: number
+          type: [number, 'null']
           format: double
           description: Gestational age at birth, in completed weeks.
         mode_of_delivery:
@@ -325,7 +361,7 @@ components:
             - ""
           description: "Newborn sex: female, male, intersex, or unknown."
         birth_order:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Birth order for multiple births (1 for a singleton).
         resuscitation_measures:

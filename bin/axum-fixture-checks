@@ -6,8 +6,8 @@ The fixtures (`src/<form>/fixtures/*.yaml`) and the literal `INSERT`s in
 `tests/` were written before the crates had CHECK constraints, with values such
 as `status: "Test status"` or `0` for a score from 1 to 15. This finds each value
 a constraint refuses and puts in the first one it allows: the first non-empty
-value of an `IN (...)` list, the lowest bound of a range, or NULL where nothing
-else fits. Postgres judges every value, so the semantics are exact, NULL
+value of an `IN (...)` list, the lowest bound of a range, a value cut to its
+column's length, or NULL where nothing else fits. Postgres judges every value, so the semantics are exact, NULL
 included. It needs no tables, only a connection, through PGHOST, PGPORT and
 PGUSER (default 127.0.0.1, 5432, postgres).
 
@@ -33,7 +33,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent / "lib"))
 import axum_crate as ac  # noqa: E402
 
-STAMP = "20261107600000_check_constraints.up.sql"
+STAMPS = ("20261107600000_check_constraints.up.sql", "20261107700000_length_constraints.up.sql")
+LENGTH = re.compile(r"char_length\((\w+)\) <= (\d+)")
 CONSTRAINT = re.compile(r'^ALTER TABLE "(\w+)" ADD CONSTRAINT "(\w+)" CHECK \((.*)\) NOT VALID;$', re.M)
 STRING = re.compile(r"'(?:[^']|'')*'")
 NUMBER = re.compile(r"(?<![\w.])-?\d+(?:\.\d+)?(?![\w.])")
@@ -249,12 +250,14 @@ def candidates(expression: str, kind: str, nullable: bool) -> list[str]:
 # --- the crate ------------------------------------------------------------------
 
 def crate_rows(crate: Path):
-    up = crate / "migrations" / STAMP
-    if not up.is_file():
+    ups = [crate / "migrations" / stamp for stamp in STAMPS]
+    if not any(up.is_file() for up in ups):
         return {}, {}, []
     checks: dict[str, list[tuple[str, str]]] = {}
-    for table, name, expression in CONSTRAINT.findall(up.read_text()):
-        checks.setdefault(table, []).append((name, expression))
+    for up in ups:
+        if up.is_file():
+            for table, name, expression in CONSTRAINT.findall(up.read_text()):
+                checks.setdefault(table, []).append((name, expression))
     tables = ac.migration_tables(crate)
     sources = []
     fixtures = next(iter(crate.glob("src/*/fixtures")), None)
@@ -323,6 +326,12 @@ def main() -> int:
             kinds = {c.name: (c.sql, c.nullable) for c in tables[row.table].columns}
             kind, nullable = kinds[column]
             options = candidates(expression, kind, nullable)
+            sized = LENGTH.fullmatch(expression)
+            current = row.values[column].literal
+            if sized and current.startswith("'"):
+                # Cut a long value to fit, rather than lose it.
+                text = current[1:-1].replace("''", "'")[: int(sized[2])]
+                options.insert(0, quote(text))
             tried = judge.holds([(expression, {**values, column: (o, kind)}) for o in options])
             choice = next((o for o, good in zip(options, tried) if good), None)
             if choice is None:

@@ -106,7 +106,13 @@ NAME_HEURISTICS: list[tuple[re.Pattern, object]] = [
     (re.compile(r"phone"), "+441234567890"),
     (re.compile(r"postal_address"), "10 Downing Street, London"),
     (re.compile(r"^postcode$"), "SW1A 2AA"),
+    (re.compile(r"iso_639_1"), "en"),
+    (re.compile(r"iso_3166_1_alpha_3"), "GBR"),
+    (re.compile(r"iso_3166_1_alpha_2"), "GB"),
     (re.compile(r"country_as_iso"), "GB"),
+    (re.compile(r"^state$"), "CA"),
+    (re.compile(r"zip_code"), "90210"),
+    (re.compile(r"social_security_number"), "123-45-6789"),
     # Distinct from bin/loco-seed-data-rollout's own "9434765919": the
     # seed fixture already inserted a patient row with that NHS number,
     # and this generator's own POST must not collide with it under the
@@ -136,6 +142,13 @@ def _heuristic_type_compatible(heuristic_value, inner_type: str) -> bool:
     if isinstance(heuristic_value, str):
         return inner_type not in ("bool", "i64", "i32", "f64", "f32", "Decimal")
     return True
+
+
+SIZED_RE = re.compile(r"^\s*(\w+)\s+(?:VARCHAR|CHAR)\s*\(\s*(\d+)\s*\)", re.IGNORECASE | re.MULTILINE)
+
+
+def parse_lengths(sql_text: str) -> dict[str, int]:
+    return {m.group(1): int(m.group(2)) for m in SIZED_RE.finditer(sql_text)}
 
 
 def pick_value(field_name: str, rust_type: str, enums: dict[str, list[str]]):
@@ -169,12 +182,15 @@ def build_patient_body(controller_text: str, sql_text: str) -> dict | None:
     if not m:
         return None
     enums = parse_check_enums(sql_text) if sql_text else {}
+    lengths = parse_lengths(sql_text) if sql_text else {}
     body = {}
     for fm in FIELD_RE.finditer(m.group(1)):
         name, rust_type = fm.group(1), fm.group(2).strip()
         if name == "deleted_at":
             continue
         value = pick_value(name, rust_type, enums)
+        if isinstance(value, str) and name in lengths:
+            value = value[: lengths[name]]  # the crate refuses a value past its length
         if value is None and not rust_type.startswith("Option<"):
             return None
         if value is not None:

@@ -225,6 +225,10 @@ starts. `bin/axum-fixture-checks` gives the fixtures and test rows allowed value
 judged by Postgres. Each crate gains a `build.rs`, because `sqlx::migrate!` embeds the
 migrations and Cargo did not rebuild when one was added.
 
+The crates' columns had also lost the lengths of `sql/`'s `VARCHAR(n)` and `CHAR(n)`,
+so a second migration adds each as a `char_length(column) <= n` check, `NOT VALID`
+likewise (11,838 of them).
+
 Every crate is on axa 0.6.2, which answers a broken CHECK or NOT NULL constraint as
 `422` `unprocessable_entity`, naming neither the value nor the field, and 351 crates
 test that with a value their CHECK does not list.
@@ -235,3 +239,28 @@ sends another learns it is theirs to fix. (+) A new migration reaches the next b
 `422` does not say which field, so a client must check its own values against the
 OpenAPI enums. (−) A change to `sql/` must be followed by both tools.
 
+
+## ADR-13 — Lists page by signed cursor, with no total
+
+**Context.** Every list took `?limit=` and `?offset=` and reported `x-total-count`,
+through axa's offset paging. axa 0.7 marks that insecure: the total counts every row,
+including rows a record policy would hide from the caller; the offset is the caller's
+to choose, so any position can be asked for; and an offset past the last row cost a
+scan. axa 0.7 adds `cursor-pagination` beside it.
+
+**Decision.** Every crate is on axa 0.7 (`bin/axum-axa-0-7`) and pages every list by
+signed cursor (`bin/axum-cursor-pagination`). A list takes `?limit=` and an opaque
+`?cursor=`, answers a bare array, and links the next page with `Link: rel="next"`
+while more rows follow. The cursor is signed with HMAC-SHA256 under `CURSOR_KEY`,
+over its position, the path and every filter. The key must be at least 32 bytes and
+the same on every replica, and a production-like environment will not start without
+it; development and test use a public key in the source. A bad cursor or limit answers
+`422`, and a limit over 1000 is refused, not clamped. Models fetch one row more than the
+page, so that `CursorPage::respond` can tell whether more follow, and no longer count.
+
+**Consequences.** (+) No list reveals how many rows there are, and a caller can reach
+only pages the service handed out. (+) One query per page, not two. (−) A client that
+read `x-total-count`, or sent `?offset=`, must follow `Link` instead; no front-end here
+did. (−) The position inside a cursor is still an offset, so a row added or removed
+between two fetches can make a later page repeat or skip one row. (−) Rotating
+`CURSOR_KEY` turns every cursor already handed out into a `422`.

@@ -19,38 +19,29 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            maximum: 100000
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of HealthScreeningQuestionnaire records
+          description: A page of HealthScreeningQuestionnaire records, with no total
           headers:
-            x-total-count:
-              description: Rows there are in all
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
               schema:
-                type: integer
-            x-limit:
-              description: The limit applied
-              schema:
-                type: integer
-            x-offset:
-              description: The offset applied
-              schema:
-                type: integer
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/HealthScreeningQuestionnaire"
-        "400":
-          description: The offset is past the maximum
+        "422":
+          description: The limit or the cursor is not valid
           content:
             application/problem+json:
               schema:
@@ -149,6 +140,51 @@ paths:
     patch:
       summary: Update an existing HealthScreeningQuestionnaire
       operationId: updateHealthScreeningQuestionnaire
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HealthScreeningQuestionnaire"
+      responses:
+        "200":
+          description: The updated HealthScreeningQuestionnaire
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthScreeningQuestionnaire"
+        "404":
+          description: HealthScreeningQuestionnaire not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing HealthScreeningQuestionnaire
+      operationId: replaceHealthScreeningQuestionnaire
       requestBody:
         required: true
         content:
@@ -291,7 +327,7 @@ components:
           maxLength: 255
           description: "Step 1: site where the screening took place."
         assessment_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: "Step 1: date the screening was conducted."
         assessment_mode:
@@ -313,11 +349,11 @@ components:
             - ""
           description: "Step 3: usual physical activity level."
         moderate_exercise_days_per_week:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Step 3: number of days per week with at least moderate exercise, 0 to 7."
         fruit_and_vegetable_portions_per_day:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Step 3: typical fruit and vegetable portions eaten per day."
         diet_notes:
@@ -333,19 +369,19 @@ components:
             - ""
           description: "Step 4: smoking status."
         cigarettes_per_day:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Step 4: cigarettes smoked per day, where applicable."
         audit_c_frequency:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Step 4: AUDIT-C item 1, frequency of drinking, 0 to 4."
         audit_c_typical_quantity:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Step 4: AUDIT-C item 2, typical quantity per drinking day, 0 to 4."
         audit_c_binge_frequency:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Step 4: AUDIT-C item 3, frequency of six-or-more (binge) drinking, 0 to 4."
         condition_diabetes:
@@ -519,27 +555,27 @@ components:
             - ""
           description: "Step 8, PAR-Q+ item 7: do you have a bone, joint, or soft-tissue problem that could be made worse by becoming more physically active."
         height_as_cm:
-          type: number
+          type: [number, 'null']
           format: double
           description: "Step 9: height measurement in cm, optional."
         weight_as_kg:
-          type: number
+          type: [number, 'null']
           format: double
           description: "Step 9: weight measurement in kg, optional."
         body_mass_index:
-          type: number
+          type: [number, 'null']
           format: double
           description: "Step 9: body mass index, auto-computed from height and weight when both are present."
         resting_blood_pressure_systolic:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Step 9: resting systolic blood pressure in mmHg, optional."
         resting_blood_pressure_diastolic:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Step 9: resting diastolic blood pressure in mmHg, optional."
         resting_heart_rate:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Step 9: resting heart rate in beats per minute, optional."
         job_role:
@@ -588,11 +624,11 @@ components:
           maxLength: 500
           description: "Step 10: detail of the other occupational exposure risk, free text."
         stress_level:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Step 11: self-reported stress level, 0 (none) to 4 (severe)."
         sleep_quality:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Step 11: self-reported sleep quality, 0 (very poor) to 4 (very good)."
         mental_health_concern:

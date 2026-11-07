@@ -19,38 +19,29 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            maximum: 100000
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of ModelForEndStageLiverDiseaseScoreGrade records
+          description: A page of ModelForEndStageLiverDiseaseScoreGrade records, with no total
           headers:
-            x-total-count:
-              description: Rows there are in all
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
               schema:
-                type: integer
-            x-limit:
-              description: The limit applied
-              schema:
-                type: integer
-            x-offset:
-              description: The offset applied
-              schema:
-                type: integer
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/ModelForEndStageLiverDiseaseScoreGrade"
-        "400":
-          description: The offset is past the maximum
+        "422":
+          description: The limit or the cursor is not valid
           content:
             application/problem+json:
               schema:
@@ -191,6 +182,51 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing ModelForEndStageLiverDiseaseScoreGrade
+      operationId: replaceModelForEndStageLiverDiseaseScoreGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ModelForEndStageLiverDiseaseScoreGrade"
+      responses:
+        "200":
+          description: The updated ModelForEndStageLiverDiseaseScoreGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModelForEndStageLiverDiseaseScoreGrade"
+        "404":
+          description: ModelForEndStageLiverDiseaseScoreGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ModelForEndStageLiverDiseaseScoreGrade
       operationId: deleteModelForEndStageLiverDiseaseScoreGrade
@@ -265,22 +301,22 @@ components:
           format: uuid
           description: Foreign key to the parent assessment (unique, 1:1).
         bilirubin_mg_dl:
-          type: number
+          type: [number, 'null']
           format: double
           description: Total bilirubin converted to mg/dL (from umol/L when required).
         creatinine_mg_dl:
-          type: number
+          type: [number, 'null']
           format: double
           description: Serum creatinine converted to mg/dL (from umol/L when required), before the dialysis rule and bounds.
         creatinine_adjusted:
-          type: number
+          type: [number, 'null']
           format: double
           description: Creatinine after the dialysis rule (set to 4.0 mg/dL when the rule applied), before the 1.0-4.0 bounds.
         dialysis_rule_applied:
           type: boolean
           description: True when the dialysis creatinine rule applied (>= 2 haemodialysis sessions in the past 7 days or >= 24 h CVVHD).
         meld_score:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Integer MELD score clamped to 6-40; NULL when a required lab input for the chosen variant is missing.
         mortality_band:
@@ -294,7 +330,7 @@ components:
             - ""
           description: "Mapped estimated 3-month mortality band: low, moderate, high, very-high, or extreme."
         estimated_mortality_percent:
-          type: number
+          type: [number, 'null']
           format: double
           description: Estimated 3-month mortality as a percentage for the mapped band.
         graded_at:

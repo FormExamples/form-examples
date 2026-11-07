@@ -19,38 +19,29 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            maximum: 100000
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of KneeReplacementSurgeryEvaluation records
+          description: A page of KneeReplacementSurgeryEvaluation records, with no total
           headers:
-            x-total-count:
-              description: Rows there are in all
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
               schema:
-                type: integer
-            x-limit:
-              description: The limit applied
-              schema:
-                type: integer
-            x-offset:
-              description: The offset applied
-              schema:
-                type: integer
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/KneeReplacementSurgeryEvaluation"
-        "400":
-          description: The offset is past the maximum
+        "422":
+          description: The limit or the cursor is not valid
           content:
             application/problem+json:
               schema:
@@ -191,6 +182,51 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing KneeReplacementSurgeryEvaluation
+      operationId: replaceKneeReplacementSurgeryEvaluation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/KneeReplacementSurgeryEvaluation"
+      responses:
+        "200":
+          description: The updated KneeReplacementSurgeryEvaluation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KneeReplacementSurgeryEvaluation"
+        "404":
+          description: KneeReplacementSurgeryEvaluation not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a KneeReplacementSurgeryEvaluation
       operationId: deleteKneeReplacementSurgeryEvaluation
@@ -281,11 +317,11 @@ components:
           maxLength: 255
           description: Site or clinic name where the evaluation took place.
         assessment_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the evaluation was carried out.
         assessment_time:
-          type: string
+          type: [string, 'null']
           format: time
           description: Time the evaluation was carried out.
         knee_side:
@@ -297,15 +333,15 @@ components:
             - ""
           description: "Affected knee: left, right, or bilateral. Bilateral drives the bilateral-symptomatic safety flag."
         symptom_duration_months:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Duration of knee symptoms in months.
         pain_at_rest_0_to_10:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Pain severity at rest, 0 (none) to 10 (worst possible).
         pain_on_activity_0_to_10:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Pain severity on activity, 0 (none) to 10 (worst possible).
         night_pain:
@@ -332,7 +368,7 @@ components:
             - ""
           description: "Type of prior knee surgery: arthroscopy, ligament repair, previous partial replacement, or other."
         prior_knee_surgery_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date of the most recent prior knee surgery.
         prior_injury:
@@ -346,51 +382,51 @@ components:
           type: string
           description: Free-text description of the prior knee injury.
         oks_pain_severity:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Oxford Knee Score item 1: usual knee pain severity, 0 (worst) to 4 (best)."
         oks_washing_and_drying:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Oxford Knee Score item 2: difficulty washing and drying, 0 (worst) to 4 (best)."
         oks_transport:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Oxford Knee Score item 3: difficulty getting in or out of a car, or using public transport, 0 (worst) to 4 (best)."
         oks_walking_distance:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Oxford Knee Score item 4: walking distance before knee pain becomes severe, 0 (worst) to 4 (best)."
         oks_pain_sitting_or_lying:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Oxford Knee Score item 5: pain sitting or lying, 0 (worst) to 4 (best)."
         oks_limping:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Oxford Knee Score item 6: limping when walking, 0 (worst) to 4 (best)."
         oks_kneeling:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Oxford Knee Score item 7: difficulty kneeling, 0 (worst) to 4 (best)."
         oks_night_pain_frequency:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Oxford Knee Score item 8: night pain frequency, 0 (worst) to 4 (best)."
         oks_pain_interfering_with_work:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Oxford Knee Score item 9: pain interfering with usual work (including housework), 0 (worst) to 4 (best)."
         oks_giving_way:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Oxford Knee Score item 10: feeling the knee might suddenly \"give way\" or let the patient down, 0 (worst) to 4 (best)."
         oks_shopping:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Oxford Knee Score item 11: ability to do the household shopping alone, 0 (worst) to 4 (best)."
         oks_stairs:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Oxford Knee Score item 12: ability to walk down a flight of stairs, 0 (worst) to 4 (best)."
         walking_distance_before_pain:
@@ -429,11 +465,11 @@ components:
             - ""
           description: "Walking aid in use: none, stick, frame, or wheelchair."
         flexion_degrees:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Active knee flexion in degrees, measured on examination.
         extension_deficit_degrees:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Extension deficit in degrees; 0 indicates full extension.
         fixed_flexion_deformity_present:
@@ -444,7 +480,7 @@ components:
             - ""
           description: Whether a fixed flexion deformity is present on examination.
         fixed_flexion_deformity_degrees:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Fixed flexion deformity in degrees; above 15 degrees fires the fixed-flexion-deformity safety flag because it affects surgical planning.
         coronal_deformity_type:
@@ -500,7 +536,7 @@ components:
             - ""
           description: "Patellar tracking on examination: normal or maltracking."
         quadriceps_strength_mrc:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Quadriceps strength on the Medical Research Council (MRC) 0 to 5 scale.
         effusion_present:
@@ -525,15 +561,15 @@ components:
             - ""
           description: Whether a weight-bearing X-ray of the knee has been performed.
         kellgren_lawrence_grade_medial:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Kellgren-Lawrence radiographic osteoarthritis grade of the medial compartment, 0 to 4.
         kellgren_lawrence_grade_lateral:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Kellgren-Lawrence radiographic osteoarthritis grade of the lateral compartment, 0 to 4.
         kellgren_lawrence_grade_patellofemoral:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Kellgren-Lawrence radiographic osteoarthritis grade of the patellofemoral compartment, 0 to 4.
         mri_performed:
@@ -569,7 +605,7 @@ components:
             - ""
           description: Whether physiotherapy has been tried as a conservative measure.
         physiotherapy_duration_weeks:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Duration of physiotherapy in weeks.
         weight_management_advice_given:
@@ -596,7 +632,7 @@ components:
             - ""
           description: "Type of intra-articular injection given: corticosteroid, hyaluronic acid, both, or other."
         injection_count:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Number of intra-articular injections given.
         injection_response:
@@ -750,7 +786,7 @@ components:
             - ""
           description: "Clinician recommendation: total knee replacement, partial knee replacement, continue conservative management, MDT review, or not currently a candidate."
         target_list_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Target date to add the patient to the surgical waiting list, if applicable.
         responsible_surgeon:

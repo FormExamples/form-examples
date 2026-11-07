@@ -19,38 +19,29 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            maximum: 100000
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of MedicalCertificateOfCauseOfDeath records
+          description: A page of MedicalCertificateOfCauseOfDeath records, with no total
           headers:
-            x-total-count:
-              description: Rows there are in all
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
               schema:
-                type: integer
-            x-limit:
-              description: The limit applied
-              schema:
-                type: integer
-            x-offset:
-              description: The offset applied
-              schema:
-                type: integer
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/MedicalCertificateOfCauseOfDeath"
-        "400":
-          description: The offset is past the maximum
+        "422":
+          description: The limit or the cursor is not valid
           content:
             application/problem+json:
               schema:
@@ -191,6 +182,51 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing MedicalCertificateOfCauseOfDeath
+      operationId: replaceMedicalCertificateOfCauseOfDeath
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalCertificateOfCauseOfDeath"
+      responses:
+        "200":
+          description: The updated MedicalCertificateOfCauseOfDeath
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalCertificateOfCauseOfDeath"
+        "404":
+          description: MedicalCertificateOfCauseOfDeath not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MedicalCertificateOfCauseOfDeath
       operationId: deleteMedicalCertificateOfCauseOfDeath
@@ -265,7 +301,7 @@ components:
           format: uuid
           description: Foreign key to the deceased this certificate documents (restrict delete).
         clinician_id:
-          type: string
+          type: [string, 'null']
           format: uuid
           description: Foreign key to the certifying doctor (restrict delete); optional.
         certifying_doctor_name:
@@ -290,7 +326,7 @@ components:
           type: string
           description: "Place where the certificate is completed: hospital, practice, or other."
         certification_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the certificate was completed.
         attended_deceased:
@@ -301,7 +337,7 @@ components:
             - ""
           description: Whether the certifier attended the deceased during the last illness (yes/no).
         last_seen_alive_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the certifier last saw the deceased alive.
         deceased_name:
@@ -317,11 +353,11 @@ components:
             - ""
           description: "Sex of the deceased: female, male, other, or unknown."
         date_of_birth:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date of birth of the deceased.
         age_years:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Age of the deceased at death, in whole years.
         patient_identifier:
@@ -329,11 +365,11 @@ components:
           maxLength: 100
           description: NHS number or local identifier of the deceased as recorded on the certificate.
         date_of_death:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date of death.
         time_of_death:
-          type: string
+          type: [string, 'null']
           format: time
           description: Time of death.
         place_of_death:

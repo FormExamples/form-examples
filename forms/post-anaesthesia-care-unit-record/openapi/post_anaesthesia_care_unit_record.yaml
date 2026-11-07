@@ -19,38 +19,29 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            maximum: 100000
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of PostAnaesthesiaCareUnitRecord records
+          description: A page of PostAnaesthesiaCareUnitRecord records, with no total
           headers:
-            x-total-count:
-              description: Rows there are in all
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
               schema:
-                type: integer
-            x-limit:
-              description: The limit applied
-              schema:
-                type: integer
-            x-offset:
-              description: The offset applied
-              schema:
-                type: integer
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/PostAnaesthesiaCareUnitRecord"
-        "400":
-          description: The offset is past the maximum
+        "422":
+          description: The limit or the cursor is not valid
           content:
             application/problem+json:
               schema:
@@ -191,6 +182,51 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing PostAnaesthesiaCareUnitRecord
+      operationId: replacePostAnaesthesiaCareUnitRecord
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostAnaesthesiaCareUnitRecord"
+      responses:
+        "200":
+          description: The updated PostAnaesthesiaCareUnitRecord
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostAnaesthesiaCareUnitRecord"
+        "404":
+          description: PostAnaesthesiaCareUnitRecord not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PostAnaesthesiaCareUnitRecord
       operationId: deletePostAnaesthesiaCareUnitRecord
@@ -265,7 +301,7 @@ components:
           format: uuid
           description: Foreign key to the patient in recovery (delete restricted).
         clinician_id:
-          type: string
+          type: [string, 'null']
           format: uuid
           description: Foreign key to the recording recovery clinician (optional; delete restricted).
         nurse_name:
@@ -286,7 +322,7 @@ components:
           maxLength: 255
           description: Name of the supervising anaesthetist responsible for the case.
         admitted_at:
-          type: string
+          type: [string, 'null']
           format: date-time
           description: Date and time of admission to the post-anaesthesia care unit.
         anaesthetic_technique:
@@ -334,7 +370,7 @@ components:
             - ""
           description: ASA physical status (I-V) carried over from the pre-anaesthetic assessment.
         baseline_systolic_bp:
-          type: number
+          type: [number, 'null']
           format: double
           description: Pre-anaesthetic baseline systolic blood pressure in mmHg, used as the circulation reference.
         ambulatory_case:
@@ -393,7 +429,7 @@ components:
             - ""
           description: "Airway status in recovery: patent, oral-airway (oral/nasal airway in situ), or other support."
         pain_score:
-          type: number
+          type: [number, 'null']
           format: double
           description: Pain score on the verbal / numeric rating scale (0-10).
         ponv_severity:

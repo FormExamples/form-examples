@@ -74,11 +74,10 @@ where in the team's lifecycle the ADR is being captured.
      `file://`, no build step
    - `front-end-with-svelte/` — `pnpm dev`, then visit
      `http://localhost:5173`
-   - `back-end-with-axum/` — `cargo run -- start`,
-     then visit `http://localhost:5150/architecture_decision_records/new`
 2. Fill the 16-step wizard. The HTML and SvelteKit forms autosave to
-   `localStorage` under `adr.form.v1` as you type. The Axum backend
-   auto-numbers and auto-slugs the row on submit.
+   `localStorage` under `adr.form.v1` as you type. To store an ADR,
+   `POST` it to the Axum back end's `/api/adrs`, which numbers and slugs
+   it when the body leaves those out.
 3. Click **Generate Markdown ADR**. Copy the output or download the
    `.md` file into `docs/adr/NNNN-slug.md` in your project repo.
 
@@ -86,8 +85,7 @@ where in the team's lifecycle the ADR is being captured.
 
 1. Open a wizard.
 2. Click **Import .md** and pick the committed file.
-3. The wizard is populated from the Markdown (HTML and SvelteKit only —
-   the Axum wizard edits the row directly via `/edit`).
+3. The wizard is populated from the Markdown.
 4. Re-generate Markdown when done; commit the updated file.
 
 ### Browse the register
@@ -109,20 +107,12 @@ cargo run -- db migrate
 cargo run -- start
 ```
 
-Routes:
+The back end is a JSON API (`GET /api/openapi.yaml` describes it):
 
-- `GET  /architecture_decision_records` — register HTML
-- `GET  /architecture_decision_records/new` — minimal new-draft form
-- `GET  /architecture_decision_records/:id` — read-only ADR view with
-  status banners (superseded / deprecated / pending)
-- `GET  /architecture_decision_records/:id/edit` — 16-section wizard
-- `GET  /architecture_decision_records/:id/markdown` — rendered ADR as
-  `text/markdown`
-- `GET  /api/adrs` — JSON register for the SvelteKit dashboard
-- `GET  /api/adrs/:slug` — JSON view (metadata + rendered Markdown)
-- HTMX partials at `/architecture_decision_records/:id/positions` and
-  `/architecture_decision_records/:id/notes` for inline child-table
-  edits in the wizard
+- `GET  /api/adrs` — the register, by number, paged
+- `POST /api/adrs` — create an ADR; a missing number is the next one, and a
+  missing slug comes from the title. Answers the stored row
+- `GET  /api/adrs/{slug}` — one ADR's metadata and its rendered Markdown
 
 ## Directory structure
 

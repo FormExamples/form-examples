@@ -8,11 +8,11 @@ Content-Type: application/json
 {
   "name": "Test Patient",
   "birthDate": "1990-01-01",
-  "socialSecurityNumber": "Test socialSecurityNumber",
+  "socialSecurityNumber": "123-45-6789",
   "streetAddress": "Test streetAddress",
   "city": "Test city",
-  "state": "Test state",
-  "zipCode": "Test zipCode",
+  "state": "CA",
+  "zipCode": "90210",
   "phone": "+441234567890",
   "email": "test.patient@example.com"
 }
@@ -26,11 +26,11 @@ Content-Type: application/json
   "id": "e6951026-66f8-4f6c-852d-7a9de125527b",
   "name": "Test Patient",
   "birthDate": "1990-01-01",
-  "socialSecurityNumber": "Test socialSecurityNumber",
+  "socialSecurityNumber": "123-45-6789",
   "streetAddress": "Test streetAddress",
   "city": "Test city",
-  "state": "Test state",
-  "zipCode": "Test zipCode",
+  "state": "CA",
+  "zipCode": "90210",
   "phone": "+441234567890",
   "email": "test.patient@example.com"
 }
@@ -48,11 +48,11 @@ Content-Type: application/json
   "id": "e6951026-66f8-4f6c-852d-7a9de125527b",
   "name": "Test Patient",
   "birthDate": "1990-01-01",
-  "socialSecurityNumber": "Test socialSecurityNumber",
+  "socialSecurityNumber": "123-45-6789",
   "streetAddress": "Test streetAddress",
   "city": "Test city",
-  "state": "Test state",
-  "zipCode": "Test zipCode",
+  "state": "CA",
+  "zipCode": "90210",
   "phone": "+441234567890",
   "email": "test.patient@example.com"
 }

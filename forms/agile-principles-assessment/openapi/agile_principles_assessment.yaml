@@ -19,38 +19,29 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            maximum: 100000
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of AgilePrinciplesAssessment records
+          description: A page of AgilePrinciplesAssessment records, with no total
           headers:
-            x-total-count:
-              description: Rows there are in all
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
               schema:
-                type: integer
-            x-limit:
-              description: The limit applied
-              schema:
-                type: integer
-            x-offset:
-              description: The offset applied
-              schema:
-                type: integer
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/AgilePrinciplesAssessment"
-        "400":
-          description: The offset is past the maximum
+        "422":
+          description: The limit or the cursor is not valid
           content:
             application/problem+json:
               schema:
@@ -191,6 +182,51 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing AgilePrinciplesAssessment
+      operationId: replaceAgilePrinciplesAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgilePrinciplesAssessment"
+      responses:
+        "200":
+          description: The updated AgilePrinciplesAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgilePrinciplesAssessment"
+        "404":
+          description: AgilePrinciplesAssessment not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AgilePrinciplesAssessment
       operationId: deleteAgilePrinciplesAssessment
@@ -275,7 +311,7 @@ components:
           type: boolean
           description: TRUE when the respondent chose to submit anonymously; renderers must mask name, email, and role for these rows.
         assessment_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date on which the assessment was completed.
         assessment_period:
@@ -289,7 +325,7 @@ components:
             - ""
           description: "Cadence of the assessment: sprint, quarter, half-year, annual, or ad-hoc."
         p01_customer_satisfaction:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Likert 1-5 for principle 1: highest priority is to satisfy the customer through early and continuous delivery of valuable software."
         p01_comment:
@@ -300,7 +336,7 @@ components:
           format: double
           description: Configurable weight for principle 1, range 0.50-2.00, default 1.00. Affects the weighted-mean composite maturity.
         p02_welcome_change:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Likert 1-5 for principle 2: changing requirements are welcomed, even late in development, to harness competitive advantage."
         p02_comment:
@@ -311,7 +347,7 @@ components:
           format: double
           description: Configurable weight for principle 2, range 0.50-2.00, default 1.00.
         p03_deliver_frequently:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Likert 1-5 for principle 3: deliver working software frequently, within a few weeks or months."
         p03_comment:
@@ -322,7 +358,7 @@ components:
           format: double
           description: Configurable weight for principle 3, range 0.50-2.00, default 1.00.
         p04_collaboration:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Likert 1-5 for principle 4: business stakeholders and developers must work together daily."
         p04_comment:
@@ -333,7 +369,7 @@ components:
           format: double
           description: Configurable weight for principle 4, range 0.50-2.00, default 1.00.
         p05_motivated_individuals:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Likert 1-5 for principle 5: build projects around motivated individuals, providing them with the environment and support needed."
         p05_comment:
@@ -344,7 +380,7 @@ components:
           format: double
           description: Configurable weight for principle 5, range 0.50-2.00, default 1.00.
         p06_face_to_face:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Likert 1-5 for principle 6: the most efficient method for conveying information within a development team is face-to-face communication."
         p06_comment:
@@ -355,7 +391,7 @@ components:
           format: double
           description: Configurable weight for principle 6, range 0.50-2.00, default 1.00.
         p07_working_software:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Likert 1-5 for principle 7: working software is the primary measure of progress."
         p07_comment:
@@ -366,7 +402,7 @@ components:
           format: double
           description: Configurable weight for principle 7, range 0.50-2.00, default 1.00.
         p08_sustainable_development:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Likert 1-5 for principle 8: agile processes promote a sustainable, consistent pace for developers and users."
         p08_comment:
@@ -377,7 +413,7 @@ components:
           format: double
           description: Configurable weight for principle 8, range 0.50-2.00, default 1.00.
         p09_technical_excellence:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Likert 1-5 for principle 9: continuous attention to technical excellence and good design enhances agility."
         p09_comment:
@@ -388,7 +424,7 @@ components:
           format: double
           description: Configurable weight for principle 9, range 0.50-2.00, default 1.00.
         p10_simplicity:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Likert 1-5 for principle 10: the art of maximising the amount of work not done is essential."
         p10_comment:
@@ -399,7 +435,7 @@ components:
           format: double
           description: Configurable weight for principle 10, range 0.50-2.00, default 1.00.
         p11_self_organising_teams:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Likert 1-5 for principle 11: the best architectures, requirements, and designs emerge from self-organising teams."
         p11_comment:
@@ -410,7 +446,7 @@ components:
           format: double
           description: Configurable weight for principle 11, range 0.50-2.00, default 1.00.
         p12_regular_reflection:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Likert 1-5 for principle 12: at regular intervals, the team reflects on how to become more effective, then adjusts behaviour accordingly."
         p12_comment:

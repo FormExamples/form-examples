@@ -19,38 +19,29 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            maximum: 100000
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of OkrGrade records
+          description: A page of OkrGrade records, with no total
           headers:
-            x-total-count:
-              description: Rows there are in all
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
               schema:
-                type: integer
-            x-limit:
-              description: The limit applied
-              schema:
-                type: integer
-            x-offset:
-              description: The offset applied
-              schema:
-                type: integer
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/OkrGrade"
-        "400":
-          description: The offset is past the maximum
+        "422":
+          description: The limit or the cursor is not valid
           content:
             application/problem+json:
               schema:
@@ -191,6 +182,51 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing OkrGrade
+      operationId: replaceOkrGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OkrGrade"
+      responses:
+        "200":
+          description: The updated OkrGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OkrGrade"
+        "404":
+          description: OkrGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a OkrGrade
       operationId: deleteOkrGrade
@@ -265,31 +301,31 @@ components:
           format: uuid
           description: Foreign key to the parent okr_objective row (UNIQUE, 1:1).
         score_by_progress_percent:
-          type: number
+          type: [number, 'null']
           format: double
           description: "Score 1 of 7: echoed from okr_objective for dashboard joins."
         score_by_confidence_decile:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Score 2 of 7: echoed from okr_objective."
         score_by_stretch_tier:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Score 3 of 7: echoed from okr_objective."
         score_by_alignment_grade:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Score 4 of 7: echoed from okr_objective."
         score_by_impact_tier:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Score 5 of 7: echoed from okr_objective."
         score_by_smart_quality:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Score 6 of 7: echoed from okr_objective."
         score_by_pace_deviation_percent:
-          type: number
+          type: [number, 'null']
           format: double
           description: "Score 7 of 7: echoed from okr_objective."
         computed_composite_rag:
@@ -329,7 +365,7 @@ components:
           type: string
           description: Name or identifier of the reviewer who signed off.
         signed_at:
-          type: string
+          type: [string, 'null']
           format: date-time
           description: Timestamp of the reviewer electronic signature.
         graded_at:

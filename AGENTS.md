@@ -57,7 +57,7 @@ Mechanical fleet-wide maintenance tools for `back-end-with-axum/` crates
 `deny.toml`, `#![forbid(unsafe_code)]`, scaffold-bug fixups, the axa
 1.0.1 migration, MSRV, connection-pool sizing, `GET /api/openapi.yaml`,
 camelCase JSON, the axa 0.6 and RFC 9457 move, the rate limit and development-only
-seed, the CHECK constraints) are catalogued in
+seed, the CHECK constraints, axa 0.7 and cursor paging) are catalogued in
 [`AGENTS/back-end-with-axum.md`](AGENTS/back-end-with-axum.md) §Fleet-wide
 maintenance tools, to keep this file under the repo's own 40KB target.
 Each has a `--check` CI drift detector, listed in the Verify block below.
@@ -68,7 +68,7 @@ Each has a `--check` CI drift detector, listed in the Verify block below.
 - `bin/fhir-r5/generate-fhir-r5-representations.py` — generate FHIR HL7 R5 JSON per SQL entity
 - `bin/protobuf/generate-protobuf-representations.py` — generate Protocol Buffers `.proto` schemas per SQL entity
 - `bin/openapi/generate-openapi-representations.py` — generate OpenAPI 3.1 `.yaml` specifications per SQL entity
-- `bin/openapi/generate-openapi-combined.py [--check] [<slug>…]` — merge a form's per-entity OpenAPI files into one `forms/<slug>/openapi/openapi.yaml` (union of `paths` and `components.schemas` under a form-level `info` block, for Swagger UI / client codegen consumers that want one document per form); `--check` is the CI drift detector
+- `bin/openapi/generate-openapi-combined.py [--check] [<slug>…]` — merge a form's per-entity OpenAPI files, and any hand-written `openapi/hand/routes.yaml`, into the `openapi/combined/openapi.yaml` each crate serves: only the paths and methods the crate declares, at the paths it serves, with camelCase properties as sent; `--check` is the CI drift detector and also fails on a route served but not documented, or documented but not served
 - `bin/back-end-with-axum/generate-back-end-with-axum-setup.py [--check] [<slug>…]` — emit each form's `cargo run -- generate scaffold --api` setup script; `--check` is the CI drift detector
 - `bin/back-end-with-axum/generate-rust-docs.py <crate>…` — insert rustdoc (crate `//!`, module headers, `///` on every `pub` item) so each Axum crate compiles under `#![deny(missing_docs)]`; idempotent
 - `bin/back-end-with-axum/generate-axum-agents.py [--stale|--list-stale] <slug>…` — regenerate a form's `back-end-with-axum/AGENTS.md` to describe the crate as it actually is (relational per-table Axum JSON API, RESTful scaffold controller per domain table); replaces docs still describing the obsolete single-`assessments`-table-with-JSONB design. `--list-stale` is the CI drift detector
@@ -247,6 +247,8 @@ bin/axum-forbid-unsafe --check --all # Axum #![forbid(unsafe_code)] crate-root d
 bin/generate-api-transcripts --check   # per-form api-create.http drift detector (336/356; slow, real server)
 bin/axum-axa-upgrade --check --all # axa 0.6 + RFC 9457 problem details drift detector
 bin/axum-axa-adopt --check --all   # per-client rate limit, development-only seed, Page::respond on every list
+bin/axum-axa-0-7 --check --all     # axa 0.7, offset_pagination name, Cargo.lock
+bin/axum-cursor-pagination --check --all # every list pages by signed cursor, with no total
 bin/axum-check-constraints --check --all # sql/ CHECK constraints migrated into every crate, plus build.rs
 bin/axum-fixture-checks --check --all    # fixtures and test rows satisfy those CHECKs (needs Postgres)
 bin/axum-entity-routes --check --all # every SQL table reachable over HTTP
@@ -254,7 +256,7 @@ bin/axum-soft-delete --check --all # DELETE marks and cascades; reads and update
 bin/axum-msrv-set --msrv 1.97 --check --all # Rust MSRV (rust-version) drift detector, per spec/rust-msrv-n-minus-2/
 bin/generate-forms-tsv.py --check     # forms.tsv drift detector
 bin/generate-tools-doc.py --check     # docs/tools.md drift detector
-bin/openapi/generate-openapi-combined.py --check # per-form combined openapi.yaml drift detector
+bin/openapi/generate-openapi-combined.py --check # per-form combined openapi.yaml drift + served-route coverage
 bin/test-examples-conformance         # example fixtures vs sql/ schema conformance
 bin/test-tutorials                    # docs/tutorials/ reference only existing tools/paths
 bin/test-engines                      # HTML scoring engines load and run headless

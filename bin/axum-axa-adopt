@@ -46,6 +46,9 @@ import sys
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OLD_AXA = 'axa = { version = "0.6", features = ["pagination", "queue", "sqlx"] }'
 NEW_AXA = 'axa = { version = "0.6", features = ["pagination", "queue", "ratelimit", "sqlx"] }'
+# The ratelimit feature, on axa 0.6 or a later step (bin/axum-axa-0-7,
+# bin/axum-cursor-pagination).
+HAS_RATELIMIT = re.compile(r'^axa = \{ version = "0\.[67]", features = \[[^]]*"ratelimit"', re.M)
 
 OLD_ROUTER = """    /// Build the full router under the standard middleware.
     ///
@@ -115,7 +118,7 @@ def plan(crate: str) -> dict[str, str] | None:
     """Every edit for a crate, or None when it is already done."""
     src = source_dir(crate)
     manifest = open(f"{crate}/Cargo.toml").read()
-    if NEW_AXA in manifest:
+    if HAS_RATELIMIT.search(manifest):
         return None
     edits: dict[str, str] = {}
 
@@ -133,7 +136,7 @@ def plan(crate: str) -> dict[str, str] | None:
 def drift(crate: str) -> str | None:
     """Why a crate has not taken these up, if it has not."""
     src = source_dir(crate)
-    if NEW_AXA not in open(f"{crate}/Cargo.toml").read():
+    if not HAS_RATELIMIT.search(open(f"{crate}/Cargo.toml").read()):
         return "no ratelimit feature"
     app = open(f"{src}/app.rs").read()
     if ROUTER_MARK not in app or "axa::middleware::apply(routes" not in app:

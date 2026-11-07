@@ -9,14 +9,14 @@
   claimTitle: "Test claimTitle"
   businessPurpose: "Test businessPurpose"
   projectOrCostCode: "Test projectOrCostCode"
-  currencyAsIso4217: "Test currencyAsIso4217"
+  currencyAsIso4217: "Tes"
   totalAmount: 1.0
   totalVatAmount: 1.0
   advanceAlreadyReceivedAmount: 1.0
   amountToRepay: 1.0
   repaymentMethod: "payroll"
   bankAccountName: "Test bankAccountName"
-  bankAccountLastFour: "Test bankAccountLastFour"
+  bankAccountLastFour: "Test"
   declarationExpensesWereIncurredWhollyForWork: true
   declarationNoDuplicateClaim: true
   declarationReceiptsAttached: true

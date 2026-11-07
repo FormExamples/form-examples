@@ -19,38 +19,29 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            maximum: 100000
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of PaediatricEarlyWarningScore records
+          description: A page of PaediatricEarlyWarningScore records, with no total
           headers:
-            x-total-count:
-              description: Rows there are in all
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
               schema:
-                type: integer
-            x-limit:
-              description: The limit applied
-              schema:
-                type: integer
-            x-offset:
-              description: The offset applied
-              schema:
-                type: integer
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/PaediatricEarlyWarningScore"
-        "400":
-          description: The offset is past the maximum
+        "422":
+          description: The limit or the cursor is not valid
           content:
             application/problem+json:
               schema:
@@ -191,6 +182,51 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing PaediatricEarlyWarningScore
+      operationId: replacePaediatricEarlyWarningScore
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PaediatricEarlyWarningScore"
+      responses:
+        "200":
+          description: The updated PaediatricEarlyWarningScore
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaediatricEarlyWarningScore"
+        "404":
+          description: PaediatricEarlyWarningScore not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PaediatricEarlyWarningScore
       operationId: deletePaediatricEarlyWarningScore
@@ -265,7 +301,7 @@ components:
           format: uuid
           description: "Foreign key to the child observed (RESTRICT: patients are not deleted while observations exist)."
         clinician_id:
-          type: string
+          type: [string, 'null']
           format: uuid
           description: Foreign key to the clinician who recorded the observation set (RESTRICT); NULL until assigned.
         status:
@@ -277,7 +313,7 @@ components:
             - signed
           description: "Workflow status: draft, submitted, amended, or signed."
         observation_at:
-          type: string
+          type: [string, 'null']
           format: date-time
           description: Date and time the observation set was taken; NULL when not yet recorded.
         care_setting:
@@ -300,7 +336,7 @@ components:
             - ""
           description: "Age band selected first; sets the normal respiratory-rate and heart-rate ranges: neonate (0-<1 month), infant (1-11 months), young-child (1-4 years), child (5-11 years), or adolescent (>=12 years)."
         respiratory_rate:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Respiratory rate in breaths per minute, scored against the age-band normal range; NULL when not recorded.
         respiratory_effort:
@@ -313,7 +349,7 @@ components:
             - ""
           description: "Respiratory effort / recession: none, mild, moderate, or severe (grunting)."
         oxygen_saturation:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Oxygen saturation (SpO2) as a percentage; NULL when not recorded.
         supplemental_oxygen:
@@ -325,7 +361,7 @@ components:
             - ""
           description: "Supplemental-oxygen requirement: room-air, low-flow, or high-flow."
         heart_rate:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Heart rate in beats per minute, scored against the age-band normal range; NULL when not recorded.
         capillary_refill:

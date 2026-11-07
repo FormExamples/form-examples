@@ -19,38 +19,29 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            maximum: 100000
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of ReturnToWork records
+          description: A page of ReturnToWork records, with no total
           headers:
-            x-total-count:
-              description: Rows there are in all
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
               schema:
-                type: integer
-            x-limit:
-              description: The limit applied
-              schema:
-                type: integer
-            x-offset:
-              description: The offset applied
-              schema:
-                type: integer
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/ReturnToWork"
-        "400":
-          description: The offset is past the maximum
+        "422":
+          description: The limit or the cursor is not valid
           content:
             application/problem+json:
               schema:
@@ -191,6 +182,51 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing ReturnToWork
+      operationId: replaceReturnToWork
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReturnToWork"
+      responses:
+        "200":
+          description: The updated ReturnToWork
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReturnToWork"
+        "404":
+          description: ReturnToWork not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ReturnToWork
       operationId: deleteReturnToWork
@@ -269,7 +305,7 @@ components:
           format: uuid
           description: Foreign key to the clinician issuing the statement.
         employer_id:
-          type: string
+          type: [string, 'null']
           format: uuid
           description: Foreign key to the employer receiving the statement.
         status:
@@ -290,19 +326,19 @@ components:
             - ""
           description: "Statement output style: fit-note (UK Med 3), medical-clearance-letter, or specialist-report."
         assessment_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the assessment was performed.
         assessment_time:
-          type: string
+          type: [string, 'null']
           format: time
           description: Time the assessment was performed.
         absence_first_day:
-          type: string
+          type: [string, 'null']
           format: date
           description: First calendar day of the current absence.
         absence_total_calendar_days:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Total calendar days absent as of the assessment.
         prior_med3_reference:
@@ -358,7 +394,7 @@ components:
           type: string
           description: Ongoing non-pharmacological therapy (physiotherapy, counselling, specialist follow-up).
         last_consultation_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date of the most recent consultation before this assessment.
         anticipated_recovery_trajectory:
@@ -389,7 +425,7 @@ components:
             - ""
           description: "Mobility: normal, reduced, severely-limited, or wheelchair."
         manual_handling_capacity_kg:
-          type: number
+          type: [number, 'null']
           format: double
           description: Maximum safe manual-handling load in kilograms.
         cognition:
@@ -420,7 +456,7 @@ components:
             - ""
           description: "Sleep: normal, disturbed, or severely-disturbed."
         pain_score_0_10:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Patient-reported pain on a 0-10 numeric rating scale.
         driving_capacity:
@@ -432,15 +468,15 @@ components:
             - ""
           description: "Driving capacity: fit-to-drive, restricted, or not-fit-to-drive."
         standing_tolerance_minutes:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Continuous standing tolerance in minutes.
         sitting_tolerance_minutes:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Continuous sitting tolerance in minutes.
         screen_tolerance_minutes:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Continuous screen-use tolerance in minutes.
         adl_independence:
@@ -487,15 +523,15 @@ components:
             - ""
           description: "Clinician confidence in the statement: high, medium, or low."
         valid_from:
-          type: string
+          type: [string, 'null']
           format: date
           description: First date the statement is valid.
         valid_until:
-          type: string
+          type: [string, 'null']
           format: date
           description: Last date the statement is valid.
         validity_weeks:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Number of weeks the statement is valid (alternative expression of valid_until).
         reassessment_required:
@@ -523,7 +559,7 @@ components:
             - ""
           description: "Selected phased-return template: 2-week, 4-week, 8-week, 12-week, or custom."
         phased_return_target_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Target date for full-hours resumption.
         phased_return_schedule_json:
@@ -553,7 +589,7 @@ components:
             - ""
           description: "Location of the next review: gp, occupational-health, specialist, employer-oh, or none."
         review_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Scheduled date of the next review.
         occupational_health_referral_made:
@@ -595,7 +631,7 @@ components:
           type: string
           description: Clinician electronic signature captured as an SVG path.
         signed_at:
-          type: string
+          type: [string, 'null']
           format: date-time
           description: Timestamp when the clinician signed off the statement.
       required:

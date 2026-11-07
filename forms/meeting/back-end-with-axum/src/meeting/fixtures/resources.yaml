@@ -9,7 +9,7 @@
   unit: "Test unit"
   url: "Test url"
   costAmount: 1.0
-  costCurrency: "Test costCurrency"
+  costCurrency: "Tes"
   status: "requested"
   notes: "Test notes"
   meetingId: "00000000-0000-4000-8000-00000003c610"

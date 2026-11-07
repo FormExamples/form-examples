@@ -19,38 +19,29 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            maximum: 100000
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of PerioperativeOptimization records
+          description: A page of PerioperativeOptimization records, with no total
           headers:
-            x-total-count:
-              description: Rows there are in all
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
               schema:
-                type: integer
-            x-limit:
-              description: The limit applied
-              schema:
-                type: integer
-            x-offset:
-              description: The offset applied
-              schema:
-                type: integer
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/PerioperativeOptimization"
-        "400":
-          description: The offset is past the maximum
+        "422":
+          description: The limit or the cursor is not valid
           content:
             application/problem+json:
               schema:
@@ -191,6 +182,51 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing PerioperativeOptimization
+      operationId: replacePerioperativeOptimization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PerioperativeOptimization"
+      responses:
+        "200":
+          description: The updated PerioperativeOptimization
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PerioperativeOptimization"
+        "404":
+          description: PerioperativeOptimization not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a PerioperativeOptimization
       operationId: deletePerioperativeOptimization
@@ -277,11 +313,11 @@ components:
             - urgent
           description: "Workflow status of the assessment: draft, submitted, reviewed, or urgent."
         assessment_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the assessment was conducted. With planned_surgery_date this is the basis of the time-to-surgery gating that drives every domain status.
         assessment_time:
-          type: string
+          type: [string, 'null']
           format: time
           description: Time the assessment was conducted.
         site_name:
@@ -337,7 +373,7 @@ components:
           maxLength: 255
           description: Consultant surgeon responsible for the procedure.
         planned_surgery_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Planned date of surgery. With assessment_date this determines weeks_to_surgery, which every optimization domain lead time is gated against. A missing date disables gating and marks every triggered domain action-required.
         urgency:
@@ -370,11 +406,11 @@ components:
             - ""
           description: Side of the body the procedure is on, where applicable.
         anticipated_blood_loss_ml:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Anticipated blood loss in ml, which raises the importance of correcting anaemia before surgery.
         anticipated_length_of_stay_days:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Anticipated length of stay in days.
         interpreter_required:
@@ -721,43 +757,43 @@ components:
           type: string
           description: Free-text notes about allergies and intolerances.
         bloods_sample_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the blood sample was taken, so the report can say how current the results are.
         haemoglobin_g_per_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Haemoglobin in g per litre. Below 130 in men or 120 in women triggers the anaemia domain; below 80 forces a defer-surgery band and a high-priority flag.
         mean_cell_volume_fl:
-          type: number
+          type: [number, 'null']
           format: double
           description: Mean cell volume in femtolitres, which helps characterize the anaemia.
         ferritin_ug_per_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Ferritin in micrograms per litre. Below 30 indicates absolute iron deficiency and triggers the anaemia domain.
         transferrin_saturation_percent:
-          type: number
+          type: [number, 'null']
           format: double
           description: Transferrin saturation as a percentage. Below 20 with a ferritin of 30 to 100 indicates functional iron deficiency.
         vitamin_b12_ng_per_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Vitamin B12 in nanograms per litre, an alternative cause of anaemia.
         folate_ug_per_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Serum folate in micrograms per litre, an alternative cause of anaemia.
         c_reactive_protein_mg_per_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: C-reactive protein in mg per litre. Inflammation raises ferritin, so a high value changes how the iron studies are read.
         creatinine_umol_per_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Serum creatinine in micromol per litre.
         egfr_ml_per_min:
-          type: number
+          type: [number, 'null']
           format: double
           description: Estimated glomerular filtration rate in ml per minute per 1.73 square metres. Below 30 raises the renal-optimization flag.
         anaemia_known_cause:
@@ -780,7 +816,7 @@ components:
             - ""
           description: Route of iron replacement. Intravenous iron needs a 4-week lead time; oral iron needs 8.
         anaemia_treatment_start_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date anaemia treatment started.
         previous_transfusion:
@@ -811,19 +847,19 @@ components:
             - ""
           description: Diabetes diagnosis and type. A raised HbA1c with no diagnosis recorded fires the undiagnosed-diabetes flag.
         diabetes_duration_years:
-          type: number
+          type: [number, 'null']
           format: double
           description: How long the patient has had diabetes, in years.
         hba1c_mmol_per_mol:
-          type: number
+          type: [number, 'null']
           format: double
           description: Glycated haemoglobin in mmol per mol. At or above 48 triggers the glycaemic-control domain; at or above 69, the CPOC deferral threshold of 8.5 percent, it forces a defer-surgery band and a high-priority flag.
         hba1c_sample_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the HbA1c sample was taken. HbA1c reflects roughly three months of glycaemia, which is why the domain lead time is 12 weeks.
         capillary_glucose_mmol_per_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Capillary blood glucose in mmol per litre at the time of assessment.
         diabetes_treatment:
@@ -857,7 +893,7 @@ components:
             - ""
           description: Whether the diabetes team has reviewed the patient, which moves the glycaemic-control domain to in-progress.
         diabetes_team_review_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date of the diabetes-team review.
         foot_check_done:
@@ -879,15 +915,15 @@ components:
             - ""
           description: Smoking status. Any current smoker triggers the smoking domain, which needs a 4-week lead time for the respiratory benefit.
         cigarettes_per_day:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Cigarettes smoked per day.
         pack_years:
-          type: number
+          type: [number, 'null']
           format: double
           description: Pack-years of smoking history.
         quit_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the patient stopped smoking, so weeks quit before surgery can be computed.
         smoking_cessation_offered:
@@ -922,19 +958,19 @@ components:
           type: string
           description: Free-text notes about smoking and tobacco.
         alcohol_units_per_week:
-          type: number
+          type: [number, 'null']
           format: double
           description: Alcohol consumption in United Kingdom units per week. Above 14 triggers the alcohol domain.
         audit_c_frequency:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "AUDIT-C question 1: how often the patient has a drink containing alcohol, scored 0 to 4."
         audit_c_typical_quantity:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "AUDIT-C question 2: how many standard drinks on a typical drinking day, scored 0 to 4."
         audit_c_binge_frequency:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "AUDIT-C question 3: how often the patient has six or more drinks on one occasion, scored 0 to 4."
         alcohol_dependence_features:
@@ -973,23 +1009,23 @@ components:
           type: string
           description: Free-text notes about alcohol and other substances.
         height_as_cm:
-          type: number
+          type: [number, 'null']
           format: double
           description: Height in cm, for the body mass index component of MUST.
         weight_as_kg:
-          type: number
+          type: [number, 'null']
           format: double
           description: Weight in kg, for the body mass index and weight-loss components of MUST.
         body_mass_index:
-          type: number
+          type: [number, 'null']
           format: double
           description: Body mass index in kg per square metre, scored as MUST step 1.
         usual_weight_as_kg:
-          type: number
+          type: [number, 'null']
           format: double
           description: The patient's usual or pre-illness weight in kg, i.e. the baseline for percentage weight loss.
         weight_loss_percent:
-          type: number
+          type: [number, 'null']
           format: double
           description: Percentage unintentional weight loss over the last three to six months, scored as MUST step 2. Above 10 also triggers the nutrition domain on its own.
         weight_loss_is_intentional:
@@ -1064,27 +1100,27 @@ components:
             - ""
           description: Whether the patient can climb a flight of stairs without stopping, the plain-language proxy for four metabolic equivalents that most patients can answer.
         metabolic_equivalents:
-          type: number
+          type: [number, 'null']
           format: double
           description: Estimated metabolic equivalents. Below 4 triggers the physical-fitness domain; 4 METs is the classic threshold below which perioperative risk rises.
         duke_activity_status_index:
-          type: number
+          type: [number, 'null']
           format: double
           description: Duke Activity Status Index. Below 34 triggers the physical-fitness domain.
         six_minute_walk_metres:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Six-minute walk distance in metres. Below 400 triggers the physical-fitness domain.
         cpet_anaerobic_threshold:
-          type: number
+          type: [number, 'null']
           format: double
           description: Anaerobic threshold in ml per kg per minute on cardiopulmonary exercise testing. Below 11 triggers the physical-fitness domain.
         cpet_peak_vo2:
-          type: number
+          type: [number, 'null']
           format: double
           description: Peak oxygen uptake in ml per kg per minute on cardiopulmonary exercise testing.
         grip_strength_kg:
-          type: number
+          type: [number, 'null']
           format: double
           description: Hand-grip strength in kg by dynamometer.
         prehabilitation_offered:
@@ -1102,11 +1138,11 @@ components:
             - ""
           description: Whether the patient enrolled in prehabilitation, which moves the physical-fitness domain to in-progress.
         prehabilitation_sessions_per_week:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Number of prehabilitation sessions per week.
         prehabilitation_start_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the prehabilitation programme started.
         protein_supplementation_recommended:
@@ -1120,7 +1156,7 @@ components:
           type: string
           description: Free-text notes about functional capacity and physical fitness.
         clinical_frailty_scale:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Clinical Frailty Scale, 1 to 9. Reported and flagged at 7 or above, but not gated, because frailty is rarely reversible in a weeks-long window. A score of 5 or above indicates a Mini-Cog.
         fried_weakness:
@@ -1159,7 +1195,7 @@ components:
             - ""
           description: "Fried Frailty Phenotype criterion: unintentional weight loss."
         risk_analysis_index_score:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Risk Analysis Index (RAI) score; higher scores indicate greater frailty.
         mini_cog_performed:
@@ -1170,7 +1206,7 @@ components:
             - ""
           description: Whether the Mini-Cog cognitive screen was performed, indicated when the Clinical Frailty Scale is 5 or above.
         mini_cog_score:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Mini-Cog total score 0-5 (three-item recall plus clock-draw test). A score of 0-2 suggests cognitive impairment.
         cognitive_screen_tool:
@@ -1184,7 +1220,7 @@ components:
             - ""
           description: Which cognitive screening tool was used.
         cognitive_screen_score:
-          type: number
+          type: [number, 'null']
           format: double
           description: Score from the cognitive screening tool used.
         cognitive_impairment:
@@ -1204,7 +1240,7 @@ components:
             - ""
           description: Whether there is a concern about the patient's capacity to consent, which fires the capacity-concern flag.
         falls_in_last_12_months:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Number of falls in the last 12 months.
         mobility_aid:
@@ -1245,15 +1281,15 @@ components:
           type: string
           description: Free-text notes about frailty, cognition, and falls.
         systolic_bp:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Systolic blood pressure in mmHg. At or above 180 triggers the cardiorespiratory domain and fires the uncontrolled-hypertension flag.
         diastolic_bp:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Diastolic blood pressure in mmHg. At or above 110 triggers the cardiorespiratory domain and fires the uncontrolled-hypertension flag.
         heart_rate:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Heart rate in beats per minute.
         heart_rhythm:
@@ -1284,11 +1320,11 @@ components:
             - ""
           description: Clinician-assessed exercise tolerance.
         ejection_fraction_percent:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Left ventricular ejection fraction as a percentage. Below 40 triggers the cardiorespiratory domain and fires a high-priority flag.
         echo_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date of the echocardiogram the ejection fraction came from.
         asthma_control:
@@ -1324,11 +1360,11 @@ components:
             - ""
           description: Whether the patient has rescue steroids at home.
         spirometry_fev1_percent:
-          type: number
+          type: [number, 'null']
           format: double
           description: Forced expiratory volume in one second as a percentage of predicted.
         stop_bang_score:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: STOP-BANG obstructive sleep apnoea screening score, 0 to 8. A score of 5 or more without a sleep-apnoea diagnosis triggers the cardiorespiratory domain.
         sleep_apnoea_diagnosis:
@@ -1346,7 +1382,7 @@ components:
             - ""
           description: Whether the patient uses continuous positive airway pressure, which should be brought to hospital.
         oxygen_saturation_percent:
-          type: number
+          type: [number, 'null']
           format: double
           description: Peripheral oxygen saturation as a percentage on room air. Below 92 fires the respiratory-optimization flag.
         cardiorespiratory_notes:
@@ -1538,7 +1574,7 @@ components:
             - ""
           description: Whether a copy of the plan was given to the patient.
         next_review_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date of the next planned optimization review.
         plan_notes:

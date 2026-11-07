@@ -19,38 +19,29 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            maximum: 100000
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of EpilepsyReview records
+          description: A page of EpilepsyReview records, with no total
           headers:
-            x-total-count:
-              description: Rows there are in all
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
               schema:
-                type: integer
-            x-limit:
-              description: The limit applied
-              schema:
-                type: integer
-            x-offset:
-              description: The offset applied
-              schema:
-                type: integer
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/EpilepsyReview"
-        "400":
-          description: The offset is past the maximum
+        "422":
+          description: The limit or the cursor is not valid
           content:
             application/problem+json:
               schema:
@@ -191,6 +182,51 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing EpilepsyReview
+      operationId: replaceEpilepsyReview
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EpilepsyReview"
+      responses:
+        "200":
+          description: The updated EpilepsyReview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EpilepsyReview"
+        "404":
+          description: EpilepsyReview not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a EpilepsyReview
       operationId: deleteEpilepsyReview
@@ -265,7 +301,7 @@ components:
           format: uuid
           description: Foreign key to the patient this review documents (restrict delete).
         clinician_id:
-          type: string
+          type: [string, 'null']
           format: uuid
           description: Foreign key to the reviewing clinician (restrict delete); optional.
         reviewer_name:
@@ -282,7 +318,7 @@ components:
             - ""
           description: "Reviewing clinician role: gp, practice-nurse, epilepsy-nurse, neurologist, or other."
         reviewed_at:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the annual review was conducted.
         care_setting:
@@ -302,7 +338,7 @@ components:
             - ""
           description: "Type of review: annual or interim."
         months_since_last_review:
-          type: number
+          type: [number, 'null']
           format: double
           description: Interval in months since the last review; drives the review-overdue flag when greater than 12.
         patient_identifier:
@@ -337,11 +373,11 @@ components:
             - ""
           description: "Epilepsy type: focal, generalised, combined, or unknown."
         age_at_onset:
-          type: number
+          type: [number, 'null']
           format: double
           description: Age at epilepsy onset in years.
         years_since_diagnosis:
-          type: number
+          type: [number, 'null']
           format: double
           description: Years since epilepsy diagnosis.
         learning_disability:
@@ -365,11 +401,11 @@ components:
             - ""
           description: "Seizure frequency: none, less-than-monthly, monthly, weekly, or daily (weekly/daily drive an uncontrolled classification)."
         last_seizure_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date of the most recent seizure.
         seizure_free_months:
-          type: number
+          type: [number, 'null']
           format: double
           description: Documented seizure-free duration in months.
         seizure_trend:
@@ -401,7 +437,7 @@ components:
             - ""
           description: "ASM side-effect burden: none, mild, or significant (significant drives a side-effects flag)."
         drug_level:
-          type: number
+          type: [number, 'null']
           format: double
           description: Therapeutic ASM drug level where relevant (units per the specific drug).
         triggers:
@@ -507,7 +543,7 @@ components:
             - ""
           description: Whether specialist (neurology) review is needed (yes/no).
         next_review_due:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the next review is planned.
         care_plan:

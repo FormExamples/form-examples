@@ -84,9 +84,9 @@ async fn can_create_and_read_back_patient() {
         assert_eq!(fetched["postcode"], "SW1A 2AA");
         assert_eq!(fetched["unitedKingdomNhsNumber"], "9434765919");
         assert_eq!(fetched["hospitalMrn"], "MRN-000123");
-        assert_eq!(fetched["heightAsCm"], "170.2");
-        assert_eq!(fetched["weightAsKg"], "70.4");
-        assert_eq!(fetched["bodyMassIndex"], "24.2");
+        assert_eq!(fetched["heightAsCm"], 170.2);
+        assert_eq!(fetched["weightAsKg"], 70.4);
+        assert_eq!(fetched["bodyMassIndex"], 24.2);
         assert_eq!(fetched["allergiesSummary"], "No known allergies");
 
         // 4. The new record is present in the list endpoint.

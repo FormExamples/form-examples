@@ -30,11 +30,27 @@ for them.
   them, so any value was stored: `"sex": "banana"` answered 200. Each crate now migrates
   its 7,781 CHECKs, `NOT VALID` so that existing rows still migrate, and 684 fixture
   and test values that broke them were given allowed ones. A value a CHECK does not
-  list now answers `422` `unprocessable_entity`, through axa 0.6.2. A crate also gains
+  list now answers `422` `unprocessable_entity`, through axa 0.6.2. The `VARCHAR(n)`
+  lengths, lost the same way, are back as 11,838 `char_length` checks, and 157 fixture
+  and test values were cut to fit. A crate also gains
   `build.rs`, so that a new migration reaches the next build. See ADR-12.
+- **Every route a crate serves is in its OpenAPI document.** Hand-written routes
+  (the dashboards, `submit` and `result`, `inpatient-clinical-note`'s grading, the
+  ADR register) are documented in `openapi/hand/routes.yaml`, which the combined
+  generator merges, and `generate-openapi-combined.py --check` now fails on a route
+  that is served but not documented, or documented but not served. Each document also
+  describes `GET /api/openapi.yaml` and `PUT`.
 
 ### Changed
 
+- **Lists page by signed cursor, with no total.** Every Axum crate is on axa 0.7, and
+  every list now takes `?limit=` and an opaque `?cursor=` instead of `?offset=`, and
+  links the next page with `Link: rel="next"`. `x-total-count`, `x-limit` and
+  `x-offset` are gone. A cursor is signed with `CURSOR_KEY`, which a production-like
+  environment requires, so a caller cannot forge one or carry it to another filter. A
+  bad cursor, or a limit over 1000, answers `422` instead of being clamped.
+  `openapi.yaml` publishes all of this. `bin/axum-axa-0-7` and
+  `bin/axum-cursor-pagination` made the move, and their `--check`s keep it. See ADR-13.
 - **axa 0.6.** Every Axum crate moved from 0.5, and `axa` now writes every error as an
   RFC 9457 problem, so `support/problem.rs` and `support/paging.rs` are gone. A
   duplicate or a missing reference answers `409` rather than `500`, an extractor's
@@ -81,6 +97,23 @@ for them.
 
 ### Fixed
 
+- The served OpenAPI documents named every property in snake_case and typed every
+  column as non-null, where the crates send camelCase and `null`. They now match
+  what is sent, checked against live responses from every crate. Seven crates serve
+  a table under another path than the document gave (`/api/people`, `/api/respect`,
+  `…prophylaxes`, `…thromboses`, two `…criteria`, and a kebab-case path); the
+  document now gives the served path.
+- `architecture-decision-record` created a record at `POST
+  /architecture_decision_records`, which answered a redirect to a route that did
+  not exist. It is `POST /api/adrs`, answering the stored row, and the crate now
+  serves `GET /api/openapi.yaml` like every other.
+- `bin/generate-api-transcripts` and the patient request tests posted values longer
+  than their columns allow, such as `"Test preferredLanguageAsIso6391"` for a
+  two-letter code. They post realistic codes (`en`, `GBR`), cut to the column's length.
+- The `neurodiversity-adjustment-request` engine's most urgent timeframe was 54
+  characters, where `sql/` allowed 50. The column is now `VARCHAR(100)`.
+- `inpatient-clinical-note` sent its five decimal fields as strings, unlike every other
+  crate and its OpenAPI document. They are numbers.
 - The `inpatient-clinical-note` grading tests recorded a consent status of
   `capacitous-consent`, which neither `sql/` nor either front-end offers. They use
   `consented`.

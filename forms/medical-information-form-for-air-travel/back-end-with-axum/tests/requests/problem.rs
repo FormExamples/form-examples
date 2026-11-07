@@ -24,7 +24,7 @@ macro_rules! problem {
 async fn every_failure_is_a_problem() {
     request::<App, _, _>(|request, _ctx| async move {
         // axa's own error, whose text reaches the client.
-        let (body, _) = problem!(request.get("/api/clinicians?offset=100001").await, 400);
+        let (body, _) = problem!(request.get("/api/clinicians?cursor=forged").await, 422);
         assert!(body["detail"].is_string());
 
         // A route that does not exist, and a wrong method.
@@ -94,7 +94,7 @@ async fn a_value_outside_a_check_is_unprocessable() {
             "name": "Test Patient",
             "birthDate": "1990-01-01",
             "sexAtBirth": "not-a-listed-value",
-            "nationalityAsIso31661Alpha2": "Test nationalityAsIso31661Alpha2",
+            "nationalityAsIso31661Alpha2": "GB",
             "passportNumber": "Test passportNumber",
             "unitedKingdomNhsNumber": "9434765928",
             "nationalHealthId": "Test nationalHealthId",
@@ -120,7 +120,7 @@ async fn a_value_outside_a_check_is_unprocessable() {
             "name": "Test Patient",
             "birthDate": "1990-01-01",
             "sexAtBirth": "female",
-            "nationalityAsIso31661Alpha2": "Test nationalityAsIso31661Alpha2",
+            "nationalityAsIso31661Alpha2": "GB",
             "passportNumber": "Test passportNumber",
             "unitedKingdomNhsNumber": "9434765928",
             "nationalHealthId": "Test nationalHealthId",

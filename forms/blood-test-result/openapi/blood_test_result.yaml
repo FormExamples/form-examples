@@ -19,38 +19,29 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            maximum: 100000
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of BloodTestResult records
+          description: A page of BloodTestResult records, with no total
           headers:
-            x-total-count:
-              description: Rows there are in all
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
               schema:
-                type: integer
-            x-limit:
-              description: The limit applied
-              schema:
-                type: integer
-            x-offset:
-              description: The offset applied
-              schema:
-                type: integer
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/BloodTestResult"
-        "400":
-          description: The offset is past the maximum
+        "422":
+          description: The limit or the cursor is not valid
           content:
             application/problem+json:
               schema:
@@ -191,6 +182,51 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing BloodTestResult
+      operationId: replaceBloodTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BloodTestResult"
+      responses:
+        "200":
+          description: The updated BloodTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BloodTestResult"
+        "404":
+          description: BloodTestResult not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BloodTestResult
       operationId: deleteBloodTestResult
@@ -282,11 +318,11 @@ components:
             - ""
           description: "Report lifecycle status: preliminary, final, amended, cancelled."
         performed_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the specimen was collected / the test was performed.
         reported_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the report was authored / authorised.
         specimen_type:
@@ -312,79 +348,79 @@ components:
           maxLength: 1000
           description: Clinical history and the question the test was performed to answer.
         haemoglobin_g_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Haemoglobin concentration in g/L (FBC). Adult reference approx. 130-180 (male) / 115-160 (female) g/L.
         white_cell_count:
-          type: number
+          type: [number, 'null']
           format: double
           description: Total white cell count in x10^9/L (FBC). Adult reference approx. 4.0-11.0.
         platelets:
-          type: number
+          type: [number, 'null']
           format: double
           description: Platelet count in x10^9/L (FBC). Adult reference approx. 150-400.
         neutrophils:
-          type: number
+          type: [number, 'null']
           format: double
           description: Absolute neutrophil count in x10^9/L (FBC). Adult reference approx. 2.0-7.5.
         sodium_mmol_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Serum / plasma sodium in mmol/L (U&E). Adult reference approx. 133-146.
         potassium_mmol_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Serum / plasma potassium in mmol/L (U&E). Adult reference approx. 3.5-5.3.
         urea_mmol_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Serum / plasma urea in mmol/L (U&E). Adult reference approx. 2.5-7.8.
         creatinine_umol_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Serum / plasma creatinine in umol/L (renal). Adult reference approx. 60-110.
         egfr:
-          type: number
+          type: [number, 'null']
           format: double
           description: Estimated glomerular filtration rate in mL/min/1.73m^2 (renal). >=90 normal; <60 indicates reduced function.
         alt_u_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Alanine aminotransferase in U/L (LFT). Adult reference approx. <=40-50.
         alkaline_phosphatase:
-          type: number
+          type: [number, 'null']
           format: double
           description: Alkaline phosphatase in U/L (LFT). Adult reference approx. 30-130.
         bilirubin_umol_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Total bilirubin in umol/L (LFT). Adult reference approx. <=21.
         albumin_g_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Serum albumin in g/L (LFT). Adult reference approx. 35-50.
         c_reactive_protein:
-          type: number
+          type: [number, 'null']
           format: double
           description: C-reactive protein in mg/L (inflammation). Adult reference approx. <5.
         hba1c_mmol_mol:
-          type: number
+          type: [number, 'null']
           format: double
           description: Glycated haemoglobin (HbA1c) in mmol/mol (IFCC). <42 normal; 42-47 prediabetes; >=48 diabetes range.
         glucose_mmol_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Plasma glucose in mmol/L. Fasting reference approx. 3.9-5.5.
         tsh:
-          type: number
+          type: [number, 'null']
           format: double
           description: Thyroid-stimulating hormone in mU/L (endocrine). Adult reference approx. 0.3-4.2.
         ferritin:
-          type: number
+          type: [number, 'null']
           format: double
           description: Serum ferritin in ug/L (haematinics). Adult reference approx. 15-300 (varies by sex).
         inr:
-          type: number
+          type: [number, 'null']
           format: double
           description: International normalised ratio (coagulation). Reference approx. 0.8-1.2 when not anticoagulated.
         overall_result_status:

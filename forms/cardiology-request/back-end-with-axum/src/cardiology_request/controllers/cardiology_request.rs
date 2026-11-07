@@ -287,8 +287,8 @@ async fn create(
 
 /// GET /`api/cardiology_requests` -- list requests (most recent first).
 #[debug_handler]
-async fn list(State(ctx): State<AppContext>, Query(params): Query<PageParams>) -> Result<Response> {
-    let page = params.resolve(PAGE_LIMITS)?;
+async fn list(State(ctx): State<AppContext>, OriginalUri(uri): OriginalUri) -> Result<Response> {
+    let page = cursor_page(&ctx, &uri)?;
     let (limit, offset) = page.bounds();
     let models = sqlx::query_as::<_, cardiology_requests::Model>(
         "SELECT * FROM cardiology_requests WHERE deleted_at IS NULL ORDER BY \
@@ -298,11 +298,7 @@ async fn list(State(ctx): State<AppContext>, Query(params): Query<PageParams>) -
     .bind(offset)
     .fetch_all(&db(&ctx))
     .await?;
-    let total: i64 =
-        sqlx::query_scalar("SELECT COUNT(*) FROM cardiology_requests WHERE deleted_at IS NULL")
-            .fetch_one(&db(&ctx))
-            .await?;
-    Ok(page.respond(total, models))
+    Ok(page.respond(models))
 }
 
 /// GET /`api/cardiology_requests/{id`} -- fetch one request.

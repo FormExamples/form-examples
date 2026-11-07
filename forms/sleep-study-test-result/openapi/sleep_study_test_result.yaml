@@ -19,38 +19,29 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            maximum: 100000
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of SleepStudyTestResult records
+          description: A page of SleepStudyTestResult records, with no total
           headers:
-            x-total-count:
-              description: Rows there are in all
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
               schema:
-                type: integer
-            x-limit:
-              description: The limit applied
-              schema:
-                type: integer
-            x-offset:
-              description: The offset applied
-              schema:
-                type: integer
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/SleepStudyTestResult"
-        "400":
-          description: The offset is past the maximum
+        "422":
+          description: The limit or the cursor is not valid
           content:
             application/problem+json:
               schema:
@@ -191,6 +182,51 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing SleepStudyTestResult
+      operationId: replaceSleepStudyTestResult
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SleepStudyTestResult"
+      responses:
+        "200":
+          description: The updated SleepStudyTestResult
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SleepStudyTestResult"
+        "404":
+          description: SleepStudyTestResult not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a SleepStudyTestResult
       operationId: deleteSleepStudyTestResult
@@ -282,11 +318,11 @@ components:
             - ""
           description: "Report lifecycle status: preliminary, final, amended, cancelled."
         performed_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the sleep study was performed (night of recording).
         reported_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the report was authored / signed.
         study_type:
@@ -317,31 +353,31 @@ components:
           maxLength: 1000
           description: Comparison with relevant previous sleep studies.
         total_recording_time_hours:
-          type: number
+          type: [number, 'null']
           format: double
           description: Total recording time in hours.
         total_sleep_time_hours:
-          type: number
+          type: [number, 'null']
           format: double
           description: Total sleep time in hours (for attended polysomnography with sleep staging).
         apnoea_hypopnoea_index:
-          type: number
+          type: [number, 'null']
           format: double
           description: "Apnoea-Hypopnoea Index (AHI): events per hour. AASM bands: normal <5, mild 5 to <15, moderate 15 to <30, severe >=30."
         oxygen_desaturation_index:
-          type: number
+          type: [number, 'null']
           format: double
           description: "Oxygen Desaturation Index (ODI): >=3% (or >=4%) desaturations per hour."
         minimum_spo2_percent:
-          type: number
+          type: [number, 'null']
           format: double
           description: Lowest (nadir) oxygen saturation recorded, as a percentage.
         time_below_90_percent_spo2:
-          type: number
+          type: [number, 'null']
           format: double
           description: Percentage of recording / sleep time spent with SpO2 below 90% (T90).
         mean_heart_rate_bpm:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Mean heart rate during the study, in beats per minute.
         osa_severity:

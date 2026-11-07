@@ -7,7 +7,7 @@
   category: "travel"
   description: "Test description"
   merchant: "Test merchant"
-  currencyAsIso4217: "Test currencyAsIso4217"
+  currencyAsIso4217: "Tes"
   amount: 1.0
   vatAmount: 1.0
   exchangeRateToClaimCurrency: 1.0

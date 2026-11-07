@@ -19,38 +19,29 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            maximum: 100000
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of QuickSequentialOrganFailureAssessmentGrade records
+          description: A page of QuickSequentialOrganFailureAssessmentGrade records, with no total
           headers:
-            x-total-count:
-              description: Rows there are in all
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
               schema:
-                type: integer
-            x-limit:
-              description: The limit applied
-              schema:
-                type: integer
-            x-offset:
-              description: The offset applied
-              schema:
-                type: integer
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/QuickSequentialOrganFailureAssessmentGrade"
-        "400":
-          description: The offset is past the maximum
+        "422":
+          description: The limit or the cursor is not valid
           content:
             application/problem+json:
               schema:
@@ -191,6 +182,51 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing QuickSequentialOrganFailureAssessmentGrade
+      operationId: replaceQuickSequentialOrganFailureAssessmentGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuickSequentialOrganFailureAssessmentGrade"
+      responses:
+        "200":
+          description: The updated QuickSequentialOrganFailureAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuickSequentialOrganFailureAssessmentGrade"
+        "404":
+          description: QuickSequentialOrganFailureAssessmentGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a QuickSequentialOrganFailureAssessmentGrade
       operationId: deleteQuickSequentialOrganFailureAssessmentGrade
@@ -265,19 +301,19 @@ components:
           format: uuid
           description: Foreign key to the parent assessment (unique, 1:1).
         respiratory_rate_point:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Point (0 or 1) awarded for criterion 1, respiratory rate (>= 22 breaths/min).
         mentation_point:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Point (0 or 1) awarded for criterion 2, mentation (GCS < 15 or altered mentation).
         systolic_blood_pressure_point:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Point (0 or 1) awarded for criterion 3, systolic blood pressure (<= 100 mmHg).
         total_score:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Summed qSOFA score across the three criteria (0-3).
         risk_band:

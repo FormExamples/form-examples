@@ -19,38 +19,29 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            maximum: 100000
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of Qrisk3CardiovascularDiseaseRiskScore records
+          description: A page of Qrisk3CardiovascularDiseaseRiskScore records, with no total
           headers:
-            x-total-count:
-              description: Rows there are in all
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
               schema:
-                type: integer
-            x-limit:
-              description: The limit applied
-              schema:
-                type: integer
-            x-offset:
-              description: The offset applied
-              schema:
-                type: integer
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/Qrisk3CardiovascularDiseaseRiskScore"
-        "400":
-          description: The offset is past the maximum
+        "422":
+          description: The limit or the cursor is not valid
           content:
             application/problem+json:
               schema:
@@ -191,6 +182,51 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing Qrisk3CardiovascularDiseaseRiskScore
+      operationId: replaceQrisk3CardiovascularDiseaseRiskScore
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Qrisk3CardiovascularDiseaseRiskScore"
+      responses:
+        "200":
+          description: The updated Qrisk3CardiovascularDiseaseRiskScore
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Qrisk3CardiovascularDiseaseRiskScore"
+        "404":
+          description: Qrisk3CardiovascularDiseaseRiskScore not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a Qrisk3CardiovascularDiseaseRiskScore
       operationId: deleteQrisk3CardiovascularDiseaseRiskScore
@@ -265,7 +301,7 @@ components:
           format: uuid
           description: Foreign key to the patient being assessed (delete restricted).
         clinician_id:
-          type: string
+          type: [string, 'null']
           format: uuid
           description: Foreign key to the assessing clinician (optional; delete restricted).
         clinician_name:
@@ -282,7 +318,7 @@ components:
             - ""
           description: "Role of the assessing clinician: gp, nurse, pharmacist, or other."
         assessed_at:
-          type: string
+          type: [string, 'null']
           format: date-time
           description: Date and time the assessment was performed.
         care_setting:
@@ -299,7 +335,7 @@ components:
           maxLength: 100
           description: Local patient identifier as recorded on the assessment.
         age:
-          type: number
+          type: [number, 'null']
           format: double
           description: Age in years; QRISK3 is valid for ages 25-84.
         sex:
@@ -324,7 +360,7 @@ components:
             - ""
           description: "Nine-category QRISK3 ethnicity: white-or-not-stated, indian, pakistani, bangladeshi, other-asian, black-caribbean, black-african, chinese, or other."
         townsend_score:
-          type: number
+          type: [number, 'null']
           format: double
           description: Townsend deprivation score derived from postcode; optional (defaults to the cohort mean when null).
         postcode:
@@ -342,7 +378,7 @@ components:
             - ""
           description: "Smoking status: non, ex, light, moderate, or heavy."
         body_mass_index:
-          type: number
+          type: [number, 'null']
           format: double
           description: Body mass index (BMI), kg/m^2; may be derived from height and weight.
         diabetes_status:
@@ -354,15 +390,15 @@ components:
             - ""
           description: "Diabetes status: none, type1, or type2."
         cholesterol_hdl_ratio:
-          type: number
+          type: [number, 'null']
           format: double
           description: Total-cholesterol to HDL-cholesterol ratio.
         systolic_blood_pressure:
-          type: number
+          type: [number, 'null']
           format: double
           description: Mean systolic blood pressure in mmHg.
         systolic_blood_pressure_sd:
-          type: number
+          type: [number, 'null']
           format: double
           description: Standard deviation of at least two systolic blood pressure readings (visit-to-visit variability), mmHg.
         on_blood_pressure_treatment:

@@ -24,7 +24,7 @@ CREATE TABLE neurodiversity_adjustment_request_grade (
     -- Axis D: handling priority
     priority_tier VARCHAR(10) NOT NULL DEFAULT ''
         CHECK (priority_tier IN ('routine', 'soon', 'urgent', '')),
-    target_timeframe VARCHAR(50) NOT NULL DEFAULT '',
+    target_timeframe VARCHAR(100) NOT NULL DEFAULT '',
 
     recommendation VARCHAR(25) NOT NULL DEFAULT ''
         CHECK (recommendation IN ('progress-to-meeting', 'seek-occupational-health', 'request-more-detail', 'signpost-access-to-work', '')),

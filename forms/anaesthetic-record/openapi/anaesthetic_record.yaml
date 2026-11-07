@@ -19,38 +19,29 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            maximum: 100000
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of AnaestheticRecord records
+          description: A page of AnaestheticRecord records, with no total
           headers:
-            x-total-count:
-              description: Rows there are in all
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
               schema:
-                type: integer
-            x-limit:
-              description: The limit applied
-              schema:
-                type: integer
-            x-offset:
-              description: The offset applied
-              schema:
-                type: integer
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/AnaestheticRecord"
-        "400":
-          description: The offset is past the maximum
+        "422":
+          description: The limit or the cursor is not valid
           content:
             application/problem+json:
               schema:
@@ -191,6 +182,51 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing AnaestheticRecord
+      operationId: replaceAnaestheticRecord
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnaestheticRecord"
+      responses:
+        "200":
+          description: The updated AnaestheticRecord
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnaestheticRecord"
+        "404":
+          description: AnaestheticRecord not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a AnaestheticRecord
       operationId: deleteAnaestheticRecord
@@ -265,7 +301,7 @@ components:
           format: uuid
           description: Foreign key to the patient who received the anaesthetic.
         clinician_id:
-          type: string
+          type: [string, 'null']
           format: uuid
           description: Foreign key to the responsible anaesthetist (primary author of the record).
         theatre:
@@ -273,7 +309,7 @@ components:
           maxLength: 100
           description: Theatre or location where the anaesthetic was delivered.
         operation_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date of the anaesthetic.
         anaesthetist_name:
@@ -367,15 +403,15 @@ components:
             - ""
           description: "Whether the ASA E (emergency) modifier applies: yes or no."
         mallampati_class:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Modified Mallampati class (1-4).
         mouth_opening_cm:
-          type: number
+          type: [number, 'null']
           format: double
           description: Inter-incisor gap (mouth opening) in centimetres.
         thyromental_distance_cm:
-          type: number
+          type: [number, 'null']
           format: double
           description: Thyromental distance in centimetres.
         dentition:
@@ -410,7 +446,7 @@ components:
           maxLength: 60
           description: Airway device or tube size.
         tube_depth_cm:
-          type: number
+          type: [number, 'null']
           format: double
           description: Tracheal tube depth at the teeth in centimetres.
         cuffed:
@@ -421,11 +457,11 @@ components:
             - ""
           description: "Whether the airway device was cuffed: yes or no."
         cormack_lehane_grade:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Cormack-Lehane grade of the laryngoscopic view (1-4).
         intubation_attempts:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Number of intubation attempts.
         capnography_confirmed:
@@ -449,27 +485,27 @@ components:
             - ""
           description: "Primary anaesthetic technique: general, regional, sedation, mac, or combined."
         crystalloid_ml:
-          type: number
+          type: [number, 'null']
           format: double
           description: Crystalloid volume administered in millilitres.
         colloid_ml:
-          type: number
+          type: [number, 'null']
           format: double
           description: Colloid volume administered in millilitres.
         blood_products_ml:
-          type: number
+          type: [number, 'null']
           format: double
           description: Blood products volume administered in millilitres.
         estimated_blood_loss_ml:
-          type: number
+          type: [number, 'null']
           format: double
           description: Estimated blood loss in millilitres.
         urine_output_ml:
-          type: number
+          type: [number, 'null']
           format: double
           description: Urine output in millilitres.
         cell_salvage_ml:
-          type: number
+          type: [number, 'null']
           format: double
           description: Cell-salvaged blood returned to the patient in millilitres.
         regional_technique:
@@ -491,7 +527,7 @@ components:
           maxLength: 255
           description: Local anaesthetic agent used for the regional technique.
         regional_dose_mg:
-          type: number
+          type: [number, 'null']
           format: double
           description: Regional local anaesthetic dose in milligrams.
         block_height:
@@ -526,7 +562,7 @@ components:
           type: string
           description: Outstanding tasks handed over to the recovery team.
         handover_at:
-          type: string
+          type: [string, 'null']
           format: date-time
           description: Timestamp of handover to the recovery team.
         receiving_practitioner:
@@ -537,7 +573,7 @@ components:
           type: string
           description: Electronic signature of the anaesthetist at sign-off.
         signed_at:
-          type: string
+          type: [string, 'null']
           format: date-time
           description: Timestamp when the record was signed.
       required:

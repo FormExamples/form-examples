@@ -43,8 +43,9 @@ NEW_AXA = 'axa = { version = "0.6", features = ["pagination", "queue", "sqlx"] }
 OLD_ROUTER = "support::problem::apply(Self::routes(ctx), ctx)"
 NEW_ROUTER = "Self::routes(ctx).into_app(ctx.clone())"
 # bin/axum-axa-adopt then adds the ratelimit feature and builds the router
-# itself, so the check accepts either step.
-ON_06 = re.compile(r'^axa = \{ version = "0\.6", features = \["pagination", "queue", (?:"ratelimit", )?"sqlx"\] \}$', re.M)
+# itself, and bin/axum-axa-0-7 and bin/axum-cursor-pagination move on to axa 0.7
+# and its paging crates, so the check accepts any of those steps.
+ON_06 = re.compile(r'^axa = \{ version = "0\.[67]", features = \["(?:offset-|cursor-)?pagination", "queue", (?:"ratelimit", )?"sqlx"\] \}$', re.M)
 ROUTERS = (NEW_ROUTER, "axa::middleware::apply(routes, &ctx.config.http)")
 LIMITS = """/// The bounds of every list route. `limit` and its default match `openapi.yaml`.
 pub const PAGE_LIMITS: axa::pagination::Limits = axa::pagination::Limits {
@@ -141,10 +142,10 @@ def drift(crate: str) -> str | None:
     """Why a crate is not on the target, if it is not."""
     src = os.path.dirname(glob.glob(f"{crate}/src/*/app.rs")[0])
     if not ON_06.search(open(f"{crate}/Cargo.toml").read()):
-        return "not on axa 0.6"
+        return "not on axa 0.6 or later"
     lock = open(f"{crate}/Cargo.lock").read()
-    if not re.search(r'^name = "axa"\nversion = "0\.6\.', lock, re.M):
-        return "Cargo.lock is not on axa 0.6"
+    if not re.search(r'^name = "axa"\nversion = "0\.[67]\.', lock, re.M):
+        return "Cargo.lock is not on axa 0.6 or later"
     app = open(f"{src}/app.rs").read()
     if not any(router in app for router in ROUTERS):
         return "router does not apply axa's standard stack"
@@ -177,7 +178,7 @@ def main() -> int:
         bad = [(crate, why) for crate in crates if (why := drift(crate))]
         for crate, why in bad:
             print(f"{crate.split('/')[-2]}: {why}")
-        print(f"{len(crates) - len(bad)}/{len(crates)} crates on axa 0.6")
+        print(f"{len(crates) - len(bad)}/{len(crates)} crates on axa 0.6 or later")
         return 1 if bad else 0
     # Plan everything first, so one odd crate leaves the fleet as it was.
     plans = [plan(crate) for crate in crates]

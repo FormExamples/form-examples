@@ -19,38 +19,29 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            maximum: 100000
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of HypertensionReview records
+          description: A page of HypertensionReview records, with no total
           headers:
-            x-total-count:
-              description: Rows there are in all
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
               schema:
-                type: integer
-            x-limit:
-              description: The limit applied
-              schema:
-                type: integer
-            x-offset:
-              description: The offset applied
-              schema:
-                type: integer
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/HypertensionReview"
-        "400":
-          description: The offset is past the maximum
+        "422":
+          description: The limit or the cursor is not valid
           content:
             application/problem+json:
               schema:
@@ -191,6 +182,51 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing HypertensionReview
+      operationId: replaceHypertensionReview
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HypertensionReview"
+      responses:
+        "200":
+          description: The updated HypertensionReview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HypertensionReview"
+        "404":
+          description: HypertensionReview not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a HypertensionReview
       operationId: deleteHypertensionReview
@@ -265,7 +301,7 @@ components:
           format: uuid
           description: Foreign key to the patient this review documents (restrict delete).
         clinician_id:
-          type: string
+          type: [string, 'null']
           format: uuid
           description: Foreign key to the reviewing clinician (restrict delete); optional.
         clinician_role:
@@ -278,7 +314,7 @@ components:
             - ""
           description: "Reviewing clinician role: gp, practice-nurse, pharmacist, or other."
         reviewed_at:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the annual review was conducted.
         practice_site:
@@ -318,7 +354,7 @@ components:
             - ""
           description: "Patient ethnicity: white, black-african-caribbean, south-asian, mixed, or other."
         diagnosis_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date of hypertension diagnosis.
         type2_diabetes:
@@ -350,19 +386,19 @@ components:
             - ""
           description: Whether the patient has atrial fibrillation (yes/no).
         clinic_systolic:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Clinic systolic blood pressure in mmHg (best of repeated seated readings).
         clinic_diastolic:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Clinic diastolic blood pressure in mmHg (best of repeated seated readings).
         home_systolic:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Home/ambulatory (HBPM/ABPM) daytime-average systolic blood pressure in mmHg.
         home_diastolic:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Home/ambulatory (HBPM/ABPM) daytime-average diastolic blood pressure in mmHg.
         monitoring_method:
@@ -381,7 +417,7 @@ components:
             - ""
           description: Whether a symptomatic postural systolic fall >= 20 mmHg is present (yes/no).
         antihypertensive_agents:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Count of current antihypertensive agents.
         adherence:
@@ -400,7 +436,7 @@ components:
             - ""
           description: Whether troublesome medication side effects are present (yes/no).
         qrisk_percent:
-          type: number
+          type: [number, 'null']
           format: double
           description: QRISK 10-year cardiovascular risk as a percentage.
         smoking_status:
@@ -419,38 +455,38 @@ components:
             - ""
           description: Whether the patient is on a statin (yes/no).
         bmi:
-          type: number
+          type: [number, 'null']
           format: double
           description: Body mass index in kg/m^2.
         lifestyle_advice:
           type: string
           description: Free-text record of lifestyle advice given (diet, exercise, alcohol, salt, smoking cessation).
         serum_creatinine:
-          type: number
+          type: [number, 'null']
           format: double
           description: Serum creatinine in micromol/L (U&E).
         egfr:
-          type: number
+          type: [number, 'null']
           format: double
           description: Estimated glomerular filtration rate in mL/min/1.73m^2 (U&E).
         serum_potassium:
-          type: number
+          type: [number, 'null']
           format: double
           description: Serum potassium in mmol/L (U&E).
         hba1c:
-          type: number
+          type: [number, 'null']
           format: double
           description: HbA1c in mmol/mol (glycaemic control).
         total_cholesterol:
-          type: number
+          type: [number, 'null']
           format: double
           description: Total cholesterol in mmol/L (lipids).
         hdl_cholesterol:
-          type: number
+          type: [number, 'null']
           format: double
           description: HDL cholesterol in mmol/L (lipids).
         urine_acr:
-          type: number
+          type: [number, 'null']
           format: double
           description: Urine albumin:creatinine ratio in mg/mmol.
         complications:

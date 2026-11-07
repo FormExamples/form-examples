@@ -5,25 +5,18 @@
 
 use crate::support::prelude::*;
 use axum::debug_handler;
-use serde::Deserialize;
 use serde_json::{Value, json};
 
 use crate::models::cardiology_response_grades;
 use crate::models::cardiology_responses;
 
-#[derive(Debug, Deserialize)]
-struct DashboardParams {
-    #[serde(flatten)]
-    page: PageParams,
-}
-
 /// GET /api/dashboard — list graded responses (response joined to its grade).
 #[debug_handler]
 async fn dashboard(
     State(ctx): State<AppContext>,
-    Query(params): Query<DashboardParams>,
+    OriginalUri(uri): OriginalUri,
 ) -> Result<Response> {
-    let page = params.page.resolve(PAGE_LIMITS)?;
+    let page = cursor_page(&ctx, &uri)?;
     let (limit, offset) = page.bounds();
 
     // Each grade row, newest first, paired with its parent response.
@@ -53,11 +46,7 @@ async fn dashboard(
         })
         .collect();
 
-    let total: i64 =
-        sqlx::query_scalar("SELECT COUNT(*) FROM cardiology_response_grades WHERE deleted_at IS NULL")
-            .fetch_one(&db(&ctx))
-            .await?;
-    Ok(page.respond(total, items))
+    Ok(page.respond(items))
 }
 
 /// Routes.

@@ -21,10 +21,10 @@ async fn can_create_and_read_back_patient() {
             "givenNames": "Test givenNames",
             "birthDate": "1990-01-01",
             "sex": "male",
-            "nationalityAsIso31661Alpha3": "Test nationalityAsIso31661Alpha3",
+            "nationalityAsIso31661Alpha3": "GBR",
             "travelDocumentKind": "passport",
             "travelDocumentNumber": "Test travelDocumentNumber",
-            "travelDocumentIssuerAsIso31661Alpha3": "Test travelDocumentIssuerAsIso31661Alpha3",
+            "travelDocumentIssuerAsIso31661Alpha3": "GBR",
             "email": "test.patient@example.com",
             "phone": "+441234567890",
             "postalAddressAsFullText": "10 Downing Street, London",
@@ -78,13 +78,13 @@ async fn can_create_and_read_back_patient() {
         assert_eq!(fetched["sex"], "male");
         assert_eq!(
             fetched["nationalityAsIso31661Alpha3"],
-            "Test nationalityAsIso31661Alpha3"
+            "GBR"
         );
         assert_eq!(fetched["travelDocumentKind"], "passport");
         assert_eq!(fetched["travelDocumentNumber"], "Test travelDocumentNumber");
         assert_eq!(
             fetched["travelDocumentIssuerAsIso31661Alpha3"],
-            "Test travelDocumentIssuerAsIso31661Alpha3"
+            "GBR"
         );
         assert_eq!(fetched["email"], "test.patient@example.com");
         assert_eq!(fetched["phone"], "+441234567890");

@@ -71,11 +71,11 @@ async fn load_item(ctx: &AppContext, id: Uuid) -> Result<Model> {
 #[debug_handler]
 pub async fn list(
     State(ctx): State<AppContext>,
-    Query(params): Query<PageParams>,
+    OriginalUri(uri): OriginalUri,
 ) -> Result<Response> {
-    let page = params.resolve(PAGE_LIMITS)?;
-    let (rows, total) = Model::page(&db(&ctx), page).await?;
-    Ok(page.respond(total, rows))
+    let page = cursor_page(&ctx, &uri)?;
+    let rows = Model::page(&db(&ctx), &page).await?;
+    Ok(page.respond(rows))
 }
 
 /// Create a new medical operation note team member record.

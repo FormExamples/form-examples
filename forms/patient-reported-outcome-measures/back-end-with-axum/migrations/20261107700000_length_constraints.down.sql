@@ -1,0 +1,5 @@
+ALTER TABLE "patient_reported_outcome_measures_scores" DROP CONSTRAINT IF EXISTS "patient_reported_outcome_measures_scores_eq5d_health_s_698ddab9";
+ALTER TABLE "patient_reported_outcome_measures_scores" DROP CONSTRAINT IF EXISTS "patient_reported_outcome_measures_scores_mjoa_band_length";
+ALTER TABLE "patient_reported_outcome_measures_scores" DROP CONSTRAINT IF EXISTS "patient_reported_outcome_measures_scores_ndi_band_length";
+ALTER TABLE "patient_reported_outcome_measures" DROP CONSTRAINT IF EXISTS "patient_reported_outcome_measures_visit_length";
+ALTER TABLE "patient_reported_outcome_measures" DROP CONSTRAINT IF EXISTS "patient_reported_outcome_measures_subject_id_length";

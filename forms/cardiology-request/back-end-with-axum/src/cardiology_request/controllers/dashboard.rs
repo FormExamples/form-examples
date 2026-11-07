@@ -14,8 +14,6 @@ use crate::models::{cardiology_request_grades, cardiology_requests};
 #[derive(Debug, Deserialize)]
 struct DashboardParams {
     status: Option<String>,
-    #[serde(flatten)]
-    page: PageParams,
 }
 
 /// GET /api/dashboard -- list requests joined with their grade as JSON.
@@ -23,8 +21,9 @@ struct DashboardParams {
 async fn dashboard(
     State(ctx): State<AppContext>,
     Query(params): Query<DashboardParams>,
+    OriginalUri(uri): OriginalUri,
 ) -> Result<Response> {
-    let page = params.page.resolve(PAGE_LIMITS)?;
+    let page = cursor_page(&ctx, &uri)?;
     let (limit, offset) = page.bounds();
 
     let requests: Vec<cardiology_requests::Model> = sqlx::query_as(
@@ -53,14 +52,7 @@ async fn dashboard(
         }));
     }
 
-    let total: i64 = sqlx::query_scalar(
-        "SELECT COUNT(*) FROM cardiology_requests WHERE ($1::text IS NULL OR status = $1) \
-            AND deleted_at IS NULL",
-    )
-    .bind(params.status.as_deref())
-    .fetch_one(&db(&ctx))
-    .await?;
-    Ok(page.respond(total, items))
+    Ok(page.respond(items))
 }
 
 /// Routes.

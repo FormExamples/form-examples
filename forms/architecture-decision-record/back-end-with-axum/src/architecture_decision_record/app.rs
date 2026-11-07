@@ -42,7 +42,7 @@ impl App {
     #[must_use]
     pub fn routes(_ctx: &AppContext) -> AppRoutes {
         AppRoutes::with_default_routes()
-            .add_route(crate::controllers::architecture_decision_record::routes())
+            .add_route(crate::controllers::openapi::routes())
             .add_route(crate::controllers::architecture_decision_record::api_routes())
     }
 
@@ -126,6 +126,7 @@ impl App {
     pub async fn context(environment: Environment, config: Config) -> Result<AppContext> {
         let pool = axa::db::connect(&config.database).await?;
         let mut ctx = AppContext::new(environment, pool, config);
+        ctx.shared_store.insert(support::cursor_key(&ctx.environment)?);
         if ctx.config.workers == WorkerMode::BackgroundQueue {
             let mut queue =
                 Queue::connect(&ctx.config.database.uri, QueueOptions::default()).await?;

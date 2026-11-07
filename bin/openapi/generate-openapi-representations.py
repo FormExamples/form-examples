@@ -307,10 +307,13 @@ def emit_property(lines, indent, col, col_description):
     lines.append(f"{pad}{key}:")
 
     inner = ' ' * (indent + 2)
+    # A nullable column is sent as null when it holds nothing, so its type
+    # admits null (OpenAPI 3.1 is JSON Schema: a type list, and null in an enum).
+    nullable = not col['not_null'] and name != 'id'
 
     # CHECK enum overrides regular type mapping — but type is still emitted.
     if col['check_values']:
-        lines.append(f"{inner}type: string")
+        lines.append(f"{inner}type: [string, 'null']" if nullable else f"{inner}type: string")
         lines.append(f"{inner}enum:")
         seen = set()
         ordered = []
@@ -321,9 +324,13 @@ def emit_property(lines, indent, col, col_description):
             ordered.append(v)
         for v in ordered:
             lines.append(f"{inner}  - {yaml_enum_value(v)}")
+        if nullable:
+            lines.append(f"{inner}  - null")
     else:
         type_pairs = sql_to_openapi(col)
         for k, v in type_pairs:
+            if k == 'type' and nullable:
+                v = f"[{v}, 'null']"
             lines.append(f"{inner}{k}: {v}")
 
     if col_description:
@@ -428,34 +435,28 @@ def build_yaml(table_name, columns, form_slug, source_table_names,
     L.append("            maximum: 1000")
     L.append("            default: 100")
     L.append("          required: false")
-    L.append("        - name: offset")
+    L.append("          description: Rows on a page. A larger limit is refused, not clamped")
+    L.append("        - name: cursor")
     L.append("          in: query")
     L.append("          schema:")
-    L.append("            type: integer")
-    L.append("            minimum: 0")
-    L.append("            maximum: 100000")
-    L.append("            default: 0")
+    L.append("            type: string")
     L.append("          required: false")
+    L.append("          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters")
     L.append("      responses:")
     L.append('        "200":')
-    L.append(f"          description: A page of {resource} records")
+    L.append(f"          description: A page of {resource} records, with no total")
     L.append("          headers:")
-    for header, meaning in (
-        ("x-total-count", "Rows there are in all"),
-        ("x-limit", "The limit applied"),
-        ("x-offset", "The offset applied"),
-    ):
-        L.append(f"            {header}:")
-        L.append(f"              description: {meaning}")
-        L.append("              schema:")
-        L.append("                type: integer")
+    L.append("            link:")
+    L.append('              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page')
+    L.append("              schema:")
+    L.append("                type: string")
     L.append("          content:")
     L.append("            application/json:")
     L.append("              schema:")
     L.append("                type: array")
     L.append("                items:")
     L.append(f'                  $ref: "#/components/schemas/{resource}"')
-    problem_response(L, "400", "The offset is past the maximum")
+    problem_response(L, "422", "The limit or the cursor is not valid")
     too_many_requests(L)
     L.append("    post:")
     L.append(f"      summary: Create a new {resource}")
@@ -500,6 +501,26 @@ def build_yaml(table_name, columns, form_slug, source_table_names,
     L.append("    patch:")
     L.append(f"      summary: Update an existing {resource}")
     L.append(f"      operationId: update{resource}")
+    L.append("      requestBody:")
+    L.append("        required: true")
+    L.append("        content:")
+    L.append("          application/json:")
+    L.append("            schema:")
+    L.append(f'              $ref: "#/components/schemas/{resource}"')
+    L.append("      responses:")
+    L.append('        "200":')
+    L.append(f"          description: The updated {resource}")
+    L.append("          content:")
+    L.append("            application/json:")
+    L.append("              schema:")
+    L.append(f'                $ref: "#/components/schemas/{resource}"')
+    problem_response(L, "404", f"{resource} not found")
+    problem_response(L, "409", "It duplicates a row, or refers to a missing one")
+    problem_response(L, "422", "The body does not match the schema, or a value is outside what its field allows")
+    too_many_requests(L)
+    L.append("    put:")
+    L.append(f"      summary: Replace an existing {resource}")
+    L.append(f"      operationId: replace{resource}")
     L.append("      requestBody:")
     L.append("        required: true")
     L.append("        content:")

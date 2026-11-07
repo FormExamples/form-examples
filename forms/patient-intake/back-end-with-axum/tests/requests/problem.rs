@@ -24,12 +24,7 @@ macro_rules! problem {
 async fn every_failure_is_a_problem() {
     request::<App, _, _>(|request, _ctx| async move {
         // axa's own error, whose text reaches the client.
-        let (body, _) = problem!(
-            request
-                .get("/api/assessment_medications?offset=100001")
-                .await,
-            400
-        );
+        let (body, _) = problem!(request.get("/api/assessment_medications?cursor=forged").await, 422);
         assert!(body["detail"].is_string());
 
         // A route that does not exist, and a wrong method.

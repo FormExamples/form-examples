@@ -1,0 +1,158 @@
+# Routes no SQL table describes, documented by hand. Merged into
+# combined/openapi.yaml by bin/openapi/generate-openapi-combined.py.
+paths:
+  /api/cardiology_responses/{id}/submit:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    post:
+      summary: Grade the response and store the grade
+      description: Runs the scoring engine over the stored record and replaces any earlier grade, with
+        its fired rules and flags, in one transaction.
+      operationId: submitCardiologyResponse
+      responses:
+        '200':
+          description: The grade, its fired rules, and its flags
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardiologyResponseResult'
+        '404':
+          description: CardiologyResponse not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/cardiology_responses/{id}/result:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      summary: The stored grade of the response, with its fired rules and flags
+      operationId: getCardiologyResponseResult
+      responses:
+        '200':
+          description: The grade, its fired rules, and its flags
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardiologyResponseResult'
+        '404':
+          description: CardiologyResponse not found, or not yet graded
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /api/dashboard:
+    get:
+      summary: Each response with its grade, newest grade first
+      description: Lists grades newest first, each paired with the record it grades.
+      operationId: getDashboard
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        description: Rows on a page (default 100, largest 1000). A larger limit is refused, not clamped
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+      - name: cursor
+        in: query
+        required: false
+        description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
+        schema:
+          type: string
+      responses:
+        '200':
+          description: One page of rows, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CardiologyResponseDashboardRow'
+        '422':
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+components:
+  schemas:
+    CardiologyResponseResult:
+      type: object
+      required:
+      - grade
+      - firedRules
+      - flags
+      properties:
+        grade:
+          $ref: '#/components/schemas/CardiologyResponseGrade'
+        firedRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/CardiologyResponseGradeRule'
+        flags:
+          type: array
+          items:
+            $ref: '#/components/schemas/CardiologyResponseGradeFlag'
+    CardiologyResponseDashboardRow:
+      type: object
+      required:
+      - response
+      - grade
+      properties:
+        response:
+          oneOf:
+          - $ref: '#/components/schemas/CardiologyResponse'
+          - type: 'null'
+        grade:
+          $ref: '#/components/schemas/CardiologyResponseGrade'

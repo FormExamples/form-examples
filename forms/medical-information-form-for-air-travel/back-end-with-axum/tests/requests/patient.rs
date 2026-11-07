@@ -20,7 +20,7 @@ async fn can_create_and_read_back_patient() {
             "name": "Test Patient",
             "birthDate": "1990-01-01",
             "sexAtBirth": "female",
-            "nationalityAsIso31661Alpha2": "Test nationalityAsIso31661Alpha2",
+            "nationalityAsIso31661Alpha2": "GB",
             "passportNumber": "Test passportNumber",
             "unitedKingdomNhsNumber": "9434765919",
             "nationalHealthId": "Test nationalHealthId",
@@ -79,7 +79,7 @@ async fn can_create_and_read_back_patient() {
         assert_eq!(fetched["sexAtBirth"], "female");
         assert_eq!(
             fetched["nationalityAsIso31661Alpha2"],
-            "Test nationalityAsIso31661Alpha2"
+            "GB"
         );
         assert_eq!(fetched["passportNumber"], "Test passportNumber");
         assert_eq!(fetched["unitedKingdomNhsNumber"], "9434765919");

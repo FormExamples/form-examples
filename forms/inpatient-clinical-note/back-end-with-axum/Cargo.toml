@@ -15,11 +15,11 @@ default-run = "inpatient_clinical_note-cli"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [workspace.dependencies]
-axa = { version = "0.6", features = ["pagination", "queue", "ratelimit", "sqlx"] }
+axa = { version = "0.7", features = ["cursor-pagination", "queue", "ratelimit", "sqlx"] }
 
 [dependencies]
 axa = { workspace = true }
-rust_decimal = { version = "1", features = ["serde"] }
+rust_decimal = { version = "1", features = ["serde", "serde-float"] }
 serde-saphyr = "2"
 sqlx = { version = "0.9", default-features = false, features = ["chrono", "derive", "json", "macros", "migrate", "postgres", "runtime-tokio", "rust_decimal", "tls-rustls-ring-webpki", "uuid"] }
 thiserror = "2"

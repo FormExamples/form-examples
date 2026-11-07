@@ -101,11 +101,11 @@ async fn create(State(ctx): State<AppContext>, Json(body): Json<CreateBody>) -> 
 
 /// GET /`api/cardiology_responses` — list responses (newest first).
 #[debug_handler]
-async fn list(State(ctx): State<AppContext>, Query(params): Query<PageParams>) -> Result<Response> {
-    let page = params.resolve(PAGE_LIMITS)?;
-    let (models, total) = cardiology_responses::page(&db(&ctx), page).await?;
+async fn list(State(ctx): State<AppContext>, OriginalUri(uri): OriginalUri) -> Result<Response> {
+    let page = cursor_page(&ctx, &uri)?;
+    let models = cardiology_responses::page(&db(&ctx), &page).await?;
     let items: Vec<Value> = models.iter().map(response_to_json).collect();
-    Ok(page.respond(total, items))
+    Ok(page.respond(items))
 }
 
 /// GET /`api/cardiology_responses/{id`} — fetch one response.

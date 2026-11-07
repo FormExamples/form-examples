@@ -1,0 +1,109 @@
+# Routes no SQL table describes, documented by hand. Merged into
+# combined/openapi.yaml by bin/openapi/generate-openapi-combined.py.
+paths:
+  /api/inpatient_clinical_notes/{id}/grade:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    post:
+      summary: Grade the note and store the grade
+      description: 'Runs the documentation-completeness and clinical-acuity engines over the stored note
+        and its children, and records a new grade with its rules and flags. Append-only: an earlier grade
+        is kept, and the newest one counts.'
+      operationId: gradeInpatientClinicalNote
+      responses:
+        '200':
+          description: The stored grade, and the engine's full result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InpatientClinicalNoteGradeResponse'
+        '404':
+          description: InpatientClinicalNote not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    get:
+      summary: The newest stored grade of the note
+      operationId: getInpatientClinicalNoteGrade
+      responses:
+        '200':
+          description: The newest stored grade, without the engine result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InpatientClinicalNoteGradeResponse'
+        '404':
+          description: InpatientClinicalNote not found, or never graded; POST to the same path grades
+            it
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+components:
+  schemas:
+    InpatientClinicalNoteGradeResponse:
+      type: object
+      required:
+      - grade
+      properties:
+        grade:
+          $ref: '#/components/schemas/InpatientClinicalNoteGrade'
+        result:
+          type: object
+          description: 'The engine''s result, present only on POST: completeness status and percent, acuity
+            band (computed and as overridden), each component''s status, and the fired rules and flags.'
+          properties:
+            status:
+              type: string
+            completenessPercent:
+              type: integer
+            acuityBand:
+              type: string
+            computedAcuityBand:
+              type: string
+            acuityOverridden:
+              type: boolean
+            componentStatuses:
+              type: array
+              items:
+                type: object
+            documentedRequired:
+              type: integer
+            totalRequired:
+              type: integer
+            firedRules:
+              type: array
+              items:
+                type: object
+            flags:
+              type: array
+              items:
+                type: object

@@ -5,7 +5,7 @@
   name: "Test Patient"
   birthDate: "1990-01-01"
   sexAtBirth: "female"
-  nationalityAsIso31661Alpha2: "Test nationalityAsIso31661Alpha2"
+  nationalityAsIso31661Alpha2: "Te"
   passportNumber: "Test passportNumber"
   unitedKingdomNhsNumber: "9434765919"
   nationalHealthId: "Test nationalHealthId"

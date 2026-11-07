@@ -1,0 +1,5 @@
+ALTER TABLE "hospital_performance_indicator_values" DROP CONSTRAINT IF EXISTS "hospital_performance_indicator_values_category_title_length";
+ALTER TABLE "hospital_performance_indicator_values" DROP CONSTRAINT IF EXISTS "hospital_performance_indicator_values_indicator_code_length";
+ALTER TABLE "hospital_performance_indicators" DROP CONSTRAINT IF EXISTS "hospital_performance_indicators_status_length";
+ALTER TABLE "hospital_performance_indicators" DROP CONSTRAINT IF EXISTS "hospital_performance_indicators_prepared_by_name_length";
+ALTER TABLE "hospital_performance_indicators" DROP CONSTRAINT IF EXISTS "hospital_performance_indicators_hospital_name_length";
