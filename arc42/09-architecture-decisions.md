@@ -187,3 +187,26 @@ duplicate or a missing reference is the caller's `409`, not a `500`. (+) No crat
 an error body it has just written. (−) A `(StatusCode, "why")` answer loses its text, so
 handlers must return an `Error`. (−) `409` covers both a duplicate and a missing
 reference, and only `detail` tells them apart.
+
+## ADR-11 — A request limit per client, and fixtures only in development
+
+**Context.** The crates have no authentication (ADR-7), so nothing slowed a client that
+sent requests as fast as it could. `task seed` loaded made-up records wherever it ran,
+production included. `axa` 0.6 offers `axa-ratelimit` and `Task::development_only` for
+these. Five hand-written controllers still wrote paging headers by hand and wrapped
+lists in `{items, total}`, unlike the bare array `openapi.yaml` documents.
+
+**Decision.** Each crate limits a client to 600 requests a minute with
+`axa::ratelimit::by_client`, layered on the routes inside `axa::middleware::apply`,
+which works out the client's address first. `router` builds the stack itself, because
+`into_app` leaves no room inside it. The limit is in `support/mod.rs`. The `seed` task is
+development only. Every list, the dashboards included, answers with `Page::respond`.
+`openapi.yaml` publishes the `429` on every operation. `bin/axum-axa-adopt --check`
+keeps all three.
+
+**Consequences.** (+) A runaway client gets a `429` problem with `Retry-After`, and
+health probes are never limited. (+) Fixtures cannot reach a production database.
+(+) The dashboards page, and report a true total. (−) Each process counts for itself,
+so several replicas give a client several limits. (−) Behind a proxy, `TRUSTED_PROXIES`
+must list it, or every client shares the proxy's one limit. (−) Dashboard clients
+reading `items` must read the array, with the total in `x-total-count`.

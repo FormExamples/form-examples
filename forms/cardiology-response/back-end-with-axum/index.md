@@ -37,7 +37,7 @@ A critical result auto-escalates Axis D to `critical-alert` and raises the
 | DELETE | `/api/cardiology_responses/{id}`        | Soft-delete the response                          |
 | POST   | `/api/cardiology_responses/{id}/submit` | Run the engine, persist the grade transactionally |
 | GET    | `/api/cardiology_responses/{id}/result` | Return the stored grade + fired rules + flags     |
-| GET    | `/api/dashboard`                        | List graded responses, grade joined to response   |
+| GET    | `/api/dashboard`                        | List graded responses with their response (paged) |
 
 All request and response bodies are `application/json` with camelCase keys via
 `serde(rename_all = "camelCase")`.

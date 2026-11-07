@@ -56,6 +56,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Clinician
       operationId: createClinician
@@ -90,6 +101,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/clinicians/{id}:
     parameters:
     - name: id
@@ -110,6 +132,17 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -148,6 +181,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Clinician
       operationId: deleteClinician
@@ -156,6 +200,17 @@ paths:
           description: Clinician deleted
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -209,6 +264,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Grade
       operationId: createGrade
@@ -243,6 +309,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/grades/{id}:
     parameters:
     - name: id
@@ -263,6 +340,17 @@ paths:
                 $ref: '#/components/schemas/Grade'
         '404':
           description: Grade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -301,6 +389,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Grade
       operationId: deleteGrade
@@ -309,6 +408,17 @@ paths:
           description: Grade deleted
         '404':
           description: Grade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -362,6 +472,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GradingAdditionalFlag
       operationId: createGradingAdditionalFlag
@@ -396,6 +517,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/grading_additional_flags/{id}:
     parameters:
     - name: id
@@ -416,6 +548,17 @@ paths:
                 $ref: '#/components/schemas/GradingAdditionalFlag'
         '404':
           description: GradingAdditionalFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -454,6 +597,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GradingAdditionalFlag
       operationId: deleteGradingAdditionalFlag
@@ -462,6 +616,17 @@ paths:
           description: GradingAdditionalFlag deleted
         '404':
           description: GradingAdditionalFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -515,6 +680,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new GradingFiredRule
       operationId: createGradingFiredRule
@@ -549,6 +725,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/grading_fired_rules/{id}:
     parameters:
     - name: id
@@ -569,6 +756,17 @@ paths:
                 $ref: '#/components/schemas/GradingFiredRule'
         '404':
           description: GradingFiredRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -607,6 +805,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a GradingFiredRule
       operationId: deleteGradingFiredRule
@@ -615,6 +824,17 @@ paths:
           description: GradingFiredRule deleted
         '404':
           description: GradingFiredRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -668,6 +888,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Patient
       operationId: createPatient
@@ -702,6 +933,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/patients/{id}:
     parameters:
     - name: id
@@ -722,6 +964,17 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -760,6 +1013,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Patient
       operationId: deletePatient
@@ -768,6 +1032,17 @@ paths:
           description: Patient deleted
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -821,6 +1096,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PrescriptionDetails
       operationId: createPrescriptionDetails
@@ -855,6 +1141,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/prescription_details/{id}:
     parameters:
     - name: id
@@ -875,6 +1172,17 @@ paths:
                 $ref: '#/components/schemas/PrescriptionDetails'
         '404':
           description: PrescriptionDetails not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -913,6 +1221,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PrescriptionDetails
       operationId: deletePrescriptionDetails
@@ -921,6 +1240,17 @@ paths:
           description: PrescriptionDetails deleted
         '404':
           description: PrescriptionDetails not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -974,6 +1304,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PrescriptionRequestType
       operationId: createPrescriptionRequestType
@@ -1008,6 +1349,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/prescription_request_types/{id}:
     parameters:
     - name: id
@@ -1028,6 +1380,17 @@ paths:
                 $ref: '#/components/schemas/PrescriptionRequestType'
         '404':
           description: PrescriptionRequestType not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -1066,6 +1429,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PrescriptionRequestType
       operationId: deletePrescriptionRequestType
@@ -1074,6 +1448,17 @@ paths:
           description: PrescriptionRequestType deleted
         '404':
           description: PrescriptionRequestType not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -1127,6 +1512,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PrescriptionRequest
       operationId: createPrescriptionRequest
@@ -1161,6 +1557,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/prescription_requests/{id}:
     parameters:
     - name: id
@@ -1181,6 +1588,17 @@ paths:
                 $ref: '#/components/schemas/PrescriptionRequest'
         '404':
           description: PrescriptionRequest not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -1219,6 +1637,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PrescriptionRequest
       operationId: deletePrescriptionRequest
@@ -1227,6 +1656,17 @@ paths:
           description: PrescriptionRequest deleted
         '404':
           description: PrescriptionRequest not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -1280,6 +1720,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new PrescriptionSubstitutionOptions
       operationId: createPrescriptionSubstitutionOptions
@@ -1314,6 +1765,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/prescription_substitution_options/{id}:
     parameters:
     - name: id
@@ -1334,6 +1796,17 @@ paths:
                 $ref: '#/components/schemas/PrescriptionSubstitutionOptions'
         '404':
           description: PrescriptionSubstitutionOptions not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -1372,6 +1845,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a PrescriptionSubstitutionOptions
       operationId: deletePrescriptionSubstitutionOptions
@@ -1380,6 +1864,17 @@ paths:
           description: PrescriptionSubstitutionOptions deleted
         '404':
           description: PrescriptionSubstitutionOptions not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:

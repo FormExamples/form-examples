@@ -55,6 +55,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MedicalCertificateOfCauseOfDeathGradeRule
       operationId: createMedicalCertificateOfCauseOfDeathGradeRule
@@ -89,6 +100,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
   /api/medical_certificate_of_cause_of_death_grade_rules/{id}:
     parameters:
       - name: id
@@ -109,6 +131,17 @@ paths:
                 $ref: "#/components/schemas/MedicalCertificateOfCauseOfDeathGradeRule"
         "404":
           description: MedicalCertificateOfCauseOfDeathGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -147,6 +180,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a MedicalCertificateOfCauseOfDeathGradeRule
       operationId: deleteMedicalCertificateOfCauseOfDeathGradeRule
@@ -155,6 +199,17 @@ paths:
           description: MedicalCertificateOfCauseOfDeathGradeRule deleted
         "404":
           description: MedicalCertificateOfCauseOfDeathGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:

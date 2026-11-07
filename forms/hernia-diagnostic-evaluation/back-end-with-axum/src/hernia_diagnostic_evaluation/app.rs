@@ -140,13 +140,22 @@ impl App {
         Ok(ctx)
     }
 
-    /// Build the full router under the standard middleware.
+    /// Build the full router: the routes, a request limit per client, and the
+    /// standard middleware. The limit sits inside the standard stack, which
+    /// works out the client's address and gives a refusal its request id and
+    /// security headers.
     ///
     /// # Errors
     ///
     /// Fails when a configured CORS origin is invalid.
     pub fn router(ctx: &AppContext) -> Result<Router> {
-        Self::routes(ctx).into_app(ctx.clone())
+        let limiter = axa::ratelimit::Limiter::new(
+            support::RATE_LIMIT_REQUESTS,
+            support::RATE_LIMIT_WINDOW_SECONDS,
+        );
+        let limit = axum::middleware::from_fn_with_state(limiter, axa::ratelimit::by_client);
+        let routes = Self::routes(ctx).into_router(ctx.clone()).layer(limit);
+        axa::middleware::apply(routes, &ctx.config.http)
     }
 
     /// Run a database command.
@@ -242,6 +251,10 @@ struct SeedTask;
 
 #[async_trait::async_trait]
 impl axa::task::Task for SeedTask {
+    fn development_only(&self) -> bool {
+        true
+    }
+
     fn task(&self) -> axa::task::TaskInfo {
         axa::task::TaskInfo {
             name: "seed".to_string(),

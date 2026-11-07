@@ -57,6 +57,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Address
       operationId: createAddress
@@ -91,6 +102,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/addresses/{id}:
     parameters:
     - name: id
@@ -111,6 +133,17 @@ paths:
                 $ref: '#/components/schemas/Address'
         '404':
           description: Address not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -149,6 +182,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Address
       operationId: deleteAddress
@@ -157,6 +201,17 @@ paths:
           description: Address deleted
         '404':
           description: Address not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -210,6 +265,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LastingPowerOfAttorney
       operationId: createLastingPowerOfAttorney
@@ -244,6 +310,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/lasting_power_of_attorneys/{id}:
     parameters:
     - name: id
@@ -264,6 +341,17 @@ paths:
                 $ref: '#/components/schemas/LastingPowerOfAttorney'
         '404':
           description: LastingPowerOfAttorney not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -302,6 +390,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LastingPowerOfAttorney
       operationId: deleteLastingPowerOfAttorney
@@ -310,6 +409,17 @@ paths:
           description: LastingPowerOfAttorney deleted
         '404':
           description: LastingPowerOfAttorney not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -363,6 +473,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaAttorney
       operationId: createLpaAttorney
@@ -397,6 +518,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/lpa_attorneys/{id}:
     parameters:
     - name: id
@@ -417,6 +549,17 @@ paths:
                 $ref: '#/components/schemas/LpaAttorney'
         '404':
           description: LpaAttorney not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -455,6 +598,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaAttorney
       operationId: deleteLpaAttorney
@@ -463,6 +617,17 @@ paths:
           description: LpaAttorney deleted
         '404':
           description: LpaAttorney not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -516,6 +681,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaCertificateProvider
       operationId: createLpaCertificateProvider
@@ -550,6 +726,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/lpa_certificate_providers/{id}:
     parameters:
     - name: id
@@ -570,6 +757,17 @@ paths:
                 $ref: '#/components/schemas/LpaCertificateProvider'
         '404':
           description: LpaCertificateProvider not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -608,6 +806,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaCertificateProvider
       operationId: deleteLpaCertificateProvider
@@ -616,6 +825,17 @@ paths:
           description: LpaCertificateProvider deleted
         '404':
           description: LpaCertificateProvider not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -669,6 +889,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaContinuationSheet
       operationId: createLpaContinuationSheet
@@ -703,6 +934,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/lpa_continuation_sheets/{id}:
     parameters:
     - name: id
@@ -723,6 +965,17 @@ paths:
                 $ref: '#/components/schemas/LpaContinuationSheet'
         '404':
           description: LpaContinuationSheet not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -761,6 +1014,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaContinuationSheet
       operationId: deleteLpaContinuationSheet
@@ -769,6 +1033,17 @@ paths:
           description: LpaContinuationSheet deleted
         '404':
           description: LpaContinuationSheet not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -822,6 +1097,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaPersonToNotify
       operationId: createLpaPersonToNotify
@@ -856,6 +1142,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/lpa_person_to_notifies/{id}:
     parameters:
     - name: id
@@ -876,6 +1173,17 @@ paths:
                 $ref: '#/components/schemas/LpaPersonToNotify'
         '404':
           description: LpaPersonToNotify not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -914,6 +1222,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaPersonToNotify
       operationId: deleteLpaPersonToNotify
@@ -922,6 +1241,17 @@ paths:
           description: LpaPersonToNotify deleted
         '404':
           description: LpaPersonToNotify not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -975,6 +1305,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaPreferencesAndInstructions
       operationId: createLpaPreferencesAndInstructions
@@ -1009,6 +1350,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/lpa_preferences_and_instructions/{id}:
     parameters:
     - name: id
@@ -1029,6 +1381,17 @@ paths:
                 $ref: '#/components/schemas/LpaPreferencesAndInstructions'
         '404':
           description: LpaPreferencesAndInstructions not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -1067,6 +1430,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaPreferencesAndInstructions
       operationId: deleteLpaPreferencesAndInstructions
@@ -1075,6 +1449,17 @@ paths:
           description: LpaPreferencesAndInstructions deleted
         '404':
           description: LpaPreferencesAndInstructions not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -1128,6 +1513,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaRegistrationApplication
       operationId: createLpaRegistrationApplication
@@ -1162,6 +1558,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/lpa_registration_applications/{id}:
     parameters:
     - name: id
@@ -1182,6 +1589,17 @@ paths:
                 $ref: '#/components/schemas/LpaRegistrationApplication'
         '404':
           description: LpaRegistrationApplication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -1220,6 +1638,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaRegistrationApplication
       operationId: deleteLpaRegistrationApplication
@@ -1228,6 +1657,17 @@ paths:
           description: LpaRegistrationApplication deleted
         '404':
           description: LpaRegistrationApplication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -1281,6 +1721,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaRegistrationRecipient
       operationId: createLpaRegistrationRecipient
@@ -1315,6 +1766,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/lpa_registration_recipients/{id}:
     parameters:
     - name: id
@@ -1335,6 +1797,17 @@ paths:
                 $ref: '#/components/schemas/LpaRegistrationRecipient'
         '404':
           description: LpaRegistrationRecipient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -1373,6 +1846,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaRegistrationRecipient
       operationId: deleteLpaRegistrationRecipient
@@ -1381,6 +1865,17 @@ paths:
           description: LpaRegistrationRecipient deleted
         '404':
           description: LpaRegistrationRecipient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -1434,6 +1929,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaReplacementAttorney
       operationId: createLpaReplacementAttorney
@@ -1468,6 +1974,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/lpa_replacement_attorneys/{id}:
     parameters:
     - name: id
@@ -1488,6 +2005,17 @@ paths:
                 $ref: '#/components/schemas/LpaReplacementAttorney'
         '404':
           description: LpaReplacementAttorney not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -1526,6 +2054,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaReplacementAttorney
       operationId: deleteLpaReplacementAttorney
@@ -1534,6 +2073,17 @@ paths:
           description: LpaReplacementAttorney deleted
         '404':
           description: LpaReplacementAttorney not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -1587,6 +2137,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaSignature
       operationId: createLpaSignature
@@ -1621,6 +2182,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/lpa_signatures/{id}:
     parameters:
     - name: id
@@ -1641,6 +2213,17 @@ paths:
                 $ref: '#/components/schemas/LpaSignature'
         '404':
           description: LpaSignature not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -1679,6 +2262,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaSignature
       operationId: deleteLpaSignature
@@ -1687,6 +2281,17 @@ paths:
           description: LpaSignature deleted
         '404':
           description: LpaSignature not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -1740,6 +2345,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaValidationFlag
       operationId: createLpaValidationFlag
@@ -1774,6 +2390,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/lpa_validation_flags/{id}:
     parameters:
     - name: id
@@ -1794,6 +2421,17 @@ paths:
                 $ref: '#/components/schemas/LpaValidationFlag'
         '404':
           description: LpaValidationFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -1832,6 +2470,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaValidationFlag
       operationId: deleteLpaValidationFlag
@@ -1840,6 +2489,17 @@ paths:
           description: LpaValidationFlag deleted
         '404':
           description: LpaValidationFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -1893,6 +2553,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaValidationResult
       operationId: createLpaValidationResult
@@ -1927,6 +2598,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/lpa_validation_results/{id}:
     parameters:
     - name: id
@@ -1947,6 +2629,17 @@ paths:
                 $ref: '#/components/schemas/LpaValidationResult'
         '404':
           description: LpaValidationResult not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -1985,6 +2678,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaValidationResult
       operationId: deleteLpaValidationResult
@@ -1993,6 +2697,17 @@ paths:
           description: LpaValidationResult deleted
         '404':
           description: LpaValidationResult not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -2046,6 +2761,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaValidationRule
       operationId: createLpaValidationRule
@@ -2080,6 +2806,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/lpa_validation_rules/{id}:
     parameters:
     - name: id
@@ -2100,6 +2837,17 @@ paths:
                 $ref: '#/components/schemas/LpaValidationRule'
         '404':
           description: LpaValidationRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -2138,6 +2886,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaValidationRule
       operationId: deleteLpaValidationRule
@@ -2146,6 +2905,17 @@ paths:
           description: LpaValidationRule deleted
         '404':
           description: LpaValidationRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -2199,6 +2969,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new LpaWitness
       operationId: createLpaWitness
@@ -2233,6 +3014,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/lpa_witnesses/{id}:
     parameters:
     - name: id
@@ -2253,6 +3045,17 @@ paths:
                 $ref: '#/components/schemas/LpaWitness'
         '404':
           description: LpaWitness not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -2291,6 +3094,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a LpaWitness
       operationId: deleteLpaWitness
@@ -2299,6 +3113,17 @@ paths:
           description: LpaWitness deleted
         '404':
           description: LpaWitness not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:

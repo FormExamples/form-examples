@@ -18,7 +18,7 @@ default-run = "pre_anaesthesia_assessment-cli"
 path = "src/pre_anaesthesia_assessment/lib.rs"
 
 [workspace.dependencies]
-axa = { version = "0.6", features = ["pagination", "queue", "sqlx"] }
+axa = { version = "0.6", features = ["pagination", "queue", "ratelimit", "sqlx"] }
 
 [dependencies]
 axa = { workspace = true }

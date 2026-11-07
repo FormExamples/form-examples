@@ -13,7 +13,8 @@ use crate::models::neurodiversity_adjustment_reviews;
 
 #[derive(Debug, Deserialize)]
 struct DashboardParams {
-    limit: Option<u64>,
+    #[serde(flatten)]
+    page: PageParams,
 }
 
 /// GET /api/dashboard — list graded reviews (review joined to its grade).
@@ -22,14 +23,16 @@ async fn dashboard(
     State(ctx): State<AppContext>,
     Query(params): Query<DashboardParams>,
 ) -> Result<Response> {
-    let limit = params.limit.unwrap_or(500);
+    let page = params.page.resolve(PAGE_LIMITS)?;
+    let (limit, offset) = page.bounds();
 
     // Each grade row, newest first, paired with its parent review.
     let grades: Vec<neurodiversity_adjustment_review_grades::Model> = sqlx::query_as(
         "SELECT * FROM neurodiversity_adjustment_review_grades WHERE deleted_at IS \
-            NULL ORDER BY graded_at DESC LIMIT $1",
+            NULL ORDER BY graded_at DESC, id LIMIT $1 OFFSET $2",
     )
-    .bind(i64::try_from(limit).unwrap_or(i64::MAX))
+    .bind(limit)
+    .bind(offset)
     .fetch_all(&db(&ctx))
     .await?;
     let mut rows = Vec::with_capacity(grades.len());
@@ -52,7 +55,11 @@ async fn dashboard(
         })
         .collect();
 
-    Ok(Json(json!({ "items": items, "total": items.len() })).into_response())
+    let total: i64 =
+        sqlx::query_scalar("SELECT COUNT(*) FROM neurodiversity_adjustment_review_grades WHERE deleted_at IS NULL")
+            .fetch_one(&db(&ctx))
+            .await?;
+    Ok(page.respond(total, items))
 }
 
 /// Routes.

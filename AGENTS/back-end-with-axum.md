@@ -119,7 +119,17 @@ violated unique or foreign key constraint answers `409`, and a `500` has no `det
 Health routes under `/_` keep their own bodies.
 
 List routes use `params.resolve(PAGE_LIMITS)?`, `page.bounds()`, and
-`page.respond(total, rows)`. `PAGE_LIMITS` is in `support/mod.rs`.
+`page.respond(total, rows)`. `PAGE_LIMITS` is in `support/mod.rs`. A list answers a
+bare array, never an `{items, total}` envelope; the total is in `x-total-count`.
+
+`App::router` limits each client to `RATE_LIMIT_REQUESTS` (600) in each
+`RATE_LIMIT_WINDOW_SECONDS` (60), both in `support/mod.rs`, with
+`axa::ratelimit::by_client`. The layer goes on the routes before
+`axa::middleware::apply`, so it runs inside the standard stack, after the client's
+address is worked out. Past the limit a client gets a `429` problem with
+`Retry-After` and the `RateLimit-*` headers. `/_ping`, `/_health`, and `/_readiness`
+are never limited. Each process counts for itself, and behind a proxy
+`TRUSTED_PROXIES` must list it.
 
 ## Commands
 
@@ -136,7 +146,7 @@ cargo run -- db migrate       # Apply pending migrations
 cargo run -- db down          # Revert the newest migration
 cargo run -- db status        # Show which migrations have run
 AXA_DESTROY_DATA=true cargo run -- db reset   # Drop everything and migrate again
-cargo run -- task seed        # Load the fixtures
+cargo run -- task seed        # Load the fixtures (development and test only)
 ```
 
 ## Configuration
@@ -151,6 +161,8 @@ Settings come from the environment, with defaults in `defaults()` in `app.rs`:
 - `LOG_LEVEL`, `LOG_FORMAT`, `LOG_FILTER`
 - `WORKER_MODE`
 - `SHUTDOWN_TIMEOUT_SECONDS` — how long requests and jobs get to finish (default 25)
+- `TRUSTED_PROXIES` — the proxies whose `X-Forwarded-For` is believed, so that the rate
+  limit counts each client rather than the proxy
 
 ## Access control
 
@@ -171,6 +183,8 @@ come back in a stable order, so a client can read every page.
 process runs in development or test and `AXA_DESTROY_DATA` is `true`. `axa::cli::parse`
 refuses them before the service runs anything, and `--environment` cannot lift it.
 `App::db` refuses them in production as well, for a call that arrives any other way.
+`task seed` is development only: outside development and test it is refused, so
+fixtures cannot reach real records.
 
 ## Background queue
 
@@ -215,6 +229,7 @@ Every crate's `Cargo.lock` is committed, because each is a binary crate. See
 - `bin/axum-forbid-unsafe [--check] [--dry-run] [--verbose] [--all|<slug>…]` — add `#![forbid(unsafe_code)]` to each crate root
 - `bin/axum-msrv-set --msrv <version> [--check] [--dry-run] [--all|<slug>…]` — set the Rust MSRV fleet-wide
 - `bin/axum-axa-upgrade [--check] [--root <dir>] [--all|<slug>…]` — move crates from axa 0.5 to 0.6, whose errors are RFC 9457 problems, and check they stay there
+- `bin/axum-axa-adopt [--check] [--root <dir>] [--all|<slug>…]` — take up axa 0.6's per-client rate limit and development-only `seed` task; `--check` also fails a list that skips `Page::respond`
 - `bin/axum-entity-routes [--check] [--root <dir>] [--all|<slug>…]` — give every `sql/` table a migration, model, controller, and test, unless a hand-written controller already reaches it. Run after adding a table, then run `bin/axum-soft-delete`
 - `bin/axum-soft-delete [--check] [--root <dir>] [--all|<slug>…]` — make `DELETE` mark and cascade, make reads and updates skip marked rows, narrow uniqueness to live rows, and take `deleted_at` out of every body
 - `bin/test-axum-routes` — assert every crate exposes its domain HTTP API

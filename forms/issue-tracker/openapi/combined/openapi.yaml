@@ -56,6 +56,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new IssueTrackerGradeFlag
       operationId: createIssueTrackerGradeFlag
@@ -90,6 +101,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/issue_tracker_grade_flags/{id}:
     parameters:
     - name: id
@@ -110,6 +132,17 @@ paths:
                 $ref: '#/components/schemas/IssueTrackerGradeFlag'
         '404':
           description: IssueTrackerGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -148,6 +181,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a IssueTrackerGradeFlag
       operationId: deleteIssueTrackerGradeFlag
@@ -156,6 +200,17 @@ paths:
           description: IssueTrackerGradeFlag deleted
         '404':
           description: IssueTrackerGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -209,6 +264,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new IssueTrackerGradeRule
       operationId: createIssueTrackerGradeRule
@@ -243,6 +309,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/issue_tracker_grade_rules/{id}:
     parameters:
     - name: id
@@ -263,6 +340,17 @@ paths:
                 $ref: '#/components/schemas/IssueTrackerGradeRule'
         '404':
           description: IssueTrackerGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -301,6 +389,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a IssueTrackerGradeRule
       operationId: deleteIssueTrackerGradeRule
@@ -309,6 +408,17 @@ paths:
           description: IssueTrackerGradeRule deleted
         '404':
           description: IssueTrackerGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -362,6 +472,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new IssueTrackerGrade
       operationId: createIssueTrackerGrade
@@ -396,6 +517,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/issue_tracker_grades/{id}:
     parameters:
     - name: id
@@ -416,6 +548,17 @@ paths:
                 $ref: '#/components/schemas/IssueTrackerGrade'
         '404':
           description: IssueTrackerGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -454,6 +597,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a IssueTrackerGrade
       operationId: deleteIssueTrackerGrade
@@ -462,6 +616,17 @@ paths:
           description: IssueTrackerGrade deleted
         '404':
           description: IssueTrackerGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -515,6 +680,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new IssueTracker
       operationId: createIssueTracker
@@ -549,6 +725,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/issue_trackers/{id}:
     parameters:
     - name: id
@@ -569,6 +756,17 @@ paths:
                 $ref: '#/components/schemas/IssueTracker'
         '404':
           description: IssueTracker not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -607,6 +805,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a IssueTracker
       operationId: deleteIssueTracker
@@ -615,6 +824,17 @@ paths:
           description: IssueTracker deleted
         '404':
           description: IssueTracker not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -668,6 +888,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Participant
       operationId: createParticipant
@@ -702,6 +933,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/participants/{id}:
     parameters:
     - name: id
@@ -722,6 +964,17 @@ paths:
                 $ref: '#/components/schemas/Participant'
         '404':
           description: Participant not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -760,6 +1013,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Participant
       operationId: deleteParticipant
@@ -768,6 +1032,17 @@ paths:
           description: Participant deleted
         '404':
           description: Participant not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -821,6 +1096,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     post:
       summary: Create a new Reporter
       operationId: createReporter
@@ -855,6 +1141,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /api/reporters/{id}:
     parameters:
     - name: id
@@ -875,6 +1172,17 @@ paths:
                 $ref: '#/components/schemas/Reporter'
         '404':
           description: Reporter not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -913,6 +1221,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       summary: Delete a Reporter
       operationId: deleteReporter
@@ -921,6 +1240,17 @@ paths:
           description: Reporter deleted
         '404':
           description: Reporter not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:

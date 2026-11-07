@@ -14,7 +14,8 @@ use crate::models::{neurodiversity_adjustment_request_grades, neurodiversity_adj
 #[derive(Debug, Deserialize)]
 struct DashboardParams {
     status: Option<String>,
-    limit: Option<u64>,
+    #[serde(flatten)]
+    page: PageParams,
 }
 
 /// GET /api/dashboard -- list requests joined with their grade as JSON.
@@ -23,23 +24,27 @@ async fn dashboard(
     State(ctx): State<AppContext>,
     Query(params): Query<DashboardParams>,
 ) -> Result<Response> {
-    let limit = params.limit.unwrap_or(500);
+    let page = params.page.resolve(PAGE_LIMITS)?;
+    let (limit, offset) = page.bounds();
 
     let requests: Vec<neurodiversity_adjustment_requests::Model> = sqlx::query_as(
         "SELECT * FROM neurodiversity_adjustment_requests WHERE ($1::text IS NULL OR \
-            status = $1) AND deleted_at IS NULL ORDER BY created_at DESC LIMIT $2",
+            status = $1) AND deleted_at IS NULL ORDER BY created_at DESC, id LIMIT $2 \
+            OFFSET $3",
     )
-    .bind(params.status)
-    .bind(i64::try_from(limit).unwrap_or(i64::MAX))
+    .bind(params.status.as_deref())
+    .bind(limit)
+    .bind(offset)
     .fetch_all(&db(&ctx))
     .await?;
 
     let mut items: Vec<Value> = Vec::with_capacity(requests.len());
     for request in &requests {
         let grade = sqlx::query_as::<_, neurodiversity_adjustment_request_grades::Model>(
-            "SELECT * FROM neurodiversity_adjustment_request_grades WHERE deleted_at IS \
-            NULL",
+            "SELECT * FROM neurodiversity_adjustment_request_grades WHERE \
+            neurodiversity_adjustment_request_id = $1 AND deleted_at IS NULL",
         )
+        .bind(request.id)
         .fetch_optional(&db(&ctx))
         .await?;
         items.push(json!({
@@ -48,8 +53,14 @@ async fn dashboard(
         }));
     }
 
-    let total = items.len();
-    Ok(Json(json!({ "items": items, "total": total })).into_response())
+    let total: i64 = sqlx::query_scalar(
+        "SELECT COUNT(*) FROM neurodiversity_adjustment_requests WHERE ($1::text IS NULL OR status = $1) \
+            AND deleted_at IS NULL",
+    )
+    .bind(params.status.as_deref())
+    .fetch_one(&db(&ctx))
+    .await?;
+    Ok(page.respond(total, items))
 }
 
 /// Routes.

@@ -18,7 +18,7 @@ default-run = "pre_operative_assessment_by_clinician-cli"
 path = "src/pre_operative_assessment_by_clinician/lib.rs"
 
 [workspace.dependencies]
-axa = { version = "0.6", features = ["pagination", "queue", "sqlx"] }
+axa = { version = "0.6", features = ["pagination", "queue", "ratelimit", "sqlx"] }
 
 [dependencies]
 axa = { workspace = true }

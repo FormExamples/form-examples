@@ -55,6 +55,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new ZaritBurdenInterviewGradeFlag
       operationId: createZaritBurdenInterviewGradeFlag
@@ -89,6 +100,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
   /api/zarit_burden_interview_grade_flags/{id}:
     parameters:
       - name: id
@@ -109,6 +131,17 @@ paths:
                 $ref: "#/components/schemas/ZaritBurdenInterviewGradeFlag"
         "404":
           description: ZaritBurdenInterviewGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -147,6 +180,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a ZaritBurdenInterviewGradeFlag
       operationId: deleteZaritBurdenInterviewGradeFlag
@@ -155,6 +199,17 @@ paths:
           description: ZaritBurdenInterviewGradeFlag deleted
         "404":
           description: ZaritBurdenInterviewGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:

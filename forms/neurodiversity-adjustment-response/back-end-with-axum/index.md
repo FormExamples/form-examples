@@ -42,7 +42,7 @@ Axis D, regardless of the other axes.
 | DELETE | `/api/neurodiversity_adjustment_responses/{id}`        | Soft-delete the response                          |
 | POST   | `/api/neurodiversity_adjustment_responses/{id}/submit` | Run the engine, persist the grade transactionally |
 | GET    | `/api/neurodiversity_adjustment_responses/{id}/result` | Return the stored grade + fired rules + flags     |
-| GET    | `/api/dashboard`                                       | List graded responses, grade joined to response   |
+| GET    | `/api/dashboard`                                       | List graded responses with their response (paged) |
 
 All request and response bodies are `application/json` with camelCase keys via
 `serde(rename_all = "camelCase")`.

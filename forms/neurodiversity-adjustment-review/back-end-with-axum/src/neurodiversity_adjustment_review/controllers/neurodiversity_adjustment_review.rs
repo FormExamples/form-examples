@@ -110,8 +110,7 @@ async fn list(State(ctx): State<AppContext>, Query(params): Query<PageParams>) -
     let page = params.resolve(PAGE_LIMITS)?;
     let (models, total) = neurodiversity_adjustment_reviews::page(&db(&ctx), page).await?;
     let items: Vec<Value> = models.iter().map(review_to_json).collect();
-    let headers = page.headers(u64::try_from(total).unwrap_or(0));
-    Ok((headers, Json(json!({ "items": items, "total": total }))).into_response())
+    Ok(page.respond(total, items))
 }
 
 /// GET /`api/neurodiversity_adjustment_reviews/{id`} — fetch one review.

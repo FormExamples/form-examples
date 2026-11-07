@@ -1,7 +1,7 @@
 # Back end
 
 Each form has one Rust JSON-API crate in `back-end-with-axum/`: axum 0.8 +
-[axa](https://crates.io/crates/axa) 0.1 + sqlx 0.9 over PostgreSQL. It
+[axa](https://crates.io/crates/axa) 0.6 + sqlx 0.9 over PostgreSQL. It
 is a pure JSON API — no Tera, HTMX, Alpine, or CSS. The reference crate is
 `forms/medical-operation-note/back-end-with-axum`.
 
@@ -61,6 +61,12 @@ configuration files. `APP_ENV` picks `development`, `test`, or `production`, and
 outside production, where it is required. The `_development`, `_test`, and
 `_production` databases follow the `<form_snake_case>_<env>` naming. The full list
 is in [`AGENTS/back-end-with-axum.md`](../AGENTS/back-end-with-axum.md).
+
+Each client may send 600 requests a minute; past that it gets a `429` problem with
+`Retry-After`. The limit counts per process, by the address axa works out, so behind a
+proxy `TRUSTED_PROXIES` must list it. Health probes are never limited. `task seed` runs
+only in development and test, so fixtures cannot reach real records. See ADR-11 in
+[`arc42/09-architecture-decisions.md`](../arc42/09-architecture-decisions.md).
 
 ## Background queue
 

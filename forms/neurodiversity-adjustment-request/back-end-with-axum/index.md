@@ -34,7 +34,7 @@ the impact axis and auto-escalates the priority tier.
 | DELETE | `/api/neurodiversity-adjustment-requests/{id}`        | Delete a request (cascades its grade, rules, flags)               |
 | POST   | `/api/neurodiversity-adjustment-requests/{id}/submit` | Run the engine, transactionally persist the grade + rules + flags |
 | GET    | `/api/neurodiversity-adjustment-requests/{id}/result` | Return the stored grade with its fired rules and flags            |
-| GET    | `/api/dashboard`                                      | List requests joined with their grade (`?status=`, `?limit=`)     |
+| GET    | `/api/dashboard`                                      | List requests joined with their grade (`?status=`, paged)        |
 
 All bodies are `application/json` with camelCase keys via
 `serde(rename_all = "camelCase")`.

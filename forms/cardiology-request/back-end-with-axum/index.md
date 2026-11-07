@@ -30,7 +30,7 @@ front-end engine. The red-flag auto-escalation invariant is preserved.
 | DELETE | `/api/cardiology_requests/{id}`        | Delete a request (cascades its grade, rules, flags)               |
 | POST   | `/api/cardiology_requests/{id}/submit` | Run the engine, transactionally persist the grade + rules + flags |
 | GET    | `/api/cardiology_requests/{id}/result` | Return the stored grade with its fired rules and flags            |
-| GET    | `/api/dashboard`                       | List requests joined with their grade (`?status=`, `?limit=`)     |
+| GET    | `/api/dashboard`                       | List requests joined with their grade (`?status=`, paged)        |
 
 All bodies are `application/json` with camelCase keys via
 `serde(rename_all = "camelCase")`.

@@ -55,6 +55,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BowelCancerScreeningFit
       operationId: createBowelCancerScreeningFit
@@ -89,6 +100,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
   /api/bowel_cancer_screening_fits/{id}:
     parameters:
       - name: id
@@ -109,6 +131,17 @@ paths:
                 $ref: "#/components/schemas/BowelCancerScreeningFit"
         "404":
           description: BowelCancerScreeningFit not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -147,6 +180,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BowelCancerScreeningFit
       operationId: deleteBowelCancerScreeningFit
@@ -155,6 +199,17 @@ paths:
           description: BowelCancerScreeningFit deleted
         "404":
           description: BowelCancerScreeningFit not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:

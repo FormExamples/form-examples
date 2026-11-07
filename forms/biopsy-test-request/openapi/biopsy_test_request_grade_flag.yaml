@@ -55,6 +55,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new BiopsyTestRequestGradeFlag
       operationId: createBiopsyTestRequestGradeFlag
@@ -89,6 +100,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
   /api/biopsy_test_request_grade_flags/{id}:
     parameters:
       - name: id
@@ -109,6 +131,17 @@ paths:
                 $ref: "#/components/schemas/BiopsyTestRequestGradeFlag"
         "404":
           description: BiopsyTestRequestGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:
@@ -147,6 +180,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
       summary: Delete a BiopsyTestRequestGradeFlag
       operationId: deleteBiopsyTestRequestGradeFlag
@@ -155,6 +199,17 @@ paths:
           description: BiopsyTestRequestGradeFlag deleted
         "404":
           description: BiopsyTestRequestGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
           content:
             application/problem+json:
               schema:

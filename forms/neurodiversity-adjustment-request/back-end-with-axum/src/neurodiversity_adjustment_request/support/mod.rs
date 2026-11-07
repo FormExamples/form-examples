@@ -12,6 +12,7 @@ use axum::{
     response::{IntoResponse, Response},
 };
 use sqlx::PgPool;
+use std::num::NonZeroU32;
 
 pub use seed::seed;
 
@@ -21,6 +22,13 @@ pub const PAGE_LIMITS: axa::pagination::Limits = axa::pagination::Limits {
     max_limit: 1000,
     max_offset: 100_000,
 };
+
+/// Requests one client may make in each window: plenty for a person using a
+/// form, and a stop on a runaway script.
+pub const RATE_LIMIT_REQUESTS: NonZeroU32 = NonZeroU32::new(600).unwrap();
+
+/// The rate limit's window, in seconds.
+pub const RATE_LIMIT_WINDOW_SECONDS: NonZeroU32 = NonZeroU32::new(60).unwrap();
 
 /// The database pool.
 #[must_use]

@@ -15,7 +15,7 @@ default-run = "arc42-cli"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [workspace.dependencies]
-axa = { version = "0.6", features = ["pagination", "queue", "sqlx"] }
+axa = { version = "0.6", features = ["pagination", "queue", "ratelimit", "sqlx"] }
 
 [dependencies]
 axa = { workspace = true }

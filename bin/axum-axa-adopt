@@ -1,0 +1,193 @@
+#!/usr/bin/env python3
+"""bin/axum-axa-adopt — take up what axa 0.6 offers beyond its problems, in each
+form's `back-end-with-axum/`.
+
+What it changes in a crate:
+
+  Cargo.toml                the `ratelimit` feature
+  support/mod.rs            `RATE_LIMIT_REQUESTS` and `RATE_LIMIT_WINDOW_SECONDS`:
+                            600 requests a minute per client
+  app.rs                    `router` layers `axa::ratelimit::by_client` on the
+                            routes, then applies the standard stack. The limit has
+                            to sit inside that stack, which works out the client's
+                            address and gives a refusal its request id and
+                            security headers; `into_app` leaves no room for it
+  app.rs                    the `seed` task is development only, so `task seed`
+                            cannot put made-up records into production
+
+`--check` also fails a crate whose list routes skip axa's paging helpers: a
+`page.headers(...)` written by hand, or an `{items, total}` envelope where
+`Page::respond` gives the bare array that `openapi.yaml` documents. Those few
+hand-written controllers are fixed by hand, not by this tool.
+
+The rate limit counts per process, by the address axa resolved, so behind a
+proxy `TRUSTED_PROXIES` must list it. Health probes are never limited.
+
+Every edit to a crate is planned and asserted before any is written, so a crate
+that differs from the expected shape stops with its name and stays untouched. A
+crate already done is skipped, so the tool can be rerun. Cargo.lock is left to
+`cargo update -p axa`.
+
+Usage:
+  bin/axum-axa-adopt <slug>...          # named forms
+  bin/axum-axa-adopt --all              # every form's Axum crate
+  bin/axum-axa-adopt --root DIR <slug>  # a copy of forms/ at DIR
+  bin/axum-axa-adopt --check --all      # CI drift check (non-zero on drift)
+"""
+
+from __future__ import annotations
+
+import argparse
+import glob
+import os
+import re
+import sys
+
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OLD_AXA = 'axa = { version = "0.6", features = ["pagination", "queue", "sqlx"] }'
+NEW_AXA = 'axa = { version = "0.6", features = ["pagination", "queue", "ratelimit", "sqlx"] }'
+
+OLD_ROUTER = """    /// Build the full router under the standard middleware.
+    ///
+    /// # Errors
+    ///
+    /// Fails when a configured CORS origin is invalid.
+    pub fn router(ctx: &AppContext) -> Result<Router> {
+        Self::routes(ctx).into_app(ctx.clone())
+    }
+"""
+NEW_ROUTER = """    /// Build the full router: the routes, a request limit per client, and the
+    /// standard middleware. The limit sits inside the standard stack, which
+    /// works out the client's address and gives a refusal its request id and
+    /// security headers.
+    ///
+    /// # Errors
+    ///
+    /// Fails when a configured CORS origin is invalid.
+    pub fn router(ctx: &AppContext) -> Result<Router> {
+        let limiter = axa::ratelimit::Limiter::new(
+            support::RATE_LIMIT_REQUESTS,
+            support::RATE_LIMIT_WINDOW_SECONDS,
+        );
+        let limit = axum::middleware::from_fn_with_state(limiter, axa::ratelimit::by_client);
+        let routes = Self::routes(ctx).into_router(ctx.clone()).layer(limit);
+        axa::middleware::apply(routes, &ctx.config.http)
+    }
+"""
+ROUTER_MARK = "axa::ratelimit::by_client"
+
+OLD_SEED = """impl axa::task::Task for SeedTask {
+    fn task(&self) -> axa::task::TaskInfo {"""
+NEW_SEED = """impl axa::task::Task for SeedTask {
+    fn development_only(&self) -> bool {
+        true
+    }
+
+    fn task(&self) -> axa::task::TaskInfo {"""
+
+OLD_POOL = """/// The database pool.
+"""
+NEW_POOL = """/// Requests one client may make in each window: plenty for a person using a
+/// form, and a stop on a runaway script.
+pub const RATE_LIMIT_REQUESTS: NonZeroU32 = NonZeroU32::new(600).unwrap();
+
+/// The rate limit's window, in seconds.
+pub const RATE_LIMIT_WINDOW_SECONDS: NonZeroU32 = NonZeroU32::new(60).unwrap();
+
+/// The database pool.
+"""
+OLD_USE = "use sqlx::PgPool;\n"
+NEW_USE = "use sqlx::PgPool;\nuse std::num::NonZeroU32;\n"
+
+
+def sub(text: str, old: str, new: str, what: str, path: str) -> str:
+    assert text.count(old) == 1, f"{path}: expected one {what}, found {text.count(old)}"
+    return text.replace(old, new)
+
+
+def source_dir(crate: str) -> str:
+    apps = glob.glob(f"{crate}/src/*/app.rs")
+    assert len(apps) == 1, f"{crate}: expected one app.rs, found {apps}"
+    return os.path.dirname(apps[0])
+
+
+def plan(crate: str) -> dict[str, str] | None:
+    """Every edit for a crate, or None when it is already done."""
+    src = source_dir(crate)
+    manifest = open(f"{crate}/Cargo.toml").read()
+    if NEW_AXA in manifest:
+        return None
+    edits: dict[str, str] = {}
+
+    def change(path, edit):
+        edits[path] = edit(edits.get(path) or open(path).read(), path)
+
+    change(f"{crate}/Cargo.toml", lambda text, path: sub(text, OLD_AXA, NEW_AXA, "axa line", path))
+    change(f"{src}/app.rs", lambda text, path: sub(text, OLD_ROUTER, NEW_ROUTER, "router", path))
+    change(f"{src}/app.rs", lambda text, path: sub(text, OLD_SEED, NEW_SEED, "seed task", path))
+    change(f"{src}/support/mod.rs", lambda text, path: sub(text, OLD_USE, NEW_USE, "PgPool import", path))
+    change(f"{src}/support/mod.rs", lambda text, path: sub(text, OLD_POOL, NEW_POOL, "pool doc", path))
+    return edits
+
+
+def drift(crate: str) -> str | None:
+    """Why a crate has not taken these up, if it has not."""
+    src = source_dir(crate)
+    if NEW_AXA not in open(f"{crate}/Cargo.toml").read():
+        return "no ratelimit feature"
+    app = open(f"{src}/app.rs").read()
+    if ROUTER_MARK not in app or "axa::middleware::apply(routes" not in app:
+        return "router has no rate limit inside the standard stack"
+    if "fn development_only(&self) -> bool {\n        true" not in app:
+        return "seed task is not development only"
+    if "RATE_LIMIT_REQUESTS" not in open(f"{src}/support/mod.rs").read():
+        return "support/mod.rs has no rate limit"
+    for path in sorted(glob.glob(f"{src}/controllers/*.rs")):
+        text = open(path).read()
+        name = os.path.basename(path)
+        if re.search(r"\bpage\.headers\(", text):
+            return f"{name} writes paging headers by hand; use Page::respond"
+        if re.search(r'json!\(\{\s*"items"', text):
+            return f"{name} wraps a list in {{items, total}}; use Page::respond"
+    return None
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    parser.add_argument("slugs", nargs="*")
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--root", default=f"{REPO}/forms")
+    args = parser.parse_args()
+    if args.all:
+        crates = sorted(os.path.dirname(c) for c in glob.glob(f"{args.root}/*/back-end-with-axum/Cargo.toml"))
+    elif args.slugs:
+        crates = [f"{args.root}/{slug}/back-end-with-axum" for slug in args.slugs]
+    else:
+        parser.error("name forms, or pass --all")
+    if args.check:
+        bad = [(crate, why) for crate in crates if (why := drift(crate))]
+        for crate, why in bad:
+            print(f"{crate.split('/')[-2]}: {why}")
+        print(f"{len(crates) - len(bad)}/{len(crates)} crates take up axa's rate limit, development-only seed and paging helpers")
+        return 1 if bad else 0
+    # Plan everything first, so one odd crate leaves the fleet as it was.
+    try:
+        plans = [plan(crate) for crate in crates]
+    except AssertionError as error:
+        print(f"axum-axa-adopt: nothing written: {error}", file=sys.stderr)
+        return 1
+    done = 0
+    for edits in plans:
+        if edits is None:
+            continue
+        for path, text in edits.items():
+            with open(path, "w") as handle:
+                handle.write(text)
+        done += 1
+    print(f"axum-axa-adopt: {done} crate(s) changed, {len(crates) - done} already done")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

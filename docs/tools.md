@@ -2,8 +2,9 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-91 tools.
+92 tools.
 
+- [`bin/axum-axa-adopt`](#axum-axa-adopt)
 - [`bin/axum-axa-upgrade`](#axum-axa-upgrade)
 - [`bin/axum-entity-routes`](#axum-entity-routes)
 - [`bin/axum-forbid-unsafe`](#axum-forbid-unsafe)
@@ -95,6 +96,45 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/back-end-with-axum/generate-rust-docs.py`](#back-end-with-axumgenerate-rust-docspy)
 - [`bin/sql/generate-sql-combined.py`](#sqlgenerate-sql-combinedpy)
 - [`bin/sql/generate-sql-comments.py`](#sqlgenerate-sql-commentspy)
+
+<h2 id="axum-axa-adopt"><code>bin/axum-axa-adopt</code></h2>
+
+```text
+bin/axum-axa-adopt — take up what axa 0.6 offers beyond its problems, in each
+form's `back-end-with-axum/`.
+
+What it changes in a crate:
+
+  Cargo.toml                the `ratelimit` feature
+  support/mod.rs            `RATE_LIMIT_REQUESTS` and `RATE_LIMIT_WINDOW_SECONDS`:
+                            600 requests a minute per client
+  app.rs                    `router` layers `axa::ratelimit::by_client` on the
+                            routes, then applies the standard stack. The limit has
+                            to sit inside that stack, which works out the client's
+                            address and gives a refusal its request id and
+                            security headers; `into_app` leaves no room for it
+  app.rs                    the `seed` task is development only, so `task seed`
+                            cannot put made-up records into production
+
+`--check` also fails a crate whose list routes skip axa's paging helpers: a
+`page.headers(...)` written by hand, or an `{items, total}` envelope where
+`Page::respond` gives the bare array that `openapi.yaml` documents. Those few
+hand-written controllers are fixed by hand, not by this tool.
+
+The rate limit counts per process, by the address axa resolved, so behind a
+proxy `TRUSTED_PROXIES` must list it. Health probes are never limited.
+
+Every edit to a crate is planned and asserted before any is written, so a crate
+that differs from the expected shape stops with its name and stays untouched. A
+crate already done is skipped, so the tool can be rerun. Cargo.lock is left to
+`cargo update -p axa`.
+
+Usage:
+  bin/axum-axa-adopt <slug>...          # named forms
+  bin/axum-axa-adopt --all              # every form's Axum crate
+  bin/axum-axa-adopt --root DIR <slug>  # a copy of forms/ at DIR
+  bin/axum-axa-adopt --check --all      # CI drift check (non-zero on drift)
+```
 
 <h2 id="axum-axa-upgrade"><code>bin/axum-axa-upgrade</code></h2>
 

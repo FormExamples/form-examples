@@ -45,7 +45,7 @@ PATCH  /api/neurodiversity_adjustment_reviews/{id}         overwrite the review 
 DELETE /api/neurodiversity_adjustment_reviews/{id}         soft-delete the review
 POST   /api/neurodiversity_adjustment_reviews/{id}/submit  run the engine, persist the grade
 GET    /api/neurodiversity_adjustment_reviews/{id}/result  read back the persisted grade
-GET    /api/dashboard                          list graded reviews (review joined to grade)
+GET    /api/dashboard                          list graded reviews with their review (paged)
 ```
 
 `POST .../submit` runs the engine and persists the grade + fired-rule rows +

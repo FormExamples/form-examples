@@ -22,6 +22,10 @@ for them.
   forms, could not be reached over HTTP, and most existed only in `sql/`. Each gained
   what it lacked of a migration, a model, and routes, and
   `bin/axum-entity-routes --check` keeps it so.
+- **A request limit per client.** Every Axum crate allows a client 600 requests a
+  minute, then answers `429` with `Retry-After`, through `axa-ratelimit`. Health probes
+  are never limited. Behind a proxy, set `TRUSTED_PROXIES`. `openapi.yaml` publishes the
+  `429` on every operation. See ADR-11.
 
 ### Changed
 
@@ -71,6 +75,18 @@ for them.
 
 ### Fixed
 
+- `task seed` loaded fixtures in production. It now runs only in development and test.
+- The `neurodiversity-adjustment-request` dashboard showed one arbitrary grade against
+  every request, because its lookup did not name the request. Each request now shows its
+  own grade, or none.
+- Five hand-written back-ends (`cardiology-request`, `cardiology-response`, and the
+  three `neurodiversity-adjustment-*`) wrapped lists in `{items, total}`, where
+  `openapi.yaml` documents a bare array. Their lists and dashboards now answer the
+  array, page with `?limit=` and `?offset=`, and report the true total in
+  `x-total-count`. A dashboard used to take up to any `limit`, with 500 by default.
+- `bin/generate-api-transcripts` still drove Loco, so it could not run. It now uses the
+  axa command line, and `--check` ignores ids and timestamps. Every transcript was
+  recorded again, with UUID ids.
 - **`db down` and `db truncate` are refused in production**, like `db reset`. They
   had no guard.
 - **Loco and SeaORM replaced by plain Axum, `axa`, and sqlx** in every form's

@@ -378,8 +378,7 @@ async fn list(State(ctx): State<AppContext>, Query(params): Query<PageParams>) -
     )
     .fetch_one(&db(&ctx))
     .await?;
-    let headers = page.headers(u64::try_from(total).unwrap_or(0));
-    Ok((headers, Json(json!({ "items": models, "total": total }))).into_response())
+    Ok(page.respond(total, models))
 }
 
 /// GET /api/neurodiversity-adjustment-requests/{id} -- fetch one request.

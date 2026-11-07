@@ -340,6 +340,21 @@ def problem_response(L, code, description):
     L.append('                $ref: "#/components/schemas/Problem"')
 
 
+def too_many_requests(L):
+    """The `429` that every route can answer, past the per-client rate limit."""
+    L.append('        "429":')
+    L.append("          description: This client sent too many requests")
+    L.append("          headers:")
+    L.append("            retry-after:")
+    L.append("              description: Seconds to wait before sending again")
+    L.append("              schema:")
+    L.append("                type: integer")
+    L.append("          content:")
+    L.append("            application/problem+json:")
+    L.append("              schema:")
+    L.append('                $ref: "#/components/schemas/Problem"')
+
+
 def emit_problem_schema(L):
     """The RFC 9457 problem object, as `axa` writes it."""
     L.append("    Problem:")
@@ -441,6 +456,7 @@ def build_yaml(table_name, columns, form_slug, source_table_names,
     L.append("                items:")
     L.append(f'                  $ref: "#/components/schemas/{resource}"')
     problem_response(L, "400", "The offset is past the maximum")
+    too_many_requests(L)
     L.append("    post:")
     L.append(f"      summary: Create a new {resource}")
     L.append(f"      operationId: create{resource}")
@@ -460,6 +476,7 @@ def build_yaml(table_name, columns, form_slug, source_table_names,
     problem_response(L, "400", "The request was refused")
     problem_response(L, "409", "It duplicates a row, or refers to a missing one")
     problem_response(L, "422", "The body does not match the schema")
+    too_many_requests(L)
     L.append(f"  /api/{plural}/{{id}}:")
     L.append("    parameters:")
     L.append("      - name: id")
@@ -479,6 +496,7 @@ def build_yaml(table_name, columns, form_slug, source_table_names,
     L.append("              schema:")
     L.append(f'                $ref: "#/components/schemas/{resource}"')
     problem_response(L, "404", f"{resource} not found")
+    too_many_requests(L)
     L.append("    patch:")
     L.append(f"      summary: Update an existing {resource}")
     L.append(f"      operationId: update{resource}")
@@ -498,6 +516,7 @@ def build_yaml(table_name, columns, form_slug, source_table_names,
     problem_response(L, "404", f"{resource} not found")
     problem_response(L, "409", "It duplicates a row, or refers to a missing one")
     problem_response(L, "422", "The body does not match the schema")
+    too_many_requests(L)
     L.append("    delete:")
     L.append(f"      summary: Delete a {resource}")
     L.append(f"      operationId: delete{resource}")
@@ -505,6 +524,7 @@ def build_yaml(table_name, columns, form_slug, source_table_names,
     L.append('        "200":')
     L.append(f"          description: {resource} deleted")
     problem_response(L, "404", f"{resource} not found")
+    too_many_requests(L)
     L.append("components:")
     L.append("  schemas:")
     emit_problem_schema(L)
