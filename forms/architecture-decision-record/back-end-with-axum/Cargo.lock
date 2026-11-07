@@ -199,9 +199,9 @@ checksum = "f2032f911046de80f0a198e0901378627c33f59ea0ac00e363d481118bd70a53"
 
 [[package]]
 name = "axa"
-version = "0.5.0"
+version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "701b64579d3cfa2affd9e2a6d45bacf8d66d8cb2f32dc30b682604cadb7f9d15"
+checksum = "39530ce057e79a039c11ee1da47eafbcb1a3e97f7fbc36b714584c8eee4ab41d"
 dependencies = [
  "async-trait",
  "axa-environment",
@@ -232,9 +232,9 @@ checksum = "aeb36293430bafb06d1e29f5e213623d127444cdd234003b413a46207c03bbd3"
 
 [[package]]
 name = "axa-pagination"
-version = "0.1.0"
+version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c3bf7498561f895402bbc4c78b8a8e05bd0d11de28c2a3d458b1ad6089935aeb"
+checksum = "a173061148a2344af7610a69926bf41a1867ba2a35374f478b9bec0762effb63"
 dependencies = [
  "axum",
  "serde",

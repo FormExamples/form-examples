@@ -30,7 +30,7 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Self>, i64)> {
-        let (limit, offset) = crate::support::paging::bounds(page);
+        let (limit, offset) = page.bounds();
         let rows = sqlx::query_as(
             "SELECT * FROM grace_score_for_acute_coronary_syndrome_grades WHERE \
             deleted_at IS NULL ORDER BY id LIMIT $1 OFFSET $2",

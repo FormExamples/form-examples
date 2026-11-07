@@ -19,7 +19,7 @@ src/<snake>/
   controllers/         axum handlers (one per entity)
   models/              one struct and its SQL per table
   engine/              the pure scoring engine (types, *_rules, grader, flagged_issues)
-  support/             what axa leaves to a service: pool, paging, errors, seeding
+  support/             what axa leaves to a service: pool, page limits, model errors, seeding
   workers/  tasks/  initializers/  fixtures/
 migrations/            <version>_<table>.up.sql and .down.sql, per SQL table
 tests/                 models/ requests/ engine/ tasks/ workers/

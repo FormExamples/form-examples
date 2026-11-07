@@ -16,7 +16,7 @@
 | Layer | Constraint |
 | ----- | ---------- |
 | **Database** | PostgreSQL 18; UUIDv4 primary keys via `gen_random_uuid()`; `created_at` / `updated_at` / `deleted_at` timestamps on every table; migrations in numbered `NN_create_table_<name>.sql` files. |
-| **Back-end** | Rust (editions 2021 and 2024) + axum 0.8 + axa 0.5 + sqlx 0.9. **JSON API only** — no Tera templates, no HTMX, no Alpine.js, no static assets, no Lily/CSS. Postgres-backed background queue only. |
+| **Back-end** | Rust (editions 2021 and 2024) + axum 0.8 + axa 0.6 + sqlx 0.9. **JSON API only** — no Tera templates, no HTMX, no Alpine.js, no static assets, no Lily/CSS. Postgres-backed background queue only. |
 | **Front-end (HTML)** | Framework-free HTML + the **Lily Design System HTML headless** class contract. No build step; pages work over `file://`. Classic `<script>` tags only — no modules, no bundler. |
 | **Front-end (Svelte)** | SvelteKit + Svelte 5 runes + Tailwind CSS 4 + SVAR DataGrid, conforming to the **Lily Design System Svelte headless** component contract. RESTful routes nested under `src/routes/<slug>/`. |
 | **Generators** | Python 3 scripts under `bin/`; deterministic and idempotent. |

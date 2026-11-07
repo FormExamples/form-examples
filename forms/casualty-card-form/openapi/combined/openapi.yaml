@@ -78,6 +78,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -126,6 +132,12 @@ paths:
                 $ref: '#/components/schemas/CasualtyCardAllergy'
         '404':
           description: CasualtyCardAllergy not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -219,6 +231,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -267,6 +285,12 @@ paths:
                 $ref: '#/components/schemas/CasualtyCardArrivalTriage'
         '404':
           description: CasualtyCardArrivalTriage not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -360,6 +384,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -408,6 +438,12 @@ paths:
                 $ref: '#/components/schemas/CasualtyCardAssessmentPlan'
         '404':
           description: CasualtyCardAssessmentPlan not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -501,6 +537,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -549,6 +591,12 @@ paths:
                 $ref: '#/components/schemas/CasualtyCardClinicalExamination'
         '404':
           description: CasualtyCardClinicalExamination not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -642,6 +690,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -690,6 +744,12 @@ paths:
                 $ref: '#/components/schemas/CasualtyCardDemographics'
         '404':
           description: CasualtyCardDemographics not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -783,6 +843,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -831,6 +897,12 @@ paths:
                 $ref: '#/components/schemas/CasualtyCardDisposition'
         '404':
           description: CasualtyCardDisposition not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -924,6 +996,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -972,6 +1050,12 @@ paths:
                 $ref: '#/components/schemas/CasualtyCardGp'
         '404':
           description: CasualtyCardGp not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -1065,6 +1149,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -1113,6 +1203,12 @@ paths:
                 $ref: '#/components/schemas/CasualtyCardInvestigations'
         '404':
           description: CasualtyCardInvestigations not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -1206,6 +1302,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -1254,6 +1356,12 @@ paths:
                 $ref: '#/components/schemas/CasualtyCardMedicalHistory'
         '404':
           description: CasualtyCardMedicalHistory not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -1347,6 +1455,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -1395,6 +1509,12 @@ paths:
                 $ref: '#/components/schemas/CasualtyCardMedication'
         '404':
           description: CasualtyCardMedication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -1488,6 +1608,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -1536,6 +1662,12 @@ paths:
                 $ref: '#/components/schemas/CasualtyCardNextOfKin'
         '404':
           description: CasualtyCardNextOfKin not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -1629,6 +1761,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -1677,6 +1815,12 @@ paths:
                 $ref: '#/components/schemas/CasualtyCardPainAssessment'
         '404':
           description: CasualtyCardPainAssessment not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -1770,6 +1914,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -1818,6 +1968,12 @@ paths:
                 $ref: '#/components/schemas/CasualtyCardPresentingComplaint'
         '404':
           description: CasualtyCardPresentingComplaint not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -1911,6 +2067,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -1959,6 +2121,12 @@ paths:
                 $ref: '#/components/schemas/CasualtyCardPrimarySurvey'
         '404':
           description: CasualtyCardPrimarySurvey not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -2052,6 +2220,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -2100,6 +2274,12 @@ paths:
                 $ref: '#/components/schemas/CasualtyCardSafeguardingConsent'
         '404':
           description: CasualtyCardSafeguardingConsent not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -2193,6 +2373,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -2241,6 +2427,12 @@ paths:
                 $ref: '#/components/schemas/CasualtyCardTreatment'
         '404':
           description: CasualtyCardTreatment not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -2334,6 +2526,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -2382,6 +2580,12 @@ paths:
                 $ref: '#/components/schemas/CasualtyCardVitalSigns'
         '404':
           description: CasualtyCardVitalSigns not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -2475,6 +2679,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -2523,6 +2733,12 @@ paths:
                 $ref: '#/components/schemas/CasualtyCard'
         '404':
           description: CasualtyCard not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -2616,6 +2832,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -2664,6 +2886,12 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -2757,6 +2985,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -2805,6 +3039,12 @@ paths:
                 $ref: '#/components/schemas/FlaggedIssue'
         '404':
           description: FlaggedIssue not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -2898,6 +3138,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -2946,6 +3192,12 @@ paths:
                 $ref: '#/components/schemas/News2Result'
         '404':
           description: News2Result not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -3039,6 +3291,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -3087,6 +3345,12 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -4560,6 +4824,12 @@ components:
         instance:
           type: string
           description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
       required:
       - type
       - title

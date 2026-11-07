@@ -99,21 +99,23 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 <h2 id="axum-axa-upgrade"><code>bin/axum-axa-upgrade</code></h2>
 
 ```text
-bin/axum-axa-upgrade — move each form's `back-end-with-axum/` to axa 0.5 and
-RFC 9457 errors through `axa-problem`.
+bin/axum-axa-upgrade — move each form's `back-end-with-axum/` to axa 0.6, which
+answers every failure as an RFC 9457 problem itself.
 
 What it changes in a crate:
 
-  Cargo.toml                axa 0.5 with the `problem` feature; a `description`,
-                            which `--help` prints; `clap` removed
-  app.rs                    the pool goes in `AppContext::db`, so `/_readiness`
-                            asks it without a named check; the production guard
-                            uses `DbCommand::destroys_data`; `router` goes through
-                            `support::problem::apply`
-  bin/main.rs               `axa::cli::parse` in place of `Cli::parse`
-  support/mod.rs            `db` reads `ctx.db`; adds `pub mod problem`
-  support/problem.rs        copied from `migrate-from-loco/support/problem.rs`
-  tests/**/problem.rs       a request test of the failure shapes
+  Cargo.toml                axa 0.6; the `problem` feature goes, as axa no longer
+                            needs it
+  app.rs                    `router` is `into_app` again
+  support/problem.rs        removed: axa covers Axum's 404, 405, 413 and extractor
+                            refusals
+  support/paging.rs         removed: `Page::bounds`, `Page::respond`, and `?` on
+                            `PageParams::resolve` replace it
+  support/mod.rs            `PAGE_LIMITS`, the one part of paging.rs that was ours
+  support/prelude.rs        `axa::extract::{Json, Path, Query}` in place of Axum's,
+                            so a refused request says what was wrong
+  controllers, models       call the `Page` methods
+  tests/**/problem.rs       expect a `detail` on an extractor's refusal
 
 Every edit to a crate is planned and asserted before any is written, so a crate
 that differs from the expected shape stops with its name and stays untouched. A

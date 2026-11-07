@@ -19,7 +19,7 @@ Slug: back-end-with-axum
 | --- | --- | --- |
 | [Rust](https://rust-lang.org/) | 1.97+ | Systems programming language |
 | [axum](https://crates.io/crates/axum) | 0.8 | Web application framework |
-| [axa](https://crates.io/crates/axa) | 0.5 | Routes, middleware, errors, configuration, command line, job queue, test helpers |
+| [axa](https://crates.io/crates/axa) | 0.6 | Routes, middleware, errors, configuration, command line, job queue, test helpers |
 | [axa-sqlx](https://crates.io/crates/axa-sqlx) | 0.1 | Pooling, migrations, and test resets, as `axa::sqlx` |
 | [axa-problem](https://crates.io/crates/axa-problem) | 0.1 | RFC 9457 error responses, as `axa::problem` |
 | [sqlx](https://crates.io/crates/sqlx) | 0.9 | Hand-written SQL against PostgreSQL |
@@ -103,18 +103,23 @@ Handlers take `State(ctx): State<AppContext>` and reach the database through
 declared with `axa::routes::Routes` and collected in `App::routes`.
 
 Every failed request answers RFC 9457 `application/problem+json`, whichever layer
-failed it: `axa::Error`, an Axum extractor, an unknown route, a panic, or a timeout.
-`axa::Error` itself still writes `{"error": ..., "description": ...}`, so
-`support/problem.rs` rewrites failures on the way out, once inside the middleware
-and once outside it. A handler keeps returning `axa::Result`.
+failed it: `axa::Error`, an extractor, an unknown route, a wrong method, an oversized
+body, a panic, or a timeout. `axa` writes all of these itself, so a handler keeps
+returning `axa::Result`. Return an `Error` rather than a `(StatusCode, "why")` pair,
+whose text would be dropped.
 
 ```json
-{"type": "about:blank", "title": "Bad Request", "status": 400, "detail": "offset 100001 exceeds the maximum of 100000"}
+{"type": "about:blank", "title": "Bad Request", "status": 400, "detail": "offset 100001 exceeds the maximum of 100000", "code": "bad_request"}
 ```
 
 `detail` carries the text of `Error::BadRequest` and `Error::CustomError`, so treat
-that text as public. An extractor refusal has no `detail`, because its text quotes
-what the client sent. Health routes under `/_` keep their own bodies.
+that text as public. `support/prelude.rs` exports `axa::extract::{Json, Path, Query}`
+in place of Axum's, so a refused request says what was wrong and quotes nothing. A
+violated unique or foreign key constraint answers `409`, and a `500` has no `detail`.
+Health routes under `/_` keep their own bodies.
+
+List routes use `params.resolve(PAGE_LIMITS)?`, `page.bounds()`, and
+`page.respond(total, rows)`. `PAGE_LIMITS` is in `support/mod.rs`.
 
 ## Commands
 
@@ -209,7 +214,7 @@ Every crate's `Cargo.lock` is committed, because each is a binary crate. See
 - `bin/generate-axum-deny-config.py [--check] [<slug>…]` — write each crate's `deny.toml`
 - `bin/axum-forbid-unsafe [--check] [--dry-run] [--verbose] [--all|<slug>…]` — add `#![forbid(unsafe_code)]` to each crate root
 - `bin/axum-msrv-set --msrv <version> [--check] [--dry-run] [--all|<slug>…]` — set the Rust MSRV fleet-wide
-- `bin/axum-axa-upgrade [--check] [--root <dir>] [--all|<slug>…]` — move crates to axa 0.5 and RFC 9457 errors, and check they stay there
+- `bin/axum-axa-upgrade [--check] [--root <dir>] [--all|<slug>…]` — move crates from axa 0.5 to 0.6, whose errors are RFC 9457 problems, and check they stay there
 - `bin/axum-entity-routes [--check] [--root <dir>] [--all|<slug>…]` — give every `sql/` table a migration, model, controller, and test, unless a hand-written controller already reaches it. Run after adding a table, then run `bin/axum-soft-delete`
 - `bin/axum-soft-delete [--check] [--root <dir>] [--all|<slug>…]` — make `DELETE` mark and cascade, make reads and updates skip marked rows, narrow uniqueness to live rows, and take `deleted_at` out of every body
 - `bin/test-axum-routes` — assert every crate exposes its domain HTTP API

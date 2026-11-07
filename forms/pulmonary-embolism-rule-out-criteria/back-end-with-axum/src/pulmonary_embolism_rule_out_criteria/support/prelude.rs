@@ -1,11 +1,11 @@
 //! Common imports for this service's handlers and models.
 
 pub use axa::{
+    extract::{Json, Path, Query},
     format,
     pagination::{Page, PageParams},
     prelude::*,
 };
-pub use axum::extract::Query;
 pub use chrono::{DateTime as ChronoDateTime, FixedOffset, NaiveDate, NaiveTime};
 pub use sqlx::PgPool;
 pub use uuid::Uuid;
@@ -14,7 +14,7 @@ pub use validator::Validate;
 pub use super::{
     db,
     model::{ModelError, ModelResult},
-    paging,
+    PAGE_LIMITS,
 };
 
 /// A date.

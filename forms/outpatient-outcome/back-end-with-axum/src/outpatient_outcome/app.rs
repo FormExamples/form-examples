@@ -233,7 +233,7 @@ impl App {
     ///
     /// Fails when a configured CORS origin is invalid.
     pub fn router(ctx: &AppContext) -> Result<Router> {
-        support::problem::apply(Self::routes(ctx), ctx)
+        Self::routes(ctx).into_app(ctx.clone())
     }
 
     /// Run a database command.

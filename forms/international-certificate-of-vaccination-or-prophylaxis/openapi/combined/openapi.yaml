@@ -79,6 +79,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -127,6 +133,12 @@ paths:
                 $ref: '#/components/schemas/Center'
         '404':
           description: Center not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -220,6 +232,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -268,6 +286,12 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -361,6 +385,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -409,6 +439,12 @@ paths:
                 $ref: '#/components/schemas/InternationalCertificateOfVaccinationOrProphylaxisEntry'
         '404':
           description: InternationalCertificateOfVaccinationOrProphylaxisEntry not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -502,6 +538,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -550,6 +592,12 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -1072,6 +1120,12 @@ components:
         instance:
           type: string
           description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
       required:
       - type
       - title

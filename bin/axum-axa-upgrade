@@ -1,19 +1,21 @@
 #!/usr/bin/env python3
-"""bin/axum-axa-upgrade — move each form's `back-end-with-axum/` to axa 0.5 and
-RFC 9457 errors through `axa-problem`.
+"""bin/axum-axa-upgrade — move each form's `back-end-with-axum/` to axa 0.6, which
+answers every failure as an RFC 9457 problem itself.
 
 What it changes in a crate:
 
-  Cargo.toml                axa 0.5 with the `problem` feature; a `description`,
-                            which `--help` prints; `clap` removed
-  app.rs                    the pool goes in `AppContext::db`, so `/_readiness`
-                            asks it without a named check; the production guard
-                            uses `DbCommand::destroys_data`; `router` goes through
-                            `support::problem::apply`
-  bin/main.rs               `axa::cli::parse` in place of `Cli::parse`
-  support/mod.rs            `db` reads `ctx.db`; adds `pub mod problem`
-  support/problem.rs        copied from `migrate-from-loco/support/problem.rs`
-  tests/**/problem.rs       a request test of the failure shapes
+  Cargo.toml                axa 0.6; the `problem` feature goes, as axa no longer
+                            needs it
+  app.rs                    `router` is `into_app` again
+  support/problem.rs        removed: axa covers Axum's 404, 405, 413 and extractor
+                            refusals
+  support/paging.rs         removed: `Page::bounds`, `Page::respond`, and `?` on
+                            `PageParams::resolve` replace it
+  support/mod.rs            `PAGE_LIMITS`, the one part of paging.rs that was ours
+  support/prelude.rs        `axa::extract::{Json, Path, Query}` in place of Axum's,
+                            so a refused request says what was wrong
+  controllers, models       call the `Page` methods
+  tests/**/problem.rs       expect a `detail` on an extractor's refusal
 
 Every edit to a crate is planned and asserted before any is written, so a crate
 that differs from the expected shape stops with its name and stays untouched. A
@@ -31,152 +33,36 @@ from __future__ import annotations
 
 import argparse
 import glob
-import json
 import os
 import re
-import subprocess
 import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BODY_MARK = "/// Far more than any error body"
-PROBLEM_RS = f"{REPO}/bin/back-end-with-axum/migrate-from-loco/support/problem.rs"
+OLD_AXA = 'axa = { version = "0.5", features = ["pagination", "problem", "queue", "sqlx"] }'
+NEW_AXA = 'axa = { version = "0.6", features = ["pagination", "queue", "sqlx"] }'
+OLD_ROUTER = "support::problem::apply(Self::routes(ctx), ctx)"
+NEW_ROUTER = "Self::routes(ctx).into_app(ctx.clone())"
+LIMITS = """/// The bounds of every list route. `limit` and its default match `openapi.yaml`.
+pub const PAGE_LIMITS: axa::pagination::Limits = axa::pagination::Limits {
+    default_limit: 100,
+    max_limit: 1000,
+    max_offset: 100_000,
+};
 
-CONNECT = """let pool = axa::sqlx::connect(&PoolConfig {
-            uri: config.database.uri.clone(),
-            min_connections: config.database.min_connections,
-            max_connections: config.database.max_connections,
-            connect_timeout_ms: config.database.connect_timeout,
-            idle_timeout_ms: config.database.idle_timeout,
-        })
-        .await?;
+/// The database pool.
 """
-CTX = """let mut ctx = AppContext::new(environment, (), config);
-        ctx.shared_store.insert(pool.clone());
-        // `/_readiness` fails when the database stops answering.
-        ctx.health_checks = Checks::new().add("database", move || {
-            let pool = pool.clone();
-            async move { ping(&pool).await }
-        });
+OLD_QUOTE = """        // Extractor refusals quote the input, so nothing of it comes back.
 """
-GUARD = """if ctx.environment.is_production_like()
-            && matches!(
-                command,
-                DbCommand::Down { .. } | DbCommand::Reset | DbCommand::Truncate
-            )
-        {"""
-DB = """/// The database pool, which boot stores in the shared store.
-///
-/// # Panics
-///
-/// If boot did not install a pool, which is a programming error.
-#[must_use]
-pub fn db(ctx: &AppContext) -> PgPool {
-    ctx.shared_store
-        .get::<PgPool>()
-        .expect("boot installs the database pool")
-}
+NEW_QUOTE = """        // An extractor's refusal says what was wrong, and quotes nothing.
 """
-DB_NEW = """/// The database pool.
-#[must_use]
-pub fn db(ctx: &AppContext) -> PgPool {
-    ctx.db.clone()
-}
-"""
-READY = """/// Without the check added in `App::context`, `/_readiness` would keep
-/// answering 200 with the database gone.
-"""
-GUARDED = """/// Nothing but the guard in `App::db` stops these against a live database.
-"""
-RUN = """App::run(axa::cli::parse(
-        env!("CARGO_PKG_NAME"),
-        env!("CARGO_PKG_VERSION"),
-        env!("CARGO_PKG_DESCRIPTION"),
-    ))
-    .await"""
-TEST = """//! Every failed request answers RFC 9457 `application/problem+json`.
-
-{imports}
-use serde_json::Value;
-use serial_test::serial;
-
-/// Assert the problem shape, and hand back the body and its text.
-macro_rules! problem {{
-    ($response:expr, $status:expr) => {{{{
-        let response = $response;
-        assert_eq!(response.status_code(), $status, "{{}}", response.text());
-        assert_eq!(response.header("content-type"), "application/problem+json");
-        let body: Value = response.json();
-        assert_eq!(body["type"], "about:blank");
-        assert_eq!(body["status"], $status);
-        assert!(body["title"].is_string());
-        (body, response.text())
-    }}}};
-}}
-
-#[tokio::test]
-#[serial]
-async fn every_failure_is_a_problem() {{
-    request::<App, _, _>(|request, _ctx| async move {{
-        // axa's own error, whose text reaches the client.
-        let (body, _) = problem!(request.get("/api/{plural}?offset=100001").await, 400);
-        assert!(body["detail"].is_string());
-
-        // A route that does not exist, and a wrong method.
-        problem!(request.get("/api/no-such-route").await, 404);
-        problem!(request.delete("{wrong_method}").await, 405);
-{id_checks}    }})
-    .await;
-}}
-
-async fn panics() -> Result<Response> {{
-    panic!("a handler fault");
-}}
-
-async fn refuses() -> Result<Response> {{
-    bad_request("This text reaches the client, and is long enough to compress.")
-}}
-
-/// A panic is answered outside the first pass, and an error reaches the second
+OLD_DETAIL = """assert_eq!(body.get("detail"), None);"""
+NEW_DETAIL = """assert!(body["detail"].is_string());"""
+OLD_DOC = """/// A panic is answered outside the first pass, and an error reaches the second
 /// pass compressed, so the standard middleware has to be in the test.
-#[tokio::test]
-#[serial]
-async fn the_middleware_cannot_escape_it() {{
-    let mut ctx = boot_test::<App>().await.unwrap().app_context;
-    let mut config = (*ctx.config).clone();
-    config.http.compression = true;
-    ctx.config = config.into();
-    let routes = AppRoutes::with_default_routes()
-        .add_route(Routes::new().add("/panics", get(panics)).add("/refuses", get(refuses)));
-    let router = problem::apply(routes, &ctx).unwrap();
-    let server = TestServer::new(router.into_make_service());
-
-    let (_, text) = problem!(server.get("/panics").await, 500);
-    assert!(!text.contains("a handler fault"));
-
-    let response = server
-        .get("/refuses")
-        .add_header("accept-encoding", "gzip")
-        .await;
-    assert_eq!(response.status_code(), 400);
-    assert_eq!(response.header("content-type"), "application/problem+json");
-    assert_eq!(response.header("content-encoding"), "gzip");
-}}
 """
-
-
-ID_CHECKS = """
-        // A missing row.
-        let id = "00000000-0000-4000-8000-000000000000";
-        problem!(request.get(&format!("/api/{plural}/{{id}}")).await, 404);
-
-        // Extractor refusals quote the input, so nothing of it comes back.
-        let (body, text) = problem!(request.get("/api/{plural}/not-a-uuid").await, 400);
-        assert_eq!(body.get("detail"), None);
-        assert!(!text.contains("not-a-uuid"));
-        problem!(request.post("/api/{plural}").json(&"not an object").await, 422);
+NEW_DOC = """/// A panic and a compressed error both pass through the standard middleware, so
+/// it has to be in the test.
 """
-# Its list route takes a slug and has no POST, so there is no id to refuse.
-NO_ID_ROUTES = {"architecture-decision-record"}
 
 
 def sub(text: str, old: str, new: str, name: str, path: str) -> str:
@@ -185,52 +71,33 @@ def sub(text: str, old: str, new: str, name: str, path: str) -> str:
     return text.replace(old, new)
 
 
-def edit_app(text: str, path: str) -> str:
-    text = sub(text, CONNECT, "let pool = axa::db::connect(&config.database).await?;\n", "connect", path)
-    text = sub(text, CTX, "let mut ctx = AppContext::new(environment, pool, config);\n", "ctx", path)
-    text = sub(text, GUARD, "if command.destroys_data() && ctx.environment.is_production_like() {", "guard", path)
-    text = sub(text, "    health::Checks,\n", "", "Checks", path)
-    text, count = re.subn(r"\bping, ", "", text, count=1)
-    assert count == 1, f"{path}: ping"
-    text, count = re.subn(r", PoolConfig\}|\bPoolConfig, ", lambda m: "}" if m[0].endswith("}") else "", text, count=1)
-    assert count == 1, f"{path}: PoolConfig"
-    return sub(text, "Self::routes(ctx).into_app(ctx.clone())", "support::problem::apply(Self::routes(ctx), ctx)", "router", path)
-
-
-def edit_main(text: str, path: str) -> str:
-    text, count = re.subn(r"^use axa::cli::Cli;\n", "", text, flags=re.M)
-    assert count == 1, f"{path}: Cli"
-    text, count = re.subn(r"^use clap::Parser;\n", "", text, flags=re.M)
-    assert count == 1, f"{path}: Parser"
-    return sub(text, "App::run(Cli::parse()).await", RUN, "run", path)
-
-
 def edit_support(text: str, path: str) -> str:
-    text = sub(text, DB, DB_NEW, "db", path)
-    return sub(text, "pub mod prelude;\n", "pub mod prelude;\npub mod problem;\n", "mod", path)
+    text = sub(text, "pub mod paging;\n", "", "paging", path)
+    text = sub(text, "pub mod problem;\n", "", "problem", path)
+    return sub(text, "/// The database pool.\n", LIMITS, "db", path)
 
 
-def title(crate: str) -> str:
-    line = open(f"{crate}/README.md").readline().strip().lstrip("# ").strip()
-    for mark in (":", " — ", " - "):
-        if mark in line:
-            return line.split(mark)[0].strip()
-    assert line, crate
-    return line
+def edit_prelude(text: str, path: str) -> str:
+    text = sub(text, "pub use axum::extract::Query;\n", "", "Query", path)
+    text = sub(text, "    format,\n", "    extract::{Json, Path, Query},\n    format,\n", "format", path)
+    return sub(text, "    paging,\n", "    PAGE_LIMITS,\n", "paging", path)
 
 
-def edit_toml(text: str, path: str, description: str) -> str:
-    text, count = re.subn(
-        r'^axa = \{ version = "0\.3", features = \["pagination", "queue", "sqlx"\] \}$',
-        'axa = { version = "0.5", features = ["pagination", "problem", "queue", "sqlx"] }',
-        text,
-        flags=re.M,
-    )
-    assert count == 1, f"{path}: axa"
-    text, count = re.subn(r"^clap = .*\n", "", text, flags=re.M)
-    assert count == 1, f"{path}: clap"
-    assert "description" not in text.split("[workspace.dependencies]")[0], f"{path}: description"
-    return sub(text, "publish = false\n", f"publish = false\ndescription = {json.dumps(description)}\n", "publish", path)
+def edit_handlers(text: str) -> str:
+    text = text.replace("use axum::{Json, debug_handler};\n", "use axum::debug_handler;\n")
+    text = text.replace("paging::resolve(&params)?", "params.resolve(PAGE_LIMITS)?")
+    text = re.sub(r"paging::respond\(page, ([^,]+), ([^)]+)\)", r"Ok(page.respond(\1, \2))", text)
+    return re.sub(r"(?:crate::support::)?paging::bounds\((\w+)\)", r"\1.bounds()", text)
+
+
+def edit_test(text: str, path: str) -> str:
+    text, count = re.subn(r"^use (\w+)::\{\s*app::App,\s*support::problem,?\s*\};$", r"use \1::app::App;", text, flags=re.M)
+    assert count == 1, f"{path}: imports"
+    text = sub(text, "problem::apply(routes, &ctx)", "routes.into_app(ctx.clone())", "apply", path)
+    if OLD_QUOTE in text:  # A crate with no id route has no extractor check.
+        text = sub(text, OLD_QUOTE, NEW_QUOTE, "quote", path)
+        text = sub(text, OLD_DETAIL, NEW_DETAIL, "detail", path)
+    return sub(text, OLD_DOC, NEW_DOC, "doc", path)
 
 
 def find_one(crate: str, name: str) -> str:
@@ -239,72 +106,52 @@ def find_one(crate: str, name: str) -> str:
     return found[0]
 
 
-def list_route(crate: str) -> str:
-    """A domain list route, from the crate's own pagination test."""
-    match = re.search(r'"/api/([\w-]+)[?"]', open(find_one(crate, "pagination.rs")).read())
-    assert match, f"{crate}: no list route in pagination.rs"
-    return match[1]
-
-
-def plan(crate: str) -> dict[str, str] | None:
-    """Every edit for a crate, or None when it has already moved."""
+def plan(crate: str) -> tuple[dict[str, str], list[str]] | None:
+    """Every edit and removal for a crate, or None when it has already moved."""
     apps = glob.glob(f"{crate}/src/*/app.rs")
     assert len(apps) == 1, crate
     src = os.path.dirname(apps[0])
     manifest = open(f"{crate}/Cargo.toml").read()
-    if 'axa = { version = "0.5"' in manifest:
+    if NEW_AXA in manifest:
         return None
     edits: dict[str, str] = {}
 
     def change(path, edit):
         edits[path] = edit(open(path).read(), path)
 
-    change(f"{src}/app.rs", edit_app)
-    change(f"{src}/bin/main.rs", edit_main)
+    change(f"{crate}/Cargo.toml", lambda text, path: sub(text, OLD_AXA, NEW_AXA, "axa", path))
+    change(f"{src}/app.rs", lambda text, path: sub(text, OLD_ROUTER, NEW_ROUTER, "router", path))
     change(f"{src}/support/mod.rs", edit_support)
-    description = f"{title(crate)} back-end JSON API"
-    change(f"{crate}/Cargo.toml", lambda text, path: edit_toml(text, path, description))
-    change(find_one(crate, "readiness.rs"), lambda text, path: sub(text, READY, "/// `/_readiness` asks `ctx.db`, so it must fail with the database gone.\n", "ready", path))
-    change(find_one(crate, "db_commands.rs"), lambda text, path: sub(text, GUARDED, "/// `cli::parse` refuses these on the command line. This is for a call that\n/// reaches `App::db` any other way.\n", "guarded", path))
-    edits[f"{src}/support/problem.rs"] = open(PROBLEM_RS).read()
-    plural = list_route(crate)
-    checks = "" if crate.split("/")[-2] in NO_ID_ROUTES else ID_CHECKS.format(plural=plural)
-    # The library's name, which can differ from its source directory.
-    library = re.search(r"^use (\w+)::app::App;", open(find_one(crate, "pagination.rs")).read(), re.M)[1]
-    imports = sorted(("use axa::{prelude::*, routes::AppRoutes};", f"use {library}::{{app::App, support::problem}};"))
-    # A few crates have no `openapi.yaml` route, and a list takes no DELETE.
-    has_openapi = os.path.exists(f"{src}/controllers/openapi.rs")
-    wrong_method = "/api/openapi.yaml" if has_openapi else f"/api/{plural}"
-    test = TEST.format(imports="\n".join(imports), plural=plural, id_checks=checks, wrong_method=wrong_method)
-    tests = f"{crate}/tests/requests"
-    if os.path.isdir(tests):
-        change(f"{tests}/mod.rs", lambda text, path: sub(text, "mod pagination;\n", "mod pagination;\nmod problem;\n", "mod", path))
-    else:
-        # A few crates keep each test as its own target.
-        tests = f"{crate}/tests"
-        head, rest = test.split("\n", 1)
-        test = f"{head}\n\n#![forbid(unsafe_code)]\n{rest}"
-    edits[f"{tests}/problem.rs"] = test
-    return edits
-
-
-def lines(path: str) -> str:
-    with open(path) as handle:
-        return handle.read().split(BODY_MARK)[-1]
+    change(f"{src}/support/prelude.rs", edit_prelude)
+    change(find_one(crate, "problem.rs"), edit_test)
+    for path in glob.glob(f"{src}/controllers/*.rs") + glob.glob(f"{src}/models/*.rs"):
+        text = open(path).read()
+        fresh = edit_handlers(text)
+        assert not re.search(r"\bpaging::", fresh), f"{path}: paging left"
+        if fresh != text:
+            edits[path] = fresh
+    return edits, [f"{src}/support/problem.rs", f"{src}/support/paging.rs"]
 
 
 def drift(crate: str) -> str | None:
     """Why a crate is not on the target, if it is not."""
     src = os.path.dirname(glob.glob(f"{crate}/src/*/app.rs")[0])
-    if 'axa = { version = "0.5", features = ["pagination", "problem"' not in open(f"{crate}/Cargo.toml").read():
-        return "not on axa 0.5 with the problem feature"
-    if "support::problem::apply" not in open(f"{src}/app.rs").read():
-        return "router does not use support::problem::apply"
-    # Imports are left out, as rustfmt sorts them by edition.
-    if not os.path.exists(f"{src}/support/problem.rs") or lines(f"{src}/support/problem.rs") != lines(PROBLEM_RS):
-        return "support/problem.rs differs from the shared copy"
-    if "axa::cli::parse" not in open(f"{src}/bin/main.rs").read():
-        return "main.rs does not use axa::cli::parse"
+    if NEW_AXA not in open(f"{crate}/Cargo.toml").read():
+        return "not on axa 0.6"
+    lock = open(f"{crate}/Cargo.lock").read()
+    if not re.search(r'^name = "axa"\nversion = "0\.6\.', lock, re.M):
+        return "Cargo.lock is not on axa 0.6"
+    if NEW_ROUTER not in open(f"{src}/app.rs").read():
+        return "router does not use into_app"
+    for name in ("problem", "paging"):
+        if os.path.exists(f"{src}/support/{name}.rs"):
+            return f"support/{name}.rs is still here"
+    if "extract::{Json, Path, Query}" not in open(f"{src}/support/prelude.rs").read():
+        return "prelude does not use axa's extractors"
+    for path in glob.glob(f"{src}/controllers/*.rs"):
+        text = open(path).read()
+        if re.search(r"use axum::\{[^}]*\b(Json|Path|Query)\b|axum::extract::(Json|Path|Query)", text):
+            return f"{os.path.basename(path)} imports Axum's extractors, which answer with no detail"
     return None
 
 
@@ -325,31 +172,22 @@ def main() -> int:
         bad = [(crate, why) for crate in crates if (why := drift(crate))]
         for crate, why in bad:
             print(f"{crate.split('/')[-2]}: {why}")
-        print(f"{len(crates) - len(bad)}/{len(crates)} crates on axa 0.5 with problem details")
+        print(f"{len(crates) - len(bad)}/{len(crates)} crates on axa 0.6")
         return 1 if bad else 0
     # Plan everything first, so one odd crate leaves the fleet as it was.
-    plans = {}
-    failures = []
-    for crate in crates:
-        try:
-            plans[crate] = plan(crate)
-        except (AssertionError, OSError) as error:
-            failures.append(f"{crate.split('/')[-2]}: {error}")
-    if failures:
-        print("\n".join(failures))
-        print(f"{len(failures)} crates differ; nothing written")
-        return 1
+    plans = [plan(crate) for crate in crates]
     moved = 0
-    for edits in plans.values():
-        if edits:
-            moved += 1
-            for path, text in edits.items():
-                with open(path, "w") as handle:
-                    handle.write(text)
-                if path.endswith("/problem.rs") and "/tests/" in path:
-                    # Route names set how the macro calls wrap.
-                    subprocess.run(["rustfmt", "--edition", "2021", path], check=True)
-    print(f"{moved} crates moved, {len(crates) - moved} already there")
+    for planned in plans:
+        if planned is None:
+            continue
+        edits, removals = planned
+        for path, text in edits.items():
+            with open(path, "w") as handle:
+                handle.write(text)
+        for path in removals:
+            os.remove(path)
+        moved += 1
+    print(f"{moved} moved, {len(crates) - moved} already on axa 0.6")
     return 0
 
 

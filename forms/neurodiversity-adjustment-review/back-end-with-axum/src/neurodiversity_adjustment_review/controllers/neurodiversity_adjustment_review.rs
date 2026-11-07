@@ -6,7 +6,7 @@
 //! `neurodiversity_adjustment_review_grade_flags` tables.
 
 use crate::support::prelude::*;
-use axum::{Json, debug_handler};
+use axum::debug_handler;
 use chrono::Utc;
 use serde::Deserialize;
 use serde_json::{Value, json};
@@ -107,7 +107,7 @@ async fn create(State(ctx): State<AppContext>, Json(body): Json<CreateBody>) -> 
 /// GET /`api/neurodiversity_adjustment_reviews` — list reviews (newest first).
 #[debug_handler]
 async fn list(State(ctx): State<AppContext>, Query(params): Query<PageParams>) -> Result<Response> {
-    let page = paging::resolve(&params)?;
+    let page = params.resolve(PAGE_LIMITS)?;
     let (models, total) = neurodiversity_adjustment_reviews::page(&db(&ctx), page).await?;
     let items: Vec<Value> = models.iter().map(review_to_json).collect();
     let headers = page.headers(u64::try_from(total).unwrap_or(0));

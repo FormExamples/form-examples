@@ -424,8 +424,8 @@ async fn api_index(
     State(ctx): State<AppContext>,
     Query(params): Query<PageParams>,
 ) -> Result<Response> {
-    let page = paging::resolve(&params)?;
-    let (limit, offset) = paging::bounds(page);
+    let page = params.resolve(PAGE_LIMITS)?;
+    let (limit, offset) = page.bounds();
     let rows = sqlx::query_as::<_, Model>(
         "SELECT * FROM architecture_decision_records WHERE deleted_at IS NULL ORDER \
             BY number ASC, id ASC LIMIT $1 OFFSET $2",
@@ -457,7 +457,7 @@ async fn api_index(
             author_name,
         });
     }
-    paging::respond(page, total, out)
+    Ok(page.respond(total, out))
 }
 
 /// Routes for the JSON register viewer under `/api/adrs`.

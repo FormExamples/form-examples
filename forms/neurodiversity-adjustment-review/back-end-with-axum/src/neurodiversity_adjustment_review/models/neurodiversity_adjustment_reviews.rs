@@ -83,7 +83,7 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Self>, i64)> {
-        let (limit, offset) = crate::support::paging::bounds(page);
+        let (limit, offset) = page.bounds();
         let rows = sqlx::query_as(
             "SELECT * FROM neurodiversity_adjustment_reviews WHERE deleted_at IS NULL \
             ORDER BY id LIMIT $1 OFFSET $2",
@@ -355,7 +355,7 @@ pub async fn find_by_id(db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
 /// # Errors
 /// Returns a database error if a query fails.
 pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Model>, i64)> {
-    let (limit, offset) = crate::support::paging::bounds(page);
+    let (limit, offset) = page.bounds();
     let rows = sqlx::query_as::<_, Model>(
         "SELECT * FROM neurodiversity_adjustment_reviews WHERE deleted_at IS NULL \
             ORDER BY created_at DESC, id LIMIT $1 OFFSET $2",

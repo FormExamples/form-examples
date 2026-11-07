@@ -3,9 +3,7 @@
 //! carries an identical copy of this module.
 
 pub mod model;
-pub mod paging;
 pub mod prelude;
-pub mod problem;
 pub mod seed;
 
 use axa::{AppContext, Result};
@@ -16,6 +14,13 @@ use axum::{
 use sqlx::PgPool;
 
 pub use seed::seed;
+
+/// The bounds of every list route. `limit` and its default match `openapi.yaml`.
+pub const PAGE_LIMITS: axa::pagination::Limits = axa::pagination::Limits {
+    default_limit: 100,
+    max_limit: 1000,
+    max_offset: 100_000,
+};
 
 /// The database pool.
 #[must_use]

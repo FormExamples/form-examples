@@ -1,6 +1,6 @@
 //! Every failed request answers RFC 9457 `application/problem+json`.
 
-use advance_statement_about_care::{app::App, support::problem};
+use advance_statement_about_care::app::App;
 use axa::{prelude::*, routes::AppRoutes};
 use serde_json::Value;
 use serial_test::serial;
@@ -35,9 +35,9 @@ async fn every_failure_is_a_problem() {
         let id = "00000000-0000-4000-8000-000000000000";
         problem!(request.get(&format!("/api/assessments/{id}")).await, 404);
 
-        // Extractor refusals quote the input, so nothing of it comes back.
+        // An extractor's refusal says what was wrong, and quotes nothing.
         let (body, text) = problem!(request.get("/api/assessments/not-a-uuid").await, 400);
-        assert_eq!(body.get("detail"), None);
+        assert!(body["detail"].is_string());
         assert!(!text.contains("not-a-uuid"));
         problem!(
             request
@@ -58,8 +58,8 @@ async fn refuses() -> Result<Response> {
     bad_request("This text reaches the client, and is long enough to compress.")
 }
 
-/// A panic is answered outside the first pass, and an error reaches the second
-/// pass compressed, so the standard middleware has to be in the test.
+/// A panic and a compressed error both pass through the standard middleware, so
+/// it has to be in the test.
 #[tokio::test]
 #[serial]
 async fn the_middleware_cannot_escape_it() {
@@ -72,7 +72,7 @@ async fn the_middleware_cannot_escape_it() {
             .add("/panics", get(panics))
             .add("/refuses", get(refuses)),
     );
-    let router = problem::apply(routes, &ctx).unwrap();
+    let router = routes.into_app(ctx.clone()).unwrap();
     let server = TestServer::new(router.into_make_service());
 
     let (_, text) = problem!(server.get("/panics").await, 500);

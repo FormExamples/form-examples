@@ -341,7 +341,7 @@ def problem_response(L, code, description):
 
 
 def emit_problem_schema(L):
-    """The RFC 9457 problem object, as `axa-problem` writes it."""
+    """The RFC 9457 problem object, as `axa` writes it."""
     L.append("    Problem:")
     L.append("      type: object")
     L.append("      description: RFC 9457 problem details")
@@ -361,6 +361,12 @@ def emit_problem_schema(L):
     L.append("        instance:")
     L.append("          type: string")
     L.append("          description: A URI identifying this occurrence")
+    L.append("        code:")
+    L.append("          type: string")
+    L.append("          description: A short machine-readable reason")
+    L.append("        errors:")
+    L.append("          type: object")
+    L.append("          description: Per-field detail, when validation failed")
     L.append("      required:")
     L.append("        - type")
     L.append("        - title")
@@ -452,6 +458,7 @@ def build_yaml(table_name, columns, form_slug, source_table_names,
     L.append("              schema:")
     L.append(f'                $ref: "#/components/schemas/{resource}"')
     problem_response(L, "400", "The request was refused")
+    problem_response(L, "409", "It duplicates a row, or refers to a missing one")
     problem_response(L, "422", "The body does not match the schema")
     L.append(f"  /api/{plural}/{{id}}:")
     L.append("    parameters:")
@@ -489,6 +496,7 @@ def build_yaml(table_name, columns, form_slug, source_table_names,
     L.append("              schema:")
     L.append(f'                $ref: "#/components/schemas/{resource}"')
     problem_response(L, "404", f"{resource} not found")
+    problem_response(L, "409", "It duplicates a row, or refers to a missing one")
     problem_response(L, "422", "The body does not match the schema")
     L.append("    delete:")
     L.append(f"      summary: Delete a {resource}")

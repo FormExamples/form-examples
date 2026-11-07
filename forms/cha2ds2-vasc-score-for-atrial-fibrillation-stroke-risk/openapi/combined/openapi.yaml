@@ -79,6 +79,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -127,6 +133,12 @@ paths:
                 $ref: '#/components/schemas/Cha2ds2VascGradeFlag'
         '404':
           description: Cha2ds2VascGradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -220,6 +232,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -268,6 +286,12 @@ paths:
                 $ref: '#/components/schemas/Cha2ds2VascGradeRule'
         '404':
           description: Cha2ds2VascGradeRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -361,6 +385,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -409,6 +439,12 @@ paths:
                 $ref: '#/components/schemas/Cha2ds2VascGrade'
         '404':
           description: Cha2ds2VascGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -502,6 +538,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -550,6 +592,12 @@ paths:
                 $ref: '#/components/schemas/Cha2ds2Vasc'
         '404':
           description: Cha2ds2Vasc not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -643,6 +691,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -691,6 +745,12 @@ paths:
                 $ref: '#/components/schemas/Clinician'
         '404':
           description: Clinician not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -784,6 +844,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -832,6 +898,12 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           description: Patient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -1361,6 +1433,12 @@ components:
         instance:
           type: string
           description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
       required:
       - type
       - title

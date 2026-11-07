@@ -176,7 +176,7 @@ jobs:
       - name: Every Axum crate root forbids unsafe code
         run: bin/axum-forbid-unsafe --check --all
 
-      - name: Every Axum crate is on axa 0.5 with RFC 9457 errors
+      - name: Every Axum crate is on axa 0.6 with RFC 9457 errors
         run: bin/axum-axa-upgrade --check --all
 
       - name: Every SQL table has an HTTP route

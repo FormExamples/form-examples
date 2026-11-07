@@ -131,6 +131,8 @@ migration that no longer exists, so it needs `db reset`.
 
 ## ADR-8 — Errors are RFC 9457 problems
 
+**Status.** Superseded by ADR-10.
+
 **Context.** A failed request answered in one of three shapes: `axa::Error` wrote
 `{"error", "description"}`, Axum's extractors wrote plain text that quoted the input,
 and an unknown route wrote nothing. `axa` plans to move `Error` to
@@ -166,3 +168,22 @@ rows, `deleted_at` is in no body, and unique indexes cover live rows only.
 deleted row cannot block its replacement. (−) The API offers no restore and no purge,
 so retention needs its own decision. (−) `sql/` still declares plain `UNIQUE`, and the
 crates' migrations narrow it.
+
+## ADR-10 — axa writes the errors and the paging
+
+**Context.** ADR-8 said the rewrite in `support/problem.rs` should go once `axa` wrote
+problems itself. `axa` 0.6 does, for every failure including Axum's 404, 405, 413 and
+extractor refusals, and answers a broken unique or foreign key as `409`. It also gained
+the page helpers that `support/paging.rs` held.
+
+**Decision.** Remove both modules, and return `router` to `into_app`. Export
+`axa::extract::{Json, Path, Query}` from each crate's prelude, because Axum's own
+extractors give a problem with no `detail`. Keep `PAGE_LIMITS`, which is this
+service's choice, in `support/mod.rs`. `openapi.yaml` publishes the `409` and the
+`code` and `errors` members.
+
+**Consequences.** (+) A refused request says what was wrong, and quotes no input. (+) A
+duplicate or a missing reference is the caller's `409`, not a `500`. (+) No crate parses
+an error body it has just written. (−) A `(StatusCode, "why")` answer loses its text, so
+handlers must return an `Error`. (−) `409` covers both a duplicate and a missing
+reference, and only `detail` tells them apart.

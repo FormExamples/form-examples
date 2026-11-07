@@ -96,7 +96,7 @@ impl Model {
     ///
     /// Propagates the database error.
     pub async fn page(db: &PgPool, page: axa::pagination::Page) -> sqlx::Result<(Vec<Self>, i64)> {
-        let (limit, offset) = crate::support::paging::bounds(page);
+        let (limit, offset) = page.bounds();
         let rows = sqlx::query_as(
             "SELECT * FROM \
             international_certificate_of_vaccination_or_prophylaxis_entries WHERE \

@@ -325,9 +325,9 @@ pub async fn list(
     State(ctx): State<AppContext>,
     Query(params): Query<PageParams>,
 ) -> Result<Response> {
-    let page = paging::resolve(&params)?;
+    let page = params.resolve(PAGE_LIMITS)?;
     let (rows, total) = Model::page(&db(&ctx), page).await?;
-    paging::respond(page, total, rows)
+    Ok(page.respond(total, rows))
 }
 
 #[debug_handler]

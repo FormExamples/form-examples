@@ -25,6 +25,11 @@ for them.
 
 ### Changed
 
+- **axa 0.6.** Every Axum crate moved from 0.5, and `axa` now writes every error as an
+  RFC 9457 problem, so `support/problem.rs` and `support/paging.rs` are gone. A
+  duplicate or a missing reference answers `409` rather than `500`, an extractor's
+  refusal says what was wrong, and problems carry a `code`. `openapi.yaml` publishes
+  all of this. See ADR-10.
 - **`DELETE` is a true soft delete.** It marks the row and whatever cascades from it,
   reads and updates skip marked rows, and uniqueness covers live rows only.
   `deleted_at` left every request and response. See ADR-9.

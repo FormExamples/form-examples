@@ -79,6 +79,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -127,6 +133,12 @@ paths:
                 $ref: '#/components/schemas/Address'
         '404':
           description: Address not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -220,6 +232,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -268,6 +286,12 @@ paths:
                 $ref: '#/components/schemas/LastingPowerOfAttorney'
         '404':
           description: LastingPowerOfAttorney not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -361,6 +385,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -409,6 +439,12 @@ paths:
                 $ref: '#/components/schemas/LpaAttorney'
         '404':
           description: LpaAttorney not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -502,6 +538,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -550,6 +592,12 @@ paths:
                 $ref: '#/components/schemas/LpaCertificateProvider'
         '404':
           description: LpaCertificateProvider not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -643,6 +691,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -691,6 +745,12 @@ paths:
                 $ref: '#/components/schemas/LpaContinuationSheet'
         '404':
           description: LpaContinuationSheet not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -784,6 +844,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -832,6 +898,12 @@ paths:
                 $ref: '#/components/schemas/LpaPersonToNotify'
         '404':
           description: LpaPersonToNotify not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -925,6 +997,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -973,6 +1051,12 @@ paths:
                 $ref: '#/components/schemas/LpaPreferencesAndInstructions'
         '404':
           description: LpaPreferencesAndInstructions not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -1066,6 +1150,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -1114,6 +1204,12 @@ paths:
                 $ref: '#/components/schemas/LpaRegistrationApplication'
         '404':
           description: LpaRegistrationApplication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -1207,6 +1303,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -1255,6 +1357,12 @@ paths:
                 $ref: '#/components/schemas/LpaRegistrationRecipient'
         '404':
           description: LpaRegistrationRecipient not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -1348,6 +1456,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -1396,6 +1510,12 @@ paths:
                 $ref: '#/components/schemas/LpaReplacementAttorney'
         '404':
           description: LpaReplacementAttorney not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -1489,6 +1609,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -1537,6 +1663,12 @@ paths:
                 $ref: '#/components/schemas/LpaSignature'
         '404':
           description: LpaSignature not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -1630,6 +1762,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -1678,6 +1816,12 @@ paths:
                 $ref: '#/components/schemas/LpaValidationFlag'
         '404':
           description: LpaValidationFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -1771,6 +1915,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -1819,6 +1969,12 @@ paths:
                 $ref: '#/components/schemas/LpaValidationResult'
         '404':
           description: LpaValidationResult not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -1912,6 +2068,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -1960,6 +2122,12 @@ paths:
                 $ref: '#/components/schemas/LpaValidationRule'
         '404':
           description: LpaValidationRule not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -2053,6 +2221,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '422':
           description: The body does not match the schema
           content:
@@ -2101,6 +2275,12 @@ paths:
                 $ref: '#/components/schemas/LpaWitness'
         '404':
           description: LpaWitness not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
           content:
             application/problem+json:
               schema:
@@ -2975,6 +3155,12 @@ components:
         instance:
           type: string
           description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
       required:
       - type
       - title

@@ -15,7 +15,7 @@
 //! first, cascading its rules and flags).
 
 use crate::support::prelude::*;
-use axum::{Json, debug_handler};
+use axum::debug_handler;
 use chrono::Utc;
 use serde::Deserialize;
 use serde_json::json;
@@ -362,8 +362,8 @@ async fn create(
 /// GET /api/neurodiversity-adjustment-requests -- list requests (newest first).
 #[debug_handler]
 async fn list(State(ctx): State<AppContext>, Query(params): Query<PageParams>) -> Result<Response> {
-    let page = paging::resolve(&params)?;
-    let (limit, offset) = paging::bounds(page);
+    let page = params.resolve(PAGE_LIMITS)?;
+    let (limit, offset) = page.bounds();
     let models = sqlx::query_as::<_, neurodiversity_adjustment_requests::Model>(
         "SELECT * FROM neurodiversity_adjustment_requests WHERE deleted_at IS NULL \
             ORDER BY created_at DESC, id LIMIT $1 OFFSET $2",
