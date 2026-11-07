@@ -1,5 +1,8 @@
 pub mod openapi;
 
 pub mod agile_consulting_scorecard_for_hiring_help;
+pub mod agile_consulting_scorecard_for_hiring_help_grade;
+pub mod agile_consulting_scorecard_for_hiring_help_grade_flag;
+pub mod agile_consulting_scorecard_for_hiring_help_grade_rule;
 pub mod organization;
 pub mod respondent;

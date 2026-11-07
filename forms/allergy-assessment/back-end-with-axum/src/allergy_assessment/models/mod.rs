@@ -1,4 +1,16 @@
+pub mod assessment_anaphylaxis_episodes;
+pub mod assessment_anaphylaxis_histories;
+pub mod assessment_current_managements;
 pub mod assessment_drug_allergies;
+pub mod assessment_drug_allergy_items;
+pub mod assessment_food_allergies;
+pub mod assessment_food_allergy_items;
+pub mod assessment_other_medications;
+pub mod assessment_test_result_items;
+pub mod assessment_testing_results;
 pub mod assessments;
 pub mod clinicians;
+pub mod grades;
+pub mod grading_additional_flags;
+pub mod grading_fired_rules;
 pub mod patients;

@@ -1,4 +1,10 @@
 pub mod assessment_cancer_histories;
+pub mod assessment_cancer_history_items;
+pub mod assessment_family_pedigree_members;
+pub mod assessment_family_pedigrees;
 pub mod assessments;
 pub mod clinicians;
+pub mod grades;
+pub mod grading_additional_flags;
+pub mod grading_fired_rules;
 pub mod patients;

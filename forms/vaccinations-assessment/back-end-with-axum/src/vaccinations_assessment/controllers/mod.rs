@@ -1,5 +1,6 @@
 pub mod openapi;
 
+pub mod additional_flag;
 pub mod administration_record;
 pub mod adult_vaccinations;
 pub mod assessment;
@@ -8,6 +9,8 @@ pub mod clinical_review;
 pub mod clinician;
 pub mod consent_information;
 pub mod contraindications_allergies;
+pub mod fired_rule;
+pub mod grade;
 pub mod immunization_history;
 pub mod occupational_vaccinations;
 pub mod patient;

@@ -51,6 +51,16 @@ impl App {
             .add_route(controllers::business_goal::routes())
             .add_route(controllers::arc42_documentation::routes())
             .add_route(controllers::architecture::routes())
+            .add_route(crate::controllers::building_block::routes())
+            .add_route(crate::controllers::runtime_scenario::routes())
+            .add_route(crate::controllers::deployment_node::routes())
+            .add_route(crate::controllers::architectural_decision::routes())
+            .add_route(crate::controllers::quality_scenario::routes())
+            .add_route(crate::controllers::risk_item::routes())
+            .add_route(crate::controllers::glossary_term::routes())
+            .add_route(crate::controllers::arc42_documentation_grade::routes())
+            .add_route(crate::controllers::arc42_documentation_grade_rule::routes())
+            .add_route(crate::controllers::arc42_documentation_grade_flag::routes())
     }
 
     /// Register background workers.

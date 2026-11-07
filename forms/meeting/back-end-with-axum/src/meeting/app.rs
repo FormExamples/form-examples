@@ -51,6 +51,10 @@ impl App {
             .add_route(controllers::agenda_item::routes())
             .add_route(controllers::meeting::routes())
             .add_route(controllers::organizer::routes())
+            .add_route(crate::controllers::meeting_outcome::routes())
+            .add_route(crate::controllers::meeting_grade::routes())
+            .add_route(crate::controllers::meeting_grade_rule::routes())
+            .add_route(crate::controllers::meeting_grade_flag::routes())
     }
 
     /// Register background workers.

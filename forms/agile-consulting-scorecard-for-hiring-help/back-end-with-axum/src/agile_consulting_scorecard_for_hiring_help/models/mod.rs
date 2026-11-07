@@ -1,3 +1,6 @@
+pub mod agile_consulting_scorecard_for_hiring_help_grade_flags;
+pub mod agile_consulting_scorecard_for_hiring_help_grade_rules;
+pub mod agile_consulting_scorecard_for_hiring_help_grades;
 pub mod agile_consulting_scorecard_for_hiring_helps;
 pub mod organizations;
 pub mod respondents;

@@ -1,4 +1,10 @@
+pub mod assessment_allergies;
+pub mod assessment_allergy_items;
+pub mod assessment_medication_items;
 pub mod assessment_medications;
 pub mod assessments;
 pub mod clinicians;
+pub mod grades;
+pub mod grading_additional_flags;
+pub mod grading_fired_rules;
 pub mod patients;

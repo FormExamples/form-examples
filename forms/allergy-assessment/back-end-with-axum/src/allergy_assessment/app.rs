@@ -47,6 +47,18 @@ impl App {
             .add_route(controllers::assessment::routes())
             .add_route(controllers::clinician::routes())
             .add_route(controllers::patient::routes())
+            .add_route(crate::controllers::assessment_drug_allergy_item::routes())
+            .add_route(crate::controllers::assessment_food_allergies::routes())
+            .add_route(crate::controllers::assessment_food_allergy_item::routes())
+            .add_route(crate::controllers::assessment_anaphylaxis_history::routes())
+            .add_route(crate::controllers::assessment_anaphylaxis_episode::routes())
+            .add_route(crate::controllers::assessment_testing_results::routes())
+            .add_route(crate::controllers::assessment_test_result_item::routes())
+            .add_route(crate::controllers::assessment_current_management::routes())
+            .add_route(crate::controllers::assessment_other_medication::routes())
+            .add_route(crate::controllers::grade::routes())
+            .add_route(crate::controllers::grading_fired_rule::routes())
+            .add_route(crate::controllers::grading_additional_flag::routes())
     }
 
     /// Register background workers.

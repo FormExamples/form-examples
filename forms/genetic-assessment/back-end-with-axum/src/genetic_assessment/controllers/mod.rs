@@ -1,5 +1,11 @@
 pub mod assessment;
 pub mod assessment_cancer_history;
+pub mod assessment_cancer_history_item;
+pub mod assessment_family_pedigree;
+pub mod assessment_family_pedigree_member;
 pub mod clinician;
+pub mod grade;
+pub mod grading_additional_flag;
+pub mod grading_fired_rule;
 pub mod openapi;
 pub mod patient;

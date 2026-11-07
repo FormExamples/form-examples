@@ -1,1 +1,11 @@
+pub mod eye_prescription_eyes;
+pub mod eye_prescription_grade_flags;
+pub mod eye_prescription_grade_rules;
+pub mod eye_prescription_grades;
+pub mod eye_prescription_lens_recommendations;
+pub mod eye_prescription_ocular_health_findings;
+pub mod eye_prescription_pupillary_distances;
+pub mod eye_prescription_visual_acuities;
+pub mod eye_prescriptions;
 pub mod patients;
+pub mod prescribers;

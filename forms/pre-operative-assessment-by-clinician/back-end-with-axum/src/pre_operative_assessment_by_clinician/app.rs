@@ -51,6 +51,12 @@ impl App {
             .add_route(controllers::medication::routes())
             .add_route(controllers::clinician::routes())
             .add_route(controllers::patient::routes())
+            .add_route(
+                crate::controllers::pre_operative_assessment_by_clinician_grade_rule::routes(),
+            )
+            .add_route(
+                crate::controllers::pre_operative_assessment_by_clinician_grade_flag::routes(),
+            )
     }
 
     /// Register background workers.

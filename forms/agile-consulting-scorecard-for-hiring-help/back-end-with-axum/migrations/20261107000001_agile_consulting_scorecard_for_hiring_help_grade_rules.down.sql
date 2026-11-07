@@ -1,0 +1,1 @@
+DROP TABLE "agile_consulting_scorecard_for_hiring_help_grade_rules";

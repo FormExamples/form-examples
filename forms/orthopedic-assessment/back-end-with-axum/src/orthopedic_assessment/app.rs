@@ -47,6 +47,16 @@ impl App {
             .add_route(controllers::assessment::routes())
             .add_route(controllers::clinician::routes())
             .add_route(controllers::patient::routes())
+            .add_route(crate::controllers::assessment_rom_measurement::routes())
+            .add_route(crate::controllers::assessment_strength_testing::routes())
+            .add_route(crate::controllers::assessment_strength_test_item::routes())
+            .add_route(crate::controllers::assessment_imaging_history::routes())
+            .add_route(crate::controllers::assessment_imaging_item::routes())
+            .add_route(crate::controllers::assessment_surgical_history::routes())
+            .add_route(crate::controllers::assessment_surgery_item::routes())
+            .add_route(crate::controllers::grade::routes())
+            .add_route(crate::controllers::grading_fired_rule::routes())
+            .add_route(crate::controllers::grading_additional_flag::routes())
     }
 
     /// Register background workers.

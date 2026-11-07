@@ -5,5 +5,9 @@ mod readiness;
 
 pub mod assessment;
 pub mod assessment_current_medications;
+mod assessment_medication_items_route;
 pub mod clinician;
+mod grades_route;
+mod grading_additional_flags_route;
+mod grading_fired_rules_route;
 pub mod patient;

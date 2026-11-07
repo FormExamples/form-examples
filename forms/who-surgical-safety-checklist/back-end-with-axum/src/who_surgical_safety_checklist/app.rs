@@ -45,6 +45,8 @@ impl App {
             .add_route(crate::controllers::openapi::routes())
             .add_route(controllers::clinician::routes())
             .add_route(controllers::patient::routes())
+            .add_route(crate::controllers::who_surgical_safety_checklist::routes())
+            .add_route(crate::controllers::team_member::routes())
     }
 
     /// Register background workers.

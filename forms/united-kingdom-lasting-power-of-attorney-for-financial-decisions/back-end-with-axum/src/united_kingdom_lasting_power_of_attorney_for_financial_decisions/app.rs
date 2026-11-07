@@ -45,6 +45,20 @@ impl App {
             .add_route(crate::controllers::openapi::routes())
             .add_route(controllers::address::routes())
             .add_route(controllers::person::routes())
+            .add_route(crate::controllers::lasting_power_of_attorney::routes())
+            .add_route(crate::controllers::lpa_attorney::routes())
+            .add_route(crate::controllers::lpa_replacement_attorney::routes())
+            .add_route(crate::controllers::lpa_certificate_provider::routes())
+            .add_route(crate::controllers::lpa_person_to_notify::routes())
+            .add_route(crate::controllers::lpa_preferences_and_instructions::routes())
+            .add_route(crate::controllers::lpa_signature::routes())
+            .add_route(crate::controllers::lpa_witness::routes())
+            .add_route(crate::controllers::lpa_continuation_sheet::routes())
+            .add_route(crate::controllers::lpa_registration_application::routes())
+            .add_route(crate::controllers::lpa_registration_recipient::routes())
+            .add_route(crate::controllers::lpa_validation_result::routes())
+            .add_route(crate::controllers::lpa_validation_rule::routes())
+            .add_route(crate::controllers::lpa_validation_flag::routes())
     }
 
     /// Register background workers.

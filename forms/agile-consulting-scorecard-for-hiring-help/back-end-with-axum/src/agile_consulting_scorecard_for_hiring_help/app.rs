@@ -46,6 +46,15 @@ impl App {
             .add_route(controllers::agile_consulting_scorecard_for_hiring_help::routes())
             .add_route(controllers::respondent::routes())
             .add_route(controllers::organization::routes())
+            .add_route(
+                crate::controllers::agile_consulting_scorecard_for_hiring_help_grade::routes(),
+            )
+            .add_route(
+                crate::controllers::agile_consulting_scorecard_for_hiring_help_grade_rule::routes(),
+            )
+            .add_route(
+                crate::controllers::agile_consulting_scorecard_for_hiring_help_grade_flag::routes(),
+            )
     }
 
     /// Register background workers.

@@ -1,5 +1,9 @@
 pub mod action_items;
 pub mod agenda_items;
+pub mod meeting_grade_flags;
+pub mod meeting_grade_rules;
+pub mod meeting_grades;
+pub mod meeting_outcomes;
 pub mod meeting_outputs;
 pub mod meetings;
 pub mod organizers;

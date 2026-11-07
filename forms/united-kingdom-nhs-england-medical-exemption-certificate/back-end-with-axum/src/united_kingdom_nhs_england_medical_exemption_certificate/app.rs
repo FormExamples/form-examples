@@ -45,6 +45,12 @@ impl App {
             .add_route(crate::controllers::openapi::routes())
             .add_route(controllers::practitioner::routes())
             .add_route(controllers::patient::routes())
+            .add_route(crate::controllers::eligible_condition::routes())
+            .add_route(crate::controllers::application::routes())
+            .add_route(crate::controllers::application_eligible_condition::routes())
+            .add_route(crate::controllers::grade::routes())
+            .add_route(crate::controllers::grade_fired_rule::routes())
+            .add_route(crate::controllers::grade_additional_flag::routes())
     }
 
     /// Register background workers.

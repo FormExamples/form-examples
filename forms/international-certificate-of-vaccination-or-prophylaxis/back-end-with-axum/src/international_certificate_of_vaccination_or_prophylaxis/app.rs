@@ -46,6 +46,8 @@ impl App {
             .add_route(controllers::center::routes())
             .add_route(controllers::clinician::routes())
             .add_route(controllers::patient::routes())
+            .add_route(crate::controllers::international_certificate_of_vaccination_or_prophylaxis::routes())
+            .add_route(crate::controllers::international_certificate_of_vaccination_or_prophylaxis_entry::routes())
     }
 
     /// Register background workers.

@@ -1,0 +1,30 @@
+CREATE TABLE IF NOT EXISTS "application_eligible_conditions" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "application_id" uuid NOT NULL,
+    "eligible_condition_id" uuid NOT NULL,
+    "diagnosis_date" date NULL,
+    "snomed_ct_code" varchar NOT NULL DEFAULT '',
+    "icd10_code" varchar NOT NULL DEFAULT '',
+    "treatment_detail" text NOT NULL DEFAULT '',
+    "fistula_site" text NOT NULL DEFAULT '',
+    "appliance_type" text NOT NULL DEFAULT '',
+    "substitution_therapy" varchar NOT NULL DEFAULT '',
+    "on_substitution_therapy" varchar NOT NULL DEFAULT '',
+    "diabetes_treatment_mode" text NOT NULL DEFAULT '',
+    "anticonvulsant" text NOT NULL DEFAULT '',
+    "continuous_anticonvulsant_therapy" varchar NOT NULL DEFAULT '',
+    "cannot_leave_home_unaided" varchar NOT NULL DEFAULT '',
+    "disability_carer_detail" text NOT NULL DEFAULT '',
+    "disability_expected_to_be_permanent" varchar NOT NULL DEFAULT '',
+    "cancer_site" varchar NOT NULL DEFAULT '',
+    "cancer_treatment_phase" text NOT NULL DEFAULT '',
+    "histology_confirmed" varchar NOT NULL DEFAULT '',
+    "practitioner_attestation_notes" text NOT NULL DEFAULT '',
+    CONSTRAINT "fk-application_eligible_conditions-application_id-to-applications" FOREIGN KEY ("application_id") REFERENCES "applications" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-application_eligible_conditions-eligible_condition_id-to-eligible_conditions" FOREIGN KEY ("eligible_condition_id") REFERENCES "eligible_conditions" (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+ALTER TABLE application_eligible_conditions ALTER COLUMN id SET DEFAULT gen_random_uuid();

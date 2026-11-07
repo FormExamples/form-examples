@@ -54,6 +54,10 @@ impl App {
             .add_route(controllers::outpatient_outcome::routes())
             .add_route(controllers::clinician::routes())
             .add_route(controllers::patient::routes())
+            .add_route(crate::controllers::outpatient_outcome_signoff::routes())
+            .add_route(crate::controllers::outpatient_outcome_grade::routes())
+            .add_route(crate::controllers::outpatient_outcome_grade_rule::routes())
+            .add_route(crate::controllers::outpatient_outcome_grade_flag::routes())
     }
 
     /// Register background workers.

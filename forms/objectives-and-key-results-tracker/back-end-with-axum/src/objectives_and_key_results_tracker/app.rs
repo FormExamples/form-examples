@@ -45,6 +45,12 @@ impl App {
             .add_route(crate::controllers::openapi::routes())
             .add_route(controllers::participant::routes())
             .add_route(controllers::reporter::routes())
+            .add_route(crate::controllers::okr_objective::routes())
+            .add_route(crate::controllers::okr_key_result::routes())
+            .add_route(crate::controllers::okr_check_in::routes())
+            .add_route(crate::controllers::okr_grade::routes())
+            .add_route(crate::controllers::okr_grade_rule::routes())
+            .add_route(crate::controllers::okr_grade_flag::routes())
     }
 
     /// Register background workers.

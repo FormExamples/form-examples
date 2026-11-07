@@ -4,6 +4,18 @@ mod problem;
 mod readiness;
 
 pub mod assessment;
+mod assessment_anaphylaxis_episodes_route;
+mod assessment_anaphylaxis_histories_route;
+mod assessment_current_managements_route;
 pub mod assessment_drug_allergies;
+mod assessment_drug_allergy_items_route;
+mod assessment_food_allergies_route;
+mod assessment_food_allergy_items_route;
+mod assessment_other_medications_route;
+mod assessment_test_result_items_route;
+mod assessment_testing_results_route;
 pub mod clinician;
+mod grades_route;
+mod grading_additional_flags_route;
+mod grading_fired_rules_route;
 pub mod patient;

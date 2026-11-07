@@ -44,6 +44,16 @@ impl App {
         AppRoutes::with_default_routes() // controller routes below
             .add_route(crate::controllers::openapi::routes())
             .add_route(controllers::patient::routes())
+            .add_route(crate::controllers::prescriber::routes())
+            .add_route(crate::controllers::eye_prescription::routes())
+            .add_route(crate::controllers::eye_prescription_eye::routes())
+            .add_route(crate::controllers::eye_prescription_visual_acuity::routes())
+            .add_route(crate::controllers::eye_prescription_pupillary_distance::routes())
+            .add_route(crate::controllers::eye_prescription_lens_recommendation::routes())
+            .add_route(crate::controllers::eye_prescription_ocular_health_finding::routes())
+            .add_route(crate::controllers::eye_prescription_grade::routes())
+            .add_route(crate::controllers::eye_prescription_grade_rule::routes())
+            .add_route(crate::controllers::eye_prescription_grade_flag::routes())
     }
 
     /// Register background workers.

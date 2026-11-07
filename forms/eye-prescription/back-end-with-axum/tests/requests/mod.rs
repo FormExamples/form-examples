@@ -3,4 +3,14 @@ mod pagination;
 mod problem;
 mod readiness;
 
+mod eye_prescription_eyes_route;
+mod eye_prescription_grade_flags_route;
+mod eye_prescription_grade_rules_route;
+mod eye_prescription_grades_route;
+mod eye_prescription_lens_recommendations_route;
+mod eye_prescription_ocular_health_findings_route;
+mod eye_prescription_pupillary_distances_route;
+mod eye_prescription_visual_acuities_route;
+mod eye_prescriptions_route;
 pub mod patient;
+mod prescribers_route;

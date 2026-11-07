@@ -3,6 +3,7 @@ mod pagination;
 mod problem;
 mod readiness;
 
+mod additional_flags_route;
 pub mod administration_record;
 pub mod adult_vaccinations;
 pub mod assessment;
@@ -11,6 +12,8 @@ pub mod clinical_review;
 pub mod clinician;
 pub mod consent_information;
 pub mod contraindications_allergies;
+mod fired_rules_route;
+mod grades_route;
 pub mod immunization_history;
 pub mod occupational_vaccinations;
 pub mod patient;

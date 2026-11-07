@@ -47,6 +47,10 @@ impl App {
             .add_route(controllers::assessment::routes())
             .add_route(controllers::clinician::routes())
             .add_route(controllers::patient::routes())
+            .add_route(crate::controllers::assessment_medication_item::routes())
+            .add_route(crate::controllers::grade::routes())
+            .add_route(crate::controllers::grading_fired_rule::routes())
+            .add_route(crate::controllers::grading_additional_flag::routes())
     }
 
     /// Register background workers.

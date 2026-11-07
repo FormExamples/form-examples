@@ -1,9 +1,15 @@
 pub mod assessments;
 pub mod blood_pressures;
+pub mod body_measurements;
 pub mod cholesterols;
 pub mod clinicians;
 pub mod demographics_ethnicities;
 pub mod family_histories;
+pub mod grades;
+pub mod grading_additional_flags;
+pub mod grading_fired_rules;
 pub mod medical_conditions;
 pub mod patients;
+pub mod physical_activity_diets;
+pub mod review_calculates;
 pub mod smoking_alcohols;
