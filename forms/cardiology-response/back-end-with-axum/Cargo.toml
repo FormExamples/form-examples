@@ -13,7 +13,7 @@ description = "Cardiology Response back-end JSON API"
 default-run = "cardiology-response-axum-crate-cli"
 
 [workspace.dependencies]
-axa = { version = "0.7", features = ["cursor-pagination", "queue", "ratelimit", "sqlx"] }
+axa = { version = "0.9", features = ["cursor-pagination", "queue", "ratelimit", "sqlx"] }
 
 [dependencies]
 axa = { workspace = true }

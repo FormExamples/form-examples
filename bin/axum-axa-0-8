@@ -1,0 +1,116 @@
+#!/usr/bin/env python3
+"""bin/axum-axa-0-8 — move each form's `back-end-with-axum/` from axa 0.7 to 0.8.
+
+What it changes in a crate:
+
+  Cargo.toml                axa 0.8
+  Cargo.lock                axa 0.8 and axa-cursor-pagination 0.1.1, by
+                            `cargo update -p axa -p axa-cursor-pagination`, so
+                            nothing else in the lock moves; unless --no-lock
+
+Only the `outbox` feature breaks in 0.8 (axa-outbox 0.2.0 keeps an insert-only
+record), and no crate here turns it on. axa-cursor-pagination 0.1.1 moves to
+`base64` 0.23 and encodes cursors as before, so a cursor issued under 0.7 still
+reads. No source changes.
+
+A crate already moved is skipped, so the tool can be rerun. A crate whose axa line
+differs from the expected shape stops the run before anything is written.
+
+Usage:
+  bin/axum-axa-0-8 <slug>...          # named forms
+  bin/axum-axa-0-8 --all              # every form's Axum crate
+  bin/axum-axa-0-8 --all --no-lock    # leave Cargo.lock to `cargo update`
+  bin/axum-axa-0-8 --root DIR <slug>  # a copy of forms/ at DIR
+  bin/axum-axa-0-8 --check --all      # CI drift check (non-zero on drift)
+"""
+
+from __future__ import annotations
+
+import argparse
+import glob
+import os
+import re
+import subprocess
+import sys
+
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OLD_AXA = 'axa = { version = "0.7", features = ["cursor-pagination", "queue", "ratelimit", "sqlx"] }'
+NEW_AXA = 'axa = { version = "0.8", features = ["cursor-pagination", "queue", "ratelimit", "sqlx"] }'
+# bin/axum-axa-0-9 moves on to axa 0.9 and checks its own lock, so the check
+# accepts that step.
+LATER = re.compile(r'^axa = \{ version = "0\.9", features = \["cursor-pagination"', re.M)
+LOCKED = (
+    re.compile(r'^name = "axa"\nversion = "0\.8\.', re.M),
+    re.compile(r'^name = "axa-cursor-pagination"\nversion = "0\.1\.(?:[1-9]|\d\d)', re.M),
+)
+
+
+def locked(crate: str) -> bool:
+    """Whether the crate's Cargo.lock has axa 0.8 and its cursor crate."""
+    lock = open(f"{crate}/Cargo.lock").read()
+    return all(pattern.search(lock) for pattern in LOCKED)
+
+
+def drift(crate: str) -> str | None:
+    """Why a crate is not on axa 0.8 or later, if it is not."""
+    manifest = open(f"{crate}/Cargo.toml").read()
+    if LATER.search(manifest):
+        return None
+    if NEW_AXA not in manifest:
+        return "Cargo.toml is not on axa 0.8"
+    if not locked(crate):
+        return "Cargo.lock is not on axa 0.8 and axa-cursor-pagination 0.1.1"
+    return None
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    parser.add_argument("slugs", nargs="*")
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--no-lock", action="store_true")
+    parser.add_argument("--root", default=f"{REPO}/forms")
+    args = parser.parse_args()
+    if args.all:
+        crates = sorted(os.path.dirname(c) for c in glob.glob(f"{args.root}/*/back-end-with-axum/Cargo.toml"))
+    elif args.slugs:
+        crates = [f"{args.root}/{slug}/back-end-with-axum" for slug in args.slugs]
+    else:
+        parser.error("name forms, or pass --all")
+    if args.check:
+        bad = [(crate, why) for crate in crates if (why := drift(crate))]
+        for crate, why in bad:
+            print(f"{crate.split('/')[-2]}: {why}")
+        print(f"{len(crates) - len(bad)}/{len(crates)} crates on axa 0.8 or later")
+        return 1 if bad else 0
+    # Check every manifest first, so one odd crate leaves the fleet as it was.
+    manifests = {crate: open(f"{crate}/Cargo.toml").read() for crate in crates}
+    odd = [c for c, text in manifests.items() if NEW_AXA not in text and text.count(OLD_AXA) != 1]
+    if odd:
+        for crate in odd:
+            print(f"stopped, nothing written: {crate}: expected the axa 0.7 line once", file=sys.stderr)
+        return 1
+    moved = 0
+    for crate, text in manifests.items():
+        if NEW_AXA not in text:
+            with open(f"{crate}/Cargo.toml", "w") as handle:
+                handle.write(text.replace(OLD_AXA, NEW_AXA))
+            moved += 1
+    failed = []
+    if not args.no_lock:
+        for crate in crates:
+            if locked(crate):
+                continue
+            result = subprocess.run(
+                ["cargo", "update", "-q", "-p", "axa", "-p", "axa-cursor-pagination"],
+                cwd=crate, capture_output=True, text=True,
+            )
+            if result.returncode or not locked(crate):
+                failed.append(crate)
+                print(f"{crate.split('/')[-2]}: cargo update failed: {result.stderr.strip()[-300:]}", file=sys.stderr)
+    print(f"{moved} moved, {len(crates) - moved} already on axa 0.8, {len(failed)} lock failures")
+    return 1 if failed else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

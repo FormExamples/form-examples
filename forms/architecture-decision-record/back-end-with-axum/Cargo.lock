@@ -199,9 +199,9 @@ checksum = "f2032f911046de80f0a198e0901378627c33f59ea0ac00e363d481118bd70a53"
 
 [[package]]
 name = "axa"
-version = "0.7.0"
+version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e7f321d0968f2ca45ddc6d0a6f2d48f2682f9d680ba2a50c3b7a69f28444a41f"
+checksum = "5ced1838dc01c704bf4f02a1f41e7c40fa52fce4c1204adea7a1aab154a41d72"
 dependencies = [
  "async-trait",
  "axa-cursor-pagination",
@@ -228,12 +228,12 @@ dependencies = [
 
 [[package]]
 name = "axa-cursor-pagination"
-version = "0.1.0"
+version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "254bae98d29dc977a0a3d4ba4e4d776fe94931923b70f476b7020aea15e60d98"
+checksum = "b8e27de6945fe8ee4ca8e537b92b35ca79d731f12d4a5a59c4c3deef0e601c15"
 dependencies = [
  "axum",
- "base64 0.22.1",
+ "base64 0.23.1",
  "hmac",
  "serde",
  "sha2 0.11.1",
@@ -279,9 +279,9 @@ dependencies = [
 
 [[package]]
 name = "axa-worker"
-version = "0.1.0"
+version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b965872e9cb8d57f4fe4e0e7035fb685da22f9f214fe85477c6bbb2619b18d3f"
+checksum = "5cc0632f7f7ef8158fc817aef410be52936e63097f737585485aaa06c606646f"
 dependencies = [
  "serde_json",
  "sqlx",

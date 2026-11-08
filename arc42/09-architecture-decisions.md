@@ -264,3 +264,6 @@ read `x-total-count`, or sent `?offset=`, must follow `Link` instead; no front-e
 did. (−) The position inside a cursor is still an offset, so a row added or removed
 between two fetches can make a later page repeat or skip one row. (−) Rotating
 `CURSOR_KEY` turns every cursor already handed out into a `422`.
+
+**Later.** axa 0.9 removed offset paging altogether, so the move was also the only
+way forward: the fleet is on 0.9 (`bin/axum-axa-0-9`) with no change to any list.

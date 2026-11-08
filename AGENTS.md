@@ -57,7 +57,7 @@ Mechanical fleet-wide maintenance tools for `back-end-with-axum/` crates
 `deny.toml`, `#![forbid(unsafe_code)]`, scaffold-bug fixups, the axa
 1.0.1 migration, MSRV, connection-pool sizing, `GET /api/openapi.yaml`,
 camelCase JSON, the axa 0.6 and RFC 9457 move, the rate limit and development-only
-seed, the CHECK constraints, axa 0.7 and cursor paging) are catalogued in
+seed, the CHECK constraints, axa 0.7 and cursor paging, axa 0.8 and 0.9) are catalogued in
 [`AGENTS/back-end-with-axum.md`](AGENTS/back-end-with-axum.md) §Fleet-wide
 maintenance tools, to keep this file under the repo's own 40KB target.
 Each has a `--check` CI drift detector, listed in the Verify block below.
@@ -248,6 +248,8 @@ bin/generate-api-transcripts --check   # per-form api-create.http drift detector
 bin/axum-axa-upgrade --check --all # axa 0.6 + RFC 9457 problem details drift detector
 bin/axum-axa-adopt --check --all   # per-client rate limit, development-only seed, Page::respond on every list
 bin/axum-axa-0-7 --check --all     # axa 0.7, offset_pagination name, Cargo.lock
+bin/axum-axa-0-8 --check --all     # axa 0.8 or later, and axa-cursor-pagination 0.1.1, in Cargo.toml and Cargo.lock
+bin/axum-axa-0-9 --check --all     # axa 0.9 and axa-worker 0.2, in Cargo.toml and Cargo.lock
 bin/axum-cursor-pagination --check --all # every list pages by signed cursor, with no total
 bin/axum-check-constraints --check --all # sql/ CHECK constraints migrated into every crate, plus build.rs
 bin/axum-fixture-checks --check --all    # fixtures and test rows satisfy those CHECKs (needs Postgres)

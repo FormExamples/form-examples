@@ -2,9 +2,11 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-96 tools.
+98 tools.
 
 - [`bin/axum-axa-0-7`](#axum-axa-0-7)
+- [`bin/axum-axa-0-8`](#axum-axa-0-8)
+- [`bin/axum-axa-0-9`](#axum-axa-0-9)
 - [`bin/axum-axa-adopt`](#axum-axa-adopt)
 - [`bin/axum-axa-upgrade`](#axum-axa-upgrade)
 - [`bin/axum-check-constraints`](#axum-check-constraints)
@@ -130,6 +132,64 @@ Usage:
   bin/axum-axa-0-7 --all --no-lock    # leave Cargo.lock to `cargo update -p axa`
   bin/axum-axa-0-7 --root DIR <slug>  # a copy of forms/ at DIR
   bin/axum-axa-0-7 --check --all      # CI drift check (non-zero on drift)
+```
+
+<h2 id="axum-axa-0-8"><code>bin/axum-axa-0-8</code></h2>
+
+```text
+bin/axum-axa-0-8 — move each form's `back-end-with-axum/` from axa 0.7 to 0.8.
+
+What it changes in a crate:
+
+  Cargo.toml                axa 0.8
+  Cargo.lock                axa 0.8 and axa-cursor-pagination 0.1.1, by
+                            `cargo update -p axa -p axa-cursor-pagination`, so
+                            nothing else in the lock moves; unless --no-lock
+
+Only the `outbox` feature breaks in 0.8 (axa-outbox 0.2.0 keeps an insert-only
+record), and no crate here turns it on. axa-cursor-pagination 0.1.1 moves to
+`base64` 0.23 and encodes cursors as before, so a cursor issued under 0.7 still
+reads. No source changes.
+
+A crate already moved is skipped, so the tool can be rerun. A crate whose axa line
+differs from the expected shape stops the run before anything is written.
+
+Usage:
+  bin/axum-axa-0-8 <slug>...          # named forms
+  bin/axum-axa-0-8 --all              # every form's Axum crate
+  bin/axum-axa-0-8 --all --no-lock    # leave Cargo.lock to `cargo update`
+  bin/axum-axa-0-8 --root DIR <slug>  # a copy of forms/ at DIR
+  bin/axum-axa-0-8 --check --all      # CI drift check (non-zero on drift)
+```
+
+<h2 id="axum-axa-0-9"><code>bin/axum-axa-0-9</code></h2>
+
+```text
+bin/axum-axa-0-9 — move each form's `back-end-with-axum/` from axa 0.8 to 0.9.
+
+What it changes in a crate:
+
+  Cargo.toml                axa 0.9
+  Cargo.lock                axa 0.9 and axa-worker 0.2, by
+                            `cargo update -p axa -p axa-worker`, so nothing else
+                            in the lock moves; unless --no-lock
+
+0.9 breaks three things, and no crate here uses any of them: it removes offset
+paging (every crate pages by cursor, after bin/axum-cursor-pagination); it renames
+axa-idempotency's `lease` (no crate turns idempotency on); and axa-worker's
+`cancel` and `retry` take a transaction, a `by` and a `reason` (no crate calls
+them). The queue starts with `Queue::connect`, which makes the new insert-only
+`axa_job_acts` table itself. No source changes.
+
+A crate already moved is skipped, so the tool can be rerun. A crate whose axa line
+differs from the expected shape stops the run before anything is written.
+
+Usage:
+  bin/axum-axa-0-9 <slug>...          # named forms
+  bin/axum-axa-0-9 --all              # every form's Axum crate
+  bin/axum-axa-0-9 --all --no-lock    # leave Cargo.lock to `cargo update`
+  bin/axum-axa-0-9 --root DIR <slug>  # a copy of forms/ at DIR
+  bin/axum-axa-0-9 --check --all      # CI drift check (non-zero on drift)
 ```
 
 <h2 id="axum-axa-adopt"><code>bin/axum-axa-adopt</code></h2>

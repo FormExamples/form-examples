@@ -43,6 +43,13 @@ for them.
 
 ### Changed
 
+- **axa 0.9.** Every Axum crate moved from 0.7 through 0.8, with `bin/axum-axa-0-8`
+  and `bin/axum-axa-0-9`. Each bumps the axa line and updates only the axa crates in
+  each `Cargo.lock`: `axa` 0.9, `axa-cursor-pagination` 0.1.1 and `axa-worker` 0.2.
+  What 0.8 and 0.9 break is unused here: the `outbox` feature, offset paging (every list
+  already pages by cursor), idempotency's `lease`, and the queue's `cancel` and
+  `retry`. `Queue::connect` makes the new insert-only `axa_job_acts` table itself. A
+  cursor issued under 0.7 still reads. No source changed.
 - **Lists page by signed cursor, with no total.** Every Axum crate is on axa 0.7, and
   every list now takes `?limit=` and an opaque `?cursor=` instead of `?offset=`, and
   links the next page with `Link: rel="next"`. `x-total-count`, `x-limit` and
