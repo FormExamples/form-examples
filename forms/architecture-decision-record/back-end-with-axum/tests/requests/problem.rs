@@ -70,3 +70,44 @@ async fn the_middleware_cannot_escape_it() {
     assert_eq!(response.header("content-type"), "application/problem+json");
     assert_eq!(response.header("content-encoding"), "gzip");
 }
+
+/// A status outside the SQL CHECK list is refused before the database sees it:
+/// this crate validates its enums itself and answers `400` saying which value.
+/// The CHECK stays as the backstop, and the database refuses the same value.
+#[tokio::test]
+#[serial]
+async fn a_value_outside_a_check_is_refused() {
+    request::<App, _, _>(|request, ctx| async move {
+        let pool = crate::db(&ctx);
+        let author: (uuid::Uuid,) = sqlx::query_as(
+            "INSERT INTO authors (name, email, role) VALUES ('Test', 'a@example.com', 'architect') RETURNING id",
+        )
+        .fetch_one(&pool)
+        .await
+        .unwrap();
+        let organization: (uuid::Uuid,) =
+            sqlx::query_as("INSERT INTO organizations (name) VALUES ('Acme') RETURNING id")
+                .fetch_one(&pool)
+                .await
+                .unwrap();
+        let adr = |status: &str| {
+            serde_json::json!({
+                "authorId": author.0,
+                "organizationId": organization.0,
+                "title": "Use PostgreSQL",
+                "status": status
+            })
+        };
+        let (body, _) = problem!(request.post("/api/adrs").json(&adr("provisional")).await, 400);
+        assert!(body["detail"].as_str().unwrap().starts_with("status "));
+        request.post("/api/adrs").json(&adr("pending")).await.assert_status_ok();
+
+        let refused = sqlx::query("UPDATE authors SET role = 'not-a-listed-value'")
+            .execute(&pool)
+            .await
+            .unwrap_err();
+        let code = refused.as_database_error().and_then(|e| e.code()).unwrap();
+        assert_eq!(code, "23514", "a CHECK violation");
+    })
+    .await;
+}

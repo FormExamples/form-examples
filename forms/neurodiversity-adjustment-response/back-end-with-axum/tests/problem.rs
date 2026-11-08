@@ -103,3 +103,27 @@ async fn the_middleware_cannot_escape_it() {
     assert_eq!(response.header("content-type"), "application/problem+json");
     assert_eq!(response.header("content-encoding"), "gzip");
 }
+
+/// The database refuses a value its CHECK constraint does not list, and axa answers
+/// the caller with `422`, naming neither the value nor the field.
+#[tokio::test]
+#[serial]
+async fn a_value_outside_a_check_is_unprocessable() {
+    request::<App, _, _>(|request, ctx| async move {
+        let _ = &ctx;
+        let body = |value: &str| {
+            let mut body = serde_json::to_value(neurodiversity_adjustment_response_axum_crate::engine::types::NeurodiversityAdjustmentResponse::default()).unwrap();
+            body["responseStatus"] = value.into();
+            body
+        };
+        let response = request.post("/api/neurodiversity_adjustment_responses").json(&body("not-a-listed-value")).await;
+        let (problem, text) = problem!(response, 422);
+        assert_eq!(problem["code"], "unprocessable_entity");
+        assert_eq!(problem["detail"], "A value is outside what this field allows");
+        assert!(!text.contains("not-a-listed-value"));
+
+        // The same body with a listed value is stored, so the shape was never the fault.
+        request.post("/api/neurodiversity_adjustment_responses").json(&body("draft")).await.assert_status_ok();
+    })
+    .await;
+}
