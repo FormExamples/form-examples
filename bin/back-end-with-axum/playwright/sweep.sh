@@ -63,7 +63,7 @@ for slug in "${FORMS[@]}"; do
     continue
   fi
   ./target/debug/"$bin" db migrate > /tmp/migrate-$slug.log 2>&1 || true
-  nohup ./target/debug/"$bin" start > /tmp/loco-$slug.log 2>&1 &
+  nohup ./target/debug/"$bin" start > /tmp/axum-$slug.log 2>&1 &
   pid=$!
   popd > /dev/null
 

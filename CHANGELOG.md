@@ -43,6 +43,17 @@ for them.
 
 ### Changed
 
+- **Dependencies, 2026-11-09.** Every Axum crate moves to `validator` 0.21 and
+  `serial_test` 4, and its lock to the latest compatible versions. Every Svelte
+  front-end moves to Lily `svelte-headless` 0.8 and pickers 0.3 (picker bar 0.5),
+  SvelteKit 3.1.1, Svelte 5.57.3, Vite 8.3.6 and the other patch releases. The
+  GitHub Pages site takes the same, and `e2e/` Playwright 1.65. TypeScript stays at
+  6: SvelteKit cannot yet load TypeScript 7.
+- **The site counts its forms.** The home page and tagline read the count from the
+  generated form list (360), so they cannot go stale again.
+- **Loco-era names and defaults in `bin/`.** `bin/test-sql-apply` connects as
+  `postgres` by default, as CI does (the documented recipe connected as a `loco`
+  role that `initdb -U postgres` never creates), and helper and log names say Axum.
 - **axa 0.9.** Every Axum crate moved from 0.7 through 0.8, with `bin/axum-axa-0-8`
   and `bin/axum-axa-0-9`. Each bumps the axa line and updates only the axa crates in
   each `Cargo.lock`: `axa` 0.9, `axa-cursor-pagination` 0.1.1 and `axa-worker` 0.2.

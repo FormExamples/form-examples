@@ -2510,6 +2510,41 @@ export const examples: ExampleEntry[] = [
     ]
   },
   {
+    "slug": "expense-reimbursement",
+    "title": "Expense Reimbursement",
+    "description": "A workplace expense reimbursement claim that a worker (for example a clinician) completes after spending their own money on a work-related expense and wanting to be repaid. It records who is claiming and who approves, each expense line (date, category, merchant, amount, VAT, how it was paid, receipt), the business purpose, how the worker wants to be repaid, and the worker's declarations — then computes a three-axis grade (policy compliance, claim completeness, and the approval tier the claim needs) plus a set of fraud-prevention and policy flags. The output is a structured claim that an approver can accept, query, escalate or reject.",
+    "personas": [
+      {
+        "name": "compliant-train-fare-approve",
+        "description": "A nurse claims a £42.50 train fare to a mandatory course, with receipt: compliant, complete, line-manager tier, approve."
+      },
+      {
+        "name": "equipment-over-50-without-approval-escalate",
+        "description": "A registrar buys a £142 stethoscope without prior approval: needs-review, budget-holder tier, escalate."
+      },
+      {
+        "name": "conference-over-500-finance-review",
+        "description": "A physiotherapist pays £620 for a pre-approved conference: compliant but over £500, so finance review and escalate."
+      },
+      {
+        "name": "team-dinner-with-wine-reject",
+        "description": "A pharmacist claims a team dinner including wine: alcohol is never reimbursable, so likely-ineligible and reject."
+      },
+      {
+        "name": "stale-no-receipt-incomplete-request-more-information",
+        "description": "A healthcare assistant submits a four-month-old, receiptless claim with no repayment method or declaration: incomplete, so request more information."
+      },
+      {
+        "name": "duplicate-parking-lines-escalate",
+        "description": "A midwife lists the same car-park charge twice: duplicate suspected (high flag) forces finance review and escalate."
+      },
+      {
+        "name": "euro-course-with-exchange-rate-and-advance-approve",
+        "description": "A surgeon pays €90 for a course (rate 0.85) after a £20 advance: converted total £76.50, repay £56.50, approve."
+      }
+    ]
+  },
+  {
     "slug": "eye-prescription",
     "title": "Eye Prescription",
     "description": "A UK General Optical Council (GOC) aligned spectacle prescription as issued by a registered optometrist or dispensing optician following a sight test. Captures refractive correction for each eye (sphere, cylinder, axis, addition, prism, base), pupillary distance, visual acuity, optional ocular health findings, and lens recommendations. Computes a per-eye refractive classification (emmetropia / myopia / hyperopia / astigmatism, each by severity), a composite prescription complexity (simple / moderate / complex), and a set of safety flags (high myopia, high astigmatism, significant anisometropia, prism present, presbyopia, expired prescription, paediatric, ocular pathology). Output is a signed prescription document with validity dates suitable for handing to a lens dispenser, exporting as a FHIR R5 `VisionPrescription` resource, or archiving as XML.",
@@ -3883,6 +3918,61 @@ export const examples: ExampleEntry[] = [
     ]
   },
   {
+    "slug": "medical-device-assessment",
+    "title": "Medical Device Assessment",
+    "description": "A single-page, step-by-step questionnaire that assesses a medical device against the EU MDR 2017/745 Annex VIII classification rules (mirrored by the UK Medical Devices Regulations 2002). The assessor describes the device; the engine computes the risk class (I, IIa, IIb, III), the conformity-assessment route, and flags regulatory-readiness gaps.",
+    "personas": [
+      {
+        "name": "bandage-class-i",
+        "description": "Adhesive bandage: Rule 1, Class I, self-declaration."
+      },
+      {
+        "name": "sterile-dressing-is",
+        "description": "Sterile wound dressing: Class Is, partial notified-body route."
+      },
+      {
+        "name": "reusable-scalpel-ir",
+        "description": "Reusable surgical scalpel: Class Ir."
+      },
+      {
+        "name": "urinary-catheter-iia",
+        "description": "Short-term urinary catheter: Rule 5, Class IIa."
+      },
+      {
+        "name": "hip-implant-iib",
+        "description": "Hip joint implant: Rule 8, Class IIb."
+      },
+      {
+        "name": "pacemaker-iii",
+        "description": "Cardiac pacemaker: implant in heart, Class III."
+      },
+      {
+        "name": "diagnostic-app-iia",
+        "description": "Decision-support app, other harm: Rule 11, Class IIa."
+      },
+      {
+        "name": "insulin-loop-iii",
+        "description": "Closed-loop insulin pump: Rule 22, Class III."
+      },
+      {
+        "name": "ivd-out-of-scope",
+        "description": "In vitro diagnostic: blocked, IVDR applies."
+      },
+      {
+        "name": "gaps-class-iia",
+        "description": "Class IIa device with no risk file, no QMS: readiness gaps."
+      },
+      {
+        "name": "override-down",
+        "description": "Assessor overrides computed IIb to IIa with reason: class-override flag."
+      },
+      {
+        "name": "software-purpose-blank-failsafe",
+        "description": "Software with no purpose recorded: fail-safe IIa."
+      }
+    ]
+  },
+  {
     "slug": "medical-error-report",
     "title": "Medical Error Report",
     "description": "Medical error reporting form for incident documentation, root cause analysis, and patient safety improvement. Uses WHO severity scale and NCC MERP harm categories.",
@@ -3898,6 +3988,65 @@ export const examples: ExampleEntry[] = [
       {
         "name": "critical-abo-transfusion",
         "description": "ABO-incompatible transfusion started in an emergency with the bedside check bypassed: WHO critical / MERP H, severe harm, ICU with renal support, duty of candour NOT yet completed — expect critical overall risk."
+      }
+    ]
+  },
+  {
+    "slug": "medical-fit-note",
+    "title": "Medical Fit Note",
+    "description": "A single-page, step-by-step form for a clinician to assess, sign and approve a fit note (Statement of Fitness for Work) for an employee taking sick leave. It follows the UK fit note model: the clinician advises that the employee is either not fit for work or may be fit for work with adjustments, for a stated period.",
+    "personas": [
+      {
+        "name": "not-fit-two-weeks",
+        "description": "Complete not-fit note for 14 days: approved."
+      },
+      {
+        "name": "may-be-fit-phased-return",
+        "description": "May be fit with phased return and altered hours: approved, 2 adjustments."
+      },
+      {
+        "name": "may-be-fit-no-adjustment",
+        "description": "May be fit but no adjustment chosen (R-05): needs-completion."
+      },
+      {
+        "name": "unsigned-blocked",
+        "description": "Declaration not ticked (R-06): blocked."
+      },
+      {
+        "name": "end-before-start",
+        "description": "Period ends before it starts (R-04): blocked."
+      },
+      {
+        "name": "long-period-no-review",
+        "description": "120-day period without reassessment (R-08): needs-completion."
+      },
+      {
+        "name": "long-period-with-review",
+        "description": "120-day period with reassessment: approved."
+      },
+      {
+        "name": "backdated-15-days",
+        "description": "Period starts 15 days before assessment (R-09): needs-completion."
+      },
+      {
+        "name": "backdated-14-days-ok",
+        "description": "Period starts exactly 14 days before assessment: approved."
+      },
+      {
+        "name": "unregistered-clinician",
+        "description": "No registration number (R-07): blocked."
+      },
+      {
+        "name": "duration-only",
+        "description": "Duration of 28 days instead of an end date: approved."
+      },
+      {
+        "name": "blank-state",
+        "description": "Nothing entered: blocked with every blocking rule."
+      },
+      {
+        "name": "duration-zero-days",
+        "description": "Duration of 0 days is not a valid period end (R-04): blocked."
       }
     ]
   },
@@ -6496,6 +6645,49 @@ export const examples: ExampleEntry[] = [
       {
         "name": "critical-germ-cell-afp-pattern-uncommunicated-incomplete",
         "description": "Markedly elevated AFP (3500 ng/mL, reference <10) with a modestly elevated beta-hCG (180 IU/L) and raised LDH, a pattern highly suggestive of a non-seminomatous germ-cell tumour: AFP at or above the 1000 ng/mL germ-cell critical threshold auto-escalates classification to critical and follow-up to critical-alert regardless of the other axes; the result has not yet been recorded as communicated, no originating request is linked, and the clinical history and impression sections are not yet completed while urgent staging and MDT referral are arranged — expect critical classification + major severity + 60% completeness + critical-alert follow-up + urgent-review."
+      }
+    ]
+  },
+  {
+    "slug": "uk-nhs-digital-technology-assessment-criteria",
+    "title": "UK NHS Digital Technology Assessment Criteria (DTAC)",
+    "description": "A UK NHS–aligned assessment of a digital health technology against the NHS England Digital Technology Assessment Criteria (DTAC). A commissioner, procurement lead or assurance team records, for each of 47 criteria in seven sections (company information, value proposition, clinical safety, data protection, technical security, interoperability, usability and accessibility), whether the supplier's evidence shows the criterion is met, partially met, not met or not applicable. The engine computes a per-section result, an overall outcome (meets, conditional, does-not-meet or incomplete) and a list of flagged issues, and the wizard produces a signed assessment report.",
+    "personas": [
+      {
+        "name": "all-met",
+        "description": "Every criterion met with a review date set: outcome meets, no flags."
+      },
+      {
+        "name": "not-a-medical-device-meets",
+        "description": "Non-device wellbeing app: medical-device criterion not applicable, rest met; outcome meets."
+      },
+      {
+        "name": "conditional-partial-dpia",
+        "description": "One mandatory criterion (DPIA) partially met, rest met: outcome conditional."
+      },
+      {
+        "name": "advisory-not-met-still-meets",
+        "description": "Advisory criteria not met do not fail the assessment: outcome meets."
+      },
+      {
+        "name": "does-not-meet-security",
+        "description": "No penetration test and no MFA: outcome does-not-meet with critical security flags."
+      },
+      {
+        "name": "does-not-meet-clinical-safety",
+        "description": "Medical device with no Clinical Safety Officer and no hazard log."
+      },
+      {
+        "name": "does-not-meet-accessibility",
+        "description": "Fails WCAG AA and has no accessibility statement."
+      },
+      {
+        "name": "incomplete-blank",
+        "description": "Nothing rated yet: outcome incomplete."
+      },
+      {
+        "name": "incomplete-one-unanswered",
+        "description": "All met except one unanswered mandatory criterion: outcome incomplete."
       }
     ]
   },

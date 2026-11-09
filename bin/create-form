@@ -19,7 +19,7 @@ mkdir_with_ai_idempotent() (
   touch tasks.md
 )
 
-create_form_loco_script() {
+create_form_database_script() {
     # form_dir="$1"
     # form_name_as_snake="$2"
     file="$form_dir/back-end-with-axum/00-new.sh"
@@ -36,7 +36,7 @@ EOF
 
 main() {
     rsync -av "$top/etc/skeleton/" "$form_dir/"
-    create_form_loco_script "$form_dir" "$form_name_as_snake"
+    create_form_database_script "$form_dir" "$form_name_as_snake"
 }
 
 main

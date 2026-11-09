@@ -214,9 +214,9 @@ bin/svelte-autosave-restore-fix --check        # Svelte autosave-restore bug fix
 # bin/svelte-date-time-picker-vendor --check   # one-shot, superseded by svelte-lily-picker-defaults — vendored copy deleted fleet-wide as unneeded; do not run as a CI gate
 bin/html-date-time-picker-vendor --check       # HTML date-time-picker vendor drift detector (vendor-only, unwired)
 bin/page-header-layout-refactor --check        # HTML page-header title-left/controls-right drift detector
-bin/form-export-import-refactor --check        # HTML wizard-level export/import rollout drift detector (263/350 forms)
-bin/form-restore-banner-refactor --check       # HTML wizard restore-banner rollout drift detector (263/263 migrated forms)
-bin/generate-export-samples --check            # per-form export-sample.csv/.tsv drift detector (265/356 forms; slow — drives a real browser)
+bin/form-export-import-refactor --check        # HTML wizard-level export/import rollout drift detector (269/360 forms)
+bin/form-restore-banner-refactor --check       # HTML wizard restore-banner rollout drift detector (269/269 migrated forms)
+bin/generate-export-samples --check            # per-form export-sample.csv/.tsv drift detector (265/360 forms; slow — drives a real browser)
 bin/verify-personas                            # personas.json vs real wizard submit/render (slow)
 bin/verify-blank-submit                        # blank-state submit never crashes
 bin/html-error-message-contrast-fix --check    # HTML semantic-colour (danger/success/warning/info/muted) WCAG AA contrast drift detector
@@ -244,7 +244,7 @@ bin/back-end-with-axum/generate-back-end-with-axum-setup.py --check # Axum setup
 bin/back-end-with-axum/generate-axum-agents.py --list-stale # Back-end AGENTS.md staleness check (empty output = clean)
 bin/generate-axum-deny-config.py --check # Axum deny.toml drift detector
 bin/axum-forbid-unsafe --check --all # Axum #![forbid(unsafe_code)] crate-root drift detector
-bin/generate-api-transcripts --check   # per-form api-create.http drift detector (336/356; slow, real server)
+bin/generate-api-transcripts --check   # per-form api-create.http drift detector (336/360; slow, real server)
 bin/axum-axa-upgrade --check --all # axa 0.6 + RFC 9457 problem details drift detector
 bin/axum-axa-adopt --check --all   # per-client rate limit, development-only seed, Page::respond on every list
 bin/axum-axa-0-7 --check --all     # axa 0.7, offset_pagination name, Cargo.lock

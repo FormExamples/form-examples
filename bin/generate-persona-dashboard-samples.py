@@ -190,10 +190,11 @@ def render_html(rows: list[dict], fields: list[str]) -> str:
 def render_ts(rows: list[dict], fields: list[str]) -> str:
     parts = [TS_HEADER]
     for row in rows:
-        parts.append("\t{\n")
-        lines = [f"\t\t{field}: {js_literal(row[field])}" for field in fields]
+        # Two-space indent, as the front-end's Prettier config writes it.
+        parts.append("  {\n")
+        lines = [f"    {field}: {js_literal(row[field])}" for field in fields]
         parts.append(",\n".join(lines))
-        parts.append("\n\t},\n")
+        parts.append("\n  },\n")
     body = "".join(parts)
     if body.endswith("},\n"):
         body = body[: -len("},\n")] + "}\n"

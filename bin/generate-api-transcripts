@@ -12,15 +12,14 @@ drop and recreate its database, migrate it with the axa CLI (`db
 migrate`), start the real server (`start`), POST a real request, GET it
 back, capture both real HTTP transcripts, stop the server.
 
-Reuses bin/loco-integration-test-rollout's own field-parsing and
-value-synthesis (copied in, not imported, matching this repo's
-self-contained-tool convention) so the POSTed body matches exactly what
-that tool's own integration test already sends and asserts — this
-script does not re-decide what a realistic patient record looks like.
+Its field parsing and value synthesis were copied from the retired
+bin/loco-integration-test-rollout, so the POSTed body matches what the
+crates' integration tests send and assert; this script does not re-decide
+what a realistic patient record looks like.
 
-Scoped to crates with `controllers/patient.rs` (336/356 fleet-wide,
-per bin/loco-integration-test-rollout's own survey) -- the same
-controller/`Params` shape that tool already handles. A crate with a
+Scoped to crates with `controllers/patient.rs` (336/360 fleet-wide,
+as surveyed when the integration tests were written) -- the same
+controller/`Params` shape those tests use. A crate with a
 differently-shaped or absent patient controller (e.g. this repo's own
 "gold reference", `cardiology-request`, whose only controller is a
 hand-named `RequestParams` on its main table) is SKIPped, not guessed
@@ -113,7 +112,7 @@ NAME_HEURISTICS: list[tuple[re.Pattern, object]] = [
     (re.compile(r"^state$"), "CA"),
     (re.compile(r"zip_code"), "90210"),
     (re.compile(r"social_security_number"), "123-45-6789"),
-    # Distinct from bin/loco-seed-data-rollout's own "9434765919": the
+    # Distinct from the seed fixtures' "9434765919": the
     # seed fixture already inserted a patient row with that NHS number,
     # and this generator's own POST must not collide with it under the
     # column's unique constraint.
@@ -302,8 +301,8 @@ def render_transcript(slug: str, base_url: str, path: str, req_body: dict, post_
 
 
 def capture_crate(slug: str, write: bool, run_port: int) -> tuple[str, str]:
-    loco_dir = FORMS_DIR / slug / "back-end-with-axum"
-    src_dirs = [d for d in loco_dir.glob("src/*/") if (d / "controllers" / "mod.rs").is_file()]
+    crate_dir = FORMS_DIR / slug / "back-end-with-axum"
+    src_dirs = [d for d in crate_dir.glob("src/*/") if (d / "controllers" / "mod.rs").is_file()]
     if not src_dirs:
         return "SKIP", "no crate src dir found"
     src_dir = src_dirs[0]
@@ -333,7 +332,7 @@ def capture_crate(slug: str, write: bool, run_port: int) -> tuple[str, str]:
         return "SKIP", "no database name in app.rs defaults()"
     dbname = f"{m_db.group(1)}_transcript"
 
-    cargo_toml = (loco_dir / "Cargo.toml").read_text()
+    cargo_toml = (crate_dir / "Cargo.toml").read_text()
     bin_name = find_bin_name(cargo_toml)
     if not bin_name:
         return "SKIP", "no [[bin]] in Cargo.toml"
@@ -343,14 +342,14 @@ def capture_crate(slug: str, write: bool, run_port: int) -> tuple[str, str]:
         return "SKIP", db_err
     env = {**os.environ, "APP_ENV": "development", "DATABASE_URL": database_url(dbname)}
 
-    migrate = run(["cargo", "run", "-q", "--bin", bin_name, "--", "db", "migrate"], loco_dir, env, timeout=900)
+    migrate = run(["cargo", "run", "-q", "--bin", bin_name, "--", "db", "migrate"], crate_dir, env, timeout=900)
     if migrate.returncode != 0:
         return "SKIP", f"db migrate failed: {last_line(migrate.stderr)}"
 
     proc = subprocess.Popen(
         ["cargo", "run", "-q", "--bin", bin_name, "--", "start",
          "--binding", "127.0.0.1", "--port", str(run_port)],
-        cwd=loco_dir, env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+        cwd=crate_dir, env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
     )
     try:
         if not wait_for_port(run_port, timeout=120):

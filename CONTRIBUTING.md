@@ -150,14 +150,14 @@ sharded Rust job) verifies the supply-chain policy: licenses, security
 advisories, banned crates, and trusted sources.
 
 The SQL apply gate and the Axum tests need a Postgres reachable via `PGHOST` /
-`PGPORT` / `PGUSER` (default `localhost:5432`, user `loco`). A throwaway local
+`PGPORT` / `PGUSER` (default `localhost:5432`, user `postgres`). A throwaway local
 instance:
 
 ```sh
 PGDATA=$(mktemp -d)/data; SOCK=$(mktemp -d)
 initdb -D "$PGDATA" -U postgres --auth=trust
 pg_ctl -D "$PGDATA" -o "-p 5433 -k $SOCK -c listen_addresses=''" start
-PGHOST="$SOCK" PGPORT=5433 PGUSER=loco bin/test-sql-apply
+PGHOST="$SOCK" PGPORT=5433 PGUSER=postgres bin/test-sql-apply
 ```
 
 ## Adding a new form

@@ -28,10 +28,9 @@ those already had `#![forbid(unsafe_code)]` in `lib.rs` before this tool
 existed.
 
 This is an ongoing convention, not a one-shot migration. `cargo run -- generate
-scaffold` does not emit the attribute, so each form's generated
-`back-end-with-axum-setup` script calls this tool as its final step, right
-after `bin/route-loco-layout`; `--check` is the CI drift detector that catches
-a crate which skipped it.
+scaffold` does not emit the attribute, so run this tool on a newly scaffolded
+crate; `--check` is the CI drift detector that catches a crate which skipped
+it.
 
 Usage:
   bin/axum-forbid-unsafe <slug>...        # named forms

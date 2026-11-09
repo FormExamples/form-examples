@@ -33,7 +33,7 @@ async-trait = { version = "0.1" }
 axum = { version = "0.8" }
 tracing = { version = "0.1" }
 chrono = { version = "0.4", features = ["serde"] }
-validator = { version = "0.20", features = ["derive"] }
+validator = { version = "0.21", features = ["derive"] }
 uuid = { version = "1.29", features = ["serde", "v4"] }
 
 [[bin]]
@@ -43,7 +43,7 @@ required-features = []
 
 [dev-dependencies]
 axa = { workspace = true, features = ["testing"] }
-serial_test = { version = "3.5.0" }
+serial_test = { version = "4.0.1" }
 insta = { version = "1.49", features = ["redactions", "yaml", "filters"] }
 
 [lib]

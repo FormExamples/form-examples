@@ -58,6 +58,6 @@ so N runners cover the corpus with no overlap and no gaps
 ## Local Postgres for the DB-backed gates
 
 `bin/test-sql-apply` and the Axum tests read `PGHOST` / `PGPORT` / `PGUSER`
-(default `localhost:5432`, user `loco`). See [`../CONTRIBUTING.md`](../CONTRIBUTING.md)
+(default `localhost:5432`, user `postgres`). See [`../CONTRIBUTING.md`](../CONTRIBUTING.md)
 for a throwaway-instance recipe (a short socket dir avoids the Unix-socket path
 length limit).

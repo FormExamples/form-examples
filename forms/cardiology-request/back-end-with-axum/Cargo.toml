@@ -34,7 +34,7 @@ tokio = { version = "1.54", default-features = false, features = [
 ] }
 async-trait = { version = "0.1" }
 axum = { version = "0.8" }
-validator = { version = "0.20", features = ["derive"] }
+validator = { version = "0.21", features = ["derive"] }
 tracing = { version = "0.1" }
 
 [[bin]]
@@ -44,5 +44,5 @@ required-features = []
 
 [dev-dependencies]
 axa = { workspace = true, features = ["testing"] }
-serial_test = { version = "3.5.0" }
+serial_test = { version = "4.0.1" }
 insta = { version = "1.49", features = ["redactions", "yaml", "filters"] }

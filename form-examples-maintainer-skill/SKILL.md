@@ -74,7 +74,12 @@ truth) or the generated [`docs/tools.md`](../docs/tools.md). Categories:
 - **Generators (SQL → derived representations)** — the `xml-representations`,
   `fhir-r5`, `protobuf`, `openapi`, `back-end-with-axum` generators, plus
   `generate-changelog-and-examples.py`.
-  `generate-axum-deny-config.py`, `axum-forbid-unsafe`,
+- **Axum crates** — after changing `sql/`: `bin/axum-entity-routes` (a new
+  table), `bin/axum-sql-columns` (a new column), `bin/axum-check-constraints`
+  (a new CHECK), then `bin/axum-soft-delete` and
+  `bin/openapi/generate-openapi-combined.py <slug>`. Also
+  `generate-axum-deny-config.py`, `axum-forbid-unsafe`, `axum-msrv-set`,
+  and the axa version moves (`axum-axa-0-7`, `-0-8`, `-0-9`).
   Most have a `--check` mode that is the CI drift detector for that
   convention; several are one-shot migrations already applied fleet-wide
   (their header comment says so — do not re-run them as a gate).

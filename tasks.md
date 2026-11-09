@@ -12,7 +12,8 @@ bin/lily-html-refactor --check --all && bin/lily-svelte-refactor --check --all
 bin/lily-sync --check && bin/lily-svelte-sync --check
 bin/generate-llms-txt.py --check && bin/generate-spec.py --check
 bin/generate-changelog-and-examples.py --check
-bin/loco-config-refactor --check --all
+bin/axum-sql-columns --check --all && bin/axum-check-constraints --check --all
+bin/axum-soft-delete --check --all && bin/axum-entity-routes --check --all
 ```
 
 ## Status summary (2026-08-26) — Round 2
@@ -3343,6 +3344,30 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       Wired into `AGENTS.md`'s Generators catalogue and Verify section;
       `docs/tools.md` regenerated. Broader-than-`*-test-result` support
       (forms whose `sql/` doesn't share this exact shape) is future work.
+
+## Phase 14 — Axum back ends (2026-11)
+
+The 360 crates moved from Loco to Axum and axa (2026-11-06), then to axa 0.9.1.
+Each `sql/` table has a route (`bin/axum-entity-routes`), each column its
+`sql/` name (`bin/axum-sql-columns`), and each CHECK a constraint
+(`bin/axum-check-constraints`). DELETE is a cascading soft delete
+(`bin/axum-soft-delete`), and lists page by signed cursor.
+
+- [x] 41 `sql/` columns missing from 18 crates: 14 foreign keys renamed to
+      their `sql/` names, 27 columns added (2026-11-09).
+- [x] `validator` 0.21, `serial_test` 4, and every crate's lock updated
+      within range (2026-11-09).
+- [ ] **Maintainer decision — soft-deleted rows:** a restore route, a purge
+      after a retention period, or both.
+- [ ] **Maintainer decision — `sql/` UNIQUE constraints** the crates lack
+      (outpatient-outcome's one EQ-5D-5L row per outcome, for example):
+      add them, after finding any stored rows that break them.
+- [ ] TypeScript 7: SvelteKit's `svelte-kit sync` cannot load it yet
+      ("Cannot read properties of undefined (reading 'readFile')"), so every
+      front-end stays on TypeScript 6 until SvelteKit supports it.
+- [ ] `deepmerge` advisory GHSA-gcqx-w48m-w2h4 (low): no fixed release; it
+      comes in through `@sveltejs/vite-plugin-svelte` at build time only.
+      Recheck when either package releases.
 
 ## Done (previous rounds — summary)
 

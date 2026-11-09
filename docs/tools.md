@@ -418,10 +418,9 @@ those already had `#![forbid(unsafe_code)]` in `lib.rs` before this tool
 existed.
 
 This is an ongoing convention, not a one-shot migration. `cargo run -- generate
-scaffold` does not emit the attribute, so each form's generated
-`back-end-with-axum-setup` script calls this tool as its final step, right
-after `bin/route-loco-layout`; `--check` is the CI drift detector that catches
-a crate which skipped it.
+scaffold` does not emit the attribute, so run this tool on a newly scaffolded
+crate; `--check` is the CI drift detector that catches a crate which skipped
+it.
 
 Usage:
   bin/axum-forbid-unsafe <slug>...        # named forms
@@ -741,15 +740,14 @@ drop and recreate its database, migrate it with the axa CLI (`db
 migrate`), start the real server (`start`), POST a real request, GET it
 back, capture both real HTTP transcripts, stop the server.
 
-Reuses bin/loco-integration-test-rollout's own field-parsing and
-value-synthesis (copied in, not imported, matching this repo's
-self-contained-tool convention) so the POSTed body matches exactly what
-that tool's own integration test already sends and asserts — this
-script does not re-decide what a realistic patient record looks like.
+Its field parsing and value synthesis were copied from the retired
+bin/loco-integration-test-rollout, so the POSTed body matches what the
+crates' integration tests send and assert; this script does not re-decide
+what a realistic patient record looks like.
 
-Scoped to crates with `controllers/patient.rs` (336/356 fleet-wide,
-per bin/loco-integration-test-rollout's own survey) -- the same
-controller/`Params` shape that tool already handles. A crate with a
+Scoped to crates with `controllers/patient.rs` (336/360 fleet-wide,
+as surveyed when the integration tests were written) -- the same
+controller/`Params` shape those tests use. A crate with a
 differently-shaped or absent patient controller (e.g. this repo's own
 "gold reference", `cardiology-request`, whose only controller is a
 hand-named `RequestParams` on its main table) is SKIPped, not guessed
@@ -2601,7 +2599,7 @@ test-sql-apply: apply each form's numbered SQL migrations, in filename
  Environment:
 
      PGHOST (default localhost), PGPORT (default 5432),
-     PGUSER (default loco) — connection for createdb/dropdb/psql.
+     PGUSER (default postgres) — connection for createdb/dropdb/psql.
 
  Exit status is non-zero if any form fails, with one line per failure
  naming the first file that errored and the first error line.

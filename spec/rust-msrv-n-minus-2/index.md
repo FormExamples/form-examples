@@ -1,6 +1,6 @@
 # Rust MSRV — current N-2
 
-Status: **implemented** as of 2026-08-29. Applied fleet-wide (355 forms,
+Status: **implemented** as of 2026-08-29; now **1.97** across all 360 Axum crates (see Current value). The record below is of that first rollout, applied fleet-wide (355 forms,
 710 `Cargo.toml`/`migration/Cargo.toml` files) via
 [`bin/axum-msrv-set`](../../bin/axum-msrv-set), MSRV set to **1.96** (stable
 was 1.98 at the time). Verified against a real `rustc +1.96` (installed via
@@ -83,7 +83,8 @@ started requiring a newer toolchain than the policy allows.
 
 ## Current value
 
-As of the most recent update to this document, stable Rust is **1.98**, so the
-MSRV is **1.96**. If stable has moved on since, this document is stale in its
+As of the most recent update to this document (2026-11-09), stable Rust is
+**1.99**, so the MSRV is **1.97**: every Axum crate's `rust-version`, and the CI
+`msrv` job's `dtolnay/rust-toolchain@1.97`. If stable has moved on since, this document is stale in its
 example only — the rule above is what binds, and `Cargo.toml` must be brought
 back in line with it.
