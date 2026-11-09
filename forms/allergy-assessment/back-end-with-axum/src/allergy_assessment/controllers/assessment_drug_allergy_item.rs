@@ -25,7 +25,7 @@ pub struct Params {
     /// Sort order.
     pub sort_order: i32,
     /// Assessment drug allergy id.
-    pub assessment_drug_allergy_id: Uuid,
+    pub drug_allergies_id: Uuid,
 }
 
 impl Params {
@@ -34,7 +34,7 @@ impl Params {
         sqlx::query_as(
             "INSERT INTO assessment_drug_allergy_items (allergen, reaction_type, \
             severity, timing, alternatives_tolerated, sort_order, \
-            assessment_drug_allergy_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+            drug_allergies_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
         )
         .bind(&self.allergen)
         .bind(&self.reaction_type)
@@ -42,7 +42,7 @@ impl Params {
         .bind(&self.timing)
         .bind(&self.alternatives_tolerated)
         .bind(self.sort_order)
-        .bind(self.assessment_drug_allergy_id)
+        .bind(self.drug_allergies_id)
         .fetch_one(db)
         .await
     }
@@ -52,7 +52,7 @@ impl Params {
         sqlx::query_as(
             "UPDATE assessment_drug_allergy_items SET allergen = $2, reaction_type = $3, \
             severity = $4, timing = $5, alternatives_tolerated = $6, sort_order = $7, \
-            assessment_drug_allergy_id = $8, updated_at = now() WHERE id = $1 AND \
+            drug_allergies_id = $8, updated_at = now() WHERE id = $1 AND \
             deleted_at IS NULL RETURNING *",
         )
         .bind(id)
@@ -62,7 +62,7 @@ impl Params {
         .bind(&self.timing)
         .bind(&self.alternatives_tolerated)
         .bind(self.sort_order)
-        .bind(self.assessment_drug_allergy_id)
+        .bind(self.drug_allergies_id)
         .fetch_optional(db)
         .await
     }

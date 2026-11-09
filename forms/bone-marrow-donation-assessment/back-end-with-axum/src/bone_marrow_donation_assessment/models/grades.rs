@@ -28,7 +28,7 @@ pub struct Model {
     /// Graded at.
     pub graded_at: DateTimeWithTimeZone,
     /// Bone marrow donation assessment id.
-    pub bone_marrow_donation_assessment_id: Uuid,
+    pub assessment_id: Uuid,
 }
 /// Grades.
 pub type Grades = Model;

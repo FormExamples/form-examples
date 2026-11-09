@@ -37,7 +37,7 @@ pub struct Params {
     /// Graded at.
     pub graded_at: DateTimeWithTimeZone,
     /// Agile consulting scorecard for hiring help id.
-    pub agile_consulting_scorecard_for_hiring_help_id: Uuid,
+    pub agile_consulting_scorecard_id: Uuid,
 }
 
 impl Params {
@@ -48,7 +48,7 @@ impl Params {
             manifesto_subtotal, principles_subtotal, computed_band, final_band, \
             override_reason, recommendation, recommended_focus_areas, review_notes, \
             signed_by, signed_at, graded_at, \
-            agile_consulting_scorecard_for_hiring_help_id) VALUES ($1, $2, $3, $4, $5, \
+            agile_consulting_scorecard_id) VALUES ($1, $2, $3, $4, $5, \
             $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *",
         )
         .bind(self.score_total)
@@ -63,7 +63,7 @@ impl Params {
         .bind(&self.signed_by)
         .bind(self.signed_at)
         .bind(self.graded_at)
-        .bind(self.agile_consulting_scorecard_for_hiring_help_id)
+        .bind(self.agile_consulting_scorecard_id)
         .fetch_one(db)
         .await
     }
@@ -75,7 +75,7 @@ impl Params {
             $2, manifesto_subtotal = $3, principles_subtotal = $4, computed_band = $5, \
             final_band = $6, override_reason = $7, recommendation = $8, \
             recommended_focus_areas = $9, review_notes = $10, signed_by = $11, signed_at \
-            = $12, graded_at = $13, agile_consulting_scorecard_for_hiring_help_id = $14, \
+            = $12, graded_at = $13, agile_consulting_scorecard_id = $14, \
             updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
@@ -91,7 +91,7 @@ impl Params {
         .bind(&self.signed_by)
         .bind(self.signed_at)
         .bind(self.graded_at)
-        .bind(self.agile_consulting_scorecard_for_hiring_help_id)
+        .bind(self.agile_consulting_scorecard_id)
         .fetch_optional(db)
         .await
     }

@@ -1629,6 +1629,10 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
+        assessmentId:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, enforcing 1:1).
         eligibility:
           type: string
           enum:
@@ -1670,6 +1674,7 @@ components:
       required:
       - createdAt
       - updatedAt
+      - assessmentId
       - eligibility
       - overallRiskLevel
       - hlaMatchLevel

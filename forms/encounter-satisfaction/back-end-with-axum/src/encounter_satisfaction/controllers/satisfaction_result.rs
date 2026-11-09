@@ -14,6 +14,8 @@ pub struct Params {
     pub category: String,
     pub answered_count: i32,
     pub scored_at: DateTimeWithTimeZone,
+    #[serde(default)]
+    pub domain_scores: Option<serde_json::Value>,
 }
 
 impl Params {
@@ -21,14 +23,15 @@ impl Params {
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
             "INSERT INTO satisfaction_results (encounter_satisfaction_id, \
-            composite_score, category, answered_count, scored_at) VALUES ($1, $2, $3, \
-            $4, $5) RETURNING *",
+            composite_score, category, answered_count, scored_at, domain_scores) VALUES \
+            ($1, $2, $3, $4, $5, COALESCE($6, '[]')) RETURNING *",
         )
         .bind(self.encounter_satisfaction_id)
         .bind(self.composite_score)
         .bind(&self.category)
         .bind(self.answered_count)
         .bind(self.scored_at)
+        .bind(&self.domain_scores)
         .fetch_one(db)
         .await
     }
@@ -38,7 +41,8 @@ impl Params {
         sqlx::query_as(
             "UPDATE satisfaction_results SET encounter_satisfaction_id = $2, \
             composite_score = $3, category = $4, answered_count = $5, scored_at = $6, \
-            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
+            domain_scores = COALESCE($7, domain_scores), updated_at = now() WHERE id = \
+            $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.encounter_satisfaction_id)
@@ -46,6 +50,7 @@ impl Params {
         .bind(&self.category)
         .bind(self.answered_count)
         .bind(self.scored_at)
+        .bind(&self.domain_scores)
         .fetch_optional(db)
         .await
     }

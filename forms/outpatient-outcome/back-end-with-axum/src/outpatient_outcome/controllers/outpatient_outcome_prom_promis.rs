@@ -10,16 +10,57 @@ use crate::models::outpatient_outcome_prom_promis::Model;
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub outpatient_outcome_id: Uuid,
+    #[serde(default)]
+    pub item1_general_health: Option<i32>,
+    #[serde(default)]
+    pub item2_quality_of_life: Option<i32>,
+    #[serde(default)]
+    pub item3_physical_health: Option<i32>,
+    #[serde(default)]
+    pub item4_mental_health: Option<i32>,
+    #[serde(default)]
+    pub item5_social_activities: Option<i32>,
+    #[serde(default)]
+    pub item6_carry_out_physical: Option<i32>,
+    #[serde(default)]
+    pub item7_emotional_problems: Option<i32>,
+    #[serde(default)]
+    pub item8_fatigue: Option<i32>,
+    #[serde(default)]
+    pub item9_pain: Option<i32>,
+    #[serde(default)]
+    pub item10_everyday_activities: Option<i32>,
+    #[serde(default)]
+    pub global_physical_health_t_score: Option<f64>,
+    #[serde(default)]
+    pub global_mental_health_t_score: Option<f64>,
 }
 
 impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO outpatient_outcome_prom_promis (outpatient_outcome_id) VALUES \
-            ($1) RETURNING *",
+            "INSERT INTO outpatient_outcome_prom_promis (outpatient_outcome_id, \
+            item1_general_health, item2_quality_of_life, item3_physical_health, \
+            item4_mental_health, item5_social_activities, item6_carry_out_physical, \
+            item7_emotional_problems, item8_fatigue, item9_pain, \
+            item10_everyday_activities, global_physical_health_t_score, \
+            global_mental_health_t_score) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, \
+            $10, $11, $12, $13) RETURNING *",
         )
         .bind(self.outpatient_outcome_id)
+        .bind(self.item1_general_health)
+        .bind(self.item2_quality_of_life)
+        .bind(self.item3_physical_health)
+        .bind(self.item4_mental_health)
+        .bind(self.item5_social_activities)
+        .bind(self.item6_carry_out_physical)
+        .bind(self.item7_emotional_problems)
+        .bind(self.item8_fatigue)
+        .bind(self.item9_pain)
+        .bind(self.item10_everyday_activities)
+        .bind(self.global_physical_health_t_score)
+        .bind(self.global_mental_health_t_score)
         .fetch_one(db)
         .await
     }
@@ -28,10 +69,27 @@ impl Params {
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
             "UPDATE outpatient_outcome_prom_promis SET outpatient_outcome_id = $2, \
+            item1_general_health = $3, item2_quality_of_life = $4, item3_physical_health \
+            = $5, item4_mental_health = $6, item5_social_activities = $7, \
+            item6_carry_out_physical = $8, item7_emotional_problems = $9, item8_fatigue \
+            = $10, item9_pain = $11, item10_everyday_activities = $12, \
+            global_physical_health_t_score = $13, global_mental_health_t_score = $14, \
             updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.outpatient_outcome_id)
+        .bind(self.item1_general_health)
+        .bind(self.item2_quality_of_life)
+        .bind(self.item3_physical_health)
+        .bind(self.item4_mental_health)
+        .bind(self.item5_social_activities)
+        .bind(self.item6_carry_out_physical)
+        .bind(self.item7_emotional_problems)
+        .bind(self.item8_fatigue)
+        .bind(self.item9_pain)
+        .bind(self.item10_everyday_activities)
+        .bind(self.global_physical_health_t_score)
+        .bind(self.global_mental_health_t_score)
         .fetch_optional(db)
         .await
     }

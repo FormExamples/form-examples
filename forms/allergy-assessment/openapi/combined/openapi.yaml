@@ -4453,6 +4453,10 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
+        drugAllergiesId:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment_drug_allergies table.
         allergen:
           type: string
           maxLength: 255
@@ -4484,6 +4488,7 @@ components:
       required:
       - createdAt
       - updatedAt
+      - drugAllergiesId
       - allergen
       - reactionType
       - severity

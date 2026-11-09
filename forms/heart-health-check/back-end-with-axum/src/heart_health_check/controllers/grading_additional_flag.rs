@@ -20,8 +20,8 @@ pub struct Params {
     pub message: String,
     /// Priority.
     pub priority: String,
-    /// Assessment id.
-    pub assessment_id: Uuid,
+    /// Grade id.
+    pub grade_id: Uuid,
 }
 
 impl Params {
@@ -29,13 +29,13 @@ impl Params {
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
             "INSERT INTO grading_additional_flags (flag_id, category, message, priority, \
-            assessment_id) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+            grade_id) VALUES ($1, $2, $3, $4, $5) RETURNING *",
         )
         .bind(&self.flag_id)
         .bind(&self.category)
         .bind(&self.message)
         .bind(&self.priority)
-        .bind(self.assessment_id)
+        .bind(self.grade_id)
         .fetch_one(db)
         .await
     }
@@ -44,7 +44,7 @@ impl Params {
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
             "UPDATE grading_additional_flags SET flag_id = $2, category = $3, message = \
-            $4, priority = $5, assessment_id = $6, updated_at = now() WHERE id = $1 AND \
+            $4, priority = $5, grade_id = $6, updated_at = now() WHERE id = $1 AND \
             deleted_at IS NULL RETURNING *",
         )
         .bind(id)
@@ -52,7 +52,7 @@ impl Params {
         .bind(&self.category)
         .bind(&self.message)
         .bind(&self.priority)
-        .bind(self.assessment_id)
+        .bind(self.grade_id)
         .fetch_optional(db)
         .await
     }

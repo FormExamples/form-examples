@@ -85,20 +85,21 @@ impl Model {
             now() WHERE assessment_id IN (SELECT id FROM child1) AND deleted_at IS NULL \
             RETURNING id), child7 AS (UPDATE smoking_alcohols SET deleted_at = now(), \
             updated_at = now() WHERE assessment_id IN (SELECT id FROM child1) AND \
-            deleted_at IS NULL RETURNING id), child8 AS (UPDATE grading_additional_flags \
+            deleted_at IS NULL RETURNING id), child8 AS (UPDATE physical_activity_diets \
             SET deleted_at = now(), updated_at = now() WHERE assessment_id IN (SELECT id \
             FROM child1) AND deleted_at IS NULL RETURNING id), child9 AS (UPDATE \
-            physical_activity_diets SET deleted_at = now(), updated_at = now() WHERE \
+            body_measurements SET deleted_at = now(), updated_at = now() WHERE \
             assessment_id IN (SELECT id FROM child1) AND deleted_at IS NULL RETURNING \
-            id), child10 AS (UPDATE body_measurements SET deleted_at = now(), updated_at \
+            id), child10 AS (UPDATE review_calculates SET deleted_at = now(), updated_at \
             = now() WHERE assessment_id IN (SELECT id FROM child1) AND deleted_at IS \
-            NULL RETURNING id), child11 AS (UPDATE review_calculates SET deleted_at = \
-            now(), updated_at = now() WHERE assessment_id IN (SELECT id FROM child1) AND \
-            deleted_at IS NULL RETURNING id), child12 AS (UPDATE grades SET deleted_at = \
-            now(), updated_at = now() WHERE assessment_id IN (SELECT id FROM child1) AND \
-            deleted_at IS NULL RETURNING id), child13 AS (UPDATE grading_fired_rules SET \
-            deleted_at = now(), updated_at = now() WHERE grade_id IN (SELECT id FROM \
-            child12) AND deleted_at IS NULL RETURNING id) SELECT count(*) FROM target",
+            NULL RETURNING id), child11 AS (UPDATE grades SET deleted_at = now(), \
+            updated_at = now() WHERE assessment_id IN (SELECT id FROM child1) AND \
+            deleted_at IS NULL RETURNING id), child12 AS (UPDATE \
+            grading_additional_flags SET deleted_at = now(), updated_at = now() WHERE \
+            grade_id IN (SELECT id FROM child11) AND deleted_at IS NULL RETURNING id), \
+            child13 AS (UPDATE grading_fired_rules SET deleted_at = now(), updated_at = \
+            now() WHERE grade_id IN (SELECT id FROM child11) AND deleted_at IS NULL \
+            RETURNING id) SELECT count(*) FROM target",
         )
         .bind(id)
         .execute(db)

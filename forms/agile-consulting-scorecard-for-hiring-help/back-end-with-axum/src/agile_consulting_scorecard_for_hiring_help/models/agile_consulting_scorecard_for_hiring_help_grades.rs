@@ -42,7 +42,7 @@ pub struct Model {
     /// Graded at.
     pub graded_at: DateTimeWithTimeZone,
     /// Agile consulting scorecard for hiring help id.
-    pub agile_consulting_scorecard_for_hiring_help_id: Uuid,
+    pub agile_consulting_scorecard_id: Uuid,
 }
 /// Agile consulting scorecard for hiring help grades.
 pub type AgileConsultingScorecardForHiringHelpGrades = Model;

@@ -32,7 +32,7 @@ pub struct Model {
     /// Sort order.
     pub sort_order: i32,
     /// Assessment polypharmacy review id.
-    pub assessment_polypharmacy_review_id: Uuid,
+    pub polypharmacy_review_id: Uuid,
 }
 /// Assessment polypharmacy review medications.
 pub type AssessmentPolypharmacyReviewMedications = Model;

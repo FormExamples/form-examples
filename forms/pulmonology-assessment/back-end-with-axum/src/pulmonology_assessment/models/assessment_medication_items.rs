@@ -30,7 +30,7 @@ pub struct Model {
     /// Sort order.
     pub sort_order: i32,
     /// Assessment current medication id.
-    pub assessment_current_medication_id: Uuid,
+    pub current_medications_id: Uuid,
 }
 /// Assessment medication items.
 pub type AssessmentMedicationItems = Model;

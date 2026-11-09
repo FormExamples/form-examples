@@ -169,7 +169,17 @@ def apply_alters(tables, text):
         added = re.match(r"ADD COLUMN (?:IF NOT EXISTS )?(.*)", action, re.I)
         dropped = re.match(r'DROP COLUMN (?:IF EXISTS )?"?(\w+)"?', action, re.I)
         relaxed = re.match(r'ALTER COLUMN "?(\w+)"? DROP NOT NULL', action, re.I)
-        if added:
+        renamed = re.match(r'RENAME COLUMN "?(\w+)"? TO "?(\w+)"?', action, re.I)
+        required = re.match(r'ALTER COLUMN "?(\w+)"? SET NOT NULL', action, re.I)
+        if renamed:
+            for column in table.columns:
+                if column.name == renamed[1]:
+                    column.name = renamed[2]
+        elif required:
+            for column in table.columns:
+                if column.name == required[1]:
+                    column.nullable = False
+        elif added:
             table.columns.append(parse_column(added[1]))
         elif dropped:
             table.columns = [c for c in table.columns if c.name != dropped[1]]
@@ -179,9 +189,12 @@ def apply_alters(tables, text):
                     column.nullable = True
 
 
-def migration_tables(crate):
+def migration_tables(crate, before=None):
+    """The crate's tables after its migrations, or only those older than `before`."""
     tables = {}
     for path in sorted((crate / "migrations").glob("*.up.sql")):
+        if before is not None and path.name >= before:
+            break
         text = path.read_text()
         tables.update(parse_tables(text))
         apply_alters(tables, text)

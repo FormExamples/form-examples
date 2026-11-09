@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-98 tools.
+99 tools.
 
 - [`bin/axum-axa-0-7`](#axum-axa-0-7)
 - [`bin/axum-axa-0-8`](#axum-axa-0-8)
@@ -16,6 +16,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/axum-forbid-unsafe`](#axum-forbid-unsafe)
 - [`bin/axum-msrv-set`](#axum-msrv-set)
 - [`bin/axum-soft-delete`](#axum-soft-delete)
+- [`bin/axum-sql-columns`](#axum-sql-columns)
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
 - [`bin/create-form`](#create-form)
@@ -290,7 +291,10 @@ A second migration, `20261107700000_length_constraints`, holds the lengths of
 `sql/`'s `VARCHAR(n)` and `CHAR(n)` columns as `char_length(column) <= n` checks,
 `NOT VALID` likewise, because the crates' columns were migrated without a length.
 
-A CHECK naming a column the crate's table lacks is skipped and counted.
+A CHECK naming a column the crate's table lacks is skipped and counted. The tool
+reads only the migrations older than its own, so a column added later never
+rewrites a migration a database has already run: that column's CHECKs go in the
+migration that adds it (see bin/axum-sql-columns).
 
 Usage:
   bin/axum-check-constraints <slug>...          # named forms
@@ -481,6 +485,37 @@ left alone, because the reference still says what the row referred to.
 --check fails on a crate whose SQL is not in that shape, on a unique index
 migrated after that migration, and on a crate without tests/.../soft_delete.rs.
 A statement the tool cannot classify is listed for a person to read.
+```
+
+<h2 id="axum-sql-columns"><code>bin/axum-sql-columns</code></h2>
+
+```text
+bin/axum-sql-columns — give each form's `back-end-with-axum/` every column its
+`sql/` declares, under the name `sql/` gives it.
+
+bin/axum-sql-columns [--check] [--root DIR] [--all|<slug>...]
+
+The scaffold left some `sql/` columns out of the crates, so the API dropped what
+the form collected (outpatient-outcome's EQ-5D-5L and PROMIS answers), and it
+named some foreign keys after the parent table rather than as `sql/` does. The
+renames were done once, by hand, in `20261109000000_sql_column_names`; this tool
+adds what is still missing, in one migration per crate,
+`20261109100000_sql_columns`:
+
+  migrations   ADD COLUMN in the fleet's type mapping, then each `sql/` CHECK
+               and VARCHAR(n) length on those columns, NOT VALID, named as
+               bin/axum-check-constraints names them
+  model        a field per column; a float drops `Eq` from the derive
+  controller   a `Params` field, the insert and the update
+
+A new field is optional in the request, so a client that does not send it
+still works: a nullable column stores null, and a NOT NULL column with a
+default takes its `sql/` default on insert and keeps its value on update. A
+NOT NULL column without a default cannot be added to stored rows, so it is
+reported for a person to decide.
+
+--check lists every `sql/` column a crate's table lacks, and exits 1 if there
+is one.
 ```
 
 <h2 id="clean"><code>bin/clean</code></h2>

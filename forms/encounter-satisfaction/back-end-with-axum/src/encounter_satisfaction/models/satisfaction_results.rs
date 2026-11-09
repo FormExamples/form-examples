@@ -19,6 +19,7 @@ pub struct Model {
     pub answered_count: i32,
     pub scored_at: DateTimeWithTimeZone,
     pub encounter_satisfaction_id: Uuid,
+    pub domain_scores: serde_json::Value,
 }
 
 impl Model {

@@ -30,7 +30,7 @@ pub struct Model {
     /// Sort order.
     pub sort_order: i32,
     /// Assessment drug allergy id.
-    pub assessment_drug_allergy_id: Uuid,
+    pub drug_allergies_id: Uuid,
 }
 /// Assessment drug allergy items.
 pub type AssessmentDrugAllergyItems = Model;

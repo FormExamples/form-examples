@@ -563,7 +563,7 @@ components:
           format: date
           description: Target date for full-hours resumption.
         phased_return_schedule_json:
-          type: object
+          type: array
           description: Ordered list of {week, hoursPerWeek, daysPerWeek, notes} entries.
         phased_return_support_contact:
           type: string

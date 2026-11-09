@@ -2152,6 +2152,10 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
+        polypharmacyReviewId:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment_polypharmacy_review table.
         medicationName:
           type: string
           maxLength: 255
@@ -2194,6 +2198,7 @@ components:
       required:
       - createdAt
       - updatedAt
+      - polypharmacyReviewId
       - medicationName
       - dose
       - frequency

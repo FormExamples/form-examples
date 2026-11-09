@@ -2135,6 +2135,10 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
+        currentMedicationsId:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment_current_medications table.
         medicationName:
           type: string
           maxLength: 255
@@ -2169,6 +2173,7 @@ components:
       required:
       - createdAt
       - updatedAt
+      - currentMedicationsId
       - medicationName
       - dose
       - frequency

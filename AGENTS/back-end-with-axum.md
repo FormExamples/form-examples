@@ -257,6 +257,7 @@ Every crate's `Cargo.lock` is committed, because each is a binary crate. See
 - `bin/axum-check-constraints [--check] [--root <dir>] [--all|<slug>…]` — migrate every `sql/` CHECK constraint the crate's tables can hold, `NOT VALID`, and write the `build.rs` that rebuilds when `migrations/` changes. Run after changing `sql/`, then run `bin/axum-fixture-checks`
 - `bin/axum-fixture-checks [--check] [--all|<slug>…]` — put an allowed value wherever a fixture or a test's literal `INSERT` breaks a CHECK constraint; needs Postgres
 - `bin/axum-entity-routes [--check] [--root <dir>] [--all|<slug>…]` — give every `sql/` table a migration, model, controller, and test, unless a hand-written controller already reaches it. Run after adding a table, then run `bin/axum-soft-delete`
+- `bin/axum-sql-columns [--check] [--root <dir>] [--all|<slug>…]` — add each `sql/` column a crate's table lacks, under its `sql/` name: one migration with the column and its CHECKs, `NOT VALID`, a model field, and an optional `Params` field in the insert and update. Refuses a `NOT NULL` column without a default. Run after adding a column to `sql/`
 - `bin/axum-soft-delete [--check] [--root <dir>] [--all|<slug>…]` — make `DELETE` mark and cascade, make reads and updates skip marked rows, narrow uniqueness to live rows, and take `deleted_at` out of every body
 - `bin/test-axum-routes` — assert every crate exposes its domain HTTP API
 - `bin/generate-api-transcripts [--check] [<slug>…]` — record a real `examples/api-create.http` transcript

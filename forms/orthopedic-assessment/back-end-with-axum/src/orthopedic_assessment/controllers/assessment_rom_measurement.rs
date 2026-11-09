@@ -27,7 +27,7 @@ pub struct Params {
     /// Sort order.
     pub sort_order: i32,
     /// Assessment range of motion id.
-    pub assessment_range_of_motion_id: Uuid,
+    pub range_of_motion_id: Uuid,
 }
 
 impl Params {
@@ -36,7 +36,7 @@ impl Params {
         sqlx::query_as(
             "INSERT INTO assessment_rom_measurements (movement, active_degrees, \
             passive_degrees, normal_degrees, end_feel, pain_on_movement, sort_order, \
-            assessment_range_of_motion_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) \
+            range_of_motion_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) \
             RETURNING *",
         )
         .bind(&self.movement)
@@ -46,7 +46,7 @@ impl Params {
         .bind(&self.end_feel)
         .bind(&self.pain_on_movement)
         .bind(self.sort_order)
-        .bind(self.assessment_range_of_motion_id)
+        .bind(self.range_of_motion_id)
         .fetch_one(db)
         .await
     }
@@ -56,7 +56,7 @@ impl Params {
         sqlx::query_as(
             "UPDATE assessment_rom_measurements SET movement = $2, active_degrees = $3, \
             passive_degrees = $4, normal_degrees = $5, end_feel = $6, pain_on_movement = \
-            $7, sort_order = $8, assessment_range_of_motion_id = $9, updated_at = now() \
+            $7, sort_order = $8, range_of_motion_id = $9, updated_at = now() \
             WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
@@ -67,7 +67,7 @@ impl Params {
         .bind(&self.end_feel)
         .bind(&self.pain_on_movement)
         .bind(self.sort_order)
-        .bind(self.assessment_range_of_motion_id)
+        .bind(self.range_of_motion_id)
         .fetch_optional(db)
         .await
     }

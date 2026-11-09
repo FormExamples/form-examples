@@ -15,6 +15,18 @@ pub struct Model {
     #[serde(skip)]
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub outpatient_outcome_id: Uuid,
+    pub before_mobility: Option<i32>,
+    pub before_self_care: Option<i32>,
+    pub before_usual_activities: Option<i32>,
+    pub before_pain_discomfort: Option<i32>,
+    pub before_anxiety_depression: Option<i32>,
+    pub before_vas: Option<i32>,
+    pub after_mobility: Option<i32>,
+    pub after_self_care: Option<i32>,
+    pub after_usual_activities: Option<i32>,
+    pub after_pain_discomfort: Option<i32>,
+    pub after_anxiety_depression: Option<i32>,
+    pub after_vas: Option<i32>,
 }
 
 impl Model {

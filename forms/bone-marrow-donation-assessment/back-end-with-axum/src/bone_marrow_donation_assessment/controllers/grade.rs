@@ -23,7 +23,7 @@ pub struct Params {
     /// Graded at.
     pub graded_at: DateTimeWithTimeZone,
     /// Bone marrow donation assessment id.
-    pub bone_marrow_donation_assessment_id: Uuid,
+    pub assessment_id: Uuid,
 }
 
 impl Params {
@@ -31,7 +31,7 @@ impl Params {
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
             "INSERT INTO grades (eligibility, overall_risk_level, hla_match_level, \
-            collection_method, graded_at, bone_marrow_donation_assessment_id) VALUES \
+            collection_method, graded_at, assessment_id) VALUES \
             ($1, $2, $3, $4, $5, $6) RETURNING *",
         )
         .bind(&self.eligibility)
@@ -39,7 +39,7 @@ impl Params {
         .bind(&self.hla_match_level)
         .bind(&self.collection_method)
         .bind(self.graded_at)
-        .bind(self.bone_marrow_donation_assessment_id)
+        .bind(self.assessment_id)
         .fetch_one(db)
         .await
     }
@@ -49,7 +49,7 @@ impl Params {
         sqlx::query_as(
             "UPDATE grades SET eligibility = $2, overall_risk_level = $3, hla_match_level \
             = $4, collection_method = $5, graded_at = $6, \
-            bone_marrow_donation_assessment_id = $7, updated_at = now() WHERE id = $1 \
+            assessment_id = $7, updated_at = now() WHERE id = $1 \
             AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
@@ -58,7 +58,7 @@ impl Params {
         .bind(&self.hla_match_level)
         .bind(&self.collection_method)
         .bind(self.graded_at)
-        .bind(self.bone_marrow_donation_assessment_id)
+        .bind(self.assessment_id)
         .fetch_optional(db)
         .await
     }

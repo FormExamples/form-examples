@@ -3526,6 +3526,10 @@ components:
           type: integer
           format: int32
           description: Number of Likert questions answered out of 19 total.
+        domainScores:
+          type: array
+          description: JSONB array of per-domain score objects. Each object has domain, mean, count, and
+            questions array.
         scoredAt:
           type: string
           format: date-time
@@ -3537,6 +3541,7 @@ components:
       - compositeScore
       - category
       - answeredCount
+      - domainScores
       - scoredAt
       description: 1:1 with encounter_satisfaction. Computed ESS score with category and per-domain breakdown.
     StaffProfessionalism:

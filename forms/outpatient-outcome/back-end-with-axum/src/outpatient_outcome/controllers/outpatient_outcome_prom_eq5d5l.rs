@@ -10,16 +10,56 @@ use crate::models::outpatient_outcome_prom_eq5d5ls::Model;
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub outpatient_outcome_id: Uuid,
+    #[serde(default)]
+    pub before_mobility: Option<i32>,
+    #[serde(default)]
+    pub before_self_care: Option<i32>,
+    #[serde(default)]
+    pub before_usual_activities: Option<i32>,
+    #[serde(default)]
+    pub before_pain_discomfort: Option<i32>,
+    #[serde(default)]
+    pub before_anxiety_depression: Option<i32>,
+    #[serde(default)]
+    pub before_vas: Option<i32>,
+    #[serde(default)]
+    pub after_mobility: Option<i32>,
+    #[serde(default)]
+    pub after_self_care: Option<i32>,
+    #[serde(default)]
+    pub after_usual_activities: Option<i32>,
+    #[serde(default)]
+    pub after_pain_discomfort: Option<i32>,
+    #[serde(default)]
+    pub after_anxiety_depression: Option<i32>,
+    #[serde(default)]
+    pub after_vas: Option<i32>,
 }
 
 impl Params {
     /// Insert a row.
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
-            "INSERT INTO outpatient_outcome_prom_eq5d5ls (outpatient_outcome_id) VALUES \
-            ($1) RETURNING *",
+            "INSERT INTO outpatient_outcome_prom_eq5d5ls (outpatient_outcome_id, \
+            before_mobility, before_self_care, before_usual_activities, \
+            before_pain_discomfort, before_anxiety_depression, before_vas, \
+            after_mobility, after_self_care, after_usual_activities, \
+            after_pain_discomfort, after_anxiety_depression, after_vas) VALUES ($1, $2, \
+            $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *",
         )
         .bind(self.outpatient_outcome_id)
+        .bind(self.before_mobility)
+        .bind(self.before_self_care)
+        .bind(self.before_usual_activities)
+        .bind(self.before_pain_discomfort)
+        .bind(self.before_anxiety_depression)
+        .bind(self.before_vas)
+        .bind(self.after_mobility)
+        .bind(self.after_self_care)
+        .bind(self.after_usual_activities)
+        .bind(self.after_pain_discomfort)
+        .bind(self.after_anxiety_depression)
+        .bind(self.after_vas)
         .fetch_one(db)
         .await
     }
@@ -28,10 +68,26 @@ impl Params {
     async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
         sqlx::query_as(
             "UPDATE outpatient_outcome_prom_eq5d5ls SET outpatient_outcome_id = $2, \
-            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
+            before_mobility = $3, before_self_care = $4, before_usual_activities = $5, \
+            before_pain_discomfort = $6, before_anxiety_depression = $7, before_vas = \
+            $8, after_mobility = $9, after_self_care = $10, after_usual_activities = \
+            $11, after_pain_discomfort = $12, after_anxiety_depression = $13, after_vas \
+            = $14, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.outpatient_outcome_id)
+        .bind(self.before_mobility)
+        .bind(self.before_self_care)
+        .bind(self.before_usual_activities)
+        .bind(self.before_pain_discomfort)
+        .bind(self.before_anxiety_depression)
+        .bind(self.before_vas)
+        .bind(self.after_mobility)
+        .bind(self.after_self_care)
+        .bind(self.after_usual_activities)
+        .bind(self.after_pain_discomfort)
+        .bind(self.after_anxiety_depression)
+        .bind(self.after_vas)
         .fetch_optional(db)
         .await
     }

@@ -43,6 +43,8 @@ pub struct Params {
     pub safeguarding_notes: String,
     pub clinician_signature_svg: String,
     pub clinician_signed_at: Option<DateTimeWithTimeZone>,
+    #[serde(default)]
+    pub is_duplicate_of: Option<Uuid>,
 }
 
 impl Params {
@@ -59,9 +61,10 @@ impl Params {
             period_type, period_duration_value, period_duration_unit, period_from, \
             period_to, will_assess_again, planned_review_date, issued_at, issued_via, \
             issue_setting, safeguarding_concern, safeguarding_notes, \
-            clinician_signature_svg, clinician_signed_at) VALUES ($1, $2, $3, $4, $5, \
-            $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, \
-            $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34) RETURNING *",
+            clinician_signature_svg, clinician_signed_at, is_duplicate_of) VALUES ($1, \
+            $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, \
+            $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, \
+            $34, $35) RETURNING *",
         )
         .bind(self.patient_id)
         .bind(self.clinician_id)
@@ -97,6 +100,7 @@ impl Params {
         .bind(&self.safeguarding_notes)
         .bind(&self.clinician_signature_svg)
         .bind(self.clinician_signed_at)
+        .bind(self.is_duplicate_of)
         .fetch_one(db)
         .await
     }
@@ -117,7 +121,8 @@ impl Params {
             will_assess_again = $27, planned_review_date = $28, issued_at = $29, \
             issued_via = $30, issue_setting = $31, safeguarding_concern = $32, \
             safeguarding_notes = $33, clinician_signature_svg = $34, clinician_signed_at \
-            = $35, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
+            = $35, is_duplicate_of = $36, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.patient_id)
@@ -154,6 +159,7 @@ impl Params {
         .bind(&self.safeguarding_notes)
         .bind(&self.clinician_signature_svg)
         .bind(self.clinician_signed_at)
+        .bind(self.is_duplicate_of)
         .fetch_optional(db)
         .await
     }

@@ -320,7 +320,7 @@ components:
           format: int32
           description: Number of Likert questions answered out of 19 total.
         domain_scores:
-          type: object
+          type: array
           description: JSONB array of per-domain score objects. Each object has domain, mean, count, and questions array.
         scored_at:
           type: string

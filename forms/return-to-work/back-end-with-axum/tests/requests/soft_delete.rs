@@ -21,7 +21,7 @@ async fn delete_hides_the_row_and_keeps_it() {
                 .unwrap();
         let row2: Uuid = sqlx::query_scalar(
             "INSERT INTO return_to_works (phased_return_schedule_json, patient_id, \
-            clinician_id) VALUES ('{}', $1, $2) RETURNING id",
+            clinician_id) VALUES ('[]', $1, $2) RETURNING id",
         )
         .bind(row0)
         .bind(row1)

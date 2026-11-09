@@ -20,6 +20,7 @@ pub struct Model {
     pub supplemental_oxygen: String,
     pub scored_at: DateTimeWithTimeZone,
     pub casualty_card_id: Uuid,
+    pub parameter_scores: serde_json::Value,
 }
 
 impl Model {

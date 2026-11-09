@@ -29,7 +29,7 @@ pub struct Params {
     /// Sort order.
     pub sort_order: i32,
     /// Assessment medication id.
-    pub assessment_medication_id: Uuid,
+    pub medications_id: Uuid,
 }
 
 impl Params {
@@ -37,7 +37,7 @@ impl Params {
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
             "INSERT INTO assessment_medication_items (medication_name, dose, frequency, \
-            route, prescriber, reason, start_date, sort_order, assessment_medication_id) \
+            route, prescriber, reason, start_date, sort_order, medications_id) \
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
         )
         .bind(&self.medication_name)
@@ -48,7 +48,7 @@ impl Params {
         .bind(&self.reason)
         .bind(self.start_date)
         .bind(self.sort_order)
-        .bind(self.assessment_medication_id)
+        .bind(self.medications_id)
         .fetch_one(db)
         .await
     }
@@ -58,7 +58,7 @@ impl Params {
         sqlx::query_as(
             "UPDATE assessment_medication_items SET medication_name = $2, dose = $3, \
             frequency = $4, route = $5, prescriber = $6, reason = $7, start_date = $8, \
-            sort_order = $9, assessment_medication_id = $10, updated_at = now() WHERE id \
+            sort_order = $9, medications_id = $10, updated_at = now() WHERE id \
             = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
@@ -70,7 +70,7 @@ impl Params {
         .bind(&self.reason)
         .bind(self.start_date)
         .bind(self.sort_order)
-        .bind(self.assessment_medication_id)
+        .bind(self.medications_id)
         .fetch_optional(db)
         .await
     }

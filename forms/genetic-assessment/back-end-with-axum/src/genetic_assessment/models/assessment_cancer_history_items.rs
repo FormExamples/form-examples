@@ -28,7 +28,7 @@ pub struct Model {
     /// Sort order.
     pub sort_order: i32,
     /// Assessment cancer history id.
-    pub assessment_cancer_history_id: Uuid,
+    pub cancer_history_id: Uuid,
 }
 /// Assessment cancer history items.
 pub type AssessmentCancerHistoryItems = Model;

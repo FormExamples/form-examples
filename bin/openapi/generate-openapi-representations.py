@@ -217,8 +217,10 @@ def sql_to_openapi(col):
     if 'BYTEA' in t or 'BLOB' in t:
         return [('type', 'string'), ('format', 'byte')]
 
-    # JSON
+    # JSON: an array when sql/ defaults it to one, otherwise an object.
     if 'JSON' in t:
+        if re.search(r"DEFAULT\s+'\[", col['definition'], re.I):
+            return [('type', 'array')]
         return [('type', 'object')]
 
     # CHAR(n) / VARCHAR(n) — carry maxLength

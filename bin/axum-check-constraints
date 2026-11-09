@@ -22,7 +22,10 @@ A second migration, `20261107700000_length_constraints`, holds the lengths of
 `sql/`'s `VARCHAR(n)` and `CHAR(n)` columns as `char_length(column) <= n` checks,
 `NOT VALID` likewise, because the crates' columns were migrated without a length.
 
-A CHECK naming a column the crate's table lacks is skipped and counted.
+A CHECK naming a column the crate's table lacks is skipped and counted. The tool
+reads only the migrations older than its own, so a column added later never
+rewrites a migration a database has already run: that column's CHECKs go in the
+migration that adds it (see bin/axum-sql-columns).
 
 Usage:
   bin/axum-check-constraints <slug>...          # named forms
@@ -106,7 +109,7 @@ def migration(crate: Path) -> tuple[str, str, int, int]:
     """The up and down SQL, and how many CHECKs were kept and skipped."""
     form = crate.parent
     wanted = ac.sql_tables(form)
-    migrated = ac.migration_tables(crate)
+    migrated = ac.migration_tables(crate, before=STAMP)
     up, down, used = [], [], Counter()
     skipped = 0
     for table, column, expression in sql_checks(form):
@@ -158,7 +161,7 @@ def name_for(base: str) -> str:
 def length_migration(crate: Path) -> tuple[str, str, int]:
     form = crate.parent
     wanted = ac.sql_tables(form)
-    migrated = ac.migration_tables(crate)
+    migrated = ac.migration_tables(crate, before=STAMP)
     up, down, seen = [], [], set()
     for table, column, size in sql_lengths(form):
         target = ac.resolve(table, wanted[table], migrated) if table in wanted else None

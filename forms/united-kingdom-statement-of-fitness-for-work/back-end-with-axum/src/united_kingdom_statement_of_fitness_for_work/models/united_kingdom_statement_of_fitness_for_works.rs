@@ -48,6 +48,7 @@ pub struct Model {
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub medical_practice_id: Uuid,
+    pub is_duplicate_of: Option<Uuid>,
 }
 
 impl Model {

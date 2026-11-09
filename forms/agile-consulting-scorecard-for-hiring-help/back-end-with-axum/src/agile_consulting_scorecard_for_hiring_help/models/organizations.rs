@@ -74,11 +74,11 @@ impl Model {
             updated_at = now() WHERE respondent_id IN (SELECT id FROM child1) AND \
             deleted_at IS NULL RETURNING id), child4 AS (UPDATE \
             agile_consulting_scorecard_for_hiring_help_grades SET deleted_at = now(), \
-            updated_at = now() WHERE agile_consulting_scorecard_for_hiring_help_id IN \
+            updated_at = now() WHERE agile_consulting_scorecard_id IN \
             (SELECT id FROM child2) AND deleted_at IS NULL RETURNING id), child5 AS \
             (UPDATE agile_consulting_scorecard_for_hiring_help_grades SET deleted_at = \
             now(), updated_at = now() WHERE \
-            agile_consulting_scorecard_for_hiring_help_id IN (SELECT id FROM child3) AND \
+            agile_consulting_scorecard_id IN (SELECT id FROM child3) AND \
             deleted_at IS NULL RETURNING id), child6 AS (UPDATE \
             agile_consulting_scorecard_for_hiring_help_grade_rules SET deleted_at = \
             now(), updated_at = now() WHERE agile_consulting_scorecard_grade_id IN \

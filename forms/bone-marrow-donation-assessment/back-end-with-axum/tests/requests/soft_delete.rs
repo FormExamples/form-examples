@@ -23,7 +23,7 @@ async fn delete_hides_the_row_and_keeps_it() {
         .await
         .unwrap();
         let row2: Uuid = sqlx::query_scalar(
-            "INSERT INTO grades (graded_at, bone_marrow_donation_assessment_id) VALUES \
+            "INSERT INTO grades (graded_at, assessment_id) VALUES \
             (now(), $1) RETURNING id",
         )
         .bind(row1)

@@ -45,7 +45,7 @@
   phasedReturnApplicable: "yes"
   phasedReturnTemplate: "2-week"
   phasedReturnTargetDate: "1990-01-01"
-  phasedReturnScheduleJson: {}
+  phasedReturnScheduleJson: []
   phasedReturnSupportContact: "Test phasedReturnSupportContact"
   workstationReviewRequired: "yes"
   additionalAdjustmentsText: "Test additionalAdjustmentsText"

@@ -70,7 +70,7 @@ impl Model {
             "WITH target AS (UPDATE assessment_cancer_histories SET deleted_at = now(), \
             updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING id), \
             child1 AS (UPDATE assessment_cancer_history_items SET deleted_at = now(), \
-            updated_at = now() WHERE assessment_cancer_history_id IN (SELECT id FROM \
+            updated_at = now() WHERE cancer_history_id IN (SELECT id FROM \
             target) AND deleted_at IS NULL RETURNING id) SELECT count(*) FROM target",
         )
         .bind(id)

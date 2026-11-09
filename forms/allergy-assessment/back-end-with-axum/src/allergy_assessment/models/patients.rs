@@ -87,7 +87,7 @@ impl Model {
             RETURNING id), child7 AS (UPDATE grades SET deleted_at = now(), updated_at = \
             now() WHERE assessment_id IN (SELECT id FROM child1) AND deleted_at IS NULL \
             RETURNING id), child8 AS (UPDATE assessment_drug_allergy_items SET \
-            deleted_at = now(), updated_at = now() WHERE assessment_drug_allergy_id IN \
+            deleted_at = now(), updated_at = now() WHERE drug_allergies_id IN \
             (SELECT id FROM child2) AND deleted_at IS NULL RETURNING id), child9 AS \
             (UPDATE assessment_food_allergy_items SET deleted_at = now(), updated_at = \
             now() WHERE food_allergies_id IN (SELECT id FROM child3) AND deleted_at IS \

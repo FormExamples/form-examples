@@ -2218,6 +2218,13 @@ components:
           - community
           - ''
           description: Care setting in which the fit note was issued.
+        isDuplicateOf:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: If this is a duplicate (DWP policy 3.7 — only if the original was lost), points
+            to the original fit note.
         safeguardingConcern:
           type: string
           enum:

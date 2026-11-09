@@ -1730,6 +1730,11 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
+        agileConsultingScorecardId:
+          type: string
+          format: uuid
+          description: Foreign key to the parent agile_consulting_scorecard_for_hiring_help row (unique,
+            1:1).
         scoreTotal:
           type:
           - integer
@@ -1807,6 +1812,7 @@ components:
       required:
       - createdAt
       - updatedAt
+      - agileConsultingScorecardId
       - computedBand
       - finalBand
       - overrideReason

@@ -2619,6 +2619,10 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
+        cancerHistoryId:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment_cancer_history table.
         relativeRelationship:
           type: string
           maxLength: 50
@@ -2648,6 +2652,7 @@ components:
       required:
       - createdAt
       - updatedAt
+      - cancerHistoryId
       - relativeRelationship
       - cancerType
       - outcome

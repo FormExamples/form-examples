@@ -2643,7 +2643,7 @@ components:
           format: date
           description: Target date for full-hours resumption.
         phasedReturnScheduleJson:
-          type: object
+          type: array
           description: Ordered list of {week, hoursPerWeek, daysPerWeek, notes} entries.
         phasedReturnSupportContact:
           type: string

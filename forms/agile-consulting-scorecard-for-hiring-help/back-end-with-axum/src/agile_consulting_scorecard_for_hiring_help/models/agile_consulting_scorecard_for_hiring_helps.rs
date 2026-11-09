@@ -99,7 +99,7 @@ impl Model {
             deleted_at = now(), updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
             RETURNING id), child1 AS (UPDATE \
             agile_consulting_scorecard_for_hiring_help_grades SET deleted_at = now(), \
-            updated_at = now() WHERE agile_consulting_scorecard_for_hiring_help_id IN \
+            updated_at = now() WHERE agile_consulting_scorecard_id IN \
             (SELECT id FROM target) AND deleted_at IS NULL RETURNING id), child2 AS \
             (UPDATE agile_consulting_scorecard_for_hiring_help_grade_rules SET \
             deleted_at = now(), updated_at = now() WHERE \

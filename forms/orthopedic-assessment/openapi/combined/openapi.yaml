@@ -3684,6 +3684,10 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
+        rangeOfMotionId:
+          type: string
+          format: uuid
+          description: Foreign key to the assessment_range_of_motion table.
         movement:
           type: string
           maxLength: 50
@@ -3731,6 +3735,7 @@ components:
       required:
       - createdAt
       - updatedAt
+      - rangeOfMotionId
       - movement
       - endFeel
       - painOnMovement

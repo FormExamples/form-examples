@@ -104,6 +104,23 @@ for them.
 
 ### Fixed
 
+- **Every `sql/` column is in its crate, under its `sql/` name.** The scaffold left 27
+  columns out of 4 crates, so the API dropped what the forms collected:
+  outpatient-outcome's 24 EQ-5D-5L and PROMIS answers and scores, the NEWS2 and
+  satisfaction score breakdowns, and the fit note's link to the note it duplicates.
+  Each crate now migrates them, with their `sql/` CHECKs `NOT VALID`, and takes them
+  as optional fields, so a client that leaves them out still works. 14 foreign keys
+  in 14 crates were named after their parent table and now carry their `sql/` name
+  (patient-intake's `assessmentMedicationId` is `medicationsId`), which the served
+  `openapi.yaml` already documented. heart-health-check's additional flags now belong
+  to a grade, as in `sql/`, rather than straight to the assessment: each stored flag
+  moves to its assessment's grade, and an assessment flagged before it was graded
+  gets a draft grade. `bin/axum-sql-columns --check` keeps the crates in step.
+- **A JSONB list is an array in OpenAPI.** The generator called every JSONB column an
+  object, so encounter-satisfaction's `domainScores` and return-to-work's
+  `phasedReturnScheduleJson`, which `sql/` defaults to `'[]'`, were documented wrongly;
+  return-to-work's seed also stored `{}` there and now stores `[]`.
+
 - The served OpenAPI documents named every property in snake_case and typed every
   column as non-null, where the crates send camelCase and `null`. They now match
   what is sent, checked against live responses from every crate. Seven crates serve

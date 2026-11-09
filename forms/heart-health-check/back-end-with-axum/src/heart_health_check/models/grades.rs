@@ -70,9 +70,11 @@ impl Model {
         sqlx::query(
             "WITH target AS (UPDATE grades SET deleted_at = now(), updated_at = now() \
             WHERE id = $1 AND deleted_at IS NULL RETURNING id), child1 AS (UPDATE \
-            grading_fired_rules SET deleted_at = now(), updated_at = now() WHERE \
-            grade_id IN (SELECT id FROM target) AND deleted_at IS NULL RETURNING id) \
-            SELECT count(*) FROM target",
+            grading_additional_flags SET deleted_at = now(), updated_at = now() WHERE \
+            grade_id IN (SELECT id FROM target) AND deleted_at IS NULL RETURNING id), \
+            child2 AS (UPDATE grading_fired_rules SET deleted_at = now(), updated_at = \
+            now() WHERE grade_id IN (SELECT id FROM target) AND deleted_at IS NULL \
+            RETURNING id) SELECT count(*) FROM target",
         )
         .bind(id)
         .execute(db)

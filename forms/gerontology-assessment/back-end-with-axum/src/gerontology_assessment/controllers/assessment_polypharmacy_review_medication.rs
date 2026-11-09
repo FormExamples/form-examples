@@ -27,7 +27,7 @@ pub struct Params {
     /// Sort order.
     pub sort_order: i32,
     /// Assessment polypharmacy review id.
-    pub assessment_polypharmacy_review_id: Uuid,
+    pub polypharmacy_review_id: Uuid,
 }
 
 impl Params {
@@ -36,7 +36,7 @@ impl Params {
         sqlx::query_as(
             "INSERT INTO assessment_polypharmacy_review_medications (medication_name, \
             dose, frequency, route, indication, is_prn, sort_order, \
-            assessment_polypharmacy_review_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) \
+            polypharmacy_review_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) \
             RETURNING *",
         )
         .bind(&self.medication_name)
@@ -46,7 +46,7 @@ impl Params {
         .bind(&self.indication)
         .bind(&self.is_prn)
         .bind(self.sort_order)
-        .bind(self.assessment_polypharmacy_review_id)
+        .bind(self.polypharmacy_review_id)
         .fetch_one(db)
         .await
     }
@@ -56,7 +56,7 @@ impl Params {
         sqlx::query_as(
             "UPDATE assessment_polypharmacy_review_medications SET medication_name = $2, \
             dose = $3, frequency = $4, route = $5, indication = $6, is_prn = $7, \
-            sort_order = $8, assessment_polypharmacy_review_id = $9, updated_at = now() \
+            sort_order = $8, polypharmacy_review_id = $9, updated_at = now() \
             WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
@@ -67,7 +67,7 @@ impl Params {
         .bind(&self.indication)
         .bind(&self.is_prn)
         .bind(self.sort_order)
-        .bind(self.assessment_polypharmacy_review_id)
+        .bind(self.polypharmacy_review_id)
         .fetch_optional(db)
         .await
     }

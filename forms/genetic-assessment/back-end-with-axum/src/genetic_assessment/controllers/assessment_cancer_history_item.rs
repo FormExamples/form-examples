@@ -23,7 +23,7 @@ pub struct Params {
     /// Sort order.
     pub sort_order: i32,
     /// Assessment cancer history id.
-    pub assessment_cancer_history_id: Uuid,
+    pub cancer_history_id: Uuid,
 }
 
 impl Params {
@@ -32,14 +32,14 @@ impl Params {
         sqlx::query_as(
             "INSERT INTO assessment_cancer_history_items (relative_relationship, \
             cancer_type, age_at_diagnosis, outcome, sort_order, \
-            assessment_cancer_history_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+            cancer_history_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
         )
         .bind(&self.relative_relationship)
         .bind(&self.cancer_type)
         .bind(self.age_at_diagnosis)
         .bind(&self.outcome)
         .bind(self.sort_order)
-        .bind(self.assessment_cancer_history_id)
+        .bind(self.cancer_history_id)
         .fetch_one(db)
         .await
     }
@@ -49,7 +49,7 @@ impl Params {
         sqlx::query_as(
             "UPDATE assessment_cancer_history_items SET relative_relationship = $2, \
             cancer_type = $3, age_at_diagnosis = $4, outcome = $5, sort_order = $6, \
-            assessment_cancer_history_id = $7, updated_at = now() WHERE id = $1 AND \
+            cancer_history_id = $7, updated_at = now() WHERE id = $1 AND \
             deleted_at IS NULL RETURNING *",
         )
         .bind(id)
@@ -58,7 +58,7 @@ impl Params {
         .bind(self.age_at_diagnosis)
         .bind(&self.outcome)
         .bind(self.sort_order)
-        .bind(self.assessment_cancer_history_id)
+        .bind(self.cancer_history_id)
         .fetch_optional(db)
         .await
     }

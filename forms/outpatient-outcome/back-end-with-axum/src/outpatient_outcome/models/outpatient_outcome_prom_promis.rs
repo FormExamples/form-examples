@@ -6,7 +6,7 @@ use crate::support::prelude::*;
 
 /// One row.
 #[allow(missing_docs)]
-#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize, sqlx::FromRow)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize, sqlx::FromRow)]
 #[serde(rename_all = "camelCase")]
 pub struct Model {
     pub created_at: DateTimeWithTimeZone,
@@ -15,6 +15,18 @@ pub struct Model {
     #[serde(skip)]
     pub deleted_at: Option<DateTimeWithTimeZone>,
     pub outpatient_outcome_id: Uuid,
+    pub item1_general_health: Option<i32>,
+    pub item2_quality_of_life: Option<i32>,
+    pub item3_physical_health: Option<i32>,
+    pub item4_mental_health: Option<i32>,
+    pub item5_social_activities: Option<i32>,
+    pub item6_carry_out_physical: Option<i32>,
+    pub item7_emotional_problems: Option<i32>,
+    pub item8_fatigue: Option<i32>,
+    pub item9_pain: Option<i32>,
+    pub item10_everyday_activities: Option<i32>,
+    pub global_physical_health_t_score: Option<f64>,
+    pub global_mental_health_t_score: Option<f64>,
 }
 
 impl Model {

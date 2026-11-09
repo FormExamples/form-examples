@@ -4144,6 +4144,10 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
+        gradeId:
+          type: string
+          format: uuid
+          description: Foreign key to the grade table.
         flagId:
           type: string
           maxLength: 30
@@ -4165,6 +4169,7 @@ components:
       required:
       - createdAt
       - updatedAt
+      - gradeId
       - flagId
       - category
       - message

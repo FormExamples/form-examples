@@ -73,7 +73,7 @@ impl Model {
             bone_marrow_donation_assessments SET deleted_at = now(), updated_at = now() \
             WHERE patient_id IN (SELECT id FROM target) AND deleted_at IS NULL RETURNING \
             id), child2 AS (UPDATE grades SET deleted_at = now(), updated_at = now() \
-            WHERE bone_marrow_donation_assessment_id IN (SELECT id FROM child1) AND \
+            WHERE assessment_id IN (SELECT id FROM child1) AND \
             deleted_at IS NULL RETURNING id), child3 AS (UPDATE grading_fired_rules SET \
             deleted_at = now(), updated_at = now() WHERE grade_id IN (SELECT id FROM \
             child2) AND deleted_at IS NULL RETURNING id), child4 AS (UPDATE \

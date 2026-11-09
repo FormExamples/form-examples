@@ -15,6 +15,8 @@ pub struct Params {
     pub has_any_single_score_3: bool,
     pub supplemental_oxygen: String,
     pub scored_at: DateTimeWithTimeZone,
+    #[serde(default)]
+    pub parameter_scores: Option<serde_json::Value>,
 }
 
 impl Params {
@@ -22,8 +24,8 @@ impl Params {
     async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
         sqlx::query_as(
             "INSERT INTO news2_results (casualty_card_id, total_score, clinical_response, \
-            has_any_single_score_3, supplemental_oxygen, scored_at) VALUES ($1, $2, $3, \
-            $4, $5, $6) RETURNING *",
+            has_any_single_score_3, supplemental_oxygen, scored_at, parameter_scores) \
+            VALUES ($1, $2, $3, $4, $5, $6, COALESCE($7, '{}')) RETURNING *",
         )
         .bind(self.casualty_card_id)
         .bind(self.total_score)
@@ -31,6 +33,7 @@ impl Params {
         .bind(self.has_any_single_score_3)
         .bind(&self.supplemental_oxygen)
         .bind(self.scored_at)
+        .bind(&self.parameter_scores)
         .fetch_one(db)
         .await
     }
@@ -40,8 +43,8 @@ impl Params {
         sqlx::query_as(
             "UPDATE news2_results SET casualty_card_id = $2, total_score = $3, \
             clinical_response = $4, has_any_single_score_3 = $5, supplemental_oxygen = \
-            $6, scored_at = $7, updated_at = now() WHERE id = $1 AND deleted_at IS NULL \
-            RETURNING *",
+            $6, scored_at = $7, parameter_scores = COALESCE($8, parameter_scores), \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
         )
         .bind(id)
         .bind(self.casualty_card_id)
@@ -50,6 +53,7 @@ impl Params {
         .bind(self.has_any_single_score_3)
         .bind(&self.supplemental_oxygen)
         .bind(self.scored_at)
+        .bind(&self.parameter_scores)
         .fetch_optional(db)
         .await
     }

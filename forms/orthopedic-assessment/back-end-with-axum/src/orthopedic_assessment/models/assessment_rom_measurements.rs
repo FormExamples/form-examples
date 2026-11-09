@@ -32,7 +32,7 @@ pub struct Model {
     /// Sort order.
     pub sort_order: i32,
     /// Assessment range of motion id.
-    pub assessment_range_of_motion_id: Uuid,
+    pub range_of_motion_id: Uuid,
 }
 /// Assessment rom measurements.
 pub type AssessmentRomMeasurements = Model;

@@ -25,8 +25,8 @@ pub struct Model {
     pub message: String,
     /// Priority.
     pub priority: String,
-    /// Assessment id.
-    pub assessment_id: Uuid,
+    /// Grade id.
+    pub grade_id: Uuid,
 }
 /// Grading additional flags.
 pub type GradingAdditionalFlags = Model;
