@@ -21,8 +21,8 @@ importers:
         specifier: ^0.3.0
         version: 0.3.0(svelte@5.57.2)
       '@lilydesignsystem/svelte-share-picker':
-        specifier: ^0.2.0
-        version: 0.2.0(svelte@5.57.2)
+        specifier: ^0.3.2
+        version: 0.3.2(@lilydesignsystem/svelte-headless@0.8.0(svelte@5.57.2))(svelte@5.57.2)
       '@lilydesignsystem/svelte-text-size-picker':
         specifier: ^0.2.0
         version: 0.2.0(svelte@5.57.2)
@@ -249,6 +249,12 @@ packages:
     peerDependencies:
       svelte: ^5.0.0
 
+  '@lilydesignsystem/svelte-headless@0.8.0':
+    resolution: {integrity: sha512-IJBDWHM/nlnpr20bytWl11JBY23nS56DY0bSTTcBIKUoymAyv5y8HIML69nljc9TdFeV2fPPOeKDS3YKnXh/zQ==}
+    engines: {node: '>=26'}
+    peerDependencies:
+      svelte: ^5.0.0
+
   '@lilydesignsystem/svelte-link-picker@0.1.1':
     resolution: {integrity: sha512-TmgAbQ45eeR16J6GxBlfepp7iNKzL5LUBozCCBDbDZTbmWz+I9J/OEsy39XsQy3D4LCJMnQ1o2qoAbUny7ncog==}
     engines: {node: '=26'}
@@ -277,6 +283,13 @@ packages:
     resolution: {integrity: sha512-/W+yda4IEfEhaMWdEh4kVvHUQKz/pbFtuaoxgOZMg65JhMcKjWeis9J3OHQ69o5LIK+AFxFhDCqDh/g/8gSDGQ==}
     engines: {node: '=26'}
     peerDependencies:
+      svelte: ^5.0.0
+
+  '@lilydesignsystem/svelte-share-picker@0.3.2':
+    resolution: {integrity: sha512-GdFnr8TjLgqp5BTYX6YbKvt3vThYu6a/GJNu97zew3ZoxwV9h2VGNR18woTGZ3q53Wk20OuHTQ0JcqpE1DA5Mw==}
+    engines: {node: '>=26'}
+    peerDependencies:
+      '@lilydesignsystem/svelte-headless': '>=0.4.0 <1.0.0'
       svelte: ^5.0.0
 
   '@lilydesignsystem/svelte-text-size-picker@0.2.0':
@@ -1028,6 +1041,11 @@ snapshots:
       aria-query: 5.3.2
       svelte: 5.57.2
 
+  '@lilydesignsystem/svelte-headless@0.8.0(svelte@5.57.2)':
+    dependencies:
+      aria-query: 5.3.2
+      svelte: 5.57.2
+
   '@lilydesignsystem/svelte-link-picker@0.1.1(svelte@5.57.2)':
     dependencies:
       '@lilydesignsystem/svelte-headless': 0.2.0(svelte@5.57.2)
@@ -1056,6 +1074,11 @@ snapshots:
   '@lilydesignsystem/svelte-share-picker@0.2.0(svelte@5.57.2)':
     dependencies:
       '@lilydesignsystem/svelte-headless': 0.2.0(svelte@5.57.2)
+      svelte: 5.57.2
+
+  '@lilydesignsystem/svelte-share-picker@0.3.2(@lilydesignsystem/svelte-headless@0.8.0(svelte@5.57.2))(svelte@5.57.2)':
+    dependencies:
+      '@lilydesignsystem/svelte-headless': 0.8.0(svelte@5.57.2)
       svelte: 5.57.2
 
   '@lilydesignsystem/svelte-text-size-picker@0.2.0(svelte@5.57.2)':
