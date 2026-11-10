@@ -24,7 +24,8 @@ Every document also describes `GET /api/openapi.yaml` itself, and an operation t
 crate does not serve, such as a `PUT` a hand-written controller lacks, is left out.
 
 `--check` fails when a combined document is stale, and when a route the crate
-serves is not documented, or a documented one is not served, method by method.
+serves is not documented, or a documented one is not served, method by method,
+and when two operations share an `operationId`.
 
 Generated artefact: do not hand-edit. Idempotent.
 
@@ -37,6 +38,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 import re
 import sys
 from pathlib import Path
@@ -277,11 +279,13 @@ def main() -> int:
             have = out.read_text() if out.exists() else ""
             if have != want:
                 drift.append(slug)
-            documented = {
-                (method, path)
-                for path, item in (yaml.load(want.split("\n", 2)[2], Loader=LOADER).get("paths") or {}).items()
-                for method in item if method in METHODS
-            }
+            paths = yaml.load(want.split("\n", 2)[2], Loader=LOADER).get("paths") or {}
+            documented = {(method, path) for path, item in paths.items() for method in item if method in METHODS}
+            ids = Counter(item[method].get("operationId") for path, item in paths.items()
+                          for method in item if method in METHODS)
+            for name, count in sorted(ids.items(), key=lambda pair: str(pair[0])):
+                if name and count > 1:
+                    gaps.append(f"{slug}: operationId {name} is used {count} times")
             normal = lambda ops: {(m, shape(p)) for m, p in ops}
             served = normal(served_operations(slug))
             documented = normal(documented)

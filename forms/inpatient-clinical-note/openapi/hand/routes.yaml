@@ -41,7 +41,7 @@ paths:
                 $ref: '#/components/schemas/Problem'
     get:
       summary: The newest stored grade of the note
-      operationId: getInpatientClinicalNoteGrade
+      operationId: getNewestInpatientClinicalNoteGrade
       responses:
         '200':
           description: The newest stored grade, without the engine result

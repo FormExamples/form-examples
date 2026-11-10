@@ -258,7 +258,10 @@ jobs:
           from openapi_spec_validator import validate
           from openapi_spec_validator.readers import read_from_filename
           bad = []
+          # openapi/hand/ holds fragments, merged into and validated as combined/.
           for f in sorted(glob.glob("forms/*/openapi/**/*.yaml", recursive=True)):
+              if "/openapi/hand/" in f:
+                  continue
               try:
                   spec, _ = read_from_filename(f)
                   validate(spec)
