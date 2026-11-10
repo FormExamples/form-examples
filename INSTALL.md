@@ -102,7 +102,7 @@ createdb -h "$SOCK" -p 5433 -U postgres apgar_score_development
 
 ```sh
 cd forms/apgar-score/back-end-with-axum
-export DATABASE_URL="postgres://loco@localhost/apgar_score_development?host=$SOCK&port=5433"
+export DB_URL="postgres://postgres@localhost/apgar_score_development?host=$SOCK&port=5433"
 cargo run -- db migrate
 cargo run -- start
 ```
@@ -140,7 +140,7 @@ use does not fit it.
 The scaffolded crates ship development defaults on purpose, so that everything
 above is a one-command experience. They are not deployment settings.
 
-- Set `DATABASE_URL` and the rest from the environment. Each crate refuses
+- Set `DB_URL` and the rest from the environment. Each crate refuses
   production without it, and its development fallbacks must never ship.
 - Put the API behind your own authentication and authorization. The crates have
   none: they demonstrate the data shape and the routes, not an access-control design.

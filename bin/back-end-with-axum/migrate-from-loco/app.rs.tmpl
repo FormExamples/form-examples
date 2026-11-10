@@ -89,7 +89,7 @@ impl App {
         .await?;
         let mut ctx = AppContext::new(environment, (), config);
         ctx.shared_store.insert(pool.clone());
-        // `/_readiness` fails when the database stops answering.
+        // `/_health/ready` fails when the database stops answering.
         ctx.health_checks = Checks::new().add("database", move || {
             let pool = pool.clone();
             async move { ping(&pool).await }

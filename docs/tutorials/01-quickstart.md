@@ -75,14 +75,14 @@ pnpm exec vitest run    # engine unit tests
 ## 3. The Axum JSON API (Rust back-end)
 
 The back-end is a Rust axum + axa + sqlx crate — one crate per form, one table per SQL
-entity. It reads `DATABASE_URL` (default
+entity. It reads `DB_URL` (default
 `postgres://postgres:postgres@localhost:5432/apgar_score_test`) and needs a reachable
 Postgres.
 
 ### 3a. A throwaway Postgres
 
 If you already run Postgres on `localhost:5432` with a `postgres` superuser, skip to
-3b and use the default `DATABASE_URL`. Otherwise spin up a disposable instance
+3b and use the default `DB_URL`. Otherwise spin up a disposable instance
 (the same recipe as `CONTRIBUTING.md`, using a **short** socket directory
 because Unix socket paths are length-limited):
 
@@ -98,7 +98,7 @@ createdb -h "$SOCK" -p 5433 -U postgres apgar_score_development
 
 ```sh
 cd forms/apgar-score/back-end-with-axum
-export DATABASE_URL="postgres://loco@localhost/apgar_score_development?host=$SOCK&port=5433"
+export DB_URL="postgres://postgres@localhost/apgar_score_development?host=$SOCK&port=5433"
 cargo run -- db migrate
 cargo run -- start
 ```

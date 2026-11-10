@@ -102,7 +102,7 @@ Loco-specific parts of ADR-2 and ADR-4; the Postgres-only queue stands.
 
 **Consequences.** (+) About 30% fewer transitive dependencies per crate. (+) A
 reviewer reads exactly the SQL that runs. (+) Production refuses to boot without
-`DATABASE_URL`, and refuses to issue tokens without `JWT_SECRET`. (−) Queries are
+`DB_URL`, and refuses to issue tokens without `JWT_SECRET`. (−) Queries are
 checked by the test suite, not at compile time. (−) No generator scaffolds a new
 crate, so a new form starts from a copy of an existing one. (−) The drift checks
 between `sql/` and migrations (`loco-migration-defaults`,

@@ -181,7 +181,7 @@ own bands map onto ESI where the mapping is not self-evident.
   request or response body, and uniqueness covers live rows only.
 - Database name pattern: `<slug_snake>_development`, `<slug_snake>_test`,
   `<slug_snake>_production`. Connection string for production lives in
-  `DATABASE_URL`.
+  `DB_URL`.
 - `Cargo.lock` is tracked in git (binary crate); see
   [`spec/cargo-lock-tracking.md`](spec/cargo-lock-tracking.md).
 

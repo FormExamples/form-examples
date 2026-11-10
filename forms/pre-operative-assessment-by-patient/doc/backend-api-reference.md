@@ -194,7 +194,7 @@ The engine is invoked via the `POST /api/assessments/{id}/grade` endpoint and st
 |----------|---------|
 | `PORT` | Server port |
 | `HOST` | Server host URL |
-| `DATABASE_URL` | PostgreSQL connection string |
+| `DB_URL` | PostgreSQL connection string |
 | `FRONTEND_URL` | Allowed CORS origin |
 
 ### Config Files

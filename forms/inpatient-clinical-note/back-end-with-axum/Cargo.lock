@@ -181,19 +181,20 @@ checksum = "f2032f911046de80f0a198e0901378627c33f59ea0ac00e363d481118bd70a53"
 
 [[package]]
 name = "axa"
-version = "0.10.0"
+version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "749003a8ad036a3290cfa8ba199784bb6cc3cb981dbafaa40aced8cefeb0d48f"
+checksum = "3c68930771c74b20f9b2f5d33a6bb16cb00401d373393b13013e76b322ffbb3c"
 dependencies = [
  "async-trait",
  "axa-cursor-pagination",
  "axa-environment",
  "axa-postgres-job-queue",
- "axa-problem-details-for-http-apis",
+ "axa-problem",
  "axa-request-rate-limit",
  "axa-sqlx",
  "axum",
  "clap",
+ "http-body-util",
  "hyper",
  "hyper-util",
  "serde",
@@ -205,6 +206,7 @@ dependencies = [
  "tracing",
  "tracing-subscriber",
  "uuid",
+ "validator",
 ]
 
 [[package]]
@@ -222,9 +224,9 @@ dependencies = [
 
 [[package]]
 name = "axa-environment"
-version = "0.1.1"
+version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "aeb36293430bafb06d1e29f5e213623d127444cdd234003b413a46207c03bbd3"
+checksum = "b9bdc35432012724d2a1a528ae83fc1117640f64ef910bbb46df8ad0261ebb15"
 
 [[package]]
 name = "axa-postgres-job-queue"
@@ -240,10 +242,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "axa-problem-details-for-http-apis"
-version = "0.1.0"
+name = "axa-problem"
+version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5f38120df3cab7c23d904781dab36f2b11b6167b260eaf9b89284539e32f759f"
+checksum = "86d84bba954b07bd001fa9e91524ac6e594eabb062aa9a1f075d6614337f9e3a"
 dependencies = [
  "axum",
  "serde",
@@ -252,11 +254,11 @@ dependencies = [
 
 [[package]]
 name = "axa-request-rate-limit"
-version = "0.2.0"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b21a6d7122840293b59a2eabd62e92865a6945e4dfa8101996deb41d203ab04c"
+checksum = "57564cb5db808613c8c2be18755e849e5118999c27c25d5a6ccf17d6dca46e43"
 dependencies = [
- "axa-problem-details-for-http-apis",
+ "axa-problem",
  "axum",
  "serde_json",
  "tracing",
@@ -264,18 +266,18 @@ dependencies = [
 
 [[package]]
 name = "axa-sqlx"
-version = "0.1.2"
+version = "0.1.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9cd2ea55e649597a7b8ad96ba4801500887a9eca630fd32b4d36c820a54c3028"
+checksum = "9cffa9a42afe521a2831f5554f2accfecccab7c4ddcc429f39d36c531cac2a35"
 dependencies = [
  "sqlx",
 ]
 
 [[package]]
 name = "axa-test"
-version = "0.1.0"
+version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b4d675f10aa4fdfa3ae28b903c5eb0173026afbc247992b348dc9ec539981000"
+checksum = "31e4ddef189464f706dcec0a02daf9087f1bf6fbdcb27d070beeb347198fd89f"
 dependencies = [
  "axa",
  "axum-test",

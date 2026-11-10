@@ -57,7 +57,7 @@ and flag IDs with the JS and TypeScript engines — see
 
 Settings come from the environment, with defaults in code; there are no
 configuration files. `APP_ENV` picks `development`, `test`, or `production`, and
-`DATABASE_URL` defaults to `postgres://postgres:postgres@localhost:5432/<form>_<env>`
+`DB_URL` defaults to `postgres://postgres:postgres@localhost:5432/<form>_<env>`
 outside production, where it is required. The `_development`, `_test`, and
 `_production` databases follow the `<form_snake_case>_<env>` naming. The full list
 is in [`AGENTS/back-end-with-axum.md`](../AGENTS/back-end-with-axum.md).

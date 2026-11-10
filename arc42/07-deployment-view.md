@@ -38,13 +38,13 @@ flowchart TD
 | **HTML front-end** | none (no build step) | Static files served over HTTP or `file://`; self-contained; talks to the API via `fetch /api/...` with a sample-data fallback. |
 | **Svelte front-end** | SvelteKit adapter build (`pnpm build`) | Adapter output (static or Node) served under `/<slug>/`; client-only SVAR grid on the dashboard route. |
 | **Axum back-end** | `cargo build --release` | axum service (default port 5150); one crate per form; JSON API only. |
-| **Database** | sqlx migrations (`cargo run -- db migrate`) | PostgreSQL 18; per-form databases `<slug_snake>_{development,test,production}`; production URL from `DATABASE_URL`. |
-| **Observability** | built into each crate | Structured logs, `/_health`, and `/_readiness`, which names a failed database or queue. No metrics or trace export. |
+| **Database** | sqlx migrations (`cargo run -- db migrate`) | PostgreSQL 18; per-form databases `<slug_snake>_{development,test,production}`; production URL from `DB_URL`. |
+| **Observability** | built into each crate | Structured logs, and `/_health/live`, `/_health/ready` (which names a failed database or queue) and `/_health/startup`. No metrics or trace export. |
 
 ## 7.3 Configuration
 
 Each form's settings come from the environment, with defaults in code
-(`APP_ENV`, `DATABASE_URL`, `PORT`, `HOST`, `CORS_ALLOWED_ORIGINS`).
+(`APP_ENV`, `DB_URL`, `PORT`, `HOST`, `CORS_ALLOWED_ORIGINS`).
 The Postgres-backed background queue reuses the main database URI; axa creates
 its own `axa_queue` table on first start. Test config runs workers
 `ForegroundBlocking` so queued jobs execute inline.

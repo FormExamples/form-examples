@@ -43,6 +43,16 @@ for them.
 
 ### Changed
 
+- **axa 0.11.** Every Axum crate moved from 0.10, with `bin/axum-axa-0-11`; axa-test
+  is 0.2. The crates read `DB_URL`, not `DATABASE_URL`, and production refuses to
+  boot without it, so CI, `bin/generate-api-transcripts`, the crates' CI files and
+  the docs use `DB_URL`. Health is `/_health/live`, `/_health/ready` and
+  `/_health/startup`; `/_ping`, `/_health` and `/_readiness` answer 404, so each
+  readiness test and the Playwright sweep moved. With no code change, a database
+  that cannot serve now answers 503 with `Retry-After`, and every response carries
+  cross-origin and permissions-policy headers. Before deploying, set `DB_URL` and
+  move probes. The setup docs connect as `postgres`, not the old `loco` role.
+
 - **axa 0.10.** Every Axum crate moved from 0.9.1, with `bin/axum-axa-0-10`. The
   `testing` feature became its own crate, so the dev-dependency is `axa-test = "0.1"`
   and tests import `axa_test::prelude`; `axa::prelude` no longer brings in

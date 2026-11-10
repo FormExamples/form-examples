@@ -98,5 +98,5 @@ jobs:
           args: --all-features --all
         env:
           REDIS_URL: redis://localhost:${{job.services.redis.ports[6379]}}
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres_test
+          DB_URL: postgres://postgres:postgres@localhost:5432/postgres_test
           

@@ -340,7 +340,7 @@ def capture_crate(slug: str, write: bool, run_port: int) -> tuple[str, str]:
     db_err = fresh_database(dbname)
     if db_err:
         return "SKIP", db_err
-    env = {**os.environ, "APP_ENV": "development", "DATABASE_URL": database_url(dbname)}
+    env = {**os.environ, "APP_ENV": "development", "DB_URL": database_url(dbname)}
 
     migrate = run(["cargo", "run", "-q", "--bin", bin_name, "--", "db", "migrate"], crate_dir, env, timeout=900)
     if migrate.returncode != 0:

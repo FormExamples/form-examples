@@ -2,9 +2,10 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-100 tools.
+101 tools.
 
 - [`bin/axum-axa-0-10`](#axum-axa-0-10)
+- [`bin/axum-axa-0-11`](#axum-axa-0-11)
 - [`bin/axum-axa-0-7`](#axum-axa-0-7)
 - [`bin/axum-axa-0-8`](#axum-axa-0-8)
 - [`bin/axum-axa-0-9`](#axum-axa-0-9)
@@ -136,6 +137,38 @@ Usage:
   bin/axum-axa-0-10 --all --no-lock    # leave Cargo.lock to `cargo update`
   bin/axum-axa-0-10 --root DIR <slug>  # a copy of forms/ at DIR
   bin/axum-axa-0-10 --check --all      # CI drift check (non-zero on drift)
+```
+
+<h2 id="axum-axa-0-11"><code>bin/axum-axa-0-11</code></h2>
+
+```text
+bin/axum-axa-0-11 — move each form's `back-end-with-axum/` from axa 0.10 to 0.11.
+
+What it changes in a crate:
+
+  Cargo.toml                axa 0.11 and axa-test 0.2
+  tests/**/readiness.rs     `/_readiness` becomes `/_health/ready`
+  .github/workflows/ci.yaml `DATABASE_URL` becomes `DB_URL`
+  Cargo.lock                axa 0.11 and axa-test 0.2, by
+                            `cargo update -p axa -p axa-test`, so nothing else in
+                            the lock moves; unless --no-lock
+
+0.11 reads `DB_URL`, not `DATABASE_URL` (production refuses to boot without it),
+and serves health at `/_health/live`, `/_health/ready` and `/_health/startup`;
+`/_ping`, `/_health` and `/_readiness` answer 404. What else it breaks is unused
+here: no crate calls `body_limit` or depends on an axa subcrate directly. It also answers 503 with `Retry-After`, not 500, when the
+database cannot serve, and adds cross-origin and permissions-policy headers;
+see help/upgrading-to-0.11 in axa. Set `DB_URL` and move probes before deploying.
+
+A crate already moved is skipped, so the tool can be rerun. A crate whose axa
+lines differ from the expected shape stops the run before anything is written.
+
+Usage:
+  bin/axum-axa-0-11 <slug>...          # named forms
+  bin/axum-axa-0-11 --all              # every form's Axum crate
+  bin/axum-axa-0-11 --all --no-lock    # leave Cargo.lock to `cargo update`
+  bin/axum-axa-0-11 --root DIR <slug>  # a copy of forms/ at DIR
+  bin/axum-axa-0-11 --check --all      # CI drift check (non-zero on drift)
 ```
 
 <h2 id="axum-axa-0-7"><code>bin/axum-axa-0-7</code></h2>
@@ -2841,7 +2874,8 @@ Every document also describes `GET /api/openapi.yaml` itself, and an operation t
 crate does not serve, such as a `PUT` a hand-written controller lacks, is left out.
 
 `--check` fails when a combined document is stale, and when a route the crate
-serves is not documented, or a documented one is not served, method by method.
+serves is not documented, or a documented one is not served, method by method,
+and when two operations share an `operationId`.
 
 Generated artefact: do not hand-edit. Idempotent.
 

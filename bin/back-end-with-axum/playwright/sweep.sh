@@ -69,7 +69,7 @@ for slug in "${FORMS[@]}"; do
 
   ready=""
   for _ in {1..20}; do
-    if curl -fsS "http://localhost:$port/_ping" > /dev/null 2>&1; then ready=1; break; fi
+    if curl -fsS "http://localhost:$port/_health/live" > /dev/null 2>&1; then ready=1; break; fi
     sleep 0.5
   done
 

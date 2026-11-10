@@ -14,7 +14,7 @@ Recap of Tutorial 1 §3 (throwaway Postgres, then migrate and start):
 
 ```sh
 cd forms/apgar-score/back-end-with-axum
-export DATABASE_URL="postgres://loco@localhost/apgar_score_development?host=$SOCK&port=5433"
+export DB_URL="postgres://postgres@localhost/apgar_score_development?host=$SOCK&port=5433"
 cargo run -- db migrate
 cargo run -- start
 ```

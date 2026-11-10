@@ -127,8 +127,8 @@ fairer than letting you find out after the work.
 
 The honest checklist, because a security policy that omits it is decorative:
 
-- Set `DATABASE_URL` and every other setting from the environment. Production
-  refuses to boot without `DATABASE_URL`.
+- Set `DB_URL` and every other setting from the environment. Production
+  refuses to boot without `DB_URL`.
 - Put the JSON API behind your own authentication and authorization. **The crates
   have none: every route, including patient records, is open to whoever can reach
   it.** They demonstrate the data shape and the routes, not an access-control design.

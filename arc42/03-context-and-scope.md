@@ -50,7 +50,7 @@ interfaces" are the file/format contracts each form satisfies.
 | Runtime API | JSON over HTTP (axum + axa + sqlx), canonical `/api/assessments` | request/response |
 | Draft persistence | Browser LocalStorage (`<slug>.front-end-with-{html,svelte}.v1`) | client-side |
 | Tabular import/export | JSON, XML, CSV, TSV | import / export |
-| Observability | Structured logs; `/_health`; `/_readiness` | read (back-end) |
+| Observability | Structured logs; `/_health/live`; `/_health/ready`; `/_health/startup` | read (back-end) |
 
 ## 3.3 Scope
 

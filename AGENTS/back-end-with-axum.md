@@ -136,8 +136,8 @@ and there is no total.
 `axa::ratelimit::by_client`. The layer goes on the routes before
 `axa::middleware::apply`, so it runs inside the standard stack, after the client's
 address is worked out. Past the limit a client gets a `429` problem with
-`Retry-After` and the `RateLimit-*` headers. `/_ping`, `/_health`, and `/_readiness`
-are never limited. Each process counts for itself, and behind a proxy
+`Retry-After` and the `RateLimit-*` headers. `/_health/live`, `/_health/ready`, and
+`/_health/startup` are never limited. Each process counts for itself, and behind a proxy
 `TRUSTED_PROXIES` must list it.
 
 ## Commands
@@ -164,7 +164,7 @@ Settings come from the environment, with defaults in `defaults()` in `app.rs`:
 
 - `APP_ENV` — `development`, `test`, or `production`
 - `PORT`, `BINDING`, `HOST` — where to listen (default port 5150)
-- `DATABASE_URL` — PostgreSQL connection string. Required in production
+- `DB_URL` — PostgreSQL connection string. Required in production
 - `DB_MIN_CONNECTIONS`, `DB_MAX_CONNECTIONS`, `DB_CONNECT_TIMEOUT`, `DB_IDLE_TIMEOUT`
 - `CORS_ALLOWED_ORIGINS` — off in production until origins are listed
 - `LOG_LEVEL`, `LOG_FORMAT`, `LOG_FILTER`
@@ -220,9 +220,11 @@ Run `forms/<slug>/back-end-with-axum-setup` to create the three databases and ap
 the migrations. Run `cargo run -- check` to print the effective settings, with
 secrets redacted, without connecting to anything.
 
-`/_readiness` answers 503 and names what failed when the database or the queue
-stops answering; each crate adds the database check in `App::context`. `/_health`
-only says the process is up.
+`/_health/ready` answers 503 and names what failed when the database or the queue
+stops answering, and from the moment shutdown begins; each crate adds the database
+check in `App::context`. `/_health/live` only says the process is up, and
+`/_health/startup` passes once the database has answered. The old `/_ping`,
+`/_health`, and `/_readiness` answer 404 since axa 0.11.
 
 For database naming, always use the full form name, never use an abbreviation or
 truncation.
@@ -254,6 +256,7 @@ Every crate's `Cargo.lock` is committed, because each is a binary crate. See
 - `bin/axum-axa-0-8 [--check] [--no-lock] [--root <dir>] [--all|<slug>…]` — move from axa 0.7 to 0.8: the axa line, and `cargo update -p axa -p axa-cursor-pagination`, so nothing else in the lock moves. No source changes; only the unused `outbox` feature breaks
 - `bin/axum-axa-0-9 [--check] [--no-lock] [--root <dir>] [--all|<slug>…]` — move from axa 0.8 to 0.9: the axa line, and `cargo update -p axa -p axa-worker`. No source changes: what 0.9 breaks (offset paging, idempotency's `lease`, the queue's `cancel` and `retry`) is unused here
 - `bin/axum-axa-0-10 [--check] [--no-lock] [--root <dir>] [--all|<slug>…]` — move from axa 0.9 to 0.10: the axa line, the `testing` dev-dependency becomes `axa-test = "0.1"`, tests import `axa_test::prelude` (0.9's `axa::prelude` re-exported the test helpers; 0.10's does not), and `cargo update -p axa`. The 13 renamed subcrates (axa-worker is now axa-postgres-job-queue) are not direct dependencies here
+- `bin/axum-axa-0-11 [--check] [--no-lock] [--root <dir>] [--all|<slug>…]` — move from axa 0.10 to 0.11: the axa and axa-test lines, the readiness test onto `/_health/ready`, each crate's inert CI onto `DB_URL`, and `cargo update -p axa -p axa-test`. Set `DB_URL` (not `DATABASE_URL`) and move probes to `/_health/live` and `/_health/ready` before deploying; see axa's help/upgrading-to-0.11
 - `bin/axum-cursor-pagination [--check] [--root <dir>] [--all|<slug>…]` — page every generated list by signed cursor instead of offset: `cursor_key` and `cursor_page` in `support/`, lists read the URI, models drop their `COUNT(*)`, tests follow `Link`; `--check` also names a hand-written list still paging by offset
 - `bin/axum-check-constraints [--check] [--root <dir>] [--all|<slug>…]` — migrate every `sql/` CHECK constraint the crate's tables can hold, `NOT VALID`, and write the `build.rs` that rebuilds when `migrations/` changes. Run after changing `sql/`, then run `bin/axum-fixture-checks`
 - `bin/axum-fixture-checks [--check] [--all|<slug>…]` — put an allowed value wherever a fixture or a test's literal `INSERT` breaks a CHECK constraint; needs Postgres

@@ -384,7 +384,7 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     env:
-      # Axum test config reads DATABASE_URL; each crate boots its own DB
+      # Axum test config reads DB_URL; each crate boots its own DB
       # (created per crate below) and auto-migrates on boot_test.
       PGHOST: localhost
       PGPORT: '5432'
@@ -434,12 +434,12 @@ jobs:
             echo "::group::$slug"
             createdb "$db" 2>/dev/null || true
             ( cd "$crate" \
-              && DATABASE_URL="postgres://postgres:postgres@localhost:5432/$db" \
+              && DB_URL="postgres://postgres:postgres@localhost:5432/$db" \
                  cargo check --all-targets \
-              && DATABASE_URL="postgres://postgres:postgres@localhost:5432/$db" \
+              && DB_URL="postgres://postgres:postgres@localhost:5432/$db" \
                  cargo clippy --all-targets -- -D warnings \
               && cargo deny --all-features check \
-              && DATABASE_URL="postgres://postgres:postgres@localhost:5432/$db" \
+              && DB_URL="postgres://postgres:postgres@localhost:5432/$db" \
                  cargo test ) || { echo "::error::$slug failed"; fail=1; }
             dropdb --if-exists "$db" 2>/dev/null || true
             # Each crate builds its own independent target/ (no shared

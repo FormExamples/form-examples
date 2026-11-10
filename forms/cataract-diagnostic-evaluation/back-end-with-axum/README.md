@@ -60,7 +60,7 @@ cargo run -- db migrate
 cargo run -- start
 ```
 
-`config/development.yaml` and `config/test.yaml` read `DATABASE_URL`, falling
+`config/development.yaml` and `config/test.yaml` read `DB_URL`, falling
 back to `postgres://postgres:postgres@localhost:5433/...`.
 
 ## Verify

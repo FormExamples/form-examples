@@ -60,7 +60,7 @@ cargo run -- db migrate
 cargo run -- start
 ```
 
-`DATABASE_URL` selects the database, with a local default per environment...`.
+`DB_URL` selects the database, with a local default per environment...`.
 
 ## Verify
 
