@@ -43,6 +43,11 @@ for them.
 
 ### Changed
 
+- **axa 0.12.** Every Axum crate moved from 0.11, with `bin/axum-axa-0-12`. For a
+  Postgres service 0.12 only renames: the `sqlx` feature is `postgres-sqlx`,
+  `axa::sqlx` is `axa::postgres_sqlx`, and axa-test is 0.3. Only the axa crates
+  moved in each `Cargo.lock`. The 0.6, 0.7 and 0.11 checks accept the new names.
+
 - **axa 0.11.** Every Axum crate moved from 0.10, with `bin/axum-axa-0-11`; axa-test
   is 0.2. The crates read `DB_URL`, not `DATABASE_URL`, and production refuses to
   boot without it, so CI, `bin/generate-api-transcripts`, the crates' CI files and

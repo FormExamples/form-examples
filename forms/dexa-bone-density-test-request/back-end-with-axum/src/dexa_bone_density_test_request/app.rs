@@ -6,10 +6,10 @@ use axa::{
     boot::{BootResult, TestApp},
     cli::{Cli, Command, DbCommand, parse_vars},
     config::{Config, Defaults},
+    postgres_sqlx::{dangerously_recreate, migrate, revert, status, truncate},
     queue::{Queue, QueueOptions},
     routes::AppRoutes,
     server,
-    sqlx::{dangerously_recreate, migrate, revert, status, truncate},
     task::Tasks,
     worker::WorkerMode,
 };

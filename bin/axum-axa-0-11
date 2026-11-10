@@ -44,6 +44,8 @@ NEW_AXA = f'axa = {{ version = "0.11", {FEATURES}'
 OLD_TEST = 'axa-test = "0.1"\n'
 NEW_TEST = 'axa-test = "0.2"\n'
 DB = re.compile(r"\bDATABASE_URL\b")
+# A crate on a later axa (bin/axum-axa-0-12) has moved past this step.
+LATER = re.compile(r'^axa = \{ version = "0\.(?:1[2-9]|[2-9]\d)", features = \["cursor-pagination"', re.M)
 LOCKED = (
     re.compile(r'^name = "axa"\nversion = "0\.11\.', re.M),
     re.compile(r'^name = "axa-test"\nversion = "0\.2\.', re.M),
@@ -67,8 +69,10 @@ def files(crate: str) -> dict[str, callable]:
 
 
 def drift(crate: str) -> str | None:
-    """Why a crate is not on axa 0.11, if it is not."""
+    """Why a crate is not on axa 0.11 or later, if it is not."""
     manifest = open(f"{crate}/Cargo.toml").read()
+    if LATER.search(manifest):
+        return None
     if NEW_AXA not in manifest or NEW_TEST not in manifest:
         return "Cargo.toml is not on axa 0.11 and axa-test 0.2"
     for path, rewrite in files(crate).items():
@@ -97,10 +101,11 @@ def main() -> int:
         bad = [(crate, why) for crate in crates if (why := drift(crate))]
         for crate, why in bad:
             print(f"{crate.split('/')[-2]}: {why}")
-        print(f"{len(crates) - len(bad)}/{len(crates)} crates on axa 0.11")
+        print(f"{len(crates) - len(bad)}/{len(crates)} crates on axa 0.11 or later")
         return 1 if bad else 0
     # Check every manifest first, so one odd crate leaves the fleet as it was.
-    manifests = {crate: open(f"{crate}/Cargo.toml").read() for crate in crates}
+    manifests = {crate: text for crate in crates
+                 if not LATER.search(text := open(f"{crate}/Cargo.toml").read())}
     odd = [c for c, text in manifests.items()
            if NEW_AXA not in text and (text.count(OLD_AXA) != 1 or text.count(OLD_TEST) != 1)]
     if odd:
@@ -123,7 +128,7 @@ def main() -> int:
         moved += changed
     failed = []
     if not args.no_lock:
-        for crate in crates:
+        for crate in manifests:
             if locked(crate):
                 continue
             result = subprocess.run(["cargo", "update", "-q", "-p", "axa", "-p", "axa-test"],

@@ -6,10 +6,10 @@ use axa::{
     boot::{BootResult, TestApp},
     cli::{Cli, Command, DbCommand, parse_vars},
     config::{Config, Defaults},
+    postgres_sqlx::{dangerously_recreate, migrate, revert, status},
     queue::{Queue, QueueOptions},
     routes::AppRoutes,
     server,
-    sqlx::{dangerously_recreate, migrate, revert, status},
     task::Tasks,
     worker::WorkerMode,
 };
@@ -76,7 +76,7 @@ impl App {
             "neurodiversity_adjustment_request_grade_rules",
             "neurodiversity_adjustment_request_grade_flags",
         ];
-        axa::sqlx::truncate(&db(ctx), tables).await?;
+        axa::postgres_sqlx::truncate(&db(ctx), tables).await?;
         Ok(())
     }
 

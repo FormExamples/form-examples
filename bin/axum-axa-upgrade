@@ -46,7 +46,7 @@ NEW_ROUTER = "Self::routes(ctx).into_app(ctx.clone())"
 # itself, and bin/axum-axa-0-7 and bin/axum-cursor-pagination move on to axa 0.7
 # and its paging crates, and bin/axum-axa-0-8 and 0-9 to axa 0.8 and 0.9, so the check accepts
 # any of those steps.
-ON_06 = re.compile(r'^axa = \{ version = "0\.(?:[6-9]|[1-9]\d)", features = \["(?:offset-|cursor-)?pagination", "queue", (?:"ratelimit", )?"sqlx"\] \}$', re.M)
+ON_06 = re.compile(r'^axa = \{ version = "0\.(?:[6-9]|[1-9]\d)", features = \["(?:offset-|cursor-)?pagination", (?:"queue", (?:"ratelimit", )?"sqlx"|"postgres-sqlx", "queue", "ratelimit")\] \}$', re.M)
 ROUTERS = (NEW_ROUTER, "axa::middleware::apply(routes, &ctx.config.http)")
 LIMITS = """/// The bounds of every list route. `limit` and its default match `openapi.yaml`.
 pub const PAGE_LIMITS: axa::pagination::Limits = axa::pagination::Limits {

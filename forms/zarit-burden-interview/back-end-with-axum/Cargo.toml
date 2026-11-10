@@ -15,7 +15,7 @@ default-run = "zarit_burden_interview-cli"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [workspace.dependencies]
-axa = { version = "0.11", features = ["cursor-pagination", "queue", "ratelimit", "sqlx"] }
+axa = { version = "0.12", features = ["cursor-pagination", "postgres-sqlx", "queue", "ratelimit"] }
 
 [dependencies]
 axa = { workspace = true }
@@ -42,7 +42,7 @@ path = "src/zarit_burden_interview/bin/main.rs"
 required-features = []
 
 [dev-dependencies]
-axa-test = "0.2"
+axa-test = "0.3"
 serial_test = { version = "4.0.1" }
 insta = { version = "1.49", features = ["redactions", "yaml", "filters"] }
 

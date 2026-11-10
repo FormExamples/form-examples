@@ -13,7 +13,7 @@ description = "Neurodiversity Adjustment Request back-end JSON API"
 default-run = "neurodiversity-adjustment-request-axum-crate-cli"
 
 [workspace.dependencies]
-axa = { version = "0.11", features = ["cursor-pagination", "queue", "ratelimit", "sqlx"] }
+axa = { version = "0.12", features = ["cursor-pagination", "postgres-sqlx", "queue", "ratelimit"] }
 
 [dependencies]
 axa = { workspace = true }
@@ -40,7 +40,7 @@ path = "src/neurodiversity_adjustment_request/bin/main.rs"
 required-features = []
 
 [dev-dependencies]
-axa-test = "0.2"
+axa-test = "0.3"
 serial_test = { version = "4.0.1" }
 insta = { version = "1.49", features = ["redactions", "yaml", "filters"] }
 

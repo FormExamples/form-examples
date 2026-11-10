@@ -2,16 +2,16 @@
 //! line, and the boot used by tests. Everything here is an ordinary function.
 
 use axa::{
+    AppContext, Environment, Error, Result,
     boot::{BootResult, TestApp},
     cli::{parse_vars, Cli, Command, DbCommand},
     config::{Config, Defaults},
+    postgres_sqlx::{dangerously_recreate, migrate, revert, status, truncate},
     queue::{Queue, QueueOptions},
     routes::AppRoutes,
     server,
-    sqlx::{dangerously_recreate, migrate, revert, status, truncate},
     task::Tasks,
     worker::WorkerMode,
-    AppContext, Environment, Error, Result,
 };
 use axum::Router;
 use sqlx::migrate::Migrator;

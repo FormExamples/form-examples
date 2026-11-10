@@ -49,6 +49,9 @@ import sys
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OLD_FEATURE = '"offset-pagination", "queue"'
 NEW_FEATURE = '"cursor-pagination", "queue"'
+# Feature lists change with later axa (0.12 adds "postgres-sqlx"), so the check
+# asks only that the feature is on.
+HAS_CURSOR = re.compile(r'^axa = \{[^\n]*features = \[[^\]]*"cursor-pagination"', re.M)
 
 OLD_LIMITS = """/// The bounds of every list route. `limit` and its default match `openapi.yaml`.
 pub const PAGE_LIMITS: axa::offset_pagination::Limits = axa::offset_pagination::Limits {
@@ -355,7 +358,7 @@ def move_page(text: str, path: str) -> str:
 def plan(crate: str) -> dict[str, str] | None:
     """Every edit for a crate, or None when it is already moved."""
     manifest = open(f"{crate}/Cargo.toml").read()
-    if NEW_FEATURE in manifest:
+    if HAS_CURSOR.search(manifest):
         return None
     source = source_dir(crate)
     edits: dict[str, str] = {}
@@ -410,7 +413,7 @@ def plan(crate: str) -> dict[str, str] | None:
 
 def drift(crate: str) -> str | None:
     """Why a crate's lists are not cursor-paged, if they are not."""
-    if NEW_FEATURE not in open(f"{crate}/Cargo.toml").read():
+    if not HAS_CURSOR.search(open(f"{crate}/Cargo.toml").read()):
         return "Cargo.toml has no cursor-pagination feature"
     source = source_dir(crate)
     if "fn cursor_key(" not in open(f"{source}/support/mod.rs").read():

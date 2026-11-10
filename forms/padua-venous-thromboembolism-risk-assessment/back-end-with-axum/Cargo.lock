@@ -175,17 +175,17 @@ checksum = "f2032f911046de80f0a198e0901378627c33f59ea0ac00e363d481118bd70a53"
 
 [[package]]
 name = "axa"
-version = "0.11.0"
+version = "0.12.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3c68930771c74b20f9b2f5d33a6bb16cb00401d373393b13013e76b322ffbb3c"
+checksum = "c6eef2e9e6e02d6494daab37b438730a8320ef6d03666b62c929207f85a35c36"
 dependencies = [
  "async-trait",
  "axa-cursor-pagination",
  "axa-environment",
  "axa-postgres-job-queue",
+ "axa-postgres-sqlx",
  "axa-problem",
  "axa-request-rate-limit",
- "axa-sqlx",
  "axum",
  "clap",
  "http-body-util",
@@ -236,6 +236,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "axa-postgres-sqlx"
+version = "0.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b5291ba9206f9dbc07643612953867aca1871995db4fc0a60c9a10c34cc24013"
+dependencies = [
+ "sqlx",
+]
+
+[[package]]
 name = "axa-problem"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -259,19 +268,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "axa-sqlx"
-version = "0.1.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9cffa9a42afe521a2831f5554f2accfecccab7c4ddcc429f39d36c531cac2a35"
-dependencies = [
- "sqlx",
-]
-
-[[package]]
 name = "axa-test"
-version = "0.2.0"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "31e4ddef189464f706dcec0a02daf9087f1bf6fbdcb27d070beeb347198fd89f"
+checksum = "e288ecf85c86303c6743741ebe0ddfdc5fec79497d66af5cf4e7c38d92a86017"
 dependencies = [
  "axa",
  "axum-test",

@@ -3347,7 +3347,7 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
 
 ## Phase 14 — Axum back ends (2026-11)
 
-The 360 crates moved from Loco to Axum and axa (2026-11-06), then to axa 0.11.0.
+The 360 crates moved from Loco to Axum and axa (2026-11-06), then to axa 0.12.0.
 Each `sql/` table has a route (`bin/axum-entity-routes`), each column its
 `sql/` name (`bin/axum-sql-columns`), and each CHECK a constraint
 (`bin/axum-check-constraints`). DELETE is a cascading soft delete
@@ -3355,6 +3355,8 @@ Each `sql/` table has a route (`bin/axum-entity-routes`), each column its
 
 - [x] 41 `sql/` columns missing from 18 crates: 14 foreign keys renamed to
       their `sql/` names, 27 columns added (2026-11-09).
+- [x] axa 0.12: the `postgres-sqlx` feature and `axa::postgres_sqlx`,
+      axa-test 0.3 (`bin/axum-axa-0-12`, 2026-11-10).
 - [x] axa 0.11: `DB_URL`, the `/_health/*` routes, axa-test 0.2
       (`bin/axum-axa-0-11`, 2026-11-10).
 - [x] axa 0.10: the test helpers come from `axa-test` 0.1

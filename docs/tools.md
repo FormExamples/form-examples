@@ -2,10 +2,11 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-101 tools.
+102 tools.
 
 - [`bin/axum-axa-0-10`](#axum-axa-0-10)
 - [`bin/axum-axa-0-11`](#axum-axa-0-11)
+- [`bin/axum-axa-0-12`](#axum-axa-0-12)
 - [`bin/axum-axa-0-7`](#axum-axa-0-7)
 - [`bin/axum-axa-0-8`](#axum-axa-0-8)
 - [`bin/axum-axa-0-9`](#axum-axa-0-9)
@@ -169,6 +170,36 @@ Usage:
   bin/axum-axa-0-11 --all --no-lock    # leave Cargo.lock to `cargo update`
   bin/axum-axa-0-11 --root DIR <slug>  # a copy of forms/ at DIR
   bin/axum-axa-0-11 --check --all      # CI drift check (non-zero on drift)
+```
+
+<h2 id="axum-axa-0-12"><code>bin/axum-axa-0-12</code></h2>
+
+```text
+bin/axum-axa-0-12 — move each form's `back-end-with-axum/` from axa 0.11 to 0.12.
+
+What it changes in a crate:
+
+  Cargo.toml                axa 0.12, whose `sqlx` feature is `postgres-sqlx`,
+                            and axa-test 0.3
+  src/**/*.rs               `axa::sqlx` is `axa::postgres_sqlx`, also inside a
+                            `use axa::{...}` block, kept in order
+  Cargo.lock                axa 0.12 and axa-test 0.3, by
+                            `cargo update -p axa -p axa-test`, so nothing else in
+                            the lock moves; unless --no-lock
+
+0.12 names each database feature, crate and module for its database and library;
+for a Postgres service the upgrade is renaming, and nothing it does changes. No
+crate here uses Diesel, SeaORM or the outbox, which 0.12 also renames.
+
+A crate already moved is skipped, so the tool can be rerun. A crate whose axa
+lines differ from the expected shape stops the run before anything is written.
+
+Usage:
+  bin/axum-axa-0-12 <slug>...          # named forms
+  bin/axum-axa-0-12 --all              # every form's Axum crate
+  bin/axum-axa-0-12 --all --no-lock    # leave Cargo.lock to `cargo update`
+  bin/axum-axa-0-12 --root DIR <slug>  # a copy of forms/ at DIR
+  bin/axum-axa-0-12 --check --all      # CI drift check (non-zero on drift)
 ```
 
 <h2 id="axum-axa-0-7"><code>bin/axum-axa-0-7</code></h2>

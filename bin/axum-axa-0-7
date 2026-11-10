@@ -41,7 +41,7 @@ OLD_AXA = 'axa = { version = "0.6", features = ["pagination", "queue", "ratelimi
 NEW_AXA = 'axa = { version = "0.7", features = ["offset-pagination", "queue", "ratelimit", "sqlx"] }'
 # bin/axum-cursor-pagination then swaps offset paging for cursor paging, and
 # bin/axum-axa-0-8 and 0-9 move on to 0.8 and 0.9, so the check accepts any of those steps.
-ON_07 = re.compile(r'^axa = \{ version = "0\.(?:[7-9]|[1-9]\d)", features = \["(?:offset|cursor)-pagination", "queue", "ratelimit", "sqlx"\] \}$', re.M)
+ON_07 = re.compile(r'^axa = \{ version = "0\.(?:[7-9]|[1-9]\d)", features = \["(?:offset|cursor)-pagination", (?:"queue", "ratelimit", "sqlx"|"postgres-sqlx", "queue", "ratelimit")\] \}$', re.M)
 OLD_PATH = re.compile(r"\baxa::pagination::")
 OLD_PRELUDE = "    pagination::{Page, PageParams},\n"
 NEW_PRELUDE = "    offset_pagination::{Page, PageParams},\n"
