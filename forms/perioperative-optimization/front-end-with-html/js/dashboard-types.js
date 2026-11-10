@@ -47,7 +47,7 @@
 /**
  * Response from `GET /api/perioperative_optimizations`.
  *
- * The Loco back-end returns a bare JSON array; the dashboard accepts either a
+ * The Axum back-end returns a bare JSON array; the dashboard accepts either a
  * bare array or an `{ items, total }` envelope so a future paginated response is
  * forwards-compatible.
  *

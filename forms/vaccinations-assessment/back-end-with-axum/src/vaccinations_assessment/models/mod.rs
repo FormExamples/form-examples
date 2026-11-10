@@ -1,0 +1,15 @@
+pub mod additional_flags;
+pub mod administration_records;
+pub mod adult_vaccinations;
+pub mod assessments;
+pub mod childhood_vaccinations;
+pub mod clinical_reviews;
+pub mod clinicians;
+pub mod consent_informations;
+pub mod contraindications_allergies;
+pub mod fired_rules;
+pub mod grades;
+pub mod immunization_histories;
+pub mod occupational_vaccinations;
+pub mod patients;
+pub mod travel_vaccinations;

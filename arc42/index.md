@@ -32,7 +32,7 @@ navigational overview, not a second contract.
 | 9  | [Architecture Decisions](09-architecture-decisions.md) | ADRs: relational schema, route layout, HTML consolidation, observability, SQL as source of truth |
 | 10 | [Quality Requirements](10-quality-requirements.md) | Quality tree; concrete scenarios |
 | 11 | [Risks and Technical Debt](11-risks-and-technical-debt.md) | Accessibility palette debt, CI breadth, i18n, deployment/auth |
-| 12 | [Glossary](12-glossary.md) | Lily, Loco, FHIR R5, grading engine, drift gate, slug, … |
+| 12 | [Glossary](12-glossary.md) | Lily, Axum, FHIR R5, grading engine, drift gate, slug, … |
 
 ## About arc42
 

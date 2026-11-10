@@ -6,8 +6,8 @@ Implementation roadmap. See [`spec/index.md`](./spec/index.md) for the contract.
 
 All four layers are built as of 2026-07-02: foundation docs (`index.md`,
 `spec/index.md`, `AGENTS.md`, `plan.md`, `tasks.md`); SQL migrations plus the
-generated representations (XML, FHIR R5, protobuf, OpenAPI, Loco setup); both
-consolidated front-ends (HTML + Lily and SvelteKit + Lily); and the Loco
+generated representations (XML, FHIR R5, protobuf, OpenAPI, Axum setup); both
+consolidated front-ends (HTML + Lily and SvelteKit + Lily); and the Axum
 JSON-API back-end — plus `CHANGELOG.md` and `examples/`.
 
 ## Roadmap
@@ -17,7 +17,7 @@ JSON-API back-end — plus `CHANGELOG.md` and `examples/`.
    identification fields, five criterion inputs (age plus four enum findings),
    timestamps; UUIDv4 PK. Source of truth.
 3. **Generated representations** — run the XML, FHIR R5, protobuf, OpenAPI, and
-   Loco setup generators.
+   Axum setup generators.
 4. **Decision engine** — `types.ts`, `utils.ts`, `ottawa-knee-rules.ts`,
    `ottawa-knee-grader.ts`, `flagged-issues.ts` with Vitest tests covering the
    age boundary, each single-criterion trigger, the isolated-patellar
@@ -25,7 +25,7 @@ JSON-API back-end — plus `CHANGELOG.md` and `examples/`.
 5. **Front-ends** — consolidated `front-end-with-html` (Lily wizard + dashboard)
    and `front-end-with-svelte` (Lily; RESTful `/<plural>/` list + `/<plural>/[id]`
    form).
-6. **Back-end** — `back-end-with-loco` Rust axum + Loco JSON API, relational
+6. **Back-end** — `back-end-with-axum` Rust axum + axa JSON API, relational
    per-table schema.
 7. **Verify** — `bin/test-form ottawa-knee-rule`, Lily drift checks, spec /
    changelog drift checks.

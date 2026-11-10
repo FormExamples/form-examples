@@ -29,7 +29,7 @@ Gynaecological symptom assessment covering menstrual history, cervical screening
 gynecology-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

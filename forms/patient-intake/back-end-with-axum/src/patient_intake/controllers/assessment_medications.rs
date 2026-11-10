@@ -1,0 +1,121 @@
+#![allow(clippy::missing_errors_doc)]
+#![allow(clippy::unnecessary_struct_initialization)]
+#![allow(clippy::unused_async)]
+use crate::support::prelude::*;
+use serde::{Deserialize, Serialize};
+
+use crate::models::assessment_medications::Model;
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Params {
+    pub assessment_id: Uuid,
+    pub takes_medications: String,
+    pub takes_over_the_counter: String,
+    pub takes_supplements: String,
+    pub supplement_details: String,
+    pub medication_adherence: String,
+    pub pharmacy_name: String,
+    pub pharmacy_phone: String,
+    pub medications_notes: String,
+}
+
+impl Params {
+    /// Insert a row.
+    async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
+        sqlx::query_as(
+            "INSERT INTO assessment_medications (assessment_id, takes_medications, \
+            takes_over_the_counter, takes_supplements, supplement_details, \
+            medication_adherence, pharmacy_name, pharmacy_phone, medications_notes) \
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
+        )
+        .bind(self.assessment_id)
+        .bind(&self.takes_medications)
+        .bind(&self.takes_over_the_counter)
+        .bind(&self.takes_supplements)
+        .bind(&self.supplement_details)
+        .bind(&self.medication_adherence)
+        .bind(&self.pharmacy_name)
+        .bind(&self.pharmacy_phone)
+        .bind(&self.medications_notes)
+        .fetch_one(db)
+        .await
+    }
+
+    /// Update the row with this id, if there is one.
+    async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
+        sqlx::query_as(
+            "UPDATE assessment_medications SET assessment_id = $2, takes_medications = \
+            $3, takes_over_the_counter = $4, takes_supplements = $5, supplement_details \
+            = $6, medication_adherence = $7, pharmacy_name = $8, pharmacy_phone = $9, \
+            medications_notes = $10, updated_at = now() WHERE id = $1 AND deleted_at IS \
+            NULL RETURNING *",
+        )
+        .bind(id)
+        .bind(self.assessment_id)
+        .bind(&self.takes_medications)
+        .bind(&self.takes_over_the_counter)
+        .bind(&self.takes_supplements)
+        .bind(&self.supplement_details)
+        .bind(&self.medication_adherence)
+        .bind(&self.pharmacy_name)
+        .bind(&self.pharmacy_phone)
+        .bind(&self.medications_notes)
+        .fetch_optional(db)
+        .await
+    }
+}
+
+async fn load_item(ctx: &AppContext, id: Uuid) -> Result<Model> {
+    let item = Model::find_by_id(&db(ctx), id).await?;
+    item.ok_or_else(|| Error::NotFound)
+}
+
+#[debug_handler]
+pub async fn list(
+    State(ctx): State<AppContext>,
+    OriginalUri(uri): OriginalUri,
+) -> Result<Response> {
+    let page = cursor_page(&ctx, &uri)?;
+    let rows = Model::page(&db(&ctx), &page).await?;
+    Ok(page.respond(rows))
+}
+
+#[debug_handler]
+pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    let item = params.insert(&db(&ctx)).await?;
+    format::json(item)
+}
+
+#[debug_handler]
+pub async fn update(
+    Path(id): Path<Uuid>,
+    State(ctx): State<AppContext>,
+    Json(params): Json<Params>,
+) -> Result<Response> {
+    let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
+    format::json(item)
+}
+
+#[debug_handler]
+pub async fn remove(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
+    load_item(&ctx, id).await?;
+    Model::delete(&db(&ctx), id).await?;
+    format::empty()
+}
+
+#[debug_handler]
+pub async fn get_one(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
+    format::json(load_item(&ctx, id).await?)
+}
+
+pub fn routes() -> Routes {
+    Routes::new()
+        .prefix("api/assessment_medications/")
+        .add("/", get(list))
+        .add("/", post(add))
+        .add("{id}", get(get_one))
+        .add("{id}", delete(remove))
+        .add("{id}", put(update))
+        .add("{id}", patch(update))
+}

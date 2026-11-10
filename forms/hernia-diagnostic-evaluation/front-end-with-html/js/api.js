@@ -1,6 +1,6 @@
 // Back-end API client for the Hernia Diagnostic Evaluation dashboard.
 //
-// The back-end lives at http://localhost:5150 (Loco / axum); the dashboard
+// The back-end lives at http://localhost:5150 (Axum / axum); the dashboard
 // endpoint returns either a bare JSON array of `EvaluationRow` objects or an
 // `{ items, total }` envelope. When the fetch fails (CORS, network, server
 // down) or returns an empty list, callers fall back to the sample data shipped

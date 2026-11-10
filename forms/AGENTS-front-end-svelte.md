@@ -468,6 +468,6 @@ detection: `bin/lily-svelte-sync --check`.
 
 - HTML subprojects (`front-end-*-with-html/`) — see
   [`AGENTS-front-end-html.md`](AGENTS-front-end-html.md).
-- The Loco/Rust back-end JSON API subproject — see
-  [`/AGENTS/back-end-with-loco.md`](../AGENTS/back-end-with-loco.md).
+- The Axum/Rust back-end JSON API subproject — see
+  [`/AGENTS/back-end-with-axum.md`](../AGENTS/back-end-with-axum.md).
 - The Lily library's own development.

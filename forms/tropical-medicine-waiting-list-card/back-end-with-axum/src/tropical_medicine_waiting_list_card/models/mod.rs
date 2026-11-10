@@ -1,0 +1,7 @@
+pub mod patients;
+pub mod practitioners;
+pub mod trop_med_waiting_list_card_appointments;
+pub mod trop_med_waiting_list_card_grade_flags;
+pub mod trop_med_waiting_list_card_grade_rules;
+pub mod trop_med_waiting_list_card_grades;
+pub mod trop_med_waiting_list_cards;

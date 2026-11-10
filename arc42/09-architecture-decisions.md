@@ -8,8 +8,8 @@ Short ADRs (context / decision / consequences) for the load-bearing choices.
 computed grade. A tempting shortcut is a single table with one JSONB `data`
 column per form.
 
-**Decision.** Use a **relational schema**: one SQL migration and one SeaORM
-entity per table. The core `<form>` record, the `<form>_grade` result, the
+**Decision.** Use a **relational schema**: one SQL migration and one sqlx
+model per table. The core `<form>` record, the `<form>_grade` result, the
 `<form>_grade_rule` audit rows, the `<form>_grade_flag` rows, and any
 domain-specific child tables (team members, procedures, implants, …) are each
 their own table with a UUID PK and the timestamp trio.
@@ -18,7 +18,7 @@ their own table with a UUID PK and the timestamp trio.
 XML/FHIR/protobuf/OpenAPI generators project real columns, and the grading
 audit trail is queryable. (+) Every generated representation is meaningful. (−)
 More migrations and entities per form. The reference crate is
-`forms/medical-operation-note/back-end-with-loco/`; single-table JSONB is
+`forms/medical-operation-note/back-end-with-axum/`; single-table JSONB is
 explicitly wrong.
 
 ## ADR-2 — Route layout nesting (snake back-end, kebab Svelte, RESTful plural)
@@ -27,7 +27,7 @@ explicitly wrong.
 layout across stacks.
 
 **Decision.** Nest each stack under a per-form directory.
-- **Back-end:** all crate source under `back-end-with-loco/src/<form_snake_case>/`
+- **Back-end:** all crate source under `back-end-with-axum/src/<form_snake_case>/`
   (crate root keeps `Cargo.toml`, `config/`, `migration/`, `tests/`).
 - **Svelte:** all routes under `src/routes/<form-kebab-case>/`, served at
   `/<slug>/`, with a **RESTful collection** named by the pluralized slug:
@@ -85,3 +85,185 @@ regeneration idempotency (zero drift).
 is free. (+) Drift gates (`bin/*-generate-* --check`, `bin/test-sql-apply`) make
 this executable. (−) A shape change requires editing SQL then regenerating; a
 hand-edit to a generated file is silently overwritten (so it is forbidden).
+
+## ADR-6 — Plain Axum, axa, and sqlx replace Loco and SeaORM
+
+**Context.** Each back-end crate was a Loco application on SeaORM: a large
+dependency tree, YAML configuration, and a migration crate per form. The
+scaffolded crates use little of that framework, and the published `axa` and
+`axa-sqlx` crates cover what they do use.
+
+**Decision.** Each crate is ordinary Axum calling `axa` 0.3, with `axa-sqlx` for
+pooling and migrations. Models hold hand-written SQL run through sqlx. Migrations
+are plain `.up.sql` and `.down.sql` files. Settings come from the environment.
+Authentication, hashing, mail, and seeding stay in each crate's identical
+`support/` module, because axa leaves them to services. This supersedes the
+Loco-specific parts of ADR-2 and ADR-4; the Postgres-only queue stands.
+
+**Consequences.** (+) About 30% fewer transitive dependencies per crate. (+) A
+reviewer reads exactly the SQL that runs. (+) Production refuses to boot without
+`DB_URL`, and refuses to issue tokens without `JWT_SECRET`. (−) Queries are
+checked by the test suite, not at compile time. (−) No generator scaffolds a new
+crate, so a new form starts from a copy of an existing one. (−) The drift checks
+between `sql/` and migrations (`loco-migration-defaults`,
+`loco-migration-nullability`) parsed Rust migrations and were retired with them.
+
+## ADR-7 — No built-in authentication; lists are paged
+
+**Context.** Every crate carried a Loco-era auth scaffold: nine routes, a `users`
+table, mail, and password hashing. No form controller and no front-end used it, so
+it looked like access control while protecting nothing, and it brought in
+`jsonwebtoken`, whose unused RSA and ECDSA code held two accepted advisories. List
+routes returned whole tables, although `openapi.yaml` published `limit` and `offset`.
+
+**Decision.** Remove the scaffold, and leave access control to whoever deploys a
+crate. Page every top-level list with `axa-pagination`, at the published limits.
+Remove the OpenTelemetry and Prometheus dependencies, which no code ever called, so
+the crates export neither metrics nor traces. This supersedes the auth, hashing, and
+mail parts of ADR-6 and the observability part of ADR-2.
+
+**Consequences.** (+) About 100 fewer locked packages per crate, and no accepted
+advisories in `deny.toml`. (+) A list cannot return an unbounded table. (+) The crates
+say plainly that they have no access control. (−) A deployment has to bring its own.
+(−) A client that read a list as complete now gets its first 100 rows, and must
+follow `x-total-count`. (−) A database migrated since ADR-6 has a recorded `users`
+migration that no longer exists, so it needs `db reset`.
+
+## ADR-8 — Errors are RFC 9457 problems
+
+**Status.** Superseded by ADR-10.
+
+**Context.** A failed request answered in one of three shapes: `axa::Error` wrote
+`{"error", "description"}`, Axum's extractors wrote plain text that quoted the input,
+and an unknown route wrote nothing. `axa` plans to move `Error` to
+`application/problem+json`, and `axa-problem` is published, but `axa` 0.5 does not
+convert yet.
+
+**Decision.** Each crate rewrites failed responses in `support/problem.rs`, built on
+`axa::problem::Problem`. A rewrite on the way out covers every source without
+touching a handler. It runs inside the middleware, ahead of compression, and again
+outside it, for the panics and timeouts the middleware answers. Health routes under
+`/_` keep their own bodies.
+
+**Consequences.** (+) A client handles one error shape, which `openapi.yaml`
+publishes. (+) `axa::Error` keeps logging the real cause, and no input is echoed.
+(−) An extractor refusal no longer says which field failed. (−) The rewrite parses a
+body that `axa::Error` has just written, and should go once `axa` writes problems
+itself. (−) A client reading `error` or `description` from an error body must move to
+`title` and `detail`.
+
+## ADR-9 — Deletes are soft, and cascade
+
+**Context.** `deleted_at` was on every table, but `DELETE` removed the row and its
+children, lists returned rows a client had marked, and a client could set the column.
+These are clinical records, which must outlive a mistaken or disputed delete.
+
+**Decision.** `DELETE` marks the row and follows every `ON DELETE CASCADE` key in one
+statement, so a deleted assessment takes its grades with it. A `SET NULL` key is left,
+because the reference still says what a row referred to. Reads and updates skip marked
+rows, `deleted_at` is in no body, and unique indexes cover live rows only.
+`bin/axum-soft-delete --check` holds this in CI.
+
+**Consequences.** (+) A deleted record survives, with the time it was deleted. (+) A
+deleted row cannot block its replacement. (−) The API offers no restore and no purge,
+so retention needs its own decision. (−) `sql/` still declares plain `UNIQUE`, and the
+crates' migrations narrow it.
+
+## ADR-10 — axa writes the errors and the paging
+
+**Context.** ADR-8 said the rewrite in `support/problem.rs` should go once `axa` wrote
+problems itself. `axa` 0.6 does, for every failure including Axum's 404, 405, 413 and
+extractor refusals, and answers a broken unique or foreign key as `409`. It also gained
+the page helpers that `support/paging.rs` held.
+
+**Decision.** Remove both modules, and return `router` to `into_app`. Export
+`axa::extract::{Json, Path, Query}` from each crate's prelude, because Axum's own
+extractors give a problem with no `detail`. Keep `PAGE_LIMITS`, which is this
+service's choice, in `support/mod.rs`. `openapi.yaml` publishes the `409` and the
+`code` and `errors` members.
+
+**Consequences.** (+) A refused request says what was wrong, and quotes no input. (+) A
+duplicate or a missing reference is the caller's `409`, not a `500`. (+) No crate parses
+an error body it has just written. (−) A `(StatusCode, "why")` answer loses its text, so
+handlers must return an `Error`. (−) `409` covers both a duplicate and a missing
+reference, and only `detail` tells them apart.
+
+## ADR-11 — A request limit per client, and fixtures only in development
+
+**Context.** The crates have no authentication (ADR-7), so nothing slowed a client that
+sent requests as fast as it could. `task seed` loaded made-up records wherever it ran,
+production included. `axa` 0.6 offers `axa-ratelimit` and `Task::development_only` for
+these. Five hand-written controllers still wrote paging headers by hand and wrapped
+lists in `{items, total}`, unlike the bare array `openapi.yaml` documents.
+
+**Decision.** Each crate limits a client to 600 requests a minute with
+`axa::ratelimit::by_client`, layered on the routes inside `axa::middleware::apply`,
+which works out the client's address first. `router` builds the stack itself, because
+`into_app` leaves no room inside it. The limit is in `support/mod.rs`. The `seed` task is
+development only. Every list, the dashboards included, answers with `Page::respond`.
+`openapi.yaml` publishes the `429` on every operation. `bin/axum-axa-adopt --check`
+keeps all three.
+
+**Consequences.** (+) A runaway client gets a `429` problem with `Retry-After`, and
+health probes are never limited. (+) Fixtures cannot reach a production database.
+(+) The dashboards page, and report a true total. (−) Each process counts for itself,
+so several replicas give a client several limits. (−) Behind a proxy, `TRUSTED_PROXIES`
+must list it, or every client shares the proxy's one limit. (−) Dashboard clients
+reading `items` must read the array, with the total in `x-total-count`.
+
+## ADR-12 — The database enforces the CHECK constraints in `sql/`
+
+**Context.** `sql/` declares 7,803 CHECK constraints, mostly the allowed values of an
+enum field. The crates' migrations were generated without them, so a crate stored
+anything: `"sex": "banana"` answered 200. The seed fixtures and test rows had been
+written to match, with values such as `status: "Test status"`.
+
+**Decision.** `bin/axum-check-constraints` writes one migration per crate holding every
+CHECK whose columns the crate's table has (7,781; 22 name a column the crate lacks).
+Each is added `NOT VALID`, so a database holding an old bad row still migrates and
+starts. `bin/axum-fixture-checks` gives the fixtures and test rows allowed values,
+judged by Postgres. Each crate gains a `build.rs`, because `sqlx::migrate!` embeds the
+migrations and Cargo did not rebuild when one was added.
+
+The crates' columns had also lost the lengths of `sql/`'s `VARCHAR(n)` and `CHAR(n)`,
+so a second migration adds each as a `char_length(column) <= n` check, `NOT VALID`
+likewise (11,838 of them).
+
+Every crate is on axa 0.6.2, which answers a broken CHECK or NOT NULL constraint as
+`422` `unprocessable_entity`, naming neither the value nor the field, and 351 crates
+test that with a value their CHECK does not list.
+
+**Consequences.** (+) Stored values are the ones the form offers, and a caller who
+sends another learns it is theirs to fix. (+) A new migration reaches the next build.
+(−) Rows stored before stay unchecked until someone runs `VALIDATE CONSTRAINT`. (−) The
+`422` does not say which field, so a client must check its own values against the
+OpenAPI enums. (−) A change to `sql/` must be followed by both tools.
+
+
+## ADR-13 — Lists page by signed cursor, with no total
+
+**Context.** Every list took `?limit=` and `?offset=` and reported `x-total-count`,
+through axa's offset paging. axa 0.7 marks that insecure: the total counts every row,
+including rows a record policy would hide from the caller; the offset is the caller's
+to choose, so any position can be asked for; and an offset past the last row cost a
+scan. axa 0.7 adds `cursor-pagination` beside it.
+
+**Decision.** Every crate is on axa 0.7 (`bin/axum-axa-0-7`) and pages every list by
+signed cursor (`bin/axum-cursor-pagination`). A list takes `?limit=` and an opaque
+`?cursor=`, answers a bare array, and links the next page with `Link: rel="next"`
+while more rows follow. The cursor is signed with HMAC-SHA256 under `CURSOR_KEY`,
+over its position, the path and every filter. The key must be at least 32 bytes and
+the same on every replica, and a production-like environment will not start without
+it; development and test use a public key in the source. A bad cursor or limit answers
+`422`, and a limit over 1000 is refused, not clamped. Models fetch one row more than the
+page, so that `CursorPage::respond` can tell whether more follow, and no longer count.
+
+**Consequences.** (+) No list reveals how many rows there are, and a caller can reach
+only pages the service handed out. (+) One query per page, not two. (−) A client that
+read `x-total-count`, or sent `?offset=`, must follow `Link` instead; no front-end here
+did. (−) The position inside a cursor is still an offset, so a row added or removed
+between two fetches can make a later page repeat or skip one row. (−) Rotating
+`CURSOR_KEY` turns every cursor already handed out into a `422`.
+
+**Later.** axa 0.9 removed offset paging altogether, so the move was also the only
+way forward: the fleet is on 0.9 (`bin/axum-axa-0-9`) with no change to any list.

@@ -1,0 +1,144 @@
+#!/usr/bin/env python3
+"""bin/axum-axa-0-11 — move each form's `back-end-with-axum/` from axa 0.10 to 0.11.
+
+What it changes in a crate:
+
+  Cargo.toml                axa 0.11 and axa-test 0.2
+  tests/**/readiness.rs     `/_readiness` becomes `/_health/ready`
+  .github/workflows/ci.yaml `DATABASE_URL` becomes `DB_URL`
+  Cargo.lock                axa 0.11 and axa-test 0.2, by
+                            `cargo update -p axa -p axa-test`, so nothing else in
+                            the lock moves; unless --no-lock
+
+0.11 reads `DB_URL`, not `DATABASE_URL` (production refuses to boot without it),
+and serves health at `/_health/live`, `/_health/ready` and `/_health/startup`;
+`/_ping`, `/_health` and `/_readiness` answer 404. What else it breaks is unused
+here: no crate calls `body_limit` or depends on an axa subcrate directly. It also answers 503 with `Retry-After`, not 500, when the
+database cannot serve, and adds cross-origin and permissions-policy headers;
+see help/upgrading-to-0.11 in axa. Set `DB_URL` and move probes before deploying.
+
+A crate already moved is skipped, so the tool can be rerun. A crate whose axa
+lines differ from the expected shape stops the run before anything is written.
+
+Usage:
+  bin/axum-axa-0-11 <slug>...          # named forms
+  bin/axum-axa-0-11 --all              # every form's Axum crate
+  bin/axum-axa-0-11 --all --no-lock    # leave Cargo.lock to `cargo update`
+  bin/axum-axa-0-11 --root DIR <slug>  # a copy of forms/ at DIR
+  bin/axum-axa-0-11 --check --all      # CI drift check (non-zero on drift)
+"""
+
+from __future__ import annotations
+
+import argparse
+import glob
+import os
+import re
+import subprocess
+import sys
+
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+FEATURES = 'features = ["cursor-pagination", "queue", "ratelimit", "sqlx"] }'
+OLD_AXA = f'axa = {{ version = "0.10", {FEATURES}'
+NEW_AXA = f'axa = {{ version = "0.11", {FEATURES}'
+OLD_TEST = 'axa-test = "0.1"\n'
+NEW_TEST = 'axa-test = "0.2"\n'
+DB = re.compile(r"\bDATABASE_URL\b")
+# A crate on a later axa (bin/axum-axa-0-12) has moved past this step.
+LATER = re.compile(r'^axa = \{ version = "0\.(?:1[2-9]|[2-9]\d)", features = \["cursor-pagination"', re.M)
+LOCKED = (
+    re.compile(r'^name = "axa"\nversion = "0\.11\.', re.M),
+    re.compile(r'^name = "axa-test"\nversion = "0\.2\.', re.M),
+)
+
+
+def locked(crate: str) -> bool:
+    """Whether the crate's Cargo.lock has axa 0.11 and axa-test 0.2."""
+    lock = open(f"{crate}/Cargo.lock").read()
+    return all(pattern.search(lock) for pattern in LOCKED)
+
+
+def files(crate: str) -> dict[str, callable]:
+    """Each file the move rewrites, with its rewrite."""
+    found = {path: lambda text: text.replace("/_readiness", "/_health/ready")
+             for path in glob.glob(f"{crate}/tests/**/readiness.rs", recursive=True)}
+    workflow = f"{crate}/.github/workflows/ci.yaml"
+    if os.path.exists(workflow):
+        found[workflow] = lambda text: DB.sub("DB_URL", text)
+    return found
+
+
+def drift(crate: str) -> str | None:
+    """Why a crate is not on axa 0.11 or later, if it is not."""
+    manifest = open(f"{crate}/Cargo.toml").read()
+    if LATER.search(manifest):
+        return None
+    if NEW_AXA not in manifest or NEW_TEST not in manifest:
+        return "Cargo.toml is not on axa 0.11 and axa-test 0.2"
+    for path, rewrite in files(crate).items():
+        if rewrite(text := open(path).read()) != text:
+            return f"{os.path.relpath(path, crate)} still names /_readiness or DATABASE_URL"
+    if not locked(crate):
+        return "Cargo.lock is not on axa 0.11 and axa-test 0.2"
+    return None
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    parser.add_argument("slugs", nargs="*")
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--no-lock", action="store_true")
+    parser.add_argument("--root", default=f"{REPO}/forms")
+    args = parser.parse_args()
+    if args.all:
+        crates = sorted(os.path.dirname(c) for c in glob.glob(f"{args.root}/*/back-end-with-axum/Cargo.toml"))
+    elif args.slugs:
+        crates = [f"{args.root}/{slug}/back-end-with-axum" for slug in args.slugs]
+    else:
+        parser.error("name forms, or pass --all")
+    if args.check:
+        bad = [(crate, why) for crate in crates if (why := drift(crate))]
+        for crate, why in bad:
+            print(f"{crate.split('/')[-2]}: {why}")
+        print(f"{len(crates) - len(bad)}/{len(crates)} crates on axa 0.11 or later")
+        return 1 if bad else 0
+    # Check every manifest first, so one odd crate leaves the fleet as it was.
+    manifests = {crate: text for crate in crates
+                 if not LATER.search(text := open(f"{crate}/Cargo.toml").read())}
+    odd = [c for c, text in manifests.items()
+           if NEW_AXA not in text and (text.count(OLD_AXA) != 1 or text.count(OLD_TEST) != 1)]
+    if odd:
+        for crate in odd:
+            print(f"stopped, nothing written: {crate}: expected the axa 0.10 lines once each", file=sys.stderr)
+        return 1
+    moved = 0
+    for crate, text in manifests.items():
+        new = text.replace(OLD_AXA, NEW_AXA).replace(OLD_TEST, NEW_TEST)
+        changed = new != text
+        if changed:
+            with open(f"{crate}/Cargo.toml", "w") as handle:
+                handle.write(new)
+        for path, rewrite in files(crate).items():
+            old = open(path).read()
+            if (fixed := rewrite(old)) != old:
+                with open(path, "w") as handle:
+                    handle.write(fixed)
+                changed = True
+        moved += changed
+    failed = []
+    if not args.no_lock:
+        for crate in manifests:
+            if locked(crate):
+                continue
+            result = subprocess.run(["cargo", "update", "-q", "-p", "axa", "-p", "axa-test"],
+                                    cwd=crate, capture_output=True, text=True)
+            if result.returncode or not locked(crate):
+                failed.append(crate)
+                print(f"{crate.split('/')[-2]}: cargo update failed: {result.stderr.strip()[-300:]}", file=sys.stderr)
+    print(f"{moved} moved, {len(crates) - moved} already on axa 0.11, {len(failed)} lock failures")
+    return 1 if failed else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

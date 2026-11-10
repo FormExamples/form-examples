@@ -32,7 +32,7 @@ Urological evaluation using the IPSS (International Prostate Symptom Score) with
 urology-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

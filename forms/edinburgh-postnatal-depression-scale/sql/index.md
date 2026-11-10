@@ -23,5 +23,5 @@ reverse-scored at option→score mapping. A total of `>= 10` bands `possible` an
 `>= 13` bands `likely`; item 10 `> 0` raises the mandatory urgent self-harm flag
 regardless of the total.
 
-Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Loco
+Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Axum
 setup script) are derived from these migrations and are never hand-edited.

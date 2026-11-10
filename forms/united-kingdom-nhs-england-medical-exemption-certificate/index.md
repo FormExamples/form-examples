@@ -144,8 +144,8 @@ united-kingdom-nhs-england-medical-exemption-certificate/
   front-end-with-svelte/                     # SvelteKit single-page wizard
   front-end-with-html/                  # static HTML review dashboard
   front-end-with-svelte/                # SVAR DataGrid dashboard
-  back-end-with-loco/          # Rust axum + Loco JSON API
-  back-end-with-loco-setup     # scaffold generator (shell script)
+  back-end-with-axum/          # Rust axum + axa + sqlx JSON API
+  back-end-with-axum-setup     # scaffold generator (shell script)
 ```
 
 ## Verify

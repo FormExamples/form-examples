@@ -17,18 +17,18 @@ Task tracking. See [`plan.md`](./plan.md) for the roadmap.
 - [x] Populate the boilerplate `index.md` / `AGENTS.md` / `CLAUDE.md` /
       `README.md` for every generated-representation subdirectory (`doc/`,
       `fhir/r5/`, `protobuf/`, `sql/`, `typespec/`, `xml/`).
-- [x] Generated XML, FHIR R5, protobuf, OpenAPI, Loco setup.
-- [x] `back-end-with-loco` (Rust axum + Loco JSON API). Scaffolded via
+- [x] Generated XML, FHIR R5, protobuf, OpenAPI, Axum setup.
+- [x] `back-end-with-axum` (Rust axum + axa JSON API). Scaffolded via
       `cargo loco generate scaffold` for all 6 tables (patient, clinician,
       diabetes_podiatry_assessment, grade, grade_rule, grade_flag), route
       layout converted via `bin/route-loco-layout`, and every fleet-wide
       Loco convention tool applied and verified `--check`-clean
-      (`loco-forbid-unsafe`, `loco-seed-base-rename`,
+      (`axum-forbid-unsafe`, `loco-seed-base-rename`,
       `loco-test-auth-header-fix`, `loco-rs-1-migration` + hand-aligned
       `Cargo.toml`/MSRV to the fleet's 1.1.0/1.96 pin, `loco-config-refactor`,
       `loco-migration-defaults`, `loco-migration-nullability`,
       `loco-test-max-connections-fix`, `loco-camel-case-json-refactor`,
-      `loco-serve-openapi-refactor`, `generate-loco-deny-config.py`). Two
+      `loco-serve-openapi-refactor`, `generate-axum-deny-config.py`). Two
       real, hand-fixed issues found along the way: (1) the freshly-scaffolded
       `App::seed()` still referenced the now-renamed `_base` param body-side
       — fixed to the `CARGO_MANIFEST_DIR`-relative fixture path pattern;

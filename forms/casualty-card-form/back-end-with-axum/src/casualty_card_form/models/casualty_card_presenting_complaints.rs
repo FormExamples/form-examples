@@ -1,0 +1,82 @@
+//! casualty_card_presenting_complaints model.
+
+use serde::{Deserialize, Serialize};
+
+use crate::support::prelude::*;
+
+/// One row.
+#[allow(missing_docs)]
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize, sqlx::FromRow)]
+#[serde(rename_all = "camelCase")]
+pub struct Model {
+    pub created_at: DateTimeWithTimeZone,
+    pub updated_at: DateTimeWithTimeZone,
+    pub id: Uuid,
+    #[serde(skip)]
+    pub deleted_at: Option<DateTimeWithTimeZone>,
+    pub chief_complaint: String,
+    pub history_of_presenting_complaint: String,
+    pub onset: String,
+    pub duration: String,
+    pub character: String,
+    pub severity: String,
+    pub location: String,
+    pub radiation: String,
+    pub aggravating_factors: String,
+    pub relieving_factors: String,
+    pub associated_symptoms: String,
+    pub previous_episodes: String,
+    pub treatment_prior_to_arrival: String,
+    pub casualty_card_id: Uuid,
+}
+
+impl Model {
+    /// One page of rows in a stable order, with one row more than the page
+    /// when more follow, which `CursorPage::respond` drops.
+    ///
+    /// # Errors
+    ///
+    /// Propagates the database error.
+    pub async fn page(db: &PgPool, page: &axa::cursor_pagination::CursorPage) -> sqlx::Result<Vec<Self>> {
+        let (limit, offset) = page.bounds();
+        sqlx::query_as(
+            "SELECT * FROM casualty_card_presenting_complaints WHERE deleted_at IS NULL \
+            ORDER BY id LIMIT $1 OFFSET $2",
+        )
+        .bind(limit)
+        .bind(offset)
+        .fetch_all(db)
+        .await
+    }
+
+    /// The row with this id, if there is one.
+    ///
+    /// # Errors
+    ///
+    /// Propagates the database error.
+    pub async fn find_by_id(db: &PgPool, id: Uuid) -> sqlx::Result<Option<Self>> {
+        sqlx::query_as(
+            "SELECT * FROM casualty_card_presenting_complaints WHERE id = $1 AND \
+            deleted_at IS NULL",
+        )
+        .bind(id)
+        .fetch_optional(db)
+        .await
+    }
+
+    /// Delete the row with this id.
+    ///
+    /// # Errors
+    ///
+    /// Propagates the database error.
+    pub async fn delete(db: &PgPool, id: Uuid) -> sqlx::Result<()> {
+        sqlx::query(
+            "UPDATE casualty_card_presenting_complaints SET deleted_at = now(), \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL",
+        )
+        .bind(id)
+        .execute(db)
+        .await?;
+        Ok(())
+    }
+}

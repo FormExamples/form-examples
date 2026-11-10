@@ -1,6 +1,6 @@
 // Backend API client for the Cardiology Waiting List Card dashboard. Mirrors
 // the SvelteKit dashboard. The backend lives at http://localhost:5150
-// (Loco / axum). When fetch fails or the response is empty, callers fall
+// (Axum / axum). When fetch fails or the response is empty, callers fall
 // back to the sample data in `data.js`.
 
   

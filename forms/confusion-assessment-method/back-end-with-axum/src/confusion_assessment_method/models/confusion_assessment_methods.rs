@@ -1,0 +1,106 @@
+//! confusion_assessment_methods model.
+
+use serde::{Deserialize, Serialize};
+
+use crate::support::prelude::*;
+
+/// One row.
+#[allow(missing_docs)]
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize, sqlx::FromRow)]
+#[serde(rename_all = "camelCase")]
+pub struct Model {
+    pub created_at: DateTimeWithTimeZone,
+    pub updated_at: DateTimeWithTimeZone,
+    pub id: Uuid,
+    #[serde(skip)]
+    pub deleted_at: Option<DateTimeWithTimeZone>,
+    pub assessor_name: String,
+    pub assessor_role: String,
+    pub assessed_at: Option<DateTimeWithTimeZone>,
+    pub ward_unit: String,
+    pub cam_variant: String,
+    pub patient_identifier: String,
+    pub age_band: String,
+    pub sex: String,
+    pub cognitive_baseline: String,
+    pub collateral_source: String,
+    pub feature_acute_onset_fluctuating: String,
+    pub onset_timing: String,
+    pub feature_inattention: String,
+    pub attention_test: String,
+    pub feature_disorganised_thinking: String,
+    pub feature_altered_consciousness: String,
+    pub consciousness_level: String,
+    pub rass_score: Option<i32>,
+    pub motoric_subtype: String,
+    pub hallucinations: bool,
+    pub delusions: bool,
+    pub sleep_wake_disturbance: bool,
+    pub deliriogenic_medication: bool,
+    pub deliriogenic_medication_detail: String,
+    pub suspected_precipitants: String,
+    pub recommended_actions: String,
+    pub clinical_note: String,
+    pub patient_id: Uuid,
+    pub clinician_id: Option<Uuid>,
+}
+
+impl Model {
+    /// One page of rows in a stable order, with one row more than the page
+    /// when more follow, which `CursorPage::respond` drops.
+    ///
+    /// # Errors
+    ///
+    /// Propagates the database error.
+    pub async fn page(db: &PgPool, page: &axa::cursor_pagination::CursorPage) -> sqlx::Result<Vec<Self>> {
+        let (limit, offset) = page.bounds();
+        sqlx::query_as(
+            "SELECT * FROM confusion_assessment_methods WHERE deleted_at IS NULL ORDER BY \
+            id LIMIT $1 OFFSET $2",
+        )
+        .bind(limit)
+        .bind(offset)
+        .fetch_all(db)
+        .await
+    }
+
+    /// The row with this id, if there is one.
+    ///
+    /// # Errors
+    ///
+    /// Propagates the database error.
+    pub async fn find_by_id(db: &PgPool, id: Uuid) -> sqlx::Result<Option<Self>> {
+        sqlx::query_as(
+            "SELECT * FROM confusion_assessment_methods WHERE id = $1 AND deleted_at IS \
+            NULL",
+        )
+        .bind(id)
+        .fetch_optional(db)
+        .await
+    }
+
+    /// Delete the row with this id.
+    ///
+    /// # Errors
+    ///
+    /// Propagates the database error.
+    pub async fn delete(db: &PgPool, id: Uuid) -> sqlx::Result<()> {
+        sqlx::query(
+            "WITH target AS (UPDATE confusion_assessment_methods SET deleted_at = now(), \
+            updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING id), \
+            child1 AS (UPDATE confusion_assessment_method_grades SET deleted_at = now(), \
+            updated_at = now() WHERE confusion_assessment_method_id IN (SELECT id FROM \
+            target) AND deleted_at IS NULL RETURNING id), child2 AS (UPDATE \
+            confusion_assessment_method_grade_rules SET deleted_at = now(), updated_at = \
+            now() WHERE confusion_assessment_method_grade_id IN (SELECT id FROM child1) \
+            AND deleted_at IS NULL RETURNING id), child3 AS (UPDATE \
+            confusion_assessment_method_grade_flags SET deleted_at = now(), updated_at = \
+            now() WHERE confusion_assessment_method_grade_id IN (SELECT id FROM child1) \
+            AND deleted_at IS NULL RETURNING id) SELECT count(*) FROM target",
+        )
+        .bind(id)
+        .execute(db)
+        .await?;
+        Ok(())
+    }
+}

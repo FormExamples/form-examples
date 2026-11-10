@@ -1,0 +1,17 @@
+ALTER TABLE "electrocardiogram_test_request_grade_flags" DROP CONSTRAINT IF EXISTS "electrocardiogram_test_request_grade_flags_priority_check";
+ALTER TABLE "electrocardiogram_test_request_grade_flags" DROP CONSTRAINT IF EXISTS "electrocardiogram_test_request_grade_flags_category_check";
+ALTER TABLE "electrocardiogram_test_request_grade_rules" DROP CONSTRAINT IF EXISTS "electrocardiogram_test_request_grade_rules_axis_check";
+ALTER TABLE "electrocardiogram_test_request_grades" DROP CONSTRAINT IF EXISTS "electrocardiogram_test_request_grades_recommendation_check";
+ALTER TABLE "electrocardiogram_test_request_grades" DROP CONSTRAINT IF EXISTS "electrocardiogram_test_request_grades_priority_band_check";
+ALTER TABLE "electrocardiogram_test_request_grades" DROP CONSTRAINT IF EXISTS "electrocardiogram_test_request_grades_completeness_per_fab3bb09";
+ALTER TABLE "electrocardiogram_test_request_grades" DROP CONSTRAINT IF EXISTS "electrocardiogram_test_request_grades_triage_tier_check";
+ALTER TABLE "electrocardiogram_test_request_grades" DROP CONSTRAINT IF EXISTS "electrocardiogram_test_request_grades_appropriateness__af06bbd9";
+ALTER TABLE "electrocardiogram_test_request_grades" DROP CONSTRAINT IF EXISTS "electrocardiogram_test_request_grades_appropriateness__330046e6";
+ALTER TABLE "electrocardiogram_test_requests" DROP CONSTRAINT IF EXISTS "electrocardiogram_test_requests_urgency_check";
+ALTER TABLE "electrocardiogram_test_requests" DROP CONSTRAINT IF EXISTS "electrocardiogram_test_requests_known_arrhythmia_check";
+ALTER TABLE "electrocardiogram_test_requests" DROP CONSTRAINT IF EXISTS "electrocardiogram_test_requests_primary_indication_check";
+ALTER TABLE "electrocardiogram_test_requests" DROP CONSTRAINT IF EXISTS "electrocardiogram_test_requests_ecg_type_check";
+ALTER TABLE "electrocardiogram_test_requests" DROP CONSTRAINT IF EXISTS "electrocardiogram_test_requests_setting_check";
+ALTER TABLE "electrocardiogram_test_requests" DROP CONSTRAINT IF EXISTS "electrocardiogram_test_requests_status_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";

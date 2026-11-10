@@ -1,8 +1,0 @@
-mod users;
-
-mod patients;
-mod clinicians;
-mod nerve_conduction_study_test_requests;
-mod nerve_conduction_study_test_request_grades;
-mod nerve_conduction_study_test_request_grade_rules;
-mod nerve_conduction_study_test_request_grade_flags;

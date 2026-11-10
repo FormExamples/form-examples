@@ -104,10 +104,10 @@ Required artefacts and their current status:
 | `openapi` | generated |
 | `front-end-with-html` | HTML + Lily (wizard + dashboard) — not implemented |
 | `front-end-with-svelte` | SvelteKit (wizard + dashboard) — not implemented |
-| `back-end-with-loco` | Rust + Loco JSON API |
-| `back-end-with-loco-setup` | generated scaffold script |
+| `back-end-with-axum` | Rust + Axum JSON API |
+| `back-end-with-axum-setup` | generated scaffold script |
 
-Generated artefacts (XML, FHIR R5, Protocol Buffers, OpenAPI, Loco setup script) are never hand-edited; re-run the generators in [`/AGENTS.md`](../../../AGENTS.md) §Tools after schema changes.
+Generated artefacts (XML, FHIR R5, Protocol Buffers, OpenAPI, Axum setup script) are never hand-edited; re-run the generators in [`/AGENTS.md`](../../../AGENTS.md) §Tools after schema changes.
 
 ## 6. Acceptance criteria
 

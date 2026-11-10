@@ -35,7 +35,7 @@
 - [x] `fhir/r5/` — FHIR HL7 R5 JSON per SQL entity.
 - [x] `protobuf/` — Protocol Buffers schemas.
 - [x] `openapi/` — OpenAPI 3.1 specifications.
-- [x] `back-end-with-loco-setup` — scaffold script.
+- [x] `back-end-with-axum-setup` — scaffold script.
 - [x] `CHANGELOG.md` and `examples/`.
 - [x] `llms.txt`.
 
@@ -74,15 +74,15 @@
 - [x] `pnpm check` and `pnpm test` pass.
 - [x] `bin/lily-svelte-refactor --check hernia-diagnostic-evaluation` passes.
 
-## Back-end with Loco
+## Back-end with Axum
 
-- [x] Run `back-end-with-loco-setup` to scaffold the crate.
+- [x] Run `back-end-with-axum-setup` to scaffold the crate.
 - [x] One migration + one entity per SQL table, relational (not JSONB).
 - [x] Controllers with `serde(rename_all = "camelCase")` params.
 - [x] `bin/loco-migration-defaults --check hernia-diagnostic-evaluation` passes.
 - [x] `bin/loco-migration-nullability --check hernia-diagnostic-evaluation` passes.
 - [x] `bin/loco-config-refactor --check hernia-diagnostic-evaluation` passes.
-- [x] `bin/generate-loco-deny-config.py hernia-diagnostic-evaluation` run.
+- [x] `bin/generate-axum-deny-config.py hernia-diagnostic-evaluation` run.
 - [x] `cargo build` and `cargo test` pass.
 
 ## Verify

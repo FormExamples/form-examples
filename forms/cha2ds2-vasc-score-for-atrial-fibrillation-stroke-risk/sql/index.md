@@ -23,5 +23,5 @@ Because the form slug is long, some trigger identifiers exceed PostgreSQL's
 `trigger_<table>_updated_at` names are used regardless and remain unique within
 63 bytes.
 
-Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Loco
+Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Axum
 setup script) are derived from these migrations and are never hand-edited.

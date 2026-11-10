@@ -1,0 +1,30 @@
+CREATE TABLE IF NOT EXISTS "waterlow_pressure_ulcer_risk_assessments" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "nurse_name" varchar NOT NULL DEFAULT '',
+    "nurse_role" varchar NOT NULL DEFAULT '',
+    "assessed_at" timestamp with time zone NULL,
+    "care_setting" varchar NOT NULL DEFAULT '',
+    "assessment_reason" varchar NOT NULL DEFAULT '',
+    "patient_identifier" varchar NOT NULL DEFAULT '',
+    "age_band" varchar NOT NULL DEFAULT '',
+    "sex" varchar NOT NULL DEFAULT '',
+    "build_weight_for_height" varchar NOT NULL DEFAULT '',
+    "skin_type" varchar NOT NULL DEFAULT '',
+    "continence" varchar NOT NULL DEFAULT '',
+    "mobility" varchar NOT NULL DEFAULT '',
+    "tissue_malnutrition" varchar NOT NULL DEFAULT '',
+    "neurological_deficit" varchar NOT NULL DEFAULT '',
+    "major_surgery_trauma" varchar NOT NULL DEFAULT '',
+    "medication" varchar NOT NULL DEFAULT '',
+    "existing_pressure_damage" varchar NOT NULL DEFAULT '',
+    "clinical_note" text NOT NULL DEFAULT '',
+    "patient_id" uuid NOT NULL,
+    "clinician_id" uuid NULL,
+    CONSTRAINT "fk-waterlow_pressure_ulcer_risk_assessments-patient_id-to-patients" FOREIGN KEY ("patient_id") REFERENCES "patients" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-waterlow_pressure_ulcer_risk_assessments-clinician_id-to-clinicians" FOREIGN KEY ("clinician_id") REFERENCES "clinicians" (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+ALTER TABLE waterlow_pressure_ulcer_risk_assessments ALTER COLUMN id SET DEFAULT gen_random_uuid();

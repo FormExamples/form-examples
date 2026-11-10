@@ -16,6 +16,197 @@ for them.
 
 ## [Unreleased]
 
+### Added
+
+- **Every SQL table now has an HTTP route.** 182 tables, including the grades of 23
+  forms, could not be reached over HTTP, and most existed only in `sql/`. Each gained
+  what it lacked of a migration, a model, and routes, and
+  `bin/axum-entity-routes --check` keeps it so.
+- **A request limit per client.** Every Axum crate allows a client 600 requests a
+  minute, then answers `429` with `Retry-After`, through `axa-ratelimit`. Health probes
+  are never limited. Behind a proxy, set `TRUSTED_PROXIES`. `openapi.yaml` publishes the
+  `429` on every operation. See ADR-11.
+- **The database enforces the CHECK constraints in `sql/`.** No crate's migrations had
+  them, so any value was stored: `"sex": "banana"` answered 200. Each crate now migrates
+  its 7,781 CHECKs, `NOT VALID` so that existing rows still migrate, and 684 fixture
+  and test values that broke them were given allowed ones. A value a CHECK does not
+  list now answers `422` `unprocessable_entity`, through axa 0.6.2. The `VARCHAR(n)`
+  lengths, lost the same way, are back as 11,838 `char_length` checks, and 157 fixture
+  and test values were cut to fit. A crate also gains
+  `build.rs`, so that a new migration reaches the next build. See ADR-12.
+- **Every route a crate serves is in its OpenAPI document.** Hand-written routes
+  (the dashboards, `submit` and `result`, `inpatient-clinical-note`'s grading, the
+  ADR register) are documented in `openapi/hand/routes.yaml`, which the combined
+  generator merges, and `generate-openapi-combined.py --check` now fails on a route
+  that is served but not documented, or documented but not served. Each document also
+  describes `GET /api/openapi.yaml` and `PUT`.
+
+### Changed
+
+- **axa 0.12.** Every Axum crate moved from 0.11, with `bin/axum-axa-0-12`. For a
+  Postgres service 0.12 only renames: the `sqlx` feature is `postgres-sqlx`,
+  `axa::sqlx` is `axa::postgres_sqlx`, and axa-test is 0.3. Only the axa crates
+  moved in each `Cargo.lock`. The 0.6, 0.7 and 0.11 checks accept the new names.
+
+- **axa 0.11.** Every Axum crate moved from 0.10, with `bin/axum-axa-0-11`; axa-test
+  is 0.2. The crates read `DB_URL`, not `DATABASE_URL`, and production refuses to
+  boot without it, so CI, `bin/generate-api-transcripts`, the crates' CI files and
+  the docs use `DB_URL`. Health is `/_health/live`, `/_health/ready` and
+  `/_health/startup`; `/_ping`, `/_health` and `/_readiness` answer 404, so each
+  readiness test and the Playwright sweep moved. With no code change, a database
+  that cannot serve now answers 503 with `Retry-After`, and every response carries
+  cross-origin and permissions-policy headers. Before deploying, set `DB_URL` and
+  move probes. The setup docs connect as `postgres`, not the old `loco` role.
+
+- **axa 0.10.** Every Axum crate moved from 0.9.1, with `bin/axum-axa-0-10`. The
+  `testing` feature became its own crate, so the dev-dependency is `axa-test = "0.1"`
+  and tests import `axa_test::prelude`; `axa::prelude` no longer brings in
+  `boot_test`, `request` and `TestServer`, so the files that used it import both.
+  Only the axa crates moved in each `Cargo.lock`. The 13 renamed subcrates
+  (`axa-worker` is now `axa-postgres-job-queue`) are not direct dependencies here.
+  The older axa checks accept a later axa.
+
+- **Dependencies, 2026-11-09.** Every Axum crate moves to `validator` 0.21 and
+  `serial_test` 4, and its lock to the latest compatible versions. Every Svelte
+  front-end moves to Lily `svelte-headless` 0.8 and pickers 0.3 (picker bar 0.5),
+  SvelteKit 3.1.1, Svelte 5.57.3, Vite 8.3.6 and the other patch releases. The
+  GitHub Pages site takes the same, and `e2e/` Playwright 1.65. TypeScript stays at
+  6: SvelteKit cannot yet load TypeScript 7.
+- **The site counts its forms.** The home page and tagline read the count from the
+  generated form list (360), so they cannot go stale again.
+- **Loco-era names and defaults in `bin/`.** `bin/test-sql-apply` connects as
+  `postgres` by default, as CI does (the documented recipe connected as a `loco`
+  role that `initdb -U postgres` never creates), and helper and log names say Axum.
+- **axa 0.9.** Every Axum crate moved from 0.7 through 0.8, with `bin/axum-axa-0-8`
+  and `bin/axum-axa-0-9`. Each bumps the axa line and updates only the axa crates in
+  each `Cargo.lock`: `axa` 0.9, `axa-cursor-pagination` 0.1.1 and `axa-worker` 0.2.
+  What 0.8 and 0.9 break is unused here: the `outbox` feature, offset paging (every list
+  already pages by cursor), idempotency's `lease`, and the queue's `cancel` and
+  `retry`. `Queue::connect` makes the new insert-only `axa_job_acts` table itself. A
+  cursor issued under 0.7 still reads. No source changed.
+- **Lists page by signed cursor, with no total.** Every Axum crate is on axa 0.7, and
+  every list now takes `?limit=` and an opaque `?cursor=` instead of `?offset=`, and
+  links the next page with `Link: rel="next"`. `x-total-count`, `x-limit` and
+  `x-offset` are gone. A cursor is signed with `CURSOR_KEY`, which a production-like
+  environment requires, so a caller cannot forge one or carry it to another filter. A
+  bad cursor, or a limit over 1000, answers `422` instead of being clamped.
+  `openapi.yaml` publishes all of this. `bin/axum-axa-0-7` and
+  `bin/axum-cursor-pagination` made the move, and their `--check`s keep it. See ADR-13.
+- **axa 0.6.** Every Axum crate moved from 0.5, and `axa` now writes every error as an
+  RFC 9457 problem, so `support/problem.rs` and `support/paging.rs` are gone. A
+  duplicate or a missing reference answers `409` rather than `500`, an extractor's
+  refusal says what was wrong, and problems carry a `code`. `openapi.yaml` publishes
+  all of this. See ADR-10.
+- **`DELETE` is a true soft delete.** It marks the row and whatever cascades from it,
+  reads and updates skip marked rows, and uniqueness covers live rows only.
+  `deleted_at` left every request and response. See ADR-9.
+
+- **Every error is now RFC 9457 `application/problem+json`** in every form's back-end,
+  through `axa-problem`: `axa::Error`, extractor refusals, unknown routes, panics, and
+  timeouts. A client reading `error` or `description` must move to `title` and `detail`.
+  `openapi.yaml` publishes the `Problem` schema. See ADR-8.
+- **`axa` 0.5 in every form's back-end**, up from 0.3. The pool now lives in
+  `AppContext::db`, `/_readiness` asks it directly, and `--help` describes the form.
+- **`openapi.yaml` now describes the real API.** Paths carry `/api` and the crates'
+  snake_case names, and creates and deletes answer `200`, as they always did. The
+  combined document a crate serves lists only routes it has, so a table with no
+  controller has a per-entity file and no entry there.
+- **`db down`, `db reset`, and `db truncate` now need `AXA_DESTROY_DATA=true`**, and
+  only run in development or test.
+- **The auth scaffold is gone from every form's back-end**: the nine `/api/auth`
+  routes, the `users` table, mail, and password hashing. Nothing used them, and no
+  form route required them. See ADR-7. A database migrated since the Axum move needs
+  `db reset`.
+- **List routes are paged** with `axa-pagination`, at the limits `openapi.yaml`
+  already published: `limit` 100 by default and 1000 at most. `offset` stops at
+  100000, and answers report `x-total-count`, `x-limit`, and `x-offset`. A list now
+  returns its first 100 rows unless asked for more.
+- **`axa` 0.3 in every form's back-end.** `start` now goes through `server::run`,
+  `check` prints the effective settings, and `/_readiness` answers 503 when the
+  database stops answering, which it did not check before.
+- **The local database role is now `postgres`, not `loco`,** following axa's
+  default URL `postgres://postgres:postgres@localhost:5432/<form>_<env>`. An existing
+  local setup needs that role, or `DATABASE_URL` set. Setup scripts and CI follow.
+- **`serde-saphyr` replaces `serde_yaml` for fixtures**, which removes the
+  unmaintained `unsafe-libyaml`. Both parsers read all 2,559 fixture files the same.
+- **`deny.toml` accepts no advisories.** `RUSTSEC-2023-0071` left with jsonwebtoken.
+- **Unused dependencies removed:** `opentelemetry`, `opentelemetry_sdk`,
+  `opentelemetry-otlp`, `tracing-opentelemetry`, `axum-prometheus`, `regex`, `rstest`,
+  and `tracing-subscriber`. The crates never exported metrics or traces, and
+  `arc42/07` no longer says they do.
+- **`db truncate` now empties the form's tables**, where it only emptied `users`.
+
+### Fixed
+
+- **Every `sql/` column is in its crate, under its `sql/` name.** The scaffold left 27
+  columns out of 4 crates, so the API dropped what the forms collected:
+  outpatient-outcome's 24 EQ-5D-5L and PROMIS answers and scores, the NEWS2 and
+  satisfaction score breakdowns, and the fit note's link to the note it duplicates.
+  Each crate now migrates them, with their `sql/` CHECKs `NOT VALID`, and takes them
+  as optional fields, so a client that leaves them out still works. 14 foreign keys
+  in 14 crates were named after their parent table and now carry their `sql/` name
+  (patient-intake's `assessmentMedicationId` is `medicationsId`), which the served
+  `openapi.yaml` already documented. heart-health-check's additional flags now belong
+  to a grade, as in `sql/`, rather than straight to the assessment: each stored flag
+  moves to its assessment's grade, and an assessment flagged before it was graded
+  gets a draft grade. `bin/axum-sql-columns --check` keeps the crates in step.
+- **A JSONB list is an array in OpenAPI.** The generator called every JSONB column an
+  object, so encounter-satisfaction's `domainScores` and return-to-work's
+  `phasedReturnScheduleJson`, which `sql/` defaults to `'[]'`, were documented wrongly;
+  return-to-work's seed also stored `{}` there and now stores `[]`.
+
+- The served OpenAPI documents named every property in snake_case and typed every
+  column as non-null, where the crates send camelCase and `null`. They now match
+  what is sent, checked against live responses from every crate. Seven crates serve
+  a table under another path than the document gave (`/api/people`, `/api/respect`,
+  `…prophylaxes`, `…thromboses`, two `…criteria`, and a kebab-case path); the
+  document now gives the served path.
+- `architecture-decision-record` created a record at `POST
+  /architecture_decision_records`, which answered a redirect to a route that did
+  not exist. It is `POST /api/adrs`, answering the stored row, and the crate now
+  serves `GET /api/openapi.yaml` like every other.
+- `bin/generate-api-transcripts` and the patient request tests posted values longer
+  than their columns allow, such as `"Test preferredLanguageAsIso6391"` for a
+  two-letter code. They post realistic codes (`en`, `GBR`), cut to the column's length.
+- The `neurodiversity-adjustment-request` engine's most urgent timeframe was 54
+  characters, where `sql/` allowed 50. The column is now `VARCHAR(100)`.
+- `inpatient-clinical-note` sent its five decimal fields as strings, unlike every other
+  crate and its OpenAPI document. They are numbers.
+- The `inpatient-clinical-note` grading tests recorded a consent status of
+  `capacitous-consent`, which neither `sql/` nor either front-end offers. They use
+  `consented`.
+- `task seed` loaded fixtures in production. It now runs only in development and test.
+- The `neurodiversity-adjustment-request` dashboard showed one arbitrary grade against
+  every request, because its lookup did not name the request. Each request now shows its
+  own grade, or none.
+- Five hand-written back-ends (`cardiology-request`, `cardiology-response`, and the
+  three `neurodiversity-adjustment-*`) wrapped lists in `{items, total}`, where
+  `openapi.yaml` documents a bare array. Their lists and dashboards now answer the
+  array, page with `?limit=` and `?offset=`, and report the true total in
+  `x-total-count`. A dashboard used to take up to any `limit`, with 500 by default.
+- `bin/generate-api-transcripts` still drove Loco, so it could not run. It now uses the
+  axa command line, and `--check` ignores ids and timestamps. Every transcript was
+  recorded again, with UUID ids.
+- **`db down` and `db truncate` are refused in production**, like `db reset`. They
+  had no guard.
+- **Loco and SeaORM replaced by plain Axum, `axa`, and sqlx** in every form's
+  back-end, and `back-end-with-loco` renamed to `back-end-with-axum`. Migrations
+  are now plain `.up.sql` and `.down.sql` files, settings come from the
+  environment (`config/*.yaml` is gone), and paging, model errors, and seeding live
+  in an identical `support/` module per crate. The generated schema matches the
+  old one exactly in all 360 forms. See ADR-6 in `arc42/`.
+- **MSRV raised to 1.97**, which `axa` requires.
+- **`/api/auth`, mail, and seeding** keep their behaviour, with these differences
+  on purpose: production requires `JWT_SECRET` and `DATABASE_URL`, CORS is off in
+  production until `CORS_ALLOWED_ORIGINS` lists origins, and outside production
+  mail is logged unless `SMTP_ENABLE` is set.
+
+### Removed
+
+- The `bin/loco-*` one-shot refactors and drift checks that only applied to Loco,
+  including `loco-migration-defaults` and `loco-migration-nullability`.
+- `examples/playground.rs` and each crate's `migration/` and `config/`.
+
 ### Changed
 
 - **Applied `spec/lily-design-system-svelte-with-picker-bar/` fleet-wide:
@@ -137,7 +328,7 @@ for them.
   disk.** Every form's checklist began life as `bin/create-form`'s
   scaffold template; fleet-wide tooling since has built almost all of
   that work directly (SQL migrations, generated XML/FHIR/protobuf/OpenAPI,
-  `front-end-with-html/`, `front-end-with-svelte/`, `back-end-with-loco/`,
+  `front-end-with-html/`, `front-end-with-svelte/`, `back-end-with-axum/`,
   `doc/` pages, ...) without ever going back to tick the original
   per-form list — 1856 stale `- [ ]` lines found in `tasks.md` fleet-wide,
   plus another 69 in `plan.md` once the sweep was extended there too.
@@ -903,7 +1094,7 @@ for them.
   `front-end-form-with-*`/`front-end-dashboard-with-*` layout, SVAR
   dashboards, `full-stack-with-loco-tera-htmx-alpine/`) rewritten to the
   current 355-form / `front-end-with-html` + `front-end-with-svelte` +
-  `back-end-with-loco` reality; and `scripts/generate-forms-data.ts`
+  `back-end-with-axum` reality; and `scripts/generate-forms-data.ts`
   listed *any* directory under `forms/` (picking up `doc/`, `fhir/`,
   `lily-spec/`, `lily-svelte-spec/` as 4 bogus entries on the public
   Forms page) rather than requiring an `index.md`.
@@ -951,13 +1142,13 @@ this section gathers the `[Unreleased]` history that shipped as v1.0.0.
 ### Added
 
 - `#![forbid(unsafe_code)]` on every crate root in every form's
-  `back-end-with-loco/` — the library, the `-cli` binary, the `migration`
+  `back-end-with-axum/` — the library, the `-cli` binary, the `migration`
   library, and the integration-test target — 1,412 crate roots across 355
   crates. Nothing in these crates needs `unsafe`, and `forbid`, unlike `deny`,
   cannot be reopened by a later inner `allow`.
-- `bin/loco-forbid-unsafe`, the tool that applies and gates the above, with
+- `bin/axum-forbid-unsafe`, the tool that applies and gates the above, with
   `--check` wired into the CI drift job. Every form's generated
-  `back-end-with-loco-setup` script now calls it as its final step, so a newly
+  `back-end-with-axum-setup` script now calls it as its final step, so a newly
   scaffolded crate arrives with the attribute already in place.
 - Repository-level special files for public repositories: `AI_STATEMENT.md`,
   `BENCHMARKS.md`, `CHANGELOG.md`, `CODEOWNERS`, `COMPARISONS.md`,
@@ -1152,7 +1343,7 @@ this section gathers the `[Unreleased]` history that shipped as v1.0.0.
 
 ### Changed
 
-- Route layouts settled: Loco crates under `back-end-with-loco/src/<snake>/`,
+- Route layouts settled: Loco crates under `back-end-with-axum/src/<snake>/`,
   Svelte routes nested under `src/routes/<form-kebab-case>/`.
 - Every HTML front-end converted from classic `window.<Namespace>` scripts to
   native ES modules, with `spec/es-modules.md` and a `--check` gate.

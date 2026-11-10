@@ -46,7 +46,7 @@ Standardisation Initiative*.
   review dashboard (`dashboard.html`); Lily Design System, ES modules, no build
 - `./front-end-with-svelte/` — SvelteKit single-page wizard + dashboard;
   routes nested under `src/routes/dietic-assessment/`
-- `./back-end-with-loco/` — Rust axum + Loco JSON API; crate source under
+- `./back-end-with-axum/` — Rust axum + axa + sqlx JSON API; crate source under
   `src/dietic_assessment/`
 
 ## Scoring engine
@@ -171,11 +171,11 @@ Bundle.
 
 ## Back-end stack
 
-- Rust edition 2021 (as scaffolded by loco-rs 1.0.1).
-- Loco 1.0.1 on axum 0.8, SeaORM with PostgreSQL.
+- Rust edition 2021 (as scaffolded by axa 1.0.1).
+- Axum 1.0.1 on axum 0.8, sqlx with PostgreSQL.
 - JSON API only — no Tera, HTMX, Alpine, or CSS.
 - Relational per-table schema: one migration and one entity per SQL table.
-- `i64` ids (loco-rs 1.0 `ColType::PkAuto` renders `BIGINT`).
+- `i64` ids (axa 1.0 `ColType::PkAuto` renders `BIGINT`).
 - `serde(rename_all = "camelCase")` for front-end interop.
 
 ## Clinical grounding

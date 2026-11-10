@@ -18,7 +18,7 @@ of the pattern, scaffolded by `bin/create-form`. → *quality: uniformity.*
 
 `forms/<slug>/sql/` is the single source of truth for data shape. Python
 generators project it to XML/DTD, FHIR R5 JSON, Protocol Buffers, and OpenAPI
-3.1, plus the Loco scaffold script. Generated artefacts are never hand-edited;
+3.1, plus the Axum scaffold script. Generated artefacts are never hand-edited;
 correctness is proven by regenerating and observing **zero drift**.
 → *quality: correctness, interoperability.*
 
@@ -31,10 +31,10 @@ flowchart TD
   sql --> fhir[fhir/r5/ JSON]
   sql --> proto[protobuf/ .proto]
   sql --> oapi[openapi/ 3.1 yaml]
-  sql --> loco[back-end-with-loco-setup]
+  sql --> loco[back-end-with-axum-setup]
   spec --> feh[front-end-with-html]
   spec --> fes[front-end-with-svelte]
-  spec --> bel[back-end-with-loco]
+  spec --> bel[back-end-with-axum]
 ```
 
 ## 4.3 Pure scoring engines, mirrored across stacks
@@ -59,5 +59,5 @@ accessibility commitments are shared. → *quality: accessibility, uniformity.*
 Correctness is *demonstrated*, not asserted. A family of `bin/…--check` drift
 detectors and test gates make every invariant executable: structure validity,
 SQL apply, generated-artefact drift, Lily contract drift, spec presence, and
-Loco config drift. A green run is the acceptance criterion. → *quality:
+Axum config drift. A green run is the acceptance criterion. → *quality:
 correctness, maintainability.* See [§10 Quality Requirements](10-quality-requirements.md).

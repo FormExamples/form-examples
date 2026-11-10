@@ -1,0 +1,20 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-00000009923f"
+  deletedAt: null
+  inhalerUse: "yes"
+  inhalerTechniqueAssessed: "yes"
+  inhalerTechniqueAdequate: "yes"
+  shortActingBronchodilator: "yes"
+  sabaFrequency: "Test sabaFrequency"
+  longActingBronchodilator: "yes"
+  inhaledCorticosteroid: "yes"
+  combinationInhaler: "yes"
+  longTermOxygenTherapy: "yes"
+  oxygenFlowRateLmin: 1.0
+  oxygenHoursPerDay: 1
+  nebuliserUse: "yes"
+  oralMedications: "Test oralMedications"
+  medicationAdherence: "good"
+  additionalNotes: "Test additionalNotes"
+  assessmentId: "00000000-0000-4000-8000-00000006f3ed"

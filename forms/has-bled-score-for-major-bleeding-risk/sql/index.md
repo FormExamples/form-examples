@@ -25,5 +25,5 @@ Each contributes 0 or 1 point for a total of 0-9; a total >= 3 bands as `high`
 major-bleeding risk. The score pairs with, but does not compute, CHA2DS2-VASc,
 which is recorded as an optional context input.
 
-Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Loco
+Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Axum
 setup script) are derived from these migrations and are never hand-edited.

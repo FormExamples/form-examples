@@ -1,0 +1,14 @@
+ALTER TABLE "history_and_physical_examination_grade_flags" DROP CONSTRAINT IF EXISTS "history_and_physical_examination_grade_flags_priority_check";
+ALTER TABLE "history_and_physical_examination_grade_flags" DROP CONSTRAINT IF EXISTS "history_and_physical_examination_grade_flags_category_check";
+ALTER TABLE "history_and_physical_examination_grade_rules" DROP CONSTRAINT IF EXISTS "history_and_physical_examination_grade_rules_section_check";
+ALTER TABLE "history_and_physical_examination_grades" DROP CONSTRAINT IF EXISTS "history_and_physical_examination_grades_status_check";
+ALTER TABLE "history_and_physical_examinations" DROP CONSTRAINT IF EXISTS "history_and_physical_examinations_consciousness_level_check";
+ALTER TABLE "history_and_physical_examinations" DROP CONSTRAINT IF EXISTS "history_and_physical_examinations_allergy_status_check";
+ALTER TABLE "history_and_physical_examinations" DROP CONSTRAINT IF EXISTS "history_and_physical_examinations_sex_check";
+ALTER TABLE "history_and_physical_examinations" DROP CONSTRAINT IF EXISTS "history_and_physical_examinations_age_band_check";
+ALTER TABLE "history_and_physical_examinations" DROP CONSTRAINT IF EXISTS "history_and_physical_examinations_admission_source_check";
+ALTER TABLE "history_and_physical_examinations" DROP CONSTRAINT IF EXISTS "history_and_physical_examinations_care_setting_check";
+ALTER TABLE "history_and_physical_examinations" DROP CONSTRAINT IF EXISTS "history_and_physical_examinations_clinician_role_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

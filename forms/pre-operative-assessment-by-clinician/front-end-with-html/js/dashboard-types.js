@@ -52,7 +52,7 @@
 /**
  * Response from `GET /api/assessments`.
  *
- * The Loco backend returns a bare JSON array of `AssessmentRow` objects; the
+ * The Axum backend returns a bare JSON array of `AssessmentRow` objects; the
  * dashboard accepts either a bare array or an `{ items, total }` envelope so
  * future paginated responses are forwards-compatible.
  *

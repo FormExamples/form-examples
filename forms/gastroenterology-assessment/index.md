@@ -29,7 +29,7 @@ Gastrointestinal symptom evaluation covering upper and lower GI, abdominal pain,
 gastroenterology-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

@@ -29,7 +29,7 @@ Functional movement screening using the FMS (Functional Movement Screen) with 7 
 kinesiology-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

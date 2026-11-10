@@ -1,7 +1,0 @@
-- createdAt: "2026-01-01T00:00:00Z"
-  updatedAt: "2026-01-01T00:00:00Z"
-  id: "00000000-0000-4000-8000-0000000a5c38"
-  deletedAt: null
-  hasDrugAllergies: "No known allergies"
-  crossReactivityConcerns: "Test crossReactivityConcerns"
-  assessmentId: "00000000-0000-4000-8000-0000000ecc88"

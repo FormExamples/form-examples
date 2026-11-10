@@ -1,0 +1,15 @@
+ALTER TABLE "electroencephalogram_test_result_grade_flags" DROP CONSTRAINT IF EXISTS "electroencephalogram_test_result_grade_flags_priority_check";
+ALTER TABLE "electroencephalogram_test_result_grade_flags" DROP CONSTRAINT IF EXISTS "electroencephalogram_test_result_grade_flags_category_check";
+ALTER TABLE "electroencephalogram_test_result_grade_rules" DROP CONSTRAINT IF EXISTS "electroencephalogram_test_result_grade_rules_axis_check";
+ALTER TABLE "electroencephalogram_test_result_grades" DROP CONSTRAINT IF EXISTS "electroencephalogram_test_result_grades_recommendation_check";
+ALTER TABLE "electroencephalogram_test_result_grades" DROP CONSTRAINT IF EXISTS "electroencephalogram_test_result_grades_follow_up_urgency_check";
+ALTER TABLE "electroencephalogram_test_result_grades" DROP CONSTRAINT IF EXISTS "electroencephalogram_test_result_grades_report_complet_889d117e";
+ALTER TABLE "electroencephalogram_test_result_grades" DROP CONSTRAINT IF EXISTS "electroencephalogram_test_result_grades_abnormality_se_f21e824d";
+ALTER TABLE "electroencephalogram_test_result_grades" DROP CONSTRAINT IF EXISTS "electroencephalogram_test_result_grades_result_classif_ade89ab9";
+ALTER TABLE "electroencephalogram_test_results" DROP CONSTRAINT IF EXISTS "electroencephalogram_test_results_background_rhythm_check";
+ALTER TABLE "electroencephalogram_test_results" DROP CONSTRAINT IF EXISTS "electroencephalogram_test_results_recording_quality_check";
+ALTER TABLE "electroencephalogram_test_results" DROP CONSTRAINT IF EXISTS "electroencephalogram_test_results_recording_duration_m_966ced18";
+ALTER TABLE "electroencephalogram_test_results" DROP CONSTRAINT IF EXISTS "electroencephalogram_test_results_eeg_type_check";
+ALTER TABLE "electroencephalogram_test_results" DROP CONSTRAINT IF EXISTS "electroencephalogram_test_results_report_status_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";

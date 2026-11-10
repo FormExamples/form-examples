@@ -9,7 +9,6 @@
       "Bash(cargo build *)",
       "Bash(cargo test *)",
       "Bash(:)",
-      "Bash(chmod +x /Users/jph/git/formexamples/form-examples/forms/agile-consulting-scorecard-for-hiring-help/full-stack-with-loco-tera-htmx-alpine-setup)",
       "Bash(node -e \"const fs=require\\('fs'\\);const c=fs.readFileSync\\('index.html','utf8'\\);console.log\\('size:',c.length,'chars'\\);console.log\\('items found:',\\(c.match\\(/key:.'\\(m\\\\d|p\\\\d{1,2}\\)'/g\\)||[]\\).length\\);\")",
       "Bash(node *)",
       "Bash(cargo run *)",

@@ -1,0 +1,31 @@
+CREATE TABLE IF NOT EXISTS "nuclear_medicine_test_requests" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "status" varchar NOT NULL DEFAULT 'draft',
+    "site_name" varchar NOT NULL DEFAULT '',
+    "setting" varchar NOT NULL DEFAULT '',
+    "referral_date" date NULL,
+    "requested_by_date" date NULL,
+    "scan_type" varchar NOT NULL DEFAULT '',
+    "primary_indication" varchar NOT NULL DEFAULT '',
+    "clinical_question" varchar NOT NULL DEFAULT '',
+    "relevant_history" varchar NOT NULL DEFAULT '',
+    "pregnancy_status" varchar NOT NULL DEFAULT '',
+    "breastfeeding" boolean NOT NULL DEFAULT false,
+    "egfr" double precision NULL,
+    "recent_other_nuclear_scan" boolean NOT NULL DEFAULT false,
+    "weight_kg" double precision NULL,
+    "urgency" varchar NOT NULL DEFAULT 'routine',
+    "ir_me_r_justification" varchar NOT NULL DEFAULT '',
+    "supervising_consultant" varchar NOT NULL DEFAULT '',
+    "requester_contact" varchar NOT NULL DEFAULT '',
+    "notes" varchar NOT NULL DEFAULT '',
+    "patient_id" uuid NOT NULL,
+    "clinician_id" uuid NOT NULL,
+    CONSTRAINT "fk-nuclear_medicine_test_requests-patient_id-to-patients" FOREIGN KEY ("patient_id") REFERENCES "patients" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-nuclear_medicine_test_requests-clinician_id-to-clinicians" FOREIGN KEY ("clinician_id") REFERENCES "clinicians" (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+ALTER TABLE nuclear_medicine_test_requests ALTER COLUMN id SET DEFAULT gen_random_uuid();

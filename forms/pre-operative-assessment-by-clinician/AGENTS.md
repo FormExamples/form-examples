@@ -27,7 +27,7 @@ See [`index.md`](./index.md) for the full design and the 16-step wizard table.
   + review dashboard (`dashboard.html`); Lily Design System, no build
 - `./front-end-with-svelte/` — SvelteKit single-page wizard + SVAR DataGrid
   review dashboard; routes nested under `src/routes/<form-kebab-case>/`
-- `./back-end-with-loco/` — Rust axum + Loco JSON API back-end; crate source
+- `./back-end-with-axum/` — Rust axum + axa + sqlx JSON API back-end; crate source
   under `src/<form_snake_case>/`
 
 ## Scoring engine
@@ -124,8 +124,8 @@ step 16 with a documented reason. Both the **computed** grade and the
 ## Backend stack
 
 - Rust edition 2024
-- Loco 0.16 framework on axum 0.8
-- SeaORM 1.1 with PostgreSQL
+- Axum 0.16 framework on axum 0.8
+- sqlx 1.1 with PostgreSQL
 - a JSON API (no server-rendered templates)
 - `serde(rename_all = "camelCase")` for front-end interop
 

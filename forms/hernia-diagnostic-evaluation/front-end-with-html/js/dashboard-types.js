@@ -45,7 +45,7 @@
 /**
  * Response from `GET /api/hernia_diagnostic_evaluations`.
  *
- * The Loco back-end returns a bare JSON array of `EvaluationRow` objects; the
+ * The Axum back-end returns a bare JSON array of `EvaluationRow` objects; the
  * dashboard accepts either a bare array or an `{ items, total }` envelope so a
  * future paginated response is forwards-compatible.
  *

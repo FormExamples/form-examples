@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-0000000deae0"
+  deletedAt: null
+  name: "Test Patient"
+  birthDate: "1990-01-01"
+  socialSecurityNumber: "Test social"
+  streetAddress: "Test streetAddress"
+  city: "Test city"
+  state: "Te"
+  zipCode: "Test zipCo"
+  phone: "+441234567890"
+  email: "test.patient@example.com"

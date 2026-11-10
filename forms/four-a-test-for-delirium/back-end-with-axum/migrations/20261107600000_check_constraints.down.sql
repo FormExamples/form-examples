@@ -1,0 +1,14 @@
+ALTER TABLE "four_a_test_for_delirium_grade_flags" DROP CONSTRAINT IF EXISTS "four_a_test_for_delirium_grade_flags_priority_check";
+ALTER TABLE "four_a_test_for_delirium_grade_flags" DROP CONSTRAINT IF EXISTS "four_a_test_for_delirium_grade_flags_category_check";
+ALTER TABLE "four_a_test_for_delirium_grade_rules" DROP CONSTRAINT IF EXISTS "four_a_test_for_delirium_grade_rules_item_check";
+ALTER TABLE "four_a_test_for_delirium_grades" DROP CONSTRAINT IF EXISTS "four_a_test_for_delirium_grades_interpretation_check";
+ALTER TABLE "four_a_test_for_delirium_grades" DROP CONSTRAINT IF EXISTS "four_a_test_for_delirium_grades_total_score_check";
+ALTER TABLE "four_a_test_for_deliriums" DROP CONSTRAINT IF EXISTS "four_a_test_for_deliriums_acute_change_source_check";
+ALTER TABLE "four_a_test_for_deliriums" DROP CONSTRAINT IF EXISTS "four_a_test_for_deliriums_acute_change_check";
+ALTER TABLE "four_a_test_for_deliriums" DROP CONSTRAINT IF EXISTS "four_a_test_for_deliriums_attention_months_check";
+ALTER TABLE "four_a_test_for_deliriums" DROP CONSTRAINT IF EXISTS "four_a_test_for_deliriums_amt4_check";
+ALTER TABLE "four_a_test_for_deliriums" DROP CONSTRAINT IF EXISTS "four_a_test_for_deliriums_alertness_check";
+ALTER TABLE "four_a_test_for_deliriums" DROP CONSTRAINT IF EXISTS "four_a_test_for_deliriums_setting_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

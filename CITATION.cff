@@ -30,7 +30,7 @@ abstract: >-
   representations generated from it (XML with DTD, HL7 FHIR R5, Protocol
   Buffers, and OpenAPI 3.1), two front-end implementations (static HTML and
   SvelteKit) of a single-page questionnaire wizard with a deterministic scoring
-  or grading engine, and a Rust JSON API (axum and Loco). Machine-checked drift
+  or grading engine, and a Rust JSON API (axum and Axum). Machine-checked drift
   detectors hold every generated artefact in agreement with its source. The
   forms are worked examples; none is clinically validated or approved for care.
 keywords:

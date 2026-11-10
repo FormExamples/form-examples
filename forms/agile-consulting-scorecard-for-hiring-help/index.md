@@ -144,8 +144,8 @@ agile-consulting-scorecard-for-hiring-help/
   front-end-with-svelte/                       # SvelteKit wizard + /report + /report/pdf + /diff
   front-end-with-html/                    # static reviewer table (11 columns)
   front-end-with-svelte/                  # SVAR Grid dashboard + /report/[id] + /import + stats panel
-  back-end-with-loco/            # Rust axum server + scoring engine + CLI
-  back-end-with-loco-setup       # Loco scaffold-generator shell script
+  back-end-with-axum/            # Rust axum server + scoring engine + CLI
+  back-end-with-axum-setup       # Axum scaffold-generator shell script
 ```
 
 ## Quick start

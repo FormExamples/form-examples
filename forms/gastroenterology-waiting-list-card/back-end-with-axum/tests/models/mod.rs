@@ -1,0 +1,7 @@
+mod gastro_waiting_list_card_appointments;
+mod gastro_waiting_list_card_grade_flags;
+mod gastro_waiting_list_card_grade_rules;
+mod gastro_waiting_list_card_grades;
+mod gastro_waiting_list_cards;
+mod patients;
+mod practitioners;

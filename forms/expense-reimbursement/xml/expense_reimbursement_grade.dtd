@@ -1,0 +1,13 @@
+<!ELEMENT expense_reimbursement_grade (id,created_at,updated_at,deleted_at,expense_reimbursement_id,compliance_band,completeness_percent,approval_tier,recommendation,manager_notes,signed_at,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT expense_reimbursement_id (#PCDATA)>
+<!ELEMENT compliance_band (#PCDATA)>
+<!ELEMENT completeness_percent (#PCDATA)>
+<!ELEMENT approval_tier (#PCDATA)>
+<!ELEMENT recommendation (#PCDATA)>
+<!ELEMENT manager_notes (#PCDATA)>
+<!ELEMENT signed_at (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

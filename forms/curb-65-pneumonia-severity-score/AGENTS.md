@@ -24,7 +24,7 @@ See [`index.md`](./index.md) for the full design and the criterion table.
 - `./openapi/` — generated OpenAPI 3.1 specifications
 - `./front-end-with-html/` — HTML + Lily wizard (`index.html`) + `dashboard.html`
 - `./front-end-with-svelte/` — SvelteKit + Lily wizard + dashboard
-- `./back-end-with-loco/` — Rust axum + Loco JSON API
+- `./back-end-with-axum/` — Rust axum + axa + sqlx JSON API
 
 ## Scoring engine
 

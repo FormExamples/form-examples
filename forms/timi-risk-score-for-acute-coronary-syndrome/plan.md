@@ -6,8 +6,8 @@ Implementation roadmap. See [`spec/index.md`](./spec/index.md) for the contract.
 
 All four layers are built as of 2026-07-02: foundation docs (`index.md`,
 `spec/index.md`, `AGENTS.md`, `plan.md`, `tasks.md`); SQL migrations plus the
-generated representations (XML, FHIR R5, protobuf, OpenAPI, Loco setup); both
-consolidated front-ends (HTML + Lily and SvelteKit + Lily); and the Loco
+generated representations (XML, FHIR R5, protobuf, OpenAPI, Axum setup); both
+consolidated front-ends (HTML + Lily and SvelteKit + Lily); and the Axum
 JSON-API back-end — plus `CHANGELOG.md` and `examples/`.
 
 ## Roadmap
@@ -17,7 +17,7 @@ JSON-API back-end — plus `CHANGELOG.md` and `examples/`.
    identification fields, the seven criterion inputs (age plus the risk-factor
    and clinical yes/no flags), timestamps; UUIDv4 PK. Source of truth.
 3. **Generated representations** — run the XML, FHIR R5, protobuf, OpenAPI, and
-   Loco setup generators.
+   Axum setup generators.
 4. **Scoring engine** — `types.ts`, `utils.ts`, `timi-rules.ts`,
    `timi-grader.ts`, `flagged-issues.ts` with Vitest tests covering the age
    boundary (64/65), the risk-factor threshold (2/3), each band transition, and
@@ -25,7 +25,7 @@ JSON-API back-end — plus `CHANGELOG.md` and `examples/`.
 5. **Front-ends** — consolidated `front-end-with-html` (Lily wizard + dashboard)
    and `front-end-with-svelte` (Lily; RESTful `/<plural>/` list + `/<plural>/[id]`
    form).
-6. **Back-end** — `back-end-with-loco` Rust axum + Loco JSON API, relational
+6. **Back-end** — `back-end-with-axum` Rust axum + axa JSON API, relational
    per-table schema.
 7. **Verify** — `bin/test-form timi-risk-score-for-acute-coronary-syndrome`,
    Lily drift checks, spec / changelog drift checks.

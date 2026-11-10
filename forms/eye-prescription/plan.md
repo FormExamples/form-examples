@@ -93,7 +93,7 @@ medium / high), a human-readable description, and a suggested action
 7. [ ] Generate Protobuf via
        `bin/protobuf/generate-protobuf-representations.py`.
 8. [ ] Write TypeSpec API definitions.
-9. [ ] Write `back-end-with-loco-setup` script
+9. [ ] Write `back-end-with-axum-setup` script
        (cargo loco generate scaffold per table).
 10. [ ] Populate each subproject's AGENTS / index / plan / tasks with
         form-specific content (so each is implementation-ready).
@@ -101,7 +101,7 @@ medium / high), a human-readable description, and a suggested action
 12. [ ] Build HTML front-end form (static, Alpine.js).
 13. [ ] Build SvelteKit dashboard (SVAR DataGrid).
 14. [ ] Build HTML dashboard (static review table).
-15. [ ] Build Rust full-stack with axum / Loco JSON API.
+15. [ ] Build Rust full-stack with axum / axa JSON API.
 16. [ ] Unit-test classification engine (Vitest).
 17. [ ] Run `bin/test-form eye-prescription`.
 

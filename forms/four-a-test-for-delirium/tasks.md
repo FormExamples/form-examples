@@ -22,14 +22,14 @@
 - [x] FHIR R5 JSON generated.
 - [x] Protobuf generated.
 - [x] OpenAPI generated.
-- [x] Loco setup script generated.
+- [x] Axum setup script generated.
 
 ## Front-ends
 - [x] `front-end-with-html/` — Lily wizard + dashboard.
 - [x] `front-end-with-svelte/` — Lily wizard + dashboard.
 
 ## Back-end
-- [x] `back-end-with-loco/` — axum + Loco JSON API.
+- [x] `back-end-with-axum/` — axum + Loco JSON API.
 
 ## Tests
 - [x] Vitest unit tests for the scoring engine (`fourat-grader.test.ts`).

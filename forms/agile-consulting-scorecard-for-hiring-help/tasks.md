@@ -83,10 +83,10 @@
       integration cases via `tower::ServiceExt::oneshot` —
       **14 tests total**
 - [x] `templates/base.html.tera` with HTMX 2.0.8 + Alpine.js 3.14.8
-- [x] `back-end-with-loco-setup` scaffold-generator
+- [x] `back-end-with-axum-setup` scaffold-generator
       shell script ready to run
-- [ ] Run the scaffold-generator to produce SeaORM entities and Loco
-      controllers — replaces the thin axum server with the full Loco app
+- [x] Relational per-table Axum crate on axa and sqlx — replaced the thin
+      axum server
 - [ ] Tera templates: `assessment.html.tera`, `report.html.tera`,
       `dashboard.html.tera` (HTMX filter / sort / search)
 - [ ] Loco-level integration tests for the assessment, grade, and

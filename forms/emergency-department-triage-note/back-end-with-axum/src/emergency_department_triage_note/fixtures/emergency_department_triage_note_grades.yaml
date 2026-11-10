@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-00000007af3f"
+  deletedAt: null
+  news2Total: 1
+  news2AnyParameterThree: "yes"
+  priorityLevel: 1
+  priorityColour: "red"
+  priorityName: "Immediate"
+  targetMinutes: 0
+  gradedAt: "2026-01-01T00:00:00Z"
+  emergencyDepartmentTriageNoteId: "00000000-0000-4000-8000-00000002658b"

@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-0000000c0879"
+  deletedAt: null
+  polypharmacyConcern: "yes"
+  drugInteractionsIdentified: "yes"
+  drugInteractionDetails: "Test drugInteractionDetails"
+  complementaryMedicines: "yes"
+  complementaryMedicineDetails: "Test complementaryMedicineDetails"
+  medicationAdherence: "good"
+  medicationsNotes: "Test medicationsNotes"
+  assessmentId: "00000000-0000-4000-8000-000000031c2f"

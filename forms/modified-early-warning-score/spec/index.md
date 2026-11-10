@@ -24,7 +24,7 @@ MEWS predates and is superseded by NEWS2 (see sibling form
 ## 2. Scope
 
 In scope: the schema, scoring engine, two consolidated front-ends
-(`front-end-with-html`, `front-end-with-svelte`), the Rust Loco JSON-API crate,
+(`front-end-with-html`, `front-end-with-svelte`), the Rust Axum JSON-API crate,
 and the generated representations (XML, FHIR R5, protobuf, OpenAPI). Out of
 scope: hosted deployment, authentication, multi-tenancy, paediatric or
 pregnancy-specific scoring, and longitudinal trend storage beyond a single
@@ -175,8 +175,8 @@ CSV, or TSV.
 | `openapi` | generated |
 | `front-end-with-html` | HTML + Lily (wizard + dashboard) |
 | `front-end-with-svelte` | SvelteKit (wizard + dashboard) |
-| `back-end-with-loco` | Rust + Loco JSON API |
-| `back-end-with-loco-setup` | generated scaffold script |
+| `back-end-with-axum` | Rust + Axum JSON API |
+| `back-end-with-axum-setup` | generated scaffold script |
 
 Generated artefacts are never hand-edited; re-run the generators in
 [`/AGENTS.md`](../../../AGENTS.md) §Tools after schema changes.

@@ -4,7 +4,7 @@ A battery of 4 independent, validated PRO instruments (SF-36v2, NDI,
 mJOA, EQ-5D-3L). Each is scored independently — there is no
 cross-instrument composite. **The exact scoring algorithm for every
 instrument is in [`spec/index.md`](./spec/index.md); implementations
-in every stack (HTML, Svelte, Loco) MUST match it precisely** — do not
+in every stack (HTML, Svelte, Axum) MUST match it precisely** — do not
 invent alternate coefficients, thresholds, or recoding rules.
 
 ## Directory map
@@ -20,7 +20,7 @@ invent alternate coefficients, thresholds, or recoding rules.
 - `./fhir/r5/` — generated FHIR R5 JSON per SQL entity
 - `./front-end-with-html/` — single-page HTML wizard (index.html) + dashboard (dashboard.html)
 - `./front-end-with-svelte/` — SvelteKit single-page wizard + dashboard
-- `./back-end-with-loco/` — Rust backend with a JSON API
+- `./back-end-with-axum/` — Rust backend with a JSON API
 
 ## Data model
 
@@ -157,8 +157,8 @@ well-known instruments (named columns), not an open-ended checklist.
 ## Backend stack
 
 - Rust edition 2024
-- Loco 0.16 framework on axum 0.8
-- SeaORM 1.1 with PostgreSQL
+- Axum 0.16 framework on axum 0.8
+- sqlx 1.1 with PostgreSQL
 - a JSON API (no server-rendered templates)
 - `serde(rename_all = "camelCase")` for front-end interop
 

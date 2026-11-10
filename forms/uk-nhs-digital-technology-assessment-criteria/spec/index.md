@@ -25,7 +25,7 @@ Full design description: [`index.md`](../index.md).
 ## 2. Scope
 
 In scope: the schema and generated representations (this stage), then the scoring engine,
-front-ends (HTML and SvelteKit) and Loco back-end. Out of scope: hosted deployment,
+front-ends (HTML and SvelteKit) and Axum back-end. Out of scope: hosted deployment,
 authentication, evidence document storage, and formal DTAC certification.
 
 ## Scoring system

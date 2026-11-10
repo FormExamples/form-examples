@@ -1,0 +1,30 @@
+CREATE TABLE IF NOT EXISTS "has_bled_score_for_major_bleeding_risks" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "clinician_name" varchar NOT NULL DEFAULT '',
+    "clinician_role" varchar NOT NULL DEFAULT '',
+    "assessed_at" timestamp with time zone NULL,
+    "care_setting" varchar NOT NULL DEFAULT '',
+    "anticoagulation_status" varchar NOT NULL DEFAULT '',
+    "cha_ds_vasc_score" integer NULL,
+    "patient_identifier" varchar NOT NULL DEFAULT '',
+    "age_years" integer NULL,
+    "sex" varchar NOT NULL DEFAULT '',
+    "hypertension_uncontrolled" varchar NOT NULL DEFAULT '',
+    "abnormal_renal_function" varchar NOT NULL DEFAULT '',
+    "abnormal_liver_function" varchar NOT NULL DEFAULT '',
+    "stroke_history" varchar NOT NULL DEFAULT '',
+    "bleeding_history" varchar NOT NULL DEFAULT '',
+    "labile_inr" varchar NOT NULL DEFAULT '',
+    "antiplatelet_or_nsaid" varchar NOT NULL DEFAULT '',
+    "alcohol_units_per_week" double precision NULL,
+    "clinical_note" text NOT NULL DEFAULT '',
+    "patient_id" uuid NOT NULL,
+    "clinician_id" uuid NULL,
+    CONSTRAINT "fk-has_bled_score_for_major_bleeding_risks-patient_id-to-patients" FOREIGN KEY ("patient_id") REFERENCES "patients" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-has_bled_score_for_major_bleeding_risks-clinician_id-to-clinicians" FOREIGN KEY ("clinician_id") REFERENCES "clinicians" (id) ON DELETE SET NULL ON UPDATE NO ACTION
+);
+
+ALTER TABLE has_bled_score_for_major_bleeding_risks ALTER COLUMN id SET DEFAULT gen_random_uuid();

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main inpatient clinical note record: note identification, admission context, interval history, observations and NEWS2, examination findings, risk assessments, clinical impression, plan and escalation, communication, and sign-off. Problems, medication changes, investigations, and jobs live in child tables."
 paths:
-  /inpatient-clinical-notes:
+  /api/inpatient_clinical_notes:
     get:
       summary: List InpatientClinicalNote records
       operationId: listInpatientClinicalNote
@@ -19,22 +19,44 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of InpatientClinicalNote records
+          description: A page of InpatientClinicalNote records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/InpatientClinicalNote"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new InpatientClinicalNote
       operationId: createInpatientClinicalNote
@@ -45,15 +67,42 @@ paths:
             schema:
               $ref: "#/components/schemas/InpatientClinicalNote"
       responses:
-        "201":
+        "200":
           description: The newly created InpatientClinicalNote
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/InpatientClinicalNote"
         "400":
-          description: Validation error
-  /inpatient-clinical-notes/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/inpatient_clinical_notes/{id}:
     parameters:
       - name: id
         in: path
@@ -73,6 +122,21 @@ paths:
                 $ref: "#/components/schemas/InpatientClinicalNote"
         "404":
           description: InpatientClinicalNote not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing InpatientClinicalNote
       operationId: updateInpatientClinicalNote
@@ -91,16 +155,132 @@ paths:
                 $ref: "#/components/schemas/InpatientClinicalNote"
         "404":
           description: InpatientClinicalNote not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing InpatientClinicalNote
+      operationId: replaceInpatientClinicalNote
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InpatientClinicalNote"
+      responses:
+        "200":
+          description: The updated InpatientClinicalNote
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InpatientClinicalNote"
+        "404":
+          description: InpatientClinicalNote not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
-      summary: Soft-delete a InpatientClinicalNote
+      summary: Delete a InpatientClinicalNote
       operationId: deleteInpatientClinicalNote
       responses:
-        "204":
+        "200":
           description: InpatientClinicalNote deleted
         "404":
           description: InpatientClinicalNote not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
 components:
   schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
     InpatientClinicalNote:
       type: object
       properties:
@@ -116,10 +296,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed. Clinical notes are never hard-deleted.
         patient_id:
           type: string
           format: uuid
@@ -129,7 +305,7 @@ components:
           format: uuid
           description: Foreign key to the clinician who authored the note.
         responsible_consultant_id:
-          type: string
+          type: [string, 'null']
           format: uuid
           description: Foreign key to the consultant responsible for the patient, when recorded.
         status:
@@ -166,7 +342,7 @@ components:
           maxLength: 20
           description: Bed or bay identifier.
         note_at:
-          type: string
+          type: [string, 'null']
           format: date-time
           description: Timestamp the note refers to, i.e. when the clinical events occurred. Distinct from created_at, which is when the entry was written.
         author_name:
@@ -248,7 +424,7 @@ components:
           type: string
           description: "For a transfer note: the clinical or operational reason for the transfer."
         admission_at:
-          type: string
+          type: [string, 'null']
           format: date-time
           description: Timestamp the admission episode began. Length of stay is derived in code, never stored.
         admitting_specialty:
@@ -290,7 +466,7 @@ components:
           type: string
           description: Concerns raised by the nursing team.
         pain_score:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Patient-reported pain score, 0..10.
         sleep_quality:
@@ -312,7 +488,7 @@ components:
             - ""
           description: "Oral intake: normal, reduced, minimal, or nil-by-mouth."
         bowels_last_opened:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the bowels were last opened.
         mobility_status:
@@ -328,15 +504,15 @@ components:
             - ""
           description: "Current mobility: independent, stick, frame, assistance-of-one, assistance-of-two, hoist, or bed-bound."
         observed_at:
-          type: string
+          type: [string, 'null']
           format: date-time
           description: Timestamp the observation set was taken.
         respiratory_rate:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Respiratory rate in breaths per minute (NEWS2 parameter).
         oxygen_saturation:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Peripheral oxygen saturation as a percentage (NEWS2 parameter).
         spo2_scale:
@@ -360,19 +536,19 @@ components:
             - ""
           description: Oxygen delivery device, or air when the patient is on room air (NEWS2 air-or-oxygen parameter).
         oxygen_flow_litres_per_minute:
-          type: number
+          type: [number, 'null']
           format: double
           description: Oxygen flow rate in litres per minute.
         systolic_blood_pressure:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Systolic blood pressure in mmHg (NEWS2 parameter).
         diastolic_blood_pressure:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Diastolic blood pressure in mmHg. Recorded for completeness; not a NEWS2 parameter.
         pulse_rate:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Pulse rate in beats per minute (NEWS2 parameter).
         acvpu:
@@ -386,15 +562,15 @@ components:
             - ""
           description: "Consciousness on the ACVPU scale: alert, confusion, voice, pain, or unresponsive (NEWS2 parameter)."
         temperature_celsius:
-          type: number
+          type: [number, 'null']
           format: double
           description: Temperature in degrees Celsius (NEWS2 parameter).
         news2_total:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: NEWS2 aggregate score as entered from the ward chart, 0..20. An entered total always wins over a derived one.
         news2_derived_total:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: NEWS2 aggregate derived by the engine from the seven parameters, 0..20. Reported alongside the entered total so a discrepancy is visible rather than silently resolved.
         news2_trend:
@@ -484,7 +660,7 @@ components:
             - ""
           description: "Antimicrobial stewardship review status per NICE NG15: not-applicable, due, done, or overdue."
         antimicrobial_review_at:
-          type: string
+          type: [string, 'null']
           format: date-time
           description: Timestamp of the antimicrobial review, or the date it falls due.
         vte_status:
@@ -506,7 +682,7 @@ components:
             - ""
           description: "VTE prophylaxis in place: pharmacological, mechanical, both, none, or contraindicated."
         vte_assessed_at:
-          type: string
+          type: [string, 'null']
           format: date-time
           description: Timestamp the VTE risk assessment was performed.
         vte_notes:
@@ -568,7 +744,7 @@ components:
             - ""
           description: "Delirium screen outcome per NICE CG103: negative, possible-delirium, probable-delirium, cognitive-impairment, or not-assessed."
         delirium_4at_score:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: 4AT delirium screening score, 0..12. The full instrument lives in the four-a-test-for-delirium form.
         delirium_notes:
@@ -584,7 +760,7 @@ components:
             - ""
           description: "Nutrition screening band: low-risk, medium-risk, high-risk, or not-assessed."
         must_score:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Malnutrition Universal Screening Tool (MUST) score, 0..6.
         nutrition_plan:
@@ -751,11 +927,11 @@ components:
           maxLength: 255
           description: Name and grade of the senior who reviewed or is to review.
         senior_review_at:
-          type: string
+          type: [string, 'null']
           format: date-time
           description: Timestamp of the senior review.
         estimated_discharge_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Estimated date of discharge.
         discharge_planning_notes:
@@ -809,7 +985,7 @@ components:
           type: string
           description: Electronic signature of the author.
         signed_at:
-          type: string
+          type: [string, 'null']
           format: date-time
           description: Timestamp the note was signed.
       required:

@@ -29,7 +29,7 @@ Comprehensive allergy evaluation covering drug, food, and environmental allergie
 allergy-assessment/
   front-end-with-svelte/             # Patient questionnaire
   front-end-with-svelte/        # Dashboard
-  back-end-with-loco/    # Full-stack option
+  back-end-with-axum/    # Full-stack option
 ```
 
 ## Technology

@@ -1,0 +1,388 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: assessment_polypharmacy_review
+openapi: 3.1.0
+info:
+  title: Gerontology Assessment — AssessmentPolypharmacyReview
+  version: 1.0.0
+  description: "Polypharmacy review section: medication counts, falls-risk drugs, anticholinergic burden, and STOPP/START review. One-to-one child of assessment."
+paths:
+  /api/assessment_polypharmacy_reviews:
+    get:
+      summary: List AssessmentPolypharmacyReview records
+      operationId: listAssessmentPolypharmacyReview
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
+          in: query
+          schema:
+            type: string
+          required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
+      responses:
+        "200":
+          description: A page of AssessmentPolypharmacyReview records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AssessmentPolypharmacyReview"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new AssessmentPolypharmacyReview
+      operationId: createAssessmentPolypharmacyReview
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssessmentPolypharmacyReview"
+      responses:
+        "200":
+          description: The newly created AssessmentPolypharmacyReview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentPolypharmacyReview"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/assessment_polypharmacy_reviews/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AssessmentPolypharmacyReview by id
+      operationId: getAssessmentPolypharmacyReview
+      responses:
+        "200":
+          description: The requested AssessmentPolypharmacyReview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentPolypharmacyReview"
+        "404":
+          description: AssessmentPolypharmacyReview not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing AssessmentPolypharmacyReview
+      operationId: updateAssessmentPolypharmacyReview
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssessmentPolypharmacyReview"
+      responses:
+        "200":
+          description: The updated AssessmentPolypharmacyReview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentPolypharmacyReview"
+        "404":
+          description: AssessmentPolypharmacyReview not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing AssessmentPolypharmacyReview
+      operationId: replaceAssessmentPolypharmacyReview
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssessmentPolypharmacyReview"
+      responses:
+        "200":
+          description: The updated AssessmentPolypharmacyReview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentPolypharmacyReview"
+        "404":
+          description: AssessmentPolypharmacyReview not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a AssessmentPolypharmacyReview
+      operationId: deleteAssessmentPolypharmacyReview
+      responses:
+        "200":
+          description: AssessmentPolypharmacyReview deleted
+        "404":
+          description: AssessmentPolypharmacyReview not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
+    AssessmentPolypharmacyReview:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, enforcing 1:1).
+        total_regular_medications:
+          type: [integer, 'null']
+          format: int32
+          description: Total number of regular medications, NULL if unanswered.
+        total_prn_medications:
+          type: [integer, 'null']
+          format: int32
+          description: Total number of as-needed (PRN) medications, NULL if unanswered.
+        polypharmacy_flag:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether polypharmacy is flagged (5+ medications): yes, no, or empty string."
+        medication_review_date:
+          type: [string, 'null']
+          format: date
+          description: Date of last medication review, NULL if unanswered.
+        falls_risk_medications:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the patient is taking falls-risk medications (e.g. sedatives, antihypertensives): yes, no, or empty string."
+        falls_risk_medication_details:
+          type: string
+          description: Details of falls-risk medications.
+        anticholinergic_burden:
+          type: string
+          enum:
+            - low
+            - moderate
+            - high
+            - ""
+          description: "Anticholinergic burden level: low, moderate, high, or empty string."
+        drug_interactions_identified:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether significant drug interactions have been identified: yes, no, or empty string."
+        drug_interaction_details:
+          type: string
+          description: Details of significant drug interactions.
+        adherence_concerns:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether there are medication adherence concerns: yes, no, or empty string."
+        adherence_details:
+          type: string
+          description: Details of adherence concerns.
+        stopp_start_review_done:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether a STOPP/START criteria review has been done: yes, no, or empty string."
+        deprescribing_opportunities:
+          type: string
+          description: Free-text description of deprescribing opportunities identified.
+        polypharmacy_notes:
+          type: string
+          description: Free-text notes on polypharmacy review.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - polypharmacy_flag
+        - falls_risk_medications
+        - falls_risk_medication_details
+        - anticholinergic_burden
+        - drug_interactions_identified
+        - drug_interaction_details
+        - adherence_concerns
+        - adherence_details
+        - stopp_start_review_done
+        - deprescribing_opportunities
+        - polypharmacy_notes
+      description: "Polypharmacy review section: medication counts, falls-risk drugs, anticholinergic burden, and STOPP/START review. One-to-one child of assessment."

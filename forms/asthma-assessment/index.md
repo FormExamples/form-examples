@@ -28,7 +28,7 @@ Asthma control evaluation using the ACT (Asthma Control Test) scoring instrument
 asthma-assessment/
   front-end-with-svelte/             # Patient questionnaire
   front-end-with-svelte/        # Dashboard
-  back-end-with-loco/    # Full-stack option
+  back-end-with-axum/    # Full-stack option
 ```
 
 ## Technology

@@ -13,7 +13,7 @@ Created 2026-08-14. Per-phase checkboxes live in [`tasks.md`](./tasks.md).
 | Scoring engine (`front-end-with-svelte/src/lib/engine/`) | complete — 40 Vitest cases pass |
 | `front-end-with-html/` | complete — 40/40 Node engine-mirror tests pass, `bin/lily-html-refactor --check` clean |
 | `front-end-with-svelte/` UI | complete — `pnpm check`/`pnpm test`/`pnpm build` pass, `bin/lily-svelte-refactor --check` clean |
-| `back-end-with-loco/` | complete — loco-rs 1.0.1, `cargo build` + 28 tests pass |
+| `back-end-with-axum/` | complete — loco-rs 1.0.1, `cargo build` + 28 tests pass |
 
 `bin/test-form cataract-diagnostic-evaluation` passes.
 
@@ -55,7 +55,7 @@ record ready for a surgical referral letter.
 
 1. Spec (`spec/index.md`), `index.md`, `AGENTS.md`.
 2. SQL migrations (`sql/02`–`sql/06`), verified against a scratch Postgres.
-3. Generated representations (XML, FHIR R5, protobuf, OpenAPI, Loco setup,
+3. Generated representations (XML, FHIR R5, protobuf, OpenAPI, Axum setup,
    examples, CHANGELOG, llms.txt).
 4. TypeScript engine + Vitest boundary tests (this repo's engine-first
    convention) — done before any UI code.

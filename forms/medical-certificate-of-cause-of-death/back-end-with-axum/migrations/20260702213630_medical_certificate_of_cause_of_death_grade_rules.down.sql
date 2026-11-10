@@ -1,0 +1,1 @@
+DROP TABLE "medical_certificate_of_cause_of_death_grade_rules";

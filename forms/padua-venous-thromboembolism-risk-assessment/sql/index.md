@@ -30,5 +30,5 @@ to the informational bleeding-risk check (`active_bleeding`,
 `high_bleeding_risk`), which gates the recommendation but never changes the
 score.
 
-Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Loco
+Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Axum
 setup script) are derived from these migrations and are never hand-edited.

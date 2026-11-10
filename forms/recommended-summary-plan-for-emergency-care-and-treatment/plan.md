@@ -6,9 +6,9 @@ Implementation roadmap. See [`spec/index.md`](./spec/index.md) for the contract.
 
 All four layers built as of 2026-07-02: foundation docs (`index.md`,
 `spec/index.md`, `AGENTS.md`, `plan.md`, `tasks.md`); SQL migrations in `sql/`
-plus the generated representations (XML, FHIR R5, protobuf, OpenAPI, Loco
+plus the generated representations (XML, FHIR R5, protobuf, OpenAPI, Axum
 setup script); both consolidated front-ends (`front-end-with-html` and
-`front-end-with-svelte`); and the `back-end-with-loco` Rust JSON API.
+`front-end-with-svelte`); and the `back-end-with-axum` Rust JSON API.
 `CHANGELOG.md` and `examples/` are in place.
 
 ## Roadmap
@@ -19,7 +19,7 @@ setup script); both consolidated front-ends (`front-end-with-html` and
    CPR recommendation, ceilings of treatment, capacity and involvement,
    clinician sign-off) plus timestamps; UUIDv4 PK. Source of truth.
 3. **Generated representations** — run the XML, FHIR R5, protobuf, OpenAPI, and
-   Loco setup generators.
+   Axum setup generators.
 4. **Validation engine** — `types.ts`, `utils.ts`, `validation-rules.ts`,
    `plan-validator.ts`, `flagged-issues.ts` with Vitest tests covering each
    mandatory rule (pass and fail), the conditional capacity rule, completeness
@@ -27,7 +27,7 @@ setup script); both consolidated front-ends (`front-end-with-html` and
 5. **Front-ends** — consolidated `front-end-with-html` (Lily wizard + dashboard)
    and `front-end-with-svelte` (Lily; RESTful `/plans/` list + `/plans/[id]`
    form).
-6. **Back-end** — `back-end-with-loco` Rust axum + Loco JSON API, relational
+6. **Back-end** — `back-end-with-axum` Rust axum + axa JSON API, relational
    per-table schema.
 7. **Verify** — `bin/test-form
    recommended-summary-plan-for-emergency-care-and-treatment`, Lily drift

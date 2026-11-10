@@ -34,7 +34,7 @@
 - [x] `fhir/r5/` — FHIR HL7 R5 JSON per SQL entity.
 - [x] `protobuf/` — Protocol Buffers schemas.
 - [x] `openapi/` — OpenAPI 3.1 specifications.
-- [x] `back-end-with-loco-setup` — scaffold script.
+- [x] `back-end-with-axum-setup` — scaffold script.
 - [x] `CHANGELOG.md` and `examples/`.
 - [x] `llms.txt`.
 - [x] Per-directory `index.md`/`AGENTS.md`/`CLAUDE.md`/`README.md` quartet for
@@ -81,7 +81,7 @@
 - [x] `bin/es-modules-refactor --check hip-replacement-surgery-evaluation`
       passes.
 
-## Back-end with Loco
+## Back-end with Axum
 
 - [x] Scaffolded `patient`, `clinician`,
       `hip_replacement_surgery_evaluation`,

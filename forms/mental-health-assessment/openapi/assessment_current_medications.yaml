@@ -1,0 +1,348 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: assessment_current_medications
+openapi: 3.1.0
+info:
+  title: Mental Health Assessment — AssessmentCurrentMedications
+  version: 1.0.0
+  description: "Current medications section header: psychotropic medication status and adherence. One-to-one child of assessment."
+paths:
+  /api/assessment_current_medications:
+    get:
+      summary: List AssessmentCurrentMedications records
+      operationId: listAssessmentCurrentMedications
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
+          in: query
+          schema:
+            type: string
+          required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
+      responses:
+        "200":
+          description: A page of AssessmentCurrentMedications records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AssessmentCurrentMedications"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new AssessmentCurrentMedications
+      operationId: createAssessmentCurrentMedications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssessmentCurrentMedications"
+      responses:
+        "200":
+          description: The newly created AssessmentCurrentMedications
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentCurrentMedications"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/assessment_current_medications/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one AssessmentCurrentMedications by id
+      operationId: getAssessmentCurrentMedications
+      responses:
+        "200":
+          description: The requested AssessmentCurrentMedications
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentCurrentMedications"
+        "404":
+          description: AssessmentCurrentMedications not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing AssessmentCurrentMedications
+      operationId: updateAssessmentCurrentMedications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssessmentCurrentMedications"
+      responses:
+        "200":
+          description: The updated AssessmentCurrentMedications
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentCurrentMedications"
+        "404":
+          description: AssessmentCurrentMedications not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing AssessmentCurrentMedications
+      operationId: replaceAssessmentCurrentMedications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssessmentCurrentMedications"
+      responses:
+        "200":
+          description: The updated AssessmentCurrentMedications
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssessmentCurrentMedications"
+        "404":
+          description: AssessmentCurrentMedications not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a AssessmentCurrentMedications
+      operationId: deleteAssessmentCurrentMedications
+      responses:
+        "200":
+          description: AssessmentCurrentMedications deleted
+        "404":
+          description: AssessmentCurrentMedications not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
+    AssessmentCurrentMedications:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        assessment_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent assessment (unique, enforcing 1:1).
+        taking_psychotropic_medication:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the patient is taking psychotropic medication: yes, no, or empty string."
+        medication_adherence:
+          type: string
+          enum:
+            - good
+            - partial
+            - poor
+            - ""
+          description: "Self-reported medication adherence: good, partial, poor, or empty string."
+        side_effects:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the patient reports medication side effects: yes, no, or empty string."
+        side_effects_details:
+          type: string
+          description: Free-text description of medication side effects.
+        over_the_counter_medications:
+          type: string
+          description: Free-text list of over-the-counter medications.
+        supplements:
+          type: string
+          description: Free-text list of dietary supplements.
+        medication_notes:
+          type: string
+          description: Free-text clinician notes on medications.
+      required:
+        - created_at
+        - updated_at
+        - assessment_id
+        - taking_psychotropic_medication
+        - medication_adherence
+        - side_effects
+        - side_effects_details
+        - over_the_counter_medications
+        - supplements
+        - medication_notes
+      description: "Current medications section header: psychotropic medication status and adherence. One-to-one child of assessment."

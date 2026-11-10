@@ -24,7 +24,7 @@ Read-and-acknowledge privacy notice covering the use of patient data for researc
 research-and-planning-privacy-notice/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

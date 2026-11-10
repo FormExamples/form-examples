@@ -1,0 +1,15 @@
+ALTER TABLE "medical_certificate_of_cause_of_death_grade_flags" DROP CONSTRAINT IF EXISTS "medical_certificate_of_cause_of_death_grade_flags_prio_4328fb72";
+ALTER TABLE "medical_certificate_of_cause_of_death_grade_flags" DROP CONSTRAINT IF EXISTS "medical_certificate_of_cause_of_death_grade_flags_cate_406b72da";
+ALTER TABLE "medical_certificate_of_cause_of_death_grade_rules" DROP CONSTRAINT IF EXISTS "medical_certificate_of_cause_of_death_grade_rules_dime_5f9b04b9";
+ALTER TABLE "medical_certificate_of_cause_of_death_grades" DROP CONSTRAINT IF EXISTS "medical_certificate_of_cause_of_death_grades_coroner_r_124cb603";
+ALTER TABLE "medical_certificate_of_cause_of_death_grades" DROP CONSTRAINT IF EXISTS "medical_certificate_of_cause_of_death_grades_validity__009dc577";
+ALTER TABLE "medical_certificate_of_cause_of_deaths" DROP CONSTRAINT IF EXISTS "medical_certificate_of_cause_of_deaths_medical_examine_c698b35e";
+ALTER TABLE "medical_certificate_of_cause_of_deaths" DROP CONSTRAINT IF EXISTS "medical_certificate_of_cause_of_deaths_coroner_reason_check";
+ALTER TABLE "medical_certificate_of_cause_of_deaths" DROP CONSTRAINT IF EXISTS "medical_certificate_of_cause_of_deaths_referred_to_cor_48bf0220";
+ALTER TABLE "medical_certificate_of_cause_of_deaths" DROP CONSTRAINT IF EXISTS "medical_certificate_of_cause_of_deaths_seen_after_deat_d7500d9e";
+ALTER TABLE "medical_certificate_of_cause_of_deaths" DROP CONSTRAINT IF EXISTS "medical_certificate_of_cause_of_deaths_sex_check";
+ALTER TABLE "medical_certificate_of_cause_of_deaths" DROP CONSTRAINT IF EXISTS "medical_certificate_of_cause_of_deaths_attended_deceased_check";
+ALTER TABLE "medical_certificate_of_cause_of_deaths" DROP CONSTRAINT IF EXISTS "medical_certificate_of_cause_of_deaths_certifying_doct_fd291d3c";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

@@ -1,0 +1,32 @@
+CREATE TABLE IF NOT EXISTS "structured_medication_reviews" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "clinician_name" text NOT NULL DEFAULT '',
+    "clinician_role" varchar NOT NULL DEFAULT '',
+    "reviewed_at" timestamp with time zone NULL,
+    "care_setting" varchar NOT NULL DEFAULT '',
+    "consultation_mode" varchar NOT NULL DEFAULT '',
+    "patient_identifier" text NOT NULL DEFAULT '',
+    "age_band" varchar NOT NULL DEFAULT '',
+    "sex" varchar NOT NULL DEFAULT '',
+    "frailty_status" varchar NOT NULL DEFAULT '',
+    "lives_in_care_home" varchar NOT NULL DEFAULT '',
+    "long_term_conditions" text NOT NULL DEFAULT '',
+    "presenting_problems" text NOT NULL DEFAULT '',
+    "patient_reported_issues" text NOT NULL DEFAULT '',
+    "what_matters_to_patient" text NOT NULL DEFAULT '',
+    "shared_decisions" text NOT NULL DEFAULT '',
+    "monitoring_due" text NOT NULL DEFAULT '',
+    "overdue_monitoring_count" integer NULL,
+    "follow_up_plan" text NOT NULL DEFAULT '',
+    "follow_up_date" date NULL,
+    "review_completed" varchar NOT NULL DEFAULT '',
+    "patient_id" uuid NOT NULL,
+    "clinician_id" uuid NULL,
+    CONSTRAINT "fk-structured_medication_reviews-patient_id-to-patients" FOREIGN KEY ("patient_id") REFERENCES "patients" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-structured_medication_reviews-clinician_id-to-clinicians" FOREIGN KEY ("clinician_id") REFERENCES "clinicians" (id) ON DELETE SET NULL ON UPDATE NO ACTION
+);
+
+ALTER TABLE structured_medication_reviews ALTER COLUMN id SET DEFAULT gen_random_uuid();

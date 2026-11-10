@@ -129,6 +129,6 @@ Rules for the conversion:
 
 - The SvelteKit front-end (`front-end-with-svelte/`) already uses ES modules;
   unchanged.
-- The Rust/Loco back-end; unchanged.
+- The Rust/Axum back-end; unchanged.
 - `table-export.js` and other standalone utilities that neither import nor
   export stay as-is except for being loaded alongside the module entry.

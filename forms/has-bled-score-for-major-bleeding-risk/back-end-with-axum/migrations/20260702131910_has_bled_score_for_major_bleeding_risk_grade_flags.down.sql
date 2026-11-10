@@ -1,0 +1,1 @@
+DROP TABLE "has_bled_score_for_major_bleeding_risk_grade_flags";

@@ -80,7 +80,7 @@ hospital-performance-indicators/
   fhir/r5/                                 # FHIR R5 JSON resources
   front-end-with-html/                     # static single-page wizard + dashboard
   front-end-with-svelte/                   # SvelteKit single-page wizard + dashboard
-  back-end-with-loco/                      # Rust axum + Loco JSON API
+  back-end-with-axum/                      # Rust axum + axa + sqlx JSON API
 ```
 
 ## Related forms

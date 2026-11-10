@@ -1,0 +1,125 @@
+//! Assessment cancer history item module.
+
+#![allow(clippy::missing_errors_doc)]
+#![allow(clippy::unnecessary_struct_initialization)]
+#![allow(clippy::unused_async)]
+use crate::support::prelude::*;
+use serde::{Deserialize, Serialize};
+
+use crate::models::assessment_cancer_history_items::Model;
+
+/// Params.
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Params {
+    /// Relative relationship.
+    pub relative_relationship: String,
+    /// Cancer type.
+    pub cancer_type: String,
+    /// Age at diagnosis.
+    pub age_at_diagnosis: Option<i32>,
+    /// Outcome.
+    pub outcome: String,
+    /// Sort order.
+    pub sort_order: i32,
+    /// Assessment cancer history id.
+    pub cancer_history_id: Uuid,
+}
+
+impl Params {
+    /// Insert a row.
+    async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
+        sqlx::query_as(
+            "INSERT INTO assessment_cancer_history_items (relative_relationship, \
+            cancer_type, age_at_diagnosis, outcome, sort_order, \
+            cancer_history_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+        )
+        .bind(&self.relative_relationship)
+        .bind(&self.cancer_type)
+        .bind(self.age_at_diagnosis)
+        .bind(&self.outcome)
+        .bind(self.sort_order)
+        .bind(self.cancer_history_id)
+        .fetch_one(db)
+        .await
+    }
+
+    /// Update the row with this id, if there is one.
+    async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
+        sqlx::query_as(
+            "UPDATE assessment_cancer_history_items SET relative_relationship = $2, \
+            cancer_type = $3, age_at_diagnosis = $4, outcome = $5, sort_order = $6, \
+            cancer_history_id = $7, updated_at = now() WHERE id = $1 AND \
+            deleted_at IS NULL RETURNING *",
+        )
+        .bind(id)
+        .bind(&self.relative_relationship)
+        .bind(&self.cancer_type)
+        .bind(self.age_at_diagnosis)
+        .bind(&self.outcome)
+        .bind(self.sort_order)
+        .bind(self.cancer_history_id)
+        .fetch_optional(db)
+        .await
+    }
+}
+
+async fn load_item(ctx: &AppContext, id: Uuid) -> Result<Model> {
+    let item = Model::find_by_id(&db(ctx), id).await?;
+    item.ok_or_else(|| Error::NotFound)
+}
+
+/// List.
+#[debug_handler]
+pub async fn list(
+    State(ctx): State<AppContext>,
+    OriginalUri(uri): OriginalUri,
+) -> Result<Response> {
+    let page = cursor_page(&ctx, &uri)?;
+    let rows = Model::page(&db(&ctx), &page).await?;
+    Ok(page.respond(rows))
+}
+
+/// Add.
+#[debug_handler]
+pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    let item = params.insert(&db(&ctx)).await?;
+    format::json(item)
+}
+
+/// Update.
+#[debug_handler]
+pub async fn update(
+    Path(id): Path<Uuid>,
+    State(ctx): State<AppContext>,
+    Json(params): Json<Params>,
+) -> Result<Response> {
+    let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
+    format::json(item)
+}
+
+/// Remove.
+#[debug_handler]
+pub async fn remove(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
+    load_item(&ctx, id).await?;
+    Model::delete(&db(&ctx), id).await?;
+    format::empty()
+}
+
+/// Get one.
+#[debug_handler]
+pub async fn get_one(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
+    format::json(load_item(&ctx, id).await?)
+}
+
+/// Routes.
+pub fn routes() -> Routes {
+    Routes::new()
+        .prefix("api/assessment_cancer_history_items/")
+        .add("/", get(list))
+        .add("/", post(add))
+        .add("{id}", get(get_one))
+        .add("{id}", delete(remove))
+        .add("{id}", put(update))
+        .add("{id}", patch(update))
+}

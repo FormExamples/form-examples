@@ -17,5 +17,5 @@ restricted. Foreign-key targets are created before their referencers.
 | 06 | `06_create_table_qrisk3_cardiovascular_disease_risk_score_grade_rule.sql` | `qrisk3_cardiovascular_disease_risk_score_grade_rule` | audit trail of contributing model terms |
 | 07 | `07_create_table_qrisk3_cardiovascular_disease_risk_score_grade_flag.sql` | `qrisk3_cardiovascular_disease_risk_score_grade_flag` | red-flag issues with priority and suggested action |
 
-Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Loco
+Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Axum
 setup script) are derived from these migrations and are never hand-edited.

@@ -1,0 +1,12 @@
+mod access_schedulings;
+mod care_qualities;
+mod clinicians;
+mod communications;
+mod encounter_satisfactions;
+mod environments;
+mod flagged_issues;
+mod overall_satisfactions;
+mod patients;
+mod satisfaction_results;
+mod staff_professionalisms;
+mod visit_informations;

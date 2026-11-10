@@ -1,0 +1,31 @@
+CREATE TABLE IF NOT EXISTS "cytology_test_results" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "originating_request_reference" varchar NOT NULL DEFAULT '',
+    "report_status" varchar NOT NULL DEFAULT '',
+    "performed_date" date NULL,
+    "reported_date" date NULL,
+    "specimen_type" varchar NOT NULL DEFAULT '',
+    "specimen_adequacy" varchar NOT NULL DEFAULT '',
+    "clinical_history" varchar NOT NULL DEFAULT '',
+    "comparison_with_previous" varchar NOT NULL DEFAULT '',
+    "cytology_result_category" varchar NOT NULL DEFAULT '',
+    "hpv_result" varchar NOT NULL DEFAULT '',
+    "malignancy_present" boolean NOT NULL DEFAULT false,
+    "dysplasia_present" boolean NOT NULL DEFAULT false,
+    "microscopic_description" varchar NOT NULL DEFAULT '',
+    "diagnosis" varchar NOT NULL DEFAULT '',
+    "impression" varchar NOT NULL DEFAULT '',
+    "reporting_category" varchar NOT NULL DEFAULT '',
+    "recommended_follow_up" varchar NOT NULL DEFAULT '',
+    "critical_result_communicated" boolean NOT NULL DEFAULT false,
+    "reported_to" varchar NOT NULL DEFAULT '',
+    "patient_id" uuid NOT NULL,
+    "clinician_id" uuid NOT NULL,
+    CONSTRAINT "fk-cytology_test_results-patient_id-to-patients" FOREIGN KEY ("patient_id") REFERENCES "patients" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-cytology_test_results-clinician_id-to-clinicians" FOREIGN KEY ("clinician_id") REFERENCES "clinicians" (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+ALTER TABLE cytology_test_results ALTER COLUMN id SET DEFAULT gen_random_uuid();

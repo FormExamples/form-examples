@@ -1,0 +1,8 @@
+pub mod openapi;
+
+pub mod caprini_venous_thromboembolism_risk_assessment;
+pub mod caprini_venous_thromboembolism_risk_assessment_grade;
+pub mod caprini_venous_thromboembolism_risk_assessment_grade_flag;
+pub mod caprini_venous_thromboembolism_risk_assessment_grade_rule;
+pub mod clinician;
+pub mod patient;

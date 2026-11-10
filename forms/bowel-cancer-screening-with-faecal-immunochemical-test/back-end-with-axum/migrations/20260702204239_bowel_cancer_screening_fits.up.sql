@@ -1,0 +1,31 @@
+CREATE TABLE IF NOT EXISTS "bowel_cancer_screening_fits" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "reviewed_at" timestamp with time zone NULL,
+    "screening_hub" varchar NOT NULL DEFAULT '',
+    "participant_identifier" varchar NOT NULL DEFAULT '',
+    "age" integer NULL,
+    "within_age_range" varchar NOT NULL DEFAULT '',
+    "recall_interval" varchar NOT NULL DEFAULT '',
+    "invitation_date" date NULL,
+    "previous_outcome" varchar NOT NULL DEFAULT '',
+    "last_screen_date" date NULL,
+    "kit_returned" varchar NOT NULL DEFAULT '',
+    "return_date" date NULL,
+    "sample_adequacy" varchar NOT NULL DEFAULT '',
+    "spoilt_reason" varchar NOT NULL DEFAULT '',
+    "faecal_haemoglobin_ug_g" double precision NULL,
+    "assay" varchar NOT NULL DEFAULT '',
+    "threshold_applied" double precision NULL,
+    "red_flag_symptoms" varchar NOT NULL DEFAULT '',
+    "clinical_note" text NOT NULL DEFAULT '',
+    "context" text NOT NULL DEFAULT '',
+    "patient_id" uuid NOT NULL,
+    "clinician_id" uuid NULL,
+    CONSTRAINT "fk-bowel_cancer_screening_fits-patient_id-to-patients" FOREIGN KEY ("patient_id") REFERENCES "patients" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-bowel_cancer_screening_fits-clinician_id-to-clinicians" FOREIGN KEY ("clinician_id") REFERENCES "clinicians" (id) ON DELETE SET NULL ON UPDATE NO ACTION
+);
+
+ALTER TABLE bowel_cancer_screening_fits ALTER COLUMN id SET DEFAULT gen_random_uuid();

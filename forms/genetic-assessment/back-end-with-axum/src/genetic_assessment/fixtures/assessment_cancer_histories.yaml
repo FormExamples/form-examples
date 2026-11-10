@@ -1,0 +1,14 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-0000000ce46e"
+  deletedAt: null
+  familyCancerHistory: "yes"
+  multipleFamilyCancers: "yes"
+  earlyOnsetCancer: "yes"
+  bilateralCancer: "yes"
+  rareTumourTypes: "yes"
+  rareTumourDetails: "Test rareTumourDetails"
+  knownCancerSyndrome: "yes"
+  cancerSyndromeDetails: "Test cancerSyndromeDetails"
+  cancerRiskScore: 1
+  assessmentId: "00000000-0000-4000-8000-0000000845c4"

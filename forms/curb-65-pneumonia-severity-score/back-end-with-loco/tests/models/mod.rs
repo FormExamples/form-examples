@@ -1,8 +1,0 @@
-mod users;
-
-mod patients;
-mod clinicians;
-mod curb_65_pneumonia_severity_scores;
-mod curb_65_pneumonia_severity_score_grades;
-mod curb_65_pneumonia_severity_score_grade_rules;
-mod curb_65_pneumonia_severity_score_grade_flags;

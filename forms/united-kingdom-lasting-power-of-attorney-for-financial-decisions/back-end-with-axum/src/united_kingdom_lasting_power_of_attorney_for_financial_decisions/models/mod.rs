@@ -1,0 +1,16 @@
+pub mod addresses;
+pub mod lasting_power_of_attorneys;
+pub mod lpa_attorneys;
+pub mod lpa_certificate_providers;
+pub mod lpa_continuation_sheets;
+pub mod lpa_person_to_notifies;
+pub mod lpa_preferences_and_instructions;
+pub mod lpa_registration_applications;
+pub mod lpa_registration_recipients;
+pub mod lpa_replacement_attorneys;
+pub mod lpa_signatures;
+pub mod lpa_validation_flags;
+pub mod lpa_validation_results;
+pub mod lpa_validation_rules;
+pub mod lpa_witnesses;
+pub mod people;

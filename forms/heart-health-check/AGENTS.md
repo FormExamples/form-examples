@@ -11,7 +11,7 @@ NHS Heart Health Check for cardiovascular risk assessment using simplified QRISK
 - ./doc/ - Additional documentation
 - ./front-end-with-html/ - single-page HTML wizard (index.html) + dashboard (dashboard.html)
 - ./front-end-with-svelte/ - SvelteKit single-page wizard + dashboard (SVAR DataGrid)
-- ./back-end-with-loco/ - Rust axum + Loco JSON API back-end
+- ./back-end-with-axum/ - Rust axum + axa + sqlx JSON API back-end
 - ./sql/ - PostgreSQL schema migrations (15 files)
 
 ## Scoring system
@@ -79,9 +79,9 @@ Sorted by priority: high > medium > low.
 
 ## Backend
 
-- Rust edition 2024 with Loco 0.16 framework
+- Rust edition 2024 with Axum 0.16 framework
 - axum 0.8 web framework
-- SeaORM 1.1 with PostgreSQL
+- sqlx 1.1 with PostgreSQL
 - Engine types mirror TypeScript with serde(rename_all = "camelCase")
 
 ## Conventions

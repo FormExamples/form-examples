@@ -1,7 +1,7 @@
 # Data model
 
 The `sql/` directory of each form is the **source of truth for data shape**.
-Every downstream representation (XML, FHIR, Protobuf, OpenAPI, the Loco crate) is
+Every downstream representation (XML, FHIR, Protobuf, OpenAPI, the Axum crate) is
 derived from it. This page describes the relational schema every form shares and
 walks a real example.
 
@@ -33,8 +33,10 @@ updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
 deleted_at TIMESTAMPTZ DEFAULT NULL,
 ```
 
-`deleted_at` is a soft-delete marker. Every table also gets a
-`trigger_<table>_updated_at` trigger wired to `set_updated_at()`.
+`deleted_at` is a soft-delete marker: `DELETE` sets it, on the row and on everything
+that cascades from it, and the API then treats the row as gone. Uniqueness covers
+live rows only, so a deleted row cannot block its replacement. Every table also gets
+a `trigger_<table>_updated_at` trigger wired to `set_updated_at()`.
 
 ## Shared entities
 

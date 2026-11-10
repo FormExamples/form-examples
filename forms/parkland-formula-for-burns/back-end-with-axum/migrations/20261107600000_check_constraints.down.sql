@@ -1,0 +1,15 @@
+ALTER TABLE "parkland_formula_for_burns_grade_flags" DROP CONSTRAINT IF EXISTS "parkland_formula_for_burns_grade_flags_priority_check";
+ALTER TABLE "parkland_formula_for_burns_grade_flags" DROP CONSTRAINT IF EXISTS "parkland_formula_for_burns_grade_flags_category_check";
+ALTER TABLE "parkland_formula_for_burns_grade_rules" DROP CONSTRAINT IF EXISTS "parkland_formula_for_burns_grade_rules_instrument_check";
+ALTER TABLE "parkland_formula_for_burns" DROP CONSTRAINT IF EXISTS "parkland_formula_for_burns_mechanism_check";
+ALTER TABLE "parkland_formula_for_burns" DROP CONSTRAINT IF EXISTS "parkland_formula_for_burns_circumferential_or_deep_check";
+ALTER TABLE "parkland_formula_for_burns" DROP CONSTRAINT IF EXISTS "parkland_formula_for_burns_inhalation_suspected_check";
+ALTER TABLE "parkland_formula_for_burns" DROP CONSTRAINT IF EXISTS "parkland_formula_for_burns_injury_time_known_check";
+ALTER TABLE "parkland_formula_for_burns" DROP CONSTRAINT IF EXISTS "parkland_formula_for_burns_tbsa_method_check";
+ALTER TABLE "parkland_formula_for_burns" DROP CONSTRAINT IF EXISTS "parkland_formula_for_burns_sex_check";
+ALTER TABLE "parkland_formula_for_burns" DROP CONSTRAINT IF EXISTS "parkland_formula_for_burns_age_band_check";
+ALTER TABLE "parkland_formula_for_burns" DROP CONSTRAINT IF EXISTS "parkland_formula_for_burns_care_setting_check";
+ALTER TABLE "parkland_formula_for_burns" DROP CONSTRAINT IF EXISTS "parkland_formula_for_burns_clinician_role_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

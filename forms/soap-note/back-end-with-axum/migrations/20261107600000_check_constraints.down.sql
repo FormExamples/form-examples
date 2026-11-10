@@ -1,0 +1,17 @@
+ALTER TABLE "soap_note_grade_flags" DROP CONSTRAINT IF EXISTS "soap_note_grade_flags_priority_check";
+ALTER TABLE "soap_note_grade_flags" DROP CONSTRAINT IF EXISTS "soap_note_grade_flags_category_check";
+ALTER TABLE "soap_note_grade_rules" DROP CONSTRAINT IF EXISTS "soap_note_grade_rules_section_check";
+ALTER TABLE "soap_note_grades" DROP CONSTRAINT IF EXISTS "soap_note_grades_plan_present_check";
+ALTER TABLE "soap_note_grades" DROP CONSTRAINT IF EXISTS "soap_note_grades_assessment_present_check";
+ALTER TABLE "soap_note_grades" DROP CONSTRAINT IF EXISTS "soap_note_grades_objective_present_check";
+ALTER TABLE "soap_note_grades" DROP CONSTRAINT IF EXISTS "soap_note_grades_subjective_present_check";
+ALTER TABLE "soap_note_grades" DROP CONSTRAINT IF EXISTS "soap_note_grades_status_check";
+ALTER TABLE "soap_notes" DROP CONSTRAINT IF EXISTS "soap_notes_managed_at_home_check";
+ALTER TABLE "soap_notes" DROP CONSTRAINT IF EXISTS "soap_notes_abnormal_vitals_present_check";
+ALTER TABLE "soap_notes" DROP CONSTRAINT IF EXISTS "soap_notes_red_flag_symptoms_check";
+ALTER TABLE "soap_notes" DROP CONSTRAINT IF EXISTS "soap_notes_clinician_role_check";
+ALTER TABLE "soap_notes" DROP CONSTRAINT IF EXISTS "soap_notes_encounter_type_check";
+ALTER TABLE "soap_notes" DROP CONSTRAINT IF EXISTS "soap_notes_care_setting_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

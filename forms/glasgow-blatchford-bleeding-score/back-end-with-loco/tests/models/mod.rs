@@ -1,8 +1,0 @@
-mod users;
-
-mod patients;
-mod clinicians;
-mod glasgow_blatchford_bleeding_scores;
-mod glasgow_blatchford_bleeding_score_grades;
-mod glasgow_blatchford_bleeding_score_grade_rules;
-mod glasgow_blatchford_bleeding_score_grade_flags;

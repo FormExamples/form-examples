@@ -23,7 +23,7 @@ wizard table. The 25 checkpoints are catalogued verbatim in
 - `./fhir/r5/` — generated FHIR R5 JSON per SQL entity
 - `./front-end-with-html/` — single-page HTML wizard (index.html) + dashboard (dashboard.html)
 - `./front-end-with-svelte/` — SvelteKit single-page wizard + dashboard
-- `./back-end-with-loco/` — Rust backend with a JSON API
+- `./back-end-with-axum/` — Rust backend with a JSON API
 
 ## Data model
 
@@ -117,8 +117,8 @@ matching the `agile-checklist` convention.
 ## Backend stack
 
 - Rust edition 2024
-- Loco 0.16 framework on axum 0.8
-- SeaORM 1.1 with PostgreSQL
+- Axum 0.16 framework on axum 0.8
+- sqlx 1.1 with PostgreSQL
 - a JSON API (no server-rendered templates)
 - `serde(rename_all = "camelCase")` for front-end interop
 

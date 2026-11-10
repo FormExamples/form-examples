@@ -34,7 +34,7 @@ Workplace ergonomic evaluation using the REBA (Rapid Entire Body Assessment) for
 ergonomic-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

@@ -29,7 +29,7 @@ Acute stroke evaluation using the NIHSS (National Institutes of Health Stroke Sc
 stroke-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

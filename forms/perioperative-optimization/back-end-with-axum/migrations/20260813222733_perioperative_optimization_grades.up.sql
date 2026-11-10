@@ -1,0 +1,31 @@
+CREATE TABLE IF NOT EXISTS "perioperative_optimization_grades" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "weeks_to_surgery" integer NULL,
+    "gating_applied" boolean NOT NULL DEFAULT false,
+    "must_score" integer NULL,
+    "must_risk" varchar NOT NULL DEFAULT '',
+    "audit_c_score" integer NULL,
+    "stop_bang_score" integer NULL,
+    "duke_activity_status_index" double precision NULL,
+    "clinical_frailty_scale" integer NULL,
+    "domains_optimized" integer NULL,
+    "domains_in_progress" integer NULL,
+    "domains_action_required" integer NULL,
+    "domains_insufficient_time" integer NULL,
+    "computed_readiness" varchar NOT NULL DEFAULT '',
+    "final_readiness" varchar NOT NULL DEFAULT '',
+    "override_reason" varchar NOT NULL DEFAULT '',
+    "gate_decision" varchar NOT NULL DEFAULT '',
+    "recommended_earliest_surgery_date" date NULL,
+    "clinician_notes" text NOT NULL DEFAULT '',
+    "signed_by_name" varchar NOT NULL DEFAULT '',
+    "signed_at" timestamp with time zone NULL,
+    "graded_at" timestamp with time zone NOT NULL,
+    "perioperative_optimization_id" uuid NOT NULL,
+    CONSTRAINT "fk-perioperative_optimization_grades-perioperative_optimization_id-to-perioperative_optimizations" FOREIGN KEY ("perioperative_optimization_id") REFERENCES "perioperative_optimizations" (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+ALTER TABLE perioperative_optimization_grades ALTER COLUMN id SET DEFAULT gen_random_uuid();

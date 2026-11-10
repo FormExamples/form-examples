@@ -14,7 +14,7 @@ Structured outpatient outcome report covering clinical outcome, PROMs, PREMs, an
 - ./fhir/r5/ - FHIR HL7 R5 JSON per table
 - ./front-end-with-html/ - single-page HTML wizard (index.html) + dashboard (dashboard.html)
 - ./front-end-with-svelte/ - SvelteKit single-page wizard + dashboard (SVAR DataGrid)
-- ./back-end-with-loco/ - Rust backend
+- ./back-end-with-axum/ - Rust backend
 
 ## Scoring system
 

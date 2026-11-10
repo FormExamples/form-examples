@@ -13,12 +13,12 @@ Task tracking. See [`plan.md`](./plan.md) for the roadmap.
 - [x] Author `plan.md` and `tasks.md`.
 - [x] SQL migrations in `sql/` (chart header + `fluid_balance_entry` line-item
       table, UUIDv4 PKs, timestamps).
-- [x] Generated XML, FHIR R5, protobuf, OpenAPI, Loco setup.
+- [x] Generated XML, FHIR R5, protobuf, OpenAPI, Axum setup.
 - [x] Computation engine (`types.ts`, `utils.ts`, `balance-rules.ts`,
       `balance-grader.ts`, `flagged-issues.ts`) + Vitest tests.
 - [x] `front-end-with-html` (Lily wizard + dashboard).
 - [x] `front-end-with-svelte` (Lily wizard + dashboard).
-- [x] `back-end-with-loco` (Rust axum + Loco JSON API).
+- [x] `back-end-with-axum` (Rust axum + axa JSON API).
 - [x] Lily HTML / Svelte drift checks passed.
 </content>
 

@@ -23,8 +23,8 @@ table.
 - `./typespec/` — TypeSpec models for API-first integration
 - `./front-end-with-html/` — single-page HTML wizard (index.html) + dashboard (dashboard.html)
 - `./front-end-with-svelte/` — SvelteKit single-page wizard + dashboard (SVAR DataGrid)
-- `./back-end-with-loco/` — Rust axum + Loco JSON API
-- `./back-end-with-loco-setup` — scaffold shell script
+- `./back-end-with-axum/` — Rust axum + axa + sqlx JSON API
+- `./back-end-with-axum-setup` — scaffold shell script
 
 ## Grading / eligibility engine
 
@@ -106,8 +106,8 @@ table.
 ## Backend stack
 
 - Rust edition 2024
-- Loco 0.16 framework conventions on axum 0.8
-- SeaORM 1.1 with PostgreSQL
+- Axum 0.16 framework conventions on axum 0.8
+- sqlx 1.1 with PostgreSQL
 - a JSON API (no server-rendered templates)
 - `serde(rename_all = "camelCase")` for front-end interop
 

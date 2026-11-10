@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Safety-critical flags that fire independently of the aggregate risk band, with priority and a suggested action for the ward and escalation team.
 paths:
-  /national-early-warning-score-2-grade-flags:
+  /api/national_early_warning_score_2_grade_flags:
     get:
       summary: List NationalEarlyWarningScore2GradeFlag records
       operationId: listNationalEarlyWarningScore2GradeFlag
@@ -19,22 +19,44 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of NationalEarlyWarningScore2GradeFlag records
+          description: A page of NationalEarlyWarningScore2GradeFlag records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/NationalEarlyWarningScore2GradeFlag"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NationalEarlyWarningScore2GradeFlag
       operationId: createNationalEarlyWarningScore2GradeFlag
@@ -45,15 +67,42 @@ paths:
             schema:
               $ref: "#/components/schemas/NationalEarlyWarningScore2GradeFlag"
       responses:
-        "201":
+        "200":
           description: The newly created NationalEarlyWarningScore2GradeFlag
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/NationalEarlyWarningScore2GradeFlag"
         "400":
-          description: Validation error
-  /national-early-warning-score-2-grade-flags/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/national_early_warning_score_2_grade_flags/{id}:
     parameters:
       - name: id
         in: path
@@ -73,6 +122,21 @@ paths:
                 $ref: "#/components/schemas/NationalEarlyWarningScore2GradeFlag"
         "404":
           description: NationalEarlyWarningScore2GradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NationalEarlyWarningScore2GradeFlag
       operationId: updateNationalEarlyWarningScore2GradeFlag
@@ -91,16 +155,132 @@ paths:
                 $ref: "#/components/schemas/NationalEarlyWarningScore2GradeFlag"
         "404":
           description: NationalEarlyWarningScore2GradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing NationalEarlyWarningScore2GradeFlag
+      operationId: replaceNationalEarlyWarningScore2GradeFlag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NationalEarlyWarningScore2GradeFlag"
+      responses:
+        "200":
+          description: The updated NationalEarlyWarningScore2GradeFlag
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NationalEarlyWarningScore2GradeFlag"
+        "404":
+          description: NationalEarlyWarningScore2GradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
-      summary: Soft-delete a NationalEarlyWarningScore2GradeFlag
+      summary: Delete a NationalEarlyWarningScore2GradeFlag
       operationId: deleteNationalEarlyWarningScore2GradeFlag
       responses:
-        "204":
+        "200":
           description: NationalEarlyWarningScore2GradeFlag deleted
         "404":
           description: NationalEarlyWarningScore2GradeFlag not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
 components:
   schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
     NationalEarlyWarningScore2GradeFlag:
       type: object
       properties:
@@ -116,10 +296,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the row was most recently updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the row was soft-deleted.
         national_early_warning_score_2_grade_id:
           type: string
           format: uuid

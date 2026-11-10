@@ -29,7 +29,7 @@ Informed consent form for medical procedures, validated for completeness of requ
 consent-to-treatment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

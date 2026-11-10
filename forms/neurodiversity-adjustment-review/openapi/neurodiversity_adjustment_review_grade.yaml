@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed four-axis grade for a neurodiversity reasonable-adjustments review: overall effectiveness, wellbeing risk, review completeness, and next-step urgency. Any adjustment reported as not-working, a dissatisfied worker, declining wellbeing, or an escalation drives the wellbeing-risk axis and the next-step urgency regardless of the other axes."
 paths:
-  /neurodiversity-adjustment-review-grades:
+  /api/neurodiversity_adjustment_review_grades:
     get:
       summary: List NeurodiversityAdjustmentReviewGrade records
       operationId: listNeurodiversityAdjustmentReviewGrade
@@ -19,22 +19,44 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of NeurodiversityAdjustmentReviewGrade records
+          description: A page of NeurodiversityAdjustmentReviewGrade records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/NeurodiversityAdjustmentReviewGrade"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NeurodiversityAdjustmentReviewGrade
       operationId: createNeurodiversityAdjustmentReviewGrade
@@ -45,15 +67,42 @@ paths:
             schema:
               $ref: "#/components/schemas/NeurodiversityAdjustmentReviewGrade"
       responses:
-        "201":
+        "200":
           description: The newly created NeurodiversityAdjustmentReviewGrade
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/NeurodiversityAdjustmentReviewGrade"
         "400":
-          description: Validation error
-  /neurodiversity-adjustment-review-grades/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/neurodiversity_adjustment_review_grades/{id}:
     parameters:
       - name: id
         in: path
@@ -73,6 +122,21 @@ paths:
                 $ref: "#/components/schemas/NeurodiversityAdjustmentReviewGrade"
         "404":
           description: NeurodiversityAdjustmentReviewGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NeurodiversityAdjustmentReviewGrade
       operationId: updateNeurodiversityAdjustmentReviewGrade
@@ -91,16 +155,132 @@ paths:
                 $ref: "#/components/schemas/NeurodiversityAdjustmentReviewGrade"
         "404":
           description: NeurodiversityAdjustmentReviewGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing NeurodiversityAdjustmentReviewGrade
+      operationId: replaceNeurodiversityAdjustmentReviewGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NeurodiversityAdjustmentReviewGrade"
+      responses:
+        "200":
+          description: The updated NeurodiversityAdjustmentReviewGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentReviewGrade"
+        "404":
+          description: NeurodiversityAdjustmentReviewGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
-      summary: Soft-delete a NeurodiversityAdjustmentReviewGrade
+      summary: Delete a NeurodiversityAdjustmentReviewGrade
       operationId: deleteNeurodiversityAdjustmentReviewGrade
       responses:
-        "204":
+        "200":
           description: NeurodiversityAdjustmentReviewGrade deleted
         "404":
           description: NeurodiversityAdjustmentReviewGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
 components:
   schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
     NeurodiversityAdjustmentReviewGrade:
       type: object
       properties:
@@ -116,10 +296,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         neurodiversity_adjustment_review_id:
           type: string
           format: uuid
@@ -142,7 +318,7 @@ components:
             - ""
           description: "Axis B wellbeing risk band: ok, caution, high-risk."
         completeness_percent:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Axis C review completeness as a percentage of mandatory fields (0-100).
         next_step_urgency:
@@ -172,7 +348,7 @@ components:
           type: string
           description: Free-text sign-off notes from the manager or HR contact.
         signed_at:
-          type: string
+          type: [string, 'null']
           format: date-time
           description: Timestamp of the manager / HR electronic signature.
         graded_at:

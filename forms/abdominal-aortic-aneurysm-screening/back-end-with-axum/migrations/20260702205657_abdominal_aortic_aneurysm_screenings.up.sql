@@ -1,0 +1,32 @@
+CREATE TABLE IF NOT EXISTS "abdominal_aortic_aneurysm_screenings" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "technician_name" text NOT NULL DEFAULT '',
+    "technician_role" varchar NOT NULL DEFAULT '',
+    "clinic_site" text NOT NULL DEFAULT '',
+    "scanned_at" timestamp with time zone NULL,
+    "device_identifier" text NOT NULL DEFAULT '',
+    "patient_identifier" varchar NOT NULL DEFAULT '',
+    "age" integer NULL,
+    "sex" varchar NOT NULL DEFAULT '',
+    "eligibility_route" varchar NOT NULL DEFAULT '',
+    "scan_type" varchar NOT NULL DEFAULT '',
+    "consent_given" varchar NOT NULL DEFAULT '',
+    "leaflet_provided" varchar NOT NULL DEFAULT '',
+    "consent_note" text NOT NULL DEFAULT '',
+    "aorta_visualised" varchar NOT NULL DEFAULT '',
+    "max_aortic_diameter_cm" double precision NULL,
+    "prior_max_diameter_cm" double precision NULL,
+    "prior_scan_date" date NULL,
+    "symptomatic" varchar NOT NULL DEFAULT '',
+    "incidental_findings" text NOT NULL DEFAULT '',
+    "result_note" text NOT NULL DEFAULT '',
+    "patient_id" uuid NOT NULL,
+    "clinician_id" uuid NULL,
+    CONSTRAINT "fk-abdominal_aortic_aneurysm_screenings-patient_id-to-patients" FOREIGN KEY ("patient_id") REFERENCES "patients" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-abdominal_aortic_aneurysm_screenings-clinician_id-to-clinicians" FOREIGN KEY ("clinician_id") REFERENCES "clinicians" (id) ON DELETE SET NULL ON UPDATE NO ACTION
+);
+
+ALTER TABLE abdominal_aortic_aneurysm_screenings ALTER COLUMN id SET DEFAULT gen_random_uuid();

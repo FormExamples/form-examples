@@ -29,7 +29,7 @@ Cancer patient evaluation using ECOG (Eastern Cooperative Oncology Group) Perfor
 oncology-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

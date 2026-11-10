@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Dietetic assessment: the payload of the 16-step single-page wizard, covering medical history, medication and supplements, dietary recall, lifestyle and food environment, and physical measurements."
 paths:
-  /dietic-assessments:
+  /api/dietic_assessments:
     get:
       summary: List DieticAssessment records
       operationId: listDieticAssessment
@@ -19,22 +19,44 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of DieticAssessment records
+          description: A page of DieticAssessment records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/DieticAssessment"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new DieticAssessment
       operationId: createDieticAssessment
@@ -45,15 +67,42 @@ paths:
             schema:
               $ref: "#/components/schemas/DieticAssessment"
       responses:
-        "201":
+        "200":
           description: The newly created DieticAssessment
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/DieticAssessment"
         "400":
-          description: Validation error
-  /dietic-assessments/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/dietic_assessments/{id}:
     parameters:
       - name: id
         in: path
@@ -73,6 +122,21 @@ paths:
                 $ref: "#/components/schemas/DieticAssessment"
         "404":
           description: DieticAssessment not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing DieticAssessment
       operationId: updateDieticAssessment
@@ -91,16 +155,132 @@ paths:
                 $ref: "#/components/schemas/DieticAssessment"
         "404":
           description: DieticAssessment not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing DieticAssessment
+      operationId: replaceDieticAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DieticAssessment"
+      responses:
+        "200":
+          description: The updated DieticAssessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DieticAssessment"
+        "404":
+          description: DieticAssessment not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
-      summary: Soft-delete a DieticAssessment
+      summary: Delete a DieticAssessment
       operationId: deleteDieticAssessment
       responses:
-        "204":
+        "200":
           description: DieticAssessment deleted
         "404":
           description: DieticAssessment not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
 components:
   schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
     DieticAssessment:
       type: object
       properties:
@@ -116,10 +296,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Soft-delete timestamp; NULL when the row is live.
         patient_id:
           type: string
           format: uuid
@@ -137,11 +313,11 @@ components:
             - urgent
           description: "Workflow status of the assessment: draft, submitted, reviewed, or urgent."
         assessment_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the assessment was conducted.
         assessment_time:
-          type: string
+          type: [string, 'null']
           format: time
           description: Time the assessment was conducted.
         site_name:
@@ -175,7 +351,7 @@ components:
             - ""
           description: Type of appointment, where an initial appointment typically runs 45 to 60 minutes and a specialist programme up to 90 minutes.
         planned_duration_minutes:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Planned appointment duration in minutes, such as 45 to 60 for an initial general clinical or outpatient visit.
         interpreter_required:
@@ -204,7 +380,7 @@ components:
             - ""
           description: Who referred the patient to the dietetic service.
         referral_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the referral was made.
         referral_reason:
@@ -322,7 +498,7 @@ components:
           maxLength: 255
           description: Type of recent surgery.
         recent_surgery_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date of the recent surgery.
         gastrointestinal_surgery:
@@ -464,43 +640,43 @@ components:
             - ""
           description: "How height and weight were obtained: measured, self-reported, estimated, or declined. Declined is a first-class answer; the MUST body mass index component is then estimated from mid-upper-arm circumference."
         height_as_cm:
-          type: number
+          type: [number, 'null']
           format: double
           description: Height in cm, such as for calculating body mass index.
         weight_as_kg:
-          type: number
+          type: [number, 'null']
           format: double
           description: Weight in kg, such as for calculating body mass index and percentage weight loss.
         body_mass_index:
-          type: number
+          type: [number, 'null']
           format: double
           description: Body mass index in kg per square metre, auto-computed from height and weight, and scored as MUST step 1.
         mid_upper_arm_circumference_as_cm:
-          type: number
+          type: [number, 'null']
           format: double
           description: Mid-upper-arm circumference in cm. Below 23.5 suggests body mass index below 20; above 32.0 suggests body mass index above 30. Used to estimate the MUST body mass index component when weighing is declined or impractical.
         calf_circumference_as_cm:
-          type: number
+          type: [number, 'null']
           format: double
           description: Calf circumference in cm, supporting the GLIM reduced-muscle-mass phenotypic criterion.
         waist_as_cm:
-          type: number
+          type: [number, 'null']
           format: double
           description: Waist circumference in cm, such as for assessing central adiposity.
         usual_weight_as_kg:
-          type: number
+          type: [number, 'null']
           format: double
           description: The patient's usual or pre-illness weight in kg, i.e. the baseline for percentage weight loss.
         weight_3_months_ago_as_kg:
-          type: number
+          type: [number, 'null']
           format: double
           description: Weight in kg three months ago, where known.
         weight_6_months_ago_as_kg:
-          type: number
+          type: [number, 'null']
           format: double
           description: Weight in kg six months ago, i.e. the outer bound of the MUST weight-loss window.
         weight_loss_percent:
-          type: number
+          type: [number, 'null']
           format: double
           description: Percentage unplanned weight loss over the last three to six months, auto-computed, and scored as MUST step 2.
         weight_loss_is_intentional:
@@ -535,7 +711,7 @@ components:
             - ""
           description: Whether oedema is present, because fluid weight masks true weight loss.
         oedema_adjustment_kg:
-          type: number
+          type: [number, 'null']
           format: double
           description: Weight adjustment in kg subtracted for oedema before body mass index is computed.
         ascites_present:
@@ -553,94 +729,94 @@ components:
             - ""
           description: Whether the patient has an amputation, which changes the interpretation of weight and body mass index.
         amputation_adjustment_percent:
-          type: number
+          type: [number, 'null']
           format: double
           description: Percentage of body weight attributed to the absent limb, used to interpret weight and body mass index.
         anthropometry_notes:
           type: string
           description: Free-text notes about the measurements, such as why weighing was declined.
         bloods_sample_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the blood sample was taken, so the report can say how current the biochemistry is.
         albumin_g_per_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Serum albumin in g per litre. A marker of inflammation rather than of protein intake, so it supports the GLIM inflammation criterion rather than diagnosing malnutrition.
         c_reactive_protein_mg_per_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: C-reactive protein in mg per litre, supporting the GLIM inflammation and disease burden etiologic criterion.
         haemoglobin_g_per_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Haemoglobin in g per litre.
         ferritin_ug_per_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Ferritin in micrograms per litre, i.e. the iron store marker.
         vitamin_b12_ng_per_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Vitamin B12 in nanograms per litre.
         folate_ug_per_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Serum folate in micrograms per litre.
         vitamin_d_nmol_per_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: 25-hydroxyvitamin D in nmol per litre.
         hba1c_mmol_per_mol:
-          type: number
+          type: [number, 'null']
           format: double
           description: Glycated haemoglobin in mmol per mol. Above 75 fires the uncontrolled-diabetes safety flag.
         sodium_mmol_per_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Serum sodium in mmol per litre.
         potassium_mmol_per_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Serum potassium in mmol per litre. A low pre-feeding value is a NICE CG32 refeeding-syndrome high-risk criterion.
         magnesium_mmol_per_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Serum magnesium in mmol per litre. A low pre-feeding value is a NICE CG32 refeeding-syndrome high-risk criterion.
         phosphate_mmol_per_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Serum phosphate in mmol per litre. A low pre-feeding value is a NICE CG32 refeeding-syndrome high-risk criterion.
         corrected_calcium_mmol_per_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Albumin-corrected calcium in mmol per litre.
         urea_mmol_per_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Serum urea in mmol per litre.
         creatinine_umol_per_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Serum creatinine in micromol per litre.
         egfr_ml_per_min:
-          type: number
+          type: [number, 'null']
           format: double
           description: Estimated glomerular filtration rate in ml per minute per 1.73 square metres. Below 30 with a high-protein or high-potassium plan fires the renal-dietary-conflict safety flag.
         alanine_aminotransferase_u_per_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Alanine aminotransferase in units per litre.
         bilirubin_umol_per_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Total bilirubin in micromol per litre.
         total_cholesterol_mmol_per_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Total cholesterol in mmol per litre.
         triglycerides_mmol_per_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Triglycerides in mmol per litre.
         biochemistry_notes:
@@ -781,18 +957,18 @@ components:
             - ""
           description: Pressure ulcer category, where category 2 or above fires the pressure-ulcer safety flag and raises protein and energy requirements.
         hand_grip_strength_kg:
-          type: number
+          type: [number, 'null']
           format: double
           description: Hand-grip strength in kg by dynamometer, compared against sex-adjusted cut-offs to support the sarcopenia-risk safety flag.
         physical_exam_notes:
           type: string
           description: Free-text notes from the nutrition-focused physical examination.
         meals_per_day:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Number of meals the patient eats in a typical day.
         snacks_per_day:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Number of snacks the patient eats in a typical day.
         recall_breakfast:
@@ -832,19 +1008,19 @@ components:
             - ""
           description: "Overall appetite: good, fair, poor, or absent."
         appetite_score_0_10:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Appetite rated by the patient from 0 for none to 10 for normal.
         proportion_of_usual_intake_percent:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Current intake as a percentage of the patient's usual intake. Below 50 fires the inadequate-oral-intake safety flag and supports the GLIM reduced-intake etiologic criterion.
         meals_out_per_week:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Number of meals eaten out per week.
         takeaways_per_week:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Number of takeaway meals per week.
         food_diary_completed:
@@ -855,11 +1031,11 @@ components:
             - ""
           description: Whether the patient completed a food diary before the appointment.
         estimated_energy_intake_kcal:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Estimated current daily energy intake in kilocalories, from the recall or food diary.
         estimated_protein_intake_g:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Estimated current daily protein intake in grams, from the recall or food diary.
         eats_alone:
@@ -873,7 +1049,7 @@ components:
           type: string
           description: Free-text notes about the dietary recall.
         fluid_intake_ml_per_day:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Usual daily fluid intake in ml.
         fluid_types:
@@ -881,11 +1057,11 @@ components:
           maxLength: 500
           description: Types of drink the patient consumes, such as water, tea, juice, or milk-based drinks.
         caffeinated_drinks_per_day:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Number of caffeinated drinks per day.
         alcohol_units_per_week:
-          type: number
+          type: [number, 'null']
           format: double
           description: Alcohol consumption in United Kingdom units per week. Above 14 fires the alcohol-excess safety flag and is a NICE CG32 refeeding-risk criterion.
         thickened_fluids:
@@ -923,7 +1099,7 @@ components:
             - ""
           description: Whether a fluid restriction is in place, such as for heart failure or dialysis.
         fluid_restriction_ml_per_day:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Prescribed daily fluid restriction in ml.
         hydration_notes:
@@ -1092,7 +1268,7 @@ components:
             - ""
           description: Whether the patient has bloating.
         bowel_frequency_per_week:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Number of bowel movements per week.
         bristol_stool_type:
@@ -1129,7 +1305,7 @@ components:
             - ""
           description: Whether the patient has a stoma or enterocutaneous fistula.
         stoma_output_ml_per_day:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Stoma or fistula output in ml per day, where a high output impairs absorption and fluid balance.
         malabsorption_signs:
@@ -1185,7 +1361,7 @@ components:
             - ""
           description: The patient's cooking skills, because a care plan must be achievable with them.
         cooking_confidence_0_10:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: The patient's confidence in cooking, from 0 for none to 10 for fully confident.
         has_cooker:
@@ -1217,7 +1393,7 @@ components:
             - ""
           description: Whether the patient has a working microwave.
         food_budget_per_week:
-          type: number
+          type: [number, 'null']
           format: double
           description: Weekly food budget in the local currency, because a care plan must be affordable.
         worried_food_would_run_out:
@@ -1309,11 +1485,11 @@ components:
           maxLength: 255
           description: Type of exercise the patient does.
         exercise_minutes_per_week:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Minutes of exercise per week.
         sedentary_hours_per_day:
-          type: number
+          type: [number, 'null']
           format: double
           description: Hours per day spent sedentary.
         mobility:
@@ -1326,27 +1502,27 @@ components:
             - ""
           description: Mobility status, from independent through walking aid and wheelchair to bed-bound.
         falls_in_last_12_months:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Number of falls in the last 12 months, which is the SARC-F falls component and a sarcopenia indicator.
         sarcf_strength:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "SARC-F component: difficulty lifting and carrying 4.5 kg, scored 0 for none, 1 for some, 2 for a lot or unable."
         sarcf_walking:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "SARC-F component: difficulty walking across a room, scored 0 for none, 1 for some, 2 for a lot, uses aids, or unable."
         sarcf_rising_from_chair:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "SARC-F component: difficulty transferring from a chair or bed, scored 0 for none, 1 for some, 2 for a lot or unable without help."
         sarcf_climbing_stairs:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "SARC-F component: difficulty climbing a flight of ten stairs, scored 0 for none, 1 for some, 2 for a lot or unable."
         sarcf_falls:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "SARC-F component: number of falls in the past year, scored 0 for none, 1 for one to three, 2 for four or more."
         eats_independently:
@@ -1369,7 +1545,7 @@ components:
           type: string
           description: Free-text notes about physical activity and function.
         motivation_0_10:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: The patient's motivation to change, from 0 for none to 10 for fully motivated.
         stage_of_change:
@@ -1384,7 +1560,7 @@ components:
             - ""
           description: Stage of change in the transtheoretical model, which sets how directive the intervention should be.
         self_efficacy_0_10:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: The patient's confidence in their ability to change, from 0 for none to 10 for fully confident.
         previous_attempts:
@@ -1505,23 +1681,23 @@ components:
             - ""
           description: Whether there has been, or is likely to be, no nutritional intake for more than five days, i.e. the second half of the MUST step 3 acute disease effect criterion.
         days_of_negligible_intake:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Number of days of little or no nutritional intake, used for the NICE CG32 refeeding-syndrome risk criteria.
         nrs_2002_score:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Nutritional Risk Screening 2002 total score, 0 to 7, where 3 or more indicates nutritional risk in the acute inpatient setting.
         energy_requirement_kcal:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Estimated daily energy requirement in kilocalories, entered by the dietitian using the equation named below.
         protein_requirement_g:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Estimated daily protein requirement in grams, entered by the dietitian.
         fluid_requirement_ml:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Estimated daily fluid requirement in ml, entered by the dietitian.
         requirement_equation:
@@ -1596,11 +1772,11 @@ components:
           type: string
           description: What will be monitored to evaluate the intervention, such as weight, intake, or a biochemical marker.
         review_interval_weeks:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Interval in weeks until the next review.
         review_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date of the next planned review.
         onward_referral:

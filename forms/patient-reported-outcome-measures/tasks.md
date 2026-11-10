@@ -26,7 +26,7 @@
       Verified via `svelte-check` (0 errors), `vitest run` (21/21,
       including all worked-example assertions), and Playwright
       end-to-end (fixed a real `v.toFixed` crash found during testing).
-- [x] `back-end-with-loco/` — Rust JSON API, 1:1 raw + score entities
+- [x] `back-end-with-axum/` — Rust JSON API, 1:1 raw + score entities
       (`has_one`/`belongs_to`, UNIQUE FK index enforcing the 1:1 at the
       DB level). Same Loco FK-auto-singularization bug as the other
       new forms, fixed identically via explicit-column-name override.

@@ -1,9 +1,0 @@
-mod users;
-
-mod patients;
-mod practitioners;
-mod psychiatry_waiting_list_cards;
-mod psychiatry_waiting_list_card_appointments;
-mod psychiatry_waiting_list_card_grades;
-mod psychiatry_waiting_list_card_grade_rules;
-mod psychiatry_waiting_list_card_grade_flags;

@@ -19,7 +19,7 @@ clinician). A formal diagnosis is not required for the duty to apply.
 ## Source of truth
 
 `sql/` is the schema source of truth. After editing it, regenerate derived
-artefacts (XML, FHIR R5, protobuf, OpenAPI, Loco setup, examples, `spec/`,
+artefacts (XML, FHIR R5, protobuf, OpenAPI, Axum setup, examples, `spec/`,
 `CHANGELOG.md`) with the repo generators in `bin/` — never hand-edit generated
 files.
 

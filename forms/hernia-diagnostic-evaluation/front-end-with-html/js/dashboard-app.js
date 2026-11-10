@@ -301,7 +301,7 @@ async function loadData() {
   } catch (e) {
     evaluations = sampleEvaluations;
     showNotice(
-      'The back-end is unavailable, so the dashboard is showing sample data. Start the Loco API on http://localhost:5150 to see live records.',
+      'The back-end is unavailable, so the dashboard is showing sample data. Start the Axum API on http://localhost:5150 to see live records.',
       'warning'
     );
   }

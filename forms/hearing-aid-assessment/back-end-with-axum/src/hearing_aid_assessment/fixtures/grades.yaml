@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000093f1f"
+  deletedAt: null
+  handicapLevel: "no-handicap"
+  hhiesTotalScore: 1
+  hearingAidCandidacy: "recommended"
+  leftEarRecommendation: "hearing-aid"
+  rightEarRecommendation: "hearing-aid"
+  gradedAt: "2026-01-01T00:00:00Z"
+  assessmentId: "00000000-0000-4000-8000-0000000d1b20"

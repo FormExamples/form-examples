@@ -30,7 +30,7 @@ Comprehensive psychiatric evaluation using the GAF (Global Assessment of Functio
 psychiatry-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

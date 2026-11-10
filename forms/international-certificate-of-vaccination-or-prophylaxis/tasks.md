@@ -35,7 +35,7 @@
 
 ## Full-stack backend
 
-- [x] `back-end-with-loco-setup` shell script
+- [x] `back-end-with-axum-setup` shell script
 - [ ] Loco app scaffold
 - [ ] Cargo workspace + migration sub-crate
 - [ ] Tera base template with HTMX + Alpine CDN scripts

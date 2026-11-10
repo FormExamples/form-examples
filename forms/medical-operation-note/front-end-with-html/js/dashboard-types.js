@@ -67,7 +67,7 @@
 /**
  * Response from `GET /api/operation-notes`.
  *
- * The Loco backend returns a bare JSON array of `OperationNoteRow` objects;
+ * The Axum backend returns a bare JSON array of `OperationNoteRow` objects;
  * the dashboard accepts either a bare array or an `{ items, total }` envelope
  * so future paginated responses are forwards-compatible.
  *

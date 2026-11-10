@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Neurodiversity reasonable-adjustments response: the employer's decision, written confirmation, and review arrangements in answer to a request. Captures the overall decision and rationale, which adjustments were agreed (and any alternatives offered), the trial period and review date, support / resources / responsibilities, and any escalation. This is the source-of-truth record that the four-axis grade is computed from. Aligned with the ACAS reasonable-adjustment confirmation and review templates and the Equality Act 2010 duty to make reasonable adjustments."
 paths:
-  /neurodiversity-adjustment-responses:
+  /api/neurodiversity_adjustment_responses:
     get:
       summary: List NeurodiversityAdjustmentResponse records
       operationId: listNeurodiversityAdjustmentResponse
@@ -19,22 +19,44 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of NeurodiversityAdjustmentResponse records
+          description: A page of NeurodiversityAdjustmentResponse records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/NeurodiversityAdjustmentResponse"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NeurodiversityAdjustmentResponse
       operationId: createNeurodiversityAdjustmentResponse
@@ -45,15 +67,42 @@ paths:
             schema:
               $ref: "#/components/schemas/NeurodiversityAdjustmentResponse"
       responses:
-        "201":
+        "200":
           description: The newly created NeurodiversityAdjustmentResponse
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/NeurodiversityAdjustmentResponse"
         "400":
-          description: Validation error
-  /neurodiversity-adjustment-responses/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/neurodiversity_adjustment_responses/{id}:
     parameters:
       - name: id
         in: path
@@ -73,6 +122,21 @@ paths:
                 $ref: "#/components/schemas/NeurodiversityAdjustmentResponse"
         "404":
           description: NeurodiversityAdjustmentResponse not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NeurodiversityAdjustmentResponse
       operationId: updateNeurodiversityAdjustmentResponse
@@ -91,16 +155,132 @@ paths:
                 $ref: "#/components/schemas/NeurodiversityAdjustmentResponse"
         "404":
           description: NeurodiversityAdjustmentResponse not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing NeurodiversityAdjustmentResponse
+      operationId: replaceNeurodiversityAdjustmentResponse
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NeurodiversityAdjustmentResponse"
+      responses:
+        "200":
+          description: The updated NeurodiversityAdjustmentResponse
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentResponse"
+        "404":
+          description: NeurodiversityAdjustmentResponse not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
-      summary: Soft-delete a NeurodiversityAdjustmentResponse
+      summary: Delete a NeurodiversityAdjustmentResponse
       operationId: deleteNeurodiversityAdjustmentResponse
       responses:
-        "204":
+        "200":
           description: NeurodiversityAdjustmentResponse deleted
         "404":
           description: NeurodiversityAdjustmentResponse not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
 components:
   schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
     NeurodiversityAdjustmentResponse:
       type: object
       properties:
@@ -116,10 +296,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         worker_id:
           type: string
           format: uuid
@@ -155,15 +331,15 @@ components:
             - ""
           description: "How the request was handled: meeting, occupational-health-referral, email, hr-review, other."
         assessed_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the request was assessed / discussed with the worker.
         responded_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the response was issued to the worker.
         effective_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the agreed adjustments take effect.
         overall_decision:
@@ -228,14 +404,14 @@ components:
           type: boolean
           description: Whether the agreed adjustments are being tried for a time-limited trial period before permanent implementation.
         trial_period_weeks:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Length of the trial period in weeks, if a trial applies (0-104).
         review_scheduled:
           type: boolean
           description: Whether a review of the adjustments has been scheduled.
         review_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the adjustments will be reviewed.
         occupational_health_referred:

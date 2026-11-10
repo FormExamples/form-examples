@@ -1,11 +1,11 @@
 # Back end
 
-Each form has one Rust JSON-API crate in `back-end-with-loco/`: axum 0.8 +
-[Loco](https://loco.rs) 0.16 + SeaORM 1.1 over PostgreSQL, Rust edition 2021. It
+Each form has one Rust JSON-API crate in `back-end-with-axum/`: axum 0.8 +
+[axa](https://crates.io/crates/axa) 0.6 + sqlx 0.9 over PostgreSQL. It
 is a pure JSON API — no Tera, HTMX, Alpine, or CSS. The reference crate is
-`forms/medical-operation-note/back-end-with-loco`.
+`forms/medical-operation-note/back-end-with-axum`.
 
-Authoring rules: [`AGENTS/back-end-with-loco.md`](../AGENTS/back-end-with-loco.md).
+Authoring rules: [`AGENTS/back-end-with-axum.md`](../AGENTS/back-end-with-axum.md).
 
 ## Layout
 
@@ -14,15 +14,15 @@ Crate source lives under `src/<form_snake_case>/` (e.g.
 
 ```
 src/<snake>/
-  app.rs               Loco Hooks: routes, workers, initializers
+  app.rs               configuration, routes, workers, tasks, command line, test boot
   bin/main.rs          CLI entrypoint
-  controllers/         axum handlers (one per entity) + auth
-  models/              SeaORM ActiveModels; _entities/ holds generated entities
+  controllers/         axum handlers (one per entity)
+  models/              one struct and its SQL per table
   engine/              the pure scoring engine (types, *_rules, grader, flagged_issues)
-  views/  workers/  tasks/  initializers/  mailers/  fixtures/
-migration/src/         one mNN_<timestamp>_<table>.rs per SQL table
-config/                development.yaml, test.yaml, production.yaml
-tests/                 models/ requests/ engine/ tasks/ workers/ (+ snapshots)
+  support/             what axa leaves to a service: pool, page limits, model errors, seeding
+  workers/  tasks/  initializers/  fixtures/
+migrations/            <version>_<table>.up.sql and .down.sql, per SQL table
+tests/                 models/ requests/ engine/ tasks/ workers/
 Cargo.toml  Cargo.lock
 ```
 
@@ -38,6 +38,11 @@ the SQL: `patients`, `clinicians`, `medical_operation_notes`, its child tables
 as the SQL: a UUIDv4 primary key via `gen_random_uuid()`, and
 `created_at` / `updated_at` / `deleted_at` timestamps.
 
+Every table in `sql/` is reachable over HTTP, through its own `/api/<plural>` routes
+or a hand-written aggregate. `DELETE` is a soft delete: one statement sets `deleted_at`
+on the row and along its `ON DELETE CASCADE` keys, and reads and updates then answer
+as if the row were gone. `deleted_at` is in no request or response body.
+
 Request/response structs that cross the wire to the front-end carry
 `serde(rename_all = "camelCase")`, so the JSON API speaks camelCase while Rust
 internals stay snake_case — the same boundary described in
@@ -50,44 +55,30 @@ and flag IDs with the JS and TypeScript engines — see
 
 ## Configuration
 
-Three environments, each a Loco YAML in `config/`. The database and queue point
-at Postgres via the `DATABASE_URL` env var with a per-form default, e.g.:
+Settings come from the environment, with defaults in code; there are no
+configuration files. `APP_ENV` picks `development`, `test`, or `production`, and
+`DB_URL` defaults to `postgres://postgres:postgres@localhost:5432/<form>_<env>`
+outside production, where it is required. The `_development`, `_test`, and
+`_production` databases follow the `<form_snake_case>_<env>` naming. The full list
+is in [`AGENTS/back-end-with-axum.md`](../AGENTS/back-end-with-axum.md).
 
-```yaml
-database:
-  uri: {{ get_env(name="DATABASE_URL",
-         default="postgres://loco:loco@localhost:5432/medical_operation_note_development") }}
-  auto_migrate: true
-```
+Each client may send 600 requests a minute; past that it gets a `429` problem with
+`Retry-After`. The limit counts per process, by the address axa works out, so behind a
+proxy `TRUSTED_PROXIES` must list it. Health probes are never limited. `task seed` runs
+only in development and test, so fixtures cannot reach real records. See ADR-11 in
+[`arc42/09-architecture-decisions.md`](../arc42/09-architecture-decisions.md).
 
-`_development`, `_test`, and `_production` databases follow the
-`<form_snake_case>_<env>` naming.
+## Background queue
 
-## Background queue + observability convention
-
-The canonical convention (enforced by `bin/loco-config-refactor --check`) is:
-
-- **Postgres-only background queue.** `loco-rs` is declared with
-  `default-features = false` and an explicit feature list
-  (`auth_jwt`, `bg_pg`, `cache_inmem`, `cli`, `with-db`); the SQLite (`bg_sqlt`)
-  and Redis (`bg_redis`) queues are removed. In the config, `workers.mode` is
-  `BackgroundQueue` (development/production) or `ForegroundBlocking` (test, so
-  queued mailer jobs run inline), and the `queue:` block is `kind: Postgres`
-  reusing the same URI as `database.uri`.
-- **OpenTelemetry + Prometheus observability.** Cargo.toml carries the OTLP
-  exporter deps (`opentelemetry`, `opentelemetry_sdk`, `opentelemetry-otlp`,
-  `tracing-opentelemetry`) and the Prometheus `/metrics` dependency
-  (`axum-prometheus`).
-
-`bin/loco-config-refactor` applies this mechanically and is idempotent; its
-`--check --all` mode is the CI drift detector (see [Verification](verification.md)).
+Jobs run on axa's Postgres queue, using `FOR UPDATE SKIP LOCKED` on one
+`axa_queue` table, so no broker is needed. `start` runs only the server; `start
+--all` or `start --worker` runs jobs. Tests run jobs inline.
 
 ## Supply-chain policy (cargo-deny)
 
 Every crate carries a `deny.toml` generated by
-`bin/generate-loco-deny-config.py` — a single policy applied verbatim
-across the corpus, since every crate shares the same `loco-rs` 0.16 pin
-and (near enough) the same dependency graph. It checks licenses (an
+`bin/generate-axum-deny-config.py` — a single policy applied verbatim
+across the corpus, since every crate has nearly the same dependency graph. It checks licenses (an
 explicit permissive allow-list), security advisories, banned crates, and
 trusted sources; unfixable transitive advisories (unmaintained crates, or
 a vulnerability class this crate's code path never reaches, e.g. an XML
@@ -96,28 +87,28 @@ parser DoS when the crate never parses untrusted XML) are recorded as
 Run with `--all-features` so feature-gated dependencies are included:
 
 ```sh
-cd back-end-with-loco && cargo deny --all-features check
+cd back-end-with-axum && cargo deny --all-features check
 ```
 
 ## Tests boot a real database
 
-Model and request tests use `loco_rs::testing::prelude::*`: `boot_test::<App>()`
-brings up the app against the `_test` Postgres database, `seed::<App>()` loads
-fixtures, and assertions use `insta` snapshots (`serial_test`'s `#[serial]`
-serializes DB access). In CI the Rust job runs `cargo check` + `cargo clippy -D
-warnings` + `cargo deny --all-features check` + `cargo test` across an 8-way
-shard matrix, each shard with its own Postgres-backed per-crate database.
+Model and request tests use `axa_test::prelude::*` (the `axa-test` dev-dependency): `boot_test::<App>()`
+brings up the app against the `_test` Postgres database on a freshly recreated
+schema, `seed::<App>()` loads fixtures, and assertions use `insta` snapshots
+(`serial_test`'s `#[serial]` serializes DB access). In CI the Rust job runs `cargo
+check` + `cargo clippy -D warnings` + `cargo deny --all-features check` + `cargo
+test` across an 8-way shard matrix, each shard with its own Postgres-backed
+per-crate database.
 
 ## The setup generator
 
-`back-end-with-loco-setup` is a **generated** executable shell script (never
+`back-end-with-axum-setup` is a **generated** executable shell script (never
 hand-edited) produced by
-`bin/back-end-with-loco/generate-back-end-with-loco-setup.py`. It captures how
-the crate is scaffolded from scratch: `createdb` for the three environments,
-`loco new`, and a `cargo loco generate scaffold --api` call per table with its
-columns and types. Regenerating it is drift-checked like every other generated
-artefact — see [Generator pipeline](generator-pipeline.md).
+`bin/back-end-with-axum/generate-back-end-with-axum-setup.py`. It runs `createdb`
+for the three environments and applies the crate's migrations. Regenerating it is
+drift-checked like every other generated artefact — see
+[Generator pipeline](generator-pipeline.md).
 
 Local Postgres setup for the DB-backed gates is in
 [`CONTRIBUTING.md`](../CONTRIBUTING.md); the reference crate is
-`forms/medical-operation-note/back-end-with-loco`.
+`forms/medical-operation-note/back-end-with-axum`.

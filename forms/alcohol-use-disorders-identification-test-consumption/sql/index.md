@@ -24,5 +24,5 @@ trigger uses the short base **`audit_c`** (`audit_c`, `audit_c_grade`,
 | 06 | `06_create_table_audit_c_grade_rule.sql` | `audit_c_grade_rule` | audit trail of fired grading rules |
 | 07 | `07_create_table_audit_c_grade_flag.sql` | `audit_c_grade_flag` | red-flag issues with priority and suggested action |
 
-Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Loco
+Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Axum
 setup script) are derived from these migrations and are never hand-edited.

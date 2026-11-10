@@ -1,0 +1,30 @@
+CREATE TABLE IF NOT EXISTS "recognition_of_stroke_in_the_emergency_rooms" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "clinician_name" varchar NOT NULL DEFAULT '',
+    "clinician_role" varchar NOT NULL DEFAULT '',
+    "assessed_at" timestamp with time zone NULL,
+    "care_setting" varchar NOT NULL DEFAULT '',
+    "symptom_onset_at" timestamp with time zone NULL,
+    "patient_identifier" varchar NOT NULL DEFAULT '',
+    "age_band" varchar NOT NULL DEFAULT '',
+    "sex" varchar NOT NULL DEFAULT '',
+    "blood_glucose" double precision NULL,
+    "hypoglycaemia_corrected" varchar NOT NULL DEFAULT '',
+    "loss_of_consciousness" varchar NOT NULL DEFAULT '',
+    "seizure_activity" varchar NOT NULL DEFAULT '',
+    "facial_weakness" varchar NOT NULL DEFAULT '',
+    "arm_weakness" varchar NOT NULL DEFAULT '',
+    "leg_weakness" varchar NOT NULL DEFAULT '',
+    "speech_disturbance" varchar NOT NULL DEFAULT '',
+    "visual_field_defect" varchar NOT NULL DEFAULT '',
+    "clinical_note" text NOT NULL DEFAULT '',
+    "patient_id" uuid NOT NULL,
+    "clinician_id" uuid NULL,
+    CONSTRAINT "fk-recognition_of_stroke_in_the_emergency_rooms-patient_id-to-patients" FOREIGN KEY ("patient_id") REFERENCES "patients" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-recognition_of_stroke_in_the_emergency_rooms-clinician_id-to-clinicians" FOREIGN KEY ("clinician_id") REFERENCES "clinicians" (id) ON DELETE SET NULL ON UPDATE NO ACTION
+);
+
+ALTER TABLE recognition_of_stroke_in_the_emergency_rooms ALTER COLUMN id SET DEFAULT gen_random_uuid();

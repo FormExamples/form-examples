@@ -35,5 +35,5 @@ inputs are nullable (`NULL` = unanswered); enum and free-text inputs default to
 `''`. A missing input yields a `NULL` sub-score and an incomplete-assessment
 flag — the engine never guesses.
 
-Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Loco
+Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Axum
 setup script) are derived from these migrations and are never hand-edited.

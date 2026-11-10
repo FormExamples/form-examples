@@ -20,7 +20,7 @@ form from this self-report.
 - `./examples/` — filled-form JSON fixture + FHIR R5 Bundle
 - `./front-end-with-html/` — patient wizard (`index.html`) + dashboard (`dashboard.html`); Lily Design System, no build; includes accessible-UX toolbar (`js/a11y.js`) and the clinician handoff (`js/linkage.js`)
 - `./front-end-with-svelte/` — SvelteKit patient wizard + SVAR DataGrid dashboard; routes under `src/routes/<form-kebab-case>/`
-- `./back-end-with-loco/` — Rust axum + Loco JSON API back-end; relational per-table schema; crate source under `src/<form_snake_case>/`
+- `./back-end-with-axum/` — Rust axum + axa + sqlx JSON API back-end; relational per-table schema; crate source under `src/<form_snake_case>/`
 
 ## Details
 
@@ -103,11 +103,11 @@ Dashboard application:
 - Dropdown filters for ASA grade, allergy flag, adverse incident flag
 - See ./front-end-with-svelte/ for specific instructions
 
-## Back-end application using Rust Axum Loco in ./back-end-with-loco
+## Back-end application using Rust Axum in ./back-end-with-axum
 
 - Rust edition 2024
-- Axum web framework via Loco
-- SeaORM for database access
+- Axum web framework via Axum
+- sqlx for database access
 - PostgreSQL 18, relational per-table schema (one table per entity)
 - REST API for assessment CRUD
 - ASA grading engine (42 rules, ported from frontend)
@@ -116,7 +116,7 @@ Dashboard application:
 - CORS configuration for frontend integration
 - Input validation on all write endpoints (POST, PUT)
 - Pagination capped at 100 per page
-- See ./back-end-with-loco/AGENTS.md for backend-specific instructions
+- See ./back-end-with-axum/AGENTS.md for backend-specific instructions
 
 ## American Society of Anesthesiologists (ASA) Physical Status Classification (PSC)
 

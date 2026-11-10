@@ -1,9 +1,0 @@
-mod users;
-
-mod patients;
-mod practitioners;
-mod nuclear_med_waiting_list_cards;
-mod nuclear_med_waiting_list_card_appointments;
-mod nuclear_med_waiting_list_card_grades;
-mod nuclear_med_waiting_list_card_grade_rules;
-mod nuclear_med_waiting_list_card_grade_flags;

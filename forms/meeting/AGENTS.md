@@ -23,7 +23,7 @@ See [`index.md`](./index.md) for the full design and the 10-step wizard table.
 - `./typespec/` — TypeSpec API surface definitions
 - `./front-end-with-html/` — single-page HTML wizard (index.html) + dashboard (dashboard.html)
 - `./front-end-with-svelte/` — SvelteKit single-page wizard + dashboard (SVAR DataGrid)
-- `./back-end-with-loco/` — Rust axum + Loco JSON API back-end
+- `./back-end-with-axum/` — Rust axum + axa + sqlx JSON API back-end
 
 ## Data model
 
@@ -115,8 +115,8 @@ emitted verbatim into the ICS export. Supported `frequency` values are
 ## Backend stack
 
 - Rust edition 2024
-- Loco 0.16 framework on axum 0.8
-- SeaORM 1.1 with PostgreSQL
+- Axum 0.16 framework on axum 0.8
+- sqlx 1.1 with PostgreSQL
 - a JSON API (no server-rendered templates)
 - `serde(rename_all = "camelCase")` for front-end interop
 

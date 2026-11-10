@@ -12,7 +12,8 @@ bin/lily-html-refactor --check --all && bin/lily-svelte-refactor --check --all
 bin/lily-sync --check && bin/lily-svelte-sync --check
 bin/generate-llms-txt.py --check && bin/generate-spec.py --check
 bin/generate-changelog-and-examples.py --check
-bin/loco-config-refactor --check --all
+bin/axum-sql-columns --check --all && bin/axum-check-constraints --check --all
+bin/axum-soft-delete --check --all && bin/axum-entity-routes --check --all
 ```
 
 ## Status summary (2026-08-26) — Round 2
@@ -67,7 +68,7 @@ bugs, each fenced with a new gate:
 - 81 mangled `*_grade_flag.sql` migrations (lost `.sql` extension) restored.
 - 170 missing `front-end-with-html/README.md` symlinks added.
 - `mobility-assessment`'s stub dashboard implemented.
-- `medical-operation-note` missing domain controllers → added; `bin/test-loco-routes`.
+- `medical-operation-note` missing domain controllers → added; `bin/test-axum-routes`.
 - 135 stale back-end `AGENTS.md` (obsolete JSONB API) regenerated; `--list-stale` gate.
 - 1652 false-positive scaffold request tests (trailing-slash → welcome page) fixed.
 - **The big one:** a route-nesting seed-path regression had broken ~4000
@@ -80,8 +81,8 @@ bugs, each fenced with a new gate:
 New verification tooling (all in CI): `bin/generate-forms-tsv.py`,
 `bin/test-examples-conformance`, `bin/forms-shard`, `bin/generate-tools-doc.py`,
 `e2e/` (Playwright + axe-core) + `bin/test-e2e`, `bin/test-engines`,
-`bin/test-personas`, `bin/test-loco-routes`, `bin/test-tutorials`,
-`bin/back-end-with-loco/generate-loco-agents.py`,
+`bin/test-personas`, `bin/test-axum-routes`, `bin/test-tutorials`,
+`bin/back-end-with-axum/generate-axum-agents.py`,
 `bin/openapi/generate-openapi-combined.py`.
 
 **Remaining large/deliberate items** (documented in-place below): snake_case↔
@@ -390,7 +391,7 @@ Design each feature on the reference forms
       obsolete single-`assessments`-table JSONB API (`/api/assessments`,
       `data JSONB`, `src/bin/main.rs` layout) that no longer exists — the
       crates are relational per-table. Added
-      `bin/back-end-with-loco/generate-loco-agents.py` (emits an accurate doc
+      `bin/back-end-with-axum/generate-axum-agents.py` (emits an accurate doc
       from each crate's real controllers) + a `--list-stale` gate wired into
       `bin/test-tools` and CI; regenerated the 135, left the 151 correct
       hand-authored docs untouched.
@@ -467,7 +468,7 @@ Design each feature on the reference forms
       scratch Postgres 18 — cargo check clean; full suite 35 tests, 0 failed
       (up from 27); loco route + config drift gates green.
 - [x] **Loco setup-script drift (81 forms) — FIXED + gated.** Surfaced while
-      regenerating for psychology-assessment: 81 `back-end-with-loco-setup`
+      regenerating for psychology-assessment: 81 `back-end-with-axum-setup`
       scripts were missing the `grading_additional_flag` scaffold call. Root
       cause: they were generated during Phase 0 while the 81
       `92_*_grade_flag.sql` migrations still lacked their `.sql` extension, so
@@ -543,7 +544,7 @@ Design each feature on the reference forms
       Domain routes need NO auth. Ports to other crates by swapping the field
       set per that crate's `Params`. Also fixed apgar's stale `Cargo.lock` and
       dropped `--locked` from the CI rust job (lock hygiene isn't maintained
-      across all 286 crates; matches `bin/test-loco-project`).
+      across all 286 crates; matches `bin/test-axum-project`).
 - [x] **FIXED — API served snake_case, not camelCase (was 283/286 crates,
       re-measured at 355 forms as 346 needing the fix + 9 already covered).**
       The scaffold `Params`/`_entities` models derived plain serde with NO
@@ -608,7 +609,7 @@ Design each feature on the reference forms
       passing); one live HTTP round-trip. Full fleet-wide compilation of all
       355 crates was NOT attempted — sampling-based verification, as with
       the openapi rollout above. Docs updated: `AGENTS.md` catalogue +
-      Verify block, `AGENTS/back-end-with-loco.md` JSON API contract
+      Verify block, `AGENTS/back-end-with-axum.md` JSON API contract
       section, `docs/tools.md` regenerated.
 - [x] **FIXED — 1652 false-positive scaffold request tests.** They GET
       `/api/<table>/` (trailing slash → Loco's HTML welcome page, 200) and
@@ -629,7 +630,7 @@ Design each feature on the reference forms
       full suite to completion. Fixed all 279 crates to seed via
       `CARGO_MANIFEST_DIR`; verified full suites now pass 0-failed (apgar 38,
       stroke 35, patient-intake 32, mental-health 32). This is what actually
-      unblocks the CI rust job's `cargo test`. Added a `bin/test-loco-routes`
+      unblocks the CI rust job's `cargo test`. Added a `bin/test-axum-routes`
       gate rejecting the broken `base.join("users.yaml")` pattern. (The 6
       crates without a users.yaml never call seed — genuinely fine.)
 - [x] **Loco API integration test rollout, Phase 1: DONE 2026-09-11.** New
@@ -646,7 +647,7 @@ Design each feature on the reference forms
       check`/`clippy -D warnings` clean on 8 diverse crates spanning the
       `Params`-variant spread, `cargo test` green with a live scratch
       Postgres on 4 (all running the new test). See
-      `AGENTS/back-end-with-loco.md` §Fleet-wide maintenance tools for the
+      `AGENTS/back-end-with-axum.md` §Fleet-wide maintenance tools for the
       full writeup; `--check` is the CI drift detector.
 
       **Follow-on (2), the 9-crate missing-stub gap: FIXED same day,
@@ -958,7 +959,7 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       fleet-wide tooling since has built almost all of that work directly
       (SQL migrations, generated XML/FHIR/protobuf/OpenAPI,
       `front-end-with-html/`, `front-end-with-svelte/`,
-      `back-end-with-loco/`, `doc/` pages, ...) without ever going back to
+      `back-end-with-axum/`, `doc/` pages, ...) without ever going back to
       tick the original per-form list.
 
       New `bin/sync-form-tasks-checkboxes` closes the loop mechanically
@@ -1136,8 +1137,8 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       ways-to-contribute in `CONTRIBUTING.md`; docs table in `index.md`;
       spec marked implemented with per-file status table.
 - [x] `#![forbid(unsafe_code)]` on all 1,412 crate roots via new
-      `bin/loco-forbid-unsafe` (idempotent; `--check` in CI drift job);
-      generated `back-end-with-loco-setup` scripts now run it post-scaffold
+      `bin/axum-forbid-unsafe` (idempotent; `--check` in CI drift job);
+      generated `back-end-with-axum-setup` scripts now run it post-scaffold
       (355 regenerated); 5 sample crates compile clean.
 - [x] `#![warn(clippy::clippy::pedantic)]` typo → `clippy::pedantic` in the
       3 crates carrying it (which surfaces real pedantic findings — Phase 8).
@@ -1264,7 +1265,7 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
         `clippy -D warnings` by default, on 346/355 crates. New
         `bin/loco-seed-base-rename` and `bin/loco-test-auth-header-fix`
         (single-occurrence-per-file confirmed before writing, `--check`
-        gated, wired into the setup script alongside `loco-forbid-unsafe`).
+        gated, wired into the setup script alongside `axum-forbid-unsafe`).
         24-crate sample across all 8 shards verified clippy-clean.
       - **Svelte, all 8 shards:** the job ran `pnpm install --frozen-lockfile`, but every
         `front-end-with-svelte` is its own pnpm project with no
@@ -1616,7 +1617,7 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       (`bin/loco-seed-data-rollout`).
       **Serve `combined/openapi.yaml` at `/api/openapi.yaml`: DONE
       2026-09-09.** New `bin/loco-serve-openapi-refactor`, targeting every
-      Loco crate (355 found via `back-end-with-loco/src/*/controllers/
+      Loco crate (355 found via `back-end-with-axum/src/*/controllers/
       mod.rs`). A byte-identical `controllers/openapi.rs` (it depends only
       on the uniform 4-level directory nesting to reach
       `openapi/combined/openapi.yaml` via `include_str!`, not on the form's
@@ -1665,7 +1666,7 @@ personas. Once the oracle exists, persona scaffolding + fill is mechanical
       `cargo check`/`clippy`/`test` job will catch anything the sample
       missed. Vendored `controllers/openapi.rs` confirmed byte-identical
       across all 349 crates via `cmp`. Documented in
-      `AGENTS/back-end-with-loco.md` and `AGENTS.md`'s Generators
+      `AGENTS/back-end-with-axum.md` and `AGENTS.md`'s Generators
       catalogue + Verify section; `docs/tools.md` regenerated.
 - [x] **Personas: COMPLETE.** This entry's own incremental tracking stopped
       at 289/355 (2026-09-03); the persona backlog finished under Phase 13's
@@ -2201,8 +2202,8 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       `?? 999` to `?? 0` in HTML `js/asa-rules.js` and the SvelteKit
       `src/lib/engine/asa-rules.ts`; R-ASA-III-04 needed no change (its own
       `?? 0` already correctly stays suppressed once `recentStrokeTia`
-      reads `'yes'`). The current `back-end-with-loco` is a JSON-only API
-      with no scoring logic of its own — `back-end-with-loco/todo/` is a
+      reads `'yes'`). The current `back-end-with-axum` is a JSON-only API
+      with no scoring logic of its own — `back-end-with-axum/todo/` is a
       superseded, unwired Tera/HTMX prototype, not one of this form's live
       stacks, so it was correctly left untouched. Documented the decision
       in `spec/index.md` §3, added a 4th persona
@@ -2235,7 +2236,7 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       correctly, in both `js/domain-rules.js` and
       `src/lib/engine/domain-rules.ts`. Checked for the Loco/`todo/`
       third stack this item's own text assumed exists: confirmed the
-      current `back-end-with-loco` has no scoring logic of its own
+      current `back-end-with-axum` has no scoring logic of its own
       (JSON-API-only) and no `todo/` prototype exists for this form, so
       only two stacks actually needed the change. `computedReadiness` is
       unaffected either way for a wholly blank assessment (both
@@ -3343,6 +3344,36 @@ updating that form's `spec/index.md`, then the engine in **all three stacks**
       Wired into `AGENTS.md`'s Generators catalogue and Verify section;
       `docs/tools.md` regenerated. Broader-than-`*-test-result` support
       (forms whose `sql/` doesn't share this exact shape) is future work.
+
+## Phase 14 — Axum back ends (2026-11)
+
+The 360 crates moved from Loco to Axum and axa (2026-11-06), then to axa 0.12.0.
+Each `sql/` table has a route (`bin/axum-entity-routes`), each column its
+`sql/` name (`bin/axum-sql-columns`), and each CHECK a constraint
+(`bin/axum-check-constraints`). DELETE is a cascading soft delete
+(`bin/axum-soft-delete`), and lists page by signed cursor.
+
+- [x] 41 `sql/` columns missing from 18 crates: 14 foreign keys renamed to
+      their `sql/` names, 27 columns added (2026-11-09).
+- [x] axa 0.12: the `postgres-sqlx` feature and `axa::postgres_sqlx`,
+      axa-test 0.3 (`bin/axum-axa-0-12`, 2026-11-10).
+- [x] axa 0.11: `DB_URL`, the `/_health/*` routes, axa-test 0.2
+      (`bin/axum-axa-0-11`, 2026-11-10).
+- [x] axa 0.10: the test helpers come from `axa-test` 0.1
+      (`bin/axum-axa-0-10`, 2026-11-09).
+- [x] `validator` 0.21, `serial_test` 4, and every crate's lock updated
+      within range (2026-11-09).
+- [ ] **Maintainer decision — soft-deleted rows:** a restore route, a purge
+      after a retention period, or both.
+- [ ] **Maintainer decision — `sql/` UNIQUE constraints** the crates lack
+      (outpatient-outcome's one EQ-5D-5L row per outcome, for example):
+      add them, after finding any stored rows that break them.
+- [ ] TypeScript 7: SvelteKit's `svelte-kit sync` cannot load it yet
+      ("Cannot read properties of undefined (reading 'readFile')"), so every
+      front-end stays on TypeScript 6 until SvelteKit supports it.
+- [ ] `deepmerge` advisory GHSA-gcqx-w48m-w2h4 (low): no fixed release; it
+      comes in through `@sveltejs/vite-plugin-svelte` at build time only.
+      Recheck when either package releases.
 
 ## Done (previous rounds — summary)
 

@@ -1,0 +1,16 @@
+ALTER TABLE "microbiology_culture_test_result_grade_flags" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_result_grade_flags_priority_check";
+ALTER TABLE "microbiology_culture_test_result_grade_flags" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_result_grade_flags_category_check";
+ALTER TABLE "microbiology_culture_test_result_grade_rules" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_result_grade_rules_axis_check";
+ALTER TABLE "microbiology_culture_test_result_grades" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_result_grades_recommendation_check";
+ALTER TABLE "microbiology_culture_test_result_grades" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_result_grades_follow_up_urgency_check";
+ALTER TABLE "microbiology_culture_test_result_grades" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_result_grades_report_complet_8604ee6b";
+ALTER TABLE "microbiology_culture_test_result_grades" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_result_grades_abnormality_se_5e735db5";
+ALTER TABLE "microbiology_culture_test_result_grades" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_result_grades_result_classif_1a564c73";
+ALTER TABLE "microbiology_culture_test_results" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_results_acid_fast_bacilli_check";
+ALTER TABLE "microbiology_culture_test_results" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_results_c_difficile_toxin_check";
+ALTER TABLE "microbiology_culture_test_results" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_results_culture_result_check";
+ALTER TABLE "microbiology_culture_test_results" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_results_specimen_condition_check";
+ALTER TABLE "microbiology_culture_test_results" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_results_specimen_type_check";
+ALTER TABLE "microbiology_culture_test_results" DROP CONSTRAINT IF EXISTS "microbiology_culture_test_results_report_status_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";

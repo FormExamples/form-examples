@@ -1,0 +1,31 @@
+CREATE TABLE IF NOT EXISTS "agile_checklist_grades" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "answered_count" integer NOT NULL DEFAULT 0,
+    "teams_yes_count" integer NOT NULL DEFAULT 0,
+    "teams_applicable_count" integer NOT NULL DEFAULT 0,
+    "teams_percent" double precision NULL,
+    "stakeholders_yes_count" integer NOT NULL DEFAULT 0,
+    "stakeholders_applicable_count" integer NOT NULL DEFAULT 0,
+    "stakeholders_percent" double precision NULL,
+    "practices_yes_count" integer NOT NULL DEFAULT 0,
+    "practices_applicable_count" integer NOT NULL DEFAULT 0,
+    "practices_percent" double precision NULL,
+    "overall_percent" double precision NULL,
+    "teams_band" varchar NOT NULL DEFAULT '',
+    "stakeholders_band" varchar NOT NULL DEFAULT '',
+    "practices_band" varchar NOT NULL DEFAULT '',
+    "maturity" varchar NOT NULL DEFAULT '',
+    "top_action_1" varchar NOT NULL DEFAULT '',
+    "top_action_2" varchar NOT NULL DEFAULT '',
+    "top_action_3" varchar NOT NULL DEFAULT '',
+    "coach_notes" text NOT NULL DEFAULT '',
+    "signed_at" timestamp with time zone NULL,
+    "graded_at" timestamp with time zone NOT NULL,
+    "agile_checklist_id" uuid NOT NULL,
+    CONSTRAINT "fk-agile_checklist_grades-agile_checklist_id-to-agile_checklists" FOREIGN KEY ("agile_checklist_id") REFERENCES "agile_checklists" (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+ALTER TABLE agile_checklist_grades ALTER COLUMN id SET DEFAULT gen_random_uuid();

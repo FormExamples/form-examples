@@ -10,14 +10,14 @@ over HTTP; `file://` does not work).
 - `js/types.js` — wizard state shape and label helpers
 - `js/steps.js` — declarative step and field definitions, including which questions apply to which answers
 - `js/form-app.js` — wizard app: autosave, progress, report, save to the back end
-- `js/api.js` — Loco API client (dashboard join, submit sequence)
+- `js/api.js` — Axum API client (dashboard join, submit sequence)
 - `js/dashboard-app.js`, `js/data.js` — dashboard; sample rows mirror `examples/personas.json`
 
 Run: `python3 -m http.server -d forms/medical-device-assessment/front-end-with-html`.
 
 ## Back-end wiring
 
-`js/api.js` is the single client for the Loco API in `../back-end-with-loco`
+`js/api.js` is the single client for the Axum API in `../back-end-with-axum`
 (plain per-table REST, camelCase JSON, UUID ids). Base URL: `?api=` query
 parameter, else `window.__API_BASE__`, else `http://localhost:5150`.
 

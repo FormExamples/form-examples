@@ -13,7 +13,7 @@ report readiness gaps. Full description: [`index.md`](../index.md).
 ## 2. Scope
 
 In scope: schema, scoring engine, front-ends (form + dashboard, HTML and
-SvelteKit) and the Loco JSON API. Out of scope: FDA classification, IVDR
+SvelteKit) and the Axum JSON API. Out of scope: FDA classification, IVDR
 classification (flagged only), authentication, multi-tenancy.
 
 ## 3. Scoring system
@@ -46,10 +46,10 @@ determiningRule, readiness, firedRules[], flags[] }` (migrations 05–07).
 | -------------------------- | -------------------------------------------- |
 | `sql`                      | source of truth                              |
 | `xml`, `fhir`, `protobuf`, `openapi` | generated                          |
-| `front-end-with-html`      | HTML + Lily; wired to the Loco API (below)   |
-| `front-end-with-svelte`    | SvelteKit; wired to the Loco API (below)     |
-| `back-end-with-loco`       | Rust + Loco per-table JSON API; dev CORS on  |
-| `back-end-with-loco-setup` | generated scaffold script                    |
+| `front-end-with-html`      | HTML + Lily; wired to the Axum API (below)   |
+| `front-end-with-svelte`    | SvelteKit; wired to the Axum API (below)     |
+| `back-end-with-axum`       | Rust + Axum per-table JSON API; dev CORS on  |
+| `back-end-with-axum-setup` | generated scaffold script                    |
 
 ### Front-end to back-end wiring
 

@@ -1,0 +1,7 @@
+pub mod clinicians;
+pub mod medical_practices;
+pub mod patients;
+pub mod united_kingdom_statement_of_fitness_for_work_grade_flags;
+pub mod united_kingdom_statement_of_fitness_for_work_grade_rules;
+pub mod united_kingdom_statement_of_fitness_for_work_grades;
+pub mod united_kingdom_statement_of_fitness_for_works;

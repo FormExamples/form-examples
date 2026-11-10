@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Per-eye refractive prescription (sphere, cylinder, axis, addition, prism). One row per eye per prescription.
 paths:
-  /eye-prescription-eyes:
+  /api/eye_prescription_eyes:
     get:
       summary: List EyePrescriptionEye records
       operationId: listEyePrescriptionEye
@@ -19,22 +19,44 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of EyePrescriptionEye records
+          description: A page of EyePrescriptionEye records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/EyePrescriptionEye"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new EyePrescriptionEye
       operationId: createEyePrescriptionEye
@@ -45,15 +67,42 @@ paths:
             schema:
               $ref: "#/components/schemas/EyePrescriptionEye"
       responses:
-        "201":
+        "200":
           description: The newly created EyePrescriptionEye
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/EyePrescriptionEye"
         "400":
-          description: Validation error
-  /eye-prescription-eyes/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/eye_prescription_eyes/{id}:
     parameters:
       - name: id
         in: path
@@ -73,6 +122,21 @@ paths:
                 $ref: "#/components/schemas/EyePrescriptionEye"
         "404":
           description: EyePrescriptionEye not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing EyePrescriptionEye
       operationId: updateEyePrescriptionEye
@@ -91,16 +155,132 @@ paths:
                 $ref: "#/components/schemas/EyePrescriptionEye"
         "404":
           description: EyePrescriptionEye not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing EyePrescriptionEye
+      operationId: replaceEyePrescriptionEye
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EyePrescriptionEye"
+      responses:
+        "200":
+          description: The updated EyePrescriptionEye
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EyePrescriptionEye"
+        "404":
+          description: EyePrescriptionEye not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
-      summary: Soft-delete a EyePrescriptionEye
+      summary: Delete a EyePrescriptionEye
       operationId: deleteEyePrescriptionEye
       responses:
-        "204":
+        "200":
           description: EyePrescriptionEye deleted
         "404":
           description: EyePrescriptionEye not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
 components:
   schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
     EyePrescriptionEye:
       type: object
       properties:
@@ -116,10 +296,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         eye_prescription_id:
           type: string
           format: uuid
@@ -131,23 +307,23 @@ components:
             - left
           description: "Which eye: right (OD) or left (OS)."
         sphere_diopters:
-          type: number
+          type: [number, 'null']
           format: double
           description: Sphere power in dioptres. Negative for myopia, positive for hyperopia, range -30.00 to +30.00 in 0.25 steps.
         cylinder_diopters:
-          type: number
+          type: [number, 'null']
           format: double
           description: Cylinder power in dioptres (minus-cylinder convention). Range -10.00 to 0.00 in 0.25 steps.
         axis_degrees:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Cylinder axis in integer degrees, 1 to 180 (only meaningful when cylinder is non-zero).
         addition_diopters:
-          type: number
+          type: [number, 'null']
           format: double
           description: Reading addition in dioptres (always positive). Range 0.00 to +4.00 in 0.25 steps.
         intermediate_addition_diopters:
-          type: number
+          type: [number, 'null']
           format: double
           description: Intermediate addition for trifocal / occupational varifocal use, in dioptres.
         prism_horizontal_diopters:

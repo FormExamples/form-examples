@@ -32,7 +32,7 @@ Oral health evaluation using the DMFT (Decayed, Missing, Filled Teeth) Index wit
 dental-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

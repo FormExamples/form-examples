@@ -1,0 +1,1 @@
+DROP TABLE "learning_disability_annual_health_check_grade_flags";

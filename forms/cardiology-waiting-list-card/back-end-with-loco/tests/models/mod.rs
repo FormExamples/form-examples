@@ -1,9 +1,0 @@
-mod users;
-
-mod patients;
-mod practitioners;
-mod cardiology_waiting_list_cards;
-mod cardiology_waiting_list_card_appointments;
-mod cardiology_waiting_list_card_grades;
-mod cardiology_waiting_list_card_grade_rules;
-mod cardiology_waiting_list_card_grade_flags;

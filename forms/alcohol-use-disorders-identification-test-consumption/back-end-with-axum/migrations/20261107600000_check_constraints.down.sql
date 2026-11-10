@@ -1,0 +1,16 @@
+ALTER TABLE "audit_c_grade_flags" DROP CONSTRAINT IF EXISTS "audit_c_grade_flags_priority_check";
+ALTER TABLE "audit_c_grade_flags" DROP CONSTRAINT IF EXISTS "audit_c_grade_flags_category_check";
+ALTER TABLE "audit_c_grade_rules" DROP CONSTRAINT IF EXISTS "audit_c_grade_rules_item_check";
+ALTER TABLE "audit_c_grades" DROP CONSTRAINT IF EXISTS "audit_c_grades_positive_screen_check";
+ALTER TABLE "audit_c_grades" DROP CONSTRAINT IF EXISTS "audit_c_grades_risk_band_check";
+ALTER TABLE "audit_cs" DROP CONSTRAINT IF EXISTS "audit_cs_item_3_binge_frequency_check";
+ALTER TABLE "audit_cs" DROP CONSTRAINT IF EXISTS "audit_cs_item_2_quantity_check";
+ALTER TABLE "audit_cs" DROP CONSTRAINT IF EXISTS "audit_cs_item_1_frequency_check";
+ALTER TABLE "audit_cs" DROP CONSTRAINT IF EXISTS "audit_cs_sex_check";
+ALTER TABLE "audit_cs" DROP CONSTRAINT IF EXISTS "audit_cs_age_band_check";
+ALTER TABLE "audit_cs" DROP CONSTRAINT IF EXISTS "audit_cs_administration_mode_check";
+ALTER TABLE "audit_cs" DROP CONSTRAINT IF EXISTS "audit_cs_care_setting_check";
+ALTER TABLE "audit_cs" DROP CONSTRAINT IF EXISTS "audit_cs_clinician_role_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

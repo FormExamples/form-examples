@@ -10,7 +10,7 @@ import { fullyPopulatedQualityScenarios, nonDraftAdrs, nonEmpty, risksWithMitiga
 //   - `empty`    otherwise.
 //
 // The thresholds are identical across every front-end and the back-end so the
-// HTML engine matches the Svelte and Loco stacks byte-for-byte. Pure data +
+// HTML engine matches the Svelte and Axum stacks byte-for-byte. Pure data +
 // helpers; the grader (grader.js) composes them.
 
 // Per-section predicate: returns { populated, complete } for a document.

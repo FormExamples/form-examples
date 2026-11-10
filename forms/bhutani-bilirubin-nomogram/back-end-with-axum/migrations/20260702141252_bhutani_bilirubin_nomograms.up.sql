@@ -1,0 +1,30 @@
+CREATE TABLE IF NOT EXISTS "bhutani_bilirubin_nomograms" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "clinician_name" varchar NOT NULL DEFAULT '',
+    "clinician_role" varchar NOT NULL DEFAULT '',
+    "assessed_at" timestamp with time zone NULL,
+    "care_setting" varchar NOT NULL DEFAULT '',
+    "infant_identifier" varchar NOT NULL DEFAULT '',
+    "sex" varchar NOT NULL DEFAULT '',
+    "born_at" timestamp with time zone NULL,
+    "gestational_age_weeks" double precision NULL,
+    "age_hours" double precision NULL,
+    "total_serum_bilirubin_umol_l" double precision NULL,
+    "measurement_method" varchar NOT NULL DEFAULT '',
+    "preterm_under_38" varchar NOT NULL DEFAULT '',
+    "previous_sibling_jaundice" varchar NOT NULL DEFAULT '',
+    "exclusive_breastfeeding" varchar NOT NULL DEFAULT '',
+    "bruising" varchar NOT NULL DEFAULT '',
+    "blood_group_incompatibility" varchar NOT NULL DEFAULT '',
+    "early_onset_under_24h" varchar NOT NULL DEFAULT '',
+    "clinical_note" text NOT NULL DEFAULT '',
+    "patient_id" uuid NOT NULL,
+    "clinician_id" uuid NULL,
+    CONSTRAINT "fk-bhutani_bilirubin_nomograms-patient_id-to-patients" FOREIGN KEY ("patient_id") REFERENCES "patients" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-bhutani_bilirubin_nomograms-clinician_id-to-clinicians" FOREIGN KEY ("clinician_id") REFERENCES "clinicians" (id) ON DELETE SET NULL ON UPDATE NO ACTION
+);
+
+ALTER TABLE bhutani_bilirubin_nomograms ALTER COLUMN id SET DEFAULT gen_random_uuid();

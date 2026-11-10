@@ -34,7 +34,7 @@
  * Patient row displayed in the clinician dashboard.
  *
  * Mirrors the conceptual `PatientRow` for the Vaccinations Checklist
- * dashboard. Backend (Loco/axum) emits this with `serde(rename_all =
+ * dashboard. Backend (Axum/axum) emits this with `serde(rename_all =
  * "camelCase")`, so field names match exactly.
  *
  * @typedef {Object} PatientRow

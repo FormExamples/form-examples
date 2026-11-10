@@ -14,10 +14,10 @@
       HTML and SvelteKit) with `index.md`, `AGENTS.md`, `CLAUDE.md`,
       `plan.md`, `tasks.md`
 - [x] Scaffolded the Rust crate at
-      `back-end-with-loco/` with `Cargo.toml`,
+      `back-end-with-axum/` with `Cargo.toml`,
       `.gitignore`, `src/bin/main.rs`, and a base Tera template that
       includes HTMX, Alpine.js, and `hx-boost`
-- [x] Authored the `back-end-with-loco-setup` scaffold
+- [x] Authored the `back-end-with-axum-setup` scaffold
       generator shell script
 
 ## Pending
@@ -86,9 +86,8 @@
       (17 tests, all passing — symmetric with the Vitest suite)
 - [x] CLI binary `issue-tracker-cli` that round-trips
       `IssueTrackerAssessment` JSON on stdin to `GradeResult` JSON on stdout
-- [ ] Run the scaffold generator to produce SeaORM entities and Loco
-      controllers from the SQL migrations (re-adds Loco / SeaORM /
-      axum / Tera deps to `Cargo.toml`)
+- [x] Relational per-table Axum crate on axa and sqlx, one model and one
+      controller per SQL table
 - [x] Tera templates: `assessment.html.tera` (the single-page wizard
       embedding ten step partials), `assessment/step01..step10.html.tera`,
       `report.html.tera`, `dashboard.html.tera` — verified by

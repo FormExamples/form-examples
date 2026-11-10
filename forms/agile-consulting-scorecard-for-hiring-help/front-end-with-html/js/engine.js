@@ -1,7 +1,7 @@
 // Agile Consulting Scorecard for Hiring Help — pure scoring engine.
 //
 // JavaScript port of front-end-with-svelte/src/lib/engine/score-grader.ts
-// (and the Loco back-end's scoring/{manifesto,principles}.rs), extracted
+// (and the Axum back-end's scoring/{manifesto,principles}.rs), extracted
 // from the inline <script> in index.html so it can be imported headless
 // (bin/test-engines, bin/test-personas) as well as by the page.
 //

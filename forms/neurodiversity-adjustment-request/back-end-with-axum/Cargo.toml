@@ -1,0 +1,48 @@
+[workspace]
+
+[workspace.package]
+rust-version = "1.97"
+
+[package]
+name = "neurodiversity-adjustment-request-axum-crate"
+version = "0.1.0"
+edition = "2024"
+rust-version.workspace = true
+publish = false
+description = "Neurodiversity Adjustment Request back-end JSON API"
+default-run = "neurodiversity-adjustment-request-axum-crate-cli"
+
+[workspace.dependencies]
+axa = { version = "0.12", features = ["cursor-pagination", "postgres-sqlx", "queue", "ratelimit"] }
+
+[dependencies]
+axa = { workspace = true }
+serde-saphyr = "2"
+sqlx = { version = "0.9", default-features = false, features = ["chrono", "derive", "json", "macros", "migrate", "postgres", "runtime-tokio", "tls-rustls-ring-webpki", "uuid"] }
+thiserror = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1" }
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1.29", features = ["v4", "serde"] }
+tokio = { version = "1.54", default-features = false, features = [
+  "rt-multi-thread",
+  "signal",
+  "sync",
+] }
+async-trait = { version = "0.1" }
+axum = { version = "0.8" }
+validator = { version = "0.21", features = ["derive"] }
+tracing = { version = "0.1" }
+
+[[bin]]
+name = "neurodiversity-adjustment-request-axum-crate-cli"
+path = "src/neurodiversity_adjustment_request/bin/main.rs"
+required-features = []
+
+[dev-dependencies]
+axa-test = "0.3"
+serial_test = { version = "4.0.1" }
+insta = { version = "1.49", features = ["redactions", "yaml", "filters"] }
+
+[lib]
+path = "src/neurodiversity_adjustment_request/lib.rs"

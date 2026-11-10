@@ -1,0 +1,13 @@
+mod administration_records;
+mod adult_vaccinations;
+mod assessments;
+mod childhood_vaccinations;
+mod clinical_reviews;
+mod clinicians;
+mod consent_informations;
+mod contraindications_allergies;
+mod fired_rules;
+mod immunization_histories;
+mod occupational_vaccinations;
+mod patients;
+mod travel_vaccinations;

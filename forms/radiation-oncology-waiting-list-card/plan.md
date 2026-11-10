@@ -67,13 +67,13 @@ Safety / operational flags fire independently and surface as
        `bin/protobuf/generate-protobuf-representations.py`.
 7. [ ] Generate OpenAPI 3.1 with
        `bin/openapi/generate-openapi-representations.py`.
-8. [ ] Generate Loco scaffold script with
-       `bin/back-end-with-loco/generate-back-end-with-loco-setup.py`.
+8. [ ] Generate Axum setup script with
+       `bin/back-end-with-axum/generate-back-end-with-axum-setup.py`.
 9. [ ] Build SvelteKit practitioner form (single-page wizard).
 10. [ ] Build static HTML practitioner form (Alpine.js).
 11. [ ] Build SvelteKit dashboard (SVAR DataGrid).
 12. [ ] Build static HTML dashboard (sortable table).
-13. [ ] Build Rust full-stack with axum / Loco JSON API.
+13. [ ] Build Rust full-stack with axum / axa JSON API.
 14. [ ] Unit-test composite grader (Vitest).
 15. [ ] Run `bin/test-form radiation-oncology-waiting-list-card`.
 

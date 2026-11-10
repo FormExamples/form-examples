@@ -1,0 +1,202 @@
+#!/usr/bin/env python3
+"""bin/axum-axa-upgrade — move each form's `back-end-with-axum/` to axa 0.6, which
+answers every failure as an RFC 9457 problem itself.
+
+What it changes in a crate:
+
+  Cargo.toml                axa 0.6; the `problem` feature goes, as axa no longer
+                            needs it
+  app.rs                    `router` is `into_app` again
+  support/problem.rs        removed: axa covers Axum's 404, 405, 413 and extractor
+                            refusals
+  support/paging.rs         removed: `Page::bounds`, `Page::respond`, and `?` on
+                            `PageParams::resolve` replace it
+  support/mod.rs            `PAGE_LIMITS`, the one part of paging.rs that was ours
+  support/prelude.rs        `axa::extract::{Json, Path, Query}` in place of Axum's,
+                            so a refused request says what was wrong
+  controllers, models       call the `Page` methods
+  tests/**/problem.rs       expect a `detail` on an extractor's refusal
+
+Every edit to a crate is planned and asserted before any is written, so a crate
+that differs from the expected shape stops with its name and stays untouched. A
+crate already moved is skipped, so the tool can be rerun. Cargo.lock is left to
+`cargo update -p axa`.
+
+Usage:
+  bin/axum-axa-upgrade <slug>...          # named forms
+  bin/axum-axa-upgrade --all              # every form's Axum crate
+  bin/axum-axa-upgrade --root DIR <slug>  # a copy of forms/ at DIR
+  bin/axum-axa-upgrade --check --all      # CI drift check (non-zero on drift)
+"""
+
+from __future__ import annotations
+
+import argparse
+import glob
+import os
+import re
+import sys
+
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OLD_AXA = 'axa = { version = "0.5", features = ["pagination", "problem", "queue", "sqlx"] }'
+NEW_AXA = 'axa = { version = "0.6", features = ["pagination", "queue", "sqlx"] }'
+OLD_ROUTER = "support::problem::apply(Self::routes(ctx), ctx)"
+NEW_ROUTER = "Self::routes(ctx).into_app(ctx.clone())"
+# bin/axum-axa-adopt then adds the ratelimit feature and builds the router
+# itself, and bin/axum-axa-0-7 and bin/axum-cursor-pagination move on to axa 0.7
+# and its paging crates, and bin/axum-axa-0-8 and 0-9 to axa 0.8 and 0.9, so the check accepts
+# any of those steps.
+ON_06 = re.compile(r'^axa = \{ version = "0\.(?:[6-9]|[1-9]\d)", features = \["(?:offset-|cursor-)?pagination", (?:"queue", (?:"ratelimit", )?"sqlx"|"postgres-sqlx", "queue", "ratelimit")\] \}$', re.M)
+ROUTERS = (NEW_ROUTER, "axa::middleware::apply(routes, &ctx.config.http)")
+LIMITS = """/// The bounds of every list route. `limit` and its default match `openapi.yaml`.
+pub const PAGE_LIMITS: axa::pagination::Limits = axa::pagination::Limits {
+    default_limit: 100,
+    max_limit: 1000,
+    max_offset: 100_000,
+};
+
+/// The database pool.
+"""
+OLD_QUOTE = """        // Extractor refusals quote the input, so nothing of it comes back.
+"""
+NEW_QUOTE = """        // An extractor's refusal says what was wrong, and quotes nothing.
+"""
+OLD_DETAIL = """assert_eq!(body.get("detail"), None);"""
+NEW_DETAIL = """assert!(body["detail"].is_string());"""
+OLD_DOC = """/// A panic is answered outside the first pass, and an error reaches the second
+/// pass compressed, so the standard middleware has to be in the test.
+"""
+NEW_DOC = """/// A panic and a compressed error both pass through the standard middleware, so
+/// it has to be in the test.
+"""
+
+
+def sub(text: str, old: str, new: str, name: str, path: str) -> str:
+    count = text.count(old)
+    assert count == 1, f"{path}: {name} found {count} times"
+    return text.replace(old, new)
+
+
+def edit_support(text: str, path: str) -> str:
+    text = sub(text, "pub mod paging;\n", "", "paging", path)
+    text = sub(text, "pub mod problem;\n", "", "problem", path)
+    return sub(text, "/// The database pool.\n", LIMITS, "db", path)
+
+
+def edit_prelude(text: str, path: str) -> str:
+    text = sub(text, "pub use axum::extract::Query;\n", "", "Query", path)
+    text = sub(text, "    format,\n", "    extract::{Json, Path, Query},\n    format,\n", "format", path)
+    return sub(text, "    paging,\n", "    PAGE_LIMITS,\n", "paging", path)
+
+
+def edit_handlers(text: str) -> str:
+    text = text.replace("use axum::{Json, debug_handler};\n", "use axum::debug_handler;\n")
+    text = text.replace("paging::resolve(&params)?", "params.resolve(PAGE_LIMITS)?")
+    text = re.sub(r"paging::respond\(page, ([^,]+), ([^)]+)\)", r"Ok(page.respond(\1, \2))", text)
+    return re.sub(r"(?:crate::support::)?paging::bounds\((\w+)\)", r"\1.bounds()", text)
+
+
+def edit_test(text: str, path: str) -> str:
+    text, count = re.subn(r"^use (\w+)::\{\s*app::App,\s*support::problem,?\s*\};$", r"use \1::app::App;", text, flags=re.M)
+    assert count == 1, f"{path}: imports"
+    text = sub(text, "problem::apply(routes, &ctx)", "routes.into_app(ctx.clone())", "apply", path)
+    if OLD_QUOTE in text:  # A crate with no id route has no extractor check.
+        text = sub(text, OLD_QUOTE, NEW_QUOTE, "quote", path)
+        text = sub(text, OLD_DETAIL, NEW_DETAIL, "detail", path)
+    return sub(text, OLD_DOC, NEW_DOC, "doc", path)
+
+
+def find_one(crate: str, name: str) -> str:
+    found = glob.glob(f"{crate}/tests/requests/{name}") + glob.glob(f"{crate}/tests/{name}")
+    assert len(found) == 1, f"{crate}: {name} found {found}"
+    return found[0]
+
+
+def plan(crate: str) -> tuple[dict[str, str], list[str]] | None:
+    """Every edit and removal for a crate, or None when it has already moved."""
+    apps = glob.glob(f"{crate}/src/*/app.rs")
+    assert len(apps) == 1, crate
+    src = os.path.dirname(apps[0])
+    manifest = open(f"{crate}/Cargo.toml").read()
+    if ON_06.search(manifest):
+        return None
+    edits: dict[str, str] = {}
+
+    def change(path, edit):
+        edits[path] = edit(open(path).read(), path)
+
+    change(f"{crate}/Cargo.toml", lambda text, path: sub(text, OLD_AXA, NEW_AXA, "axa", path))
+    change(f"{src}/app.rs", lambda text, path: sub(text, OLD_ROUTER, NEW_ROUTER, "router", path))
+    change(f"{src}/support/mod.rs", edit_support)
+    change(f"{src}/support/prelude.rs", edit_prelude)
+    change(find_one(crate, "problem.rs"), edit_test)
+    for path in glob.glob(f"{src}/controllers/*.rs") + glob.glob(f"{src}/models/*.rs"):
+        text = open(path).read()
+        fresh = edit_handlers(text)
+        assert not re.search(r"\bpaging::", fresh), f"{path}: paging left"
+        if fresh != text:
+            edits[path] = fresh
+    return edits, [f"{src}/support/problem.rs", f"{src}/support/paging.rs"]
+
+
+def drift(crate: str) -> str | None:
+    """Why a crate is not on the target, if it is not."""
+    src = os.path.dirname(glob.glob(f"{crate}/src/*/app.rs")[0])
+    if not ON_06.search(open(f"{crate}/Cargo.toml").read()):
+        return "not on axa 0.6 or later"
+    lock = open(f"{crate}/Cargo.lock").read()
+    if not re.search(r'^name = "axa"\nversion = "0\.(?:[6-9]|[1-9]\d)\.', lock, re.M):
+        return "Cargo.lock is not on axa 0.6 or later"
+    app = open(f"{src}/app.rs").read()
+    if not any(router in app for router in ROUTERS):
+        return "router does not apply axa's standard stack"
+    for name in ("problem", "paging"):
+        if os.path.exists(f"{src}/support/{name}.rs"):
+            return f"support/{name}.rs is still here"
+    if "extract::{Json, Path, Query}" not in open(f"{src}/support/prelude.rs").read():
+        return "prelude does not use axa's extractors"
+    for path in glob.glob(f"{src}/controllers/*.rs"):
+        text = open(path).read()
+        if re.search(r"use axum::\{[^}]*\b(Json|Path|Query)\b|axum::extract::(Json|Path|Query)", text):
+            return f"{os.path.basename(path)} imports Axum's extractors, which answer with no detail"
+    return None
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    parser.add_argument("slugs", nargs="*")
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--root", default=f"{REPO}/forms")
+    args = parser.parse_args()
+    if args.all:
+        crates = sorted(os.path.dirname(c) for c in glob.glob(f"{args.root}/*/back-end-with-axum/Cargo.toml"))
+    elif args.slugs:
+        crates = [f"{args.root}/{slug}/back-end-with-axum" for slug in args.slugs]
+    else:
+        parser.error("name forms, or pass --all")
+    if args.check:
+        bad = [(crate, why) for crate in crates if (why := drift(crate))]
+        for crate, why in bad:
+            print(f"{crate.split('/')[-2]}: {why}")
+        print(f"{len(crates) - len(bad)}/{len(crates)} crates on axa 0.6 or later")
+        return 1 if bad else 0
+    # Plan everything first, so one odd crate leaves the fleet as it was.
+    plans = [plan(crate) for crate in crates]
+    moved = 0
+    for planned in plans:
+        if planned is None:
+            continue
+        edits, removals = planned
+        for path, text in edits.items():
+            with open(path, "w") as handle:
+                handle.write(text)
+        for path in removals:
+            os.remove(path)
+        moved += 1
+    print(f"{moved} moved, {len(crates) - moved} already on axa 0.6")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

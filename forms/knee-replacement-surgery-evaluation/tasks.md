@@ -37,7 +37,7 @@
 - [x] `fhir/r5/` — FHIR HL7 R5 JSON per SQL entity.
 - [x] `protobuf/` — Protocol Buffers schemas.
 - [x] `openapi/` — OpenAPI 3.1 specifications.
-- [x] `back-end-with-loco-setup` — scaffold script.
+- [x] `back-end-with-axum-setup` — scaffold script.
 - [x] `CHANGELOG.md` and `examples/`.
 - [x] `llms.txt`.
 - [x] `bin/test-examples-conformance knee-replacement-surgery-evaluation` passes.
@@ -87,10 +87,10 @@
       and `bin/es-modules-refactor --check knee-replacement-surgery-evaluation`
       pass.
 
-## Back-end with Loco
+## Back-end with Axum
 
 - [x] `cargo loco generate scaffold --api` per table, per
-      `back-end-with-loco-setup`.
+      `back-end-with-axum-setup`.
 - [x] Migrations/entities corrected for `i64` ids, nullability, and defaults
       to match `sql/`.
 - [x] `src/knee_replacement_surgery_evaluation/` crate-source layout.
@@ -98,7 +98,7 @@
       field names.
 - [x] `cargo build` succeeds (clean, no warnings).
 - [x] `cargo test` passes against a scratch Postgres test database (28/28).
-- [x] `bin/loco-config-refactor`, `bin/generate-loco-deny-config.py`,
+- [x] `bin/loco-config-refactor`, `bin/generate-axum-deny-config.py`,
       `bin/loco-migration-defaults`, `bin/loco-migration-nullability` clean.
 - [~] `cargo deny --all-features check` — fails on `RUSTSEC-2023-0071`
       (transitive `rsa`/`jsonwebtoken` advisory), an identical pre-existing

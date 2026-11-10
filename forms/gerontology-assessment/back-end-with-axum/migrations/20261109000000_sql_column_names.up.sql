@@ -1,0 +1,3 @@
+-- Name assessment_polypharmacy_review_medications.polypharmacy_review_id as sql/ does.
+ALTER TABLE "assessment_polypharmacy_review_medications" RENAME COLUMN "assessment_polypharmacy_review_id" TO "polypharmacy_review_id";
+ALTER TABLE "assessment_polypharmacy_review_medications" RENAME CONSTRAINT "fk-assessment_polypharmacy_review_medications-assessment_polypharmacy_review_id-to-assessment_polypharmacy_reviews" TO "fk-assessment_polypharmacy_review_medications-polypharmacy_review_id-to-assessment_polypharmacy_reviews";

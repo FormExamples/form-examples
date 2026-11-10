@@ -1,7 +1,7 @@
 // Backend API client for the Patient Satisfaction Survey clinician
 // dashboard.
 //
-// The backend is expected at http://localhost:5150 (Loco / axum); the
+// The backend is expected at http://localhost:5150 (Axum / axum); the
 // dashboard endpoint returns a `DashboardPatientsResponse`. When the fetch
 // fails (CORS, network, server down) or returns an empty list, callers
 // fall back to the sample data shipped in `data.js` so the page remains

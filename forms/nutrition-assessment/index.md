@@ -33,7 +33,7 @@ Nutritional status evaluation using the Malnutrition Universal Screening Tool (M
 nutrition-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

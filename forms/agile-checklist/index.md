@@ -119,7 +119,7 @@ agile-checklist/
   front-end-with-svelte/                       # SvelteKit single-page wizard
   front-end-with-html/                    # review dashboard (HTML)
   front-end-with-svelte/                  # review dashboard (Svelte + table)
-  back-end-with-loco/            # Rust backend + server-rendered UI
+  back-end-with-axum/            # Rust backend + server-rendered UI
 ```
 
 ## Related forms

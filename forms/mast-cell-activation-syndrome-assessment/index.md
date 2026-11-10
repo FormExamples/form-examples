@@ -29,7 +29,7 @@ MCAS symptom evaluation across dermatological, gastrointestinal, cardiovascular,
 mast-cell-activation-syndrome-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Computed and signed-off grading result for one perioperative optimization assessment, holding the engine-computed and clinician-final surgical readiness bands.
 paths:
-  /perioperative-optimization-grades:
+  /api/perioperative_optimization_grades:
     get:
       summary: List PerioperativeOptimizationGrade records
       operationId: listPerioperativeOptimizationGrade
@@ -19,22 +19,44 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of PerioperativeOptimizationGrade records
+          description: A page of PerioperativeOptimizationGrade records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/PerioperativeOptimizationGrade"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PerioperativeOptimizationGrade
       operationId: createPerioperativeOptimizationGrade
@@ -45,15 +67,42 @@ paths:
             schema:
               $ref: "#/components/schemas/PerioperativeOptimizationGrade"
       responses:
-        "201":
+        "200":
           description: The newly created PerioperativeOptimizationGrade
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/PerioperativeOptimizationGrade"
         "400":
-          description: Validation error
-  /perioperative-optimization-grades/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/perioperative_optimization_grades/{id}:
     parameters:
       - name: id
         in: path
@@ -73,6 +122,21 @@ paths:
                 $ref: "#/components/schemas/PerioperativeOptimizationGrade"
         "404":
           description: PerioperativeOptimizationGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PerioperativeOptimizationGrade
       operationId: updatePerioperativeOptimizationGrade
@@ -91,16 +155,132 @@ paths:
                 $ref: "#/components/schemas/PerioperativeOptimizationGrade"
         "404":
           description: PerioperativeOptimizationGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing PerioperativeOptimizationGrade
+      operationId: replacePerioperativeOptimizationGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PerioperativeOptimizationGrade"
+      responses:
+        "200":
+          description: The updated PerioperativeOptimizationGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PerioperativeOptimizationGrade"
+        "404":
+          description: PerioperativeOptimizationGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
-      summary: Soft-delete a PerioperativeOptimizationGrade
+      summary: Delete a PerioperativeOptimizationGrade
       operationId: deletePerioperativeOptimizationGrade
       responses:
-        "204":
+        "200":
           description: PerioperativeOptimizationGrade deleted
         "404":
           description: PerioperativeOptimizationGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
 components:
   schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
     PerioperativeOptimizationGrade:
       type: object
       properties:
@@ -116,23 +296,19 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         perioperative_optimization_id:
           type: string
           format: uuid
           description: Foreign key to the perioperative_optimization table, unique because grading is one-to-one with the assessment.
         weeks_to_surgery:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Whole weeks between the assessment date and the planned surgery date, the value every domain lead time is gated against. Negative where the surgery date precedes the assessment date; NULL where either date is missing.
         gating_applied:
           type: boolean
           description: Whether time-to-surgery gating could be applied, i.e. whether both dates were present. When false, every triggered domain reports action-required and the report says gating was not applied.
         must_score:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Malnutrition Universal Screening Tool total, 0 to 6, driving the nutrition domain.
         must_risk:
@@ -144,23 +320,23 @@ components:
             - ""
           description: "MUST risk category: low for 0, medium for 1, high for 2 or more."
         audit_c_score:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: AUDIT-C alcohol consumption score, 0 to 12, driving the alcohol domain.
         stop_bang_score:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: STOP-BANG obstructive sleep apnoea screening score, 0 to 8, contributing to the cardiorespiratory domain.
         duke_activity_status_index:
-          type: number
+          type: [number, 'null']
           format: double
           description: Duke Activity Status Index, contributing to the physical fitness domain.
         clinical_frailty_scale:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Clinical Frailty Scale, 1 to 9. Reported and flagged but not gated, because frailty is rarely reversible in the available window.
         fried_phenotype_score:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: "Fried Frailty Phenotype score (0-5): count of weakness, slowness, low activity, exhaustion, and unintentional weight loss criteria met."
         fried_frailty_category:
@@ -172,19 +348,19 @@ components:
             - ""
           description: "Fried Frailty Phenotype category derived from the score: robust (0), pre-frail (1-2), or frail (3-5)."
         domains_optimized:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Count of the eight domains graded optimized or not-applicable.
         domains_in_progress:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Count of the eight domains graded in-progress.
         domains_action_required:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Count of the eight domains graded action-required.
         domains_insufficient_time:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Count of the eight domains graded insufficient-time. Any value above zero forces a defer-surgery readiness band.
         computed_readiness:
@@ -221,7 +397,7 @@ components:
             - ""
           description: "The explicit human decision recorded at sign-off: proceed, proceed-with-prehabilitation, defer-and-optimize, accept-unoptimized-risk, mdt-review, or cancel."
         recommended_earliest_surgery_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Earliest date at which every triggered domain would have had its full lead time, derived from the largest domain shortfall.
         clinician_notes:
@@ -232,7 +408,7 @@ components:
           maxLength: 255
           description: Name of the clinician who signed the assessment.
         signed_at:
-          type: string
+          type: [string, 'null']
           format: date-time
           description: Timestamp of the clinician electronic signature.
         graded_at:

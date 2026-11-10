@@ -26,5 +26,5 @@ The total Caprini score is the age-band weight (`under-41` = 0, `41-60` = 1,
 When `high_bleeding_risk` is `yes`, any pharmacological recommendation is
 downgraded to mechanical and a bleeding-contraindication flag is raised.
 
-Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Loco
+Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Axum
 setup script) are derived from these migrations and are never hand-edited.

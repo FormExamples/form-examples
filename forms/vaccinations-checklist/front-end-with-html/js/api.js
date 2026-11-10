@@ -1,6 +1,6 @@
 // Backend API client for the clinician dashboard.
 //
-// The backend lives at http://localhost:5150 (Loco / axum); the dashboard
+// The backend lives at http://localhost:5150 (Axum / axum); the dashboard
 // endpoint returns a `DashboardPatientsResponse`. When the fetch fails
 // (CORS, network, server down) or returns an empty list, callers fall back
 // to the sample data shipped in `data.js` so the page is usable standalone.

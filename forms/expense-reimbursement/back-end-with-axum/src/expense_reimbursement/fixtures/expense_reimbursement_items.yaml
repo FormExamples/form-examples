@@ -1,0 +1,20 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "51711ecb-9bb2-55cb-8da6-73a46629ac16"
+  deletedAt: null
+  lineNumber: 1
+  expenseDate: "1990-01-01"
+  category: "travel"
+  description: "Test description"
+  merchant: "Test merchant"
+  currencyAsIso4217: "Tes"
+  amount: 1.0
+  vatAmount: 1.0
+  exchangeRateToClaimCurrency: 1.0
+  paymentMethod: "personal-credit-card"
+  mileageDistanceMiles: 1.0
+  receiptAttached: true
+  receiptReference: "Test receiptReference"
+  receiptMissingReason: "Test receiptMissingReason"
+  priorApprovalObtained: true
+  expenseReimbursementId: "28b9f69d-6240-5190-81e4-dbcbecb8e037"

@@ -14,6 +14,6 @@
 - [x] Build `front-end-with-svelte/` SvelteKit wizard scaffold.
 - [x] Build `front-end-with-html/` static review table.
 - [x] Build `front-end-with-svelte/` SVAR DataGrid dashboard scaffold.
-- [x] Write `back-end-with-loco-setup` shell script.
-- [x] Build `back-end-with-loco/` Rust crate.
+- [x] Write `back-end-with-axum-setup` shell script.
+- [x] Build `back-end-with-axum/` Rust crate.
 - [x] Run `bin/test-form united-kingdom-nhs-england-medical-exemption-certificate`.

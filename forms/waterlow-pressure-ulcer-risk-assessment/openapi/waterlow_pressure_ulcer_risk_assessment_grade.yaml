@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed Waterlow grading result: per-category points, summed Waterlow total, derived risk band, and recommended prevention actions."
 paths:
-  /waterlow-pressure-ulcer-risk-assessment-grades:
+  /api/waterlow_pressure_ulcer_risk_assessment_grades:
     get:
       summary: List WaterlowPressureUlcerRiskAssessmentGrade records
       operationId: listWaterlowPressureUlcerRiskAssessmentGrade
@@ -19,22 +19,44 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of WaterlowPressureUlcerRiskAssessmentGrade records
+          description: A page of WaterlowPressureUlcerRiskAssessmentGrade records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/WaterlowPressureUlcerRiskAssessmentGrade"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new WaterlowPressureUlcerRiskAssessmentGrade
       operationId: createWaterlowPressureUlcerRiskAssessmentGrade
@@ -45,15 +67,42 @@ paths:
             schema:
               $ref: "#/components/schemas/WaterlowPressureUlcerRiskAssessmentGrade"
       responses:
-        "201":
+        "200":
           description: The newly created WaterlowPressureUlcerRiskAssessmentGrade
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/WaterlowPressureUlcerRiskAssessmentGrade"
         "400":
-          description: Validation error
-  /waterlow-pressure-ulcer-risk-assessment-grades/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/waterlow_pressure_ulcer_risk_assessment_grades/{id}:
     parameters:
       - name: id
         in: path
@@ -73,6 +122,21 @@ paths:
                 $ref: "#/components/schemas/WaterlowPressureUlcerRiskAssessmentGrade"
         "404":
           description: WaterlowPressureUlcerRiskAssessmentGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing WaterlowPressureUlcerRiskAssessmentGrade
       operationId: updateWaterlowPressureUlcerRiskAssessmentGrade
@@ -91,16 +155,132 @@ paths:
                 $ref: "#/components/schemas/WaterlowPressureUlcerRiskAssessmentGrade"
         "404":
           description: WaterlowPressureUlcerRiskAssessmentGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing WaterlowPressureUlcerRiskAssessmentGrade
+      operationId: replaceWaterlowPressureUlcerRiskAssessmentGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WaterlowPressureUlcerRiskAssessmentGrade"
+      responses:
+        "200":
+          description: The updated WaterlowPressureUlcerRiskAssessmentGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WaterlowPressureUlcerRiskAssessmentGrade"
+        "404":
+          description: WaterlowPressureUlcerRiskAssessmentGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
-      summary: Soft-delete a WaterlowPressureUlcerRiskAssessmentGrade
+      summary: Delete a WaterlowPressureUlcerRiskAssessmentGrade
       operationId: deleteWaterlowPressureUlcerRiskAssessmentGrade
       responses:
-        "204":
+        "200":
           description: WaterlowPressureUlcerRiskAssessmentGrade deleted
         "404":
           description: WaterlowPressureUlcerRiskAssessmentGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
 components:
   schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
     WaterlowPressureUlcerRiskAssessmentGrade:
       type: object
       properties:
@@ -116,56 +296,52 @@ components:
           type: string
           format: date-time
           description: Timestamp when the row was most recently updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the row was soft-deleted.
         waterlow_pressure_ulcer_risk_assessment_id:
           type: string
           format: uuid
           description: Foreign key to the parent assessment (unique, 1:1).
         build_points:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Points contributed by the build / weight for height category.
         skin_points:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Points contributed by the skin type category.
         sex_points:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Points contributed by the sex sub-category of the sex-and-age category.
         age_points:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Points contributed by the age sub-category of the sex-and-age category.
         continence_points:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Points contributed by the continence category.
         mobility_points:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Points contributed by the mobility category.
         tissue_malnutrition_points:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Points contributed by the tissue malnutrition special-risk group.
         neurological_deficit_points:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Points contributed by the neurological deficit special-risk group.
         major_surgery_trauma_points:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Points contributed by the major surgery or trauma special-risk group.
         medication_points:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Points contributed by the medication special-risk group.
         total_score:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Summed Waterlow score across all core categories and special-risk groups (higher means higher risk).
         risk_band:

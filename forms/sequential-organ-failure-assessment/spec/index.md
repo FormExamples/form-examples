@@ -21,7 +21,7 @@ Full design description: [`index.md`](../index.md).
 ## 2. Scope
 
 In scope: the schema, scoring engine, the two consolidated front-ends (form +
-dashboard in HTML, and form + dashboard in SvelteKit), and the Rust Loco JSON
+dashboard in HTML, and form + dashboard in SvelteKit), and the Rust Axum JSON
 API crate listed in §5. Out of scope: hosted deployment, authentication,
 multi-tenancy, and the paediatric pSOFA variant.
 
@@ -77,10 +77,10 @@ The engine is **pure** — no side effects, no I/O — and fully unit-tested.
 | `openapi` | generated |
 | `front-end-with-html` | HTML + Lily (wizard + dashboard) |
 | `front-end-with-svelte` | SvelteKit + Lily (`/<plural>/` list + `/<plural>/[id]` form) |
-| `back-end-with-loco` | Rust + Loco JSON API |
-| `back-end-with-loco-setup` | generated scaffold script |
+| `back-end-with-axum` | Rust + Axum JSON API |
+| `back-end-with-axum-setup` | generated scaffold script |
 
-Generated artefacts (XML, FHIR R5, Protocol Buffers, OpenAPI, Loco setup script)
+Generated artefacts (XML, FHIR R5, Protocol Buffers, OpenAPI, Axum setup script)
 are never hand-edited; re-run the generators in [`/AGENTS.md`](../../../AGENTS.md)
 §Tools after schema changes.
 

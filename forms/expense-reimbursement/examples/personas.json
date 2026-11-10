@@ -1,0 +1,717 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "calculateGrade",
+  "note": "Realistic filled-in states in the scoring engine's shape. `expected` is computed by `bin/test-personas --update` and verified by `bin/test-personas`. They cover each compliance band, each approval tier, each recommendation, the duplicate and foreign-currency flags, and the £10 / £50 / £500 / 90-day policy thresholds.",
+  "personas": [
+    {
+      "name": "compliant-train-fare-approve",
+      "description": "A nurse claims a £42.50 train fare to a mandatory course, with receipt: compliant, complete, line-manager tier, approve.",
+      "state": {
+        "worker": {
+          "name": "Funmi Adeyemi",
+          "jobTitle": "Staff nurse",
+          "department": "Cardiology",
+          "employeeReference": "EMP-20311",
+          "costCentre": "",
+          "email": "",
+          "phone": ""
+        },
+        "manager": {
+          "name": "Kofi Mensah",
+          "role": "line-manager",
+          "jobTitle": "",
+          "department": "",
+          "email": ""
+        },
+        "claim": {
+          "status": "submitted",
+          "claimDate": "2026-10-20",
+          "periodStart": "",
+          "periodEnd": "",
+          "title": "Resuscitation course travel",
+          "businessPurpose": "Mandatory refresher.",
+          "projectOrCostCode": "",
+          "currency": "GBP",
+          "advanceReceivedAmount": null
+        },
+        "items": [
+          {
+            "lineNumber": 1,
+            "expenseDate": "2026-10-15",
+            "category": "travel",
+            "description": "Return train fare",
+            "merchant": "National Rail",
+            "currency": "GBP",
+            "amount": 42.5,
+            "vatAmount": null,
+            "exchangeRate": null,
+            "paymentMethod": "personal-debit-card",
+            "mileageDistanceMiles": null,
+            "receiptAttached": true,
+            "receiptReference": "",
+            "receiptMissingReason": "",
+            "priorApprovalObtained": false
+          }
+        ],
+        "repayment": {
+          "method": "payroll",
+          "bankAccountName": "",
+          "bankAccountLastFour": ""
+        },
+        "declarations": {
+          "whollyForWork": true,
+          "noDuplicateClaim": true,
+          "receiptsAttached": true,
+          "signedName": "Funmi Adeyemi",
+          "signedAt": ""
+        }
+      },
+      "expected": {
+        "complianceBand": "compliant",
+        "completenessPercent": 100,
+        "approvalTier": "line-manager",
+        "total": 42.5,
+        "amountToRepay": 42.5,
+        "recommendation": "approve",
+        "recommendationLabel": "Approve and repay",
+        "firedRules": [
+          {
+            "ruleId": "R-APPR-LINE-01",
+            "axis": "approval",
+            "category": "approval-tier",
+            "description": "Total £42.50 is within £100: line manager."
+          }
+        ],
+        "flags": []
+      }
+    },
+    {
+      "name": "equipment-over-50-without-approval-escalate",
+      "description": "A registrar buys a £142 stethoscope without prior approval: needs-review, budget-holder tier, escalate.",
+      "state": {
+        "worker": {
+          "name": "Cathal Brennan",
+          "jobTitle": "Registrar",
+          "department": "Emergency Medicine",
+          "employeeReference": "",
+          "costCentre": "",
+          "email": "",
+          "phone": ""
+        },
+        "manager": {
+          "name": "Kofi Mensah",
+          "role": "line-manager",
+          "jobTitle": "",
+          "department": "",
+          "email": ""
+        },
+        "claim": {
+          "status": "submitted",
+          "claimDate": "2026-10-21",
+          "periodStart": "",
+          "periodEnd": "",
+          "title": "Stethoscope replacement",
+          "businessPurpose": "Damaged on shift.",
+          "projectOrCostCode": "",
+          "currency": "GBP",
+          "advanceReceivedAmount": null
+        },
+        "items": [
+          {
+            "lineNumber": 1,
+            "expenseDate": "2026-10-12",
+            "category": "equipment",
+            "description": "Stethoscope",
+            "merchant": "MedSupply",
+            "currency": "GBP",
+            "amount": 142,
+            "vatAmount": null,
+            "exchangeRate": null,
+            "paymentMethod": "personal-credit-card",
+            "mileageDistanceMiles": null,
+            "receiptAttached": true,
+            "receiptReference": "",
+            "receiptMissingReason": "",
+            "priorApprovalObtained": false
+          }
+        ],
+        "repayment": {
+          "method": "bank-transfer",
+          "bankAccountName": "Cathal Brennan",
+          "bankAccountLastFour": "4821"
+        },
+        "declarations": {
+          "whollyForWork": true,
+          "noDuplicateClaim": true,
+          "receiptsAttached": true,
+          "signedName": "Cathal Brennan",
+          "signedAt": ""
+        }
+      },
+      "expected": {
+        "complianceBand": "needs-review",
+        "completenessPercent": 100,
+        "approvalTier": "budget-holder",
+        "total": 142,
+        "amountToRepay": 142,
+        "recommendation": "escalate",
+        "recommendationLabel": "Escalate for review",
+        "firedRules": [
+          {
+            "ruleId": "R-COMP-APPROVAL-01",
+            "axis": "compliance",
+            "category": "no-prior-approval",
+            "severity": "needs-review",
+            "description": "Line 1 (Stethoscope) is over £50 without prior approval."
+          },
+          {
+            "ruleId": "R-APPR-BUDGET-01",
+            "axis": "approval",
+            "category": "approval-tier",
+            "description": "Total £142.00 is over £100: budget holder."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-NO-PRIOR-APPROVAL-1",
+            "category": "no-prior-approval",
+            "priority": "medium",
+            "description": "Line 1 (Stethoscope) had no prior approval.",
+            "suggestedAction": "Confirm the manager would have approved it, or reject."
+          }
+        ]
+      }
+    },
+    {
+      "name": "conference-over-500-finance-review",
+      "description": "A physiotherapist pays £620 for a pre-approved conference: compliant but over £500, so finance review and escalate.",
+      "state": {
+        "worker": {
+          "name": "Elena Castillo",
+          "jobTitle": "Physiotherapist",
+          "department": "Rehabilitation",
+          "employeeReference": "",
+          "costCentre": "",
+          "email": "",
+          "phone": ""
+        },
+        "manager": {
+          "name": "Kofi Mensah",
+          "role": "line-manager",
+          "jobTitle": "",
+          "department": "",
+          "email": ""
+        },
+        "claim": {
+          "status": "submitted",
+          "claimDate": "2026-10-22",
+          "periodStart": "",
+          "periodEnd": "",
+          "title": "Conference registration",
+          "businessPurpose": "Annual conference.",
+          "projectOrCostCode": "",
+          "currency": "GBP",
+          "advanceReceivedAmount": null
+        },
+        "items": [
+          {
+            "lineNumber": 1,
+            "expenseDate": "2026-10-05",
+            "category": "registration-and-licensing",
+            "description": "Conference registration",
+            "merchant": "Physio Society",
+            "currency": "GBP",
+            "amount": 620,
+            "vatAmount": null,
+            "exchangeRate": null,
+            "paymentMethod": "personal-credit-card",
+            "mileageDistanceMiles": null,
+            "receiptAttached": true,
+            "receiptReference": "",
+            "receiptMissingReason": "",
+            "priorApprovalObtained": true
+          }
+        ],
+        "repayment": {
+          "method": "bank-transfer",
+          "bankAccountName": "Elena Castillo",
+          "bankAccountLastFour": "4821"
+        },
+        "declarations": {
+          "whollyForWork": true,
+          "noDuplicateClaim": true,
+          "receiptsAttached": true,
+          "signedName": "Elena Castillo",
+          "signedAt": ""
+        }
+      },
+      "expected": {
+        "complianceBand": "compliant",
+        "completenessPercent": 100,
+        "approvalTier": "finance-review",
+        "total": 620,
+        "amountToRepay": 620,
+        "recommendation": "escalate",
+        "recommendationLabel": "Escalate for review",
+        "firedRules": [
+          {
+            "ruleId": "R-APPR-FINANCE-01",
+            "axis": "approval",
+            "category": "approval-tier",
+            "description": "Total £620.00 is over £500: finance review."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-OVER-LIMIT-1",
+            "category": "over-limit",
+            "priority": "medium",
+            "description": "Line 1 (Conference registration) is over the £500 single-line limit.",
+            "suggestedAction": "Route to finance for sign-off."
+          }
+        ]
+      }
+    },
+    {
+      "name": "team-dinner-with-wine-reject",
+      "description": "A pharmacist claims a team dinner including wine: alcohol is never reimbursable, so likely-ineligible and reject.",
+      "state": {
+        "worker": {
+          "name": "Lena Eriksson",
+          "jobTitle": "Pharmacist",
+          "department": "Pharmacy",
+          "employeeReference": "",
+          "costCentre": "",
+          "email": "",
+          "phone": ""
+        },
+        "manager": {
+          "name": "Kofi Mensah",
+          "role": "line-manager",
+          "jobTitle": "",
+          "department": "",
+          "email": ""
+        },
+        "claim": {
+          "status": "submitted",
+          "claimDate": "2026-10-24",
+          "periodStart": "",
+          "periodEnd": "",
+          "title": "Team dinner",
+          "businessPurpose": "Leaving dinner.",
+          "projectOrCostCode": "",
+          "currency": "GBP",
+          "advanceReceivedAmount": null
+        },
+        "items": [
+          {
+            "lineNumber": 1,
+            "expenseDate": "2026-10-18",
+            "category": "meals",
+            "description": "Team dinner with wine",
+            "merchant": "Trattoria",
+            "currency": "GBP",
+            "amount": 96,
+            "vatAmount": null,
+            "exchangeRate": null,
+            "paymentMethod": "personal-credit-card",
+            "mileageDistanceMiles": null,
+            "receiptAttached": true,
+            "receiptReference": "",
+            "receiptMissingReason": "",
+            "priorApprovalObtained": true
+          }
+        ],
+        "repayment": {
+          "method": "payroll",
+          "bankAccountName": "",
+          "bankAccountLastFour": ""
+        },
+        "declarations": {
+          "whollyForWork": true,
+          "noDuplicateClaim": true,
+          "receiptsAttached": true,
+          "signedName": "Lena Eriksson",
+          "signedAt": ""
+        }
+      },
+      "expected": {
+        "complianceBand": "likely-ineligible",
+        "completenessPercent": 100,
+        "approvalTier": "finance-review",
+        "total": 96,
+        "amountToRepay": 96,
+        "recommendation": "reject",
+        "recommendationLabel": "Reject the claim",
+        "firedRules": [
+          {
+            "ruleId": "R-COMP-PERSONAL-01",
+            "axis": "compliance",
+            "category": "alcohol-or-personal",
+            "severity": "likely-ineligible",
+            "description": "Line 1 (Team dinner with wine) looks like alcohol or a personal item, which is never reimbursable."
+          },
+          {
+            "ruleId": "R-APPR-FINANCE-01",
+            "axis": "approval",
+            "category": "approval-tier",
+            "description": "A high-priority flag was raised: finance review."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-PERSONAL-1",
+            "category": "alcohol-or-personal",
+            "priority": "high",
+            "description": "Line 1 (Team dinner with wine) looks like alcohol or a personal item.",
+            "suggestedAction": "Reject this line; alcohol and personal items are not reimbursable."
+          }
+        ]
+      }
+    },
+    {
+      "name": "stale-no-receipt-incomplete-request-more-information",
+      "description": "A healthcare assistant submits a four-month-old, receiptless claim with no repayment method or declaration: incomplete, so request more information.",
+      "state": {
+        "worker": {
+          "name": "Mads Jensen",
+          "jobTitle": "Healthcare assistant",
+          "department": "Elderly Care",
+          "employeeReference": "",
+          "costCentre": "",
+          "email": "",
+          "phone": ""
+        },
+        "manager": {
+          "name": "Kofi Mensah",
+          "role": "line-manager",
+          "jobTitle": "",
+          "department": "",
+          "email": ""
+        },
+        "claim": {
+          "status": "submitted",
+          "claimDate": "2026-10-25",
+          "periodStart": "",
+          "periodEnd": "",
+          "title": "Uniform shoes",
+          "businessPurpose": "Replacement shoes.",
+          "projectOrCostCode": "",
+          "currency": "GBP",
+          "advanceReceivedAmount": null
+        },
+        "items": [
+          {
+            "lineNumber": 1,
+            "expenseDate": "2026-06-01",
+            "category": "clothing-uniform",
+            "description": "Shoes",
+            "merchant": "ShoeShop",
+            "currency": "GBP",
+            "amount": 45,
+            "vatAmount": null,
+            "exchangeRate": null,
+            "paymentMethod": "",
+            "mileageDistanceMiles": null,
+            "receiptAttached": false,
+            "receiptReference": "",
+            "receiptMissingReason": "",
+            "priorApprovalObtained": false
+          }
+        ],
+        "repayment": {
+          "method": "",
+          "bankAccountName": "",
+          "bankAccountLastFour": ""
+        },
+        "declarations": {
+          "whollyForWork": false,
+          "noDuplicateClaim": false,
+          "receiptsAttached": false,
+          "signedName": "",
+          "signedAt": ""
+        }
+      },
+      "expected": {
+        "complianceBand": "needs-review",
+        "completenessPercent": 58,
+        "approvalTier": "finance-review",
+        "total": 45,
+        "amountToRepay": 45,
+        "recommendation": "request-more-information",
+        "recommendationLabel": "Request more information from the worker",
+        "firedRules": [
+          {
+            "ruleId": "R-COMP-RECEIPT-01",
+            "axis": "compliance",
+            "category": "missing-receipt",
+            "severity": "needs-review",
+            "description": "Line 1 (Shoes) is over £10 with no receipt and no reason given."
+          },
+          {
+            "ruleId": "R-COMP-STALE-01",
+            "axis": "compliance",
+            "category": "stale-expense",
+            "severity": "needs-review",
+            "description": "Line 1 (Shoes) is 146 days old; policy asks for claims within 90 days."
+          },
+          {
+            "ruleId": "R-COMP-WORK-01",
+            "axis": "compliance",
+            "category": "no-declaration",
+            "severity": "needs-review",
+            "description": "The worker has not declared the expenses were incurred wholly for work."
+          },
+          {
+            "id": "R-COMPL-REPAY-01",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing: Repayment method."
+          },
+          {
+            "id": "R-COMPL-BANK-01",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing: Bank account name and last four digits (for a bank transfer)."
+          },
+          {
+            "id": "R-COMPL-DECL-01",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing: Declaration: no duplicate claim."
+          },
+          {
+            "id": "R-COMPL-DECL-02",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing: Declaration: receipts attached."
+          },
+          {
+            "id": "R-COMPL-SIGN-01",
+            "axis": "completeness",
+            "category": "missing-field",
+            "description": "Missing: Signed name."
+          },
+          {
+            "ruleId": "R-APPR-FINANCE-01",
+            "axis": "approval",
+            "category": "approval-tier",
+            "description": "A high-priority flag was raised: finance review."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-MISSING-RECEIPT-1",
+            "category": "missing-receipt",
+            "priority": "medium",
+            "description": "Line 1 (Shoes) has no receipt.",
+            "suggestedAction": "Ask the worker to attach the receipt or explain why it is missing."
+          },
+          {
+            "flagId": "F-STALE-1",
+            "category": "stale-expense",
+            "priority": "low",
+            "description": "Line 1 (Shoes) is 146 days old.",
+            "suggestedAction": "Check whether a late-claim exception applies."
+          },
+          {
+            "flagId": "F-NO-DECLARATION-001",
+            "category": "no-declaration",
+            "priority": "high",
+            "description": "The worker has not declared this is not a duplicate claim.",
+            "suggestedAction": "Ask the worker to complete the declarations before approval."
+          }
+        ]
+      }
+    },
+    {
+      "name": "duplicate-parking-lines-escalate",
+      "description": "A midwife lists the same car-park charge twice: duplicate suspected (high flag) forces finance review and escalate.",
+      "state": {
+        "worker": {
+          "name": "Aisha Ibrahim",
+          "jobTitle": "Midwife",
+          "department": "Maternity",
+          "employeeReference": "",
+          "costCentre": "",
+          "email": "",
+          "phone": ""
+        },
+        "manager": {
+          "name": "Kofi Mensah",
+          "role": "line-manager",
+          "jobTitle": "",
+          "department": "",
+          "email": ""
+        },
+        "claim": {
+          "status": "submitted",
+          "claimDate": "2026-10-26",
+          "periodStart": "",
+          "periodEnd": "",
+          "title": "Parking",
+          "businessPurpose": "Training venue parking.",
+          "projectOrCostCode": "",
+          "currency": "GBP",
+          "advanceReceivedAmount": null
+        },
+        "items": [
+          {
+            "lineNumber": 1,
+            "expenseDate": "2026-10-19",
+            "category": "parking-and-tolls",
+            "description": "Car park",
+            "merchant": "City Park",
+            "currency": "GBP",
+            "amount": 12,
+            "vatAmount": null,
+            "exchangeRate": null,
+            "paymentMethod": "",
+            "mileageDistanceMiles": null,
+            "receiptAttached": true,
+            "receiptReference": "",
+            "receiptMissingReason": "",
+            "priorApprovalObtained": false
+          },
+          {
+            "lineNumber": 2,
+            "expenseDate": "2026-10-19",
+            "category": "parking-and-tolls",
+            "description": "Car park",
+            "merchant": "City Park",
+            "currency": "GBP",
+            "amount": 12,
+            "vatAmount": null,
+            "exchangeRate": null,
+            "paymentMethod": "",
+            "mileageDistanceMiles": null,
+            "receiptAttached": true,
+            "receiptReference": "",
+            "receiptMissingReason": "",
+            "priorApprovalObtained": false
+          }
+        ],
+        "repayment": {
+          "method": "payroll",
+          "bankAccountName": "",
+          "bankAccountLastFour": ""
+        },
+        "declarations": {
+          "whollyForWork": true,
+          "noDuplicateClaim": true,
+          "receiptsAttached": true,
+          "signedName": "Aisha Ibrahim",
+          "signedAt": ""
+        }
+      },
+      "expected": {
+        "complianceBand": "compliant",
+        "completenessPercent": 100,
+        "approvalTier": "finance-review",
+        "total": 24,
+        "amountToRepay": 24,
+        "recommendation": "escalate",
+        "recommendationLabel": "Escalate for review",
+        "firedRules": [
+          {
+            "ruleId": "R-APPR-FINANCE-01",
+            "axis": "approval",
+            "category": "approval-tier",
+            "description": "A high-priority flag was raised: finance review."
+          }
+        ],
+        "flags": [
+          {
+            "flagId": "F-DUPLICATE-2",
+            "category": "duplicate-suspected",
+            "priority": "high",
+            "description": "Line 1 and line 2 have the same date, merchant and amount.",
+            "suggestedAction": "Confirm these are two separate purchases."
+          }
+        ]
+      }
+    },
+    {
+      "name": "euro-course-with-exchange-rate-and-advance-approve",
+      "description": "A surgeon pays €90 for a course (rate 0.85) after a £20 advance: converted total £76.50, repay £56.50, approve.",
+      "state": {
+        "worker": {
+          "name": "Karim Haddad",
+          "jobTitle": "Surgeon",
+          "department": "Theatre",
+          "employeeReference": "",
+          "costCentre": "",
+          "email": "",
+          "phone": ""
+        },
+        "manager": {
+          "name": "Kofi Mensah",
+          "role": "line-manager",
+          "jobTitle": "",
+          "department": "",
+          "email": ""
+        },
+        "claim": {
+          "status": "submitted",
+          "claimDate": "2026-10-27",
+          "periodStart": "",
+          "periodEnd": "",
+          "title": "Course in Lyon",
+          "businessPurpose": "Surgical technique course.",
+          "projectOrCostCode": "",
+          "currency": "GBP",
+          "advanceReceivedAmount": 20
+        },
+        "items": [
+          {
+            "lineNumber": 1,
+            "expenseDate": "2026-10-20",
+            "category": "training-course",
+            "description": "Course fee",
+            "merchant": "Institut Lyon",
+            "currency": "EUR",
+            "amount": 90,
+            "vatAmount": null,
+            "exchangeRate": 0.85,
+            "paymentMethod": "personal-credit-card",
+            "mileageDistanceMiles": null,
+            "receiptAttached": true,
+            "receiptReference": "",
+            "receiptMissingReason": "",
+            "priorApprovalObtained": true
+          }
+        ],
+        "repayment": {
+          "method": "payroll",
+          "bankAccountName": "",
+          "bankAccountLastFour": ""
+        },
+        "declarations": {
+          "whollyForWork": true,
+          "noDuplicateClaim": true,
+          "receiptsAttached": true,
+          "signedName": "Karim Haddad",
+          "signedAt": ""
+        }
+      },
+      "expected": {
+        "complianceBand": "compliant",
+        "completenessPercent": 100,
+        "approvalTier": "line-manager",
+        "total": 76.5,
+        "amountToRepay": 56.5,
+        "recommendation": "approve",
+        "recommendationLabel": "Approve and repay",
+        "firedRules": [
+          {
+            "ruleId": "R-APPR-LINE-01",
+            "axis": "approval",
+            "category": "approval-tier",
+            "description": "Total £76.50 is within £100: line manager."
+          }
+        ],
+        "flags": []
+      }
+    }
+  ]
+}

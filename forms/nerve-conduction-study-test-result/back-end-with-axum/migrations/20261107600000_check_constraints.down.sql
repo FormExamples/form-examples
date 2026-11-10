@@ -1,0 +1,17 @@
+ALTER TABLE "nerve_conduction_study_test_result_grade_flags" DROP CONSTRAINT IF EXISTS "nerve_conduction_study_test_result_grade_flags_priority_check";
+ALTER TABLE "nerve_conduction_study_test_result_grade_flags" DROP CONSTRAINT IF EXISTS "nerve_conduction_study_test_result_grade_flags_category_check";
+ALTER TABLE "nerve_conduction_study_test_result_grade_rules" DROP CONSTRAINT IF EXISTS "nerve_conduction_study_test_result_grade_rules_axis_check";
+ALTER TABLE "nerve_conduction_study_test_result_grades" DROP CONSTRAINT IF EXISTS "nerve_conduction_study_test_result_grades_recommendation_check";
+ALTER TABLE "nerve_conduction_study_test_result_grades" DROP CONSTRAINT IF EXISTS "nerve_conduction_study_test_result_grades_follow_up_ur_2b9ca1a4";
+ALTER TABLE "nerve_conduction_study_test_result_grades" DROP CONSTRAINT IF EXISTS "nerve_conduction_study_test_result_grades_report_compl_c0ac7742";
+ALTER TABLE "nerve_conduction_study_test_result_grades" DROP CONSTRAINT IF EXISTS "nerve_conduction_study_test_result_grades_abnormality__aa8be82b";
+ALTER TABLE "nerve_conduction_study_test_result_grades" DROP CONSTRAINT IF EXISTS "nerve_conduction_study_test_result_grades_result_class_4e322761";
+ALTER TABLE "nerve_conduction_study_test_results" DROP CONSTRAINT IF EXISTS "nerve_conduction_study_test_results_pattern_check";
+ALTER TABLE "nerve_conduction_study_test_results" DROP CONSTRAINT IF EXISTS "nerve_conduction_study_test_results_severity_check";
+ALTER TABLE "nerve_conduction_study_test_results" DROP CONSTRAINT IF EXISTS "nerve_conduction_study_test_results_study_adequacy_check";
+ALTER TABLE "nerve_conduction_study_test_results" DROP CONSTRAINT IF EXISTS "nerve_conduction_study_test_results_laterality_check";
+ALTER TABLE "nerve_conduction_study_test_results" DROP CONSTRAINT IF EXISTS "nerve_conduction_study_test_results_region_check";
+ALTER TABLE "nerve_conduction_study_test_results" DROP CONSTRAINT IF EXISTS "nerve_conduction_study_test_results_study_type_check";
+ALTER TABLE "nerve_conduction_study_test_results" DROP CONSTRAINT IF EXISTS "nerve_conduction_study_test_results_report_status_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";

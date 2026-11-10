@@ -208,5 +208,5 @@ CHECK constraint, `AdditionalFlag.category` in `types.ts`, and detected in
   `fried_phenotype_score`, `fried_frailty_category`.
 - `sql/11_create_table_pre_operative_assessment_by_clinician_grade_flag.sql`
   — the five new `category` values above.
-- `back-end-with-loco/migration/src/m20260814_090000_add_glp1_and_frailty_fields_to_pre_operative_assessment_by_clinicians.rs`
-  mirrors the same columns onto the Loco entities and controller `Params`.
+- `back-end-with-axum/migration/src/m20260814_090000_add_glp1_and_frailty_fields_to_pre_operative_assessment_by_clinicians.rs`
+  mirrors the same columns onto the Axum entities and controller `Params`.

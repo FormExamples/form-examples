@@ -1,0 +1,16 @@
+ALTER TABLE "cha2ds2_vasc_grade_flags" DROP CONSTRAINT IF EXISTS "cha2ds2_vasc_grade_flags_priority_check";
+ALTER TABLE "cha2ds2_vasc_grade_flags" DROP CONSTRAINT IF EXISTS "cha2ds2_vasc_grade_flags_category_check";
+ALTER TABLE "cha2ds2_vasc_grade_rules" DROP CONSTRAINT IF EXISTS "cha2ds2_vasc_grade_rules_criterion_check";
+ALTER TABLE "cha2ds2_vasc_grades" DROP CONSTRAINT IF EXISTS "cha2ds2_vasc_grades_risk_band_check";
+ALTER TABLE "cha2ds2_vascs" DROP CONSTRAINT IF EXISTS "cha2ds2_vascs_vascular_disease_check";
+ALTER TABLE "cha2ds2_vascs" DROP CONSTRAINT IF EXISTS "cha2ds2_vascs_stroke_tia_thromboembolism_check";
+ALTER TABLE "cha2ds2_vascs" DROP CONSTRAINT IF EXISTS "cha2ds2_vascs_diabetes_check";
+ALTER TABLE "cha2ds2_vascs" DROP CONSTRAINT IF EXISTS "cha2ds2_vascs_hypertension_check";
+ALTER TABLE "cha2ds2_vascs" DROP CONSTRAINT IF EXISTS "cha2ds2_vascs_congestive_heart_failure_check";
+ALTER TABLE "cha2ds2_vascs" DROP CONSTRAINT IF EXISTS "cha2ds2_vascs_sex_check";
+ALTER TABLE "cha2ds2_vascs" DROP CONSTRAINT IF EXISTS "cha2ds2_vascs_atrial_fibrillation_type_check";
+ALTER TABLE "cha2ds2_vascs" DROP CONSTRAINT IF EXISTS "cha2ds2_vascs_care_setting_check";
+ALTER TABLE "cha2ds2_vascs" DROP CONSTRAINT IF EXISTS "cha2ds2_vascs_clinician_role_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

@@ -38,7 +38,7 @@ Run with `--check` in CI to detect drift between the schema and the examples.
   only for forms with `js/form-export.js` wired
   (`bin/form-export-import-refactor`) and a `personas.json`.
 - `api-create.http` — a real POST-then-GET transcript against this form's
-  own Loco crate, captured by actually running the seeded server and
+  own Axum crate, captured by actually running the seeded server and
   making the request (`bin/generate-api-transcripts`) rather than
   reimplementing the API — same fidelity rule as the CSV/TSV samples
   above. Present only for forms whose crate has the fleet's uniform

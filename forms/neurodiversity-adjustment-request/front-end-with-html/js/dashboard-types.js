@@ -46,7 +46,7 @@
 /**
  * Response from `GET /api/neurodiversity_adjustment_requests`.
  *
- * The Loco backend returns a bare JSON array of `RequestRow` objects; the
+ * The Axum backend returns a bare JSON array of `RequestRow` objects; the
  * dashboard accepts either a bare array or an `{ items, total }` envelope so
  * future paginated responses are forwards-compatible.
  *

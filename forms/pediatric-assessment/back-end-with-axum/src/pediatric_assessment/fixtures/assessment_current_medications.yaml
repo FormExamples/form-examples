@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-0000000e0c6e"
+  deletedAt: null
+  takesRegularMedications: "yes"
+  takesOverTheCounter: "yes"
+  overTheCounterDetails: "Test overTheCounterDetails"
+  takesSupplements: "yes"
+  supplementDetails: "Test supplementDetails"
+  medicationAdherence: "good"
+  adverseDrugReactions: "Test adverseDrugReactions"
+  additionalNotes: "Test additionalNotes"
+  assessmentId: "00000000-0000-4000-8000-0000000c1f25"

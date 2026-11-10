@@ -4,8 +4,8 @@
 
 All four layers are built as of 2026-07-02: foundation docs (`index.md`,
 `AGENTS.md`, `spec/index.md`, `plan.md`, `tasks.md`); SQL migrations plus the
-generated representations (XML, FHIR R5, protobuf, OpenAPI, Loco setup); both
-consolidated front-ends (HTML + Lily and SvelteKit + Lily); and the Loco
+generated representations (XML, FHIR R5, protobuf, OpenAPI, Axum setup); both
+consolidated front-ends (HTML + Lily and SvelteKit + Lily); and the Axum
 JSON-API back-end — plus `CHANGELOG.md` and `examples/`. The `doc/` clinical
 reference notes remain outstanding.
 
@@ -62,7 +62,7 @@ to `unableToAssess`.
 8. [x] Build the TypeScript classification engine + Vitest tests.
 9. [x] Build the HTML front-end (wizard + dashboard, Lily).
 10. [x] Build the SvelteKit front-end (wizard + dashboard, Lily).
-11. [x] Build the Rust axum + Loco JSON API.
+11. [x] Build the Rust axum + axa JSON API.
 12. [ ] Run `bin/test-form confusion-assessment-method`.
 
 ## Future enhancements

@@ -1,0 +1,31 @@
+CREATE TABLE IF NOT EXISTS "medical_fit_notes" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "status" varchar NOT NULL DEFAULT 'draft',
+    "assessment_date" date NULL,
+    "assessment_method" varchar NOT NULL DEFAULT '',
+    "diagnosis_primary" varchar NOT NULL DEFAULT '',
+    "diagnosis_additional" varchar NOT NULL DEFAULT '',
+    "fitness_advice" varchar NOT NULL DEFAULT '',
+    "period_from" date NULL,
+    "period_to" date NULL,
+    "period_duration_days" integer NULL,
+    "reassessment_required" varchar NOT NULL DEFAULT '',
+    "adjustment_phased_return" varchar NOT NULL DEFAULT '',
+    "adjustment_altered_hours" varchar NOT NULL DEFAULT '',
+    "adjustment_amended_duties" varchar NOT NULL DEFAULT '',
+    "adjustment_workplace_adaptations" varchar NOT NULL DEFAULT '',
+    "functional_effects" text NOT NULL DEFAULT '',
+    "comments" text NOT NULL DEFAULT '',
+    "employee_consent_to_share" varchar NOT NULL DEFAULT '',
+    "clinician_declaration" varchar NOT NULL DEFAULT '',
+    "signed_at" timestamp with time zone NULL,
+    "employee_id" uuid NOT NULL,
+    "clinician_id" uuid NOT NULL,
+    CONSTRAINT "fk-medical_fit_notes-employee_id-to-employees" FOREIGN KEY ("employee_id") REFERENCES "employees" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-medical_fit_notes-clinician_id-to-clinicians" FOREIGN KEY ("clinician_id") REFERENCES "clinicians" (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+ALTER TABLE medical_fit_notes ALTER COLUMN id SET DEFAULT gen_random_uuid();

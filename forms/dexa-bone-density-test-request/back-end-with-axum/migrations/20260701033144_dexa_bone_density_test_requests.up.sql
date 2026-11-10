@@ -1,0 +1,33 @@
+CREATE TABLE IF NOT EXISTS "dexa_bone_density_test_requests" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "status" varchar NOT NULL DEFAULT 'draft',
+    "site_name" varchar NOT NULL DEFAULT '',
+    "setting" varchar NOT NULL DEFAULT '',
+    "referral_date" date NULL,
+    "requested_by_date" date NULL,
+    "scan_region" varchar NOT NULL DEFAULT '',
+    "primary_indication" varchar NOT NULL DEFAULT '',
+    "clinical_question" varchar NOT NULL DEFAULT '',
+    "relevant_history" varchar NOT NULL DEFAULT '',
+    "frax_major_fracture_percent" double precision NULL,
+    "previous_fragility_fracture" boolean NOT NULL DEFAULT false,
+    "long_term_steroids" boolean NOT NULL DEFAULT false,
+    "menopause_status" varchar NOT NULL DEFAULT '',
+    "parental_hip_fracture" boolean NOT NULL DEFAULT false,
+    "weight_kg" double precision NULL,
+    "previous_dexa" varchar NOT NULL DEFAULT '',
+    "previous_dexa_date" date NULL,
+    "urgency" varchar NOT NULL DEFAULT 'routine',
+    "supervising_consultant" varchar NOT NULL DEFAULT '',
+    "requester_contact" varchar NOT NULL DEFAULT '',
+    "notes" varchar NOT NULL DEFAULT '',
+    "patient_id" uuid NOT NULL,
+    "clinician_id" uuid NOT NULL,
+    CONSTRAINT "fk-dexa_bone_density_test_requests-patient_id-to-patients" FOREIGN KEY ("patient_id") REFERENCES "patients" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-dexa_bone_density_test_requests-clinician_id-to-clinicians" FOREIGN KEY ("clinician_id") REFERENCES "clinicians" (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+ALTER TABLE dexa_bone_density_test_requests ALTER COLUMN id SET DEFAULT gen_random_uuid();

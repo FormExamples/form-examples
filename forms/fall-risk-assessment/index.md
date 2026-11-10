@@ -48,7 +48,7 @@ Fall risk evaluation using the Morse Fall Scale (MFS) with comprehensive environ
 fall-risk-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

@@ -1,0 +1,14 @@
+ALTER TABLE "grading_additional_flags" DROP CONSTRAINT IF EXISTS "grading_additional_flags_priority_length";
+ALTER TABLE "grading_additional_flags" DROP CONSTRAINT IF EXISTS "grading_additional_flags_category_length";
+ALTER TABLE "grading_additional_flags" DROP CONSTRAINT IF EXISTS "grading_additional_flags_flag_id_length";
+ALTER TABLE "grading_fired_rules" DROP CONSTRAINT IF EXISTS "grading_fired_rules_severity_level_length";
+ALTER TABLE "grading_fired_rules" DROP CONSTRAINT IF EXISTS "grading_fired_rules_category_length";
+ALTER TABLE "grading_fired_rules" DROP CONSTRAINT IF EXISTS "grading_fired_rules_rule_id_length";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_disease_activity_level_length";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_das28_method_length";
+ALTER TABLE "assessments" DROP CONSTRAINT IF EXISTS "assessments_status_length";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_united_kingdom_nhs_number_length";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_country_as_iso_3166_1_alpha_2_length";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_united_kingdom_nhs_number_length";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_country_as_iso_3166_1_alpha_2_length";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_name_length";

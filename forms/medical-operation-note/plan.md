@@ -33,7 +33,7 @@
 - [x] `fhir/r5/` — FHIR R5 JSON per SQL entity.
 - [x] `protobuf/` — `.proto` per SQL entity.
 - [x] `openapi/` — OpenAPI 3.1 `.yaml` per SQL entity.
-- [x] `back-end-with-loco-setup` — Loco scaffold script.
+- [x] `back-end-with-axum-setup` — Axum setup script.
 
 ## Phase 4 — Front-ends (deferred, parallel subagents)
 
@@ -46,7 +46,7 @@
 
 ## Phase 5 — Backend (deferred)
 
-- [x] `back-end-with-loco/` — Rust Loco backend with
+- [x] `back-end-with-axum/` — Rust Loco backend with
       Loco JSON API.
 
 ## Phase 6 — Verification

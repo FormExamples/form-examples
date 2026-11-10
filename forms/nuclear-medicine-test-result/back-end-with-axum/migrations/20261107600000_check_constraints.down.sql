@@ -1,0 +1,17 @@
+ALTER TABLE "nuclear_medicine_test_result_grade_flags" DROP CONSTRAINT IF EXISTS "nuclear_medicine_test_result_grade_flags_priority_check";
+ALTER TABLE "nuclear_medicine_test_result_grade_flags" DROP CONSTRAINT IF EXISTS "nuclear_medicine_test_result_grade_flags_category_check";
+ALTER TABLE "nuclear_medicine_test_result_grade_rules" DROP CONSTRAINT IF EXISTS "nuclear_medicine_test_result_grade_rules_axis_check";
+ALTER TABLE "nuclear_medicine_test_result_grades" DROP CONSTRAINT IF EXISTS "nuclear_medicine_test_result_grades_recommendation_check";
+ALTER TABLE "nuclear_medicine_test_result_grades" DROP CONSTRAINT IF EXISTS "nuclear_medicine_test_result_grades_follow_up_urgency_check";
+ALTER TABLE "nuclear_medicine_test_result_grades" DROP CONSTRAINT IF EXISTS "nuclear_medicine_test_result_grades_report_completenes_78fed0df";
+ALTER TABLE "nuclear_medicine_test_result_grades" DROP CONSTRAINT IF EXISTS "nuclear_medicine_test_result_grades_abnormality_severity_check";
+ALTER TABLE "nuclear_medicine_test_result_grades" DROP CONSTRAINT IF EXISTS "nuclear_medicine_test_result_grades_result_classification_check";
+ALTER TABLE "nuclear_medicine_test_results" DROP CONSTRAINT IF EXISTS "nuclear_medicine_test_results_split_function_right_per_0724dcf4";
+ALTER TABLE "nuclear_medicine_test_results" DROP CONSTRAINT IF EXISTS "nuclear_medicine_test_results_split_function_left_percent_check";
+ALTER TABLE "nuclear_medicine_test_results" DROP CONSTRAINT IF EXISTS "nuclear_medicine_test_results_ejection_fraction_percent_check";
+ALTER TABLE "nuclear_medicine_test_results" DROP CONSTRAINT IF EXISTS "nuclear_medicine_test_results_examination_adequacy_check";
+ALTER TABLE "nuclear_medicine_test_results" DROP CONSTRAINT IF EXISTS "nuclear_medicine_test_results_injected_activity_mbq_check";
+ALTER TABLE "nuclear_medicine_test_results" DROP CONSTRAINT IF EXISTS "nuclear_medicine_test_results_scan_type_check";
+ALTER TABLE "nuclear_medicine_test_results" DROP CONSTRAINT IF EXISTS "nuclear_medicine_test_results_report_status_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";

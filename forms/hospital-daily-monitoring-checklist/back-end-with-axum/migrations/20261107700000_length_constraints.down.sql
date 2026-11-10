@@ -1,0 +1,8 @@
+ALTER TABLE "hospital_daily_monitoring_checklist_items" DROP CONSTRAINT IF EXISTS "hospital_daily_monitoring_checklist_items_status_length";
+ALTER TABLE "hospital_daily_monitoring_checklist_items" DROP CONSTRAINT IF EXISTS "hospital_daily_monitoring_checklist_items_section_title_length";
+ALTER TABLE "hospital_daily_monitoring_checklist_items" DROP CONSTRAINT IF EXISTS "hospital_daily_monitoring_checklist_items_item_code_length";
+ALTER TABLE "hospital_daily_monitoring_checklists" DROP CONSTRAINT IF EXISTS "hospital_daily_monitoring_checklists_status_length";
+ALTER TABLE "hospital_daily_monitoring_checklists" DROP CONSTRAINT IF EXISTS "hospital_daily_monitoring_checklists_inspecting_office_312539f6";
+ALTER TABLE "hospital_daily_monitoring_checklists" DROP CONSTRAINT IF EXISTS "hospital_daily_monitoring_checklists_inspecting_office_9cb6e05d";
+ALTER TABLE "hospital_daily_monitoring_checklists" DROP CONSTRAINT IF EXISTS "hospital_daily_monitoring_checklists_department_or_site_length";
+ALTER TABLE "hospital_daily_monitoring_checklists" DROP CONSTRAINT IF EXISTS "hospital_daily_monitoring_checklists_hospital_name_length";

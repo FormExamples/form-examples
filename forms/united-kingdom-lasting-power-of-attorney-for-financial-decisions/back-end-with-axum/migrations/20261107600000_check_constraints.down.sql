@@ -1,0 +1,15 @@
+ALTER TABLE "lpa_validation_flags" DROP CONSTRAINT IF EXISTS "lpa_validation_flags_priority_check";
+ALTER TABLE "lpa_validation_rules" DROP CONSTRAINT IF EXISTS "lpa_validation_rules_priority_check";
+ALTER TABLE "lpa_validation_results" DROP CONSTRAINT IF EXISTS "lpa_validation_results_composite_risk_check";
+ALTER TABLE "lpa_validation_results" DROP CONSTRAINT IF EXISTS "lpa_validation_results_validity_band_check";
+ALTER TABLE "lpa_registration_recipients" DROP CONSTRAINT IF EXISTS "lpa_registration_recipients_recipient_kind_check";
+ALTER TABLE "lpa_registration_applications" DROP CONSTRAINT IF EXISTS "lpa_registration_applications_payment_method_check";
+ALTER TABLE "lpa_registration_applications" DROP CONSTRAINT IF EXISTS "lpa_registration_applications_applicant_kind_check";
+ALTER TABLE "lpa_continuation_sheets" DROP CONSTRAINT IF EXISTS "lpa_continuation_sheets_kind_check";
+ALTER TABLE "lpa_signatures" DROP CONSTRAINT IF EXISTS "lpa_signatures_lp1f_section_check";
+ALTER TABLE "lpa_signatures" DROP CONSTRAINT IF EXISTS "lpa_signatures_role_check";
+ALTER TABLE "lpa_person_to_notifies" DROP CONSTRAINT IF EXISTS "lpa_person_to_notifies_ordinal_check";
+ALTER TABLE "lpa_certificate_providers" DROP CONSTRAINT IF EXISTS "lpa_certificate_providers_knows_donor_as_check";
+ALTER TABLE "lasting_power_of_attorneys" DROP CONSTRAINT IF EXISTS "lasting_power_of_attorneys_status_check";
+ALTER TABLE "lasting_power_of_attorneys" DROP CONSTRAINT IF EXISTS "lasting_power_of_attorneys_when_attorneys_can_act_check";
+ALTER TABLE "lasting_power_of_attorneys" DROP CONSTRAINT IF EXISTS "lasting_power_of_attorneys_decision_mode_check";

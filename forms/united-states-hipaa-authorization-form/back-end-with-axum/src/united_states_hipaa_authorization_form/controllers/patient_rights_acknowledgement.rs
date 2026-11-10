@@ -1,0 +1,116 @@
+#![allow(clippy::missing_errors_doc)]
+#![allow(clippy::unnecessary_struct_initialization)]
+#![allow(clippy::unused_async)]
+use crate::support::prelude::*;
+use serde::{Deserialize, Serialize};
+
+use crate::models::patient_rights_acknowledgements::Model;
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Params {
+    pub hipaa_authorization_id: Uuid,
+    pub acknowledged_right_to_revoke: String,
+    pub acknowledged_revocation_procedure: String,
+    pub acknowledged_no_conditioning: String,
+    pub acknowledged_redisclosure_warning: String,
+    pub acknowledged_right_to_copy: String,
+    pub acknowledged_right_to_inspect_disclosed: String,
+}
+
+impl Params {
+    /// Insert a row.
+    async fn insert(&self, db: &PgPool) -> sqlx::Result<Model> {
+        sqlx::query_as(
+            "INSERT INTO patient_rights_acknowledgements (hipaa_authorization_id, \
+            acknowledged_right_to_revoke, acknowledged_revocation_procedure, \
+            acknowledged_no_conditioning, acknowledged_redisclosure_warning, \
+            acknowledged_right_to_copy, acknowledged_right_to_inspect_disclosed) VALUES \
+            ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+        )
+        .bind(self.hipaa_authorization_id)
+        .bind(&self.acknowledged_right_to_revoke)
+        .bind(&self.acknowledged_revocation_procedure)
+        .bind(&self.acknowledged_no_conditioning)
+        .bind(&self.acknowledged_redisclosure_warning)
+        .bind(&self.acknowledged_right_to_copy)
+        .bind(&self.acknowledged_right_to_inspect_disclosed)
+        .fetch_one(db)
+        .await
+    }
+
+    /// Update the row with this id, if there is one.
+    async fn update(&self, db: &PgPool, id: Uuid) -> sqlx::Result<Option<Model>> {
+        sqlx::query_as(
+            "UPDATE patient_rights_acknowledgements SET hipaa_authorization_id = $2, \
+            acknowledged_right_to_revoke = $3, acknowledged_revocation_procedure = $4, \
+            acknowledged_no_conditioning = $5, acknowledged_redisclosure_warning = $6, \
+            acknowledged_right_to_copy = $7, acknowledged_right_to_inspect_disclosed = \
+            $8, updated_at = now() WHERE id = $1 AND deleted_at IS NULL RETURNING *",
+        )
+        .bind(id)
+        .bind(self.hipaa_authorization_id)
+        .bind(&self.acknowledged_right_to_revoke)
+        .bind(&self.acknowledged_revocation_procedure)
+        .bind(&self.acknowledged_no_conditioning)
+        .bind(&self.acknowledged_redisclosure_warning)
+        .bind(&self.acknowledged_right_to_copy)
+        .bind(&self.acknowledged_right_to_inspect_disclosed)
+        .fetch_optional(db)
+        .await
+    }
+}
+
+async fn load_item(ctx: &AppContext, id: Uuid) -> Result<Model> {
+    let item = Model::find_by_id(&db(ctx), id).await?;
+    item.ok_or_else(|| Error::NotFound)
+}
+
+#[debug_handler]
+pub async fn list(
+    State(ctx): State<AppContext>,
+    OriginalUri(uri): OriginalUri,
+) -> Result<Response> {
+    let page = cursor_page(&ctx, &uri)?;
+    let rows = Model::page(&db(&ctx), &page).await?;
+    Ok(page.respond(rows))
+}
+
+#[debug_handler]
+pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    let item = params.insert(&db(&ctx)).await?;
+    format::json(item)
+}
+
+#[debug_handler]
+pub async fn update(
+    Path(id): Path<Uuid>,
+    State(ctx): State<AppContext>,
+    Json(params): Json<Params>,
+) -> Result<Response> {
+    let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
+    format::json(item)
+}
+
+#[debug_handler]
+pub async fn remove(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
+    load_item(&ctx, id).await?;
+    Model::delete(&db(&ctx), id).await?;
+    format::empty()
+}
+
+#[debug_handler]
+pub async fn get_one(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
+    format::json(load_item(&ctx, id).await?)
+}
+
+pub fn routes() -> Routes {
+    Routes::new()
+        .prefix("api/patient_rights_acknowledgements/")
+        .add("/", get(list))
+        .add("/", post(add))
+        .add("{id}", get(get_one))
+        .add("{id}", delete(remove))
+        .add("{id}", put(update))
+        .add("{id}", patch(update))
+}

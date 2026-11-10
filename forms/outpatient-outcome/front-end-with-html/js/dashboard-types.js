@@ -32,7 +32,7 @@
 /**
  * Response from `GET /api/outpatient_outcomes`.
  *
- * The Loco backend returns a bare JSON array of `OutcomeRow` objects; the
+ * The Axum backend returns a bare JSON array of `OutcomeRow` objects; the
  * dashboard accepts either a bare array or an `{ items, total }` envelope so
  * future paginated responses are forwards-compatible.
  *

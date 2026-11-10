@@ -21,12 +21,12 @@ flags. Drafts persist in `localStorage` under
 A sortable, filterable table of fit notes. The offline sample rows in
 `js/data.js` are one per persona in
 [`../examples/personas.json`](../examples/personas.json), carrying the
-engine's exact expected grade. The page tries the Loco back-end first (see
+engine's exact expected grade. The page tries the Axum back-end first (see
 [Back-end wiring](#back-end-wiring)) and falls back to the sample rows.
 
 ## Back-end wiring
 
-The Loco back-end has no bespoke dashboard or submit endpoint, so `js/api.js`
+The Axum back-end has no bespoke dashboard or submit endpoint, so `js/api.js`
 talks to the plain REST resources (`/api/employees`, `/api/clinicians`,
 `/api/medical_fit_notes`, `/api/medical_fit_note_grades`,
 `/api/medical_fit_note_grade_rules`, `/api/medical_fit_note_grade_flags`).

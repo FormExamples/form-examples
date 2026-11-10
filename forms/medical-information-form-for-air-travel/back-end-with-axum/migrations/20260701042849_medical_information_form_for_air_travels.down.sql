@@ -1,0 +1,1 @@
+DROP TABLE "medical_information_form_for_air_travels";

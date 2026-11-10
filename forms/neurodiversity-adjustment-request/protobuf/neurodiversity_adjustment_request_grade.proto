@@ -44,7 +44,7 @@ message NeurodiversityAdjustmentRequestGrade {
   NeurodiversityAdjustmentRequestGradeImpactBandEnum impact_band = 7;  // VARCHAR(15)
   int32 completeness_percent = 8;  // INTEGER
   NeurodiversityAdjustmentRequestGradePriorityTierEnum priority_tier = 9;  // VARCHAR(10)
-  string target_timeframe = 10;  // VARCHAR(50) — max 50 chars
+  string target_timeframe = 10;  // VARCHAR(100) — max 100 chars
   NeurodiversityAdjustmentRequestGradeRecommendationEnum recommendation = 11;  // VARCHAR(25)
   string manager_notes = 12;  // TEXT
   string signed_at = 13;  // TIMESTAMPTZ — iso 8601

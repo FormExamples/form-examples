@@ -28,6 +28,6 @@
 ## Wiring
 - [x] HTML front-end API client (`js/api.js`): configurable base, client-side dashboard join, wizard submit
 - [x] SvelteKit API client (`src/lib/api/`): `VITE_API_BASE`, dashboard join, wizard submit, Vitest coverage
-- [x] Permissive CORS in `back-end-with-loco/config/development.yaml`
+- [x] Permissive CORS in `back-end-with-axum/config/development.yaml`
 - [x] Offline sample-data fallback kept on both dashboards; submit errors keep report and draft
 - [x] Svelte sample rows fixed to cover all 13 personas

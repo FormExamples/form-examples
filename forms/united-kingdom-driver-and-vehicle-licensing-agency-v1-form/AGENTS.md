@@ -19,7 +19,7 @@ General confidential medical information — vision self-declaration for driving
 - ./doc/ - Reference documentation
 - ./front-end-with-html/ - single-page HTML wizard (index.html) + dashboard (dashboard.html)
 - ./front-end-with-svelte/ - SvelteKit single-page wizard + dashboard (SVAR DataGrid)
-- ./back-end-with-loco/ - Back-end JSON API; Rust + axum + Loco
+- ./back-end-with-axum/ - Back-end JSON API; Rust + axum + axa + sqlx
 
 ## Form parts
 

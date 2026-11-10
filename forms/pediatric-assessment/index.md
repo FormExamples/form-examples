@@ -28,7 +28,7 @@ Child development screening covering birth history, growth, developmental milest
 pediatric-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

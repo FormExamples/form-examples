@@ -1,0 +1,1 @@
+DROP TABLE "united_kingdom_statement_of_fitness_for_work_grade_rules";

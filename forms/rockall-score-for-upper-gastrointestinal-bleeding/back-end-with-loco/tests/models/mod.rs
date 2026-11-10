@@ -1,8 +1,0 @@
-mod users;
-
-mod patients;
-mod clinicians;
-mod rockall_score_for_upper_gastrointestinal_bleedings;
-mod rockall_score_for_upper_gastrointestinal_bleeding_grades;
-mod rockall_score_for_upper_gastrointestinal_bleeding_grade_rules;
-mod rockall_score_for_upper_gastrointestinal_bleeding_grade_flags;

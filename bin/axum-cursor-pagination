@@ -1,0 +1,473 @@
+#!/usr/bin/env python3
+"""bin/axum-cursor-pagination — move each form's `back-end-with-axum/` lists from
+offset paging to axa's signed cursor paging.
+
+A list then takes `?limit=` and an opaque `?cursor=`, and answers a bare JSON
+array with `Link: <...>; rel="next"` while more rows follow. There is no total
+and no `?offset=`: a total counts rows a caller may not see, an offset is the
+caller's to choose, and a cursor is signed over its position and its query, so a
+caller cannot make one up, edit one, or carry it to another list or filter. A bad
+limit or cursor is a `422`, never clamped.
+
+What it changes in a crate:
+
+  Cargo.toml                the `cursor-pagination` feature in place of
+                            `offset-pagination`
+  support/mod.rs            `PAGE_LIMITS` as `CursorLimits`; `cursor_key`, which
+                            reads the `CURSOR_KEY` secret (required where the
+                            environment is production-like); `cursor_page`
+  support/prelude.rs        `CursorPage`, `OriginalUri` and `cursor_page`
+  app.rs                    `App::context` stores the key in the shared store
+  controllers               every generated `list` reads its page from the URI
+  models                    every `page` drops its `COUNT(*)` and returns rows only
+  tests/requests/           `pagination.rs` follows a `Link` and refuses forged,
+                            carried and out-of-range pages; `problem.rs` expects a
+                            `422` for a forged cursor
+
+The handful of hand-written lists (dashboards, the ADR index) are not generated,
+so `--check` names them until they are moved by hand.
+
+Every edit to a crate is planned and asserted before any is written, so a crate
+that differs from the expected shape stops with its name and stays untouched. A
+crate already moved is skipped, so the tool can be rerun.
+
+Usage:
+  bin/axum-cursor-pagination <slug>...          # named forms
+  bin/axum-cursor-pagination --all              # every form's Axum crate
+  bin/axum-cursor-pagination --root DIR <slug>  # a copy of forms/ at DIR
+  bin/axum-cursor-pagination --check --all      # CI drift check (non-zero on drift)
+"""
+
+from __future__ import annotations
+
+import argparse
+import glob
+import os
+import re
+import sys
+
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OLD_FEATURE = '"offset-pagination", "queue"'
+NEW_FEATURE = '"cursor-pagination", "queue"'
+# Feature lists change with later axa (0.12 adds "postgres-sqlx"), so the check
+# asks only that the feature is on.
+HAS_CURSOR = re.compile(r'^axa = \{[^\n]*features = \[[^\]]*"cursor-pagination"', re.M)
+
+OLD_LIMITS = """/// The bounds of every list route. `limit` and its default match `openapi.yaml`.
+pub const PAGE_LIMITS: axa::offset_pagination::Limits = axa::offset_pagination::Limits {
+    default_limit: 100,
+    max_limit: 1000,
+    max_offset: 100_000,
+};
+"""
+NEW_LIMITS = """/// The page sizes of every list route. `limit` and its default match
+/// `openapi.yaml`. A larger limit is refused, not clamped.
+pub const PAGE_LIMITS: CursorLimits = CursorLimits {
+    default_limit: 100,
+    max_limit: 1000,
+};
+
+/// The key that signs list cursors in development and test when `CURSOR_KEY` is
+/// not set. It is in the source, so anyone can sign a cursor with it, which is
+/// why a production-like environment refuses to fall back to it.
+const DEVELOPMENT_CURSOR_KEY: &[u8; 32] = b"development cursor key; public!!";
+
+/// The key that signs list cursors: `CURSOR_KEY`, at least 32 bytes, the same on
+/// every replica. Development and test fall back to a public key.
+///
+/// # Errors
+///
+/// Fails when `CURSOR_KEY` is shorter than 32 bytes, or is not set where the
+/// environment is production-like.
+pub fn cursor_key(environment: &Environment) -> Result<CursorKey> {
+    match std::env::var("CURSOR_KEY") {
+        Ok(secret) => CursorKey::new(secret.as_bytes()).map_err(Error::wrap),
+        Err(_) if environment.is_production_like() => Err(Error::string(
+            "CURSOR_KEY must be set, to at least 32 bytes, to sign list cursors",
+        )),
+        Err(_) => CursorKey::new(DEVELOPMENT_CURSOR_KEY).map_err(Error::wrap),
+    }
+}
+
+/// The page a list request asks for, read from its URI and checked against the
+/// cursor key `App::context` stored.
+///
+/// # Errors
+///
+/// A bad `limit` or `cursor` is a `422`. A context with no cursor key is a `500`.
+pub fn cursor_page(ctx: &AppContext, uri: &Uri) -> Result<CursorPage> {
+    let key = ctx
+        .shared_store
+        .get_ref::<CursorKey>()
+        .ok_or_else(|| Error::string("App::context stores no cursor key"))?;
+    Ok(CursorPage::new(&key, PAGE_LIMITS, uri)?)
+}
+"""
+OLD_USE = "use axa::{AppContext, Result};\n"
+NEW_USE = """use axa::{
+    cursor_pagination::{CursorKey, CursorLimits, CursorPage},
+    AppContext, Environment, Error, Result,
+};
+"""
+OLD_HTTP = re.compile(r"    http::\{(header, HeaderValue|HeaderValue, header)\},\n")
+NEW_HTTP = "    http::{header, HeaderValue, Uri},\n"
+
+OLD_PRELUDE_USE = """pub use axa::{
+    extract::{Json, Path, Query},
+    format,
+    offset_pagination::{Page, PageParams},
+    prelude::*,
+};
+"""
+NEW_PRELUDE_USE = """pub use axa::{
+    cursor_pagination::CursorPage,
+    extract::{Json, Path, Query},
+    format,
+    prelude::*,
+};
+pub use axum::extract::OriginalUri;
+"""
+OLD_PRELUDE_SUPER = "pub use super::{\n    db,\n"
+NEW_PRELUDE_SUPER = "pub use super::{\n    cursor_page, db,\n"
+
+OLD_CONTEXT = "        let mut ctx = AppContext::new(environment, pool, config);\n"
+NEW_CONTEXT = OLD_CONTEXT + "        ctx.shared_store.insert(support::cursor_key(&ctx.environment)?);\n"
+
+OLD_LIST = """    Query(params): Query<PageParams>,
+) -> Result<Response> {
+    let page = params.resolve(PAGE_LIMITS)?;
+    let (rows, total) = Model::page(&db(&ctx), page).await?;
+    Ok(page.respond(total, rows))
+"""
+NEW_LIST = """    OriginalUri(uri): OriginalUri,
+) -> Result<Response> {
+    let page = cursor_page(&ctx, &uri)?;
+    let rows = Model::page(&db(&ctx), &page).await?;
+    Ok(page.respond(rows))
+"""
+
+OLD_PAGE = re.compile(
+    r"    /// One page of (?P<what>\w+) in a stable order, and how many \w+ there are in all\.\n"
+    r"(?P<mid>(?:    ///.*\n)*)"
+    r"    pub async fn page\(db: &PgPool, page: axa::offset_pagination::Page\) -> sqlx::Result<\(Vec<Self>, i64\)> \{\n"
+    r"        let \(limit, offset\) = page\.bounds\(\);\n"
+    r"        let \w+ = (?P<query>sqlx::query_as\((?:(?!\n    \}).)*?\.await)\?;\n"
+    r"        let total =(?:(?!\n    \}).)*?\.await\?;\n"
+    r"        Ok\(\(\w+, total\)\)\n"
+    r"    \}\n",
+    re.S,
+)
+NEW_PAGE = (
+    "    /// One page of \\g<what> in a stable order, with one row more than the page\n"
+    "    /// when more follow, which `CursorPage::respond` drops.\n"
+    "\\g<mid>"
+    "    pub async fn page(db: &PgPool, page: &axa::cursor_pagination::CursorPage) -> sqlx::Result<Vec<Self>> {\n"
+    "        let (limit, offset) = page.bounds();\n"
+    "        \\g<query>\n"
+    "    }\n"
+)
+
+OLD_PROBLEM = re.compile(
+    r"problem!\(\s*request\s*\.get\(\s*\"(?P<path>[^\"?]+)\?offset=100001\"\s*\)\s*\.await,\s*400\s*\)"
+)
+
+PAGINATION_TEST = '''//! Lists come in signed cursor pages, with no total.
+
+use LIBRARY::app::App;
+use axa_test::prelude::*;
+use serde_json::Value;
+use serial_test::serial;
+
+/// A page of one row links to the next, whose cursor works only where it was
+/// made; the limits `openapi.yaml` publishes are refused, never clamped, outside
+/// their range.
+#[tokio::test]
+#[serial]
+async fn lists_come_in_cursor_pages() {
+    request::<App, _, _>(|request, ctx| async move {
+        App::seed(&ctx).await.unwrap();
+        // A second live row, so that a page of one has a next page. Any unique
+        // column of the copy is null, so it cannot clash.
+        sqlx::query(
+            "INSERT INTO TABLE SELECT (jsonb_populate_record(NULL::TABLE, to_jsonb(t) || \\
+            jsonb_build_object('id', gen_random_uuid()))).* FROM TABLE t",
+        )
+        .execute(&ctx.db)
+        .await
+        .unwrap();
+
+        let first = request.get("PATH?limit=1").await;
+        first.assert_status_ok();
+        assert!(first.maybe_header("x-total-count").is_none());
+        let first_rows: Vec<Value> = first.json();
+        assert_eq!(first_rows.len(), 1);
+        let link = first.header("link");
+        let next = link
+            .to_str()
+            .unwrap()
+            .strip_prefix('<')
+            .and_then(|rest| rest.strip_suffix(">; rel=\\"next\\""))
+            .unwrap()
+            .to_string();
+        assert!(next.starts_with("PATH?limit=1&cursor="), "{next}");
+
+        let second = request.get(&next).await;
+        second.assert_status_ok();
+        assert!(second.maybe_header("link").is_none());
+        let second_rows: Vec<Value> = second.json();
+        assert_eq!(second_rows.len(), 1);
+        assert_ne!(first_rows[0]["id"], second_rows[0]["id"]);
+
+        let carried = format!("{next}&status=other");
+        for refused in [
+            carried.as_str(),
+            "PATH?cursor=forged",
+            "PATH?limit=0",
+            "PATH?limit=1001",
+            "PATH?limit=many",
+        ] {
+            request.get(refused).await.assert_status_unprocessable_entity();
+        }
+    })
+    .await;
+}
+'''
+
+# For a crate that seeds no rows: an empty page has no next page, and the same
+# pages are refused.
+EMPTY_PAGINATION_TEST = '''//! Lists come in signed cursor pages, with no total.
+
+use LIBRARY::app::App;
+use axa_test::prelude::*;
+use serde_json::Value;
+use serial_test::serial;
+
+/// This service seeds no rows, so a page is empty and links nowhere; the limits
+/// `openapi.yaml` publishes are refused, never clamped, outside their range.
+#[tokio::test]
+#[serial]
+async fn lists_come_in_cursor_pages() {
+    request::<App, _, _>(|request, _ctx| async move {
+        let page = request.get("PATH?limit=1").await;
+        page.assert_status_ok();
+        assert!(page.maybe_header("x-total-count").is_none());
+        assert!(page.maybe_header("link").is_none());
+        let rows: Vec<Value> = page.json();
+        assert!(rows.is_empty());
+
+        for refused in [
+            "PATH?cursor=forged",
+            "PATH?limit=0",
+            "PATH?limit=1001",
+            "PATH?limit=many",
+        ] {
+            request.get(refused).await.assert_status_unprocessable_entity();
+        }
+    })
+    .await;
+}
+'''
+
+
+def source_dir(crate: str) -> str:
+    apps = glob.glob(f"{crate}/src/*/app.rs")
+    assert len(apps) == 1, f"{crate}: expected one app.rs, found {apps}"
+    return os.path.dirname(apps[0])
+
+
+def migrations(crate: str) -> str:
+    return "\n".join(open(p).read() for p in sorted(glob.glob(f"{crate}/migrations/*.up.sql")))
+
+
+def unique_columns(sql: str, table: str) -> list[str] | None:
+    """The columns of `table` a unique constraint covers, or None when one of them
+    cannot be null, so a copy of a row cannot be made unique by nulling them."""
+    create = re.search(rf'CREATE TABLE (?:IF NOT EXISTS )?"?{table}"? \((.*?)\n\);', sql, re.S)
+    if not create:
+        return None
+    lines = {m[1]: m[0] for m in re.finditer(r'^\s*"?(\w+)"? [^\n]*', create[1], re.M)}
+    columns = [m[1] for m in re.finditer(r'^\s*"?(\w+)"? [^\n]*\bUNIQUE\b', create[1], re.M)]
+    for index in re.finditer(rf'CREATE UNIQUE INDEX [^;]*? ON "?{table}"? \(([^)]*)\)', sql):
+        columns += [c.strip().strip('"') for c in index[1].split(",")]
+    if re.search(rf'ALTER TABLE "?{table}"? [^;]*UNIQUE', sql):
+        return None
+    columns = sorted(set(columns))
+    if any(c not in lines or "NOT NULL" in lines[c] or "PRIMARY KEY" in lines[c] for c in columns):
+        return None
+    return columns
+
+
+def fixture_rows(source: str, table: str) -> int:
+    path = f"{source}/fixtures/{table}.yaml"
+    return len(re.findall(r"^- ", open(path).read(), re.M)) if os.path.exists(path) else 0
+
+
+def lists(source: str) -> list[tuple[str, str]]:
+    """(served path, table) for every generated list."""
+    found = []
+    for path in sorted(glob.glob(f"{source}/controllers/*.rs")):
+        text = open(path).read()
+        model = re.search(r"use crate::models::(\w+)::Model;", text)
+        prefix = re.search(r'\.prefix\("([^"]+)"\)', text)
+        if not (model and prefix and re.search(r'\.add\("/", get\(list\)\)', text)):
+            continue
+        if NEW_LIST not in text and OLD_LIST not in text:
+            continue
+        model_text = open(f"{source}/models/{model[1]}.rs").read()
+        table = re.search(r"SELECT \* FROM (\w+) WHERE deleted_at IS NULL", model_text)
+        if table:
+            found.append(("/" + prefix[1].strip("/"), table[1]))
+    return found
+
+
+def pagination_test(crate: str, source: str, library: str) -> str | None:
+    sql = migrations(crate)
+    candidates = sorted(
+        (len(columns), path, table, columns)
+        for path, table in lists(source)
+        if fixture_rows(source, table) == 1 and (columns := unique_columns(sql, table)) is not None
+    )
+    if not candidates:
+        found = lists(source)
+        if found and not glob.glob(f"{source}/fixtures/*.yaml"):
+            return EMPTY_PAGINATION_TEST.replace("LIBRARY", library).replace("PATH", found[0][0])
+        return None
+    _, path, table, columns = candidates[0]
+    nulls = "".join(f", '{column}', NULL" for column in columns)
+    return (PAGINATION_TEST.replace("LIBRARY", library).replace("TABLE", table).replace("PATH", path)
+            .replace("gen_random_uuid())", f"gen_random_uuid(){nulls})"))
+
+
+def move_page(text: str, path: str) -> str:
+    """The generated `Model::page`, moved to cursor paging. A page function of
+    any other shape, such as a hand-written one, is left for a person."""
+    head = "    pub async fn page(db: &PgPool, page: axa::offset_pagination::Page) -> sqlx::Result<(Vec<Self>, i64)> {\n"
+    if head not in text:
+        return text
+    assert text.count(head) == 1, f"{path}: expected one generated page()"
+    at = text.index(head)
+    start = at
+    while text.rfind("\n", 0, start - 1) >= 0 and text[text.rfind("\n", 0, start - 1) + 1:start].startswith("    ///"):
+        start = text.rfind("\n", 0, start - 1) + 1
+    end = text.index("\n    }\n", at) + len("\n    }\n")
+    block, count = OLD_PAGE.subn(NEW_PAGE, text[start:end])
+    assert count == 1, f"{path}: page() is not the generated shape"
+    return text[:start] + block + text[end:]
+
+
+def plan(crate: str) -> dict[str, str] | None:
+    """Every edit for a crate, or None when it is already moved."""
+    manifest = open(f"{crate}/Cargo.toml").read()
+    if HAS_CURSOR.search(manifest):
+        return None
+    source = source_dir(crate)
+    edits: dict[str, str] = {}
+
+    def change(path, edit):
+        edits[path] = edit(edits.get(path) or open(path).read(), path)
+
+    def sub(old, new, what):
+        def edit(text, path):
+            assert text.count(old) == 1, f"{path}: expected the {what} once"
+            return text.replace(old, new)
+        return edit
+
+    def resub(pattern, new, what):
+        def edit(text, path):
+            fresh, count = pattern.subn(new, text)
+            assert count == 1, f"{path}: expected the {what} once, found {count}"
+            return fresh
+        return edit
+
+    change(f"{crate}/Cargo.toml", sub(OLD_FEATURE, NEW_FEATURE, "offset-pagination feature"))
+    change(f"{source}/support/mod.rs", sub(OLD_LIMITS, NEW_LIMITS, "PAGE_LIMITS"))
+    change(f"{source}/support/mod.rs", sub(OLD_USE, NEW_USE, "axa import"))
+    change(f"{source}/support/mod.rs", resub(OLD_HTTP, NEW_HTTP, "http import"))
+    change(f"{source}/support/prelude.rs", sub(OLD_PRELUDE_USE, NEW_PRELUDE_USE, "axa re-export"))
+    change(f"{source}/support/prelude.rs", sub(OLD_PRELUDE_SUPER, NEW_PRELUDE_SUPER, "support re-export"))
+    change(f"{source}/app.rs", sub(OLD_CONTEXT, NEW_CONTEXT, "context"))
+    for path in sorted(glob.glob(f"{source}/controllers/*.rs")):
+        text = open(path).read()
+        if OLD_LIST in text:
+            assert text.count(OLD_LIST) == 1, f"{path}: expected one list"
+            edits[path] = text.replace(OLD_LIST, NEW_LIST)
+    for path in sorted(glob.glob(f"{source}/models/*.rs")):
+        text = open(path).read()
+        fresh = move_page(text, path)
+        if fresh != text:
+            edits[path] = fresh
+    for problem in glob.glob(f"{crate}/tests/**/problem.rs", recursive=True):
+        text = edits.get(problem) or open(problem).read()
+        fresh, count = OLD_PROBLEM.subn(lambda m: f'problem!(request.get("{m["path"]}?cursor=forged").await, 422)', text)
+        if count:
+            edits[problem] = fresh
+    paging = f"{crate}/tests/requests/pagination.rs"
+    if os.path.exists(paging) and lists(source):
+        library = re.search(r"use (\w+)::app::App", open(paging).read())[1]
+        # Plan against the edited controllers, so lists() sees the new shape.
+        test = pagination_test(crate, source, library)
+        assert test, f"{crate}: no list with one fixture row and no unique column to page through"
+        edits[paging] = test
+    return edits
+
+
+def drift(crate: str) -> str | None:
+    """Why a crate's lists are not cursor-paged, if they are not."""
+    if not HAS_CURSOR.search(open(f"{crate}/Cargo.toml").read()):
+        return "Cargo.toml has no cursor-pagination feature"
+    source = source_dir(crate)
+    if "fn cursor_key(" not in open(f"{source}/support/mod.rs").read():
+        return "support/mod.rs has no cursor_key"
+    if NEW_CONTEXT not in open(f"{source}/app.rs").read():
+        return "App::context stores no cursor key"
+    for path in sorted(glob.glob(f"{source}/**/*.rs", recursive=True) + glob.glob(f"{crate}/tests/**/*.rs", recursive=True)):
+        text = open(path).read()
+        name = os.path.relpath(path, crate)
+        if re.search(r'\b(offset_pagination|PageParams)\b|\.header\("x-total-count"\)|[?&]offset=', text):
+            return f"{name} still pages by offset"
+    return None
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    parser.add_argument("slugs", nargs="*")
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--root", default=f"{REPO}/forms")
+    args = parser.parse_args()
+    if args.all:
+        crates = sorted(os.path.dirname(c) for c in glob.glob(f"{args.root}/*/back-end-with-axum/Cargo.toml"))
+    elif args.slugs:
+        crates = [f"{args.root}/{slug}/back-end-with-axum" for slug in args.slugs]
+    else:
+        parser.error("name forms, or pass --all")
+    if args.check:
+        bad = [(crate, why) for crate in crates if (why := drift(crate))]
+        for crate, why in bad:
+            print(f"{crate.split('/')[-2]}: {why}")
+        print(f"{len(crates) - len(bad)}/{len(crates)} crates page lists by signed cursor")
+        return 1 if bad else 0
+    # Plan everything first, so one odd crate leaves the fleet as it was.
+    plans, stopped = [], []
+    for crate in crates:
+        try:
+            plans.append(plan(crate))
+        except AssertionError as error:
+            stopped.append(str(error))
+    if stopped:
+        print("stopped, nothing written:", *stopped, sep="\n  ", file=sys.stderr)
+        return 1
+    moved = 0
+    for edits in plans:
+        if edits is None:
+            continue
+        for path, text in edits.items():
+            with open(path, "w") as handle:
+                handle.write(text)
+        moved += 1
+    print(f"{moved} moved, {len(crates) - moved} already cursor-paged")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

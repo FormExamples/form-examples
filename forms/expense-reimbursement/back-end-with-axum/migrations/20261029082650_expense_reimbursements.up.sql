@@ -1,0 +1,32 @@
+CREATE TABLE IF NOT EXISTS "expense_reimbursements" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "status" varchar NOT NULL DEFAULT 'draft',
+    "claim_date" date NULL,
+    "claim_period_start_date" date NULL,
+    "claim_period_end_date" date NULL,
+    "claim_title" varchar NOT NULL DEFAULT '',
+    "business_purpose" text NOT NULL DEFAULT '',
+    "project_or_cost_code" varchar NOT NULL DEFAULT '',
+    "currency_as_iso_4217" varchar NOT NULL DEFAULT 'GBP',
+    "total_amount" double precision NULL,
+    "total_vat_amount" double precision NULL,
+    "advance_already_received_amount" double precision NULL,
+    "amount_to_repay" double precision NULL,
+    "repayment_method" varchar NOT NULL DEFAULT '',
+    "bank_account_name" varchar NOT NULL DEFAULT '',
+    "bank_account_last_four" varchar NULL,
+    "declaration_expenses_were_incurred_wholly_for_work" boolean NOT NULL DEFAULT false,
+    "declaration_no_duplicate_claim" boolean NOT NULL DEFAULT false,
+    "declaration_receipts_attached" boolean NOT NULL DEFAULT false,
+    "declaration_signed_name" varchar NOT NULL DEFAULT '',
+    "declaration_signed_at" timestamp with time zone NULL,
+    "worker_id" uuid NOT NULL,
+    "manager_id" uuid NOT NULL,
+    CONSTRAINT "fk-expense_reimbursements-worker_id-to-workers" FOREIGN KEY ("worker_id") REFERENCES "workers" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-expense_reimbursements-manager_id-to-managers" FOREIGN KEY ("manager_id") REFERENCES "managers" (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+ALTER TABLE expense_reimbursements ALTER COLUMN id SET DEFAULT gen_random_uuid();

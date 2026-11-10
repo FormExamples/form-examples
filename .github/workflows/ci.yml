@@ -120,13 +120,13 @@ jobs:
           python3 bin/protobuf/generate-protobuf-representations.py
           python3 bin/openapi/generate-openapi-representations.py
           python3 bin/openapi/generate-openapi-combined.py
-          python3 bin/back-end-with-loco/generate-back-end-with-loco-setup.py
+          python3 bin/back-end-with-axum/generate-back-end-with-axum-setup.py
 
       - name: Combined OpenAPI spec is current
         run: python3 bin/openapi/generate-openapi-combined.py --check
 
-      - name: Loco setup scripts are current
-        run: python3 bin/back-end-with-loco/generate-back-end-with-loco-setup.py --check
+      - name: Axum setup scripts are current
+        run: python3 bin/back-end-with-axum/generate-back-end-with-axum-setup.py --check
 
       - name: forms.tsv is current
         run: python3 bin/generate-forms-tsv.py --check
@@ -152,11 +152,11 @@ jobs:
       - name: HTML scoring engines load and run headless
         run: bin/test-engines
 
-      - name: Every Loco crate exposes its domain API
-        run: bin/test-loco-routes
+      - name: Every Axum crate exposes its domain API
+        run: bin/test-axum-routes
 
       - name: Back-end AGENTS.md are not stale
-        run: test -z "$(bin/back-end-with-loco/generate-loco-agents.py --list-stale)"
+        run: test -z "$(bin/back-end-with-axum/generate-axum-agents.py --list-stale)"
 
       - name: Authored personas match engine output
         run: bin/test-personas
@@ -173,23 +173,26 @@ jobs:
       # They are a maintainer-run "has upstream changed?" check, not a
       # repo-internal invariant, so they are intentionally not run here.
 
-      - name: Loco background-queue + observability has no drift
-        run: bin/loco-config-refactor --check --all
+      - name: Every Axum crate root forbids unsafe code
+        run: bin/axum-forbid-unsafe --check --all
 
-      - name: Every Loco crate root forbids unsafe code
-        run: bin/loco-forbid-unsafe --check --all
+      - name: Every Axum crate is on axa 0.6 with RFC 9457 errors
+        run: bin/axum-axa-upgrade --check --all
 
-      - name: Loco migrations mirror sql/ column defaults
-        run: bin/loco-migration-defaults --check --all
+      - name: Every Axum crate limits each client and seeds only in development
+        run: bin/axum-axa-adopt --check --all
 
-      - name: Loco migration/entity/controller nullability matches sql/
-        run: bin/loco-migration-nullability --check --all
+      - name: Every Axum crate migrates the CHECK constraints from sql/
+        run: bin/axum-check-constraints --check --all
 
-      - name: No Loco crate is still on loco-rs 0.16
-        run: bin/loco-rs-1-migration --check --all
+      - name: Every SQL table has an HTTP route
+        run: bin/axum-entity-routes --check --all
 
-      - name: Loco deny.toml files are current
-        run: python3 bin/generate-loco-deny-config.py --check
+      - name: Every Axum delete is a soft delete
+        run: bin/axum-soft-delete --check --all
+
+      - name: Axum deny.toml files are current
+        run: python3 bin/generate-axum-deny-config.py --check
 
       - name: HTML front-ends are ES modules
         run: bin/es-modules-refactor --check --all
@@ -255,7 +258,10 @@ jobs:
           from openapi_spec_validator import validate
           from openapi_spec_validator.readers import read_from_filename
           bad = []
+          # openapi/hand/ holds fragments, merged into and validated as combined/.
           for f in sorted(glob.glob("forms/*/openapi/**/*.yaml", recursive=True)):
+              if "/openapi/hand/" in f:
+                  continue
               try:
                   spec, _ = read_from_filename(f)
                   validate(spec)
@@ -286,27 +292,29 @@ jobs:
       postgres:
         image: postgres:18
         env:
-          POSTGRES_USER: loco
-          POSTGRES_PASSWORD: loco
-          POSTGRES_DB: loco
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
         ports:
           - 5432:5432
         options: >-
-          --health-cmd "pg_isready -U loco"
+          --health-cmd "pg_isready -U postgres"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
     env:
       PGHOST: localhost
       PGPORT: '5432'
-      PGUSER: loco
-      PGPASSWORD: loco
+      PGUSER: postgres
+      PGPASSWORD: postgres
     steps:
       - uses: actions/checkout@v7
       - name: Install psql client
         run: sudo apt-get update && sudo apt-get install -y postgresql-client
       - name: Apply every form's migrations to a fresh scratch DB
         run: bin/test-sql-apply
+      - name: Every Axum fixture and test row satisfies the CHECK constraints
+        run: bin/axum-fixture-checks --check --all
 
   fhir:
     name: FHIR R5 validation
@@ -365,23 +373,23 @@ jobs:
       postgres:
         image: postgres:18
         env:
-          POSTGRES_USER: loco
-          POSTGRES_PASSWORD: loco
-          POSTGRES_DB: loco
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
         ports:
           - 5432:5432
         options: >-
-          --health-cmd "pg_isready -U loco"
+          --health-cmd "pg_isready -U postgres"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
     env:
-      # Loco test config reads DATABASE_URL; each crate boots its own DB
+      # Axum test config reads DB_URL; each crate boots its own DB
       # (created per crate below) and auto-migrates on boot_test.
       PGHOST: localhost
       PGPORT: '5432'
-      PGUSER: loco
-      PGPASSWORD: loco
+      PGUSER: postgres
+      PGPASSWORD: postgres
     steps:
       - uses: actions/checkout@v7
       - uses: dtolnay/rust-toolchain@stable
@@ -394,11 +402,11 @@ jobs:
           tool: cargo-deny
       - uses: Swatinem/rust-cache@v2
         with:
-          shared-key: loco-shard-${{ matrix.shard }}
-          workspaces: forms/*/back-end-with-loco
+          shared-key: axum-shard-${{ matrix.shard }}
+          workspaces: forms/*/back-end-with-axum
       # Free the runner's preinstalled Android/.NET/Haskell/CodeQL toolchains
       # (unused by this job, tens of GB): every shard's target/ is wiped per
-      # crate below too, but this heavier build (axum + sea-orm + opentelemetry
+      # crate below too, but this heavier build (axum + sqlx + opentelemetry
       # + tonic per crate, ~44 crates/shard) still fills the default ~14GB
       # free space outright — confirmed by a real CI run, all 8 shards failing
       # identically with the runner's own "No space left on device" (not a
@@ -409,7 +417,7 @@ jobs:
             /opt/hostedtoolcache/CodeQL "$AGENT_TOOLSDIRECTORY" || true
           df -h /
       # Plain cargo (no --locked): lock hygiene is not maintained across all
-      # 347 crates, matching the repo's own bin/test-loco-project.
+      # 347 crates, matching the repo's own bin/test-axum-project.
       - name: check / clippy / deny / test each crate in this shard
         run: |
           fail=0
@@ -419,23 +427,23 @@ jobs:
             if [ "$ALL" != "true" ]; then
               case " $CHANGED " in *" $slug "*) ;; *) continue ;; esac
             fi
-            crate="forms/$slug/back-end-with-loco"
+            crate="forms/$slug/back-end-with-axum"
             [ -f "$crate/Cargo.toml" ] || continue
             snake=$(printf '%s' "$slug" | tr '-' '_')
             db="${snake}_test"
             echo "::group::$slug"
             createdb "$db" 2>/dev/null || true
             ( cd "$crate" \
-              && DATABASE_URL="postgres://loco:loco@localhost:5432/$db" \
+              && DB_URL="postgres://postgres:postgres@localhost:5432/$db" \
                  cargo check --all-targets \
-              && DATABASE_URL="postgres://loco:loco@localhost:5432/$db" \
+              && DB_URL="postgres://postgres:postgres@localhost:5432/$db" \
                  cargo clippy --all-targets -- -D warnings \
               && cargo deny --all-features check \
-              && DATABASE_URL="postgres://loco:loco@localhost:5432/$db" \
+              && DB_URL="postgres://postgres:postgres@localhost:5432/$db" \
                  cargo test ) || { echo "::error::$slug failed"; fail=1; }
             dropdb --if-exists "$db" 2>/dev/null || true
             # Each crate builds its own independent target/ (no shared
-            # workspace across the ~44 crates in a shard); axum + sea-orm +
+            # workspace across the ~44 crates in a shard); axum + sqlx +
             # opentelemetry + tonic make a single crate's debug build several
             # hundred MB to low GB, which fills the runner's disk well before
             # the shard finishes if left to accumulate. Wipe it now that this
@@ -460,7 +468,7 @@ jobs:
   # test): the MSRV question is "does this compile", which the spec says is
   # sufficient and fast.
   msrv:
-    name: MSRV 1.96 (shard ${{ matrix.shard }}/8)
+    name: MSRV 1.97 (shard ${{ matrix.shard }}/8)
     runs-on: ubuntu-latest
     if: github.event_name != 'schedule' || github.event.schedule != '17 5 * * 1'
     needs: [changes]
@@ -470,18 +478,18 @@ jobs:
         shard: [0, 1, 2, 3, 4, 5, 6, 7]
     steps:
       - uses: actions/checkout@v7
-      - uses: dtolnay/rust-toolchain@1.96
+      - uses: dtolnay/rust-toolchain@1.97
       - uses: Swatinem/rust-cache@v2
         with:
           shared-key: msrv-shard-${{ matrix.shard }}
-          workspaces: forms/*/back-end-with-loco
+          workspaces: forms/*/back-end-with-axum
       # Same disk-exhaustion risk as the `rust` job above (~44 independent
       # crates/shard, no shared workspace) — same two mitigations up front.
       - name: Free runner disk space
         run: |
           sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc \
             /opt/hostedtoolcache/CodeQL "$AGENT_TOOLSDIRECTORY" || true
-      - name: cargo +1.96 check --all-targets --workspace, each crate in this shard
+      - name: cargo +1.97 check --all-targets --workspace, each crate in this shard
         run: |
           fail=0
           CHANGED="${{ needs.changes.outputs.forms }}"
@@ -490,7 +498,7 @@ jobs:
             if [ "$ALL" != "true" ]; then
               case " $CHANGED " in *" $slug "*) ;; *) continue ;; esac
             fi
-            crate="forms/$slug/back-end-with-loco"
+            crate="forms/$slug/back-end-with-axum"
             [ -f "$crate/Cargo.toml" ] || continue
             echo "::group::$slug"
             ( cd "$crate" && cargo check --all-targets --workspace ) \
@@ -562,7 +570,7 @@ jobs:
         run: |
           fail=0
           for slug in $(bin/forms-as-kebab-case); do
-            crate="forms/$slug/back-end-with-loco"
+            crate="forms/$slug/back-end-with-axum"
             [ -f "$crate/Cargo.lock" ] || continue
             ( cd "$crate" && cargo deny --all-features check advisories -s ) \
               || { echo "::error::$slug has advisory findings"; fail=1; }

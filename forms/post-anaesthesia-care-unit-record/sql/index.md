@@ -22,5 +22,5 @@ total 0-10, >= 9 = street-fit) covers day-surgery discharge home.
 | 06 | `06_create_table_post_anaesthesia_care_unit_record_grade_rule.sql` | `post_anaesthesia_care_unit_record_grade_rule` | audit trail of fired grading rules |
 | 07 | `07_create_table_post_anaesthesia_care_unit_record_grade_flag.sql` | `post_anaesthesia_care_unit_record_grade_flag` | red-flag issues with priority and suggested action |
 
-Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Loco
+Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Axum
 setup script) are derived from these migrations and are never hand-edited.

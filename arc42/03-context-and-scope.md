@@ -47,10 +47,10 @@ interfaces" are the file/format contracts each form satisfies.
 | Health interoperability | **FHIR HL7 R5** JSON per entity; FHIR R5 Bundle sample | export / exchange |
 | Wire schema | **Protocol Buffers** `.proto` per entity | export |
 | API description | **OpenAPI 3.1** YAML per entity | contract |
-| Runtime API | JSON over HTTP (axum + Loco), canonical `/api/assessments` | request/response |
+| Runtime API | JSON over HTTP (axum + axa + sqlx), canonical `/api/assessments` | request/response |
 | Draft persistence | Browser LocalStorage (`<slug>.front-end-with-{html,svelte}.v1`) | client-side |
 | Tabular import/export | JSON, XML, CSV, TSV | import / export |
-| Observability | OpenTelemetry OTLP; Prometheus `/metrics` | export (back-end) |
+| Observability | Structured logs; `/_health/live`; `/_health/ready`; `/_health/startup` | read (back-end) |
 
 ## 3.3 Scope
 

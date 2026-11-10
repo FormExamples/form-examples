@@ -1,0 +1,33 @@
+CREATE TABLE IF NOT EXISTS "holter_monitor_test_requests" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "status" varchar NOT NULL DEFAULT 'draft',
+    "site_name" varchar NOT NULL DEFAULT '',
+    "setting" varchar NOT NULL DEFAULT '',
+    "referral_date" date NULL,
+    "requested_by_date" date NULL,
+    "monitor_type" varchar NOT NULL DEFAULT '',
+    "primary_indication" varchar NOT NULL DEFAULT '',
+    "clinical_question" varchar NOT NULL DEFAULT '',
+    "relevant_history" varchar NOT NULL DEFAULT '',
+    "symptom_palpitations" boolean NOT NULL DEFAULT false,
+    "symptom_syncope" boolean NOT NULL DEFAULT false,
+    "symptom_presyncope" boolean NOT NULL DEFAULT false,
+    "symptom_breathlessness" boolean NOT NULL DEFAULT false,
+    "symptom_frequency" varchar NOT NULL DEFAULT '',
+    "known_arrhythmia" varchar NOT NULL DEFAULT '',
+    "recent_stroke_tia" boolean NOT NULL DEFAULT false,
+    "relevant_medications" varchar NOT NULL DEFAULT '',
+    "urgency" varchar NOT NULL DEFAULT 'routine',
+    "supervising_consultant" varchar NOT NULL DEFAULT '',
+    "requester_contact" varchar NOT NULL DEFAULT '',
+    "notes" varchar NOT NULL DEFAULT '',
+    "patient_id" uuid NOT NULL,
+    "clinician_id" uuid NOT NULL,
+    CONSTRAINT "fk-holter_monitor_test_requests-patient_id-to-patients" FOREIGN KEY ("patient_id") REFERENCES "patients" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-holter_monitor_test_requests-clinician_id-to-clinicians" FOREIGN KEY ("clinician_id") REFERENCES "clinicians" (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+ALTER TABLE holter_monitor_test_requests ALTER COLUMN id SET DEFAULT gen_random_uuid();

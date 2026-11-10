@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE expense_reimbursement SYSTEM "expense_reimbursement.dtd">
+<expense_reimbursement>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<worker_id>550e8400-e29b-41d4-a716-446655440000</worker_id>
+<manager_id>660e8400-e29b-41d4-a716-446655440001</manager_id>
+<status>draft</status>
+<claim_date>2026-01-15</claim_date>
+<claim_period_start_date>2026-01-15</claim_period_start_date>
+<claim_period_end_date>2026-01-15</claim_period_end_date>
+<claim_title>Example Title</claim_title>
+<business_purpose></business_purpose>
+<project_or_cost_code>ABC123</project_or_cost_code>
+<currency_as_iso_4217></currency_as_iso_4217>
+<total_amount>0.0</total_amount>
+<total_vat_amount>0.0</total_vat_amount>
+<advance_already_received_amount>0.0</advance_already_received_amount>
+<amount_to_repay>0.0</amount_to_repay>
+<repayment_method>payroll</repayment_method>
+<bank_account_name>Example</bank_account_name>
+<bank_account_last_four></bank_account_last_four>
+<declaration_expenses_were_incurred_wholly_for_work>true</declaration_expenses_were_incurred_wholly_for_work>
+<declaration_no_duplicate_claim>true</declaration_no_duplicate_claim>
+<declaration_receipts_attached>true</declaration_receipts_attached>
+<declaration_signed_name>Example</declaration_signed_name>
+<declaration_signed_at>2026-04-09T10:00:00Z</declaration_signed_at>
+</expense_reimbursement>

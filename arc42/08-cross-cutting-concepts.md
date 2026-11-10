@@ -21,7 +21,8 @@ Repo-wide conventions applied to every table:
 
 - **UUIDv4 primary keys** via `gen_random_uuid()`.
 - **Timestamp trio** on every table: `created_at`, `updated_at`, `deleted_at`
-  (soft delete), with a `set_updated_at()` trigger.
+  (soft delete: `DELETE` marks the row and its cascading children, and the API
+  hides marked rows), with a `set_updated_at()` trigger.
 - **Empty-value sentinels:** `''` for unanswered text and enum fields (the
   `CHECK (x IN ('', …))` list includes the empty sentinel); `null` for
   unanswered numeric, date, and time fields — so an in-progress draft never
@@ -50,7 +51,7 @@ and `bin/lily-svelte-sync`.
 ## 8.3 The generator pipeline and drift gates
 
 SQL is the source of truth; Python generators project it to XML/DTD, FHIR R5
-JSON, Protocol Buffers, OpenAPI 3.1, and the Loco scaffold script (see
+JSON, Protocol Buffers, OpenAPI 3.1, and the Axum scaffold script (see
 [§4.2](04-solution-strategy.md), [§6.3](06-runtime-view.md)). Generators are
 **deterministic and idempotent**: correct regeneration yields zero diff. Every
 generator and mechanical refactor exposes a `--check` mode used as a CI **drift

@@ -3,11 +3,10 @@
 
 For each form's sql/ directory, parses CREATE TABLE statements
 plus COMMENT ON TABLE / COMMENT ON COLUMN, and writes one .yaml file per
-top-level SQL entity into openapi/.
+SQL table into openapi/.
 
 Conventions documented in AGENTS/openapi.md:
-  - One .yaml per top-level table; assessment_<section> children fold
-    into a single assessment.yaml (mirrors FHIR R5, XML, protobuf).
+  - One .yaml per table, because each table has its own routes.
   - openapi: 3.1.0
   - info.title = "<Form Slug Titlecased> — <Resource>"
   - info.description = COMMENT ON TABLE (or the table name if absent)
@@ -23,7 +22,6 @@ from pathlib import Path
 
 FORMS_DIR = Path(__file__).resolve().parent.parent.parent / "forms"
 
-CHILD_SKIP_COLUMNS = {"id", "assessment_id", "created_at", "updated_at"}
 
 
 def parse_create_table(sql_text):
@@ -139,61 +137,6 @@ def parse_comments(sql_text):
     return table_comments, column_comments
 
 
-def merge_assessment_tables(tables, column_comments):
-    """Fold every `assessment_<section>` child into the `assessment`
-    parent so we emit a single assessment.yaml per form. Mirrors the
-    fhir-r5/protobuf folding rule. Also rewrites column_comments for
-    section-prefixed columns that collide with the parent."""
-    parent_idx = None
-    children = []
-    keep_indices = []
-
-    for i, (name, cols) in enumerate(tables):
-        if name == "assessment":
-            parent_idx = i
-            keep_indices.append(i)
-        elif name.startswith("assessment_"):
-            section = name[len("assessment_"):]
-            children.append((name, section, cols))
-        else:
-            keep_indices.append(i)
-
-    if parent_idx is None or not children:
-        return list(tables), column_comments
-
-    parent_name, parent_cols = tables[parent_idx]
-    merged_cols = list(parent_cols)
-    taken = {c["name"] for c in merged_cols}
-
-    new_col_comments = dict(column_comments)
-
-    for child_table, section, child_cols in children:
-        for col in child_cols:
-            if col["name"] in CHILD_SKIP_COLUMNS:
-                continue
-            new_col = dict(col)
-            new_name = col["name"]
-            if new_name in taken:
-                new_name = f"{section}_{col['name']}"
-                new_col["name"] = new_name
-            merged_cols.append(new_col)
-            taken.add(new_name)
-
-            # Carry the child's COMMENT under the (parent, possibly-renamed) key.
-            src = (child_table, col["name"])
-            if src in column_comments:
-                new_col_comments[("assessment", new_name)] = column_comments[src]
-
-    out = []
-    for i in keep_indices:
-        name, cols = tables[i]
-        if i == parent_idx:
-            out.append((name, merged_cols))
-        else:
-            out.append((name, cols))
-    return out, new_col_comments
-
-
 def snake_to_pascal(name):
     return ''.join(part.capitalize() for part in name.split('_') if part)
 
@@ -203,21 +146,22 @@ def slug_title(slug):
     return ' '.join(part.capitalize() for part in slug.split('-') if part)
 
 
-def pluralize_kebab(snake_name):
-    """SQL snake_case table name → kebab-case URL plural.
+def pluralize_route(snake_name):
+    """SQL snake_case table name → the plural a form's back-end routes it under.
 
-    Rules (empirically derived from existing yamls):
+    Rules (read from the crates' controllers):
       consonant + 'y' → drop 'y', add 'ies'
-      ends in s/x/z/ch/sh → add 'es'
+      ends in ss/x/z/ch/sh → add 'es'
+      ends in any other s → unchanged
       otherwise → add 's'
     """
-    kebab = snake_name.replace('_', '-')
-    if len(kebab) >= 2 and kebab[-1] == 'y' and kebab[-2] not in 'aeiou':
-        return kebab[:-1] + 'ies'
-    last2 = kebab[-2:]
-    if kebab[-1] in 'sxz' or last2 in ('ch', 'sh'):
-        return kebab + 'es'
-    return kebab + 's'
+    if len(snake_name) >= 2 and snake_name[-1] == 'y' and snake_name[-2] not in 'aeiou':
+        return snake_name[:-1] + 'ies'
+    if snake_name.endswith(('ss', 'x', 'z', 'ch', 'sh')):
+        return snake_name + 'es'
+    if snake_name.endswith('s'):
+        return snake_name
+    return snake_name + 's'
 
 
 # ---------------------------------------------------------------------------
@@ -273,8 +217,10 @@ def sql_to_openapi(col):
     if 'BYTEA' in t or 'BLOB' in t:
         return [('type', 'string'), ('format', 'byte')]
 
-    # JSON
+    # JSON: an array when sql/ defaults it to one, otherwise an object.
     if 'JSON' in t:
+        if re.search(r"DEFAULT\s+'\[", col['definition'], re.I):
+            return [('type', 'array')]
         return [('type', 'object')]
 
     # CHAR(n) / VARCHAR(n) — carry maxLength
@@ -363,10 +309,13 @@ def emit_property(lines, indent, col, col_description):
     lines.append(f"{pad}{key}:")
 
     inner = ' ' * (indent + 2)
+    # A nullable column is sent as null when it holds nothing, so its type
+    # admits null (OpenAPI 3.1 is JSON Schema: a type list, and null in an enum).
+    nullable = not col['not_null'] and name != 'id'
 
     # CHECK enum overrides regular type mapping — but type is still emitted.
     if col['check_values']:
-        lines.append(f"{inner}type: string")
+        lines.append(f"{inner}type: [string, 'null']" if nullable else f"{inner}type: string")
         lines.append(f"{inner}enum:")
         seen = set()
         ordered = []
@@ -377,21 +326,85 @@ def emit_property(lines, indent, col, col_description):
             ordered.append(v)
         for v in ordered:
             lines.append(f"{inner}  - {yaml_enum_value(v)}")
+        if nullable:
+            lines.append(f"{inner}  - null")
     else:
         type_pairs = sql_to_openapi(col)
         for k, v in type_pairs:
+            if k == 'type' and nullable:
+                v = f"[{v}, 'null']"
             lines.append(f"{inner}{k}: {v}")
 
     if col_description:
         lines.append(f"{inner}description: {yaml_quote(col_description)}")
 
 
+def problem_response(L, code, description):
+    """An error response, which every form's back-end answers as RFC 9457."""
+    L.append(f'        "{code}":')
+    L.append(f"          description: {description}")
+    L.append("          content:")
+    L.append("            application/problem+json:")
+    L.append("              schema:")
+    L.append('                $ref: "#/components/schemas/Problem"')
+
+
+def too_many_requests(L):
+    """The `429` that every route can answer, past the per-client rate limit."""
+    L.append('        "429":')
+    L.append("          description: This client sent too many requests")
+    L.append("          headers:")
+    L.append("            retry-after:")
+    L.append("              description: Seconds to wait before sending again")
+    L.append("              schema:")
+    L.append("                type: integer")
+    L.append("          content:")
+    L.append("            application/problem+json:")
+    L.append("              schema:")
+    L.append('                $ref: "#/components/schemas/Problem"')
+
+
+def emit_problem_schema(L):
+    """The RFC 9457 problem object, as `axa` writes it."""
+    L.append("    Problem:")
+    L.append("      type: object")
+    L.append("      description: RFC 9457 problem details")
+    L.append("      properties:")
+    L.append("        type:")
+    L.append("          type: string")
+    L.append("          description: A URI identifying the problem type")
+    L.append("        title:")
+    L.append("          type: string")
+    L.append("          description: A short summary of the problem type")
+    L.append("        status:")
+    L.append("          type: integer")
+    L.append("          description: The HTTP status code")
+    L.append("        detail:")
+    L.append("          type: string")
+    L.append("          description: An explanation of this occurrence")
+    L.append("        instance:")
+    L.append("          type: string")
+    L.append("          description: A URI identifying this occurrence")
+    L.append("        code:")
+    L.append("          type: string")
+    L.append("          description: A short machine-readable reason")
+    L.append("        errors:")
+    L.append("          type: object")
+    L.append("          description: Per-field detail, when validation failed")
+    L.append("      required:")
+    L.append("        - type")
+    L.append("        - title")
+    L.append("        - status")
+
+
 def build_yaml(table_name, columns, form_slug, source_table_names,
                table_comment, column_comments):
     """Render a single OpenAPI 3.1 yaml document."""
+    # deleted_at is server state: no request sets it and no response carries it.
+    columns = [c for c in columns if c['name'] != 'deleted_at']
     resource = snake_to_pascal(table_name)
     title = f"{slug_title(form_slug)} — {resource}"
-    plural = pluralize_kebab(table_name)
+    plural = pluralize_route(table_name)
     if table_comment:
         info_description = table_comment
         schema_description = table_comment
@@ -411,7 +424,7 @@ def build_yaml(table_name, columns, form_slug, source_table_names,
     L.append("  version: 1.0.0")
     L.append(f"  description: {yaml_quote(info_description)}")
     L.append("paths:")
-    L.append(f"  /{plural}:")
+    L.append(f"  /api/{plural}:")
     L.append("    get:")
     L.append(f"      summary: List {resource} records")
     L.append(f"      operationId: list{resource}")
@@ -424,22 +437,29 @@ def build_yaml(table_name, columns, form_slug, source_table_names,
     L.append("            maximum: 1000")
     L.append("            default: 100")
     L.append("          required: false")
-    L.append("        - name: offset")
+    L.append("          description: Rows on a page. A larger limit is refused, not clamped")
+    L.append("        - name: cursor")
     L.append("          in: query")
     L.append("          schema:")
-    L.append("            type: integer")
-    L.append("            minimum: 0")
-    L.append("            default: 0")
+    L.append("            type: string")
     L.append("          required: false")
+    L.append("          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters")
     L.append("      responses:")
     L.append('        "200":')
-    L.append(f"          description: A page of {resource} records")
+    L.append(f"          description: A page of {resource} records, with no total")
+    L.append("          headers:")
+    L.append("            link:")
+    L.append('              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page')
+    L.append("              schema:")
+    L.append("                type: string")
     L.append("          content:")
     L.append("            application/json:")
     L.append("              schema:")
     L.append("                type: array")
     L.append("                items:")
     L.append(f'                  $ref: "#/components/schemas/{resource}"')
+    problem_response(L, "422", "The limit or the cursor is not valid")
+    too_many_requests(L)
     L.append("    post:")
     L.append(f"      summary: Create a new {resource}")
     L.append(f"      operationId: create{resource}")
@@ -450,15 +470,17 @@ def build_yaml(table_name, columns, form_slug, source_table_names,
     L.append("            schema:")
     L.append(f'              $ref: "#/components/schemas/{resource}"')
     L.append("      responses:")
-    L.append('        "201":')
+    L.append('        "200":')
     L.append(f"          description: The newly created {resource}")
     L.append("          content:")
     L.append("            application/json:")
     L.append("              schema:")
     L.append(f'                $ref: "#/components/schemas/{resource}"')
-    L.append('        "400":')
-    L.append("          description: Validation error")
-    L.append(f"  /{plural}/{{id}}:")
+    problem_response(L, "400", "The request was refused")
+    problem_response(L, "409", "It duplicates a row, or refers to a missing one")
+    problem_response(L, "422", "The body does not match the schema, or a value is outside what its field allows")
+    too_many_requests(L)
+    L.append(f"  /api/{plural}/{{id}}:")
     L.append("    parameters:")
     L.append("      - name: id")
     L.append("        in: path")
@@ -476,8 +498,8 @@ def build_yaml(table_name, columns, form_slug, source_table_names,
     L.append("            application/json:")
     L.append("              schema:")
     L.append(f'                $ref: "#/components/schemas/{resource}"')
-    L.append('        "404":')
-    L.append(f"          description: {resource} not found")
+    problem_response(L, "404", f"{resource} not found")
+    too_many_requests(L)
     L.append("    patch:")
     L.append(f"      summary: Update an existing {resource}")
     L.append(f"      operationId: update{resource}")
@@ -494,18 +516,41 @@ def build_yaml(table_name, columns, form_slug, source_table_names,
     L.append("            application/json:")
     L.append("              schema:")
     L.append(f'                $ref: "#/components/schemas/{resource}"')
-    L.append('        "404":')
-    L.append(f"          description: {resource} not found")
+    problem_response(L, "404", f"{resource} not found")
+    problem_response(L, "409", "It duplicates a row, or refers to a missing one")
+    problem_response(L, "422", "The body does not match the schema, or a value is outside what its field allows")
+    too_many_requests(L)
+    L.append("    put:")
+    L.append(f"      summary: Replace an existing {resource}")
+    L.append(f"      operationId: replace{resource}")
+    L.append("      requestBody:")
+    L.append("        required: true")
+    L.append("        content:")
+    L.append("          application/json:")
+    L.append("            schema:")
+    L.append(f'              $ref: "#/components/schemas/{resource}"')
+    L.append("      responses:")
+    L.append('        "200":')
+    L.append(f"          description: The updated {resource}")
+    L.append("          content:")
+    L.append("            application/json:")
+    L.append("              schema:")
+    L.append(f'                $ref: "#/components/schemas/{resource}"')
+    problem_response(L, "404", f"{resource} not found")
+    problem_response(L, "409", "It duplicates a row, or refers to a missing one")
+    problem_response(L, "422", "The body does not match the schema, or a value is outside what its field allows")
+    too_many_requests(L)
     L.append("    delete:")
-    L.append(f"      summary: Soft-delete a {resource}")
+    L.append(f"      summary: Delete a {resource}")
     L.append(f"      operationId: delete{resource}")
     L.append("      responses:")
-    L.append('        "204":')
+    L.append('        "200":')
     L.append(f"          description: {resource} deleted")
-    L.append('        "404":')
-    L.append(f"          description: {resource} not found")
+    problem_response(L, "404", f"{resource} not found")
+    too_many_requests(L)
     L.append("components:")
     L.append("  schemas:")
+    emit_problem_schema(L)
     L.append(f"    {resource}:")
     L.append("      type: object")
     L.append("      properties:")
@@ -554,12 +599,6 @@ def process_form(form_dir):
     table_comments, column_comments = parse_comments(all_sql)
 
     source_for = {name: [name] for name, _ in all_tables}
-    if any(n == "assessment" for n, _ in all_tables):
-        for n, _ in all_tables:
-            if n.startswith("assessment_"):
-                source_for["assessment"].append(n)
-
-    all_tables, column_comments = merge_assessment_tables(all_tables, column_comments)
     expected_files = {f"{t[0]}.yaml" for t in all_tables}
 
     openapi_dir.mkdir(exist_ok=True)

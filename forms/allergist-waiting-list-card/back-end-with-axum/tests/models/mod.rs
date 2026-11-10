@@ -1,0 +1,7 @@
+mod allergist_waiting_list_card_appointments;
+mod allergist_waiting_list_card_grade_flags;
+mod allergist_waiting_list_card_grade_rules;
+mod allergist_waiting_list_card_grades;
+mod allergist_waiting_list_cards;
+mod patients;
+mod practitioners;

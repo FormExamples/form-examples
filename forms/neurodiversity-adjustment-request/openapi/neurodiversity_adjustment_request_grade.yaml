@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed four-axis grade for a neurodiversity reasonable-adjustments request: Equality Act 2010 eligibility, impact / wellbeing risk, request completeness, and handling priority. Being neurodivergent will often amount to a disability under the Equality Act 2010; a substantial and long-term adverse effect drives the eligibility axis, and a worker at risk of absence / burnout auto-escalates the impact and priority axes."
 paths:
-  /neurodiversity-adjustment-request-grades:
+  /api/neurodiversity_adjustment_request_grades:
     get:
       summary: List NeurodiversityAdjustmentRequestGrade records
       operationId: listNeurodiversityAdjustmentRequestGrade
@@ -19,22 +19,44 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of NeurodiversityAdjustmentRequestGrade records
+          description: A page of NeurodiversityAdjustmentRequestGrade records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/NeurodiversityAdjustmentRequestGrade"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new NeurodiversityAdjustmentRequestGrade
       operationId: createNeurodiversityAdjustmentRequestGrade
@@ -45,15 +67,42 @@ paths:
             schema:
               $ref: "#/components/schemas/NeurodiversityAdjustmentRequestGrade"
       responses:
-        "201":
+        "200":
           description: The newly created NeurodiversityAdjustmentRequestGrade
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/NeurodiversityAdjustmentRequestGrade"
         "400":
-          description: Validation error
-  /neurodiversity-adjustment-request-grades/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/neurodiversity_adjustment_request_grades/{id}:
     parameters:
       - name: id
         in: path
@@ -73,6 +122,21 @@ paths:
                 $ref: "#/components/schemas/NeurodiversityAdjustmentRequestGrade"
         "404":
           description: NeurodiversityAdjustmentRequestGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing NeurodiversityAdjustmentRequestGrade
       operationId: updateNeurodiversityAdjustmentRequestGrade
@@ -91,16 +155,132 @@ paths:
                 $ref: "#/components/schemas/NeurodiversityAdjustmentRequestGrade"
         "404":
           description: NeurodiversityAdjustmentRequestGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing NeurodiversityAdjustmentRequestGrade
+      operationId: replaceNeurodiversityAdjustmentRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NeurodiversityAdjustmentRequestGrade"
+      responses:
+        "200":
+          description: The updated NeurodiversityAdjustmentRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NeurodiversityAdjustmentRequestGrade"
+        "404":
+          description: NeurodiversityAdjustmentRequestGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
-      summary: Soft-delete a NeurodiversityAdjustmentRequestGrade
+      summary: Delete a NeurodiversityAdjustmentRequestGrade
       operationId: deleteNeurodiversityAdjustmentRequestGrade
       responses:
-        "204":
+        "200":
           description: NeurodiversityAdjustmentRequestGrade deleted
         "404":
           description: NeurodiversityAdjustmentRequestGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
 components:
   schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
     NeurodiversityAdjustmentRequestGrade:
       type: object
       properties:
@@ -116,10 +296,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         neurodiversity_adjustment_request_id:
           type: string
           format: uuid
@@ -141,7 +317,7 @@ components:
             - ""
           description: "Axis B impact / wellbeing risk band: ok, caution, high-risk."
         completeness_percent:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Axis C request completeness as a percentage of mandatory fields (0-100).
         priority_tier:
@@ -154,7 +330,7 @@ components:
           description: "Axis D handling priority: routine, soon, urgent."
         target_timeframe:
           type: string
-          maxLength: 50
+          maxLength: 100
           description: Target timeframe for the employer to respond, implied by the priority tier (the Equality Act duty is to act without unreasonable delay).
         recommendation:
           type: string
@@ -169,7 +345,7 @@ components:
           type: string
           description: Free-text triage / sign-off notes from the manager or HR contact.
         signed_at:
-          type: string
+          type: [string, 'null']
           format: date-time
           description: Timestamp of the manager / HR electronic signature.
         graded_at:

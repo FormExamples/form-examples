@@ -58,7 +58,7 @@ in a formal Hazard Log before this list can be treated as a safety artefact.
 
 The form is client-side by default: the HTML front-end persists only to
 LocalStorage on the user's own device, and nothing is transmitted unless a
-back-end is configured. A deployment that enables the Loco back-end processes
+back-end is configured. A deployment that enables the Axum back-end processes
 special-category health data and needs a Data Protection Impact Assessment, a
 lawful basis under UK GDPR Article 6 and Article 9, and a retention schedule.
 

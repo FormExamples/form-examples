@@ -20,16 +20,16 @@ Implementation-facing companion to `medical-device-assessment-skill` (this form'
 | `openapi` | generated |
 | `front-end-with-html` | HTML + Lily (wizard + dashboard) |
 | `front-end-with-svelte` | SvelteKit (wizard + dashboard) |
-| `back-end-with-loco` | Rust + Loco JSON API |
+| `back-end-with-axum` | Rust + Axum JSON API |
 
-Generated artefacts (`xml`, `fhir`, `protobuf`, `openapi`, the Loco setup script, `CHANGELOG.md`, `examples/assessment.json`) are never hand-edited — regenerate them instead; see the tool catalogue in [`/AGENTS.md`](../../../../AGENTS.md).
+Generated artefacts (`xml`, `fhir`, `protobuf`, `openapi`, the Axum setup script, `CHANGELOG.md`, `examples/assessment.json`) are never hand-edited — regenerate them instead; see the tool catalogue in [`/AGENTS.md`](../../../../AGENTS.md).
 
 ## Scoring engine
 
 Pure function: assessment state in, `{ computedClass, classSuffix,
 conformityRoute, firedRules, flags, readiness }` out. Highest class over all
 fired rules wins. Rule table is in `index.md`. Never hand-edit generated
-artefacts (`xml/`, `fhir/`, `protobuf/`, `openapi/`, `back-end-with-loco-setup`).
+artefacts (`xml/`, `fhir/`, `protobuf/`, `openapi/`, `back-end-with-axum-setup`).
 
 ## Verify
 

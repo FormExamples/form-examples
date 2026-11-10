@@ -3,7 +3,7 @@
 ## Current status
 
 Foundation build. SQL schema (source of truth) and per-form documentation are in
-place; generated derivatives follow. Front-ends and the Loco back-end crate are
+place; generated derivatives follow. Front-ends and the Axum back-end crate are
 deferred to a later pass, consistent with the request/response form family.
 
 ## Why this form exists
@@ -39,10 +39,10 @@ It is the **request** half of the pair with
 1. [x] SQL migrations (worker, manager, request, grade, grade_rule, grade_flag)
 2. [x] index.md / AGENTS.md / plan.md / tasks.md
 3. [ ] Generated representations (XML, FHIR R5, protobuf, OpenAPI)
-4. [ ] Loco setup script, examples, spec, CHANGELOG.md
+4. [ ] Axum setup script, examples, spec, CHANGELOG.md
 5. [ ] front-end-with-html (consolidated HTML wizard + dashboard + JS four-axis engine)
 6. [ ] front-end-with-svelte (consolidated SvelteKit wizard + dashboard + TS engine)
-7. [ ] back-end-with-loco (Rust JSON API crate)
+7. [ ] back-end-with-axum (Rust JSON API crate)
 
 ## Future enhancements
 

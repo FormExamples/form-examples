@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-00000003d342"
+  deletedAt: null
+  mecCategoryCoc: "1"
+  mecCategoryPop: "1"
+  mecCategoryImplant: "1"
+  mecCategoryInjection: "1"
+  mecCategoryIud: "1"
+  mecCategoryIus: "1"
+  overallRiskLevel: "low"
+  gradedAt: "2026-01-01T00:00:00Z"
+  assessmentId: "00000000-0000-4000-8000-000000056711"

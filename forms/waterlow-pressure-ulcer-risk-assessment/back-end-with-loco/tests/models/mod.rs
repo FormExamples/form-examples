@@ -1,8 +1,0 @@
-mod users;
-
-mod patients;
-mod clinicians;
-mod waterlow_pressure_ulcer_risk_assessments;
-mod waterlow_pressure_ulcer_risk_assessment_grades;
-mod waterlow_pressure_ulcer_risk_assessment_grade_rules;
-mod waterlow_pressure_ulcer_risk_assessment_grade_flags;

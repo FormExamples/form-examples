@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main CURB-65 pneumonia severity assessment record: assessment context, patient identification, the five scored criterion inputs (confusion, urea, respiratory rate, blood pressure, age), advisory adjuncts, and the clinician disposition override."
 paths:
-  /curb-65-pneumonia-severity-scores:
+  /api/curb_65_pneumonia_severity_scores:
     get:
       summary: List Curb65PneumoniaSeverityScore records
       operationId: listCurb65PneumoniaSeverityScore
@@ -19,22 +19,44 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of Curb65PneumoniaSeverityScore records
+          description: A page of Curb65PneumoniaSeverityScore records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/Curb65PneumoniaSeverityScore"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Curb65PneumoniaSeverityScore
       operationId: createCurb65PneumoniaSeverityScore
@@ -45,15 +67,42 @@ paths:
             schema:
               $ref: "#/components/schemas/Curb65PneumoniaSeverityScore"
       responses:
-        "201":
+        "200":
           description: The newly created Curb65PneumoniaSeverityScore
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Curb65PneumoniaSeverityScore"
         "400":
-          description: Validation error
-  /curb-65-pneumonia-severity-scores/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/curb_65_pneumonia_severity_scores/{id}:
     parameters:
       - name: id
         in: path
@@ -73,6 +122,21 @@ paths:
                 $ref: "#/components/schemas/Curb65PneumoniaSeverityScore"
         "404":
           description: Curb65PneumoniaSeverityScore not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Curb65PneumoniaSeverityScore
       operationId: updateCurb65PneumoniaSeverityScore
@@ -91,16 +155,132 @@ paths:
                 $ref: "#/components/schemas/Curb65PneumoniaSeverityScore"
         "404":
           description: Curb65PneumoniaSeverityScore not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing Curb65PneumoniaSeverityScore
+      operationId: replaceCurb65PneumoniaSeverityScore
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Curb65PneumoniaSeverityScore"
+      responses:
+        "200":
+          description: The updated Curb65PneumoniaSeverityScore
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Curb65PneumoniaSeverityScore"
+        "404":
+          description: Curb65PneumoniaSeverityScore not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
-      summary: Soft-delete a Curb65PneumoniaSeverityScore
+      summary: Delete a Curb65PneumoniaSeverityScore
       operationId: deleteCurb65PneumoniaSeverityScore
       responses:
-        "204":
+        "200":
           description: Curb65PneumoniaSeverityScore deleted
         "404":
           description: Curb65PneumoniaSeverityScore not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
 components:
   schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
     Curb65PneumoniaSeverityScore:
       type: object
       properties:
@@ -116,16 +296,12 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         patient_id:
           type: string
           format: uuid
           description: Foreign key to the patient being assessed (delete restricted).
         clinician_id:
-          type: string
+          type: [string, 'null']
           format: uuid
           description: Foreign key to the assessing clinician (optional; delete restricted).
         clinician_name:
@@ -145,7 +321,7 @@ components:
             - ""
           description: "Role of the assessing clinician: physician, general-practitioner, advanced-nurse-practitioner, nurse, paramedic, pharmacist, or other."
         assessed_at:
-          type: string
+          type: [string, 'null']
           format: date-time
           description: Date and time the assessment was performed.
         care_setting:
@@ -173,7 +349,7 @@ components:
             - ""
           description: "Patient sex recorded for the assessment: female, male, intersex, or unknown."
         age_years:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Criterion A65 — patient age in years, derived from date of birth and confirmed at assessment; scores 1 when >= 65.
         confusion_present:
@@ -184,7 +360,7 @@ components:
             - ""
           description: "Criterion C — whether new-onset confusion is present: yes, no, or unanswered."
         amt_score:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Supporting evidence for confusion — Abbreviated Mental Test score (0-10); not scored directly.
         urea_measured:
@@ -195,27 +371,27 @@ components:
             - ""
           description: Whether serum urea was measured; when no, the four-criterion CRB-65 fallback is computed instead of CURB-65.
         urea_mmol_l:
-          type: number
+          type: [number, 'null']
           format: double
           description: Criterion U — serum urea in millimoles per litre (mmol/L); scores 1 when > 7.
         respiratory_rate:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Criterion R — respiratory rate in breaths per minute; scores 1 when >= 30.
         systolic_bp:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Criterion B — systolic blood pressure in mmHg; scores 1 when < 90 (or diastolic <= 60).
         diastolic_bp:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Criterion B — diastolic blood pressure in mmHg; scores 1 when <= 60 (or systolic < 90).
         oxygen_saturation:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Advisory adjunct — peripheral oxygen saturation (SpO2) as a percentage; not scored, raises the hypoxia flag when < 92.
         temperature_c:
-          type: number
+          type: [number, 'null']
           format: double
           description: Advisory adjunct — body temperature in degrees Celsius; not scored.
         significant_comorbidity:

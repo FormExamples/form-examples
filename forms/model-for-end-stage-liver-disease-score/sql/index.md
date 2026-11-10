@@ -27,5 +27,5 @@ correction, the MELD 3.0 sex-and-albumin variant, a 6-40 clamp, and a mapped
 3-month mortality band. The calculation lives in the front-end and back-end
 engines; this schema stores its inputs and outputs.
 
-Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Loco
+Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Axum
 setup script) are derived from these migrations and are never hand-edited.

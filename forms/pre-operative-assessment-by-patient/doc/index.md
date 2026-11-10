@@ -48,4 +48,4 @@ Comprehensive documentation for the Pre-Operative Assessment web application, a 
   Detailed specification of all 16 questionnaire steps, every field, data types, conditional logic, and validation rules.
 
 - **[Backend API Reference](backend-api-reference.md)**
-  REST API endpoints, request/response formats, grading engine integration, and database architecture for the Rust Axum Loco backend.
+  REST API endpoints, request/response formats, grading engine integration, and database architecture for the Rust Axum backend.

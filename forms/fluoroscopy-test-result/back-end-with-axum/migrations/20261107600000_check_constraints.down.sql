@@ -1,0 +1,15 @@
+ALTER TABLE "fluoroscopy_test_result_grade_flags" DROP CONSTRAINT IF EXISTS "fluoroscopy_test_result_grade_flags_priority_check";
+ALTER TABLE "fluoroscopy_test_result_grade_flags" DROP CONSTRAINT IF EXISTS "fluoroscopy_test_result_grade_flags_category_check";
+ALTER TABLE "fluoroscopy_test_result_grade_rules" DROP CONSTRAINT IF EXISTS "fluoroscopy_test_result_grade_rules_axis_check";
+ALTER TABLE "fluoroscopy_test_result_grades" DROP CONSTRAINT IF EXISTS "fluoroscopy_test_result_grades_recommendation_check";
+ALTER TABLE "fluoroscopy_test_result_grades" DROP CONSTRAINT IF EXISTS "fluoroscopy_test_result_grades_follow_up_urgency_check";
+ALTER TABLE "fluoroscopy_test_result_grades" DROP CONSTRAINT IF EXISTS "fluoroscopy_test_result_grades_report_completeness_per_8b9e12dc";
+ALTER TABLE "fluoroscopy_test_result_grades" DROP CONSTRAINT IF EXISTS "fluoroscopy_test_result_grades_abnormality_severity_check";
+ALTER TABLE "fluoroscopy_test_result_grades" DROP CONSTRAINT IF EXISTS "fluoroscopy_test_result_grades_result_classification_check";
+ALTER TABLE "fluoroscopy_test_results" DROP CONSTRAINT IF EXISTS "fluoroscopy_test_results_screening_time_minutes_check";
+ALTER TABLE "fluoroscopy_test_results" DROP CONSTRAINT IF EXISTS "fluoroscopy_test_results_examination_adequacy_check";
+ALTER TABLE "fluoroscopy_test_results" DROP CONSTRAINT IF EXISTS "fluoroscopy_test_results_contrast_used_check";
+ALTER TABLE "fluoroscopy_test_results" DROP CONSTRAINT IF EXISTS "fluoroscopy_test_results_study_type_check";
+ALTER TABLE "fluoroscopy_test_results" DROP CONSTRAINT IF EXISTS "fluoroscopy_test_results_report_status_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";

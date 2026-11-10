@@ -8,7 +8,7 @@
    checklist, inspector/sign-off) + dashboard.
 5. Front-end-with-svelte — SvelteKit wizard mirroring the HTML
    front-end + dashboard.
-6. Back-end-with-loco — Rust axum + Loco JSON API, single entity.
+6. Back-end-with-loco — Rust axum + axa JSON API, single entity.
 7. Verify — `bin/test-form patient-room-readiness`,
    `bin/lily-html-refactor --check`, `bin/lily-svelte-refactor --check`.
 

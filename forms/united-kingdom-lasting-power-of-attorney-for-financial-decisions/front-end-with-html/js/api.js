@@ -1,6 +1,6 @@
 // Backend API client for the UK LP1F case dashboard.
 //
-// The backend lives at http://localhost:5150 (Loco / axum). The dashboard
+// The backend lives at http://localhost:5150 (Axum / axum). The dashboard
 // endpoint returns either a bare JSON array of DashboardRow objects or a
 // `{ items, total }` envelope. When the fetch fails (CORS, network, server
 // down) or returns an empty list, callers fall back to the sample data shipped

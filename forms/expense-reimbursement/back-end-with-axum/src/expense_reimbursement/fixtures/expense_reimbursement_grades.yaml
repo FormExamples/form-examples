@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "63721472-1f2c-5fdd-900b-6a6f8d1b7602"
+  deletedAt: null
+  complianceBand: "compliant"
+  completenessPercent: 1
+  approvalTier: "line-manager"
+  recommendation: "approve"
+  managerNotes: "Test managerNotes"
+  signedAt: "2026-01-01T00:00:00Z"
+  gradedAt: "2026-01-01T00:00:00Z"
+  expenseReimbursementId: "28b9f69d-6240-5190-81e4-dbcbecb8e037"

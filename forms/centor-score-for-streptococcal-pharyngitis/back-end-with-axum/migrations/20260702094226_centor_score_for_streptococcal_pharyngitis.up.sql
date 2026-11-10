@@ -1,0 +1,30 @@
+CREATE TABLE IF NOT EXISTS "centor_score_for_streptococcal_pharyngitis" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "clinician_name" varchar NOT NULL DEFAULT '',
+    "clinician_role" varchar NOT NULL DEFAULT '',
+    "assessed_at" timestamp with time zone NULL,
+    "care_setting" varchar NOT NULL DEFAULT '',
+    "patient_identifier" varchar NOT NULL DEFAULT '',
+    "age_years" integer NULL,
+    "sex" varchar NOT NULL DEFAULT '',
+    "tonsillar_exudate" varchar NOT NULL DEFAULT '',
+    "tender_anterior_cervical_nodes" varchar NOT NULL DEFAULT '',
+    "fever_over_38" varchar NOT NULL DEFAULT '',
+    "measured_temperature_celsius" double precision NULL,
+    "absence_of_cough" varchar NOT NULL DEFAULT '',
+    "stridor_or_breathing_difficulty" varchar NOT NULL DEFAULT '',
+    "drooling_or_cannot_swallow" varchar NOT NULL DEFAULT '',
+    "trismus" varchar NOT NULL DEFAULT '',
+    "muffled_voice" varchar NOT NULL DEFAULT '',
+    "unilateral_neck_swelling" varchar NOT NULL DEFAULT '',
+    "clinical_note" text NOT NULL DEFAULT '',
+    "patient_id" uuid NOT NULL,
+    "clinician_id" uuid NULL,
+    CONSTRAINT "fk-centor_score_for_streptococcal_pharyngitis-patient_id-to-patients" FOREIGN KEY ("patient_id") REFERENCES "patients" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-centor_score_for_streptococcal_pharyngitis-clinician_id-to-clinicians" FOREIGN KEY ("clinician_id") REFERENCES "clinicians" (id) ON DELETE SET NULL ON UPDATE NO ACTION
+);
+
+ALTER TABLE centor_score_for_streptococcal_pharyngitis ALTER COLUMN id SET DEFAULT gen_random_uuid();

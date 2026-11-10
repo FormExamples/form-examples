@@ -133,7 +133,7 @@ hearing-test-result/
   protobuf/                         # Protocol Buffers schemas (generated)
   typespec/                         # TypeSpec API definitions (generated)
   front-end-with-svelte/            # SvelteKit single-page wizard
-  back-end-with-loco/               # Rust axum + Loco JSON API
+  back-end-with-axum/               # Rust axum + axa + sqlx JSON API
 ```
 
 ## Clinical references

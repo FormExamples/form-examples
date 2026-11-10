@@ -25,5 +25,5 @@ disease, cardiac failure) into a total of 0-23. A total of 0 is `very-low`
 `high` (admit and arrange urgent endoscopy). See [`../spec/index.md`](../spec/index.md)
 for the grading algorithm and flag definitions.
 
-Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Loco
+Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Axum
 setup script) are derived from these migrations and are never hand-edited.

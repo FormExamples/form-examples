@@ -41,7 +41,7 @@ file only records changes scoped to the **Health Screening Questionnaire** form.
 - `front-end-with-svelte/`: the same wizard and dashboard in SvelteKit 2 / Svelte 5 runes with a
   welcome page, a `pdfmake` report endpoint, and 39 Vitest cases asserting both sides of every
   PAR-Q+ item and AUDIT-C threshold.
-- `back-end-with-loco/`: Rust axum + Loco 1.0.1 JSON API, relational per-table schema, `i64` ids.
+- `back-end-with-axum/`: Rust axum + Loco 1.0.1 JSON API, relational per-table schema, `i64` ids.
 - Clinical reference documentation in `doc/`: the PAR-Q+ and AUDIT-C instrument reference with
   rule IDs, and clinical-safety case notes with a preliminary hazard list.
 

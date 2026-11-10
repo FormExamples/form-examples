@@ -29,7 +29,7 @@ ADHD screening using the ASRS (Adult ADHD Self-Report Scale) v1.1 screener.
 attention-deficit-assessment/
   front-end-with-svelte/             # Patient questionnaire
   front-end-with-svelte/        # Dashboard
-  back-end-with-loco/    # Full-stack option
+  back-end-with-axum/    # Full-stack option
 ```
 
 ## Technology

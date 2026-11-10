@@ -1,0 +1,1 @@
+DROP TABLE "timi_risk_score_for_acute_coronary_syndromes";

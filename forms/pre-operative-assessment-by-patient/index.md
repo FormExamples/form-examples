@@ -75,7 +75,7 @@ pre-operative-assessment-by-patient/
   openapi/                        # OpenAPI 3.1 .yaml specifications per SQL entity (generated)
   front-end-with-html/            # questionnaire + dashboard (HTML + Lily Design System)
   front-end-with-svelte/          # questionnaire + dashboard (SvelteKit + Lily)
-  back-end-with-loco/             # back-end Rust JSON API (axum + Loco)
+  back-end-with-axum/             # back-end Rust JSON API (axum + axa + sqlx)
 ```
 
 ## Documentation

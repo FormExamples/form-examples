@@ -1,0 +1,352 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: expense_reimbursement_grade
+openapi: 3.1.0
+info:
+  title: Expense Reimbursement — ExpenseReimbursementGrade
+  version: 1.0.0
+  description: "Computed three-axis grade for an expense reimbursement claim: policy compliance, completeness and approval tier."
+paths:
+  /api/expense_reimbursement_grades:
+    get:
+      summary: List ExpenseReimbursementGrade records
+      operationId: listExpenseReimbursementGrade
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
+          in: query
+          schema:
+            type: string
+          required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
+      responses:
+        "200":
+          description: A page of ExpenseReimbursementGrade records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ExpenseReimbursementGrade"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new ExpenseReimbursementGrade
+      operationId: createExpenseReimbursementGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExpenseReimbursementGrade"
+      responses:
+        "200":
+          description: The newly created ExpenseReimbursementGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExpenseReimbursementGrade"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/expense_reimbursement_grades/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one ExpenseReimbursementGrade by id
+      operationId: getExpenseReimbursementGrade
+      responses:
+        "200":
+          description: The requested ExpenseReimbursementGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExpenseReimbursementGrade"
+        "404":
+          description: ExpenseReimbursementGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing ExpenseReimbursementGrade
+      operationId: updateExpenseReimbursementGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExpenseReimbursementGrade"
+      responses:
+        "200":
+          description: The updated ExpenseReimbursementGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExpenseReimbursementGrade"
+        "404":
+          description: ExpenseReimbursementGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing ExpenseReimbursementGrade
+      operationId: replaceExpenseReimbursementGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExpenseReimbursementGrade"
+      responses:
+        "200":
+          description: The updated ExpenseReimbursementGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExpenseReimbursementGrade"
+        "404":
+          description: ExpenseReimbursementGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a ExpenseReimbursementGrade
+      operationId: deleteExpenseReimbursementGrade
+      responses:
+        "200":
+          description: ExpenseReimbursementGrade deleted
+        "404":
+          description: ExpenseReimbursementGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
+    ExpenseReimbursementGrade:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this row was updated.
+        expense_reimbursement_id:
+          type: string
+          format: uuid
+          description: Foreign key to the expense_reimbursement table.
+        compliance_band:
+          type: string
+          enum:
+            - compliant
+            - needs-review
+            - likely-ineligible
+            - ""
+          description: "Compliance band. One of: compliant, needs-review, likely-ineligible."
+        completeness_percent:
+          type: [integer, 'null']
+          format: int32
+          description: Completeness percent.
+        approval_tier:
+          type: string
+          enum:
+            - line-manager
+            - budget-holder
+            - finance-review
+            - ""
+          description: "Approval tier. One of: line-manager, budget-holder, finance-review."
+        recommendation:
+          type: string
+          enum:
+            - approve
+            - request-more-information
+            - escalate
+            - reject
+            - ""
+          description: "Recommendation. One of: approve, request-more-information, escalate, reject."
+        manager_notes:
+          type: string
+          description: Manager notes.
+        signed_at:
+          type: [string, 'null']
+          format: date-time
+          description: Signed at.
+        graded_at:
+          type: string
+          format: date-time
+          description: Graded at.
+      required:
+        - created_at
+        - updated_at
+        - expense_reimbursement_id
+        - compliance_band
+        - approval_tier
+        - recommendation
+        - manager_notes
+        - graded_at
+      description: "Computed three-axis grade for an expense reimbursement claim: policy compliance, completeness and approval tier."

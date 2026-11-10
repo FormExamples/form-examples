@@ -468,6 +468,10 @@ export const forms: Form[] = [
     "title": "Estimated Glomerular Filtration Rate (eGFR) Calculator"
   },
   {
+    "slug": "expense-reimbursement",
+    "title": "Expense Reimbursement"
+  },
+  {
     "slug": "eye-prescription",
     "title": "Eye Prescription"
   },
@@ -756,8 +760,16 @@ export const forms: Form[] = [
     "title": "Medical Certificate of Cause of Death (MCCD)"
   },
   {
+    "slug": "medical-device-assessment",
+    "title": "Medical Device Assessment"
+  },
+  {
     "slug": "medical-error-report",
     "title": "Medical Error Report"
+  },
+  {
+    "slug": "medical-fit-note",
+    "title": "Medical Fit Note"
   },
   {
     "slug": "medical-information-form-for-air-travel",
@@ -1282,6 +1294,10 @@ export const forms: Form[] = [
   {
     "slug": "tumor-marker-test-result",
     "title": "Tumor Marker Test Result"
+  },
+  {
+    "slug": "uk-nhs-digital-technology-assessment-criteria",
+    "title": "UK NHS Digital Technology Assessment Criteria (DTAC)"
   },
   {
     "slug": "ultrasound-test-request",

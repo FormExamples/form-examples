@@ -1,12 +1,12 @@
 # Generated from sql/. Do not edit by hand.
-# SOURCE: assessment, assessment_performance_ratings, assessment_performance_rating_item, assessment_satisfaction_ratings, assessment_satisfaction_rating_item
+# SOURCE: assessment
 openapi: 3.1.0
 info:
   title: Occupational Therapy Assessment — Assessment
   version: 1.0.0
   description: Occupational therapy assessment form using COPM. Parent entity for all assessment sections.
 paths:
-  /assessments:
+  /api/assessments:
     get:
       summary: List Assessment records
       operationId: listAssessment
@@ -19,22 +19,44 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of Assessment records
+          description: A page of Assessment records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/Assessment"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new Assessment
       operationId: createAssessment
@@ -45,15 +67,42 @@ paths:
             schema:
               $ref: "#/components/schemas/Assessment"
       responses:
-        "201":
+        "200":
           description: The newly created Assessment
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Assessment"
         "400":
-          description: Validation error
-  /assessments/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/assessments/{id}:
     parameters:
       - name: id
         in: path
@@ -73,6 +122,21 @@ paths:
                 $ref: "#/components/schemas/Assessment"
         "404":
           description: Assessment not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing Assessment
       operationId: updateAssessment
@@ -91,16 +155,132 @@ paths:
                 $ref: "#/components/schemas/Assessment"
         "404":
           description: Assessment not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing Assessment
+      operationId: replaceAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Assessment"
+      responses:
+        "200":
+          description: The updated Assessment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Assessment"
+        "404":
+          description: Assessment not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
-      summary: Soft-delete a Assessment
+      summary: Delete a Assessment
       operationId: deleteAssessment
       responses:
-        "204":
+        "200":
           description: Assessment deleted
         "404":
           description: Assessment not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
 components:
   schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
     Assessment:
       type: object
       properties:
@@ -116,10 +296,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         patient_id:
           type: string
           format: uuid
@@ -132,125 +308,9 @@ components:
             - reviewed
             - urgent
           description: "Lifecycle status: draft, submitted, reviewed, or urgent."
-        performance_ratings_deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
-        overall_performance_score:
-          type: number
-          format: double
-          description: Overall COPM performance score (1-10), averaged across domains.
-        self_care_performance_score:
-          type: number
-          format: double
-          description: COPM performance score for self-care activities (1 = not able, 10 = able to do extremely well).
-        productivity_performance_score:
-          type: number
-          format: double
-          description: COPM performance score for productivity activities (1 = not able, 10 = able to do extremely well).
-        leisure_performance_score:
-          type: number
-          format: double
-          description: COPM performance score for leisure activities (1 = not able, 10 = able to do extremely well).
-        performance_notes:
-          type: string
-          description: Additional notes on performance ratings and observations.
-        performance_rating_item_deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
-        performance_ratings_id:
-          type: string
-          format: uuid
-          description: Foreign key to the assessment_performance_ratings table.
-        occupational_issue:
-          type: string
-          maxLength: 255
-          description: Description of the specific occupational performance issue.
-        domain:
-          type: string
-          enum:
-            - self-care
-            - productivity
-            - leisure
-            - ""
-          description: "COPM domain: self-care, productivity, leisure, or empty."
-        importance_score:
-          type: integer
-          format: int32
-          description: Patient-rated importance of this issue (1 = not important, 10 = extremely important).
-        performance_score:
-          type: integer
-          format: int32
-          description: Patient-rated performance score (1 = not able, 10 = able to do extremely well).
-        sort_order:
-          type: integer
-          format: int32
-          description: Display order of the item within the list.
-        satisfaction_ratings_deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
-        overall_satisfaction_score:
-          type: number
-          format: double
-          description: Overall COPM satisfaction score (1-10), averaged across domains.
-        self_care_satisfaction_score:
-          type: number
-          format: double
-          description: COPM satisfaction score for self-care activities (1 = not satisfied, 10 = extremely satisfied).
-        productivity_satisfaction_score:
-          type: number
-          format: double
-          description: COPM satisfaction score for productivity activities (1 = not satisfied, 10 = extremely satisfied).
-        leisure_satisfaction_score:
-          type: number
-          format: double
-          description: COPM satisfaction score for leisure activities (1 = not satisfied, 10 = extremely satisfied).
-        satisfaction_notes:
-          type: string
-          description: Additional notes on satisfaction ratings and observations.
-        satisfaction_rating_item_deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
-        satisfaction_ratings_id:
-          type: string
-          format: uuid
-          description: Foreign key to the assessment_satisfaction_ratings table.
-        satisfaction_rating_item_occupational_issue:
-          type: string
-          maxLength: 255
-          description: Description of the specific occupational performance issue.
-        satisfaction_rating_item_domain:
-          type: string
-          enum:
-            - self-care
-            - productivity
-            - leisure
-            - ""
-          description: "COPM domain: self-care, productivity, leisure, or empty."
-        satisfaction_score:
-          type: integer
-          format: int32
-          description: Patient-rated satisfaction score (1 = not satisfied, 10 = extremely satisfied).
-        satisfaction_rating_item_sort_order:
-          type: integer
-          format: int32
-          description: Display order of the item within the list.
       required:
         - created_at
         - updated_at
         - patient_id
         - status
-        - performance_notes
-        - performance_ratings_id
-        - occupational_issue
-        - domain
-        - sort_order
-        - satisfaction_notes
-        - satisfaction_ratings_id
-        - satisfaction_rating_item_occupational_issue
-        - satisfaction_rating_item_domain
-        - satisfaction_rating_item_sort_order
       description: Occupational therapy assessment form using COPM. Parent entity for all assessment sections.

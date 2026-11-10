@@ -26,12 +26,12 @@ table, and the aggregate risk bands.
 - `./openapi/` — generated OpenAPI 3.1 YAML per SQL entity
 - `./front-end-with-html/` — HTML + Lily wizard (`index.html`) + dashboard
 - `./front-end-with-svelte/` — SvelteKit wizard + dashboard (RESTful routes)
-- `./back-end-with-loco/` — Rust axum + Loco JSON API
+- `./back-end-with-axum/` — Rust axum + axa + sqlx JSON API
 
 ## Source of truth
 
 `sql/` is the schema source of truth. After editing it, regenerate derived
-artefacts (XML, FHIR R5, protobuf, OpenAPI, Loco setup, examples, `spec/`,
+artefacts (XML, FHIR R5, protobuf, OpenAPI, Axum setup, examples, `spec/`,
 `CHANGELOG.md`) with the repo generators in `bin/` — never hand-edit generated
 files.
 

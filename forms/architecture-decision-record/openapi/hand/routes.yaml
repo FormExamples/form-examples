@@ -1,0 +1,179 @@
+# Routes no SQL table describes, documented by hand. Merged into
+# combined/openapi.yaml by bin/openapi/generate-openapi-combined.py.
+paths:
+  /api/adrs:
+    get:
+      summary: List the decision records, by number
+      operationId: listAdrs
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        description: Rows on a page (default 100, largest 1000). A larger limit is refused, not clamped
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+      - name: cursor
+        in: query
+        required: false
+        description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
+        schema:
+          type: string
+      responses:
+        '200':
+          description: One page of records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AdrSummary'
+        '422':
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    post:
+      summary: Create a decision record
+      operationId: createArchitectureDecisionRecord
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArchitectureDecisionRecord'
+      responses:
+        '200':
+          description: The new record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArchitectureDecisionRecord'
+        '400':
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      description: A missing number becomes the next one, and a missing slug comes from the title.
+  /api/adrs/{slug}:
+    parameters:
+    - name: slug
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: One decision record, with its Markdown
+      operationId: getAdr
+      responses:
+        '200':
+          description: The record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdrView'
+        '404':
+          description: No record has this slug
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+components:
+  schemas:
+    AdrSummary:
+      type: object
+      required:
+      - id
+      - number
+      - slug
+      - title
+      - status
+      - decisionGroup
+      - decisionDate
+      - authorName
+      properties:
+        id:
+          type: string
+          format: uuid
+        number:
+          type:
+          - integer
+          - 'null'
+        slug:
+          type: string
+        title:
+          type: string
+        status:
+          type: string
+        decisionGroup:
+          type: string
+        decisionDate:
+          type: string
+          description: An ISO 8601 date, or empty when none is recorded
+        authorName:
+          type: string
+          description: Empty when the record has no author
+    AdrView:
+      allOf:
+      - $ref: '#/components/schemas/AdrSummary'
+      - type: object
+        required:
+        - markdown
+        properties:
+          markdown:
+            type: string
+            description: The whole record rendered as Markdown

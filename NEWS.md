@@ -9,6 +9,17 @@ per-form record, each `forms/<slug>/CHANGELOG.md`.
 
 ## Latest
 
+### 2026-11-05 — Back-ends move from Loco and SeaORM to Axum, axa, and sqlx
+
+Every form's back-end now runs directly on Axum with the `axa` library and
+hand-written SQL through sqlx, and each `back-end-with-loco` directory is now
+`back-end-with-axum`.
+
+The move also removed an authentication scaffold that nothing used, so the back-ends
+have no access control and must sit behind a deployer's own. List routes now return
+100 rows by default, as their published contract always said they could. The form
+tables are otherwise unchanged.
+
 ### 2026-08-28 — GitHub Sponsors funding channel added
 
 The project gained its first funding channel:

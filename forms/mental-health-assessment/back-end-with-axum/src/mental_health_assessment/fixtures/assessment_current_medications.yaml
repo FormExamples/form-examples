@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-00000008ae1c"
+  deletedAt: null
+  takingPsychotropicMedication: "yes"
+  medicationAdherence: "good"
+  sideEffects: "yes"
+  sideEffectsDetails: "Test sideEffectsDetails"
+  overTheCounterMedications: "Test overTheCounterMedications"
+  supplements: "Test supplements"
+  medicationNotes: "Test medicationNotes"
+  assessmentId: "00000000-0000-4000-8000-0000000a184c"

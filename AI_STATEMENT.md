@@ -147,7 +147,7 @@ build rather than warn.
   Postgres; `bin/test-examples-conformance` checks each fixture against the
   schema it claims to match.
 - **Contract gates.** The Lily HTML and Svelte class contracts, the ES-modules
-  contract, the Loco queue/observability conventions, and the
+  contract, the Axum queue/observability conventions, and the
   migration-vs-`sql/` defaults and nullability detectors each have a `--check`
   gate.
 - **External validators.** Generated FHIR R5 resources and Bundles are validated

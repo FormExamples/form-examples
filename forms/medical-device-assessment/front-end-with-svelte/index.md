@@ -28,7 +28,7 @@ Served under `/medical-device-assessment/` (the root `/` redirects there):
   rendered through `StepSection.svelte` and `FieldRenderer.svelte`.
 - `src/lib/stores/assessment.svelte.ts` — id-keyed store with localStorage
   autosave (`medical-device-assessment.front-end-with-svelte.v1` for `new`).
-- `src/lib/api/medical-device-assessments.ts` — Loco API client: dashboard
+- `src/lib/api/medical-device-assessments.ts` — Axum API client: dashboard
   join (assessments + grades + flags) and the submit sequence (manufacturer,
   assessor, assessment, grade, rules, flags). Set `VITE_API_BASE` to point at
   the back end (default `http://localhost:5150`); the offline samples remain

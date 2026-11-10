@@ -18,5 +18,5 @@ before their referencers.
 | 06 | `06_create_table_curb_65_pneumonia_severity_score_grade_rule.sql` | `curb_65_pneumonia_severity_score_grade_rule` | audit trail of fired grading rules |
 | 07 | `07_create_table_curb_65_pneumonia_severity_score_grade_flag.sql` | `curb_65_pneumonia_severity_score_grade_flag` | advisory safety flags with priority and suggested action |
 
-Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Loco
+Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Axum
 setup script) are derived from these migrations and are never hand-edited.

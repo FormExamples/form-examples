@@ -33,7 +33,7 @@ Haematological evaluation covering complete blood count, coagulation studies, pe
 hematology-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

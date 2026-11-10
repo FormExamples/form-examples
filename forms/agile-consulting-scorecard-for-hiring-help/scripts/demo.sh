@@ -2,7 +2,7 @@
 #
 # Agile Consulting Scorecard — end-to-end pipeline demo.
 #
-# Boots the Loco backend on a free local port (using a temporary
+# Boots the Axum backend on a free local port (using a temporary
 # Postgres database), exercises every one of the nine HTTP endpoints
 # with the golden sample, prints the highlights, and tears the
 # backend down. Useful as a smoke test and as a copy-paste-able
@@ -14,7 +14,7 @@
 # Requirements: cargo, curl, python3, and a running PostgreSQL
 # accessible at $LOCO_DATABASE_URL (or the default
 # postgres://postgres:postgres@localhost:5432/postgres). The script
-# creates a fresh demo database, lets Loco run migrations, exercises
+# creates a fresh demo database, lets Axum run migrations, exercises
 # the endpoints, then drops the database.
 
 set -euo pipefail
@@ -46,7 +46,7 @@ if ! PGPASSWORD="$DB_PASS" psql \
   cat <<EOF >&2
 fatal: cannot reach PostgreSQL at $DB_HOST:$DB_PORT as $DB_USER.
 
-The Loco backend needs a Postgres instance. Either:
+The Axum backend needs a Postgres instance. Either:
 
   1. Start one (e.g. via Docker):
        docker run -d --name pg -p 5432:5432 \\
@@ -89,7 +89,7 @@ PGPASSWORD="$DB_PASS" psql \
 export LOCO_SERVER__PORT="$PORT"
 export LOCO_DATABASE__URI="postgres://$DB_USER:$DB_PASS@$DB_HOST:$DB_PORT/$DB_NAME"
 
-echo "==> building + launching Loco backend on $BASE"
+echo "==> building + launching Axum backend on $BASE"
 (
   cd "$CRATE_DIR"
   cargo run --quiet --bin agile-consulting-scorecard-cli -- start &
@@ -105,7 +105,7 @@ for _ in $(seq 1 120); do
 done
 SERVER_PID=$(cat /tmp/agile-scorecard-demo.pid 2>/dev/null || true)
 if [[ -z "$SERVER_PID" ]] || ! curl -s -o /dev/null "$BASE/"; then
-  echo "fatal: Loco backend failed to start on $BASE" >&2
+  echo "fatal: Axum backend failed to start on $BASE" >&2
   exit 1
 fi
 
@@ -184,4 +184,4 @@ print('bands:  low {0}   borderline {1}   medium {2}   high {3}'.format(b['low']
 "
 
 echo
-echo "==> done — tearing down Loco backend + dropping demo database"
+echo "==> done — tearing down Axum backend + dropping demo database"

@@ -7,7 +7,6 @@
       "Bash(python3 bin/protobuf/generate-protobuf-representations.py)",
       "Bash(bin/test-form who-surgical-safety-checklist *)",
       "Bash(bin/test-form pre-operative-assessment-by-clinician *)",
-      "Bash(loco --help)",
       "Bash(git check-ignore *)",
       "Bash(git add *)",
       "Bash(awk -F/ 'NR<=3 || NR>=350 {print}')",

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Signature, date, and witness fields. One-to-one child of hipaa_authorization. Required by 45 CFR § 164.508(c)(1)(vi).
 paths:
-  /signature-witnesses:
+  /api/signature_witnesses:
     get:
       summary: List SignatureWitness records
       operationId: listSignatureWitness
@@ -19,22 +19,44 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of SignatureWitness records
+          description: A page of SignatureWitness records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/SignatureWitness"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new SignatureWitness
       operationId: createSignatureWitness
@@ -45,15 +67,42 @@ paths:
             schema:
               $ref: "#/components/schemas/SignatureWitness"
       responses:
-        "201":
+        "200":
           description: The newly created SignatureWitness
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/SignatureWitness"
         "400":
-          description: Validation error
-  /signature-witnesses/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/signature_witnesses/{id}:
     parameters:
       - name: id
         in: path
@@ -73,6 +122,21 @@ paths:
                 $ref: "#/components/schemas/SignatureWitness"
         "404":
           description: SignatureWitness not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing SignatureWitness
       operationId: updateSignatureWitness
@@ -91,16 +155,132 @@ paths:
                 $ref: "#/components/schemas/SignatureWitness"
         "404":
           description: SignatureWitness not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing SignatureWitness
+      operationId: replaceSignatureWitness
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SignatureWitness"
+      responses:
+        "200":
+          description: The updated SignatureWitness
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SignatureWitness"
+        "404":
+          description: SignatureWitness not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
-      summary: Soft-delete a SignatureWitness
+      summary: Delete a SignatureWitness
       operationId: deleteSignatureWitness
       responses:
-        "204":
+        "200":
           description: SignatureWitness deleted
         "404":
           description: SignatureWitness not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
 components:
   schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
     SignatureWitness:
       type: object
       properties:
@@ -116,10 +296,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         hipaa_authorization_id:
           type: string
           format: uuid
@@ -135,7 +311,7 @@ components:
           type: string
           description: URI of the captured electronic signature image (SVG or PNG data URI).
         signature_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the individual signed the authorization. Required by § 164.508(c)(1)(vi).
         signed_at_location:
@@ -160,7 +336,7 @@ components:
             - "no"
           description: "Whether the parent / guardian has confirmed their co-signature: yes, no, or empty."
         parent_guardian_signature_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the parent / guardian co-signed.
         witness_name:
@@ -175,7 +351,7 @@ components:
             - "no"
           description: "Whether the witness has confirmed their signature: yes, no, or empty."
         witness_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the witness signed.
         witness_role:

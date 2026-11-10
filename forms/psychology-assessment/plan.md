@@ -7,7 +7,7 @@ SvelteKit patient front-end implemented. DASS-21 patient form (8-step wizard, 3 
 Remaining work:
 
 - Build front-end-with-svelte (SVAR DataGrid)
-- Build back-end-with-loco Rust backend (axum + Loco +
+- Build back-end-with-axum Rust backend (axum + axa +
   Loco JSON API)
 - PDF report generation via SvelteKit server endpoint
 - End-to-end Playwright tests

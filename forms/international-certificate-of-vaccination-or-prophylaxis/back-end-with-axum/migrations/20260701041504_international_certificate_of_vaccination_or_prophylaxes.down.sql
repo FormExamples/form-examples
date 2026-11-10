@@ -1,0 +1,1 @@
+DROP TABLE "international_certificate_of_vaccination_or_prophylaxes";

@@ -26,7 +26,7 @@ See [`index.md`](./index.md) for the full design and the section table, and
 - `./openapi/` — generated OpenAPI 3.1 specifications
 - `./front-end-with-html/` — consolidated HTML wizard + dashboard (Lily)
 - `./front-end-with-svelte/` — consolidated SvelteKit wizard + dashboard (Lily)
-- `./back-end-with-loco/` — Rust axum + Loco JSON API
+- `./back-end-with-axum/` — Rust axum + axa + sqlx JSON API
 
 ## Classification engine
 
@@ -84,7 +84,7 @@ without dose adjustment (high), missing ACR (medium), incomplete review (low).
 - `created_at`, `updated_at`, `deleted_at` timestamps on every table.
 - Import and export via JSON, XML, CSV, and TSV.
 - British English throughout.
-- Generated artefacts (XML, FHIR, protobuf, OpenAPI, Loco setup) are never
+- Generated artefacts (XML, FHIR, protobuf, OpenAPI, Axum setup) are never
   hand-edited.
 
 ## Clinical grounding

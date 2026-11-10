@@ -34,7 +34,7 @@
 - [x] `front-end-with-svelte/` — consolidated SvelteKit wizard + dashboard.
 
 ## Back-end
-- [x] `back-end-with-loco/` — Rust axum + Loco JSON API.
+- [x] `back-end-with-axum/` — Rust axum + axa JSON API.
 
 ## Tests
 - [ ] `bin/test-form glasgow-coma-scale` passes (blocked by a repo-wide

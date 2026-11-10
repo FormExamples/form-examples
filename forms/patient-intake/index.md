@@ -29,7 +29,7 @@ General patient intake form collecting demographics, insurance, medical history,
 patient-intake/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

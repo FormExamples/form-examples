@@ -5,7 +5,7 @@
   const sections = [
     { id: 'html', label: 'Front-end: HTML / Lily headless' },
     { id: 'svelte', label: 'Front-end: SvelteKit / Lily headless' },
-    { id: 'rust', label: 'Back-end: Rust / axum / Loco' },
+    { id: 'rust', label: 'Back-end: Rust / axum / axa' },
     { id: 'sql', label: 'SQL migrations' },
     { id: 'xml', label: 'XML representations' },
     { id: 'fhir', label: 'FHIR HL7 R5' },
@@ -53,11 +53,11 @@
   <a href={agentDoc('forms/AGENTS-front-end-svelte.md')} target="_blank" rel="noopener noreferrer">Read the SvelteKit stack doc →</a>
 </p>
 
-<h2 id="rust" class="mt-10 text-xl font-semibold">Back-end with Rust / axum / Loco</h2>
+<h2 id="rust" class="mt-10 text-xl font-semibold">Back-end with Rust / axum / axa</h2>
 <p class="mt-4">
-  Each form has a Rust back-end JSON API built on the Loco framework with axum routing — no HTML
+  Each form has a Rust back-end JSON API built on Axum and axa — no HTML
   rendering layer at all: no Tera templates, no HTMX, no Alpine.js, no Lily Design System, no CSS, no
-  static assets. The schema is relational and per-table: one Loco migration, one SeaORM entity, and
+  static assets. The schema is relational and per-table: one SQL migration, one sqlx model, and
   one RESTful scaffold controller per SQL table (never a single table with a JSONB blob), running
   against PostgreSQL.
 </p>
@@ -66,7 +66,7 @@
   <code>serde(rename_all = "camelCase")</code>, so every implementation stays aligned at its JSON boundary.
 </p>
 <p class="mt-4">
-  <a href={agentDoc('AGENTS/back-end-with-loco.md')} target="_blank" rel="noopener noreferrer">Read the Rust stack doc →</a>
+  <a href={agentDoc('AGENTS/back-end-with-axum.md')} target="_blank" rel="noopener noreferrer">Read the Rust stack doc →</a>
 </p>
 
 <h2 id="sql" class="mt-10 text-xl font-semibold">SQL migrations</h2>

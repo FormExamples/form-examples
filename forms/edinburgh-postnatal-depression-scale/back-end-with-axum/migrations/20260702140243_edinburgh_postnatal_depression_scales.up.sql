@@ -1,0 +1,33 @@
+CREATE TABLE IF NOT EXISTS "edinburgh_postnatal_depression_scales" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "clinician_name" varchar NOT NULL DEFAULT '',
+    "clinician_role" varchar NOT NULL DEFAULT '',
+    "care_setting" varchar NOT NULL DEFAULT '',
+    "assessed_at" timestamp with time zone NULL,
+    "perinatal_stage" varchar NOT NULL DEFAULT '',
+    "perinatal_week" double precision NULL,
+    "respondent_identifier" varchar NOT NULL DEFAULT '',
+    "age_band" varchar NOT NULL DEFAULT '',
+    "preferred_language" varchar NOT NULL DEFAULT '',
+    "assistance_needed" varchar NOT NULL DEFAULT '',
+    "item_1" integer NULL,
+    "item_2" integer NULL,
+    "item_3" integer NULL,
+    "item_4" integer NULL,
+    "item_5" integer NULL,
+    "item_6" integer NULL,
+    "item_7" integer NULL,
+    "item_8" integer NULL,
+    "item_9" integer NULL,
+    "item_10" integer NULL,
+    "clinical_note" text NOT NULL DEFAULT '',
+    "patient_id" uuid NOT NULL,
+    "clinician_id" uuid NULL,
+    CONSTRAINT "fk-edinburgh_postnatal_depression_scales-patient_id-to-patients" FOREIGN KEY ("patient_id") REFERENCES "patients" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-edinburgh_postnatal_depression_scales-clinician_id-to-clinicians" FOREIGN KEY ("clinician_id") REFERENCES "clinicians" (id) ON DELETE SET NULL ON UPDATE NO ACTION
+);
+
+ALTER TABLE edinburgh_postnatal_depression_scales ALTER COLUMN id SET DEFAULT gen_random_uuid();

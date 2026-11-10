@@ -41,7 +41,7 @@
 - Run `bin/fhir-r5/generate-fhir-r5-representations.py`.
 - Run `bin/protobuf/generate-protobuf-representations.py`.
 - Run `bin/openapi/generate-openapi-representations.py`.
-- Run `bin/back-end-with-loco/generate-back-end-with-loco-setup.py`.
+- Run `bin/back-end-with-axum/generate-back-end-with-axum-setup.py`.
 
 ### Front-ends
 
@@ -54,7 +54,7 @@
 
 ### Backend
 
-- `back-end-with-loco/` — Loco JSON API
+- `back-end-with-axum/` — Loco JSON API
   full-stack implementation.
 
 ### Verification

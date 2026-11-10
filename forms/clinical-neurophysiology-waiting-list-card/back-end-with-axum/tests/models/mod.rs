@@ -1,0 +1,7 @@
+mod clin_neurophys_waiting_list_card_appointments;
+mod clin_neurophys_waiting_list_card_grade_flags;
+mod clin_neurophys_waiting_list_card_grade_rules;
+mod clin_neurophys_waiting_list_card_grades;
+mod clin_neurophys_waiting_list_cards;
+mod patients;
+mod practitioners;

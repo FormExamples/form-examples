@@ -13,7 +13,7 @@ Created 2026-08-14. Per-phase checkboxes live in [`tasks.md`](./tasks.md).
 | Scoring engine (`front-end-with-svelte/src/lib/engine/`) | complete — pure TypeScript, 40 Vitest boundary cases, all green |
 | `front-end-with-svelte/` (wizard + dashboard) | complete — `vitest` 40/40, `svelte-check` clean, `bin/lily-svelte-refactor --check` clean |
 | `front-end-with-html/` (wizard + dashboard) | complete — Node cross-check harness 40/40, `bin/lily-html-refactor`/`bin/es-modules-refactor --check` clean |
-| `back-end-with-loco/` | complete — `cargo build` clean, `cargo test` 28/28; `cargo deny` has one pre-existing fleet-wide advisory gap (see Risks) |
+| `back-end-with-axum/` | complete — `cargo build` clean, `cargo test` 28/28; `cargo deny` has one pre-existing fleet-wide advisory gap (see Risks) |
 
 `bin/test-form knee-replacement-surgery-evaluation` passes, along with every
 gate in `spec/index.md` §9.
@@ -81,7 +81,7 @@ Verified against a fresh scratch Postgres via `bin/test-sql-apply`.
 ### Phase 3 — Generated representations (complete)
 
 XML, FHIR R5, Protocol Buffers, OpenAPI regenerated from `sql/`; `examples/`,
-`CHANGELOG.md`, `llms.txt`, `back-end-with-loco-setup`, `sql/schema.sql`
+`CHANGELOG.md`, `llms.txt`, `back-end-with-axum-setup`, `sql/schema.sql`
 regenerated.
 
 ### Phase 4 — Scoring engine (complete)
@@ -104,8 +104,8 @@ via a standalone Node harness.
 
 ### Phase 6 — Back-end (in progress)
 
-`back-end-with-loco/`: Loco 1.0.1, relational per-table schema, `i64` ids,
-JSON API only, mirroring `dietic-assessment/back-end-with-loco/`'s crate
+`back-end-with-axum/`: Loco 1.0.1, relational per-table schema, `i64` ids,
+JSON API only, mirroring `dietic-assessment/back-end-with-axum/`'s crate
 layout.
 
 ### Phase 7 — Verification
@@ -131,7 +131,7 @@ build` + `cargo test` in the Loco crate.
   `dietic-assessment` reference crate fails identically, because the
   generated `deny.toml` template predates loco-rs 1.0.1's `jsonwebtoken` v10
   dependency tree. It is a fleet-wide gap in
-  `bin/generate-loco-deny-config.py`'s policy, not a defect introduced here,
+  `bin/generate-axum-deny-config.py`'s policy, not a defect introduced here,
   and per this repo's "generated artefacts are never hand-edited" rule it
   should be fixed by updating that generator, not by hand-editing this
   crate's `deny.toml`.

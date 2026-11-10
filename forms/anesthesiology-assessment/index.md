@@ -35,7 +35,7 @@ See `doc/` and `spec/index.md` for the full design spec.
 anesthesiology-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

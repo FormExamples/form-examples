@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-00000009aaee"
+  deletedAt: null
+  complianceStatus: "fully-immunised"
+  overallRiskLevel: "low"
+  childhoodComplete: "yes"
+  occupationalComplete: "yes"
+  covidComplete: "yes"
+  fluCurrent: "yes"
+  gradedAt: "2026-01-01T00:00:00Z"
+  assessmentId: "00000000-0000-4000-8000-00000003d376"

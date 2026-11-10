@@ -1,0 +1,1 @@
+DROP TABLE "body_mass_index_and_body_surface_area_calculator_grade_flags";

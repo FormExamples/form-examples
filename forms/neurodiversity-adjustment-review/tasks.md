@@ -5,12 +5,12 @@
 - [x] SQL migrations: worker, manager, `neurodiversity_adjustment_review`,
       `_grade`, `_grade_rule`, `_grade_flag`; applies cleanly (`bin/test-sql-apply`).
 - [x] `index.md`, `AGENTS.md`, `plan.md`, `tasks.md`, `spec/index.md`.
-- [x] Generated derivatives (XML, FHIR R5, protobuf, OpenAPI, Loco setup,
+- [x] Generated derivatives (XML, FHIR R5, protobuf, OpenAPI, Axum setup,
       examples, CHANGELOG, llms.txt).
 
 - [x] Build `front-end-with-html` (single-page wizard + dashboard + JS engine).
 - [x] Build `front-end-with-svelte` (RESTful list + form routes + TS engine).
-- [x] Build `back-end-with-loco` (Rust JSON API crate; relational per-table schema).
+- [x] Build `back-end-with-axum` (Rust JSON API crate; relational per-table schema).
 
 ## Next
 

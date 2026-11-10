@@ -17,8 +17,8 @@ bin/create-form example-screening-score
 ```
 
 `bin/create-form` copies `etc/skeleton/` into `forms/example-screening-score/`
-and writes the Loco bootstrap script. You now have the full directory layout
-(`index.md`, `spec/`, `sql/`, `front-end-with-html/`, `back-end-with-loco/`, …)
+and writes the Axum bootstrap script. You now have the full directory layout
+(`index.md`, `spec/`, `sql/`, `front-end-with-html/`, `back-end-with-axum/`, …)
 with empty or placeholder content.
 
 ## 2. Fill in the design docs
@@ -56,7 +56,7 @@ Every table needs the three timestamps and a UUID primary key (see the
 
 ## 4. Regenerate the derived artefacts
 
-The SQL drives XML, FHIR, protobuf, OpenAPI, the Loco setup script, and the
+The SQL drives XML, FHIR, protobuf, OpenAPI, the Axum setup script, and the
 per-form CHANGELOG + examples. Run the generators (they are idempotent — safe to
 re-run):
 
@@ -66,7 +66,7 @@ python3 bin/xml-representations/generate-xml-representations.py
 python3 bin/fhir-r5/generate-fhir-r5-representations.py
 python3 bin/protobuf/generate-protobuf-representations.py
 python3 bin/openapi/generate-openapi-representations.py
-python3 bin/back-end-with-loco/generate-back-end-with-loco-setup.py
+python3 bin/back-end-with-axum/generate-back-end-with-axum-setup.py
 python3 bin/generate-changelog-and-examples.py example-screening-score
 python3 bin/generate-llms-txt.py example-screening-score
 ```
@@ -85,7 +85,7 @@ logic):
 - **Svelte** — mirror `forms/cardiology-request/front-end-with-svelte/` (the
   Svelte reference form): a pure engine in `src/lib/engine/`, `StepNName.svelte`
   wizard steps, and RESTful routes. Tutorial 3 covers the engine.
-- **Loco** — mirror `forms/medical-operation-note/back-end-with-loco/` (the Loco
+- **Axum** — mirror `forms/medical-operation-note/back-end-with-axum/` (the Axum
   reference crate): one migration and one `_entity` per SQL table.
 
 ## 6. Validate the structure
@@ -117,5 +117,5 @@ ls bin/openapi/generate-openapi-representations.py
 # The three reference forms this tutorial points at all exist:
 ls forms/pre-operative-assessment-by-clinician/front-end-with-html
 ls forms/cardiology-request/front-end-with-svelte
-ls forms/medical-operation-note/back-end-with-loco
+ls forms/medical-operation-note/back-end-with-axum
 ```

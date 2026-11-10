@@ -1,0 +1,1 @@
+ALTER TABLE "united_kingdom_statement_of_fitness_for_works" DROP COLUMN "united_kingdom_statement_of_fitness_for_work_id";

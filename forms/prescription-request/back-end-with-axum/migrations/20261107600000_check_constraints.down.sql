@@ -1,0 +1,13 @@
+ALTER TABLE "grading_additional_flags" DROP CONSTRAINT IF EXISTS "grading_additional_flags_priority_check";
+ALTER TABLE "grading_fired_rules" DROP CONSTRAINT IF EXISTS "grading_fired_rules_severity_level_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_rule_count_check";
+ALTER TABLE "grades" DROP CONSTRAINT IF EXISTS "grades_priority_level_check";
+ALTER TABLE "prescription_request_types" DROP CONSTRAINT IF EXISTS "prescription_request_types_is_emergency_check";
+ALTER TABLE "prescription_request_types" DROP CONSTRAINT IF EXISTS "prescription_request_types_is_new_prescription_check";
+ALTER TABLE "prescription_substitution_options" DROP CONSTRAINT IF EXISTS "prescription_substitution_options_allow_dosage_adjustment_check";
+ALTER TABLE "prescription_substitution_options" DROP CONSTRAINT IF EXISTS "prescription_substitution_options_allow_generic_substi_c4fa9950";
+ALTER TABLE "prescription_substitution_options" DROP CONSTRAINT IF EXISTS "prescription_substitution_options_allow_brand_substitu_8fb252e9";
+ALTER TABLE "prescription_details" DROP CONSTRAINT IF EXISTS "prescription_details_route_of_administration_check";
+ALTER TABLE "prescription_requests" DROP CONSTRAINT IF EXISTS "prescription_requests_status_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";

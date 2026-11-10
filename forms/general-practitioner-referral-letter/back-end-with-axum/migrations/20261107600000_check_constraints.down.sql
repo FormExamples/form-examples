@@ -1,0 +1,10 @@
+ALTER TABLE "general_practitioner_referral_letter_grade_flags" DROP CONSTRAINT IF EXISTS "general_practitioner_referral_letter_grade_flags_priority_check";
+ALTER TABLE "general_practitioner_referral_letter_grade_flags" DROP CONSTRAINT IF EXISTS "general_practitioner_referral_letter_grade_flags_category_check";
+ALTER TABLE "general_practitioner_referral_letter_grades" DROP CONSTRAINT IF EXISTS "general_practitioner_referral_letter_grades_urgency_check";
+ALTER TABLE "general_practitioner_referral_letter_grades" DROP CONSTRAINT IF EXISTS "general_practitioner_referral_letter_grades_status_check";
+ALTER TABLE "general_practitioner_referral_letters" DROP CONSTRAINT IF EXISTS "general_practitioner_referral_letters_consent_to_share_check";
+ALTER TABLE "general_practitioner_referral_letters" DROP CONSTRAINT IF EXISTS "general_practitioner_referral_letters_urgency_check";
+ALTER TABLE "general_practitioner_referral_letters" DROP CONSTRAINT IF EXISTS "general_practitioner_referral_letters_referrer_role_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

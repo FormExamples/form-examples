@@ -82,7 +82,7 @@ The engine has parity tests across the TypeScript (Vitest) and Rust
 - Engine files (TypeScript): `score-grader.ts`, `manifesto-rules.ts`,
   `principles-rules.ts`, `flagged-issues.ts`.
 - Engine files (Rust): mirror module names under
-  `back-end-with-loco/src/engine/`.
+  `back-end-with-axum/src/engine/`.
 - Test files: `score-grader.test.ts`, `manifesto-rules.test.ts`,
   `principles-rules.test.ts`, `flagged-issues.test.ts` (TS); equivalent
   Rust tests.

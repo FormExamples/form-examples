@@ -10,7 +10,7 @@
 - [x] `front-end-with-svelte/` — 3-step wizard + dashboard. Verified via
       `svelte-check` (0 errors), `vitest run` (3/3), and Playwright
       (submit → report, dashboard renders, 0 console errors).
-- [x] `back-end-with-loco/` — Rust JSON API. Verified via `cargo check`
+- [x] `back-end-with-axum/` — Rust JSON API. Verified via `cargo check`
       (clean) and `cargo test` (25/25 passing against a live Postgres);
       fixed a fixture-path bug matching the established convention.
 - [x] Filled in doc-stub files (`doc/`, `fhir/r5/`, `protobuf/`, `sql/`,

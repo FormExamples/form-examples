@@ -1,7 +1,7 @@
 /**
  * Back-end API client for the medical fit note front-end.
  *
- * The Loco back-end (forms/medical-fit-note/back-end-with-loco) serves plain
+ * The Axum back-end (forms/medical-fit-note/back-end-with-axum) serves plain
  * REST JSON (camelCase, UUID ids) at /api/employees, /api/clinicians,
  * /api/medical_fit_notes, /api/medical_fit_note_grades,
  * /api/medical_fit_note_grade_rules and /api/medical_fit_note_grade_flags

@@ -12,7 +12,7 @@ Created 2026-08-13. Per-phase checkboxes live in [`tasks.md`](./tasks.md).
 | `examples/`, `CHANGELOG.md`, `llms.txt` | generated |
 | `front-end-with-html/` | complete |
 | `front-end-with-svelte/` | complete |
-| `back-end-with-loco/` | complete |
+| `back-end-with-axum/` | complete |
 
 ## Why this form exists
 
@@ -75,7 +75,7 @@ Acceptance: `bin/test-sql-apply perioperative-optimization` passes.
 ### Phase 3 — Generated representations
 
 XML/DTD, FHIR R5, protobuf, OpenAPI, then the SQL comment and combined-schema
-generators, then the Loco setup script, CHANGELOG/examples, `llms.txt`, and
+generators, then the Axum setup script, CHANGELOG/examples, `llms.txt`, and
 `forms.tsv`.
 
 Acceptance: every generator's `--check` reports no drift and
@@ -99,13 +99,13 @@ both sides of every gating boundary.
 
 Acceptance: `pnpm check`, `pnpm test`, and the Lily Svelte drift detectors pass.
 
-### Phase 6 — Loco back-end
+### Phase 6 — Axum back-end
 
-Loco 1.0.1 on axum 0.8 with SeaORM and PostgreSQL, JSON API only, relational
-per-table schema. Run the `bin/loco-*` tools afterwards so defaults,
-nullability, deny policy, and the queue/observability config match the fleet.
+axum 0.8 with axa, sqlx and PostgreSQL, JSON API only, relational per-table
+schema. The `bin/axum-*` tools keep it in step with the fleet.
 
-Acceptance: `cargo build`, `cargo test`, and every `bin/loco-* --check` pass.
+Acceptance: `cargo clippy`, `cargo test`, `cargo deny --all-features check`,
+and every `bin/axum-* --check` pass.
 
 ## Risks and open questions
 

@@ -1,0 +1,20 @@
+pub mod openapi;
+
+pub mod arc42_documentation;
+pub mod arc42_documentation_grade;
+pub mod arc42_documentation_grade_flag;
+pub mod arc42_documentation_grade_rule;
+pub mod architectural_decision;
+pub mod architecture;
+pub mod building_block;
+pub mod business_goal;
+pub mod constraint_item;
+pub mod context_partner;
+pub mod deployment_node;
+pub mod glossary_term;
+pub mod quality_goal;
+pub mod quality_scenario;
+pub mod risk_item;
+pub mod runtime_scenario;
+pub mod stakeholder;
+pub mod technology_decision;

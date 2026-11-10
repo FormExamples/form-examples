@@ -1,6 +1,6 @@
 // Backend API client for the dashboard and the wizard.
 //
-// Talks to the Loco REST API in ../back-end-with-loco: plain per-table CRUD
+// Talks to the Axum REST API in ../back-end-with-axum: plain per-table CRUD
 // (camelCase JSON, UUID ids) at /api/manufacturers, /api/assessors,
 // /api/medical_device_assessments, /api/medical_device_assessment_grades,
 // /api/medical_device_assessment_grade_rules and

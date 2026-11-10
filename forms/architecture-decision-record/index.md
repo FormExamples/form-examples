@@ -74,11 +74,10 @@ where in the team's lifecycle the ADR is being captured.
      `file://`, no build step
    - `front-end-with-svelte/` — `pnpm dev`, then visit
      `http://localhost:5173`
-   - `back-end-with-loco/` — `cargo loco start`,
-     then visit `http://localhost:5150/architecture_decision_records/new`
 2. Fill the 16-step wizard. The HTML and SvelteKit forms autosave to
-   `localStorage` under `adr.form.v1` as you type. The Loco backend
-   auto-numbers and auto-slugs the row on submit.
+   `localStorage` under `adr.form.v1` as you type. To store an ADR,
+   `POST` it to the Axum back end's `/api/adrs`, which numbers and slugs
+   it when the body leaves those out.
 3. Click **Generate Markdown ADR**. Copy the output or download the
    `.md` file into `docs/adr/NNNN-slug.md` in your project repo.
 
@@ -86,8 +85,7 @@ where in the team's lifecycle the ADR is being captured.
 
 1. Open a wizard.
 2. Click **Import .md** and pick the committed file.
-3. The wizard is populated from the Markdown (HTML and SvelteKit only —
-   the Loco wizard edits the row directly via `/edit`).
+3. The wizard is populated from the Markdown.
 4. Re-generate Markdown when done; commit the updated file.
 
 ### Browse the register
@@ -97,32 +95,24 @@ where in the team's lifecycle the ADR is being captured.
   when wiring to a real backend.
 - `front-end-with-svelte/` — sortable / filterable register
   with status pills. Set `VITE_API_BASE_URL=http://localhost:5150` in
-  `.env.local` to read live from the Loco backend's `/api/adrs`
+  `.env.local` to read live from the Axum backend's `/api/adrs`
   endpoint. Clicking a row navigates to `/{slug}` for an inline
   Markdown view.
 
 ### Run the backend
 
 ```sh
-cd back-end-with-loco
-cargo loco db migrate
-cargo loco start
+cd back-end-with-axum
+cargo run -- db migrate
+cargo run -- start
 ```
 
-Routes:
+The back end is a JSON API (`GET /api/openapi.yaml` describes it):
 
-- `GET  /architecture_decision_records` — register HTML
-- `GET  /architecture_decision_records/new` — minimal new-draft form
-- `GET  /architecture_decision_records/:id` — read-only ADR view with
-  status banners (superseded / deprecated / pending)
-- `GET  /architecture_decision_records/:id/edit` — 16-section wizard
-- `GET  /architecture_decision_records/:id/markdown` — rendered ADR as
-  `text/markdown`
-- `GET  /api/adrs` — JSON register for the SvelteKit dashboard
-- `GET  /api/adrs/:slug` — JSON view (metadata + rendered Markdown)
-- HTMX partials at `/architecture_decision_records/:id/positions` and
-  `/architecture_decision_records/:id/notes` for inline child-table
-  edits in the wizard
+- `GET  /api/adrs` — the register, by number, paged
+- `POST /api/adrs` — create an ADR; a missing number is the next one, and a
+  missing slug comes from the title. Answers the stored row
+- `GET  /api/adrs/{slug}` — one ADR's metadata and its rendered Markdown
 
 ## Directory structure
 
@@ -141,7 +131,7 @@ architecture-decision-record/
   front-end-with-svelte/                    SvelteKit 2 + Svelte 5 wizard
   front-end-with-html/                 Decision register (HTML table)
   front-end-with-svelte/               Decision register (SVAR Grid)
-  back-end-with-loco/         Rust + Loco JSON API
+  back-end-with-axum/         Rust + Axum JSON API
 ```
 
 ## References

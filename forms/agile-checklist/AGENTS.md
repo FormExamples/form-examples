@@ -24,7 +24,7 @@ table. The 57 items are sourced verbatim from [`seed.md`](./seed.md).
 - `./fhir/r5/` — generated FHIR R5 JSON per SQL entity
 - `./front-end-with-html/` — single-page HTML wizard (index.html) + dashboard (dashboard.html)
 - `./front-end-with-svelte/` — SvelteKit single-page wizard + dashboard (SVAR DataGrid)
-- `./back-end-with-loco/` — Rust backend with
+- `./back-end-with-axum/` — Rust backend with
   a JSON API
 
 ## Scoring engine
@@ -109,8 +109,8 @@ mapping from item-text in `seed.md` to schema column is unambiguous.
 ## Backend stack
 
 - Rust edition 2024
-- Loco 0.16 framework on axum 0.8
-- SeaORM 1.1 with PostgreSQL
+- Axum 0.16 framework on axum 0.8
+- sqlx 1.1 with PostgreSQL
 - a JSON API (no server-rendered templates)
 - `serde(rename_all = "camelCase")` for front-end interop
 

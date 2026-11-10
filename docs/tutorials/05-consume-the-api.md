@@ -1,10 +1,10 @@
 # Tutorial 5 — Consume the API
 
-This tutorial boots the **`apgar-score`** Loco crate, drives full CRUD with
+This tutorial boots the **`apgar-score`** Axum crate, drives full CRUD with
 `curl`, maps each call to the form's OpenAPI spec, and reads the FHIR R5 bundle
 that represents a submitted assessment. It assumes you have the API running from
 Tutorial 1 (`01-quickstart.md`, §3) — the same Postgres and
-`cargo loco start`.
+`cargo run -- start`.
 
 Run from the repository root unless a `cd` says otherwise.
 
@@ -13,13 +13,13 @@ Run from the repository root unless a `cd` says otherwise.
 Recap of Tutorial 1 §3 (throwaway Postgres, then migrate and start):
 
 ```sh
-cd forms/apgar-score/back-end-with-loco
-export DATABASE_URL="postgres://loco@localhost/apgar_score_development?host=$SOCK&port=5433"
-cargo loco db migrate
-cargo loco start
+cd forms/apgar-score/back-end-with-axum
+export DB_URL="postgres://postgres@localhost/apgar_score_development?host=$SOCK&port=5433"
+cargo run -- db migrate
+cargo run -- start
 ```
 
-Loco serves on `localhost:5150` and mounts controllers under the `api/` prefix.
+Axum serves on `localhost:5150` and mounts controllers under the `api/` prefix.
 
 ## 2. The OpenAPI ↔ live-route mapping
 
@@ -47,7 +47,7 @@ sed -n '1,60p' forms/apgar-score/openapi/patient.yaml
 
 ## 3. CRUD with curl
 
-Run these in a second shell while `cargo loco start` holds the first.
+Run these in a second shell while `cargo run -- start` holds the first.
 
 **Create** (POST — the request body matches the controller's `Params`; required
 fields are `name`, `birth_date`, `sex`, `united_kingdom_nhs_number`,
@@ -132,7 +132,7 @@ FHIR consumer as the interoperable export of a submitted record.
 
 ```sh
 # The crate, its OpenAPI specs, and the FHIR bundle this tutorial uses exist:
-ls forms/apgar-score/back-end-with-loco/Cargo.toml
+ls forms/apgar-score/back-end-with-axum/Cargo.toml
 ls forms/apgar-score/openapi/patient.yaml
 ls forms/apgar-score/openapi/apgar_score.yaml
 ls forms/apgar-score/examples/fhir-bundle.json

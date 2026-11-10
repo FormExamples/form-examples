@@ -37,7 +37,7 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 - `bin/test-tools` — smoke-test every Lily-system tool's `--check` / `--counts` / `--help` modes
 - `bin/test-personas [<slug>…] [--update] [--verbose]` — verify each form's hand-authored `examples/personas.json` (a realistic filled state + the engine's exact expected grade) against its actual scoring engine; `--update` (re)computes `expected`; `--verbose` lists every persona, and the summary counts both forms and personas. Split engines (a separate flag detector that `form-app.js` composes at render time) have their flags pinned too, via `flagsHint` + `flagsArgs` (the detector's exact call contract, copied from `form-app.js` — detectors variously take `(state)`, `(state, grade)`, or specific grade fields, so the contract must be spelled out or the pinned flags would silently differ from the UI). The wall clock is frozen while grading (`clock`, default `2026-09-03T12:00:00Z`) so review-date / expiry / certification flags never rot. Richer regression oracle than the type-defaulted `examples/assessment.json` fixture — several persona sets have found real, verified gaps between a form's documented behavior and what its engine actually does
 - `bin/test-engines [<slug>…] [--verbose] [--skip-summary] [--probe <slug>]` — headless smoke gate for every HTML front-end's scoring engine: loads it (real ES-module `import()`, or a `vm` sandbox for any classic-script straggler), runs its grader over the default state, and asserts a structured result. Catches an engine that throws on load or returns malformed output, with no browser. Discovery is by *probing* (`bin/lib/engine-loader.js`): the factory is the zero-arg export building the largest state object, and the grader is the plausibly-named export whose result over that state looks most like a composite (rule + flag arrays, a status-like key) — names only break ties. The earlier name-only heuristic mis-picked sub-axis graders on six verified forms and left 76 forms SKIPped; probing leaves 15 (all genuinely engine-less or factory-less). `--skip-summary` groups the SKIPs by reason class; `--probe` shows every candidate's score for one form
-- `bin/test-loco-routes` — assert every Loco crate exposes its domain HTTP API: a crate whose `app.rs` `routes()` wires only `auth::routes()` compiles and has a full data layer but exposes no domain entities over HTTP; fails any crate wiring fewer than two routes
+- `bin/test-axum-routes` — assert every Axum crate exposes its domain HTTP API: a crate whose `app.rs` `routes()` wires only `auth::routes()` compiles and has a full data layer but exposes no domain entities over HTTP; fails any crate wiring fewer than two routes
 - `bin/test-tutorials` — fast doc-rot check for `docs/tutorials/`: extracts every fenced ` ```sh ` block, scans it for `bin/...` and `forms/...` path tokens, and asserts each still exists. Static reference check only — starts no servers, runs no tutorial commands
 - `bin/create-form <slug>` — scaffold a new form directory
 - `bin/update` — run the `update / upgrade / fix / harmonize / audit / test` Claude Code prompt against the repo
@@ -50,14 +50,15 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 - `bin/sql/generate-sql-comments.py` — append missing `COMMENT ON TABLE` / `COMMENT ON COLUMN` to numbered SQL migrations
 - `bin/sql/generate-sql-combined.py` — combine each form's numbered SQL migrations into `schema.sql`
 
-### Loco back-end refactor
+### Axum back-end refactor
 
-Mechanical fleet-wide maintenance tools for `back-end-with-loco/` crates
+Mechanical fleet-wide maintenance tools for `back-end-with-axum/` crates
 (background-queue/observability config, migration defaults/nullability, UUID primary keys,
-`deny.toml`, `#![forbid(unsafe_code)]`, scaffold-bug fixups, the loco-rs
+`deny.toml`, `#![forbid(unsafe_code)]`, scaffold-bug fixups, the axa
 1.0.1 migration, MSRV, connection-pool sizing, `GET /api/openapi.yaml`,
-camelCase JSON) are catalogued in
-[`AGENTS/back-end-with-loco.md`](AGENTS/back-end-with-loco.md) §Fleet-wide
+camelCase JSON, the axa 0.6 and RFC 9457 move, the rate limit and development-only
+seed, the CHECK constraints, axa 0.7 and cursor paging, axa 0.8 through 0.12, the `sql/` columns) are catalogued in
+[`AGENTS/back-end-with-axum.md`](AGENTS/back-end-with-axum.md) §Fleet-wide
 maintenance tools, to keep this file under the repo's own 40KB target.
 Each has a `--check` CI drift detector, listed in the Verify block below.
 
@@ -67,10 +68,10 @@ Each has a `--check` CI drift detector, listed in the Verify block below.
 - `bin/fhir-r5/generate-fhir-r5-representations.py` — generate FHIR HL7 R5 JSON per SQL entity
 - `bin/protobuf/generate-protobuf-representations.py` — generate Protocol Buffers `.proto` schemas per SQL entity
 - `bin/openapi/generate-openapi-representations.py` — generate OpenAPI 3.1 `.yaml` specifications per SQL entity
-- `bin/openapi/generate-openapi-combined.py [--check] [<slug>…]` — merge a form's per-entity OpenAPI files into one `forms/<slug>/openapi/openapi.yaml` (union of `paths` and `components.schemas` under a form-level `info` block, for Swagger UI / client codegen consumers that want one document per form); `--check` is the CI drift detector
-- `bin/back-end-with-loco/generate-back-end-with-loco-setup.py [--check] [<slug>…]` — emit each form's `cargo loco generate scaffold --api` setup script; `--check` is the CI drift detector
-- `bin/back-end-with-loco/generate-rust-docs.py <crate>…` — insert rustdoc (crate `//!`, module headers, `///` on every `pub` item) so each Loco crate compiles under `#![deny(missing_docs)]`; idempotent
-- `bin/back-end-with-loco/generate-loco-agents.py [--stale|--list-stale] <slug>…` — regenerate a form's `back-end-with-loco/AGENTS.md` to describe the crate as it actually is (relational per-table Loco JSON API, RESTful scaffold controller per domain table); replaces docs still describing the obsolete single-`assessments`-table-with-JSONB design. `--list-stale` is the CI drift detector
+- `bin/openapi/generate-openapi-combined.py [--check] [<slug>…]` — merge a form's per-entity OpenAPI files, and any hand-written `openapi/hand/routes.yaml`, into the `openapi/combined/openapi.yaml` each crate serves: only the paths and methods the crate declares, at the paths it serves, with camelCase properties as sent; `--check` is the CI drift detector and also fails on a route served but not documented, or documented but not served
+- `bin/back-end-with-axum/generate-back-end-with-axum-setup.py [--check] [<slug>…]` — emit each form's `cargo run -- generate scaffold --api` setup script; `--check` is the CI drift detector
+- `bin/back-end-with-axum/generate-rust-docs.py <crate>…` — insert rustdoc (crate `//!`, module headers, `///` on every `pub` item) so each Axum crate compiles under `#![deny(missing_docs)]`; idempotent
+- `bin/back-end-with-axum/generate-axum-agents.py [--stale|--list-stale] <slug>…` — regenerate a form's `back-end-with-axum/AGENTS.md` to describe the crate as it actually is (relational per-table Axum JSON API, RESTful scaffold controller per domain table); replaces docs still describing the obsolete single-`assessments`-table-with-JSONB design. `--list-stale` is the CI drift detector
 - `bin/generate-changelog-and-examples.py [--check] [<slug>…]` — scaffold per-form `CHANGELOG.md` and `examples/` (filled-form JSON fixture + FHIR R5 Bundle); `--check` is the CI drift detector
 - `bin/generate-persona-fhir-bundles.py [--check] [--all|<slug>…]` — generate one FHIR R5 `Bundle` per `examples/personas.json` entry into `examples/personas-fhir/`, built from that persona's actual filled `state` and computed `expected` grade (richer than `generate-changelog-and-examples.py`'s generic, type-defaulted `examples/fhir-bundle.json`, which carries the same placeholder values for every reader). Scoped to the `*-test-result` family, whose `sql/` all share one shape (`patient` + `clinician` + a single main `<slug>_result` table + a `_grade`/`_grade_rule`/`_grade_flag` triad); defaults to that whole family with no arguments. `--check` is the CI drift detector
 - `bin/generate-persona-dashboard-samples.py [--check] [--all|<slug>…]` — regenerate each `*-test-result` form's clinician-dashboard sample rows (`front-end-with-html/js/data.js` + the parallel `front-end-with-svelte/src/lib/data/sample-reports.ts`) from `examples/personas.json`, one row per persona, so the dashboard's offline sample data and the persona oracle can never disagree. Field order is read from each form's own `ReportRow` TypeScript interface (a few forms interleave a domain-specific field, e.g. `dexa-bone-density-test-result`'s `lowestTScore`/`whoClassification`, rather than appending it); the synthetic `id` reuses each form's own existing prefix (no fleet-wide naming rule). `--check` is the CI drift detector
@@ -129,8 +130,8 @@ forms/<slug>/
   openapi/                                         # OpenAPI 3.1 .yaml specifications per SQL entity (generated)
   front-end-with-html/                             # Questionnaire + dashboard (HTML + Lily Design System; index.html + dashboard.html)
   front-end-with-svelte/                           # Questionnaire + dashboard (SvelteKit + Lily); routes nested under src/routes/<form-kebab-case>/ (served at /<slug>/)
-  back-end-with-loco/                              # Back-end Rust JSON API (axum + Loco; no Tera/HTMX/Alpine/CSS); crate source under src/<form_snake_case>/
-  back-end-with-loco-setup                         # Scaffold generator (executable shell script of `cargo loco generate scaffold --api` calls; generated)
+  back-end-with-axum/                              # Back-end Rust JSON API (axum + axa + sqlx; no Tera/HTMX/Alpine/CSS); crate source under src/<form_snake_case>/
+  back-end-with-axum-setup                         # Scaffold generator (executable shell script of `cargo run -- generate scaffold --api` calls; generated)
 ```
 
 ## Standard workflow for a new form
@@ -144,7 +145,7 @@ forms/<slug>/
    - `python3 bin/fhir-r5/generate-fhir-r5-representations.py`
    - `python3 bin/protobuf/generate-protobuf-representations.py`
    - `python3 bin/openapi/generate-openapi-representations.py`
-   - `python3 bin/back-end-with-loco/generate-back-end-with-loco-setup.py`
+   - `python3 bin/back-end-with-axum/generate-back-end-with-axum-setup.py`
    - `python3 bin/generate-changelog-and-examples.py` (CHANGELOG + examples/)
 5. Build the front-ends (form and dashboard, each in HTML and SvelteKit).
 6. Build the back-end Rust JSON API implementation.
@@ -164,9 +165,9 @@ See the per-stack agent docs:
 - [Front-end with HTML / Lily Design System headless](forms/AGENTS-front-end-html.md)
 - [Front-end with SvelteKit / Lily Design System Svelte headless](forms/AGENTS-front-end-svelte.md)
 - [Front-end with SvelteKit / Tailwind / SVAR](AGENTS/front-end-with-sveltekit-tailwind-svar.md)
-- [Back-end with Rust / axum / Loco (JSON API)](AGENTS/back-end-with-loco.md)
+- [Back-end with Rust / axum / Axum (JSON API)](AGENTS/back-end-with-axum.md)
 - [Lily Design System fleet-wide tools](AGENTS/lily-tools.md)
-- [Back-end scaffold generator (setup script)](AGENTS/back-end-with-loco-setup.md)
+- [Back-end scaffold generator (setup script)](AGENTS/back-end-with-axum-setup.md)
 - [SQL migrations](AGENTS/sql.md)
 - [XML representations](AGENTS/xml-representations.md)
 - [FHIR HL7 R5 representations](AGENTS/fhir-r5.md)
@@ -183,7 +184,7 @@ See the per-stack agent docs:
 - UUIDv4 primary keys via `gen_random_uuid()`.
 - Timestamps on every table: `created_at`, `updated_at`, `deleted_at`.
 - Import and export via JSON, XML, CSV (Comma-Separated Values), and TSV (Tab-Separated Values).
-- Generated artefacts are never hand-edited (XML, FHIR, protobuf, OpenAPI, Loco setup script).
+- Generated artefacts are never hand-edited (XML, FHIR, protobuf, OpenAPI, Axum setup script).
 
 ## Compliance
 
@@ -213,9 +214,9 @@ bin/svelte-autosave-restore-fix --check        # Svelte autosave-restore bug fix
 # bin/svelte-date-time-picker-vendor --check   # one-shot, superseded by svelte-lily-picker-defaults — vendored copy deleted fleet-wide as unneeded; do not run as a CI gate
 bin/html-date-time-picker-vendor --check       # HTML date-time-picker vendor drift detector (vendor-only, unwired)
 bin/page-header-layout-refactor --check        # HTML page-header title-left/controls-right drift detector
-bin/form-export-import-refactor --check        # HTML wizard-level export/import rollout drift detector (263/350 forms)
-bin/form-restore-banner-refactor --check       # HTML wizard restore-banner rollout drift detector (263/263 migrated forms)
-bin/generate-export-samples --check            # per-form export-sample.csv/.tsv drift detector (265/356 forms; slow — drives a real browser)
+bin/form-export-import-refactor --check        # HTML wizard-level export/import rollout drift detector (269/360 forms)
+bin/form-restore-banner-refactor --check       # HTML wizard restore-banner rollout drift detector (269/269 migrated forms)
+bin/generate-export-samples --check            # per-form export-sample.csv/.tsv drift detector (265/360 forms; slow — drives a real browser)
 bin/verify-personas                            # personas.json vs real wizard submit/render (slow)
 bin/verify-blank-submit                        # blank-state submit never crashes
 bin/html-error-message-contrast-fix --check    # HTML semantic-colour (danger/success/warning/info/muted) WCAG AA contrast drift detector
@@ -239,39 +240,39 @@ bin/node-current-version-set --check  # spec/node-current-version/ drift detecto
 bin/generate-changelog-and-examples.py --check # CHANGELOG + examples/ drift detector
 bin/generate-persona-fhir-bundles.py --check   # per-persona FHIR R5 Bundle drift detector (*-test-result family)
 bin/generate-persona-dashboard-samples.py --check # per-persona dashboard sample-row drift detector (*-test-result family)
-bin/back-end-with-loco/generate-back-end-with-loco-setup.py --check # Loco setup-script drift detector
-bin/back-end-with-loco/generate-loco-agents.py --list-stale # Back-end AGENTS.md staleness check (empty output = clean)
-bin/loco-config-refactor --check --all # Loco background-queue + observability drift detector
-bin/generate-loco-deny-config.py --check # Loco deny.toml drift detector
-bin/loco-forbid-unsafe --check --all # Loco #![forbid(unsafe_code)] crate-root drift detector
-bin/loco-seed-base-rename --check --all # Loco seed() unused-base-param drift detector
-bin/loco-seed-base-stray-usage-fix --check --all # Loco seed() stray `let _ = base;` completeness check (one-shot)
-bin/loco-test-auth-header-fix --check --all # Loco test auth_header() redundant-& drift detector
-bin/loco-migration-defaults --check --all # Loco migration vs sql/ column-default drift detector
-bin/loco-migration-nullability --check --all # Loco migration/entity/controller vs sql/ nullability drift detector
-bin/loco-test-max-connections-fix --check --all # Loco config/test.yaml max_connections=1 pool-race drift detector
-bin/loco-serve-openapi-refactor --check --all # Loco GET /api/openapi.yaml route rollout drift detector
-bin/loco-camel-case-json-refactor --check --all # Loco domain-struct rename_all=camelCase drift detector
-bin/loco-integration-test-rollout --check --all # Loco patient-table POST/GET round-trip test rollout drift detector
-bin/loco-seed-data-rollout --check --all # Loco App::seed() domain-table fixture rollout drift detector
-bin/generate-api-transcripts --check   # per-form api-create.http drift detector (336/356; slow, real server)
-bin/loco-missing-request-test-stubs-fix --check --all # Loco missing-domain-test-stub completeness check (one-shot)
-bin/loco-uuid-pk-refactor --check --all # Loco integer-id -> UUID primary-key drift detector
-bin/loco-rs-1-migration --check --all # Loco 0.16 -> 1.0.1 migration completeness check (one-shot)
-bin/loco-msrv-set --msrv 1.96 --check --all # Rust MSRV (rust-version) drift detector, per spec/rust-msrv-n-minus-2/
+bin/back-end-with-axum/generate-back-end-with-axum-setup.py --check # Axum setup-script drift detector
+bin/back-end-with-axum/generate-axum-agents.py --list-stale # Back-end AGENTS.md staleness check (empty output = clean)
+bin/generate-axum-deny-config.py --check # Axum deny.toml drift detector
+bin/axum-forbid-unsafe --check --all # Axum #![forbid(unsafe_code)] crate-root drift detector
+bin/generate-api-transcripts --check   # per-form api-create.http drift detector (336/360; slow, real server)
+bin/axum-axa-upgrade --check --all # axa 0.6 + RFC 9457 problem details drift detector
+bin/axum-axa-adopt --check --all   # per-client rate limit, development-only seed, Page::respond on every list
+bin/axum-axa-0-7 --check --all     # axa 0.7, offset_pagination name, Cargo.lock
+bin/axum-axa-0-8 --check --all     # axa 0.8 or later, and axa-cursor-pagination 0.1.1, in Cargo.toml and Cargo.lock
+bin/axum-axa-0-9 --check --all     # axa 0.9 or later, in Cargo.toml and Cargo.lock
+bin/axum-axa-0-10 --check --all    # axa 0.10 or later, and axa-test, in Cargo.toml, tests and Cargo.lock
+bin/axum-axa-0-11 --check --all    # axa 0.11 or later: /_health/ready and DB_URL in tests and crate CI
+bin/axum-axa-0-12 --check --all    # axa 0.12, the postgres-sqlx feature and axa::postgres_sqlx, axa-test 0.3, in Cargo.toml, src and Cargo.lock
+bin/axum-cursor-pagination --check --all # every list pages by signed cursor, with no total
+bin/axum-check-constraints --check --all # sql/ CHECK constraints migrated into every crate, plus build.rs
+bin/axum-fixture-checks --check --all    # fixtures and test rows satisfy those CHECKs (needs Postgres)
+bin/axum-entity-routes --check --all # every SQL table reachable over HTTP
+bin/axum-sql-columns --check --all   # every sql/ column in its crate, under its sql/ name
+bin/axum-soft-delete --check --all # DELETE marks and cascades; reads and updates skip deleted rows
+bin/axum-msrv-set --msrv 1.97 --check --all # Rust MSRV (rust-version) drift detector, per spec/rust-msrv-n-minus-2/
 bin/generate-forms-tsv.py --check     # forms.tsv drift detector
 bin/generate-tools-doc.py --check     # docs/tools.md drift detector
-bin/openapi/generate-openapi-combined.py --check # per-form combined openapi.yaml drift detector
+bin/openapi/generate-openapi-combined.py --check # per-form combined openapi.yaml drift + served-route coverage
 bin/test-examples-conformance         # example fixtures vs sql/ schema conformance
 bin/test-tutorials                    # docs/tutorials/ reference only existing tools/paths
 bin/test-engines                      # HTML scoring engines load and run headless
-bin/test-loco-routes                  # every Loco crate exposes its domain HTTP API
+bin/test-axum-routes                  # every Axum crate exposes its domain HTTP API
 bin/test-vendored-uniformity          # vendored themes + DateTimePicker byte-identical fleet-wide
 bin/test-personas                     # personas.json vs each form's actual scoring engine
 bin/test-e2e --html                   # Playwright smoke + axe-core a11y sweep (HTML)
 ```
 
-Per-crate (each `forms/<slug>/back-end-with-loco/`, run in CI as part of the sharded Rust job):
+Per-crate (each `forms/<slug>/back-end-with-axum/`, run in CI as part of the sharded Rust job):
 
 ```sh
 cargo deny --all-features check       # supply-chain policy: advisories, licenses, bans, sources

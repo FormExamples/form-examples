@@ -1,0 +1,2 @@
+-- Name agile_consulting_scorecard_for_hiring_help_grades.agile_consulting_scorecard_id as sql/ does.
+ALTER TABLE "agile_consulting_scorecard_for_hiring_help_grades" RENAME COLUMN "agile_consulting_scorecard_id" TO "agile_consulting_scorecard_for_hiring_help_id";

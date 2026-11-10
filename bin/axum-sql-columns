@@ -1,0 +1,250 @@
+#!/usr/bin/env python3
+"""bin/axum-sql-columns — give each form's `back-end-with-axum/` every column its
+`sql/` declares, under the name `sql/` gives it.
+
+bin/axum-sql-columns [--check] [--root DIR] [--all|<slug>...]
+
+The scaffold left some `sql/` columns out of the crates, so the API dropped what
+the form collected (outpatient-outcome's EQ-5D-5L and PROMIS answers), and it
+named some foreign keys after the parent table rather than as `sql/` does. The
+renames were done once, by hand, in `20261109000000_sql_column_names`; this tool
+adds what is still missing, in one migration per crate,
+`20261109100000_sql_columns`:
+
+  migrations   ADD COLUMN in the fleet's type mapping, then each `sql/` CHECK
+               and VARCHAR(n) length on those columns, NOT VALID, named as
+               bin/axum-check-constraints names them
+  model        a field per column; a float drops `Eq` from the derive
+  controller   a `Params` field, the insert and the update
+
+A new field is optional in the request, so a client that does not send it
+still works: a nullable column stores null, and a NOT NULL column with a
+default takes its `sql/` default on insert and keeps its value on update. A
+NOT NULL column without a default cannot be added to stored rows, so it is
+reported for a person to decide.
+
+--check lists every `sql/` column a crate's table lacks, and exits 1 if there
+is one.
+"""
+
+import argparse
+import importlib.machinery
+import importlib.util
+import re
+import sys
+from collections import Counter
+from pathlib import Path
+
+BIN = Path(__file__).resolve().parent
+sys.path.insert(0, str(BIN / "lib"))
+import axum_crate as ac  # noqa: E402
+
+
+def load(name):
+    loader = importlib.machinery.SourceFileLoader(name.replace("-", "_"), str(BIN / name))
+    spec = importlib.util.spec_from_loader(loader.name, loader)
+    module = importlib.util.module_from_spec(spec)
+    loader.exec_module(module)
+    return module
+
+
+checks = load("axum-check-constraints")
+soft = load("axum-soft-delete")
+routes = load("axum-entity-routes")
+
+NAME = "20261109100000_sql_columns"
+LITERAL = re.compile(r'"((?:[^"\\]|\\.|\\\n)*)"', re.S)
+
+
+def missing(form, crate):
+    """(sql table, crate table, sql column) for each column the crate lacks."""
+    wanted, migrated = ac.sql_tables(form), ac.migration_tables(crate)
+    found = []
+    for name, table in wanted.items():
+        target = ac.resolve(name, table, migrated)
+        if target is None:
+            continue
+        have = {c.name for c in migrated[target].columns}
+        found += [(name, target, c) for c in table.columns if c.name not in have]
+    return found
+
+
+def column_sql(column, wanted, migrated):
+    sql = f'"{column.name}" {column.sql}'
+    if column.default is not None:
+        sql += f" DEFAULT {column.default}"
+    if not column.nullable:
+        sql += " NOT NULL"
+    if column.references:
+        parent = ac.resolve(column.references, wanted[column.references], migrated)
+        sql += f' REFERENCES "{parent}" (id) ON DELETE {column.on_delete}'
+    return sql
+
+
+def migration(form, crate, rows):
+    wanted, migrated = ac.sql_tables(form), ac.migration_tables(crate)
+    up, down, constraints, undo, used = [], [], [], [], Counter()
+    added = {(target, c.name) for _, target, c in rows}
+    for _, target, column in rows:
+        up.append(f'ALTER TABLE "{target}" ADD COLUMN {column_sql(column, wanted, migrated)};')
+        down.insert(0, f'ALTER TABLE "{target}" DROP COLUMN "{column.name}";')
+    for table, column, expression in checks.sql_checks(form):
+        target = ac.resolve(table, wanted[table], migrated) if table in wanted else None
+        mentioned = checks.names_in(expression) & {c.name for c in wanted[table].columns} if target else set()
+        if not any((target, name) in added for name in mentioned):
+            continue
+        base = f"{target}_{column}_check" if column else f"{target}_check"
+        used[base] += 1
+        name = checks.name_for(base if used[base] == 1 else f"{base}{used[base]}")
+        constraints.append(f'ALTER TABLE "{target}" ADD CONSTRAINT "{name}" CHECK ({expression}) NOT VALID;')
+        undo.insert(0, f'ALTER TABLE "{target}" DROP CONSTRAINT IF EXISTS "{name}";')
+    for table, column, length in checks.sql_lengths(form):
+        target = ac.resolve(table, wanted[table], migrated) if table in wanted else None
+        if (target, column) in added:
+            name = checks.name_for(f"{target}_{column}_length")
+            constraints.append(f'ALTER TABLE "{target}" ADD CONSTRAINT "{name}" '
+                               f'CHECK (char_length("{column}") <= {length}) NOT VALID;')
+            undo.insert(0, f'ALTER TABLE "{target}" DROP CONSTRAINT IF EXISTS "{name}";')
+    head = "-- The sql/ columns the scaffold left out, with their CHECKs.\n"
+    return head + "\n".join(up + constraints) + "\n", head + "\n".join(undo + down) + "\n"
+
+
+def model_type(column):
+    return f"Option<{column.rust}>" if column.nullable else column.rust
+
+
+def add_model_fields(text, columns):
+    match = re.search(r"pub struct Model \{\n(.*?)\n\}", text, re.S)
+    documented = "///" in match[1]
+    body = ""
+    for column in columns:
+        if documented:
+            body += f"    /// {routes.words(column.name)}.\n"
+        body += f"    pub {routes.field(column.name)}: {model_type(column)},\n"
+    text = text[:match.end() - 1] + body + text[match.end() - 1:]
+    if any(c.rust == "f64" for c in columns):
+        text = re.sub(r"(#\[derive\([^)]*PartialEq), Eq,", r"\1,", text)
+    return text
+
+
+def add_params_fields(text, columns):
+    match = re.search(r"pub struct Params \{\n(.*?)\n\}", text, re.S)
+    documented = "///" in match[1]
+    body = ""
+    for column in columns:
+        if documented:
+            body += f"    /// {routes.words(column.name)}.\n"
+        body += f"    #[serde(default)]\n    pub {routes.field(column.name)}: Option<{column.rust}>,\n"
+    return text[:match.end() - 1] + body + text[match.end() - 1:]
+
+
+def placeholder(sql):
+    return max(int(n) for n in re.findall(r"\$(\d+)", sql)) + 1
+
+
+def value(column, mark, keep=False):
+    if column.nullable or column.default is None:
+        return mark
+    return f"COALESCE({mark}, {column.name})" if keep else f"COALESCE({mark}, {column.default})"
+
+
+def bind(column):
+    copy = column.rust in ("i32", "f64", "bool", "Uuid")
+    return f"        .bind({'' if copy else '&'}self.{routes.field(column.name)})\n"
+
+
+def add_statements(text, table, columns):
+    """Add the columns to the controller's insert and update, and bind them."""
+    done = []
+
+    def rewrite(match):
+        sql = re.sub(r"\\\n\s*", "", match[1])
+        insert = re.fullmatch(rf"INSERT INTO {table} \((.*?)\) VALUES \((.*?)\)( RETURNING .*)", sql)
+        update = re.fullmatch(rf"(UPDATE {table} SET .*?)(, updated_at = now\(\) WHERE .*)", sql)
+        if insert:
+            first = placeholder(sql)
+            names = insert[1] + "".join(f", {c.name}" for c in columns)
+            marks = insert[2] + "".join(f", {value(c, f'${first + i}')}" for i, c in enumerate(columns))
+            sql = f"INSERT INTO {table} ({names}) VALUES ({marks}){insert[3]}"
+        elif update:
+            first = placeholder(sql)
+            sets = "".join(f", {c.name} = {value(c, f'${first + i}', keep=True)}" for i, c in enumerate(columns))
+            sql = update[1] + sets + update[2]
+        else:
+            return match[0]
+        done.append(match.end())
+        return soft.literal(sql)
+
+    text = LITERAL.sub(rewrite, text)
+    if len(done) != 2:
+        raise SystemExit(f"{table}: expected one insert and one update, found {len(done)}")
+    binds = "".join(bind(c) for c in columns)
+    if len(re.findall(r"\n        \.fetch_(?:one|optional)\(db\)", text)) != 2:
+        raise SystemExit(f"{table}: expected two fetches to bind before")
+    return re.sub(r"(\n)(        \.fetch_(?:one|optional)\(db\))", lambda m: m[1] + binds + m[2], text)
+
+
+def controller_for(source, table):
+    """The controller whose insert writes this table."""
+    for path in sorted(source.glob("controllers/*.rs")):
+        flat = re.sub(r"\\\n\s*", "", path.read_text())
+        if re.search(rf"INSERT INTO {table} \(", flat):
+            return path
+    return None
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    parser.add_argument("slugs", nargs="*")
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--root", type=Path, default=BIN.parent)
+    args = parser.parse_args()
+    if not args.all and not args.slugs:
+        parser.error("name forms, or pass --all")
+    gaps, written, refused = 0, 0, []
+    for path in ac.crates(args.root, args.slugs, args.all):
+        crate = path if path.name == "back-end-with-axum" else path / "back-end-with-axum"
+        form = crate.parent
+        if not crate.is_dir():
+            continue
+        rows = missing(form, crate)
+        if args.check:
+            for name, _, column in rows:
+                print(f"{form.name}: {name}.{column.name} is not in the crate")
+            gaps += len(rows)
+            continue
+        bad = [(n, c) for n, _, c in rows if not c.nullable and c.default is None]
+        if bad:
+            refused += [f"{form.name}: {n}.{c.name} is NOT NULL without a default" for n, c in bad]
+            continue
+        if not rows:
+            continue
+        up, down = migration(form, crate, rows)
+        (crate / "migrations" / f"{NAME}.up.sql").write_text(up)
+        (crate / "migrations" / f"{NAME}.down.sql").write_text(down)
+        source = ac.source_dir(crate)
+        by_table = {}
+        for _, target, column in rows:
+            by_table.setdefault(target, []).append(column)
+        for target, columns in by_table.items():
+            model = source / "models" / f"{target}.rs"
+            model.write_text(add_model_fields(model.read_text(), columns))
+            control = controller_for(source, target)
+            if control is None:
+                raise SystemExit(f"{form.name}: no controller inserts into {target}")
+            text = add_params_fields(control.read_text(), columns)
+            control.write_text(add_statements(text, target, columns))
+        written += 1
+        print(f"{form.name}: {len(rows)} columns added")
+    for line in refused:
+        print(line, file=sys.stderr)
+    if args.check:
+        print(f"{gaps} sql/ column(s) missing from the crates")
+        return 1 if gaps else 0
+    print(f"{written} crates written, {len(refused)} columns refused")
+    return 1 if refused else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

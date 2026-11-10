@@ -119,8 +119,8 @@ eye-prescription/
   front-end-with-svelte/                       # SvelteKit single-page wizard
   front-end-with-html/                    # HTML review table
   front-end-with-svelte/                  # SvelteKit SVAR DataGrid
-  back-end-with-loco/            # Rust backend + server-rendered UI
-  back-end-with-loco-setup       # generator shell script
+  back-end-with-axum/            # Rust backend + server-rendered UI
+  back-end-with-axum-setup       # generator shell script
 ```
 
 ## Clinical references

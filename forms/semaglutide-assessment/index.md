@@ -29,7 +29,7 @@ GLP-1 receptor agonist eligibility screening for semaglutide therapy, evaluating
 semaglutide-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

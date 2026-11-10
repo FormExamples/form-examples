@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (ACR / ASGE-AUC / EPAGE 1-9), cancer-pathway urgency / triage tier, request completeness, and pre-procedure bleeding / mortality risk."
 paths:
-  /endoscopy-test-request-grades:
+  /api/endoscopy_test_request_grades:
     get:
       summary: List EndoscopyTestRequestGrade records
       operationId: listEndoscopyTestRequestGrade
@@ -19,22 +19,44 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of EndoscopyTestRequestGrade records
+          description: A page of EndoscopyTestRequestGrade records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/EndoscopyTestRequestGrade"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new EndoscopyTestRequestGrade
       operationId: createEndoscopyTestRequestGrade
@@ -45,15 +67,42 @@ paths:
             schema:
               $ref: "#/components/schemas/EndoscopyTestRequestGrade"
       responses:
-        "201":
+        "200":
           description: The newly created EndoscopyTestRequestGrade
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/EndoscopyTestRequestGrade"
         "400":
-          description: Validation error
-  /endoscopy-test-request-grades/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/endoscopy_test_request_grades/{id}:
     parameters:
       - name: id
         in: path
@@ -73,6 +122,21 @@ paths:
                 $ref: "#/components/schemas/EndoscopyTestRequestGrade"
         "404":
           description: EndoscopyTestRequestGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing EndoscopyTestRequestGrade
       operationId: updateEndoscopyTestRequestGrade
@@ -91,16 +155,132 @@ paths:
                 $ref: "#/components/schemas/EndoscopyTestRequestGrade"
         "404":
           description: EndoscopyTestRequestGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing EndoscopyTestRequestGrade
+      operationId: replaceEndoscopyTestRequestGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EndoscopyTestRequestGrade"
+      responses:
+        "200":
+          description: The updated EndoscopyTestRequestGrade
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EndoscopyTestRequestGrade"
+        "404":
+          description: EndoscopyTestRequestGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
-      summary: Soft-delete a EndoscopyTestRequestGrade
+      summary: Delete a EndoscopyTestRequestGrade
       operationId: deleteEndoscopyTestRequestGrade
       responses:
-        "204":
+        "200":
           description: EndoscopyTestRequestGrade deleted
         "404":
           description: EndoscopyTestRequestGrade not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
 components:
   schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
     EndoscopyTestRequestGrade:
       type: object
       properties:
@@ -116,16 +296,12 @@ components:
           type: string
           format: date-time
           description: Timestamp when the record was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the record was deleted a.k.a. soft-removed.
         endoscopy_test_request_id:
           type: string
           format: uuid
           description: Foreign key to the parent request (unique, 1:1).
         appropriateness_score:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Appropriateness score (1-9), ACR / ASGE-AUC / EPAGE style.
         appropriateness_band:
@@ -157,15 +333,15 @@ components:
           maxLength: 500
           description: Rationale explaining the two-week-wait eligibility decision.
         completeness_percent:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Request completeness as a percentage of mandatory fields (0-100).
         glasgow_blatchford_score:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Glasgow-Blatchford bleeding score (0-23); 0 indicates very low risk suitable for outpatient management.
         rockall_score:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Pre-endoscopy Rockall score (0-11) for upper-GI-bleed mortality / rebleed risk.
         risk_band:
@@ -193,7 +369,7 @@ components:
           type: string
           description: Free-text vetting notes.
         signed_at:
-          type: string
+          type: [string, 'null']
           format: date-time
           description: Timestamp of vetting clinician electronic signature.
         graded_at:

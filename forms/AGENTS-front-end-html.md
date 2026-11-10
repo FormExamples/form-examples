@@ -473,5 +473,5 @@ Wire it into your CI step or into `bin/test` as appropriate.
 
 - SvelteKit subprojects (`front-end-*-with-svelte/`) — covered by a
   separate plan.
-- The Loco/Rust full-stack subproject.
+- The Axum/Rust full-stack subproject.
 - The Lily library's own development.

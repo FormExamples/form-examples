@@ -26,5 +26,5 @@ Some derived table, trigger, and index identifiers exceed PostgreSQL's 63-byte
 limit and are silently truncated; because they are table-scoped there is no
 collision.
 
-Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Loco
+Generated artefacts (XML, FHIR R5, protobuf, OpenAPI, `schema.sql`, and the Axum
 setup script) are derived from these migrations and are never hand-edited.

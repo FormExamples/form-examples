@@ -11,11 +11,11 @@
 
 ## Next
 
-- [x] Regenerate derived artefacts (XML, FHIR R5, protobuf, OpenAPI, Loco setup).
+- [x] Regenerate derived artefacts (XML, FHIR R5, protobuf, OpenAPI, Axum setup).
 - [x] Generate `spec/index.md`, `CHANGELOG.md`, `examples/`, `llms.txt`.
 - [x] Build `front-end-with-html` (single-page wizard + dashboard + JS engine).
 - [x] Build `front-end-with-svelte` (RESTful list + form routes + TS engine).
-- [x] Build `back-end-with-loco` (Rust JSON API crate; relational per-table schema).
+- [x] Build `back-end-with-axum` (Rust JSON API crate; relational per-table schema).
 - [ ] Curate example fixtures across the four-axis bands.
 
 ## Notes

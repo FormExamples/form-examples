@@ -31,6 +31,6 @@ for the full grading algorithm and flagged-issue rules.
 ## Regenerate
 
 `sql/` is the source of truth. After editing it, regenerate the derived
-artefacts (XML, FHIR R5, protobuf, OpenAPI, Loco setup, examples, `spec/`,
+artefacts (XML, FHIR R5, protobuf, OpenAPI, Axum setup, examples, `spec/`,
 `CHANGELOG.md`) with the repo generators in `bin/` — never hand-edit generated
 files.

@@ -1,0 +1,14 @@
+#![forbid(unsafe_code)]
+
+mod models;
+mod requests;
+mod tasks;
+
+use axa::{AppContext, Result};
+use post_operative_report::app::App;
+pub use post_operative_report::support::db;
+
+/// Load the fixtures. `H` keeps the call shape `seed::<App>(ctx)`.
+pub async fn seed<H>(ctx: &AppContext) -> Result<()> {
+    App::seed(ctx).await
+}

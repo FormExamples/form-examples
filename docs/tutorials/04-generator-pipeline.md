@@ -1,7 +1,7 @@
 # Tutorial 4 — The generator pipeline
 
 SQL is the single source of truth. From each form's `sql/` migrations the repo
-generates XML + DTD, FHIR R5 JSON, Protocol Buffers, OpenAPI 3.1, the Loco setup
+generates XML + DTD, FHIR R5 JSON, Protocol Buffers, OpenAPI 3.1, the Axum setup
 script, and the per-form CHANGELOG + examples. This tutorial adds one column to
 a real form, regenerates everything, inspects the diffs, and then reverts —
 using **`apgar-score`** as the guinea pig.
@@ -43,7 +43,7 @@ python3 bin/xml-representations/generate-xml-representations.py
 python3 bin/fhir-r5/generate-fhir-r5-representations.py
 python3 bin/protobuf/generate-protobuf-representations.py
 python3 bin/openapi/generate-openapi-representations.py
-python3 bin/back-end-with-loco/generate-back-end-with-loco-setup.py
+python3 bin/back-end-with-axum/generate-back-end-with-axum-setup.py
 python3 bin/generate-changelog-and-examples.py apgar-score
 ```
 
@@ -69,7 +69,7 @@ What each artefact is:
 | `fhir/r5/` | `bin/fhir-r5/generate-fhir-r5-representations.py` | FHIR HL7 R5 JSON per entity. |
 | `protobuf/` | `bin/protobuf/generate-protobuf-representations.py` | A `.proto` message per entity. |
 | `openapi/` | `bin/openapi/generate-openapi-representations.py` | An OpenAPI 3.1 spec per entity (the `Patient`/`ApgarScore` schemas). |
-| `back-end-with-loco-setup` | `bin/back-end-with-loco/generate-back-end-with-loco-setup.py` | The `cargo loco generate scaffold` script. |
+| `back-end-with-axum-setup` | `bin/back-end-with-axum/generate-back-end-with-axum-setup.py` | The `cargo run -- generate scaffold` script. |
 | `CHANGELOG.md`, `examples/` | `bin/generate-changelog-and-examples.py` | Keep-a-Changelog file + filled fixtures. |
 
 ## 5. What the `--check` gates catch
@@ -114,7 +114,7 @@ ls bin/xml-representations/generate-xml-representations.py
 ls bin/fhir-r5/generate-fhir-r5-representations.py
 ls bin/protobuf/generate-protobuf-representations.py
 ls bin/openapi/generate-openapi-representations.py
-ls bin/back-end-with-loco/generate-back-end-with-loco-setup.py
+ls bin/back-end-with-axum/generate-back-end-with-axum-setup.py
 ls bin/generate-changelog-and-examples.py
 ls bin/generate-llms-txt.py
 # The SQL source and one generated target for apgar-score exist:

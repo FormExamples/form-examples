@@ -29,7 +29,7 @@ Ophthalmic evaluation covering visual acuity, anterior and posterior segment exa
 ophthalmology-assessment/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

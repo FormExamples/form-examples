@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Timed intrapartum observation rows for a partogram: labour progress, contractions, fetal heart rate, liquor and moulding, maternal vitals, urine, and drugs / oxytocin."
 paths:
-  /partogram-observations:
+  /api/partogram_observations:
     get:
       summary: List PartogramObservation records
       operationId: listPartogramObservation
@@ -19,22 +19,44 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of PartogramObservation records
+          description: A page of PartogramObservation records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/PartogramObservation"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new PartogramObservation
       operationId: createPartogramObservation
@@ -45,15 +67,42 @@ paths:
             schema:
               $ref: "#/components/schemas/PartogramObservation"
       responses:
-        "201":
+        "200":
           description: The newly created PartogramObservation
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/PartogramObservation"
         "400":
-          description: Validation error
-  /partogram-observations/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/partogram_observations/{id}:
     parameters:
       - name: id
         in: path
@@ -73,6 +122,21 @@ paths:
                 $ref: "#/components/schemas/PartogramObservation"
         "404":
           description: PartogramObservation not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing PartogramObservation
       operationId: updatePartogramObservation
@@ -91,16 +155,132 @@ paths:
                 $ref: "#/components/schemas/PartogramObservation"
         "404":
           description: PartogramObservation not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing PartogramObservation
+      operationId: replacePartogramObservation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PartogramObservation"
+      responses:
+        "200":
+          description: The updated PartogramObservation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PartogramObservation"
+        "404":
+          description: PartogramObservation not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
-      summary: Soft-delete a PartogramObservation
+      summary: Delete a PartogramObservation
       operationId: deletePartogramObservation
       responses:
-        "204":
+        "200":
           description: PartogramObservation deleted
         "404":
           description: PartogramObservation not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
 components:
   schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
     PartogramObservation:
       type: object
       properties:
@@ -116,28 +296,24 @@ components:
           type: string
           format: date-time
           description: Timestamp when the row was most recently updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when the row was soft-deleted.
         partogram_id:
           type: string
           format: uuid
           description: Foreign key to the parent partogram labour record.
         observed_at:
-          type: string
+          type: [string, 'null']
           format: date-time
           description: Wall-clock date and time the observation was taken.
         cervical_dilatation_cm:
-          type: number
+          type: [number, 'null']
           format: double
           description: Cervical dilatation in centimetres (0-10), plotted against the alert and action lines.
         descent_fifths:
-          type: number
+          type: [number, 'null']
           format: double
           description: Descent of the fetal head in fifths palpable above the pelvic brim (5 down to 0).
         contractions_per_10_min:
-          type: number
+          type: [number, 'null']
           format: double
           description: "Uterine contraction frequency: number of contractions in 10 minutes."
         contraction_duration_band:
@@ -157,7 +333,7 @@ components:
             - ""
           description: "Contraction strength on palpation: mild, moderate, or strong."
         fetal_heart_rate:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Fetal heart rate in beats per minute.
         liquor_state:
@@ -180,23 +356,23 @@ components:
             - ""
           description: "Degree of fetal skull moulding: 0, +, ++, or +++."
         systolic_blood_pressure:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Maternal systolic blood pressure in mmHg.
         diastolic_blood_pressure:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Maternal diastolic blood pressure in mmHg.
         pulse:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Maternal pulse in beats per minute.
         temperature:
-          type: number
+          type: [number, 'null']
           format: double
           description: Maternal temperature in degrees Celsius.
         urine_volume_ml:
-          type: number
+          type: [number, 'null']
           format: double
           description: Volume of urine passed in millilitres.
         urine_protein:
@@ -230,7 +406,7 @@ components:
             - ""
           description: "Urine glucose dipstick: negative, trace, +, ++, or +++."
         oxytocin_rate:
-          type: number
+          type: [number, 'null']
           format: double
           description: Oxytocin infusion rate (drops per minute or mU/min).
         drugs_and_fluids:

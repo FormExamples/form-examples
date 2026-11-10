@@ -15,14 +15,14 @@ set -u
 # Environment:
 #
 #     PGHOST (default localhost), PGPORT (default 5432),
-#     PGUSER (default loco) — connection for createdb/dropdb/psql.
+#     PGUSER (default postgres) — connection for createdb/dropdb/psql.
 #
 # Exit status is non-zero if any form fails, with one line per failure
 # naming the first file that errored and the first error line.
 
 PGHOST="${PGHOST:-localhost}"
 PGPORT="${PGPORT:-5432}"
-PGUSER="${PGUSER:-loco}"
+PGUSER="${PGUSER:-postgres}"
 export PGHOST PGPORT PGUSER
 
 top="$(git rev-parse --show-toplevel)" || exit 1

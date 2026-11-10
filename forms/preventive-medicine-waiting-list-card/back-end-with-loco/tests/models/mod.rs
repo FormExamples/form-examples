@@ -1,9 +1,0 @@
-mod users;
-
-mod patients;
-mod practitioners;
-mod prev_med_waiting_list_cards;
-mod prev_med_waiting_list_card_appointments;
-mod prev_med_waiting_list_card_grades;
-mod prev_med_waiting_list_card_grade_rules;
-mod prev_med_waiting_list_card_grade_flags;

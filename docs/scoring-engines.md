@@ -53,7 +53,7 @@ states the contract explicitly: "No side effects, no network calls, no I/O."
 
 The three implementations share structure and identifiers:
 
-| Concern | HTML (`front-end-with-html/js/`) | Svelte (`src/lib/engine/`) | Rust (`back-end-with-loco/.../engine/`) |
+| Concern | HTML (`front-end-with-html/js/`) | Svelte (`src/lib/engine/`) | Rust (`back-end-with-axum/.../engine/`) |
 |---------|----------------------------------|----------------------------|------------------------------------------|
 | types | `types.js` | `types.ts` | `types.rs` |
 | rules | `rules.js` | `*-rules.ts` (one per family) | `*_rules.rs` |

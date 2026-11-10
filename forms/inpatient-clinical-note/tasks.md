@@ -52,14 +52,14 @@ Task tracking. See [`plan.md`](plan.md) for the phased roadmap.
   declared them `NOT NULL` with no default, so the Loco schema silently
   disagreed with its own source of truth and any insert that omitted a column
   failed. `cargo loco generate scaffold` cannot express defaults, so
-  regenerating the crate from `back-end-with-loco-setup` would reintroduce the
+  regenerating the crate from `back-end-with-axum-setup` would reintroduce the
   divergence — re-apply the defaults if that ever happens.
 
 ## Pre-existing issues surfaced while building this form
 
 Not fixed here, because they belong to other forms or to the fleet:
 
-- `bin/back-end-with-loco/generate-back-end-with-loco-setup.py --check` reports
+- `bin/back-end-with-axum/generate-back-end-with-axum-setup.py --check` reports
   three unrelated forms as stale: `pre-anaesthesia-assessment`,
   `pre-operative-assessment-by-clinician`, `pre-operative-assessment-by-patient`.
   Their setup scripts do not match their own SQL.

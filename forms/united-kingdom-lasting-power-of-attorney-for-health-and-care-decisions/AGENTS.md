@@ -24,8 +24,8 @@ table.
 - `./typespec/` — TypeSpec API definitions
 - `./front-end-with-html/` — single-page HTML wizard (index.html) + dashboard (dashboard.html)
 - `./front-end-with-svelte/` — SvelteKit single-page wizard + dashboard (SVAR DataGrid)
-- `./back-end-with-loco/` — Rust axum + Loco JSON API back-end
-- `./back-end-with-loco-new/` — Loco scaffold generator
+- `./back-end-with-axum/` — Rust axum + axa + sqlx JSON API back-end
+- `./back-end-with-axum-new/` — Axum scaffold generator
 
 ## Validity engine
 
@@ -102,8 +102,8 @@ See [`doc/rule-catalogue.md`](./doc/rule-catalogue.md) for the full table.
 ## Backend stack
 
 - Rust edition 2024
-- Loco 0.16 on axum 0.8
-- SeaORM 1.1 with PostgreSQL
+- Axum 0.16 on axum 0.8
+- sqlx 1.1 with PostgreSQL
 - a JSON API (no server-rendered templates)
 - `serde(rename_all = "camelCase")` for front-end interop
 

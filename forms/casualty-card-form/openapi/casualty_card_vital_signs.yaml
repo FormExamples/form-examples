@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: 1:1 with casualty_card. Vital signs observations used for NEWS2 auto-calculation.
 paths:
-  /casualty-card-vital-signses:
+  /api/casualty_card_vital_signs:
     get:
       summary: List CasualtyCardVitalSigns records
       operationId: listCasualtyCardVitalSigns
@@ -19,22 +19,44 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of CasualtyCardVitalSigns records
+          description: A page of CasualtyCardVitalSigns records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/CasualtyCardVitalSigns"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new CasualtyCardVitalSigns
       operationId: createCasualtyCardVitalSigns
@@ -45,15 +67,42 @@ paths:
             schema:
               $ref: "#/components/schemas/CasualtyCardVitalSigns"
       responses:
-        "201":
+        "200":
           description: The newly created CasualtyCardVitalSigns
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/CasualtyCardVitalSigns"
         "400":
-          description: Validation error
-  /casualty-card-vital-signses/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/casualty_card_vital_signs/{id}:
     parameters:
       - name: id
         in: path
@@ -73,6 +122,21 @@ paths:
                 $ref: "#/components/schemas/CasualtyCardVitalSigns"
         "404":
           description: CasualtyCardVitalSigns not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing CasualtyCardVitalSigns
       operationId: updateCasualtyCardVitalSigns
@@ -91,16 +155,132 @@ paths:
                 $ref: "#/components/schemas/CasualtyCardVitalSigns"
         "404":
           description: CasualtyCardVitalSigns not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing CasualtyCardVitalSigns
+      operationId: replaceCasualtyCardVitalSigns
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasualtyCardVitalSigns"
+      responses:
+        "200":
+          description: The updated CasualtyCardVitalSigns
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CasualtyCardVitalSigns"
+        "404":
+          description: CasualtyCardVitalSigns not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
-      summary: Soft-delete a CasualtyCardVitalSigns
+      summary: Delete a CasualtyCardVitalSigns
       operationId: deleteCasualtyCardVitalSigns
       responses:
-        "204":
+        "200":
           description: CasualtyCardVitalSigns deleted
         "404":
           description: CasualtyCardVitalSigns not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
 components:
   schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
     CasualtyCardVitalSigns:
       type: object
       properties:
@@ -116,32 +296,28 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted.
         casualty_card_id:
           type: string
           format: uuid
           description: FK to casualty_card (UNIQUE = 1:1 relationship).
         heart_rate:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Heart rate in beats per minute. NULL if not recorded.
         systolic_bp:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Systolic blood pressure in mmHg. NULL if not recorded.
         diastolic_bp:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Diastolic blood pressure in mmHg. NULL if not recorded.
         respiratory_rate:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Respiratory rate in breaths per minute. NULL if not recorded.
         oxygen_saturation:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Peripheral oxygen saturation (SpO2) as a percentage. NULL if not recorded.
         supplemental_oxygen:
@@ -155,11 +331,11 @@ components:
           type: string
           description: Oxygen flow rate (e.g. 2L/min, 15L NRB).
         temperature:
-          type: number
+          type: [number, 'null']
           format: double
           description: Core temperature in degrees Celsius. NULL if not recorded.
         blood_glucose:
-          type: number
+          type: [number, 'null']
           format: double
           description: Blood glucose in mmol/L. NULL if not recorded.
         consciousness_level:
@@ -172,7 +348,7 @@ components:
             - ""
           description: "AVPU consciousness level: alert, verbal, pain, unresponsive, or empty string if unanswered."
         pupil_left_size:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Left pupil size in mm (1-9). NULL if not recorded.
         pupil_left_reactive:
@@ -183,7 +359,7 @@ components:
             - ""
           description: "Whether the left pupil is reactive to light: yes, no, or empty string if unanswered."
         pupil_right_size:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Right pupil size in mm (1-9). NULL if not recorded.
         pupil_right_reactive:
@@ -197,7 +373,7 @@ components:
           type: string
           description: Capillary refill time (e.g. less than 2 seconds, 3 seconds).
         weight:
-          type: number
+          type: [number, 'null']
           format: double
           description: Patient weight in kilograms. NULL if not recorded.
       required:

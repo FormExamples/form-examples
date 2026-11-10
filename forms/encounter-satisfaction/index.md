@@ -31,7 +31,7 @@ Patient encounter satisfaction survey for collecting feedback on healthcare expe
 encounter-satisfaction/
   front-end-with-svelte/
   front-end-with-svelte/
-  back-end-with-loco/
+  back-end-with-axum/
 ```
 
 ## Technology

@@ -1,0 +1,1 @@
+DROP TABLE "columbia_suicide_severity_rating_scale_grade_flags";

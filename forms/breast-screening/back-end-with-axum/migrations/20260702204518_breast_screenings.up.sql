@@ -1,0 +1,32 @@
+CREATE TABLE IF NOT EXISTS "breast_screenings" (
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" uuid PRIMARY KEY,
+    "deleted_at" timestamp with time zone NULL,
+    "reporting_clinician_role" varchar NOT NULL DEFAULT '',
+    "reported_at" timestamp with time zone NULL,
+    "screening_unit" text NOT NULL DEFAULT '',
+    "episode_type" varchar NOT NULL DEFAULT '',
+    "patient_identifier" varchar NOT NULL DEFAULT '',
+    "age_years" integer NULL,
+    "last_screened_date" date NULL,
+    "higher_risk_surveillance" varchar NOT NULL DEFAULT '',
+    "symptomatic" varchar NOT NULL DEFAULT '',
+    "consent_given" varchar NOT NULL DEFAULT '',
+    "views_taken" varchar NOT NULL DEFAULT '',
+    "image_adequacy" varchar NOT NULL DEFAULT '',
+    "first_read_opinion" varchar NOT NULL DEFAULT '',
+    "second_read_opinion" varchar NOT NULL DEFAULT '',
+    "arbitration_outcome" varchar NOT NULL DEFAULT '',
+    "reading_outcome" varchar NOT NULL DEFAULT '',
+    "assessment_performed" varchar NOT NULL DEFAULT '',
+    "assessment_modalities" text NOT NULL DEFAULT '',
+    "imaging_classification" integer NULL,
+    "clinical_context" text NOT NULL DEFAULT '',
+    "patient_id" uuid NOT NULL,
+    "clinician_id" uuid NULL,
+    CONSTRAINT "fk-breast_screenings-patient_id-to-patients" FOREIGN KEY ("patient_id") REFERENCES "patients" (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "fk-breast_screenings-clinician_id-to-clinicians" FOREIGN KEY ("clinician_id") REFERENCES "clinicians" (id) ON DELETE SET NULL ON UPDATE NO ACTION
+);
+
+ALTER TABLE breast_screenings ALTER COLUMN id SET DEFAULT gen_random_uuid();

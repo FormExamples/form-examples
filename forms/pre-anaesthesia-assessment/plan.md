@@ -8,7 +8,7 @@ XML/DTD, FHIR R5, Protocol Buffers, and OpenAPI 3.1 representations,
 consolidated `front-end-with-html/` (Lily Design System wizard + dashboard),
 `front-end-with-svelte/` (SvelteKit 2 / Svelte 5 wizard + dashboard + PDF
 report, routes nested under `src/routes/pre-anaesthesia-assessment/`),
-and `back-end-with-loco/` (Rust edition 2024, Loco 0.16 + axum 0.8 + SeaORM,
+and `back-end-with-axum/` (Rust edition 2024, axum 0.8 + axa + sqlx,
 relational per-table schema). `bin/test-form pre-anaesthesia-assessment`
 passes. This form is the **canonical reference layout** for the monorepo, so
 improvements here set the template other forms will follow.
@@ -47,9 +47,9 @@ anaesthetist reviews before signing the WHO Safer Surgery Checklist.
 
 The repo's docs must describe what actually exists before new work lands.
 
-- Remove the stale `back-end-with-loco/todo/` embedded subcrate (it uses Tera
-  templates, which the back-end conventions ban; it predates the JSON-API
-  refactor).
+- Done 2026-11-07: removed the stale `back-end-with-axum/todo/` embedded
+  subcrate (it used Tera templates, which the back-end conventions ban; it
+  predated the JSON-API refactor).
 - Fix stale references: `tasks.md` lists the pre-rename SQL filenames
   (`00-extensions.sql`…); `AGENTS.md` points at a `seeds/` directory that no
   longer exists (the CPOC PDF lives in `doc/`), claims an `asa-rules.test.ts`

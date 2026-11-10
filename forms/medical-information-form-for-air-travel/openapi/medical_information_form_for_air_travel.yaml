@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "One MEDIF row per submission: passenger identity, trip details, attending-physician clinical evaluation, and requested in-flight accommodations for an airline medical-desk decision."
 paths:
-  /medical-information-form-for-air-travels:
+  /api/medical_information_form_for_air_travels:
     get:
       summary: List MedicalInformationFormForAirTravel records
       operationId: listMedicalInformationFormForAirTravel
@@ -19,22 +19,44 @@ paths:
             maximum: 1000
             default: 100
           required: false
-        - name: offset
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
           in: query
           schema:
-            type: integer
-            minimum: 0
-            default: 0
+            type: string
           required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
       responses:
         "200":
-          description: A page of MedicalInformationFormForAirTravel records
+          description: A page of MedicalInformationFormForAirTravel records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/MedicalInformationFormForAirTravel"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     post:
       summary: Create a new MedicalInformationFormForAirTravel
       operationId: createMedicalInformationFormForAirTravel
@@ -45,15 +67,42 @@ paths:
             schema:
               $ref: "#/components/schemas/MedicalInformationFormForAirTravel"
       responses:
-        "201":
+        "200":
           description: The newly created MedicalInformationFormForAirTravel
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/MedicalInformationFormForAirTravel"
         "400":
-          description: Validation error
-  /medical-information-form-for-air-travels/{id}:
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/medical_information_form_for_air_travels/{id}:
     parameters:
       - name: id
         in: path
@@ -73,6 +122,21 @@ paths:
                 $ref: "#/components/schemas/MedicalInformationFormForAirTravel"
         "404":
           description: MedicalInformationFormForAirTravel not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     patch:
       summary: Update an existing MedicalInformationFormForAirTravel
       operationId: updateMedicalInformationFormForAirTravel
@@ -91,16 +155,132 @@ paths:
                 $ref: "#/components/schemas/MedicalInformationFormForAirTravel"
         "404":
           description: MedicalInformationFormForAirTravel not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing MedicalInformationFormForAirTravel
+      operationId: replaceMedicalInformationFormForAirTravel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalInformationFormForAirTravel"
+      responses:
+        "200":
+          description: The updated MedicalInformationFormForAirTravel
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalInformationFormForAirTravel"
+        "404":
+          description: MedicalInformationFormForAirTravel not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
     delete:
-      summary: Soft-delete a MedicalInformationFormForAirTravel
+      summary: Delete a MedicalInformationFormForAirTravel
       operationId: deleteMedicalInformationFormForAirTravel
       responses:
-        "204":
+        "200":
           description: MedicalInformationFormForAirTravel deleted
         "404":
           description: MedicalInformationFormForAirTravel not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
 components:
   schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
     MedicalInformationFormForAirTravel:
       type: object
       properties:
@@ -116,16 +296,12 @@ components:
           type: string
           format: date-time
           description: Timestamp when this row was updated most-recently.
-        deleted_at:
-          type: string
-          format: date-time
-          description: Timestamp when this row was deleted a.k.a. soft-removed.
         patient_id:
           type: string
           format: uuid
           description: Foreign key to the passenger (MEDIF subject).
         clinician_id:
-          type: string
+          type: [string, 'null']
           format: uuid
           description: Foreign key to the attending physician (Part 2 author).
         status:
@@ -175,7 +351,7 @@ components:
           maxLength: 10
           description: Outbound flight number including airline prefix.
         outbound_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Outbound flight date.
         outbound_origin_iata:
@@ -191,7 +367,7 @@ components:
           maxLength: 10
           description: Return flight number if applicable.
         return_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Return flight date if applicable.
         cabin_class:
@@ -204,7 +380,7 @@ components:
             - ""
           description: "Cabin class: economy, premium-economy, business, or first."
         sector_duration_minutes:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Longest sector duration in minutes (drives oxygen battery planning).
         transit_airports_iata:
@@ -269,34 +445,34 @@ components:
           type: string
           description: Comma-separated ICD-10 codes.
         diagnosis_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the primary diagnosis was established.
         current_treatment:
           type: string
           description: Current treatment summary.
         last_admission_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date of most recent hospital admission, if any.
         last_discharge_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date of most recent hospital discharge, if any.
         last_specialist_review_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date of most recent specialist review.
         resting_systolic_bp:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Resting systolic blood pressure in mmHg.
         resting_diastolic_bp:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Resting diastolic blood pressure in mmHg.
         resting_heart_rate:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Resting heart rate in beats per minute.
         nyha_class:
@@ -309,11 +485,11 @@ components:
             - ""
           description: New York Heart Association functional class I-IV.
         recent_mi_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date of most recent myocardial infarction, if any.
         recent_stent_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date of most recent coronary stent, if any.
         on_anticoagulant:
@@ -331,7 +507,7 @@ components:
             - ""
           description: Implanted pacemaker or ICD present.
         exercise_tolerance_metres:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Exercise tolerance on flat ground in metres before symptoms.
         unstable_angina:
@@ -342,11 +518,11 @@ components:
             - ""
           description: Current unstable angina present.
         resting_spo2_percent:
-          type: number
+          type: [number, 'null']
           format: double
           description: Resting oxygen saturation on room air as a percentage.
         predicted_inflight_spo2_percent:
-          type: number
+          type: [number, 'null']
           format: double
           description: Predicted in-flight oxygen saturation as a percentage.
         hypoxic_challenge_result:
@@ -359,7 +535,7 @@ components:
             - ""
           description: "Hypoxic challenge test result: pass, borderline, fail, or not-performed."
         recent_pneumothorax_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date of most recent pneumothorax, if any (gas-expansion risk).
         asthma_severity:
@@ -390,11 +566,11 @@ components:
             - ""
           description: "CPAP or BiPAP use at home: none, cpap, bipap, or both."
         recent_pulmonary_embolism_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date of most recent pulmonary embolism, if any.
         last_surgery_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date of most recent surgery, if any.
         last_surgery_site:
@@ -420,7 +596,7 @@ components:
             - ""
           description: Recent fracture with plaster cast in situ.
         recent_dvt_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date of most recent deep vein thrombosis, if any.
         scuba_diving_within_24h:
@@ -431,7 +607,7 @@ components:
             - ""
           description: Scuba diving within 24 hours of departure (decompression risk).
         recent_stroke_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date of most recent stroke, if any.
         is_pregnant:
@@ -442,7 +618,7 @@ components:
             - ""
           description: Whether the passenger is currently pregnant.
         gestation_weeks:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Current gestation in completed weeks, if pregnant.
         pregnancy_type:
@@ -457,7 +633,7 @@ components:
           type: string
           description: Free-text pregnancy complications.
         expected_delivery_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Expected delivery date.
         obstetrician_contact:
@@ -473,7 +649,7 @@ components:
             - ""
           description: "Communicable disease status: none, infectious, convalescent, or cleared."
         last_symptom_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date of last symptoms of a communicable disease.
         isolation_required:
@@ -497,7 +673,7 @@ components:
             - ""
           description: Whether supplemental oxygen is required in-flight.
         oxygen_flow_rate_lpm:
-          type: number
+          type: [number, 'null']
           format: double
           description: Supplemental oxygen flow rate in litres per minute.
         oxygen_duration:
@@ -520,7 +696,7 @@ components:
           type: string
           description: Make and model of the portable oxygen concentrator.
         poc_battery_hours:
-          type: number
+          type: [number, 'null']
           format: double
           description: Total battery duration in hours (must exceed sector duration + 50%).
         requires_stretcher:
@@ -616,7 +792,7 @@ components:
             - ""
           description: Whether customs documentation for medications is available.
         haemoglobin_g_per_l:
-          type: integer
+          type: [integer, 'null']
           format: int32
           description: Haemoglobin in grams per litre (drives severe-anaemia rule).
         physician_declaration:
@@ -632,11 +808,11 @@ components:
           type: string
           description: Physician name as printed on the signature.
         physician_signature_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the physician signed the form.
         valid_until_date:
-          type: string
+          type: [string, 'null']
           format: date
           description: Date the MEDIF expires (typically signature date + 10 to 14 days).
         additional_notes:

@@ -1,7 +1,0 @@
-mod users;
-
-mod patients;
-mod clinicians;
-mod knee_replacement_surgery_evaluations;
-mod knee_replacement_surgery_evaluation_grades;
-mod knee_replacement_surgery_evaluation_grade_flags;

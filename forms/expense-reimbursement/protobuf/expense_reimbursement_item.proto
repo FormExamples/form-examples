@@ -1,0 +1,56 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: expense_reimbursement_item
+
+syntax = "proto3";
+
+package form_examples.expense_reimbursement;
+
+enum ExpenseReimbursementItemCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_TRAVEL = 1;  // travel
+  CATEGORY_MILEAGE = 2;  // mileage
+  CATEGORY_ACCOMMODATION = 3;  // accommodation
+  CATEGORY_MEALS = 4;  // meals
+  CATEGORY_EQUIPMENT = 5;  // equipment
+  CATEGORY_CLOTHING_UNIFORM = 6;  // clothing-uniform
+  CATEGORY_TRAINING_COURSE = 7;  // training-course
+  CATEGORY_PROFESSIONAL_FEES = 8;  // professional-fees
+  CATEGORY_REGISTRATION_AND_LICENSING = 9;  // registration-and-licensing
+  CATEGORY_BOOKS_AND_SUBSCRIPTIONS = 10;  // books-and-subscriptions
+  CATEGORY_TELEPHONE_AND_INTERNET = 11;  // telephone-and-internet
+  CATEGORY_POSTAGE = 12;  // postage
+  CATEGORY_PARKING_AND_TOLLS = 13;  // parking-and-tolls
+  CATEGORY_CLIENT_HOSPITALITY = 14;  // client-hospitality
+  CATEGORY_OTHER = 15;  // other
+}
+
+enum ExpenseReimbursementItemPaymentMethodEnum {
+  PAYMENTMETHOD_UNSPECIFIED = 0;
+  PAYMENTMETHOD_PERSONAL_CREDIT_CARD = 1;  // personal-credit-card
+  PAYMENTMETHOD_PERSONAL_DEBIT_CARD = 2;  // personal-debit-card
+  PAYMENTMETHOD_CASH = 3;  // cash
+  PAYMENTMETHOD_OTHER = 4;  // other
+}
+
+message ExpenseReimbursementItem {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string expense_reimbursement_id = 5;  // UUID — uuid
+  int32 line_number = 6;  // INTEGER
+  string expense_date = 7;  // DATE — iso 8601 date
+  ExpenseReimbursementItemCategoryEnum category = 8;  // VARCHAR(30)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string merchant = 10;  // VARCHAR(255) — max 255 chars
+  string currency_as_iso_4217 = 11;  // CHAR(3) — max 3 chars
+  double amount = 12;  // NUMERIC(12, 2) — numeric(12, 2)
+  double vat_amount = 13;  // NUMERIC(12, 2) — numeric(12, 2)
+  double exchange_rate_to_claim_currency = 14;  // NUMERIC(12, 6) — numeric(12, 6)
+  ExpenseReimbursementItemPaymentMethodEnum payment_method = 15;  // VARCHAR(20)
+  double mileage_distance_miles = 16;  // NUMERIC(8, 1) — numeric(8, 1)
+  bool receipt_attached = 17;  // BOOLEAN
+  string receipt_reference = 18;  // VARCHAR(255) — max 255 chars
+  string receipt_missing_reason = 19;  // VARCHAR(500) — max 500 chars
+  bool prior_approval_obtained = 20;  // BOOLEAN
+}

@@ -12,12 +12,12 @@ the repo.
 - [Data model](data-model.md) — the per-form relational schema, shared
   `patient`/`clinician` entities, grading tables, and conventions.
 - [Generator pipeline](generator-pipeline.md) — how SQL becomes XML, FHIR R5,
-  Protocol Buffers, OpenAPI, and the Loco setup script.
+  Protocol Buffers, OpenAPI, and the Axum setup script.
 - [Scoring engines](scoring-engines.md) — the pure grading-engine pattern and
   how the HTML, Svelte, and Rust implementations stay in agreement.
 - [Lily Design System](lily.md) — the headless HTML and Svelte UI contracts and
   the sync/refactor/status tooling.
-- [Back end](back-end.md) — the Rust + axum + Loco JSON API, one crate per form.
+- [Back end](back-end.md) — the Rust + axum + axa + sqlx JSON API, one crate per form.
 - [Verification](verification.md) — every gate and what it proves.
 - [Internationalization](i18n.md) — the message-extraction pattern and the
   English/Welsh pilot.
@@ -28,7 +28,7 @@ the repo.
 Hands-on, runnable walkthroughs live in [`tutorials/`](tutorials/):
 
 1. [Quickstart](tutorials/01-quickstart.md) — run one form locally (HTML,
-   Svelte, and the Loco API).
+   Svelte, and the Axum API).
 2. [Build a new form](tutorials/02-new-form.md) — end to end with a worked
    example.
 3. [Author a scoring engine](tutorials/03-scoring-engine.md).

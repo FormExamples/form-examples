@@ -17,7 +17,7 @@
 - [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
 - [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
 - [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
-- [Rust Loco JSON-API back-end](back-end-with-loco/)
+- [Rust Axum JSON-API back-end](back-end-with-axum/)
 
 ## Generated representations
 

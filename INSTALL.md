@@ -20,7 +20,7 @@ You only need the tools for the stacks you actually intend to run.
 | --- | --- |
 | HTML front-end | any static file server — Python 3 is enough |
 | SvelteKit front-end | Node 26+ and [pnpm](https://pnpm.io/) |
-| Rust back-end | Rust stable via [rustup](https://rustup.rs/), the Loco CLI (`cargo install loco`), and PostgreSQL 18 (server + client) |
+| Rust back-end | Rust stable via [rustup](https://rustup.rs/), and PostgreSQL 18 (server + client) |
 | The generators and gates | Python 3.12+, plus `xmllint` for XML validation |
 
 ## Clone
@@ -81,40 +81,40 @@ pnpm exec vitest run  # scoring-engine unit tests
 
 ## Run the Rust JSON API
 
-The back end is one Rust crate per form — axum + Loco + SeaORM, one table per
+The back end is one Rust crate per form — axum + axa + sqlx, one table per
 SQL entity — and it needs a reachable PostgreSQL.
 
 ### A throwaway Postgres
 
-Skip this if you already run Postgres locally with a `loco` superuser. Note the
+Skip this if you already run Postgres locally with a `postgres` superuser. Note the
 short socket directory: Unix socket paths are length-limited, and `mktemp -d`
 under a long `TMPDIR` will exceed it.
 
 ```sh
 export PGDATA="$(mktemp -d)/data"
 export SOCK="$(mktemp -d)"
-initdb -D "$PGDATA" -U loco --auth=trust
+initdb -D "$PGDATA" -U postgres --auth=trust
 pg_ctl -D "$PGDATA" -o "-p 5433 -k $SOCK -c listen_addresses=''" start
-createdb -h "$SOCK" -p 5433 -U loco apgar_score_development
+createdb -h "$SOCK" -p 5433 -U postgres apgar_score_development
 ```
 
 ### Migrate and start
 
 ```sh
-cd forms/apgar-score/back-end-with-loco
-export DATABASE_URL="postgres://loco@localhost/apgar_score_development?host=$SOCK&port=5433"
-cargo loco db migrate
-cargo loco start
+cd forms/apgar-score/back-end-with-axum
+export DB_URL="postgres://postgres@localhost/apgar_score_development?host=$SOCK&port=5433"
+cargo run -- db migrate
+cargo run -- start
 ```
 
-Loco listens on `localhost:5150`, with controllers mounted under `api/`:
+Axum listens on `localhost:5150`, with controllers mounted under `api/`:
 
 ```sh
 curl -s http://localhost:5150/api/patients
 ```
 
-Useful neighbours: `cargo loco db seed` loads the sample fixtures,
-`cargo loco db reset` starts over, and `forms/apgar-score/openapi/` documents
+Useful neighbours: `cargo run -- task seed` loads the sample fixtures,
+`AXA_DESTROY_DATA=true cargo run -- db reset` starts over, and `forms/apgar-score/openapi/` documents
 every endpoint.
 
 ### Tear down
@@ -140,10 +140,10 @@ use does not fit it.
 The scaffolded crates ship development defaults on purpose, so that everything
 above is a one-command experience. They are not deployment settings.
 
-- Replace every value in `config/development.yaml` and `config/production.yaml`
-  — the committed JWT secret first — and load secrets from the environment.
-- Put the API behind your own authentication and authorization. The crates
-  demonstrate the data shape and the routes, not an access-control design.
+- Set `DB_URL` and the rest from the environment. Each crate refuses
+  production without it, and its development fallbacks must never ship.
+- Put the API behind your own authentication and authorization. The crates have
+  none: they demonstrate the data shape and the routes, not an access-control design.
 - Terminate TLS in front of it, and set your own CORS policy.
 - Delete the seed fixtures and personas; they are synthetic sample data.
 - Re-run `cargo deny --all-features check` on your fork, on your schedule.

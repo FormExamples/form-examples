@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { SITE_NAME, SITE_TAGLINE, REPO_URL } from '#lib/site.js';
+  import { SITE_NAME, SITE_TAGLINE, REPO_URL, FORM_COUNT } from '#lib/site.js';
   import CategoryTable from '#lib/components/CategoryTable.svelte';
   import CodeBlock from '#lib/components/CodeBlock.svelte';
 </script>
@@ -17,11 +17,11 @@
 
 <h2 class="mt-10 text-xl font-semibold">What's in the repo</h2>
 <ul class="mt-4 list-disc space-y-1 pl-6">
-  <li>356 form projects, each in <code>forms/&lt;slug&gt;/</code></li>
+  <li>{FORM_COUNT} form projects, each in <code>forms/&lt;slug&gt;/</code></li>
   <li>PostgreSQL SQL migrations (Liquibase SQL format) — the source of truth</li>
   <li>Generated XML + DTD, FHIR HL7 R5, Protocol Buffers, and OpenAPI 3.1 representations per SQL entity</li>
   <li>Two front-ends per form (questionnaire + dashboard, each in HTML and SvelteKit — both on the Lily Design System)</li>
-  <li>A Rust back-end JSON API per form (axum + Loco; no Tera/HTMX/Alpine/CSS)</li>
+  <li>A Rust back-end JSON API per form (axum + axa + sqlx; no Tera/HTMX/Alpine/CSS)</li>
 </ul>
 
 <h2 class="mt-10 text-xl font-semibold">Form categories</h2>
@@ -39,7 +39,7 @@
   examples/                      # Filled-form JSON fixtures + personas + FHIR R5 Bundle
   front-end-with-html/           # Questionnaire + dashboard (HTML, Lily Design System)
   front-end-with-svelte/         # Questionnaire + dashboard (SvelteKit, Lily Design System)
-  back-end-with-loco/            # Rust JSON API (axum + Loco)`}</CodeBlock>
+  back-end-with-axum/            # Rust JSON API (axum + axa + sqlx)`}</CodeBlock>
 
 <div class="mt-10">
   <a

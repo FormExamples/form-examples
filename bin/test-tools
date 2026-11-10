@@ -103,16 +103,16 @@ else
     red "test-personas (persona regression — see /tmp/test-tools-personas.log)"
 fi
 
-if bin/test-loco-routes >/tmp/test-tools-loco-routes.log 2>&1; then
-    green "test-loco-routes (every Loco crate exposes its domain API)"
+if bin/test-axum-routes >/tmp/test-tools-axum-routes.log 2>&1; then
+    green "test-axum-routes (every Axum crate exposes its domain API)"
 else
-    red "test-loco-routes (a crate wires only auth — see /tmp/test-tools-loco-routes.log)"
+    red "test-axum-routes (a crate wires only auth — see /tmp/test-tools-axum-routes.log)"
 fi
 
-if [ -z "$(bin/back-end-with-loco/generate-loco-agents.py --list-stale 2>/dev/null)" ]; then
+if [ -z "$(bin/back-end-with-axum/generate-axum-agents.py --list-stale 2>/dev/null)" ]; then
     green "back-end AGENTS.md: no stale JSONB single-table docs"
 else
-    red "back-end AGENTS.md stale — run bin/back-end-with-loco/generate-loco-agents.py --stale"
+    red "back-end AGENTS.md stale — run bin/back-end-with-axum/generate-axum-agents.py --stale"
 fi
 
 # ---------------------------------------------------------------------------

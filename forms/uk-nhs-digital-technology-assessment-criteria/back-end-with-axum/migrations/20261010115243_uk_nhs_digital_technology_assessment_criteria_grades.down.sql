@@ -1,0 +1,1 @@
+DROP TABLE "uk_nhs_digital_technology_assessment_criteria_grades";

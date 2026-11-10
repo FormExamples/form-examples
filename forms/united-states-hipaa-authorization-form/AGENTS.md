@@ -30,10 +30,10 @@ reference form on which the schema is modelled.
 - `./front-end-with-html/` — HTML review table
 - `./front-end-with-svelte/` — SvelteKit + SVAR DataGrid review
   dashboard
-- `./back-end-with-loco/` — Rust backend with
+- `./back-end-with-axum/` — Rust backend with
   a JSON API
-- `./back-end-with-loco-setup` — scaffold generator
-  (executable shell script of `cargo loco generate scaffold` calls)
+- `./back-end-with-axum-setup` — scaffold generator
+  (executable shell script of `cargo run -- generate scaffold` calls)
 
 ## Validity engine
 
@@ -114,8 +114,8 @@ core-element check:
 ## Backend stack
 
 - Rust edition 2024
-- Loco 0.16 framework on axum 0.8
-- SeaORM 1.1 with PostgreSQL
+- Axum 0.16 framework on axum 0.8
+- sqlx 1.1 with PostgreSQL
 - a JSON API (no server-rendered templates)
 - `serde(rename_all = "camelCase")` for front-end interop
 

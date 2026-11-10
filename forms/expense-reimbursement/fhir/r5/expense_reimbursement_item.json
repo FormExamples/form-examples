@@ -1,0 +1,253 @@
+{
+  "resourceType": "Observation",
+  "id": "880e8400-e29b-41d4-a716-446655440003",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Observation"
+    ],
+    "lastUpdated": "2026-04-09T10:00:00+00:00"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "urn:form-examples:expense-reimbursement",
+        "code": "expense_reimbursement_item",
+        "display": "Expense Reimbursement Item"
+      }
+    ]
+  },
+  "encounter": {
+    "reference": "Encounter/770e8400-e29b-41d4-a716-446655440002"
+  },
+  "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:expense-reimbursement",
+            "code": "deleted_at",
+            "display": "Deleted At"
+          }
+        ]
+      },
+      "valueDateTime": "2026-04-09T10:00:00+00:00"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:expense-reimbursement",
+            "code": "line_number",
+            "display": "Line Number"
+          }
+        ]
+      },
+      "valueInteger": 2
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:expense-reimbursement",
+            "code": "expense_date",
+            "display": "Expense Date"
+          }
+        ]
+      },
+      "valueDateTime": "2026-01-15"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:expense-reimbursement",
+            "code": "category",
+            "display": "Category"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:expense-reimbursement:category",
+            "code": "travel",
+            "display": "Travel"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:expense-reimbursement",
+            "code": "description",
+            "display": "Description"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:expense-reimbursement",
+            "code": "merchant",
+            "display": "Merchant"
+          }
+        ]
+      },
+      "valueString": "Example Merchant"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:expense-reimbursement",
+            "code": "currency_as_iso_4217",
+            "display": "Currency As Iso 4217"
+          }
+        ]
+      },
+      "valueString": "Example Currency As Iso 4217"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:expense-reimbursement",
+            "code": "amount",
+            "display": "Amount"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:expense-reimbursement",
+            "code": "vat_amount",
+            "display": "Vat Amount"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:expense-reimbursement",
+            "code": "exchange_rate_to_claim_currency",
+            "display": "Exchange Rate To Claim Currency"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 72.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:expense-reimbursement",
+            "code": "payment_method",
+            "display": "Payment Method"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:form-examples:expense-reimbursement:payment_method",
+            "code": "personal-credit-card",
+            "display": "Personal-Credit-Card"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:expense-reimbursement",
+            "code": "mileage_distance_miles",
+            "display": "Mileage Distance Miles"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 0.0
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:expense-reimbursement",
+            "code": "receipt_attached",
+            "display": "Receipt Attached"
+          }
+        ]
+      },
+      "valueBoolean": true
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:expense-reimbursement",
+            "code": "receipt_reference",
+            "display": "Receipt Reference"
+          }
+        ]
+      },
+      "valueString": "Example Receipt Reference"
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:expense-reimbursement",
+            "code": "receipt_missing_reason",
+            "display": "Receipt Missing Reason"
+          }
+        ]
+      },
+      "valueString": "Example text."
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "urn:form-examples:expense-reimbursement",
+            "code": "prior_approval_obtained",
+            "display": "Prior Approval Obtained"
+          }
+        ]
+      },
+      "valueBoolean": true
+    }
+  ]
+}
