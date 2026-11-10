@@ -111,19 +111,15 @@ a `pdfmake` PDF report endpoint, and Vitest unit tests for the engine.
 
 Acceptance: `pnpm check`, `pnpm test`, and the Lily Svelte drift detectors pass.
 
-### Phase 6 — Loco back-end
+### Phase 6 — Axum back-end
 
-Rust, Loco 1.0.1 on axum 0.8 with SeaORM and PostgreSQL. JSON
-API only. Relational per-table schema: one migration and one entity per SQL
-table, `i64` ids, `serde(rename_all = "camelCase")`. Run the `bin/loco-*`
-tools afterwards so column defaults, nullability, deny policy, and the
-background-queue/observability config match the fleet conventions.
+Rust, axum 0.8 with axa, sqlx and PostgreSQL. JSON API only. Relational
+per-table schema: one migration and one model per SQL table, UUID ids,
+`serde(rename_all = "camelCase")`. The `bin/axum-*` tools keep it in step
+with the fleet.
 
-Acceptance: `cargo build`, `cargo test`, and every `bin/loco-* --check` pass.
-`cargo deny --all-features check` reports RUSTSEC-2023-0071 (`rsa`, reached
-transitively through SeaORM's MySQL driver); this is fleet-wide, and the
-canonical crate `forms/medical-operation-note/back-end-with-axum` fails
-identically.
+Acceptance: `cargo clippy`, `cargo test`, `cargo deny --all-features check`,
+and every `bin/axum-* --check` pass.
 
 ## Risks and open questions
 

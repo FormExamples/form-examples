@@ -86,9 +86,8 @@
       (17 tests, all passing — symmetric with the Vitest suite)
 - [x] CLI binary `issue-tracker-cli` that round-trips
       `IssueTrackerAssessment` JSON on stdin to `GradeResult` JSON on stdout
-- [ ] Run the scaffold generator to produce SeaORM entities and Loco
-      controllers from the SQL migrations (re-adds Loco / SeaORM /
-      axum / Tera deps to `Cargo.toml`)
+- [x] Relational per-table Axum crate on axa and sqlx, one model and one
+      controller per SQL table
 - [x] Tera templates: `assessment.html.tera` (the single-page wizard
       embedding ten step partials), `assessment/step01..step10.html.tera`,
       `report.html.tera`, `dashboard.html.tera` — verified by

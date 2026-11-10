@@ -54,8 +54,8 @@
       table with sample data, browser smoke test passing.
 
 ## Full-stack backend
-- [x] `back-end-with-axum/` — Loco 0.16 + axum 0.8 +
-      SeaORM + Loco JSON API.
+- [x] `back-end-with-axum/` — axum 0.8 + axa + sqlx
+      JSON API.
 
 ## Tests
 - [x] Vitest unit tests for the engine — 17/17 passing in the SvelteKit

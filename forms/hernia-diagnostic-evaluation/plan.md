@@ -90,7 +90,3 @@ used by `dietic-assessment` and `perioperative-optimization`.
   category `CHECK` constraint for fleet-wide flag-taxonomy consistency but is
   not currently wired to a wizard field — see `doc/safety-case-notes.md`
   hazard H-08.
-- `cargo deny --all-features check` is expected to fail fleet-wide on
-  RUSTSEC-2023-0071 (`rsa`, transitive via SeaORM's MySQL driver) — the
-  canonical reference crate `forms/medical-operation-note/back-end-with-axum`
-  fails identically, so this is not specific to this form.

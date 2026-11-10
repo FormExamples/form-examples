@@ -52,7 +52,7 @@
 
 ## Full-stack backend
 - [ ] `back-end-with-axum-new/00-new.sh` — Loco scaffold.
-- [x] `back-end-with-axum/` — Loco 0.16 + axum 0.8 + SeaORM + Loco JSON API.
+- [x] `back-end-with-axum/` — axum 0.8 + axa + sqlx JSON API.
 
 ## Tests
 - [ ] Vitest unit tests for `composite-validator.ts` (all rule families).

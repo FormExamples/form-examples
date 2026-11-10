@@ -15,8 +15,8 @@
       `svelte-check` (0 errors, 4 pre-existing a11y warnings matching
       baseline), `vitest run` (3/3), and Playwright (16 fieldsets, 67
       metric rows, submit → report, 0 console errors).
-- [x] `back-end-with-axum/` — Rust JSON API (parent + child SeaORM
-      entities). Fixed a real Loco FK-auto-singularization bug (the
+- [x] `back-end-with-axum/` — Rust JSON API (parent + child sqlx
+      models). Fixed a real Loco FK-auto-singularization bug (the
       parent table name "hospital_dashboard_metrics" is itself plural,
       so Loco's `references()` helper derived the wrong FK column name;
       fixed via explicit-column override). Verified via `cargo check`

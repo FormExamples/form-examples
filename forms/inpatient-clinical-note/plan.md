@@ -38,7 +38,7 @@ Development roadmap and status. See [`index.md`](index.md) for the design and
 ## Phase 4 — Back end
 
 - [x] `back-end-with-axum/` — Rust axum + axa JSON API
-- [x] One SeaORM migration and one entity per SQL table
+- [x] One migration and one sqlx model per SQL table
 - [x] REST controllers per entity, registered in `app.rs`
 - [x] Both engines ported to Rust, with 16 engine tests
 - [x] `cargo build` + `cargo clippy --all-targets` clean; `cargo test` 49/49

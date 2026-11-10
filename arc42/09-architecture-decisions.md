@@ -8,8 +8,8 @@ Short ADRs (context / decision / consequences) for the load-bearing choices.
 computed grade. A tempting shortcut is a single table with one JSONB `data`
 column per form.
 
-**Decision.** Use a **relational schema**: one SQL migration and one SeaORM
-entity per table. The core `<form>` record, the `<form>_grade` result, the
+**Decision.** Use a **relational schema**: one SQL migration and one sqlx
+model per table. The core `<form>` record, the `<form>_grade` result, the
 `<form>_grade_rule` audit rows, the `<form>_grade_flag` rows, and any
 domain-specific child tables (team members, procedures, implants, …) are each
 their own table with a UUID PK and the timestamp trio.

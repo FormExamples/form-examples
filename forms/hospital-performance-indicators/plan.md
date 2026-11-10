@@ -13,8 +13,8 @@
    + dashboard.
 5. Front-end-with-svelte — SvelteKit wizard mirroring the HTML
    front-end + dashboard.
-6. Back-end-with-loco — Rust axum + axa JSON API, relational
-   (parent + child entity) SeaORM models.
+6. Back-end-with-axum — Rust axum + axa JSON API, relational
+   (parent + child entity) sqlx models.
 7. Verify — `bin/test-form hospital-performance-indicators`,
    `bin/lily-html-refactor --check`, `bin/lily-svelte-refactor --check`.
 

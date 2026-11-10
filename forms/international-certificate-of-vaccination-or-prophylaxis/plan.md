@@ -37,7 +37,7 @@
 - [x] `back-end-with-axum-setup` — scaffold generator script
 - [x] `back-end-with-axum/` — Rust Loco crate
 - [ ] HTMX + Alpine.js base layout (`templates/base.html.tera`)
-- [x] SeaORM migrations mirroring `sql/`
+- [x] sqlx migrations mirroring `sql/`
 - [ ] Validation engine port to Rust
 - [ ] Controller routes: GET show, POST submit, GET report
 

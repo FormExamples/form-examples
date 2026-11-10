@@ -78,9 +78,7 @@
 - [x] `bin/loco-migration-nullability --check` passes.
 - [x] `bin/generate-axum-deny-config.py --check` passes.
 - [x] `cargo build` and `cargo test` pass.
-- [ ] `cargo deny --all-features check` — fails on RUSTSEC-2023-0071 (`rsa`,
-      transitive via SeaORM's MySQL driver). Fleet-wide: the canonical crate
-      `forms/medical-operation-note/back-end-with-axum` fails identically.
+- [x] `cargo deny --all-features check` passes.
 
 ## Verify
 

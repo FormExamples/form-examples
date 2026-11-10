@@ -52,10 +52,6 @@ pass** end-to-end (33 form Vitest + 13 dashboard Vitest + 14 Cargo).
 
 ### High priority — REMAINING
 
-- **Full Loco app.** Run the `back-end-with-axum-setup`
-  script to scaffold SeaORM entities and Loco controllers. Replace the
-  thin axum server with Loco controllers wrapping the existing scoring
-  engine.
 - **Tera templates.** `assessment.html.tera` (six-step wizard with step
   partials), `report.html.tera`, `dashboard.html.tera` (HTMX-driven
   filter / sort).
@@ -103,6 +99,5 @@ pass** end-to-end (33 form Vitest + 13 dashboard Vitest + 14 Cargo).
   patient-assessment scaffold. A second mapping (FHIR
   `QuestionnaireResponse` + `Organization`) may be more semantically
   appropriate; both will be evaluated.
-- The Rust crate ships a thin axum server (good enough to serve the
-  dashboard locally). The full Loco app — SeaORM entities, controllers,
-  Tera templates — is still pending.
+- The Rust crate is the fleet's relational Axum JSON API on axa and sqlx:
+  one model and one controller per SQL table.

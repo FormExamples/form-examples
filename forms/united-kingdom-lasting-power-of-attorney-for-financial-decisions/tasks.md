@@ -60,8 +60,8 @@
 ## Full-stack backend
 - [x] `back-end-with-axum-setup` shell script with all
       `cargo loco generate scaffold` calls.
-- [x] `back-end-with-axum/` — Loco 0.16 + axum 0.8
-      + SeaORM + Loco JSON API
+- [x] `back-end-with-axum/` — axum 0.8 + axa
+      + sqlx JSON API
 
 ## Tests
 - [ ] Vitest unit tests for `validator.ts`, `blocker-rules.ts`, `flag-rules.ts`.
