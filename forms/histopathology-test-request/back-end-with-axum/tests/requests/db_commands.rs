@@ -1,5 +1,5 @@
 use axa::cli::DbCommand;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use axa::Environment;
 use histopathology_test_request::app::App;
 use serial_test::serial;

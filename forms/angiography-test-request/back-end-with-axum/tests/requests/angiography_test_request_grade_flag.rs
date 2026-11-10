@@ -1,7 +1,7 @@
 #[allow(unused_imports)]
 use crate::{db, seed};
 use angiography_test_request::app::App;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use serial_test::serial;
 
 #[tokio::test]

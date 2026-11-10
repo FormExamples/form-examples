@@ -1,7 +1,7 @@
 //! Lists come in signed cursor pages, with no total.
 
 use bowel_cancer_screening_with_faecal_immunochemical_test::app::App;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use serde_json::Value;
 use serial_test::serial;
 

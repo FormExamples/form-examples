@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use recognition_of_stroke_in_the_emergency_room::app::App;
 use serial_test::serial;
 use uuid::Uuid;

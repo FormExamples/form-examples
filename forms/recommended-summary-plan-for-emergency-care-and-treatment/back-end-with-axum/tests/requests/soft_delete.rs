@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use recommended_summary_plan_for_emergency_care_and_treatment::app::App;
 use serial_test::serial;
 use uuid::Uuid;

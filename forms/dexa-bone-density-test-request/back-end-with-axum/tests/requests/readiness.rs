@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use dexa_bone_density_test_request::app::App;
 use serial_test::serial;
 

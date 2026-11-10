@@ -1,5 +1,5 @@
 use axa::cli::DbCommand;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use axa::Environment;
 use bone_marrow_donation_assessment::app::App;
 use serial_test::serial;

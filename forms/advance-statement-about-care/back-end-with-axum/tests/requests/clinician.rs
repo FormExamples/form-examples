@@ -1,7 +1,7 @@
 #[allow(unused_imports)]
 use crate::{db, seed};
 use advance_statement_about_care::app::App;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use serial_test::serial;
 
 #[tokio::test]

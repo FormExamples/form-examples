@@ -1,5 +1,5 @@
 use axa::cli::DbCommand;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use axa::Environment;
 use post_anaesthesia_care_unit_record::app::App;
 use serial_test::serial;

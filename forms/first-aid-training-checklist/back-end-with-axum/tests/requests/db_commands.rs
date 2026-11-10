@@ -1,5 +1,5 @@
 use axa::cli::DbCommand;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use axa::Environment;
 use first_aid_training_checklist::app::App;
 use serial_test::serial;

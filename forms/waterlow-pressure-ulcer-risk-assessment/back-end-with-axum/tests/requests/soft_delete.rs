@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use serial_test::serial;
 use uuid::Uuid;
 use waterlow_pressure_ulcer_risk_assessment::app::App;

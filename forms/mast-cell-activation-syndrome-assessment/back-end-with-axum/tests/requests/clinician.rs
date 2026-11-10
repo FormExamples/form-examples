@@ -1,6 +1,6 @@
 #[allow(unused_imports)]
 use crate::{db, seed};
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use mast_cell_activation_syndrome_assessment::app::App;
 use serial_test::serial;
 

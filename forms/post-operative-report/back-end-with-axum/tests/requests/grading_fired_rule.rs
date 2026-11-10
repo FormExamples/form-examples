@@ -1,6 +1,6 @@
 #[allow(unused_imports)]
 use crate::{db, seed};
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use post_operative_report::app::App;
 use serial_test::serial;
 

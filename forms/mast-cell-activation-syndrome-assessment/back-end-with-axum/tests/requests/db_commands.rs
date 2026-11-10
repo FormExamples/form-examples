@@ -1,5 +1,5 @@
 use axa::cli::DbCommand;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use axa::Environment;
 use mast_cell_activation_syndrome_assessment::app::App;
 use serial_test::serial;

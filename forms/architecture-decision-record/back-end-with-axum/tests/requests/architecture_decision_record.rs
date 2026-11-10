@@ -11,7 +11,7 @@
 #[allow(unused_imports)]
 use crate::{db, seed};
 use architecture_decision_record::app::App;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use serial_test::serial;
 
 async fn seed_author(ctx: &axa::AppContext) -> uuid::Uuid {

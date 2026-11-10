@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use history_and_physical_examination::app::App;
 use serial_test::serial;
 

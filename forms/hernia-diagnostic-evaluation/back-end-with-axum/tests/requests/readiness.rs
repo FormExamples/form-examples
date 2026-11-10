@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use hernia_diagnostic_evaluation::app::App;
 use serial_test::serial;
 

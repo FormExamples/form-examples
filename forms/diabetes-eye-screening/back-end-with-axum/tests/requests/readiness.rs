@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use diabetes_eye_screening::app::App;
 use serial_test::serial;
 

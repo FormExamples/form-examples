@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use serial_test::serial;
 use substance_abuse_assessment::app::App;
 

@@ -1,5 +1,5 @@
 use axa::cli::DbCommand;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use axa::Environment;
 use serial_test::serial;
 use united_kingdom_statement_of_fitness_for_work::app::App;

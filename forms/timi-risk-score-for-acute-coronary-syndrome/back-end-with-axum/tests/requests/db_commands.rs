@@ -1,5 +1,5 @@
 use axa::cli::DbCommand;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use axa::Environment;
 use serial_test::serial;
 use timi_risk_score_for_acute_coronary_syndrome::app::App;

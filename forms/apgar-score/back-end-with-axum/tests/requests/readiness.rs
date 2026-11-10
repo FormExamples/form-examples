@@ -1,5 +1,5 @@
 use apgar_score::app::App;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use serial_test::serial;
 
 /// `/_readiness` asks `ctx.db`, so it must fail with the database gone.

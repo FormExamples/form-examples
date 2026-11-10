@@ -1,6 +1,6 @@
 #![forbid(unsafe_code)]
 
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use neurodiversity_adjustment_request_axum_crate::app::App;
 use serde_json::Value;
 use serial_test::serial;

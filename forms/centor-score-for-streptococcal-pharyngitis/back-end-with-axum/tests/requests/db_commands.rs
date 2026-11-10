@@ -1,5 +1,5 @@
 use axa::cli::DbCommand;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use axa::Environment;
 use centor_score_for_streptococcal_pharyngitis::app::App;
 use serial_test::serial;

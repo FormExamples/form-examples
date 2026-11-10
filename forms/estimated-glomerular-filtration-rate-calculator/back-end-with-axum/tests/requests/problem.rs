@@ -1,6 +1,7 @@
 //! Every failed request answers RFC 9457 `application/problem+json`.
 
 use axa::{prelude::*, routes::AppRoutes};
+use axa_test::prelude::*;
 use estimated_glomerular_filtration_rate_calculator::app::App;
 use serde_json::Value;
 use serial_test::serial;

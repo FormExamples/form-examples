@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use newborn_blood_spot_screening::app::App;
 use serial_test::serial;
 use uuid::Uuid;

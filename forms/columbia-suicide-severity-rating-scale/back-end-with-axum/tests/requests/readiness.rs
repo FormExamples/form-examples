@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use columbia_suicide_severity_rating_scale::app::App;
 use serial_test::serial;
 

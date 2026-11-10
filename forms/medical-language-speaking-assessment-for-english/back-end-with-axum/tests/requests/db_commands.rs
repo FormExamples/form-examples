@@ -1,5 +1,5 @@
 use axa::cli::DbCommand;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use axa::Environment;
 use medical_language_speaking_assessment_for_english::app::App;
 use serial_test::serial;

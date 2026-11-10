@@ -1,5 +1,5 @@
 use arc42::app::App;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use serial_test::serial;
 
 #[tokio::test]

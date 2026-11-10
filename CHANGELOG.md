@@ -43,6 +43,14 @@ for them.
 
 ### Changed
 
+- **axa 0.10.** Every Axum crate moved from 0.9.1, with `bin/axum-axa-0-10`. The
+  `testing` feature became its own crate, so the dev-dependency is `axa-test = "0.1"`
+  and tests import `axa_test::prelude`; `axa::prelude` no longer brings in
+  `boot_test`, `request` and `TestServer`, so the files that used it import both.
+  Only the axa crates moved in each `Cargo.lock`. The 13 renamed subcrates
+  (`axa-worker` is now `axa-postgres-job-queue`) are not direct dependencies here.
+  The older axa checks accept a later axa.
+
 - **Dependencies, 2026-11-09.** Every Axum crate moves to `validator` 0.21 and
   `serial_test` 4, and its lock to the latest compatible versions. Every Svelte
   front-end moves to Lily `svelte-headless` 0.8 and pickers 0.3 (picker bar 0.5),

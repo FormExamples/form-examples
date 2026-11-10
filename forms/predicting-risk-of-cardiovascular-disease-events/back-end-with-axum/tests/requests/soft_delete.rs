@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use predicting_risk_of_cardiovascular_disease_events::app::App;
 use serial_test::serial;
 use uuid::Uuid;

@@ -1,6 +1,6 @@
 #[allow(unused_imports)]
 use crate::{db, seed};
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use serial_test::serial;
 use united_kingdom_driver_and_vehicle_licensing_agency_m1_form::app::App;
 

@@ -2,8 +2,9 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-99 tools.
+100 tools.
 
+- [`bin/axum-axa-0-10`](#axum-axa-0-10)
 - [`bin/axum-axa-0-7`](#axum-axa-0-7)
 - [`bin/axum-axa-0-8`](#axum-axa-0-8)
 - [`bin/axum-axa-0-9`](#axum-axa-0-9)
@@ -103,6 +104,39 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/back-end-with-axum/generate-rust-docs.py`](#back-end-with-axumgenerate-rust-docspy)
 - [`bin/sql/generate-sql-combined.py`](#sqlgenerate-sql-combinedpy)
 - [`bin/sql/generate-sql-comments.py`](#sqlgenerate-sql-commentspy)
+
+<h2 id="axum-axa-0-10"><code>bin/axum-axa-0-10</code></h2>
+
+```text
+bin/axum-axa-0-10 — move each form's `back-end-with-axum/` from axa 0.9 to 0.10.
+
+What it changes in a crate:
+
+  Cargo.toml                axa 0.10; the dev-dependency on axa with the
+                            `testing` feature becomes `axa-test = "0.1"`
+  tests/*.rs                `axa::testing::prelude` becomes `axa_test::prelude`,
+                            `axa::TestServer` becomes `axa_test::TestServer`, and
+                            a file that takes the test helpers from
+                            `axa::prelude` also imports `axa_test::prelude`
+  Cargo.lock                axa 0.10 and axa-test 0.1, by `cargo update -p axa`,
+                            so nothing else in the lock moves; unless --no-lock
+
+0.10 moves the `testing` feature to its own crate, axa-test, and renames 13
+subcrates (axa-worker is now axa-postgres-job-queue). No crate depends on a
+subcrate directly, and every feature, module and table name stays the same, so
+nothing else changes. In 0.9 `axa::prelude` re-exported the test helpers
+(`boot_test`, `request`, `TestServer`) under `testing`; in 0.10 it does not.
+
+A crate already moved is skipped, so the tool can be rerun. A crate whose axa
+lines differ from the expected shape stops the run before anything is written.
+
+Usage:
+  bin/axum-axa-0-10 <slug>...          # named forms
+  bin/axum-axa-0-10 --all              # every form's Axum crate
+  bin/axum-axa-0-10 --all --no-lock    # leave Cargo.lock to `cargo update`
+  bin/axum-axa-0-10 --root DIR <slug>  # a copy of forms/ at DIR
+  bin/axum-axa-0-10 --check --all      # CI drift check (non-zero on drift)
+```
 
 <h2 id="axum-axa-0-7"><code>bin/axum-axa-0-7</code></h2>
 

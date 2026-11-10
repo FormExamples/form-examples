@@ -2,7 +2,7 @@
 
 #![forbid(unsafe_code)]
 
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use cardiology_response_axum_crate::{app::App, support::db};
 
 /// `/_readiness` asks `ctx.db`, so it must fail with the database gone.

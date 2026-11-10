@@ -1,5 +1,5 @@
 use axa::cli::DbCommand;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use axa::Environment;
 use model_for_end_stage_liver_disease_score::app::App;
 use serial_test::serial;

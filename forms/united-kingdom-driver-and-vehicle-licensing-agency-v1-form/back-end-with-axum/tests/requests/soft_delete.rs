@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use serial_test::serial;
 use united_kingdom_driver_and_vehicle_licensing_agency_v1_form::app::App;
 use uuid::Uuid;

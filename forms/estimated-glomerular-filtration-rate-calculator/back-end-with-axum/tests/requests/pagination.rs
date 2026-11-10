@@ -1,7 +1,7 @@
 //! Lists come in signed cursor pages, with no total.
 
 use estimated_glomerular_filtration_rate_calculator::app::App;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use serde_json::Value;
 use serial_test::serial;
 

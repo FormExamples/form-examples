@@ -1,6 +1,6 @@
 #[allow(unused_imports)]
 use crate::{db, seed};
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use pulmonary_embolism_rule_out_criteria::app::App;
 use serial_test::serial;
 

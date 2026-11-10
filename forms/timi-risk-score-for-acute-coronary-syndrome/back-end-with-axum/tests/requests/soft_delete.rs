@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use serial_test::serial;
 use timi_risk_score_for_acute_coronary_syndrome::app::App;
 use uuid::Uuid;

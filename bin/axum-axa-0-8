@@ -36,9 +36,9 @@ import sys
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OLD_AXA = 'axa = { version = "0.7", features = ["cursor-pagination", "queue", "ratelimit", "sqlx"] }'
 NEW_AXA = 'axa = { version = "0.8", features = ["cursor-pagination", "queue", "ratelimit", "sqlx"] }'
-# bin/axum-axa-0-9 moves on to axa 0.9 and checks its own lock, so the check
-# accepts that step.
-LATER = re.compile(r'^axa = \{ version = "0\.9", features = \["cursor-pagination"', re.M)
+# bin/axum-axa-0-9 and bin/axum-axa-0-10 move on and check their own locks, so
+# the check accepts those steps.
+LATER = re.compile(r'^axa = \{ version = "0\.(?:9|[1-9]\d)", features = \["cursor-pagination"', re.M)
 LOCKED = (
     re.compile(r'^name = "axa"\nversion = "0\.8\.', re.M),
     re.compile(r'^name = "axa-cursor-pagination"\nversion = "0\.1\.(?:[1-9]|\d\d)', re.M),

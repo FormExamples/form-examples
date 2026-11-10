@@ -1,7 +1,7 @@
 #[allow(unused_imports)]
 use crate::{db, seed};
 use arc42::app::App;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use serial_test::serial;
 
 macro_rules! configure_insta {

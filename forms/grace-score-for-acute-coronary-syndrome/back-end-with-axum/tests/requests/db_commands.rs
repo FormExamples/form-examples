@@ -1,5 +1,5 @@
 use axa::cli::DbCommand;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use axa::Environment;
 use grace_score_for_acute_coronary_syndrome::app::App;
 use serial_test::serial;

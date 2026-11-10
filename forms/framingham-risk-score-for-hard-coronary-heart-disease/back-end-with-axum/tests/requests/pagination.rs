@@ -1,7 +1,7 @@
 //! Lists come in signed cursor pages, with no total.
 
 use framingham_risk_score_for_hard_coronary_heart_disease::app::App;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use serde_json::Value;
 use serial_test::serial;
 

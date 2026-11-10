@@ -15,7 +15,7 @@ default-run = "ward_round_note-cli"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [workspace.dependencies]
-axa = { version = "0.9", features = ["cursor-pagination", "queue", "ratelimit", "sqlx"] }
+axa = { version = "0.10", features = ["cursor-pagination", "queue", "ratelimit", "sqlx"] }
 
 [dependencies]
 axa = { workspace = true }
@@ -42,7 +42,7 @@ path = "src/ward_round_note/bin/main.rs"
 required-features = []
 
 [dev-dependencies]
-axa = { workspace = true, features = ["testing"] }
+axa-test = "0.1"
 serial_test = { version = "4.0.1" }
 insta = { version = "1.49", features = ["redactions", "yaml", "filters"] }
 

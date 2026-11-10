@@ -2,7 +2,7 @@
 #[allow(unused_imports)]
 use crate::{db, seed};
 use allergy_skin_test_request::app::App;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use serde_json::Value;
 use serial_test::serial;
 

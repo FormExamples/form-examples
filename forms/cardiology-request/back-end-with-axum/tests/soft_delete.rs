@@ -1,6 +1,6 @@
 #![forbid(unsafe_code)]
 
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use cardiology_request_axum_crate::app::App;
 use serial_test::serial;
 use uuid::Uuid;

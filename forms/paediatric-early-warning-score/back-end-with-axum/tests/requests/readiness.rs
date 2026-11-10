@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use paediatric_early_warning_score::app::App;
 use serial_test::serial;
 

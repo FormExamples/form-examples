@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use serial_test::serial;
 use united_kingdom_lasting_power_of_attorney_for_financial_decisions::app::App;
 

@@ -292,7 +292,7 @@ pub fn routes() -> Routes {{
 
 
 def request_test(name, library):
-    return f'''use axa::testing::prelude::*;
+    return f'''use axa_test::prelude::*;
 use {library}::app::App;
 use serial_test::serial;
 

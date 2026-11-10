@@ -1,6 +1,6 @@
 #![forbid(unsafe_code)]
 use neurodiversity_adjustment_request_axum_crate::app::App;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use serde_json::Value;
 
 /// A fresh database has no rows, so a page is empty and links nowhere; the limits

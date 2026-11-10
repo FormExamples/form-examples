@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use internal_medicine_waiting_list_card::app::App;
 use serial_test::serial;
 

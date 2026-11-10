@@ -92,7 +92,7 @@ cd back-end-with-axum && cargo deny --all-features check
 
 ## Tests boot a real database
 
-Model and request tests use `axa::testing::prelude::*`: `boot_test::<App>()`
+Model and request tests use `axa_test::prelude::*` (the `axa-test` dev-dependency): `boot_test::<App>()`
 brings up the app against the `_test` Postgres database on a freshly recreated
 schema, `seed::<App>()` loads fixtures, and assertions use `insta` snapshots
 (`serial_test`'s `#[serial]` serializes DB access). In CI the Rust job runs `cargo

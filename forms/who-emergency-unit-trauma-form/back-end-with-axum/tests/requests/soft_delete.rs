@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use serial_test::serial;
 use uuid::Uuid;
 use who_emergency_unit_trauma_form::app::App;

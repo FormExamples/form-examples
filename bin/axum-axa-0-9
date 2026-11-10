@@ -38,6 +38,8 @@ import sys
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OLD_AXA = 'axa = { version = "0.8", features = ["cursor-pagination", "queue", "ratelimit", "sqlx"] }'
 NEW_AXA = 'axa = { version = "0.9", features = ["cursor-pagination", "queue", "ratelimit", "sqlx"] }'
+# A crate on a later axa (bin/axum-axa-0-10) has moved past this step.
+LATER = re.compile(r'^axa = \{ version = "0\.[1-9]\d", features = \["cursor-pagination"', re.M)
 LOCKED = (
     re.compile(r'^name = "axa"\nversion = "0\.9\.', re.M),
     re.compile(r'^name = "axa-worker"\nversion = "0\.2\.', re.M),
@@ -51,8 +53,11 @@ def locked(crate: str) -> bool:
 
 
 def drift(crate: str) -> str | None:
-    """Why a crate is not on axa 0.9, if it is not."""
-    if NEW_AXA not in open(f"{crate}/Cargo.toml").read():
+    """Why a crate is not on axa 0.9 or later, if it is not."""
+    manifest = open(f"{crate}/Cargo.toml").read()
+    if LATER.search(manifest):
+        return None
+    if NEW_AXA not in manifest:
         return "Cargo.toml is not on axa 0.9"
     if not locked(crate):
         return "Cargo.lock is not on axa 0.9 and axa-worker 0.2"
@@ -77,10 +82,11 @@ def main() -> int:
         bad = [(crate, why) for crate in crates if (why := drift(crate))]
         for crate, why in bad:
             print(f"{crate.split('/')[-2]}: {why}")
-        print(f"{len(crates) - len(bad)}/{len(crates)} crates on axa 0.9")
+        print(f"{len(crates) - len(bad)}/{len(crates)} crates on axa 0.9 or later")
         return 1 if bad else 0
     # Check every manifest first, so one odd crate leaves the fleet as it was.
-    manifests = {crate: open(f"{crate}/Cargo.toml").read() for crate in crates}
+    manifests = {crate: text for crate in crates
+                 if not LATER.search(text := open(f"{crate}/Cargo.toml").read())}
     odd = [c for c, text in manifests.items() if NEW_AXA not in text and text.count(OLD_AXA) != 1]
     if odd:
         for crate in odd:
@@ -94,7 +100,7 @@ def main() -> int:
             moved += 1
     failed = []
     if not args.no_lock:
-        for crate in crates:
+        for crate in manifests:
             if locked(crate):
                 continue
             result = subprocess.run(

@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use hospital_dashboard_metrics::app::App;
 use serial_test::serial;
 

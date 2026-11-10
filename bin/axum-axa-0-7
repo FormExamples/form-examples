@@ -41,7 +41,7 @@ OLD_AXA = 'axa = { version = "0.6", features = ["pagination", "queue", "ratelimi
 NEW_AXA = 'axa = { version = "0.7", features = ["offset-pagination", "queue", "ratelimit", "sqlx"] }'
 # bin/axum-cursor-pagination then swaps offset paging for cursor paging, and
 # bin/axum-axa-0-8 and 0-9 move on to 0.8 and 0.9, so the check accepts any of those steps.
-ON_07 = re.compile(r'^axa = \{ version = "0\.[789]", features = \["(?:offset|cursor)-pagination", "queue", "ratelimit", "sqlx"\] \}$', re.M)
+ON_07 = re.compile(r'^axa = \{ version = "0\.(?:[7-9]|[1-9]\d)", features = \["(?:offset|cursor)-pagination", "queue", "ratelimit", "sqlx"\] \}$', re.M)
 OLD_PATH = re.compile(r"\baxa::pagination::")
 OLD_PRELUDE = "    pagination::{Page, PageParams},\n"
 NEW_PRELUDE = "    offset_pagination::{Page, PageParams},\n"
@@ -76,7 +76,7 @@ def drift(crate: str) -> str | None:
     """Why a crate is not on axa 0.7, if it is not."""
     if not ON_07.search(open(f"{crate}/Cargo.toml").read()):
         return "Cargo.toml is not on axa 0.7"
-    if not re.search(r'^name = "axa"\nversion = "0\.[789]\.', open(f"{crate}/Cargo.lock").read(), re.M):
+    if not re.search(r'^name = "axa"\nversion = "0\.(?:[7-9]|[1-9]\d)\.', open(f"{crate}/Cargo.lock").read(), re.M):
         return "Cargo.lock is not on axa 0.7"
     for path in sources(crate):
         text = open(path).read()
@@ -122,7 +122,7 @@ def main() -> int:
     failed = []
     if not args.no_lock:
         for crate, _ in plans:
-            if not re.search(r'^name = "axa"\nversion = "0\.[789]\.', open(f"{crate}/Cargo.lock").read(), re.M):
+            if not re.search(r'^name = "axa"\nversion = "0\.(?:[7-9]|[1-9]\d)\.', open(f"{crate}/Cargo.lock").read(), re.M):
                 result = subprocess.run(["cargo", "update", "-q", "-p", "axa"], cwd=crate, capture_output=True, text=True)
                 if result.returncode:
                     failed.append(crate)

@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use medical_information_form_for_air_travel::app::App;
 use serial_test::serial;
 

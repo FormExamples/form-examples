@@ -1,5 +1,5 @@
 use axa::cli::DbCommand;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use axa::Environment;
 use cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk::app::App;
 use serial_test::serial;

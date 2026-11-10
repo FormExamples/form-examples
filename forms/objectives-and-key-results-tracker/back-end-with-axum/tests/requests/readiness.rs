@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use objectives_and_key_results_tracker::app::App;
 use serial_test::serial;
 

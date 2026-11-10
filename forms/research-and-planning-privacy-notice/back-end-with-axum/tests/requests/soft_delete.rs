@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use research_and_planning_privacy_notice::app::App;
 use serial_test::serial;
 use uuid::Uuid;

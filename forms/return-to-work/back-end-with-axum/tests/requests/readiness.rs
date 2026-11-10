@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use return_to_work::app::App;
 use serial_test::serial;
 

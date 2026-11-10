@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use rockall_score_for_upper_gastrointestinal_bleeding::app::App;
 use serial_test::serial;
 

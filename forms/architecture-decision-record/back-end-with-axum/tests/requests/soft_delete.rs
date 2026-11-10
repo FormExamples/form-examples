@@ -1,5 +1,5 @@
 use architecture_decision_record::{app::App, models::architecture_decision_records::Model};
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use serial_test::serial;
 use uuid::Uuid;
 

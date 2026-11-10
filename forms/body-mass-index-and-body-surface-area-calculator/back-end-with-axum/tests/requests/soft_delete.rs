@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use body_mass_index_and_body_surface_area_calculator::app::App;
 use serial_test::serial;
 use uuid::Uuid;

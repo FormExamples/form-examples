@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use model_for_end_stage_liver_disease_score::app::App;
 use serial_test::serial;
 use uuid::Uuid;

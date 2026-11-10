@@ -46,7 +46,7 @@ NEW_ROUTER = "Self::routes(ctx).into_app(ctx.clone())"
 # itself, and bin/axum-axa-0-7 and bin/axum-cursor-pagination move on to axa 0.7
 # and its paging crates, and bin/axum-axa-0-8 and 0-9 to axa 0.8 and 0.9, so the check accepts
 # any of those steps.
-ON_06 = re.compile(r'^axa = \{ version = "0\.[6-9]", features = \["(?:offset-|cursor-)?pagination", "queue", (?:"ratelimit", )?"sqlx"\] \}$', re.M)
+ON_06 = re.compile(r'^axa = \{ version = "0\.(?:[6-9]|[1-9]\d)", features = \["(?:offset-|cursor-)?pagination", "queue", (?:"ratelimit", )?"sqlx"\] \}$', re.M)
 ROUTERS = (NEW_ROUTER, "axa::middleware::apply(routes, &ctx.config.http)")
 LIMITS = """/// The bounds of every list route. `limit` and its default match `openapi.yaml`.
 pub const PAGE_LIMITS: axa::pagination::Limits = axa::pagination::Limits {
@@ -145,7 +145,7 @@ def drift(crate: str) -> str | None:
     if not ON_06.search(open(f"{crate}/Cargo.toml").read()):
         return "not on axa 0.6 or later"
     lock = open(f"{crate}/Cargo.lock").read()
-    if not re.search(r'^name = "axa"\nversion = "0\.[6-9]\.', lock, re.M):
+    if not re.search(r'^name = "axa"\nversion = "0\.(?:[6-9]|[1-9]\d)\.', lock, re.M):
         return "Cargo.lock is not on axa 0.6 or later"
     app = open(f"{src}/app.rs").read()
     if not any(router in app for router in ROUTERS):

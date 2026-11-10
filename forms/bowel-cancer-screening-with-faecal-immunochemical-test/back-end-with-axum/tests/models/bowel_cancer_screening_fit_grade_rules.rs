@@ -1,6 +1,6 @@
 #[allow(unused_imports)]
 use crate::{db, seed};
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use bowel_cancer_screening_with_faecal_immunochemical_test::app::App;
 use serial_test::serial;
 

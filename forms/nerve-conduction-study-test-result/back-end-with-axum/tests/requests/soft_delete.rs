@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use nerve_conduction_study_test_result::app::App;
 use serial_test::serial;
 use uuid::Uuid;

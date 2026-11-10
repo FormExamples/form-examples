@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use care_privacy_notice::app::App;
 use serial_test::serial;
 

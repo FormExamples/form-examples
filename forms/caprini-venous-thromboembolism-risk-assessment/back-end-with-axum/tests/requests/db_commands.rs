@@ -1,5 +1,5 @@
 use axa::cli::DbCommand;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use axa::Environment;
 use caprini_venous_thromboembolism_risk_assessment::app::App;
 use serial_test::serial;

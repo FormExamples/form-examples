@@ -2,6 +2,7 @@
 
 use anion_gap_calculator::app::App;
 use axa::{prelude::*, routes::AppRoutes};
+use axa_test::prelude::*;
 use serde_json::Value;
 use serial_test::serial;
 

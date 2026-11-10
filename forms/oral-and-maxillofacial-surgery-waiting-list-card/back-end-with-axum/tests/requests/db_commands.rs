@@ -1,5 +1,5 @@
 use axa::cli::DbCommand;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use axa::Environment;
 use oral_and_maxillofacial_surgery_waiting_list_card::app::App;
 use serial_test::serial;

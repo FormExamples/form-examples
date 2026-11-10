@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use chronic_obstructive_pulmonary_disease_review::app::App;
 use serial_test::serial;
 

@@ -47,8 +47,8 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OLD_AXA = 'axa = { version = "0.6", features = ["pagination", "queue", "sqlx"] }'
 NEW_AXA = 'axa = { version = "0.6", features = ["pagination", "queue", "ratelimit", "sqlx"] }'
 # The ratelimit feature, on axa 0.6 or a later step (bin/axum-axa-0-7,
-# bin/axum-cursor-pagination, bin/axum-axa-0-8, bin/axum-axa-0-9).
-HAS_RATELIMIT = re.compile(r'^axa = \{ version = "0\.[6-9]", features = \[[^]]*"ratelimit"', re.M)
+# bin/axum-cursor-pagination, bin/axum-axa-0-8, bin/axum-axa-0-9, bin/axum-axa-0-10).
+HAS_RATELIMIT = re.compile(r'^axa = \{ version = "0\.(?:[6-9]|[1-9]\d)", features = \[[^]]*"ratelimit"', re.M)
 
 OLD_ROUTER = """    /// Build the full router under the standard middleware.
     ///

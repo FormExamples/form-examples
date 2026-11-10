@@ -1,7 +1,7 @@
 //! Lists come in signed cursor pages, with no total.
 
 use who_emergency_unit_general_form::app::App;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use serde_json::Value;
 use serial_test::serial;
 

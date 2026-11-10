@@ -1,6 +1,6 @@
 #[allow(unused_imports)]
 use crate::{db, seed};
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use estimated_glomerular_filtration_rate_calculator::app::App;
 use serial_test::serial;
 

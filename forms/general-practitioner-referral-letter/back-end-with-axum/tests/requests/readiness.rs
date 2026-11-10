@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use general_practitioner_referral_letter::app::App;
 use serial_test::serial;
 

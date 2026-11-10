@@ -1,6 +1,6 @@
 #[allow(unused_imports)]
 use crate::{db, seed};
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use international_certificate_of_vaccination_or_prophylaxis::app::App;
 use serial_test::serial;
 

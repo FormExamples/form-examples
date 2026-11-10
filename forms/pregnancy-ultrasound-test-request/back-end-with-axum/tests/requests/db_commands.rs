@@ -1,5 +1,5 @@
 use axa::cli::DbCommand;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use axa::Environment;
 use pregnancy_ultrasound_test_request::app::App;
 use serial_test::serial;

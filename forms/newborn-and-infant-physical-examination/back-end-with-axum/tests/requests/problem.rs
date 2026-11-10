@@ -1,6 +1,7 @@
 //! Every failed request answers RFC 9457 `application/problem+json`.
 
 use axa::{prelude::*, routes::AppRoutes};
+use axa_test::prelude::*;
 use newborn_and_infant_physical_examination::app::App;
 use serde_json::Value;
 use serial_test::serial;

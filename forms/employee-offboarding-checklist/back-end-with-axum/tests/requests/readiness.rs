@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use employee_offboarding_checklist::app::App;
 use serial_test::serial;
 

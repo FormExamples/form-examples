@@ -1,5 +1,5 @@
 use axa::cli::DbCommand;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use axa::Environment;
 use serial_test::serial;
 use wells_score_for_deep_vein_thrombosis::app::App;

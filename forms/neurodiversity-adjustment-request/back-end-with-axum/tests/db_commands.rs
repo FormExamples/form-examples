@@ -2,7 +2,7 @@
 
 use axa::Environment;
 use axa::cli::DbCommand;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use neurodiversity_adjustment_request_axum_crate::app::App;
 
 /// `cli::parse` refuses these on the command line. This is for a call that

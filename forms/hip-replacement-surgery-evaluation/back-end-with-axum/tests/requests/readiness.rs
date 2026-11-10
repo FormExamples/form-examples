@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use hip_replacement_surgery_evaluation::app::App;
 use serial_test::serial;
 

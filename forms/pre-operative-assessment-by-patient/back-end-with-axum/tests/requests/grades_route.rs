@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use pre_operative_assessment_by_patient::app::App;
 use serial_test::serial;
 

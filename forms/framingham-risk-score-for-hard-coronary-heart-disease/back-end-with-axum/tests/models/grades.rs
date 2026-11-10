@@ -1,6 +1,6 @@
 #[allow(unused_imports)]
 use crate::{db, seed};
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use framingham_risk_score_for_hard_coronary_heart_disease::app::App;
 use serial_test::serial;
 

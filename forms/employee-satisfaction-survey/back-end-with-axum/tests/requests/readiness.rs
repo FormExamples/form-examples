@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use employee_satisfaction_survey::app::App;
 use serial_test::serial;
 

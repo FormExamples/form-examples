@@ -1,6 +1,6 @@
 #[allow(unused_imports)]
 use crate::{db, seed};
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk::app::App;
 use serial_test::serial;
 

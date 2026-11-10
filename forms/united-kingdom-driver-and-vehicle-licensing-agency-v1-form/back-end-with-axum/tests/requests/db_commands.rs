@@ -1,5 +1,5 @@
 use axa::cli::DbCommand;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use axa::Environment;
 use serial_test::serial;
 use united_kingdom_driver_and_vehicle_licensing_agency_v1_form::app::App;

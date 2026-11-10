@@ -1,5 +1,5 @@
 use axa::cli::DbCommand;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use axa::Environment;
 use edinburgh_postnatal_depression_scale::app::App;
 use serial_test::serial;

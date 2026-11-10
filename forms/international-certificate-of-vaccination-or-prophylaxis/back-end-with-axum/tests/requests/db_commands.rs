@@ -1,5 +1,5 @@
 use axa::cli::DbCommand;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use axa::Environment;
 use international_certificate_of_vaccination_or_prophylaxis::app::App;
 use serial_test::serial;

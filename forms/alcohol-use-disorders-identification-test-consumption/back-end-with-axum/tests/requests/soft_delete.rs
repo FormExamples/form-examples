@@ -1,5 +1,5 @@
 use alcohol_use_disorders_identification_test_consumption::app::App;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use serial_test::serial;
 use uuid::Uuid;
 

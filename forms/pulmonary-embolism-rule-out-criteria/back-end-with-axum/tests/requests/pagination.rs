@@ -1,7 +1,7 @@
 //! Lists come in signed cursor pages, with no total.
 
 use pulmonary_embolism_rule_out_criteria::app::App;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use serde_json::Value;
 use serial_test::serial;
 

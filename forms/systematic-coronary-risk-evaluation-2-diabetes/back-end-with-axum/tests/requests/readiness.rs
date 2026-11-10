@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use serial_test::serial;
 use systematic_coronary_risk_evaluation_2_diabetes::app::App;
 

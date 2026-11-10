@@ -1,5 +1,5 @@
 use axa::cli::DbCommand;
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use axa::Environment;
 use predicting_risk_of_cardiovascular_disease_events::app::App;
 use serial_test::serial;

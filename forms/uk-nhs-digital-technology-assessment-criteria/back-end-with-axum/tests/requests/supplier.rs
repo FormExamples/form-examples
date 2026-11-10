@@ -2,7 +2,7 @@
 // the `supplier` table plays the same role as `patient` in the fleet's reference test.
 #[allow(unused_imports)]
 use crate::{db, seed};
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use serde_json::Value;
 use serial_test::serial;
 use uk_nhs_digital_technology_assessment_criteria::app::App;

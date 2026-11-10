@@ -3,6 +3,7 @@
 #![forbid(unsafe_code)]
 
 use axa::{prelude::*, routes::AppRoutes};
+use axa_test::prelude::*;
 use cardiology_response_axum_crate::app::App;
 use serde_json::Value;
 use serial_test::serial;

@@ -1,4 +1,4 @@
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use ottawa_ankle_rules::app::App;
 use serial_test::serial;
 use uuid::Uuid;

@@ -9,7 +9,7 @@
 
 #[allow(unused_imports)]
 use crate::{db, seed};
-use axa::testing::prelude::*;
+use axa_test::prelude::*;
 use inpatient_clinical_note::app::App;
 use inpatient_clinical_note::grading::{grade_and_persist, latest_grade, to_engine_note};
 use inpatient_clinical_note::models::{
