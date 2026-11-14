@@ -1,0 +1,6 @@
+{
+  "source": [
+    "forms/*/front-end-with-svelte/package.json",
+    "e2e/package.json"
+  ]
+}
