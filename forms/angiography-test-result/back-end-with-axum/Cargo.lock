@@ -197,9 +197,9 @@ checksum = "f2032f911046de80f0a198e0901378627c33f59ea0ac00e363d481118bd70a53"
 
 [[package]]
 name = "axa"
-version = "0.12.0"
+version = "0.13.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c6eef2e9e6e02d6494daab37b438730a8320ef6d03666b62c929207f85a35c36"
+checksum = "8bdeddbed117d43108e5123160b668db94196de2a513abf9a5c294f491b58b22"
 dependencies = [
  "async-trait",
  "axa-cursor-pagination",
@@ -215,6 +215,7 @@ dependencies = [
  "hyper-util",
  "serde",
  "serde_json",
+ "serde_path_to_error",
  "sqlx",
  "thiserror",
  "tokio",
@@ -259,9 +260,9 @@ dependencies = [
 
 [[package]]
 name = "axa-postgres-sqlx"
-version = "0.1.3"
+version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b5291ba9206f9dbc07643612953867aca1871995db4fc0a60c9a10c34cc24013"
+checksum = "5d6f151f37e58d00fccc68cf24dfb06f6c4ab1a20465a43371602da10f31b67f"
 dependencies = [
  "sqlx",
 ]
@@ -291,9 +292,9 @@ dependencies = [
 
 [[package]]
 name = "axa-test"
-version = "0.3.0"
+version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e288ecf85c86303c6743741ebe0ddfdc5fec79497d66af5cf4e7c38d92a86017"
+checksum = "db5bef3df06bb3e60315a00e10f4c6511b3b0692e29eb68403efd242be4136f0"
 dependencies = [
  "axa",
  "axum-test",
