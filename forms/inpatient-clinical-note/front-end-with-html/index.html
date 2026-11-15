@@ -20,6 +20,7 @@
                     var saved = localStorage.getItem(
                         "inpatient-clinical-note.theme.v1",
                     );
+                    if (!saved && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) saved = "dark";
                     var link = document.getElementById("theme-stylesheet");
                     if (saved && link)
                         link.setAttribute(

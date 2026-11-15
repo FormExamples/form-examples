@@ -12,11 +12,28 @@ function themeHref(theme) {
   return `css/themes/${theme}.css`;
 }
 
-function readSavedTheme() {
+// The browser's light/dark setting, as a theme: used while no theme is saved.
+function systemTheme() {
   try {
-    return localStorage.getItem(STORAGE_KEY) ?? DEFAULT_THEME;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   } catch {
     return DEFAULT_THEME;
+  }
+}
+
+function hasSavedTheme() {
+  try {
+    return localStorage.getItem(STORAGE_KEY) !== null;
+  } catch {
+    return false;
+  }
+}
+
+function readSavedTheme() {
+  try {
+    return localStorage.getItem(STORAGE_KEY) ?? systemTheme();
+  } catch {
+    return systemTheme();
   }
 }
 
@@ -40,6 +57,17 @@ function init() {
   if (!select) return;
   select.value = saved;
   select.addEventListener('change', () => applyTheme(select.value, true));
+  // Follow the OS light/dark setting live, until the user chooses a theme.
+  try {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if (hasSavedTheme()) return;
+      const theme = systemTheme();
+      applyTheme(theme, false);
+      select.value = theme;
+    });
+  } catch {
+    // matchMedia unavailable: the initial scheme still applies
+  }
 }
 
 if (document.readyState === 'loading') {
