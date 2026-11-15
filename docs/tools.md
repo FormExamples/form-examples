@@ -2,12 +2,13 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-103 tools.
+104 tools.
 
 - [`bin/axum-axa-0-10`](#axum-axa-0-10)
 - [`bin/axum-axa-0-11`](#axum-axa-0-11)
 - [`bin/axum-axa-0-12`](#axum-axa-0-12)
 - [`bin/axum-axa-0-13`](#axum-axa-0-13)
+- [`bin/axum-axa-0-14`](#axum-axa-0-14)
 - [`bin/axum-axa-0-7`](#axum-axa-0-7)
 - [`bin/axum-axa-0-8`](#axum-axa-0-8)
 - [`bin/axum-axa-0-9`](#axum-axa-0-9)
@@ -232,6 +233,37 @@ Usage:
   bin/axum-axa-0-13 --all --no-lock    # leave Cargo.lock to `cargo update`
   bin/axum-axa-0-13 --root DIR <slug>  # a copy of forms/ at DIR
   bin/axum-axa-0-13 --check --all      # CI drift check (non-zero on drift)
+```
+
+<h2 id="axum-axa-0-14"><code>bin/axum-axa-0-14</code></h2>
+
+```text
+bin/axum-axa-0-14 — move each form's `back-end-with-axum/` from axa 0.13 to 0.14.
+
+What it changes in a crate:
+
+  Cargo.toml                axa 0.14 and axa-test 0.5
+  Cargo.lock                axa 0.14 and axa-test 0.5, by
+                            `cargo update -p axa -p axa-test`, so only axa's own
+                            crates move; unless --no-lock
+
+0.14 needed no source change in the crate it was trialled on
+(forms/apgar-score: `cargo check --all-targets` and clippy clean). The lock update
+also moves axa-cursor-pagination (0.1.2) and axa-postgres-job-queue (0.3.0).
+
+axa 0.14.0 was younger than this repo's minimum publish age when locked; the lock
+step sets CARGO_RESOLVER_INCOMPATIBLE_PUBLISH_AGE=allow for that `cargo update`
+only, so it works before and after the cooldown ends.
+
+A crate already moved is skipped, so the tool can be rerun. A crate whose axa
+lines differ from the expected shape stops the run before anything is written.
+
+Usage:
+  bin/axum-axa-0-14 <slug>...          # named forms
+  bin/axum-axa-0-14 --all              # every form's Axum crate
+  bin/axum-axa-0-14 --all --no-lock    # leave Cargo.lock to `cargo update`
+  bin/axum-axa-0-14 --root DIR <slug>  # a copy of forms/ at DIR
+  bin/axum-axa-0-14 --check --all      # CI drift check (non-zero on drift)
 ```
 
 <h2 id="axum-axa-0-7"><code>bin/axum-axa-0-7</code></h2>

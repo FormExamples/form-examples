@@ -200,9 +200,9 @@ checksum = "f2032f911046de80f0a198e0901378627c33f59ea0ac00e363d481118bd70a53"
 
 [[package]]
 name = "axa"
-version = "0.13.0"
+version = "0.14.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8bdeddbed117d43108e5123160b668db94196de2a513abf9a5c294f491b58b22"
+checksum = "8ed3ad5580418df5e3850e87618d710b523d5f49c28040e2bbf86af51e5aa9af"
 dependencies = [
  "async-trait",
  "axa-cursor-pagination",
@@ -231,9 +231,9 @@ dependencies = [
 
 [[package]]
 name = "axa-cursor-pagination"
-version = "0.1.1"
+version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b8e27de6945fe8ee4ca8e537b92b35ca79d731f12d4a5a59c4c3deef0e601c15"
+checksum = "3d7343ae9911dc6136c1248b3d1418401a5f8fcfaf8bec59a5ae2867c467a6d6"
 dependencies = [
  "axum",
  "base64 0.23.1",
@@ -250,9 +250,9 @@ checksum = "b9bdc35432012724d2a1a528ae83fc1117640f64ef910bbb46df8ad0261ebb15"
 
 [[package]]
 name = "axa-postgres-job-queue"
-version = "0.2.0"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0c39e78f9f48c36920f0d2c139797b21fc477b72519e0f0b6d0b03f809ed739f"
+checksum = "a384bf23d57b4419d39c900bc46c68b36da6ba4e152fc1956d7d620ba5ea18f7"
 dependencies = [
  "serde_json",
  "sqlx",
@@ -295,9 +295,9 @@ dependencies = [
 
 [[package]]
 name = "axa-test"
-version = "0.4.0"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "db5bef3df06bb3e60315a00e10f4c6511b3b0692e29eb68403efd242be4136f0"
+checksum = "db37b8bcf68df174dff0756c9b340f8db3091300398334f56e5d51d0f99261eb"
 dependencies = [
  "axa",
  "axum-test",

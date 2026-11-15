@@ -15,7 +15,7 @@ default-run = "plastic_surgery_assessment-cli"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [workspace.dependencies]
-axa = { version = "0.13", features = ["cursor-pagination", "postgres-sqlx", "queue", "ratelimit"] }
+axa = { version = "0.14", features = ["cursor-pagination", "postgres-sqlx", "queue", "ratelimit"] }
 
 [dependencies]
 axa = { workspace = true }
@@ -42,7 +42,7 @@ path = "src/plastic_surgery_assessment/bin/main.rs"
 required-features = []
 
 [dev-dependencies]
-axa-test = "0.4"
+axa-test = "0.5"
 serial_test = { version = "4.0.1" }
 insta = { version = "1.49", features = ["redactions", "yaml", "filters"] }
 
