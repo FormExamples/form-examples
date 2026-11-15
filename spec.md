@@ -142,6 +142,9 @@ own bands map onto ESI where the mapping is not self-evident.
   form is reachable by scrolling. `.page-header` / `.page-footer` are
   statically positioned in every `front-end-with-html/` and
   `front-end-with-svelte/`.
+- **Light and dark follow the browser.** The UI uses the browser's light/dark
+  setting (`prefers-color-scheme`), in every `front-end-with-html/` and
+  `front-end-with-svelte/`.
 - **Lily Design System HTML headless** is the class vocabulary for every
   `front-end-*-with-html/` directory. See
   [`forms/AGENTS-front-end-html.md`](forms/AGENTS-front-end-html.md) for the
