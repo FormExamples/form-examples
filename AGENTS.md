@@ -252,7 +252,8 @@ bin/axum-axa-0-8 --check --all     # axa 0.8 or later, and axa-cursor-pagination
 bin/axum-axa-0-9 --check --all     # axa 0.9 or later, in Cargo.toml and Cargo.lock
 bin/axum-axa-0-10 --check --all    # axa 0.10 or later, and axa-test, in Cargo.toml, tests and Cargo.lock
 bin/axum-axa-0-11 --check --all    # axa 0.11 or later: /_health/ready and DB_URL in tests and crate CI
-bin/axum-axa-0-12 --check --all    # axa 0.12, the postgres-sqlx feature and axa::postgres_sqlx, axa-test 0.3, in Cargo.toml, src and Cargo.lock
+bin/axum-axa-0-12 --check --all    # axa 0.12 or later, the postgres-sqlx feature and axa::postgres_sqlx, axa-test 0.3, in Cargo.toml, src and Cargo.lock
+bin/axum-axa-0-13 --check --all    # axa 0.13 and axa-test 0.4, in Cargo.toml and Cargo.lock
 bin/axum-cursor-pagination --check --all # every list pages by signed cursor, with no total
 bin/axum-check-constraints --check --all # sql/ CHECK constraints migrated into every crate, plus build.rs
 bin/axum-fixture-checks --check --all    # fixtures and test rows satisfy those CHECKs (needs Postgres)

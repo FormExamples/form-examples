@@ -2,11 +2,12 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-102 tools.
+103 tools.
 
 - [`bin/axum-axa-0-10`](#axum-axa-0-10)
 - [`bin/axum-axa-0-11`](#axum-axa-0-11)
 - [`bin/axum-axa-0-12`](#axum-axa-0-12)
+- [`bin/axum-axa-0-13`](#axum-axa-0-13)
 - [`bin/axum-axa-0-7`](#axum-axa-0-7)
 - [`bin/axum-axa-0-8`](#axum-axa-0-8)
 - [`bin/axum-axa-0-9`](#axum-axa-0-9)
@@ -200,6 +201,37 @@ Usage:
   bin/axum-axa-0-12 --all --no-lock    # leave Cargo.lock to `cargo update`
   bin/axum-axa-0-12 --root DIR <slug>  # a copy of forms/ at DIR
   bin/axum-axa-0-12 --check --all      # CI drift check (non-zero on drift)
+```
+
+<h2 id="axum-axa-0-13"><code>bin/axum-axa-0-13</code></h2>
+
+```text
+bin/axum-axa-0-13 — move each form's `back-end-with-axum/` from axa 0.12 to 0.13.
+
+What it changes in a crate:
+
+  Cargo.toml                axa 0.13 and axa-test 0.4
+  Cargo.lock                axa 0.13 and axa-test 0.4, by
+                            `cargo update -p axa -p axa-test`, so only axa's own
+                            crates move; unless --no-lock
+
+Unlike 0.12, 0.13 needed no source change in the crate it was trialled on
+(forms/apgar-score: `cargo check --all-targets` and clippy clean). The tests need
+Postgres and were run separately.
+
+axa 0.13.0 is younger than this repo's 3-day minimum publish age until
+2026-11-17; the lock step sets CARGO_RESOLVER_INCOMPATIBLE_PUBLISH_AGE=allow for
+that `cargo update` only, so it works before and after that date.
+
+A crate already moved is skipped, so the tool can be rerun. A crate whose axa
+lines differ from the expected shape stops the run before anything is written.
+
+Usage:
+  bin/axum-axa-0-13 <slug>...          # named forms
+  bin/axum-axa-0-13 --all              # every form's Axum crate
+  bin/axum-axa-0-13 --all --no-lock    # leave Cargo.lock to `cargo update`
+  bin/axum-axa-0-13 --root DIR <slug>  # a copy of forms/ at DIR
+  bin/axum-axa-0-13 --check --all      # CI drift check (non-zero on drift)
 ```
 
 <h2 id="axum-axa-0-7"><code>bin/axum-axa-0-7</code></h2>
