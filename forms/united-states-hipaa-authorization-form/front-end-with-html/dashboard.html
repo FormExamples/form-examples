@@ -10,6 +10,7 @@
     (function () {
       try {
         var saved = localStorage.getItem('united-states-hipaa-authorization-form.theme.v1');
+        if (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) saved = 'dark';
         var link = document.getElementById('theme-stylesheet');
         if (saved && link) link.setAttribute('href', 'css/themes/' + saved + '.css');
       } catch (e) {}

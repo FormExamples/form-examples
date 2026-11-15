@@ -1,0 +1,162 @@
+#!/usr/bin/env python3
+"""bin/browser-color-scheme-refactor — every front-end uses the browser's light/dark setting.
+
+Applies spec.md §5 ("Light and dark follow the browser"): with no theme saved in
+localStorage, the UI uses `dark` when the browser prefers a dark colour scheme
+(`prefers-color-scheme: dark`) and `light` otherwise. A saved choice always wins.
+
+What it changes, per form:
+
+  front-end-with-html/index.html, dashboard.html
+                          the blocking inline <head> script falls back to `dark`
+                          when no theme is saved and the browser prefers dark
+  front-end-with-html/js/theme-select.js
+                          the saved-theme fallback is the browser's scheme (not
+                          a fixed `light`), and the page follows the OS setting
+                          live while no theme is saved
+  front-end-with-svelte/src/routes/<kebab>/+layout.svelte
+                          ThemePicker `detectFromSystem: true` (saved theme,
+                          then the system scheme, then the default)
+
+A form already moved is skipped, so the tool can be rerun. A form without the
+swappable theme stylesheet (see bin/html-theme-locale-select-refactor) is left
+alone.
+
+Usage:
+  bin/browser-color-scheme-refactor [--all|<slug>...]   # apply
+  bin/browser-color-scheme-refactor --check [--all|<slug>...]  # CI drift check
+"""
+
+from __future__ import annotations
+
+import argparse
+import glob
+import os
+import re
+import sys
+
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+SAVED = re.compile(r"^([ \t]*)var saved = localStorage\.getItem\(\s*(['\"])[^'\"]+\2,?\s*\);[ \t]*\n", re.M)
+MARKER = "prefers-color-scheme"
+
+
+def html_guard(text: str) -> str:
+    """Add the dark fallback after `var saved = ...;` in the inline head script."""
+    if MARKER in text:
+        return text
+    def add(match: re.Match) -> str:
+        indent, quote = match[1], match[2]
+        line = (f"{indent}if (!saved && window.matchMedia && window.matchMedia({quote}(prefers-color-scheme: dark){quote}).matches) "
+                f"saved = {quote}dark{quote};\n")
+        return match[0] + line
+    return SAVED.sub(add, text, count=1)
+
+
+def js_select(text: str) -> str:
+    """Make theme-select.js fall back to the browser's scheme, and follow it live."""
+    if MARKER in text:
+        return text
+    text = text.replace(
+        "function readSavedTheme() {",
+        "// The browser's light/dark setting, as a theme: used while no theme is saved.\n"
+        "function systemTheme() {\n"
+        "  try {\n"
+        "    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';\n"
+        "  } catch {\n"
+        "    return DEFAULT_THEME;\n"
+        "  }\n"
+        "}\n\n"
+        "function hasSavedTheme() {\n"
+        "  try {\n"
+        "    return localStorage.getItem(STORAGE_KEY) !== null;\n"
+        "  } catch {\n"
+        "    return false;\n"
+        "  }\n"
+        "}\n\n"
+        "function readSavedTheme() {", 1)
+    start = text.index("function readSavedTheme() {")
+    end = text.index("\n}\n", start)
+    body = text[start:end].replace("?? DEFAULT_THEME", "?? systemTheme()").replace("return DEFAULT_THEME;", "return systemTheme();")
+    text = text[:start] + body + text[end:]
+    text = text.replace(
+        "  select.addEventListener('change', () => applyTheme(select.value, true));\n",
+        "  select.addEventListener('change', () => applyTheme(select.value, true));\n"
+        "  // Follow the OS light/dark setting live, until the user chooses a theme.\n"
+        "  try {\n"
+        "    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {\n"
+        "      if (hasSavedTheme()) return;\n"
+        "      const theme = systemTheme();\n"
+        "      applyTheme(theme, false);\n"
+        "      select.value = theme;\n"
+        "    });\n"
+        "  } catch {\n"
+        "    // matchMedia unavailable: the initial scheme still applies\n"
+        "  }\n", 1)
+    return text
+
+
+OLD_PROPS = "themeProps={{ themeLabels, defaultValue: DEFAULT_THEME, storageKey: THEME_STORAGE_KEY }}"
+NEW_PROPS = ("themeProps={{\n"
+             "            themeLabels,\n"
+             "            defaultValue: DEFAULT_THEME,\n"
+             "            storageKey: THEME_STORAGE_KEY,\n"
+             "            detectFromSystem: true\n"
+             "          }}")
+
+
+def svelte_layout(text: str) -> str:
+    return text.replace(OLD_PROPS, NEW_PROPS)
+
+
+def targets(form: str) -> dict[str, callable]:
+    html = f"{REPO}/forms/{form}/front-end-with-html"
+    found = {}
+    for name in ("index.html", "dashboard.html"):
+        path = f"{html}/{name}"
+        if os.path.exists(path) and 'id="theme-stylesheet"' in open(path).read():
+            found[path] = html_guard
+    path = f"{html}/js/theme-select.js"
+    if os.path.exists(path):
+        found[path] = js_select
+    for path in glob.glob(f"{REPO}/forms/{form}/front-end-with-svelte/src/routes/*/+layout.svelte"):
+        if OLD_PROPS in open(path).read() or "detectFromSystem" in open(path).read():
+            found[path] = svelte_layout
+    return found
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    parser.add_argument("slugs", nargs="*")
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--check", action="store_true")
+    args = parser.parse_args()
+    if args.all:
+        forms = sorted(os.path.basename(os.path.dirname(p)) for p in glob.glob(f"{REPO}/forms/*/spec"))
+    elif args.slugs:
+        forms = args.slugs
+    else:
+        parser.error("name forms, or pass --all")
+    bad, changed = [], 0
+    for form in forms:
+        for path, rewrite in targets(form).items():
+            old = open(path).read()
+            new = rewrite(old)
+            if new == old:
+                continue
+            if args.check:
+                bad.append(os.path.relpath(path, REPO))
+            else:
+                open(path, "w").write(new)
+                changed += 1
+    if args.check:
+        for path in bad:
+            print(f"drift: {path}")
+        print(f"{len(bad)} files still fixed to a light default")
+        return 1 if bad else 0
+    print(f"{changed} files changed across {len(forms)} forms")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

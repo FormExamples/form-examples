@@ -62,7 +62,12 @@
           }}
           themesUrl="/themes/"
           themes={themeValues}
-          themeProps={{ themeLabels, defaultValue: DEFAULT_THEME, storageKey: THEME_STORAGE_KEY }}
+          themeProps={{
+            themeLabels,
+            defaultValue: DEFAULT_THEME,
+            storageKey: THEME_STORAGE_KEY,
+            detectFromSystem: true
+          }}
           locales={localeValues}
           localeProps={{
             localeLabels,

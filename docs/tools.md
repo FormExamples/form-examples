@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-104 tools.
+105 tools.
 
 - [`bin/axum-axa-0-10`](#axum-axa-0-10)
 - [`bin/axum-axa-0-11`](#axum-axa-0-11)
@@ -22,6 +22,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/axum-msrv-set`](#axum-msrv-set)
 - [`bin/axum-soft-delete`](#axum-soft-delete)
 - [`bin/axum-sql-columns`](#axum-sql-columns)
+- [`bin/browser-color-scheme-refactor`](#browser-color-scheme-refactor)
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
 - [`bin/create-form`](#create-form)
@@ -677,6 +678,37 @@ reported for a person to decide.
 
 --check lists every `sql/` column a crate's table lacks, and exits 1 if there
 is one.
+```
+
+<h2 id="browser-color-scheme-refactor"><code>bin/browser-color-scheme-refactor</code></h2>
+
+```text
+bin/browser-color-scheme-refactor — every front-end uses the browser's light/dark setting.
+
+Applies spec.md §5 ("Light and dark follow the browser"): with no theme saved in
+localStorage, the UI uses `dark` when the browser prefers a dark colour scheme
+(`prefers-color-scheme: dark`) and `light` otherwise. A saved choice always wins.
+
+What it changes, per form:
+
+  front-end-with-html/index.html, dashboard.html
+                          the blocking inline <head> script falls back to `dark`
+                          when no theme is saved and the browser prefers dark
+  front-end-with-html/js/theme-select.js
+                          the saved-theme fallback is the browser's scheme (not
+                          a fixed `light`), and the page follows the OS setting
+                          live while no theme is saved
+  front-end-with-svelte/src/routes/<kebab>/+layout.svelte
+                          ThemePicker `detectFromSystem: true` (saved theme,
+                          then the system scheme, then the default)
+
+A form already moved is skipped, so the tool can be rerun. A form without the
+swappable theme stylesheet (see bin/html-theme-locale-select-refactor) is left
+alone.
+
+Usage:
+  bin/browser-color-scheme-refactor [--all|<slug>...]   # apply
+  bin/browser-color-scheme-refactor --check [--all|<slug>...]  # CI drift check
 ```
 
 <h2 id="clean"><code>bin/clean</code></h2>
