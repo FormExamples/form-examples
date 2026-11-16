@@ -15,7 +15,9 @@ describe("EspanaCodigoDeIdentificacionFiscalInput", () => {
         render(Subject, { props: { label: "Tax Identification Code" } });
 
         const input = screen.getByLabelText("Tax Identification Code");
-        expect(input.getAttribute("class")).toContain("espana-codigo-de-identificacion-fiscal-input");
+        expect(input.getAttribute("class")).toContain(
+            "espana-codigo-de-identificacion-fiscal-input",
+        );
     });
 
     test("has autocomplete off", () => {

@@ -39,72 +39,91 @@ Place inside a `<form>` (or `Form`) and set the `name` and `value` for the data 
 
 ```svelte
 <script lang="ts">
-    import HiddenInput from "./HiddenInput.svelte";
-    const csrfToken = "abc123";
+  import HiddenInput from "./HiddenInput.svelte";
+  const csrfToken = "abc123";
 </script>
 
 <form method="post">
-    <HiddenInput name="csrf" value={csrfToken} />
-    <button type="submit">Submit</button>
+  <HiddenInput
+    name="csrf"
+    value={csrfToken}
+  />
+  <button type="submit">Submit</button>
 </form>
 ```
 
 ```svelte
 <script lang="ts">
-    import HiddenInput from "./HiddenInput.svelte";
-    let recordId = $state("42");
+  import HiddenInput from "./HiddenInput.svelte";
+  let recordId = $state("42");
 </script>
 
 <form>
-    <HiddenInput name="record_id" value={recordId} />
-    <label>New name <input name="name" /></label>
-    <button type="submit">Save</button>
+  <HiddenInput
+    name="record_id"
+    value={recordId}
+  />
+  <label>New name <input name="name" /></label>
+  <button type="submit">Save</button>
 </form>
 ```
 
 ```svelte
 <script lang="ts">
-    import HiddenInput from "./HiddenInput.svelte";
-    let step = $state("2");
+  import HiddenInput from "./HiddenInput.svelte";
+  let step = $state("2");
 </script>
 
 <form>
-    <HiddenInput name="wizard_step" value={step} />
-    <p>Step {step} of 3</p>
+  <HiddenInput
+    name="wizard_step"
+    value={step}
+  />
+  <p>Step {step} of 3</p>
 </form>
 ```
 
 ```svelte
 <script lang="ts">
-    import Form from "../Form/Form.svelte";
-    import HiddenInput from "./HiddenInput.svelte";
-    function handleSubmit(e: SubmitEvent) {
-        const data = new FormData(e.target as HTMLFormElement);
-        console.log(Object.fromEntries(data));
-    }
+  import Form from "../Form/Form.svelte";
+  import HiddenInput from "./HiddenInput.svelte";
+  function handleSubmit(e: SubmitEvent) {
+    const data = new FormData(e.target as HTMLFormElement);
+    console.log(Object.fromEntries(data));
+  }
 </script>
 
-<Form label="Edit record" onsubmit={handleSubmit}>
-    <HiddenInput name="id" value="101" />
-    <label>Title <input name="title" /></label>
-    <button type="submit">Save</button>
+<Form
+  label="Edit record"
+  onsubmit={handleSubmit}
+>
+  <HiddenInput
+    name="id"
+    value="101"
+  />
+  <label>Title <input name="title" /></label>
+  <button type="submit">Save</button>
 </Form>
 ```
 
 ```svelte
 <script lang="ts">
-    import HiddenInput from "./HiddenInput.svelte";
-    const fields = [
-        { name: "user_id", value: "u-1" },
-        { name: "org_id", value: "o-9" },
-    ];
+  import HiddenInput from "./HiddenInput.svelte";
+  const fields = [
+    { name: "user_id", value: "u-1" },
+    { name: "org_id", value: "o-9" },
+  ];
 </script>
 
 <form>
-    {#each fields as f}
-        <HiddenInput name={f.name} value={f.value} data-testid={f.name} />
-    {/each}
-    <button type="submit">Save</button>
+  {#each fields as f}
+    <HiddenInput
+      name={f.name}
+      value={f.value}
+      data-testid={f.name}
+    />
+  {/each}
+  <button type="submit">Save</button>
 </form>
 ```
 

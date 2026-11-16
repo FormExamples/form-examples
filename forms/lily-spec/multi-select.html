@@ -1,0 +1,26 @@
+<!-- multi-select.html -->
+<!-- MultiSelect component -->
+<!--
+  Description: a native multiple-choice select (listbox) from which several options can be chosen
+  HTML tag: <select multiple>
+  CSS class: multi-select
+  Keyboard: native only (Arrow keys move, Shift+Arrow extends, Ctrl/Cmd+click toggles)
+  Accessibility: aria-label for accessible name; native listbox semantics
+  Attributes: size (visible rows), required, disabled, name; options are <option> children
+  Usage:
+    <select class="multi-select" multiple aria-label="Example" size="4">
+      <option value="a">A</option>
+    </select>
+-->
+
+<select
+  class="multi-select"
+  multiple
+  aria-label="Toppings"
+  size="4"
+>
+  <option value="cheese">Cheese</option>
+  <option value="olives">Olives</option>
+  <option value="peppers">Peppers</option>
+  <option value="mushrooms">Mushrooms</option>
+</select>

@@ -38,58 +38,71 @@ Place near the form control. Set a unique `id` and reference it from the input's
 
 ```svelte
 <script lang="ts">
-    import Hint from "./Hint.svelte";
+  import Hint from "./Hint.svelte";
 </script>
 
 <Hint id="email-hint">Enter your work email</Hint>
-<input type="email" aria-describedby="email-hint" />
-```
-
-```svelte
-<script lang="ts">
-    import Hint from "./Hint.svelte";
-</script>
-
-<Hint id="password-hint">Must be at least 8 characters</Hint>
-<input type="password" aria-describedby="password-hint" />
-```
-
-```svelte
-<script lang="ts">
-    import Hint from "./Hint.svelte";
-    import TextInput from "../TextInput/TextInput.svelte";
-    let name = $state("");
-</script>
-
-<label for="name">Name</label>
-<Hint id="name-hint">As shown on your ID</Hint>
-<TextInput
-    id="name"
-    label="Name"
-    bind:value={name}
-    aria-describedby="name-hint"
+<input
+  type="email"
+  aria-describedby="email-hint"
 />
 ```
 
 ```svelte
 <script lang="ts">
-    import Hint from "./Hint.svelte";
+  import Hint from "./Hint.svelte";
 </script>
 
-<Hint class="muted-hint" data-testid="phone-hint" id="phone-hint">
-    Include country code, e.g. +1 555 123 4567
+<Hint id="password-hint">Must be at least 8 characters</Hint>
+<input
+  type="password"
+  aria-describedby="password-hint"
+/>
+```
+
+```svelte
+<script lang="ts">
+  import Hint from "./Hint.svelte";
+  import TextInput from "../TextInput/TextInput.svelte";
+  let name = $state("");
+</script>
+
+<label for="name">Name</label>
+<Hint id="name-hint">As shown on your ID</Hint>
+<TextInput
+  id="name"
+  label="Name"
+  bind:value={name}
+  aria-describedby="name-hint"
+/>
+```
+
+```svelte
+<script lang="ts">
+  import Hint from "./Hint.svelte";
+</script>
+
+<Hint
+  class="muted-hint"
+  data-testid="phone-hint"
+  id="phone-hint"
+>
+  Include country code, e.g. +1 555 123 4567
 </Hint>
 ```
 
 ```svelte
 <script lang="ts">
-    import Hint from "./Hint.svelte";
+  import Hint from "./Hint.svelte";
 </script>
 
 <Hint id="url-hint">
-    Must start with <code>https://</code>
+  Must start with <code>https://</code>
 </Hint>
-<input type="url" aria-describedby="url-hint" />
+<input
+  type="url"
+  aria-describedby="url-hint"
+/>
 ```
 
 ## Accessibility

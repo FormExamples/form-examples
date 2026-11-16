@@ -41,78 +41,94 @@ Manage an `open` boolean in consumer state. Render `FloatingPanel` next to its t
 
 ```svelte
 <script lang="ts">
-    import FloatingPanel from "./FloatingPanel.svelte";
-    let open = $state(false);
+  import FloatingPanel from "./FloatingPanel.svelte";
+  let open = $state(false);
 </script>
 
 <button onclick={() => (open = !open)}>Toggle</button>
-<FloatingPanel {open} label="Options">
-    <p>Some contextual options.</p>
+<FloatingPanel
+  {open}
+  label="Options"
+>
+  <p>Some contextual options.</p>
 </FloatingPanel>
 ```
 
 ```svelte
 <script lang="ts">
-    import FloatingPanel from "./FloatingPanel.svelte";
-    let filtersVisible = $state(false);
+  import FloatingPanel from "./FloatingPanel.svelte";
+  let filtersVisible = $state(false);
 </script>
 
 <button onclick={() => (filtersVisible = !filtersVisible)}>Filters</button>
-<FloatingPanel open={filtersVisible} label="Filters">
-    <form>
-        <label>Category <input name="category" /></label>
-    </form>
+<FloatingPanel
+  open={filtersVisible}
+  label="Filters"
+>
+  <form>
+    <label>Category <input name="category" /></label>
+  </form>
 </FloatingPanel>
 ```
 
 ```svelte
 <script lang="ts">
-    import FloatingPanel from "./FloatingPanel.svelte";
-    let open = $state(false);
-    function onKey(e: KeyboardEvent) {
-        if (e.key === "Escape") open = false;
-    }
+  import FloatingPanel from "./FloatingPanel.svelte";
+  let open = $state(false);
+  function onKey(e: KeyboardEvent) {
+    if (e.key === "Escape") open = false;
+  }
 </script>
 
 <svelte:window on:keydown={onKey} />
 <button onclick={() => (open = true)}>Open panel</button>
-<FloatingPanel {open} label="Details">
-    <p>Press Escape to close.</p>
-    <button onclick={() => (open = false)}>Close</button>
+<FloatingPanel
+  {open}
+  label="Details"
+>
+  <p>Press Escape to close.</p>
+  <button onclick={() => (open = false)}>Close</button>
 </FloatingPanel>
 ```
 
 ```svelte
 <script lang="ts">
-    import FloatingPanel from "./FloatingPanel.svelte";
-    let open = $state(true);
+  import FloatingPanel from "./FloatingPanel.svelte";
+  let open = $state(true);
 </script>
 
 <FloatingPanel
-    {open}
-    label="Contextual help"
-    class="help-panel"
-    data-testid="help-panel"
+  {open}
+  label="Contextual help"
+  class="help-panel"
+  data-testid="help-panel"
 >
-    <h3>Help</h3>
-    <p>More information about this field.</p>
+  <h3>Help</h3>
+  <p>More information about this field.</p>
 </FloatingPanel>
 ```
 
 ```svelte
 <script lang="ts">
-    import FloatingPanel from "./FloatingPanel.svelte";
-    let open = $state(false);
-    let anchor: HTMLButtonElement;
+  import FloatingPanel from "./FloatingPanel.svelte";
+  let open = $state(false);
+  let anchor: HTMLButtonElement;
 </script>
 
-<button bind:this={anchor} onclick={() => (open = !open)}>Menu</button>
-<FloatingPanel {open} label="Actions" aria-labelledby="menu-heading">
-    <h2 id="menu-heading">Actions</h2>
-    <ul>
-        <li><button onclick={() => (open = false)}>Edit</button></li>
-        <li><button onclick={() => (open = false)}>Delete</button></li>
-    </ul>
+<button
+  bind:this={anchor}
+  onclick={() => (open = !open)}>Menu</button
+>
+<FloatingPanel
+  {open}
+  label="Actions"
+  aria-labelledby="menu-heading"
+>
+  <h2 id="menu-heading">Actions</h2>
+  <ul>
+    <li><button onclick={() => (open = false)}>Edit</button></li>
+    <li><button onclick={() => (open = false)}>Delete</button></li>
+  </ul>
 </FloatingPanel>
 ```
 

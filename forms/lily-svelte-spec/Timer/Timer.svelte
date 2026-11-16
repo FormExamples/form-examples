@@ -2,7 +2,8 @@
     // Timer component
     //
     // A headless timer that renders a semantic <time> element with role="timer"
-    // and aria-live="polite" for accessible countdown or elapsed time displays.
+    // for accessible countdown or elapsed time displays. It is not a live region
+    // (role="timer" is aria-live="off" by default): a value that changes every second would flood a screen reader.
     // The consumer manages the actual timer logic (intervals, countdowns) and
     // provides formatted display content through the children snippet. Commonly
     // used for session timeouts, countdowns, stopwatches, cooking timers, and
@@ -30,7 +31,7 @@
     // Accessibility:
     //   - role="timer" indicates countdown or elapsed time
     //   - aria-label provides the accessible name for screen readers
-    //   - aria-live="polite" announces timer updates without interrupting
+    //   - not live: a screen reader reads it when asked; announce milestones ("one minute left") in a separate status region
     //   - Semantic <time> element supports machine-readable time data
     //
     // Internationalization:
@@ -68,7 +69,6 @@
     class={`timer ${className}`}
     role="timer"
     aria-label={label}
-    aria-live="polite"
     {...restProps}
 >
     {@render children?.()}

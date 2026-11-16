@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/svelte";
+import { fireEvent, render, screen } from "@testing-library/svelte";
 import { describe, expect, test } from "vitest";
 
 import Subject from "./Combobox.svelte";
@@ -20,7 +20,7 @@ describe("Combobox", () => {
 
     test("has aria-label", () => {
         render(Subject, { props: { label: "Search fruit", children: optionsSnippet() } });
-        expect(screen.getByLabelText("Search fruit")).toBeTruthy();
+        expect(screen.getByRole("combobox", { name: "Search fruit" })).toBeTruthy();
     });
 
     test("listbox hidden when closed", () => {
@@ -41,5 +41,13 @@ describe("Combobox", () => {
     test("passes through attributes", () => {
         render(Subject, { props: { label: "F", "data-testid": "cb", children: optionsSnippet() } });
         expect(screen.getByTestId("cb")).toBeTruthy();
+    });
+
+    test("Escape closes the listbox and collapses the combobox", async () => {
+        render(Subject, { props: { label: "Fruit", open: true, children: optionsSnippet() } });
+        const input = screen.getByRole("combobox");
+        await fireEvent.keyDown(input, { key: "Escape" });
+        expect(screen.queryByRole("listbox")).toBeNull();
+        expect(input.getAttribute("aria-expanded")).toBe("false");
     });
 });

@@ -45,6 +45,8 @@
     // References:
     //   - MDN datetime-local input: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local
 
+    import { warnMissingName } from "../dev-warning";
+
     let {
         class: className = "",
         label,
@@ -69,6 +71,15 @@
         disabled?: boolean;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName(
+            "DateTimeLocalInput",
+            label,
+            restProps["aria-label"],
+            restProps["aria-labelledby"],
+        ),
+    );
 </script>
 
 <!-- DateTimeLocalInput.svelte -->

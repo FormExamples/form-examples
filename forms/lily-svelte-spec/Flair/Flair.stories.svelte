@@ -1,17 +1,20 @@
-<script module lang="ts">
-  import { defineMeta } from '@storybook/addon-svelte-csf';
-  import Flair from './Flair.svelte';
+<script
+    module
+    lang="ts"
+>
+    import { defineMeta } from "@storybook/addon-svelte-csf";
+    import Flair from "./Flair.svelte";
 
-  const { Story } = defineMeta({
-    title: 'Headless/Flair',
-    component: Flair,
-  });
+    const { Story } = defineMeta({
+        title: "Headless/Flair",
+        component: Flair,
+    });
 </script>
 
 <Story
-  name="Default"
-  tags={['autodocs', '!dev']}
-  args={{'label':'Flair'}}
+    name="Default"
+    tags={["autodocs", "!dev"]}
+    args={{ label: "Flair" }}
 >
-  <span>Flair</span>
+    <span>Flair</span>
 </Story>

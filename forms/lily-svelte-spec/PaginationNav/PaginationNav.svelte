@@ -50,6 +50,7 @@
     //   - WAI-ARIA Navigation role: https://www.w3.org/TR/wai-aria-1.2/#navigation
     //   - HTML nav element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nav
 
+    import { warnMissingName } from "../dev-warning";
     import type { Snippet } from "svelte";
 
     let {
@@ -64,6 +65,15 @@
         children: Snippet;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName(
+            "PaginationNav",
+            label,
+            restProps["aria-label"],
+            restProps["aria-labelledby"],
+        ),
+    );
 </script>
 
 <!-- PaginationNav.svelte -->

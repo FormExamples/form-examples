@@ -51,7 +51,9 @@
     // References:
     //   - WAI-ARIA Menu Bar Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
 
+    import { warnMissingName } from "../dev-warning";
     import type { Snippet } from "svelte";
+    import { attachMenu } from "../Menu/menu-keys";
 
     let {
         class: className = "",
@@ -66,40 +68,13 @@
         [key: string]: unknown;
     } = $props();
 
+    $effect(() =>
+        warnMissingName("MenuBar", label, restProps["aria-label"], restProps["aria-labelledby"]),
+    );
+
     let barRef: HTMLElement | undefined = $state(undefined);
 
-    function onkeydown(event: KeyboardEvent) {
-        if (!barRef) return;
-        const items = Array.from(
-            barRef.querySelectorAll<HTMLElement>("[role='menuitem']"),
-        );
-        const current = document.activeElement as HTMLElement;
-        const index = items.indexOf(current);
-        switch (event.key) {
-            case "ArrowRight": {
-                event.preventDefault();
-                const next = index < items.length - 1 ? index + 1 : 0;
-                items[next]?.focus();
-                break;
-            }
-            case "ArrowLeft": {
-                event.preventDefault();
-                const prev = index > 0 ? index - 1 : items.length - 1;
-                items[prev]?.focus();
-                break;
-            }
-            case "Home": {
-                event.preventDefault();
-                items[0]?.focus();
-                break;
-            }
-            case "End": {
-                event.preventDefault();
-                items[items.length - 1]?.focus();
-                break;
-            }
-        }
-    }
+    $effect(() => (barRef ? attachMenu(barRef, "horizontal") : undefined));
 </script>
 
 <!-- MenuBar.svelte -->
@@ -108,7 +83,6 @@
     role="menubar"
     aria-label={label}
     bind:this={barRef}
-    {onkeydown}
     {...restProps}
 >
     {@render children?.()}

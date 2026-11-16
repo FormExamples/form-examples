@@ -75,11 +75,13 @@ describe("GovernmentBanner", () => {
     });
 
     test("renders children inside the details panel", () => {
-        const { container } = render(Subject, { props: {
-            ...baseProps,
-            expanded: true,
-            children: textSnippet("Why this matters"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                ...baseProps,
+                expanded: true,
+                children: textSnippet("Why this matters"),
+            },
+        });
 
         const panel = container.querySelector("div.government-banner-details") as HTMLElement;
         expect(panel.textContent).toContain("Why this matters");

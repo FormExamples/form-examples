@@ -5,13 +5,12 @@
   HTML tag: <span>
   CSS class: espana-codigo-de-identificacion-fiscal-view
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
   Format: 9 characters: 8 numbers and a control letter (the letters I, Ñ, O, and U are not used)
   Usage:
-    <span class="espana-codigo-de-identificacion-fiscal-view" aria-label="Tax Identification Code">value-here</span>
+    <span class="espana-codigo-de-identificacion-fiscal-view">value-here</span>
 -->
 
-<span
-  class="espana-codigo-de-identificacion-fiscal-view"
-  aria-label="Tax Identification Code"
-></span>
+<span class="espana-codigo-de-identificacion-fiscal-view"
+  ><span class="screen-reader-span">Tax Identification Code </span></span
+>

@@ -5,7 +5,7 @@
   HTML tag: <div>
   CSS class: progress-spinner
   Keyboard: None (passive element)
-  Accessibility: role="progressbar", aria-label for accessible name
+  Accessibility: role="status" with aria-live="polite", aria-label for accessible name
   Usage:
     <div class="progress-spinner" role="progressbar" aria-label="Example">
       ...
@@ -14,7 +14,8 @@
 
 <div
   class="progress-spinner"
-  role="progressbar"
+  aria-live="polite"
+  role="status"
   aria-label=""
 >
   <!-- Consumer provides content -->

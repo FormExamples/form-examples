@@ -42,7 +42,7 @@ Import the component, pass a `value` string, and optionally provide a `label` fo
 
 ```svelte
 <script lang="ts">
-    import MeasurementSystemView from "./MeasurementSystemView.svelte";
+  import MeasurementSystemView from "./MeasurementSystemView.svelte";
 </script>
 
 <MeasurementSystemView value="metric" />
@@ -52,22 +52,25 @@ Import the component, pass a `value` string, and optionally provide a `label` fo
 
 ```svelte
 <script lang="ts">
-    import MeasurementSystemView from "./MeasurementSystemView.svelte";
+  import MeasurementSystemView from "./MeasurementSystemView.svelte";
 </script>
 
-<MeasurementSystemView value="SI" label="International System of Units" />
+<MeasurementSystemView
+  value="SI"
+  label="International System of Units"
+/>
 ```
 
 ### Inside a description list
 
 ```svelte
 <script lang="ts">
-    import MeasurementSystemView from "./MeasurementSystemView.svelte";
+  import MeasurementSystemView from "./MeasurementSystemView.svelte";
 </script>
 
 <dl>
-    <dt>Preferred system</dt>
-    <dd><MeasurementSystemView value="metric" /></dd>
+  <dt>Preferred system</dt>
+  <dd><MeasurementSystemView value="metric" /></dd>
 </dl>
 ```
 
@@ -75,8 +78,8 @@ Import the component, pass a `value` string, and optionally provide a `label` fo
 
 ```svelte
 <script lang="ts">
-    import MeasurementSystemView from "./MeasurementSystemView.svelte";
-    let system = $state("imperial");
+  import MeasurementSystemView from "./MeasurementSystemView.svelte";
+  let system = $state("imperial");
 </script>
 
 <p>Current system: <MeasurementSystemView value={system} /></p>
@@ -86,20 +89,23 @@ Import the component, pass a `value` string, and optionally provide a `label` fo
 
 ```svelte
 <script lang="ts">
-    import MeasurementSystemView from "./MeasurementSystemView.svelte";
+  import MeasurementSystemView from "./MeasurementSystemView.svelte";
 </script>
 
-<MeasurementSystemView class="system-badge" value="metric" />
+<MeasurementSystemView
+  class="system-badge"
+  value="metric"
+/>
 
 <style>
-    :global(.system-badge) {
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        font-size: 0.75rem;
-        padding: 0.125rem 0.375rem;
-        border: 1px solid currentColor;
-        border-radius: 9999px;
-    }
+  :global(.system-badge) {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+    padding: 0.125rem 0.375rem;
+    border: 1px solid currentColor;
+    border-radius: 9999px;
+  }
 </style>
 ```
 

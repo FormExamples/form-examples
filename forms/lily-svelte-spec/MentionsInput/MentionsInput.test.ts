@@ -14,18 +14,31 @@ function textSnippet(text: string) {
 
 describe("MentionsInput", () => {
     test("renders as a div with the mentions-input class", () => {
-        const { container } = render(Subject, { props: {
-            label: "Comment",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Comment",
+            },
+        });
 
         const root = container.querySelector("div.mentions-input") as HTMLElement;
         expect(root).toBeTruthy();
     });
 
+    test("aria-controls on the input points at the suggestions panel's id", () => {
+        const { container } = render(Subject, { props: { label: "Comment" } });
+
+        const input = screen.getByRole("combobox");
+        const panel = container.querySelector(".mentions-input-suggestions") as HTMLElement;
+        expect(panel.id).toBeTruthy();
+        expect(input.getAttribute("aria-controls")).toBe(panel.id);
+    });
+
     test("inner input has combobox role and aria attributes", () => {
-        render(Subject, { props: {
-            label: "Comment",
-        }});
+        render(Subject, {
+            props: {
+                label: "Comment",
+            },
+        });
 
         const input = screen.getByRole("combobox");
         expect(input.getAttribute("aria-label")).toBe("Comment");
@@ -34,80 +47,96 @@ describe("MentionsInput", () => {
     });
 
     test("aria-expanded reflects expanded prop", () => {
-        render(Subject, { props: {
-            label: "Comment",
-            expanded: true,
-        }});
+        render(Subject, {
+            props: {
+                label: "Comment",
+                expanded: true,
+            },
+        });
 
         const input = screen.getByRole("combobox");
         expect(input.getAttribute("aria-expanded")).toBe("true");
     });
 
     test("default trigger char is @", () => {
-        const { container } = render(Subject, { props: {
-            label: "Comment",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Comment",
+            },
+        });
 
         const root = container.querySelector("div.mentions-input") as HTMLElement;
         expect(root.getAttribute("data-trigger-char")).toBe("@");
     });
 
     test("supports custom trigger char", () => {
-        const { container } = render(Subject, { props: {
-            label: "Comment",
-            triggerChar: "#",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Comment",
+                triggerChar: "#",
+            },
+        });
 
         const root = container.querySelector("div.mentions-input") as HTMLElement;
         expect(root.getAttribute("data-trigger-char")).toBe("#");
     });
 
     test("input shows value", () => {
-        const { container } = render(Subject, { props: {
-            label: "Comment",
-            value: "Hello @",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Comment",
+                value: "Hello @",
+            },
+        });
 
         const input = container.querySelector("input.mentions-input-control") as HTMLInputElement;
         expect(input.value).toBe("Hello @");
     });
 
     test("input shows placeholder", () => {
-        const { container } = render(Subject, { props: {
-            label: "Comment",
-            placeholder: "Mention someone",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Comment",
+                placeholder: "Mention someone",
+            },
+        });
 
         const input = container.querySelector("input.mentions-input-control") as HTMLInputElement;
         expect(input.getAttribute("placeholder")).toBe("Mention someone");
     });
 
     test("input can be disabled", () => {
-        const { container } = render(Subject, { props: {
-            label: "Comment",
-            disabled: true,
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Comment",
+                disabled: true,
+            },
+        });
 
         const input = container.querySelector("input.mentions-input-control") as HTMLInputElement;
         expect(input.disabled).toBe(true);
     });
 
     test("suggestions panel is hidden when not expanded", () => {
-        const { container } = render(Subject, { props: {
-            label: "Comment",
-            children: textSnippet("Suggestions"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Comment",
+                children: textSnippet("Suggestions"),
+            },
+        });
 
         const panel = container.querySelector(".mentions-input-suggestions") as HTMLElement;
         expect(panel.hasAttribute("hidden")).toBe(true);
     });
 
     test("suggestions panel is visible when expanded", () => {
-        const { container } = render(Subject, { props: {
-            label: "Comment",
-            expanded: true,
-            children: textSnippet("Suggestions"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Comment",
+                expanded: true,
+                children: textSnippet("Suggestions"),
+            },
+        });
 
         const panel = container.querySelector(".mentions-input-suggestions") as HTMLElement;
         expect(panel.hasAttribute("hidden")).toBe(false);
@@ -117,10 +146,12 @@ describe("MentionsInput", () => {
     test("invokes oninput handler when typing", async () => {
         const user: UserEvent = userEvent.setup();
         const handleInput = vi.fn();
-        render(Subject, { props: {
-            label: "Comment",
-            oninput: handleInput,
-        }});
+        render(Subject, {
+            props: {
+                label: "Comment",
+                oninput: handleInput,
+            },
+        });
 
         const input = screen.getByRole("combobox");
         await user.type(input, "h");
@@ -128,10 +159,12 @@ describe("MentionsInput", () => {
     });
 
     test("appends consumer class to base class", () => {
-        const { container } = render(Subject, { props: {
-            label: "Comment",
-            class: "extra",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Comment",
+                class: "extra",
+            },
+        });
 
         const root = container.querySelector("div.mentions-input") as HTMLElement;
         expect(root.className).toContain("mentions-input");

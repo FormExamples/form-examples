@@ -1,16 +1,19 @@
-<script module lang="ts">
-  import { defineMeta } from '@storybook/addon-svelte-csf';
-  import DontListItem from './DontListItem.svelte';
+<script
+    module
+    lang="ts"
+>
+    import { defineMeta } from "@storybook/addon-svelte-csf";
+    import DontListItem from "./DontListItem.svelte";
 
-  const { Story } = defineMeta({
-    title: 'Headless/DontListItem',
-    component: DontListItem,
-  });
+    const { Story } = defineMeta({
+        title: "Headless/DontListItem",
+        component: DontListItem,
+    });
 </script>
 
 <Story
-  name="Default"
-  tags={['autodocs', '!dev']}
+    name="Default"
+    tags={["autodocs", "!dev"]}
 >
-  <span>List item</span>
+    <span>List item</span>
 </Story>

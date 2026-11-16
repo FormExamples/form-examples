@@ -4,17 +4,23 @@
   Description: a modal or non-modal dialog window
   HTML tag: <dialog>
   CSS class: dialog
-  Keyboard: Tab to cycle focus within dialog, Escape to close
-  Accessibility: role="dialog", Implicit dialog role, aria-label for accessible name, aria-modal for modal behavior
+  Keyboard: Escape closes (also the native cancel event); Tab is trapped by showModal()
+  Accessibility: role="dialog", aria-label for accessible name, aria-modal, tabindex="-1"
   Usage:
-    <dialog class="dialog" role="dialog" aria-label="Example">
-      ...
+    <dialog
+      class="dialog"
+      role="dialog"
+      tabindex="-1"
+      aria-label=""
+      aria-modal="true"
+    >
     </dialog>
 -->
 
 <dialog
   class="dialog"
   role="dialog"
+  tabindex="-1"
   aria-label=""
   aria-modal="true"
 >
@@ -26,10 +32,19 @@
   (function() {
     'use strict';
     document.querySelectorAll('.dialog').forEach(function(el) {
+      function close() {
+        if (typeof el.close === 'function') el.close();
+        else el.removeAttribute('open');
+      }
       el.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-          el.close ? el.close() : el.setAttribute('data-open', 'false');
+        if (e.key === 'Escape' && !e.defaultPrevented) {
+          e.preventDefault();
+          close();
         }
+      });
+      el.addEventListener('cancel', function(e) {
+        e.preventDefault();
+        close();
       });
     });
   })();

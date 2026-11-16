@@ -7,7 +7,7 @@
     //
     // Props:
     //   className — string, optional. CSS class name.
-    //   active — boolean, optional. Marks the cell as currently active/selected.
+    //   active — boolean, optional. Marks the cell as the roving tab stop.
     //   label — string, optional. Accessible name for the cell via aria-label.
     //   children — Snippet, optional. Cell content such as task cards or text.
     //   ...restProps — additional HTML attributes spread onto the <td>.
@@ -28,7 +28,7 @@
     //
     // Accessibility:
     //   - role="gridcell" identifies the cell as part of a grid
-    //   - aria-selected indicates the active/selected state when active is true
+    //   - `active` is the roving tab stop only: it never sets aria-selected, because focus is not selection (a grid with real selection passes aria-selected itself)
     //   - tabindex enables roving tabindex (0 when active, -1 otherwise)
     //   - aria-label optionally provides an accessible name for the cell
     //
@@ -52,7 +52,7 @@
         children,
         ...restProps
     }: {
-        /** Marks the cell as currently active/selected. */
+        /** Marks the cell as the roving tab stop (tabindex="0"). Never sets aria-selected. */
         active?: boolean;
         /** Accessible name for the cell. */
         label?: string;
@@ -66,7 +66,6 @@
 <td
     class={`kanban-table-td ${className}`}
     role="gridcell"
-    aria-selected={active || undefined}
     tabindex={active ? 0 : -1}
     aria-label={label}
     {...restProps}

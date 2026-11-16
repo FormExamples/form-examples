@@ -91,7 +91,10 @@ Import and bind `value`. Pass a translated `label`. Mark `required` when the for
   bind:value={ssn}
   disabled={locked}
 />
-<button type="button" onclick={() => (locked = !locked)}>
+<button
+  type="button"
+  onclick={() => (locked = !locked)}
+>
   {locked ? "Unlock" : "Lock"}
 </button>
 ```
@@ -115,7 +118,12 @@ Import and bind `value`. Pass a translated `label`. Mark `required` when the for
   aria-describedby="ssn-err"
   required
 />
-{#if err}<p id="ssn-err" role="alert">{err}</p>{/if}
+{#if err}<p
+    id="ssn-err"
+    role="alert"
+  >
+    {err}
+  </p>{/if}
 ```
 
 ## Accessibility

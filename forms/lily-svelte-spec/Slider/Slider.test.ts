@@ -35,4 +35,9 @@ describe("Slider", () => {
         render(Subject, { props: { label: "S", "data-testid": "sl" } });
         expect(screen.getByTestId("sl")).toBeTruthy();
     });
+
+    test("passes aria-valuetext through to the range input", () => {
+        render(Subject, { props: { label: "S", value: 20, "aria-valuetext": "20 percent" } });
+        expect(screen.getByRole("slider").getAttribute("aria-valuetext")).toBe("20 percent");
+    });
 });

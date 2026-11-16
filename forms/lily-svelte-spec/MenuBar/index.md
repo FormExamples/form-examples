@@ -48,16 +48,16 @@ Compose `MenuBar` with `MenuBarButton` children, one per top-level menu entry. W
 
 ```svelte
 <script lang="ts">
-    import MenuBar from "./MenuBar.svelte";
-    import MenuBarButton from "../MenuBarButton/MenuBarButton.svelte";
+  import MenuBar from "./MenuBar.svelte";
+  import MenuBarButton from "../MenuBarButton/MenuBarButton.svelte";
 </script>
 
 <MenuBar label="Main menu">
-    <MenuBarButton>File</MenuBarButton>
-    <MenuBarButton>Edit</MenuBarButton>
-    <MenuBarButton>View</MenuBarButton>
-    <MenuBarButton>Window</MenuBarButton>
-    <MenuBarButton>Help</MenuBarButton>
+  <MenuBarButton>File</MenuBarButton>
+  <MenuBarButton>Edit</MenuBarButton>
+  <MenuBarButton>View</MenuBarButton>
+  <MenuBarButton>Window</MenuBarButton>
+  <MenuBarButton>Help</MenuBarButton>
 </MenuBar>
 ```
 
@@ -67,18 +67,18 @@ ArrowRight/ArrowLeft move focus horizontally between items. Home/End jump to fir
 
 ```svelte
 <script lang="ts">
-    import MenuBar from "./MenuBar.svelte";
-    import MenuBarButton from "../MenuBarButton/MenuBarButton.svelte";
-    let items = ["File", "Edit", "View"];
-    function open(item: string) {
-        console.log("open", item);
-    }
+  import MenuBar from "./MenuBar.svelte";
+  import MenuBarButton from "../MenuBarButton/MenuBarButton.svelte";
+  let items = ["File", "Edit", "View"];
+  function open(item: string) {
+    console.log("open", item);
+  }
 </script>
 
 <MenuBar label="Application menu">
-    {#each items as item}
-        <MenuBarButton onclick={() => open(item)}>{item}</MenuBarButton>
-    {/each}
+  {#each items as item}
+    <MenuBarButton onclick={() => open(item)}>{item}</MenuBarButton>
+  {/each}
 </MenuBar>
 ```
 
@@ -86,43 +86,43 @@ ArrowRight/ArrowLeft move focus horizontally between items. Home/End jump to fir
 
 ```svelte
 <script lang="ts">
-    import MenuBar from "./MenuBar.svelte";
-    import MenuBarButton from "../MenuBarButton/MenuBarButton.svelte";
-    import Menu from "../Menu/Menu.svelte";
-    import MenuItem from "../MenuItem/MenuItem.svelte";
+  import MenuBar from "./MenuBar.svelte";
+  import MenuBarButton from "../MenuBarButton/MenuBarButton.svelte";
+  import Menu from "../Menu/Menu.svelte";
+  import MenuItem from "../MenuItem/MenuItem.svelte";
 
-    let openMenu = $state<string | null>(null);
+  let openMenu = $state<string | null>(null);
 </script>
 
 <MenuBar label="Main">
-    <MenuBarButton
-        aria-haspopup="menu"
-        aria-expanded={openMenu === "file"}
-        onclick={() => (openMenu = openMenu === "file" ? null : "file")}
-    >
-        File
-    </MenuBarButton>
-    <MenuBarButton
-        aria-haspopup="menu"
-        aria-expanded={openMenu === "edit"}
-        onclick={() => (openMenu = openMenu === "edit" ? null : "edit")}
-    >
-        Edit
-    </MenuBarButton>
+  <MenuBarButton
+    aria-haspopup="menu"
+    aria-expanded={openMenu === "file"}
+    onclick={() => (openMenu = openMenu === "file" ? null : "file")}
+  >
+    File
+  </MenuBarButton>
+  <MenuBarButton
+    aria-haspopup="menu"
+    aria-expanded={openMenu === "edit"}
+    onclick={() => (openMenu = openMenu === "edit" ? null : "edit")}
+  >
+    Edit
+  </MenuBarButton>
 </MenuBar>
 
 {#if openMenu === "file"}
-    <Menu label="File">
-        <MenuItem>New</MenuItem>
-        <MenuItem>Open</MenuItem>
-        <MenuItem>Save</MenuItem>
-    </Menu>
+  <Menu label="File">
+    <MenuItem>New</MenuItem>
+    <MenuItem>Open</MenuItem>
+    <MenuItem>Save</MenuItem>
+  </Menu>
 {:else if openMenu === "edit"}
-    <Menu label="Edit">
-        <MenuItem>Undo</MenuItem>
-        <MenuItem>Cut</MenuItem>
-        <MenuItem>Copy</MenuItem>
-    </Menu>
+  <Menu label="Edit">
+    <MenuItem>Undo</MenuItem>
+    <MenuItem>Cut</MenuItem>
+    <MenuItem>Copy</MenuItem>
+  </Menu>
 {/if}
 ```
 
@@ -130,14 +130,14 @@ ArrowRight/ArrowLeft move focus horizontally between items. Home/End jump to fir
 
 ```svelte
 <script lang="ts">
-    import MenuBar from "./MenuBar.svelte";
-    import MenuBarButton from "../MenuBarButton/MenuBarButton.svelte";
+  import MenuBar from "./MenuBar.svelte";
+  import MenuBarButton from "../MenuBarButton/MenuBarButton.svelte";
 </script>
 
 <MenuBar label="Main">
-    <MenuBarButton>File</MenuBarButton>
-    <MenuBarButton disabled>Edit</MenuBarButton>
-    <MenuBarButton>View</MenuBarButton>
+  <MenuBarButton>File</MenuBarButton>
+  <MenuBarButton disabled>Edit</MenuBarButton>
+  <MenuBarButton>View</MenuBarButton>
 </MenuBar>
 ```
 
@@ -145,21 +145,24 @@ ArrowRight/ArrowLeft move focus horizontally between items. Home/End jump to fir
 
 ```svelte
 <script lang="ts">
-    import MenuBar from "./MenuBar.svelte";
-    import MenuBarButton from "../MenuBarButton/MenuBarButton.svelte";
+  import MenuBar from "./MenuBar.svelte";
+  import MenuBarButton from "../MenuBarButton/MenuBarButton.svelte";
 </script>
 
-<MenuBar class="app-menubar" label="Application">
-    <MenuBarButton>File</MenuBarButton>
-    <MenuBarButton>Edit</MenuBarButton>
+<MenuBar
+  class="app-menubar"
+  label="Application"
+>
+  <MenuBarButton>File</MenuBarButton>
+  <MenuBarButton>Edit</MenuBarButton>
 </MenuBar>
 
 <style>
-    :global(.app-menubar) {
-        display: flex;
-        gap: 0.25rem;
-        border-bottom: 1px solid #e5e7eb;
-    }
+  :global(.app-menubar) {
+    display: flex;
+    gap: 0.25rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
 </style>
 ```
 

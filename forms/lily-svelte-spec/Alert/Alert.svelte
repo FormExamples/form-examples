@@ -89,9 +89,7 @@
     } = $props();
 
     // Default aria-live based on role if not explicitly set
-    let ariaLive = $derived(
-        live ?? (role === "alert" ? "assertive" : "polite"),
-    );
+    let ariaLive = $derived(live ?? (role === "alert" ? "assertive" : "polite"));
 </script>
 
 <!-- Alert.svelte -->

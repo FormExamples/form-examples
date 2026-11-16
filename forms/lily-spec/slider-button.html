@@ -4,8 +4,10 @@
   Description: a button with a slider
   HTML tag: <button>
   CSS class: slider-button
-  Keyboard: Tab to focus, Enter/Space to activate
-  Accessibility: role="slider", aria-label for accessible name
+  Keyboard: ArrowRight/ArrowLeft move the slider by data-step (default 10); Home returns it to 0; End, Enter or Space
+    complete it. Reaching 100 dispatches a bubbling "confirm" event and resets to 0. A disabled button ignores keys.
+  Accessibility: role="slider" with aria-label, aria-valuenow (the position), aria-valuemin 0, aria-valuemax 100
+  The consumer draws the track and thumb from aria-valuenow, and wires pointer drag through the same value.
 -->
 
 <button
@@ -16,6 +18,35 @@
   aria-valuemin="0"
   aria-valuemax="100"
   aria-valuenow="0"
+  data-step="10"
 >
   <!-- Consumer provides content -->
 </button>
+
+<script>
+  // SliderButton behavior: keyboard slide-to-confirm
+  (function () {
+    "use strict";
+    document.querySelectorAll(".slider-button").forEach(function (el) {
+      el.addEventListener("keydown", function (e) {
+        if (el.disabled) return;
+        var position = parseFloat(el.getAttribute("aria-valuenow")) || 0;
+        var step = parseFloat(el.getAttribute("data-step"));
+        if (isNaN(step)) step = 10;
+        var next;
+        if (e.key === "ArrowRight") next = position + step;
+        else if (e.key === "ArrowLeft") next = position - step;
+        else if (e.key === "Home") next = 0;
+        else if (e.key === "End" || e.key === "Enter" || e.key === " ") next = 100;
+        else return;
+        e.preventDefault();
+        if (next >= 100) {
+          el.setAttribute("aria-valuenow", "0");
+          el.dispatchEvent(new CustomEvent("confirm", { bubbles: true }));
+        } else {
+          el.setAttribute("aria-valuenow", String(Math.max(0, next)));
+        }
+      });
+    });
+  })();
+</script>

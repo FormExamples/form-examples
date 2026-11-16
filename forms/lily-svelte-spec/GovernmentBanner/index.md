@@ -40,7 +40,7 @@ A headless Svelte 5 component inspired by the U.S. Web Design System (USWDS) Ban
 
 ```svelte
 <script lang="ts">
-  import GovernmentBanner from './GovernmentBanner.svelte';
+  import GovernmentBanner from "./GovernmentBanner.svelte";
 
   let expanded = $state(false);
 </script>
@@ -49,7 +49,7 @@ A headless Svelte 5 component inspired by the U.S. Web Design System (USWDS) Ban
   label="Official government website"
   headerText="An official website of the United States government"
   expandLabel="Here's how you know"
-  expanded={expanded}
+  {expanded}
   ontoggle={(next) => (expanded = next)}
 >
   <p>Official websites use .gov</p>

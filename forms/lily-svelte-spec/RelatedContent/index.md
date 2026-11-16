@@ -10,7 +10,7 @@ See [components/related-content/index.md](../../../components/related-content/in
 
 ```svelte
 <script lang="ts">
-    import RelatedContent from "./RelatedContent.svelte";
+  import RelatedContent from "./RelatedContent.svelte";
 </script>
 
 <RelatedContent />

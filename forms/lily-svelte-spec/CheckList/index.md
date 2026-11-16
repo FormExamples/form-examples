@@ -32,71 +32,71 @@ Compose with `CheckListItem` children. Provide a `label` to describe the list's 
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `class` | `string` | `""` | CSS class name (note: current source does not apply a base class to the `<ol>`). |
-| `label` | `string` | `undefined` | Accessible label for the list. |
-| `children` | `Snippet` | required | `CheckListItem` components. |
-| `...restProps` | `unknown` | — | Additional attributes spread onto the `<ol>`. |
+| Prop           | Type      | Default     | Description                                                                      |
+| -------------- | --------- | ----------- | -------------------------------------------------------------------------------- |
+| `class`        | `string`  | `""`        | CSS class name (note: current source does not apply a base class to the `<ol>`). |
+| `label`        | `string`  | `undefined` | Accessible label for the list.                                                   |
+| `children`     | `Snippet` | required    | `CheckListItem` components.                                                      |
+| `...restProps` | `unknown` | —           | Additional attributes spread onto the `<ol>`.                                    |
 
 ## Usage
 
 ```svelte
 <script lang="ts">
-    import CheckList from "./CheckList.svelte";
-    import CheckListItem from "../CheckListItem/CheckListItem.svelte";
+  import CheckList from "./CheckList.svelte";
+  import CheckListItem from "../CheckListItem/CheckListItem.svelte";
 </script>
 
 <CheckList label="Onboarding tasks">
-    <CheckListItem checked>Create account</CheckListItem>
-    <CheckListItem>Set up profile</CheckListItem>
-    <CheckListItem>Invite team members</CheckListItem>
+  <CheckListItem checked>Create account</CheckListItem>
+  <CheckListItem>Set up profile</CheckListItem>
+  <CheckListItem>Invite team members</CheckListItem>
 </CheckList>
 ```
 
 ```svelte
 <script lang="ts">
-    import CheckList from "./CheckList.svelte";
-    import CheckListItem from "../CheckListItem/CheckListItem.svelte";
+  import CheckList from "./CheckList.svelte";
+  import CheckListItem from "../CheckListItem/CheckListItem.svelte";
 </script>
 
 <CheckList label="Pre-flight checks">
-    <CheckListItem checked>Review content</CheckListItem>
-    <CheckListItem checked>Run tests</CheckListItem>
-    <CheckListItem>Deploy to staging</CheckListItem>
-    <CheckListItem disabled>Deploy to production (admin only)</CheckListItem>
+  <CheckListItem checked>Review content</CheckListItem>
+  <CheckListItem checked>Run tests</CheckListItem>
+  <CheckListItem>Deploy to staging</CheckListItem>
+  <CheckListItem disabled>Deploy to production (admin only)</CheckListItem>
 </CheckList>
 ```
 
 ```svelte
 <script lang="ts">
-    import CheckList from "./CheckList.svelte";
-    import CheckListItem from "../CheckListItem/CheckListItem.svelte";
+  import CheckList from "./CheckList.svelte";
+  import CheckListItem from "../CheckListItem/CheckListItem.svelte";
 
-    let steps = $state([
-        { id: 1, label: "Read the docs", done: true },
-        { id: 2, label: "Run the demo", done: false },
-        { id: 3, label: "Ship it", done: false }
-    ]);
+  let steps = $state([
+    { id: 1, label: "Read the docs", done: true },
+    { id: 2, label: "Run the demo", done: false },
+    { id: 3, label: "Ship it", done: false },
+  ]);
 </script>
 
 <CheckList label="Tutorial">
-    {#each steps as step (step.id)}
-        <CheckListItem checked={step.done}>{step.label}</CheckListItem>
-    {/each}
+  {#each steps as step (step.id)}
+    <CheckListItem checked={step.done}>{step.label}</CheckListItem>
+  {/each}
 </CheckList>
 ```
 
 ```svelte
 <script lang="ts">
-    import CheckList from "./CheckList.svelte";
-    import CheckListItem from "../CheckListItem/CheckListItem.svelte";
+  import CheckList from "./CheckList.svelte";
+  import CheckListItem from "../CheckListItem/CheckListItem.svelte";
 </script>
 
 <CheckList label="Morning routine">
-    <CheckListItem checked>Hydrate</CheckListItem>
-    <CheckListItem>Stretch</CheckListItem>
-    <CheckListItem>Review calendar</CheckListItem>
+  <CheckListItem checked>Hydrate</CheckListItem>
+  <CheckListItem>Stretch</CheckListItem>
+  <CheckListItem>Review calendar</CheckListItem>
 </CheckList>
 ```
 

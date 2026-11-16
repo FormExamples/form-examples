@@ -41,6 +41,7 @@
     //   - WAI-ARIA Toolbar Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/
 
     import type { Snippet } from "svelte";
+    import { attachToolbar } from "../widget-keys";
 
     let {
         class: className = "",
@@ -71,10 +72,15 @@
     const showClear = $derived(
         Boolean(clearSelectionLabel) && typeof onClearSelection === "function",
     );
+
+    let rootEl = $state<HTMLElement>();
+
+    $effect(() => (rootEl ? attachToolbar(rootEl, { dismiss: ".action-bar-clear" }) : undefined));
 </script>
 
 <!-- ActionBar.svelte -->
 <div
+    bind:this={rootEl}
     class={`action-bar ${className}`}
     role="toolbar"
     aria-label={label}
@@ -90,7 +96,7 @@
             class="action-bar-clear"
             type="button"
             aria-label={clearSelectionLabel}
-            onclick={onClearSelection}
-        >×</button>
+            onclick={onClearSelection}>×</button
+        >
     {/if}
 </div>

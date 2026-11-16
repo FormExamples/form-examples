@@ -10,7 +10,7 @@ See [components/chat-message/index.md](../../../components/chat-message/index.md
 
 ```svelte
 <script lang="ts">
-    import ChatMessage from "./ChatMessage.svelte";
+  import ChatMessage from "./ChatMessage.svelte";
 </script>
 
 <ChatMessage />

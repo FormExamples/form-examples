@@ -49,7 +49,7 @@ import ProgressSpinner from './ProgressSpinner.svelte';
 
 ```svelte
 <script lang="ts">
-  import ProgressSpinner from './ProgressSpinner.svelte';
+  import ProgressSpinner from "./ProgressSpinner.svelte";
 </script>
 
 <ProgressSpinner label="Loading data" />
@@ -59,7 +59,7 @@ import ProgressSpinner from './ProgressSpinner.svelte';
 
 ```svelte
 <script lang="ts">
-  import ProgressSpinner from './ProgressSpinner.svelte';
+  import ProgressSpinner from "./ProgressSpinner.svelte";
 </script>
 
 <ProgressSpinner label="Loading search results">
@@ -71,7 +71,7 @@ import ProgressSpinner from './ProgressSpinner.svelte';
 
 ```svelte
 <script lang="ts">
-  import ProgressSpinner from './ProgressSpinner.svelte';
+  import ProgressSpinner from "./ProgressSpinner.svelte";
 
   let busy = $state(true);
 </script>
@@ -87,12 +87,15 @@ import ProgressSpinner from './ProgressSpinner.svelte';
 
 ```svelte
 <script lang="ts">
-  import ProgressSpinner from './ProgressSpinner.svelte';
+  import ProgressSpinner from "./ProgressSpinner.svelte";
 
   let submitting = $state(false);
 </script>
 
-<button type="button" disabled={submitting}>
+<button
+  type="button"
+  disabled={submitting}
+>
   {#if submitting}
     <ProgressSpinner label="Saving">Saving…</ProgressSpinner>
   {:else}
@@ -112,7 +115,7 @@ import ProgressSpinner from './ProgressSpinner.svelte';
 ## Accessibility
 
 - `role="status"` + `aria-live="polite"` make text changes inside the spinner announced politely.
-- `aria-label` describes *what* is loading.
+- `aria-label` describes _what_ is loading.
 - Non-interactive; no keyboard handling.
 - Consumer CSS must honor `prefers-reduced-motion` for the spinning animation.
 

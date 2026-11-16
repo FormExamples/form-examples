@@ -55,31 +55,38 @@ import PasswordInputOrTextInputDiv from './PasswordInputOrTextInputDiv.svelte';
 
 ```svelte
 <script lang="ts">
-  import PasswordInputOrTextInputDiv from './PasswordInputOrTextInputDiv.svelte';
+  import PasswordInputOrTextInputDiv from "./PasswordInputOrTextInputDiv.svelte";
 
   let password = $state("");
 </script>
 
-<PasswordInputOrTextInputDiv label="Password" bind:value={password} />
+<PasswordInputOrTextInputDiv
+  label="Password"
+  bind:value={password}
+/>
 ```
 
 ### Without the toggle
 
 ```svelte
 <script lang="ts">
-  import PasswordInputOrTextInputDiv from './PasswordInputOrTextInputDiv.svelte';
+  import PasswordInputOrTextInputDiv from "./PasswordInputOrTextInputDiv.svelte";
 
   let password = $state("");
 </script>
 
-<PasswordInputOrTextInputDiv label="Password" bind:value={password} showToggle={false} />
+<PasswordInputOrTextInputDiv
+  label="Password"
+  bind:value={password}
+  showToggle={false}
+/>
 ```
 
 ### Localized toggle label
 
 ```svelte
 <script lang="ts">
-  import PasswordInputOrTextInputDiv from './PasswordInputOrTextInputDiv.svelte';
+  import PasswordInputOrTextInputDiv from "./PasswordInputOrTextInputDiv.svelte";
 
   let password = $state("");
 </script>
@@ -95,27 +102,41 @@ import PasswordInputOrTextInputDiv from './PasswordInputOrTextInputDiv.svelte';
 
 ```svelte
 <script lang="ts">
-  import PasswordInputOrTextInputDiv from './PasswordInputOrTextInputDiv.svelte';
+  import PasswordInputOrTextInputDiv from "./PasswordInputOrTextInputDiv.svelte";
 
   let password = $state("");
 </script>
 
-<PasswordInputOrTextInputDiv label="Password" bind:value={password} required />
-<PasswordInputOrTextInputDiv label="Password" value="••••••••" disabled />
+<PasswordInputOrTextInputDiv
+  label="Password"
+  bind:value={password}
+  required
+/>
+<PasswordInputOrTextInputDiv
+  label="Password"
+  value="••••••••"
+  disabled
+/>
 ```
 
 ### In a sign-in form
 
 ```svelte
 <script lang="ts">
-  import PasswordInputOrTextInputDiv from './PasswordInputOrTextInputDiv.svelte';
+  import PasswordInputOrTextInputDiv from "./PasswordInputOrTextInputDiv.svelte";
 
   let password = $state("");
-  function signIn(e: SubmitEvent) { e.preventDefault(); /* auth */ }
+  function signIn(e: SubmitEvent) {
+    e.preventDefault(); /* auth */
+  }
 </script>
 
 <form onsubmit={signIn}>
-  <PasswordInputOrTextInputDiv label="Password" bind:value={password} required />
+  <PasswordInputOrTextInputDiv
+    label="Password"
+    bind:value={password}
+    required
+  />
   <button type="submit">Sign in</button>
 </form>
 ```

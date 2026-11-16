@@ -7,7 +7,7 @@
   Keyboard: Tab to focus, Enter or Space to activate
   Accessibility: role="menuitem", Implicit button role, aria-label for accessible name
   Usage:
-    <button class="menu-bar-button" role="menuitem" aria-label="Example">
+    <button class="menu-bar-button" role="menuitem" tabindex="-1" aria-label="Example">
       ...
     </button>
 -->
@@ -15,6 +15,7 @@
 <button
   class="menu-bar-button"
   role="menuitem"
+  tabindex="-1"
   aria-label=""
 >
   <!-- Consumer provides button content -->

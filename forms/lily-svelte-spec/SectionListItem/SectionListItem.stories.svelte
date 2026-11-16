@@ -1,17 +1,19 @@
-<script module lang="ts">
-  import { defineMeta } from '@storybook/addon-svelte-csf';
-  import SectionListItem from './SectionListItem.svelte';
+<script
+    module
+    lang="ts"
+>
+    import { defineMeta } from "@storybook/addon-svelte-csf";
+    import SectionListItem from "./SectionListItem.svelte";
 
-  const { Story } = defineMeta({
-    title: 'Headless/SectionListItem',
-    component: SectionListItem,
-  });
+    const { Story } = defineMeta({
+        title: "Headless/SectionListItem",
+        component: SectionListItem,
+    });
 </script>
 
 <Story
-  name="Default"
-  tags={['autodocs', '!dev']}
-  args={{'label':'SectionListItem'}}
+    name="Default"
+    tags={["autodocs", "!dev"]}
 >
-  <span>SectionListItem</span>
+    <span>SectionListItem</span>
 </Story>

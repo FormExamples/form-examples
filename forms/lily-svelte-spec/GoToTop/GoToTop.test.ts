@@ -17,4 +17,11 @@ describe("GoToTop", () => {
         const el = container.querySelector(".go-to-top");
         expect(el).toBeTruthy();
     });
+
+    it("names the link with label", () => {
+        const { container } = render(GoToTop, {
+            props: { label: "Back to top", children: textSnippet("Back to top") },
+        });
+        expect(container.querySelector("a")?.getAttribute("aria-label")).toBe("Back to top");
+    });
 });

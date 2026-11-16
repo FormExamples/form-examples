@@ -12,7 +12,9 @@ function textSnippet(text: string) {
 
 describe("Sidebar", () => {
     test("renders an aside", () => {
-        render(Subject, { props: { label: "Nav", "data-testid": "sb", children: textSnippet("content") } });
+        render(Subject, {
+            props: { label: "Nav", "data-testid": "sb", children: textSnippet("content") },
+        });
         expect(screen.getByTestId("sb").tagName).toBe("ASIDE");
     });
 

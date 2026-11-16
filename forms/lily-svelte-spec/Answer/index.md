@@ -10,7 +10,7 @@ See [components/answer/index.md](../../../components/answer/index.md) for the fu
 
 ```svelte
 <script lang="ts">
-    import Answer from "./Answer.svelte";
+  import Answer from "./Answer.svelte";
 </script>
 
 <Answer />

@@ -1,14 +1,14 @@
 # Timer
 
-A headless countdown or elapsed-time display rendered as a semantic `<time>` element with `role="timer"`, `aria-label`, and `aria-live="polite"`.
+A headless countdown or elapsed-time display rendered as a semantic `<time>` element with `role="timer"` and `aria-label`, not a live region.
 
 ## What it is
 
-`Timer` is a headless Svelte 5 component that renders a `<time>` element with `role="timer"` and `aria-live="polite"`. It does not drive any timer logic itself — consumers compute and format the displayed time and pass it via the `children` snippet.
+`Timer` is a headless Svelte 5 component that renders a `<time>` element with `role="timer"`, not a live region. It does not drive any timer logic itself — consumers compute and format the displayed time and pass it via the `children` snippet.
 
 ## What it does
 
-- Renders `<time class="timer {className}" role="timer" aria-label={label} aria-live="polite">`.
+- Renders `<time class="timer {className}" role="timer" aria-label={label}>`.
 - Renders the `children` snippet as the visible time text.
 - Spreads additional HTML attributes onto the `<time>` (e.g. `datetime="PT5M30S"` for ISO 8601 duration).
 
@@ -52,7 +52,10 @@ Import, supply `label`, and pass formatted time content through `children`. Opti
   import Timer from "./Timer.svelte";
 </script>
 
-<Timer label="Session timeout" datetime="PT5M30S">5:30</Timer>
+<Timer
+  label="Session timeout"
+  datetime="PT5M30S">5:30</Timer
+>
 ```
 
 ```svelte
@@ -66,12 +69,19 @@ Import, supply `label`, and pass formatted time content through `children`. Opti
     }, 1000);
     return () => clearInterval(id);
   });
-  const mm = $derived(Math.floor(remaining / 60).toString().padStart(2, "0"));
+  const mm = $derived(
+    Math.floor(remaining / 60)
+      .toString()
+      .padStart(2, "0"),
+  );
   const ss = $derived((remaining % 60).toString().padStart(2, "0"));
   const iso = $derived(`PT${Math.floor(remaining / 60)}M${remaining % 60}S`);
 </script>
 
-<Timer label="Time remaining" datetime={iso}>{mm}:{ss}</Timer>
+<Timer
+  label="Time remaining"
+  datetime={iso}>{mm}:{ss}</Timer
+>
 ```
 
 ```svelte
@@ -92,7 +102,7 @@ Import, supply `label`, and pass formatted time content through `children`. Opti
 ## Accessibility
 
 - `role="timer"` identifies the element as a countdown/elapsed-time display.
-- `aria-live="polite"` announces updates to screen readers without interrupting current speech; avoid wiring an aggressive interval unless needed.
+- Not a live region: a ticking value is not announced. Announce milestones in a separate `role="status"` region.
 - `aria-label` supplies the accessible name.
 - Semantic `<time>` is ideal for machine-readable durations when `datetime` is provided.
 

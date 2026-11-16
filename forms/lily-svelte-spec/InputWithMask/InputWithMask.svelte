@@ -65,7 +65,10 @@
     data-mask={mask}
     {...restProps}
 >
-    <span class="input-with-mask-display" aria-hidden="true">{mask}</span>
+    <span
+        class="input-with-mask-display"
+        aria-hidden="true">{mask}</span
+    >
     <input
         class="input-with-mask-control"
         type="text"

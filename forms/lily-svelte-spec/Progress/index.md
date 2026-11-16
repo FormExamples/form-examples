@@ -50,17 +50,21 @@ import Progress from './Progress.svelte';
 
 ```svelte
 <script lang="ts">
-  import Progress from './Progress.svelte';
+  import Progress from "./Progress.svelte";
 </script>
 
-<Progress label="Upload progress" value={50} max={100} />
+<Progress
+  label="Upload progress"
+  value={50}
+  max={100}
+/>
 ```
 
 ### Indeterminate loading
 
 ```svelte
 <script lang="ts">
-  import Progress from './Progress.svelte';
+  import Progress from "./Progress.svelte";
 </script>
 
 <Progress label="Loading" />
@@ -70,17 +74,21 @@ import Progress from './Progress.svelte';
 
 ```svelte
 <script lang="ts">
-  import Progress from './Progress.svelte';
+  import Progress from "./Progress.svelte";
 </script>
 
-<Progress label="Installation" value={3} max={5} />
+<Progress
+  label="Installation"
+  value={3}
+  max={5}
+/>
 ```
 
 ### Animated progress from state
 
 ```svelte
 <script lang="ts">
-  import Progress from './Progress.svelte';
+  import Progress from "./Progress.svelte";
 
   let percent = $state(0);
   $effect(() => {
@@ -92,19 +100,27 @@ import Progress from './Progress.svelte';
   });
 </script>
 
-<Progress label="Upload progress" value={percent} max={100} />
+<Progress
+  label="Upload progress"
+  value={percent}
+  max={100}
+/>
 ```
 
 ### With a test hook
 
 ```svelte
-<Progress label="Sync" value={40} data-testid="sync-progress" />
+<Progress
+  label="Sync"
+  value={40}
+  data-testid="sync-progress"
+/>
 ```
 
 ## Accessibility
 
 - `<progress>` implicitly has `role="progressbar"` with `aria-valuenow` / `aria-valuemin` / `aria-valuemax` managed by the browser.
-- `aria-label` tells screen readers *what* is progressing.
+- `aria-label` tells screen readers _what_ is progressing.
 - WCAG 2.2 AAA: consumer CSS must provide sufficient contrast for the progress bar.
 
 ## Related components

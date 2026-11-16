@@ -4,16 +4,22 @@
   Description: a toggle switch for turning a setting on or off
   HTML tag: <button>
   CSS class: switch-button
-  Keyboard: Tab to focus, Enter or Space to activate
-  Accessibility: role="switch", Implicit button role, aria-label for accessible name, aria-checked for toggle state
+  Keyboard: Tab to focus, Space or Enter toggles (native button activation)
+  Accessibility: role="switch", aria-checked for the on/off state, aria-label for accessible name
   Usage:
-    <button class="switch-button" role="switch" aria-label="Example">
-      ...
+    <button
+      class="switch-button"
+      type="button"
+      role="switch"
+      aria-label=""
+      aria-checked="false"
+    >
     </button>
 -->
 
 <button
   class="switch-button"
+  type="button"
   role="switch"
   aria-label=""
   aria-checked="false"
@@ -27,14 +33,8 @@
     'use strict';
     document.querySelectorAll('.switch-button').forEach(function(el) {
       el.addEventListener('click', function() {
-        var pressed = el.getAttribute('aria-checked') === 'true';
-        el.setAttribute('aria-checked', String(!pressed));
-      });
-      el.addEventListener('keydown', function(e) {
-        if (e.key === ' ' || e.key === 'Enter') {
-          e.preventDefault();
-          el.click();
-        }
+        if (el.disabled) return;
+        el.setAttribute('aria-checked', String(el.getAttribute('aria-checked') !== 'true'));
       });
     });
   })();

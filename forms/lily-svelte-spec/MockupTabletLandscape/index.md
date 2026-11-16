@@ -10,7 +10,7 @@ See [components/mockup-tablet-landscape/index.md](../../../components/mockup-tab
 
 ```svelte
 <script lang="ts">
-    import MockupTabletLandscape from "./MockupTabletLandscape.svelte";
+  import MockupTabletLandscape from "./MockupTabletLandscape.svelte";
 </script>
 
 <MockupTabletLandscape />

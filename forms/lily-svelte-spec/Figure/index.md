@@ -29,22 +29,22 @@ Pass the visualization content as children and a descriptive `label`.
 
 ```svelte
 <script lang="ts">
-    import Figure from "./Figure.svelte";
+  import Figure from "./Figure.svelte";
 </script>
 
 <Figure label="Monthly revenue for 2026">
-    <svg><!-- bar chart SVG --></svg>
+  <svg><!-- bar chart SVG --></svg>
 </Figure>
 ```
 
 ## Props
 
-| Prop       | Type       | Default  | Description                                   |
-| ---------- | ---------- | -------- | --------------------------------------------- |
-| `class`    | `string`   | `""`     | CSS class appended to the base class.        |
-| `label`    | `string`   | required | Accessible description via `aria-label`.      |
-| `children` | `Snippet`  | required | Figure content (SVG, canvas, component, etc.).|
-| `...rest`  | `unknown`  | —        | Additional HTML attributes on the `<figure>`. |
+| Prop       | Type      | Default  | Description                                    |
+| ---------- | --------- | -------- | ---------------------------------------------- |
+| `class`    | `string`  | `""`     | CSS class appended to the base class.          |
+| `label`    | `string`  | required | Accessible description via `aria-label`.       |
+| `children` | `Snippet` | required | Figure content (SVG, canvas, component, etc.). |
+| `...rest`  | `unknown` | —        | Additional HTML attributes on the `<figure>`.  |
 
 ## Usage
 
@@ -52,7 +52,7 @@ Pass the visualization content as children and a descriptive `label`.
 
 ```svelte
 <Figure label="Monthly revenue for 2026">
-    <svg><!-- bar chart SVG here --></svg>
+  <svg><!-- bar chart SVG here --></svg>
 </Figure>
 ```
 
@@ -60,7 +60,11 @@ Pass the visualization content as children and a descriptive `label`.
 
 ```svelte
 <Figure label="User growth trend">
-    <canvas bind:this={canvas} width="600" height="300"></canvas>
+  <canvas
+    bind:this={canvas}
+    width="600"
+    height="300"
+  ></canvas>
 </Figure>
 ```
 
@@ -68,8 +72,8 @@ Pass the visualization content as children and a descriptive `label`.
 
 ```svelte
 <Figure label="Users by region">
-    <svg><!-- map --></svg>
-    <figcaption>Active users as of March 2026</figcaption>
+  <svg><!-- map --></svg>
+  <figcaption>Active users as of March 2026</figcaption>
 </Figure>
 ```
 
@@ -77,7 +81,7 @@ Pass the visualization content as children and a descriptive `label`.
 
 ```svelte
 <Figure label="Weekly active users">
-    <Sparkline data={users} />
+  <Sparkline data={users} />
 </Figure>
 ```
 
@@ -85,7 +89,7 @@ Pass the visualization content as children and a descriptive `label`.
 
 ```svelte
 <Figure label="Ingresos mensuales">
-    <svg><!-- gráfico --></svg>
+  <svg><!-- gráfico --></svg>
 </Figure>
 ```
 

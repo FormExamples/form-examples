@@ -5,7 +5,7 @@
   HTML tag: <span>
   CSS class: badge
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: role="status", aria-label for accessible name
   Usage:
     <span class="badge" aria-label="Example">
       ...
@@ -14,6 +14,8 @@
 
 <span
   class="badge"
+  data-type="default"
+  role="status"
   aria-label=""
 >
   <!-- Consumer provides text content -->

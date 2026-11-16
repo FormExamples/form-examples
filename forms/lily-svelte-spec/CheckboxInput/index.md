@@ -31,64 +31,77 @@ Bind the `checked` prop for reactivity. Provide `label` for accessibility. Wrap 
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `class` | `string` | `""` | CSS class name appended to the base class. |
-| `checked` | `boolean` | `false` (bindable) | Current checked state. |
-| `label` | `string` | required | `aria-label` for the checkbox. |
-| `disabled` | `boolean` | `false` | Disables the checkbox. |
-| `required` | `boolean` | `false` | Marks the checkbox as required. |
-| `name` | `string` | `undefined` | Form field name. |
-| `id` | `string` | `undefined` | Element ID. |
-| `value` | `string` | `undefined` | Value attribute for form submission. |
-| `...restProps` | `unknown` | — | Additional attributes spread onto the `<input>`. |
+| Prop           | Type      | Default            | Description                                      |
+| -------------- | --------- | ------------------ | ------------------------------------------------ |
+| `class`        | `string`  | `""`               | CSS class name appended to the base class.       |
+| `checked`      | `boolean` | `false` (bindable) | Current checked state.                           |
+| `label`        | `string`  | required           | `aria-label` for the checkbox.                   |
+| `disabled`     | `boolean` | `false`            | Disables the checkbox.                           |
+| `required`     | `boolean` | `false`            | Marks the checkbox as required.                  |
+| `name`         | `string`  | `undefined`        | Form field name.                                 |
+| `id`           | `string`  | `undefined`        | Element ID.                                      |
+| `value`        | `string`  | `undefined`        | Value attribute for form submission.             |
+| `...restProps` | `unknown` | —                  | Additional attributes spread onto the `<input>`. |
 
 ## Usage
 
 ```svelte
 <script lang="ts">
-    import CheckboxInput from "./CheckboxInput.svelte";
+  import CheckboxInput from "./CheckboxInput.svelte";
 
-    let accepted = $state(false);
-</script>
-
-<CheckboxInput label="Accept terms" bind:checked={accepted} />
-```
-
-```svelte
-<script lang="ts">
-    import CheckboxInput from "./CheckboxInput.svelte";
-
-    let subscribed = $state(false);
-    let hasEmail = $state(true);
+  let accepted = $state(false);
 </script>
 
 <CheckboxInput
-    label="Subscribe to newsletter"
-    bind:checked={subscribed}
-    disabled={!hasEmail}
+  label="Accept terms"
+  bind:checked={accepted}
 />
 ```
 
 ```svelte
 <script lang="ts">
-    import CheckboxInput from "./CheckboxInput.svelte";
+  import CheckboxInput from "./CheckboxInput.svelte";
 
-    let agree = $state(false);
+  let subscribed = $state(false);
+  let hasEmail = $state(true);
 </script>
 
-<CheckboxInput label="I agree" bind:checked={agree} required name="agree" value="yes" />
+<CheckboxInput
+  label="Subscribe to newsletter"
+  bind:checked={subscribed}
+  disabled={!hasEmail}
+/>
 ```
 
 ```svelte
 <script lang="ts">
-    import CheckboxInput from "./CheckboxInput.svelte";
+  import CheckboxInput from "./CheckboxInput.svelte";
 
-    let remember = $state(true);
-    const id = "remember-me";
+  let agree = $state(false);
 </script>
 
-<CheckboxInput {id} label="Remember me" bind:checked={remember} />
+<CheckboxInput
+  label="I agree"
+  bind:checked={agree}
+  required
+  name="agree"
+  value="yes"
+/>
+```
+
+```svelte
+<script lang="ts">
+  import CheckboxInput from "./CheckboxInput.svelte";
+
+  let remember = $state(true);
+  const id = "remember-me";
+</script>
+
+<CheckboxInput
+  {id}
+  label="Remember me"
+  bind:checked={remember}
+/>
 <label for={id}>Remember me on this device</label>
 ```
 

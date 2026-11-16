@@ -2,22 +2,24 @@
 <!-- CurrencyInput component -->
 <!--
   Description: a locale-aware currency input with automatic formatting, symbols, separators
-  HTML tag: <div>
+  HTML tag: <input>
   CSS class: currency-input
   Keyboard: None (passive element)
   Accessibility: aria-label for accessible name
   Usage:
-    <div class="currency-input" aria-label="Example">
+    <div class="currency-input" aria-label="Example" data-currency-code="EUR">
       ...
     </div>
 -->
 
-<div
+<!-- data-currency-code is REQUIRED: the consumer supplies the ISO 4217 code. It is never defaulted. -->
+<input
   class="currency-input"
+  type="text"
+  inputmode="decimal"
   aria-label=""
->
-  <!-- Consumer provides content -->
-</div>
+  data-currency-code=""
+/>
 
 <script>
   // CurrencyInput behavior

@@ -47,12 +47,12 @@ Chat transcript pane:
 
 ```svelte
 <script lang="ts">
-    import ScrollArea from "./ScrollArea.svelte";
-    let messages = $state(["Hello", "Hi", "How are you?"]);
+  import ScrollArea from "./ScrollArea.svelte";
+  let messages = $state(["Hello", "Hi", "How are you?"]);
 </script>
 
 <ScrollArea label="Chat messages">
-    {#each messages as m}<p>{m}</p>{/each}
+  {#each messages as m}<p>{m}</p>{/each}
 </ScrollArea>
 ```
 
@@ -60,11 +60,14 @@ Code block with inline style:
 
 ```svelte
 <script lang="ts">
-    import ScrollArea from "./ScrollArea.svelte";
+  import ScrollArea from "./ScrollArea.svelte";
 </script>
 
-<ScrollArea label="Source code" style="overflow:auto; max-height:300px;">
-    <pre><code>{source}</code></pre>
+<ScrollArea
+  label="Source code"
+  style="overflow:auto; max-height:300px;"
+>
+  <pre><code>{source}</code></pre>
 </ScrollArea>
 ```
 
@@ -72,11 +75,14 @@ Log viewer with consumer CSS class:
 
 ```svelte
 <script lang="ts">
-    import ScrollArea from "./ScrollArea.svelte";
+  import ScrollArea from "./ScrollArea.svelte";
 </script>
 
-<ScrollArea label="Build log" class="log-viewer">
-    {#each logLines as line}<div>{line}</div>{/each}
+<ScrollArea
+  label="Build log"
+  class="log-viewer"
+>
+  {#each logLines as line}<div>{line}</div>{/each}
 </ScrollArea>
 ```
 
@@ -84,11 +90,17 @@ Horizontally scrolling gallery:
 
 ```svelte
 <script lang="ts">
-    import ScrollArea from "./ScrollArea.svelte";
+  import ScrollArea from "./ScrollArea.svelte";
 </script>
 
-<ScrollArea label="Image gallery" style="overflow-x:auto; white-space:nowrap;">
-    {#each images as img}<img src={img.src} alt={img.alt} />{/each}
+<ScrollArea
+  label="Image gallery"
+  style="overflow-x:auto; white-space:nowrap;"
+>
+  {#each images as img}<img
+      src={img.src}
+      alt={img.alt}
+    />{/each}
 </ScrollArea>
 ```
 
@@ -100,6 +112,7 @@ Horizontally scrolling gallery:
 - No custom key handler - scrolling relies on the browser's built-in key mapping.
 
 References:
+
 - WAI-ARIA Region Role: https://www.w3.org/TR/wai-aria-1.2/#region
 - WCAG 2.1 Reflow: https://www.w3.org/WAI/WCAG21/Understanding/reflow.html
 

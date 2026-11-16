@@ -10,7 +10,7 @@ See [components/pagination-link/index.md](../../../components/pagination-link/in
 
 ```svelte
 <script lang="ts">
-    import PaginationLink from "./PaginationLink.svelte";
+  import PaginationLink from "./PaginationLink.svelte";
 </script>
 
 <PaginationLink />

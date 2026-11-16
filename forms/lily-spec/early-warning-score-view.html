@@ -1,0 +1,12 @@
+<!-- early-warning-score-view.html -->
+<!-- EarlyWarningScoreView component -->
+<!--
+  Description: a read-only display of an early warning score, with its band and escalation text
+  HTML tag: <span>
+  CSS class: early-warning-score-view (parts: -system, -score, -band, -escalation)
+  Spec: spec/healthcare-ui
+  Display only: it computes nothing. Attributes: data-band (the consumer's band key); the band is also text. Scoring
+    systems differ by country and population; scoring is the consumer's validated code.
+-->
+
+<span class="early-warning-score-view" data-band="high"><span class="early-warning-score-view-system">NEWS2</span> <span class="early-warning-score-view-score">7</span> <span class="early-warning-score-view-band">High</span> <span class="early-warning-score-view-escalation">Urgent response</span></span>

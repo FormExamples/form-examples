@@ -5,13 +5,12 @@
   HTML tag: <span>
   CSS class: nederland-burgerservice-nummer-view
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
   Format: 9-digit number issued via the Personal Records Database (BRP); validated with a variant of the eleven-test (Luhn) algorithm
   Usage:
-    <span class="nederland-burgerservice-nummer-view" aria-label="Citizen Service Number">value-here</span>
+    <span class="nederland-burgerservice-nummer-view">value-here</span>
 -->
 
-<span
-  class="nederland-burgerservice-nummer-view"
-  aria-label="Citizen Service Number"
-></span>
+<span class="nederland-burgerservice-nummer-view"
+  ><span class="screen-reader-span">Citizen Service Number </span></span
+>

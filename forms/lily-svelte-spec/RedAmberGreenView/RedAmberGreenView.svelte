@@ -8,7 +8,7 @@
     //
     // Props:
     //   className — string, optional. CSS class name.
-    //   label — string, required. Accessible label for screen readers via aria-label.
+    //   label — string, optional. Hidden text naming the value. Leave it out when a visible caption, such as a dt or a SummaryListItem term, already names it.
     //   value — string, default "". The RAG status value to display (e.g. "red", "amber", "green").
     //   ...restProps — additional HTML attributes spread onto the <span>.
     //
@@ -26,7 +26,7 @@
     //   - None — this is a passive informational display, not an interactive element.
     //
     // Accessibility:
-    //   - aria-label on the <span> for screen reader context
+    //   - A visible caption names the value, or label renders as hidden text; a plain span cannot take aria-label.
     //   - Screen readers announce the label and displayed status value
     //   - WCAG 2.2 AAA: properly labeled for assistive technology
     //
@@ -50,7 +50,7 @@
         ...restProps
     }: {
         /** Accessible label for screen readers */
-        label: string;
+        label?: string;
         /** The RAG status value to display (e.g. "red", "amber", "green") */
         value?: string;
         [key: string]: unknown;
@@ -60,6 +60,7 @@
 <!-- RedAmberGreenView.svelte -->
 <span
     class={`red-amber-green-view ${className}`}
-    aria-label={label}
-    {...restProps}>{value}</span
+    data-value={value || undefined}
+    {...restProps}
+    >{#if label}<span class="screen-reader-span">{`${label} `}</span>{/if}{value}</span
 >

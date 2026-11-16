@@ -1,16 +1,19 @@
-<script module lang="ts">
-  import { defineMeta } from '@storybook/addon-svelte-csf';
-  import DataTableTD from './DataTableTD.svelte';
+<script
+    module
+    lang="ts"
+>
+    import { defineMeta } from "@storybook/addon-svelte-csf";
+    import DataTableTD from "./DataTableTD.svelte";
 
-  const { Story } = defineMeta({
-    title: 'Headless/DataTableTD',
-    component: DataTableTD,
-  });
+    const { Story } = defineMeta({
+        title: "Headless/DataTableTD",
+        component: DataTableTD,
+    });
 </script>
 
 <Story
-  name="Default"
-  tags={['autodocs', '!dev']}
+    name="Default"
+    tags={["autodocs", "!dev"]}
 >
-  <span>Cell data</span>
+    <span>Cell data</span>
 </Story>

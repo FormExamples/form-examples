@@ -46,6 +46,8 @@
     // References:
     //   - MDN text-area-input element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/text-area-input
 
+    import { warnMissingName } from "../dev-warning";
+
     let {
         class: className = "",
         label,
@@ -67,6 +69,15 @@
         disabled?: boolean;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName(
+            "TextAreaInput",
+            label,
+            restProps["aria-label"],
+            restProps["aria-labelledby"],
+        ),
+    );
 </script>
 
 <!-- TextAreaInput.svelte -->
@@ -77,5 +88,4 @@
     {rows}
     {required}
     {disabled}
-    {...restProps}
-></textarea>
+    {...restProps}></textarea>

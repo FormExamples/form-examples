@@ -32,11 +32,17 @@ A headless Svelte 5 component that renders `<span class="status-light" role="sta
 
 ```svelte
 <script lang="ts">
-  import StatusLight from './StatusLight.svelte';
+  import StatusLight from "./StatusLight.svelte";
 </script>
 
-<StatusLight variant="positive" label="Active" />
-<StatusLight variant="negative" label="Offline" />
+<StatusLight
+  variant="positive"
+  label="Active"
+/>
+<StatusLight
+  variant="negative"
+  label="Offline"
+/>
 ```
 
 ## Accessibility

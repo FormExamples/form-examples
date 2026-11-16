@@ -52,19 +52,23 @@ import PasswordInput from './PasswordInput.svelte';
 
 ```svelte
 <script lang="ts">
-  import PasswordInput from './PasswordInput.svelte';
+  import PasswordInput from "./PasswordInput.svelte";
 
   let password = $state("");
 </script>
 
-<PasswordInput label="Password" bind:value={password} required />
+<PasswordInput
+  label="Password"
+  bind:value={password}
+  required
+/>
 ```
 
 ### New-password field on registration
 
 ```svelte
 <script lang="ts">
-  import PasswordInput from './PasswordInput.svelte';
+  import PasswordInput from "./PasswordInput.svelte";
 
   let newPassword = $state("");
 </script>
@@ -82,24 +86,34 @@ import PasswordInput from './PasswordInput.svelte';
 
 ```svelte
 <script lang="ts">
-  import PasswordInput from './PasswordInput.svelte';
+  import PasswordInput from "./PasswordInput.svelte";
 </script>
 
-<PasswordInput label="Password" value="••••••••" disabled />
+<PasswordInput
+  label="Password"
+  value="••••••••"
+  disabled
+/>
 ```
 
 ### Inside a form with submit
 
 ```svelte
 <script lang="ts">
-  import PasswordInput from './PasswordInput.svelte';
+  import PasswordInput from "./PasswordInput.svelte";
 
   let password = $state("");
-  function signIn(e: SubmitEvent) { e.preventDefault(); /* auth */ }
+  function signIn(e: SubmitEvent) {
+    e.preventDefault(); /* auth */
+  }
 </script>
 
 <form onsubmit={signIn}>
-  <PasswordInput label="Password" bind:value={password} required />
+  <PasswordInput
+    label="Password"
+    bind:value={password}
+    required
+  />
   <button type="submit">Sign in</button>
 </form>
 ```
@@ -107,7 +121,10 @@ import PasswordInput from './PasswordInput.svelte';
 ### Localized label
 
 ```svelte
-<PasswordInput label="Mot de passe" required />
+<PasswordInput
+  label="Mot de passe"
+  required
+/>
 ```
 
 ## Accessibility

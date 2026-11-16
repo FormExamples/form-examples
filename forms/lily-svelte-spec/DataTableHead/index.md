@@ -27,100 +27,112 @@ Place inside `DataTable`. Use `<th scope="col">` inside a `DataTableRow` for the
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `class` | `string` | `""` | CSS class name appended to the base class. |
-| `children` | `Snippet` | required | `DataTableRow` elements with header cells. |
-| `...restProps` | `unknown` | — | Additional attributes spread onto the `<thead>`. |
+| Prop           | Type      | Default  | Description                                      |
+| -------------- | --------- | -------- | ------------------------------------------------ |
+| `class`        | `string`  | `""`     | CSS class name appended to the base class.       |
+| `children`     | `Snippet` | required | `DataTableRow` elements with header cells.       |
+| `...restProps` | `unknown` | —        | Additional attributes spread onto the `<thead>`. |
 
 ## Usage
 
 ```svelte
 <script lang="ts">
-    import DataTable from "../DataTable/DataTable.svelte";
-    import DataTableHead from "./DataTableHead.svelte";
-    import DataTableBody from "../DataTableBody/DataTableBody.svelte";
-    import DataTableRow from "../DataTableRow/DataTableRow.svelte";
-    import DataTableTD from "../DataTableTD/DataTableTD.svelte";
+  import DataTable from "../DataTable/DataTable.svelte";
+  import DataTableHead from "./DataTableHead.svelte";
+  import DataTableBody from "../DataTableBody/DataTableBody.svelte";
+  import DataTableRow from "../DataTableRow/DataTableRow.svelte";
+  import DataTableTD from "../DataTableTD/DataTableTD.svelte";
 </script>
 
 <DataTable label="Employees">
-    <DataTableHead>
-        <DataTableRow>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-        </DataTableRow>
-    </DataTableHead>
-    <DataTableBody>
-        <DataTableRow>
-            <DataTableTD>Alice</DataTableTD>
-            <DataTableTD>alice@example.com</DataTableTD>
-        </DataTableRow>
-    </DataTableBody>
+  <DataTableHead>
+    <DataTableRow>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+    </DataTableRow>
+  </DataTableHead>
+  <DataTableBody>
+    <DataTableRow>
+      <DataTableTD>Alice</DataTableTD>
+      <DataTableTD>alice@example.com</DataTableTD>
+    </DataTableRow>
+  </DataTableBody>
 </DataTable>
 ```
 
 ```svelte
 <script lang="ts">
-    import DataTable from "../DataTable/DataTable.svelte";
-    import DataTableHead from "./DataTableHead.svelte";
-    import DataTableBody from "../DataTableBody/DataTableBody.svelte";
-    import DataTableRow from "../DataTableRow/DataTableRow.svelte";
-    import DataTableTD from "../DataTableTD/DataTableTD.svelte";
+  import DataTable from "../DataTable/DataTable.svelte";
+  import DataTableHead from "./DataTableHead.svelte";
+  import DataTableBody from "../DataTableBody/DataTableBody.svelte";
+  import DataTableRow from "../DataTableRow/DataTableRow.svelte";
+  import DataTableTD from "../DataTableTD/DataTableTD.svelte";
 
-    const cols = ["Name", "Email", "Role"];
+  const cols = ["Name", "Email", "Role"];
 </script>
 
 <DataTable label="Users">
-    <DataTableHead>
-        <DataTableRow>
-            {#each cols as c}
-                <th scope="col">{c}</th>
-            {/each}
-        </DataTableRow>
-    </DataTableHead>
-    <DataTableBody>
-        <DataTableRow>
-            <DataTableTD>Alice</DataTableTD>
-            <DataTableTD>alice@example.com</DataTableTD>
-            <DataTableTD>Admin</DataTableTD>
-        </DataTableRow>
-    </DataTableBody>
+  <DataTableHead>
+    <DataTableRow>
+      {#each cols as c}
+        <th scope="col">{c}</th>
+      {/each}
+    </DataTableRow>
+  </DataTableHead>
+  <DataTableBody>
+    <DataTableRow>
+      <DataTableTD>Alice</DataTableTD>
+      <DataTableTD>alice@example.com</DataTableTD>
+      <DataTableTD>Admin</DataTableTD>
+    </DataTableRow>
+  </DataTableBody>
 </DataTable>
 ```
 
 ```svelte
 <script lang="ts">
-    import DataTable from "../DataTable/DataTable.svelte";
-    import DataTableHead from "./DataTableHead.svelte";
-    import DataTableBody from "../DataTableBody/DataTableBody.svelte";
-    import DataTableRow from "../DataTableRow/DataTableRow.svelte";
-    import DataTableTD from "../DataTableTD/DataTableTD.svelte";
+  import DataTable from "../DataTable/DataTable.svelte";
+  import DataTableHead from "./DataTableHead.svelte";
+  import DataTableBody from "../DataTableBody/DataTableBody.svelte";
+  import DataTableRow from "../DataTableRow/DataTableRow.svelte";
+  import DataTableTD from "../DataTableTD/DataTableTD.svelte";
 
-    let sortKey = $state("name");
+  let sortKey = $state("name");
 
-    function sortBy(k: string) {
-        sortKey = k;
-    }
+  function sortBy(k: string) {
+    sortKey = k;
+  }
 </script>
 
 <DataTable label="Sortable users">
-    <DataTableHead>
-        <DataTableRow>
-            <th scope="col" aria-sort={sortKey === "name" ? "ascending" : "none"}>
-                <button type="button" onclick={() => sortBy("name")}>Name</button>
-            </th>
-            <th scope="col" aria-sort={sortKey === "email" ? "ascending" : "none"}>
-                <button type="button" onclick={() => sortBy("email")}>Email</button>
-            </th>
-        </DataTableRow>
-    </DataTableHead>
-    <DataTableBody>
-        <DataTableRow>
-            <DataTableTD>Alice</DataTableTD>
-            <DataTableTD>alice@example.com</DataTableTD>
-        </DataTableRow>
-    </DataTableBody>
+  <DataTableHead>
+    <DataTableRow>
+      <th
+        scope="col"
+        aria-sort={sortKey === "name" ? "ascending" : "none"}
+      >
+        <button
+          type="button"
+          onclick={() => sortBy("name")}>Name</button
+        >
+      </th>
+      <th
+        scope="col"
+        aria-sort={sortKey === "email" ? "ascending" : "none"}
+      >
+        <button
+          type="button"
+          onclick={() => sortBy("email")}>Email</button
+        >
+      </th>
+    </DataTableRow>
+  </DataTableHead>
+  <DataTableBody>
+    <DataTableRow>
+      <DataTableTD>Alice</DataTableTD>
+      <DataTableTD>alice@example.com</DataTableTD>
+    </DataTableRow>
+  </DataTableBody>
 </DataTable>
 ```
 

@@ -10,7 +10,7 @@ See [components/tree-list-item/index.md](../../../components/tree-list-item/inde
 
 ```svelte
 <script lang="ts">
-    import TreeListItem from "./TreeListItem.svelte";
+  import TreeListItem from "./TreeListItem.svelte";
 </script>
 
 <TreeListItem />

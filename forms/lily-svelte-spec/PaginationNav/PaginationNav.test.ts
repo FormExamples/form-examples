@@ -31,7 +31,9 @@ describe("PaginationNav", () => {
     });
 
     test("passes through attributes", () => {
-        render(Subject, { props: { label: "Pagination", "data-testid": "pn", children: textSnippet("x") } });
+        render(Subject, {
+            props: { label: "Pagination", "data-testid": "pn", children: textSnippet("x") },
+        });
         expect(screen.getByTestId("pn")).toBeTruthy();
     });
 });

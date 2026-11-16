@@ -40,16 +40,20 @@ A headless Svelte 5 component inspired by [Ant Design Popconfirm](https://ant.de
 
 ```svelte
 <script lang="ts">
-  import PopconfirmDialog from './PopconfirmDialog.svelte';
+  import PopconfirmDialog from "./PopconfirmDialog.svelte";
 
   let open = $state(false);
 
-  function confirm() { /* … */ open = false; }
-  function cancel() { open = false; }
+  function confirm() {
+    /* … */ open = false;
+  }
+  function cancel() {
+    open = false;
+  }
 </script>
 
 <PopconfirmDialog
-  open={open}
+  {open}
   title="Delete this item?"
   description="This action cannot be undone."
   confirmLabel="Delete"

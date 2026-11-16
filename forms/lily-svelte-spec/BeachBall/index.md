@@ -43,7 +43,7 @@ Import `BeachBall` from `./BeachBall.svelte`. Always pass `label`. Toggle `activ
 
 ```svelte
 <script lang="ts">
-  import BeachBall from './BeachBall.svelte';
+  import BeachBall from "./BeachBall.svelte";
 </script>
 
 <BeachBall label="Fetching data" />
@@ -53,7 +53,7 @@ Import `BeachBall` from `./BeachBall.svelte`. Always pass `label`. Toggle `activ
 
 ```svelte
 <script lang="ts">
-  import BeachBall from './BeachBall.svelte';
+  import BeachBall from "./BeachBall.svelte";
 
   let loading = $state(true);
 
@@ -62,34 +62,47 @@ Import `BeachBall` from `./BeachBall.svelte`. Always pass `label`. Toggle `activ
   });
 </script>
 
-<BeachBall label="Processing request" active={loading} />
+<BeachBall
+  label="Processing request"
+  active={loading}
+/>
 ```
 
 ### Inline with content
 
 ```svelte
 <script lang="ts">
-  import BeachBall from './BeachBall.svelte';
+  import BeachBall from "./BeachBall.svelte";
 
   let saving = $state(false);
 </script>
 
-<p>Status: {saving ? 'Saving...' : 'Saved'} <BeachBall label="Saving" active={saving} /></p>
+<p>
+  Status: {saving ? "Saving..." : "Saved"}
+  <BeachBall
+    label="Saving"
+    active={saving}
+  />
+</p>
 ```
 
 ### With custom class and data hooks
 
 ```svelte
-<BeachBall label="Loading results" class="large" data-testid="results-spinner" />
+<BeachBall
+  label="Loading results"
+  class="large"
+  data-testid="results-spinner"
+/>
 ```
 
 ### Localized label
 
 ```svelte
 <script lang="ts">
-  import BeachBall from './BeachBall.svelte';
+  import BeachBall from "./BeachBall.svelte";
 
-  const label = 'Cargando contenido';
+  const label = "Cargando contenido";
 </script>
 
 <BeachBall {label} />

@@ -1,16 +1,19 @@
-<script module lang="ts">
-  import { defineMeta } from '@storybook/addon-svelte-csf';
-  import InsetText from './InsetText.svelte';
+<script
+    module
+    lang="ts"
+>
+    import { defineMeta } from "@storybook/addon-svelte-csf";
+    import InsetText from "./InsetText.svelte";
 
-  const { Story } = defineMeta({
-    title: 'Headless/InsetText',
-    component: InsetText,
-  });
+    const { Story } = defineMeta({
+        title: "Headless/InsetText",
+        component: InsetText,
+    });
 </script>
 
 <Story
-  name="Default"
-  tags={['autodocs', '!dev']}
+    name="Default"
+    tags={["autodocs", "!dev"]}
 >
-  <p>Inset text content</p>
+    <p>Inset text content</p>
 </Story>

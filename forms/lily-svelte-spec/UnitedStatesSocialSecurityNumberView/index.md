@@ -31,69 +31,69 @@ Import the component and pass the formatted `value` and an accessible `label`. P
 
 ## Props
 
-| Prop        | Type     | Default | Description                                                      |
-| ----------- | -------- | ------- | ---------------------------------------------------------------- |
-| `class`     | `string` | `""`    | Additional CSS class appended to the base class name.            |
-| `label`     | `string` | —       | Required. Accessible name set on `aria-label`.                   |
-| `value`     | `string` | `""`    | The SSN string to display (e.g., `"123-45-6789"`).               |
-| `...rest`   | —        | —       | Any additional HTML attributes, spread onto the `<span>`.        |
+| Prop      | Type     | Default | Description                                               |
+| --------- | -------- | ------- | --------------------------------------------------------- |
+| `class`   | `string` | `""`    | Additional CSS class appended to the base class name.     |
+| `label`   | `string` | —       | Required. Accessible name set on `aria-label`.            |
+| `value`   | `string` | `""`    | The SSN string to display (e.g., `"123-45-6789"`).        |
+| `...rest` | —        | —       | Any additional HTML attributes, spread onto the `<span>`. |
 
 ## Usage
 
 ```svelte
 <script lang="ts">
-    import UnitedStatesSocialSecurityNumberView from "./UnitedStatesSocialSecurityNumberView.svelte";
+  import UnitedStatesSocialSecurityNumberView from "./UnitedStatesSocialSecurityNumberView.svelte";
 
-    let ssn = $state("123-45-6789");
+  let ssn = $state("123-45-6789");
 </script>
 
 <UnitedStatesSocialSecurityNumberView
-    label="Social Security Number"
-    value={ssn}
+  label="Social Security Number"
+  value={ssn}
 />
 ```
 
 ```svelte
 <script lang="ts">
-    import UnitedStatesSocialSecurityNumberView from "./UnitedStatesSocialSecurityNumberView.svelte";
+  import UnitedStatesSocialSecurityNumberView from "./UnitedStatesSocialSecurityNumberView.svelte";
 
-    // Masked except last 4 digits for display.
-    let stored = "123-45-6789";
-    let masked = $derived(`***-**-${stored.slice(-4)}`);
+  // Masked except last 4 digits for display.
+  let stored = "123-45-6789";
+  let masked = $derived(`***-**-${stored.slice(-4)}`);
 </script>
 
 <UnitedStatesSocialSecurityNumberView
-    label="SSN (last 4 digits)"
-    value={masked}
+  label="SSN (last 4 digits)"
+  value={masked}
 />
 ```
 
 ```svelte
 <script lang="ts">
-    import UnitedStatesSocialSecurityNumberView from "./UnitedStatesSocialSecurityNumberView.svelte";
+  import UnitedStatesSocialSecurityNumberView from "./UnitedStatesSocialSecurityNumberView.svelte";
 </script>
 
 <dl>
-    <dt>SSN</dt>
-    <dd>
-        <UnitedStatesSocialSecurityNumberView
-            label="Social Security Number"
-            value="123-45-6789"
-        />
-    </dd>
+  <dt>SSN</dt>
+  <dd>
+    <UnitedStatesSocialSecurityNumberView
+      label="Social Security Number"
+      value="123-45-6789"
+    />
+  </dd>
 </dl>
 ```
 
 ```svelte
 <script lang="ts">
-    import UnitedStatesSocialSecurityNumberView from "./UnitedStatesSocialSecurityNumberView.svelte";
+  import UnitedStatesSocialSecurityNumberView from "./UnitedStatesSocialSecurityNumberView.svelte";
 </script>
 
 <UnitedStatesSocialSecurityNumberView
-    class="ssn"
-    label="SSN"
-    value="123-45-6789"
-    data-testid="ssn-view"
+  class="ssn"
+  label="SSN"
+  value="123-45-6789"
+  data-testid="ssn-view"
 />
 ```
 

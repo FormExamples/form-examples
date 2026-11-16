@@ -39,10 +39,13 @@ A headless Svelte 5 component that renders a single `<div>` element. Category: l
 
 ```svelte
 <script lang="ts">
-  import Masonry from './Masonry.svelte';
+  import Masonry from "./Masonry.svelte";
 </script>
 
-<Masonry columns={3} gap="1rem">
+<Masonry
+  columns={3}
+  gap="1rem"
+>
   <article>Short</article>
   <article>Tall content here, much longer than the others.</article>
   <article>Medium length</article>

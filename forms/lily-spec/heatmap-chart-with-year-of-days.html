@@ -1,0 +1,46 @@
+<!-- heatmap-chart-with-year-of-days.html -->
+<!-- HeatmapChartWithYearOfDays component -->
+<!--
+  Description: a headless wrapper for a grid chart where cell colour encodes the value at each row and column.
+    Wraps a consumer-supplied inline <svg>; no drawing happens here.
+  HTML tag: <figure> containing <div class="heatmap-chart-with-year-of-days-graphic" role="img">
+  CSS class: heatmap-chart-with-year-of-days (sub-elements: heatmap-chart-with-year-of-days-graphic, heatmap-chart-with-year-of-days-data-table)
+  Keyboard: None on the graphic; the data table follows native table behaviour
+  Accessibility: the graphic wrapper carries role="img" and the required
+    consumer-supplied aria-label; aria-describedby (optional) references a text
+    description. The optional data table is a sibling of the graphic, outside
+    role="img", so assistive technology can reach it.
+  Usage (see the markup below for the commented version):
+    <figure class="heatmap-chart-with-year-of-days" data-year="2026" data-week-start="0">
+        <div class="heatmap-chart-with-year-of-days-graphic" role="img" aria-label="Example" aria-describedby="heatmap-chart-with-year-of-days-desc">
+            <svg data-testid="art" viewBox="0 0 10 10"><circle r="4" cx="5" cy="5"></circle></svg>
+      </div>
+        <div class="heatmap-chart-with-year-of-days-data-table">
+        <table>
+          <caption>Values</caption>
+          <tbody><tr><th scope="row">A</th><td>1</td></tr></tbody>
+        </table>
+      </div>
+    </figure>
+    <p id="heatmap-chart-with-year-of-days-desc">Example description</p>
+-->
+
+<figure class="heatmap-chart-with-year-of-days" data-year="2026" data-week-start="0">
+  <!-- role="img" lives on the graphic wrapper, never on the figure: it makes
+       its descendants presentational, so a data table inside it would be
+       invisible to assistive technology. -->
+  <div class="heatmap-chart-with-year-of-days-graphic" role="img" aria-label="Example" aria-describedby="heatmap-chart-with-year-of-days-desc">
+    <!-- data-year and data-week-start (0 = Sunday … 6 = Saturday) are required; the weekday rows start at data-week-start and the week columns start with the week holding 1 January. -->
+  <!-- Consumer provides the inline svg; no drawing happens in this component. -->
+    <svg data-testid="art" viewBox="0 0 10 10"><circle r="4" cx="5" cy="5"></circle></svg>
+  </div>
+  <!-- Optional accessible table alternative: a SIBLING of the graphic, outside role="img". -->
+  <div class="heatmap-chart-with-year-of-days-data-table">
+    <table>
+      <caption>Values</caption>
+      <tbody><tr><th scope="row">A</th><td>1</td></tr></tbody>
+    </table>
+  </div>
+</figure>
+<!-- Optional short text description referenced by aria-describedby on the graphic -->
+<p id="heatmap-chart-with-year-of-days-desc">Example description</p>

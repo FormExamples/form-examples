@@ -32,79 +32,116 @@ Wrap checkbox inputs inside `<CheckboxGroup label="...">`. The component is inte
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `class` | `string` | `""` | CSS class name appended to the base class. |
-| `label` | `string` | required | Accessible name for the group. |
-| `disabled` | `boolean` | `false` | Disables the group via `<fieldset disabled>`. |
-| `children` | `Snippet` | required | Checkbox elements. |
-| `...restProps` | `unknown` | — | Additional attributes spread onto the `<fieldset>`. |
+| Prop           | Type      | Default  | Description                                         |
+| -------------- | --------- | -------- | --------------------------------------------------- |
+| `class`        | `string`  | `""`     | CSS class name appended to the base class.          |
+| `label`        | `string`  | required | Accessible name for the group.                      |
+| `disabled`     | `boolean` | `false`  | Disables the group via `<fieldset disabled>`.       |
+| `children`     | `Snippet` | required | Checkbox elements.                                  |
+| `...restProps` | `unknown` | —        | Additional attributes spread onto the `<fieldset>`. |
 
 ## Usage
 
 ```svelte
 <script lang="ts">
-    import CheckboxGroup from "./CheckboxGroup.svelte";
+  import CheckboxGroup from "./CheckboxGroup.svelte";
 </script>
 
 <CheckboxGroup label="Features">
-    <label><input type="checkbox" name="features" value="wifi" /> Wi-Fi</label>
-    <label><input type="checkbox" name="features" value="bluetooth" /> Bluetooth</label>
-    <label><input type="checkbox" name="features" value="gps" /> GPS</label>
+  <label
+    ><input
+      type="checkbox"
+      name="features"
+      value="wifi"
+    /> Wi-Fi</label
+  >
+  <label
+    ><input
+      type="checkbox"
+      name="features"
+      value="bluetooth"
+    /> Bluetooth</label
+  >
+  <label
+    ><input
+      type="checkbox"
+      name="features"
+      value="gps"
+    /> GPS</label
+  >
 </CheckboxGroup>
 ```
 
 ```svelte
 <script lang="ts">
-    import CheckboxGroup from "./CheckboxGroup.svelte";
+  import CheckboxGroup from "./CheckboxGroup.svelte";
 </script>
 
-<CheckboxGroup label="Toppings" disabled>
-    <label><input type="checkbox" value="cheese" /> Cheese</label>
-    <label><input type="checkbox" value="olives" /> Olives</label>
+<CheckboxGroup
+  label="Toppings"
+  disabled
+>
+  <label
+    ><input
+      type="checkbox"
+      value="cheese"
+    /> Cheese</label
+  >
+  <label
+    ><input
+      type="checkbox"
+      value="olives"
+    /> Olives</label
+  >
 </CheckboxGroup>
 ```
 
 ```svelte
 <script lang="ts">
-    import CheckboxGroup from "./CheckboxGroup.svelte";
+  import CheckboxGroup from "./CheckboxGroup.svelte";
 
-    let selected = $state<string[]>([]);
-    const options = ["Email", "SMS", "Push"];
+  let selected = $state<string[]>([]);
+  const options = ["Email", "SMS", "Push"];
 
-    function toggle(option: string) {
-        selected = selected.includes(option)
-            ? selected.filter((o) => o !== option)
-            : [...selected, option];
-    }
+  function toggle(option: string) {
+    selected = selected.includes(option)
+      ? selected.filter((o) => o !== option)
+      : [...selected, option];
+  }
 </script>
 
 <CheckboxGroup label="Notifications">
-    {#each options as option}
-        <label>
-            <input
-                type="checkbox"
-                checked={selected.includes(option)}
-                onchange={() => toggle(option)}
-            />
-            {option}
-        </label>
-    {/each}
+  {#each options as option}
+    <label>
+      <input
+        type="checkbox"
+        checked={selected.includes(option)}
+        onchange={() => toggle(option)}
+      />
+      {option}
+    </label>
+  {/each}
 </CheckboxGroup>
 ```
 
 ```svelte
 <script lang="ts">
-    import CheckboxGroup from "./CheckboxGroup.svelte";
-    import CheckboxInput from "../CheckboxInput/CheckboxInput.svelte";
+  import CheckboxGroup from "./CheckboxGroup.svelte";
+  import CheckboxInput from "../CheckboxInput/CheckboxInput.svelte";
 
-    let wifi = $state(false);
-    let bluetooth = $state(false);
+  let wifi = $state(false);
+  let bluetooth = $state(false);
 </script>
 
 <CheckboxGroup label="Connectivity">
-    <CheckboxInput label="Wi-Fi" bind:checked={wifi} />
-    <CheckboxInput label="Bluetooth" bind:checked={bluetooth} />
+  <CheckboxInput
+    label="Wi-Fi"
+    bind:checked={wifi}
+  />
+  <CheckboxInput
+    label="Bluetooth"
+    bind:checked={bluetooth}
+  />
 </CheckboxGroup>
 ```
 

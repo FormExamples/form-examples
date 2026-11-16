@@ -46,7 +46,7 @@ Import `Badge` from `./Badge.svelte`. Provide children for the visible content. 
 
 ```svelte
 <script lang="ts">
-  import Badge from './Badge.svelte';
+  import Badge from "./Badge.svelte";
 </script>
 
 <Badge>New</Badge>
@@ -56,7 +56,7 @@ Import `Badge` from `./Badge.svelte`. Provide children for the visible content. 
 
 ```svelte
 <script lang="ts">
-  import Badge from './Badge.svelte';
+  import Badge from "./Badge.svelte";
 
   let unread = $state(3);
 </script>
@@ -68,7 +68,7 @@ Import `Badge` from `./Badge.svelte`. Provide children for the visible content. 
 
 ```svelte
 <script lang="ts">
-  import Badge from './Badge.svelte';
+  import Badge from "./Badge.svelte";
 </script>
 
 <Badge type="info">Info</Badge>
@@ -81,8 +81,8 @@ Import `Badge` from `./Badge.svelte`. Provide children for the visible content. 
 
 ```svelte
 <script lang="ts">
-  import Badge from './Badge.svelte';
-  import Button from '../Button/Button.svelte';
+  import Badge from "./Badge.svelte";
+  import Button from "../Button/Button.svelte";
 
   let unread = $state(12);
 </script>
@@ -96,10 +96,10 @@ Import `Badge` from `./Badge.svelte`. Provide children for the visible content. 
 
 ```svelte
 <script lang="ts">
-  import Badge from './Badge.svelte';
+  import Badge from "./Badge.svelte";
 
-  let status = $state<'success' | 'warning' | 'error'>('success');
-  let text = $derived({ success: 'Online', warning: 'Degraded', error: 'Offline' }[status]);
+  let status = $state<"success" | "warning" | "error">("success");
+  let text = $derived({ success: "Online", warning: "Degraded", error: "Offline" }[status]);
 </script>
 
 <Badge type={status}>{text}</Badge>

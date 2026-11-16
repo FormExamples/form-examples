@@ -39,7 +39,7 @@ A headless Svelte 5 component inspired by the U.S. Web Design System (USWDS) Ide
 
 ```svelte
 <script lang="ts">
-  import GovernmentIdentifier from './GovernmentIdentifier.svelte';
+  import GovernmentIdentifier from "./GovernmentIdentifier.svelte";
 </script>
 
 <GovernmentIdentifier

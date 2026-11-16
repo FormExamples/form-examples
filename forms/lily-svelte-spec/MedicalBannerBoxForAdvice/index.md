@@ -43,18 +43,18 @@ Place inside a `MedicalBanner` or `MedicalBannerBox`, pass a descriptive `label`
 
 ```svelte
 <script lang="ts">
-    import MedicalBanner from "../MedicalBanner/MedicalBanner.svelte";
-    import MedicalBannerBox from "../MedicalBannerBox/MedicalBannerBox.svelte";
-    import MedicalBannerBoxForAdvice from "./MedicalBannerBoxForAdvice.svelte";
+  import MedicalBanner from "../MedicalBanner/MedicalBanner.svelte";
+  import MedicalBannerBox from "../MedicalBannerBox/MedicalBannerBox.svelte";
+  import MedicalBannerBoxForAdvice from "./MedicalBannerBoxForAdvice.svelte";
 </script>
 
 <MedicalBanner label="Summary">
-    <MedicalBannerBox>
-        <MedicalBannerBoxForAdvice label="Care contacts">
-            <p>GP: Dr. Rivera</p>
-            <p>Consultant: Dr. Okafor</p>
-        </MedicalBannerBoxForAdvice>
-    </MedicalBannerBox>
+  <MedicalBannerBox>
+    <MedicalBannerBoxForAdvice label="Care contacts">
+      <p>GP: Dr. Rivera</p>
+      <p>Consultant: Dr. Okafor</p>
+    </MedicalBannerBoxForAdvice>
+  </MedicalBannerBox>
 </MedicalBanner>
 ```
 
@@ -62,11 +62,11 @@ Place inside a `MedicalBanner` or `MedicalBannerBox`, pass a descriptive `label`
 
 ```svelte
 <script lang="ts">
-    import MedicalBannerBoxForAdvice from "./MedicalBannerBoxForAdvice.svelte";
+  import MedicalBannerBoxForAdvice from "./MedicalBannerBoxForAdvice.svelte";
 </script>
 
 <MedicalBannerBoxForAdvice label="Care plan review">
-    <p>Next review due 2026-06-01.</p>
+  <p>Next review due 2026-06-01.</p>
 </MedicalBannerBoxForAdvice>
 ```
 
@@ -74,21 +74,21 @@ Place inside a `MedicalBanner` or `MedicalBannerBox`, pass a descriptive `label`
 
 ```svelte
 <script lang="ts">
-    import MedicalBanner from "../MedicalBanner/MedicalBanner.svelte";
-    import MedicalBannerBox from "../MedicalBannerBox/MedicalBannerBox.svelte";
-    import MedicalBannerBoxForAdvice from "./MedicalBannerBoxForAdvice.svelte";
-    import MedicalBannerBoxForDanger from "../MedicalBannerBoxForDanger/MedicalBannerBoxForDanger.svelte";
+  import MedicalBanner from "../MedicalBanner/MedicalBanner.svelte";
+  import MedicalBannerBox from "../MedicalBannerBox/MedicalBannerBox.svelte";
+  import MedicalBannerBoxForAdvice from "./MedicalBannerBoxForAdvice.svelte";
+  import MedicalBannerBoxForDanger from "../MedicalBannerBoxForDanger/MedicalBannerBoxForDanger.svelte";
 </script>
 
 <MedicalBanner label="Record summary">
-    <MedicalBannerBox>
-        <MedicalBannerBoxForDanger label="Allergies">
-            <p>Peanuts</p>
-        </MedicalBannerBoxForDanger>
-        <MedicalBannerBoxForAdvice label="Diet">
-            <p>Low sodium</p>
-        </MedicalBannerBoxForAdvice>
-    </MedicalBannerBox>
+  <MedicalBannerBox>
+    <MedicalBannerBoxForDanger label="Allergies">
+      <p>Peanuts</p>
+    </MedicalBannerBoxForDanger>
+    <MedicalBannerBoxForAdvice label="Diet">
+      <p>Low sodium</p>
+    </MedicalBannerBoxForAdvice>
+  </MedicalBannerBox>
 </MedicalBanner>
 ```
 
@@ -96,18 +96,21 @@ Place inside a `MedicalBanner` or `MedicalBannerBox`, pass a descriptive `label`
 
 ```svelte
 <script lang="ts">
-    import MedicalBannerBoxForAdvice from "./MedicalBannerBoxForAdvice.svelte";
+  import MedicalBannerBoxForAdvice from "./MedicalBannerBoxForAdvice.svelte";
 </script>
 
-<MedicalBannerBoxForAdvice class="advice-soft" label="Notes">
-    <p>Patient prefers morning appointments.</p>
+<MedicalBannerBoxForAdvice
+  class="advice-soft"
+  label="Notes"
+>
+  <p>Patient prefers morning appointments.</p>
 </MedicalBannerBoxForAdvice>
 
 <style>
-    :global(.advice-soft[data-type="advice"]) {
-        background: #eff6ff;
-        padding: 0.5rem;
-    }
+  :global(.advice-soft[data-type="advice"]) {
+    background: #eff6ff;
+    padding: 0.5rem;
+  }
 </style>
 ```
 
@@ -115,16 +118,16 @@ Place inside a `MedicalBanner` or `MedicalBannerBox`, pass a descriptive `label`
 
 ```svelte
 <script lang="ts">
-    import MedicalBannerBoxForAdvice from "./MedicalBannerBoxForAdvice.svelte";
-    let contacts = $state(["Dr. Rivera", "Nurse Lee"]);
+  import MedicalBannerBoxForAdvice from "./MedicalBannerBoxForAdvice.svelte";
+  let contacts = $state(["Dr. Rivera", "Nurse Lee"]);
 </script>
 
 <MedicalBannerBoxForAdvice label="Care team">
-    <ul>
-        {#each contacts as contact}
-            <li>{contact}</li>
-        {/each}
-    </ul>
+  <ul>
+    {#each contacts as contact}
+      <li>{contact}</li>
+    {/each}
+  </ul>
 </MedicalBannerBoxForAdvice>
 ```
 

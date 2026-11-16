@@ -13,6 +13,8 @@
     //   multiple — boolean, default false. Whether to allow selecting multiple files.
     //   disabled — boolean, default false. Whether the button is disabled.
     //   onchange — (files: FileList | null) => void, default undefined. Callback when files are selected.
+    //   selectedLabel — (count: number) => string, optional. The status for a count of files, in the consumer's words;
+    //     plural forms are the consumer's. Without it the status stays empty: no English default.
     //   ...restProps — additional HTML attributes spread onto the outer <div>.
     //
     // Syntax:
@@ -54,6 +56,7 @@
         multiple = false,
         disabled = false,
         onchange = undefined,
+        selectedLabel = undefined,
         ...restProps
     }: {
         /** Accessible label for the button. */
@@ -66,6 +69,8 @@
         disabled?: boolean;
         /** Callback with selected files. */
         onchange?: (files: FileList | null) => void;
+        /** The status for a count of files; plural forms are the consumer's. */
+        selectedLabel?: (count: number) => string;
         [key: string]: unknown;
     } = $props();
 
@@ -108,8 +113,8 @@
         aria-live="polite"
         data-file-count={fileCount}
     >
-        {#if fileCount > 0}
-            {fileCount} {fileCount === 1 ? "file" : "files"} selected
+        {#if fileCount > 0 && selectedLabel}
+            {selectedLabel(fileCount)}
         {/if}
     </span>
 </div>

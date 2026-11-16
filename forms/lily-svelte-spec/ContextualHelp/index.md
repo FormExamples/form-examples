@@ -9,7 +9,7 @@ A headless Svelte 5 component that renders a wrapper `<div class="contextual-hel
 ## What it does
 
 - Trigger button has `aria-haspopup="dialog"`, `aria-expanded`, and `aria-controls`.
-- Panel has `role="dialog"` and a stable id; it is `hidden` when `expanded` is false.
+- Panel has `role="dialog"`, `popover="auto"` and a stable id (`$props.id()`); the trigger opens it with `command="toggle-popover"` `commandfor` (and `popovertarget`), the browser closes it on Escape or a click outside, and the `toggle` event keeps the bindable `expanded` in step (`hidden` fallback where `showPopover` is missing).
 - Generates a stable id with `crypto.randomUUID()` (Math.random fallback).
 
 ## When to use it
@@ -27,6 +27,7 @@ A headless Svelte 5 component that renders a wrapper `<div class="contextual-hel
 
 - `class` — string, default `""`.
 - `label` — string, **required**. `aria-label` for the trigger.
+- `triggerLabel` — string, **required**, no default. The trigger's visible text, such as `?` or `؟`.
 - `expanded` — boolean, default `false`.
 - `onclick` — `(event: MouseEvent) => void`, optional. Trigger click handler.
 - `children` — `Snippet`, optional. Popover content.
@@ -35,12 +36,16 @@ A headless Svelte 5 component that renders a wrapper `<div class="contextual-hel
 
 ```svelte
 <script lang="ts">
-  import ContextualHelp from './ContextualHelp.svelte';
+  import ContextualHelp from "./ContextualHelp.svelte";
 
   let open = $state(false);
 </script>
 
-<ContextualHelp label="Help with this field" expanded={open} onclick={() => (open = !open)}>
+<ContextualHelp
+  label="Help with this field"
+  expanded={open}
+  onclick={() => (open = !open)}
+>
   <p>Why we ask: this helps verify your account.</p>
 </ContextualHelp>
 ```
@@ -48,7 +53,7 @@ A headless Svelte 5 component that renders a wrapper `<div class="contextual-hel
 ## Accessibility
 
 - Trigger has `aria-haspopup="dialog"`, `aria-expanded`, `aria-controls`.
-- Panel has `role="dialog"` and a stable id; the native `hidden` attribute removes it from the accessibility tree when collapsed.
+- Panel has `role="dialog"` and a stable id; closed, the popover is not displayed, which removes it from the accessibility tree.
 - Consumer is responsible for focus management when the dialog opens.
 
 ## Related components

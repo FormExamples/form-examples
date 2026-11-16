@@ -1,17 +1,20 @@
-<script module lang="ts">
-  import { defineMeta } from '@storybook/addon-svelte-csf';
-  import ErrorSummary from './ErrorSummary.svelte';
+<script
+    module
+    lang="ts"
+>
+    import { defineMeta } from "@storybook/addon-svelte-csf";
+    import ErrorSummary from "./ErrorSummary.svelte";
 
-  const { Story } = defineMeta({
-    title: 'Headless/ErrorSummary',
-    component: ErrorSummary,
-  });
+    const { Story } = defineMeta({
+        title: "Headless/ErrorSummary",
+        component: ErrorSummary,
+    });
 </script>
 
 <Story
-  name="Default"
-  tags={['autodocs', '!dev']}
-  args={{'title':'Error Summary'}}
+    name="Default"
+    tags={["autodocs", "!dev"]}
+    args={{ title: "Error Summary" }}
 >
-  <span>Error message</span>
+    <span>Error message</span>
 </Story>

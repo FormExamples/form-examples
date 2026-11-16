@@ -10,7 +10,7 @@ See [components/table-body/index.md](../../../components/table-body/index.md) fo
 
 ```svelte
 <script lang="ts">
-    import TableBody from "./TableBody.svelte";
+  import TableBody from "./TableBody.svelte";
 </script>
 
 <TableBody />

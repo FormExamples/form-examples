@@ -18,18 +18,29 @@ describe("Details", () => {
     });
 
     test("is collapsed by default", () => {
-        render(Subject, { props: { summary: "Info", "data-testid": "det", children: textSnippet("Content") } });
+        render(Subject, {
+            props: { summary: "Info", "data-testid": "det", children: textSnippet("Content") },
+        });
         expect((screen.getByTestId("det") as HTMLDetailsElement).open).toBe(false);
     });
 
     test("can be initially open", () => {
-        render(Subject, { props: { summary: "Info", open: true, "data-testid": "det", children: textSnippet("Content") } });
+        render(Subject, {
+            props: {
+                summary: "Info",
+                open: true,
+                "data-testid": "det",
+                children: textSnippet("Content"),
+            },
+        });
         expect((screen.getByTestId("det") as HTMLDetailsElement).open).toBe(true);
     });
 
     test("toggles on summary click", async () => {
         const user: UserEvent = userEvent.setup();
-        render(Subject, { props: { summary: "Toggle", "data-testid": "det", children: textSnippet("Content") } });
+        render(Subject, {
+            props: { summary: "Toggle", "data-testid": "det", children: textSnippet("Content") },
+        });
         const details = screen.getByTestId("det") as HTMLDetailsElement;
 
         await user.click(screen.getByText("Toggle"));
@@ -40,12 +51,16 @@ describe("Details", () => {
     });
 
     test("renders children content", () => {
-        render(Subject, { props: { summary: "S", "data-testid": "det", children: textSnippet("Inner text") } });
+        render(Subject, {
+            props: { summary: "S", "data-testid": "det", children: textSnippet("Inner text") },
+        });
         expect(screen.getByTestId("det").textContent).toContain("Inner text");
     });
 
     test("passes through attributes", () => {
-        render(Subject, { props: { summary: "S", "data-testid": "det", children: textSnippet("C") } });
+        render(Subject, {
+            props: { summary: "S", "data-testid": "det", children: textSnippet("C") },
+        });
         expect(screen.getByTestId("det")).toBeTruthy();
     });
 });

@@ -5,13 +5,12 @@
   HTML tag: <span>
   CSS class: ellada-dematerialised-securities-system-view
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
   Format: 10 digits linked to the investor's personal details (name, ID number, passport number, tax registration number) and managed by the Central Securities Depository of Greece
   Usage:
-    <span class="ellada-dematerialised-securities-system-view" aria-label="Dematerialised Securities System">value-here</span>
+    <span class="ellada-dematerialised-securities-system-view">value-here</span>
 -->
 
-<span
-  class="ellada-dematerialised-securities-system-view"
-  aria-label="Dematerialised Securities System"
-></span>
+<span class="ellada-dematerialised-securities-system-view"
+  ><span class="screen-reader-span">Dematerialised Securities System </span></span
+>

@@ -4,9 +4,9 @@ import { describe, expect, test } from "vitest";
 import Subject from "./Visible.svelte";
 
 function visibleSnippet(label: string) {
-    return ((($anchor: Comment, _visible: boolean) => {
+    return (($anchor: Comment, _visible: boolean) => {
         $anchor.before(document.createTextNode(label));
-    }) as any);
+    }) as any;
 }
 
 describe("Visible", () => {

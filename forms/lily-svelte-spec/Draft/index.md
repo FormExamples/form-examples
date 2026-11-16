@@ -10,11 +10,14 @@ See [components/draft/index.md](../../../components/draft/index.md) for the full
 
 ```svelte
 <script lang="ts">
-    import Draft from "./Draft.svelte";
+  import Draft from "./Draft.svelte";
 </script>
 
-<Draft label="Draft article" status="in-progress">
-    <p>Working title — opening paragraph still needs a hook.</p>
+<Draft
+  label="Draft article"
+  status="in-progress"
+>
+  <p>Working title — opening paragraph still needs a hook.</p>
 </Draft>
 ```
 

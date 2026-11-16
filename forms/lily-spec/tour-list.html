@@ -4,17 +4,55 @@
   Description: an ordered list of tour guide steps
   HTML tag: <ol>
   CSS class: tour-list
-  Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Keyboard: Escape ends the tour (sets data-active="false" and hides it); start it by setting data-active="true"
+  Accessibility: a plain <ol> (no role="dialog", which would hide the list semantics; no aria-modal: not modal; any dialog semantics belong to the enclosing tour), tabindex="-1", aria-label for accessible name
   Usage:
-    <ol class="tour-list" aria-label="Example">
-      ...
+    <ol
+      class="tour-list"
+      tabindex="-1"
+      aria-label=""
+      data-active="false"
+      hidden
+    >
     </ol>
 -->
 
 <ol
   class="tour-list"
+  tabindex="-1"
   aria-label=""
+  data-active="false"
+  hidden
 >
   <!-- Consumer provides list items -->
 </ol>
+
+<script>
+  // TourList behavior
+  (function() {
+    'use strict';
+    document.querySelectorAll('.tour-list').forEach(function(el) {
+      var opener = null;
+      function sync() {
+        if (el.getAttribute('data-active') === 'true') {
+          if (el.hidden) opener = document.activeElement;
+          el.hidden = false;
+          el.focus();
+        } else {
+          el.hidden = true;
+          if (opener && opener.isConnected) opener.focus();
+          opener = null;
+        }
+      }
+      new MutationObserver(sync).observe(el, { attributes: true, attributeFilter: ['data-active'] });
+      sync();
+      el.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && el.getAttribute('data-active') === 'true') {
+          e.preventDefault();
+          el.setAttribute('data-active', 'false');
+          el.dispatchEvent(new CustomEvent('close'));
+        }
+      });
+    });
+  })();
+</script>

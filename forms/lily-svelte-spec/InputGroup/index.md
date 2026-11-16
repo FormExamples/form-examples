@@ -43,12 +43,16 @@ A headless Svelte 5 component that renders a single `<div role="group">` element
 
 ```svelte
 <script lang="ts">
-  import InputGroup from './InputGroup.svelte';
+  import InputGroup from "./InputGroup.svelte";
 </script>
 
 <InputGroup label="Amount in US dollars">
   {#snippet prefix()}<span aria-hidden="true">$</span>{/snippet}
-  <input type="number" min="0" step="0.01" />
+  <input
+    type="number"
+    min="0"
+    step="0.01"
+  />
   {#snippet suffix()}<span aria-hidden="true">USD</span>{/snippet}
 </InputGroup>
 ```
@@ -58,7 +62,10 @@ A headless Svelte 5 component that renders a single `<div role="group">` element
 ```svelte
 <InputGroup label="Search">
   {#snippet prefix()}<span aria-hidden="true">🔍</span>{/snippet}
-  <input type="search" placeholder="Search…" />
+  <input
+    type="search"
+    placeholder="Search…"
+  />
 </InputGroup>
 ```
 

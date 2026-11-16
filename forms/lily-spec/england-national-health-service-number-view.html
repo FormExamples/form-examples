@@ -5,13 +5,12 @@
   HTML tag: <span>
   CSS class: england-national-health-service-number-view
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
   Format: 10 digits in 3-3-4 format with a Modulus-11 check digit, allocated through the Personal Demographics Service
   Usage:
-    <span class="england-national-health-service-number-view" aria-label="National Health Service Number">value-here</span>
+    <span class="england-national-health-service-number-view">value-here</span>
 -->
 
-<span
-  class="england-national-health-service-number-view"
-  aria-label="National Health Service Number"
-></span>
+<span class="england-national-health-service-number-view"
+  ><span class="screen-reader-span">National Health Service Number </span></span
+>

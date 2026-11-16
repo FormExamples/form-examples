@@ -52,7 +52,10 @@ Import the component and bind `value`. Pass a translated `label`. Add `required`
   let nhs = $state("");
 </script>
 
-<UnitedKingdomNationalHealthServiceNumberInput label="NHS Number" bind:value={nhs} />
+<UnitedKingdomNationalHealthServiceNumberInput
+  label="NHS Number"
+  bind:value={nhs}
+/>
 ```
 
 ```svelte
@@ -83,11 +86,23 @@ Import the component and bind `value`. Pass a translated `label`. Add `required`
 </script>
 
 {#if editing}
-  <UnitedKingdomNationalHealthServiceNumberInput label="NHS Number" bind:value={nhs} />
-  <button type="button" onclick={() => (editing = false)}>Done</button>
+  <UnitedKingdomNationalHealthServiceNumberInput
+    label="NHS Number"
+    bind:value={nhs}
+  />
+  <button
+    type="button"
+    onclick={() => (editing = false)}>Done</button
+  >
 {:else}
-  <UnitedKingdomNationalHealthServiceNumberView label="NHS Number" value={nhs} />
-  <button type="button" onclick={() => (editing = true)}>Edit</button>
+  <UnitedKingdomNationalHealthServiceNumberView
+    label="NHS Number"
+    value={nhs}
+  />
+  <button
+    type="button"
+    onclick={() => (editing = true)}>Edit</button
+  >
 {/if}
 ```
 
@@ -104,7 +119,10 @@ Import the component and bind `value`. Pass a translated `label`. Add `required`
   bind:value={nhs}
   disabled={locked}
 />
-<button type="button" onclick={() => (locked = !locked)}>
+<button
+  type="button"
+  onclick={() => (locked = !locked)}
+>
   {locked ? "Unlock" : "Lock"}
 </button>
 ```

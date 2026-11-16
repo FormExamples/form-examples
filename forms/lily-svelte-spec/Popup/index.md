@@ -1,17 +1,17 @@
 # Popup
 
-A headless conditional overlay dialog that temporarily appears over the main content for information, prompts, or actions. Only mounts in the DOM when `open` is `true`.
+A headless overlay dialog that temporarily appears over the main content for information, prompts, or actions. It is a native `popover="auto"`: the browser opens it from a `command="toggle-popover"` trigger and closes it on Escape or a click outside.
 
 ## What it is
 
 - Component: `Popup`
-- HTML element: `<div role="dialog">` (conditionally rendered)
+- HTML element: `<div popover="auto" role="dialog">` (always rendered)
 - Role: `dialog`
 - Category: overlay / floating content
 
 ## What it does
 
-- Renders a `<div role="dialog">` with `aria-label` only when the bindable `open` is `true`.
+- Renders a `<div popover="auto" role="dialog">` with `aria-label`; the native Popover API shows it in the top layer and closes it on Escape or a click outside (light dismiss); `open` follows the element's `toggle` event, with a `hidden` fallback where `showPopover` is missing.
 - Unmounts completely when closed.
 - Supports `bind:open` for two-way binding.
 - Spreads additional attributes onto the dialog `<div>`.
@@ -31,7 +31,7 @@ A headless conditional overlay dialog that temporarily appears over the main con
 
 ## How to use it
 
-The consumer controls the trigger, the open/close logic, Escape handling, and focus management.
+The consumer provides the trigger (`<button command="toggle-popover" commandfor="{id}">`) and any focus management; the browser handles Escape and light dismiss.
 
 ```svelte
 import Popup from './Popup.svelte';
@@ -51,16 +51,28 @@ import Popup from './Popup.svelte';
 
 ```svelte
 <script lang="ts">
-  import Popup from './Popup.svelte';
+  import Popup from "./Popup.svelte";
 
   let open = $state(false);
 </script>
 
-<button type="button" onclick={() => (open = true)}>Delete</button>
-<Popup label="Confirm deletion" bind:open>
+<button
+  type="button"
+  onclick={() => (open = true)}>Delete</button
+>
+<Popup
+  label="Confirm deletion"
+  bind:open
+>
   <p>Are you sure you want to proceed?</p>
-  <button type="button" onclick={() => (open = false)}>Yes</button>
-  <button type="button" onclick={() => (open = false)}>No</button>
+  <button
+    type="button"
+    onclick={() => (open = false)}>Yes</button
+  >
+  <button
+    type="button"
+    onclick={() => (open = false)}>No</button
+  >
 </Popup>
 ```
 
@@ -68,13 +80,19 @@ import Popup from './Popup.svelte';
 
 ```svelte
 <script lang="ts">
-  import Popup from './Popup.svelte';
+  import Popup from "./Popup.svelte";
 
   let open = $state(false);
 </script>
 
-<button type="button" onclick={() => (open = !open)}>Toggle popup</button>
-<Popup label="Info" bind:open>
+<button
+  type="button"
+  onclick={() => (open = !open)}>Toggle popup</button
+>
+<Popup
+  label="Info"
+  bind:open
+>
   <p>Popup content.</p>
 </Popup>
 ```
@@ -83,15 +101,20 @@ import Popup from './Popup.svelte';
 
 ```svelte
 <script lang="ts">
-  import Popup from './Popup.svelte';
+  import Popup from "./Popup.svelte";
 
   let open = $state(true);
-  function onKey(e: KeyboardEvent) { if (e.key === "Escape") open = false; }
+  function onKey(e: KeyboardEvent) {
+    if (e.key === "Escape") open = false;
+  }
 </script>
 
 <svelte:window onkeydown={onKey} />
 
-<Popup label="Welcome" bind:open>
+<Popup
+  label="Welcome"
+  bind:open
+>
   <p>Press Escape to close.</p>
 </Popup>
 ```
@@ -100,18 +123,37 @@ import Popup from './Popup.svelte';
 
 ```svelte
 <script lang="ts">
-  import Popup from './Popup.svelte';
+  import Popup from "./Popup.svelte";
 
   let open = $state(false);
   let tag = $state("");
 </script>
 
-<button type="button" onclick={() => (open = true)}>Add tag</button>
-<Popup label="New tag" bind:open>
-  <form onsubmit={(e) => { e.preventDefault(); open = false; }}>
-    <label>Name <input type="text" bind:value={tag} /></label>
+<button
+  type="button"
+  onclick={() => (open = true)}>Add tag</button
+>
+<Popup
+  label="New tag"
+  bind:open
+>
+  <form
+    onsubmit={(e) => {
+      e.preventDefault();
+      open = false;
+    }}
+  >
+    <label
+      >Name <input
+        type="text"
+        bind:value={tag}
+      /></label
+    >
     <button type="submit">Add</button>
-    <button type="button" onclick={() => (open = false)}>Cancel</button>
+    <button
+      type="button"
+      onclick={() => (open = false)}>Cancel</button
+    >
   </form>
 </Popup>
 ```
@@ -119,7 +161,11 @@ import Popup from './Popup.svelte';
 ### With positioning hook
 
 ```svelte
-<Popup label="Menu" bind:open data-anchor="top-center" />
+<Popup
+  label="Menu"
+  bind:open
+  data-anchor="top-center"
+/>
 ```
 
 ## Accessibility

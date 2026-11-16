@@ -14,30 +14,36 @@ function textSnippet(text: string) {
 
 describe("OverlayContainer", () => {
     test("renders with the overlay-container class", () => {
-        const { container } = render(Subject, { props: {
-            open: true,
-            children: textSnippet("Modal"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                open: true,
+                children: textSnippet("Modal"),
+            },
+        });
 
         const root = container.querySelector(".overlay-container") as HTMLElement;
         expect(root).toBeTruthy();
     });
 
     test("has role presentation", () => {
-        const { container } = render(Subject, { props: {
-            open: true,
-            children: textSnippet("X"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                open: true,
+                children: textSnippet("X"),
+            },
+        });
 
         const root = container.querySelector(".overlay-container") as HTMLElement;
         expect(root.getAttribute("role")).toBe("presentation");
     });
 
     test("sets data-open and aria-hidden when open", () => {
-        const { container } = render(Subject, { props: {
-            open: true,
-            children: textSnippet("Open"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                open: true,
+                children: textSnippet("Open"),
+            },
+        });
 
         const root = container.querySelector(".overlay-container") as HTMLElement;
         expect(root.getAttribute("data-open")).toBe("true");
@@ -45,10 +51,12 @@ describe("OverlayContainer", () => {
     });
 
     test("hides when open is false", () => {
-        const { container } = render(Subject, { props: {
-            open: false,
-            children: textSnippet("Closed"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                open: false,
+                children: textSnippet("Closed"),
+            },
+        });
 
         const root = container.querySelector(".overlay-container") as HTMLElement;
         expect(root.getAttribute("data-open")).toBe("false");
@@ -57,11 +65,13 @@ describe("OverlayContainer", () => {
     });
 
     test("applies aria-label when provided", () => {
-        const { container } = render(Subject, { props: {
-            open: true,
-            label: "Modal backdrop",
-            children: textSnippet("X"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                open: true,
+                label: "Modal backdrop",
+                children: textSnippet("X"),
+            },
+        });
 
         const root = container.querySelector(".overlay-container") as HTMLElement;
         expect(root.getAttribute("aria-label")).toBe("Modal backdrop");
@@ -70,11 +80,13 @@ describe("OverlayContainer", () => {
     test("handles click events", async () => {
         const user: UserEvent = userEvent.setup();
         const handleClick = vi.fn();
-        const { container } = render(Subject, { props: {
-            open: true,
-            onclick: handleClick,
-            children: textSnippet("X"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                open: true,
+                onclick: handleClick,
+                children: textSnippet("X"),
+            },
+        });
 
         const root = container.querySelector(".overlay-container") as HTMLElement;
         await user.click(root);
@@ -82,11 +94,13 @@ describe("OverlayContainer", () => {
     });
 
     test("appends consumer class to base class", () => {
-        const { container } = render(Subject, { props: {
-            open: true,
-            class: "extra",
-            children: textSnippet("X"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                open: true,
+                class: "extra",
+                children: textSnippet("X"),
+            },
+        });
 
         const root = container.querySelector(".overlay-container") as HTMLElement;
         expect(root.className).toContain("overlay-container");

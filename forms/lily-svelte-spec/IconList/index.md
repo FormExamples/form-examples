@@ -32,8 +32,8 @@ A headless Svelte 5 component inspired by the U.S. Web Design System (USWDS) Ico
 
 ```svelte
 <script lang="ts">
-  import IconList from './IconList.svelte';
-  import IconListItem from '../IconListItem/IconListItem.svelte';
+  import IconList from "./IconList.svelte";
+  import IconListItem from "../IconListItem/IconListItem.svelte";
 </script>
 
 <IconList label="Features">

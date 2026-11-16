@@ -35,71 +35,74 @@ Place as a direct child of `GrailLayout`. The component itself provides the `com
 
 ```svelte
 <script lang="ts">
-    import GrailLayoutLeftAside from "./GrailLayoutLeftAside.svelte";
+  import GrailLayoutLeftAside from "./GrailLayoutLeftAside.svelte";
 </script>
 
 <GrailLayoutLeftAside>
-    <nav aria-label="Primary navigation">
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-    </nav>
+  <nav aria-label="Primary navigation">
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+  </nav>
 </GrailLayoutLeftAside>
 ```
 
 ```svelte
 <script lang="ts">
-    import GrailLayoutLeftAside from "./GrailLayoutLeftAside.svelte";
+  import GrailLayoutLeftAside from "./GrailLayoutLeftAside.svelte";
 </script>
 
 <GrailLayoutLeftAside>
-    <aside aria-label="Filters">
-        <h2>Filters</h2>
-        <label><input type="checkbox" /> Active</label>
-    </aside>
+  <aside aria-label="Filters">
+    <h2>Filters</h2>
+    <label><input type="checkbox" /> Active</label>
+  </aside>
 </GrailLayoutLeftAside>
 ```
 
 ```svelte
 <script lang="ts">
-    import GrailLayout from "../GrailLayout/GrailLayout.svelte";
-    import GrailLayoutLeftAside from "./GrailLayoutLeftAside.svelte";
-    import GrailLayoutCenterMain from "../GrailLayoutCenterMain/GrailLayoutCenterMain.svelte";
+  import GrailLayout from "../GrailLayout/GrailLayout.svelte";
+  import GrailLayoutLeftAside from "./GrailLayoutLeftAside.svelte";
+  import GrailLayoutCenterMain from "../GrailLayoutCenterMain/GrailLayoutCenterMain.svelte";
 </script>
 
 <GrailLayout>
-    <GrailLayoutLeftAside>
-        <nav aria-label="Primary">...</nav>
-    </GrailLayoutLeftAside>
-    <GrailLayoutCenterMain><main>Content</main></GrailLayoutCenterMain>
+  <GrailLayoutLeftAside>
+    <nav aria-label="Primary">...</nav>
+  </GrailLayoutLeftAside>
+  <GrailLayoutCenterMain><main>Content</main></GrailLayoutCenterMain>
 </GrailLayout>
 ```
 
 ```svelte
 <script lang="ts">
-    import GrailLayoutLeftAside from "./GrailLayoutLeftAside.svelte";
+  import GrailLayoutLeftAside from "./GrailLayoutLeftAside.svelte";
 </script>
 
-<GrailLayoutLeftAside class="narrow-left" data-testid="grail-left">
-    <aside><p>Ad slot</p></aside>
+<GrailLayoutLeftAside
+  class="narrow-left"
+  data-testid="grail-left"
+>
+  <aside><p>Ad slot</p></aside>
 </GrailLayoutLeftAside>
 ```
 
 ```svelte
 <script lang="ts">
-    import GrailLayoutLeftAside from "./GrailLayoutLeftAside.svelte";
-    const items = [
-        { href: "/", label: "Home" },
-        { href: "/docs", label: "Docs" },
-        { href: "/help", label: "Help" },
-    ];
+  import GrailLayoutLeftAside from "./GrailLayoutLeftAside.svelte";
+  const items = [
+    { href: "/", label: "Home" },
+    { href: "/docs", label: "Docs" },
+    { href: "/help", label: "Help" },
+  ];
 </script>
 
 <GrailLayoutLeftAside>
-    <nav aria-label="Primary">
-        <ul>
-            {#each items as i}<li><a href={i.href}>{i.label}</a></li>{/each}
-        </ul>
-    </nav>
+  <nav aria-label="Primary">
+    <ul>
+      {#each items as i}<li><a href={i.href}>{i.label}</a></li>{/each}
+    </ul>
+  </nav>
 </GrailLayoutLeftAside>
 ```
 

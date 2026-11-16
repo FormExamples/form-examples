@@ -5,18 +5,25 @@
   HTML tag: <div>
   CSS class: scroller
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: role="group" with aria-label; drop both when the content needs no name
 -->
 
 <div
   class="scroller"
+  role="group"
   aria-label=""
   data-offset="0.5"
 >
-  <div class="scroller-background" aria-live="polite">
+  <div
+    class="scroller-background"
+    aria-live="polite"
+  >
     <!-- Consumer provides sticky background -->
   </div>
-  <div class="scroller-foreground scroller-base" data-offset="0.5">
+  <div
+    class="scroller-foreground scroller-base"
+    data-offset="0.5"
+  >
     <!-- Consumer provides step children -->
   </div>
 </div>

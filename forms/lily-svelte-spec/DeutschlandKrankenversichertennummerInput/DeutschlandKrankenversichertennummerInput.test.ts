@@ -15,7 +15,9 @@ describe("DeutschlandKrankenversichertennummerInput", () => {
         render(Subject, { props: { label: "Health Insurance Number" } });
 
         const input = screen.getByLabelText("Health Insurance Number");
-        expect(input.getAttribute("class")).toContain("deutschland-krankenversichertennummer-input");
+        expect(input.getAttribute("class")).toContain(
+            "deutschland-krankenversichertennummer-input",
+        );
     });
 
     test("has autocomplete off", () => {

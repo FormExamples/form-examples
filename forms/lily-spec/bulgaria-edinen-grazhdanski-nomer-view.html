@@ -5,13 +5,12 @@
   HTML tag: <span>
   CSS class: bulgaria-edinen-grazhdanski-nomer-view
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
   Format: 10 digits: the first 6 are the date of birth (YYMMDD), the next 3 encode area and birth order (ninth digit even for boy, odd for girl), and the tenth is a check digit
   Usage:
-    <span class="bulgaria-edinen-grazhdanski-nomer-view" aria-label="Uniform Civil Number">value-here</span>
+    <span class="bulgaria-edinen-grazhdanski-nomer-view">value-here</span>
 -->
 
-<span
-  class="bulgaria-edinen-grazhdanski-nomer-view"
-  aria-label="Uniform Civil Number"
-></span>
+<span class="bulgaria-edinen-grazhdanski-nomer-view"
+  ><span class="screen-reader-span">Uniform Civil Number </span></span
+>

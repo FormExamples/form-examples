@@ -32,6 +32,9 @@
 </script>
 
 <!-- GrailLayoutBottomFooter.svelte -->
-<footer class={`grail-layout-bottom-footer ${className}`} {...restProps}>
+<footer
+    class={`grail-layout-bottom-footer ${className}`}
+    {...restProps}
+>
     {@render children?.()}
 </footer>

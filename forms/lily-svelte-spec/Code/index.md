@@ -10,7 +10,7 @@ See [components/code/index.md](../../../components/code/index.md) for the full c
 
 ```svelte
 <script lang="ts">
-    import Code from "./Code.svelte";
+  import Code from "./Code.svelte";
 </script>
 
 <Code />

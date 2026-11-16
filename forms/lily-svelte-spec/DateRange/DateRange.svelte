@@ -49,6 +49,8 @@
     //   - MDN input type="date": https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date
     //   - MDN fieldset element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset
 
+    import { warnMissingName } from "../dev-warning";
+
     let {
         class: className = "",
         label,
@@ -70,6 +72,10 @@
         end?: string;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName("DateRange", label, restProps["aria-label"], restProps["aria-labelledby"]),
+    );
 </script>
 
 <!-- DateRange.svelte -->

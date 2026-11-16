@@ -22,12 +22,16 @@ describe("FloatingPanel", () => {
     });
 
     test("renders children", () => {
-        render(Subject, { props: { label: "Panel", open: true, children: textSnippet("Content") } });
+        render(Subject, {
+            props: { label: "Panel", open: true, children: textSnippet("Content") },
+        });
         expect(screen.getByRole("region").textContent).toContain("Content");
     });
 
     test("passes through attributes", () => {
-        render(Subject, { props: { label: "P", open: true, "data-testid": "fp", children: textSnippet("C") } });
+        render(Subject, {
+            props: { label: "P", open: true, "data-testid": "fp", children: textSnippet("C") },
+        });
         expect(screen.getByTestId("fp")).toBeTruthy();
     });
 });

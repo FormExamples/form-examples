@@ -27,7 +27,7 @@
     //   - role="dialog" with aria-modal="false" (non-modal popover dialog)
     //   - aria-labelledby points at the heading
     //   - aria-describedby points at the description (when provided)
-    //   - hidden attribute removes the closed coachmark from the AT tree
+    //   - closed, it is display: none (popover="manual", or the hidden attribute where the Popover API is missing), so out of the AT tree
     //
     // Internationalization:
     //   - All user-facing strings via props
@@ -37,14 +37,13 @@
     //   - WAI-ARIA Dialog Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
 
     function makeId(prefix: string): string {
-        if (
-            typeof crypto !== "undefined" &&
-            typeof crypto.randomUUID === "function"
-        ) {
+        if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
             return `${prefix}-${crypto.randomUUID()}`;
         }
         return `${prefix}-${Math.random().toString(36).slice(2, 11)}`;
     }
+
+    import { popoverState } from "../Popover/popover.js";
 
     let {
         class: className = "",
@@ -80,17 +79,28 @@
     aria-modal="false"
     aria-labelledby={titleId}
     aria-describedby={description ? descId : undefined}
-    hidden={!open}
+    popover="manual"
+    use:popoverState={open}
     {...restProps}
 >
-    <h2 class="coachmark-title" id={titleId}>{title}</h2>
+    <h2
+        class="coachmark-title"
+        id={titleId}
+    >
+        {title}
+    </h2>
     {#if description}
-        <p class="coachmark-description" id={descId}>{description}</p>
+        <p
+            class="coachmark-description"
+            id={descId}
+        >
+            {description}
+        </p>
     {/if}
     <button
         class="coachmark-dismiss"
         type="button"
         aria-label={dismissLabel}
-        onclick={onDismiss}
-    >×</button>
+        onclick={onDismiss}>×</button
+    >
 </div>

@@ -48,14 +48,34 @@ Render `Listbox` as a container, pass an accessible `label`, and include child e
 
 ```svelte
 <script lang="ts">
-    import Listbox from "./Listbox.svelte";
+  import Listbox from "./Listbox.svelte";
 </script>
 
 <Listbox label="Fruits">
-    <div role="option" tabindex="-1">Apple</div>
-    <div role="option" tabindex="-1">Banana</div>
-    <div role="option" tabindex="-1">Cherry</div>
-    <div role="option" tabindex="-1">Durian</div>
+  <div
+    role="option"
+    tabindex="-1"
+  >
+    Apple
+  </div>
+  <div
+    role="option"
+    tabindex="-1"
+  >
+    Banana
+  </div>
+  <div
+    role="option"
+    tabindex="-1"
+  >
+    Cherry
+  </div>
+  <div
+    role="option"
+    tabindex="-1"
+  >
+    Durian
+  </div>
 </Listbox>
 ```
 
@@ -65,28 +85,28 @@ Users can move focus with ArrowDown/ArrowUp (wrapping) and jump to the first/las
 
 ```svelte
 <script lang="ts">
-    import Listbox from "./Listbox.svelte";
-    let colors = ["Red", "Green", "Blue"];
-    let selected = $state("Red");
+  import Listbox from "./Listbox.svelte";
+  let colors = ["Red", "Green", "Blue"];
+  let selected = $state("Red");
 </script>
 
 <Listbox label="Select a color">
-    {#each colors as color}
-        <div
-            role="option"
-            tabindex="-1"
-            aria-selected={selected === color}
-            onclick={() => (selected = color)}
-            onkeydown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    selected = color;
-                }
-            }}
-        >
-            {color}
-        </div>
-    {/each}
+  {#each colors as color}
+    <div
+      role="option"
+      tabindex="-1"
+      aria-selected={selected === color}
+      onclick={() => (selected = color)}
+      onkeydown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          selected = color;
+        }
+      }}
+    >
+      {color}
+    </div>
+  {/each}
 </Listbox>
 <p>Selected: {selected}</p>
 ```
@@ -95,28 +115,31 @@ Users can move focus with ArrowDown/ArrowUp (wrapping) and jump to the first/las
 
 ```svelte
 <script lang="ts">
-    import Listbox from "./Listbox.svelte";
-    let fruits = ["Apple", "Banana", "Cherry"];
-    let chosen = $state<Set<string>>(new Set());
+  import Listbox from "./Listbox.svelte";
+  let fruits = ["Apple", "Banana", "Cherry"];
+  let chosen = $state<Set<string>>(new Set());
 
-    function toggle(fruit: string) {
-        if (chosen.has(fruit)) chosen.delete(fruit);
-        else chosen.add(fruit);
-        chosen = new Set(chosen);
-    }
+  function toggle(fruit: string) {
+    if (chosen.has(fruit)) chosen.delete(fruit);
+    else chosen.add(fruit);
+    chosen = new Set(chosen);
+  }
 </script>
 
-<Listbox label="Choose fruits" aria-multiselectable="true">
-    {#each fruits as fruit}
-        <div
-            role="option"
-            tabindex="-1"
-            aria-selected={chosen.has(fruit)}
-            onclick={() => toggle(fruit)}
-        >
-            {fruit}
-        </div>
-    {/each}
+<Listbox
+  label="Choose fruits"
+  aria-multiselectable="true"
+>
+  {#each fruits as fruit}
+    <div
+      role="option"
+      tabindex="-1"
+      aria-selected={chosen.has(fruit)}
+      onclick={() => toggle(fruit)}
+    >
+      {fruit}
+    </div>
+  {/each}
 </Listbox>
 ```
 
@@ -124,26 +147,26 @@ Users can move focus with ArrowDown/ArrowUp (wrapping) and jump to the first/las
 
 ```svelte
 <script lang="ts">
-    import Listbox from "./Listbox.svelte";
-    let people = [
-        { id: 1, name: "Alice", role: "Engineer" },
-        { id: 2, name: "Bob", role: "Designer" },
-    ];
-    let selectedId = $state(1);
+  import Listbox from "./Listbox.svelte";
+  let people = [
+    { id: 1, name: "Alice", role: "Engineer" },
+    { id: 2, name: "Bob", role: "Designer" },
+  ];
+  let selectedId = $state(1);
 </script>
 
 <Listbox label="Assign to person">
-    {#each people as person}
-        <div
-            role="option"
-            tabindex="-1"
-            aria-selected={selectedId === person.id}
-            onclick={() => (selectedId = person.id)}
-        >
-            <strong>{person.name}</strong>
-            <em>{person.role}</em>
-        </div>
-    {/each}
+  {#each people as person}
+    <div
+      role="option"
+      tabindex="-1"
+      aria-selected={selectedId === person.id}
+      onclick={() => (selectedId = person.id)}
+    >
+      <strong>{person.name}</strong>
+      <em>{person.role}</em>
+    </div>
+  {/each}
 </Listbox>
 ```
 
@@ -151,17 +174,33 @@ Users can move focus with ArrowDown/ArrowUp (wrapping) and jump to the first/las
 
 ```svelte
 <script lang="ts">
-    import Listbox from "./Listbox.svelte";
-    import { onMount } from "svelte";
+  import Listbox from "./Listbox.svelte";
+  import { onMount } from "svelte";
 
-    let firstOption: HTMLDivElement | undefined;
-    onMount(() => firstOption?.focus());
+  let firstOption: HTMLDivElement | undefined;
+  onMount(() => firstOption?.focus());
 </script>
 
 <Listbox label="Options">
-    <div bind:this={firstOption} role="option" tabindex="-1">Option 1</div>
-    <div role="option" tabindex="-1">Option 2</div>
-    <div role="option" tabindex="-1">Option 3</div>
+  <div
+    bind:this={firstOption}
+    role="option"
+    tabindex="-1"
+  >
+    Option 1
+  </div>
+  <div
+    role="option"
+    tabindex="-1"
+  >
+    Option 2
+  </div>
+  <div
+    role="option"
+    tabindex="-1"
+  >
+    Option 3
+  </div>
 </Listbox>
 ```
 

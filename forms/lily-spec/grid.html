@@ -14,9 +14,19 @@
     Consumers may set data-columns to a number (12) or a custom string
     (e.g. "1fr 2fr 1fr") which is then used as-is.
 
+  Fluid mode: for as many columns as fit, each at least W wide, use
+    grid-template-columns: repeat(auto-fit, minmax(min(W, 100%), 1fr));
+    and data-min-column-width="W" (e.g. 12rem). It replaces the column count.
+
   Usage:
     <div class="grid" data-columns="12"
          style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 1rem;">
+      ...
+    </div>
+
+  Fluid usage:
+    <div class="grid" data-columns="12" data-min-column-width="12rem"
+         style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(12rem, 100%), 1fr)); gap: 1rem;">
       ...
     </div>
 -->

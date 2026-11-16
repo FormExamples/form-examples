@@ -2,19 +2,18 @@
 <!-- CallToAction component -->
 <!--
   Description: a prominent prompt encouraging user action
-  HTML tag: <div>
+  HTML tag: <a> when it navigates, else <button type="button">
   CSS class: call-to-action
-  Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Keyboard: Tab focuses it; Enter activates (and Space, on the button)
+  Accessibility: native link or button; aria-label only when the text is not enough
   Usage:
-    <div class="call-to-action" aria-label="Example">
-      ...
-    </div>
+    <a class="call-to-action" href="/signup">Sign up now</a>
+    <button class="call-to-action" type="button">Start</button>
 -->
 
-<div
+<a
   class="call-to-action"
-  aria-label=""
+  href=""
 >
   <!-- Consumer provides content -->
-</div>
+</a>

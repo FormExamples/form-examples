@@ -45,7 +45,7 @@ Import `CallToAction` from `./CallToAction.svelte`. Set `href` for navigation or
 
 ```svelte
 <script lang="ts">
-  import CallToAction from './CallToAction.svelte';
+  import CallToAction from "./CallToAction.svelte";
 </script>
 
 <CallToAction href="/signup">Sign Up Now</CallToAction>
@@ -55,10 +55,10 @@ Import `CallToAction` from `./CallToAction.svelte`. Set `href` for navigation or
 
 ```svelte
 <script lang="ts">
-  import CallToAction from './CallToAction.svelte';
+  import CallToAction from "./CallToAction.svelte";
 
   function start() {
-    console.log('starting...');
+    console.log("starting...");
   }
 </script>
 
@@ -69,10 +69,13 @@ Import `CallToAction` from `./CallToAction.svelte`. Set `href` for navigation or
 
 ```svelte
 <script lang="ts">
-  import CallToAction from './CallToAction.svelte';
+  import CallToAction from "./CallToAction.svelte";
 </script>
 
-<CallToAction href="/join" label="Join the program">
+<CallToAction
+  href="/join"
+  label="Join the program"
+>
   <span aria-hidden="true">➜</span>
 </CallToAction>
 ```
@@ -81,13 +84,16 @@ Import `CallToAction` from `./CallToAction.svelte`. Set `href` for navigation or
 
 ```svelte
 <script lang="ts">
-  import CallToAction from './CallToAction.svelte';
+  import CallToAction from "./CallToAction.svelte";
 
   let loading = $state(true);
 </script>
 
-<CallToAction disabled={loading} onclick={() => (loading = false)}>
-  {loading ? 'Loading...' : 'Continue'}
+<CallToAction
+  disabled={loading}
+  onclick={() => (loading = false)}
+>
+  {loading ? "Loading..." : "Continue"}
 </CallToAction>
 ```
 
@@ -95,13 +101,16 @@ Import `CallToAction` from `./CallToAction.svelte`. Set `href` for navigation or
 
 ```svelte
 <script lang="ts">
-  import CallToAction from './CallToAction.svelte';
+  import CallToAction from "./CallToAction.svelte";
 </script>
 
 <section>
   <h1>Ready to begin?</h1>
   <p>Start your free trial today.</p>
-  <CallToAction href="/trial" data-track="hero-cta">Start free trial</CallToAction>
+  <CallToAction
+    href="/trial"
+    data-track="hero-cta">Start free trial</CallToAction
+  >
 </section>
 ```
 

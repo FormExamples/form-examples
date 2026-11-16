@@ -32,88 +32,103 @@ Control `open` from your `oncontextmenu` handler on the trigger element. Provide
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `class` | `string` | `""` | CSS class name appended to the base class. |
-| `label` | `string` | required | `aria-label`. |
-| `open` | `boolean` | `false` (bindable) | Whether the menu is visible. |
-| `children` | `Snippet` | required | Items with `role="menuitem"`. |
-| `...restProps` | `unknown` | — | Additional attributes spread onto the menu `<div>`. |
+| Prop           | Type      | Default            | Description                                         |
+| -------------- | --------- | ------------------ | --------------------------------------------------- |
+| `class`        | `string`  | `""`               | CSS class name appended to the base class.          |
+| `label`        | `string`  | required           | `aria-label`.                                       |
+| `open`         | `boolean` | `false` (bindable) | Whether the menu is visible.                        |
+| `children`     | `Snippet` | required           | Items with `role="menuitem"`.                       |
+| `...restProps` | `unknown` | —                  | Additional attributes spread onto the menu `<div>`. |
 
 ## Usage
 
 ```svelte
 <script lang="ts">
-    import ContextMenu from "./ContextMenu.svelte";
-    import ContextMenuItem from "../ContextMenuItem/ContextMenuItem.svelte";
+  import ContextMenu from "./ContextMenu.svelte";
+  import ContextMenuItem from "../ContextMenuItem/ContextMenuItem.svelte";
 
-    let open = $state(false);
+  let open = $state(false);
 
-    function openMenu(event: MouseEvent) {
-        event.preventDefault();
-        open = true;
-    }
+  function openMenu(event: MouseEvent) {
+    event.preventDefault();
+    open = true;
+  }
 </script>
 
 <div oncontextmenu={openMenu}>Right-click here</div>
 
-<ContextMenu label="Actions" bind:open>
-    <ContextMenuItem>Cut</ContextMenuItem>
-    <ContextMenuItem>Copy</ContextMenuItem>
-    <ContextMenuItem>Paste</ContextMenuItem>
+<ContextMenu
+  label="Actions"
+  bind:open
+>
+  <ContextMenuItem>Cut</ContextMenuItem>
+  <ContextMenuItem>Copy</ContextMenuItem>
+  <ContextMenuItem>Paste</ContextMenuItem>
 </ContextMenu>
 ```
 
 ```svelte
 <script lang="ts">
-    import ContextMenu from "./ContextMenu.svelte";
-    import ContextMenuItem from "../ContextMenuItem/ContextMenuItem.svelte";
+  import ContextMenu from "./ContextMenu.svelte";
+  import ContextMenuItem from "../ContextMenuItem/ContextMenuItem.svelte";
 
-    let open = $state(false);
+  let open = $state(false);
 
-    function onItemClick(name: string) {
-        console.log("Chose:", name);
-        open = false;
-    }
+  function onItemClick(name: string) {
+    console.log("Chose:", name);
+    open = false;
+  }
 </script>
 
-<button type="button" onclick={() => (open = true)}>Open actions</button>
+<button
+  type="button"
+  onclick={() => (open = true)}>Open actions</button
+>
 
-<ContextMenu label="File actions" bind:open>
-    <ContextMenuItem onclick={() => onItemClick("Open")}>Open</ContextMenuItem>
-    <ContextMenuItem onclick={() => onItemClick("Rename")}>Rename</ContextMenuItem>
-    <ContextMenuItem onclick={() => onItemClick("Delete")}>Delete</ContextMenuItem>
+<ContextMenu
+  label="File actions"
+  bind:open
+>
+  <ContextMenuItem onclick={() => onItemClick("Open")}>Open</ContextMenuItem>
+  <ContextMenuItem onclick={() => onItemClick("Rename")}>Rename</ContextMenuItem>
+  <ContextMenuItem onclick={() => onItemClick("Delete")}>Delete</ContextMenuItem>
 </ContextMenu>
 ```
 
 ```svelte
 <script lang="ts">
-    import ContextMenu from "./ContextMenu.svelte";
-    import ContextMenuItem from "../ContextMenuItem/ContextMenuItem.svelte";
+  import ContextMenu from "./ContextMenu.svelte";
+  import ContextMenuItem from "../ContextMenuItem/ContextMenuItem.svelte";
 
-    let open = $state(true);
+  let open = $state(true);
 </script>
 
-<ContextMenu label="Simple menu" bind:open>
-    <ContextMenuItem>New tab</ContextMenuItem>
-    <ContextMenuItem>New window</ContextMenuItem>
-    <ContextMenuItem aria-disabled="true">Reopen closed tab</ContextMenuItem>
+<ContextMenu
+  label="Simple menu"
+  bind:open
+>
+  <ContextMenuItem>New tab</ContextMenuItem>
+  <ContextMenuItem>New window</ContextMenuItem>
+  <ContextMenuItem aria-disabled="true">Reopen closed tab</ContextMenuItem>
 </ContextMenu>
 ```
 
 ```svelte
 <script lang="ts">
-    import ContextMenu from "./ContextMenu.svelte";
-    import ContextMenuItem from "../ContextMenuItem/ContextMenuItem.svelte";
+  import ContextMenu from "./ContextMenu.svelte";
+  import ContextMenuItem from "../ContextMenuItem/ContextMenuItem.svelte";
 
-    let open = $state(false);
-    const items = ["Cut", "Copy", "Paste"];
+  let open = $state(false);
+  const items = ["Cut", "Copy", "Paste"];
 </script>
 
-<ContextMenu label="Text actions" bind:open>
-    {#each items as name}
-        <ContextMenuItem>{name}</ContextMenuItem>
-    {/each}
+<ContextMenu
+  label="Text actions"
+  bind:open
+>
+  {#each items as name}
+    <ContextMenuItem>{name}</ContextMenuItem>
+  {/each}
 </ContextMenu>
 ```
 

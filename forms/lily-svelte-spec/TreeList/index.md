@@ -47,9 +47,24 @@ Import and provide `<li role="treeitem" tabindex="-1">` children (the first visi
 </script>
 
 <TreeList label="File browser">
-  <li role="treeitem" tabindex="0">Documents</li>
-  <li role="treeitem" tabindex="-1">Photos</li>
-  <li role="treeitem" tabindex="-1">Videos</li>
+  <li
+    role="treeitem"
+    tabindex="0"
+  >
+    Documents
+  </li>
+  <li
+    role="treeitem"
+    tabindex="-1"
+  >
+    Photos
+  </li>
+  <li
+    role="treeitem"
+    tabindex="-1"
+  >
+    Videos
+  </li>
 </TreeList>
 ```
 
@@ -62,7 +77,12 @@ Import and provide `<li role="treeitem" tabindex="-1">` children (the first visi
 
 <TreeList label="Site map">
   {#each rows as r, i}
-    <li role="treeitem" tabindex={i === 0 ? 0 : -1}>{r}</li>
+    <li
+      role="treeitem"
+      tabindex={i === 0 ? 0 : -1}
+    >
+      {r}
+    </li>
   {/each}
 </TreeList>
 ```
@@ -73,14 +93,34 @@ Import and provide `<li role="treeitem" tabindex="-1">` children (the first visi
 </script>
 
 <TreeList label="Org chart">
-  <li role="treeitem" tabindex="0" aria-expanded="true">
+  <li
+    role="treeitem"
+    tabindex="0"
+    aria-expanded="true"
+  >
     Engineering
     <ol role="group">
-      <li role="treeitem" tabindex="-1">Frontend</li>
-      <li role="treeitem" tabindex="-1">Backend</li>
+      <li
+        role="treeitem"
+        tabindex="-1"
+      >
+        Frontend
+      </li>
+      <li
+        role="treeitem"
+        tabindex="-1"
+      >
+        Backend
+      </li>
     </ol>
   </li>
-  <li role="treeitem" tabindex="-1" aria-expanded="false">Design</li>
+  <li
+    role="treeitem"
+    tabindex="-1"
+    aria-expanded="false"
+  >
+    Design
+  </li>
 </TreeList>
 ```
 

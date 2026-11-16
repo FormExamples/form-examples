@@ -10,7 +10,7 @@ See [components/bar-chart/index.md](../../../components/bar-chart/index.md) for 
 
 ```svelte
 <script lang="ts">
-    import BarChart from "./BarChart.svelte";
+  import BarChart from "./BarChart.svelte";
 </script>
 
 <BarChart />

@@ -4,7 +4,7 @@ import ChatList from "./ChatList.svelte";
 
 describe("ChatList", () => {
     test("renders with content", () => {
-        render(ChatList, { props: { label: "Test" } });
+        render(ChatList, { props: { label: "Test" } as any });
         const el = screen.getByLabelText("Test");
         expect(el).toBeTruthy();
         expect(el.getAttribute("class")).toContain("chat-list");

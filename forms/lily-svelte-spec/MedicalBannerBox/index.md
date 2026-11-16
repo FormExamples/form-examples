@@ -43,21 +43,21 @@ Place `MedicalBannerBox` inside a `MedicalBanner` and nest domain-specific `Medi
 
 ```svelte
 <script lang="ts">
-    import MedicalBanner from "../MedicalBanner/MedicalBanner.svelte";
-    import MedicalBannerBox from "./MedicalBannerBox.svelte";
-    import MedicalBannerBoxForDanger from "../MedicalBannerBoxForDanger/MedicalBannerBoxForDanger.svelte";
-    import MedicalBannerBoxForAdvice from "../MedicalBannerBoxForAdvice/MedicalBannerBoxForAdvice.svelte";
+  import MedicalBanner from "../MedicalBanner/MedicalBanner.svelte";
+  import MedicalBannerBox from "./MedicalBannerBox.svelte";
+  import MedicalBannerBoxForDanger from "../MedicalBannerBoxForDanger/MedicalBannerBoxForDanger.svelte";
+  import MedicalBannerBoxForAdvice from "../MedicalBannerBoxForAdvice/MedicalBannerBoxForAdvice.svelte";
 </script>
 
 <MedicalBanner label="Patient summary">
-    <MedicalBannerBox>
-        <MedicalBannerBoxForDanger label="Allergies">
-            <p>Penicillin</p>
-        </MedicalBannerBoxForDanger>
-        <MedicalBannerBoxForAdvice label="Care team">
-            <p>GP: Dr. Rivera</p>
-        </MedicalBannerBoxForAdvice>
-    </MedicalBannerBox>
+  <MedicalBannerBox>
+    <MedicalBannerBoxForDanger label="Allergies">
+      <p>Penicillin</p>
+    </MedicalBannerBoxForDanger>
+    <MedicalBannerBoxForAdvice label="Care team">
+      <p>GP: Dr. Rivera</p>
+    </MedicalBannerBoxForAdvice>
+  </MedicalBannerBox>
 </MedicalBanner>
 ```
 
@@ -65,15 +65,15 @@ Place `MedicalBannerBox` inside a `MedicalBanner` and nest domain-specific `Medi
 
 ```svelte
 <script lang="ts">
-    import MedicalBanner from "../MedicalBanner/MedicalBanner.svelte";
-    import MedicalBannerBox from "./MedicalBannerBox.svelte";
+  import MedicalBanner from "../MedicalBanner/MedicalBanner.svelte";
+  import MedicalBannerBox from "./MedicalBannerBox.svelte";
 </script>
 
 <MedicalBanner label="Record">
-    <MedicalBannerBox label="Patient identifiers">
-        <p>MRN: 00123</p>
-        <p>DOB: 1980-01-01</p>
-    </MedicalBannerBox>
+  <MedicalBannerBox label="Patient identifiers">
+    <p>MRN: 00123</p>
+    <p>DOB: 1980-01-01</p>
+  </MedicalBannerBox>
 </MedicalBanner>
 ```
 
@@ -81,23 +81,23 @@ Place `MedicalBannerBox` inside a `MedicalBanner` and nest domain-specific `Medi
 
 ```svelte
 <script lang="ts">
-    import MedicalBanner from "../MedicalBanner/MedicalBanner.svelte";
-    import MedicalBannerBox from "./MedicalBannerBox.svelte";
+  import MedicalBanner from "../MedicalBanner/MedicalBanner.svelte";
+  import MedicalBannerBox from "./MedicalBannerBox.svelte";
 </script>
 
 <MedicalBanner label="Summary">
-    <MedicalBannerBox class="flex-row">
-        <div>Section 1</div>
-        <div>Section 2</div>
-        <div>Section 3</div>
-    </MedicalBannerBox>
+  <MedicalBannerBox class="flex-row">
+    <div>Section 1</div>
+    <div>Section 2</div>
+    <div>Section 3</div>
+  </MedicalBannerBox>
 </MedicalBanner>
 
 <style>
-    :global(.flex-row) {
-        display: flex;
-        gap: 1rem;
-    }
+  :global(.flex-row) {
+    display: flex;
+    gap: 1rem;
+  }
 </style>
 ```
 
@@ -105,14 +105,14 @@ Place `MedicalBannerBox` inside a `MedicalBanner` and nest domain-specific `Medi
 
 ```svelte
 <script lang="ts">
-    import MedicalBanner from "../MedicalBanner/MedicalBanner.svelte";
-    import MedicalBannerBox from "./MedicalBannerBox.svelte";
+  import MedicalBanner from "../MedicalBanner/MedicalBanner.svelte";
+  import MedicalBannerBox from "./MedicalBannerBox.svelte";
 </script>
 
 <MedicalBanner label="Ward overview">
-    <MedicalBannerBox data-layout="compact">
-        <p>Bed 12A — stable</p>
-    </MedicalBannerBox>
+  <MedicalBannerBox data-layout="compact">
+    <p>Bed 12A — stable</p>
+  </MedicalBannerBox>
 </MedicalBanner>
 ```
 
@@ -120,17 +120,17 @@ Place `MedicalBannerBox` inside a `MedicalBanner` and nest domain-specific `Medi
 
 ```svelte
 <script lang="ts">
-    import MedicalBanner from "../MedicalBanner/MedicalBanner.svelte";
-    import MedicalBannerBox from "./MedicalBannerBox.svelte";
+  import MedicalBanner from "../MedicalBanner/MedicalBanner.svelte";
+  import MedicalBannerBox from "./MedicalBannerBox.svelte";
 </script>
 
 <MedicalBanner label="Shift report">
-    <MedicalBannerBox label="Morning">
-        <p>12 admissions</p>
-    </MedicalBannerBox>
-    <MedicalBannerBox label="Afternoon">
-        <p>8 discharges</p>
-    </MedicalBannerBox>
+  <MedicalBannerBox label="Morning">
+    <p>12 admissions</p>
+  </MedicalBannerBox>
+  <MedicalBannerBox label="Afternoon">
+    <p>8 discharges</p>
+  </MedicalBannerBox>
 </MedicalBanner>
 ```
 

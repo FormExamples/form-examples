@@ -10,7 +10,7 @@ See [components/scatter-chart/index.md](../../../components/scatter-chart/index.
 
 ```svelte
 <script lang="ts">
-    import ScatterChart from "./ScatterChart.svelte";
+  import ScatterChart from "./ScatterChart.svelte";
 </script>
 
 <ScatterChart />

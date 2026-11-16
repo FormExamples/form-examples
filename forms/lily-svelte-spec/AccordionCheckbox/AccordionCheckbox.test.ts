@@ -25,7 +25,7 @@ describe("AccordionCheckbox", () => {
             props: { label: "Show", children: textSnippet("Content") },
         });
         const input = container.querySelector(
-            ".accordion-checkbox > input.accordion-checkbox-input"
+            ".accordion-checkbox > input.accordion-checkbox-input",
         ) as HTMLInputElement | null;
         expect(input).toBeTruthy();
         expect(input!.type).toBe("checkbox");

@@ -52,14 +52,14 @@ Composition:
 
 ```svelte
 <script lang="ts">
-    import SummaryList from "../SummaryList/SummaryList.svelte";
-    import SummaryListItem from "./SummaryListItem.svelte";
+  import SummaryList from "../SummaryList/SummaryList.svelte";
+  import SummaryListItem from "./SummaryListItem.svelte";
 </script>
 
 <SummaryList label="Order summary">
-    <SummaryListItem term="Product">Widget</SummaryListItem>
-    <SummaryListItem term="Quantity">3</SummaryListItem>
-    <SummaryListItem term="Total">$29.97</SummaryListItem>
+  <SummaryListItem term="Product">Widget</SummaryListItem>
+  <SummaryListItem term="Quantity">3</SummaryListItem>
+  <SummaryListItem term="Total">$29.97</SummaryListItem>
 </SummaryList>
 ```
 
@@ -67,14 +67,14 @@ With interactive content in the value:
 
 ```svelte
 <script lang="ts">
-    import SummaryList from "../SummaryList/SummaryList.svelte";
-    import SummaryListItem from "./SummaryListItem.svelte";
+  import SummaryList from "../SummaryList/SummaryList.svelte";
+  import SummaryListItem from "./SummaryListItem.svelte";
 </script>
 
 <SummaryList label="Account">
-    <SummaryListItem term="Email">
-        jane@example.com <button>Edit</button>
-    </SummaryListItem>
+  <SummaryListItem term="Email">
+    jane@example.com <button>Edit</button>
+  </SummaryListItem>
 </SummaryList>
 ```
 
@@ -82,13 +82,19 @@ With extra attributes on the wrapper:
 
 ```svelte
 <script lang="ts">
-    import SummaryList from "../SummaryList/SummaryList.svelte";
-    import SummaryListItem from "./SummaryListItem.svelte";
+  import SummaryList from "../SummaryList/SummaryList.svelte";
+  import SummaryListItem from "./SummaryListItem.svelte";
 </script>
 
 <SummaryList label="Report">
-    <SummaryListItem term="Status" data-status="ok">OK</SummaryListItem>
-    <SummaryListItem term="Uptime" data-status="warn">98.2%</SummaryListItem>
+  <SummaryListItem
+    term="Status"
+    data-status="ok">OK</SummaryListItem
+  >
+  <SummaryListItem
+    term="Uptime"
+    data-status="warn">98.2%</SummaryListItem
+  >
 </SummaryList>
 ```
 
@@ -96,14 +102,14 @@ Mixed list with plain `<dt>`/`<dd>` siblings:
 
 ```svelte
 <script lang="ts">
-    import SummaryList from "../SummaryList/SummaryList.svelte";
-    import SummaryListItem from "./SummaryListItem.svelte";
+  import SummaryList from "../SummaryList/SummaryList.svelte";
+  import SummaryListItem from "./SummaryListItem.svelte";
 </script>
 
 <SummaryList label="Mixed">
-    <SummaryListItem term="Name">Jane</SummaryListItem>
-    <dt>Raw term</dt>
-    <dd>Raw value</dd>
+  <SummaryListItem term="Name">Jane</SummaryListItem>
+  <dt>Raw term</dt>
+  <dd>Raw value</dd>
 </SummaryList>
 ```
 
@@ -111,15 +117,18 @@ Dynamic rows:
 
 ```svelte
 <script lang="ts">
-    import SummaryList from "../SummaryList/SummaryList.svelte";
-    import SummaryListItem from "./SummaryListItem.svelte";
-    const rows = [{ k: "A", v: "1" }, { k: "B", v: "2" }];
+  import SummaryList from "../SummaryList/SummaryList.svelte";
+  import SummaryListItem from "./SummaryListItem.svelte";
+  const rows = [
+    { k: "A", v: "1" },
+    { k: "B", v: "2" },
+  ];
 </script>
 
 <SummaryList label="Data">
-    {#each rows as r}
-        <SummaryListItem term={r.k}>{r.v}</SummaryListItem>
-    {/each}
+  {#each rows as r}
+    <SummaryListItem term={r.k}>{r.v}</SummaryListItem>
+  {/each}
 </SummaryList>
 ```
 
@@ -130,6 +139,7 @@ Dynamic rows:
 - Must appear inside a `<dl>` for valid HTML.
 
 References:
+
 - HTML spec - `<div>` in `<dl>`: https://html.spec.whatwg.org/multipage/grouping-content.html#the-dl-element
 
 ## Related components

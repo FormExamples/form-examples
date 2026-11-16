@@ -37,6 +37,8 @@ Wrap navigation content in `NavigationMenu`, pass a descriptive `label`, and inc
 
 - `class` (string, optional) — consumer CSS class appended to the base `navigation-menu` class.
 - `label` (string, required) — accessible name applied via `aria-label`.
+- `overflow` (boolean, optional, default `false`) — overflow mode: renders `<ul class="navigation-menu-list">` (children must be `<li>` items) and a hidden "More" disclosure; a `ResizeObserver` moves the items that do not fit into it. Publishes `data-overflow="true"`. Without JavaScript the links wrap. Keep the item set static (use `{#key}` to change it). Canonical contract: `components/navigation-menu/index.md`.
+- `moreLabel` (string, required with `overflow`) — the More button's accessible name; no English default.
 - `children` (Snippet, required) — navigation content (links, lists, nested menus).
 - `...restProps` (unknown) — additional HTML attributes spread onto the `<nav>`.
 
@@ -46,13 +48,13 @@ Wrap navigation content in `NavigationMenu`, pass a descriptive `label`, and inc
 
 ```svelte
 <script lang="ts">
-    import NavigationMenu from "./NavigationMenu.svelte";
+  import NavigationMenu from "./NavigationMenu.svelte";
 </script>
 
 <NavigationMenu label="Main navigation">
-    <a href="/">Home</a>
-    <a href="/about">About</a>
-    <a href="/contact">Contact</a>
+  <a href="/">Home</a>
+  <a href="/about">About</a>
+  <a href="/contact">Contact</a>
 </NavigationMenu>
 ```
 
@@ -60,15 +62,15 @@ Wrap navigation content in `NavigationMenu`, pass a descriptive `label`, and inc
 
 ```svelte
 <script lang="ts">
-    import NavigationMenu from "./NavigationMenu.svelte";
+  import NavigationMenu from "./NavigationMenu.svelte";
 </script>
 
 <NavigationMenu label="Footer navigation">
-    <ul>
-        <li><a href="/privacy">Privacy Policy</a></li>
-        <li><a href="/terms">Terms of Service</a></li>
-        <li><a href="/contact">Contact</a></li>
-    </ul>
+  <ul>
+    <li><a href="/privacy">Privacy Policy</a></li>
+    <li><a href="/terms">Terms of Service</a></li>
+    <li><a href="/contact">Contact</a></li>
+  </ul>
 </NavigationMenu>
 ```
 
@@ -76,20 +78,29 @@ Wrap navigation content in `NavigationMenu`, pass a descriptive `label`, and inc
 
 ```svelte
 <script lang="ts">
-    import NavigationMenu from "./NavigationMenu.svelte";
-    let current = $state("/dashboard");
+  import NavigationMenu from "./NavigationMenu.svelte";
+  let current = $state("/dashboard");
 </script>
 
 <NavigationMenu label="Sidebar">
-    <a href="/dashboard" aria-current={current === "/dashboard" ? "page" : undefined}>
-        Dashboard
-    </a>
-    <a href="/reports" aria-current={current === "/reports" ? "page" : undefined}>
-        Reports
-    </a>
-    <a href="/settings" aria-current={current === "/settings" ? "page" : undefined}>
-        Settings
-    </a>
+  <a
+    href="/dashboard"
+    aria-current={current === "/dashboard" ? "page" : undefined}
+  >
+    Dashboard
+  </a>
+  <a
+    href="/reports"
+    aria-current={current === "/reports" ? "page" : undefined}
+  >
+    Reports
+  </a>
+  <a
+    href="/settings"
+    aria-current={current === "/settings" ? "page" : undefined}
+  >
+    Settings
+  </a>
 </NavigationMenu>
 ```
 
@@ -97,20 +108,20 @@ Wrap navigation content in `NavigationMenu`, pass a descriptive `label`, and inc
 
 ```svelte
 <script lang="ts">
-    import NavigationMenu from "./NavigationMenu.svelte";
-    let links = [
-        { href: "/", label: "Home" },
-        { href: "/news", label: "News" },
-        { href: "/about", label: "About" },
-    ];
+  import NavigationMenu from "./NavigationMenu.svelte";
+  let links = [
+    { href: "/", label: "Home" },
+    { href: "/news", label: "News" },
+    { href: "/about", label: "About" },
+  ];
 </script>
 
 <NavigationMenu label="Main navigation">
-    <ul>
-        {#each links as link}
-            <li><a href={link.href}>{link.label}</a></li>
-        {/each}
-    </ul>
+  <ul>
+    {#each links as link}
+      <li><a href={link.href}>{link.label}</a></li>
+    {/each}
+  </ul>
 </NavigationMenu>
 ```
 
@@ -118,21 +129,24 @@ Wrap navigation content in `NavigationMenu`, pass a descriptive `label`, and inc
 
 ```svelte
 <script lang="ts">
-    import NavigationMenu from "./NavigationMenu.svelte";
+  import NavigationMenu from "./NavigationMenu.svelte";
 </script>
 
-<NavigationMenu class="site-nav" label="Main">
-    <a href="/">Home</a>
-    <a href="/blog">Blog</a>
+<NavigationMenu
+  class="site-nav"
+  label="Main"
+>
+  <a href="/">Home</a>
+  <a href="/blog">Blog</a>
 </NavigationMenu>
 
 <style>
-    :global(.site-nav) {
-        display: flex;
-        gap: 1rem;
-        padding: 1rem;
-        border-bottom: 1px solid #e5e7eb;
-    }
+  :global(.site-nav) {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
 </style>
 ```
 

@@ -5,13 +5,10 @@
   HTML tag: <span>
   CSS class: slovensko-pas-view
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
   Format: 9 characters in the format XXNNNNNNN: 2 block letters and 7 digits; valid for 10 years
   Usage:
-    <span class="slovensko-pas-view" aria-label="Slovak Passport">value-here</span>
+    <span class="slovensko-pas-view">value-here</span>
 -->
 
-<span
-  class="slovensko-pas-view"
-  aria-label="Slovak Passport"
-></span>
+<span class="slovensko-pas-view"><span class="screen-reader-span">Slovak Passport </span></span>

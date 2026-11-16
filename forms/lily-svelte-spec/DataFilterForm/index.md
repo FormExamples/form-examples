@@ -31,74 +31,111 @@ Provide `label`. Hook `onsubmit` to your filtering function. Include submit and 
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `class` | `string` | `""` | CSS class name appended to the base class. |
-| `label` | `string` | required | `aria-label` for the filter region. |
-| `onsubmit` | `(event: SubmitEvent) => void` | `undefined` | Called after `preventDefault()`. |
-| `onreset` | `(event: Event) => void` | `undefined` | Passed straight to the form. |
-| `children` | `Snippet` | required | Filter controls. |
-| `...restProps` | `unknown` | — | Additional attributes spread onto the `<form>`. |
+| Prop           | Type                           | Default     | Description                                     |
+| -------------- | ------------------------------ | ----------- | ----------------------------------------------- |
+| `class`        | `string`                       | `""`        | CSS class name appended to the base class.      |
+| `label`        | `string`                       | required    | `aria-label` for the filter region.             |
+| `onsubmit`     | `(event: SubmitEvent) => void` | `undefined` | Called after `preventDefault()`.                |
+| `onreset`      | `(event: Event) => void`       | `undefined` | Passed straight to the form.                    |
+| `children`     | `Snippet`                      | required    | Filter controls.                                |
+| `...restProps` | `unknown`                      | —           | Additional attributes spread onto the `<form>`. |
 
 ## Usage
 
 ```svelte
 <script lang="ts">
-    import DataFilterForm from "./DataFilterForm.svelte";
+  import DataFilterForm from "./DataFilterForm.svelte";
 
-    let category = $state("all");
+  let category = $state("all");
 
-    function applyFilters() {
-        console.log("Filter by:", category);
-    }
+  function applyFilters() {
+    console.log("Filter by:", category);
+  }
 </script>
 
-<DataFilterForm label="Filter results" onsubmit={applyFilters}>
-    <label>
-        Category
-        <select bind:value={category}>
-            <option value="all">All</option>
-            <option value="articles">Articles</option>
-            <option value="videos">Videos</option>
-        </select>
-    </label>
-    <button type="submit">Apply</button>
+<DataFilterForm
+  label="Filter results"
+  onsubmit={applyFilters}
+>
+  <label>
+    Category
+    <select bind:value={category}>
+      <option value="all">All</option>
+      <option value="articles">Articles</option>
+      <option value="videos">Videos</option>
+    </select>
+  </label>
+  <button type="submit">Apply</button>
 </DataFilterForm>
 ```
 
 ```svelte
 <script lang="ts">
-    import DataFilterForm from "./DataFilterForm.svelte";
+  import DataFilterForm from "./DataFilterForm.svelte";
 
-    let q = $state("");
-    let tag = $state("");
+  let q = $state("");
+  let tag = $state("");
 
-    function applyFilters() { /* update state or fetch */ }
-    function clearFilters() { q = ""; tag = ""; }
+  function applyFilters() {
+    /* update state or fetch */
+  }
+  function clearFilters() {
+    q = "";
+    tag = "";
+  }
 </script>
 
-<DataFilterForm label="Search posts" onsubmit={applyFilters} onreset={clearFilters}>
-    <label>Query <input type="search" bind:value={q} /></label>
-    <label>Tag <input type="text" bind:value={tag} /></label>
-    <button type="submit">Apply</button>
-    <button type="reset">Clear</button>
+<DataFilterForm
+  label="Search posts"
+  onsubmit={applyFilters}
+  onreset={clearFilters}
+>
+  <label
+    >Query <input
+      type="search"
+      bind:value={q}
+    /></label
+  >
+  <label
+    >Tag <input
+      type="text"
+      bind:value={tag}
+    /></label
+  >
+  <button type="submit">Apply</button>
+  <button type="reset">Clear</button>
 </DataFilterForm>
 ```
 
 ```svelte
 <script lang="ts">
-    import DataFilterForm from "./DataFilterForm.svelte";
+  import DataFilterForm from "./DataFilterForm.svelte";
 
-    let priceMin = $state("");
-    let priceMax = $state("");
+  let priceMin = $state("");
+  let priceMax = $state("");
 
-    function apply() { /* ... */ }
+  function apply() {
+    /* ... */
+  }
 </script>
 
-<DataFilterForm label="Price range" onsubmit={apply}>
-    <label>Min <input type="number" bind:value={priceMin} /></label>
-    <label>Max <input type="number" bind:value={priceMax} /></label>
-    <button type="submit">Filter</button>
+<DataFilterForm
+  label="Price range"
+  onsubmit={apply}
+>
+  <label
+    >Min <input
+      type="number"
+      bind:value={priceMin}
+    /></label
+  >
+  <label
+    >Max <input
+      type="number"
+      bind:value={priceMax}
+    /></label
+  >
+  <button type="submit">Filter</button>
 </DataFilterForm>
 ```
 

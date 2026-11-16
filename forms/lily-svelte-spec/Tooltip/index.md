@@ -57,7 +57,11 @@ Import, bind `visible`, set an `id` and `aria-describedby` on the trigger that m
 >
   Save
 </button>
-<Tooltip id="tip" label="Save your changes" bind:visible={show} />
+<Tooltip
+  id="tip"
+  label="Save your changes"
+  bind:visible={show}
+/>
 ```
 
 ```svelte
@@ -81,7 +85,11 @@ Import, bind `visible`, set an `id` and `aria-describedby` on the trigger that m
 >
   Delete
 </button>
-<Tooltip id="del-tip" label="Permanently deletes this item" bind:visible={show} />
+<Tooltip
+  id="del-tip"
+  label="Permanently deletes this item"
+  bind:visible={show}
+/>
 ```
 
 ```svelte
@@ -99,7 +107,11 @@ Import, bind `visible`, set an `id` and `aria-describedby` on the trigger that m
 >
   ⓘ
 </span>
-<Tooltip id="info" label="More information" bind:visible={show} />
+<Tooltip
+  id="info"
+  label="More information"
+  bind:visible={show}
+/>
 ```
 
 ```svelte

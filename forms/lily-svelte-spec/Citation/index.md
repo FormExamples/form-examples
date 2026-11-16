@@ -10,7 +10,7 @@ See [components/citation/index.md](../../../components/citation/index.md) for th
 
 ```svelte
 <script lang="ts">
-    import Citation from "./Citation.svelte";
+  import Citation from "./Citation.svelte";
 </script>
 
 <Citation />

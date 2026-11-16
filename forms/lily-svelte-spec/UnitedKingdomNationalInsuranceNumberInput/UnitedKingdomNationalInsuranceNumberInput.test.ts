@@ -15,7 +15,9 @@ describe("UnitedKingdomNationalInsuranceNumberInput", () => {
         render(Subject, { props: { label: "National Insurance Number" } });
 
         const input = screen.getByLabelText("National Insurance Number");
-        expect(input.getAttribute("class")).toContain("united-kingdom-national-insurance-number-input");
+        expect(input.getAttribute("class")).toContain(
+            "united-kingdom-national-insurance-number-input",
+        );
     });
 
     test("has autocomplete off", () => {
@@ -54,7 +56,9 @@ describe("UnitedKingdomNationalInsuranceNumberInput", () => {
     });
 
     test("passes through additional HTML attributes", () => {
-        render(Subject, { props: { label: "National Insurance Number", "data-testid": "subject" } });
+        render(Subject, {
+            props: { label: "National Insurance Number", "data-testid": "subject" },
+        });
 
         const input = screen.getByTestId("subject");
         expect(input).toBeTruthy();

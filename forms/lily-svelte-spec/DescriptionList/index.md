@@ -10,7 +10,7 @@ See [components/description-list/index.md](../../../components/description-list/
 
 ```svelte
 <script lang="ts">
-    import DescriptionList from "./DescriptionList.svelte";
+  import DescriptionList from "./DescriptionList.svelte";
 </script>
 
 <DescriptionList />

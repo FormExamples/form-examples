@@ -26,7 +26,11 @@ describe("HorizontalScroller", () => {
     });
 
     test("ArrowRight calls scrollBy with positive step", () => {
-        const { container } = render(Subject, { label: "x", step: 150, children: snippet("items") });
+        const { container } = render(Subject, {
+            label: "x",
+            step: 150,
+            children: snippet("items"),
+        });
         const region = container.querySelector(".horizontal-scroller") as HTMLDivElement;
         const scrollBy = vi.fn();
         Object.defineProperty(region, "scrollBy", { value: scrollBy, configurable: true });
@@ -35,7 +39,11 @@ describe("HorizontalScroller", () => {
     });
 
     test("ArrowLeft calls scrollBy with negative step", () => {
-        const { container } = render(Subject, { label: "x", step: 150, children: snippet("items") });
+        const { container } = render(Subject, {
+            label: "x",
+            step: 150,
+            children: snippet("items"),
+        });
         const region = container.querySelector(".horizontal-scroller") as HTMLDivElement;
         const scrollBy = vi.fn();
         Object.defineProperty(region, "scrollBy", { value: scrollBy, configurable: true });
@@ -60,5 +68,16 @@ describe("HorizontalScroller", () => {
         Object.defineProperty(region, "scrollWidth", { value: 1234, configurable: true });
         region.dispatchEvent(new KeyboardEvent("keydown", { key: "End", bubbles: true }));
         expect(scrollTo).toHaveBeenCalledWith({ left: 1234, behavior: "smooth" });
+    });
+
+    test("End goes the other way in right-to-left", () => {
+        const { container } = render(Subject, { label: "x", children: snippet("items") });
+        const region = container.querySelector(".horizontal-scroller") as HTMLDivElement;
+        region.style.direction = "rtl";
+        const scrollTo = vi.fn();
+        Object.defineProperty(region, "scrollTo", { value: scrollTo, configurable: true });
+        Object.defineProperty(region, "scrollWidth", { value: 1234, configurable: true });
+        region.dispatchEvent(new KeyboardEvent("keydown", { key: "End", bubbles: true }));
+        expect(scrollTo).toHaveBeenCalledWith({ left: -1234, behavior: "smooth" });
     });
 });

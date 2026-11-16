@@ -10,7 +10,7 @@ See [components/mockup-watch/index.md](../../../components/mockup-watch/index.md
 
 ```svelte
 <script lang="ts">
-    import MockupWatch from "./MockupWatch.svelte";
+  import MockupWatch from "./MockupWatch.svelte";
 </script>
 
 <MockupWatch />

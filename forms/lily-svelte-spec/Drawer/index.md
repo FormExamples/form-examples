@@ -1,6 +1,6 @@
 # Drawer
 
-A panel that slides in from an edge of the viewport. Rendered conditionally as `<div role="dialog" aria-modal="true">` with a `data-side` attribute for consumer positioning.
+A panel that slides in from an edge of the viewport. Rendered conditionally as a modal `<dialog aria-modal="true">` opened with `showModal()`, with a `data-side` attribute for consumer positioning.
 
 ## What it is
 
@@ -8,7 +8,7 @@ A panel that slides in from an edge of the viewport. Rendered conditionally as `
 
 ## What it does
 
-- Conditionally renders a `<div role="dialog" aria-modal="true">` when `open` is `true`.
+- Conditionally renders a native `<dialog>` opened with `showModal()` (see `../Dialog/modal.ts`) when `open` is `true`: top layer, inert page, Tab trapped inside, focus returned to the opener on close. Where `showModal` is missing (jsdom) it falls back to the `open` attribute and focuses the dialog.
 - Applies `aria-label` for the accessible name.
 - Exposes `data-side="left|right|top|bottom"` for CSS hooks.
 - Closes on Escape by setting `open = false`.
@@ -32,58 +32,81 @@ Bind `open` to a state variable and choose a `side`.
 
 ```svelte
 <script lang="ts">
-    import Drawer from "./Drawer.svelte";
-    let open = $state(false);
+  import Drawer from "./Drawer.svelte";
+  let open = $state(false);
 </script>
 
-<button type="button" onclick={() => open = true}>Open menu</button>
-<Drawer label="Navigation" bind:open side="left">
-    <nav>…</nav>
+<button
+  type="button"
+  onclick={() => (open = true)}>Open menu</button
+>
+<Drawer
+  label="Navigation"
+  bind:open
+  side="left"
+>
+  <nav>…</nav>
 </Drawer>
 ```
 
 ## Props
 
-| Prop       | Type                                       | Default | Description                                |
-| ---------- | ------------------------------------------ | ------- | ------------------------------------------ |
-| `class`    | `string`                                   | `""`    | CSS class appended to the base class.     |
-| `open`     | `boolean`                                  | `false` | Whether the drawer is visible. Bindable.   |
-| `label`    | `string`                                   | required| Accessible name via `aria-label`.          |
-| `side`     | `"left" \| "right" \| "top" \| "bottom"`   | `"left"`| Edge the drawer enters from.               |
-| `children` | `Snippet`                                  | required| Drawer content.                            |
-| `...rest`  | `unknown`                                  | —       | Additional HTML attributes on the `<div>`. |
+| Prop       | Type                                     | Default  | Description                                   |
+| ---------- | ---------------------------------------- | -------- | --------------------------------------------- |
+| `class`    | `string`                                 | `""`     | CSS class appended to the base class.         |
+| `open`     | `boolean`                                | `false`  | Whether the drawer is visible. Bindable.      |
+| `label`    | `string`                                 | required | Accessible name via `aria-label`.             |
+| `side`     | `"left" \| "right" \| "top" \| "bottom"` | `"left"` | Edge the drawer enters from.                  |
+| `children` | `Snippet`                                | required | Drawer content.                               |
+| `...rest`  | `unknown`                                | —        | Additional HTML attributes on the `<dialog>`. |
 
 ## Usage
 
 ### 1. Left-side navigation drawer
 
 ```svelte
-<Drawer label="Navigation" bind:open side="left">
-    <nav aria-label="Main">…</nav>
+<Drawer
+  label="Navigation"
+  bind:open
+  side="left"
+>
+  <nav aria-label="Main">…</nav>
 </Drawer>
 ```
 
 ### 2. Right-side filter drawer
 
 ```svelte
-<Drawer label="Filters" bind:open={showFilters} side="right">
-    <form>…</form>
+<Drawer
+  label="Filters"
+  bind:open={showFilters}
+  side="right"
+>
+  <form>…</form>
 </Drawer>
 ```
 
 ### 3. Top banner-style drawer
 
 ```svelte
-<Drawer label="Announcements" bind:open side="top">
-    <p>Release 2.0 is now available.</p>
+<Drawer
+  label="Announcements"
+  bind:open
+  side="top"
+>
+  <p>Release 2.0 is now available.</p>
 </Drawer>
 ```
 
 ### 4. Bottom-sheet drawer
 
 ```svelte
-<Drawer label="Details" bind:open side="bottom">
-    <article>…</article>
+<Drawer
+  label="Details"
+  bind:open
+  side="bottom"
+>
+  <article>…</article>
 </Drawer>
 ```
 
@@ -91,21 +114,28 @@ Bind `open` to a state variable and choose a `side`.
 
 ```svelte
 <script lang="ts">
-    import Drawer from "./Drawer.svelte";
-    let open = $state(true);
+  import Drawer from "./Drawer.svelte";
+  let open = $state(true);
 </script>
 
-<Drawer label="Cart" bind:open side="right">
-    <ul>…</ul>
-    <button type="button" onclick={() => open = false}>Close</button>
+<Drawer
+  label="Cart"
+  bind:open
+  side="right"
+>
+  <ul>…</ul>
+  <button
+    type="button"
+    onclick={() => (open = false)}>Close</button
+  >
 </Drawer>
 ```
 
 ## Accessibility
 
-- `role="dialog"` with `aria-modal="true"` and `aria-label`.
+- Implicit `role="dialog"` from `<dialog>`, `aria-modal="true"` (true: `showModal()` makes the page inert) and `aria-label`.
 - Escape closes the drawer.
-- `tabindex="-1"` supports programmatic focus management. Consumers should move focus into the drawer on open and return it to the trigger on close.
+- Focus moves into the drawer on open and returns to the trigger on close; `tabindex="-1"` lets the dialog itself take focus when it has no focusable child. Escape and the native `cancel` event close it.
 
 ## Related components
 

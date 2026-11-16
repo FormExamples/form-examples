@@ -32,17 +32,23 @@ describe("TabBarButton", () => {
     });
 
     test("reflects selected state when true", () => {
-        render(Subject, { props: { selected: true, controls: "panel-1", children: textSnippet("Tab") } });
+        render(Subject, {
+            props: { selected: true, controls: "panel-1", children: textSnippet("Tab") },
+        });
         expect(screen.getByRole("tab").getAttribute("aria-selected")).toBe("true");
     });
 
     test("has aria-controls pointing to panel id", () => {
-        render(Subject, { props: { controls: "settings-panel", children: textSnippet("Settings") } });
+        render(Subject, {
+            props: { controls: "settings-panel", children: textSnippet("Settings") },
+        });
         expect(screen.getByRole("tab").getAttribute("aria-controls")).toBe("settings-panel");
     });
 
     test("has tabindex 0 when selected", () => {
-        render(Subject, { props: { selected: true, controls: "panel-1", children: textSnippet("Tab") } });
+        render(Subject, {
+            props: { selected: true, controls: "panel-1", children: textSnippet("Tab") },
+        });
         expect(screen.getByRole("tab").getAttribute("tabindex")).toBe("0");
     });
 
@@ -52,7 +58,9 @@ describe("TabBarButton", () => {
     });
 
     test("passes through attributes", () => {
-        render(Subject, { props: { controls: "panel-1", "data-testid": "my-tab", children: textSnippet("Tab") } });
+        render(Subject, {
+            props: { controls: "panel-1", "data-testid": "my-tab", children: textSnippet("Tab") },
+        });
         expect(screen.getByTestId("my-tab")).toBeTruthy();
     });
 });

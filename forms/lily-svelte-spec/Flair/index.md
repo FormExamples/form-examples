@@ -41,7 +41,7 @@ Wrap inline text or markup in `<Flair>...</Flair>`. Provide a `label` only when 
 
 ```svelte
 <script lang="ts">
-    import Flair from "./Flair.svelte";
+  import Flair from "./Flair.svelte";
 </script>
 
 <Flair>New</Flair>
@@ -49,7 +49,7 @@ Wrap inline text or markup in `<Flair>...</Flair>`. Provide a `label` only when 
 
 ```svelte
 <script lang="ts">
-    import Flair from "./Flair.svelte";
+  import Flair from "./Flair.svelte";
 </script>
 
 <p>Posted by Alex <Flair label="Role: moderator">MOD</Flair></p>
@@ -57,18 +57,18 @@ Wrap inline text or markup in `<Flair>...</Flair>`. Provide a `label` only when 
 
 ```svelte
 <script lang="ts">
-    import Flair from "./Flair.svelte";
-    const items = ["New", "Sale", "Limited"];
+  import Flair from "./Flair.svelte";
+  const items = ["New", "Sale", "Limited"];
 </script>
 
 {#each items as item}
-    <Flair label={`Tag: ${item}`}>{item}</Flair>
+  <Flair label={`Tag: ${item}`}>{item}</Flair>
 {/each}
 ```
 
 ```svelte
 <script lang="ts">
-    import Flair from "./Flair.svelte";
+  import Flair from "./Flair.svelte";
 </script>
 
 <h2>Release notes <Flair class="beta-flag">beta</Flair></h2>
@@ -76,11 +76,14 @@ Wrap inline text or markup in `<Flair>...</Flair>`. Provide a `label` only when 
 
 ```svelte
 <script lang="ts">
-    import Flair from "./Flair.svelte";
+  import Flair from "./Flair.svelte";
 </script>
 
-<Flair label="Status: urgent" data-testid="urgent-flair">
-    <strong>!</strong> Urgent
+<Flair
+  label="Status: urgent"
+  data-testid="urgent-flair"
+>
+  <strong>!</strong> Urgent
 </Flair>
 ```
 

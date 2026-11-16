@@ -1,16 +1,19 @@
-<script module lang="ts">
-  import { defineMeta } from '@storybook/addon-svelte-csf';
-  import PostalCodeView from './PostalCodeView.svelte';
+<script
+    module
+    lang="ts"
+>
+    import { defineMeta } from "@storybook/addon-svelte-csf";
+    import PostalCodeView from "./PostalCodeView.svelte";
 
-  const { Story } = defineMeta({
-    title: 'Headless/PostalCodeView',
-    component: PostalCodeView,
-  });
+    const { Story } = defineMeta({
+        title: "Headless/PostalCodeView",
+        component: PostalCodeView,
+    });
 </script>
 
 <Story
-  name="Default"
-  tags={['autodocs', '!dev']}
+    name="Default"
+    tags={["autodocs", "!dev"]}
 >
-  <span>View content</span>
+    <span>View content</span>
 </Story>

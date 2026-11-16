@@ -1,0 +1,16 @@
+<!-- aotearoa-national-health-index-view.html -->
+<!-- AotearoaNationalHealthIndexView component -->
+<!--
+  Description: a read-only display of New Zealand's National Health Index (NHI) Number
+  HTML tag: <span>
+  CSS class: aotearoa-national-health-index-view
+  Keyboard: None (passive element)
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
+  Format: Seven-character identifier (three letters, four digits). The legacy AAANNNC format uses a Modulus-11 check digit over the six preceding characters; an expanded AAANNAX format (issued from July 2026) uses a Modulus-23 check digit instead, to extend the identifier space.
+  Usage:
+    <span class="aotearoa-national-health-index-view">value-here</span>
+-->
+
+<span class="aotearoa-national-health-index-view"
+  ><span class="screen-reader-span">National Health Index (NHI) Number </span></span
+>

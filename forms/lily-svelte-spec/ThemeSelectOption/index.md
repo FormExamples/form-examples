@@ -48,7 +48,10 @@ Import and place inside `ThemeSelect`. Provide a unique `value` and label conten
   let theme = $state("");
 </script>
 
-<ThemeSelect label="Theme" bind:value={theme}>
+<ThemeSelect
+  label="Theme"
+  bind:value={theme}
+>
   <ThemeSelectOption value="light">Light</ThemeSelectOption>
   <ThemeSelectOption value="dark">Dark</ThemeSelectOption>
 </ThemeSelect>
@@ -62,10 +65,19 @@ Import and place inside `ThemeSelect`. Provide a unique `value` and label conten
   let theme = $state("");
 </script>
 
-<ThemeSelect label="Theme" bind:value={theme}>
-  <ThemeSelectOption value="" disabled>Select a theme…</ThemeSelectOption>
+<ThemeSelect
+  label="Theme"
+  bind:value={theme}
+>
+  <ThemeSelectOption
+    value=""
+    disabled>Select a theme…</ThemeSelectOption
+  >
   <ThemeSelectOption value="light">Light</ThemeSelectOption>
-  <ThemeSelectOption value="dark" selected>Dark</ThemeSelectOption>
+  <ThemeSelectOption
+    value="dark"
+    selected>Dark</ThemeSelectOption
+  >
 </ThemeSelect>
 ```
 
@@ -83,7 +95,10 @@ Import and place inside `ThemeSelect`. Provide a unique `value` and label conten
   let theme = $state("system");
 </script>
 
-<ThemeSelect label="Color scheme" bind:value={theme}>
+<ThemeSelect
+  label="Color scheme"
+  bind:value={theme}
+>
   {#each themes as t}
     <ThemeSelectOption value={t.value}>{t.label}</ThemeSelectOption>
   {/each}
@@ -99,10 +114,16 @@ Import and place inside `ThemeSelect`. Provide a unique `value` and label conten
   let premium = $state(false);
 </script>
 
-<ThemeSelect label="Theme" bind:value={theme}>
+<ThemeSelect
+  label="Theme"
+  bind:value={theme}
+>
   <ThemeSelectOption value="light">Light</ThemeSelectOption>
   <ThemeSelectOption value="dark">Dark</ThemeSelectOption>
-  <ThemeSelectOption value="midnight" disabled={!premium}>
+  <ThemeSelectOption
+    value="midnight"
+    disabled={!premium}
+  >
     Midnight (premium)
   </ThemeSelectOption>
 </ThemeSelect>

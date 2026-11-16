@@ -10,7 +10,7 @@ See [components/mockup-phone-portrait/index.md](../../../components/mockup-phone
 
 ```svelte
 <script lang="ts">
-    import MockupPhonePortrait from "./MockupPhonePortrait.svelte";
+  import MockupPhonePortrait from "./MockupPhonePortrait.svelte";
 </script>
 
 <MockupPhonePortrait />

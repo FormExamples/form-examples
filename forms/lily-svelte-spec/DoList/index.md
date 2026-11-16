@@ -30,25 +30,25 @@ Wrap one or more `DoListItem` children inside `DoList`.
 
 ```svelte
 <script lang="ts">
-    import DoList from "./DoList.svelte";
-    import DoListItem from "../DoListItem/DoListItem.svelte";
+  import DoList from "./DoList.svelte";
+  import DoListItem from "../DoListItem/DoListItem.svelte";
 </script>
 
 <DoList>
-    <DoListItem>Use descriptive alt text for images</DoListItem>
-    <DoListItem>Provide visible focus indicators</DoListItem>
-    <DoListItem>Use sufficient color contrast</DoListItem>
+  <DoListItem>Use descriptive alt text for images</DoListItem>
+  <DoListItem>Provide visible focus indicators</DoListItem>
+  <DoListItem>Use sufficient color contrast</DoListItem>
 </DoList>
 ```
 
 ## Props
 
-| Prop       | Type       | Default | Description                                |
-| ---------- | ---------- | ------- | ------------------------------------------ |
-| `class`    | `string`   | `""`    | CSS class appended to the base class.     |
-| `label`    | `string`   | `"Do"`  | Accessible name via `aria-label`.          |
-| `children` | `Snippet`  | required| List items (typically `DoListItem`).       |
-| `...rest`  | `unknown`  | —       | Additional HTML attributes on the `<ol>`. |
+| Prop       | Type      | Default  | Description                               |
+| ---------- | --------- | -------- | ----------------------------------------- |
+| `class`    | `string`  | `""`     | CSS class appended to the base class.     |
+| `label`    | `string`  | `"Do"`   | Accessible name via `aria-label`.         |
+| `children` | `Snippet` | required | List items (typically `DoListItem`).      |
+| `...rest`  | `unknown` | —        | Additional HTML attributes on the `<ol>`. |
 
 ## Usage
 
@@ -56,8 +56,8 @@ Wrap one or more `DoListItem` children inside `DoList`.
 
 ```svelte
 <DoList>
-    <DoListItem>Write clear labels</DoListItem>
-    <DoListItem>Use semantic HTML</DoListItem>
+  <DoListItem>Write clear labels</DoListItem>
+  <DoListItem>Use semantic HTML</DoListItem>
 </DoList>
 ```
 
@@ -65,8 +65,8 @@ Wrap one or more `DoListItem` children inside `DoList`.
 
 ```svelte
 <DoList label="Recommended">
-    <DoListItem>Provide alt text for images</DoListItem>
-    <DoListItem>Use sufficient color contrast</DoListItem>
+  <DoListItem>Provide alt text for images</DoListItem>
+  <DoListItem>Use sufficient color contrast</DoListItem>
 </DoList>
 ```
 
@@ -74,17 +74,17 @@ Wrap one or more `DoListItem` children inside `DoList`.
 
 ```svelte
 <script lang="ts">
-    import DoList from "./DoList.svelte";
-    import DoListItem from "../DoListItem/DoListItem.svelte";
-    import DontList from "../DontList/DontList.svelte";
-    import DontListItem from "../DontListItem/DontListItem.svelte";
+  import DoList from "./DoList.svelte";
+  import DoListItem from "../DoListItem/DoListItem.svelte";
+  import DontList from "../DontList/DontList.svelte";
+  import DontListItem from "../DontListItem/DontListItem.svelte";
 </script>
 
 <DoList>
-    <DoListItem>Write clear error messages</DoListItem>
+  <DoListItem>Write clear error messages</DoListItem>
 </DoList>
 <DontList>
-    <DontListItem>Use technical jargon in errors</DontListItem>
+  <DontListItem>Use technical jargon in errors</DontListItem>
 </DontList>
 ```
 
@@ -92,10 +92,10 @@ Wrap one or more `DoListItem` children inside `DoList`.
 
 ```svelte
 <DoList label="Accessibility checklist">
-    <DoListItem>Use semantic elements</DoListItem>
-    <DoListItem>Provide keyboard operability</DoListItem>
-    <DoListItem>Announce dynamic updates</DoListItem>
-    <DoListItem>Label every form control</DoListItem>
+  <DoListItem>Use semantic elements</DoListItem>
+  <DoListItem>Provide keyboard operability</DoListItem>
+  <DoListItem>Announce dynamic updates</DoListItem>
+  <DoListItem>Label every form control</DoListItem>
 </DoList>
 ```
 
@@ -103,8 +103,8 @@ Wrap one or more `DoListItem` children inside `DoList`.
 
 ```svelte
 <DoList class="guideline-list">
-    <DoListItem>Keep paragraphs short</DoListItem>
-    <DoListItem>Prefer active voice</DoListItem>
+  <DoListItem>Keep paragraphs short</DoListItem>
+  <DoListItem>Prefer active voice</DoListItem>
 </DoList>
 ```
 

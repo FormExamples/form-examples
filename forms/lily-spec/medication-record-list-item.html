@@ -1,0 +1,29 @@
+<!-- medication-record-list-item.html -->
+<!-- MedicationRecordListItem component -->
+<!--
+  Description: one medicine in a medication record list, with its status and when it applies
+  HTML tag: <li>
+  CSS class: medication-record-list-item (parts: -status, -effective)
+  Spec: spec/healthcare-ui (tasks.md P28-T3)
+  Attributes: data-status (active, completed, entered-in-error, intended, stopped, on-hold, unknown, not-taken). Each status is also text, in the consumer's words; a part with no text is left out.
+    Dates are <time datetime>.
+-->
+
+<ul
+  class="medication-record-list"
+  data-status="known"
+  aria-label="Current medicines"
+>
+  <li
+    class="medication-record-list-item"
+    data-status="active"
+  >
+    ramipril 5 mg capsule, oral, once a day
+    <span class="medication-record-list-item-status">Active</span>
+    <time
+      class="medication-record-list-item-effective"
+      datetime="2025-03-03"
+      >Since 3 Mar 2025</time
+    >
+  </li>
+</ul>

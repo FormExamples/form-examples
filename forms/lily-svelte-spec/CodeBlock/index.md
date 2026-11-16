@@ -10,7 +10,7 @@ See [components/code-block/index.md](../../../components/code-block/index.md) fo
 
 ```svelte
 <script lang="ts">
-    import CodeBlock from "./CodeBlock.svelte";
+  import CodeBlock from "./CodeBlock.svelte";
 </script>
 
 <CodeBlock />

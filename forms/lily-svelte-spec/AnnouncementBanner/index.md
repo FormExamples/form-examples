@@ -10,7 +10,7 @@ See [components/announcement-banner/index.md](../../../components/announcement-b
 
 ```svelte
 <script lang="ts">
-    import AnnouncementBanner from "./AnnouncementBanner.svelte";
+  import AnnouncementBanner from "./AnnouncementBanner.svelte";
 </script>
 
 <AnnouncementBanner />

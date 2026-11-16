@@ -5,7 +5,7 @@
   HTML tag: <div>
   CSS class: notification
   Keyboard: None (passive element)
-  Accessibility: role="alert", aria-label for accessible name
+  Accessibility: role="status" with aria-live="polite" by default; role="alert" with assertive only when urgent
   Usage:
     <div class="notification" role="alert" aria-label="Example">
       ...
@@ -14,7 +14,8 @@
 
 <div
   class="notification"
-  role="alert"
+  aria-live="polite"
+  role="status"
   aria-label=""
 >
   <!-- Consumer provides content -->

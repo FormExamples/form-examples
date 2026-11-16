@@ -45,54 +45,71 @@ Import the component, pass a `label`, and bind the `value`. Optionally combine w
 
 ```svelte
 <script lang="ts">
-    import MeasurementUnitInput from "./MeasurementUnitInput.svelte";
-    let unit = $state("");
+  import MeasurementUnitInput from "./MeasurementUnitInput.svelte";
+  let unit = $state("");
 </script>
 
-<MeasurementUnitInput label="Unit" bind:value={unit} />
+<MeasurementUnitInput
+  label="Unit"
+  bind:value={unit}
+/>
 ```
 
 ### Required unit input
 
 ```svelte
 <script lang="ts">
-    import MeasurementUnitInput from "./MeasurementUnitInput.svelte";
-    let unit = $state("");
+  import MeasurementUnitInput from "./MeasurementUnitInput.svelte";
+  let unit = $state("");
 </script>
 
-<MeasurementUnitInput label="Unit of measure" bind:value={unit} required />
+<MeasurementUnitInput
+  label="Unit of measure"
+  bind:value={unit}
+  required
+/>
 ```
 
 ### Paired with a numeric value
 
 ```svelte
 <script lang="ts">
-    import MeasurementUnitInput from "./MeasurementUnitInput.svelte";
-    let amount = $state("");
-    let unit = $state("");
+  import MeasurementUnitInput from "./MeasurementUnitInput.svelte";
+  let amount = $state("");
+  let unit = $state("");
 </script>
 
 <label>
-    Amount
-    <input type="number" bind:value={amount} />
+  Amount
+  <input
+    type="number"
+    bind:value={amount}
+  />
 </label>
-<MeasurementUnitInput label="Unit" bind:value={unit} />
+<MeasurementUnitInput
+  label="Unit"
+  bind:value={unit}
+/>
 ```
 
 ### With datalist suggestions
 
 ```svelte
 <script lang="ts">
-    import MeasurementUnitInput from "./MeasurementUnitInput.svelte";
-    let unit = $state("");
+  import MeasurementUnitInput from "./MeasurementUnitInput.svelte";
+  let unit = $state("");
 </script>
 
-<MeasurementUnitInput label="Unit" bind:value={unit} list="units" />
+<MeasurementUnitInput
+  label="Unit"
+  bind:value={unit}
+  list="units"
+/>
 <datalist id="units">
-    <option value="kg" />
-    <option value="lb" />
-    <option value="cm" />
-    <option value="in" />
+  <option value="kg" />
+  <option value="lb" />
+  <option value="cm" />
+  <option value="in" />
 </datalist>
 ```
 
@@ -100,11 +117,15 @@ Import the component, pass a `label`, and bind the `value`. Optionally combine w
 
 ```svelte
 <script lang="ts">
-    import MeasurementUnitInput from "./MeasurementUnitInput.svelte";
-    let unit = $state("kg");
+  import MeasurementUnitInput from "./MeasurementUnitInput.svelte";
+  let unit = $state("kg");
 </script>
 
-<MeasurementUnitInput label="Unit" bind:value={unit} disabled />
+<MeasurementUnitInput
+  label="Unit"
+  bind:value={unit}
+  disabled
+/>
 ```
 
 ## Accessibility

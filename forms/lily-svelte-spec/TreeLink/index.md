@@ -10,7 +10,7 @@ See [components/tree-link/index.md](../../../components/tree-link/index.md) for 
 
 ```svelte
 <script lang="ts">
-    import TreeLink from "./TreeLink.svelte";
+  import TreeLink from "./TreeLink.svelte";
 </script>
 
 <TreeLink />

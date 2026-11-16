@@ -4,11 +4,14 @@
   Description: a group of tabs for switching between content panels
   HTML tag: <div>
   CSS class: tab-bar
-  Keyboard: Tab to focus tab list, Arrow Left/Right to navigate tabs, Enter/Space to select
-  Accessibility: role="tablist", aria-label for accessible name
+  Keyboard: ArrowRight/ArrowLeft move focus between tabs (wrapping), Home/End jump to first/last, Enter/Space (native button click) select
+  Accessibility: role="tablist", aria-label for accessible name; tabs are role="tab" with aria-selected and a roving tabindex
   Usage:
-    <div class="tab-bar" role="tablist" aria-label="Example">
-      ...
+    <div
+      class="tab-bar"
+      role="tablist"
+      aria-label=""
+    >
     </div>
 -->
 
@@ -17,36 +20,46 @@
   role="tablist"
   aria-label=""
 >
-  <!-- Consumer provides content -->
+  <!-- Consumer provides role="tab" buttons -->
 </div>
 
 <script>
   // TabBar behavior
   (function() {
     'use strict';
-    document.querySelectorAll('.tab-bar').forEach(function(tabBar) {
-      var tabs = tabBar.querySelectorAll('[role="tab"]');
-      tabBar.addEventListener('keydown', function(e) {
-        var index = Array.from(tabs).indexOf(document.activeElement);
-        if (index < 0) return;
+    document.querySelectorAll('.tab-bar').forEach(function(root) {
+      root.addEventListener('keydown', function(e) {
+        var items = Array.from(root.querySelectorAll("[role='tab']"));
+        var index = items.indexOf(document.activeElement);
         if (e.key === 'ArrowRight') {
           e.preventDefault();
-          tabs[(index + 1) % tabs.length].focus();
+          if (items.length) items[index < items.length - 1 ? index + 1 : 0].focus();
         } else if (e.key === 'ArrowLeft') {
           e.preventDefault();
-          tabs[(index - 1 + tabs.length) % tabs.length].focus();
+          if (items.length) items[index > 0 ? index - 1 : items.length - 1].focus();
+        } else if (e.key === 'Home') {
+          e.preventDefault();
+          if (items.length) items[0].focus();
+        } else if (e.key === 'End') {
+          e.preventDefault();
+          if (items.length) items[items.length - 1].focus();
         }
       });
-      tabs.forEach(function(tab) {
-        tab.addEventListener('click', function() {
-          tabs.forEach(function(t) {
-            t.setAttribute('aria-selected', 'false');
-            t.setAttribute('tabindex', '-1');
-          });
-          tab.setAttribute('aria-selected', 'true');
-          tab.setAttribute('tabindex', '0');
+    });
+    document.querySelectorAll('.tab-bar').forEach(function(bar) {
+      function select(tab) {
+        bar.querySelectorAll('[role="tab"]').forEach(function(t) {
+          t.setAttribute('aria-selected', String(t === tab));
+          t.setAttribute('tabindex', t === tab ? '0' : '-1');
         });
+      }
+      bar.addEventListener('click', function(e) {
+        var tab = e.target.closest && e.target.closest('[role="tab"]');
+        if (tab && bar.contains(tab)) select(tab);
       });
+      var tabs = Array.from(bar.querySelectorAll('[role="tab"]'));
+      var current = tabs.filter(function(t) { return t.getAttribute('aria-selected') === 'true'; })[0] || tabs[0];
+      if (current) select(current);
     });
   })();
 </script>

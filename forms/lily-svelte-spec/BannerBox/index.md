@@ -41,8 +41,8 @@ Import `BannerBox` from `./BannerBox.svelte`. Place as a direct child of `Banner
 
 ```svelte
 <script lang="ts">
-  import Banner from '../Banner/Banner.svelte';
-  import BannerBox from './BannerBox.svelte';
+  import Banner from "../Banner/Banner.svelte";
+  import BannerBox from "./BannerBox.svelte";
 </script>
 
 <Banner>
@@ -57,8 +57,8 @@ Import `BannerBox` from `./BannerBox.svelte`. Place as a direct child of `Banner
 
 ```svelte
 <script lang="ts">
-  import Banner from '../Banner/Banner.svelte';
-  import BannerBox from './BannerBox.svelte';
+  import Banner from "../Banner/Banner.svelte";
+  import BannerBox from "./BannerBox.svelte";
 </script>
 
 <Banner type="warning">
@@ -73,8 +73,8 @@ Import `BannerBox` from `./BannerBox.svelte`. Place as a direct child of `Banner
 
 ```svelte
 <script lang="ts">
-  import Banner from '../Banner/Banner.svelte';
-  import BannerBox from './BannerBox.svelte';
+  import Banner from "../Banner/Banner.svelte";
+  import BannerBox from "./BannerBox.svelte";
 </script>
 
 <Banner>
@@ -90,9 +90,9 @@ Import `BannerBox` from `./BannerBox.svelte`. Place as a direct child of `Banner
 
 ```svelte
 <script lang="ts">
-  import Banner from '../Banner/Banner.svelte';
-  import BannerBox from './BannerBox.svelte';
-  import Button from '../Button/Button.svelte';
+  import Banner from "../Banner/Banner.svelte";
+  import BannerBox from "./BannerBox.svelte";
+  import Button from "../Button/Button.svelte";
 </script>
 
 <Banner type="info">

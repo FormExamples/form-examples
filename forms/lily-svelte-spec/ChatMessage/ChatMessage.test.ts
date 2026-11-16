@@ -4,7 +4,7 @@ import ChatMessage from "./ChatMessage.svelte";
 
 describe("ChatMessage", () => {
     test("renders with content", () => {
-        render(ChatMessage, { props: { label: "Test" } });
+        render(ChatMessage, { props: { label: "Test" } as any });
         const el = screen.getByLabelText("Test");
         expect(el).toBeTruthy();
         expect(el.getAttribute("class")).toContain("chat-message");

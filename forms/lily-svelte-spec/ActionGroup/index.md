@@ -36,7 +36,7 @@ A headless Svelte 5 component that renders a `<div role="group">` with an `aria-
 
 ```svelte
 <script lang="ts">
-  import ActionGroup from './ActionGroup.svelte';
+  import ActionGroup from "./ActionGroup.svelte";
 
   let open = $state(false);
 </script>

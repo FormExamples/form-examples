@@ -29,91 +29,91 @@ Control `active` from parent state tracking which cell is currently focusable. O
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `class` | `string` | `""` | CSS class name appended to the base class. |
-| `active` | `boolean` | `false` | Makes the cell focusable and sets `aria-selected`. |
-| `children` | `Snippet` | required | Cell content. |
-| `...restProps` | `unknown` | — | Additional attributes spread onto the `<td>`. |
+| Prop           | Type      | Default  | Description                                        |
+| -------------- | --------- | -------- | -------------------------------------------------- |
+| `class`        | `string`  | `""`     | CSS class name appended to the base class.         |
+| `active`       | `boolean` | `false`  | Makes the cell focusable and sets `aria-selected`. |
+| `children`     | `Snippet` | required | Cell content.                                      |
+| `...restProps` | `unknown` | —        | Additional attributes spread onto the `<td>`.      |
 
 ## Usage
 
 ```svelte
 <script lang="ts">
-    import DataTable from "../DataTable/DataTable.svelte";
-    import DataTableHead from "../DataTableHead/DataTableHead.svelte";
-    import DataTableBody from "../DataTableBody/DataTableBody.svelte";
-    import DataTableRow from "../DataTableRow/DataTableRow.svelte";
-    import DataTableTD from "./DataTableTD.svelte";
+  import DataTable from "../DataTable/DataTable.svelte";
+  import DataTableHead from "../DataTableHead/DataTableHead.svelte";
+  import DataTableBody from "../DataTableBody/DataTableBody.svelte";
+  import DataTableRow from "../DataTableRow/DataTableRow.svelte";
+  import DataTableTD from "./DataTableTD.svelte";
 </script>
 
 <DataTable label="Simple">
-    <DataTableHead>
-        <DataTableRow><th scope="col">A</th><th scope="col">B</th></DataTableRow>
-    </DataTableHead>
-    <DataTableBody>
-        <DataTableRow>
-            <DataTableTD>1</DataTableTD>
-            <DataTableTD active>2</DataTableTD>
-        </DataTableRow>
-    </DataTableBody>
+  <DataTableHead>
+    <DataTableRow><th scope="col">A</th><th scope="col">B</th></DataTableRow>
+  </DataTableHead>
+  <DataTableBody>
+    <DataTableRow>
+      <DataTableTD>1</DataTableTD>
+      <DataTableTD active>2</DataTableTD>
+    </DataTableRow>
+  </DataTableBody>
 </DataTable>
 ```
 
 ```svelte
 <script lang="ts">
-    import DataTable from "../DataTable/DataTable.svelte";
-    import DataTableHead from "../DataTableHead/DataTableHead.svelte";
-    import DataTableBody from "../DataTableBody/DataTableBody.svelte";
-    import DataTableRow from "../DataTableRow/DataTableRow.svelte";
-    import DataTableTD from "./DataTableTD.svelte";
+  import DataTable from "../DataTable/DataTable.svelte";
+  import DataTableHead from "../DataTableHead/DataTableHead.svelte";
+  import DataTableBody from "../DataTableBody/DataTableBody.svelte";
+  import DataTableRow from "../DataTableRow/DataTableRow.svelte";
+  import DataTableTD from "./DataTableTD.svelte";
 
-    let row = $state(0);
-    let col = $state(0);
-    const rows = [
-        ["A1", "A2"],
-        ["B1", "B2"]
-    ];
+  let row = $state(0);
+  let col = $state(0);
+  const rows = [
+    ["A1", "A2"],
+    ["B1", "B2"],
+  ];
 </script>
 
 <DataTable label="Keyboard grid">
-    <DataTableHead>
-        <DataTableRow><th scope="col">Col 1</th><th scope="col">Col 2</th></DataTableRow>
-    </DataTableHead>
-    <DataTableBody>
-        {#each rows as r, rIdx}
-            <DataTableRow>
-                {#each r as cell, cIdx}
-                    <DataTableTD active={row === rIdx && col === cIdx}>{cell}</DataTableTD>
-                {/each}
-            </DataTableRow>
+  <DataTableHead>
+    <DataTableRow><th scope="col">Col 1</th><th scope="col">Col 2</th></DataTableRow>
+  </DataTableHead>
+  <DataTableBody>
+    {#each rows as r, rIdx}
+      <DataTableRow>
+        {#each r as cell, cIdx}
+          <DataTableTD active={row === rIdx && col === cIdx}>{cell}</DataTableTD>
         {/each}
-    </DataTableBody>
+      </DataTableRow>
+    {/each}
+  </DataTableBody>
 </DataTable>
 ```
 
 ```svelte
 <script lang="ts">
-    import DataTable from "../DataTable/DataTable.svelte";
-    import DataTableHead from "../DataTableHead/DataTableHead.svelte";
-    import DataTableBody from "../DataTableBody/DataTableBody.svelte";
-    import DataTableRow from "../DataTableRow/DataTableRow.svelte";
-    import DataTableTD from "./DataTableTD.svelte";
+  import DataTable from "../DataTable/DataTable.svelte";
+  import DataTableHead from "../DataTableHead/DataTableHead.svelte";
+  import DataTableBody from "../DataTableBody/DataTableBody.svelte";
+  import DataTableRow from "../DataTableRow/DataTableRow.svelte";
+  import DataTableTD from "./DataTableTD.svelte";
 </script>
 
 <DataTable label="Product list">
-    <DataTableHead>
-        <DataTableRow>
-            <th scope="col">Product</th>
-            <th scope="col">Price</th>
-        </DataTableRow>
-    </DataTableHead>
-    <DataTableBody>
-        <DataTableRow>
-            <DataTableTD>Widget</DataTableTD>
-            <DataTableTD>$1.99</DataTableTD>
-        </DataTableRow>
-    </DataTableBody>
+  <DataTableHead>
+    <DataTableRow>
+      <th scope="col">Product</th>
+      <th scope="col">Price</th>
+    </DataTableRow>
+  </DataTableHead>
+  <DataTableBody>
+    <DataTableRow>
+      <DataTableTD>Widget</DataTableTD>
+      <DataTableTD>$1.99</DataTableTD>
+    </DataTableRow>
+  </DataTableBody>
 </DataTable>
 ```
 

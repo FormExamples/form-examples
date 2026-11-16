@@ -1,58 +1,62 @@
 <script lang="ts">
     // DateField component
     //
-    // A headless date field providing a fully labeled date input with built-in support
-    // for descriptions and error messages. It wraps a native <input type="date"> with
-    // a visible <label>, optional helper text, and validation error display, all linked
-    // via auto-generated IDs for accessibility. Error messages are announced to screen
-    // readers via role="alert". Ideal for forms requiring date input with validation.
+    // A date asked for as three parts, day, month and year, in a <fieldset> named by its
+    // <legend>, with optional helper text and an error message, all linked by generated
+    // ids. It suits dates people know by heart, such as a date of birth. The order of the
+    // parts and every label are the consumer's: there is no regional or English default.
     //
     // Props:
     //   className — string, optional. CSS class name.
-    //   label — string, required. Visible label text for the date field.
-    //   value — string, default "". Current date value in YYYY-MM-DD format; bindable via bind:value.
-    //   description — string, default undefined. Helper text displayed below the input.
-    //   error — string, default undefined. Error message displayed when validation fails.
-    //   required — boolean, default false. Whether the field is required.
-    //   disabled — boolean, default false. Whether the field is disabled.
-    //   id — string, default undefined. Custom ID for the input element; auto-generated if omitted.
-    //   ...restProps — additional HTML attributes spread onto the wrapper <div>.
+    //   label — string, required. The legend, naming the whole date.
+    //   dayLabel, monthLabel, yearLabel — string, required. The three parts' labels.
+    //   order — "ymd" | "dmy" | "mdy", default "ymd" (ISO 8601). The order of the parts.
+    //   value — string, default "". YYYY-MM-DD once all three parts are filled, else "";
+    //     bindable via bind:value. A new value fills the parts.
+    //   name — string, optional. Base name: the parts are {name}-day, -month, -year.
+    //   autocomplete — "bday", optional. A date of birth: the parts autocomplete as bday-day, -month, -year.
+    //   description — string, optional. Helper text, linked from the fieldset.
+    //   error — string, optional. Error message, linked from the fieldset and announced.
+    //   required — boolean, default false. Every part is required.
+    //   disabled — boolean, default false. The fieldset and its parts are disabled.
+    //   id — string, optional. Base id: the parts are {id}-day, -month, -year.
+    //   ...restProps — additional HTML attributes spread onto the <fieldset>.
     //
     // Syntax:
-    //   <DateField label="Start date" bind:value />
-    //
-    // Examples:
-    //   <!-- Date field with error and required state -->
-    //   <DateField label="End date" bind:value error="Required" required />
-    //   <!-- Date field with description -->
-    //   <DateField label="Birthday" bind:value description="Format: YYYY-MM-DD" />
+    //   <DateField label="Date of birth" dayLabel="Day" monthLabel="Month" yearLabel="Year" bind:value />
     //
     // Keyboard:
-    //   - None beyond native <input type="date"> keyboard behavior, which varies by browser
+    //   - Tab moves between the parts; each is a native text field
     //
     // Accessibility:
-    //   - <label for={inputId}> links the visible label to the input
-    //   - aria-describedby links the input to its description text when present
-    //   - aria-invalid="true" indicates the input has an invalid value when error is present
-    //   - aria-errormessage links the input to its error message when present
-    //   - role="alert" on the error paragraph announces errors to screen readers
+    //   - <fieldset> + <legend> name the group, announced with each part
+    //   - <label for> names each part
+    //   - aria-describedby on the fieldset links the description and the error
+    //   - aria-invalid="true" on each part while an error is shown
+    //   - role="alert" on the error paragraph announces it
     //
     // Internationalization:
-    //   - The label, description, and error props provide all text; no hardcoded strings
-    //
-    // Claude rules:
-    //   - Headless: no CSS, no styles — consumer provides all styling
-    //   - Auto-generates a unique ID if none is provided, using $derived() for reactivity
-    //   - IDs are derived for description and error elements for proper ARIA linking
+    //   - Every label is a prop, and the order is a prop: no English, no regional default
     //
     // References:
-    //   - ARIA Error Handling: https://www.w3.org/WAI/WCAG22/Techniques/aria/ARIA21
-    //   - WAI Forms Tutorial: https://www.w3.org/WAI/tutorials/forms/
+    //   - WAI Forms Tutorial, grouping controls: https://www.w3.org/WAI/tutorials/forms/grouping/
+    //   - ISO 8601 calendar dates (YYYY-MM-DD)
+
+    import { untrack } from "svelte";
+    import { warnMissingName } from "../dev-warning";
+
+    type Part = "day" | "month" | "year";
 
     let {
         class: className = "",
         label,
+        dayLabel,
+        monthLabel,
+        yearLabel,
+        order = "ymd",
         value = $bindable(""),
+        name = undefined,
+        autocomplete = undefined,
         description = undefined,
         error = undefined,
         required = false,
@@ -60,48 +64,108 @@
         id = undefined,
         ...restProps
     }: {
-        /** Visible label for the date field. */
+        /** The legend, naming the whole date. */
         label: string;
-        /** Current date value in YYYY-MM-DD format. Bindable. */
+        /** The day part's label. */
+        dayLabel: string;
+        /** The month part's label. */
+        monthLabel: string;
+        /** The year part's label. */
+        yearLabel: string;
+        /** The order of the parts. Default "ymd" (ISO 8601). */
+        order?: "ymd" | "dmy" | "mdy";
+        /** YYYY-MM-DD once all three parts are filled, else "". Bindable. */
         value?: string;
-        /** Helper text displayed below the input. */
+        /** Base name: the parts are {name}-day, {name}-month, {name}-year. */
+        name?: string;
+        /** "bday" for a date of birth: the parts autocomplete as bday-day, bday-month, bday-year. */
+        autocomplete?: "bday";
+        /** Helper text, linked from the fieldset. */
         description?: string;
-        /** Error message when validation fails. */
+        /** Error message, linked from the fieldset and announced. */
         error?: string;
-        /** Whether the field is required. */
+        /** Every part is required. */
         required?: boolean;
-        /** Whether the field is disabled. */
+        /** The fieldset and its parts are disabled. */
         disabled?: boolean;
-        /** Custom id for the input element. */
+        /** Base id for the parts; auto-generated if omitted. */
         id?: string;
         [key: string]: unknown;
     } = $props();
 
-    // Generate a stable id for linking label/input/description/error.
+    $effect(() =>
+        warnMissingName("DateField", label, restProps["aria-label"], restProps["aria-labelledby"]),
+    );
+
     const uid = $props.id();
-    const generatedId = `date-field-${uid}`;
-    let inputId = $derived(id ?? generatedId);
-    let descriptionId = $derived(`${inputId}-desc`);
-    let errorId = $derived(`${inputId}-error`);
+    let baseId = $derived(id ?? `date-field-${uid}`);
+    let descriptionId = $derived(`${baseId}-desc`);
+    let errorId = $derived(`${baseId}-error`);
+    let describedBy = $derived(
+        [description ? descriptionId : "", error ? errorId : ""].filter(Boolean).join(" ") ||
+            undefined,
+    );
+
+    /** The parts of a YYYY-MM-DD value, or empty parts for anything else. */
+    function split(v: string): Record<Part, string> {
+        const m = /^(\d{1,4})-(\d{1,2})-(\d{1,2})$/.exec(v ?? "");
+        return m ? { year: m[1], month: m[2], day: m[3] } : { year: "", month: "", day: "" };
+    }
+
+    /** YYYY-MM-DD when every part is a number, else "". The calendar check is the consumer's. */
+    function join(p: Record<Part, string>): string {
+        if (![p.year, p.month, p.day].every((x) => /^\d+$/.test(x))) return "";
+        return `${p.year.padStart(4, "0")}-${p.month.padStart(2, "0")}-${p.day.padStart(2, "0")}`;
+    }
+
+    let parts = $state(split(value));
+
+    $effect(() => {
+        // A value set from outside fills the parts; one the parts produced leaves them as typed.
+        const next = value;
+        untrack(() => {
+            if (next !== join(parts)) parts = split(next);
+        });
+    });
+
+    function update(part: Part, text: string) {
+        parts = { ...parts, [part]: text };
+        value = join(parts);
+    }
+
+    const labels = $derived({ day: dayLabel, month: monthLabel, year: yearLabel });
+    const SEQUENCES: Record<string, Part[]> = {
+        ymd: ["year", "month", "day"],
+        dmy: ["day", "month", "year"],
+        mdy: ["month", "day", "year"],
+    };
+    const sequence = $derived(SEQUENCES[order] ?? SEQUENCES.ymd);
 </script>
 
 <!-- DateField.svelte -->
-<div
+<fieldset
     class={`date-field ${className}`}
+    aria-describedby={describedBy}
+    {disabled}
     {...restProps}
 >
-    <label for={inputId}>{label}</label>
-    <input
-        class="date-input"
-        id={inputId}
-        type="date"
-        bind:value
-        {required}
-        {disabled}
-        aria-describedby={description ? descriptionId : undefined}
-        aria-invalid={error ? true : undefined}
-        aria-errormessage={error ? errorId : undefined}
-    />
+    <legend>{label}</legend>
+    {#each sequence as part (part)}
+        <label for={`${baseId}-${part}`}>{labels[part]}</label>
+        <input
+            class={`date-field-${part}`}
+            id={`${baseId}-${part}`}
+            name={name ? `${name}-${part}` : undefined}
+            type="text"
+            inputmode="numeric"
+            autocomplete={autocomplete === "bday" ? `bday-${part}` : undefined}
+            maxlength={part === "year" ? 4 : 2}
+            value={parts[part]}
+            oninput={(event) => update(part, event.currentTarget.value)}
+            {required}
+            aria-invalid={error ? true : undefined}
+        />
+    {/each}
     {#if description}
         <p id={descriptionId}>{description}</p>
     {/if}
@@ -113,4 +177,4 @@
             {error}
         </p>
     {/if}
-</div>
+</fieldset>

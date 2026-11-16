@@ -26,7 +26,9 @@ describe("GanttTable", () => {
     });
 
     test("renders caption when provided", () => {
-        render(Subject, { props: { label: "Project", caption: "Q1 Schedule", children: textSnippet("tasks") } });
+        render(Subject, {
+            props: { label: "Project", caption: "Q1 Schedule", children: textSnippet("tasks") },
+        });
         const table = screen.getByRole("grid");
         const cap = table.querySelector("caption");
         expect(cap).toBeTruthy();

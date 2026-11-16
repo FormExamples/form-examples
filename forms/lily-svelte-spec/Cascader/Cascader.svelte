@@ -38,11 +38,15 @@
     //   - WAI-ARIA Combobox Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
 
     import type { Snippet } from "svelte";
+    import { attachTreePopup, type TreeSelection } from "../widget-keys";
+
+    import { popoverState } from "../Popover/popover.js";
 
     let {
         class: className = "",
         label,
-        expanded = false,
+        expanded = $bindable(false),
+        onSelect = undefined,
         disabled = false,
         placeholder = undefined,
         value = undefined,
@@ -56,6 +60,8 @@
         label: string;
         /** Whether the panel is open */
         expanded?: boolean;
+        /** Called with the chosen item, its path and every selected value */
+        onSelect?: (selection: TreeSelection) => void;
         /** Whether the cascader is disabled */
         disabled?: boolean;
         /** Placeholder text on the trigger when no value is selected */
@@ -68,26 +74,44 @@
         children?: Snippet;
         [key: string]: unknown;
     } = $props();
+
+    let rootEl = $state<HTMLElement>();
+
+    $effect(() =>
+        rootEl
+            ? attachTreePopup(rootEl, {
+                  exclusive: true,
+                  onOpen: (open) => (expanded = open),
+                  onSelect: (selection) => onSelect?.(selection),
+              })
+            : undefined,
+    );
 </script>
 
 <!-- Cascader.svelte -->
 <div
+    bind:this={rootEl}
     class={`cascader ${className}`}
-    role="combobox"
-    aria-haspopup="tree"
-    aria-expanded={expanded}
-    aria-label={label}
     {...restProps}
 >
+    <!-- svelte-ignore a11y_role_has_required_aria_props (attachTreePopup sets aria-controls on mount: it gives the panel its id) -->
     <button
         class="cascader-trigger"
         type="button"
+        role="combobox"
+        aria-haspopup="tree"
+        aria-expanded={expanded}
+        aria-label={label}
         {disabled}
         {onclick}
     >
         {value ?? placeholder ?? ""}
     </button>
-    <div class="cascader-panel" hidden={!expanded}>
+    <div
+        class="cascader-panel"
+        popover="manual"
+        use:popoverState={expanded}
+    >
         {#if children}{@render children?.()}{/if}
     </div>
 </div>

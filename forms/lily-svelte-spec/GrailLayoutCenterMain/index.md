@@ -34,72 +34,75 @@ Place as a direct child of `GrailLayout`. The component itself provides the `mai
 
 ```svelte
 <script lang="ts">
-    import GrailLayoutCenterMain from "./GrailLayoutCenterMain.svelte";
+  import GrailLayoutCenterMain from "./GrailLayoutCenterMain.svelte";
 </script>
 
 <GrailLayoutCenterMain>
-    <main>
-        <h1>Welcome</h1>
-        <p>This is the primary content.</p>
-    </main>
+  <main>
+    <h1>Welcome</h1>
+    <p>This is the primary content.</p>
+  </main>
 </GrailLayoutCenterMain>
 ```
 
 ```svelte
 <script lang="ts">
-    import GrailLayout from "../GrailLayout/GrailLayout.svelte";
-    import GrailLayoutCenterMain from "./GrailLayoutCenterMain.svelte";
+  import GrailLayout from "../GrailLayout/GrailLayout.svelte";
+  import GrailLayoutCenterMain from "./GrailLayoutCenterMain.svelte";
 </script>
 
 <GrailLayout>
-    <GrailLayoutCenterMain><main>Primary content</main></GrailLayoutCenterMain>
+  <GrailLayoutCenterMain><main>Primary content</main></GrailLayoutCenterMain>
 </GrailLayout>
 ```
 
 ```svelte
 <script lang="ts">
-    import GrailLayoutCenterMain from "./GrailLayoutCenterMain.svelte";
+  import GrailLayoutCenterMain from "./GrailLayoutCenterMain.svelte";
 </script>
 
-<GrailLayoutCenterMain class="main-area" data-testid="grail-main">
-    <main>
-        <article>
-            <h2>Article title</h2>
-            <p>Body.</p>
-        </article>
-    </main>
+<GrailLayoutCenterMain
+  class="main-area"
+  data-testid="grail-main"
+>
+  <main>
+    <article>
+      <h2>Article title</h2>
+      <p>Body.</p>
+    </article>
+  </main>
 </GrailLayoutCenterMain>
 ```
 
 ```svelte
 <script lang="ts">
-    import GrailLayoutCenterMain from "./GrailLayoutCenterMain.svelte";
-    const posts = [
-        { id: 1, title: "Post one" },
-        { id: 2, title: "Post two" },
-    ];
+  import GrailLayoutCenterMain from "./GrailLayoutCenterMain.svelte";
+  const posts = [
+    { id: 1, title: "Post one" },
+    { id: 2, title: "Post two" },
+  ];
 </script>
 
 <GrailLayoutCenterMain>
-    <main>
-        <h2>Latest posts</h2>
-        <ul>
-            {#each posts as p}<li>{p.title}</li>{/each}
-        </ul>
-    </main>
+  <main>
+    <h2>Latest posts</h2>
+    <ul>
+      {#each posts as p}<li>{p.title}</li>{/each}
+    </ul>
+  </main>
 </GrailLayoutCenterMain>
 ```
 
 ```svelte
 <script lang="ts">
-    import GrailLayoutCenterMain from "./GrailLayoutCenterMain.svelte";
+  import GrailLayoutCenterMain from "./GrailLayoutCenterMain.svelte";
 </script>
 
 <GrailLayoutCenterMain>
-    <main aria-labelledby="page-heading">
-        <h1 id="page-heading">Dashboard</h1>
-        <p>Your metrics.</p>
-    </main>
+  <main aria-labelledby="page-heading">
+    <h1 id="page-heading">Dashboard</h1>
+    <p>Your metrics.</p>
+  </main>
 </GrailLayoutCenterMain>
 ```
 

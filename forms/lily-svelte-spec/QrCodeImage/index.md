@@ -31,7 +31,7 @@ A headless container for a QR code (two-dimensional barcode-image). Renders a `<
 
 ## How to use it
 
-Import and provide the QR payload visualization as children. The `label` should describe *what happens on scan*, not "QR code".
+Import and provide the QR payload visualization as children. The `label` should describe _what happens on scan_, not "QR code".
 
 ```svelte
 import QrCodeImage from './QrCodeImage.svelte';
@@ -50,11 +50,16 @@ import QrCodeImage from './QrCodeImage.svelte';
 
 ```svelte
 <script lang="ts">
-  import QrCodeImage from './QrCodeImage.svelte';
+  import QrCodeImage from "./QrCodeImage.svelte";
 </script>
 
 <QrCodeImage label="Scan to visit example.com">
-  <svg viewBox="0 0 29 29" width="160" height="160" aria-hidden="true">
+  <svg
+    viewBox="0 0 29 29"
+    width="160"
+    height="160"
+    aria-hidden="true"
+  >
     <!-- QR code paths supplied by a library -->
   </svg>
 </QrCodeImage>
@@ -64,7 +69,7 @@ import QrCodeImage from './QrCodeImage.svelte';
 
 ```svelte
 <script lang="ts">
-  import QrCodeImage from './QrCodeImage.svelte';
+  import QrCodeImage from "./QrCodeImage.svelte";
 
   let qrCanvas = $state<HTMLCanvasElement | null>(null);
   // populate qrCanvas via your QR library of choice
@@ -79,11 +84,15 @@ import QrCodeImage from './QrCodeImage.svelte';
 
 ```svelte
 <script lang="ts">
-  import QrCodeImage from './QrCodeImage.svelte';
+  import QrCodeImage from "./QrCodeImage.svelte";
 </script>
 
 <QrCodeImage label="Scan to open the menu">
-  <img src="/qr/menu.png" alt="" aria-hidden="true" />
+  <img
+    src="/qr/menu.png"
+    alt=""
+    aria-hidden="true"
+  />
 </QrCodeImage>
 ```
 
@@ -91,11 +100,14 @@ import QrCodeImage from './QrCodeImage.svelte';
 
 ```svelte
 <script lang="ts">
-  import QrCodeImage from './QrCodeImage.svelte';
+  import QrCodeImage from "./QrCodeImage.svelte";
 </script>
 
 <QrCodeImage label="Scan to join Wi-Fi network 'Guest'">
-  <svg viewBox="0 0 29 29" aria-hidden="true">
+  <svg
+    viewBox="0 0 29 29"
+    aria-hidden="true"
+  >
     <!-- QR paths for WIFI:T:WPA;S:Guest;P:...;; -->
   </svg>
 </QrCodeImage>
@@ -105,7 +117,10 @@ import QrCodeImage from './QrCodeImage.svelte';
 
 ```svelte
 <QrCodeImage label="Escanear para visitar example.com">
-  <svg viewBox="0 0 29 29" aria-hidden="true"></svg>
+  <svg
+    viewBox="0 0 29 29"
+    aria-hidden="true"
+  ></svg>
 </QrCodeImage>
 ```
 

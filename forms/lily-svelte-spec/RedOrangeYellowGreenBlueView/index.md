@@ -7,7 +7,7 @@ A headless read-only display of a five-level Red/Orange/Yellow/Green/Blue (ROYGB
 - Component: `RedOrangeYellowGreenBlueView`
 - HTML element: `<span>`
 - Role: inline text; accessible name via `aria-label`
-- Category: view (read-only display sibling of `RedOrangeYellowGreenBluePicker`)
+- Category: view (read-only display sibling of `RedOrangeYellowGreenBlueRadioGroup`)
 
 ## What it does
 
@@ -24,7 +24,7 @@ A headless read-only display of a five-level Red/Orange/Yellow/Green/Blue (ROYGB
 
 ## When not to use it
 
-- To capture a ROYGB value — use `RedOrangeYellowGreenBluePicker` or compose `RedOrangeYellowGreenBluePickerButton`s.
+- To capture a ROYGB value — use `RedOrangeYellowGreenBlueRadioGroup` or compose `RedOrangeYellowGreenBlueRadioInput`s.
 - For three-level status — use `RedAmberGreenView`.
 - For rating / satisfaction displays — use `FiveStarRatingView`, `FiveFaceRatingView`, `NetPromoterScoreView`.
 
@@ -49,53 +49,75 @@ import RedOrangeYellowGreenBlueView from './RedOrangeYellowGreenBlueView.svelte'
 
 ```svelte
 <script lang="ts">
-  import RedOrangeYellowGreenBlueView from './RedOrangeYellowGreenBlueView.svelte';
+  import RedOrangeYellowGreenBlueView from "./RedOrangeYellowGreenBlueView.svelte";
 </script>
 
-<RedOrangeYellowGreenBlueView label="Risk level" value="yellow" />
+<RedOrangeYellowGreenBlueView
+  label="Risk level"
+  value="yellow"
+/>
 ```
 
 ### Dynamic value
 
 ```svelte
 <script lang="ts">
-  import RedOrangeYellowGreenBlueView from './RedOrangeYellowGreenBlueView.svelte';
+  import RedOrangeYellowGreenBlueView from "./RedOrangeYellowGreenBlueView.svelte";
 
   let level = $state("blue");
 </script>
 
-<RedOrangeYellowGreenBlueView label="Alert status" value={level} />
+<RedOrangeYellowGreenBlueView
+  label="Alert status"
+  value={level}
+/>
 ```
 
 ### Paired with the picker counterpart
 
 ```svelte
 <script lang="ts">
-  import RedOrangeYellowGreenBluePicker from '../RedOrangeYellowGreenBluePicker/RedOrangeYellowGreenBluePicker.svelte';
-  import RedOrangeYellowGreenBlueView from './RedOrangeYellowGreenBlueView.svelte';
+  import RedOrangeYellowGreenBlueRadioGroup from "../RedOrangeYellowGreenBlueRadioGroup/RedOrangeYellowGreenBlueRadioGroup.svelte";
+  import RedOrangeYellowGreenBlueView from "./RedOrangeYellowGreenBlueView.svelte";
 
   let level = $state("");
   let submitted = $state(false);
 </script>
 
 {#if submitted}
-  <RedOrangeYellowGreenBlueView label="Level" value={level} />
+  <RedOrangeYellowGreenBlueView
+    label="Level"
+    value={level}
+  />
 {:else}
-  <RedOrangeYellowGreenBluePicker label="Level" bind:value={level} />
-  <button type="button" onclick={() => (submitted = true)}>Confirm</button>
+  <RedOrangeYellowGreenBlueRadioGroup
+    label="Level"
+    bind:value={level}
+  />
+  <button
+    type="button"
+    onclick={() => (submitted = true)}>Confirm</button
+  >
 {/if}
 ```
 
 ### With a data attribute
 
 ```svelte
-<RedOrangeYellowGreenBlueView label="System health" value="blue" data-testid="health" />
+<RedOrangeYellowGreenBlueView
+  label="System health"
+  value="blue"
+  data-testid="health"
+/>
 ```
 
 ### Localized value
 
 ```svelte
-<RedOrangeYellowGreenBlueView label="Nivel" value="rojo" />
+<RedOrangeYellowGreenBlueView
+  label="Nivel"
+  value="rojo"
+/>
 ```
 
 ## Accessibility
@@ -106,8 +128,8 @@ import RedOrangeYellowGreenBlueView from './RedOrangeYellowGreenBlueView.svelte'
 
 ## Related components
 
-- `RedOrangeYellowGreenBluePicker` — dropdown-style picker sibling.
-- `RedOrangeYellowGreenBluePickerButton` — button-style picker sibling.
+- `RedOrangeYellowGreenBlueRadioGroup` — dropdown-style picker sibling.
+- `RedOrangeYellowGreenBlueRadioInput` — button-style picker sibling.
 - `RedAmberGreenView` — three-level status view.
 - Other read-only status views: `FiveStarRatingView`, `FiveFaceRatingView`, `NetPromoterScoreView`.
 

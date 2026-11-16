@@ -39,20 +39,25 @@ A headless Svelte 5 component inspired by [Ant Design Cascader](https://ant.desi
 
 ```svelte
 <script lang="ts">
-  import Cascader from './Cascader.svelte';
+  import Cascader from "./Cascader.svelte";
 
   let open = $state(false);
-  let value = $state('');
+  let value = $state("");
 </script>
 
 <Cascader
   label="Region"
   placeholder="Choose a region"
   expanded={open}
-  value={value}
+  {value}
   onclick={() => (open = !open)}
 >
-  <ul role="tree" aria-label="Regions">…</ul>
+  <ul
+    role="tree"
+    aria-label="Regions"
+  >
+    …
+  </ul>
 </Cascader>
 ```
 

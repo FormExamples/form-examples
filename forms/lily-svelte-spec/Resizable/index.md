@@ -52,11 +52,11 @@ Basic both-axis resizable region:
 
 ```svelte
 <script lang="ts">
-    import Resizable from "./Resizable.svelte";
+  import Resizable from "./Resizable.svelte";
 </script>
 
 <Resizable label="Preview panel">
-    <p>Drag the bottom-right corner to resize.</p>
+  <p>Drag the bottom-right corner to resize.</p>
 </Resizable>
 ```
 
@@ -64,14 +64,17 @@ Horizontal-only sidebar:
 
 ```svelte
 <script lang="ts">
-    import Resizable from "./Resizable.svelte";
+  import Resizable from "./Resizable.svelte";
 </script>
 
-<Resizable label="Sidebar" direction="horizontal">
-    <nav>
-        <a href="/">Home</a>
-        <a href="/docs">Docs</a>
-    </nav>
+<Resizable
+  label="Sidebar"
+  direction="horizontal"
+>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/docs">Docs</a>
+  </nav>
 </Resizable>
 ```
 
@@ -79,11 +82,15 @@ Vertical-only preview with extra attributes:
 
 ```svelte
 <script lang="ts">
-    import Resizable from "./Resizable.svelte";
+  import Resizable from "./Resizable.svelte";
 </script>
 
-<Resizable label="Output" direction="vertical" id="output-pane">
-    <pre>{output}</pre>
+<Resizable
+  label="Output"
+  direction="vertical"
+  id="output-pane"
+>
+  <pre>{output}</pre>
 </Resizable>
 ```
 
@@ -91,12 +98,16 @@ Resizable code editor area with consumer styling:
 
 ```svelte
 <script lang="ts">
-    import Resizable from "./Resizable.svelte";
-    let code = $state("// write code here");
+  import Resizable from "./Resizable.svelte";
+  let code = $state("// write code here");
 </script>
 
-<Resizable label="Editor" direction="both" class="editor-shell">
-    <textarea bind:value={code}></textarea>
+<Resizable
+  label="Editor"
+  direction="both"
+  class="editor-shell"
+>
+  <textarea bind:value={code}></textarea>
 </Resizable>
 ```
 
@@ -104,12 +115,16 @@ Bound state to persist user size (example pattern - consumer-driven):
 
 ```svelte
 <script lang="ts">
-    import Resizable from "./Resizable.svelte";
-    let width = $state(400);
+  import Resizable from "./Resizable.svelte";
+  let width = $state(400);
 </script>
 
-<Resizable label="Chart" direction="horizontal" style={`width:${width}px`}>
-    <div>Chart content</div>
+<Resizable
+  label="Chart"
+  direction="horizontal"
+  style={`width:${width}px`}
+>
+  <div>Chart content</div>
 </Resizable>
 ```
 
@@ -122,6 +137,7 @@ Bound state to persist user size (example pattern - consumer-driven):
 - Consumers should ensure a visible focus indicator via their own CSS.
 
 Related references:
+
 - WAI-ARIA Region Role: https://www.w3.org/TR/wai-aria-1.2/#region
 - WAI-ARIA Window Splitter Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/
 

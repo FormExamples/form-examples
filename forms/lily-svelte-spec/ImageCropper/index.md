@@ -46,11 +46,14 @@ Image with a crop overlay:
 
 ```svelte
 <script lang="ts">
-    import ImageCropper from "./ImageCropper.svelte";
+  import ImageCropper from "./ImageCropper.svelte";
 </script>
 
 <ImageCropper label="Crop your profile photo">
-    <img src="/uploads/photo.jpg" alt="Photo to crop" />
+  <img
+    src="/uploads/photo.jpg"
+    alt="Photo to crop"
+  />
 </ImageCropper>
 ```
 
@@ -58,11 +61,14 @@ Canvas surface:
 
 ```svelte
 <script lang="ts">
-    import ImageCropper from "./ImageCropper.svelte";
+  import ImageCropper from "./ImageCropper.svelte";
 </script>
 
 <ImageCropper label="Adjust the crop region around the document">
-    <canvas width="600" height="800"></canvas>
+  <canvas
+    width="600"
+    height="800"
+  ></canvas>
 </ImageCropper>
 ```
 
@@ -70,12 +76,15 @@ In an avatar upload flow:
 
 ```svelte
 <script lang="ts">
-    import ImageCropper from "./ImageCropper.svelte";
-    let previewUrl = $state("");
+  import ImageCropper from "./ImageCropper.svelte";
+  let previewUrl = $state("");
 </script>
 
 <ImageCropper label="Crop your profile photo to a square">
-    <img src={previewUrl} alt="Selected photo to crop" />
+  <img
+    src={previewUrl}
+    alt="Selected photo to crop"
+  />
 </ImageCropper>
 ```
 
@@ -83,11 +92,17 @@ With custom class:
 
 ```svelte
 <script lang="ts">
-    import ImageCropper from "./ImageCropper.svelte";
+  import ImageCropper from "./ImageCropper.svelte";
 </script>
 
-<ImageCropper label="Image cropper" class="boxed">
-    <img src="/uploads/photo.jpg" alt="Photo to crop" />
+<ImageCropper
+  label="Image cropper"
+  class="boxed"
+>
+  <img
+    src="/uploads/photo.jpg"
+    alt="Photo to crop"
+  />
 </ImageCropper>
 ```
 
@@ -95,12 +110,17 @@ Paired with a reset button:
 
 ```svelte
 <script lang="ts">
-    import ImageCropper from "./ImageCropper.svelte";
-    function reset() { /* consumer resets the crop region */ }
+  import ImageCropper from "./ImageCropper.svelte";
+  function reset() {
+    /* consumer resets the crop region */
+  }
 </script>
 
 <ImageCropper label="Crop your profile photo">
-    <img src="/uploads/photo.jpg" alt="Photo to crop" />
+  <img
+    src="/uploads/photo.jpg"
+    alt="Photo to crop"
+  />
 </ImageCropper>
 <button onclick={reset}>Reset</button>
 ```
@@ -112,6 +132,7 @@ Paired with a reset button:
 - Consumers should offer keyboard-accessible controls for moving and resizing the crop region.
 
 References:
+
 - WAI-ARIA `application` role: https://www.w3.org/TR/wai-aria-1.2/#application
 
 ## Related components

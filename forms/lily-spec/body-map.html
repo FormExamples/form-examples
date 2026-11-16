@@ -1,0 +1,15 @@
+<!-- body-map.html -->
+<!-- BodyMap component -->
+<!--
+  Description: a picker for marking regions of the body on a consumer-supplied drawing, with a checkbox for each region
+  HTML tag: <fieldset>
+  CSS class: body-map (parts: -legend, -figure, -regions, -region)
+  Spec: spec/healthcare-ui
+  A fieldset named by its legend. The consumer's drawing in .body-map-figure is aria-hidden; every region is a real
+    checkbox, which submits with the form. Mark each drawing shape with data-region; the framework catalogs toggle a
+    region on a shape click and set data-selected on chosen shapes, and this static snippet leaves that to the
+    consumer's script.
+  Keyboard: Tab through the checkboxes; Space toggles one.
+-->
+
+<fieldset class="body-map"><legend class="body-map-legend">Where is the pain?</legend><div class="body-map-figure" aria-hidden="true"><svg viewBox="0 0 40 80" width="80" height="160"><circle data-region="head" cx="20" cy="8" r="7"></circle><rect data-region="chest" x="10" y="17" width="20" height="22"></rect></svg></div><ul class="body-map-regions"><li><label class="body-map-region"><input type="checkbox" name="sites" value="head"> Head</label></li><li><label class="body-map-region"><input type="checkbox" name="sites" value="chest"> Chest</label></li></ul></fieldset>

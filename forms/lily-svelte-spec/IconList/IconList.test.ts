@@ -20,47 +20,57 @@ function htmlSnippet(html: string) {
 
 describe("IconList", () => {
     test("renders as a ul with the icon-list class", () => {
-        const { container } = render(Subject, { props: {
-            children: textSnippet("items"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                children: textSnippet("items"),
+            },
+        });
 
         const root = container.querySelector("ul.icon-list") as HTMLElement;
         expect(root).toBeTruthy();
     });
 
     test("applies aria-label when provided", () => {
-        render(Subject, { props: {
-            label: "Features",
-            children: textSnippet("items"),
-        }});
+        render(Subject, {
+            props: {
+                label: "Features",
+                children: textSnippet("items"),
+            },
+        });
 
         const list = screen.getByRole("list", { name: "Features" });
         expect(list.getAttribute("aria-label")).toBe("Features");
     });
 
     test("omits aria-label when not provided", () => {
-        const { container } = render(Subject, { props: {
-            children: textSnippet("items"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                children: textSnippet("items"),
+            },
+        });
 
         const root = container.querySelector("ul") as HTMLElement;
         expect(root.hasAttribute("aria-label")).toBe(false);
     });
 
     test("renders children content", () => {
-        const { container } = render(Subject, { props: {
-            children: htmlSnippet("<li>One</li><li>Two</li>"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                children: htmlSnippet("<li>One</li><li>Two</li>"),
+            },
+        });
 
         const items = container.querySelectorAll("li");
         expect(items.length).toBe(2);
     });
 
     test("appends consumer class to base class", () => {
-        const { container } = render(Subject, { props: {
-            class: "extra",
-            children: textSnippet("x"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                class: "extra",
+                children: textSnippet("x"),
+            },
+        });
 
         const root = container.querySelector("ul") as HTMLElement;
         expect(root.className).toContain("icon-list");

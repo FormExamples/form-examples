@@ -22,7 +22,14 @@ describe("Fieldset", () => {
     });
 
     test("supports disabled", () => {
-        render(Subject, { props: { legend: "Info", disabled: true, "data-testid": "fs", children: textSnippet("C") } });
+        render(Subject, {
+            props: {
+                legend: "Info",
+                disabled: true,
+                "data-testid": "fs",
+                children: textSnippet("C"),
+            },
+        });
         expect((screen.getByTestId("fs") as HTMLFieldSetElement).disabled).toBe(true);
     });
 
@@ -32,7 +39,9 @@ describe("Fieldset", () => {
     });
 
     test("passes through attributes", () => {
-        render(Subject, { props: { legend: "G", "data-testid": "fs", children: textSnippet("C") } });
+        render(Subject, {
+            props: { legend: "G", "data-testid": "fs", children: textSnippet("C") },
+        });
         expect(screen.getByTestId("fs")).toBeTruthy();
     });
 });

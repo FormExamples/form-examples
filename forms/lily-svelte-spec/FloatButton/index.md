@@ -39,10 +39,13 @@ A headless Svelte 5 component inspired by [Ant Design FloatButton](https://ant.d
 
 ```svelte
 <script lang="ts">
-  import FloatButton from './FloatButton.svelte';
+  import FloatButton from "./FloatButton.svelte";
 </script>
 
-<FloatButton label="Open help" onclick={openHelp}>
+<FloatButton
+  label="Open help"
+  onclick={openHelp}
+>
   <span aria-hidden="true">?</span>
 </FloatButton>
 ```

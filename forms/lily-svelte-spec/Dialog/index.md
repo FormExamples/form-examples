@@ -32,27 +32,36 @@ Bind `open` to a state variable and toggle it with a trigger.
 
 ```svelte
 <script lang="ts">
-    import Dialog from "./Dialog.svelte";
-    let open = $state(false);
+  import Dialog from "./Dialog.svelte";
+  let open = $state(false);
 </script>
 
-<button type="button" onclick={() => open = true}>Open dialog</button>
-<Dialog label="Confirm action" bind:open>
-    <p>Are you sure?</p>
-    <button type="button" onclick={() => open = false}>Close</button>
+<button
+  type="button"
+  onclick={() => (open = true)}>Open dialog</button
+>
+<Dialog
+  label="Confirm action"
+  bind:open
+>
+  <p>Are you sure?</p>
+  <button
+    type="button"
+    onclick={() => (open = false)}>Close</button
+  >
 </Dialog>
 ```
 
 ## Props
 
-| Prop       | Type       | Default  | Description                                   |
-| ---------- | ---------- | -------- | --------------------------------------------- |
-| `class`    | `string`   | `""`     | CSS class appended to the base class.        |
-| `open`     | `boolean`  | `false`  | Whether the dialog is visible. Bindable.      |
-| `label`    | `string`   | required | Accessible name via `aria-label`.             |
-| `modal`    | `boolean`  | `true`   | Whether the dialog is modal (`aria-modal`).   |
-| `children` | `Snippet`  | required | Dialog body content.                          |
-| `...rest`  | `unknown`  | —        | Additional HTML attributes on the `<dialog>`. |
+| Prop       | Type      | Default  | Description                                   |
+| ---------- | --------- | -------- | --------------------------------------------- |
+| `class`    | `string`  | `""`     | CSS class appended to the base class.         |
+| `open`     | `boolean` | `false`  | Whether the dialog is visible. Bindable.      |
+| `label`    | `string`  | required | Accessible name via `aria-label`.             |
+| `modal`    | `boolean` | `true`   | Whether the dialog is modal (`aria-modal`).   |
+| `children` | `Snippet` | required | Dialog body content.                          |
+| `...rest`  | `unknown` | —        | Additional HTML attributes on the `<dialog>`. |
 
 ## Usage
 
@@ -60,49 +69,79 @@ Bind `open` to a state variable and toggle it with a trigger.
 
 ```svelte
 <script lang="ts">
-    import Dialog from "./Dialog.svelte";
-    let open = $state(false);
-    function confirm() { /* … */ open = false; }
+  import Dialog from "./Dialog.svelte";
+  let open = $state(false);
+  function confirm() {
+    /* … */ open = false;
+  }
 </script>
 
-<Dialog label="Confirm action" bind:open>
-    <p>Are you sure you want to proceed?</p>
-    <button type="button" onclick={() => open = false}>Cancel</button>
-    <button type="button" onclick={confirm}>Confirm</button>
+<Dialog
+  label="Confirm action"
+  bind:open
+>
+  <p>Are you sure you want to proceed?</p>
+  <button
+    type="button"
+    onclick={() => (open = false)}>Cancel</button
+  >
+  <button
+    type="button"
+    onclick={confirm}>Confirm</button
+  >
 </Dialog>
 ```
 
 ### 2. Non-modal notice
 
 ```svelte
-<Dialog label="Notification" bind:open={showNotice} modal={false}>
-    <p>Your file has been saved.</p>
+<Dialog
+  label="Notification"
+  bind:open={showNotice}
+  modal={false}
+>
+  <p>Your file has been saved.</p>
 </Dialog>
 ```
 
 ### 3. Form inside a dialog
 
 ```svelte
-<Dialog label="Create account" bind:open>
-    <form onsubmit={handleSubmit}>
-        <input name="name" required />
-        <button type="submit">Create</button>
-    </form>
+<Dialog
+  label="Create account"
+  bind:open
+>
+  <form onsubmit={handleSubmit}>
+    <input
+      name="name"
+      required
+    />
+    <button type="submit">Create</button>
+  </form>
 </Dialog>
 ```
 
 ### 4. Multiple dialogs
 
 ```svelte
-<Dialog label="Step 1" bind:open={step1Open}>…</Dialog>
-<Dialog label="Step 2" bind:open={step2Open}>…</Dialog>
+<Dialog
+  label="Step 1"
+  bind:open={step1Open}>…</Dialog
+>
+<Dialog
+  label="Step 2"
+  bind:open={step2Open}>…</Dialog
+>
 ```
 
 ### 5. Escape to close (built in)
 
 ```svelte
-<Dialog label="Press Escape to close" bind:open>
-    <p>Hit Escape to close this dialog.</p>
+<Dialog
+  label="Press Escape to close"
+  bind:open
+>
+  <p>Hit Escape to close this dialog.</p>
 </Dialog>
 ```
 

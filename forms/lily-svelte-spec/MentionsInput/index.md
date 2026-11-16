@@ -22,7 +22,7 @@ A headless Svelte 5 component inspired by [Ant Design Mentions](https://ant.desi
 ## When not to use it
 
 - For plain text input, use `TextInput` or `TextAreaInput`.
-- For tag selection, use `TagInput`.
+- For tag selection, use `TagInputDiv`.
 
 ## Props
 
@@ -41,27 +41,35 @@ A headless Svelte 5 component inspired by [Ant Design Mentions](https://ant.desi
 
 ```svelte
 <script lang="ts">
-  import MentionsInput from './MentionsInput.svelte';
+  import MentionsInput from "./MentionsInput.svelte";
 
-  let value = $state('');
+  let value = $state("");
   let expanded = $state(false);
 
   function handleInput(e: Event) {
     const input = e.target as HTMLInputElement;
     value = input.value;
-    expanded = input.value.endsWith('@');
+    expanded = input.value.endsWith("@");
   }
 </script>
 
 <MentionsInput
   label="Comment"
-  value={value}
-  expanded={expanded}
+  {value}
+  {expanded}
   oninput={handleInput}
   placeholder="Type @ to mention"
 >
-  <ul role="listbox" aria-label="People">
-    <li role="option" aria-selected="false">@alice</li>
+  <ul
+    role="listbox"
+    aria-label="People"
+  >
+    <li
+      role="option"
+      aria-selected="false"
+    >
+      @alice
+    </li>
   </ul>
 </MentionsInput>
 ```

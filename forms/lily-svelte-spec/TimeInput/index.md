@@ -49,7 +49,10 @@ Import, bind `value`, and pass a translated `label`. Optionally constrain the al
   let start = $state("");
 </script>
 
-<TimeInput label="Start time" bind:value={start} />
+<TimeInput
+  label="Start time"
+  bind:value={start}
+/>
 ```
 
 ```svelte
@@ -76,8 +79,15 @@ Import, bind `value`, and pass a translated `label`. Optionally constrain the al
   let end = $state("17:00");
 </script>
 
-<TimeInput label="Open from" bind:value={start} />
-<TimeInput label="Open until" bind:value={end} min={start} />
+<TimeInput
+  label="Open from"
+  bind:value={start}
+/>
+<TimeInput
+  label="Open until"
+  bind:value={end}
+  min={start}
+/>
 ```
 
 ```svelte
@@ -88,8 +98,15 @@ Import, bind `value`, and pass a translated `label`. Optionally constrain the al
   let locked = $state(true);
 </script>
 
-<TimeInput label="Reminder time" bind:value={value} disabled={locked} />
-<button type="button" onclick={() => (locked = !locked)}>
+<TimeInput
+  label="Reminder time"
+  bind:value
+  disabled={locked}
+/>
+<button
+  type="button"
+  onclick={() => (locked = !locked)}
+>
   {locked ? "Edit" : "Lock"}
 </button>
 ```

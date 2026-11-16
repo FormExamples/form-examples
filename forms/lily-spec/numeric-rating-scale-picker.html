@@ -1,0 +1,13 @@
+<!-- numeric-rating-scale-picker.html -->
+<!-- NumericRatingScalePicker component -->
+<!--
+  Description: a picker for a 0 to 10 rating, such as pain, with the consumer's words at each end
+  HTML tag: <fieldset>
+  CSS class: numeric-rating-scale-picker (parts: -legend, -min-label, -options, -option, -max-label)
+  Spec: spec/healthcare-ui
+  Native radios in a fieldset named by its legend; each radio is named by its number, and the end radios are described
+    by the consumer's anchor words (aria-describedby). Lily ships no anchor words and is not a validated instrument.
+  Keyboard: Tab into the group; the arrow keys move and choose (native radios).
+-->
+
+<fieldset class="numeric-rating-scale-picker"><legend class="numeric-rating-scale-picker-legend">How bad is your pain now?</legend><span class="numeric-rating-scale-picker-min-label" id="nrs-demo-min">No pain</span><span class="numeric-rating-scale-picker-options"><label class="numeric-rating-scale-picker-option"><input type="radio" name="pain" value="0" aria-describedby="nrs-demo-min"> 0</label><label class="numeric-rating-scale-picker-option"><input type="radio" name="pain" value="1"> 1</label><label class="numeric-rating-scale-picker-option"><input type="radio" name="pain" value="2"> 2</label><label class="numeric-rating-scale-picker-option"><input type="radio" name="pain" value="3"> 3</label><label class="numeric-rating-scale-picker-option"><input type="radio" name="pain" value="4"> 4</label><label class="numeric-rating-scale-picker-option"><input type="radio" name="pain" value="5"> 5</label><label class="numeric-rating-scale-picker-option"><input type="radio" name="pain" value="6"> 6</label><label class="numeric-rating-scale-picker-option"><input type="radio" name="pain" value="7"> 7</label><label class="numeric-rating-scale-picker-option"><input type="radio" name="pain" value="8"> 8</label><label class="numeric-rating-scale-picker-option"><input type="radio" name="pain" value="9"> 9</label><label class="numeric-rating-scale-picker-option"><input type="radio" name="pain" value="10" aria-describedby="nrs-demo-max"> 10</label></span><span class="numeric-rating-scale-picker-max-label" id="nrs-demo-max">Worst pain imaginable</span></fieldset>

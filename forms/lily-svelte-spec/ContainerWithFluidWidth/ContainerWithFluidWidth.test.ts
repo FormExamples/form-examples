@@ -13,18 +13,22 @@ function textSnippet(text: string) {
 
 describe("ContainerWithFluidWidth", () => {
     test("renders with the container-with-fluid-width class", () => {
-        const { container } = render(Subject, { props: {
-            children: textSnippet("Content"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                children: textSnippet("Content"),
+            },
+        });
 
         const root = container.querySelector(".container-with-fluid-width") as HTMLElement;
         expect(root).toBeTruthy();
     });
 
     test("defaults to 1rem horizontal padding", () => {
-        const { container } = render(Subject, { props: {
-            children: textSnippet("Default"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                children: textSnippet("Default"),
+            },
+        });
 
         const root = container.querySelector(".container-with-fluid-width") as HTMLElement;
         expect(root.getAttribute("data-padding-inline")).toBe("1rem");
@@ -32,10 +36,12 @@ describe("ContainerWithFluidWidth", () => {
     });
 
     test("applies custom padding-inline", () => {
-        const { container } = render(Subject, { props: {
-            paddingInline: "2rem",
-            children: textSnippet("Custom"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                paddingInline: "2rem",
+                children: textSnippet("Custom"),
+            },
+        });
 
         const root = container.querySelector(".container-with-fluid-width") as HTMLElement;
         expect(root.getAttribute("data-padding-inline")).toBe("2rem");
@@ -43,28 +49,34 @@ describe("ContainerWithFluidWidth", () => {
     });
 
     test("applies width: 100%", () => {
-        const { container } = render(Subject, { props: {
-            children: textSnippet("Wide"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                children: textSnippet("Wide"),
+            },
+        });
 
         const root = container.querySelector(".container-with-fluid-width") as HTMLElement;
         expect(root.getAttribute("style")).toContain("width: 100%");
     });
 
     test("renders children content", () => {
-        const { container } = render(Subject, { props: {
-            children: textSnippet("Inner"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                children: textSnippet("Inner"),
+            },
+        });
 
         const root = container.querySelector(".container-with-fluid-width") as HTMLElement;
         expect(root.textContent).toContain("Inner");
     });
 
     test("appends consumer class to base class", () => {
-        const { container } = render(Subject, { props: {
-            class: "extra",
-            children: textSnippet("X"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                class: "extra",
+                children: textSnippet("X"),
+            },
+        });
 
         const root = container.querySelector(".container-with-fluid-width") as HTMLElement;
         expect(root.className).toContain("container-with-fluid-width");

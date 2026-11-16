@@ -1,0 +1,193 @@
+<!-- file-tree.html -->
+<!-- FileTree component -->
+<!--
+  Description: a hierarchical tree of folders and files following the WAI-ARIA APG tree pattern
+  HTML tag: <ul role="tree">
+  CSS class: file-tree
+  Keyboard (focus on a treeitem):
+    ArrowDown / ArrowUp  next / previous visible item (clamped, no wrap)
+    ArrowRight           closed folder opens; open folder moves to its first child
+    ArrowLeft            open folder closes; otherwise moves to the parent folder
+    Home / End           first / last visible item
+    *                    expand all sibling folders at the focused level
+    printable characters typeahead on the item's own text
+    Enter / Space        activate (clicks the item)
+  Accessibility: aria-label names the tree. The consumer supplies <li role="treeitem"> items, a
+    nested <ul role="group"> inside each folder, aria-expanded on folders and aria-selected as needed.
+    ROVING TABINDEX: exactly one visible item has tabindex="0", all others -1. Opening/closing only
+    toggles aria-expanded; hiding a closed folder's group is consumer CSS (no inline styles here).
+  Deviation from Svelte: none. A MutationObserver (as in Svelte) re-normalises the tab stop when
+    aria-expanded changes or items are added/removed.
+  Usage:
+    <ul class="file-tree" role="tree" aria-label="Files"> <li role="treeitem">...</li> </ul>
+-->
+
+<ul
+  class="file-tree"
+  role="tree"
+  aria-label="Files"
+>
+  <li role="treeitem" aria-expanded="true" data-id="src">src
+    <ul role="group">
+      <li role="treeitem" aria-expanded="true" data-id="lib">lib
+        <ul role="group"><li role="treeitem" data-id="index">index.ts</li></ul>
+      </li>
+      <li role="treeitem" data-id="app">app.ts</li>
+    </ul>
+  </li>
+  <li role="treeitem" aria-expanded="false" data-id="docs">docs
+    <ul role="group"><li role="treeitem" data-id="guide">guide.md</li></ul>
+  </li>
+  <li role="treeitem" data-id="readme">readme.md</li>
+  <li role="treeitem" aria-expanded="false" data-id="etc">etc
+    <ul role="group"><li role="treeitem" data-id="x">x.txt</li></ul>
+  </li>
+</ul>
+
+<script>
+  // FileTree behavior
+  (function() {
+    'use strict';
+
+    function initFileTree(tree) {
+      var buffer = '';
+      var bufferTimer;
+
+      function allItems() {
+        return Array.prototype.slice.call(tree.querySelectorAll("[role='treeitem']"));
+      }
+      function parentItem(item) {
+        return item.parentElement ? item.parentElement.closest("[role='treeitem']") : null;
+      }
+      function isVisible(item) {
+        var p = parentItem(item);
+        while (p) {
+          if (p.getAttribute('aria-expanded') === 'false') return false;
+          p = parentItem(p);
+        }
+        return true;
+      }
+      function visibleItems() { return allItems().filter(isVisible); }
+      // The item's own text, excluding any nested group.
+      function ownText(item) {
+        var text = '';
+        item.childNodes.forEach(function(n) {
+          if (n.nodeType === 1 && n.getAttribute('role') === 'group') return;
+          text += n.textContent || '';
+        });
+        return text.trim().toLowerCase();
+      }
+      function setStop(target) {
+        allItems().forEach(function(item) {
+          item.setAttribute('tabindex', item === target ? '0' : '-1');
+        });
+      }
+      // Keep exactly one tab stop, on a visible item.
+      function normalise() {
+        var visible = visibleItems();
+        if (visible.length === 0) return;
+        var stops = allItems().filter(function(i) { return i.getAttribute('tabindex') === '0'; });
+        if (stops.length === 1 && isVisible(stops[0])) return;
+        var keep = stops.find(isVisible) ||
+          visible.find(function(i) { return i.getAttribute('aria-selected') === 'true'; }) ||
+          visible[0];
+        setStop(keep);
+      }
+      function focusItem(item) {
+        if (!item) return;
+        setStop(item);
+        item.focus();
+      }
+
+      normalise();
+      new MutationObserver(normalise).observe(tree, {
+        subtree: true,
+        childList: true,
+        attributes: true,
+        attributeFilter: ['aria-expanded']
+      });
+
+      tree.addEventListener('focusin', function(event) {
+        var item = event.target.closest("[role='treeitem']");
+        if (item && tree.contains(item)) setStop(item);
+      });
+
+      tree.addEventListener('keydown', function(event) {
+        var target = event.target;
+        var item = target.closest("[role='treeitem']");
+        if (!item || !tree.contains(item)) return;
+        if (event.ctrlKey || event.metaKey || event.altKey) return;
+
+        var visible = visibleItems();
+        var index = visible.indexOf(item);
+        var expanded = item.getAttribute('aria-expanded');
+
+        switch (event.key) {
+          case 'ArrowDown':
+            event.preventDefault();
+            focusItem(visible[Math.min(index + 1, visible.length - 1)]);
+            return;
+          case 'ArrowUp':
+            event.preventDefault();
+            focusItem(visible[Math.max(index - 1, 0)]);
+            return;
+          case 'Home':
+            event.preventDefault();
+            focusItem(visible[0]);
+            return;
+          case 'End':
+            event.preventDefault();
+            focusItem(visible[visible.length - 1]);
+            return;
+          case 'ArrowRight':
+            if (target !== item) return;
+            event.preventDefault();
+            if (expanded === 'false') {
+              item.setAttribute('aria-expanded', 'true');
+            } else if (expanded === 'true') {
+              focusItem(item.querySelector("[role='group'] [role='treeitem']"));
+            }
+            return;
+          case 'ArrowLeft':
+            if (target !== item) return;
+            event.preventDefault();
+            if (expanded === 'true') {
+              item.setAttribute('aria-expanded', 'false');
+            } else {
+              focusItem(parentItem(item));
+            }
+            return;
+          case 'Enter':
+          case ' ':
+            if (target !== item) return;
+            event.preventDefault();
+            item.click();
+            return;
+          case '*':
+            event.preventDefault();
+            Array.prototype.slice.call(item.parentElement ? item.parentElement.children : []).forEach(function(sibling) {
+              if (sibling.getAttribute('role') === 'treeitem' && sibling.getAttribute('aria-expanded') === 'false') {
+                sibling.setAttribute('aria-expanded', 'true');
+              }
+            });
+            return;
+        }
+
+        // Typeahead
+        if (event.key.length === 1) {
+          event.preventDefault();
+          buffer += event.key.toLowerCase();
+          clearTimeout(bufferTimer);
+          bufferTimer = setTimeout(function() { buffer = ''; }, 500);
+          var cycle = buffer.length === 1 || buffer.split('').every(function(c) { return c === buffer[0]; });
+          var needle = cycle ? buffer[0] : buffer;
+          var cut = index + (cycle ? 1 : 0);
+          var ordered = visible.slice(cut).concat(visible.slice(0, cut));
+          focusItem(ordered.find(function(i) { return ownText(i).indexOf(needle) === 0; }));
+        }
+      });
+    }
+
+    document.querySelectorAll('.file-tree').forEach(initFileTree);
+  })();
+</script>

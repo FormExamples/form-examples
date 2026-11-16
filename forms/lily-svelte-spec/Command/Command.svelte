@@ -51,7 +51,12 @@
     //   - WAI-ARIA Listbox Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/listbox/
     //   - WAI-ARIA Combobox Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
 
+    import { warnMissingName } from "../dev-warning";
     import type { Snippet } from "svelte";
+    import { attachCommand } from "./command-keys";
+
+    const uid = $props.id();
+    const listId = `command-list-${uid}`;
 
     let {
         class: className = "",
@@ -67,6 +72,15 @@
         children: Snippet;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName("Command", label, restProps["aria-label"], restProps["aria-labelledby"]),
+    );
+
+    let input = $state<HTMLInputElement>();
+    let list = $state<HTMLElement>();
+
+    $effect(() => (input && list ? attachCommand(input, list) : undefined));
 </script>
 
 <!-- Command.svelte -->
@@ -77,13 +91,17 @@
     {...restProps}
 >
     <input
+        bind:this={input}
         type="search"
+        aria-controls={listId}
         bind:value
         aria-label={label}
         {placeholder}
         autocomplete="off"
     />
     <div
+        bind:this={list}
+        id={listId}
         role="listbox"
         aria-label={label}
     >

@@ -1,17 +1,20 @@
-<script module lang="ts">
-  import { defineMeta } from '@storybook/addon-svelte-csf';
-  import Field from './Field.svelte';
+<script
+    module
+    lang="ts"
+>
+    import { defineMeta } from "@storybook/addon-svelte-csf";
+    import Field from "./Field.svelte";
 
-  const { Story } = defineMeta({
-    title: 'Headless/Field',
-    component: Field,
-  });
+    const { Story } = defineMeta({
+        title: "Headless/Field",
+        component: Field,
+    });
 </script>
 
 <Story
-  name="Default"
-  tags={['autodocs', '!dev']}
-  args={{'label':'Field'}}
+    name="Default"
+    tags={["autodocs", "!dev"]}
+    args={{ label: "Field" }}
 >
-  <input type="text" />
+    <input type="text" />
 </Story>

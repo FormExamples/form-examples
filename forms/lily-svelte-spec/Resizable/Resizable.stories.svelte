@@ -1,17 +1,20 @@
-<script module lang="ts">
-  import { defineMeta } from '@storybook/addon-svelte-csf';
-  import Resizable from './Resizable.svelte';
+<script
+    module
+    lang="ts"
+>
+    import { defineMeta } from "@storybook/addon-svelte-csf";
+    import Resizable from "./Resizable.svelte";
 
-  const { Story } = defineMeta({
-    title: 'Headless/Resizable',
-    component: Resizable,
-  });
+    const { Story } = defineMeta({
+        title: "Headless/Resizable",
+        component: Resizable,
+    });
 </script>
 
 <Story
-  name="Default"
-  tags={['autodocs', '!dev']}
-  args={{'label':'Resizable'}}
+    name="Default"
+    tags={["autodocs", "!dev"]}
+    args={{ label: "Resizable" }}
 >
-  <div>Resizable content</div>
+    <div>Resizable content</div>
 </Story>

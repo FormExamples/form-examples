@@ -5,13 +5,12 @@
   HTML tag: <span>
   CSS class: latvija-personas-kods-view
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
   Format: 11 digits in the form DDMMYY-CZZZZ where the first 6 are the date of birth (DDMMYY) and C encodes the century (0 = 19th, 1 = 20th, 2 = 21st)
   Usage:
-    <span class="latvija-personas-kods-view" aria-label="Personal Code">value-here</span>
+    <span class="latvija-personas-kods-view">value-here</span>
 -->
 
-<span
-  class="latvija-personas-kods-view"
-  aria-label="Personal Code"
-></span>
+<span class="latvija-personas-kods-view"
+  ><span class="screen-reader-span">Personal Code </span></span
+>

@@ -10,7 +10,7 @@ See [components/super-banner/index.md](../../../components/super-banner/index.md
 
 ```svelte
 <script lang="ts">
-    import SuperBanner from "./SuperBanner.svelte";
+  import SuperBanner from "./SuperBanner.svelte";
 </script>
 
 <SuperBanner />

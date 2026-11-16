@@ -36,7 +36,11 @@ describe("GraphicBlock", () => {
 
     test("renders all caption parts when provided", () => {
         const { container } = render(Subject, {
-            label: "x", title: "T", description: "D", notes: "N", children: snippet("c"),
+            label: "x",
+            title: "T",
+            description: "D",
+            notes: "N",
+            children: snippet("c"),
         });
         expect(container.querySelector(".graphic-block-title")?.textContent).toBe("T");
         expect(container.querySelector(".graphic-block-description")?.textContent).toBe("D");

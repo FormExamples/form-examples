@@ -60,4 +60,23 @@ describe("Scroller", () => {
         const fg = container.querySelector(".scroller-foreground");
         expect(fg?.classList.contains("scroller-base")).toBe(true);
     });
+
+    test("is a named group when labelled", () => {
+        const { container } = render(Subject, {
+            label: "Story",
+            background: snippet("<div />"),
+            children: snippet("content"),
+        });
+        const root = container.querySelector(".scroller");
+        expect(root?.getAttribute("role")).toBe("group");
+        expect(root?.getAttribute("aria-label")).toBe("Story");
+    });
+
+    test("has no role without a label", () => {
+        const { container } = render(Subject, {
+            background: snippet("<div />"),
+            children: snippet("content"),
+        });
+        expect(container.querySelector(".scroller")?.hasAttribute("role")).toBe(false);
+    });
 });

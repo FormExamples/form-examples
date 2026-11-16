@@ -27,7 +27,10 @@
 </script>
 
 <!-- Byline.svelte -->
-<div class={`byline ${className}`} {...restProps}>
+<div
+    class={`byline ${className}`}
+    {...restProps}
+>
     <span class="byline-authors">{@render children?.()}</span>
     {#if published}
         <span class="byline-published">{@render published()}</span>

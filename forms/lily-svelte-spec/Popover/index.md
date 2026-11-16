@@ -1,18 +1,18 @@
 # Popover
 
-A headless conditional dialog overlay that displays contextual information or actions near its trigger element. Only mounts in the DOM when `open` is `true`.
+A headless dialog overlay that displays contextual information or actions near its trigger element. It is a native `popover="auto"`: the browser opens it from a `command="toggle-popover"` trigger and closes it on Escape or a click outside.
 
 ## What it is
 
 - Component: `Popover`
-- HTML element: `<div role="dialog">` (conditionally rendered)
+- HTML element: `<div popover="auto" role="dialog">` (always rendered)
 - Role: `dialog`
 - Category: overlay / floating content
 
 ## What it does
 
-- Renders a `<div role="dialog">` with `aria-label` only when the bindable `open` is `true`.
-- Does nothing when closed — no hidden DOM, no animation hooks.
+- Renders a `<div popover="auto" role="dialog">` with `aria-label`; the native Popover API shows it in the top layer and closes it on Escape or a click outside (light dismiss); `open` follows the element's `toggle` event, with a `hidden` fallback where `showPopover` is missing.
+- Closed, it stays in the DOM (so a trigger can name its `id`) and the browser does not display it.
 - Supports `bind:open` for two-way toggling from the trigger.
 - Spreads additional attributes onto the dialog `<div>`.
 
@@ -31,7 +31,7 @@ A headless conditional dialog overlay that displays contextual information or ac
 
 ## How to use it
 
-The consumer is responsible for the trigger, the open/close logic, Escape handling, and focus management. The component only toggles visibility and applies ARIA.
+The consumer provides the trigger (`<button command="toggle-popover" commandfor="{id}">`) and any focus management; the browser handles Escape and light dismiss.
 
 ```svelte
 import Popover from './Popover.svelte';
@@ -51,15 +51,24 @@ import Popover from './Popover.svelte';
 
 ```svelte
 <script lang="ts">
-  import Popover from './Popover.svelte';
+  import Popover from "./Popover.svelte";
 
   let open = $state(false);
 </script>
 
-<button type="button" onclick={() => (open = !open)}>Toggle info</button>
-<Popover label="Additional information" bind:open>
+<button
+  type="button"
+  onclick={() => (open = !open)}>Toggle info</button
+>
+<Popover
+  label="Additional information"
+  bind:open
+>
   <p>Here is some contextual information.</p>
-  <button type="button" onclick={() => (open = false)}>Close</button>
+  <button
+    type="button"
+    onclick={() => (open = false)}>Close</button
+  >
 </Popover>
 ```
 
@@ -67,10 +76,12 @@ import Popover from './Popover.svelte';
 
 ```svelte
 <script lang="ts">
-  import Popover from './Popover.svelte';
+  import Popover from "./Popover.svelte";
 
   let open = $state(false);
-  function onKey(e: KeyboardEvent) { if (e.key === "Escape") open = false; }
+  function onKey(e: KeyboardEvent) {
+    if (e.key === "Escape") open = false;
+  }
 </script>
 
 <svelte:window onkeydown={onKey} />
@@ -82,7 +93,10 @@ import Popover from './Popover.svelte';
 >
   Details
 </button>
-<Popover label="Details" bind:open>
+<Popover
+  label="Details"
+  bind:open
+>
   <p>Quick preview content.</p>
 </Popover>
 ```
@@ -91,18 +105,37 @@ import Popover from './Popover.svelte';
 
 ```svelte
 <script lang="ts">
-  import Popover from './Popover.svelte';
+  import Popover from "./Popover.svelte";
 
   let open = $state(false);
   let email = $state("");
 </script>
 
-<button type="button" onclick={() => (open = true)}>Invite</button>
-<Popover label="Send invitation" bind:open>
-  <form onsubmit={(e) => { e.preventDefault(); open = false; }}>
-    <label>Email <input type="email" bind:value={email} /></label>
+<button
+  type="button"
+  onclick={() => (open = true)}>Invite</button
+>
+<Popover
+  label="Send invitation"
+  bind:open
+>
+  <form
+    onsubmit={(e) => {
+      e.preventDefault();
+      open = false;
+    }}
+  >
+    <label
+      >Email <input
+        type="email"
+        bind:value={email}
+      /></label
+    >
     <button type="submit">Send</button>
-    <button type="button" onclick={() => (open = false)}>Cancel</button>
+    <button
+      type="button"
+      onclick={() => (open = false)}>Cancel</button
+    >
   </form>
 </Popover>
 ```
@@ -111,12 +144,15 @@ import Popover from './Popover.svelte';
 
 ```svelte
 <script lang="ts">
-  import Popover from './Popover.svelte';
+  import Popover from "./Popover.svelte";
 
   let open = $state(true);
 </script>
 
-<Popover label="Welcome" {open}>
+<Popover
+  label="Welcome"
+  {open}
+>
   <p>Welcome aboard!</p>
 </Popover>
 ```
@@ -124,7 +160,11 @@ import Popover from './Popover.svelte';
 ### Extra attributes for positioning hooks
 
 ```svelte
-<Popover label="Menu" bind:open data-anchor="top-right" />
+<Popover
+  label="Menu"
+  bind:open
+  data-anchor="top-right"
+/>
 ```
 
 ## Accessibility

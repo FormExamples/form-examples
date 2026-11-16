@@ -28,7 +28,9 @@ describe("Command", () => {
     });
 
     test("applies placeholder", () => {
-        render(Subject, { props: { label: "Cmd", placeholder: "Type...", children: textSnippet("Items") } });
+        render(Subject, {
+            props: { label: "Cmd", placeholder: "Type...", children: textSnippet("Items") },
+        });
         expect(screen.getByPlaceholderText("Type...")).toBeTruthy();
     });
 
@@ -40,7 +42,9 @@ describe("Command", () => {
     });
 
     test("passes through attributes", () => {
-        render(Subject, { props: { label: "Cmd", "data-testid": "cmd", children: textSnippet("Items") } });
+        render(Subject, {
+            props: { label: "Cmd", "data-testid": "cmd", children: textSnippet("Items") },
+        });
         expect(screen.getByTestId("cmd")).toBeTruthy();
     });
 });

@@ -44,9 +44,9 @@ Import `AccordionList` from `./AccordionList.svelte`. Place it inside an `Accord
 
 ```svelte
 <script lang="ts">
-  import AccordionNav from '../AccordionNav/AccordionNav.svelte';
-  import AccordionList from './AccordionList.svelte';
-  import AccordionListItem from '../AccordionListItem/AccordionListItem.svelte';
+  import AccordionNav from "../AccordionNav/AccordionNav.svelte";
+  import AccordionList from "./AccordionList.svelte";
+  import AccordionListItem from "../AccordionListItem/AccordionListItem.svelte";
 </script>
 
 <AccordionNav label="FAQ">
@@ -63,9 +63,9 @@ Import `AccordionList` from `./AccordionList.svelte`. Place it inside an `Accord
 
 ```svelte
 <script lang="ts">
-  import AccordionNav from '../AccordionNav/AccordionNav.svelte';
-  import AccordionList from './AccordionList.svelte';
-  import AccordionListItem from '../AccordionListItem/AccordionListItem.svelte';
+  import AccordionNav from "../AccordionNav/AccordionNav.svelte";
+  import AccordionList from "./AccordionList.svelte";
+  import AccordionListItem from "../AccordionListItem/AccordionListItem.svelte";
 </script>
 
 <AccordionNav label="Help Topics">
@@ -86,9 +86,9 @@ Import `AccordionList` from `./AccordionList.svelte`. Place it inside an `Accord
 
 ```svelte
 <script lang="ts">
-  import AccordionNav from '../AccordionNav/AccordionNav.svelte';
-  import AccordionList from './AccordionList.svelte';
-  import AccordionListItem from '../AccordionListItem/AccordionListItem.svelte';
+  import AccordionNav from "../AccordionNav/AccordionNav.svelte";
+  import AccordionList from "./AccordionList.svelte";
+  import AccordionListItem from "../AccordionListItem/AccordionListItem.svelte";
 
   let firstOpen = $state(true);
 </script>
@@ -106,10 +106,16 @@ Import `AccordionList` from `./AccordionList.svelte`. Place it inside an `Accord
 ### With custom data attributes
 
 ```svelte
-<AccordionList label="Filters" data-testid="filter-group">
+<AccordionList
+  label="Filters"
+  data-testid="filter-group"
+>
   <AccordionListItem>
     <summary>Category</summary>
-    <ul><li>Books</li><li>Games</li></ul>
+    <ul>
+      <li>Books</li>
+      <li>Games</li>
+    </ul>
   </AccordionListItem>
 </AccordionList>
 ```

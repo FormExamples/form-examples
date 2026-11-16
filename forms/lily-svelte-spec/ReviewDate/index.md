@@ -50,33 +50,43 @@ Simple review date:
 
 ```svelte
 <script lang="ts">
-    import ReviewDate from "./ReviewDate.svelte";
+  import ReviewDate from "./ReviewDate.svelte";
 </script>
 
-<ReviewDate label="Next review" datetime="2026-06-15">June 15, 2026</ReviewDate>
+<ReviewDate
+  label="Next review"
+  datetime="2026-06-15">June 15, 2026</ReviewDate
+>
 ```
 
 With a locale-formatted string:
 
 ```svelte
 <script lang="ts">
-    import ReviewDate from "./ReviewDate.svelte";
-    const iso = "2026-04-18";
-    const formatted = new Date(iso).toLocaleDateString("en-GB");
+  import ReviewDate from "./ReviewDate.svelte";
+  const iso = "2026-04-18";
+  const formatted = new Date(iso).toLocaleDateString("en-GB");
 </script>
 
-<ReviewDate label="Last audit" datetime={iso}>{formatted}</ReviewDate>
+<ReviewDate
+  label="Last audit"
+  datetime={iso}>{formatted}</ReviewDate
+>
 ```
 
 With extra data attributes for CSS:
 
 ```svelte
 <script lang="ts">
-    import ReviewDate from "./ReviewDate.svelte";
+  import ReviewDate from "./ReviewDate.svelte";
 </script>
 
-<ReviewDate label="Due date" datetime="2026-12-31" data-urgency="high">
-    Dec 31, 2026
+<ReviewDate
+  label="Due date"
+  datetime="2026-12-31"
+  data-urgency="high"
+>
+  Dec 31, 2026
 </ReviewDate>
 ```
 
@@ -84,12 +94,15 @@ In a summary row:
 
 ```svelte
 <script lang="ts">
-    import ReviewDate from "./ReviewDate.svelte";
-    import SummaryListItem from "../SummaryListItem/SummaryListItem.svelte";
+  import ReviewDate from "./ReviewDate.svelte";
+  import SummaryListItem from "../SummaryListItem/SummaryListItem.svelte";
 </script>
 
 <SummaryListItem term="Next review">
-    <ReviewDate label="Next review" datetime="2026-09-01">September 1, 2026</ReviewDate>
+  <ReviewDate
+    label="Next review"
+    datetime="2026-09-01">September 1, 2026</ReviewDate
+  >
 </SummaryListItem>
 ```
 
@@ -97,12 +110,15 @@ Conditional localized output:
 
 ```svelte
 <script lang="ts">
-    import ReviewDate from "./ReviewDate.svelte";
-    let { iso, locale }: { iso: string; locale: string } = $props();
+  import ReviewDate from "./ReviewDate.svelte";
+  let { iso, locale }: { iso: string; locale: string } = $props();
 </script>
 
-<ReviewDate label="Review date" datetime={iso}>
-    {new Intl.DateTimeFormat(locale).format(new Date(iso))}
+<ReviewDate
+  label="Review date"
+  datetime={iso}
+>
+  {new Intl.DateTimeFormat(locale).format(new Date(iso))}
 </ReviewDate>
 ```
 
@@ -113,6 +129,7 @@ Conditional localized output:
 - `aria-label` is required and should describe the meaning of the date, not just repeat the visible text ("Last reviewed on ..." rather than just "June 15, 2026").
 
 References:
+
 - HTML `<time>`: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time
 - ISO 8601: https://en.wikipedia.org/wiki/ISO_8601
 

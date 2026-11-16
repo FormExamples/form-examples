@@ -48,7 +48,7 @@ Import `Alert` from `./Alert.svelte`. Pass the severity `type` for styling and c
 
 ```svelte
 <script lang="ts">
-  import Alert from './Alert.svelte';
+  import Alert from "./Alert.svelte";
 </script>
 
 <Alert>Something happened.</Alert>
@@ -58,10 +58,13 @@ Import `Alert` from `./Alert.svelte`. Pass the severity `type` for styling and c
 
 ```svelte
 <script lang="ts">
-  import Alert from './Alert.svelte';
+  import Alert from "./Alert.svelte";
 </script>
 
-<Alert type="error" heading="Error">
+<Alert
+  type="error"
+  heading="Error"
+>
   Something went wrong. Please try again.
 </Alert>
 ```
@@ -70,10 +73,14 @@ Import `Alert` from `./Alert.svelte`. Pass the severity `type` for styling and c
 
 ```svelte
 <script lang="ts">
-  import Alert from './Alert.svelte';
+  import Alert from "./Alert.svelte";
 </script>
 
-<Alert role="status" type="success" heading="Saved">
+<Alert
+  role="status"
+  type="success"
+  heading="Saved"
+>
   Your changes were saved.
 </Alert>
 ```
@@ -82,17 +89,20 @@ Import `Alert` from `./Alert.svelte`. Pass the severity `type` for styling and c
 
 ```svelte
 <script lang="ts">
-  import Alert from './Alert.svelte';
+  import Alert from "./Alert.svelte";
 
   let error = $state<string | null>(null);
   function submit() {
-    error = 'Unable to connect to the server.';
+    error = "Unable to connect to the server.";
   }
 </script>
 
 <button onclick={submit}>Submit</button>
 {#if error}
-  <Alert type="error" heading="Connection failed">{error}</Alert>
+  <Alert
+    type="error"
+    heading="Connection failed">{error}</Alert
+  >
 {/if}
 ```
 
@@ -100,10 +110,15 @@ Import `Alert` from `./Alert.svelte`. Pass the severity `type` for styling and c
 
 ```svelte
 <script lang="ts">
-  import Alert from './Alert.svelte';
+  import Alert from "./Alert.svelte";
 </script>
 
-<Alert type="warning" role="status" live="assertive" heading="Session expiring">
+<Alert
+  type="warning"
+  role="status"
+  live="assertive"
+  heading="Session expiring"
+>
   You will be logged out in 1 minute.
 </Alert>
 ```

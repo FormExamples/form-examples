@@ -62,6 +62,7 @@
     //   - HTML <select> element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select
     //   - WAI-ARIA Listbox Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/listbox/
 
+    import { warnMissingName } from "../dev-warning";
     import type { Snippet } from "svelte";
 
     let {
@@ -91,6 +92,15 @@
         after?: Snippet;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName(
+            "SelectWithExtras",
+            label,
+            restProps["aria-label"],
+            restProps["aria-labelledby"],
+        ),
+    );
 </script>
 
 <!-- SelectWithExtras.svelte -->

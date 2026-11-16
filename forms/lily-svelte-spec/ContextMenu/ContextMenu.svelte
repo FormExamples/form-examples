@@ -51,7 +51,9 @@
     // References:
     //   - WAI-ARIA Menu Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/menu/
 
+    import { warnMissingName } from "../dev-warning";
     import type { Snippet } from "svelte";
+    import { popoverState, toggleOpened } from "../Popover/popover.js";
 
     let {
         class: className = "",
@@ -69,14 +71,22 @@
         [key: string]: unknown;
     } = $props();
 
+    $effect(() =>
+        warnMissingName(
+            "ContextMenu",
+            label,
+            restProps["aria-label"],
+            restProps["aria-labelledby"],
+        ),
+    );
+
     // Reference to the menu element for focus management.
     let menuRef: HTMLElement | undefined = $state(undefined);
 
     // When the menu opens, focus the first menuitem.
     $effect(() => {
         if (open && menuRef) {
-            const firstItem =
-                menuRef.querySelector<HTMLElement>("[role='menuitem']");
+            const firstItem = menuRef.querySelector<HTMLElement>("[role='menuitem']");
             firstItem?.focus();
         }
     });
@@ -84,9 +94,7 @@
     // Keyboard navigation within the menu.
     function onkeydown(event: KeyboardEvent) {
         if (!menuRef) return;
-        const items = Array.from(
-            menuRef.querySelectorAll<HTMLElement>("[role='menuitem']"),
-        );
+        const items = Array.from(menuRef.querySelectorAll<HTMLElement>("[role='menuitem']"));
         const current = document.activeElement as HTMLElement;
         const index = items.indexOf(current);
 
@@ -122,15 +130,19 @@
     }
 </script>
 
-{#if open}
-    <div
-        class={`context-menu ${className}`}
-        role="menu"
-        aria-label={label}
-        bind:this={menuRef}
-        {onkeydown}
-        {...restProps}
-    >
-        {@render children?.()}
-    </div>
-{/if}
+<!-- popover="auto": there is no declarative trigger (a right-click or long-press opens it), so popoverState shows it
+     with showPopover() when `open` turns true, in the top layer; light dismiss and Escape come from the browser and the
+     toggle event writes `open` back. Positioning at the pointer stays the consumer's CSS. -->
+<div
+    class={`context-menu ${className}`}
+    role="menu"
+    aria-label={label}
+    popover="auto"
+    bind:this={menuRef}
+    use:popoverState={open}
+    ontoggle={(event) => (open = toggleOpened(event))}
+    {onkeydown}
+    {...restProps}
+>
+    {@render children?.()}
+</div>

@@ -2,31 +2,80 @@
 <!-- SlideOutDrawer component -->
 <!--
   Description: a drawer that slides out from the side of the page
-  HTML tag: <div>
+  HTML tag: <dialog>
   CSS class: slide-out-drawer
-  Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Keyboard: open it by setting data-open="true" (opened with showModal(): focus moves inside, Tab stays inside, the page behind is inert); Escape (keydown or the native cancel event) closes it: sets data-open="false", closes the dialog and returns focus to the opener
+  Accessibility: native <dialog> opened with showModal() (role="dialog" kept explicit as in dialog.html), aria-modal="true" (true: showModal() makes the rest of the page inert), tabindex="-1", aria-label for accessible name. Where showModal is missing it falls back to the open attribute. A closed <dialog> is not rendered, so no hidden attribute is needed.
   Usage:
-    <div class="slide-out-drawer" aria-label="Example">
-      ...
-    </div>
+    <dialog
+      class="slide-out-drawer"
+      role="dialog"
+      aria-modal="true"
+      tabindex="-1"
+      aria-label=""
+      data-open="false"
+    >
+    </dialog>
 -->
 
-<div
+<dialog
   class="slide-out-drawer"
+  role="dialog"
+  aria-modal="true"
+  tabindex="-1"
   aria-label=""
   data-open="false"
 >
   <!-- Consumer provides content -->
-</div>
+</dialog>
 
 <script>
-  // SlideOutDrawer behavior
+  // SlideOutDrawer behavior: a real modal (tasks.md P18-T6). data-open is the source of truth; the dialog is opened
+  // with showModal() so the browser traps Tab, makes the page inert and puts it in the top layer.
   (function() {
     'use strict';
-    // SlideOutDrawer: consumer implements interactive behavior
     document.querySelectorAll('.slide-out-drawer').forEach(function(el) {
-      // Interactive behavior initialization
+      var opener = null;
+      function sync() {
+        if (el.getAttribute('data-open') === 'true') {
+          if (!el.open) {
+            opener = document.activeElement;
+            if (typeof el.showModal === 'function') el.showModal();
+            else el.setAttribute('open', '');
+          }
+          if (!el.contains(document.activeElement)) el.focus();
+        } else {
+          if (el.open) {
+            if (typeof el.close === 'function') el.close();
+            else el.removeAttribute('open');
+          }
+          if (opener && opener.isConnected) opener.focus();
+          opener = null;
+        }
+      }
+      function dismiss() {
+        if (el.getAttribute('data-open') !== 'true') return;
+        el.setAttribute('data-open', 'false');
+        el.dispatchEvent(new CustomEvent('close'));
+      }
+      new MutationObserver(sync).observe(el, { attributes: true, attributeFilter: ['data-open'] });
+      sync();
+      el.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !e.defaultPrevented && el.getAttribute('data-open') === 'true') {
+          e.preventDefault();
+          dismiss();
+        }
+      });
+      el.addEventListener('cancel', function(e) {
+        e.preventDefault();
+        dismiss();
+      });
+      // The native close event (e.g. a <form method="dialog">) keeps data-open in step.
+      el.addEventListener('close', function(e) {
+        if (e instanceof CustomEvent) return;
+        // A reopen can land before this queued event, so follow only a dialog that is really closed.
+        if (!el.open && el.getAttribute('data-open') === 'true') el.setAttribute('data-open', 'false');
+      });
     });
   })();
 </script>

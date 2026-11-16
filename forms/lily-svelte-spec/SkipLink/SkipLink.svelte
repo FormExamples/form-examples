@@ -9,11 +9,11 @@
     // Props:
     //   className — string, optional. CSS class name.
     //   href — string, default "#content". The anchor target that the link navigates to.
-    //   label — string, default "Skip to content". The visible link text.
+    //   label — string, required. No default: the words are yours. The visible link text.
     //   ...restProps — additional HTML attributes spread onto the <a>.
     //
     // Syntax:
-    //   <SkipLink />
+    //   <SkipLink label="Skip to content" />
     //
     // Examples:
     //   <!-- Custom target and label -->
@@ -34,7 +34,6 @@
     //
     // Internationalization:
     //   - The label prop externalizes the link text for localization
-    //   - Default "Skip to content" should be overridden in non-English contexts
     //
     // Claude rules:
     //   - Headless: no CSS, no styles — consumer provides all styling
@@ -45,18 +44,22 @@
     //   - WCAG 2.1 Bypass Blocks: https://www.w3.org/WAI/WCAG21/Understanding/bypass-blocks.html
     //   - WebAIM Skip Navigation Links: https://webaim.org/techniques/skipnav/
 
+    import { warnMissingName } from "../dev-warning";
+
     let {
         class: className = "",
         href = "#content",
-        label = "Skip to content",
+        label,
         ...restProps
     }: {
         /** Target anchor. */
         href?: string;
         /** Link text. */
-        label?: string;
+        label: string;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() => warnMissingName("SkipLink", label, restProps["aria-labelledby"]));
 </script>
 
 <!-- SkipLink.svelte -->

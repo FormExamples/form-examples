@@ -37,9 +37,9 @@ Import `CalendarTableHead` from `./CalendarTableHead.svelte`. Place at the top o
 
 ```svelte
 <script lang="ts">
-  import CalendarTable from '../CalendarTable/CalendarTable.svelte';
-  import CalendarTableHead from './CalendarTableHead.svelte';
-  import CalendarTableRow from '../CalendarTableRow/CalendarTableRow.svelte';
+  import CalendarTable from "../CalendarTable/CalendarTable.svelte";
+  import CalendarTableHead from "./CalendarTableHead.svelte";
+  import CalendarTableRow from "../CalendarTableRow/CalendarTableRow.svelte";
 </script>
 
 <CalendarTable label="January 2025">
@@ -55,15 +55,15 @@ Import `CalendarTableHead` from `./CalendarTableHead.svelte`. Place at the top o
 
 ```svelte
 <script lang="ts">
-  import CalendarTable from '../CalendarTable/CalendarTable.svelte';
-  import CalendarTableHead from './CalendarTableHead.svelte';
-  import CalendarTableRow from '../CalendarTableRow/CalendarTableRow.svelte';
+  import CalendarTable from "../CalendarTable/CalendarTable.svelte";
+  import CalendarTableHead from "./CalendarTableHead.svelte";
+  import CalendarTableRow from "../CalendarTableRow/CalendarTableRow.svelte";
 </script>
 
 <CalendarTable label="January 2025">
   <CalendarTableHead>
     <CalendarTableRow>
-      {#each ['S', 'M', 'T', 'W', 'T', 'F', 'S'] as d}
+      {#each ["S", "M", "T", "W", "T", "F", "S"] as d}
         <th><abbr title={d}>{d}</abbr></th>
       {/each}
     </CalendarTableRow>
@@ -75,11 +75,11 @@ Import `CalendarTableHead` from `./CalendarTableHead.svelte`. Place at the top o
 
 ```svelte
 <script lang="ts">
-  import CalendarTable from '../CalendarTable/CalendarTable.svelte';
-  import CalendarTableHead from './CalendarTableHead.svelte';
-  import CalendarTableRow from '../CalendarTableRow/CalendarTableRow.svelte';
+  import CalendarTable from "../CalendarTable/CalendarTable.svelte";
+  import CalendarTableHead from "./CalendarTableHead.svelte";
+  import CalendarTableRow from "../CalendarTableRow/CalendarTableRow.svelte";
 
-  const days = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+  const days = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
 </script>
 
 <CalendarTable label="Enero 2025">
@@ -95,8 +95,8 @@ Import `CalendarTableHead` from `./CalendarTableHead.svelte`. Place at the top o
 
 ```svelte
 <script lang="ts">
-  import CalendarTableHead from './CalendarTableHead.svelte';
-  import CalendarTableRow from '../CalendarTableRow/CalendarTableRow.svelte';
+  import CalendarTableHead from "./CalendarTableHead.svelte";
+  import CalendarTableRow from "../CalendarTableRow/CalendarTableRow.svelte";
 </script>
 
 <CalendarTableHead data-section="weekdays">
@@ -111,11 +111,11 @@ Import `CalendarTableHead` from `./CalendarTableHead.svelte`. Place at the top o
 
 ```svelte
 <script lang="ts">
-  import CalendarTable from '../CalendarTable/CalendarTable.svelte';
-  import CalendarTableHead from './CalendarTableHead.svelte';
-  import CalendarTableBody from '../CalendarTableBody/CalendarTableBody.svelte';
-  import CalendarTableRow from '../CalendarTableRow/CalendarTableRow.svelte';
-  import CalendarTableTD from '../CalendarTableTD/CalendarTableTD.svelte';
+  import CalendarTable from "../CalendarTable/CalendarTable.svelte";
+  import CalendarTableHead from "./CalendarTableHead.svelte";
+  import CalendarTableBody from "../CalendarTableBody/CalendarTableBody.svelte";
+  import CalendarTableRow from "../CalendarTableRow/CalendarTableRow.svelte";
+  import CalendarTableTD from "../CalendarTableTD/CalendarTableTD.svelte";
 </script>
 
 <CalendarTable label="Feb 2025">
@@ -123,7 +123,9 @@ Import `CalendarTableHead` from `./CalendarTableHead.svelte`. Place at the top o
     <CalendarTableRow><th>Mon</th><th>Tue</th></CalendarTableRow>
   </CalendarTableHead>
   <CalendarTableBody>
-    <CalendarTableRow><CalendarTableTD>3</CalendarTableTD><CalendarTableTD>4</CalendarTableTD></CalendarTableRow>
+    <CalendarTableRow
+      ><CalendarTableTD>3</CalendarTableTD><CalendarTableTD>4</CalendarTableTD></CalendarTableRow
+    >
   </CalendarTableBody>
 </CalendarTable>
 ```

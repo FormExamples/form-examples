@@ -46,6 +46,7 @@
     // References:
     //   - Clipboard API: https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/writeText
 
+    import { warnMissingName } from "../dev-warning";
     import type { Snippet } from "svelte";
 
     let {
@@ -69,6 +70,15 @@
         children?: Snippet;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName(
+            "ClipboardCopyButton",
+            label,
+            restProps["aria-label"],
+            restProps["aria-labelledby"],
+        ),
+    );
 
     let copied = $state(false);
 

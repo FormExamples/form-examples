@@ -39,26 +39,26 @@ Place `KanbanTableBody` inside a `KanbanTable` and nest `KanbanTableRow` childre
 
 ```svelte
 <script lang="ts">
-    import KanbanTable from "../KanbanTable/KanbanTable.svelte";
-    import KanbanTableHead from "../KanbanTableHead/KanbanTableHead.svelte";
-    import KanbanTableBody from "./KanbanTableBody.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
-    import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
+  import KanbanTable from "../KanbanTable/KanbanTable.svelte";
+  import KanbanTableHead from "../KanbanTableHead/KanbanTableHead.svelte";
+  import KanbanTableBody from "./KanbanTableBody.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
 </script>
 
 <KanbanTable label="Board">
-    <KanbanTableHead>
-        <KanbanTableRow>
-            <th>To Do</th>
-            <th>Done</th>
-        </KanbanTableRow>
-    </KanbanTableHead>
-    <KanbanTableBody>
-        <KanbanTableRow>
-            <KanbanTableTD>Task A</KanbanTableTD>
-            <KanbanTableTD>Task B</KanbanTableTD>
-        </KanbanTableRow>
-    </KanbanTableBody>
+  <KanbanTableHead>
+    <KanbanTableRow>
+      <th>To Do</th>
+      <th>Done</th>
+    </KanbanTableRow>
+  </KanbanTableHead>
+  <KanbanTableBody>
+    <KanbanTableRow>
+      <KanbanTableTD>Task A</KanbanTableTD>
+      <KanbanTableTD>Task B</KanbanTableTD>
+    </KanbanTableRow>
+  </KanbanTableBody>
 </KanbanTable>
 ```
 
@@ -66,33 +66,33 @@ Place `KanbanTableBody` inside a `KanbanTable` and nest `KanbanTableRow` childre
 
 ```svelte
 <script lang="ts">
-    import KanbanTable from "../KanbanTable/KanbanTable.svelte";
-    import KanbanTableHead from "../KanbanTableHead/KanbanTableHead.svelte";
-    import KanbanTableBody from "./KanbanTableBody.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
-    import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
+  import KanbanTable from "../KanbanTable/KanbanTable.svelte";
+  import KanbanTableHead from "../KanbanTableHead/KanbanTableHead.svelte";
+  import KanbanTableBody from "./KanbanTableBody.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
 </script>
 
 <KanbanTable label="Sprint">
-    <KanbanTableHead>
-        <KanbanTableRow>
-            <th>To Do</th>
-            <th>Doing</th>
-            <th>Done</th>
-        </KanbanTableRow>
-    </KanbanTableHead>
-    <KanbanTableBody>
-        <KanbanTableRow>
-            <KanbanTableTD>Story 1</KanbanTableTD>
-            <KanbanTableTD>Story 2</KanbanTableTD>
-            <KanbanTableTD>Story 3</KanbanTableTD>
-        </KanbanTableRow>
-        <KanbanTableRow>
-            <KanbanTableTD>Story 4</KanbanTableTD>
-            <KanbanTableTD />
-            <KanbanTableTD>Story 5</KanbanTableTD>
-        </KanbanTableRow>
-    </KanbanTableBody>
+  <KanbanTableHead>
+    <KanbanTableRow>
+      <th>To Do</th>
+      <th>Doing</th>
+      <th>Done</th>
+    </KanbanTableRow>
+  </KanbanTableHead>
+  <KanbanTableBody>
+    <KanbanTableRow>
+      <KanbanTableTD>Story 1</KanbanTableTD>
+      <KanbanTableTD>Story 2</KanbanTableTD>
+      <KanbanTableTD>Story 3</KanbanTableTD>
+    </KanbanTableRow>
+    <KanbanTableRow>
+      <KanbanTableTD>Story 4</KanbanTableTD>
+      <KanbanTableTD />
+      <KanbanTableTD>Story 5</KanbanTableTD>
+    </KanbanTableRow>
+  </KanbanTableBody>
 </KanbanTable>
 ```
 
@@ -100,35 +100,35 @@ Place `KanbanTableBody` inside a `KanbanTable` and nest `KanbanTableRow` childre
 
 ```svelte
 <script lang="ts">
-    import KanbanTable from "../KanbanTable/KanbanTable.svelte";
-    import KanbanTableHead from "../KanbanTableHead/KanbanTableHead.svelte";
-    import KanbanTableBody from "./KanbanTableBody.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
-    import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
+  import KanbanTable from "../KanbanTable/KanbanTable.svelte";
+  import KanbanTableHead from "../KanbanTableHead/KanbanTableHead.svelte";
+  import KanbanTableBody from "./KanbanTableBody.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
 
-    let rows = $state([
-        ["Fix login", "Review PR", "Ship patch"],
-        ["Write docs", "QA regression", "Announce"],
-    ]);
+  let rows = $state([
+    ["Fix login", "Review PR", "Ship patch"],
+    ["Write docs", "QA regression", "Announce"],
+  ]);
 </script>
 
 <KanbanTable label="Board">
-    <KanbanTableHead>
-        <KanbanTableRow>
-            <th>To Do</th>
-            <th>Doing</th>
-            <th>Done</th>
-        </KanbanTableRow>
-    </KanbanTableHead>
-    <KanbanTableBody>
-        {#each rows as row}
-            <KanbanTableRow>
-                {#each row as cell}
-                    <KanbanTableTD>{cell}</KanbanTableTD>
-                {/each}
-            </KanbanTableRow>
+  <KanbanTableHead>
+    <KanbanTableRow>
+      <th>To Do</th>
+      <th>Doing</th>
+      <th>Done</th>
+    </KanbanTableRow>
+  </KanbanTableHead>
+  <KanbanTableBody>
+    {#each rows as row}
+      <KanbanTableRow>
+        {#each row as cell}
+          <KanbanTableTD>{cell}</KanbanTableTD>
         {/each}
-    </KanbanTableBody>
+      </KanbanTableRow>
+    {/each}
+  </KanbanTableBody>
 </KanbanTable>
 ```
 
@@ -136,16 +136,16 @@ Place `KanbanTableBody` inside a `KanbanTable` and nest `KanbanTableRow` childre
 
 ```svelte
 <script lang="ts">
-    import KanbanTableBody from "./KanbanTableBody.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
-    import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
+  import KanbanTableBody from "./KanbanTableBody.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
 </script>
 
 <KanbanTableBody class="striped">
-    <KanbanTableRow>
-        <KanbanTableTD>A</KanbanTableTD>
-        <KanbanTableTD>B</KanbanTableTD>
-    </KanbanTableRow>
+  <KanbanTableRow>
+    <KanbanTableTD>A</KanbanTableTD>
+    <KanbanTableTD>B</KanbanTableTD>
+  </KanbanTableRow>
 </KanbanTableBody>
 ```
 
@@ -153,15 +153,15 @@ Place `KanbanTableBody` inside a `KanbanTable` and nest `KanbanTableRow` childre
 
 ```svelte
 <script lang="ts">
-    import KanbanTableBody from "./KanbanTableBody.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
-    import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
+  import KanbanTableBody from "./KanbanTableBody.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
 </script>
 
 <KanbanTableBody data-density="compact">
-    <KanbanTableRow>
-        <KanbanTableTD>Compact row</KanbanTableTD>
-    </KanbanTableRow>
+  <KanbanTableRow>
+    <KanbanTableTD>Compact row</KanbanTableTD>
+  </KanbanTableRow>
 </KanbanTableBody>
 ```
 

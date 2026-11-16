@@ -5,13 +5,12 @@
   HTML tag: <span>
   CSS class: liechtenstein-passport-number-view
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
   Format: 1 letter followed by 5 digits (e.g. R00536)
   Usage:
-    <span class="liechtenstein-passport-number-view" aria-label="Liechtenstein Passport Number">value-here</span>
+    <span class="liechtenstein-passport-number-view">value-here</span>
 -->
 
-<span
-  class="liechtenstein-passport-number-view"
-  aria-label="Liechtenstein Passport Number"
-></span>
+<span class="liechtenstein-passport-number-view"
+  ><span class="screen-reader-span">Liechtenstein Passport Number </span></span
+>

@@ -42,7 +42,7 @@ Import `CalendarTableTD` from `./CalendarTableTD.svelte`. Pass children for the 
 
 ```svelte
 <script lang="ts">
-  import CalendarTableTD from './CalendarTableTD.svelte';
+  import CalendarTableTD from "./CalendarTableTD.svelte";
 </script>
 
 <CalendarTableTD>22</CalendarTableTD>
@@ -52,25 +52,31 @@ Import `CalendarTableTD` from `./CalendarTableTD.svelte`. Pass children for the 
 
 ```svelte
 <script lang="ts">
-  import CalendarTableTD from './CalendarTableTD.svelte';
+  import CalendarTableTD from "./CalendarTableTD.svelte";
 </script>
 
-<CalendarTableTD selected today>15</CalendarTableTD>
+<CalendarTableTD
+  selected
+  today>15</CalendarTableTD
+>
 ```
 
 ### In a row
 
 ```svelte
 <script lang="ts">
-  import CalendarTableRow from '../CalendarTableRow/CalendarTableRow.svelte';
-  import CalendarTableTD from './CalendarTableTD.svelte';
+  import CalendarTableRow from "../CalendarTableRow/CalendarTableRow.svelte";
+  import CalendarTableTD from "./CalendarTableTD.svelte";
 
   let selected = $state(15);
 </script>
 
 <CalendarTableRow>
   {#each [14, 15, 16] as d}
-    <CalendarTableTD selected={d === selected} onclick={() => (selected = d)}>
+    <CalendarTableTD
+      selected={d === selected}
+      onclick={() => (selected = d)}
+    >
       {d}
     </CalendarTableTD>
   {/each}
@@ -81,10 +87,10 @@ Import `CalendarTableTD` from `./CalendarTableTD.svelte`. Pass children for the 
 
 ```svelte
 <script lang="ts">
-  import CalendarTable from '../CalendarTable/CalendarTable.svelte';
-  import CalendarTableBody from '../CalendarTableBody/CalendarTableBody.svelte';
-  import CalendarTableRow from '../CalendarTableRow/CalendarTableRow.svelte';
-  import CalendarTableTD from './CalendarTableTD.svelte';
+  import CalendarTable from "../CalendarTable/CalendarTable.svelte";
+  import CalendarTableBody from "../CalendarTableBody/CalendarTableBody.svelte";
+  import CalendarTableRow from "../CalendarTableRow/CalendarTableRow.svelte";
+  import CalendarTableTD from "./CalendarTableTD.svelte";
 </script>
 
 <CalendarTable label="January 2025">
@@ -102,14 +108,17 @@ Import `CalendarTableTD` from `./CalendarTableTD.svelte`. Pass children for the 
 
 ```svelte
 <script lang="ts">
-  import CalendarTableTD from './CalendarTableTD.svelte';
+  import CalendarTableTD from "./CalendarTableTD.svelte";
 
   function pick(d: number) {
-    console.log('picked', d);
+    console.log("picked", d);
   }
 </script>
 
-<CalendarTableTD data-date="2025-01-15" onclick={() => pick(15)}>15</CalendarTableTD>
+<CalendarTableTD
+  data-date="2025-01-15"
+  onclick={() => pick(15)}>15</CalendarTableTD
+>
 ```
 
 ## Accessibility

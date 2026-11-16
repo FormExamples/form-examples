@@ -5,13 +5,12 @@
   HTML tag: <span>
   CSS class: belgique-numero-de-registre-national-view
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
   Format: 11 digits where the first 6 are the date of birth (YYMMDD), the next 3 are an ordering number (uneven for men, even for women) and the last 2 a check digit
   Usage:
-    <span class="belgique-numero-de-registre-national-view" aria-label="National Register Number">value-here</span>
+    <span class="belgique-numero-de-registre-national-view">value-here</span>
 -->
 
-<span
-  class="belgique-numero-de-registre-national-view"
-  aria-label="National Register Number"
-></span>
+<span class="belgique-numero-de-registre-national-view"
+  ><span class="screen-reader-span">National Register Number </span></span
+>

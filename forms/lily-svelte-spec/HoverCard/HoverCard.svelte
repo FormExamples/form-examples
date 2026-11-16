@@ -2,7 +2,7 @@
     // HoverCard component
     //
     // A hover card that displays supplementary content when triggered, typically by a
-    // hover or focus interaction on a trigger element. It conditionally renders a container
+    // hover or focus interaction on a trigger element. It renders a popover="manual" container
     // with role="tooltip" when the open prop is true. Useful for user profile previews,
     // link previews, contextual help, or any popover-style content.
     //
@@ -44,13 +44,14 @@
     //   - Headless: no CSS, no styles — consumer provides all styling and positioning
     //   - Uses $bindable(false) for two-way binding on the open prop
     //   - Consumer is responsible for managing hover/focus events on the trigger element
-    //   - Fully removed from DOM when closed via {#if open}
-    //
+    //   - Native first: popover="manual" (top layer) opened and closed by the `open` state through ./Popover/popover.ts; where the Popover API is missing (jsdom, older browsers) it falls back to the `hidden` attribute. Placement is the theme's CSS (anchor positioning); light dismiss and Escape stay the consumer's.
     // References:
     //   - WAI-ARIA tooltip role: https://www.w3.org/TR/wai-aria-1.2/#tooltip
     //   - WAI-ARIA Tooltip Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
 
     import type { Snippet } from "svelte";
+
+    import { popoverState } from "../Popover/popover.js";
 
     let {
         class: className = "",
@@ -67,13 +68,13 @@
 </script>
 
 <!-- HoverCard.svelte -->
-{#if open}
-    <div
-        class={`hover-card ${className}`}
-        role="tooltip"
-        aria-label={label}
-        {...restProps}
-    >
-        {@render children?.()}
-    </div>
-{/if}
+<div
+    class={`hover-card ${className}`}
+    role="tooltip"
+    popover="manual"
+    use:popoverState={open}
+    aria-label={label}
+    {...restProps}
+>
+    {@render children?.()}
+</div>

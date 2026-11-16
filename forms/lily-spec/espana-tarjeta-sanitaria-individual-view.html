@@ -5,12 +5,11 @@
   HTML tag: <span>
   CSS class: espana-tarjeta-sanitaria-individual-view
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
   Usage:
-    <span class="espana-tarjeta-sanitaria-individual-view" aria-label="TSI">BBBB12345678</span>
+    <span class="espana-tarjeta-sanitaria-individual-view">BBBB12345678</span>
 -->
 
-<span
-  class="espana-tarjeta-sanitaria-individual-view"
-  aria-label="TSI"
-></span>
+<span class="espana-tarjeta-sanitaria-individual-view"
+  ><span class="screen-reader-span">TSI </span></span
+>

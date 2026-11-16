@@ -70,7 +70,9 @@
             `gap: ${gap}`,
             align ? `align-items: ${align}` : "",
             justify ? `justify-content: ${justify}` : "",
-        ].filter(Boolean).join("; ") + ";"
+        ]
+            .filter(Boolean)
+            .join("; ") + ";",
     );
 </script>
 

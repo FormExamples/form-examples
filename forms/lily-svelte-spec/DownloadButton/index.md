@@ -40,7 +40,7 @@ A headless Svelte 5 component rendering an `<a>` element with the `download` att
 
 ```svelte
 <script lang="ts">
-  import DownloadButton from './DownloadButton.svelte';
+  import DownloadButton from "./DownloadButton.svelte";
 </script>
 
 <DownloadButton

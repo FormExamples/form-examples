@@ -38,9 +38,9 @@ A headless Svelte 5 component inspired by the U.S. Web Design System (USWDS) Inp
 
 ```svelte
 <script lang="ts">
-  import InputWithMask from './InputWithMask.svelte';
+  import InputWithMask from "./InputWithMask.svelte";
 
-  let phone = $state('');
+  let phone = $state("");
 </script>
 
 <InputWithMask

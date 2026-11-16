@@ -48,7 +48,7 @@ Import `Banner` from `./Banner.svelte`. Provide children as the message. For dis
 
 ```svelte
 <script lang="ts">
-  import Banner from './Banner.svelte';
+  import Banner from "./Banner.svelte";
 </script>
 
 <Banner>Important announcement here.</Banner>
@@ -58,10 +58,10 @@ Import `Banner` from `./Banner.svelte`. Provide children as the message. For dis
 
 ```svelte
 <script lang="ts">
-  import Banner from './Banner.svelte';
+  import Banner from "./Banner.svelte";
 
   function handleDismiss() {
-    console.log('banner closed');
+    console.log("banner closed");
   }
 </script>
 
@@ -79,11 +79,15 @@ Import `Banner` from `./Banner.svelte`. Provide children as the message. For dis
 
 ```svelte
 <script lang="ts">
-  import Banner from './Banner.svelte';
-  import BannerBox from '../BannerBox/BannerBox.svelte';
+  import Banner from "./Banner.svelte";
+  import BannerBox from "../BannerBox/BannerBox.svelte";
 </script>
 
-<Banner type="info" dismissible closeLabel="Close">
+<Banner
+  type="info"
+  dismissible
+  closeLabel="Close"
+>
   <BannerBox>
     <span>We use cookies to improve your experience.</span>
     <a href="/cookies">Learn more</a>
@@ -95,10 +99,13 @@ Import `Banner` from `./Banner.svelte`. Provide children as the message. For dis
 
 ```svelte
 <script lang="ts">
-  import Banner from './Banner.svelte';
+  import Banner from "./Banner.svelte";
 </script>
 
-<Banner type="error" data-testid="outage-banner">
+<Banner
+  type="error"
+  data-testid="outage-banner"
+>
   Service unavailable. Please try again later.
 </Banner>
 ```
@@ -107,13 +114,18 @@ Import `Banner` from `./Banner.svelte`. Provide children as the message. For dis
 
 ```svelte
 <script lang="ts">
-  import Banner from './Banner.svelte';
+  import Banner from "./Banner.svelte";
 
   let accepted = $state(false);
 </script>
 
 {#if !accepted}
-  <Banner type="info" dismissible closeLabel="Accept" onclose={() => (accepted = true)}>
+  <Banner
+    type="info"
+    dismissible
+    closeLabel="Accept"
+    onclose={() => (accepted = true)}
+  >
     By using this site you accept our terms.
   </Banner>
 {/if}

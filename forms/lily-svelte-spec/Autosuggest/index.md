@@ -10,11 +10,32 @@ See [components/autosuggest/index.md](../../../components/autosuggest/index.md) 
 
 ```svelte
 <script lang="ts">
-    import Autosuggest from "./Autosuggest.svelte";
+  import Autosuggest from "./Autosuggest.svelte";
+
+  const fruit = ["Apple", "Apricot", "Avocado", "Banana"];
+  let value = $state("");
+  let suggestions = $state<{ value: string; label: string }[]>([]);
+
+  function search(query: string) {
+    const q = query.toLowerCase();
+    suggestions = q
+      ? fruit.filter((f) => f.toLowerCase().includes(q)).map((f) => ({ value: f, label: f }))
+      : [];
+  }
 </script>
 
-<Autosuggest />
+<Autosuggest
+  label="Fruit"
+  bind:value
+  {suggestions}
+  onInput={search}
+  onSelect={(chosen) => console.log(chosen)}
+/>
 ```
+
+Props: `label` (required), `value` (bindable), `suggestions` (`{ value, label }[]`), `onInput(query)`, `onSelect(value)`,
+`placeholder`, `name`, `class`, and rest props on the root `<div>`. The keys: ArrowDown / ArrowUp open and move the
+highlight (wrapping), Home / End jump, Enter chooses, Escape closes.
 
 ## Files
 

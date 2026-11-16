@@ -47,15 +47,20 @@ import PaginationList from './PaginationList.svelte';
 
 ```svelte
 <script lang="ts">
-  import PaginationNav from '../PaginationNav/PaginationNav.svelte';
-  import PaginationList from './PaginationList.svelte';
-  import PaginationListItem from '../PaginationListItem/PaginationListItem.svelte';
+  import PaginationNav from "../PaginationNav/PaginationNav.svelte";
+  import PaginationList from "./PaginationList.svelte";
+  import PaginationListItem from "../PaginationListItem/PaginationListItem.svelte";
 </script>
 
 <PaginationNav label="Pagination">
   <PaginationList label="Search results">
     <PaginationListItem><a href="/page/1">1</a></PaginationListItem>
-    <PaginationListItem><a href="/page/2" aria-current="page">2</a></PaginationListItem>
+    <PaginationListItem
+      ><a
+        href="/page/2"
+        aria-current="page">2</a
+      ></PaginationListItem
+    >
     <PaginationListItem><a href="/page/3">3</a></PaginationListItem>
   </PaginationList>
 </PaginationNav>
@@ -65,13 +70,18 @@ import PaginationList from './PaginationList.svelte';
 
 ```svelte
 <script lang="ts">
-  import PaginationList from './PaginationList.svelte';
-  import PaginationListItem from '../PaginationListItem/PaginationListItem.svelte';
+  import PaginationList from "./PaginationList.svelte";
+  import PaginationListItem from "../PaginationListItem/PaginationListItem.svelte";
 </script>
 
 <PaginationList label="Article pages">
   <PaginationListItem><a href="/article?p=1">Previous</a></PaginationListItem>
-  <PaginationListItem><a href="/article?p=2" aria-current="page">2</a></PaginationListItem>
+  <PaginationListItem
+    ><a
+      href="/article?p=2"
+      aria-current="page">2</a
+    ></PaginationListItem
+  >
   <PaginationListItem><a href="/article?p=3">Next</a></PaginationListItem>
 </PaginationList>
 ```
@@ -80,8 +90,8 @@ import PaginationList from './PaginationList.svelte';
 
 ```svelte
 <script lang="ts">
-  import PaginationList from './PaginationList.svelte';
-  import PaginationListItem from '../PaginationListItem/PaginationListItem.svelte';
+  import PaginationList from "./PaginationList.svelte";
+  import PaginationListItem from "../PaginationListItem/PaginationListItem.svelte";
 
   let current = $state(4);
   const total = 10;
@@ -90,7 +100,10 @@ import PaginationList from './PaginationList.svelte';
 <PaginationList label="Results pages">
   {#each Array.from({ length: total }, (_, i) => i + 1) as n}
     <PaginationListItem>
-      <a href={`?p=${n}`} aria-current={n === current ? "page" : undefined}>{n}</a>
+      <a
+        href={`?p=${n}`}
+        aria-current={n === current ? "page" : undefined}>{n}</a
+      >
     </PaginationListItem>
   {/each}
 </PaginationList>
@@ -100,18 +113,24 @@ import PaginationList from './PaginationList.svelte';
 
 ```svelte
 <script lang="ts">
-  import PaginationList from './PaginationList.svelte';
-  import PaginationListItem from '../PaginationListItem/PaginationListItem.svelte';
+  import PaginationList from "./PaginationList.svelte";
+  import PaginationListItem from "../PaginationListItem/PaginationListItem.svelte";
 
   let page = $state(1);
 </script>
 
 <PaginationList label="Pages">
   <PaginationListItem>
-    <button type="button" onclick={() => (page = Math.max(1, page - 1))}>Previous</button>
+    <button
+      type="button"
+      onclick={() => (page = Math.max(1, page - 1))}>Previous</button
+    >
   </PaginationListItem>
   <PaginationListItem>
-    <button type="button" onclick={() => (page += 1)}>Next</button>
+    <button
+      type="button"
+      onclick={() => (page += 1)}>Next</button
+    >
   </PaginationListItem>
 </PaginationList>
 ```
@@ -122,7 +141,12 @@ import PaginationList from './PaginationList.svelte';
 <PaginationList label="Pages">
   <PaginationListItem><a href="/p/1">1</a></PaginationListItem>
   <PaginationListItem aria-hidden="true">…</PaginationListItem>
-  <PaginationListItem><a href="/p/50" aria-current="page">50</a></PaginationListItem>
+  <PaginationListItem
+    ><a
+      href="/p/50"
+      aria-current="page">50</a
+    ></PaginationListItem
+  >
 </PaginationList>
 ```
 

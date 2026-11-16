@@ -57,6 +57,7 @@
     //   - MDN input type=checkbox: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox
     //   - MDN aria-controls: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-controls
 
+    import { warnMissingName } from "../dev-warning";
     import type { Snippet } from "svelte";
 
     let {
@@ -77,6 +78,15 @@
         children: Snippet;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName(
+            "AccordionCheckbox",
+            label,
+            restProps["aria-label"],
+            restProps["aria-labelledby"],
+        ),
+    );
 
     const generatedId = `accordion-checkbox-${Math.random().toString(36).slice(2, 9)}`;
     const baseId = $derived(id ?? generatedId);

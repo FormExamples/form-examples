@@ -5,13 +5,12 @@
   HTML tag: <span>
   CSS class: norge-fodselsnummer-view
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
   Format: 11 digits where the first 6 represent the date of birth (DDMMYY)
   Usage:
-    <span class="norge-fodselsnummer-view" aria-label="Norwegian Birth Number">value-here</span>
+    <span class="norge-fodselsnummer-view">value-here</span>
 -->
 
-<span
-  class="norge-fodselsnummer-view"
-  aria-label="Norwegian Birth Number"
-></span>
+<span class="norge-fodselsnummer-view"
+  ><span class="screen-reader-span">Norwegian Birth Number </span></span
+>

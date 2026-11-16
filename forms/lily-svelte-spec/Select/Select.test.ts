@@ -44,7 +44,9 @@ describe("Select", () => {
     });
 
     test("passes through attributes", () => {
-        render(Subject, { props: { label: "C", "data-testid": "sel", children: optionsSnippet() } });
+        render(Subject, {
+            props: { label: "C", "data-testid": "sel", children: optionsSnippet() },
+        });
         expect(screen.getByTestId("sel")).toBeTruthy();
     });
 });

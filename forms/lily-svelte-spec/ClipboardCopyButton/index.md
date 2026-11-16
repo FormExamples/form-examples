@@ -30,65 +30,74 @@ Provide `text` (what to copy) and `label` (the accessible name of the button). U
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `class` | `string` | `""` | CSS class name appended to the base class. |
-| `text` | `string` | required | Text to write to the clipboard. |
-| `label` | `string` | required | `aria-label` for the button. |
-| `onsuccess` | `() => void` | `undefined` | Called after a successful write. |
-| `onerror` | `(error: unknown) => void` | `undefined` | Called if the write fails. |
-| `children` | `Snippet` | `undefined` | Optional custom button content. |
-| `...restProps` | `unknown` | — | Additional attributes spread onto the `<button>`. |
+| Prop           | Type                       | Default     | Description                                       |
+| -------------- | -------------------------- | ----------- | ------------------------------------------------- |
+| `class`        | `string`                   | `""`        | CSS class name appended to the base class.        |
+| `text`         | `string`                   | required    | Text to write to the clipboard.                   |
+| `label`        | `string`                   | required    | `aria-label` for the button.                      |
+| `onsuccess`    | `() => void`               | `undefined` | Called after a successful write.                  |
+| `onerror`      | `(error: unknown) => void` | `undefined` | Called if the write fails.                        |
+| `children`     | `Snippet`                  | `undefined` | Optional custom button content.                   |
+| `...restProps` | `unknown`                  | —           | Additional attributes spread onto the `<button>`. |
 
 ## Usage
 
 ```svelte
 <script lang="ts">
-    import ClipboardCopyButton from "./ClipboardCopyButton.svelte";
+  import ClipboardCopyButton from "./ClipboardCopyButton.svelte";
 </script>
 
-<ClipboardCopyButton text="https://example.com" label="Copy link" />
+<ClipboardCopyButton
+  text="https://example.com"
+  label="Copy link"
+/>
 ```
 
 ```svelte
 <script lang="ts">
-    import ClipboardCopyButton from "./ClipboardCopyButton.svelte";
+  import ClipboardCopyButton from "./ClipboardCopyButton.svelte";
 
-    const code = "pnpm install lily-design-system-svelte-headless";
+  const code = "npm install @lilydesignsystem/svelte-headless";
 </script>
 
-<ClipboardCopyButton text={code} label="Copy install command">
-    Copy command
+<ClipboardCopyButton
+  text={code}
+  label="Copy install command"
+>
+  Copy command
 </ClipboardCopyButton>
 ```
 
 ```svelte
 <script lang="ts">
-    import ClipboardCopyButton from "./ClipboardCopyButton.svelte";
+  import ClipboardCopyButton from "./ClipboardCopyButton.svelte";
 
-    let message = $state("");
+  let message = $state("");
 </script>
 
 <ClipboardCopyButton
-    text="Share: https://example.com/post/42"
-    label="Copy share link"
-    onsuccess={() => (message = "Copied!")}
-    onerror={(e) => (message = `Copy failed: ${String(e)}`)}
+  text="Share: https://example.com/post/42"
+  label="Copy share link"
+  onsuccess={() => (message = "Copied!")}
+  onerror={(e) => (message = `Copy failed: ${String(e)}`)}
 >
-    Copy
+  Copy
 </ClipboardCopyButton>
 <p aria-live="polite">{message}</p>
 ```
 
 ```svelte
 <script lang="ts">
-    import ClipboardCopyButton from "./ClipboardCopyButton.svelte";
+  import ClipboardCopyButton from "./ClipboardCopyButton.svelte";
 
-    let email = $state("joel@example.com");
+  let email = $state("joel@example.com");
 </script>
 
-<ClipboardCopyButton text={email} label="Copy email address">
-    {email}
+<ClipboardCopyButton
+  text={email}
+  label="Copy email address"
+>
+  {email}
 </ClipboardCopyButton>
 ```
 

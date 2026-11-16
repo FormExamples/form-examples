@@ -53,7 +53,10 @@ Import, optionally pass `label`, and set `urgent` for assertive announcements. C
   import Toast from "./Toast.svelte";
 </script>
 
-<Toast label="Error" urgent>Something went wrong.</Toast>
+<Toast
+  label="Error"
+  urgent>Something went wrong.</Toast
+>
 ```
 
 ```svelte
@@ -68,7 +71,10 @@ Import, optionally pass `label`, and set `urgent` for assertive announcements. C
   }
 </script>
 
-<button type="button" onclick={notify}>Save</button>
+<button
+  type="button"
+  onclick={notify}>Save</button
+>
 
 {#if visible}
   <Toast label="Info">Saved 3 items.</Toast>
@@ -92,11 +98,20 @@ Import, optionally pass `label`, and set `urgent` for assertive announcements. C
   }
 </script>
 
-<button type="button" onclick={() => add("Saved", false)}>Save</button>
-<button type="button" onclick={() => add("Failed", true)}>Fail</button>
+<button
+  type="button"
+  onclick={() => add("Saved", false)}>Save</button
+>
+<button
+  type="button"
+  onclick={() => add("Failed", true)}>Fail</button
+>
 
 {#each messages as m (m.id)}
-  <Toast label={m.urgent ? "Error" : "Info"} urgent={m.urgent}>{m.text}</Toast>
+  <Toast
+    label={m.urgent ? "Error" : "Info"}
+    urgent={m.urgent}>{m.text}</Toast
+  >
 {/each}
 ```
 

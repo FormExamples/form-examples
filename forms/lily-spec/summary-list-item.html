@@ -2,11 +2,13 @@
 <!-- SummaryListItem component -->
 <!--
   Description: one key-value pair in a summary list
-  HTML tag: <li> wrapped in <ol>
+  HTML tag: <div> wrapped in <dl>, holding a <dt> and a <dd>
   CSS class: summary-list-item
-  Accessibility: aria-label for accessible name
+  Keyboard: none; not interactive, and any interactive children handle their own keys
+  Accessibility: the dt and dd pair carries the meaning; the div has no name
 -->
 
-<ol><li class="summary-list-item" aria-label="Example">
-    <!-- Consumer provides child content -->
-</li></ol>
+<dl><div class="summary-list-item">
+    <dt>Term</dt>
+    <dd><!-- Consumer provides the value --></dd>
+</div></dl>

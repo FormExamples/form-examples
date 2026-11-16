@@ -12,7 +12,7 @@ function textSnippet(text: string) {
 describe("DocumentListItem", () => {
     it("renders with class", () => {
         const { container } = render(DocumentListItem, {
-            props: { label: "Test", children: textSnippet("content") },
+            props: { children: textSnippet("content") },
         });
         const el = container.querySelector(".document-list-item");
         expect(el).toBeTruthy();

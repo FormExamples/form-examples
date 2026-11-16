@@ -1,16 +1,19 @@
-<script module lang="ts">
-  import { defineMeta } from '@storybook/addon-svelte-csf';
-  import CalendarTableFoot from './CalendarTableFoot.svelte';
+<script
+    module
+    lang="ts"
+>
+    import { defineMeta } from "@storybook/addon-svelte-csf";
+    import CalendarTableFoot from "./CalendarTableFoot.svelte";
 
-  const { Story } = defineMeta({
-    title: 'Headless/CalendarTableFoot',
-    component: CalendarTableFoot,
-  });
+    const { Story } = defineMeta({
+        title: "Headless/CalendarTableFoot",
+        component: CalendarTableFoot,
+    });
 </script>
 
 <Story
-  name="Default"
-  tags={['autodocs', '!dev']}
+    name="Default"
+    tags={["autodocs", "!dev"]}
 >
-  <tr><td>Footer</td></tr>
+    <tr><td>Footer</td></tr>
 </Story>

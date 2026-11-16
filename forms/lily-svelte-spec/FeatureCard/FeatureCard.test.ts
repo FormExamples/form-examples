@@ -14,18 +14,22 @@ function htmlSnippet(html: string) {
 
 describe("FeatureCard", () => {
     test("renders as an article with the feature-card class", () => {
-        const { container } = render(Subject, { props: {
-            heading: "Privacy first",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                heading: "Privacy first",
+            },
+        });
 
         const root = container.querySelector("article.feature-card") as HTMLElement;
         expect(root).toBeTruthy();
     });
 
     test("renders the required heading", () => {
-        const { container } = render(Subject, { props: {
-            heading: "Privacy first",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                heading: "Privacy first",
+            },
+        });
 
         const h3 = container.querySelector("h3.feature-card-heading") as HTMLElement;
         expect(h3).toBeTruthy();
@@ -33,49 +37,59 @@ describe("FeatureCard", () => {
     });
 
     test("uses heading as the default aria-label", () => {
-        const { container } = render(Subject, { props: {
-            heading: "Privacy first",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                heading: "Privacy first",
+            },
+        });
 
         const root = container.querySelector("article") as HTMLElement;
         expect(root.getAttribute("aria-label")).toBe("Privacy first");
     });
 
     test("aria-label prop overrides heading", () => {
-        const { container } = render(Subject, { props: {
-            heading: "Privacy first",
-            label: "Privacy feature card",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                heading: "Privacy first",
+                label: "Privacy feature card",
+            },
+        });
 
         const root = container.querySelector("article") as HTMLElement;
         expect(root.getAttribute("aria-label")).toBe("Privacy feature card");
     });
 
     test("defaults imagePosition to start", () => {
-        const { container } = render(Subject, { props: {
-            heading: "Privacy first",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                heading: "Privacy first",
+            },
+        });
 
         const root = container.querySelector("article") as HTMLElement;
         expect(root.getAttribute("data-image-position")).toBe("start");
     });
 
     test("supports imagePosition top", () => {
-        const { container } = render(Subject, { props: {
-            heading: "Privacy first",
-            imagePosition: "top",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                heading: "Privacy first",
+                imagePosition: "top",
+            },
+        });
 
         const root = container.querySelector("article") as HTMLElement;
         expect(root.getAttribute("data-image-position")).toBe("top");
     });
 
     test("renders image when imageUrl is provided", () => {
-        const { container } = render(Subject, { props: {
-            heading: "Privacy first",
-            imageUrl: "/img.png",
-            imageAlt: "Lock illustration",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                heading: "Privacy first",
+                imageUrl: "/img.png",
+                imageAlt: "Lock illustration",
+            },
+        });
 
         const img = container.querySelector("img.feature-card-image") as HTMLImageElement;
         expect(img).toBeTruthy();
@@ -84,19 +98,23 @@ describe("FeatureCard", () => {
     });
 
     test("does not render image when imageUrl is omitted", () => {
-        const { container } = render(Subject, { props: {
-            heading: "Privacy first",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                heading: "Privacy first",
+            },
+        });
 
         const img = container.querySelector("img");
         expect(img).toBeNull();
     });
 
     test("renders description when provided", () => {
-        const { container } = render(Subject, { props: {
-            heading: "Privacy first",
-            description: "Your data stays yours.",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                heading: "Privacy first",
+                description: "Your data stays yours.",
+            },
+        });
 
         const p = container.querySelector("p.feature-card-description") as HTMLElement;
         expect(p).toBeTruthy();
@@ -104,10 +122,12 @@ describe("FeatureCard", () => {
     });
 
     test("renders children content", () => {
-        const { container } = render(Subject, { props: {
-            heading: "Privacy first",
-            children: htmlSnippet("<a href='/learn'>Learn more</a>"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                heading: "Privacy first",
+                children: htmlSnippet("<a href='/learn'>Learn more</a>"),
+            },
+        });
 
         const link = container.querySelector("article a") as HTMLAnchorElement;
         expect(link).toBeTruthy();
@@ -115,10 +135,12 @@ describe("FeatureCard", () => {
     });
 
     test("appends consumer class to base class", () => {
-        const { container } = render(Subject, { props: {
-            heading: "Privacy first",
-            class: "extra",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                heading: "Privacy first",
+                class: "extra",
+            },
+        });
 
         const root = container.querySelector("article") as HTMLElement;
         expect(root.className).toContain("feature-card");

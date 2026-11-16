@@ -8,6 +8,8 @@
     // Props:
     //   class — string, optional. CSS class appended to the base class.
     //   columns — number | string, default 12. Number of equal columns OR custom grid-template-columns.
+    //   minColumnWidth — string, optional. A CSS length (e.g. "12rem"). When set, as many columns fit as the
+    //     container allows, each at least this wide: repeat(auto-fit, minmax(min(<W>, 100%), 1fr)). Wins over `columns`.
     //   gap — string, default "1rem". Gap CSS value.
     //   children — Snippet, required. Grid items.
     //   ...restProps — additional HTML attributes spread onto the <div>.
@@ -33,6 +35,7 @@
     //   - Headless: only inline styles are grid behavior (display, template, gap)
     //   - When columns is a number, uses repeat(N, minmax(0, 1fr))
     //   - When columns is a string, uses it as-is
+    //   - When minColumnWidth is set it wins over columns (columns has a default, so "unset" cannot be detected)
     //
     // References:
     //   - MDN CSS Grid: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout
@@ -42,12 +45,15 @@
     let {
         class: className = "",
         columns = 12,
+        minColumnWidth,
         gap = "1rem",
         children,
         ...restProps
     }: {
         /** Number of equal columns OR custom grid-template-columns string */
         columns?: number | string;
+        /** CSS length: fit as many columns as the container allows, each at least this wide. Wins over `columns`. */
+        minColumnWidth?: string;
         /** Gap CSS value */
         gap?: string;
         /** Grid items */
@@ -56,9 +62,11 @@
     } = $props();
 
     const templateColumns = $derived(
-        typeof columns === "number"
-            ? `repeat(${columns}, minmax(0, 1fr))`
-            : columns
+        minColumnWidth
+            ? `repeat(auto-fit, minmax(min(${minColumnWidth}, 100%), 1fr))`
+            : typeof columns === "number"
+              ? `repeat(${columns}, minmax(0, 1fr))`
+              : columns,
     );
 </script>
 
@@ -66,6 +74,7 @@
 <div
     class={`grid ${className}`}
     data-columns={String(columns)}
+    data-min-column-width={minColumnWidth || undefined}
     style={`display: grid; grid-template-columns: ${templateColumns}; gap: ${gap};`}
     {...restProps}
 >

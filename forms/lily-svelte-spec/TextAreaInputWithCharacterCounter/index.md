@@ -1,6 +1,6 @@
 # TextAreaInputWithCharacterCounter
 
-A multi-line text input combined with a live character-count caption, rendered inside a `<div>` wrapper with `aria-describedby` and `aria-live="polite"` linking the text-area-input to its counter.
+A multi-line text input combined with a live character-count caption, rendered inside a `<div>` wrapper with `aria-describedby` linking the field to a counter whose status is announced once typing pauses the text-area-input to its counter.
 
 ## What it is
 
@@ -10,7 +10,7 @@ A multi-line text input combined with a live character-count caption, rendered i
 
 - Renders a wrapper `<div class="text-area-input-with-character-counter">`.
 - Inside the wrapper: a `<textarea>` with `aria-label`, `aria-describedby` linking to the counter, and `maxlength={maxLength}`.
-- A sibling `<span>` with a generated `id`, `aria-live="polite"`, and the reactive counter text derived from `counterTemplate`, `value.length`, and `maxLength`.
+- A sibling `<span>` with a generated `id`, holding the reactive counter text (visible, `aria-hidden`) and a hidden `role="status"` that takes it after `announceDelay` ms of quiet; the text is derived from `counterTemplate`, `value.length`, and `maxLength`.
 - Replaces `{count}` and `{max}` placeholders in `counterTemplate` with live values using Svelte 5 `$derived`.
 - Binds `value` via `bind:value`.
 - Spreads additional HTML attributes onto the wrapper `<div>`, not the text-area-input.
@@ -104,7 +104,7 @@ Import, pass `label`, `maxLength`, and bind `value`. Optionally provide a transl
   label="Message"
   maxLength={1000}
   rows={8}
-  required={required}
+  {required}
   bind:value={body}
 />
 ```
@@ -113,7 +113,7 @@ Import, pass `label`, `maxLength`, and bind `value`. Optionally provide a transl
 
 - `aria-label` on the text-area-input provides its accessible name.
 - `aria-describedby` on the text-area-input links it to the counter `<span>`.
-- `aria-live="polite"` on the counter announces updates without interrupting speech.
+- The counter's status is announced once per pause in typing, not per keystroke.
 - `maxlength` on the text-area-input enforces the limit at the browser level.
 - Consumers can fully translate the counter text by providing `counterTemplate`.
 

@@ -18,7 +18,7 @@ function renderInRow(props: Record<string, unknown>) {
     table.appendChild(tbody);
     container.appendChild(table);
     document.body.appendChild(container);
-    const result = render(Subject, { props, target: tr });
+    const result = render(Subject, { props: props as any, target: tr });
     return { ...result, container };
 }
 

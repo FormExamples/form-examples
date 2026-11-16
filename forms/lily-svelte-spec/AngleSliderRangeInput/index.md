@@ -24,7 +24,7 @@ A headless Svelte 5 input wrapping `<input type="range">`. Category: range input
 ## When not to use it
 
 - For general numeric values — use `NumberInput` or `RangeInput`.
-- For two-dimensional hue/saturation picking — use `ColorPicker`.
+- For two-dimensional hue/saturation picking — use `ColorRadioGroup`.
 - For a rotary knob UI — use `Dial`.
 - For selecting a slider confirmation gesture — use `SliderButton`.
 
@@ -52,12 +52,15 @@ Import `AngleSliderRangeInput` from `./AngleSliderRangeInput.svelte`. Provide `l
 
 ```svelte
 <script lang="ts">
-  import AngleSliderRangeInput from './AngleSliderRangeInput.svelte';
+  import AngleSliderRangeInput from "./AngleSliderRangeInput.svelte";
 
   let angle = $state(0);
 </script>
 
-<AngleSliderRangeInput label="Rotation" bind:value={angle} />
+<AngleSliderRangeInput
+  label="Rotation"
+  bind:value={angle}
+/>
 <p>Current angle: {angle}°</p>
 ```
 
@@ -65,19 +68,23 @@ Import `AngleSliderRangeInput` from `./AngleSliderRangeInput.svelte`. Provide `l
 
 ```svelte
 <script lang="ts">
-  import AngleSliderRangeInput from './AngleSliderRangeInput.svelte';
+  import AngleSliderRangeInput from "./AngleSliderRangeInput.svelte";
 
   let heading = $state(90);
 </script>
 
-<AngleSliderRangeInput label="Direction" bind:value={heading} step={15} />
+<AngleSliderRangeInput
+  label="Direction"
+  bind:value={heading}
+  step={15}
+/>
 ```
 
 ### Custom range with localized suffix
 
 ```svelte
 <script lang="ts">
-  import AngleSliderRangeInput from './AngleSliderRangeInput.svelte';
+  import AngleSliderRangeInput from "./AngleSliderRangeInput.svelte";
 
   let hue = $state(0);
 </script>
@@ -95,21 +102,29 @@ Import `AngleSliderRangeInput` from `./AngleSliderRangeInput.svelte`. Provide `l
 
 ```svelte
 <script lang="ts">
-  import AngleSliderRangeInput from './AngleSliderRangeInput.svelte';
+  import AngleSliderRangeInput from "./AngleSliderRangeInput.svelte";
 </script>
 
-<AngleSliderRangeInput label="Locked angle" value={45} disabled />
+<AngleSliderRangeInput
+  label="Locked angle"
+  value={45}
+  disabled
+/>
 ```
 
 ### Named form field
 
 ```svelte
 <script lang="ts">
-  import AngleSliderRangeInput from './AngleSliderRangeInput.svelte';
+  import AngleSliderRangeInput from "./AngleSliderRangeInput.svelte";
 </script>
 
 <form>
-  <AngleSliderRangeInput label="Orientation" name="orientation" id="orient" />
+  <AngleSliderRangeInput
+    label="Orientation"
+    name="orientation"
+    id="orient"
+  />
   <button type="submit">Save</button>
 </form>
 ```
@@ -128,7 +143,7 @@ Import `AngleSliderRangeInput` from `./AngleSliderRangeInput.svelte`. Provide `l
 - `Slider` — draggable slider UI.
 - `Dial` — rotary value picker.
 - `NumberInput` — plain number input.
-- `ColorPicker` — hue/saturation 2D picker.
+- `ColorRadioGroup` — hue/saturation 2D picker.
 
 ---
 

@@ -44,9 +44,9 @@ A headless Svelte 5 component that renders a `<form>` with an email field, submi
 
 ```svelte
 <script lang="ts">
-  import NewsletterSignup from './NewsletterSignup.svelte';
+  import NewsletterSignup from "./NewsletterSignup.svelte";
 
-  let state = $state<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  let state = $state<"idle" | "submitting" | "success" | "error">("idle");
 </script>
 
 <NewsletterSignup
@@ -59,7 +59,10 @@ A headless Svelte 5 component that renders a `<form>` with an email field, submi
   successMessage="Thanks for subscribing!"
   errorMessage="Something went wrong. Please try again."
   {state}
-  onsubmit={(e) => { e.preventDefault(); state = 'submitting'; /* … */ }}
+  onsubmit={(e) => {
+    e.preventDefault();
+    state = "submitting"; /* … */
+  }}
 />
 ```
 

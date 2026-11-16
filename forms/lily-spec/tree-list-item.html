@@ -4,9 +4,10 @@
   Description: one item in a tree navigation list
   HTML tag: <li> wrapped in <ol>
   CSS class: tree-list-item
+  Keyboard: none; not interactive, and any interactive children handle their own keys
   Accessibility: aria-label for accessible name
 -->
 
-<ol role="tree"><li class="tree-list-item" role="treeitem" aria-label="Example">
+<ol role="tree"><li class="tree-list-item" role="treeitem" tabindex="-1" aria-label="Example">
     <!-- Consumer provides child content -->
 </li></ol>

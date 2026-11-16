@@ -1,0 +1,41 @@
+<!-- ring-chart.html -->
+<!-- RingChart component -->
+<!--
+  Description: a pie chart with a hollow centre, often used to show progress or a share of a total.
+    Wraps a consumer-supplied inline <svg>; no drawing happens here.
+  HTML tag: <figure> containing <div class="ring-chart-graphic" role="img">
+  CSS class: ring-chart (sub-elements: ring-chart-graphic, ring-chart-data-table)
+  Keyboard: None on the graphic; the data table follows native table behaviour
+  Accessibility: the graphic wrapper carries role="img" and the consumer-supplied
+    aria-label; the optional data table is a sibling of the graphic, outside
+    role="img", so assistive technology can reach it.
+  Usage (see the markup below for the commented version):
+    <figure class="ring-chart">
+        <div class="ring-chart-graphic" role="img" aria-label="Example">
+            <svg data-testid="art" viewBox="0 0 10 10"><circle r="4" cx="5" cy="5"></circle></svg>
+      </div>
+        <div class="ring-chart-data-table">
+        <table>
+          <caption>Values</caption>
+          <tbody><tr><th scope="row">A</th><td>1</td></tr></tbody>
+        </table>
+      </div>
+    </figure>
+-->
+
+<figure class="ring-chart">
+  <!-- role="img" lives on the graphic wrapper, never on the figure: it makes
+       its descendants presentational, so a data table inside it would be
+       invisible to assistive technology. -->
+  <div class="ring-chart-graphic" role="img" aria-label="Example">
+    <!-- Consumer provides the inline svg; no drawing happens in this component. -->
+    <svg data-testid="art" viewBox="0 0 10 10"><circle r="4" cx="5" cy="5"></circle></svg>
+  </div>
+  <!-- Optional accessible table alternative: a SIBLING of the graphic, outside role="img". -->
+  <div class="ring-chart-data-table">
+    <table>
+      <caption>Values</caption>
+      <tbody><tr><th scope="row">A</th><td>1</td></tr></tbody>
+    </table>
+  </div>
+</figure>

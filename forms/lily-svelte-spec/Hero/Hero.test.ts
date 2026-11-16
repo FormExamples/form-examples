@@ -4,7 +4,7 @@ import Hero from "./Hero.svelte";
 
 describe("Hero", () => {
     test("renders with content", () => {
-        render(Hero, { props: { label: "Test" } });
+        render(Hero, { props: { label: "Test" } as any });
         const el = screen.getByLabelText("Test");
         expect(el).toBeTruthy();
         expect(el.getAttribute("class")).toContain("hero");

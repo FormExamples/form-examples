@@ -32,74 +32,92 @@ Import the component, bind `value`, and supply an accessible `label`. Wrap in `F
 
 ## Props
 
-| Prop        | Type      | Default | Description                                                              |
-| ----------- | --------- | ------- | ------------------------------------------------------------------------ |
-| `class`     | `string`  | `""`    | Additional CSS class appended to the base class name.                    |
-| `label`     | `string`  | —       | Required. Accessible name set on `aria-label`.                           |
-| `value`     | `string`  | `""`    | Bindable week value in `YYYY-Www` format. Supports `bind:value`.         |
-| `required`  | `boolean` | `false` | Sets the native `required` attribute.                                    |
-| `disabled`  | `boolean` | `false` | Sets the native `disabled` attribute.                                    |
-| `...rest`   | —         | —       | Additional HTML attributes (e.g., `min`, `max`), spread onto the input.  |
+| Prop       | Type      | Default | Description                                                             |
+| ---------- | --------- | ------- | ----------------------------------------------------------------------- |
+| `class`    | `string`  | `""`    | Additional CSS class appended to the base class name.                   |
+| `label`    | `string`  | —       | Required. Accessible name set on `aria-label`.                          |
+| `value`    | `string`  | `""`    | Bindable week value in `YYYY-Www` format. Supports `bind:value`.        |
+| `required` | `boolean` | `false` | Sets the native `required` attribute.                                   |
+| `disabled` | `boolean` | `false` | Sets the native `disabled` attribute.                                   |
+| `...rest`  | —         | —       | Additional HTML attributes (e.g., `min`, `max`), spread onto the input. |
 
 ## Usage
 
 ```svelte
 <script lang="ts">
-    import WeekInput from "./WeekInput.svelte";
+  import WeekInput from "./WeekInput.svelte";
 
-    let week = $state("");
-</script>
-
-<WeekInput label="Report week" bind:value={week} />
-```
-
-```svelte
-<script lang="ts">
-    import WeekInput from "./WeekInput.svelte";
-
-    let week = $state("2024-W15");
+  let week = $state("");
 </script>
 
 <WeekInput
-    label="Select week"
-    bind:value={week}
-    required
-    min="2024-W01"
-    max="2024-W52"
+  label="Report week"
+  bind:value={week}
 />
 ```
 
 ```svelte
 <script lang="ts">
-    import WeekInput from "./WeekInput.svelte";
-    import Field from "../Field/Field.svelte";
+  import WeekInput from "./WeekInput.svelte";
 
-    let reportWeek = $state("");
-    let error = $state("");
+  let week = $state("2024-W15");
 </script>
 
-<Field label="Report week" required error={error}>
-    <WeekInput label="Report week" bind:value={reportWeek} required />
+<WeekInput
+  label="Select week"
+  bind:value={week}
+  required
+  min="2024-W01"
+  max="2024-W52"
+/>
+```
+
+```svelte
+<script lang="ts">
+  import WeekInput from "./WeekInput.svelte";
+  import Field from "../Field/Field.svelte";
+
+  let reportWeek = $state("");
+  let error = $state("");
+</script>
+
+<Field
+  label="Report week"
+  required
+  {error}
+>
+  <WeekInput
+    label="Report week"
+    bind:value={reportWeek}
+    required
+  />
 </Field>
 ```
 
 ```svelte
 <script lang="ts">
-    import WeekInput from "./WeekInput.svelte";
+  import WeekInput from "./WeekInput.svelte";
 
-    let week = $state("2024-W20");
+  let week = $state("2024-W20");
 </script>
 
-<WeekInput label="Week" bind:value={week} />
+<WeekInput
+  label="Week"
+  bind:value={week}
+/>
 <p>Selected: {week || "(none)"}</p>
 ```
 
 ```svelte
 <script lang="ts">
-    import WeekInput from "./WeekInput.svelte";
+  import WeekInput from "./WeekInput.svelte";
 </script>
 
-<WeekInput label="Read-only week" value="2024-W10" disabled />
+<WeekInput
+  label="Read-only week"
+  value="2024-W10"
+  disabled
+/>
 ```
 
 ## Accessibility

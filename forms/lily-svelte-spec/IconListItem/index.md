@@ -33,7 +33,7 @@ A headless Svelte 5 component inspired by the U.S. Web Design System (USWDS) Ico
 
 ```svelte
 <script lang="ts">
-  import IconListItem from './IconListItem.svelte';
+  import IconListItem from "./IconListItem.svelte";
 </script>
 
 {#snippet starIcon()}

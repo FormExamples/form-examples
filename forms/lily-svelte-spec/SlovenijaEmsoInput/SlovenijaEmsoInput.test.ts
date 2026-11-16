@@ -54,7 +54,9 @@ describe("SlovenijaEmsoInput", () => {
     });
 
     test("passes through additional HTML attributes", () => {
-        render(Subject, { props: { label: "Unique Master Citizen Number", "data-testid": "subject" } });
+        render(Subject, {
+            props: { label: "Unique Master Citizen Number", "data-testid": "subject" },
+        });
 
         const input = screen.getByTestId("subject");
         expect(input).toBeTruthy();

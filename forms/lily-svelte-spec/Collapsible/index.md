@@ -39,64 +39,70 @@ Provide a required `summary` string and children content. Optionally bind `open`
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `class` | `string` | `""` | CSS class name appended to the base class. |
-| `summary` | `string` | required | Text of the toggle trigger. |
-| `open` | `boolean` | `false` (bindable) | Whether the content is expanded. |
-| `children` | `Snippet` | required | Revealed content. |
-| `...restProps` | `unknown` | — | Additional attributes spread onto the `<details>`. |
+| Prop           | Type      | Default            | Description                                        |
+| -------------- | --------- | ------------------ | -------------------------------------------------- |
+| `class`        | `string`  | `""`               | CSS class name appended to the base class.         |
+| `summary`      | `string`  | required           | Text of the toggle trigger.                        |
+| `open`         | `boolean` | `false` (bindable) | Whether the content is expanded.                   |
+| `children`     | `Snippet` | required           | Revealed content.                                  |
+| `...restProps` | `unknown` | —                  | Additional attributes spread onto the `<details>`. |
 
 ## Usage
 
 ```svelte
 <script lang="ts">
-    import Collapsible from "./Collapsible.svelte";
+  import Collapsible from "./Collapsible.svelte";
 </script>
 
 <Collapsible summary="More info">
-    <p>Hidden content revealed when expanded.</p>
+  <p>Hidden content revealed when expanded.</p>
 </Collapsible>
 ```
 
 ```svelte
 <script lang="ts">
-    import Collapsible from "./Collapsible.svelte";
+  import Collapsible from "./Collapsible.svelte";
 
-    let showAdvanced = $state(false);
+  let showAdvanced = $state(false);
 </script>
 
-<Collapsible summary="Advanced settings" bind:open={showAdvanced}>
-    <p>Advanced options here.</p>
+<Collapsible
+  summary="Advanced settings"
+  bind:open={showAdvanced}
+>
+  <p>Advanced options here.</p>
 </Collapsible>
 <p>Advanced is {showAdvanced ? "shown" : "hidden"}.</p>
 ```
 
 ```svelte
 <script lang="ts">
-    import Collapsible from "./Collapsible.svelte";
+  import Collapsible from "./Collapsible.svelte";
 </script>
 
 <Collapsible summary="What is a cookie?">
-    <p>A small piece of data stored by your browser.</p>
+  <p>A small piece of data stored by your browser.</p>
 </Collapsible>
 <Collapsible summary="Why do we use them?">
-    <p>To remember preferences and keep you signed in.</p>
+  <p>To remember preferences and keep you signed in.</p>
 </Collapsible>
 ```
 
 ```svelte
 <script lang="ts">
-    import Collapsible from "./Collapsible.svelte";
+  import Collapsible from "./Collapsible.svelte";
 
-    let open = $state(true);
+  let open = $state(true);
 </script>
 
-<Collapsible summary="Notes" bind:open>
-    <ul>
-        <li>Item A</li>
-        <li>Item B</li>
-    </ul>
+<Collapsible
+  summary="Notes"
+  bind:open
+>
+  <ul>
+    <li>Item A</li>
+    <li>Item B</li>
+  </ul>
 </Collapsible>
 ```
 

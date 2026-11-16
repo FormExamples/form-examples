@@ -29,7 +29,7 @@ Pass the email address as a prop.
 
 ```svelte
 <script lang="ts">
-    import EmailLink from "./EmailLink.svelte";
+  import EmailLink from "./EmailLink.svelte";
 </script>
 
 <EmailLink email="alice@example.com" />
@@ -37,12 +37,12 @@ Pass the email address as a prop.
 
 ## Props
 
-| Prop      | Type      | Default     | Description                                     |
-| --------- | --------- | ----------- | ----------------------------------------------- |
-| `class`   | `string`  | `""`        | CSS class appended to the base class.          |
-| `email`   | `string`  | required    | The email address (used for text and `href`).   |
-| `label`   | `string`  | `undefined` | Optional accessible name override.              |
-| `...rest` | `unknown` | —           | Additional HTML attributes on the `<a>`.        |
+| Prop      | Type      | Default     | Description                                   |
+| --------- | --------- | ----------- | --------------------------------------------- |
+| `class`   | `string`  | `""`        | CSS class appended to the base class.         |
+| `email`   | `string`  | required    | The email address (used for text and `href`). |
+| `label`   | `string`  | `undefined` | Optional accessible name override.            |
+| `...rest` | `unknown` | —           | Additional HTML attributes on the `<a>`.      |
 
 ## Usage
 
@@ -55,31 +55,37 @@ Pass the email address as a prop.
 ### 2. With an accessible label override
 
 ```svelte
-<EmailLink email="support@example.com" label="Contact support team" />
+<EmailLink
+  email="support@example.com"
+  label="Contact support team"
+/>
 ```
 
 ### 3. In a contact list
 
 ```svelte
 <ul>
-    {#each team as member}
-        <li>{member.name}: <EmailLink email={member.email} /></li>
-    {/each}
+  {#each team as member}
+    <li>{member.name}: <EmailLink email={member.email} /></li>
+  {/each}
 </ul>
 ```
 
 ### 4. Styled via class
 
 ```svelte
-<EmailLink email="press@example.com" class="email-link--press" />
+<EmailLink
+  email="press@example.com"
+  class="email-link--press"
+/>
 ```
 
 ### 5. With subject via rest props
 
 ```svelte
 <EmailLink
-    email="sales@example.com"
-    href="mailto:sales@example.com?subject=Enquiry"
+  email="sales@example.com"
+  href="mailto:sales@example.com?subject=Enquiry"
 />
 <!-- The explicit href overrides the generated one. -->
 ```

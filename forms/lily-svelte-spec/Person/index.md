@@ -10,7 +10,7 @@ See [components/person/index.md](../../../components/person/index.md) for the fu
 
 ```svelte
 <script lang="ts">
-    import Person from "./Person.svelte";
+  import Person from "./Person.svelte";
 </script>
 
 <Person />

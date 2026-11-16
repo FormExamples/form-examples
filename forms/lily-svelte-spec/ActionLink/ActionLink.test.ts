@@ -15,10 +15,12 @@ function textSnippet(text: string) {
 
 describe("ActionLink", () => {
     test("renders as a link with href", () => {
-        render(Subject, { props: {
-            href: "/example",
-            children: textSnippet("Go to example"),
-        }});
+        render(Subject, {
+            props: {
+                href: "/example",
+                children: textSnippet("Go to example"),
+            },
+        });
 
         const link: HTMLElement = screen.getByRole("link", { name: "Go to example" });
         expect(link).toBeTruthy();
@@ -26,11 +28,13 @@ describe("ActionLink", () => {
     });
 
     test("applies aria-label when label prop is provided", () => {
-        render(Subject, { props: {
-            href: "/next",
-            label: "Navigate to next section",
-            children: textSnippet("Next"),
-        }});
+        render(Subject, {
+            props: {
+                href: "/next",
+                label: "Navigate to next section",
+                children: textSnippet("Next"),
+            },
+        });
 
         const link: HTMLElement = screen.getByRole("link", { name: "Navigate to next section" });
         expect(link).toBeTruthy();
@@ -38,22 +42,26 @@ describe("ActionLink", () => {
     });
 
     test("does not set aria-label when label prop is not provided", () => {
-        render(Subject, { props: {
-            href: "/test",
-            children: textSnippet("Test link"),
-        }});
+        render(Subject, {
+            props: {
+                href: "/test",
+                children: textSnippet("Test link"),
+            },
+        });
 
         const link: HTMLElement = screen.getByRole("link", { name: "Test link" });
         expect(link.getAttribute("aria-label")).toBeNull();
     });
 
     test("passes through additional HTML attributes", () => {
-        render(Subject, { props: {
-            href: "/ext",
-            target: "_blank",
-            rel: "noopener noreferrer",
-            children: textSnippet("External"),
-        }});
+        render(Subject, {
+            props: {
+                href: "/ext",
+                target: "_blank",
+                rel: "noopener noreferrer",
+                children: textSnippet("External"),
+            },
+        });
 
         const link: HTMLElement = screen.getByRole("link", { name: "External" });
         expect(link.getAttribute("target")).toBe("_blank");
@@ -62,10 +70,12 @@ describe("ActionLink", () => {
 
     test("is focusable via keyboard", async () => {
         const user: UserEvent = userEvent.setup();
-        render(Subject, { props: {
-            href: "/keyboard",
-            children: textSnippet("Keyboard nav"),
-        }});
+        render(Subject, {
+            props: {
+                href: "/keyboard",
+                children: textSnippet("Keyboard nav"),
+            },
+        });
 
         const link: HTMLElement = screen.getByRole("link", { name: "Keyboard nav" });
         await user.tab();

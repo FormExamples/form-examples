@@ -27,7 +27,10 @@
 </script>
 
 <!-- Headline.svelte -->
-<div class={`headline ${className}`} {...restProps}>
+<div
+    class={`headline ${className}`}
+    {...restProps}
+>
     {#if level === 1}
         <h1 class="headline-heading">{@render children?.()}</h1>
     {:else if level === 2}

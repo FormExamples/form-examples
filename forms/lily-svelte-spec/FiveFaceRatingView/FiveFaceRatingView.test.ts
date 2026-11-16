@@ -9,9 +9,9 @@ describe("FiveFaceRatingView", () => {
         expect(screen.getByRole("img", { name: "Okay" })).toBeTruthy();
     });
 
-    test("displays face label for value", () => {
+    test("without labels the face text is the number, not an English word", () => {
         render(Subject, { props: { value: 4, label: "R" } });
-        expect(screen.getByRole("img").textContent).toContain("Good");
+        expect(screen.getByRole("img").textContent?.trim()).toBe("4");
     });
 
     test("has data-value", () => {
@@ -20,7 +20,9 @@ describe("FiveFaceRatingView", () => {
     });
 
     test("supports custom labels", () => {
-        render(Subject, { props: { value: 1, label: "R", labels: ["Awful", "Poor", "Fine", "Nice", "Great"] } });
+        render(Subject, {
+            props: { value: 1, label: "R", labels: ["Awful", "Poor", "Fine", "Nice", "Great"] },
+        });
         expect(screen.getByRole("img").textContent).toContain("Awful");
     });
 

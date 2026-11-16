@@ -42,6 +42,7 @@
 <!-- MedicalBannerBox.svelte -->
 <div
     class={`medical-banner-box ${className}`}
+    role={label ? "group" : undefined}
     aria-label={label}
     data-context="medical"
     {...restProps}

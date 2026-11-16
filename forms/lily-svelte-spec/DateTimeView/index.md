@@ -45,16 +45,20 @@ Import `DateTimeView` and pass an ISO 8601 `value`. Format the display string yo
 
 ```svelte
 <script lang="ts">
-  import DateTimeView from './DateTimeView.svelte';
+  import DateTimeView from "./DateTimeView.svelte";
 
-  const iso = '2026-01-31T10:00:00Z';
-  const formatted = new Intl.DateTimeFormat('en-US', {
-    dateStyle: 'medium',
-    timeStyle: 'short',
+  const iso = "2026-01-31T10:00:00Z";
+  const formatted = new Intl.DateTimeFormat("en-US", {
+    dateStyle: "medium",
+    timeStyle: "short",
   }).format(new Date(iso));
 </script>
 
-<DateTimeView value={iso} format={formatted} label="Published" />
+<DateTimeView
+  value={iso}
+  format={formatted}
+  label="Published"
+/>
 ```
 
 ### With custom children

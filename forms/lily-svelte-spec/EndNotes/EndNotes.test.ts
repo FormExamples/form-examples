@@ -1,6 +1,11 @@
 import { render } from "@testing-library/svelte";
 import { describe, expect, test } from "vitest";
-import Subject from "./EndNotes.svelte";
+import type { Component } from "svelte";
+
+import Tested from "./EndNotes.svelte";
+
+// These tests leave required props out on purpose, to prove what the component does then.
+const Subject = Tested as unknown as Component<Record<string, unknown>>;
 
 function snippet(text: string) {
     return (($anchor: Comment) => {
@@ -21,10 +26,10 @@ describe("EndNotes", () => {
         expect(container.textContent).toContain("content");
     });
 
-    test("defaults aria-label to 'End notes'", () => {
+    test("has no English aria-label of its own", () => {
         const { container } = render(Subject, { children: snippet("x") });
         const root = container.querySelector(".end-notes");
-        expect(root?.getAttribute("aria-label")).toBe("End notes");
+        expect(root?.hasAttribute("aria-label")).toBe(false);
     });
 
     test("aria-label can be overridden", () => {

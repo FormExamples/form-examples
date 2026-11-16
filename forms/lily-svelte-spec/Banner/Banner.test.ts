@@ -14,9 +14,11 @@ function textSnippet(text: string) {
 
 describe("Banner", () => {
     test("renders with region role", () => {
-        render(Subject, { props: {
-            children: textSnippet("Announcement"),
-        }});
+        render(Subject, {
+            props: {
+                children: textSnippet("Announcement"),
+            },
+        });
 
         const banner: HTMLElement = screen.getByRole("region");
         expect(banner).toBeTruthy();
@@ -24,48 +26,58 @@ describe("Banner", () => {
     });
 
     test("defaults to type info", () => {
-        render(Subject, { props: {
-            children: textSnippet("Info message"),
-        }});
+        render(Subject, {
+            props: {
+                children: textSnippet("Info message"),
+            },
+        });
 
         const banner: HTMLElement = screen.getByRole("region");
         expect(banner.getAttribute("data-type")).toBe("info");
     });
 
     test("applies custom type", () => {
-        render(Subject, { props: {
-            type: "warning",
-            children: textSnippet("Warning"),
-        }});
+        render(Subject, {
+            props: {
+                type: "warning",
+                children: textSnippet("Warning"),
+            },
+        });
 
         const banner: HTMLElement = screen.getByRole("region");
         expect(banner.getAttribute("data-type")).toBe("warning");
     });
 
     test("has aria-live polite for dynamic content", () => {
-        render(Subject, { props: {
-            children: textSnippet("Dynamic"),
-        }});
+        render(Subject, {
+            props: {
+                children: textSnippet("Dynamic"),
+            },
+        });
 
         const banner: HTMLElement = screen.getByRole("region");
         expect(banner.getAttribute("aria-live")).toBe("polite");
     });
 
     test("shows dismiss button when dismissible", () => {
-        render(Subject, { props: {
-            dismissible: true,
-            closeLabel: "Dismiss banner",
-            children: textSnippet("Dismissible"),
-        }});
+        render(Subject, {
+            props: {
+                dismissible: true,
+                closeLabel: "Dismiss banner",
+                children: textSnippet("Dismissible"),
+            },
+        });
 
         const button: HTMLElement = screen.getByRole("button", { name: "Dismiss banner" });
         expect(button).toBeTruthy();
     });
 
     test("hides dismiss button when not dismissible", () => {
-        render(Subject, { props: {
-            children: textSnippet("Not dismissible"),
-        }});
+        render(Subject, {
+            props: {
+                children: textSnippet("Not dismissible"),
+            },
+        });
 
         const button: HTMLElement | null = screen.queryByRole("button");
         expect(button).toBeNull();
@@ -74,12 +86,14 @@ describe("Banner", () => {
     test("dismisses banner on button click", async () => {
         const user: UserEvent = userEvent.setup();
         const handleClose = vi.fn();
-        render(Subject, { props: {
-            dismissible: true,
-            closeLabel: "Close",
-            onclose: handleClose,
-            children: textSnippet("Dismiss me"),
-        }});
+        render(Subject, {
+            props: {
+                dismissible: true,
+                closeLabel: "Close",
+                onclose: handleClose,
+                children: textSnippet("Dismiss me"),
+            },
+        });
 
         const button: HTMLElement = screen.getByRole("button", { name: "Close" });
         await user.click(button);
@@ -89,10 +103,12 @@ describe("Banner", () => {
     });
 
     test("passes through additional HTML attributes", () => {
-        render(Subject, { props: {
-            "data-testid": "my-banner",
-            children: textSnippet("Content"),
-        }});
+        render(Subject, {
+            props: {
+                "data-testid": "my-banner",
+                children: textSnippet("Content"),
+            },
+        });
 
         const banner: HTMLElement = screen.getByTestId("my-banner");
         expect(banner).toBeTruthy();

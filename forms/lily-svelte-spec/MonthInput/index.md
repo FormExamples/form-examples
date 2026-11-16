@@ -47,27 +47,30 @@ Import the component, pass a `label`, and bind the `value` (which will be a `YYY
 
 ```svelte
 <script lang="ts">
-    import MonthInput from "./MonthInput.svelte";
-    let month = $state("");
+  import MonthInput from "./MonthInput.svelte";
+  let month = $state("");
 </script>
 
-<MonthInput label="Start month" bind:value={month} />
+<MonthInput
+  label="Start month"
+  bind:value={month}
+/>
 ```
 
 ### Required with min/max constraints
 
 ```svelte
 <script lang="ts">
-    import MonthInput from "./MonthInput.svelte";
-    let month = $state("");
+  import MonthInput from "./MonthInput.svelte";
+  let month = $state("");
 </script>
 
 <MonthInput
-    label="Expiration"
-    bind:value={month}
-    required
-    min="2024-01"
-    max="2030-12"
+  label="Expiration"
+  bind:value={month}
+  required
+  min="2024-01"
+  max="2030-12"
 />
 ```
 
@@ -75,27 +78,31 @@ Import the component, pass a `label`, and bind the `value` (which will be a `YYY
 
 ```svelte
 <script lang="ts">
-    import MonthInput from "./MonthInput.svelte";
-    let month = $state("2025-04");
+  import MonthInput from "./MonthInput.svelte";
+  let month = $state("2025-04");
 </script>
 
-<MonthInput label="Report month" bind:value={month} disabled />
+<MonthInput
+  label="Report month"
+  bind:value={month}
+  disabled
+/>
 ```
 
 ### Credit-card expiration
 
 ```svelte
 <script lang="ts">
-    import MonthInput from "./MonthInput.svelte";
-    let expiration = $state("");
+  import MonthInput from "./MonthInput.svelte";
+  let expiration = $state("");
 </script>
 
 <MonthInput
-    label="Card expiration"
-    bind:value={expiration}
-    required
-    min="2026-04"
-    name="expiration"
+  label="Card expiration"
+  bind:value={expiration}
+  required
+  min="2026-04"
+  name="expiration"
 />
 ```
 
@@ -103,12 +110,15 @@ Import the component, pass a `label`, and bind the `value` (which will be a `YYY
 
 ```svelte
 <script lang="ts">
-    import MonthInput from "./MonthInput.svelte";
-    let month = $state("2026-01");
-    const firstOfMonth = $derived(month ? `${month}-01` : "");
+  import MonthInput from "./MonthInput.svelte";
+  let month = $state("2026-01");
+  const firstOfMonth = $derived(month ? `${month}-01` : "");
 </script>
 
-<MonthInput label="Start month" bind:value={month} />
+<MonthInput
+  label="Start month"
+  bind:value={month}
+/>
 <p>First day of month: {firstOfMonth}</p>
 ```
 

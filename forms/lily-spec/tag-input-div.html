@@ -1,0 +1,48 @@
+<!-- tag-input-div.html -->
+<!-- TagInputDiv component -->
+<!--
+  Description: an input for adding and removing tags
+  HTML tag: <div>
+  CSS class: tag-input-div
+  Keyboard: Enter with text adds it and clears the field; with no text it stays a normal Enter
+  Accessibility: role="group" and aria-label name the tags and the field together; the field has its own aria-label
+  Events: tag-input-div-add, bubbling, with detail.value the trimmed text
+  Usage:
+    <div class="tag-input-div" role="group" aria-label="Tags">
+      <span class="tag">one</span>
+      <input class="tag-input-div-field" type="text" aria-label="Tags">
+    </div>
+-->
+
+<div
+  class="tag-input-div"
+  role="group"
+  aria-label="Tags"
+>
+  <!-- Consumer provides the tags, with their remove buttons -->
+  <input
+    class="tag-input-div-field"
+    type="text"
+    aria-label="Tags"
+  >
+</div>
+
+<script>
+  // TagInputDiv behavior
+  (function() {
+    'use strict';
+    document.querySelectorAll('.tag-input-div').forEach(function(root) {
+      var field = root.querySelector('.tag-input-div-field');
+      if (!field) return;
+      field.addEventListener('keydown', function(event) {
+        // Enter during an IME composition confirms the composition.
+        if (event.key !== 'Enter' || event.isComposing) return;
+        var text = field.value.trim();
+        if (!text) return;
+        event.preventDefault();
+        field.value = '';
+        root.dispatchEvent(new CustomEvent('tag-input-div-add', { bubbles: true, detail: { value: text } }));
+      });
+    });
+  })();
+</script>

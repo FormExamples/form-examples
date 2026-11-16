@@ -1,17 +1,20 @@
-<script module lang="ts">
-  import { defineMeta } from '@storybook/addon-svelte-csf';
-  import Character from './Character.svelte';
+<script
+    module
+    lang="ts"
+>
+    import { defineMeta } from "@storybook/addon-svelte-csf";
+    import Character from "./Character.svelte";
 
-  const { Story } = defineMeta({
-    title: 'Headless/Character',
-    component: Character,
-  });
+    const { Story } = defineMeta({
+        title: "Headless/Character",
+        component: Character,
+    });
 </script>
 
 <Story
-  name="Default"
-  tags={['autodocs', '!dev']}
-  args={{'label':'Character'}}
+    name="Default"
+    tags={["autodocs", "!dev"]}
+    args={{ label: "Character" }}
 >
-  <p>Character content</p>
+    <p>Character content</p>
 </Story>

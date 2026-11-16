@@ -44,7 +44,7 @@ Simple separator:
 
 ```svelte
 <script lang="ts">
-    import Separator from "./Separator.svelte";
+  import Separator from "./Separator.svelte";
 </script>
 
 <p>First section</p>
@@ -56,7 +56,7 @@ Labeled separator:
 
 ```svelte
 <script lang="ts">
-    import Separator from "./Separator.svelte";
+  import Separator from "./Separator.svelte";
 </script>
 
 <Separator label="End of introduction" />
@@ -66,26 +66,29 @@ Separator with data attribute for CSS:
 
 ```svelte
 <script lang="ts">
-    import Separator from "./Separator.svelte";
+  import Separator from "./Separator.svelte";
 </script>
 
-<Separator label="Section break" data-section="divider" />
+<Separator
+  label="Section break"
+  data-section="divider"
+/>
 ```
 
 Between menu items:
 
 ```svelte
 <script lang="ts">
-    import Menu from "../Menu/Menu.svelte";
-    import MenuItem from "../MenuItem/MenuItem.svelte";
-    import Separator from "./Separator.svelte";
+  import Menu from "../Menu/Menu.svelte";
+  import MenuItem from "../MenuItem/MenuItem.svelte";
+  import Separator from "./Separator.svelte";
 </script>
 
 <Menu label="Actions">
-    <MenuItem>Open</MenuItem>
-    <MenuItem>Save</MenuItem>
-    <Separator label="Destructive actions" />
-    <MenuItem>Delete</MenuItem>
+  <MenuItem>Open</MenuItem>
+  <MenuItem>Save</MenuItem>
+  <Separator label="Destructive actions" />
+  <MenuItem>Delete</MenuItem>
 </Menu>
 ```
 
@@ -93,7 +96,7 @@ Custom styling with class:
 
 ```svelte
 <script lang="ts">
-    import Separator from "./Separator.svelte";
+  import Separator from "./Separator.svelte";
 </script>
 
 <Separator class="thick" />
@@ -105,6 +108,7 @@ Custom styling with class:
 - Supply a meaningful `aria-label` only when the break's purpose is not obvious from context; otherwise omit.
 
 References:
+
 - WAI-ARIA Separator Role: https://www.w3.org/TR/wai-aria-1.2/#separator
 - MDN `<hr>`: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hr
 

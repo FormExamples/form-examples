@@ -39,9 +39,9 @@ Import `BreadcrumbList` from `./BreadcrumbList.svelte`. Place inside `Breadcrumb
 
 ```svelte
 <script lang="ts">
-  import BreadcrumbNav from '../BreadcrumbNav/BreadcrumbNav.svelte';
-  import BreadcrumbList from './BreadcrumbList.svelte';
-  import BreadcrumbListItem from '../BreadcrumbListItem/BreadcrumbListItem.svelte';
+  import BreadcrumbNav from "../BreadcrumbNav/BreadcrumbNav.svelte";
+  import BreadcrumbList from "./BreadcrumbList.svelte";
+  import BreadcrumbListItem from "../BreadcrumbListItem/BreadcrumbListItem.svelte";
 </script>
 
 <BreadcrumbNav label="Breadcrumb">
@@ -57,9 +57,9 @@ Import `BreadcrumbList` from `./BreadcrumbList.svelte`. Place inside `Breadcrumb
 
 ```svelte
 <script lang="ts">
-  import BreadcrumbNav from '../BreadcrumbNav/BreadcrumbNav.svelte';
-  import BreadcrumbList from './BreadcrumbList.svelte';
-  import BreadcrumbListItem from '../BreadcrumbListItem/BreadcrumbListItem.svelte';
+  import BreadcrumbNav from "../BreadcrumbNav/BreadcrumbNav.svelte";
+  import BreadcrumbList from "./BreadcrumbList.svelte";
+  import BreadcrumbListItem from "../BreadcrumbListItem/BreadcrumbListItem.svelte";
 </script>
 
 <BreadcrumbNav label="Docs">
@@ -75,14 +75,14 @@ Import `BreadcrumbList` from `./BreadcrumbList.svelte`. Place inside `Breadcrumb
 
 ```svelte
 <script lang="ts">
-  import BreadcrumbNav from '../BreadcrumbNav/BreadcrumbNav.svelte';
-  import BreadcrumbList from './BreadcrumbList.svelte';
-  import BreadcrumbListItem from '../BreadcrumbListItem/BreadcrumbListItem.svelte';
+  import BreadcrumbNav from "../BreadcrumbNav/BreadcrumbNav.svelte";
+  import BreadcrumbList from "./BreadcrumbList.svelte";
+  import BreadcrumbListItem from "../BreadcrumbListItem/BreadcrumbListItem.svelte";
 
   let trail = $state([
-    { href: '/', label: 'Home' },
-    { href: '/shop', label: 'Shop' },
-    { label: 'Books' }
+    { href: "/", label: "Home" },
+    { href: "/shop", label: "Shop" },
+    { label: "Books" },
   ]);
 </script>
 
@@ -105,9 +105,9 @@ Import `BreadcrumbList` from `./BreadcrumbList.svelte`. Place inside `Breadcrumb
 
 ```svelte
 <script lang="ts">
-  import BreadcrumbNav from '../BreadcrumbNav/BreadcrumbNav.svelte';
-  import BreadcrumbList from './BreadcrumbList.svelte';
-  import BreadcrumbListItem from '../BreadcrumbListItem/BreadcrumbListItem.svelte';
+  import BreadcrumbNav from "../BreadcrumbNav/BreadcrumbNav.svelte";
+  import BreadcrumbList from "./BreadcrumbList.svelte";
+  import BreadcrumbListItem from "../BreadcrumbListItem/BreadcrumbListItem.svelte";
 </script>
 
 <header>

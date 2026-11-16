@@ -39,11 +39,14 @@ Import `Caption` from `./Caption.svelte`. Place inside a `<figure>` or `Figure`.
 
 ```svelte
 <script lang="ts">
-  import Caption from './Caption.svelte';
+  import Caption from "./Caption.svelte";
 </script>
 
 <figure>
-  <img src="/sunset.jpg" alt="Sunset over the ocean" />
+  <img
+    src="/sunset.jpg"
+    alt="Sunset over the ocean"
+  />
   <Caption>Photo taken at Malibu beach.</Caption>
 </figure>
 ```
@@ -52,11 +55,14 @@ Import `Caption` from `./Caption.svelte`. Place inside a `<figure>` or `Figure`.
 
 ```svelte
 <script lang="ts">
-  import Caption from './Caption.svelte';
+  import Caption from "./Caption.svelte";
 </script>
 
 <figure aria-describedby="chart-caption">
-  <svg role="img" aria-label="Revenue chart"><!-- ... --></svg>
+  <svg
+    role="img"
+    aria-label="Revenue chart"><!-- ... --></svg
+  >
   <Caption id="chart-caption">Figure 1: Revenue growth over time.</Caption>
 </figure>
 ```
@@ -65,11 +71,14 @@ Import `Caption` from `./Caption.svelte`. Place inside a `<figure>` or `Figure`.
 
 ```svelte
 <script lang="ts">
-  import Caption from './Caption.svelte';
+  import Caption from "./Caption.svelte";
 </script>
 
 <figure>
-  <img src="/poster.jpg" alt="Event poster" />
+  <img
+    src="/poster.jpg"
+    alt="Event poster"
+  />
   <Caption>
     Photograph by <em>Jane Doe</em> — <a href="/license">CC BY 4.0</a>
   </Caption>
@@ -80,12 +89,15 @@ Import `Caption` from `./Caption.svelte`. Place inside a `<figure>` or `Figure`.
 
 ```svelte
 <script lang="ts">
-  import Figure from '../Figure/Figure.svelte';
-  import Caption from './Caption.svelte';
+  import Figure from "../Figure/Figure.svelte";
+  import Caption from "./Caption.svelte";
 </script>
 
 <Figure>
-  <img src="/diagram.png" alt="System overview diagram" />
+  <img
+    src="/diagram.png"
+    alt="System overview diagram"
+  />
   <Caption>System overview: client → API → database.</Caption>
 </Figure>
 ```
@@ -94,11 +106,14 @@ Import `Caption` from `./Caption.svelte`. Place inside a `<figure>` or `Figure`.
 
 ```svelte
 <script lang="ts">
-  import Caption from './Caption.svelte';
+  import Caption from "./Caption.svelte";
 </script>
 
 <figure>
-  <video src="/intro.mp4" controls></video>
+  <video
+    src="/intro.mp4"
+    controls
+  ></video>
   <Caption>Product introduction video, 2 minutes.</Caption>
 </figure>
 ```

@@ -41,12 +41,15 @@ Import `Avatar` from `./Avatar.svelte`. Always pass `alt` (the person's name). P
 
 ```svelte
 <script lang="ts">
-  import Avatar from './Avatar.svelte';
-  import AvatarImage from '../AvatarImage/AvatarImage.svelte';
+  import Avatar from "./Avatar.svelte";
+  import AvatarImage from "../AvatarImage/AvatarImage.svelte";
 </script>
 
 <Avatar alt="Jane Doe">
-  <AvatarImage src="/photos/jane.jpg" alt="Jane Doe" />
+  <AvatarImage
+    src="/photos/jane.jpg"
+    alt="Jane Doe"
+  />
 </Avatar>
 ```
 
@@ -54,8 +57,8 @@ Import `Avatar` from `./Avatar.svelte`. Always pass `alt` (the person's name). P
 
 ```svelte
 <script lang="ts">
-  import Avatar from './Avatar.svelte';
-  import AvatarText from '../AvatarText/AvatarText.svelte';
+  import Avatar from "./Avatar.svelte";
+  import AvatarText from "../AvatarText/AvatarText.svelte";
 </script>
 
 <Avatar alt="Jane Doe">
@@ -67,13 +70,16 @@ Import `Avatar` from `./Avatar.svelte`. Always pass `alt` (the person's name). P
 
 ```svelte
 <script lang="ts">
-  import Avatar from './Avatar.svelte';
-  import AvatarImage from '../AvatarImage/AvatarImage.svelte';
-  import AvatarText from '../AvatarText/AvatarText.svelte';
+  import Avatar from "./Avatar.svelte";
+  import AvatarImage from "../AvatarImage/AvatarImage.svelte";
+  import AvatarText from "../AvatarText/AvatarText.svelte";
 </script>
 
 <Avatar alt="Jane Doe">
-  <AvatarImage src="/photos/jane.jpg" alt="Jane Doe" />
+  <AvatarImage
+    src="/photos/jane.jpg"
+    alt="Jane Doe"
+  />
   <AvatarText>JD</AvatarText>
 </Avatar>
 ```
@@ -82,12 +88,12 @@ Import `Avatar` from `./Avatar.svelte`. Always pass `alt` (the person's name). P
 
 ```svelte
 <script lang="ts">
-  import Avatar from './Avatar.svelte';
-  import AvatarImage from '../AvatarImage/AvatarImage.svelte';
+  import Avatar from "./Avatar.svelte";
+  import AvatarImage from "../AvatarImage/AvatarImage.svelte";
 
   const users = [
-    { name: 'Jane Doe', src: '/photos/jane.jpg' },
-    { name: 'Ada Lovelace', src: '/photos/ada.jpg' }
+    { name: "Jane Doe", src: "/photos/jane.jpg" },
+    { name: "Ada Lovelace", src: "/photos/ada.jpg" },
   ];
 </script>
 
@@ -95,7 +101,10 @@ Import `Avatar` from `./Avatar.svelte`. Always pass `alt` (the person's name). P
   {#each users as user}
     <li>
       <Avatar alt={user.name}>
-        <AvatarImage src={user.src} alt={user.name} />
+        <AvatarImage
+          src={user.src}
+          alt={user.name}
+        />
       </Avatar>
     </li>
   {/each}
@@ -106,8 +115,8 @@ Import `Avatar` from `./Avatar.svelte`. Always pass `alt` (the person's name). P
 
 ```svelte
 <script lang="ts">
-  import Avatar from './Avatar.svelte';
-  import AvatarText from '../AvatarText/AvatarText.svelte';
+  import Avatar from "./Avatar.svelte";
+  import AvatarText from "../AvatarText/AvatarText.svelte";
 </script>
 
 <a href="/users/jane">

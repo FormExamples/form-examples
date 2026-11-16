@@ -28,17 +28,23 @@ describe("ThemeSelectOption", () => {
     });
 
     test("supports selected", () => {
-        render(Subject, { props: { value: "dark", selected: true, children: textSnippet("Dark") } });
+        render(Subject, {
+            props: { value: "dark", selected: true, children: textSnippet("Dark") },
+        });
         expect((screen.getByRole("option") as HTMLOptionElement).selected).toBe(true);
     });
 
     test("supports disabled", () => {
-        render(Subject, { props: { value: "dark", disabled: true, children: textSnippet("Dark") } });
+        render(Subject, {
+            props: { value: "dark", disabled: true, children: textSnippet("Dark") },
+        });
         expect((screen.getByRole("option") as HTMLOptionElement).disabled).toBe(true);
     });
 
     test("passes through attributes", () => {
-        render(Subject, { props: { value: "dark", "data-testid": "tso", children: textSnippet("Dark") } });
+        render(Subject, {
+            props: { value: "dark", "data-testid": "tso", children: textSnippet("Dark") },
+        });
         expect(screen.getByTestId("tso")).toBeTruthy();
     });
 });

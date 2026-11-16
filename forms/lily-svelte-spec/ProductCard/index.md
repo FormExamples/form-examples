@@ -44,16 +44,21 @@ A headless Svelte 5 component that renders a single `<article>` element. Categor
 
 ```svelte
 <script lang="ts">
-  import ProductCard from './ProductCard.svelte';
-  import Button from '../Button/Button.svelte';
+  import ProductCard from "./ProductCard.svelte";
+  import Button from "../Button/Button.svelte";
 
-  const price = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
+  const price = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
   }).format(24);
 </script>
 
-<ProductCard name="Linen Pillow" price={price} imageUrl="/pillow.jpg" imageAlt="Linen pillow on a bed">
+<ProductCard
+  name="Linen Pillow"
+  {price}
+  imageUrl="/pillow.jpg"
+  imageAlt="Linen pillow on a bed"
+>
   <p>Soft and breathable linen pillow.</p>
   <Button>Add to cart</Button>
 </ProductCard>

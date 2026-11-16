@@ -17,4 +17,25 @@ describe("StatusTag", () => {
         const el = container.querySelector(".status-tag");
         expect(el).toBeTruthy();
     });
+
+    it("is a static label, with label as hidden text", () => {
+        const { container } = render(StatusTag, {
+            props: { label: "Status:", children: textSnippet("Done") },
+        });
+        const el = container.querySelector(".status-tag")!;
+        expect(el.hasAttribute("role")).toBe(false);
+        expect(el.hasAttribute("aria-label")).toBe(false);
+        expect(el.querySelector(".screen-reader-span")!.textContent).toBe("Status: ");
+    });
+
+    it("renders type as data-type, default when unset", () => {
+        const plain = render(StatusTag, { props: { children: textSnippet("Draft") } });
+        expect(plain.container.querySelector(".status-tag")!.getAttribute("data-type")).toBe(
+            "default",
+        );
+        const set = render(StatusTag, {
+            props: { type: "error", children: textSnippet("Failed") },
+        });
+        expect(set.container.querySelector(".status-tag")!.getAttribute("data-type")).toBe("error");
+    });
 });

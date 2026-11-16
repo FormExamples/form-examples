@@ -45,12 +45,12 @@ Import `ClampText` and pass the `lines` prop. Provide consumer CSS that reads `-
 
 ```svelte
 <script lang="ts">
-  import ClampText from './ClampText.svelte';
+  import ClampText from "./ClampText.svelte";
 </script>
 
 <ClampText lines={3}>
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-  incididunt ut labore et dolore magna aliqua.
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+  labore et dolore magna aliqua.
 </ClampText>
 ```
 

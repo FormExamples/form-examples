@@ -47,14 +47,14 @@ Navigation sidebar:
 
 ```svelte
 <script lang="ts">
-    import Sidebar from "./Sidebar.svelte";
+  import Sidebar from "./Sidebar.svelte";
 </script>
 
 <Sidebar label="Primary navigation">
-    <nav>
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-    </nav>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+  </nav>
 </Sidebar>
 ```
 
@@ -62,13 +62,13 @@ Filter sidebar:
 
 ```svelte
 <script lang="ts">
-    import Sidebar from "./Sidebar.svelte";
+  import Sidebar from "./Sidebar.svelte";
 </script>
 
 <Sidebar label="Filters">
-    <form>
-        <label>Category <select><option>News</option></select></label>
-    </form>
+  <form>
+    <label>Category <select><option>News</option></select></label>
+  </form>
 </Sidebar>
 ```
 
@@ -76,14 +76,14 @@ Related-articles sidebar:
 
 ```svelte
 <script lang="ts">
-    import Sidebar from "./Sidebar.svelte";
+  import Sidebar from "./Sidebar.svelte";
 </script>
 
 <Sidebar label="Related articles">
-    <ul>
-        <li><a href="/a">Article A</a></li>
-        <li><a href="/b">Article B</a></li>
-    </ul>
+  <ul>
+    <li><a href="/a">Article A</a></li>
+    <li><a href="/b">Article B</a></li>
+  </ul>
 </Sidebar>
 ```
 
@@ -91,16 +91,16 @@ Sidebar + main content (grail-layout-like pattern):
 
 ```svelte
 <script lang="ts">
-    import Sidebar from "./Sidebar.svelte";
+  import Sidebar from "./Sidebar.svelte";
 </script>
 
 <div class="layout">
-    <Sidebar label="Docs navigation">
-        <nav>...</nav>
-    </Sidebar>
-    <main>
-        <h1>Page</h1>
-    </main>
+  <Sidebar label="Docs navigation">
+    <nav>...</nav>
+  </Sidebar>
+  <main>
+    <h1>Page</h1>
+  </main>
 </div>
 ```
 
@@ -108,11 +108,15 @@ With custom ID and class:
 
 ```svelte
 <script lang="ts">
-    import Sidebar from "./Sidebar.svelte";
+  import Sidebar from "./Sidebar.svelte";
 </script>
 
-<Sidebar label="Table of contents" id="toc" class="sticky">
-    <ol><li><a href="#intro">Introduction</a></li></ol>
+<Sidebar
+  label="Table of contents"
+  id="toc"
+  class="sticky"
+>
+  <ol><li><a href="#intro">Introduction</a></li></ol>
 </Sidebar>
 ```
 
@@ -123,6 +127,7 @@ With custom ID and class:
 - No keyboard interaction is built in; interactive content inside (links, buttons) retains native behavior.
 
 References:
+
 - WAI-ARIA Complementary Role: https://www.w3.org/TR/wai-aria-1.2/#complementary
 - MDN `<aside>`: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/aside
 

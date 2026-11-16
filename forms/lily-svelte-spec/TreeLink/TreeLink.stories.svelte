@@ -1,4 +1,7 @@
-<script module lang="ts">
+<script
+    module
+    lang="ts"
+>
     import { defineMeta } from "@storybook/addon-svelte-csf";
     import TreeLink from "./TreeLink.svelte";
     const { Story } = defineMeta({
@@ -7,8 +10,11 @@
     });
 </script>
 
-<Story name="Default" tags={["autodocs", "!dev"]}>
-    <TreeLink label="TreeLink example">
+<Story
+    name="Default"
+    tags={["autodocs", "!dev"]}
+>
+    <TreeLink href="#example">
         <span>TreeLink example</span>
     </TreeLink>
 </Story>

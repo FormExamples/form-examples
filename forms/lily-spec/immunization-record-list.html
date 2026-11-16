@@ -1,0 +1,34 @@
+<!-- immunization-record-list.html -->
+<!-- ImmunizationRecordList component -->
+<!--
+  Description: a list of a patient's immunizations, whose status is never blank
+  HTML tag: <ul>
+  CSS class: immunization-record-list (part: immunization-record-list-status)
+  Spec: spec/healthcare-ui (tasks.md P28-T3)
+  Attributes: data-status (known, none-known, not-recorded, unavailable, omitted) and aria-label (the status in words).
+    For any status but "known", the status words are the list's one item, li.immunization-record-list-status, so the list is never
+    blank: "none known", "not recorded", "unavailable" and "omitted" are different facts.
+  Usage (status other than known):
+    <ul class="immunization-record-list" data-status="none-known" aria-label="No immunizations recorded"><li class="immunization-record-list-status">No immunizations recorded</li></ul>
+-->
+
+<ul
+  class="immunization-record-list"
+  data-status="known"
+  aria-label="Immunizations"
+>
+  <li
+    class="immunization-record-list-item"
+    data-status="completed"
+  >
+    <span class="immunization-record-list-item-vaccine">MMR vaccine</span>
+    <time
+      class="immunization-record-list-item-occurrence"
+      datetime="2025-09-12"
+      >12 Sep 2025</time
+    >
+    <span class="immunization-record-list-item-dose-number">Dose 2 of 2</span>
+    <span class="immunization-record-list-item-status">Given</span>
+    <span class="immunization-record-list-item-lot-number">AB1234</span>
+  </li>
+</ul>

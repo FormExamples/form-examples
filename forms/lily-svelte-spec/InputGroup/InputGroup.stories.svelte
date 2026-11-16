@@ -1,17 +1,20 @@
-<script module lang="ts">
-  import { defineMeta } from '@storybook/addon-svelte-csf';
-  import InputGroup from './InputGroup.svelte';
+<script
+    module
+    lang="ts"
+>
+    import { defineMeta } from "@storybook/addon-svelte-csf";
+    import InputGroup from "./InputGroup.svelte";
 
-  const { Story } = defineMeta({
-    title: 'Headless/InputGroup',
-    component: InputGroup,
-  });
+    const { Story } = defineMeta({
+        title: "Headless/InputGroup",
+        component: InputGroup,
+    });
 </script>
 
 <Story
-  name="Default"
-  tags={['autodocs', '!dev']}
-  args={{ label: 'Amount' }}
+    name="Default"
+    tags={["autodocs", "!dev"]}
+    args={{ label: "Amount" }}
 >
-  <input type="number" />
+    <input type="number" />
 </Story>

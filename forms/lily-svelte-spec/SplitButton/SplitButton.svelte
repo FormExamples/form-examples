@@ -51,14 +51,16 @@
     // References:
     //   - WAI-ARIA Menu Button: https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/
 
+    import { warnMissingName } from "../dev-warning";
     import type { Snippet } from "svelte";
+    import { popoverState, popoverSupported, toggleOpened } from "../Popover/popover.js";
 
     let {
         class: className = "",
         label,
         primaryLabel,
         menuLabel,
-        menuOpen = false,
+        menuOpen = $bindable(false),
         disabled = false,
         onprimaryclick = undefined,
         onmenutoggle = undefined,
@@ -71,18 +73,39 @@
         primaryLabel: string;
         /** Accessible label for the menu trigger (required) */
         menuLabel: string;
-        /** Whether the dropdown menu is open */
+        /** Whether the dropdown menu is open. Bindable: the browser opens and light-dismisses it. */
         menuOpen?: boolean;
         /** Whether both buttons are disabled */
         disabled?: boolean;
         /** Primary action handler */
         onprimaryclick?: (event: MouseEvent) => void;
-        /** Menu toggle handler */
+        /** Menu toggle handler; call preventDefault() to keep the menu as it is */
         onmenutoggle?: (event: MouseEvent) => void;
         /** The menu content */
         children: Snippet;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName(
+            "SplitButton",
+            label,
+            restProps["aria-label"],
+            restProps["aria-labelledby"],
+        ),
+    );
+
+    const uid = $props.id();
+    const menuId = `split-button-menu-${uid}`;
+    let menu: HTMLDivElement | undefined = $state();
+
+    // With the Popover API the trigger's command="toggle-popover" opens and closes the menu and the toggle event
+    // writes `menuOpen` back; without it, the click toggles `menuOpen` and popoverState sets `hidden`.
+    function toggle(event: MouseEvent) {
+        onmenutoggle?.(event);
+        if (event.defaultPrevented) return;
+        if (menu && !popoverSupported(menu)) menuOpen = !menuOpen;
+    }
 </script>
 
 <!-- SplitButton.svelte -->
@@ -107,9 +130,20 @@
         aria-haspopup="menu"
         aria-expanded={menuOpen}
         aria-label={menuLabel}
-        onclick={onmenutoggle}
+        aria-controls={menuId}
+        command="toggle-popover"
+        commandfor={menuId}
+        popovertarget={menuId}
+        onclick={toggle}
     ></button>
-    <div class="split-button-menu" hidden={!menuOpen}>
+    <div
+        bind:this={menu}
+        class="split-button-menu"
+        id={menuId}
+        popover="auto"
+        use:popoverState={menuOpen}
+        ontoggle={(event) => (menuOpen = toggleOpened(event))}
+    >
         {@render children?.()}
     </div>
 </div>

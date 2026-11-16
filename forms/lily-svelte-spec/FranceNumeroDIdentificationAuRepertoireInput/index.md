@@ -46,74 +46,80 @@ Pass a required localized `label` and optionally bind `value`. The consumer rend
 
 ```svelte
 <script lang="ts">
-    import FranceNumeroDIdentificationAuRepertoireInput from "./FranceNumeroDIdentificationAuRepertoireInput.svelte";
-    let nir = $state("");
+  import FranceNumeroDIdentificationAuRepertoireInput from "./FranceNumeroDIdentificationAuRepertoireInput.svelte";
+  let nir = $state("");
 </script>
 
 <FranceNumeroDIdentificationAuRepertoireInput
-    label="Numéro de sécurité sociale"
-    bind:value={nir}
+  label="Numéro de sécurité sociale"
+  bind:value={nir}
 />
 ```
 
 ```svelte
 <script lang="ts">
-    import FranceNumeroDIdentificationAuRepertoireInput from "./FranceNumeroDIdentificationAuRepertoireInput.svelte";
-    let nir = $state("1 85 05 75 012 345 67");
+  import FranceNumeroDIdentificationAuRepertoireInput from "./FranceNumeroDIdentificationAuRepertoireInput.svelte";
+  let nir = $state("1 85 05 75 012 345 67");
 </script>
 
 <FranceNumeroDIdentificationAuRepertoireInput
-    label="NIR"
-    bind:value={nir}
-    required
+  label="NIR"
+  bind:value={nir}
+  required
 />
 ```
 
 ```svelte
 <script lang="ts">
-    import FranceNumeroDIdentificationAuRepertoireInput from "./FranceNumeroDIdentificationAuRepertoireInput.svelte";
+  import FranceNumeroDIdentificationAuRepertoireInput from "./FranceNumeroDIdentificationAuRepertoireInput.svelte";
 </script>
 
 <FranceNumeroDIdentificationAuRepertoireInput
-    label="NIR"
-    disabled
-    value="1 85 05 75 012 345 67"
+  label="NIR"
+  disabled
+  value="1 85 05 75 012 345 67"
 />
 ```
 
 ```svelte
 <script lang="ts">
-    import Form from "../Form/Form.svelte";
-    import Field from "../Field/Field.svelte";
-    import FranceNumeroDIdentificationAuRepertoireInput from "./FranceNumeroDIdentificationAuRepertoireInput.svelte";
-    import Button from "../Button/Button.svelte";
-    let nir = $state("");
+  import Form from "../Form/Form.svelte";
+  import Field from "../Field/Field.svelte";
+  import FranceNumeroDIdentificationAuRepertoireInput from "./FranceNumeroDIdentificationAuRepertoireInput.svelte";
+  import Button from "../Button/Button.svelte";
+  let nir = $state("");
 </script>
 
-<Form label="Patient registration" onsubmit={() => console.log(nir)}>
-    <Field label="NIR">
-        <FranceNumeroDIdentificationAuRepertoireInput
-            label="NIR"
-            bind:value={nir}
-            required
-        />
-    </Field>
-    <Button type="submit" label="Register">Register</Button>
+<Form
+  label="Patient registration"
+  onsubmit={() => console.log(nir)}
+>
+  <Field label="NIR">
+    <FranceNumeroDIdentificationAuRepertoireInput
+      label="NIR"
+      bind:value={nir}
+      required
+    />
+  </Field>
+  <Button
+    type="submit"
+    label="Register">Register</Button
+  >
 </Form>
 ```
 
 ```svelte
 <script lang="ts">
-    import FranceNumeroDIdentificationAuRepertoireInput from "./FranceNumeroDIdentificationAuRepertoireInput.svelte";
-    let nir = $state("");
+  import FranceNumeroDIdentificationAuRepertoireInput from "./FranceNumeroDIdentificationAuRepertoireInput.svelte";
+  let nir = $state("");
 </script>
 
 <FranceNumeroDIdentificationAuRepertoireInput
-    label="NIR"
-    bind:value={nir}
-    class="nir-field"
-    data-testid="nir-input"
-    aria-describedby="nir-hint"
+  label="NIR"
+  bind:value={nir}
+  class="nir-field"
+  data-testid="nir-input"
+  aria-describedby="nir-hint"
 />
 <p id="nir-hint">Format: X XX XX XX XXX XXX XX</p>
 ```

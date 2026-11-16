@@ -1,0 +1,48 @@
+<!-- show-more.html -->
+<!-- ShowMore component -->
+<!--
+  Description: content that is clamped by consumer CSS until a button reveals the rest
+  HTML tag: <div>
+  CSS class: show-more (root), show-more-content, show-more-button
+  Keyboard: native button (Tab to focus, Enter or Space to toggle)
+  Accessibility: the button has aria-expanded and aria-controls pointing at the content id.
+    The clamp is consumer CSS keyed on [data-expanded="false"]; content stays in the
+    accessibility tree (no aria-hidden). Button text is supplied for both states
+    (data-more-label / data-less-label on the root); there is no English default.
+  Usage: put data-more-label and data-less-label on the root; the script keeps the button text,
+    aria-expanded and data-expanded in step.
+-->
+
+<div
+  class="show-more"
+  data-more-label="Show more"
+  data-less-label="Show less"
+>
+  <div class="show-more-content" id="show-more-content-1" data-expanded="false">
+    <p>Long content goes here. Consumer CSS clamps it while data-expanded is false.</p>
+  </div>
+  <button
+    type="button"
+    class="show-more-button"
+    aria-expanded="false"
+    aria-controls="show-more-content-1"
+  >Show more</button>
+</div>
+
+<script>
+  // ShowMore behavior
+  (function() {
+    'use strict';
+    document.querySelectorAll('.show-more').forEach(function(el) {
+      var button = el.querySelector('.show-more-button');
+      var content = el.querySelector('.show-more-content');
+      if (!button || !content) return;
+      button.addEventListener('click', function() {
+        var expanded = button.getAttribute('aria-expanded') !== 'true';
+        button.setAttribute('aria-expanded', String(expanded));
+        content.setAttribute('data-expanded', String(expanded));
+        button.textContent = expanded ? el.getAttribute('data-less-label') : el.getAttribute('data-more-label');
+      });
+    });
+  })();
+</script>

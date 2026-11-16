@@ -30,7 +30,9 @@ describe("TileMap", () => {
     test("ArrowRight moves focus to the next tile", () => {
         const { container } = render(Subject, {
             label: "x",
-            children: snippet('<button data-tile tabindex="0">A</button><button data-tile tabindex="-1">B</button>'),
+            children: snippet(
+                '<button data-tile tabindex="0">A</button><button data-tile tabindex="-1">B</button>',
+            ),
         });
         const tiles = Array.from(container.querySelectorAll("[data-tile]")) as HTMLElement[];
         tiles[0].focus();

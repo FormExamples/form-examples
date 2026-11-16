@@ -1,15 +1,18 @@
-<script module lang="ts">
-  import { defineMeta } from '@storybook/addon-svelte-csf';
-  import CheckboxInput from './CheckboxInput.svelte';
+<script
+    module
+    lang="ts"
+>
+    import { defineMeta } from "@storybook/addon-svelte-csf";
+    import CheckboxInput from "./CheckboxInput.svelte";
 
-  const { Story } = defineMeta({
-    title: 'Headless/CheckboxInput',
-    component: CheckboxInput,
-  });
+    const { Story } = defineMeta({
+        title: "Headless/CheckboxInput",
+        component: CheckboxInput,
+    });
 </script>
 
 <Story
-  name="Default"
-  tags={['autodocs', '!dev']}
-  args={{'label':'Checkbox Input'}}
+    name="Default"
+    tags={["autodocs", "!dev"]}
+    args={{ label: "Checkbox Input" }}
 />

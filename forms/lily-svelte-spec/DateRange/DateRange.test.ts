@@ -22,7 +22,9 @@ describe("DateRange", () => {
     });
 
     test("passes through attributes", () => {
-        render(Subject, { props: { label: "D", startLabel: "S", endLabel: "E", "data-testid": "dr" } });
+        render(Subject, {
+            props: { label: "D", startLabel: "S", endLabel: "E", "data-testid": "dr" },
+        });
         expect(screen.getByTestId("dr")).toBeTruthy();
     });
 });

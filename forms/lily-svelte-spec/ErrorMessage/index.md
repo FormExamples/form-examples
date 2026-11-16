@@ -29,22 +29,22 @@ Render conditionally when there is an error to display.
 
 ```svelte
 <script lang="ts">
-    import ErrorMessage from "./ErrorMessage.svelte";
-    let error = $state("");
+  import ErrorMessage from "./ErrorMessage.svelte";
+  let error = $state("");
 </script>
 
 {#if error}
-    <ErrorMessage>{error}</ErrorMessage>
+  <ErrorMessage>{error}</ErrorMessage>
 {/if}
 ```
 
 ## Props
 
-| Prop       | Type       | Default | Description                              |
-| ---------- | ---------- | ------- | ---------------------------------------- |
-| `class`    | `string`   | `""`    | CSS class appended to the base class.   |
-| `children` | `Snippet`  | required| Error message content.                   |
-| `...rest`  | `unknown`  | —       | Additional HTML attributes on the `<p>`. |
+| Prop       | Type      | Default  | Description                              |
+| ---------- | --------- | -------- | ---------------------------------------- |
+| `class`    | `string`  | `""`     | CSS class appended to the base class.    |
+| `children` | `Snippet` | required | Error message content.                   |
+| `...rest`  | `unknown` | —        | Additional HTML attributes on the `<p>`. |
 
 ## Usage
 
@@ -58,16 +58,20 @@ Render conditionally when there is an error to display.
 
 ```svelte
 {#if error}
-    <ErrorMessage>{error}</ErrorMessage>
+  <ErrorMessage>{error}</ErrorMessage>
 {/if}
 ```
 
 ### 3. Associated with an input via `aria-errormessage`
 
 ```svelte
-<input id="email" aria-invalid={!!error} aria-errormessage="email-error" />
+<input
+  id="email"
+  aria-invalid={!!error}
+  aria-errormessage="email-error"
+/>
 {#if error}
-    <ErrorMessage id="email-error">{error}</ErrorMessage>
+  <ErrorMessage id="email-error">{error}</ErrorMessage>
 {/if}
 ```
 
@@ -75,9 +79,9 @@ Render conditionally when there is an error to display.
 
 ```svelte
 {#each Object.entries(errors) as [field, msg]}
-    {#if msg}
-        <ErrorMessage id={`${field}-error`}>{msg}</ErrorMessage>
-    {/if}
+  {#if msg}
+    <ErrorMessage id={`${field}-error`}>{msg}</ErrorMessage>
+  {/if}
 {/each}
 ```
 
@@ -85,7 +89,7 @@ Render conditionally when there is an error to display.
 
 ```svelte
 <ErrorMessage>
-    Passwords must be at least <strong>8 characters</strong>.
+  Passwords must be at least <strong>8 characters</strong>.
 </ErrorMessage>
 ```
 

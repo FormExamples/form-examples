@@ -41,7 +41,7 @@ Pass a `label` when the icon conveys meaning that should be announced; pass `dec
 
 ```svelte
 <script lang="ts">
-    import Icon from "./Icon.svelte";
+  import Icon from "./Icon.svelte";
 </script>
 
 <Icon label="Close">x</Icon>
@@ -49,56 +49,75 @@ Pass a `label` when the icon conveys meaning that should be announced; pass `dec
 
 ```svelte
 <script lang="ts">
-    import Icon from "./Icon.svelte";
+  import Icon from "./Icon.svelte";
 </script>
 
 <button aria-label="Save">
-    <Icon decorative>*</Icon>
-    Save
+  <Icon decorative>*</Icon>
+  Save
 </button>
 ```
 
 ```svelte
 <script lang="ts">
-    import Icon from "./Icon.svelte";
+  import Icon from "./Icon.svelte";
 </script>
 
 <Icon label="Search">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="11" cy="11" r="8" fill="none" stroke="currentColor" />
-        <line x1="21" y1="21" x2="16" y2="16" stroke="currentColor" />
-    </svg>
+  <svg
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <circle
+      cx="11"
+      cy="11"
+      r="8"
+      fill="none"
+      stroke="currentColor"
+    />
+    <line
+      x1="21"
+      y1="21"
+      x2="16"
+      y2="16"
+      stroke="currentColor"
+    />
+  </svg>
 </Icon>
 ```
 
 ```svelte
 <script lang="ts">
-    import Icon from "./Icon.svelte";
+  import Icon from "./Icon.svelte";
 </script>
 
-<Icon label="Warning" class="warning-icon" data-testid="warning">
-    ⚠
+<Icon
+  label="Warning"
+  class="warning-icon"
+  data-testid="warning"
+>
+  ⚠
 </Icon>
 ```
 
 ```svelte
 <script lang="ts">
-    import Icon from "./Icon.svelte";
-    const items = [
-        { glyph: "★", label: "Favourite" },
-        { glyph: "✎", label: "Edit" },
-        { glyph: "✕", label: "Remove" },
-    ];
+  import Icon from "./Icon.svelte";
+  const items = [
+    { glyph: "★", label: "Favourite" },
+    { glyph: "✎", label: "Edit" },
+    { glyph: "✕", label: "Remove" },
+  ];
 </script>
 
 <ul>
-    {#each items as it}
-        <li>
-            <button aria-label={it.label}>
-                <Icon decorative>{it.glyph}</Icon>
-            </button>
-        </li>
-    {/each}
+  {#each items as it}
+    <li>
+      <button aria-label={it.label}>
+        <Icon decorative>{it.glyph}</Icon>
+      </button>
+    </li>
+  {/each}
 </ul>
 ```
 

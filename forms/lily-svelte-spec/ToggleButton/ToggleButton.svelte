@@ -1,11 +1,11 @@
 <script lang="ts">
     // ToggleButton component
     //
-    // A headless binary on/off toggle button using role="switch". Renders a
-    // <button> with aria-checked to communicate state. Supports click and
+    // A headless toggle button: a native <button> with aria-pressed, the WAI-ARIA
+    // toggle button pattern. Supports click and
     // keyboard (Space key) interaction. The pressed state is bindable for
-    // two-way data flow. Commonly used for settings like dark mode,
-    // notifications, or feature flags.
+    // two-way data flow. For actions that stay on, such as Bold, Mute or
+    // Favourite; for a setting that turns on or off, use SwitchButton (role="switch").
     //
     // Props:
     //   className — string, optional. CSS class name.
@@ -30,8 +30,8 @@
     //   - Enter: activates the button (native button behavior)
     //
     // Accessibility:
-    //   - role="switch" identifies the element as a two-state toggle
-    //   - aria-checked={pressed} communicates the current state
+    //   - A native <button>: no role is needed; a screen reader says "toggle button"
+    //   - aria-pressed={pressed} communicates the current state ("pressed" / "not pressed")
     //   - aria-label={label} provides the accessible name
     //
     // Internationalization:
@@ -44,8 +44,8 @@
     //   - type="button" prevents accidental form submission
     //
     // References:
-    //   - WAI-ARIA Switch Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/switch/
-    //   - WAI-ARIA Switch Role: https://www.w3.org/TR/wai-aria-1.2/#switch
+    //   - WAI-ARIA Button Pattern (toggle button): https://www.w3.org/WAI/ARIA/apg/patterns/button/
+    //   - aria-pressed: https://www.w3.org/TR/wai-aria-1.2/#aria-pressed
 
     import type { Snippet } from "svelte";
 
@@ -88,8 +88,7 @@
 <button
     class={`toggle-button ${className}`}
     type="button"
-    role="switch"
-    aria-checked={pressed}
+    aria-pressed={pressed}
     aria-label={label}
     {disabled}
     {onclick}

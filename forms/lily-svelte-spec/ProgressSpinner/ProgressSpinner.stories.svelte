@@ -1,17 +1,20 @@
-<script module lang="ts">
-  import { defineMeta } from '@storybook/addon-svelte-csf';
-  import ProgressSpinner from './ProgressSpinner.svelte';
+<script
+    module
+    lang="ts"
+>
+    import { defineMeta } from "@storybook/addon-svelte-csf";
+    import ProgressSpinner from "./ProgressSpinner.svelte";
 
-  const { Story } = defineMeta({
-    title: 'Headless/ProgressSpinner',
-    component: ProgressSpinner,
-  });
+    const { Story } = defineMeta({
+        title: "Headless/ProgressSpinner",
+        component: ProgressSpinner,
+    });
 </script>
 
 <Story
-  name="Default"
-  tags={['autodocs', '!dev']}
-  args={{'label':'Progress Spinner'}}
+    name="Default"
+    tags={["autodocs", "!dev"]}
+    args={{ label: "Progress Spinner" }}
 >
-  <span>Loading...</span>
+    <span>Loading...</span>
 </Story>

@@ -53,7 +53,9 @@
     //   - MDN dialog element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
     //   - WAI-ARIA dialog role: https://www.w3.org/TR/wai-aria-1.2/#dialog
 
+    import { warnMissingName } from "../dev-warning";
     import type { Snippet } from "svelte";
+    import { modalDialog } from "./modal.js";
 
     let {
         class: className = "",
@@ -74,23 +76,39 @@
         [key: string]: unknown;
     } = $props();
 
+    $effect(() =>
+        warnMissingName("Dialog", label, restProps["aria-label"], restProps["aria-labelledby"]),
+    );
+
     function onkeydown(event: KeyboardEvent) {
-        if (event.key === "Escape") {
+        if (event.key === "Escape" && !event.defaultPrevented) {
             event.preventDefault();
             open = false;
         }
+    }
+    function oncancel(event: Event) {
+        event.preventDefault();
+        open = false;
+    }
+    function onclose() {
+        open = false;
     }
 </script>
 
 <!-- Dialog.svelte -->
 {#if open}
+    <!-- A modal dialog is opened by `showModal()` (see modal.ts), so the `open` attribute is only rendered for a
+         non-modal one; the keydown and cancel handlers keep `open` in step with a native Escape or `<form method="dialog">`. -->
     <dialog
         class={`dialog ${className}`}
-        open
+        open={modal ? undefined : true}
         tabindex="-1"
         aria-label={label}
         aria-modal={modal || undefined}
+        use:modalDialog={modal}
         {onkeydown}
+        {oncancel}
+        {onclose}
         {...restProps}
     >
         {@render children?.()}

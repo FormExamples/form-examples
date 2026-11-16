@@ -32,6 +32,7 @@
     // Claude rules:
     //   - Headless: no CSS, no styles — consumer provides all styling
 
+    import { warnMissingName } from "../dev-warning";
     import type { Snippet } from "svelte";
 
     let {
@@ -52,6 +53,15 @@
         children: Snippet;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName(
+            "MedicalBanner",
+            label,
+            restProps["aria-label"],
+            restProps["aria-labelledby"],
+        ),
+    );
 
     let visible = $state(true);
 

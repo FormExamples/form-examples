@@ -4,28 +4,55 @@
   Description: a form wrapper for inline editing of content
   HTML tag: <form>
   CSS class: editable-form
-  Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Keyboard: Escape cancels (sets data-editing="false", hides the form and dispatches a cancel event); submit ends editing; start by setting data-editing="true"
+  Accessibility: aria-label for accessible name, tabindex="-1" (focus lands on the form when it opens)
   Usage:
-    <form class="editable-form" aria-label="Example">
-      ...
+    <form
+      class="editable-form"
+      tabindex="-1"
+      aria-label=""
+      data-editing="false"
+      hidden
+    >
     </form>
 -->
 
 <form
   class="editable-form"
+  tabindex="-1"
   aria-label=""
+  data-editing="false"
+  hidden
 >
-  <!-- Consumer provides form fields -->
+  <!-- Consumer provides fields -->
 </form>
 
 <script>
   // EditableForm behavior
   (function() {
     'use strict';
-    // EditableForm: consumer implements interactive behavior
-    document.querySelectorAll('.editable-form').forEach(function(el) {
-      // Interactive behavior initialization
+    document.querySelectorAll('.editable-form').forEach(function(form) {
+      function sync() {
+        if (form.getAttribute('data-editing') === 'true') {
+          form.hidden = false;
+          form.focus();
+        } else {
+          form.hidden = true;
+        }
+      }
+      new MutationObserver(sync).observe(form, { attributes: true, attributeFilter: ['data-editing'] });
+      sync();
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        form.setAttribute('data-editing', 'false');
+      });
+      form.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          form.setAttribute('data-editing', 'false');
+          form.dispatchEvent(new CustomEvent('cancel'));
+        }
+      });
     });
   })();
 </script>

@@ -4,7 +4,7 @@ import MedicalBanner from "./MedicalBanner.svelte";
 
 describe("MedicalBanner", () => {
     test("renders with content", () => {
-        render(MedicalBanner, { props: { label: "Test" } });
+        render(MedicalBanner, { props: { label: "Test" } as any });
         const el = screen.getByLabelText("Test");
         expect(el).toBeTruthy();
         expect(el.getAttribute("class")).toContain("medical-banner");

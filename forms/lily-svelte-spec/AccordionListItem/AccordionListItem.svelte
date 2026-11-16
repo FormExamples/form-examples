@@ -2,7 +2,7 @@
     // AccordionListItem component
     //
     // A single expandable section within an AccordionList, using the native
-    // HTML <details> element for built-in disclosure behavior. The consumer
+    // HTML <details> element for built-in disclosure behavior, inside an <li>. The consumer
     // provides a <summary> element (the clickable header) and content (the
     // expandable body) as children. The open prop is two-way bindable via
     // $bindable(), allowing parent components to programmatically control
@@ -12,7 +12,7 @@
     //   className — string, optional. CSS class name.
     //   open — boolean, default false, bindable. Whether the item is expanded.
     //   children — Snippet, required. A <summary> and content elements.
-    //   ...restProps — additional HTML attributes spread onto <details>.
+    //   ...restProps — additional HTML attributes spread onto the <li>.
     //
     // Syntax:
     //   <AccordionListItem>
@@ -70,10 +70,11 @@
 </script>
 
 <!-- AccordionListItem.svelte -->
-<details
+<li
     class={`accordion-list-item ${className}`}
-    bind:open
     {...restProps}
 >
-    {@render children?.()}
-</details>
+    <details bind:open>
+        {@render children?.()}
+    </details>
+</li>
