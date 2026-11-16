@@ -42,6 +42,8 @@ OLD_AXA = f'axa = {{ version = "0.13", {FEATURES}'
 NEW_AXA = f'axa = {{ version = "0.14", {FEATURES}'
 OLD_TEST = 'axa-test = "0.4"\n'
 NEW_TEST = 'axa-test = "0.5"\n'
+# A crate on a later axa (bin/axum-axa-0-16) has moved past this step.
+LATER = re.compile(r'^axa = \{ version = "0\.(?:1[5-9]|[2-9]\d)", features = \["cursor-pagination", "postgres-sqlx"', re.M)
 LOCKED = (
     re.compile(r'^name = "axa"\nversion = "0\.14\.', re.M),
     re.compile(r'^name = "axa-test"\nversion = "0\.5\.', re.M),
@@ -55,8 +57,10 @@ def locked(crate: str) -> bool:
 
 
 def drift(crate: str) -> str | None:
-    """Why a crate is not on axa 0.14, if it is not."""
+    """Why a crate is not on axa 0.14 or later, if it is not."""
     manifest = open(f"{crate}/Cargo.toml").read()
+    if LATER.search(manifest):
+        return None
     if NEW_AXA not in manifest or NEW_TEST not in manifest:
         return "Cargo.toml is not on axa 0.14 and axa-test 0.5"
     if not locked(crate):
@@ -82,7 +86,7 @@ def main() -> int:
         bad = [(crate, why) for crate in crates if (why := drift(crate))]
         for crate, why in bad:
             print(f"{crate.split('/')[-2]}: {why}")
-        print(f"{len(crates) - len(bad)}/{len(crates)} crates on axa 0.14")
+        print(f"{len(crates) - len(bad)}/{len(crates)} crates on axa 0.14 or later")
         return 1 if bad else 0
     # Check every manifest first, so one odd crate leaves the fleet as it was.
     manifests = {crate: open(f"{crate}/Cargo.toml").read() for crate in crates}
