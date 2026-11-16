@@ -7,5 +7,7 @@ engineStrict: true
 
 minimumReleaseAgeExclude:
   - vite@8.3.4
+  - '@lilydesignsystem/svelte-theme-picker@0.4.0'
 overrides:
+  '@lilydesignsystem/svelte-theme-picker': ^0.4.0
   '@svar-ui/svelte-core': ^2.6.1
