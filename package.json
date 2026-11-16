@@ -1,0 +1,14 @@
+{
+  "name": "form-examples",
+  "private": true,
+  "description": "Repo-root tooling for the Medical Forms monorepo (dependency version consistency).",
+  "engines": {
+    "node": "=26"
+  },
+  "scripts": {
+    "syncpack:lint": "syncpack lint"
+  },
+  "devDependencies": {
+    "syncpack": "^15.3.3"
+  }
+}
