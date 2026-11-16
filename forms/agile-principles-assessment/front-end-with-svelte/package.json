@@ -46,7 +46,7 @@
     "@lilydesignsystem/svelte-picker-bar": "^0.6.0",
     "@lilydesignsystem/svelte-share-picker": "^0.3.2",
     "@lilydesignsystem/svelte-text-size-picker": "^0.3.2",
-    "@lilydesignsystem/svelte-theme-picker": "^0.3.2",
+    "@lilydesignsystem/svelte-theme-picker": "^0.4.0",
     "@svar-ui/svelte-grid": "^2.7.6",
     "pdfmake": "^0.3.14"
   },

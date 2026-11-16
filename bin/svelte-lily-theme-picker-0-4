@@ -1,0 +1,135 @@
+#!/usr/bin/env python3
+"""bin/svelte-lily-theme-picker-0-4 — move each Svelte front-end to Lily theme-picker 0.4.
+
+What it changes in a `front-end-with-svelte/`:
+
+  package.json         @lilydesignsystem/svelte-theme-picker ^0.3.2 -> ^0.4.0
+  pnpm-workspace.yaml  an `overrides` entry for svelte-theme-picker ^0.4.0 (picker-bar
+                       0.6 still depends on ^0.3.0, so without it a second copy
+                       installs), and a `minimumReleaseAgeExclude` entry for
+                       svelte-theme-picker@0.4.0 (published the day it was adopted)
+  pnpm-lock.yaml       `pnpm install --lockfile-only`; unless --no-lock
+  src/routes/<kebab>/+layout.svelte
+                       themeProps: `detectFromSystem: true` and `defaultValue` become
+                       `systemLabel: 'Follow this device'`, and `cookieName: ''`
+
+0.4.0 adds a first option, "Follow this device", that follows `prefers-color-scheme`
+live and is where a visitor with no saved choice starts; that is spec.md §5 ("Light
+and dark follow the browser"), built in. A `defaultValue` would override that start, so
+it goes. 0.4.0 also keeps the choice in a first-party cookie by default, which this repo's
+privacy notices do not disclose; `cookieName: ''` turns it off, so only localStorage
+keeps the choice, as before.
+
+A front-end already moved is skipped, so the tool can be rerun.
+
+Usage:
+  bin/svelte-lily-theme-picker-0-4 [--no-lock] --all|<slug>...
+  bin/svelte-lily-theme-picker-0-4 --check --all|<slug>...   # CI drift check
+"""
+
+from __future__ import annotations
+
+import argparse
+import glob
+import os
+import re
+import subprocess
+import sys
+
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PKG_OLD = '"@lilydesignsystem/svelte-theme-picker": "^0.3.2"'
+PKG_NEW = '"@lilydesignsystem/svelte-theme-picker": "^0.4.0"'
+EXCLUDE_OLD = "minimumReleaseAgeExclude:\n  - vite@8.3.4\n"
+EXCLUDE_NEW = EXCLUDE_OLD + "  - '@lilydesignsystem/svelte-theme-picker@0.4.0'\n"
+OVERRIDE_OLD = "overrides:\n"
+OVERRIDE_NEW = OVERRIDE_OLD + "  '@lilydesignsystem/svelte-theme-picker': ^0.4.0\n"
+PROPS_OLD = (
+    "            themeLabels,\n"
+    "            defaultValue: DEFAULT_THEME,\n"
+    "            storageKey: THEME_STORAGE_KEY,\n"
+    "            detectFromSystem: true\n"
+)
+PROPS_NEW = (
+    "            themeLabels,\n"
+    "            storageKey: THEME_STORAGE_KEY,\n"
+    "            systemLabel: 'Follow this device',\n"
+    "            cookieName: ''\n"
+)
+IMPORT_OLD = "import { THEME_OPTIONS, THEME_STORAGE_KEY, DEFAULT_THEME } from"
+IMPORT_NEW = "import { THEME_OPTIONS, THEME_STORAGE_KEY } from"
+LOCKED = re.compile(r"^ +'?@lilydesignsystem/svelte-theme-picker'?:\n +specifier: \^0\.4\.0\n +version: 0\.4\.", re.M)
+
+
+def layouts(app: str) -> list[str]:
+    return glob.glob(f"{app}/src/routes/*/+layout.svelte")
+
+
+def rewrite_layout(text: str) -> str:
+    if PROPS_OLD not in text:
+        return text
+    return text.replace(PROPS_OLD, PROPS_NEW).replace(IMPORT_OLD, IMPORT_NEW)
+
+
+def rewrite_workspace(text: str) -> str:
+    if "svelte-theme-picker@0.4.0" not in text:
+        text = text.replace(EXCLUDE_OLD, EXCLUDE_NEW, 1)
+    if "'@lilydesignsystem/svelte-theme-picker': ^0.4.0" not in text:
+        text = text.replace(OVERRIDE_OLD, OVERRIDE_NEW, 1)
+    return text
+
+
+def drift(app: str) -> str | None:
+    if PKG_NEW not in open(f"{app}/package.json").read():
+        return "package.json is not on svelte-theme-picker ^0.4.0"
+    work = open(f"{app}/pnpm-workspace.yaml").read()
+    if rewrite_workspace(work) != work:
+        return "pnpm-workspace.yaml lacks the 0.4.0 override or release-age exclusion"
+    for path in layouts(app):
+        text = open(path).read()
+        if rewrite_layout(text) != text or ("themeProps" in text and "systemLabel" not in text):
+            return f"{os.path.relpath(path, app)} does not use systemLabel and cookieName: ''"
+    if not LOCKED.search(open(f"{app}/pnpm-lock.yaml").read()):
+        return "pnpm-lock.yaml is not on svelte-theme-picker 0.4"
+    return None
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    parser.add_argument("slugs", nargs="*")
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--no-lock", action="store_true")
+    args = parser.parse_args()
+    if args.all:
+        apps = sorted(os.path.dirname(p) for p in glob.glob(f"{REPO}/forms/*/front-end-with-svelte/package.json"))
+    elif args.slugs:
+        apps = [f"{REPO}/forms/{s}/front-end-with-svelte" for s in args.slugs]
+    else:
+        parser.error("name forms, or pass --all")
+    if args.check:
+        bad = [(a, why) for a in apps if (why := drift(a))]
+        for app, why in bad:
+            print(f"{app.split('/')[-2]}: {why}")
+        print(f"{len(apps) - len(bad)}/{len(apps)} front-ends on svelte-theme-picker 0.4")
+        return 1 if bad else 0
+    moved, failed = 0, []
+    for app in apps:
+        changed = False
+        for path, fn in [(f"{app}/package.json", lambda t: t.replace(PKG_OLD, PKG_NEW)),
+                         (f"{app}/pnpm-workspace.yaml", rewrite_workspace)] + [(p, rewrite_layout) for p in layouts(app)]:
+            old = open(path).read()
+            if (new := fn(old)) != old:
+                open(path, "w").write(new)
+                changed = True
+        moved += changed
+        if not args.no_lock and not LOCKED.search(open(f"{app}/pnpm-lock.yaml").read()):
+            result = subprocess.run(["pnpm", "install", "--lockfile-only", "--silent"], cwd=app, capture_output=True, text=True)
+            if result.returncode or not LOCKED.search(open(f"{app}/pnpm-lock.yaml").read()):
+                failed.append(app)
+                print(f"{app.split('/')[-2]}: pnpm lock failed: {(result.stderr or result.stdout).strip()[-300:]}", file=sys.stderr)
+    print(f"{moved} moved, {len(apps) - moved} already on theme-picker 0.4, {len(failed)} lock failures")
+    return 1 if failed else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

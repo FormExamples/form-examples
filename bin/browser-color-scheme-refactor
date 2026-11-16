@@ -16,7 +16,9 @@ What it changes, per form:
                           live while no theme is saved
   front-end-with-svelte/src/routes/<kebab>/+layout.svelte
                           ThemePicker `detectFromSystem: true` (saved theme,
-                          then the system scheme, then the default)
+                          then the system scheme, then the default); superseded
+                          by bin/svelte-lily-theme-picker-0-4, whose native
+                          "Follow this device" option does the same
 
 A form already moved is skipped, so the tool can be rerun. A form without the
 swappable theme stylesheet (see bin/html-theme-locale-select-refactor) is left

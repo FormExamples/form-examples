@@ -24,8 +24,8 @@ importers:
         specifier: ^0.3.2
         version: 0.3.2(@lilydesignsystem/svelte-headless@0.9.0(svelte@5.57.3(@typescript-eslint/types@8.72.1)))(svelte@5.57.3(@typescript-eslint/types@8.72.1))
       '@lilydesignsystem/svelte-theme-picker':
-        specifier: ^0.3.2
-        version: 0.3.2(@lilydesignsystem/svelte-headless@0.9.0(svelte@5.57.3(@typescript-eslint/types@8.72.1)))(svelte@5.57.3(@typescript-eslint/types@8.72.1))
+        specifier: ^0.4.0
+        version: 0.4.0(@lilydesignsystem/svelte-headless@0.9.0(svelte@5.57.3(@typescript-eslint/types@8.72.1)))(svelte@5.57.3(@typescript-eslint/types@8.72.1))
       migrate:
         specifier: ^2.1.0
         version: 2.1.0
@@ -245,6 +245,13 @@ packages:
 
   '@lilydesignsystem/svelte-theme-picker@0.3.2':
     resolution: {integrity: sha512-bX/FESig8sTrLL31C6HjR6U0FVacFmUqIqQ+ZnngotW5Rmthn7ifncy1DCy09vWStpSMCFDnLJXVhZqTJhLQRg==}
+    engines: {node: '>=26'}
+    peerDependencies:
+      '@lilydesignsystem/svelte-headless': '>=0.4.0 <1.0.0'
+      svelte: ^5.0.0
+
+  '@lilydesignsystem/svelte-theme-picker@0.4.0':
+    resolution: {integrity: sha512-JEd/OjtE6Obw+6yp7sqb9FlPsp8paoOITfX0HWBFJKHg7W4bA1bNDHudtPY/WQ4c8KBLJABjwZGIKd7Vy5HFHQ==}
     engines: {node: '>=26'}
     peerDependencies:
       '@lilydesignsystem/svelte-headless': '>=0.4.0 <1.0.0'
@@ -1605,6 +1612,11 @@ snapshots:
       svelte: 5.57.3(@typescript-eslint/types@8.72.1)
 
   '@lilydesignsystem/svelte-theme-picker@0.3.2(@lilydesignsystem/svelte-headless@0.9.0(svelte@5.57.3(@typescript-eslint/types@8.72.1)))(svelte@5.57.3(@typescript-eslint/types@8.72.1))':
+    dependencies:
+      '@lilydesignsystem/svelte-headless': 0.9.0(svelte@5.57.3(@typescript-eslint/types@8.72.1))
+      svelte: 5.57.3(@typescript-eslint/types@8.72.1)
+
+  '@lilydesignsystem/svelte-theme-picker@0.4.0(@lilydesignsystem/svelte-headless@0.9.0(svelte@5.57.3(@typescript-eslint/types@8.72.1)))(svelte@5.57.3(@typescript-eslint/types@8.72.1))':
     dependencies:
       '@lilydesignsystem/svelte-headless': 0.9.0(svelte@5.57.3(@typescript-eslint/types@8.72.1))
       svelte: 5.57.3(@typescript-eslint/types@8.72.1)
