@@ -30,22 +30,22 @@ Place one or more `DontListItem`s inside a `DontList`.
 
 ```svelte
 <script lang="ts">
-    import DontList from "../DontList/DontList.svelte";
-    import DontListItem from "./DontListItem.svelte";
+  import DontList from "../DontList/DontList.svelte";
+  import DontListItem from "./DontListItem.svelte";
 </script>
 
 <DontList>
-    <DontListItem>Use color alone to convey meaning</DontListItem>
+  <DontListItem>Use color alone to convey meaning</DontListItem>
 </DontList>
 ```
 
 ## Props
 
-| Prop       | Type       | Default | Description                              |
-| ---------- | ---------- | ------- | ---------------------------------------- |
-| `class`    | `string`   | `""`    | CSS class appended to the base class.   |
-| `children` | `Snippet`  | required| The discouraged-practice content.        |
-| `...rest`  | `unknown`  | —       | Additional HTML attributes on the `<li>`.|
+| Prop       | Type      | Default  | Description                               |
+| ---------- | --------- | -------- | ----------------------------------------- |
+| `class`    | `string`  | `""`     | CSS class appended to the base class.     |
+| `children` | `Snippet` | required | The discouraged-practice content.         |
+| `...rest`  | `unknown` | —        | Additional HTML attributes on the `<li>`. |
 
 ## Usage
 
@@ -53,8 +53,8 @@ Place one or more `DontListItem`s inside a `DontList`.
 
 ```svelte
 <DontList>
-    <DontListItem>Skip alt text</DontListItem>
-    <DontListItem>Use only color for meaning</DontListItem>
+  <DontListItem>Skip alt text</DontListItem>
+  <DontListItem>Use only color for meaning</DontListItem>
 </DontList>
 ```
 
@@ -62,10 +62,10 @@ Place one or more `DontListItem`s inside a `DontList`.
 
 ```svelte
 <DoList>
-    <DoListItem>Write clear error messages</DoListItem>
+  <DoListItem>Write clear error messages</DoListItem>
 </DoList>
 <DontList>
-    <DontListItem>Use technical jargon in errors</DontListItem>
+  <DontListItem>Use technical jargon in errors</DontListItem>
 </DontList>
 ```
 
@@ -73,9 +73,9 @@ Place one or more `DontListItem`s inside a `DontList`.
 
 ```svelte
 <DontList>
-    <DontListItem>
-        Do not override <code>outline</code> without a visible replacement
-    </DontListItem>
+  <DontListItem>
+    Do not override <code>outline</code> without a visible replacement
+  </DontListItem>
 </DontList>
 ```
 
@@ -83,8 +83,8 @@ Place one or more `DontListItem`s inside a `DontList`.
 
 ```svelte
 <ul aria-label="Practices to avoid">
-    <DontListItem>Use placeholders as labels</DontListItem>
-    <DontListItem>Trap keyboard focus</DontListItem>
+  <DontListItem>Use placeholders as labels</DontListItem>
+  <DontListItem>Trap keyboard focus</DontListItem>
 </ul>
 ```
 

@@ -46,11 +46,11 @@ Single toast:
 
 ```svelte
 <script lang="ts">
-    import Sonner from "./Sonner.svelte";
+  import Sonner from "./Sonner.svelte";
 </script>
 
 <Sonner label="Notifications">
-    <div role="status">File saved successfully.</div>
+  <div role="status">File saved successfully.</div>
 </Sonner>
 ```
 
@@ -58,21 +58,21 @@ Stacked toasts driven by state:
 
 ```svelte
 <script lang="ts">
-    import Sonner from "./Sonner.svelte";
-    let toasts = $state<{ id: number; message: string }[]>([]);
-    let nextId = 0;
-    function pushToast(message: string) {
-        const id = ++nextId;
-        toasts = [...toasts, { id, message }];
-        setTimeout(() => (toasts = toasts.filter((t) => t.id !== id)), 3000);
-    }
+  import Sonner from "./Sonner.svelte";
+  let toasts = $state<{ id: number; message: string }[]>([]);
+  let nextId = 0;
+  function pushToast(message: string) {
+    const id = ++nextId;
+    toasts = [...toasts, { id, message }];
+    setTimeout(() => (toasts = toasts.filter((t) => t.id !== id)), 3000);
+  }
 </script>
 
 <button onclick={() => pushToast("Saved")}>Save</button>
 <Sonner label="Alerts">
-    {#each toasts as t (t.id)}
-        <div role="status">{t.message}</div>
-    {/each}
+  {#each toasts as t (t.id)}
+    <div role="status">{t.message}</div>
+  {/each}
 </Sonner>
 ```
 
@@ -80,11 +80,11 @@ With an assertive toast for errors:
 
 ```svelte
 <script lang="ts">
-    import Sonner from "./Sonner.svelte";
+  import Sonner from "./Sonner.svelte";
 </script>
 
 <Sonner label="Errors">
-    <div role="alert">Could not connect to server.</div>
+  <div role="alert">Could not connect to server.</div>
 </Sonner>
 ```
 
@@ -92,11 +92,14 @@ Custom positioning via class:
 
 ```svelte
 <script lang="ts">
-    import Sonner from "./Sonner.svelte";
+  import Sonner from "./Sonner.svelte";
 </script>
 
-<Sonner label="Notifications" class="fixed-bottom-right">
-    <div role="status">Link copied.</div>
+<Sonner
+  label="Notifications"
+  class="fixed-bottom-right"
+>
+  <div role="status">Link copied.</div>
 </Sonner>
 ```
 
@@ -104,13 +107,13 @@ At app-shell root:
 
 ```svelte
 <script lang="ts">
-    import Sonner from "./Sonner.svelte";
-    let toasts = $state([] as string[]);
+  import Sonner from "./Sonner.svelte";
+  let toasts = $state([] as string[]);
 </script>
 
 <main>...</main>
 <Sonner label="App notifications">
-    {#each toasts as msg}<div role="status">{msg}</div>{/each}
+  {#each toasts as msg}<div role="status">{msg}</div>{/each}
 </Sonner>
 ```
 
@@ -122,6 +125,7 @@ At app-shell root:
 - The `Sonner` region itself does not implement dismissal - consumers must add keyboard-reachable close buttons for persistent toasts.
 
 References:
+
 - WAI-ARIA Live Regions: https://www.w3.org/TR/wai-aria-1.2/#aria-live
 - WAI-ARIA `region` role: https://www.w3.org/TR/wai-aria-1.2/#region
 

@@ -56,6 +56,7 @@
     // References:
     //   - WAI-ARIA Form Role: https://www.w3.org/WAI/ARIA/apd/roles/form/
 
+    import { warnMissingName } from "../dev-warning";
     import type { Snippet } from "svelte";
 
     let {
@@ -79,6 +80,15 @@
         children: Snippet;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName(
+            "EditableForm",
+            label,
+            restProps["aria-label"],
+            restProps["aria-labelledby"],
+        ),
+    );
 
     function handleSubmit(event: SubmitEvent) {
         event.preventDefault();

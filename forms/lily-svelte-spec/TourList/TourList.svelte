@@ -1,8 +1,10 @@
 <script lang="ts">
     // TourList component
     //
-    // A headless guided walkthrough overlay that presents step-by-step
-    // instructions to users. Useful for onboarding flows, feature tutorials, or
+    // A headless ordered list of guided walkthrough steps that presents step-by-step
+    // instructions to users. It is a plain <ol> (no role="dialog", no aria-modal), so
+    // screen readers keep its list semantics and announce the step count; any dialog
+    // semantics belong to the enclosing Tour, which is non-modal. Useful for onboarding flows, feature tutorials, or
     // contextual help systems. The consumer provides TourListItem children to
     // define each step of the tour.
     //
@@ -11,7 +13,7 @@
     //   label — string, required. Accessible name for the tour dialog via aria-label.
     //   active — boolean, default false. Whether the tour is visible; bindable with bind:active.
     //   children — Snippet, required. TourListItem elements.
-    //   ...restProps — additional HTML attributes spread onto the <div>.
+    //   ...restProps — additional HTML attributes spread onto the <ol>.
     //
     // Syntax:
     //   <TourList label="Getting started" bind:active>...</TourList>
@@ -34,10 +36,9 @@
     //   - Escape: closes the tour by setting active to false
     //
     // Accessibility:
-    //   - role="dialog" identifies the overlay as a dialog window
-    //   - aria-modal="true" indicates the dialog is modal
-    //   - aria-label={label} provides an accessible name for the tour
-    //   - tabindex="-1" allows the dialog to receive focus for keyboard events
+    //   - native <ol> list semantics (no role="dialog": it would hide the list; no aria-modal: not modal)
+    //   - aria-label={label} provides an accessible name for the list of steps
+    //   - tabindex="-1" allows the list to receive focus for keyboard events
     //
     // Internationalization:
     //   - The label prop accepts any translated string
@@ -62,6 +63,8 @@
     }: {
         /** Accessible label for the tour. */
         label: string;
+        /** Whether the tour is visible. Bindable. */
+        active?: boolean;
         /** TourListItem elements. */
         children: Snippet;
         [key: string]: unknown;
@@ -78,8 +81,6 @@
 {#if active}
     <ol
         class={`tour-list ${className}`}
-        role="dialog"
-        aria-modal="true"
         aria-label={label}
         tabindex="-1"
         {onkeydown}

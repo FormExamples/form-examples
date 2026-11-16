@@ -46,7 +46,7 @@ import PaginationListItem from './PaginationListItem.svelte';
 
 ```svelte
 <script lang="ts">
-  import PaginationListItem from './PaginationListItem.svelte';
+  import PaginationListItem from "./PaginationListItem.svelte";
 </script>
 
 <PaginationListItem>
@@ -58,11 +58,14 @@ import PaginationListItem from './PaginationListItem.svelte';
 
 ```svelte
 <script lang="ts">
-  import PaginationListItem from './PaginationListItem.svelte';
+  import PaginationListItem from "./PaginationListItem.svelte";
 </script>
 
 <PaginationListItem>
-  <a href="/page/2" aria-current="page">2</a>
+  <a
+    href="/page/2"
+    aria-current="page">2</a
+  >
 </PaginationListItem>
 ```
 
@@ -70,13 +73,23 @@ import PaginationListItem from './PaginationListItem.svelte';
 
 ```svelte
 <script lang="ts">
-  import PaginationList from '../PaginationList/PaginationList.svelte';
-  import PaginationListItem from './PaginationListItem.svelte';
+  import PaginationList from "../PaginationList/PaginationList.svelte";
+  import PaginationListItem from "./PaginationListItem.svelte";
 </script>
 
 <PaginationList label="Pages">
-  <PaginationListItem><a href="/page/1" rel="prev">Previous</a></PaginationListItem>
-  <PaginationListItem><a href="/page/3" rel="next">Next</a></PaginationListItem>
+  <PaginationListItem
+    ><a
+      href="/page/1"
+      rel="prev">Previous</a
+    ></PaginationListItem
+  >
+  <PaginationListItem
+    ><a
+      href="/page/3"
+      rel="next">Next</a
+    ></PaginationListItem
+  >
 </PaginationList>
 ```
 
@@ -84,7 +97,7 @@ import PaginationListItem from './PaginationListItem.svelte';
 
 ```svelte
 <script lang="ts">
-  import PaginationListItem from './PaginationListItem.svelte';
+  import PaginationListItem from "./PaginationListItem.svelte";
 </script>
 
 <PaginationListItem aria-hidden="true">…</PaginationListItem>
@@ -94,15 +107,20 @@ import PaginationListItem from './PaginationListItem.svelte';
 
 ```svelte
 <script lang="ts">
-  import PaginationNav from '../PaginationNav/PaginationNav.svelte';
-  import PaginationList from '../PaginationList/PaginationList.svelte';
-  import PaginationListItem from './PaginationListItem.svelte';
+  import PaginationNav from "../PaginationNav/PaginationNav.svelte";
+  import PaginationList from "../PaginationList/PaginationList.svelte";
+  import PaginationListItem from "./PaginationListItem.svelte";
 </script>
 
 <PaginationNav label="Pagination">
   <PaginationList label="Pages">
     <PaginationListItem><a href="/p/1">1</a></PaginationListItem>
-    <PaginationListItem><a href="/p/2" aria-current="page">2</a></PaginationListItem>
+    <PaginationListItem
+      ><a
+        href="/p/2"
+        aria-current="page">2</a
+      ></PaginationListItem
+    >
     <PaginationListItem><a href="/p/3">3</a></PaginationListItem>
   </PaginationList>
 </PaginationNav>

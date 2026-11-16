@@ -40,23 +40,29 @@ describe("GovernmentIdentifier", () => {
     });
 
     test("renders the agency name in an anchor when agencyHref provided", () => {
-        const { container } = render(Subject, { props: {
-            ...baseProps,
-            agencyHref: "https://example.gov",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                ...baseProps,
+                agencyHref: "https://example.gov",
+            },
+        });
 
-        const link = container.querySelector("p.government-identifier-agency a") as HTMLAnchorElement;
+        const link = container.querySelector(
+            "p.government-identifier-agency a",
+        ) as HTMLAnchorElement;
         expect(link).toBeTruthy();
         expect(link.getAttribute("href")).toBe("https://example.gov");
         expect(link.textContent).toBe("U.S. Department of Example");
     });
 
     test("renders the logo image when logoUrl provided", () => {
-        const { container } = render(Subject, { props: {
-            ...baseProps,
-            logoUrl: "/logo.svg",
-            logoAlt: "Agency logo",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                ...baseProps,
+                logoUrl: "/logo.svg",
+                logoAlt: "Agency logo",
+            },
+        });
 
         const img = container.querySelector("img.government-identifier-logo") as HTMLImageElement;
         expect(img.getAttribute("src")).toBe("/logo.svg");
@@ -64,20 +70,24 @@ describe("GovernmentIdentifier", () => {
     });
 
     test("renders description when provided", () => {
-        const { container } = render(Subject, { props: {
-            ...baseProps,
-            description: "An official agency",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                ...baseProps,
+                description: "An official agency",
+            },
+        });
 
         const desc = container.querySelector("p.government-identifier-description") as HTMLElement;
         expect(desc.textContent).toBe("An official agency");
     });
 
     test("renders nested nav with aria-label when children provided", () => {
-        const { container } = render(Subject, { props: {
-            ...baseProps,
-            children: htmlSnippet("<a href='/about'>About</a>"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                ...baseProps,
+                children: htmlSnippet("<a href='/about'>About</a>"),
+            },
+        });
 
         const nav = container.querySelector("nav.government-identifier-links") as HTMLElement;
         expect(nav).toBeTruthy();

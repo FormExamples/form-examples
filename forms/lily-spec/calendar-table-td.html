@@ -4,9 +4,10 @@
   Description: a calendar table interactive grid data cell for managing dates, days, etc.
   HTML tag: <td> wrapped in <table><tr>
   CSS class: calendar-table-td
+  Keyboard: none; not interactive, and any interactive children handle their own keys
   Accessibility: aria-label for accessible name
 -->
 
-<table><tr><td class="calendar-table-td" aria-label="Example">
+<table><tr><td class="calendar-table-td" role="gridcell" aria-label="Example">
     <!-- Consumer provides child content -->
 </td></tr></table>

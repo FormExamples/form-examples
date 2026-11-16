@@ -5,7 +5,7 @@
   HTML tag: <button>
   CSS class: segment-group-item
   Keyboard: Tab to focus, Enter or Space to activate
-  Accessibility: Implicit button role, aria-label for accessible name
+  Accessibility: role="radio" with aria-checked, inside a segment-group radiogroup; one tab stop
   Usage:
     <button class="segment-group-item" aria-label="Example">
       ...
@@ -14,7 +14,11 @@
 
 <button
   class="segment-group-item"
-  aria-label=""
+  data-value="one"
+  type="button"
+  role="radio"
+  aria-checked="false"
+  tabindex="-1"
 >
   <!-- Consumer provides button content -->
 </button>

@@ -36,92 +36,139 @@ Bind `value` for filtering. Bind `open` to control visibility. Provide `role="op
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `class` | `string` | `""` | CSS class name appended to the base class. |
-| `label` | `string` | required | `aria-label` for both input and listbox. |
-| `value` | `string` | `""` (bindable) | Current text input value. |
-| `open` | `boolean` | `false` (bindable) | Whether the listbox is visible. |
-| `children` | `Snippet` | required | Option elements rendered in the listbox. |
-| `...restProps` | `unknown` | — | Additional attributes spread onto the wrapper `<div>`. |
+| Prop           | Type      | Default            | Description                                            |
+| -------------- | --------- | ------------------ | ------------------------------------------------------ |
+| `class`        | `string`  | `""`               | CSS class name appended to the base class.             |
+| `label`        | `string`  | required           | `aria-label` for both input and listbox.               |
+| `value`        | `string`  | `""` (bindable)    | Current text input value.                              |
+| `open`         | `boolean` | `false` (bindable) | Whether the listbox is visible.                        |
+| `children`     | `Snippet` | required           | Option elements rendered in the listbox.               |
+| `...restProps` | `unknown` | —                  | Additional attributes spread onto the wrapper `<div>`. |
 
 ## Usage
 
 ```svelte
 <script lang="ts">
-    import Combobox from "./Combobox.svelte";
+  import Combobox from "./Combobox.svelte";
 
-    let value = $state("");
-    let open = $state(false);
-    const options = ["Apple", "Banana", "Cherry", "Date", "Elderberry"];
-    let filtered = $derived(
-        options.filter((o) => o.toLowerCase().includes(value.toLowerCase()))
-    );
+  let value = $state("");
+  let open = $state(false);
+  const options = ["Apple", "Banana", "Cherry", "Date", "Elderberry"];
+  let filtered = $derived(options.filter((o) => o.toLowerCase().includes(value.toLowerCase())));
 </script>
 
-<Combobox label="Pick a fruit" bind:value bind:open>
-    {#each filtered as option}
-        <div
-            role="option"
-            tabindex="-1"
-            onclick={() => {
-                value = option;
-                open = false;
-            }}
-        >
-            {option}
-        </div>
-    {/each}
+<Combobox
+  label="Pick a fruit"
+  bind:value
+  bind:open
+>
+  {#each filtered as option}
+    <div
+      role="option"
+      tabindex="-1"
+      onclick={() => {
+        value = option;
+        open = false;
+      }}
+    >
+      {option}
+    </div>
+  {/each}
 </Combobox>
 ```
 
 ```svelte
 <script lang="ts">
-    import Combobox from "./Combobox.svelte";
+  import Combobox from "./Combobox.svelte";
 
-    let q = $state("");
-    let open = $state(false);
+  let q = $state("");
+  let open = $state(false);
 </script>
 
-<Combobox label="Search users" bind:value={q} bind:open>
-    {#if q.trim().length === 0}
-        <div role="option" tabindex="-1">Start typing to search...</div>
-    {:else}
-        <div role="option" tabindex="-1">No results for "{q}"</div>
-    {/if}
+<Combobox
+  label="Search users"
+  bind:value={q}
+  bind:open
+>
+  {#if q.trim().length === 0}
+    <div
+      role="option"
+      tabindex="-1"
+    >
+      Start typing to search...
+    </div>
+  {:else}
+    <div
+      role="option"
+      tabindex="-1"
+    >
+      No results for "{q}"
+    </div>
+  {/if}
 </Combobox>
 ```
 
 ```svelte
 <script lang="ts">
-    import Combobox from "./Combobox.svelte";
+  import Combobox from "./Combobox.svelte";
 
-    let open = $state(false);
-    let value = $state("");
+  let open = $state(false);
+  let value = $state("");
 </script>
 
-<Combobox label="Tags" bind:value bind:open>
-    <div role="option" tabindex="-1">design</div>
-    <div role="option" tabindex="-1">svelte</div>
-    <div role="option" tabindex="-1">accessibility</div>
+<Combobox
+  label="Tags"
+  bind:value
+  bind:open
+>
+  <div
+    role="option"
+    tabindex="-1"
+  >
+    design
+  </div>
+  <div
+    role="option"
+    tabindex="-1"
+  >
+    svelte
+  </div>
+  <div
+    role="option"
+    tabindex="-1"
+  >
+    accessibility
+  </div>
 </Combobox>
 
-<button type="button" onclick={() => (open = !open)}>Toggle dropdown</button>
+<button
+  type="button"
+  onclick={() => (open = !open)}>Toggle dropdown</button
+>
 ```
 
 ```svelte
 <script lang="ts">
-    import Combobox from "./Combobox.svelte";
+  import Combobox from "./Combobox.svelte";
 
-    let value = $state("");
-    let open = $state(false);
-    const items = ["Alpha", "Beta", "Gamma"];
+  let value = $state("");
+  let open = $state(false);
+  const items = ["Alpha", "Beta", "Gamma"];
 </script>
 
-<Combobox label="Phase" bind:value bind:open>
-    {#each items as item}
-        <div role="option" tabindex="-1">{item}</div>
-    {/each}
+<Combobox
+  label="Phase"
+  bind:value
+  bind:open
+>
+  {#each items as item}
+    <div
+      role="option"
+      tabindex="-1"
+    >
+      {item}
+    </div>
+  {/each}
 </Combobox>
 ```
 

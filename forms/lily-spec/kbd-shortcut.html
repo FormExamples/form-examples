@@ -1,0 +1,17 @@
+<!-- kbd-shortcut.html -->
+<!-- KbdShortcut component -->
+<!--
+  Description: a keyboard shortcut made of several keys, such as Ctrl + K
+  HTML tag: <kbd> containing one <kbd class="kbd-shortcut-key"> per key
+  CSS class: kbd-shortcut (root), kbd-shortcut-key, kbd-shortcut-separator
+  Keyboard: None (passive element)
+  Accessibility: separators are aria-hidden so they are not read; an optional aria-label on the
+    root gives a spoken form, otherwise screen readers read the keys. The separator default
+    is "+" and is decorative.
+  Usage:
+    <kbd class="kbd-shortcut" aria-label="Control K">
+      <kbd class="kbd-shortcut-key">Ctrl</kbd><span class="kbd-shortcut-separator" aria-hidden="true">+</span><kbd class="kbd-shortcut-key" aria-hidden="true">K</kbd>
+    </kbd>
+-->
+
+<kbd class="kbd-shortcut"><span class="screen-reader-span">Control K </span><kbd class="kbd-shortcut-key" aria-hidden="true">Ctrl</kbd><span class="kbd-shortcut-separator" aria-hidden="true">+</span><kbd class="kbd-shortcut-key" aria-hidden="true">K</kbd></kbd>

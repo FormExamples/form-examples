@@ -45,35 +45,45 @@ Import `ButtonInput` from `./ButtonInput.svelte`. Always pass `value`. Optionall
 
 ```svelte
 <script lang="ts">
-  import ButtonInput from './ButtonInput.svelte';
+  import ButtonInput from "./ButtonInput.svelte";
 
   function handleClick() {
-    console.log('clicked');
+    console.log("clicked");
   }
 </script>
 
-<ButtonInput value="Click me" onclick={handleClick} />
+<ButtonInput
+  value="Click me"
+  onclick={handleClick}
+/>
 ```
 
 ### Disabled
 
 ```svelte
 <script lang="ts">
-  import ButtonInput from './ButtonInput.svelte';
+  import ButtonInput from "./ButtonInput.svelte";
 </script>
 
-<ButtonInput value="Submit" disabled />
+<ButtonInput
+  value="Submit"
+  disabled
+/>
 ```
 
 ### Named form field with aria-label override
 
 ```svelte
 <script lang="ts">
-  import ButtonInput from './ButtonInput.svelte';
+  import ButtonInput from "./ButtonInput.svelte";
 </script>
 
 <form>
-  <ButtonInput value="Save" name="action" label="Save changes to profile" />
+  <ButtonInput
+    value="Save"
+    name="action"
+    label="Save changes to profile"
+  />
 </form>
 ```
 
@@ -81,8 +91,8 @@ Import `ButtonInput` from `./ButtonInput.svelte`. Always pass `value`. Optionall
 
 ```svelte
 <script lang="ts">
-  import ButtonInput from './ButtonInput.svelte';
-  import Field from '../Field/Field.svelte';
+  import ButtonInput from "./ButtonInput.svelte";
+  import Field from "../Field/Field.svelte";
 </script>
 
 <Field label="Actions">
@@ -94,14 +104,20 @@ Import `ButtonInput` from `./ButtonInput.svelte`. Always pass `value`. Optionall
 
 ```svelte
 <script lang="ts">
-  import ButtonInput from './ButtonInput.svelte';
+  import ButtonInput from "./ButtonInput.svelte";
 
-  let name = $state('');
+  let name = $state("");
   let disabled = $derived(name.trim().length === 0);
 </script>
 
-<input type="text" bind:value={name} />
-<ButtonInput value="Continue" {disabled} />
+<input
+  type="text"
+  bind:value={name}
+/>
+<ButtonInput
+  value="Continue"
+  {disabled}
+/>
 ```
 
 ## Accessibility

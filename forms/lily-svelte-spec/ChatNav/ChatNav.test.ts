@@ -4,7 +4,7 @@ import ChatNav from "./ChatNav.svelte";
 
 describe("ChatNav", () => {
     test("renders with content", () => {
-        render(ChatNav, { props: { label: "Test" } });
+        render(ChatNav, { props: { label: "Test" } as any });
         const el = screen.getByLabelText("Test");
         expect(el).toBeTruthy();
         expect(el.getAttribute("class")).toContain("chat-nav");

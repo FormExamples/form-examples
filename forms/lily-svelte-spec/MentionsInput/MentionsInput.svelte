@@ -24,7 +24,8 @@
     //
     // Accessibility:
     //   - <input role="combobox"> with aria-haspopup="listbox", aria-expanded,
-    //     aria-autocomplete="list", aria-label.
+    //     aria-autocomplete="list", aria-label, and aria-controls pointing at the
+    //     suggestions panel's generated id.
     //
     // Internationalization:
     //   - label, placeholder, triggerChar all come through props.
@@ -38,13 +39,18 @@
     //   - WAI-ARIA Combobox Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
 
     import type { Snippet } from "svelte";
+    import { attachMentions } from "../widget-keys";
+
+    import { popoverState } from "../Popover/popover.js";
 
     let {
         class: className = "",
         label,
         value = "",
         triggerChar = "@",
-        expanded = false,
+        expanded = $bindable(false),
+        onQuery = undefined,
+        onSelect = undefined,
         placeholder = undefined,
         disabled = false,
         oninput = undefined,
@@ -61,6 +67,10 @@
         triggerChar?: string;
         /** Whether the suggestions panel is open */
         expanded?: boolean;
+        /** Called with the text after the trigger character */
+        onQuery?: (query: string) => void;
+        /** Called with the mention written */
+        onSelect?: (value: string) => void;
         /** Placeholder text */
         placeholder?: string;
         /** Whether the input is disabled */
@@ -71,10 +81,26 @@
         children?: Snippet;
         [key: string]: unknown;
     } = $props();
+
+    const uid = $props.id();
+    const suggestionsId = `${uid}-suggestions`;
+
+    let rootEl = $state<HTMLElement>();
+
+    $effect(() =>
+        rootEl
+            ? attachMentions(rootEl, {
+                  onOpen: (open) => (expanded = open),
+                  onQuery: (query) => onQuery?.(query),
+                  onSelect: (mention) => onSelect?.(mention),
+              })
+            : undefined,
+    );
 </script>
 
 <!-- MentionsInput.svelte -->
 <div
+    bind:this={rootEl}
     class={`mentions-input ${className}`}
     data-trigger-char={triggerChar}
     {...restProps}
@@ -85,6 +111,7 @@
         role="combobox"
         aria-label={label}
         aria-haspopup="listbox"
+        aria-controls={suggestionsId}
         aria-expanded={expanded}
         aria-autocomplete="list"
         {value}
@@ -92,7 +119,12 @@
         {disabled}
         {oninput}
     />
-    <div class="mentions-input-suggestions" hidden={!expanded}>
+    <div
+        class="mentions-input-suggestions"
+        id={suggestionsId}
+        popover="manual"
+        use:popoverState={expanded}
+    >
         {#if children}{@render children?.()}{/if}
     </div>
 </div>

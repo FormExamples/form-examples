@@ -1,10 +1,10 @@
 <script lang="ts">
     // GanttTableTD component
     //
-    // A single cell within a GanttTableTR representing a time period in the
+    // A single cell within a GanttTableTr representing a time period in the
     // Gantt table grid. Renders as a <td> with role="gridcell". Supports an
-    // active state to indicate the task spans this time period, communicated
-    // via aria-selected for screen readers.
+    // active state that makes the cell a tab stop (tabindex="0"); it does
+    // not set aria-selected, which would announce focus as selection.
     //
     // Props:
     //   className — string, optional. CSS class name.
@@ -31,7 +31,7 @@
     //
     // Accessibility:
     //   - role="gridcell" identifies the cell as part of a grid
-    //   - aria-selected set to true when active; omitted otherwise
+    //   - `active` is the roving tab stop only: it never sets aria-selected, because focus is not selection (a grid with real selection passes aria-selected itself)
     //   - Roving tabindex: tabindex="0" when active, "-1" otherwise
     //
     // Internationalization:
@@ -39,7 +39,7 @@
     //
     // Claude rules:
     //   - Headless: no CSS, no styles — consumer provides all styling
-    //   - Must be used inside a GanttTableTR (which provides the <tr>)
+    //   - Must be used inside a GanttTableTr (which provides the <tr>)
     //   - Children are optional — empty cells represent inactive time periods
     //
     // References:
@@ -65,7 +65,6 @@
 <td
     class={`gantt-table-td ${className}`}
     role="gridcell"
-    aria-selected={active || undefined}
     tabindex={active ? 0 : -1}
     {...restProps}
 >

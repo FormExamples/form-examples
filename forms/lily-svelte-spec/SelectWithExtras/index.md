@@ -9,7 +9,13 @@ A Svelte 5 headless component that renders:
 ```html
 <div class="select-with-extras ...">
   <!-- optional before snippet -->
-  <select aria-label="..." bind:value ...>...</select>
+  <select
+    aria-label="..."
+    bind:value
+    ...
+  >
+    ...
+  </select>
   <!-- optional after snippet -->
 </div>
 ```
@@ -60,14 +66,17 @@ Flag before the select:
 
 ```svelte
 <script lang="ts">
-    import SelectWithExtras from "./SelectWithExtras.svelte";
-    let country = $state("us");
+  import SelectWithExtras from "./SelectWithExtras.svelte";
+  let country = $state("us");
 </script>
 
-<SelectWithExtras label="Country" bind:value={country}>
-    {#snippet before()}<span aria-hidden="true">🇺🇸</span>{/snippet}
-    <option value="us">United States</option>
-    <option value="gb">United Kingdom</option>
+<SelectWithExtras
+  label="Country"
+  bind:value={country}
+>
+  {#snippet before()}<span aria-hidden="true">🇺🇸</span>{/snippet}
+  <option value="us">United States</option>
+  <option value="gb">United Kingdom</option>
 </SelectWithExtras>
 ```
 
@@ -75,14 +84,17 @@ Unit label after the select:
 
 ```svelte
 <script lang="ts">
-    import SelectWithExtras from "./SelectWithExtras.svelte";
-    let unit = $state("kg");
+  import SelectWithExtras from "./SelectWithExtras.svelte";
+  let unit = $state("kg");
 </script>
 
-<SelectWithExtras label="Unit" bind:value={unit}>
-    {#snippet after()}<span>selected</span>{/snippet}
-    <option value="kg">Kilograms</option>
-    <option value="lb">Pounds</option>
+<SelectWithExtras
+  label="Unit"
+  bind:value={unit}
+>
+  {#snippet after()}<span>selected</span>{/snippet}
+  <option value="kg">Kilograms</option>
+  <option value="lb">Pounds</option>
 </SelectWithExtras>
 ```
 
@@ -90,15 +102,18 @@ Both before and after snippets:
 
 ```svelte
 <script lang="ts">
-    import SelectWithExtras from "./SelectWithExtras.svelte";
-    let currency = $state("USD");
+  import SelectWithExtras from "./SelectWithExtras.svelte";
+  let currency = $state("USD");
 </script>
 
-<SelectWithExtras label="Currency" bind:value={currency}>
-    {#snippet before()}<span>$</span>{/snippet}
-    {#snippet after()}<small>default</small>{/snippet}
-    <option value="USD">USD</option>
-    <option value="EUR">EUR</option>
+<SelectWithExtras
+  label="Currency"
+  bind:value={currency}
+>
+  {#snippet before()}<span>$</span>{/snippet}
+  {#snippet after()}<small>default</small>{/snippet}
+  <option value="USD">USD</option>
+  <option value="EUR">EUR</option>
 </SelectWithExtras>
 ```
 
@@ -106,14 +121,19 @@ Required and disabled states:
 
 ```svelte
 <script lang="ts">
-    import SelectWithExtras from "./SelectWithExtras.svelte";
-    let level = $state("");
+  import SelectWithExtras from "./SelectWithExtras.svelte";
+  let level = $state("");
 </script>
 
-<SelectWithExtras label="Level" bind:value={level} required disabled>
-    <option value="">Pick a level</option>
-    <option value="low">Low</option>
-    <option value="high">High</option>
+<SelectWithExtras
+  label="Level"
+  bind:value={level}
+  required
+  disabled
+>
+  <option value="">Pick a level</option>
+  <option value="low">Low</option>
+  <option value="high">High</option>
 </SelectWithExtras>
 ```
 
@@ -121,13 +141,18 @@ Wrapper attributes (spread onto `<div>`):
 
 ```svelte
 <script lang="ts">
-    import SelectWithExtras from "./SelectWithExtras.svelte";
-    let x = $state("a");
+  import SelectWithExtras from "./SelectWithExtras.svelte";
+  let x = $state("a");
 </script>
 
-<SelectWithExtras label="Group" bind:value={x} data-testid="grp" class="inline">
-    <option value="a">A</option>
-    <option value="b">B</option>
+<SelectWithExtras
+  label="Group"
+  bind:value={x}
+  data-testid="grp"
+  class="inline"
+>
+  <option value="a">A</option>
+  <option value="b">B</option>
 </SelectWithExtras>
 ```
 
@@ -138,6 +163,7 @@ Wrapper attributes (spread onto `<div>`):
 - Native keyboard support is preserved.
 
 References:
+
 - HTML `<select>`: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select
 
 ## Related components

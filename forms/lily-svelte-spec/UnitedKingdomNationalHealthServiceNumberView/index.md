@@ -80,11 +80,23 @@ Import the component and pass a translated `label` plus the `value` string (pre-
 </script>
 
 {#if editing}
-  <UnitedKingdomNationalHealthServiceNumberInput label="NHS Number" bind:value />
-  <button type="button" onclick={() => (editing = false)}>Done</button>
+  <UnitedKingdomNationalHealthServiceNumberInput
+    label="NHS Number"
+    bind:value
+  />
+  <button
+    type="button"
+    onclick={() => (editing = false)}>Done</button
+  >
 {:else}
-  <UnitedKingdomNationalHealthServiceNumberView label="NHS Number" {value} />
-  <button type="button" onclick={() => (editing = true)}>Edit</button>
+  <UnitedKingdomNationalHealthServiceNumberView
+    label="NHS Number"
+    {value}
+  />
+  <button
+    type="button"
+    onclick={() => (editing = true)}>Edit</button
+  >
 {/if}
 ```
 

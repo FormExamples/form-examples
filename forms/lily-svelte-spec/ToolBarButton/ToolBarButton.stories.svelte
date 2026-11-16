@@ -1,16 +1,19 @@
-<script module lang="ts">
-  import { defineMeta } from '@storybook/addon-svelte-csf';
-  import ToolBarButton from './ToolBarButton.svelte';
+<script
+    module
+    lang="ts"
+>
+    import { defineMeta } from "@storybook/addon-svelte-csf";
+    import ToolBarButton from "./ToolBarButton.svelte";
 
-  const { Story } = defineMeta({
-    title: 'Headless/ToolBarButton',
-    component: ToolBarButton,
-  });
+    const { Story } = defineMeta({
+        title: "Headless/ToolBarButton",
+        component: ToolBarButton,
+    });
 </script>
 
 <Story
-  name="Default"
-  tags={['autodocs', '!dev']}
+    name="Default"
+    tags={["autodocs", "!dev"]}
 >
-  <span>Click me</span>
+    <span>Click me</span>
 </Story>

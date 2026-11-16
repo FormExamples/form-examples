@@ -1,0 +1,23 @@
+<!-- thinking.html -->
+<!-- Thinking component -->
+<!--
+  Description: a collapsible block showing an AI agent's reasoning, closed by default
+  HTML tag: <details>
+  CSS class: thinking (root), thinking-summary, thinking-content
+  Keyboard: native summary (Tab to focus, Enter or Space to toggle)
+  Accessibility: the <summary> text is the label (consumer-supplied). While content is still
+    being produced set data-streaming="true" and aria-busy="true" on the root; remove both when
+    done. Add the open attribute to start expanded.
+  Usage:
+    <details class="thinking">
+      <summary class="thinking-summary">Thinking</summary>
+      <div class="thinking-content">...</div>
+    </details>
+-->
+
+<details class="thinking" data-streaming="true" aria-busy="true">
+  <summary class="thinking-summary">Thinking</summary>
+  <div class="thinking-content">
+    <p>Reasoning content goes here.</p>
+  </div>
+</details>

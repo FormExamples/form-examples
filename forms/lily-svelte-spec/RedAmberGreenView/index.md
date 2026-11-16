@@ -7,7 +7,7 @@ A headless read-only display of a Red/Amber/Green (RAG) status. Renders the valu
 - Component: `RedAmberGreenView`
 - HTML element: `<span>`
 - Role: inline text; accessible name via `aria-label`
-- Category: view (read-only display sibling of `RedAmberGreenPicker`)
+- Category: view (read-only display sibling of `RedAmberGreenRadioGroup`)
 
 ## What it does
 
@@ -24,7 +24,7 @@ A headless read-only display of a Red/Amber/Green (RAG) status. Renders the valu
 
 ## When not to use it
 
-- To capture a RAG value — use `RedAmberGreenPicker` or compose `RedAmberGreenPickerButton`s.
+- To capture a RAG value — use `RedAmberGreenRadioGroup` or compose `RedAmberGreenRadioInput`s.
 - For a five-level scale — use `RedOrangeYellowGreenBlueView`.
 - For rating or satisfaction displays — use `FiveStarRatingView`, `FiveFaceRatingView`, `NetPromoterScoreView`.
 
@@ -49,53 +49,75 @@ import RedAmberGreenView from './RedAmberGreenView.svelte';
 
 ```svelte
 <script lang="ts">
-  import RedAmberGreenView from './RedAmberGreenView.svelte';
+  import RedAmberGreenView from "./RedAmberGreenView.svelte";
 </script>
 
-<RedAmberGreenView label="Project status" value="green" />
+<RedAmberGreenView
+  label="Project status"
+  value="green"
+/>
 ```
 
 ### Dynamic value
 
 ```svelte
 <script lang="ts">
-  import RedAmberGreenView from './RedAmberGreenView.svelte';
+  import RedAmberGreenView from "./RedAmberGreenView.svelte";
 
   let status = $state("amber");
 </script>
 
-<RedAmberGreenView label="Health check" value={status} />
+<RedAmberGreenView
+  label="Health check"
+  value={status}
+/>
 ```
 
 ### Paired with the picker counterpart
 
 ```svelte
 <script lang="ts">
-  import RedAmberGreenPicker from '../RedAmberGreenPicker/RedAmberGreenPicker.svelte';
-  import RedAmberGreenView from './RedAmberGreenView.svelte';
+  import RedAmberGreenRadioGroup from "../RedAmberGreenRadioGroup/RedAmberGreenRadioGroup.svelte";
+  import RedAmberGreenView from "./RedAmberGreenView.svelte";
 
   let status = $state("");
   let submitted = $state(false);
 </script>
 
 {#if submitted}
-  <RedAmberGreenView label="Status" value={status} />
+  <RedAmberGreenView
+    label="Status"
+    value={status}
+  />
 {:else}
-  <RedAmberGreenPicker label="Status" bind:value={status} />
-  <button type="button" onclick={() => (submitted = true)}>Confirm</button>
+  <RedAmberGreenRadioGroup
+    label="Status"
+    bind:value={status}
+  />
+  <button
+    type="button"
+    onclick={() => (submitted = true)}>Confirm</button
+  >
 {/if}
 ```
 
 ### Color-coded via data attribute
 
 ```svelte
-<RedAmberGreenView label="Risk level" value="amber" data-tone="warning" />
+<RedAmberGreenView
+  label="Risk level"
+  value="amber"
+  data-tone="warning"
+/>
 ```
 
 ### Localized value
 
 ```svelte
-<RedAmberGreenView label="Estado" value="rojo" />
+<RedAmberGreenView
+  label="Estado"
+  value="rojo"
+/>
 ```
 
 ## Accessibility
@@ -106,8 +128,8 @@ import RedAmberGreenView from './RedAmberGreenView.svelte';
 
 ## Related components
 
-- `RedAmberGreenPicker` — dropdown-style picker sibling.
-- `RedAmberGreenPickerButton` — button-style picker sibling.
+- `RedAmberGreenRadioGroup` — dropdown-style picker sibling.
+- `RedAmberGreenRadioInput` — button-style picker sibling.
 - `RedOrangeYellowGreenBlueView` — five-level status view.
 - Other read-only status views: `FiveStarRatingView`, `FiveFaceRatingView`, `NetPromoterScoreView`.
 

@@ -5,13 +5,12 @@
   HTML tag: <span>
   CSS class: malta-passport-number-view
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
   Format: 7 numerical digits issued by the Civil Registration Directorate
   Usage:
-    <span class="malta-passport-number-view" aria-label="Malta Passport Number">value-here</span>
+    <span class="malta-passport-number-view">value-here</span>
 -->
 
-<span
-  class="malta-passport-number-view"
-  aria-label="Malta Passport Number"
-></span>
+<span class="malta-passport-number-view"
+  ><span class="screen-reader-span">Malta Passport Number </span></span
+>

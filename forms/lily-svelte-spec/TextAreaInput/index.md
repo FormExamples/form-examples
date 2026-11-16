@@ -49,7 +49,11 @@ Import, bind `value`, pass a translated `label`, and optionally set `rows`. Add 
   let comments = $state("");
 </script>
 
-<TextAreaInput label="Comments" bind:value={comments} rows={5} />
+<TextAreaInput
+  label="Comments"
+  bind:value={comments}
+  rows={5}
+/>
 ```
 
 ```svelte
@@ -75,7 +79,11 @@ Import, bind `value`, pass a translated `label`, and optionally set `rows`. Add 
   let readOnly = $state(true);
 </script>
 
-<TextAreaInput label="Notes" bind:value={notes} disabled={readOnly} />
+<TextAreaInput
+  label="Notes"
+  bind:value={notes}
+  disabled={readOnly}
+/>
 ```
 
 ```svelte
@@ -86,7 +94,12 @@ Import, bind `value`, pass a translated `label`, and optionally set `rows`. Add 
   let count = $derived(body.length);
 </script>
 
-<TextAreaInput label="Message" bind:value={body} maxlength={500} rows={6} />
+<TextAreaInput
+  label="Message"
+  bind:value={body}
+  maxlength={500}
+  rows={6}
+/>
 <p aria-live="polite">{count} / 500 characters</p>
 ```
 

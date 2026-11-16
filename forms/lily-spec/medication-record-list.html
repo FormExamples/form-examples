@@ -1,0 +1,32 @@
+<!-- medication-record-list.html -->
+<!-- MedicationRecordList component -->
+<!--
+  Description: a list of a patient's medicines, whose status is never blank
+  HTML tag: <ul>
+  CSS class: medication-record-list (part: medication-record-list-status)
+  Spec: spec/healthcare-ui (tasks.md P28-T3)
+  Attributes: data-status (known, none-known, not-recorded, unavailable, omitted) and aria-label (the status in words).
+    For any status but "known", the status words are the list's one item, li.medication-record-list-status, so the list is never
+    blank: "none known", "not recorded", "unavailable" and "omitted" are different facts.
+  Usage (status other than known):
+    <ul class="medication-record-list" data-status="none-known" aria-label="No known medicines"><li class="medication-record-list-status">No known medicines</li></ul>
+-->
+
+<ul
+  class="medication-record-list"
+  data-status="known"
+  aria-label="Current medicines"
+>
+  <li
+    class="medication-record-list-item"
+    data-status="active"
+  >
+    ramipril 5 mg capsule, oral, once a day
+    <span class="medication-record-list-item-status">Active</span>
+    <time
+      class="medication-record-list-item-effective"
+      datetime="2025-03-03"
+      >Since 3 Mar 2025</time
+    >
+  </li>
+</ul>

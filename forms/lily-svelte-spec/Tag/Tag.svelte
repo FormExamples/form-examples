@@ -47,11 +47,18 @@
     let {
         class: className = "",
         label,
+        live = false,
         children,
         ...restProps
     }: {
         /** Accessible label for screen readers */
         label: string;
+        /**
+         * Announce changes: a `role="status"` live region, for a tag whose text
+         * changes in place (a job's status). Off by default — a page of static
+         * tags should not be a page of live regions.
+         */
+        live?: boolean;
         /** The tag content (text, icon, etc.) */
         children: Snippet;
         /** Additional HTML attributes */
@@ -60,11 +67,24 @@
 </script>
 
 <!-- Tag.svelte -->
-<span
-    class={`tag ${className}`}
-    role="status"
-    aria-label={label}
-    {...restProps}
->
-    {@render children?.()}
-</span>
+{#if live}
+    <span
+        class={`tag ${className}`}
+        role="status"
+        aria-label={label}
+        {...restProps}
+    >
+        {@render children?.()}
+    </span>
+{:else}
+    <!-- Not a live region: aria-label is not allowed on a plain <span>, so the
+         label is screen-reader text appended after the content (the themes hide
+         .screen-reader-span). The content stays exposed: it may hold a focusable
+         control, such as a remove button. -->
+    <span
+        class={`tag ${className}`}
+        {...restProps}
+    >
+        {@render children?.()}{#if label}<span class="screen-reader-span">{label}</span>{/if}
+    </span>
+{/if}

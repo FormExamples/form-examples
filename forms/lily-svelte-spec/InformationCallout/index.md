@@ -45,11 +45,11 @@ Import the component, pass a descriptive `label`, and render arbitrary content v
 
 ```svelte
 <script lang="ts">
-    import InformationCallout from "./InformationCallout.svelte";
+  import InformationCallout from "./InformationCallout.svelte";
 </script>
 
 <InformationCallout label="Note">
-    <p>This feature is in beta.</p>
+  <p>This feature is in beta.</p>
 </InformationCallout>
 ```
 
@@ -57,11 +57,11 @@ Import the component, pass a descriptive `label`, and render arbitrary content v
 
 ```svelte
 <script lang="ts">
-    import InformationCallout from "./InformationCallout.svelte";
+  import InformationCallout from "./InformationCallout.svelte";
 </script>
 
 <InformationCallout label="Warning">
-    <p>Changes cannot be undone after submission.</p>
+  <p>Changes cannot be undone after submission.</p>
 </InformationCallout>
 ```
 
@@ -69,12 +69,12 @@ Import the component, pass a descriptive `label`, and render arbitrary content v
 
 ```svelte
 <script lang="ts">
-    import InformationCallout from "./InformationCallout.svelte";
+  import InformationCallout from "./InformationCallout.svelte";
 </script>
 
 <InformationCallout label="Tip">
-    <h3>Pro tip</h3>
-    <p>Press <kbd>Cmd</kbd>+<kbd>K</kbd> to open the command palette.</p>
+  <h3>Pro tip</h3>
+  <p>Press <kbd>Cmd</kbd>+<kbd>K</kbd> to open the command palette.</p>
 </InformationCallout>
 ```
 
@@ -82,19 +82,22 @@ Import the component, pass a descriptive `label`, and render arbitrary content v
 
 ```svelte
 <script lang="ts">
-    import InformationCallout from "./InformationCallout.svelte";
+  import InformationCallout from "./InformationCallout.svelte";
 </script>
 
-<InformationCallout class="callout-brand" label="Did you know?">
-    <p>You can export your data at any time from the settings page.</p>
+<InformationCallout
+  class="callout-brand"
+  label="Did you know?"
+>
+  <p>You can export your data at any time from the settings page.</p>
 </InformationCallout>
 
 <style>
-    :global(.callout-brand) {
-        border-left: 4px solid #2563eb;
-        padding: 1rem;
-        background: #eff6ff;
-    }
+  :global(.callout-brand) {
+    border-left: 4px solid #2563eb;
+    padding: 1rem;
+    background: #eff6ff;
+  }
 </style>
 ```
 
@@ -102,13 +105,16 @@ Import the component, pass a descriptive `label`, and render arbitrary content v
 
 ```svelte
 <script lang="ts">
-    import InformationCallout from "./InformationCallout.svelte";
-    let status = $state<"info" | "warning">("info");
-    const labels = { info: "Note", warning: "Warning" };
+  import InformationCallout from "./InformationCallout.svelte";
+  let status = $state<"info" | "warning">("info");
+  const labels = { info: "Note", warning: "Warning" };
 </script>
 
-<InformationCallout label={labels[status]} data-type={status}>
-    <p>Current status: {status}</p>
+<InformationCallout
+  label={labels[status]}
+  data-type={status}
+>
+  <p>Current status: {status}</p>
 </InformationCallout>
 ```
 

@@ -48,7 +48,7 @@ import ResetInput from './ResetInput.svelte';
 
 ```svelte
 <script lang="ts">
-  import ResetInput from './ResetInput.svelte';
+  import ResetInput from "./ResetInput.svelte";
 </script>
 
 <form>
@@ -61,7 +61,7 @@ import ResetInput from './ResetInput.svelte';
 
 ```svelte
 <script lang="ts">
-  import ResetInput from './ResetInput.svelte';
+  import ResetInput from "./ResetInput.svelte";
 </script>
 
 <form>
@@ -73,16 +73,21 @@ import ResetInput from './ResetInput.svelte';
 
 ```svelte
 <script lang="ts">
-  import ResetInput from './ResetInput.svelte';
+  import ResetInput from "./ResetInput.svelte";
 
   let dirty = $state(false);
   let name = $state("");
-  $effect(() => { dirty = name.length > 0; });
+  $effect(() => {
+    dirty = name.length > 0;
+  });
 </script>
 
 <form>
   <label>Name <input bind:value={name} /></label>
-  <ResetInput value="Start over" disabled={!dirty} />
+  <ResetInput
+    value="Start over"
+    disabled={!dirty}
+  />
 </form>
 ```
 
@@ -90,8 +95,8 @@ import ResetInput from './ResetInput.svelte';
 
 ```svelte
 <script lang="ts">
-  import ResetInput from './ResetInput.svelte';
-  import SubmitInput from '../SubmitInput/SubmitInput.svelte';
+  import ResetInput from "./ResetInput.svelte";
+  import SubmitInput from "../SubmitInput/SubmitInput.svelte";
 </script>
 
 <form>
@@ -106,7 +111,7 @@ import ResetInput from './ResetInput.svelte';
 
 ```svelte
 <script lang="ts">
-  import ResetInput from './ResetInput.svelte';
+  import ResetInput from "./ResetInput.svelte";
 </script>
 
 <ResetInput value="Réinitialiser" />

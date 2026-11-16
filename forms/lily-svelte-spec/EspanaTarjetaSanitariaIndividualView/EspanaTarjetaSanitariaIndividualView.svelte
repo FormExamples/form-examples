@@ -7,7 +7,7 @@
     //
     // Props:
     //   className — string, optional. CSS class name.
-    //   label — string, required. Accessible label via aria-label.
+    //   label — string, optional. Hidden text naming the value. Leave it out when a visible caption, such as a dt or a SummaryListItem term, already names it.
     //   value — string, default "". The TSI string to display.
     //   ...restProps — additional HTML attributes spread onto the <span>.
     //
@@ -18,7 +18,7 @@
     //   - None -- passive display-only component
     //
     // Accessibility:
-    //   - aria-label provides the accessible name for screen readers
+    //   - A visible caption names the value, or label renders as hidden text; a plain span cannot take aria-label.
     //
     // Claude rules:
     //   - Headless: no CSS, no styles -- consumer provides all styling
@@ -30,7 +30,7 @@
         value = "",
         ...restProps
     }: {
-        label: string;
+        label?: string;
         value?: string;
         [key: string]: unknown;
     } = $props();
@@ -39,5 +39,6 @@
 <!-- EspanaTarjetaSanitariaIndividualView.svelte -->
 <span
     class={`espana-tarjeta-sanitaria-individual-view ${className}`}
-    aria-label={label}
-    {...restProps}>{value}</span>
+    {...restProps}
+    >{#if label}<span class="screen-reader-span">{`${label} `}</span>{/if}{value}</span
+>

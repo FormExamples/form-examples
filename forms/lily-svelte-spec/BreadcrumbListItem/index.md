@@ -1,6 +1,6 @@
 # BreadcrumbListItem
 
-A single step in a breadcrumb trail. Renders a semantic `<li>`, with `aria-current="page"` applied when `current` is true to indicate the user's location.
+A single step in a breadcrumb trail. Renders a semantic `<li>`, with `data-current` applied when `current` is true to indicate the user's location.
 
 ## What it is
 
@@ -8,7 +8,7 @@ A headless Svelte 5 component. Category: breadcrumb-trail leaf, part of the Brea
 
 ## What it does
 
-- Renders `<li class="breadcrumb-list-item {className}" aria-current={current ? "page" : undefined}>`.
+- Renders `<li class="breadcrumb-list-item {className}" data-current={current ? "" : undefined}>`.
 - Typically contains an `<a>` for ancestor pages or plain text for the current page.
 - Spreads additional HTML attributes onto the `<li>`.
 
@@ -29,7 +29,7 @@ Import `BreadcrumbListItem` from `./BreadcrumbListItem.svelte`. Put inside `Brea
 ## Props
 
 - `class` — string, default `""`. CSS class appended to `breadcrumb-list-item`.
-- `current` — boolean, default `false`. Sets `aria-current="page"` when true.
+- `current` — boolean, default `false`. Sets `data-current` when true.
 - `children` — `Snippet`, required. Crumb content (link or text).
 - `...restProps` — additional HTML attributes spread onto the `<li>`.
 
@@ -39,7 +39,7 @@ Import `BreadcrumbListItem` from `./BreadcrumbListItem.svelte`. Put inside `Brea
 
 ```svelte
 <script lang="ts">
-  import BreadcrumbListItem from './BreadcrumbListItem.svelte';
+  import BreadcrumbListItem from "./BreadcrumbListItem.svelte";
 </script>
 
 <BreadcrumbListItem><a href="/products">Products</a></BreadcrumbListItem>
@@ -49,7 +49,7 @@ Import `BreadcrumbListItem` from `./BreadcrumbListItem.svelte`. Put inside `Brea
 
 ```svelte
 <script lang="ts">
-  import BreadcrumbListItem from './BreadcrumbListItem.svelte';
+  import BreadcrumbListItem from "./BreadcrumbListItem.svelte";
 </script>
 
 <BreadcrumbListItem current>About</BreadcrumbListItem>
@@ -59,9 +59,9 @@ Import `BreadcrumbListItem` from `./BreadcrumbListItem.svelte`. Put inside `Brea
 
 ```svelte
 <script lang="ts">
-  import BreadcrumbNav from '../BreadcrumbNav/BreadcrumbNav.svelte';
-  import BreadcrumbList from '../BreadcrumbList/BreadcrumbList.svelte';
-  import BreadcrumbListItem from './BreadcrumbListItem.svelte';
+  import BreadcrumbNav from "../BreadcrumbNav/BreadcrumbNav.svelte";
+  import BreadcrumbList from "../BreadcrumbList/BreadcrumbList.svelte";
+  import BreadcrumbListItem from "./BreadcrumbListItem.svelte";
 </script>
 
 <BreadcrumbNav label="Breadcrumb">
@@ -91,7 +91,7 @@ Import `BreadcrumbListItem` from `./BreadcrumbListItem.svelte`. Put inside `Brea
 
 ```svelte
 <script lang="ts">
-  import BreadcrumbListItem from './BreadcrumbListItem.svelte';
+  import BreadcrumbListItem from "./BreadcrumbListItem.svelte";
 </script>
 
 <BreadcrumbListItem data-depth="2"><a href="/guides">Guides</a></BreadcrumbListItem>
@@ -100,7 +100,7 @@ Import `BreadcrumbListItem` from `./BreadcrumbListItem.svelte`. Put inside `Brea
 ## Accessibility
 
 - Implicit `listitem` role from `<li>`.
-- `aria-current="page"` announces the current location; only applied when `current` is true.
+- `data-current` marks the current location for CSS and scripts; only applied when `current` is true. It is not announced: put `aria-current="page"` on the element inside (or pass it as a rest prop on the item) so assistive technology announces it.
 - Keyboard interaction comes from contained links.
 
 ## Related components

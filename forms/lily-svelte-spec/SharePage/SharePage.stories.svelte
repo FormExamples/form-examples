@@ -1,17 +1,20 @@
-<script module lang="ts">
-  import { defineMeta } from '@storybook/addon-svelte-csf';
-  import SharePage from './SharePage.svelte';
+<script
+    module
+    lang="ts"
+>
+    import { defineMeta } from "@storybook/addon-svelte-csf";
+    import SharePage from "./SharePage.svelte";
 
-  const { Story } = defineMeta({
-    title: 'Headless/SharePage',
-    component: SharePage,
-  });
+    const { Story } = defineMeta({
+        title: "Headless/SharePage",
+        component: SharePage,
+    });
 </script>
 
 <Story
-  name="Default"
-  tags={['autodocs', '!dev']}
-  args={{'label':'SharePage'}}
+    name="Default"
+    tags={["autodocs", "!dev"]}
+    args={{ label: "SharePage" }}
 >
-  <span>SharePage</span>
+    <span>SharePage</span>
 </Story>

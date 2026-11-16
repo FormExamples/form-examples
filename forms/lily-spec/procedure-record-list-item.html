@@ -1,0 +1,29 @@
+<!-- procedure-record-list-item.html -->
+<!-- ProcedureRecordListItem component -->
+<!--
+  Description: one procedure in a procedure record list, with its status and when it was performed
+  HTML tag: <li>
+  CSS class: procedure-record-list-item (parts: -procedure, -status, -performed)
+  Spec: spec/healthcare-ui (tasks.md P28-T3)
+  Attributes: data-status (preparation, in-progress, not-done, on-hold, stopped, completed, entered-in-error, unknown). Each status is also text, in the consumer's words; a part with no text is left out.
+    Dates are <time datetime>.
+-->
+
+<ul
+  class="procedure-record-list"
+  data-status="known"
+  aria-label="Procedures"
+>
+  <li
+    class="procedure-record-list-item"
+    data-status="completed"
+  >
+    <span class="procedure-record-list-item-procedure">Appendectomy</span>
+    <span class="procedure-record-list-item-status">Completed</span>
+    <time
+      class="procedure-record-list-item-performed"
+      datetime="2018-04-22"
+      >22 Apr 2018</time
+    >
+  </li>
+</ul>

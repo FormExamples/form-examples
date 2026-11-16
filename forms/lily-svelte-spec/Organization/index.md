@@ -10,7 +10,7 @@ See [components/organization/index.md](../../../components/organization/index.md
 
 ```svelte
 <script lang="ts">
-    import Organization from "./Organization.svelte";
+  import Organization from "./Organization.svelte";
 </script>
 
 <Organization />

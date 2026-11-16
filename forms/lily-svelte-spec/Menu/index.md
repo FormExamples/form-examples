@@ -49,15 +49,15 @@ Render `Menu` with a descriptive `label` and compose with `MenuItem` children (o
 
 ```svelte
 <script lang="ts">
-    import Menu from "./Menu.svelte";
-    import MenuItem from "../MenuItem/MenuItem.svelte";
+  import Menu from "./Menu.svelte";
+  import MenuItem from "../MenuItem/MenuItem.svelte";
 </script>
 
 <Menu label="Actions">
-    <MenuItem onclick={() => console.log("Cut")}>Cut</MenuItem>
-    <MenuItem onclick={() => console.log("Copy")}>Copy</MenuItem>
-    <MenuItem onclick={() => console.log("Paste")}>Paste</MenuItem>
-    <MenuItem onclick={() => console.log("Delete")}>Delete</MenuItem>
+  <MenuItem onclick={() => console.log("Cut")}>Cut</MenuItem>
+  <MenuItem onclick={() => console.log("Copy")}>Copy</MenuItem>
+  <MenuItem onclick={() => console.log("Paste")}>Paste</MenuItem>
+  <MenuItem onclick={() => console.log("Delete")}>Delete</MenuItem>
 </Menu>
 ```
 
@@ -67,23 +67,23 @@ ArrowDown/ArrowUp move focus between items (wrapping). Home/End jump to first/la
 
 ```svelte
 <script lang="ts">
-    import Menu from "./Menu.svelte";
-    import MenuItem from "../MenuItem/MenuItem.svelte";
+  import Menu from "./Menu.svelte";
+  import MenuItem from "../MenuItem/MenuItem.svelte";
 
-    let actions = [
-        { id: "new", label: "New File" },
-        { id: "open", label: "Open" },
-        { id: "save", label: "Save" },
-    ];
-    function handle(id: string) {
-        console.log(id);
-    }
+  let actions = [
+    { id: "new", label: "New File" },
+    { id: "open", label: "Open" },
+    { id: "save", label: "Save" },
+  ];
+  function handle(id: string) {
+    console.log(id);
+  }
 </script>
 
 <Menu label="File actions">
-    {#each actions as action}
-        <MenuItem onclick={() => handle(action.id)}>{action.label}</MenuItem>
-    {/each}
+  {#each actions as action}
+    <MenuItem onclick={() => handle(action.id)}>{action.label}</MenuItem>
+  {/each}
 </Menu>
 ```
 
@@ -91,14 +91,14 @@ ArrowDown/ArrowUp move focus between items (wrapping). Home/End jump to first/la
 
 ```svelte
 <script lang="ts">
-    import Menu from "./Menu.svelte";
-    import MenuItem from "../MenuItem/MenuItem.svelte";
+  import Menu from "./Menu.svelte";
+  import MenuItem from "../MenuItem/MenuItem.svelte";
 </script>
 
 <Menu label="Edit">
-    <MenuItem>Undo</MenuItem>
-    <MenuItem aria-disabled="true">Redo</MenuItem>
-    <MenuItem>Cut</MenuItem>
+  <MenuItem>Undo</MenuItem>
+  <MenuItem aria-disabled="true">Redo</MenuItem>
+  <MenuItem>Cut</MenuItem>
 </Menu>
 ```
 
@@ -106,23 +106,23 @@ ArrowDown/ArrowUp move focus between items (wrapping). Home/End jump to first/la
 
 ```svelte
 <script lang="ts">
-    import Menu from "./Menu.svelte";
-    import MenuItem from "../MenuItem/MenuItem.svelte";
-    let open = $state(false);
+  import Menu from "./Menu.svelte";
+  import MenuItem from "../MenuItem/MenuItem.svelte";
+  let open = $state(false);
 
-    function onContext(e: MouseEvent) {
-        e.preventDefault();
-        open = true;
-    }
+  function onContext(e: MouseEvent) {
+    e.preventDefault();
+    open = true;
+  }
 </script>
 
 <div oncontextmenu={onContext}>Right-click me</div>
 
 {#if open}
-    <Menu label="Context menu">
-        <MenuItem onclick={() => (open = false)}>Inspect</MenuItem>
-        <MenuItem onclick={() => (open = false)}>Copy link</MenuItem>
-    </Menu>
+  <Menu label="Context menu">
+    <MenuItem onclick={() => (open = false)}>Inspect</MenuItem>
+    <MenuItem onclick={() => (open = false)}>Copy link</MenuItem>
+  </Menu>
 {/if}
 ```
 
@@ -130,40 +130,40 @@ ArrowDown/ArrowUp move focus between items (wrapping). Home/End jump to first/la
 
 ```svelte
 <script lang="ts">
-    import Menu from "./Menu.svelte";
-    import MenuItem from "../MenuItem/MenuItem.svelte";
-    let open = $state(false);
+  import Menu from "./Menu.svelte";
+  import MenuItem from "../MenuItem/MenuItem.svelte";
+  let open = $state(false);
 
-    function activate(label: string) {
-        alert(label);
-        open = false;
-    }
+  function activate(label: string) {
+    alert(label);
+    open = false;
+  }
 </script>
 
 <button
-    type="button"
-    aria-haspopup="menu"
-    aria-expanded={open}
-    onclick={() => (open = !open)}
+  type="button"
+  aria-haspopup="menu"
+  aria-expanded={open}
+  onclick={() => (open = !open)}
 >
-    More
+  More
 </button>
 
 {#if open}
-    <Menu label="More actions">
-        <MenuItem
-            onclick={() => activate("Rename")}
-            onkeydown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    activate("Rename");
-                }
-            }}
-        >
-            Rename
-        </MenuItem>
-        <MenuItem onclick={() => activate("Move")}>Move</MenuItem>
-    </Menu>
+  <Menu label="More actions">
+    <MenuItem
+      onclick={() => activate("Rename")}
+      onkeydown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          activate("Rename");
+        }
+      }}
+    >
+      Rename
+    </MenuItem>
+    <MenuItem onclick={() => activate("Move")}>Move</MenuItem>
+  </Menu>
 {/if}
 ```
 

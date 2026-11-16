@@ -45,34 +45,37 @@ Import the compound components, compose them with a `KanbanTableHead` for the wo
 
 ```svelte
 <script lang="ts">
-    import KanbanTable from "./KanbanTable.svelte";
-    import KanbanTableHead from "../KanbanTableHead/KanbanTableHead.svelte";
-    import KanbanTableBody from "../KanbanTableBody/KanbanTableBody.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
-    import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
-    import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
+  import KanbanTable from "./KanbanTable.svelte";
+  import KanbanTableHead from "../KanbanTableHead/KanbanTableHead.svelte";
+  import KanbanTableBody from "../KanbanTableBody/KanbanTableBody.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
+  import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
 </script>
 
-<KanbanTable label="Sprint 5 board" caption="Sprint 5">
-    <colgroup>
-        <KanbanTableTD span={1} />
-        <KanbanTableTD span={1} />
-        <KanbanTableTD span={1} />
-    </colgroup>
-    <KanbanTableHead>
-        <KanbanTableRow>
-            <th scope="col">To Do</th>
-            <th scope="col">In Progress</th>
-            <th scope="col">Done</th>
-        </KanbanTableRow>
-    </KanbanTableHead>
-    <KanbanTableBody>
-        <KanbanTableRow>
-            <KanbanTableTD label="Task A">Task A</KanbanTableTD>
-            <KanbanTableTD label="Task B">Task B</KanbanTableTD>
-            <KanbanTableTD label="Task C">Task C</KanbanTableTD>
-        </KanbanTableRow>
-    </KanbanTableBody>
+<KanbanTable
+  label="Sprint 5 board"
+  caption="Sprint 5"
+>
+  <colgroup>
+    <KanbanTableTD span={1} />
+    <KanbanTableTD span={1} />
+    <KanbanTableTD span={1} />
+  </colgroup>
+  <KanbanTableHead>
+    <KanbanTableRow>
+      <th scope="col">To Do</th>
+      <th scope="col">In Progress</th>
+      <th scope="col">Done</th>
+    </KanbanTableRow>
+  </KanbanTableHead>
+  <KanbanTableBody>
+    <KanbanTableRow>
+      <KanbanTableTD label="Task A">Task A</KanbanTableTD>
+      <KanbanTableTD label="Task B">Task B</KanbanTableTD>
+      <KanbanTableTD label="Task C">Task C</KanbanTableTD>
+    </KanbanTableRow>
+  </KanbanTableBody>
 </KanbanTable>
 ```
 
@@ -80,31 +83,37 @@ Import the compound components, compose them with a `KanbanTableHead` for the wo
 
 ```svelte
 <script lang="ts">
-    import KanbanTable from "./KanbanTable.svelte";
-    import KanbanTableHead from "../KanbanTableHead/KanbanTableHead.svelte";
-    import KanbanTableBody from "../KanbanTableBody/KanbanTableBody.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
-    import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
-    let selected = $state("a");
+  import KanbanTable from "./KanbanTable.svelte";
+  import KanbanTableHead from "../KanbanTableHead/KanbanTableHead.svelte";
+  import KanbanTableBody from "../KanbanTableBody/KanbanTableBody.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
+  let selected = $state("a");
 </script>
 
 <KanbanTable label="Backlog">
-    <KanbanTableHead>
-        <KanbanTableRow>
-            <th scope="col">To Do</th>
-            <th scope="col">Doing</th>
-        </KanbanTableRow>
-    </KanbanTableHead>
-    <KanbanTableBody>
-        <KanbanTableRow>
-            <KanbanTableTD active={selected === "a"} label="Fix login bug">
-                Fix login bug
-            </KanbanTableTD>
-            <KanbanTableTD active={selected === "b"} label="Write docs">
-                Write docs
-            </KanbanTableTD>
-        </KanbanTableRow>
-    </KanbanTableBody>
+  <KanbanTableHead>
+    <KanbanTableRow>
+      <th scope="col">To Do</th>
+      <th scope="col">Doing</th>
+    </KanbanTableRow>
+  </KanbanTableHead>
+  <KanbanTableBody>
+    <KanbanTableRow>
+      <KanbanTableTD
+        active={selected === "a"}
+        label="Fix login bug"
+      >
+        Fix login bug
+      </KanbanTableTD>
+      <KanbanTableTD
+        active={selected === "b"}
+        label="Write docs"
+      >
+        Write docs
+      </KanbanTableTD>
+    </KanbanTableRow>
+  </KanbanTableBody>
 </KanbanTable>
 ```
 
@@ -112,33 +121,33 @@ Import the compound components, compose them with a `KanbanTableHead` for the wo
 
 ```svelte
 <script lang="ts">
-    import KanbanTable from "./KanbanTable.svelte";
-    import KanbanTableHead from "../KanbanTableHead/KanbanTableHead.svelte";
-    import KanbanTableBody from "../KanbanTableBody/KanbanTableBody.svelte";
-    import KanbanTableFoot from "../KanbanTableFoot/KanbanTableFoot.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
-    import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
+  import KanbanTable from "./KanbanTable.svelte";
+  import KanbanTableHead from "../KanbanTableHead/KanbanTableHead.svelte";
+  import KanbanTableBody from "../KanbanTableBody/KanbanTableBody.svelte";
+  import KanbanTableFoot from "../KanbanTableFoot/KanbanTableFoot.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
 </script>
 
 <KanbanTable label="Team board">
-    <KanbanTableHead>
-        <KanbanTableRow>
-            <th scope="col">To Do</th>
-            <th scope="col">Done</th>
-        </KanbanTableRow>
-    </KanbanTableHead>
-    <KanbanTableBody>
-        <KanbanTableRow>
-            <KanbanTableTD>T1</KanbanTableTD>
-            <KanbanTableTD>D1</KanbanTableTD>
-        </KanbanTableRow>
-    </KanbanTableBody>
-    <KanbanTableFoot>
-        <KanbanTableRow>
-            <KanbanTableTD>Total: 1</KanbanTableTD>
-            <KanbanTableTD>Total: 1</KanbanTableTD>
-        </KanbanTableRow>
-    </KanbanTableFoot>
+  <KanbanTableHead>
+    <KanbanTableRow>
+      <th scope="col">To Do</th>
+      <th scope="col">Done</th>
+    </KanbanTableRow>
+  </KanbanTableHead>
+  <KanbanTableBody>
+    <KanbanTableRow>
+      <KanbanTableTD>T1</KanbanTableTD>
+      <KanbanTableTD>D1</KanbanTableTD>
+    </KanbanTableRow>
+  </KanbanTableBody>
+  <KanbanTableFoot>
+    <KanbanTableRow>
+      <KanbanTableTD>Total: 1</KanbanTableTD>
+      <KanbanTableTD>Total: 1</KanbanTableTD>
+    </KanbanTableRow>
+  </KanbanTableFoot>
 </KanbanTable>
 ```
 
@@ -146,36 +155,36 @@ Import the compound components, compose them with a `KanbanTableHead` for the wo
 
 ```svelte
 <script lang="ts">
-    import KanbanTable from "./KanbanTable.svelte";
-    import KanbanTableHead from "../KanbanTableHead/KanbanTableHead.svelte";
-    import KanbanTableBody from "../KanbanTableBody/KanbanTableBody.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
-    import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
+  import KanbanTable from "./KanbanTable.svelte";
+  import KanbanTableHead from "../KanbanTableHead/KanbanTableHead.svelte";
+  import KanbanTableBody from "../KanbanTableBody/KanbanTableBody.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
 
-    let columns = $state(["To Do", "In Progress", "Done"]);
-    let tasks = $state([
-        ["Design", "Build", "Ship"],
-        ["Spec", "Review", "Release"],
-    ]);
+  let columns = $state(["To Do", "In Progress", "Done"]);
+  let tasks = $state([
+    ["Design", "Build", "Ship"],
+    ["Spec", "Review", "Release"],
+  ]);
 </script>
 
 <KanbanTable label="Team sprint">
-    <KanbanTableHead>
-        <KanbanTableRow>
-            {#each columns as col}
-                <th scope="col">{col}</th>
-            {/each}
-        </KanbanTableRow>
-    </KanbanTableHead>
-    <KanbanTableBody>
-        {#each tasks as row}
-            <KanbanTableRow>
-                {#each row as cell}
-                    <KanbanTableTD>{cell}</KanbanTableTD>
-                {/each}
-            </KanbanTableRow>
+  <KanbanTableHead>
+    <KanbanTableRow>
+      {#each columns as col}
+        <th scope="col">{col}</th>
+      {/each}
+    </KanbanTableRow>
+  </KanbanTableHead>
+  <KanbanTableBody>
+    {#each tasks as row}
+      <KanbanTableRow>
+        {#each row as cell}
+          <KanbanTableTD>{cell}</KanbanTableTD>
         {/each}
-    </KanbanTableBody>
+      </KanbanTableRow>
+    {/each}
+  </KanbanTableBody>
 </KanbanTable>
 ```
 
@@ -183,26 +192,29 @@ Import the compound components, compose them with a `KanbanTableHead` for the wo
 
 ```svelte
 <script lang="ts">
-    import KanbanTable from "./KanbanTable.svelte";
-    import KanbanTableHead from "../KanbanTableHead/KanbanTableHead.svelte";
-    import KanbanTableBody from "../KanbanTableBody/KanbanTableBody.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
-    import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
+  import KanbanTable from "./KanbanTable.svelte";
+  import KanbanTableHead from "../KanbanTableHead/KanbanTableHead.svelte";
+  import KanbanTableBody from "../KanbanTableBody/KanbanTableBody.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
 </script>
 
-<KanbanTable label="Q1 roadmap" caption="Q1 2026 Roadmap">
-    <KanbanTableHead>
-        <KanbanTableRow>
-            <th scope="col">Planned</th>
-            <th scope="col">Shipped</th>
-        </KanbanTableRow>
-    </KanbanTableHead>
-    <KanbanTableBody>
-        <KanbanTableRow>
-            <KanbanTableTD>Feature A</KanbanTableTD>
-            <KanbanTableTD>Feature B</KanbanTableTD>
-        </KanbanTableRow>
-    </KanbanTableBody>
+<KanbanTable
+  label="Q1 roadmap"
+  caption="Q1 2026 Roadmap"
+>
+  <KanbanTableHead>
+    <KanbanTableRow>
+      <th scope="col">Planned</th>
+      <th scope="col">Shipped</th>
+    </KanbanTableRow>
+  </KanbanTableHead>
+  <KanbanTableBody>
+    <KanbanTableRow>
+      <KanbanTableTD>Feature A</KanbanTableTD>
+      <KanbanTableTD>Feature B</KanbanTableTD>
+    </KanbanTableRow>
+  </KanbanTableBody>
 </KanbanTable>
 ```
 

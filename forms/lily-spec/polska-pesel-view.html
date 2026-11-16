@@ -5,13 +5,10 @@
   HTML tag: <span>
   CSS class: polska-pesel-view
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
   Format: 11 numeric digits; assigned shortly after birth and unchanged for life
   Usage:
-    <span class="polska-pesel-view" aria-label="PESEL">value-here</span>
+    <span class="polska-pesel-view">value-here</span>
 -->
 
-<span
-  class="polska-pesel-view"
-  aria-label="PESEL"
-></span>
+<span class="polska-pesel-view"><span class="screen-reader-span">PESEL </span></span>

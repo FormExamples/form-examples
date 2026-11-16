@@ -42,13 +42,21 @@ A headless Svelte 5 component that renders a single `<div>` element. Category: o
 
 ```svelte
 <script lang="ts">
-  import OverlayContainer from './OverlayContainer.svelte';
+  import OverlayContainer from "./OverlayContainer.svelte";
 
   let open = $state(false);
 </script>
 
-<OverlayContainer open={open} onclick={() => (open = false)} label="Modal backdrop">
-  <div role="dialog" aria-modal="true" aria-label="Example dialog">
+<OverlayContainer
+  {open}
+  onclick={() => (open = false)}
+  label="Modal backdrop"
+>
+  <div
+    role="dialog"
+    aria-modal="true"
+    aria-label="Example dialog"
+  >
     Dialog content here
   </div>
 </OverlayContainer>

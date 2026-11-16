@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { warnMissingName } from "../dev-warning";
+    import { untrack } from "svelte";
     // PinInputDiv component
     //
     // A headless PIN input that renders a group of single-character numeric inputs
@@ -12,6 +14,7 @@
     //   className — string, optional. CSS class name.
     //   label — string, required. Accessible label for the group of inputs via aria-label.
     //   length — number, default 4. Number of digit inputs to render.
+    //   digitLabel — (position, length) => string, optional. Each input's accessible name; defaults to `label`.
     //   value — string, default "". Bindable combined string of all entered digits.
     //   disabled — boolean, default false. Whether all inputs are disabled.
     //   ...restProps — additional HTML attributes spread onto the group <div>.
@@ -38,14 +41,13 @@
     //
     // Accessibility:
     //   - role="group" with aria-label on the container identifies the PIN group
-    //   - Each input has aria-label="Digit X of Y" for positional context
+    //   - Each input is named by `digitLabel(position, length)` when given (e.g. "Digit 2 of 4"), else by `label`
     //   - inputmode="numeric" ensures numeric keyboard on mobile devices
     //   - maxlength="1" restricts each input to a single character
     //
     // Internationalization:
     //   - The label prop is consumer-provided for the group name
-    //   - Individual "Digit X of Y" labels are currently hardcoded in English
-    //   - No other hardcoded user-facing strings
+    //   - Each digit's name comes from the consumer's `digitLabel`; without it the group `label` is used. No English default
     //
     // Claude rules:
     //   - Headless: no CSS, no styles — consumer provides all styling
@@ -60,6 +62,7 @@
         class: className = "",
         label,
         length = 4,
+        digitLabel,
         value = $bindable(""),
         disabled = false,
         ...restProps
@@ -68,6 +71,11 @@
         label: string;
         /** Number of digit inputs to render */
         length?: number;
+        /**
+         * Each digit input's accessible name, e.g. (n, of) => `Digit ${n} of ${of}`.
+         * Without it each input is named by `label`: no English default.
+         */
+        digitLabel?: (position: number, length: number) => string;
         /** Combined string of all entered digits, bindable */
         value?: string;
         /** Whether all inputs are disabled */
@@ -76,10 +84,24 @@
         [key: string]: unknown;
     } = $props();
 
+    $effect(() =>
+        warnMissingName(
+            "PinInputDiv",
+            label,
+            restProps["aria-label"],
+            restProps["aria-labelledby"],
+        ),
+    );
+
     // Internal state: array of individual digit characters.
     // Note: the length prop is captured at initialization time for the initial
     // array size. This is intentional -- the pin length is expected to be static.
-    let digits: string[] = $state(Array.from({ length }, () => ""));
+    // Seeded from the initial `value`: starting empty meant the effect below
+    // overwrote a bound starting value with "" on mount.
+    const initialDigits = untrack(() =>
+        Array.from({ length }, (_, i) => (/^[0-9]$/.test(value[i] ?? "") ? value[i] : "")),
+    );
+    let digits: string[] = $state([...initialDigits]);
 
     // References to each input element for focus management
     let inputRefs: HTMLInputElement[] = $state([]);
@@ -90,6 +112,32 @@
     // Keep the bindable value in sync with the derived combined value
     $effect(() => {
         value = combinedValue;
+    });
+
+    // Form reset: the digit inputs use a one-way `value`, which a reset clears
+    // without telling this component, so `value` would keep digits the fields no
+    // longer show. Restore the initial digits instead — one tick later, after the
+    // browser has reset the DOM, and not when the reset was cancelled.
+    let root: HTMLDivElement | undefined = $state();
+    $effect(() => {
+        const form = root?.closest("form");
+        if (!form) return;
+        let timer: ReturnType<typeof setTimeout> | undefined;
+        const onReset = (event: Event) => {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                if (event.defaultPrevented) return;
+                digits = [...initialDigits];
+                inputRefs.forEach((input, i) => {
+                    if (input) input.value = initialDigits[i];
+                });
+            }, 0);
+        };
+        form.addEventListener("reset", onReset);
+        return () => {
+            clearTimeout(timer);
+            form.removeEventListener("reset", onReset);
+        };
     });
 
     // Handle input events on individual digit fields
@@ -137,6 +185,7 @@
 
 <!-- PinInputDiv.svelte -->
 <div
+    bind:this={root}
     class={`pin-input-div ${className}`}
     role="group"
     aria-label={label}
@@ -148,7 +197,7 @@
             type="text"
             inputmode="numeric"
             maxlength="1"
-            aria-label={`Digit ${index + 1} of ${length}`}
+            aria-label={digitLabel ? digitLabel(index + 1, length) : label}
             value={digits[index]}
             {disabled}
             oninput={(e) => handleInput(index, e)}

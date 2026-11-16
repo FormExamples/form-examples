@@ -1,4 +1,7 @@
-<script module lang="ts">
+<script
+    module
+    lang="ts"
+>
     import { defineMeta } from "@storybook/addon-svelte-csf";
     import AccordionLink from "./AccordionLink.svelte";
     const { Story } = defineMeta({
@@ -7,8 +10,11 @@
     });
 </script>
 
-<Story name="Default" tags={["autodocs", "!dev"]}>
-    <AccordionLink label="AccordionLink example">
+<Story
+    name="Default"
+    tags={["autodocs", "!dev"]}
+>
+    <AccordionLink href="#example">
         <span>AccordionLink example</span>
     </AccordionLink>
 </Story>

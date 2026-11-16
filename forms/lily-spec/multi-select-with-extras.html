@@ -1,0 +1,27 @@
+<!-- multi-select-with-extras.html -->
+<!-- MultiSelectWithExtras component -->
+<!--
+  Description: a native multiple-choice select wrapped in a div with before/after content slots
+  HTML tag: <div> wrapping <select multiple>
+  CSS class: multi-select-with-extras
+  Keyboard: native only (on the inner select)
+  Accessibility: aria-label is on the inner <select>, not the wrapper div
+  Attributes: extra attributes pass through on the wrapper div; size/required/disabled go on the select
+  Usage:
+    <div class="multi-select-with-extras">
+      … before content …
+      <select multiple aria-label="Example"> ... </select>
+      … after content …
+    </div>
+-->
+
+<div class="multi-select-with-extras">
+  <span class="multi-select-with-extras-before">Choose toppings</span>
+  <select multiple aria-label="Toppings" size="4">
+    <option value="cheese">Cheese</option>
+    <option value="olives">Olives</option>
+    <option value="peppers">Peppers</option>
+    <option value="mushrooms">Mushrooms</option>
+  </select>
+  <span class="multi-select-with-extras-after">Hold Ctrl or Cmd to select several</span>
+</div>

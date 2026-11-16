@@ -1,0 +1,26 @@
+<!-- empty-state.html -->
+<!-- EmptyState component -->
+<!--
+  Description: placeholder content shown where a list, table or search has nothing to show
+  HTML tag: <div>
+  CSS class: empty-state
+  Keyboard: None (passive element); any action is a consumer-supplied button/link
+  Accessibility: when a label is given, role="group" and aria-label name the region; without
+    a label the div carries no role. No icon is bundled; heading, text and action are consumer-supplied.
+  Usage:
+    <div class="empty-state" role="group" aria-label="No results">
+      <h2>Nothing here yet</h2>
+      <p>Explanation</p>
+      <a href="/new">Create one</a>
+    </div>
+-->
+
+<div
+  class="empty-state"
+  role="group"
+  aria-label="No results"
+>
+  <h2>Nothing here yet</h2>
+  <p>Try a different search.</p>
+  <button type="button">Clear filters</button>
+</div>

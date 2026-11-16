@@ -44,12 +44,12 @@ Import `CalendarTableTD` and place inside a `CalendarTableRow` within `CalendarT
 
 ```svelte
 <script lang="ts">
-  import CalendarTable from '../CalendarTable/CalendarTable.svelte';
-  import CalendarTableHead from '../CalendarTableHead/CalendarTableHead.svelte';
-  import CalendarTableBody from '../CalendarTableBody/CalendarTableBody.svelte';
-  import CalendarTableRow from '../CalendarTableRow/CalendarTableRow.svelte';
-  import CalendarTableTD from './CalendarTableTD.svelte';
-  import CalendarTableTD from '../CalendarTableTD/CalendarTableTD.svelte';
+  import CalendarTable from "../CalendarTable/CalendarTable.svelte";
+  import CalendarTableHead from "../CalendarTableHead/CalendarTableHead.svelte";
+  import CalendarTableBody from "../CalendarTableBody/CalendarTableBody.svelte";
+  import CalendarTableRow from "../CalendarTableRow/CalendarTableRow.svelte";
+  import CalendarTableTD from "./CalendarTableTD.svelte";
+  import CalendarTableTD from "../CalendarTableTD/CalendarTableTD.svelte";
 </script>
 
 <CalendarTable label="January 2025">
@@ -79,8 +79,14 @@ Import `CalendarTableTD` and place inside a `CalendarTableRow` within `CalendarT
 ```svelte
 <CalendarTableHead>
   <CalendarTableRow>
-    <CalendarTableTD colspan={5} scope="colgroup">Weekdays</CalendarTableTD>
-    <CalendarTableTD colspan={2} scope="colgroup">Weekend</CalendarTableTD>
+    <CalendarTableTD
+      colspan={5}
+      scope="colgroup">Weekdays</CalendarTableTD
+    >
+    <CalendarTableTD
+      colspan={2}
+      scope="colgroup">Weekend</CalendarTableTD
+    >
   </CalendarTableRow>
 </CalendarTableHead>
 ```

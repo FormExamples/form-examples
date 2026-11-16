@@ -50,58 +50,70 @@ Pass `src` and `alt`. Optionally pass `caption` to get the figure/figcaption wra
 
 ```svelte
 <script lang="ts">
-    import Image from "./Image.svelte";
-</script>
-
-<Image src="/photo.jpg" alt="A sunset over the ocean" />
-```
-
-```svelte
-<script lang="ts">
-    import Image from "./Image.svelte";
+  import Image from "./Image.svelte";
 </script>
 
 <Image
-    src="/photo.jpg"
-    alt="A sunset over the ocean"
-    caption="Photo by Jane Doe"
+  src="/photo.jpg"
+  alt="A sunset over the ocean"
 />
 ```
 
 ```svelte
 <script lang="ts">
-    import Image from "./Image.svelte";
+  import Image from "./Image.svelte";
 </script>
 
-<Image src="/large-photo.jpg" alt="Landscape" loading="lazy" />
+<Image
+  src="/photo.jpg"
+  alt="A sunset over the ocean"
+  caption="Photo by Jane Doe"
+/>
 ```
 
 ```svelte
 <script lang="ts">
-    import Image from "./Image.svelte";
-    const photos = [
-        { src: "/a.jpg", alt: "Photo A", caption: "First photo" },
-        { src: "/b.jpg", alt: "Photo B", caption: "Second photo" },
-    ];
+  import Image from "./Image.svelte";
+</script>
+
+<Image
+  src="/large-photo.jpg"
+  alt="Landscape"
+  loading="lazy"
+/>
+```
+
+```svelte
+<script lang="ts">
+  import Image from "./Image.svelte";
+  const photos = [
+    { src: "/a.jpg", alt: "Photo A", caption: "First photo" },
+    { src: "/b.jpg", alt: "Photo B", caption: "Second photo" },
+  ];
 </script>
 
 {#each photos as p}
-    <Image src={p.src} alt={p.alt} caption={p.caption} loading="lazy" />
+  <Image
+    src={p.src}
+    alt={p.alt}
+    caption={p.caption}
+    loading="lazy"
+  />
 {/each}
 ```
 
 ```svelte
 <script lang="ts">
-    import Image from "./Image.svelte";
+  import Image from "./Image.svelte";
 </script>
 
 <Image
-    src="/banner.jpg"
-    alt="Site banner"
-    class="hero-image"
-    data-testid="hero"
-    width="1200"
-    height="400"
+  src="/banner.jpg"
+  alt="Site banner"
+  class="hero-image"
+  data-testid="hero"
+  width="1200"
+  height="400"
 />
 ```
 

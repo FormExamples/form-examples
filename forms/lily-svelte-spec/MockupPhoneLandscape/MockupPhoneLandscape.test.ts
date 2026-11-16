@@ -11,7 +11,9 @@ function textSnippet(text: string) {
 
 describe("MockupPhoneLandscape", () => {
     test("renders root with class mockup-phone-landscape", () => {
-        const { container } = render(Subject, { props: { label: "Test", children: textSnippet("Body") } });
+        const { container } = render(Subject, {
+            props: { label: "Test", children: textSnippet("Body") },
+        });
         expect(container.querySelector(".mockup-phone-landscape")).toBeTruthy();
     });
 });

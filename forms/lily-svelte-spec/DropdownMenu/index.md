@@ -32,54 +32,116 @@ Provide a `label` and children with `role="menuitem"` and `tabindex="-1"`.
 
 ```svelte
 <script lang="ts">
-    import DropdownMenu from "./DropdownMenu.svelte";
-    let open = $state(false);
+  import DropdownMenu from "./DropdownMenu.svelte";
+  let open = $state(false);
 </script>
 
-<DropdownMenu label="Options" bind:open>
-    <li role="menuitem" tabindex="-1">Edit</li>
-    <li role="menuitem" tabindex="-1">Duplicate</li>
-    <li role="menuitem" tabindex="-1">Delete</li>
+<DropdownMenu
+  label="Options"
+  bind:open
+>
+  <li
+    role="menuitem"
+    tabindex="-1"
+  >
+    Edit
+  </li>
+  <li
+    role="menuitem"
+    tabindex="-1"
+  >
+    Duplicate
+  </li>
+  <li
+    role="menuitem"
+    tabindex="-1"
+  >
+    Delete
+  </li>
 </DropdownMenu>
 ```
 
 ## Props
 
-| Prop       | Type       | Default | Description                                       |
-| ---------- | ---------- | ------- | ------------------------------------------------- |
-| `class`    | `string`   | `""`    | CSS class appended to the base class.            |
-| `label`    | `string`   | required| Accessible name and visible text for the trigger. |
-| `open`     | `boolean`  | `false` | Whether the menu is open. Bindable.               |
-| `children` | `Snippet`  | required| Menu items, each with `role="menuitem"`.          |
-| `...rest`  | `unknown`  | —       | Additional HTML attributes on the wrapper `<div>`.|
+| Prop       | Type      | Default  | Description                                        |
+| ---------- | --------- | -------- | -------------------------------------------------- |
+| `class`    | `string`  | `""`     | CSS class appended to the base class.              |
+| `label`    | `string`  | required | Accessible name and visible text for the trigger.  |
+| `open`     | `boolean` | `false`  | Whether the menu is open. Bindable.                |
+| `children` | `Snippet` | required | Menu items, each with `role="menuitem"`.           |
+| `...rest`  | `unknown` | —        | Additional HTML attributes on the wrapper `<div>`. |
 
 ## Usage
 
 ### 1. Basic dropdown
 
 ```svelte
-<DropdownMenu label="Options" bind:open>
-    <li role="menuitem" tabindex="-1">Edit</li>
-    <li role="menuitem" tabindex="-1">Duplicate</li>
-    <li role="menuitem" tabindex="-1">Delete</li>
+<DropdownMenu
+  label="Options"
+  bind:open
+>
+  <li
+    role="menuitem"
+    tabindex="-1"
+  >
+    Edit
+  </li>
+  <li
+    role="menuitem"
+    tabindex="-1"
+  >
+    Duplicate
+  </li>
+  <li
+    role="menuitem"
+    tabindex="-1"
+  >
+    Delete
+  </li>
 </DropdownMenu>
 ```
 
 ### 2. With click handlers
 
 ```svelte
-<DropdownMenu label="Actions" bind:open={menuOpen}>
-    <li role="menuitem" tabindex="-1" onclick={() => handle("edit")}>Edit</li>
-    <li role="menuitem" tabindex="-1" onclick={() => handle("delete")}>Delete</li>
+<DropdownMenu
+  label="Actions"
+  bind:open={menuOpen}
+>
+  <li
+    role="menuitem"
+    tabindex="-1"
+    onclick={() => handle("edit")}
+  >
+    Edit
+  </li>
+  <li
+    role="menuitem"
+    tabindex="-1"
+    onclick={() => handle("delete")}
+  >
+    Delete
+  </li>
 </DropdownMenu>
 ```
 
 ### 3. Controlled from outside
 
 ```svelte
-<button type="button" onclick={() => open = !open}>Toggle</button>
-<DropdownMenu label="More" bind:open>
-    <li role="menuitem" tabindex="-1">Export</li>
+<button
+  type="button"
+  onclick={() => (open = !open)}>Toggle</button
+>
+<DropdownMenu
+  label="More"
+  bind:open
+>
+  <li
+    role="menuitem"
+    tabindex="-1"
+  >
+    Export
+  </li>
 </DropdownMenu>
 ```
 
@@ -87,10 +149,22 @@ Provide a `label` and children with `role="menuitem"` and `tabindex="-1"`.
 
 ```svelte
 {#each rows as row}
-    <DropdownMenu label={`Actions for ${row.name}`}>
-        <li role="menuitem" tabindex="-1" onclick={() => edit(row)}>Edit</li>
-        <li role="menuitem" tabindex="-1" onclick={() => remove(row)}>Remove</li>
-    </DropdownMenu>
+  <DropdownMenu label={`Actions for ${row.name}`}>
+    <li
+      role="menuitem"
+      tabindex="-1"
+      onclick={() => edit(row)}
+    >
+      Edit
+    </li>
+    <li
+      role="menuitem"
+      tabindex="-1"
+      onclick={() => remove(row)}
+    >
+      Remove
+    </li>
+  </DropdownMenu>
 {/each}
 ```
 
@@ -98,9 +172,24 @@ Provide a `label` and children with `role="menuitem"` and `tabindex="-1"`.
 
 ```svelte
 <DropdownMenu label="View">
-    <li role="menuitem" tabindex="-1">Compact</li>
-    <li role="menuitem" tabindex="-1">Comfortable</li>
-    <li role="menuitem" tabindex="-1">Spacious</li>
+  <li
+    role="menuitem"
+    tabindex="-1"
+  >
+    Compact
+  </li>
+  <li
+    role="menuitem"
+    tabindex="-1"
+  >
+    Comfortable
+  </li>
+  <li
+    role="menuitem"
+    tabindex="-1"
+  >
+    Spacious
+  </li>
 </DropdownMenu>
 <!-- ArrowDown/Up cycle | Home/End jump | Escape closes -->
 ```

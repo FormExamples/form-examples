@@ -5,13 +5,12 @@
   HTML tag: <span>
   CSS class: nederland-identiteitskaart-nummer-view
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
   Format: 9 characters following the same format as the passport number; 'O' is disallowed but '0' is permitted
   Usage:
-    <span class="nederland-identiteitskaart-nummer-view" aria-label="Dutch National Identity Card Number">value-here</span>
+    <span class="nederland-identiteitskaart-nummer-view">value-here</span>
 -->
 
-<span
-  class="nederland-identiteitskaart-nummer-view"
-  aria-label="Dutch National Identity Card Number"
-></span>
+<span class="nederland-identiteitskaart-nummer-view"
+  ><span class="screen-reader-span">Dutch National Identity Card Number </span></span
+>

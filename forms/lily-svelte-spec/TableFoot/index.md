@@ -10,7 +10,7 @@ See [components/table-foot/index.md](../../../components/table-foot/index.md) fo
 
 ```svelte
 <script lang="ts">
-    import TableFoot from "./TableFoot.svelte";
+  import TableFoot from "./TableFoot.svelte";
 </script>
 
 <TableFoot />

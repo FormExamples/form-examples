@@ -3,29 +3,58 @@
 <!--
   Description: an inline-editable text element that toggles between view and edit modes
   HTML tag: <div>
-  CSS class: editable
-  Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
-  Usage:
-    <div class="editable" aria-label="Example">
-      ...
-    </div>
+  CSS class: editable (sub-elements: editable-button, editable-input)
+  Keyboard: Enter or Space on the button starts editing (its own keys); in the field Enter confirms and Escape cancels;
+    focus moves to the field on edit and back to the button after
+  Accessibility: display: a native <button type="button"> named "value, label"; editing: an <input type="text"> named by
+    the label. A disabled button cannot start editing.
+  Usage (see the markup below): the button shows the value; the hidden input carries the label as its aria-label. A
+    bubbling `editable-change` event fires with detail.value when an edit is confirmed.
 -->
 
-<div
-  class="editable"
-  aria-label=""
->
-  <!-- Consumer provides content -->
+<div class="editable">
+  <button type="button" class="editable-button" aria-label="Draft title, Title">Draft title</button>
+  <input type="text" class="editable-input" aria-label="Title" hidden>
 </div>
 
 <script>
-  // Editable behavior
-  (function() {
+  // Editable behavior: swap the button for the field and back, moving focus with the swap.
+  (function () {
     'use strict';
-    // Editable: consumer implements interactive behavior
-    document.querySelectorAll('.editable').forEach(function(el) {
-      // Interactive behavior initialization
+    document.querySelectorAll('.editable').forEach(function (root) {
+      var button = root.querySelector('.editable-button');
+      var input = root.querySelector('.editable-input');
+      if (!button || !input) return;
+      var label = input.getAttribute('aria-label') || '';
+      function begin() {
+        if (button.disabled) return;
+        input.value = button.textContent.trim();
+        button.hidden = true;
+        input.hidden = false;
+        input.focus();
+      }
+      function end(confirm) {
+        var value = input.value;
+        if (confirm) {
+          button.textContent = value;
+          button.setAttribute('aria-label', value ? value + ', ' + label : label);
+        }
+        input.hidden = true;
+        button.hidden = false;
+        button.focus();
+        if (confirm) root.dispatchEvent(new CustomEvent('editable-change', { bubbles: true, detail: { value: value } }));
+      }
+      button.addEventListener('click', begin);
+      input.addEventListener('keydown', function (e) {
+        if (e.isComposing) return;
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          end(true);
+        } else if (e.key === 'Escape') {
+          e.preventDefault();
+          end(false);
+        }
+      });
     });
   })();
 </script>

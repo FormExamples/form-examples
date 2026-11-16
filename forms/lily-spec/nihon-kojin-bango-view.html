@@ -1,0 +1,16 @@
+<!-- nihon-kojin-bango-view.html -->
+<!-- NihonKojinBangoView component -->
+<!--
+  Description: a read-only display of Japan's Individual Number / My Number (マイナンバー)
+  HTML tag: <span>
+  CSS class: nihon-kojin-bango-view
+  Keyboard: None (passive element)
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
+  Format: Twelve digits, issued to every resident of Japan since 2016. The twelfth digit is a check digit: the first eleven digits are each multiplied by a position-dependent weight (6,5,4,3,2 for positions 1-5; 7,6,5,4,3,2 for positions 6-11), summed, taken Modulus-11, and the remainder subtracted from 11 (remainders of 0 or 1 both yield a check digit of 0).
+  Usage:
+    <span class="nihon-kojin-bango-view">value-here</span>
+-->
+
+<span class="nihon-kojin-bango-view"
+  ><span class="screen-reader-span">Individual Number / My Number (マイナンバー) </span></span
+>

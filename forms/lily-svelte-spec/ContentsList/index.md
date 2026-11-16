@@ -28,69 +28,69 @@ Place inside `ContentsNav`, with `ContentsListItem` children containing anchor l
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `class` | `string` | `""` | CSS class name appended to the base class. |
-| `children` | `Snippet` | required | `ContentsListItem` components. |
-| `...restProps` | `unknown` | — | Additional attributes spread onto the `<ol>`. |
+| Prop           | Type      | Default  | Description                                   |
+| -------------- | --------- | -------- | --------------------------------------------- |
+| `class`        | `string`  | `""`     | CSS class name appended to the base class.    |
+| `children`     | `Snippet` | required | `ContentsListItem` components.                |
+| `...restProps` | `unknown` | —        | Additional attributes spread onto the `<ol>`. |
 
 ## Usage
 
 ```svelte
 <script lang="ts">
-    import ContentsNav from "../ContentsNav/ContentsNav.svelte";
-    import ContentsList from "./ContentsList.svelte";
-    import ContentsListItem from "../ContentsListItem/ContentsListItem.svelte";
+  import ContentsNav from "../ContentsNav/ContentsNav.svelte";
+  import ContentsList from "./ContentsList.svelte";
+  import ContentsListItem from "../ContentsListItem/ContentsListItem.svelte";
 </script>
 
 <ContentsNav label="On this page">
-    <ContentsList>
-        <ContentsListItem><a href="#introduction">Introduction</a></ContentsListItem>
-        <ContentsListItem><a href="#usage">Usage</a></ContentsListItem>
-        <ContentsListItem><a href="#examples">Examples</a></ContentsListItem>
-    </ContentsList>
+  <ContentsList>
+    <ContentsListItem><a href="#introduction">Introduction</a></ContentsListItem>
+    <ContentsListItem><a href="#usage">Usage</a></ContentsListItem>
+    <ContentsListItem><a href="#examples">Examples</a></ContentsListItem>
+  </ContentsList>
 </ContentsNav>
 ```
 
 ```svelte
 <script lang="ts">
-    import ContentsNav from "../ContentsNav/ContentsNav.svelte";
-    import ContentsList from "./ContentsList.svelte";
-    import ContentsListItem from "../ContentsListItem/ContentsListItem.svelte";
+  import ContentsNav from "../ContentsNav/ContentsNav.svelte";
+  import ContentsList from "./ContentsList.svelte";
+  import ContentsListItem from "../ContentsListItem/ContentsListItem.svelte";
 
-    const sections = [
-        { id: "overview", title: "Overview" },
-        { id: "install", title: "Install" },
-        { id: "api", title: "API" }
-    ];
+  const sections = [
+    { id: "overview", title: "Overview" },
+    { id: "install", title: "Install" },
+    { id: "api", title: "API" },
+  ];
 </script>
 
 <ContentsNav label="Contents">
-    <ContentsList>
-        {#each sections as s (s.id)}
-            <ContentsListItem><a href={`#${s.id}`}>{s.title}</a></ContentsListItem>
-        {/each}
-    </ContentsList>
+  <ContentsList>
+    {#each sections as s (s.id)}
+      <ContentsListItem><a href={`#${s.id}`}>{s.title}</a></ContentsListItem>
+    {/each}
+  </ContentsList>
 </ContentsNav>
 ```
 
 ```svelte
 <script lang="ts">
-    import ContentsNav from "../ContentsNav/ContentsNav.svelte";
-    import ContentsList from "./ContentsList.svelte";
-    import ContentsListItem from "../ContentsListItem/ContentsListItem.svelte";
+  import ContentsNav from "../ContentsNav/ContentsNav.svelte";
+  import ContentsList from "./ContentsList.svelte";
+  import ContentsListItem from "../ContentsListItem/ContentsListItem.svelte";
 </script>
 
 <ContentsNav label="Report contents">
-    <ContentsList>
-        <ContentsListItem>
-            <a href="#results">Results</a>
-            <ContentsList>
-                <ContentsListItem><a href="#data">Data</a></ContentsListItem>
-                <ContentsListItem><a href="#analysis">Analysis</a></ContentsListItem>
-            </ContentsList>
-        </ContentsListItem>
-    </ContentsList>
+  <ContentsList>
+    <ContentsListItem>
+      <a href="#results">Results</a>
+      <ContentsList>
+        <ContentsListItem><a href="#data">Data</a></ContentsListItem>
+        <ContentsListItem><a href="#analysis">Analysis</a></ContentsListItem>
+      </ContentsList>
+    </ContentsListItem>
+  </ContentsList>
 </ContentsNav>
 ```
 

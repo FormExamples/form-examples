@@ -50,9 +50,18 @@ Import and wrap `ToggleButton` children (or any buttons using `aria-pressed`/`ar
 </script>
 
 <ToggleGroup label="Text formatting">
-  <ToggleButton label="Bold" bind:pressed={bold}>B</ToggleButton>
-  <ToggleButton label="Italic" bind:pressed={italic}>I</ToggleButton>
-  <ToggleButton label="Underline" bind:pressed={underline}>U</ToggleButton>
+  <ToggleButton
+    label="Bold"
+    bind:pressed={bold}>B</ToggleButton
+  >
+  <ToggleButton
+    label="Italic"
+    bind:pressed={italic}>I</ToggleButton
+  >
+  <ToggleButton
+    label="Underline"
+    bind:pressed={underline}>U</ToggleButton
+  >
 </ToggleGroup>
 ```
 
@@ -62,8 +71,14 @@ Import and wrap `ToggleButton` children (or any buttons using `aria-pressed`/`ar
 </script>
 
 <ToggleGroup label="View options">
-  <button type="button" aria-pressed="true">Grid</button>
-  <button type="button" aria-pressed="false">List</button>
+  <button
+    type="button"
+    aria-pressed="true">Grid</button
+  >
+  <button
+    type="button"
+    aria-pressed="false">List</button
+  >
 </ToggleGroup>
 ```
 
@@ -77,7 +92,10 @@ Import and wrap `ToggleButton` children (or any buttons using `aria-pressed`/`ar
 
 <ToggleGroup label="Feature flags">
   {#each Object.keys(flags) as key}
-    <ToggleButton label={key} bind:pressed={flags[key]}>{key}</ToggleButton>
+    <ToggleButton
+      label={key}
+      bind:pressed={flags[key]}>{key}</ToggleButton
+    >
   {/each}
 </ToggleGroup>
 ```
@@ -92,10 +110,16 @@ Import and wrap `ToggleButton` children (or any buttons using `aria-pressed`/`ar
 </script>
 
 <ToggleGroup label="Préférences">
-  <ToggleButton label="Notifications" bind:pressed={notifications}>
+  <ToggleButton
+    label="Notifications"
+    bind:pressed={notifications}
+  >
     Notifications
   </ToggleButton>
-  <ToggleButton label="Sons" bind:pressed={sounds}>Sons</ToggleButton>
+  <ToggleButton
+    label="Sons"
+    bind:pressed={sounds}>Sons</ToggleButton
+  >
 </ToggleGroup>
 ```
 

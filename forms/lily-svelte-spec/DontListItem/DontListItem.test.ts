@@ -28,7 +28,9 @@ describe("DontListItem", () => {
     });
 
     test("passes through data-testid attribute", () => {
-        render(Subject, { props: { "data-testid": "dont-item", children: textSnippet("Bad practice") } });
+        render(Subject, {
+            props: { "data-testid": "dont-item", children: textSnippet("Bad practice") },
+        });
         expect(screen.getByTestId("dont-item")).toBeTruthy();
         expect(screen.getByTestId("dont-item").tagName).toBe("LI");
     });

@@ -5,7 +5,7 @@
   HTML tag: <div>
   CSS class: sonner
   Keyboard: None (passive element)
-  Accessibility: role="status", aria-label for accessible name
+  Accessibility: role="region" with aria-label, and aria-live="polite" for its toasts
   Usage:
     <div class="sonner" role="status" aria-label="Example">
       ...
@@ -14,7 +14,8 @@
 
 <div
   class="sonner"
-  role="status"
+  aria-live="polite"
+  role="region"
   aria-label=""
 >
   <!-- Consumer provides content -->

@@ -41,10 +41,13 @@ A headless Svelte 5 component that renders a single `<div>` element. Category: l
 
 ```svelte
 <script lang="ts">
-  import Grid from './Grid.svelte';
+  import Grid from "./Grid.svelte";
 </script>
 
-<Grid columns={3} gap="1rem">
+<Grid
+  columns={3}
+  gap="1rem"
+>
   <div>One</div>
   <div>Two</div>
   <div>Three</div>
@@ -54,7 +57,10 @@ A headless Svelte 5 component that renders a single `<div>` element. Category: l
 ### Custom track sizes
 
 ```svelte
-<Grid columns="200px 1fr 200px" gap="1.5rem">
+<Grid
+  columns="200px 1fr 200px"
+  gap="1.5rem"
+>
   <aside>Nav</aside>
   <main>Content</main>
   <aside>Meta</aside>

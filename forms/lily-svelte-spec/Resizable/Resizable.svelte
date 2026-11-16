@@ -71,6 +71,7 @@
 </script>
 
 <!-- Resizable.svelte -->
+<!-- svelte-ignore a11y_no_noninteractive_tabindex (a scrollable region must be keyboard-focusable (axe scrollable-region-focusable)) -->
 <div
     class={`resizable ${className}`}
     role="region"

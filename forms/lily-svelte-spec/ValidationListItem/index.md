@@ -35,8 +35,8 @@ A headless Svelte 5 component inspired by the U.S. Web Design System (USWDS) Val
 
 ```svelte
 <script lang="ts">
-  import ValidationList from '../ValidationList/ValidationList.svelte';
-  import ValidationListItem from './ValidationListItem.svelte';
+  import ValidationList from "../ValidationList/ValidationList.svelte";
+  import ValidationListItem from "./ValidationListItem.svelte";
 </script>
 
 <ValidationList label="Password requirements">

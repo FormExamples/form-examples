@@ -16,7 +16,7 @@ function renderInList(props: Record<string, unknown>) {
     const ol = document.createElement("ol");
     container.appendChild(ol);
     document.body.appendChild(container);
-    const result = render(CheckListItem, { props, target: ol });
+    const result = render(CheckListItem, { props: props as any, target: ol });
     return { ...result, container };
 }
 

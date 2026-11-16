@@ -27,7 +27,9 @@ describe("Toast", () => {
     });
 
     test("has assertive live region when urgent", () => {
-        render(Subject, { props: { urgent: true, "data-testid": "t", children: textSnippet("E") } });
+        render(Subject, {
+            props: { urgent: true, "data-testid": "t", children: textSnippet("E") },
+        });
         expect(screen.getByTestId("t").getAttribute("aria-live")).toBe("assertive");
     });
 

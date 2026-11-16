@@ -41,8 +41,8 @@ A headless Svelte 5 component for compact item rows in a collection. Inspired by
 
 ```svelte
 <script lang="ts">
-  import CollectionList from '../CollectionList/CollectionList.svelte';
-  import CollectionListItem from './CollectionListItem.svelte';
+  import CollectionList from "../CollectionList/CollectionList.svelte";
+  import CollectionListItem from "./CollectionListItem.svelte";
 </script>
 
 <CollectionList label="Articles">

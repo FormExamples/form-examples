@@ -42,7 +42,7 @@ Import `ContainerWithFluidWidth` and pass `paddingInline`. Required prop: `child
 
 ```svelte
 <script lang="ts">
-  import ContainerWithFluidWidth from './ContainerWithFluidWidth.svelte';
+  import ContainerWithFluidWidth from "./ContainerWithFluidWidth.svelte";
 </script>
 
 <ContainerWithFluidWidth paddingInline="clamp(1rem, 4vw, 3rem)">

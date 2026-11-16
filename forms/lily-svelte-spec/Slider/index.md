@@ -53,11 +53,14 @@ Volume slider:
 
 ```svelte
 <script lang="ts">
-    import Slider from "./Slider.svelte";
-    let volume = $state(50);
+  import Slider from "./Slider.svelte";
+  let volume = $state(50);
 </script>
 
-<Slider label="Volume" bind:value={volume} />
+<Slider
+  label="Volume"
+  bind:value={volume}
+/>
 <p>{volume}%</p>
 ```
 
@@ -65,46 +68,67 @@ Brightness:
 
 ```svelte
 <script lang="ts">
-    import Slider from "./Slider.svelte";
-    let brightness = $state(75);
+  import Slider from "./Slider.svelte";
+  let brightness = $state(75);
 </script>
 
-<Slider label="Brightness" bind:value={brightness} min={0} max={100} />
+<Slider
+  label="Brightness"
+  bind:value={brightness}
+  min={0}
+  max={100}
+/>
 ```
 
 Price max:
 
 ```svelte
 <script lang="ts">
-    import Slider from "./Slider.svelte";
-    let maxPrice = $state(250);
+  import Slider from "./Slider.svelte";
+  let maxPrice = $state(250);
 </script>
 
-<Slider label="Max price" bind:value={maxPrice} min={0} max={1000} step={10} />
+<Slider
+  label="Max price"
+  bind:value={maxPrice}
+  min={0}
+  max={1000}
+  step={10}
+/>
 ```
 
 Disabled state:
 
 ```svelte
 <script lang="ts">
-    import Slider from "./Slider.svelte";
-    let v = $state(20);
+  import Slider from "./Slider.svelte";
+  let v = $state(20);
 </script>
 
-<Slider label="Locked" bind:value={v} disabled />
+<Slider
+  label="Locked"
+  bind:value={v}
+  disabled
+/>
 ```
 
 With name for form submission:
 
 ```svelte
 <script lang="ts">
-    import Slider from "./Slider.svelte";
-    let v = $state(10);
+  import Slider from "./Slider.svelte";
+  let v = $state(10);
 </script>
 
 <form>
-    <Slider label="Quantity" bind:value={v} name="qty" min={1} max={100} />
-    <button type="submit">Submit</button>
+  <Slider
+    label="Quantity"
+    bind:value={v}
+    name="qty"
+    min={1}
+    max={100}
+  />
+  <button type="submit">Submit</button>
 </form>
 ```
 
@@ -116,6 +140,7 @@ With name for form submission:
 - Consider pairing with a visible numeric readout for sighted users.
 
 References:
+
 - WAI-ARIA Slider Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/slider/
 - MDN `input type="range"`: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range
 

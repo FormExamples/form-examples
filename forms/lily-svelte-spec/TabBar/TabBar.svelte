@@ -51,6 +51,7 @@
     // References:
     //   - WAI-ARIA Tabs Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
 
+    import { warnMissingName } from "../dev-warning";
     import type { Snippet } from "svelte";
 
     let {
@@ -66,13 +67,15 @@
         [key: string]: unknown;
     } = $props();
 
+    $effect(() =>
+        warnMissingName("TabBar", label, restProps["aria-label"], restProps["aria-labelledby"]),
+    );
+
     let barRef: HTMLElement | undefined = $state(undefined);
 
     function onkeydown(event: KeyboardEvent) {
         if (!barRef) return;
-        const items = Array.from(
-            barRef.querySelectorAll<HTMLElement>("[role='tab']"),
-        );
+        const items = Array.from(barRef.querySelectorAll<HTMLElement>("[role='tab']"));
         const current = document.activeElement as HTMLElement;
         const index = items.indexOf(current);
         switch (event.key) {

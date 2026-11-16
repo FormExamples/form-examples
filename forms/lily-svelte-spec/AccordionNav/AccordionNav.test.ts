@@ -27,7 +27,9 @@ describe("AccordionNav", () => {
     });
 
     test("passes through attributes", () => {
-        render(Subject, { props: { label: "F", "data-testid": "aan", children: textSnippet("x") } });
+        render(Subject, {
+            props: { label: "F", "data-testid": "aan", children: textSnippet("x") },
+        });
         expect(screen.getByTestId("aan")).toBeTruthy();
     });
 });

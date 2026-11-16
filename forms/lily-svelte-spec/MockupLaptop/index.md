@@ -10,7 +10,7 @@ See [components/mockup-laptop/index.md](../../../components/mockup-laptop/index.
 
 ```svelte
 <script lang="ts">
-    import MockupLaptop from "./MockupLaptop.svelte";
+  import MockupLaptop from "./MockupLaptop.svelte";
 </script>
 
 <MockupLaptop />

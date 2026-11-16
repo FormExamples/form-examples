@@ -1,0 +1,49 @@
+<!-- contents-nav-spy.fixture.html -->
+<!-- Minimal real-browser harness for contents-nav-spy.test.js: a tall page with
+     a fixed contents nav and four sections (the last one short, so it can never
+     reach the activation line). Not a shipped component fixture. The test
+     injects contents-nav-spy.js as an inline classic script (Chrome refuses a
+     module import between file:// URLs) and calls window.__setup. -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      body { margin: 0; }
+      nav { position: fixed; top: 0; left: 0; width: 12rem; }
+      main { margin-left: 13rem; }
+      section { height: 900px; }
+      section#last { height: 200px; }
+      html { scroll-behavior: auto; }
+    </style>
+  </head>
+  <body>
+    <nav class="contents-nav" aria-label="On this page">
+      <ol>
+        <li><a href="#intro">Introduction</a></li>
+        <li><a href="#usage">Usage</a>
+          <ol><li><a href="#usage-details">Details</a></li></ol>
+        </li>
+        <li><a href="#api">API</a></li>
+        <li><a href="#last">Last</a></li>
+      </ol>
+    </nav>
+    <main>
+      <section id="intro"><h2>Introduction</h2></section>
+      <section id="usage"><h2>Usage</h2><div id="usage-details" style="margin-top:400px"><h3>Details</h3></div></section>
+      <section id="api"><h2>API</h2></section>
+      <section id="last"><h2>Last</h2></section>
+    </main>
+    <script>
+      window.__setup = (startScrollspy) => {
+        const params = new URLSearchParams(window.location.search);
+        window.__changes = [];
+        window.__stop = startScrollspy(document.querySelector(".contents-nav"), {
+          offset: params.has("offset") ? Number(params.get("offset")) : 0,
+          current: params.get("current") || "true",
+          onChange: (id) => window.__changes.push(id),
+        });
+      };
+    </script>
+  </body>
+</html>

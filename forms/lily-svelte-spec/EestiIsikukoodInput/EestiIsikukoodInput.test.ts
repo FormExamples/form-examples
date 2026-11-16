@@ -54,7 +54,9 @@ describe("EestiIsikukoodInput", () => {
     });
 
     test("passes through additional HTML attributes", () => {
-        render(Subject, { props: { label: "Personal Identification Code", "data-testid": "subject" } });
+        render(Subject, {
+            props: { label: "Personal Identification Code", "data-testid": "subject" },
+        });
 
         const input = screen.getByTestId("subject");
         expect(input).toBeTruthy();

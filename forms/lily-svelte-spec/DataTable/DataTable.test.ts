@@ -39,7 +39,9 @@ describe("DataTable", () => {
     });
 
     test("renders caption when provided", () => {
-        render(Subject, { props: { label: "Users", caption: "User list", children: rowSnippet() } });
+        render(Subject, {
+            props: { label: "Users", caption: "User list", children: rowSnippet() },
+        });
         const table = screen.getByRole("grid");
         const cap = table.querySelector("caption");
         expect(cap).toBeTruthy();

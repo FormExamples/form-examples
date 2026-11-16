@@ -4,7 +4,7 @@ import Person from "./Person.svelte";
 
 describe("Person", () => {
     test("renders with content", () => {
-        render(Person, { props: { label: "Test" } });
+        render(Person, { props: { label: "Test" } as any });
         const el = screen.getByLabelText("Test");
         expect(el).toBeTruthy();
         expect(el.getAttribute("class")).toContain("person");

@@ -4,16 +4,21 @@
   Description: a button that toggles between pressed and unpressed states
   HTML tag: <button>
   CSS class: toggle-button
-  Keyboard: Tab to focus, Enter or Space to activate
-  Accessibility: Implicit button role, aria-label for accessible name, aria-pressed for toggle state
+  Keyboard: Tab to focus, Space or Enter toggles (native button activation)
+  Accessibility: a native button with aria-pressed for the state (the WAI-ARIA toggle button pattern), aria-label for accessible name
   Usage:
-    <button class="toggle-button" aria-label="Example">
-      ...
+    <button
+      class="toggle-button"
+      type="button"
+      aria-label=""
+      aria-pressed="false"
+    >
     </button>
 -->
 
 <button
   class="toggle-button"
+  type="button"
   aria-label=""
   aria-pressed="false"
 >
@@ -22,12 +27,12 @@
 
 <script>
   // ToggleButton behavior
-  (function() {
-    'use strict';
-    document.querySelectorAll('.toggle-button').forEach(function(el) {
-      el.addEventListener('click', function() {
-        var pressed = el.getAttribute('aria-pressed') === 'true';
-        el.setAttribute('aria-pressed', String(!pressed));
+  (function () {
+    "use strict";
+    document.querySelectorAll(".toggle-button").forEach(function (el) {
+      el.addEventListener("click", function () {
+        if (el.disabled) return;
+        el.setAttribute("aria-pressed", String(el.getAttribute("aria-pressed") !== "true"));
       });
     });
   })();

@@ -9,8 +9,8 @@
     //
     // Props:
     //   className — string, optional. CSS class name.
-    //   label — string, default "AI". Accessible name via aria-label.
-    //   text — string, default "AI". Visible text displayed inside the indicator.
+    //   label — string, optional, no default. Accessible name via aria-label.
+    //   text — string, required. No default: the words are yours. Visible text displayed inside the indicator.
     //   ...restProps — additional HTML attributes spread onto the <span>.
     //
     // Syntax:
@@ -39,14 +39,14 @@
 
     let {
         class: className = "",
-        label = "AI",
-        text = "AI",
+        label,
+        text,
         ...restProps
     }: {
         /** Accessible name for the indicator. */
         label?: string;
         /** Visible text displayed. */
-        text?: string;
+        text: string;
         [key: string]: unknown;
     } = $props();
 </script>
@@ -54,6 +54,7 @@
 <!-- AiLabel.svelte -->
 <span
     class={`ai-label ${className}`}
+    role="img"
     aria-label={label}
-    {...restProps}
->{text}</span>
+    {...restProps}>{text}</span
+>

@@ -1,8 +1,140 @@
 <!-- autosuggest.html -->
 <!-- Autosuggest component -->
-<div
-  class="autosuggest"
-  aria-label=""
->
-  <!-- Consumer provides content -->
+<!--
+  Description: a text input that proposes matching options as users type
+  HTML tag: <div>
+  CSS class: autosuggest
+  Keyboard: ArrowDown/ArrowUp open the list and move the highlight (wrapping); Home/End jump while open; Alt+ArrowDown opens without moving the highlight; Alt+ArrowUp closes; Enter chooses; Escape closes without choosing; blur closes
+  Accessibility: the input is role="combobox" with aria-autocomplete="list", aria-expanded, aria-controls (the listbox) and aria-activedescendant (the highlighted option, which carries aria-selected="true"); the list is hidden while closed
+  Usage:
+    <div class="autosuggest">
+      <input class="autosuggest-input" type="text" role="combobox" autocomplete="off"
+             aria-label="Fruit" aria-autocomplete="list" aria-expanded="false" aria-controls="fruit-list">
+      <ul class="autosuggest-list" role="listbox" id="fruit-list" aria-label="Fruit" hidden></ul>
+    </div>
+  The consumer listens for "input" on the input and renders the suggestions into the list as
+  <li class="autosuggest-option" role="option" data-value="apple">Apple</li>; the script opens the list while it
+  has options (ids are assigned when missing). Choosing an option writes its data-value (or its text) into the input
+  and fires a bubbling "autosuggest-select" event on the root with { value }.
+-->
+
+<div class="autosuggest">
+  <input
+    class="autosuggest-input"
+    type="text"
+    role="combobox"
+    autocomplete="off"
+    aria-label=""
+    aria-autocomplete="list"
+    aria-expanded="false"
+    aria-controls="autosuggest-list"
+  />
+  <ul
+    class="autosuggest-list"
+    role="listbox"
+    id="autosuggest-list"
+    aria-label=""
+    hidden
+  >
+    <!-- Consumer renders the suggestions as role="option" items -->
+  </ul>
 </div>
+
+<script>
+  // Autosuggest behavior
+  (function () {
+    "use strict";
+    document.querySelectorAll(".autosuggest").forEach(function (root) {
+      var input = root.querySelector('[role="combobox"]');
+      var list = root.querySelector('[role="listbox"]');
+      if (!input || !list) return;
+      var wanted = false;
+      var active = -1;
+      function options() {
+        return Array.prototype.slice.call(list.querySelectorAll('[role="option"]'));
+      }
+      function sync() {
+        var opts = options();
+        var open = wanted && opts.length > 0;
+        if (active >= opts.length) active = -1;
+        list.hidden = !open;
+        input.setAttribute("aria-expanded", String(open));
+        opts.forEach(function (o, i) {
+          if (!o.id) o.id = list.id + "-option-" + i;
+          o.setAttribute("aria-selected", String(open && i === active));
+        });
+        if (open && active >= 0) input.setAttribute("aria-activedescendant", opts[active].id);
+        else input.removeAttribute("aria-activedescendant");
+        return open;
+      }
+      function choose(o) {
+        var value = o.getAttribute("data-value");
+        input.value = value === null ? o.textContent.trim() : value;
+        wanted = false;
+        active = -1;
+        sync();
+        root.dispatchEvent(
+          new CustomEvent("autosuggest-select", { bubbles: true, detail: { value: input.value } }),
+        );
+      }
+      input.addEventListener("input", function () {
+        wanted = true;
+        active = -1;
+        sync();
+      });
+      input.addEventListener("keydown", function (e) {
+        if (e.isComposing) return; // The key belongs to the IME.
+        var opts = options();
+        var count = opts.length;
+        var open = !list.hidden;
+        if (e.key === "ArrowDown" && e.altKey) {
+          if (count === 0 || open) return;
+          wanted = true;
+        } else if (e.key === "ArrowUp" && e.altKey) {
+          if (!open) return;
+          wanted = false;
+          active = -1;
+        } else if (e.key === "ArrowDown") {
+          if (count === 0) return;
+          active = open ? (active + 1) % count : 0;
+          wanted = true;
+        } else if (e.key === "ArrowUp") {
+          if (count === 0) return;
+          active = open && active > 0 ? active - 1 : count - 1;
+          wanted = true;
+        } else if (e.key === "Home") {
+          if (!open) return;
+          active = 0;
+        } else if (e.key === "End") {
+          if (!open) return;
+          active = count - 1;
+        } else if (e.key === "Enter") {
+          if (!open || active < 0) return;
+          e.preventDefault();
+          choose(opts[active]);
+          return;
+        } else if (e.key === "Escape") {
+          if (!open) return;
+          wanted = false;
+          active = -1;
+        } else return;
+        e.preventDefault();
+        sync();
+      });
+      input.addEventListener("blur", function () {
+        wanted = false;
+        active = -1;
+        sync();
+      });
+      // Keep focus in the input while an option is pressed, so a click can choose it.
+      list.addEventListener("mousedown", function (e) {
+        e.preventDefault();
+      });
+      list.addEventListener("click", function (e) {
+        var o = e.target.closest('[role="option"]');
+        if (o && list.contains(o)) choose(o);
+      });
+      new MutationObserver(sync).observe(list, { childList: true, subtree: true });
+    });
+  })();
+</script>

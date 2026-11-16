@@ -35,73 +35,76 @@ Place as a direct child of `GrailLayout`. The component itself provides the `com
 
 ```svelte
 <script lang="ts">
-    import GrailLayoutRightAside from "./GrailLayoutRightAside.svelte";
+  import GrailLayoutRightAside from "./GrailLayoutRightAside.svelte";
 </script>
 
 <GrailLayoutRightAside>
-    <aside aria-label="Related">
-        <h2>Related</h2>
-        <ul><li><a href="/r1">Related 1</a></li></ul>
-    </aside>
+  <aside aria-label="Related">
+    <h2>Related</h2>
+    <ul><li><a href="/r1">Related 1</a></li></ul>
+  </aside>
 </GrailLayoutRightAside>
 ```
 
 ```svelte
 <script lang="ts">
-    import GrailLayout from "../GrailLayout/GrailLayout.svelte";
-    import GrailLayoutCenterMain from "../GrailLayoutCenterMain/GrailLayoutCenterMain.svelte";
-    import GrailLayoutRightAside from "./GrailLayoutRightAside.svelte";
+  import GrailLayout from "../GrailLayout/GrailLayout.svelte";
+  import GrailLayoutCenterMain from "../GrailLayoutCenterMain/GrailLayoutCenterMain.svelte";
+  import GrailLayoutRightAside from "./GrailLayoutRightAside.svelte";
 </script>
 
 <GrailLayout>
-    <GrailLayoutCenterMain><main>Body</main></GrailLayoutCenterMain>
-    <GrailLayoutRightAside>
-        <aside>On this page...</aside>
-    </GrailLayoutRightAside>
+  <GrailLayoutCenterMain><main>Body</main></GrailLayoutCenterMain>
+  <GrailLayoutRightAside>
+    <aside>On this page...</aside>
+  </GrailLayoutRightAside>
 </GrailLayout>
 ```
 
 ```svelte
 <script lang="ts">
-    import GrailLayoutRightAside from "./GrailLayoutRightAside.svelte";
+  import GrailLayoutRightAside from "./GrailLayoutRightAside.svelte";
 </script>
 
-<GrailLayoutRightAside class="narrow-right" data-testid="grail-right">
-    <aside><p>Sponsored</p></aside>
+<GrailLayoutRightAside
+  class="narrow-right"
+  data-testid="grail-right"
+>
+  <aside><p>Sponsored</p></aside>
 </GrailLayoutRightAside>
 ```
 
 ```svelte
 <script lang="ts">
-    import GrailLayoutRightAside from "./GrailLayoutRightAside.svelte";
-    const onPage = [
-        { id: "intro", label: "Introduction" },
-        { id: "usage", label: "Usage" },
-    ];
+  import GrailLayoutRightAside from "./GrailLayoutRightAside.svelte";
+  const onPage = [
+    { id: "intro", label: "Introduction" },
+    { id: "usage", label: "Usage" },
+  ];
 </script>
 
 <GrailLayoutRightAside>
-    <aside aria-label="On this page">
-        <nav>
-            <ul>
-                {#each onPage as p}
-                    <li><a href={`#${p.id}`}>{p.label}</a></li>
-                {/each}
-            </ul>
-        </nav>
-    </aside>
+  <aside aria-label="On this page">
+    <nav>
+      <ul>
+        {#each onPage as p}
+          <li><a href={`#${p.id}`}>{p.label}</a></li>
+        {/each}
+      </ul>
+    </nav>
+  </aside>
 </GrailLayoutRightAside>
 ```
 
 ```svelte
 <script lang="ts">
-    import GrailLayoutRightAside from "./GrailLayoutRightAside.svelte";
+  import GrailLayoutRightAside from "./GrailLayoutRightAside.svelte";
 </script>
 
 <GrailLayoutRightAside hidden={false}>
-    <aside aria-label="Help">
-        <p>Need help? Contact support.</p>
-    </aside>
+  <aside aria-label="Help">
+    <p>Need help? Contact support.</p>
+  </aside>
 </GrailLayoutRightAside>
 ```
 

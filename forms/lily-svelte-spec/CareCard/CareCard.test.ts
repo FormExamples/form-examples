@@ -11,64 +11,76 @@ function textSnippet(text: string) {
 }
 
 describe("CareCard", () => {
-    test("renders as a region with heading", () => {
-        render(Subject, { props: {
-            heading: "Speak to a GP",
-            children: textSnippet("Advice content"),
-        }});
+    test("renders as a named group with heading", () => {
+        render(Subject, {
+            props: {
+                heading: "Speak to a GP",
+                children: textSnippet("Advice content"),
+            },
+        });
 
-        expect(screen.getByRole("region", { name: "Speak to a GP" })).toBeTruthy();
+        expect(screen.getByRole("group", { name: "Speak to a GP" })).toBeTruthy();
         expect(screen.getByRole("heading", { name: "Speak to a GP" })).toBeTruthy();
     });
 
     test("defaults to non-urgent type", () => {
-        render(Subject, { props: {
-            heading: "Advice",
-            "data-testid": "card",
-            children: textSnippet("Content"),
-        }});
+        render(Subject, {
+            props: {
+                heading: "Advice",
+                "data-testid": "card",
+                children: textSnippet("Content"),
+            },
+        });
 
         expect(screen.getByTestId("card").getAttribute("data-type")).toBe("non-urgent");
     });
 
     test("applies urgent type", () => {
-        render(Subject, { props: {
-            type: "urgent",
-            heading: "Urgent",
-            "data-testid": "card",
-            children: textSnippet("Content"),
-        }});
+        render(Subject, {
+            props: {
+                type: "urgent",
+                heading: "Urgent",
+                "data-testid": "card",
+                children: textSnippet("Content"),
+            },
+        });
 
         expect(screen.getByTestId("card").getAttribute("data-type")).toBe("urgent");
     });
 
     test("applies immediate type", () => {
-        render(Subject, { props: {
-            type: "immediate",
-            heading: "Call 999",
-            "data-testid": "card",
-            children: textSnippet("Content"),
-        }});
+        render(Subject, {
+            props: {
+                type: "immediate",
+                heading: "Call 999",
+                "data-testid": "card",
+                children: textSnippet("Content"),
+            },
+        });
 
         expect(screen.getByTestId("card").getAttribute("data-type")).toBe("immediate");
     });
 
     test("uses label prop for aria-label when provided", () => {
-        render(Subject, { props: {
-            heading: "GP advice",
-            label: "Non-urgent care advice",
-            children: textSnippet("Content"),
-        }});
+        render(Subject, {
+            props: {
+                heading: "GP advice",
+                label: "Non-urgent care advice",
+                children: textSnippet("Content"),
+            },
+        });
 
-        expect(screen.getByRole("region", { name: "Non-urgent care advice" })).toBeTruthy();
+        expect(screen.getByRole("group", { name: "Non-urgent care advice" })).toBeTruthy();
     });
 
     test("passes through additional HTML attributes", () => {
-        render(Subject, { props: {
-            heading: "Test",
-            "data-testid": "care",
-            children: textSnippet("Content"),
-        }});
+        render(Subject, {
+            props: {
+                heading: "Test",
+                "data-testid": "care",
+                children: textSnippet("Content"),
+            },
+        });
 
         expect(screen.getByTestId("care")).toBeTruthy();
     });

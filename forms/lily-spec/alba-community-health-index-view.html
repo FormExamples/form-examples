@@ -5,13 +5,12 @@
   HTML tag: <span>
   CSS class: alba-community-health-index-view
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
   Format: 10 digits encoding date of birth (DDMMYY) + two random digits + a sex digit (odd male, even female) + a Modulus-11 check digit
   Usage:
-    <span class="alba-community-health-index-view" aria-label="Community Health Index">value-here</span>
+    <span class="alba-community-health-index-view">value-here</span>
 -->
 
-<span
-  class="alba-community-health-index-view"
-  aria-label="Community Health Index"
-></span>
+<span class="alba-community-health-index-view"
+  ><span class="screen-reader-span">Community Health Index </span></span
+>

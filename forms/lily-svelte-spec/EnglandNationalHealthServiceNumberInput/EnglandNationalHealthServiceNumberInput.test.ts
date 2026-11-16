@@ -15,7 +15,9 @@ describe("EnglandNationalHealthServiceNumberInput", () => {
         render(Subject, { props: { label: "National Health Service Number" } });
 
         const input = screen.getByLabelText("National Health Service Number");
-        expect(input.getAttribute("class")).toContain("england-national-health-service-number-input");
+        expect(input.getAttribute("class")).toContain(
+            "england-national-health-service-number-input",
+        );
     });
 
     test("has autocomplete off", () => {
@@ -54,7 +56,9 @@ describe("EnglandNationalHealthServiceNumberInput", () => {
     });
 
     test("passes through additional HTML attributes", () => {
-        render(Subject, { props: { label: "National Health Service Number", "data-testid": "subject" } });
+        render(Subject, {
+            props: { label: "National Health Service Number", "data-testid": "subject" },
+        });
 
         const input = screen.getByTestId("subject");
         expect(input).toBeTruthy();

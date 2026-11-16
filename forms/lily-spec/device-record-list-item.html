@@ -1,0 +1,29 @@
+<!-- device-record-list-item.html -->
+<!-- DeviceRecordListItem component -->
+<!--
+  Description: one medical device in a device record list, with its status and when it was used
+  HTML tag: <li>
+  CSS class: device-record-list-item (parts: -device, -status, -timing)
+  Spec: spec/healthcare-ui (tasks.md P28-T3)
+  Attributes: data-status (active, completed, entered-in-error, intended, stopped, on-hold). Each status is also text, in the consumer's words; a part with no text is left out.
+    Dates are <time datetime>.
+-->
+
+<ul
+  class="device-record-list"
+  data-status="known"
+  aria-label="Medical devices"
+>
+  <li
+    class="device-record-list-item"
+    data-status="active"
+  >
+    <span class="device-record-list-item-device">Cardiac pacemaker</span>
+    <span class="device-record-list-item-status">In use</span>
+    <time
+      class="device-record-list-item-timing"
+      datetime="2021-02-08"
+      >Since 8 Feb 2021</time
+    >
+  </li>
+</ul>

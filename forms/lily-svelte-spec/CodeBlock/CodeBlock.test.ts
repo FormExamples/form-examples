@@ -4,7 +4,7 @@ import CodeBlock from "./CodeBlock.svelte";
 
 describe("CodeBlock", () => {
     test("renders with content", () => {
-        render(CodeBlock, { props: { label: "Test" } });
+        render(CodeBlock, { props: { label: "Test" } as any });
         const el = screen.getByLabelText("Test");
         expect(el).toBeTruthy();
         expect(el.getAttribute("class")).toContain("code-block");

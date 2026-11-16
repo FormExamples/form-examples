@@ -31,6 +31,9 @@
 </script>
 
 <!-- GrailLayoutCenterMain.svelte -->
-<main class={`grail-layout-center-main ${className}`} {...restProps}>
+<main
+    class={`grail-layout-center-main ${className}`}
+    {...restProps}
+>
     {@render children?.()}
 </main>

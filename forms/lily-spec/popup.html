@@ -4,29 +4,107 @@
   Description: a temporary overlay that appears above page content
   HTML tag: <div>
   CSS class: popup
-  Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Popover API: the popup is a <div popover="auto" role="dialog">. The browser
+    puts it in the top layer while open and closes it on Escape and on a click
+    outside it (light dismiss). A trigger button names it with
+    command="toggle-popover" commandfor="{id}" (Chrome 135, Firefox 144,
+    Safari 26.2) and popovertarget="{id}" (Chrome 114, Firefox 125, Safari 17,
+    used where command is not supported), so it opens with no script.
+  Keyboard: Enter or Space on the trigger toggles it; Escape closes it.
+  Accessibility: role="dialog" with aria-label for the accessible name;
+    aria-haspopup="dialog" on the trigger. The browser exposes the trigger's
+    expanded state from popovertarget; the script keeps an explicit
+    aria-expanded in step when it runs.
   Usage:
-    <div class="popup" aria-label="Example">
-      ...
+    <button type="button" aria-haspopup="dialog" aria-controls="popup-1"
+            command="toggle-popover" commandfor="popup-1" popovertarget="popup-1">
+      … consumer trigger text …
+    </button>
+    <div class="popup" id="popup-1" popover="auto" role="dialog" aria-label="…">
+      … consumer content …
     </div>
 -->
 
+<button
+  type="button"
+  aria-haspopup="dialog"
+  aria-controls="popup-1"
+  command="toggle-popover"
+  commandfor="popup-1"
+  popovertarget="popup-1"
+>
+  <!-- Consumer provides trigger text -->
+</button>
+
 <div
   class="popup"
+  id="popup-1"
+  popover="auto"
+  role="dialog"
   aria-label=""
-  data-open="false"
 >
   <!-- Consumer provides content -->
 </div>
 
 <script>
   // Popup behavior
-  (function() {
-    'use strict';
-    // Popup: consumer implements interactive behavior
-    document.querySelectorAll('.popup').forEach(function(el) {
-      // Interactive behavior initialization
+  // Opening, closing, Escape and light dismiss are the browser's: popover="auto"
+  // and a trigger with command="toggle-popover" commandfor (or popovertarget)
+  // need no script. This script only (1) keeps aria-expanded on each trigger in
+  // step with the panel's toggle event and (2) where the Popover API is missing
+  // (browsers before Chrome 114, Firefox 125, Safari 17) falls back to the
+  // hidden attribute, a click toggle and Escape. Pure vanilla JavaScript.
+  (function () {
+    "use strict";
+
+    var native = typeof HTMLElement.prototype.showPopover === "function";
+
+    document.querySelectorAll("div.popup").forEach(function (panel) {
+      if (!panel.id) return;
+      var triggers = Array.prototype.slice.call(
+        document.querySelectorAll(
+          '[commandfor="' + panel.id + '"], [popovertarget="' + panel.id + '"]'
+        )
+      ).filter(function (t) {
+        var command = t.getAttribute("command");
+        return !command || command === "toggle-popover";
+      });
+
+      function setExpanded(open) {
+        triggers.forEach(function (t) {
+          t.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+      }
+
+      if (native) {
+        setExpanded(panel.matches(":popover-open"));
+        panel.addEventListener("toggle", function (event) {
+          setExpanded(event.newState === "open");
+        });
+        return;
+      }
+
+      // Fallback: no Popover API.
+      panel.removeAttribute("popover");
+      panel.setAttribute("hidden", "");
+      setExpanded(false);
+      function show(open) {
+        if (open) panel.removeAttribute("hidden");
+        else panel.setAttribute("hidden", "");
+        setExpanded(open);
+      }
+      triggers.forEach(function (t) {
+        t.addEventListener("click", function () {
+          if (t.disabled) return;
+          show(panel.hasAttribute("hidden"));
+        });
+      });
+      panel.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && !panel.hasAttribute("hidden")) {
+          show(false);
+          if (triggers[0]) triggers[0].focus();
+        }
+      });
     });
   })();
 </script>

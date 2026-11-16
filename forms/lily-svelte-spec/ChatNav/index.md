@@ -10,7 +10,7 @@ See [components/chat-nav/index.md](../../../components/chat-nav/index.md) for th
 
 ```svelte
 <script lang="ts">
-    import ChatNav from "./ChatNav.svelte";
+  import ChatNav from "./ChatNav.svelte";
 </script>
 
 <ChatNav />

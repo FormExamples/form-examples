@@ -4,9 +4,10 @@
   Description: a Gantt chart table interactive grid data cell for planning schedule visualization
   HTML tag: <td> wrapped in <table><tr>
   CSS class: gantt-table-td
+  Keyboard: none; not interactive, and any interactive children handle their own keys
   Accessibility: aria-label for accessible name
 -->
 
-<table><tr><td class="gantt-table-td" aria-label="Example">
+<table><tr><td class="gantt-table-td" role="gridcell" aria-label="Example">
     <!-- Consumer provides child content -->
 </td></tr></table>

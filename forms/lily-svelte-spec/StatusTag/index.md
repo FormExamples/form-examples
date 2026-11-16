@@ -10,7 +10,7 @@ See [components/status-tag/index.md](../../../components/status-tag/index.md) fo
 
 ```svelte
 <script lang="ts">
-    import StatusTag from "./StatusTag.svelte";
+  import StatusTag from "./StatusTag.svelte";
 </script>
 
 <StatusTag />

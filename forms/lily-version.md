@@ -12,8 +12,8 @@ model.
 | Field            | Value                                                                  |
 |------------------|------------------------------------------------------------------------|
 | Repository       | `lilydesignsystem/lily-design-system` (subdir `lily-design-system-html-headless`) |
-| Pinned commit    | `a89961e8f`                                                              |
-| Date pinned      | 2026-08-31                                                             |
+| Pinned commit    | `a6cb8fe87`                                                              |
+| Date pinned      | 2026-11-16                                                             |
 | Snapshot         | [`lily-spec/`](lily-spec/) — one file per component spec               |
 
 This pin is the contract our forms build against. Newer Lily HTML commits

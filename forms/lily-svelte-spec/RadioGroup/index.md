@@ -48,13 +48,31 @@ import RadioGroup from './RadioGroup.svelte';
 
 ```svelte
 <script lang="ts">
-  import RadioGroup from './RadioGroup.svelte';
+  import RadioGroup from "./RadioGroup.svelte";
 </script>
 
 <RadioGroup label="Size">
-  <label><input type="radio" name="size" value="s" /> Small</label>
-  <label><input type="radio" name="size" value="m" /> Medium</label>
-  <label><input type="radio" name="size" value="l" /> Large</label>
+  <label
+    ><input
+      type="radio"
+      name="size"
+      value="s"
+    /> Small</label
+  >
+  <label
+    ><input
+      type="radio"
+      name="size"
+      value="m"
+    /> Medium</label
+  >
+  <label
+    ><input
+      type="radio"
+      name="size"
+      value="l"
+    /> Large</label
+  >
 </RadioGroup>
 ```
 
@@ -62,14 +80,27 @@ import RadioGroup from './RadioGroup.svelte';
 
 ```svelte
 <script lang="ts">
-  import RadioGroup from './RadioGroup.svelte';
-  import RadioInput from '../RadioInput/RadioInput.svelte';
+  import RadioGroup from "./RadioGroup.svelte";
+  import RadioInput from "../RadioInput/RadioInput.svelte";
 </script>
 
 <RadioGroup label="Shipping method">
-  <RadioInput label="Standard" name="shipping" value="standard" checked />
-  <RadioInput label="Express" name="shipping" value="express" />
-  <RadioInput label="Overnight" name="shipping" value="overnight" />
+  <RadioInput
+    label="Standard"
+    name="shipping"
+    value="standard"
+    checked
+  />
+  <RadioInput
+    label="Express"
+    name="shipping"
+    value="express"
+  />
+  <RadioInput
+    label="Overnight"
+    name="shipping"
+    value="overnight"
+  />
 </RadioGroup>
 ```
 
@@ -77,14 +108,28 @@ import RadioGroup from './RadioGroup.svelte';
 
 ```svelte
 <script lang="ts">
-  import RadioGroup from './RadioGroup.svelte';
+  import RadioGroup from "./RadioGroup.svelte";
 
   let choice = $state("yes");
 </script>
 
 <RadioGroup label="Subscribe to newsletter?">
-  <label><input type="radio" name="sub" value="yes" bind:group={choice} /> Yes</label>
-  <label><input type="radio" name="sub" value="no" bind:group={choice} /> No</label>
+  <label
+    ><input
+      type="radio"
+      name="sub"
+      value="yes"
+      bind:group={choice}
+    /> Yes</label
+  >
+  <label
+    ><input
+      type="radio"
+      name="sub"
+      value="no"
+      bind:group={choice}
+    /> No</label
+  >
 </RadioGroup>
 <p>You chose: {choice}</p>
 ```
@@ -93,20 +138,26 @@ import RadioGroup from './RadioGroup.svelte';
 
 ```svelte
 <script lang="ts">
-  import RadioGroup from './RadioGroup.svelte';
+  import RadioGroup from "./RadioGroup.svelte";
 
   const options = [
-    { value: 's', label: 'Small' },
-    { value: 'm', label: 'Medium' },
-    { value: 'l', label: 'Large' },
+    { value: "s", label: "Small" },
+    { value: "m", label: "Medium" },
+    { value: "l", label: "Large" },
   ];
-  let size = $state('m');
+  let size = $state("m");
 </script>
 
 <RadioGroup label="Size">
   {#each options as o}
     <label>
-      <input type="radio" name="size" value={o.value} bind:group={size} /> {o.label}
+      <input
+        type="radio"
+        name="size"
+        value={o.value}
+        bind:group={size}
+      />
+      {o.label}
     </label>
   {/each}
 </RadioGroup>
@@ -116,12 +167,29 @@ import RadioGroup from './RadioGroup.svelte';
 
 ```svelte
 <script lang="ts">
-  import RadioGroup from './RadioGroup.svelte';
+  import RadioGroup from "./RadioGroup.svelte";
 </script>
 
-<RadioGroup label="Region" disabled>
-  <label><input type="radio" name="region" value="eu" disabled /> EU</label>
-  <label><input type="radio" name="region" value="us" disabled /> US</label>
+<RadioGroup
+  label="Region"
+  disabled
+>
+  <label
+    ><input
+      type="radio"
+      name="region"
+      value="eu"
+      disabled
+    /> EU</label
+  >
+  <label
+    ><input
+      type="radio"
+      name="region"
+      value="us"
+      disabled
+    /> US</label
+  >
 </RadioGroup>
 ```
 

@@ -33,25 +33,28 @@ Import the component and bind a string value in `YYYY-MM-DDThh:mm` format.
 
 ```svelte
 <script lang="ts">
-    import DateTimeLocalInput from "./DateTimeLocalInput.svelte";
-    let when = $state("");
+  import DateTimeLocalInput from "./DateTimeLocalInput.svelte";
+  let when = $state("");
 </script>
 
-<DateTimeLocalInput label="Event start" bind:value={when} />
+<DateTimeLocalInput
+  label="Event start"
+  bind:value={when}
+/>
 ```
 
 ## Props
 
-| Prop        | Type      | Default     | Description                                        |
-| ----------- | --------- | ----------- | -------------------------------------------------- |
-| `class`     | `string`  | `""`        | CSS class name appended to the base class.        |
-| `label`     | `string`  | required    | Accessible name applied via `aria-label`.          |
-| `value`     | `string`  | `""`        | Bindable datetime string (`YYYY-MM-DDThh:mm`).     |
-| `min`       | `string`  | `undefined` | Minimum allowed datetime.                          |
-| `max`       | `string`  | `undefined` | Maximum allowed datetime.                          |
-| `required`  | `boolean` | `false`     | Whether the input is required.                     |
-| `disabled`  | `boolean` | `false`     | Whether the input is disabled.                     |
-| `...rest`   | `unknown` | —           | Additional HTML attributes spread onto the input. |
+| Prop       | Type      | Default     | Description                                       |
+| ---------- | --------- | ----------- | ------------------------------------------------- |
+| `class`    | `string`  | `""`        | CSS class name appended to the base class.        |
+| `label`    | `string`  | required    | Accessible name applied via `aria-label`.         |
+| `value`    | `string`  | `""`        | Bindable datetime string (`YYYY-MM-DDThh:mm`).    |
+| `min`      | `string`  | `undefined` | Minimum allowed datetime.                         |
+| `max`      | `string`  | `undefined` | Maximum allowed datetime.                         |
+| `required` | `boolean` | `false`     | Whether the input is required.                    |
+| `disabled` | `boolean` | `false`     | Whether the input is disabled.                    |
+| `...rest`  | `unknown` | —           | Additional HTML attributes spread onto the input. |
 
 ## Usage
 
@@ -59,11 +62,14 @@ Import the component and bind a string value in `YYYY-MM-DDThh:mm` format.
 
 ```svelte
 <script lang="ts">
-    import DateTimeLocalInput from "./DateTimeLocalInput.svelte";
-    let start = $state("");
+  import DateTimeLocalInput from "./DateTimeLocalInput.svelte";
+  let start = $state("");
 </script>
 
-<DateTimeLocalInput label="Event start" bind:value={start} />
+<DateTimeLocalInput
+  label="Event start"
+  bind:value={start}
+/>
 <p>Starts at: {start}</p>
 ```
 
@@ -71,15 +77,15 @@ Import the component and bind a string value in `YYYY-MM-DDThh:mm` format.
 
 ```svelte
 <script lang="ts">
-    import DateTimeLocalInput from "./DateTimeLocalInput.svelte";
-    let appointment = $state("");
+  import DateTimeLocalInput from "./DateTimeLocalInput.svelte";
+  let appointment = $state("");
 </script>
 
 <DateTimeLocalInput
-    label="Appointment"
-    bind:value={appointment}
-    min="2026-01-01T08:00"
-    max="2026-12-31T18:00"
+  label="Appointment"
+  bind:value={appointment}
+  min="2026-01-01T08:00"
+  max="2026-12-31T18:00"
 />
 ```
 
@@ -87,13 +93,17 @@ Import the component and bind a string value in `YYYY-MM-DDThh:mm` format.
 
 ```svelte
 <script lang="ts">
-    import DateTimeLocalInput from "./DateTimeLocalInput.svelte";
-    let departure = $state("");
+  import DateTimeLocalInput from "./DateTimeLocalInput.svelte";
+  let departure = $state("");
 </script>
 
 <form>
-    <DateTimeLocalInput label="Departure time" bind:value={departure} required />
-    <button type="submit">Book</button>
+  <DateTimeLocalInput
+    label="Departure time"
+    bind:value={departure}
+    required
+  />
+  <button type="submit">Book</button>
 </form>
 ```
 
@@ -101,22 +111,26 @@ Import the component and bind a string value in `YYYY-MM-DDThh:mm` format.
 
 ```svelte
 <script lang="ts">
-    import DateTimeLocalInput from "./DateTimeLocalInput.svelte";
-    let meeting = $state("");
-    let isLocked = $state(true);
+  import DateTimeLocalInput from "./DateTimeLocalInput.svelte";
+  let meeting = $state("");
+  let isLocked = $state(true);
 </script>
 
-<DateTimeLocalInput label="Meeting" bind:value={meeting} disabled={isLocked} />
+<DateTimeLocalInput
+  label="Meeting"
+  bind:value={meeting}
+  disabled={isLocked}
+/>
 ```
 
 ### 5. With name and custom class
 
 ```svelte
 <DateTimeLocalInput
-    label="Deadline"
-    bind:value={deadline}
-    name="deadline"
-    class="deadline-input"
+  label="Deadline"
+  bind:value={deadline}
+  name="deadline"
+  class="deadline-input"
 />
 ```
 

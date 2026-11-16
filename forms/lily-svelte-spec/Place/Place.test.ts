@@ -4,7 +4,7 @@ import Place from "./Place.svelte";
 
 describe("Place", () => {
     test("renders with content", () => {
-        render(Place, { props: { label: "Test" } });
+        render(Place, { props: { label: "Test" } as any });
         const el = screen.getByLabelText("Test");
         expect(el).toBeTruthy();
         expect(el.getAttribute("class")).toContain("place");

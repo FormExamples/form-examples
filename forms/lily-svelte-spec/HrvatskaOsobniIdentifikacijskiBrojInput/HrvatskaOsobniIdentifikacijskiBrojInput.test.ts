@@ -15,7 +15,9 @@ describe("HrvatskaOsobniIdentifikacijskiBrojInput", () => {
         render(Subject, { props: { label: "Personal Identification Number" } });
 
         const input = screen.getByLabelText("Personal Identification Number");
-        expect(input.getAttribute("class")).toContain("hrvatska-osobni-identifikacijski-broj-input");
+        expect(input.getAttribute("class")).toContain(
+            "hrvatska-osobni-identifikacijski-broj-input",
+        );
     });
 
     test("has autocomplete off", () => {
@@ -54,7 +56,9 @@ describe("HrvatskaOsobniIdentifikacijskiBrojInput", () => {
     });
 
     test("passes through additional HTML attributes", () => {
-        render(Subject, { props: { label: "Personal Identification Number", "data-testid": "subject" } });
+        render(Subject, {
+            props: { label: "Personal Identification Number", "data-testid": "subject" },
+        });
 
         const input = screen.getByTestId("subject");
         expect(input).toBeTruthy();

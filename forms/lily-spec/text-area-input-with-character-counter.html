@@ -4,38 +4,41 @@
   Description: a multi-line text area with a caption below that is a character counter
   HTML tag: <div>
   CSS class: text-area-input-with-character-counter
-  Keyboard: Standard text-area-input behavior
-  Accessibility: aria-label, aria-describedby links text-area-input to counter, aria-live="polite" on counter
-  Usage:
-    <div class="text-area-input-with-character-counter">
-      <textarea aria-label="Feedback" aria-describedby="counter-1" maxlength="500"></textarea>
-      <span id="counter-1" aria-live="polite">0 of 500 characters</span>
-    </div>
+  Keyboard: Standard textarea behavior
+  Accessibility: aria-label names the textarea; aria-describedby links it to the counter, whose visible count is
+    aria-hidden and whose visually hidden role="status" (.screen-reader-span) takes the same text once typing pauses,
+    so a run of keystrokes is announced once.
+  Attributes on the root: data-counter-template (default "{count} / {max}": the numbers alone, no English),
+    data-announce-delay (milliseconds of quiet before the status takes the count, default 1000).
+  Usage (see the markup below)
 -->
 
-<div
-  class="text-area-input-with-character-counter"
->
-  <!-- Consumer provides content -->
+<div class="text-area-input-with-character-counter" data-counter-template="{count} / {max}">
+  <textarea aria-label="Feedback" aria-describedby="text-area-input-with-character-counter-1" maxlength="500"></textarea>
+  <span id="text-area-input-with-character-counter-1"><span aria-hidden="true">0 / 500</span><span class="screen-reader-span" role="status">0 / 500</span></span>
 </div>
 
 <script>
-  // TextAreaInputWithCharacterCounter behavior
-  (function() {
+  // TextAreaInputWithCharacterCounter behavior: the visible count follows the textarea at once; the status only after a
+  // pause in typing.
+  (function () {
     'use strict';
-    document.querySelectorAll('.text-area-input-with-character-counter').forEach(function(el) {
-      var text-area-input = el.querySelector('text-area-input');
-      var counter = el.querySelector('[aria-live]');
-      if (text-area-input && counter) {
-        var maxLength = parseInt(text-area-input.getAttribute('maxlength'), 10) || 0;
-        var template = el.getAttribute('data-counter-template') || '{count} of {max} characters';
-        function updateCounter() {
-          var count = text-area-input.value.length;
-          counter.textContent = template.replace('{count}', count).replace('{max}', maxLength);
-        }
-        text-area-input.addEventListener('input', updateCounter);
-        updateCounter();
-      }
+    document.querySelectorAll('.text-area-input-with-character-counter').forEach(function (el) {
+      var field = el.querySelector('textarea');
+      var counter = field && document.getElementById(field.getAttribute('aria-describedby'));
+      var shown = counter && counter.querySelector('[aria-hidden="true"]');
+      var status = counter && counter.querySelector('[role="status"]');
+      if (!field || !shown || !status) return;
+      var maxLength = Number(field.getAttribute('maxlength')) || 0;
+      var template = el.getAttribute('data-counter-template') || '{count} / {max}';
+      var delay = Number(el.getAttribute('data-announce-delay') || 1000);
+      var timer;
+      field.addEventListener('input', function () {
+        var text = template.replace('{count}', String(field.value.length)).replace('{max}', String(maxLength));
+        shown.textContent = text;
+        clearTimeout(timer);
+        timer = setTimeout(function () { status.textContent = text; }, delay);
+      });
     });
   })();
 </script>

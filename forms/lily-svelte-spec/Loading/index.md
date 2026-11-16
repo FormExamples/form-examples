@@ -10,7 +10,7 @@ See [components/loading/index.md](../../../components/loading/index.md) for the 
 
 ```svelte
 <script lang="ts">
-    import Loading from "./Loading.svelte";
+  import Loading from "./Loading.svelte";
 </script>
 
 <Loading />

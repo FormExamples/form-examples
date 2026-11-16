@@ -2,19 +2,19 @@
     // GanttTableBody component
     //
     // The body section of a GanttTable, rendered as a <tbody> element.
-    // Contains GanttTableTR elements with task data cells.
+    // Contains GanttTableTr elements with task data cells.
     //
     // Props:
     //   className — string, optional. CSS class name.
-    //   children — Snippet, required. GanttTableTR elements with data cells.
+    //   children — Snippet, required. GanttTableTr elements with data cells.
     //   ...restProps — additional HTML attributes spread onto the <tbody>.
     //
     // Syntax:
     //   <GanttTableBody>
-    //     <GanttTableTR>
+    //     <GanttTableTr>
     //       <GanttTableTD>Design</GanttTableTD>
     //       <GanttTableTD>Jan 1</GanttTableTD>
-    //     </GanttTableTR>
+    //     </GanttTableTr>
     //   </GanttTableBody>
     //
     // Keyboard:
@@ -38,7 +38,7 @@
         children,
         ...restProps
     }: {
-        /** GanttTableTR elements with task data cells. */
+        /** GanttTableTr elements with task data cells. */
         children: Snippet;
         [key: string]: unknown;
     } = $props();

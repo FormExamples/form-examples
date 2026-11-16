@@ -51,13 +51,13 @@ Plain buttons:
 
 ```svelte
 <script lang="ts">
-    import TaskBar from "./TaskBar.svelte";
+  import TaskBar from "./TaskBar.svelte";
 </script>
 
 <TaskBar label="Tasks">
-    <button>New</button>
-    <button>Open</button>
-    <button>Save</button>
+  <button>New</button>
+  <button>Open</button>
+  <button>Save</button>
 </TaskBar>
 ```
 
@@ -65,14 +65,14 @@ With `TaskBarButton` (companion component lives in a sibling directory):
 
 ```svelte
 <script lang="ts">
-    import TaskBar from "./TaskBar.svelte";
-    import TaskBarButton from "../TaskBarButton/TaskBarButton.svelte";
+  import TaskBar from "./TaskBar.svelte";
+  import TaskBarButton from "../TaskBarButton/TaskBarButton.svelte";
 </script>
 
 <TaskBar label="Document actions">
-    <TaskBarButton onclick={() => {}}>New</TaskBarButton>
-    <TaskBarButton onclick={() => {}}>Open</TaskBarButton>
-    <TaskBarButton onclick={() => {}}>Save</TaskBarButton>
+  <TaskBarButton onclick={() => {}}>New</TaskBarButton>
+  <TaskBarButton onclick={() => {}}>Open</TaskBarButton>
+  <TaskBarButton onclick={() => {}}>Save</TaskBarButton>
 </TaskBar>
 ```
 
@@ -80,19 +80,21 @@ Dynamic list of actions:
 
 ```svelte
 <script lang="ts">
-    import TaskBar from "./TaskBar.svelte";
-    const actions = [
-        { id: "new", label: "New" },
-        { id: "open", label: "Open" },
-        { id: "save", label: "Save" },
-    ];
-    function run(id: string) { console.log("action", id); }
+  import TaskBar from "./TaskBar.svelte";
+  const actions = [
+    { id: "new", label: "New" },
+    { id: "open", label: "Open" },
+    { id: "save", label: "Save" },
+  ];
+  function run(id: string) {
+    console.log("action", id);
+  }
 </script>
 
 <TaskBar label="Tasks">
-    {#each actions as a}
-        <button onclick={() => run(a.id)}>{a.label}</button>
-    {/each}
+  {#each actions as a}
+    <button onclick={() => run(a.id)}>{a.label}</button>
+  {/each}
 </TaskBar>
 ```
 
@@ -100,13 +102,13 @@ With a disabled action:
 
 ```svelte
 <script lang="ts">
-    import TaskBar from "./TaskBar.svelte";
+  import TaskBar from "./TaskBar.svelte";
 </script>
 
 <TaskBar label="Editor tasks">
-    <button>Cut</button>
-    <button>Copy</button>
-    <button disabled>Paste</button>
+  <button>Cut</button>
+  <button>Copy</button>
+  <button disabled>Paste</button>
 </TaskBar>
 ```
 
@@ -114,13 +116,21 @@ Mixed button types (the arrow handler finds all focusable elements):
 
 ```svelte
 <script lang="ts">
-    import TaskBar from "./TaskBar.svelte";
+  import TaskBar from "./TaskBar.svelte";
 </script>
 
 <TaskBar label="Mixed">
-    <button>Run</button>
-    <a href="/help" tabindex="0">Help</a>
-    <div role="button" tabindex="0">Custom</div>
+  <button>Run</button>
+  <a
+    href="/help"
+    tabindex="0">Help</a
+  >
+  <div
+    role="button"
+    tabindex="0"
+  >
+    Custom
+  </div>
 </TaskBar>
 ```
 
@@ -131,6 +141,7 @@ Mixed button types (the arrow handler finds all focusable elements):
 - Consumers should ensure only one descendant has `tabindex="0"` at a time (roving tabindex) for WAI-ARIA conformance.
 
 References:
+
 - WAI-ARIA Toolbar Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/
 
 ## Related components

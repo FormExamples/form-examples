@@ -20,51 +20,61 @@ function htmlSnippet(html: string) {
 
 describe("ValidationList", () => {
     test("renders as a ul with the validation-list class", () => {
-        const { container } = render(Subject, { props: {
-            label: "Password requirements",
-            children: textSnippet("rules"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Password requirements",
+                children: textSnippet("rules"),
+            },
+        });
 
         const root = container.querySelector("ul.validation-list") as HTMLElement;
         expect(root).toBeTruthy();
     });
 
     test("applies aria-label", () => {
-        render(Subject, { props: {
-            label: "Password requirements",
-            children: textSnippet("rules"),
-        }});
+        render(Subject, {
+            props: {
+                label: "Password requirements",
+                children: textSnippet("rules"),
+            },
+        });
 
         const list = screen.getByRole("list", { name: "Password requirements" });
         expect(list.getAttribute("aria-label")).toBe("Password requirements");
     });
 
     test("applies aria-live=polite", () => {
-        const { container } = render(Subject, { props: {
-            label: "Rules",
-            children: textSnippet("x"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Rules",
+                children: textSnippet("x"),
+            },
+        });
 
         const root = container.querySelector("ul") as HTMLElement;
         expect(root.getAttribute("aria-live")).toBe("polite");
     });
 
     test("renders children content", () => {
-        const { container } = render(Subject, { props: {
-            label: "Rules",
-            children: htmlSnippet("<li>One</li><li>Two</li>"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Rules",
+                children: htmlSnippet("<li>One</li><li>Two</li>"),
+            },
+        });
 
         const items = container.querySelectorAll("li");
         expect(items.length).toBe(2);
     });
 
     test("appends consumer class to base class", () => {
-        const { container } = render(Subject, { props: {
-            label: "Rules",
-            class: "extra",
-            children: textSnippet("x"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Rules",
+                class: "extra",
+                children: textSnippet("x"),
+            },
+        });
 
         const root = container.querySelector("ul") as HTMLElement;
         expect(root.className).toContain("validation-list");

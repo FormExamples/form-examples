@@ -40,7 +40,7 @@ Choose a stable unique id (e.g. `fn1`). Place a superscript link in the main con
 
 ```svelte
 <script lang="ts">
-    import Footnote from "./Footnote.svelte";
+  import Footnote from "./Footnote.svelte";
 </script>
 
 <p>This claim is supported by research.<a href="#fn1"><sup>1</sup></a></p>
@@ -49,47 +49,51 @@ Choose a stable unique id (e.g. `fn1`). Place a superscript link in the main con
 
 ```svelte
 <script lang="ts">
-    import Footnote from "./Footnote.svelte";
+  import Footnote from "./Footnote.svelte";
 </script>
 
 <Footnote id="fn2">
-    <a href="#ref2">2.</a> Example, A. (2024).
-    <cite>Research Title</cite>. Journal Name.
+  <a href="#ref2">2.</a> Example, A. (2024).
+  <cite>Research Title</cite>. Journal Name.
 </Footnote>
 ```
 
 ```svelte
 <script lang="ts">
-    import Footnote from "./Footnote.svelte";
-    const notes = [
-        { id: "fn1", text: "Data retrieved 2026-01-01." },
-        { id: "fn2", text: "Adjusted for inflation." },
-    ];
+  import Footnote from "./Footnote.svelte";
+  const notes = [
+    { id: "fn1", text: "Data retrieved 2026-01-01." },
+    { id: "fn2", text: "Adjusted for inflation." },
+  ];
 </script>
 
 {#each notes as note}
-    <Footnote id={note.id}>{note.text}</Footnote>
+  <Footnote id={note.id}>{note.text}</Footnote>
 {/each}
 ```
 
 ```svelte
 <script lang="ts">
-    import Footnote from "./Footnote.svelte";
+  import Footnote from "./Footnote.svelte";
 </script>
 
-<Footnote id="fn-legal" class="legal-note" data-testid="legal">
-    <p>Subject to change without notice.</p>
+<Footnote
+  id="fn-legal"
+  class="legal-note"
+  data-testid="legal"
+>
+  <p>Subject to change without notice.</p>
 </Footnote>
 ```
 
 ```svelte
 <script lang="ts">
-    import Footnote from "./Footnote.svelte";
+  import Footnote from "./Footnote.svelte";
 </script>
 
 <article>
-    <p>Water boils at 100&deg;C at sea level<a href="#fn-boil"><sup>1</sup></a>.</p>
-    <Footnote id="fn-boil">At standard atmospheric pressure (101.325 kPa).</Footnote>
+  <p>Water boils at 100&deg;C at sea level<a href="#fn-boil"><sup>1</sup></a>.</p>
+  <Footnote id="fn-boil">At standard atmospheric pressure (101.325 kPa).</Footnote>
 </article>
 ```
 

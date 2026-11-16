@@ -43,7 +43,7 @@ A headless Svelte 5 component rendering an `<article>` landmark containing an op
 
 ```svelte
 <script lang="ts">
-  import FeatureCard from './FeatureCard.svelte';
+  import FeatureCard from "./FeatureCard.svelte";
 </script>
 
 <FeatureCard

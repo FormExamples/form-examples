@@ -2,19 +2,11 @@
 <!-- ReviewDate component -->
 <!--
   Description: a display of a content review date
-  HTML tag: <span>
+  HTML tag: <time>
   CSS class: review-date
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
-  Usage:
-    <span class="review-date" aria-label="Example">
-      ...
-    </span>
+  Accessibility: aria-label gives context; datetime is the ISO 8601 machine-readable date
+  Usage: replace the aria-label and datetime values and the visible text
 -->
 
-<span
-  class="review-date"
-  aria-label=""
->
-  <!-- Consumer provides text content -->
-</span>
+<time class="review-date" datetime="2026-10-06"><span class="screen-reader-span">Last reviewed </span>6 October 2026</time>

@@ -43,17 +43,17 @@ Place inside a `MedicalBanner` or `MedicalBannerBox`, pass a descriptive `label`
 
 ```svelte
 <script lang="ts">
-    import MedicalBanner from "../MedicalBanner/MedicalBanner.svelte";
-    import MedicalBannerBox from "../MedicalBannerBox/MedicalBannerBox.svelte";
-    import MedicalBannerBoxForDanger from "./MedicalBannerBoxForDanger.svelte";
+  import MedicalBanner from "../MedicalBanner/MedicalBanner.svelte";
+  import MedicalBannerBox from "../MedicalBannerBox/MedicalBannerBox.svelte";
+  import MedicalBannerBoxForDanger from "./MedicalBannerBoxForDanger.svelte";
 </script>
 
 <MedicalBanner label="Patient summary">
-    <MedicalBannerBox>
-        <MedicalBannerBoxForDanger label="Allergies">
-            <p>Penicillin, peanuts</p>
-        </MedicalBannerBoxForDanger>
-    </MedicalBannerBox>
+  <MedicalBannerBox>
+    <MedicalBannerBoxForDanger label="Allergies">
+      <p>Penicillin, peanuts</p>
+    </MedicalBannerBoxForDanger>
+  </MedicalBannerBox>
 </MedicalBanner>
 ```
 
@@ -61,11 +61,11 @@ Place inside a `MedicalBanner` or `MedicalBannerBox`, pass a descriptive `label`
 
 ```svelte
 <script lang="ts">
-    import MedicalBannerBoxForDanger from "./MedicalBannerBoxForDanger.svelte";
+  import MedicalBannerBoxForDanger from "./MedicalBannerBoxForDanger.svelte";
 </script>
 
 <MedicalBannerBoxForDanger label="Infection control">
-    <p>MRSA positive — isolation precautions required</p>
+  <p>MRSA positive — isolation precautions required</p>
 </MedicalBannerBoxForDanger>
 ```
 
@@ -73,21 +73,24 @@ Place inside a `MedicalBanner` or `MedicalBannerBox`, pass a descriptive `label`
 
 ```svelte
 <script lang="ts">
-    import MedicalBanner from "../MedicalBanner/MedicalBanner.svelte";
-    import MedicalBannerBox from "../MedicalBannerBox/MedicalBannerBox.svelte";
-    import MedicalBannerBoxForDanger from "./MedicalBannerBoxForDanger.svelte";
-    import MedicalBannerBoxForAdvice from "../MedicalBannerBoxForAdvice/MedicalBannerBoxForAdvice.svelte";
+  import MedicalBanner from "../MedicalBanner/MedicalBanner.svelte";
+  import MedicalBannerBox from "../MedicalBannerBox/MedicalBannerBox.svelte";
+  import MedicalBannerBoxForDanger from "./MedicalBannerBoxForDanger.svelte";
+  import MedicalBannerBoxForAdvice from "../MedicalBannerBoxForAdvice/MedicalBannerBoxForAdvice.svelte";
 </script>
 
-<MedicalBanner label="Record summary" type="warning">
-    <MedicalBannerBox>
-        <MedicalBannerBoxForDanger label="Reactions">
-            <p>Severe reaction to morphine</p>
-        </MedicalBannerBoxForDanger>
-        <MedicalBannerBoxForAdvice label="Contacts">
-            <p>On-call: Dr. Patel</p>
-        </MedicalBannerBoxForAdvice>
-    </MedicalBannerBox>
+<MedicalBanner
+  label="Record summary"
+  type="warning"
+>
+  <MedicalBannerBox>
+    <MedicalBannerBoxForDanger label="Reactions">
+      <p>Severe reaction to morphine</p>
+    </MedicalBannerBoxForDanger>
+    <MedicalBannerBoxForAdvice label="Contacts">
+      <p>On-call: Dr. Patel</p>
+    </MedicalBannerBoxForAdvice>
+  </MedicalBannerBox>
 </MedicalBanner>
 ```
 
@@ -95,19 +98,22 @@ Place inside a `MedicalBanner` or `MedicalBannerBox`, pass a descriptive `label`
 
 ```svelte
 <script lang="ts">
-    import MedicalBannerBoxForDanger from "./MedicalBannerBoxForDanger.svelte";
+  import MedicalBannerBoxForDanger from "./MedicalBannerBoxForDanger.svelte";
 </script>
 
-<MedicalBannerBoxForDanger class="danger-strong" label="DNACPR">
-    <p>Do not attempt CPR</p>
+<MedicalBannerBoxForDanger
+  class="danger-strong"
+  label="DNACPR"
+>
+  <p>Do not attempt CPR</p>
 </MedicalBannerBoxForDanger>
 
 <style>
-    :global(.danger-strong[data-type="danger"]) {
-        background: #fee2e2;
-        border-left: 4px solid #dc2626;
-        padding: 0.5rem;
-    }
+  :global(.danger-strong[data-type="danger"]) {
+    background: #fee2e2;
+    border-left: 4px solid #dc2626;
+    padding: 0.5rem;
+  }
 </style>
 ```
 
@@ -115,16 +121,16 @@ Place inside a `MedicalBanner` or `MedicalBannerBox`, pass a descriptive `label`
 
 ```svelte
 <script lang="ts">
-    import MedicalBannerBoxForDanger from "./MedicalBannerBoxForDanger.svelte";
-    let reactions = $state(["Penicillin", "Sulfa"]);
+  import MedicalBannerBoxForDanger from "./MedicalBannerBoxForDanger.svelte";
+  let reactions = $state(["Penicillin", "Sulfa"]);
 </script>
 
 <MedicalBannerBoxForDanger label="Drug reactions">
-    <ul>
-        {#each reactions as reaction}
-            <li>{reaction}</li>
-        {/each}
-    </ul>
+  <ul>
+    {#each reactions as reaction}
+      <li>{reaction}</li>
+    {/each}
+  </ul>
 </MedicalBannerBoxForDanger>
 ```
 

@@ -1,4 +1,7 @@
-<script module lang="ts">
+<script
+    module
+    lang="ts"
+>
     import { defineMeta } from "@storybook/addon-svelte-csf";
     import PaginationLink from "./PaginationLink.svelte";
     const { Story } = defineMeta({
@@ -7,8 +10,11 @@
     });
 </script>
 
-<Story name="Default" tags={["autodocs", "!dev"]}>
-    <PaginationLink label="PaginationLink example">
+<Story
+    name="Default"
+    tags={["autodocs", "!dev"]}
+>
+    <PaginationLink href="#example">
         <span>PaginationLink example</span>
     </PaginationLink>
 </Story>

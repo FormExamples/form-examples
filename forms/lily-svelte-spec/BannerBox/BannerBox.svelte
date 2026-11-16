@@ -57,6 +57,7 @@
 <!-- BannerBox.svelte -->
 <div
     class={`banner-box ${className}`}
+    role={label ? "group" : undefined}
     aria-label={label}
     {...restProps}
 >

@@ -34,15 +34,15 @@ A headless Svelte 5 component that renders `<div role="tabpanel" tabindex="0">`.
 
 ```svelte
 <script lang="ts">
-  import TabPanel from './TabPanel.svelte';
+  import TabPanel from "./TabPanel.svelte";
 
-  let current = $state('details');
+  let current = $state("details");
 </script>
 
 <TabPanel
   label="Details"
   labelledBy="tab-details"
-  selected={current === 'details'}
+  selected={current === "details"}
 >
   <p>Details content…</p>
 </TabPanel>

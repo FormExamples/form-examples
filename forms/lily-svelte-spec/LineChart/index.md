@@ -10,7 +10,7 @@ See [components/line-chart/index.md](../../../components/line-chart/index.md) fo
 
 ```svelte
 <script lang="ts">
-    import LineChart from "./LineChart.svelte";
+  import LineChart from "./LineChart.svelte";
 </script>
 
 <LineChart />

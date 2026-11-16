@@ -50,7 +50,10 @@ Import and bind `value`. Supply a translated `label`. Extend with placeholder/pa
   let name = $state("");
 </script>
 
-<TextInput label="Full name" bind:value={name} />
+<TextInput
+  label="Full name"
+  bind:value={name}
+/>
 ```
 
 ```svelte
@@ -60,7 +63,12 @@ Import and bind `value`. Supply a translated `label`. Extend with placeholder/pa
   let email = $state("");
 </script>
 
-<TextInput label="Email" bind:value={email} required placeholder="you@example.com" />
+<TextInput
+  label="Email"
+  bind:value={email}
+  required
+  placeholder="you@example.com"
+/>
 ```
 
 ```svelte
@@ -70,7 +78,11 @@ Import and bind `value`. Supply a translated `label`. Extend with placeholder/pa
   let notes = $state("Read-only");
 </script>
 
-<TextInput label="Notes" bind:value={notes} disabled />
+<TextInput
+  label="Notes"
+  bind:value={notes}
+  disabled
+/>
 ```
 
 ```svelte

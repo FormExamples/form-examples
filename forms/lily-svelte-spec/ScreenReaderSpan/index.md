@@ -10,7 +10,7 @@ See [components/screen-reader-span/index.md](../../../components/screen-reader-s
 
 ```svelte
 <script lang="ts">
-    import ScreenReaderSpan from "./ScreenReaderSpan.svelte";
+  import ScreenReaderSpan from "./ScreenReaderSpan.svelte";
 </script>
 
 <ScreenReaderSpan />

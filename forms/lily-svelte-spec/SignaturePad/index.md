@@ -46,11 +46,14 @@ Canvas drawing surface:
 
 ```svelte
 <script lang="ts">
-    import SignaturePad from "./SignaturePad.svelte";
+  import SignaturePad from "./SignaturePad.svelte";
 </script>
 
 <SignaturePad label="Sign here">
-    <canvas width="400" height="200"></canvas>
+  <canvas
+    width="400"
+    height="200"
+  ></canvas>
 </SignaturePad>
 ```
 
@@ -58,12 +61,18 @@ SVG surface:
 
 ```svelte
 <script lang="ts">
-    import SignaturePad from "./SignaturePad.svelte";
-    let path = $state("");
+  import SignaturePad from "./SignaturePad.svelte";
+  let path = $state("");
 </script>
 
 <SignaturePad label="Your signature">
-    <svg viewBox="0 0 400 200"><path d={path} stroke="black" fill="none" /></svg>
+  <svg viewBox="0 0 400 200"
+    ><path
+      d={path}
+      stroke="black"
+      fill="none"
+    /></svg
+  >
 </SignaturePad>
 ```
 
@@ -71,12 +80,15 @@ With consent text context:
 
 ```svelte
 <script lang="ts">
-    import SignaturePad from "./SignaturePad.svelte";
+  import SignaturePad from "./SignaturePad.svelte";
 </script>
 
 <p>I agree to the terms above.</p>
 <SignaturePad label="Sign to accept terms">
-    <canvas width="500" height="150"></canvas>
+  <canvas
+    width="500"
+    height="150"
+  ></canvas>
 </SignaturePad>
 ```
 
@@ -84,11 +96,17 @@ With custom class:
 
 ```svelte
 <script lang="ts">
-    import SignaturePad from "./SignaturePad.svelte";
+  import SignaturePad from "./SignaturePad.svelte";
 </script>
 
-<SignaturePad label="Signature" class="boxed">
-    <canvas width="400" height="200"></canvas>
+<SignaturePad
+  label="Signature"
+  class="boxed"
+>
+  <canvas
+    width="400"
+    height="200"
+  ></canvas>
 </SignaturePad>
 ```
 
@@ -96,16 +114,20 @@ Paired with a clear button:
 
 ```svelte
 <script lang="ts">
-    import SignaturePad from "./SignaturePad.svelte";
-    let canvas = $state<HTMLCanvasElement>();
-    function clear() {
-        const ctx = canvas?.getContext("2d");
-        if (ctx && canvas) ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
+  import SignaturePad from "./SignaturePad.svelte";
+  let canvas = $state<HTMLCanvasElement>();
+  function clear() {
+    const ctx = canvas?.getContext("2d");
+    if (ctx && canvas) ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
 </script>
 
 <SignaturePad label="Signature">
-    <canvas bind:this={canvas} width="400" height="200"></canvas>
+  <canvas
+    bind:this={canvas}
+    width="400"
+    height="200"
+  ></canvas>
 </SignaturePad>
 <button onclick={clear}>Clear</button>
 ```
@@ -117,6 +139,7 @@ Paired with a clear button:
 - Consumers should offer a fallback (for example, typing a name) for users who cannot draw.
 
 References:
+
 - WAI-ARIA `application` role: https://www.w3.org/TR/wai-aria-1.2/#application
 
 ## Related components

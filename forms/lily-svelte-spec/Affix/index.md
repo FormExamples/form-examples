@@ -38,7 +38,7 @@ A headless Svelte 5 component that renders a single `<div class="affix">` whose 
 
 ```svelte
 <script lang="ts">
-  import Affix from './Affix.svelte';
+  import Affix from "./Affix.svelte";
 </script>
 
 <Affix offsetTop={64}>
@@ -50,7 +50,12 @@ A headless Svelte 5 component that renders a single `<div class="affix">` whose 
 
 ```svelte
 <Affix offsetBottom={16}>
-  <div role="toolbar" aria-label="Quick actions">…</div>
+  <div
+    role="toolbar"
+    aria-label="Quick actions"
+  >
+    …
+  </div>
 </Affix>
 ```
 

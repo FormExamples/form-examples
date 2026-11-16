@@ -10,7 +10,7 @@ See [components/success-panel/index.md](../../../components/success-panel/index.
 
 ```svelte
 <script lang="ts">
-    import SuccessPanel from "./SuccessPanel.svelte";
+  import SuccessPanel from "./SuccessPanel.svelte";
 </script>
 
 <SuccessPanel />

@@ -52,14 +52,17 @@ Basic select with plain options:
 
 ```svelte
 <script lang="ts">
-    import Select from "./Select.svelte";
-    let country = $state("");
+  import Select from "./Select.svelte";
+  let country = $state("");
 </script>
 
-<Select label="Country" bind:value={country}>
-    <option value="">Select...</option>
-    <option value="us">United States</option>
-    <option value="gb">United Kingdom</option>
+<Select
+  label="Country"
+  bind:value={country}
+>
+  <option value="">Select...</option>
+  <option value="us">United States</option>
+  <option value="gb">United Kingdom</option>
 </Select>
 ```
 
@@ -67,15 +70,19 @@ Select with `Option` children:
 
 ```svelte
 <script lang="ts">
-    import Select from "./Select.svelte";
-    import Option from "../Option/Option.svelte";
-    let priority = $state("");
+  import Select from "./Select.svelte";
+  import Option from "../Option/Option.svelte";
+  let priority = $state("");
 </script>
 
-<Select label="Priority" bind:value={priority} required>
-    <Option value="">Select priority...</Option>
-    <Option value="low">Low</Option>
-    <Option value="high">High</Option>
+<Select
+  label="Priority"
+  bind:value={priority}
+  required
+>
+  <Option value="">Select priority...</Option>
+  <Option value="low">Low</Option>
+  <Option value="high">High</Option>
 </Select>
 ```
 
@@ -83,13 +90,17 @@ Disabled select:
 
 ```svelte
 <script lang="ts">
-    import Select from "./Select.svelte";
-    let status = $state("active");
+  import Select from "./Select.svelte";
+  let status = $state("active");
 </script>
 
-<Select label="Status" bind:value={status} disabled>
-    <option value="active">Active</option>
-    <option value="inactive">Inactive</option>
+<Select
+  label="Status"
+  bind:value={status}
+  disabled
+>
+  <option value="active">Active</option>
+  <option value="inactive">Inactive</option>
 </Select>
 ```
 
@@ -97,19 +108,22 @@ Dynamic options from data:
 
 ```svelte
 <script lang="ts">
-    import Select from "./Select.svelte";
-    const categories = [
-        { id: "news", name: "News" },
-        { id: "sports", name: "Sports" },
-        { id: "tech", name: "Technology" },
-    ];
-    let category = $state("news");
+  import Select from "./Select.svelte";
+  const categories = [
+    { id: "news", name: "News" },
+    { id: "sports", name: "Sports" },
+    { id: "tech", name: "Technology" },
+  ];
+  let category = $state("news");
 </script>
 
-<Select label="Category" bind:value={category}>
-    {#each categories as c}
-        <option value={c.id}>{c.name}</option>
-    {/each}
+<Select
+  label="Category"
+  bind:value={category}
+>
+  {#each categories as c}
+    <option value={c.id}>{c.name}</option>
+  {/each}
 </Select>
 ```
 
@@ -117,18 +131,18 @@ With change handler via restProps:
 
 ```svelte
 <script lang="ts">
-    import Select from "./Select.svelte";
-    let lang = $state("en");
+  import Select from "./Select.svelte";
+  let lang = $state("en");
 </script>
 
 <Select
-    label="Language"
-    bind:value={lang}
-    onchange={() => console.log("picked:", lang)}
+  label="Language"
+  bind:value={lang}
+  onchange={() => console.log("picked:", lang)}
 >
-    <option value="en">English</option>
-    <option value="fr">French</option>
-    <option value="de">German</option>
+  <option value="en">English</option>
+  <option value="fr">French</option>
+  <option value="de">German</option>
 </Select>
 ```
 
@@ -139,6 +153,7 @@ With change handler via restProps:
 - For richer dropdowns consider `Combobox` or `Listbox`.
 
 References:
+
 - MDN `<select>`: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select
 
 ## Related components

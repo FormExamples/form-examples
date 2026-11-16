@@ -5,7 +5,7 @@
   HTML tag: <div>
   CSS class: banner
   Keyboard: None (passive element)
-  Accessibility: role="banner", aria-label for accessible name
+  Accessibility: role="region" with aria-live="polite", so a change is announced without interrupting
   Usage:
     <div class="banner" role="banner" aria-label="Example">
       ...
@@ -14,8 +14,9 @@
 
 <div
   class="banner"
-  role="banner"
-  aria-label=""
+  data-type="info"
+  role="region"
+  aria-live="polite"
 >
   <!-- Consumer provides content -->
 </div>

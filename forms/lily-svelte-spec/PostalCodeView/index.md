@@ -48,7 +48,7 @@ Note: unlike most `*View` components in this library, this one uses `text` (not 
 
 ```svelte
 <script lang="ts">
-  import PostalCodeView from './PostalCodeView.svelte';
+  import PostalCodeView from "./PostalCodeView.svelte";
 </script>
 
 <PostalCodeView text="90210" />
@@ -58,7 +58,7 @@ Note: unlike most `*View` components in this library, this one uses `text` (not 
 
 ```svelte
 <script lang="ts">
-  import PostalCodeView from './PostalCodeView.svelte';
+  import PostalCodeView from "./PostalCodeView.svelte";
 </script>
 
 <PostalCodeView text="SW1A 1AA" />
@@ -68,7 +68,7 @@ Note: unlike most `*View` components in this library, this one uses `text` (not 
 
 ```svelte
 <script lang="ts">
-  import PostalCodeView from './PostalCodeView.svelte';
+  import PostalCodeView from "./PostalCodeView.svelte";
 
   let postcode = $state("EC1A 1BB");
 </script>
@@ -80,15 +80,18 @@ Note: unlike most `*View` components in this library, this one uses `text` (not 
 
 ```svelte
 <script lang="ts">
-  import PostalCodeInput from '../PostalCodeInput/PostalCodeInput.svelte';
-  import PostalCodeView from './PostalCodeView.svelte';
+  import PostalCodeInput from "../PostalCodeInput/PostalCodeInput.svelte";
+  import PostalCodeView from "./PostalCodeView.svelte";
 
   let zip = $state("90210");
   let editing = $state(false);
 </script>
 
 {#if editing}
-  <PostalCodeInput label="ZIP" bind:value={zip} />
+  <PostalCodeInput
+    label="ZIP"
+    bind:value={zip}
+  />
 {:else}
   <PostalCodeView text={zip} />
 {/if}
@@ -98,7 +101,10 @@ Note: unlike most `*View` components in this library, this one uses `text` (not 
 ### With a test hook
 
 ```svelte
-<PostalCodeView text="90210" data-testid="shipping-zip" />
+<PostalCodeView
+  text="90210"
+  data-testid="shipping-zip"
+/>
 ```
 
 ## Accessibility

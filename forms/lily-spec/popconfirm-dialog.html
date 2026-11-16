@@ -33,7 +33,7 @@
       aria-modal="false"
       aria-labelledby="popconfirm-title"
       aria-describedby="popconfirm-description"
-      hidden
+      popover="manual"
     >
       <h2 class="popconfirm-dialog-title" id="popconfirm-title">Delete file?</h2>
       <p class="popconfirm-dialog-description" id="popconfirm-description">
@@ -50,7 +50,7 @@
   aria-modal="false"
   aria-labelledby="popconfirm-dialog-title"
   aria-describedby="popconfirm-dialog-description"
-  hidden
+  popover="manual"
 >
   <!-- Title: REQUIRED. The id is referenced by aria-labelledby above. -->
   <h2 class="popconfirm-dialog-title" id="popconfirm-dialog-title">
@@ -81,6 +81,26 @@
   //   closes the dialog the same way.
   (function () {
     "use strict";
+    // P16-T4: the popup is popover="manual" (top layer); open and close it with the Popover API, or with the
+    // hidden attribute where the API is missing (then the popover attribute is dropped, which does nothing there).
+    function setOpen(el, open) {
+      if (typeof el.showPopover !== "function") {
+        el.removeAttribute("popover");
+        el.hidden = !open;
+        return;
+      }
+      try {
+        if (open) el.showPopover();
+        else el.hidePopover();
+      } catch (e) {
+        // Already in that state: nothing to do.
+      }
+    }
+
+    document.querySelectorAll(".popconfirm-dialog").forEach(function (el) {
+      if (typeof el.showPopover !== "function") setOpen(el, false);
+    });
+
 
     var roots = document.querySelectorAll('div.popconfirm-dialog');
 
@@ -93,7 +113,7 @@
           // Notify consumer code that the user confirmed.
           root.dispatchEvent(new CustomEvent('lily:confirm', { bubbles: true }));
           // Close the dialog.
-          root.setAttribute('hidden', '');
+          setOpen(root, false);
         });
       }
 
@@ -102,7 +122,7 @@
           // Notify consumer code that the user cancelled.
           root.dispatchEvent(new CustomEvent('lily:cancel', { bubbles: true }));
           // Close the dialog.
-          root.setAttribute('hidden', '');
+          setOpen(root, false);
         });
       }
     });

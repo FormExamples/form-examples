@@ -6,18 +6,22 @@ import Subject from "./ButtonInput.svelte";
 
 describe("ButtonInput", () => {
     test("renders as a button with value text", () => {
-        render(Subject, { props: {
-            value: "Click me",
-        }});
+        render(Subject, {
+            props: {
+                value: "Click me",
+            },
+        });
 
         const button: HTMLElement = screen.getByRole("button", { name: "Click me" });
         expect(button).toBeTruthy();
     });
 
     test("renders as input[type=button]", () => {
-        render(Subject, { props: {
-            value: "Test",
-        }});
+        render(Subject, {
+            props: {
+                value: "Test",
+            },
+        });
 
         const button: HTMLInputElement = screen.getByRole("button") as HTMLInputElement;
         expect(button.tagName.toLowerCase()).toBe("input");
@@ -25,10 +29,12 @@ describe("ButtonInput", () => {
     });
 
     test("can be disabled", () => {
-        render(Subject, { props: {
-            value: "Disabled",
-            disabled: true,
-        }});
+        render(Subject, {
+            props: {
+                value: "Disabled",
+                disabled: true,
+            },
+        });
 
         const button: HTMLInputElement = screen.getByRole("button") as HTMLInputElement;
         expect(button.disabled).toBe(true);
@@ -37,10 +43,12 @@ describe("ButtonInput", () => {
     test("handles click events", async () => {
         const user: UserEvent = userEvent.setup();
         const handleClick = vi.fn();
-        render(Subject, { props: {
-            value: "Click",
-            onclick: handleClick,
-        }});
+        render(Subject, {
+            props: {
+                value: "Click",
+                onclick: handleClick,
+            },
+        });
 
         const button: HTMLElement = screen.getByRole("button");
         await user.click(button);
@@ -48,20 +56,24 @@ describe("ButtonInput", () => {
     });
 
     test("applies name attribute", () => {
-        render(Subject, { props: {
-            value: "Submit",
-            name: "action-btn",
-        }});
+        render(Subject, {
+            props: {
+                value: "Submit",
+                name: "action-btn",
+            },
+        });
 
         const button: HTMLElement = screen.getByRole("button");
         expect(button.getAttribute("name")).toBe("action-btn");
     });
 
     test("applies aria-label when label prop is provided", () => {
-        render(Subject, { props: {
-            value: "X",
-            label: "Close dialog",
-        }});
+        render(Subject, {
+            props: {
+                value: "X",
+                label: "Close dialog",
+            },
+        });
 
         const button: HTMLElement = screen.getByRole("button", { name: "Close dialog" });
         expect(button).toBeTruthy();
@@ -69,9 +81,11 @@ describe("ButtonInput", () => {
 
     test("is focusable via keyboard", async () => {
         const user: UserEvent = userEvent.setup();
-        render(Subject, { props: {
-            value: "Focus",
-        }});
+        render(Subject, {
+            props: {
+                value: "Focus",
+            },
+        });
 
         const button: HTMLElement = screen.getByRole("button");
         await user.tab();
@@ -79,10 +93,12 @@ describe("ButtonInput", () => {
     });
 
     test("passes through additional HTML attributes", () => {
-        render(Subject, { props: {
-            value: "Test",
-            "data-testid": "btn-input",
-        }});
+        render(Subject, {
+            props: {
+                value: "Test",
+                "data-testid": "btn-input",
+            },
+        });
 
         const button: HTMLElement = screen.getByTestId("btn-input");
         expect(button).toBeTruthy();

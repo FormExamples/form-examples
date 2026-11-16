@@ -9,7 +9,7 @@
     //
     // Props:
     //   className — string, optional. CSS class name.
-    //   label — string, required. Accessible label for screen readers via aria-label.
+    //   label — string, optional. Hidden text naming the value. Leave it out when a visible caption, such as a dt or a SummaryListItem term, already names it.
     //   value — string, default "". The NPS score value to display.
     //   ...restProps — additional HTML attributes spread onto the <span>.
     //
@@ -27,7 +27,7 @@
     //   - None — this is a passive informational display, not interactive.
     //
     // Accessibility:
-    //   - aria-label provides the accessible name so screen readers announce context
+    //   - A visible caption names the value, or label renders as hidden text; a plain span cannot take aria-label.
     //   - Screen readers announce both the label and the displayed value
     //
     // Internationalization:
@@ -38,7 +38,7 @@
     // Claude rules:
     //   - Headless: no CSS, no styles — consumer provides all styling
     //   - No score validation or classification logic; consumer handles categorization
-    //   - Part of the Input/View pattern; pairs with NetPromoterScorePicker
+    //   - Part of the Input/View pattern; pairs with NetPromoterScoreRadioGroup
     //
     // References:
     //   - Net Promoter Score: https://en.wikipedia.org/wiki/Net_promoter_score
@@ -50,7 +50,7 @@
         ...restProps
     }: {
         /** Accessible label for screen readers */
-        label: string;
+        label?: string;
         /** The NPS score value to display */
         value?: string;
         [key: string]: unknown;
@@ -60,6 +60,6 @@
 <!-- NetPromoterScoreView: displays an NPS score as text -->
 <span
     class={`net-promoter-score-view ${className}`}
-    aria-label={label}
-    {...restProps}>{value}</span
+    {...restProps}
+    >{#if label}<span class="screen-reader-span">{`${label} `}</span>{/if}{value}</span
 >

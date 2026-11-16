@@ -7,7 +7,7 @@ describe("NederlandPaspoortNummerView", () => {
     test("renders with the correct class", () => {
         render(Subject, { props: { label: "Dutch Passport Number", value: "test-value" } });
 
-        const el = screen.getByLabelText("Dutch Passport Number");
+        const el = document.querySelector(".nederland-paspoort-nummer-view") as HTMLElement;
         expect(el).toBeTruthy();
         expect(el.getAttribute("class")).toContain("nederland-paspoort-nummer-view");
     });
@@ -15,14 +15,19 @@ describe("NederlandPaspoortNummerView", () => {
     test("renders the value as text content", () => {
         render(Subject, { props: { label: "Dutch Passport Number", value: "test-value" } });
 
-        const el = screen.getByLabelText("Dutch Passport Number");
-        expect(el.textContent).toBe("test-value");
+        const el = document.querySelector(".nederland-paspoort-nummer-view") as HTMLElement;
+        expect(
+            el.textContent?.replace(el.querySelector(".screen-reader-span")?.textContent ?? "", ""),
+        ).toBe("test-value");
     });
 
     test("has aria-label from the label prop", () => {
         render(Subject, { props: { label: "Dutch Passport Number" } });
 
-        const el = screen.getByLabelText("Dutch Passport Number");
-        expect(el.getAttribute("aria-label")).toBe("Dutch Passport Number");
+        const el = document.querySelector(".nederland-paspoort-nummer-view") as HTMLElement;
+        expect(el.querySelector(".screen-reader-span")?.textContent).toBe(
+            `${"Dutch Passport Number"} `,
+        );
+        expect(el.hasAttribute("aria-label")).toBe(false);
     });
 });

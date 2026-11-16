@@ -42,80 +42,86 @@ Import the component, optionally bind `open` to consumer state, and supply the n
 
 ```svelte
 <script lang="ts">
-    import HamburgerMenu from "./HamburgerMenu.svelte";
-    let open = $state(false);
+  import HamburgerMenu from "./HamburgerMenu.svelte";
+  let open = $state(false);
 </script>
 
-<HamburgerMenu label="Main menu" bind:open>
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About</a></li>
-    </ul>
+<HamburgerMenu
+  label="Main menu"
+  bind:open
+>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/about">About</a></li>
+  </ul>
 </HamburgerMenu>
 ```
 
 ```svelte
 <script lang="ts">
-    import HamburgerMenu from "./HamburgerMenu.svelte";
-    let menuOpen = $state(true);
+  import HamburgerMenu from "./HamburgerMenu.svelte";
+  let menuOpen = $state(true);
 </script>
 
 <HamburgerMenu bind:open={menuOpen}>
-    <ul>
-        <li><a href="/dashboard">Dashboard</a></li>
-        <li><a href="/settings">Settings</a></li>
-    </ul>
+  <ul>
+    <li><a href="/dashboard">Dashboard</a></li>
+    <li><a href="/settings">Settings</a></li>
+  </ul>
 </HamburgerMenu>
 <p>Menu is {menuOpen ? "open" : "closed"}</p>
 ```
 
 ```svelte
 <script lang="ts">
-    import HamburgerMenu from "./HamburgerMenu.svelte";
-    const links = [
-        { href: "/", text: "Home" },
-        { href: "/pricing", text: "Pricing" },
-        { href: "/docs", text: "Docs" },
-    ];
+  import HamburgerMenu from "./HamburgerMenu.svelte";
+  const links = [
+    { href: "/", text: "Home" },
+    { href: "/pricing", text: "Pricing" },
+    { href: "/docs", text: "Docs" },
+  ];
 </script>
 
 <HamburgerMenu label="Site menu">
-    <nav>
-        <ul>
-            {#each links as l}<li><a href={l.href}>{l.text}</a></li>{/each}
-        </ul>
-    </nav>
+  <nav>
+    <ul>
+      {#each links as l}<li><a href={l.href}>{l.text}</a></li>{/each}
+    </ul>
+  </nav>
 </HamburgerMenu>
 ```
 
 ```svelte
 <script lang="ts">
-    import HamburgerMenu from "./HamburgerMenu.svelte";
-    let open = $state(false);
-    function onKey(e: KeyboardEvent) {
-        if (e.key === "Escape") open = false;
-    }
+  import HamburgerMenu from "./HamburgerMenu.svelte";
+  let open = $state(false);
+  function onKey(e: KeyboardEvent) {
+    if (e.key === "Escape") open = false;
+  }
 </script>
 
 <svelte:window on:keydown={onKey} />
-<HamburgerMenu label="Menu" bind:open>
-    <p>Press Escape to close.</p>
+<HamburgerMenu
+  label="Menu"
+  bind:open
+>
+  <p>Press Escape to close.</p>
 </HamburgerMenu>
 ```
 
 ```svelte
 <script lang="ts">
-    import HamburgerMenu from "./HamburgerMenu.svelte";
+  import HamburgerMenu from "./HamburgerMenu.svelte";
 </script>
 
 <HamburgerMenu
-    label="Navigation"
-    class="mobile-menu"
-    data-testid="mobile-menu"
+  label="Navigation"
+  class="mobile-menu"
+  data-testid="mobile-menu"
 >
-    <ul>
-        <li><a href="/">Home</a></li>
-    </ul>
+  <ul>
+    <li><a href="/">Home</a></li>
+  </ul>
 </HamburgerMenu>
 ```
 

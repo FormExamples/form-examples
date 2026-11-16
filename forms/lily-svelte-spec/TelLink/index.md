@@ -53,7 +53,10 @@ Import the component and pass the `phone` number including country code. Optiona
   import TelLink from "./TelLink.svelte";
 </script>
 
-<TelLink phone="+1-555-0100" label="Call customer support" />
+<TelLink
+  phone="+1-555-0100"
+  label="Call customer support"
+/>
 ```
 
 ```svelte
@@ -66,11 +69,23 @@ Import the component and pass the `phone` number including country code. Optiona
 </script>
 
 {#if editing}
-  <TelInput label="Phone" bind:value={phone} />
-  <button type="button" onclick={() => (editing = false)}>Save</button>
+  <TelInput
+    label="Phone"
+    bind:value={phone}
+  />
+  <button
+    type="button"
+    onclick={() => (editing = false)}>Save</button
+  >
 {:else}
-  <TelLink phone={phone} label="Primary phone number" />
-  <button type="button" onclick={() => (editing = true)}>Edit</button>
+  <TelLink
+    {phone}
+    label="Primary phone number"
+  />
+  <button
+    type="button"
+    onclick={() => (editing = true)}>Edit</button
+  >
 {/if}
 ```
 
@@ -87,7 +102,10 @@ Import the component and pass the `phone` number including country code. Optiona
 <ul>
   {#each contacts as c}
     <li>
-      {c.name}: <TelLink phone={c.phone} label={`Call ${c.name}`} />
+      {c.name}: <TelLink
+        phone={c.phone}
+        label={`Call ${c.name}`}
+      />
     </li>
   {/each}
 </ul>

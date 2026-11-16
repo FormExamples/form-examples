@@ -34,70 +34,73 @@ Place as a direct child of `GrailLayout`. The component itself provides the `con
 
 ```svelte
 <script lang="ts">
-    import GrailLayoutBottomFooter from "./GrailLayoutBottomFooter.svelte";
+  import GrailLayoutBottomFooter from "./GrailLayoutBottomFooter.svelte";
 </script>
 
 <GrailLayoutBottomFooter>
-    <footer><small>Copyright 2026</small></footer>
+  <footer><small>Copyright 2026</small></footer>
 </GrailLayoutBottomFooter>
 ```
 
 ```svelte
 <script lang="ts">
-    import GrailLayoutBottomFooter from "./GrailLayoutBottomFooter.svelte";
-    import Footer from "../Footer/Footer.svelte";
+  import GrailLayoutBottomFooter from "./GrailLayoutBottomFooter.svelte";
+  import Footer from "../Footer/Footer.svelte";
 </script>
 
 <GrailLayoutBottomFooter>
-    <Footer label="Site footer">
-        <nav aria-label="Footer">
-            <a href="/privacy">Privacy</a>
-            <a href="/terms">Terms</a>
-        </nav>
-    </Footer>
+  <Footer label="Site footer">
+    <nav aria-label="Footer">
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </nav>
+  </Footer>
 </GrailLayoutBottomFooter>
 ```
 
 ```svelte
 <script lang="ts">
-    import GrailLayout from "../GrailLayout/GrailLayout.svelte";
-    import GrailLayoutCenterMain from "../GrailLayoutCenterMain/GrailLayoutCenterMain.svelte";
-    import GrailLayoutBottomFooter from "./GrailLayoutBottomFooter.svelte";
+  import GrailLayout from "../GrailLayout/GrailLayout.svelte";
+  import GrailLayoutCenterMain from "../GrailLayoutCenterMain/GrailLayoutCenterMain.svelte";
+  import GrailLayoutBottomFooter from "./GrailLayoutBottomFooter.svelte";
 </script>
 
 <GrailLayout>
-    <GrailLayoutCenterMain><main>Content</main></GrailLayoutCenterMain>
-    <GrailLayoutBottomFooter><footer>Footer</footer></GrailLayoutBottomFooter>
+  <GrailLayoutCenterMain><main>Content</main></GrailLayoutCenterMain>
+  <GrailLayoutBottomFooter><footer>Footer</footer></GrailLayoutBottomFooter>
 </GrailLayout>
 ```
 
 ```svelte
 <script lang="ts">
-    import GrailLayoutBottomFooter from "./GrailLayoutBottomFooter.svelte";
+  import GrailLayoutBottomFooter from "./GrailLayoutBottomFooter.svelte";
 </script>
 
-<GrailLayoutBottomFooter class="site-bottom" data-testid="grail-bottom">
-    <footer>
-        <p>Custom footer with hooks.</p>
-    </footer>
+<GrailLayoutBottomFooter
+  class="site-bottom"
+  data-testid="grail-bottom"
+>
+  <footer>
+    <p>Custom footer with hooks.</p>
+  </footer>
 </GrailLayoutBottomFooter>
 ```
 
 ```svelte
 <script lang="ts">
-    import GrailLayoutBottomFooter from "./GrailLayoutBottomFooter.svelte";
-    const links = [
-        { href: "/about", text: "About" },
-        { href: "/jobs", text: "Jobs" },
-    ];
+  import GrailLayoutBottomFooter from "./GrailLayoutBottomFooter.svelte";
+  const links = [
+    { href: "/about", text: "About" },
+    { href: "/jobs", text: "Jobs" },
+  ];
 </script>
 
 <GrailLayoutBottomFooter>
-    <footer>
-        <ul>
-            {#each links as l}<li><a href={l.href}>{l.text}</a></li>{/each}
-        </ul>
-    </footer>
+  <footer>
+    <ul>
+      {#each links as l}<li><a href={l.href}>{l.text}</a></li>{/each}
+    </ul>
+  </footer>
 </GrailLayoutBottomFooter>
 ```
 

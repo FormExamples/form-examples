@@ -10,7 +10,7 @@ See [components/dial-group/index.md](../../../components/dial-group/index.md) fo
 
 ```svelte
 <script lang="ts">
-    import DialGroup from "./DialGroup.svelte";
+  import DialGroup from "./DialGroup.svelte";
 </script>
 
 <DialGroup />

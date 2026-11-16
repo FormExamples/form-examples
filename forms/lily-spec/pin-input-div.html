@@ -4,28 +4,77 @@
   Description: a series of single-digit inputs for entering a PIN or OTP code
   HTML tag: <div>
   CSS class: pin-input-div
-  Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Keyboard: Typing a digit fills the field and moves to the next; Backspace clears the field or, when empty, clears and moves to the previous; ArrowLeft/ArrowRight move between fields
+  Accessibility: role="group", aria-label for accessible name; each digit input is type="text" inputmode="numeric" maxlength="1" with its own aria-label
   Usage:
-    <div class="pin-input-div" aria-label="Example">
-      ...
+    <div
+      class="pin-input-div"
+      role="group"
+      aria-label=""
+    >
+      <input type="text" inputmode="numeric" maxlength="1" aria-label="" />
+      <input type="text" inputmode="numeric" maxlength="1" aria-label="" />
+      <input type="text" inputmode="numeric" maxlength="1" aria-label="" />
+      <input type="text" inputmode="numeric" maxlength="1" aria-label="" />
     </div>
 -->
 
 <div
   class="pin-input-div"
+  role="group"
   aria-label=""
 >
-  <!-- Consumer provides content -->
+  <input type="text" inputmode="numeric" maxlength="1" aria-label="" />
+  <input type="text" inputmode="numeric" maxlength="1" aria-label="" />
+  <input type="text" inputmode="numeric" maxlength="1" aria-label="" />
+  <input type="text" inputmode="numeric" maxlength="1" aria-label="" />
 </div>
 
 <script>
   // PinInputDiv behavior
   (function() {
     'use strict';
-    // PinInputDiv: consumer implements interactive behavior
-    document.querySelectorAll('.pin-input-div').forEach(function(el) {
-      // Interactive behavior initialization
+    document.querySelectorAll('.pin-input-div').forEach(function(root) {
+      function inputs() { return Array.from(root.querySelectorAll('input')); }
+      function publish() {
+        root.setAttribute('data-value', inputs().map(function(i) { return i.value; }).join(''));
+      }
+      root.addEventListener('input', function(e) {
+        var all = inputs();
+        var index = all.indexOf(e.target);
+        if (index < 0) return;
+        if (e.target.value && !/^[0-9]$/.test(e.target.value)) {
+          e.target.value = '';
+        } else if (e.target.value && index < all.length - 1) {
+          all[index + 1].focus();
+        }
+        publish();
+      });
+      root.addEventListener('keydown', function(e) {
+        var all = inputs();
+        var index = all.indexOf(e.target);
+        if (index < 0) return;
+        if (e.key === 'Backspace') {
+          if (!e.target.value && index > 0) {
+            all[index - 1].focus();
+            all[index - 1].value = '';
+          } else {
+            e.target.value = '';
+          }
+          publish();
+        } else if (e.key === 'ArrowLeft' && index > 0) {
+          all[index - 1].focus();
+        } else if (e.key === 'ArrowRight' && index < all.length - 1) {
+          all[index + 1].focus();
+        }
+      });
+      var form = root.closest('form');
+      if (form) {
+        form.addEventListener('reset', function(e) {
+          // the browser restores each input one tick after the event; a cancelled reset changes nothing
+          setTimeout(function() { if (!e.defaultPrevented) publish(); }, 0);
+        });
+      }
     });
   })();
 </script>

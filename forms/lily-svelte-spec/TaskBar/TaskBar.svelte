@@ -49,7 +49,9 @@
     // References:
     //   - WAI-ARIA Toolbar Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/
 
+    import { warnMissingName } from "../dev-warning";
     import type { Snippet } from "svelte";
+    import { attachToolbar } from "../widget-keys";
 
     let {
         class: className = "",
@@ -64,42 +66,13 @@
         [key: string]: unknown;
     } = $props();
 
+    $effect(() =>
+        warnMissingName("TaskBar", label, restProps["aria-label"], restProps["aria-labelledby"]),
+    );
+
     let barRef: HTMLElement | undefined = $state(undefined);
 
-    function onkeydown(event: KeyboardEvent) {
-        if (!barRef) return;
-        const items = Array.from(
-            barRef.querySelectorAll<HTMLElement>(
-                "button, [role='button'], [tabindex]",
-            ),
-        );
-        const current = document.activeElement as HTMLElement;
-        const index = items.indexOf(current);
-        switch (event.key) {
-            case "ArrowRight": {
-                event.preventDefault();
-                const next = index < items.length - 1 ? index + 1 : 0;
-                items[next]?.focus();
-                break;
-            }
-            case "ArrowLeft": {
-                event.preventDefault();
-                const prev = index > 0 ? index - 1 : items.length - 1;
-                items[prev]?.focus();
-                break;
-            }
-            case "Home": {
-                event.preventDefault();
-                items[0]?.focus();
-                break;
-            }
-            case "End": {
-                event.preventDefault();
-                items[items.length - 1]?.focus();
-                break;
-            }
-        }
-    }
+    $effect(() => (barRef ? attachToolbar(barRef) : undefined));
 </script>
 
 <!-- TaskBar.svelte -->
@@ -108,7 +81,6 @@
     role="toolbar"
     aria-label={label}
     bind:this={barRef}
-    {onkeydown}
     {...restProps}
 >
     {@render children?.()}

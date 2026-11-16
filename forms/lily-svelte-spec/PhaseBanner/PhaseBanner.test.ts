@@ -17,4 +17,11 @@ describe("PhaseBanner", () => {
         const el = container.querySelector(".phase-banner");
         expect(el).toBeTruthy();
     });
+
+    it("has role=group with a label", () => {
+        const { container } = render(PhaseBanner, { props: { label: "Story" } as any });
+        const root = container.querySelector(".phase-banner")!;
+        expect(root.getAttribute("role")).toBe("group");
+        expect(root.getAttribute("aria-label")).toBe("Story");
+    });
 });

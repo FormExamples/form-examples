@@ -39,7 +39,9 @@ describe("TaskBar", () => {
         render(Subject, { props: { label: "Tasks", children: buttonsSnippet() } });
         const buttons = screen.getAllByRole("button");
         buttons[0].focus();
-        buttons[0].dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }));
+        buttons[0].dispatchEvent(
+            new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }),
+        );
         expect(document.activeElement).toBe(buttons[1]);
     });
 

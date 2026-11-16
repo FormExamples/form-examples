@@ -4,29 +4,168 @@
   Description: a text input combined with a dropdown list for filtering options
   HTML tag: <div>
   CSS class: combobox
-  Keyboard: Tab to focus, Arrow Down to open list, type to filter, Enter to select, Escape to close
-  Accessibility: role="combobox", aria-label for accessible name
+  Keyboard: ArrowDown and ArrowUp open on the first or last option, then move and wrap; Home and End jump while open;
+    Enter chooses the highlighted option; Escape closes while open and is left alone while closed (so an enclosing
+    dialog still gets it); Alt+ArrowDown opens without a highlight; Alt+ArrowUp closes. Typing opens the list, blur
+    closes it, and clicking an option chooses it. Focus stays in the input.
+  Events: a bubbling "combobox-select" with detail.value when an option is chosen, and "combobox-close" on closing
+  Accessibility: role="combobox" on the <input>, with aria-label, aria-expanded, aria-controls (the listbox id) and
+    aria-autocomplete="list"; the listbox is role="listbox" with the same aria-label, hidden while closed
   Usage:
-    <div class="combobox" role="combobox" aria-label="Example">
-      ...
+    <div class="combobox">
+      <input type="text" role="combobox" aria-label="Fruit" aria-expanded="false" aria-controls="fruit-list"
+        aria-autocomplete="list" />
+      <div role="listbox" id="fruit-list" aria-label="Fruit" popover="manual">
+        <div role="option">Apple</div>
+      </div>
     </div>
+  Filtering is the consumer's: hide or replace the options on the input's input event. The value is an option's
+  data-value, else its text. The script is shared/combobox-client.js, inlined.
 -->
 
-<div
-  class="combobox"
-  role="combobox"
-  aria-label=""
->
-  <!-- Consumer provides content -->
+<div class="combobox">
+  <input
+    type="text"
+    role="combobox"
+    aria-label=""
+    aria-expanded="false"
+    aria-controls="combobox-listbox"
+    aria-autocomplete="list"
+  />
+  <div
+    role="listbox"
+    id="combobox-listbox"
+    aria-label=""
+    popover="manual"
+  >
+    <!-- Consumer provides options -->
+  </div>
 </div>
 
 <script>
-  // Combobox behavior
-  (function() {
-    'use strict';
-    // Combobox: consumer implements interactive behavior
-    document.querySelectorAll('.combobox').forEach(function(el) {
-      // Interactive behavior initialization
+  // Combobox behavior: shared/combobox-client.js, inlined so the snippet stays one file. The combobox contract holds both.
+  (function () {
+    "use strict";
+    // P16-T4: the popup is popover="manual" (top layer); open and close it with the Popover API, or with the
+    // hidden attribute where the API is missing (then the popover attribute is dropped, which does nothing there).
+    function showList(el, open) {
+      if (typeof el.showPopover !== "function") {
+        el.removeAttribute("popover");
+        el.hidden = !open;
+        return;
+      }
+      try {
+        if (open) el.showPopover();
+        else el.hidePopover();
+      } catch (e) {
+        // Already in that state: nothing to do.
+      }
+    }
+
+    document.querySelectorAll(".combobox [role=\"listbox\"]").forEach(function (el) {
+      if (typeof el.showPopover !== "function") showList(el, false);
+    });
+
+    document.querySelectorAll(".combobox").forEach(function (root) {
+      var input = root.querySelector('[role="combobox"]');
+      var list = input && document.getElementById(input.getAttribute("aria-controls"));
+      if (!list) return;
+
+      function allOptions() {
+        return Array.from(list.querySelectorAll('[role="option"]'));
+      }
+      function usable() {
+        return allOptions().filter(function (o) {
+          return !o.hidden && o.getAttribute("aria-disabled") !== "true";
+        });
+      }
+      function isOpen() {
+        return input.getAttribute("aria-expanded") === "true";
+      }
+      function setOpen(open) {
+        input.setAttribute("aria-expanded", String(open));
+        showList(list, open);
+      }
+      function setActive(option) {
+        allOptions().forEach(function (el, index) {
+          if (el === option && !el.id) el.id = list.id + "-option-" + index;
+          el.setAttribute("aria-selected", String(el === option));
+          el.toggleAttribute("data-active", el === option);
+        });
+        if (option) {
+          input.setAttribute("aria-activedescendant", option.id);
+          // Focus stays in the input, so the list does not scroll itself.
+          option.scrollIntoView({ block: "nearest" });
+        } else input.removeAttribute("aria-activedescendant");
+      }
+      function close() {
+        setActive(null);
+        setOpen(false);
+        root.dispatchEvent(new CustomEvent("combobox-close", { bubbles: true }));
+      }
+      function choose(option) {
+        var value = option.dataset.value !== undefined ? option.dataset.value : option.textContent.trim();
+        input.value = value;
+        root.dispatchEvent(new CustomEvent("combobox-select", { bubbles: true, detail: { value: value } }));
+        close();
+      }
+
+      input.addEventListener("keydown", function (e) {
+        if (e.isComposing) return;
+        var open = isOpen();
+        var options = usable();
+        var active = input.getAttribute("aria-activedescendant");
+        var index = options.findIndex(function (o) {
+          return o.id !== "" && o.id === active;
+        });
+        function move(option) {
+          e.preventDefault();
+          if (!open) setOpen(true);
+          setActive(option);
+        }
+        if (e.key === "ArrowDown" && e.altKey) {
+          if (open || !options.length) return;
+          e.preventDefault();
+          setOpen(true);
+        } else if (e.key === "ArrowUp" && e.altKey) {
+          if (!open) return;
+          e.preventDefault();
+          close();
+        } else if (e.key === "ArrowDown") {
+          if (options.length) move(options[open ? (index + 1) % options.length : 0]);
+        } else if (e.key === "ArrowUp") {
+          if (options.length) move(options[open && index > 0 ? index - 1 : options.length - 1]);
+        } else if (e.key === "Home") {
+          if (open && options.length) move(options[0]);
+        } else if (e.key === "End") {
+          if (open && options.length) move(options[options.length - 1]);
+        } else if (e.key === "Enter") {
+          if (open && index >= 0) {
+            e.preventDefault();
+            choose(options[index]);
+          }
+        } else if (e.key === "Escape") {
+          if (open) {
+            e.preventDefault();
+            close();
+          }
+        }
+      });
+      input.addEventListener("input", function () {
+        setActive(null);
+        if (!isOpen()) setOpen(true);
+      });
+      input.addEventListener("blur", function () {
+        if (isOpen()) close();
+      });
+      // Pressing an option must not blur the input, or the list closes before the click lands.
+      list.addEventListener("mousedown", function (e) {
+        e.preventDefault();
+      });
+      list.addEventListener("click", function (e) {
+        var option = e.target.closest('[role="option"]');
+        if (option && option.getAttribute("aria-disabled") !== "true") choose(option);
+      });
     });
   })();
 </script>

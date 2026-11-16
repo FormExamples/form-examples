@@ -50,7 +50,10 @@
     {...restProps}
 >
     {#if icon}
-        <span class="icon-list-item-icon" aria-hidden="true">
+        <span
+            class="icon-list-item-icon"
+            aria-hidden="true"
+        >
             {@render icon()}
         </span>
     {/if}

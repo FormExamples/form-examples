@@ -10,7 +10,7 @@ See [components/chat-list-item/index.md](../../../components/chat-list-item/inde
 
 ```svelte
 <script lang="ts">
-    import ChatListItem from "./ChatListItem.svelte";
+  import ChatListItem from "./ChatListItem.svelte";
 </script>
 
 <ChatListItem />

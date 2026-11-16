@@ -46,14 +46,14 @@ Composition with `SummaryListItem`:
 
 ```svelte
 <script lang="ts">
-    import SummaryList from "./SummaryList.svelte";
-    import SummaryListItem from "../SummaryListItem/SummaryListItem.svelte";
+  import SummaryList from "./SummaryList.svelte";
+  import SummaryListItem from "../SummaryListItem/SummaryListItem.svelte";
 </script>
 
 <SummaryList label="Order summary">
-    <SummaryListItem term="Product">Widget</SummaryListItem>
-    <SummaryListItem term="Quantity">3</SummaryListItem>
-    <SummaryListItem term="Total">$29.97</SummaryListItem>
+  <SummaryListItem term="Product">Widget</SummaryListItem>
+  <SummaryListItem term="Quantity">3</SummaryListItem>
+  <SummaryListItem term="Total">$29.97</SummaryListItem>
 </SummaryList>
 ```
 
@@ -61,12 +61,14 @@ Plain `<dt>`/`<dd>` children:
 
 ```svelte
 <script lang="ts">
-    import SummaryList from "./SummaryList.svelte";
+  import SummaryList from "./SummaryList.svelte";
 </script>
 
 <SummaryList label="Account details">
-    <dt>Name</dt><dd>Jane Doe</dd>
-    <dt>Email</dt><dd>jane@example.com</dd>
+  <dt>Name</dt>
+  <dd>Jane Doe</dd>
+  <dt>Email</dt>
+  <dd>jane@example.com</dd>
 </SummaryList>
 ```
 
@@ -74,19 +76,19 @@ Dynamic rows:
 
 ```svelte
 <script lang="ts">
-    import SummaryList from "./SummaryList.svelte";
-    import SummaryListItem from "../SummaryListItem/SummaryListItem.svelte";
-    const rows = [
-        { term: "Plan", value: "Pro" },
-        { term: "Seats", value: "5" },
-        { term: "Renewal", value: "2026-06-01" },
-    ];
+  import SummaryList from "./SummaryList.svelte";
+  import SummaryListItem from "../SummaryListItem/SummaryListItem.svelte";
+  const rows = [
+    { term: "Plan", value: "Pro" },
+    { term: "Seats", value: "5" },
+    { term: "Renewal", value: "2026-06-01" },
+  ];
 </script>
 
 <SummaryList label="Subscription">
-    {#each rows as r}
-        <SummaryListItem term={r.term}>{r.value}</SummaryListItem>
-    {/each}
+  {#each rows as r}
+    <SummaryListItem term={r.term}>{r.value}</SummaryListItem>
+  {/each}
 </SummaryList>
 ```
 
@@ -94,15 +96,15 @@ With nested interactive values:
 
 ```svelte
 <script lang="ts">
-    import SummaryList from "./SummaryList.svelte";
-    import SummaryListItem from "../SummaryListItem/SummaryListItem.svelte";
+  import SummaryList from "./SummaryList.svelte";
+  import SummaryListItem from "../SummaryListItem/SummaryListItem.svelte";
 </script>
 
 <SummaryList label="Shipping">
-    <SummaryListItem term="Address">
-        123 Main St
-        <button>Edit</button>
-    </SummaryListItem>
+  <SummaryListItem term="Address">
+    123 Main St
+    <button>Edit</button>
+  </SummaryListItem>
 </SummaryList>
 ```
 
@@ -110,14 +112,17 @@ With custom class:
 
 ```svelte
 <script lang="ts">
-    import SummaryList from "./SummaryList.svelte";
-    import SummaryListItem from "../SummaryListItem/SummaryListItem.svelte";
+  import SummaryList from "./SummaryList.svelte";
+  import SummaryListItem from "../SummaryListItem/SummaryListItem.svelte";
 </script>
 
-<SummaryList label="Invoice" class="stripe-rows">
-    <SummaryListItem term="Subtotal">$100.00</SummaryListItem>
-    <SummaryListItem term="Tax">$8.25</SummaryListItem>
-    <SummaryListItem term="Total">$108.25</SummaryListItem>
+<SummaryList
+  label="Invoice"
+  class="stripe-rows"
+>
+  <SummaryListItem term="Subtotal">$100.00</SummaryListItem>
+  <SummaryListItem term="Tax">$8.25</SummaryListItem>
+  <SummaryListItem term="Total">$108.25</SummaryListItem>
 </SummaryList>
 ```
 
@@ -128,6 +133,7 @@ With custom class:
 - `<dt>` and `<dd>` children are announced as term/description by assistive tech.
 
 References:
+
 - MDN `<dl>`: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl
 
 ## Related components

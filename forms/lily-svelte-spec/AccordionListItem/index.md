@@ -42,7 +42,7 @@ Import `AccordionListItem` from `./AccordionListItem.svelte`. Provide a `<summar
 
 ```svelte
 <script lang="ts">
-  import AccordionListItem from './AccordionListItem.svelte';
+  import AccordionListItem from "./AccordionListItem.svelte";
 </script>
 
 <AccordionListItem>
@@ -55,7 +55,7 @@ Import `AccordionListItem` from `./AccordionListItem.svelte`. Provide a `<summar
 
 ```svelte
 <script lang="ts">
-  import AccordionListItem from './AccordionListItem.svelte';
+  import AccordionListItem from "./AccordionListItem.svelte";
 
   let isOpen = $state(true);
 </script>
@@ -72,8 +72,8 @@ Import `AccordionListItem` from `./AccordionListItem.svelte`. Provide a `<summar
 
 ```svelte
 <script lang="ts">
-  import AccordionListItem from './AccordionListItem.svelte';
-  import Button from '../Button/Button.svelte';
+  import AccordionListItem from "./AccordionListItem.svelte";
+  import Button from "../Button/Button.svelte";
 
   let open = $state(false);
 </script>
@@ -89,9 +89,9 @@ Import `AccordionListItem` from `./AccordionListItem.svelte`. Provide a `<summar
 
 ```svelte
 <script lang="ts">
-  import AccordionNav from '../AccordionNav/AccordionNav.svelte';
-  import AccordionList from '../AccordionList/AccordionList.svelte';
-  import AccordionListItem from './AccordionListItem.svelte';
+  import AccordionNav from "../AccordionNav/AccordionNav.svelte";
+  import AccordionList from "../AccordionList/AccordionList.svelte";
+  import AccordionListItem from "./AccordionListItem.svelte";
 </script>
 
 <AccordionNav label="FAQ">

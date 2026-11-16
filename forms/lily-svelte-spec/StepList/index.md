@@ -34,13 +34,19 @@ A headless Svelte 5 component inspired by [Ant Design Steps](https://ant.design/
 
 ```svelte
 <script lang="ts">
-  import StepList from './StepList.svelte';
-  import StepListItem from '../StepListItem/StepListItem.svelte';
+  import StepList from "./StepList.svelte";
+  import StepListItem from "../StepListItem/StepListItem.svelte";
 </script>
 
-<StepList label="Checkout" current={1}>
+<StepList
+  label="Checkout"
+  current={1}
+>
   <StepListItem status="finished">Cart</StepListItem>
-  <StepListItem status="in-progress" current>Shipping</StepListItem>
+  <StepListItem
+    status="in-progress"
+    current>Shipping</StepListItem
+  >
   <StepListItem status="waiting">Payment</StepListItem>
 </StepList>
 ```

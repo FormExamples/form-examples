@@ -51,10 +51,13 @@ import ProgressCircle from './ProgressCircle.svelte';
 
 ```svelte
 <script lang="ts">
-  import ProgressCircle from './ProgressCircle.svelte';
+  import ProgressCircle from "./ProgressCircle.svelte";
 </script>
 
-<ProgressCircle label="Upload" value={75}>
+<ProgressCircle
+  label="Upload"
+  value={75}
+>
   <span>75%</span>
 </ProgressCircle>
 ```
@@ -63,20 +66,28 @@ import ProgressCircle from './ProgressCircle.svelte';
 
 ```svelte
 <script lang="ts">
-  import ProgressCircle from './ProgressCircle.svelte';
+  import ProgressCircle from "./ProgressCircle.svelte";
 </script>
 
-<ProgressCircle label="Loading" value={30} />
+<ProgressCircle
+  label="Loading"
+  value={30}
+/>
 ```
 
 ### Custom range
 
 ```svelte
 <script lang="ts">
-  import ProgressCircle from './ProgressCircle.svelte';
+  import ProgressCircle from "./ProgressCircle.svelte";
 </script>
 
-<ProgressCircle label="Steps complete" value={3} min={0} max={5}>
+<ProgressCircle
+  label="Steps complete"
+  value={3}
+  min={0}
+  max={5}
+>
   <span>3 / 5</span>
 </ProgressCircle>
 ```
@@ -85,7 +96,7 @@ import ProgressCircle from './ProgressCircle.svelte';
 
 ```svelte
 <script lang="ts">
-  import ProgressCircle from './ProgressCircle.svelte';
+  import ProgressCircle from "./ProgressCircle.svelte";
 
   let percent = $state(0);
   $effect(() => {
@@ -97,7 +108,10 @@ import ProgressCircle from './ProgressCircle.svelte';
   });
 </script>
 
-<ProgressCircle label="Sync progress" value={percent}>
+<ProgressCircle
+  label="Sync progress"
+  value={percent}
+>
   <span>{percent}%</span>
 </ProgressCircle>
 ```
@@ -106,17 +120,36 @@ import ProgressCircle from './ProgressCircle.svelte';
 
 ```svelte
 <script lang="ts">
-  import ProgressCircle from './ProgressCircle.svelte';
+  import ProgressCircle from "./ProgressCircle.svelte";
 
   let value = $state(60);
-  const r = 40, c = 2 * Math.PI * r;
+  const r = 40,
+    c = 2 * Math.PI * r;
 </script>
 
-<ProgressCircle label="Goal" value={value}>
-  <svg viewBox="0 0 100 100" aria-hidden="true">
-    <circle cx="50" cy="50" r={r} fill="none" stroke="#eee" stroke-width="8" />
+<ProgressCircle
+  label="Goal"
+  {value}
+>
+  <svg
+    viewBox="0 0 100 100"
+    aria-hidden="true"
+  >
     <circle
-      cx="50" cy="50" r={r} fill="none" stroke="currentColor" stroke-width="8"
+      cx="50"
+      cy="50"
+      {r}
+      fill="none"
+      stroke="#eee"
+      stroke-width="8"
+    />
+    <circle
+      cx="50"
+      cy="50"
+      {r}
+      fill="none"
+      stroke="currentColor"
+      stroke-width="8"
       stroke-dasharray={c}
       stroke-dashoffset={c * (1 - value / 100)}
       transform="rotate(-90 50 50)"

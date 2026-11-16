@@ -49,6 +49,8 @@
     //   - MDN checkbox input: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox
     //   - WAI-ARIA Checkbox Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/
 
+    import { warnMissingName } from "../dev-warning";
+
     let {
         class: className = "",
         checked = $bindable(false),
@@ -69,6 +71,15 @@
         value?: string;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName(
+            "CheckboxInput",
+            label,
+            restProps["aria-label"],
+            restProps["aria-labelledby"],
+        ),
+    );
 </script>
 
 <!-- CheckboxInput.svelte -->

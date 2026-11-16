@@ -46,23 +46,33 @@ A headless Svelte 5 component that renders a single `<section>` element. Categor
 
 ```svelte
 <script lang="ts">
-  import InfoState from './InfoState.svelte';
+  import InfoState from "./InfoState.svelte";
 </script>
 
-<InfoState level="empty" title="No results found" description="Try a different search term." />
+<InfoState
+  level="empty"
+  title="No results found"
+  description="Try a different search term."
+/>
 ```
 
 ### Error state with retry action
 
 ```svelte
 <script lang="ts">
-  import InfoState from './InfoState.svelte';
-  import Button from '../Button/Button.svelte';
+  import InfoState from "./InfoState.svelte";
+  import Button from "../Button/Button.svelte";
 
-  function retry() { /* … */ }
+  function retry() {
+    /* … */
+  }
 </script>
 
-<InfoState level="error" title="Something went wrong" description="Please try again.">
+<InfoState
+  level="error"
+  title="Something went wrong"
+  description="Please try again."
+>
   {#snippet action()}
     <Button onclick={retry}>Retry</Button>
   {/snippet}

@@ -5,13 +5,12 @@
   HTML tag: <span>
   CSS class: nederland-paspoort-nummer-view
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
   Format: 9 characters: positions 1-2 [A-Z] except 'O', positions 3-8 [A-Z 0-9] except 'O', position 9 [0-9]
   Usage:
-    <span class="nederland-paspoort-nummer-view" aria-label="Dutch Passport Number">value-here</span>
+    <span class="nederland-paspoort-nummer-view">value-here</span>
 -->
 
-<span
-  class="nederland-paspoort-nummer-view"
-  aria-label="Dutch Passport Number"
-></span>
+<span class="nederland-paspoort-nummer-view"
+  ><span class="screen-reader-span">Dutch Passport Number </span></span
+>

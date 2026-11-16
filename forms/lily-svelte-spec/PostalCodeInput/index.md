@@ -51,62 +51,80 @@ import PostalCodeInput from './PostalCodeInput.svelte';
 
 ```svelte
 <script lang="ts">
-  import PostalCodeInput from './PostalCodeInput.svelte';
+  import PostalCodeInput from "./PostalCodeInput.svelte";
 
   let postcode = $state("");
 </script>
 
-<PostalCodeInput label="Postal code" bind:value={postcode} />
+<PostalCodeInput
+  label="Postal code"
+  bind:value={postcode}
+/>
 ```
 
 ### Required ZIP code
 
 ```svelte
 <script lang="ts">
-  import PostalCodeInput from './PostalCodeInput.svelte';
+  import PostalCodeInput from "./PostalCodeInput.svelte";
 
   let zip = $state("");
 </script>
 
-<PostalCodeInput label="ZIP code" bind:value={zip} required />
+<PostalCodeInput
+  label="ZIP code"
+  bind:value={zip}
+  required
+/>
 ```
 
 ### UK postcode with a placeholder
 
 ```svelte
 <script lang="ts">
-  import PostalCodeInput from './PostalCodeInput.svelte';
+  import PostalCodeInput from "./PostalCodeInput.svelte";
 
   let postcode = $state("");
 </script>
 
-<PostalCodeInput label="Postcode" bind:value={postcode} placeholder="SW1A 1AA" />
+<PostalCodeInput
+  label="Postcode"
+  bind:value={postcode}
+  placeholder="SW1A 1AA"
+/>
 ```
 
 ### With a locale-specific pattern
 
 ```svelte
 <script lang="ts">
-  import PostalCodeInput from './PostalCodeInput.svelte';
+  import PostalCodeInput from "./PostalCodeInput.svelte";
 </script>
 
 <!-- US ZIP or ZIP+4 -->
-<PostalCodeInput label="ZIP" pattern="\d{5}(-\d{4})?" placeholder="90210" />
+<PostalCodeInput
+  label="ZIP"
+  pattern="\d{5}(-\d{4})?"
+  placeholder="90210"
+/>
 ```
 
 ### Toggling between input and view
 
 ```svelte
 <script lang="ts">
-  import PostalCodeInput from './PostalCodeInput.svelte';
-  import PostalCodeView from '../PostalCodeView/PostalCodeView.svelte';
+  import PostalCodeInput from "./PostalCodeInput.svelte";
+  import PostalCodeView from "../PostalCodeView/PostalCodeView.svelte";
 
   let zip = $state("90210");
   let editing = $state(false);
 </script>
 
 {#if editing}
-  <PostalCodeInput label="ZIP" bind:value={zip} />
+  <PostalCodeInput
+    label="ZIP"
+    bind:value={zip}
+  />
 {:else}
   <PostalCodeView text={zip} />
 {/if}

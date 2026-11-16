@@ -10,7 +10,7 @@ See [components/chat-list/index.md](../../../components/chat-list/index.md) for 
 
 ```svelte
 <script lang="ts">
-    import ChatList from "./ChatList.svelte";
+  import ChatList from "./ChatList.svelte";
 </script>
 
 <ChatList />

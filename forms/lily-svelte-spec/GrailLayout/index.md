@@ -36,123 +36,123 @@ Compose all five slot components as children of `GrailLayout`. The slot componen
 
 ```svelte
 <script lang="ts">
-    import GrailLayout from "./GrailLayout.svelte";
-    import GrailLayoutTopHeader from "../GrailLayoutTopHeader/GrailLayoutTopHeader.svelte";
-    import GrailLayoutLeftAside from "../GrailLayoutLeftAside/GrailLayoutLeftAside.svelte";
-    import GrailLayoutCenterMain from "../GrailLayoutCenterMain/GrailLayoutCenterMain.svelte";
-    import GrailLayoutRightAside from "../GrailLayoutRightAside/GrailLayoutRightAside.svelte";
-    import GrailLayoutBottomFooter from "../GrailLayoutBottomFooter/GrailLayoutBottomFooter.svelte";
+  import GrailLayout from "./GrailLayout.svelte";
+  import GrailLayoutTopHeader from "../GrailLayoutTopHeader/GrailLayoutTopHeader.svelte";
+  import GrailLayoutLeftAside from "../GrailLayoutLeftAside/GrailLayoutLeftAside.svelte";
+  import GrailLayoutCenterMain from "../GrailLayoutCenterMain/GrailLayoutCenterMain.svelte";
+  import GrailLayoutRightAside from "../GrailLayoutRightAside/GrailLayoutRightAside.svelte";
+  import GrailLayoutBottomFooter from "../GrailLayoutBottomFooter/GrailLayoutBottomFooter.svelte";
 </script>
 
 <GrailLayout>
-    <GrailLayoutTopHeader>
-        <header><h1>Site</h1></header>
-    </GrailLayoutTopHeader>
-    <GrailLayoutLeftAside>
-        <nav aria-label="Primary">...</nav>
-    </GrailLayoutLeftAside>
-    <GrailLayoutCenterMain>
-        <main><h2>Welcome</h2></main>
-    </GrailLayoutCenterMain>
-    <GrailLayoutRightAside>
-        <aside>Related content</aside>
-    </GrailLayoutRightAside>
-    <GrailLayoutBottomFooter>
-        <footer><small>Copyright 2026</small></footer>
-    </GrailLayoutBottomFooter>
+  <GrailLayoutTopHeader>
+    <header><h1>Site</h1></header>
+  </GrailLayoutTopHeader>
+  <GrailLayoutLeftAside>
+    <nav aria-label="Primary">...</nav>
+  </GrailLayoutLeftAside>
+  <GrailLayoutCenterMain>
+    <main><h2>Welcome</h2></main>
+  </GrailLayoutCenterMain>
+  <GrailLayoutRightAside>
+    <aside>Related content</aside>
+  </GrailLayoutRightAside>
+  <GrailLayoutBottomFooter>
+    <footer><small>Copyright 2026</small></footer>
+  </GrailLayoutBottomFooter>
 </GrailLayout>
 ```
 
 ```svelte
 <script lang="ts">
-    import GrailLayout from "./GrailLayout.svelte";
-    import GrailLayoutTopHeader from "../GrailLayoutTopHeader/GrailLayoutTopHeader.svelte";
-    import GrailLayoutCenterMain from "../GrailLayoutCenterMain/GrailLayoutCenterMain.svelte";
-    import GrailLayoutBottomFooter from "../GrailLayoutBottomFooter/GrailLayoutBottomFooter.svelte";
+  import GrailLayout from "./GrailLayout.svelte";
+  import GrailLayoutTopHeader from "../GrailLayoutTopHeader/GrailLayoutTopHeader.svelte";
+  import GrailLayoutCenterMain from "../GrailLayoutCenterMain/GrailLayoutCenterMain.svelte";
+  import GrailLayoutBottomFooter from "../GrailLayoutBottomFooter/GrailLayoutBottomFooter.svelte";
 </script>
 
 <GrailLayout class="app-shell">
-    <GrailLayoutTopHeader><header>Header</header></GrailLayoutTopHeader>
-    <GrailLayoutCenterMain><main>Content only</main></GrailLayoutCenterMain>
-    <GrailLayoutBottomFooter><footer>Footer</footer></GrailLayoutBottomFooter>
+  <GrailLayoutTopHeader><header>Header</header></GrailLayoutTopHeader>
+  <GrailLayoutCenterMain><main>Content only</main></GrailLayoutCenterMain>
+  <GrailLayoutBottomFooter><footer>Footer</footer></GrailLayoutBottomFooter>
 </GrailLayout>
 ```
 
 ```svelte
 <script lang="ts">
-    import GrailLayout from "./GrailLayout.svelte";
-    import GrailLayoutTopHeader from "../GrailLayoutTopHeader/GrailLayoutTopHeader.svelte";
-    import GrailLayoutLeftAside from "../GrailLayoutLeftAside/GrailLayoutLeftAside.svelte";
-    import GrailLayoutCenterMain from "../GrailLayoutCenterMain/GrailLayoutCenterMain.svelte";
-    import GrailLayoutBottomFooter from "../GrailLayoutBottomFooter/GrailLayoutBottomFooter.svelte";
-    let menuOpen = $state(false);
+  import GrailLayout from "./GrailLayout.svelte";
+  import GrailLayoutTopHeader from "../GrailLayoutTopHeader/GrailLayoutTopHeader.svelte";
+  import GrailLayoutLeftAside from "../GrailLayoutLeftAside/GrailLayoutLeftAside.svelte";
+  import GrailLayoutCenterMain from "../GrailLayoutCenterMain/GrailLayoutCenterMain.svelte";
+  import GrailLayoutBottomFooter from "../GrailLayoutBottomFooter/GrailLayoutBottomFooter.svelte";
+  let menuOpen = $state(false);
 </script>
 
 <GrailLayout>
-    <GrailLayoutTopHeader>
-        <header>
-            <button onclick={() => (menuOpen = !menuOpen)}>Menu</button>
-        </header>
-    </GrailLayoutTopHeader>
-    {#if menuOpen}
-        <GrailLayoutLeftAside>
-            <nav aria-label="Main">...</nav>
-        </GrailLayoutLeftAside>
-    {/if}
-    <GrailLayoutCenterMain><main>Body</main></GrailLayoutCenterMain>
-    <GrailLayoutBottomFooter><footer>Footer</footer></GrailLayoutBottomFooter>
+  <GrailLayoutTopHeader>
+    <header>
+      <button onclick={() => (menuOpen = !menuOpen)}>Menu</button>
+    </header>
+  </GrailLayoutTopHeader>
+  {#if menuOpen}
+    <GrailLayoutLeftAside>
+      <nav aria-label="Main">...</nav>
+    </GrailLayoutLeftAside>
+  {/if}
+  <GrailLayoutCenterMain><main>Body</main></GrailLayoutCenterMain>
+  <GrailLayoutBottomFooter><footer>Footer</footer></GrailLayoutBottomFooter>
 </GrailLayout>
 ```
 
 ```svelte
 <script lang="ts">
-    import GrailLayout from "./GrailLayout.svelte";
-    import GrailLayoutTopHeader from "../GrailLayoutTopHeader/GrailLayoutTopHeader.svelte";
-    import GrailLayoutLeftAside from "../GrailLayoutLeftAside/GrailLayoutLeftAside.svelte";
-    import GrailLayoutCenterMain from "../GrailLayoutCenterMain/GrailLayoutCenterMain.svelte";
-    import GrailLayoutRightAside from "../GrailLayoutRightAside/GrailLayoutRightAside.svelte";
-    import GrailLayoutBottomFooter from "../GrailLayoutBottomFooter/GrailLayoutBottomFooter.svelte";
+  import GrailLayout from "./GrailLayout.svelte";
+  import GrailLayoutTopHeader from "../GrailLayoutTopHeader/GrailLayoutTopHeader.svelte";
+  import GrailLayoutLeftAside from "../GrailLayoutLeftAside/GrailLayoutLeftAside.svelte";
+  import GrailLayoutCenterMain from "../GrailLayoutCenterMain/GrailLayoutCenterMain.svelte";
+  import GrailLayoutRightAside from "../GrailLayoutRightAside/GrailLayoutRightAside.svelte";
+  import GrailLayoutBottomFooter from "../GrailLayoutBottomFooter/GrailLayoutBottomFooter.svelte";
 </script>
 
 <GrailLayout
-    class="themed-grail"
-    data-testid="grail"
-    aria-label="Application shell"
+  class="themed-grail"
+  data-testid="grail"
+  aria-label="Application shell"
 >
-    <GrailLayoutTopHeader><header>Header</header></GrailLayoutTopHeader>
-    <GrailLayoutLeftAside><nav>Left</nav></GrailLayoutLeftAside>
-    <GrailLayoutCenterMain><main>Main</main></GrailLayoutCenterMain>
-    <GrailLayoutRightAside><aside>Right</aside></GrailLayoutRightAside>
-    <GrailLayoutBottomFooter><footer>Footer</footer></GrailLayoutBottomFooter>
+  <GrailLayoutTopHeader><header>Header</header></GrailLayoutTopHeader>
+  <GrailLayoutLeftAside><nav>Left</nav></GrailLayoutLeftAside>
+  <GrailLayoutCenterMain><main>Main</main></GrailLayoutCenterMain>
+  <GrailLayoutRightAside><aside>Right</aside></GrailLayoutRightAside>
+  <GrailLayoutBottomFooter><footer>Footer</footer></GrailLayoutBottomFooter>
 </GrailLayout>
 ```
 
 ```svelte
 <script lang="ts">
-    import GrailLayout from "./GrailLayout.svelte";
-    import GrailLayoutTopHeader from "../GrailLayoutTopHeader/GrailLayoutTopHeader.svelte";
-    import GrailLayoutCenterMain from "../GrailLayoutCenterMain/GrailLayoutCenterMain.svelte";
-    import GrailLayoutBottomFooter from "../GrailLayoutBottomFooter/GrailLayoutBottomFooter.svelte";
-    import Header from "../Header/Header.svelte";
-    import Footer from "../Footer/Footer.svelte";
+  import GrailLayout from "./GrailLayout.svelte";
+  import GrailLayoutTopHeader from "../GrailLayoutTopHeader/GrailLayoutTopHeader.svelte";
+  import GrailLayoutCenterMain from "../GrailLayoutCenterMain/GrailLayoutCenterMain.svelte";
+  import GrailLayoutBottomFooter from "../GrailLayoutBottomFooter/GrailLayoutBottomFooter.svelte";
+  import Header from "../Header/Header.svelte";
+  import Footer from "../Footer/Footer.svelte";
 </script>
 
 <GrailLayout>
-    <GrailLayoutTopHeader>
-        <Header label="Site">
-            <h1>My site</h1>
-        </Header>
-    </GrailLayoutTopHeader>
-    <GrailLayoutCenterMain>
-        <main>
-            <p>Main content.</p>
-        </main>
-    </GrailLayoutCenterMain>
-    <GrailLayoutBottomFooter>
-        <Footer label="Site footer">
-            <small>Copyright 2026</small>
-        </Footer>
-    </GrailLayoutBottomFooter>
+  <GrailLayoutTopHeader>
+    <Header label="Site">
+      <h1>My site</h1>
+    </Header>
+  </GrailLayoutTopHeader>
+  <GrailLayoutCenterMain>
+    <main>
+      <p>Main content.</p>
+    </main>
+  </GrailLayoutCenterMain>
+  <GrailLayoutBottomFooter>
+    <Footer label="Site footer">
+      <small>Copyright 2026</small>
+    </Footer>
+  </GrailLayoutBottomFooter>
 </GrailLayout>
 ```
 

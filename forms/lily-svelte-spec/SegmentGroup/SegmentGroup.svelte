@@ -47,7 +47,9 @@
     // References:
     //   - WAI-ARIA Radio Group Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/radio/
 
+    import { warnMissingName } from "../dev-warning";
     import type { Snippet } from "svelte";
+    import { attachRadioGroup } from "../widget-keys";
 
     let {
         class: className = "",
@@ -61,10 +63,24 @@
         children: Snippet;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName(
+            "SegmentGroup",
+            label,
+            restProps["aria-label"],
+            restProps["aria-labelledby"],
+        ),
+    );
+
+    let rootEl = $state<HTMLElement>();
+
+    $effect(() => (rootEl ? attachRadioGroup(rootEl) : undefined));
 </script>
 
 <!-- SegmentGroup.svelte -->
 <div
+    bind:this={rootEl}
     class={`segment-group ${className}`}
     role="radiogroup"
     aria-label={label}

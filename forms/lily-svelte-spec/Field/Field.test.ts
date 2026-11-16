@@ -17,22 +17,30 @@ describe("Field", () => {
     });
 
     test("renders description", () => {
-        render(Subject, { props: { label: "Name", description: "Full name", children: textSnippet("input") } });
+        render(Subject, {
+            props: { label: "Name", description: "Full name", children: textSnippet("input") },
+        });
         expect(screen.getByText("Full name")).toBeTruthy();
     });
 
     test("renders error with alert role", () => {
-        render(Subject, { props: { label: "Name", error: "Required", children: textSnippet("input") } });
+        render(Subject, {
+            props: { label: "Name", error: "Required", children: textSnippet("input") },
+        });
         expect(screen.getByRole("alert").textContent).toBe("Required");
     });
 
     test("shows required indicator", () => {
-        render(Subject, { props: { label: "Name", required: true, children: textSnippet("input") } });
+        render(Subject, {
+            props: { label: "Name", required: true, children: textSnippet("input") },
+        });
         expect(screen.getByText("*")).toBeTruthy();
     });
 
     test("required indicator is aria-hidden", () => {
-        render(Subject, { props: { label: "Name", required: true, children: textSnippet("input") } });
+        render(Subject, {
+            props: { label: "Name", required: true, children: textSnippet("input") },
+        });
         expect(screen.getByText("*").closest("[aria-hidden]")).toBeTruthy();
     });
 

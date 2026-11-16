@@ -42,14 +42,14 @@ Place `MenuBarButton` elements inside a `MenuBar`, one per top-level entry. Wire
 
 ```svelte
 <script lang="ts">
-    import MenuBar from "../MenuBar/MenuBar.svelte";
-    import MenuBarButton from "./MenuBarButton.svelte";
+  import MenuBar from "../MenuBar/MenuBar.svelte";
+  import MenuBarButton from "./MenuBarButton.svelte";
 </script>
 
 <MenuBar label="Main menu">
-    <MenuBarButton>File</MenuBarButton>
-    <MenuBarButton>Edit</MenuBarButton>
-    <MenuBarButton>View</MenuBarButton>
+  <MenuBarButton>File</MenuBarButton>
+  <MenuBarButton>Edit</MenuBarButton>
+  <MenuBarButton>View</MenuBarButton>
 </MenuBar>
 ```
 
@@ -57,16 +57,16 @@ Place `MenuBarButton` elements inside a `MenuBar`, one per top-level entry. Wire
 
 ```svelte
 <script lang="ts">
-    import MenuBar from "../MenuBar/MenuBar.svelte";
-    import MenuBarButton from "./MenuBarButton.svelte";
+  import MenuBar from "../MenuBar/MenuBar.svelte";
+  import MenuBarButton from "./MenuBarButton.svelte";
 
-    function openFileMenu() {
-        console.log("open file menu");
-    }
+  function openFileMenu() {
+    console.log("open file menu");
+  }
 </script>
 
 <MenuBar label="Main">
-    <MenuBarButton onclick={openFileMenu}>File</MenuBarButton>
+  <MenuBarButton onclick={openFileMenu}>File</MenuBarButton>
 </MenuBar>
 ```
 
@@ -74,28 +74,28 @@ Place `MenuBarButton` elements inside a `MenuBar`, one per top-level entry. Wire
 
 ```svelte
 <script lang="ts">
-    import MenuBar from "../MenuBar/MenuBar.svelte";
-    import MenuBarButton from "./MenuBarButton.svelte";
-    import Menu from "../Menu/Menu.svelte";
-    import MenuItem from "../MenuItem/MenuItem.svelte";
-    let open = $state(false);
+  import MenuBar from "../MenuBar/MenuBar.svelte";
+  import MenuBarButton from "./MenuBarButton.svelte";
+  import Menu from "../Menu/Menu.svelte";
+  import MenuItem from "../MenuItem/MenuItem.svelte";
+  let open = $state(false);
 </script>
 
 <MenuBar label="Main">
-    <MenuBarButton
-        aria-haspopup="menu"
-        aria-expanded={open}
-        onclick={() => (open = !open)}
-    >
-        File
-    </MenuBarButton>
+  <MenuBarButton
+    aria-haspopup="menu"
+    aria-expanded={open}
+    onclick={() => (open = !open)}
+  >
+    File
+  </MenuBarButton>
 </MenuBar>
 
 {#if open}
-    <Menu label="File">
-        <MenuItem onclick={() => (open = false)}>New</MenuItem>
-        <MenuItem onclick={() => (open = false)}>Open</MenuItem>
-    </Menu>
+  <Menu label="File">
+    <MenuItem onclick={() => (open = false)}>New</MenuItem>
+    <MenuItem onclick={() => (open = false)}>Open</MenuItem>
+  </Menu>
 {/if}
 ```
 
@@ -103,13 +103,13 @@ Place `MenuBarButton` elements inside a `MenuBar`, one per top-level entry. Wire
 
 ```svelte
 <script lang="ts">
-    import MenuBar from "../MenuBar/MenuBar.svelte";
-    import MenuBarButton from "./MenuBarButton.svelte";
+  import MenuBar from "../MenuBar/MenuBar.svelte";
+  import MenuBarButton from "./MenuBarButton.svelte";
 </script>
 
 <MenuBar label="Main">
-    <MenuBarButton>File</MenuBarButton>
-    <MenuBarButton disabled>Edit</MenuBarButton>
+  <MenuBarButton>File</MenuBarButton>
+  <MenuBarButton disabled>Edit</MenuBarButton>
 </MenuBar>
 ```
 
@@ -117,26 +117,26 @@ Place `MenuBarButton` elements inside a `MenuBar`, one per top-level entry. Wire
 
 ```svelte
 <script lang="ts">
-    import MenuBar from "../MenuBar/MenuBar.svelte";
-    import MenuBarButton from "./MenuBarButton.svelte";
+  import MenuBar from "../MenuBar/MenuBar.svelte";
+  import MenuBarButton from "./MenuBarButton.svelte";
 </script>
 
 <MenuBar label="App">
-    <MenuBarButton class="mb-btn">File</MenuBarButton>
-    <MenuBarButton class="mb-btn">Edit</MenuBarButton>
+  <MenuBarButton class="mb-btn">File</MenuBarButton>
+  <MenuBarButton class="mb-btn">Edit</MenuBarButton>
 </MenuBar>
 
 <style>
-    :global(.mb-btn) {
-        padding: 0.25rem 0.75rem;
-        border: none;
-        background: transparent;
-        cursor: pointer;
-    }
-    :global(.mb-btn:focus-visible) {
-        outline: 2px solid #2563eb;
-        outline-offset: 2px;
-    }
+  :global(.mb-btn) {
+    padding: 0.25rem 0.75rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+  :global(.mb-btn:focus-visible) {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+  }
 </style>
 ```
 

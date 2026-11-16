@@ -31,61 +31,81 @@ Provide a required `label` and bind a value.
 
 ```svelte
 <script lang="ts">
-    import EmailInput from "./EmailInput.svelte";
-    let email = $state("");
+  import EmailInput from "./EmailInput.svelte";
+  let email = $state("");
 </script>
 
-<EmailInput label="Your email" bind:value={email} />
+<EmailInput
+  label="Your email"
+  bind:value={email}
+/>
 ```
 
 ## Props
 
-| Prop       | Type      | Default | Description                                  |
-| ---------- | --------- | ------- | -------------------------------------------- |
-| `class`    | `string`  | `""`    | CSS class appended to the base class.       |
-| `label`    | `string`  | required| Accessible name via `aria-label`.            |
-| `value`    | `string`  | `""`    | Bindable email value.                        |
-| `required` | `boolean` | `false` | Whether the field is required.               |
-| `disabled` | `boolean` | `false` | Whether the field is disabled.               |
-| `...rest`  | `unknown` | —       | Additional HTML attributes on the `<input>`. |
+| Prop       | Type      | Default  | Description                                  |
+| ---------- | --------- | -------- | -------------------------------------------- |
+| `class`    | `string`  | `""`     | CSS class appended to the base class.        |
+| `label`    | `string`  | required | Accessible name via `aria-label`.            |
+| `value`    | `string`  | `""`     | Bindable email value.                        |
+| `required` | `boolean` | `false`  | Whether the field is required.               |
+| `disabled` | `boolean` | `false`  | Whether the field is disabled.               |
+| `...rest`  | `unknown` | —        | Additional HTML attributes on the `<input>`. |
 
 ## Usage
 
 ### 1. Basic input
 
 ```svelte
-<EmailInput label="Your email" bind:value={email} />
+<EmailInput
+  label="Your email"
+  bind:value={email}
+/>
 ```
 
 ### 2. Required field
 
 ```svelte
-<EmailInput label="Contact email" bind:value={email} required />
+<EmailInput
+  label="Contact email"
+  bind:value={email}
+  required
+/>
 ```
 
 ### 3. Inside a Field
 
 ```svelte
-<Field label="Email" description="We'll never share your email.">
-    <EmailInput label="Email" bind:value={email} />
+<Field
+  label="Email"
+  description="We'll never share your email."
+>
+  <EmailInput
+    label="Email"
+    bind:value={email}
+  />
 </Field>
 ```
 
 ### 4. Disabled
 
 ```svelte
-<EmailInput label="Email" value="alice@example.com" disabled />
+<EmailInput
+  label="Email"
+  value="alice@example.com"
+  disabled
+/>
 ```
 
 ### 5. With name and autocomplete
 
 ```svelte
 <EmailInput
-    label="Email"
-    bind:value={email}
-    name="email"
-    autocomplete="email"
-    required
+  label="Email"
+  bind:value={email}
+  name="email"
+  autocomplete="email"
+  required
 />
 ```
 

@@ -54,6 +54,8 @@
     //   - WAI-ARIA Grid Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/grid/
 
     import type { Snippet } from "svelte";
+    import { warnMissingName } from "../dev-warning";
+    import { attachGrid } from "../widget-keys";
 
     let {
         class: className = "",
@@ -70,10 +72,16 @@
         children: Snippet;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() => warnMissingName("KanbanTable", label, restProps["aria-labelledby"]));
+
+    let rootEl = $state<HTMLElement>();
+    $effect(() => (rootEl ? attachGrid(rootEl) : undefined));
 </script>
 
 <!-- KanbanTable.svelte -->
 <table
+    bind:this={rootEl}
     class={`kanban-table ${className}`}
     role="grid"
     aria-label={label}

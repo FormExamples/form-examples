@@ -2,16 +2,19 @@
 <!-- AccordionList component -->
 <!--
   Description: a grouped container of accordion list item components
-  HTML tag: <div>  (not <ol>, because <details> is not valid inside <ol>/<ul>)
+  HTML tag: <ol>, of accordion-list-item <li>s each holding a <details>
   CSS class: accordion-list
   Keyboard: None (passive element)
-  Accessibility: role="group" + aria-label
+  Accessibility: native list semantics; optional aria-label
   Usage:
-    <div class="accordion-list" role="group" aria-label="Example">
-      ...
-    </div>
+    <ol class="accordion-list" aria-label="Example">
+      <li class="accordion-list-item"><details><summary>…</summary>…</details></li>
+    </ol>
 -->
 
-<div class="accordion-list" role="group" aria-label="">
-    <!-- Consumer provides accordion list items -->
-</div>
+<ol
+  class="accordion-list"
+  aria-label=""
+>
+  <!-- Consumer provides accordion list items -->
+</ol>

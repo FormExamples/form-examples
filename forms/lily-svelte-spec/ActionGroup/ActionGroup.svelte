@@ -33,11 +33,13 @@
     //   - Adobe Spectrum ActionGroup: https://spectrum.adobe.com/page/action-group/
 
     import type { Snippet } from "svelte";
+    import { attachToolbar } from "../widget-keys";
+    import { popoverState, popoverSupported, toggleOpened } from "../Popover/popover.js";
 
     let {
         class: className = "",
         label,
-        overflowOpen = false,
+        overflowOpen = $bindable(false),
         overflowLabel = undefined,
         onOverflowToggle = undefined,
         children = undefined,
@@ -47,22 +49,39 @@
         class?: string;
         /** Accessible label for the group (REQUIRED) */
         label: string;
-        /** Whether the overflow menu is open */
+        /** Whether the overflow menu is open. Bindable: the browser opens and light-dismisses it. */
         overflowOpen?: boolean;
         /** Accessible label for the overflow trigger button */
         overflowLabel?: string;
-        /** Click handler for the overflow trigger */
-        onOverflowToggle?: () => void;
+        /** Click handler for the overflow trigger; call preventDefault() on the event to keep the menu as it is */
+        onOverflowToggle?: (event: MouseEvent) => void;
         /** Visible action buttons */
         children?: Snippet;
         /** Overflow menu content */
         overflow?: Snippet;
         [key: string]: unknown;
     } = $props();
+
+    const uid = $props.id();
+    const menuId = `action-group-overflow-menu-${uid}`;
+    let menu: HTMLDivElement | undefined = $state();
+
+    // With the Popover API the trigger's command="toggle-popover" opens and closes the menu and the toggle event
+    // writes `overflowOpen` back; without it, the click toggles `overflowOpen` and popoverState sets `hidden`.
+    function toggle(event: MouseEvent) {
+        onOverflowToggle?.(event);
+        if (event.defaultPrevented) return;
+        if (menu && !popoverSupported(menu)) overflowOpen = !overflowOpen;
+    }
+
+    let rootEl = $state<HTMLElement>();
+
+    $effect(() => (rootEl ? attachToolbar(rootEl) : undefined));
 </script>
 
 <!-- ActionGroup.svelte -->
 <div
+    bind:this={rootEl}
     class={`action-group ${className}`}
     role="group"
     aria-label={label}
@@ -78,9 +97,20 @@
             aria-haspopup="menu"
             aria-expanded={overflowOpen}
             aria-label={overflowLabel}
-            onclick={onOverflowToggle}
-        >…</button>
-        <div class="action-group-overflow-menu" hidden={!overflowOpen}>
+            aria-controls={menuId}
+            command="toggle-popover"
+            commandfor={menuId}
+            popovertarget={menuId}
+            onclick={toggle}>…</button
+        >
+        <div
+            bind:this={menu}
+            class="action-group-overflow-menu"
+            id={menuId}
+            popover="auto"
+            use:popoverState={overflowOpen}
+            ontoggle={(event) => (overflowOpen = toggleOpened(event))}
+        >
             {@render overflow()}
         </div>
     {/if}

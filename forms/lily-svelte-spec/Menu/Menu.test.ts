@@ -43,7 +43,9 @@ describe("Menu", () => {
     });
 
     test("passes through attributes", () => {
-        render(Subject, { props: { label: "A", "data-testid": "m", children: menuItemsSnippet() } });
+        render(Subject, {
+            props: { label: "A", "data-testid": "m", children: menuItemsSnippet() },
+        });
         expect(screen.getByTestId("m")).toBeTruthy();
     });
 });

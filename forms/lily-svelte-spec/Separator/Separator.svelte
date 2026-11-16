@@ -52,6 +52,7 @@
 </script>
 
 <!-- Separator.svelte -->
+<!-- svelte-ignore a11y_no_redundant_roles (explicit role keeps the contract on wrapper hosts) -->
 <hr
     class={`separator ${className}`}
     role="separator"

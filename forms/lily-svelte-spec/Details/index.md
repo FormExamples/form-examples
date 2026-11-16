@@ -30,23 +30,23 @@ Pass a required `summary` string and wrap the revealed content in the default sl
 
 ```svelte
 <script lang="ts">
-    import Details from "./Details.svelte";
+  import Details from "./Details.svelte";
 </script>
 
 <Details summary="More information">
-    <p>Additional details shown when expanded.</p>
+  <p>Additional details shown when expanded.</p>
 </Details>
 ```
 
 ## Props
 
-| Prop       | Type       | Default  | Description                                      |
-| ---------- | ---------- | -------- | ------------------------------------------------ |
-| `class`    | `string`   | `""`     | CSS class appended to the base class.           |
-| `summary`  | `string`   | required | Text shown in the clickable `<summary>`.         |
-| `open`     | `boolean`  | `false`  | Whether the details section is expanded. Bindable. |
-| `children` | `Snippet`  | required | Content revealed when expanded.                  |
-| `...rest`  | `unknown`  | —        | Additional HTML attributes on the `<details>`.   |
+| Prop       | Type      | Default  | Description                                        |
+| ---------- | --------- | -------- | -------------------------------------------------- |
+| `class`    | `string`  | `""`     | CSS class appended to the base class.              |
+| `summary`  | `string`  | required | Text shown in the clickable `<summary>`.           |
+| `open`     | `boolean` | `false`  | Whether the details section is expanded. Bindable. |
+| `children` | `Snippet` | required | Content revealed when expanded.                    |
+| `...rest`  | `unknown` | —        | Additional HTML attributes on the `<details>`.     |
 
 ## Usage
 
@@ -54,7 +54,7 @@ Pass a required `summary` string and wrap the revealed content in the default sl
 
 ```svelte
 <Details summary="Read more">
-    <p>Lorem ipsum dolor sit amet.</p>
+  <p>Lorem ipsum dolor sit amet.</p>
 </Details>
 ```
 
@@ -62,12 +62,15 @@ Pass a required `summary` string and wrap the revealed content in the default sl
 
 ```svelte
 <script lang="ts">
-    import Details from "./Details.svelte";
-    let open = $state(false);
+  import Details from "./Details.svelte";
+  let open = $state(false);
 </script>
 
-<Details summary="Advanced options" bind:open>
-    <p>Configure advanced settings here.</p>
+<Details
+  summary="Advanced options"
+  bind:open
+>
+  <p>Configure advanced settings here.</p>
 </Details>
 <p>Open: {open}</p>
 ```
@@ -75,8 +78,11 @@ Pass a required `summary` string and wrap the revealed content in the default sl
 ### 3. Open by default
 
 ```svelte
-<Details summary="Terms and conditions" open>
-    <p>Full terms text…</p>
+<Details
+  summary="Terms and conditions"
+  open
+>
+  <p>Full terms text…</p>
 </Details>
 ```
 
@@ -92,15 +98,21 @@ Pass a required `summary` string and wrap the revealed content in the default sl
 
 ```svelte
 <script lang="ts">
-    import Details from "./Details.svelte";
-    let open = $state(false);
+  import Details from "./Details.svelte";
+  let open = $state(false);
 </script>
 
-<button type="button" onclick={() => open = !open}>
-    Toggle details
+<button
+  type="button"
+  onclick={() => (open = !open)}
+>
+  Toggle details
 </button>
-<Details summary="Details" bind:open>
-    <p>Controlled from outside.</p>
+<Details
+  summary="Details"
+  bind:open
+>
+  <p>Controlled from outside.</p>
 </Details>
 ```
 

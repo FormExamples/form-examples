@@ -24,7 +24,7 @@ A Svelte 5 headless component wrapping `<input type="search">`. It renders exact
 
 - A search field that needs a built-in submit button, icon, or combobox suggestions - compose with other components or use `TextInputWithSearch`/`Combobox`.
 - Generic text entry (use `TextInput`).
-- Tag entry (use `TagInput`).
+- Tag entry (use `TagInputDiv`).
 
 ## How to use it
 
@@ -48,11 +48,14 @@ Basic bound search:
 
 ```svelte
 <script lang="ts">
-    import SearchInput from "./SearchInput.svelte";
-    let query = $state("");
+  import SearchInput from "./SearchInput.svelte";
+  let query = $state("");
 </script>
 
-<SearchInput label="Search" bind:value={query} />
+<SearchInput
+  label="Search"
+  bind:value={query}
+/>
 <p>Current query: {query}</p>
 ```
 
@@ -60,15 +63,15 @@ With placeholder and name:
 
 ```svelte
 <script lang="ts">
-    import SearchInput from "./SearchInput.svelte";
-    let query = $state("");
+  import SearchInput from "./SearchInput.svelte";
+  let query = $state("");
 </script>
 
 <SearchInput
-    label="Search articles"
-    bind:value={query}
-    name="q"
-    placeholder="Type to search..."
+  label="Search articles"
+  bind:value={query}
+  name="q"
+  placeholder="Type to search..."
 />
 ```
 
@@ -76,13 +79,17 @@ Required inside a form:
 
 ```svelte
 <script lang="ts">
-    import SearchInput from "./SearchInput.svelte";
-    let query = $state("");
+  import SearchInput from "./SearchInput.svelte";
+  let query = $state("");
 </script>
 
 <form>
-    <SearchInput label="Filter products" bind:value={query} required />
-    <button type="submit">Go</button>
+  <SearchInput
+    label="Filter products"
+    bind:value={query}
+    required
+  />
+  <button type="submit">Go</button>
 </form>
 ```
 
@@ -90,28 +97,35 @@ Disabled while loading:
 
 ```svelte
 <script lang="ts">
-    import SearchInput from "./SearchInput.svelte";
-    let query = $state("");
-    let loading = $state(true);
+  import SearchInput from "./SearchInput.svelte";
+  let query = $state("");
+  let loading = $state(true);
 </script>
 
-<SearchInput label="Search" bind:value={query} disabled={loading} />
+<SearchInput
+  label="Search"
+  bind:value={query}
+  disabled={loading}
+/>
 ```
 
 Debounced filter:
 
 ```svelte
 <script lang="ts">
-    import SearchInput from "./SearchInput.svelte";
-    let query = $state("");
-    let timer: number;
-    $effect(() => {
-        clearTimeout(timer);
-        timer = setTimeout(() => console.log("search:", query), 250);
-    });
+  import SearchInput from "./SearchInput.svelte";
+  let query = $state("");
+  let timer: number;
+  $effect(() => {
+    clearTimeout(timer);
+    timer = setTimeout(() => console.log("search:", query), 250);
+  });
 </script>
 
-<SearchInput label="Search" bind:value={query} />
+<SearchInput
+  label="Search"
+  bind:value={query}
+/>
 ```
 
 ## Accessibility
@@ -122,6 +136,7 @@ Debounced filter:
 - Enter submits the containing form.
 
 References:
+
 - MDN `input type="search"`: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/search
 
 ## Related components
@@ -129,7 +144,7 @@ References:
 - `TextInput` - generic text entry.
 - `TextInputWithSearch` - text input with search affordances.
 - `Combobox` - text input with dropdown suggestions.
-- `TagInput` - build a list of tags from typed entries.
+- `TagInputDiv` - build a list of tags from typed entries.
 
 ---
 

@@ -4,29 +4,61 @@
   Description: a rotary dial control for selecting a value
   HTML tag: <div>
   CSS class: dial
-  Keyboard: Tab to focus, Arrow keys to adjust value
-  Accessibility: role="slider", aria-label for accessible name
+  Keyboard: ArrowRight/ArrowUp increase and ArrowLeft/ArrowDown decrease by data-step (default 1); Shift multiplies by 10; Home sets aria-valuemin, End sets aria-valuemax; aria-disabled="true" ignores keys
+  Accessibility: role="slider", tabindex, aria-label, aria-valuenow/aria-valuemin/aria-valuemax, aria-disabled
   Usage:
-    <div class="dial" role="slider" aria-label="Example">
-      ...
+    <div
+      class="dial"
+      role="slider"
+      tabindex="0"
+      aria-label=""
+      aria-valuenow="0"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      data-step="1"
+    >
     </div>
 -->
 
 <div
   class="dial"
   role="slider"
+  tabindex="0"
   aria-label=""
+  aria-valuenow="0"
+  aria-valuemin="0"
+  aria-valuemax="100"
+  data-step="1"
 >
-  <!-- Consumer provides content -->
+  <!-- Consumer provides the visual -->
 </div>
 
 <script>
   // Dial behavior
   (function() {
     'use strict';
-    // Dial: consumer implements interactive behavior
     document.querySelectorAll('.dial').forEach(function(el) {
-      // Interactive behavior initialization
+      function num(name, fallback) {
+        var n = parseFloat(el.getAttribute(name));
+        return isNaN(n) ? fallback : n;
+      }
+      el.addEventListener('keydown', function(e) {
+        if (el.getAttribute('aria-disabled') === 'true') return;
+        var min = num('aria-valuemin', 0);
+        var max = num('aria-valuemax', 100);
+        var step = num('data-step', 1) * (e.shiftKey ? 10 : 1);
+        var value = num('aria-valuenow', min);
+        var next = value;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowUp') next = value + step;
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') next = value - step;
+        else if (e.key === 'Home') next = min;
+        else if (e.key === 'End') next = max;
+        else return;
+        e.preventDefault();
+        next = Math.min(max, Math.max(min, next));
+        el.setAttribute('aria-valuenow', String(next));
+        el.dispatchEvent(new CustomEvent('change', { bubbles: true, detail: { value: next } }));
+      });
     });
   })();
 </script>

@@ -31,62 +31,74 @@ Provide a required `heading` describing the action, and optionally pick one of t
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `class` | `string` | `""` | CSS class name appended to the base class. |
-| `type` | `"non-urgent" \| "urgent" \| "immediate"` | `"non-urgent"` | Urgency tier exposed via `data-type`. |
-| `heading` | `string` | required | Heading text rendered in an `<h2>`. |
-| `label` | `string` | `undefined` | `aria-label` override; defaults to `heading`. |
-| `children` | `Snippet` | required | Body content. |
-| `...restProps` | `unknown` | — | Additional attributes spread onto the `<section>`. |
+| Prop           | Type                                      | Default        | Description                                        |
+| -------------- | ----------------------------------------- | -------------- | -------------------------------------------------- |
+| `class`        | `string`                                  | `""`           | CSS class name appended to the base class.         |
+| `type`         | `"non-urgent" \| "urgent" \| "immediate"` | `"non-urgent"` | Urgency tier exposed via `data-type`.              |
+| `heading`      | `string`                                  | required       | Heading text rendered in an `<h2>`.                |
+| `label`        | `string`                                  | `undefined`    | `aria-label` override; defaults to `heading`.      |
+| `children`     | `Snippet`                                 | required       | Body content.                                      |
+| `...restProps` | `unknown`                                 | —              | Additional attributes spread onto the `<section>`. |
 
 ## Usage
 
 ```svelte
 <script lang="ts">
-    import CareCard from "./CareCard.svelte";
+  import CareCard from "./CareCard.svelte";
 </script>
 
-<CareCard type="non-urgent" heading="Speak to a GP if:">
-    <ul>
-        <li>symptoms have lasted more than 3 days</li>
-    </ul>
+<CareCard
+  type="non-urgent"
+  heading="Speak to a GP if:"
+>
+  <ul>
+    <li>symptoms have lasted more than 3 days</li>
+  </ul>
 </CareCard>
 ```
 
 ```svelte
 <script lang="ts">
-    import CareCard from "./CareCard.svelte";
+  import CareCard from "./CareCard.svelte";
 </script>
 
-<CareCard type="urgent" heading="Ask for an urgent GP appointment or call 111 if:">
-    <ul>
-        <li>you feel faint or very weak</li>
-        <li>you have a high temperature</li>
-    </ul>
+<CareCard
+  type="urgent"
+  heading="Ask for an urgent GP appointment or call 111 if:"
+>
+  <ul>
+    <li>you feel faint or very weak</li>
+    <li>you have a high temperature</li>
+  </ul>
 </CareCard>
 ```
 
 ```svelte
 <script lang="ts">
-    import CareCard from "./CareCard.svelte";
+  import CareCard from "./CareCard.svelte";
 </script>
 
-<CareCard type="immediate" heading="Call 999 or go to A&E if:">
-    <ul>
-        <li>you have sudden chest pain</li>
-        <li>you have difficulty breathing</li>
-    </ul>
+<CareCard
+  type="immediate"
+  heading="Call 999 or go to A&E if:"
+>
+  <ul>
+    <li>you have sudden chest pain</li>
+    <li>you have difficulty breathing</li>
+  </ul>
 </CareCard>
 ```
 
 ```svelte
 <script lang="ts">
-    import CareCard from "./CareCard.svelte";
+  import CareCard from "./CareCard.svelte";
 </script>
 
-<CareCard heading="Self-care" label="Self-care advice">
-    <p>Rest, drink fluids, and monitor your symptoms.</p>
+<CareCard
+  heading="Self-care"
+  label="Self-care advice"
+>
+  <p>Rest, drink fluids, and monitor your symptoms.</p>
 </CareCard>
 ```
 

@@ -19,7 +19,9 @@ describe("VideoPlayer", () => {
 
     test("applies aria-label from label prop", () => {
         const { container } = render(Subject, { src: "/v.mp4", label: "Demo video" });
-        expect(container.querySelector(".video-player")?.getAttribute("aria-label")).toBe("Demo video");
+        expect(container.querySelector(".video-player")?.getAttribute("aria-label")).toBe(
+            "Demo video",
+        );
     });
 
     test("renders a video with src", () => {
@@ -41,9 +43,13 @@ describe("VideoPlayer", () => {
 
     test("renders caption snippet inside figcaption", () => {
         const { container } = render(Subject, {
-            src: "/v.mp4", label: "x", caption: snippet("A caption"),
+            src: "/v.mp4",
+            label: "x",
+            caption: snippet("A caption"),
         });
-        expect(container.querySelector("figcaption.video-player-caption")?.textContent).toBe("A caption");
+        expect(container.querySelector("figcaption.video-player-caption")?.textContent).toBe(
+            "A caption",
+        );
     });
 
     test("omits figcaption when no caption snippet", () => {

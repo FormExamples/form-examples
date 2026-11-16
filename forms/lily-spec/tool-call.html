@@ -1,0 +1,24 @@
+<!-- tool-call.html -->
+<!-- ToolCall component -->
+<!--
+  Description: a collapsible record of one tool invocation by an AI agent, with a name, a status word, and its input, output or error.
+  HTML tag: <details> with <summary class="tool-call-summary"> and <div class="tool-call-content">
+  CSS class: tool-call
+  Keyboard: Enter / Space on the native <summary> toggles
+  Accessibility: native details/summary; data-status carries the state and
+    aria-busy="true" only while running; the status word is visible text,
+    never colour alone; ToolCallError is role="alert" so open the call on error.
+-->
+
+<details class="tool-call" data-status="running" aria-busy="true" open>
+  <summary class="tool-call-summary"><span class="tool-call-name">search_web</span> <span class="tool-call-status" data-status="running">Running</span></summary>
+  <div class="tool-call-content">
+    <div class="tool-call-input" role="group" aria-label="Arguments">{"query": "weather"}</div>
+  </div>
+</details>
+<details class="tool-call" id="tool-call-error" data-status="error" open>
+  <summary class="tool-call-summary"><span class="tool-call-name">search_web</span> <span class="tool-call-status" data-status="error">Failed</span></summary>
+  <div class="tool-call-content">
+    <div class="tool-call-error" role="alert">The tool timed out.</div>
+  </div>
+</details>

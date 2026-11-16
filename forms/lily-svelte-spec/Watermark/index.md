@@ -36,7 +36,7 @@ A headless Svelte 5 component inspired by [Ant Design Watermark](https://ant.des
 
 ```svelte
 <script lang="ts">
-  import Watermark from './Watermark.svelte';
+  import Watermark from "./Watermark.svelte";
 </script>
 
 <Watermark text="Confidential">

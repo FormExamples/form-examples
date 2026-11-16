@@ -10,7 +10,7 @@ See [components/comment/index.md](../../../components/comment/index.md) for the 
 
 ```svelte
 <script lang="ts">
-    import Comment from "./Comment.svelte";
+  import Comment from "./Comment.svelte";
 </script>
 
 <Comment />

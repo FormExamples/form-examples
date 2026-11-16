@@ -44,6 +44,8 @@
     //   - Ant Design Popconfirm: https://ant.design/components/popconfirm
     //   - WAI-ARIA Alert and Message Dialogs Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/
 
+    import { popoverState } from "../Popover/popover.js";
+
     let {
         class: className = "",
         open = false,
@@ -95,12 +97,23 @@
     aria-modal="false"
     aria-labelledby={titleId}
     aria-describedby={description ? descId : undefined}
-    hidden={!open}
+    popover="manual"
+    use:popoverState={open}
     {...restProps}
 >
-    <h2 class="popconfirm-dialog-title" id={titleId}>{title}</h2>
+    <h2
+        class="popconfirm-dialog-title"
+        id={titleId}
+    >
+        {title}
+    </h2>
     {#if description}
-        <p class="popconfirm-dialog-description" id={descId}>{description}</p>
+        <p
+            class="popconfirm-dialog-description"
+            id={descId}
+        >
+            {description}
+        </p>
     {/if}
     <button
         class="popconfirm-dialog-cancel"

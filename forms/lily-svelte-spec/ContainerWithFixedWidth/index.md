@@ -42,7 +42,7 @@ Import `ContainerWithFixedWidth` and pass `maxWidth`. Required prop: `children`.
 
 ```svelte
 <script lang="ts">
-  import ContainerWithFixedWidth from './ContainerWithFixedWidth.svelte';
+  import ContainerWithFixedWidth from "./ContainerWithFixedWidth.svelte";
 </script>
 
 <ContainerWithFixedWidth maxWidth="960px">

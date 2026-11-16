@@ -7,7 +7,7 @@ describe("NorgeFodselsnummerView", () => {
     test("renders with the correct class", () => {
         render(Subject, { props: { label: "Norwegian Birth Number", value: "test-value" } });
 
-        const el = screen.getByLabelText("Norwegian Birth Number");
+        const el = document.querySelector(".norge-fodselsnummer-view") as HTMLElement;
         expect(el).toBeTruthy();
         expect(el.getAttribute("class")).toContain("norge-fodselsnummer-view");
     });
@@ -15,14 +15,19 @@ describe("NorgeFodselsnummerView", () => {
     test("renders the value as text content", () => {
         render(Subject, { props: { label: "Norwegian Birth Number", value: "test-value" } });
 
-        const el = screen.getByLabelText("Norwegian Birth Number");
-        expect(el.textContent).toBe("test-value");
+        const el = document.querySelector(".norge-fodselsnummer-view") as HTMLElement;
+        expect(
+            el.textContent?.replace(el.querySelector(".screen-reader-span")?.textContent ?? "", ""),
+        ).toBe("test-value");
     });
 
     test("has aria-label from the label prop", () => {
         render(Subject, { props: { label: "Norwegian Birth Number" } });
 
-        const el = screen.getByLabelText("Norwegian Birth Number");
-        expect(el.getAttribute("aria-label")).toBe("Norwegian Birth Number");
+        const el = document.querySelector(".norge-fodselsnummer-view") as HTMLElement;
+        expect(el.querySelector(".screen-reader-span")?.textContent).toBe(
+            `${"Norwegian Birth Number"} `,
+        );
+        expect(el.hasAttribute("aria-label")).toBe(false);
     });
 });

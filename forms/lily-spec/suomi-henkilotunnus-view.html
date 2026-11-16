@@ -5,13 +5,12 @@
   HTML tag: <span>
   CSS class: suomi-henkilotunnus-view
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
   Format: 11 characters in the format DDMMYYCZZZQ: DDMMYY is the date of birth, C is the century sign (+, -, or A), ZZZ is an individual number (odd male, even female), Q is the checksum
   Usage:
-    <span class="suomi-henkilotunnus-view" aria-label="Personal Identity Code">value-here</span>
+    <span class="suomi-henkilotunnus-view">value-here</span>
 -->
 
-<span
-  class="suomi-henkilotunnus-view"
-  aria-label="Personal Identity Code"
-></span>
+<span class="suomi-henkilotunnus-view"
+  ><span class="screen-reader-span">Personal Identity Code </span></span
+>

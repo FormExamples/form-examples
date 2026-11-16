@@ -22,20 +22,24 @@ function htmlSnippet(html: string) {
 
 describe("ButtonGroup", () => {
     test("renders as a div with the button-group class", () => {
-        const { container } = render(Subject, { props: {
-            label: "Edit actions",
-            children: textSnippet("buttons"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Edit actions",
+                children: textSnippet("buttons"),
+            },
+        });
 
         const root = container.querySelector("div.button-group") as HTMLElement;
         expect(root).toBeTruthy();
     });
 
     test("applies role=group and aria-label", () => {
-        render(Subject, { props: {
-            label: "Pagination controls",
-            children: textSnippet("buttons"),
-        }});
+        render(Subject, {
+            props: {
+                label: "Pagination controls",
+                children: textSnippet("buttons"),
+            },
+        });
 
         const group = screen.getByRole("group", { name: "Pagination controls" });
         expect(group).toBeTruthy();
@@ -43,10 +47,12 @@ describe("ButtonGroup", () => {
     });
 
     test("renders children content", () => {
-        const { container } = render(Subject, { props: {
-            label: "Group",
-            children: htmlSnippet("<button>One</button><button>Two</button>"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Group",
+                children: htmlSnippet("<button>One</button><button>Two</button>"),
+            },
+        });
 
         const buttons = container.querySelectorAll("button");
         expect(buttons.length).toBe(2);
@@ -55,11 +61,13 @@ describe("ButtonGroup", () => {
     });
 
     test("appends consumer class to base class", () => {
-        const { container } = render(Subject, { props: {
-            label: "Group",
-            class: "extra",
-            children: textSnippet("x"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Group",
+                class: "extra",
+                children: textSnippet("x"),
+            },
+        });
 
         const root = container.querySelector("div") as HTMLElement;
         expect(root.className).toContain("button-group");
@@ -67,11 +75,13 @@ describe("ButtonGroup", () => {
     });
 
     test("spreads rest props onto the root", () => {
-        const { container } = render(Subject, { props: {
-            label: "Group",
-            "data-test": "foo",
-            children: textSnippet("x"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Group",
+                "data-test": "foo",
+                children: textSnippet("x"),
+            },
+        });
 
         const root = container.querySelector("div") as HTMLElement;
         expect(root.getAttribute("data-test")).toBe("foo");

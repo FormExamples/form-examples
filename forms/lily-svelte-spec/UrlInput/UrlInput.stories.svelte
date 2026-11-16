@@ -1,15 +1,18 @@
-<script module lang="ts">
-  import { defineMeta } from '@storybook/addon-svelte-csf';
-  import UrlInput from './UrlInput.svelte';
+<script
+    module
+    lang="ts"
+>
+    import { defineMeta } from "@storybook/addon-svelte-csf";
+    import UrlInput from "./UrlInput.svelte";
 
-  const { Story } = defineMeta({
-    title: 'Headless/UrlInput',
-    component: UrlInput,
-  });
+    const { Story } = defineMeta({
+        title: "Headless/UrlInput",
+        component: UrlInput,
+    });
 </script>
 
 <Story
-  name="Default"
-  tags={['autodocs', '!dev']}
-  args={{'label':'Url Input'}}
+    name="Default"
+    tags={["autodocs", "!dev"]}
+    args={{ label: "Url Input" }}
 />

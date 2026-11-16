@@ -50,6 +50,7 @@
     // References:
     //   - WAI-ARIA Disclosure Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
 
+    import { warnMissingName } from "../dev-warning";
     import type { Snippet } from "svelte";
 
     let {
@@ -67,6 +68,10 @@
         children: Snippet;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName("Expander", label, restProps["aria-label"], restProps["aria-labelledby"]),
+    );
 
     const uid = $props.id();
     const contentId = `expander-${uid}`;

@@ -32,74 +32,87 @@ Import the component and pass content through `children`. Use `heading` and `hea
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `class` | `string` | `""` | CSS class name appended to the base class. |
-| `heading` | `string` | `undefined` | Heading text rendered inside the article. |
-| `headingLevel` | `2 \| 3 \| 4 \| 5 \| 6` | `3` | HTML heading level for the heading. |
-| `href` | `string` | `undefined` | When set, wraps the heading text in an `<a>`. |
-| `label` | `string` | `undefined` | `aria-label` for the `<article>` landmark. |
-| `children` | `Snippet` | required | Card body content. |
-| `...restProps` | `unknown` | — | Additional attributes spread onto the `<article>`. |
+| Prop           | Type                    | Default     | Description                                        |
+| -------------- | ----------------------- | ----------- | -------------------------------------------------- |
+| `class`        | `string`                | `""`        | CSS class name appended to the base class.         |
+| `heading`      | `string`                | `undefined` | Heading text rendered inside the article.          |
+| `headingLevel` | `2 \| 3 \| 4 \| 5 \| 6` | `3`         | HTML heading level for the heading.                |
+| `href`         | `string`                | `undefined` | When set, wraps the heading text in an `<a>`.      |
+| `label`        | `string`                | `undefined` | `aria-label` for the `<article>` landmark.         |
+| `children`     | `Snippet`               | required    | Card body content.                                 |
+| `...restProps` | `unknown`               | —           | Additional attributes spread onto the `<article>`. |
 
 ## Usage
 
 ```svelte
 <script lang="ts">
-    import Card from "./Card.svelte";
+  import Card from "./Card.svelte";
 </script>
 
 <Card>
-    <h3>Plain card</h3>
-    <p>Body content.</p>
+  <h3>Plain card</h3>
+  <p>Body content.</p>
 </Card>
 ```
 
 ```svelte
 <script lang="ts">
-    import Card from "./Card.svelte";
+  import Card from "./Card.svelte";
 </script>
 
-<Card heading="Product name" href="/products/1">
-    <p>Product description</p>
+<Card
+  heading="Product name"
+  href="/products/1"
+>
+  <p>Product description</p>
 </Card>
 ```
 
 ```svelte
 <script lang="ts">
-    import Card from "./Card.svelte";
+  import Card from "./Card.svelte";
 </script>
 
-<Card heading="Dashboard" headingLevel={2} label="Sales dashboard">
-    <p>Revenue metrics for Q1.</p>
+<Card
+  heading="Dashboard"
+  headingLevel={2}
+  label="Sales dashboard"
+>
+  <p>Revenue metrics for Q1.</p>
 </Card>
 ```
 
 ```svelte
 <script lang="ts">
-    import Card from "./Card.svelte";
+  import Card from "./Card.svelte";
 
-    let items = $state([
-        { id: 1, title: "One", body: "First" },
-        { id: 2, title: "Two", body: "Second" }
-    ]);
+  let items = $state([
+    { id: 1, title: "One", body: "First" },
+    { id: 2, title: "Two", body: "Second" },
+  ]);
 </script>
 
 {#each items as item (item.id)}
-    <Card heading={item.title} href={`/items/${item.id}`}>
-        <p>{item.body}</p>
-    </Card>
+  <Card
+    heading={item.title}
+    href={`/items/${item.id}`}
+  >
+    <p>{item.body}</p>
+  </Card>
 {/each}
 ```
 
 ```svelte
 <script lang="ts">
-    import Card from "./Card.svelte";
+  import Card from "./Card.svelte";
 </script>
 
-<Card heading="User profile" headingLevel={4}>
-    <p>Name: Alice</p>
-    <p>Role: Administrator</p>
+<Card
+  heading="User profile"
+  headingLevel={4}
+>
+  <p>Name: Alice</p>
+  <p>Role: Administrator</p>
 </Card>
 ```
 

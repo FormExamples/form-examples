@@ -7,7 +7,7 @@ describe("AlbaCommunityHealthIndexView", () => {
     test("renders with the correct class", () => {
         render(Subject, { props: { label: "Community Health Index", value: "test-value" } });
 
-        const el = screen.getByLabelText("Community Health Index");
+        const el = document.querySelector(".alba-community-health-index-view") as HTMLElement;
         expect(el).toBeTruthy();
         expect(el.getAttribute("class")).toContain("alba-community-health-index-view");
     });
@@ -15,14 +15,19 @@ describe("AlbaCommunityHealthIndexView", () => {
     test("renders the value as text content", () => {
         render(Subject, { props: { label: "Community Health Index", value: "test-value" } });
 
-        const el = screen.getByLabelText("Community Health Index");
-        expect(el.textContent).toBe("test-value");
+        const el = document.querySelector(".alba-community-health-index-view") as HTMLElement;
+        expect(
+            el.textContent?.replace(el.querySelector(".screen-reader-span")?.textContent ?? "", ""),
+        ).toBe("test-value");
     });
 
     test("has aria-label from the label prop", () => {
         render(Subject, { props: { label: "Community Health Index" } });
 
-        const el = screen.getByLabelText("Community Health Index");
-        expect(el.getAttribute("aria-label")).toBe("Community Health Index");
+        const el = document.querySelector(".alba-community-health-index-view") as HTMLElement;
+        expect(el.querySelector(".screen-reader-span")?.textContent).toBe(
+            `${"Community Health Index"} `,
+        );
+        expect(el.hasAttribute("aria-label")).toBe(false);
     });
 });

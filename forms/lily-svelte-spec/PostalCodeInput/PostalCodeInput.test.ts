@@ -17,7 +17,9 @@ describe("PostalCodeInput", () => {
 
     test("has autocomplete postal-code", () => {
         render(Subject, { props: { label: "Postal code" } });
-        expect((screen.getByLabelText("Postal code") as HTMLInputElement).autocomplete).toBe("postal-code");
+        expect((screen.getByLabelText("Postal code") as HTMLInputElement).autocomplete).toBe(
+            "postal-code",
+        );
     });
 
     test("supports required", () => {

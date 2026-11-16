@@ -51,13 +51,16 @@ import Option from './Option.svelte';
 
 ```svelte
 <script lang="ts">
-  import Option from './Option.svelte';
+  import Option from "./Option.svelte";
 </script>
 
 <select name="country">
   <Option value="us">United States</Option>
   <Option value="uk">United Kingdom</Option>
-  <Option value="ca" disabled>Canada</Option>
+  <Option
+    value="ca"
+    disabled>Canada</Option
+  >
 </select>
 ```
 
@@ -65,13 +68,16 @@ import Option from './Option.svelte';
 
 ```svelte
 <script lang="ts">
-  import Select from '../Select/Select.svelte';
-  import Option from './Option.svelte';
+  import Select from "../Select/Select.svelte";
+  import Option from "./Option.svelte";
 
   let country = $state("us");
 </script>
 
-<Select label="Country" bind:value={country}>
+<Select
+  label="Country"
+  bind:value={country}
+>
   <Option value="us">United States</Option>
   <Option value="uk">United Kingdom</Option>
   <Option value="ca">Canada</Option>
@@ -82,12 +88,15 @@ import Option from './Option.svelte';
 
 ```svelte
 <script lang="ts">
-  import Option from './Option.svelte';
+  import Option from "./Option.svelte";
 </script>
 
 <select>
   <Option value="s">Small</Option>
-  <Option value="m" selected>Medium</Option>
+  <Option
+    value="m"
+    selected>Medium</Option
+  >
   <Option value="l">Large</Option>
 </select>
 ```
@@ -96,14 +105,14 @@ import Option from './Option.svelte';
 
 ```svelte
 <script lang="ts">
-  import Option from './Option.svelte';
+  import Option from "./Option.svelte";
 
   const sizes = [
-    { value: 's', label: 'Small' },
-    { value: 'm', label: 'Medium' },
-    { value: 'l', label: 'Large' },
+    { value: "s", label: "Small" },
+    { value: "m", label: "Medium" },
+    { value: "l", label: "Large" },
   ];
-  let size = $state('m');
+  let size = $state("m");
 </script>
 
 <select bind:value={size}>
@@ -116,7 +125,10 @@ import Option from './Option.svelte';
 ### With a data attribute hook
 
 ```svelte
-<Option value="urgent" data-priority="high">Urgent</Option>
+<Option
+  value="urgent"
+  data-priority="high">Urgent</Option
+>
 ```
 
 ## Accessibility

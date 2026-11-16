@@ -15,7 +15,9 @@ describe("AustraliaIndividualHealthcareIdentifierInput", () => {
         render(Subject, { props: { label: "Individual Healthcare Identifier" } });
 
         const input = screen.getByLabelText("Individual Healthcare Identifier");
-        expect(input.getAttribute("class")).toContain("australia-individual-healthcare-identifier-input");
+        expect(input.getAttribute("class")).toContain(
+            "australia-individual-healthcare-identifier-input",
+        );
     });
 
     test("has autocomplete off", () => {
@@ -54,7 +56,9 @@ describe("AustraliaIndividualHealthcareIdentifierInput", () => {
     });
 
     test("passes through additional HTML attributes", () => {
-        render(Subject, { props: { label: "Individual Healthcare Identifier", "data-testid": "subject" } });
+        render(Subject, {
+            props: { label: "Individual Healthcare Identifier", "data-testid": "subject" },
+        });
 
         const input = screen.getByTestId("subject");
         expect(input).toBeTruthy();

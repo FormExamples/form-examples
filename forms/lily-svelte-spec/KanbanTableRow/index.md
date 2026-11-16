@@ -39,14 +39,14 @@ Nest `KanbanTableRow` inside `KanbanTableHead`, `KanbanTableBody`, or `KanbanTab
 
 ```svelte
 <script lang="ts">
-    import KanbanTableRow from "./KanbanTableRow.svelte";
-    import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
+  import KanbanTableRow from "./KanbanTableRow.svelte";
+  import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
 </script>
 
 <KanbanTableRow>
-    <KanbanTableTD>Task A</KanbanTableTD>
-    <KanbanTableTD>Task B</KanbanTableTD>
-    <KanbanTableTD>Task C</KanbanTableTD>
+  <KanbanTableTD>Task A</KanbanTableTD>
+  <KanbanTableTD>Task B</KanbanTableTD>
+  <KanbanTableTD>Task C</KanbanTableTD>
 </KanbanTableRow>
 ```
 
@@ -54,13 +54,13 @@ Nest `KanbanTableRow` inside `KanbanTableHead`, `KanbanTableBody`, or `KanbanTab
 
 ```svelte
 <script lang="ts">
-    import KanbanTableRow from "./KanbanTableRow.svelte";
+  import KanbanTableRow from "./KanbanTableRow.svelte";
 </script>
 
 <KanbanTableRow>
-    <th scope="col">To Do</th>
-    <th scope="col">In Progress</th>
-    <th scope="col">Done</th>
+  <th scope="col">To Do</th>
+  <th scope="col">In Progress</th>
+  <th scope="col">Done</th>
 </KanbanTableRow>
 ```
 
@@ -68,15 +68,15 @@ Nest `KanbanTableRow` inside `KanbanTableHead`, `KanbanTableBody`, or `KanbanTab
 
 ```svelte
 <script lang="ts">
-    import KanbanTableRow from "./KanbanTableRow.svelte";
-    import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
-    let cells = $state(["Fix login", "Write docs", "Ship 1.0"]);
+  import KanbanTableRow from "./KanbanTableRow.svelte";
+  import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
+  let cells = $state(["Fix login", "Write docs", "Ship 1.0"]);
 </script>
 
 <KanbanTableRow>
-    {#each cells as cell}
-        <KanbanTableTD>{cell}</KanbanTableTD>
-    {/each}
+  {#each cells as cell}
+    <KanbanTableTD>{cell}</KanbanTableTD>
+  {/each}
 </KanbanTableRow>
 ```
 
@@ -84,15 +84,15 @@ Nest `KanbanTableRow` inside `KanbanTableHead`, `KanbanTableBody`, or `KanbanTab
 
 ```svelte
 <script lang="ts">
-    import KanbanTableRow from "./KanbanTableRow.svelte";
-    import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
-    let selected = $state(1);
+  import KanbanTableRow from "./KanbanTableRow.svelte";
+  import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
+  let selected = $state(1);
 </script>
 
 <KanbanTableRow>
-    {#each ["A", "B", "C"] as item, i}
-        <KanbanTableTD active={selected === i}>{item}</KanbanTableTD>
-    {/each}
+  {#each ["A", "B", "C"] as item, i}
+    <KanbanTableTD active={selected === i}>{item}</KanbanTableTD>
+  {/each}
 </KanbanTableRow>
 ```
 
@@ -100,14 +100,17 @@ Nest `KanbanTableRow` inside `KanbanTableHead`, `KanbanTableBody`, or `KanbanTab
 
 ```svelte
 <script lang="ts">
-    import KanbanTableRow from "./KanbanTableRow.svelte";
-    import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
+  import KanbanTableRow from "./KanbanTableRow.svelte";
+  import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
 </script>
 
-<KanbanTableRow class="row-highlight" data-priority="high">
-    <KanbanTableTD>Bug: Login failure</KanbanTableTD>
-    <KanbanTableTD />
-    <KanbanTableTD />
+<KanbanTableRow
+  class="row-highlight"
+  data-priority="high"
+>
+  <KanbanTableTD>Bug: Login failure</KanbanTableTD>
+  <KanbanTableTD />
+  <KanbanTableTD />
 </KanbanTableRow>
 ```
 
@@ -122,7 +125,7 @@ Nest `KanbanTableRow` inside `KanbanTableHead`, `KanbanTableBody`, or `KanbanTab
 - `KanbanTableHead`, `KanbanTableBody`, `KanbanTableFoot` — section wrappers.
 - `KanbanTableTD` — a `<td role="gridcell">` task cell.
 - `KanbanTableTD` — `<col>` column definitions inside `<colgroup>`.
-- `DataTableRow`, `CalendarTableRow`, `GanttTableTR` — equivalent rows for other table types.
+- `DataTableRow`, `CalendarTableRow`, `GanttTableTr` — equivalent rows for other table types.
 
 ---
 

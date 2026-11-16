@@ -50,21 +50,24 @@ Wrap medical banner content in `MedicalBanner`, nest `MedicalBannerBox` (for lay
 
 ```svelte
 <script lang="ts">
-    import MedicalBanner from "./MedicalBanner.svelte";
-    import MedicalBannerBox from "../MedicalBannerBox/MedicalBannerBox.svelte";
-    import MedicalBannerBoxForDanger from "../MedicalBannerBoxForDanger/MedicalBannerBoxForDanger.svelte";
-    import MedicalBannerBoxForAdvice from "../MedicalBannerBoxForAdvice/MedicalBannerBoxForAdvice.svelte";
+  import MedicalBanner from "./MedicalBanner.svelte";
+  import MedicalBannerBox from "../MedicalBannerBox/MedicalBannerBox.svelte";
+  import MedicalBannerBoxForDanger from "../MedicalBannerBoxForDanger/MedicalBannerBoxForDanger.svelte";
+  import MedicalBannerBoxForAdvice from "../MedicalBannerBoxForAdvice/MedicalBannerBoxForAdvice.svelte";
 </script>
 
-<MedicalBanner label="Patient record summary" type="info">
-    <MedicalBannerBox>
-        <MedicalBannerBoxForDanger label="Allergies">
-            <p>Penicillin</p>
-        </MedicalBannerBoxForDanger>
-        <MedicalBannerBoxForAdvice label="Care contacts">
-            <p>GP: Dr. Rivera</p>
-        </MedicalBannerBoxForAdvice>
-    </MedicalBannerBox>
+<MedicalBanner
+  label="Patient record summary"
+  type="info"
+>
+  <MedicalBannerBox>
+    <MedicalBannerBoxForDanger label="Allergies">
+      <p>Penicillin</p>
+    </MedicalBannerBoxForDanger>
+    <MedicalBannerBoxForAdvice label="Care contacts">
+      <p>GP: Dr. Rivera</p>
+    </MedicalBannerBoxForAdvice>
+  </MedicalBannerBox>
 </MedicalBanner>
 ```
 
@@ -72,20 +75,20 @@ Wrap medical banner content in `MedicalBanner`, nest `MedicalBannerBox` (for lay
 
 ```svelte
 <script lang="ts">
-    import MedicalBanner from "./MedicalBanner.svelte";
-    function logDismiss() {
-        console.log("banner dismissed");
-    }
+  import MedicalBanner from "./MedicalBanner.svelte";
+  function logDismiss() {
+    console.log("banner dismissed");
+  }
 </script>
 
 <MedicalBanner
-    label="Infection control advisory"
-    type="warning"
-    dismissible
-    closeLabel="Dismiss advisory"
-    onclose={logDismiss}
+  label="Infection control advisory"
+  type="warning"
+  dismissible
+  closeLabel="Dismiss advisory"
+  onclose={logDismiss}
 >
-    <p>Follow hand-hygiene protocol.</p>
+  <p>Follow hand-hygiene protocol.</p>
 </MedicalBanner>
 ```
 
@@ -93,11 +96,14 @@ Wrap medical banner content in `MedicalBanner`, nest `MedicalBannerBox` (for lay
 
 ```svelte
 <script lang="ts">
-    import MedicalBanner from "./MedicalBanner.svelte";
+  import MedicalBanner from "./MedicalBanner.svelte";
 </script>
 
-<MedicalBanner label="Critical lab result" type="warning">
-    <p>Potassium outside reference range.</p>
+<MedicalBanner
+  label="Critical lab result"
+  type="warning"
+>
+  <p>Potassium outside reference range.</p>
 </MedicalBanner>
 ```
 
@@ -105,14 +111,17 @@ Wrap medical banner content in `MedicalBanner`, nest `MedicalBannerBox` (for lay
 
 ```svelte
 <script lang="ts">
-    import MedicalBanner from "./MedicalBanner.svelte";
-    import MedicalBannerBox from "../MedicalBannerBox/MedicalBannerBox.svelte";
+  import MedicalBanner from "./MedicalBanner.svelte";
+  import MedicalBannerBox from "../MedicalBannerBox/MedicalBannerBox.svelte";
 </script>
 
-<MedicalBanner label="System unavailable" type="error">
-    <MedicalBannerBox>
-        <p>EHR is offline. Contact support.</p>
-    </MedicalBannerBox>
+<MedicalBanner
+  label="System unavailable"
+  type="error"
+>
+  <MedicalBannerBox>
+    <p>EHR is offline. Contact support.</p>
+  </MedicalBannerBox>
 </MedicalBanner>
 ```
 
@@ -120,11 +129,14 @@ Wrap medical banner content in `MedicalBanner`, nest `MedicalBannerBox` (for lay
 
 ```svelte
 <script lang="ts">
-    import MedicalBanner from "./MedicalBanner.svelte";
+  import MedicalBanner from "./MedicalBanner.svelte";
 </script>
 
-<MedicalBanner label="Record saved" type="success">
-    <p>Record submitted at 14:35.</p>
+<MedicalBanner
+  label="Record saved"
+  type="success"
+>
+  <p>Record submitted at 14:35.</p>
 </MedicalBanner>
 ```
 

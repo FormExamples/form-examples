@@ -15,7 +15,9 @@ describe("ElladaDematerialisedSecuritiesSystemInput", () => {
         render(Subject, { props: { label: "Dematerialised Securities System" } });
 
         const input = screen.getByLabelText("Dematerialised Securities System");
-        expect(input.getAttribute("class")).toContain("ellada-dematerialised-securities-system-input");
+        expect(input.getAttribute("class")).toContain(
+            "ellada-dematerialised-securities-system-input",
+        );
     });
 
     test("has autocomplete off", () => {
@@ -54,7 +56,9 @@ describe("ElladaDematerialisedSecuritiesSystemInput", () => {
     });
 
     test("passes through additional HTML attributes", () => {
-        render(Subject, { props: { label: "Dematerialised Securities System", "data-testid": "subject" } });
+        render(Subject, {
+            props: { label: "Dematerialised Securities System", "data-testid": "subject" },
+        });
 
         const input = screen.getByTestId("subject");
         expect(input).toBeTruthy();

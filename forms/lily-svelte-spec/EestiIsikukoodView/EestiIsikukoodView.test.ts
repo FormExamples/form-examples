@@ -7,7 +7,7 @@ describe("EestiIsikukoodView", () => {
     test("renders with the correct class", () => {
         render(Subject, { props: { label: "Personal Identification Code", value: "test-value" } });
 
-        const el = screen.getByLabelText("Personal Identification Code");
+        const el = document.querySelector(".eesti-isikukood-view") as HTMLElement;
         expect(el).toBeTruthy();
         expect(el.getAttribute("class")).toContain("eesti-isikukood-view");
     });
@@ -15,14 +15,19 @@ describe("EestiIsikukoodView", () => {
     test("renders the value as text content", () => {
         render(Subject, { props: { label: "Personal Identification Code", value: "test-value" } });
 
-        const el = screen.getByLabelText("Personal Identification Code");
-        expect(el.textContent).toBe("test-value");
+        const el = document.querySelector(".eesti-isikukood-view") as HTMLElement;
+        expect(
+            el.textContent?.replace(el.querySelector(".screen-reader-span")?.textContent ?? "", ""),
+        ).toBe("test-value");
     });
 
     test("has aria-label from the label prop", () => {
         render(Subject, { props: { label: "Personal Identification Code" } });
 
-        const el = screen.getByLabelText("Personal Identification Code");
-        expect(el.getAttribute("aria-label")).toBe("Personal Identification Code");
+        const el = document.querySelector(".eesti-isikukood-view") as HTMLElement;
+        expect(el.querySelector(".screen-reader-span")?.textContent).toBe(
+            `${"Personal Identification Code"} `,
+        );
+        expect(el.hasAttribute("aria-label")).toBe(false);
     });
 });

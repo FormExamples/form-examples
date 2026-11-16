@@ -26,7 +26,9 @@ describe("CalendarTable", () => {
     });
 
     test("renders caption when provided", () => {
-        render(Subject, { props: { label: "January", caption: "January 2025", children: textSnippet("1") } });
+        render(Subject, {
+            props: { label: "January", caption: "January 2025", children: textSnippet("1") },
+        });
         const table = screen.getByRole("grid");
         const cap = table.querySelector("caption");
         expect(cap).toBeTruthy();
@@ -45,7 +47,9 @@ describe("CalendarTable", () => {
     });
 
     test("passes through attributes", () => {
-        render(Subject, { props: { label: "J", "data-testid": "cal", children: textSnippet("1") } });
+        render(Subject, {
+            props: { label: "J", "data-testid": "cal", children: textSnippet("1") },
+        });
         expect(screen.getByTestId("cal")).toBeTruthy();
     });
 });

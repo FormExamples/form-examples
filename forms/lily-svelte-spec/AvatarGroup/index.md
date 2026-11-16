@@ -10,7 +10,7 @@ See [components/avatar-group/index.md](../../../components/avatar-group/index.md
 
 ```svelte
 <script lang="ts">
-    import AvatarGroup from "./AvatarGroup.svelte";
+  import AvatarGroup from "./AvatarGroup.svelte";
 </script>
 
 <AvatarGroup />

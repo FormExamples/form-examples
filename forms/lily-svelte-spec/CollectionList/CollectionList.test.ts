@@ -20,19 +20,23 @@ function htmlSnippet(html: string) {
 
 describe("CollectionList", () => {
     test("renders as a ul with the collection-list class", () => {
-        const { container } = render(Subject, { props: {
-            children: textSnippet("items"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                children: textSnippet("items"),
+            },
+        });
 
         const root = container.querySelector("ul.collection-list") as HTMLElement;
         expect(root).toBeTruthy();
     });
 
     test("applies aria-label when provided", () => {
-        render(Subject, { props: {
-            label: "Latest articles",
-            children: textSnippet("items"),
-        }});
+        render(Subject, {
+            props: {
+                label: "Latest articles",
+                children: textSnippet("items"),
+            },
+        });
 
         const list = screen.getByRole("list", { name: "Latest articles" });
         expect(list).toBeTruthy();
@@ -40,28 +44,34 @@ describe("CollectionList", () => {
     });
 
     test("omits aria-label when not provided", () => {
-        const { container } = render(Subject, { props: {
-            children: textSnippet("items"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                children: textSnippet("items"),
+            },
+        });
 
         const root = container.querySelector("ul") as HTMLElement;
         expect(root.hasAttribute("aria-label")).toBe(false);
     });
 
     test("renders children content", () => {
-        const { container } = render(Subject, { props: {
-            children: htmlSnippet("<li>One</li><li>Two</li>"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                children: htmlSnippet("<li>One</li><li>Two</li>"),
+            },
+        });
 
         const items = container.querySelectorAll("li");
         expect(items.length).toBe(2);
     });
 
     test("appends consumer class to base class", () => {
-        const { container } = render(Subject, { props: {
-            class: "extra",
-            children: textSnippet("x"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                class: "extra",
+                children: textSnippet("x"),
+            },
+        });
 
         const root = container.querySelector("ul") as HTMLElement;
         expect(root.className).toContain("collection-list");

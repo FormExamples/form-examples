@@ -14,7 +14,9 @@ function snippet(html: string) {
 describe("ScrollerVideo", () => {
     test("renders a div with class scroller-video", () => {
         const { container } = render(Subject, {
-            src: "/v.mp4", label: "Story", alt: "A video",
+            src: "/v.mp4",
+            label: "Story",
+            alt: "A video",
             children: snippet("<section>step</section>"),
         });
         const root = container.querySelector(".scroller-video");
@@ -24,15 +26,21 @@ describe("ScrollerVideo", () => {
 
     test("applies aria-label from label prop", () => {
         const { container } = render(Subject, {
-            src: "/v.mp4", label: "Story", alt: "alt",
+            src: "/v.mp4",
+            label: "Story",
+            alt: "alt",
             children: snippet("<section>step</section>"),
         });
-        expect(container.querySelector(".scroller-video")?.getAttribute("aria-label")).toBe("Story");
+        expect(container.querySelector(".scroller-video")?.getAttribute("aria-label")).toBe(
+            "Story",
+        );
     });
 
     test("renders a video with the src attribute", () => {
         const { container } = render(Subject, {
-            src: "/v.mp4", label: "x", alt: "alt",
+            src: "/v.mp4",
+            label: "x",
+            alt: "alt",
             children: snippet("<section>step</section>"),
         });
         const video = container.querySelector("video.scroller-video-element");
@@ -42,7 +50,9 @@ describe("ScrollerVideo", () => {
 
     test("background region exposes role=img with alt as aria-label", () => {
         const { container } = render(Subject, {
-            src: "/v.mp4", label: "x", alt: "A waterfall scene",
+            src: "/v.mp4",
+            label: "x",
+            alt: "A waterfall scene",
             children: snippet("<section>step</section>"),
         });
         const bg = container.querySelector(".scroller-video-background");
@@ -53,11 +63,25 @@ describe("ScrollerVideo", () => {
 
     test("renders children inside the foreground", () => {
         const { container } = render(Subject, {
-            src: "/v.mp4", label: "x", alt: "alt",
+            src: "/v.mp4",
+            label: "x",
+            alt: "alt",
             children: snippet("<section>step 1</section><section>step 2</section>"),
         });
         const fg = container.querySelector(".scroller-video-foreground");
         expect(fg).toBeTruthy();
         expect(fg?.children.length).toBe(2);
+    });
+
+    test("is a named group when labelled", () => {
+        const { container } = render(Subject, {
+            label: "Story",
+            src: "a.mp4",
+            alt: "Alt",
+            children: snippet("content"),
+        });
+        const root = container.querySelector(".scroller-video");
+        expect(root?.getAttribute("role")).toBe("group");
+        expect(root?.getAttribute("aria-label")).toBe("Story");
     });
 });

@@ -45,7 +45,7 @@ Empty skeleton box:
 
 ```svelte
 <script lang="ts">
-    import Skeleton from "./Skeleton.svelte";
+  import Skeleton from "./Skeleton.svelte";
 </script>
 
 <Skeleton style="width:200px; height:20px;" />
@@ -55,13 +55,22 @@ Skeleton with line shapes:
 
 ```svelte
 <script lang="ts">
-    import Skeleton from "./Skeleton.svelte";
+  import Skeleton from "./Skeleton.svelte";
 </script>
 
 <Skeleton>
-    <div class="skeleton-line" style="height:16px; width:80%"></div>
-    <div class="skeleton-line" style="height:16px; width:60%"></div>
-    <div class="skeleton-line" style="height:16px; width:90%"></div>
+  <div
+    class="skeleton-line"
+    style="height:16px; width:80%"
+  ></div>
+  <div
+    class="skeleton-line"
+    style="height:16px; width:60%"
+  ></div>
+  <div
+    class="skeleton-line"
+    style="height:16px; width:90%"
+  ></div>
 </Skeleton>
 ```
 
@@ -69,13 +78,22 @@ Skeleton card:
 
 ```svelte
 <script lang="ts">
-    import Skeleton from "./Skeleton.svelte";
+  import Skeleton from "./Skeleton.svelte";
 </script>
 
 <Skeleton>
-    <div style="height:120px" class="skeleton-media"></div>
-    <div style="height:14px; width:70%" class="skeleton-line"></div>
-    <div style="height:14px; width:40%" class="skeleton-line"></div>
+  <div
+    style="height:120px"
+    class="skeleton-media"
+  ></div>
+  <div
+    style="height:14px; width:70%"
+    class="skeleton-line"
+  ></div>
+  <div
+    style="height:14px; width:40%"
+    class="skeleton-line"
+  ></div>
 </Skeleton>
 ```
 
@@ -83,14 +101,14 @@ Conditional render:
 
 ```svelte
 <script lang="ts">
-    import Skeleton from "./Skeleton.svelte";
-    let loading = $state(true);
+  import Skeleton from "./Skeleton.svelte";
+  let loading = $state(true);
 </script>
 
 {#if loading}
-    <Skeleton style="height:80px"></Skeleton>
+  <Skeleton style="height:80px"></Skeleton>
 {:else}
-    <article>Loaded!</article>
+  <article>Loaded!</article>
 {/if}
 ```
 
@@ -98,11 +116,11 @@ List of skeleton rows:
 
 ```svelte
 <script lang="ts">
-    import Skeleton from "./Skeleton.svelte";
+  import Skeleton from "./Skeleton.svelte";
 </script>
 
 {#each { length: 5 } as _}
-    <Skeleton style="height:32px; margin:4px 0"></Skeleton>
+  <Skeleton style="height:32px; margin:4px 0"></Skeleton>
 {/each}
 ```
 
@@ -113,6 +131,7 @@ List of skeleton rows:
 - Consumers should ensure real content replaces the skeleton promptly.
 
 References:
+
 - WAI-ARIA `aria-busy`: https://www.w3.org/WAI/ARIA/apg/states/aria-busy/
 - MDN `aria-hidden`: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-hidden
 

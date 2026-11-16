@@ -1,0 +1,41 @@
+<!-- funnel-chart.html -->
+<!-- FunnelChart component -->
+<!--
+  Description: a chart of stages narrowing from top to bottom, showing how a quantity drops at each step.
+    Wraps a consumer-supplied inline <svg>; no drawing happens here.
+  HTML tag: <figure> containing <div class="funnel-chart-graphic" role="img">
+  CSS class: funnel-chart (sub-elements: funnel-chart-graphic, funnel-chart-data-table)
+  Keyboard: None on the graphic; the data table follows native table behaviour
+  Accessibility: the graphic wrapper carries role="img" and the consumer-supplied
+    aria-label; the optional data table is a sibling of the graphic, outside
+    role="img", so assistive technology can reach it.
+  Usage (see the markup below for the commented version):
+    <figure class="funnel-chart">
+        <div class="funnel-chart-graphic" role="img" aria-label="Example">
+            <svg data-testid="art" viewBox="0 0 10 10"><circle r="4" cx="5" cy="5"></circle></svg>
+      </div>
+        <div class="funnel-chart-data-table">
+        <table>
+          <caption>Values</caption>
+          <tbody><tr><th scope="row">A</th><td>1</td></tr></tbody>
+        </table>
+      </div>
+    </figure>
+-->
+
+<figure class="funnel-chart">
+  <!-- role="img" lives on the graphic wrapper, never on the figure: it makes
+       its descendants presentational, so a data table inside it would be
+       invisible to assistive technology. -->
+  <div class="funnel-chart-graphic" role="img" aria-label="Example">
+    <!-- Consumer provides the inline svg; no drawing happens in this component. -->
+    <svg data-testid="art" viewBox="0 0 10 10"><circle r="4" cx="5" cy="5"></circle></svg>
+  </div>
+  <!-- Optional accessible table alternative: a SIBLING of the graphic, outside role="img". -->
+  <div class="funnel-chart-data-table">
+    <table>
+      <caption>Values</caption>
+      <tbody><tr><th scope="row">A</th><td>1</td></tr></tbody>
+    </table>
+  </div>
+</figure>

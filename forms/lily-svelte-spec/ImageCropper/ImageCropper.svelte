@@ -49,17 +49,40 @@
     //
     // References:
     //   - WAI-ARIA application role: https://www.w3.org/TR/wai-aria-1.2/#application
-    import type { Snippet } from "svelte";
+    import { untrack, type Snippet } from "svelte";
+    import { attachCropper, type CropRect } from "../widget-keys";
     let {
         class: className = "",
         label,
+        crop = undefined,
+        onCropChange = undefined,
         children,
         ...restProps
-    }: { label: string; children: Snippet; [key: string]: unknown } = $props();
+    }: {
+        label: string;
+        /** Where the rectangle starts, in percent. Default: the whole image. */
+        crop?: CropRect;
+        /** Called with each new rectangle. */
+        onCropChange?: (crop: CropRect) => void;
+        children: Snippet;
+        [key: string]: unknown;
+    } = $props();
+
+    let rootEl = $state<HTMLElement>();
+
+    $effect(() =>
+        rootEl
+            ? attachCropper(rootEl, {
+                  crop: untrack(() => crop),
+                  onChange: (next) => onCropChange?.(next),
+              })
+            : undefined,
+    );
 </script>
 
 <!-- ImageCropper.svelte -->
 <div
+    bind:this={rootEl}
     class={`image-cropper ${className}`}
     role="application"
     aria-label={label}

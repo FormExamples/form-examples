@@ -13,9 +13,11 @@ function textSnippet(text: string) {
 
 describe("Affix", () => {
     test("renders as a div with the affix class", () => {
-        const { container } = render(Subject, { props: {
-            children: textSnippet("Sticky"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                children: textSnippet("Sticky"),
+            },
+        });
 
         const root = container.querySelector("div.affix") as HTMLElement;
         expect(root).toBeTruthy();
@@ -23,9 +25,11 @@ describe("Affix", () => {
     });
 
     test("defaults to position sticky with top 0 when no offsets given", () => {
-        const { container } = render(Subject, { props: {
-            children: textSnippet("Sticky"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                children: textSnippet("Sticky"),
+            },
+        });
 
         const root = container.querySelector("div.affix") as HTMLElement;
         const style = root.getAttribute("style") ?? "";
@@ -34,10 +38,12 @@ describe("Affix", () => {
     });
 
     test("applies offsetTop when provided", () => {
-        const { container } = render(Subject, { props: {
-            offsetTop: 64,
-            children: textSnippet("Sticky"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                offsetTop: 64,
+                children: textSnippet("Sticky"),
+            },
+        });
 
         const root = container.querySelector("div.affix") as HTMLElement;
         const style = root.getAttribute("style") ?? "";
@@ -46,10 +52,12 @@ describe("Affix", () => {
     });
 
     test("applies offsetBottom when provided", () => {
-        const { container } = render(Subject, { props: {
-            offsetBottom: 24,
-            children: textSnippet("Sticky"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                offsetBottom: 24,
+                children: textSnippet("Sticky"),
+            },
+        });
 
         const root = container.querySelector("div.affix") as HTMLElement;
         const style = root.getAttribute("style") ?? "";
@@ -58,19 +66,23 @@ describe("Affix", () => {
     });
 
     test("renders children content", () => {
-        const { container } = render(Subject, { props: {
-            children: textSnippet("Pinned content"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                children: textSnippet("Pinned content"),
+            },
+        });
 
         const root = container.querySelector("div.affix") as HTMLElement;
         expect(root.textContent).toContain("Pinned content");
     });
 
     test("appends consumer class to base class", () => {
-        const { container } = render(Subject, { props: {
-            class: "extra",
-            children: textSnippet("X"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                class: "extra",
+                children: textSnippet("X"),
+            },
+        });
 
         const root = container.querySelector("div.affix") as HTMLElement;
         expect(root.className).toContain("affix");

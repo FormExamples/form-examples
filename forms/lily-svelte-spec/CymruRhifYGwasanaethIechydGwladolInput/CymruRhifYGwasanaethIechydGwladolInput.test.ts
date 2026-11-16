@@ -15,7 +15,9 @@ describe("CymruRhifYGwasanaethIechydGwladolInput", () => {
         render(Subject, { props: { label: "National Health Service Number" } });
 
         const input = screen.getByLabelText("National Health Service Number");
-        expect(input.getAttribute("class")).toContain("cymru-rhif-y-gwasanaeth-iechyd-gwladol-input");
+        expect(input.getAttribute("class")).toContain(
+            "cymru-rhif-y-gwasanaeth-iechyd-gwladol-input",
+        );
     });
 
     test("has autocomplete off", () => {
@@ -54,7 +56,9 @@ describe("CymruRhifYGwasanaethIechydGwladolInput", () => {
     });
 
     test("passes through additional HTML attributes", () => {
-        render(Subject, { props: { label: "National Health Service Number", "data-testid": "subject" } });
+        render(Subject, {
+            props: { label: "National Health Service Number", "data-testid": "subject" },
+        });
 
         const input = screen.getByTestId("subject");
         expect(input).toBeTruthy();

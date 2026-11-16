@@ -85,7 +85,7 @@
     {/if}
     <h3 class="collection-list-item-heading">
         {#if href}
-            <a href={href}>{heading}</a>
+            <a {href}>{heading}</a>
         {:else}
             {heading}
         {/if}

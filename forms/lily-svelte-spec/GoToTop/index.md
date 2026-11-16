@@ -10,7 +10,7 @@ See [components/go-to-top/index.md](../../../components/go-to-top/index.md) for 
 
 ```svelte
 <script lang="ts">
-    import GoToTop from "./GoToTop.svelte";
+  import GoToTop from "./GoToTop.svelte";
 </script>
 
 <GoToTop />

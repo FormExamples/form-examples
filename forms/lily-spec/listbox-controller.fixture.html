@@ -1,0 +1,47 @@
+<!-- listbox-controller.fixture.html -->
+<!-- Minimal real-browser harness for listbox-controller.test.js: a plain
+     listbox with three options, wired to a ListboxController whose
+     callback invocations are recorded on window.__calls for the test to
+     inspect via browser.execute(). Not a shipped component fixture — this
+     module has no .html component of its own to load the way every other
+     *.test.js in this catalog does. -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <ul id="list" role="listbox" aria-label="Fruits" tabindex="-1">
+      <li role="option" id="opt-0">Apple</li>
+      <li role="option" id="opt-1">Banana</li>
+      <li role="option" id="opt-2">Cherry</li>
+    </ul>
+    <!-- A classic script, not <script type="module">: Chrome refuses a
+         module import between file:// URLs (origin "null", CORS), so the
+         import never ran and window.__controller stayed undefined. The
+         test injects listbox-controller.js inline instead, then calls
+         window.__setup with the class. -->
+    <script>
+      window.__setup = (ListboxController) => {
+        window.__calls = { activeIndex: [], activate: [], escape: 0, tabOut: 0 };
+
+        const list = document.getElementById("list");
+        const params = new URLSearchParams(window.location.search);
+        window.__controller = new ListboxController({
+          root: list,
+          clamp: params.get("clamp") === "true",
+          typeahead: params.get("typeahead") === "true",
+          pageSize: params.has("pageSize") ? Number(params.get("pageSize")) : 10,
+          getOptionLabel: (option) => option.textContent ?? "",
+          onActiveIndexChange: (index) => {
+            window.__calls.activeIndex.push(index);
+            list.setAttribute("aria-activedescendant", index >= 0 ? `opt-${index}` : "");
+          },
+          onActivate: (index) => window.__calls.activate.push(index),
+          onEscape: () => (window.__calls.escape += 1),
+          onTabOut: () => (window.__calls.tabOut += 1),
+        });
+      };
+    </script>
+  </body>
+</html>

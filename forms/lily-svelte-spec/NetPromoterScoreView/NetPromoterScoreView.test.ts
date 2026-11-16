@@ -7,43 +7,52 @@ describe("NetPromoterScoreView", () => {
     test("renders a span element", () => {
         render(Subject, { props: { label: "NPS Score" } });
 
-        const el = screen.getByLabelText("NPS Score");
+        const el = document.querySelector(".net-promoter-score-view") as HTMLElement;
         expect(el.tagName).toBe("SPAN");
     });
 
     test("has aria-label from label prop", () => {
         render(Subject, { props: { label: "NPS Score" } });
 
-        const el = screen.getByLabelText("NPS Score");
-        expect(el.getAttribute("aria-label")).toBe("NPS Score");
+        const el = document.querySelector(".net-promoter-score-view") as HTMLElement;
+        expect(el.querySelector(".screen-reader-span")?.textContent).toBe(`${"NPS Score"} `);
+        expect(el.hasAttribute("aria-label")).toBe(false);
     });
 
     test("displays the value as text", () => {
         render(Subject, { props: { label: "NPS Score", value: "8" } });
 
-        const el = screen.getByLabelText("NPS Score");
-        expect(el.textContent).toBe("8");
+        const el = document.querySelector(".net-promoter-score-view") as HTMLElement;
+        expect(
+            el.textContent?.replace(el.querySelector(".screen-reader-span")?.textContent ?? "", ""),
+        ).toBe("8");
     });
 
     test("defaults to empty string when no value provided", () => {
         render(Subject, { props: { label: "NPS Score" } });
 
-        const el = screen.getByLabelText("NPS Score");
-        expect(el.textContent).toBe("");
+        const el = document.querySelector(".net-promoter-score-view") as HTMLElement;
+        expect(
+            el.textContent?.replace(el.querySelector(".screen-reader-span")?.textContent ?? "", ""),
+        ).toBe("");
     });
 
     test("displays score of 0", () => {
         render(Subject, { props: { label: "NPS Score", value: "0" } });
 
-        const el = screen.getByLabelText("NPS Score");
-        expect(el.textContent).toBe("0");
+        const el = document.querySelector(".net-promoter-score-view") as HTMLElement;
+        expect(
+            el.textContent?.replace(el.querySelector(".screen-reader-span")?.textContent ?? "", ""),
+        ).toBe("0");
     });
 
     test("displays score of 10", () => {
         render(Subject, { props: { label: "NPS Score", value: "10" } });
 
-        const el = screen.getByLabelText("NPS Score");
-        expect(el.textContent).toBe("10");
+        const el = document.querySelector(".net-promoter-score-view") as HTMLElement;
+        expect(
+            el.textContent?.replace(el.querySelector(".screen-reader-span")?.textContent ?? "", ""),
+        ).toBe("10");
     });
 
     test("passes through additional HTML attributes", () => {

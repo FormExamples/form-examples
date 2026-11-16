@@ -22,7 +22,7 @@ A single button item inside a TaskBar that renders as a native `<button type="bu
 ## When not to use it
 
 - Don't use it to submit forms. Use `ButtonInput type="submit"` or the `SubmitInput` component instead.
-- Don't use it to toggle a two-state setting. Use `ToggleButton` (which uses `role="switch"`).
+- Don't use it to toggle a two-state setting. Use `SwitchButton` (`role="switch"`) for an on/off setting, or `ToggleButton` (`aria-pressed`) for an action that stays pressed.
 - Don't use it for navigation. Use an `<a>` element or a `*Link` component.
 - Don't use it outside of a `TaskBar` when you need toolbar grouping semantics.
 
@@ -64,7 +64,10 @@ Import the component and place one or more `TaskBarButton` elements inside a `Ta
 </script>
 
 <TaskBar label="Document actions">
-  <TaskBarButton onclick={() => (saving = true)} disabled={saving}>
+  <TaskBarButton
+    onclick={() => (saving = true)}
+    disabled={saving}
+  >
     {saving ? "Saving…" : "Save"}
   </TaskBarButton>
   <TaskBarButton>Print</TaskBarButton>
@@ -79,7 +82,10 @@ Import the component and place one or more `TaskBarButton` elements inside a `Ta
   let count = $state(0);
 </script>
 
-<TaskBarButton onclick={() => count++} aria-describedby="hint">
+<TaskBarButton
+  onclick={() => count++}
+  aria-describedby="hint"
+>
   Add item ({count})
 </TaskBarButton>
 <span id="hint">Adds one item to the list.</span>

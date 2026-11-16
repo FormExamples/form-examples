@@ -41,8 +41,8 @@ Import `AvatarText` from `./AvatarText.svelte`. Place inside an `Avatar`. Pass i
 
 ```svelte
 <script lang="ts">
-  import Avatar from '../Avatar/Avatar.svelte';
-  import AvatarText from './AvatarText.svelte';
+  import Avatar from "../Avatar/Avatar.svelte";
+  import AvatarText from "./AvatarText.svelte";
 </script>
 
 <Avatar alt="Jane Doe">
@@ -54,8 +54,8 @@ Import `AvatarText` from `./AvatarText.svelte`. Place inside an `Avatar`. Pass i
 
 ```svelte
 <script lang="ts">
-  import Avatar from '../Avatar/Avatar.svelte';
-  import AvatarText from './AvatarText.svelte';
+  import Avatar from "../Avatar/Avatar.svelte";
+  import AvatarText from "./AvatarText.svelte";
 </script>
 
 <Avatar alt="Anon">
@@ -67,8 +67,8 @@ Import `AvatarText` from `./AvatarText.svelte`. Place inside an `Avatar`. Pass i
 
 ```svelte
 <script lang="ts">
-  import Avatar from '../Avatar/Avatar.svelte';
-  import AvatarText from './AvatarText.svelte';
+  import Avatar from "../Avatar/Avatar.svelte";
+  import AvatarText from "./AvatarText.svelte";
 </script>
 
 <Avatar alt="Support bot">
@@ -80,13 +80,16 @@ Import `AvatarText` from `./AvatarText.svelte`. Place inside an `Avatar`. Pass i
 
 ```svelte
 <script lang="ts">
-  import Avatar from '../Avatar/Avatar.svelte';
-  import AvatarImage from '../AvatarImage/AvatarImage.svelte';
-  import AvatarText from './AvatarText.svelte';
+  import Avatar from "../Avatar/Avatar.svelte";
+  import AvatarImage from "../AvatarImage/AvatarImage.svelte";
+  import AvatarText from "./AvatarText.svelte";
 </script>
 
 <Avatar alt="Jane Doe">
-  <AvatarImage src="/photos/jane.jpg" alt="Jane Doe" />
+  <AvatarImage
+    src="/photos/jane.jpg"
+    alt="Jane Doe"
+  />
   <AvatarText>JD</AvatarText>
 </Avatar>
 ```
@@ -95,12 +98,16 @@ Import `AvatarText` from `./AvatarText.svelte`. Place inside an `Avatar`. Pass i
 
 ```svelte
 <script lang="ts">
-  import Avatar from '../Avatar/Avatar.svelte';
-  import AvatarText from './AvatarText.svelte';
+  import Avatar from "../Avatar/Avatar.svelte";
+  import AvatarText from "./AvatarText.svelte";
 
-  let name = $state('Ada Lovelace');
+  let name = $state("Ada Lovelace");
   let initials = $derived(
-    name.split(' ').map((n) => n[0]).join('').toUpperCase()
+    name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase(),
   );
 </script>
 

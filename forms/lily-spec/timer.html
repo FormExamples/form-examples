@@ -2,32 +2,23 @@
 <!-- Timer component -->
 <!--
   Description: a countdown or elapsed time display
-  HTML tag: <div>
+  HTML tag: <time>
   CSS class: timer
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: aria-label for accessible name; role="timer", not live
   Usage:
     <div class="timer" aria-label="Example">
       ...
     </div>
 -->
 
-<div
+<time
   class="timer"
+  role="timer"
   aria-label=""
 >
   <!-- Consumer provides content -->
-</div>
+</time>
 
-<script>
-  // Timer behavior
-  (function() {
-    'use strict';
-    document.querySelectorAll('.timer').forEach(function(el) {
-      var display = el.querySelector('[data-display]');
-      if (display) {
-        el.setAttribute('aria-live', 'polite');
-      }
-    });
-  })();
-</script>
+<!-- Not a live region: role="timer" is aria-live="off" by default, because a value that changes every second would flood
+     a screen reader. Announce milestones ("one minute left") in a separate role="status" region. -->

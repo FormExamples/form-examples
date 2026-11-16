@@ -1,0 +1,20 @@
+<!-- hanguk-jumin-deungnok-beonho-input.html -->
+<!-- HangukJuminDeungnokBeonhoInput component -->
+<!--
+  Description: an input for entering South Korea's Resident Registration Number (주민등록번호)
+  HTML tag: <input>
+  CSS class: hanguk-jumin-deungnok-beonho-input
+  Keyboard: Tab to focus, standard input keyboard interactions
+  Accessibility: Implicit input role, aria-label for accessible name
+  Format: Thirteen digits, displayed as NNNNNN-NNNNNNN. The first six digits encode date of birth (YYMMDD); the seventh digit encodes sex and birth century; digits eight through eleven encode place of registration; the twelfth is a sequence number; the thirteenth is a Modulus-11 check digit over the preceding twelve.
+  Usage:
+    <input class="hanguk-jumin-deungnok-beonho-input" type="text" aria-label="Resident Registration Number (주민등록번호)" autocomplete="off">
+-->
+
+<input
+  class="hanguk-jumin-deungnok-beonho-input"
+  type="text"
+  aria-label="Resident Registration Number (주민등록번호)"
+  autocomplete="off"
+  spellcheck="false"
+>

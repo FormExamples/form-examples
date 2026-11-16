@@ -24,13 +24,7 @@
     //   - Adobe Spectrum StatusLight: https://spectrum.adobe.com/page/status-light/
 
     type Variant =
-        | "neutral"
-        | "informative"
-        | "positive"
-        | "notice"
-        | "negative"
-        | "active"
-        | "inactive";
+        "neutral" | "informative" | "positive" | "notice" | "negative" | "active" | "inactive";
 
     let {
         class: className = "",
@@ -54,6 +48,9 @@
     role="status"
     {...restProps}
 >
-    <span class="status-light-dot" aria-hidden="true"></span>
+    <span
+        class="status-light-dot"
+        aria-hidden="true"
+    ></span>
     <span class="status-light-label">{label}</span>
 </span>

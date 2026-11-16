@@ -10,7 +10,7 @@ See [components/diff/index.md](../../../components/diff/index.md) for the full c
 
 ```svelte
 <script lang="ts">
-    import Diff from "./Diff.svelte";
+  import Diff from "./Diff.svelte";
 </script>
 
 <Diff />

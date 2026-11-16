@@ -50,28 +50,32 @@ Import the component, pass a `label`, a `value`, and the `min`/`max` bounds. Opt
 
 ```svelte
 <script lang="ts">
-    import Meter from "./Meter.svelte";
+  import Meter from "./Meter.svelte";
 </script>
 
-<Meter label="Disk space" value={45} max={100} />
+<Meter
+  label="Disk space"
+  value={45}
+  max={100}
+/>
 ```
 
 ### Battery with thresholds
 
 ```svelte
 <script lang="ts">
-    import Meter from "./Meter.svelte";
-    let battery = $state(20);
+  import Meter from "./Meter.svelte";
+  let battery = $state(20);
 </script>
 
 <Meter
-    label="Battery"
-    value={battery}
-    min={0}
-    max={100}
-    low={25}
-    high={75}
-    optimum={100}
+  label="Battery"
+  value={battery}
+  min={0}
+  max={100}
+  low={25}
+  high={75}
+  optimum={100}
 />
 ```
 
@@ -79,18 +83,18 @@ Import the component, pass a `label`, a `value`, and the `min`/`max` bounds. Opt
 
 ```svelte
 <script lang="ts">
-    import Meter from "./Meter.svelte";
-    let strength = $state(3);
+  import Meter from "./Meter.svelte";
+  let strength = $state(3);
 </script>
 
 <Meter
-    label="Password strength"
-    value={strength}
-    min={0}
-    max={5}
-    low={1}
-    high={4}
-    optimum={5}
+  label="Password strength"
+  value={strength}
+  min={0}
+  max={5}
+  low={1}
+  high={4}
+  optimum={5}
 />
 ```
 
@@ -98,16 +102,21 @@ Import the component, pass a `label`, a `value`, and the `min`/`max` bounds. Opt
 
 ```svelte
 <script lang="ts">
-    import Meter from "./Meter.svelte";
+  import Meter from "./Meter.svelte";
 </script>
 
-<Meter class="meter-wide" label="Quota" value={72} max={100} />
+<Meter
+  class="meter-wide"
+  label="Quota"
+  value={72}
+  max={100}
+/>
 
 <style>
-    :global(.meter-wide) {
-        width: 100%;
-        height: 1rem;
-    }
+  :global(.meter-wide) {
+    width: 100%;
+    height: 1rem;
+  }
 </style>
 ```
 
@@ -115,14 +124,22 @@ Import the component, pass a `label`, a `value`, and the `min`/`max` bounds. Opt
 
 ```svelte
 <script lang="ts">
-    import Meter from "./Meter.svelte";
-    let used = $state(30);
+  import Meter from "./Meter.svelte";
+  let used = $state(30);
 </script>
 
-<Meter label="Memory used" value={used} min={0} max={100} />
+<Meter
+  label="Memory used"
+  value={used}
+  min={0}
+  max={100}
+/>
 
-<button type="button" onclick={() => (used = Math.min(100, used + 10))}>
-    Use more memory
+<button
+  type="button"
+  onclick={() => (used = Math.min(100, used + 10))}
+>
+  Use more memory
 </button>
 ```
 

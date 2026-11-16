@@ -31,31 +31,36 @@ Render when errors exist; move focus to the summary after submit.
 
 ```svelte
 <script lang="ts">
-    import ErrorSummary from "./ErrorSummary.svelte";
-    let ref: HTMLElement | undefined = $state();
-    let errors = $state<{ id: string; message: string }[]>([]);
-    $effect(() => { if (errors.length) ref?.focus(); });
+  import ErrorSummary from "./ErrorSummary.svelte";
+  let ref: HTMLElement | undefined = $state();
+  let errors = $state<{ id: string; message: string }[]>([]);
+  $effect(() => {
+    if (errors.length) ref?.focus();
+  });
 </script>
 
 {#if errors.length}
-    <ErrorSummary title="There is a problem" bind:this={ref}>
-        <ul>
-            {#each errors as e}
-                <li><a href={`#${e.id}`}>{e.message}</a></li>
-            {/each}
-        </ul>
-    </ErrorSummary>
+  <ErrorSummary
+    title="There is a problem"
+    bind:this={ref}
+  >
+    <ul>
+      {#each errors as e}
+        <li><a href={`#${e.id}`}>{e.message}</a></li>
+      {/each}
+    </ul>
+  </ErrorSummary>
 {/if}
 ```
 
 ## Props
 
-| Prop       | Type       | Default  | Description                                     |
-| ---------- | ---------- | -------- | ----------------------------------------------- |
-| `class`    | `string`   | `""`     | CSS class appended to the base class.          |
-| `title`    | `string`   | required | Heading text for the summary.                   |
-| `children` | `Snippet`  | required | List of error links (typically a `<ul>`).       |
-| `...rest`  | `unknown`  | —        | Additional HTML attributes on the `<div>`.      |
+| Prop       | Type      | Default  | Description                                |
+| ---------- | --------- | -------- | ------------------------------------------ |
+| `class`    | `string`  | `""`     | CSS class appended to the base class.      |
+| `title`    | `string`  | required | Heading text for the summary.              |
+| `children` | `Snippet` | required | List of error links (typically a `<ul>`).  |
+| `...rest`  | `unknown` | —        | Additional HTML attributes on the `<div>`. |
 
 ## Usage
 
@@ -63,10 +68,10 @@ Render when errors exist; move focus to the summary after submit.
 
 ```svelte
 <ErrorSummary title="There is a problem">
-    <ul>
-        <li><a href="#name">Enter your name</a></li>
-        <li><a href="#email">Enter a valid email address</a></li>
-    </ul>
+  <ul>
+    <li><a href="#name">Enter your name</a></li>
+    <li><a href="#email">Enter a valid email address</a></li>
+  </ul>
 </ErrorSummary>
 ```
 
@@ -74,9 +79,9 @@ Render when errors exist; move focus to the summary after submit.
 
 ```svelte
 <ErrorSummary title="Please fix the following">
-    <ul>
-        <li><a href="#password">Password must be at least 8 characters</a></li>
-    </ul>
+  <ul>
+    <li><a href="#password">Password must be at least 8 characters</a></li>
+  </ul>
 </ErrorSummary>
 ```
 
@@ -84,16 +89,21 @@ Render when errors exist; move focus to the summary after submit.
 
 ```svelte
 <script lang="ts">
-    import ErrorSummary from "./ErrorSummary.svelte";
-    let summaryEl: HTMLElement | undefined = $state();
-    function submit() {
-        validate();
-        if (errors.length) summaryEl?.focus();
-    }
+  import ErrorSummary from "./ErrorSummary.svelte";
+  let summaryEl: HTMLElement | undefined = $state();
+  function submit() {
+    validate();
+    if (errors.length) summaryEl?.focus();
+  }
 </script>
 
-<ErrorSummary title="Errors" bind:this={summaryEl}>
-    <ul>{#each errors as e}<li><a href={`#${e.id}`}>{e.message}</a></li>{/each}</ul>
+<ErrorSummary
+  title="Errors"
+  bind:this={summaryEl}
+>
+  <ul>
+    {#each errors as e}<li><a href={`#${e.id}`}>{e.message}</a></li>{/each}
+  </ul>
 </ErrorSummary>
 ```
 
@@ -101,18 +111,24 @@ Render when errors exist; move focus to the summary after submit.
 
 ```svelte
 <form onsubmit={submit}>
-    {#if errors.length}
-        <ErrorSummary title="There is a problem">
-            <ul>
-                {#each errors as e}
-                    <li><a href={`#${e.id}`}>{e.message}</a></li>
-                {/each}
-            </ul>
-        </ErrorSummary>
-    {/if}
-    <Field label="Name" error={errors.name}>
-        <TextInput label="Name" bind:value={name} />
-    </Field>
+  {#if errors.length}
+    <ErrorSummary title="There is a problem">
+      <ul>
+        {#each errors as e}
+          <li><a href={`#${e.id}`}>{e.message}</a></li>
+        {/each}
+      </ul>
+    </ErrorSummary>
+  {/if}
+  <Field
+    label="Name"
+    error={errors.name}
+  >
+    <TextInput
+      label="Name"
+      bind:value={name}
+    />
+  </Field>
 </form>
 ```
 
@@ -120,7 +136,7 @@ Render when errors exist; move focus to the summary after submit.
 
 ```svelte
 <ErrorSummary title="Il y a un problème">
-    <ul><li><a href="#email">Entrez un e-mail valide</a></li></ul>
+  <ul><li><a href="#email">Entrez un e-mail valide</a></li></ul>
 </ErrorSummary>
 ```
 

@@ -22,21 +22,27 @@ describe("ThemeProvider", () => {
 
     test("defaults data-theme to light", () => {
         const { container } = render(Subject, {
-            theme: { primary: "#fff" }, children: snippet("x"),
+            theme: { primary: "#fff" },
+            children: snippet("x"),
         });
-        expect(container.querySelector(".theme-provider")?.getAttribute("data-theme")).toBe("light");
+        expect(container.querySelector(".theme-provider")?.getAttribute("data-theme")).toBe(
+            "light",
+        );
     });
 
     test("applies data-theme=dark when base=dark", () => {
         const { container } = render(Subject, {
-            theme: { primary: "#000" }, base: "dark", children: snippet("x"),
+            theme: { primary: "#000" },
+            base: "dark",
+            children: snippet("x"),
         });
         expect(container.querySelector(".theme-provider")?.getAttribute("data-theme")).toBe("dark");
     });
 
     test("flattens flat keys to --theme-* CSS variables", () => {
         const { container } = render(Subject, {
-            theme: { primary: "#fff", danger: "#dc2626" }, children: snippet("x"),
+            theme: { primary: "#fff", danger: "#dc2626" },
+            children: snippet("x"),
         });
         const root = container.querySelector(".theme-provider") as HTMLElement;
         expect(root.style.getPropertyValue("--theme-primary")).toBe("#fff");
@@ -45,7 +51,8 @@ describe("ThemeProvider", () => {
 
     test("flattens nested keys with hyphenated paths", () => {
         const { container } = render(Subject, {
-            theme: { color: { primary: "#fff", danger: "#dc2626" } }, children: snippet("x"),
+            theme: { color: { primary: "#fff", danger: "#dc2626" } },
+            children: snippet("x"),
         });
         const root = container.querySelector(".theme-provider") as HTMLElement;
         expect(root.style.getPropertyValue("--theme-color-primary")).toBe("#fff");
@@ -54,7 +61,8 @@ describe("ThemeProvider", () => {
 
     test("uses display: contents on the wrapper", () => {
         const { container } = render(Subject, {
-            theme: { primary: "#fff" }, children: snippet("x"),
+            theme: { primary: "#fff" },
+            children: snippet("x"),
         });
         const root = container.querySelector(".theme-provider") as HTMLElement;
         expect(root.style.display).toBe("contents");
@@ -62,7 +70,8 @@ describe("ThemeProvider", () => {
 
     test("renders children", () => {
         const { container } = render(Subject, {
-            theme: { primary: "#fff" }, children: snippet("hello"),
+            theme: { primary: "#fff" },
+            children: snippet("hello"),
         });
         expect(container.textContent).toBe("hello");
     });

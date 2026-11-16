@@ -40,33 +40,33 @@ Place `KanbanTableFoot` after `KanbanTableBody` inside a `KanbanTable`, and nest
 
 ```svelte
 <script lang="ts">
-    import KanbanTable from "../KanbanTable/KanbanTable.svelte";
-    import KanbanTableHead from "../KanbanTableHead/KanbanTableHead.svelte";
-    import KanbanTableBody from "../KanbanTableBody/KanbanTableBody.svelte";
-    import KanbanTableFoot from "./KanbanTableFoot.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
-    import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
+  import KanbanTable from "../KanbanTable/KanbanTable.svelte";
+  import KanbanTableHead from "../KanbanTableHead/KanbanTableHead.svelte";
+  import KanbanTableBody from "../KanbanTableBody/KanbanTableBody.svelte";
+  import KanbanTableFoot from "./KanbanTableFoot.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
 </script>
 
 <KanbanTable label="Board">
-    <KanbanTableHead>
-        <KanbanTableRow>
-            <th>To Do</th>
-            <th>Done</th>
-        </KanbanTableRow>
-    </KanbanTableHead>
-    <KanbanTableBody>
-        <KanbanTableRow>
-            <KanbanTableTD>A</KanbanTableTD>
-            <KanbanTableTD>B</KanbanTableTD>
-        </KanbanTableRow>
-    </KanbanTableBody>
-    <KanbanTableFoot>
-        <KanbanTableRow>
-            <KanbanTableTD>Total: 3</KanbanTableTD>
-            <KanbanTableTD>Total: 5</KanbanTableTD>
-        </KanbanTableRow>
-    </KanbanTableFoot>
+  <KanbanTableHead>
+    <KanbanTableRow>
+      <th>To Do</th>
+      <th>Done</th>
+    </KanbanTableRow>
+  </KanbanTableHead>
+  <KanbanTableBody>
+    <KanbanTableRow>
+      <KanbanTableTD>A</KanbanTableTD>
+      <KanbanTableTD>B</KanbanTableTD>
+    </KanbanTableRow>
+  </KanbanTableBody>
+  <KanbanTableFoot>
+    <KanbanTableRow>
+      <KanbanTableTD>Total: 3</KanbanTableTD>
+      <KanbanTableTD>Total: 5</KanbanTableTD>
+    </KanbanTableRow>
+  </KanbanTableFoot>
 </KanbanTable>
 ```
 
@@ -74,23 +74,23 @@ Place `KanbanTableFoot` after `KanbanTableBody` inside a `KanbanTable`, and nest
 
 ```svelte
 <script lang="ts">
-    import KanbanTableFoot from "./KanbanTableFoot.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
-    import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
+  import KanbanTableFoot from "./KanbanTableFoot.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
 </script>
 
 <KanbanTableFoot>
-    <KanbanTableRow>
-        <KanbanTableTD>
-            <button type="button">+ Add to To Do</button>
-        </KanbanTableTD>
-        <KanbanTableTD>
-            <button type="button">+ Add to Doing</button>
-        </KanbanTableTD>
-        <KanbanTableTD>
-            <button type="button">+ Add to Done</button>
-        </KanbanTableTD>
-    </KanbanTableRow>
+  <KanbanTableRow>
+    <KanbanTableTD>
+      <button type="button">+ Add to To Do</button>
+    </KanbanTableTD>
+    <KanbanTableTD>
+      <button type="button">+ Add to Doing</button>
+    </KanbanTableTD>
+    <KanbanTableTD>
+      <button type="button">+ Add to Done</button>
+    </KanbanTableTD>
+  </KanbanTableRow>
 </KanbanTableFoot>
 ```
 
@@ -98,22 +98,22 @@ Place `KanbanTableFoot` after `KanbanTableBody` inside a `KanbanTable`, and nest
 
 ```svelte
 <script lang="ts">
-    import KanbanTableFoot from "./KanbanTableFoot.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
-    import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
+  import KanbanTableFoot from "./KanbanTableFoot.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
 
-    let totals = $state([3, 5, 2]);
-    let labels = $state(["To Do", "Doing", "Done"]);
+  let totals = $state([3, 5, 2]);
+  let labels = $state(["To Do", "Doing", "Done"]);
 </script>
 
 <KanbanTableFoot>
-    <KanbanTableRow>
-        {#each totals as t, i}
-            <KanbanTableTD label={`${labels[i]} total`}>
-                {labels[i]}: {t}
-            </KanbanTableTD>
-        {/each}
-    </KanbanTableRow>
+  <KanbanTableRow>
+    {#each totals as t, i}
+      <KanbanTableTD label={`${labels[i]} total`}>
+        {labels[i]}: {t}
+      </KanbanTableTD>
+    {/each}
+  </KanbanTableRow>
 </KanbanTableFoot>
 ```
 
@@ -121,17 +121,17 @@ Place `KanbanTableFoot` after `KanbanTableBody` inside a `KanbanTable`, and nest
 
 ```svelte
 <script lang="ts">
-    import KanbanTableFoot from "./KanbanTableFoot.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
-    import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
+  import KanbanTableFoot from "./KanbanTableFoot.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
 </script>
 
 <KanbanTableFoot class="foot-totals">
-    <KanbanTableRow>
-        <KanbanTableTD>12 pts</KanbanTableTD>
-        <KanbanTableTD>8 pts</KanbanTableTD>
-        <KanbanTableTD>20 pts</KanbanTableTD>
-    </KanbanTableRow>
+  <KanbanTableRow>
+    <KanbanTableTD>12 pts</KanbanTableTD>
+    <KanbanTableTD>8 pts</KanbanTableTD>
+    <KanbanTableTD>20 pts</KanbanTableTD>
+  </KanbanTableRow>
 </KanbanTableFoot>
 ```
 
@@ -139,20 +139,20 @@ Place `KanbanTableFoot` after `KanbanTableBody` inside a `KanbanTable`, and nest
 
 ```svelte
 <script lang="ts">
-    import KanbanTableFoot from "./KanbanTableFoot.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
-    import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
+  import KanbanTableFoot from "./KanbanTableFoot.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
 </script>
 
 <KanbanTableFoot>
-    <KanbanTableRow>
-        <KanbanTableTD>Count: 3</KanbanTableTD>
-        <KanbanTableTD>Count: 2</KanbanTableTD>
-    </KanbanTableRow>
-    <KanbanTableRow>
-        <KanbanTableTD>Points: 8</KanbanTableTD>
-        <KanbanTableTD>Points: 5</KanbanTableTD>
-    </KanbanTableRow>
+  <KanbanTableRow>
+    <KanbanTableTD>Count: 3</KanbanTableTD>
+    <KanbanTableTD>Count: 2</KanbanTableTD>
+  </KanbanTableRow>
+  <KanbanTableRow>
+    <KanbanTableTD>Points: 8</KanbanTableTD>
+    <KanbanTableTD>Points: 5</KanbanTableTD>
+  </KanbanTableRow>
 </KanbanTableFoot>
 ```
 

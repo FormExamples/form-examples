@@ -16,7 +16,11 @@ describe("MeasurementSystemView", () => {
 
     test("supports aria-label", () => {
         render(Subject, { props: { value: "SI", label: "International System" } });
-        expect(screen.getByText("SI").getAttribute("aria-label")).toBe("International System");
+        expect(
+            (document.querySelector(".measurement-system-view") as HTMLElement).querySelector(
+                ".screen-reader-span",
+            )?.textContent,
+        ).toBe(`${"International System"} `);
     });
 
     test("passes through attributes", () => {

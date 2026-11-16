@@ -55,36 +55,50 @@ import RangeInput from './RangeInput.svelte';
 
 ```svelte
 <script lang="ts">
-  import RangeInput from './RangeInput.svelte';
+  import RangeInput from "./RangeInput.svelte";
 
   let volume = $state(50);
 </script>
 
-<RangeInput label="Volume" bind:value={volume} min={0} max={100} />
+<RangeInput
+  label="Volume"
+  bind:value={volume}
+  min={0}
+  max={100}
+/>
 ```
 
 ### Price range with step
 
 ```svelte
 <script lang="ts">
-  import RangeInput from './RangeInput.svelte';
+  import RangeInput from "./RangeInput.svelte";
 
   let price = $state(100);
 </script>
 
-<RangeInput label="Price limit" bind:value={price} min={10} max={500} step={10} />
+<RangeInput
+  label="Price limit"
+  bind:value={price}
+  min={10}
+  max={500}
+  step={10}
+/>
 ```
 
 ### Showing the live value
 
 ```svelte
 <script lang="ts">
-  import RangeInput from './RangeInput.svelte';
+  import RangeInput from "./RangeInput.svelte";
 
   let brightness = $state(70);
 </script>
 
-<RangeInput label="Brightness" bind:value={brightness} />
+<RangeInput
+  label="Brightness"
+  bind:value={brightness}
+/>
 <output>{brightness}%</output>
 ```
 
@@ -92,22 +106,32 @@ import RangeInput from './RangeInput.svelte';
 
 ```svelte
 <script lang="ts">
-  import RangeInput from './RangeInput.svelte';
+  import RangeInput from "./RangeInput.svelte";
 </script>
 
-<RangeInput label="Locked" value={30} disabled />
+<RangeInput
+  label="Locked"
+  value={30}
+  disabled
+/>
 ```
 
 ### Fine-grained decimal step
 
 ```svelte
 <script lang="ts">
-  import RangeInput from './RangeInput.svelte';
+  import RangeInput from "./RangeInput.svelte";
 
   let ratio = $state(1);
 </script>
 
-<RangeInput label="Zoom ratio" bind:value={ratio} min={0.5} max={2} step={0.01} />
+<RangeInput
+  label="Zoom ratio"
+  bind:value={ratio}
+  min={0.5}
+  max={2}
+  step={0.01}
+/>
 ```
 
 ## Accessibility

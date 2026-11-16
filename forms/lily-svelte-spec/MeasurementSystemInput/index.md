@@ -45,41 +45,48 @@ Import the component, pass a `label`, and bind the `value`. Optionally provide a
 
 ```svelte
 <script lang="ts">
-    import MeasurementSystemInput from "./MeasurementSystemInput.svelte";
-    let system = $state("");
+  import MeasurementSystemInput from "./MeasurementSystemInput.svelte";
+  let system = $state("");
 </script>
 
-<MeasurementSystemInput label="Measurement system" bind:value={system} />
+<MeasurementSystemInput
+  label="Measurement system"
+  bind:value={system}
+/>
 ```
 
 ### Required system input
 
 ```svelte
 <script lang="ts">
-    import MeasurementSystemInput from "./MeasurementSystemInput.svelte";
-    let system = $state("");
+  import MeasurementSystemInput from "./MeasurementSystemInput.svelte";
+  let system = $state("");
 </script>
 
-<MeasurementSystemInput label="System" bind:value={system} required />
+<MeasurementSystemInput
+  label="System"
+  bind:value={system}
+  required
+/>
 ```
 
 ### With a datalist of common systems
 
 ```svelte
 <script lang="ts">
-    import MeasurementSystemInput from "./MeasurementSystemInput.svelte";
-    let system = $state("");
+  import MeasurementSystemInput from "./MeasurementSystemInput.svelte";
+  let system = $state("");
 </script>
 
 <MeasurementSystemInput
-    label="Measurement system"
-    bind:value={system}
-    list="systems"
+  label="Measurement system"
+  bind:value={system}
+  list="systems"
 />
 <datalist id="systems">
-    <option value="metric" />
-    <option value="imperial" />
-    <option value="SI" />
+  <option value="metric" />
+  <option value="imperial" />
+  <option value="SI" />
 </datalist>
 ```
 
@@ -87,25 +94,29 @@ Import the component, pass a `label`, and bind the `value`. Optionally provide a
 
 ```svelte
 <script lang="ts">
-    import MeasurementSystemInput from "./MeasurementSystemInput.svelte";
-    let system = $state("metric");
+  import MeasurementSystemInput from "./MeasurementSystemInput.svelte";
+  let system = $state("metric");
 </script>
 
-<MeasurementSystemInput label="System" bind:value={system} disabled />
+<MeasurementSystemInput
+  label="System"
+  bind:value={system}
+  disabled
+/>
 ```
 
 ### With a placeholder via restProps
 
 ```svelte
 <script lang="ts">
-    import MeasurementSystemInput from "./MeasurementSystemInput.svelte";
-    let system = $state("");
+  import MeasurementSystemInput from "./MeasurementSystemInput.svelte";
+  let system = $state("");
 </script>
 
 <MeasurementSystemInput
-    label="Measurement system"
-    bind:value={system}
-    placeholder="metric, imperial, SI…"
+  label="Measurement system"
+  bind:value={system}
+  placeholder="metric, imperial, SI…"
 />
 ```
 

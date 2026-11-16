@@ -10,7 +10,7 @@ See [components/hero/index.md](../../../components/hero/index.md) for the full c
 
 ```svelte
 <script lang="ts">
-    import Hero from "./Hero.svelte";
+  import Hero from "./Hero.svelte";
 </script>
 
 <Hero />

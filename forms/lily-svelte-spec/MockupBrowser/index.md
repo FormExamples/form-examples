@@ -10,7 +10,7 @@ See [components/mockup-browser/index.md](../../../components/mockup-browser/inde
 
 ```svelte
 <script lang="ts">
-    import MockupBrowser from "./MockupBrowser.svelte";
+  import MockupBrowser from "./MockupBrowser.svelte";
 </script>
 
 <MockupBrowser />

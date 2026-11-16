@@ -9,6 +9,9 @@
   Note: when rendering multiple instances on the same page, give each <dialog>
         a unique id (and unique ids on the inner title/description elements
         if you reference them with aria-labelledby/aria-describedby).
+  Opening (tasks.md P14-T4): open it with `el.showModal()`, never by adding the `open` attribute. showModal() puts it
+        in the top layer, makes the page behind inert, traps Tab, moves focus in and, on `el.close()`, returns focus
+        to the element that opened it; `open` alone shows it non-modally while it still says aria-modal.
   Usage:
     <dialog id="alert-dialog-1" class="alert-dialog" role="alertdialog" aria-label="Example">
       ...
@@ -26,13 +29,24 @@
 
 <script>
   // AlertDialog behavior
+  // Escape closes it (the native cancel event under showModal(), and a keydown where the
+  // dialog was shown some other way).
   (function() {
     'use strict';
     document.querySelectorAll('.alert-dialog').forEach(function(el) {
+      function close() {
+        if (typeof el.close === 'function') el.close();
+        else el.removeAttribute('open');
+      }
       el.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-          el.close ? el.close() : el.setAttribute('data-open', 'false');
+        if (e.key === 'Escape' && !e.defaultPrevented) {
+          e.preventDefault();
+          close();
         }
+      });
+      el.addEventListener('cancel', function(e) {
+        e.preventDefault();
+        close();
       });
     });
   })();

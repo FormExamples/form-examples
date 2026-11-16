@@ -71,7 +71,11 @@
     {...restProps}
 >
     {#if imageUrl}
-        <img class="feature-card-image" src={imageUrl} alt={imageAlt ?? ""} />
+        <img
+            class="feature-card-image"
+            src={imageUrl}
+            alt={imageAlt ?? ""}
+        />
     {/if}
     <header class="feature-card-header">
         <h3 class="feature-card-heading">{heading}</h3>

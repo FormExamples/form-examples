@@ -10,7 +10,7 @@ See [components/phase-banner/index.md](../../../components/phase-banner/index.md
 
 ```svelte
 <script lang="ts">
-    import PhaseBanner from "./PhaseBanner.svelte";
+  import PhaseBanner from "./PhaseBanner.svelte";
 </script>
 
 <PhaseBanner />

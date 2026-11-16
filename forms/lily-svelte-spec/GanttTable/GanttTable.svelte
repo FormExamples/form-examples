@@ -16,23 +16,22 @@
     // Syntax:
     //   <GanttTable label="Project timeline">
     //     <GanttTableHead>
-    //       <GanttTableTR>
+    //       <GanttTableTr>
     //         <th>Task</th><th>Week 1</th><th>Week 2</th><th>Week 3</th>
-    //       </GanttTableTR>
+    //       </GanttTableTr>
     //     </GanttTableHead>
     //     <GanttTableBody>
-    //       <GanttTableTR>
+    //       <GanttTableTr>
     //         <th>Design</th>
     //         <GanttTableTD active>---</GanttTableTD>
     //         <GanttTableTD />
     //         <GanttTableTD />
-    //       </GanttTableTR>
+    //       </GanttTableTr>
     //     </GanttTableBody>
     //   </GanttTable>
     //
     // Keyboard:
-    //   None built-in — consumer should implement grid keyboard navigation
-    //   (arrow keys for cell movement, Enter/Space for selection).
+    //   Arrows, Home, End, Ctrl+Home, Ctrl+End, PageUp, PageDown, Enter, F2 and Escape over the cells, with one tab stop; data-consumer-keys on the root turns them off.
     //
     // Accessibility:
     //   - role="grid" identifies the table as an interactive grid widget
@@ -46,12 +45,14 @@
     // Claude rules:
     //   - Headless: no CSS, no styles — consumer provides all styling
     //   - Compound component: use with GanttTableHead, GanttTableBody, GanttTableTfoot,
-    //     GanttTableTR, GanttTableTD, and GanttTableTH
+    //     GanttTableTr, GanttTableTD, and GanttTableTH
     //
     // References:
     //   - WAI-ARIA Grid Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/grid/
 
     import type { Snippet } from "svelte";
+    import { warnMissingName } from "../dev-warning";
+    import { attachGrid } from "../widget-keys";
 
     let {
         class: className = "",
@@ -68,10 +69,16 @@
         children: Snippet;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() => warnMissingName("GanttTable", label, restProps["aria-labelledby"]));
+
+    let rootEl = $state<HTMLElement>();
+    $effect(() => (rootEl ? attachGrid(rootEl) : undefined));
 </script>
 
 <!-- GanttTable.svelte -->
 <table
+    bind:this={rootEl}
     class={`gantt-table ${className}`}
     role="grid"
     aria-label={label}

@@ -55,58 +55,82 @@ import NumberInput from './NumberInput.svelte';
 
 ```svelte
 <script lang="ts">
-  import NumberInput from './NumberInput.svelte';
+  import NumberInput from "./NumberInput.svelte";
 
   let quantity = $state<number | undefined>(undefined);
 </script>
 
-<NumberInput label="Quantity" bind:value={quantity} />
+<NumberInput
+  label="Quantity"
+  bind:value={quantity}
+/>
 ```
 
 ### With min, max, and step
 
 ```svelte
 <script lang="ts">
-  import NumberInput from './NumberInput.svelte';
+  import NumberInput from "./NumberInput.svelte";
 
   let qty = $state<number | undefined>(1);
 </script>
 
-<NumberInput label="Quantity" bind:value={qty} min={0} max={100} step={1} />
+<NumberInput
+  label="Quantity"
+  bind:value={qty}
+  min={0}
+  max={100}
+  step={1}
+/>
 ```
 
 ### Required age field
 
 ```svelte
 <script lang="ts">
-  import NumberInput from './NumberInput.svelte';
+  import NumberInput from "./NumberInput.svelte";
 
   let age = $state<number | undefined>(undefined);
 </script>
 
-<NumberInput label="Age" bind:value={age} min={0} max={120} required />
+<NumberInput
+  label="Age"
+  bind:value={age}
+  min={0}
+  max={120}
+  required
+/>
 ```
 
 ### Decimal step
 
 ```svelte
 <script lang="ts">
-  import NumberInput from './NumberInput.svelte';
+  import NumberInput from "./NumberInput.svelte";
 
   let price = $state<number | undefined>(9.99);
 </script>
 
-<NumberInput label="Price" bind:value={price} min={0} step={0.01} />
+<NumberInput
+  label="Price"
+  bind:value={price}
+  min={0}
+  step={0.01}
+/>
 ```
 
 ### Disabled with a placeholder
 
 ```svelte
 <script lang="ts">
-  import NumberInput from './NumberInput.svelte';
+  import NumberInput from "./NumberInput.svelte";
 </script>
 
-<NumberInput label="Quantity" placeholder="0" disabled />
+<NumberInput
+  label="Quantity"
+  placeholder="0"
+  disabled
+/>
 ```
 
 ## Accessibility
