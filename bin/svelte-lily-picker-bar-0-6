@@ -1,0 +1,92 @@
+#!/usr/bin/env python3
+"""bin/svelte-lily-picker-bar-0-6 — move each Svelte front-end to Lily picker-bar 0.6 and headless 0.9.
+
+What it changes in a `front-end-with-svelte/`:
+
+  package.json      @lilydesignsystem/svelte-picker-bar ^0.5.3 -> ^0.6.0
+                    @lilydesignsystem/svelte-headless   ^0.8.0 -> ^0.9.0
+  pnpm-lock.yaml    `pnpm install --lockfile-only`, so only the lock moves and no
+                    node_modules is created; unless --no-lock
+
+The theme picker itself (@lilydesignsystem/svelte-theme-picker 0.3.2) is already the
+latest release; picker-bar 0.6.0 still depends on it, so it does not move. No source
+change was needed (apgar-score: lint, format:check, svelte-check and build clean).
+
+A front-end already moved is skipped, so the tool can be rerun. A front-end whose
+package.json lacks the expected lines stops the run before anything is written.
+
+Usage:
+  bin/svelte-lily-picker-bar-0-6 [--no-lock] --all|<slug>...
+  bin/svelte-lily-picker-bar-0-6 --check --all|<slug>...   # CI drift check
+"""
+
+from __future__ import annotations
+
+import argparse
+import glob
+import os
+import re
+import subprocess
+import sys
+
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BAR_OLD, BAR_NEW = '"@lilydesignsystem/svelte-picker-bar": "^0.5.3"', '"@lilydesignsystem/svelte-picker-bar": "^0.6.0"'
+HEAD_OLD, HEAD_NEW = '"@lilydesignsystem/svelte-headless": "^0.8.0"', '"@lilydesignsystem/svelte-headless": "^0.9.0"'
+LOCKED = (
+    re.compile(r"^ +'?@lilydesignsystem/svelte-picker-bar'?:\n +specifier: \^0\.6\.0\n +version: 0\.6\.", re.M),
+    re.compile(r"^ +'?@lilydesignsystem/svelte-headless'?:\n +specifier: \^0\.9\.0\n +version: 0\.9\.", re.M),
+)
+
+
+def drift(app: str) -> str | None:
+    text = open(f"{app}/package.json").read()
+    if BAR_NEW not in text or HEAD_NEW not in text:
+        return "package.json is not on picker-bar ^0.6.0 and headless ^0.9.0"
+    lock = open(f"{app}/pnpm-lock.yaml").read()
+    if not all(p.search(lock) for p in LOCKED):
+        return "pnpm-lock.yaml is not on picker-bar 0.6 and headless 0.9"
+    return None
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    parser.add_argument("slugs", nargs="*")
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--no-lock", action="store_true")
+    args = parser.parse_args()
+    if args.all:
+        apps = sorted(os.path.dirname(p) for p in glob.glob(f"{REPO}/forms/*/front-end-with-svelte/package.json"))
+    elif args.slugs:
+        apps = [f"{REPO}/forms/{s}/front-end-with-svelte" for s in args.slugs]
+    else:
+        parser.error("name forms, or pass --all")
+    if args.check:
+        bad = [(a, why) for a in apps if (why := drift(a))]
+        for app, why in bad:
+            print(f"{app.split('/')[-2]}: {why}")
+        print(f"{len(apps) - len(bad)}/{len(apps)} front-ends on picker-bar 0.6 and headless 0.9")
+        return 1 if bad else 0
+    texts = {a: open(f"{a}/package.json").read() for a in apps}
+    odd = [a for a, t in texts.items() if BAR_NEW not in t and BAR_OLD not in t or HEAD_NEW not in t and HEAD_OLD not in t]
+    if odd:
+        for app in odd:
+            print(f"stopped, nothing written: {app}: expected the picker-bar 0.5.3 and headless 0.8.0 lines", file=sys.stderr)
+        return 1
+    moved, failed = 0, []
+    for app, text in texts.items():
+        new = text.replace(BAR_OLD, BAR_NEW).replace(HEAD_OLD, HEAD_NEW)
+        if new != text:
+            open(f"{app}/package.json", "w").write(new)
+            moved += 1
+        if not args.no_lock and drift(app):
+            result = subprocess.run(["pnpm", "install", "--lockfile-only", "--silent"], cwd=app, capture_output=True, text=True)
+            if result.returncode or drift(app):
+                failed.append(app)
+                print(f"{app.split('/')[-2]}: pnpm lock failed: {(result.stderr or result.stdout).strip()[-300:]}", file=sys.stderr)
+    print(f"{moved} moved, {len(apps) - moved} already on picker-bar 0.6, {len(failed)} lock failures")
+    return 1 if failed else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

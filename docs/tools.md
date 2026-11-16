@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-105 tools.
+106 tools.
 
 - [`bin/axum-axa-0-10`](#axum-axa-0-10)
 - [`bin/axum-axa-0-11`](#axum-axa-0-11)
@@ -72,6 +72,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/svelte-helpers-chooser-rename`](#svelte-helpers-chooser-rename)
 - [`bin/svelte-helpers-picker-rename`](#svelte-helpers-picker-rename)
 - [`bin/svelte-kit-3-theme-url-fix.py`](#svelte-kit-3-theme-url-fixpy)
+- [`bin/svelte-lily-picker-bar-0-6`](#svelte-lily-picker-bar-0-6)
 - [`bin/svelte-lily-picker-defaults`](#svelte-lily-picker-defaults)
 - [`bin/svelte-lily-pnpm-migrate`](#svelte-lily-pnpm-migrate)
 - [`bin/svelte-lily-scope-rename`](#svelte-lily-scope-rename)
@@ -2170,6 +2171,30 @@ the `sv migrate` codemod's own per-form task list — once confirmed resolved
 Usage:
   bin/svelte-kit-3-theme-url-fix.py --check          # CI drift detector
   bin/svelte-kit-3-theme-url-fix.py --apply          # rewrite in place
+```
+
+<h2 id="svelte-lily-picker-bar-0-6"><code>bin/svelte-lily-picker-bar-0-6</code></h2>
+
+```text
+bin/svelte-lily-picker-bar-0-6 — move each Svelte front-end to Lily picker-bar 0.6 and headless 0.9.
+
+What it changes in a `front-end-with-svelte/`:
+
+  package.json      @lilydesignsystem/svelte-picker-bar ^0.5.3 -> ^0.6.0
+                    @lilydesignsystem/svelte-headless   ^0.8.0 -> ^0.9.0
+  pnpm-lock.yaml    `pnpm install --lockfile-only`, so only the lock moves and no
+                    node_modules is created; unless --no-lock
+
+The theme picker itself (@lilydesignsystem/svelte-theme-picker 0.3.2) is already the
+latest release; picker-bar 0.6.0 still depends on it, so it does not move. No source
+change was needed (apgar-score: lint, format:check, svelte-check and build clean).
+
+A front-end already moved is skipped, so the tool can be rerun. A front-end whose
+package.json lacks the expected lines stops the run before anything is written.
+
+Usage:
+  bin/svelte-lily-picker-bar-0-6 [--no-lock] --all|<slug>...
+  bin/svelte-lily-picker-bar-0-6 --check --all|<slug>...   # CI drift check
 ```
 
 <h2 id="svelte-lily-picker-defaults"><code>bin/svelte-lily-picker-defaults</code></h2>
