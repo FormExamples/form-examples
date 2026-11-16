@@ -2,13 +2,14 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-105 tools.
+106 tools.
 
 - [`bin/axum-axa-0-10`](#axum-axa-0-10)
 - [`bin/axum-axa-0-11`](#axum-axa-0-11)
 - [`bin/axum-axa-0-12`](#axum-axa-0-12)
 - [`bin/axum-axa-0-13`](#axum-axa-0-13)
 - [`bin/axum-axa-0-14`](#axum-axa-0-14)
+- [`bin/axum-axa-0-16`](#axum-axa-0-16)
 - [`bin/axum-axa-0-7`](#axum-axa-0-7)
 - [`bin/axum-axa-0-8`](#axum-axa-0-8)
 - [`bin/axum-axa-0-9`](#axum-axa-0-9)
@@ -265,6 +266,41 @@ Usage:
   bin/axum-axa-0-14 --all --no-lock    # leave Cargo.lock to `cargo update`
   bin/axum-axa-0-14 --root DIR <slug>  # a copy of forms/ at DIR
   bin/axum-axa-0-14 --check --all      # CI drift check (non-zero on drift)
+```
+
+<h2 id="axum-axa-0-16"><code>bin/axum-axa-0-16</code></h2>
+
+```text
+bin/axum-axa-0-16 — move each form's `back-end-with-axum/` from axa 0.14 to 0.16.
+
+What it changes in a crate:
+
+  Cargo.toml                axa 0.16 and axa-test 0.7
+  src/<snake>/app.rs        `cli::Command` has a `Health` variant in 0.16: `run` answers
+                            it before connecting to anything, with `axa::cli::health`,
+                            and the later `match` lists it beside `Check`
+  Cargo.lock                axa 0.16 and axa-test 0.7, by
+                            `cargo update -p axa -p axa-test`, so only axa's own crates
+                            move; unless --no-lock
+
+0.15 is skipped: axa-test 0.6 and axa 0.15 were superseded the same day. Nothing else in
+the 0.15 or 0.16 upgrade guides touches these crates (no web sessions, no hand-built
+`config::Server`, no MySQL queue, no `SETUP_STATEMENTS` match). The job queue's new setup
+statements run at boot, as every crate uses `Queue::connect`.
+
+Both versions were hours old when the fleet moved, inside the minimum publish age; the
+lock step sets CARGO_RESOLVER_INCOMPATIBLE_PUBLISH_AGE=allow for that `cargo update`
+only, so it works before and after the cooldown ends.
+
+A crate already moved is skipped, so the tool can be rerun. A crate whose axa lines or
+`run` function differ from the expected shape stops the run before anything is written.
+
+Usage:
+  bin/axum-axa-0-16 <slug>...          # named forms
+  bin/axum-axa-0-16 --all              # every form's Axum crate
+  bin/axum-axa-0-16 --all --no-lock    # leave Cargo.lock to `cargo update`
+  bin/axum-axa-0-16 --root DIR <slug>  # a copy of forms/ at DIR
+  bin/axum-axa-0-16 --check --all      # CI drift check (non-zero on drift)
 ```
 
 <h2 id="axum-axa-0-7"><code>bin/axum-axa-0-7</code></h2>
