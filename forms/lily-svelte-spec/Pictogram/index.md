@@ -40,10 +40,13 @@ A headless Svelte 5 component rendering a `<figure>` containing an `aria-hidden`
 
 ```svelte
 <script lang="ts">
-  import Pictogram from './Pictogram.svelte';
+  import Pictogram from "./Pictogram.svelte";
 </script>
 
-<Pictogram heading="Privacy" description="Your data stays yours.">
+<Pictogram
+  heading="Privacy"
+  description="Your data stays yours."
+>
   {#snippet icon()}
     <span aria-hidden="true">🔒</span>
   {/snippet}

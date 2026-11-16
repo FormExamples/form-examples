@@ -13,9 +13,11 @@ function textSnippet(text: string) {
 
 describe("Watermark", () => {
     test("renders as a div with the watermark class", () => {
-        const { container } = render(Subject, { props: {
-            text: "Confidential",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                text: "Confidential",
+            },
+        });
 
         const root = container.querySelector("div.watermark") as HTMLElement;
         expect(root).toBeTruthy();
@@ -23,9 +25,11 @@ describe("Watermark", () => {
     });
 
     test("renders an overlay with aria-hidden=true", () => {
-        const { container } = render(Subject, { props: {
-            text: "Confidential",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                text: "Confidential",
+            },
+        });
 
         const overlay = container.querySelector(".watermark-overlay") as HTMLElement;
         expect(overlay).toBeTruthy();
@@ -33,9 +37,11 @@ describe("Watermark", () => {
     });
 
     test("default gap is 100px and rotate is -22", () => {
-        const { container } = render(Subject, { props: {
-            text: "Confidential",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                text: "Confidential",
+            },
+        });
 
         const root = container.querySelector("div.watermark") as HTMLElement;
         expect(root.getAttribute("data-gap")).toBe("100px");
@@ -43,11 +49,13 @@ describe("Watermark", () => {
     });
 
     test("supports custom gap and rotate", () => {
-        const { container } = render(Subject, { props: {
-            text: "X",
-            gap: "60px",
-            rotate: 45,
-        }});
+        const { container } = render(Subject, {
+            props: {
+                text: "X",
+                gap: "60px",
+                rotate: 45,
+            },
+        });
 
         const root = container.querySelector("div.watermark") as HTMLElement;
         expect(root.getAttribute("data-gap")).toBe("60px");
@@ -55,38 +63,46 @@ describe("Watermark", () => {
     });
 
     test("overlay exposes text via data-text", () => {
-        const { container } = render(Subject, { props: {
-            text: "Confidential",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                text: "Confidential",
+            },
+        });
 
         const overlay = container.querySelector(".watermark-overlay") as HTMLElement;
         expect(overlay.getAttribute("data-text")).toBe("Confidential");
     });
 
     test("overlay exposes imageUrl via data-image-url", () => {
-        const { container } = render(Subject, { props: {
-            imageUrl: "/wm.png",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                imageUrl: "/wm.png",
+            },
+        });
 
         const overlay = container.querySelector(".watermark-overlay") as HTMLElement;
         expect(overlay.getAttribute("data-image-url")).toBe("/wm.png");
     });
 
     test("renders children beneath the overlay", () => {
-        const { container } = render(Subject, { props: {
-            text: "WM",
-            children: textSnippet("Document body"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                text: "WM",
+                children: textSnippet("Document body"),
+            },
+        });
 
         const root = container.querySelector("div.watermark") as HTMLElement;
         expect(root.textContent).toContain("Document body");
     });
 
     test("appends consumer class to base class", () => {
-        const { container } = render(Subject, { props: {
-            text: "X",
-            class: "extra",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                text: "X",
+                class: "extra",
+            },
+        });
 
         const root = container.querySelector("div.watermark") as HTMLElement;
         expect(root.className).toContain("watermark");

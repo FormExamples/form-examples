@@ -45,7 +45,7 @@ Import `ActionLink` from `./ActionLink.svelte`. Always provide `href`. Optionall
 
 ```svelte
 <script lang="ts">
-  import ActionLink from './ActionLink.svelte';
+  import ActionLink from "./ActionLink.svelte";
 </script>
 
 <ActionLink href="/next-step">Continue to next step</ActionLink>
@@ -55,10 +55,13 @@ Import `ActionLink` from `./ActionLink.svelte`. Always provide `href`. Optionall
 
 ```svelte
 <script lang="ts">
-  import ActionLink from './ActionLink.svelte';
+  import ActionLink from "./ActionLink.svelte";
 </script>
 
-<ActionLink href="/find" label="Find a GP surgery near you">
+<ActionLink
+  href="/find"
+  label="Find a GP surgery near you"
+>
   Find a GP
 </ActionLink>
 ```
@@ -67,10 +70,13 @@ Import `ActionLink` from `./ActionLink.svelte`. Always provide `href`. Optionall
 
 ```svelte
 <script lang="ts">
-  import ActionLink from './ActionLink.svelte';
+  import ActionLink from "./ActionLink.svelte";
 </script>
 
-<ActionLink href="/apply" data-track="apply-cta">
+<ActionLink
+  href="/apply"
+  data-track="apply-cta"
+>
   Start your application
 </ActionLink>
 ```
@@ -79,10 +85,15 @@ Import `ActionLink` from `./ActionLink.svelte`. Always provide `href`. Optionall
 
 ```svelte
 <script lang="ts">
-  import ActionLink from './ActionLink.svelte';
+  import ActionLink from "./ActionLink.svelte";
 </script>
 
-<ActionLink href="https://example.org/report" target="_blank" rel="noopener" label="Open report in a new tab">
+<ActionLink
+  href="https://example.org/report"
+  target="_blank"
+  rel="noopener"
+  label="Open report in a new tab"
+>
   Open full report
 </ActionLink>
 ```
@@ -91,7 +102,7 @@ Import `ActionLink` from `./ActionLink.svelte`. Always provide `href`. Optionall
 
 ```svelte
 <script lang="ts">
-  import ActionLink from './ActionLink.svelte';
+  import ActionLink from "./ActionLink.svelte";
 </script>
 
 <p>Ready to begin? <ActionLink href="/signup">Create your account</ActionLink></p>

@@ -32,63 +32,75 @@ Bind `value`. Provide `label`. Pass `error` on validation failure; the alert wil
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `class` | `string` | `""` | CSS class name appended to the base class. |
-| `label` | `string` | required | Visible label. |
-| `value` | `string` | `""` (bindable) | Date value in YYYY-MM-DD. |
-| `description` | `string` | `undefined` | Helper text below the input. |
-| `error` | `string` | `undefined` | Error message; triggers `aria-invalid`. |
-| `required` | `boolean` | `false` | Marks the field required. |
-| `disabled` | `boolean` | `false` | Disables the input. |
-| `id` | `string` | `undefined` | Custom input ID; auto-generated if omitted. |
-| `...restProps` | `unknown` | — | Additional attributes spread onto the wrapper `<div>`. |
+| Prop           | Type      | Default         | Description                                            |
+| -------------- | --------- | --------------- | ------------------------------------------------------ |
+| `class`        | `string`  | `""`            | CSS class name appended to the base class.             |
+| `label`        | `string`  | required        | Visible label.                                         |
+| `value`        | `string`  | `""` (bindable) | Date value in YYYY-MM-DD.                              |
+| `description`  | `string`  | `undefined`     | Helper text below the input.                           |
+| `error`        | `string`  | `undefined`     | Error message; triggers `aria-invalid`.                |
+| `required`     | `boolean` | `false`         | Marks the field required.                              |
+| `disabled`     | `boolean` | `false`         | Disables the input.                                    |
+| `id`           | `string`  | `undefined`     | Custom input ID; auto-generated if omitted.            |
+| `...restProps` | `unknown` | —               | Additional attributes spread onto the wrapper `<div>`. |
 
 ## Usage
 
 ```svelte
 <script lang="ts">
-    import DateField from "./DateField.svelte";
+  import DateField from "./DateField.svelte";
 
-    let start = $state("");
-</script>
-
-<DateField label="Start date" bind:value={start} />
-```
-
-```svelte
-<script lang="ts">
-    import DateField from "./DateField.svelte";
-
-    let end = $state("");
-    let error = $derived(end === "" ? "Please choose a date." : undefined);
-</script>
-
-<DateField label="End date" bind:value={end} {error} required />
-```
-
-```svelte
-<script lang="ts">
-    import DateField from "./DateField.svelte";
-
-    let birthday = $state("");
-</script>
-
-<DateField label="Birthday" bind:value={birthday} description="Format: YYYY-MM-DD" />
-```
-
-```svelte
-<script lang="ts">
-    import DateField from "./DateField.svelte";
-
-    let deadline = $state("");
+  let start = $state("");
 </script>
 
 <DateField
-    label="Deadline"
-    id="deadline-field"
-    bind:value={deadline}
-    description="Must be a future date."
+  label="Start date"
+  bind:value={start}
+/>
+```
+
+```svelte
+<script lang="ts">
+  import DateField from "./DateField.svelte";
+
+  let end = $state("");
+  let error = $derived(end === "" ? "Please choose a date." : undefined);
+</script>
+
+<DateField
+  label="End date"
+  bind:value={end}
+  {error}
+  required
+/>
+```
+
+```svelte
+<script lang="ts">
+  import DateField from "./DateField.svelte";
+
+  let birthday = $state("");
+</script>
+
+<DateField
+  label="Birthday"
+  bind:value={birthday}
+  description="Format: YYYY-MM-DD"
+/>
+```
+
+```svelte
+<script lang="ts">
+  import DateField from "./DateField.svelte";
+
+  let deadline = $state("");
+</script>
+
+<DateField
+  label="Deadline"
+  id="deadline-field"
+  bind:value={deadline}
+  description="Must be a future date."
 />
 ```
 

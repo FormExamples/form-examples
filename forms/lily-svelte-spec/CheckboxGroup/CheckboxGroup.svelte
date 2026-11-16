@@ -52,6 +52,7 @@
     //   - WAI-ARIA Checkbox Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/
     //   - WAI-ARIA Group Role: https://www.w3.org/TR/wai-aria-1.2/#group
 
+    import { warnMissingName } from "../dev-warning";
     import type { Snippet } from "svelte";
 
     let {
@@ -69,9 +70,19 @@
         children: Snippet;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName(
+            "CheckboxGroup",
+            label,
+            restProps["aria-label"],
+            restProps["aria-labelledby"],
+        ),
+    );
 </script>
 
 <!-- CheckboxGroup.svelte -->
+<!-- svelte-ignore a11y_no_redundant_roles (explicit role=group is part of the documented contract) -->
 <fieldset
     class={`checkbox-group ${className}`}
     role="group"

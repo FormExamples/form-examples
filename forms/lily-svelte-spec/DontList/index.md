@@ -30,24 +30,24 @@ Wrap one or more `DontListItem` children inside `DontList`.
 
 ```svelte
 <script lang="ts">
-    import DontList from "./DontList.svelte";
-    import DontListItem from "../DontListItem/DontListItem.svelte";
+  import DontList from "./DontList.svelte";
+  import DontListItem from "../DontListItem/DontListItem.svelte";
 </script>
 
 <DontList>
-    <DontListItem>Use color alone to convey meaning</DontListItem>
-    <DontListItem>Remove focus outlines without replacement</DontListItem>
+  <DontListItem>Use color alone to convey meaning</DontListItem>
+  <DontListItem>Remove focus outlines without replacement</DontListItem>
 </DontList>
 ```
 
 ## Props
 
-| Prop       | Type       | Default   | Description                                |
-| ---------- | ---------- | --------- | ------------------------------------------ |
-| `class`    | `string`   | `""`      | CSS class appended to the base class.     |
-| `label`    | `string`   | `"Don't"` | Accessible name via `aria-label`.          |
-| `children` | `Snippet`  | required  | List items (typically `DontListItem`).     |
-| `...rest`  | `unknown`  | —         | Additional HTML attributes on the `<ol>`. |
+| Prop       | Type      | Default   | Description                               |
+| ---------- | --------- | --------- | ----------------------------------------- |
+| `class`    | `string`  | `""`      | CSS class appended to the base class.     |
+| `label`    | `string`  | `"Don't"` | Accessible name via `aria-label`.         |
+| `children` | `Snippet` | required  | List items (typically `DontListItem`).    |
+| `...rest`  | `unknown` | —         | Additional HTML attributes on the `<ol>`. |
 
 ## Usage
 
@@ -55,8 +55,8 @@ Wrap one or more `DontListItem` children inside `DontList`.
 
 ```svelte
 <DontList>
-    <DontListItem>Skip alt text</DontListItem>
-    <DontListItem>Use only color for meaning</DontListItem>
+  <DontListItem>Skip alt text</DontListItem>
+  <DontListItem>Use only color for meaning</DontListItem>
 </DontList>
 ```
 
@@ -64,8 +64,8 @@ Wrap one or more `DontListItem` children inside `DontList`.
 
 ```svelte
 <DontList label="Avoid">
-    <DontListItem>Hard-code user-facing strings</DontListItem>
-    <DontListItem>Rely on placeholder text as labels</DontListItem>
+  <DontListItem>Hard-code user-facing strings</DontListItem>
+  <DontListItem>Rely on placeholder text as labels</DontListItem>
 </DontList>
 ```
 
@@ -73,17 +73,17 @@ Wrap one or more `DontListItem` children inside `DontList`.
 
 ```svelte
 <script lang="ts">
-    import DoList from "../DoList/DoList.svelte";
-    import DoListItem from "../DoListItem/DoListItem.svelte";
-    import DontList from "./DontList.svelte";
-    import DontListItem from "../DontListItem/DontListItem.svelte";
+  import DoList from "../DoList/DoList.svelte";
+  import DoListItem from "../DoListItem/DoListItem.svelte";
+  import DontList from "./DontList.svelte";
+  import DontListItem from "../DontListItem/DontListItem.svelte";
 </script>
 
 <DoList>
-    <DoListItem>Write clear error messages</DoListItem>
+  <DoListItem>Write clear error messages</DoListItem>
 </DoList>
 <DontList>
-    <DontListItem>Use technical jargon in errors</DontListItem>
+  <DontListItem>Use technical jargon in errors</DontListItem>
 </DontList>
 ```
 
@@ -91,9 +91,9 @@ Wrap one or more `DontListItem` children inside `DontList`.
 
 ```svelte
 <DontList label="Accessibility anti-patterns">
-    <DontListItem>Remove outlines without a replacement</DontListItem>
-    <DontListItem>Trap keyboard focus</DontListItem>
-    <DontListItem>Rely on hover only</DontListItem>
+  <DontListItem>Remove outlines without a replacement</DontListItem>
+  <DontListItem>Trap keyboard focus</DontListItem>
+  <DontListItem>Rely on hover only</DontListItem>
 </DontList>
 ```
 
@@ -101,7 +101,7 @@ Wrap one or more `DontListItem` children inside `DontList`.
 
 ```svelte
 <DontList class="red-border">
-    <DontListItem>Skip screen reader text</DontListItem>
+  <DontListItem>Skip screen reader text</DontListItem>
 </DontList>
 ```
 

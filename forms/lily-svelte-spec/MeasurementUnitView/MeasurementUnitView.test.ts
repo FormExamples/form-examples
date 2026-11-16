@@ -16,7 +16,11 @@ describe("MeasurementUnitView", () => {
 
     test("supports aria-label", () => {
         render(Subject, { props: { value: "cm", label: "Centimeters" } });
-        expect(screen.getByText("cm").getAttribute("aria-label")).toBe("Centimeters");
+        expect(
+            (document.querySelector(".measurement-unit-view") as HTMLElement).querySelector(
+                ".screen-reader-span",
+            )?.textContent,
+        ).toBe(`${"Centimeters"} `);
     });
 
     test("passes through attributes", () => {

@@ -2,17 +2,17 @@
     // GanttTableHead component
     //
     // The header section of a GanttTable, rendered as a <thead> element.
-    // Contains GanttTableTR elements with column headers for task names,
+    // Contains GanttTableTr elements with column headers for task names,
     // dates, durations, or other Gantt chart metadata.
     //
     // Props:
     //   className — string, optional. CSS class name.
-    //   children — Snippet, required. GanttTableTR elements with header cells.
+    //   children — Snippet, required. GanttTableTr elements with header cells.
     //   ...restProps — additional HTML attributes spread onto the <thead>.
     //
     // Syntax:
     //   <GanttTableHead>
-    //     <GanttTableTR><th>Task</th><th>Start</th><th>End</th></GanttTableTR>
+    //     <GanttTableTr><th>Task</th><th>Start</th><th>End</th></GanttTableTr>
     //   </GanttTableHead>
     //
     // Keyboard:
@@ -36,7 +36,7 @@
         children,
         ...restProps
     }: {
-        /** GanttTableTR elements with header cells. */
+        /** GanttTableTr elements with header cells. */
         children: Snippet;
         [key: string]: unknown;
     } = $props();

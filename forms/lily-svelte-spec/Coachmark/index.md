@@ -37,7 +37,7 @@ A headless Svelte 5 component that renders a `<div role="dialog" aria-modal="fal
 
 ```svelte
 <script lang="ts">
-  import Coachmark from './Coachmark.svelte';
+  import Coachmark from "./Coachmark.svelte";
 
   let open = $state(true);
 </script>

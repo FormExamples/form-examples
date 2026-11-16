@@ -10,7 +10,7 @@ See [components/address-input/index.md](../../../components/address-input/index.
 
 ```svelte
 <script lang="ts">
-    import AddressInput from "./AddressInput.svelte";
+  import AddressInput from "./AddressInput.svelte";
 </script>
 
 <AddressInput />

@@ -43,11 +43,14 @@ Import `AspectRatioContainer` from `./AspectRatioContainer.svelte`. Provide the 
 
 ```svelte
 <script lang="ts">
-  import AspectRatioContainer from './AspectRatioContainer.svelte';
+  import AspectRatioContainer from "./AspectRatioContainer.svelte";
 </script>
 
 <AspectRatioContainer ratio={16 / 9}>
-  <video src="promo.mp4" controls></video>
+  <video
+    src="promo.mp4"
+    controls
+  ></video>
 </AspectRatioContainer>
 ```
 
@@ -55,11 +58,14 @@ Import `AspectRatioContainer` from `./AspectRatioContainer.svelte`. Provide the 
 
 ```svelte
 <script lang="ts">
-  import AspectRatioContainer from './AspectRatioContainer.svelte';
+  import AspectRatioContainer from "./AspectRatioContainer.svelte";
 </script>
 
 <AspectRatioContainer ratio={1}>
-  <img src="/photos/jane.jpg" alt="Jane Doe" />
+  <img
+    src="/photos/jane.jpg"
+    alt="Jane Doe"
+  />
 </AspectRatioContainer>
 ```
 
@@ -67,10 +73,13 @@ Import `AspectRatioContainer` from `./AspectRatioContainer.svelte`. Provide the 
 
 ```svelte
 <script lang="ts">
-  import AspectRatioContainer from './AspectRatioContainer.svelte';
+  import AspectRatioContainer from "./AspectRatioContainer.svelte";
 </script>
 
-<AspectRatioContainer ratio={4 / 3} data-testid="card-frame">
+<AspectRatioContainer
+  ratio={4 / 3}
+  data-testid="card-frame"
+>
   <article>
     <h3>Product name</h3>
     <p>Description here.</p>
@@ -82,11 +91,14 @@ Import `AspectRatioContainer` from `./AspectRatioContainer.svelte`. Provide the 
 
 ```svelte
 <script lang="ts">
-  import AspectRatioContainer from './AspectRatioContainer.svelte';
+  import AspectRatioContainer from "./AspectRatioContainer.svelte";
 </script>
 
 <AspectRatioContainer ratio={21 / 9}>
-  <img src="/hero.jpg" alt="Mountains at sunrise" />
+  <img
+    src="/hero.jpg"
+    alt="Mountains at sunrise"
+  />
 </AspectRatioContainer>
 ```
 
@@ -94,7 +106,7 @@ Import `AspectRatioContainer` from `./AspectRatioContainer.svelte`. Provide the 
 
 ```svelte
 <script lang="ts">
-  import AspectRatioContainer from './AspectRatioContainer.svelte';
+  import AspectRatioContainer from "./AspectRatioContainer.svelte";
 
   let isPortrait = $state(false);
   let ratio = $derived(isPortrait ? 3 / 4 : 4 / 3);
@@ -102,7 +114,10 @@ Import `AspectRatioContainer` from `./AspectRatioContainer.svelte`. Provide the 
 
 <button onclick={() => (isPortrait = !isPortrait)}>Toggle orientation</button>
 <AspectRatioContainer {ratio}>
-  <img src="/photo.jpg" alt="Photo" />
+  <img
+    src="/photo.jpg"
+    alt="Photo"
+  />
 </AspectRatioContainer>
 ```
 

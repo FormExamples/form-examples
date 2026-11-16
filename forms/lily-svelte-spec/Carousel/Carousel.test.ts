@@ -32,7 +32,9 @@ describe("Carousel", () => {
     });
 
     test("passes through attributes", () => {
-        render(Subject, { props: { label: "G", "data-testid": "car", children: textSnippet("x") } });
+        render(Subject, {
+            props: { label: "G", "data-testid": "car", children: textSnippet("x") },
+        });
         expect(screen.getByTestId("car")).toBeTruthy();
     });
 });

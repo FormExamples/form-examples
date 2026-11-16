@@ -7,7 +7,7 @@ describe("LatvijaPersonasKodsView", () => {
     test("renders with the correct class", () => {
         render(Subject, { props: { label: "Personal Code", value: "test-value" } });
 
-        const el = screen.getByLabelText("Personal Code");
+        const el = document.querySelector(".latvija-personas-kods-view") as HTMLElement;
         expect(el).toBeTruthy();
         expect(el.getAttribute("class")).toContain("latvija-personas-kods-view");
     });
@@ -15,14 +15,17 @@ describe("LatvijaPersonasKodsView", () => {
     test("renders the value as text content", () => {
         render(Subject, { props: { label: "Personal Code", value: "test-value" } });
 
-        const el = screen.getByLabelText("Personal Code");
-        expect(el.textContent).toBe("test-value");
+        const el = document.querySelector(".latvija-personas-kods-view") as HTMLElement;
+        expect(
+            el.textContent?.replace(el.querySelector(".screen-reader-span")?.textContent ?? "", ""),
+        ).toBe("test-value");
     });
 
     test("has aria-label from the label prop", () => {
         render(Subject, { props: { label: "Personal Code" } });
 
-        const el = screen.getByLabelText("Personal Code");
-        expect(el.getAttribute("aria-label")).toBe("Personal Code");
+        const el = document.querySelector(".latvija-personas-kods-view") as HTMLElement;
+        expect(el.querySelector(".screen-reader-span")?.textContent).toBe(`${"Personal Code"} `);
+        expect(el.hasAttribute("aria-label")).toBe(false);
     });
 });

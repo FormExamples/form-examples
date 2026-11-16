@@ -2,13 +2,12 @@
     // DataTableTD component
     //
     // A single data cell within a DataTableRow. Renders as a <td> with
-    // role="gridcell". Supports an active state for indicating the currently
-    // focused or selected cell, communicated via aria-selected for screen
-    // readers. Uses a roving tabindex pattern.
+    // role="gridcell". Supports an active state marking the grid's single roving tab
+    // stop (tabindex="0"); it does not set aria-selected.
     //
     // Props:
     //   className — string, optional. CSS class name.
-    //   active — boolean, default false. Whether this cell is active/selected.
+    //   active — boolean, default false. Whether this cell is the roving tab stop.
     //   children — Snippet, required. Cell content.
     //   ...restProps — additional HTML attributes spread onto the <td>.
     //
@@ -21,7 +20,7 @@
     //
     // Accessibility:
     //   - role="gridcell" identifies the cell as part of an interactive grid
-    //   - aria-selected set to true when active; omitted otherwise
+    //   - `active` is the roving tab stop only: it never sets aria-selected, because focus is not selection (a grid with real selection passes aria-selected itself)
     //   - Roving tabindex: tabindex="0" when active, "-1" otherwise
     //
     // Claude rules:
@@ -39,7 +38,7 @@
         children,
         ...restProps
     }: {
-        /** Whether this cell is active/selected. */
+        /** Whether this cell is the roving tab stop (tabindex="0"). Never sets aria-selected. */
         active?: boolean;
         /** Cell content. */
         children: Snippet;
@@ -51,7 +50,6 @@
 <td
     class={`data-table-td ${className}`}
     role="gridcell"
-    aria-selected={active || undefined}
     tabindex={active ? 0 : -1}
     {...restProps}
 >

@@ -10,7 +10,7 @@ See [components/mockup-window/index.md](../../../components/mockup-window/index.
 
 ```svelte
 <script lang="ts">
-    import MockupWindow from "./MockupWindow.svelte";
+  import MockupWindow from "./MockupWindow.svelte";
 </script>
 
 <MockupWindow />

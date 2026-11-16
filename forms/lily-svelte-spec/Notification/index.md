@@ -54,7 +54,7 @@ import Notification from './Notification.svelte';
 
 ```svelte
 <script lang="ts">
-  import Notification from './Notification.svelte';
+  import Notification from "./Notification.svelte";
 </script>
 
 <Notification label="Success">Your changes have been saved.</Notification>
@@ -64,10 +64,13 @@ import Notification from './Notification.svelte';
 
 ```svelte
 <script lang="ts">
-  import Notification from './Notification.svelte';
+  import Notification from "./Notification.svelte";
 </script>
 
-<Notification label="Error" urgent>
+<Notification
+  label="Error"
+  urgent
+>
   Something went wrong. Please try again.
 </Notification>
 ```
@@ -76,7 +79,7 @@ import Notification from './Notification.svelte';
 
 ```svelte
 <script lang="ts">
-  import Notification from './Notification.svelte';
+  import Notification from "./Notification.svelte";
 </script>
 
 <Notification>3 new messages</Notification>
@@ -86,10 +89,13 @@ import Notification from './Notification.svelte';
 
 ```svelte
 <script lang="ts">
-  import Notification from './Notification.svelte';
+  import Notification from "./Notification.svelte";
 
   let saved = $state(false);
-  function save() { saved = true; setTimeout(() => (saved = false), 3000); }
+  function save() {
+    saved = true;
+    setTimeout(() => (saved = false), 3000);
+  }
 </script>
 
 <button onclick={save}>Save</button>
@@ -102,10 +108,13 @@ import Notification from './Notification.svelte';
 
 ```svelte
 <script lang="ts">
-  import Notification from './Notification.svelte';
+  import Notification from "./Notification.svelte";
 </script>
 
-<Notification label="Update available" urgent>
+<Notification
+  label="Update available"
+  urgent
+>
   <strong>Update available:</strong>
   <a href="/changelog">See what's new</a>
 </Notification>

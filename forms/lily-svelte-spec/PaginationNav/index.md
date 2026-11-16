@@ -48,16 +48,21 @@ import PaginationNav from './PaginationNav.svelte';
 
 ```svelte
 <script lang="ts">
-  import PaginationNav from './PaginationNav.svelte';
-  import PaginationList from '../PaginationList/PaginationList.svelte';
-  import PaginationListItem from '../PaginationListItem/PaginationListItem.svelte';
+  import PaginationNav from "./PaginationNav.svelte";
+  import PaginationList from "../PaginationList/PaginationList.svelte";
+  import PaginationListItem from "../PaginationListItem/PaginationListItem.svelte";
 </script>
 
 <PaginationNav label="Pagination">
   <PaginationList label="Results pages">
     <PaginationListItem><a href="/page/1">Previous</a></PaginationListItem>
     <PaginationListItem><a href="/page/1">1</a></PaginationListItem>
-    <PaginationListItem><a href="/page/2" aria-current="page">2</a></PaginationListItem>
+    <PaginationListItem
+      ><a
+        href="/page/2"
+        aria-current="page">2</a
+      ></PaginationListItem
+    >
     <PaginationListItem><a href="/page/3">3</a></PaginationListItem>
     <PaginationListItem><a href="/page/3">Next</a></PaginationListItem>
   </PaginationList>
@@ -68,9 +73,9 @@ import PaginationNav from './PaginationNav.svelte';
 
 ```svelte
 <script lang="ts">
-  import PaginationNav from './PaginationNav.svelte';
-  import PaginationList from '../PaginationList/PaginationList.svelte';
-  import PaginationListItem from '../PaginationListItem/PaginationListItem.svelte';
+  import PaginationNav from "./PaginationNav.svelte";
+  import PaginationList from "../PaginationList/PaginationList.svelte";
+  import PaginationListItem from "../PaginationListItem/PaginationListItem.svelte";
 
   let current = $state(2);
   const totalPages = 5;
@@ -80,7 +85,10 @@ import PaginationNav from './PaginationNav.svelte';
   <PaginationList label="Search results">
     {#each Array.from({ length: totalPages }, (_, i) => i + 1) as page}
       <PaginationListItem>
-        <a href={`/page/${page}`} aria-current={page === current ? "page" : undefined}>
+        <a
+          href={`/page/${page}`}
+          aria-current={page === current ? "page" : undefined}
+        >
           {page}
         </a>
       </PaginationListItem>
@@ -93,9 +101,9 @@ import PaginationNav from './PaginationNav.svelte';
 
 ```svelte
 <script lang="ts">
-  import PaginationNav from './PaginationNav.svelte';
-  import PaginationList from '../PaginationList/PaginationList.svelte';
-  import PaginationListItem from '../PaginationListItem/PaginationListItem.svelte';
+  import PaginationNav from "./PaginationNav.svelte";
+  import PaginationList from "../PaginationList/PaginationList.svelte";
+  import PaginationListItem from "../PaginationListItem/PaginationListItem.svelte";
 
   let page = $state(1);
 </script>
@@ -103,11 +111,17 @@ import PaginationNav from './PaginationNav.svelte';
 <PaginationNav label="Pagination">
   <PaginationList label="Report pages">
     <PaginationListItem>
-      <button type="button" onclick={() => (page = Math.max(1, page - 1))}>Previous</button>
+      <button
+        type="button"
+        onclick={() => (page = Math.max(1, page - 1))}>Previous</button
+      >
     </PaginationListItem>
     <PaginationListItem>Page {page}</PaginationListItem>
     <PaginationListItem>
-      <button type="button" onclick={() => (page += 1)}>Next</button>
+      <button
+        type="button"
+        onclick={() => (page += 1)}>Next</button
+      >
     </PaginationListItem>
   </PaginationList>
 </PaginationNav>
@@ -119,7 +133,12 @@ import PaginationNav from './PaginationNav.svelte';
 <PaginationNav label="Paginación">
   <PaginationList label="Páginas de resultados">
     <PaginationListItem><a href="?p=1">Anterior</a></PaginationListItem>
-    <PaginationListItem><a href="?p=2" aria-current="page">2</a></PaginationListItem>
+    <PaginationListItem
+      ><a
+        href="?p=2"
+        aria-current="page">2</a
+      ></PaginationListItem
+    >
     <PaginationListItem><a href="?p=3">Siguiente</a></PaginationListItem>
   </PaginationList>
 </PaginationNav>
@@ -132,7 +151,12 @@ import PaginationNav from './PaginationNav.svelte';
   <PaginationList label="Pages">
     <PaginationListItem><a href="/page/1">1</a></PaginationListItem>
     <PaginationListItem aria-hidden="true">…</PaginationListItem>
-    <PaginationListItem><a href="/page/99" aria-current="page">99</a></PaginationListItem>
+    <PaginationListItem
+      ><a
+        href="/page/99"
+        aria-current="page">99</a
+      ></PaginationListItem
+    >
     <PaginationListItem><a href="/page/100">100</a></PaginationListItem>
   </PaginationList>
 </PaginationNav>

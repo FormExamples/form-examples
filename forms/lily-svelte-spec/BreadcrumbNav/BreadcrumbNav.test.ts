@@ -27,7 +27,9 @@ describe("BreadcrumbNav", () => {
     });
 
     test("passes through attributes", () => {
-        render(Subject, { props: { label: "Breadcrumb", "data-testid": "bcn", children: textSnippet("x") } });
+        render(Subject, {
+            props: { label: "Breadcrumb", "data-testid": "bcn", children: textSnippet("x") },
+        });
         expect(screen.getByTestId("bcn")).toBeTruthy();
     });
 });

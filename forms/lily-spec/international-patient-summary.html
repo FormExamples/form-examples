@@ -1,0 +1,103 @@
+<!-- international-patient-summary.html -->
+<!-- InternationalPatientSummary component -->
+<!--
+  Description: an International Patient Summary (HL7 FHIR IPS) laid out for a clinician: patient banner, contents, sections and
+    document details, never silently missing a required section
+  HTML tag: <article>
+  CSS class: international-patient-summary (parts: -banner, -contents, -sections, -details)
+  Spec: spec/healthcare-ui; components/international-patient-summary
+  Structure only: no FHIR parsing. Static HTML cannot add sections, so the consumer writes each missing required section
+    (medications, allergies, problems) itself, as below: data-status="omitted", data-required="true" and its words, after the
+    given sections, with a contents link to it. Section ids are international-patient-summary-{key}. Give a second summary on the page its own
+    prefix in place of "international-patient-summary".
+-->
+
+<article
+  class="international-patient-summary"
+  aria-label="Patient summary"
+>
+  <div class="international-patient-summary-banner">
+    <!-- the patient banner pattern -->
+  </div>
+  <nav
+    class="international-patient-summary-contents"
+    aria-label="Contents"
+  >
+    <ol>
+      <li
+        data-section="allergies"
+        data-status="known"
+      >
+        <a href="#international-patient-summary-allergies">Allergies and intolerances</a>
+      </li>
+      <li
+        data-section="problems"
+        data-status="none-known"
+      >
+        <a href="#international-patient-summary-problems">Problem list</a>
+      </li>
+      <li
+        data-section="medications"
+        data-status="omitted"
+      >
+        <a href="#international-patient-summary-medications">Medication summary</a>
+      </li>
+    </ol>
+  </nav>
+  <div class="international-patient-summary-sections">
+    <section
+      class="international-patient-summary-section"
+      id="international-patient-summary-allergies"
+      aria-labelledby="international-patient-summary-allergies-heading"
+      data-section="allergies"
+      data-code="48765-2"
+      data-status="known"
+      data-required="true"
+    >
+      <h2
+        id="international-patient-summary-allergies-heading"
+        class="international-patient-summary-section-heading"
+      >
+        Allergies and intolerances
+      </h2>
+      <!-- the section's entries: allergy-record-list -->
+    </section>
+    <section
+      class="international-patient-summary-section"
+      id="international-patient-summary-problems"
+      aria-labelledby="international-patient-summary-problems-heading"
+      data-section="problems"
+      data-code="11450-4"
+      data-status="none-known"
+      data-required="true"
+    >
+      <h2
+        id="international-patient-summary-problems-heading"
+        class="international-patient-summary-section-heading"
+      >
+        Problem list
+      </h2>
+      <p class="international-patient-summary-section-status">No known problems</p>
+    </section>
+    <section
+      class="international-patient-summary-section"
+      id="international-patient-summary-medications"
+      aria-labelledby="international-patient-summary-medications-heading"
+      data-section="medications"
+      data-code="10160-0"
+      data-status="omitted"
+      data-required="true"
+    >
+      <h2
+        id="international-patient-summary-medications-heading"
+        class="international-patient-summary-section-heading"
+      >
+        Medication summary
+      </h2>
+      <p class="international-patient-summary-section-status">Section missing from document</p>
+    </section>
+  </div>
+  <div class="international-patient-summary-details">
+    <!-- the document's details: title, date, authors, custodian, IPS version -->
+  </div>
+</article>

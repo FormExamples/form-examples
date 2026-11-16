@@ -4,7 +4,7 @@ import Event from "./Event.svelte";
 
 describe("Event", () => {
     test("renders with content", () => {
-        render(Event, { props: { label: "Test" } });
+        render(Event, { props: { label: "Test" } as any });
         const el = screen.getByLabelText("Test");
         expect(el).toBeTruthy();
         expect(el.getAttribute("class")).toContain("event");

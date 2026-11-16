@@ -31,38 +31,54 @@ Bind `editing` and handle `onsubmit`. Place any inputs and action buttons inside
 
 ```svelte
 <script lang="ts">
-    import EditableForm from "./EditableForm.svelte";
-    let editing = $state(false);
-    function save(event: SubmitEvent) { /* … */ }
+  import EditableForm from "./EditableForm.svelte";
+  let editing = $state(false);
+  function save(event: SubmitEvent) {
+    /* … */
+  }
 </script>
 
-<button type="button" onclick={() => editing = true}>Edit</button>
-<EditableForm label="Edit profile" bind:editing onsubmit={save}>
-    <input name="name" />
-    <button type="submit">Save</button>
+<button
+  type="button"
+  onclick={() => (editing = true)}>Edit</button
+>
+<EditableForm
+  label="Edit profile"
+  bind:editing
+  onsubmit={save}
+>
+  <input name="name" />
+  <button type="submit">Save</button>
 </EditableForm>
 ```
 
 ## Props
 
-| Prop        | Type                              | Default | Description                                   |
-| ----------- | --------------------------------- | ------- | --------------------------------------------- |
-| `class`     | `string`                          | `""`    | CSS class appended to the base class.        |
-| `label`     | `string`                          | required| Accessible name via `aria-label`.             |
-| `editing`   | `boolean`                         | `false` | Whether the form is in edit mode. Bindable.   |
-| `onsubmit`  | `(event: SubmitEvent) => void`    | `undefined` | Called after a submit completes.          |
-| `oncancel`  | `() => void`                      | `undefined` | Called when Escape cancels editing.       |
-| `children`  | `Snippet`                         | required| Form content (inputs, buttons).               |
-| `...rest`   | `unknown`                         | —       | Additional HTML attributes on the `<form>`.   |
+| Prop       | Type                           | Default     | Description                                 |
+| ---------- | ------------------------------ | ----------- | ------------------------------------------- |
+| `class`    | `string`                       | `""`        | CSS class appended to the base class.       |
+| `label`    | `string`                       | required    | Accessible name via `aria-label`.           |
+| `editing`  | `boolean`                      | `false`     | Whether the form is in edit mode. Bindable. |
+| `onsubmit` | `(event: SubmitEvent) => void` | `undefined` | Called after a submit completes.            |
+| `oncancel` | `() => void`                   | `undefined` | Called when Escape cancels editing.         |
+| `children` | `Snippet`                      | required    | Form content (inputs, buttons).             |
+| `...rest`  | `unknown`                      | —           | Additional HTML attributes on the `<form>`. |
 
 ## Usage
 
 ### 1. Basic editable form
 
 ```svelte
-<EditableForm label="Edit profile" bind:editing onsubmit={save}>
-    <input name="name" value={name} />
-    <button type="submit">Save</button>
+<EditableForm
+  label="Edit profile"
+  bind:editing
+  onsubmit={save}
+>
+  <input
+    name="name"
+    value={name}
+  />
+  <button type="submit">Save</button>
 </EditableForm>
 ```
 
@@ -70,14 +86,20 @@ Bind `editing` and handle `onsubmit`. Place any inputs and action buttons inside
 
 ```svelte
 <EditableForm
-    label="Rename item"
-    bind:editing
-    onsubmit={rename}
-    oncancel={revert}
+  label="Rename item"
+  bind:editing
+  onsubmit={rename}
+  oncancel={revert}
 >
-    <input name="title" value={title} />
-    <button type="submit">OK</button>
-    <button type="button" onclick={() => editing = false}>Cancel</button>
+  <input
+    name="title"
+    value={title}
+  />
+  <button type="submit">OK</button>
+  <button
+    type="button"
+    onclick={() => (editing = false)}>Cancel</button
+  >
 </EditableForm>
 ```
 
@@ -85,38 +107,58 @@ Bind `editing` and handle `onsubmit`. Place any inputs and action buttons inside
 
 ```svelte
 <script lang="ts">
-    import EditableForm from "./EditableForm.svelte";
-    let editing = $state(false);
-    let name = $state("Alice");
+  import EditableForm from "./EditableForm.svelte";
+  let editing = $state(false);
+  let name = $state("Alice");
 </script>
 
 {#if !editing}
-    <span>{name}</span>
-    <button type="button" onclick={() => editing = true}>Edit</button>
+  <span>{name}</span>
+  <button
+    type="button"
+    onclick={() => (editing = true)}>Edit</button
+  >
 {/if}
-<EditableForm label="Edit name" bind:editing onsubmit={e => { name = new FormData(e.target).get("name") as string; }}>
-    <input name="name" value={name} />
-    <button type="submit">Save</button>
+<EditableForm
+  label="Edit name"
+  bind:editing
+  onsubmit={(e) => {
+    name = new FormData(e.target).get("name") as string;
+  }}
+>
+  <input
+    name="name"
+    value={name}
+  />
+  <button type="submit">Save</button>
 </EditableForm>
 ```
 
 ### 4. Multiple fields
 
 ```svelte
-<EditableForm label="Address" bind:editing onsubmit={save}>
-    <input name="street" />
-    <input name="city" />
-    <input name="postcode" />
-    <button type="submit">Save</button>
+<EditableForm
+  label="Address"
+  bind:editing
+  onsubmit={save}
+>
+  <input name="street" />
+  <input name="city" />
+  <input name="postcode" />
+  <button type="submit">Save</button>
 </EditableForm>
 ```
 
 ### 5. Escape cancels
 
 ```svelte
-<EditableForm label="Edit" bind:editing oncancel={() => console.log("cancelled")}>
-    <input name="title" />
-    <button type="submit">Save</button>
+<EditableForm
+  label="Edit"
+  bind:editing
+  oncancel={() => console.log("cancelled")}
+>
+  <input name="title" />
+  <button type="submit">Save</button>
 </EditableForm>
 <!-- Pressing Escape sets editing=false and calls oncancel. -->
 ```

@@ -43,12 +43,16 @@ describe("CheckboxGroup", () => {
     });
 
     test("supports disabled", () => {
-        render(Subject, { props: { label: "Features", disabled: true, children: checkboxSnippet() } });
+        render(Subject, {
+            props: { label: "Features", disabled: true, children: checkboxSnippet() },
+        });
         expect((screen.getByRole("group") as HTMLFieldSetElement).disabled).toBe(true);
     });
 
     test("passes through attributes", () => {
-        render(Subject, { props: { label: "F", "data-testid": "cg", children: checkboxSnippet() } });
+        render(Subject, {
+            props: { label: "F", "data-testid": "cg", children: checkboxSnippet() },
+        });
         expect(screen.getByTestId("cg")).toBeTruthy();
     });
 });

@@ -6,12 +6,9 @@
     //
     // Props:
     //   className — string, optional. CSS class name.
-    //   label — string, optional. Accessible name for the group via aria-label.
+    //   label — string, optional. Accessible name for the list via aria-label.
     //   children — Snippet, required. AccordionListItem elements.
-    //   ...restProps — additional HTML attributes spread onto the <div>.
-    //
-    // Note: Renders a <div> (not <ol>) because AccordionListItem renders <details>,
-    // and <details> is not a valid child of <ol>/<ul>.
+    //   ...restProps — additional HTML attributes spread onto the <ol>.
     //
     // Syntax:
     //   <AccordionNav>
@@ -34,7 +31,7 @@
     // by AccordionListItem children.
     //
     // Accessibility:
-    //   - aria-label optionally provides an accessible name for the group
+    //   - An <ol>, so screen readers announce how many sections there are and where each one is; aria-label optionally names it
     //
     // Internationalization:
     //   - The label prop accepts any translated string
@@ -45,7 +42,7 @@
     //   - Headless: no CSS, no styles — consumer provides all styling
     //
     // References:
-    //   - WAI-ARIA group role: https://www.w3.org/TR/wai-aria-1.2/#group
+    //   - HTML ol element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol
 
     import type { Snippet } from "svelte";
 
@@ -64,11 +61,10 @@
 </script>
 
 <!-- AccordionList.svelte -->
-<div
+<ol
     class={`accordion-list ${className}`}
-    role="group"
     aria-label={label || undefined}
     {...restProps}
 >
     {@render children?.()}
-</div>
+</ol>

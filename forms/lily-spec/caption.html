@@ -1,12 +1,13 @@
 <!-- caption.html -->
 <!-- Caption component -->
 <!--
-  Description: a caption for a table or figure element
-  HTML tag: <caption> wrapped in <table>
+  Description: a caption for a figure
+  HTML tag: <figcaption> inside its <figure>
   CSS class: caption
-  Accessibility: aria-label for accessible name
+  Keyboard: none; not interactive, and any interactive children handle their own keys
+  Accessibility: names its parent figure; a table's caption is the table's own <caption>
 -->
 
-<table><caption class="caption" aria-label="Example">
+<figure><figcaption class="caption">
     <!-- Consumer provides child content -->
-</caption></table>
+</figcaption></figure>

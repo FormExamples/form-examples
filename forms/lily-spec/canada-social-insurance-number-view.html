@@ -1,0 +1,16 @@
+<!-- canada-social-insurance-number-view.html -->
+<!-- CanadaSocialInsuranceNumberView component -->
+<!--
+  Description: a read-only display of Canada's Social Insurance Number (SIN)
+  HTML tag: <span>
+  CSS class: canada-social-insurance-number-view
+  Keyboard: None (passive element)
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
+  Format: Nine digits, usually displayed in three groups of three (NNN NNN NNN). The leading digit denotes the region of registration (1 Atlantic, 2-3 Quebec, 4-5 Ontario, 6 Prairies, 7 Pacific, 9 temporary residents), the following seven digits are a serial number, and the final digit is a Luhn (Modulus-10) check digit over the first eight.
+  Usage:
+    <span class="canada-social-insurance-number-view">value-here</span>
+-->
+
+<span class="canada-social-insurance-number-view"
+  ><span class="screen-reader-span">Social Insurance Number (SIN) </span></span
+>

@@ -12,10 +12,12 @@ function textSnippet(text: string) {
 
 describe("Character", () => {
     test("renders with img role and aria-label", () => {
-        render(Subject, { props: {
-            label: "Check mark",
-            children: textSnippet("✓"),
-        }});
+        render(Subject, {
+            props: {
+                label: "Check mark",
+                children: textSnippet("✓"),
+            },
+        });
 
         const el = screen.getByRole("img", { name: "Check mark" });
         expect(el).toBeTruthy();
@@ -23,11 +25,13 @@ describe("Character", () => {
     });
 
     test("is aria-hidden when decorative", () => {
-        render(Subject, { props: {
-            decorative: true,
-            "data-testid": "char",
-            children: textSnippet("★"),
-        }});
+        render(Subject, {
+            props: {
+                decorative: true,
+                "data-testid": "char",
+                children: textSnippet("★"),
+            },
+        });
 
         const el = screen.getByTestId("char");
         expect(el.getAttribute("aria-hidden")).toBe("true");
@@ -35,21 +39,25 @@ describe("Character", () => {
     });
 
     test("does not have aria-hidden when not decorative", () => {
-        render(Subject, { props: {
-            label: "Star",
-            children: textSnippet("★"),
-        }});
+        render(Subject, {
+            props: {
+                label: "Star",
+                children: textSnippet("★"),
+            },
+        });
 
         const el = screen.getByRole("img");
         expect(el.getAttribute("aria-hidden")).toBeNull();
     });
 
     test("passes through additional HTML attributes", () => {
-        render(Subject, { props: {
-            label: "Test",
-            "data-testid": "char",
-            children: textSnippet("X"),
-        }});
+        render(Subject, {
+            props: {
+                label: "Test",
+                "data-testid": "char",
+                children: textSnippet("X"),
+            },
+        });
 
         expect(screen.getByTestId("char")).toBeTruthy();
     });

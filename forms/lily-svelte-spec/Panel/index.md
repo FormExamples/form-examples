@@ -49,7 +49,7 @@ import Panel from './Panel.svelte';
 
 ```svelte
 <script lang="ts">
-  import Panel from './Panel.svelte';
+  import Panel from "./Panel.svelte";
 </script>
 
 <Panel label="Settings">
@@ -61,7 +61,7 @@ import Panel from './Panel.svelte';
 
 ```svelte
 <script lang="ts">
-  import Panel from './Panel.svelte';
+  import Panel from "./Panel.svelte";
 </script>
 
 <Panel label="Account information">
@@ -77,15 +77,18 @@ import Panel from './Panel.svelte';
 
 ```svelte
 <script lang="ts">
-  import Panel from './Panel.svelte';
-  import TextInput from '../TextInput/TextInput.svelte';
-  import Button from '../Button/Button.svelte';
+  import Panel from "./Panel.svelte";
+  import TextInput from "../TextInput/TextInput.svelte";
+  import Button from "../Button/Button.svelte";
 
   let name = $state("");
 </script>
 
 <Panel label="Profile">
-  <TextInput label="Name" bind:value={name} />
+  <TextInput
+    label="Name"
+    bind:value={name}
+  />
   <Button type="button">Save</Button>
 </Panel>
 ```
@@ -94,7 +97,7 @@ import Panel from './Panel.svelte';
 
 ```svelte
 <script lang="ts">
-  import Panel from './Panel.svelte';
+  import Panel from "./Panel.svelte";
 </script>
 
 <Panel label="Recent activity">
@@ -110,10 +113,13 @@ import Panel from './Panel.svelte';
 
 ```svelte
 <script lang="ts">
-  import Panel from './Panel.svelte';
+  import Panel from "./Panel.svelte";
 </script>
 
-<Panel label="System status" data-tone="ok">
+<Panel
+  label="System status"
+  data-tone="ok"
+>
   <p>All systems operational.</p>
 </Panel>
 ```

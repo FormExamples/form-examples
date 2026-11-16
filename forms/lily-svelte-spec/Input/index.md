@@ -49,39 +49,47 @@ Import the component, pass a `label` for screen readers, bind the `value`, and o
 
 ```svelte
 <script lang="ts">
-    import Input from "./Input.svelte";
-    let value = $state("");
+  import Input from "./Input.svelte";
+  let value = $state("");
 </script>
 
-<Input label="Search" bind:value />
+<Input
+  label="Search"
+  bind:value
+/>
 ```
 
 ### Required name input
 
 ```svelte
 <script lang="ts">
-    import Input from "./Input.svelte";
-    let name = $state("");
+  import Input from "./Input.svelte";
+  let name = $state("");
 </script>
 
-<Input label="Name" bind:value={name} type="text" required />
+<Input
+  label="Name"
+  bind:value={name}
+  type="text"
+  required
+/>
 ```
 
 ### Email input with disabled state
 
 ```svelte
 <script lang="ts">
-    import Input from "./Input.svelte";
-    let email = $state("");
-    let isSubmitting = $state(false);
+  import Input from "./Input.svelte";
+  let email = $state("");
+  let isSubmitting = $state(false);
 </script>
 
 <Input
-    label="Email address"
-    bind:value={email}
-    type="email"
-    required
-    disabled={isSubmitting}
+  label="Email address"
+  bind:value={email}
+  type="email"
+  required
+  disabled={isSubmitting}
 />
 ```
 
@@ -89,17 +97,17 @@ Import the component, pass a `label` for screen readers, bind the `value`, and o
 
 ```svelte
 <script lang="ts">
-    import Input from "./Input.svelte";
-    let zip = $state("");
+  import Input from "./Input.svelte";
+  let zip = $state("");
 </script>
 
 <Input
-    label="ZIP code"
-    bind:value={zip}
-    type="text"
-    placeholder="12345"
-    pattern="[0-9]{5}"
-    maxlength={5}
+  label="ZIP code"
+  bind:value={zip}
+  type="text"
+  placeholder="12345"
+  pattern="[0-9]{5}"
+  maxlength={5}
 />
 ```
 
@@ -107,16 +115,16 @@ Import the component, pass a `label` for screen readers, bind the `value`, and o
 
 ```svelte
 <script lang="ts">
-    import Input from "./Input.svelte";
-    let quantity = $state("1");
+  import Input from "./Input.svelte";
+  let quantity = $state("1");
 </script>
 
 <Input
-    label="Quantity"
-    bind:value={quantity}
-    type="number"
-    min={1}
-    max={99}
+  label="Quantity"
+  bind:value={quantity}
+  type="number"
+  min={1}
+  max={99}
 />
 ```
 

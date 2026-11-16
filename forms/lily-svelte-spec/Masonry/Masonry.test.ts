@@ -13,18 +13,22 @@ function textSnippet(text: string) {
 
 describe("Masonry", () => {
     test("renders with the masonry class", () => {
-        const { container } = render(Subject, { props: {
-            children: textSnippet("Items"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                children: textSnippet("Items"),
+            },
+        });
 
         const root = container.querySelector(".masonry") as HTMLElement;
         expect(root).toBeTruthy();
     });
 
     test("defaults to 3 columns", () => {
-        const { container } = render(Subject, { props: {
-            children: textSnippet("Default"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                children: textSnippet("Default"),
+            },
+        });
 
         const root = container.querySelector(".masonry") as HTMLElement;
         expect(root.getAttribute("data-columns")).toBe("3");
@@ -32,10 +36,12 @@ describe("Masonry", () => {
     });
 
     test("applies custom columns", () => {
-        const { container } = render(Subject, { props: {
-            columns: 5,
-            children: textSnippet("Five"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                columns: 5,
+                children: textSnippet("Five"),
+            },
+        });
 
         const root = container.querySelector(".masonry") as HTMLElement;
         expect(root.getAttribute("data-columns")).toBe("5");
@@ -43,29 +49,35 @@ describe("Masonry", () => {
     });
 
     test("defaults to 1rem gap", () => {
-        const { container } = render(Subject, { props: {
-            children: textSnippet("Gap"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                children: textSnippet("Gap"),
+            },
+        });
 
         const root = container.querySelector(".masonry") as HTMLElement;
         expect(root.getAttribute("style")).toContain("column-gap: 1rem");
     });
 
     test("applies custom gap", () => {
-        const { container } = render(Subject, { props: {
-            gap: "2rem",
-            children: textSnippet("Wide gap"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                gap: "2rem",
+                children: textSnippet("Wide gap"),
+            },
+        });
 
         const root = container.querySelector(".masonry") as HTMLElement;
         expect(root.getAttribute("style")).toContain("column-gap: 2rem");
     });
 
     test("appends consumer class to base class", () => {
-        const { container } = render(Subject, { props: {
-            class: "extra",
-            children: textSnippet("X"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                class: "extra",
+                children: textSnippet("X"),
+            },
+        });
 
         const root = container.querySelector(".masonry") as HTMLElement;
         expect(root.className).toContain("masonry");

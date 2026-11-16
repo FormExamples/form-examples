@@ -24,8 +24,7 @@
     //   </CalendarTable>
     //
     // Keyboard:
-    //   None built-in — consumer should implement grid keyboard navigation
-    //   (arrow keys for cell movement, Enter/Space for selection).
+    //   Arrows, Home, End, Ctrl+Home, Ctrl+End, PageUp, PageDown, Enter, F2 and Escape over the cells, with one tab stop; data-consumer-keys on the root turns them off.
     //
     // Accessibility:
     //   - role="grid" identifies the table as an interactive grid widget
@@ -45,6 +44,8 @@
     //   - WAI-ARIA Grid Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/grid/
 
     import type { Snippet } from "svelte";
+    import { warnMissingName } from "../dev-warning";
+    import { attachGrid } from "../widget-keys";
 
     let {
         class: className = "",
@@ -61,10 +62,16 @@
         children: Snippet;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() => warnMissingName("CalendarTable", label, restProps["aria-labelledby"]));
+
+    let rootEl = $state<HTMLElement>();
+    $effect(() => (rootEl ? attachGrid(rootEl) : undefined));
 </script>
 
 <!-- CalendarTable.svelte -->
 <table
+    bind:this={rootEl}
     class={`calendar-table ${className}`}
     role="grid"
     aria-label={label}

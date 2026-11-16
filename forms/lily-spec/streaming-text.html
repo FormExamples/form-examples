@@ -1,0 +1,17 @@
+<!-- streaming-text.html -->
+<!-- StreamingText component -->
+<!--
+  Description: text that arrives in chunks, as an AI answer streams in, announced once to screen readers when complete.
+  HTML tag: <div role="status">
+  CSS class: streaming-text
+  Keyboard: None
+  Accessibility: a polite, atomic status region. While streaming the region is
+    marked busy (aria-busy="true", data-streaming="true") so assistive technology
+    waits; remove both when the last chunk arrives and the finished text is
+    announced once. The component never splits, times or animates the text.
+  Usage (streaming):
+    <div class="streaming-text" role="status" aria-live="polite" aria-atomic="true" aria-label="Assistant answer" aria-busy="true" data-streaming="true">The answer is arriv</div>
+-->
+
+<div class="streaming-text" role="status" aria-live="polite" aria-atomic="true" aria-label="Assistant answer" aria-busy="true" data-streaming="true">The answer is arriv</div>
+<div class="streaming-text" id="streaming-text-done" role="status" aria-live="polite" aria-atomic="true" aria-label="Assistant answer">The answer has arrived in full.</div>

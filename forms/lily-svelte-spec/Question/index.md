@@ -10,7 +10,7 @@ See [components/question/index.md](../../../components/question/index.md) for th
 
 ```svelte
 <script lang="ts">
-    import Question from "./Question.svelte";
+  import Question from "./Question.svelte";
 </script>
 
 <Question />

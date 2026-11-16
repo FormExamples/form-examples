@@ -8,16 +8,16 @@
     //
     // Props:
     //   className — string, optional. CSS class name.
-    //   label — string, default "Do". Accessible name for the list.
+    //   label — string, required. No default: the words are yours. Accessible name for the list.
     //   children — Snippet, required. List items, each should be an <li> element.
     //   ...restProps — additional HTML attributes spread onto the <ol> element.
     //
     // Syntax:
-    //   <DoList><li>Best practice</li></DoList>
+    //   <DoList label="Do"><li>Best practice</li></DoList>
     //
     // Examples:
     //   <!-- Basic do list -->
-    //   <DoList>
+    //   <DoList label="Do">
     //     <li>Write clear labels</li>
     //     <li>Use semantic HTML</li>
     //   </DoList>
@@ -33,10 +33,10 @@
     //
     // Accessibility:
     //   - role="list" preserves list semantics even when CSS removes default styling
-    //   - aria-label provides an accessible name (defaults to "Do")
+    //   - aria-label provides the accessible name
     //
     // Internationalization:
-    //   - The label prop defaults to "Do" but can be overridden for any locale
+    //   - The label prop is required: the words are yours
     //   - All list item text comes through consumer-provided children
     //
     // Claude rules:
@@ -51,12 +51,12 @@
 
     let {
         class: className = "",
-        label = "Do",
+        label,
         children,
         ...restProps
     }: {
         /** Accessible name for the list. */
-        label?: string;
+        label: string;
         /** List items. */
         children: Snippet;
         [key: string]: unknown;

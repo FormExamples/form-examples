@@ -51,7 +51,9 @@ describe("Expander", () => {
     });
 
     test("passes through attributes", () => {
-        render(Subject, { props: { label: "M", "data-testid": "exp", children: textSnippet("C") } });
+        render(Subject, {
+            props: { label: "M", "data-testid": "exp", children: textSnippet("C") },
+        });
         expect(screen.getByTestId("exp")).toBeTruthy();
     });
 });

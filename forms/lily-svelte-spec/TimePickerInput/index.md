@@ -49,7 +49,10 @@ Import, bind `value`, and pass a translated `label`. Use `min`/`max`/`step` via 
   let t = $state("");
 </script>
 
-<TimePickerInput label="Appointment time" bind:value={t} />
+<TimePickerInput
+  label="Appointment time"
+  bind:value={t}
+/>
 ```
 
 ```svelte
@@ -59,7 +62,11 @@ Import, bind `value`, and pass a translated `label`. Use `min`/`max`/`step` via 
   let departure = $state("");
 </script>
 
-<TimePickerInput label="Departure time" bind:value={departure} required />
+<TimePickerInput
+  label="Departure time"
+  bind:value={departure}
+  required
+/>
 ```
 
 ```svelte
@@ -71,8 +78,14 @@ Import, bind `value`, and pass a translated `label`. Use `min`/`max`/`step` via 
   let time = $state("");
 </script>
 
-<DateInput label="Date" bind:value={date} />
-<TimePickerInput label="Time" bind:value={time} />
+<DateInput
+  label="Date"
+  bind:value={date}
+/>
+<TimePickerInput
+  label="Time"
+  bind:value={time}
+/>
 ```
 
 ```svelte

@@ -51,7 +51,7 @@ All other visual styling (colors, padding, typography, shadow) must come from co
 
 ```svelte
 <script lang="ts">
-  import StickyPromoBanner from './StickyPromoBanner.svelte';
+  import StickyPromoBanner from "./StickyPromoBanner.svelte";
 
   let open = $state(true);
 </script>

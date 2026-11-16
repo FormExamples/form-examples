@@ -10,7 +10,7 @@ See [components/place/index.md](../../../components/place/index.md) for the full
 
 ```svelte
 <script lang="ts">
-    import Place from "./Place.svelte";
+  import Place from "./Place.svelte";
 </script>
 
 <Place />

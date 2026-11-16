@@ -39,28 +39,28 @@ Place `KanbanTableHead` inside a `KanbanTable` and nest a `KanbanTableRow` conta
 
 ```svelte
 <script lang="ts">
-    import KanbanTable from "../KanbanTable/KanbanTable.svelte";
-    import KanbanTableHead from "./KanbanTableHead.svelte";
-    import KanbanTableBody from "../KanbanTableBody/KanbanTableBody.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
-    import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
+  import KanbanTable from "../KanbanTable/KanbanTable.svelte";
+  import KanbanTableHead from "./KanbanTableHead.svelte";
+  import KanbanTableBody from "../KanbanTableBody/KanbanTableBody.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
 </script>
 
 <KanbanTable label="Board">
-    <KanbanTableHead>
-        <KanbanTableRow>
-            <th scope="col">To Do</th>
-            <th scope="col">In Progress</th>
-            <th scope="col">Done</th>
-        </KanbanTableRow>
-    </KanbanTableHead>
-    <KanbanTableBody>
-        <KanbanTableRow>
-            <KanbanTableTD>Task A</KanbanTableTD>
-            <KanbanTableTD>Task B</KanbanTableTD>
-            <KanbanTableTD>Task C</KanbanTableTD>
-        </KanbanTableRow>
-    </KanbanTableBody>
+  <KanbanTableHead>
+    <KanbanTableRow>
+      <th scope="col">To Do</th>
+      <th scope="col">In Progress</th>
+      <th scope="col">Done</th>
+    </KanbanTableRow>
+  </KanbanTableHead>
+  <KanbanTableBody>
+    <KanbanTableRow>
+      <KanbanTableTD>Task A</KanbanTableTD>
+      <KanbanTableTD>Task B</KanbanTableTD>
+      <KanbanTableTD>Task C</KanbanTableTD>
+    </KanbanTableRow>
+  </KanbanTableBody>
 </KanbanTable>
 ```
 
@@ -68,17 +68,17 @@ Place `KanbanTableHead` inside a `KanbanTable` and nest a `KanbanTableRow` conta
 
 ```svelte
 <script lang="ts">
-    import KanbanTableHead from "./KanbanTableHead.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
-    let counts = $state({ todo: 3, doing: 2, done: 5 });
+  import KanbanTableHead from "./KanbanTableHead.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  let counts = $state({ todo: 3, doing: 2, done: 5 });
 </script>
 
 <KanbanTableHead>
-    <KanbanTableRow>
-        <th scope="col">To Do ({counts.todo})</th>
-        <th scope="col">Doing ({counts.doing})</th>
-        <th scope="col">Done ({counts.done})</th>
-    </KanbanTableRow>
+  <KanbanTableRow>
+    <th scope="col">To Do ({counts.todo})</th>
+    <th scope="col">Doing ({counts.doing})</th>
+    <th scope="col">Done ({counts.done})</th>
+  </KanbanTableRow>
 </KanbanTableHead>
 ```
 
@@ -86,17 +86,17 @@ Place `KanbanTableHead` inside a `KanbanTable` and nest a `KanbanTableRow` conta
 
 ```svelte
 <script lang="ts">
-    import KanbanTableHead from "./KanbanTableHead.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
-    let stages = $state(["Backlog", "Design", "Build", "Test", "Ship"]);
+  import KanbanTableHead from "./KanbanTableHead.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  let stages = $state(["Backlog", "Design", "Build", "Test", "Ship"]);
 </script>
 
 <KanbanTableHead>
-    <KanbanTableRow>
-        {#each stages as stage}
-            <th scope="col">{stage}</th>
-        {/each}
-    </KanbanTableRow>
+  <KanbanTableRow>
+    {#each stages as stage}
+      <th scope="col">{stage}</th>
+    {/each}
+  </KanbanTableRow>
 </KanbanTableHead>
 ```
 
@@ -104,26 +104,35 @@ Place `KanbanTableHead` inside a `KanbanTable` and nest a `KanbanTableRow` conta
 
 ```svelte
 <script lang="ts">
-    import KanbanTableHead from "./KanbanTableHead.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  import KanbanTableHead from "./KanbanTableHead.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
 
-    function filterStage(stage: string) {
-        // consumer-specific filter handler
-    }
+  function filterStage(stage: string) {
+    // consumer-specific filter handler
+  }
 </script>
 
 <KanbanTableHead>
-    <KanbanTableRow>
-        <th scope="col">
-            <button type="button" onclick={() => filterStage("todo")}>To Do</button>
-        </th>
-        <th scope="col">
-            <button type="button" onclick={() => filterStage("doing")}>Doing</button>
-        </th>
-        <th scope="col">
-            <button type="button" onclick={() => filterStage("done")}>Done</button>
-        </th>
-    </KanbanTableRow>
+  <KanbanTableRow>
+    <th scope="col">
+      <button
+        type="button"
+        onclick={() => filterStage("todo")}>To Do</button
+      >
+    </th>
+    <th scope="col">
+      <button
+        type="button"
+        onclick={() => filterStage("doing")}>Doing</button
+      >
+    </th>
+    <th scope="col">
+      <button
+        type="button"
+        onclick={() => filterStage("done")}>Done</button
+      >
+    </th>
+  </KanbanTableRow>
 </KanbanTableHead>
 ```
 
@@ -131,23 +140,23 @@ Place `KanbanTableHead` inside a `KanbanTable` and nest a `KanbanTableRow` conta
 
 ```svelte
 <script lang="ts">
-    import KanbanTableHead from "./KanbanTableHead.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  import KanbanTableHead from "./KanbanTableHead.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
 </script>
 
 <KanbanTableHead class="sticky-top">
-    <KanbanTableRow>
-        <th scope="col">To Do</th>
-        <th scope="col">Doing</th>
-        <th scope="col">Done</th>
-    </KanbanTableRow>
+  <KanbanTableRow>
+    <th scope="col">To Do</th>
+    <th scope="col">Doing</th>
+    <th scope="col">Done</th>
+  </KanbanTableRow>
 </KanbanTableHead>
 
 <style>
-    :global(.sticky-top) {
-        position: sticky;
-        top: 0;
-    }
+  :global(.sticky-top) {
+    position: sticky;
+    top: 0;
+  }
 </style>
 ```
 

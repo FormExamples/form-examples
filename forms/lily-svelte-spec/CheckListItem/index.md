@@ -39,58 +39,58 @@ Place as a child of `CheckList`. Pass the item text as children.
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `class` | `string` | `""` | CSS class name (note: not applied to the `<li>` in current source). |
-| `checked` | `boolean` | `false` | Whether the checkbox is checked. |
-| `disabled` | `boolean` | `false` | Whether the checkbox is disabled. |
-| `children` | `Snippet` | required | Label content for the item. |
-| `...restProps` | `unknown` | — | Additional attributes spread onto the `<li>`. |
+| Prop           | Type      | Default  | Description                                                         |
+| -------------- | --------- | -------- | ------------------------------------------------------------------- |
+| `class`        | `string`  | `""`     | CSS class name (note: not applied to the `<li>` in current source). |
+| `checked`      | `boolean` | `false`  | Whether the checkbox is checked.                                    |
+| `disabled`     | `boolean` | `false`  | Whether the checkbox is disabled.                                   |
+| `children`     | `Snippet` | required | Label content for the item.                                         |
+| `...restProps` | `unknown` | —        | Additional attributes spread onto the `<li>`.                       |
 
 ## Usage
 
 ```svelte
 <script lang="ts">
-    import CheckList from "../CheckList/CheckList.svelte";
-    import CheckListItem from "./CheckListItem.svelte";
+  import CheckList from "../CheckList/CheckList.svelte";
+  import CheckListItem from "./CheckListItem.svelte";
 </script>
 
 <CheckList label="Onboarding tasks">
-    <CheckListItem checked>Create account</CheckListItem>
-    <CheckListItem>Set up profile</CheckListItem>
-    <CheckListItem disabled>Invite team (admin only)</CheckListItem>
+  <CheckListItem checked>Create account</CheckListItem>
+  <CheckListItem>Set up profile</CheckListItem>
+  <CheckListItem disabled>Invite team (admin only)</CheckListItem>
 </CheckList>
 ```
 
 ```svelte
 <script lang="ts">
-    import CheckList from "../CheckList/CheckList.svelte";
-    import CheckListItem from "./CheckListItem.svelte";
+  import CheckList from "../CheckList/CheckList.svelte";
+  import CheckListItem from "./CheckListItem.svelte";
 </script>
 
 <CheckList label="Release checklist">
-    <CheckListItem checked>Version bumped</CheckListItem>
-    <CheckListItem checked>Changelog updated</CheckListItem>
-    <CheckListItem>Tag pushed</CheckListItem>
+  <CheckListItem checked>Version bumped</CheckListItem>
+  <CheckListItem checked>Changelog updated</CheckListItem>
+  <CheckListItem>Tag pushed</CheckListItem>
 </CheckList>
 ```
 
 ```svelte
 <script lang="ts">
-    import CheckList from "../CheckList/CheckList.svelte";
-    import CheckListItem from "./CheckListItem.svelte";
+  import CheckList from "../CheckList/CheckList.svelte";
+  import CheckListItem from "./CheckListItem.svelte";
 
-    let tasks = $state([
-        { id: "a", label: "Draft plan", done: true },
-        { id: "b", label: "Share with team", done: false },
-        { id: "c", label: "Collect feedback", done: false }
-    ]);
+  let tasks = $state([
+    { id: "a", label: "Draft plan", done: true },
+    { id: "b", label: "Share with team", done: false },
+    { id: "c", label: "Collect feedback", done: false },
+  ]);
 </script>
 
 <CheckList label="Today">
-    {#each tasks as t (t.id)}
-        <CheckListItem checked={t.done}>{t.label}</CheckListItem>
-    {/each}
+  {#each tasks as t (t.id)}
+    <CheckListItem checked={t.done}>{t.label}</CheckListItem>
+  {/each}
 </CheckList>
 ```
 

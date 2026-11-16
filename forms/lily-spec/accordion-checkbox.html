@@ -75,7 +75,8 @@
       input.id = checkboxId;
       input.setAttribute("aria-controls", panelId);
       input.setAttribute("aria-expanded", checked ? "true" : "false");
-      if (checked) input.checked = true;
+      // defaultChecked (the attribute) is what a form reset restores; `checked` alone is not.
+      if (checked) input.defaultChecked = true;
 
       // Build the label
       var labelEl = document.createElement("label");
@@ -100,7 +101,7 @@
       root.appendChild(panel);
 
       // Wire up the toggle
-      input.addEventListener("change", function () {
+      function showState() {
         var isChecked = input.checked;
         input.setAttribute("aria-expanded", isChecked ? "true" : "false");
         if (isChecked) {
@@ -108,6 +109,22 @@
         } else {
           panel.setAttribute("hidden", "");
         }
+        return isChecked;
+      }
+
+      // Form reset: the browser restores the checkbox but not the panel, so show the
+      // panel for the restored state one tick later (not when the reset was cancelled).
+      var form = root.closest("form");
+      if (form) {
+        form.addEventListener("reset", function (event) {
+          setTimeout(function () {
+            if (!event.defaultPrevented) showState();
+          }, 0);
+        });
+      }
+
+      input.addEventListener("change", function () {
+        var isChecked = showState();
         root.dispatchEvent(
           new CustomEvent("accordion-checkbox:change", {
             detail: { checked: isChecked },

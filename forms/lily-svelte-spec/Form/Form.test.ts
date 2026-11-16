@@ -7,7 +7,7 @@ import Subject from "./Form.svelte";
 function buttonSnippet(label: string, type: string = "submit") {
     return (($$anchor: Comment) => {
         const btn = document.createElement("button");
-        btn.type = type;
+        btn.type = type as HTMLButtonElement["type"];
         btn.textContent = label;
         $$anchor.before(btn);
     }) as any;
@@ -34,7 +34,9 @@ describe("Form", () => {
     test("calls onsubmit and prevents default", async () => {
         const user: UserEvent = userEvent.setup();
         const handleSubmit = vi.fn();
-        render(Subject, { props: { label: "F", onsubmit: handleSubmit, children: buttonSnippet("Go") } });
+        render(Subject, {
+            props: { label: "F", onsubmit: handleSubmit, children: buttonSnippet("Go") },
+        });
         await user.click(screen.getByRole("button", { name: "Go" }));
         expect(handleSubmit).toHaveBeenCalledOnce();
     });

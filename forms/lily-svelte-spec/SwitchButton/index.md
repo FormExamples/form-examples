@@ -51,11 +51,14 @@ Basic on/off toggle:
 
 ```svelte
 <script lang="ts">
-    import SwitchButton from "./SwitchButton.svelte";
-    let enabled = $state(false);
+  import SwitchButton from "./SwitchButton.svelte";
+  let enabled = $state(false);
 </script>
 
-<SwitchButton label="Enable notifications" bind:checked={enabled} />
+<SwitchButton
+  label="Enable notifications"
+  bind:checked={enabled}
+/>
 <p>Notifications are {enabled ? "on" : "off"}</p>
 ```
 
@@ -63,50 +66,70 @@ Dark mode toggle:
 
 ```svelte
 <script lang="ts">
-    import SwitchButton from "./SwitchButton.svelte";
-    let dark = $state(false);
+  import SwitchButton from "./SwitchButton.svelte";
+  let dark = $state(false);
 </script>
 
-<SwitchButton label="Dark mode" bind:checked={dark} />
+<SwitchButton
+  label="Dark mode"
+  bind:checked={dark}
+/>
 ```
 
 Disabled switch:
 
 ```svelte
 <script lang="ts">
-    import SwitchButton from "./SwitchButton.svelte";
-    let locked = $state(true);
-    let x = $state(false);
+  import SwitchButton from "./SwitchButton.svelte";
+  let locked = $state(true);
+  let x = $state(false);
 </script>
 
-<SwitchButton label="Locked feature" bind:checked={x} disabled={locked} />
+<SwitchButton
+  label="Locked feature"
+  bind:checked={x}
+  disabled={locked}
+/>
 ```
 
 With onchange-like side effect via `$effect`:
 
 ```svelte
 <script lang="ts">
-    import SwitchButton from "./SwitchButton.svelte";
-    let sync = $state(false);
-    $effect(() => {
-        console.log("sync changed:", sync);
-    });
+  import SwitchButton from "./SwitchButton.svelte";
+  let sync = $state(false);
+  $effect(() => {
+    console.log("sync changed:", sync);
+  });
 </script>
 
-<SwitchButton label="Auto sync" bind:checked={sync} />
+<SwitchButton
+  label="Auto sync"
+  bind:checked={sync}
+/>
 ```
 
 In a settings form:
 
 ```svelte
 <script lang="ts">
-    import SwitchButton from "./SwitchButton.svelte";
-    let prefs = $state({ email: true, sms: false });
+  import SwitchButton from "./SwitchButton.svelte";
+  let prefs = $state({ email: true, sms: false });
 </script>
 
 <ul>
-    <li><SwitchButton label="Email alerts" bind:checked={prefs.email} /> Email alerts</li>
-    <li><SwitchButton label="SMS alerts" bind:checked={prefs.sms} /> SMS alerts</li>
+  <li>
+    <SwitchButton
+      label="Email alerts"
+      bind:checked={prefs.email}
+    /> Email alerts
+  </li>
+  <li>
+    <SwitchButton
+      label="SMS alerts"
+      bind:checked={prefs.sms}
+    /> SMS alerts
+  </li>
 </ul>
 ```
 
@@ -118,6 +141,7 @@ In a settings form:
 - Native `<button disabled>` behavior blocks interaction when disabled.
 
 References:
+
 - WAI-ARIA Switch Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/switch/
 - WAI-ARIA `switch` role: https://www.w3.org/TR/wai-aria-1.2/#switch
 

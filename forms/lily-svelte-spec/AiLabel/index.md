@@ -41,7 +41,7 @@ Import `AiLabel` from `./AiLabel.svelte`. Optionally override `text` (what users
 
 ```svelte
 <script lang="ts">
-  import AiLabel from './AiLabel.svelte';
+  import AiLabel from "./AiLabel.svelte";
 </script>
 
 <p>This summary was created by <AiLabel /> based on your documents.</p>
@@ -51,36 +51,48 @@ Import `AiLabel` from `./AiLabel.svelte`. Optionally override `text` (what users
 
 ```svelte
 <script lang="ts">
-  import AiLabel from './AiLabel.svelte';
+  import AiLabel from "./AiLabel.svelte";
 </script>
 
-<AiLabel text="AI generated" label="This content was AI generated" />
+<AiLabel
+  text="AI generated"
+  label="This content was AI generated"
+/>
 ```
 
 ### Localized label
 
 ```svelte
 <script lang="ts">
-  import AiLabel from './AiLabel.svelte';
+  import AiLabel from "./AiLabel.svelte";
 
-  const text = 'IA';
-  const label = 'Contenu généré par IA';
+  const text = "IA";
+  const label = "Contenu généré par IA";
 </script>
 
-<AiLabel {text} {label} />
+<AiLabel
+  {text}
+  {label}
+/>
 ```
 
 ### Wrapped in a button for explainability
 
 ```svelte
 <script lang="ts">
-  import AiLabel from './AiLabel.svelte';
+  import AiLabel from "./AiLabel.svelte";
 
   let showExplain = $state(false);
 </script>
 
-<button type="button" onclick={() => (showExplain = !showExplain)}>
-  <AiLabel text="AI" label="Open AI explanation" />
+<button
+  type="button"
+  onclick={() => (showExplain = !showExplain)}
+>
+  <AiLabel
+    text="AI"
+    label="Open AI explanation"
+  />
 </button>
 {#if showExplain}<p>This answer was generated using ...</p>{/if}
 ```
@@ -88,7 +100,12 @@ Import `AiLabel` from `./AiLabel.svelte`. Optionally override `text` (what users
 ### With data attributes for tracking
 
 ```svelte
-<AiLabel text="AI" label="AI-generated summary" data-testid="ai-badge" data-source="gpt-5" />
+<AiLabel
+  text="AI"
+  label="AI-generated summary"
+  data-testid="ai-badge"
+  data-source="gpt-5"
+/>
 ```
 
 ## Accessibility

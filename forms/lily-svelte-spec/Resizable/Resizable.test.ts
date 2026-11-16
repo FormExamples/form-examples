@@ -27,7 +27,9 @@ describe("Resizable", () => {
     });
 
     test("supports horizontal direction", () => {
-        render(Subject, { props: { label: "Panel", direction: "horizontal", children: textSnippet("x") } });
+        render(Subject, {
+            props: { label: "Panel", direction: "horizontal", children: textSnippet("x") },
+        });
         expect(screen.getByRole("region").getAttribute("data-resize")).toBe("horizontal");
     });
 

@@ -43,10 +43,12 @@ describe("StickyPromoBanner", () => {
     });
 
     test("supports position top", () => {
-        const { container } = render(Subject, { props: {
-            ...baseProps,
-            position: "top",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                ...baseProps,
+                position: "top",
+            },
+        });
 
         const root = container.querySelector("aside") as HTMLElement;
         expect(root.getAttribute("data-position")).toBe("top");
@@ -66,10 +68,12 @@ describe("StickyPromoBanner", () => {
     });
 
     test("hides when open is false", () => {
-        const { container } = render(Subject, { props: {
-            ...baseProps,
-            open: false,
-        }});
+        const { container } = render(Subject, {
+            props: {
+                ...baseProps,
+                open: false,
+            },
+        });
 
         const root = container.querySelector("aside") as HTMLElement;
         expect(root.hasAttribute("hidden")).toBe(true);
@@ -83,12 +87,16 @@ describe("StickyPromoBanner", () => {
     });
 
     test("renders dismiss button when ondismiss is provided", () => {
-        const { container } = render(Subject, { props: {
-            ...baseProps,
-            ondismiss: () => {},
-        }});
+        const { container } = render(Subject, {
+            props: {
+                ...baseProps,
+                ondismiss: () => {},
+            },
+        });
 
-        const button = container.querySelector("button.sticky-promo-banner-dismiss") as HTMLButtonElement;
+        const button = container.querySelector(
+            "button.sticky-promo-banner-dismiss",
+        ) as HTMLButtonElement;
         expect(button).toBeTruthy();
         expect(button.getAttribute("aria-label")).toBe("Dismiss banner");
         expect(button.getAttribute("type")).toBe("button");
@@ -97,20 +105,24 @@ describe("StickyPromoBanner", () => {
     test("invokes ondismiss when dismiss button is clicked", async () => {
         const user: UserEvent = userEvent.setup();
         const handleDismiss = vi.fn();
-        render(Subject, { props: {
-            ...baseProps,
-            ondismiss: handleDismiss,
-        }});
+        render(Subject, {
+            props: {
+                ...baseProps,
+                ondismiss: handleDismiss,
+            },
+        });
 
         await user.click(screen.getByRole("button", { name: "Dismiss banner" }));
         expect(handleDismiss).toHaveBeenCalledOnce();
     });
 
     test("renders children content", () => {
-        const { container } = render(Subject, { props: {
-            ...baseProps,
-            children: htmlSnippet("<p data-testid='promo'>Special offer</p>"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                ...baseProps,
+                children: htmlSnippet("<p data-testid='promo'>Special offer</p>"),
+            },
+        });
 
         const content = container.querySelector("[data-testid='promo']") as HTMLElement;
         expect(content).toBeTruthy();
@@ -118,10 +130,12 @@ describe("StickyPromoBanner", () => {
     });
 
     test("appends consumer class to base class", () => {
-        const { container } = render(Subject, { props: {
-            ...baseProps,
-            class: "extra",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                ...baseProps,
+                class: "extra",
+            },
+        });
 
         const root = container.querySelector("aside") as HTMLElement;
         expect(root.className).toContain("sticky-promo-banner");

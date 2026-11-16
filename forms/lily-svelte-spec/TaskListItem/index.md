@@ -50,7 +50,10 @@ Import the component and place it inside a `TaskList` (or any `<ol>`/`<ul>`). Su
 </script>
 
 <ol>
-  <TaskListItem label="Write release notes" bind:checked={done} />
+  <TaskListItem
+    label="Write release notes"
+    bind:checked={done}
+  />
 </ol>
 ```
 
@@ -62,8 +65,15 @@ Import the component and place it inside a `TaskList` (or any `<ol>`/`<ul>`). Su
 
 <TaskList label="Today">
   <TaskListItem label="Buy groceries" />
-  <TaskListItem label="Clean house" checked />
-  <TaskListItem label="Archived task" checked disabled />
+  <TaskListItem
+    label="Clean house"
+    checked
+  />
+  <TaskListItem
+    label="Archived task"
+    checked
+    disabled
+  />
 </TaskList>
 ```
 
@@ -82,7 +92,10 @@ Import the component and place it inside a `TaskList` (or any `<ol>`/`<ul>`). Su
 <p>Completed: {count} / {items.length}</p>
 <TaskList label="Sprint tasks">
   {#each items as it (it.id)}
-    <TaskListItem label={it.label} bind:checked={it.checked} />
+    <TaskListItem
+      label={it.label}
+      bind:checked={it.checked}
+    />
   {/each}
 </TaskList>
 ```

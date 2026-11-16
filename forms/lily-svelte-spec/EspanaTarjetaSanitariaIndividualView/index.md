@@ -29,36 +29,45 @@ Pass the TSI string and an accessible label.
 
 ```svelte
 <script lang="ts">
-    import EspanaTarjetaSanitariaIndividualView from "./EspanaTarjetaSanitariaIndividualView.svelte";
+  import EspanaTarjetaSanitariaIndividualView from "./EspanaTarjetaSanitariaIndividualView.svelte";
 </script>
 
-<EspanaTarjetaSanitariaIndividualView label="TSI" value="BBBB12345678" />
+<EspanaTarjetaSanitariaIndividualView
+  label="TSI"
+  value="BBBB12345678"
+/>
 ```
 
 ## Props
 
-| Prop      | Type      | Default  | Description                              |
-| --------- | --------- | -------- | ---------------------------------------- |
+| Prop      | Type      | Default  | Description                             |
+| --------- | --------- | -------- | --------------------------------------- |
 | `class`   | `string`  | `""`     | CSS class appended to the base class.   |
-| `label`   | `string`  | required | Accessible name via `aria-label`.        |
-| `value`   | `string`  | `""`     | TSI string to display.                   |
-| `...rest` | `unknown` | —        | Additional HTML attributes on the span.  |
+| `label`   | `string`  | required | Accessible name via `aria-label`.       |
+| `value`   | `string`  | `""`     | TSI string to display.                  |
+| `...rest` | `unknown` | —        | Additional HTML attributes on the span. |
 
 ## Usage
 
 ### 1. Basic display
 
 ```svelte
-<EspanaTarjetaSanitariaIndividualView label="TSI" value="BBBB12345678" />
+<EspanaTarjetaSanitariaIndividualView
+  label="TSI"
+  value="BBBB12345678"
+/>
 ```
 
 ### 2. In a summary list
 
 ```svelte
 <SummaryList>
-    <SummaryListItem term="TSI">
-        <EspanaTarjetaSanitariaIndividualView label="TSI" value={patient.tsi} />
-    </SummaryListItem>
+  <SummaryListItem term="TSI">
+    <EspanaTarjetaSanitariaIndividualView
+      label="TSI"
+      value={patient.tsi}
+    />
+  </SummaryListItem>
 </SummaryList>
 ```
 
@@ -66,25 +75,33 @@ Pass the TSI string and an accessible label.
 
 ```svelte
 <EspanaTarjetaSanitariaIndividualView
-    label="Tarjeta Sanitaria Individual"
-    value={patient.tsi}
+  label="Tarjeta Sanitaria Individual"
+  value={patient.tsi}
 />
 ```
 
 ### 4. Paired with input for confirmation
 
 ```svelte
-<EspanaTarjetaSanitariaIndividualInput label="TSI" bind:value={tsi} />
-<p>Valor actual: <EspanaTarjetaSanitariaIndividualView label="TSI" value={tsi} /></p>
+<EspanaTarjetaSanitariaIndividualInput
+  label="TSI"
+  bind:value={tsi}
+/>
+<p>
+  Valor actual: <EspanaTarjetaSanitariaIndividualView
+    label="TSI"
+    value={tsi}
+  />
+</p>
 ```
 
 ### 5. Styled via class
 
 ```svelte
 <EspanaTarjetaSanitariaIndividualView
-    label="TSI"
-    value={patient.tsi}
-    class="monospace"
+  label="TSI"
+  value={patient.tsi}
+  class="monospace"
 />
 ```
 

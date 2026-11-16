@@ -1,12 +1,12 @@
-import { render, screen } from "@testing-library/svelte";
+import { render } from "@testing-library/svelte";
 import { describe, expect, test } from "vitest";
 import ScreenReaderSpan from "./ScreenReaderSpan.svelte";
 
 describe("ScreenReaderSpan", () => {
     test("renders with content", () => {
-        render(ScreenReaderSpan, { props: { label: "Test" } });
-        const el = screen.getByLabelText("Test");
+        const { container } = render(ScreenReaderSpan, { props: {} as any });
+        const el = container.querySelector(".screen-reader-span");
         expect(el).toBeTruthy();
-        expect(el.getAttribute("class")).toContain("screen-reader-span");
+        expect(el?.hasAttribute("aria-label")).toBe(false);
     });
 });

@@ -5,13 +5,10 @@
   HTML tag: <span>
   CSS class: cesko-cestovni-pas-view
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
   Format: usually 8 digits, sometimes longer, issued by the Ministry of the Interior
   Usage:
-    <span class="cesko-cestovni-pas-view" aria-label="Czech Passport">value-here</span>
+    <span class="cesko-cestovni-pas-view">value-here</span>
 -->
 
-<span
-  class="cesko-cestovni-pas-view"
-  aria-label="Czech Passport"
-></span>
+<span class="cesko-cestovni-pas-view"><span class="screen-reader-span">Czech Passport </span></span>

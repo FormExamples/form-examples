@@ -4,11 +4,25 @@
   Description: a menu that appears on right-click or long-press
   HTML tag: <div>
   CSS class: context-menu
-  Keyboard: None (passive element)
-  Accessibility: role="menu", aria-label for accessible name
+  Keyboard: ArrowDown/ArrowUp move between items (wrapping), Home/End jump to first/last, Escape closes (sets data-open="false"); opening focuses the first item
+  Accessibility: role="menu", aria-label for accessible name; items are role="menuitem" tabindex="-1"
+  Popover API (tasks.md P18-T11): the menu is popover="auto". There is no
+    declarative trigger (a right-click or long-press opens it), so the
+    consumer sets data-open="true" and the embedded script shows it with
+    showPopover(), in the top layer; the browser closes it on Escape and on a
+    click outside, and the script then sets data-open="false", fires `close`
+    and returns focus to the opener. Positioning at the pointer stays the
+    consumer's CSS (a popover is centred by the browser's default style).
+    Where the Popover API is missing the script falls back to the `hidden`
+    attribute, with Escape.
   Usage:
-    <div class="context-menu" role="menu" aria-label="Example">
-      ...
+    <div
+      class="context-menu"
+      role="menu"
+      aria-label=""
+      data-open="false"
+      popover="auto"
+    >
     </div>
 -->
 
@@ -16,17 +30,85 @@
   class="context-menu"
   role="menu"
   aria-label=""
+  data-open="false"
+  popover="auto"
 >
-  <!-- Consumer provides content -->
+  <!-- Consumer provides role="menuitem" items -->
 </div>
 
 <script>
   // ContextMenu behavior
   (function() {
     'use strict';
-    // ContextMenu: consumer implements interactive behavior
+    var native = typeof HTMLElement.prototype.showPopover === 'function';
+    document.querySelectorAll('.context-menu').forEach(function(root) {
+      root.addEventListener('keydown', function(e) {
+        var items = Array.from(root.querySelectorAll("[role='menuitem']"));
+        var index = items.indexOf(document.activeElement);
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          if (items.length) items[index < items.length - 1 ? index + 1 : 0].focus();
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          if (items.length) items[index > 0 ? index - 1 : items.length - 1].focus();
+        } else if (e.key === 'Home') {
+          e.preventDefault();
+          if (items.length) items[0].focus();
+        } else if (e.key === 'End') {
+          e.preventDefault();
+          if (items.length) items[items.length - 1].focus();
+        }
+      });
+    });
     document.querySelectorAll('.context-menu').forEach(function(el) {
-      // Interactive behavior initialization
+      var opener = null;
+      var shown = false;
+      if (!native) el.removeAttribute('popover');
+      function show(open) {
+        if (native) {
+          try {
+            if (open) el.showPopover(); else el.hidePopover();
+          } catch (error) {
+            // Already in that state.
+          }
+        } else {
+          el.hidden = !open;
+        }
+      }
+      function sync() {
+        if (el.getAttribute('data-open') === 'true') {
+          if (!shown) opener = document.activeElement;
+          shown = true;
+          show(true);
+          var first = el.querySelector("[role='menuitem']");
+          if (first) first.focus(); else el.focus();
+        } else {
+          var wasShown = shown;
+          shown = false;
+          show(false);
+          if (wasShown && opener && opener.isConnected) opener.focus();
+          opener = null;
+        }
+      }
+      new MutationObserver(sync).observe(el, { attributes: true, attributeFilter: ['data-open'] });
+      sync();
+      function close() {
+        el.setAttribute('data-open', 'false');
+        el.dispatchEvent(new CustomEvent('close'));
+      }
+      if (native) {
+        // Escape and light dismiss are the browser's; follow them.
+        el.addEventListener('toggle', function(e) {
+          if (e.newState === 'closed' && el.getAttribute('data-open') === 'true') close();
+        });
+      } else {
+        el.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && el.getAttribute('data-open') === 'true') {
+            e.preventDefault();
+            close();
+          }
+        });
+      }
     });
   })();
 </script>

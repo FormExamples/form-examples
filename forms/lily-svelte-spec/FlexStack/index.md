@@ -42,7 +42,7 @@ A headless Svelte 5 component that renders a single `<div>` element. Category: l
 
 ```svelte
 <script lang="ts">
-  import FlexStack from './FlexStack.svelte';
+  import FlexStack from "./FlexStack.svelte";
 </script>
 
 <FlexStack gap="0.75rem">
@@ -55,7 +55,12 @@ A headless Svelte 5 component that renders a single `<div>` element. Category: l
 ### Horizontal toolbar with space-between
 
 ```svelte
-<FlexStack direction="row" gap="0.5rem" align="center" justify="space-between">
+<FlexStack
+  direction="row"
+  gap="0.5rem"
+  align="center"
+  justify="space-between"
+>
   <span>Left</span>
   <span>Right</span>
 </FlexStack>

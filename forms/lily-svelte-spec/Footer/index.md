@@ -40,72 +40,75 @@ Wrap any footer-appropriate content in `<Footer>...</Footer>`. Supply `label` on
 
 ```svelte
 <script lang="ts">
-    import Footer from "./Footer.svelte";
+  import Footer from "./Footer.svelte";
 </script>
 
 <Footer label="Site footer">
-    <p>Copyright 2026</p>
+  <p>Copyright 2026</p>
 </Footer>
 ```
 
 ```svelte
 <script lang="ts">
-    import Footer from "./Footer.svelte";
+  import Footer from "./Footer.svelte";
 </script>
 
 <Footer>
-    <nav aria-label="Footer navigation">
-        <a href="/privacy">Privacy</a>
-        <a href="/terms">Terms</a>
-        <a href="/contact">Contact</a>
-    </nav>
+  <nav aria-label="Footer navigation">
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+    <a href="/contact">Contact</a>
+  </nav>
 </Footer>
 ```
 
 ```svelte
 <script lang="ts">
-    import Footer from "./Footer.svelte";
+  import Footer from "./Footer.svelte";
 </script>
 
 <article>
-    <h1>Article title</h1>
-    <p>Body content...</p>
-    <Footer label="Article footer">
-        <p>Published 2026-04-18 by Jamie</p>
-    </Footer>
+  <h1>Article title</h1>
+  <p>Body content...</p>
+  <Footer label="Article footer">
+    <p>Published 2026-04-18 by Jamie</p>
+  </Footer>
 </article>
 ```
 
 ```svelte
 <script lang="ts">
-    import Footer from "./Footer.svelte";
+  import Footer from "./Footer.svelte";
 </script>
 
-<Footer class="site-footer" data-testid="site-footer">
-    <div>
-        <h2>Contact</h2>
-        <p>hello@example.com</p>
-    </div>
-    <div>
-        <h2>Links</h2>
-        <ul>
-            <li><a href="/about">About</a></li>
-            <li><a href="/careers">Careers</a></li>
-        </ul>
-    </div>
+<Footer
+  class="site-footer"
+  data-testid="site-footer"
+>
+  <div>
+    <h2>Contact</h2>
+    <p>hello@example.com</p>
+  </div>
+  <div>
+    <h2>Links</h2>
+    <ul>
+      <li><a href="/about">About</a></li>
+      <li><a href="/careers">Careers</a></li>
+    </ul>
+  </div>
 </Footer>
 ```
 
 ```svelte
 <script lang="ts">
-    import Footer from "./Footer.svelte";
+  import Footer from "./Footer.svelte";
 </script>
 
 <Footer label="Page footer">
-    <small>All rights reserved.</small>
+  <small>All rights reserved.</small>
 </Footer>
 <Footer label="App footer">
-    <small>Build 123.4.5</small>
+  <small>Build 123.4.5</small>
 </Footer>
 ```
 

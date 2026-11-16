@@ -14,9 +14,11 @@ function htmlSnippet(html: string) {
 
 describe("StepList", () => {
     test("renders as an ol with the step-list class", () => {
-        const { container } = render(Subject, { props: {
-            children: htmlSnippet("<li>Step 1</li>"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                children: htmlSnippet("<li>Step 1</li>"),
+            },
+        });
 
         const root = container.querySelector("ol.step-list") as HTMLElement;
         expect(root).toBeTruthy();
@@ -24,39 +26,47 @@ describe("StepList", () => {
     });
 
     test("applies aria-label when provided", () => {
-        const { container } = render(Subject, { props: {
-            label: "Checkout steps",
-            children: htmlSnippet("<li>Step 1</li>"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Checkout steps",
+                children: htmlSnippet("<li>Step 1</li>"),
+            },
+        });
 
         const root = container.querySelector("ol.step-list") as HTMLElement;
         expect(root.getAttribute("aria-label")).toBe("Checkout steps");
     });
 
     test("applies data-current when provided", () => {
-        const { container } = render(Subject, { props: {
-            current: 1,
-            children: htmlSnippet("<li>Step 1</li>"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                current: 1,
+                children: htmlSnippet("<li>Step 1</li>"),
+            },
+        });
 
         const root = container.querySelector("ol.step-list") as HTMLElement;
         expect(root.getAttribute("data-current")).toBe("1");
     });
 
     test("renders children", () => {
-        const { container } = render(Subject, { props: {
-            children: htmlSnippet("<li>One</li><li>Two</li>"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                children: htmlSnippet("<li>One</li><li>Two</li>"),
+            },
+        });
 
         const root = container.querySelector("ol.step-list") as HTMLElement;
         expect(root.querySelectorAll("li").length).toBe(2);
     });
 
     test("appends consumer class to base class", () => {
-        const { container } = render(Subject, { props: {
-            class: "extra",
-            children: htmlSnippet("<li>One</li>"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                class: "extra",
+                children: htmlSnippet("<li>One</li>"),
+            },
+        });
 
         const root = container.querySelector("ol.step-list") as HTMLElement;
         expect(root.className).toContain("step-list");

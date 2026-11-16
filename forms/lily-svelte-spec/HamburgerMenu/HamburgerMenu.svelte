@@ -8,7 +8,7 @@
     //
     // Props:
     //   className — string, optional. CSS class name.
-    //   label — string, default "Menu". Accessible name for the toggle button and navigation region.
+    //   label — string, required. No default: the words are yours. Accessible name for the toggle button and navigation region.
     //   open — boolean, default false. Bindable boolean controlling whether the navigation panel is visible.
     //   children — Snippet, required. Navigation content rendered when the menu is open.
     //   ...restProps — additional HTML attributes spread onto the outer div wrapper.
@@ -28,7 +28,7 @@
     //   </HamburgerMenu>
     //
     //   <!-- Hamburger menu with external open state -->
-    //   <HamburgerMenu bind:open={menuOpen}>
+    //   <HamburgerMenu label="Main menu" bind:open={menuOpen}>
     //     <ul>
     //       <li><a href="/dashboard">Dashboard</a></li>
     //       <li><a href="/settings">Settings</a></li>
@@ -48,7 +48,7 @@
     //   - aria-label on the navigation container provides an accessible name for the landmark
     //
     // Internationalization:
-    //   - The label prop allows localized accessible names; default "Menu" should be overridden for non-English locales
+    //   - The label prop supplies the accessible name in your language
     //   - All content comes through the children snippet
     //
     // Claude rules:
@@ -62,19 +62,22 @@
     //   - WAI-ARIA Navigation Landmark: https://www.w3.org/WAI/ARIA/apd/practices/landmark-regions/
 
     import type { Snippet } from "svelte";
+    import { warnMissingName } from "../dev-warning";
 
     let {
         class: className = "",
-        label = "Menu",
+        label,
         open = $bindable(false),
         children,
         ...restProps
     }: {
-        label?: string;
+        label: string;
         open?: boolean;
         children: Snippet;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() => warnMissingName("HamburgerMenu", label, restProps["aria-labelledby"]));
 
     const uid = $props.id();
     const menuId = `hamburger-${uid}`;

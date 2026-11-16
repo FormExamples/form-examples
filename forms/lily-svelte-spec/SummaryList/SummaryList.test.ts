@@ -13,51 +13,61 @@ function textSnippet(text: string) {
 
 describe("SummaryList", () => {
     test("renders a dl element", () => {
-        render(Subject, { props: {
-            label: "Summary",
-            children: textSnippet("Content"),
-        }});
+        render(Subject, {
+            props: {
+                label: "Summary",
+                children: textSnippet("Content"),
+            },
+        });
 
         const el = screen.getByLabelText("Summary");
         expect(el.tagName).toBe("DL");
     });
 
     test("has aria-label from label prop", () => {
-        render(Subject, { props: {
-            label: "Summary",
-            children: textSnippet("Content"),
-        }});
+        render(Subject, {
+            props: {
+                label: "Summary",
+                children: textSnippet("Content"),
+            },
+        });
 
         const el = screen.getByLabelText("Summary");
         expect(el.getAttribute("aria-label")).toBe("Summary");
     });
 
     test("renders children content", () => {
-        render(Subject, { props: {
-            label: "Summary",
-            children: textSnippet("Item details"),
-        }});
+        render(Subject, {
+            props: {
+                label: "Summary",
+                children: textSnippet("Item details"),
+            },
+        });
 
         const el = screen.getByLabelText("Summary");
         expect(el.textContent).toContain("Item details");
     });
 
     test("passes through additional HTML attributes", () => {
-        render(Subject, { props: {
-            label: "Summary",
-            "data-testid": "summary-list",
-            children: textSnippet("Content"),
-        }});
+        render(Subject, {
+            props: {
+                label: "Summary",
+                "data-testid": "summary-list",
+                children: textSnippet("Content"),
+            },
+        });
 
         expect(screen.getByTestId("summary-list")).toBeTruthy();
     });
 
     test("accepts id attribute", () => {
-        render(Subject, { props: {
-            label: "Summary",
-            id: "my-summary",
-            children: textSnippet("Content"),
-        }});
+        render(Subject, {
+            props: {
+                label: "Summary",
+                id: "my-summary",
+                children: textSnippet("Content"),
+            },
+        });
 
         const el = screen.getByLabelText("Summary");
         expect(el.getAttribute("id")).toBe("my-summary");

@@ -52,45 +52,57 @@ Basic tabs + tabpanels:
 
 ```svelte
 <script lang="ts">
-    import TabBar from "./TabBar.svelte";
-    import TabBarButton from "../TabBarButton/TabBarButton.svelte";
-    let active = $state<"general" | "advanced">("general");
+  import TabBar from "./TabBar.svelte";
+  import TabBarButton from "../TabBarButton/TabBarButton.svelte";
+  let active = $state<"general" | "advanced">("general");
 </script>
 
 <TabBar label="Settings">
-    <TabBarButton
-        selected={active === "general"}
-        controls="panel-general"
-        onclick={() => (active = "general")}
-    >General</TabBarButton>
-    <TabBarButton
-        selected={active === "advanced"}
-        controls="panel-advanced"
-        onclick={() => (active = "advanced")}
-    >Advanced</TabBarButton>
+  <TabBarButton
+    selected={active === "general"}
+    controls="panel-general"
+    onclick={() => (active = "general")}>General</TabBarButton
+  >
+  <TabBarButton
+    selected={active === "advanced"}
+    controls="panel-advanced"
+    onclick={() => (active = "advanced")}>Advanced</TabBarButton
+  >
 </TabBar>
-<section id="panel-general" role="tabpanel" hidden={active !== "general"}>General panel</section>
-<section id="panel-advanced" role="tabpanel" hidden={active !== "advanced"}>Advanced panel</section>
+<section
+  id="panel-general"
+  role="tabpanel"
+  hidden={active !== "general"}
+>
+  General panel
+</section>
+<section
+  id="panel-advanced"
+  role="tabpanel"
+  hidden={active !== "advanced"}
+>
+  Advanced panel
+</section>
 ```
 
 Three-tab switch:
 
 ```svelte
 <script lang="ts">
-    import TabBar from "./TabBar.svelte";
-    import TabBarButton from "../TabBarButton/TabBarButton.svelte";
-    const tabs = ["overview", "usage", "billing"] as const;
-    let active = $state<typeof tabs[number]>("overview");
+  import TabBar from "./TabBar.svelte";
+  import TabBarButton from "../TabBarButton/TabBarButton.svelte";
+  const tabs = ["overview", "usage", "billing"] as const;
+  let active = $state<(typeof tabs)[number]>("overview");
 </script>
 
 <TabBar label="Account">
-    {#each tabs as t}
-        <TabBarButton
-            selected={active === t}
-            controls={`panel-${t}`}
-            onclick={() => (active = t)}
-        >{t}</TabBarButton>
-    {/each}
+  {#each tabs as t}
+    <TabBarButton
+      selected={active === t}
+      controls={`panel-${t}`}
+      onclick={() => (active = t)}>{t}</TabBarButton
+    >
+  {/each}
 </TabBar>
 ```
 
@@ -98,23 +110,23 @@ With data-driven tabs:
 
 ```svelte
 <script lang="ts">
-    import TabBar from "./TabBar.svelte";
-    import TabBarButton from "../TabBarButton/TabBarButton.svelte";
-    const items = [
-        { id: "a", label: "Alpha" },
-        { id: "b", label: "Beta" },
-    ];
-    let active = $state("a");
+  import TabBar from "./TabBar.svelte";
+  import TabBarButton from "../TabBarButton/TabBarButton.svelte";
+  const items = [
+    { id: "a", label: "Alpha" },
+    { id: "b", label: "Beta" },
+  ];
+  let active = $state("a");
 </script>
 
 <TabBar label="Sections">
-    {#each items as it}
-        <TabBarButton
-            selected={active === it.id}
-            controls={`panel-${it.id}`}
-            onclick={() => (active = it.id)}
-        >{it.label}</TabBarButton>
-    {/each}
+  {#each items as it}
+    <TabBarButton
+      selected={active === it.id}
+      controls={`panel-${it.id}`}
+      onclick={() => (active = it.id)}>{it.label}</TabBarButton
+    >
+  {/each}
 </TabBar>
 ```
 
@@ -122,12 +134,20 @@ Plain-button children (still keyboard-navigable because arrow handling queries `
 
 ```svelte
 <script lang="ts">
-    import TabBar from "./TabBar.svelte";
+  import TabBar from "./TabBar.svelte";
 </script>
 
 <TabBar label="Minimal">
-    <button role="tab" aria-selected="true" tabindex="0">One</button>
-    <button role="tab" aria-selected="false" tabindex="-1">Two</button>
+  <button
+    role="tab"
+    aria-selected="true"
+    tabindex="0">One</button
+  >
+  <button
+    role="tab"
+    aria-selected="false"
+    tabindex="-1">Two</button
+  >
 </TabBar>
 ```
 
@@ -135,13 +155,19 @@ With extra attributes on the tablist:
 
 ```svelte
 <script lang="ts">
-    import TabBar from "./TabBar.svelte";
-    import TabBarButton from "../TabBarButton/TabBarButton.svelte";
+  import TabBar from "./TabBar.svelte";
+  import TabBarButton from "../TabBarButton/TabBarButton.svelte";
 </script>
 
-<TabBar label="Views" id="views-tabs">
-    <TabBarButton selected controls="p1">One</TabBarButton>
-    <TabBarButton controls="p2">Two</TabBarButton>
+<TabBar
+  label="Views"
+  id="views-tabs"
+>
+  <TabBarButton
+    selected
+    controls="p1">One</TabBarButton
+  >
+  <TabBarButton controls="p2">Two</TabBarButton>
 </TabBar>
 ```
 
@@ -153,6 +179,7 @@ With extra attributes on the tablist:
 - Consumers should ensure the associated tabpanels use `role="tabpanel"` with matching ids.
 
 References:
+
 - WAI-ARIA Tabs Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
 
 ## Related components

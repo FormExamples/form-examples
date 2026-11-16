@@ -13,13 +13,15 @@ function textSnippet(text: string) {
 
 describe("TransferList", () => {
     test("renders as a div with the transfer-list class and group role", () => {
-        const { container } = render(Subject, { props: {
-            label: "Roles",
-            sourceLabel: "Available",
-            targetLabel: "Selected",
-            source: textSnippet("source"),
-            target: textSnippet("target"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Roles",
+                sourceLabel: "Available",
+                targetLabel: "Selected",
+                source: textSnippet("source"),
+                target: textSnippet("target"),
+            },
+        });
 
         const root = container.querySelector("div.transfer-list") as HTMLElement;
         expect(root).toBeTruthy();
@@ -28,13 +30,15 @@ describe("TransferList", () => {
     });
 
     test("renders source section with sourceLabel", () => {
-        const { container } = render(Subject, { props: {
-            label: "Roles",
-            sourceLabel: "Available roles",
-            targetLabel: "Selected roles",
-            source: textSnippet("Source content"),
-            target: textSnippet("target"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Roles",
+                sourceLabel: "Available roles",
+                targetLabel: "Selected roles",
+                source: textSnippet("Source content"),
+                target: textSnippet("target"),
+            },
+        });
 
         const sourceSection = container.querySelector(".transfer-list-source") as HTMLElement;
         expect(sourceSection).toBeTruthy();
@@ -44,13 +48,15 @@ describe("TransferList", () => {
     });
 
     test("renders target section with targetLabel", () => {
-        const { container } = render(Subject, { props: {
-            label: "Roles",
-            sourceLabel: "Available roles",
-            targetLabel: "Selected roles",
-            source: textSnippet("source"),
-            target: textSnippet("Target content"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Roles",
+                sourceLabel: "Available roles",
+                targetLabel: "Selected roles",
+                source: textSnippet("source"),
+                target: textSnippet("Target content"),
+            },
+        });
 
         const targetSection = container.querySelector(".transfer-list-target") as HTMLElement;
         expect(targetSection).toBeTruthy();
@@ -60,14 +66,16 @@ describe("TransferList", () => {
     });
 
     test("renders actions when provided", () => {
-        const { container } = render(Subject, { props: {
-            label: "Roles",
-            sourceLabel: "Available",
-            targetLabel: "Selected",
-            source: textSnippet("source"),
-            target: textSnippet("target"),
-            actions: textSnippet("Move buttons"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Roles",
+                sourceLabel: "Available",
+                targetLabel: "Selected",
+                source: textSnippet("source"),
+                target: textSnippet("target"),
+                actions: textSnippet("Move buttons"),
+            },
+        });
 
         const actionsRegion = container.querySelector(".transfer-list-actions") as HTMLElement;
         expect(actionsRegion).toBeTruthy();
@@ -75,26 +83,30 @@ describe("TransferList", () => {
     });
 
     test("omits actions when not provided", () => {
-        const { container } = render(Subject, { props: {
-            label: "Roles",
-            sourceLabel: "Available",
-            targetLabel: "Selected",
-            source: textSnippet("source"),
-            target: textSnippet("target"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Roles",
+                sourceLabel: "Available",
+                targetLabel: "Selected",
+                source: textSnippet("source"),
+                target: textSnippet("target"),
+            },
+        });
 
         expect(container.querySelector(".transfer-list-actions")).toBeNull();
     });
 
     test("appends consumer class to base class", () => {
-        const { container } = render(Subject, { props: {
-            label: "L",
-            sourceLabel: "S",
-            targetLabel: "T",
-            source: textSnippet("s"),
-            target: textSnippet("t"),
-            class: "extra",
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "L",
+                sourceLabel: "S",
+                targetLabel: "T",
+                source: textSnippet("s"),
+                target: textSnippet("t"),
+                class: "extra",
+            },
+        });
 
         const root = container.querySelector("div.transfer-list") as HTMLElement;
         expect(root.className).toContain("transfer-list");

@@ -40,9 +40,9 @@ Import `BreadcrumbNav` from `./BreadcrumbNav.svelte`. Always pass `label`. Wrap 
 
 ```svelte
 <script lang="ts">
-  import BreadcrumbNav from './BreadcrumbNav.svelte';
-  import BreadcrumbList from '../BreadcrumbList/BreadcrumbList.svelte';
-  import BreadcrumbListItem from '../BreadcrumbListItem/BreadcrumbListItem.svelte';
+  import BreadcrumbNav from "./BreadcrumbNav.svelte";
+  import BreadcrumbList from "../BreadcrumbList/BreadcrumbList.svelte";
+  import BreadcrumbListItem from "../BreadcrumbListItem/BreadcrumbListItem.svelte";
 </script>
 
 <BreadcrumbNav label="Breadcrumb">
@@ -58,11 +58,11 @@ Import `BreadcrumbNav` from `./BreadcrumbNav.svelte`. Always pass `label`. Wrap 
 
 ```svelte
 <script lang="ts">
-  import BreadcrumbNav from './BreadcrumbNav.svelte';
-  import BreadcrumbList from '../BreadcrumbList/BreadcrumbList.svelte';
-  import BreadcrumbListItem from '../BreadcrumbListItem/BreadcrumbListItem.svelte';
+  import BreadcrumbNav from "./BreadcrumbNav.svelte";
+  import BreadcrumbList from "../BreadcrumbList/BreadcrumbList.svelte";
+  import BreadcrumbListItem from "../BreadcrumbListItem/BreadcrumbListItem.svelte";
 
-  const label = 'Chemin de navigation';
+  const label = "Chemin de navigation";
 </script>
 
 <BreadcrumbNav {label}>
@@ -77,9 +77,9 @@ Import `BreadcrumbNav` from `./BreadcrumbNav.svelte`. Always pass `label`. Wrap 
 
 ```svelte
 <script lang="ts">
-  import BreadcrumbNav from './BreadcrumbNav.svelte';
-  import BreadcrumbList from '../BreadcrumbList/BreadcrumbList.svelte';
-  import BreadcrumbListItem from '../BreadcrumbListItem/BreadcrumbListItem.svelte';
+  import BreadcrumbNav from "./BreadcrumbNav.svelte";
+  import BreadcrumbList from "../BreadcrumbList/BreadcrumbList.svelte";
+  import BreadcrumbListItem from "../BreadcrumbListItem/BreadcrumbListItem.svelte";
 </script>
 
 <header>
@@ -97,12 +97,16 @@ Import `BreadcrumbNav` from `./BreadcrumbNav.svelte`. Always pass `label`. Wrap 
 
 ```svelte
 <script lang="ts">
-  import BreadcrumbNav from './BreadcrumbNav.svelte';
-  import BreadcrumbList from '../BreadcrumbList/BreadcrumbList.svelte';
-  import BreadcrumbListItem from '../BreadcrumbListItem/BreadcrumbListItem.svelte';
+  import BreadcrumbNav from "./BreadcrumbNav.svelte";
+  import BreadcrumbList from "../BreadcrumbList/BreadcrumbList.svelte";
+  import BreadcrumbListItem from "../BreadcrumbListItem/BreadcrumbListItem.svelte";
 </script>
 
-<BreadcrumbNav label="Breadcrumb" data-testid="bc" id="page-breadcrumbs">
+<BreadcrumbNav
+  label="Breadcrumb"
+  data-testid="bc"
+  id="page-breadcrumbs"
+>
   <BreadcrumbList>
     <BreadcrumbListItem><a href="/">Home</a></BreadcrumbListItem>
     <BreadcrumbListItem current>Contact</BreadcrumbListItem>
@@ -114,9 +118,9 @@ Import `BreadcrumbNav` from `./BreadcrumbNav.svelte`. Always pass `label`. Wrap 
 
 ```svelte
 <script lang="ts">
-  import BreadcrumbNav from './BreadcrumbNav.svelte';
-  import BreadcrumbList from '../BreadcrumbList/BreadcrumbList.svelte';
-  import BreadcrumbListItem from '../BreadcrumbListItem/BreadcrumbListItem.svelte';
+  import BreadcrumbNav from "./BreadcrumbNav.svelte";
+  import BreadcrumbList from "../BreadcrumbList/BreadcrumbList.svelte";
+  import BreadcrumbListItem from "../BreadcrumbListItem/BreadcrumbListItem.svelte";
 </script>
 
 <main>

@@ -42,9 +42,9 @@ Import `AccordionNav` from `./AccordionNav.svelte`. Always pass a `label`. Provi
 
 ```svelte
 <script lang="ts">
-  import AccordionNav from './AccordionNav.svelte';
-  import AccordionList from '../AccordionList/AccordionList.svelte';
-  import AccordionListItem from '../AccordionListItem/AccordionListItem.svelte';
+  import AccordionNav from "./AccordionNav.svelte";
+  import AccordionList from "../AccordionList/AccordionList.svelte";
+  import AccordionListItem from "../AccordionListItem/AccordionListItem.svelte";
 </script>
 
 <AccordionNav label="Frequently Asked Questions">
@@ -61,20 +61,27 @@ Import `AccordionNav` from `./AccordionNav.svelte`. Always pass a `label`. Provi
 
 ```svelte
 <script lang="ts">
-  import AccordionNav from './AccordionNav.svelte';
-  import AccordionList from '../AccordionList/AccordionList.svelte';
-  import AccordionListItem from '../AccordionListItem/AccordionListItem.svelte';
+  import AccordionNav from "./AccordionNav.svelte";
+  import AccordionList from "../AccordionList/AccordionList.svelte";
+  import AccordionListItem from "../AccordionListItem/AccordionListItem.svelte";
 </script>
 
 <AccordionNav label="Product filters">
   <AccordionList label="Filter groups">
     <AccordionListItem>
       <summary>Category</summary>
-      <ul><li>Books</li><li>Games</li></ul>
+      <ul>
+        <li>Books</li>
+        <li>Games</li>
+      </ul>
     </AccordionListItem>
     <AccordionListItem>
       <summary>Price</summary>
-      <input type="range" min="0" max="100" />
+      <input
+        type="range"
+        min="0"
+        max="100"
+      />
     </AccordionListItem>
   </AccordionList>
 </AccordionNav>
@@ -84,12 +91,16 @@ Import `AccordionNav` from `./AccordionNav.svelte`. Always pass a `label`. Provi
 
 ```svelte
 <script lang="ts">
-  import AccordionNav from './AccordionNav.svelte';
-  import AccordionList from '../AccordionList/AccordionList.svelte';
-  import AccordionListItem from '../AccordionListItem/AccordionListItem.svelte';
+  import AccordionNav from "./AccordionNav.svelte";
+  import AccordionList from "../AccordionList/AccordionList.svelte";
+  import AccordionListItem from "../AccordionListItem/AccordionListItem.svelte";
 </script>
 
-<AccordionNav label="Docs" id="docs-accordion" data-section="help">
+<AccordionNav
+  label="Docs"
+  id="docs-accordion"
+  data-section="help"
+>
   <AccordionList>
     <AccordionListItem>
       <summary>Getting Started</summary>
@@ -104,13 +115,19 @@ Import `AccordionNav` from `./AccordionNav.svelte`. Always pass a `label`. Provi
 ```svelte
 <AccordionNav label="Shipping FAQ">
   <AccordionList>
-    <AccordionListItem><summary>Delivery times</summary><p>...</p></AccordionListItem>
+    <AccordionListItem
+      ><summary>Delivery times</summary>
+      <p>...</p></AccordionListItem
+    >
   </AccordionList>
 </AccordionNav>
 
 <AccordionNav label="Returns FAQ">
   <AccordionList>
-    <AccordionListItem><summary>Return policy</summary><p>...</p></AccordionListItem>
+    <AccordionListItem
+      ><summary>Return policy</summary>
+      <p>...</p></AccordionListItem
+    >
   </AccordionList>
 </AccordionNav>
 ```

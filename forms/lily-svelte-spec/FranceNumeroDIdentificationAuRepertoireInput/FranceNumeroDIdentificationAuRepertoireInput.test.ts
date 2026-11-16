@@ -22,7 +22,9 @@ describe("FranceNumeroDIdentificationAuRepertoireInput", () => {
         render(Subject, { props: { label: "NIR" } });
 
         const input = screen.getByLabelText("NIR");
-        expect(input.getAttribute("pattern")).toBe("[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{3} [0-9]{3} [0-9]{2}");
+        expect(input.getAttribute("pattern")).toBe(
+            "[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{3} [0-9]{3} [0-9]{2}",
+        );
     });
 
     test("has autocomplete off", () => {

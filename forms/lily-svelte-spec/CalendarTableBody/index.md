@@ -36,10 +36,10 @@ Import `CalendarTableBody` from `./CalendarTableBody.svelte`. Place inside `Cale
 
 ```svelte
 <script lang="ts">
-  import CalendarTable from '../CalendarTable/CalendarTable.svelte';
-  import CalendarTableBody from './CalendarTableBody.svelte';
-  import CalendarTableRow from '../CalendarTableRow/CalendarTableRow.svelte';
-  import CalendarTableTD from '../CalendarTableTD/CalendarTableTD.svelte';
+  import CalendarTable from "../CalendarTable/CalendarTable.svelte";
+  import CalendarTableBody from "./CalendarTableBody.svelte";
+  import CalendarTableRow from "../CalendarTableRow/CalendarTableRow.svelte";
+  import CalendarTableTD from "../CalendarTableTD/CalendarTableTD.svelte";
 </script>
 
 <CalendarTable label="January 2025">
@@ -56,10 +56,10 @@ Import `CalendarTableBody` from `./CalendarTableBody.svelte`. Place inside `Cale
 
 ```svelte
 <script lang="ts">
-  import CalendarTable from '../CalendarTable/CalendarTable.svelte';
-  import CalendarTableBody from './CalendarTableBody.svelte';
-  import CalendarTableRow from '../CalendarTableRow/CalendarTableRow.svelte';
-  import CalendarTableTD from '../CalendarTableTD/CalendarTableTD.svelte';
+  import CalendarTable from "../CalendarTable/CalendarTable.svelte";
+  import CalendarTableBody from "./CalendarTableBody.svelte";
+  import CalendarTableRow from "../CalendarTableRow/CalendarTableRow.svelte";
+  import CalendarTableTD from "../CalendarTableTD/CalendarTableTD.svelte";
 </script>
 
 <CalendarTable label="January 2025">
@@ -82,12 +82,12 @@ Import `CalendarTableBody` from `./CalendarTableBody.svelte`. Place inside `Cale
 
 ```svelte
 <script lang="ts">
-  import CalendarTable from '../CalendarTable/CalendarTable.svelte';
-  import CalendarTableHead from '../CalendarTableHead/CalendarTableHead.svelte';
-  import CalendarTableBody from './CalendarTableBody.svelte';
-  import CalendarTableFoot from '../CalendarTableFoot/CalendarTableFoot.svelte';
-  import CalendarTableRow from '../CalendarTableRow/CalendarTableRow.svelte';
-  import CalendarTableTD from '../CalendarTableTD/CalendarTableTD.svelte';
+  import CalendarTable from "../CalendarTable/CalendarTable.svelte";
+  import CalendarTableHead from "../CalendarTableHead/CalendarTableHead.svelte";
+  import CalendarTableBody from "./CalendarTableBody.svelte";
+  import CalendarTableFoot from "../CalendarTableFoot/CalendarTableFoot.svelte";
+  import CalendarTableRow from "../CalendarTableRow/CalendarTableRow.svelte";
+  import CalendarTableTD from "../CalendarTableTD/CalendarTableTD.svelte";
 </script>
 
 <CalendarTable label="Feb 2025">
@@ -117,10 +117,10 @@ Import `CalendarTableBody` from `./CalendarTableBody.svelte`. Place inside `Cale
 
 ```svelte
 <script lang="ts">
-  import CalendarTable from '../CalendarTable/CalendarTable.svelte';
-  import CalendarTableBody from './CalendarTableBody.svelte';
-  import CalendarTableRow from '../CalendarTableRow/CalendarTableRow.svelte';
-  import CalendarTableTD from '../CalendarTableTD/CalendarTableTD.svelte';
+  import CalendarTable from "../CalendarTable/CalendarTable.svelte";
+  import CalendarTableBody from "./CalendarTableBody.svelte";
+  import CalendarTableRow from "../CalendarTableRow/CalendarTableRow.svelte";
+  import CalendarTableTD from "../CalendarTableTD/CalendarTableTD.svelte";
 
   let weeks = $state([[1, 2, 3, 4, 5, 6, 7]]);
 </script>

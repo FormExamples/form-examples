@@ -1,16 +1,16 @@
 # TourListItem
 
-A single step within a `TourList` guided tour, rendered as a `<li role="group">` with `aria-roledescription="step"`, `aria-current`, and conditional `hidden`/`aria-hidden` based on whether the step is current.
+A single step within a `TourList` guided tour, rendered as an `<li>` of its list, `data-current`, and conditional `hidden`/`aria-hidden` based on whether the step is current.
 
 ## What it is
 
-`TourListItem` is a headless Svelte 5 component representing one step of a guided walkthrough. It renders a `<li>` with group-step ARIA semantics, hides itself unless it is the currently active step, and composes a progress-aware accessible label when `stepNumber` and `totalSteps` are supplied.
+`TourListItem` is a headless Svelte 5 component representing one step of a guided walkthrough. It renders a `<li>` with group-step ARIA semantics, hides itself unless it is the currently active step, and, given the consumer's `stepTemplate` with `stepNumber` and `totalSteps`, names the step with its progress.
 
 ## What it does
 
-- Renders `<li class="tour-list-item {className}" role="group" aria-roledescription="step">`.
-- Derives a `fullLabel` — `"{label} (Step N of M)"` when both `stepNumber` and `totalSteps` are provided, otherwise just `label` — and assigns it to `aria-label`.
-- Sets `aria-current="step"` when `current` is true.
+- Renders `<li class="tour-list-item {className}">`.
+- Derives a `fullLabel` — the consumer's `stepTemplate` with `{label}`, `{step}` and `{total}` filled in, when it and both numbers are given, otherwise just `label` — and assigns it to `aria-label`. No English default.
+- Sets `data-current` when `current` is true.
 - Sets `aria-hidden="true"` and the HTML `hidden` attribute when `current` is false, so inactive steps are hidden for both sighted and assistive users.
 - Renders the `children` snippet as the step content.
 - Spreads additional HTML attributes onto the `<li>`.
@@ -30,7 +30,7 @@ A single step within a `TourList` guided tour, rendered as a `<li role="group">`
 
 ## How to use it
 
-Import and place inside `TourList` (possibly nested under a `Tour`). Pass a translated `label` and set `current` based on your external step index. Supply `stepNumber` and `totalSteps` for the "Step N of M" suffix in the accessible label.
+Import and place inside `TourList` (possibly nested under a `Tour`). Pass a translated `label` and set `current` based on your external step index. For progress in the accessible name, supply `stepNumber`, `totalSteps` and a translated `stepTemplate`, such as `"{label} (Step {step} of {total})"`.
 
 ## Props
 
@@ -39,6 +39,7 @@ Import and place inside `TourList` (possibly nested under a `Tour`). Pass a tran
 - `current` — boolean, default `false`. Whether this step is the currently visible step.
 - `stepNumber` — number, optional. 1-based step number.
 - `totalSteps` — number, optional. Total steps in the tour.
+- `stepTemplate` — string, optional. The step's whole name with `{label}`, `{step}` and `{total}`; without it the name is `label`.
 - `children` — Snippet, required. Step content.
 - `...restProps` — any additional HTML attributes spread onto the `<li>`.
 
@@ -53,12 +54,25 @@ Import and place inside `TourList` (possibly nested under a `Tour`). Pass a tran
   let step = $state(0);
 </script>
 
-<TourList label="Steps" bind:active>
-  <TourListItem label="Welcome" current={step === 0} stepNumber={1} totalSteps={2}>
+<TourList
+  label="Steps"
+  bind:active
+>
+  <TourListItem
+    label="Welcome"
+    current={step === 0}
+    stepNumber={1}
+    totalSteps={2}
+  >
     <p>Welcome!</p>
     <button onclick={() => step++}>Next</button>
   </TourListItem>
-  <TourListItem label="Done" current={step === 1} stepNumber={2} totalSteps={2}>
+  <TourListItem
+    label="Done"
+    current={step === 1}
+    stepNumber={2}
+    totalSteps={2}
+  >
     <button onclick={() => (active = false)}>Finish</button>
   </TourListItem>
 </TourList>
@@ -80,8 +94,14 @@ Import and place inside `TourList` (possibly nested under a `Tour`). Pass a tran
   let step = $state(0);
 </script>
 
-<Tour label="Tour" bind:active>
-  <TourList label="Steps" active>
+<Tour
+  label="Tour"
+  bind:active
+>
+  <TourList
+    label="Steps"
+    active
+  >
     {#each steps as s, i}
       <TourListItem
         label={s.label}
@@ -110,12 +130,21 @@ Import and place inside `TourList` (possibly nested under a `Tour`). Pass a tran
   let step = $state(0);
 </script>
 
-<TourList label="Quick guide" bind:active>
-  <TourListItem label="No progress shown" current={step === 0}>
+<TourList
+  label="Quick guide"
+  bind:active
+>
+  <TourListItem
+    label="No progress shown"
+    current={step === 0}
+  >
     A step without stepNumber / totalSteps
     <button onclick={() => step++}>Next</button>
   </TourListItem>
-  <TourListItem label="Final step" current={step === 1}>
+  <TourListItem
+    label="Final step"
+    current={step === 1}
+  >
     <button onclick={() => (active = false)}>Close</button>
   </TourListItem>
 </TourList>
@@ -130,12 +159,25 @@ Import and place inside `TourList` (possibly nested under a `Tour`). Pass a tran
   let step = $state(0);
 </script>
 
-<TourList label="Visite" bind:active>
-  <TourListItem label="Bienvenue" current={step === 0} stepNumber={1} totalSteps={2}>
+<TourList
+  label="Visite"
+  bind:active
+>
+  <TourListItem
+    label="Bienvenue"
+    current={step === 0}
+    stepNumber={1}
+    totalSteps={2}
+  >
     Bonjour !
     <button onclick={() => step++}>Suivant</button>
   </TourListItem>
-  <TourListItem label="Fin" current={step === 1} stepNumber={2} totalSteps={2}>
+  <TourListItem
+    label="Fin"
+    current={step === 1}
+    stepNumber={2}
+    totalSteps={2}
+  >
     <button onclick={() => (active = false)}>Terminer</button>
   </TourListItem>
 </TourList>
@@ -143,9 +185,9 @@ Import and place inside `TourList` (possibly nested under a `Tour`). Pass a tran
 
 ## Accessibility
 
-- `role="group"` and `aria-roledescription="step"` identify the element as a tour step.
+- No group role or role description: the `<li>` stays a list item, so a screen reader counts the steps.
 - `aria-label` includes the step label and a "Step N of M" suffix when available.
-- `aria-current="step"` marks the active step for assistive technology.
+- `data-current` marks the active step for assistive technology.
 - Inactive steps are hidden with both `hidden` and `aria-hidden="true"` so they are not announced.
 - Consumers should move focus to the current step's content when it becomes active.
 

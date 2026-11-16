@@ -47,6 +47,7 @@
     //   - WAI-ARIA Breadcrumb Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/
     //   - HTML nav element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nav
 
+    import { warnMissingName } from "../dev-warning";
     import type { Snippet } from "svelte";
 
     let {
@@ -61,6 +62,15 @@
         children: Snippet;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName(
+            "BreadcrumbNav",
+            label,
+            restProps["aria-label"],
+            restProps["aria-labelledby"],
+        ),
+    );
 </script>
 
 <!-- BreadcrumbNav.svelte -->

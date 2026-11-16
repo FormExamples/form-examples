@@ -10,11 +10,11 @@ See [components/addressograph-box/index.md](../../../components/addressograph-bo
 
 ```svelte
 <script lang="ts">
-    import AddressographBox from "./AddressographBox.svelte";
+  import AddressographBox from "./AddressographBox.svelte";
 </script>
 
 <AddressographBox label="Patient identification">
-    <span>Jane Doe</span>
+  <span>Jane Doe</span>
 </AddressographBox>
 ```
 

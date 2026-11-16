@@ -7,7 +7,7 @@ describe("PortugalPassaporteView", () => {
     test("renders with the correct class", () => {
         render(Subject, { props: { label: "Portuguese Passport", value: "test-value" } });
 
-        const el = screen.getByLabelText("Portuguese Passport");
+        const el = document.querySelector(".portugal-passaporte-view") as HTMLElement;
         expect(el).toBeTruthy();
         expect(el.getAttribute("class")).toContain("portugal-passaporte-view");
     });
@@ -15,14 +15,19 @@ describe("PortugalPassaporteView", () => {
     test("renders the value as text content", () => {
         render(Subject, { props: { label: "Portuguese Passport", value: "test-value" } });
 
-        const el = screen.getByLabelText("Portuguese Passport");
-        expect(el.textContent).toBe("test-value");
+        const el = document.querySelector(".portugal-passaporte-view") as HTMLElement;
+        expect(
+            el.textContent?.replace(el.querySelector(".screen-reader-span")?.textContent ?? "", ""),
+        ).toBe("test-value");
     });
 
     test("has aria-label from the label prop", () => {
         render(Subject, { props: { label: "Portuguese Passport" } });
 
-        const el = screen.getByLabelText("Portuguese Passport");
-        expect(el.getAttribute("aria-label")).toBe("Portuguese Passport");
+        const el = document.querySelector(".portugal-passaporte-view") as HTMLElement;
+        expect(el.querySelector(".screen-reader-span")?.textContent).toBe(
+            `${"Portuguese Passport"} `,
+        );
+        expect(el.hasAttribute("aria-label")).toBe(false);
     });
 });

@@ -29,13 +29,16 @@ Unlike `Details`, which uses a `<summary>` toggle, this component uses a real fo
 
 ```svelte
 <script lang="ts">
-    import AccordionCheckbox from "./AccordionCheckbox.svelte";
+  import AccordionCheckbox from "./AccordionCheckbox.svelte";
 
-    let comments = $state(false);
+  let comments = $state(false);
 </script>
 
-<AccordionCheckbox label="I have additional comments" bind:checked={comments}>
-    <textarea aria-label="Your comments"></textarea>
+<AccordionCheckbox
+  label="I have additional comments"
+  bind:checked={comments}
+>
+  <textarea aria-label="Your comments"></textarea>
 </AccordionCheckbox>
 ```
 

@@ -13,12 +13,16 @@ function textSnippet(text: string) {
 
 describe("Dialog", () => {
     test("hidden when open is false", () => {
-        render(Subject, { props: { label: "Confirm", open: false, children: textSnippet("Content") } });
+        render(Subject, {
+            props: { label: "Confirm", open: false, children: textSnippet("Content") },
+        });
         expect(screen.queryByRole("dialog")).toBeNull();
     });
 
     test("visible when open is true", () => {
-        render(Subject, { props: { label: "Confirm", open: true, children: textSnippet("Content") } });
+        render(Subject, {
+            props: { label: "Confirm", open: true, children: textSnippet("Content") },
+        });
         expect(screen.getByRole("dialog", { name: "Confirm" })).toBeTruthy();
     });
 
@@ -28,17 +32,23 @@ describe("Dialog", () => {
     });
 
     test("has aria-modal when modal", () => {
-        render(Subject, { props: { label: "D", open: true, modal: true, children: textSnippet("C") } });
+        render(Subject, {
+            props: { label: "D", open: true, modal: true, children: textSnippet("C") },
+        });
         expect(screen.getByRole("dialog").getAttribute("aria-modal")).toBe("true");
     });
 
     test("no aria-modal when non-modal", () => {
-        render(Subject, { props: { label: "D", open: true, modal: false, children: textSnippet("C") } });
+        render(Subject, {
+            props: { label: "D", open: true, modal: false, children: textSnippet("C") },
+        });
         expect(screen.getByRole("dialog").getAttribute("aria-modal")).toBeNull();
     });
 
     test("renders children", () => {
-        render(Subject, { props: { label: "D", open: true, children: textSnippet("Hello dialog") } });
+        render(Subject, {
+            props: { label: "D", open: true, children: textSnippet("Hello dialog") },
+        });
         expect(screen.getByRole("dialog").textContent).toContain("Hello dialog");
     });
 
@@ -52,7 +62,9 @@ describe("Dialog", () => {
     });
 
     test("passes through attributes", () => {
-        render(Subject, { props: { label: "D", open: true, "data-testid": "dlg", children: textSnippet("C") } });
+        render(Subject, {
+            props: { label: "D", open: true, "data-testid": "dlg", children: textSnippet("C") },
+        });
         expect(screen.getByTestId("dlg")).toBeTruthy();
     });
 });

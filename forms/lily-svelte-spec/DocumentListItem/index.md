@@ -10,7 +10,7 @@ See [components/document-list-item/index.md](../../../components/document-list-i
 
 ```svelte
 <script lang="ts">
-    import DocumentListItem from "./DocumentListItem.svelte";
+  import DocumentListItem from "./DocumentListItem.svelte";
 </script>
 
 <DocumentListItem />

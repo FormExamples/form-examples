@@ -72,7 +72,10 @@
     aria-label={label}
     {...restProps}
 >
-    <div class="pictogram-icon" aria-hidden="true">
+    <div
+        class="pictogram-icon"
+        aria-hidden="true"
+    >
         {@render icon()}
     </div>
     <figcaption class="pictogram-caption">

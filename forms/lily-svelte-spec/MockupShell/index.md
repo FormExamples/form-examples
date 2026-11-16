@@ -10,7 +10,7 @@ See [components/mockup-shell/index.md](../../../components/mockup-shell/index.md
 
 ```svelte
 <script lang="ts">
-    import MockupShell from "./MockupShell.svelte";
+  import MockupShell from "./MockupShell.svelte";
 </script>
 
 <MockupShell />

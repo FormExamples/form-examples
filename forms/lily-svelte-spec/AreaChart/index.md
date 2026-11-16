@@ -10,7 +10,7 @@ See [components/area-chart/index.md](../../../components/area-chart/index.md) fo
 
 ```svelte
 <script lang="ts">
-    import AreaChart from "./AreaChart.svelte";
+  import AreaChart from "./AreaChart.svelte";
 </script>
 
 <AreaChart />

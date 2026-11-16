@@ -43,102 +43,142 @@ Import the component, pass a required `label` describing the form's purpose, and
 
 ```svelte
 <script lang="ts">
-    import Form from "./Form.svelte";
-    import Field from "../Field/Field.svelte";
-    import TextInput from "../TextInput/TextInput.svelte";
-    import Button from "../Button/Button.svelte";
+  import Form from "./Form.svelte";
+  import Field from "../Field/Field.svelte";
+  import TextInput from "../TextInput/TextInput.svelte";
+  import Button from "../Button/Button.svelte";
 
-    let name = $state("");
-    let email = $state("");
-    function handleSubmit() {
-        console.log({ name, email });
-    }
-</script>
-
-<Form label="Contact" onsubmit={handleSubmit}>
-    <Field label="Name">
-        <TextInput label="Name" bind:value={name} />
-    </Field>
-    <Field label="Email">
-        <TextInput label="Email" bind:value={email} />
-    </Field>
-    <Button type="submit" label="Submit">Submit</Button>
-</Form>
-```
-
-```svelte
-<script lang="ts">
-    import Form from "./Form.svelte";
-    function handleLogin(event: SubmitEvent) {
-        const data = new FormData(event.target as HTMLFormElement);
-        console.log(Object.fromEntries(data));
-    }
-</script>
-
-<Form label="Login" onsubmit={handleLogin}>
-    <label>Email <input name="email" type="email" required /></label>
-    <label>Password <input name="password" type="password" required /></label>
-    <button type="submit">Sign in</button>
-</Form>
-```
-
-```svelte
-<script lang="ts">
-    import Form from "./Form.svelte";
-    let query = $state("");
-
-    function applyFilters() { console.log("apply", query); }
-    function clearFilters() { query = ""; }
+  let name = $state("");
+  let email = $state("");
+  function handleSubmit() {
+    console.log({ name, email });
+  }
 </script>
 
 <Form
-    label="Search filters"
-    onsubmit={applyFilters}
-    onreset={clearFilters}
+  label="Contact"
+  onsubmit={handleSubmit}
 >
-    <input name="query" bind:value={query} />
-    <button type="submit">Apply</button>
-    <button type="reset">Clear</button>
+  <Field label="Name">
+    <TextInput
+      label="Name"
+      bind:value={name}
+    />
+  </Field>
+  <Field label="Email">
+    <TextInput
+      label="Email"
+      bind:value={email}
+    />
+  </Field>
+  <Button
+    type="submit"
+    label="Submit">Submit</Button
+  >
 </Form>
 ```
 
 ```svelte
 <script lang="ts">
-    import Form from "./Form.svelte";
-    import ErrorSummary from "../ErrorSummary/ErrorSummary.svelte";
-    let errors = $state<{ name?: string }>({});
-
-    function handleSubmit() {
-        errors = { name: "Required" };
-    }
-</script>
-
-<Form label="Signup" onsubmit={handleSubmit}>
-    {#if errors.name}
-        <ErrorSummary title="There is a problem">
-            <ul><li>{errors.name}</li></ul>
-        </ErrorSummary>
-    {/if}
-    <label>Name <input name="name" /></label>
-    <button type="submit">Submit</button>
-</Form>
-```
-
-```svelte
-<script lang="ts">
-    import Form from "./Form.svelte";
+  import Form from "./Form.svelte";
+  function handleLogin(event: SubmitEvent) {
+    const data = new FormData(event.target as HTMLFormElement);
+    console.log(Object.fromEntries(data));
+  }
 </script>
 
 <Form
-    label="Upload"
-    onsubmit={() => {}}
-    class="upload-form"
-    data-testid="upload-form"
-    method="post"
-    enctype="multipart/form-data"
+  label="Login"
+  onsubmit={handleLogin}
 >
-    <input type="file" name="file" />
-    <button type="submit">Upload</button>
+  <label
+    >Email <input
+      name="email"
+      type="email"
+      required
+    /></label
+  >
+  <label
+    >Password <input
+      name="password"
+      type="password"
+      required
+    /></label
+  >
+  <button type="submit">Sign in</button>
+</Form>
+```
+
+```svelte
+<script lang="ts">
+  import Form from "./Form.svelte";
+  let query = $state("");
+
+  function applyFilters() {
+    console.log("apply", query);
+  }
+  function clearFilters() {
+    query = "";
+  }
+</script>
+
+<Form
+  label="Search filters"
+  onsubmit={applyFilters}
+  onreset={clearFilters}
+>
+  <input
+    name="query"
+    bind:value={query}
+  />
+  <button type="submit">Apply</button>
+  <button type="reset">Clear</button>
+</Form>
+```
+
+```svelte
+<script lang="ts">
+  import Form from "./Form.svelte";
+  import ErrorSummary from "../ErrorSummary/ErrorSummary.svelte";
+  let errors = $state<{ name?: string }>({});
+
+  function handleSubmit() {
+    errors = { name: "Required" };
+  }
+</script>
+
+<Form
+  label="Signup"
+  onsubmit={handleSubmit}
+>
+  {#if errors.name}
+    <ErrorSummary title="There is a problem">
+      <ul><li>{errors.name}</li></ul>
+    </ErrorSummary>
+  {/if}
+  <label>Name <input name="name" /></label>
+  <button type="submit">Submit</button>
+</Form>
+```
+
+```svelte
+<script lang="ts">
+  import Form from "./Form.svelte";
+</script>
+
+<Form
+  label="Upload"
+  onsubmit={() => {}}
+  class="upload-form"
+  data-testid="upload-form"
+  method="post"
+  enctype="multipart/form-data"
+>
+  <input
+    type="file"
+    name="file"
+  />
+  <button type="submit">Upload</button>
 </Form>
 ```
 

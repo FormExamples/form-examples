@@ -31,61 +31,85 @@ Provide a required `label` and bind the value.
 
 ```svelte
 <script lang="ts">
-    import EspanaTarjetaSanitariaIndividualInput from "./EspanaTarjetaSanitariaIndividualInput.svelte";
-    let tsi = $state("");
+  import EspanaTarjetaSanitariaIndividualInput from "./EspanaTarjetaSanitariaIndividualInput.svelte";
+  let tsi = $state("");
 </script>
 
-<EspanaTarjetaSanitariaIndividualInput label="TSI" bind:value={tsi} />
+<EspanaTarjetaSanitariaIndividualInput
+  label="TSI"
+  bind:value={tsi}
+/>
 ```
 
 ## Props
 
-| Prop       | Type      | Default | Description                                   |
-| ---------- | --------- | ------- | --------------------------------------------- |
-| `class`    | `string`  | `""`    | CSS class appended to the base class.        |
-| `label`    | `string`  | required| Accessible name via `aria-label`.             |
-| `value`    | `string`  | `""`    | Bindable TSI string.                          |
-| `required` | `boolean` | `false` | Whether the input is required.                |
-| `disabled` | `boolean` | `false` | Whether the input is disabled.                |
-| `...rest`  | `unknown` | —       | Additional HTML attributes on the `<input>`.  |
+| Prop       | Type      | Default  | Description                                  |
+| ---------- | --------- | -------- | -------------------------------------------- |
+| `class`    | `string`  | `""`     | CSS class appended to the base class.        |
+| `label`    | `string`  | required | Accessible name via `aria-label`.            |
+| `value`    | `string`  | `""`     | Bindable TSI string.                         |
+| `required` | `boolean` | `false`  | Whether the input is required.               |
+| `disabled` | `boolean` | `false`  | Whether the input is disabled.               |
+| `...rest`  | `unknown` | —        | Additional HTML attributes on the `<input>`. |
 
 ## Usage
 
 ### 1. Basic input
 
 ```svelte
-<EspanaTarjetaSanitariaIndividualInput label="TSI" bind:value={tsi} />
+<EspanaTarjetaSanitariaIndividualInput
+  label="TSI"
+  bind:value={tsi}
+/>
 ```
 
 ### 2. Required
 
 ```svelte
-<EspanaTarjetaSanitariaIndividualInput label="TSI" bind:value={tsi} required />
+<EspanaTarjetaSanitariaIndividualInput
+  label="TSI"
+  bind:value={tsi}
+  required
+/>
 ```
 
 ### 3. Disabled (for previewing a pre-filled value)
 
 ```svelte
 <EspanaTarjetaSanitariaIndividualInput
-    label="TSI"
-    value="BBBB12345678"
-    disabled
+  label="TSI"
+  value="BBBB12345678"
+  disabled
 />
 ```
 
 ### 4. Inside a Field
 
 ```svelte
-<Field label="Tarjeta Sanitaria Individual" description="Formato variable por CCAA">
-    <EspanaTarjetaSanitariaIndividualInput label="TSI" bind:value={tsi} />
+<Field
+  label="Tarjeta Sanitaria Individual"
+  description="Formato variable por CCAA"
+>
+  <EspanaTarjetaSanitariaIndividualInput
+    label="TSI"
+    bind:value={tsi}
+  />
 </Field>
 ```
 
 ### 5. With paired view for confirm screens
 
 ```svelte
-<EspanaTarjetaSanitariaIndividualInput label="TSI" bind:value={tsi} />
-<p>Confirmación: <EspanaTarjetaSanitariaIndividualView label="TSI" value={tsi} /></p>
+<EspanaTarjetaSanitariaIndividualInput
+  label="TSI"
+  bind:value={tsi}
+/>
+<p>
+  Confirmación: <EspanaTarjetaSanitariaIndividualView
+    label="TSI"
+    value={tsi}
+  />
+</p>
 ```
 
 ## Accessibility

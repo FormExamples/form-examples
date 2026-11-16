@@ -7,9 +7,17 @@ A headless paired start/end date range control. It renders a `<fieldset aria-lab
 DateRange renders:
 
 ```html
-<fieldset aria-label={label}>
-  <input type="date" aria-label={startLabel} bind:value={start} />
-  <input type="date" aria-label={endLabel} bind:value={end} />
+<fieldset aria-label="{label}">
+  <input
+    type="date"
+    aria-label="{startLabel}"
+    bind:value="{start}"
+  />
+  <input
+    type="date"
+    aria-label="{endLabel}"
+    bind:value="{end}"
+  />
 </fieldset>
 ```
 
@@ -38,92 +46,92 @@ Provide three labels: `label` (group), `startLabel`, `endLabel`. Bind `start` an
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `class` | `string` | `""` | CSS class name appended to the base class. |
-| `label` | `string` | required | Group `aria-label` on the `<fieldset>`. |
-| `startLabel` | `string` | required | `aria-label` for the start input. |
-| `endLabel` | `string` | required | `aria-label` for the end input. |
-| `start` | `string` | `""` (bindable) | Start date (YYYY-MM-DD). |
-| `end` | `string` | `""` (bindable) | End date (YYYY-MM-DD). |
-| `...restProps` | `unknown` | — | Additional attributes spread onto the `<fieldset>`. |
+| Prop           | Type      | Default         | Description                                         |
+| -------------- | --------- | --------------- | --------------------------------------------------- |
+| `class`        | `string`  | `""`            | CSS class name appended to the base class.          |
+| `label`        | `string`  | required        | Group `aria-label` on the `<fieldset>`.             |
+| `startLabel`   | `string`  | required        | `aria-label` for the start input.                   |
+| `endLabel`     | `string`  | required        | `aria-label` for the end input.                     |
+| `start`        | `string`  | `""` (bindable) | Start date (YYYY-MM-DD).                            |
+| `end`          | `string`  | `""` (bindable) | End date (YYYY-MM-DD).                              |
+| `...restProps` | `unknown` | —               | Additional attributes spread onto the `<fieldset>`. |
 
 ## Usage
 
 ```svelte
 <script lang="ts">
-    import DateRange from "./DateRange.svelte";
+  import DateRange from "./DateRange.svelte";
 
-    let start = $state("");
-    let end = $state("");
+  let start = $state("");
+  let end = $state("");
 </script>
 
 <DateRange
-    label="Trip dates"
-    startLabel="Departure"
-    endLabel="Return"
-    bind:start
-    bind:end
+  label="Trip dates"
+  startLabel="Departure"
+  endLabel="Return"
+  bind:start
+  bind:end
 />
 ```
 
 ```svelte
 <script lang="ts">
-    import DateRange from "./DateRange.svelte";
+  import DateRange from "./DateRange.svelte";
 
-    let start = $state("");
-    let end = $state("");
+  let start = $state("");
+  let end = $state("");
 </script>
 
 <DateRange
-    label="Project timeline"
-    startLabel="Start date"
-    endLabel="End date"
-    bind:start
-    bind:end
+  label="Project timeline"
+  startLabel="Start date"
+  endLabel="End date"
+  bind:start
+  bind:end
 />
 <p>From {start} to {end}</p>
 ```
 
 ```svelte
 <script lang="ts">
-    import DateRange from "./DateRange.svelte";
+  import DateRange from "./DateRange.svelte";
 
-    let start = $state("2025-01-01");
-    let end = $state("2025-01-31");
+  let start = $state("2025-01-01");
+  let end = $state("2025-01-31");
 </script>
 
 <DateRange
-    label="January"
-    startLabel="Start"
-    endLabel="End"
-    bind:start
-    bind:end
+  label="January"
+  startLabel="Start"
+  endLabel="End"
+  bind:start
+  bind:end
 />
 ```
 
 ```svelte
 <script lang="ts">
-    import DateRange from "./DateRange.svelte";
+  import DateRange from "./DateRange.svelte";
 
-    let start = $state("");
-    let end = $state("");
+  let start = $state("");
+  let end = $state("");
 
-    function submit(e: SubmitEvent) {
-        e.preventDefault();
-        console.log({ start, end });
-    }
+  function submit(e: SubmitEvent) {
+    e.preventDefault();
+    console.log({ start, end });
+  }
 </script>
 
 <form onsubmit={submit}>
-    <DateRange
-        label="Booking window"
-        startLabel="Check-in"
-        endLabel="Check-out"
-        bind:start
-        bind:end
-    />
-    <button type="submit">Search</button>
+  <DateRange
+    label="Booking window"
+    startLabel="Check-in"
+    endLabel="Check-out"
+    bind:start
+    bind:end
+  />
+  <button type="submit">Search</button>
 </form>
 ```
 

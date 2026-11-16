@@ -38,8 +38,8 @@
     //   </AlertDialog>
     //
     // Keyboard:
-    //   - Escape: Consumer must implement via onkeydown to close the dialog
-    //   - Tab: Consumer should implement focus trapping within the dialog
+    //   - Escape: closes the dialog (showModal(): the browser fires cancel; the component sets open to false)
+    //   - Tab: stays inside the dialog (the browser traps it while the dialog is modal)
     //
     // Accessibility:
     //   - role="alertdialog" signals critical content requiring acknowledgment
@@ -55,7 +55,6 @@
     //
     // Claude rules:
     //   - Headless: no CSS, no styles — consumer provides all styling
-    //   - Consumer is responsible for focus trapping and Escape key handling
     //   - The open prop must use $bindable() for two-way binding
     //   - Do not use heading elements; use <p><strong> for the title
     //   - Distinct from Dialog: use AlertDialog only for critical messages
@@ -65,6 +64,7 @@
     //   - WAI-ARIA Alert and Message Dialogs Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/
 
     import type { Snippet } from "svelte";
+    import { modalDialog } from "../Dialog/modal.js";
 
     let {
         class: className = "",
@@ -95,7 +95,12 @@
 {#if open}
     <dialog
         class={`alert-dialog ${className}`}
-        open
+        use:modalDialog={true}
+        oncancel={(event) => {
+            event.preventDefault();
+            open = false;
+        }}
+        onclose={() => (open = false)}
         role="alertdialog"
         aria-labelledby={titleId}
         aria-describedby={description ? descriptionId : undefined}

@@ -43,14 +43,14 @@ Place `MenuItem` elements inside a `Menu` (or another `role="menu"` container). 
 
 ```svelte
 <script lang="ts">
-    import Menu from "../Menu/Menu.svelte";
-    import MenuItem from "./MenuItem.svelte";
+  import Menu from "../Menu/Menu.svelte";
+  import MenuItem from "./MenuItem.svelte";
 </script>
 
 <Menu label="File">
-    <MenuItem onclick={() => console.log("New")}>New File</MenuItem>
-    <MenuItem onclick={() => console.log("Open")}>Open File</MenuItem>
-    <MenuItem onclick={() => console.log("Save")}>Save</MenuItem>
+  <MenuItem onclick={() => console.log("New")}>New File</MenuItem>
+  <MenuItem onclick={() => console.log("Open")}>Open File</MenuItem>
+  <MenuItem onclick={() => console.log("Save")}>Save</MenuItem>
 </Menu>
 ```
 
@@ -60,26 +60,26 @@ The parent `Menu` handles ArrowDown/ArrowUp (wrapping) and Home/End.
 
 ```svelte
 <script lang="ts">
-    import Menu from "../Menu/Menu.svelte";
-    import MenuItem from "./MenuItem.svelte";
+  import Menu from "../Menu/Menu.svelte";
+  import MenuItem from "./MenuItem.svelte";
 
-    function activate() {
-        console.log("activated");
-    }
+  function activate() {
+    console.log("activated");
+  }
 </script>
 
 <Menu label="Actions">
-    <MenuItem
-        onclick={activate}
-        onkeydown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                activate();
-            }
-        }}
-    >
-        Run
-    </MenuItem>
+  <MenuItem
+    onclick={activate}
+    onkeydown={(e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        activate();
+      }
+    }}
+  >
+    Run
+  </MenuItem>
 </Menu>
 ```
 
@@ -87,14 +87,14 @@ The parent `Menu` handles ArrowDown/ArrowUp (wrapping) and Home/End.
 
 ```svelte
 <script lang="ts">
-    import Menu from "../Menu/Menu.svelte";
-    import MenuItem from "./MenuItem.svelte";
+  import Menu from "../Menu/Menu.svelte";
+  import MenuItem from "./MenuItem.svelte";
 </script>
 
 <Menu label="Edit">
-    <MenuItem>Undo</MenuItem>
-    <MenuItem aria-disabled="true">Redo</MenuItem>
-    <MenuItem>Cut</MenuItem>
+  <MenuItem>Undo</MenuItem>
+  <MenuItem aria-disabled="true">Redo</MenuItem>
+  <MenuItem>Cut</MenuItem>
 </Menu>
 ```
 
@@ -102,19 +102,19 @@ The parent `Menu` handles ArrowDown/ArrowUp (wrapping) and Home/End.
 
 ```svelte
 <script lang="ts">
-    import Menu from "../Menu/Menu.svelte";
-    import MenuItem from "./MenuItem.svelte";
-    let submenuOpen = $state(false);
+  import Menu from "../Menu/Menu.svelte";
+  import MenuItem from "./MenuItem.svelte";
+  let submenuOpen = $state(false);
 </script>
 
 <Menu label="File">
-    <MenuItem
-        aria-haspopup="true"
-        aria-expanded={submenuOpen}
-        onclick={() => (submenuOpen = !submenuOpen)}
-    >
-        Recent Files
-    </MenuItem>
+  <MenuItem
+    aria-haspopup="true"
+    aria-expanded={submenuOpen}
+    onclick={() => (submenuOpen = !submenuOpen)}
+  >
+    Recent Files
+  </MenuItem>
 </Menu>
 ```
 
@@ -122,19 +122,19 @@ The parent `Menu` handles ArrowDown/ArrowUp (wrapping) and Home/End.
 
 ```svelte
 <script lang="ts">
-    import Menu from "../Menu/Menu.svelte";
-    import MenuItem from "./MenuItem.svelte";
+  import Menu from "../Menu/Menu.svelte";
+  import MenuItem from "./MenuItem.svelte";
 </script>
 
 <Menu label="Edit">
-    <MenuItem>
-        <span>Copy</span>
-        <kbd>Cmd+C</kbd>
-    </MenuItem>
-    <MenuItem>
-        <span>Paste</span>
-        <kbd>Cmd+V</kbd>
-    </MenuItem>
+  <MenuItem>
+    <span>Copy</span>
+    <kbd>Cmd+C</kbd>
+  </MenuItem>
+  <MenuItem>
+    <span>Paste</span>
+    <kbd>Cmd+V</kbd>
+  </MenuItem>
 </Menu>
 ```
 

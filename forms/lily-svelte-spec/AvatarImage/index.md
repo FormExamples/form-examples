@@ -40,12 +40,15 @@ Import `AvatarImage` from `./AvatarImage.svelte`. Always pass both `src` and `al
 
 ```svelte
 <script lang="ts">
-  import Avatar from '../Avatar/Avatar.svelte';
-  import AvatarImage from './AvatarImage.svelte';
+  import Avatar from "../Avatar/Avatar.svelte";
+  import AvatarImage from "./AvatarImage.svelte";
 </script>
 
 <Avatar alt="Jane Doe">
-  <AvatarImage src="/photos/jane.jpg" alt="Jane Doe" />
+  <AvatarImage
+    src="/photos/jane.jpg"
+    alt="Jane Doe"
+  />
 </Avatar>
 ```
 
@@ -53,12 +56,17 @@ Import `AvatarImage` from `./AvatarImage.svelte`. Always pass both `src` and `al
 
 ```svelte
 <script lang="ts">
-  import Avatar from '../Avatar/Avatar.svelte';
-  import AvatarImage from './AvatarImage.svelte';
+  import Avatar from "../Avatar/Avatar.svelte";
+  import AvatarImage from "./AvatarImage.svelte";
 </script>
 
 <Avatar alt="Ada Lovelace">
-  <AvatarImage src="/photos/ada.jpg" alt="Ada Lovelace" width="48" height="48" />
+  <AvatarImage
+    src="/photos/ada.jpg"
+    alt="Ada Lovelace"
+    width="48"
+    height="48"
+  />
 </Avatar>
 ```
 
@@ -66,12 +74,17 @@ Import `AvatarImage` from `./AvatarImage.svelte`. Always pass both `src` and `al
 
 ```svelte
 <script lang="ts">
-  import Avatar from '../Avatar/Avatar.svelte';
-  import AvatarImage from './AvatarImage.svelte';
+  import Avatar from "../Avatar/Avatar.svelte";
+  import AvatarImage from "./AvatarImage.svelte";
 </script>
 
 <Avatar alt="Team member">
-  <AvatarImage src="/team/member.jpg" alt="Team member" loading="lazy" decoding="async" />
+  <AvatarImage
+    src="/team/member.jpg"
+    alt="Team member"
+    loading="lazy"
+    decoding="async"
+  />
 </Avatar>
 ```
 
@@ -79,13 +92,16 @@ Import `AvatarImage` from `./AvatarImage.svelte`. Always pass both `src` and `al
 
 ```svelte
 <script lang="ts">
-  import Avatar from '../Avatar/Avatar.svelte';
-  import AvatarImage from './AvatarImage.svelte';
-  import AvatarText from '../AvatarText/AvatarText.svelte';
+  import Avatar from "../Avatar/Avatar.svelte";
+  import AvatarImage from "./AvatarImage.svelte";
+  import AvatarText from "../AvatarText/AvatarText.svelte";
 </script>
 
 <Avatar alt="Jane Doe">
-  <AvatarImage src="/photos/jane.jpg" alt="Jane Doe" />
+  <AvatarImage
+    src="/photos/jane.jpg"
+    alt="Jane Doe"
+  />
   <AvatarText>JD</AvatarText>
 </Avatar>
 ```
@@ -94,16 +110,19 @@ Import `AvatarImage` from `./AvatarImage.svelte`. Always pass both `src` and `al
 
 ```svelte
 <script lang="ts">
-  import Avatar from '../Avatar/Avatar.svelte';
-  import AvatarImage from './AvatarImage.svelte';
+  import Avatar from "../Avatar/Avatar.svelte";
+  import AvatarImage from "./AvatarImage.svelte";
 
-  let src = $state('/photos/jane.jpg');
+  let src = $state("/photos/jane.jpg");
 </script>
 
 <Avatar alt="Jane Doe">
-  <AvatarImage {src} alt="Jane Doe" />
+  <AvatarImage
+    {src}
+    alt="Jane Doe"
+  />
 </Avatar>
-<button onclick={() => (src = '/photos/jane-alt.jpg')}>Swap photo</button>
+<button onclick={() => (src = "/photos/jane-alt.jpg")}>Swap photo</button>
 ```
 
 ## Accessibility

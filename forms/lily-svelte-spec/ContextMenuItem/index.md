@@ -30,56 +30,65 @@ Place inside `ContextMenu`. Add click handlers via `restProps` (`onclick`) to im
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `class` | `string` | `""` | CSS class name appended to the base class. |
-| `children` | `Snippet` | required | Menu item content. |
-| `...restProps` | `unknown` | — | Additional attributes spread onto the `<div>`. |
+| Prop           | Type      | Default  | Description                                    |
+| -------------- | --------- | -------- | ---------------------------------------------- |
+| `class`        | `string`  | `""`     | CSS class name appended to the base class.     |
+| `children`     | `Snippet` | required | Menu item content.                             |
+| `...restProps` | `unknown` | —        | Additional attributes spread onto the `<div>`. |
 
 ## Usage
 
 ```svelte
 <script lang="ts">
-    import ContextMenu from "../ContextMenu/ContextMenu.svelte";
-    import ContextMenuItem from "./ContextMenuItem.svelte";
+  import ContextMenu from "../ContextMenu/ContextMenu.svelte";
+  import ContextMenuItem from "./ContextMenuItem.svelte";
 
-    let open = $state(false);
+  let open = $state(false);
 </script>
 
-<ContextMenu label="Actions" bind:open>
-    <ContextMenuItem>Cut</ContextMenuItem>
-    <ContextMenuItem>Copy</ContextMenuItem>
-    <ContextMenuItem>Paste</ContextMenuItem>
+<ContextMenu
+  label="Actions"
+  bind:open
+>
+  <ContextMenuItem>Cut</ContextMenuItem>
+  <ContextMenuItem>Copy</ContextMenuItem>
+  <ContextMenuItem>Paste</ContextMenuItem>
 </ContextMenu>
 ```
 
 ```svelte
 <script lang="ts">
-    import ContextMenu from "../ContextMenu/ContextMenu.svelte";
-    import ContextMenuItem from "./ContextMenuItem.svelte";
+  import ContextMenu from "../ContextMenu/ContextMenu.svelte";
+  import ContextMenuItem from "./ContextMenuItem.svelte";
 
-    let open = $state(false);
+  let open = $state(false);
 </script>
 
-<ContextMenu label="Edit" bind:open>
-    <ContextMenuItem onclick={() => console.log("Undo")}>Undo</ContextMenuItem>
-    <ContextMenuItem onclick={() => console.log("Redo")}>Redo</ContextMenuItem>
-    <ContextMenuItem aria-disabled="true">Delete</ContextMenuItem>
+<ContextMenu
+  label="Edit"
+  bind:open
+>
+  <ContextMenuItem onclick={() => console.log("Undo")}>Undo</ContextMenuItem>
+  <ContextMenuItem onclick={() => console.log("Redo")}>Redo</ContextMenuItem>
+  <ContextMenuItem aria-disabled="true">Delete</ContextMenuItem>
 </ContextMenu>
 ```
 
 ```svelte
 <script lang="ts">
-    import ContextMenu from "../ContextMenu/ContextMenu.svelte";
-    import ContextMenuItem from "./ContextMenuItem.svelte";
+  import ContextMenu from "../ContextMenu/ContextMenu.svelte";
+  import ContextMenuItem from "./ContextMenuItem.svelte";
 
-    let open = $state(false);
+  let open = $state(false);
 </script>
 
-<ContextMenu label="Clipboard" bind:open>
-    <ContextMenuItem aria-keyshortcuts="Control+X">Cut</ContextMenuItem>
-    <ContextMenuItem aria-keyshortcuts="Control+C">Copy</ContextMenuItem>
-    <ContextMenuItem aria-keyshortcuts="Control+V">Paste</ContextMenuItem>
+<ContextMenu
+  label="Clipboard"
+  bind:open
+>
+  <ContextMenuItem aria-keyshortcuts="Control+X">Cut</ContextMenuItem>
+  <ContextMenuItem aria-keyshortcuts="Control+C">Copy</ContextMenuItem>
+  <ContextMenuItem aria-keyshortcuts="Control+V">Paste</ContextMenuItem>
 </ContextMenu>
 ```
 

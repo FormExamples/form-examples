@@ -9,7 +9,7 @@
     //   class — string, optional. CSS class appended to the base class.
     //   status — "waiting" | "in-progress" | "finished" | "error",
     //            default "waiting". Renders as data-status.
-    //   current — boolean, default false. When true, renders aria-current="step".
+    //   current — boolean, default false. When true, renders data-current.
     //   label — string, optional. aria-label override.
     //   children — Snippet, required. Step content (typically title and description).
     //   ...restProps — additional HTML attributes spread onto the <li>.
@@ -18,7 +18,7 @@
     //   <StepListItem status="finished">Cart</StepListItem>
     //
     // Accessibility:
-    //   - aria-current="step" when current=true.
+    //   - data-current when current=true.
     //   - aria-label optional override.
     //
     // Internationalization:
@@ -60,7 +60,7 @@
 <li
     class={`step-list-item ${className}`}
     data-status={status}
-    aria-current={current ? "step" : undefined}
+    data-current={current ? "" : undefined}
     aria-label={label}
     {...restProps}
 >

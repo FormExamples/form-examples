@@ -14,38 +14,46 @@ function textSnippet(text: string) {
 
 describe("Button", () => {
     test("renders as a button", () => {
-        render(Subject, { props: {
-            children: textSnippet("Click me"),
-        }});
+        render(Subject, {
+            props: {
+                children: textSnippet("Click me"),
+            },
+        });
 
         const button: HTMLElement = screen.getByRole("button", { name: "Click me" });
         expect(button).toBeTruthy();
     });
 
     test("defaults to type button", () => {
-        render(Subject, { props: {
-            children: textSnippet("Click"),
-        }});
+        render(Subject, {
+            props: {
+                children: textSnippet("Click"),
+            },
+        });
 
         const button: HTMLElement = screen.getByRole("button");
         expect(button.getAttribute("type")).toBe("button");
     });
 
     test("accepts submit type", () => {
-        render(Subject, { props: {
-            type: "submit",
-            children: textSnippet("Submit"),
-        }});
+        render(Subject, {
+            props: {
+                type: "submit",
+                children: textSnippet("Submit"),
+            },
+        });
 
         const button: HTMLElement = screen.getByRole("button");
         expect(button.getAttribute("type")).toBe("submit");
     });
 
     test("can be disabled", () => {
-        render(Subject, { props: {
-            disabled: true,
-            children: textSnippet("Disabled"),
-        }});
+        render(Subject, {
+            props: {
+                disabled: true,
+                children: textSnippet("Disabled"),
+            },
+        });
 
         const button: HTMLButtonElement = screen.getByRole("button") as HTMLButtonElement;
         expect(button.disabled).toBe(true);
@@ -54,10 +62,12 @@ describe("Button", () => {
     test("handles click events", async () => {
         const user: UserEvent = userEvent.setup();
         const handleClick = vi.fn();
-        render(Subject, { props: {
-            onclick: handleClick,
-            children: textSnippet("Click"),
-        }});
+        render(Subject, {
+            props: {
+                onclick: handleClick,
+                children: textSnippet("Click"),
+            },
+        });
 
         const button: HTMLElement = screen.getByRole("button");
         await user.click(button);
@@ -67,11 +77,13 @@ describe("Button", () => {
     test("does not fire click when disabled", async () => {
         const user: UserEvent = userEvent.setup();
         const handleClick = vi.fn();
-        render(Subject, { props: {
-            disabled: true,
-            onclick: handleClick,
-            children: textSnippet("Disabled"),
-        }});
+        render(Subject, {
+            props: {
+                disabled: true,
+                onclick: handleClick,
+                children: textSnippet("Disabled"),
+            },
+        });
 
         const button: HTMLElement = screen.getByRole("button");
         await user.click(button);
@@ -79,29 +91,35 @@ describe("Button", () => {
     });
 
     test("supports aria-pressed for toggle buttons", () => {
-        render(Subject, { props: {
-            pressed: true,
-            children: textSnippet("Toggle"),
-        }});
+        render(Subject, {
+            props: {
+                pressed: true,
+                children: textSnippet("Toggle"),
+            },
+        });
 
         const button: HTMLElement = screen.getByRole("button");
         expect(button.getAttribute("aria-pressed")).toBe("true");
     });
 
     test("does not have aria-pressed when not a toggle button", () => {
-        render(Subject, { props: {
-            children: textSnippet("Normal"),
-        }});
+        render(Subject, {
+            props: {
+                children: textSnippet("Normal"),
+            },
+        });
 
         const button: HTMLElement = screen.getByRole("button");
         expect(button.getAttribute("aria-pressed")).toBeNull();
     });
 
     test("applies aria-label when label prop is provided", () => {
-        render(Subject, { props: {
-            label: "Close dialog",
-            children: textSnippet("X"),
-        }});
+        render(Subject, {
+            props: {
+                label: "Close dialog",
+                children: textSnippet("X"),
+            },
+        });
 
         const button: HTMLElement = screen.getByRole("button", { name: "Close dialog" });
         expect(button).toBeTruthy();
@@ -109,9 +127,11 @@ describe("Button", () => {
 
     test("is focusable via keyboard", async () => {
         const user: UserEvent = userEvent.setup();
-        render(Subject, { props: {
-            children: textSnippet("Focus me"),
-        }});
+        render(Subject, {
+            props: {
+                children: textSnippet("Focus me"),
+            },
+        });
 
         const button: HTMLElement = screen.getByRole("button");
         await user.tab();
@@ -121,10 +141,12 @@ describe("Button", () => {
     test("activates via Enter key", async () => {
         const user: UserEvent = userEvent.setup();
         const handleClick = vi.fn();
-        render(Subject, { props: {
-            onclick: handleClick,
-            children: textSnippet("Press Enter"),
-        }});
+        render(Subject, {
+            props: {
+                onclick: handleClick,
+                children: textSnippet("Press Enter"),
+            },
+        });
 
         const button: HTMLElement = screen.getByRole("button");
         await user.tab();
@@ -135,10 +157,12 @@ describe("Button", () => {
     test("activates via Space key", async () => {
         const user: UserEvent = userEvent.setup();
         const handleClick = vi.fn();
-        render(Subject, { props: {
-            onclick: handleClick,
-            children: textSnippet("Press Space"),
-        }});
+        render(Subject, {
+            props: {
+                onclick: handleClick,
+                children: textSnippet("Press Space"),
+            },
+        });
 
         const button: HTMLElement = screen.getByRole("button");
         await user.tab();
@@ -147,13 +171,31 @@ describe("Button", () => {
     });
 
     test("passes through additional HTML attributes", () => {
-        render(Subject, { props: {
-            "data-testid": "my-btn",
-            id: "btn-1",
-            children: textSnippet("Custom"),
-        }});
+        render(Subject, {
+            props: {
+                "data-testid": "my-btn",
+                id: "btn-1",
+                children: textSnippet("Custom"),
+            },
+        });
 
         const button: HTMLElement = screen.getByTestId("my-btn");
         expect(button.getAttribute("id")).toBe("btn-1");
+    });
+
+    test("a pending button stays enabled and focusable, carrying aria-busy and aria-disabled", async () => {
+        render(Subject, {
+            props: {
+                "aria-busy": "true",
+                "aria-disabled": "true",
+                children: textSnippet("Saving"),
+            },
+        });
+        const button = screen.getByRole("button") as HTMLButtonElement;
+        expect(button.disabled).toBe(false);
+        expect(button.getAttribute("aria-busy")).toBe("true");
+        expect(button.getAttribute("aria-disabled")).toBe("true");
+        button.focus();
+        expect(document.activeElement).toBe(button);
     });
 });

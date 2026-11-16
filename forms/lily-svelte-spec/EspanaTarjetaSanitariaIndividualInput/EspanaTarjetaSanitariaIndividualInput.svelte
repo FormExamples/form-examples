@@ -43,6 +43,8 @@
     // References:
     //   - Ministerio de Sanidad: https://www.sanidad.gob.es/
 
+    import { warnMissingName } from "../dev-warning";
+
     let {
         class: className = "",
         label,
@@ -62,6 +64,15 @@
         /** Additional HTML attributes */
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName(
+            "EspanaTarjetaSanitariaIndividualInput",
+            label,
+            restProps["aria-label"],
+            restProps["aria-labelledby"],
+        ),
+    );
 </script>
 
 <!-- EspanaTarjetaSanitariaIndividualInput.svelte -->
@@ -70,6 +81,7 @@
     type="text"
     aria-label={label}
     autocomplete="off"
+    spellcheck="false"
     bind:value
     {required}
     {disabled}

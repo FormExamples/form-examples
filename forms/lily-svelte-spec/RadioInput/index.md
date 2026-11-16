@@ -51,24 +51,41 @@ import RadioInput from './RadioInput.svelte';
 
 ```svelte
 <script lang="ts">
-  import RadioInput from './RadioInput.svelte';
+  import RadioInput from "./RadioInput.svelte";
 </script>
 
-<RadioInput label="Option A" name="choice" value="a" />
+<RadioInput
+  label="Option A"
+  name="choice"
+  value="a"
+/>
 ```
 
 ### Group of radios inside a RadioGroup
 
 ```svelte
 <script lang="ts">
-  import RadioGroup from '../RadioGroup/RadioGroup.svelte';
-  import RadioInput from './RadioInput.svelte';
+  import RadioGroup from "../RadioGroup/RadioGroup.svelte";
+  import RadioInput from "./RadioInput.svelte";
 </script>
 
 <RadioGroup label="Size">
-  <RadioInput label="Small" name="size" value="small" checked />
-  <RadioInput label="Medium" name="size" value="medium" />
-  <RadioInput label="Large" name="size" value="large" />
+  <RadioInput
+    label="Small"
+    name="size"
+    value="small"
+    checked
+  />
+  <RadioInput
+    label="Medium"
+    name="size"
+    value="medium"
+  />
+  <RadioInput
+    label="Large"
+    name="size"
+    value="large"
+  />
 </RadioGroup>
 ```
 
@@ -76,16 +93,31 @@ import RadioInput from './RadioInput.svelte';
 
 ```svelte
 <script lang="ts">
-  import RadioGroup from '../RadioGroup/RadioGroup.svelte';
-  import RadioInput from './RadioInput.svelte';
+  import RadioGroup from "../RadioGroup/RadioGroup.svelte";
+  import RadioInput from "./RadioInput.svelte";
 
   let shipping = $state<"standard" | "express" | "overnight">("standard");
 </script>
 
 <RadioGroup label="Shipping">
-  <RadioInput label="Standard" name="shipping" value="standard" bind:group={shipping} />
-  <RadioInput label="Express" name="shipping" value="express" bind:group={shipping} />
-  <RadioInput label="Overnight" name="shipping" value="overnight" bind:group={shipping} />
+  <RadioInput
+    label="Standard"
+    name="shipping"
+    value="standard"
+    bind:group={shipping}
+  />
+  <RadioInput
+    label="Express"
+    name="shipping"
+    value="express"
+    bind:group={shipping}
+  />
+  <RadioInput
+    label="Overnight"
+    name="shipping"
+    value="overnight"
+    bind:group={shipping}
+  />
 </RadioGroup>
 ```
 
@@ -93,18 +125,26 @@ import RadioInput from './RadioInput.svelte';
 
 ```svelte
 <script lang="ts">
-  import RadioGroup from '../RadioGroup/RadioGroup.svelte';
-  import RadioInput from './RadioInput.svelte';
+  import RadioGroup from "../RadioGroup/RadioGroup.svelte";
+  import RadioInput from "./RadioInput.svelte";
 </script>
 
 <RadioGroup label="Plan">
   <div class="card">
-    <RadioInput label="Free" name="plan" value="free" />
+    <RadioInput
+      label="Free"
+      name="plan"
+      value="free"
+    />
     <h3>Free</h3>
     <p>Basic features</p>
   </div>
   <div class="card">
-    <RadioInput label="Pro" name="plan" value="pro" />
+    <RadioInput
+      label="Pro"
+      name="plan"
+      value="pro"
+    />
     <h3>Pro</h3>
     <p>All features</p>
   </div>
@@ -114,7 +154,12 @@ import RadioInput from './RadioInput.svelte';
 ### Disabled option
 
 ```svelte
-<RadioInput label="Region EU" name="region" value="eu" disabled />
+<RadioInput
+  label="Region EU"
+  name="region"
+  value="eu"
+  disabled
+/>
 ```
 
 ## Accessibility

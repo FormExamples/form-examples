@@ -1,10 +1,44 @@
 <script lang="ts">
     // ScrollerBase component
     //
-    // A low-level scroll-position tracking primitive for scrollytelling.
-    // Direct children are treated as steps. IntersectionObserver reports
-    // the active step index (via onIndexChange callback), and a scroll
-    // listener computes overall progress (via onProgressChange).
+    // A low-level scroll-position tracking primitive for scrollytelling. Direct children are treated as
+    // steps: an IntersectionObserver reports the active step index through `onIndexChange`, and a window
+    // scroll listener computes overall progress (0 to 1) for `onProgressChange`. Scroller is built on it.
+    //
+    // Props:
+    //   className — string, optional. CSS class name.
+    //   label — string, optional. Accessible name, rendered as aria-label on the root.
+    //   offset — number, default 0.5. Where in the viewport (0 top, 1 bottom) a step becomes active.
+    //   onIndexChange — (index: number) => void, optional. Called with the index of the step that crosses the offset line.
+    //   onProgressChange — (progress: number) => void, optional. Called on scroll with a value from 0 to 1; also called once on mount.
+    //   children — Snippet, required. The content.
+    //   ...restProps — additional HTML attributes spread onto the root <div>.
+    //
+    // Syntax:
+    //   <ScrollerBase onIndexChange={…} onProgressChange={…}>…steps…</ScrollerBase>
+    //
+    // Examples:
+    //   <ScrollerBase offset={0.6} onIndexChange={(i) => (active = i)}><section>One</section><section>Two</section></ScrollerBase>
+    //
+    // Keyboard:
+    //   - None -- not interactive; any interactive children handle their own keys; the page scrolls with the usual keys
+    //
+    // Accessibility:
+    //   - With a label the root is role="group", because a plain <div> cannot be named
+    //   - Every step is an ordinary block, so the content reads in document order without scrolling effects
+    //
+    // Internationalization:
+    //   - No hardcoded user-facing strings
+    //
+    // Claude rules:
+    //   - Headless: no CSS, no styles -- consumer provides all styling
+    //   - Observers and the passive scroll listener are removed on cleanup
+    //   - Without IntersectionObserver no callbacks fire
+    //   - Progress is measured from the element's rect against window.innerHeight
+    //
+    // References:
+    //   - MDN IntersectionObserver: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+    //   - Reuters Graphics Scroller (the inspiration): https://github.com/reuters-graphics/graphics-components
 
     import type { Snippet } from "svelte";
 
@@ -46,7 +80,7 @@
             {
                 rootMargin: `-${triggerFromTop} 0px -${(100 - offset * 100).toFixed(2)}% 0px`,
                 threshold: 0,
-            }
+            },
         );
         for (const step of steps) observer.observe(step);
 
@@ -72,6 +106,7 @@
 <div
     bind:this={scrollerEl}
     class={`scroller-base ${className}`}
+    role={label ? "group" : undefined}
     aria-label={label}
     {...restProps}
 >

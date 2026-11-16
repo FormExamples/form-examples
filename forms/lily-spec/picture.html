@@ -1,0 +1,14 @@
+<!-- picture.html -->
+<!-- Picture component -->
+<!--
+  Description: a responsive image wrapper that lets the browser choose among several sources, using the native picture element.
+  HTML tag: <picture>
+  CSS class: picture
+  Keyboard: none; not interactive, and any interactive children handle their own keys
+  Contract: sources and one img as children; the img's alt, width and height are the consumer's
+-->
+
+<picture class="picture">
+  <source srcset="wide.webp" media="(min-width: 800px)" type="image/webp">
+  <img src="small.jpg" alt="A lily in bloom" width="320" height="200">
+</picture>

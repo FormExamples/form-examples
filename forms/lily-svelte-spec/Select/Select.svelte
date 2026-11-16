@@ -58,6 +58,7 @@
     // References:
     //   - MDN select element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select
 
+    import { warnMissingName } from "../dev-warning";
     import type { Snippet } from "svelte";
 
     let {
@@ -81,6 +82,10 @@
         children: Snippet;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName("Select", label, restProps["aria-label"], restProps["aria-labelledby"]),
+    );
 </script>
 
 <!-- Select.svelte -->

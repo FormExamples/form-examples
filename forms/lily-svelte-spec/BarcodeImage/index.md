@@ -10,10 +10,13 @@ See [components/barcode-image/index.md](../../../components/barcode-image/index.
 
 ```svelte
 <script lang="ts">
-    import BarcodeImage from "./BarcodeImage.svelte";
+  import BarcodeImage from "./BarcodeImage.svelte";
 </script>
 
-<BarcodeImage src="/barcode-images/order-12345.svg" alt="Order number 12345" />
+<BarcodeImage
+  src="/barcode-images/order-12345.svg"
+  alt="Order number 12345"
+/>
 ```
 
 ## Files

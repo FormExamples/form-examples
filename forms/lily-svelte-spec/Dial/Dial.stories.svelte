@@ -1,15 +1,18 @@
-<script module lang="ts">
-  import { defineMeta } from '@storybook/addon-svelte-csf';
-  import Dial from './Dial.svelte';
+<script
+    module
+    lang="ts"
+>
+    import { defineMeta } from "@storybook/addon-svelte-csf";
+    import Dial from "./Dial.svelte";
 
-  const { Story } = defineMeta({
-    title: 'Headless/Dial',
-    component: Dial,
-  });
+    const { Story } = defineMeta({
+        title: "Headless/Dial",
+        component: Dial,
+    });
 </script>
 
 <Story
-  name="Default"
-  tags={['autodocs', '!dev']}
-  args={{'label':'Dial'}}
+    name="Default"
+    tags={["autodocs", "!dev"]}
+    args={{ label: "Dial" }}
 />

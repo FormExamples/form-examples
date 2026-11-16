@@ -7,7 +7,7 @@ describe("RomaniaCodNumericPersonalView", () => {
     test("renders with the correct class", () => {
         render(Subject, { props: { label: "Personal Numerical Code", value: "test-value" } });
 
-        const el = screen.getByLabelText("Personal Numerical Code");
+        const el = document.querySelector(".romania-cod-numeric-personal-view") as HTMLElement;
         expect(el).toBeTruthy();
         expect(el.getAttribute("class")).toContain("romania-cod-numeric-personal-view");
     });
@@ -15,14 +15,19 @@ describe("RomaniaCodNumericPersonalView", () => {
     test("renders the value as text content", () => {
         render(Subject, { props: { label: "Personal Numerical Code", value: "test-value" } });
 
-        const el = screen.getByLabelText("Personal Numerical Code");
-        expect(el.textContent).toBe("test-value");
+        const el = document.querySelector(".romania-cod-numeric-personal-view") as HTMLElement;
+        expect(
+            el.textContent?.replace(el.querySelector(".screen-reader-span")?.textContent ?? "", ""),
+        ).toBe("test-value");
     });
 
     test("has aria-label from the label prop", () => {
         render(Subject, { props: { label: "Personal Numerical Code" } });
 
-        const el = screen.getByLabelText("Personal Numerical Code");
-        expect(el.getAttribute("aria-label")).toBe("Personal Numerical Code");
+        const el = document.querySelector(".romania-cod-numeric-personal-view") as HTMLElement;
+        expect(el.querySelector(".screen-reader-span")?.textContent).toBe(
+            `${"Personal Numerical Code"} `,
+        );
+        expect(el.hasAttribute("aria-label")).toBe(false);
     });
 });

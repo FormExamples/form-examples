@@ -74,7 +74,10 @@
     aria-label={label}
     {...restProps}
 >
-    <section class="transfer-list-source" aria-label={sourceLabel}>
+    <section
+        class="transfer-list-source"
+        aria-label={sourceLabel}
+    >
         {@render source()}
     </section>
     {#if actions}
@@ -82,7 +85,10 @@
             {@render actions()}
         </div>
     {/if}
-    <section class="transfer-list-target" aria-label={targetLabel}>
+    <section
+        class="transfer-list-target"
+        aria-label={targetLabel}
+    >
         {@render target()}
     </section>
 </div>

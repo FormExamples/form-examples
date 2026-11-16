@@ -42,96 +42,110 @@ Bind `open` to consumer state, and toggle it from the trigger's `onmouseenter`/`
 
 ```svelte
 <script lang="ts">
-    import HoverCard from "./HoverCard.svelte";
-    let open = $state(false);
+  import HoverCard from "./HoverCard.svelte";
+  let open = $state(false);
 </script>
 
 <button
-    onmouseenter={() => (open = true)}
-    onmouseleave={() => (open = false)}
-    onfocus={() => (open = true)}
-    onblur={() => (open = false)}
-    aria-describedby="user-card"
->Hover me</button>
+  onmouseenter={() => (open = true)}
+  onmouseleave={() => (open = false)}
+  onfocus={() => (open = true)}
+  onblur={() => (open = false)}
+  aria-describedby="user-card">Hover me</button
+>
 
-<HoverCard id="user-card" label="User info" bind:open>
-    <p>Profile details here</p>
+<HoverCard
+  id="user-card"
+  label="User info"
+  bind:open
+>
+  <p>Profile details here</p>
 </HoverCard>
 ```
 
 ```svelte
 <script lang="ts">
-    import HoverCard from "./HoverCard.svelte";
-    let open = $state(false);
-    const user = { name: "Alex", role: "Admin" };
+  import HoverCard from "./HoverCard.svelte";
+  let open = $state(false);
+  const user = { name: "Alex", role: "Admin" };
 </script>
 
 <a
-    href="/users/alex"
-    onmouseenter={() => (open = true)}
-    onmouseleave={() => (open = false)}
->{user.name}</a>
+  href="/users/alex"
+  onmouseenter={() => (open = true)}
+  onmouseleave={() => (open = false)}>{user.name}</a
+>
 
-<HoverCard label={`Profile: ${user.name}`} bind:open>
-    <p>{user.name}</p>
-    <p>{user.role}</p>
+<HoverCard
+  label={`Profile: ${user.name}`}
+  bind:open
+>
+  <p>{user.name}</p>
+  <p>{user.role}</p>
 </HoverCard>
 ```
 
 ```svelte
 <script lang="ts">
-    import HoverCard from "./HoverCard.svelte";
-    let open = $state(false);
-    function onKey(e: KeyboardEvent) {
-        if (e.key === "Escape") open = false;
-    }
+  import HoverCard from "./HoverCard.svelte";
+  let open = $state(false);
+  function onKey(e: KeyboardEvent) {
+    if (e.key === "Escape") open = false;
+  }
 </script>
 
 <svelte:window on:keydown={onKey} />
 <button
-    onfocus={() => (open = true)}
-    onblur={() => (open = false)}
->Help</button>
-<HoverCard label="Help" bind:open>
-    <p>Press Escape to dismiss.</p>
+  onfocus={() => (open = true)}
+  onblur={() => (open = false)}>Help</button
+>
+<HoverCard
+  label="Help"
+  bind:open
+>
+  <p>Press Escape to dismiss.</p>
 </HoverCard>
 ```
 
 ```svelte
 <script lang="ts">
-    import HoverCard from "./HoverCard.svelte";
-    let open = $state(false);
+  import HoverCard from "./HoverCard.svelte";
+  let open = $state(false);
 </script>
 
 <HoverCard
-    label="Terms glossary"
-    bind:open
-    class="glossary-card"
-    data-testid="glossary"
+  label="Terms glossary"
+  bind:open
+  class="glossary-card"
+  data-testid="glossary"
 >
-    <dl>
-        <dt>API</dt><dd>Application Programming Interface</dd>
-    </dl>
+  <dl>
+    <dt>API</dt>
+    <dd>Application Programming Interface</dd>
+  </dl>
 </HoverCard>
 ```
 
 ```svelte
 <script lang="ts">
-    import HoverCard from "./HoverCard.svelte";
-    let openFor = $state<string | null>(null);
-    const items = ["A", "B", "C"];
+  import HoverCard from "./HoverCard.svelte";
+  let openFor = $state<string | null>(null);
+  const items = ["A", "B", "C"];
 </script>
 
 {#each items as item}
-    <button
-        onmouseenter={() => (openFor = item)}
-        onmouseleave={() => (openFor = null)}
-    >{item}</button>
-    {#if openFor === item}
-        <HoverCard label={`Info about ${item}`} open={true}>
-            <p>Details about {item}</p>
-        </HoverCard>
-    {/if}
+  <button
+    onmouseenter={() => (openFor = item)}
+    onmouseleave={() => (openFor = null)}>{item}</button
+  >
+  {#if openFor === item}
+    <HoverCard
+      label={`Info about ${item}`}
+      open={true}
+    >
+      <p>Details about {item}</p>
+    </HoverCard>
+  {/if}
 {/each}
 ```
 

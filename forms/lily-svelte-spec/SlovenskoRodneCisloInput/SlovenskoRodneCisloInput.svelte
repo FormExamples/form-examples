@@ -26,6 +26,8 @@
     // References:
     //   - https://en.wikipedia.org/wiki/National_identification_number#Slovakia
 
+    import { warnMissingName } from "../dev-warning";
+
     let {
         class: className = "",
         label,
@@ -40,6 +42,15 @@
         disabled?: boolean;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName(
+            "SlovenskoRodneCisloInput",
+            label,
+            restProps["aria-label"],
+            restProps["aria-labelledby"],
+        ),
+    );
 </script>
 
 <!-- SlovenskoRodneCisloInput.svelte -->
@@ -48,6 +59,7 @@
     type="text"
     aria-label={label}
     autocomplete="off"
+    spellcheck="false"
     bind:value
     {required}
     {disabled}

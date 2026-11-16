@@ -26,6 +26,7 @@
 
 <div
   class="coachmark"
+  popover="manual"
   role="dialog"
   aria-modal="false"
   aria-labelledby="coachmark-title-1"
@@ -42,6 +43,26 @@
   // `hidden` attribute. Pure vanilla JavaScript — no framework, no styling.
   (function () {
     "use strict";
+    // P16-T4: the popup is popover="manual" (top layer); open and close it with the Popover API, or with the
+    // hidden attribute where the API is missing (then the popover attribute is dropped, which does nothing there).
+    function setOpen(el, open) {
+      if (typeof el.showPopover !== "function") {
+        el.removeAttribute("popover");
+        el.hidden = !open;
+        return;
+      }
+      try {
+        if (open) el.showPopover();
+        else el.hidePopover();
+      } catch (e) {
+        // Already in that state: nothing to do.
+      }
+    }
+
+    document.querySelectorAll(".coachmark").forEach(function (el) {
+      if (typeof el.showPopover !== "function") setOpen(el, false);
+    });
+
 
     var coachmarks = document.querySelectorAll('div.coachmark');
 
@@ -52,7 +73,7 @@
       dismiss.addEventListener('click', function () {
         if (dismiss.disabled) return;
         // Hide the coachmark dialog.
-        coachmark.setAttribute('hidden', '');
+        setOpen(coachmark, false);
       });
     });
   })();

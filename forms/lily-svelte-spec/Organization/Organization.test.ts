@@ -4,7 +4,7 @@ import Organization from "./Organization.svelte";
 
 describe("Organization", () => {
     test("renders with content", () => {
-        render(Organization, { props: { label: "Test" } });
+        render(Organization, { props: { label: "Test" } as any });
         const el = screen.getByLabelText("Test");
         expect(el).toBeTruthy();
         expect(el.getAttribute("class")).toContain("organization");

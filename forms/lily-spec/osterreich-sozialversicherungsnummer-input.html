@@ -1,0 +1,20 @@
+<!-- osterreich-sozialversicherungsnummer-input.html -->
+<!-- OsterreichSozialversicherungsnummerInput component -->
+<!--
+  Description: an input for entering Austria's Sozialversicherungsnummer (SVNR)
+  HTML tag: <input>
+  CSS class: osterreich-sozialversicherungsnummer-input
+  Keyboard: Tab to focus, standard input keyboard interactions
+  Accessibility: Implicit input role, aria-label for accessible name
+  Format: Ten digits, displayed as NNNN DDMMYY. The first three digits are a serial number followed by a Modulus-11 check digit as the fourth digit; the remaining six digits encode date of birth (DDMMYY).
+  Usage:
+    <input class="osterreich-sozialversicherungsnummer-input" type="text" aria-label="Sozialversicherungsnummer (SVNR)" autocomplete="off">
+-->
+
+<input
+  class="osterreich-sozialversicherungsnummer-input"
+  type="text"
+  aria-label="Sozialversicherungsnummer (SVNR)"
+  autocomplete="off"
+  spellcheck="false"
+>

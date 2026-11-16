@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-106 tools.
+108 tools.
 
 - [`bin/axum-axa-0-10`](#axum-axa-0-10)
 - [`bin/axum-axa-0-11`](#axum-axa-0-11)
@@ -73,9 +73,11 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/svelte-helpers-chooser-rename`](#svelte-helpers-chooser-rename)
 - [`bin/svelte-helpers-picker-rename`](#svelte-helpers-picker-rename)
 - [`bin/svelte-kit-3-theme-url-fix.py`](#svelte-kit-3-theme-url-fixpy)
+- [`bin/svelte-lily-picker-bar-0-6`](#svelte-lily-picker-bar-0-6)
 - [`bin/svelte-lily-picker-defaults`](#svelte-lily-picker-defaults)
 - [`bin/svelte-lily-pnpm-migrate`](#svelte-lily-pnpm-migrate)
 - [`bin/svelte-lily-scope-rename`](#svelte-lily-scope-rename)
+- [`bin/svelte-lily-theme-picker-0-4`](#svelte-lily-theme-picker-0-4)
 - [`bin/svelte-lint-format-refactor`](#svelte-lint-format-refactor)
 - [`bin/svelte-locale-select-refactor`](#svelte-locale-select-refactor)
 - [`bin/svelte-pnpm-workspace-fix`](#svelte-pnpm-workspace-fix)
@@ -736,7 +738,9 @@ What it changes, per form:
                           live while no theme is saved
   front-end-with-svelte/src/routes/<kebab>/+layout.svelte
                           ThemePicker `detectFromSystem: true` (saved theme,
-                          then the system scheme, then the default)
+                          then the system scheme, then the default); superseded
+                          by bin/svelte-lily-theme-picker-0-4, whose native
+                          "Follow this device" option does the same
 
 A form already moved is skipped, so the tool can be rerun. A form without the
 swappable theme stylesheet (see bin/html-theme-locale-select-refactor) is left
@@ -2208,6 +2212,30 @@ Usage:
   bin/svelte-kit-3-theme-url-fix.py --apply          # rewrite in place
 ```
 
+<h2 id="svelte-lily-picker-bar-0-6"><code>bin/svelte-lily-picker-bar-0-6</code></h2>
+
+```text
+bin/svelte-lily-picker-bar-0-6 — move each Svelte front-end to Lily picker-bar 0.6 and headless 0.9.
+
+What it changes in a `front-end-with-svelte/`:
+
+  package.json      @lilydesignsystem/svelte-picker-bar ^0.5.3 -> ^0.6.0
+                    @lilydesignsystem/svelte-headless   ^0.8.0 -> ^0.9.0
+  pnpm-lock.yaml    `pnpm install --lockfile-only`, so only the lock moves and no
+                    node_modules is created; unless --no-lock
+
+The theme picker itself (@lilydesignsystem/svelte-theme-picker 0.3.2) is already the
+latest release; picker-bar 0.6.0 still depends on it, so it does not move. No source
+change was needed (apgar-score: lint, format:check, svelte-check and build clean).
+
+A front-end already moved is skipped, so the tool can be rerun. A front-end whose
+package.json lacks the expected lines stops the run before anything is written.
+
+Usage:
+  bin/svelte-lily-picker-bar-0-6 [--no-lock] --all|<slug>...
+  bin/svelte-lily-picker-bar-0-6 --check --all|<slug>...   # CI drift check
+```
+
 <h2 id="svelte-lily-picker-defaults"><code>bin/svelte-lily-picker-defaults</code></h2>
 
 ```text
@@ -2368,6 +2396,37 @@ Usage:
   bin/svelte-lily-scope-rename --apply <slug>...
 
 Idempotent: re-running after a full --apply makes no further changes.
+```
+
+<h2 id="svelte-lily-theme-picker-0-4"><code>bin/svelte-lily-theme-picker-0-4</code></h2>
+
+```text
+bin/svelte-lily-theme-picker-0-4 — move each Svelte front-end to Lily theme-picker 0.4.
+
+What it changes in a `front-end-with-svelte/`:
+
+  package.json         @lilydesignsystem/svelte-theme-picker ^0.3.2 -> ^0.4.0
+  pnpm-workspace.yaml  an `overrides` entry for svelte-theme-picker ^0.4.0 (picker-bar
+                       0.6 still depends on ^0.3.0, so without it a second copy
+                       installs), and a `minimumReleaseAgeExclude` entry for
+                       svelte-theme-picker@0.4.0 (published the day it was adopted)
+  pnpm-lock.yaml       `pnpm install --lockfile-only`; unless --no-lock
+  src/routes/<kebab>/+layout.svelte
+                       themeProps: `detectFromSystem: true` and `defaultValue` become
+                       `systemLabel: 'Follow this device'`, and `cookieName: ''`
+
+0.4.0 adds a first option, "Follow this device", that follows `prefers-color-scheme`
+live and is where a visitor with no saved choice starts; that is spec.md §5 ("Light
+and dark follow the browser"), built in. A `defaultValue` would override that start, so
+it goes. 0.4.0 also keeps the choice in a first-party cookie by default, which this repo's
+privacy notices do not disclose; `cookieName: ''` turns it off, so only localStorage
+keeps the choice, as before.
+
+A front-end already moved is skipped, so the tool can be rerun.
+
+Usage:
+  bin/svelte-lily-theme-picker-0-4 [--no-lock] --all|<slug>...
+  bin/svelte-lily-theme-picker-0-4 --check --all|<slug>...   # CI drift check
 ```
 
 <h2 id="svelte-lint-format-refactor"><code>bin/svelte-lint-format-refactor</code></h2>

@@ -38,7 +38,7 @@ A headless Svelte 5 component that exposes a grouping landmark for assistive tec
 
 ```svelte
 <script lang="ts">
-  import ButtonGroup from './ButtonGroup.svelte';
+  import ButtonGroup from "./ButtonGroup.svelte";
 </script>
 
 <ButtonGroup label="Edit actions">

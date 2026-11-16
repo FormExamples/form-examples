@@ -27,7 +27,9 @@ describe("HoverCard", () => {
     });
 
     test("passes through attributes", () => {
-        render(Subject, { props: { label: "I", open: true, "data-testid": "hc", children: textSnippet("C") } });
+        render(Subject, {
+            props: { label: "I", open: true, "data-testid": "hc", children: textSnippet("C") },
+        });
         expect(screen.getByTestId("hc")).toBeTruthy();
     });
 });

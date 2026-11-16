@@ -4,29 +4,103 @@
   Description: a menu that opens below a trigger button
   HTML tag: <div>
   CSS class: dropdown-menu
-  Keyboard: None (passive element)
-  Accessibility: role="menu", aria-label for accessible name
+  Keyboard: Enter/Space/click on the button toggles the menu and focuses the first item; in the menu ArrowDown/ArrowUp move (wrapping), Home/End jump, Escape closes and returns focus to the button
+  Accessibility: button: aria-haspopup="true", aria-expanded, aria-controls, aria-label; panel: role="menu", aria-label; items are role="menuitem" tabindex="-1"
+  Popover API: the menu is popover="auto" and the button names it with
+    command="toggle-popover" commandfor (and popovertarget), so the browser
+    opens and closes it, closes it on Escape and on a click outside, and puts
+    it in the top layer, with no script. The embedded script keeps
+    aria-expanded in step with the menu's toggle event, focuses the first item
+    on open, and moves focus between items with the arrow keys (no native
+    equivalent). Where the Popover API is missing it falls back to toggling the
+    `hidden` attribute, with Escape. (tasks.md P18-T11)
   Usage:
-    <div class="dropdown-menu" role="menu" aria-label="Example">
-      ...
+    <div class="dropdown-menu">
+      <button type="button" aria-haspopup="true" aria-expanded="false" aria-label="Options"
+              aria-controls="dropdown-menu-1" command="toggle-popover"
+              commandfor="dropdown-menu-1" popovertarget="dropdown-menu-1">Options</button>
+      <div id="dropdown-menu-1" role="menu" aria-label="Options" popover="auto">
+        <div role="menuitem" tabindex="-1">Edit</div>
+      </div>
     </div>
 -->
 
 <div
   class="dropdown-menu"
-  role="menu"
-  aria-label=""
 >
-  <!-- Consumer provides content -->
+  <button
+    type="button"
+    aria-haspopup="true"
+    aria-expanded="false"
+    aria-label=""
+    aria-controls="dropdown-menu-1"
+    command="toggle-popover"
+    commandfor="dropdown-menu-1"
+    popovertarget="dropdown-menu-1"
+  >
+    <!-- Consumer provides button content -->
+  </button>
+  <div id="dropdown-menu-1" role="menu" aria-label="" popover="auto">
+    <!-- Consumer provides role="menuitem" items -->
+  </div>
 </div>
 
 <script>
   // DropdownMenu behavior
   (function() {
     'use strict';
-    // DropdownMenu: consumer implements interactive behavior
-    document.querySelectorAll('.dropdown-menu').forEach(function(el) {
-      // Interactive behavior initialization
+    var native = typeof HTMLElement.prototype.showPopover === 'function';
+    document.querySelectorAll('.dropdown-menu').forEach(function(root) {
+      var button = root.querySelector('button');
+      var menu = root.querySelector('[role="menu"]');
+      if (!button || !menu) return;
+      function items() { return Array.from(menu.querySelectorAll("[role='menuitem']")); }
+      function opened(open) {
+        button.setAttribute('aria-expanded', String(open));
+        if (open) {
+          var first = items()[0];
+          if (first) first.focus();
+        }
+      }
+      if (native) {
+        // The browser opens, closes and light-dismisses the menu; follow it.
+        menu.addEventListener('toggle', function(e) { opened(e.newState === 'open'); });
+      } else {
+        // Fallback: no Popover API.
+        menu.removeAttribute('popover');
+        menu.hidden = true;
+        var setOpen = function(open) {
+          menu.hidden = !open;
+          opened(open);
+        };
+        button.addEventListener('click', function() {
+          setOpen(menu.hidden);
+        });
+        menu.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') {
+            e.preventDefault();
+            setOpen(false);
+            button.focus();
+          }
+        });
+      }
+      menu.addEventListener('keydown', function(e) {
+        var list = items();
+        var index = list.indexOf(document.activeElement);
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          if (list.length) list[index < list.length - 1 ? index + 1 : 0].focus();
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          if (list.length) list[index > 0 ? index - 1 : list.length - 1].focus();
+        } else if (e.key === 'Home') {
+          e.preventDefault();
+          if (list.length) list[0].focus();
+        } else if (e.key === 'End') {
+          e.preventDefault();
+          if (list.length) list[list.length - 1].focus();
+        }
+      });
     });
   })();
 </script>

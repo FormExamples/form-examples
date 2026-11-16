@@ -70,6 +70,7 @@
 </script>
 
 <!-- StickyPromoBanner.svelte -->
+<!-- svelte-ignore a11y_no_redundant_roles (explicit role keeps the landmark on wrapper hosts) -->
 <aside
     class={`sticky-promo-banner ${className}`}
     role="complementary"

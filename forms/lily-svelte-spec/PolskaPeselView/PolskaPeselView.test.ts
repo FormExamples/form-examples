@@ -7,7 +7,7 @@ describe("PolskaPeselView", () => {
     test("renders with the correct class", () => {
         render(Subject, { props: { label: "PESEL", value: "test-value" } });
 
-        const el = screen.getByLabelText("PESEL");
+        const el = document.querySelector(".polska-pesel-view") as HTMLElement;
         expect(el).toBeTruthy();
         expect(el.getAttribute("class")).toContain("polska-pesel-view");
     });
@@ -15,14 +15,17 @@ describe("PolskaPeselView", () => {
     test("renders the value as text content", () => {
         render(Subject, { props: { label: "PESEL", value: "test-value" } });
 
-        const el = screen.getByLabelText("PESEL");
-        expect(el.textContent).toBe("test-value");
+        const el = document.querySelector(".polska-pesel-view") as HTMLElement;
+        expect(
+            el.textContent?.replace(el.querySelector(".screen-reader-span")?.textContent ?? "", ""),
+        ).toBe("test-value");
     });
 
     test("has aria-label from the label prop", () => {
         render(Subject, { props: { label: "PESEL" } });
 
-        const el = screen.getByLabelText("PESEL");
-        expect(el.getAttribute("aria-label")).toBe("PESEL");
+        const el = document.querySelector(".polska-pesel-view") as HTMLElement;
+        expect(el.querySelector(".screen-reader-span")?.textContent).toBe(`${"PESEL"} `);
+        expect(el.hasAttribute("aria-label")).toBe(false);
     });
 });

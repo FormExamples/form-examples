@@ -1,17 +1,20 @@
-<script module lang="ts">
-  import { defineMeta } from '@storybook/addon-svelte-csf';
-  import AreaChart from './AreaChart.svelte';
+<script
+    module
+    lang="ts"
+>
+    import { defineMeta } from "@storybook/addon-svelte-csf";
+    import AreaChart from "./AreaChart.svelte";
 
-  const { Story } = defineMeta({
-    title: 'Headless/AreaChart',
-    component: AreaChart,
-  });
+    const { Story } = defineMeta({
+        title: "Headless/AreaChart",
+        component: AreaChart,
+    });
 </script>
 
 <Story
-  name="Default"
-  tags={['autodocs', '!dev']}
-  args={{'label':'AreaChart'}}
+    name="Default"
+    tags={["autodocs", "!dev"]}
+    args={{ label: "AreaChart" }}
 >
-  <span>AreaChart</span>
+    <span>AreaChart</span>
 </Story>

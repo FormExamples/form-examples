@@ -10,7 +10,7 @@ See [components/slider-button/index.md](../../../components/slider-button/index.
 
 ```svelte
 <script lang="ts">
-    import SliderButton from "./SliderButton.svelte";
+  import SliderButton from "./SliderButton.svelte";
 </script>
 
 <SliderButton />

@@ -8,7 +8,7 @@
     //
     // Props:
     //   className — string, optional. CSS class name.
-    //   label — string, optional. Accessible name for the list via aria-label.
+    //   label — string, required. Accessible name for the list via aria-label.
     //                Usually omitted, since PaginationNav already supplies the
     //                navigation landmark label.
     //   children — Snippet, required. PaginationListItem elements.
@@ -49,21 +49,31 @@
     //
     // References:
     //   - HTML ol element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol
+    import { warnMissingName } from "../dev-warning";
 
     import type { Snippet } from "svelte";
 
     let {
         class: className = "",
-        label = undefined,
+        label,
         children,
         ...restProps
     }: {
-        /** Optional accessible label for the list. */
-        label?: string;
+        /** Accessible label for the list. */
+        label: string;
         /** PaginationListItem elements. */
         children: Snippet;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName(
+            "PaginationList",
+            label,
+            restProps["aria-label"],
+            restProps["aria-labelledby"],
+        ),
+    );
 </script>
 
 <!-- PaginationList.svelte -->

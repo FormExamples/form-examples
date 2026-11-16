@@ -31,67 +31,67 @@ Place inside `ContentsList`. Wrap a link inside. Use `aria-current="page"` or `a
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `class` | `string` | `""` | CSS class name (accepted but not applied in current source). |
-| `children` | `Snippet` | required | List item content. |
-| `...restProps` | `unknown` | — | Additional attributes spread onto the `<li>`. |
+| Prop           | Type      | Default  | Description                                                  |
+| -------------- | --------- | -------- | ------------------------------------------------------------ |
+| `class`        | `string`  | `""`     | CSS class name (accepted but not applied in current source). |
+| `children`     | `Snippet` | required | List item content.                                           |
+| `...restProps` | `unknown` | —        | Additional attributes spread onto the `<li>`.                |
 
 ## Usage
 
 ```svelte
 <script lang="ts">
-    import ContentsNav from "../ContentsNav/ContentsNav.svelte";
-    import ContentsList from "../ContentsList/ContentsList.svelte";
-    import ContentsListItem from "./ContentsListItem.svelte";
+  import ContentsNav from "../ContentsNav/ContentsNav.svelte";
+  import ContentsList from "../ContentsList/ContentsList.svelte";
+  import ContentsListItem from "./ContentsListItem.svelte";
 </script>
 
 <ContentsNav label="On this page">
-    <ContentsList>
-        <ContentsListItem><a href="#intro">Introduction</a></ContentsListItem>
-        <ContentsListItem><a href="#usage">Usage</a></ContentsListItem>
-    </ContentsList>
+  <ContentsList>
+    <ContentsListItem><a href="#intro">Introduction</a></ContentsListItem>
+    <ContentsListItem><a href="#usage">Usage</a></ContentsListItem>
+  </ContentsList>
 </ContentsNav>
 ```
 
 ```svelte
 <script lang="ts">
-    import ContentsNav from "../ContentsNav/ContentsNav.svelte";
-    import ContentsList from "../ContentsList/ContentsList.svelte";
-    import ContentsListItem from "./ContentsListItem.svelte";
+  import ContentsNav from "../ContentsNav/ContentsNav.svelte";
+  import ContentsList from "../ContentsList/ContentsList.svelte";
+  import ContentsListItem from "./ContentsListItem.svelte";
 </script>
 
 <ContentsNav label="Report">
-    <ContentsList>
-        <ContentsListItem>
-            <a href="#results">Results</a>
-            <ContentsList>
-                <ContentsListItem><a href="#data">Data</a></ContentsListItem>
-                <ContentsListItem><a href="#analysis">Analysis</a></ContentsListItem>
-            </ContentsList>
-        </ContentsListItem>
-    </ContentsList>
+  <ContentsList>
+    <ContentsListItem>
+      <a href="#results">Results</a>
+      <ContentsList>
+        <ContentsListItem><a href="#data">Data</a></ContentsListItem>
+        <ContentsListItem><a href="#analysis">Analysis</a></ContentsListItem>
+      </ContentsList>
+    </ContentsListItem>
+  </ContentsList>
 </ContentsNav>
 ```
 
 ```svelte
 <script lang="ts">
-    import ContentsNav from "../ContentsNav/ContentsNav.svelte";
-    import ContentsList from "../ContentsList/ContentsList.svelte";
-    import ContentsListItem from "./ContentsListItem.svelte";
+  import ContentsNav from "../ContentsNav/ContentsNav.svelte";
+  import ContentsList from "../ContentsList/ContentsList.svelte";
+  import ContentsListItem from "./ContentsListItem.svelte";
 
-    const currentId = "usage";
+  const currentId = "usage";
 </script>
 
 <ContentsNav label="Docs">
-    <ContentsList>
-        <ContentsListItem aria-current={currentId === "install" ? "true" : undefined}>
-            <a href="#install">Install</a>
-        </ContentsListItem>
-        <ContentsListItem aria-current={currentId === "usage" ? "true" : undefined}>
-            <a href="#usage">Usage</a>
-        </ContentsListItem>
-    </ContentsList>
+  <ContentsList>
+    <ContentsListItem aria-current={currentId === "install" ? "true" : undefined}>
+      <a href="#install">Install</a>
+    </ContentsListItem>
+    <ContentsListItem aria-current={currentId === "usage" ? "true" : undefined}>
+      <a href="#usage">Usage</a>
+    </ContentsListItem>
+  </ContentsList>
 </ContentsNav>
 ```
 

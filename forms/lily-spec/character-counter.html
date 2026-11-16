@@ -3,28 +3,52 @@
 <!--
   Description: a counter showing remaining or used characters in a text field
   HTML tag: <span>
-  CSS class: character-counter
+  CSS class: character-counter (sub-elements: character-counter-text, character-counter-status)
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
-  Usage:
-    <span class="character-counter" aria-label="Example">
-      ...
-    </span>
+  Accessibility: the visible count (.character-counter-text) is aria-hidden; a visually hidden role="status"
+    (.character-counter-status, also .screen-reader-span), named by aria-label, takes the same text once typing pauses,
+    so a run of keystrokes is announced once, as GOV.UK's character count does.
+  Attributes on the root: data-for (the id of the field it counts), data-max (optional), data-announce-delay
+    (milliseconds of quiet before the status takes the count, default 1000). The script keeps data-count,
+    data-remaining and data-over-limit up to date.
+  Usage (see the markup below)
 -->
 
+<label for="character-counter-field">Message</label>
+<textarea id="character-counter-field" maxlength="200"></textarea>
 <span
   class="character-counter"
-  aria-label=""
->
-  <!-- Consumer provides text content -->
-</span>
+  data-for="character-counter-field"
+  data-max="200"
+  data-count="0"
+  data-remaining="200"
+><span class="character-counter-text" aria-hidden="true">0 / 200</span><span class="character-counter-status screen-reader-span" role="status" aria-label="Characters used">0 / 200</span></span>
 
 <script>
-  // CharacterCounter behavior
-  (function() {
+  // CharacterCounter behavior: the visible count follows the field at once; the status only after a pause.
+  (function () {
     'use strict';
-    document.querySelectorAll('.character-counter').forEach(function(el) {
-      el.setAttribute('aria-live', 'polite');
+    document.querySelectorAll('.character-counter[data-for]').forEach(function (el) {
+      var field = document.getElementById(el.getAttribute('data-for'));
+      var shown = el.querySelector('.character-counter-text');
+      var status = el.querySelector('.character-counter-status');
+      if (!field || !shown || !status) return;
+      var max = el.hasAttribute('data-max') ? Number(el.getAttribute('data-max')) : null;
+      var delay = Number(el.getAttribute('data-announce-delay') || 1000);
+      var timer;
+      field.addEventListener('input', function () {
+        var count = field.value.length;
+        var text = max === null ? String(count) : count + ' / ' + max;
+        el.setAttribute('data-count', String(count));
+        if (max !== null) {
+          el.setAttribute('data-remaining', String(max - count));
+          if (count > max) el.setAttribute('data-over-limit', '');
+          else el.removeAttribute('data-over-limit');
+        }
+        shown.textContent = text;
+        clearTimeout(timer);
+        timer = setTimeout(function () { status.textContent = text; }, delay);
+      });
     });
   })();
 </script>

@@ -32,73 +32,91 @@ Import the component, bind `value`, and supply an accessible `label`. Wrap in a 
 
 ## Props
 
-| Prop        | Type      | Default | Description                                                              |
-| ----------- | --------- | ------- | ------------------------------------------------------------------------ |
-| `class`     | `string`  | `""`    | Additional CSS class appended to the base class name.                    |
-| `label`     | `string`  | —       | Required. Accessible name set on `aria-label`.                           |
-| `value`     | `string`  | `""`    | Bindable URL value. Supports `bind:value`.                               |
-| `required`  | `boolean` | `false` | Sets the native `required` attribute for form validation.                |
-| `disabled`  | `boolean` | `false` | Sets the native `disabled` attribute.                                    |
-| `...rest`   | —         | —       | Additional HTML attributes, spread onto the `<input>`.                   |
+| Prop       | Type      | Default | Description                                               |
+| ---------- | --------- | ------- | --------------------------------------------------------- |
+| `class`    | `string`  | `""`    | Additional CSS class appended to the base class name.     |
+| `label`    | `string`  | —       | Required. Accessible name set on `aria-label`.            |
+| `value`    | `string`  | `""`    | Bindable URL value. Supports `bind:value`.                |
+| `required` | `boolean` | `false` | Sets the native `required` attribute for form validation. |
+| `disabled` | `boolean` | `false` | Sets the native `disabled` attribute.                     |
+| `...rest`  | —         | —       | Additional HTML attributes, spread onto the `<input>`.    |
 
 ## Usage
 
 ```svelte
 <script lang="ts">
-    import UrlInput from "./UrlInput.svelte";
+  import UrlInput from "./UrlInput.svelte";
 
-    let website = $state("");
-</script>
-
-<UrlInput label="Website" bind:value={website} />
-```
-
-```svelte
-<script lang="ts">
-    import UrlInput from "./UrlInput.svelte";
-
-    let portfolioUrl = $state("");
+  let website = $state("");
 </script>
 
 <UrlInput
-    label="Portfolio link"
-    bind:value={portfolioUrl}
-    required
-    placeholder="https://example.com"
+  label="Website"
+  bind:value={website}
 />
 ```
 
 ```svelte
 <script lang="ts">
-    import UrlInput from "./UrlInput.svelte";
-    import Field from "../Field/Field.svelte";
+  import UrlInput from "./UrlInput.svelte";
 
-    let homepage = $state("");
-    let error = $state("");
+  let portfolioUrl = $state("");
 </script>
 
-<Field label="Homepage" required error={error}>
-    <UrlInput label="Homepage" bind:value={homepage} required />
+<UrlInput
+  label="Portfolio link"
+  bind:value={portfolioUrl}
+  required
+  placeholder="https://example.com"
+/>
+```
+
+```svelte
+<script lang="ts">
+  import UrlInput from "./UrlInput.svelte";
+  import Field from "../Field/Field.svelte";
+
+  let homepage = $state("");
+  let error = $state("");
+</script>
+
+<Field
+  label="Homepage"
+  required
+  {error}
+>
+  <UrlInput
+    label="Homepage"
+    bind:value={homepage}
+    required
+  />
 </Field>
 ```
 
 ```svelte
 <script lang="ts">
-    import UrlInput from "./UrlInput.svelte";
+  import UrlInput from "./UrlInput.svelte";
 
-    let url = $state("https://example.org");
+  let url = $state("https://example.org");
 </script>
 
-<UrlInput label="Editable URL" bind:value={url} />
+<UrlInput
+  label="Editable URL"
+  bind:value={url}
+/>
 <p>Current: {url}</p>
 ```
 
 ```svelte
 <script lang="ts">
-    import UrlInput from "./UrlInput.svelte";
+  import UrlInput from "./UrlInput.svelte";
 </script>
 
-<UrlInput label="Read-only URL" value="https://example.org" disabled />
+<UrlInput
+  label="Read-only URL"
+  value="https://example.org"
+  disabled
+/>
 ```
 
 ## Accessibility

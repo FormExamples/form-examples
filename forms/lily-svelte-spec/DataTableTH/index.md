@@ -30,65 +30,68 @@ Place inside a `DataTableRow` within `DataTableHead`.
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `class` | `string` | `""` | CSS class name appended to the base class. |
-| `colspan` | `number` | `undefined` | Number of columns this header cell spans. |
-| `rowspan` | `number` | `undefined` | Number of rows this header cell spans. |
-| `scope` | `"col" \| "row" \| "colgroup" \| "rowgroup"` | `"col"` | Header scope for assistive tech. |
-| `children` | `Snippet` | `undefined` | Header cell content. |
-| `...restProps` | `unknown` | — | Additional attributes spread onto the `<th>`. |
+| Prop           | Type                                         | Default     | Description                                   |
+| -------------- | -------------------------------------------- | ----------- | --------------------------------------------- |
+| `class`        | `string`                                     | `""`        | CSS class name appended to the base class.    |
+| `colspan`      | `number`                                     | `undefined` | Number of columns this header cell spans.     |
+| `rowspan`      | `number`                                     | `undefined` | Number of rows this header cell spans.        |
+| `scope`        | `"col" \| "row" \| "colgroup" \| "rowgroup"` | `"col"`     | Header scope for assistive tech.              |
+| `children`     | `Snippet`                                    | `undefined` | Header cell content.                          |
+| `...restProps` | `unknown`                                    | —           | Additional attributes spread onto the `<th>`. |
 
 ## Usage
 
 ```svelte
 <script lang="ts">
-    import DataTable from "../DataTable/DataTable.svelte";
-    import DataTableHead from "../DataTableHead/DataTableHead.svelte";
-    import DataTableBody from "../DataTableBody/DataTableBody.svelte";
-    import DataTableRow from "../DataTableRow/DataTableRow.svelte";
-    import DataTableTD from "./DataTableTD.svelte";
-    import DataTableTD from "../DataTableTD/DataTableTD.svelte";
+  import DataTable from "../DataTable/DataTable.svelte";
+  import DataTableHead from "../DataTableHead/DataTableHead.svelte";
+  import DataTableBody from "../DataTableBody/DataTableBody.svelte";
+  import DataTableRow from "../DataTableRow/DataTableRow.svelte";
+  import DataTableTD from "./DataTableTD.svelte";
+  import DataTableTD from "../DataTableTD/DataTableTD.svelte";
 </script>
 
 <DataTable label="Users">
-    <DataTableHead>
-        <DataTableRow>
-            <DataTableTD>Name</DataTableTD>
-            <DataTableTD>Email</DataTableTD>
-            <DataTableTD>Role</DataTableTD>
-        </DataTableRow>
-    </DataTableHead>
-    <DataTableBody>
-        <DataTableRow>
-            <DataTableTD>Alice</DataTableTD>
-            <DataTableTD>alice@example.com</DataTableTD>
-            <DataTableTD>Admin</DataTableTD>
-        </DataTableRow>
-    </DataTableBody>
+  <DataTableHead>
+    <DataTableRow>
+      <DataTableTD>Name</DataTableTD>
+      <DataTableTD>Email</DataTableTD>
+      <DataTableTD>Role</DataTableTD>
+    </DataTableRow>
+  </DataTableHead>
+  <DataTableBody>
+    <DataTableRow>
+      <DataTableTD>Alice</DataTableTD>
+      <DataTableTD>alice@example.com</DataTableTD>
+      <DataTableTD>Admin</DataTableTD>
+    </DataTableRow>
+  </DataTableBody>
 </DataTable>
 ```
 
 ```svelte
 <script lang="ts">
-    import DataTable from "../DataTable/DataTable.svelte";
-    import DataTableHead from "../DataTableHead/DataTableHead.svelte";
-    import DataTableRow from "../DataTableRow/DataTableRow.svelte";
-    import DataTableTD from "./DataTableTD.svelte";
+  import DataTable from "../DataTable/DataTable.svelte";
+  import DataTableHead from "../DataTableHead/DataTableHead.svelte";
+  import DataTableRow from "../DataTableRow/DataTableRow.svelte";
+  import DataTableTD from "./DataTableTD.svelte";
 </script>
 
 <!-- Grouped header spanning multiple columns -->
 <DataTable label="Sales">
-    <DataTableHead>
-        <DataTableRow>
-            <DataTableTD rowspan={2}>Region</DataTableTD>
-            <DataTableTD colspan={2} scope="colgroup">2025</DataTableTD>
-        </DataTableRow>
-        <DataTableRow>
-            <DataTableTD>Q1</DataTableTD>
-            <DataTableTD>Q2</DataTableTD>
-        </DataTableRow>
-    </DataTableHead>
+  <DataTableHead>
+    <DataTableRow>
+      <DataTableTD rowspan={2}>Region</DataTableTD>
+      <DataTableTD
+        colspan={2}
+        scope="colgroup">2025</DataTableTD
+      >
+    </DataTableRow>
+    <DataTableRow>
+      <DataTableTD>Q1</DataTableTD>
+      <DataTableTD>Q2</DataTableTD>
+    </DataTableRow>
+  </DataTableHead>
 </DataTable>
 ```
 

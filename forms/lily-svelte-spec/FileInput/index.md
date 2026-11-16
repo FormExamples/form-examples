@@ -30,55 +30,79 @@ Provide a required `label` and optional `accept`.
 
 ```svelte
 <script lang="ts">
-    import FileInput from "./FileInput.svelte";
+  import FileInput from "./FileInput.svelte";
 </script>
 
-<FileInput label="Upload photo" accept="image/*" />
+<FileInput
+  label="Upload photo"
+  accept="image/*"
+/>
 ```
 
 ## Props
 
-| Prop       | Type      | Default     | Description                                    |
-| ---------- | --------- | ----------- | ---------------------------------------------- |
-| `class`    | `string`  | `""`        | CSS class appended to the base class.         |
-| `label`    | `string`  | required    | Accessible name via `aria-label`.              |
-| `accept`   | `string`  | `undefined` | Comma-separated MIME types or extensions.      |
-| `multiple` | `boolean` | `false`     | Allow selecting multiple files.                |
-| `required` | `boolean` | `false`     | Whether the input is required.                 |
-| `disabled` | `boolean` | `false`     | Whether the input is disabled.                 |
-| `...rest`  | `unknown` | —           | Additional HTML attributes on the `<input>`.   |
+| Prop       | Type      | Default     | Description                                  |
+| ---------- | --------- | ----------- | -------------------------------------------- |
+| `class`    | `string`  | `""`        | CSS class appended to the base class.        |
+| `label`    | `string`  | required    | Accessible name via `aria-label`.            |
+| `accept`   | `string`  | `undefined` | Comma-separated MIME types or extensions.    |
+| `multiple` | `boolean` | `false`     | Allow selecting multiple files.              |
+| `required` | `boolean` | `false`     | Whether the input is required.               |
+| `disabled` | `boolean` | `false`     | Whether the input is disabled.               |
+| `...rest`  | `unknown` | —           | Additional HTML attributes on the `<input>`. |
 
 ## Usage
 
 ### 1. Image upload
 
 ```svelte
-<FileInput label="Upload photo" accept="image/*" />
+<FileInput
+  label="Upload photo"
+  accept="image/*"
+/>
 ```
 
 ### 2. Multiple documents
 
 ```svelte
-<FileInput label="Attach documents" accept=".pdf,.doc,.docx" multiple />
+<FileInput
+  label="Attach documents"
+  accept=".pdf,.doc,.docx"
+  multiple
+/>
 ```
 
 ### 3. Required profile picture
 
 ```svelte
-<FileInput label="Profile picture" accept="image/png,image/jpeg" required />
+<FileInput
+  label="Profile picture"
+  accept="image/png,image/jpeg"
+  required
+/>
 ```
 
 ### 4. With onchange handler
 
 ```svelte
-<FileInput label="Upload CSV" accept=".csv" onchange={handleFiles} />
+<FileInput
+  label="Upload CSV"
+  accept=".csv"
+  onchange={handleFiles}
+/>
 ```
 
 ### 5. Inside a Field
 
 ```svelte
-<Field label="Avatar" description="PNG or JPEG, up to 5 MB">
-    <FileInput label="Avatar" accept="image/png,image/jpeg" />
+<Field
+  label="Avatar"
+  description="PNG or JPEG, up to 5 MB"
+>
+  <FileInput
+    label="Avatar"
+    accept="image/png,image/jpeg"
+  />
 </Field>
 ```
 

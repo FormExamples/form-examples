@@ -62,7 +62,7 @@
         /** Current value. Bindable. */
         value?: string;
         /** Autocomplete hint. */
-        autocomplete?: string;
+        autocomplete?: "current-password" | "new-password" | "off";
         /** Whether required. */
         required?: boolean;
         /** Whether disabled. */

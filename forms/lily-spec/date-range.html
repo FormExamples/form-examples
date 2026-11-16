@@ -1,20 +1,15 @@
 <!-- date-range.html -->
 <!-- DateRange component -->
 <!--
-  Description: a display of a start and end date range
-  HTML tag: <span>
-  CSS class: date-range
-  Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
-  Usage:
-    <span class="date-range" aria-label="Example">
-      ...
-    </span>
+  Description: paired start and end date inputs
+  HTML tag: <fieldset> containing two <input type="date">
+  CSS class: date-range (fieldset), date-input (each input)
+  Keyboard: native date-input keys (Tab between the two, arrows within)
+  Accessibility: aria-label on the fieldset (group name) and on each input
+  Usage: replace the three aria-label values with consumer-supplied text
 -->
 
-<span
-  class="date-range"
-  aria-label=""
->
-  <!-- Consumer provides text content -->
-</span>
+<fieldset class="date-range" aria-label="Trip dates">
+  <input class="date-input" type="date" aria-label="Departure" />
+  <input class="date-input" type="date" aria-label="Return" />
+</fieldset>

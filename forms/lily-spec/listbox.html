@@ -4,12 +4,17 @@
   Description: a list of selectable options with keyboard navigation
   HTML tag: <div>
   CSS class: listbox
-  Keyboard: Tab to focus, Arrow Up/Down to navigate, Enter to select
-  Accessibility: role="listbox", aria-label for accessible name
+  Keyboard: Tab to focus an option; ArrowDown/ArrowUp move focus to the next/previous option and wrap at the ends;
+    Home/End move focus to the first/last option. The options are read on each key press, so options added later work.
+  Accessibility: role="listbox", aria-label for accessible name; each option is role="option" with tabindex (one "0",
+    the rest "-1") and aria-selected, which the consumer sets
   Usage:
-    <div class="listbox" role="listbox" aria-label="Example">
-      ...
+    <div class="listbox" role="listbox" aria-label="Fruits">
+      <div role="option" tabindex="0" aria-selected="true">Apple</div>
+      <div role="option" tabindex="-1" aria-selected="false">Banana</div>
     </div>
+  Selection is the consumer's: listen for keydown/click on the options and set aria-selected.
+  For aria-activedescendant navigation, typeahead and paging, use ListboxController (listbox-controller.js).
 -->
 
 <div
@@ -17,16 +22,27 @@
   role="listbox"
   aria-label=""
 >
-  <!-- Consumer provides content -->
+  <!-- Consumer provides options -->
 </div>
 
 <script>
-  // Listbox behavior
-  (function() {
-    'use strict';
-    // Listbox: consumer implements interactive behavior
-    document.querySelectorAll('.listbox').forEach(function(el) {
-      // Interactive behavior initialization
+  // Listbox behavior: roving focus among the [role="option"] children
+  (function () {
+    "use strict";
+    document.querySelectorAll(".listbox").forEach(function (el) {
+      el.addEventListener("keydown", function (e) {
+        var options = Array.prototype.slice.call(el.querySelectorAll('[role="option"]'));
+        var count = options.length;
+        var focused = options.indexOf(document.activeElement);
+        var next;
+        if (e.key === "ArrowDown") next = focused < count - 1 ? focused + 1 : 0;
+        else if (e.key === "ArrowUp") next = focused > 0 ? focused - 1 : count - 1;
+        else if (e.key === "Home") next = 0;
+        else if (e.key === "End") next = count - 1;
+        else return;
+        e.preventDefault();
+        if (count > 0) options[next].focus();
+      });
     });
   })();
 </script>

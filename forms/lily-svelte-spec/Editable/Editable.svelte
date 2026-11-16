@@ -2,9 +2,11 @@
     // Editable component
     //
     // An inline-editable text component that toggles between a read-only display
-    // and an input field for editing. In display mode it renders a <span> with
-    // role="button"; in edit mode it renders an <input type="text">. Pressing
-    // Enter confirms the edit and Escape cancels it, reverting to the original value.
+    // and an input field for editing. The root is a <div class="editable">; in
+    // display mode it holds a native <button type="button"> showing the value, and
+    // in edit mode an <input type="text">. Pressing Enter confirms the edit and
+    // Escape cancels it, reverting to the original value. Focus moves to the input
+    // on edit, and back to the button on confirm or cancel.
     //
     // Props:
     //   className — string, optional. CSS class name.
@@ -12,7 +14,7 @@
     //   label — string, required. Accessible name for the editable control.
     //   editing — boolean, default false. Whether the component is in edit mode; bindable.
     //   disabled — boolean, default false. Whether editing is disabled.
-    //   ...restProps — additional HTML attributes spread onto the <span> or <input>.
+    //   ...restProps — additional HTML attributes spread onto the root <div>.
     //
     // Syntax:
     //   <Editable label="Name" bind:value />
@@ -25,16 +27,14 @@
     //   <Editable label="Title" bind:value bind:editing />
     //
     // Keyboard:
-    //   - Enter (display mode): activate edit mode
-    //   - Space (display mode): activate edit mode
+    //   - Enter or Space (display mode): activate edit mode (the native button's own keys)
     //   - Enter (edit mode): confirm the edit and return to display mode
     //   - Escape (edit mode): cancel the edit and return to display mode
     //
     // Accessibility:
-    //   - role="button" on the display span indicates it is activatable
-    //   - aria-label provides the accessible name in both modes
-    //   - aria-disabled on the span when disabled
-    //   - tabindex="0" when enabled, tabindex="-1" when disabled
+    //   - a native <button> in display mode: focusable, Enter and Space, no role to add
+    //   - aria-label provides the accessible name in both modes; in display mode it starts with the visible value
+    //   - the button is disabled when `disabled` is true
     //
     // Internationalization:
     //   - The label prop accepts any string; consumers provide localized text
@@ -46,6 +46,9 @@
     //
     // References:
     //   - WAI-ARIA Button Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/button/
+
+    import { tick } from "svelte";
+    import { warnMissingName } from "../dev-warning";
 
     let {
         class: className = "",
@@ -66,22 +69,37 @@
         [key: string]: unknown;
     } = $props();
 
-    let draft = $state(value);
+    $effect(() =>
+        warnMissingName("Editable", label, restProps["aria-label"], restProps["aria-labelledby"]),
+    );
 
-    function startEditing() {
+    let draft = $state(value);
+    let input: HTMLInputElement | undefined = $state();
+    let button: HTMLButtonElement | undefined = $state();
+
+    // The element that had focus is removed by the switch, so focus follows the user to the element that replaces it.
+    async function startEditing() {
         if (disabled) return;
         draft = value;
         editing = true;
+        await tick();
+        input?.focus();
+    }
+
+    async function finish() {
+        editing = false;
+        await tick();
+        button?.focus();
     }
 
     function confirm() {
         value = draft;
-        editing = false;
+        void finish();
     }
 
     function cancel() {
         draft = value;
-        editing = false;
+        void finish();
     }
 
     function onkeydown(event: KeyboardEvent) {
@@ -96,31 +114,29 @@
 </script>
 
 <!-- Editable.svelte -->
-{#if editing}
-    <input
-        class={`editable ${className}`}
-        type="text"
-        aria-label={label}
-        bind:value={draft}
-        {onkeydown}
-        {...restProps}
-    />
-{:else}
-    <span
-        class={`editable ${className}`}
-        role="button"
-        tabindex={disabled ? -1 : 0}
-        aria-label={label}
-        aria-disabled={disabled || undefined}
-        onclick={startEditing}
-        onkeydown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                startEditing();
-            }
-        }}
-        {...restProps}
-    >
-        {value}
-    </span>
-{/if}
+<div
+    class={`editable ${className}`}
+    {...restProps}
+>
+    {#if editing}
+        <input
+            bind:this={input}
+            class="editable-input"
+            type="text"
+            aria-label={label}
+            bind:value={draft}
+            {onkeydown}
+        />
+    {:else}
+        <button
+            bind:this={button}
+            class="editable-button"
+            type="button"
+            aria-label={value ? `${value}, ${label}` : label}
+            {disabled}
+            onclick={startEditing}
+        >
+            {value}
+        </button>
+    {/if}
+</div>

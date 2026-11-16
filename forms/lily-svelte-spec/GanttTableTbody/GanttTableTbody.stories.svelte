@@ -1,16 +1,19 @@
-<script module lang="ts">
-  import { defineMeta } from '@storybook/addon-svelte-csf';
-  import GanttTableBody from './GanttTableBody.svelte';
+<script
+    module
+    lang="ts"
+>
+    import { defineMeta } from "@storybook/addon-svelte-csf";
+    import GanttTableTbody from "./GanttTableTbody.svelte";
 
-  const { Story } = defineMeta({
-    title: 'Headless/GanttTableBody',
-    component: GanttTableBody,
-  });
+    const { Story } = defineMeta({
+        title: "Headless/GanttTableTbody",
+        component: GanttTableTbody,
+    });
 </script>
 
 <Story
-  name="Default"
-  tags={['autodocs', '!dev']}
+    name="Default"
+    tags={["autodocs", "!dev"]}
 >
-  <tr><td>Data</td></tr>
+    <tr><td>Data</td></tr>
 </Story>

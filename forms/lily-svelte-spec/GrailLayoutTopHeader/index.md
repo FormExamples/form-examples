@@ -35,76 +35,82 @@ Place as a direct child of `GrailLayout`. The component itself provides the `ban
 
 ```svelte
 <script lang="ts">
-    import GrailLayoutTopHeader from "./GrailLayoutTopHeader.svelte";
+  import GrailLayoutTopHeader from "./GrailLayoutTopHeader.svelte";
 </script>
 
 <GrailLayoutTopHeader>
-    <header><h1>Site Header</h1></header>
+  <header><h1>Site Header</h1></header>
 </GrailLayoutTopHeader>
 ```
 
 ```svelte
 <script lang="ts">
-    import GrailLayoutTopHeader from "./GrailLayoutTopHeader.svelte";
-    import Header from "../Header/Header.svelte";
+  import GrailLayoutTopHeader from "./GrailLayoutTopHeader.svelte";
+  import Header from "../Header/Header.svelte";
 </script>
 
 <GrailLayoutTopHeader>
-    <Header label="Site header">
-        <h1>My site</h1>
-        <nav aria-label="Primary">
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-        </nav>
-    </Header>
+  <Header label="Site header">
+    <h1>My site</h1>
+    <nav aria-label="Primary">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+    </nav>
+  </Header>
 </GrailLayoutTopHeader>
 ```
 
 ```svelte
 <script lang="ts">
-    import GrailLayout from "../GrailLayout/GrailLayout.svelte";
-    import GrailLayoutTopHeader from "./GrailLayoutTopHeader.svelte";
-    import GrailLayoutCenterMain from "../GrailLayoutCenterMain/GrailLayoutCenterMain.svelte";
+  import GrailLayout from "../GrailLayout/GrailLayout.svelte";
+  import GrailLayoutTopHeader from "./GrailLayoutTopHeader.svelte";
+  import GrailLayoutCenterMain from "../GrailLayoutCenterMain/GrailLayoutCenterMain.svelte";
 </script>
 
 <GrailLayout>
-    <GrailLayoutTopHeader>
-        <header>Header</header>
-    </GrailLayoutTopHeader>
-    <GrailLayoutCenterMain><main>Content</main></GrailLayoutCenterMain>
+  <GrailLayoutTopHeader>
+    <header>Header</header>
+  </GrailLayoutTopHeader>
+  <GrailLayoutCenterMain><main>Content</main></GrailLayoutCenterMain>
 </GrailLayout>
 ```
 
 ```svelte
 <script lang="ts">
-    import GrailLayoutTopHeader from "./GrailLayoutTopHeader.svelte";
+  import GrailLayoutTopHeader from "./GrailLayoutTopHeader.svelte";
 </script>
 
-<GrailLayoutTopHeader class="app-top" data-testid="grail-top">
-    <header>
-        <a href="/">Logo</a>
-        <button>Menu</button>
-    </header>
+<GrailLayoutTopHeader
+  class="app-top"
+  data-testid="grail-top"
+>
+  <header>
+    <a href="/">Logo</a>
+    <button>Menu</button>
+  </header>
 </GrailLayoutTopHeader>
 ```
 
 ```svelte
 <script lang="ts">
-    import GrailLayoutTopHeader from "./GrailLayoutTopHeader.svelte";
-    import HamburgerMenu from "../HamburgerMenu/HamburgerMenu.svelte";
-    let open = $state(false);
+  import GrailLayoutTopHeader from "./GrailLayoutTopHeader.svelte";
+  import HamburgerMenu from "../HamburgerMenu/HamburgerMenu.svelte";
+  let open = $state(false);
 </script>
 
 <GrailLayoutTopHeader>
-    <header>
-        <h1>Site</h1>
-        <HamburgerMenu label="Main menu" bind:open>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/settings">Settings</a></li>
-            </ul>
-        </HamburgerMenu>
-    </header>
+  <header>
+    <h1>Site</h1>
+    <HamburgerMenu
+      label="Main menu"
+      bind:open
+    >
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/settings">Settings</a></li>
+      </ul>
+    </HamburgerMenu>
+  </header>
 </GrailLayoutTopHeader>
 ```
 

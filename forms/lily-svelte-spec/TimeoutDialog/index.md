@@ -10,7 +10,7 @@ See [components/timeout-dialog/index.md](../../../components/timeout-dialog/inde
 
 ```svelte
 <script lang="ts">
-    import TimeoutDialog from "./TimeoutDialog.svelte";
+  import TimeoutDialog from "./TimeoutDialog.svelte";
 </script>
 
 <TimeoutDialog />

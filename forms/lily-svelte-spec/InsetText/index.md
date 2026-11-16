@@ -43,7 +43,7 @@ Import the component and render your inset content via the `children` snippet. P
 
 ```svelte
 <script lang="ts">
-    import InsetText from "./InsetText.svelte";
+  import InsetText from "./InsetText.svelte";
 </script>
 
 <InsetText>It can take up to 8 weeks to process.</InsetText>
@@ -53,11 +53,11 @@ Import the component and render your inset content via the `children` snippet. P
 
 ```svelte
 <script lang="ts">
-    import InsetText from "./InsetText.svelte";
+  import InsetText from "./InsetText.svelte";
 </script>
 
 <InsetText>
-    <p>You must apply before the deadline. Late applications will not be accepted.</p>
+  <p>You must apply before the deadline. Late applications will not be accepted.</p>
 </InsetText>
 ```
 
@@ -65,18 +65,18 @@ Import the component and render your inset content via the `children` snippet. P
 
 ```svelte
 <script lang="ts">
-    import InsetText from "./InsetText.svelte";
+  import InsetText from "./InsetText.svelte";
 </script>
 
 <article>
-    <h2>Applying for a permit</h2>
-    <p>Start your application online.</p>
+  <h2>Applying for a permit</h2>
+  <p>Start your application online.</p>
 
-    <InsetText>
-        <p>Keep your reference number handy — you will need it for all future communications.</p>
-    </InsetText>
+  <InsetText>
+    <p>Keep your reference number handy — you will need it for all future communications.</p>
+  </InsetText>
 
-    <p>Submit supporting documents within 14 days.</p>
+  <p>Submit supporting documents within 14 days.</p>
 </article>
 ```
 
@@ -84,19 +84,19 @@ Import the component and render your inset content via the `children` snippet. P
 
 ```svelte
 <script lang="ts">
-    import InsetText from "./InsetText.svelte";
+  import InsetText from "./InsetText.svelte";
 </script>
 
 <InsetText class="inset-text-brand">
-    <p>This section applies to applicants aged 18 and over.</p>
+  <p>This section applies to applicants aged 18 and over.</p>
 </InsetText>
 
 <style>
-    :global(.inset-text-brand) {
-        border-left: 0.25rem solid #005eb8;
-        padding: 0.75rem 1rem;
-        background: #f9fafb;
-    }
+  :global(.inset-text-brand) {
+    border-left: 0.25rem solid #005eb8;
+    padding: 0.75rem 1rem;
+    background: #f9fafb;
+  }
 </style>
 ```
 
@@ -104,11 +104,11 @@ Import the component and render your inset content via the `children` snippet. P
 
 ```svelte
 <script lang="ts">
-    import InsetText from "./InsetText.svelte";
+  import InsetText from "./InsetText.svelte";
 </script>
 
 <InsetText data-variant="important">
-    <p>Read all safety instructions before proceeding.</p>
+  <p>Read all safety instructions before proceeding.</p>
 </InsetText>
 ```
 

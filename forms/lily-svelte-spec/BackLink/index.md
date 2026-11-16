@@ -42,7 +42,7 @@ Import `BackLink` from `./BackLink.svelte`. Always pass `href`. Optionally provi
 
 ```svelte
 <script lang="ts">
-  import BackLink from './BackLink.svelte';
+  import BackLink from "./BackLink.svelte";
 </script>
 
 <BackLink href="/previous-page">Back to previous page</BackLink>
@@ -52,39 +52,49 @@ Import `BackLink` from `./BackLink.svelte`. Always pass `href`. Optionally provi
 
 ```svelte
 <script lang="ts">
-  import BackLink from './BackLink.svelte';
+  import BackLink from "./BackLink.svelte";
 </script>
 
-<BackLink href="/dashboard" label="Return to dashboard">Back</BackLink>
+<BackLink
+  href="/dashboard"
+  label="Return to dashboard">Back</BackLink
+>
 ```
 
 ### In a multi-step form
 
 ```svelte
 <script lang="ts">
-  import BackLink from './BackLink.svelte';
+  import BackLink from "./BackLink.svelte";
 </script>
 
-<BackLink href="/checkout/shipping" data-step="payment">Go back to shipping</BackLink>
+<BackLink
+  href="/checkout/shipping"
+  data-step="payment">Go back to shipping</BackLink
+>
 ```
 
 ### With rel and tracking
 
 ```svelte
 <script lang="ts">
-  import BackLink from './BackLink.svelte';
+  import BackLink from "./BackLink.svelte";
 </script>
 
-<BackLink href="/" rel="up" data-track="home-back">Back to home</BackLink>
+<BackLink
+  href="/"
+  rel="up"
+  data-track="home-back">Back to home</BackLink
+>
 ```
 
 ### Reactive href
 
 ```svelte
 <script lang="ts">
-  import BackLink from './BackLink.svelte';
+  import BackLink from "./BackLink.svelte";
 
-  let previous = $state('/step-1');
+  let previous = $state("/step-1");
 </script>
 
 <BackLink href={previous}>Back</BackLink>

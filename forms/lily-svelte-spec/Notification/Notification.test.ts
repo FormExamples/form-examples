@@ -27,7 +27,9 @@ describe("Notification", () => {
     });
 
     test("has assertive live region when urgent", () => {
-        render(Subject, { props: { urgent: true, "data-testid": "n", children: textSnippet("E") } });
+        render(Subject, {
+            props: { urgent: true, "data-testid": "n", children: textSnippet("E") },
+        });
         expect(screen.getByTestId("n").getAttribute("aria-live")).toBe("assertive");
     });
 

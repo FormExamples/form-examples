@@ -42,7 +42,9 @@ describe("SummaryListItem", () => {
     });
 
     test("passes through attributes to wrapper div", () => {
-        render(Subject, { props: { term: "Key", "data-testid": "sli", children: textSnippet("Value") } });
+        render(Subject, {
+            props: { term: "Key", "data-testid": "sli", children: textSnippet("Value") },
+        });
         expect(screen.getByTestId("sli")).toBeTruthy();
         expect(screen.getByTestId("sli").tagName).toBe("DIV");
     });

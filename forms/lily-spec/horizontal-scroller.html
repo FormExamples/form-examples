@@ -4,8 +4,17 @@
   Description: a horizontally scrollable content container
   HTML tag: <div>
   CSS class: horizontal-scroller
-  Keyboard: None (passive element)
-  Accessibility: role="region", aria-label for accessible name
+  Keyboard: ArrowRight/ArrowLeft scroll by data-step pixels (default 100), Home scrolls to the start, End to the end
+  Accessibility: role="region", aria-label for accessible name, tabindex="0" (a scrollable region must be focusable)
+  Usage:
+    <div
+      class="horizontal-scroller"
+      role="region"
+      aria-label=""
+      tabindex="0"
+      data-step="100"
+    >
+    </div>
 -->
 
 <div
@@ -13,6 +22,34 @@
   role="region"
   aria-label=""
   tabindex="0"
+  data-step="100"
 >
   <!-- Consumer provides content -->
 </div>
+
+<script>
+  // HorizontalScroller behavior
+  (function() {
+    'use strict';
+    document.querySelectorAll('.horizontal-scroller').forEach(function(el) {
+      el.addEventListener('keydown', function(e) {
+        var step = parseFloat(el.getAttribute('data-step'));
+        if (isNaN(step)) step = 100;
+        if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          el.scrollBy({ left: step, behavior: 'smooth' });
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          el.scrollBy({ left: -step, behavior: 'smooth' });
+        } else if (e.key === 'Home') {
+          e.preventDefault();
+          el.scrollTo({ left: 0, behavior: 'smooth' });
+        } else if (e.key === 'End') {
+          e.preventDefault();
+          var end = getComputedStyle(el).direction === 'rtl' ? -el.scrollWidth : el.scrollWidth;
+          el.scrollTo({ left: end, behavior: 'smooth' });
+        }
+      });
+    });
+  })();
+</script>

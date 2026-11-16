@@ -10,7 +10,7 @@ See [components/table-row/index.md](../../../components/table-row/index.md) for 
 
 ```svelte
 <script lang="ts">
-    import TableRow from "./TableRow.svelte";
+  import TableRow from "./TableRow.svelte";
 </script>
 
 <TableRow />

@@ -38,7 +38,9 @@ describe("Option", () => {
     });
 
     test("passes through attributes", () => {
-        render(Subject, { props: { value: "a", "data-testid": "opt", children: textSnippet("A") } });
+        render(Subject, {
+            props: { value: "a", "data-testid": "opt", children: textSnippet("A") },
+        });
         expect(screen.getByTestId("opt")).toBeTruthy();
     });
 });

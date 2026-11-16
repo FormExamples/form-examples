@@ -44,29 +44,29 @@ Place `KanbanTableTD` elements inside a `KanbanTableRow` within `KanbanTableHead
 
 ```svelte
 <script lang="ts">
-    import KanbanTable from "../KanbanTable/KanbanTable.svelte";
-    import KanbanTableHead from "../KanbanTableHead/KanbanTableHead.svelte";
-    import KanbanTableBody from "../KanbanTableBody/KanbanTableBody.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
-    import KanbanTableTD from "./KanbanTableTD.svelte";
-    import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
+  import KanbanTable from "../KanbanTable/KanbanTable.svelte";
+  import KanbanTableHead from "../KanbanTableHead/KanbanTableHead.svelte";
+  import KanbanTableBody from "../KanbanTableBody/KanbanTableBody.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  import KanbanTableTD from "./KanbanTableTD.svelte";
+  import KanbanTableTD from "../KanbanTableTD/KanbanTableTD.svelte";
 </script>
 
 <KanbanTable label="Board">
-    <KanbanTableHead>
-        <KanbanTableRow>
-            <KanbanTableTD>To do</KanbanTableTD>
-            <KanbanTableTD>In progress</KanbanTableTD>
-            <KanbanTableTD>Done</KanbanTableTD>
-        </KanbanTableRow>
-    </KanbanTableHead>
-    <KanbanTableBody>
-        <KanbanTableRow>
-            <KanbanTableTD>A</KanbanTableTD>
-            <KanbanTableTD>B</KanbanTableTD>
-            <KanbanTableTD>C</KanbanTableTD>
-        </KanbanTableRow>
-    </KanbanTableBody>
+  <KanbanTableHead>
+    <KanbanTableRow>
+      <KanbanTableTD>To do</KanbanTableTD>
+      <KanbanTableTD>In progress</KanbanTableTD>
+      <KanbanTableTD>Done</KanbanTableTD>
+    </KanbanTableRow>
+  </KanbanTableHead>
+  <KanbanTableBody>
+    <KanbanTableRow>
+      <KanbanTableTD>A</KanbanTableTD>
+      <KanbanTableTD>B</KanbanTableTD>
+      <KanbanTableTD>C</KanbanTableTD>
+    </KanbanTableRow>
+  </KanbanTableBody>
 </KanbanTable>
 ```
 
@@ -74,10 +74,13 @@ Place `KanbanTableTD` elements inside a `KanbanTableRow` within `KanbanTableHead
 
 ```svelte
 <KanbanTableHead>
-    <KanbanTableRow>
-        <KanbanTableTD colspan={2} scope="colgroup">Active</KanbanTableTD>
-        <KanbanTableTD>Done</KanbanTableTD>
-    </KanbanTableRow>
+  <KanbanTableRow>
+    <KanbanTableTD
+      colspan={2}
+      scope="colgroup">Active</KanbanTableTD
+    >
+    <KanbanTableTD>Done</KanbanTableTD>
+  </KanbanTableRow>
 </KanbanTableHead>
 ```
 
@@ -85,11 +88,11 @@ Place `KanbanTableTD` elements inside a `KanbanTableRow` within `KanbanTableHead
 
 ```svelte
 <KanbanTableHead>
-    <KanbanTableRow>
-        <KanbanTableTD data-stage="todo">To do</KanbanTableTD>
-        <KanbanTableTD data-stage="doing">In progress</KanbanTableTD>
-        <KanbanTableTD data-stage="done">Done</KanbanTableTD>
-    </KanbanTableRow>
+  <KanbanTableRow>
+    <KanbanTableTD data-stage="todo">To do</KanbanTableTD>
+    <KanbanTableTD data-stage="doing">In progress</KanbanTableTD>
+    <KanbanTableTD data-stage="done">Done</KanbanTableTD>
+  </KanbanTableRow>
 </KanbanTableHead>
 ```
 

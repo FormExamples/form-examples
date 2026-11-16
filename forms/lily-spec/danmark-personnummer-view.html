@@ -5,13 +5,12 @@
   HTML tag: <span>
   CSS class: danmark-personnummer-view
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
   Format: 10 digits in the format DDMMYYXXXX where the first 6 are the date of birth (DDMMYY)
   Usage:
-    <span class="danmark-personnummer-view" aria-label="Personal Identity Code">value-here</span>
+    <span class="danmark-personnummer-view">value-here</span>
 -->
 
-<span
-  class="danmark-personnummer-view"
-  aria-label="Personal Identity Code"
-></span>
+<span class="danmark-personnummer-view"
+  ><span class="screen-reader-span">Personal Identity Code </span></span
+>

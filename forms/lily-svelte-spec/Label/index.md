@@ -42,23 +42,26 @@ Either link the label to a control by `for` matching the control's `id`, or wrap
 
 ```svelte
 <script lang="ts">
-    import Label from "./Label.svelte";
+  import Label from "./Label.svelte";
 </script>
 
 <Label for="email">Email address</Label>
-<input id="email" type="email" />
+<input
+  id="email"
+  type="email"
+/>
 ```
 
 ### Label wrapping a form control (no `for` needed)
 
 ```svelte
 <script lang="ts">
-    import Label from "./Label.svelte";
+  import Label from "./Label.svelte";
 </script>
 
 <Label>
-    Email address
-    <input type="email" />
+  Email address
+  <input type="email" />
 </Label>
 ```
 
@@ -66,45 +69,59 @@ Either link the label to a control by `for` matching the control's `id`, or wrap
 
 ```svelte
 <script lang="ts">
-    import Label from "./Label.svelte";
+  import Label from "./Label.svelte";
 </script>
 
 <Label for="name">
-    Name <span aria-hidden="true">*</span>
-    <span class="visually-hidden">required</span>
+  Name <span aria-hidden="true">*</span>
+  <span class="screen-reader-span">required</span>
 </Label>
-<input id="name" type="text" required />
+<input
+  id="name"
+  type="text"
+  required
+/>
 ```
 
 ### Label pairing with CheckboxInput
 
 ```svelte
 <script lang="ts">
-    import Label from "./Label.svelte";
-    import CheckboxInput from "../CheckboxInput/CheckboxInput.svelte";
-    let agreed = $state(false);
+  import Label from "./Label.svelte";
+  import CheckboxInput from "../CheckboxInput/CheckboxInput.svelte";
+  let agreed = $state(false);
 </script>
 
 <Label for="agree">I agree to the terms</Label>
-<CheckboxInput id="agree" label="I agree to the terms" bind:checked={agreed} />
+<CheckboxInput
+  id="agree"
+  label="I agree to the terms"
+  bind:checked={agreed}
+/>
 ```
 
 ### Label with a consumer CSS class
 
 ```svelte
 <script lang="ts">
-    import Label from "./Label.svelte";
+  import Label from "./Label.svelte";
 </script>
 
-<Label class="label-strong" for="zip">ZIP code</Label>
-<input id="zip" type="text" />
+<Label
+  class="label-strong"
+  for="zip">ZIP code</Label
+>
+<input
+  id="zip"
+  type="text"
+/>
 
 <style>
-    :global(.label-strong) {
-        font-weight: 600;
-        display: block;
-        margin-bottom: 0.25rem;
-    }
+  :global(.label-strong) {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.25rem;
+  }
 </style>
 ```
 

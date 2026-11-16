@@ -5,13 +5,12 @@
   HTML tag: <span>
   CSS class: slovenija-emso-view
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
   Format: 13 digits: the first 7 are the date of birth (DDMMYYY), digits 8-9 the register, 10-12 a sex-and-serial component (000-499 male, 500-999 female), 13 a check digit
   Usage:
-    <span class="slovenija-emso-view" aria-label="Unique Master Citizen Number">value-here</span>
+    <span class="slovenija-emso-view">value-here</span>
 -->
 
-<span
-  class="slovenija-emso-view"
-  aria-label="Unique Master Citizen Number"
-></span>
+<span class="slovenija-emso-view"
+  ><span class="screen-reader-span">Unique Master Citizen Number </span></span
+>

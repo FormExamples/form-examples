@@ -35,10 +35,13 @@ A headless Svelte 5 component that renders a wrapper `<div class="split-view">` 
 
 ```svelte
 <script lang="ts">
-  import SplitView from './SplitView.svelte';
+  import SplitView from "./SplitView.svelte";
 </script>
 
-<SplitView label="Editor and preview" splitPercent={40}>
+<SplitView
+  label="Editor and preview"
+  splitPercent={40}
+>
   {#snippet primary()}
     <textarea>Editor</textarea>
   {/snippet}

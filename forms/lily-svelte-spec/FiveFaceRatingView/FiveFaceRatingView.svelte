@@ -2,7 +2,7 @@
     // FiveFaceRatingView component
     //
     // A read-only five-face rating display that shows a text label corresponding to a
-    // rating value from 1 to 5. This is the display-only companion to FiveFaceRatingPicker,
+    // rating value from 1 to 5. This is the display-only companion to FiveFaceRatingRadioGroup,
     // used for showing previously submitted ratings in summaries, review lists, or
     // dashboard displays. Renders a span with role="img" and the face label text.
     //
@@ -10,7 +10,7 @@
     //   className — string, optional. CSS class name.
     //   value — number, required. Rating value (1-5) to display.
     //   label — string, required. Accessible description via aria-label.
-    //   labels — string[], default ["Very bad", "Bad", "Okay", "Good", "Very good"]. Text labels for each face.
+    //   labels — string[], default ["1", "2", "3", "4", "5"] (no English default; pass words, e.g. ["Very bad", …, "Very good"]). Text labels for each face.
     //   ...restProps — additional HTML attributes spread onto the span.
     //
     // Syntax:
@@ -37,7 +37,7 @@
     // Claude rules:
     //   - Headless: no CSS, no styles — consumer provides all styling
     //   - Uses $derived() to look up the face label from the labels array based on value
-    //   - Companion to FiveFaceRatingPicker for the Input/View pattern
+    //   - Companion to FiveFaceRatingRadioGroup for the Input/View pattern
     //
     // References:
     //   - WAI-ARIA img role: https://www.w3.org/WAI/ARIA/apd/roles/img/
@@ -46,7 +46,8 @@
         class: className = "",
         value,
         label,
-        labels = ["Very bad", "Bad", "Okay", "Good", "Very good"],
+        // The numbers, not English words: the words are the consumer's to supply.
+        labels = ["1", "2", "3", "4", "5"],
         ...restProps
     }: {
         /** Rating value (1-5). */

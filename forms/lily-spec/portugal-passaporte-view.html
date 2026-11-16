@@ -5,13 +5,12 @@
   HTML tag: <span>
   CSS class: portugal-passaporte-view
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
   Format: 1 letter [A-Z] and 6 digits [0-9]
   Usage:
-    <span class="portugal-passaporte-view" aria-label="Portuguese Passport">value-here</span>
+    <span class="portugal-passaporte-view">value-here</span>
 -->
 
-<span
-  class="portugal-passaporte-view"
-  aria-label="Portuguese Passport"
-></span>
+<span class="portugal-passaporte-view"
+  ><span class="screen-reader-span">Portuguese Passport </span></span
+>

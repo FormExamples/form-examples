@@ -5,16 +5,18 @@
   HTML tag: <span>
   CSS class: tag
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: not a live region by default. aria-label is not allowed
+    on a plain <span>, so extra context for screen readers is text appended
+    after the content (class screen-reader-span, which the themes hide); the
+    content stays exposed, since it may hold a control such as a remove
+    button. For a tag whose text changes in place, make it a live region
+    instead: role="status" with aria-label.
   Usage:
-    <span class="tag" aria-label="Example">
-      ...
-    </span>
+    <span class="tag">High<span class="screen-reader-span"> priority</span></span>
+    <span class="tag" role="status" aria-label="Build: Passing">Passing</span>
 -->
 
-<span
-  class="tag"
-  aria-label=""
->
+<span class="tag">
   <!-- Consumer provides text content -->
+  <span class="screen-reader-span"><!-- Optional context for screen readers --></span>
 </span>

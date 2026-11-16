@@ -1,4 +1,7 @@
-<script module lang="ts">
+<script
+    module
+    lang="ts"
+>
     import { defineMeta } from "@storybook/addon-svelte-csf";
     import ChatList from "./ChatList.svelte";
     const { Story } = defineMeta({
@@ -7,7 +10,10 @@
     });
 </script>
 
-<Story name="Default" tags={["autodocs", "!dev"]}>
+<Story
+    name="Default"
+    tags={["autodocs", "!dev"]}
+>
     <ChatList label="ChatList example">
         <span>ChatList example</span>
     </ChatList>

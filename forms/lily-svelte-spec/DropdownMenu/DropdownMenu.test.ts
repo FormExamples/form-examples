@@ -87,7 +87,9 @@ describe("DropdownMenu", () => {
     });
 
     test("passes through attributes", () => {
-        render(Subject, { props: { label: "Options", "data-testid": "dd", children: menuItemsSnippet() } });
+        render(Subject, {
+            props: { label: "Options", "data-testid": "dd", children: menuItemsSnippet() },
+        });
         expect(screen.getByTestId("dd")).toBeTruthy();
     });
 });

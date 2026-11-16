@@ -2,31 +2,19 @@
 <!-- Slider component -->
 <!--
   Description: a draggable control for selecting a value along a track
-  HTML tag: <div>
+  HTML tag: <input type="range">
   CSS class: slider
-  Keyboard: Tab to focus, Arrow keys to adjust value
-  Accessibility: role="slider", aria-label for accessible name
+  Keyboard: the native range input's: Tab to focus, the arrow keys, Home, End, PageUp and PageDown adjust the value
+  Accessibility: the input's implicit slider role, with aria-label for its name
   Usage:
-    <div class="slider" role="slider" aria-label="Example">
-      ...
-    </div>
+    <input class="slider" type="range" aria-label="Example" min="0" max="100" value="50" />
 -->
 
-<div
+<input
   class="slider"
-  role="slider"
+  type="range"
   aria-label=""
->
-  <!-- Consumer provides content -->
-</div>
-
-<script>
-  // Slider behavior
-  (function() {
-    'use strict';
-    // Slider: consumer implements interactive behavior
-    document.querySelectorAll('.slider').forEach(function(el) {
-      // Interactive behavior initialization
-    });
-  })();
-</script>
+  min="0"
+  max="100"
+  value="50"
+/>

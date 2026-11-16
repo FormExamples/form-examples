@@ -62,8 +62,14 @@ Import `TaskList` and place `TaskListItem` children (or raw `<li>` elements) ins
 </script>
 
 <TaskList label="Onboarding checklist">
-  <TaskListItem label="Create account" bind:checked={a} />
-  <TaskListItem label="Complete profile" bind:checked={b} />
+  <TaskListItem
+    label="Create account"
+    bind:checked={a}
+  />
+  <TaskListItem
+    label="Complete profile"
+    bind:checked={b}
+  />
 </TaskList>
 ```
 
@@ -90,7 +96,10 @@ Import `TaskList` and place `TaskListItem` children (or raw `<li>` elements) ins
 
 <TaskList label="Weekend chores">
   {#each tasks as task (task.id)}
-    <TaskListItem label={task.label} bind:checked={task.checked} />
+    <TaskListItem
+      label={task.label}
+      bind:checked={task.checked}
+    />
   {/each}
 </TaskList>
 ```

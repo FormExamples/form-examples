@@ -31,27 +31,42 @@ function menuItemsSnippet() {
 
 describe("ContextMenu", () => {
     test("hidden when open is false", () => {
-        render(Subject, { props: { label: "Actions", open: false, children: textSnippet("Items") } });
+        render(Subject, {
+            props: { label: "Actions", open: false, children: textSnippet("Items") },
+        });
         expect(screen.queryByRole("menu")).toBeNull();
     });
 
     test("visible when open is true", () => {
-        render(Subject, { props: { label: "Actions", open: true, children: textSnippet("Items") } });
+        render(Subject, {
+            props: { label: "Actions", open: true, children: textSnippet("Items") },
+        });
         expect(screen.getByRole("menu", { name: "Actions" })).toBeTruthy();
     });
 
     test("renders children", () => {
-        render(Subject, { props: { label: "Actions", open: true, children: textSnippet("Custom Content") } });
+        render(Subject, {
+            props: { label: "Actions", open: true, children: textSnippet("Custom Content") },
+        });
         expect(screen.getByRole("menu").textContent).toContain("Custom Content");
     });
 
     test("passes through attributes", () => {
-        render(Subject, { props: { label: "Actions", open: true, "data-testid": "ctx", children: textSnippet("Items") } });
+        render(Subject, {
+            props: {
+                label: "Actions",
+                open: true,
+                "data-testid": "ctx",
+                children: textSnippet("Items"),
+            },
+        });
         expect(screen.getByTestId("ctx")).toBeTruthy();
     });
 
     test("has correct aria-label", () => {
-        render(Subject, { props: { label: "File actions", open: true, children: textSnippet("Items") } });
+        render(Subject, {
+            props: { label: "File actions", open: true, children: textSnippet("Items") },
+        });
         expect(screen.getByRole("menu").getAttribute("aria-label")).toBe("File actions");
     });
 

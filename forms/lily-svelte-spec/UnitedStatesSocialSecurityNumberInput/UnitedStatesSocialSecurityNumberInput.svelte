@@ -82,6 +82,7 @@
     inputmode="numeric"
     pattern={ssnPattern}
     autocomplete="off"
+    spellcheck="false"
     bind:value
     {required}
     {disabled}

@@ -5,13 +5,10 @@
   HTML tag: <span>
   CSS class: lietuva-pasas-view
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
   Format: 8-digit passport or identity card number
   Usage:
-    <span class="lietuva-pasas-view" aria-label="Lithuanian Passport">value-here</span>
+    <span class="lietuva-pasas-view">value-here</span>
 -->
 
-<span
-  class="lietuva-pasas-view"
-  aria-label="Lithuanian Passport"
-></span>
+<span class="lietuva-pasas-view"><span class="screen-reader-span">Lithuanian Passport </span></span>

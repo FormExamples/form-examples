@@ -30,7 +30,7 @@ A headless Svelte 5 component that renders `<div class="menu-group" role="group"
 
 ```svelte
 <script lang="ts">
-  import MenuGroup from './MenuGroup.svelte';
+  import MenuGroup from "./MenuGroup.svelte";
 </script>
 
 <MenuGroup label="File">

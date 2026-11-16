@@ -54,6 +54,7 @@
 </script>
 
 <!-- Caption.svelte -->
+<!-- svelte-ignore a11y_figcaption_parent (Caption is a figure part; the consumer places it inside their <figure>) -->
 <figcaption
     class={`caption ${className}`}
     {...restProps}

@@ -51,7 +51,10 @@ Import the component, bind `value`, and pass a translated `label`. Extend with p
   let phone = $state("");
 </script>
 
-<TelInput label="Phone number" bind:value={phone} />
+<TelInput
+  label="Phone number"
+  bind:value={phone}
+/>
 ```
 
 ```svelte
@@ -61,7 +64,11 @@ Import the component, bind `value`, and pass a translated `label`. Extend with p
   let mobile = $state("");
 </script>
 
-<TelInput label="Mobile" bind:value={mobile} required />
+<TelInput
+  label="Mobile"
+  bind:value={mobile}
+  required
+/>
 ```
 
 ```svelte
@@ -88,8 +95,15 @@ Import the component, bind `value`, and pass a translated `label`. Extend with p
   let readOnly = $state(true);
 </script>
 
-<TelInput label="Contact number" bind:value={phone} disabled={readOnly} />
-<button type="button" onclick={() => (readOnly = !readOnly)}>
+<TelInput
+  label="Contact number"
+  bind:value={phone}
+  disabled={readOnly}
+/>
+<button
+  type="button"
+  onclick={() => (readOnly = !readOnly)}
+>
   {readOnly ? "Edit" : "Lock"}
 </button>
 ```

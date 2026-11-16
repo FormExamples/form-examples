@@ -10,7 +10,7 @@ See [components/section-link/index.md](../../../components/section-link/index.md
 
 ```svelte
 <script lang="ts">
-    import SectionLink from "./SectionLink.svelte";
+  import SectionLink from "./SectionLink.svelte";
 </script>
 
 <SectionLink />

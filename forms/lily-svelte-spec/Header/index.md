@@ -39,74 +39,80 @@ Wrap header content in `<Header>...</Header>`. Provide `label` when there are mu
 
 ```svelte
 <script lang="ts">
-    import Header from "./Header.svelte";
+  import Header from "./Header.svelte";
 </script>
 
 <Header label="Site header">
-    <h1>My Site</h1>
+  <h1>My Site</h1>
 </Header>
 ```
 
 ```svelte
 <script lang="ts">
-    import Header from "./Header.svelte";
+  import Header from "./Header.svelte";
 </script>
 
 <Header>
-    <h1>Page Title</h1>
-    <nav aria-label="Primary">
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-    </nav>
+  <h1>Page Title</h1>
+  <nav aria-label="Primary">
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+  </nav>
 </Header>
 ```
 
 ```svelte
 <script lang="ts">
-    import Header from "./Header.svelte";
+  import Header from "./Header.svelte";
 </script>
 
 <article>
-    <Header label="Article header">
-        <h1>Article title</h1>
-        <p>By Jamie, 2026-04-18</p>
-    </Header>
-    <p>Body content...</p>
+  <Header label="Article header">
+    <h1>Article title</h1>
+    <p>By Jamie, 2026-04-18</p>
+  </Header>
+  <p>Body content...</p>
 </article>
 ```
 
 ```svelte
 <script lang="ts">
-    import Header from "./Header.svelte";
+  import Header from "./Header.svelte";
 </script>
 
 <Header
-    class="site-header"
-    data-testid="site-header"
-    label="Site header"
+  class="site-header"
+  data-testid="site-header"
+  label="Site header"
 >
-    <a href="/" aria-label="Home">Logo</a>
-    <form role="search">
-        <label>Search <input type="search" /></label>
-    </form>
+  <a
+    href="/"
+    aria-label="Home">Logo</a
+  >
+  <form role="search">
+    <label>Search <input type="search" /></label>
+  </form>
 </Header>
 ```
 
 ```svelte
 <script lang="ts">
-    import Header from "./Header.svelte";
-    import HamburgerMenu from "../HamburgerMenu/HamburgerMenu.svelte";
-    let open = $state(false);
+  import Header from "./Header.svelte";
+  import HamburgerMenu from "../HamburgerMenu/HamburgerMenu.svelte";
+  let open = $state(false);
 </script>
 
 <Header label="Mobile header">
-    <a href="/">Logo</a>
-    <HamburgerMenu label="Menu" bind:open>
-        <ul>
-            <li><a href="/a">A</a></li>
-            <li><a href="/b">B</a></li>
-        </ul>
-    </HamburgerMenu>
+  <a href="/">Logo</a>
+  <HamburgerMenu
+    label="Menu"
+    bind:open
+  >
+    <ul>
+      <li><a href="/a">A</a></li>
+      <li><a href="/b">B</a></li>
+    </ul>
+  </HamburgerMenu>
 </Header>
 ```
 

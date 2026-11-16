@@ -5,8 +5,12 @@ import FranceNumeroDIdentificationAuRepertoireView from "./FranceNumeroDIdentifi
 describe("FranceNumeroDIdentificationAuRepertoireView", () => {
     test("renders with content", () => {
         render(FranceNumeroDIdentificationAuRepertoireView, { props: { label: "Test" } });
-        const el = screen.getByLabelText("Test");
+        const el = document.querySelector(
+            ".france-numero-d-identification-au-repertoire-view",
+        ) as HTMLElement;
         expect(el).toBeTruthy();
-        expect(el.getAttribute("class")).toContain("france-numero-d-identification-au-repertoire-view");
+        expect(el.getAttribute("class")).toContain(
+            "france-numero-d-identification-au-repertoire-view",
+        );
     });
 });

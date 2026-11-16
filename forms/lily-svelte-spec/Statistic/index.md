@@ -37,14 +37,22 @@ A headless Svelte 5 component inspired by [Ant Design Statistic](https://ant.des
 
 ```svelte
 <script lang="ts">
-  import Statistic from './Statistic.svelte';
+  import Statistic from "./Statistic.svelte";
 </script>
 
-<Statistic title="Active users" value="1,234" />
+<Statistic
+  title="Active users"
+  value="1,234"
+/>
 
-<Statistic title="Revenue" value="42">
-  {#snippet prefix()}$ {/snippet}
-  {#snippet suffix()} M{/snippet}
+<Statistic
+  title="Revenue"
+  value="42"
+>
+  {#snippet prefix()}$
+  {/snippet}
+  {#snippet suffix()}
+    M{/snippet}
 </Statistic>
 ```
 

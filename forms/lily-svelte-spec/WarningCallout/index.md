@@ -32,69 +32,78 @@ Import the component, pass content through the default `children` snippet, and o
 
 ## Props
 
-| Prop        | Type       | Default     | Description                                                           |
-| ----------- | ---------- | ----------- | --------------------------------------------------------------------- |
-| `class`     | `string`   | `""`        | Additional CSS class appended to the base class name.                 |
-| `label`     | `string`   | `undefined` | Optional `aria-label` to distinguish multiple alerts.                 |
-| `children`  | `Snippet`  | —           | Required. Warning content.                                            |
-| `...rest`   | —          | —           | Spread onto the `<aside>`.                                            |
+| Prop       | Type      | Default     | Description                                           |
+| ---------- | --------- | ----------- | ----------------------------------------------------- |
+| `class`    | `string`  | `""`        | Additional CSS class appended to the base class name. |
+| `label`    | `string`  | `undefined` | Optional `aria-label` to distinguish multiple alerts. |
+| `children` | `Snippet` | —           | Required. Warning content.                            |
+| `...rest`  | —         | —           | Spread onto the `<aside>`.                            |
 
 ## Usage
 
 ```svelte
 <script lang="ts">
-    import WarningCallout from "./WarningCallout.svelte";
+  import WarningCallout from "./WarningCallout.svelte";
 </script>
 
 <WarningCallout label="Session warning">
-    <p>Your session is about to expire.</p>
+  <p>Your session is about to expire.</p>
 </WarningCallout>
 ```
 
 ```svelte
 <script lang="ts">
-    import WarningCallout from "./WarningCallout.svelte";
+  import WarningCallout from "./WarningCallout.svelte";
 </script>
 
 <WarningCallout>
-    <p>Unsaved changes will be lost when you navigate away.</p>
+  <p>Unsaved changes will be lost when you navigate away.</p>
 </WarningCallout>
 ```
 
 ```svelte
 <script lang="ts">
-    import WarningCallout from "./WarningCallout.svelte";
+  import WarningCallout from "./WarningCallout.svelte";
 
-    let show = $state(false);
+  let show = $state(false);
 </script>
 
-<button type="button" onclick={() => (show = !show)}>Toggle warning</button>
+<button
+  type="button"
+  onclick={() => (show = !show)}>Toggle warning</button
+>
 
 {#if show}
-    <WarningCallout label="Validation warning">
-        <p>Some fields contain unusual values. Please review before submitting.</p>
-    </WarningCallout>
+  <WarningCallout label="Validation warning">
+    <p>Some fields contain unusual values. Please review before submitting.</p>
+  </WarningCallout>
 {/if}
 ```
 
 ```svelte
 <script lang="ts">
-    import WarningCallout from "./WarningCallout.svelte";
+  import WarningCallout from "./WarningCallout.svelte";
 </script>
 
-<WarningCallout label="Storage warning" data-testid="storage-warning">
-    <h2>Storage almost full</h2>
-    <p>You have used 95% of your available storage. Delete files to free up space.</p>
+<WarningCallout
+  label="Storage warning"
+  data-testid="storage-warning"
+>
+  <h2>Storage almost full</h2>
+  <p>You have used 95% of your available storage. Delete files to free up space.</p>
 </WarningCallout>
 ```
 
 ```svelte
 <script lang="ts">
-    import WarningCallout from "./WarningCallout.svelte";
+  import WarningCallout from "./WarningCallout.svelte";
 </script>
 
-<WarningCallout class="warning-callout--inline" label="Rate limit">
-    <p>You are approaching your API rate limit.</p>
+<WarningCallout
+  class="warning-callout--inline"
+  label="Rate limit"
+>
+  <p>You are approaching your API rate limit.</p>
 </WarningCallout>
 ```
 

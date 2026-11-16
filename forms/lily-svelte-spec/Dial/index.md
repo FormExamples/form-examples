@@ -32,25 +32,31 @@ Bind a numeric value, define `min`/`max`/`step`, and provide an accessible `labe
 
 ```svelte
 <script lang="ts">
-    import Dial from "./Dial.svelte";
-    let volume = $state(50);
+  import Dial from "./Dial.svelte";
+  let volume = $state(50);
 </script>
 
-<Dial label="Volume" bind:value={volume} min={0} max={100} step={1} />
+<Dial
+  label="Volume"
+  bind:value={volume}
+  min={0}
+  max={100}
+  step={1}
+/>
 ```
 
 ## Props
 
-| Prop       | Type      | Default  | Description                                    |
-| ---------- | --------- | -------- | ---------------------------------------------- |
-| `class`    | `string`  | `""`     | CSS class appended to the base class.         |
-| `value`    | `number`  | `0`      | Current value. Bindable.                       |
-| `min`      | `number`  | `0`      | Minimum value.                                 |
-| `max`      | `number`  | `100`    | Maximum value.                                 |
-| `step`     | `number`  | `1`      | Increment per arrow key press.                 |
-| `label`    | `string`  | required | Accessible name via `aria-label`.              |
-| `disabled` | `boolean` | `false`  | Whether the dial is disabled.                  |
-| `...rest`  | `unknown` | —        | Additional HTML attributes on the `<div>`.     |
+| Prop       | Type      | Default  | Description                                |
+| ---------- | --------- | -------- | ------------------------------------------ |
+| `class`    | `string`  | `""`     | CSS class appended to the base class.      |
+| `value`    | `number`  | `0`      | Current value. Bindable.                   |
+| `min`      | `number`  | `0`      | Minimum value.                             |
+| `max`      | `number`  | `100`    | Maximum value.                             |
+| `step`     | `number`  | `1`      | Increment per arrow key press.             |
+| `label`    | `string`  | required | Accessible name via `aria-label`.          |
+| `disabled` | `boolean` | `false`  | Whether the dial is disabled.              |
+| `...rest`  | `unknown` | —        | Additional HTML attributes on the `<div>`. |
 
 ## Usage
 
@@ -58,45 +64,81 @@ Bind a numeric value, define `min`/`max`/`step`, and provide an accessible `labe
 
 ```svelte
 <script lang="ts">
-    import Dial from "./Dial.svelte";
-    let value = $state(25);
+  import Dial from "./Dial.svelte";
+  let value = $state(25);
 </script>
 
-<Dial label="Brightness" bind:value />
+<Dial
+  label="Brightness"
+  bind:value
+/>
 ```
 
 ### 2. Custom range and step
 
 ```svelte
-<Dial label="Temperature" bind:value={temp} min={10} max={30} step={0.5} />
+<Dial
+  label="Temperature"
+  bind:value={temp}
+  min={10}
+  max={30}
+  step={0.5}
+/>
 ```
 
 ### 3. Disabled dial
 
 ```svelte
-<Dial label="Locked control" value={30} disabled />
+<Dial
+  label="Locked control"
+  value={30}
+  disabled
+/>
 ```
 
 ### 4. Multiple dials in a group
 
 ```svelte
 <script lang="ts">
-    import Dial from "./Dial.svelte";
-    import DialGroup from "../DialGroup/DialGroup.svelte";
-    let bass = $state(0), mid = $state(0), treble = $state(0);
+  import Dial from "./Dial.svelte";
+  import DialGroup from "../DialGroup/DialGroup.svelte";
+  let bass = $state(0),
+    mid = $state(0),
+    treble = $state(0);
 </script>
 
 <DialGroup label="Equalizer">
-    <Dial label="Bass" bind:value={bass} min={-10} max={10} />
-    <Dial label="Mid" bind:value={mid} min={-10} max={10} />
-    <Dial label="Treble" bind:value={treble} min={-10} max={10} />
+  <Dial
+    label="Bass"
+    bind:value={bass}
+    min={-10}
+    max={10}
+  />
+  <Dial
+    label="Mid"
+    bind:value={mid}
+    min={-10}
+    max={10}
+  />
+  <Dial
+    label="Treble"
+    bind:value={treble}
+    min={-10}
+    max={10}
+  />
 </DialGroup>
 ```
 
 ### 5. Keyboard shortcut with Shift
 
 ```svelte
-<Dial label="Volume" bind:value={volume} min={0} max={100} step={1} />
+<Dial
+  label="Volume"
+  bind:value={volume}
+  min={0}
+  max={100}
+  step={1}
+/>
 <!-- ArrowUp: +1 | Shift+ArrowUp: +10 | Home: 0 | End: 100 -->
 ```
 

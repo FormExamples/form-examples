@@ -22,7 +22,7 @@ A single `<button type="button">` designed to be placed inside a `ToolBar`, with
 
 - Don't use it outside a `ToolBar` when you want roving focus — the navigation logic lives in the parent.
 - Don't use it to submit forms — use `SubmitInput` or `ButtonInput`.
-- Don't use it for a toggle state — use `ToggleButton` with `role="switch"`.
+- Don't use it for a toggle state — use `ToggleButton`, a toggle button with `aria-pressed`.
 - Don't use it for navigation — use an `<a>` element.
 
 ## How to use it

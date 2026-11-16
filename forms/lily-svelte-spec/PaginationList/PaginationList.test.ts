@@ -22,24 +22,26 @@ function pagesSnippet() {
 
 describe("PaginationList", () => {
     test("renders an ordered list", () => {
-        render(Subject, { props: { children: pagesSnippet() } });
+        render(Subject, { props: { label: "Pages", children: pagesSnippet() } });
         const list = screen.getByRole("list");
         expect(list.tagName).toBe("OL");
     });
 
-    test("has aria-label when provided", () => {
+    test("has aria-label", () => {
         render(Subject, { props: { label: "Pages", children: pagesSnippet() } });
         expect(screen.getByLabelText("Pages")).toBeTruthy();
     });
 
     test("renders children links", () => {
-        render(Subject, { props: { children: pagesSnippet() } });
+        render(Subject, { props: { label: "Pages", children: pagesSnippet() } });
         expect(screen.getByText("1")).toBeTruthy();
         expect(screen.getByText("2")).toBeTruthy();
     });
 
     test("passes through attributes", () => {
-        render(Subject, { props: { "data-testid": "pg", children: pagesSnippet() } });
+        render(Subject, {
+            props: { label: "Pages", "data-testid": "pg", children: pagesSnippet() },
+        });
         expect(screen.getByTestId("pg")).toBeTruthy();
     });
 });

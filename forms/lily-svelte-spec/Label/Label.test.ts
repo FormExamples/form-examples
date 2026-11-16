@@ -17,7 +17,9 @@ describe("Label", () => {
     });
 
     test("has for attribute", () => {
-        render(Subject, { props: { for: "email-input", "data-testid": "lbl", children: textSnippet("Email") } });
+        render(Subject, {
+            props: { for: "email-input", "data-testid": "lbl", children: textSnippet("Email") },
+        });
         expect(screen.getByTestId("lbl").getAttribute("for")).toBe("email-input");
     });
 

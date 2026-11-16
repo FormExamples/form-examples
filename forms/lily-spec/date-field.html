@@ -2,19 +2,49 @@
 <!-- DateField component -->
 <!--
   Description: a structured field for entering date components
-  HTML tag: <div>
+  HTML tag: <fieldset>
   CSS class: date-field
-  Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Keyboard: Tab moves between the parts; each is a native text field
+  Accessibility: a legend names the group, a label each part; the fieldset's aria-describedby links any hint
+  Order: the consumer's. Year, month, day (ISO 8601) here; reorder the label and input pairs for
+    day first or month first. The labels are the consumer's words.
+  Name: each part is {name}-day, {name}-month, {name}-year, so the form submits without script.
   Usage:
-    <div class="date-field" aria-label="Example">
+    <fieldset class="date-field" aria-describedby="dob-desc">
+      <legend>Date of birth</legend>
+      <label for="dob-year">Year</label>
+      <input class="date-field-year" id="dob-year" name="dob-year" type="text" inputmode="numeric" maxlength="4" />
       ...
-    </div>
+      <p id="dob-desc">For example, 2007 3 27</p>
+    </fieldset>
 -->
 
-<div
+<fieldset
   class="date-field"
-  aria-label=""
 >
-  <!-- Consumer provides content -->
-</div>
+  <legend><!-- Consumer provides the date's name --></legend>
+  <label for="date-field-year"><!-- Consumer provides the year label --></label>
+  <input
+    class="date-field-year"
+    id="date-field-year"
+    type="text"
+    inputmode="numeric"
+    maxlength="4"
+  />
+  <label for="date-field-month"><!-- Consumer provides the month label --></label>
+  <input
+    class="date-field-month"
+    id="date-field-month"
+    type="text"
+    inputmode="numeric"
+    maxlength="2"
+  />
+  <label for="date-field-day"><!-- Consumer provides the day label --></label>
+  <input
+    class="date-field-day"
+    id="date-field-day"
+    type="text"
+    inputmode="numeric"
+    maxlength="2"
+  />
+</fieldset>

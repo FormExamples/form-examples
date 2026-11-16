@@ -10,7 +10,7 @@ A headless Svelte 5 component, paired with `StepList`. Inspired by [Ant Design S
 
 - Renders an `<li class="step-list-item">` with consumer `class` appended.
 - Applies `data-status` (one of `waiting`, `in-progress`, `finished`, `error`).
-- Applies `aria-current="step"` when `current=true`.
+- Applies `data-current` when `current=true`.
 - Applies `aria-label` when the override is provided.
 
 ## When to use it
@@ -25,7 +25,7 @@ A headless Svelte 5 component, paired with `StepList`. Inspired by [Ant Design S
 
 - `class` — string, default `""`. CSS class appended to `step-list-item`.
 - `status` — `"waiting" | "in-progress" | "finished" | "error"`, default `"waiting"`.
-- `current` — boolean, default `false`. When true, sets `aria-current="step"`.
+- `current` — boolean, default `false`. When true, sets `data-current`.
 - `label` — string, optional. `aria-label` override.
 - `children` — `Snippet`, required. Step content (title and optional description).
 - `...restProps` — additional HTML attributes spread onto the `<li>`.
@@ -34,13 +34,20 @@ A headless Svelte 5 component, paired with `StepList`. Inspired by [Ant Design S
 
 ```svelte
 <script lang="ts">
-  import StepList from '../StepList/StepList.svelte';
-  import StepListItem from './StepListItem.svelte';
+  import StepList from "../StepList/StepList.svelte";
+  import StepListItem from "./StepListItem.svelte";
 </script>
 
-<StepList label="Checkout" current={1}>
+<StepList
+  label="Checkout"
+  current={1}
+>
   <StepListItem status="finished">Cart</StepListItem>
-  <StepListItem status="in-progress" current label="Step 2 of 3: Shipping">
+  <StepListItem
+    status="in-progress"
+    current
+    label="Step 2 of 3: Shipping"
+  >
     Shipping
   </StepListItem>
   <StepListItem status="waiting">Payment</StepListItem>
@@ -49,7 +56,7 @@ A headless Svelte 5 component, paired with `StepList`. Inspired by [Ant Design S
 
 ## Accessibility
 
-- `aria-current="step"` is announced as "current step" by most screen readers.
+- `data-current` marks the current step for CSS and scripts; it is not announced. Put `aria-current="step"` on the content inside (or pass it as a rest prop on the item) so assistive technology says "current step".
 - Use `data-status` to drive consumer CSS for visual state.
 - Provide `label` overrides to give richer announcements (e.g., "Step 2 of 3: Shipping").
 

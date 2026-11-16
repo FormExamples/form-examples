@@ -43,72 +43,91 @@ Place inside a `<form>`. Pass `src` and `alt`. Optionally set `width`, `height`,
 
 ```svelte
 <script lang="ts">
-    import ImageInput from "./ImageInput.svelte";
+  import ImageInput from "./ImageInput.svelte";
 </script>
 
 <form method="post">
-    <ImageInput src="/submit.png" alt="Submit form" />
+  <ImageInput
+    src="/submit.png"
+    alt="Submit form"
+  />
 </form>
 ```
 
 ```svelte
 <script lang="ts">
-    import ImageInput from "./ImageInput.svelte";
+  import ImageInput from "./ImageInput.svelte";
 </script>
 
 <form>
-    <ImageInput
-        src="/icons/go.png"
-        alt="Go"
-        width={32}
-        height={32}
-    />
+  <ImageInput
+    src="/icons/go.png"
+    alt="Go"
+    width={32}
+    height={32}
+  />
 </form>
 ```
 
 ```svelte
 <script lang="ts">
-    import ImageInput from "./ImageInput.svelte";
-    let formValid = $state(false);
+  import ImageInput from "./ImageInput.svelte";
+  let formValid = $state(false);
 </script>
 
 <form>
-    <label>Email <input type="email" oninput={(e) => (formValid = (e.target as HTMLInputElement).checkValidity())} /></label>
-    <ImageInput src="/submit.png" alt="Submit" disabled={!formValid} />
+  <label
+    >Email <input
+      type="email"
+      oninput={(e) => (formValid = (e.target as HTMLInputElement).checkValidity())}
+    /></label
+  >
+  <ImageInput
+    src="/submit.png"
+    alt="Submit"
+    disabled={!formValid}
+  />
 </form>
 ```
 
 ```svelte
 <script lang="ts">
-    import Form from "../Form/Form.svelte";
-    import ImageInput from "./ImageInput.svelte";
+  import Form from "../Form/Form.svelte";
+  import ImageInput from "./ImageInput.svelte";
 </script>
 
-<Form label="Vote" onsubmit={() => console.log("voted")}>
-    <input type="hidden" name="candidate" value="A" />
-    <ImageInput
-        src="/vote.png"
-        alt="Cast vote"
-        width={120}
-        height={48}
-    />
+<Form
+  label="Vote"
+  onsubmit={() => console.log("voted")}
+>
+  <input
+    type="hidden"
+    name="candidate"
+    value="A"
+  />
+  <ImageInput
+    src="/vote.png"
+    alt="Cast vote"
+    width={120}
+    height={48}
+  />
 </Form>
 ```
 
 ```svelte
 <script lang="ts">
-    import ImageInput from "./ImageInput.svelte";
+  import ImageInput from "./ImageInput.svelte";
 </script>
 
 <form>
-    <ImageInput
-        src="/submit.svg"
-        alt="Search"
-        class="custom-submit"
-        data-testid="search-submit"
-        formmethod="get"
-        formaction="/search"
-    />
+  <ImageInput
+    src="/submit.svg"
+    alt="Search"
+    class="custom-submit"
+    data-testid="search-submit"
+    formmethod="get"
+    formaction="/search"
+  />
 </form>
 ```
 

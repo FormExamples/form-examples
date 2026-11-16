@@ -47,19 +47,23 @@ A headless Svelte 5 component that renders a `<div role="group">` plus two `<but
 
 ```svelte
 <script lang="ts">
-  import SplitButton from './SplitButton.svelte';
+  import SplitButton from "./SplitButton.svelte";
 
   let menuOpen = $state(false);
 
-  function save() { /* … */ }
-  function toggleMenu() { menuOpen = !menuOpen; }
+  function save() {
+    /* … */
+  }
+  function toggleMenu() {
+    menuOpen = !menuOpen;
+  }
 </script>
 
 <SplitButton
   label="Save options"
   primaryLabel="Save"
   menuLabel="More save options"
-  menuOpen={menuOpen}
+  {menuOpen}
   onprimaryclick={save}
   onmenutoggle={toggleMenu}
 >

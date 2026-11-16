@@ -48,7 +48,10 @@ Import both `ThemeSelect` and `ThemeSelectOption`. Pass a `label`, bind `value`,
   let theme = $state("light");
 </script>
 
-<ThemeSelect label="Theme" bind:value={theme}>
+<ThemeSelect
+  label="Theme"
+  bind:value={theme}
+>
   <ThemeSelectOption value="light">Light</ThemeSelectOption>
   <ThemeSelectOption value="dark">Dark</ThemeSelectOption>
   <ThemeSelectOption value="system">System Default</ThemeSelectOption>
@@ -64,13 +67,21 @@ Import both `ThemeSelect` and `ThemeSelectOption`. Pass a `label`, bind `value`,
   let theme = $state("dark");
 </script>
 
-<ThemeSelect label="Color scheme" bind:value={theme}>
+<ThemeSelect
+  label="Color scheme"
+  bind:value={theme}
+>
   <ThemeSelectOption value="light">Light</ThemeSelectOption>
   <ThemeSelectOption value="dark">Dark</ThemeSelectOption>
   <ThemeSelectOption value="high-contrast">High Contrast</ThemeSelectOption>
 </ThemeSelect>
 
-<p>Active: <ThemeView label="Active theme" value={theme} /></p>
+<p>
+  Active: <ThemeView
+    label="Active theme"
+    value={theme}
+  />
+</p>
 ```
 
 ```svelte
@@ -86,7 +97,10 @@ Import both `ThemeSelect` and `ThemeSelectOption`. Pass a `label`, bind `value`,
   let theme = $state("system");
 </script>
 
-<ThemeSelect label="Thème" bind:value={theme}>
+<ThemeSelect
+  label="Thème"
+  bind:value={theme}
+>
   {#each themes as t}
     <ThemeSelectOption value={t.value}>{t.name}</ThemeSelectOption>
   {/each}
@@ -105,7 +119,10 @@ Import both `ThemeSelect` and `ThemeSelectOption`. Pass a `label`, bind `value`,
   });
 </script>
 
-<ThemeSelect label="Theme" bind:value={theme}>
+<ThemeSelect
+  label="Theme"
+  bind:value={theme}
+>
   <ThemeSelectOption value="light">Light</ThemeSelectOption>
   <ThemeSelectOption value="dark">Dark</ThemeSelectOption>
 </ThemeSelect>

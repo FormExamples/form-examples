@@ -4,17 +4,70 @@
   Description: a custom scrollbar element
   HTML tag: <div>
   CSS class: scroll-bar
-  Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Keyboard: ArrowUp/ArrowLeft decrease and ArrowDown/ArrowRight increase by data-step (default 1); PageUp/PageDown by data-page-step (default 10); Home sets aria-valuemin, End sets aria-valuemax; the value is clamped and a bubbling "change" event carries { value }
+  Accessibility: role="scrollbar", tabindex, aria-label, aria-orientation, aria-controls (the scrolled element's id), aria-valuenow/aria-valuemin/aria-valuemax
   Usage:
-    <div class="scroll-bar" aria-label="Example">
+    <div
+      class="scroll-bar"
+      role="scrollbar"
+      tabindex="0"
+      aria-label="Example"
+      aria-orientation="vertical"
+      aria-controls="example-content"
+      aria-valuenow="0"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      data-step="1"
+      data-page-step="10"
+    >
       ...
     </div>
+  The consumer scrolls its content on "change", writes aria-valuenow back as the content scrolls, and handles drag.
 -->
 
 <div
   class="scroll-bar"
+  role="scrollbar"
+  tabindex="0"
   aria-label=""
+  aria-orientation="vertical"
+  aria-valuenow="0"
+  aria-valuemin="0"
+  aria-valuemax="100"
+  data-step="1"
+  data-page-step="10"
 >
   <!-- Consumer provides content -->
 </div>
+
+<script>
+  // ScrollBar behavior
+  (function () {
+    "use strict";
+    document.querySelectorAll(".scroll-bar").forEach(function (el) {
+      function num(name, fallback) {
+        var n = parseFloat(el.getAttribute(name));
+        return isNaN(n) ? fallback : n;
+      }
+      el.addEventListener("keydown", function (e) {
+        var min = num("aria-valuemin", 0);
+        var max = num("aria-valuemax", 100);
+        var step = num("data-step", 1);
+        var pageStep = num("data-page-step", 10);
+        var value = num("aria-valuenow", min);
+        var next;
+        if (e.key === "ArrowUp" || e.key === "ArrowLeft") next = value - step;
+        else if (e.key === "ArrowDown" || e.key === "ArrowRight") next = value + step;
+        else if (e.key === "PageUp") next = value - pageStep;
+        else if (e.key === "PageDown") next = value + pageStep;
+        else if (e.key === "Home") next = min;
+        else if (e.key === "End") next = max;
+        else return;
+        e.preventDefault();
+        next = Math.min(max, Math.max(min, next));
+        el.setAttribute("aria-valuenow", String(next));
+        el.dispatchEvent(new CustomEvent("change", { bubbles: true, detail: { value: next } }));
+      });
+    });
+  })();
+</script>

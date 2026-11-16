@@ -51,22 +51,22 @@ Basic pair of tabs:
 
 ```svelte
 <script lang="ts">
-    import TabBar from "../TabBar/TabBar.svelte";
-    import TabBarButton from "./TabBarButton.svelte";
-    let active = $state("general");
+  import TabBar from "../TabBar/TabBar.svelte";
+  import TabBarButton from "./TabBarButton.svelte";
+  let active = $state("general");
 </script>
 
 <TabBar label="Settings">
-    <TabBarButton
-        selected={active === "general"}
-        controls="panel-general"
-        onclick={() => (active = "general")}
-    >General</TabBarButton>
-    <TabBarButton
-        selected={active === "advanced"}
-        controls="panel-advanced"
-        onclick={() => (active = "advanced")}
-    >Advanced</TabBarButton>
+  <TabBarButton
+    selected={active === "general"}
+    controls="panel-general"
+    onclick={() => (active = "general")}>General</TabBarButton
+  >
+  <TabBarButton
+    selected={active === "advanced"}
+    controls="panel-advanced"
+    onclick={() => (active = "advanced")}>Advanced</TabBarButton
+  >
 </TabBar>
 ```
 
@@ -74,26 +74,26 @@ Tabs with icons:
 
 ```svelte
 <script lang="ts">
-    import TabBar from "../TabBar/TabBar.svelte";
-    import TabBarButton from "./TabBarButton.svelte";
-    let active = $state("home");
+  import TabBar from "../TabBar/TabBar.svelte";
+  import TabBarButton from "./TabBarButton.svelte";
+  let active = $state("home");
 </script>
 
 <TabBar label="App">
-    <TabBarButton
-        selected={active === "home"}
-        controls="p-home"
-        onclick={() => (active = "home")}
-    >
-        <span aria-hidden="true">🏠</span> Home
-    </TabBarButton>
-    <TabBarButton
-        selected={active === "profile"}
-        controls="p-profile"
-        onclick={() => (active = "profile")}
-    >
-        <span aria-hidden="true">👤</span> Profile
-    </TabBarButton>
+  <TabBarButton
+    selected={active === "home"}
+    controls="p-home"
+    onclick={() => (active = "home")}
+  >
+    <span aria-hidden="true">🏠</span> Home
+  </TabBarButton>
+  <TabBarButton
+    selected={active === "profile"}
+    controls="p-profile"
+    onclick={() => (active = "profile")}
+  >
+    <span aria-hidden="true">👤</span> Profile
+  </TabBarButton>
 </TabBar>
 ```
 
@@ -101,20 +101,20 @@ Mapped from a list:
 
 ```svelte
 <script lang="ts">
-    import TabBar from "../TabBar/TabBar.svelte";
-    import TabBarButton from "./TabBarButton.svelte";
-    const items = ["overview", "activity", "settings"];
-    let active = $state("overview");
+  import TabBar from "../TabBar/TabBar.svelte";
+  import TabBarButton from "./TabBarButton.svelte";
+  const items = ["overview", "activity", "settings"];
+  let active = $state("overview");
 </script>
 
 <TabBar label="Profile">
-    {#each items as it}
-        <TabBarButton
-            selected={active === it}
-            controls={`p-${it}`}
-            onclick={() => (active = it)}
-        >{it}</TabBarButton>
-    {/each}
+  {#each items as it}
+    <TabBarButton
+      selected={active === it}
+      controls={`p-${it}`}
+      onclick={() => (active = it)}>{it}</TabBarButton
+    >
+  {/each}
 </TabBar>
 ```
 
@@ -122,30 +122,56 @@ With panels matching the `controls` id:
 
 ```svelte
 <script lang="ts">
-    import TabBar from "../TabBar/TabBar.svelte";
-    import TabBarButton from "./TabBarButton.svelte";
-    let active = $state("a");
+  import TabBar from "../TabBar/TabBar.svelte";
+  import TabBarButton from "./TabBarButton.svelte";
+  let active = $state("a");
 </script>
 
 <TabBar label="Data">
-    <TabBarButton selected={active === "a"} controls="panel-a" onclick={() => (active = "a")}>A</TabBarButton>
-    <TabBarButton selected={active === "b"} controls="panel-b" onclick={() => (active = "b")}>B</TabBarButton>
+  <TabBarButton
+    selected={active === "a"}
+    controls="panel-a"
+    onclick={() => (active = "a")}>A</TabBarButton
+  >
+  <TabBarButton
+    selected={active === "b"}
+    controls="panel-b"
+    onclick={() => (active = "b")}>B</TabBarButton
+  >
 </TabBar>
-<section id="panel-a" role="tabpanel" hidden={active !== "a"}>A</section>
-<section id="panel-b" role="tabpanel" hidden={active !== "b"}>B</section>
+<section
+  id="panel-a"
+  role="tabpanel"
+  hidden={active !== "a"}
+>
+  A
+</section>
+<section
+  id="panel-b"
+  role="tabpanel"
+  hidden={active !== "b"}
+>
+  B
+</section>
 ```
 
 Disabled/non-interactive via attribute spread:
 
 ```svelte
 <script lang="ts">
-    import TabBar from "../TabBar/TabBar.svelte";
-    import TabBarButton from "./TabBarButton.svelte";
+  import TabBar from "../TabBar/TabBar.svelte";
+  import TabBarButton from "./TabBarButton.svelte";
 </script>
 
 <TabBar label="Docs">
-    <TabBarButton selected controls="p1">Intro</TabBarButton>
-    <TabBarButton controls="p2" disabled>Advanced (coming soon)</TabBarButton>
+  <TabBarButton
+    selected
+    controls="p1">Intro</TabBarButton
+  >
+  <TabBarButton
+    controls="p2"
+    disabled>Advanced (coming soon)</TabBarButton
+  >
 </TabBar>
 ```
 
@@ -157,6 +183,7 @@ Disabled/non-interactive via attribute spread:
 - Arrow / Home / End are handled by the parent `TabBar`.
 
 References:
+
 - WAI-ARIA Tabs Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
 
 ## Related components

@@ -47,10 +47,16 @@ Import and place inside a `TimelineList`. Set `datetime` (ISO) and `heading` (vi
 </script>
 
 <TimelineList label="Order history">
-  <TimelineListItem datetime="2024-01-15" heading="January 15, 2024">
+  <TimelineListItem
+    datetime="2024-01-15"
+    heading="January 15, 2024"
+  >
     Order placed
   </TimelineListItem>
-  <TimelineListItem datetime="2024-01-19" heading="January 19, 2024">
+  <TimelineListItem
+    datetime="2024-01-19"
+    heading="January 19, 2024"
+  >
     Order delivered
   </TimelineListItem>
 </TimelineList>
@@ -63,11 +69,17 @@ Import and place inside a `TimelineList`. Set `datetime` (ISO) and `heading` (vi
 </script>
 
 <TimelineList label="Release notes">
-  <TimelineListItem datetime="2024-04-01" heading="v1.0">
+  <TimelineListItem
+    datetime="2024-04-01"
+    heading="v1.0"
+  >
     <h3>Initial release</h3>
     <p>Core features shipped.</p>
   </TimelineListItem>
-  <TimelineListItem datetime="2024-05-15" heading="v1.1">
+  <TimelineListItem
+    datetime="2024-05-15"
+    heading="v1.1"
+  >
     <h3>Performance updates</h3>
     <p>Faster rendering.</p>
   </TimelineListItem>
@@ -99,7 +111,11 @@ Import and place inside a `TimelineList`. Set `datetime` (ISO) and `heading` (vi
 
 <TimelineList label="Session activity">
   {#each events as e (e.at)}
-    <TimelineListItem datetime={e.at} heading={e.heading} data-type="session">
+    <TimelineListItem
+      datetime={e.at}
+      heading={e.heading}
+      data-type="session"
+    >
       {e.msg}
     </TimelineListItem>
   {/each}

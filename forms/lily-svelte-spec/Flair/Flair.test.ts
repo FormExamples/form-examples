@@ -22,7 +22,9 @@ describe("Flair", () => {
     });
 
     test("meaningful when label provided", () => {
-        render(Subject, { props: { label: "Status: new", "data-testid": "fl", children: textSnippet("New") } });
+        render(Subject, {
+            props: { label: "Status: new", "data-testid": "fl", children: textSnippet("New") },
+        });
         expect(screen.getByTestId("fl").getAttribute("aria-label")).toBe("Status: new");
         expect(screen.getByTestId("fl").getAttribute("aria-hidden")).toBeNull();
     });
@@ -30,5 +32,12 @@ describe("Flair", () => {
     test("passes through attributes", () => {
         render(Subject, { props: { "data-testid": "fl", children: textSnippet("X") } });
         expect(screen.getByTestId("fl")).toBeTruthy();
+    });
+
+    test("has role=img with a label", () => {
+        const { container } = render(Subject, { props: { label: "Story" } as any });
+        const root = container.querySelector(".flair")!;
+        expect(root.getAttribute("role")).toBe("img");
+        expect(root.getAttribute("aria-label")).toBe("Story");
     });
 });

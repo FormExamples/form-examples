@@ -10,7 +10,7 @@ See [components/breadcrumb-link/index.md](../../../components/breadcrumb-link/in
 
 ```svelte
 <script lang="ts">
-    import BreadcrumbLink from "./BreadcrumbLink.svelte";
+  import BreadcrumbLink from "./BreadcrumbLink.svelte";
 </script>
 
 <BreadcrumbLink />

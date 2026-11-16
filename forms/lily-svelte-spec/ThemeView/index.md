@@ -42,7 +42,10 @@ Import and pass the `label` (for accessibility) and the `value` (the theme name 
   import ThemeView from "./ThemeView.svelte";
 </script>
 
-<ThemeView label="Current theme" value="dark" />
+<ThemeView
+  label="Current theme"
+  value="dark"
+/>
 ```
 
 ```svelte
@@ -54,12 +57,20 @@ Import and pass the `label` (for accessibility) and the `value` (the theme name 
   let theme = $state("light");
 </script>
 
-<ThemeSelect label="Theme" bind:value={theme}>
+<ThemeSelect
+  label="Theme"
+  bind:value={theme}
+>
   <ThemeSelectOption value="light">Light</ThemeSelectOption>
   <ThemeSelectOption value="dark">Dark</ThemeSelectOption>
 </ThemeSelect>
 
-<p>Active: <ThemeView label="Active theme" value={theme} /></p>
+<p>
+  Active: <ThemeView
+    label="Active theme"
+    value={theme}
+  />
+</p>
 ```
 
 ```svelte
@@ -81,7 +92,11 @@ Import and pass the `label` (for accessibility) and the `value` (the theme name 
 </script>
 
 <footer>
-  Theme: <ThemeView label="Current theme" value="high-contrast" data-testid="theme" />
+  Theme: <ThemeView
+    label="Current theme"
+    value="high-contrast"
+    data-testid="theme"
+  />
 </footer>
 ```
 

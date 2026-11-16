@@ -32,6 +32,9 @@
 </script>
 
 <!-- GrailLayoutTopHeader.svelte -->
-<header class={`grail-layout-top-header ${className}`} {...restProps}>
+<header
+    class={`grail-layout-top-header ${className}`}
+    {...restProps}
+>
     {@render children?.()}
 </header>

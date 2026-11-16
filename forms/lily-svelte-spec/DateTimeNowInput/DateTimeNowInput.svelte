@@ -10,9 +10,10 @@
     // Props:
     //   className — string, optional. CSS class name.
     //   label — string, required. Accessible name for the wrapper group via aria-label.
-    //   dateLabel — string, default "Date". Accessible name for the date input via aria-label.
-    //   timeLabel — string, default "Time". Accessible name for the time input via aria-label.
-    //   nowLabel — string, default "Now". Accessible label and text for the "Now" button.
+    //   dateLabel — string, required. Accessible name for the date input via aria-label.
+    //   timeLabel — string, required. Accessible name for the time input via aria-label.
+    //   nowLabel — string, required. Accessible label and text for the "Now" button.
+    //   The three come from the locale-translations packs: {...dateTimeNowInputLabels(pack)}.
     //   dateValue — string, default "". Bindable date string (format: YYYY-MM-DD).
     //   timeValue — string, default "". Bindable time string (format: HH:mm).
     //   required — boolean, default false. Whether the inputs are required.
@@ -20,17 +21,17 @@
     //   ...restProps — additional HTML attributes spread onto the wrapper <div>.
     //
     // Syntax:
-    //   <DateTimeNowInput label="Event time" bind:dateValue bind:timeValue />
+    //   <DateTimeNowInput label="Event time" dateLabel="Date" timeLabel="Time" nowLabel="Now" bind:dateValue bind:timeValue />
     //
     // Examples:
-    //   <!-- Basic usage -->
-    //   <DateTimeNowInput label="Event time" bind:dateValue bind:timeValue />
+    //   <!-- Labels from a locale pack (@lilydesignsystem/svelte-locale-translations) -->
+    //   <DateTimeNowInput label="Heure de l'événement" {...dateTimeNowInputLabels(fr)} bind:dateValue bind:timeValue />
     //
-    //   <!-- Custom labels for internationalization -->
-    //   <DateTimeNowInput label="Heure" dateLabel="Date" timeLabel="Heure" nowLabel="Maintenant" bind:dateValue bind:timeValue />
+    //   <!-- Labels written by hand -->
+    //   <DateTimeNowInput label="Event time" dateLabel="Date" timeLabel="Time" nowLabel="Now" bind:dateValue bind:timeValue />
     //
     //   <!-- Required and disabled -->
-    //   <DateTimeNowInput label="Appointment" bind:dateValue bind:timeValue required disabled={isLocked} />
+    //   <DateTimeNowInput label="Appointment" {...labels} bind:dateValue bind:timeValue required disabled={isLocked} />
     //
     // Keyboard:
     //   - Tab: Moves focus between the date input, time input, and "Now" button
@@ -45,7 +46,8 @@
     //
     // Internationalization:
     //   - The label, dateLabel, timeLabel, and nowLabel props are the only user-facing strings
-    //   - Default labels are "Date", "Time", and "Now"; override for other locales
+    //   - No default labels: a missing one leaves its control unnamed rather than in English.
+    //     dateTimeNowInputLabels(pack) from the locale-translations package gives all three in 64 locales.
     //   - No other hardcoded user-facing strings
     //
     // Claude rules:
@@ -56,12 +58,14 @@
     //   - MDN date input: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date
     //   - MDN time input: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time
 
+    import { warnMissingName } from "../dev-warning";
+
     let {
         class: className = "",
         label,
-        dateLabel = "Date",
-        timeLabel = "Time",
-        nowLabel = "Now",
+        dateLabel,
+        timeLabel,
+        nowLabel,
         dateValue = $bindable(""),
         timeValue = $bindable(""),
         required = false,
@@ -69,15 +73,24 @@
         ...restProps
     }: {
         label: string;
-        dateLabel?: string;
-        timeLabel?: string;
-        nowLabel?: string;
+        dateLabel: string;
+        timeLabel: string;
+        nowLabel: string;
         dateValue?: string;
         timeValue?: string;
         required?: boolean;
         disabled?: boolean;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName(
+            "DateTimeNowInput",
+            label,
+            restProps["aria-label"],
+            restProps["aria-labelledby"],
+        ),
+    );
 
     function handleNow() {
         const now = new Date();

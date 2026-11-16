@@ -31,7 +31,7 @@
     // Accessibility:
     //   - role="tooltip" identifies the element as a tooltip popup
     //   - id enables aria-describedby linking to the trigger element
-    //   - Conditionally rendered: fully removed from DOM when not visible
+    //   - Always rendered as popover="manual"; hidden (display: none) when not visible
     //
     // Internationalization:
     //   - The label prop accepts any translated string
@@ -39,12 +39,15 @@
     //
     // Claude rules:
     //   - Headless: no CSS, no styles -- consumer provides all styling
-    //   - Uses {#if visible} for conditional rendering
+    //   - Native first: popover="manual" (top layer) opened and closed by the `open` state through ./Popover/popover.ts; where the Popover API is missing (jsdom, older browsers) it falls back to the `hidden` attribute. Placement is the theme's CSS (anchor positioning); light dismiss and Escape stay the consumer's.
     //   - Consumer manages visibility (hover, focus, etc.)
     //
     // References:
     //   - WAI-ARIA Tooltip Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
     //   - MDN aria-describedby: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-describedby
+
+    import { warnMissingName } from "../dev-warning";
+    import { popoverState } from "../Popover/popover.js";
 
     let {
         class: className = "",
@@ -61,16 +64,20 @@
         id?: string;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName("Tooltip", label, restProps["aria-label"], restProps["aria-labelledby"]),
+    );
 </script>
 
 <!-- Tooltip.svelte -->
-{#if visible}
-    <div
-        class={`tooltip ${className}`}
-        role="tooltip"
-        {id}
-        {...restProps}
-    >
-        {label}
-    </div>
-{/if}
+<div
+    class={`tooltip ${className}`}
+    role="tooltip"
+    popover="manual"
+    use:popoverState={visible}
+    {id}
+    {...restProps}
+>
+    {label}
+</div>

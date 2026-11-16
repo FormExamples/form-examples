@@ -9,7 +9,7 @@ A headless Svelte 5 component inspired by [Ant Design TreeSelect](https://ant.de
 ## What it does
 
 - Renders a `<div role="combobox" aria-haspopup="tree">` with the base class `tree-select` plus consumer `class`.
-- Sets `aria-expanded`, `aria-label`, and (when `multiple`) `aria-multiselectable="true"`.
+- Sets `aria-expanded`, `aria-label`, and (when `multiple`) `data-multiple="true"`.
 - Renders a child `<button class="tree-select-trigger" type="button">` with the current `value` or `placeholder`.
 - Renders a `<div class="tree-select-panel">` hidden when not expanded.
 
@@ -29,7 +29,7 @@ A headless Svelte 5 component inspired by [Ant Design TreeSelect](https://ant.de
 - `label` — string, **required**. Accessible name via `aria-label`.
 - `expanded` — boolean, default `false`. Whether the tree panel is open.
 - `disabled` — boolean, default `false`. Disables the trigger button.
-- `multiple` — boolean, default `false`. Sets `aria-multiselectable="true"` when true.
+- `multiple` — boolean, default `false`. Sets `data-multiple="true"` when true; put `aria-multiselectable` on your own `role="tree"`.
 - `placeholder` — string, optional.
 - `value` — string, optional. Display value.
 - `onclick` — `(event: MouseEvent) => void`, optional. Trigger click handler.
@@ -40,28 +40,33 @@ A headless Svelte 5 component inspired by [Ant Design TreeSelect](https://ant.de
 
 ```svelte
 <script lang="ts">
-  import TreeSelect from './TreeSelect.svelte';
+  import TreeSelect from "./TreeSelect.svelte";
 
   let open = $state(false);
-  let value = $state('');
+  let value = $state("");
 </script>
 
 <TreeSelect
   label="Category"
   placeholder="Choose a category"
   expanded={open}
-  value={value}
+  {value}
   multiple
   onclick={() => (open = !open)}
 >
-  <ul role="tree" aria-label="Categories">…</ul>
+  <ul
+    role="tree"
+    aria-label="Categories"
+  >
+    …
+  </ul>
 </TreeSelect>
 ```
 
 ## Accessibility
 
 - `role="combobox"` with `aria-haspopup="tree"`, `aria-expanded`, and `aria-label`.
-- `aria-multiselectable` set only when `multiple=true`.
+- `data-multiple="true"` set only when `multiple=true` (not `aria-multiselectable`, which is invalid on a combobox).
 - Native `<button>` trigger handles Tab/Enter/Space.
 
 ## Related components

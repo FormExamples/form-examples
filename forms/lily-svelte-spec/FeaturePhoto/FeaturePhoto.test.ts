@@ -41,14 +41,18 @@ describe("FeaturePhoto", () => {
 
     test("renders caption snippet when provided", () => {
         const { container } = render(Subject, {
-            src: "/p.jpg", alt: "A", caption: snippet("Sunset"),
+            src: "/p.jpg",
+            alt: "A",
+            caption: snippet("Sunset"),
         });
         expect(container.querySelector(".feature-photo-caption-text")?.textContent).toBe("Sunset");
     });
 
     test("renders credit snippet when provided", () => {
         const { container } = render(Subject, {
-            src: "/p.jpg", alt: "A", credit: snippet("Jane"),
+            src: "/p.jpg",
+            alt: "A",
+            credit: snippet("Jane"),
         });
         expect(container.querySelector(".feature-photo-credit")?.textContent).toBe("Jane");
     });

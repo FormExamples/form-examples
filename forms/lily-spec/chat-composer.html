@@ -1,0 +1,21 @@
+<!-- chat-composer.html -->
+<!-- ChatComposer component -->
+<!--
+  Description: a chat input form with a text area that grows with its content, sends on Enter, and turns its send button into a stop button while a reply is in progress.
+  HTML tag: <form> containing <textarea class="chat-composer-input"> and one <button class="chat-composer-button">
+  CSS class: chat-composer
+  Keyboard: Enter sends; Shift+Enter inserts a line break; Enter during IME composition is ignored
+  Accessibility: the textarea is named by aria-label; the one button is send (type=submit,
+    data-state=send) or, while a reply is in progress, stop (type=button, data-state=stop); the
+    send button is disabled, never hidden, when the text is empty.
+  MARKUP-ONLY DEVIATION: this HTML catalog's macros ship no JavaScript, so the behaviours that need script — Enter to send (Shift+Enter for a line break, ignoring Enter during IME composition), growing the textarea as the user types, and swapping send/stop on the fly — are not in the macro. The macro renders the correct initial markup from its params (rows from the value's line count, send or stop from `busy`, the send button disabled when the value is empty); add a small client script (or use the Web Components catalog's element) for the live behaviour.
+-->
+
+<form class="chat-composer">
+  <textarea class="chat-composer-input" aria-label="Message" rows="1"></textarea>
+  <button class="chat-composer-button" type="submit" data-state="send" disabled><span class="chat-composer-button-label">Send</span></button>
+</form>
+<form class="chat-composer" id="chat-composer-busy">
+  <textarea class="chat-composer-input" aria-label="Message" rows="2">Explain headless components</textarea>
+  <button class="chat-composer-button" type="button" data-state="stop"><span class="chat-composer-button-label">Stop</span></button>
+</form>

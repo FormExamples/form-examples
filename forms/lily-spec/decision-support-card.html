@@ -1,0 +1,25 @@
+<!-- decision-support-card.html -->
+<!-- DecisionSupportCard component -->
+<!--
+  Description: a clinical decision support card with a summary, urgency indicator, source, suggestions and override reasons
+  HTML tag: <div>
+  CSS class: decision-support-card (parts: -header, -indicator, -summary, -detail, -source, -suggestions, -suggestion, -links, -override, -override-label, -override-reason, -dismiss)
+  Spec: spec/healthcare-ui
+  The CDS Hooks card shape. role="group" named by the summary; not a live region, so it never interrupts by itself.
+  Attributes: data-indicator (info, warning, critical); the indicator is also text in .decision-support-card-indicator.
+  Suggestions are real buttons; the consumer's script applies them. The dismiss form keeps native validation: when
+    reasons are offered the select is required, so the browser refuses to submit without one.
+  Keyboard: Tab through the source link, suggestions, links, the reason select and the dismiss button; Enter or Space
+    activates a button.
+-->
+
+<div class="decision-support-card" role="group" aria-label="Penicillin allergy recorded" data-indicator="critical">
+  <p class="decision-support-card-header"><span class="decision-support-card-indicator">Critical</span> <span class="decision-support-card-summary">Penicillin allergy recorded</span></p>
+  <div class="decision-support-card-detail"><p>Amoxicillin is a penicillin.</p></div>
+  <p class="decision-support-card-source"><a href="#formulary">Local formulary</a></p>
+  <div class="decision-support-card-suggestions"><button type="button" class="decision-support-card-suggestion" data-recommended="true">Cancel amoxicillin</button></div>
+  <form class="decision-support-card-override">
+    <label class="decision-support-card-override-label">Reason for dismissing <select class="decision-support-card-override-reason" name="overrideReason" required><option value="">Choose a reason</option><option value="error">Allergy recorded in error</option></select></label>
+    <button type="submit" class="decision-support-card-dismiss">Dismiss</button>
+  </form>
+</div>

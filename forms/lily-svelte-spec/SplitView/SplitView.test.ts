@@ -12,11 +12,13 @@ function textSnippet(text: string) {
 
 describe("SplitView", () => {
     test("renders with the split-view class and aria-label", () => {
-        const { container } = render(Subject, { props: {
-            label: "Editor and preview",
-            primary: textSnippet("PRIMARY"),
-            secondary: textSnippet("SECONDARY"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Editor and preview",
+                primary: textSnippet("PRIMARY"),
+                secondary: textSnippet("SECONDARY"),
+            },
+        });
 
         const root = container.querySelector("div.split-view") as HTMLElement;
         expect(root).toBeTruthy();
@@ -24,63 +26,69 @@ describe("SplitView", () => {
     });
 
     test("default orientation is horizontal and exposed as data attribute", () => {
-        const { container } = render(Subject, { props: {
-            label: "L",
-            primary: textSnippet("P"),
-            secondary: textSnippet("S"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "L",
+                primary: textSnippet("P"),
+                secondary: textSnippet("S"),
+            },
+        });
 
         const root = container.querySelector(".split-view") as HTMLElement;
         expect(root.getAttribute("data-orientation")).toBe("horizontal");
     });
 
     test("vertical orientation is exposed as data attribute", () => {
-        const { container } = render(Subject, { props: {
-            label: "L",
-            orientation: "vertical",
-            primary: textSnippet("P"),
-            secondary: textSnippet("S"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "L",
+                orientation: "vertical",
+                primary: textSnippet("P"),
+                secondary: textSnippet("S"),
+            },
+        });
 
         const root = container.querySelector(".split-view") as HTMLElement;
         expect(root.getAttribute("data-orientation")).toBe("vertical");
     });
 
     test("default splitPercent is 50 and exposed as data attribute", () => {
-        const { container } = render(Subject, { props: {
-            label: "L",
-            primary: textSnippet("P"),
-            secondary: textSnippet("S"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "L",
+                primary: textSnippet("P"),
+                secondary: textSnippet("S"),
+            },
+        });
 
         const root = container.querySelector(".split-view") as HTMLElement;
         expect(root.getAttribute("data-split-percent")).toBe("50");
     });
 
     test("renders primary and secondary section panels", () => {
-        const { container } = render(Subject, { props: {
-            label: "L",
-            primary: textSnippet("PRIMARY-CONTENT"),
-            secondary: textSnippet("SECONDARY-CONTENT"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "L",
+                primary: textSnippet("PRIMARY-CONTENT"),
+                secondary: textSnippet("SECONDARY-CONTENT"),
+            },
+        });
 
-        const primary = container.querySelector(
-            "section.split-view-primary",
-        ) as HTMLElement;
-        const secondary = container.querySelector(
-            "section.split-view-secondary",
-        ) as HTMLElement;
+        const primary = container.querySelector("section.split-view-primary") as HTMLElement;
+        const secondary = container.querySelector("section.split-view-secondary") as HTMLElement;
         expect(primary.textContent).toContain("PRIMARY-CONTENT");
         expect(secondary.textContent).toContain("SECONDARY-CONTENT");
     });
 
     test("default divider has role separator and ARIA values", () => {
-        const { container } = render(Subject, { props: {
-            label: "L",
-            splitPercent: 60,
-            primary: textSnippet("P"),
-            secondary: textSnippet("S"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "L",
+                splitPercent: 60,
+                primary: textSnippet("P"),
+                secondary: textSnippet("S"),
+            },
+        });
 
         const sep = container.querySelector(".split-view-divider") as HTMLElement;
         expect(sep.getAttribute("role")).toBe("separator");
@@ -92,27 +100,44 @@ describe("SplitView", () => {
     });
 
     test("custom divider snippet replaces the default separator", () => {
-        const { container } = render(Subject, { props: {
-            label: "L",
-            primary: textSnippet("P"),
-            secondary: textSnippet("S"),
-            divider: textSnippet("CUSTOM-DIVIDER"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "L",
+                primary: textSnippet("P"),
+                secondary: textSnippet("S"),
+                divider: textSnippet("CUSTOM-DIVIDER"),
+            },
+        });
 
         expect(container.querySelector(".split-view-divider")).toBeNull();
         expect(container.textContent).toContain("CUSTOM-DIVIDER");
     });
 
     test("appends consumer class to base class", () => {
-        const { container } = render(Subject, { props: {
-            label: "L",
-            class: "extra",
-            primary: textSnippet("P"),
-            secondary: textSnippet("S"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "L",
+                class: "extra",
+                primary: textSnippet("P"),
+                secondary: textSnippet("S"),
+            },
+        });
 
         const root = container.querySelector(".split-view") as HTMLElement;
         expect(root.className).toContain("split-view");
         expect(root.className).toContain("extra");
+    });
+
+    test("is a named group when labelled", () => {
+        const { container } = render(Subject, {
+            props: {
+                label: "Story",
+                primary: textSnippet("P"),
+                secondary: textSnippet("S"),
+            } as any,
+        });
+        const root = container.querySelector(".split-view");
+        expect(root?.getAttribute("role")).toBe("group");
+        expect(root?.getAttribute("aria-label")).toBe("Story");
     });
 });

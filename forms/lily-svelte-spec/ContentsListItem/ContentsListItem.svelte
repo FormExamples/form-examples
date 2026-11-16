@@ -58,6 +58,9 @@
 </script>
 
 <!-- ContentsListItem.svelte -->
-<li class={`contents-list-item ${className}`} {...restProps}>
+<li
+    class={`contents-list-item ${className}`}
+    {...restProps}
+>
     {@render children?.()}
 </li>

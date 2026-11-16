@@ -35,13 +35,19 @@ A headless Svelte 5 component inspired by the U.S. Web Design System (USWDS) Col
 
 ```svelte
 <script lang="ts">
-  import CollectionList from './CollectionList.svelte';
-  import CollectionListItem from '../CollectionListItem/CollectionListItem.svelte';
+  import CollectionList from "./CollectionList.svelte";
+  import CollectionListItem from "../CollectionListItem/CollectionListItem.svelte";
 </script>
 
 <CollectionList label="Latest articles">
-  <CollectionListItem heading="Article one" href="/a/1" />
-  <CollectionListItem heading="Article two" href="/a/2" />
+  <CollectionListItem
+    heading="Article one"
+    href="/a/1"
+  />
+  <CollectionListItem
+    heading="Article two"
+    href="/a/2"
+  />
 </CollectionList>
 ```
 

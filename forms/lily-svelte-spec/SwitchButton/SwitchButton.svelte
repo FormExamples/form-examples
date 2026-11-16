@@ -43,6 +43,8 @@
     //   - WAI-ARIA Switch Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/switch/
     //   - WAI-ARIA Switch Role: https://www.w3.org/TR/wai-aria-1.2/#switch
 
+    import { warnMissingName } from "../dev-warning";
+
     let {
         class: className = "",
         label,
@@ -58,6 +60,15 @@
         disabled?: boolean;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName(
+            "SwitchButton",
+            label,
+            restProps["aria-label"],
+            restProps["aria-labelledby"],
+        ),
+    );
 
     function handleKeydown(event: KeyboardEvent) {
         if (event.key === " " && !disabled) {

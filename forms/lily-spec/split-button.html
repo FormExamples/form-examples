@@ -12,23 +12,28 @@
     - Escape on the trigger or the menu closes the menu and returns focus to the trigger.
   Accessibility:
     - role="group" with aria-label groups the two buttons.
-    - The trigger uses aria-haspopup="menu" and aria-expanded reflects the open state.
-    - The menu container uses the hidden attribute when closed so it is removed from the accessibility tree.
+    - The trigger uses aria-haspopup="menu", aria-controls, and aria-expanded reflects the open state.
+    - The closed menu is not rendered (a closed popover, or the hidden attribute in the fallback), so it is out of the accessibility tree.
 
-  Behavior:
-    Renders a <div role="group"> containing a primary action button and a
-    menu trigger button, followed by a menu container that holds the
-    consumer-supplied menu content. The script wires up open/close on
-    the trigger, Escape-to-close, and focus return.
+  Popover API (tasks.md P18-T11):
+    The menu is popover="auto" and the trigger names it with
+    command="toggle-popover" commandfor (and popovertarget), so the browser
+    opens and closes it, closes it on Escape and on a click outside, and puts
+    it in the top layer, with no script. The embedded script keeps
+    aria-expanded in step with the menu's toggle event. Where the Popover API
+    is missing it falls back to toggling the `hidden` attribute, with Escape
+    and an outside click.
 
   Usage:
     <div class="split-button" role="group" aria-label="Save options">
       <button class="split-button-primary" type="button">Save</button>
       <button class="split-button-menu-trigger" type="button"
-              aria-haspopup="menu" aria-expanded="false" aria-label="More save options">
+              aria-haspopup="menu" aria-expanded="false" aria-label="More save options"
+              aria-controls="split-button-menu-1" command="toggle-popover"
+              commandfor="split-button-menu-1" popovertarget="split-button-menu-1">
       </button>
-      <div class="split-button-menu" hidden>
-        <!-- Consumer-supplied menu content -->
+      <div class="split-button-menu" id="split-button-menu-1" popover="auto">
+        … Consumer-supplied menu content …
       </div>
     </div>
 -->
@@ -53,14 +58,19 @@
     aria-haspopup="menu"
     aria-expanded="false"
     aria-label=""
+    aria-controls="split-button-menu-1"
+    command="toggle-popover"
+    commandfor="split-button-menu-1"
+    popovertarget="split-button-menu-1"
   >
     <!-- Consumer optionally provides a chevron icon -->
   </button>
 
-  <!-- Menu container — toggled visible when the trigger is pressed -->
+  <!-- Menu container — a popover the trigger opens -->
   <div
     class="split-button-menu"
-    hidden
+    id="split-button-menu-1"
+    popover="auto"
   >
     <!-- Consumer provides menu items (typically a Menu component) -->
   </div>
@@ -68,15 +78,17 @@
 
 <script>
   // SplitButton behavior
-  // Manages the open/closed state of the menu by:
+  // With the Popover API the browser opens, closes and light-dismisses the
+  // menu; this script only keeps aria-expanded in step with its toggle event.
+  // Without it (the fallback) the script manages the open/closed state by:
   //   - Toggling on trigger click.
   //   - Closing on Escape (returning focus to the trigger).
   //   - Closing on outside click.
-  // The aria-expanded attribute on the trigger and the hidden attribute on
-  // the menu are kept in sync.
+  // and keeps aria-expanded and the menu's hidden attribute in sync.
   (function () {
     "use strict";
 
+    var native = typeof HTMLElement.prototype.showPopover === "function";
     var groups = document.querySelectorAll('div.split-button');
 
     groups.forEach(function (group) {
@@ -84,6 +96,17 @@
       var trigger = group.querySelector('.split-button-menu-trigger');
       var menu = group.querySelector('.split-button-menu');
       if (!trigger || !menu) return;
+
+      if (native) {
+        menu.addEventListener('toggle', function (event) {
+          trigger.setAttribute('aria-expanded', event.newState === 'open' ? 'true' : 'false');
+        });
+        return;
+      }
+
+      // Fallback: no Popover API.
+      menu.removeAttribute('popover');
+      menu.setAttribute('hidden', '');
 
       // Apply the open/closed state to both ARIA and the hidden attribute.
       function setOpen(isOpen) {

@@ -1,6 +1,6 @@
 # CalendarRangePicker
 
-A headless container for calendar-based date-range selection. Renders a `<div role="application">` with a required `aria-label`. Provides the semantic shell; the consumer supplies the calendar grid, range highlighting, and keyboard interactions.
+A headless container for calendar-based date-range selection. Renders a `<div role="group">` with a required `aria-label`. Provides the semantic shell; the consumer supplies the calendar grid, range highlighting, and keyboard interactions.
 
 ## What it is
 
@@ -8,8 +8,8 @@ A headless Svelte 5 wrapper intended to host a `CalendarTable` (or similar) with
 
 ## What it does
 
-- Renders `<div class="calendar-range-picker {className}" role="application" aria-label={label}>`.
-- Applies `role="application"` to signal that the widget manages its own keyboard interactions instead of standard document navigation.
+- Renders `<div class="calendar-range-picker {className}" role="group" aria-label={label}>`.
+- Applies `role="group"` to signal that the widget manages its own keyboard interactions instead of standard document navigation.
 - Spreads additional HTML attributes onto the `<div>`.
 
 ## When to use it
@@ -41,12 +41,12 @@ Import `CalendarRangePicker` from `./CalendarRangePicker.svelte`. Pass `label`. 
 
 ```svelte
 <script lang="ts">
-  import CalendarRangePicker from './CalendarRangePicker.svelte';
-  import CalendarTable from '../CalendarTable/CalendarTable.svelte';
-  import CalendarTableHead from '../CalendarTableHead/CalendarTableHead.svelte';
-  import CalendarTableBody from '../CalendarTableBody/CalendarTableBody.svelte';
-  import CalendarTableRow from '../CalendarTableRow/CalendarTableRow.svelte';
-  import CalendarTableTD from '../CalendarTableTD/CalendarTableTD.svelte';
+  import CalendarRangePicker from "./CalendarRangePicker.svelte";
+  import CalendarTable from "../CalendarTable/CalendarTable.svelte";
+  import CalendarTableHead from "../CalendarTableHead/CalendarTableHead.svelte";
+  import CalendarTableBody from "../CalendarTableBody/CalendarTableBody.svelte";
+  import CalendarTableRow from "../CalendarTableRow/CalendarTableRow.svelte";
+  import CalendarTableTD from "../CalendarTableTD/CalendarTableTD.svelte";
 </script>
 
 <CalendarRangePicker label="Select travel dates">
@@ -71,7 +71,7 @@ Import `CalendarRangePicker` from `./CalendarRangePicker.svelte`. Pass `label`. 
 
 ```svelte
 <script lang="ts">
-  import CalendarRangePicker from './CalendarRangePicker.svelte';
+  import CalendarRangePicker from "./CalendarRangePicker.svelte";
 
   let start = $state<Date | null>(null);
   let end = $state<Date | null>(null);
@@ -81,9 +81,12 @@ Import `CalendarRangePicker` from `./CalendarRangePicker.svelte`. Pass `label`. 
   }
 </script>
 
-<CalendarRangePicker label="Select dates" {onkeydown}>
+<CalendarRangePicker
+  label="Select dates"
+  {onkeydown}
+>
   <div>
-    Start: {start?.toDateString() ?? 'none'} — End: {end?.toDateString() ?? 'none'}
+    Start: {start?.toDateString() ?? "none"} — End: {end?.toDateString() ?? "none"}
   </div>
 </CalendarRangePicker>
 ```
@@ -92,9 +95,9 @@ Import `CalendarRangePicker` from `./CalendarRangePicker.svelte`. Pass `label`. 
 
 ```svelte
 <script lang="ts">
-  import CalendarRangePicker from './CalendarRangePicker.svelte';
+  import CalendarRangePicker from "./CalendarRangePicker.svelte";
 
-  const label = 'Seleccionar fechas de viaje';
+  const label = "Seleccionar fechas de viaje";
 </script>
 
 <CalendarRangePicker {label}>
@@ -106,20 +109,24 @@ Import `CalendarRangePicker` from `./CalendarRangePicker.svelte`. Pass `label`. 
 
 ```svelte
 <script lang="ts">
-  import CalendarRangePicker from './CalendarRangePicker.svelte';
+  import CalendarRangePicker from "./CalendarRangePicker.svelte";
 </script>
 
-<CalendarRangePicker label="Date range" data-testid="range-picker" id="rp">
+<CalendarRangePicker
+  label="Date range"
+  data-testid="range-picker"
+  id="rp"
+>
   <p>...</p>
 </CalendarRangePicker>
 ```
 
 ## Accessibility
 
-- `role="application"` tells screen readers the widget handles its own key handling; the consumer must implement arrow-key navigation, Enter/Space selection, and range extension (e.g. Shift+click).
+- `role="group"` tells screen readers the widget handles its own key handling; the consumer must implement arrow-key navigation, Enter/Space selection, and range extension (e.g. Shift+click).
 - `aria-label` names the picker.
 - Focus management and range highlighting are the consumer's responsibility.
-- Follows the WAI-ARIA Application role and Grid pattern guidance.
+- Follows the WAI-ARIA group role; a keyed calendar inside it follows the Grid pattern.
 
 ## Related components
 

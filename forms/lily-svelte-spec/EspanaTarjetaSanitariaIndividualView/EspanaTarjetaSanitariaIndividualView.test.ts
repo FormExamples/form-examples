@@ -5,7 +5,9 @@ import EspanaTarjetaSanitariaIndividualView from "./EspanaTarjetaSanitariaIndivi
 describe("EspanaTarjetaSanitariaIndividualView", () => {
     test("renders with content", () => {
         render(EspanaTarjetaSanitariaIndividualView, { props: { label: "Test" } });
-        const el = screen.getByLabelText("Test");
+        const el = document.querySelector(
+            ".espana-tarjeta-sanitaria-individual-view",
+        ) as HTMLElement;
         expect(el).toBeTruthy();
         expect(el.getAttribute("class")).toContain("espana-tarjeta-sanitaria-individual-view");
     });

@@ -37,7 +37,9 @@ describe("MenuBar", () => {
     });
 
     test("passes through attributes", () => {
-        render(Subject, { props: { label: "M", "data-testid": "mb", children: menuItemsSnippet() } });
+        render(Subject, {
+            props: { label: "M", "data-testid": "mb", children: menuItemsSnippet() },
+        });
         expect(screen.getByTestId("mb")).toBeTruthy();
     });
 });

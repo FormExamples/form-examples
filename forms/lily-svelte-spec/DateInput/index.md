@@ -31,65 +31,85 @@ Provide `label` (used as `aria-label`). Bind `value` to a `$state` variable.
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `class` | `string` | `""` | CSS class name appended to the base class. |
-| `label` | `string` | required | `aria-label`. |
-| `value` | `string` | `""` (bindable) | Date in YYYY-MM-DD. |
-| `min` | `string` | `undefined` | Minimum date (YYYY-MM-DD). |
-| `max` | `string` | `undefined` | Maximum date (YYYY-MM-DD). |
-| `required` | `boolean` | `false` | Marks the input required. |
-| `disabled` | `boolean` | `false` | Disables the input. |
-| `...restProps` | `unknown` | — | Additional attributes spread onto the `<input>`. |
+| Prop           | Type      | Default         | Description                                      |
+| -------------- | --------- | --------------- | ------------------------------------------------ |
+| `class`        | `string`  | `""`            | CSS class name appended to the base class.       |
+| `label`        | `string`  | required        | `aria-label`.                                    |
+| `value`        | `string`  | `""` (bindable) | Date in YYYY-MM-DD.                              |
+| `min`          | `string`  | `undefined`     | Minimum date (YYYY-MM-DD).                       |
+| `max`          | `string`  | `undefined`     | Maximum date (YYYY-MM-DD).                       |
+| `required`     | `boolean` | `false`         | Marks the input required.                        |
+| `disabled`     | `boolean` | `false`         | Disables the input.                              |
+| `...restProps` | `unknown` | —               | Additional attributes spread onto the `<input>`. |
 
 ## Usage
 
 ```svelte
 <script lang="ts">
-    import DateInput from "./DateInput.svelte";
+  import DateInput from "./DateInput.svelte";
 
-    let date = $state("");
+  let date = $state("");
 </script>
 
-<DateInput label="Birth date" bind:value={date} />
+<DateInput
+  label="Birth date"
+  bind:value={date}
+/>
 ```
 
 ```svelte
 <script lang="ts">
-    import DateInput from "./DateInput.svelte";
+  import DateInput from "./DateInput.svelte";
 
-    let due = $state("");
+  let due = $state("");
 </script>
 
-<DateInput label="Deadline" bind:value={due} min="2024-01-01" max="2024-12-31" />
+<DateInput
+  label="Deadline"
+  bind:value={due}
+  min="2024-01-01"
+  max="2024-12-31"
+/>
 ```
 
 ```svelte
 <script lang="ts">
-    import DateInput from "./DateInput.svelte";
+  import DateInput from "./DateInput.svelte";
 
-    let date = $state("");
-    let locked = $state(false);
+  let date = $state("");
+  let locked = $state(false);
 </script>
 
-<DateInput label="Start date" bind:value={date} required disabled={locked} />
+<DateInput
+  label="Start date"
+  bind:value={date}
+  required
+  disabled={locked}
+/>
 ```
 
 ```svelte
 <script lang="ts">
-    import DateInput from "./DateInput.svelte";
+  import DateInput from "./DateInput.svelte";
 
-    let start = $state("");
-    let end = $state("");
+  let start = $state("");
+  let end = $state("");
 </script>
 
 <label>
-    Start
-    <DateInput label="Start date" bind:value={start} />
+  Start
+  <DateInput
+    label="Start date"
+    bind:value={start}
+  />
 </label>
 <label>
-    End
-    <DateInput label="End date" bind:value={end} min={start} />
+  End
+  <DateInput
+    label="End date"
+    bind:value={end}
+    min={start}
+  />
 </label>
 ```
 

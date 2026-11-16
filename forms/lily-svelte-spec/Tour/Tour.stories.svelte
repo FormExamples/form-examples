@@ -1,17 +1,20 @@
-<script module lang="ts">
-  import { defineMeta } from '@storybook/addon-svelte-csf';
-  import Tour from './Tour.svelte';
+<script
+    module
+    lang="ts"
+>
+    import { defineMeta } from "@storybook/addon-svelte-csf";
+    import Tour from "./Tour.svelte";
 
-  const { Story } = defineMeta({
-    title: 'Headless/Tour',
-    component: Tour,
-  });
+    const { Story } = defineMeta({
+        title: "Headless/Tour",
+        component: Tour,
+    });
 </script>
 
 <Story
-  name="Default"
-  tags={['autodocs', '!dev']}
-  args={{'label':'Tour'}}
+    name="Default"
+    tags={["autodocs", "!dev"]}
+    args={{ label: "Tour" }}
 >
-  <p>Tour content</p>
+    <p>Tour content</p>
 </Story>

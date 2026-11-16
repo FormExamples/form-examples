@@ -26,7 +26,7 @@
     //   - None — this is a display-only component with no interactive behavior.
     //
     // Accessibility:
-    //   - aria-label optionally provides additional context beyond the displayed value
+    //   - A visible caption names the value, or label renders as hidden text; a plain span cannot take aria-label.
     //   - Text content is inherently accessible to screen readers
     //
     // Internationalization:
@@ -57,6 +57,6 @@
 <!-- MeasurementInstanceView.svelte -->
 <span
     class={`measurement-instance-view ${className}`}
-    aria-label={label}
-    {...restProps}>{value}</span
+    {...restProps}
+    >{#if label}<span class="screen-reader-span">{`${label} `}</span>{/if}{value}</span
 >

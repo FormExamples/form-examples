@@ -31,147 +31,150 @@ Compose head/body/foot/row/cell components. Provide a descriptive `label` for th
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `class` | `string` | `""` | CSS class name appended to the base class. |
-| `label` | `string` | required | `aria-label` for the grid. |
-| `caption` | `string` | `undefined` | Visible caption. |
-| `children` | `Snippet` | required | Head/body/foot elements. |
-| `...restProps` | `unknown` | — | Additional attributes spread onto the `<table>`. |
+| Prop           | Type      | Default     | Description                                      |
+| -------------- | --------- | ----------- | ------------------------------------------------ |
+| `class`        | `string`  | `""`        | CSS class name appended to the base class.       |
+| `label`        | `string`  | required    | `aria-label` for the grid.                       |
+| `caption`      | `string`  | `undefined` | Visible caption.                                 |
+| `children`     | `Snippet` | required    | Head/body/foot elements.                         |
+| `...restProps` | `unknown` | —           | Additional attributes spread onto the `<table>`. |
 
 ## Usage
 
 ```svelte
 <script lang="ts">
-    import DataTable from "./DataTable.svelte";
-    import DataTableHead from "../DataTableHead/DataTableHead.svelte";
-    import DataTableBody from "../DataTableBody/DataTableBody.svelte";
-    import DataTableRow from "../DataTableRow/DataTableRow.svelte";
-    import DataTableTD from "../DataTableTD/DataTableTD.svelte";
+  import DataTable from "./DataTable.svelte";
+  import DataTableHead from "../DataTableHead/DataTableHead.svelte";
+  import DataTableBody from "../DataTableBody/DataTableBody.svelte";
+  import DataTableRow from "../DataTableRow/DataTableRow.svelte";
+  import DataTableTD from "../DataTableTD/DataTableTD.svelte";
 </script>
 
 <DataTable label="User accounts">
-    <DataTableHead>
-        <DataTableRow>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-        </DataTableRow>
-    </DataTableHead>
-    <DataTableBody>
-        <DataTableRow>
-            <DataTableTD>Alice</DataTableTD>
-            <DataTableTD>alice@example.com</DataTableTD>
-        </DataTableRow>
-        <DataTableRow>
-            <DataTableTD>Bob</DataTableTD>
-            <DataTableTD>bob@example.com</DataTableTD>
-        </DataTableRow>
-    </DataTableBody>
+  <DataTableHead>
+    <DataTableRow>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+    </DataTableRow>
+  </DataTableHead>
+  <DataTableBody>
+    <DataTableRow>
+      <DataTableTD>Alice</DataTableTD>
+      <DataTableTD>alice@example.com</DataTableTD>
+    </DataTableRow>
+    <DataTableRow>
+      <DataTableTD>Bob</DataTableTD>
+      <DataTableTD>bob@example.com</DataTableTD>
+    </DataTableRow>
+  </DataTableBody>
 </DataTable>
 ```
 
 ```svelte
 <script lang="ts">
-    import DataTable from "./DataTable.svelte";
-    import DataTableHead from "../DataTableHead/DataTableHead.svelte";
-    import DataTableBody from "../DataTableBody/DataTableBody.svelte";
-    import DataTableFoot from "../DataTableFoot/DataTableFoot.svelte";
-    import DataTableRow from "../DataTableRow/DataTableRow.svelte";
-    import DataTableTD from "../DataTableTD/DataTableTD.svelte";
+  import DataTable from "./DataTable.svelte";
+  import DataTableHead from "../DataTableHead/DataTableHead.svelte";
+  import DataTableBody from "../DataTableBody/DataTableBody.svelte";
+  import DataTableFoot from "../DataTableFoot/DataTableFoot.svelte";
+  import DataTableRow from "../DataTableRow/DataTableRow.svelte";
+  import DataTableTD from "../DataTableTD/DataTableTD.svelte";
 </script>
 
-<DataTable label="Sales" caption="Quarterly sales">
-    <DataTableHead>
-        <DataTableRow>
-            <th scope="col">Month</th>
-            <th scope="col">Revenue</th>
-        </DataTableRow>
-    </DataTableHead>
-    <DataTableBody>
-        <DataTableRow>
-            <DataTableTD>January</DataTableTD>
-            <DataTableTD>$10,000</DataTableTD>
-        </DataTableRow>
-        <DataTableRow>
-            <DataTableTD>February</DataTableTD>
-            <DataTableTD>$12,000</DataTableTD>
-        </DataTableRow>
-    </DataTableBody>
-    <DataTableFoot>
-        <DataTableRow>
-            <DataTableTD>Total</DataTableTD>
-            <DataTableTD>$22,000</DataTableTD>
-        </DataTableRow>
-    </DataTableFoot>
+<DataTable
+  label="Sales"
+  caption="Quarterly sales"
+>
+  <DataTableHead>
+    <DataTableRow>
+      <th scope="col">Month</th>
+      <th scope="col">Revenue</th>
+    </DataTableRow>
+  </DataTableHead>
+  <DataTableBody>
+    <DataTableRow>
+      <DataTableTD>January</DataTableTD>
+      <DataTableTD>$10,000</DataTableTD>
+    </DataTableRow>
+    <DataTableRow>
+      <DataTableTD>February</DataTableTD>
+      <DataTableTD>$12,000</DataTableTD>
+    </DataTableRow>
+  </DataTableBody>
+  <DataTableFoot>
+    <DataTableRow>
+      <DataTableTD>Total</DataTableTD>
+      <DataTableTD>$22,000</DataTableTD>
+    </DataTableRow>
+  </DataTableFoot>
 </DataTable>
 ```
 
 ```svelte
 <script lang="ts">
-    import DataTable from "./DataTable.svelte";
-    import DataTableHead from "../DataTableHead/DataTableHead.svelte";
-    import DataTableBody from "../DataTableBody/DataTableBody.svelte";
-    import DataTableRow from "../DataTableRow/DataTableRow.svelte";
-    import DataTableTD from "../DataTableTD/DataTableTD.svelte";
-    import DataTableTD from "../DataTableTD/DataTableTD.svelte";
+  import DataTable from "./DataTable.svelte";
+  import DataTableHead from "../DataTableHead/DataTableHead.svelte";
+  import DataTableBody from "../DataTableBody/DataTableBody.svelte";
+  import DataTableRow from "../DataTableRow/DataTableRow.svelte";
+  import DataTableTD from "../DataTableTD/DataTableTD.svelte";
+  import DataTableTD from "../DataTableTD/DataTableTD.svelte";
 </script>
 
 <DataTable label="Users">
-    <colgroup>
-        <DataTableTD />
-        <DataTableTD span={2} />
-    </colgroup>
-    <DataTableHead>
-        <DataTableRow>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Role</th>
-        </DataTableRow>
-    </DataTableHead>
-    <DataTableBody>
-        <DataTableRow>
-            <DataTableTD>Alice</DataTableTD>
-            <DataTableTD>alice@example.com</DataTableTD>
-            <DataTableTD>Admin</DataTableTD>
-        </DataTableRow>
-    </DataTableBody>
+  <colgroup>
+    <DataTableTD />
+    <DataTableTD span={2} />
+  </colgroup>
+  <DataTableHead>
+    <DataTableRow>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Role</th>
+    </DataTableRow>
+  </DataTableHead>
+  <DataTableBody>
+    <DataTableRow>
+      <DataTableTD>Alice</DataTableTD>
+      <DataTableTD>alice@example.com</DataTableTD>
+      <DataTableTD>Admin</DataTableTD>
+    </DataTableRow>
+  </DataTableBody>
 </DataTable>
 ```
 
 ```svelte
 <script lang="ts">
-    import DataTable from "./DataTable.svelte";
-    import DataTableHead from "../DataTableHead/DataTableHead.svelte";
-    import DataTableBody from "../DataTableBody/DataTableBody.svelte";
-    import DataTableRow from "../DataTableRow/DataTableRow.svelte";
-    import DataTableTD from "../DataTableTD/DataTableTD.svelte";
+  import DataTable from "./DataTable.svelte";
+  import DataTableHead from "../DataTableHead/DataTableHead.svelte";
+  import DataTableBody from "../DataTableBody/DataTableBody.svelte";
+  import DataTableRow from "../DataTableRow/DataTableRow.svelte";
+  import DataTableTD from "../DataTableTD/DataTableTD.svelte";
 
-    let activeRow = $state(0);
-    let activeCol = $state(0);
-    const data = [
-        ["A1", "A2"],
-        ["B1", "B2"]
-    ];
+  let activeRow = $state(0);
+  let activeCol = $state(0);
+  const data = [
+    ["A1", "A2"],
+    ["B1", "B2"],
+  ];
 </script>
 
 <DataTable label="Grid navigation demo">
-    <DataTableHead>
-        <DataTableRow>
-            <th scope="col">Col 1</th>
-            <th scope="col">Col 2</th>
-        </DataTableRow>
-    </DataTableHead>
-    <DataTableBody>
-        {#each data as row, r}
-            <DataTableRow>
-                {#each row as cell, c}
-                    <DataTableTD active={activeRow === r && activeCol === c}>
-                        {cell}
-                    </DataTableTD>
-                {/each}
-            </DataTableRow>
+  <DataTableHead>
+    <DataTableRow>
+      <th scope="col">Col 1</th>
+      <th scope="col">Col 2</th>
+    </DataTableRow>
+  </DataTableHead>
+  <DataTableBody>
+    {#each data as row, r}
+      <DataTableRow>
+        {#each row as cell, c}
+          <DataTableTD active={activeRow === r && activeCol === c}>
+            {cell}
+          </DataTableTD>
         {/each}
-    </DataTableBody>
+      </DataTableRow>
+    {/each}
+  </DataTableBody>
 </DataTable>
 ```
 

@@ -31,69 +31,105 @@ Bind `open` and provide dialog content as children.
 
 ```svelte
 <script lang="ts">
-    import FileDialog from "./FileDialog.svelte";
-    let open = $state(false);
+  import FileDialog from "./FileDialog.svelte";
+  let open = $state(false);
 </script>
 
-<button type="button" onclick={() => open = true}>Open…</button>
-<FileDialog label="Open file" bind:open>
-    <ul>
-        <li>document.txt</li>
-        <li>image.png</li>
-    </ul>
-    <button type="button" onclick={() => open = false}>Cancel</button>
+<button
+  type="button"
+  onclick={() => (open = true)}>Open…</button
+>
+<FileDialog
+  label="Open file"
+  bind:open
+>
+  <ul>
+    <li>document.txt</li>
+    <li>image.png</li>
+  </ul>
+  <button
+    type="button"
+    onclick={() => (open = false)}>Cancel</button
+  >
 </FileDialog>
 ```
 
 ## Props
 
-| Prop       | Type       | Default | Description                                   |
-| ---------- | ---------- | ------- | --------------------------------------------- |
-| `class`    | `string`   | `""`    | CSS class appended to the base class.        |
-| `label`    | `string`   | required| Accessible name via `aria-label`.             |
-| `open`     | `boolean`  | `false` | Whether the dialog is visible. Bindable.      |
-| `children` | `Snippet`  | required| Dialog content.                               |
-| `...rest`  | `unknown`  | —       | Additional HTML attributes on the `<dialog>`. |
+| Prop       | Type      | Default  | Description                                   |
+| ---------- | --------- | -------- | --------------------------------------------- |
+| `class`    | `string`  | `""`     | CSS class appended to the base class.         |
+| `label`    | `string`  | required | Accessible name via `aria-label`.             |
+| `open`     | `boolean` | `false`  | Whether the dialog is visible. Bindable.      |
+| `children` | `Snippet` | required | Dialog content.                               |
+| `...rest`  | `unknown` | —        | Additional HTML attributes on the `<dialog>`. |
 
 ## Usage
 
 ### 1. Open file
 
 ```svelte
-<FileDialog label="Open file" bind:open>
-    <ul>
-        {#each files as f}<li>{f.name}</li>{/each}
-    </ul>
-    <button type="button" onclick={() => open = false}>Cancel</button>
+<FileDialog
+  label="Open file"
+  bind:open
+>
+  <ul>
+    {#each files as f}<li>{f.name}</li>{/each}
+  </ul>
+  <button
+    type="button"
+    onclick={() => (open = false)}>Cancel</button
+  >
 </FileDialog>
 ```
 
 ### 2. Save as
 
 ```svelte
-<FileDialog label="Save as" bind:open>
-    <Field label="Filename">
-        <TextInput label="Filename" bind:value={filename} />
-    </Field>
-    <button type="button" onclick={save}>Save</button>
+<FileDialog
+  label="Save as"
+  bind:open
+>
+  <Field label="Filename">
+    <TextInput
+      label="Filename"
+      bind:value={filename}
+    />
+  </Field>
+  <button
+    type="button"
+    onclick={save}>Save</button
+  >
 </FileDialog>
 ```
 
 ### 3. Escape closes
 
 ```svelte
-<FileDialog label="Choose folder" bind:open>
-    <p>Press Escape to cancel.</p>
+<FileDialog
+  label="Choose folder"
+  bind:open
+>
+  <p>Press Escape to cancel.</p>
 </FileDialog>
 ```
 
 ### 4. With selection callback
 
 ```svelte
-<FileDialog label="Select image" bind:open>
-    {#each images as img}
-        <button type="button" onclick={() => { pick(img); open = false; }}>{img.name}</button>
-    {/each}
+<FileDialog
+  label="Select image"
+  bind:open
+>
+  {#each images as img}
+    <button
+      type="button"
+      onclick={() => {
+        pick(img);
+        open = false;
+      }}>{img.name}</button
+    >
+  {/each}
 </FileDialog>
 ```
 
@@ -101,9 +137,18 @@ Bind `open` and provide dialog content as children.
 
 ```svelte
 <DropdownMenu label="File">
-    <li role="menuitem" tabindex="-1" onclick={() => open = true}>Open…</li>
+  <li
+    role="menuitem"
+    tabindex="-1"
+    onclick={() => (open = true)}
+  >
+    Open…
+  </li>
 </DropdownMenu>
-<FileDialog label="Open" bind:open>…</FileDialog>
+<FileDialog
+  label="Open"
+  bind:open>…</FileDialog
+>
 ```
 
 ## Accessibility

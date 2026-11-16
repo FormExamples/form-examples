@@ -43,12 +43,12 @@ Import `CalendarTable` from `./CalendarTable.svelte`. Always pass `label` (e.g. 
 
 ```svelte
 <script lang="ts">
-  import CalendarTable from './CalendarTable.svelte';
-  import CalendarTableHead from '../CalendarTableHead/CalendarTableHead.svelte';
-  import CalendarTableBody from '../CalendarTableBody/CalendarTableBody.svelte';
-  import CalendarTableFoot from '../CalendarTableFoot/CalendarTableFoot.svelte';
-  import CalendarTableRow from '../CalendarTableRow/CalendarTableRow.svelte';
-  import CalendarTableTD from '../CalendarTableTD/CalendarTableTD.svelte';
+  import CalendarTable from "./CalendarTable.svelte";
+  import CalendarTableHead from "../CalendarTableHead/CalendarTableHead.svelte";
+  import CalendarTableBody from "../CalendarTableBody/CalendarTableBody.svelte";
+  import CalendarTableFoot from "../CalendarTableFoot/CalendarTableFoot.svelte";
+  import CalendarTableRow from "../CalendarTableRow/CalendarTableRow.svelte";
+  import CalendarTableTD from "../CalendarTableTD/CalendarTableTD.svelte";
 </script>
 
 <CalendarTable label="January 2025">
@@ -76,13 +76,16 @@ Import `CalendarTable` from `./CalendarTable.svelte`. Always pass `label` (e.g. 
 
 ```svelte
 <script lang="ts">
-  import CalendarTable from './CalendarTable.svelte';
-  import CalendarTableBody from '../CalendarTableBody/CalendarTableBody.svelte';
-  import CalendarTableRow from '../CalendarTableRow/CalendarTableRow.svelte';
-  import CalendarTableTD from '../CalendarTableTD/CalendarTableTD.svelte';
+  import CalendarTable from "./CalendarTable.svelte";
+  import CalendarTableBody from "../CalendarTableBody/CalendarTableBody.svelte";
+  import CalendarTableRow from "../CalendarTableRow/CalendarTableRow.svelte";
+  import CalendarTableTD from "../CalendarTableTD/CalendarTableTD.svelte";
 </script>
 
-<CalendarTable label="February 2025" caption="February 2025">
+<CalendarTable
+  label="February 2025"
+  caption="February 2025"
+>
   <CalendarTableBody>
     <CalendarTableRow>
       <CalendarTableTD>1</CalendarTableTD>
@@ -95,10 +98,10 @@ Import `CalendarTable` from `./CalendarTable.svelte`. Always pass `label` (e.g. 
 
 ```svelte
 <script lang="ts">
-  import CalendarTable from './CalendarTable.svelte';
-  import CalendarTableBody from '../CalendarTableBody/CalendarTableBody.svelte';
-  import CalendarTableRow from '../CalendarTableRow/CalendarTableRow.svelte';
-  import CalendarTableTD from '../CalendarTableTD/CalendarTableTD.svelte';
+  import CalendarTable from "./CalendarTable.svelte";
+  import CalendarTableBody from "../CalendarTableBody/CalendarTableBody.svelte";
+  import CalendarTableRow from "../CalendarTableRow/CalendarTableRow.svelte";
+  import CalendarTableTD from "../CalendarTableTD/CalendarTableTD.svelte";
 
   let selected = $state(15);
 </script>
@@ -107,7 +110,10 @@ Import `CalendarTable` from `./CalendarTable.svelte`. Always pass `label` (e.g. 
   <CalendarTableBody>
     <CalendarTableRow>
       {#each [14, 15, 16] as d}
-        <CalendarTableTD selected={d === selected} today={d === 15}>{d}</CalendarTableTD>
+        <CalendarTableTD
+          selected={d === selected}
+          today={d === 15}>{d}</CalendarTableTD
+        >
       {/each}
     </CalendarTableRow>
   </CalendarTableBody>
@@ -118,11 +124,11 @@ Import `CalendarTable` from `./CalendarTable.svelte`. Always pass `label` (e.g. 
 
 ```svelte
 <script lang="ts">
-  import CalendarTable from './CalendarTable.svelte';
-  import CalendarTableTD from '../CalendarTableTD/CalendarTableTD.svelte';
-  import CalendarTableBody from '../CalendarTableBody/CalendarTableBody.svelte';
-  import CalendarTableRow from '../CalendarTableRow/CalendarTableRow.svelte';
-  import CalendarTableTD from '../CalendarTableTD/CalendarTableTD.svelte';
+  import CalendarTable from "./CalendarTable.svelte";
+  import CalendarTableTD from "../CalendarTableTD/CalendarTableTD.svelte";
+  import CalendarTableBody from "../CalendarTableBody/CalendarTableBody.svelte";
+  import CalendarTableRow from "../CalendarTableRow/CalendarTableRow.svelte";
+  import CalendarTableTD from "../CalendarTableTD/CalendarTableTD.svelte";
 </script>
 
 <CalendarTable label="Week view">
@@ -144,11 +150,11 @@ Import `CalendarTable` from `./CalendarTable.svelte`. Always pass `label` (e.g. 
 
 ```svelte
 <script lang="ts">
-  import CalendarRangePicker from '../CalendarRangePicker/CalendarRangePicker.svelte';
-  import CalendarTable from './CalendarTable.svelte';
-  import CalendarTableBody from '../CalendarTableBody/CalendarTableBody.svelte';
-  import CalendarTableRow from '../CalendarTableRow/CalendarTableRow.svelte';
-  import CalendarTableTD from '../CalendarTableTD/CalendarTableTD.svelte';
+  import CalendarRangePicker from "../CalendarRangePicker/CalendarRangePicker.svelte";
+  import CalendarTable from "./CalendarTable.svelte";
+  import CalendarTableBody from "../CalendarTableBody/CalendarTableBody.svelte";
+  import CalendarTableRow from "../CalendarTableRow/CalendarTableRow.svelte";
+  import CalendarTableTD from "../CalendarTableTD/CalendarTableTD.svelte";
 </script>
 
 <CalendarRangePicker label="Select date range">

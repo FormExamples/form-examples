@@ -32,48 +32,60 @@ Bind `expanded` and pass a label and children.
 
 ```svelte
 <script lang="ts">
-    import Expander from "./Expander.svelte";
-    let expanded = $state(false);
+  import Expander from "./Expander.svelte";
+  let expanded = $state(false);
 </script>
 
-<Expander label="Show details" bind:expanded>
-    <p>Details here…</p>
+<Expander
+  label="Show details"
+  bind:expanded
+>
+  <p>Details here…</p>
 </Expander>
 ```
 
 ## Props
 
-| Prop       | Type       | Default | Description                                  |
-| ---------- | ---------- | ------- | -------------------------------------------- |
-| `class`    | `string`   | `""`    | CSS class appended to the base class.       |
-| `label`    | `string`   | required| Button label and region `aria-label`.        |
-| `expanded` | `boolean`  | `false` | Whether the content is expanded. Bindable.   |
-| `children` | `Snippet`  | required| Expandable content.                          |
-| `...rest`  | `unknown`  | —       | Additional HTML attributes on the wrapper.   |
+| Prop       | Type      | Default  | Description                                |
+| ---------- | --------- | -------- | ------------------------------------------ |
+| `class`    | `string`  | `""`     | CSS class appended to the base class.      |
+| `label`    | `string`  | required | Button label and region `aria-label`.      |
+| `expanded` | `boolean` | `false`  | Whether the content is expanded. Bindable. |
+| `children` | `Snippet` | required | Expandable content.                        |
+| `...rest`  | `unknown` | —        | Additional HTML attributes on the wrapper. |
 
 ## Usage
 
 ### 1. Basic expander
 
 ```svelte
-<Expander label="Show details" bind:expanded>
-    <p>Details here...</p>
+<Expander
+  label="Show details"
+  bind:expanded
+>
+  <p>Details here...</p>
 </Expander>
 ```
 
 ### 2. Advanced settings
 
 ```svelte
-<Expander label="Advanced settings" bind:expanded={showAdvanced}>
-    <form>…</form>
+<Expander
+  label="Advanced settings"
+  bind:expanded={showAdvanced}
+>
+  <form>…</form>
 </Expander>
 ```
 
 ### 3. Open by default
 
 ```svelte
-<Expander label="Terms" expanded>
-    <p>Full terms of service…</p>
+<Expander
+  label="Terms"
+  expanded
+>
+  <p>Full terms of service…</p>
 </Expander>
 ```
 
@@ -89,13 +101,19 @@ Bind `expanded` and pass a label and children.
 
 ```svelte
 <script lang="ts">
-    import Expander from "./Expander.svelte";
-    let expanded = $state(false);
+  import Expander from "./Expander.svelte";
+  let expanded = $state(false);
 </script>
 
-<button type="button" onclick={() => expanded = !expanded}>External toggle</button>
-<Expander label="Content" bind:expanded>
-    <p>Controlled by the button above.</p>
+<button
+  type="button"
+  onclick={() => (expanded = !expanded)}>External toggle</button
+>
+<Expander
+  label="Content"
+  bind:expanded
+>
+  <p>Controlled by the button above.</p>
 </Expander>
 ```
 

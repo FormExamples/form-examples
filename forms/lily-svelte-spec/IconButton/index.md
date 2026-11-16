@@ -46,12 +46,17 @@ A headless Svelte 5 component that renders a single native `<button>` element. B
 
 ```svelte
 <script lang="ts">
-  import IconButton from './IconButton.svelte';
+  import IconButton from "./IconButton.svelte";
 
-  function close() { /* … */ }
+  function close() {
+    /* … */
+  }
 </script>
 
-<IconButton label="Close dialog" onclick={close}>
+<IconButton
+  label="Close dialog"
+  onclick={close}
+>
   <span aria-hidden="true">×</span>
 </IconButton>
 ```
@@ -60,12 +65,16 @@ A headless Svelte 5 component that renders a single native `<button>` element. B
 
 ```svelte
 <script lang="ts">
-  import IconButton from './IconButton.svelte';
+  import IconButton from "./IconButton.svelte";
 
   let pinned = $state(false);
 </script>
 
-<IconButton label="Pin item" pressed={pinned} onclick={() => (pinned = !pinned)}>
+<IconButton
+  label="Pin item"
+  pressed={pinned}
+  onclick={() => (pinned = !pinned)}
+>
   <span aria-hidden="true">📌</span>
 </IconButton>
 ```

@@ -41,7 +41,7 @@ Import the component, pass the `value` string, and optionally provide a `label` 
 
 ```svelte
 <script lang="ts">
-    import MeasurementInstanceView from "./MeasurementInstanceView.svelte";
+  import MeasurementInstanceView from "./MeasurementInstanceView.svelte";
 </script>
 
 <MeasurementInstanceView value="72 kg" />
@@ -51,24 +51,37 @@ Import the component, pass the `value` string, and optionally provide a `label` 
 
 ```svelte
 <script lang="ts">
-    import MeasurementInstanceView from "./MeasurementInstanceView.svelte";
+  import MeasurementInstanceView from "./MeasurementInstanceView.svelte";
 </script>
 
-<MeasurementInstanceView value="98.6 F" label="Body temperature" />
+<MeasurementInstanceView
+  value="98.6 F"
+  label="Body temperature"
+/>
 ```
 
 ### Inside a description list
 
 ```svelte
 <script lang="ts">
-    import MeasurementInstanceView from "./MeasurementInstanceView.svelte";
+  import MeasurementInstanceView from "./MeasurementInstanceView.svelte";
 </script>
 
 <dl>
-    <dt>Weight</dt>
-    <dd><MeasurementInstanceView value="72 kg" label="Weight" /></dd>
-    <dt>Height</dt>
-    <dd><MeasurementInstanceView value="178 cm" label="Height" /></dd>
+  <dt>Weight</dt>
+  <dd>
+    <MeasurementInstanceView
+      value="72 kg"
+      label="Weight"
+    />
+  </dd>
+  <dt>Height</dt>
+  <dd>
+    <MeasurementInstanceView
+      value="178 cm"
+      label="Height"
+    />
+  </dd>
 </dl>
 ```
 
@@ -76,16 +89,20 @@ Import the component, pass the `value` string, and optionally provide a `label` 
 
 ```svelte
 <script lang="ts">
-    import MeasurementInstanceView from "./MeasurementInstanceView.svelte";
+  import MeasurementInstanceView from "./MeasurementInstanceView.svelte";
 </script>
 
-<MeasurementInstanceView class="value-strong" value="120/80 mmHg" label="Blood pressure" />
+<MeasurementInstanceView
+  class="value-strong"
+  value="120/80 mmHg"
+  label="Blood pressure"
+/>
 
 <style>
-    :global(.value-strong) {
-        font-weight: 600;
-        font-variant-numeric: tabular-nums;
-    }
+  :global(.value-strong) {
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
 </style>
 ```
 
@@ -93,11 +110,14 @@ Import the component, pass the `value` string, and optionally provide a `label` 
 
 ```svelte
 <script lang="ts">
-    import MeasurementInstanceView from "./MeasurementInstanceView.svelte";
-    let reading = $state("36.7 C");
+  import MeasurementInstanceView from "./MeasurementInstanceView.svelte";
+  let reading = $state("36.7 C");
 </script>
 
-<MeasurementInstanceView value={reading} label="Latest temperature" />
+<MeasurementInstanceView
+  value={reading}
+  label="Latest temperature"
+/>
 ```
 
 ## Accessibility

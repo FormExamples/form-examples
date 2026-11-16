@@ -62,6 +62,7 @@
     class={`clamp-text ${className}`}
     data-lines={lines}
     style={`--clamp-text-lines: ${lines};`}
+    role={label ? "group" : undefined}
     aria-label={label}
     {...restProps}
 >

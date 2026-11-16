@@ -43,14 +43,14 @@ Composition with `Tag`:
 
 ```svelte
 <script lang="ts">
-    import TagGroup from "./TagGroup.svelte";
-    import Tag from "../Tag/Tag.svelte";
+  import TagGroup from "./TagGroup.svelte";
+  import Tag from "../Tag/Tag.svelte";
 </script>
 
 <TagGroup label="Technologies">
-    <Tag label="Technology">Svelte</Tag>
-    <Tag label="Technology">TypeScript</Tag>
-    <Tag label="Technology">Vite</Tag>
+  <Tag label="Technology">Svelte</Tag>
+  <Tag label="Technology">TypeScript</Tag>
+  <Tag label="Technology">Vite</Tag>
 </TagGroup>
 ```
 
@@ -58,50 +58,54 @@ Dynamic tags from data:
 
 ```svelte
 <script lang="ts">
-    import TagGroup from "./TagGroup.svelte";
-    import Tag from "../Tag/Tag.svelte";
-    const skills = ["Svelte", "TypeScript", "CSS", "Accessibility"];
+  import TagGroup from "./TagGroup.svelte";
+  import Tag from "../Tag/Tag.svelte";
+  const skills = ["Svelte", "TypeScript", "CSS", "Accessibility"];
 </script>
 
 <TagGroup label="Skills">
-    {#each skills as s}
-        <Tag label="Skill">{s}</Tag>
-    {/each}
+  {#each skills as s}
+    <Tag label="Skill">{s}</Tag>
+  {/each}
 </TagGroup>
 ```
 
-Paired with `TagInput` for adding tags:
+Paired with `TagInputDiv` for adding tags:
 
 ```svelte
 <script lang="ts">
-    import TagGroup from "./TagGroup.svelte";
-    import Tag from "../Tag/Tag.svelte";
-    import TagInput from "../TagInput/TagInput.svelte";
-    let tags = $state<string[]>(["svelte"]);
-    let newTag = $state("");
+  import TagGroup from "./TagGroup.svelte";
+  import Tag from "../Tag/Tag.svelte";
+  import TagInputDiv from "../TagInputDiv/TagInputDiv.svelte";
+  let tags = $state<string[]>(["svelte"]);
+  let newTag = $state("");
 </script>
 
 <TagGroup label="Tags">
-    {#each tags as t}
-        <Tag label="Tag">{t}</Tag>
-    {/each}
+  {#each tags as t}
+    <Tag label="Tag">{t}</Tag>
+  {/each}
 </TagGroup>
-<TagInput label="Add tag" bind:value={newTag} onadd={(v) => (tags = [...tags, v])} />
+<TagInputDiv
+  label="Add tag"
+  bind:value={newTag}
+  onadd={(v) => (tags = [...tags, v])}
+/>
 ```
 
 In an article's metadata:
 
 ```svelte
 <script lang="ts">
-    import TagGroup from "./TagGroup.svelte";
-    import Tag from "../Tag/Tag.svelte";
+  import TagGroup from "./TagGroup.svelte";
+  import Tag from "../Tag/Tag.svelte";
 </script>
 
 <footer>
-    <TagGroup label="Topics">
-        <Tag label="Topic">Accessibility</Tag>
-        <Tag label="Topic">Design systems</Tag>
-    </TagGroup>
+  <TagGroup label="Topics">
+    <Tag label="Topic">Accessibility</Tag>
+    <Tag label="Topic">Design systems</Tag>
+  </TagGroup>
 </footer>
 ```
 
@@ -109,13 +113,16 @@ With extra class for layout:
 
 ```svelte
 <script lang="ts">
-    import TagGroup from "./TagGroup.svelte";
-    import Tag from "../Tag/Tag.svelte";
+  import TagGroup from "./TagGroup.svelte";
+  import Tag from "../Tag/Tag.svelte";
 </script>
 
-<TagGroup label="Tools" class="wrap">
-    <Tag label="Tool">Vitest</Tag>
-    <Tag label="Tool">Playwright</Tag>
+<TagGroup
+  label="Tools"
+  class="wrap"
+>
+  <Tag label="Tool">Vitest</Tag>
+  <Tag label="Tool">Playwright</Tag>
 </TagGroup>
 ```
 
@@ -125,12 +132,13 @@ With extra class for layout:
 - `TagGroup` does not add keyboard behavior; it is a passive container.
 
 References:
+
 - WAI-ARIA `group` role: https://www.w3.org/TR/wai-aria-1.2/#group
 
 ## Related components
 
 - `Tag` - the intended child.
-- `TagInput` - input for adding new tags.
+- `TagInputDiv` - input for adding new tags.
 - `Badge` - single count/status indicator.
 - `CheckboxGroup` - multi-select form group.
 

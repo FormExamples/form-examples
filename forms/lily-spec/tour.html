@@ -4,17 +4,27 @@
   Description: a tour guide, such as for sightseeing, or pathways, or demonstrations, etc.
   HTML tag: <div>
   CSS class: tour
-  Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Keyboard: Escape ends the tour (sets data-active="false" and hides it); start it by setting data-active="true"
+  Accessibility: role="dialog" (non-modal: no aria-modal, the tour points at the live page, which stays usable), tabindex="-1", aria-label for accessible name
   Usage:
-    <div class="tour" aria-label="Example">
-      ...
+    <div
+      class="tour"
+      role="dialog"
+      tabindex="-1"
+      aria-label=""
+      data-active="false"
+      hidden
+    >
     </div>
 -->
 
 <div
   class="tour"
+  role="dialog"
+  tabindex="-1"
   aria-label=""
+  data-active="false"
+  hidden
 >
   <!-- Consumer provides content -->
 </div>
@@ -23,9 +33,28 @@
   // Tour behavior
   (function() {
     'use strict';
-    // Tour: consumer implements interactive behavior
     document.querySelectorAll('.tour').forEach(function(el) {
-      // Interactive behavior initialization
+      var opener = null;
+      function sync() {
+        if (el.getAttribute('data-active') === 'true') {
+          if (el.hidden) opener = document.activeElement;
+          el.hidden = false;
+          el.focus();
+        } else {
+          el.hidden = true;
+          if (opener && opener.isConnected) opener.focus();
+          opener = null;
+        }
+      }
+      new MutationObserver(sync).observe(el, { attributes: true, attributeFilter: ['data-active'] });
+      sync();
+      el.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && el.getAttribute('data-active') === 'true') {
+          e.preventDefault();
+          el.setAttribute('data-active', 'false');
+          el.dispatchEvent(new CustomEvent('close'));
+        }
+      });
     });
   })();
 </script>

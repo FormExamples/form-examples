@@ -46,14 +46,14 @@ Place `KanbanTableTD` elements inside `KanbanTableRow`. Use `active` together wi
 
 ```svelte
 <script lang="ts">
-    import KanbanTableTD from "./KanbanTableTD.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  import KanbanTableTD from "./KanbanTableTD.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
 </script>
 
 <KanbanTableRow>
-    <KanbanTableTD>Fix login bug</KanbanTableTD>
-    <KanbanTableTD>Write docs</KanbanTableTD>
-    <KanbanTableTD>Release 1.0</KanbanTableTD>
+  <KanbanTableTD>Fix login bug</KanbanTableTD>
+  <KanbanTableTD>Write docs</KanbanTableTD>
+  <KanbanTableTD>Release 1.0</KanbanTableTD>
 </KanbanTableRow>
 ```
 
@@ -61,14 +61,12 @@ Place `KanbanTableTD` elements inside `KanbanTableRow`. Use `active` together wi
 
 ```svelte
 <script lang="ts">
-    import KanbanTableTD from "./KanbanTableTD.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  import KanbanTableTD from "./KanbanTableTD.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
 </script>
 
 <KanbanTableRow>
-    <KanbanTableTD label="High priority: Fix login bug">
-        Fix login bug
-    </KanbanTableTD>
+  <KanbanTableTD label="High priority: Fix login bug">Fix login bug</KanbanTableTD>
 </KanbanTableRow>
 ```
 
@@ -76,14 +74,14 @@ Place `KanbanTableTD` elements inside `KanbanTableRow`. Use `active` together wi
 
 ```svelte
 <script lang="ts">
-    import KanbanTableTD from "./KanbanTableTD.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  import KanbanTableTD from "./KanbanTableTD.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
 </script>
 
 <KanbanTableRow>
-    <KanbanTableTD>Design</KanbanTableTD>
-    <KanbanTableTD />
-    <KanbanTableTD />
+  <KanbanTableTD>Design</KanbanTableTD>
+  <KanbanTableTD />
+  <KanbanTableTD />
 </KanbanTableRow>
 ```
 
@@ -91,15 +89,24 @@ Place `KanbanTableTD` elements inside `KanbanTableRow`. Use `active` together wi
 
 ```svelte
 <script lang="ts">
-    import KanbanTableTD from "./KanbanTableTD.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
-    let selectedId = $state("b");
+  import KanbanTableTD from "./KanbanTableTD.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  let selectedId = $state("b");
 </script>
 
 <KanbanTableRow>
-    <KanbanTableTD active={selectedId === "a"} label="Task A">Task A</KanbanTableTD>
-    <KanbanTableTD active={selectedId === "b"} label="Task B">Task B</KanbanTableTD>
-    <KanbanTableTD active={selectedId === "c"} label="Task C">Task C</KanbanTableTD>
+  <KanbanTableTD
+    active={selectedId === "a"}
+    label="Task A">Task A</KanbanTableTD
+  >
+  <KanbanTableTD
+    active={selectedId === "b"}
+    label="Task B">Task B</KanbanTableTD
+  >
+  <KanbanTableTD
+    active={selectedId === "c"}
+    label="Task C">Task C</KanbanTableTD
+  >
 </KanbanTableRow>
 ```
 
@@ -107,18 +114,18 @@ Place `KanbanTableTD` elements inside `KanbanTableRow`. Use `active` together wi
 
 ```svelte
 <script lang="ts">
-    import KanbanTableTD from "./KanbanTableTD.svelte";
-    import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
-    import Card from "../Card/Card.svelte";
+  import KanbanTableTD from "./KanbanTableTD.svelte";
+  import KanbanTableRow from "../KanbanTableRow/KanbanTableRow.svelte";
+  import Card from "../Card/Card.svelte";
 </script>
 
 <KanbanTableRow>
-    <KanbanTableTD label="Story: Add dark mode">
-        <Card label="Add dark mode">
-            <h3>Add dark mode</h3>
-            <p>Support system preference.</p>
-        </Card>
-    </KanbanTableTD>
+  <KanbanTableTD label="Story: Add dark mode">
+    <Card label="Add dark mode">
+      <h3>Add dark mode</h3>
+      <p>Support system preference.</p>
+    </Card>
+  </KanbanTableTD>
 </KanbanTableRow>
 ```
 

@@ -1,4 +1,7 @@
-<script module lang="ts">
+<script
+    module
+    lang="ts"
+>
     import { defineMeta } from "@storybook/addon-svelte-csf";
     import ContentsLink from "./ContentsLink.svelte";
     const { Story } = defineMeta({
@@ -7,7 +10,10 @@
     });
 </script>
 
-<Story name="Default" tags={["autodocs", "!dev"]}>
+<Story
+    name="Default"
+    tags={["autodocs", "!dev"]}
+>
     <ContentsLink label="ContentsLink example">
         <span>ContentsLink example</span>
     </ContentsLink>

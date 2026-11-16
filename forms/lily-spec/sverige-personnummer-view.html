@@ -5,13 +5,12 @@
   HTML tag: <span>
   CSS class: sverige-personnummer-view
   Keyboard: None (passive element)
-  Accessibility: aria-label for accessible name
+  Accessibility: a visible caption names the value, or the screen-reader-span does. A plain span cannot take aria-label
   Format: 12 digits in the format CCYYMMDDZZZQ: CCYYMMDD is the date of birth, ZZZ a serial (odd male, even female), and Q a Luhn check digit
   Usage:
-    <span class="sverige-personnummer-view" aria-label="Personal Identity Number">value-here</span>
+    <span class="sverige-personnummer-view">value-here</span>
 -->
 
-<span
-  class="sverige-personnummer-view"
-  aria-label="Personal Identity Number"
-></span>
+<span class="sverige-personnummer-view"
+  ><span class="screen-reader-span">Personal Identity Number </span></span
+>

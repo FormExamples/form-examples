@@ -47,6 +47,7 @@
     //   - WAI-ARIA Radio Group Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/radiobutton/
     //   - WAI-ARIA Authoring Practices - Radio Group: https://www.w3.org/WAI/ARIA/apg/patterns/radio/
 
+    import { warnMissingName } from "../dev-warning";
     import type { Snippet } from "svelte";
 
     let {
@@ -61,6 +62,10 @@
         children: Snippet;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName("RadioGroup", label, restProps["aria-label"], restProps["aria-labelledby"]),
+    );
 </script>
 
 <!-- RadioGroup.svelte -->

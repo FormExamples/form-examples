@@ -10,7 +10,7 @@ See [components/tile/index.md](../../../components/tile/index.md) for the full c
 
 ```svelte
 <script lang="ts">
-    import Tile from "./Tile.svelte";
+  import Tile from "./Tile.svelte";
 </script>
 
 <Tile />

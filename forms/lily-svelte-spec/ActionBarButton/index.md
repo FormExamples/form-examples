@@ -36,10 +36,13 @@ A headless Svelte 5 component that renders a native `<button class="action-bar-b
 
 ```svelte
 <script lang="ts">
-  import ActionBarButton from './ActionBarButton.svelte';
+  import ActionBarButton from "./ActionBarButton.svelte";
 </script>
 
-<ActionBarButton label="Delete" onclick={handleDelete}>
+<ActionBarButton
+  label="Delete"
+  onclick={handleDelete}
+>
   Delete
 </ActionBarButton>
 ```

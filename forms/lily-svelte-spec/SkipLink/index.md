@@ -47,21 +47,23 @@ Default usage:
 
 ```svelte
 <script lang="ts">
-    import SkipLink from "./SkipLink.svelte";
+  import SkipLink from "./SkipLink.svelte";
 </script>
 
-<SkipLink />
-<main id="content">...</main>
+<SkipLink /><main id="content">...</main>
 ```
 
 Custom target and localized label:
 
 ```svelte
 <script lang="ts">
-    import SkipLink from "./SkipLink.svelte";
+  import SkipLink from "./SkipLink.svelte";
 </script>
 
-<SkipLink href="#main" label="Passer au contenu" />
+<SkipLink
+  href="#main"
+  label="Passer au contenu"
+/>
 <main id="main">...</main>
 ```
 
@@ -69,23 +71,36 @@ Custom class for focus styling:
 
 ```svelte
 <script lang="ts">
-    import SkipLink from "./SkipLink.svelte";
+  import SkipLink from "./SkipLink.svelte";
 </script>
 
-<SkipLink href="#content" label="Skip navigation" class="sr-only-focusable" />
+<SkipLink
+  href="#content"
+  label="Skip navigation"
+  class="sr-only-focusable"
+/>
 ```
 
 Multiple targets:
 
 ```svelte
 <script lang="ts">
-    import SkipLink from "./SkipLink.svelte";
+  import SkipLink from "./SkipLink.svelte";
 </script>
 
 <nav aria-label="Skip links">
-    <SkipLink href="#main" label="Skip to main" />
-    <SkipLink href="#search" label="Skip to search" />
-    <SkipLink href="#footer" label="Skip to footer" />
+  <SkipLink
+    href="#main"
+    label="Skip to main"
+  />
+  <SkipLink
+    href="#search"
+    label="Skip to search"
+  />
+  <SkipLink
+    href="#footer"
+    label="Skip to footer"
+  />
 </nav>
 ```
 
@@ -93,13 +108,18 @@ Inside app shell:
 
 ```svelte
 <script lang="ts">
-    import SkipLink from "./SkipLink.svelte";
-    import Header from "../Header/Header.svelte";
+  import SkipLink from "./SkipLink.svelte";
+  import Header from "../Header/Header.svelte";
 </script>
 
 <SkipLink />
 <Header label="Site header">...</Header>
-<main id="content" tabindex="-1">Main content</main>
+<main
+  id="content"
+  tabindex="-1"
+>
+  Main content
+</main>
 ```
 
 ## Accessibility
@@ -110,6 +130,7 @@ Inside app shell:
 - Typically the element is visually hidden until it receives focus; consumers control that via CSS.
 
 References:
+
 - WCAG 2.1 Bypass Blocks: https://www.w3.org/WAI/WCAG21/Understanding/bypass-blocks.html
 - WebAIM Skip Navigation Links: https://webaim.org/techniques/skipnav/
 

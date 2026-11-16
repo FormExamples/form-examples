@@ -17,7 +17,7 @@ A headless PIN input that renders a group of single-character numeric inputs for
 - Backspace clears the current field or moves focus back and clears the previous field.
 - Left / Right arrows move focus between fields.
 - Maintains an internal `digits` array and exposes a combined string via `bind:value`.
-- Applies positional aria-labels (`"Digit X of Y"`) to each digit input for screen reader context.
+- Names each digit input with the consumer's `digitLabel(position, length)` (for example `"Digit 2 of 4"`); without it each input takes the group `label`.
 
 ## When to use it
 
@@ -55,31 +55,38 @@ import PinInputDiv from './PinInputDiv.svelte';
 
 ```svelte
 <script lang="ts">
-  import PinInputDiv from './PinInputDiv.svelte';
+  import PinInputDiv from "./PinInputDiv.svelte";
 
   let pin = $state("");
 </script>
 
-<PinInputDiv label="Enter PIN" bind:value={pin} />
+<PinInputDiv
+  label="Enter PIN"
+  bind:value={pin}
+/>
 ```
 
 ### 6-digit verification code
 
 ```svelte
 <script lang="ts">
-  import PinInputDiv from './PinInputDiv.svelte';
+  import PinInputDiv from "./PinInputDiv.svelte";
 
   let code = $state("");
 </script>
 
-<PinInputDiv label="Verification Code" length={6} bind:value={code} />
+<PinInputDiv
+  label="Verification Code"
+  length={6}
+  bind:value={code}
+/>
 ```
 
 ### Submit when complete
 
 ```svelte
 <script lang="ts">
-  import PinInputDiv from './PinInputDiv.svelte';
+  import PinInputDiv from "./PinInputDiv.svelte";
 
   let code = $state("");
   $effect(() => {
@@ -89,32 +96,44 @@ import PinInputDiv from './PinInputDiv.svelte';
   });
 </script>
 
-<PinInputDiv label="One-time code" length={6} bind:value={code} />
+<PinInputDiv
+  label="One-time code"
+  length={6}
+  bind:value={code}
+/>
 ```
 
 ### Disabled after submission
 
 ```svelte
 <script lang="ts">
-  import PinInputDiv from './PinInputDiv.svelte';
+  import PinInputDiv from "./PinInputDiv.svelte";
 
   let code = $state("123456");
   let submitting = $state(true);
 </script>
 
-<PinInputDiv label="One-time code" length={6} bind:value={code} disabled={submitting} />
+<PinInputDiv
+  label="One-time code"
+  length={6}
+  bind:value={code}
+  disabled={submitting}
+/>
 ```
 
 ### Localized group label
 
 ```svelte
-<PinInputDiv label="Código de verificación" length={6} />
+<PinInputDiv
+  label="Código de verificación"
+  length={6}
+/>
 ```
 
 ## Accessibility
 
 - `role="group"` with `aria-label` identifies the collection as a PIN entry group.
-- Each digit input has an `aria-label` of the form `"Digit X of Y"` for positional context; note these positional labels are currently in English — wrap or fork to localize them.
+- Each digit input's `aria-label` is `digitLabel(position, length)` when the consumer supplies it, else the group `label`; the component has no English default, so the positional wording is localised by the consumer.
 - `inputmode="numeric"` triggers a numeric soft keyboard on mobile devices.
 - Keyboard: Backspace, Left / Right arrows, and digit entry behave as users expect.
 - WCAG 2.2 AAA: consumer CSS must provide a visible focus indicator on each field.

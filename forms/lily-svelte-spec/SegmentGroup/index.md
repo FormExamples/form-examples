@@ -48,22 +48,22 @@ Composition with `SegmentGroupItem`:
 
 ```svelte
 <script lang="ts">
-    import SegmentGroup from "./SegmentGroup.svelte";
-    import SegmentGroupItem from "../SegmentGroupItem/SegmentGroupItem.svelte";
-    let mode = $state<"grid" | "list">("grid");
+  import SegmentGroup from "./SegmentGroup.svelte";
+  import SegmentGroupItem from "../SegmentGroupItem/SegmentGroupItem.svelte";
+  let mode = $state<"grid" | "list">("grid");
 </script>
 
 <SegmentGroup label="Display mode">
-    <SegmentGroupItem
-        checked={mode === "grid"}
-        value="grid"
-        onclick={() => (mode = "grid")}
-    >Grid</SegmentGroupItem>
-    <SegmentGroupItem
-        checked={mode === "list"}
-        value="list"
-        onclick={() => (mode = "list")}
-    >List</SegmentGroupItem>
+  <SegmentGroupItem
+    checked={mode === "grid"}
+    value="grid"
+    onclick={() => (mode = "grid")}>Grid</SegmentGroupItem
+  >
+  <SegmentGroupItem
+    checked={mode === "list"}
+    value="list"
+    onclick={() => (mode = "list")}>List</SegmentGroupItem
+  >
 </SegmentGroup>
 ```
 
@@ -71,20 +71,20 @@ Three-option density picker:
 
 ```svelte
 <script lang="ts">
-    import SegmentGroup from "./SegmentGroup.svelte";
-    import SegmentGroupItem from "../SegmentGroupItem/SegmentGroupItem.svelte";
-    let density = $state<"compact" | "cozy" | "comfortable">("cozy");
-    const options = ["compact", "cozy", "comfortable"] as const;
+  import SegmentGroup from "./SegmentGroup.svelte";
+  import SegmentGroupItem from "../SegmentGroupItem/SegmentGroupItem.svelte";
+  let density = $state<"compact" | "cozy" | "comfortable">("cozy");
+  const options = ["compact", "cozy", "comfortable"] as const;
 </script>
 
 <SegmentGroup label="Density">
-    {#each options as d}
-        <SegmentGroupItem
-            checked={density === d}
-            value={d}
-            onclick={() => (density = d)}
-        >{d}</SegmentGroupItem>
-    {/each}
+  {#each options as d}
+    <SegmentGroupItem
+      checked={density === d}
+      value={d}
+      onclick={() => (density = d)}>{d}</SegmentGroupItem
+    >
+  {/each}
 </SegmentGroup>
 ```
 
@@ -92,15 +92,27 @@ With a disabled option:
 
 ```svelte
 <script lang="ts">
-    import SegmentGroup from "./SegmentGroup.svelte";
-    import SegmentGroupItem from "../SegmentGroupItem/SegmentGroupItem.svelte";
-    let plan = $state("free");
+  import SegmentGroup from "./SegmentGroup.svelte";
+  import SegmentGroupItem from "../SegmentGroupItem/SegmentGroupItem.svelte";
+  let plan = $state("free");
 </script>
 
 <SegmentGroup label="Plan">
-    <SegmentGroupItem checked={plan === "free"} value="free" onclick={() => (plan = "free")}>Free</SegmentGroupItem>
-    <SegmentGroupItem checked={plan === "pro"} value="pro" onclick={() => (plan = "pro")}>Pro</SegmentGroupItem>
-    <SegmentGroupItem checked={plan === "enterprise"} value="enterprise" disabled>Enterprise</SegmentGroupItem>
+  <SegmentGroupItem
+    checked={plan === "free"}
+    value="free"
+    onclick={() => (plan = "free")}>Free</SegmentGroupItem
+  >
+  <SegmentGroupItem
+    checked={plan === "pro"}
+    value="pro"
+    onclick={() => (plan = "pro")}>Pro</SegmentGroupItem
+  >
+  <SegmentGroupItem
+    checked={plan === "enterprise"}
+    value="enterprise"
+    disabled>Enterprise</SegmentGroupItem
+  >
 </SegmentGroup>
 ```
 
@@ -108,17 +120,29 @@ Inside a form with hidden input:
 
 ```svelte
 <script lang="ts">
-    import SegmentGroup from "./SegmentGroup.svelte";
-    import SegmentGroupItem from "../SegmentGroupItem/SegmentGroupItem.svelte";
-    let view = $state("grid");
+  import SegmentGroup from "./SegmentGroup.svelte";
+  import SegmentGroupItem from "../SegmentGroupItem/SegmentGroupItem.svelte";
+  let view = $state("grid");
 </script>
 
 <form>
-    <SegmentGroup label="View">
-        <SegmentGroupItem checked={view === "grid"} value="grid" onclick={() => (view = "grid")}>Grid</SegmentGroupItem>
-        <SegmentGroupItem checked={view === "list"} value="list" onclick={() => (view = "list")}>List</SegmentGroupItem>
-    </SegmentGroup>
-    <input type="hidden" name="view" value={view} />
+  <SegmentGroup label="View">
+    <SegmentGroupItem
+      checked={view === "grid"}
+      value="grid"
+      onclick={() => (view = "grid")}>Grid</SegmentGroupItem
+    >
+    <SegmentGroupItem
+      checked={view === "list"}
+      value="list"
+      onclick={() => (view = "list")}>List</SegmentGroupItem
+    >
+  </SegmentGroup>
+  <input
+    type="hidden"
+    name="view"
+    value={view}
+  />
 </form>
 ```
 
@@ -126,12 +150,18 @@ Plain-button children (no `SegmentGroupItem`):
 
 ```svelte
 <script lang="ts">
-    import SegmentGroup from "./SegmentGroup.svelte";
+  import SegmentGroup from "./SegmentGroup.svelte";
 </script>
 
 <SegmentGroup label="View">
-    <button role="radio" aria-checked="true">Grid</button>
-    <button role="radio" aria-checked="false">List</button>
+  <button
+    role="radio"
+    aria-checked="true">Grid</button
+  >
+  <button
+    role="radio"
+    aria-checked="false">List</button
+  >
 </SegmentGroup>
 ```
 
@@ -143,6 +173,7 @@ Plain-button children (no `SegmentGroupItem`):
 - Arrow-key navigation is not built in; `SegmentGroupItem` uses roving `tabindex` based on `checked`.
 
 References:
+
 - WAI-ARIA Radio Group Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/radio/
 
 ## Related components

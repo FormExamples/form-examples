@@ -77,7 +77,11 @@
     {...restProps}
 >
     {#if imageUrl}
-        <img class="product-card-image" src={imageUrl} alt={imageAlt ?? ""} />
+        <img
+            class="product-card-image"
+            src={imageUrl}
+            alt={imageAlt ?? ""}
+        />
     {/if}
     <header class="product-card-header">
         <h3 class="product-card-name">{name}</h3>

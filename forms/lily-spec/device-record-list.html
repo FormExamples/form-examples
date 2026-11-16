@@ -1,0 +1,32 @@
+<!-- device-record-list.html -->
+<!-- DeviceRecordList component -->
+<!--
+  Description: a list of a patient's medical devices, whose status is never blank
+  HTML tag: <ul>
+  CSS class: device-record-list (part: device-record-list-status)
+  Spec: spec/healthcare-ui (tasks.md P28-T3)
+  Attributes: data-status (known, none-known, not-recorded, unavailable, omitted) and aria-label (the status in words).
+    For any status but "known", the status words are the list's one item, li.device-record-list-status, so the list is never
+    blank: "none known", "not recorded", "unavailable" and "omitted" are different facts.
+  Usage (status other than known):
+    <ul class="device-record-list" data-status="none-known" aria-label="No known medical devices"><li class="device-record-list-status">No known medical devices</li></ul>
+-->
+
+<ul
+  class="device-record-list"
+  data-status="known"
+  aria-label="Medical devices"
+>
+  <li
+    class="device-record-list-item"
+    data-status="active"
+  >
+    <span class="device-record-list-item-device">Cardiac pacemaker</span>
+    <span class="device-record-list-item-status">In use</span>
+    <time
+      class="device-record-list-item-timing"
+      datetime="2021-02-08"
+      >Since 8 Feb 2021</time
+    >
+  </li>
+</ul>

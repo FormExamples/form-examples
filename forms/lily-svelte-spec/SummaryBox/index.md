@@ -37,7 +37,7 @@ A headless Svelte 5 component inspired by the U.S. Web Design System (USWDS) Sum
 
 ```svelte
 <script lang="ts">
-  import SummaryBox from './SummaryBox.svelte';
+  import SummaryBox from "./SummaryBox.svelte";
 </script>
 
 <SummaryBox heading="Key information">

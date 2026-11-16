@@ -4,8 +4,10 @@
     // A tour guide is an outer container for a guided walkthrough experience,
     // such as for sightseeing, or pathways, or demonstrations, or onboarding.
     // It wraps a TourList and its TourListItem children, providing
-    // the dialog overlay and keyboard dismissal behavior. When active, it
-    // renders as a modal dialog that traps focus and can be closed with Escape.
+    // the dialog container and keyboard dismissal behavior. When active, it
+    // renders as a NON-modal dialog that can be closed with Escape: a tour points
+    // at parts of the real page and often asks the user to try them, so the page
+    // must stay usable. It therefore does not set aria-modal and does not trap focus.
     //
     // Props:
     //   className — string, optional. CSS class name.
@@ -46,7 +48,7 @@
     //
     // Accessibility:
     //   - role="dialog" identifies the overlay as a dialog window
-    //   - aria-modal="true" indicates the dialog is modal
+    //   - no aria-modal: the tour is non-modal, the page behind it stays usable
     //   - aria-label={label} provides an accessible name for the tour
     //   - tabindex="-1" allows the dialog to receive focus for keyboard events
     //
@@ -92,7 +94,6 @@
     <div
         class={`tour ${className}`}
         role="dialog"
-        aria-modal="true"
         aria-label={label}
         tabindex="-1"
         {onkeydown}

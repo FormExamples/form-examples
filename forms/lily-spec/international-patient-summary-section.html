@@ -1,0 +1,34 @@
+<!-- international-patient-summary-section.html -->
+<!-- InternationalPatientSummarySection component -->
+<!--
+  Description: one section of an International Patient Summary, with its LOINC code and a status that is never blank
+  HTML tag: <section>
+  CSS class: international-patient-summary-section (parts: -heading, -status, -narrative)
+  Spec: spec/healthcare-ui; components/international-patient-summary-section
+  Attributes: id (international-patient-summary-{key}), aria-labelledby (the heading), data-section (the IPS key), data-code
+    (its LOINC code), data-status (known, none-known, not-recorded, unavailable, omitted), data-required="true" for medications,
+    allergies and problems. For any status but "known", p.international-patient-summary-section-status holds the words.
+    The author's narrative, sanitised by the consumer, sits in details.international-patient-summary-section-narrative.
+-->
+
+<section
+  class="international-patient-summary-section"
+  id="international-patient-summary-problems"
+  aria-labelledby="international-patient-summary-problems-heading"
+  data-section="problems"
+  data-code="11450-4"
+  data-status="not-recorded"
+  data-required="true"
+>
+  <h2
+    id="international-patient-summary-problems-heading"
+    class="international-patient-summary-section-heading"
+  >
+    Problem list
+  </h2>
+  <p class="international-patient-summary-section-status">Not recorded</p>
+  <details class="international-patient-summary-section-narrative">
+    <summary>Narrative from the document</summary>
+    <p>No problems were recorded at discharge.</p>
+  </details>
+</section>

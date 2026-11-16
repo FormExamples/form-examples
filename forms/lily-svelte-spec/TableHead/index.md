@@ -10,7 +10,7 @@ See [components/table-head/index.md](../../../components/table-head/index.md) fo
 
 ```svelte
 <script lang="ts">
-    import TableHead from "./TableHead.svelte";
+  import TableHead from "./TableHead.svelte";
 </script>
 
 <TableHead />

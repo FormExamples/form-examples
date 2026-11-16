@@ -31,24 +31,24 @@ Wrap related controls with a `legend` describing the group.
 
 ```svelte
 <script lang="ts">
-    import Fieldset from "./Fieldset.svelte";
+  import Fieldset from "./Fieldset.svelte";
 </script>
 
 <Fieldset legend="Contact info">
-    <label>Email <input type="email" /></label>
-    <label>Phone <input type="tel" /></label>
+  <label>Email <input type="email" /></label>
+  <label>Phone <input type="tel" /></label>
 </Fieldset>
 ```
 
 ## Props
 
-| Prop       | Type       | Default | Description                                    |
-| ---------- | ---------- | ------- | ---------------------------------------------- |
-| `class`    | `string`   | `""`    | CSS class appended to the base class.         |
-| `legend`   | `string`   | required| Text for the `<legend>` element.               |
-| `disabled` | `boolean`  | `false` | Disables all descendant form controls.         |
-| `children` | `Snippet`  | required| Grouped form controls.                         |
-| `...rest`  | `unknown`  | —       | Additional HTML attributes on the `<fieldset>`.|
+| Prop       | Type      | Default  | Description                                     |
+| ---------- | --------- | -------- | ----------------------------------------------- |
+| `class`    | `string`  | `""`     | CSS class appended to the base class.           |
+| `legend`   | `string`  | required | Text for the `<legend>` element.                |
+| `disabled` | `boolean` | `false`  | Disables all descendant form controls.          |
+| `children` | `Snippet` | required | Grouped form controls.                          |
+| `...rest`  | `unknown` | —        | Additional HTML attributes on the `<fieldset>`. |
 
 ## Usage
 
@@ -56,17 +56,20 @@ Wrap related controls with a `legend` describing the group.
 
 ```svelte
 <Fieldset legend="Contact info">
-    <Field label="Email"><EmailInput label="Email" /></Field>
-    <Field label="Phone"><TelInput label="Phone" /></Field>
+  <Field label="Email"><EmailInput label="Email" /></Field>
+  <Field label="Phone"><TelInput label="Phone" /></Field>
 </Fieldset>
 ```
 
 ### 2. Conditionally disabled group
 
 ```svelte
-<Fieldset legend="Shipping address" disabled={usesBillingAddress}>
-    <Field label="Street"><TextInput label="Street" /></Field>
-    <Field label="City"><TextInput label="City" /></Field>
+<Fieldset
+  legend="Shipping address"
+  disabled={usesBillingAddress}
+>
+  <Field label="Street"><TextInput label="Street" /></Field>
+  <Field label="City"><TextInput label="City" /></Field>
 </Fieldset>
 ```
 
@@ -74,9 +77,9 @@ Wrap related controls with a `legend` describing the group.
 
 ```svelte
 <Fieldset legend="Payment">
-    <Field label="Card number"><TextInput label="Card number" /></Field>
-    <Field label="Expiry"><MonthInput label="Expiry" /></Field>
-    <Field label="CVV"><TextInput label="CVV" /></Field>
+  <Field label="Card number"><TextInput label="Card number" /></Field>
+  <Field label="Expiry"><MonthInput label="Expiry" /></Field>
+  <Field label="CVV"><TextInput label="CVV" /></Field>
 </Fieldset>
 ```
 
@@ -84,8 +87,20 @@ Wrap related controls with a `legend` describing the group.
 
 ```svelte
 <Fieldset legend="Preferred contact">
-    <label><input type="radio" name="contact" value="email" /> Email</label>
-    <label><input type="radio" name="contact" value="phone" /> Phone</label>
+  <label
+    ><input
+      type="radio"
+      name="contact"
+      value="email"
+    /> Email</label
+  >
+  <label
+    ><input
+      type="radio"
+      name="contact"
+      value="phone"
+    /> Phone</label
+  >
 </Fieldset>
 ```
 
@@ -93,7 +108,7 @@ Wrap related controls with a `legend` describing the group.
 
 ```svelte
 <Fieldset legend="Información de contacto">
-    <label>Correo <input type="email" /></label>
+  <label>Correo <input type="email" /></label>
 </Fieldset>
 ```
 

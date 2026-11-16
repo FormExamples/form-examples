@@ -3,7 +3,7 @@
   import { page } from '$app/state';
   import PickerBar from '@lilydesignsystem/svelte-picker-bar';
   import { SHARE_TARGETS } from '#lib/config/share-targets.js';
-  import { THEME_OPTIONS, THEME_STORAGE_KEY, DEFAULT_THEME } from '#lib/config/themes.js';
+  import { THEME_OPTIONS, THEME_STORAGE_KEY } from '#lib/config/themes.js';
   import { LOCALE_OPTIONS, LOCALE_STORAGE_KEY, DEFAULT_LOCALE } from '#lib/config/locales.js';
   import {
     TEXT_SIZE_OPTIONS,
@@ -64,9 +64,9 @@
           themes={themeValues}
           themeProps={{
             themeLabels,
-            defaultValue: DEFAULT_THEME,
             storageKey: THEME_STORAGE_KEY,
-            detectFromSystem: true
+            systemLabel: 'Follow this device',
+            cookieName: ''
           }}
           locales={localeValues}
           localeProps={{

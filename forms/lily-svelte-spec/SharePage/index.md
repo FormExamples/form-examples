@@ -10,7 +10,7 @@ See [components/share-page/index.md](../../../components/share-page/index.md) fo
 
 ```svelte
 <script lang="ts">
-    import SharePage from "./SharePage.svelte";
+  import SharePage from "./SharePage.svelte";
 </script>
 
 <SharePage />

@@ -2,8 +2,8 @@
     // FloatingPanel component
     //
     // A floating panel container that overlays page content, typically used for tooltips,
-    // popovers, dropdown menus, or contextual UI. It renders conditionally based on an
-    // open prop, fully removing itself from the DOM when closed. Consumers are responsible
+    // popovers, dropdown menus, or contextual UI. It is always rendered as a popover="manual", shown according to an
+    // open prop, display: none when closed. Consumers are responsible
     // for positioning the panel relative to a trigger element using their own CSS.
     //
     // Props:
@@ -39,13 +39,15 @@
     //
     // Claude rules:
     //   - Headless: no CSS, no styles — consumer provides all styling and positioning
-    //   - Uses {#if open} for conditional rendering (fully removed from DOM when closed)
+    //   - Native first: popover="manual" (top layer) opened and closed by the `open` state through ./Popover/popover.ts; where the Popover API is missing (jsdom, older browsers) it falls back to the `hidden` attribute. Placement is the theme's CSS (anchor positioning); light dismiss and Escape stay the consumer's.
     //   - Consumer manages show/hide logic externally
     //
     // References:
     //   - WAI-ARIA Disclosure Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
 
     import type { Snippet } from "svelte";
+
+    import { popoverState } from "../Popover/popover.js";
 
     let {
         class: className = "",
@@ -65,13 +67,13 @@
 </script>
 
 <!-- FloatingPanel.svelte -->
-{#if open}
-    <div
-        class={`floating-panel ${className}`}
-        role="region"
-        aria-label={label}
-        {...restProps}
-    >
-        {@render children?.()}
-    </div>
-{/if}
+<div
+    class={`floating-panel ${className}`}
+    role="region"
+    popover="manual"
+    use:popoverState={open}
+    aria-label={label}
+    {...restProps}
+>
+    {@render children?.()}
+</div>

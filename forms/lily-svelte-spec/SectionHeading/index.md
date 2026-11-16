@@ -36,7 +36,7 @@ A headless Svelte 5 component that renders a `<header>` block with an eyebrow pa
 
 ```svelte
 <script lang="ts">
-  import SectionHeading from './SectionHeading.svelte';
+  import SectionHeading from "./SectionHeading.svelte";
 </script>
 
 <SectionHeading

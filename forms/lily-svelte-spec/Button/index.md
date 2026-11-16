@@ -54,10 +54,10 @@ Import `Button` from `./Button.svelte` and pass children. For toggle buttons, bi
 
 ```svelte
 <script lang="ts">
-  import Button from './Button.svelte';
+  import Button from "./Button.svelte";
 
   function handleClick() {
-    console.log('clicked');
+    console.log("clicked");
   }
 </script>
 
@@ -68,13 +68,16 @@ Import `Button` from `./Button.svelte` and pass children. For toggle buttons, bi
 
 ```svelte
 <script lang="ts">
-  import Button from './Button.svelte';
+  import Button from "./Button.svelte";
 
   let isSubmitting = $state(false);
 </script>
 
 <form onsubmit={() => (isSubmitting = true)}>
-  <Button type="submit" disabled={isSubmitting}>Submit</Button>
+  <Button
+    type="submit"
+    disabled={isSubmitting}>Submit</Button
+  >
 </form>
 ```
 
@@ -82,36 +85,46 @@ Import `Button` from `./Button.svelte` and pass children. For toggle buttons, bi
 
 ```svelte
 <script lang="ts">
-  import Button from './Button.svelte';
+  import Button from "./Button.svelte";
 
   let isBold = $state(false);
 </script>
 
-<Button pressed={isBold} onclick={() => (isBold = !isBold)}>Bold</Button>
+<Button
+  pressed={isBold}
+  onclick={() => (isBold = !isBold)}>Bold</Button
+>
 ```
 
 ### Accessible label override for icon-only button
 
 ```svelte
 <script lang="ts">
-  import Button from './Button.svelte';
-  let closeLabel = 'Close dialog';
+  import Button from "./Button.svelte";
+  let closeLabel = "Close dialog";
 </script>
 
-<Button label={closeLabel} onclick={() => dialog.close()}>×</Button>
+<Button
+  label={closeLabel}
+  onclick={() => dialog.close()}>×</Button
+>
 ```
 
 ### Button as a dialog trigger
 
 ```svelte
 <script lang="ts">
-  import Button from './Button.svelte';
-  import Dialog from '../Dialog/Dialog.svelte';
+  import Button from "./Button.svelte";
+  import Dialog from "../Dialog/Dialog.svelte";
 
   let open = $state(false);
 </script>
 
-<Button aria-haspopup="dialog" aria-expanded={open} onclick={() => (open = true)}>
+<Button
+  aria-haspopup="dialog"
+  aria-expanded={open}
+  onclick={() => (open = true)}
+>
   Open settings
 </Button>
 

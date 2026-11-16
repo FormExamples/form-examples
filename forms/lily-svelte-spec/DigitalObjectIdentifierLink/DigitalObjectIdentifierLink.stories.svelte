@@ -1,4 +1,7 @@
-<script module lang="ts">
+<script
+    module
+    lang="ts"
+>
     import { defineMeta } from "@storybook/addon-svelte-csf";
     import DigitalObjectIdentifierLink from "./DigitalObjectIdentifierLink.svelte";
     const { Story } = defineMeta({
@@ -7,8 +10,9 @@
     });
 </script>
 
-<Story name="Default" tags={["autodocs", "!dev"]}>
-    <DigitalObjectIdentifierLink label="DigitalObjectIdentifierLink example">
-        <span>DigitalObjectIdentifierLink example</span>
-    </DigitalObjectIdentifierLink>
+<Story
+    name="Default"
+    tags={["autodocs", "!dev"]}
+>
+    <DigitalObjectIdentifierLink doi="10.1000/xyz123" />
 </Story>

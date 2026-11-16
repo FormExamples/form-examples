@@ -82,6 +82,7 @@
     inputmode="numeric"
     pattern={nhsPattern}
     autocomplete="off"
+    spellcheck="false"
     bind:value
     {required}
     {disabled}

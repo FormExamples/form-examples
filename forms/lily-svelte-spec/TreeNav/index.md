@@ -46,9 +46,24 @@ Import and supply `<li role="treeitem" tabindex="-1">` children (one item with `
 </script>
 
 <TreeNav label="Main navigation">
-  <li role="treeitem" tabindex="0">Home</li>
-  <li role="treeitem" tabindex="-1">About</li>
-  <li role="treeitem" tabindex="-1">Contact</li>
+  <li
+    role="treeitem"
+    tabindex="0"
+  >
+    Home
+  </li>
+  <li
+    role="treeitem"
+    tabindex="-1"
+  >
+    About
+  </li>
+  <li
+    role="treeitem"
+    tabindex="-1"
+  >
+    Contact
+  </li>
 </TreeNav>
 ```
 
@@ -59,14 +74,33 @@ Import and supply `<li role="treeitem" tabindex="-1">` children (one item with `
 </script>
 
 <TreeNav label="Docs">
-  <li role="treeitem" tabindex="0" aria-expanded="true">
+  <li
+    role="treeitem"
+    tabindex="0"
+    aria-expanded="true"
+  >
     Getting started
     <TreeList label="Getting started topics">
-      <li role="treeitem" tabindex="-1"><a href="/install">Install</a></li>
-      <li role="treeitem" tabindex="-1"><a href="/setup">Setup</a></li>
+      <li
+        role="treeitem"
+        tabindex="-1"
+      >
+        <a href="/install">Install</a>
+      </li>
+      <li
+        role="treeitem"
+        tabindex="-1"
+      >
+        <a href="/setup">Setup</a>
+      </li>
     </TreeList>
   </li>
-  <li role="treeitem" tabindex="-1">Guides</li>
+  <li
+    role="treeitem"
+    tabindex="-1"
+  >
+    Guides
+  </li>
 </TreeNav>
 ```
 
@@ -83,7 +117,10 @@ Import and supply `<li role="treeitem" tabindex="-1">` children (one item with `
 
 <TreeNav label="Site">
   {#each items as it, i}
-    <li role="treeitem" tabindex={i === 0 ? 0 : -1}>
+    <li
+      role="treeitem"
+      tabindex={i === 0 ? 0 : -1}
+    >
       <a href={it.href}>{it.label}</a>
     </li>
   {/each}
@@ -95,10 +132,31 @@ Import and supply `<li role="treeitem" tabindex="-1">` children (one item with `
   import TreeNav from "./TreeNav.svelte";
 </script>
 
-<TreeNav label="Navigation" data-testid="tree">
-  <li role="treeitem" tabindex="0" aria-selected="true">Dashboard</li>
-  <li role="treeitem" tabindex="-1" aria-selected="false">Reports</li>
-  <li role="treeitem" tabindex="-1" aria-selected="false">Settings</li>
+<TreeNav
+  label="Navigation"
+  data-testid="tree"
+>
+  <li
+    role="treeitem"
+    tabindex="0"
+    aria-selected="true"
+  >
+    Dashboard
+  </li>
+  <li
+    role="treeitem"
+    tabindex="-1"
+    aria-selected="false"
+  >
+    Reports
+  </li>
+  <li
+    role="treeitem"
+    tabindex="-1"
+    aria-selected="false"
+  >
+    Settings
+  </li>
 </TreeNav>
 ```
 

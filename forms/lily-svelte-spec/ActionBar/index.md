@@ -38,8 +38,8 @@ A headless Svelte 5 component that renders a `<div>` with `role="toolbar"`. Insp
 
 ```svelte
 <script lang="ts">
-  import ActionBar from './ActionBar.svelte';
-  import ActionBarButton from '../ActionBarButton/ActionBarButton.svelte';
+  import ActionBar from "./ActionBar.svelte";
+  import ActionBarButton from "../ActionBarButton/ActionBarButton.svelte";
 
   let count = $state(3);
 </script>

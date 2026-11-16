@@ -3,7 +3,7 @@
     //
     // A read-only five-star rating display that renders filled and empty star characters
     // to visually represent a rating value from 0 to 5. This is the display-only companion
-    // to FiveStarRatingPicker, used for showing ratings in product listings, review summaries,
+    // to FiveStarRatingRadioGroup, used for showing ratings in product listings, review summaries,
     // and user profiles. Screen readers receive the full rating via aria-label.
     //
     // Props:
@@ -38,7 +38,7 @@
     // Claude rules:
     //   - Headless: no CSS, no styles — consumer provides all styling
     //   - Uses Unicode star characters for filled/empty display
-    //   - Companion to FiveStarRatingPicker for the Input/View pattern
+    //   - Companion to FiveStarRatingRadioGroup for the Input/View pattern
     //
     // References:
     //   - WAI-ARIA img role: https://www.w3.org/WAI/ARIA/apd/roles/img/

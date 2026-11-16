@@ -41,7 +41,7 @@ Pass a localized `label`. Optionally narrow `accept` to specific image MIME type
 
 ```svelte
 <script lang="ts">
-    import ImageFileInput from "./ImageFileInput.svelte";
+  import ImageFileInput from "./ImageFileInput.svelte";
 </script>
 
 <ImageFileInput label="Upload profile photo" />
@@ -49,67 +49,70 @@ Pass a localized `label`. Optionally narrow `accept` to specific image MIME type
 
 ```svelte
 <script lang="ts">
-    import ImageFileInput from "./ImageFileInput.svelte";
+  import ImageFileInput from "./ImageFileInput.svelte";
 </script>
 
 <ImageFileInput
-    label="Upload document scan"
-    accept="image/png, image/jpeg"
-    required
+  label="Upload document scan"
+  accept="image/png, image/jpeg"
+  required
 />
 ```
 
 ```svelte
 <script lang="ts">
-    import ImageFileInput from "./ImageFileInput.svelte";
-    let previewUrl = $state<string | null>(null);
+  import ImageFileInput from "./ImageFileInput.svelte";
+  let previewUrl = $state<string | null>(null);
 
-    function onChange(e: Event) {
-        const input = e.target as HTMLInputElement;
-        const file = input.files?.[0];
-        previewUrl = file ? URL.createObjectURL(file) : null;
-    }
+  function onChange(e: Event) {
+    const input = e.target as HTMLInputElement;
+    const file = input.files?.[0];
+    previewUrl = file ? URL.createObjectURL(file) : null;
+  }
 </script>
 
 <label for="avatar">Avatar</label>
 <ImageFileInput
-    id="avatar"
-    label="Avatar image"
-    onchange={onChange}
+  id="avatar"
+  label="Avatar image"
+  onchange={onChange}
 />
 {#if previewUrl}
-    <img src={previewUrl} alt="Preview" />
+  <img
+    src={previewUrl}
+    alt="Preview"
+  />
 {/if}
 ```
 
 ```svelte
 <script lang="ts">
-    import ImageFileInput from "./ImageFileInput.svelte";
-    import Field from "../Field/Field.svelte";
-    import Hint from "../Hint/Hint.svelte";
+  import ImageFileInput from "./ImageFileInput.svelte";
+  import Field from "../Field/Field.svelte";
+  import Hint from "../Hint/Hint.svelte";
 </script>
 
 <Field label="Photo">
-    <Hint id="photo-hint">PNG or JPEG, up to 2 MB</Hint>
-    <ImageFileInput
-        label="Photo"
-        aria-describedby="photo-hint"
-        accept="image/png, image/jpeg"
-    />
+  <Hint id="photo-hint">PNG or JPEG, up to 2 MB</Hint>
+  <ImageFileInput
+    label="Photo"
+    aria-describedby="photo-hint"
+    accept="image/png, image/jpeg"
+  />
 </Field>
 ```
 
 ```svelte
 <script lang="ts">
-    import ImageFileInput from "./ImageFileInput.svelte";
+  import ImageFileInput from "./ImageFileInput.svelte";
 </script>
 
 <ImageFileInput
-    label="Gallery upload"
-    accept="image/*"
-    multiple
-    class="gallery-upload"
-    data-testid="gallery-upload"
+  label="Gallery upload"
+  accept="image/*"
+  multiple
+  class="gallery-upload"
+  data-testid="gallery-upload"
 />
 ```
 

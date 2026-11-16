@@ -10,7 +10,7 @@ See [components/event/index.md](../../../components/event/index.md) for the full
 
 ```svelte
 <script lang="ts">
-    import Event from "./Event.svelte";
+  import Event from "./Event.svelte";
 </script>
 
 <Event />

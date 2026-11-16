@@ -46,7 +46,9 @@
     // References:
     //   - WAI-ARIA Dialog Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
     //   - MDN dialog element: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
+    import { warnMissingName } from "../dev-warning";
     import type { Snippet } from "svelte";
+    import { modalDialog } from "../Dialog/modal.js";
     let {
         class: className = "",
         label,
@@ -59,8 +61,12 @@
         children: Snippet;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName("FileDialog", label, restProps["aria-label"], restProps["aria-labelledby"]),
+    );
     function onkeydown(event: KeyboardEvent) {
-        if (event.key === "Escape") {
+        if (event.key === "Escape" && !event.defaultPrevented) {
             event.preventDefault();
             open = false;
         }
@@ -71,9 +77,15 @@
 {#if open}
     <dialog
         class={`file-dialog ${className}`}
-        open
+        use:modalDialog={true}
+        oncancel={(event) => {
+            event.preventDefault();
+            open = false;
+        }}
+        onclose={() => (open = false)}
         tabindex="-1"
         aria-label={label}
+        aria-modal="true"
         {onkeydown}
         {...restProps}
     >

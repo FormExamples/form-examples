@@ -4,15 +4,67 @@
   Description: a tile cartogram map
   HTML tag: <div>
   CSS class: tile-map
-  Keyboard: None (passive element)
-  Accessibility: role="img", aria-label for accessible name
+  Keyboard: Arrow keys move between [data-tile] elements (Up/Down pick the nearest tile above/below), Enter/Space dispatch a bubbling tile-activate event from the focused tile, Escape blurs it
+  Accessibility: role="img", aria-label for accessible name, aria-roledescription (consumer supplies the localised text)
+  Usage:
+    <div
+      class="tile-map"
+      role="img"
+      aria-label=""
+      aria-roledescription=""
+    >
+    </div>
 -->
 
 <div
   class="tile-map"
   role="img"
   aria-label=""
-  aria-roledescription="tile map"
+  aria-roledescription=""
 >
-  <!-- Consumer provides [data-tile] elements; consumer JS handles arrow-key navigation -->
+  <!-- Consumer provides [data-tile] tiles with tabindex -->
 </div>
+
+<script>
+  // TileMap behavior
+  (function() {
+    'use strict';
+    document.querySelectorAll('.tile-map').forEach(function(root) {
+      root.addEventListener('keydown', function(e) {
+        var tiles = Array.from(root.querySelectorAll('[data-tile]'));
+        if (tiles.length === 0) return;
+        var focused = document.activeElement;
+        var idx = tiles.indexOf(focused);
+        if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          tiles[Math.min(tiles.length - 1, idx + 1)].focus();
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          tiles[Math.max(0, idx - 1)].focus();
+        } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          if (idx === -1) return;
+          var rect = tiles[idx].getBoundingClientRect();
+          var targetX = rect.left + rect.width / 2;
+          var below = e.key === 'ArrowDown';
+          var best = null;
+          var bestScore = Infinity;
+          tiles.forEach(function(t, i) {
+            if (i === idx) return;
+            var r = t.getBoundingClientRect();
+            if (below ? !(r.top > rect.top) : !(r.top < rect.top)) return;
+            var score = Math.abs(r.left + r.width / 2 - targetX) + Math.abs(r.top - rect.top);
+            if (score < bestScore) { best = t; bestScore = score; }
+          });
+          if (best) best.focus();
+        } else if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          if (idx !== -1) focused.dispatchEvent(new CustomEvent('tile-activate', { bubbles: true }));
+        } else if (e.key === 'Escape') {
+          e.preventDefault();
+          if (idx !== -1) focused.blur();
+        }
+      });
+    });
+  })();
+</script>

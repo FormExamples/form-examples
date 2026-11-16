@@ -15,7 +15,9 @@ describe("PortugalNumeroDeIdentificacaoFiscalInput", () => {
         render(Subject, { props: { label: "Tax Identification Number" } });
 
         const input = screen.getByLabelText("Tax Identification Number");
-        expect(input.getAttribute("class")).toContain("portugal-numero-de-identificacao-fiscal-input");
+        expect(input.getAttribute("class")).toContain(
+            "portugal-numero-de-identificacao-fiscal-input",
+        );
     });
 
     test("has autocomplete off", () => {
@@ -54,7 +56,9 @@ describe("PortugalNumeroDeIdentificacaoFiscalInput", () => {
     });
 
     test("passes through additional HTML attributes", () => {
-        render(Subject, { props: { label: "Tax Identification Number", "data-testid": "subject" } });
+        render(Subject, {
+            props: { label: "Tax Identification Number", "data-testid": "subject" },
+        });
 
         const input = screen.getByTestId("subject");
         expect(input).toBeTruthy();

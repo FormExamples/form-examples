@@ -1,7 +1,25 @@
 <!-- timeout-dialog.html -->
 <!-- TimeoutDialog component -->
+<!--
+  Description: a modal dialog warning users before session timeout
+  HTML tag: <dialog>
+  CSS class: timeout-dialog
+  Keyboard: Tab cycles focus within the dialog (showModal()); Escape closes it unless the consumer prevents cancel
+  Accessibility: role="alertdialog" (the warning needs a response), aria-label for the accessible name
+  Opening (tasks.md P14-T4): open it with `el.showModal()` and close it with `el.close()` when the user chooses
+        an action. showModal() puts it in the top layer, makes the page behind inert, traps Tab and moves focus in;
+        close() returns focus to the element that had it. The label and the actions are the consumer's.
+  Usage:
+    <dialog class="timeout-dialog" role="alertdialog" aria-label="Session timeout">
+      <p>You will be signed out in 2 minutes.</p>
+      <button type="button">Stay signed in</button>
+    </dialog>
+    then, from the consumer's script: document.querySelector(".timeout-dialog").showModal()
+-->
+
 <dialog
   class="timeout-dialog"
+  role="alertdialog"
   aria-label=""
 >
   <!-- Consumer provides content -->

@@ -64,6 +64,8 @@
     // References:
     //   - WAI-ARIA Slider Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/slider/
 
+    import { warnMissingName } from "../dev-warning";
+
     let {
         class: className = "",
         value = $bindable(0),
@@ -97,6 +99,15 @@
         valueTextSuffix?: string;
         [key: string]: unknown;
     } = $props();
+
+    $effect(() =>
+        warnMissingName(
+            "AngleSliderRangeInput",
+            label,
+            restProps["aria-label"],
+            restProps["aria-labelledby"],
+        ),
+    );
 
     // Formatted value text for screen readers (e.g., "90°")
     let valueText = $derived(`${value}${valueTextSuffix}`);

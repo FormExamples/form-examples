@@ -49,22 +49,22 @@ Basic selected/unselected pair:
 
 ```svelte
 <script lang="ts">
-    import SegmentGroup from "../SegmentGroup/SegmentGroup.svelte";
-    import SegmentGroupItem from "./SegmentGroupItem.svelte";
-    let view = $state("grid");
+  import SegmentGroup from "../SegmentGroup/SegmentGroup.svelte";
+  import SegmentGroupItem from "./SegmentGroupItem.svelte";
+  let view = $state("grid");
 </script>
 
 <SegmentGroup label="View">
-    <SegmentGroupItem
-        checked={view === "grid"}
-        value="grid"
-        onclick={() => (view = "grid")}
-    >Grid</SegmentGroupItem>
-    <SegmentGroupItem
-        checked={view === "list"}
-        value="list"
-        onclick={() => (view = "list")}
-    >List</SegmentGroupItem>
+  <SegmentGroupItem
+    checked={view === "grid"}
+    value="grid"
+    onclick={() => (view = "grid")}>Grid</SegmentGroupItem
+  >
+  <SegmentGroupItem
+    checked={view === "list"}
+    value="list"
+    onclick={() => (view = "list")}>List</SegmentGroupItem
+  >
 </SegmentGroup>
 ```
 
@@ -72,20 +72,20 @@ Dynamic options:
 
 ```svelte
 <script lang="ts">
-    import SegmentGroup from "../SegmentGroup/SegmentGroup.svelte";
-    import SegmentGroupItem from "./SegmentGroupItem.svelte";
-    const sizes = ["S", "M", "L"] as const;
-    let size = $state<typeof sizes[number]>("M");
+  import SegmentGroup from "../SegmentGroup/SegmentGroup.svelte";
+  import SegmentGroupItem from "./SegmentGroupItem.svelte";
+  const sizes = ["S", "M", "L"] as const;
+  let size = $state<(typeof sizes)[number]>("M");
 </script>
 
 <SegmentGroup label="Size">
-    {#each sizes as s}
-        <SegmentGroupItem
-            checked={size === s}
-            value={s}
-            onclick={() => (size = s)}
-        >{s}</SegmentGroupItem>
-    {/each}
+  {#each sizes as s}
+    <SegmentGroupItem
+      checked={size === s}
+      value={s}
+      onclick={() => (size = s)}>{s}</SegmentGroupItem
+    >
+  {/each}
 </SegmentGroup>
 ```
 
@@ -93,14 +93,20 @@ Disabled option:
 
 ```svelte
 <script lang="ts">
-    import SegmentGroup from "../SegmentGroup/SegmentGroup.svelte";
-    import SegmentGroupItem from "./SegmentGroupItem.svelte";
+  import SegmentGroup from "../SegmentGroup/SegmentGroup.svelte";
+  import SegmentGroupItem from "./SegmentGroupItem.svelte";
 </script>
 
 <SegmentGroup label="Tier">
-    <SegmentGroupItem checked value="free">Free</SegmentGroupItem>
-    <SegmentGroupItem value="pro">Pro</SegmentGroupItem>
-    <SegmentGroupItem value="enterprise" disabled>Enterprise</SegmentGroupItem>
+  <SegmentGroupItem
+    checked
+    value="free">Free</SegmentGroupItem
+  >
+  <SegmentGroupItem value="pro">Pro</SegmentGroupItem>
+  <SegmentGroupItem
+    value="enterprise"
+    disabled>Enterprise</SegmentGroupItem
+  >
 </SegmentGroup>
 ```
 
@@ -108,18 +114,26 @@ With icons or complex children:
 
 ```svelte
 <script lang="ts">
-    import SegmentGroup from "../SegmentGroup/SegmentGroup.svelte";
-    import SegmentGroupItem from "./SegmentGroupItem.svelte";
-    let mode = $state("light");
+  import SegmentGroup from "../SegmentGroup/SegmentGroup.svelte";
+  import SegmentGroupItem from "./SegmentGroupItem.svelte";
+  let mode = $state("light");
 </script>
 
 <SegmentGroup label="Theme">
-    <SegmentGroupItem checked={mode === "light"} value="light" onclick={() => (mode = "light")}>
-        <span aria-hidden="true">☀️</span> Light
-    </SegmentGroupItem>
-    <SegmentGroupItem checked={mode === "dark"} value="dark" onclick={() => (mode = "dark")}>
-        <span aria-hidden="true">🌙</span> Dark
-    </SegmentGroupItem>
+  <SegmentGroupItem
+    checked={mode === "light"}
+    value="light"
+    onclick={() => (mode = "light")}
+  >
+    <span aria-hidden="true">☀️</span> Light
+  </SegmentGroupItem>
+  <SegmentGroupItem
+    checked={mode === "dark"}
+    value="dark"
+    onclick={() => (mode = "dark")}
+  >
+    <span aria-hidden="true">🌙</span> Dark
+  </SegmentGroupItem>
 </SegmentGroup>
 ```
 
@@ -127,21 +141,28 @@ Keyboard-arrow handling (consumer-provided on the parent):
 
 ```svelte
 <script lang="ts">
-    import SegmentGroup from "../SegmentGroup/SegmentGroup.svelte";
-    import SegmentGroupItem from "./SegmentGroupItem.svelte";
-    const opts = ["a", "b", "c"];
-    let sel = $state("a");
-    function onkeydown(e: KeyboardEvent) {
-        const i = opts.indexOf(sel);
-        if (e.key === "ArrowRight") sel = opts[(i + 1) % opts.length];
-        if (e.key === "ArrowLeft") sel = opts[(i - 1 + opts.length) % opts.length];
-    }
+  import SegmentGroup from "../SegmentGroup/SegmentGroup.svelte";
+  import SegmentGroupItem from "./SegmentGroupItem.svelte";
+  const opts = ["a", "b", "c"];
+  let sel = $state("a");
+  function onkeydown(e: KeyboardEvent) {
+    const i = opts.indexOf(sel);
+    if (e.key === "ArrowRight") sel = opts[(i + 1) % opts.length];
+    if (e.key === "ArrowLeft") sel = opts[(i - 1 + opts.length) % opts.length];
+  }
 </script>
 
-<SegmentGroup label="Options" {onkeydown}>
-    {#each opts as o}
-        <SegmentGroupItem checked={sel === o} value={o} onclick={() => (sel = o)}>{o}</SegmentGroupItem>
-    {/each}
+<SegmentGroup
+  label="Options"
+  {onkeydown}
+>
+  {#each opts as o}
+    <SegmentGroupItem
+      checked={sel === o}
+      value={o}
+      onclick={() => (sel = o)}>{o}</SegmentGroupItem
+    >
+  {/each}
 </SegmentGroup>
 ```
 

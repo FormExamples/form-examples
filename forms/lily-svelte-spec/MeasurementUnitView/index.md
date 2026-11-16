@@ -42,7 +42,7 @@ Import the component, pass the unit `value`, and optionally provide a `label` wi
 
 ```svelte
 <script lang="ts">
-    import MeasurementUnitView from "./MeasurementUnitView.svelte";
+  import MeasurementUnitView from "./MeasurementUnitView.svelte";
 </script>
 
 <MeasurementUnitView value="kg" />
@@ -52,21 +52,27 @@ Import the component, pass the unit `value`, and optionally provide a `label` wi
 
 ```svelte
 <script lang="ts">
-    import MeasurementUnitView from "./MeasurementUnitView.svelte";
+  import MeasurementUnitView from "./MeasurementUnitView.svelte";
 </script>
 
-<MeasurementUnitView value="lb" label="Pounds" />
+<MeasurementUnitView
+  value="lb"
+  label="Pounds"
+/>
 ```
 
 ### Beside a numeric value
 
 ```svelte
 <script lang="ts">
-    import MeasurementUnitView from "./MeasurementUnitView.svelte";
+  import MeasurementUnitView from "./MeasurementUnitView.svelte";
 </script>
 
 <p>
-    Weight: 72&nbsp;<MeasurementUnitView value="kg" label="Kilograms" />
+  Weight: 72&nbsp;<MeasurementUnitView
+    value="kg"
+    label="Kilograms"
+  />
 </p>
 ```
 
@@ -74,12 +80,17 @@ Import the component, pass the unit `value`, and optionally provide a `label` wi
 
 ```svelte
 <script lang="ts">
-    import MeasurementUnitView from "./MeasurementUnitView.svelte";
+  import MeasurementUnitView from "./MeasurementUnitView.svelte";
 </script>
 
 <dl>
-    <dt>Unit</dt>
-    <dd><MeasurementUnitView value="cm" label="Centimetres" /></dd>
+  <dt>Unit</dt>
+  <dd>
+    <MeasurementUnitView
+      value="cm"
+      label="Centimetres"
+    />
+  </dd>
 </dl>
 ```
 
@@ -87,16 +98,20 @@ Import the component, pass the unit `value`, and optionally provide a `label` wi
 
 ```svelte
 <script lang="ts">
-    import MeasurementUnitView from "./MeasurementUnitView.svelte";
+  import MeasurementUnitView from "./MeasurementUnitView.svelte";
 </script>
 
-<MeasurementUnitView class="unit-muted" value="mmHg" label="Millimetres of mercury" />
+<MeasurementUnitView
+  class="unit-muted"
+  value="mmHg"
+  label="Millimetres of mercury"
+/>
 
 <style>
-    :global(.unit-muted) {
-        color: #6b7280;
-        margin-left: 0.25rem;
-    }
+  :global(.unit-muted) {
+    color: #6b7280;
+    margin-left: 0.25rem;
+  }
 </style>
 ```
 

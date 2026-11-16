@@ -10,7 +10,7 @@ See [components/column-chart/index.md](../../../components/column-chart/index.md
 
 ```svelte
 <script lang="ts">
-    import ColumnChart from "./ColumnChart.svelte";
+  import ColumnChart from "./ColumnChart.svelte";
 </script>
 
 <ColumnChart />

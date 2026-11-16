@@ -1,17 +1,20 @@
-<script module lang="ts">
-  import { defineMeta } from '@storybook/addon-svelte-csf';
-  import ImageCropper from './ImageCropper.svelte';
+<script
+    module
+    lang="ts"
+>
+    import { defineMeta } from "@storybook/addon-svelte-csf";
+    import ImageCropper from "./ImageCropper.svelte";
 
-  const { Story } = defineMeta({
-    title: 'Headless/ImageCropper',
-    component: ImageCropper,
-  });
+    const { Story } = defineMeta({
+        title: "Headless/ImageCropper",
+        component: ImageCropper,
+    });
 </script>
 
 <Story
-  name="Default"
-  tags={['autodocs', '!dev']}
-  args={{'label':'Image Cropper'}}
+    name="Default"
+    tags={["autodocs", "!dev"]}
+    args={{ label: "Image Cropper" }}
 >
-  <p>Crop region</p>
+    <p>Crop region</p>
 </Story>

@@ -11,19 +11,19 @@ function textSnippet(text: string) {
 }
 
 describe("Panel", () => {
-    test("renders as a region", () => {
+    test("renders as a named group", () => {
         render(Subject, { props: { label: "Settings", children: textSnippet("Content") } });
-        expect(screen.getByRole("region", { name: "Settings" })).toBeTruthy();
+        expect(screen.getByRole("group", { name: "Settings" })).toBeTruthy();
     });
 
     test("has aria-label", () => {
         render(Subject, { props: { label: "Info", children: textSnippet("C") } });
-        expect(screen.getByRole("region").getAttribute("aria-label")).toBe("Info");
+        expect(screen.getByRole("group").getAttribute("aria-label")).toBe("Info");
     });
 
     test("renders children", () => {
         render(Subject, { props: { label: "P", children: textSnippet("Panel content") } });
-        expect(screen.getByRole("region").textContent).toContain("Panel content");
+        expect(screen.getByRole("group").textContent).toContain("Panel content");
     });
 
     test("passes through attributes", () => {

@@ -44,36 +44,43 @@ Import the component, pass a `label`, and bind the `value`. Validate the format 
 
 ```svelte
 <script lang="ts">
-    import MeasurementInstanceInput from "./MeasurementInstanceInput.svelte";
-    let weight = $state("");
+  import MeasurementInstanceInput from "./MeasurementInstanceInput.svelte";
+  let weight = $state("");
 </script>
 
-<MeasurementInstanceInput label="Weight" bind:value={weight} />
+<MeasurementInstanceInput
+  label="Weight"
+  bind:value={weight}
+/>
 ```
 
 ### Required temperature
 
 ```svelte
 <script lang="ts">
-    import MeasurementInstanceInput from "./MeasurementInstanceInput.svelte";
-    let temp = $state("");
+  import MeasurementInstanceInput from "./MeasurementInstanceInput.svelte";
+  let temp = $state("");
 </script>
 
-<MeasurementInstanceInput label="Temperature" bind:value={temp} required />
+<MeasurementInstanceInput
+  label="Temperature"
+  bind:value={temp}
+  required
+/>
 ```
 
 ### Blood pressure with placeholder
 
 ```svelte
 <script lang="ts">
-    import MeasurementInstanceInput from "./MeasurementInstanceInput.svelte";
-    let bp = $state("");
+  import MeasurementInstanceInput from "./MeasurementInstanceInput.svelte";
+  let bp = $state("");
 </script>
 
 <MeasurementInstanceInput
-    label="Blood pressure"
-    bind:value={bp}
-    placeholder="120/80 mmHg"
+  label="Blood pressure"
+  bind:value={bp}
+  placeholder="120/80 mmHg"
 />
 ```
 
@@ -81,26 +88,30 @@ Import the component, pass a `label`, and bind the `value`. Validate the format 
 
 ```svelte
 <script lang="ts">
-    import MeasurementInstanceInput from "./MeasurementInstanceInput.svelte";
-    let distance = $state("10 km");
+  import MeasurementInstanceInput from "./MeasurementInstanceInput.svelte";
+  let distance = $state("10 km");
 </script>
 
-<MeasurementInstanceInput label="Distance" bind:value={distance} disabled />
+<MeasurementInstanceInput
+  label="Distance"
+  bind:value={distance}
+  disabled
+/>
 ```
 
 ### With a pattern and maxlength via restProps
 
 ```svelte
 <script lang="ts">
-    import MeasurementInstanceInput from "./MeasurementInstanceInput.svelte";
-    let height = $state("");
+  import MeasurementInstanceInput from "./MeasurementInstanceInput.svelte";
+  let height = $state("");
 </script>
 
 <MeasurementInstanceInput
-    label="Height"
-    bind:value={height}
-    pattern="[0-9]+(\.[0-9]+)?\s*(cm|m|in|ft)"
-    maxlength={20}
+  label="Height"
+  bind:value={height}
+  pattern="[0-9]+(\.[0-9]+)?\s*(cm|m|in|ft)"
+  maxlength={20}
 />
 ```
 

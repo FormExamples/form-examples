@@ -14,30 +14,36 @@ function textSnippet(text: string) {
 
 describe("FloatButton", () => {
     test("renders as a button with the float-button class", () => {
-        const { container } = render(Subject, { props: {
-            label: "Help",
-            children: textSnippet("?"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Help",
+                children: textSnippet("?"),
+            },
+        });
 
         const root = container.querySelector("button.float-button") as HTMLElement;
         expect(root).toBeTruthy();
     });
 
     test("applies aria-label", () => {
-        render(Subject, { props: {
-            label: "Open help",
-            children: textSnippet("?"),
-        }});
+        render(Subject, {
+            props: {
+                label: "Open help",
+                children: textSnippet("?"),
+            },
+        });
 
         const button = screen.getByRole("button", { name: "Open help" });
         expect(button).toBeTruthy();
     });
 
     test("defaults to bottom-right position", () => {
-        const { container } = render(Subject, { props: {
-            label: "Help",
-            children: textSnippet("?"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Help",
+                children: textSnippet("?"),
+            },
+        });
 
         const button = container.querySelector("button") as HTMLElement;
         expect(button.getAttribute("data-position")).toBe("bottom-right");
@@ -48,11 +54,13 @@ describe("FloatButton", () => {
     });
 
     test("supports top-left position", () => {
-        const { container } = render(Subject, { props: {
-            label: "Help",
-            position: "top-left",
-            children: textSnippet("?"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Help",
+                position: "top-left",
+                children: textSnippet("?"),
+            },
+        });
 
         const button = container.querySelector("button") as HTMLElement;
         expect(button.getAttribute("data-position")).toBe("top-left");
@@ -62,11 +70,13 @@ describe("FloatButton", () => {
     });
 
     test("supports top-right position", () => {
-        const { container } = render(Subject, { props: {
-            label: "Help",
-            position: "top-right",
-            children: textSnippet("?"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Help",
+                position: "top-right",
+                children: textSnippet("?"),
+            },
+        });
 
         const button = container.querySelector("button") as HTMLElement;
         const style = button.getAttribute("style") ?? "";
@@ -75,11 +85,13 @@ describe("FloatButton", () => {
     });
 
     test("supports bottom-left position", () => {
-        const { container } = render(Subject, { props: {
-            label: "Help",
-            position: "bottom-left",
-            children: textSnippet("?"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Help",
+                position: "bottom-left",
+                children: textSnippet("?"),
+            },
+        });
 
         const button = container.querySelector("button") as HTMLElement;
         const style = button.getAttribute("style") ?? "";
@@ -88,21 +100,25 @@ describe("FloatButton", () => {
     });
 
     test("defaults to type button", () => {
-        render(Subject, { props: {
-            label: "Help",
-            children: textSnippet("?"),
-        }});
+        render(Subject, {
+            props: {
+                label: "Help",
+                children: textSnippet("?"),
+            },
+        });
 
         const button = screen.getByRole("button");
         expect(button.getAttribute("type")).toBe("button");
     });
 
     test("can be disabled", () => {
-        render(Subject, { props: {
-            label: "Help",
-            disabled: true,
-            children: textSnippet("?"),
-        }});
+        render(Subject, {
+            props: {
+                label: "Help",
+                disabled: true,
+                children: textSnippet("?"),
+            },
+        });
 
         const button = screen.getByRole("button") as HTMLButtonElement;
         expect(button.disabled).toBe(true);
@@ -111,22 +127,26 @@ describe("FloatButton", () => {
     test("handles click events", async () => {
         const user: UserEvent = userEvent.setup();
         const handleClick = vi.fn();
-        render(Subject, { props: {
-            label: "Help",
-            onclick: handleClick,
-            children: textSnippet("?"),
-        }});
+        render(Subject, {
+            props: {
+                label: "Help",
+                onclick: handleClick,
+                children: textSnippet("?"),
+            },
+        });
 
         await user.click(screen.getByRole("button"));
         expect(handleClick).toHaveBeenCalledOnce();
     });
 
     test("appends consumer class to base class", () => {
-        const { container } = render(Subject, { props: {
-            label: "Help",
-            class: "extra",
-            children: textSnippet("?"),
-        }});
+        const { container } = render(Subject, {
+            props: {
+                label: "Help",
+                class: "extra",
+                children: textSnippet("?"),
+            },
+        });
 
         const root = container.querySelector("button") as HTMLElement;
         expect(root.className).toContain("float-button");

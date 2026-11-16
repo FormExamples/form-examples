@@ -30,22 +30,22 @@ Place one or more `DoListItem`s inside a `DoList`.
 
 ```svelte
 <script lang="ts">
-    import DoList from "../DoList/DoList.svelte";
-    import DoListItem from "./DoListItem.svelte";
+  import DoList from "../DoList/DoList.svelte";
+  import DoListItem from "./DoListItem.svelte";
 </script>
 
 <DoList>
-    <DoListItem>Use descriptive alt text for images</DoListItem>
+  <DoListItem>Use descriptive alt text for images</DoListItem>
 </DoList>
 ```
 
 ## Props
 
-| Prop       | Type       | Default | Description                              |
-| ---------- | ---------- | ------- | ---------------------------------------- |
-| `class`    | `string`   | `""`    | CSS class appended to the base class.   |
-| `children` | `Snippet`  | required| The recommendation content.              |
-| `...rest`  | `unknown`  | —       | Additional HTML attributes on the `<li>`.|
+| Prop       | Type      | Default  | Description                               |
+| ---------- | --------- | -------- | ----------------------------------------- |
+| `class`    | `string`  | `""`     | CSS class appended to the base class.     |
+| `children` | `Snippet` | required | The recommendation content.               |
+| `...rest`  | `unknown` | —        | Additional HTML attributes on the `<li>`. |
 
 ## Usage
 
@@ -53,8 +53,8 @@ Place one or more `DoListItem`s inside a `DoList`.
 
 ```svelte
 <DoList>
-    <DoListItem>Write clear labels</DoListItem>
-    <DoListItem>Use semantic HTML</DoListItem>
+  <DoListItem>Write clear labels</DoListItem>
+  <DoListItem>Use semantic HTML</DoListItem>
 </DoList>
 ```
 
@@ -62,10 +62,10 @@ Place one or more `DoListItem`s inside a `DoList`.
 
 ```svelte
 <DoList>
-    <DoListItem>Write clear error messages</DoListItem>
+  <DoListItem>Write clear error messages</DoListItem>
 </DoList>
 <DontList>
-    <DontListItem>Use technical jargon in errors</DontListItem>
+  <DontListItem>Use technical jargon in errors</DontListItem>
 </DontList>
 ```
 
@@ -73,9 +73,9 @@ Place one or more `DoListItem`s inside a `DoList`.
 
 ```svelte
 <DoList>
-    <DoListItem>
-        Use <code>aria-label</code> to describe unlabelled controls
-    </DoListItem>
+  <DoListItem>
+    Use <code>aria-label</code> to describe unlabelled controls
+  </DoListItem>
 </DoList>
 ```
 
@@ -83,8 +83,8 @@ Place one or more `DoListItem`s inside a `DoList`.
 
 ```svelte
 <ul aria-label="Recommended practices">
-    <DoListItem>Provide visible focus indicators</DoListItem>
-    <DoListItem>Use sufficient color contrast</DoListItem>
+  <DoListItem>Provide visible focus indicators</DoListItem>
+  <DoListItem>Use sufficient color contrast</DoListItem>
 </ul>
 ```
 

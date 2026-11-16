@@ -45,11 +45,11 @@ Default:
 
 ```svelte
 <script lang="ts">
-    import SubmitInput from "./SubmitInput.svelte";
+  import SubmitInput from "./SubmitInput.svelte";
 </script>
 
 <form>
-    <SubmitInput />
+  <SubmitInput />
 </form>
 ```
 
@@ -57,11 +57,11 @@ Custom label:
 
 ```svelte
 <script lang="ts">
-    import SubmitInput from "./SubmitInput.svelte";
+  import SubmitInput from "./SubmitInput.svelte";
 </script>
 
 <form>
-    <SubmitInput value="Send message" />
+  <SubmitInput value="Send message" />
 </form>
 ```
 
@@ -69,12 +69,15 @@ Conditionally disabled:
 
 ```svelte
 <script lang="ts">
-    import SubmitInput from "./SubmitInput.svelte";
-    let formValid = $state(false);
+  import SubmitInput from "./SubmitInput.svelte";
+  let formValid = $state(false);
 </script>
 
 <form>
-    <SubmitInput value="Save changes" disabled={!formValid} />
+  <SubmitInput
+    value="Save changes"
+    disabled={!formValid}
+  />
 </form>
 ```
 
@@ -82,12 +85,18 @@ With a `name` for multi-submit forms:
 
 ```svelte
 <script lang="ts">
-    import SubmitInput from "./SubmitInput.svelte";
+  import SubmitInput from "./SubmitInput.svelte";
 </script>
 
 <form>
-    <SubmitInput value="Approve" name="action" />
-    <SubmitInput value="Reject" name="action" />
+  <SubmitInput
+    value="Approve"
+    name="action"
+  />
+  <SubmitInput
+    value="Reject"
+    name="action"
+  />
 </form>
 ```
 
@@ -95,17 +104,20 @@ Inside the `Form` component:
 
 ```svelte
 <script lang="ts">
-    import Form from "../Form/Form.svelte";
-    import SubmitInput from "./SubmitInput.svelte";
-    function onsubmit(e: SubmitEvent) {
-        e.preventDefault();
-        console.log("submitted");
-    }
+  import Form from "../Form/Form.svelte";
+  import SubmitInput from "./SubmitInput.svelte";
+  function onsubmit(e: SubmitEvent) {
+    e.preventDefault();
+    console.log("submitted");
+  }
 </script>
 
-<Form label="Contact" {onsubmit}>
-    <!-- fields... -->
-    <SubmitInput value="Submit" />
+<Form
+  label="Contact"
+  {onsubmit}
+>
+  <!-- fields... -->
+  <SubmitInput value="Submit" />
 </Form>
 ```
 
@@ -117,6 +129,7 @@ Inside the `Form` component:
 - No extra ARIA attributes needed.
 
 References:
+
 - MDN `input type="submit"`: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/submit
 
 ## Related components

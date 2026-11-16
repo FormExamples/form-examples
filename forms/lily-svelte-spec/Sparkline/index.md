@@ -45,11 +45,17 @@ SVG sparkline:
 
 ```svelte
 <script lang="ts">
-    import Sparkline from "./Sparkline.svelte";
+  import Sparkline from "./Sparkline.svelte";
 </script>
 
 <Sparkline label="Revenue trend over past 7 days">
-    <svg viewBox="0 0 100 20"><polyline points="0,20 20,10 40,15 60,5 80,12 100,2" fill="none" stroke="currentColor" /></svg>
+  <svg viewBox="0 0 100 20"
+    ><polyline
+      points="0,20 20,10 40,15 60,5 80,12 100,2"
+      fill="none"
+      stroke="currentColor"
+    /></svg
+  >
 </Sparkline>
 ```
 
@@ -57,11 +63,14 @@ Canvas sparkline:
 
 ```svelte
 <script lang="ts">
-    import Sparkline from "./Sparkline.svelte";
+  import Sparkline from "./Sparkline.svelte";
 </script>
 
 <Sparkline label="Temperature last 24 hours">
-    <canvas width="100" height="20"></canvas>
+  <canvas
+    width="100"
+    height="20"
+  ></canvas>
 </Sparkline>
 ```
 
@@ -69,25 +78,41 @@ Inline in a sentence:
 
 ```svelte
 <script lang="ts">
-    import Sparkline from "./Sparkline.svelte";
+  import Sparkline from "./Sparkline.svelte";
 </script>
 
-<p>Sales this week trended up <Sparkline label="Weekly sales up"><svg viewBox="0 0 60 12"><polyline points="0,12 30,8 60,0" stroke="green" fill="none" /></svg></Sparkline>.</p>
+<p>
+  Sales this week trended up <Sparkline label="Weekly sales up"
+    ><svg viewBox="0 0 60 12"
+      ><polyline
+        points="0,12 30,8 60,0"
+        stroke="green"
+        fill="none"
+      /></svg
+    ></Sparkline
+  >.
+</p>
 ```
 
 In a summary card:
 
 ```svelte
 <script lang="ts">
-    import Sparkline from "./Sparkline.svelte";
+  import Sparkline from "./Sparkline.svelte";
 </script>
 
 <article>
-    <h3>Users</h3>
-    <p>1,204</p>
-    <Sparkline label="User growth last 30 days">
-        <svg viewBox="0 0 120 30"><polyline points="0,28 20,22 40,14 60,16 80,10 100,7 120,2" stroke="currentColor" fill="none" /></svg>
-    </Sparkline>
+  <h3>Users</h3>
+  <p>1,204</p>
+  <Sparkline label="User growth last 30 days">
+    <svg viewBox="0 0 120 30"
+      ><polyline
+        points="0,28 20,22 40,14 60,16 80,10 100,7 120,2"
+        stroke="currentColor"
+        fill="none"
+      /></svg
+    >
+  </Sparkline>
 </article>
 ```
 
@@ -95,11 +120,20 @@ With CSS class:
 
 ```svelte
 <script lang="ts">
-    import Sparkline from "./Sparkline.svelte";
+  import Sparkline from "./Sparkline.svelte";
 </script>
 
-<Sparkline label="CPU usage" class="sparkline-compact">
-    <svg viewBox="0 0 40 10"><path d="M0,8 L10,5 L20,7 L30,2 L40,4" stroke="currentColor" fill="none" /></svg>
+<Sparkline
+  label="CPU usage"
+  class="sparkline-compact"
+>
+  <svg viewBox="0 0 40 10"
+    ><path
+      d="M0,8 L10,5 L20,7 L30,2 L40,4"
+      stroke="currentColor"
+      fill="none"
+    /></svg
+  >
 </Sparkline>
 ```
 
@@ -110,6 +144,7 @@ With CSS class:
 - Interactive sparklines need an additional pattern; this component is read-only.
 
 References:
+
 - WAI-ARIA `img` role: https://www.w3.org/TR/wai-aria-1.2/#img
 
 ## Related components
