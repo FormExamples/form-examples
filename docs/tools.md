@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-117 tools.
+118 tools.
 
 - [`bin/axum-axa-0-10`](#axum-axa-0-10)
 - [`bin/axum-axa-0-11`](#axum-axa-0-11)
@@ -10,6 +10,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/axum-axa-0-13`](#axum-axa-0-13)
 - [`bin/axum-axa-0-14`](#axum-axa-0-14)
 - [`bin/axum-axa-0-16`](#axum-axa-0-16)
+- [`bin/axum-axa-0-19`](#axum-axa-0-19)
 - [`bin/axum-axa-0-7`](#axum-axa-0-7)
 - [`bin/axum-axa-0-8`](#axum-axa-0-8)
 - [`bin/axum-axa-0-9`](#axum-axa-0-9)
@@ -312,6 +313,35 @@ Usage:
   bin/axum-axa-0-16 --all --no-lock    # leave Cargo.lock to `cargo update`
   bin/axum-axa-0-16 --root DIR <slug>  # a copy of forms/ at DIR
   bin/axum-axa-0-16 --check --all      # CI drift check (non-zero on drift)
+```
+
+<h2 id="axum-axa-0-19"><code>bin/axum-axa-0-19</code></h2>
+
+```text
+bin/axum-axa-0-19 — move each form's `back-end-with-axum/` from axa 0.16 to 0.19.
+
+What it changes in a crate:
+
+  Cargo.toml    axa 0.19 and axa-test 0.10
+  Cargo.lock    axa 0.19 and axa-test 0.10, by `cargo update -p axa -p axa-test`, so only
+                axa's own crates move; unless --no-lock
+
+0.17 and 0.18 are passed through: their upgrade guides need only the version for these
+crates (no Diesel, sessions, http-client or Keycloak/PASETO guards). 0.19 moves the job
+queues' times from chrono to jiff; no crate here passes a time to the queue (`run_at`,
+`first_at`, `JobInfo`), and axa's own sqlx no longer enables the `chrono` feature, which
+no crate needs now that the models use jiff-sqlx. Rust 1.98 is the minimum, which is the
+fleet's MSRV already.
+
+The versions were hours old when the fleet moved, inside the minimum publish age; the lock
+step sets CARGO_RESOLVER_INCOMPATIBLE_PUBLISH_AGE=allow for that `cargo update` only.
+
+Usage:
+  bin/axum-axa-0-19 <slug>...          # named forms
+  bin/axum-axa-0-19 --all              # every form's Axum crate
+  bin/axum-axa-0-19 --all --no-lock    # leave Cargo.lock to `cargo update`
+  bin/axum-axa-0-19 --root DIR <slug>  # a copy of forms/ at DIR
+  bin/axum-axa-0-19 --check --all      # CI drift check (non-zero on drift)
 ```
 
 <h2 id="axum-axa-0-7"><code>bin/axum-axa-0-7</code></h2>

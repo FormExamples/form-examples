@@ -1,0 +1,115 @@
+#!/usr/bin/env python3
+"""bin/axum-axa-0-19 — move each form's `back-end-with-axum/` from axa 0.16 to 0.19.
+
+What it changes in a crate:
+
+  Cargo.toml    axa 0.19 and axa-test 0.10
+  Cargo.lock    axa 0.19 and axa-test 0.10, by `cargo update -p axa -p axa-test`, so only
+                axa's own crates move; unless --no-lock
+
+0.17 and 0.18 are passed through: their upgrade guides need only the version for these
+crates (no Diesel, sessions, http-client or Keycloak/PASETO guards). 0.19 moves the job
+queues' times from chrono to jiff; no crate here passes a time to the queue (`run_at`,
+`first_at`, `JobInfo`), and axa's own sqlx no longer enables the `chrono` feature, which
+no crate needs now that the models use jiff-sqlx. Rust 1.98 is the minimum, which is the
+fleet's MSRV already.
+
+The versions were hours old when the fleet moved, inside the minimum publish age; the lock
+step sets CARGO_RESOLVER_INCOMPATIBLE_PUBLISH_AGE=allow for that `cargo update` only.
+
+Usage:
+  bin/axum-axa-0-19 <slug>...          # named forms
+  bin/axum-axa-0-19 --all              # every form's Axum crate
+  bin/axum-axa-0-19 --all --no-lock    # leave Cargo.lock to `cargo update`
+  bin/axum-axa-0-19 --root DIR <slug>  # a copy of forms/ at DIR
+  bin/axum-axa-0-19 --check --all      # CI drift check (non-zero on drift)
+"""
+
+from __future__ import annotations
+
+import argparse
+import glob
+import os
+import re
+import subprocess
+import sys
+
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+FEATURES = 'features = ["cursor-pagination", "postgres-sqlx", "queue", "ratelimit"] }'
+OLD_AXA = f'axa = {{ version = "0.16", {FEATURES}'
+NEW_AXA = f'axa = {{ version = "0.19", {FEATURES}'
+OLD_TEST = 'axa-test = "0.7"\n'
+NEW_TEST = 'axa-test = "0.10"\n'
+LOCKED = (
+    re.compile(r'^name = "axa"\nversion = "0\.19\.', re.M),
+    re.compile(r'^name = "axa-test"\nversion = "0\.10\.', re.M),
+)
+
+
+def locked(crate: str) -> bool:
+    """Whether the crate's Cargo.lock has axa 0.19 and axa-test 0.10."""
+    lock = open(f"{crate}/Cargo.lock").read()
+    return all(pattern.search(lock) for pattern in LOCKED)
+
+
+def drift(crate: str) -> str | None:
+    """Why a crate is not on axa 0.19, if it is not."""
+    manifest = open(f"{crate}/Cargo.toml").read()
+    if NEW_AXA not in manifest or NEW_TEST not in manifest:
+        return "Cargo.toml is not on axa 0.19 and axa-test 0.10"
+    if not locked(crate):
+        return "Cargo.lock is not on axa 0.19 and axa-test 0.10"
+    return None
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    parser.add_argument("slugs", nargs="*")
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--no-lock", action="store_true")
+    parser.add_argument("--root", default=f"{REPO}/forms")
+    args = parser.parse_args()
+    if args.all:
+        crates = sorted(os.path.dirname(c) for c in glob.glob(f"{args.root}/*/back-end-with-axum/Cargo.toml"))
+    elif args.slugs:
+        crates = [f"{args.root}/{slug}/back-end-with-axum" for slug in args.slugs]
+    else:
+        parser.error("name forms, or pass --all")
+    if args.check:
+        bad = [(crate, why) for crate in crates if (why := drift(crate))]
+        for crate, why in bad:
+            print(f"{crate.split('/')[-2]}: {why}")
+        print(f"{len(crates) - len(bad)}/{len(crates)} crates on axa 0.19")
+        return 1 if bad else 0
+    # Check every crate first, so one odd crate leaves the fleet as it was.
+    manifests = {crate: open(f"{crate}/Cargo.toml").read() for crate in crates}
+    odd = [c for c in crates
+           if NEW_AXA not in manifests[c] and (manifests[c].count(OLD_AXA) != 1 or manifests[c].count(OLD_TEST) != 1)]
+    if odd:
+        for crate in odd:
+            print(f"stopped, nothing written: {crate}: expected the axa 0.16 lines once each", file=sys.stderr)
+        return 1
+    moved = 0
+    for crate in crates:
+        new = manifests[crate].replace(OLD_AXA, NEW_AXA).replace(OLD_TEST, NEW_TEST)
+        if new != manifests[crate]:
+            open(f"{crate}/Cargo.toml", "w").write(new)
+            moved += 1
+    failed = []
+    if not args.no_lock:
+        env = {**os.environ, "CARGO_RESOLVER_INCOMPATIBLE_PUBLISH_AGE": "allow"}
+        for crate in crates:
+            if locked(crate):
+                continue
+            result = subprocess.run(["cargo", "update", "-q", "-p", "axa", "-p", "axa-test"],
+                                    cwd=crate, capture_output=True, text=True, env=env)
+            if result.returncode or not locked(crate):
+                failed.append(crate)
+                print(f"{crate.split('/')[-2]}: cargo update failed: {result.stderr.strip()[-300:]}", file=sys.stderr)
+    print(f"{moved} moved, {len(crates) - moved} already on axa 0.19, {len(failed)} lock failures")
+    return 1 if failed else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

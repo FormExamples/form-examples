@@ -33,7 +33,7 @@ use crate::models::{
 /// engine's date parsing accepts. Absent becomes the empty string, the
 /// convention for an unanswered field.
 fn timestamp(value: Option<DateTimeWithTimeZone>) -> String {
-    value.map(|d| d.to_jiff().to_string()).unwrap_or_default()
+    value.map_or_default(|d| d.to_jiff().to_string())
 }
 
 /// Project the stored note and its children onto the engine's input shape.
@@ -134,8 +134,7 @@ pub fn to_engine_note(
         senior_review_by: note.senior_review_by.clone(),
         estimated_discharge_date: note
             .estimated_discharge_date
-            .map(|d| d.to_jiff().to_string())
-            .unwrap_or_default(),
+            .map_or_default(|d| d.to_jiff().to_string()),
 
         family_communication: note.family_communication.clone(),
         patient_communication: note.patient_communication.clone(),

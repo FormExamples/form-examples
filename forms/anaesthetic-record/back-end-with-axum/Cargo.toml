@@ -15,7 +15,7 @@ default-run = "anaesthetic_record-cli"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [workspace.dependencies]
-axa = { version = "0.16", features = ["cursor-pagination", "postgres-sqlx", "queue", "ratelimit"] }
+axa = { version = "0.19", features = ["cursor-pagination", "postgres-sqlx", "queue", "ratelimit"] }
 
 [dependencies]
 axa = { workspace = true }
@@ -43,7 +43,7 @@ path = "src/anaesthetic_record/bin/main.rs"
 required-features = []
 
 [dev-dependencies]
-axa-test = "0.7"
+axa-test = "0.10"
 serial_test = { version = "4.0.1" }
 insta = { version = "1.49", features = ["redactions", "yaml", "filters"] }
 

@@ -271,14 +271,13 @@ fn to_engine_request(
     manager: Option<&managers::Model>,
 ) -> EngineRequest {
     EngineRequest {
-        worker_name: worker.map(|w| w.name.clone()).unwrap_or_default(),
-        worker_job_title: worker.map(|w| w.job_title.clone()).unwrap_or_default(),
-        worker_department: worker.map(|w| w.department.clone()).unwrap_or_default(),
+        worker_name: worker.map_or_default(|w| w.name.clone()),
+        worker_job_title: worker.map_or_default(|w| w.job_title.clone()),
+        worker_department: worker.map_or_default(|w| w.department.clone()),
         worker_employment_type: worker
-            .map(|w| w.employment_type.clone())
-            .unwrap_or_default(),
-        worker_work_pattern: worker.map(|w| w.work_pattern.clone()).unwrap_or_default(),
-        worker_work_location: worker.map(|w| w.work_location.clone()).unwrap_or_default(),
+            .map_or_default(|w| w.employment_type.clone()),
+        worker_work_pattern: worker.map_or_default(|w| w.work_pattern.clone()),
+        worker_work_location: worker.map_or_default(|w| w.work_location.clone()),
         worker_employment_start_date: worker
             .and_then(|w| w.employment_start_date.map(|d| d.to_jiff().to_string()))
             .unwrap_or_default(),
@@ -287,19 +286,18 @@ fn to_engine_request(
             .unwrap_or_default(),
         worker_email: worker.and_then(|w| w.email.clone()).unwrap_or_default(),
         worker_phone: worker.and_then(|w| w.phone.clone()).unwrap_or_default(),
-        manager_name: manager.map(|m| m.name.clone()).unwrap_or_default(),
-        manager_role: manager.map(|m| m.role.clone()).unwrap_or_default(),
-        manager_job_title: manager.map(|m| m.job_title.clone()).unwrap_or_default(),
-        manager_department: manager.map(|m| m.department.clone()).unwrap_or_default(),
+        manager_name: manager.map_or_default(|m| m.name.clone()),
+        manager_role: manager.map_or_default(|m| m.role.clone()),
+        manager_job_title: manager.map_or_default(|m| m.job_title.clone()),
+        manager_department: manager.map_or_default(|m| m.department.clone()),
         manager_email: manager.and_then(|m| m.email.clone()).unwrap_or_default(),
         manager_phone: manager.and_then(|m| m.phone.clone()).unwrap_or_default(),
         status: r.status.clone(),
         requested_by: r.requested_by.clone(),
-        request_date: r.request_date.map(|d| d.to_jiff().to_string()).unwrap_or_default(),
+        request_date: r.request_date.map_or_default(|d| d.to_jiff().to_string()),
         requested_start_date: r
             .requested_start_date
-            .map(|d| d.to_jiff().to_string())
-            .unwrap_or_default(),
+            .map_or_default(|d| d.to_jiff().to_string()),
         condition_adhd: r.condition_adhd,
         condition_autism: r.condition_autism,
         condition_dyslexia: r.condition_dyslexia,

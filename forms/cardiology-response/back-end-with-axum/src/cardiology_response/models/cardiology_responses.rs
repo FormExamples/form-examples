@@ -296,12 +296,10 @@ impl Model {
             consultation_type: self.consultation_type.clone(),
             assessed_date: self
                 .assessed_date
-                .map(|d| d.to_jiff().to_string())
-                .unwrap_or_default(),
+                .map_or_default(|d| d.to_jiff().to_string()),
             responded_date: self
                 .responded_date
-                .map(|d| d.to_jiff().to_string())
-                .unwrap_or_default(),
+                .map_or_default(|d| d.to_jiff().to_string()),
             patient_name: String::new(),
             patient_nhs_number: String::new(),
             patient_birth_date: String::new(),
