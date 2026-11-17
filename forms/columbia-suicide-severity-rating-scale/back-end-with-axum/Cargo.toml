@@ -1,7 +1,7 @@
 [workspace]
 
 [workspace.package]
-rust-version = "1.97"
+rust-version = "1.98"
 
 [package]
 name = "columbia_suicide_severity_rating_scale"

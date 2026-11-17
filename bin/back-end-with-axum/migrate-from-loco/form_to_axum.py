@@ -818,7 +818,7 @@ def convert_cargo(crate):
     p = crate / "Cargo.toml"
     s = p.read_text()
     s = s.replace("-loco-crate", "-axum-crate")
-    s = re.sub(r'rust-version = "1\.9\d"', 'rust-version = "1.97"', s)
+    s = re.sub(r'rust-version = "1\.9\d"', 'rust-version = "1.98"', s)
     s = re.sub(r'members = \["migration"\]\n', "", s)
     axa = 'axa = { version = "0.2", features = ["queue", "sqlx"] }'
     s = re.sub(r"loco-rs = \{ version[^\n]*\n(?:[^\n]*\n)*?\] \}\n", axa + "\n", s, count=1)

@@ -1,7 +1,7 @@
 [workspace]
 
 [workspace.package]
-rust-version = "1.97"
+rust-version = "1.98"
 
 [package]
 name = "framingham_risk_score_for_hard_coronary_heart_disease"

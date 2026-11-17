@@ -1,7 +1,7 @@
 [workspace]
 
 [workspace.package]
-rust-version = "1.97"
+rust-version = "1.98"
 
 [package]
 name = "medical_language_speaking_assessment_for_english"

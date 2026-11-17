@@ -1,7 +1,7 @@
 [workspace]
 
 [workspace.package]
-rust-version = "1.97"
+rust-version = "1.98"
 
 [package]
 name = "nerve_conduction_study_test_request"

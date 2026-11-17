@@ -473,7 +473,7 @@ jobs:
   # test): the MSRV question is "does this compile", which the spec says is
   # sufficient and fast.
   msrv:
-    name: MSRV 1.97 (shard ${{ matrix.shard }}/8)
+    name: MSRV 1.98 (shard ${{ matrix.shard }}/8)
     runs-on: ubuntu-latest
     if: github.event_name != 'schedule' || github.event.schedule != '17 5 * * 1'
     needs: [changes]
@@ -483,7 +483,7 @@ jobs:
         shard: [0, 1, 2, 3, 4, 5, 6, 7]
     steps:
       - uses: actions/checkout@v7
-      - uses: dtolnay/rust-toolchain@1.97
+      - uses: dtolnay/rust-toolchain@1.98
       - uses: Swatinem/rust-cache@v2
         with:
           shared-key: msrv-shard-${{ matrix.shard }}
@@ -494,7 +494,7 @@ jobs:
         run: |
           sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc \
             /opt/hostedtoolcache/CodeQL "$AGENT_TOOLSDIRECTORY" || true
-      - name: cargo +1.97 check --all-targets --workspace, each crate in this shard
+      - name: cargo +1.98 check --all-targets --workspace, each crate in this shard
         run: |
           fail=0
           CHANGED="${{ needs.changes.outputs.forms }}"

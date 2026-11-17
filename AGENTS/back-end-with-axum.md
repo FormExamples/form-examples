@@ -17,7 +17,7 @@ Slug: back-end-with-axum
 
 | Component | Version | Purpose |
 | --- | --- | --- |
-| [Rust](https://rust-lang.org/) | 1.97+ | Systems programming language |
+| [Rust](https://rust-lang.org/) | 1.98+ | Systems programming language |
 | [axum](https://crates.io/crates/axum) | 0.8 | Web application framework |
 | [axa](https://crates.io/crates/axa) | 0.6 | Routes, middleware, errors, configuration, command line, job queue, test helpers |
 | [axa-sqlx](https://crates.io/crates/axa-sqlx) | 0.1 | Pooling, migrations, and test resets, as `axa::sqlx` |

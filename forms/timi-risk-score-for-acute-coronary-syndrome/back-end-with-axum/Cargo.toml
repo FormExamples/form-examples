@@ -1,7 +1,7 @@
 [workspace]
 
 [workspace.package]
-rust-version = "1.97"
+rust-version = "1.98"
 
 [package]
 name = "timi_risk_score_for_acute_coronary_syndrome"
