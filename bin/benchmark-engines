@@ -1,0 +1,82 @@
+#!/usr/bin/env node
+/*
+ * bin/benchmark-engines — microbenchmark every HTML front-end's scoring engine.
+ *
+ * For each form with examples/personas.json, loads the engine headless (the same
+ * loader as bin/test-engines and bin/test-personas), then times its grader over
+ * the persona states: a warm-up pass, then repeated passes until at least
+ * --budget ms (default 100) have elapsed, then reports the mean microseconds
+ * per grade. Forms run one at a time, so timings do not contend.
+ *
+ * Output: one line per form (mean µs per grade, grades per second), then the
+ * fleet summary (median, 95th percentile, slowest ten). With --tsv the per-form
+ * rows are tab-separated for a spreadsheet or diff.
+ *
+ * Absolute numbers depend on the machine and Node version; compare runs from the
+ * same machine. --max-us N makes the tool exit 1 if any form's mean exceeds N µs,
+ * a coarse guard against an accidentally quadratic engine (default: report only).
+ *
+ * Usage: bin/benchmark-engines [--budget MS] [--tsv] [--max-us N] [--all|<slug>...]
+ */
+'use strict';
+const fs = require('fs');
+const path = require('path');
+const { loadEngine } = require('./lib/engine-loader.js');
+
+const REPO = path.resolve(__dirname, '..');
+const args = process.argv.slice(2);
+const flag = (n) => args.includes(n);
+const value = (n, d) => (args.includes(n) ? Number(args[args.indexOf(n) + 1]) : d);
+const budget = value('--budget', 100);
+const maxUs = value('--max-us', Infinity);
+const slugsGiven = args.filter((a, i) => !a.startsWith('--') && !['--budget', '--max-us'].includes(args[i - 1]));
+
+function allSlugs() {
+  return fs.readdirSync(path.join(REPO, 'forms')).sort().filter((s) => fs.existsSync(path.join(REPO, 'forms', s, 'examples', 'personas.json')));
+}
+
+async function bench(slug) {
+  const doc = JSON.parse(fs.readFileSync(path.join(REPO, 'forms', slug, 'examples', 'personas.json'), 'utf8'));
+  const eng = await loadEngine(REPO, slug);
+  if (eng.error || !eng.ns) return { slug, skip: eng.error || 'no engine' };
+  const grader = eng.ns[doc.graderHint || eng.grader];
+  if (typeof grader !== 'function') return { slug, skip: 'no grader' };
+  const states = (doc.personas || []).map((p) => ({ state: p.state, options: p.options }));
+  if (!states.length) return { slug, skip: 'no personas' };
+  const once = () => {
+    for (const s of states) grader(JSON.parse(JSON.stringify(s.state)), s.options && JSON.parse(JSON.stringify(s.options)));
+  };
+  try { once(); once(); } catch (e) { return { slug, skip: `grader threw: ${String(e.message).split('\n')[0]}` }; }
+  let grades = 0;
+  const start = process.hrtime.bigint();
+  let elapsed = 0;
+  do {
+    once();
+    grades += states.length;
+    elapsed = Number(process.hrtime.bigint() - start) / 1e6;
+  } while (elapsed < budget);
+  const us = (elapsed * 1000) / grades;
+  return { slug, us, perSecond: 1e6 / us, grades };
+}
+
+(async () => {
+  const slugs = slugsGiven.length ? slugsGiven : allSlugs();
+  const rows = [], skipped = [];
+  for (const slug of slugs) {
+    const r = await bench(slug);
+    if (r.skip) { skipped.push(`${slug}: ${r.skip}`); continue; }
+    rows.push(r);
+    console.log(flag('--tsv') ? `${slug}\t${r.us.toFixed(2)}\t${Math.round(r.perSecond)}` : `${slug}: ${r.us.toFixed(1)} µs/grade  (${Math.round(r.perSecond).toLocaleString()}/s)`);
+  }
+  const sorted = rows.map((r) => r.us).sort((a, b) => a - b);
+  const q = (p) => sorted[Math.min(sorted.length - 1, Math.floor(p * sorted.length))];
+  console.log(`\nbenchmark-engines: ${rows.length} engines timed, ${skipped.length} skipped`);
+  if (rows.length) {
+    console.log(`  median ${q(0.5).toFixed(1)} µs, p95 ${q(0.95).toFixed(1)} µs, max ${sorted[sorted.length - 1].toFixed(1)} µs per grade`);
+    console.log('  slowest: ' + rows.slice().sort((a, b) => b.us - a.us).slice(0, 10).map((r) => `${r.slug} ${r.us.toFixed(0)}µs`).join(', '));
+  }
+  for (const s of skipped.slice(0, 20)) console.error(`skipped ${s}`);
+  const slow = rows.filter((r) => r.us > maxUs);
+  for (const r of slow) console.error(`too slow: ${r.slug} ${r.us.toFixed(1)} µs > ${maxUs}`);
+  process.exit(slow.length ? 1 : 0);
+})();

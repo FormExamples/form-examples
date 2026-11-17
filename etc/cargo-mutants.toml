@@ -1,0 +1,18 @@
+# cargo-mutants configuration shared by every Axum crate; used by bin/mutation-test-axum.
+# Only hand-written logic is worth mutating: skip formatting, docs, and generated plumbing.
+exclude_globs = [
+    "src/*/bin/**",
+    "src/*/fixtures/**",
+    "src/*/initializers/**",
+    "src/*/tasks/**",
+    "build.rs",
+]
+exclude_re = [
+    "impl (Display|Debug) for",
+    "fmt",
+    "-> Result<\\(\\)>",
+]
+# The crate's tests need a database; do not let a slow query count as a hang.
+timeout_multiplier = 3.0
+# Tests share one scratch database, so mutants must run one at a time.
+additional_cargo_test_args = ["--", "--test-threads=1"]
