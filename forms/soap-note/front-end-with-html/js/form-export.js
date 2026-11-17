@@ -101,7 +101,18 @@
     }
   }
 
+  // Spreadsheet formula injection (CWE-1236): a cell starting with = + - @ tab or CR
+  // is executed as a formula by Excel/Sheets. Prefix such non-numeric text with an
+  // apostrophe so it is read as text. Plain numbers (e.g. -3.5) are left alone.
+  function neutralizeFormula(value) {
+    if (/^[=+\-@\t\r]/.test(value) && !/^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/.test(value)) {
+      return "'" + value;
+    }
+    return value;
+  }
+
   function escapeField(value, sep) {
+    value = neutralizeFormula(value);
     if (value.includes('"') || value.includes('\n') || value.includes(sep)) {
       return '"' + value.replace(/"/g, '""') + '"';
     }

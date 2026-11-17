@@ -1,3 +1,7 @@
+function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+}
+
 let data = [];
 let view = [];
 let sort = { key: null, dir: 'asc' };
@@ -68,13 +72,13 @@ document.querySelector('#grid tbody').addEventListener('click', (e) => {
   if (next?.classList.contains('detail') && next.dataset.id === id) { next.remove(); return; }
   document.querySelectorAll('tr.detail').forEach((d) => d.remove());
   const d = data.find((x) => x.id === id);
-  const html = `<tr class="detail" data-id="${id}"><td colspan="10">
+  const html = `<tr class="detail" data-id="${esc(id)}"><td colspan="10">
     <h3>Key Results</h3>
-    <ul class="kr-list">${d.keyResults.map((k) => `<li>${k.position}. ${k.title} — ${k.current ?? '–'}/${k.target ?? '–'} ${k.unit} (${Math.round((k.progress_fraction ?? 0) * 100)}%)</li>`).join('')}</ul>
+    <ul class="kr-list">${d.keyResults.map((k) => `<li>${esc(k.position)}. ${esc(k.title)} — ${esc(k.current ?? '–')}/${esc(k.target ?? '–')} ${esc(k.unit)} (${Math.round((k.progress_fraction ?? 0) * 100)}%)</li>`).join('')}</ul>
     <h3>Flags</h3>
-    <ul class="flag-list">${d.flags.length ? d.flags.map((f) => `<li><b>${f.code}</b> [${f.priority}]: ${f.description}</li>`).join('') : '<li><i>none</i></li>'}</ul>
+    <ul class="flag-list">${d.flags.length ? d.flags.map((f) => `<li><b>${esc(f.code)}</b> [${esc(f.priority)}]: ${esc(f.description)}</li>`).join('') : '<li><i>none</i></li>'}</ul>
     <h3>Latest check-in</h3>
-    <p>${d.latestCheckIn?.checked_in_at?.slice(0, 10) ?? ''}: ${d.latestCheckIn?.narrative ?? ''}</p>
+    <p>${esc(d.latestCheckIn?.checked_in_at?.slice(0, 10) ?? '')}: ${esc(d.latestCheckIn?.narrative ?? '')}</p>
   </td></tr>`;
   tr.insertAdjacentHTML('afterend', html);
 });

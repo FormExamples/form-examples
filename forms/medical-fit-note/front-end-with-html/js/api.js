@@ -11,7 +11,7 @@
 //   - saves a submitted wizard as a sequence of POSTs (saveFitNote).
 //
 // The API base defaults to http://localhost:5150 and can be overridden by
-// `window.__API_BASE__` or a `?api=` query parameter. Callers fall back to the
+// `window.__API_BASE__` or a `?api=` query parameter (same origin or loopback only). Callers fall back to the
 // sample data in `data.js` when a fetch fails, so the pages work offline.
 
 const DEFAULT_API_BASE = 'http://localhost:5150';
@@ -21,6 +21,20 @@ function resolveApiBase() {
   let base = '';
   try {
     base = new URLSearchParams(window.location.search).get('api') || '';
+    // A link must not be able to point the app at an arbitrary host: only the
+    // page's own origin or a loopback address is honored.
+    if (base) {
+      const u = new URL(base, window.location.href);
+      const loopback = ['localhost', '127.0.0.1', '[::1]'].includes(u.hostname);
+      if (u.origin !== window.location.origin && !loopback) base = '';
+    }
+    // A link must not be able to point the app at an arbitrary host: only the
+    // page's own origin or a loopback address is honored.
+    if (base) {
+      const u = new URL(base, window.location.href);
+      const loopback = ['localhost', '127.0.0.1', '[::1]'].includes(u.hostname);
+      if (u.origin !== window.location.origin && !loopback) base = '';
+    }
   } catch (e) {
     // No window/location (e.g. a headless import): fall through.
   }

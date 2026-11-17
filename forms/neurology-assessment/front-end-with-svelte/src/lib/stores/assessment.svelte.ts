@@ -236,6 +236,8 @@ class AssessmentStore {
  */
 function deepAssign(target: Record<string, unknown>, source: Record<string, unknown>) {
   for (const key of Object.keys(source)) {
+    // Draft data comes from localStorage or an import: never walk into prototype keys.
+    if (key === '__proto__' || key === 'constructor' || key === 'prototype') continue;
     const sv = source[key];
     const tv = target[key];
     if (sv && typeof sv === 'object' && !Array.isArray(sv) && tv && typeof tv === 'object') {

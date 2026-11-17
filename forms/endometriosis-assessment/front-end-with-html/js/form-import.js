@@ -23,6 +23,17 @@
     return bar;
   }
 
+  // Imported files are untrusted. Cap the size, drop keys that could pollute
+  // Object.prototype, and drop numbers that JSON.parse turned into Infinity
+  // (e.g. 1e999) so they never reach a scoring engine.
+  const MAX_IMPORT_BYTES = 2 * 1024 * 1024;
+  const FORBIDDEN_KEYS = ['__proto__', 'constructor', 'prototype'];
+  function safeReviver(key, value) {
+    if (FORBIDDEN_KEYS.indexOf(key) !== -1) return undefined;
+    if (typeof value === 'number' && !Number.isFinite(value)) return undefined;
+    return value;
+  }
+
   function init() {
     const contract = window.__FORM_STATE__;
     const main = document.querySelector('main');
@@ -54,6 +65,11 @@
       const file = input.files && input.files[0];
       input.value = '';
       if (!file) return;
+      if (file.size > MAX_IMPORT_BYTES) {
+        status.textContent = 'Could not read that file: it is larger than 2 MB.';
+        status.className = '';
+        return;
+      }
       if (
         !confirm(
           'Importing will replace everything currently entered in this form. Continue?'
@@ -65,7 +81,7 @@
       reader.onload = function () {
         let parsed;
         try {
-          parsed = JSON.parse(String(reader.result));
+          parsed = JSON.parse(String(reader.result), safeReviver);
         } catch (e) {
           status.textContent = 'Could not read that file: not valid JSON.';
           status.className = '';

@@ -19,7 +19,14 @@ const DEFAULT_API_BASE = 'http://localhost:5150';
 function resolveApiBase() {
   let base = DEFAULT_API_BASE;
   try {
-    const q = new URLSearchParams(window.location.search).get('api');
+    let q = new URLSearchParams(window.location.search).get('api');
+    // A link must not be able to point the app at an arbitrary host: only the
+    // page's own origin or a loopback address is honored.
+    if (q) {
+      const u = new URL(q, window.location.href);
+      const loopback = ['localhost', '127.0.0.1', '[::1]'].includes(u.hostname);
+      if (u.origin !== window.location.origin && !loopback) q = '';
+    }
     if (q) base = q;
     else if (typeof window.__API_BASE__ === 'string' && window.__API_BASE__) base = window.__API_BASE__;
   } catch (e) {
