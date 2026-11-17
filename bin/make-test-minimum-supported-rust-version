@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+# bin/make-test-minimum-supported-rust-version — check and test every Axum crate on
+# the minimum supported Rust version (MSRV, N-2) and on the version after it (N-1),
+# per spec/rust-msrv-n-minus-2/. Delegate of `make test-minimum-supported-rust-version`.
+#
+# Each form's back-end-with-axum/ is its own workspace, so this runs
+# `cargo check --all-targets` and `cargo test` in each one, once per toolchain.
+# The MSRV is read from the first crate's `rust-version`; N-1 is that minor plus
+# one. A toolchain that is not installed stops the run with the rustup command.
+# Across all 360 crates this takes hours: name slugs to run a subset.
+#
+# Usage:
+#   bin/make-test-minimum-supported-rust-version           # every form
+#   bin/make-test-minimum-supported-rust-version <slug>…   # named forms
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+if [ "$#" -gt 0 ]; then
+  slugs=("$@")
+else
+  slugs=()
+  for crate in forms/*/back-end-with-axum; do
+    slug=${crate#forms/}
+    slugs+=("${slug%/back-end-with-axum}")
+  done
+fi
+
+first="forms/${slugs[0]}/back-end-with-axum/Cargo.toml"
+msrv=$(sed -nE 's/^rust-version[[:space:]]*=[[:space:]]*"([0-9]+\.[0-9]+)(\.[0-9]+)?".*/\1/p' "$first" | head -n 1)
+if [ -z "$msrv" ]; then
+  echo "error: no rust-version found in $first" >&2
+  exit 1
+fi
+major=${msrv%%.*}
+minor=${msrv#*.}
+next="$major.$((minor + 1))"
+
+echo "Minimum supported Rust version (N-2): $msrv; next (N-1): $next"
+
+for toolchain in "$msrv" "$next"; do
+  if ! rustup toolchain list | grep -q "^$toolchain"; then
+    echo "error: Rust toolchain $toolchain is not installed; run: rustup toolchain install $toolchain" >&2
+    exit 1
+  fi
+done
+
+fail=0
+for toolchain in "$msrv" "$next"; do
+  for slug in "${slugs[@]}"; do
+    crate="forms/$slug/back-end-with-axum"
+    if [ ! -f "$crate/Cargo.toml" ]; then
+      echo "error: no such crate: $crate" >&2
+      exit 2
+    fi
+    echo
+    echo "=== Rust $toolchain: $slug ==="
+    (
+      cd "$crate"
+      export RUSTUP_TOOLCHAIN="$toolchain"
+      cargo check --all-targets
+      cargo test
+    ) || { echo "FAILED: $slug on Rust $toolchain" >&2; fail=1; }
+  done
+done
+exit "$fail"

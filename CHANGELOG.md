@@ -43,6 +43,8 @@ for them.
 
 ### Changed
 
+- **MSRV raised to 1.98** (current stable 1.100 minus two) in all 360 Axum crates, the CI `msrv` job, and the docs, with `bin/axum-msrv-set --msrv 1.98 --all`. The Rust toolchain is pinned to 1.100.0 in `rust-toolchain.toml`. `bin/axum-mutants-profile` now also gives every crate a lighter `[profile.dev]` (line-table debug information, none for dependencies), and `make test-minimum-supported-rust-version` checks and tests on 1.98 and 1.99 (not run end to end: it takes hours). Only one crate (`glasgow-coma-scale`) was checked with `cargo +1.98 check --all-targets`; the CI `msrv` job checks the rest.
+
 - **axa 0.12.** Every Axum crate moved from 0.11, with `bin/axum-axa-0-12`. For a
   Postgres service 0.12 only renames: the `sqlx` feature is `postgres-sqlx`,
   `axa::sqlx` is `axa::postgres_sqlx`, and axa-test is 0.3. Only the axa crates

@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-116 tools.
+117 tools.
 
 - [`bin/axum-axa-0-10`](#axum-axa-0-10)
 - [`bin/axum-axa-0-11`](#axum-axa-0-11)
@@ -66,6 +66,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/lily-svelte-theme-locale-select-refactor`](#lily-svelte-theme-locale-select-refactor)
 - [`bin/lily-sync`](#lily-sync)
 - [`bin/make-github-pages`](#make-github-pages)
+- [`bin/make-test-minimum-supported-rust-version`](#make-test-minimum-supported-rust-version)
 - [`bin/migrate-sql-filenames.py`](#migrate-sql-filenamespy)
 - [`bin/mutation-test-axum`](#mutation-test-axum)
 - [`bin/mutation-test-engines`](#mutation-test-engines)
@@ -709,7 +710,7 @@ Usage:
 
 ```text
 bin/axum-mutants-profile — give every Axum crate the `[profile.mutants]` that
-cargo-mutants builds with.
+cargo-mutants builds with, and the lighter `[profile.dev]` debug information.
 
 `bin/mutation-test-axum` runs `cargo mutants` over a crate, which builds every
 mutant once in a throwaway copy of the tree. The `mutants` profile makes each
@@ -728,7 +729,18 @@ root, is applied once per form: this appends
     incremental = false
 
 to `back-end-with-axum/Cargo.toml`, or corrects the three keys when the table
-already exists (other keys in it are kept). Idempotent. Run it after
+already exists (other keys in it are kept). It does the same for the dev
+profile, which keeps line tables for backtraces and drops the rest of the
+debug information, and none at all for dependencies:
+
+    [profile.dev]
+    debug = "line-tables-only"
+    split-debuginfo = "unpacked"
+
+    [profile.dev.package."*"]
+    debug = false
+
+Idempotent. Run it after
 `bin/create-form`, since a freshly generated crate does not have the table.
 
 Usage:
@@ -1885,6 +1897,24 @@ bin/make-github-pages — publish formexamples.github.io/, per
  Usage:
    bin/make-github-pages              # export + push (same as `make github-pages`)
    bin/make-github-pages --dry-run    # split only, don't push
+```
+
+<h2 id="make-test-minimum-supported-rust-version"><code>bin/make-test-minimum-supported-rust-version</code></h2>
+
+```text
+bin/make-test-minimum-supported-rust-version — check and test every Axum crate on
+ the minimum supported Rust version (MSRV, N-2) and on the version after it (N-1),
+ per spec/rust-msrv-n-minus-2/. Delegate of `make test-minimum-supported-rust-version`.
+
+ Each form's back-end-with-axum/ is its own workspace, so this runs
+ `cargo check --all-targets` and `cargo test` in each one, once per toolchain.
+ The MSRV is read from the first crate's `rust-version`; N-1 is that minor plus
+ one. A toolchain that is not installed stops the run with the rustup command.
+ Across all 360 crates this takes hours: name slugs to run a subset.
+
+ Usage:
+   bin/make-test-minimum-supported-rust-version           # every form
+   bin/make-test-minimum-supported-rust-version <slug>…   # named forms
 ```
 
 <h2 id="migrate-sql-filenamespy"><code>bin/migrate-sql-filenames.py</code></h2>
