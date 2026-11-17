@@ -6,6 +6,8 @@ allowBuilds:
 engineStrict: true
 
 minimumReleaseAgeExclude:
+  - '@lilydesignsystem/svelte-picker-bar@0.7.0'
+  - '@lilydesignsystem/svelte-headless@0.10.0'
   - vite@8.3.4
   - '@lilydesignsystem/svelte-theme-picker@0.4.0'
 overrides:

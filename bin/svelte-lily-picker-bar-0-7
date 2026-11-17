@@ -1,0 +1,111 @@
+#!/usr/bin/env python3
+"""bin/svelte-lily-picker-bar-0-7 — move each Svelte front-end to Lily picker-bar 0.7 and headless 0.10.
+
+What it changes in a `front-end-with-svelte/`:
+
+  package.json         @lilydesignsystem/svelte-picker-bar ^0.6.0 -> ^0.7.0
+                       @lilydesignsystem/svelte-headless   ^0.9.0 -> ^0.10.0
+  pnpm-workspace.yaml  minimumReleaseAgeExclude gains picker-bar@0.7.0 and headless@0.10.0
+                       (both under the 3-day release-age cooldown when adopted)
+  pnpm-lock.yaml       `pnpm install --lockfile-only`, so only the lock moves and no
+                       node_modules is created; unless --no-lock
+
+picker-bar 0.7 depends on svelte-theme-picker ^0.4.0 itself; the workspace override on
+theme-picker stays, harmless.
+
+A front-end already moved is skipped, so the tool can be rerun. A front-end whose
+package.json lacks the expected lines stops the run before anything is written.
+
+Usage:
+  bin/svelte-lily-picker-bar-0-7 [--no-lock] --all|<slug>...
+  bin/svelte-lily-picker-bar-0-7 --check --all|<slug>...   # CI drift check
+"""
+
+from __future__ import annotations
+
+import argparse
+import glob
+import os
+import re
+import subprocess
+import sys
+
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BAR_OLD, BAR_NEW = '"@lilydesignsystem/svelte-picker-bar": "^0.6.0"', '"@lilydesignsystem/svelte-picker-bar": "^0.7.0"'
+HEAD_OLD, HEAD_NEW = '"@lilydesignsystem/svelte-headless": "^0.9.0"', '"@lilydesignsystem/svelte-headless": "^0.10.0"'
+EXCLUDES = ("'@lilydesignsystem/svelte-picker-bar@0.7.0'", "'@lilydesignsystem/svelte-headless@0.10.0'")
+LOCKED = (
+    re.compile(r"^ +'?@lilydesignsystem/svelte-picker-bar'?:\n +specifier: \^0\.7\.0\n +version: 0\.7\.", re.M),
+    re.compile(r"^ +'?@lilydesignsystem/svelte-headless'?:\n +specifier: \^0\.10\.0\n +version: 0\.10\.", re.M),
+)
+
+
+def drift(app: str) -> str | None:
+    text = open(f"{app}/package.json").read()
+    if BAR_NEW not in text or HEAD_NEW not in text:
+        return "package.json is not on picker-bar ^0.7.0 and headless ^0.10.0"
+    ws = open(f"{app}/pnpm-workspace.yaml").read()
+    if not all(f"  - {e}" in ws for e in EXCLUDES):
+        return "pnpm-workspace.yaml lacks the picker-bar 0.7.0 / headless 0.10.0 release-age exclusions"
+    lock = open(f"{app}/pnpm-lock.yaml").read()
+    if not all(p.search(lock) for p in LOCKED):
+        return "pnpm-lock.yaml is not on picker-bar 0.7 and headless 0.10"
+    return None
+
+
+def add_excludes(ws: str) -> str:
+    missing = [e for e in EXCLUDES if f"  - {e}" not in ws]
+    if not missing:
+        return ws
+    lines = "".join(f"  - {e}\n" for e in missing)
+    marker = "minimumReleaseAgeExclude:\n"
+    if marker in ws:
+        return ws.replace(marker, marker + lines, 1)
+    return ws.rstrip("\n") + "\n\n" + marker + lines
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    parser.add_argument("slugs", nargs="*")
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--no-lock", action="store_true")
+    args = parser.parse_args()
+    if args.all:
+        apps = sorted(os.path.dirname(p) for p in glob.glob(f"{REPO}/forms/*/front-end-with-svelte/package.json"))
+    elif args.slugs:
+        apps = [f"{REPO}/forms/{s}/front-end-with-svelte" for s in args.slugs]
+    else:
+        parser.error("name forms, or pass --all")
+    if args.check:
+        bad = [(a, why) for a in apps if (why := drift(a))]
+        for app, why in bad:
+            print(f"{app.split('/')[-2]}: {why}")
+        print(f"{len(apps) - len(bad)}/{len(apps)} front-ends on picker-bar 0.7 and headless 0.10")
+        return 1 if bad else 0
+    texts = {a: open(f"{a}/package.json").read() for a in apps}
+    odd = [a for a, t in texts.items() if BAR_NEW not in t and BAR_OLD not in t or HEAD_NEW not in t and HEAD_OLD not in t]
+    if odd:
+        for app in odd:
+            print(f"stopped, nothing written: {app}: expected the picker-bar 0.6.0 and headless 0.9.0 lines", file=sys.stderr)
+        return 1
+    moved, failed = 0, []
+    for app, text in texts.items():
+        new = text.replace(BAR_OLD, BAR_NEW).replace(HEAD_OLD, HEAD_NEW)
+        ws = open(f"{app}/pnpm-workspace.yaml").read()
+        new_ws = add_excludes(ws)
+        if new != text or new_ws != ws:
+            open(f"{app}/package.json", "w").write(new)
+            open(f"{app}/pnpm-workspace.yaml", "w").write(new_ws)
+            moved += 1
+        if not args.no_lock and drift(app):
+            result = subprocess.run(["pnpm", "install", "--lockfile-only", "--silent"], cwd=app, capture_output=True, text=True)
+            if result.returncode or drift(app):
+                failed.append(app)
+                print(f"{app.split('/')[-2]}: pnpm lock failed: {(result.stderr or result.stdout).strip()[-300:]}", file=sys.stderr)
+    print(f"{moved} moved, {len(apps) - moved} already on picker-bar 0.7, {len(failed)} lock failures")
+    return 1 if failed else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

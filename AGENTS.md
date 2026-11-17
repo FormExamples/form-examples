@@ -223,7 +223,8 @@ bin/html-error-message-contrast-fix --check    # HTML semantic-colour (danger/su
 bin/svelte-lily-pnpm-migrate --check --all    # Svelte Lily vendoring -> real pnpm dependency drift detector (headless primitives + picker-bar consolidation)
 bin/svelte-lily-scope-rename --check --all    # Svelte Lily unscoped -> @lilydesignsystem npm-scope rename drift detector
 bin/svelte-lily-picker-defaults --check --all # Svelte Lily default theme-order/text-size-scale + DateTimePicker-retirement drift detector
-bin/svelte-lily-picker-bar-0-6 --check --all # Svelte Lily picker-bar ^0.6.0 + headless ^0.9.0 in package.json and pnpm-lock.yaml
+# bin/svelte-lily-picker-bar-0-6 --check --all # one-shot, superseded by svelte-lily-picker-bar-0-7 — expects ^0.6.0; do not run as a CI gate
+bin/svelte-lily-picker-bar-0-7 --check --all # Svelte Lily picker-bar ^0.7.0 + headless ^0.10.0: package.json, release-age exclusions, pnpm-lock.yaml
 bin/svelte-lily-theme-picker-0-4 --check --all # Svelte Lily theme-picker ^0.4.0: override, release-age exclusion, "Follow this device" option, no cookie
 bin/browser-color-scheme-refactor --check --all # HTML + Svelte theme follows the browser's light/dark setting when none is saved (spec.md §5)
 bin/html-helpers-picker-rename --check        # HTML text-size-chooser/share-chooser -> *-picker rename drift detector (supersedes html-helpers-chooser-rename / html-text-size-select-refactor / html-share-button-refactor, below)
