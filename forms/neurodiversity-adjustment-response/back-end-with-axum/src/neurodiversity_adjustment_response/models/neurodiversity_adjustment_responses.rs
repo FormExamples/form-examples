@@ -343,16 +343,13 @@ impl Model {
             handling_method: self.handling_method.clone(),
             assessed_date: self
                 .assessed_date
-                .map(|d| d.to_jiff().to_string())
-                .unwrap_or_default(),
+                .map_or_default(|d| d.to_jiff().to_string()),
             responded_date: self
                 .responded_date
-                .map(|d| d.to_jiff().to_string())
-                .unwrap_or_default(),
+                .map_or_default(|d| d.to_jiff().to_string()),
             effective_date: self
                 .effective_date
-                .map(|d| d.to_jiff().to_string())
-                .unwrap_or_default(),
+                .map_or_default(|d| d.to_jiff().to_string()),
             overall_decision: self.overall_decision.clone(),
             decision_rationale: self.decision_rationale.clone(),
             decline_reason_category: self.decline_reason_category.clone(),
@@ -369,7 +366,7 @@ impl Model {
             trial_period: self.trial_period,
             trial_period_weeks: self.trial_period_weeks,
             review_scheduled: self.review_scheduled,
-            review_date: self.review_date.map(|d| d.to_jiff().to_string()).unwrap_or_default(),
+            review_date: self.review_date.map_or_default(|d| d.to_jiff().to_string()),
             occupational_health_referred: self.occupational_health_referred,
             access_to_work_referred: self.access_to_work_referred,
             support_resources_detail: self.support_resources_detail.clone(),

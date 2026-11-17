@@ -211,31 +211,26 @@ fn to_engine_request(
     clinician: Option<&clinicians::Model>,
 ) -> EngineRequest {
     EngineRequest {
-        referring_clinician: clinician.map(|c| c.name.clone()).unwrap_or_default(),
-        referrer_role: clinician.map(|c| c.role.clone()).unwrap_or_default(),
+        referring_clinician: clinician.map_or_default(|c| c.name.clone()),
+        referrer_role: clinician.map_or_default(|c| c.role.clone()),
         registration_body: clinician
-            .map(|c| c.registration_body.clone())
-            .unwrap_or_default(),
+            .map_or_default(|c| c.registration_body.clone()),
         registration_number: clinician
-            .map(|c| c.registration_number.clone())
-            .unwrap_or_default(),
+            .map_or_default(|c| c.registration_number.clone()),
         supervising_consultant: r.supervising_consultant.clone(),
         requester_contact: r.requester_contact.clone(),
-        referral_date: r.referral_date.map(|d| d.to_jiff().to_string()).unwrap_or_default(),
+        referral_date: r.referral_date.map_or_default(|d| d.to_jiff().to_string()),
         nhs_number: patient
-            .map(|p| p.united_kingdom_nhs_number.clone())
-            .unwrap_or_default(),
-        patient_name: patient.map(|p| p.name.clone()).unwrap_or_default(),
+            .map_or_default(|p| p.united_kingdom_nhs_number.clone()),
+        patient_name: patient.map_or_default(|p| p.name.clone()),
         date_of_birth: patient
-            .map(|p| p.birth_date.to_jiff().to_string())
-            .unwrap_or_default(),
+            .map_or_default(|p| p.birth_date.to_jiff().to_string()),
         status: r.status.clone(),
         site_name: r.site_name.clone(),
         setting: r.setting.clone(),
         requested_by_date: r
             .requested_by_date
-            .map(|d| d.to_jiff().to_string())
-            .unwrap_or_default(),
+            .map_or_default(|d| d.to_jiff().to_string()),
         requested_service: r.requested_service.clone(),
         referral_reason: r.referral_reason.clone(),
         clinical_question: r.clinical_question.clone(),

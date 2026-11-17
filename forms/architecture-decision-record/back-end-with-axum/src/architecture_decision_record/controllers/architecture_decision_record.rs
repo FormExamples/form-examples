@@ -343,8 +343,7 @@ async fn render_markdown(ctx: &AppContext, item: &Model) -> Result<String> {
         md.push_str("---\n");
         let when = item
             .signed_off_at
-            .map(|d| format!(" on {}", d.to_jiff()))
-            .unwrap_or_default();
+            .map_or_default(|d| format!(" on {}", d.to_jiff()));
         let _ = writeln!(md, "Signed off by {}{}.", item.signed_off_by, when);
     }
 
@@ -384,8 +383,7 @@ async fn api_show_by_slug(
     let id = item.id;
     let author_name = authors::Model::find_by_id(&db(&ctx), item.author_id.unwrap_or_default())
         .await?
-        .map(|a| a.name)
-        .unwrap_or_default();
+        .map_or_default(|a| a.name);
     let md = render_markdown(&ctx, &item).await?;
 
     format::json(AdrViewApi {
@@ -397,8 +395,7 @@ async fn api_show_by_slug(
         decision_group: item.decision_group.clone(),
         decision_date: item
             .decision_date
-            .map(|d| d.to_jiff().to_string())
-            .unwrap_or_default(),
+            .map_or_default(|d| d.to_jiff().to_string()),
         author_name,
         markdown: md,
     })
@@ -439,8 +436,7 @@ async fn api_index(
     for r in rows {
         let author_name = authors::Model::find_by_id(&db(&ctx), r.author_id.unwrap_or_default())
             .await?
-            .map(|a| a.name)
-            .unwrap_or_default();
+            .map_or_default(|a| a.name);
         out.push(AdrRowApi {
             id: r.id.to_string(),
             number: r.number,
@@ -448,7 +444,7 @@ async fn api_index(
             title: r.title,
             status: r.status,
             decision_group: r.decision_group,
-            decision_date: r.decision_date.map(|d| d.to_jiff().to_string()).unwrap_or_default(),
+            decision_date: r.decision_date.map_or_default(|d| d.to_jiff().to_string()),
             author_name,
         });
     }

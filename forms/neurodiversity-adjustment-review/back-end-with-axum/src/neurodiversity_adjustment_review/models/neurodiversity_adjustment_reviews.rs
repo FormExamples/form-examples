@@ -307,11 +307,10 @@ impl Model {
             review_status: self.review_status.clone(),
             response_reference: self.response_reference.clone(),
             review_method: self.review_method.clone(),
-            review_date: self.review_date.map(|d| d.to_jiff().to_string()).unwrap_or_default(),
+            review_date: self.review_date.map_or_default(|d| d.to_jiff().to_string()),
             next_review_date: self
                 .next_review_date
-                .map(|d| d.to_jiff().to_string())
-                .unwrap_or_default(),
+                .map_or_default(|d| d.to_jiff().to_string()),
             effectiveness_working_environment: self.effectiveness_working_environment.clone(),
             effectiveness_equipment_technology: self.effectiveness_equipment_technology.clone(),
             effectiveness_working_arrangements: self.effectiveness_working_arrangements.clone(),
