@@ -43,6 +43,7 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 - `bin/mutation-test-axum [--list] <slug>…` — `cargo mutants` over an Axum crate with the shared `etc/cargo-mutants.toml`; needs the scratch Postgres; slow, maintainer-run
 - `bin/benchmark-engines [--budget MS] [--tsv] [--max-us N] [--all|<slug>…]` — microbenchmark every scoring engine's grader over its persona states (µs per grade)
 - `bin/benchmark-gates [--runs N] [--markdown] [--max-total SECONDS]` — time the cheap fleet-wide drift gates; the numbers behind `BENCHMARKS.md`
+- `bin/make-test-minimum-supported-rust-version [<slug>…]` — check and test the Axum crates on the MSRV (N-2) and N-1 (`make test-minimum-supported-rust-version`); slow across all 360, so name slugs for a subset
 - `bin/test-tutorials` — fast doc-rot check for `docs/tutorials/`: extracts every fenced ` ```sh ` block, scans it for `bin/...` and `forms/...` path tokens, and asserts each still exists. Static reference check only — starts no servers, runs no tutorial commands
 - `bin/create-form <slug>` — scaffold a new form directory
 - `bin/update` — run the `update / upgrade / fix / harmonize / audit / test` Claude Code prompt against the repo
@@ -273,7 +274,7 @@ bin/axum-entity-routes --check --all # every SQL table reachable over HTTP
 bin/axum-sql-columns --check --all   # every sql/ column in its crate, under its sql/ name
 bin/axum-soft-delete --check --all # DELETE marks and cascades; reads and updates skip deleted rows
 bin/axum-msrv-set --msrv 1.98 --check --all # Rust MSRV (rust-version) drift detector, per spec/rust-msrv-n-minus-2/
-bin/axum-mutants-profile --check --all # every crate has the [profile.mutants] cargo-mutants builds with
+bin/axum-mutants-profile --check --all # every crate has the [profile.mutants] cargo-mutants builds with, and the lighter [profile.dev]
 bin/generate-forms-tsv.py --check     # forms.tsv drift detector
 bin/generate-tools-doc.py --check     # docs/tools.md drift detector
 bin/openapi/generate-openapi-combined.py --check # per-form combined openapi.yaml drift + served-route coverage

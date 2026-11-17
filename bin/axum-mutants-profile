@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """bin/axum-mutants-profile — give every Axum crate the `[profile.mutants]` that
-cargo-mutants builds with.
+cargo-mutants builds with, and the lighter `[profile.dev]` debug information.
 
 `bin/mutation-test-axum` runs `cargo mutants` over a crate, which builds every
 mutant once in a throwaway copy of the tree. The `mutants` profile makes each
@@ -19,7 +19,18 @@ root, is applied once per form: this appends
     incremental = false
 
 to `back-end-with-axum/Cargo.toml`, or corrects the three keys when the table
-already exists (other keys in it are kept). Idempotent. Run it after
+already exists (other keys in it are kept). It does the same for the dev
+profile, which keeps line tables for backtraces and drops the rest of the
+debug information, and none at all for dependencies:
+
+    [profile.dev]
+    debug = "line-tables-only"
+    split-debuginfo = "unpacked"
+
+    [profile.dev.package."*"]
+    debug = false
+
+Idempotent. Run it after
 `bin/create-form`, since a freshly generated crate does not have the table.
 
 Usage:
@@ -39,41 +50,55 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 FORMS = ROOT / "forms"
 
-BLOCK = """
-# cargo-mutants builds every mutant once in a throwaway copy of the tree: no debug information and no
-# incremental state make each build quicker and smaller. `etc/cargo-mutants.toml` selects it.
-[profile.mutants]
-inherits = "test"
-debug = "none"
-incremental = false
-"""
-
-WANTED = (("inherits", '"test"'), ("debug", '"none"'), ("incremental", "false"))
-HEADER_RE = re.compile(r"^\[profile\.mutants\][ \t]*\n", re.M)
+# Each wanted table: its name, the comment written above it when the table is added, and its keys.
+TABLES = (
+    (
+        "profile.mutants",
+        "# cargo-mutants builds every mutant once in a throwaway copy of the tree: no debug information and no\n"
+        "# incremental state make each build quicker and smaller. `etc/cargo-mutants.toml` selects it.\n",
+        (("inherits", '"test"'), ("debug", '"none"'), ("incremental", "false")),
+    ),
+    (
+        "profile.dev",
+        "# Lighter dev builds: line tables for backtraces, and a separate debug-info file on macOS.\n",
+        (("debug", '"line-tables-only"'), ("split-debuginfo", '"unpacked"')),
+    ),
+    (
+        "profile.dev.package.\"*\"",
+        "# Dependencies carry no debug information in dev builds.\n",
+        (("debug", "false"),),
+    ),
+)
 NEXT_TABLE_RE = re.compile(r"^\[", re.M)
 
 
-def fixed_cargo_toml(text: str) -> str | None:
-    """Return the corrected Cargo.toml text, or None if it is already right."""
-    header = HEADER_RE.search(text)
+def fixed_table(text: str, name: str, comment: str, wanted) -> str:
+    """Return the text with one table present and its wanted keys correct."""
+    header = re.compile(rf"^\[{re.escape(name)}\][ \t]*\n", re.M).search(text)
     if header is None:
-        return text + ("" if text.endswith("\n") else "\n") + BLOCK
+        block = f"\n{comment}[{name}]\n" + "".join(f"{k} = {v}\n" for k, v in wanted)
+        return text + ("" if text.endswith("\n") else "\n") + block
 
     following = NEXT_TABLE_RE.search(text, header.end())
     stop = following.start() if following else len(text)
     body = text[header.end() : stop]
     new_body = body
-    for key, value in WANTED:
+    for key, value in wanted:
         line = re.compile(rf"^{key}[ \t]*=.*$", re.M)
         if line.search(new_body):
             new_body = line.sub(f"{key} = {value}", new_body, count=1)
         else:
-            new_body = new_body.rstrip("\n") + f"\n{key} = {value}\n"
-            if stop < len(text):
-                new_body += "\n"  # keep a blank line before the next table
-    if new_body == body:
-        return None
+            trailing = len(new_body) - len(new_body.rstrip("\n"))
+            new_body = new_body.rstrip("\n") + f"\n{key} = {value}\n" + "\n" * max(trailing - 1, 0)
     return text[: header.end()] + new_body + text[stop:]
+
+
+def fixed_cargo_toml(text: str) -> str | None:
+    """Return the corrected Cargo.toml text, or None if it is already right."""
+    new_text = text
+    for name, comment, wanted in TABLES:
+        new_text = fixed_table(new_text, name, comment, wanted)
+    return None if new_text == text else new_text
 
 
 def main() -> int:
@@ -116,7 +141,7 @@ def main() -> int:
     if args.check:
         if drifted:
             print(
-                f"[profile.mutants] missing or wrong in {len(drifted)} form(s) "
+                f"[profile.mutants] / [profile.dev] missing or wrong in {len(drifted)} form(s) "
                 "(run: bin/axum-mutants-profile --all)"
             )
             for name in drifted[:10]:
@@ -124,7 +149,7 @@ def main() -> int:
             if len(drifted) > 10:
                 print(f"  … and {len(drifted) - 10} more")
             return 1
-        print(f"[profile.mutants] correct in every form ({len(forms)} forms)")
+        print(f"[profile.mutants] and [profile.dev] correct in every form ({len(forms)} forms)")
         return 0
 
     verb = "would fix" if args.dry_run else "fixed"

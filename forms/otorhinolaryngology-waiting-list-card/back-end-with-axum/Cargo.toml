@@ -56,3 +56,12 @@ path = "src/otorhinolaryngology_waiting_list_card/lib.rs"
 inherits = "test"
 debug = "none"
 incremental = false
+
+# Lighter dev builds: line tables for backtraces, and a separate debug-info file on macOS.
+[profile.dev]
+debug = "line-tables-only"
+split-debuginfo = "unpacked"
+
+# Dependencies carry no debug information in dev builds.
+[profile.dev.package."*"]
+debug = false
