@@ -273,6 +273,7 @@ bin/axum-entity-routes --check --all # every SQL table reachable over HTTP
 bin/axum-sql-columns --check --all   # every sql/ column in its crate, under its sql/ name
 bin/axum-soft-delete --check --all # DELETE marks and cascades; reads and updates skip deleted rows
 bin/axum-msrv-set --msrv 1.97 --check --all # Rust MSRV (rust-version) drift detector, per spec/rust-msrv-n-minus-2/
+bin/axum-mutants-profile --check --all # every crate has the [profile.mutants] cargo-mutants builds with
 bin/generate-forms-tsv.py --check     # forms.tsv drift detector
 bin/generate-tools-doc.py --check     # docs/tools.md drift detector
 bin/openapi/generate-openapi-combined.py --check # per-form combined openapi.yaml drift + served-route coverage

@@ -49,3 +49,10 @@ insta = { version = "1.49", features = ["redactions", "yaml", "filters"] }
 
 [lib]
 path = "src/patient_reported_outcome_measures/lib.rs"
+
+# cargo-mutants builds every mutant once in a throwaway copy of the tree: no debug information and no
+# incremental state make each build quicker and smaller. `etc/cargo-mutants.toml` selects it.
+[profile.mutants]
+inherits = "test"
+debug = "none"
+incremental = false

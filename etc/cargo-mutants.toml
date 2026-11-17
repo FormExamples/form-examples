@@ -1,5 +1,10 @@
 # cargo-mutants configuration shared by every Axum crate; used by bin/mutation-test-axum.
 # Only hand-written logic is worth mutating: skip formatting, docs, and generated plumbing.
+
+# Each crate's `[profile.mutants]` (bin/axum-mutants-profile): the test profile without debug
+# information or incremental state, so each mutant builds quicker and smaller.
+profile = "mutants"
+
 exclude_globs = [
     "src/*/bin/**",
     "src/*/fixtures/**",

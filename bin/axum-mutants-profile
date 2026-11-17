@@ -1,0 +1,136 @@
+#!/usr/bin/env python3
+"""bin/axum-mutants-profile — give every Axum crate the `[profile.mutants]` that
+cargo-mutants builds with.
+
+`bin/mutation-test-axum` runs `cargo mutants` over a crate, which builds every
+mutant once in a throwaway copy of the tree. The `mutants` profile makes each
+of those builds quicker and smaller: it inherits the test profile, drops debug
+information, and turns incremental compilation off (incremental state is never
+reused for a mutant, so it would only cost disk). `etc/cargo-mutants.toml`
+selects it with `profile = "mutants"`.
+
+Each form's `back-end-with-axum/` is its OWN self-contained workspace (see
+bin/axum-msrv-set), so a profile, which Cargo reads only from the workspace
+root, is applied once per form: this appends
+
+    [profile.mutants]
+    inherits = "test"
+    debug = "none"
+    incremental = false
+
+to `back-end-with-axum/Cargo.toml`, or corrects the three keys when the table
+already exists (other keys in it are kept). Idempotent. Run it after
+`bin/create-form`, since a freshly generated crate does not have the table.
+
+Usage:
+  bin/axum-mutants-profile <slug>...        # named forms
+  bin/axum-mutants-profile --all            # every form's Axum crate
+  bin/axum-mutants-profile --dry-run --all  # show what would change
+  bin/axum-mutants-profile --check --all    # CI drift check (non-zero on drift)
+"""
+
+from __future__ import annotations
+
+import argparse
+import pathlib
+import re
+import sys
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+FORMS = ROOT / "forms"
+
+BLOCK = """
+# cargo-mutants builds every mutant once in a throwaway copy of the tree: no debug information and no
+# incremental state make each build quicker and smaller. `etc/cargo-mutants.toml` selects it.
+[profile.mutants]
+inherits = "test"
+debug = "none"
+incremental = false
+"""
+
+WANTED = (("inherits", '"test"'), ("debug", '"none"'), ("incremental", "false"))
+HEADER_RE = re.compile(r"^\[profile\.mutants\][ \t]*\n", re.M)
+NEXT_TABLE_RE = re.compile(r"^\[", re.M)
+
+
+def fixed_cargo_toml(text: str) -> str | None:
+    """Return the corrected Cargo.toml text, or None if it is already right."""
+    header = HEADER_RE.search(text)
+    if header is None:
+        return text + ("" if text.endswith("\n") else "\n") + BLOCK
+
+    following = NEXT_TABLE_RE.search(text, header.end())
+    stop = following.start() if following else len(text)
+    body = text[header.end() : stop]
+    new_body = body
+    for key, value in WANTED:
+        line = re.compile(rf"^{key}[ \t]*=.*$", re.M)
+        if line.search(new_body):
+            new_body = line.sub(f"{key} = {value}", new_body, count=1)
+        else:
+            new_body = new_body.rstrip("\n") + f"\n{key} = {value}\n"
+            if stop < len(text):
+                new_body += "\n"  # keep a blank line before the next table
+    if new_body == body:
+        return None
+    return text[: header.end()] + new_body + text[stop:]
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Give every Axum crate the [profile.mutants] cargo-mutants builds with."
+    )
+    parser.add_argument("slugs", nargs="*", help="form slugs to process")
+    parser.add_argument("--all", action="store_true", help="process every form")
+    parser.add_argument(
+        "--check", action="store_true", help="report drift; exit non-zero if any"
+    )
+    parser.add_argument(
+        "--dry-run", action="store_true", help="report what would change"
+    )
+    args = parser.parse_args()
+
+    if args.all:
+        forms = sorted(
+            p for p in FORMS.iterdir() if (p / "back-end-with-axum").is_dir()
+        )
+    elif args.slugs:
+        forms = [FORMS / slug for slug in args.slugs]
+    else:
+        parser.error("give one or more slugs, or --all")
+
+    apply = not (args.check or args.dry_run)
+    drifted: list[str] = []
+
+    for form in forms:
+        cargo_toml = form / "back-end-with-axum" / "Cargo.toml"
+        if not cargo_toml.is_file():
+            print(f"no such crate: {cargo_toml}", file=sys.stderr)
+            return 2
+        fixed = fixed_cargo_toml(cargo_toml.read_text())
+        if fixed is not None:
+            drifted.append(form.name)
+            if apply:
+                cargo_toml.write_text(fixed)
+
+    if args.check:
+        if drifted:
+            print(
+                f"[profile.mutants] missing or wrong in {len(drifted)} form(s) "
+                "(run: bin/axum-mutants-profile --all)"
+            )
+            for name in drifted[:10]:
+                print(f"  {name}")
+            if len(drifted) > 10:
+                print(f"  … and {len(drifted) - 10} more")
+            return 1
+        print(f"[profile.mutants] correct in every form ({len(forms)} forms)")
+        return 0
+
+    verb = "would fix" if args.dry_run else "fixed"
+    print(f"{len(drifted)} form(s) {verb}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

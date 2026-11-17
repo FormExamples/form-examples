@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-115 tools.
+116 tools.
 
 - [`bin/axum-axa-0-10`](#axum-axa-0-10)
 - [`bin/axum-axa-0-11`](#axum-axa-0-11)
@@ -22,6 +22,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/axum-fixture-checks`](#axum-fixture-checks)
 - [`bin/axum-forbid-unsafe`](#axum-forbid-unsafe)
 - [`bin/axum-msrv-set`](#axum-msrv-set)
+- [`bin/axum-mutants-profile`](#axum-mutants-profile)
 - [`bin/axum-soft-delete`](#axum-soft-delete)
 - [`bin/axum-sql-columns`](#axum-sql-columns)
 - [`bin/benchmark-engines`](#benchmark-engines)
@@ -702,6 +703,39 @@ Usage:
   bin/axum-msrv-set --msrv 1.96 --all            # every form's Axum crate
   bin/axum-msrv-set --msrv 1.96 --dry-run --all  # show what would change
   bin/axum-msrv-set --msrv 1.96 --check --all    # CI drift check (non-zero on drift)
+```
+
+<h2 id="axum-mutants-profile"><code>bin/axum-mutants-profile</code></h2>
+
+```text
+bin/axum-mutants-profile — give every Axum crate the `[profile.mutants]` that
+cargo-mutants builds with.
+
+`bin/mutation-test-axum` runs `cargo mutants` over a crate, which builds every
+mutant once in a throwaway copy of the tree. The `mutants` profile makes each
+of those builds quicker and smaller: it inherits the test profile, drops debug
+information, and turns incremental compilation off (incremental state is never
+reused for a mutant, so it would only cost disk). `etc/cargo-mutants.toml`
+selects it with `profile = "mutants"`.
+
+Each form's `back-end-with-axum/` is its OWN self-contained workspace (see
+bin/axum-msrv-set), so a profile, which Cargo reads only from the workspace
+root, is applied once per form: this appends
+
+    [profile.mutants]
+    inherits = "test"
+    debug = "none"
+    incremental = false
+
+to `back-end-with-axum/Cargo.toml`, or corrects the three keys when the table
+already exists (other keys in it are kept). Idempotent. Run it after
+`bin/create-form`, since a freshly generated crate does not have the table.
+
+Usage:
+  bin/axum-mutants-profile <slug>...        # named forms
+  bin/axum-mutants-profile --all            # every form's Axum crate
+  bin/axum-mutants-profile --dry-run --all  # show what would change
+  bin/axum-mutants-profile --check --all    # CI drift check (non-zero on drift)
 ```
 
 <h2 id="axum-soft-delete"><code>bin/axum-soft-delete</code></h2>
