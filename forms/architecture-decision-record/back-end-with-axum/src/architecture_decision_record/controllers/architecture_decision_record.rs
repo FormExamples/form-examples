@@ -249,7 +249,7 @@ async fn render_markdown(ctx: &AppContext, item: &Model) -> Result<String> {
         let _ = writeln!(md, "- **Group:** {}", item.decision_group);
     }
     if let Some(d) = item.decision_date {
-        let _ = writeln!(md, "- **Date:** {d}");
+        let _ = writeln!(md, "- **Date:** {}", d.to_jiff());
     }
     if let Some(a) = &author {
         let email = if a.email.is_empty() {
@@ -328,7 +328,7 @@ async fn render_markdown(ctx: &AppContext, item: &Model) -> Result<String> {
         md.push_str("_None._\n");
     } else {
         for n in &notes {
-            let when = n.noted_at.to_rfc3339();
+            let when = n.noted_at.to_jiff().to_string();
             let who = if n.noted_by.is_empty() {
                 "unknown"
             } else {
@@ -343,7 +343,7 @@ async fn render_markdown(ctx: &AppContext, item: &Model) -> Result<String> {
         md.push_str("---\n");
         let when = item
             .signed_off_at
-            .map(|d| format!(" on {}", d.to_rfc3339()))
+            .map(|d| format!(" on {}", d.to_jiff()))
             .unwrap_or_default();
         let _ = writeln!(md, "Signed off by {}{}.", item.signed_off_by, when);
     }
@@ -397,7 +397,7 @@ async fn api_show_by_slug(
         decision_group: item.decision_group.clone(),
         decision_date: item
             .decision_date
-            .map(|d| d.to_string())
+            .map(|d| d.to_jiff().to_string())
             .unwrap_or_default(),
         author_name,
         markdown: md,
@@ -448,7 +448,7 @@ async fn api_index(
             title: r.title,
             status: r.status,
             decision_group: r.decision_group,
-            decision_date: r.decision_date.map(|d| d.to_string()).unwrap_or_default(),
+            decision_date: r.decision_date.map(|d| d.to_jiff().to_string()).unwrap_or_default(),
             author_name,
         });
     }

@@ -16,7 +16,6 @@
 
 use crate::support::prelude::*;
 use axum::debug_handler;
-use chrono::Utc;
 use serde::Deserialize;
 use serde_json::json;
 use uuid::Uuid;
@@ -42,8 +41,8 @@ struct RequestParams {
     manager_id: Uuid,
     status: String,
     requested_by: String,
-    request_date: Option<chrono::NaiveDate>,
-    requested_start_date: Option<chrono::NaiveDate>,
+    request_date: Option<jiff_sqlx::Date>,
+    requested_start_date: Option<jiff_sqlx::Date>,
     condition_adhd: bool,
     condition_autism: bool,
     condition_dyslexia: bool,
@@ -87,7 +86,7 @@ struct RequestParams {
 impl RequestParams {
     /// Insert a row.
     async fn insert(self, db: &PgPool) -> sqlx::Result<neurodiversity_adjustment_requests::Model> {
-        let now = Utc::now();
+        let now = jiff_sqlx::Timestamp::from(jiff::Timestamp::now());
         sqlx::query_as(
             "INSERT INTO neurodiversity_adjustment_requests (created_at, updated_at, \
             worker_id, manager_id, status, requested_by, request_date, requested_start_date, \
@@ -177,7 +176,7 @@ impl RequestParams {
         db: &PgPool,
         id: Uuid,
     ) -> sqlx::Result<neurodiversity_adjustment_requests::Model> {
-        let now = Utc::now();
+        let now = jiff_sqlx::Timestamp::from(jiff::Timestamp::now());
         sqlx::query_as(
             "UPDATE neurodiversity_adjustment_requests SET updated_at = $2, worker_id = \
             $3, manager_id = $4, status = $5, requested_by = $6, request_date = $7, \
@@ -281,7 +280,7 @@ fn to_engine_request(
         worker_work_pattern: worker.map(|w| w.work_pattern.clone()).unwrap_or_default(),
         worker_work_location: worker.map(|w| w.work_location.clone()).unwrap_or_default(),
         worker_employment_start_date: worker
-            .and_then(|w| w.employment_start_date.map(|d| d.to_string()))
+            .and_then(|w| w.employment_start_date.map(|d| d.to_jiff().to_string()))
             .unwrap_or_default(),
         worker_employee_reference: worker
             .and_then(|w| w.employee_reference.clone())
@@ -296,10 +295,10 @@ fn to_engine_request(
         manager_phone: manager.and_then(|m| m.phone.clone()).unwrap_or_default(),
         status: r.status.clone(),
         requested_by: r.requested_by.clone(),
-        request_date: r.request_date.map(|d| d.to_string()).unwrap_or_default(),
+        request_date: r.request_date.map(|d| d.to_jiff().to_string()).unwrap_or_default(),
         requested_start_date: r
             .requested_start_date
-            .map(|d| d.to_string())
+            .map(|d| d.to_jiff().to_string())
             .unwrap_or_default(),
         condition_adhd: r.condition_adhd,
         condition_autism: r.condition_autism,
@@ -420,7 +419,7 @@ async fn submit(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<R
     let engine_request = to_engine_request(&request, worker.as_ref(), manager.as_ref());
     let grade = calculate_grade(&engine_request);
 
-    let now = Utc::now();
+    let now = jiff_sqlx::Timestamp::from(jiff::Timestamp::now());
     let mut txn = db(&ctx).begin().await?;
 
     // Idempotency: drop any prior grade (cascades rules + flags).

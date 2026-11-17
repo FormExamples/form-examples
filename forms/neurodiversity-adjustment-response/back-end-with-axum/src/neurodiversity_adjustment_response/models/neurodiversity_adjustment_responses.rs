@@ -4,7 +4,6 @@ use serde::{Deserialize, Serialize};
 
 use crate::engine::types::NeurodiversityAdjustmentResponse;
 use crate::support::prelude::*;
-use chrono::Utc;
 
 /// One row.
 #[allow(missing_docs)]
@@ -158,7 +157,7 @@ fn parse_date(s: &str) -> Option<Date> {
     if s.is_empty() {
         return None;
     }
-    chrono::NaiveDate::parse_from_str(s, "%Y-%m-%d").ok()
+    s.parse::<jiff::civil::Date>().ok().map(Date::from)
 }
 
 impl Model {
@@ -173,7 +172,7 @@ impl Model {
         manager_id: Uuid,
         payload: &NeurodiversityAdjustmentResponse,
     ) -> sqlx::Result<Self> {
-        let now = Utc::now();
+        let now = jiff_sqlx::Timestamp::from(jiff::Timestamp::now());
         sqlx::query_as(
             "INSERT INTO neurodiversity_adjustment_responses (created_at, updated_at, \
             worker_id, manager_id, response_status, request_reference, handling_method, \
@@ -240,7 +239,7 @@ impl Model {
         manager_id: Uuid,
         payload: &NeurodiversityAdjustmentResponse,
     ) -> sqlx::Result<Self> {
-        let now = Utc::now();
+        let now = jiff_sqlx::Timestamp::from(jiff::Timestamp::now());
         sqlx::query_as(
             "UPDATE neurodiversity_adjustment_responses SET updated_at = $2, worker_id = \
             $3, manager_id = $4, response_status = $5, request_reference = $6, \
@@ -344,15 +343,15 @@ impl Model {
             handling_method: self.handling_method.clone(),
             assessed_date: self
                 .assessed_date
-                .map(|d| d.to_string())
+                .map(|d| d.to_jiff().to_string())
                 .unwrap_or_default(),
             responded_date: self
                 .responded_date
-                .map(|d| d.to_string())
+                .map(|d| d.to_jiff().to_string())
                 .unwrap_or_default(),
             effective_date: self
                 .effective_date
-                .map(|d| d.to_string())
+                .map(|d| d.to_jiff().to_string())
                 .unwrap_or_default(),
             overall_decision: self.overall_decision.clone(),
             decision_rationale: self.decision_rationale.clone(),
@@ -370,7 +369,7 @@ impl Model {
             trial_period: self.trial_period,
             trial_period_weeks: self.trial_period_weeks,
             review_scheduled: self.review_scheduled,
-            review_date: self.review_date.map(|d| d.to_string()).unwrap_or_default(),
+            review_date: self.review_date.map(|d| d.to_jiff().to_string()).unwrap_or_default(),
             occupational_health_referred: self.occupational_health_referred,
             access_to_work_referred: self.access_to_work_referred,
             support_resources_detail: self.support_resources_detail.clone(),

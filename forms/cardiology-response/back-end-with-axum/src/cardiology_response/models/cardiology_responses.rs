@@ -4,7 +4,6 @@ use serde::{Deserialize, Serialize};
 
 use crate::engine::types::CardiologyResponse;
 use crate::support::prelude::*;
-use chrono::Utc;
 
 /// One row.
 #[allow(missing_docs)]
@@ -139,7 +138,7 @@ fn parse_date(s: &str) -> Option<Date> {
     if s.is_empty() {
         return None;
     }
-    chrono::NaiveDate::parse_from_str(s, "%Y-%m-%d").ok()
+    s.parse::<jiff::civil::Date>().ok().map(Date::from)
 }
 
 impl Model {
@@ -154,7 +153,7 @@ impl Model {
         clinician_id: Uuid,
         payload: &CardiologyResponse,
     ) -> sqlx::Result<Self> {
-        let now = Utc::now();
+        let now = jiff_sqlx::Timestamp::from(jiff::Timestamp::now());
         sqlx::query_as(
             "INSERT INTO cardiology_responses (created_at, updated_at, patient_id, \
             clinician_id, originating_request_reference, response_status, consultation_type, \
@@ -212,7 +211,7 @@ impl Model {
         clinician_id: Uuid,
         payload: &CardiologyResponse,
     ) -> sqlx::Result<Self> {
-        let now = Utc::now();
+        let now = jiff_sqlx::Timestamp::from(jiff::Timestamp::now());
         sqlx::query_as(
             "UPDATE cardiology_responses SET updated_at = $2, patient_id = $3, \
             clinician_id = $4, originating_request_reference = $5, response_status = $6, \
@@ -297,11 +296,11 @@ impl Model {
             consultation_type: self.consultation_type.clone(),
             assessed_date: self
                 .assessed_date
-                .map(|d| d.to_string())
+                .map(|d| d.to_jiff().to_string())
                 .unwrap_or_default(),
             responded_date: self
                 .responded_date
-                .map(|d| d.to_string())
+                .map(|d| d.to_jiff().to_string())
                 .unwrap_or_default(),
             patient_name: String::new(),
             patient_nhs_number: String::new(),

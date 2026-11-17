@@ -7,7 +7,6 @@ use super::{
 };
 use crate::engine::types::GradingResult;
 use crate::support::prelude::*;
-use chrono::Utc;
 
 /// One row.
 #[allow(missing_docs)]
@@ -142,7 +141,7 @@ impl Model {
         .execute(&mut *txn)
         .await?;
 
-        let now = Utc::now();
+        let now = jiff_sqlx::Timestamp::from(jiff::Timestamp::now());
 
         let grade_row = sqlx::query_as::<_, Model>(
             "INSERT INTO neurodiversity_adjustment_review_grades (created_at, updated_at, \

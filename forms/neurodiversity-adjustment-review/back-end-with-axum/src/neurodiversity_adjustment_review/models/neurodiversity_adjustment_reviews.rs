@@ -4,7 +4,6 @@ use serde::{Deserialize, Serialize};
 
 use crate::engine::types::NeurodiversityAdjustmentReview;
 use crate::support::prelude::*;
-use chrono::Utc;
 
 /// One row.
 #[allow(missing_docs)]
@@ -143,7 +142,7 @@ fn parse_date(s: &str) -> Option<Date> {
     if s.is_empty() {
         return None;
     }
-    chrono::NaiveDate::parse_from_str(s, "%Y-%m-%d").ok()
+    s.parse::<jiff::civil::Date>().ok().map(Date::from)
 }
 
 impl Model {
@@ -158,7 +157,7 @@ impl Model {
         manager_id: Uuid,
         payload: &NeurodiversityAdjustmentReview,
     ) -> sqlx::Result<Self> {
-        let now = Utc::now();
+        let now = jiff_sqlx::Timestamp::from(jiff::Timestamp::now());
         sqlx::query_as(
             "INSERT INTO neurodiversity_adjustment_reviews (created_at, updated_at, worker_id, \
             manager_id, review_status, response_reference, review_method, review_date, \
@@ -216,7 +215,7 @@ impl Model {
         manager_id: Uuid,
         payload: &NeurodiversityAdjustmentReview,
     ) -> sqlx::Result<Self> {
-        let now = Utc::now();
+        let now = jiff_sqlx::Timestamp::from(jiff::Timestamp::now());
         sqlx::query_as(
             "UPDATE neurodiversity_adjustment_reviews SET updated_at = $2, worker_id = \
             $3, manager_id = $4, review_status = $5, response_reference = $6, \
@@ -308,10 +307,10 @@ impl Model {
             review_status: self.review_status.clone(),
             response_reference: self.response_reference.clone(),
             review_method: self.review_method.clone(),
-            review_date: self.review_date.map(|d| d.to_string()).unwrap_or_default(),
+            review_date: self.review_date.map(|d| d.to_jiff().to_string()).unwrap_or_default(),
             next_review_date: self
                 .next_review_date
-                .map(|d| d.to_string())
+                .map(|d| d.to_jiff().to_string())
                 .unwrap_or_default(),
             effectiveness_working_environment: self.effectiveness_working_environment.clone(),
             effectiveness_equipment_technology: self.effectiveness_equipment_technology.clone(),

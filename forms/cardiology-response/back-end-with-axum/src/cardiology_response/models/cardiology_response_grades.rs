@@ -5,7 +5,6 @@ use serde::{Deserialize, Serialize};
 use super::{cardiology_response_grade_flags, cardiology_response_grade_rules};
 use crate::engine::types::GradingResult;
 use crate::support::prelude::*;
-use chrono::Utc;
 
 /// One row.
 #[allow(missing_docs)]
@@ -139,7 +138,7 @@ impl Model {
         .execute(&mut *txn)
         .await?;
 
-        let now = Utc::now();
+        let now = jiff_sqlx::Timestamp::from(jiff::Timestamp::now());
 
         let grade_row = sqlx::query_as::<_, Model>(
             "INSERT INTO cardiology_response_grades (created_at, updated_at, \

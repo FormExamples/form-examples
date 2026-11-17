@@ -32,10 +32,9 @@ pub fn length_of_stay_days(note: &InpatientClinicalNote) -> Option<i64> {
         return None;
     }
     let parse = |s: &str| {
-        chrono::DateTime::parse_from_rfc3339(s)
-            .map(|d| d.naive_utc())
-            .or_else(|_| chrono::NaiveDateTime::parse_from_str(s, "%Y-%m-%dT%H:%M"))
-            .or_else(|_| chrono::NaiveDateTime::parse_from_str(s, "%Y-%m-%dT%H:%M:%S"))
+        s.parse::<jiff::Timestamp>()
+            .map(|t| t.to_zoned(jiff::tz::TimeZone::UTC).datetime())
+            .or_else(|_| s.parse::<jiff::civil::DateTime>())
             .ok()
     };
     let a = parse(&note.admission_at)?;
@@ -43,7 +42,7 @@ pub fn length_of_stay_days(note: &InpatientClinicalNote) -> Option<i64> {
     if n < a {
         return None;
     }
-    Some((n - a).num_days())
+    Some(i64::from(a.until(n).ok()?.get_days()))
 }
 
 /// Detect every safety flag for a note.

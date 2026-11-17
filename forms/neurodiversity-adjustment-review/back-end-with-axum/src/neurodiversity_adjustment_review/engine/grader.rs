@@ -61,7 +61,7 @@ pub fn calculate_grade(review: &NeurodiversityAdjustmentReview) -> GradingResult
         recommendation_label: recommendation_label_value,
         fired_rules,
         flags,
-        graded_at: chrono::Utc::now().to_rfc3339(),
+        graded_at: jiff::Timestamp::now().to_string(),
     }
 }
 

@@ -7,7 +7,6 @@
 
 use crate::support::prelude::*;
 use axum::debug_handler;
-use chrono::Utc;
 use serde::Deserialize;
 use serde_json::{Value, json};
 use uuid::Uuid;
@@ -55,7 +54,7 @@ async fn ensure_worker(ctx: &AppContext, id: Option<Uuid>) -> Result<Uuid> {
     if let Some(id) = id {
         return Ok(id);
     }
-    let now = Utc::now();
+    let now = jiff_sqlx::Timestamp::from(jiff::Timestamp::now());
     Ok(sqlx::query_as::<_, workers::Model>(
         "INSERT INTO workers (created_at, updated_at, name, job_title, department, \
         employment_type, work_pattern, work_location) VALUES ($1, $2, $3, $4, $5, $6, $7, \
@@ -79,7 +78,7 @@ async fn ensure_manager(ctx: &AppContext, id: Option<Uuid>) -> Result<Uuid> {
     if let Some(id) = id {
         return Ok(id);
     }
-    let now = Utc::now();
+    let now = jiff_sqlx::Timestamp::from(jiff::Timestamp::now());
     Ok(sqlx::query_as::<_, managers::Model>(
         "INSERT INTO managers (created_at, updated_at, name, role, job_title, department) \
         VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",

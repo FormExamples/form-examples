@@ -13,7 +13,6 @@
 
 use crate::support::prelude::*;
 use axum::debug_handler;
-use chrono::Utc;
 use serde::Deserialize;
 use serde_json::json;
 use uuid::Uuid;
@@ -38,8 +37,8 @@ struct RequestParams {
     status: String,
     site_name: String,
     setting: String,
-    referral_date: Option<chrono::NaiveDate>,
-    requested_by_date: Option<chrono::NaiveDate>,
+    referral_date: Option<jiff_sqlx::Date>,
+    requested_by_date: Option<jiff_sqlx::Date>,
     requested_service: String,
     referral_reason: String,
     clinical_question: String,
@@ -75,7 +74,7 @@ struct RequestParams {
 impl RequestParams {
     /// Insert a row.
     async fn insert(self, db: &PgPool) -> sqlx::Result<cardiology_requests::Model> {
-        let now = Utc::now();
+        let now = jiff_sqlx::Timestamp::from(jiff::Timestamp::now());
         sqlx::query_as(
             "INSERT INTO cardiology_requests (created_at, updated_at, patient_id, \
             clinician_id, status, site_name, setting, referral_date, requested_by_date, \
@@ -139,7 +138,7 @@ impl RequestParams {
 
     /// Replace the row with this id.
     async fn update(self, db: &PgPool, id: Uuid) -> sqlx::Result<cardiology_requests::Model> {
-        let now = Utc::now();
+        let now = jiff_sqlx::Timestamp::from(jiff::Timestamp::now());
         sqlx::query_as(
             "UPDATE cardiology_requests SET updated_at = $2, patient_id = $3, \
             clinician_id = $4, status = $5, site_name = $6, setting = $7, referral_date \
@@ -222,20 +221,20 @@ fn to_engine_request(
             .unwrap_or_default(),
         supervising_consultant: r.supervising_consultant.clone(),
         requester_contact: r.requester_contact.clone(),
-        referral_date: r.referral_date.map(|d| d.to_string()).unwrap_or_default(),
+        referral_date: r.referral_date.map(|d| d.to_jiff().to_string()).unwrap_or_default(),
         nhs_number: patient
             .map(|p| p.united_kingdom_nhs_number.clone())
             .unwrap_or_default(),
         patient_name: patient.map(|p| p.name.clone()).unwrap_or_default(),
         date_of_birth: patient
-            .map(|p| p.birth_date.to_string())
+            .map(|p| p.birth_date.to_jiff().to_string())
             .unwrap_or_default(),
         status: r.status.clone(),
         site_name: r.site_name.clone(),
         setting: r.setting.clone(),
         requested_by_date: r
             .requested_by_date
-            .map(|d| d.to_string())
+            .map(|d| d.to_jiff().to_string())
             .unwrap_or_default(),
         requested_service: r.requested_service.clone(),
         referral_reason: r.referral_reason.clone(),
@@ -345,7 +344,7 @@ async fn submit(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<R
     let engine_request = to_engine_request(&request, patient.as_ref(), clinician.as_ref());
     let grade = calculate_grade(&engine_request);
 
-    let now = Utc::now();
+    let now = jiff_sqlx::Timestamp::from(jiff::Timestamp::now());
     let mut txn = db(&ctx).begin().await?;
 
     // Idempotency: drop any prior grade (cascades rules + flags).

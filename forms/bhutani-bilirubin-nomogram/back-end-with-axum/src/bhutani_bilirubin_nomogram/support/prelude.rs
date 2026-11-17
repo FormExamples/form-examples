@@ -7,7 +7,6 @@ pub use axa::{
     prelude::*,
 };
 pub use axum::extract::OriginalUri;
-pub use chrono::{DateTime as ChronoDateTime, FixedOffset, NaiveDate, NaiveTime};
 pub use sqlx::PgPool;
 pub use uuid::Uuid;
 pub use validator::Validate;
@@ -19,8 +18,8 @@ pub use super::{
 };
 
 /// A date.
-pub type Date = NaiveDate;
+pub type Date = jiff_sqlx::Date;
 /// A time of day.
-pub type Time = NaiveTime;
-/// A timestamp with its time zone offset.
-pub type DateTimeWithTimeZone = ChronoDateTime<FixedOffset>;
+pub type Time = jiff_sqlx::Time;
+/// A timestamp, an instant on the UTC timeline.
+pub type DateTimeWithTimeZone = jiff_sqlx::Timestamp;
