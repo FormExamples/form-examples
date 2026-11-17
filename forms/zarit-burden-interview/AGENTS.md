@@ -8,8 +8,16 @@ burden band from *little or no burden* to *severe burden*. A validated 12-item
 short form (total 0–48; high-burden cut-off ≥ 17) is supported. A high total
 prompts carer support, respite, and mental-health screening.
 
+## Specification Driven Development
+
+**The `spec/` directory is the source of truth.** 
+- Before doing anything read all files inside the `spec/` directory using your file-reading tools.
+- Treat all files inside `spec/` as strict requirements. Where any file disagrees with the spec, the spec wins: fix the file, or change the spec on purpose and bring the other files into line in the same commit. 
+- Do not improvise structure, style, or citation practice.
+
+## More
+
 See [`index.md`](./index.md) for the full design and the assessment-step table,
-and [`spec/index.md`](./spec/index.md) for the living domain spec.
 
 ## Directory map
 
