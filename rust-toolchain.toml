@@ -1,0 +1,8 @@
+# Pin the Rust toolchain for every Axum crate in this repository, so `cargo build`,
+# `cargo clippy` and `cargo fmt` behave the same on every machine. The minimum
+# supported Rust version (MSRV, N-2) is each crate's `rust-version`; see
+# spec/rust-msrv-n-minus-2/.
+[toolchain]
+channel = "1.100.0"
+components = ["rustfmt", "clippy"]
+profile = "minimal"
