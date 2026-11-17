@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-109 tools.
+115 tools.
 
 - [`bin/axum-axa-0-10`](#axum-axa-0-10)
 - [`bin/axum-axa-0-11`](#axum-axa-0-11)
@@ -24,6 +24,8 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/axum-msrv-set`](#axum-msrv-set)
 - [`bin/axum-soft-delete`](#axum-soft-delete)
 - [`bin/axum-sql-columns`](#axum-sql-columns)
+- [`bin/benchmark-engines`](#benchmark-engines)
+- [`bin/benchmark-gates`](#benchmark-gates)
 - [`bin/browser-color-scheme-refactor`](#browser-color-scheme-refactor)
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -64,6 +66,8 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/lily-sync`](#lily-sync)
 - [`bin/make-github-pages`](#make-github-pages)
 - [`bin/migrate-sql-filenames.py`](#migrate-sql-filenamespy)
+- [`bin/mutation-test-axum`](#mutation-test-axum)
+- [`bin/mutation-test-engines`](#mutation-test-engines)
 - [`bin/node-current-version-set`](#node-current-version-set)
 - [`bin/normalize`](#normalize)
 - [`bin/oxford-spelling-sweep`](#oxford-spelling-sweep)
@@ -75,6 +79,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/svelte-helpers-picker-rename`](#svelte-helpers-picker-rename)
 - [`bin/svelte-kit-3-theme-url-fix.py`](#svelte-kit-3-theme-url-fixpy)
 - [`bin/svelte-lily-picker-bar-0-6`](#svelte-lily-picker-bar-0-6)
+- [`bin/svelte-lily-picker-bar-0-7`](#svelte-lily-picker-bar-0-7)
 - [`bin/svelte-lily-picker-defaults`](#svelte-lily-picker-defaults)
 - [`bin/svelte-lily-pnpm-migrate`](#svelte-lily-pnpm-migrate)
 - [`bin/svelte-lily-scope-rename`](#svelte-lily-scope-rename)
@@ -97,6 +102,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/test-examples-conformance`](#test-examples-conformance)
 - [`bin/test-form`](#test-form)
 - [`bin/test-personas`](#test-personas)
+- [`bin/test-security-policy`](#test-security-policy)
 - [`bin/test-sql-apply`](#test-sql-apply)
 - [`bin/test-tools`](#test-tools)
 - [`bin/test-tutorials`](#test-tutorials)
@@ -746,6 +752,29 @@ reported for a person to decide.
 
 --check lists every `sql/` column a crate's table lacks, and exits 1 if there
 is one.
+```
+
+<h2 id="benchmark-engines"><code>bin/benchmark-engines</code></h2>
+
+_No header documentation._
+
+<h2 id="benchmark-gates"><code>bin/benchmark-gates</code></h2>
+
+```text
+bin/benchmark-gates — time the cheap, fleet-wide drift gates, several runs each.
+
+BENCHMARKS.md claims the whole cheap set runs in about ten seconds. This measures it:
+each gate is run --runs times (default 5, after one untimed warm-up), and the table
+reports min, median and max wall-clock seconds plus the exit status. Run it on an
+otherwise idle machine; numbers are only comparable on the same machine.
+
+Gates that need a database, a browser or a Rust toolchain are not included (see
+BENCHMARKS.md, "Gates not timed here").
+
+Usage:
+  bin/benchmark-gates [--runs N] [--markdown] [--max-total SECONDS]
+--markdown prints a table ready to paste into BENCHMARKS.md. --max-total makes the
+tool exit 1 if the sum of the medians exceeds SECONDS (a regression guard).
 ```
 
 <h2 id="browser-color-scheme-refactor"><code>bin/browser-color-scheme-refactor</code></h2>
@@ -1867,6 +1896,66 @@ Actions per form:
 Idempotent. Safe to re-run.
 ```
 
+<h2 id="mutation-test-axum"><code>bin/mutation-test-axum</code></h2>
+
+```text
+bin/mutation-test-axum — mutation-test one or more Axum crates with cargo-mutants.
+
+ Runs `cargo mutants` over forms/<slug>/back-end-with-axum/ with the shared
+ configuration in etc/cargo-mutants.toml. A mutant the crate's tests do not
+ fail ("missed") marks logic no test pins. Needs the scratch Postgres the crate
+ tests need (DB_URL set; see AGENTS/back-end-with-axum.md), and `cargo install
+ cargo-mutants`. Slow: minutes to hours per crate, so this is a maintainer or
+ nightly tool, never a per-push gate.
+
+ Usage: bin/mutation-test-axum [--list] <slug>...
+   --list   print the mutants without running any tests
+ Output: forms/<slug>/back-end-with-axum/mutants.out/ (gitignored); the missed
+ mutants are in missed.txt.
+ Exit status: cargo-mutants' (0 all caught, 2 some missed, 3 timeouts, 4 baseline failed).
+```
+
+<h2 id="mutation-test-engines"><code>bin/mutation-test-engines</code></h2>
+
+```text
+bin/mutation-test-engines — mutation-test each HTML front-end's scoring engine against its personas.
+
+`bin/test-personas` is the regression oracle for a scoring engine: a few realistic
+filled states and the exact grade each must produce. This tool measures how good that
+oracle is. It makes one small change at a time to the engine source (a mutant), runs
+`bin/test-personas <slug>`, and expects it to fail. A mutant that still passes
+*survived*: the personas do not pin that behaviour, so a real bug there would go
+unnoticed.
+
+Mutation operators (applied outside strings, template literals and comments):
+  ===  <->  !==        ==  <->  !=
+  >=   ->   >          <=  ->   <          >  ->  >=        <  ->  <=
+  &&   <->  ||
+  +    <->  -          (binary use only, spaced)
+  true <->  false
+  integer literal N -> N+1                   (not a digit run inside a name or decimal)
+
+Files mutated, per form, in front-end-with-html/js/: every module except the UI,
+export/import and vendored-helper ones (NOT_ENGINE), so grader.js, rules.js, flags.js,
+oet-grader.js, flagged-issues.js and the like. Each file is restored from memory afterwards, even on Ctrl-C.
+
+A mutant is *killed* if test-personas fails, errors or times out. Some survivors are
+equivalent mutants (no observable change), so 100% is not the goal; the survivors
+list is the work: each is either a missing persona or dead code.
+
+Usage:
+  bin/mutation-test-engines [--jobs N] [--survivors] [--min PERCENT] [--limit N] --all|<slug>...
+  bin/mutation-test-engines --update-baseline --all     # record each form's score in etc/mutation-baseline.tsv
+  bin/mutation-test-engines --check-baseline [--all|<slug>...]  # ratchet: fail if a form scores lower than recorded
+  bin/mutation-test-engines --list-operators
+
+The baseline is a ratchet: scores may rise (re-record them) but not fall, so a change
+that weakens the personas, or adds engine logic they do not cover, is caught. A form
+absent from the baseline is not checked. A 1-point tolerance absorbs a mutant-count shift.
+
+Exit status: 1 if a form with personas scores under --min (default 0: report only).
+```
+
 <h2 id="node-current-version-set"><code>bin/node-current-version-set</code></h2>
 
 ```text
@@ -2264,6 +2353,31 @@ package.json lacks the expected lines stops the run before anything is written.
 Usage:
   bin/svelte-lily-picker-bar-0-6 [--no-lock] --all|<slug>...
   bin/svelte-lily-picker-bar-0-6 --check --all|<slug>...   # CI drift check
+```
+
+<h2 id="svelte-lily-picker-bar-0-7"><code>bin/svelte-lily-picker-bar-0-7</code></h2>
+
+```text
+bin/svelte-lily-picker-bar-0-7 — move each Svelte front-end to Lily picker-bar 0.7 and headless 0.10.
+
+What it changes in a `front-end-with-svelte/`:
+
+  package.json         @lilydesignsystem/svelte-picker-bar ^0.6.0 -> ^0.7.0
+                       @lilydesignsystem/svelte-headless   ^0.9.0 -> ^0.10.0
+  pnpm-workspace.yaml  minimumReleaseAgeExclude gains picker-bar@0.7.0 and headless@0.10.0
+                       (both under the 3-day release-age cooldown when adopted)
+  pnpm-lock.yaml       `pnpm install --lockfile-only`, so only the lock moves and no
+                       node_modules is created; unless --no-lock
+
+picker-bar 0.7 depends on svelte-theme-picker ^0.4.0 itself; the workspace override on
+theme-picker stays, harmless.
+
+A front-end already moved is skipped, so the tool can be rerun. A front-end whose
+package.json lacks the expected lines stops the run before anything is written.
+
+Usage:
+  bin/svelte-lily-picker-bar-0-7 [--no-lock] --all|<slug>...
+  bin/svelte-lily-picker-bar-0-7 --check --all|<slug>...   # CI drift check
 ```
 
 <h2 id="svelte-lily-picker-defaults"><code>bin/svelte-lily-picker-defaults</code></h2>
@@ -2900,6 +3014,22 @@ test-form: test one form directory in this project for implementation
 <h2 id="test-personas"><code>bin/test-personas</code></h2>
 
 _No header documentation._
+
+<h2 id="test-security-policy"><code>bin/test-security-policy</code></h2>
+
+```text
+bin/test-security-policy — check SECURITY.md and security.txt against spec/security-policy/.
+
+Asserts:
+  * SECURITY.md has every required section heading;
+  * formexamples.github.io/static/.well-known/security.txt (RFC 9116) has Contact,
+    Expires, Policy and Canonical;
+  * Expires is in the future and within one year;
+  * the Contact address matches the address in SECURITY.md.
+
+Usage: bin/test-security-policy
+Exit status: 0 if the policy is intact, 1 otherwise.
+```
 
 <h2 id="test-sql-apply"><code>bin/test-sql-apply</code></h2>
 

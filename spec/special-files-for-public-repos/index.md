@@ -23,7 +23,7 @@ describes.
 | [`CODEOWNERS`](../../CODEOWNERS) | review ownership per path, with <joel@joelparkerhenderson.com> | present |
 | [`MAINTAINERS.md`](../../MAINTAINERS.md) | roster, publishing identities, access continuity; sole maintainer | present |
 | [`GOVERNANCE.md`](../../GOVERNANCE.md) | who decides what, how decisions are recorded, how to become a maintainer | present |
-| [`SECURITY.md`](../../SECURITY.md) | scope, supported versions, private reporting route, response commitments | present |
+| [`SECURITY.md`](../../SECURITY.md) | scope, supported versions, private reporting route, severity targets, safe harbor, advisories; with `/.well-known/security.txt` ([`spec/security-policy/`](../security-policy/)) | present |
 | [`CODE_OF_CONDUCT.md`](../../CODE_OF_CONDUCT.md) | expected conduct and enforcement | present |
 | [`CHANGELOG.md`](../../CHANGELOG.md) | repository-level change history, Keep a Changelog 1.1.0 + SemVer | present |
 | [`AI_STATEMENT.md`](../../AI_STATEMENT.md) | how AI tooling is used to build this, what it may and may not do — including the standing, maintainer-granted authority to decide a release is ready and publish a crate — and the limits | present |

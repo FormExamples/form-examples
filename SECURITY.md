@@ -83,7 +83,9 @@ on `main`; adopters who pin should rebase.
 
 **Do not open a public issue for a suspected vulnerability.**
 
-Report privately to **<joel@joelparkerhenderson.com>**, with:
+Report privately to **<joel@joelparkerhenderson.com>** (also published as
+[`/.well-known/security.txt`](https://formexamples.com/.well-known/security.txt)),
+or through GitHub's private vulnerability reporting on the **Security** tab, with:
 
 - what you found, and where — file path and line, or the form slug and stack;
 - how to reproduce it, ideally as a failing command or a minimal case;
@@ -109,6 +111,23 @@ issue, or publish. That is explicitly permitted by this policy, it is not a
 violation of coordinated disclosure, and the fallback exists so that a silent
 maintainer cannot become an indefinite embargo.
 
+### Severity and response targets
+
+Severity is assessed with [CVSS v4.0](https://www.first.org/cvss/v4-0/), read in
+the context of *this* repository: example code with no data and no hosted
+service, so the question is what an adopter following the repository's own
+instructions inherits.
+
+| Severity | Typical example | Fix target on `main` |
+| --- | --- | --- |
+| Critical (9.0+) | injection or remote code execution reachable from the shipped defaults; a leaked credential | 7 days |
+| High (7.0 to 8.9) | stored XSS in a front-end; a `bin/` tool that writes outside its paths | 30 days |
+| Medium (4.0 to 6.9) | a missing hardening header, a weakness needing unusual preconditions | 90 days |
+| Low (below 4.0) | defence-in-depth gaps, hardening suggestions | next scheduled maintenance |
+
+Targets are goals for a single unpaid maintainer, not guarantees. If one will be
+missed, the reply says so, with the reason and a new date.
+
 ### Coordinated disclosure
 
 The preference is: report privately, agree a date, publish together. Ninety days
@@ -122,6 +141,41 @@ Reporters are credited by name and link in the fix's commit and in
 [`CHANGELOG.md`](CHANGELOG.md), unless you ask not to be. There is no bug
 bounty; there is no money in this project to pay one, and saying so up front is
 fairer than letting you find out after the work.
+
+## Safe harbor
+
+Good-faith security research on this repository is welcome. If you read
+and test the code, run it locally, and report what you find privately, this
+project will not pursue or support legal action against you. Please do not
+access data that is not yours, degrade any service, or test against
+infrastructure this project does not own. The repository has no hosted service
+of its own, so local testing covers nearly everything.
+
+## Advisories and CVEs
+
+An accepted report is published as a
+[GitHub Security Advisory](https://docs.github.com/en/code-security/security-advisories)
+on the repository once a fix is on `main`, with a CVE requested through GitHub
+as a CNA when the weakness is in code an adopter would copy. Private
+vulnerability reporting through the repository's **Security** tab is also
+accepted, as an alternative to email.
+
+## Secure development
+
+The standing defences, each enforced in CI rather than by promise:
+
+- `cargo deny --all-features check` on every crate, plus a weekly advisories
+  pass over every lockfile, so a new advisory is seen without a push.
+- `#![forbid(unsafe_code)]` in every Axum crate
+  (`bin/axum-forbid-unsafe --check --all`).
+- A package release-age cooldown (pnpm `minimumReleaseAge`, Cargo
+  `min-publish-age`): a new release is not adopted for three days, and any
+  exception is a named, reviewed entry in the lockfile workspace.
+- Pinned toolchains and lockfiles, with Dependabot enabled.
+- Vendored theme copies byte-identical across forms
+  (`bin/test-vendored-uniformity`).
+- This policy itself is checked by `bin/test-security-policy`, including that
+  `/.well-known/security.txt` has not expired.
 
 ## If you are deploying any of this
 

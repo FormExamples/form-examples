@@ -146,6 +146,8 @@ jobs:
       - name: Examples conform to SQL schema
         run: bin/test-examples-conformance
 
+      - name: Security policy is complete and security.txt unexpired
+        run: bin/test-security-policy
       - name: Tutorials reference only existing tools/paths
         run: bin/test-tutorials
 
@@ -579,6 +581,21 @@ jobs:
               || { echo "::error::$slug has advisory findings"; fail=1; }
           done
           exit $fail
+
+  # Mutation testing of the scoring engines: how well do personas.json pin the
+  # engine's behaviour? A ratchet, not a target: no form may score lower than
+  # etc/mutation-baseline.tsv. Nightly and manual only; about ten minutes.
+  mutation:
+    name: Scoring-engine mutation ratchet (nightly)
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '17 3 * * *')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '26'
+      - name: Mutants must not survive more than the recorded baseline
+        run: bin/mutation-test-engines --check-baseline --jobs 4
 
   e2e:
     name: End-to-end sweep

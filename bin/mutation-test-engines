@@ -1,0 +1,193 @@
+#!/usr/bin/env python3
+"""bin/mutation-test-engines — mutation-test each HTML front-end's scoring engine against its personas.
+
+`bin/test-personas` is the regression oracle for a scoring engine: a few realistic
+filled states and the exact grade each must produce. This tool measures how good that
+oracle is. It makes one small change at a time to the engine source (a mutant), runs
+`bin/test-personas <slug>`, and expects it to fail. A mutant that still passes
+*survived*: the personas do not pin that behaviour, so a real bug there would go
+unnoticed.
+
+Mutation operators (applied outside strings, template literals and comments):
+  ===  <->  !==        ==  <->  !=
+  >=   ->   >          <=  ->   <          >  ->  >=        <  ->  <=
+  &&   <->  ||
+  +    <->  -          (binary use only, spaced)
+  true <->  false
+  integer literal N -> N+1                   (not a digit run inside a name or decimal)
+
+Files mutated, per form, in front-end-with-html/js/: every module except the UI,
+export/import and vendored-helper ones (NOT_ENGINE), so grader.js, rules.js, flags.js,
+oet-grader.js, flagged-issues.js and the like. Each file is restored from memory afterwards, even on Ctrl-C.
+
+A mutant is *killed* if test-personas fails, errors or times out. Some survivors are
+equivalent mutants (no observable change), so 100% is not the goal; the survivors
+list is the work: each is either a missing persona or dead code.
+
+Usage:
+  bin/mutation-test-engines [--jobs N] [--survivors] [--min PERCENT] [--limit N] --all|<slug>...
+  bin/mutation-test-engines --update-baseline --all     # record each form's score in etc/mutation-baseline.tsv
+  bin/mutation-test-engines --check-baseline [--all|<slug>...]  # ratchet: fail if a form scores lower than recorded
+  bin/mutation-test-engines --list-operators
+
+The baseline is a ratchet: scores may rise (re-record them) but not fall, so a change
+that weakens the personas, or adds engine logic they do not cover, is caught. A form
+absent from the baseline is not checked. A 1-point tolerance absorbs a mutant-count shift.
+
+Exit status: 1 if a form with personas scores under --min (default 0: report only).
+"""
+
+from __future__ import annotations
+
+import argparse
+import concurrent.futures
+import os
+import re
+import signal
+import subprocess
+import sys
+
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASELINE = f"{REPO}/etc/mutation-baseline.tsv"
+# Everything in js/ is engine code except the UI, export/import and vendored-helper modules.
+NOT_ENGINE = {"api", "dashboard-app", "dashboard-types", "data", "date-time-picker", "form-app", "form-export",
+              "form-import", "locale-select", "restore-banner", "share-picker", "table-export",
+              "text-size-picker", "theme-select", "types"}
+# Strings, template literals, comments are copied through untouched.
+SKIP = re.compile(r"""'(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*"|`(?:\\.|[^`\\])*`|//[^\n]*|/\*.*?\*/""", re.S)
+OPERATORS = [
+    (re.compile(r"==="), "!=="), (re.compile(r"!=="), "==="),
+    (re.compile(r"(?<![=!<>])==(?!=)"), "!="), (re.compile(r"(?<![=!<>])!=(?!=)"), "=="),
+    (re.compile(r">=(?!=)"), ">"), (re.compile(r"<=(?!=)"), "<"),
+    (re.compile(r"(?<![=<>-])>(?![=>])"), ">="), (re.compile(r"(?<![=<>!])<(?![=<])"), "<="),
+    (re.compile(r"&&"), "||"), (re.compile(r"\|\|"), "&&"),
+    (re.compile(r"(?<=[\w)\]]) \+ (?=[\w(\[])"), " - "), (re.compile(r"(?<=[\w)\]]) - (?=[\w(\[])"), " + "),
+    (re.compile(r"\btrue\b"), "false"), (re.compile(r"\bfalse\b"), "true"),
+    (re.compile(r"(?<![\w.$])\d+(?![\w.])"), None),  # integer literal: N -> N+1
+]
+
+
+def mutants(source: str):
+    """Yield (line_number, description, mutated_source)."""
+    protected = [(m.start(), m.end()) for m in SKIP.finditer(source)]
+    starts = [0] + [m.end() for m in re.finditer(r"\n", source)]
+
+    def protect(pos: int) -> bool:
+        return any(a <= pos < b for a, b in protected)
+
+    for pattern, replacement in OPERATORS:
+        for m in pattern.finditer(source):
+            if protect(m.start()):
+                continue
+            new = replacement if replacement is not None else str(int(m.group()) + 1)
+            line = sum(1 for s in starts if s <= m.start())
+            yield line, f"{m.group()!r} -> {new!r}", source[: m.start()] + new + source[m.end():]
+
+
+def run_personas(slug: str) -> bool:
+    try:
+        result = subprocess.run([f"{REPO}/bin/test-personas", slug], capture_output=True, timeout=30)
+    except subprocess.TimeoutExpired:
+        return False
+    return result.returncode == 0
+
+
+def test_form(slug: str, limit: int | None):
+    js = f"{REPO}/forms/{slug}/front-end-with-html/js"
+    if not os.path.exists(f"{REPO}/forms/{slug}/examples/personas.json"):
+        return slug, None, "no personas"
+    if not run_personas(slug):
+        return slug, None, "personas do not pass unmutated"
+    killed, survivors, total = 0, [], 0
+    for name in sorted(os.listdir(js)) if os.path.isdir(js) else []:
+        path = f"{js}/{name}"
+        if not name.endswith(".js") or name[:-3] in NOT_ENGINE:
+            continue
+        original = open(path, "rb").read()
+        text = original.decode()
+        try:
+            for line, what, mutated in mutants(text):
+                if limit is not None and total >= limit:
+                    break
+                total += 1
+                open(path, "w").write(mutated)
+                if run_personas(slug):
+                    survivors.append(f"{slug}/{name}:{line}: {what}")
+                else:
+                    killed += 1
+        finally:
+            open(path, "wb").write(original)
+    return slug, (killed, total), survivors
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    parser.add_argument("slugs", nargs="*")
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--jobs", type=int, default=4)
+    parser.add_argument("--survivors", action="store_true", help="list every surviving mutant")
+    parser.add_argument("--min", type=float, default=0.0, help="fail if a form scores below this percent")
+    parser.add_argument("--limit", type=int, help="at most N mutants per form (quick sample)")
+    parser.add_argument("--update-baseline", action="store_true")
+    parser.add_argument("--check-baseline", action="store_true")
+    parser.add_argument("--list-operators", action="store_true")
+    args = parser.parse_args()
+    if args.list_operators:
+        for pattern, replacement in OPERATORS:
+            print(f"{pattern.pattern}  ->  {replacement or 'N+1'}")
+        return 0
+    baseline = {}
+    if os.path.exists(BASELINE):
+        for row in open(BASELINE):
+            slug, k, t = row.split()
+            baseline[slug] = (int(k), int(t))
+    if args.all or (args.check_baseline and not args.slugs):
+        args.all = True
+        slugs = sorted(os.path.basename(p) for p in os.listdir(f"{REPO}/forms") if os.path.isdir(f"{REPO}/forms/{p}") for p in [p])
+    elif args.slugs:
+        slugs = args.slugs
+    else:
+        parser.error("name forms, or pass --all")
+    restore = signal.signal(signal.SIGTERM, lambda *_: sys.exit(130))
+    killed_all = total_all = scored = 0
+    below, regressed, results = [], [], {}
+    with concurrent.futures.ThreadPoolExecutor(args.jobs) as pool:
+        for slug, score, detail in pool.map(lambda s: test_form(s, args.limit), slugs):
+            if score is None:
+                if not args.all:
+                    print(f"{slug}: skipped ({detail})")
+                continue
+            killed, total = score
+            pct = 100.0 * killed / total if total else 100.0
+            scored += 1
+            killed_all += killed
+            total_all += total
+            results[slug] = (killed, total)
+            print(f"{slug}: {killed}/{total} killed ({pct:.0f}%)")
+            if args.check_baseline and slug in baseline:
+                bk, bt = baseline[slug]
+                if pct < 100.0 * bk / bt - 1.0:
+                    regressed.append(f"{slug}: {pct:.0f}% < recorded {100.0 * bk / bt:.0f}%")
+            if args.survivors:
+                for s in detail:
+                    print(f"  survived {s}")
+            if pct < args.min:
+                below.append(slug)
+    signal.signal(signal.SIGTERM, restore)
+    pct = 100.0 * killed_all / total_all if total_all else 100.0
+    print(f"mutation-test-engines: {scored} forms, {killed_all}/{total_all} mutants killed ({pct:.1f}%)")
+    if below:
+        print(f"below {args.min}%: {', '.join(below)}", file=sys.stderr)
+    if args.update_baseline:
+        baseline.update(results)
+        with open(BASELINE, "w") as out:
+            for slug in sorted(baseline):
+                out.write(f"{slug}\t{baseline[slug][0]}\t{baseline[slug][1]}\n")
+        print(f"recorded {len(results)} forms in {os.path.relpath(BASELINE, REPO)}")
+    for r in regressed:
+        print(f"regressed: {r}", file=sys.stderr)
+    return 1 if below or regressed else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
