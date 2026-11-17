@@ -1,0 +1,7 @@
+# Security contact for form-examples (RFC 9116).
+# Policy: https://github.com/FormExamples/form-examples/blob/main/SECURITY.md
+Contact: mailto:joel@joelparkerhenderson.com
+Expires: 2027-11-17T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://formexamples.com/.well-known/security.txt
+Policy: https://github.com/FormExamples/form-examples/blob/main/SECURITY.md

@@ -146,6 +146,8 @@ jobs:
       - name: Examples conform to SQL schema
         run: bin/test-examples-conformance
 
+      - name: Security policy is complete and security.txt unexpired
+        run: bin/test-security-policy
       - name: Tutorials reference only existing tools/paths
         run: bin/test-tutorials
 

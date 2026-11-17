@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-108 tools.
+109 tools.
 
 - [`bin/axum-axa-0-10`](#axum-axa-0-10)
 - [`bin/axum-axa-0-11`](#axum-axa-0-11)
@@ -96,6 +96,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/test-examples-conformance`](#test-examples-conformance)
 - [`bin/test-form`](#test-form)
 - [`bin/test-personas`](#test-personas)
+- [`bin/test-security-policy`](#test-security-policy)
 - [`bin/test-sql-apply`](#test-sql-apply)
 - [`bin/test-tools`](#test-tools)
 - [`bin/test-tutorials`](#test-tutorials)
@@ -2870,6 +2871,22 @@ test-form: test one form directory in this project for implementation
 <h2 id="test-personas"><code>bin/test-personas</code></h2>
 
 _No header documentation._
+
+<h2 id="test-security-policy"><code>bin/test-security-policy</code></h2>
+
+```text
+bin/test-security-policy — check SECURITY.md and security.txt against spec/security-policy/.
+
+Asserts:
+  * SECURITY.md has every required section heading;
+  * formexamples.github.io/static/.well-known/security.txt (RFC 9116) has Contact,
+    Expires, Policy and Canonical;
+  * Expires is in the future and within one year;
+  * the Contact address matches the address in SECURITY.md.
+
+Usage: bin/test-security-policy
+Exit status: 0 if the policy is intact, 1 otherwise.
+```
 
 <h2 id="test-sql-apply"><code>bin/test-sql-apply</code></h2>
 

@@ -1,0 +1,59 @@
+#!/usr/bin/env python3
+"""bin/test-security-policy — check SECURITY.md and security.txt against spec/security-policy/.
+
+Asserts:
+  * SECURITY.md has every required section heading;
+  * formexamples.github.io/static/.well-known/security.txt (RFC 9116) has Contact,
+    Expires, Policy and Canonical;
+  * Expires is in the future and within one year;
+  * the Contact address matches the address in SECURITY.md.
+
+Usage: bin/test-security-policy
+Exit status: 0 if the policy is intact, 1 otherwise.
+"""
+
+import datetime
+import os
+import re
+import sys
+
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SECTIONS = ["Scope", "Supported versions", "Reporting a vulnerability", "Severity and response targets",
+            "Coordinated disclosure", "Safe harbor", "Advisories and CVEs", "Secure development", "Credit"]
+
+
+def main() -> int:
+    errors = []
+    policy = open(f"{REPO}/SECURITY.md").read()
+    headings = {m.group(1).strip() for m in re.finditer(r"^#{2,4} (.+)$", policy, re.M)}
+    errors += [f"SECURITY.md lacks the section: {s}" for s in SECTIONS if s not in headings]
+    path = f"{REPO}/formexamples.github.io/static/.well-known/security.txt"
+    if not os.path.exists(path):
+        errors.append("security.txt is missing")
+    else:
+        fields = {}
+        for line in open(path):
+            if line.strip() and not line.startswith("#") and ":" in line:
+                key, value = line.split(":", 1)
+                fields.setdefault(key.strip(), value.strip())
+        errors += [f"security.txt lacks {k}" for k in ("Contact", "Expires", "Policy", "Canonical") if k not in fields]
+        if "Expires" in fields:
+            expires = datetime.datetime.fromisoformat(fields["Expires"].replace("Z", "+00:00"))
+            now = datetime.datetime.now(datetime.timezone.utc)
+            if expires <= now:
+                errors.append(f"security.txt expired {fields['Expires']}")
+            elif expires > now + datetime.timedelta(days=366):
+                errors.append("security.txt Expires is more than a year ahead (RFC 9116)")
+            elif expires < now + datetime.timedelta(days=30):
+                print(f"warning: security.txt expires {fields['Expires']}; renew it soon", file=sys.stderr)
+        contact = fields.get("Contact", "").replace("mailto:", "")
+        if contact and contact not in policy:
+            errors.append("security.txt Contact is not the address in SECURITY.md")
+    for e in errors:
+        print(e)
+    print("test-security-policy:", "FAIL" if errors else "ok")
+    return 1 if errors else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
