@@ -21,7 +21,7 @@ axa = { version = "0.16", features = ["cursor-pagination", "postgres-sqlx", "que
 axa = { workspace = true }
 rust_decimal = { version = "1", features = ["serde", "serde-float"] }
 serde-saphyr = "2"
-sqlx = { version = "0.9", default-features = false, features = ["chrono", "derive", "json", "macros", "migrate", "postgres", "runtime-tokio", "rust_decimal", "tls-rustls-ring-webpki", "uuid"] }
+sqlx = { version = "0.9", default-features = false, features = ["derive", "json", "macros", "migrate", "postgres", "runtime-tokio", "rust_decimal", "tls-rustls-ring-webpki", "uuid"] }
 thiserror = "2"
 serde = { version = "1", features = ["derive"] }
 serde_json = { version = "1" }
@@ -33,7 +33,8 @@ tokio = { version = "1.54", default-features = false, features = [
 async-trait = { version = "0.1" }
 axum = { version = "0.8" }
 tracing = { version = "0.1" }
-chrono = { version = "0.4", features = ["serde"] }
+jiff = { version = "0.2", features = ["serde"] }
+jiff-sqlx = { version = "0.2.2", features = ["postgres", "serde"] }
 validator = { version = "0.21", features = ["derive"] }
 uuid = { version = "1.29", features = ["serde", "v4"] }
 # view engine i18n

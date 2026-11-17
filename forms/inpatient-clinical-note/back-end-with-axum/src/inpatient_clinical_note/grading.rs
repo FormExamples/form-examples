@@ -33,7 +33,7 @@ use crate::models::{
 /// engine's date parsing accepts. Absent becomes the empty string, the
 /// convention for an unanswered field.
 fn timestamp(value: Option<DateTimeWithTimeZone>) -> String {
-    value.map(|d| d.to_rfc3339()).unwrap_or_default()
+    value.map(|d| d.to_jiff().to_string()).unwrap_or_default()
 }
 
 /// Project the stored note and its children onto the engine's input shape.
@@ -134,7 +134,7 @@ pub fn to_engine_note(
         senior_review_by: note.senior_review_by.clone(),
         estimated_discharge_date: note
             .estimated_discharge_date
-            .map(|d| d.to_string())
+            .map(|d| d.to_jiff().to_string())
             .unwrap_or_default(),
 
         family_communication: note.family_communication.clone(),
@@ -245,7 +245,7 @@ pub async fn grade_and_persist(
     .bind(documented(&result, ComponentKey::Plan))
     .bind(documented(&result, ComponentKey::Escalation))
     .bind(documented(&result, ComponentKey::Communication))
-    .bind(chrono::Utc::now())
+    .bind(jiff_sqlx::Timestamp::from(jiff::Timestamp::now()))
     .bind(id)
     .fetch_one(&mut *txn)
     .await?;

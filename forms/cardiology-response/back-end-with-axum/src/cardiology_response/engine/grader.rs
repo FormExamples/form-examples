@@ -57,7 +57,7 @@ pub fn calculate_grade(response: &CardiologyResponse) -> GradingResult {
         recommendation,
         fired_rules,
         flags,
-        graded_at: chrono::Utc::now().to_rfc3339(),
+        graded_at: jiff::Timestamp::now().to_string(),
     }
 }
 

@@ -41,9 +41,9 @@ pub fn whole_days_between(a: &str, b: &str) -> Option<i64> {
     if a.trim().is_empty() || b.trim().is_empty() {
         return None;
     }
-    let da = chrono::NaiveDate::parse_from_str(a.trim(), "%Y-%m-%d").ok()?;
-    let db = chrono::NaiveDate::parse_from_str(b.trim(), "%Y-%m-%d").ok()?;
-    Some((db - da).num_days())
+    let da: jiff::civil::Date = a.trim().parse().ok()?;
+    let db: jiff::civil::Date = b.trim().parse().ok()?;
+    Some(i64::from(da.until(db).ok()?.get_days()))
 }
 
 // ──────────────────────────────────────────────

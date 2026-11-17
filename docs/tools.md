@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-114 tools.
+115 tools.
 
 - [`bin/axum-axa-0-10`](#axum-axa-0-10)
 - [`bin/axum-axa-0-11`](#axum-axa-0-11)
@@ -16,6 +16,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/axum-axa-adopt`](#axum-axa-adopt)
 - [`bin/axum-axa-upgrade`](#axum-axa-upgrade)
 - [`bin/axum-check-constraints`](#axum-check-constraints)
+- [`bin/axum-chrono-to-jiff`](#axum-chrono-to-jiff)
 - [`bin/axum-cursor-pagination`](#axum-cursor-pagination)
 - [`bin/axum-entity-routes`](#axum-entity-routes)
 - [`bin/axum-fixture-checks`](#axum-fixture-checks)
@@ -508,6 +509,35 @@ Usage:
   bin/axum-check-constraints --all              # every form's Axum crate
   bin/axum-check-constraints --root DIR --all   # a copy of the repo at DIR
   bin/axum-check-constraints --check --all      # CI drift check (non-zero on drift)
+```
+
+<h2 id="axum-chrono-to-jiff"><code>bin/axum-chrono-to-jiff</code></h2>
+
+```text
+bin/axum-chrono-to-jiff — move every Axum crate from chrono to jiff.
+
+sqlx 0.9 has no jiff feature, so rows decode through `jiff-sqlx`, BurntSushi's wrapper
+types with sqlx Postgres codecs and serde. In each `back-end-with-axum/`:
+
+  Cargo.toml     drop the sqlx `chrono` feature and the chrono dependency; add
+                 jiff 0.2 (serde) and jiff-sqlx 0.2.2 (postgres, serde)
+  src/*/support/prelude.rs
+                 Date, Time and DateTimeWithTimeZone become jiff_sqlx::Date, ::Time and
+                 ::Timestamp; the chrono re-export goes
+  other sources  the few direct chrono uses (`Utc::now()`, ISO date parsing, test
+                 fixtures) are rewritten onto jiff; none are left
+  Cargo.lock     `cargo metadata`, so only the lock moves; unless --no-lock
+
+JSON note: a timestamp now serializes with a `Z` suffix (`2026-11-17T09:00:00Z`) instead
+of chrono's `+00:00`; both are RFC 3339 and `date-time` in OpenAPI. Chrono remains in each
+lockfile as a transitive dependency of axa (croner) and axum-test; nothing here names it.
+
+A crate already moved is skipped, so the tool can be rerun. A crate with chrono in a shape
+the rewrites do not know stops the run before anything is written.
+
+Usage:
+  bin/axum-chrono-to-jiff [--no-lock] [--root DIR] --all|<slug>...
+  bin/axum-chrono-to-jiff --check --all|<slug>...    # CI drift check
 ```
 
 <h2 id="axum-cursor-pagination"><code>bin/axum-cursor-pagination</code></h2>

@@ -1,0 +1,184 @@
+#!/usr/bin/env python3
+"""bin/axum-chrono-to-jiff — move every Axum crate from chrono to jiff.
+
+sqlx 0.9 has no jiff feature, so rows decode through `jiff-sqlx`, BurntSushi's wrapper
+types with sqlx Postgres codecs and serde. In each `back-end-with-axum/`:
+
+  Cargo.toml     drop the sqlx `chrono` feature and the chrono dependency; add
+                 jiff 0.2 (serde) and jiff-sqlx 0.2.2 (postgres, serde)
+  src/*/support/prelude.rs
+                 Date, Time and DateTimeWithTimeZone become jiff_sqlx::Date, ::Time and
+                 ::Timestamp; the chrono re-export goes
+  other sources  the few direct chrono uses (`Utc::now()`, ISO date parsing, test
+                 fixtures) are rewritten onto jiff; none are left
+  Cargo.lock     `cargo metadata`, so only the lock moves; unless --no-lock
+
+JSON note: a timestamp now serializes with a `Z` suffix (`2026-11-17T09:00:00Z`) instead
+of chrono's `+00:00`; both are RFC 3339 and `date-time` in OpenAPI. Chrono remains in each
+lockfile as a transitive dependency of axa (croner) and axum-test; nothing here names it.
+
+A crate already moved is skipped, so the tool can be rerun. A crate with chrono in a shape
+the rewrites do not know stops the run before anything is written.
+
+Usage:
+  bin/axum-chrono-to-jiff [--no-lock] [--root DIR] --all|<slug>...
+  bin/axum-chrono-to-jiff --check --all|<slug>...    # CI drift check
+"""
+
+from __future__ import annotations
+
+import argparse
+import glob
+import os
+import re
+import subprocess
+import sys
+
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CHRONO_DEP = 'chrono = { version = "0.4", features = ["serde"] }\n'
+JIFF_DEPS = 'jiff = { version = "0.2", features = ["serde"] }\njiff-sqlx = { version = "0.2.2", features = ["postgres", "serde"] }\n'
+PRELUDE_USE = "pub use chrono::{DateTime as ChronoDateTime, FixedOffset, NaiveDate, NaiveTime};\n"
+PRELUDE_TYPES = (
+    "/// A date.\npub type Date = NaiveDate;\n"
+    "/// A time of day.\npub type Time = NaiveTime;\n"
+    "/// A timestamp with its time zone offset.\npub type DateTimeWithTimeZone = ChronoDateTime<FixedOffset>;"
+)
+JIFF_TYPES = (
+    "/// A date.\npub type Date = jiff_sqlx::Date;\n"
+    "/// A time of day.\npub type Time = jiff_sqlx::Time;\n"
+    "/// A timestamp, an instant on the UTC timeline.\npub type DateTimeWithTimeZone = jiff_sqlx::Timestamp;"
+)
+NOW = "jiff_sqlx::Timestamp::from(jiff::Timestamp::now())"
+# (pattern, replacement) for direct chrono uses in sources and tests.
+REWRITES = [
+    (re.compile(r"^use chrono::Utc;\n", re.M), ""),
+    (re.compile(r"chrono::Utc::now\(\)\.to_rfc3339\(\)|Utc::now\(\)\.to_rfc3339\(\)"), "jiff::Timestamp::now().to_string()"),
+    (re.compile(r"(?:chrono::)?Utc::now\(\)"), NOW),
+    (re.compile(r'let da = chrono::NaiveDate::parse_from_str\(a\.trim\(\), "%Y-%m-%d"\)\.ok\(\)\?;\n'
+                r'    let db = chrono::NaiveDate::parse_from_str\(b\.trim\(\), "%Y-%m-%d"\)\.ok\(\)\?;\n'
+                r'    Some\(\(db - da\)\.num_days\(\)\)'),
+     "let da: jiff::civil::Date = a.trim().parse().ok()?;\n"
+     "    let db: jiff::civil::Date = b.trim().parse().ok()?;\n"
+     "    Some(i64::from(da.until(db).ok()?.get_days()))"),
+    (re.compile(r'chrono::NaiveDate::parse_from_str\((\w+), "%Y-%m-%d"\)\.ok\(\)'),
+     r"\1.parse::<jiff::civil::Date>().ok().map(Date::from)"),
+    (re.compile(r'chrono::DateTime::parse_from_rfc3339\(("[^"]*")\)\.unwrap\(\)'),
+     r'jiff_sqlx::Timestamp::from(\1.parse::<jiff::Timestamp>().unwrap())'),
+    (re.compile(r"chrono::NaiveDate\b(?!::)"), "jiff_sqlx::Date"),
+    (re.compile(r"        chrono::DateTime::parse_from_rfc3339\(s\)\n"
+                r"            \.map\(\|d\| d\.naive_utc\(\)\)\n"
+                r'            \.or_else\(\|_\| chrono::NaiveDateTime::parse_from_str\(s, "%Y-%m-%dT%H:%M"\)\)\n'
+                r'            \.or_else\(\|_\| chrono::NaiveDateTime::parse_from_str\(s, "%Y-%m-%dT%H:%M:%S"\)\)\n'
+                r"            \.ok\(\)"),
+     "        s.parse::<jiff::Timestamp>()\n"
+     "            .map(|t| t.to_zoned(jiff::tz::TimeZone::UTC).datetime())\n"
+     "            .or_else(|_| s.parse::<jiff::civil::DateTime>())\n"
+     "            .ok()"),
+    (re.compile(r"Some\(\(n - a\)\.num_days\(\)\)"), "Some(i64::from(a.until(n).ok()?.get_days()))"),
+    (re.compile(r"chrono::NaiveDate::from_ymd_opt\((\d+), (\d+), (\d+)\)\.unwrap\(\)"),
+     r"jiff_sqlx::Date::from(jiff::civil::date(\1, \2, \3))"),
+    (re.compile(r'format!\((" on \{\}"), d\.to_rfc3339\(\)\)'), r"format!(\1, d.to_jiff())"),
+    # jiff-sqlx wrappers have no Display or to_rfc3339; unwrap to the jiff value first.
+    (re.compile(r"\.map\(\|d\| d\.to_string\(\)\)"), ".map(|d| d.to_jiff().to_string())"),
+    (re.compile(r"\.to_rfc3339\(\)"), ".to_jiff().to_string()"),
+    (re.compile(r"\bbirth_date\.to_string\(\)"), "birth_date.to_jiff().to_string()"),
+    (re.compile(r"\bnow\.date_naive\(\)"),
+     "jiff_sqlx::Date::from(now.to_jiff().to_zoned(jiff::tz::TimeZone::UTC).date())"),
+    (re.compile(r'writeln!\(md, "- \*\*Date:\*\* \{d\}"\)'), 'writeln!(md, "- **Date:** {}", d.to_jiff())'),
+]
+
+
+def sources(crate: str) -> list[str]:
+    return sorted(glob.glob(f"{crate}/src/**/*.rs", recursive=True) + glob.glob(f"{crate}/tests/**/*.rs", recursive=True)
+                  + glob.glob(f"{crate}/build.rs"))
+
+
+def rewrite_manifest(text: str) -> str | None:
+    if CHRONO_DEP not in text:
+        return text if JIFF_DEPS in text and "chrono" not in text else None
+    if text.count('features = ["chrono", ') != 1:
+        return None
+    return text.replace('features = ["chrono", ', "features = [").replace(CHRONO_DEP, JIFF_DEPS)
+
+
+def rewrite_source(path: str, text: str) -> str:
+    if path.endswith("/support/prelude.rs"):
+        text = text.replace(PRELUDE_USE, "").replace(PRELUDE_TYPES, JIFF_TYPES)
+    for pattern, replacement in REWRITES:
+        text = pattern.sub(replacement, text)
+    return text
+
+
+def locked(crate: str) -> bool:
+    return re.search(r'^name = "jiff-sqlx"\n', open(f"{crate}/Cargo.lock").read(), re.M) is not None
+
+
+def drift(crate: str) -> str | None:
+    if JIFF_DEPS not in open(f"{crate}/Cargo.toml").read() or "chrono" in open(f"{crate}/Cargo.toml").read():
+        return "Cargo.toml still names chrono, or lacks jiff and jiff-sqlx"
+    for path in sources(crate):
+        if "chrono" in (text := open(path).read()) or re.search(r"\bUtc\b|NaiveDate|NaiveTime|FixedOffset", text):
+            return f"{os.path.relpath(path, crate)} still uses chrono"
+    if not locked(crate):
+        return "Cargo.lock has no jiff-sqlx"
+    return None
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    parser.add_argument("slugs", nargs="*")
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--no-lock", action="store_true")
+    parser.add_argument("--root", default=f"{REPO}/forms")
+    args = parser.parse_args()
+    if args.all:
+        crates = sorted(os.path.dirname(c) for c in glob.glob(f"{args.root}/*/back-end-with-axum/Cargo.toml"))
+    elif args.slugs:
+        crates = [f"{args.root}/{slug}/back-end-with-axum" for slug in args.slugs]
+    else:
+        parser.error("name forms, or pass --all")
+    if args.check:
+        bad = [(c, why) for c in crates if (why := drift(c))]
+        for crate, why in bad:
+            print(f"{crate.split('/')[-2]}: {why}")
+        print(f"{len(crates) - len(bad)}/{len(crates)} crates on jiff")
+        return 1 if bad else 0
+    plan: dict[str, str] = {}
+    odd = []
+    for crate in crates:
+        manifest = rewrite_manifest(open(f"{crate}/Cargo.toml").read())
+        if manifest is None:
+            odd.append(crate)
+            continue
+        plan[f"{crate}/Cargo.toml"] = manifest
+        for path in sources(crate):
+            plan[path] = rewrite_source(path, open(path).read())
+    # Whatever chrono is left after the rewrites is a shape we do not know.
+    for path, text in plan.items():
+        if not path.endswith("Cargo.toml") and (re.search(r"chrono|\bUtc\b|NaiveDate|NaiveTime|FixedOffset", text)):
+            odd.append(path)
+    if odd:
+        for item in odd:
+            print(f"stopped, nothing written: {item}: chrono in a shape not handled", file=sys.stderr)
+        return 1
+    moved = 0
+    for path, text in plan.items():
+        if text != open(path).read():
+            open(path, "w").write(text)
+            moved += 1
+    failed = []
+    if not args.no_lock:
+        for crate in crates:
+            if locked(crate):
+                continue
+            result = subprocess.run(["cargo", "metadata", "--format-version", "1", "-q"], cwd=crate, capture_output=True, text=True)
+            if result.returncode or not locked(crate):
+                failed.append(crate)
+                print(f"{crate.split('/')[-2]}: cargo metadata failed: {result.stderr.strip()[-300:]}", file=sys.stderr)
+    print(f"{moved} files changed, {len(failed)} lock failures")
+    return 1 if failed else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

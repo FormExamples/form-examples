@@ -3,7 +3,6 @@
 //! Ported from `front-end-with-svelte/src/lib/engine/grader.ts`. Pure: no side
 //! effects, no network calls, no I/O.
 
-use chrono::Utc;
 
 use super::completeness_rules::grade_completeness;
 use super::eligibility_rules::grade_eligibility;
@@ -58,7 +57,7 @@ pub fn calculate_grade(request: &NeurodiversityAdjustmentRequest) -> GradingResu
         recommendation_label,
         fired_rules,
         flags,
-        graded_at: Utc::now().to_rfc3339(),
+        graded_at: jiff::Timestamp::now().to_string(),
     }
 }
 

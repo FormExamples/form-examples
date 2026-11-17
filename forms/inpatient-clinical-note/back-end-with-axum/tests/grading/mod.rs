@@ -62,7 +62,7 @@ async fn seed_people(db: &PgPool) -> (Uuid, Uuid, Uuid) {
         "INSERT INTO patients (name, birth_date, sex) VALUES ($1, $2, $3) RETURNING *",
     )
     .bind("Test Patient".to_owned())
-    .bind(chrono::NaiveDate::from_ymd_opt(1948, 3, 12).unwrap())
+    .bind(jiff_sqlx::Date::from(jiff::civil::date(1948, 3, 12)))
     .bind("female".to_owned())
     .fetch_one(db)
     .await
@@ -94,10 +94,10 @@ async fn seed_complete_note(db: &PgPool) -> Uuid {
     )
     .bind("progress".to_owned())
     .bind(Some(
-        chrono::DateTime::parse_from_rfc3339("2026-07-31T09:00:00Z").unwrap(),
+        jiff_sqlx::Timestamp::from("2026-07-31T09:00:00Z".parse::<jiff::Timestamp>().unwrap()),
     ))
     .bind(Some(
-        chrono::DateTime::parse_from_rfc3339("2026-07-29T14:00:00Z").unwrap(),
+        jiff_sqlx::Timestamp::from("2026-07-29T14:00:00Z".parse::<jiff::Timestamp>().unwrap()),
     ))
     .bind("Dr A. Okafor".to_owned())
     .bind("ST4".to_owned())
@@ -277,7 +277,7 @@ async fn soft_deleted_children_are_excluded_from_grading() {
     // Soft-delete it; the projection must stop seeing it.
     sqlx::query("UPDATE inpatient_clinical_note_investigations SET deleted_at = $2 WHERE id = $1")
         .bind(investigation.id)
-        .bind(Some(chrono::Utc::now()))
+        .bind(Some(jiff_sqlx::Timestamp::from(jiff::Timestamp::now())))
         .execute(db)
         .await
         .expect("soft-delete");

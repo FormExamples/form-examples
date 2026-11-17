@@ -7,7 +7,6 @@
 
 use crate::support::prelude::*;
 use axum::debug_handler;
-use chrono::Utc;
 use serde::Deserialize;
 use serde_json::{Value, json};
 use uuid::Uuid;
@@ -55,7 +54,7 @@ async fn ensure_patient(ctx: &AppContext, id: Option<Uuid>) -> Result<Uuid> {
     if let Some(id) = id {
         return Ok(id);
     }
-    let now = Utc::now();
+    let now = jiff_sqlx::Timestamp::from(jiff::Timestamp::now());
     Ok(sqlx::query_as::<_, patients::Model>(
         "INSERT INTO patients (created_at, updated_at, name, birth_date) VALUES ($1, $2, \
         $3, $4) RETURNING *",
@@ -63,7 +62,7 @@ async fn ensure_patient(ctx: &AppContext, id: Option<Uuid>) -> Result<Uuid> {
     .bind(now)
     .bind(now)
     .bind(String::new())
-    .bind(now.date_naive())
+    .bind(jiff_sqlx::Date::from(now.to_jiff().to_zoned(jiff::tz::TimeZone::UTC).date()))
     .fetch_one(&db(ctx))
     .await?
     .id)
@@ -74,7 +73,7 @@ async fn ensure_clinician(ctx: &AppContext, id: Option<Uuid>) -> Result<Uuid> {
     if let Some(id) = id {
         return Ok(id);
     }
-    let now = Utc::now();
+    let now = jiff_sqlx::Timestamp::from(jiff::Timestamp::now());
     Ok(sqlx::query_as::<_, clinicians::Model>(
         "INSERT INTO clinicians (created_at, updated_at, name, role, registration_body, \
         registration_number) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",

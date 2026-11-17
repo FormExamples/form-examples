@@ -27,7 +27,7 @@ Slug: back-end-with-axum
 | [serde](https://serde.rs/) | 1.x | Serialization with `rename_all = "camelCase"` |
 | [uuid](https://crates.io/crates/uuid) | 1.x | UUIDv4 primary keys |
 | [tokio](https://tokio.rs/) | 1.x | Async runtime |
-| [chrono](https://crates.io/crates/chrono) | 0.4 | Timestamps with serde support |
+| [jiff](https://crates.io/crates/jiff) + [jiff-sqlx](https://crates.io/crates/jiff-sqlx) | 0.2 | Dates, times and timestamps; `jiff-sqlx` wraps them for sqlx Postgres and serde, since sqlx has no jiff feature. `Date`, `Time` and `DateTimeWithTimeZone` in `support/prelude.rs` alias the wrappers; call `.to_jiff()` to format or compute |
 | [validator](https://crates.io/crates/validator) | 0.20 | Model validation |
 
 ## Crate layout
@@ -261,6 +261,7 @@ Every crate's `Cargo.lock` is committed, because each is a binary crate. See
 - `bin/axum-axa-0-13 [--check] [--no-lock] [--root <dir>] [--all|<slug>…]` — move from axa 0.12 to 0.13: the axa and axa-test 0.4 lines, and `cargo update -p axa -p axa-test` (run with `CARGO_RESOLVER_INCOMPATIBLE_PUBLISH_AGE=allow`, since 0.13.0 was under the 3-day minimum publish age until 2026-11-17). No source change was needed
 - `bin/axum-axa-0-14 [--check] [--no-lock] [--root <dir>] [--all|<slug>…]` — move from axa 0.13 to 0.14: the axa and axa-test 0.5 lines, and `cargo update -p axa -p axa-test` (with `CARGO_RESOLVER_INCOMPATIBLE_PUBLISH_AGE=allow`, since 0.14.0 was hours old and under the minimum publish age). No source change was needed
 - `bin/axum-axa-0-16 [--check] [--no-lock] [--root <dir>] [--all|<slug>…]` — move from axa 0.14 to 0.16 (0.15 skipped): axa-test 0.7, the `Command::Health` arm in each `app.rs` (`run` answers `axa::cli::health` before connecting, and the later `match` lists it beside `Check`), and `cargo update -p axa -p axa-test` (with `CARGO_RESOLVER_INCOMPATIBLE_PUBLISH_AGE=allow`, since both were hours old). Run `service health [--ready]` in an image with no `curl`; see axa's help/upgrading-to-0.16
+- `bin/axum-chrono-to-jiff [--check] [--no-lock] [--all|<slug>…]` — move every crate from chrono to jiff: `jiff` and `jiff-sqlx` in `Cargo.toml` (and no sqlx `chrono` feature), the `support/prelude.rs` aliases, the few direct chrono uses, then `cargo metadata` for the lock. Timestamps serialize with a `Z` suffix rather than `+00:00`. `--check` is the CI drift detector
 - `bin/axum-cursor-pagination [--check] [--root <dir>] [--all|<slug>…]` — page every generated list by signed cursor instead of offset: `cursor_key` and `cursor_page` in `support/`, lists read the URI, models drop their `COUNT(*)`, tests follow `Link`; `--check` also names a hand-written list still paging by offset
 - `bin/axum-check-constraints [--check] [--root <dir>] [--all|<slug>…]` — migrate every `sql/` CHECK constraint the crate's tables can hold, `NOT VALID`, and write the `build.rs` that rebuilds when `migrations/` changes. Run after changing `sql/`, then run `bin/axum-fixture-checks`
 - `bin/axum-fixture-checks [--check] [--all|<slug>…]` — put an allowed value wherever a fixture or a test's literal `INSERT` breaks a CHECK constraint; needs Postgres
