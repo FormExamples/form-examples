@@ -150,6 +150,28 @@ Where the time actually goes, and the choices behind it:
   `cargo check` over a Axum crate dominates any repository-side cost by orders
   of magnitude, which is why `sccache` is documented in the developer setup.
 
+## Benchmark tools, and the first engine run
+
+Two tools make the numbers above reproducible instead of one-off:
+
+- `bin/benchmark-gates [--runs N] [--markdown]` times the cheap fleet-wide gates
+  (min, median, max over several runs after a warm-up) and prints a table ready to
+  paste here. `--max-total SECONDS` turns it into a regression guard.
+- `bin/benchmark-engines [--budget MS] [--tsv] [--max-us N]` times every scoring
+  engine's grader over its `examples/personas.json` states, in microseconds per grade.
+
+**First engine run** (357 engines, Node v26, Apple M4 Max): median **31 µs** per
+grade, 95th percentile 256 µs, slowest `who-counter-referral-form` at 4.7 ms. So
+the engines really are microsecond-scale arithmetic, with a small tail of forms
+(waiting-list cards, triage and operation notes) worth a look if one ever shows
+up in a profile. **Caveat:** that run shared the machine with other builds (load
+average in the hundreds), so every figure is an upper bound on the engine's cost;
+rerun on an idle machine before quoting it. A later attempt to refresh the gate
+table under the same load was abandoned rather than published, for the same
+reason, so the gate table above still shows its August measurements. Gate counts
+have since grown (the personas, engine and uniformity gates each take tens of
+seconds now), so the "ten seconds for twenty gates" figure above is **stale**.
+
 ## Not measured, and honestly so
 
 No claim is made about any of the following, because none of it has been
@@ -158,9 +180,6 @@ measured:
 - **API throughput or latency.** No load test exists against any Axum crate. The
   back ends are example implementations; nobody has profiled one under
   concurrency.
-- **Scoring-engine microbenchmarks.** The engines are deterministic arithmetic
-  over a few dozen fields, so the expected cost is microseconds, but "expected"
-  is not "measured" and this section will not pretend otherwise.
 - **Database performance.** Index choices are conventional; no query plan in
   this repository has been examined under a realistic row count.
 - **Lighthouse, Core Web Vitals, or real-device rendering.** Accessibility is

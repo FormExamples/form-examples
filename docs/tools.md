@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-109 tools.
+113 tools.
 
 - [`bin/axum-axa-0-10`](#axum-axa-0-10)
 - [`bin/axum-axa-0-11`](#axum-axa-0-11)
@@ -23,6 +23,8 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/axum-msrv-set`](#axum-msrv-set)
 - [`bin/axum-soft-delete`](#axum-soft-delete)
 - [`bin/axum-sql-columns`](#axum-sql-columns)
+- [`bin/benchmark-engines`](#benchmark-engines)
+- [`bin/benchmark-gates`](#benchmark-gates)
 - [`bin/browser-color-scheme-refactor`](#browser-color-scheme-refactor)
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
@@ -63,6 +65,8 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/lily-sync`](#lily-sync)
 - [`bin/make-github-pages`](#make-github-pages)
 - [`bin/migrate-sql-filenames.py`](#migrate-sql-filenamespy)
+- [`bin/mutation-test-axum`](#mutation-test-axum)
+- [`bin/mutation-test-engines`](#mutation-test-engines)
 - [`bin/node-current-version-set`](#node-current-version-set)
 - [`bin/normalize`](#normalize)
 - [`bin/oxford-spelling-sweep`](#oxford-spelling-sweep)
@@ -717,6 +721,29 @@ reported for a person to decide.
 
 --check lists every `sql/` column a crate's table lacks, and exits 1 if there
 is one.
+```
+
+<h2 id="benchmark-engines"><code>bin/benchmark-engines</code></h2>
+
+_No header documentation._
+
+<h2 id="benchmark-gates"><code>bin/benchmark-gates</code></h2>
+
+```text
+bin/benchmark-gates — time the cheap, fleet-wide drift gates, several runs each.
+
+BENCHMARKS.md claims the whole cheap set runs in about ten seconds. This measures it:
+each gate is run --runs times (default 5, after one untimed warm-up), and the table
+reports min, median and max wall-clock seconds plus the exit status. Run it on an
+otherwise idle machine; numbers are only comparable on the same machine.
+
+Gates that need a database, a browser or a Rust toolchain are not included (see
+BENCHMARKS.md, "Gates not timed here").
+
+Usage:
+  bin/benchmark-gates [--runs N] [--markdown] [--max-total SECONDS]
+--markdown prints a table ready to paste into BENCHMARKS.md. --max-total makes the
+tool exit 1 if the sum of the medians exceeds SECONDS (a regression guard).
 ```
 
 <h2 id="browser-color-scheme-refactor"><code>bin/browser-color-scheme-refactor</code></h2>
@@ -1836,6 +1863,66 @@ Actions per form:
   delete `04_main.sql` and continue with the normal rename pass.
 
 Idempotent. Safe to re-run.
+```
+
+<h2 id="mutation-test-axum"><code>bin/mutation-test-axum</code></h2>
+
+```text
+bin/mutation-test-axum — mutation-test one or more Axum crates with cargo-mutants.
+
+ Runs `cargo mutants` over forms/<slug>/back-end-with-axum/ with the shared
+ configuration in etc/cargo-mutants.toml. A mutant the crate's tests do not
+ fail ("missed") marks logic no test pins. Needs the scratch Postgres the crate
+ tests need (DB_URL set; see AGENTS/back-end-with-axum.md), and `cargo install
+ cargo-mutants`. Slow: minutes to hours per crate, so this is a maintainer or
+ nightly tool, never a per-push gate.
+
+ Usage: bin/mutation-test-axum [--list] <slug>...
+   --list   print the mutants without running any tests
+ Output: forms/<slug>/back-end-with-axum/mutants.out/ (gitignored); the missed
+ mutants are in missed.txt.
+ Exit status: cargo-mutants' (0 all caught, 2 some missed, 3 timeouts, 4 baseline failed).
+```
+
+<h2 id="mutation-test-engines"><code>bin/mutation-test-engines</code></h2>
+
+```text
+bin/mutation-test-engines — mutation-test each HTML front-end's scoring engine against its personas.
+
+`bin/test-personas` is the regression oracle for a scoring engine: a few realistic
+filled states and the exact grade each must produce. This tool measures how good that
+oracle is. It makes one small change at a time to the engine source (a mutant), runs
+`bin/test-personas <slug>`, and expects it to fail. A mutant that still passes
+*survived*: the personas do not pin that behaviour, so a real bug there would go
+unnoticed.
+
+Mutation operators (applied outside strings, template literals and comments):
+  ===  <->  !==        ==  <->  !=
+  >=   ->   >          <=  ->   <          >  ->  >=        <  ->  <=
+  &&   <->  ||
+  +    <->  -          (binary use only, spaced)
+  true <->  false
+  integer literal N -> N+1                   (not a digit run inside a name or decimal)
+
+Files mutated, per form, in front-end-with-html/js/: every module except the UI,
+export/import and vendored-helper ones (NOT_ENGINE), so grader.js, rules.js, flags.js,
+oet-grader.js, flagged-issues.js and the like. Each file is restored from memory afterwards, even on Ctrl-C.
+
+A mutant is *killed* if test-personas fails, errors or times out. Some survivors are
+equivalent mutants (no observable change), so 100% is not the goal; the survivors
+list is the work: each is either a missing persona or dead code.
+
+Usage:
+  bin/mutation-test-engines [--jobs N] [--survivors] [--min PERCENT] [--limit N] --all|<slug>...
+  bin/mutation-test-engines --update-baseline --all     # record each form's score in etc/mutation-baseline.tsv
+  bin/mutation-test-engines --check-baseline [--all|<slug>...]  # ratchet: fail if a form scores lower than recorded
+  bin/mutation-test-engines --list-operators
+
+The baseline is a ratchet: scores may rise (re-record them) but not fall, so a change
+that weakens the personas, or adds engine logic they do not cover, is caught. A form
+absent from the baseline is not checked. A 1-point tolerance absorbs a mutant-count shift.
+
+Exit status: 1 if a form with personas scores under --min (default 0: report only).
 ```
 
 <h2 id="node-current-version-set"><code>bin/node-current-version-set</code></h2>

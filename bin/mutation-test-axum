@@ -1,0 +1,30 @@
+#!/bin/sh
+# bin/mutation-test-axum — mutation-test one or more Axum crates with cargo-mutants.
+#
+# Runs `cargo mutants` over forms/<slug>/back-end-with-axum/ with the shared
+# configuration in etc/cargo-mutants.toml. A mutant the crate's tests do not
+# fail ("missed") marks logic no test pins. Needs the scratch Postgres the crate
+# tests need (DB_URL set; see AGENTS/back-end-with-axum.md), and `cargo install
+# cargo-mutants`. Slow: minutes to hours per crate, so this is a maintainer or
+# nightly tool, never a per-push gate.
+#
+# Usage: bin/mutation-test-axum [--list] <slug>...
+#   --list   print the mutants without running any tests
+# Output: forms/<slug>/back-end-with-axum/mutants.out/ (gitignored); the missed
+# mutants are in missed.txt.
+# Exit status: cargo-mutants' (0 all caught, 2 some missed, 3 timeouts, 4 baseline failed).
+
+set -eu
+root=$(cd "$(dirname "$0")/.." && pwd)
+list=""
+if [ "${1:-}" = "--list" ]; then list="--list"; shift; fi
+[ $# -gt 0 ] || { sed -n '2,17p' "$0" | sed 's/^# \{0,1\}//'; exit 2; }
+command -v cargo-mutants >/dev/null || { echo "install cargo-mutants: cargo install cargo-mutants" >&2; exit 2; }
+status=0
+for slug in "$@"; do
+  crate="$root/forms/$slug/back-end-with-axum"
+  [ -d "$crate" ] || { echo "no such crate: $slug" >&2; exit 2; }
+  echo "== $slug"
+  ( cd "$crate" && RUSTC_WRAPPER= cargo mutants --config "$root/etc/cargo-mutants.toml" $list ) || status=$?
+done
+exit $status
