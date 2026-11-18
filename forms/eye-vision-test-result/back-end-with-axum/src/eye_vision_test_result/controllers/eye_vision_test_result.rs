@@ -5,8 +5,9 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::eye_vision_test_results::Model;
+use crate::support::validation::{plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
@@ -14,12 +15,16 @@ pub struct Params {
     pub originating_request_reference: String,
     pub report_status: String,
     pub test_type: String,
+    #[validate(custom(function = "plausible_date"))]
     pub performed_date: Option<Date>,
+    #[validate(custom(function = "plausible_date"))]
     pub reported_date: Option<Date>,
     pub clinical_history: String,
     pub visual_acuity_right: String,
     pub visual_acuity_left: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub intraocular_pressure_right_mmhg: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub intraocular_pressure_left_mmhg: Option<f64>,
     pub visual_field_result: String,
     pub reduced_visual_acuity: bool,
@@ -151,6 +156,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -161,6 +167,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

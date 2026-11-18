@@ -5,34 +5,43 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::assessments::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub status: String,
     pub full_name: String,
+    #[validate(length(max = TEXT_MAX))]
     pub address: String,
     pub postcode: String,
+    #[validate(custom(function = "plausible_date"))]
     pub date_of_birth: Option<Date>,
     pub nhs_number: String,
     pub gp_name: String,
     pub gp_practice: String,
+    #[validate(length(max = TEXT_MAX))]
     pub gp_address: String,
     pub gp_phone: String,
     pub has_mental_capacity: String,
     pub understands_consequences: String,
     pub made_voluntarily: String,
+    #[validate(custom(function = "plausible_date"))]
     pub capacity_assessment_date: Option<Date>,
     pub capacity_assessor_name: String,
     pub capacity_assessor_role: String,
+    #[validate(length(max = TEXT_MAX))]
     pub capacity_notes: String,
+    #[validate(length(max = TEXT_MAX))]
     pub circumstances_description: String,
+    #[validate(length(max = TEXT_MAX))]
     pub specific_conditions: String,
     pub applies_if_terminally_ill: String,
     pub applies_if_permanently_unconscious: String,
     pub applies_if_severely_brain_damaged: String,
     pub applies_if_advanced_dementia: String,
+    #[validate(length(max = TEXT_MAX))]
     pub other_circumstances: String,
     pub refuses_cardiopulmonary_resuscitation: String,
     pub refuses_mechanical_ventilation: String,
@@ -41,56 +50,82 @@ pub struct Params {
     pub refuses_antibiotics: String,
     pub refuses_blood_transfusion: String,
     pub refuses_dialysis: String,
+    #[validate(length(max = TEXT_MAX))]
     pub other_treatments_refused: String,
+    #[validate(length(max = TEXT_MAX))]
     pub treatment_refusal_details: String,
     pub includes_life_sustaining_treatment: String,
     pub understands_may_result_in_death: String,
+    #[validate(length(max = TEXT_MAX))]
     pub life_sustaining_treatments_specified: String,
     pub is_written_and_signed: String,
     pub is_witnessed: String,
+    #[validate(length(max = TEXT_MAX))]
     pub witness_confirmation: String,
     pub has_exceptions: String,
+    #[validate(length(max = TEXT_MAX))]
     pub exception_details: String,
+    #[validate(length(max = TEXT_MAX))]
     pub pain_management_wishes: String,
+    #[validate(length(max = TEXT_MAX))]
     pub comfort_care_wishes: String,
+    #[validate(length(max = TEXT_MAX))]
     pub emergency_exception_details: String,
+    #[validate(length(max = TEXT_MAX))]
     pub condition_specific_exceptions: String,
+    #[validate(length(max = TEXT_MAX))]
     pub preferred_place_of_care: String,
+    #[validate(length(max = TEXT_MAX))]
     pub preferred_place_of_death: String,
+    #[validate(length(max = TEXT_MAX))]
     pub spiritual_or_religious_wishes: String,
     pub organ_donation_wishes: String,
+    #[validate(length(max = TEXT_MAX))]
     pub organ_donation_details: String,
+    #[validate(length(max = TEXT_MAX))]
     pub other_wishes: String,
+    #[validate(length(max = TEXT_MAX))]
     pub people_to_notify: String,
     pub has_health_welfare_lpa: String,
     pub lpa_registered_with_opg: String,
+    #[validate(custom(function = "plausible_date"))]
     pub lpa_registration_date: Option<Date>,
     pub attorney_name: String,
+    #[validate(length(max = TEXT_MAX))]
     pub attorney_address: String,
     pub attorney_phone: String,
     pub replacement_attorney_name: String,
+    #[validate(length(max = TEXT_MAX))]
     pub lpa_authority_scope: String,
     pub lpa_conflicts_with_adrt: String,
+    #[validate(length(max = TEXT_MAX))]
     pub lpa_conflict_details: String,
     pub reviewed_by_healthcare_professional: String,
     pub reviewer_name: String,
     pub reviewer_role: String,
     pub reviewer_registration_number: String,
+    #[validate(custom(function = "plausible_date"))]
     pub review_date: Option<Date>,
     pub reviewer_confirms_capacity: String,
     pub reviewer_confirms_informed: String,
+    #[validate(length(max = TEXT_MAX))]
     pub clinical_notes: String,
+    #[validate(length(max = TEXT_MAX))]
     pub concerns_raised: String,
     pub reviewer_signature_obtained: String,
     pub maker_signature_obtained: String,
+    #[validate(custom(function = "plausible_date"))]
     pub maker_signature_date: Option<Date>,
     pub witness_name: String,
+    #[validate(length(max = TEXT_MAX))]
     pub witness_address: String,
     pub witness_signature_obtained: String,
+    #[validate(custom(function = "plausible_date"))]
     pub witness_signature_date: Option<Date>,
     pub second_witness_name: String,
     pub second_witness_signature_obtained: String,
     pub declaration_statement_agreed: String,
+    #[validate(length(max = TEXT_MAX))]
     pub legal_notes: String,
 }
 
@@ -367,6 +402,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -377,6 +413,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

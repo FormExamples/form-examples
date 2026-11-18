@@ -5,8 +5,9 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::lpa_validity_fired_rules::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub lpa_validity_id: Uuid,
@@ -14,7 +15,9 @@ pub struct Params {
     pub severity: String,
     pub rule_family: String,
     pub source_citation: String,
+    #[validate(length(max = TEXT_MAX))]
     pub description: String,
+    #[validate(length(max = TEXT_MAX))]
     pub suggested_correction: String,
 }
 
@@ -75,6 +78,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -85,6 +89,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

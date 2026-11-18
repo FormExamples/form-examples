@@ -5,26 +5,43 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::arc42_documentations::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub architecture_id: Uuid,
+    #[validate(length(max = TEXT_MAX))]
     pub author_name: String,
+    #[validate(length(max = TEXT_MAX))]
     pub author_role: String,
+    #[validate(custom(function = "plausible_date"))]
     pub document_date: Option<Date>,
+    #[validate(length(max = TEXT_MAX))]
     pub introduction: String,
+    #[validate(length(max = TEXT_MAX))]
     pub business_context_description: String,
+    #[validate(length(max = TEXT_MAX))]
     pub technical_context_description: String,
+    #[validate(length(max = TEXT_MAX))]
     pub solution_strategy_summary: String,
+    #[validate(length(max = TEXT_MAX))]
     pub top_level_decomposition_summary: String,
+    #[validate(length(max = TEXT_MAX))]
     pub building_block_overview: String,
+    #[validate(length(max = TEXT_MAX))]
     pub runtime_overview: String,
+    #[validate(length(max = TEXT_MAX))]
     pub deployment_overview: String,
+    #[validate(length(max = TEXT_MAX))]
     pub crosscutting_overview: String,
+    #[validate(length(max = TEXT_MAX))]
     pub quality_tree_summary: String,
+    #[validate(length(max = TEXT_MAX))]
     pub recommendation: String,
+    #[validate(length(max = TEXT_MAX))]
     pub additional_notes: String,
+    #[validate(length(max = TEXT_MAX))]
     pub signed_by: String,
     pub signed_at: Option<DateTimeWithTimeZone>,
 }
@@ -117,6 +134,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -127,6 +145,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

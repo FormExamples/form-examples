@@ -5,37 +5,59 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::blood_test_results::Model;
+use crate::support::validation::{plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
     pub report_status: String,
+    #[validate(custom(function = "plausible_date"))]
     pub performed_date: Option<Date>,
+    #[validate(custom(function = "plausible_date"))]
     pub reported_date: Option<Date>,
     pub specimen_type: String,
     pub specimen_condition: String,
     pub clinical_history: String,
+    #[validate(range(min = -99999.9, max = 99999.9))]
     pub haemoglobin_g_l: Option<f64>,
+    #[validate(range(min = -9999.99, max = 9999.99))]
     pub white_cell_count: Option<f64>,
+    #[validate(range(min = -999999.0, max = 999999.0))]
     pub platelets: Option<f64>,
+    #[validate(range(min = -9999.99, max = 9999.99))]
     pub neutrophils: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub sodium_mmol_l: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub potassium_mmol_l: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub urea_mmol_l: Option<f64>,
+    #[validate(range(min = -999999.0, max = 999999.0))]
     pub creatinine_umol_l: Option<f64>,
+    #[validate(range(min = -99999.0, max = 99999.0))]
     pub egfr: Option<f64>,
+    #[validate(range(min = -999999.0, max = 999999.0))]
     pub alt_u_l: Option<f64>,
+    #[validate(range(min = -999999.0, max = 999999.0))]
     pub alkaline_phosphatase: Option<f64>,
+    #[validate(range(min = -999999.0, max = 999999.0))]
     pub bilirubin_umol_l: Option<f64>,
+    #[validate(range(min = -9999.0, max = 9999.0))]
     pub albumin_g_l: Option<f64>,
+    #[validate(range(min = -99999.9, max = 99999.9))]
     pub c_reactive_protein: Option<f64>,
+    #[validate(range(min = -99999.0, max = 99999.0))]
     pub hba1c_mmol_mol: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub glucose_mmol_l: Option<f64>,
+    #[validate(range(min = -99999.99, max = 99999.99))]
     pub tsh: Option<f64>,
+    #[validate(range(min = -9999999.0, max = 9999999.0))]
     pub ferritin: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub inr: Option<f64>,
     pub overall_result_status: String,
     pub abnormal_results_present: bool,
@@ -191,6 +213,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -201,6 +224,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

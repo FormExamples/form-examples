@@ -5,14 +5,16 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::pre_operative_assessment_by_clinicians::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub status: String,
     pub site_name: String,
+    #[validate(custom(function = "plausible_date"))]
     pub assessment_date: Option<Date>,
     pub assessment_time: Option<String>,
     pub planned_procedure: String,
@@ -23,20 +25,28 @@ pub struct Params {
     pub anticipated_blood_loss_ml: Option<i32>,
     pub anticipated_duration_minutes: Option<i32>,
     pub consultant_surgeon: String,
+    #[validate(custom(function = "plausible_date"))]
     pub planned_date: Option<Date>,
     pub systolic_bp: Option<i32>,
     pub diastolic_bp: Option<i32>,
     pub heart_rate: Option<i32>,
     pub respiratory_rate: Option<i32>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub spo2_percent: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub temperature_celsius: Option<f64>,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub capillary_refill_seconds: Option<f64>,
     pub pain_score_0_10: Option<i32>,
     pub on_room_air: String,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub supplemental_oxygen_litres: Option<f64>,
     pub mallampati_class: String,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub thyromental_distance_cm: Option<f64>,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub mouth_opening_cm: Option<f64>,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub inter_incisor_gap_cm: Option<f64>,
     pub neck_rom: String,
     pub cervical_spine_stability: String,
@@ -52,6 +62,7 @@ pub struct Params {
     pub stopbang_age_gt50: String,
     pub stopbang_neck_gt40: String,
     pub stopbang_male: String,
+    #[validate(length(max = TEXT_MAX))]
     pub airway_notes: String,
     pub heart_rhythm: String,
     pub murmur_present: String,
@@ -64,9 +75,11 @@ pub struct Params {
     pub ecg_rate_bpm: Option<i32>,
     pub ecg_axis: String,
     pub ecg_ischaemic_changes: String,
+    #[validate(length(max = TEXT_MAX))]
     pub ecg_notes: String,
     pub echo_performed: String,
     pub echo_ef_percent: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub echo_notes: String,
     pub history_ihd: String,
     pub history_chf: String,
@@ -83,11 +96,15 @@ pub struct Params {
     pub asthma: String,
     pub copd: String,
     pub cxr_performed: String,
+    #[validate(length(max = TEXT_MAX))]
     pub cxr_findings: String,
     pub pft_performed: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub pft_fev1_percent_predicted: Option<f64>,
+    #[validate(range(min = -9.99, max = 9.99))]
     pub pft_fev1_fvc_ratio: Option<f64>,
     pub smoking_status: String,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub pack_years: Option<f64>,
     pub covid_history: String,
     pub days_since_covid: Option<i32>,
@@ -100,8 +117,10 @@ pub struct Params {
     pub cognition_score: Option<i32>,
     pub cognitive_impairment: String,
     pub capacity_concern: String,
+    #[validate(length(max = TEXT_MAX))]
     pub cranial_nerves_notes: String,
     pub motor_power: String,
+    #[validate(length(max = TEXT_MAX))]
     pub sensory_notes: String,
     pub reflexes: String,
     pub recent_stroke_tia: String,
@@ -109,8 +128,11 @@ pub struct Params {
     pub seizure_disorder: String,
     pub creatinine_umol_l: Option<i32>,
     pub egfr_ml_min_1_73m2: Option<i32>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub urea_mmol_l: Option<f64>,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub potassium_mmol_l: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub sodium_mmol_l: Option<f64>,
     pub dialysis_status: String,
     pub ckd_stage: String,
@@ -118,39 +140,52 @@ pub struct Params {
     pub alt_u_l: Option<i32>,
     pub ast_u_l: Option<i32>,
     pub alp_u_l: Option<i32>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub albumin_g_l: Option<f64>,
     pub chronic_liver_disease: String,
     pub child_pugh_class: String,
     pub hb_g_l: Option<i32>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub wcc_10_9_l: Option<f64>,
     pub platelets_10_9_l: Option<i32>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub mcv_fl: Option<f64>,
     pub ferritin_ug_l: Option<i32>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub transferrin_saturation_percent: Option<f64>,
+    #[validate(range(min = -99.99, max = 99.99))]
     pub inr: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub aptt_seconds: Option<f64>,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub fibrinogen_g_l: Option<f64>,
     pub on_anticoagulant: String,
     pub anticoagulant_type: String,
     pub anticoagulant_hold_plan: String,
     pub group_and_save: String,
     pub crossmatch_units: Option<i32>,
+    #[validate(custom(function = "plausible_date"))]
     pub last_transfusion_date: Option<Date>,
     pub anaemia_severity: String,
     pub diabetes_type: String,
     pub diabetes_on_insulin: String,
     pub hba1c_mmol_mol: Option<i32>,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub fasting_glucose_mmol_l: Option<f64>,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub random_glucose_mmol_l: Option<f64>,
     pub diabetes_control: String,
     pub diabetes_complications: String,
     pub thyroid_status: String,
+    #[validate(range(min = -9999.99, max = 9999.99))]
     pub tsh_mu_l: Option<f64>,
     pub adrenal_status: String,
     pub on_long_term_steroids: String,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub steroid_dose_mg: Option<f64>,
     pub steroid_cover_plan: String,
     pub abdominal_exam: String,
+    #[validate(length(max = TEXT_MAX))]
     pub abdominal_notes: String,
     pub reflux_symptoms: String,
     pub hiatus_hernia: String,
@@ -162,6 +197,7 @@ pub struct Params {
     pub last_clear_fluid_at: Option<DateTimeWithTimeZone>,
     pub rapid_sequence_induction_needed: String,
     pub spine_exam: String,
+    #[validate(length(max = TEXT_MAX))]
     pub spine_notes: String,
     pub neuraxial_suitable: String,
     pub joint_rom_hip: String,
@@ -197,18 +233,25 @@ pub struct Params {
     pub reaction_severity: String,
     pub reaction_notes: String,
     pub verified: String,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub mets_estimate: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub dasi_score: Option<f64>,
     pub ecog_performance_status: Option<i32>,
     pub clinical_frailty_scale: Option<i32>,
     pub six_minute_walk_metres: Option<i32>,
     pub sts_one_minute_reps: Option<i32>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub tug_seconds: Option<f64>,
     pub cpet_performed: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub cpet_vo2_peak_ml_kg_min: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub cpet_anaerobic_threshold_ml_kg_min: Option<f64>,
+    #[validate(length(max = TEXT_MAX))]
     pub cpet_notes: String,
     pub malnutrition_risk: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub unintentional_weight_loss_kg: Option<f64>,
     pub fried_weakness: String,
     pub fried_slowness: String,
@@ -220,6 +263,7 @@ pub struct Params {
     pub mini_cog_score: Option<i32>,
     pub prehabilitation_indicated: String,
     pub prehabilitation_type: String,
+    #[validate(custom(function = "plausible_date"))]
     pub prehabilitation_start_date: Option<Date>,
     pub protein_supplementation_recommended: String,
     pub technique: String,
@@ -980,6 +1024,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -990,6 +1035,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

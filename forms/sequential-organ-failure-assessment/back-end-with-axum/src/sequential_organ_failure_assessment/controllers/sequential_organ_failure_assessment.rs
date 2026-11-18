@@ -5,8 +5,9 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::sequential_organ_failure_assessments::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
@@ -20,22 +21,32 @@ pub struct Params {
     pub patient_identifier: String,
     pub age_years: Option<i32>,
     pub sex: String,
+    #[validate(length(max = TEXT_MAX))]
     pub admission_diagnosis: String,
     pub suspected_infection: String,
     pub baseline_sofa_total: Option<i32>,
+    #[validate(range(min = -9999.99, max = 9999.99))]
     pub pao2: Option<f64>,
+    #[validate(range(min = -99.99, max = 99.99))]
     pub fio2: Option<f64>,
+    #[validate(range(min = -99999.99, max = 99999.99))]
     pub pao2_fio2_ratio: Option<f64>,
     pub respiratory_support: String,
+    #[validate(range(min = -99999.9, max = 99999.9))]
     pub platelets: Option<f64>,
+    #[validate(range(min = -999999.9, max = 999999.9))]
     pub bilirubin: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub map: Option<f64>,
     pub vasopressor: String,
+    #[validate(range(min = -999.999, max = 999.999))]
     pub vasopressor_dose: Option<f64>,
     pub glasgow_coma_scale: Option<i32>,
     pub sedated: bool,
+    #[validate(range(min = -999999.9, max = 999999.9))]
     pub creatinine: Option<f64>,
     pub urine_output: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub clinical_note: String,
 }
 
@@ -150,6 +161,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -160,6 +172,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

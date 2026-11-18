@@ -5,13 +5,15 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::lpa_registration_applications::Model;
+use crate::support::validation::{unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub lpa_id: Uuid,
     pub applicant_role: String,
     pub applicant_signed_at: Option<DateTimeWithTimeZone>,
+    #[validate(range(min = -9999.99, max = 9999.99))]
     pub fee_amount_pounds: f64,
     pub fee_remission: String,
     pub fee_remission_reason: String,
@@ -79,6 +81,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -89,6 +92,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

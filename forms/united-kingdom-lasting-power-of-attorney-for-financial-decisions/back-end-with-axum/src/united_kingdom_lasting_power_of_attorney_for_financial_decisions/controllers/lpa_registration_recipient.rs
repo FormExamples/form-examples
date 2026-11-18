@@ -7,18 +7,21 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::lpa_registration_recipients::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Lpa id.
     pub lpa_id: Uuid,
     /// Recipient kind.
+    #[validate(length(max = TEXT_MAX))]
     pub recipient_kind: String,
     /// Recipient person id.
     pub recipient_person_id: Option<Uuid>,
     /// Company name.
+    #[validate(length(max = TEXT_MAX))]
     pub company_name: String,
     /// Prefers post.
     pub prefers_post: bool,
@@ -29,20 +32,28 @@ pub struct Params {
     /// Prefers welsh.
     pub prefers_welsh: bool,
     /// Contact phone.
+    #[validate(length(max = TEXT_MAX))]
     pub contact_phone: String,
     /// Contact email.
+    #[validate(length(max = TEXT_MAX))]
     pub contact_email: String,
     /// Other first names.
+    #[validate(length(max = TEXT_MAX))]
     pub other_first_names: String,
     /// Other last name.
+    #[validate(length(max = TEXT_MAX))]
     pub other_last_name: String,
     /// Other address line 1.
+    #[validate(length(max = TEXT_MAX))]
     pub other_address_line_1: String,
     /// Other address line 2.
+    #[validate(length(max = TEXT_MAX))]
     pub other_address_line_2: String,
     /// Other address line 3.
+    #[validate(length(max = TEXT_MAX))]
     pub other_address_line_3: String,
     /// Other postcode.
+    #[validate(length(max = TEXT_MAX))]
     pub other_postcode: String,
 }
 
@@ -129,6 +140,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -140,6 +152,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

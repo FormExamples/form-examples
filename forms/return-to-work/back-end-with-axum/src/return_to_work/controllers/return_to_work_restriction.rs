@@ -5,8 +5,9 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::return_to_work_restrictions::Model;
+use crate::support::validation::{plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub return_to_work_id: Uuid,
@@ -14,7 +15,9 @@ pub struct Params {
     pub severity: String,
     pub quantitative_limit: String,
     pub notes: String,
+    #[validate(custom(function = "plausible_date"))]
     pub start_date: Option<Date>,
+    #[validate(custom(function = "plausible_date"))]
     pub end_date: Option<Date>,
     pub priority_rank: i32,
 }
@@ -78,6 +81,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -88,6 +92,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

@@ -5,14 +5,16 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::prescription_substitution_options::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub prescription_request_id: Uuid,
     pub allow_brand_substitution: String,
     pub allow_generic_substitution: String,
     pub allow_dosage_adjustment: String,
+    #[validate(length(max = TEXT_MAX))]
     pub substitution_notes: String,
 }
 
@@ -70,6 +72,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -80,6 +83,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

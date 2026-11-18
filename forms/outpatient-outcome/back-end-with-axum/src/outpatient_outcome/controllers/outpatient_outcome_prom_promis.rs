@@ -5,8 +5,9 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::outpatient_outcome_prom_promis::Model;
+use crate::support::validation::{unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub outpatient_outcome_id: Uuid,
@@ -31,8 +32,10 @@ pub struct Params {
     #[serde(default)]
     pub item10_everyday_activities: Option<i32>,
     #[serde(default)]
+    #[validate(range(min = -999.99, max = 999.99))]
     pub global_physical_health_t_score: Option<f64>,
     #[serde(default)]
+    #[validate(range(min = -999.99, max = 999.99))]
     pub global_mental_health_t_score: Option<f64>,
 }
 
@@ -112,6 +115,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -122,6 +126,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

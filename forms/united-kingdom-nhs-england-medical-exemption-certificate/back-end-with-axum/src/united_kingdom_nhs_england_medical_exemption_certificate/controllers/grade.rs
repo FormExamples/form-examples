@@ -7,26 +7,34 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::grades::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Application id.
     pub application_id: Uuid,
     /// Outcome.
+    #[validate(length(max = TEXT_MAX))]
     pub outcome: String,
     /// Redirect to.
+    #[validate(length(max = TEXT_MAX))]
     pub redirect_to: String,
     /// Result category.
+    #[validate(length(max = TEXT_MAX))]
     pub result_category: String,
     /// Result score.
+    #[validate(range(min = -999.99, max = 999.99))]
     pub result_score: Option<f64>,
     /// Result notes.
+    #[validate(length(max = TEXT_MAX))]
     pub result_notes: String,
     /// Valid from.
+    #[validate(custom(function = "plausible_date"))]
     pub valid_from: Option<Date>,
     /// Valid until.
+    #[validate(custom(function = "plausible_date"))]
     pub valid_until: Option<Date>,
     /// Validity years.
     pub validity_years: i32,
@@ -99,6 +107,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -110,6 +119,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

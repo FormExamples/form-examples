@@ -7,20 +7,25 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::lpa_preferences_and_instructions::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Lpa id.
     pub lpa_id: Uuid,
     /// Preferences overflow text.
+    #[validate(length(max = TEXT_MAX))]
     pub preferences_overflow_text: String,
     /// Instructions overflow text.
+    #[validate(length(max = TEXT_MAX))]
     pub instructions_overflow_text: String,
     /// Decisions jointly overflow text.
+    #[validate(length(max = TEXT_MAX))]
     pub decisions_jointly_overflow_text: String,
     /// Replacement step in overflow text.
+    #[validate(length(max = TEXT_MAX))]
     pub replacement_step_in_overflow_text: String,
 }
 
@@ -80,6 +85,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -91,6 +97,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

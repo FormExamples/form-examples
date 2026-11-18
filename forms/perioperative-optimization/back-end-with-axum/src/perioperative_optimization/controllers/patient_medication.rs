@@ -5,25 +5,36 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::patient_medications::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub medication_id: Uuid,
+    #[validate(length(max = TEXT_MAX))]
     pub dose: String,
+    #[validate(length(max = TEXT_MAX))]
     pub frequency: String,
+    #[validate(length(max = TEXT_MAX))]
     pub route: String,
+    #[validate(length(max = TEXT_MAX))]
     pub indication: String,
+    #[validate(custom(function = "plausible_date"))]
     pub started_on: Option<Date>,
+    #[validate(length(max = TEXT_MAX))]
     pub prescribed_by: String,
+    #[validate(length(max = TEXT_MAX))]
     pub adherence: String,
     pub hold_required: bool,
     pub hold_start_before_days: Option<i32>,
     pub restart_after_days: Option<i32>,
     pub hold_plan_agreed: bool,
+    #[validate(length(max = TEXT_MAX))]
     pub hold_plan_agreed_by: String,
+    #[validate(custom(function = "plausible_date"))]
     pub hold_plan_agreed_on: Option<Date>,
+    #[validate(length(max = TEXT_MAX))]
     pub notes: String,
 }
 
@@ -106,6 +117,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -116,6 +128,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

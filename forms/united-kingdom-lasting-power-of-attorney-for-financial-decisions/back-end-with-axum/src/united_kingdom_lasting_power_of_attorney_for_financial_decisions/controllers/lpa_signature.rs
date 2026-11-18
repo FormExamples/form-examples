@@ -7,9 +7,10 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::lpa_signatures::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Lpa id.
@@ -17,14 +18,18 @@ pub struct Params {
     /// Signatory person id.
     pub signatory_person_id: Uuid,
     /// Role.
+    #[validate(length(max = TEXT_MAX))]
     pub role: String,
     /// Lp1f section.
     pub lp1f_section: i32,
     /// Signature blob path.
+    #[validate(length(max = TEXT_MAX))]
     pub signature_blob_path: String,
     /// Signed on.
+    #[validate(custom(function = "plausible_date"))]
     pub signed_on: Option<Date>,
     /// Signed on behalf full name.
+    #[validate(length(max = TEXT_MAX))]
     pub signed_on_behalf_full_name: String,
     /// Is witnessed.
     pub is_witnessed: bool,
@@ -91,6 +96,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -102,6 +108,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

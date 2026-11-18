@@ -6,9 +6,10 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::inpatient_clinical_notes::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
 /// Parameters accepted when creating or updating a inpatient clinical note record.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Status.
@@ -34,22 +35,26 @@ pub struct Params {
     /// Responsible consultant name.
     pub responsible_consultant_name: String,
     /// Consult question.
+    #[validate(length(max = TEXT_MAX))]
     pub consult_question: String,
     /// Consult requesting team.
     pub consult_requesting_team: String,
     /// Procedure performed.
     pub procedure_performed: String,
     /// Procedure detail.
+    #[validate(length(max = TEXT_MAX))]
     pub procedure_detail: String,
     /// Procedure consent.
     pub procedure_consent: String,
     /// Procedure complications.
+    #[validate(length(max = TEXT_MAX))]
     pub procedure_complications: String,
     /// Transfer from ward.
     pub transfer_from_ward: String,
     /// Transfer to ward.
     pub transfer_to_ward: String,
     /// Transfer reason.
+    #[validate(length(max = TEXT_MAX))]
     pub transfer_reason: String,
     /// Admission at.
     pub admission_at: Option<DateTimeWithTimeZone>,
@@ -58,16 +63,21 @@ pub struct Params {
     /// Admission method.
     pub admission_method: String,
     /// Admission reason.
+    #[validate(length(max = TEXT_MAX))]
     pub admission_reason: String,
     /// Interval history.
+    #[validate(length(max = TEXT_MAX))]
     pub interval_history: String,
     /// No interval events.
     pub no_interval_events: String,
     /// Overnight events.
+    #[validate(length(max = TEXT_MAX))]
     pub overnight_events: String,
     /// Patient reported symptoms.
+    #[validate(length(max = TEXT_MAX))]
     pub patient_reported_symptoms: String,
     /// Nursing concerns.
+    #[validate(length(max = TEXT_MAX))]
     pub nursing_concerns: String,
     /// Pain score.
     pub pain_score: Option<i32>,
@@ -76,6 +86,7 @@ pub struct Params {
     /// Oral intake.
     pub oral_intake: String,
     /// Bowels last opened.
+    #[validate(custom(function = "plausible_date"))]
     pub bowels_last_opened: Option<Date>,
     /// Mobility status.
     pub mobility_status: String,
@@ -112,22 +123,31 @@ pub struct Params {
     /// News2 not applicable reason.
     pub news2_not_applicable_reason: String,
     /// Examination general.
+    #[validate(length(max = TEXT_MAX))]
     pub examination_general: String,
     /// Examination cardiovascular.
+    #[validate(length(max = TEXT_MAX))]
     pub examination_cardiovascular: String,
     /// Examination respiratory.
+    #[validate(length(max = TEXT_MAX))]
     pub examination_respiratory: String,
     /// Examination abdominal.
+    #[validate(length(max = TEXT_MAX))]
     pub examination_abdominal: String,
     /// Examination neurological.
+    #[validate(length(max = TEXT_MAX))]
     pub examination_neurological: String,
     /// Examination musculoskeletal.
+    #[validate(length(max = TEXT_MAX))]
     pub examination_musculoskeletal: String,
     /// Examination skin and wounds.
+    #[validate(length(max = TEXT_MAX))]
     pub examination_skin_and_wounds: String,
     /// Examination lines and drains.
+    #[validate(length(max = TEXT_MAX))]
     pub examination_lines_and_drains: String,
     /// Examination other.
+    #[validate(length(max = TEXT_MAX))]
     pub examination_other: String,
     /// No investigations reviewed.
     pub no_investigations_reviewed: String,
@@ -148,10 +168,12 @@ pub struct Params {
     /// Vte assessed at.
     pub vte_assessed_at: Option<DateTimeWithTimeZone>,
     /// Vte notes.
+    #[validate(length(max = TEXT_MAX))]
     pub vte_notes: String,
     /// Falls risk.
     pub falls_risk: String,
     /// Falls interventions.
+    #[validate(length(max = TEXT_MAX))]
     pub falls_interventions: String,
     /// Pressure ulcer risk.
     pub pressure_ulcer_risk: String,
@@ -166,12 +188,14 @@ pub struct Params {
     /// Delirium 4at score.
     pub delirium_4at_score: Option<i32>,
     /// Delirium notes.
+    #[validate(length(max = TEXT_MAX))]
     pub delirium_notes: String,
     /// Nutrition screen.
     pub nutrition_screen: String,
     /// Must score.
     pub must_score: Option<i32>,
     /// Nutrition plan.
+    #[validate(length(max = TEXT_MAX))]
     pub nutrition_plan: String,
     /// Infection status.
     pub infection_status: String,
@@ -180,16 +204,20 @@ pub struct Params {
     /// Organism.
     pub organism: String,
     /// Infection precautions.
+    #[validate(length(max = TEXT_MAX))]
     pub infection_precautions: String,
     /// Safeguarding concern.
     pub safeguarding_concern: String,
     /// Safeguarding notes.
+    #[validate(length(max = TEXT_MAX))]
     pub safeguarding_notes: String,
     /// Safeguarding referral made.
     pub safeguarding_referral_made: String,
     /// Clinical impression.
+    #[validate(length(max = TEXT_MAX))]
     pub clinical_impression: String,
     /// Differential diagnosis.
+    #[validate(length(max = TEXT_MAX))]
     pub differential_diagnosis: String,
     /// Response to treatment.
     pub response_to_treatment: String,
@@ -206,10 +234,12 @@ pub struct Params {
     /// New organ support.
     pub new_organ_support: String,
     /// Plan.
+    #[validate(length(max = TEXT_MAX))]
     pub plan: String,
     /// Escalation status.
     pub escalation_status: String,
     /// Escalation action.
+    #[validate(length(max = TEXT_MAX))]
     pub escalation_action: String,
     /// Ceiling of care.
     pub ceiling_of_care: String,
@@ -224,28 +254,37 @@ pub struct Params {
     /// Senior review at.
     pub senior_review_at: Option<DateTimeWithTimeZone>,
     /// Estimated discharge date.
+    #[validate(custom(function = "plausible_date"))]
     pub estimated_discharge_date: Option<Date>,
     /// Discharge planning notes.
+    #[validate(length(max = TEXT_MAX))]
     pub discharge_planning_notes: String,
     /// Family communication.
+    #[validate(length(max = TEXT_MAX))]
     pub family_communication: String,
     /// Patient communication.
+    #[validate(length(max = TEXT_MAX))]
     pub patient_communication: String,
     /// Team handover.
+    #[validate(length(max = TEXT_MAX))]
     pub team_handover: String,
     /// Consent status.
     pub consent_status: String,
     /// Capacity assessed.
     pub capacity_assessed: String,
     /// Capacity notes.
+    #[validate(length(max = TEXT_MAX))]
     pub capacity_notes: String,
     /// Author override acuity.
     pub author_override_acuity: String,
     /// Author override reason.
+    #[validate(length(max = TEXT_MAX))]
     pub author_override_reason: String,
     /// Attestation text.
+    #[validate(length(max = TEXT_MAX))]
     pub attestation_text: String,
     /// Electronic signature.
+    #[validate(length(max = TEXT_MAX))]
     pub electronic_signature: String,
     /// Signed at.
     pub signed_at: Option<DateTimeWithTimeZone>,
@@ -632,6 +671,7 @@ pub async fn list(
 /// Create a new inpatient clinical note record.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -643,6 +683,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

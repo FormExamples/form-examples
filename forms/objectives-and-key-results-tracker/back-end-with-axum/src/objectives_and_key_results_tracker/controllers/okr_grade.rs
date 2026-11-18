@@ -7,14 +7,16 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::okr_grades::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Okr objective id.
     pub okr_objective_id: Uuid,
     /// Score by progress percent.
+    #[validate(range(min = -999.99, max = 999.99))]
     pub score_by_progress_percent: Option<f64>,
     /// Score by confidence decile.
     pub score_by_confidence_decile: Option<i32>,
@@ -27,18 +29,25 @@ pub struct Params {
     /// Score by smart quality.
     pub score_by_smart_quality: Option<i32>,
     /// Score by pace deviation percent.
+    #[validate(range(min = -999.99, max = 999.99))]
     pub score_by_pace_deviation_percent: Option<f64>,
     /// Computed composite rag.
+    #[validate(length(max = TEXT_MAX))]
     pub computed_composite_rag: String,
     /// Final composite rag.
+    #[validate(length(max = TEXT_MAX))]
     pub final_composite_rag: String,
     /// Override reason.
+    #[validate(length(max = TEXT_MAX))]
     pub override_reason: String,
     /// Recommendation.
+    #[validate(length(max = TEXT_MAX))]
     pub recommendation: String,
     /// Triage notes.
+    #[validate(length(max = TEXT_MAX))]
     pub triage_notes: String,
     /// Signed by.
+    #[validate(length(max = TEXT_MAX))]
     pub signed_by: String,
     /// Signed at.
     pub signed_at: Option<DateTimeWithTimeZone>,
@@ -131,6 +140,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -142,6 +152,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

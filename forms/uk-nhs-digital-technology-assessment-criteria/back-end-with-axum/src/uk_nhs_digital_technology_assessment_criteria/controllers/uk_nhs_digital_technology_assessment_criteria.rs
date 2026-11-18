@@ -7,9 +7,10 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::uk_nhs_digital_technology_assessment_criteria::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Supplier ID.
@@ -21,8 +22,10 @@ pub struct Params {
     /// Status.
     pub status: String,
     /// Assessment date.
+    #[validate(custom(function = "plausible_date"))]
     pub assessment_date: Option<Date>,
     /// Review due date.
+    #[validate(custom(function = "plausible_date"))]
     pub review_due_date: Option<Date>,
     /// Dtac version.
     pub dtac_version: String,
@@ -37,6 +40,7 @@ pub struct Params {
     /// A4 incident contact published.
     pub a4_incident_contact_published: String,
     /// Section a notes.
+    #[validate(length(max = TEXT_MAX))]
     pub section_a_notes: String,
     /// B1 intended use and users defined.
     pub b1_intended_use_and_users_defined: String,
@@ -47,6 +51,7 @@ pub struct Params {
     /// B4 cost effectiveness evidence.
     pub b4_cost_effectiveness_evidence: String,
     /// Section b notes.
+    #[validate(length(max = TEXT_MAX))]
     pub section_b_notes: String,
     /// C1 clinical safety officer named.
     pub c1_clinical_safety_officer_named: String,
@@ -63,6 +68,7 @@ pub struct Params {
     /// C7 post market surveillance.
     pub c7_post_market_surveillance: String,
     /// Section c notes.
+    #[validate(length(max = TEXT_MAX))]
     pub section_c_notes: String,
     /// D1 data protection officer or lead.
     pub d1_data_protection_officer_or_lead: String,
@@ -83,6 +89,7 @@ pub struct Params {
     /// D9 data subject rights supported.
     pub d9_data_subject_rights_supported: String,
     /// Section d notes.
+    #[validate(length(max = TEXT_MAX))]
     pub section_d_notes: String,
     /// E1 cyber essentials plus or iso27001.
     pub e1_cyber_essentials_plus_or_iso27001: String,
@@ -103,6 +110,7 @@ pub struct Params {
     /// E9 incident response and breach notification.
     pub e9_incident_response_and_breach_notification: String,
     /// Section e notes.
+    #[validate(length(max = TEXT_MAX))]
     pub section_e_notes: String,
     /// F1 open standards apis.
     pub f1_open_standards_apis: String,
@@ -119,6 +127,7 @@ pub struct Params {
     /// F7 data portability export.
     pub f7_data_portability_export: String,
     /// Section f notes.
+    #[validate(length(max = TEXT_MAX))]
     pub section_f_notes: String,
     /// G1 user research with target users.
     pub g1_user_research_with_target_users: String,
@@ -135,8 +144,10 @@ pub struct Params {
     /// G7 user feedback mechanism.
     pub g7_user_feedback_mechanism: String,
     /// Section g notes.
+    #[validate(length(max = TEXT_MAX))]
     pub section_g_notes: String,
     /// Assessor notes.
+    #[validate(length(max = TEXT_MAX))]
     pub assessor_notes: String,
 }
 
@@ -378,6 +389,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -389,6 +401,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

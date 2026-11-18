@@ -5,39 +5,57 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::medical_certificate_of_cause_of_deaths::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
+    #[validate(length(max = TEXT_MAX))]
     pub certifying_doctor_name: String,
     pub certifying_doctor_grade: String,
     pub gmc_reference: String,
+    #[validate(length(max = TEXT_MAX))]
     pub place_of_certification: String,
+    #[validate(custom(function = "plausible_date"))]
     pub certification_date: Option<Date>,
     pub attended_deceased: String,
+    #[validate(custom(function = "plausible_date"))]
     pub last_seen_alive_date: Option<Date>,
+    #[validate(length(max = TEXT_MAX))]
     pub deceased_name: String,
     pub sex: String,
+    #[validate(custom(function = "plausible_date"))]
     pub date_of_birth: Option<Date>,
     pub age_years: Option<i32>,
     pub patient_identifier: String,
+    #[validate(custom(function = "plausible_date"))]
     pub date_of_death: Option<Date>,
     pub time_of_death: Option<String>,
+    #[validate(length(max = TEXT_MAX))]
     pub place_of_death: String,
     pub seen_after_death_by: String,
+    #[validate(length(max = TEXT_MAX))]
     pub cause_ia_condition: String,
+    #[validate(length(max = TEXT_MAX))]
     pub cause_ia_interval: String,
+    #[validate(length(max = TEXT_MAX))]
     pub cause_ib_condition: String,
+    #[validate(length(max = TEXT_MAX))]
     pub cause_ib_interval: String,
+    #[validate(length(max = TEXT_MAX))]
     pub cause_ic_condition: String,
+    #[validate(length(max = TEXT_MAX))]
     pub cause_ic_interval: String,
+    #[validate(length(max = TEXT_MAX))]
     pub part_ii_conditions: String,
+    #[validate(length(max = TEXT_MAX))]
     pub part_ii_interval: String,
     pub referred_to_coroner: String,
     pub coroner_reason: String,
     pub medical_examiner_status: String,
+    #[validate(length(max = TEXT_MAX))]
     pub certifier_note: String,
 }
 
@@ -160,6 +178,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -170,6 +189,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

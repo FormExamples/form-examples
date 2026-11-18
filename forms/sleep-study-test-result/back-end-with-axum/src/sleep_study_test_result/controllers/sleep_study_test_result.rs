@@ -5,25 +5,34 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::sleep_study_test_results::Model;
+use crate::support::validation::{plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
     pub report_status: String,
+    #[validate(custom(function = "plausible_date"))]
     pub performed_date: Option<Date>,
+    #[validate(custom(function = "plausible_date"))]
     pub reported_date: Option<Date>,
     pub study_type: String,
     pub study_adequacy: String,
     pub clinical_history: String,
     pub comparison_with_previous: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub total_recording_time_hours: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub total_sleep_time_hours: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub apnoea_hypopnoea_index: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub oxygen_desaturation_index: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub minimum_spo2_percent: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub time_below_90_percent_spo2: Option<f64>,
     pub mean_heart_rate_bpm: Option<i32>,
     pub osa_severity: String,
@@ -162,6 +171,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -172,6 +182,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

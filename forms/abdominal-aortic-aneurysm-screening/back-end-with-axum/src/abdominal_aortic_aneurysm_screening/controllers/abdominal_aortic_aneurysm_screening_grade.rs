@@ -5,14 +5,17 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::abdominal_aortic_aneurysm_screening_grades::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub abdominal_aortic_aneurysm_screening_id: Uuid,
     pub category: String,
     pub surveillance_band: String,
+    #[validate(length(max = TEXT_MAX))]
     pub recommended_action: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub growth_cm: Option<f64>,
     pub graded_at: DateTimeWithTimeZone,
 }
@@ -73,6 +76,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -83,6 +87,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

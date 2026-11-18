@@ -6,9 +6,10 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::medical_operation_note_team_members::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
 /// Parameters accepted when creating or updating a medical operation note team member record.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Team role.
@@ -18,6 +19,7 @@ pub struct Params {
     /// Left at.
     pub left_at: Option<DateTimeWithTimeZone>,
     /// Notes.
+    #[validate(length(max = TEXT_MAX))]
     pub notes: String,
     /// Medical operation note ID.
     pub medical_operation_note_id: Uuid,
@@ -81,6 +83,7 @@ pub async fn list(
 /// Create a new medical operation note team member record.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -92,6 +95,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

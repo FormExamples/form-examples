@@ -7,9 +7,10 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::application_eligible_conditions::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Application id.
@@ -17,40 +18,49 @@ pub struct Params {
     /// Eligible condition id.
     pub eligible_condition_id: Uuid,
     /// Diagnosis date.
+    #[validate(custom(function = "plausible_date"))]
     pub diagnosis_date: Option<Date>,
     /// Snomed ct code.
     pub snomed_ct_code: String,
     /// Icd10 code.
     pub icd10_code: String,
     /// Treatment detail.
+    #[validate(length(max = TEXT_MAX))]
     pub treatment_detail: String,
     /// Fistula site.
+    #[validate(length(max = TEXT_MAX))]
     pub fistula_site: String,
     /// Appliance type.
+    #[validate(length(max = TEXT_MAX))]
     pub appliance_type: String,
     /// Substitution therapy.
     pub substitution_therapy: String,
     /// On substitution therapy.
     pub on_substitution_therapy: String,
     /// Diabetes treatment mode.
+    #[validate(length(max = TEXT_MAX))]
     pub diabetes_treatment_mode: String,
     /// Anticonvulsant.
+    #[validate(length(max = TEXT_MAX))]
     pub anticonvulsant: String,
     /// Continuous anticonvulsant therapy.
     pub continuous_anticonvulsant_therapy: String,
     /// Cannot leave home unaided.
     pub cannot_leave_home_unaided: String,
     /// Disability carer detail.
+    #[validate(length(max = TEXT_MAX))]
     pub disability_carer_detail: String,
     /// Disability expected to be permanent.
     pub disability_expected_to_be_permanent: String,
     /// Cancer site.
     pub cancer_site: String,
     /// Cancer treatment phase.
+    #[validate(length(max = TEXT_MAX))]
     pub cancer_treatment_phase: String,
     /// Histology confirmed.
     pub histology_confirmed: String,
     /// Practitioner attestation notes.
+    #[validate(length(max = TEXT_MAX))]
     pub practitioner_attestation_notes: String,
 }
 
@@ -151,6 +161,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -162,6 +173,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

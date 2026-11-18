@@ -5,8 +5,9 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::padua_venous_thromboembolism_risk_assessments::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
@@ -15,8 +16,10 @@ pub struct Params {
     pub clinician_role: String,
     pub assessed_at: Option<DateTimeWithTimeZone>,
     pub care_setting: String,
+    #[validate(length(max = TEXT_MAX))]
     pub admission_reason: String,
     pub patient_identifier: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub age_years: Option<f64>,
     pub sex: String,
     pub active_cancer: String,
@@ -27,10 +30,12 @@ pub struct Params {
     pub heart_or_respiratory_failure: String,
     pub acute_mi_or_ischaemic_stroke: String,
     pub acute_infection_or_rheumatological: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub body_mass_index: Option<f64>,
     pub ongoing_hormonal_treatment: String,
     pub active_bleeding: String,
     pub high_bleeding_risk: String,
+    #[validate(length(max = TEXT_MAX))]
     pub clinical_note: String,
 }
 
@@ -135,6 +140,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -145,6 +151,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

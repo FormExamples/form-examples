@@ -5,8 +5,9 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::bhutani_bilirubin_nomograms::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
@@ -18,8 +19,11 @@ pub struct Params {
     pub infant_identifier: String,
     pub sex: String,
     pub born_at: Option<DateTimeWithTimeZone>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub gestational_age_weeks: Option<f64>,
+    #[validate(range(min = -99999.9, max = 99999.9))]
     pub age_hours: Option<f64>,
+    #[validate(range(min = -99999.9, max = 99999.9))]
     pub total_serum_bilirubin_umol_l: Option<f64>,
     pub measurement_method: String,
     pub preterm_under_38: String,
@@ -28,6 +32,7 @@ pub struct Params {
     pub bruising: String,
     pub blood_group_incompatibility: String,
     pub early_onset_under_24h: String,
+    #[validate(length(max = TEXT_MAX))]
     pub clinical_note: String,
 }
 
@@ -122,6 +127,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -132,6 +138,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

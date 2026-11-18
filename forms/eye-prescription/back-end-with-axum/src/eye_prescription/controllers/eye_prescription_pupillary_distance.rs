@@ -7,28 +7,37 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::eye_prescription_pupillary_distances::Model;
+use crate::support::validation::{unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Eye prescription id.
     pub eye_prescription_id: Uuid,
     /// Distance total mm.
+    #[validate(range(min = -999.9, max = 999.9))]
     pub distance_total_mm: Option<f64>,
     /// Distance right mm.
+    #[validate(range(min = -999.9, max = 999.9))]
     pub distance_right_mm: Option<f64>,
     /// Distance left mm.
+    #[validate(range(min = -999.9, max = 999.9))]
     pub distance_left_mm: Option<f64>,
     /// Near total mm.
+    #[validate(range(min = -999.9, max = 999.9))]
     pub near_total_mm: Option<f64>,
     /// Near right mm.
+    #[validate(range(min = -999.9, max = 999.9))]
     pub near_right_mm: Option<f64>,
     /// Near left mm.
+    #[validate(range(min = -999.9, max = 999.9))]
     pub near_left_mm: Option<f64>,
     /// Segment height right mm.
+    #[validate(range(min = -999.9, max = 999.9))]
     pub segment_height_right_mm: Option<f64>,
     /// Segment height left mm.
+    #[validate(range(min = -999.9, max = 999.9))]
     pub segment_height_left_mm: Option<f64>,
 }
 
@@ -98,6 +107,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -109,6 +119,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

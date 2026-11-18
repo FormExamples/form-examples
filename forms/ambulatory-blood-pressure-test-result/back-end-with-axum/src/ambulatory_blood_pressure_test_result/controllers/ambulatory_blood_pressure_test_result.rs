@@ -5,8 +5,9 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::ambulatory_blood_pressure_test_results::Model;
+use crate::support::validation::{plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
@@ -14,17 +15,27 @@ pub struct Params {
     pub originating_request_reference: String,
     pub monitoring_type: String,
     pub report_status: String,
+    #[validate(custom(function = "plausible_date"))]
     pub performed_date: Option<Date>,
+    #[validate(custom(function = "plausible_date"))]
     pub reported_date: Option<Date>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub valid_readings_percent: Option<f64>,
     pub recording_adequate: bool,
     pub clinical_history: String,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub daytime_average_systolic: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub daytime_average_diastolic: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub nighttime_average_systolic: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub nighttime_average_diastolic: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub twenty_four_hour_average_systolic: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub twenty_four_hour_average_diastolic: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub nocturnal_dip_percent: Option<f64>,
     pub dipper_status: String,
     pub hypertension_confirmed: bool,
@@ -168,6 +179,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -178,6 +190,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

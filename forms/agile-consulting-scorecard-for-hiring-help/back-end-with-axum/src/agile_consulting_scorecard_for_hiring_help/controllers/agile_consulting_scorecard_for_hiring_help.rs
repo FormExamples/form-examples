@@ -5,47 +5,65 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::agile_consulting_scorecard_for_hiring_helps::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub organization_id: Uuid,
     pub respondent_id: Uuid,
     pub status: String,
+    #[validate(custom(function = "plausible_date"))]
     pub assessment_date: Date,
     pub submitted_at: Option<DateTimeWithTimeZone>,
     pub finalized_at: Option<DateTimeWithTimeZone>,
     pub m1_done: Option<bool>,
+    #[validate(length(max = TEXT_MAX))]
     pub m1_evidence: String,
     pub m2_done: Option<bool>,
+    #[validate(length(max = TEXT_MAX))]
     pub m2_evidence: String,
     pub m3_done: Option<bool>,
+    #[validate(length(max = TEXT_MAX))]
     pub m3_evidence: String,
     pub m4_done: Option<bool>,
+    #[validate(length(max = TEXT_MAX))]
     pub m4_evidence: String,
     pub p1_done: Option<bool>,
+    #[validate(length(max = TEXT_MAX))]
     pub p1_evidence: String,
     pub p2_done: Option<bool>,
+    #[validate(length(max = TEXT_MAX))]
     pub p2_evidence: String,
     pub p3_done: Option<bool>,
+    #[validate(length(max = TEXT_MAX))]
     pub p3_evidence: String,
     pub p4_done: Option<bool>,
+    #[validate(length(max = TEXT_MAX))]
     pub p4_evidence: String,
     pub p5_done: Option<bool>,
+    #[validate(length(max = TEXT_MAX))]
     pub p5_evidence: String,
     pub p6_done: Option<bool>,
+    #[validate(length(max = TEXT_MAX))]
     pub p6_evidence: String,
     pub p7_done: Option<bool>,
+    #[validate(length(max = TEXT_MAX))]
     pub p7_evidence: String,
     pub p8_done: Option<bool>,
+    #[validate(length(max = TEXT_MAX))]
     pub p8_evidence: String,
     pub p9_done: Option<bool>,
+    #[validate(length(max = TEXT_MAX))]
     pub p9_evidence: String,
     pub p10_done: Option<bool>,
+    #[validate(length(max = TEXT_MAX))]
     pub p10_evidence: String,
     pub p11_done: Option<bool>,
+    #[validate(length(max = TEXT_MAX))]
     pub p11_evidence: String,
     pub p12_done: Option<bool>,
+    #[validate(length(max = TEXT_MAX))]
     pub p12_evidence: String,
 }
 
@@ -183,6 +201,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -193,6 +212,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

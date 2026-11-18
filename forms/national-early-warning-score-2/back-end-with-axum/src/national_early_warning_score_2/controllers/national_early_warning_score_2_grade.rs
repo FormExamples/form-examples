@@ -5,8 +5,9 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::national_early_warning_score_2_grades::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub national_early_warning_score_2_id: Uuid,
@@ -20,7 +21,9 @@ pub struct Params {
     pub temperature_score: Option<i32>,
     pub any_single_parameter_three: String,
     pub risk_band: String,
+    #[validate(length(max = TEXT_MAX))]
     pub monitoring_frequency: String,
+    #[validate(length(max = TEXT_MAX))]
     pub recommendation: String,
     pub graded_at: DateTimeWithTimeZone,
 }
@@ -102,6 +105,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -112,6 +116,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

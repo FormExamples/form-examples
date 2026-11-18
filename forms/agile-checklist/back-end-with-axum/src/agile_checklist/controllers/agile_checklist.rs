@@ -5,12 +5,14 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::agile_checklists::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub respondent_id: Uuid,
     pub status: String,
+    #[validate(custom(function = "plausible_date"))]
     pub assessment_date: Option<Date>,
     pub assessment_period: String,
     pub t01_problems_to_solve: String,
@@ -70,6 +72,7 @@ pub struct Params {
     pub p16_agile_beyond_origin: String,
     pub p17_one_team: String,
     pub p18_honor_commitments: String,
+    #[validate(length(max = TEXT_MAX))]
     pub overall_notes: String,
 }
 
@@ -289,6 +292,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -299,6 +303,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

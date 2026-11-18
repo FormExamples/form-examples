@@ -5,19 +5,23 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::fluoroscopy_test_results::Model;
+use crate::support::validation::{plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
     pub report_status: String,
+    #[validate(custom(function = "plausible_date"))]
     pub performed_date: Option<Date>,
+    #[validate(custom(function = "plausible_date"))]
     pub reported_date: Option<Date>,
     pub study_type: String,
     pub contrast_used: String,
     pub examination_adequacy: String,
+    #[validate(range(min = -99999.9, max = 99999.9))]
     pub screening_time_minutes: Option<f64>,
     pub clinical_history: String,
     pub comparison_with_previous: String,
@@ -148,6 +152,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -158,6 +163,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

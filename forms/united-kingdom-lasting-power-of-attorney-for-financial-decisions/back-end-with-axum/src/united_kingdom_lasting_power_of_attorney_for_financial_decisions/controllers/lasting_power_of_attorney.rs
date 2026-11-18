@@ -7,28 +7,37 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::lasting_power_of_attorneys::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Decision mode.
+    #[validate(length(max = TEXT_MAX))]
     pub decision_mode: String,
     /// Decision mode mixed text.
+    #[validate(length(max = TEXT_MAX))]
     pub decision_mode_mixed_text: String,
     /// When attorneys can act.
+    #[validate(length(max = TEXT_MAX))]
     pub when_attorneys_can_act: String,
     /// Preferences text.
+    #[validate(length(max = TEXT_MAX))]
     pub preferences_text: String,
     /// Instructions text.
+    #[validate(length(max = TEXT_MAX))]
     pub instructions_text: String,
     /// Legal rights acknowledged.
     pub legal_rights_acknowledged: bool,
     /// Opg reference number.
+    #[validate(length(max = TEXT_MAX))]
     pub opg_reference_number: String,
     /// Opg registration date.
+    #[validate(custom(function = "plausible_date"))]
     pub opg_registration_date: Option<Date>,
     /// Status.
+    #[validate(length(max = TEXT_MAX))]
     pub status: String,
     /// Donor person id.
     pub donor_person_id: Uuid,
@@ -103,6 +112,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -114,6 +124,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

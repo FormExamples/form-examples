@@ -7,9 +7,10 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::international_certificate_of_vaccination_or_prophylaxes::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Status.
@@ -19,6 +20,7 @@ pub struct Params {
     /// Revoked at.
     pub revoked_at: Option<DateTimeWithTimeZone>,
     /// Revocation reason.
+    #[validate(length(max = TEXT_MAX))]
     pub revocation_reason: String,
     /// Certificate serial number.
     pub certificate_serial_number: String,
@@ -31,14 +33,17 @@ pub struct Params {
     /// Tertiary language as bcp 47.
     pub tertiary_language_as_bcp_47: String,
     /// Destination countries as iso 3166 1 alpha 3.
+    #[validate(length(max = TEXT_MAX))]
     pub destination_countries_as_iso_3166_1_alpha_3: String,
     /// Planned arrival date.
+    #[validate(custom(function = "plausible_date"))]
     pub planned_arrival_date: Option<Date>,
     /// Purpose of travel.
     pub purpose_of_travel: String,
     /// Medical waiver.
     pub medical_waiver: String,
     /// Medical waiver reason.
+    #[validate(length(max = TEXT_MAX))]
     pub medical_waiver_reason: String,
     /// Medical waiver signed at.
     pub medical_waiver_signed_at: Option<DateTimeWithTimeZone>,
@@ -49,6 +54,7 @@ pub struct Params {
     /// Declared immunosuppression.
     pub declared_immunosuppression: String,
     /// Electronic signature data url.
+    #[validate(length(max = TEXT_MAX))]
     pub electronic_signature_data_url: String,
     /// Electronic signature signed at.
     pub electronic_signature_signed_at: Option<DateTimeWithTimeZone>,
@@ -57,6 +63,7 @@ pub struct Params {
     /// Validity computed at.
     pub validity_computed_at: Option<DateTimeWithTimeZone>,
     /// Notes.
+    #[validate(length(max = TEXT_MAX))]
     pub notes: String,
     /// Patient id.
     pub patient_id: Uuid,
@@ -186,6 +193,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -197,6 +205,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

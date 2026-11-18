@@ -5,8 +5,9 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::medical_information_form_for_air_travel_grades::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub medical_information_form_for_air_travel_id: Uuid,
@@ -14,7 +15,9 @@ pub struct Params {
     pub final_fitness_band: String,
     pub override_reason: String,
     pub desk_recommendation: String,
+    #[validate(length(max = TEXT_MAX))]
     pub physician_notes: String,
+    #[validate(custom(function = "plausible_date"))]
     pub valid_until: Option<Date>,
     pub signed_at: Option<DateTimeWithTimeZone>,
     pub graded_at: DateTimeWithTimeZone,
@@ -84,6 +87,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -94,6 +98,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

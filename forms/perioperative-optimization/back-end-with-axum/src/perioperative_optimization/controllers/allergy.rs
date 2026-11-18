@@ -5,14 +5,20 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::allergies::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
+    #[validate(length(max = TEXT_MAX))]
     pub scientific_name: String,
+    #[validate(length(max = TEXT_MAX))]
     pub european_union_name: String,
+    #[validate(length(max = TEXT_MAX))]
     pub united_states_name: String,
+    #[validate(length(max = TEXT_MAX))]
     pub cosmetic_name: String,
+    #[validate(length(max = TEXT_MAX))]
     pub kind: String,
     pub is_regulated_food_allergen: bool,
 }
@@ -72,6 +78,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -82,6 +89,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

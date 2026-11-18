@@ -5,8 +5,9 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::soap_notes::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub encountered_at: Option<DateTimeWithTimeZone>,
@@ -14,25 +15,42 @@ pub struct Params {
     pub encounter_type: String,
     pub clinician_role: String,
     pub patient_identifier: String,
+    #[validate(length(max = TEXT_MAX))]
     pub presenting_complaint: String,
+    #[validate(length(max = TEXT_MAX))]
     pub history_of_presenting_complaint: String,
+    #[validate(length(max = TEXT_MAX))]
     pub patient_reported_symptoms: String,
+    #[validate(length(max = TEXT_MAX))]
     pub relevant_history: String,
     pub red_flag_symptoms: String,
+    #[validate(length(max = TEXT_MAX))]
     pub examination_findings: String,
+    #[validate(length(max = TEXT_MAX))]
     pub vital_signs: String,
     pub abnormal_vitals_present: String,
+    #[validate(length(max = TEXT_MAX))]
     pub investigation_results: String,
+    #[validate(length(max = TEXT_MAX))]
     pub primary_diagnosis: String,
+    #[validate(length(max = TEXT_MAX))]
     pub problem_list: String,
+    #[validate(length(max = TEXT_MAX))]
     pub differential: String,
+    #[validate(length(max = TEXT_MAX))]
     pub clinical_impression: String,
+    #[validate(length(max = TEXT_MAX))]
     pub investigations_plan: String,
+    #[validate(length(max = TEXT_MAX))]
     pub treatment_plan: String,
+    #[validate(length(max = TEXT_MAX))]
     pub referrals: String,
+    #[validate(length(max = TEXT_MAX))]
     pub follow_up: String,
+    #[validate(length(max = TEXT_MAX))]
     pub safety_netting: String,
     pub managed_at_home: String,
+    #[validate(length(max = TEXT_MAX))]
     pub clinical_note: String,
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
@@ -147,6 +165,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -157,6 +176,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

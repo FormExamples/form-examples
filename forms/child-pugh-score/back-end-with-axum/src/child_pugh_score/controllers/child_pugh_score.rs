@@ -5,8 +5,9 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::child_pugh_scores::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
@@ -19,12 +20,17 @@ pub struct Params {
     pub patient_identifier: String,
     pub age_band: String,
     pub sex: String,
+    #[validate(range(min = -99999.9, max = 99999.9))]
     pub total_bilirubin_umol_l: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub serum_albumin_g_l: Option<f64>,
+    #[validate(range(min = -99.99, max = 99.99))]
     pub inr: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub prothrombin_time_seconds: Option<f64>,
     pub ascites: String,
     pub hepatic_encephalopathy: String,
+    #[validate(length(max = TEXT_MAX))]
     pub clinical_note: String,
 }
 
@@ -111,6 +117,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -121,6 +128,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

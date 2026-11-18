@@ -6,26 +6,32 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::patients::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
 /// Parameters accepted when creating or updating a patient record.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Name.
     pub name: String,
     /// Birth date.
+    #[validate(custom(function = "plausible_date"))]
     pub birth_date: Date,
     /// Sex.
     pub sex: String,
     /// Email.
+    #[validate(length(max = TEXT_MAX))]
     pub email: Option<String>,
     /// Phone.
+    #[validate(length(max = TEXT_MAX))]
     pub phone: Option<String>,
     /// Postal address as full text.
+    #[validate(length(max = TEXT_MAX))]
     pub postal_address_as_full_text: Option<String>,
     /// Country as iso 3166 1 alpha 2.
     pub country_as_iso_3166_1_alpha_2: Option<String>,
     /// Postcode.
+    #[validate(length(max = TEXT_MAX))]
     pub postcode: Option<String>,
     /// United kingdom nhs number.
     pub united_kingdom_nhs_number: Option<String>,
@@ -38,6 +44,7 @@ pub struct Params {
     /// Body mass index.
     pub body_mass_index: Option<Decimal>,
     /// Allergies summary.
+    #[validate(length(max = TEXT_MAX))]
     pub allergies_summary: String,
 }
 
@@ -118,6 +125,7 @@ pub async fn list(
 /// Create a new patient record.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -129,6 +137,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

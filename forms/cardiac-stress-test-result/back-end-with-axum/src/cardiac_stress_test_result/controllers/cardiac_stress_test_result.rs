@@ -5,23 +5,29 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::cardiac_stress_test_results::Model;
+use crate::support::validation::{plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
     pub report_status: String,
+    #[validate(custom(function = "plausible_date"))]
     pub performed_date: Option<Date>,
+    #[validate(custom(function = "plausible_date"))]
     pub reported_date: Option<Date>,
     pub test_type: String,
     pub protocol: String,
     pub clinical_history: String,
     pub comparison_with_previous: String,
     pub maximum_heart_rate_bpm: Option<i32>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub percent_predicted_heart_rate: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub exercise_duration_minutes: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub mets_achieved: Option<f64>,
     pub peak_blood_pressure: String,
     pub blood_pressure_response: String,
@@ -33,6 +39,7 @@ pub struct Params {
     pub test_negative: bool,
     pub test_inconclusive: bool,
     pub reason_for_termination: String,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub duke_treadmill_score: Option<f64>,
     pub impression: String,
     pub reporting_category: String,
@@ -161,6 +168,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -171,6 +179,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

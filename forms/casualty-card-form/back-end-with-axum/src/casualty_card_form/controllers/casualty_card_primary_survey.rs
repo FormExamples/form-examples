@@ -5,33 +5,53 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::casualty_card_primary_surveys::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub casualty_card_id: Uuid,
+    #[validate(length(max = TEXT_MAX))]
     pub airway_status: String,
+    #[validate(length(max = TEXT_MAX))]
     pub airway_adjuncts: String,
+    #[validate(length(max = TEXT_MAX))]
     pub c_spine_immobilised: String,
+    #[validate(length(max = TEXT_MAX))]
     pub breathing_effort: String,
+    #[validate(length(max = TEXT_MAX))]
     pub chest_movement: String,
+    #[validate(length(max = TEXT_MAX))]
     pub breath_sounds: String,
+    #[validate(length(max = TEXT_MAX))]
     pub trachea_position: String,
+    #[validate(length(max = TEXT_MAX))]
     pub pulse_character: String,
+    #[validate(length(max = TEXT_MAX))]
     pub skin_colour: String,
+    #[validate(length(max = TEXT_MAX))]
     pub skin_temperature: String,
+    #[validate(length(max = TEXT_MAX))]
     pub capillary_refill: String,
+    #[validate(length(max = TEXT_MAX))]
     pub haemorrhage: String,
+    #[validate(length(max = TEXT_MAX))]
     pub iv_access: String,
     pub gcs_eye: Option<i32>,
     pub gcs_verbal: Option<i32>,
     pub gcs_motor: Option<i32>,
     pub gcs_total: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub pupils: String,
+    #[validate(length(max = TEXT_MAX))]
     pub blood_glucose_disability: String,
+    #[validate(length(max = TEXT_MAX))]
     pub limb_movements: String,
+    #[validate(length(max = TEXT_MAX))]
     pub skin_examination: String,
+    #[validate(length(max = TEXT_MAX))]
     pub injuries_identified: String,
+    #[validate(length(max = TEXT_MAX))]
     pub log_roll_findings: String,
 }
 
@@ -136,6 +156,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -146,6 +167,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

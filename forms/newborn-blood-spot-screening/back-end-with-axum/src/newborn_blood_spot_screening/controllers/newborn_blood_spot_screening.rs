@@ -5,24 +5,30 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::newborn_blood_spot_screenings::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
     pub sample_taker_role: String,
     pub care_setting: String,
+    #[validate(custom(function = "plausible_date"))]
     pub record_date: Option<Date>,
     pub time_of_birth: Option<String>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub gestation_weeks: Option<f64>,
     pub previously_screened: String,
     pub consent_given: String,
+    #[validate(length(max = TEXT_MAX))]
     pub decline_reason: String,
+    #[validate(custom(function = "plausible_date"))]
     pub sample_date: Option<Date>,
     pub sample_time: Option<String>,
     pub age_at_sample_days: Option<i32>,
     pub sampling_site: String,
+    #[validate(length(max = TEXT_MAX))]
     pub sample_notes: String,
     pub sample_adequacy: String,
     pub spot_quality_issue: String,
@@ -37,6 +43,7 @@ pub struct Params {
     pub iva_result: String,
     pub ga1_result: String,
     pub hcu_result: String,
+    #[validate(length(max = TEXT_MAX))]
     pub clinical_context: String,
 }
 
@@ -153,6 +160,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -163,6 +171,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

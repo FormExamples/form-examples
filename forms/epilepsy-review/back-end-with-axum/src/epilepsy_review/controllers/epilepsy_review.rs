@@ -5,32 +5,44 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::epilepsy_reviews::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
+    #[validate(length(max = TEXT_MAX))]
     pub reviewer_name: String,
     pub reviewer_role: String,
+    #[validate(custom(function = "plausible_date"))]
     pub reviewed_at: Option<Date>,
     pub care_setting: String,
     pub review_type: String,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub months_since_last_review: Option<f64>,
     pub patient_identifier: String,
     pub age_band: String,
     pub sex: String,
     pub epilepsy_type: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub age_at_onset: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub years_since_diagnosis: Option<f64>,
     pub learning_disability: String,
+    #[validate(length(max = TEXT_MAX))]
     pub seizure_types: String,
     pub seizure_frequency: String,
+    #[validate(custom(function = "plausible_date"))]
     pub last_seizure_date: Option<Date>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub seizure_free_months: Option<f64>,
     pub seizure_trend: String,
+    #[validate(length(max = TEXT_MAX))]
     pub current_asms: String,
     pub asm_adherence: String,
     pub asm_side_effects: String,
+    #[validate(range(min = -99999.9, max = 99999.9))]
     pub drug_level: Option<f64>,
+    #[validate(length(max = TEXT_MAX))]
     pub triggers: String,
     pub sudep_discussed: String,
     pub status_epilepticus: String,
@@ -45,8 +57,11 @@ pub struct Params {
     pub contraception_interaction_reviewed: String,
     pub mental_health_concern: String,
     pub specialist_review_needed: String,
+    #[validate(custom(function = "plausible_date"))]
     pub next_review_due: Option<Date>,
+    #[validate(length(max = TEXT_MAX))]
     pub care_plan: String,
+    #[validate(length(max = TEXT_MAX))]
     pub review_context: String,
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
@@ -198,6 +213,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -208,6 +224,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

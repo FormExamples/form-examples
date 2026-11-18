@@ -5,8 +5,9 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::columbia_suicide_severity_rating_scales::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
@@ -16,6 +17,7 @@ pub struct Params {
     pub assessed_at: Option<DateTimeWithTimeZone>,
     pub care_setting: String,
     pub scale_version: String,
+    #[validate(length(max = TEXT_MAX))]
     pub reason_for_assessment: String,
     pub patient_identifier: String,
     pub age_band: String,
@@ -38,11 +40,14 @@ pub struct Params {
     pub non_suicidal_self_injury: String,
     pub behaviour_recency: String,
     pub lifetime_attempt_count: Option<i32>,
+    #[validate(custom(function = "plausible_date"))]
     pub most_recent_attempt_date: Option<Date>,
     pub actual_lethality: Option<i32>,
     pub potential_lethality: Option<i32>,
     pub access_to_lethal_means: String,
+    #[validate(length(max = TEXT_MAX))]
     pub protective_factors: String,
+    #[validate(length(max = TEXT_MAX))]
     pub clinical_note: String,
 }
 
@@ -178,6 +183,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -188,6 +194,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

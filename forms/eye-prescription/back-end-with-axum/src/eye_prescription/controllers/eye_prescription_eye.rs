@@ -7,9 +7,10 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::eye_prescription_eyes::Model;
+use crate::support::validation::{unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Eye prescription id.
@@ -17,20 +18,26 @@ pub struct Params {
     /// Eye.
     pub eye: String,
     /// Sphere diopters.
+    #[validate(range(min = -999.99, max = 999.99))]
     pub sphere_diopters: Option<f64>,
     /// Cylinder diopters.
+    #[validate(range(min = -999.99, max = 999.99))]
     pub cylinder_diopters: Option<f64>,
     /// Axis degrees.
     pub axis_degrees: Option<i32>,
     /// Addition diopters.
+    #[validate(range(min = -999.99, max = 999.99))]
     pub addition_diopters: Option<f64>,
     /// Intermediate addition diopters.
+    #[validate(range(min = -999.99, max = 999.99))]
     pub intermediate_addition_diopters: Option<f64>,
     /// Prism horizontal diopters.
+    #[validate(range(min = -999.99, max = 999.99))]
     pub prism_horizontal_diopters: f64,
     /// Base horizontal.
     pub base_horizontal: String,
     /// Prism vertical diopters.
+    #[validate(range(min = -999.99, max = 999.99))]
     pub prism_vertical_diopters: f64,
     /// Base vertical.
     pub base_vertical: String,
@@ -107,6 +114,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -118,6 +126,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

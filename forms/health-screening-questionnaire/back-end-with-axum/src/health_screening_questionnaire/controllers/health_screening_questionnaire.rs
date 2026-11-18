@@ -5,8 +5,9 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::health_screening_questionnaires::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
@@ -14,11 +15,13 @@ pub struct Params {
     pub status: String,
     pub screening_purpose: String,
     pub site_name: String,
+    #[validate(custom(function = "plausible_date"))]
     pub assessment_date: Option<Date>,
     pub assessment_mode: String,
     pub usual_activity_level: String,
     pub moderate_exercise_days_per_week: Option<i32>,
     pub fruit_and_vegetable_portions_per_day: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub diet_notes: String,
     pub smoking_status: String,
     pub cigarettes_per_day: Option<i32>,
@@ -33,10 +36,14 @@ pub struct Params {
     pub condition_kidney_disease: String,
     pub condition_thyroid: String,
     pub condition_other: String,
+    #[validate(length(max = TEXT_MAX))]
     pub past_surgeries: String,
+    #[validate(length(max = TEXT_MAX))]
     pub current_medications: String,
+    #[validate(length(max = TEXT_MAX))]
     pub known_drug_allergies: String,
     pub family_history_premature_cardiac_event: String,
+    #[validate(length(max = TEXT_MAX))]
     pub family_history_other: String,
     pub symptom_unexplained_chest_pain: String,
     pub symptom_dizzy_spells_or_fainting: String,
@@ -52,8 +59,11 @@ pub struct Params {
     pub parq_other_chronic_medical_condition: String,
     pub parq_prescribed_medication_for_chronic_condition: String,
     pub parq_bone_or_joint_problem: String,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub height_as_cm: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub weight_as_kg: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub body_mass_index: Option<f64>,
     pub resting_blood_pressure_systolic: Option<i32>,
     pub resting_blood_pressure_diastolic: Option<i32>,
@@ -68,8 +78,10 @@ pub struct Params {
     pub stress_level: Option<i32>,
     pub sleep_quality: Option<i32>,
     pub mental_health_concern: String,
+    #[validate(length(max = TEXT_MAX))]
     pub mental_health_concern_note: String,
     pub vaccination_up_to_date: String,
+    #[validate(length(max = TEXT_MAX))]
     pub vaccination_gaps_note: String,
     pub consent_to_screening: String,
     pub information_accurate_confirmed: String,
@@ -305,6 +317,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -315,6 +328,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

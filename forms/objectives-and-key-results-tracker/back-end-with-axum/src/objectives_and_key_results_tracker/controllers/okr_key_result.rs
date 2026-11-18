@@ -7,9 +7,10 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::okr_key_results::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Okr objective id.
@@ -17,26 +18,35 @@ pub struct Params {
     /// Position.
     pub position: i32,
     /// Title.
+    #[validate(length(max = TEXT_MAX))]
     pub title: String,
     /// Kr type.
+    #[validate(length(max = TEXT_MAX))]
     pub kr_type: String,
     /// Unit.
+    #[validate(length(max = TEXT_MAX))]
     pub unit: String,
     /// Start value.
+    #[validate(range(min = -9999999999999999.9999, max = 9999999999999999.9999))]
     pub start_value: Option<f64>,
     /// Current value.
+    #[validate(range(min = -9999999999999999.9999, max = 9999999999999999.9999))]
     pub current_value: Option<f64>,
     /// Target value.
+    #[validate(range(min = -9999999999999999.9999, max = 9999999999999999.9999))]
     pub target_value: Option<f64>,
     /// Milestones json.
     pub milestones_json: Option<serde_json::Value>,
     /// Binary done.
     pub binary_done: Option<bool>,
     /// Owner name.
+    #[validate(length(max = TEXT_MAX))]
     pub owner_name: String,
     /// Due date.
+    #[validate(custom(function = "plausible_date"))]
     pub due_date: Option<Date>,
     /// Progress fraction.
+    #[validate(range(min = -99.9999, max = 99.9999))]
     pub progress_fraction: Option<f64>,
 }
 
@@ -113,6 +123,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -124,6 +135,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

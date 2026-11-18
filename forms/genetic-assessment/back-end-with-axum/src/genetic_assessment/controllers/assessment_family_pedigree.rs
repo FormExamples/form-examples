@@ -7,9 +7,10 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::assessment_family_pedigrees::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Assessment id.
@@ -21,10 +22,12 @@ pub struct Params {
     /// Consanguinity in family.
     pub consanguinity_in_family: String,
     /// Consanguinity details.
+    #[validate(length(max = TEXT_MAX))]
     pub consanguinity_details: String,
     /// Adoption status.
     pub adoption_status: String,
     /// Pedigree notes.
+    #[validate(length(max = TEXT_MAX))]
     pub pedigree_notes: String,
     /// Three generation pedigree drawn.
     pub three_generation_pedigree_drawn: String,
@@ -94,6 +97,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -105,6 +109,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

@@ -5,17 +5,20 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::hypertension_reviews::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub clinician_role: String,
+    #[validate(custom(function = "plausible_date"))]
     pub reviewed_at: Option<Date>,
     pub practice_site: String,
     pub patient_identifier: String,
     pub age_band: String,
     pub sex: String,
     pub ethnicity: String,
+    #[validate(custom(function = "plausible_date"))]
     pub diagnosis_date: Option<Date>,
     pub type2_diabetes: String,
     pub chronic_kidney_disease: String,
@@ -30,19 +33,31 @@ pub struct Params {
     pub antihypertensive_agents: Option<i32>,
     pub adherence: String,
     pub side_effects: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub qrisk_percent: Option<f64>,
     pub smoking_status: String,
     pub statin_therapy: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub bmi: Option<f64>,
+    #[validate(length(max = TEXT_MAX))]
     pub lifestyle_advice: String,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub serum_creatinine: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub egfr: Option<f64>,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub serum_potassium: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub hba1c: Option<f64>,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub total_cholesterol: Option<f64>,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub hdl_cholesterol: Option<f64>,
+    #[validate(range(min = -99999.9, max = 99999.9))]
     pub urine_acr: Option<f64>,
+    #[validate(length(max = TEXT_MAX))]
     pub complications: String,
+    #[validate(length(max = TEXT_MAX))]
     pub review_context: String,
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
@@ -182,6 +197,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -192,6 +208,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

@@ -5,50 +5,65 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::mental_health_act_assessments::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
     pub assessed_at: Option<DateTimeWithTimeZone>,
     pub location: String,
+    #[validate(length(max = TEXT_MAX))]
     pub referral_source: String,
+    #[validate(length(max = TEXT_MAX))]
     pub reason_for_assessment: String,
     pub person_identifier: String,
     pub age_band: String,
     pub sex: String,
+    #[validate(length(max = TEXT_MAX))]
     pub first_language: String,
+    #[validate(length(max = TEXT_MAX))]
     pub amhp_name: String,
     pub amhp_approved: String,
+    #[validate(length(max = TEXT_MAX))]
     pub doctor1_name: String,
+    #[validate(length(max = TEXT_MAX))]
     pub doctor1_gmc_number: String,
     pub doctor1_section12_approved: String,
     pub doctor1_examined_at: Option<DateTimeWithTimeZone>,
+    #[validate(length(max = TEXT_MAX))]
     pub doctor2_name: String,
+    #[validate(length(max = TEXT_MAX))]
     pub doctor2_gmc_number: String,
     pub doctor2_section12_approved: String,
     pub doctor2_examined_at: Option<DateTimeWithTimeZone>,
     pub prior_acquaintance: String,
     pub mental_disorder_present: String,
+    #[validate(length(max = TEXT_MAX))]
     pub mental_disorder_evidence: String,
     pub risk_to_own_health: String,
     pub risk_to_own_safety: String,
     pub risk_to_others: String,
+    #[validate(length(max = TEXT_MAX))]
     pub risk_evidence: String,
     pub risk_imminence: String,
     pub least_restrictive_met: String,
+    #[validate(length(max = TEXT_MAX))]
     pub alternatives_considered: String,
     pub appropriate_treatment_available: String,
+    #[validate(length(max = TEXT_MAX))]
     pub treatment_plan_summary: String,
     pub nearest_relative_identified: String,
     pub nearest_relative_consulted: String,
     pub nearest_relative_objection: String,
+    #[validate(length(max = TEXT_MAX))]
     pub consultation_record: String,
     pub recommended_section: String,
     pub outcome: String,
     pub bed_identified: String,
     pub conveyance: String,
+    #[validate(length(max = TEXT_MAX))]
     pub clinical_legal_note: String,
 }
 
@@ -202,6 +217,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -212,6 +228,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

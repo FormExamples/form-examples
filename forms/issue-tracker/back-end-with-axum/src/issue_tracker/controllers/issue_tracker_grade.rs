@@ -5,8 +5,9 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::issue_tracker_grades::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub issue_tracker_id: Uuid,
@@ -16,11 +17,13 @@ pub struct Params {
     pub score_by_harm_grade: Option<i32>,
     pub score_by_failure_condition: String,
     pub score_by_moscow_requirement: Option<i32>,
+    #[validate(range(min = -999.99, max = 999.99))]
     pub score_by_frequency_percent: Option<f64>,
     pub computed_composite_priority: String,
     pub final_composite_priority: String,
     pub override_reason: String,
     pub recommendation: String,
+    #[validate(length(max = TEXT_MAX))]
     pub triage_notes: String,
     pub signed_by: String,
     pub signed_at: Option<DateTimeWithTimeZone>,
@@ -111,6 +114,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -121,6 +125,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

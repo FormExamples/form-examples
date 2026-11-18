@@ -5,14 +5,18 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::partogram_observations::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub partogram_id: Uuid,
     pub observed_at: Option<DateTimeWithTimeZone>,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub cervical_dilatation_cm: Option<f64>,
+    #[validate(range(min = -9.9, max = 9.9))]
     pub descent_fifths: Option<f64>,
+    #[validate(range(min = -999.0, max = 999.0))]
     pub contractions_per_10_min: Option<f64>,
     pub contraction_duration_band: String,
     pub contraction_strength: String,
@@ -22,12 +26,16 @@ pub struct Params {
     pub systolic_blood_pressure: Option<i32>,
     pub diastolic_blood_pressure: Option<i32>,
     pub pulse: Option<i32>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub temperature: Option<f64>,
+    #[validate(range(min = -999999.0, max = 999999.0))]
     pub urine_volume_ml: Option<f64>,
     pub urine_protein: String,
     pub urine_ketones: String,
     pub urine_glucose: String,
+    #[validate(range(min = -99999.9, max = 99999.9))]
     pub oxytocin_rate: Option<f64>,
+    #[validate(length(max = TEXT_MAX))]
     pub drugs_and_fluids: String,
 }
 
@@ -122,6 +130,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -132,6 +141,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

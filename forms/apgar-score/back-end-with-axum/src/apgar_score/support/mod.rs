@@ -5,6 +5,7 @@
 pub mod model;
 pub mod prelude;
 pub mod seed;
+pub mod validation;
 
 use axa::{
     cursor_pagination::{CursorKey, CursorLimits, CursorPage},

@@ -7,9 +7,10 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::eye_prescriptions::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Patient id.
@@ -19,20 +20,25 @@ pub struct Params {
     /// Status.
     pub status: String,
     /// Examination date.
+    #[validate(custom(function = "plausible_date"))]
     pub examination_date: Date,
     /// Examination time.
     pub examination_time: Option<Time>,
     /// Issue date.
+    #[validate(custom(function = "plausible_date"))]
     pub issue_date: Date,
     /// Expiry date.
+    #[validate(custom(function = "plausible_date"))]
     pub expiry_date: Date,
     /// Reason for sight test.
     pub reason_for_sight_test: String,
     /// Prior prescription on file.
     pub prior_prescription_on_file: bool,
     /// Prior prescription date.
+    #[validate(custom(function = "plausible_date"))]
     pub prior_prescription_date: Option<Date>,
     /// Notes.
+    #[validate(length(max = TEXT_MAX))]
     pub notes: String,
 }
 
@@ -105,6 +111,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -116,6 +123,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

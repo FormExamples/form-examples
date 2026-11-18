@@ -7,52 +7,74 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::okr_objectives::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Status.
+    #[validate(length(max = TEXT_MAX))]
     pub status: String,
     /// Level.
+    #[validate(length(max = TEXT_MAX))]
     pub level: String,
     /// Cycle.
+    #[validate(length(max = TEXT_MAX))]
     pub cycle: String,
     /// Cycle start date.
+    #[validate(custom(function = "plausible_date"))]
     pub cycle_start_date: Option<Date>,
     /// Cycle end date.
+    #[validate(custom(function = "plausible_date"))]
     pub cycle_end_date: Option<Date>,
     /// Team or org name.
+    #[validate(length(max = TEXT_MAX))]
     pub team_or_org_name: String,
     /// Strategic theme.
+    #[validate(length(max = TEXT_MAX))]
     pub strategic_theme: String,
     /// External reference.
+    #[validate(length(max = TEXT_MAX))]
     pub external_reference: String,
     /// Obj title.
+    #[validate(length(max = TEXT_MAX))]
     pub obj_title: String,
     /// Obj long description.
+    #[validate(length(max = TEXT_MAX))]
     pub obj_long_description: String,
     /// Sa parent summary.
+    #[validate(length(max = TEXT_MAX))]
     pub sa_parent_summary: String,
     /// Sa business value statement.
+    #[validate(length(max = TEXT_MAX))]
     pub sa_business_value_statement: String,
     /// In initiatives.
+    #[validate(length(max = TEXT_MAX))]
     pub in_initiatives: String,
     /// In supporting links.
+    #[validate(length(max = TEXT_MAX))]
     pub in_supporting_links: String,
     /// Rk known risks.
+    #[validate(length(max = TEXT_MAX))]
     pub rk_known_risks: String,
     /// Rk dependencies.
+    #[validate(length(max = TEXT_MAX))]
     pub rk_dependencies: String,
     /// Rk blockers.
+    #[validate(length(max = TEXT_MAX))]
     pub rk_blockers: String,
     /// Rk mitigation plans.
+    #[validate(length(max = TEXT_MAX))]
     pub rk_mitigation_plans: String,
     /// Fc expected end state.
+    #[validate(length(max = TEXT_MAX))]
     pub fc_expected_end_state: String,
     /// Fc residual risk.
+    #[validate(length(max = TEXT_MAX))]
     pub fc_residual_risk: String,
     /// Score by progress percent.
+    #[validate(range(min = -999.99, max = 999.99))]
     pub score_by_progress_percent: Option<f64>,
     /// Score by confidence decile.
     pub score_by_confidence_decile: Option<i32>,
@@ -65,6 +87,7 @@ pub struct Params {
     /// Score by smart quality.
     pub score_by_smart_quality: Option<i32>,
     /// Score by pace deviation percent.
+    #[validate(range(min = -999.99, max = 999.99))]
     pub score_by_pace_deviation_percent: Option<f64>,
     /// Reporter id.
     pub reporter_id: Uuid,
@@ -192,6 +215,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -203,6 +227,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

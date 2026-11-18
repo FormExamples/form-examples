@@ -5,56 +5,92 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::assessments::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub status: String,
     pub full_name: String,
+    #[validate(length(max = TEXT_MAX))]
     pub address: String,
     pub postcode: String,
+    #[validate(custom(function = "plausible_date"))]
     pub date_of_birth: Option<Date>,
     pub nhs_number: String,
     pub phone: String,
     pub email: String,
     pub gp_name: String,
     pub gp_practice: String,
+    #[validate(length(max = TEXT_MAX))]
     pub reason_for_statement: String,
+    #[validate(length(max = TEXT_MAX))]
     pub current_health_status: String,
+    #[validate(length(max = TEXT_MAX))]
     pub current_diagnoses: String,
     pub has_discussed_with_family: String,
     pub has_discussed_with_clinician: String,
+    #[validate(length(max = TEXT_MAX))]
     pub discussion_details: String,
+    #[validate(length(max = TEXT_MAX))]
     pub personal_values: String,
+    #[validate(length(max = TEXT_MAX))]
     pub quality_of_life_priorities: String,
+    #[validate(length(max = TEXT_MAX))]
     pub religious_beliefs: String,
+    #[validate(length(max = TEXT_MAX))]
     pub spiritual_needs: String,
+    #[validate(length(max = TEXT_MAX))]
     pub cultural_considerations: String,
+    #[validate(length(max = TEXT_MAX))]
     pub fears_and_concerns: String,
+    #[validate(length(max = TEXT_MAX))]
     pub things_that_matter_most: String,
+    #[validate(length(max = TEXT_MAX))]
     pub preferred_place_of_care: String,
+    #[validate(length(max = TEXT_MAX))]
     pub preferred_place_of_death: String,
+    #[validate(length(max = TEXT_MAX))]
     pub daily_routine_preferences: String,
+    #[validate(length(max = TEXT_MAX))]
     pub personal_care_preferences: String,
+    #[validate(length(max = TEXT_MAX))]
     pub food_and_drink_preferences: String,
+    #[validate(length(max = TEXT_MAX))]
     pub sleep_preferences: String,
+    #[validate(length(max = TEXT_MAX))]
     pub clothing_preferences: String,
+    #[validate(length(max = TEXT_MAX))]
     pub environment_preferences: String,
+    #[validate(length(max = TEXT_MAX))]
     pub pet_care_wishes: String,
+    #[validate(length(max = TEXT_MAX))]
     pub pain_management_preferences: String,
+    #[validate(length(max = TEXT_MAX))]
     pub attitude_to_hospital_admission: String,
+    #[validate(length(max = TEXT_MAX))]
     pub attitude_to_intensive_care: String,
+    #[validate(length(max = TEXT_MAX))]
     pub attitude_to_artificial_nutrition: String,
+    #[validate(length(max = TEXT_MAX))]
     pub attitude_to_artificial_hydration: String,
+    #[validate(length(max = TEXT_MAX))]
     pub medication_preferences: String,
+    #[validate(length(max = TEXT_MAX))]
     pub complementary_therapy_preferences: String,
+    #[validate(length(max = TEXT_MAX))]
     pub other_treatment_wishes: String,
     pub preferred_language: String,
+    #[validate(length(max = TEXT_MAX))]
     pub communication_aids: String,
+    #[validate(length(max = TEXT_MAX))]
     pub how_to_share_information: String,
+    #[validate(length(max = TEXT_MAX))]
     pub who_to_involve_in_decisions: String,
+    #[validate(length(max = TEXT_MAX))]
     pub information_sharing_restrictions: String,
+    #[validate(length(max = TEXT_MAX))]
     pub preferred_communication_style: String,
     pub primary_contact_name: String,
     pub primary_contact_relationship: String,
@@ -63,25 +99,40 @@ pub struct Params {
     pub secondary_contact_name: String,
     pub secondary_contact_relationship: String,
     pub secondary_contact_phone: String,
+    #[validate(length(max = TEXT_MAX))]
     pub people_who_should_visit: String,
+    #[validate(length(max = TEXT_MAX))]
     pub people_who_should_not_visit: String,
+    #[validate(length(max = TEXT_MAX))]
     pub support_network_details: String,
+    #[validate(length(max = TEXT_MAX))]
     pub financial_arrangements: String,
+    #[validate(length(max = TEXT_MAX))]
     pub property_arrangements: String,
+    #[validate(length(max = TEXT_MAX))]
     pub insurance_details: String,
+    #[validate(length(max = TEXT_MAX))]
     pub will_location: String,
     pub has_lasting_power_of_attorney: String,
+    #[validate(length(max = TEXT_MAX))]
     pub lpa_details: String,
+    #[validate(length(max = TEXT_MAX))]
     pub funeral_wishes: String,
     pub burial_or_cremation: String,
+    #[validate(length(max = TEXT_MAX))]
     pub other_practical_matters: String,
     pub maker_signature_obtained: String,
+    #[validate(custom(function = "plausible_date"))]
     pub maker_signature_date: Option<Date>,
     pub witness_name: String,
+    #[validate(length(max = TEXT_MAX))]
     pub witness_address: String,
     pub witness_signature_obtained: String,
+    #[validate(custom(function = "plausible_date"))]
     pub witness_signature_date: Option<Date>,
+    #[validate(custom(function = "plausible_date"))]
     pub review_date: Option<Date>,
+    #[validate(length(max = TEXT_MAX))]
     pub review_notes: String,
 }
 
@@ -332,6 +383,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -342,6 +394,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

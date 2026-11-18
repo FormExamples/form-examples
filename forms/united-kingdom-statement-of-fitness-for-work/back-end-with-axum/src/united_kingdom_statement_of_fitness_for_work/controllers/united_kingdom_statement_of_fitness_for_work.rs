@@ -5,21 +5,25 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::united_kingdom_statement_of_fitness_for_works::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub medical_practice_id: Uuid,
     pub status: String,
+    #[validate(custom(function = "plausible_date"))]
     pub assessment_date: Option<Date>,
     pub assessment_method: String,
     pub general_fitness_considered: String,
+    #[validate(length(max = TEXT_MAX))]
     pub diagnosis_text: String,
     pub diagnosis_snomed_code: String,
     pub diagnosis_snomed_display: String,
     pub diagnosis_category: String,
+    #[validate(custom(function = "plausible_date"))]
     pub condition_first_recorded_date: Option<Date>,
     pub is_automatic_disability: String,
     pub is_non_medical: String,
@@ -28,19 +32,25 @@ pub struct Params {
     pub adaptation_altered_hours: String,
     pub adaptation_amended_duties: String,
     pub adaptation_workplace_adaptations: String,
+    #[validate(length(max = TEXT_MAX))]
     pub comments: String,
     pub period_type: String,
     pub period_duration_value: Option<i32>,
     pub period_duration_unit: String,
+    #[validate(custom(function = "plausible_date"))]
     pub period_from: Option<Date>,
+    #[validate(custom(function = "plausible_date"))]
     pub period_to: Option<Date>,
     pub will_assess_again: String,
+    #[validate(custom(function = "plausible_date"))]
     pub planned_review_date: Option<Date>,
     pub issued_at: Option<DateTimeWithTimeZone>,
     pub issued_via: String,
     pub issue_setting: String,
     pub safeguarding_concern: String,
+    #[validate(length(max = TEXT_MAX))]
     pub safeguarding_notes: String,
+    #[validate(length(max = TEXT_MAX))]
     pub clinician_signature_svg: String,
     pub clinician_signed_at: Option<DateTimeWithTimeZone>,
     #[serde(default)]
@@ -182,6 +192,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -192,6 +203,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

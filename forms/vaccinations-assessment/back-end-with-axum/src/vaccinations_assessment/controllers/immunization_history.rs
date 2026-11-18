@@ -5,17 +5,21 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::immunization_histories::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub assessment_id: Uuid,
     pub has_vaccination_record: String,
     pub record_source: String,
+    #[validate(custom(function = "plausible_date"))]
     pub last_review_date: Option<Date>,
     pub previous_adverse_reactions: String,
+    #[validate(length(max = TEXT_MAX))]
     pub adverse_reaction_details: String,
     pub immunocompromised: String,
+    #[validate(length(max = TEXT_MAX))]
     pub immunocompromised_details: String,
 }
 
@@ -80,6 +84,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -90,6 +95,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

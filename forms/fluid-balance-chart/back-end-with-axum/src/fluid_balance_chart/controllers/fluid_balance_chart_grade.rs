@@ -5,17 +5,25 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::fluid_balance_chart_grades::Model;
+use crate::support::validation::{unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub fluid_balance_chart_id: Uuid,
+    #[validate(range(min = -99999999.99, max = 99999999.99))]
     pub total_intake_ml: f64,
+    #[validate(range(min = -99999999.99, max = 99999999.99))]
     pub total_output_ml: f64,
+    #[validate(range(min = -99999999.99, max = 99999999.99))]
     pub net_balance_ml: f64,
+    #[validate(range(min = -99999999.99, max = 99999999.99))]
     pub urine_output_ml: f64,
+    #[validate(range(min = -9999.99, max = 9999.99))]
     pub hours_observed: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub weight_kg: Option<f64>,
+    #[validate(range(min = -9999.9999, max = 9999.9999))]
     pub urine_output_ml_kg_h: Option<f64>,
     pub fluid_status: String,
     pub graded_at: DateTimeWithTimeZone,
@@ -86,6 +94,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -96,6 +105,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

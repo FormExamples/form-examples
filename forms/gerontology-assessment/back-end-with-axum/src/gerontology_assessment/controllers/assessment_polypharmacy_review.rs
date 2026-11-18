@@ -5,24 +5,31 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::assessment_polypharmacy_reviews::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub assessment_id: Uuid,
     pub total_regular_medications: Option<i32>,
     pub total_prn_medications: Option<i32>,
     pub polypharmacy_flag: String,
+    #[validate(custom(function = "plausible_date"))]
     pub medication_review_date: Option<Date>,
     pub falls_risk_medications: String,
+    #[validate(length(max = TEXT_MAX))]
     pub falls_risk_medication_details: String,
     pub anticholinergic_burden: String,
     pub drug_interactions_identified: String,
+    #[validate(length(max = TEXT_MAX))]
     pub drug_interaction_details: String,
     pub adherence_concerns: String,
+    #[validate(length(max = TEXT_MAX))]
     pub adherence_details: String,
     pub stopp_start_review_done: String,
+    #[validate(length(max = TEXT_MAX))]
     pub deprescribing_opportunities: String,
+    #[validate(length(max = TEXT_MAX))]
     pub polypharmacy_notes: String,
 }
 
@@ -108,6 +115,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -118,6 +126,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

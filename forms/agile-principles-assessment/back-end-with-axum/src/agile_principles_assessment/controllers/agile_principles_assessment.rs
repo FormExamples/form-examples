@@ -5,51 +5,78 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::agile_principles_assessments::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub respondent_id: Uuid,
     pub status: String,
     pub is_anonymous: bool,
+    #[validate(custom(function = "plausible_date"))]
     pub assessment_date: Option<Date>,
     pub assessment_period: String,
     pub p01_customer_satisfaction: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub p01_comment: String,
+    #[validate(range(min = -9.99, max = 9.99))]
     pub p01_weight: f64,
     pub p02_welcome_change: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub p02_comment: String,
+    #[validate(range(min = -9.99, max = 9.99))]
     pub p02_weight: f64,
     pub p03_deliver_frequently: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub p03_comment: String,
+    #[validate(range(min = -9.99, max = 9.99))]
     pub p03_weight: f64,
     pub p04_collaboration: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub p04_comment: String,
+    #[validate(range(min = -9.99, max = 9.99))]
     pub p04_weight: f64,
     pub p05_motivated_individuals: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub p05_comment: String,
+    #[validate(range(min = -9.99, max = 9.99))]
     pub p05_weight: f64,
     pub p06_face_to_face: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub p06_comment: String,
+    #[validate(range(min = -9.99, max = 9.99))]
     pub p06_weight: f64,
     pub p07_working_software: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub p07_comment: String,
+    #[validate(range(min = -9.99, max = 9.99))]
     pub p07_weight: f64,
     pub p08_sustainable_development: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub p08_comment: String,
+    #[validate(range(min = -9.99, max = 9.99))]
     pub p08_weight: f64,
     pub p09_technical_excellence: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub p09_comment: String,
+    #[validate(range(min = -9.99, max = 9.99))]
     pub p09_weight: f64,
     pub p10_simplicity: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub p10_comment: String,
+    #[validate(range(min = -9.99, max = 9.99))]
     pub p10_weight: f64,
     pub p11_self_organising_teams: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub p11_comment: String,
+    #[validate(range(min = -9.99, max = 9.99))]
     pub p11_weight: f64,
     pub p12_regular_reflection: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub p12_comment: String,
+    #[validate(range(min = -9.99, max = 9.99))]
     pub p12_weight: f64,
+    #[validate(length(max = TEXT_MAX))]
     pub overall_notes: String,
 }
 
@@ -203,6 +230,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -213,6 +241,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

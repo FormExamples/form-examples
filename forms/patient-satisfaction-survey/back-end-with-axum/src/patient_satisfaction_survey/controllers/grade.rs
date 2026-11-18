@@ -5,19 +5,28 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::grades::Model;
+use crate::support::validation::{unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub assessment_id: Uuid,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub normalized_score: f64,
     pub satisfaction_category: String,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub domain_access_score: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub domain_communication_score: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub domain_clinical_care_score: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub domain_staff_score: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub domain_environment_score: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub domain_discharge_score: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub domain_overall_score: Option<f64>,
     pub graded_at: DateTimeWithTimeZone,
 }
@@ -91,6 +100,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -101,6 +111,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

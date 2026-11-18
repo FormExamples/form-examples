@@ -5,11 +5,13 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::grades::Model;
+use crate::support::validation::{unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub assessment_id: Uuid,
+    #[validate(range(min = -99.99, max = 99.99))]
     pub das28_score: Option<f64>,
     pub das28_method: String,
     pub disease_activity_level: String,
@@ -67,6 +69,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -77,6 +80,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

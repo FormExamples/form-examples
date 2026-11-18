@@ -5,16 +5,20 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::abdominal_aortic_aneurysm_screenings::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
+    #[validate(length(max = TEXT_MAX))]
     pub technician_name: String,
     pub technician_role: String,
+    #[validate(length(max = TEXT_MAX))]
     pub clinic_site: String,
     pub scanned_at: Option<DateTimeWithTimeZone>,
+    #[validate(length(max = TEXT_MAX))]
     pub device_identifier: String,
     pub patient_identifier: String,
     pub age: Option<i32>,
@@ -23,13 +27,19 @@ pub struct Params {
     pub scan_type: String,
     pub consent_given: String,
     pub leaflet_provided: String,
+    #[validate(length(max = TEXT_MAX))]
     pub consent_note: String,
     pub aorta_visualised: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub max_aortic_diameter_cm: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub prior_max_diameter_cm: Option<f64>,
+    #[validate(custom(function = "plausible_date"))]
     pub prior_scan_date: Option<Date>,
     pub symptomatic: String,
+    #[validate(length(max = TEXT_MAX))]
     pub incidental_findings: String,
+    #[validate(length(max = TEXT_MAX))]
     pub result_note: String,
 }
 
@@ -128,6 +138,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -138,6 +149,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

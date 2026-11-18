@@ -5,8 +5,9 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::echocardiogram_test_result_grades::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub echocardiogram_test_result_id: Uuid,
@@ -18,6 +19,7 @@ pub struct Params {
     pub target_timeframe: String,
     pub recommended_action: String,
     pub recommendation: String,
+    #[validate(length(max = TEXT_MAX))]
     pub clinician_notes: String,
     pub signed_at: Option<DateTimeWithTimeZone>,
     pub graded_at: DateTimeWithTimeZone,
@@ -95,6 +97,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -105,6 +108,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

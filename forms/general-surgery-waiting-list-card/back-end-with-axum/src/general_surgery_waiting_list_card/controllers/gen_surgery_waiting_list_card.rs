@@ -5,19 +5,24 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::gen_surgery_waiting_list_cards::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub practitioner_id: Uuid,
     pub status: String,
+    #[validate(custom(function = "plausible_date"))]
     pub entry_date: Option<Date>,
     pub entry_time: Option<String>,
     pub referral_source: String,
+    #[validate(custom(function = "plausible_date"))]
     pub referral_date: Option<Date>,
     pub referral_letter_reference: String,
+    #[validate(length(max = TEXT_MAX))]
     pub reason_for_referral: String,
+    #[validate(length(max = TEXT_MAX))]
     pub presenting_condition: String,
     pub icd_10_code: String,
     pub snomed_ct_code: String,
@@ -25,14 +30,18 @@ pub struct Params {
     pub list_name: String,
     pub specialty: String,
     pub sub_specialty: String,
+    #[validate(length(max = TEXT_MAX))]
     pub procedure_description: String,
     pub opcs_4_code: String,
     pub clinical_priority: String,
+    #[validate(custom(function = "plausible_date"))]
     pub rtt_clock_start_date: Option<Date>,
     pub expected_procedure_type: String,
     pub expected_wait_weeks: Option<i32>,
     pub consent_to_reminders: String,
+    #[validate(length(max = TEXT_MAX))]
     pub communication_notes: String,
+    #[validate(length(max = TEXT_MAX))]
     pub additional_notes: String,
     pub signed_at: Option<DateTimeWithTimeZone>,
 }
@@ -144,6 +153,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -154,6 +164,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

@@ -5,15 +5,18 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::urinalysis_test_results::Model;
+use crate::support::validation::{plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
     pub report_status: String,
+    #[validate(custom(function = "plausible_date"))]
     pub performed_date: Option<Date>,
+    #[validate(custom(function = "plausible_date"))]
     pub reported_date: Option<Date>,
     pub specimen_type: String,
     pub specimen_condition: String,
@@ -25,7 +28,9 @@ pub struct Params {
     pub glucose: String,
     pub ketones: String,
     pub bilirubin: String,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub ph: Option<f64>,
+    #[validate(range(min = -9.999, max = 9.999))]
     pub specific_gravity: Option<f64>,
     pub red_cell_count: String,
     pub white_cell_count: String,
@@ -175,6 +180,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -185,6 +191,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

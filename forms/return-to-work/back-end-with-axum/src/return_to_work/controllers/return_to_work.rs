@@ -5,8 +5,9 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::return_to_works::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
@@ -14,8 +15,10 @@ pub struct Params {
     pub employer_id: Option<Uuid>,
     pub status: String,
     pub statement_kind: String,
+    #[validate(custom(function = "plausible_date"))]
     pub assessment_date: Option<Date>,
     pub assessment_time: Option<String>,
+    #[validate(custom(function = "plausible_date"))]
     pub absence_first_day: Option<Date>,
     pub absence_total_calendar_days: Option<i32>,
     pub prior_med3_reference: String,
@@ -23,16 +26,21 @@ pub struct Params {
     pub primary_diagnosis_text: String,
     pub primary_diagnosis_snomed: String,
     pub primary_diagnosis_icd10: String,
+    #[validate(length(max = TEXT_MAX))]
     pub comorbid_conditions: String,
     pub mechanism: String,
     pub workplace_cause: String,
     pub riddor_reference: String,
+    #[validate(length(max = TEXT_MAX))]
     pub current_medications: String,
+    #[validate(length(max = TEXT_MAX))]
     pub ongoing_therapy: String,
+    #[validate(custom(function = "plausible_date"))]
     pub last_consultation_date: Option<Date>,
     pub anticipated_recovery_trajectory: String,
     pub specialist_followup_required: String,
     pub mobility: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub manual_handling_capacity_kg: Option<f64>,
     pub cognition: String,
     pub mood: String,
@@ -46,27 +54,36 @@ pub struct Params {
     pub fitness_statement_computed: String,
     pub fitness_statement_final: String,
     pub clinician_override: String,
+    #[validate(length(max = TEXT_MAX))]
     pub clinician_override_reason: String,
     pub clinician_confidence: String,
+    #[validate(custom(function = "plausible_date"))]
     pub valid_from: Option<Date>,
+    #[validate(custom(function = "plausible_date"))]
     pub valid_until: Option<Date>,
     pub validity_weeks: Option<i32>,
     pub reassessment_required: String,
     pub phased_return_applicable: String,
     pub phased_return_template: String,
+    #[validate(custom(function = "plausible_date"))]
     pub phased_return_target_date: Option<Date>,
     pub phased_return_schedule_json: serde_json::Value,
+    #[validate(length(max = TEXT_MAX))]
     pub phased_return_support_contact: String,
     pub workstation_review_required: String,
+    #[validate(length(max = TEXT_MAX))]
     pub additional_adjustments_text: String,
     pub review_location: String,
+    #[validate(custom(function = "plausible_date"))]
     pub review_date: Option<Date>,
     pub occupational_health_referral_made: String,
     pub dvla_notification_required: String,
     pub employer_oh_notified: String,
     pub return_to_work_meeting_scheduled: String,
     pub maternity_certificate_reference: String,
+    #[validate(length(max = TEXT_MAX))]
     pub final_notes: String,
+    #[validate(length(max = TEXT_MAX))]
     pub signature_svg: String,
     pub signed_at: Option<DateTimeWithTimeZone>,
 }
@@ -277,6 +294,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -287,6 +305,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

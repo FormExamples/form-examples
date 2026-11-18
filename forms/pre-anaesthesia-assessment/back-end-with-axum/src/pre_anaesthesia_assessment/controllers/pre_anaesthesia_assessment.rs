@@ -5,14 +5,16 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::pre_anaesthesia_assessments::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub status: String,
     pub site_name: String,
+    #[validate(custom(function = "plausible_date"))]
     pub assessment_date: Option<Date>,
     pub assessment_time: Option<String>,
     pub planned_procedure: String,
@@ -23,20 +25,28 @@ pub struct Params {
     pub anticipated_blood_loss_ml: Option<i32>,
     pub anticipated_duration_minutes: Option<i32>,
     pub consultant_surgeon: String,
+    #[validate(custom(function = "plausible_date"))]
     pub planned_date: Option<Date>,
     pub systolic_bp: Option<i32>,
     pub diastolic_bp: Option<i32>,
     pub heart_rate: Option<i32>,
     pub respiratory_rate: Option<i32>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub spo2_percent: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub temperature_celsius: Option<f64>,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub capillary_refill_seconds: Option<f64>,
     pub pain_score_0_10: Option<i32>,
     pub on_room_air: String,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub supplemental_oxygen_litres: Option<f64>,
     pub mallampati_class: String,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub thyromental_distance_cm: Option<f64>,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub mouth_opening_cm: Option<f64>,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub inter_incisor_gap_cm: Option<f64>,
     pub neck_rom: String,
     pub cervical_spine_stability: String,
@@ -52,6 +62,7 @@ pub struct Params {
     pub stopbang_age_gt50: String,
     pub stopbang_neck_gt40: String,
     pub stopbang_male: String,
+    #[validate(length(max = TEXT_MAX))]
     pub airway_notes: String,
     pub heart_rhythm: String,
     pub murmur_present: String,
@@ -64,9 +75,11 @@ pub struct Params {
     pub ecg_rate_bpm: Option<i32>,
     pub ecg_axis: String,
     pub ecg_ischaemic_changes: String,
+    #[validate(length(max = TEXT_MAX))]
     pub ecg_notes: String,
     pub echo_performed: String,
     pub echo_ef_percent: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub echo_notes: String,
     pub history_ihd: String,
     pub history_chf: String,
@@ -83,11 +96,15 @@ pub struct Params {
     pub asthma: String,
     pub copd: String,
     pub cxr_performed: String,
+    #[validate(length(max = TEXT_MAX))]
     pub cxr_findings: String,
     pub pft_performed: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub pft_fev1_percent_predicted: Option<f64>,
+    #[validate(range(min = -9.99, max = 9.99))]
     pub pft_fev1_fvc_ratio: Option<f64>,
     pub smoking_status: String,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub pack_years: Option<f64>,
     pub covid_history: String,
     pub days_since_covid: Option<i32>,
@@ -100,8 +117,10 @@ pub struct Params {
     pub cognition_score: Option<i32>,
     pub cognitive_impairment: String,
     pub capacity_concern: String,
+    #[validate(length(max = TEXT_MAX))]
     pub cranial_nerves_notes: String,
     pub motor_power: String,
+    #[validate(length(max = TEXT_MAX))]
     pub sensory_notes: String,
     pub reflexes: String,
     pub recent_stroke_tia: String,
@@ -109,8 +128,11 @@ pub struct Params {
     pub seizure_disorder: String,
     pub creatinine_umol_l: Option<i32>,
     pub egfr_ml_min_1_73m2: Option<i32>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub urea_mmol_l: Option<f64>,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub potassium_mmol_l: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub sodium_mmol_l: Option<f64>,
     pub dialysis_status: String,
     pub ckd_stage: String,
@@ -118,39 +140,52 @@ pub struct Params {
     pub alt_u_l: Option<i32>,
     pub ast_u_l: Option<i32>,
     pub alp_u_l: Option<i32>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub albumin_g_l: Option<f64>,
     pub chronic_liver_disease: String,
     pub child_pugh_class: String,
     pub hb_g_l: Option<i32>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub wcc_10_9_l: Option<f64>,
     pub platelets_10_9_l: Option<i32>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub mcv_fl: Option<f64>,
     pub ferritin_ug_l: Option<i32>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub transferrin_saturation_percent: Option<f64>,
+    #[validate(range(min = -99.99, max = 99.99))]
     pub inr: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub aptt_seconds: Option<f64>,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub fibrinogen_g_l: Option<f64>,
     pub on_anticoagulant: String,
     pub anticoagulant_type: String,
     pub anticoagulant_hold_plan: String,
     pub group_and_save: String,
     pub crossmatch_units: Option<i32>,
+    #[validate(custom(function = "plausible_date"))]
     pub last_transfusion_date: Option<Date>,
     pub anaemia_severity: String,
     pub diabetes_type: String,
     pub diabetes_on_insulin: String,
     pub hba1c_mmol_mol: Option<i32>,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub fasting_glucose_mmol_l: Option<f64>,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub random_glucose_mmol_l: Option<f64>,
     pub diabetes_control: String,
     pub diabetes_complications: String,
     pub thyroid_status: String,
+    #[validate(range(min = -9999.99, max = 9999.99))]
     pub tsh_mu_l: Option<f64>,
     pub adrenal_status: String,
     pub on_long_term_steroids: String,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub steroid_dose_mg: Option<f64>,
     pub steroid_cover_plan: String,
     pub abdominal_exam: String,
+    #[validate(length(max = TEXT_MAX))]
     pub abdominal_notes: String,
     pub reflux_symptoms: String,
     pub hiatus_hernia: String,
@@ -162,6 +197,7 @@ pub struct Params {
     pub last_clear_fluid_at: Option<DateTimeWithTimeZone>,
     pub rapid_sequence_induction_needed: String,
     pub spine_exam: String,
+    #[validate(length(max = TEXT_MAX))]
     pub spine_notes: String,
     pub neuraxial_suitable: String,
     pub joint_rom_hip: String,
@@ -185,18 +221,25 @@ pub struct Params {
     pub reaction_severity: String,
     pub reaction_notes: String,
     pub verified: String,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub mets_estimate: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub dasi_score: Option<f64>,
     pub ecog_performance_status: Option<i32>,
     pub clinical_frailty_scale: Option<i32>,
     pub six_minute_walk_metres: Option<i32>,
     pub sts_one_minute_reps: Option<i32>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub tug_seconds: Option<f64>,
     pub cpet_performed: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub cpet_vo2_peak_ml_kg_min: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub cpet_anaerobic_threshold_ml_kg_min: Option<f64>,
+    #[validate(length(max = TEXT_MAX))]
     pub cpet_notes: String,
     pub malnutrition_risk: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub unintentional_weight_loss_kg: Option<f64>,
     pub technique: String,
     pub airway_plan: String,
@@ -210,8 +253,11 @@ pub struct Params {
     pub anticipated_length_of_stay_days: Option<i32>,
     pub special_equipment: String,
     pub blood_products_required: String,
+    #[validate(length(max = TEXT_MAX))]
     pub proforma_header_department: String,
+    #[validate(length(max = TEXT_MAX))]
     pub proforma_header_registration_date: String,
+    #[validate(length(max = TEXT_MAX))]
     pub proforma_header_pre_op_diagnosis: String,
     pub prev_anaes_anaesthetic_difficulty: bool,
     pub prev_anaes_abnormal_reaction: bool,
@@ -225,14 +271,17 @@ pub struct Params {
     pub addiction_betel: bool,
     pub addiction_drugs: bool,
     pub addiction_other: bool,
+    #[validate(length(max = TEXT_MAX))]
     pub addiction_other_details: String,
     pub pmh_proforma_hypertension: bool,
     pub pmh_proforma_mi: bool,
     pub pmh_proforma_mi_within_past6_months: bool,
     pub pmh_proforma_angina_or_chest_pain: bool,
+    #[validate(length(max = TEXT_MAX))]
     pub pmh_proforma_angina_triggers: String,
     pub pmh_proforma_heart_failure: bool,
     pub pmh_proforma_dyspnoea: bool,
+    #[validate(length(max = TEXT_MAX))]
     pub pmh_proforma_dyspnoea_subtypes: String,
     pub pmh_proforma_palpitation: bool,
     pub pmh_proforma_arrhythmia: bool,
@@ -245,6 +294,7 @@ pub struct Params {
     pub pmh_proforma_angioplasty: bool,
     pub pmh_proforma_stenting: bool,
     pub pmh_proforma_stenting_within_past6_months: bool,
+    #[validate(length(max = TEXT_MAX))]
     pub pmh_proforma_stent_type: String,
     pub pmh_proforma_valve_disease: bool,
     pub pmh_proforma_cardiac_surgery: bool,
@@ -263,6 +313,7 @@ pub struct Params {
     pub pmh_proforma_haemoptysis: bool,
     pub pmh_proforma_sleep_apnoea: bool,
     pub pmh_proforma_sleep_apnoea_using_cpap: bool,
+    #[validate(length(max = TEXT_MAX))]
     pub pmh_proforma_stop_bang_risk: String,
     pub pmh_proforma_other_respiratory_disease: bool,
     pub pmh_proforma_diabetes_mellitus: bool,
@@ -274,12 +325,15 @@ pub struct Params {
     pub pmh_proforma_hyperthyroid: bool,
     pub pmh_proforma_stroke_or_tia: bool,
     pub pmh_proforma_stroke_within3_months: bool,
+    #[validate(length(max = TEXT_MAX))]
     pub pmh_proforma_stroke_residual_disability: String,
     pub pmh_proforma_epilepsy_or_seizures: bool,
+    #[validate(length(max = TEXT_MAX))]
     pub pmh_proforma_epilepsy_control: String,
     pub pmh_proforma_ms: bool,
     pub pmh_proforma_muscular_dystrophy: bool,
     pub pmh_proforma_other_neurological_disease: bool,
+    #[validate(length(max = TEXT_MAX))]
     pub pmh_proforma_other_neurological_disease_details: String,
     pub pmh_proforma_dementia: bool,
     pub pmh_proforma_creutzfeldt_jakob_disease: bool,
@@ -300,6 +354,7 @@ pub struct Params {
     pub pmh_proforma_chronic_pain: bool,
     pub pmh_proforma_duke_activity_status_index: Option<i32>,
     pub pmh_proforma_mets_score: Option<f64>,
+    #[validate(length(max = TEXT_MAX))]
     pub pmh_proforma_ongoing_medications: String,
     pub pmh_proforma_cortisone_prednisone_steroid: bool,
     pub pmh_proforma_blood_transfusion_history: bool,
@@ -308,6 +363,7 @@ pub struct Params {
     pub airway_exam_proforma_mouth_opening: bool,
     pub airway_exam_proforma_loose_teeth: bool,
     pub airway_exam_proforma_denture_missing: bool,
+    #[validate(length(max = TEXT_MAX))]
     pub airway_exam_proforma_mp_grade: String,
     pub airway_exam_proforma_micrognathia: bool,
     pub airway_exam_proforma_tm_distance_over65: bool,
@@ -322,6 +378,7 @@ pub struct Params {
     pub vitals_proforma_height_cm: Option<f64>,
     pub vitals_proforma_weight_kg: Option<f64>,
     pub vitals_proforma_hr: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub vitals_proforma_bp: String,
     pub vitals_proforma_resp_rate: Option<i32>,
     pub vitals_proforma_spo2: Option<f64>,
@@ -335,48 +392,90 @@ pub struct Params {
     pub gen_exam_proforma_lymphadenopathy: bool,
     pub gen_exam_proforma_edema: bool,
     pub gen_exam_proforma_jvp: bool,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_blood_group_haemoglobin: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_differential_n: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_differential_l: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_differential_e: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_differential_m: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_differential_b: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_absolute: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_nc: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_tlc: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_tpc: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_esr: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_crp: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_pcv: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_latex_rast: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_fbs: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_ppbs: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_hba1c: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_na: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_k: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_urea: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_creatinine: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_bilirubin_total: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_bilirubin_direct: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_alk_phosphatase: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_sgpt_alt: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_sgot_ast: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_bt: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_ct: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_pt: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_aptt: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_inr: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_ft3: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_ft4: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_tsh: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_ecg: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_chest_xray: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_pft: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_abg: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_two_d_echo: String,
     pub invest_proforma_lvef_percent: Option<f64>,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_tmt: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_ct_scan: String,
+    #[validate(length(max = TEXT_MAX))]
     pub invest_proforma_mri: String,
     pub risk_factors_cardiac: bool,
     pub risk_factors_respiratory: bool,
@@ -396,24 +495,34 @@ pub struct Params {
     pub risk_factors_anaemia: bool,
     pub risk_factors_neuromuscular_disorders: bool,
     pub risk_factors_others: bool,
+    #[validate(length(max = TEXT_MAX))]
     pub risk_factors_others_details: String,
+    #[validate(length(max = TEXT_MAX))]
     pub anaes_plan_proforma_anaesthetic_concerns: String,
     pub anaes_plan_proforma_plan_tiva: bool,
     pub anaes_plan_proforma_plan_ra: bool,
     pub anaes_plan_proforma_plan_other: bool,
+    #[validate(length(max = TEXT_MAX))]
     pub anaes_plan_proforma_plan_other_details: String,
+    #[validate(length(max = TEXT_MAX))]
     pub anaes_plan_proforma_list_for_ot_defer_not_fit: String,
+    #[validate(length(max = TEXT_MAX))]
     pub anaes_plan_proforma_nil_orally_after: String,
     pub anaes_plan_proforma_informed_written_consent: bool,
     pub anaes_plan_proforma_risks_benefits_alternatives_discussed: bool,
+    #[validate(length(max = TEXT_MAX))]
     pub anaes_plan_proforma_arrange_units_of_blood: String,
     pub anaes_plan_proforma_arrange_post_op_icu: bool,
     pub anaes_plan_proforma_backup: bool,
+    #[validate(length(max = TEXT_MAX))]
     pub anaes_plan_proforma_do_investigations: String,
+    #[validate(length(max = TEXT_MAX))]
     pub anaes_plan_proforma_do_special_orders: String,
     pub anaes_plan_proforma_reviewed_high_risk_anaesthesia: bool,
     pub anaes_plan_proforma_reviewed_consent: bool,
+    #[validate(length(max = TEXT_MAX))]
     pub anaes_plan_proforma_consultant_anaesthesiologist_name: String,
+    #[validate(length(max = TEXT_MAX))]
     pub anaes_plan_proforma_consultant_anaesthesiologist_signature: String,
 }
 
@@ -1641,6 +1750,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -1651,6 +1761,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

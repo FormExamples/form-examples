@@ -5,13 +5,15 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::hip_replacement_surgery_evaluations::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub status: String,
+    #[validate(custom(function = "plausible_date"))]
     pub assessment_date: Option<Date>,
     pub assessment_time: Option<String>,
     pub site_name: String,
@@ -21,8 +23,10 @@ pub struct Params {
     pub pain_on_activity_0_10: Option<i32>,
     pub night_pain: String,
     pub prior_hip_surgery: String,
+    #[validate(length(max = TEXT_MAX))]
     pub prior_hip_surgery_detail: String,
     pub prior_injury_or_dysplasia_history: String,
+    #[validate(length(max = TEXT_MAX))]
     pub prior_injury_or_dysplasia_detail: String,
     pub ohs_pain_severity: Option<i32>,
     pub ohs_washing_and_drying: Option<i32>,
@@ -42,6 +46,7 @@ pub struct Params {
     pub limp_present: String,
     pub antalgic_gait: String,
     pub trendelenburg_sign: String,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub leg_length_discrepancy_as_cm: Option<f64>,
     pub flexion_degrees: Option<i32>,
     pub internal_rotation_degrees: Option<i32>,
@@ -57,6 +62,7 @@ pub struct Params {
     pub joint_space_narrowing: String,
     pub subchondral_sclerosis_or_cysts_present: String,
     pub mri_performed: String,
+    #[validate(length(max = TEXT_MAX))]
     pub mri_findings: String,
     pub ct_performed: String,
     pub ct_indication: String,
@@ -74,6 +80,7 @@ pub struct Params {
     pub cardiac_disease_present: String,
     pub bleeding_disorder_or_anticoagulant_use: String,
     pub smoking_status: String,
+    #[validate(length(max = TEXT_MAX))]
     pub general_fitness_note: String,
     pub full_blood_count_done: String,
     pub renal_function_done: String,
@@ -87,8 +94,10 @@ pub struct Params {
     pub interpreter_required: String,
     pub interpreter_language: String,
     pub recommendation: String,
+    #[validate(custom(function = "plausible_date"))]
     pub target_list_date: Option<Date>,
     pub responsible_surgeon: String,
+    #[validate(length(max = TEXT_MAX))]
     pub additional_notes: String,
 }
 
@@ -357,6 +366,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -367,6 +377,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

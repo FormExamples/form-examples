@@ -7,9 +7,10 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::hospital_dashboard_metric_values::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Hospital dashboard metrics ID.
@@ -21,10 +22,12 @@ pub struct Params {
     /// Category title.
     pub category_title: String,
     /// Metric text.
+    #[validate(length(max = TEXT_MAX))]
     pub metric_text: String,
     /// Metric value.
     pub metric_value: Option<f64>,
     /// Notes.
+    #[validate(length(max = TEXT_MAX))]
     pub notes: String,
 }
 
@@ -87,6 +90,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -98,6 +102,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

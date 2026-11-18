@@ -7,9 +7,10 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::grades::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Assessment id.
@@ -17,10 +18,12 @@ pub struct Params {
     /// Reba score.
     pub reba_score: i32,
     /// Risk level.
+    #[validate(length(max = TEXT_MAX))]
     pub risk_level: String,
     /// Reba score override.
     pub reba_score_override: Option<i32>,
     /// Override reason.
+    #[validate(length(max = TEXT_MAX))]
     pub override_reason: String,
     /// Graded at.
     pub graded_at: DateTimeWithTimeZone,
@@ -82,6 +85,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -93,6 +97,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

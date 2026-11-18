@@ -5,24 +5,34 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::lumbar_puncture_test_results::Model;
+use crate::support::validation::{plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
     pub report_status: String,
+    #[validate(custom(function = "plausible_date"))]
     pub performed_date: Option<Date>,
+    #[validate(custom(function = "plausible_date"))]
     pub reported_date: Option<Date>,
     pub clinical_history: String,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub opening_pressure_cmh2o: Option<f64>,
     pub csf_appearance: String,
+    #[validate(range(min = -9999999.9, max = 9999999.9))]
     pub csf_white_cell_count: Option<f64>,
+    #[validate(range(min = -999999999.9, max = 999999999.9))]
     pub csf_red_cell_count: Option<f64>,
+    #[validate(range(min = -999.99, max = 999.99))]
     pub csf_protein_g_l: Option<f64>,
+    #[validate(range(min = -999.99, max = 999.99))]
     pub csf_glucose_mmol_l: Option<f64>,
+    #[validate(range(min = -99.99, max = 99.99))]
     pub csf_serum_glucose_ratio: Option<f64>,
+    #[validate(range(min = -999.99, max = 999.99))]
     pub csf_lactate_mmol_l: Option<f64>,
     pub gram_stain_result: String,
     pub culture_result: String,
@@ -172,6 +182,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -182,6 +193,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

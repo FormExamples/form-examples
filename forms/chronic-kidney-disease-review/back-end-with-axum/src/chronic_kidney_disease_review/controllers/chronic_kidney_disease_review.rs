@@ -5,14 +5,16 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::chronic_kidney_disease_reviews::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
     pub clinician_name: String,
     pub clinician_role: String,
+    #[validate(custom(function = "plausible_date"))]
     pub reviewed_at: Option<Date>,
     pub care_setting: String,
     pub review_type: String,
@@ -22,11 +24,17 @@ pub struct Params {
     pub diabetes_status: String,
     pub primary_cause: String,
     pub months_since_diagnosis: Option<i32>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub egfr: Option<f64>,
+    #[validate(custom(function = "plausible_date"))]
     pub egfr_sample_date: Option<Date>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub previous_egfr: Option<f64>,
+    #[validate(custom(function = "plausible_date"))]
     pub previous_egfr_date: Option<Date>,
+    #[validate(range(min = -99999.9, max = 99999.9))]
     pub acr: Option<f64>,
+    #[validate(custom(function = "plausible_date"))]
     pub acr_sample_date: Option<Date>,
     pub acr_measured: String,
     pub systolic_blood_pressure: Option<i32>,
@@ -37,14 +45,22 @@ pub struct Params {
     pub nephrotoxic_drug_present: String,
     pub nephrotoxic_dose_adjusted: String,
     pub medication_review_completed: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub hba1c: Option<f64>,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub potassium: Option<f64>,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub bicarbonate: Option<f64>,
+    #[validate(range(min = -99.99, max = 99.99))]
     pub calcium: Option<f64>,
+    #[validate(range(min = -99.99, max = 99.99))]
     pub phosphate: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub pth: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub haemoglobin: Option<f64>,
     pub referral_decision: String,
+    #[validate(length(max = TEXT_MAX))]
     pub clinical_note: String,
 }
 
@@ -183,6 +199,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -193,6 +210,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

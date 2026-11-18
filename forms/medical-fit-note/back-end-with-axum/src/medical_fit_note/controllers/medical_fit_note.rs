@@ -7,9 +7,10 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::medical_fit_notes::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Employee ID.
@@ -19,6 +20,7 @@ pub struct Params {
     /// Status.
     pub status: String,
     /// Assessment date.
+    #[validate(custom(function = "plausible_date"))]
     pub assessment_date: Option<Date>,
     /// Assessment method.
     pub assessment_method: String,
@@ -29,8 +31,10 @@ pub struct Params {
     /// Fitness advice.
     pub fitness_advice: String,
     /// Period from.
+    #[validate(custom(function = "plausible_date"))]
     pub period_from: Option<Date>,
     /// Period to.
+    #[validate(custom(function = "plausible_date"))]
     pub period_to: Option<Date>,
     /// Period duration days.
     pub period_duration_days: Option<i32>,
@@ -45,8 +49,10 @@ pub struct Params {
     /// Adjustment workplace adaptations.
     pub adjustment_workplace_adaptations: String,
     /// Functional effects.
+    #[validate(length(max = TEXT_MAX))]
     pub functional_effects: String,
     /// Comments.
+    #[validate(length(max = TEXT_MAX))]
     pub comments: String,
     /// Employee consent to share.
     pub employee_consent_to_share: String,
@@ -153,6 +159,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -164,6 +171,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

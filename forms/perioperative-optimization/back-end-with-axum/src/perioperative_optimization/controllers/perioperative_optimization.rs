@@ -5,13 +5,15 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::perioperative_optimizations::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub status: String,
+    #[validate(custom(function = "plausible_date"))]
     pub assessment_date: Option<Date>,
     pub assessment_time: Option<String>,
     pub site_name: String,
@@ -22,6 +24,7 @@ pub struct Params {
     pub planned_procedure: String,
     pub surgical_specialty: String,
     pub consultant_surgeon: String,
+    #[validate(custom(function = "plausible_date"))]
     pub planned_surgery_date: Option<Date>,
     pub urgency: String,
     pub surgical_severity: String,
@@ -47,6 +50,7 @@ pub struct Params {
     pub difficult_airway_history: String,
     pub malignant_hyperthermia_history: String,
     pub venous_thromboembolism_history: String,
+    #[validate(length(max = TEXT_MAX))]
     pub family_history: String,
     pub pregnancy_status: String,
     pub takes_prescription_medicines: String,
@@ -70,6 +74,7 @@ pub struct Params {
     pub medication_hold_plan_agreed: String,
     pub medication_hold_plan_agreed_by: String,
     pub medication_adherence: String,
+    #[validate(length(max = TEXT_MAX))]
     pub medication_notes: String,
     pub has_drug_allergy: String,
     pub drug_allergy_detail: String,
@@ -80,45 +85,68 @@ pub struct Params {
     pub has_contrast_allergy: String,
     pub allergy_severity: String,
     pub adrenaline_auto_injector: String,
+    #[validate(length(max = TEXT_MAX))]
     pub allergy_notes: String,
+    #[validate(custom(function = "plausible_date"))]
     pub bloods_sample_date: Option<Date>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub haemoglobin_g_per_l: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub mean_cell_volume_fl: Option<f64>,
+    #[validate(range(min = -999999.9, max = 999999.9))]
     pub ferritin_ug_per_l: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub transferrin_saturation_percent: Option<f64>,
+    #[validate(range(min = -999999.9, max = 999999.9))]
     pub vitamin_b12_ng_per_l: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub folate_ug_per_l: Option<f64>,
+    #[validate(range(min = -99999.9, max = 99999.9))]
     pub c_reactive_protein_mg_per_l: Option<f64>,
+    #[validate(range(min = -99999.9, max = 99999.9))]
     pub creatinine_umol_per_l: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub egfr_ml_per_min: Option<f64>,
     pub anaemia_known_cause: String,
     pub anaemia_treatment_started: String,
     pub anaemia_treatment_route: String,
+    #[validate(custom(function = "plausible_date"))]
     pub anaemia_treatment_start_date: Option<Date>,
     pub previous_transfusion: String,
     pub group_and_save_done: String,
+    #[validate(length(max = TEXT_MAX))]
     pub anaemia_notes: String,
     pub diabetes_type: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub diabetes_duration_years: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub hba1c_mmol_per_mol: Option<f64>,
+    #[validate(custom(function = "plausible_date"))]
     pub hba1c_sample_date: Option<Date>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub capillary_glucose_mmol_per_l: Option<f64>,
     pub diabetes_treatment: String,
     pub insulin_regimen: String,
     pub hypoglycaemia_awareness: String,
     pub diabetes_team_review: String,
+    #[validate(custom(function = "plausible_date"))]
     pub diabetes_team_review_date: Option<Date>,
     pub foot_check_done: String,
+    #[validate(length(max = TEXT_MAX))]
     pub glycaemic_notes: String,
     pub smoking_status: String,
     pub cigarettes_per_day: Option<i32>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub pack_years: Option<f64>,
+    #[validate(custom(function = "plausible_date"))]
     pub quit_date: Option<Date>,
     pub smoking_cessation_offered: String,
     pub smoking_cessation_accepted: String,
     pub nicotine_replacement: String,
     pub vaping: String,
+    #[validate(length(max = TEXT_MAX))]
     pub smoking_notes: String,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub alcohol_units_per_week: Option<f64>,
     pub audit_c_frequency: Option<i32>,
     pub audit_c_typical_quantity: Option<i32>,
@@ -128,11 +156,17 @@ pub struct Params {
     pub alcohol_services_referral: String,
     pub recreational_drug_use: String,
     pub recreational_drug_detail: String,
+    #[validate(length(max = TEXT_MAX))]
     pub alcohol_notes: String,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub height_as_cm: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub weight_as_kg: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub body_mass_index: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub usual_weight_as_kg: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub weight_loss_percent: Option<f64>,
     pub weight_loss_is_intentional: String,
     pub acutely_ill: String,
@@ -141,20 +175,28 @@ pub struct Params {
     pub oral_nutritional_supplements: String,
     pub immunonutrition: String,
     pub dietitian_referral: String,
+    #[validate(length(max = TEXT_MAX))]
     pub nutrition_notes: String,
     pub usual_activity_level: String,
     pub climbs_flight_of_stairs: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub metabolic_equivalents: Option<f64>,
+    #[validate(range(min = -999.99, max = 999.99))]
     pub duke_activity_status_index: Option<f64>,
     pub six_minute_walk_metres: Option<i32>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub cpet_anaerobic_threshold: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub cpet_peak_vo2: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub grip_strength_kg: Option<f64>,
     pub prehabilitation_offered: String,
     pub prehabilitation_enrolled: String,
     pub prehabilitation_sessions_per_week: Option<i32>,
+    #[validate(custom(function = "plausible_date"))]
     pub prehabilitation_start_date: Option<Date>,
     pub protein_supplementation_recommended: String,
+    #[validate(length(max = TEXT_MAX))]
     pub fitness_notes: String,
     pub clinical_frailty_scale: Option<i32>,
     pub fried_weakness: String,
@@ -166,6 +208,7 @@ pub struct Params {
     pub mini_cog_performed: String,
     pub mini_cog_score: Option<i32>,
     pub cognitive_screen_tool: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub cognitive_screen_score: Option<f64>,
     pub cognitive_impairment: String,
     pub capacity_concern: String,
@@ -173,6 +216,7 @@ pub struct Params {
     pub mobility_aid: String,
     pub living_situation: String,
     pub care_package: String,
+    #[validate(length(max = TEXT_MAX))]
     pub frailty_notes: String,
     pub systolic_bp: Option<i32>,
     pub diastolic_bp: Option<i32>,
@@ -181,16 +225,20 @@ pub struct Params {
     pub murmur_present: String,
     pub exercise_tolerance: String,
     pub ejection_fraction_percent: Option<i32>,
+    #[validate(custom(function = "plausible_date"))]
     pub echo_date: Option<Date>,
     pub asthma_control: String,
     pub copd_control: String,
     pub inhaler_technique_checked: String,
     pub rescue_steroids: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub spirometry_fev1_percent: Option<f64>,
     pub stop_bang_score: Option<i32>,
     pub sleep_apnoea_diagnosis: String,
     pub cpap_use: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub oxygen_saturation_percent: Option<f64>,
+    #[validate(length(max = TEXT_MAX))]
     pub cardiorespiratory_notes: String,
     pub anxiety_level: String,
     pub depression_screen: String,
@@ -202,6 +250,7 @@ pub struct Params {
     pub support_after_discharge: String,
     pub health_literacy: String,
     pub psychological_support_offered: String,
+    #[validate(length(max = TEXT_MAX))]
     pub social_notes: String,
     pub plan_anaemia: String,
     pub referral_anaemia: String,
@@ -222,9 +271,12 @@ pub struct Params {
     pub responsible_clinician: String,
     pub plan_agreed_with_patient: String,
     pub plan_shared_with_patient: String,
+    #[validate(custom(function = "plausible_date"))]
     pub next_review_date: Option<Date>,
+    #[validate(length(max = TEXT_MAX))]
     pub plan_notes: String,
     pub gate_decision: String,
+    #[validate(length(max = TEXT_MAX))]
     pub additional_notes: String,
 }
 
@@ -875,6 +927,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -885,6 +938,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

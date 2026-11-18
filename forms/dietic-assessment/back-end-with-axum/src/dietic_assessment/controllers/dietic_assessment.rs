@@ -5,13 +5,15 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::dietic_assessments::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub dietitian_id: Uuid,
     pub status: String,
+    #[validate(custom(function = "plausible_date"))]
     pub assessment_date: Option<Date>,
     pub assessment_time: Option<String>,
     pub site_name: String,
@@ -22,6 +24,7 @@ pub struct Params {
     pub interpreter_required: String,
     pub interpreter_language: String,
     pub referral_source: String,
+    #[validate(custom(function = "plausible_date"))]
     pub referral_date: Option<Date>,
     pub referral_reason: String,
     pub primary_condition: String,
@@ -41,9 +44,12 @@ pub struct Params {
     pub condition_other: String,
     pub recent_surgery: String,
     pub recent_surgery_type: String,
+    #[validate(custom(function = "plausible_date"))]
     pub recent_surgery_date: Option<Date>,
     pub gastrointestinal_surgery: String,
+    #[validate(length(max = TEXT_MAX))]
     pub current_symptoms: String,
+    #[validate(length(max = TEXT_MAX))]
     pub family_history: String,
     pub pregnancy_status: String,
     pub takes_prescription_medicines: String,
@@ -60,48 +66,84 @@ pub struct Params {
     pub drug_nutrient_interaction: String,
     pub drug_nutrient_interaction_detail: String,
     pub medication_adherence: String,
+    #[validate(length(max = TEXT_MAX))]
     pub medication_notes: String,
     pub measurement_method: String,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub height_as_cm: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub weight_as_kg: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub body_mass_index: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub mid_upper_arm_circumference_as_cm: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub calf_circumference_as_cm: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub waist_as_cm: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub usual_weight_as_kg: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub weight_3_months_ago_as_kg: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub weight_6_months_ago_as_kg: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub weight_loss_percent: Option<f64>,
     pub weight_loss_is_intentional: String,
     pub weight_trend: String,
     pub clothes_or_jewellery_looser: String,
     pub oedema_present: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub oedema_adjustment_kg: Option<f64>,
     pub ascites_present: String,
     pub amputation_present: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub amputation_adjustment_percent: Option<f64>,
+    #[validate(length(max = TEXT_MAX))]
     pub anthropometry_notes: String,
+    #[validate(custom(function = "plausible_date"))]
     pub bloods_sample_date: Option<Date>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub albumin_g_per_l: Option<f64>,
+    #[validate(range(min = -99999.9, max = 99999.9))]
     pub c_reactive_protein_mg_per_l: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub haemoglobin_g_per_l: Option<f64>,
+    #[validate(range(min = -999999.9, max = 999999.9))]
     pub ferritin_ug_per_l: Option<f64>,
+    #[validate(range(min = -999999.9, max = 999999.9))]
     pub vitamin_b12_ng_per_l: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub folate_ug_per_l: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub vitamin_d_nmol_per_l: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub hba1c_mmol_per_mol: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub sodium_mmol_per_l: Option<f64>,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub potassium_mmol_per_l: Option<f64>,
+    #[validate(range(min = -9.99, max = 9.99))]
     pub magnesium_mmol_per_l: Option<f64>,
+    #[validate(range(min = -9.99, max = 9.99))]
     pub phosphate_mmol_per_l: Option<f64>,
+    #[validate(range(min = -9.99, max = 9.99))]
     pub corrected_calcium_mmol_per_l: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub urea_mmol_per_l: Option<f64>,
+    #[validate(range(min = -99999.9, max = 99999.9))]
     pub creatinine_umol_per_l: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub egfr_ml_per_min: Option<f64>,
+    #[validate(range(min = -99999.9, max = 99999.9))]
     pub alanine_aminotransferase_u_per_l: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub bilirubin_umol_per_l: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub total_cholesterol_mmol_per_l: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub triglycerides_mmol_per_l: Option<f64>,
+    #[validate(length(max = TEXT_MAX))]
     pub biochemistry_notes: String,
     pub subcutaneous_fat_loss: String,
     pub muscle_wasting_temples: String,
@@ -118,15 +160,23 @@ pub struct Params {
     pub nail_condition: String,
     pub pressure_ulcer_present: String,
     pub pressure_ulcer_category: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub hand_grip_strength_kg: Option<f64>,
+    #[validate(length(max = TEXT_MAX))]
     pub physical_exam_notes: String,
     pub meals_per_day: Option<i32>,
     pub snacks_per_day: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub recall_breakfast: String,
+    #[validate(length(max = TEXT_MAX))]
     pub recall_mid_morning: String,
+    #[validate(length(max = TEXT_MAX))]
     pub recall_lunch: String,
+    #[validate(length(max = TEXT_MAX))]
     pub recall_afternoon: String,
+    #[validate(length(max = TEXT_MAX))]
     pub recall_dinner: String,
+    #[validate(length(max = TEXT_MAX))]
     pub recall_evening: String,
     pub portion_size: String,
     pub appetite: String,
@@ -138,21 +188,26 @@ pub struct Params {
     pub estimated_energy_intake_kcal: Option<i32>,
     pub estimated_protein_intake_g: Option<i32>,
     pub eats_alone: String,
+    #[validate(length(max = TEXT_MAX))]
     pub dietary_recall_notes: String,
     pub fluid_intake_ml_per_day: Option<i32>,
     pub fluid_types: String,
     pub caffeinated_drinks_per_day: Option<i32>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub alcohol_units_per_week: Option<f64>,
     pub thickened_fluids: String,
     pub thickened_fluids_iddsi_level: String,
     pub hydration_signs: String,
     pub fluid_restriction: String,
     pub fluid_restriction_ml_per_day: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub hydration_notes: String,
     pub has_food_allergy: String,
     pub has_food_intolerance: String,
+    #[validate(length(max = TEXT_MAX))]
     pub foods_avoided: String,
     pub avoidance_reason: String,
+    #[validate(length(max = TEXT_MAX))]
     pub dislikes: String,
     pub therapeutic_diet: String,
     pub dietary_pattern: String,
@@ -160,6 +215,7 @@ pub struct Params {
     pub fasting_practice: String,
     pub texture_modified_diet: String,
     pub texture_modified_iddsi_level: String,
+    #[validate(length(max = TEXT_MAX))]
     pub preferences_notes: String,
     pub appetite_change: String,
     pub early_satiety: String,
@@ -178,6 +234,7 @@ pub struct Params {
     pub stoma_present: String,
     pub stoma_output_ml_per_day: Option<i32>,
     pub malabsorption_signs: String,
+    #[validate(length(max = TEXT_MAX))]
     pub gastrointestinal_notes: String,
     pub living_situation: String,
     pub who_shops: String,
@@ -188,6 +245,7 @@ pub struct Params {
     pub has_fridge: String,
     pub has_freezer: String,
     pub has_microwave: String,
+    #[validate(range(min = -99999.99, max = 99999.99))]
     pub food_budget_per_week: Option<f64>,
     pub worried_food_would_run_out: String,
     pub skipped_meals_for_money: String,
@@ -197,10 +255,12 @@ pub struct Params {
     pub work_pattern: String,
     pub meal_support: String,
     pub social_support: String,
+    #[validate(length(max = TEXT_MAX))]
     pub environment_notes: String,
     pub activity_level: String,
     pub exercise_type: String,
     pub exercise_minutes_per_week: Option<i32>,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub sedentary_hours_per_day: Option<f64>,
     pub mobility: String,
     pub falls_in_last_12_months: Option<i32>,
@@ -211,11 +271,14 @@ pub struct Params {
     pub sarcf_falls: Option<i32>,
     pub eats_independently: String,
     pub feeding_assistance_required: String,
+    #[validate(length(max = TEXT_MAX))]
     pub function_notes: String,
     pub motivation_0_10: Option<i32>,
     pub stage_of_change: String,
     pub self_efficacy_0_10: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub previous_attempts: String,
+    #[validate(length(max = TEXT_MAX))]
     pub barriers: String,
     pub scoff_make_yourself_sick: String,
     pub scoff_lost_control: String,
@@ -229,6 +292,7 @@ pub struct Params {
     pub safeguarding_concern: String,
     pub health_literacy: String,
     pub preferred_learning_style: String,
+    #[validate(length(max = TEXT_MAX))]
     pub patient_goal_in_own_words: String,
     pub acutely_ill: String,
     pub no_nutritional_intake_over_5_days: String,
@@ -248,12 +312,17 @@ pub struct Params {
     pub goal_1: String,
     pub goal_2: String,
     pub goal_3: String,
+    #[validate(length(max = TEXT_MAX))]
     pub education_provided: String,
+    #[validate(length(max = TEXT_MAX))]
     pub resources_given: String,
+    #[validate(length(max = TEXT_MAX))]
     pub monitoring_indicators: String,
     pub review_interval_weeks: Option<i32>,
+    #[validate(custom(function = "plausible_date"))]
     pub review_date: Option<Date>,
     pub onward_referral: String,
+    #[validate(length(max = TEXT_MAX))]
     pub additional_notes: String,
 }
 
@@ -976,6 +1045,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -986,6 +1056,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

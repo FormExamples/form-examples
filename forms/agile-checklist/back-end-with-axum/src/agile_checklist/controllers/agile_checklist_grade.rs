@@ -5,21 +5,26 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::agile_checklist_grades::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub agile_checklist_id: Uuid,
     pub answered_count: i32,
     pub teams_yes_count: i32,
     pub teams_applicable_count: i32,
+    #[validate(range(min = -999.99, max = 999.99))]
     pub teams_percent: Option<f64>,
     pub stakeholders_yes_count: i32,
     pub stakeholders_applicable_count: i32,
+    #[validate(range(min = -999.99, max = 999.99))]
     pub stakeholders_percent: Option<f64>,
     pub practices_yes_count: i32,
     pub practices_applicable_count: i32,
+    #[validate(range(min = -999.99, max = 999.99))]
     pub practices_percent: Option<f64>,
+    #[validate(range(min = -999.99, max = 999.99))]
     pub overall_percent: Option<f64>,
     pub teams_band: String,
     pub stakeholders_band: String,
@@ -28,6 +33,7 @@ pub struct Params {
     pub top_action_1: String,
     pub top_action_2: String,
     pub top_action_3: String,
+    #[validate(length(max = TEXT_MAX))]
     pub coach_notes: String,
     pub signed_at: Option<DateTimeWithTimeZone>,
     pub graded_at: DateTimeWithTimeZone,
@@ -130,6 +136,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -140,6 +147,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

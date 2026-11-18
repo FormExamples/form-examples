@@ -7,9 +7,10 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::okr_check_ins::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Okr objective id.
@@ -17,12 +18,16 @@ pub struct Params {
     /// Checked in at.
     pub checked_in_at: DateTimeWithTimeZone,
     /// Narrative.
+    #[validate(length(max = TEXT_MAX))]
     pub narrative: String,
     /// Since last changes.
+    #[validate(length(max = TEXT_MAX))]
     pub since_last_changes: String,
     /// Blockers.
+    #[validate(length(max = TEXT_MAX))]
     pub blockers: String,
     /// Asks.
+    #[validate(length(max = TEXT_MAX))]
     pub asks: String,
     /// Confidence decile at check in.
     pub confidence_decile_at_check_in: Option<i32>,
@@ -87,6 +92,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -98,6 +104,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

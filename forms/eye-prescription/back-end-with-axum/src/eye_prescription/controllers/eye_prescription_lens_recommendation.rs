@@ -7,9 +7,10 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::eye_prescription_lens_recommendations::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Eye prescription id.
@@ -19,6 +20,7 @@ pub struct Params {
     /// Material.
     pub material: String,
     /// Refractive index.
+    #[validate(range(min = -9.999, max = 9.999))]
     pub refractive_index: Option<f64>,
     /// Aspheric.
     pub aspheric: bool,
@@ -41,6 +43,7 @@ pub struct Params {
     /// Tint percent.
     pub tint_percent: Option<i32>,
     /// Dispenser notes.
+    #[validate(length(max = TEXT_MAX))]
     pub dispenser_notes: String,
 }
 
@@ -125,6 +128,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -136,6 +140,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

@@ -5,18 +5,22 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::nuclear_medicine_test_results::Model;
+use crate::support::validation::{plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
     pub report_status: String,
+    #[validate(custom(function = "plausible_date"))]
     pub performed_date: Option<Date>,
+    #[validate(custom(function = "plausible_date"))]
     pub reported_date: Option<Date>,
     pub scan_type: String,
     pub radiopharmaceutical: String,
+    #[validate(range(min = -9999999.9, max = 9999999.9))]
     pub injected_activity_mbq: Option<f64>,
     pub examination_adequacy: String,
     pub clinical_history: String,
@@ -28,8 +32,11 @@ pub struct Params {
     pub photopenic_area: bool,
     pub no_significant_abnormality: bool,
     pub incidental_finding: bool,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub ejection_fraction_percent: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub split_function_left_percent: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub split_function_right_percent: Option<f64>,
     pub impression: String,
     pub reporting_category: String,
@@ -151,6 +158,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -161,6 +169,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

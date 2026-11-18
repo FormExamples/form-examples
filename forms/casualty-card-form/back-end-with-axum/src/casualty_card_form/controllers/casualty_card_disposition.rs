@@ -5,25 +5,40 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::casualty_card_dispositions::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub casualty_card_id: Uuid,
+    #[validate(length(max = TEXT_MAX))]
     pub disposition: String,
+    #[validate(length(max = TEXT_MAX))]
     pub admitting_specialty: String,
+    #[validate(length(max = TEXT_MAX))]
     pub admitting_consultant: String,
+    #[validate(length(max = TEXT_MAX))]
     pub ward: String,
+    #[validate(length(max = TEXT_MAX))]
     pub level_of_care: String,
+    #[validate(length(max = TEXT_MAX))]
     pub discharge_diagnosis: String,
+    #[validate(length(max = TEXT_MAX))]
     pub discharge_medications: String,
+    #[validate(length(max = TEXT_MAX))]
     pub discharge_instructions: String,
+    #[validate(length(max = TEXT_MAX))]
     pub follow_up: String,
+    #[validate(length(max = TEXT_MAX))]
     pub return_precautions: String,
+    #[validate(length(max = TEXT_MAX))]
     pub receiving_hospital: String,
+    #[validate(length(max = TEXT_MAX))]
     pub reason_for_transfer: String,
+    #[validate(length(max = TEXT_MAX))]
     pub mode_of_transfer: String,
     pub discharge_time: Option<DateTimeWithTimeZone>,
+    #[validate(length(max = TEXT_MAX))]
     pub total_time_in_department: String,
 }
 
@@ -108,6 +123,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -118,6 +134,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

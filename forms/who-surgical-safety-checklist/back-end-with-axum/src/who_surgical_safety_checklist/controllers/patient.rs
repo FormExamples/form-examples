@@ -5,15 +5,18 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::patients::Model;
+use crate::support::validation::{plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub name: String,
+    #[validate(custom(function = "plausible_date"))]
     pub birth_date: Option<Date>,
     pub sex: String,
     pub united_kingdom_nhs_number: Option<String>,
     pub medical_record_number: Option<String>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub weight_as_kg: Option<f64>,
 }
 
@@ -71,6 +74,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -81,6 +85,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

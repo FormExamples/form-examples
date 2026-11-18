@@ -6,9 +6,10 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::medical_operation_notes::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
 /// Parameters accepted when creating or updating a medical operation note record.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Status.
@@ -38,10 +39,13 @@ pub struct Params {
     /// Asa physical status.
     pub asa_physical_status: String,
     /// Pre operative diagnosis.
+    #[validate(length(max = TEXT_MAX))]
     pub pre_operative_diagnosis: String,
     /// Post operative diagnosis.
+    #[validate(length(max = TEXT_MAX))]
     pub post_operative_diagnosis: String,
     /// Indication.
+    #[validate(length(max = TEXT_MAX))]
     pub indication: String,
     /// Urgency.
     pub urgency: String,
@@ -60,6 +64,7 @@ pub struct Params {
     /// Regional block description.
     pub regional_block_description: String,
     /// Invasive monitoring.
+    #[validate(length(max = TEXT_MAX))]
     pub invasive_monitoring: String,
     /// Intraop crystalloid ml.
     pub intraop_crystalloid_ml: Option<i32>,
@@ -72,10 +77,12 @@ pub struct Params {
     /// Anaesthetic event.
     pub anaesthetic_event: String,
     /// Anaesthetic event description.
+    #[validate(length(max = TEXT_MAX))]
     pub anaesthetic_event_description: String,
     /// Patient position.
     pub patient_position: String,
     /// Pressure area protection notes.
+    #[validate(length(max = TEXT_MAX))]
     pub pressure_area_protection_notes: String,
     /// Prep solution.
     pub prep_solution: String,
@@ -86,6 +93,7 @@ pub struct Params {
     /// Incision type.
     pub incision_type: String,
     /// Incision length cm.
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub incision_length_cm: Option<f64>,
     /// Table tilt.
     pub table_tilt: String,
@@ -102,12 +110,16 @@ pub struct Params {
     /// Converted to open.
     pub converted_to_open: String,
     /// Conversion reason.
+    #[validate(length(max = TEXT_MAX))]
     pub conversion_reason: String,
     /// Operative findings summary.
+    #[validate(length(max = TEXT_MAX))]
     pub operative_findings_summary: String,
     /// Pathology found.
+    #[validate(length(max = TEXT_MAX))]
     pub pathology_found: String,
     /// Anatomical anomalies.
+    #[validate(length(max = TEXT_MAX))]
     pub anatomical_anomalies: String,
     /// Intraop photographs taken.
     pub intraop_photographs_taken: String,
@@ -126,6 +138,7 @@ pub struct Params {
     /// Instrument count final agreed.
     pub instrument_count_final_agreed: String,
     /// Count discrepancy resolution.
+    #[validate(length(max = TEXT_MAX))]
     pub count_discrepancy_resolution: String,
     /// Estimated blood loss ml.
     pub estimated_blood_loss_ml: Option<i32>,
@@ -146,10 +159,12 @@ pub struct Params {
     /// Never event flagged.
     pub never_event_flagged: String,
     /// Never event description.
+    #[validate(length(max = TEXT_MAX))]
     pub never_event_description: String,
     /// Equipment problem.
     pub equipment_problem: String,
     /// Equipment problem description.
+    #[validate(length(max = TEXT_MAX))]
     pub equipment_problem_description: String,
     /// Recovery destination.
     pub recovery_destination: String,
@@ -158,6 +173,7 @@ pub struct Params {
     /// IV fluids plan.
     pub iv_fluids_plan: String,
     /// Analgesia plan.
+    #[validate(length(max = TEXT_MAX))]
     pub analgesia_plan: String,
     /// Antibiotic plan.
     pub antibiotic_plan: String,
@@ -168,10 +184,13 @@ pub struct Params {
     /// Mobilisation plan.
     pub mobilisation_plan: String,
     /// Wound care plan.
+    #[validate(length(max = TEXT_MAX))]
     pub wound_care_plan: String,
     /// Follow up plan.
+    #[validate(length(max = TEXT_MAX))]
     pub follow_up_plan: String,
     /// Special instructions.
+    #[validate(length(max = TEXT_MAX))]
     pub special_instructions: String,
     /// Sign out completed.
     pub sign_out_completed: String,
@@ -180,10 +199,13 @@ pub struct Params {
     /// Surgeon override grade.
     pub surgeon_override_grade: String,
     /// Surgeon override reason.
+    #[validate(length(max = TEXT_MAX))]
     pub surgeon_override_reason: String,
     /// Attestation text.
+    #[validate(length(max = TEXT_MAX))]
     pub attestation_text: String,
     /// Electronic signature.
+    #[validate(length(max = TEXT_MAX))]
     pub electronic_signature: String,
     /// Dictated at.
     pub dictated_at: Option<DateTimeWithTimeZone>,
@@ -484,6 +506,7 @@ pub async fn list(
 /// Create a new medical operation note record.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -495,6 +518,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

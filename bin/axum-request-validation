@@ -1,0 +1,171 @@
+#!/usr/bin/env python3
+"""bin/axum-request-validation — give each form's `back-end-with-axum/` request
+validation that names the field, instead of leaving a bad value to the database.
+
+The crates' `Params` structs were plain `String`/`f64`/`Date`, so the only
+checks were the database's CHECK constraints (see bin/axum-check-constraints),
+which leave `TEXT` unbounded, accept any `double precision`, and take a birth
+date in the year 9999. This derives `Validate` on each controller's `Params`
+from the column types and calls it in `add` and `update`, answering `422` with
+the failed fields in camelCase and the rule codes, never the values:
+
+  - a `text` column            -> length(max = TEXT_MAX), 10 000 characters
+  - a `NUMERIC(p,s)` in sql/   -> range of what that precision holds,
+                                  e.g. NUMERIC(5,1) is -9999.9 ..= 9999.9
+  - a `date` column            -> plausible_date, years 1900 ..= 2200
+
+It writes `support/validation.rs` (identical in every crate) and registers it in
+`support/mod.rs`. A `Params` with none of those columns is left alone. Idempotent:
+a controller already deriving `Validate` is skipped.
+
+Usage:
+  bin/axum-request-validation <slug>...          # named forms
+  bin/axum-request-validation --all              # every form's Axum crate
+  bin/axum-request-validation --check --all      # CI drift check (non-zero on drift)
+  bin/axum-request-validation --root DIR --all   # a copy of the repo at DIR
+"""
+
+from __future__ import annotations
+
+import argparse
+import re
+import sys
+from decimal import Decimal
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent / "lib"))
+import axum_crate as ac  # noqa: E402
+
+REPO = Path(__file__).resolve().parent.parent
+TEMPLATE = REPO / "forms" / "four-a-test-for-delirium" / "back-end-with-axum" / "src" / \
+    "four_a_test_for_delirium" / "support" / "validation.rs"
+
+NUMERIC = re.compile(r"^\s*\"?(\w+)\"?\s+(?:NUMERIC|DECIMAL)\s*\(\s*(\d+)\s*,\s*(\d+)\s*\)", re.I | re.M)
+STRUCT = re.compile(r"(#\[derive\(Clone, Debug, Serialize, Deserialize)\)\](\n#\[serde\(rename_all = \"camelCase\"\)\]\npub struct Params \{\n)(.*?)(\n\}\n)", re.S)
+FIELD = re.compile(r"^    pub (\w+): (.+),$")
+INSERT = re.compile(r"INSERT INTO\s+\"?(\w+)\"?", re.I)
+IMPORT = "use crate::support::validation::{%s};\n"
+
+
+def numeric_ranges(form: Path) -> dict[str, dict[str, tuple[int, int]]]:
+    """SQL table -> column -> (precision, scale), read from sql/'s NUMERIC(p,s)."""
+    found: dict[str, dict[str, tuple[int, int]]] = {}
+    for path in sorted((form / "sql").glob("*.sql")):
+        if path.name == "schema.sql":
+            continue
+        for table, body in ac.create_bodies(path.read_text()):
+            for match in NUMERIC.finditer(body):
+                found.setdefault(table, {})[match[1]] = (int(match[2]), int(match[3]))
+    return found
+
+
+def bound(precision: int, scale: int) -> str:
+    """The largest magnitude NUMERIC(precision, scale) holds, as a Rust float."""
+    value = Decimal(10) ** (precision - scale) - Decimal(1).scaleb(-scale)
+    text = format(value, "f")
+    return text if "." in text else text + ".0"
+
+
+def rules_for(field: str, rust: str, column, ranges: dict[str, tuple[int, int]]):
+    """The `#[validate(...)]` attribute for one Params field, and the helpers it uses."""
+    base = rust.removeprefix("Option<").removesuffix(">")
+    if column is None:
+        return None, set()
+    if base == "String" and column.sql.lower() == "text":
+        return "length(max = TEXT_MAX)", {"TEXT_MAX"}
+    if base == "f64" and field in ranges:
+        top = bound(*ranges[field])
+        return f"range(min = -{top}, max = {top})", set()
+    if base == "Date" and column.sql.lower() == "date":
+        return 'custom(function = "plausible_date")', {"plausible_date"}
+    return None, set()
+
+
+def rewrite(source: str, tables: dict, numerics: dict, sql_tables: dict) -> str:
+    """The controller with Validate derived and called, or unchanged."""
+    if "derive(Clone, Debug, Serialize, Deserialize, Validate)" in source:
+        return source
+    match = STRUCT.search(source)
+    insert = INSERT.search(source)
+    if not match or not insert or insert[1] not in tables:
+        return source
+    table = tables[insert[1]]
+    by_name = {c.name: c for c in table.columns}
+    sql_name = next((n for n, t in sql_tables.items() if ac.resolve(n, t, tables) == insert[1]), None)
+    ranges = numerics.get(sql_name, {})
+    helpers: set[str] = set()
+    lines, used = [], 0
+    for line in match[3].split("\n"):
+        field = FIELD.match(line)
+        if field:
+            attr, uses = rules_for(field[1], field[2], by_name.get(field[1]), ranges)
+            if attr:
+                lines.append(f"    #[validate({attr})]")
+                helpers |= uses
+                used += 1
+        lines.append(line)
+    if not used:
+        return source
+    out = source[:match.start()] + match[1] + ", Validate)]" + match[2] + "\n".join(lines) + match[4] \
+        + source[match.end():]
+    names = sorted(helpers | {"unprocessable"})
+    out = re.sub(r"(use crate::models::\w+::Model;\n)", lambda m: m[1] + IMPORT % ", ".join(names), out, 1)
+    for call in ("let item = params.insert(", "let item = params.update("):
+        out = out.replace(f"    {call}", f"    params.validate().map_err(|e| unprocessable(&e))?;\n    {call}", 1)
+    return out
+
+
+def wanted(crate: Path, template: str) -> dict[Path, str]:
+    src = ac.source_dir(crate)
+    files: dict[Path, str] = {src / "support" / "validation.rs": template}
+    mod = src / "support" / "mod.rs"
+    text = mod.read_text()
+    if "pub mod validation;" not in text:
+        text = text.replace("pub mod seed;", "pub mod seed;\npub mod validation;", 1)
+    files[mod] = text
+    form = crate.parent
+    tables = ac.migration_tables(crate)
+    sql_tables = ac.sql_tables(form)
+    numerics = numeric_ranges(form)
+    for path in sorted((src / "controllers").glob("*.rs")):
+        current = path.read_text()
+        files[path] = rewrite(current, tables, numerics, sql_tables)
+    return files
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    parser.add_argument("slugs", nargs="*")
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--root", default=str(REPO))
+    args = parser.parse_args()
+    if not args.all and not args.slugs:
+        parser.error("name forms, or pass --all")
+    template = TEMPLATE.read_text()
+    crates = ac.crates(Path(args.root), args.slugs, args.all)
+    crates = [c / "back-end-with-axum" if c.name != "back-end-with-axum" else c for c in crates]
+    drift, changed = [], 0
+    for crate in crates:
+        if not (crate / "Cargo.toml").is_file():
+            continue
+        for path, text in wanted(crate, template).items():
+            current = path.read_text() if path.is_file() else None
+            if current == text:
+                continue
+            if args.check:
+                drift.append(f"{crate.parent.name}: {path.relative_to(crate)} is missing or stale")
+            else:
+                path.write_text(text)
+                changed += 1
+    if args.check:
+        for line in drift:
+            print(line)
+        print(f"{len(crates)} crates, {len(drift)} file(s) out of step")
+        return 1 if drift else 0
+    print(f"axum-request-validation: {changed} file(s) written across {len(crates)} crates")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

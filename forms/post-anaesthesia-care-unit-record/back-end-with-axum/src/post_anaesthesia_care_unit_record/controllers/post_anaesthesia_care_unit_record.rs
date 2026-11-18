@@ -5,8 +5,9 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::post_anaesthesia_care_unit_records::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
@@ -16,11 +17,13 @@ pub struct Params {
     pub anaesthetist_name: String,
     pub admitted_at: Option<DateTimeWithTimeZone>,
     pub anaesthetic_technique: String,
+    #[validate(length(max = TEXT_MAX))]
     pub procedure: String,
     pub patient_identifier: String,
     pub age_band: String,
     pub sex: String,
     pub asa_status: String,
+    #[validate(range(min = -9999.0, max = 9999.0))]
     pub baseline_systolic_bp: Option<f64>,
     pub ambulatory_case: String,
     pub activity: String,
@@ -29,15 +32,19 @@ pub struct Params {
     pub consciousness: String,
     pub oxygen_saturation: String,
     pub airway_status: String,
+    #[validate(range(min = -999.0, max = 999.0))]
     pub pain_score: Option<f64>,
     pub ponv_severity: String,
+    #[validate(length(max = TEXT_MAX))]
     pub analgesia_given: String,
+    #[validate(length(max = TEXT_MAX))]
     pub antiemetics_given: String,
     pub padss_vital_signs: String,
     pub padss_ambulation: String,
     pub padss_nausea_vomiting: String,
     pub padss_pain: String,
     pub padss_surgical_bleeding: String,
+    #[validate(length(max = TEXT_MAX))]
     pub recovery_note: String,
 }
 
@@ -157,6 +164,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -167,6 +175,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

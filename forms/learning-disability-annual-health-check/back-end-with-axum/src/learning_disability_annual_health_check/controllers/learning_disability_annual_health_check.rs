@@ -5,15 +5,19 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::learning_disability_annual_health_checks::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
+    #[validate(length(max = TEXT_MAX))]
     pub clinician_name: String,
     pub clinician_role: String,
+    #[validate(custom(function = "plausible_date"))]
     pub checked_on: Option<Date>,
+    #[validate(length(max = TEXT_MAX))]
     pub practice_name: String,
     pub easy_read_invitation_sent: String,
     pub pre_check_done: String,
@@ -21,12 +25,16 @@ pub struct Params {
     pub age_band: String,
     pub sex: String,
     pub ld_register_status: String,
+    #[validate(length(max = TEXT_MAX))]
     pub main_carer: String,
+    #[validate(length(max = TEXT_MAX))]
     pub communication_needs: String,
     pub reasonable_adjustments_recorded: String,
     pub health_passport: String,
+    #[validate(length(max = TEXT_MAX))]
     pub consent_capacity_note: String,
     pub weight_bmi_status: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub bmi: Option<f64>,
     pub blood_pressure_status: String,
     pub epilepsy_status: String,
@@ -39,25 +47,33 @@ pub struct Params {
     pub hearing_status: String,
     pub foot_health_status: String,
     pub skin_status: String,
+    #[validate(length(max = TEXT_MAX))]
     pub physical_health_actions: String,
     pub cancer_screening_status: String,
     pub other_screening_status: String,
     pub immunisation_status: String,
     pub medication_reconciled: String,
     pub psychotropic_prescribed: String,
+    #[validate(length(max = TEXT_MAX))]
     pub psychotropic_indication: String,
+    #[validate(custom(function = "plausible_date"))]
     pub psychotropic_last_reviewed: Option<Date>,
     pub stomp_discussed: String,
+    #[validate(length(max = TEXT_MAX))]
     pub medication_side_effects: String,
     pub mental_health_status: String,
     pub behaviour_status: String,
+    #[validate(length(max = TEXT_MAX))]
     pub behaviour_triggers: String,
     pub syndrome_specific_status: String,
     pub carer_needs_status: String,
+    #[validate(length(max = TEXT_MAX))]
     pub social_circumstances: String,
     pub health_action_plan_produced: String,
     pub health_action_plan_shared: String,
+    #[validate(length(max = TEXT_MAX))]
     pub health_action_plan_actions: String,
+    #[validate(length(max = TEXT_MAX))]
     pub clinician_note: String,
 }
 
@@ -236,6 +252,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -246,6 +263,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

@@ -5,40 +5,53 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::nursing_care_plans::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
+    #[validate(length(max = TEXT_MAX))]
     pub nurse_name: String,
     pub nurse_role: String,
+    #[validate(length(max = TEXT_MAX))]
     pub nmc_number: String,
     pub authored_at: Option<DateTimeWithTimeZone>,
     pub care_setting: String,
     pub plan_type: String,
     pub model_used: String,
+    #[validate(length(max = TEXT_MAX))]
     pub patient_identifier: String,
+    #[validate(length(max = TEXT_MAX))]
     pub patient_name: String,
+    #[validate(custom(function = "plausible_date"))]
     pub date_of_birth: Option<Date>,
     pub sex: String,
+    #[validate(length(max = TEXT_MAX))]
     pub ward_location: String,
+    #[validate(length(max = TEXT_MAX))]
     pub handover_note: String,
+    #[validate(custom(function = "plausible_date"))]
     pub review_date: Option<Date>,
     pub falls_risk_done: String,
     pub falls_risk_level: String,
+    #[validate(custom(function = "plausible_date"))]
     pub falls_risk_assessed_on: Option<Date>,
     pub falls_risk_actioned: String,
     pub pressure_ulcer_risk_done: String,
     pub pressure_ulcer_risk_level: String,
+    #[validate(custom(function = "plausible_date"))]
     pub pressure_ulcer_risk_assessed_on: Option<Date>,
     pub pressure_ulcer_risk_actioned: String,
     pub vte_risk_done: String,
     pub vte_risk_level: String,
+    #[validate(custom(function = "plausible_date"))]
     pub vte_risk_assessed_on: Option<Date>,
     pub vte_risk_actioned: String,
     pub nutrition_risk_done: String,
     pub nutrition_risk_level: String,
+    #[validate(custom(function = "plausible_date"))]
     pub nutrition_risk_assessed_on: Option<Date>,
     pub nutrition_risk_actioned: String,
 }
@@ -167,6 +180,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -177,6 +191,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

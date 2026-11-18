@@ -5,25 +5,35 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::toxicology_test_results::Model;
+use crate::support::validation::{plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
     pub report_status: String,
+    #[validate(custom(function = "plausible_date"))]
     pub performed_date: Option<Date>,
+    #[validate(custom(function = "plausible_date"))]
     pub reported_date: Option<Date>,
     pub specimen_condition: String,
     pub clinical_history: String,
     pub suspected_agent: String,
+    #[validate(range(min = -99999.9, max = 99999.9))]
     pub time_since_ingestion_hours: Option<f64>,
+    #[validate(range(min = -9999999.9, max = 9999999.9))]
     pub paracetamol_level_mg_l: Option<f64>,
+    #[validate(range(min = -9999999.9, max = 9999999.9))]
     pub salicylate_level_mg_l: Option<f64>,
+    #[validate(range(min = -9999999.9, max = 9999999.9))]
     pub ethanol_level: Option<f64>,
+    #[validate(range(min = -9999.99, max = 9999.99))]
     pub lithium_level_mmol_l: Option<f64>,
+    #[validate(range(min = -9999.99, max = 9999.99))]
     pub digoxin_level: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub carboxyhaemoglobin_percent: Option<f64>,
     pub drugs_of_abuse_screen: String,
     pub specific_drug_level: String,
@@ -151,6 +161,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -161,6 +172,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

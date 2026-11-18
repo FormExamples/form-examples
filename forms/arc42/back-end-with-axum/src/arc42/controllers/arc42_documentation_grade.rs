@@ -7,42 +7,58 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::arc42_documentation_grades::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Arc42 documentation id.
     pub arc42_documentation_id: Uuid,
     /// Computed maturity.
+    #[validate(length(max = TEXT_MAX))]
     pub computed_maturity: String,
     /// Final maturity.
+    #[validate(length(max = TEXT_MAX))]
     pub final_maturity: String,
     /// Override reason.
+    #[validate(length(max = TEXT_MAX))]
     pub override_reason: String,
     /// Completeness section 1.
+    #[validate(length(max = TEXT_MAX))]
     pub completeness_section_1: String,
     /// Completeness section 2.
+    #[validate(length(max = TEXT_MAX))]
     pub completeness_section_2: String,
     /// Completeness section 3.
+    #[validate(length(max = TEXT_MAX))]
     pub completeness_section_3: String,
     /// Completeness section 4.
+    #[validate(length(max = TEXT_MAX))]
     pub completeness_section_4: String,
     /// Completeness section 5.
+    #[validate(length(max = TEXT_MAX))]
     pub completeness_section_5: String,
     /// Completeness section 6.
+    #[validate(length(max = TEXT_MAX))]
     pub completeness_section_6: String,
     /// Completeness section 7.
+    #[validate(length(max = TEXT_MAX))]
     pub completeness_section_7: String,
     /// Completeness section 8.
+    #[validate(length(max = TEXT_MAX))]
     pub completeness_section_8: String,
     /// Completeness section 9.
+    #[validate(length(max = TEXT_MAX))]
     pub completeness_section_9: String,
     /// Completeness section 10.
+    #[validate(length(max = TEXT_MAX))]
     pub completeness_section_10: String,
     /// Completeness section 11.
+    #[validate(length(max = TEXT_MAX))]
     pub completeness_section_11: String,
     /// Completeness section 12.
+    #[validate(length(max = TEXT_MAX))]
     pub completeness_section_12: String,
 }
 
@@ -132,6 +148,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -143,6 +160,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

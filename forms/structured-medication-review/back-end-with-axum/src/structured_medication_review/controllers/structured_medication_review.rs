@@ -5,30 +5,41 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::structured_medication_reviews::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
+    #[validate(length(max = TEXT_MAX))]
     pub clinician_name: String,
     pub clinician_role: String,
     pub reviewed_at: Option<DateTimeWithTimeZone>,
     pub care_setting: String,
     pub consultation_mode: String,
+    #[validate(length(max = TEXT_MAX))]
     pub patient_identifier: String,
     pub age_band: String,
     pub sex: String,
     pub frailty_status: String,
     pub lives_in_care_home: String,
+    #[validate(length(max = TEXT_MAX))]
     pub long_term_conditions: String,
+    #[validate(length(max = TEXT_MAX))]
     pub presenting_problems: String,
+    #[validate(length(max = TEXT_MAX))]
     pub patient_reported_issues: String,
+    #[validate(length(max = TEXT_MAX))]
     pub what_matters_to_patient: String,
+    #[validate(length(max = TEXT_MAX))]
     pub shared_decisions: String,
+    #[validate(length(max = TEXT_MAX))]
     pub monitoring_due: String,
     pub overdue_monitoring_count: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub follow_up_plan: String,
+    #[validate(custom(function = "plausible_date"))]
     pub follow_up_date: Option<Date>,
     pub review_completed: String,
 }
@@ -130,6 +141,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -140,6 +152,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

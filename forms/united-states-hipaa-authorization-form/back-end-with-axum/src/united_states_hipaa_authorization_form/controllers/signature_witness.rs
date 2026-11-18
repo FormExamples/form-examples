@@ -5,21 +5,27 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::signature_witnesses::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub hipaa_authorization_id: Uuid,
     pub individual_signature_confirmed: String,
+    #[validate(length(max = TEXT_MAX))]
     pub individual_signature_image_uri: String,
+    #[validate(custom(function = "plausible_date"))]
     pub signature_date: Option<Date>,
+    #[validate(length(max = TEXT_MAX))]
     pub signed_at_location: String,
     pub parent_guardian_co_signature_required: String,
     pub parent_guardian_name: String,
     pub parent_guardian_signature_confirmed: String,
+    #[validate(custom(function = "plausible_date"))]
     pub parent_guardian_signature_date: Option<Date>,
     pub witness_name: String,
     pub witness_signature_confirmed: String,
+    #[validate(custom(function = "plausible_date"))]
     pub witness_date: Option<Date>,
     pub witness_role: String,
 }
@@ -101,6 +107,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -111,6 +118,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

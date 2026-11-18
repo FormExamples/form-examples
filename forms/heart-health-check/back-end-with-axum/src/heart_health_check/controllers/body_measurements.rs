@@ -7,20 +7,25 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::body_measurements::Model;
+use crate::support::validation::{unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Assessment id.
     pub assessment_id: Uuid,
     /// Height cm.
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub height_cm: Option<f64>,
     /// Weight kg.
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub weight_kg: Option<f64>,
     /// Bmi.
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub bmi: Option<f64>,
     /// Waist circumference cm.
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub waist_circumference_cm: Option<f64>,
 }
 
@@ -77,6 +82,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -88,6 +94,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

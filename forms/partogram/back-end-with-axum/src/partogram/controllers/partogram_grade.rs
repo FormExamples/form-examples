@@ -5,12 +5,14 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::partogram_grades::Model;
+use crate::support::validation::{unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub partogram_id: Uuid,
     pub progress_status: String,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub latest_dilatation_cm: Option<f64>,
     pub graded_at: DateTimeWithTimeZone,
 }
@@ -64,6 +66,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -74,6 +77,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

@@ -5,17 +5,20 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::anaesthetic_records::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
     pub theatre: String,
+    #[validate(custom(function = "plausible_date"))]
     pub operation_date: Option<Date>,
     pub anaesthetist_name: String,
     pub assistant_name: String,
     pub surgeon_name: String,
+    #[validate(length(max = TEXT_MAX))]
     pub planned_procedure: String,
     pub urgency: String,
     pub machine_checked: String,
@@ -23,46 +26,67 @@ pub struct Params {
     pub who_time_out: String,
     pub consent_confirmed: String,
     pub fasting_confirmed: String,
+    #[validate(length(max = TEXT_MAX))]
     pub iv_access: String,
     pub allergy_band_checked: String,
+    #[validate(length(max = TEXT_MAX))]
     pub documented_allergies: String,
     pub asa_status: String,
     pub asa_emergency_modifier: String,
     pub mallampati_class: Option<i32>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub mouth_opening_cm: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub thyromental_distance_cm: Option<f64>,
+    #[validate(length(max = TEXT_MAX))]
     pub dentition: String,
     pub anticipated_difficult_airway: String,
     pub prior_difficult_intubation: String,
     pub airway_technique: String,
     pub device_size: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub tube_depth_cm: Option<f64>,
     pub cuffed: String,
     pub cormack_lehane_grade: Option<i32>,
     pub intubation_attempts: Option<i32>,
     pub capnography_confirmed: String,
+    #[validate(length(max = TEXT_MAX))]
     pub monitoring_modalities: String,
     pub anaesthetic_technique: String,
+    #[validate(range(min = -999999.9, max = 999999.9))]
     pub crystalloid_ml: Option<f64>,
+    #[validate(range(min = -999999.9, max = 999999.9))]
     pub colloid_ml: Option<f64>,
+    #[validate(range(min = -999999.9, max = 999999.9))]
     pub blood_products_ml: Option<f64>,
+    #[validate(range(min = -999999.9, max = 999999.9))]
     pub estimated_blood_loss_ml: Option<f64>,
+    #[validate(range(min = -999999.9, max = 999999.9))]
     pub urine_output_ml: Option<f64>,
+    #[validate(range(min = -999999.9, max = 999999.9))]
     pub cell_salvage_ml: Option<f64>,
     pub regional_technique: String,
     pub regional_level: String,
     pub regional_drug: String,
+    #[validate(range(min = -99999.99, max = 99999.99))]
     pub regional_dose_mg: Option<f64>,
     pub block_height: String,
+    #[validate(length(max = TEXT_MAX))]
     pub regional_complications: String,
     pub recovery_destination: String,
+    #[validate(length(max = TEXT_MAX))]
     pub handover_airway_status: String,
+    #[validate(length(max = TEXT_MAX))]
     pub analgesia_plan: String,
+    #[validate(length(max = TEXT_MAX))]
     pub antiemetic_plan: String,
+    #[validate(length(max = TEXT_MAX))]
     pub oxygen_plan: String,
+    #[validate(length(max = TEXT_MAX))]
     pub outstanding_tasks: String,
     pub handover_at: Option<DateTimeWithTimeZone>,
     pub receiving_practitioner: String,
+    #[validate(length(max = TEXT_MAX))]
     pub anaesthetist_signature: String,
     pub signed_at: Option<DateTimeWithTimeZone>,
 }
@@ -255,6 +279,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -265,6 +290,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

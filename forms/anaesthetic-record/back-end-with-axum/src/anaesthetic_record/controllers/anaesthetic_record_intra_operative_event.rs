@@ -5,13 +5,15 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::anaesthetic_record_intra_operative_events::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub anaesthetic_record_id: Uuid,
     pub event_type: String,
     pub occurred_at: Option<DateTimeWithTimeZone>,
+    #[validate(length(max = TEXT_MAX))]
     pub management: String,
 }
 
@@ -65,6 +67,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -75,6 +78,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

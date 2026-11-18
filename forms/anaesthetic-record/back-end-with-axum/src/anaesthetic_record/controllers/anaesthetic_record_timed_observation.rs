@@ -5,19 +5,28 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::anaesthetic_record_timed_observations::Model;
+use crate::support::validation::{unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub anaesthetic_record_id: Uuid,
     pub observed_at: Option<DateTimeWithTimeZone>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub systolic_blood_pressure: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub diastolic_blood_pressure: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub heart_rate: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub spo2: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub end_tidal_co2: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub temperature: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub agent_percent: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub fresh_gas_flow_l: Option<f64>,
 }
 
@@ -86,6 +95,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -96,6 +106,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

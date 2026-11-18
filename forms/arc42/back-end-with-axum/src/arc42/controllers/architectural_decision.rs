@@ -7,9 +7,10 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::architectural_decisions::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Arc42 documentation id.
@@ -17,14 +18,19 @@ pub struct Params {
     /// Ordinal.
     pub ordinal: i32,
     /// Title.
+    #[validate(length(max = TEXT_MAX))]
     pub title: String,
     /// Status.
+    #[validate(length(max = TEXT_MAX))]
     pub status: String,
     /// Context.
+    #[validate(length(max = TEXT_MAX))]
     pub context: String,
     /// Decision.
+    #[validate(length(max = TEXT_MAX))]
     pub decision: String,
     /// Consequences.
+    #[validate(length(max = TEXT_MAX))]
     pub consequences: String,
 }
 
@@ -86,6 +92,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -97,6 +104,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

@@ -5,8 +5,9 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::glasgow_coma_scales::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
@@ -15,23 +16,30 @@ pub struct Params {
     pub assessor_role: String,
     pub assessed_at: Option<DateTimeWithTimeZone>,
     pub setting: String,
+    #[validate(length(max = TEXT_MAX))]
     pub reason: String,
     pub intubated: String,
     pub sedated: String,
     pub paralysed: String,
     pub eye_response: String,
+    #[validate(length(max = TEXT_MAX))]
     pub eye_not_testable_reason: String,
     pub verbal_response: String,
+    #[validate(length(max = TEXT_MAX))]
     pub verbal_not_testable_reason: String,
     pub motor_response: String,
+    #[validate(length(max = TEXT_MAX))]
     pub motor_not_testable_reason: String,
     pub left_pupil_reactivity: String,
     pub right_pupil_reactivity: String,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub left_pupil_size_mm: Option<f64>,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub right_pupil_size_mm: Option<f64>,
     pub previous_total: Option<i32>,
     pub previous_motor_score: Option<i32>,
     pub previous_assessed_at: Option<DateTimeWithTimeZone>,
+    #[validate(length(max = TEXT_MAX))]
     pub clinical_note: String,
 }
 
@@ -137,6 +145,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -147,6 +156,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

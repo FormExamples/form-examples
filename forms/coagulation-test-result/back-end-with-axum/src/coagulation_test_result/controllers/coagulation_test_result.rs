@@ -5,26 +5,36 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::coagulation_test_results::Model;
+use crate::support::validation::{plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
     pub report_status: String,
+    #[validate(custom(function = "plausible_date"))]
     pub performed_date: Option<Date>,
+    #[validate(custom(function = "plausible_date"))]
     pub reported_date: Option<Date>,
     pub specimen_condition: String,
     pub clinical_history: String,
     pub on_anticoagulant: bool,
     pub anticoagulant_agent: String,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub prothrombin_time_seconds: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub inr: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub activated_partial_thromboplastin_time_seconds: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub aptt_ratio: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub fibrinogen_g_l: Option<f64>,
+    #[validate(range(min = -9999999.9, max = 9999999.9))]
     pub d_dimer: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub thrombin_time_seconds: Option<f64>,
     pub factor_assays: String,
     pub overall_result_status: String,
@@ -154,6 +164,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -164,6 +175,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

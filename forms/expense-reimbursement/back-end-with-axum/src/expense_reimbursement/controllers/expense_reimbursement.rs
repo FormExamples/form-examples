@@ -5,23 +5,32 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::expense_reimbursements::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub worker_id: Uuid,
     pub manager_id: Uuid,
     pub status: String,
+    #[validate(custom(function = "plausible_date"))]
     pub claim_date: Option<Date>,
+    #[validate(custom(function = "plausible_date"))]
     pub claim_period_start_date: Option<Date>,
+    #[validate(custom(function = "plausible_date"))]
     pub claim_period_end_date: Option<Date>,
     pub claim_title: String,
+    #[validate(length(max = TEXT_MAX))]
     pub business_purpose: String,
     pub project_or_cost_code: String,
     pub currency_as_iso_4217: String,
+    #[validate(range(min = -9999999999.99, max = 9999999999.99))]
     pub total_amount: Option<f64>,
+    #[validate(range(min = -9999999999.99, max = 9999999999.99))]
     pub total_vat_amount: Option<f64>,
+    #[validate(range(min = -9999999999.99, max = 9999999999.99))]
     pub advance_already_received_amount: Option<f64>,
+    #[validate(range(min = -9999999999.99, max = 9999999999.99))]
     pub amount_to_repay: Option<f64>,
     pub repayment_method: String,
     pub bank_account_name: String,
@@ -133,6 +142,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -143,6 +153,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

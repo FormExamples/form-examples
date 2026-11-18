@@ -7,18 +7,22 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::lpa_continuation_sheets::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Lpa id.
     pub lpa_id: Uuid,
     /// Kind.
+    #[validate(length(max = TEXT_MAX))]
     pub kind: String,
     /// Body text.
+    #[validate(length(max = TEXT_MAX))]
     pub body_text: String,
     /// Signed on.
+    #[validate(custom(function = "plausible_date"))]
     pub signed_on: Option<Date>,
     /// Ordinal.
     pub ordinal: i32,
@@ -77,6 +81,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -88,6 +93,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

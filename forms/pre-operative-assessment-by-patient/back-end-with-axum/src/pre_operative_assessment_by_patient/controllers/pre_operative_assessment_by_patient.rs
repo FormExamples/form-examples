@@ -5,142 +5,269 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::pre_operative_assessment_by_patients::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub weight: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub height: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub bmi: Option<f64>,
+    #[validate(length(max = TEXT_MAX))]
     pub planned_procedure: String,
+    #[validate(length(max = TEXT_MAX))]
     pub procedure_urgency: String,
+    #[validate(length(max = TEXT_MAX))]
     pub status: String,
+    #[validate(length(max = TEXT_MAX))]
     pub hypertension: String,
+    #[validate(length(max = TEXT_MAX))]
     pub hypertension_controlled: String,
+    #[validate(length(max = TEXT_MAX))]
     pub ischemic_heart_disease: String,
+    #[validate(length(max = TEXT_MAX))]
     pub ihd_details: String,
+    #[validate(length(max = TEXT_MAX))]
     pub heart_failure: String,
+    #[validate(length(max = TEXT_MAX))]
     pub heart_failure_nyha: String,
+    #[validate(length(max = TEXT_MAX))]
     pub valvular_disease: String,
+    #[validate(length(max = TEXT_MAX))]
     pub valvular_details: String,
+    #[validate(length(max = TEXT_MAX))]
     pub arrhythmia: String,
+    #[validate(length(max = TEXT_MAX))]
     pub arrhythmia_type: String,
+    #[validate(length(max = TEXT_MAX))]
     pub pacemaker: String,
+    #[validate(length(max = TEXT_MAX))]
     pub recent_mi: String,
     pub recent_mi_weeks: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub asthma: String,
+    #[validate(length(max = TEXT_MAX))]
     pub asthma_frequency: String,
+    #[validate(length(max = TEXT_MAX))]
     pub copd: String,
+    #[validate(length(max = TEXT_MAX))]
     pub copd_severity: String,
+    #[validate(length(max = TEXT_MAX))]
     pub osa: String,
+    #[validate(length(max = TEXT_MAX))]
     pub osa_cpap: String,
+    #[validate(length(max = TEXT_MAX))]
     pub smoking: String,
     pub smoking_pack_years: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub recent_urti: String,
+    #[validate(length(max = TEXT_MAX))]
     pub ckd: String,
+    #[validate(length(max = TEXT_MAX))]
     pub ckd_stage: String,
+    #[validate(length(max = TEXT_MAX))]
     pub dialysis: String,
+    #[validate(length(max = TEXT_MAX))]
     pub dialysis_type: String,
+    #[validate(length(max = TEXT_MAX))]
     pub liver_disease: String,
+    #[validate(length(max = TEXT_MAX))]
     pub cirrhosis: String,
+    #[validate(length(max = TEXT_MAX))]
     pub child_pugh_score: String,
+    #[validate(length(max = TEXT_MAX))]
     pub hepatitis: String,
+    #[validate(length(max = TEXT_MAX))]
     pub hepatitis_type: String,
+    #[validate(length(max = TEXT_MAX))]
     pub diabetes: String,
+    #[validate(length(max = TEXT_MAX))]
     pub diabetes_control: String,
+    #[validate(length(max = TEXT_MAX))]
     pub diabetes_on_insulin: String,
+    #[validate(length(max = TEXT_MAX))]
     pub thyroid_disease: String,
+    #[validate(length(max = TEXT_MAX))]
     pub thyroid_type: String,
+    #[validate(length(max = TEXT_MAX))]
     pub adrenal_insufficiency: String,
+    #[validate(length(max = TEXT_MAX))]
     pub stroke_or_tia: String,
+    #[validate(length(max = TEXT_MAX))]
     pub stroke_details: String,
+    #[validate(length(max = TEXT_MAX))]
     pub epilepsy: String,
+    #[validate(length(max = TEXT_MAX))]
     pub epilepsy_controlled: String,
+    #[validate(length(max = TEXT_MAX))]
     pub neuromuscular_disease: String,
+    #[validate(length(max = TEXT_MAX))]
     pub neuromuscular_details: String,
+    #[validate(length(max = TEXT_MAX))]
     pub raised_icp: String,
+    #[validate(length(max = TEXT_MAX))]
     pub bleeding_disorder: String,
+    #[validate(length(max = TEXT_MAX))]
     pub bleeding_details: String,
+    #[validate(length(max = TEXT_MAX))]
     pub on_anticoagulants: String,
+    #[validate(length(max = TEXT_MAX))]
     pub anticoagulant_type: String,
+    #[validate(length(max = TEXT_MAX))]
     pub sickle_cell_disease: String,
+    #[validate(length(max = TEXT_MAX))]
     pub sickle_cell_trait: String,
+    #[validate(length(max = TEXT_MAX))]
     pub anaemia: String,
+    #[validate(length(max = TEXT_MAX))]
     pub rheumatoid_arthritis: String,
+    #[validate(length(max = TEXT_MAX))]
     pub cervical_spine_issues: String,
+    #[validate(length(max = TEXT_MAX))]
     pub limited_neck_movement: String,
+    #[validate(length(max = TEXT_MAX))]
     pub limited_mouth_opening: String,
+    #[validate(length(max = TEXT_MAX))]
     pub dental_issues: String,
+    #[validate(length(max = TEXT_MAX))]
     pub dental_details: String,
+    #[validate(length(max = TEXT_MAX))]
     pub previous_difficult_airway: String,
+    #[validate(length(max = TEXT_MAX))]
     pub mallampati_score: String,
+    #[validate(length(max = TEXT_MAX))]
     pub gord: String,
+    #[validate(length(max = TEXT_MAX))]
     pub hiatus_hernia: String,
+    #[validate(length(max = TEXT_MAX))]
     pub nausea: String,
+    #[validate(length(max = TEXT_MAX))]
     pub name: String,
+    #[validate(length(max = TEXT_MAX))]
     pub dose: String,
+    #[validate(length(max = TEXT_MAX))]
     pub frequency: String,
     pub sort_order: i32,
+    #[validate(length(max = TEXT_MAX))]
     pub allergen: String,
+    #[validate(length(max = TEXT_MAX))]
     pub reaction: String,
+    #[validate(length(max = TEXT_MAX))]
     pub severity: String,
     pub allergy_sort_order: i32,
+    #[validate(length(max = TEXT_MAX))]
     pub previous_anaesthesia: String,
+    #[validate(length(max = TEXT_MAX))]
     pub anaesthesia_problems: String,
+    #[validate(length(max = TEXT_MAX))]
     pub anaesthesia_problem_details: String,
+    #[validate(length(max = TEXT_MAX))]
     pub family_mh_history: String,
+    #[validate(length(max = TEXT_MAX))]
     pub family_mh_details: String,
+    #[validate(length(max = TEXT_MAX))]
     pub ponv: String,
+    #[validate(length(max = TEXT_MAX))]
     pub alcohol: String,
     pub alcohol_units_per_week: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub recreational_drugs: String,
+    #[validate(length(max = TEXT_MAX))]
     pub drug_details: String,
+    #[validate(length(max = TEXT_MAX))]
     pub exercise_tolerance: String,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub estimated_mets: Option<f64>,
+    #[validate(length(max = TEXT_MAX))]
     pub mobility_aids: String,
+    #[validate(length(max = TEXT_MAX))]
     pub recent_decline: String,
+    #[validate(length(max = TEXT_MAX))]
     pub possibly_pregnant: String,
+    #[validate(length(max = TEXT_MAX))]
     pub pregnancy_confirmed: String,
     pub gestation_weeks: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub cancer_history: String,
+    #[validate(length(max = TEXT_MAX))]
     pub cancer_history_details: String,
+    #[validate(length(max = TEXT_MAX))]
     pub mrsa_history: String,
+    #[validate(length(max = TEXT_MAX))]
     pub recent_hospital_or_care_home_admission: String,
+    #[validate(length(max = TEXT_MAX))]
     pub palpitations_or_blackouts: String,
+    #[validate(length(max = TEXT_MAX))]
     pub heart_or_artery_surgery: String,
+    #[validate(length(max = TEXT_MAX))]
     pub swollen_ankles: String,
+    #[validate(length(max = TEXT_MAX))]
     pub snoring: String,
+    #[validate(length(max = TEXT_MAX))]
     pub snoring_loud: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub collar_size_inches: Option<f64>,
+    #[validate(length(max = TEXT_MAX))]
     pub daytime_sleepiness: String,
+    #[validate(length(max = TEXT_MAX))]
     pub observed_apnoea_episodes: String,
+    #[validate(length(max = TEXT_MAX))]
     pub urinary_symptoms: String,
+    #[validate(length(max = TEXT_MAX))]
     pub urinary_catheter_history: String,
+    #[validate(length(max = TEXT_MAX))]
     pub prostate_problems: String,
+    #[validate(length(max = TEXT_MAX))]
     pub personal_vte_history: String,
+    #[validate(length(max = TEXT_MAX))]
     pub family_vte_history: String,
+    #[validate(length(max = TEXT_MAX))]
     pub blood_transfusion_history: String,
+    #[validate(length(max = TEXT_MAX))]
     pub joint_or_arthritis_problems: String,
+    #[validate(length(max = TEXT_MAX))]
     pub back_or_neck_problems: String,
+    #[validate(length(max = TEXT_MAX))]
     pub skin_conditions: String,
+    #[validate(length(max = TEXT_MAX))]
     pub pressure_sore_risk: String,
+    #[validate(length(max = TEXT_MAX))]
     pub bowel_problems: String,
+    #[validate(length(max = TEXT_MAX))]
     pub food_intolerances: String,
+    #[validate(length(max = TEXT_MAX))]
     pub food_intolerances_details: String,
+    #[validate(length(max = TEXT_MAX))]
     pub blood_donor: String,
+    #[validate(length(max = TEXT_MAX))]
     pub body_piercings: String,
+    #[validate(length(max = TEXT_MAX))]
     pub hearing_problems: String,
+    #[validate(length(max = TEXT_MAX))]
     pub vision_problems: String,
+    #[validate(length(max = TEXT_MAX))]
     pub balance_issues: String,
+    #[validate(length(max = TEXT_MAX))]
     pub contraceptive_or_hrt_use: String,
+    #[validate(length(max = TEXT_MAX))]
     pub last_menstrual_period: String,
+    #[validate(length(max = TEXT_MAX))]
     pub head_injury_requiring_hospitalisation: String,
+    #[validate(length(max = TEXT_MAX))]
     pub memory_concerns: String,
+    #[validate(length(max = TEXT_MAX))]
     pub dementia_diagnosis: String,
+    #[validate(length(max = TEXT_MAX))]
     pub depression_or_anxiety_history: String,
+    #[validate(length(max = TEXT_MAX))]
     pub depression_anxiety_impacts_daily_life: String,
+    #[validate(length(max = TEXT_MAX))]
     pub depression_anxiety_seen_doctor: String,
+    #[validate(length(max = TEXT_MAX))]
     pub learning_difficulties: String,
 }
 
@@ -538,6 +665,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -548,6 +676,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

@@ -7,32 +7,43 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::suppliers::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Name.
+    #[validate(length(max = TEXT_MAX))]
     pub name: String,
     /// Trading name.
+    #[validate(length(max = TEXT_MAX))]
     pub trading_name: String,
     /// Company registration number.
+    #[validate(length(max = TEXT_MAX))]
     pub company_registration_number: String,
     /// Country of registration as iso 3166 1 alpha 2.
     pub country_of_registration_as_iso_3166_1_alpha_2: Option<String>,
     /// Ico registration number.
+    #[validate(length(max = TEXT_MAX))]
     pub ico_registration_number: String,
     /// Website.
+    #[validate(length(max = TEXT_MAX))]
     pub website: String,
     /// Postal address as full text.
+    #[validate(length(max = TEXT_MAX))]
     pub postal_address_as_full_text: Option<String>,
     /// Postcode.
+    #[validate(length(max = TEXT_MAX))]
     pub postcode: Option<String>,
     /// Contact name.
+    #[validate(length(max = TEXT_MAX))]
     pub contact_name: String,
     /// Contact email.
+    #[validate(length(max = TEXT_MAX))]
     pub contact_email: Option<String>,
     /// Contact phone.
+    #[validate(length(max = TEXT_MAX))]
     pub contact_phone: Option<String>,
 }
 
@@ -107,6 +118,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -118,6 +130,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

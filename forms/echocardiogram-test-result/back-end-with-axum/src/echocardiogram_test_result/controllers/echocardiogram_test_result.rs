@@ -5,26 +5,32 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::echocardiogram_test_results::Model;
+use crate::support::validation::{plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
     pub echo_type: String,
+    #[validate(custom(function = "plausible_date"))]
     pub performed_date: Option<Date>,
+    #[validate(custom(function = "plausible_date"))]
     pub reported_date: Option<Date>,
     pub report_status: String,
     pub study_quality: String,
     pub clinical_history: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub lv_ejection_fraction_percent: Option<f64>,
     pub lv_function: String,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub lv_internal_diameter_diastole_mm: Option<f64>,
     pub aortic_stenosis: String,
     pub aortic_regurgitation: String,
     pub mitral_stenosis: String,
     pub mitral_regurgitation: String,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub pulmonary_artery_systolic_pressure_mmhg: Option<f64>,
     pub lv_hypertrophy: bool,
     pub regional_wall_motion_abnormality: bool,
@@ -162,6 +168,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -172,6 +179,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

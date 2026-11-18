@@ -5,19 +5,29 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::parkland_formula_for_burns_grades::Model;
+use crate::support::validation::{unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub parkland_formula_for_burns_id: Uuid,
+    #[validate(range(min = -99999999.99, max = 99999999.99))]
     pub total_24h_volume_ml: Option<f64>,
+    #[validate(range(min = -99999999.99, max = 99999999.99))]
     pub first_8h_volume_ml: Option<f64>,
+    #[validate(range(min = -99999999.99, max = 99999999.99))]
     pub next_16h_volume_ml: Option<f64>,
+    #[validate(range(min = -9999.99, max = 9999.99))]
     pub hours_since_injury: Option<f64>,
+    #[validate(range(min = -999.99, max = 999.99))]
     pub remaining_first_8h_hours: Option<f64>,
+    #[validate(range(min = -99999999.99, max = 99999999.99))]
     pub first_8h_rate_ml_h: Option<f64>,
+    #[validate(range(min = -99999999.99, max = 99999999.99))]
     pub next_16h_rate_ml_h: Option<f64>,
+    #[validate(range(min = -999999.99, max = 999999.99))]
     pub urine_output_target_min_ml_h: Option<f64>,
+    #[validate(range(min = -999999.99, max = 999999.99))]
     pub urine_output_target_max_ml_h: Option<f64>,
     pub graded_at: DateTimeWithTimeZone,
 }
@@ -93,6 +103,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -103,6 +114,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

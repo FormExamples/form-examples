@@ -5,17 +5,21 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::assessments::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub status: String,
     pub age_of_onset: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub known_allergens: String,
     pub family_history_of_atopy: String,
+    #[validate(length(max = TEXT_MAX))]
     pub family_atopy_details: String,
     pub family_history_of_allergy: String,
+    #[validate(length(max = TEXT_MAX))]
     pub family_allergy_details: String,
     pub pollen_allergy: String,
     pub dust_mite_allergy: String,
@@ -25,6 +29,7 @@ pub struct Params {
     pub insect_sting_allergy: String,
     pub insect_sting_severity: String,
     pub seasonal_pattern: String,
+    #[validate(length(max = TEXT_MAX))]
     pub other_environmental_allergens: String,
     pub asthma: String,
     pub asthma_severity: String,
@@ -34,15 +39,20 @@ pub struct Params {
     pub rhinitis_severity: String,
     pub eosinophilic_oesophagitis: String,
     pub mast_cell_disorders: String,
+    #[validate(length(max = TEXT_MAX))]
     pub mast_cell_details: String,
     pub mental_health_impact: String,
+    #[validate(length(max = TEXT_MAX))]
     pub mental_health_details: String,
     pub quality_of_life_score: Option<i32>,
     pub school_work_impact: String,
+    #[validate(length(max = TEXT_MAX))]
     pub school_work_impact_details: String,
     pub emergency_action_plan_status: String,
     pub training_provided: String,
+    #[validate(length(max = TEXT_MAX))]
     pub training_details: String,
+    #[validate(length(max = TEXT_MAX))]
     pub follow_up_schedule: String,
 }
 
@@ -179,6 +189,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -189,6 +200,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

@@ -5,14 +5,17 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::chronic_obstructive_pulmonary_disease_reviews::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
+    #[validate(length(max = TEXT_MAX))]
     pub clinician_name: String,
     pub clinician_role: String,
+    #[validate(custom(function = "plausible_date"))]
     pub reviewed_at: Option<Date>,
     pub review_type: String,
     pub patient_identifier: String,
@@ -20,23 +23,33 @@ pub struct Params {
     pub sex: String,
     pub diagnosis_year: Option<i32>,
     pub spirometry_confirmed: String,
+    #[validate(length(max = TEXT_MAX))]
     pub exposure_notes: String,
+    #[validate(range(min = -99.99, max = 99.99))]
     pub fev1_litres: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub fev1_percent_predicted: Option<f64>,
+    #[validate(range(min = -99.99, max = 99.99))]
     pub fvc_litres: Option<f64>,
+    #[validate(range(min = -9.999, max = 9.999))]
     pub fev1_fvc_ratio: Option<f64>,
+    #[validate(custom(function = "plausible_date"))]
     pub spirometry_date: Option<Date>,
     pub mrc_grade: Option<i32>,
     pub mmrc_grade: Option<i32>,
     pub cat_score: Option<i32>,
     pub exacerbations_last_12m: Option<i32>,
     pub hospitalisations_last_12m: Option<i32>,
+    #[validate(custom(function = "plausible_date"))]
     pub last_exacerbation_date: Option<Date>,
     pub rescue_pack_courses: Option<i32>,
     pub smoking_status: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub pack_years: Option<f64>,
     pub cessation_support_offered: String,
+    #[validate(length(max = TEXT_MAX))]
     pub inhaled_therapy: String,
+    #[validate(length(max = TEXT_MAX))]
     pub device_type: String,
     pub inhaler_technique_checked: String,
     pub inhaler_technique_adequate: String,
@@ -47,10 +60,13 @@ pub struct Params {
     pub pulmonary_rehab_status: String,
     pub oxygen_use: String,
     pub resting_spo2: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub comorbidities: String,
     pub self_management_plan: String,
     pub rescue_pack_supplied: String,
+    #[validate(length(max = TEXT_MAX))]
     pub next_review_interval: String,
+    #[validate(length(max = TEXT_MAX))]
     pub clinician_note: String,
 }
 
@@ -206,6 +222,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -216,6 +233,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

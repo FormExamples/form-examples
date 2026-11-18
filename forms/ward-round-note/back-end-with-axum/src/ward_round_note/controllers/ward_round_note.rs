@@ -5,39 +5,52 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::ward_round_notes::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
+    #[validate(length(max = TEXT_MAX))]
     pub clinician_name: String,
     pub clinician_grade: String,
     pub reviewed_at: Option<DateTimeWithTimeZone>,
+    #[validate(length(max = TEXT_MAX))]
     pub ward: String,
     pub patient_identifier: String,
+    #[validate(custom(function = "plausible_date"))]
     pub admission_date: Option<Date>,
+    #[validate(length(max = TEXT_MAX))]
     pub primary_diagnosis: String,
+    #[validate(length(max = TEXT_MAX))]
     pub overnight_events: String,
     pub no_overnight_events: String,
+    #[validate(length(max = TEXT_MAX))]
     pub problem_list: String,
+    #[validate(length(max = TEXT_MAX))]
     pub examination_summary: String,
     pub news2_total: Option<i32>,
     pub news2_single_param_three: String,
     pub observation_trend: String,
+    #[validate(length(max = TEXT_MAX))]
     pub investigations_reviewed: String,
     pub no_investigations_outstanding: String,
     pub abnormal_result_flagged: String,
     pub abnormal_result_actioned: String,
     pub vte_status: String,
     pub vte_prophylaxis_in_place: String,
+    #[validate(length(max = TEXT_MAX))]
     pub medication_changes: String,
     pub no_medication_changes: String,
+    #[validate(length(max = TEXT_MAX))]
     pub plan_and_jobs: String,
     pub escalation_status: String,
     pub senior_review_present: String,
+    #[validate(custom(function = "plausible_date"))]
     pub estimated_discharge_date: Option<Date>,
     pub discharge_not_estimable: String,
+    #[validate(length(max = TEXT_MAX))]
     pub clinical_note: String,
 }
 
@@ -160,6 +173,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -170,6 +184,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

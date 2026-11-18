@@ -7,22 +7,28 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::assessment_satisfaction_ratings::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Assessment id.
     pub assessment_id: Uuid,
     /// Overall satisfaction score.
+    #[validate(range(min = -99.9, max = 99.9))]
     pub overall_satisfaction_score: Option<f64>,
     /// Self care satisfaction score.
+    #[validate(range(min = -99.9, max = 99.9))]
     pub self_care_satisfaction_score: Option<f64>,
     /// Productivity satisfaction score.
+    #[validate(range(min = -99.9, max = 99.9))]
     pub productivity_satisfaction_score: Option<f64>,
     /// Leisure satisfaction score.
+    #[validate(range(min = -99.9, max = 99.9))]
     pub leisure_satisfaction_score: Option<f64>,
     /// Satisfaction notes.
+    #[validate(length(max = TEXT_MAX))]
     pub satisfaction_notes: String,
 }
 
@@ -85,6 +91,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -96,6 +103,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

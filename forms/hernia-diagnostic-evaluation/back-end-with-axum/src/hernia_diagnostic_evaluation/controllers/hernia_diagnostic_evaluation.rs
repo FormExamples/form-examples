@@ -5,13 +5,15 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::hernia_diagnostic_evaluations::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub status: String,
+    #[validate(custom(function = "plausible_date"))]
     pub assessment_date: Option<Date>,
     pub assessment_time: Option<String>,
     pub site_name: String,
@@ -25,6 +27,7 @@ pub struct Params {
     pub prior_hernia_repair: String,
     pub prior_hernia_repair_mesh: String,
     pub prior_hernia_repair_site: String,
+    #[validate(length(max = TEXT_MAX))]
     pub history_notes: String,
     pub risk_chronic_cough: String,
     pub risk_constipation_or_straining: String,
@@ -36,22 +39,27 @@ pub struct Params {
     pub risk_pregnancy: String,
     pub risk_connective_tissue_disorder: String,
     pub risk_ascites: String,
+    #[validate(length(max = TEXT_MAX))]
     pub risk_factors_notes: String,
     pub inspection_location: String,
     pub inspection_location_other: String,
     pub bulge_visible_at_rest: String,
     pub bulge_enlarges_on_standing_or_straining: String,
     pub skin_changes: String,
+    #[validate(length(max = TEXT_MAX))]
     pub inspection_notes: String,
     pub palpable_mass: String,
     pub cough_impulse_positive: String,
     pub tenderness: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub mass_size_as_cm: Option<f64>,
+    #[validate(length(max = TEXT_MAX))]
     pub palpation_notes: String,
     pub reducibility_status: String,
     pub reduces_spontaneously: String,
     pub reduces_with_manual_pressure: String,
     pub does_not_reduce: String,
+    #[validate(length(max = TEXT_MAX))]
     pub reducibility_notes: String,
     pub red_flag_severe_pain: String,
     pub red_flag_vomiting: String,
@@ -60,12 +68,14 @@ pub struct Params {
     pub red_flag_erythema_or_discolouration: String,
     pub red_flag_previously_reducible_now_irreducible: String,
     pub red_flag_tachycardia: String,
+    #[validate(length(max = TEXT_MAX))]
     pub red_flag_notes: String,
     pub hernia_type: String,
     pub hernia_type_other: String,
     pub inguinal_subtype: String,
     pub laterality: String,
     pub ehs_size_grade: String,
+    #[validate(length(max = TEXT_MAX))]
     pub classification_notes: String,
     pub ultrasound_performed: String,
     pub ultrasound_findings: String,
@@ -74,6 +84,7 @@ pub struct Params {
     pub mri_performed: String,
     pub mri_findings: String,
     pub imaging_indication: String,
+    #[validate(length(max = TEXT_MAX))]
     pub imaging_notes: String,
     pub differential_lipoma: String,
     pub differential_lymphadenopathy: String,
@@ -82,6 +93,7 @@ pub struct Params {
     pub differential_femoral_aneurysm: String,
     pub differential_abscess: String,
     pub differential_other: String,
+    #[validate(length(max = TEXT_MAX))]
     pub differential_notes: String,
     pub pain_interferes_with_work_or_activity: String,
     pub functional_impact_scale_0_10: Option<i32>,
@@ -90,7 +102,9 @@ pub struct Params {
     pub conservative_detail: String,
     pub referral_made: String,
     pub referral_target_timeframe: String,
+    #[validate(length(max = TEXT_MAX))]
     pub management_notes: String,
+    #[validate(length(max = TEXT_MAX))]
     pub additional_notes: String,
 }
 
@@ -365,6 +379,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -375,6 +390,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

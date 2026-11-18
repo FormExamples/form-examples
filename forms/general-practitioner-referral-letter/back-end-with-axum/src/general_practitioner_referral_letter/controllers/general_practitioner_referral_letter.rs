@@ -5,36 +5,58 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::general_practitioner_referral_letters::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
     pub patient_identifier: String,
     pub referrer_role: String,
+    #[validate(length(max = TEXT_MAX))]
     pub referring_practice: String,
+    #[validate(custom(function = "plausible_date"))]
     pub referral_date: Option<Date>,
+    #[validate(length(max = TEXT_MAX))]
     pub access_needs: String,
+    #[validate(length(max = TEXT_MAX))]
     pub referral_specialty: String,
+    #[validate(length(max = TEXT_MAX))]
     pub named_clinician: String,
+    #[validate(length(max = TEXT_MAX))]
     pub receiving_organisation: String,
     pub urgency: String,
+    #[validate(length(max = TEXT_MAX))]
     pub urgency_reason: String,
+    #[validate(length(max = TEXT_MAX))]
     pub suspected_cancer_criterion: String,
+    #[validate(length(max = TEXT_MAX))]
     pub suspected_cancer_pathway: String,
+    #[validate(length(max = TEXT_MAX))]
     pub reason_for_referral: String,
+    #[validate(length(max = TEXT_MAX))]
     pub relevant_history: String,
+    #[validate(length(max = TEXT_MAX))]
     pub presenting_problem: String,
+    #[validate(length(max = TEXT_MAX))]
     pub symptom_duration: String,
+    #[validate(length(max = TEXT_MAX))]
     pub red_flag_symptoms: String,
+    #[validate(length(max = TEXT_MAX))]
     pub examination_findings: String,
+    #[validate(length(max = TEXT_MAX))]
     pub investigation_results: String,
+    #[validate(length(max = TEXT_MAX))]
     pub current_medications: String,
+    #[validate(length(max = TEXT_MAX))]
     pub allergies: String,
+    #[validate(length(max = TEXT_MAX))]
     pub patient_expectations: String,
     pub consent_to_share: String,
+    #[validate(length(max = TEXT_MAX))]
     pub safety_netting: String,
+    #[validate(length(max = TEXT_MAX))]
     pub clinical_note: String,
 }
 
@@ -149,6 +171,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -159,6 +182,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

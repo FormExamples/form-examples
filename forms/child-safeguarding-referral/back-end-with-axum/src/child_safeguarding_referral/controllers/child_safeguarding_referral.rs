@@ -5,34 +5,54 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::child_safeguarding_referrals::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
+    #[validate(length(max = TEXT_MAX))]
     pub referrer_organisation: String,
     pub referred_at: Option<DateTimeWithTimeZone>,
+    #[validate(length(max = TEXT_MAX))]
     pub relationship_to_child: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub child_age: Option<f64>,
+    #[validate(length(max = TEXT_MAX))]
     pub child_setting: String,
+    #[validate(length(max = TEXT_MAX))]
     pub child_reference: String,
+    #[validate(length(max = TEXT_MAX))]
     pub child_ethnicity: String,
+    #[validate(length(max = TEXT_MAX))]
     pub child_first_language: String,
+    #[validate(length(max = TEXT_MAX))]
     pub child_disability: String,
+    #[validate(length(max = TEXT_MAX))]
     pub carers: String,
+    #[validate(length(max = TEXT_MAX))]
     pub household_members: String,
+    #[validate(length(max = TEXT_MAX))]
     pub other_children: String,
+    #[validate(length(max = TEXT_MAX))]
     pub professionals_involved: String,
+    #[validate(length(max = TEXT_MAX))]
     pub concern_description: String,
+    #[validate(length(max = TEXT_MAX))]
     pub concern_onset: String,
     pub child_disclosed: String,
+    #[validate(length(max = TEXT_MAX))]
     pub referrer_observations: String,
     pub primary_category: String,
+    #[validate(length(max = TEXT_MAX))]
     pub additional_categories: String,
+    #[validate(length(max = TEXT_MAX))]
     pub presenting_evidence: String,
     pub immediate_danger: String,
+    #[validate(length(max = TEXT_MAX))]
     pub child_whereabouts: String,
+    #[validate(length(max = TEXT_MAX))]
     pub who_with_child: String,
     pub alleged_person_in_contact: String,
     pub other_children_at_risk: String,
@@ -40,12 +60,17 @@ pub struct Params {
     pub consent_status: String,
     pub sharing_basis_without_consent: String,
     pub family_aware: String,
+    #[validate(length(max = TEXT_MAX))]
     pub unsafe_to_inform_reason: String,
+    #[validate(length(max = TEXT_MAX))]
     pub agencies_contacted: String,
     pub strategy_discussion_held: String,
+    #[validate(length(max = TEXT_MAX))]
     pub previous_safeguarding_history: String,
+    #[validate(length(max = TEXT_MAX))]
     pub requested_action: String,
     pub referrer_declaration: String,
+    #[validate(length(max = TEXT_MAX))]
     pub notes: String,
 }
 
@@ -190,6 +215,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -200,6 +226,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

@@ -7,9 +7,10 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::international_certificate_of_vaccination_or_prophylaxis_entries::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// International certificate of vaccination or prophylaxis id.
@@ -37,12 +38,14 @@ pub struct Params {
     /// Batch number.
     pub batch_number: String,
     /// Lot expiry date.
+    #[validate(custom(function = "plausible_date"))]
     pub lot_expiry_date: Option<Date>,
     /// Route.
     pub route: String,
     /// Anatomical site.
     pub anatomical_site: String,
     /// Dose amount value.
+    #[validate(range(min = -999.999, max = 999.999))]
     pub dose_amount_value: Option<f64>,
     /// Dose amount unit.
     pub dose_amount_unit: String,
@@ -51,34 +54,41 @@ pub struct Params {
     /// Dose sequence total.
     pub dose_sequence_total: Option<i32>,
     /// Vaccination date.
+    #[validate(custom(function = "plausible_date"))]
     pub vaccination_date: Option<Date>,
     /// Vaccination time.
     pub vaccination_time: Option<Time>,
     /// Administered by clinician id.
     pub administered_by_clinician_id: Option<Uuid>,
     /// Administering clinician signature data url.
+    #[validate(length(max = TEXT_MAX))]
     pub administering_clinician_signature_data_url: String,
     /// Administering clinician professional status.
     pub administering_clinician_professional_status: String,
     /// Validity starts on.
+    #[validate(custom(function = "plausible_date"))]
     pub validity_starts_on: Option<Date>,
     /// Validity ends on.
+    #[validate(custom(function = "plausible_date"))]
     pub validity_ends_on: Option<Date>,
     /// Validity is lifetime.
     pub validity_is_lifetime: String,
     /// Centre id.
     pub centre_id: Option<Uuid>,
     /// Centre stamp image data url.
+    #[validate(length(max = TEXT_MAX))]
     pub centre_stamp_image_data_url: String,
     /// Centre stamp applied.
     pub centre_stamp_applied: String,
     /// Adverse event.
     pub adverse_event: String,
     /// Adverse event notes.
+    #[validate(length(max = TEXT_MAX))]
     pub adverse_event_notes: String,
     /// Entry valid.
     pub entry_valid: String,
     /// Entry notes.
+    #[validate(length(max = TEXT_MAX))]
     pub entry_notes: String,
 }
 
@@ -219,6 +229,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -230,6 +241,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

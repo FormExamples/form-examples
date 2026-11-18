@@ -5,30 +5,40 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::medical_information_form_for_air_travels::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
     pub status: String,
+    #[validate(length(max = TEXT_MAX))]
     pub submitter_name: String,
     pub submitter_role: String,
+    #[validate(length(max = TEXT_MAX))]
     pub submitter_email: String,
+    #[validate(length(max = TEXT_MAX))]
     pub submitter_phone: String,
+    #[validate(length(max = TEXT_MAX))]
     pub submitter_organisation: String,
     pub airline_booking_reference: String,
     pub airline_iata_code: String,
+    #[validate(length(max = TEXT_MAX))]
     pub airline_name: String,
     pub outbound_flight_number: String,
+    #[validate(custom(function = "plausible_date"))]
     pub outbound_date: Option<Date>,
     pub outbound_origin_iata: String,
     pub outbound_destination_iata: String,
     pub return_flight_number: String,
+    #[validate(custom(function = "plausible_date"))]
     pub return_date: Option<Date>,
     pub cabin_class: String,
     pub sector_duration_minutes: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub transit_airports_iata: String,
+    #[validate(length(max = TEXT_MAX))]
     pub special_assistance_codes: String,
     pub reason_equipment: String,
     pub reason_recent_acute_event: String,
@@ -37,54 +47,80 @@ pub struct Params {
     pub reason_pregnancy: String,
     pub reason_mobility_escort: String,
     pub reason_psychiatric: String,
+    #[validate(length(max = TEXT_MAX))]
     pub primary_diagnosis: String,
+    #[validate(length(max = TEXT_MAX))]
     pub icd10_codes: String,
+    #[validate(custom(function = "plausible_date"))]
     pub diagnosis_date: Option<Date>,
+    #[validate(length(max = TEXT_MAX))]
     pub current_treatment: String,
+    #[validate(custom(function = "plausible_date"))]
     pub last_admission_date: Option<Date>,
+    #[validate(custom(function = "plausible_date"))]
     pub last_discharge_date: Option<Date>,
+    #[validate(custom(function = "plausible_date"))]
     pub last_specialist_review_date: Option<Date>,
     pub resting_systolic_bp: Option<i32>,
     pub resting_diastolic_bp: Option<i32>,
     pub resting_heart_rate: Option<i32>,
     pub nyha_class: String,
+    #[validate(custom(function = "plausible_date"))]
     pub recent_mi_date: Option<Date>,
+    #[validate(custom(function = "plausible_date"))]
     pub recent_stent_date: Option<Date>,
     pub on_anticoagulant: String,
     pub pacemaker_or_icd: String,
     pub exercise_tolerance_metres: Option<i32>,
     pub unstable_angina: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub resting_spo2_percent: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub predicted_inflight_spo2_percent: Option<f64>,
     pub hypoxic_challenge_result: String,
+    #[validate(custom(function = "plausible_date"))]
     pub recent_pneumothorax_date: Option<Date>,
     pub asthma_severity: String,
     pub copd_severity: String,
     pub cpap_or_bipap_use: String,
+    #[validate(custom(function = "plausible_date"))]
     pub recent_pulmonary_embolism_date: Option<Date>,
+    #[validate(custom(function = "plausible_date"))]
     pub last_surgery_date: Option<Date>,
+    #[validate(length(max = TEXT_MAX))]
     pub last_surgery_site: String,
     pub cabin_gas_risk: String,
     pub recent_fracture_cast: String,
+    #[validate(custom(function = "plausible_date"))]
     pub recent_dvt_date: Option<Date>,
     pub scuba_diving_within_24h: String,
+    #[validate(custom(function = "plausible_date"))]
     pub recent_stroke_date: Option<Date>,
     pub is_pregnant: String,
     pub gestation_weeks: Option<i32>,
     pub pregnancy_type: String,
+    #[validate(length(max = TEXT_MAX))]
     pub pregnancy_complications: String,
+    #[validate(custom(function = "plausible_date"))]
     pub expected_delivery_date: Option<Date>,
+    #[validate(length(max = TEXT_MAX))]
     pub obstetrician_contact: String,
     pub communicable_disease_status: String,
+    #[validate(custom(function = "plausible_date"))]
     pub last_symptom_date: Option<Date>,
     pub isolation_required: String,
+    #[validate(length(max = TEXT_MAX))]
     pub vaccination_status: String,
+    #[validate(length(max = TEXT_MAX))]
     pub current_antimicrobials: String,
     pub requires_supplemental_oxygen: String,
+    #[validate(range(min = -99.9, max = 99.9))]
     pub oxygen_flow_rate_lpm: Option<f64>,
     pub oxygen_duration: String,
     pub requires_poc: String,
+    #[validate(length(max = TEXT_MAX))]
     pub poc_make_model: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub poc_battery_hours: Option<f64>,
     pub requires_stretcher: String,
     pub requires_incubator: String,
@@ -94,7 +130,9 @@ pub struct Params {
     pub requires_accessible_lavatory: String,
     pub wheelchair_type: String,
     pub accompanying_carer: String,
+    #[validate(length(max = TEXT_MAX))]
     pub regular_medications: String,
+    #[validate(length(max = TEXT_MAX))]
     pub controlled_drugs: String,
     pub dangerous_goods_battery_declaration: String,
     pub sharps_in_cabin: String,
@@ -102,9 +140,13 @@ pub struct Params {
     pub customs_documentation_available: String,
     pub haemoglobin_g_per_l: Option<i32>,
     pub physician_declaration: String,
+    #[validate(length(max = TEXT_MAX))]
     pub physician_signature_name: String,
+    #[validate(custom(function = "plausible_date"))]
     pub physician_signature_date: Option<Date>,
+    #[validate(custom(function = "plausible_date"))]
     pub valid_until_date: Option<Date>,
+    #[validate(length(max = TEXT_MAX))]
     pub additional_notes: String,
 }
 
@@ -414,6 +456,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -424,6 +467,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

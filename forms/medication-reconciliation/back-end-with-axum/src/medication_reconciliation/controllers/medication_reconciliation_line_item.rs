@@ -5,17 +5,23 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::medication_reconciliation_line_items::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub medication_reconciliation_id: Uuid,
     pub list_source: String,
+    #[validate(length(max = TEXT_MAX))]
     pub drug_name: String,
+    #[validate(length(max = TEXT_MAX))]
     pub form: String,
+    #[validate(length(max = TEXT_MAX))]
     pub dose: String,
     pub route: String,
+    #[validate(length(max = TEXT_MAX))]
     pub frequency: String,
+    #[validate(length(max = TEXT_MAX))]
     pub indication: String,
     pub high_risk_class: String,
     pub adherence: String,
@@ -92,6 +98,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -102,6 +109,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

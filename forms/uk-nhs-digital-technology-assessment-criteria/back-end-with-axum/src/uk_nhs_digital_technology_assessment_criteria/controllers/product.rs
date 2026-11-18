@@ -7,28 +7,37 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::products::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Supplier ID.
     pub supplier_id: Uuid,
     /// Name.
+    #[validate(length(max = TEXT_MAX))]
     pub name: String,
     /// Version.
+    #[validate(length(max = TEXT_MAX))]
     pub version: String,
     /// Description.
+    #[validate(length(max = TEXT_MAX))]
     pub description: String,
     /// Intended purpose.
+    #[validate(length(max = TEXT_MAX))]
     pub intended_purpose: String,
     /// Product type.
+    #[validate(length(max = TEXT_MAX))]
     pub product_type: String,
     /// Medical device class.
+    #[validate(length(max = TEXT_MAX))]
     pub medical_device_class: String,
     /// Handles patient data.
+    #[validate(length(max = TEXT_MAX))]
     pub handles_patient_data: String,
     /// Is patient facing.
+    #[validate(length(max = TEXT_MAX))]
     pub is_patient_facing: String,
 }
 
@@ -95,6 +104,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -106,6 +116,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

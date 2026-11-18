@@ -5,13 +5,15 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::cataract_diagnostic_evaluations::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub status: String,
+    #[validate(custom(function = "plausible_date"))]
     pub assessment_date: Option<Date>,
     pub assessment_time: Option<String>,
     pub blurred_vision: String,
@@ -19,8 +21,10 @@ pub struct Params {
     pub night_driving_difficulty: String,
     pub faded_colour_perception: String,
     pub frequent_prescription_changes: String,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub symptom_duration_months: Option<f64>,
     pub symptom_laterality: String,
+    #[validate(length(max = TEXT_MAX))]
     pub presenting_complaint_notes: String,
     pub history_diabetes: String,
     pub history_prior_eye_surgery: String,
@@ -32,33 +36,52 @@ pub struct Params {
     pub history_smoking_status: String,
     pub history_high_uv_exposure: String,
     pub history_high_myopia: String,
+    #[validate(length(max = TEXT_MAX))]
     pub medical_history_notes: String,
+    #[validate(range(min = -99.99, max = 99.99))]
     pub unaided_va_logmar_right: Option<f64>,
+    #[validate(range(min = -99.99, max = 99.99))]
     pub unaided_va_logmar_left: Option<f64>,
     pub unaided_va_snellen_right: String,
     pub unaided_va_snellen_left: String,
+    #[validate(range(min = -99.99, max = 99.99))]
     pub best_corrected_va_logmar_right: Option<f64>,
+    #[validate(range(min = -99.99, max = 99.99))]
     pub best_corrected_va_logmar_left: Option<f64>,
     pub best_corrected_va_snellen_right: String,
     pub best_corrected_va_snellen_left: String,
+    #[validate(range(min = -99.99, max = 99.99))]
     pub pinhole_va_logmar_right: Option<f64>,
+    #[validate(range(min = -99.99, max = 99.99))]
     pub pinhole_va_logmar_left: Option<f64>,
     pub pinhole_va_snellen_right: String,
     pub pinhole_va_snellen_left: String,
+    #[validate(range(min = -99.99, max = 99.99))]
     pub refraction_sphere_right: Option<f64>,
+    #[validate(range(min = -99.99, max = 99.99))]
     pub refraction_sphere_left: Option<f64>,
+    #[validate(range(min = -99.99, max = 99.99))]
     pub refraction_cylinder_right: Option<f64>,
+    #[validate(range(min = -99.99, max = 99.99))]
     pub refraction_cylinder_left: Option<f64>,
     pub refraction_axis_right: Option<i32>,
     pub refraction_axis_left: Option<i32>,
     pub refraction_stability: String,
+    #[validate(range(min = -9.9, max = 9.9))]
     pub locs_iii_no_right: Option<f64>,
+    #[validate(range(min = -9.9, max = 9.9))]
     pub locs_iii_no_left: Option<f64>,
+    #[validate(range(min = -9.9, max = 9.9))]
     pub locs_iii_nc_right: Option<f64>,
+    #[validate(range(min = -9.9, max = 9.9))]
     pub locs_iii_nc_left: Option<f64>,
+    #[validate(range(min = -9.9, max = 9.9))]
     pub locs_iii_c_right: Option<f64>,
+    #[validate(range(min = -9.9, max = 9.9))]
     pub locs_iii_c_left: Option<f64>,
+    #[validate(range(min = -9.9, max = 9.9))]
     pub locs_iii_p_right: Option<f64>,
+    #[validate(range(min = -9.9, max = 9.9))]
     pub locs_iii_p_left: Option<f64>,
     pub cataract_type_right: String,
     pub cataract_type_left: String,
@@ -71,43 +94,63 @@ pub struct Params {
     pub glare_acuity_result_right: String,
     pub glare_acuity_result_left: String,
     pub glare_functional_impact: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub intraocular_pressure_right_mmhg: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub intraocular_pressure_left_mmhg: Option<f64>,
     pub tonometry_method: String,
     pub dilated_fundus_exam_performed: String,
+    #[validate(range(min = -9.99, max = 9.99))]
     pub optic_disc_cup_disc_ratio_right: Option<f64>,
+    #[validate(range(min = -9.99, max = 9.99))]
     pub optic_disc_cup_disc_ratio_left: Option<f64>,
     pub macula_findings_right: String,
     pub macula_findings_left: String,
+    #[validate(length(max = TEXT_MAX))]
     pub retinal_findings_right: String,
+    #[validate(length(max = TEXT_MAX))]
     pub retinal_findings_left: String,
     pub view_obscured_by_cataract_right: String,
     pub view_obscured_by_cataract_left: String,
     pub glaucoma_suspected: String,
+    #[validate(length(max = TEXT_MAX))]
     pub glaucoma_notes: String,
     pub amd_suspected: String,
+    #[validate(length(max = TEXT_MAX))]
     pub amd_notes: String,
     pub diabetic_retinopathy_suspected: String,
+    #[validate(length(max = TEXT_MAX))]
     pub diabetic_retinopathy_notes: String,
     pub biometry_performed: String,
+    #[validate(range(min = -99.99, max = 99.99))]
     pub axial_length_right_mm: Option<f64>,
+    #[validate(range(min = -99.99, max = 99.99))]
     pub axial_length_left_mm: Option<f64>,
+    #[validate(range(min = -999.99, max = 999.99))]
     pub keratometry_k1_right: Option<f64>,
+    #[validate(range(min = -999.99, max = 999.99))]
     pub keratometry_k1_left: Option<f64>,
+    #[validate(range(min = -999.99, max = 999.99))]
     pub keratometry_k2_right: Option<f64>,
+    #[validate(range(min = -999.99, max = 999.99))]
     pub keratometry_k2_left: Option<f64>,
     pub oct_performed: String,
+    #[validate(length(max = TEXT_MAX))]
     pub oct_findings: String,
+    #[validate(range(min = -99.99, max = 99.99))]
     pub calculated_iol_power_right: Option<f64>,
+    #[validate(range(min = -99.99, max = 99.99))]
     pub calculated_iol_power_left: Option<f64>,
     pub functional_difficulty_reading: Option<i32>,
     pub functional_difficulty_driving: Option<i32>,
     pub functional_difficulty_daily_activities: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub functional_impact_notes: String,
     pub management_recommendation: String,
     pub eye_for_surgery: String,
     pub risks_benefits_counselled: String,
     pub consent_discussed: String,
+    #[validate(length(max = TEXT_MAX))]
     pub management_notes: String,
 }
 
@@ -437,6 +480,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -447,6 +491,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

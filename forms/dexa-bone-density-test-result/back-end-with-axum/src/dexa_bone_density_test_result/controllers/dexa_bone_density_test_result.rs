@@ -5,31 +5,44 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::dexa_bone_density_test_results::Model;
+use crate::support::validation::{plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Uuid,
     pub originating_request_reference: String,
     pub report_status: String,
+    #[validate(custom(function = "plausible_date"))]
     pub performed_date: Option<Date>,
+    #[validate(custom(function = "plausible_date"))]
     pub reported_date: Option<Date>,
     pub scan_region: String,
     pub examination_adequacy: String,
     pub clinical_history: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub lumbar_spine_t_score: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub lumbar_spine_z_score: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub femoral_neck_t_score: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub femoral_neck_z_score: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub total_hip_t_score: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub lowest_t_score: Option<f64>,
+    #[validate(range(min = -99.999, max = 99.999))]
     pub bone_mineral_density_g_cm2: Option<f64>,
     pub who_classification: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub frax_major_fracture_percent: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub frax_hip_fracture_percent: Option<f64>,
     pub vertebral_fracture_identified: bool,
     pub comparison_with_previous: String,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub percent_change_since_previous: Option<f64>,
     pub impression: String,
     pub recommended_follow_up: String,
@@ -148,6 +161,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -158,6 +172,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

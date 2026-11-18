@@ -5,8 +5,9 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::parkland_formula_for_burns::Model;
+use crate::support::validation::{unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
@@ -18,7 +19,9 @@ pub struct Params {
     pub patient_identifier: String,
     pub age_band: String,
     pub sex: String,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub weight_kg: Option<f64>,
+    #[validate(range(min = -999.99, max = 999.99))]
     pub tbsa_percent: Option<f64>,
     pub tbsa_method: String,
     pub injury_at: Option<DateTimeWithTimeZone>,
@@ -110,6 +113,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -120,6 +124,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

@@ -5,42 +5,65 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::respect::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
+    #[validate(length(max = TEXT_MAX))]
     pub person_name: String,
+    #[validate(custom(function = "plausible_date"))]
     pub date_of_birth: Option<Date>,
+    #[validate(length(max = TEXT_MAX))]
     pub identifier: String,
+    #[validate(length(max = TEXT_MAX))]
     pub address: String,
+    #[validate(length(max = TEXT_MAX))]
     pub key_contact: String,
+    #[validate(length(max = TEXT_MAX))]
     pub health_summary: String,
+    #[validate(length(max = TEXT_MAX))]
     pub diagnoses: String,
+    #[validate(length(max = TEXT_MAX))]
     pub existing_documents: String,
+    #[validate(length(max = TEXT_MAX))]
     pub what_matters: String,
+    #[validate(length(max = TEXT_MAX))]
     pub care_preferences: String,
     pub priority_balance: String,
+    #[validate(length(max = TEXT_MAX))]
     pub recommended_interventions: String,
+    #[validate(length(max = TEXT_MAX))]
     pub not_recommended_interventions: String,
     pub cpr_recommendation: String,
+    #[validate(length(max = TEXT_MAX))]
     pub cpr_rationale: String,
     pub cpr_discussed: String,
     pub hospital_transfer: String,
     pub critical_care_admission: String,
+    #[validate(length(max = TEXT_MAX))]
     pub treatment_ceilings: String,
     pub has_capacity: String,
+    #[validate(length(max = TEXT_MAX))]
     pub capacity_assessment: String,
     pub involvement: String,
+    #[validate(length(max = TEXT_MAX))]
     pub proxy_details: String,
+    #[validate(length(max = TEXT_MAX))]
     pub clinician_name: String,
     pub clinician_role: String,
+    #[validate(length(max = TEXT_MAX))]
     pub clinician_registration: String,
+    #[validate(length(max = TEXT_MAX))]
     pub signature: String,
     pub signed_at: Option<DateTimeWithTimeZone>,
+    #[validate(length(max = TEXT_MAX))]
     pub senior_endorsement: String,
+    #[validate(length(max = TEXT_MAX))]
     pub emergency_contacts: String,
+    #[validate(custom(function = "plausible_date"))]
     pub review_date: Option<Date>,
 }
 
@@ -168,6 +191,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -178,6 +202,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

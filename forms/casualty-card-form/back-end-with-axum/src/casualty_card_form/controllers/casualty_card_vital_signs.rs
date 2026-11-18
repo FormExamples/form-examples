@@ -5,8 +5,9 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::casualty_card_vital_signs::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub casualty_card_id: Uuid,
@@ -15,16 +16,25 @@ pub struct Params {
     pub diastolic_bp: Option<i32>,
     pub respiratory_rate: Option<i32>,
     pub oxygen_saturation: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub supplemental_oxygen: String,
+    #[validate(length(max = TEXT_MAX))]
     pub oxygen_flow_rate: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub temperature: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub blood_glucose: Option<f64>,
+    #[validate(length(max = TEXT_MAX))]
     pub consciousness_level: String,
     pub pupil_left_size: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub pupil_left_reactive: String,
     pub pupil_right_size: Option<i32>,
+    #[validate(length(max = TEXT_MAX))]
     pub pupil_right_reactive: String,
+    #[validate(length(max = TEXT_MAX))]
     pub capillary_refill_time: String,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub weight: Option<f64>,
 }
 
@@ -111,6 +121,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -121,6 +132,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

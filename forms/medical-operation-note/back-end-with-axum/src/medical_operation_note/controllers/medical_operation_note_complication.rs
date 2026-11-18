@@ -6,20 +6,23 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::medical_operation_note_complications::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
 /// Parameters accepted when creating or updating a medical operation note complication record.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Category.
     pub category: String,
     /// Description.
+    #[validate(length(max = TEXT_MAX))]
     pub description: String,
     /// Clavien dindo grade.
     pub clavien_dindo_grade: String,
     /// Onset at.
     pub onset_at: Option<DateTimeWithTimeZone>,
     /// Action taken.
+    #[validate(length(max = TEXT_MAX))]
     pub action_taken: String,
     /// Resolved in theatre.
     pub resolved_in_theatre: String,
@@ -92,6 +95,7 @@ pub async fn list(
 /// Create a new medical operation note complication record.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -103,6 +107,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

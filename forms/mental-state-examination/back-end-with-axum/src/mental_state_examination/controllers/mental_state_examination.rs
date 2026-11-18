@@ -5,16 +5,19 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::mental_state_examinations::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
+    #[validate(length(max = TEXT_MAX))]
     pub clinician_name: String,
     pub clinician_role: String,
     pub assessed_at: Option<DateTimeWithTimeZone>,
     pub care_setting: String,
+    #[validate(length(max = TEXT_MAX))]
     pub assessment_reason: String,
     pub patient_identifier: String,
     pub age_band: String,
@@ -23,24 +26,30 @@ pub struct Params {
     pub appearance_eye_contact: String,
     pub appearance_rapport: String,
     pub appearance_psychomotor: String,
+    #[validate(length(max = TEXT_MAX))]
     pub appearance_abnormal_movements: String,
+    #[validate(length(max = TEXT_MAX))]
     pub appearance_notes: String,
     pub speech_rate: String,
     pub speech_volume: String,
     pub speech_quantity: String,
     pub speech_fluency: String,
+    #[validate(length(max = TEXT_MAX))]
     pub speech_notes: String,
+    #[validate(length(max = TEXT_MAX))]
     pub mood_subjective: String,
     pub mood_descriptor: String,
     pub affect_range: String,
     pub affect_congruence: String,
     pub affect_reactivity: String,
+    #[validate(length(max = TEXT_MAX))]
     pub emotion_notes: String,
     pub hallucinations_present: String,
     pub command_hallucinations: String,
     pub illusions: String,
     pub depersonalisation: String,
     pub derealisation: String,
+    #[validate(length(max = TEXT_MAX))]
     pub perception_notes: String,
     pub thought_form: String,
     pub delusions: String,
@@ -48,16 +57,20 @@ pub struct Params {
     pub suicidal_ideation: String,
     pub homicidal_ideation: String,
     pub self_harm_thoughts: String,
+    #[validate(length(max = TEXT_MAX))]
     pub thought_notes: String,
     pub insight_level: String,
     pub treatment_understanding: String,
     pub judgement: String,
+    #[validate(length(max = TEXT_MAX))]
     pub insight_notes: String,
     pub orientation: String,
     pub attention: String,
     pub memory: String,
     pub cognitive_impression: String,
+    #[validate(length(max = TEXT_MAX))]
     pub cognition_notes: String,
+    #[validate(length(max = TEXT_MAX))]
     pub clinical_formulation: String,
 }
 
@@ -230,6 +243,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -240,6 +254,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

@@ -5,8 +5,9 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::history_and_physical_examinations::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
@@ -19,30 +20,49 @@ pub struct Params {
     pub patient_identifier: String,
     pub age_band: String,
     pub sex: String,
+    #[validate(length(max = TEXT_MAX))]
     pub presenting_complaint: String,
+    #[validate(length(max = TEXT_MAX))]
     pub history_of_presenting_complaint: String,
+    #[validate(length(max = TEXT_MAX))]
     pub past_medical_surgical_history: String,
+    #[validate(length(max = TEXT_MAX))]
     pub drug_history: String,
     pub allergy_status: String,
+    #[validate(length(max = TEXT_MAX))]
     pub allergy_detail: String,
+    #[validate(length(max = TEXT_MAX))]
     pub family_history: String,
+    #[validate(length(max = TEXT_MAX))]
     pub social_history: String,
+    #[validate(length(max = TEXT_MAX))]
     pub systems_review: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub temperature: Option<f64>,
     pub heart_rate: Option<i32>,
     pub respiratory_rate: Option<i32>,
     pub systolic_blood_pressure: Option<i32>,
     pub oxygen_saturation: Option<i32>,
     pub consciousness_level: String,
+    #[validate(length(max = TEXT_MAX))]
     pub exam_cardiovascular: String,
+    #[validate(length(max = TEXT_MAX))]
     pub exam_respiratory: String,
+    #[validate(length(max = TEXT_MAX))]
     pub exam_abdominal: String,
+    #[validate(length(max = TEXT_MAX))]
     pub exam_neurological: String,
+    #[validate(length(max = TEXT_MAX))]
     pub exam_other: String,
+    #[validate(length(max = TEXT_MAX))]
     pub investigations: String,
+    #[validate(length(max = TEXT_MAX))]
     pub impression: String,
+    #[validate(length(max = TEXT_MAX))]
     pub red_flag_findings: String,
+    #[validate(length(max = TEXT_MAX))]
     pub management_plan: String,
+    #[validate(length(max = TEXT_MAX))]
     pub clinical_note: String,
 }
 
@@ -177,6 +197,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -187,6 +208,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

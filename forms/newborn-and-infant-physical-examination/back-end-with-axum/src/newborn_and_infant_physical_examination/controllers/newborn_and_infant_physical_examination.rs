@@ -5,12 +5,14 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::newborn_and_infant_physical_examinations::Model;
+use crate::support::validation::{TEXT_MAX, plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
     pub clinician_id: Option<Uuid>,
+    #[validate(length(max = TEXT_MAX))]
     pub practitioner_name: String,
     pub practitioner_role: String,
     pub examined_at: Option<DateTimeWithTimeZone>,
@@ -18,12 +20,16 @@ pub struct Params {
     pub care_setting: String,
     pub baby_identifier: String,
     pub baby_name: String,
+    #[validate(custom(function = "plausible_date"))]
     pub date_of_birth: Option<Date>,
     pub sex: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub gestational_age_weeks: Option<f64>,
+    #[validate(range(min = -99999.9, max = 99999.9))]
     pub birth_weight_grams: Option<f64>,
     pub breech_presentation: String,
     pub family_history_hip_problems: String,
+    #[validate(length(max = TEXT_MAX))]
     pub antenatal_concerns: String,
     pub eyes_red_reflex_right: String,
     pub eyes_red_reflex_left: String,
@@ -32,7 +38,9 @@ pub struct Params {
     pub femoral_pulses_right: String,
     pub femoral_pulses_left: String,
     pub central_cyanosis: String,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub oxygen_saturation_preductal: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub oxygen_saturation_postductal: Option<f64>,
     pub barlow_test: String,
     pub ortolani_test: String,
@@ -51,13 +59,17 @@ pub struct Params {
     pub limbs_and_digits: String,
     pub feet: String,
     pub tone_and_movement: String,
+    #[validate(range(min = -99999.9, max = 99999.9))]
     pub weight_grams: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub head_circumference_cm: Option<f64>,
+    #[validate(range(min = -999.9, max = 999.9))]
     pub length_cm: Option<f64>,
     pub eyes_result_recorded: String,
     pub heart_result_recorded: String,
     pub hips_result_recorded: String,
     pub testes_result_recorded: String,
+    #[validate(length(max = TEXT_MAX))]
     pub clinical_note: String,
 }
 
@@ -232,6 +244,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -242,6 +255,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

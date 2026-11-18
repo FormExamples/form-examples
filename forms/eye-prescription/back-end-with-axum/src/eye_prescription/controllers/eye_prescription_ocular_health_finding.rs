@@ -7,42 +7,54 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::eye_prescription_ocular_health_findings::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
 /// Params.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     /// Eye prescription id.
     pub eye_prescription_id: Uuid,
     /// Slit lamp right.
+    #[validate(length(max = TEXT_MAX))]
     pub slit_lamp_right: String,
     /// Slit lamp left.
+    #[validate(length(max = TEXT_MAX))]
     pub slit_lamp_left: String,
     /// Fundus right.
+    #[validate(length(max = TEXT_MAX))]
     pub fundus_right: String,
     /// Fundus left.
+    #[validate(length(max = TEXT_MAX))]
     pub fundus_left: String,
     /// Intraocular pressure right mmhg.
+    #[validate(range(min = -999.9, max = 999.9))]
     pub intraocular_pressure_right_mmhg: Option<f64>,
     /// Intraocular pressure left mmhg.
+    #[validate(range(min = -999.9, max = 999.9))]
     pub intraocular_pressure_left_mmhg: Option<f64>,
     /// Cup to disc ratio right.
+    #[validate(range(min = -9.99, max = 9.99))]
     pub cup_to_disc_ratio_right: Option<f64>,
     /// Cup to disc ratio left.
+    #[validate(range(min = -9.99, max = 9.99))]
     pub cup_to_disc_ratio_left: Option<f64>,
     /// Oct performed.
     pub oct_performed: bool,
     /// Oct findings.
+    #[validate(length(max = TEXT_MAX))]
     pub oct_findings: String,
     /// Fields performed.
     pub fields_performed: bool,
     /// Fields findings.
+    #[validate(length(max = TEXT_MAX))]
     pub fields_findings: String,
     /// Pathology flag.
     pub pathology_flag: bool,
     /// Refer ophthalmology.
     pub refer_ophthalmology: bool,
     /// Referral reason.
+    #[validate(length(max = TEXT_MAX))]
     pub referral_reason: String,
 }
 
@@ -131,6 +143,7 @@ pub async fn list(
 /// Add.
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -142,6 +155,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

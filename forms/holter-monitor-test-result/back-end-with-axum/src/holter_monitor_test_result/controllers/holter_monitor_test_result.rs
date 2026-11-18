@@ -5,8 +5,9 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::holter_monitor_test_results::Model;
+use crate::support::validation::{plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub patient_id: Uuid,
@@ -14,17 +15,24 @@ pub struct Params {
     pub originating_request_reference: String,
     pub report_status: String,
     pub monitor_type: String,
+    #[validate(custom(function = "plausible_date"))]
     pub performed_date: Option<Date>,
+    #[validate(custom(function = "plausible_date"))]
     pub reported_date: Option<Date>,
+    #[validate(range(min = -999999.9, max = 999999.9))]
     pub recording_duration_hours: Option<f64>,
+    #[validate(range(min = -9999.9, max = 9999.9))]
     pub analysed_percent: Option<f64>,
     pub clinical_history: String,
     pub predominant_rhythm: String,
     pub mean_heart_rate_bpm: Option<i32>,
     pub minimum_heart_rate_bpm: Option<i32>,
     pub maximum_heart_rate_bpm: Option<i32>,
+    #[validate(range(min = -999.99, max = 999.99))]
     pub longest_pause_seconds: Option<f64>,
+    #[validate(range(min = -999.99, max = 999.99))]
     pub ventricular_ectopic_percent: Option<f64>,
+    #[validate(range(min = -999.99, max = 999.99))]
     pub supraventricular_ectopic_percent: Option<f64>,
     pub atrial_fibrillation_detected: bool,
     pub significant_pauses: bool,
@@ -167,6 +175,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -177,6 +186,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

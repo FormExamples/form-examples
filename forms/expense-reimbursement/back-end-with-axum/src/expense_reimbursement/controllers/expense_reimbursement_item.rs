@@ -5,21 +5,27 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::expense_reimbursement_items::Model;
+use crate::support::validation::{plausible_date, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub expense_reimbursement_id: Uuid,
     pub line_number: i32,
+    #[validate(custom(function = "plausible_date"))]
     pub expense_date: Option<Date>,
     pub category: String,
     pub description: String,
     pub merchant: String,
     pub currency_as_iso_4217: String,
+    #[validate(range(min = -9999999999.99, max = 9999999999.99))]
     pub amount: Option<f64>,
+    #[validate(range(min = -9999999999.99, max = 9999999999.99))]
     pub vat_amount: Option<f64>,
+    #[validate(range(min = -999999.999999, max = 999999.999999))]
     pub exchange_rate_to_claim_currency: Option<f64>,
     pub payment_method: String,
+    #[validate(range(min = -9999999.9, max = 9999999.9))]
     pub mileage_distance_miles: Option<f64>,
     pub receipt_attached: bool,
     pub receipt_reference: String,
@@ -108,6 +114,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -118,6 +125,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }

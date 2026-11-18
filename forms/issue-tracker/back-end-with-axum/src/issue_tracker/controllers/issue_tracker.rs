@@ -5,8 +5,9 @@ use crate::support::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::issue_trackers::Model;
+use crate::support::validation::{TEXT_MAX, unprocessable};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Params {
     pub reporter_id: Uuid,
@@ -22,6 +23,7 @@ pub struct Params {
     pub customer_or_project_tag: String,
     pub external_reference: String,
     pub cc_summary: String,
+    #[validate(length(max = TEXT_MAX))]
     pub cc_long_description: String,
     pub cc_reported_by_name: String,
     pub cc_reported_via: String,
@@ -31,12 +33,15 @@ pub struct Params {
     pub pt_assignees: String,
     pub pt_stakeholders_to_inform: String,
     pub pt_observers: String,
+    #[validate(length(max = TEXT_MAX))]
     pub sx_external_signals: String,
     pub sx_alert_ids: String,
+    #[validate(length(max = TEXT_MAX))]
     pub sx_error_messages: String,
     pub sx_screenshots_url: String,
     pub sx_logs_url: String,
     pub sx_first_observed_at: Option<DateTimeWithTimeZone>,
+    #[validate(length(max = TEXT_MAX))]
     pub fx_broken_components: String,
     pub fx_failed_services: String,
     pub fx_stuck_processes: String,
@@ -45,26 +50,41 @@ pub struct Params {
     pub hx_related_issues: String,
     pub hx_prior_occurrences: Option<i32>,
     pub hx_recent_change_url: String,
+    #[validate(length(max = TEXT_MAX))]
     pub hx_references: String,
+    #[validate(length(max = TEXT_MAX))]
     pub hx_timeline: String,
+    #[validate(length(max = TEXT_MAX))]
     pub ix_hypotheses: String,
+    #[validate(length(max = TEXT_MAX))]
     pub ix_repro_steps: String,
+    #[validate(length(max = TEXT_MAX))]
     pub ix_diagnostic_queries: String,
     pub ix_tests_run: String,
+    #[validate(length(max = TEXT_MAX))]
     pub ix_blocking_unknowns: String,
+    #[validate(length(max = TEXT_MAX))]
     pub dx_root_cause: String,
+    #[validate(length(max = TEXT_MAX))]
     pub dx_contributing_causes: String,
     pub dx_scope: String,
     pub dx_confirmed: String,
+    #[validate(length(max = TEXT_MAX))]
     pub tx_mitigation_steps: String,
+    #[validate(length(max = TEXT_MAX))]
     pub tx_fix_plan: String,
+    #[validate(length(max = TEXT_MAX))]
     pub tx_workaround: String,
+    #[validate(length(max = TEXT_MAX))]
     pub tx_rollback_plan: String,
     pub tx_communication_plan: String,
     pub px_expected_resolution_at: Option<DateTimeWithTimeZone>,
+    #[validate(length(max = TEXT_MAX))]
     pub px_residual_risk: String,
+    #[validate(length(max = TEXT_MAX))]
     pub px_monitoring_plan: String,
     pub px_recurrence_likelihood: String,
+    #[validate(length(max = TEXT_MAX))]
     pub px_lessons_learned: String,
     pub score_by_priority_rank: Option<i32>,
     pub score_by_severity_of_impact: Option<i32>,
@@ -72,6 +92,7 @@ pub struct Params {
     pub score_by_harm_grade: Option<i32>,
     pub score_by_failure_condition: String,
     pub score_by_moscow_requirement: Option<i32>,
+    #[validate(range(min = -999.99, max = 999.99))]
     pub score_by_frequency_percent: Option<f64>,
 }
 
@@ -288,6 +309,7 @@ pub async fn list(
 
 #[debug_handler]
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.insert(&db(&ctx)).await?;
     format::json(item)
 }
@@ -298,6 +320,7 @@ pub async fn update(
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    params.validate().map_err(|e| unprocessable(&e))?;
     let item = params.update(&db(&ctx), id).await?.ok_or(Error::NotFound)?;
     format::json(item)
 }
