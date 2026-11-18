@@ -1,0 +1,10 @@
+# Shared cargo-tarpaulin settings for every forms/<slug>/back-end-with-axum crate.
+# Needs the crate's scratch Postgres: export DB_URL first.
+#   cd forms/<slug>/back-end-with-axum
+#   cargo tarpaulin --config ../../../etc/tarpaulin.toml
+[default]
+engine = "Llvm"
+skip-clean = true
+exclude-files = ["tests/*", "src/*/bin/*"]
+out = ["Stdout", "Json"]
+output-dir = "target/tarpaulin"

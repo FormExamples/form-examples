@@ -1,6 +1,7 @@
 mod db_commands;
 mod pagination;
 mod problem;
+mod validation;
 mod readiness;
 
 pub mod clinician;
