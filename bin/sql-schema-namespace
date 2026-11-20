@@ -12,9 +12,9 @@ namespace:
 
 A schema, rather than a `<slug>_` name prefix, because Postgres caps every
 identifier at 63 bytes and silently truncates longer ones: prefixing would push
-265 tables in 59 forms over the cap. Two snake slugs are themselves longer than
-63 bytes, so those two forms use the registered short schema names in
-`SCHEMA_OVERRIDES` below (also listed in the spec).
+265 tables in 59 forms over the cap. A schema name is the snake slug alone,
+which must itself fit; a slug that does not would need an entry in
+`SCHEMA_OVERRIDES` below (none does).
 
 For each form the tool writes `sql/00_create_schema.sql` and, in every other
 numbered `sql/NN_*.sql` file, qualifies each reference to the form's own
@@ -58,13 +58,9 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 FORMS = ROOT / "forms"
 
-# Snake slugs longer than Postgres's 63-byte identifier cap.
-SCHEMA_OVERRIDES = {
-    "united-kingdom-lasting-power-of-attorney-for-financial-decisions":
-        "united_kingdom_lpa_for_financial_decisions",
-    "united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions":
-        "united_kingdom_lpa_for_health_and_care_decisions",
-}
+# Snake slugs longer than Postgres's 63-byte identifier cap, mapped to a
+# registered short schema name. None today: every slug fits.
+SCHEMA_OVERRIDES: dict[str, str] = {}
 
 NAME = r'"?([a-z_][a-z0-9_]*)"?'
 QUALIFIED = r'"?[a-z_][a-z0-9_]*"?\s*\.\s*'

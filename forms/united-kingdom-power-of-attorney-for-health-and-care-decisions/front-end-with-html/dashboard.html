@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>LP1H — case-manager dashboard</title>
+  <meta name="description" content="Case-manager dashboard for Lasting Power of Attorney for Health and Welfare (LP1H) under the Mental Capacity Act 2005.">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" id="theme-stylesheet" href="css/themes/light.css">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('united-kingdom-power-of-attorney-for-health-and-care-decisions.theme.v1');
+        if (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) saved = 'dark';
+        var link = document.getElementById('theme-stylesheet');
+        if (saved && link) link.setAttribute('href', 'css/themes/' + saved + '.css');
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#lpas-table">Skip to LPAs table</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <div class="page-header-bar">
+        <div class="page-header-title">
+          <h1>LP1H — Case-manager dashboard</h1>
+          <p class="subtitle">
+        Lasting Power of Attorney for Health and Welfare —
+        Mental Capacity Act 2005 (England and Wales).
+      </p>
+        </div>
+        <div class="page-header-controls no-print">
+                <label class="visually-hidden" for="locale-select">Language</label>
+      <select class="theme-select" id="locale-select" aria-label="Language">
+      <option class="theme-select-option" value="en-GB" selected lang="en-GB">English (UK)</option>
+      <option class="theme-select-option" value="en-US" lang="en-US">English (US)</option>
+      <option class="theme-select-option" value="cy-GB" lang="cy-GB">Cymraeg</option>
+      <option class="theme-select-option" value="de-DE" lang="de-DE">Deutsch</option>
+      </select>
+      <label class="visually-hidden" for="theme-select">Theme</label>
+      <select class="theme-select" id="theme-select" aria-label="Theme">
+      <option class="theme-select-option" value="abyss">Abyss</option>
+      <option class="theme-select-option" value="acid">Acid</option>
+      <option class="theme-select-option" value="adobe-spectrum">Adobe Spectrum</option>
+      <option class="theme-select-option" value="aqua">Aqua</option>
+      <option class="theme-select-option" value="autumn">Autumn</option>
+      <option class="theme-select-option" value="black">Black</option>
+      <option class="theme-select-option" value="bumblebee">Bumblebee</option>
+      <option class="theme-select-option" value="business">Business</option>
+      <option class="theme-select-option" value="caramellatte">Caramellatte</option>
+      <option class="theme-select-option" value="cmyk">Cmyk</option>
+      <option class="theme-select-option" value="coffee">Coffee</option>
+      <option class="theme-select-option" value="corporate">Corporate</option>
+      <option class="theme-select-option" value="cupcake">Cupcake</option>
+      <option class="theme-select-option" value="cyberpunk">Cyberpunk</option>
+      <option class="theme-select-option" value="dark">Dark</option>
+      <option class="theme-select-option" value="dim">Dim</option>
+      <option class="theme-select-option" value="dracula">Dracula</option>
+      <option class="theme-select-option" value="emerald">Emerald</option>
+      <option class="theme-select-option" value="fantasy">Fantasy</option>
+      <option class="theme-select-option" value="forest">Forest</option>
+      <option class="theme-select-option" value="garden">Garden</option>
+      <option class="theme-select-option" value="halloween">Halloween</option>
+      <option class="theme-select-option" value="lemonade">Lemonade</option>
+      <option class="theme-select-option" value="light" selected>Light</option>
+      <option class="theme-select-option" value="lofi">Lofi</option>
+      <option class="theme-select-option" value="luxury">Luxury</option>
+      <option class="theme-select-option" value="mozilla-protocol">Mozilla Protocol</option>
+      <option class="theme-select-option" value="night">Night</option>
+      <option class="theme-select-option" value="nord">Nord</option>
+      <option class="theme-select-option" value="pastel">Pastel</option>
+      <option class="theme-select-option" value="retro">Retro</option>
+      <option class="theme-select-option" value="silk">Silk</option>
+      <option class="theme-select-option" value="sunset">Sunset</option>
+      <option class="theme-select-option" value="synthwave">Synthwave</option>
+      <option class="theme-select-option" value="united-kingdom-government-digital-service">UK · Government Digital Service</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-england-for-patients">UK · NHS England — Patients</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-england-for-practitioners">UK · NHS England — Practitioners</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-scotland-for-patients">UK · NHS Scotland — Patients</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-scotland-for-practitioners">UK · NHS Scotland — Practitioners</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-wales-for-patients">UK · NHS Wales — Patients</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-wales-for-practitioners">UK · NHS Wales — Practitioners</option>
+      <option class="theme-select-option" value="united-states-web-design-system">US · Web Design System</option>
+      <option class="theme-select-option" value="valentine">Valentine</option>
+      <option class="theme-select-option" value="winter">Winter</option>
+      <option class="theme-select-option" value="wireframe">Wireframe</option>
+      </select>
+      <label class="visually-hidden" for="text-size-picker">Text size</label>
+      <select class="theme-select" id="text-size-picker" aria-label="Text size">
+      <option class="theme-select-option" value="small">Small</option>
+      <option class="theme-select-option" value="medium" selected>Medium</option>
+      <option class="theme-select-option" value="large">Large</option>
+      <option class="theme-select-option" value="x-large">X Large</option>
+      </select>
+      <div class="share-picker">
+      <button type="button" class="share-picker-button" id="share-picker" aria-label="Share this page" aria-expanded="false" aria-controls="share-picker-list">
+      <span class="share-picker-icon" aria-hidden="true">↪</span>
+      </button>
+      <ul class="share-picker-list" id="share-picker-list" hidden>
+      <li class="share-picker-list-item">
+      <button type="button" class="share-picker-copy" id="share-picker-copy">Copy link</button>
+      </li>
+      </ul>
+      <p class="share-picker-status" id="share-picker-status" aria-live="polite"></p>
+      </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div id="status-banner" class="alert" data-type="warning" role="status" aria-live="polite" hidden></div>
+
+    <section class="filter-bar" aria-labelledby="filter-bar-heading">
+      <h2 id="filter-bar-heading" class="visually-hidden">Filters</h2>
+
+      <div class="filter-grid">
+        <div class="filter-field filter-field-search">
+          <label for="filter-search">Search</label>
+          <input
+            id="filter-search"
+            type="search"
+            class="text-input"
+            placeholder="Reference, donor name, or rule ID..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-status">Validity</label>
+          <select id="filter-status" class="select">
+            <option value="">All</option>
+            <option value="ready-to-register">Ready to register</option>
+            <option value="needs-correction">Needs correction</option>
+            <option value="invalid">Invalid</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-stage">Stage</label>
+          <select id="filter-stage" class="select">
+            <option value="">All</option>
+            <option value="draft">Draft</option>
+            <option value="awaiting-signatures">Awaiting signatures</option>
+            <option value="submitted-to-opg">Submitted to OPG</option>
+            <option value="registered">Registered</option>
+            <option value="rejected">Rejected</option>
+            <option value="revoked">Revoked</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-jurisdiction">Jurisdiction</label>
+          <select id="filter-jurisdiction" class="select">
+            <option value="">All</option>
+            <option value="england">England</option>
+            <option value="wales">Wales</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-decision">Decision rule</label>
+          <select id="filter-decision" class="select">
+            <option value="">All</option>
+            <option value="jointly">Jointly</option>
+            <option value="jointly-and-severally">Jointly &amp; severally</option>
+            <option value="mixed">Mixed</option>
+          </select>
+        </div>
+
+        <div class="filter-field filter-field-actions">
+          <button type="button" id="filter-clear-btn" class="button" data-variant="secondary" hidden>
+            Clear filters
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-summary">
+        <span id="filter-count">Loading LPAs…</span>
+      </div>
+    </section>
+
+    <section class="table-card" aria-labelledby="lpas-table-heading">
+      <h2 id="lpas-table-heading" class="visually-hidden">LPAs</h2>
+
+      <div class="table-scroll">
+        <table id="lpas-table" class="lpas-table">
+          <thead>
+            <tr id="lpas-table-head"></tr>
+          </thead>
+          <tbody id="lpas-table-body"></tbody>
+        </table>
+      </div>
+
+      <p id="lpas-empty-message" class="empty-message" hidden>
+        No LPAs match the current filters.
+      </p>
+    </section>
+
+  </main>
+
+    <footer class="page-footer">
+      <p>
+        Validity is computed against the Mental Capacity Act 2005 and the
+        Lasting Powers of Attorney, Enduring Powers of Attorney and Public
+        Guardian Regulations 2007. The case-manager dashboard is decision
+        support for solicitors and Age UK / IMCA staff; final responsibility
+        for OPG submission rests with the donor or their applicant attorney.
+      </p>
+    </footer>
+
+
+  <script type="module" src="js/dashboard-app.js"></script>
+  <script type="module" src="js/theme-select.js"></script>
+  <script type="module" src="js/text-size-picker.js"></script>
+  <script type="module" src="js/share-picker.js"></script>
+  <script type="module" src="js/locale-select.js"></script>
+  <script type="module" src="js/table-export.js"></script>
+</body>
+</html>

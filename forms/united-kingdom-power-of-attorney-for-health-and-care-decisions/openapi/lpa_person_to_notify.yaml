@@ -1,0 +1,317 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: lpa_person_to_notify
+openapi: 3.1.0
+info:
+  title: United Kingdom Power Of Attorney For Health And Care Decisions — LpaPersonToNotify
+  version: 1.0.0
+  description: Join table linking an LPA to the (up to 5) persons to notify on registration (R-MCA-NOTIFY-MAX).
+paths:
+  /api/united-kingdom-power-of-attorney-for-health-and-care-decisions/lpa_person_to_notifies:
+    get:
+      summary: List LpaPersonToNotify records
+      operationId: listLpaPersonToNotify
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
+          in: query
+          schema:
+            type: string
+          required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
+      responses:
+        "200":
+          description: A page of LpaPersonToNotify records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LpaPersonToNotify"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new LpaPersonToNotify
+      operationId: createLpaPersonToNotify
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaPersonToNotify"
+      responses:
+        "200":
+          description: The newly created LpaPersonToNotify
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaPersonToNotify"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/united-kingdom-power-of-attorney-for-health-and-care-decisions/lpa_person_to_notifies/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one LpaPersonToNotify by id
+      operationId: getLpaPersonToNotify
+      responses:
+        "200":
+          description: The requested LpaPersonToNotify
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaPersonToNotify"
+        "404":
+          description: LpaPersonToNotify not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing LpaPersonToNotify
+      operationId: updateLpaPersonToNotify
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaPersonToNotify"
+      responses:
+        "200":
+          description: The updated LpaPersonToNotify
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaPersonToNotify"
+        "404":
+          description: LpaPersonToNotify not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing LpaPersonToNotify
+      operationId: replaceLpaPersonToNotify
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LpaPersonToNotify"
+      responses:
+        "200":
+          description: The updated LpaPersonToNotify
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LpaPersonToNotify"
+        "404":
+          description: LpaPersonToNotify not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a LpaPersonToNotify
+      operationId: deleteLpaPersonToNotify
+      responses:
+        "200":
+          description: LpaPersonToNotify deleted
+        "404":
+          description: LpaPersonToNotify not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
+    LpaPersonToNotify:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        lpa_id:
+          type: string
+          format: uuid
+          description: Foreign key to the parent LPA.
+        person_to_notify_id:
+          type: string
+          format: uuid
+          description: Foreign key to the person to notify.
+        order_position:
+          type: integer
+          format: int32
+          description: Order position 1-5 in which this person appears on the LP1H form.
+      required:
+        - created_at
+        - updated_at
+        - lpa_id
+        - person_to_notify_id
+        - order_position
+      description: Join table linking an LPA to the (up to 5) persons to notify on registration (R-MCA-NOTIFY-MAX).

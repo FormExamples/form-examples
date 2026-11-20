@@ -42,7 +42,7 @@ The following Lily components are required to support the majority of forms (130
 ### Signature Capture
 **Use:** Legal consent, advance decisions, medical records release, power-of-attorney, HIPAA authorization.
 **Lily Component:** `.signature-pad` (interactive JS component)
-**Forms:** advance-decision-to-refuse-treatment, advance-statement-about-care, consent-to-treatment, medical-records-release-permission, united-kingdom-lasting-power-of-attorney-for-financial-decisions, united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions, united-states-hipaa-authorization-form (~7 forms)
+**Forms:** advance-decision-to-refuse-treatment, advance-statement-about-care, consent-to-treatment, medical-records-release-permission, united-kingdom-power-of-attorney-for-financial-decisions, united-kingdom-power-of-attorney-for-health-and-care-decisions, united-states-hipaa-authorization-form (~7 forms)
 **Current Pattern:** Text-input field with label "Type your full name as signature" (no visual signature pad yet)
 **Generator Implications:** Signature capture requires a JS shim; Lily's `.signature-pad` ships interactive canvas-based capture. Generator must detect fields named `*signature` and emit the shim rather than a plain text input.
 
@@ -70,7 +70,7 @@ The following Lily components are required to support the majority of forms (130
 ### Date Range / Calendar Pickers
 **Use:** Insurance periods, authorization validity, follow-up windows.
 **Lily Component:** `.date-range`
-**Forms:** united-kingdom-lasting-power-of-attorney-for-financial-decisions (2 date fields), medical-records-release-permission (authorization start/end), consent-to-treatment (valid period) (~6 forms)
+**Forms:** united-kingdom-power-of-attorney-for-financial-decisions (2 date fields), medical-records-release-permission (authorization start/end), consent-to-treatment (valid period) (~6 forms)
 **Current Pattern:** Two separate `.date-input` fields with descriptive labels e.g. "Start date" / "End date"
 **Status:** ✅ `.date-range` exists; can be used or two separate date inputs.
 

@@ -309,10 +309,10 @@ commit per form with `git commit --only forms/<slug>/`.
     (`5862a30a` + `903ebbe`).
   - [x] `united-kingdom-driver-and-vehicle-licensing-agency-v1-form`
     (`5862a30a` + `c9b4219`).
-  - [x] `united-kingdom-lasting-power-of-attorney-for-financial-decisions`
+  - [x] `united-kingdom-power-of-attorney-for-financial-decisions`
     (`5862a30a` + `4908c7f`). Special: Alpine.js wizard — kept x-model
     bindings, added Lily aliases in CSS only.
-  - [x] `united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions`
+  - [x] `united-kingdom-power-of-attorney-for-health-and-care-decisions`
     (`5862a30a` + `73ddbe1`). Sticky validity sidebar preserved.
   - [x] `united-kingdom-maternity-certificate-mat-b1` (`5862a30a` + `e7d10df`).
   - [x] `united-kingdom-nhs-england-medical-exemption-certificate`
@@ -508,8 +508,8 @@ commit per form with `git commit --only forms/<slug>/`.
     agile-consulting-scorecard-for-hiring-help `4412b7c7`+`82292d5c`,
     arc42 `8f9f863d`+`b0fa4293`, eye-prescription `84644f0d`+`408fa9ca`,
     international-certificate-of-vaccination-or-prophylaxis `5a22838a`,
-    united-kingdom-lasting-power-of-attorney-for-financial-decisions
-    `e21d8e98`+`24997489`, united-kingdom-lasting-power-of-attorney-for-
+    united-kingdom-power-of-attorney-for-financial-decisions
+    `e21d8e98`+`24997489`, united-kingdom-power-of-attorney-for-
     health-and-care-decisions `6a82edc9`. Plus UK fit-note `659eb569`.
   - **Final status** via `bin/lily-svelte-status --counts`:
     PASS=56, PARTIAL=32, TODO=0, EMPTY=45 of 133. **100% of 88

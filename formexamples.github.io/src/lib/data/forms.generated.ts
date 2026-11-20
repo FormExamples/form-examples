@@ -1674,16 +1674,6 @@ export const forms: Form[] = [
     "description": "A will-drafting documentation instrument for England and Wales. The person preparing a will records the testator, the estate, the executors, the beneficiaries and their shares, guardians for children under 18, funeral…"
   },
   {
-    "slug": "united-kingdom-lasting-power-of-attorney-for-financial-decisions",
-    "title": "United Kingdom Lasting Power of Attorney for Financial Decisions",
-    "description": "A digital implementation of the Office of the Public Guardian (OPG) form LP1F — Lasting power of attorney for property and financial affairs."
-  },
-  {
-    "slug": "united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions",
-    "title": "United Kingdom Lasting Power of Attorney for Health and Care Decisions",
-    "description": "A digital implementation of the statutory Lasting Power of Attorney for Health and Welfare (statutory form LP1H) under the Mental Capacity Act 2005 (England and Wales)."
-  },
-  {
     "slug": "united-kingdom-marriage-certificate-application",
     "title": "United Kingdom Marriage Certificate Application",
     "description": "A completeness and validity check for giving notice of marriage or civil partnership in England and Wales and ordering a marriage certificate from the General Register Office (GRO)."
@@ -1697,6 +1687,16 @@ export const forms: Form[] = [
     "slug": "united-kingdom-nhs-england-medical-exemption-certificate",
     "title": "UK NHS England Medical Exemption Certificate (FP92A)",
     "description": "A digital implementation of the FP92A application form completed by a UK doctor (or other health professional with access to the patient's medical records) to apply for a Medical Exemption (MedEx) Certificate for NHS…"
+  },
+  {
+    "slug": "united-kingdom-power-of-attorney-for-financial-decisions",
+    "title": "United Kingdom Lasting Power of Attorney for Financial Decisions",
+    "description": "A digital implementation of the Office of the Public Guardian (OPG) form LP1F — Lasting power of attorney for property and financial affairs."
+  },
+  {
+    "slug": "united-kingdom-power-of-attorney-for-health-and-care-decisions",
+    "title": "United Kingdom Lasting Power of Attorney for Health and Care Decisions",
+    "description": "A digital implementation of the statutory Lasting Power of Attorney for Health and Welfare (statutory form LP1H) under the Mental Capacity Act 2005 (England and Wales)."
   },
   {
     "slug": "united-kingdom-statement-of-fitness-for-work",

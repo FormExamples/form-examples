@@ -7102,44 +7102,6 @@ export const examples: ExampleEntry[] = [
     ]
   },
   {
-    "slug": "united-kingdom-lasting-power-of-attorney-for-financial-decisions",
-    "title": "United Kingdom Lasting Power of Attorney for Financial Decisions",
-    "description": "A digital implementation of the Office of the Public Guardian (OPG) form LP1F — Lasting power of attorney for property and financial affairs. The LPA is a statutory deed under the Mental Capacity Act 2005 by which a donor (\"the donor\") appoints one or more attorneys to make decisions about their property and financial affairs. Once registered by the OPG it is the legal instrument that lets attorneys run bank accounts, sell property, manage investments, claim benefits, and pay bills on behalf of the donor.",
-    "personas": [
-      {
-        "name": "Clean LP1F, submitted for registration",
-        "description": "A single attorney with one replacement attorney, an independent certificate provider, one person to notify, non-empty preferences, an attorney email on file, a registration contact preference set, and the full donor -> certificate-provider -> attorney signing order all correctly followed and witnessed by an independent witness. status is 'submitted', which computeValidityBand reads directly. No statutory blocker and no flag fires: compositeRisk is low."
-      },
-      {
-        "name": "Unsigned draft, single attorney with restrictive timing",
-        "description": "A single attorney with no replacement, timing restricted to 'only when the donor lacks capacity', no people to notify, no preferences or instructions, a missing attorney email, and no registration contact preference set. Still fully unsigned (a draft). No statutory blocker fires (donor and attorney are both adults, no signatures to check order or witnessing on), so compositeRisk comes entirely from flags: two moderate (single attorney with no replacement; restrictive timing) and four low (no people to notify, no preferences/instructions, missing attorney email, no contact preference), giving compositeRisk moderate. validityBand is ready_for_signing (every required field for signing is present)."
-      },
-      {
-        "name": "Critical, minor donor with zero attorneys and multiple statutory violations",
-        "description": "The donor is a minor (age on signing under 18), no attorney is appointed at all, decision mode is 'jointly' with no replacement attorney, the certificate provider is also a minor, is related to the donor, and is connected with a care home, the donor's own signature is witnessed by the donor themselves, the certificate-provider signature is dated before the donor's (signing-order violation), six people to notify are listed (over the limit of five), and the registration applicant kind is neither donor nor attorneys. Ten statutory blockers fire, forcing compositeRisk to critical regardless of the two low flags that also fire (empty preferences/instructions; no contact preference). validityBand is partially_signed (the donor has signed, but with zero attorneys the all-attorneys-signed condition can never be satisfied)."
-      }
-    ]
-  },
-  {
-    "slug": "united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions",
-    "title": "United Kingdom Lasting Power of Attorney for Health and Care Decisions",
-    "description": "A digital implementation of the statutory Lasting Power of Attorney for Health and Welfare (statutory form LP1H) under the Mental Capacity Act 2005 (England and Wales). The donor — or a solicitor, attorney, or advocate acting on their behalf — completes a single-page 14-step wizard that captures every field of the paper LP1H form, applies a deterministic statutory-validity engine, raises compliance flags, and emits a registration-ready application bundle for the Office of the Public Guardian (OPG).",
-    "personas": [
-      {
-        "name": "baseline-ready-to-register",
-        "description": "Single attorney, knowledge-based certificate provider, clean statutory signing order (donor then certificate provider then attorney), Option B life-sustaining-treatment choice initialled, registration fee paid in full with no remission claimed. No fired rules, no flags, ready to register."
-      },
-      {
-        "name": "needs-correction-skill-based-cp-and-unlawfulness-unassessed-instruction",
-        "description": "Skill-based certificate provider missing a professional registration number, one instruction not yet assessed for lawfulness that also contradicts a known ADRT, and a fee-remission claim with no stated reason. All high-severity, no fatal rules, so the application still needs correction rather than being outright invalid."
-      },
-      {
-        "name": "critical-underage-donor-no-attorneys-no-signatures",
-        "description": "Underage donor without capacity, no attorneys named, no certificate provider linked, no signatures at all, life-sustaining-treatment choice unset, a prohibited-act instruction (assisted suicide) that also contradicts a known ADRT, an underage replacement attorney, six people to notify, and an incomplete registration with no fee paid. Maximal fatal-rule coverage across every rule family; the application is invalid."
-      }
-    ]
-  },
-  {
     "slug": "united-kingdom-marriage-certificate-application",
     "title": "United Kingdom Marriage Certificate Application",
     "description": "A completeness and validity check for giving notice of marriage or civil partnership in England and Wales and ordering a marriage certificate from the General Register Office (GRO). A single continuous page collects the notice, the ceremony, each party's identity, residence, previous-relationship and immigration evidence, whether the parties are closely related, and the certificate order. The engine classifies the application as ready to submit, incomplete, needs evidence or correction, or ineligible, computes the permitted ceremony window, and raises flagged issues. It gives no legal advice; the register office decides each notice.",
@@ -7209,6 +7171,44 @@ export const examples: ExampleEntry[] = [
       {
         "name": "Critical - diet-only-diabetes disqualifier overrides a genuinely valid fistula condition, plus a pregnancy redirect and two completeness gaps",
         "description": "Critical/highest-severity persona layering a disqualifier, a redirect, and two completeness failures simultaneously. conditions declares both diabetes-mellitus-not-diet-only (with diabetesTreatmentMode 'diet-only', so the condition rule itself does NOT fire but the disqualifying.diet-only-diabetes rule DOES) and permanent-fistula (a genuinely valid, independently-firing condition). pregnancyStatus 'pregnant' fires redirect.fw8-pregnancy. signaturePresent is blank (missing-signature) and patientNhsNumber is '123', an invalid 10-digit number (missing-nhs-number). previousCertificateExpiry is a future date with applicationKind still 'new', firing renewal.active-certificate. Verified engine behaviour: hasDisqualifier alone is sufficient to force outcome 'ineligible' EVEN THOUGH eligibleConditions is non-empty (permanent-fistula genuinely fired) - a single disqualifying condition entry blocks the whole application, not just that condition. redirectTo is still populated ('FW8') despite the outcome already being 'ineligible' via the disqualifier branch, since redirectTo is computed before the outcome branch is chosen. Expect outcome 'ineligible', redirectTo 'FW8', eligibleConditions ['permanent-fistula'], six fired rules in registry order (condition.permanent-fistula, disqualifying.diet-only-diabetes, redirect.fw8-pregnancy, completeness.missing-signature, completeness.missing-nhs-number, renewal.active-certificate), five flags in FLAGS-array order (missing-signature, missing-nhs-number, pregnancy-redirect, diet-only-diabetes, active-certificate-exists - age-exemption does not fire, the patient is 32), validFrom '2026-08-20', validUntil '' (not eligible)."
+      }
+    ]
+  },
+  {
+    "slug": "united-kingdom-power-of-attorney-for-financial-decisions",
+    "title": "United Kingdom Lasting Power of Attorney for Financial Decisions",
+    "description": "A digital implementation of the Office of the Public Guardian (OPG) form LP1F — Lasting power of attorney for property and financial affairs. The LPA is a statutory deed under the Mental Capacity Act 2005 by which a donor (\"the donor\") appoints one or more attorneys to make decisions about their property and financial affairs. Once registered by the OPG it is the legal instrument that lets attorneys run bank accounts, sell property, manage investments, claim benefits, and pay bills on behalf of the donor.",
+    "personas": [
+      {
+        "name": "Clean LP1F, submitted for registration",
+        "description": "A single attorney with one replacement attorney, an independent certificate provider, one person to notify, non-empty preferences, an attorney email on file, a registration contact preference set, and the full donor -> certificate-provider -> attorney signing order all correctly followed and witnessed by an independent witness. status is 'submitted', which computeValidityBand reads directly. No statutory blocker and no flag fires: compositeRisk is low."
+      },
+      {
+        "name": "Unsigned draft, single attorney with restrictive timing",
+        "description": "A single attorney with no replacement, timing restricted to 'only when the donor lacks capacity', no people to notify, no preferences or instructions, a missing attorney email, and no registration contact preference set. Still fully unsigned (a draft). No statutory blocker fires (donor and attorney are both adults, no signatures to check order or witnessing on), so compositeRisk comes entirely from flags: two moderate (single attorney with no replacement; restrictive timing) and four low (no people to notify, no preferences/instructions, missing attorney email, no contact preference), giving compositeRisk moderate. validityBand is ready_for_signing (every required field for signing is present)."
+      },
+      {
+        "name": "Critical, minor donor with zero attorneys and multiple statutory violations",
+        "description": "The donor is a minor (age on signing under 18), no attorney is appointed at all, decision mode is 'jointly' with no replacement attorney, the certificate provider is also a minor, is related to the donor, and is connected with a care home, the donor's own signature is witnessed by the donor themselves, the certificate-provider signature is dated before the donor's (signing-order violation), six people to notify are listed (over the limit of five), and the registration applicant kind is neither donor nor attorneys. Ten statutory blockers fire, forcing compositeRisk to critical regardless of the two low flags that also fire (empty preferences/instructions; no contact preference). validityBand is partially_signed (the donor has signed, but with zero attorneys the all-attorneys-signed condition can never be satisfied)."
+      }
+    ]
+  },
+  {
+    "slug": "united-kingdom-power-of-attorney-for-health-and-care-decisions",
+    "title": "United Kingdom Lasting Power of Attorney for Health and Care Decisions",
+    "description": "A digital implementation of the statutory Lasting Power of Attorney for Health and Welfare (statutory form LP1H) under the Mental Capacity Act 2005 (England and Wales). The donor — or a solicitor, attorney, or advocate acting on their behalf — completes a single-page 14-step wizard that captures every field of the paper LP1H form, applies a deterministic statutory-validity engine, raises compliance flags, and emits a registration-ready application bundle for the Office of the Public Guardian (OPG).",
+    "personas": [
+      {
+        "name": "baseline-ready-to-register",
+        "description": "Single attorney, knowledge-based certificate provider, clean statutory signing order (donor then certificate provider then attorney), Option B life-sustaining-treatment choice initialled, registration fee paid in full with no remission claimed. No fired rules, no flags, ready to register."
+      },
+      {
+        "name": "needs-correction-skill-based-cp-and-unlawfulness-unassessed-instruction",
+        "description": "Skill-based certificate provider missing a professional registration number, one instruction not yet assessed for lawfulness that also contradicts a known ADRT, and a fee-remission claim with no stated reason. All high-severity, no fatal rules, so the application still needs correction rather than being outright invalid."
+      },
+      {
+        "name": "critical-underage-donor-no-attorneys-no-signatures",
+        "description": "Underage donor without capacity, no attorneys named, no certificate provider linked, no signatures at all, life-sustaining-treatment choice unset, a prohibited-act instruction (assisted suicide) that also contradicts a known ADRT, an underage replacement attorney, six people to notify, and an incomplete registration with no fee paid. Maximal fatal-rule coverage across every rule family; the application is invalid."
       }
     ]
   },
