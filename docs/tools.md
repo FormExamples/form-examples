@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-118 tools.
+120 tools.
 
 - [`bin/axum-axa-0-10`](#axum-axa-0-10)
 - [`bin/axum-axa-0-11`](#axum-axa-0-11)
@@ -11,6 +11,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/axum-axa-0-14`](#axum-axa-0-14)
 - [`bin/axum-axa-0-16`](#axum-axa-0-16)
 - [`bin/axum-axa-0-19`](#axum-axa-0-19)
+- [`bin/axum-axa-0-20`](#axum-axa-0-20)
 - [`bin/axum-axa-0-7`](#axum-axa-0-7)
 - [`bin/axum-axa-0-8`](#axum-axa-0-8)
 - [`bin/axum-axa-0-9`](#axum-axa-0-9)
@@ -24,6 +25,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/axum-forbid-unsafe`](#axum-forbid-unsafe)
 - [`bin/axum-msrv-set`](#axum-msrv-set)
 - [`bin/axum-mutants-profile`](#axum-mutants-profile)
+- [`bin/axum-request-validation`](#axum-request-validation)
 - [`bin/axum-soft-delete`](#axum-soft-delete)
 - [`bin/axum-sql-columns`](#axum-sql-columns)
 - [`bin/benchmark-engines`](#benchmark-engines)
@@ -67,7 +69,6 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/lily-svelte-theme-locale-select-refactor`](#lily-svelte-theme-locale-select-refactor)
 - [`bin/lily-sync`](#lily-sync)
 - [`bin/make-github-pages`](#make-github-pages)
-- [`bin/make-test-minimum-supported-rust-version`](#make-test-minimum-supported-rust-version)
 - [`bin/migrate-sql-filenames.py`](#migrate-sql-filenamespy)
 - [`bin/mutation-test-axum`](#mutation-test-axum)
 - [`bin/mutation-test-engines`](#mutation-test-engines)
@@ -104,6 +105,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/test-engines`](#test-engines)
 - [`bin/test-examples-conformance`](#test-examples-conformance)
 - [`bin/test-form`](#test-form)
+- [`bin/test-minimum-supported-rust-version`](#test-minimum-supported-rust-version)
 - [`bin/test-personas`](#test-personas)
 - [`bin/test-security-policy`](#test-security-policy)
 - [`bin/test-sql-apply`](#test-sql-apply)
@@ -342,6 +344,31 @@ Usage:
   bin/axum-axa-0-19 --all --no-lock    # leave Cargo.lock to `cargo update`
   bin/axum-axa-0-19 --root DIR <slug>  # a copy of forms/ at DIR
   bin/axum-axa-0-19 --check --all      # CI drift check (non-zero on drift)
+```
+
+<h2 id="axum-axa-0-20"><code>bin/axum-axa-0-20</code></h2>
+
+```text
+bin/axum-axa-0-20 — move each form's `back-end-with-axum/` from axa 0.19 to 0.20.
+
+What it changes in a crate:
+
+  Cargo.toml    axa 0.20 and axa-test 0.11
+  Cargo.lock    axa 0.20 and axa-test 0.11, by `cargo update -p axa -p axa-test`, so only
+                axa's own crates move; unless --no-lock
+
+The 0.20 upgrade guide needs only the version for these crates: Zstd is now an opt-in `zstd`
+feature of axa, and no crate sends or takes Zstd bodies, so none enables it.
+
+The versions were hours old when the fleet moved, inside the minimum publish age; the lock
+step sets CARGO_RESOLVER_INCOMPATIBLE_PUBLISH_AGE=allow for that `cargo update` only.
+
+Usage:
+  bin/axum-axa-0-20 <slug>...          # named forms
+  bin/axum-axa-0-20 --all              # every form's Axum crate
+  bin/axum-axa-0-20 --all --no-lock    # leave Cargo.lock to `cargo update`
+  bin/axum-axa-0-20 --root DIR <slug>  # a copy of forms/ at DIR
+  bin/axum-axa-0-20 --check --all      # CI drift check (non-zero on drift)
 ```
 
 <h2 id="axum-axa-0-7"><code>bin/axum-axa-0-7</code></h2>
@@ -778,6 +805,35 @@ Usage:
   bin/axum-mutants-profile --all            # every form's Axum crate
   bin/axum-mutants-profile --dry-run --all  # show what would change
   bin/axum-mutants-profile --check --all    # CI drift check (non-zero on drift)
+```
+
+<h2 id="axum-request-validation"><code>bin/axum-request-validation</code></h2>
+
+```text
+bin/axum-request-validation — give each form's `back-end-with-axum/` request
+validation that names the field, instead of leaving a bad value to the database.
+
+The crates' `Params` structs were plain `String`/`f64`/`Date`, so the only
+checks were the database's CHECK constraints (see bin/axum-check-constraints),
+which leave `TEXT` unbounded, accept any `double precision`, and take a birth
+date in the year 9999. This derives `Validate` on each controller's `Params`
+from the column types and calls it in `add` and `update`, answering `422` with
+the failed fields in camelCase and the rule codes, never the values:
+
+  - a `text` column            -> length(max = TEXT_MAX), 10 000 characters
+  - a `NUMERIC(p,s)` in sql/   -> range of what that precision holds,
+                                  e.g. NUMERIC(5,1) is -9999.9 ..= 9999.9
+  - a `date` column            -> plausible_date, years 1900 ..= 2200
+
+It writes `support/validation.rs` (identical in every crate) and registers it in
+`support/mod.rs`. A `Params` with none of those columns is left alone. Idempotent:
+a controller already deriving `Validate` is skipped.
+
+Usage:
+  bin/axum-request-validation <slug>...          # named forms
+  bin/axum-request-validation --all              # every form's Axum crate
+  bin/axum-request-validation --check --all      # CI drift check (non-zero on drift)
+  bin/axum-request-validation --root DIR --all   # a copy of the repo at DIR
 ```
 
 <h2 id="axum-soft-delete"><code>bin/axum-soft-delete</code></h2>
@@ -1927,24 +1983,6 @@ bin/make-github-pages — publish formexamples.github.io/, per
  Usage:
    bin/make-github-pages              # export + push (same as `make github-pages`)
    bin/make-github-pages --dry-run    # split only, don't push
-```
-
-<h2 id="make-test-minimum-supported-rust-version"><code>bin/make-test-minimum-supported-rust-version</code></h2>
-
-```text
-bin/make-test-minimum-supported-rust-version — check and test every Axum crate on
- the minimum supported Rust version (MSRV, N-2) and on the version after it (N-1),
- per spec/rust-msrv-n-minus-2/. Delegate of `make test-minimum-supported-rust-version`.
-
- Each form's back-end-with-axum/ is its own workspace, so this runs
- `cargo check --all-targets` and `cargo test` in each one, once per toolchain.
- The MSRV is read from the first crate's `rust-version`; N-1 is that minor plus
- one. A toolchain that is not installed stops the run with the rustup command.
- Across all 360 crates this takes hours: name slugs to run a subset.
-
- Usage:
-   bin/make-test-minimum-supported-rust-version           # every form
-   bin/make-test-minimum-supported-rust-version <slug>…   # named forms
 ```
 
 <h2 id="migrate-sql-filenamespy"><code>bin/migrate-sql-filenames.py</code></h2>
@@ -3103,6 +3141,24 @@ test-form: test one form directory in this project for implementation
  Structural checks print "Error: ..." lines and the script exits non-zero
  if any check failed. The Axum crate's `cargo test` is the only executable
  gate (it needs the Rust toolchain and a running Postgres).
+```
+
+<h2 id="test-minimum-supported-rust-version"><code>bin/test-minimum-supported-rust-version</code></h2>
+
+```text
+bin/make-test-minimum-supported-rust-version — check and test every Axum crate on
+ the minimum supported Rust version (MSRV, N-2) and on the version after it (N-1),
+ per spec/rust-msrv-n-minus-2/. Delegate of `make test-minimum-supported-rust-version`.
+
+ Each form's back-end-with-axum/ is its own workspace, so this runs
+ `cargo check --all-targets` and `cargo test` in each one, once per toolchain.
+ The MSRV is read from the first crate's `rust-version`; N-1 is that minor plus
+ one. A toolchain that is not installed stops the run with the rustup command.
+ Across all 360 crates this takes hours: name slugs to run a subset.
+
+ Usage:
+   bin/make-test-minimum-supported-rust-version           # every form
+   bin/make-test-minimum-supported-rust-version <slug>…   # named forms
 ```
 
 <h2 id="test-personas"><code>bin/test-personas</code></h2>
