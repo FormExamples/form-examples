@@ -1,7 +1,10 @@
+import { forms } from './data/forms.generated.js';
+
 export type NavLink = { href: string; label: string };
 
 export const SITE_NAME = 'FormExamples';
-export const SITE_TAGLINE = '356 medical-form reference implementations';
+export const FORM_COUNT = forms.length;
+export const SITE_TAGLINE = `${FORM_COUNT} medical-form reference implementations`;
 export const REPO_URL = 'https://github.com/formexamples/form-examples';
 
 export const navLinks: NavLink[] = [

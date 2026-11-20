@@ -5,7 +5,6 @@
   import Sidebar from '#lib/components/Sidebar.svelte';
   import Footer from '#lib/components/Footer.svelte';
   import { pageTitle } from '#lib/site.js';
-  import { THEME_OPTIONS } from '#lib/config/themes.js';
   import type { Snippet } from 'svelte';
 
   type Props = { children: Snippet };

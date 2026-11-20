@@ -34,8 +34,8 @@
   openapi/                       # OpenAPI 3.1 .yaml specifications per SQL entity (generated)
   front-end-with-html/           # Questionnaire + dashboard (HTML, Lily Design System)
   front-end-with-svelte/         # Questionnaire + dashboard (SvelteKit, Lily Design System)
-  back-end-with-loco/            # Back-end Rust JSON API (axum + Loco)
-  back-end-with-loco-setup       # Scaffold generator (generated)`}</CodeBlock>
+  back-end-with-axum/            # Back-end Rust JSON API (axum + axa + sqlx)
+  back-end-with-axum-setup       # Scaffold generator (generated)`}</CodeBlock>
 
 <h2 id="design-patterns" class="mt-10 text-xl font-semibold">Design patterns</h2>
 
@@ -49,11 +49,11 @@
 
 <h3 class="mt-6 text-lg font-semibold">Back-end</h3>
 <ul class="mt-3 list-disc space-y-1 pl-6">
-  <li>Rust JSON API — axum routing via the Loco framework, no server-rendered templates</li>
-  <li>Relational, per-table schema: one Loco migration + one entity + one RESTful scaffold controller per SQL table (never a single table with a JSONB blob)</li>
+  <li>Rust JSON API — axum routing via the Axum framework, no server-rendered templates</li>
+  <li>Relational, per-table schema: one Axum migration + one entity + one RESTful scaffold controller per SQL table (never a single table with a JSONB blob)</li>
   <li><code>serde(rename_all = "camelCase")</code> on every struct shared with a front-end, mirroring the front-end's TypeScript types</li>
-  <li>SeaORM entities against PostgreSQL, generated from the same <code>sql/</code> migrations that are the schema's source of truth</li>
-  <li>Postgres-only background queue plus OpenTelemetry + Prometheus <code>/metrics</code> observability</li>
+  <li>sqlx entities against PostgreSQL, generated from the same <code>sql/</code> migrations that are the schema's source of truth</li>
+  <li>Postgres-only background queue, structured logs, and health endpoints</li>
 </ul>
 
 <h2 id="conventions" class="mt-10 text-xl font-semibold">Conventions</h2>
@@ -63,5 +63,5 @@
   <li>Step components named <code>StepNName.svelte</code> (1-indexed; no spaces, ampersands, or parentheses)</li>
   <li>UI components in <code>src/lib/components/ui/</code></li>
   <li>UUIDv4 primary keys via <code>gen_random_uuid()</code>; <code>created_at</code>, <code>updated_at</code>, and <code>deleted_at</code> timestamps on every table</li>
-  <li>Generated artefacts (XML, FHIR, protobuf, OpenAPI, the Loco setup script, <code>CHANGELOG.md</code>, <code>examples/</code>) are never hand-edited — regenerated from source instead</li>
+  <li>Generated artefacts (XML, FHIR, protobuf, OpenAPI, the Axum setup script, <code>CHANGELOG.md</code>, <code>examples/</code>) are never hand-edited — regenerated from source instead</li>
 </ul>

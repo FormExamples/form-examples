@@ -1,4 +1,4 @@
-import { navLinks } from '#lib/site';
+import { navLinks } from '#lib/site.js';
 
 export const prerender = true;
 
